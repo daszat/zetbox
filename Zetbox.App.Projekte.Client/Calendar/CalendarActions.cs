@@ -21,10 +21,27 @@ namespace Zetbox.App.Calendar
 
     using Zetbox.API;
     using Zetbox.Client.Presentables.Calendar;
+using Zetbox.API.Common;
+    using Zetbox.App.Base;
 
     [Implementor]
-    public static class CalendarActions
+    public class CalendarActions
     {
+        private static IIdentityResolver _idResolver = null;
+        public CalendarActions(IIdentityResolver idResolver)
+        {
+            _idResolver = idResolver;
+        }
+
+        [Invocation]
+        public static void NotifyCreated(Calendar obj)
+        {
+            var ctx = obj.Context;
+            // sets the current identity as the default owner
+            var identity = _idResolver.GetCurrent();
+            obj.Owner = identity != null ? ctx.Find<Identity>(identity.ID) : null;
+        }
+
         [Invocation]
         public static void GetNewEventViewModels(Calendar obj, object /* I'm so sorry, Zetbox.Objects.dll cannot use custom classes */ args)
         {

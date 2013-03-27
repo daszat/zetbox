@@ -29,13 +29,13 @@ namespace Zetbox.API.Common
     public interface IIdentityResolver
     {
         /// <summary>
-        /// Retrieves the zetbox identity of the current user.
+        /// Retrieves the zetbox identity of the current user. The Identity is member of it's own resolver data context
         /// </summary>
         /// <returns>a Identity or null if none was found.</returns>
         Identity GetCurrent();
 
         /// <summary>
-        /// Retrieves the zetbox identity of the specified security principal.
+        /// Retrieves the zetbox identity of the specified security principal.The Identity is member of it's own resolver data context
         /// </summary>
         /// <param name="identity">a security principal</param>
         /// <returns>a Identity or null if none was found.</returns>
