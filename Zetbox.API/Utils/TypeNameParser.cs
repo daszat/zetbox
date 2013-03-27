@@ -40,13 +40,22 @@ namespace Zetbox.API.Utils
 
     public class ArraySpec
     {
-        int dimensions;
-        bool bound;
+        public int Dimensions
+        {
+            get;
+            private set;
+        }
+
+        public bool Bound
+        {
+            get;
+            private set;
+        }
 
         internal ArraySpec(int dimensions, bool bound)
         {
-            this.dimensions = dimensions;
-            this.bound = bound;
+            this.Dimensions = dimensions;
+            this.Bound = bound;
         }
     }
 
