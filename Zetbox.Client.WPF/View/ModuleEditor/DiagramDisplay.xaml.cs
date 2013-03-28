@@ -23,6 +23,7 @@ namespace Zetbox.Client.WPF.View.ModuleEditor
     /// <summary>
     /// Interaction logic for DiagramDisplay.xaml
     /// </summary>
+    [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
     public partial class DiagramDisplay : UserControl, IHasViewModel<DiagramViewModel>
     {
         public DiagramDisplay()

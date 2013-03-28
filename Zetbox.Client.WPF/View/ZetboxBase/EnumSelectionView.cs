@@ -36,6 +36,7 @@ using Zetbox.Client.WPF.View.ZetboxBase;
 namespace Zetbox.Client.WPF.View
 {
 
+    [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
     public class EnumSelectionView : PropertyEditor, IHasViewModel<EnumerationValueViewModel>
     {
         static EnumSelectionView()

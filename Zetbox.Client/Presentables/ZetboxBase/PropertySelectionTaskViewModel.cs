@@ -20,13 +20,13 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     using System.Linq;
     using System.Text;
     using Zetbox.API;
-    using Zetbox.App.Base;
-    using Zetbox.App.SchemaMigration;
     using Zetbox.API.Configuration;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
     using Zetbox.App.Extensions;
+    using Zetbox.App.SchemaMigration;
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables.ValueViewModels;
-    using Zetbox.API.Utils;
 
     [ViewModelDescriptor]
     public class PropertySelectionTaskViewModel : WindowViewModel
@@ -173,7 +173,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         PropertySelectionTaskViewModelResources.Filter_Description,
                         true, false);
                     _filterMdl.PropertyChanged += (s, e) => { if (e.PropertyName == "Value") OnPropertyChanged("PossibleValues"); };
-                    _filter = ViewModelFactory.CreateViewModel<ClassValueViewModel<string>.Factory>().Invoke(DataContext, this, _filterMdl);
+                    _filter = ViewModelFactory.CreateViewModel<StringValueViewModel.Factory>().Invoke(DataContext, this, _filterMdl);
                 }
                 return _filter;
             }

@@ -19,13 +19,13 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-
     using Zetbox.API;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
-    using Zetbox.Client.Presentables.ValueViewModels;
     using Zetbox.Client.Models;
+    using Zetbox.Client.Presentables.ValueViewModels;
 
+    [ViewModelDescriptor]
     public class TypeRefPropertyViewModel
            : ObjectReferenceViewModel
     {

@@ -37,6 +37,7 @@ namespace Zetbox.Client.WPF.View.Relations
     /// <summary>
     /// Interaction logic for RelationEndEditor.xaml
     /// </summary>
+    [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
     public partial class RelationEndEditor : UserControl, IHasViewModel<RelationEndViewModel>
     {
         public RelationEndEditor()

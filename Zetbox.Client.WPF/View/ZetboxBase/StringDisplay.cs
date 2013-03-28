@@ -30,9 +30,10 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
     using System.Windows.Navigation;
     using System.Windows.Shapes;
     using Zetbox.Client.GUI;
-    using Zetbox.Client.WPF.CustomControls;
     using Zetbox.Client.WPF.Converter;
+    using Zetbox.Client.WPF.CustomControls;
 
+    [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
     public class StringDisplay : TextBlock // Simplify, often used Control
     {
         //    <TextBlock x:Name="txtStringDisplay"

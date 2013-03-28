@@ -37,7 +37,7 @@ namespace Zetbox.App.Base
         [Invocation]
         public static void NotifyCreated(Zetbox.App.Base.StringProperty obj)
         {
-            obj.ValueModelDescriptor = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_ClassValueViewModel_1_System_String_.Find(obj.Context);
+            obj.ValueModelDescriptor = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_StringValueViewModel.Find(obj.Context);
         }
     }
 }

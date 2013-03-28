@@ -27,8 +27,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             : base(allowParallelEdges, vertexCapacity) { }
     }
 
-
-
+    [ViewModelDescriptor]
     public class DiagramViewModel : ViewModel, IRefreshCommandListener
     {
         public new delegate DiagramViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Module module);
@@ -104,7 +103,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                         "",
                         true, false);
                     _filterMdl.PropertyChanged += (s, e) => { if (e.PropertyName == "Value") OnPropertyChanged("DataTypeViewModels"); };
-                    _filter = ViewModelFactory.CreateViewModel<ClassValueViewModel<string>.Factory>().Invoke(DataContext, this, _filterMdl);
+                    _filter = ViewModelFactory.CreateViewModel<StringValueViewModel.Factory>().Invoke(DataContext, this, _filterMdl);
                 }
                 return _filter;
             }

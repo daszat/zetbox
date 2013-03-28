@@ -26,6 +26,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Zetbox.Client.GUI;
 using Zetbox.Client.WPF.CustomControls;
 using Zetbox.Client.WPF.View.ZetboxBase;
 
@@ -34,6 +35,7 @@ namespace Zetbox.Client.WPF.View
     /// <summary>
     /// Interaction logic for NullableBoolValueView.xaml
     /// </summary>
+    [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
     public partial class NullableBoolValueView : PropertyEditor
     {
         static NullableBoolValueView()

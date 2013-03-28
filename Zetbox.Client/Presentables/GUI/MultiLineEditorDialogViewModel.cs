@@ -70,10 +70,10 @@ namespace Zetbox.Client.Presentables.GUI
                 if (_OKCommand == null)
                 {
                     _OKCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
-                        DataContext, 
+                        DataContext,
                         this,
                         MultiLineEditorDialogViewModelResources.OKCommand_Name,
-                        MultiLineEditorDialogViewModelResources.OKCommand_Tooltip, 
+                        MultiLineEditorDialogViewModelResources.OKCommand_Tooltip,
                         Ok,
                         null, null);
                 }
@@ -100,7 +100,7 @@ namespace Zetbox.Client.Presentables.GUI
                         MultiLineEditorDialogViewModelResources.CancelCommand_Name,
                         MultiLineEditorDialogViewModelResources.CancelCommand_Tooltip,
                         Cancel,
-                        null, 
+                        null,
                         null);
                 }
                 return _CancelCommand;

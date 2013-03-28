@@ -37,6 +37,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
     /// <summary>
     /// Interaction logic for ObjectReferenceEditor.xaml
     /// </summary>
+    [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
     public partial class ObjectReferenceEditor : PropertyEditor, IHasViewModel<ObjectReferenceViewModel>
     {
         static ObjectReferenceEditor()

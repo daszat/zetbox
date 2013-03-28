@@ -23,12 +23,12 @@ namespace Zetbox.Client.Presentables.ValueViewModels
     using System.Text;
     using System.Text.RegularExpressions;
     using Zetbox.API;
+    using Zetbox.API.Async;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
     using Zetbox.App.GUI;
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables.GUI;
-    using Zetbox.API.Async;
 
     public enum ValueViewModelState
     {
@@ -59,7 +59,6 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         /// </summary>
         public TValue NewValue { get; private set; }
     }
-
 
     public abstract class BaseValueViewModel : ViewModel, IValueViewModel, IFormattedValueViewModel, IDataErrorInfo, ILabeledViewModel
     {
@@ -885,6 +884,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         }
     }
 
+    [ViewModelDescriptor]
     public class EnumerationValueViewModel : NullableStructValueViewModel<int>
     {
         public new delegate EnumerationValueViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
@@ -985,8 +985,19 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         }
     }
 
+    [ViewModelDescriptor]
+    public class StringValueViewModel : ClassValueViewModel<string>
+    {
+        public new delegate StringValueViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
+        public StringValueViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, IValueModel mdl)
+            : base(dependencies, dataCtx, parent, mdl)
+        {
+        }
+    }
+
+    [ViewModelDescriptor]
     public class MultiLineStringValueViewModel
-        : ClassValueViewModel<string>
+        : StringValueViewModel
     {
         public new delegate MultiLineStringValueViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
 
@@ -1069,6 +1080,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         }
     }
 
+    [ViewModelDescriptor]
     public class NullableGuidPropertyViewModel : NullableStructValueViewModel<Guid>
     {
         public new delegate NullableGuidPropertyViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
@@ -1100,6 +1112,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         }
     }
 
+    [ViewModelDescriptor]
     public class NullableDecimalPropertyViewModel : NullableStructValueViewModel<decimal>
     {
         public new delegate NullableDecimalPropertyViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
@@ -1138,6 +1151,29 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         }
     }
 
+    [ViewModelDescriptor]
+    public class NullableIntPropertyViewModel : NullableStructValueViewModel<int>
+    {
+        public new delegate NullableIntPropertyViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
+
+        public NullableIntPropertyViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, IValueModel mdl)
+            : base(dependencies, dataCtx, parent, mdl)
+        {
+        }
+    }
+
+    [ViewModelDescriptor]
+    public class NullableDoublePropertyViewModel : NullableStructValueViewModel<double>
+    {
+        public new delegate NullableDoublePropertyViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
+
+        public NullableDoublePropertyViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, IValueModel mdl)
+            : base(dependencies, dataCtx, parent, mdl)
+        {
+        }
+    }
+
+    [ViewModelDescriptor]
     public class NullableDateTimePropertyViewModel
         : NullableStructValueViewModel<DateTime>
     {
@@ -1415,7 +1451,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         public IDateTimeValueModel DateTimeModel { get; private set; }
         private readonly NullableTimePartPropertyViewModel _timePartViewModel;
         private readonly NullableDatePartPropertyViewModel _datePartViewModel;
-                
+
         protected override string FormatValue(DateTime? value)
         {
             if (value == null) return string.Empty;
@@ -1577,6 +1613,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         }
     }
 
+    [ViewModelDescriptor]
     public class NullableBoolPropertyViewModel : NullableStructValueViewModel<bool>
     {
         public new delegate NullableBoolPropertyViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
@@ -1703,6 +1740,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         }
     }
 
+    [ViewModelDescriptor]
     public class NullableMonthPropertyViewModel
         : NullableDateTimePropertyViewModel
     {

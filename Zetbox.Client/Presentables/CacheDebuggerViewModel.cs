@@ -23,6 +23,7 @@ namespace Zetbox.Client.Presentables
     using Zetbox.API;
     using Zetbox.API.Utils;
 
+    [ViewModelDescriptor]
     public class CacheDebuggerViewModel
         : ViewModel
     {
@@ -60,10 +61,10 @@ namespace Zetbox.Client.Presentables
                 if (_clearCommand == null)
                 {
                     _clearCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
-                        DataContext, 
+                        DataContext,
                         null,
                         CacheDebuggerViewModelResources.ClearCommand_Name,
-                        CacheDebuggerViewModelResources.ClearCommand_Tooltip, 
+                        CacheDebuggerViewModelResources.ClearCommand_Tooltip,
                         Cache.ClearAll,
                         null, null);
 

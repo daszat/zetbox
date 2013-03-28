@@ -26,6 +26,7 @@ using Zetbox.Client.Presentables.ZetboxBase;
 
 namespace Zetbox.Client.Presentables.ObjectBrowser
 {
+    [ViewModelDescriptor]
     public class WorkspaceViewModel
         : WindowViewModel
     {

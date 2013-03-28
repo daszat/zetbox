@@ -2,15 +2,15 @@ namespace Zetbox.Client.Presentables.Calendar
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
     using System.Text;
-    using Zetbox.Client.Presentables;
     using Zetbox.API;
-    using Zetbox.Client.Presentables.ValueViewModels;
-    using Zetbox.Client.Models;
-    using System.ComponentModel;
-    using cal = Zetbox.App.Calendar;
     using Zetbox.App.Base;
+    using Zetbox.Client.Models;
+    using Zetbox.Client.Presentables;
+    using Zetbox.Client.Presentables.ValueViewModels;
+    using cal = Zetbox.App.Calendar;
 
     public interface IEventInputViewModel : IDataErrorInfo
     {
@@ -48,7 +48,7 @@ namespace Zetbox.Client.Presentables.Calendar
             {
                 if (_startDate == null)
                 {
-                    _startDate = ViewModelFactory.CreateViewModel<NullableDateTimePropertyViewModel.Factory>().Invoke(DataContext, this, 
+                    _startDate = ViewModelFactory.CreateViewModel<NullableDateTimePropertyViewModel.Factory>().Invoke(DataContext, this,
                         new DateTimeValueModel(CalendarResources.FromLabel, "", false, false) { Value = SelectedStartDate });
                     _startDate.DateTimeStyle = InitialIsAllDay == true ? Zetbox.App.Base.DateTimeStyles.Date : App.Base.DateTimeStyles.DateTime;
                     _startDate.InputAccepted += (s, e) =>
@@ -102,32 +102,32 @@ namespace Zetbox.Client.Presentables.Calendar
             }
         }
 
-        private ClassValueViewModel<string> _summary = null;
-        public ClassValueViewModel<string> Summary
+        private StringValueViewModel _summary = null;
+        public StringValueViewModel Summary
         {
             get
             {
                 if (_summary == null)
                 {
-                    _summary = ViewModelFactory.CreateViewModel<ClassValueViewModel<string>.Factory>().Invoke(DataContext, this, new ClassValueModel<string>(CalendarResources.SummaryLabel, "", false, false));
+                    _summary = ViewModelFactory.CreateViewModel<StringValueViewModel.Factory>().Invoke(DataContext, this, new ClassValueModel<string>(CalendarResources.SummaryLabel, "", false, false));
                 }
                 return _summary;
             }
         }
-        private ClassValueViewModel<string> _location = null;
-        public ClassValueViewModel<string> Location
+        private StringValueViewModel _location = null;
+        public StringValueViewModel Location
         {
             get
             {
                 if (_location == null)
                 {
-                    _location = ViewModelFactory.CreateViewModel<ClassValueViewModel<string>.Factory>().Invoke(DataContext, this, new ClassValueModel<string>(CalendarResources.LocationLabel, "", true, false));
+                    _location = ViewModelFactory.CreateViewModel<StringValueViewModel.Factory>().Invoke(DataContext, this, new ClassValueModel<string>(CalendarResources.LocationLabel, "", true, false));
                 }
                 return _location;
             }
         }
-        private ClassValueViewModel<string> _body = null;
-        public ClassValueViewModel<string> Body
+        private StringValueViewModel _body = null;
+        public StringValueViewModel Body
         {
             get
             {
@@ -147,13 +147,13 @@ namespace Zetbox.Client.Presentables.Calendar
                 if (_recurrence == null)
                 {
                     _recurrence = ViewModelFactory.CreateViewModel<CompoundObjectPropertyViewModel.Factory>()
-                        .Invoke(DataContext, this, 
+                        .Invoke(DataContext, this,
                             new CompoundObjectValueModel(
-                                DataContext, 
-                                CalendarResources.RecurrenceLabel, 
-                                "", 
-                                true, 
-                                false, 
+                                DataContext,
+                                CalendarResources.RecurrenceLabel,
+                                "",
+                                true,
+                                false,
                                 FrozenContext.FindPersistenceObject<CompoundObject>(new Guid("3d4ec88b-fe8e-452e-a71d-03143a75aeb0"))));
                 }
                 return _recurrence;

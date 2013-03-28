@@ -18,11 +18,10 @@ namespace Zetbox.Client.Presentables
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.Linq;
     using System.Text;
-
     using Zetbox.API;
-    using System.ComponentModel;
     using Zetbox.Client.Presentables.ObjectEditor;
 
     public class ErrorDescriptor : ViewModel
@@ -74,6 +73,7 @@ namespace Zetbox.Client.Presentables
     /// <summary>
     /// A simple model presenting a list of errors from constraints of the specified DataContext.
     /// </summary>
+    [ViewModelDescriptor]
     public class ErrorListViewModel
         : WindowViewModel
     {
@@ -115,7 +115,7 @@ namespace Zetbox.Client.Presentables
                 if (_CloseCommand == null)
                 {
                     _CloseCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
-                        DataContext, 
+                        DataContext,
                         null,
                         ErrorListViewModelResources.CloseCommand_Name,
                         ErrorListViewModelResources.CloseCommand_Tooltip, Close, null, null);
@@ -137,12 +137,12 @@ namespace Zetbox.Client.Presentables
                 if (_RefreshErrorsCommand == null)
                 {
                     _RefreshErrorsCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
-                        DataContext, 
+                        DataContext,
                         this,
                         ErrorListViewModelResources.RefreshCommand_Name,
-                        ErrorListViewModelResources.RefreshCommand_Tooltip, 
+                        ErrorListViewModelResources.RefreshCommand_Tooltip,
                         RefreshErrors,
-                        null, 
+                        null,
                         null);
                 }
                 return _RefreshErrorsCommand;
@@ -164,7 +164,7 @@ namespace Zetbox.Client.Presentables
                 if (obj == null && error is ViewModel)
                 {
                     var vmdl = (ViewModel)error;
-                    if(vmdl.Parent is DataObjectViewModel)
+                    if (vmdl.Parent is DataObjectViewModel)
                     {
                         obj = ((DataObjectViewModel)vmdl.Parent).Object;
                     }

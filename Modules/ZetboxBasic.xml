@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-03-28T09:17:27Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-03-28T10:52:35Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="84f486f7-19fe-49ad-8e4a-6c05089e7684">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.650235Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
@@ -12516,6 +12516,13 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <ZetboxBase:FullName>Zetbox.Client.Presentables.ValueViewModels.NullableDecimalPropertyViewModel+Factory</ZetboxBase:FullName>
     <ZetboxBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</ZetboxBase:Parent>
   </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="df26798d-e47e-4aa4-9a21-8da333f45676">
+    <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2013-03-28T09:52:35.096844Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-03-28T09:52:35.096844Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>Zetbox.Client.Presentables.ValueViewModels.NullableDoublePropertyViewModel</ZetboxBase:FullName>
+    <ZetboxBase:Parent>f223c178-c447-40a8-960e-ffba6b8423af</ZetboxBase:Parent>
+  </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="7bd64a79-f060-4a3a-9605-dcb76c1ea5f0">
     <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
     <ZetboxBase:ChangedOn>2011-08-06T04:31:13.040282Z</ZetboxBase:ChangedOn>
@@ -12531,6 +12538,13 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <ZetboxBase:FullName>Zetbox.Client.Presentables.ValueViewModels.NullableGuidPropertyViewModel+Factory</ZetboxBase:FullName>
     <ZetboxBase:Parent>68559faa-c4b4-4bb2-bb0d-49bb83a081a7</ZetboxBase:Parent>
     <ZetboxBase:ToStringCache>Zetbox.Client.Presentables.ValueViewModels.NullableGuidPropertyViewModel+Factory</ZetboxBase:ToStringCache>
+  </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="aedefb76-d32a-4876-83cd-ef23cc6228ad">
+    <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2013-03-28T09:51:22.594844Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-03-28T09:51:22.594844Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>Zetbox.Client.Presentables.ValueViewModels.NullableIntPropertyViewModel</ZetboxBase:FullName>
+    <ZetboxBase:Parent>2f35b21a-73c2-4e38-ab28-7ee2404684be</ZetboxBase:Parent>
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="a1449630-24d8-49f7-801f-d14c350f21fc">
     <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
@@ -12706,6 +12720,13 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <ZetboxBase:CreatedOn>2011-04-19T09:39:55Z</ZetboxBase:CreatedOn>
     <ZetboxBase:FullName>Zetbox.Client.Presentables.ValueViewModels.StateChangedEventArgs</ZetboxBase:FullName>
     <ZetboxBase:Parent>7dc6c87a-fed5-492b-85be-9c9e9f3a1c7e</ZetboxBase:Parent>
+  </ZetboxBase:TypeRef>
+  <ZetboxBase:TypeRef ExportGuid="5f56a98c-63a3-45d5-8246-4dd3e27f8425">
+    <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
+    <ZetboxBase:ChangedOn>2013-03-28T09:46:33.658596Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-03-28T09:46:33.658596Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:FullName>Zetbox.Client.Presentables.ValueViewModels.StringValueViewModel</ZetboxBase:FullName>
+    <ZetboxBase:Parent>006ae4fa-804d-47a7-97d5-33d99a0ebb51</ZetboxBase:Parent>
   </ZetboxBase:TypeRef>
   <ZetboxBase:TypeRef ExportGuid="1397fbd9-d38c-45cb-99d6-86f852d22bc5">
     <ZetboxBase:Assembly>ccb4bfc9-d76a-43be-963e-bc3712e6b405</ZetboxBase:Assembly>
@@ -45497,15 +45518,6 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <GUI:ViewModelRef>860363f5-277a-45f9-8749-fba5e88f61f7</GUI:ViewModelRef>
     <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.ValueInputTaskViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
-  <GUI:ViewModelDescriptor ExportGuid="975eee82-e7e1-4a12-ab43-d2e3bc3766e4">
-    <GUI:DefaultEditorKind>2279b0a6-36b8-4c97-b1fd-9eb1710e74f3</GUI:DefaultEditorKind>
-    <GUI:DefaultGridCellDisplayKind>a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70</GUI:DefaultGridCellDisplayKind>
-    <GUI:Deleted>false</GUI:Deleted>
-    <GUI:Description>A string attribute</GUI:Description>
-    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:ViewModelRef>006ae4fa-804d-47a7-97d5-33d99a0ebb51</GUI:ViewModelRef>
-    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.ValueViewModels.ClassValueViewModel`1[[System.String, mscorlib]], Zetbox.Client</GUI:ViewModelTypeRef>
-  </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="a6ff986c-a485-4c4d-947c-e59d14112ec2">
     <GUI:DefaultEditorKind>9d414225-460a-4c54-8e36-e368804e387f</GUI:DefaultEditorKind>
     <GUI:DefaultGridCellDisplayKind>a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70</GUI:DefaultGridCellDisplayKind>
@@ -45553,6 +45565,15 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <GUI:ViewModelRef>26fe8ae8-25cc-431c-91e1-76047a15ead9</GUI:ViewModelRef>
     <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.ValueViewModels.NullableDecimalPropertyViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="3a3d0c1c-679e-4d4d-adeb-3ab260079ccb">
+    <GUI:DefaultEditorKind>2279b0a6-36b8-4c97-b1fd-9eb1710e74f3</GUI:DefaultEditorKind>
+    <GUI:DefaultGridCellDisplayKind>a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70</GUI:DefaultGridCellDisplayKind>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Description>A floating point attribute</GUI:Description>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:ViewModelRef>df26798d-e47e-4aa4-9a21-8da333f45676</GUI:ViewModelRef>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.ValueViewModels.NullableDoublePropertyViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="2b6fb70f-a382-4057-a139-cc33333d619d">
     <GUI:DefaultEditorKind>2279b0a6-36b8-4c97-b1fd-9eb1710e74f3</GUI:DefaultEditorKind>
     <GUI:DefaultGridCellDisplayKind>a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70</GUI:DefaultGridCellDisplayKind>
@@ -45562,6 +45583,15 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <GUI:ViewModelRef>7bd64a79-f060-4a3a-9605-dcb76c1ea5f0</GUI:ViewModelRef>
     <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.ValueViewModels.NullableGuidPropertyViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="edaf9334-dc36-4778-aa33-1e5cdaeeb767">
+    <GUI:DefaultEditorKind>2279b0a6-36b8-4c97-b1fd-9eb1710e74f3</GUI:DefaultEditorKind>
+    <GUI:DefaultGridCellDisplayKind>a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70</GUI:DefaultGridCellDisplayKind>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Description>An integer attribute</GUI:Description>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:ViewModelRef>aedefb76-d32a-4876-83cd-ef23cc6228ad</GUI:ViewModelRef>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.ValueViewModels.NullableIntPropertyViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="e66f8cad-f532-4c75-8fb0-e1aa8baddd06">
     <GUI:DefaultEditorKind>a09a78f4-a583-4fef-8ae7-cf7acd95e8b8</GUI:DefaultEditorKind>
     <GUI:DefaultGridCellDisplayKind>a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70</GUI:DefaultGridCellDisplayKind>
@@ -45570,24 +45600,6 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:ViewModelRef>a1449630-24d8-49f7-801f-d14c350f21fc</GUI:ViewModelRef>
     <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.ValueViewModels.NullableMonthPropertyViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
-  </GUI:ViewModelDescriptor>
-  <GUI:ViewModelDescriptor ExportGuid="3a3d0c1c-679e-4d4d-adeb-3ab260079ccb">
-    <GUI:DefaultEditorKind>2279b0a6-36b8-4c97-b1fd-9eb1710e74f3</GUI:DefaultEditorKind>
-    <GUI:DefaultGridCellDisplayKind>a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70</GUI:DefaultGridCellDisplayKind>
-    <GUI:Deleted>false</GUI:Deleted>
-    <GUI:Description>A floating point attribute</GUI:Description>
-    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:ViewModelRef>f223c178-c447-40a8-960e-ffba6b8423af</GUI:ViewModelRef>
-    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.ValueViewModels.NullableStructValueViewModel`1[[System.Double, mscorlib]], Zetbox.Client</GUI:ViewModelTypeRef>
-  </GUI:ViewModelDescriptor>
-  <GUI:ViewModelDescriptor ExportGuid="edaf9334-dc36-4778-aa33-1e5cdaeeb767">
-    <GUI:DefaultEditorKind>2279b0a6-36b8-4c97-b1fd-9eb1710e74f3</GUI:DefaultEditorKind>
-    <GUI:DefaultGridCellDisplayKind>a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70</GUI:DefaultGridCellDisplayKind>
-    <GUI:Deleted>false</GUI:Deleted>
-    <GUI:Description>An integer attribute</GUI:Description>
-    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:ViewModelRef>2f35b21a-73c2-4e38-ab28-7ee2404684be</GUI:ViewModelRef>
-    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.ValueViewModels.NullableStructValueViewModel`1[[System.Int32, mscorlib]], Zetbox.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="67a49c49-b890-4d35-a8db-1f8e43bfc7df">
     <GUI:DefaultEditorKind>4f6779a0-46f6-48a0-8880-fc491164d04a</GUI:DefaultEditorKind>
@@ -45617,6 +45629,15 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:ViewModelRef>59136763-5a94-4ae5-b9ab-6d679e86245a</GUI:ViewModelRef>
     <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.ValueViewModels.ObjectReferenceViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="975eee82-e7e1-4a12-ab43-d2e3bc3766e4">
+    <GUI:DefaultEditorKind>2279b0a6-36b8-4c97-b1fd-9eb1710e74f3</GUI:DefaultEditorKind>
+    <GUI:DefaultGridCellDisplayKind>a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70</GUI:DefaultGridCellDisplayKind>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Description>A string attribute</GUI:Description>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:ViewModelRef>5f56a98c-63a3-45d5-8246-4dd3e27f8425</GUI:ViewModelRef>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.ValueViewModels.StringValueViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="afc4b471-3aea-44cb-a1df-859594a3c1cf">
     <GUI:DefaultEditorKind>b056e51c-efcf-4ba5-bb34-3b1204254ef9</GUI:DefaultEditorKind>

@@ -24,6 +24,7 @@ namespace Zetbox.Client.Presentables
     using System.Text;
     using Zetbox.API;
 
+    [ViewModelDescriptor]
     public class ZetboxDebuggerAsViewModel
         : ViewModel, IZetboxContextDebugger
     {

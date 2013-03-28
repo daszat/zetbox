@@ -35,6 +35,7 @@ namespace Zetbox.Client.WPF.View
     /// <summary>
     /// Interaction logic for CacheDebuggerDisplay.xaml
     /// </summary>
+    [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
     public partial class CacheDebuggerDisplay : WindowView, IHasViewModel<CacheDebuggerViewModel>
     {
         public CacheDebuggerDisplay()

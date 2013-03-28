@@ -50,7 +50,7 @@ namespace Zetbox.App.Base
                 try
                 {
                     SR.Assembly srAssembly = ReflectAssembly(assembly);
-                  
+
                     CreateViewModelDescriptors(ctx, srAssembly);
                     CreateViewDescriptors(ctx, srAssembly);
 
@@ -87,6 +87,8 @@ namespace Zetbox.App.Base
         {
             using (Logging.Log.InfoTraceMethodCallFormat("CreateViewModelDescriptors", "Creating ViewModelDescriptors"))
             {
+                var liveDescriptors = new HashSet<ViewModelDescriptor>();
+
                 foreach (var type in srAssembly.GetTypes())
                 {
                     if (type != null)
@@ -111,8 +113,21 @@ namespace Zetbox.App.Base
                                 descr.ViewModelTypeRef = typeName;
                                 descr.Description = "TODO: Add description";
                             }
+                            else
+                            {
+                                descr.Deleted = false;
+                            }
+
+                            liveDescriptors.Add(descr);
                         }
                     }
+                }
+
+                var simpleAssemblyName = srAssembly.GetSimpleName();
+                var deadDescriptors = ctx.GetQuery<ViewModelDescriptor>().Where(vmd => vmd.ViewModelTypeRef.Contains(simpleAssemblyName)).ToList().Except(liveDescriptors);
+                foreach (var d in deadDescriptors)
+                {
+                    d.Deleted = true;
                 }
             }
         }
@@ -121,6 +136,8 @@ namespace Zetbox.App.Base
         {
             using (Logging.Log.InfoTraceMethodCallFormat("CreateViewDescriptors", "Creating ViewDescriptors"))
             {
+                var liveDescriptors = new HashSet<ViewDescriptor>();
+
                 foreach (var type in srAssembly.GetTypes())
                 {
                     if (type != null)
@@ -141,15 +158,33 @@ namespace Zetbox.App.Base
                         if (attr != null)
                         {
                             var typeName = type.GetSimpleName();
-                            var descr = ctx.GetQuery<ViewDescriptor>().FirstOrDefault(i => i.ControlTypeRef == typeName);
-                            if (descr == null)
+
+                            // if a view can be used under multiple ControlKinds, it needs to have multiple ViewDescriptors
+                            var descrList = ctx.GetQuery<ViewDescriptor>().Where(i => i.ControlTypeRef == typeName).ToList();
+                            if (descrList.Count == 0)
                             {
-                                descr = ctx.Create<ViewDescriptor>();
+                                var descr = ctx.Create<ViewDescriptor>();
                                 descr.ControlTypeRef = typeName;
                                 if (tk != null) descr.Toolkit = tk.Value;
+                                liveDescriptors.Add(descr);
+                            }
+                            else
+                            {
+                                foreach (var descr in descrList)
+                                {
+                                    descr.Deleted = false;
+                                    liveDescriptors.Add(descr);
+                                }
                             }
                         }
                     }
+                }
+
+                var simpleAssemblyName = srAssembly.GetSimpleName();
+                var deadDescriptors = ctx.GetQuery<ViewDescriptor>().Where(vmd => vmd.ControlTypeRef.Contains(simpleAssemblyName)).ToList().Except(liveDescriptors);
+                foreach (var d in deadDescriptors)
+                {
+                    d.Deleted = true;
                 }
             }
         }

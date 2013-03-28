@@ -25,6 +25,7 @@ namespace Zetbox.Client.Presentables.Relations
     using Zetbox.App.Extensions;
     using Zetbox.Client.Presentables.ValueViewModels;
 
+    [ViewModelDescriptor]
     public class RelationViewModel
         : DataObjectViewModel
     {

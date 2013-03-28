@@ -13,6 +13,7 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -23,10 +24,10 @@ using Zetbox.API.Configuration;
 using Zetbox.App.Base;
 using Zetbox.App.Extensions;
 using Zetbox.Client.Presentables.ZetboxBase;
-using System.Collections;
 
 namespace Zetbox.Client.Presentables.ObjectBrowser
 {
+    [ViewModelDescriptor]
     public class ModuleViewModel : DataObjectViewModel
     {
         public class TreeNodeSimpleObjects

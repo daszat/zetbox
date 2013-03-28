@@ -37,7 +37,7 @@ namespace Zetbox.App.Base
         [Invocation]
         public static void NotifyCreated(Zetbox.App.Base.DoubleProperty obj)
         {
-            obj.ValueModelDescriptor = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableStructValueViewModel_1_System_Double_.Find(obj.Context);
+            obj.ValueModelDescriptor = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableDoublePropertyViewModel.Find(obj.Context);
         }
     }
 }

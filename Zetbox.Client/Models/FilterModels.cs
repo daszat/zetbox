@@ -260,7 +260,7 @@ namespace Zetbox.Client.Models
             base.ViewModelType = ViewModelDescriptors.Zetbox_Client_Presentables_FilterViewModels_SingleValueFilterViewModel.Find(frozenCtx);
             base.FilterArguments.Add(new FilterArgumentConfig(
                 new ClassValueModel<string>(base.Label, FilterModelsResources.ToStringFilterModel_Description, true, false),
-                ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_ClassValueViewModel_1_System_String_.Find(frozenCtx)
+                ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_StringValueViewModel.Find(frozenCtx)
             ));
 
             base.RefreshOnFilterChanged = false;
@@ -379,7 +379,7 @@ namespace Zetbox.Client.Models
             fmdl.FilterArguments.Add(new FilterArgumentConfig(
                 new CompoundObjectValueModel(ctx, label, "", true, false, requestedArgumentKind, cpObj),
                 cpObj.DefaultPropertyViewModelDescriptor ?? ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_CompoundObjectPropertyViewModel.Find(frozenCtx)));
-            return fmdl;            
+            return fmdl;
         }
 
         public static SingleValueFilterModel Create<T>(IFrozenContext frozenCtx, string label, string predicate)
@@ -416,12 +416,12 @@ namespace Zetbox.Client.Models
             }
             else if (propType == typeof(int))
             {
-                vDesc = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableStructValueViewModel_1_System_Int32_.Find(frozenCtx);
+                vDesc = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableIntPropertyViewModel.Find(frozenCtx);
                 mdl = new NullableStructValueModel<int>(label, "", true, false, requestedArgumentKind);
             }
             else if (propType == typeof(double))
             {
-                vDesc = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableStructValueViewModel_1_System_Double_.Find(frozenCtx);
+                vDesc = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableDoublePropertyViewModel.Find(frozenCtx);
                 mdl = new NullableStructValueModel<double>(label, "", true, false, requestedArgumentKind);
             }
             else if (propType == typeof(bool))
@@ -436,7 +436,7 @@ namespace Zetbox.Client.Models
             }
             else if (propType == typeof(string))
             {
-                vDesc = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_ClassValueViewModel_1_System_String_.Find(frozenCtx);
+                vDesc = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_StringValueViewModel.Find(frozenCtx);
                 mdl = new ClassValueModel<string>(label, "", true, false, requestedArgumentKind);
                 fmdl.Operator = FilterOperators.Contains;
             }
@@ -557,7 +557,7 @@ namespace Zetbox.Client.Models
         protected string[] GetStringParts()
         {
             var str = (string)FilterArgument.Value.GetUntypedValue();
-            string pattern = @"(?<match>[^\s,;""]+)|\""(?<match>[^""]*)"""; 
+            string pattern = @"(?<match>[^\s,;""]+)|\""(?<match>[^""]*)""";
             return Regex.Matches(str, pattern).Cast<Match>().Select(m => m.Groups["match"].Value).ToArray();
         }
     }
@@ -591,7 +591,7 @@ namespace Zetbox.Client.Models
                 counter++;
             }
             sb.Remove(sb.Length - 3, 3);
-            return sb.ToString(); 
+            return sb.ToString();
         }
 
         private string[] _propNames;
@@ -687,7 +687,7 @@ namespace Zetbox.Client.Models
             mdl.RequestedKind = requestedKind;
             mdl.FilterArguments.Add(new FilterArgumentConfig(
                 valMdl,
-                /*cfg.ArgumentViewModel ?? */ ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableStructValueViewModel_1_System_Int32_.Find(frozenCtx)));
+                /*cfg.ArgumentViewModel ?? */ ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableIntPropertyViewModel.Find(frozenCtx)));
 
             if (setDefault)
             {
@@ -816,13 +816,13 @@ namespace Zetbox.Client.Models
             }
             else if (type == typeof(int))
             {
-                vDesc = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableStructValueViewModel_1_System_Int32_.Find(frozenCtx);
+                vDesc = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableIntPropertyViewModel.Find(frozenCtx);
                 mdl1 = new NullableStructValueModel<int>("", "", true, false, requestedArgumentKind);
                 mdl2 = new NullableStructValueModel<int>("", "", true, false, requestedArgumentKind);
             }
             else if (type == typeof(double))
             {
-                vDesc = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableStructValueViewModel_1_System_Double_.Find(frozenCtx);
+                vDesc = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableDoublePropertyViewModel.Find(frozenCtx);
                 mdl1 = new NullableStructValueModel<double>("", "", true, false, requestedArgumentKind);
                 mdl2 = new NullableStructValueModel<double>("", "", true, false, requestedArgumentKind);
             }

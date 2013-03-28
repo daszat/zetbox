@@ -35,6 +35,7 @@ namespace Zetbox.Client.WPF.View
     /// <summary>
     /// Interaction logic for SelectionDialog.xaml
     /// </summary>
+    [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
     public partial class SelectionDialog : WindowView, IHasViewModel<DataObjectSelectionTaskViewModel>
     {
         public SelectionDialog()

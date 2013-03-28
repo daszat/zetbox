@@ -27,6 +27,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Zetbox.API.Utils;
+using Zetbox.Client.GUI;
 using Zetbox.Client.Presentables;
 using Zetbox.Client.Presentables.ValueViewModels;
 using Zetbox.Client.WPF.CustomControls;
@@ -38,6 +39,7 @@ namespace Zetbox.Client.WPF.View
     /// <summary>
     /// Interaction logic for StringListView.xaml
     /// </summary>
+    [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
     public partial class StringListView : PropertyEditor
     {
         public StringListView()

@@ -56,7 +56,7 @@ namespace Zetbox.Client.GUI
             if (value != null)
                 mdl.Value = value;
 
-            var vmdl = c.ViewModelFactory.CreateViewModel<ClassValueViewModel<string>.Factory>().Invoke(c.DataContext, null, mdl);
+            var vmdl = c.ViewModelFactory.CreateViewModel<StringValueViewModel.Factory>().Invoke(c.DataContext, null, mdl);
 
             if (requestedKind != null)
                 vmdl.RequestedKind = requestedKind;

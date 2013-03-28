@@ -33,6 +33,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
     /// <summary>
     /// </summary>
+    [ViewModelDescriptor]
     public class ObjectCollectionViewModel
         : BaseObjectCollectionViewModel<ICollection<IDataObject>>, IValueCollectionViewModel<DataObjectViewModel, IReadOnlyObservableList<DataObjectViewModel>>, ISortableViewModel
     {

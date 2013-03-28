@@ -34,12 +34,13 @@ namespace Zetbox.Client.WPF.View
     /// <summary>
     /// Interaction logic for PropertyGroupBoxView.xaml
     /// </summary>
+    [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
     public partial class PropertyGroupBoxView : GroupBox
     {
         public PropertyGroupBoxView()
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             InitializeComponent();
-        }     
+        }
     }
 }

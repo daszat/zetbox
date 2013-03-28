@@ -29,6 +29,7 @@ namespace Zetbox.Client.Presentables
     /// <summary>
     /// Models a group of Property(Models)
     /// </summary>
+    [ViewModelDescriptor]
     public abstract class PropertyGroupViewModel
         : ViewModel, IDataErrorInfo
     {

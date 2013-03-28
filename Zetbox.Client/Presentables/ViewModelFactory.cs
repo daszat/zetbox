@@ -228,11 +228,11 @@ namespace Zetbox.Client.Presentables
             }
             else if (param is DoubleParameter && !isList)
             {
-                t = typeof(NullableStructValueViewModel<double>);
+                t = typeof(NullableDoublePropertyViewModel);
             }
             else if (param is IntParameter && !isList)
             {
-                t = typeof(NullableStructValueViewModel<int>);
+                t = typeof(NullableIntPropertyViewModel);
             }
             else if (param is DecimalParameter && !isList)
             {
@@ -240,7 +240,7 @@ namespace Zetbox.Client.Presentables
             }
             else if (param is StringParameter && !isList)
             {
-                t = typeof(ClassValueViewModel<string>);
+                t = typeof(StringValueViewModel);
             }
             else if (param is ObjectReferenceParameter && !isList)
             {

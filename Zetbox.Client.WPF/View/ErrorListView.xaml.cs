@@ -36,6 +36,7 @@ namespace Zetbox.Client.WPF.View
     /// <summary>
     /// Interaction logic for ErrorListView.xaml
     /// </summary>
+    [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
     public partial class ErrorListView : WindowView, IHasViewModel<ErrorListViewModel>
     {
         public ErrorListView()

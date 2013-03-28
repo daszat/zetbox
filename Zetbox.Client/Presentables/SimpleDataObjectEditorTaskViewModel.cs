@@ -65,7 +65,8 @@ namespace Zetbox.Client.Presentables
 
         public ViewModel Object
         {
-            get; private set;
+            get;
+            private set;
         }
 
         #endregion

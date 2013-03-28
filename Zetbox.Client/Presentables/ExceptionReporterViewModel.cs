@@ -17,10 +17,10 @@ namespace Zetbox.Client.Presentables
 {
     using System;
     using System.Collections.Generic;
+    using System.Drawing;
     using System.Linq;
     using System.Text;
     using Zetbox.API;
-    using System.Drawing;
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables.ValueViewModels;
 
@@ -62,7 +62,7 @@ namespace Zetbox.Client.Presentables
 
         public string ExceptionDetailsLabel
         {
-            get { return ExceptionReporterViewModelResources.ExceptionDetailsLabel; } 
+            get { return ExceptionReporterViewModelResources.ExceptionDetailsLabel; }
         }
 
         public string ExceptionText
@@ -104,14 +104,14 @@ namespace Zetbox.Client.Presentables
         }
 
         private ClassValueModel<string> _subjectTextModel = new ClassValueModel<string>(ExceptionReporterViewModelResources.SummaryLabel, ExceptionReporterViewModelResources.SummaryDescription, false, false);
-        private ClassValueViewModel<string> _subjectTextViewModel;
-        public ClassValueViewModel<string> SubjectText
+        private StringValueViewModel _subjectTextViewModel;
+        public StringValueViewModel SubjectText
         {
             get
             {
                 if (_subjectTextViewModel == null)
                 {
-                    _subjectTextViewModel = ViewModelFactory.CreateViewModel<ClassValueViewModel<string>.Factory>().Invoke(DataContext, this, _subjectTextModel);
+                    _subjectTextViewModel = ViewModelFactory.CreateViewModel<StringValueViewModel.Factory>().Invoke(DataContext, this, _subjectTextModel);
                     _subjectTextModel.Value = exception != null ? exception.GetInnerMessage() : String.Empty;
                 }
                 return _subjectTextViewModel;
@@ -124,7 +124,7 @@ namespace Zetbox.Client.Presentables
         {
             get
             {
-                if(_AdditionalTextViewModel == null)
+                if (_AdditionalTextViewModel == null)
                 {
                     _AdditionalTextViewModel = ViewModelFactory.CreateViewModel<MultiLineStringValueViewModel.Factory>().Invoke(DataContext, this, _AdditionalTextModel);
                 }
@@ -155,9 +155,9 @@ namespace Zetbox.Client.Presentables
         public void Report()
         {
             problemReporter.Report(
-                string.IsNullOrEmpty(this.SubjectText.Value) ? this.Title : this.SubjectText.Value, 
-                this.AdditionalText.Value, 
-                screenShot, 
+                string.IsNullOrEmpty(this.SubjectText.Value) ? this.Title : this.SubjectText.Value,
+                this.AdditionalText.Value,
+                screenShot,
                 exception);
             this.Show = false;
         }
@@ -170,7 +170,7 @@ namespace Zetbox.Client.Presentables
                 if (_CancelCommand == null)
                 {
                     _CancelCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
-                        DataContext, 
+                        DataContext,
                         null,
                         ExceptionReporterViewModelResources.Cancel,
                         ExceptionReporterViewModelResources.Cancel_Tooltip,

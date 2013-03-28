@@ -18,12 +18,11 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-
 using Zetbox.API;
-using Zetbox.App.Base;
-using Zetbox.App.Extensions;
 using Zetbox.API.Configuration;
 using Zetbox.API.Utils;
+using Zetbox.App.Base;
+using Zetbox.App.Extensions;
 using Zetbox.Client.Models;
 using Zetbox.Client.Presentables.ValueViewModels;
 
@@ -88,10 +87,10 @@ namespace Zetbox.Client.Presentables
                 if (_InvokeCommand == null)
                 {
                     _InvokeCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
-                        DataContext, 
+                        DataContext,
                         this,
                         ValueInputTaskViewModelResources.InvokeCommand_Name,
-                        ValueInputTaskViewModelResources.InvokeCommand_Tooltip, 
+                        ValueInputTaskViewModelResources.InvokeCommand_Tooltip,
                         Invoke,
                         null, null);
                 }
@@ -114,10 +113,10 @@ namespace Zetbox.Client.Presentables
                 if (_CancelCommand == null)
                 {
                     _CancelCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
-                        DataContext, 
+                        DataContext,
                         this,
                         ValueInputTaskViewModelResources.CancelCommand_Name,
-                        ValueInputTaskViewModelResources.CancelCommand_Tooltip, 
+                        ValueInputTaskViewModelResources.CancelCommand_Tooltip,
                         Cancel,
                         null, null);
                 }

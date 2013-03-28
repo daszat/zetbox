@@ -239,6 +239,13 @@ namespace Zetbox.API
             return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>) && type.GetGenericArguments().Single().IsEnum;
         }
 
+        public static string GetSimpleName(this Assembly assembly)
+        {
+            if (assembly == null) throw new ArgumentNullException("assembly");
+
+            return assembly.FullName.Split(',').First().Trim();
+        }
+
         public static string GetSimpleName(this Type type, bool addAssemblyNames = true)
         {
             if (type == null) throw new ArgumentNullException("type");
@@ -252,7 +259,7 @@ namespace Zetbox.API
 
             if (addAssemblyNames)
             {
-                result += ", " + type.Assembly.FullName.Split(',').First();
+                result += ", " + type.Assembly.GetSimpleName();
             }
 
             return result;

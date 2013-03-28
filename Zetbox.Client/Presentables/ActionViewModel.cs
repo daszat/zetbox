@@ -19,19 +19,20 @@ namespace Zetbox.Client.Presentables
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.Linq;
+    using System.Linq.Expressions;
     using System.Reflection;
     using System.Text;
     using Zetbox.API;
     using Zetbox.App.Base;
-    using System.Linq.Expressions;
 
+    [ViewModelDescriptor]
     public class ActionViewModel
         : CommandViewModel
     {
         public new delegate ActionViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IDataObject obj, Method m);
 
         public ActionViewModel(
-            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, 
+            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
             IDataObject obj, Method m)
             : base(appCtx, dataCtx, parent, string.Empty, string.Empty)
         {
@@ -89,8 +90,8 @@ namespace Zetbox.Client.Presentables
             get { return Label; }
         }
 
-        private static Dictionary<Tuple<Type, string>, Func<object, bool>> _canExecCache = new Dictionary<Tuple<Type,string>,Func<object,bool>>();
-        private static Dictionary<Tuple<Type, string>, Func<object, string>> _canExecReasonCache = new Dictionary<Tuple<Type,string>,Func<object,string>>();
+        private static Dictionary<Tuple<Type, string>, Func<object, bool>> _canExecCache = new Dictionary<Tuple<Type, string>, Func<object, bool>>();
+        private static Dictionary<Tuple<Type, string>, Func<object, string>> _canExecReasonCache = new Dictionary<Tuple<Type, string>, Func<object, string>>();
         public override bool CanExecute(object data)
         {
             Func<object, bool> canExec;
@@ -169,7 +170,7 @@ namespace Zetbox.Client.Presentables
             {
                 this.ViewModelFactory.ShowModel(DataObjectViewModel.Fetch(this.ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj), true);
             }
-            else if(result != null)
+            else if (result != null)
             {
                 ViewModelFactory.ShowMessage(result.ToString(), "Result");
             }
