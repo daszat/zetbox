@@ -109,8 +109,10 @@ namespace Zetbox.App.Packaging
                     {
                         if (reader.NodeType != XmlNodeType.Element) continue;
                         var obj = ImportElement(ctx, currentObjects, p);
-                        if (obj == null) throw new InvalidOperationException("Invalid import format: ImportElement returned NULL");
-                        importedObjects[((IExportableInternal)obj).ExportGuid] = obj;
+                        if (obj != null)
+                        {
+                            importedObjects[((IExportableInternal)obj).ExportGuid] = obj;
+                        }
                     }
                 }
 
@@ -270,6 +272,10 @@ namespace Zetbox.App.Packaging
                         {
                             string ifTypeName = string.Format("{0}.{1}", ns, tn);
                             ifTypeName = MigrateTypeNameMapping(ifTypeName);
+                            if (string.IsNullOrWhiteSpace(ifTypeName))
+                            {
+                                continue;
+                            }
                             Type t = ctx.GetInterfaceType(ifTypeName).Type;
                             if (t != null)
                             {
@@ -311,6 +317,10 @@ namespace Zetbox.App.Packaging
             {
                 string ifTypeName = string.Format("{0}.{1}", s.Reader.NamespaceURI, s.Reader.LocalName);
                 ifTypeName = MigrateTypeNameMapping(ifTypeName);
+                if (string.IsNullOrWhiteSpace(ifTypeName))
+                {
+                    return null;
+                }
                 InterfaceType ifType = ctx.GetInterfaceType(ifTypeName);
                 if (ifType.Type == null)
                 {
@@ -358,7 +368,13 @@ namespace Zetbox.App.Packaging
         /// <returns></returns>
         private static string MigrateTypeNameMapping(string ifTypeName)
         {
-            switch(ifTypeName) {
+            switch (ifTypeName)
+            {
+                case "Zetbox.App.Base.ServiceDescriptor":
+                case "Zetbox.App.Base.TypeRef":
+                case "Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntry":
+                case "Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntry":
+                    return string.Empty;
                 case "Zetbox.App.Base.ObjectClass_implements_Interface_RelationEntry":
                     return "Zetbox.App.Base.DataType_implements_Interface_RelationEntry";
                 default:
