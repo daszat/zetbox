@@ -1557,7 +1557,7 @@ END";
         {
             if (discriminatorFilter == null)
             {
-                WriteGuidDefaultValue(tblName, colName);
+                WriteDefaultValue(tblName, colName, value);
             }
             else
             {
