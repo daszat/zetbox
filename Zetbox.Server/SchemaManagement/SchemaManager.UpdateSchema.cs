@@ -140,17 +140,22 @@ namespace Zetbox.Server.SchemaManagement
             foreach (var prop in schema.GetQuery<ValueTypeProperty>())
             {
                 var cls = prop.ObjectClass as ObjectClass;
+                if (cls == null)
+                {
+                    // TODO: handle compounds
+                    continue;
+                }
+                var tblName = cls.GetTableRef(db);
+                var colName = Construct.ColumnName(prop, string.Empty);
+                var checkConstraintName = Construct.CheckConstraintName(tblName.Name, colName);
+
+                if (db.CheckCheckConstraintExists(tblName, checkConstraintName))
+                {
+                    db.DropCheckConstraint(tblName, checkConstraintName);
+                }
+
                 if (!prop.IsNullable() && cls != null && cls.BaseObjectClass != null && cls.GetTableMapping() == TableMapping.TPH)
                 {
-                    var tblName = cls.GetTableRef(db);
-                    var colName = Construct.ColumnName(prop, string.Empty);
-                    var checkConstraintName = Construct.CheckConstraintName(tblName.Name, colName);
-
-                    if (db.CheckCheckConstraintExists(tblName, checkConstraintName))
-                    {
-                        db.DropCheckConstraint(tblName, checkConstraintName);
-                    }
-
                     Case.CreateTPHNotNullCheckConstraint(tblName, colName, cls);
                 }
             }
@@ -165,15 +170,16 @@ namespace Zetbox.Server.SchemaManagement
                     bool hasPersistentOrder;
                     if (Case.TryInspect_1_N_Relation(rel, out assocName, out relEnd, out otherEnd, out tblName, out refTblName, out colName, out hasPersistentOrder, out listPosName))
                     {
+                        var checkConstraintName = Construct.CheckConstraintName(tblName.Name, colName);
+                        if (db.CheckCheckConstraintExists(tblName, checkConstraintName))
+                        {
+                            db.DropCheckConstraint(tblName, checkConstraintName);
+                        }
+
                         var isNullable = otherEnd.IsNullable();
                         var checkNotNull = !isNullable;
                         if (checkNotNull && (relEnd.Type.GetTableMapping() == TableMapping.TPH && relEnd.Type.BaseObjectClass != null))
                         {
-                            var checkConstraintName = Construct.CheckConstraintName(tblName.Name, colName);
-                            if (db.CheckCheckConstraintExists(tblName, checkConstraintName))
-                            {
-                                db.DropCheckConstraint(tblName, checkConstraintName);
-                            }
                             Case.CreateTPHNotNullCheckConstraint(tblName, colName, relEnd.Type);
                         }
                     }
