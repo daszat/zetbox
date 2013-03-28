@@ -3461,304 +3461,6 @@ public static void isValid_WorkSchedule(WorkScheduleSyncAccount obj, PropertyIsV
     <ZetboxBase:RoleName>SyncAccount</ZetboxBase:RoleName>
     <ZetboxBase:Type>ed44a638-a19d-430c-b19f-766a1820fc67</ZetboxBase:Type>
   </ZetboxBase:RelationEnd>
-  <ZetboxBase:Method ExportGuid="cbb06469-f6fb-4e2e-a434-7f91cdb8c09a">
-    <ZetboxBase:ChangedOn>2013-02-20T08:39:56.594562Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetNewEventViewModels(Calendar obj, System.Object args)
-{
-}
-
-[Invocation]
-public static void GetNewEventViewModelsCanExec(Calendar obj, MethodReturnEventArgs&lt;bool&gt; e)
-{
-}
-
-[Invocation]
-public static void GetNewEventViewModelsCanExecReason(Calendar obj, MethodReturnEventArgs&lt;string&gt; e)
-{
-}
-</ZetboxBase:CodeTemplate>
-    <ZetboxBase:CreatedOn>2013-02-20T08:33:37.593885Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Description>Gets a list of ViewModels that can create a new event. Multiple implementations can support different kind of events</ZetboxBase:Description>
-    <ZetboxBase:InvokeOnServer>false</ZetboxBase:InvokeOnServer>
-    <GUI:IsDisplayable>false</GUI:IsDisplayable>
-    <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
-    <ZetboxBase:Name>GetNewEventViewModels</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>1450be5f-2266-4367-8a56-1f0bee5699c4</ZetboxBase:ObjectClass>
-  </ZetboxBase:Method>
-  <ZetboxBase:Method ExportGuid="0b0133fc-c380-47bb-a6ba-7102eca96e9f">
-    <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2013-03-25T15:55:18.791383Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CodeTemplate>[Invocation]
-public static void PerformSync(SyncAccount obj)
-{
-}
-
-[Invocation]
-public static void PerformSyncCanExec(SyncAccount obj, MethodReturnEventArgs&lt;bool&gt; e)
-{
-}
-
-[Invocation]
-public static void PerformSyncCanExecReason(SyncAccount obj, MethodReturnEventArgs&lt;string&gt; e)
-{
-}
-</ZetboxBase:CodeTemplate>
-    <ZetboxBase:CreatedOn>2013-03-25T13:05:10.265489Z</ZetboxBase:CreatedOn>
-    <GUI:Icon>bbfd9a59-257a-42e6-a1f4-90de28bd7f7a</GUI:Icon>
-    <ZetboxBase:InvokeOnServer>true</ZetboxBase:InvokeOnServer>
-    <GUI:IsDisplayable>false</GUI:IsDisplayable>
-    <ZetboxBase:Label>Perform sync</ZetboxBase:Label>
-    <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
-    <ZetboxBase:Name>PerformSync</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>12ce65c1-e00b-44be-b119-eb520b46616e</ZetboxBase:ObjectClass>
-  </ZetboxBase:Method>
-  <ZetboxBase:Method ExportGuid="97570340-893f-4a2d-9a98-6ce235a68973">
-    <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2013-03-25T15:55:18.791383Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CodeTemplate>[Invocation]
-public static void ScheduleSyncNow(SyncProvider obj)
-{
-}
-
-[Invocation]
-public static void ScheduleSyncNowCanExec(SyncProvider obj, MethodReturnEventArgs&lt;bool&gt; e)
-{
-}
-
-[Invocation]
-public static void ScheduleSyncNowCanExecReason(SyncProvider obj, MethodReturnEventArgs&lt;string&gt; e)
-{
-}
-</ZetboxBase:CodeTemplate>
-    <ZetboxBase:CreatedOn>2013-03-25T15:55:18.791383Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Description>Schedules the next sync immediately</ZetboxBase:Description>
-    <ZetboxBase:InvokeOnServer>false</ZetboxBase:InvokeOnServer>
-    <GUI:IsDisplayable>true</GUI:IsDisplayable>
-    <ZetboxBase:Label>Schedule sync now</ZetboxBase:Label>
-    <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
-    <ZetboxBase:Name>ScheduleSyncNow</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>12ce65c1-e00b-44be-b119-eb520b46616e</ZetboxBase:ObjectClass>
-  </ZetboxBase:Method>
-  <ZetboxBase:Method ExportGuid="79e9a145-8d0d-400c-a3b8-875c9bda44e8">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetOffDays(Calendar obj, MethodReturnEventArgs&lt;int&gt; e, DateTime from, DateTime until)
-{
-}
-
-[Invocation]
-public static void GetOffDaysCanExec(Calendar obj, MethodReturnEventArgs&lt;bool&gt; e)
-{
-}
-
-[Invocation]
-public static void GetOffDaysCanExecReason(Calendar obj, MethodReturnEventArgs&lt;string&gt; e)
-{
-}
-</ZetboxBase:CodeTemplate>
-    <ZetboxBase:CreatedOn>2011-06-15T10:43:48Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Description>Gets the number of free days between two dates</ZetboxBase:Description>
-    <GUI:IsDisplayable>true</GUI:IsDisplayable>
-    <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
-    <ZetboxBase:Name>GetOffDays</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>901a2ddd-1330-4129-b8a2-92b8e655d168</ZetboxBase:ObjectClass>
-  </ZetboxBase:Method>
-  <ZetboxBase:Method ExportGuid="1e9a4f60-a4ec-41ae-9f1e-bb80bbe70bc3">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetWorkingDays(Calendar obj, MethodReturnEventArgs&lt;int&gt; e, DateTime from, DateTime until)
-{
-}
-
-[Invocation]
-public static void GetWorkingDaysCanExec(Calendar obj, MethodReturnEventArgs&lt;bool&gt; e)
-{
-}
-
-[Invocation]
-public static void GetWorkingDaysCanExecReason(Calendar obj, MethodReturnEventArgs&lt;string&gt; e)
-{
-}
-</ZetboxBase:CodeTemplate>
-    <ZetboxBase:CreatedOn>2011-06-15T10:42:22Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Description>Get the number of working days between two dates</ZetboxBase:Description>
-    <GUI:IsDisplayable>true</GUI:IsDisplayable>
-    <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
-    <ZetboxBase:Name>GetWorkingDays</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>901a2ddd-1330-4129-b8a2-92b8e655d168</ZetboxBase:ObjectClass>
-  </ZetboxBase:Method>
-  <ZetboxBase:Method ExportGuid="bb7592bc-26e6-463f-a806-91f56dc9fa6e">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetWorkingHours(Calendar obj, MethodReturnEventArgs&lt;decimal&gt; e, DateTime from, DateTime until)
-{
-}
-
-[Invocation]
-public static void GetWorkingHoursCanExec(Calendar obj, MethodReturnEventArgs&lt;bool&gt; e)
-{
-}
-
-[Invocation]
-public static void GetWorkingHoursCanExecReason(Calendar obj, MethodReturnEventArgs&lt;string&gt; e)
-{
-}
-</ZetboxBase:CodeTemplate>
-    <ZetboxBase:CreatedOn>2011-06-15T10:41:04Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Description>Returns the amount of working hours between two dates</ZetboxBase:Description>
-    <GUI:IsDisplayable>true</GUI:IsDisplayable>
-    <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
-    <ZetboxBase:Name>GetWorkingHours</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>901a2ddd-1330-4129-b8a2-92b8e655d168</ZetboxBase:ObjectClass>
-  </ZetboxBase:Method>
-  <ZetboxBase:Method ExportGuid="3f50df16-1d0c-4820-aaae-ce022f73c435">
-    <ZetboxBase:CategoryTags>Hidden</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CodeTemplate>[Invocation]
-public static void AppliesTo(CalendarRule obj, MethodReturnEventArgs&lt;bool&gt; e, DateTime date)
-{
-}
-
-[Invocation]
-public static void AppliesToCanExec(CalendarRule obj, MethodReturnEventArgs&lt;bool&gt; e)
-{
-}
-
-[Invocation]
-public static void AppliesToCanExecReason(CalendarRule obj, MethodReturnEventArgs&lt;string&gt; e)
-{
-}
-</ZetboxBase:CodeTemplate>
-    <ZetboxBase:CreatedOn>2011-06-15T09:29:25Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Description>Checks if the Rule applies to the given date</ZetboxBase:Description>
-    <GUI:IsDisplayable>true</GUI:IsDisplayable>
-    <ZetboxBase:Label>Applies to Range</ZetboxBase:Label>
-    <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
-    <ZetboxBase:Name>AppliesTo</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>ee70b186-09ae-43a3-afb2-a632c47765b9</ZetboxBase:ObjectClass>
-  </ZetboxBase:Method>
-  <ZetboxBase:CLRObjectParameter ExportGuid="3143b32a-c114-4d09-9294-daf6787a9a79">
-    <ZetboxBase:ChangedOn>2013-03-27T14:24:46.694321Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2013-02-20T08:35:07.915051Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:IsList>false</ZetboxBase:IsList>
-    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
-    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
-    <ZetboxBase:Method>cbb06469-f6fb-4e2e-a434-7f91cdb8c09a</ZetboxBase:Method>
-    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
-    <ZetboxBase:Name>args</ZetboxBase:Name>
-    <ZetboxBase:TypeRef>System.Object, mscorlib</ZetboxBase:TypeRef>
-  </ZetboxBase:CLRObjectParameter>
-  <ZetboxBase:DateTimeParameter ExportGuid="ec4b729a-cf80-4ef1-a0b6-d7c35ea08986">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:00.426763Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2011-06-15T10:43:48Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:IsList>false</ZetboxBase:IsList>
-    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
-    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
-    <ZetboxBase:Method>79e9a145-8d0d-400c-a3b8-875c9bda44e8</ZetboxBase:Method>
-    <ZetboxBase:Parameter_pos>1</ZetboxBase:Parameter_pos>
-    <ZetboxBase:Name>from</ZetboxBase:Name>
-  </ZetboxBase:DateTimeParameter>
-  <ZetboxBase:IntParameter ExportGuid="7af52d1a-1d60-4319-93d3-aa70b1bc73e0">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:00.435764Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2011-06-15T10:43:48Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:IsList>false</ZetboxBase:IsList>
-    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
-    <ZetboxBase:IsReturnParameter>true</ZetboxBase:IsReturnParameter>
-    <ZetboxBase:Method>79e9a145-8d0d-400c-a3b8-875c9bda44e8</ZetboxBase:Method>
-    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
-    <ZetboxBase:Name>retVal</ZetboxBase:Name>
-  </ZetboxBase:IntParameter>
-  <ZetboxBase:DateTimeParameter ExportGuid="e38ad46a-f2ce-414d-8be7-1ba966896d67">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:00.441764Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2011-06-15T10:43:48Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:IsList>false</ZetboxBase:IsList>
-    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
-    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
-    <ZetboxBase:Method>79e9a145-8d0d-400c-a3b8-875c9bda44e8</ZetboxBase:Method>
-    <ZetboxBase:Parameter_pos>2</ZetboxBase:Parameter_pos>
-    <ZetboxBase:Name>until</ZetboxBase:Name>
-  </ZetboxBase:DateTimeParameter>
-  <ZetboxBase:DateTimeParameter ExportGuid="37e6d267-c19d-4fd1-9a2c-fb4252a53c1a">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:00.444764Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2011-06-15T10:42:22Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:IsList>false</ZetboxBase:IsList>
-    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
-    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
-    <ZetboxBase:Method>1e9a4f60-a4ec-41ae-9f1e-bb80bbe70bc3</ZetboxBase:Method>
-    <ZetboxBase:Parameter_pos>1</ZetboxBase:Parameter_pos>
-    <ZetboxBase:Name>from</ZetboxBase:Name>
-  </ZetboxBase:DateTimeParameter>
-  <ZetboxBase:IntParameter ExportGuid="a76d2616-4db3-4c30-8445-f829f27f9fd9">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:00.449764Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2011-06-15T10:42:22Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:IsList>false</ZetboxBase:IsList>
-    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
-    <ZetboxBase:IsReturnParameter>true</ZetboxBase:IsReturnParameter>
-    <ZetboxBase:Method>1e9a4f60-a4ec-41ae-9f1e-bb80bbe70bc3</ZetboxBase:Method>
-    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
-    <ZetboxBase:Name>retVal</ZetboxBase:Name>
-  </ZetboxBase:IntParameter>
-  <ZetboxBase:DateTimeParameter ExportGuid="7e58c17d-5ec8-4e56-899c-b413c23a268e">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:00.452765Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2011-06-15T10:42:22Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:IsList>false</ZetboxBase:IsList>
-    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
-    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
-    <ZetboxBase:Method>1e9a4f60-a4ec-41ae-9f1e-bb80bbe70bc3</ZetboxBase:Method>
-    <ZetboxBase:Parameter_pos>2</ZetboxBase:Parameter_pos>
-    <ZetboxBase:Name>until</ZetboxBase:Name>
-  </ZetboxBase:DateTimeParameter>
-  <ZetboxBase:DateTimeParameter ExportGuid="20019e34-8ce1-4f7c-a62b-56dedd0f3205">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:00.456765Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2011-06-15T10:41:04Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:IsList>false</ZetboxBase:IsList>
-    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
-    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
-    <ZetboxBase:Method>bb7592bc-26e6-463f-a806-91f56dc9fa6e</ZetboxBase:Method>
-    <ZetboxBase:Parameter_pos>1</ZetboxBase:Parameter_pos>
-    <ZetboxBase:Name>from</ZetboxBase:Name>
-  </ZetboxBase:DateTimeParameter>
-  <ZetboxBase:DecimalParameter ExportGuid="75b79133-33b6-4ca3-a5db-9a2d8d7bb474">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:00.460765Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2011-06-15T10:41:04Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:IsList>false</ZetboxBase:IsList>
-    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
-    <ZetboxBase:IsReturnParameter>true</ZetboxBase:IsReturnParameter>
-    <ZetboxBase:Method>bb7592bc-26e6-463f-a806-91f56dc9fa6e</ZetboxBase:Method>
-    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
-    <ZetboxBase:Name>retVal</ZetboxBase:Name>
-  </ZetboxBase:DecimalParameter>
-  <ZetboxBase:DateTimeParameter ExportGuid="3e29f099-0b3b-4f41-88ef-9e892d275d2f">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:00.466765Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2011-06-15T10:41:04Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:IsList>false</ZetboxBase:IsList>
-    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
-    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
-    <ZetboxBase:Method>bb7592bc-26e6-463f-a806-91f56dc9fa6e</ZetboxBase:Method>
-    <ZetboxBase:Parameter_pos>2</ZetboxBase:Parameter_pos>
-    <ZetboxBase:Name>until</ZetboxBase:Name>
-  </ZetboxBase:DateTimeParameter>
-  <ZetboxBase:DateTimeParameter ExportGuid="cdfacec6-c4ea-4e48-ac17-ff1434cccb49">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:00.476766Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2011-06-15T09:29:55Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:IsList>false</ZetboxBase:IsList>
-    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
-    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
-    <ZetboxBase:Method>3f50df16-1d0c-4820-aaae-ce022f73c435</ZetboxBase:Method>
-    <ZetboxBase:Parameter_pos>1</ZetboxBase:Parameter_pos>
-    <ZetboxBase:Name>date</ZetboxBase:Name>
-  </ZetboxBase:DateTimeParameter>
-  <ZetboxBase:BoolParameter ExportGuid="cc83ca14-6de0-42bd-814d-6a768e35a82d">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:00.481766Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2011-06-15T09:29:25Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:IsList>false</ZetboxBase:IsList>
-    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
-    <ZetboxBase:IsReturnParameter>true</ZetboxBase:IsReturnParameter>
-    <ZetboxBase:Method>3f50df16-1d0c-4820-aaae-ce022f73c435</ZetboxBase:Method>
-    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
-    <ZetboxBase:Name>retVal</ZetboxBase:Name>
-  </ZetboxBase:BoolParameter>
   <ZetboxBase:ClientReadOnlyConstraint ExportGuid="f7f08743-512c-4a01-a5f0-e12c5d986bbf">
     <ZetboxBase:ChangedOn>2013-02-18T16:15:31.497352Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>c74f0224-1302-4fc2-8629-837d7c96db34</ZetboxBase:ConstrainedProperty>
@@ -4260,102 +3962,6 @@ public static void AppliesToCanExecReason(CalendarRule obj, MethodReturnEventArg
     <ZetboxBase:Property>09cfc4e1-c106-46ec-825d-31226d8df335</ZetboxBase:Property>
     <ZetboxBase:BoolValue>false</ZetboxBase:BoolValue>
   </ZetboxBase:BoolDefaultValue>
-  <GUI:ViewModelDescriptor ExportGuid="30b2681e-5118-4c0b-a30f-114c580c973e">
-    <GUI:Deleted>false</GUI:Deleted>
-    <GUI:Description>Object ViewModel for a calendar.</GUI:Description>
-    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
-    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.Calendar.CalendarViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
-  </GUI:ViewModelDescriptor>
-  <GUI:ViewModelDescriptor ExportGuid="a78c6c62-e8ae-4625-852e-53f6a55b5d9e">
-    <GUI:DefaultEditorKind>6bf65558-8687-492d-8fdc-f35fe928e647</GUI:DefaultEditorKind>
-    <GUI:Deleted>false</GUI:Deleted>
-    <GUI:Description>Workspace ViewModel for the calendar</GUI:Description>
-    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
-    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.Calendar.CalendarWorkspaceViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
-  </GUI:ViewModelDescriptor>
-  <GUI:ViewModelDescriptor ExportGuid="d2d3ee27-4721-4d7b-b072-37be379a926e">
-    <GUI:DefaultEditorKind>5fc3d661-81de-4fb6-a012-aa67971a08c7</GUI:DefaultEditorKind>
-    <GUI:Deleted>false</GUI:Deleted>
-    <GUI:Description>ViewModel for creating/editing a Event</GUI:Description>
-    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
-    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.Calendar.EventInputViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
-  </GUI:ViewModelDescriptor>
-  <GUI:ViewModelDescriptor ExportGuid="590f80a4-27f2-4fb4-b7d3-4b80d13dec75">
-    <GUI:Deleted>false</GUI:Deleted>
-    <GUI:Description>ViewModel for a calendar event with special extensions</GUI:Description>
-    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
-    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.Calendar.EventViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
-  </GUI:ViewModelDescriptor>
-  <GUI:ViewModelDescriptor ExportGuid="6fe82f61-0bd8-4efa-9830-673f8153a96c">
-    <GUI:DefaultEditorKind>916f91a3-aba5-4d61-9a45-297c02d77e83</GUI:DefaultEditorKind>
-    <GUI:Deleted>false</GUI:Deleted>
-    <GUI:Description>Dialog ViewModel for creating a event</GUI:Description>
-    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
-    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.Calendar.NewEventDialogViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
-  </GUI:ViewModelDescriptor>
-  <GUI:ViewModelDescriptor ExportGuid="9ef87b35-14c5-40b7-8e79-93c211211772">
-    <GUI:DefaultEditorKind>4f6223e7-2319-441f-93fc-650d68a252f3</GUI:DefaultEditorKind>
-    <GUI:Deleted>false</GUI:Deleted>
-    <GUI:Description>ViewModel for the calendar next events summary control</GUI:Description>
-    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
-    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.Calendar.NextEventsSummaryViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
-  </GUI:ViewModelDescriptor>
-  <GUI:ViewModelDescriptor ExportGuid="7fbcbbdf-1821-47dc-9332-c0ae4f6a70a1">
-    <GUI:DefaultEditorKind>df5134d6-18f1-43b9-96d3-9283bc2b09a8</GUI:DefaultEditorKind>
-    <GUI:Deleted>false</GUI:Deleted>
-    <GUI:Description>ViewModel for Week Calendar Display</GUI:Description>
-    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
-    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.Calendar.WeekCalendarViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
-  </GUI:ViewModelDescriptor>
-  <GUI:ViewModelDescriptor ExportGuid="bf9a6bc5-5f8d-4658-b033-cf571b4d503f">
-    <GUI:DefaultEditorKind>f9fc5f32-8dbd-4c86-8e94-2794336da0ac</GUI:DefaultEditorKind>
-    <GUI:Deleted>false</GUI:Deleted>
-    <GUI:Description>ViewModel for calendar rule instances, not representing the CalendarRule data object directly</GUI:Description>
-    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
-    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.Calendar.WorkScheduleRuleInstanceViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
-  </GUI:ViewModelDescriptor>
-  <GUI:ViewDescriptor ExportGuid="0cde1819-061a-4552-911b-e979a57b8e69">
-    <GUI:ControlKind>6bf65558-8687-492d-8fdc-f35fe928e647</GUI:ControlKind>
-    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.Calendar.CalendarWorkspaceDisplay, Zetbox.Client.WPF</GUI:ControlTypeRef>
-    <GUI:Deleted>false</GUI:Deleted>
-    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
-    <GUI:Toolkit>0</GUI:Toolkit>
-  </GUI:ViewDescriptor>
-  <GUI:ViewDescriptor ExportGuid="22623940-b48f-463d-a978-36ca9777e2c5">
-    <GUI:ControlKind>5fc3d661-81de-4fb6-a012-aa67971a08c7</GUI:ControlKind>
-    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.Calendar.EventInputEditor, Zetbox.Client.WPF</GUI:ControlTypeRef>
-    <GUI:Deleted>false</GUI:Deleted>
-    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
-    <GUI:Toolkit>0</GUI:Toolkit>
-  </GUI:ViewDescriptor>
-  <GUI:ViewDescriptor ExportGuid="dc80a0be-2eac-4c51-bf76-45ae17b3a947">
-    <GUI:ControlKind>916f91a3-aba5-4d61-9a45-297c02d77e83</GUI:ControlKind>
-    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.Calendar.NewEventDialog, Zetbox.Client.WPF</GUI:ControlTypeRef>
-    <GUI:Deleted>false</GUI:Deleted>
-    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
-    <GUI:Toolkit>0</GUI:Toolkit>
-  </GUI:ViewDescriptor>
-  <GUI:ViewDescriptor ExportGuid="71d1247a-9ccb-454a-b5c7-115a7c00f603">
-    <GUI:ControlKind>4f6223e7-2319-441f-93fc-650d68a252f3</GUI:ControlKind>
-    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.Calendar.NextEventsSummaryDisplay, Zetbox.Client.WPF</GUI:ControlTypeRef>
-    <GUI:Deleted>false</GUI:Deleted>
-    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
-    <GUI:Toolkit>0</GUI:Toolkit>
-  </GUI:ViewDescriptor>
-  <GUI:ViewDescriptor ExportGuid="cc2521f1-6368-4cc8-94f1-eb9e7080211b">
-    <GUI:ControlKind>df5134d6-18f1-43b9-96d3-9283bc2b09a8</GUI:ControlKind>
-    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.Calendar.WeekCalendar, Zetbox.Client.WPF</GUI:ControlTypeRef>
-    <GUI:Deleted>false</GUI:Deleted>
-    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
-    <GUI:Toolkit>0</GUI:Toolkit>
-  </GUI:ViewDescriptor>
-  <GUI:ViewDescriptor ExportGuid="4cfc8a24-f512-4f19-82fd-76641535abf5">
-    <GUI:ControlKind>f9fc5f32-8dbd-4c86-8e94-2794336da0ac</GUI:ControlKind>
-    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.Calendar.WorkScheduleRuleInstanceDisplay, Zetbox.Client.WPF</GUI:ControlTypeRef>
-    <GUI:Deleted>false</GUI:Deleted>
-    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
-    <GUI:Toolkit>0</GUI:Toolkit>
-  </GUI:ViewDescriptor>
   <ZetboxBase:RoleMembership ExportGuid="2620f6ba-668e-411c-8814-fdf70377c1b7">
     <ZetboxBase:ChangedOn>2013-02-18T16:53:29.889669Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2013-02-18T16:53:26.443472Z</ZetboxBase:CreatedOn>
@@ -4364,15 +3970,6 @@ public static void AppliesToCanExecReason(CalendarRule obj, MethodReturnEventArg
     <ZetboxBase:ObjectClass>1450be5f-2266-4367-8a56-1f0bee5699c4</ZetboxBase:ObjectClass>
     <ZetboxBase:Rights>1</ZetboxBase:Rights>
   </ZetboxBase:RoleMembership>
-  <ZetboxBase:GroupMembership ExportGuid="2fe060bd-8503-464e-a81e-e940234090fb">
-    <ZetboxBase:ChangedOn>2013-02-18T16:56:53.788331Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2013-02-18T16:56:53.788331Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Description>Group Everyone has Create rights</ZetboxBase:Description>
-    <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
-    <ZetboxBase:ObjectClass>1450be5f-2266-4367-8a56-1f0bee5699c4</ZetboxBase:ObjectClass>
-    <ZetboxBase:Rights>8</ZetboxBase:Rights>
-    <ZetboxBase:Group>76d43cf2-4ddf-4a3a-9ad6-28cabfdddff1</ZetboxBase:Group>
-  </ZetboxBase:GroupMembership>
   <ZetboxBase:RoleMembership ExportGuid="3858e3ac-d742-455e-bc06-64721b57f0ed">
     <ZetboxBase:ChangedOn>2013-02-18T17:00:58.086304Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2013-02-18T16:59:38.221736Z</ZetboxBase:CreatedOn>
@@ -4437,15 +4034,6 @@ public static void AppliesToCanExecReason(CalendarRule obj, MethodReturnEventArg
     <ZetboxBase:ObjectClass>fd0b9bf4-0891-4317-9d2e-d08a410d5c4c</ZetboxBase:ObjectClass>
     <ZetboxBase:Rights>15</ZetboxBase:Rights>
   </ZetboxBase:RoleMembership>
-  <ZetboxBase:GroupMembership ExportGuid="dd6a85d9-8cd7-4535-98be-6139d65d0868">
-    <ZetboxBase:ChangedOn>2013-02-18T16:57:25.593151Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2013-02-18T16:57:25.593151Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Description>Group Everyone has Create rights</ZetboxBase:Description>
-    <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
-    <ZetboxBase:ObjectClass>fd0b9bf4-0891-4317-9d2e-d08a410d5c4c</ZetboxBase:ObjectClass>
-    <ZetboxBase:Rights>8</ZetboxBase:Rights>
-    <ZetboxBase:Group>76d43cf2-4ddf-4a3a-9ad6-28cabfdddff1</ZetboxBase:Group>
-  </ZetboxBase:GroupMembership>
   <ZetboxBase:RoleMembership ExportGuid="fc9b268f-47c7-4e41-9afc-5312889239c9">
     <ZetboxBase:ChangedOn>2013-02-18T16:58:02.077237Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2013-02-18T16:57:51.556636Z</ZetboxBase:CreatedOn>
@@ -4568,6 +4156,418 @@ public static void AppliesToCanExecReason(CalendarRule obj, MethodReturnEventArg
     <ZetboxBase:B>385c829b-02d6-48d0-8184-b3b5df6c25be</ZetboxBase:B>
     <ZetboxBase:B_pos>1</ZetboxBase:B_pos>
   </ZetboxBase:RoleMembership_resolves_Relation_RelationEntry>
+  <ZetboxBase:Method ExportGuid="cbb06469-f6fb-4e2e-a434-7f91cdb8c09a">
+    <ZetboxBase:ChangedOn>2013-02-20T08:39:56.594562Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void GetNewEventViewModels(Calendar obj, System.Object args)
+{
+}
+
+[Invocation]
+public static void GetNewEventViewModelsCanExec(Calendar obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetNewEventViewModelsCanExecReason(Calendar obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-20T08:33:37.593885Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Gets a list of ViewModels that can create a new event. Multiple implementations can support different kind of events</ZetboxBase:Description>
+    <ZetboxBase:InvokeOnServer>false</ZetboxBase:InvokeOnServer>
+    <GUI:IsDisplayable>false</GUI:IsDisplayable>
+    <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
+    <ZetboxBase:Name>GetNewEventViewModels</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>1450be5f-2266-4367-8a56-1f0bee5699c4</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="0b0133fc-c380-47bb-a6ba-7102eca96e9f">
+    <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2013-03-25T15:55:18.791383Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void PerformSync(SyncAccount obj)
+{
+}
+
+[Invocation]
+public static void PerformSyncCanExec(SyncAccount obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void PerformSyncCanExecReason(SyncAccount obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-03-25T13:05:10.265489Z</ZetboxBase:CreatedOn>
+    <GUI:Icon>bbfd9a59-257a-42e6-a1f4-90de28bd7f7a</GUI:Icon>
+    <ZetboxBase:InvokeOnServer>true</ZetboxBase:InvokeOnServer>
+    <GUI:IsDisplayable>false</GUI:IsDisplayable>
+    <ZetboxBase:Label>Perform sync</ZetboxBase:Label>
+    <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
+    <ZetboxBase:Name>PerformSync</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>12ce65c1-e00b-44be-b119-eb520b46616e</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="97570340-893f-4a2d-9a98-6ce235a68973">
+    <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2013-03-25T15:55:18.791383Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void ScheduleSyncNow(SyncProvider obj)
+{
+}
+
+[Invocation]
+public static void ScheduleSyncNowCanExec(SyncProvider obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void ScheduleSyncNowCanExecReason(SyncProvider obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-03-25T15:55:18.791383Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Schedules the next sync immediately</ZetboxBase:Description>
+    <ZetboxBase:InvokeOnServer>false</ZetboxBase:InvokeOnServer>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <ZetboxBase:Label>Schedule sync now</ZetboxBase:Label>
+    <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
+    <ZetboxBase:Name>ScheduleSyncNow</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>12ce65c1-e00b-44be-b119-eb520b46616e</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="79e9a145-8d0d-400c-a3b8-875c9bda44e8">
+    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void GetOffDays(Calendar obj, MethodReturnEventArgs&lt;int&gt; e, DateTime from, DateTime until)
+{
+}
+
+[Invocation]
+public static void GetOffDaysCanExec(Calendar obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetOffDaysCanExecReason(Calendar obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2011-06-15T10:43:48Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Gets the number of free days between two dates</ZetboxBase:Description>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
+    <ZetboxBase:Name>GetOffDays</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>901a2ddd-1330-4129-b8a2-92b8e655d168</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="1e9a4f60-a4ec-41ae-9f1e-bb80bbe70bc3">
+    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void GetWorkingDays(Calendar obj, MethodReturnEventArgs&lt;int&gt; e, DateTime from, DateTime until)
+{
+}
+
+[Invocation]
+public static void GetWorkingDaysCanExec(Calendar obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetWorkingDaysCanExecReason(Calendar obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2011-06-15T10:42:22Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Get the number of working days between two dates</ZetboxBase:Description>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
+    <ZetboxBase:Name>GetWorkingDays</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>901a2ddd-1330-4129-b8a2-92b8e655d168</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="bb7592bc-26e6-463f-a806-91f56dc9fa6e">
+    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void GetWorkingHours(Calendar obj, MethodReturnEventArgs&lt;decimal&gt; e, DateTime from, DateTime until)
+{
+}
+
+[Invocation]
+public static void GetWorkingHoursCanExec(Calendar obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetWorkingHoursCanExecReason(Calendar obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2011-06-15T10:41:04Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Returns the amount of working hours between two dates</ZetboxBase:Description>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
+    <ZetboxBase:Name>GetWorkingHours</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>901a2ddd-1330-4129-b8a2-92b8e655d168</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="3f50df16-1d0c-4820-aaae-ce022f73c435">
+    <ZetboxBase:CategoryTags>Hidden</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void AppliesTo(CalendarRule obj, MethodReturnEventArgs&lt;bool&gt; e, DateTime date)
+{
+}
+
+[Invocation]
+public static void AppliesToCanExec(CalendarRule obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void AppliesToCanExecReason(CalendarRule obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2011-06-15T09:29:25Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Checks if the Rule applies to the given date</ZetboxBase:Description>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <ZetboxBase:Label>Applies to Range</ZetboxBase:Label>
+    <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
+    <ZetboxBase:Name>AppliesTo</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>ee70b186-09ae-43a3-afb2-a632c47765b9</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
+  <ZetboxBase:CLRObjectParameter ExportGuid="3143b32a-c114-4d09-9294-daf6787a9a79">
+    <ZetboxBase:ChangedOn>2013-03-27T14:24:46.694321Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-20T08:35:07.915051Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>cbb06469-f6fb-4e2e-a434-7f91cdb8c09a</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>args</ZetboxBase:Name>
+    <ZetboxBase:TypeRef>System.Object, mscorlib</ZetboxBase:TypeRef>
+  </ZetboxBase:CLRObjectParameter>
+  <ZetboxBase:DateTimeParameter ExportGuid="ec4b729a-cf80-4ef1-a0b6-d7c35ea08986">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:00.426763Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2011-06-15T10:43:48Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>79e9a145-8d0d-400c-a3b8-875c9bda44e8</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>1</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>from</ZetboxBase:Name>
+  </ZetboxBase:DateTimeParameter>
+  <ZetboxBase:IntParameter ExportGuid="7af52d1a-1d60-4319-93d3-aa70b1bc73e0">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:00.435764Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2011-06-15T10:43:48Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>true</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>79e9a145-8d0d-400c-a3b8-875c9bda44e8</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>retVal</ZetboxBase:Name>
+  </ZetboxBase:IntParameter>
+  <ZetboxBase:DateTimeParameter ExportGuid="e38ad46a-f2ce-414d-8be7-1ba966896d67">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:00.441764Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2011-06-15T10:43:48Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>79e9a145-8d0d-400c-a3b8-875c9bda44e8</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>2</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>until</ZetboxBase:Name>
+  </ZetboxBase:DateTimeParameter>
+  <ZetboxBase:DateTimeParameter ExportGuid="37e6d267-c19d-4fd1-9a2c-fb4252a53c1a">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:00.444764Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2011-06-15T10:42:22Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>1e9a4f60-a4ec-41ae-9f1e-bb80bbe70bc3</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>1</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>from</ZetboxBase:Name>
+  </ZetboxBase:DateTimeParameter>
+  <ZetboxBase:IntParameter ExportGuid="a76d2616-4db3-4c30-8445-f829f27f9fd9">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:00.449764Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2011-06-15T10:42:22Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>true</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>1e9a4f60-a4ec-41ae-9f1e-bb80bbe70bc3</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>retVal</ZetboxBase:Name>
+  </ZetboxBase:IntParameter>
+  <ZetboxBase:DateTimeParameter ExportGuid="7e58c17d-5ec8-4e56-899c-b413c23a268e">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:00.452765Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2011-06-15T10:42:22Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>1e9a4f60-a4ec-41ae-9f1e-bb80bbe70bc3</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>2</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>until</ZetboxBase:Name>
+  </ZetboxBase:DateTimeParameter>
+  <ZetboxBase:DateTimeParameter ExportGuid="20019e34-8ce1-4f7c-a62b-56dedd0f3205">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:00.456765Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2011-06-15T10:41:04Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>bb7592bc-26e6-463f-a806-91f56dc9fa6e</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>1</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>from</ZetboxBase:Name>
+  </ZetboxBase:DateTimeParameter>
+  <ZetboxBase:DecimalParameter ExportGuid="75b79133-33b6-4ca3-a5db-9a2d8d7bb474">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:00.460765Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2011-06-15T10:41:04Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>true</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>bb7592bc-26e6-463f-a806-91f56dc9fa6e</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>retVal</ZetboxBase:Name>
+  </ZetboxBase:DecimalParameter>
+  <ZetboxBase:DateTimeParameter ExportGuid="3e29f099-0b3b-4f41-88ef-9e892d275d2f">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:00.466765Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2011-06-15T10:41:04Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>bb7592bc-26e6-463f-a806-91f56dc9fa6e</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>2</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>until</ZetboxBase:Name>
+  </ZetboxBase:DateTimeParameter>
+  <ZetboxBase:DateTimeParameter ExportGuid="cdfacec6-c4ea-4e48-ac17-ff1434cccb49">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:00.476766Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2011-06-15T09:29:55Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>3f50df16-1d0c-4820-aaae-ce022f73c435</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>1</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>date</ZetboxBase:Name>
+  </ZetboxBase:DateTimeParameter>
+  <ZetboxBase:BoolParameter ExportGuid="cc83ca14-6de0-42bd-814d-6a768e35a82d">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:00.481766Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2011-06-15T09:29:25Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>true</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>3f50df16-1d0c-4820-aaae-ce022f73c435</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>retVal</ZetboxBase:Name>
+  </ZetboxBase:BoolParameter>
+  <GUI:ViewModelDescriptor ExportGuid="30b2681e-5118-4c0b-a30f-114c580c973e">
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Description>Object ViewModel for a calendar.</GUI:Description>
+    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.Calendar.CalendarViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="a78c6c62-e8ae-4625-852e-53f6a55b5d9e">
+    <GUI:DefaultEditorKind>6bf65558-8687-492d-8fdc-f35fe928e647</GUI:DefaultEditorKind>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Description>Workspace ViewModel for the calendar</GUI:Description>
+    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.Calendar.CalendarWorkspaceViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="d2d3ee27-4721-4d7b-b072-37be379a926e">
+    <GUI:DefaultEditorKind>5fc3d661-81de-4fb6-a012-aa67971a08c7</GUI:DefaultEditorKind>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Description>ViewModel for creating/editing a Event</GUI:Description>
+    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.Calendar.EventInputViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="590f80a4-27f2-4fb4-b7d3-4b80d13dec75">
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Description>ViewModel for a calendar event with special extensions</GUI:Description>
+    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.Calendar.EventViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="6fe82f61-0bd8-4efa-9830-673f8153a96c">
+    <GUI:DefaultEditorKind>916f91a3-aba5-4d61-9a45-297c02d77e83</GUI:DefaultEditorKind>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Description>Dialog ViewModel for creating a event</GUI:Description>
+    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.Calendar.NewEventDialogViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="9ef87b35-14c5-40b7-8e79-93c211211772">
+    <GUI:DefaultEditorKind>4f6223e7-2319-441f-93fc-650d68a252f3</GUI:DefaultEditorKind>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Description>ViewModel for the calendar next events summary control</GUI:Description>
+    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.Calendar.NextEventsSummaryViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="7fbcbbdf-1821-47dc-9332-c0ae4f6a70a1">
+    <GUI:DefaultEditorKind>df5134d6-18f1-43b9-96d3-9283bc2b09a8</GUI:DefaultEditorKind>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Description>ViewModel for Week Calendar Display</GUI:Description>
+    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.Calendar.WeekCalendarViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="bf9a6bc5-5f8d-4658-b033-cf571b4d503f">
+    <GUI:DefaultEditorKind>f9fc5f32-8dbd-4c86-8e94-2794336da0ac</GUI:DefaultEditorKind>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Description>ViewModel for calendar rule instances, not representing the CalendarRule data object directly</GUI:Description>
+    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.Calendar.WorkScheduleRuleInstanceViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewDescriptor ExportGuid="0cde1819-061a-4552-911b-e979a57b8e69">
+    <GUI:ControlKind>6bf65558-8687-492d-8fdc-f35fe928e647</GUI:ControlKind>
+    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.Calendar.CalendarWorkspaceDisplay, Zetbox.Client.WPF</GUI:ControlTypeRef>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
+    <GUI:Toolkit>0</GUI:Toolkit>
+  </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="22623940-b48f-463d-a978-36ca9777e2c5">
+    <GUI:ControlKind>5fc3d661-81de-4fb6-a012-aa67971a08c7</GUI:ControlKind>
+    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.Calendar.EventInputEditor, Zetbox.Client.WPF</GUI:ControlTypeRef>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
+    <GUI:Toolkit>0</GUI:Toolkit>
+  </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="dc80a0be-2eac-4c51-bf76-45ae17b3a947">
+    <GUI:ControlKind>916f91a3-aba5-4d61-9a45-297c02d77e83</GUI:ControlKind>
+    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.Calendar.NewEventDialog, Zetbox.Client.WPF</GUI:ControlTypeRef>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
+    <GUI:Toolkit>0</GUI:Toolkit>
+  </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="71d1247a-9ccb-454a-b5c7-115a7c00f603">
+    <GUI:ControlKind>4f6223e7-2319-441f-93fc-650d68a252f3</GUI:ControlKind>
+    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.Calendar.NextEventsSummaryDisplay, Zetbox.Client.WPF</GUI:ControlTypeRef>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
+    <GUI:Toolkit>0</GUI:Toolkit>
+  </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="cc2521f1-6368-4cc8-94f1-eb9e7080211b">
+    <GUI:ControlKind>df5134d6-18f1-43b9-96d3-9283bc2b09a8</GUI:ControlKind>
+    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.Calendar.WeekCalendar, Zetbox.Client.WPF</GUI:ControlTypeRef>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
+    <GUI:Toolkit>0</GUI:Toolkit>
+  </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="4cfc8a24-f512-4f19-82fd-76641535abf5">
+    <GUI:ControlKind>f9fc5f32-8dbd-4c86-8e94-2794336da0ac</GUI:ControlKind>
+    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.Calendar.WorkScheduleRuleInstanceDisplay, Zetbox.Client.WPF</GUI:ControlTypeRef>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
+    <GUI:Toolkit>0</GUI:Toolkit>
+  </GUI:ViewDescriptor>
+  <ZetboxBase:GroupMembership ExportGuid="2fe060bd-8503-464e-a81e-e940234090fb">
+    <ZetboxBase:ChangedOn>2013-02-18T16:56:53.788331Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-18T16:56:53.788331Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Group Everyone has Create rights</ZetboxBase:Description>
+    <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
+    <ZetboxBase:ObjectClass>1450be5f-2266-4367-8a56-1f0bee5699c4</ZetboxBase:ObjectClass>
+    <ZetboxBase:Rights>8</ZetboxBase:Rights>
+    <ZetboxBase:Group>76d43cf2-4ddf-4a3a-9ad6-28cabfdddff1</ZetboxBase:Group>
+  </ZetboxBase:GroupMembership>
+  <ZetboxBase:GroupMembership ExportGuid="dd6a85d9-8cd7-4535-98be-6139d65d0868">
+    <ZetboxBase:ChangedOn>2013-02-18T16:57:25.593151Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-18T16:57:25.593151Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Group Everyone has Create rights</ZetboxBase:Description>
+    <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
+    <ZetboxBase:ObjectClass>fd0b9bf4-0891-4317-9d2e-d08a410d5c4c</ZetboxBase:ObjectClass>
+    <ZetboxBase:Rights>8</ZetboxBase:Rights>
+    <ZetboxBase:Group>76d43cf2-4ddf-4a3a-9ad6-28cabfdddff1</ZetboxBase:Group>
+  </ZetboxBase:GroupMembership>
   <GUI:ControlKind ExportGuid="4f6223e7-2319-441f-93fc-650d68a252f3">
     <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
     <GUI:Name>Zetbox.App.Calendar.NextEventsSummaryDisplay</GUI:Name>
@@ -5706,6 +5706,152 @@ public static void isValid_PickupDirectory(FileImportConfiguration obj, Property
     <ZetboxBase:RoleName>Identity</ZetboxBase:RoleName>
     <ZetboxBase:Type>31d8890a-67fc-4a78-9d35-9ff0b9e09b4c</ZetboxBase:Type>
   </ZetboxBase:RelationEnd>
+  <ZetboxBase:NotNullableConstraint ExportGuid="cc12f2fb-315a-4bb8-92d4-648fe33c7fd2">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:01.582829Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>ef5addda-340f-4a87-83c9-3ee419519343</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2010-09-14T11:58:36Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:ClientReadOnlyConstraint ExportGuid="445edab5-aa51-4495-8eb8-cd3de26026c4">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:01.586829Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>c22516f3-b897-4827-a025-27d1515aadcd</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2011-07-21T08:16:49Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:ClientReadOnlyConstraint>
+  <ZetboxBase:ClientReadOnlyConstraint ExportGuid="881b9431-1c53-4ef7-be71-465321a55611">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:01.59183Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>c144678d-632d-4a83-8041-280d674f4453</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2011-07-21T08:16:49Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:ClientReadOnlyConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="fc5aa25e-8b85-4313-bbb6-f39f451998d5">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:01.59683Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>c144678d-632d-4a83-8041-280d674f4453</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2011-07-21T08:16:49Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:ClientReadOnlyConstraint ExportGuid="eabb0cc0-6671-4601-9fd9-6cc20415cd4c">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:01.59983Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>dc8da15a-a432-43fd-b93f-9b3530ce3144</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2011-07-21T08:16:49Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:ClientReadOnlyConstraint>
+  <ZetboxBase:ClientReadOnlyConstraint ExportGuid="65a5a435-3ec3-4972-8a2d-b6239eaac260">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:01.604831Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>e1892507-375b-4b52-ab20-16095dfc3514</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2011-07-21T08:16:49Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:ClientReadOnlyConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="94e74a54-c9ab-4077-b1b1-cec62eb99826">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:01.610831Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>e1892507-375b-4b52-ab20-16095dfc3514</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2011-07-21T08:16:49Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:InitOnlyConstraint ExportGuid="058bf0fa-0716-4365-99f3-e94d32482346">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:01.613831Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>91566b41-879d-4e72-b48b-9677cc156649</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2011-07-21T08:16:49Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:InitOnlyConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="310dc74f-c84b-4ef3-ad27-db74bc3278a2">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:01.618831Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>91566b41-879d-4e72-b48b-9677cc156649</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2010-03-10T22:14:05Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:ClientReadOnlyConstraint ExportGuid="4f83f665-ea44-4656-9a36-8acd8b88231a">
+    <ZetboxBase:ChangedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>533d8049-92ac-4100-b94f-661e5dbf5c74</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:ClientReadOnlyConstraint>
+  <ZetboxBase:ClientReadOnlyConstraint ExportGuid="dba00ff0-051d-41ce-b68d-93f48489b591">
+    <ZetboxBase:ChangedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>4dfd754a-6c10-4fb0-851d-b11e05a55abc</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:ClientReadOnlyConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="5dff324a-e624-47ff-b101-9206a593a683">
+    <ZetboxBase:ChangedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>4dfd754a-6c10-4fb0-851d-b11e05a55abc</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:ClientReadOnlyConstraint ExportGuid="f4964864-f73b-43e3-a3bf-06219a63b4d3">
+    <ZetboxBase:ChangedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>afb941f3-1f6a-427a-9d45-f04b1a8440b1</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:ClientReadOnlyConstraint>
+  <ZetboxBase:ClientReadOnlyConstraint ExportGuid="75aefd6a-a336-479e-b756-016a9595c853">
+    <ZetboxBase:ChangedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>66be2bc9-c3a2-4411-9a53-6e07548d10ab</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:ClientReadOnlyConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="ffb11fab-a755-4f68-9b2f-83fa342a806c">
+    <ZetboxBase:ChangedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>66be2bc9-c3a2-4411-9a53-6e07548d10ab</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:InitOnlyConstraint ExportGuid="d86a400b-f5b1-4149-b009-22597d99ae66">
+    <ZetboxBase:ChangedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>1034a145-8bfa-470f-8345-555b9c5087cb</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:InitOnlyConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="a67de5d0-7af2-4905-9b8d-35692f5a7902">
+    <ZetboxBase:ChangedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>1034a145-8bfa-470f-8345-555b9c5087cb</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="78a210d8-93e2-4dfd-9775-a9cb30b338ad">
+    <ZetboxBase:ChangedOn>2011-10-29T10:18:07.393084Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>f30f0053-0d08-4119-9775-284b6dee6bfd</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2011-10-29T10:18:07.393084Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MaxLength>200</ZetboxBase:MaxLength>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="0f317e2d-9f2d-419b-87e2-2ef1685f4ca9">
+    <ZetboxBase:ChangedOn>2011-10-29T10:21:25.692426Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>cd085ad4-58a4-43be-90b4-4988b728903b</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2011-10-29T10:21:25.692426Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
+  <ZetboxBase:IndexConstraint ExportGuid="fa649bca-5601-4d04-9dcb-a30517a98562">
+    <ZetboxBase:Constrained>8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6</ZetboxBase:Constrained>
+    <ZetboxBase:Reason>ExportGuid must be unique</ZetboxBase:Reason>
+    <ZetboxBase:IsUnique>true</ZetboxBase:IsUnique>
+  </ZetboxBase:IndexConstraint>
+  <ZetboxBase:IndexConstraint ExportGuid="54d401d3-e88f-4a0d-8a82-4ca076246fec">
+    <ZetboxBase:Constrained>740f4a8b-32fa-48ba-84d9-6792a755d5c9</ZetboxBase:Constrained>
+    <ZetboxBase:Reason>ExportGuid must be unique</ZetboxBase:Reason>
+    <ZetboxBase:IsUnique>true</ZetboxBase:IsUnique>
+  </ZetboxBase:IndexConstraint>
+  <ZetboxBase:IndexConstraint_ensures_unique_on_Property_RelationEntry ExportGuid="6da6a22a-4ee0-421f-8762-afb93f9c0fdc">
+    <ZetboxBase:A>54d401d3-e88f-4a0d-8a82-4ca076246fec</ZetboxBase:A>
+    <ZetboxBase:B>1034a145-8bfa-470f-8345-555b9c5087cb</ZetboxBase:B>
+  </ZetboxBase:IndexConstraint_ensures_unique_on_Property_RelationEntry>
+  <ZetboxBase:IndexConstraint_ensures_unique_on_Property_RelationEntry ExportGuid="9de23ab0-22f1-4e61-b1a7-d71d41ae2d99">
+    <ZetboxBase:A>fa649bca-5601-4d04-9dcb-a30517a98562</ZetboxBase:A>
+    <ZetboxBase:B>91566b41-879d-4e72-b48b-9677cc156649</ZetboxBase:B>
+  </ZetboxBase:IndexConstraint_ensures_unique_on_Property_RelationEntry>
+  <ZetboxBase:CurrentDateTimeDefaultValue ExportGuid="7f466f3e-066f-4092-9f80-72a28d37742e">
+    <ZetboxBase:ChangedOn>2011-08-06T04:30:49.88116Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2011-07-21T08:16:49Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Property>c144678d-632d-4a83-8041-280d674f4453</ZetboxBase:Property>
+  </ZetboxBase:CurrentDateTimeDefaultValue>
+  <ZetboxBase:CurrentDateTimeDefaultValue ExportGuid="92ed998e-2ce2-415e-a1b8-ff0da3b3be37">
+    <ZetboxBase:ChangedOn>2011-08-06T04:30:49.899161Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2011-07-21T08:16:49Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Property>e1892507-375b-4b52-ab20-16095dfc3514</ZetboxBase:Property>
+  </ZetboxBase:CurrentDateTimeDefaultValue>
+  <ZetboxBase:NewGuidDefaultValue ExportGuid="9908f0df-2f0b-48ea-89c8-41337ad723f3">
+    <ZetboxBase:ChangedOn>2011-08-06T04:30:49.907161Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-03-10T22:14:05Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Property>91566b41-879d-4e72-b48b-9677cc156649</ZetboxBase:Property>
+  </ZetboxBase:NewGuidDefaultValue>
+  <ZetboxBase:CurrentDateTimeDefaultValue ExportGuid="c53655e0-0413-473f-9d13-a94a93b14e6b">
+    <ZetboxBase:ChangedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Property>4dfd754a-6c10-4fb0-851d-b11e05a55abc</ZetboxBase:Property>
+  </ZetboxBase:CurrentDateTimeDefaultValue>
+  <ZetboxBase:CurrentDateTimeDefaultValue ExportGuid="4d5f5f26-ffdf-4614-b3b4-c8842e36821e">
+    <ZetboxBase:ChangedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Property>66be2bc9-c3a2-4411-9a53-6e07548d10ab</ZetboxBase:Property>
+  </ZetboxBase:CurrentDateTimeDefaultValue>
+  <ZetboxBase:NewGuidDefaultValue ExportGuid="24badd67-f014-45d6-97a0-a97c28092586">
+    <ZetboxBase:ChangedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Property>1034a145-8bfa-470f-8345-555b9c5087cb</ZetboxBase:Property>
+  </ZetboxBase:NewGuidDefaultValue>
   <ZetboxBase:Method ExportGuid="197e0cfb-34db-4dfa-bde8-29e7e847be99">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
@@ -5920,152 +6066,6 @@ public static void MakeStaticFileCanExecReason(ImportedFile obj, MethodReturnEve
     <ZetboxBase:Name>retVal</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>5aaabfe9-081d-445d-a543-53e0253feeb8</ZetboxBase:ObjectClass>
   </ZetboxBase:ObjectReferenceParameter>
-  <ZetboxBase:NotNullableConstraint ExportGuid="cc12f2fb-315a-4bb8-92d4-648fe33c7fd2">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:01.582829Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:ConstrainedProperty>ef5addda-340f-4a87-83c9-3ee419519343</ZetboxBase:ConstrainedProperty>
-    <ZetboxBase:CreatedOn>2010-09-14T11:58:36Z</ZetboxBase:CreatedOn>
-  </ZetboxBase:NotNullableConstraint>
-  <ZetboxBase:ClientReadOnlyConstraint ExportGuid="445edab5-aa51-4495-8eb8-cd3de26026c4">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:01.586829Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:ConstrainedProperty>c22516f3-b897-4827-a025-27d1515aadcd</ZetboxBase:ConstrainedProperty>
-    <ZetboxBase:CreatedOn>2011-07-21T08:16:49Z</ZetboxBase:CreatedOn>
-  </ZetboxBase:ClientReadOnlyConstraint>
-  <ZetboxBase:ClientReadOnlyConstraint ExportGuid="881b9431-1c53-4ef7-be71-465321a55611">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:01.59183Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:ConstrainedProperty>c144678d-632d-4a83-8041-280d674f4453</ZetboxBase:ConstrainedProperty>
-    <ZetboxBase:CreatedOn>2011-07-21T08:16:49Z</ZetboxBase:CreatedOn>
-  </ZetboxBase:ClientReadOnlyConstraint>
-  <ZetboxBase:NotNullableConstraint ExportGuid="fc5aa25e-8b85-4313-bbb6-f39f451998d5">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:01.59683Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:ConstrainedProperty>c144678d-632d-4a83-8041-280d674f4453</ZetboxBase:ConstrainedProperty>
-    <ZetboxBase:CreatedOn>2011-07-21T08:16:49Z</ZetboxBase:CreatedOn>
-  </ZetboxBase:NotNullableConstraint>
-  <ZetboxBase:ClientReadOnlyConstraint ExportGuid="eabb0cc0-6671-4601-9fd9-6cc20415cd4c">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:01.59983Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:ConstrainedProperty>dc8da15a-a432-43fd-b93f-9b3530ce3144</ZetboxBase:ConstrainedProperty>
-    <ZetboxBase:CreatedOn>2011-07-21T08:16:49Z</ZetboxBase:CreatedOn>
-  </ZetboxBase:ClientReadOnlyConstraint>
-  <ZetboxBase:ClientReadOnlyConstraint ExportGuid="65a5a435-3ec3-4972-8a2d-b6239eaac260">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:01.604831Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:ConstrainedProperty>e1892507-375b-4b52-ab20-16095dfc3514</ZetboxBase:ConstrainedProperty>
-    <ZetboxBase:CreatedOn>2011-07-21T08:16:49Z</ZetboxBase:CreatedOn>
-  </ZetboxBase:ClientReadOnlyConstraint>
-  <ZetboxBase:NotNullableConstraint ExportGuid="94e74a54-c9ab-4077-b1b1-cec62eb99826">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:01.610831Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:ConstrainedProperty>e1892507-375b-4b52-ab20-16095dfc3514</ZetboxBase:ConstrainedProperty>
-    <ZetboxBase:CreatedOn>2011-07-21T08:16:49Z</ZetboxBase:CreatedOn>
-  </ZetboxBase:NotNullableConstraint>
-  <ZetboxBase:InitOnlyConstraint ExportGuid="058bf0fa-0716-4365-99f3-e94d32482346">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:01.613831Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:ConstrainedProperty>91566b41-879d-4e72-b48b-9677cc156649</ZetboxBase:ConstrainedProperty>
-    <ZetboxBase:CreatedOn>2011-07-21T08:16:49Z</ZetboxBase:CreatedOn>
-  </ZetboxBase:InitOnlyConstraint>
-  <ZetboxBase:NotNullableConstraint ExportGuid="310dc74f-c84b-4ef3-ad27-db74bc3278a2">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:01.618831Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:ConstrainedProperty>91566b41-879d-4e72-b48b-9677cc156649</ZetboxBase:ConstrainedProperty>
-    <ZetboxBase:CreatedOn>2010-03-10T22:14:05Z</ZetboxBase:CreatedOn>
-  </ZetboxBase:NotNullableConstraint>
-  <ZetboxBase:ClientReadOnlyConstraint ExportGuid="4f83f665-ea44-4656-9a36-8acd8b88231a">
-    <ZetboxBase:ChangedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:ConstrainedProperty>533d8049-92ac-4100-b94f-661e5dbf5c74</ZetboxBase:ConstrainedProperty>
-    <ZetboxBase:CreatedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:CreatedOn>
-  </ZetboxBase:ClientReadOnlyConstraint>
-  <ZetboxBase:ClientReadOnlyConstraint ExportGuid="dba00ff0-051d-41ce-b68d-93f48489b591">
-    <ZetboxBase:ChangedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:ConstrainedProperty>4dfd754a-6c10-4fb0-851d-b11e05a55abc</ZetboxBase:ConstrainedProperty>
-    <ZetboxBase:CreatedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:CreatedOn>
-  </ZetboxBase:ClientReadOnlyConstraint>
-  <ZetboxBase:NotNullableConstraint ExportGuid="5dff324a-e624-47ff-b101-9206a593a683">
-    <ZetboxBase:ChangedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:ConstrainedProperty>4dfd754a-6c10-4fb0-851d-b11e05a55abc</ZetboxBase:ConstrainedProperty>
-    <ZetboxBase:CreatedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:CreatedOn>
-  </ZetboxBase:NotNullableConstraint>
-  <ZetboxBase:ClientReadOnlyConstraint ExportGuid="f4964864-f73b-43e3-a3bf-06219a63b4d3">
-    <ZetboxBase:ChangedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:ConstrainedProperty>afb941f3-1f6a-427a-9d45-f04b1a8440b1</ZetboxBase:ConstrainedProperty>
-    <ZetboxBase:CreatedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:CreatedOn>
-  </ZetboxBase:ClientReadOnlyConstraint>
-  <ZetboxBase:ClientReadOnlyConstraint ExportGuid="75aefd6a-a336-479e-b756-016a9595c853">
-    <ZetboxBase:ChangedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:ConstrainedProperty>66be2bc9-c3a2-4411-9a53-6e07548d10ab</ZetboxBase:ConstrainedProperty>
-    <ZetboxBase:CreatedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:CreatedOn>
-  </ZetboxBase:ClientReadOnlyConstraint>
-  <ZetboxBase:NotNullableConstraint ExportGuid="ffb11fab-a755-4f68-9b2f-83fa342a806c">
-    <ZetboxBase:ChangedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:ConstrainedProperty>66be2bc9-c3a2-4411-9a53-6e07548d10ab</ZetboxBase:ConstrainedProperty>
-    <ZetboxBase:CreatedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:CreatedOn>
-  </ZetboxBase:NotNullableConstraint>
-  <ZetboxBase:InitOnlyConstraint ExportGuid="d86a400b-f5b1-4149-b009-22597d99ae66">
-    <ZetboxBase:ChangedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:ConstrainedProperty>1034a145-8bfa-470f-8345-555b9c5087cb</ZetboxBase:ConstrainedProperty>
-    <ZetboxBase:CreatedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:CreatedOn>
-  </ZetboxBase:InitOnlyConstraint>
-  <ZetboxBase:NotNullableConstraint ExportGuid="a67de5d0-7af2-4905-9b8d-35692f5a7902">
-    <ZetboxBase:ChangedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:ConstrainedProperty>1034a145-8bfa-470f-8345-555b9c5087cb</ZetboxBase:ConstrainedProperty>
-    <ZetboxBase:CreatedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:CreatedOn>
-  </ZetboxBase:NotNullableConstraint>
-  <ZetboxBase:StringRangeConstraint ExportGuid="78a210d8-93e2-4dfd-9775-a9cb30b338ad">
-    <ZetboxBase:ChangedOn>2011-10-29T10:18:07.393084Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:ConstrainedProperty>f30f0053-0d08-4119-9775-284b6dee6bfd</ZetboxBase:ConstrainedProperty>
-    <ZetboxBase:CreatedOn>2011-10-29T10:18:07.393084Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:MaxLength>200</ZetboxBase:MaxLength>
-    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
-  </ZetboxBase:StringRangeConstraint>
-  <ZetboxBase:StringRangeConstraint ExportGuid="0f317e2d-9f2d-419b-87e2-2ef1685f4ca9">
-    <ZetboxBase:ChangedOn>2011-10-29T10:21:25.692426Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:ConstrainedProperty>cd085ad4-58a4-43be-90b4-4988b728903b</ZetboxBase:ConstrainedProperty>
-    <ZetboxBase:CreatedOn>2011-10-29T10:21:25.692426Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
-  </ZetboxBase:StringRangeConstraint>
-  <ZetboxBase:IndexConstraint ExportGuid="fa649bca-5601-4d04-9dcb-a30517a98562">
-    <ZetboxBase:Constrained>8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6</ZetboxBase:Constrained>
-    <ZetboxBase:Reason>ExportGuid must be unique</ZetboxBase:Reason>
-    <ZetboxBase:IsUnique>true</ZetboxBase:IsUnique>
-  </ZetboxBase:IndexConstraint>
-  <ZetboxBase:IndexConstraint ExportGuid="54d401d3-e88f-4a0d-8a82-4ca076246fec">
-    <ZetboxBase:Constrained>740f4a8b-32fa-48ba-84d9-6792a755d5c9</ZetboxBase:Constrained>
-    <ZetboxBase:Reason>ExportGuid must be unique</ZetboxBase:Reason>
-    <ZetboxBase:IsUnique>true</ZetboxBase:IsUnique>
-  </ZetboxBase:IndexConstraint>
-  <ZetboxBase:IndexConstraint_ensures_unique_on_Property_RelationEntry ExportGuid="6da6a22a-4ee0-421f-8762-afb93f9c0fdc">
-    <ZetboxBase:A>54d401d3-e88f-4a0d-8a82-4ca076246fec</ZetboxBase:A>
-    <ZetboxBase:B>1034a145-8bfa-470f-8345-555b9c5087cb</ZetboxBase:B>
-  </ZetboxBase:IndexConstraint_ensures_unique_on_Property_RelationEntry>
-  <ZetboxBase:IndexConstraint_ensures_unique_on_Property_RelationEntry ExportGuid="9de23ab0-22f1-4e61-b1a7-d71d41ae2d99">
-    <ZetboxBase:A>fa649bca-5601-4d04-9dcb-a30517a98562</ZetboxBase:A>
-    <ZetboxBase:B>91566b41-879d-4e72-b48b-9677cc156649</ZetboxBase:B>
-  </ZetboxBase:IndexConstraint_ensures_unique_on_Property_RelationEntry>
-  <ZetboxBase:CurrentDateTimeDefaultValue ExportGuid="7f466f3e-066f-4092-9f80-72a28d37742e">
-    <ZetboxBase:ChangedOn>2011-08-06T04:30:49.88116Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2011-07-21T08:16:49Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Property>c144678d-632d-4a83-8041-280d674f4453</ZetboxBase:Property>
-  </ZetboxBase:CurrentDateTimeDefaultValue>
-  <ZetboxBase:CurrentDateTimeDefaultValue ExportGuid="92ed998e-2ce2-415e-a1b8-ff0da3b3be37">
-    <ZetboxBase:ChangedOn>2011-08-06T04:30:49.899161Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2011-07-21T08:16:49Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Property>e1892507-375b-4b52-ab20-16095dfc3514</ZetboxBase:Property>
-  </ZetboxBase:CurrentDateTimeDefaultValue>
-  <ZetboxBase:NewGuidDefaultValue ExportGuid="9908f0df-2f0b-48ea-89c8-41337ad723f3">
-    <ZetboxBase:ChangedOn>2011-08-06T04:30:49.907161Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-03-10T22:14:05Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Property>91566b41-879d-4e72-b48b-9677cc156649</ZetboxBase:Property>
-  </ZetboxBase:NewGuidDefaultValue>
-  <ZetboxBase:CurrentDateTimeDefaultValue ExportGuid="c53655e0-0413-473f-9d13-a94a93b14e6b">
-    <ZetboxBase:ChangedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Property>4dfd754a-6c10-4fb0-851d-b11e05a55abc</ZetboxBase:Property>
-  </ZetboxBase:CurrentDateTimeDefaultValue>
-  <ZetboxBase:CurrentDateTimeDefaultValue ExportGuid="4d5f5f26-ffdf-4614-b3b4-c8842e36821e">
-    <ZetboxBase:ChangedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Property>66be2bc9-c3a2-4411-9a53-6e07548d10ab</ZetboxBase:Property>
-  </ZetboxBase:CurrentDateTimeDefaultValue>
-  <ZetboxBase:NewGuidDefaultValue ExportGuid="24badd67-f014-45d6-97a0-a97c28092586">
-    <ZetboxBase:ChangedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Property>1034a145-8bfa-470f-8345-555b9c5087cb</ZetboxBase:Property>
-  </ZetboxBase:NewGuidDefaultValue>
   <GUI:ViewModelDescriptor ExportGuid="377176c3-4ff9-4a6f-bfc0-de893bce1c12">
     <GUI:DefaultEditorKind>24338f74-ec90-48a5-90ff-b9830082cb12</GUI:DefaultEditorKind>
     <GUI:Deleted>false</GUI:Deleted>
@@ -6581,6 +6581,254 @@ public static void ObjectIsValid(StagingDatabase obj, ObjectIsValidEventArgs e)
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>StagingDatabases</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
+  <ZetboxBase:EnumerationEntry ExportGuid="4c79c2a2-73c5-43b6-8e1d-c15377074439">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.885044Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-07-02T05:27:40Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>2200</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>AnsiString</ZetboxBase:Name>
+    <ZetboxBase:Value>0</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="4c21bd8f-0fc4-4feb-9441-0bc20d31d3d0">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.887044Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-07-02T05:43:30Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>2100</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>AnsiStringFixedLength</ZetboxBase:Name>
+    <ZetboxBase:Value>22</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="41b5f5c1-7dbc-418b-b701-e3b6d59b0a09">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.889045Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-07-02T05:36:41Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>1900</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>Binary</ZetboxBase:Name>
+    <ZetboxBase:Value>1</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="b8adb2b5-8299-443e-82f0-592d32d24049">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.890045Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-07-02T05:36:41Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>2000</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>Boolean</ZetboxBase:Name>
+    <ZetboxBase:Value>3</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="96e71da7-3295-4a00-ad00-27c2929f180e">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.892045Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-07-02T05:36:41Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>2600</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>Byte</ZetboxBase:Name>
+    <ZetboxBase:Value>2</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="4a5d99ea-4d31-4a06-9f01-23abb6ea46ad">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.894045Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-07-02T05:36:41Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>2700</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>Currency</ZetboxBase:Name>
+    <ZetboxBase:Value>4</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="a82c83d1-09d7-4e80-86fb-640c57a2f103">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.896045Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-07-02T05:36:41Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>2500</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>Date</ZetboxBase:Name>
+    <ZetboxBase:Value>5</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="2d8fa50d-e03d-42b3-9290-dcf7c1c0b941">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.898045Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-07-02T05:36:41Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>2300</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>DateTime</ZetboxBase:Name>
+    <ZetboxBase:Value>6</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="75c0d14c-76ad-4411-be97-087ee68468e7">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.899045Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-07-02T05:43:30Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>2400</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>DateTime2</ZetboxBase:Name>
+    <ZetboxBase:Value>26</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="6ec25427-f23d-4848-8256-c4fbdfcb09d9">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.901045Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-07-02T05:43:30Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>700</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>DateTimeOffset</ZetboxBase:Name>
+    <ZetboxBase:Value>27</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="b8534e08-60df-46d9-95c7-fb8c7fe71b4a">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.903045Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-07-02T05:39:07Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>600</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>Decimal</ZetboxBase:Name>
+    <ZetboxBase:Value>7</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="854cde54-70e1-4b96-9c0c-127c79eb0145">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.905045Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-07-02T05:39:07Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>200</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>Double</ZetboxBase:Name>
+    <ZetboxBase:Value>8</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="25b1044a-dc8e-44b1-bf75-0d6ce38be484">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.907046Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-07-02T05:39:07Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>100</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>Guid</ZetboxBase:Name>
+    <ZetboxBase:Value>9</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="235943a4-b9a8-4330-929a-fbe98fb37b01">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.909046Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-07-02T05:39:07Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>300</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>Int16</ZetboxBase:Name>
+    <ZetboxBase:Value>10</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="2f68c3cd-8c7b-4610-a19b-c7e0a97e5d96">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.910046Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-07-02T05:39:07Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>500</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>Int32</ZetboxBase:Name>
+    <ZetboxBase:Value>11</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="5ae9ac6c-638b-4b00-aa15-7c8b9f8e4fa2">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.912046Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-07-02T05:39:07Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>400</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>Int64</ZetboxBase:Name>
+    <ZetboxBase:Value>12</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="00fcbc9c-ef5a-4494-8cc2-35e174374379">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.914046Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-07-02T05:41:00Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>800</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>Object</ZetboxBase:Name>
+    <ZetboxBase:Value>13</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="adea53de-e1c5-48d4-a175-9fe1e1b4865c">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.916046Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-07-02T05:41:00Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>1500</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>SByte</ZetboxBase:Name>
+    <ZetboxBase:Value>14</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="d2065a0f-298d-42ec-8137-96a8c654ca9a">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.917046Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-07-02T05:41:00Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>1400</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>Single</ZetboxBase:Name>
+    <ZetboxBase:Value>15</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="5a35d909-7b29-49db-961d-4ef33d78f99c">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.919046Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-07-02T05:41:00Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>1600</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>String</ZetboxBase:Name>
+    <ZetboxBase:Value>16</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="0b18614e-6b7c-4e17-93aa-ddc945412d82">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.921046Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-07-02T05:43:30Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>1800</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>StringFixedLength</ZetboxBase:Name>
+    <ZetboxBase:Value>23</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="69bcf769-2c56-4ad2-a8a7-5c63fb365887">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.923046Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-07-02T05:41:00Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>1700</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>Time</ZetboxBase:Name>
+    <ZetboxBase:Value>17</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="5e9cc2db-8298-486d-a6a0-fa82bc450e8f">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.925047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-07-02T05:41:00Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>1000</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>UInt16</ZetboxBase:Name>
+    <ZetboxBase:Value>18</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="5168ee49-8e33-4603-8ec2-bb3857b47c03">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.926047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-07-02T05:41:00Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>900</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>UInt32</ZetboxBase:Name>
+    <ZetboxBase:Value>19</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="70380ddf-25fa-4e15-a0b1-fc73f98e6f01">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.929047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-07-02T05:41:00Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>1100</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>UInt64</ZetboxBase:Name>
+    <ZetboxBase:Value>20</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="b2d0a838-f4c5-4e1f-a5d6-bd3844c5e269">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.931047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-07-02T05:43:30Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>1300</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>VarNumeric</ZetboxBase:Name>
+    <ZetboxBase:Value>21</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="b27a5bb6-5fc1-4b94-9541-cda08ff46349">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.933047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-07-02T05:43:30Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>1200</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>Xml</ZetboxBase:Name>
+    <ZetboxBase:Value>25</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="401097ed-8d85-40ab-be9e-022c4cbdd403">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.934047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-07-22T11:19:20Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>197fbcb0-8e5c-4b77-a41b-4cc31d804fbf</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>100</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>CustomSource</ZetboxBase:Name>
+    <ZetboxBase:Value>4</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="c369d276-b9a7-48bc-847a-9ae97ea2a682">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.936047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-07-22T11:19:20Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>197fbcb0-8e5c-4b77-a41b-4cc31d804fbf</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>200</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>Ignored</ZetboxBase:Name>
+    <ZetboxBase:Value>3</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="55f6a5bf-c8f3-46a3-9c2e-95c7dbace1d6">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.938047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-07-22T11:19:20Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>197fbcb0-8e5c-4b77-a41b-4cc31d804fbf</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>300</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>Mapped</ZetboxBase:Name>
+    <ZetboxBase:Value>1</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="e5f94a88-a353-47b1-891e-eef70f32c8ae">
+    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.940047Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-07-22T11:19:20Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>197fbcb0-8e5c-4b77-a41b-4cc31d804fbf</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>400</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>Questions</ZetboxBase:Name>
+    <ZetboxBase:Value>2</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
   <ZetboxBase:DataType_implements_Interface_RelationEntry ExportGuid="ceb2b91b-11d6-4921-9474-202a91d12f9f">
     <ZetboxBase:A>f2b4fe26-9d57-47c7-88b2-b30a38ebbd97</ZetboxBase:A>
     <ZetboxBase:B>a73f2d0a-786b-483d-b474-b9d9df42b8b3</ZetboxBase:B>
@@ -9486,373 +9734,6 @@ public static void isValid_SourceTables(StagingDatabase obj, PropertyIsValidEven
     <ZetboxBase:RoleName>StagingDatabases</ZetboxBase:RoleName>
     <ZetboxBase:Type>4faf24fe-d732-4a1c-9156-2cbb7ec4be56</ZetboxBase:Type>
   </ZetboxBase:RelationEnd>
-  <ZetboxBase:EnumerationEntry ExportGuid="4c79c2a2-73c5-43b6-8e1d-c15377074439">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.885044Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-07-02T05:27:40Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
-    <ZetboxBase:EnumerationEntries_pos>2200</ZetboxBase:EnumerationEntries_pos>
-    <ZetboxBase:Name>AnsiString</ZetboxBase:Name>
-    <ZetboxBase:Value>0</ZetboxBase:Value>
-  </ZetboxBase:EnumerationEntry>
-  <ZetboxBase:EnumerationEntry ExportGuid="4c21bd8f-0fc4-4feb-9441-0bc20d31d3d0">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.887044Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-07-02T05:43:30Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
-    <ZetboxBase:EnumerationEntries_pos>2100</ZetboxBase:EnumerationEntries_pos>
-    <ZetboxBase:Name>AnsiStringFixedLength</ZetboxBase:Name>
-    <ZetboxBase:Value>22</ZetboxBase:Value>
-  </ZetboxBase:EnumerationEntry>
-  <ZetboxBase:EnumerationEntry ExportGuid="41b5f5c1-7dbc-418b-b701-e3b6d59b0a09">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.889045Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-07-02T05:36:41Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
-    <ZetboxBase:EnumerationEntries_pos>1900</ZetboxBase:EnumerationEntries_pos>
-    <ZetboxBase:Name>Binary</ZetboxBase:Name>
-    <ZetboxBase:Value>1</ZetboxBase:Value>
-  </ZetboxBase:EnumerationEntry>
-  <ZetboxBase:EnumerationEntry ExportGuid="b8adb2b5-8299-443e-82f0-592d32d24049">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.890045Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-07-02T05:36:41Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
-    <ZetboxBase:EnumerationEntries_pos>2000</ZetboxBase:EnumerationEntries_pos>
-    <ZetboxBase:Name>Boolean</ZetboxBase:Name>
-    <ZetboxBase:Value>3</ZetboxBase:Value>
-  </ZetboxBase:EnumerationEntry>
-  <ZetboxBase:EnumerationEntry ExportGuid="96e71da7-3295-4a00-ad00-27c2929f180e">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.892045Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-07-02T05:36:41Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
-    <ZetboxBase:EnumerationEntries_pos>2600</ZetboxBase:EnumerationEntries_pos>
-    <ZetboxBase:Name>Byte</ZetboxBase:Name>
-    <ZetboxBase:Value>2</ZetboxBase:Value>
-  </ZetboxBase:EnumerationEntry>
-  <ZetboxBase:EnumerationEntry ExportGuid="4a5d99ea-4d31-4a06-9f01-23abb6ea46ad">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.894045Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-07-02T05:36:41Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
-    <ZetboxBase:EnumerationEntries_pos>2700</ZetboxBase:EnumerationEntries_pos>
-    <ZetboxBase:Name>Currency</ZetboxBase:Name>
-    <ZetboxBase:Value>4</ZetboxBase:Value>
-  </ZetboxBase:EnumerationEntry>
-  <ZetboxBase:EnumerationEntry ExportGuid="a82c83d1-09d7-4e80-86fb-640c57a2f103">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.896045Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-07-02T05:36:41Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
-    <ZetboxBase:EnumerationEntries_pos>2500</ZetboxBase:EnumerationEntries_pos>
-    <ZetboxBase:Name>Date</ZetboxBase:Name>
-    <ZetboxBase:Value>5</ZetboxBase:Value>
-  </ZetboxBase:EnumerationEntry>
-  <ZetboxBase:EnumerationEntry ExportGuid="2d8fa50d-e03d-42b3-9290-dcf7c1c0b941">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.898045Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-07-02T05:36:41Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
-    <ZetboxBase:EnumerationEntries_pos>2300</ZetboxBase:EnumerationEntries_pos>
-    <ZetboxBase:Name>DateTime</ZetboxBase:Name>
-    <ZetboxBase:Value>6</ZetboxBase:Value>
-  </ZetboxBase:EnumerationEntry>
-  <ZetboxBase:EnumerationEntry ExportGuid="75c0d14c-76ad-4411-be97-087ee68468e7">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.899045Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-07-02T05:43:30Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
-    <ZetboxBase:EnumerationEntries_pos>2400</ZetboxBase:EnumerationEntries_pos>
-    <ZetboxBase:Name>DateTime2</ZetboxBase:Name>
-    <ZetboxBase:Value>26</ZetboxBase:Value>
-  </ZetboxBase:EnumerationEntry>
-  <ZetboxBase:EnumerationEntry ExportGuid="6ec25427-f23d-4848-8256-c4fbdfcb09d9">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.901045Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-07-02T05:43:30Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
-    <ZetboxBase:EnumerationEntries_pos>700</ZetboxBase:EnumerationEntries_pos>
-    <ZetboxBase:Name>DateTimeOffset</ZetboxBase:Name>
-    <ZetboxBase:Value>27</ZetboxBase:Value>
-  </ZetboxBase:EnumerationEntry>
-  <ZetboxBase:EnumerationEntry ExportGuid="b8534e08-60df-46d9-95c7-fb8c7fe71b4a">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.903045Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-07-02T05:39:07Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
-    <ZetboxBase:EnumerationEntries_pos>600</ZetboxBase:EnumerationEntries_pos>
-    <ZetboxBase:Name>Decimal</ZetboxBase:Name>
-    <ZetboxBase:Value>7</ZetboxBase:Value>
-  </ZetboxBase:EnumerationEntry>
-  <ZetboxBase:EnumerationEntry ExportGuid="854cde54-70e1-4b96-9c0c-127c79eb0145">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.905045Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-07-02T05:39:07Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
-    <ZetboxBase:EnumerationEntries_pos>200</ZetboxBase:EnumerationEntries_pos>
-    <ZetboxBase:Name>Double</ZetboxBase:Name>
-    <ZetboxBase:Value>8</ZetboxBase:Value>
-  </ZetboxBase:EnumerationEntry>
-  <ZetboxBase:EnumerationEntry ExportGuid="25b1044a-dc8e-44b1-bf75-0d6ce38be484">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.907046Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-07-02T05:39:07Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
-    <ZetboxBase:EnumerationEntries_pos>100</ZetboxBase:EnumerationEntries_pos>
-    <ZetboxBase:Name>Guid</ZetboxBase:Name>
-    <ZetboxBase:Value>9</ZetboxBase:Value>
-  </ZetboxBase:EnumerationEntry>
-  <ZetboxBase:EnumerationEntry ExportGuid="235943a4-b9a8-4330-929a-fbe98fb37b01">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.909046Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-07-02T05:39:07Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
-    <ZetboxBase:EnumerationEntries_pos>300</ZetboxBase:EnumerationEntries_pos>
-    <ZetboxBase:Name>Int16</ZetboxBase:Name>
-    <ZetboxBase:Value>10</ZetboxBase:Value>
-  </ZetboxBase:EnumerationEntry>
-  <ZetboxBase:EnumerationEntry ExportGuid="2f68c3cd-8c7b-4610-a19b-c7e0a97e5d96">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.910046Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-07-02T05:39:07Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
-    <ZetboxBase:EnumerationEntries_pos>500</ZetboxBase:EnumerationEntries_pos>
-    <ZetboxBase:Name>Int32</ZetboxBase:Name>
-    <ZetboxBase:Value>11</ZetboxBase:Value>
-  </ZetboxBase:EnumerationEntry>
-  <ZetboxBase:EnumerationEntry ExportGuid="5ae9ac6c-638b-4b00-aa15-7c8b9f8e4fa2">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.912046Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-07-02T05:39:07Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
-    <ZetboxBase:EnumerationEntries_pos>400</ZetboxBase:EnumerationEntries_pos>
-    <ZetboxBase:Name>Int64</ZetboxBase:Name>
-    <ZetboxBase:Value>12</ZetboxBase:Value>
-  </ZetboxBase:EnumerationEntry>
-  <ZetboxBase:EnumerationEntry ExportGuid="00fcbc9c-ef5a-4494-8cc2-35e174374379">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.914046Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-07-02T05:41:00Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
-    <ZetboxBase:EnumerationEntries_pos>800</ZetboxBase:EnumerationEntries_pos>
-    <ZetboxBase:Name>Object</ZetboxBase:Name>
-    <ZetboxBase:Value>13</ZetboxBase:Value>
-  </ZetboxBase:EnumerationEntry>
-  <ZetboxBase:EnumerationEntry ExportGuid="adea53de-e1c5-48d4-a175-9fe1e1b4865c">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.916046Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-07-02T05:41:00Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
-    <ZetboxBase:EnumerationEntries_pos>1500</ZetboxBase:EnumerationEntries_pos>
-    <ZetboxBase:Name>SByte</ZetboxBase:Name>
-    <ZetboxBase:Value>14</ZetboxBase:Value>
-  </ZetboxBase:EnumerationEntry>
-  <ZetboxBase:EnumerationEntry ExportGuid="d2065a0f-298d-42ec-8137-96a8c654ca9a">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.917046Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-07-02T05:41:00Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
-    <ZetboxBase:EnumerationEntries_pos>1400</ZetboxBase:EnumerationEntries_pos>
-    <ZetboxBase:Name>Single</ZetboxBase:Name>
-    <ZetboxBase:Value>15</ZetboxBase:Value>
-  </ZetboxBase:EnumerationEntry>
-  <ZetboxBase:EnumerationEntry ExportGuid="5a35d909-7b29-49db-961d-4ef33d78f99c">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.919046Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-07-02T05:41:00Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
-    <ZetboxBase:EnumerationEntries_pos>1600</ZetboxBase:EnumerationEntries_pos>
-    <ZetboxBase:Name>String</ZetboxBase:Name>
-    <ZetboxBase:Value>16</ZetboxBase:Value>
-  </ZetboxBase:EnumerationEntry>
-  <ZetboxBase:EnumerationEntry ExportGuid="0b18614e-6b7c-4e17-93aa-ddc945412d82">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.921046Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-07-02T05:43:30Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
-    <ZetboxBase:EnumerationEntries_pos>1800</ZetboxBase:EnumerationEntries_pos>
-    <ZetboxBase:Name>StringFixedLength</ZetboxBase:Name>
-    <ZetboxBase:Value>23</ZetboxBase:Value>
-  </ZetboxBase:EnumerationEntry>
-  <ZetboxBase:EnumerationEntry ExportGuid="69bcf769-2c56-4ad2-a8a7-5c63fb365887">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.923046Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-07-02T05:41:00Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
-    <ZetboxBase:EnumerationEntries_pos>1700</ZetboxBase:EnumerationEntries_pos>
-    <ZetboxBase:Name>Time</ZetboxBase:Name>
-    <ZetboxBase:Value>17</ZetboxBase:Value>
-  </ZetboxBase:EnumerationEntry>
-  <ZetboxBase:EnumerationEntry ExportGuid="5e9cc2db-8298-486d-a6a0-fa82bc450e8f">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.925047Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-07-02T05:41:00Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
-    <ZetboxBase:EnumerationEntries_pos>1000</ZetboxBase:EnumerationEntries_pos>
-    <ZetboxBase:Name>UInt16</ZetboxBase:Name>
-    <ZetboxBase:Value>18</ZetboxBase:Value>
-  </ZetboxBase:EnumerationEntry>
-  <ZetboxBase:EnumerationEntry ExportGuid="5168ee49-8e33-4603-8ec2-bb3857b47c03">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.926047Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-07-02T05:41:00Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
-    <ZetboxBase:EnumerationEntries_pos>900</ZetboxBase:EnumerationEntries_pos>
-    <ZetboxBase:Name>UInt32</ZetboxBase:Name>
-    <ZetboxBase:Value>19</ZetboxBase:Value>
-  </ZetboxBase:EnumerationEntry>
-  <ZetboxBase:EnumerationEntry ExportGuid="70380ddf-25fa-4e15-a0b1-fc73f98e6f01">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.929047Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-07-02T05:41:00Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
-    <ZetboxBase:EnumerationEntries_pos>1100</ZetboxBase:EnumerationEntries_pos>
-    <ZetboxBase:Name>UInt64</ZetboxBase:Name>
-    <ZetboxBase:Value>20</ZetboxBase:Value>
-  </ZetboxBase:EnumerationEntry>
-  <ZetboxBase:EnumerationEntry ExportGuid="b2d0a838-f4c5-4e1f-a5d6-bd3844c5e269">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.931047Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-07-02T05:43:30Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
-    <ZetboxBase:EnumerationEntries_pos>1300</ZetboxBase:EnumerationEntries_pos>
-    <ZetboxBase:Name>VarNumeric</ZetboxBase:Name>
-    <ZetboxBase:Value>21</ZetboxBase:Value>
-  </ZetboxBase:EnumerationEntry>
-  <ZetboxBase:EnumerationEntry ExportGuid="b27a5bb6-5fc1-4b94-9541-cda08ff46349">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.933047Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-07-02T05:43:30Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
-    <ZetboxBase:EnumerationEntries_pos>1200</ZetboxBase:EnumerationEntries_pos>
-    <ZetboxBase:Name>Xml</ZetboxBase:Name>
-    <ZetboxBase:Value>25</ZetboxBase:Value>
-  </ZetboxBase:EnumerationEntry>
-  <ZetboxBase:EnumerationEntry ExportGuid="401097ed-8d85-40ab-be9e-022c4cbdd403">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.934047Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-07-22T11:19:20Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Enumeration>197fbcb0-8e5c-4b77-a41b-4cc31d804fbf</ZetboxBase:Enumeration>
-    <ZetboxBase:EnumerationEntries_pos>100</ZetboxBase:EnumerationEntries_pos>
-    <ZetboxBase:Name>CustomSource</ZetboxBase:Name>
-    <ZetboxBase:Value>4</ZetboxBase:Value>
-  </ZetboxBase:EnumerationEntry>
-  <ZetboxBase:EnumerationEntry ExportGuid="c369d276-b9a7-48bc-847a-9ae97ea2a682">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.936047Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-07-22T11:19:20Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Enumeration>197fbcb0-8e5c-4b77-a41b-4cc31d804fbf</ZetboxBase:Enumeration>
-    <ZetboxBase:EnumerationEntries_pos>200</ZetboxBase:EnumerationEntries_pos>
-    <ZetboxBase:Name>Ignored</ZetboxBase:Name>
-    <ZetboxBase:Value>3</ZetboxBase:Value>
-  </ZetboxBase:EnumerationEntry>
-  <ZetboxBase:EnumerationEntry ExportGuid="55f6a5bf-c8f3-46a3-9c2e-95c7dbace1d6">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.938047Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-07-22T11:19:20Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Enumeration>197fbcb0-8e5c-4b77-a41b-4cc31d804fbf</ZetboxBase:Enumeration>
-    <ZetboxBase:EnumerationEntries_pos>300</ZetboxBase:EnumerationEntries_pos>
-    <ZetboxBase:Name>Mapped</ZetboxBase:Name>
-    <ZetboxBase:Value>1</ZetboxBase:Value>
-  </ZetboxBase:EnumerationEntry>
-  <ZetboxBase:EnumerationEntry ExportGuid="e5f94a88-a353-47b1-891e-eef70f32c8ae">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:08.940047Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-07-22T11:19:20Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Enumeration>197fbcb0-8e5c-4b77-a41b-4cc31d804fbf</ZetboxBase:Enumeration>
-    <ZetboxBase:EnumerationEntries_pos>400</ZetboxBase:EnumerationEntries_pos>
-    <ZetboxBase:Name>Questions</ZetboxBase:Name>
-    <ZetboxBase:Value>2</ZetboxBase:Value>
-  </ZetboxBase:EnumerationEntry>
-  <ZetboxBase:Method ExportGuid="bd495406-0157-46d9-b89d-25a1700dfea8">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CodeTemplate>[Invocation]
-public static void CreateMappingReport(MigrationProject obj)
-{
-}
-
-[Invocation]
-public static void CreateMappingReportCanExec(MigrationProject obj, MethodReturnEventArgs&lt;bool&gt; e)
-{
-}
-
-[Invocation]
-public static void CreateMappingReportCanExecReason(MigrationProject obj, MethodReturnEventArgs&lt;string&gt; e)
-{
-}
-</ZetboxBase:CodeTemplate>
-    <ZetboxBase:CreatedOn>2010-07-09T09:51:28Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Description>Creates a mapping report</ZetboxBase:Description>
-    <GUI:IsDisplayable>true</GUI:IsDisplayable>
-    <ZetboxBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</ZetboxBase:Module>
-    <ZetboxBase:Name>CreateMappingReport</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>f2b4fe26-9d57-47c7-88b2-b30a38ebbd97</ZetboxBase:ObjectClass>
-  </ZetboxBase:Method>
-  <ZetboxBase:Method ExportGuid="bc1a8035-5383-4b92-b88c-dfc74aa32011">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CodeTemplate>[Invocation]
-public static void UpdateFromSourceSchema(MigrationProject obj)
-{
-}
-
-[Invocation]
-public static void UpdateFromSourceSchemaCanExec(MigrationProject obj, MethodReturnEventArgs&lt;bool&gt; e)
-{
-}
-
-[Invocation]
-public static void UpdateFromSourceSchemaCanExecReason(MigrationProject obj, MethodReturnEventArgs&lt;string&gt; e)
-{
-}
-</ZetboxBase:CodeTemplate>
-    <ZetboxBase:CreatedOn>2010-07-01T08:14:51Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:InvokeOnServer>true</ZetboxBase:InvokeOnServer>
-    <GUI:IsDisplayable>true</GUI:IsDisplayable>
-    <ZetboxBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</ZetboxBase:Module>
-    <ZetboxBase:Name>UpdateFromSourceSchema</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>f2b4fe26-9d57-47c7-88b2-b30a38ebbd97</ZetboxBase:ObjectClass>
-  </ZetboxBase:Method>
-  <ZetboxBase:Method ExportGuid="bfedf0e2-7f3b-499c-9a75-68db3cc00007">
-    <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CodeTemplate>[Invocation]
-public static void CreateProperty(SourceColumn obj)
-{
-}
-
-[Invocation]
-public static void CreatePropertyCanExec(SourceColumn obj, MethodReturnEventArgs&lt;bool&gt; e)
-{
-}
-
-[Invocation]
-public static void CreatePropertyCanExecReason(SourceColumn obj, MethodReturnEventArgs&lt;string&gt; e)
-{
-}
-</ZetboxBase:CodeTemplate>
-    <ZetboxBase:CreatedOn>2010-07-02T10:08:41Z</ZetboxBase:CreatedOn>
-    <GUI:IsDisplayable>true</GUI:IsDisplayable>
-    <ZetboxBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</ZetboxBase:Module>
-    <ZetboxBase:Name>CreateProperty</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>e921bb2f-2cac-46d1-a7f4-120bb1a4afe2</ZetboxBase:ObjectClass>
-  </ZetboxBase:Method>
-  <ZetboxBase:Method ExportGuid="e0aed0b7-6c43-496f-a43c-a95dd853afb1">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CodeTemplate>[Invocation]
-public static void CreateMappingReport(SourceTable obj)
-{
-}
-
-[Invocation]
-public static void CreateMappingReportCanExec(SourceTable obj, MethodReturnEventArgs&lt;bool&gt; e)
-{
-}
-
-[Invocation]
-public static void CreateMappingReportCanExecReason(SourceTable obj, MethodReturnEventArgs&lt;string&gt; e)
-{
-}
-</ZetboxBase:CodeTemplate>
-    <ZetboxBase:CreatedOn>2010-07-09T09:51:48Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Description>Creates a mapping report</ZetboxBase:Description>
-    <GUI:IsDisplayable>true</GUI:IsDisplayable>
-    <ZetboxBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</ZetboxBase:Module>
-    <ZetboxBase:Name>CreateMappingReport</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>7f95aa3e-0150-4073-8b9e-803226872cc2</ZetboxBase:ObjectClass>
-  </ZetboxBase:Method>
-  <ZetboxBase:Method ExportGuid="90a9d0b4-5024-4299-9c3c-b18ed0b02faf">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CodeTemplate>[Invocation]
-public static void CreateObjectClass(SourceTable obj)
-{
-}
-
-[Invocation]
-public static void CreateObjectClassCanExec(SourceTable obj, MethodReturnEventArgs&lt;bool&gt; e)
-{
-}
-
-[Invocation]
-public static void CreateObjectClassCanExecReason(SourceTable obj, MethodReturnEventArgs&lt;string&gt; e)
-{
-}
-</ZetboxBase:CodeTemplate>
-    <ZetboxBase:CreatedOn>2010-07-02T10:03:33Z</ZetboxBase:CreatedOn>
-    <GUI:IsDisplayable>true</GUI:IsDisplayable>
-    <ZetboxBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</ZetboxBase:Module>
-    <ZetboxBase:Name>CreateObjectClass</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>7f95aa3e-0150-4073-8b9e-803226872cc2</ZetboxBase:ObjectClass>
-  </ZetboxBase:Method>
   <ZetboxBase:ClientReadOnlyConstraint ExportGuid="c8ac521e-af96-45bd-834a-7f9cb14fb3e6">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:06.590913Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>04d6b444-4434-4bb8-a10e-c7b482befff9</ZetboxBase:ConstrainedProperty>
@@ -10349,6 +10230,125 @@ public static void CreateObjectClassCanExecReason(SourceTable obj, MethodReturnE
     <ZetboxBase:CreatedOn>2010-07-13T10:32:08Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Property>6bc56e55-16c4-4c94-8c20-12861844e053</ZetboxBase:Property>
   </ZetboxBase:NewGuidDefaultValue>
+  <ZetboxBase:Method ExportGuid="bd495406-0157-46d9-b89d-25a1700dfea8">
+    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void CreateMappingReport(MigrationProject obj)
+{
+}
+
+[Invocation]
+public static void CreateMappingReportCanExec(MigrationProject obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void CreateMappingReportCanExecReason(MigrationProject obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2010-07-09T09:51:28Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Creates a mapping report</ZetboxBase:Description>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <ZetboxBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</ZetboxBase:Module>
+    <ZetboxBase:Name>CreateMappingReport</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>f2b4fe26-9d57-47c7-88b2-b30a38ebbd97</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="bc1a8035-5383-4b92-b88c-dfc74aa32011">
+    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void UpdateFromSourceSchema(MigrationProject obj)
+{
+}
+
+[Invocation]
+public static void UpdateFromSourceSchemaCanExec(MigrationProject obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void UpdateFromSourceSchemaCanExecReason(MigrationProject obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2010-07-01T08:14:51Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:InvokeOnServer>true</ZetboxBase:InvokeOnServer>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <ZetboxBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</ZetboxBase:Module>
+    <ZetboxBase:Name>UpdateFromSourceSchema</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>f2b4fe26-9d57-47c7-88b2-b30a38ebbd97</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="bfedf0e2-7f3b-499c-9a75-68db3cc00007">
+    <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void CreateProperty(SourceColumn obj)
+{
+}
+
+[Invocation]
+public static void CreatePropertyCanExec(SourceColumn obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void CreatePropertyCanExecReason(SourceColumn obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2010-07-02T10:08:41Z</ZetboxBase:CreatedOn>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <ZetboxBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</ZetboxBase:Module>
+    <ZetboxBase:Name>CreateProperty</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>e921bb2f-2cac-46d1-a7f4-120bb1a4afe2</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="e0aed0b7-6c43-496f-a43c-a95dd853afb1">
+    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void CreateMappingReport(SourceTable obj)
+{
+}
+
+[Invocation]
+public static void CreateMappingReportCanExec(SourceTable obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void CreateMappingReportCanExecReason(SourceTable obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2010-07-09T09:51:48Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Creates a mapping report</ZetboxBase:Description>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <ZetboxBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</ZetboxBase:Module>
+    <ZetboxBase:Name>CreateMappingReport</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>7f95aa3e-0150-4073-8b9e-803226872cc2</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="90a9d0b4-5024-4299-9c3c-b18ed0b02faf">
+    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void CreateObjectClass(SourceTable obj)
+{
+}
+
+[Invocation]
+public static void CreateObjectClassCanExec(SourceTable obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void CreateObjectClassCanExecReason(SourceTable obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2010-07-02T10:03:33Z</ZetboxBase:CreatedOn>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <ZetboxBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</ZetboxBase:Module>
+    <ZetboxBase:Name>CreateObjectClass</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>7f95aa3e-0150-4073-8b9e-803226872cc2</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
   <GUI:ViewModelDescriptor ExportGuid="2bec34d6-48ed-4fcc-950c-2eacc2f292db">
     <GUI:DefaultEditorKind>4f6779a0-46f6-48a0-8880-fc491164d04a</GUI:DefaultEditorKind>
     <GUI:Deleted>false</GUI:Deleted>

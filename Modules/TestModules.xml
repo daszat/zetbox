@@ -2890,194 +2890,6 @@ public static void isValid_Projekt(Task obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RoleName>Tasks</ZetboxBase:RoleName>
     <ZetboxBase:Type>3fbb42ca-a084-491d-9135-85ed24f1ef78</ZetboxBase:Type>
   </ZetboxBase:RelationEnd>
-  <ZetboxBase:Method ExportGuid="07b6746b-586f-43fb-ae7e-317cd1ace4bf">
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:07.103536Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CodeTemplate>[Invocation]
-public static void RechnungErstellen(Auftrag obj)
-{
-}
-
-[Invocation]
-public static void RechnungErstellenCanExec(Auftrag obj, MethodReturnEventArgs&lt;bool&gt; e)
-{
-}
-
-[Invocation]
-public static void RechnungErstellenCanExecReason(Auftrag obj, MethodReturnEventArgs&lt;string&gt; e)
-{
-}
-</ZetboxBase:CodeTemplate>
-    <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Description>Testmethode zum Erstellen von Rechnungen mit Word</ZetboxBase:Description>
-    <GUI:IsDisplayable>true</GUI:IsDisplayable>
-    <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
-    <ZetboxBase:Name>RechnungErstellen</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>f6e11d1d-a832-413a-bf1d-5ecf5f7bc79d</ZetboxBase:ObjectClass>
-  </ZetboxBase:Method>
-  <ZetboxBase:Method ExportGuid="447088b9-ea3e-4c72-b1fe-761d430c4003">
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:07.103536Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CodeTemplate>[Invocation]
-public static void TestMethodForParameter(Mitarbeiter obj, MethodReturnEventArgs&lt;DateTime&gt; e, bool TestBool, System.Guid TestCLRObjectParameter, DateTime TestDateTime, double TestDouble, int TestInt, Zetbox.App.Projekte.Auftrag TestObjectParameter, string TestString)
-{
-}
-
-[Invocation]
-public static void TestMethodForParameterCanExec(Mitarbeiter obj, MethodReturnEventArgs&lt;bool&gt; e)
-{
-}
-
-[Invocation]
-public static void TestMethodForParameterCanExecReason(Mitarbeiter obj, MethodReturnEventArgs&lt;string&gt; e)
-{
-}
-</ZetboxBase:CodeTemplate>
-    <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Description />
-    <GUI:IsDisplayable>false</GUI:IsDisplayable>
-    <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
-    <ZetboxBase:Name>TestMethodForParameter</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>77933a20-338a-4961-b751-62ffa0a75c6a</ZetboxBase:ObjectClass>
-  </ZetboxBase:Method>
-  <ZetboxBase:Method ExportGuid="dbb73c2e-e751-4249-b63a-f4417c3177b4">
-    <ZetboxBase:ChangedOn>2012-05-17T12:29:28.307352Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetSummaryReport(Projekt obj, MethodReturnEventArgs&lt;System.Object&gt; e, string title, Zetbox.App.Base.DateTimeRange range)
-{
-}
-
-[Invocation]
-public static void GetSummaryReportCanExec(Projekt obj, MethodReturnEventArgs&lt;bool&gt; e)
-{
-}
-
-[Invocation]
-public static void GetSummaryReportCanExecReason(Projekt obj, MethodReturnEventArgs&lt;string&gt; e)
-{
-}
-</ZetboxBase:CodeTemplate>
-    <ZetboxBase:CreatedOn>2011-10-29T08:29:13.184716Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:InvokeOnServer>false</ZetboxBase:InvokeOnServer>
-    <GUI:IsDisplayable>true</GUI:IsDisplayable>
-    <ZetboxBase:Label>Summary Report</ZetboxBase:Label>
-    <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
-    <ZetboxBase:Name>GetSummaryReport</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>885939e8-82e1-4fdf-b80e-5f612d5131d3</ZetboxBase:ObjectClass>
-  </ZetboxBase:Method>
-  <ZetboxBase:BoolParameter ExportGuid="a5538f74-d4c6-498a-95c0-b526dddf86be">
-    <ZetboxBase:ChangedOn>2011-08-06T08:31:01.310814Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:IsList>false</ZetboxBase:IsList>
-    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
-    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
-    <ZetboxBase:Method>447088b9-ea3e-4c72-b1fe-761d430c4003</ZetboxBase:Method>
-    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
-    <ZetboxBase:Name>TestBool</ZetboxBase:Name>
-  </ZetboxBase:BoolParameter>
-  <ZetboxBase:CLRObjectParameter ExportGuid="5fc58d51-b4f0-4d78-b973-834d3e9e4962">
-    <ZetboxBase:ChangedOn>2013-03-22T13:49:09.665737Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:IsList>false</ZetboxBase:IsList>
-    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
-    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
-    <ZetboxBase:Method>447088b9-ea3e-4c72-b1fe-761d430c4003</ZetboxBase:Method>
-    <ZetboxBase:Parameter_pos>1</ZetboxBase:Parameter_pos>
-    <ZetboxBase:Name>TestCLRObjectParameter</ZetboxBase:Name>
-    <ZetboxBase:TypeRef>System.Guid, mscorlib</ZetboxBase:TypeRef>
-  </ZetboxBase:CLRObjectParameter>
-  <ZetboxBase:DateTimeParameter ExportGuid="9200143f-437e-4c8d-9150-fcdb6c3e4e11">
-    <ZetboxBase:ChangedOn>2011-08-06T08:31:01.319814Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:IsList>false</ZetboxBase:IsList>
-    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
-    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
-    <ZetboxBase:Method>447088b9-ea3e-4c72-b1fe-761d430c4003</ZetboxBase:Method>
-    <ZetboxBase:Parameter_pos>2</ZetboxBase:Parameter_pos>
-    <ZetboxBase:Name>TestDateTime</ZetboxBase:Name>
-  </ZetboxBase:DateTimeParameter>
-  <ZetboxBase:DateTimeParameter ExportGuid="9cf2824c-3570-4230-aa1a-c1146eb3226b">
-    <ZetboxBase:ChangedOn>2011-08-06T08:31:01.322814Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:IsList>false</ZetboxBase:IsList>
-    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
-    <ZetboxBase:IsReturnParameter>true</ZetboxBase:IsReturnParameter>
-    <ZetboxBase:Method>447088b9-ea3e-4c72-b1fe-761d430c4003</ZetboxBase:Method>
-    <ZetboxBase:Parameter_pos>7</ZetboxBase:Parameter_pos>
-    <ZetboxBase:Name>TestDateTimeReturn</ZetboxBase:Name>
-  </ZetboxBase:DateTimeParameter>
-  <ZetboxBase:DoubleParameter ExportGuid="bdb9baf5-8e78-4721-b97a-8d60997cfd01">
-    <ZetboxBase:ChangedOn>2011-08-06T08:31:01.326815Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:IsList>false</ZetboxBase:IsList>
-    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
-    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
-    <ZetboxBase:Method>447088b9-ea3e-4c72-b1fe-761d430c4003</ZetboxBase:Method>
-    <ZetboxBase:Parameter_pos>3</ZetboxBase:Parameter_pos>
-    <ZetboxBase:Name>TestDouble</ZetboxBase:Name>
-  </ZetboxBase:DoubleParameter>
-  <ZetboxBase:IntParameter ExportGuid="6c64e415-e5fd-4146-be0b-7aa9cf3727bd">
-    <ZetboxBase:ChangedOn>2011-08-06T08:31:01.332815Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:IsList>false</ZetboxBase:IsList>
-    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
-    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
-    <ZetboxBase:Method>447088b9-ea3e-4c72-b1fe-761d430c4003</ZetboxBase:Method>
-    <ZetboxBase:Parameter_pos>4</ZetboxBase:Parameter_pos>
-    <ZetboxBase:Name>TestInt</ZetboxBase:Name>
-  </ZetboxBase:IntParameter>
-  <ZetboxBase:ObjectReferenceParameter ExportGuid="1fa8c4d8-83a5-42b9-848d-c113951fe49f">
-    <ZetboxBase:ChangedOn>2011-08-06T08:31:01.337815Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:IsList>false</ZetboxBase:IsList>
-    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
-    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
-    <ZetboxBase:Method>447088b9-ea3e-4c72-b1fe-761d430c4003</ZetboxBase:Method>
-    <ZetboxBase:Parameter_pos>5</ZetboxBase:Parameter_pos>
-    <ZetboxBase:Name>TestObjectParameter</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>f6e11d1d-a832-413a-bf1d-5ecf5f7bc79d</ZetboxBase:ObjectClass>
-  </ZetboxBase:ObjectReferenceParameter>
-  <ZetboxBase:StringParameter ExportGuid="55ec2e74-5d6a-418f-b370-86da5ec89a70">
-    <ZetboxBase:ChangedOn>2011-08-06T08:31:01.340815Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:IsList>false</ZetboxBase:IsList>
-    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
-    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
-    <ZetboxBase:Method>447088b9-ea3e-4c72-b1fe-761d430c4003</ZetboxBase:Method>
-    <ZetboxBase:Parameter_pos>6</ZetboxBase:Parameter_pos>
-    <ZetboxBase:Name>TestString</ZetboxBase:Name>
-  </ZetboxBase:StringParameter>
-  <ZetboxBase:CompoundObjectParameter ExportGuid="29a287ee-0350-4460-b4c3-ced5f7e2aee0">
-    <ZetboxBase:ChangedOn>2011-10-29T11:05:26.956865Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2011-10-29T08:29:13.184716Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:IsList>false</ZetboxBase:IsList>
-    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
-    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
-    <ZetboxBase:Method>dbb73c2e-e751-4249-b63a-f4417c3177b4</ZetboxBase:Method>
-    <ZetboxBase:Parameter_pos>2</ZetboxBase:Parameter_pos>
-    <ZetboxBase:Name>range</ZetboxBase:Name>
-    <ZetboxBase:CompoundObject>0a5419ae-2acf-4c4e-b998-6fcb25dc5650</ZetboxBase:CompoundObject>
-  </ZetboxBase:CompoundObjectParameter>
-  <ZetboxBase:CLRObjectParameter ExportGuid="303a067c-0508-493d-842c-bda4a66114d6">
-    <ZetboxBase:ChangedOn>2013-03-22T13:49:09.665737Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2011-10-29T08:29:13.184716Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:IsList>false</ZetboxBase:IsList>
-    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
-    <ZetboxBase:IsReturnParameter>true</ZetboxBase:IsReturnParameter>
-    <ZetboxBase:Method>dbb73c2e-e751-4249-b63a-f4417c3177b4</ZetboxBase:Method>
-    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
-    <ZetboxBase:Name>retVal</ZetboxBase:Name>
-    <ZetboxBase:TypeRef>System.Object, mscorlib</ZetboxBase:TypeRef>
-  </ZetboxBase:CLRObjectParameter>
-  <ZetboxBase:StringParameter ExportGuid="9ac69d2b-5c95-498d-9b35-b0215cabed8d">
-    <ZetboxBase:ChangedOn>2011-10-29T11:05:26.956865Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2011-10-29T11:05:19.375431Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Description>Title</ZetboxBase:Description>
-    <ZetboxBase:IsList>false</ZetboxBase:IsList>
-    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
-    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
-    <ZetboxBase:Method>dbb73c2e-e751-4249-b63a-f4417c3177b4</ZetboxBase:Method>
-    <ZetboxBase:Parameter_pos>1</ZetboxBase:Parameter_pos>
-    <ZetboxBase:Name>title</ZetboxBase:Name>
-  </ZetboxBase:StringParameter>
   <ZetboxBase:StringRangeConstraint ExportGuid="19a0fe43-535c-4d4b-b038-c036a34a496f">
     <ZetboxBase:ChangedOn>2011-08-06T08:31:06.397105Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>aaffed82-1f4c-4c0f-a52d-3ca4dbdefe94</ZetboxBase:ConstrainedProperty>
@@ -3535,72 +3347,6 @@ public static void GetSummaryReportCanExecReason(Projekt obj, MethodReturnEventA
     <ZetboxBase:CreatedOn>2011-09-14T12:37:05.333827Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Property>1c8414ef-f164-4f7e-a7bf-5fca894aa4f4</ZetboxBase:Property>
   </ZetboxBase:NewGuidDefaultValue>
-  <GUI:ViewModelDescriptor ExportGuid="5c674594-0416-4d5f-9d9f-1388a8df629a">
-    <GUI:Deleted>false</GUI:Deleted>
-    <GUI:Description>ViewModel for Projekte Calendar Workspace</GUI:Description>
-    <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
-    <GUI:ViewModelTypeRef>ERROR</GUI:ViewModelTypeRef>
-  </GUI:ViewModelDescriptor>
-  <GUI:ViewModelDescriptor ExportGuid="b8952a09-fd76-4bd8-a714-7d676ab89126">
-    <GUI:Deleted>false</GUI:Deleted>
-    <GUI:Description>ViewModel for Projekte Calendar Task</GUI:Description>
-    <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
-    <GUI:ViewModelTypeRef>ERROR</GUI:ViewModelTypeRef>
-  </GUI:ViewModelDescriptor>
-  <GUI:ViewModelDescriptor ExportGuid="3643897e-b586-493c-9e23-3f37129cca03">
-    <GUI:Deleted>false</GUI:Deleted>
-    <GUI:Description>ViewModel für Projekte Navigation Action, showing a report</GUI:Description>
-    <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
-    <GUI:ViewModelTypeRef>Zetbox.App.Projekte.Client.ViewModel.Projekte.ReportScreenViewModel, Zetbox.App.Projekte.Client</GUI:ViewModelTypeRef>
-  </GUI:ViewModelDescriptor>
-  <GUI:ViewModelDescriptor ExportGuid="ec83ad5c-a62a-4407-81d4-6f6ab15ef633">
-    <GUI:Deleted>false</GUI:Deleted>
-    <GUI:Description>ViewModel für Projekte Navigation Action, showing a calendar</GUI:Description>
-    <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
-    <GUI:ViewModelTypeRef>Zetbox.App.Projekte.Client.ViewModel.Projekte.ShowCalendarNavigationActionViewModel, Zetbox.App.Projekte.Client</GUI:ViewModelTypeRef>
-  </GUI:ViewModelDescriptor>
-  <GUI:ViewModelDescriptor ExportGuid="4d307461-610a-4403-92b9-bb686dacf276">
-    <GUI:Deleted>false</GUI:Deleted>
-    <GUI:Description>ViewModes for Projekte Tasks</GUI:Description>
-    <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
-    <GUI:ViewModelTypeRef>Zetbox.App.Projekte.Client.ViewModel.Projekte.TaskViewModel, Zetbox.App.Projekte.Client</GUI:ViewModelTypeRef>
-  </GUI:ViewModelDescriptor>
-  <GUI:NavigationAction ExportGuid="812d22c1-9385-4f5e-84d9-973c8285aae2">
-    <GUI:ChangedOn>2011-10-19T14:23:36.583319Z</GUI:ChangedOn>
-    <GUI:CreatedOn>2011-10-19T14:23:36.583319Z</GUI:CreatedOn>
-    <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
-    <GUI:Parent>8bc286d2-899a-4348-9c5a-3d4e90f3ff6d</GUI:Parent>
-    <GUI:Children_pos>200</GUI:Children_pos>
-    <GUI:Title>Kalender</GUI:Title>
-    <GUI:ViewModelDescriptor>ec83ad5c-a62a-4407-81d4-6f6ab15ef633</GUI:ViewModelDescriptor>
-  </GUI:NavigationAction>
-  <GUI:NavigationSearchScreen ExportGuid="a3ab3e25-fffb-47e7-86df-197e8ab45db1">
-    <GUI:ChangedOn>2011-10-19T10:11:36.072348Z</GUI:ChangedOn>
-    <GUI:CreatedOn>2011-10-19T09:06:40.027207Z</GUI:CreatedOn>
-    <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
-    <GUI:Parent>8bc286d2-899a-4348-9c5a-3d4e90f3ff6d</GUI:Parent>
-    <GUI:Children_pos>300</GUI:Children_pos>
-    <GUI:Title>Projekt Suche</GUI:Title>
-    <GUI:AllowAddNew>true</GUI:AllowAddNew>
-    <GUI:Type>885939e8-82e1-4fdf-b80e-5f612d5131d3</GUI:Type>
-    <GUI:ViewMethod>2</GUI:ViewMethod>
-  </GUI:NavigationSearchScreen>
-  <GUI:NavigationScreen ExportGuid="8bc286d2-899a-4348-9c5a-3d4e90f3ff6d">
-    <GUI:ChangedOn>2012-08-08T11:31:29.19753Z</GUI:ChangedOn>
-    <GUI:CreatedOn>2011-10-19T09:06:01.084313Z</GUI:CreatedOn>
-    <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
-    <GUI:Title>Root</GUI:Title>
-    <GUI:ViewModelDescriptor>ebc13c2a-0375-46e6-9fc2-a4ee5afc3568</GUI:ViewModelDescriptor>
-  </GUI:NavigationScreen>
-  <GUI:NavigationScreen ExportGuid="ddaaaa2a-0f6d-42f6-9643-0ad7f111b76a">
-    <GUI:ChangedOn>2012-05-16T08:33:24.059969Z</GUI:ChangedOn>
-    <GUI:CreatedOn>2011-10-19T09:06:40.027207Z</GUI:CreatedOn>
-    <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
-    <GUI:Parent>8bc286d2-899a-4348-9c5a-3d4e90f3ff6d</GUI:Parent>
-    <GUI:Children_pos>100</GUI:Children_pos>
-    <GUI:Title>Statistik</GUI:Title>
-    <GUI:ViewModelDescriptor>3643897e-b586-493c-9e23-3f37129cca03</GUI:ViewModelDescriptor>
-  </GUI:NavigationScreen>
   <ZetboxBase:RoleMembership ExportGuid="1126a629-7fa7-4e5a-9e59-53a703f8e908">
     <ZetboxBase:ChangedOn>2011-08-06T08:31:13.170289Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-01-31T02:03:53Z</ZetboxBase:CreatedOn>
@@ -3644,33 +3390,6 @@ public static void GetSummaryReportCanExecReason(Projekt obj, MethodReturnEventA
     <ZetboxBase:ObjectClass>885939e8-82e1-4fdf-b80e-5f612d5131d3</ZetboxBase:ObjectClass>
     <ZetboxBase:Rights>3</ZetboxBase:Rights>
   </ZetboxBase:RoleMembership>
-  <ZetboxBase:GroupMembership ExportGuid="b4abcf53-5464-4942-a36b-bbc124315df2">
-    <ZetboxBase:ChangedOn>2011-08-06T08:31:12.610257Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-02-03T05:12:00Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Description>Everyone is allowed to create</ZetboxBase:Description>
-    <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
-    <ZetboxBase:ObjectClass>3fbb42ca-a084-491d-9135-85ed24f1ef78</ZetboxBase:ObjectClass>
-    <ZetboxBase:Rights>8</ZetboxBase:Rights>
-    <ZetboxBase:Group>76d43cf2-4ddf-4a3a-9ad6-28cabfdddff1</ZetboxBase:Group>
-  </ZetboxBase:GroupMembership>
-  <ZetboxBase:GroupMembership ExportGuid="b96e9be2-c9dc-494c-8762-b1e0f43b33b2">
-    <ZetboxBase:ChangedOn>2011-08-06T08:31:12.614258Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-02-03T05:13:20Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Description>Everyone is allowed to create</ZetboxBase:Description>
-    <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
-    <ZetboxBase:ObjectClass>f6e11d1d-a832-413a-bf1d-5ecf5f7bc79d</ZetboxBase:ObjectClass>
-    <ZetboxBase:Rights>8</ZetboxBase:Rights>
-    <ZetboxBase:Group>76d43cf2-4ddf-4a3a-9ad6-28cabfdddff1</ZetboxBase:Group>
-  </ZetboxBase:GroupMembership>
-  <ZetboxBase:GroupMembership ExportGuid="ff0e2b1a-0e1e-49a2-90bb-391e880c04f3">
-    <ZetboxBase:ChangedOn>2011-08-06T08:31:12.617258Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-02-03T05:09:26Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Description>Every one is allowed to create</ZetboxBase:Description>
-    <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
-    <ZetboxBase:ObjectClass>885939e8-82e1-4fdf-b80e-5f612d5131d3</ZetboxBase:ObjectClass>
-    <ZetboxBase:Rights>8</ZetboxBase:Rights>
-    <ZetboxBase:Group>76d43cf2-4ddf-4a3a-9ad6-28cabfdddff1</ZetboxBase:Group>
-  </ZetboxBase:GroupMembership>
   <ZetboxBase:RoleMembership_resolves_Relation_RelationEntry ExportGuid="cb6f2ed0-bc2d-417f-a795-b5748d2131e4">
     <ZetboxBase:A>1126a629-7fa7-4e5a-9e59-53a703f8e908</ZetboxBase:A>
     <ZetboxBase:A_pos>1</ZetboxBase:A_pos>
@@ -3737,6 +3456,287 @@ public static void GetSummaryReportCanExecReason(Projekt obj, MethodReturnEventA
     <ZetboxBase:B>c7b3cf10-cdc8-454c-826c-04a0f7e5ef3e</ZetboxBase:B>
     <ZetboxBase:B_pos>1</ZetboxBase:B_pos>
   </ZetboxBase:RoleMembership_resolves_Relation_RelationEntry>
+  <ZetboxBase:Method ExportGuid="07b6746b-586f-43fb-ae7e-317cd1ace4bf">
+    <ZetboxBase:ChangedOn>2012-04-05T09:26:07.103536Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void RechnungErstellen(Auftrag obj)
+{
+}
+
+[Invocation]
+public static void RechnungErstellenCanExec(Auftrag obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void RechnungErstellenCanExecReason(Auftrag obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Testmethode zum Erstellen von Rechnungen mit Word</ZetboxBase:Description>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
+    <ZetboxBase:Name>RechnungErstellen</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>f6e11d1d-a832-413a-bf1d-5ecf5f7bc79d</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="447088b9-ea3e-4c72-b1fe-761d430c4003">
+    <ZetboxBase:ChangedOn>2012-04-05T09:26:07.103536Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void TestMethodForParameter(Mitarbeiter obj, MethodReturnEventArgs&lt;DateTime&gt; e, bool TestBool, System.Guid TestCLRObjectParameter, DateTime TestDateTime, double TestDouble, int TestInt, Zetbox.App.Projekte.Auftrag TestObjectParameter, string TestString)
+{
+}
+
+[Invocation]
+public static void TestMethodForParameterCanExec(Mitarbeiter obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void TestMethodForParameterCanExecReason(Mitarbeiter obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description />
+    <GUI:IsDisplayable>false</GUI:IsDisplayable>
+    <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
+    <ZetboxBase:Name>TestMethodForParameter</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>77933a20-338a-4961-b751-62ffa0a75c6a</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="dbb73c2e-e751-4249-b63a-f4417c3177b4">
+    <ZetboxBase:ChangedOn>2012-05-17T12:29:28.307352Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void GetSummaryReport(Projekt obj, MethodReturnEventArgs&lt;System.Object&gt; e, string title, Zetbox.App.Base.DateTimeRange range)
+{
+}
+
+[Invocation]
+public static void GetSummaryReportCanExec(Projekt obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetSummaryReportCanExecReason(Projekt obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2011-10-29T08:29:13.184716Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:InvokeOnServer>false</ZetboxBase:InvokeOnServer>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <ZetboxBase:Label>Summary Report</ZetboxBase:Label>
+    <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
+    <ZetboxBase:Name>GetSummaryReport</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>885939e8-82e1-4fdf-b80e-5f612d5131d3</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
+  <ZetboxBase:BoolParameter ExportGuid="a5538f74-d4c6-498a-95c0-b526dddf86be">
+    <ZetboxBase:ChangedOn>2011-08-06T08:31:01.310814Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>447088b9-ea3e-4c72-b1fe-761d430c4003</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>TestBool</ZetboxBase:Name>
+  </ZetboxBase:BoolParameter>
+  <ZetboxBase:CLRObjectParameter ExportGuid="5fc58d51-b4f0-4d78-b973-834d3e9e4962">
+    <ZetboxBase:ChangedOn>2013-03-22T13:49:09.665737Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>447088b9-ea3e-4c72-b1fe-761d430c4003</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>1</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>TestCLRObjectParameter</ZetboxBase:Name>
+    <ZetboxBase:TypeRef>System.Guid, mscorlib</ZetboxBase:TypeRef>
+  </ZetboxBase:CLRObjectParameter>
+  <ZetboxBase:DateTimeParameter ExportGuid="9200143f-437e-4c8d-9150-fcdb6c3e4e11">
+    <ZetboxBase:ChangedOn>2011-08-06T08:31:01.319814Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>447088b9-ea3e-4c72-b1fe-761d430c4003</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>2</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>TestDateTime</ZetboxBase:Name>
+  </ZetboxBase:DateTimeParameter>
+  <ZetboxBase:DateTimeParameter ExportGuid="9cf2824c-3570-4230-aa1a-c1146eb3226b">
+    <ZetboxBase:ChangedOn>2011-08-06T08:31:01.322814Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>true</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>447088b9-ea3e-4c72-b1fe-761d430c4003</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>7</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>TestDateTimeReturn</ZetboxBase:Name>
+  </ZetboxBase:DateTimeParameter>
+  <ZetboxBase:DoubleParameter ExportGuid="bdb9baf5-8e78-4721-b97a-8d60997cfd01">
+    <ZetboxBase:ChangedOn>2011-08-06T08:31:01.326815Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>447088b9-ea3e-4c72-b1fe-761d430c4003</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>3</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>TestDouble</ZetboxBase:Name>
+  </ZetboxBase:DoubleParameter>
+  <ZetboxBase:IntParameter ExportGuid="6c64e415-e5fd-4146-be0b-7aa9cf3727bd">
+    <ZetboxBase:ChangedOn>2011-08-06T08:31:01.332815Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>447088b9-ea3e-4c72-b1fe-761d430c4003</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>4</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>TestInt</ZetboxBase:Name>
+  </ZetboxBase:IntParameter>
+  <ZetboxBase:ObjectReferenceParameter ExportGuid="1fa8c4d8-83a5-42b9-848d-c113951fe49f">
+    <ZetboxBase:ChangedOn>2011-08-06T08:31:01.337815Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>447088b9-ea3e-4c72-b1fe-761d430c4003</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>5</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>TestObjectParameter</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>f6e11d1d-a832-413a-bf1d-5ecf5f7bc79d</ZetboxBase:ObjectClass>
+  </ZetboxBase:ObjectReferenceParameter>
+  <ZetboxBase:StringParameter ExportGuid="55ec2e74-5d6a-418f-b370-86da5ec89a70">
+    <ZetboxBase:ChangedOn>2011-08-06T08:31:01.340815Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>447088b9-ea3e-4c72-b1fe-761d430c4003</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>6</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>TestString</ZetboxBase:Name>
+  </ZetboxBase:StringParameter>
+  <ZetboxBase:CompoundObjectParameter ExportGuid="29a287ee-0350-4460-b4c3-ced5f7e2aee0">
+    <ZetboxBase:ChangedOn>2011-10-29T11:05:26.956865Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2011-10-29T08:29:13.184716Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>dbb73c2e-e751-4249-b63a-f4417c3177b4</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>2</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>range</ZetboxBase:Name>
+    <ZetboxBase:CompoundObject>0a5419ae-2acf-4c4e-b998-6fcb25dc5650</ZetboxBase:CompoundObject>
+  </ZetboxBase:CompoundObjectParameter>
+  <ZetboxBase:CLRObjectParameter ExportGuid="303a067c-0508-493d-842c-bda4a66114d6">
+    <ZetboxBase:ChangedOn>2013-03-22T13:49:09.665737Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2011-10-29T08:29:13.184716Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>true</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>dbb73c2e-e751-4249-b63a-f4417c3177b4</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>retVal</ZetboxBase:Name>
+    <ZetboxBase:TypeRef>System.Object, mscorlib</ZetboxBase:TypeRef>
+  </ZetboxBase:CLRObjectParameter>
+  <ZetboxBase:StringParameter ExportGuid="9ac69d2b-5c95-498d-9b35-b0215cabed8d">
+    <ZetboxBase:ChangedOn>2011-10-29T11:05:26.956865Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2011-10-29T11:05:19.375431Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Title</ZetboxBase:Description>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>dbb73c2e-e751-4249-b63a-f4417c3177b4</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>1</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>title</ZetboxBase:Name>
+  </ZetboxBase:StringParameter>
+  <GUI:ViewModelDescriptor ExportGuid="5c674594-0416-4d5f-9d9f-1388a8df629a">
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Description>ViewModel for Projekte Calendar Workspace</GUI:Description>
+    <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
+    <GUI:ViewModelTypeRef>ERROR</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="b8952a09-fd76-4bd8-a714-7d676ab89126">
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Description>ViewModel for Projekte Calendar Task</GUI:Description>
+    <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
+    <GUI:ViewModelTypeRef>ERROR</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="3643897e-b586-493c-9e23-3f37129cca03">
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Description>ViewModel für Projekte Navigation Action, showing a report</GUI:Description>
+    <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
+    <GUI:ViewModelTypeRef>Zetbox.App.Projekte.Client.ViewModel.Projekte.ReportScreenViewModel, Zetbox.App.Projekte.Client</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="ec83ad5c-a62a-4407-81d4-6f6ab15ef633">
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Description>ViewModel für Projekte Navigation Action, showing a calendar</GUI:Description>
+    <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
+    <GUI:ViewModelTypeRef>Zetbox.App.Projekte.Client.ViewModel.Projekte.ShowCalendarNavigationActionViewModel, Zetbox.App.Projekte.Client</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="4d307461-610a-4403-92b9-bb686dacf276">
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Description>ViewModes for Projekte Tasks</GUI:Description>
+    <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
+    <GUI:ViewModelTypeRef>Zetbox.App.Projekte.Client.ViewModel.Projekte.TaskViewModel, Zetbox.App.Projekte.Client</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:NavigationAction ExportGuid="812d22c1-9385-4f5e-84d9-973c8285aae2">
+    <GUI:ChangedOn>2011-10-19T14:23:36.583319Z</GUI:ChangedOn>
+    <GUI:CreatedOn>2011-10-19T14:23:36.583319Z</GUI:CreatedOn>
+    <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
+    <GUI:Parent>8bc286d2-899a-4348-9c5a-3d4e90f3ff6d</GUI:Parent>
+    <GUI:Children_pos>200</GUI:Children_pos>
+    <GUI:Title>Kalender</GUI:Title>
+    <GUI:ViewModelDescriptor>ec83ad5c-a62a-4407-81d4-6f6ab15ef633</GUI:ViewModelDescriptor>
+  </GUI:NavigationAction>
+  <GUI:NavigationSearchScreen ExportGuid="a3ab3e25-fffb-47e7-86df-197e8ab45db1">
+    <GUI:ChangedOn>2011-10-19T10:11:36.072348Z</GUI:ChangedOn>
+    <GUI:CreatedOn>2011-10-19T09:06:40.027207Z</GUI:CreatedOn>
+    <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
+    <GUI:Parent>8bc286d2-899a-4348-9c5a-3d4e90f3ff6d</GUI:Parent>
+    <GUI:Children_pos>300</GUI:Children_pos>
+    <GUI:Title>Projekt Suche</GUI:Title>
+    <GUI:AllowAddNew>true</GUI:AllowAddNew>
+    <GUI:Type>885939e8-82e1-4fdf-b80e-5f612d5131d3</GUI:Type>
+    <GUI:ViewMethod>2</GUI:ViewMethod>
+  </GUI:NavigationSearchScreen>
+  <GUI:NavigationScreen ExportGuid="8bc286d2-899a-4348-9c5a-3d4e90f3ff6d">
+    <GUI:ChangedOn>2012-08-08T11:31:29.19753Z</GUI:ChangedOn>
+    <GUI:CreatedOn>2011-10-19T09:06:01.084313Z</GUI:CreatedOn>
+    <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
+    <GUI:Title>Root</GUI:Title>
+    <GUI:ViewModelDescriptor>ebc13c2a-0375-46e6-9fc2-a4ee5afc3568</GUI:ViewModelDescriptor>
+  </GUI:NavigationScreen>
+  <GUI:NavigationScreen ExportGuid="ddaaaa2a-0f6d-42f6-9643-0ad7f111b76a">
+    <GUI:ChangedOn>2012-05-16T08:33:24.059969Z</GUI:ChangedOn>
+    <GUI:CreatedOn>2011-10-19T09:06:40.027207Z</GUI:CreatedOn>
+    <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
+    <GUI:Parent>8bc286d2-899a-4348-9c5a-3d4e90f3ff6d</GUI:Parent>
+    <GUI:Children_pos>100</GUI:Children_pos>
+    <GUI:Title>Statistik</GUI:Title>
+    <GUI:ViewModelDescriptor>3643897e-b586-493c-9e23-3f37129cca03</GUI:ViewModelDescriptor>
+  </GUI:NavigationScreen>
+  <ZetboxBase:GroupMembership ExportGuid="b4abcf53-5464-4942-a36b-bbc124315df2">
+    <ZetboxBase:ChangedOn>2011-08-06T08:31:12.610257Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-02-03T05:12:00Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Everyone is allowed to create</ZetboxBase:Description>
+    <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
+    <ZetboxBase:ObjectClass>3fbb42ca-a084-491d-9135-85ed24f1ef78</ZetboxBase:ObjectClass>
+    <ZetboxBase:Rights>8</ZetboxBase:Rights>
+    <ZetboxBase:Group>76d43cf2-4ddf-4a3a-9ad6-28cabfdddff1</ZetboxBase:Group>
+  </ZetboxBase:GroupMembership>
+  <ZetboxBase:GroupMembership ExportGuid="b96e9be2-c9dc-494c-8762-b1e0f43b33b2">
+    <ZetboxBase:ChangedOn>2011-08-06T08:31:12.614258Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-02-03T05:13:20Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Everyone is allowed to create</ZetboxBase:Description>
+    <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
+    <ZetboxBase:ObjectClass>f6e11d1d-a832-413a-bf1d-5ecf5f7bc79d</ZetboxBase:ObjectClass>
+    <ZetboxBase:Rights>8</ZetboxBase:Rights>
+    <ZetboxBase:Group>76d43cf2-4ddf-4a3a-9ad6-28cabfdddff1</ZetboxBase:Group>
+  </ZetboxBase:GroupMembership>
+  <ZetboxBase:GroupMembership ExportGuid="ff0e2b1a-0e1e-49a2-90bb-391e880c04f3">
+    <ZetboxBase:ChangedOn>2011-08-06T08:31:12.617258Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-02-03T05:09:26Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Every one is allowed to create</ZetboxBase:Description>
+    <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
+    <ZetboxBase:ObjectClass>885939e8-82e1-4fdf-b80e-5f612d5131d3</ZetboxBase:ObjectClass>
+    <ZetboxBase:Rights>8</ZetboxBase:Rights>
+    <ZetboxBase:Group>76d43cf2-4ddf-4a3a-9ad6-28cabfdddff1</ZetboxBase:Group>
+  </ZetboxBase:GroupMembership>
   <GUI:SinglePropertyFilterConfiguration ExportGuid="2bd32d6c-76c8-442b-aa31-49ce2273e96f">
     <GUI:ChangedOn>2011-12-17T04:26:27.608699Z</GUI:ChangedOn>
     <GUI:CreatedOn>2011-12-17T04:26:27.608699Z</GUI:CreatedOn>
@@ -5544,6 +5544,32 @@ public static void ObjectIsValid(TPHDerivedBObj obj, ObjectIsValidEventArgs e)
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>TPHDerivedBObjs</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
+  <ZetboxBase:EnumerationEntry ExportGuid="8de3cadd-d123-40e5-9851-be6203be4879">
+    <ZetboxBase:ChangedOn>2011-08-06T08:31:08.942048Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>First Test Entry</ZetboxBase:Description>
+    <ZetboxBase:Enumeration>67b48828-e7d2-4432-a942-88e96d74b40a</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>100</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>First</ZetboxBase:Name>
+    <ZetboxBase:Value>0</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="c8403ba5-7e86-4b0f-b9a5-47720cd79b48">
+    <ZetboxBase:ChangedOn>2011-08-06T08:31:08.944048Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Second Test Entry</ZetboxBase:Description>
+    <ZetboxBase:Enumeration>67b48828-e7d2-4432-a942-88e96d74b40a</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>200</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>Second</ZetboxBase:Name>
+    <ZetboxBase:Value>1</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
+  <ZetboxBase:EnumerationEntry ExportGuid="93bac9f3-c4c6-4ed2-9c93-0f4575200333">
+    <ZetboxBase:ChangedOn>2013-02-14T15:59:58.04474Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-02-14T15:59:58.04474Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Enumeration>67b48828-e7d2-4432-a942-88e96d74b40a</ZetboxBase:Enumeration>
+    <ZetboxBase:EnumerationEntries_pos>201</ZetboxBase:EnumerationEntries_pos>
+    <ZetboxBase:Name>Third</ZetboxBase:Name>
+    <ZetboxBase:Value>3</ZetboxBase:Value>
+  </ZetboxBase:EnumerationEntry>
   <ZetboxBase:DataType_implements_Interface_RelationEntry ExportGuid="d1d2b3ef-b90d-469b-8cec-2807e83a1b41">
     <ZetboxBase:A>3a8d152e-b8d1-4439-bfe4-367731218ce9</ZetboxBase:A>
     <ZetboxBase:B>4ae6616a-eca3-47a5-b502-8e3c3913c2f0</ZetboxBase:B>
@@ -10525,451 +10551,6 @@ public static void isValid_BString(TPHDerivedBObj obj, PropertyIsValidEventArgs 
     <ZetboxBase:RoleName>TPHBaseObj</ZetboxBase:RoleName>
     <ZetboxBase:Type>430ba80a-a9e4-4700-a0c3-06b21f2c77fe</ZetboxBase:Type>
   </ZetboxBase:RelationEnd>
-  <ZetboxBase:EnumerationEntry ExportGuid="8de3cadd-d123-40e5-9851-be6203be4879">
-    <ZetboxBase:ChangedOn>2011-08-06T08:31:08.942048Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Description>First Test Entry</ZetboxBase:Description>
-    <ZetboxBase:Enumeration>67b48828-e7d2-4432-a942-88e96d74b40a</ZetboxBase:Enumeration>
-    <ZetboxBase:EnumerationEntries_pos>100</ZetboxBase:EnumerationEntries_pos>
-    <ZetboxBase:Name>First</ZetboxBase:Name>
-    <ZetboxBase:Value>0</ZetboxBase:Value>
-  </ZetboxBase:EnumerationEntry>
-  <ZetboxBase:EnumerationEntry ExportGuid="c8403ba5-7e86-4b0f-b9a5-47720cd79b48">
-    <ZetboxBase:ChangedOn>2011-08-06T08:31:08.944048Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Description>Second Test Entry</ZetboxBase:Description>
-    <ZetboxBase:Enumeration>67b48828-e7d2-4432-a942-88e96d74b40a</ZetboxBase:Enumeration>
-    <ZetboxBase:EnumerationEntries_pos>200</ZetboxBase:EnumerationEntries_pos>
-    <ZetboxBase:Name>Second</ZetboxBase:Name>
-    <ZetboxBase:Value>1</ZetboxBase:Value>
-  </ZetboxBase:EnumerationEntry>
-  <ZetboxBase:EnumerationEntry ExportGuid="93bac9f3-c4c6-4ed2-9c93-0f4575200333">
-    <ZetboxBase:ChangedOn>2013-02-14T15:59:58.04474Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2013-02-14T15:59:58.04474Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Enumeration>67b48828-e7d2-4432-a942-88e96d74b40a</ZetboxBase:Enumeration>
-    <ZetboxBase:EnumerationEntries_pos>201</ZetboxBase:EnumerationEntries_pos>
-    <ZetboxBase:Name>Third</ZetboxBase:Name>
-    <ZetboxBase:Value>3</ZetboxBase:Value>
-  </ZetboxBase:EnumerationEntry>
-  <ZetboxBase:Method ExportGuid="9e198988-498a-4936-8546-0a599b6cc613">
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:07.103536Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CodeTemplate>[Invocation]
-public static void TestMethod(ITestInterface obj, DateTime DateTimeParam)
-{
-}
-
-[Invocation]
-public static void TestMethodCanExec(ITestInterface obj, MethodReturnEventArgs&lt;bool&gt; e)
-{
-}
-
-[Invocation]
-public static void TestMethodCanExecReason(ITestInterface obj, MethodReturnEventArgs&lt;string&gt; e)
-{
-}
-</ZetboxBase:CodeTemplate>
-    <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Description />
-    <GUI:IsDisplayable>true</GUI:IsDisplayable>
-    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
-    <ZetboxBase:Name>TestMethod</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>c8ff9958-dd26-4a92-a049-7fa9d51d8bf2</ZetboxBase:ObjectClass>
-  </ZetboxBase:Method>
-  <ZetboxBase:Method ExportGuid="792be50b-66d7-4299-9c13-29609766f098">
-    <ZetboxBase:CategoryTags>Group</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:07.103536Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CodeTemplate>[Invocation]
-public static void Group1(MethodTest obj)
-{
-}
-
-[Invocation]
-public static void Group1CanExec(MethodTest obj, MethodReturnEventArgs&lt;bool&gt; e)
-{
-}
-
-[Invocation]
-public static void Group1CanExecReason(MethodTest obj, MethodReturnEventArgs&lt;string&gt; e)
-{
-}
-</ZetboxBase:CodeTemplate>
-    <ZetboxBase:CreatedOn>2012-02-16T01:24:00.439311Z</ZetboxBase:CreatedOn>
-    <GUI:Icon>fdbaa130-0be2-400b-9a4d-94d2ccaf00b7</GUI:Icon>
-    <GUI:IsDisplayable>true</GUI:IsDisplayable>
-    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
-    <ZetboxBase:Name>Group1</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>68a664ee-67e0-4ba7-a0dc-148b9dfa32a7</ZetboxBase:ObjectClass>
-  </ZetboxBase:Method>
-  <ZetboxBase:Method ExportGuid="838ddba3-52d5-444b-b29d-4b8105b1be34">
-    <ZetboxBase:CategoryTags>Group</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:07.103536Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CodeTemplate>[Invocation]
-public static void Group2(MethodTest obj)
-{
-}
-
-[Invocation]
-public static void Group2CanExec(MethodTest obj, MethodReturnEventArgs&lt;bool&gt; e)
-{
-}
-
-[Invocation]
-public static void Group2CanExecReason(MethodTest obj, MethodReturnEventArgs&lt;string&gt; e)
-{
-}
-</ZetboxBase:CodeTemplate>
-    <ZetboxBase:CreatedOn>2012-02-16T01:24:00.439311Z</ZetboxBase:CreatedOn>
-    <GUI:Icon>e685b093-3732-4fee-958b-510474f0cedf</GUI:Icon>
-    <GUI:IsDisplayable>true</GUI:IsDisplayable>
-    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
-    <ZetboxBase:Name>Group2</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>68a664ee-67e0-4ba7-a0dc-148b9dfa32a7</ZetboxBase:ObjectClass>
-  </ZetboxBase:Method>
-  <ZetboxBase:Method ExportGuid="cf553e4f-1f54-4b47-a4bd-0cd852d9421f">
-    <ZetboxBase:CategoryTags>Objects</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:07.103536Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CodeTemplate>[Invocation]
-public static void ObjParameter(MethodTest obj, Zetbox.App.Test.MethodTest objParam)
-{
-}
-
-[Invocation]
-public static void ObjParameterCanExec(MethodTest obj, MethodReturnEventArgs&lt;bool&gt; e)
-{
-}
-
-[Invocation]
-public static void ObjParameterCanExecReason(MethodTest obj, MethodReturnEventArgs&lt;string&gt; e)
-{
-}
-</ZetboxBase:CodeTemplate>
-    <ZetboxBase:CreatedOn>2012-02-16T01:24:47.954029Z</ZetboxBase:CreatedOn>
-    <GUI:Icon>5750d096-cf4d-4757-9228-62df7697d758</GUI:Icon>
-    <GUI:IsDisplayable>true</GUI:IsDisplayable>
-    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
-    <ZetboxBase:Name>ObjParameter</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>68a664ee-67e0-4ba7-a0dc-148b9dfa32a7</ZetboxBase:ObjectClass>
-  </ZetboxBase:Method>
-  <ZetboxBase:Method ExportGuid="63be30c4-22cf-4323-8d2a-21f7a8c3a440">
-    <ZetboxBase:CategoryTags>Objects</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:07.103536Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CodeTemplate>[Invocation]
-public static void ObjRet(MethodTest obj, MethodReturnEventArgs&lt;Zetbox.App.Test.MethodTest&gt; e)
-{
-}
-
-[Invocation]
-public static void ObjRetCanExec(MethodTest obj, MethodReturnEventArgs&lt;bool&gt; e)
-{
-}
-
-[Invocation]
-public static void ObjRetCanExecReason(MethodTest obj, MethodReturnEventArgs&lt;string&gt; e)
-{
-}
-</ZetboxBase:CodeTemplate>
-    <ZetboxBase:CreatedOn>2012-02-16T01:25:19.013805Z</ZetboxBase:CreatedOn>
-    <GUI:Icon>267ce6ec-7982-46d3-b1bc-2e1ea6adf815</GUI:Icon>
-    <GUI:IsDisplayable>true</GUI:IsDisplayable>
-    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
-    <ZetboxBase:Name>ObjRet</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>68a664ee-67e0-4ba7-a0dc-148b9dfa32a7</ZetboxBase:ObjectClass>
-  </ZetboxBase:Method>
-  <ZetboxBase:Method ExportGuid="bc1f2b7c-b185-4cda-86ed-dd69e04a8e5e">
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:07.103536Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CodeTemplate>[Invocation]
-public static void Parameterless(MethodTest obj)
-{
-}
-
-[Invocation]
-public static void ParameterlessCanExec(MethodTest obj, MethodReturnEventArgs&lt;bool&gt; e)
-{
-}
-
-[Invocation]
-public static void ParameterlessCanExecReason(MethodTest obj, MethodReturnEventArgs&lt;string&gt; e)
-{
-}
-</ZetboxBase:CodeTemplate>
-    <ZetboxBase:CreatedOn>2012-02-16T01:19:36.630222Z</ZetboxBase:CreatedOn>
-    <GUI:Icon>d2c90a25-c93b-4f52-a358-199ac0d71248</GUI:Icon>
-    <GUI:IsDisplayable>true</GUI:IsDisplayable>
-    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
-    <ZetboxBase:Name>Parameterless</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>68a664ee-67e0-4ba7-a0dc-148b9dfa32a7</ZetboxBase:ObjectClass>
-  </ZetboxBase:Method>
-  <ZetboxBase:Method ExportGuid="6198b2d9-c5d6-4d7d-9e4f-896f7188720c">
-    <ZetboxBase:CategoryTags>Server</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2013-02-06T13:27:59.367581Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CodeTemplate>[Invocation]
-public static void ServerMethod(MethodTest obj)
-{
-}
-
-[Invocation]
-public static void ServerMethodCanExec(MethodTest obj, MethodReturnEventArgs&lt;bool&gt; e)
-{
-}
-
-[Invocation]
-public static void ServerMethodCanExecReason(MethodTest obj, MethodReturnEventArgs&lt;string&gt; e)
-{
-}
-</ZetboxBase:CodeTemplate>
-    <ZetboxBase:CreatedOn>2013-02-06T13:27:59.367581Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Description>Does nothing, on the server</ZetboxBase:Description>
-    <ZetboxBase:InvokeOnServer>true</ZetboxBase:InvokeOnServer>
-    <GUI:IsDisplayable>true</GUI:IsDisplayable>
-    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
-    <ZetboxBase:Name>ServerMethod</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>68a664ee-67e0-4ba7-a0dc-148b9dfa32a7</ZetboxBase:ObjectClass>
-  </ZetboxBase:Method>
-  <ZetboxBase:Method ExportGuid="ee365add-736b-473b-8907-fdeb49d5ea6f">
-    <ZetboxBase:CategoryTags>Server</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2013-01-21T11:28:28.241554Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CodeTemplate>[Invocation]
-public static void ServerObjParameter(MethodTest obj, MethodReturnEventArgs&lt;Zetbox.App.Test.TestObjClass&gt; e, Zetbox.App.Test.TestObjClass input)
-{
-}
-
-[Invocation]
-public static void ServerObjParameterCanExec(MethodTest obj, MethodReturnEventArgs&lt;bool&gt; e)
-{
-}
-
-[Invocation]
-public static void ServerObjParameterCanExecReason(MethodTest obj, MethodReturnEventArgs&lt;string&gt; e)
-{
-}
-</ZetboxBase:CodeTemplate>
-    <ZetboxBase:CreatedOn>2013-01-21T11:28:28.241554Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:InvokeOnServer>true</ZetboxBase:InvokeOnServer>
-    <GUI:IsDisplayable>true</GUI:IsDisplayable>
-    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
-    <ZetboxBase:Name>ServerObjParameter</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>68a664ee-67e0-4ba7-a0dc-148b9dfa32a7</ZetboxBase:ObjectClass>
-  </ZetboxBase:Method>
-  <ZetboxBase:Method ExportGuid="3486bd52-5a89-4e64-9d9f-e50556433a09">
-    <ZetboxBase:CategoryTags>Server</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2013-01-21T11:15:16.69328Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CodeTemplate>[Invocation]
-public static void ServerParameterless(MethodTest obj)
-{
-}
-
-[Invocation]
-public static void ServerParameterlessCanExec(MethodTest obj, MethodReturnEventArgs&lt;bool&gt; e)
-{
-}
-
-[Invocation]
-public static void ServerParameterlessCanExecReason(MethodTest obj, MethodReturnEventArgs&lt;string&gt; e)
-{
-}
-</ZetboxBase:CodeTemplate>
-    <ZetboxBase:CreatedOn>2013-01-21T11:15:16.69328Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:InvokeOnServer>true</ZetboxBase:InvokeOnServer>
-    <GUI:IsDisplayable>true</GUI:IsDisplayable>
-    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
-    <ZetboxBase:Name>ServerParameterless</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>68a664ee-67e0-4ba7-a0dc-148b9dfa32a7</ZetboxBase:ObjectClass>
-  </ZetboxBase:Method>
-  <ZetboxBase:Method ExportGuid="7901a41d-6ee0-4283-86fe-f19982464f73">
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:07.103536Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CodeTemplate>[Invocation]
-public static void StringParameter(MethodTest obj, string str)
-{
-}
-
-[Invocation]
-public static void StringParameterCanExec(MethodTest obj, MethodReturnEventArgs&lt;bool&gt; e)
-{
-}
-
-[Invocation]
-public static void StringParameterCanExecReason(MethodTest obj, MethodReturnEventArgs&lt;string&gt; e)
-{
-}
-</ZetboxBase:CodeTemplate>
-    <ZetboxBase:CreatedOn>2012-02-16T01:20:13.159311Z</ZetboxBase:CreatedOn>
-    <GUI:Icon>da02708c-58e1-4219-8a55-06202c724171</GUI:Icon>
-    <GUI:IsDisplayable>true</GUI:IsDisplayable>
-    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
-    <ZetboxBase:Name>StringParameter</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>68a664ee-67e0-4ba7-a0dc-148b9dfa32a7</ZetboxBase:ObjectClass>
-  </ZetboxBase:Method>
-  <ZetboxBase:Method ExportGuid="37951886-6ea4-4adc-a59f-b78a3d981180">
-    <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:07.103536Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CodeTemplate>[Invocation]
-public static void Summary(MethodTest obj)
-{
-}
-
-[Invocation]
-public static void SummaryCanExec(MethodTest obj, MethodReturnEventArgs&lt;bool&gt; e)
-{
-}
-
-[Invocation]
-public static void SummaryCanExecReason(MethodTest obj, MethodReturnEventArgs&lt;string&gt; e)
-{
-}
-</ZetboxBase:CodeTemplate>
-    <ZetboxBase:CreatedOn>2012-02-16T01:24:00.439311Z</ZetboxBase:CreatedOn>
-    <GUI:Icon>d7d4767f-0b2d-468a-8931-866ce07828cb</GUI:Icon>
-    <GUI:IsDisplayable>true</GUI:IsDisplayable>
-    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
-    <ZetboxBase:Name>Summary</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>68a664ee-67e0-4ba7-a0dc-148b9dfa32a7</ZetboxBase:ObjectClass>
-  </ZetboxBase:Method>
-  <ZetboxBase:Method ExportGuid="6234860c-9ebc-4fea-8480-5aa2ad648adb">
-    <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-09-26T07:45:30.971203Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetNext(RecurrenceRuleTester obj, MethodReturnEventArgs&lt;DateTime&gt; e, DateTime? dt)
-{
-}
-
-[Invocation]
-public static void GetNextCanExec(RecurrenceRuleTester obj, MethodReturnEventArgs&lt;bool&gt; e)
-{
-}
-
-[Invocation]
-public static void GetNextCanExecReason(RecurrenceRuleTester obj, MethodReturnEventArgs&lt;string&gt; e)
-{
-}
-</ZetboxBase:CodeTemplate>
-    <ZetboxBase:CreatedOn>2012-09-26T07:45:30.971203Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:InvokeOnServer>false</ZetboxBase:InvokeOnServer>
-    <GUI:IsDisplayable>true</GUI:IsDisplayable>
-    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
-    <ZetboxBase:Name>GetNext</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>b6c60adc-19f0-4169-8b78-53d7eaa549f7</ZetboxBase:ObjectClass>
-  </ZetboxBase:Method>
-  <ZetboxBase:Method ExportGuid="4d28b129-0786-4add-bddd-ff026c107f5e">
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:07.103536Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CodeTemplate>[Invocation]
-public static void TestMethod(TestObjClass obj, DateTime DateTimeParamForTestMethod)
-{
-}
-
-[Invocation]
-public static void TestMethodCanExec(TestObjClass obj, MethodReturnEventArgs&lt;bool&gt; e)
-{
-}
-
-[Invocation]
-public static void TestMethodCanExecReason(TestObjClass obj, MethodReturnEventArgs&lt;string&gt; e)
-{
-}
-</ZetboxBase:CodeTemplate>
-    <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Description>testmethod</ZetboxBase:Description>
-    <GUI:IsDisplayable>true</GUI:IsDisplayable>
-    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
-    <ZetboxBase:Name>TestMethod</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>19f38f05-e88e-44c6-bfdf-d502b3632028</ZetboxBase:ObjectClass>
-  </ZetboxBase:Method>
-  <ZetboxBase:DateTimeParameter ExportGuid="ddd0bd0d-5e07-44fb-a9ce-e67fa232459c">
-    <ZetboxBase:ChangedOn>2011-08-06T08:31:01.386818Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:IsList>false</ZetboxBase:IsList>
-    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
-    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
-    <ZetboxBase:Method>9e198988-498a-4936-8546-0a599b6cc613</ZetboxBase:Method>
-    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
-    <ZetboxBase:Name>DateTimeParam</ZetboxBase:Name>
-  </ZetboxBase:DateTimeParameter>
-  <ZetboxBase:ObjectReferenceParameter ExportGuid="0df61f75-69ed-4163-9c08-848b485082a4">
-    <ZetboxBase:ChangedOn>2012-02-16T01:38:54.480272Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2012-02-16T01:24:47.954029Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:IsList>false</ZetboxBase:IsList>
-    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
-    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
-    <ZetboxBase:Label>Object parameter</ZetboxBase:Label>
-    <ZetboxBase:Method>cf553e4f-1f54-4b47-a4bd-0cd852d9421f</ZetboxBase:Method>
-    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
-    <ZetboxBase:Name>objParam</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>68a664ee-67e0-4ba7-a0dc-148b9dfa32a7</ZetboxBase:ObjectClass>
-  </ZetboxBase:ObjectReferenceParameter>
-  <ZetboxBase:ObjectReferenceParameter ExportGuid="7d7c2946-9ac4-4e8d-b48b-6de05fcc332b">
-    <ZetboxBase:ChangedOn>2012-02-16T01:25:19.013805Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2012-02-16T01:25:19.013805Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:IsList>false</ZetboxBase:IsList>
-    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
-    <ZetboxBase:IsReturnParameter>true</ZetboxBase:IsReturnParameter>
-    <ZetboxBase:Method>63be30c4-22cf-4323-8d2a-21f7a8c3a440</ZetboxBase:Method>
-    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
-    <ZetboxBase:Name>retVal</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>68a664ee-67e0-4ba7-a0dc-148b9dfa32a7</ZetboxBase:ObjectClass>
-  </ZetboxBase:ObjectReferenceParameter>
-  <ZetboxBase:ObjectReferenceParameter ExportGuid="44160789-5fad-4faa-9ea1-1f157299b715">
-    <ZetboxBase:ChangedOn>2013-01-21T11:28:28.241554Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2013-01-21T11:28:28.241554Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:IsList>false</ZetboxBase:IsList>
-    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
-    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
-    <ZetboxBase:Method>ee365add-736b-473b-8907-fdeb49d5ea6f</ZetboxBase:Method>
-    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
-    <ZetboxBase:Name>input</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>19f38f05-e88e-44c6-bfdf-d502b3632028</ZetboxBase:ObjectClass>
-  </ZetboxBase:ObjectReferenceParameter>
-  <ZetboxBase:ObjectReferenceParameter ExportGuid="f54b1c11-8002-412f-9697-e647ad2a93b9">
-    <ZetboxBase:ChangedOn>2013-01-21T11:28:28.241554Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2013-01-21T11:28:28.241554Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:IsList>false</ZetboxBase:IsList>
-    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
-    <ZetboxBase:IsReturnParameter>true</ZetboxBase:IsReturnParameter>
-    <ZetboxBase:Method>ee365add-736b-473b-8907-fdeb49d5ea6f</ZetboxBase:Method>
-    <ZetboxBase:Parameter_pos>1</ZetboxBase:Parameter_pos>
-    <ZetboxBase:Name>retVal</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>19f38f05-e88e-44c6-bfdf-d502b3632028</ZetboxBase:ObjectClass>
-  </ZetboxBase:ObjectReferenceParameter>
-  <ZetboxBase:StringParameter ExportGuid="bd10a4c2-9544-4b68-b5cc-1b777bf436ea">
-    <ZetboxBase:ChangedOn>2012-02-16T01:20:13.159311Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2012-02-16T01:20:13.159311Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:IsList>false</ZetboxBase:IsList>
-    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
-    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
-    <ZetboxBase:Method>7901a41d-6ee0-4283-86fe-f19982464f73</ZetboxBase:Method>
-    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
-    <ZetboxBase:Name>str</ZetboxBase:Name>
-  </ZetboxBase:StringParameter>
-  <ZetboxBase:DateTimeParameter ExportGuid="9f62f945-85d9-48a3-a8ea-53503197b444">
-    <ZetboxBase:ChangedOn>2012-09-26T07:45:30.971203Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2012-09-26T07:45:30.971203Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:IsList>false</ZetboxBase:IsList>
-    <ZetboxBase:IsNullable>true</ZetboxBase:IsNullable>
-    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
-    <ZetboxBase:Method>6234860c-9ebc-4fea-8480-5aa2ad648adb</ZetboxBase:Method>
-    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
-    <ZetboxBase:Name>dt</ZetboxBase:Name>
-    <ZetboxBase:DateTimeStyle>1</ZetboxBase:DateTimeStyle>
-  </ZetboxBase:DateTimeParameter>
-  <ZetboxBase:DateTimeParameter ExportGuid="e34696e6-2c3a-4e0f-bdf8-3dc756d4d6b9">
-    <ZetboxBase:ChangedOn>2012-09-26T08:26:33.867073Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2012-09-26T08:26:33.867073Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:IsList>false</ZetboxBase:IsList>
-    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
-    <ZetboxBase:IsReturnParameter>true</ZetboxBase:IsReturnParameter>
-    <ZetboxBase:Method>6234860c-9ebc-4fea-8480-5aa2ad648adb</ZetboxBase:Method>
-    <ZetboxBase:Parameter_pos>1</ZetboxBase:Parameter_pos>
-    <ZetboxBase:Name>retval</ZetboxBase:Name>
-    <ZetboxBase:DateTimeStyle>1</ZetboxBase:DateTimeStyle>
-  </ZetboxBase:DateTimeParameter>
-  <ZetboxBase:DateTimeParameter ExportGuid="1e80ab18-5034-4835-a688-e4ea028a7116">
-    <ZetboxBase:ChangedOn>2011-08-06T08:31:01.397819Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:IsList>false</ZetboxBase:IsList>
-    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
-    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
-    <ZetboxBase:Method>4d28b129-0786-4add-bddd-ff026c107f5e</ZetboxBase:Method>
-    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
-    <ZetboxBase:Name>DateTimeParamForTestMethod</ZetboxBase:Name>
-  </ZetboxBase:DateTimeParameter>
   <ZetboxBase:NotNullableConstraint ExportGuid="65532982-f057-4d59-869a-6d9017d20f98">
     <ZetboxBase:ChangedOn>2011-08-06T08:31:06.876929Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>311cb474-be7d-4e6b-b803-379e6523720c</ZetboxBase:ConstrainedProperty>
@@ -11514,6 +11095,454 @@ public static void TestMethodCanExecReason(TestObjClass obj, MethodReturnEventAr
     <ZetboxBase:CreatedOn>2013-01-02T14:02:40.368367Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Property>73f5e7ac-1dfc-4149-9995-8e3b04a95614</ZetboxBase:Property>
   </ZetboxBase:NewGuidDefaultValue>
+  <ZetboxBase:RoleMembership ExportGuid="5321160a-9207-4b84-8644-5d6820221ca7">
+    <ZetboxBase:ChangedOn>2012-06-29T04:54:29.745566Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2012-06-29T04:54:29.745566Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:ObjectClass>09dfa3cf-4a15-48ed-b76a-c330ac7379e0</ZetboxBase:ObjectClass>
+    <ZetboxBase:Rights>15</ZetboxBase:Rights>
+  </ZetboxBase:RoleMembership>
+  <ZetboxBase:RoleMembership_resolves_Relation_RelationEntry ExportGuid="7b456c1e-f781-4b82-ab8e-fbb2b3cfb6b8">
+    <ZetboxBase:A>5321160a-9207-4b84-8644-5d6820221ca7</ZetboxBase:A>
+    <ZetboxBase:A_pos>2147483647</ZetboxBase:A_pos>
+    <ZetboxBase:B>e20bcbaa-6660-4a03-bc46-0690b7988c67</ZetboxBase:B>
+    <ZetboxBase:B_pos>0</ZetboxBase:B_pos>
+  </ZetboxBase:RoleMembership_resolves_Relation_RelationEntry>
+  <ZetboxBase:Sequence ExportGuid="57a01b4f-940d-4089-b239-fa5a46dc7d00">
+    <ZetboxBase:ChangedOn>2012-04-20T12:18:21.445954Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-11-25T22:51:32Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>for testing a continuous sequence</ZetboxBase:Description>
+    <ZetboxBase:IsContinuous>true</ZetboxBase:IsContinuous>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>TestContinuousSequence</ZetboxBase:Name>
+  </ZetboxBase:Sequence>
+  <ZetboxBase:Sequence ExportGuid="5c3d9012-a36d-4910-9e7b-1bf7d8f7d09d">
+    <ZetboxBase:ChangedOn>2012-04-20T12:18:06.978127Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-11-25T22:50:57Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>for testing a simple sequence</ZetboxBase:Description>
+    <ZetboxBase:IsContinuous>false</ZetboxBase:IsContinuous>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>TestSequence</ZetboxBase:Name>
+  </ZetboxBase:Sequence>
+  <ZetboxBase:Method ExportGuid="9e198988-498a-4936-8546-0a599b6cc613">
+    <ZetboxBase:ChangedOn>2012-04-05T09:26:07.103536Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void TestMethod(ITestInterface obj, DateTime DateTimeParam)
+{
+}
+
+[Invocation]
+public static void TestMethodCanExec(ITestInterface obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void TestMethodCanExecReason(ITestInterface obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description />
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>TestMethod</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>c8ff9958-dd26-4a92-a049-7fa9d51d8bf2</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="792be50b-66d7-4299-9c13-29609766f098">
+    <ZetboxBase:CategoryTags>Group</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-04-05T09:26:07.103536Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void Group1(MethodTest obj)
+{
+}
+
+[Invocation]
+public static void Group1CanExec(MethodTest obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void Group1CanExecReason(MethodTest obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2012-02-16T01:24:00.439311Z</ZetboxBase:CreatedOn>
+    <GUI:Icon>fdbaa130-0be2-400b-9a4d-94d2ccaf00b7</GUI:Icon>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>Group1</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>68a664ee-67e0-4ba7-a0dc-148b9dfa32a7</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="838ddba3-52d5-444b-b29d-4b8105b1be34">
+    <ZetboxBase:CategoryTags>Group</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-04-05T09:26:07.103536Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void Group2(MethodTest obj)
+{
+}
+
+[Invocation]
+public static void Group2CanExec(MethodTest obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void Group2CanExecReason(MethodTest obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2012-02-16T01:24:00.439311Z</ZetboxBase:CreatedOn>
+    <GUI:Icon>e685b093-3732-4fee-958b-510474f0cedf</GUI:Icon>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>Group2</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>68a664ee-67e0-4ba7-a0dc-148b9dfa32a7</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="cf553e4f-1f54-4b47-a4bd-0cd852d9421f">
+    <ZetboxBase:CategoryTags>Objects</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-04-05T09:26:07.103536Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void ObjParameter(MethodTest obj, Zetbox.App.Test.MethodTest objParam)
+{
+}
+
+[Invocation]
+public static void ObjParameterCanExec(MethodTest obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void ObjParameterCanExecReason(MethodTest obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2012-02-16T01:24:47.954029Z</ZetboxBase:CreatedOn>
+    <GUI:Icon>5750d096-cf4d-4757-9228-62df7697d758</GUI:Icon>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>ObjParameter</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>68a664ee-67e0-4ba7-a0dc-148b9dfa32a7</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="63be30c4-22cf-4323-8d2a-21f7a8c3a440">
+    <ZetboxBase:CategoryTags>Objects</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-04-05T09:26:07.103536Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void ObjRet(MethodTest obj, MethodReturnEventArgs&lt;Zetbox.App.Test.MethodTest&gt; e)
+{
+}
+
+[Invocation]
+public static void ObjRetCanExec(MethodTest obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void ObjRetCanExecReason(MethodTest obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2012-02-16T01:25:19.013805Z</ZetboxBase:CreatedOn>
+    <GUI:Icon>267ce6ec-7982-46d3-b1bc-2e1ea6adf815</GUI:Icon>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>ObjRet</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>68a664ee-67e0-4ba7-a0dc-148b9dfa32a7</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="bc1f2b7c-b185-4cda-86ed-dd69e04a8e5e">
+    <ZetboxBase:ChangedOn>2012-04-05T09:26:07.103536Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void Parameterless(MethodTest obj)
+{
+}
+
+[Invocation]
+public static void ParameterlessCanExec(MethodTest obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void ParameterlessCanExecReason(MethodTest obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2012-02-16T01:19:36.630222Z</ZetboxBase:CreatedOn>
+    <GUI:Icon>d2c90a25-c93b-4f52-a358-199ac0d71248</GUI:Icon>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>Parameterless</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>68a664ee-67e0-4ba7-a0dc-148b9dfa32a7</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="6198b2d9-c5d6-4d7d-9e4f-896f7188720c">
+    <ZetboxBase:CategoryTags>Server</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2013-02-06T13:27:59.367581Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void ServerMethod(MethodTest obj)
+{
+}
+
+[Invocation]
+public static void ServerMethodCanExec(MethodTest obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void ServerMethodCanExecReason(MethodTest obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-02-06T13:27:59.367581Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Does nothing, on the server</ZetboxBase:Description>
+    <ZetboxBase:InvokeOnServer>true</ZetboxBase:InvokeOnServer>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>ServerMethod</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>68a664ee-67e0-4ba7-a0dc-148b9dfa32a7</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="ee365add-736b-473b-8907-fdeb49d5ea6f">
+    <ZetboxBase:CategoryTags>Server</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2013-01-21T11:28:28.241554Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void ServerObjParameter(MethodTest obj, MethodReturnEventArgs&lt;Zetbox.App.Test.TestObjClass&gt; e, Zetbox.App.Test.TestObjClass input)
+{
+}
+
+[Invocation]
+public static void ServerObjParameterCanExec(MethodTest obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void ServerObjParameterCanExecReason(MethodTest obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-01-21T11:28:28.241554Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:InvokeOnServer>true</ZetboxBase:InvokeOnServer>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>ServerObjParameter</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>68a664ee-67e0-4ba7-a0dc-148b9dfa32a7</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="3486bd52-5a89-4e64-9d9f-e50556433a09">
+    <ZetboxBase:CategoryTags>Server</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2013-01-21T11:15:16.69328Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void ServerParameterless(MethodTest obj)
+{
+}
+
+[Invocation]
+public static void ServerParameterlessCanExec(MethodTest obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void ServerParameterlessCanExecReason(MethodTest obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-01-21T11:15:16.69328Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:InvokeOnServer>true</ZetboxBase:InvokeOnServer>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>ServerParameterless</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>68a664ee-67e0-4ba7-a0dc-148b9dfa32a7</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="7901a41d-6ee0-4283-86fe-f19982464f73">
+    <ZetboxBase:ChangedOn>2012-04-05T09:26:07.103536Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void StringParameter(MethodTest obj, string str)
+{
+}
+
+[Invocation]
+public static void StringParameterCanExec(MethodTest obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void StringParameterCanExecReason(MethodTest obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2012-02-16T01:20:13.159311Z</ZetboxBase:CreatedOn>
+    <GUI:Icon>da02708c-58e1-4219-8a55-06202c724171</GUI:Icon>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>StringParameter</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>68a664ee-67e0-4ba7-a0dc-148b9dfa32a7</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="37951886-6ea4-4adc-a59f-b78a3d981180">
+    <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-04-05T09:26:07.103536Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void Summary(MethodTest obj)
+{
+}
+
+[Invocation]
+public static void SummaryCanExec(MethodTest obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void SummaryCanExecReason(MethodTest obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2012-02-16T01:24:00.439311Z</ZetboxBase:CreatedOn>
+    <GUI:Icon>d7d4767f-0b2d-468a-8931-866ce07828cb</GUI:Icon>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>Summary</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>68a664ee-67e0-4ba7-a0dc-148b9dfa32a7</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="6234860c-9ebc-4fea-8480-5aa2ad648adb">
+    <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2012-09-26T07:45:30.971203Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void GetNext(RecurrenceRuleTester obj, MethodReturnEventArgs&lt;DateTime&gt; e, DateTime? dt)
+{
+}
+
+[Invocation]
+public static void GetNextCanExec(RecurrenceRuleTester obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetNextCanExecReason(RecurrenceRuleTester obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2012-09-26T07:45:30.971203Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:InvokeOnServer>false</ZetboxBase:InvokeOnServer>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>GetNext</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>b6c60adc-19f0-4169-8b78-53d7eaa549f7</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="4d28b129-0786-4add-bddd-ff026c107f5e">
+    <ZetboxBase:ChangedOn>2012-04-05T09:26:07.103536Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void TestMethod(TestObjClass obj, DateTime DateTimeParamForTestMethod)
+{
+}
+
+[Invocation]
+public static void TestMethodCanExec(TestObjClass obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void TestMethodCanExecReason(TestObjClass obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>testmethod</ZetboxBase:Description>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>TestMethod</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>19f38f05-e88e-44c6-bfdf-d502b3632028</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
+  <ZetboxBase:DateTimeParameter ExportGuid="ddd0bd0d-5e07-44fb-a9ce-e67fa232459c">
+    <ZetboxBase:ChangedOn>2011-08-06T08:31:01.386818Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>9e198988-498a-4936-8546-0a599b6cc613</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>DateTimeParam</ZetboxBase:Name>
+  </ZetboxBase:DateTimeParameter>
+  <ZetboxBase:ObjectReferenceParameter ExportGuid="0df61f75-69ed-4163-9c08-848b485082a4">
+    <ZetboxBase:ChangedOn>2012-02-16T01:38:54.480272Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2012-02-16T01:24:47.954029Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Label>Object parameter</ZetboxBase:Label>
+    <ZetboxBase:Method>cf553e4f-1f54-4b47-a4bd-0cd852d9421f</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>objParam</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>68a664ee-67e0-4ba7-a0dc-148b9dfa32a7</ZetboxBase:ObjectClass>
+  </ZetboxBase:ObjectReferenceParameter>
+  <ZetboxBase:ObjectReferenceParameter ExportGuid="7d7c2946-9ac4-4e8d-b48b-6de05fcc332b">
+    <ZetboxBase:ChangedOn>2012-02-16T01:25:19.013805Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2012-02-16T01:25:19.013805Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>true</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>63be30c4-22cf-4323-8d2a-21f7a8c3a440</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>retVal</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>68a664ee-67e0-4ba7-a0dc-148b9dfa32a7</ZetboxBase:ObjectClass>
+  </ZetboxBase:ObjectReferenceParameter>
+  <ZetboxBase:ObjectReferenceParameter ExportGuid="44160789-5fad-4faa-9ea1-1f157299b715">
+    <ZetboxBase:ChangedOn>2013-01-21T11:28:28.241554Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-01-21T11:28:28.241554Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>ee365add-736b-473b-8907-fdeb49d5ea6f</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>input</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>19f38f05-e88e-44c6-bfdf-d502b3632028</ZetboxBase:ObjectClass>
+  </ZetboxBase:ObjectReferenceParameter>
+  <ZetboxBase:ObjectReferenceParameter ExportGuid="f54b1c11-8002-412f-9697-e647ad2a93b9">
+    <ZetboxBase:ChangedOn>2013-01-21T11:28:28.241554Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-01-21T11:28:28.241554Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>true</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>ee365add-736b-473b-8907-fdeb49d5ea6f</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>1</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>retVal</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>19f38f05-e88e-44c6-bfdf-d502b3632028</ZetboxBase:ObjectClass>
+  </ZetboxBase:ObjectReferenceParameter>
+  <ZetboxBase:StringParameter ExportGuid="bd10a4c2-9544-4b68-b5cc-1b777bf436ea">
+    <ZetboxBase:ChangedOn>2012-02-16T01:20:13.159311Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2012-02-16T01:20:13.159311Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>7901a41d-6ee0-4283-86fe-f19982464f73</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>str</ZetboxBase:Name>
+  </ZetboxBase:StringParameter>
+  <ZetboxBase:DateTimeParameter ExportGuid="9f62f945-85d9-48a3-a8ea-53503197b444">
+    <ZetboxBase:ChangedOn>2012-09-26T07:45:30.971203Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2012-09-26T07:45:30.971203Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>true</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>6234860c-9ebc-4fea-8480-5aa2ad648adb</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>dt</ZetboxBase:Name>
+    <ZetboxBase:DateTimeStyle>1</ZetboxBase:DateTimeStyle>
+  </ZetboxBase:DateTimeParameter>
+  <ZetboxBase:DateTimeParameter ExportGuid="e34696e6-2c3a-4e0f-bdf8-3dc756d4d6b9">
+    <ZetboxBase:ChangedOn>2012-09-26T08:26:33.867073Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2012-09-26T08:26:33.867073Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>true</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>6234860c-9ebc-4fea-8480-5aa2ad648adb</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>1</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>retval</ZetboxBase:Name>
+    <ZetboxBase:DateTimeStyle>1</ZetboxBase:DateTimeStyle>
+  </ZetboxBase:DateTimeParameter>
+  <ZetboxBase:DateTimeParameter ExportGuid="1e80ab18-5034-4835-a688-e4ea028a7116">
+    <ZetboxBase:ChangedOn>2011-08-06T08:31:01.397819Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>4d28b129-0786-4add-bddd-ff026c107f5e</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>DateTimeParamForTestMethod</ZetboxBase:Name>
+  </ZetboxBase:DateTimeParameter>
   <GUI:ViewModelDescriptor ExportGuid="998ed5d2-852d-49e5-82fb-723cd2c034b5">
     <GUI:DefaultEditorKind>aa843e93-7f18-45c5-8608-4470aba9f18a</GUI:DefaultEditorKind>
     <GUI:Deleted>false</GUI:Deleted>
@@ -11735,13 +11764,6 @@ public static void TestMethodCanExecReason(TestObjClass obj, MethodReturnEventAr
     <ZetboxBase:Rights>8</ZetboxBase:Rights>
     <ZetboxBase:Group>76d43cf2-4ddf-4a3a-9ad6-28cabfdddff1</ZetboxBase:Group>
   </ZetboxBase:GroupMembership>
-  <ZetboxBase:RoleMembership ExportGuid="5321160a-9207-4b84-8644-5d6820221ca7">
-    <ZetboxBase:ChangedOn>2012-06-29T04:54:29.745566Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2012-06-29T04:54:29.745566Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
-    <ZetboxBase:ObjectClass>09dfa3cf-4a15-48ed-b76a-c330ac7379e0</ZetboxBase:ObjectClass>
-    <ZetboxBase:Rights>15</ZetboxBase:Rights>
-  </ZetboxBase:RoleMembership>
   <ZetboxBase:GroupMembership ExportGuid="8307104a-8283-4945-9b21-0d5e80ee4156">
     <ZetboxBase:ChangedOn>2013-03-18T14:51:04.219701Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2013-03-18T14:51:04.219701Z</ZetboxBase:CreatedOn>
@@ -11759,12 +11781,6 @@ public static void TestMethodCanExecReason(TestObjClass obj, MethodReturnEventAr
     <ZetboxBase:Rights>8</ZetboxBase:Rights>
     <ZetboxBase:Group>76d43cf2-4ddf-4a3a-9ad6-28cabfdddff1</ZetboxBase:Group>
   </ZetboxBase:GroupMembership>
-  <ZetboxBase:RoleMembership_resolves_Relation_RelationEntry ExportGuid="7b456c1e-f781-4b82-ab8e-fbb2b3cfb6b8">
-    <ZetboxBase:A>5321160a-9207-4b84-8644-5d6820221ca7</ZetboxBase:A>
-    <ZetboxBase:A_pos>2147483647</ZetboxBase:A_pos>
-    <ZetboxBase:B>e20bcbaa-6660-4a03-bc46-0690b7988c67</ZetboxBase:B>
-    <ZetboxBase:B_pos>0</ZetboxBase:B_pos>
-  </ZetboxBase:RoleMembership_resolves_Relation_RelationEntry>
   <GUI:ControlKind ExportGuid="8455ee76-f3c5-4d73-8d3f-d79200b95976">
     <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
     <GUI:Name>Zetbox.App.Test.NextEventsTestNavScreenDisplay</GUI:Name>
@@ -11838,20 +11854,4 @@ public static void TestMethodCanExecReason(TestObjClass obj, MethodReturnEventAr
     <GUI:A>02a7d534-9325-48e5-bbc2-b61420afd940</GUI:A>
     <GUI:B>cf553e4f-1f54-4b47-a4bd-0cd852d9421f</GUI:B>
   </GUI:ObjectReferenceProperty_shows_Method_RelationEntry>
-  <ZetboxBase:Sequence ExportGuid="57a01b4f-940d-4089-b239-fa5a46dc7d00">
-    <ZetboxBase:ChangedOn>2012-04-20T12:18:21.445954Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-11-25T22:51:32Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Description>for testing a continuous sequence</ZetboxBase:Description>
-    <ZetboxBase:IsContinuous>true</ZetboxBase:IsContinuous>
-    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
-    <ZetboxBase:Name>TestContinuousSequence</ZetboxBase:Name>
-  </ZetboxBase:Sequence>
-  <ZetboxBase:Sequence ExportGuid="5c3d9012-a36d-4910-9e7b-1bf7d8f7d09d">
-    <ZetboxBase:ChangedOn>2012-04-20T12:18:06.978127Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-11-25T22:50:57Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Description>for testing a simple sequence</ZetboxBase:Description>
-    <ZetboxBase:IsContinuous>false</ZetboxBase:IsContinuous>
-    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
-    <ZetboxBase:Name>TestSequence</ZetboxBase:Name>
-  </ZetboxBase:Sequence>
 </ZetboxPackaging>
