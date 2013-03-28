@@ -114,7 +114,7 @@ namespace Zetbox.Server
             using (Log.InfoTraceMethodCallFormat("Publish", "file=[{0}],namespaces=[{1}]", file, String.Join(";", namespaces ?? new string[] { })))
             using (var subContainer = container.BeginLifetimeScope())
             {
-                Exporter.PublishFromContext(subContainer.Resolve<IZetboxServerContext>(), file, namespaces);
+                Exporter.PublishFromContext(subContainer.Resolve<IZetboxServerContext>(), file, Exporter.Filter.Meta, namespaces);
             }
         }
 
@@ -197,7 +197,7 @@ namespace Zetbox.Server
                 // the schema
                 using (MemoryStream ms = new MemoryStream())
                 {
-                    Exporter.PublishFromContext(dbctx, ms, new string[] { "*" }, "in-memory buffer");
+                    Exporter.PublishFromContext(dbctx, ms, Exporter.Filter.Schema, new string[] { "*" }, "in-memory buffer");
                     ms.Seek(0, SeekOrigin.Begin);
                     Importer.LoadFromXml(ctx, ms, "in-memory buffer");
                 }

@@ -34,23 +34,29 @@ namespace Zetbox.App.Packaging
     {
         private readonly static log4net.ILog Log = Logging.Exporter;
 
-        public static void PublishFromContext(IZetboxContext ctx, string filename, string[] ownerModules)
+        public enum Filter
+        {
+            Schema,
+            Meta
+        }
+
+        public static void PublishFromContext(IZetboxContext ctx, string filename, Filter filter, string[] ownerModules)
         {
             using (var s = new FileSystemPackageProvider(filename, BasePackageProvider.Modes.Write))
             {
-                PublishFromContext(ctx, s, ownerModules);
+                PublishFromContext(ctx, s, filter, ownerModules);
             }
         }
 
-        public static void PublishFromContext(IZetboxContext ctx, Stream stream, string[] ownerModules, string streamDescription)
+        public static void PublishFromContext(IZetboxContext ctx, Stream stream, Filter filter, string[] ownerModules, string streamDescription)
         {
             using (var s = new StreamPackageProvider(stream, BasePackageProvider.Modes.Write, streamDescription))
             {
-                PublishFromContext(ctx, s, ownerModules);
+                PublishFromContext(ctx, s, filter, ownerModules);
             }
         }
 
-        public static void PublishFromContext(IZetboxContext ctx, IPackageProvider s, string[] ownerModules)
+        public static void PublishFromContext(IZetboxContext ctx, IPackageProvider s, Filter filter, string[] ownerModules)
         {
             using (Log.DebugTraceMethodCall("PublishFromContext"))
             {
@@ -68,7 +74,9 @@ namespace Zetbox.App.Packaging
                 foreach (var module in moduleList)
                 {
                     Log.DebugFormat("Publishing objects for module {0}", module.Name);
-                    var objects = PackagingHelper.GetMetaObjects(ctx, module);
+                    var objects = filter == Filter.Meta
+                        ? PackagingHelper.GetMetaObjects(ctx, module)
+                        : PackagingHelper.GetSchemaObjects(ctx, module);
 
                     Stopwatch watch = new Stopwatch();
                     watch.Start();

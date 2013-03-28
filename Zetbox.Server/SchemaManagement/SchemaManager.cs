@@ -212,8 +212,8 @@ namespace Zetbox.Server.SchemaManagement
 
             // Only TPT or TPH base columns can have default constraints
             // And only member of object classes - no CP objects!
-            var defaultPossibleValue = objClass != null && (objClass.GetTableMapping() == TableMapping.TPT || objClass.BaseObjectClass == null); 
-            if(!defaultPossibleValue) return null;
+            var defaultPossibleValue = objClass != null && (objClass.GetTableMapping() == TableMapping.TPT || objClass.BaseObjectClass == null);
+            if (!defaultPossibleValue) return null;
 
             var defValue = prop.DefaultValue;
             if (defValue is Zetbox.App.Base.NewGuidDefaultValue)
@@ -273,7 +273,7 @@ namespace Zetbox.Server.SchemaManagement
             using (Logging.Log.DebugTraceMethodCall("SaveSchema"))
             using (var ms = new MemoryStream())
             {
-                Exporter.PublishFromContext(schema, ms, new string[] { "*" }, "in-memory buffer for SaveSchema");
+                Exporter.PublishFromContext(schema, ms, Exporter.Filter.Schema, new string[] { "*" }, "in-memory buffer for SaveSchema");
                 string schemaStr = Encoding.UTF8.GetString(ms.GetBuffer()).TrimEnd((char)0); // Trim possible C++/Database/whatever ending 0 char
                 db.SaveSchema(schemaStr);
             }
