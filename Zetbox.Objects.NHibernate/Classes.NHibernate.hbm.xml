@@ -1316,6 +1316,10 @@
                   column="`ControlTypeRef`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
+        <property name="Deleted" 
+                  column="`Deleted`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
                   optimistic-lock="false"/>
@@ -1376,6 +1380,10 @@
 <!-- ObjectReferenceProperty -->
         <many-to-one name="DefaultGridCellPreEditorKind" column="`fk_DefaultGridCellKind`" class="Zetbox.App.GUI.ControlKindNHibernateImpl+ControlKindProxy, Zetbox.Objects.NHibernateImpl" />
 
+        <!-- ValueTypeProperty isValue -->
+        <property name="Deleted" 
+                  column="`Deleted`" 
+                  optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
         <property name="Description" 
                   column="`Description`" 

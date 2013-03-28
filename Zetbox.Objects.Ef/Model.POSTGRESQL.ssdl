@@ -2804,6 +2804,7 @@
     <Property Name="fk_Module" Type="int4" />
     <Property Name="fk_ControlKind" Type="int4" />
     <Property Name="ControlTypeRef" Type="varchar" MaxLength="2000" Nullable="true" />
+    <Property Name="Deleted" Type="bool" Nullable="false" />
     <Property Name="ExportGuid" Type="uuid" Nullable="false" />
     <Property Name="Toolkit" Type="int4" Nullable="false" />
   </EntityType>
@@ -2820,6 +2821,7 @@
     <Property Name="fk_DefaultGridDisplayKind" Type="int4" />
     <Property Name="fk_DefaultGridCellKind" Type="int4" />
     <Property Name="fk_Module" Type="int4" />
+    <Property Name="Deleted" Type="bool" Nullable="false" />
     <Property Name="Description" Type="varchar" MaxLength="4000" Nullable="false" />
     <Property Name="ExportGuid" Type="uuid" Nullable="false" />
     <Property Name="ViewModelTypeRef" Type="varchar" MaxLength="2000" Nullable="true" />

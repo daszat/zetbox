@@ -47,27 +47,16 @@ namespace Zetbox.App.Base
             {
                 var ctx = assembly.Context;
 
-                // pre-load context
-                var oldTypes = ctx.GetQuery<TypeRef>()
-                    .WithEagerLoading()
-                    .Where(tr => tr.Assembly.ID == assembly.ID)
-                    .ToLookup(tr => tr.FullName);
-
                 try
                 {
                     SR.Assembly srAssembly = ReflectAssembly(assembly);
-
-                    var newTypes = LoadAndCreateTypes(srAssembly, ctx);
-                    MarkOldTypesAsDeleted(ctx, oldTypes, newTypes);
-                    UpdateTypeParents(newTypes);
-
+                  
                     CreateViewModelDescriptors(ctx, srAssembly);
                     CreateViewDescriptors(ctx, srAssembly);
 
                     var newDescriptors = new List<IDataObject>();
                     newDescriptors.AddRange(ctx.AttachedObjects.OfType<ViewModelDescriptor>().Where(d => d.ObjectState == DataObjectState.New).Cast<IDataObject>().ToList());
                     newDescriptors.AddRange(ctx.AttachedObjects.OfType<ViewDescriptor>().Where(d => d.ObjectState == DataObjectState.New).Cast<IDataObject>().ToList());
-                    newDescriptors.AddRange(ctx.AttachedObjects.OfType<Assembly>().Where(d => d.ObjectState == DataObjectState.New).Cast<IDataObject>().ToList());
 
                     if (newDescriptors.Count > 0)
                     {
@@ -162,60 +151,6 @@ namespace Zetbox.App.Base
                         }
                     }
                 }
-            }
-        }
-
-        private static void UpdateTypeParents(Dictionary<int, TypeRef> newTypes)
-        {
-            using (Logging.Log.InfoTraceMethodCallFormat("UpdateTypeParents", "Updating parents"))
-            {
-                // update parent infos
-                foreach (var tr in newTypes.Values)
-                {
-                    tr.UpdateParent();
-                }
-            }
-        }
-
-        private static void MarkOldTypesAsDeleted(IZetboxContext ctx, ILookup<string, TypeRef> oldTypes, Dictionary<int, TypeRef> newTypes)
-        {
-            using (Logging.Log.InfoTraceMethodCallFormat("MarkOldTypesAsDeleted", "Updating refs"))
-            {
-                // Delete unused Refs
-                foreach (var tr in oldTypes.SelectMany(g => g))
-                {
-                    var type = tr.AsType(false);
-                    if (type == null)
-                    {
-                        Logging.Log.Warn("Should delete " + tr.FullName);
-                        tr.Deleted = true;
-                    }
-                    else if (!type.IsGenericType)
-                    {
-                        if (!newTypes.ContainsKey(tr.ID))
-                        {
-                            Logging.Log.Warn("Should delete " + tr.FullName);
-                            tr.Deleted = true;
-                        }
-                    }
-                    else
-                    {
-                        tr.Deleted = null;
-                    }
-                }
-            }
-        }
-
-        private static Dictionary<int, TypeRef> LoadAndCreateTypes(SR.Assembly srAssembly, IZetboxContext ctx)
-        {
-            using (Logging.Log.InfoTraceMethodCall("Loading new types"))
-            {
-                var newTypes = srAssembly
-                    .GetExportedTypes()
-                    .Where(t => !t.IsGenericTypeDefinition)
-                    .Select(t => t.ToRef(ctx))
-                    .ToDictionary(tr => tr.ID);
-                return newTypes;
             }
         }
 

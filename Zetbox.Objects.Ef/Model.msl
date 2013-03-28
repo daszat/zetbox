@@ -1799,6 +1799,7 @@
 	    <MappingFragment StoreEntitySet="ViewDescriptor">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="ControlTypeRef" ColumnName="ControlTypeRef" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
           <ScalarProperty Name="ToolkitImpl" ColumnName="Toolkit" />
 	    </MappingFragment>
@@ -1808,6 +1809,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.ViewModelDescriptorEfImpl)">
 	    <MappingFragment StoreEntitySet="ViewModelDescriptor">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
           <ScalarProperty Name="ViewModelTypeRef" ColumnName="ViewModelTypeRef" />

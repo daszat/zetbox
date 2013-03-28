@@ -2798,6 +2798,10 @@ namespace Zetbox {
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("180968cf-8705-433f-9346-e726c8552737"); }
                                 }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Deleted
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("4b256764-6a40-47cb-a222-242a36e06457"); }
+                                }
                                 public static TypedGuid<global::Zetbox.App.Base.Property> ExportGuid
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("94140a56-9fed-4d65-8c2c-cb8e658dff96"); }
@@ -2847,6 +2851,10 @@ namespace Zetbox {
                                 public static TypedGuid<global::Zetbox.App.Base.Property> DefaultGridCellPreEditorKind
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("6c744476-35e0-4cef-a221-f02abc81566c"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Deleted
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("9c3935a1-2d3f-4d43-b8af-638e323b64c6"); }
                                 }
                                 public static TypedGuid<global::Zetbox.App.Base.Property> Description
                                 {

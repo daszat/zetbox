@@ -316,6 +316,88 @@ namespace Zetbox.App.GUI
         public static event PropertyIsValidHandler<Zetbox.App.GUI.ViewDescriptor> OnControlTypeRef_IsValid;
 
         /// <summary>
+        /// Indicates that the referenced control type is deleted. Descriptors with this flag set require action to finally delete them and handle their users.
+        /// </summary>
+        // value type property
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public bool Deleted
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _Deleted;
+                if (!_isDeletedSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("4b256764-6a40-47cb-a222-242a36e06457"));
+                    if (__p != null) {
+                        _isDeletedSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this._Deleted = (bool)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'ViewDescriptor.Deleted'");
+                    }
+                }
+                if (OnDeleted_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<bool>(__result);
+                    OnDeleted_Getter(this, __e);
+                    __result = _Deleted = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isDeletedSet = true;
+                if (_Deleted != value)
+                {
+                    var __oldValue = _Deleted;
+                    var __newValue = value;
+                    if (OnDeleted_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnDeleted_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("Deleted", __oldValue, __newValue);
+                    _Deleted = __newValue;
+                    NotifyPropertyChanged("Deleted", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnDeleted_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnDeleted_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("Deleted");
+                }
+            }
+        }
+        private bool _Deleted_store;
+        private bool _Deleted {
+            get { return _Deleted_store; }
+            set {
+                ReportEfPropertyChanging("Deleted");
+                _Deleted_store = value;
+                ReportEfPropertyChanged("Deleted");
+            }
+        }
+        private bool _isDeletedSet = false;
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Zetbox.App.GUI.ViewDescriptor, bool> OnDeleted_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.GUI.ViewDescriptor, bool> OnDeleted_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.GUI.ViewDescriptor, bool> OnDeleted_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.GUI.ViewDescriptor> OnDeleted_IsValid;
+
+        /// <summary>
         /// Export Guid
         /// </summary>
         // value type property
@@ -692,6 +774,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewDescriptor> On
             var me = (ViewDescriptor)this;
 
             me.ControlTypeRef = other.ControlTypeRef;
+            me.Deleted = other.Deleted;
             me.ExportGuid = other.ExportGuid;
             me.Toolkit = other.Toolkit;
             this._fk_ControlKind = otherImpl._fk_ControlKind;
@@ -714,6 +797,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewDescriptor> On
                 case "ControlKind":
                 case "ControlRef":
                 case "ControlTypeRef":
+                case "Deleted":
                 case "ExportGuid":
                 case "Module":
                 case "Toolkit":
@@ -807,6 +891,15 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewDescriptor> On
                         obj => obj.ControlTypeRef,
                         (obj, val) => obj.ControlTypeRef = val,
 						obj => OnControlTypeRef_IsValid), 
+                    // else
+                    new PropertyDescriptorEfImpl<ViewDescriptor, bool>(
+                        lazyCtx,
+                        new Guid("4b256764-6a40-47cb-a222-242a36e06457"),
+                        "Deleted",
+                        null,
+                        obj => obj.Deleted,
+                        (obj, val) => obj.Deleted = val,
+						obj => OnDeleted_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<ViewDescriptor, Guid>(
                         lazyCtx,
@@ -994,6 +1087,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewDescriptor> On
                 auxObjects.Add(ControlRef);
             }
             binStream.Write(this._ControlTypeRef);
+            binStream.Write(this._isDeletedSet);
+            if (this._isDeletedSet) {
+                binStream.Write(this._Deleted);
+            }
             binStream.Write(this._isExportGuidSet);
             if (this._isExportGuidSet) {
                 binStream.Write(this._ExportGuid);
@@ -1029,6 +1126,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewDescriptor> On
             binStream.Read(out this._fk_ControlKind);
             binStream.Read(out this._fk_ControlRef);
             this._ControlTypeRef = binStream.ReadString();
+            this._isDeletedSet = binStream.ReadBoolean();
+            if (this._isDeletedSet) {
+                this._Deleted = binStream.ReadBoolean();
+            }
             this._isExportGuidSet = binStream.ReadBoolean();
             if (this._isExportGuidSet) {
                 this._ExportGuid = binStream.ReadGuid();
@@ -1053,6 +1154,8 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewDescriptor> On
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(ControlKind != null ? ControlKind.ExportGuid : (Guid?)null, xml, "ControlKind", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(ControlRef != null ? ControlRef.ExportGuid : (Guid?)null, xml, "ControlRef", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._ControlTypeRef, xml, "ControlTypeRef", "Zetbox.App.GUI");
+            System.Diagnostics.Debug.Assert(this._isDeletedSet, "Exported objects need to have all default values evaluated");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._Deleted, xml, "Deleted", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ExportCollectionEntries(this.SupportedViewModelRefsImpl.OrderBy(i => i.Value), xml, "SupportedViewModelRefs", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream((int?)_Toolkit, xml, "Toolkit", "Zetbox.App.GUI");
@@ -1071,6 +1174,11 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewDescriptor> On
                 break;
             case "Zetbox.App.GUI|ControlTypeRef":
                 this._ControlTypeRef = XmlStreamer.ReadString(xml);
+                break;
+            case "Zetbox.App.GUI|Deleted":
+                // Import must have default value set
+                this._Deleted = XmlStreamer.ReadBoolean(xml);
+                this._isDeletedSet = true;
                 break;
             case "Zetbox.App.GUI|ExportGuid":
                 // Import must have default value set

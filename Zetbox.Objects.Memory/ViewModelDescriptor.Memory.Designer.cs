@@ -618,6 +618,77 @@ namespace Zetbox.App.GUI
         public static event PropertyIsValidHandler<Zetbox.App.GUI.ViewModelDescriptor> OnDefaultGridCellPreEditorKind_IsValid;
 
         /// <summary>
+        /// Indicates that the referenced viewmodel type is deleted. Descriptors with this flag set require action to finally delete them and handle their users.
+        /// </summary>
+        // value type property
+        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+        public bool Deleted
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _Deleted;
+                if (!_isDeletedSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("9c3935a1-2d3f-4d43-b8af-638e323b64c6"));
+                    if (__p != null) {
+                        _isDeletedSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this._Deleted = (bool)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'ViewModelDescriptor.Deleted'");
+                    }
+                }
+                if (OnDeleted_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<bool>(__result);
+                    OnDeleted_Getter(this, __e);
+                    __result = _Deleted = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isDeletedSet = true;
+                if (_Deleted != value)
+                {
+                    var __oldValue = _Deleted;
+                    var __newValue = value;
+                    if (OnDeleted_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnDeleted_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("Deleted", __oldValue, __newValue);
+                    _Deleted = __newValue;
+                    NotifyPropertyChanged("Deleted", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnDeleted_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnDeleted_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("Deleted");
+                }
+            }
+        }
+        private bool _Deleted;
+        private bool _isDeletedSet = false;
+        // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Zetbox.App.GUI.ViewModelDescriptor, bool> OnDeleted_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.GUI.ViewModelDescriptor, bool> OnDeleted_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.GUI.ViewModelDescriptor, bool> OnDeleted_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.GUI.ViewModelDescriptor> OnDeleted_IsValid;
+
+        /// <summary>
         /// describe this ViewModel
         /// </summary>
         // value type property
@@ -1150,6 +1221,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
             var otherImpl = (ViewModelDescriptorMemoryImpl)obj;
             var me = (ViewModelDescriptor)this;
 
+            me.Deleted = other.Deleted;
             me.Description = other.Description;
             me.ExportGuid = other.ExportGuid;
             me.ViewModelTypeRef = other.ViewModelTypeRef;
@@ -1252,6 +1324,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
                 case "DefaultGridCellDisplayKind":
                 case "DefaultGridCellEditorKind":
                 case "DefaultGridCellPreEditorKind":
+                case "Deleted":
                 case "Description":
                 case "ExportGuid":
                 case "Module":
@@ -1423,6 +1496,15 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
                         (obj, val) => obj.DefaultGridCellPreEditorKind = val,
 						obj => OnDefaultGridCellPreEditorKind_IsValid), 
                     // else
+                    new PropertyDescriptorMemoryImpl<ViewModelDescriptor, bool>(
+                        lazyCtx,
+                        new Guid("9c3935a1-2d3f-4d43-b8af-638e323b64c6"),
+                        "Deleted",
+                        null,
+                        obj => obj.Deleted,
+                        (obj, val) => obj.Deleted = val,
+						obj => OnDeleted_IsValid), 
+                    // else
                     new PropertyDescriptorMemoryImpl<ViewModelDescriptor, string>(
                         lazyCtx,
                         new Guid("93e25648-50f9-40d8-8753-e5dadab68e1d"),
@@ -1584,6 +1666,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
             binStream.Write(DefaultGridCellDisplayKind != null ? DefaultGridCellDisplayKind.ID : (int?)null);
             binStream.Write(DefaultGridCellEditorKind != null ? DefaultGridCellEditorKind.ID : (int?)null);
             binStream.Write(DefaultGridCellPreEditorKind != null ? DefaultGridCellPreEditorKind.ID : (int?)null);
+            binStream.Write(this._isDeletedSet);
+            if (this._isDeletedSet) {
+                binStream.Write(this._Deleted);
+            }
             binStream.Write(this._Description);
             binStream.Write(this._isExportGuidSet);
             if (this._isExportGuidSet) {
@@ -1605,6 +1691,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
             this._fk_DefaultGridCellDisplayKind = binStream.ReadNullableInt32();
             this._fk_DefaultGridCellEditorKind = binStream.ReadNullableInt32();
             this._fk_DefaultGridCellPreEditorKind = binStream.ReadNullableInt32();
+            this._isDeletedSet = binStream.ReadBoolean();
+            if (this._isDeletedSet) {
+                this._Deleted = binStream.ReadBoolean();
+            }
             this._Description = binStream.ReadString();
             this._isExportGuidSet = binStream.ReadBoolean();
             if (this._isExportGuidSet) {
@@ -1631,6 +1721,8 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(DefaultGridCellDisplayKind != null ? DefaultGridCellDisplayKind.ExportGuid : (Guid?)null, xml, "DefaultGridCellDisplayKind", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(DefaultGridCellEditorKind != null ? DefaultGridCellEditorKind.ExportGuid : (Guid?)null, xml, "DefaultGridCellEditorKind", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(DefaultGridCellPreEditorKind != null ? DefaultGridCellPreEditorKind.ExportGuid : (Guid?)null, xml, "DefaultGridCellPreEditorKind", "Zetbox.App.GUI");
+            System.Diagnostics.Debug.Assert(this._isDeletedSet, "Exported objects need to have all default values evaluated");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._Deleted, xml, "Deleted", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._Description, xml, "Description", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(ViewModelRef != null ? ViewModelRef.ExportGuid : (Guid?)null, xml, "ViewModelRef", "Zetbox.App.GUI");
@@ -1656,6 +1748,11 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
                 break;
             case "Zetbox.App.GUI|DefaultGridCellPreEditorKind":
                 this._fk_guid_DefaultGridCellPreEditorKind = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Zetbox.App.GUI|Deleted":
+                // Import must have default value set
+                this._Deleted = XmlStreamer.ReadBoolean(xml);
+                this._isDeletedSet = true;
                 break;
             case "Zetbox.App.GUI|Description":
                 this._Description = XmlStreamer.ReadString(xml);

@@ -2906,6 +2906,7 @@
                         FromRole="View"
                         ToRole="ControlRef" />
     <Property Name="ControlTypeRef" Type="String" Nullable="true" MaxLength="2000"  />
+    <Property Name="Deleted" Type="Boolean" Nullable="false"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
     <NavigationProperty Name="ModuleImpl"
                         Relationship="Model.FK_ViewDescriptor_has_Module"
@@ -2946,6 +2947,7 @@
                         Relationship="Model.FK_ViewModelDescriptor_displayedInGridBy_DefaultGridCellKind"
                         FromRole="ViewModelDescriptor"
                         ToRole="DefaultGridCellKind" />
+    <Property Name="Deleted" Type="Boolean" Nullable="false"  />
     <Property Name="Description" Type="String" Nullable="false" MaxLength="4000"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
     <NavigationProperty Name="ModuleImpl"

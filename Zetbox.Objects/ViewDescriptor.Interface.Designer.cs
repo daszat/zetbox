@@ -42,6 +42,15 @@ namespace Zetbox.App.GUI
         }
 
         /// <summary>
+        /// Indicates that the referenced control type is deleted. Descriptors with this flag set require action to finally delete them and handle their users.
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("4b256764-6a40-47cb-a222-242a36e06457")]
+        bool Deleted {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// A View supports one or more ViewModels.
         /// </summary>
 

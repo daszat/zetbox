@@ -60,6 +60,15 @@ namespace Zetbox.App.GUI
         }
 
         /// <summary>
+        /// Indicates that the referenced viewmodel type is deleted. Descriptors with this flag set require action to finally delete them and handle their users.
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("9c3935a1-2d3f-4d43-b8af-638e323b64c6")]
+        bool Deleted {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// describe this ViewModel
         /// </summary>
         [Zetbox.API.DefinitionGuid("93e25648-50f9-40d8-8753-e5dadab68e1d")]
