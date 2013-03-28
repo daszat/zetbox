@@ -752,7 +752,7 @@ namespace Zetbox.App.Base
     /*
     Relation: FK_ServiceDescriptor_describes_a_TypeRef
     A: ZeroOrMore ServiceDescriptor as ServiceDescriptor
-    B: One TypeRef as TypeRef
+    B: ZeroOrOne TypeRef as TypeRef
     Preferred Storage: MergeIntoA
     */
         // object reference property

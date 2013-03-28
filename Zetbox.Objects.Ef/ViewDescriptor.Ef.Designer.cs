@@ -149,7 +149,7 @@ namespace Zetbox.App.GUI
     /*
     Relation: FK_View_has_ControlRef
     A: ZeroOrMore ViewDescriptor as View
-    B: One TypeRef as ControlRef
+    B: ZeroOrOne TypeRef as ControlRef
     Preferred Storage: MergeIntoA
     */
         // object reference property

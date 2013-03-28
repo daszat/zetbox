@@ -46,7 +46,7 @@ namespace Zetbox.App.Base
     /*
     Relation: FK_ClrObjectParameter_isOf_Type
     A: ZeroOrMore CLRObjectParameter as ClrObjectParameter
-    B: One TypeRef as Type
+    B: ZeroOrOne TypeRef as Type
     Preferred Storage: MergeIntoA
     */
         // object reference property

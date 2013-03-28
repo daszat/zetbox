@@ -948,7 +948,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
     /*
     Relation: FK_Descriptor_has_ViewModelRef
     A: ZeroOrMore ViewModelDescriptor as Descriptor
-    B: One TypeRef as ViewModelRef
+    B: ZeroOrOne TypeRef as ViewModelRef
     Preferred Storage: MergeIntoA
     */
         // object reference property

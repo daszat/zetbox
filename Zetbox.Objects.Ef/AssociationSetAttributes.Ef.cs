@@ -598,7 +598,7 @@ using Zetbox.DalProvider.Ef;
 	/*
     Relation: FK_ClrObjectParameter_isOf_Type
     A: ZeroOrMore CLRObjectParameter as ClrObjectParameter
-    B: One TypeRef as Type
+    B: ZeroOrOne TypeRef as Type
     Preferred Storage: MergeIntoA
 	*/
 
@@ -886,7 +886,7 @@ using Zetbox.DalProvider.Ef;
 	/*
     Relation: FK_Descriptor_has_ViewModelRef
     A: ZeroOrMore ViewModelDescriptor as Descriptor
-    B: One TypeRef as ViewModelRef
+    B: ZeroOrOne TypeRef as ViewModelRef
     Preferred Storage: MergeIntoA
 	*/
 
@@ -2515,7 +2515,7 @@ using Zetbox.DalProvider.Ef;
 	/*
     Relation: FK_ServiceDescriptor_describes_a_TypeRef
     A: ZeroOrMore ServiceDescriptor as ServiceDescriptor
-    B: One TypeRef as TypeRef
+    B: ZeroOrOne TypeRef as TypeRef
     Preferred Storage: MergeIntoA
 	*/
 
@@ -3085,7 +3085,7 @@ using Zetbox.DalProvider.Ef;
 	/*
     Relation: FK_View_has_ControlRef
     A: ZeroOrMore ViewDescriptor as View
-    B: One TypeRef as ControlRef
+    B: ZeroOrOne TypeRef as ControlRef
     Preferred Storage: MergeIntoA
 	*/
 
