@@ -143,12 +143,6 @@ namespace Zetbox.App.Extensions
                     return supportedViewModels.Contains(t);
                 })).FirstOrDefault();
 
-                // Try the most common
-                if (match == null)
-                {
-                    match = allTypes.SelectMany(t => candidates.Where(c => c.SupportedViewModelRefs.Count == 0)).FirstOrDefault();
-                }
-
                 // Log a warning if nothing found
                 if (match == null)
                 {
