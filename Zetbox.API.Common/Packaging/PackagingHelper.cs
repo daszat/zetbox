@@ -47,6 +47,9 @@ namespace Zetbox.App.Packaging
             AddMetaObjects(result, () => ctx.GetQuery<DataType>().Where(i => i.Module.ID == moduleID)
                 .ToList().OrderBy(i => i.Name).ThenBy(i => i.ExportGuid));
 
+            AddMetaObjects(result, () => ctx.GetQuery<EnumerationEntry>().Where(i => i.Enumeration.Module.ID == moduleID)
+                .ToList().OrderBy(i => i.Enumeration.Name).ThenBy(i => i.Name).ThenBy(i => i.ExportGuid));
+
             // export only relation entry ending on a "local" class. Since we do not have proper inter-module dependencies in place, we cannot support pushing interface implementations across modules.
             AddMetaObjects(result, () => ctx.Internals().GetPersistenceObjectQuery<DataType_implements_Interface_RelationEntry>()
                 // Workaround for missing Module relation on DataType_implements_Interface_RelationEntry when creating ZetboxBase.xml
@@ -104,9 +107,6 @@ namespace Zetbox.App.Packaging
 
                 // break reference for linq
                 int moduleID = module.ID;
-
-                AddMetaObjects(result, () => ctx.GetQuery<EnumerationEntry>().Where(i => i.Enumeration.Module.ID == moduleID)
-                    .ToList().OrderBy(i => i.Enumeration.Name).ThenBy(i => i.Name).ThenBy(i => i.ExportGuid));
 
                 AddMetaObjects(result, () => ctx.GetQuery<Method>().Where(i => i.Module.ID == moduleID)
                     .ToList().OrderBy(i => i.ObjectClass.Name).ThenBy(i => i.Name).ThenBy(i => i.ExportGuid));

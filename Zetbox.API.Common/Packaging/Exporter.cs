@@ -345,13 +345,10 @@ namespace Zetbox.App.Packaging
             }
 
             DateTime? lastChanged = new DateTime?[] { 
-                ctx.GetQuery<Zetbox.App.Base.Assembly>().Max(d => d.ChangedOn),
-                ctx.GetQuery<Zetbox.App.Base.BaseParameter>().Max(d => d.ChangedOn),
                 ctx.GetQuery<Zetbox.App.Base.Constraint>().Max(d => d.ChangedOn),
                 ctx.GetQuery<Zetbox.App.Base.DataType>().Max(d => d.ChangedOn),
                 ctx.GetQuery<Zetbox.App.Base.DefaultPropertyValue>().Max(d => d.ChangedOn),
                 ctx.GetQuery<Zetbox.App.Base.EnumerationEntry>().Max(d => d.ChangedOn),
-                ctx.GetQuery<Zetbox.App.Base.Method>().Max(d => d.ChangedOn),
                 ctx.GetQuery<Zetbox.App.Base.Module>().Max(d => d.ChangedOn),
                 ctx.GetQuery<Zetbox.App.Base.Property>().Max(d => d.ChangedOn),
                 ctx.GetQuery<Zetbox.App.Base.Relation>().Max(d => d.ChangedOn),
