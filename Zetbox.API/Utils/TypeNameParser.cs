@@ -153,28 +153,28 @@ namespace Zetbox.API.Utils
             pos = p;
         }
 
-        static TypeSpec Parse(string name, ref int p, bool is_recurse, bool allow_aqn)
+        static TypeSpec Parse(string typeName, ref int p, bool is_recurse, bool allow_aqn)
         {
             int pos = p;
             int name_start;
             bool in_modifiers = false;
             TypeSpec data = new TypeSpec();
 
-            SkipSpace(name, ref pos);
+            SkipSpace(typeName, ref pos);
 
             name_start = pos;
 
-            for (; pos < name.Length; ++pos)
+            for (; pos < typeName.Length; ++pos)
             {
-                switch (name[pos])
+                switch (typeName[pos])
                 {
                     case '+':
-                        data.AddName(name.Substring(name_start, pos - name_start));
+                        data.AddName(typeName.Substring(name_start, pos - name_start));
                         name_start = pos + 1;
                         break;
                     case ',':
                     case ']':
-                        data.AddName(name.Substring(name_start, pos - name_start));
+                        data.AddName(typeName.Substring(name_start, pos - name_start));
                         name_start = pos + 1;
                         in_modifiers = true;
                         if (is_recurse && !allow_aqn)
@@ -186,9 +186,9 @@ namespace Zetbox.API.Utils
                     case '&':
                     case '*':
                     case '[':
-                        if (name[pos] != '[' && is_recurse)
+                        if (typeName[pos] != '[' && is_recurse)
                             throw new ArgumentException("Generic argument can't be byref or pointer type", "typeName");
-                        data.AddName(name.Substring(name_start, pos - name_start));
+                        data.AddName(typeName.Substring(name_start, pos - name_start));
                         name_start = pos + 1;
                         in_modifiers = true;
                         break;
@@ -198,14 +198,14 @@ namespace Zetbox.API.Utils
             }
 
             if (name_start < pos)
-                data.AddName(name.Substring(name_start, pos - name_start));
+                data.AddName(typeName.Substring(name_start, pos - name_start));
 
             if (in_modifiers)
             {
-                for (; pos < name.Length; ++pos)
+                for (; pos < typeName.Length; ++pos)
                 {
 
-                    switch (name[pos])
+                    switch (typeName[pos])
                     {
                         case '&':
                             if (data.is_byref)
@@ -222,50 +222,50 @@ namespace Zetbox.API.Utils
                             if (is_recurse)
                             {
                                 int end = pos;
-                                while (end < name.Length && name[end] != ']')
+                                while (end < typeName.Length && typeName[end] != ']')
                                     ++end;
-                                if (end >= name.Length)
+                                if (end >= typeName.Length)
                                     throw new ArgumentException("Unmatched ']' while parsing generic argument assembly name");
-                                data.assembly_name = name.Substring(pos + 1, end - pos - 1).Trim();
+                                data.assembly_name = typeName.Substring(pos + 1, end - pos - 1).Trim();
                                 p = end + 1;
                                 return data;
                             }
-                            data.assembly_name = name.Substring(pos + 1).Trim();
-                            pos = name.Length;
+                            data.assembly_name = typeName.Substring(pos + 1).Trim();
+                            pos = typeName.Length;
                             break;
                         case '[':
                             if (data.is_byref)
                                 throw new ArgumentException("Byref qualifier must be the last one of a type", "typeName");
                             ++pos;
-                            if (pos >= name.Length)
+                            if (pos >= typeName.Length)
                                 throw new ArgumentException("Invalid array/generic spec", "typeName");
-                            SkipSpace(name, ref pos);
+                            SkipSpace(typeName, ref pos);
 
-                            if (name[pos] != ',' && name[pos] != '*' && name[pos] != ']')
+                            if (typeName[pos] != ',' && typeName[pos] != '*' && typeName[pos] != ']')
                             {//generic args
                                 List<TypeSpec> args = new List<TypeSpec>();
                                 if (data.IsArray)
                                     throw new ArgumentException("generic args after array spec", "typeName");
 
-                                while (pos < name.Length)
+                                while (pos < typeName.Length)
                                 {
-                                    SkipSpace(name, ref pos);
-                                    bool aqn = name[pos] == '[';
+                                    SkipSpace(typeName, ref pos);
+                                    bool aqn = typeName[pos] == '[';
                                     if (aqn)
                                         ++pos; //skip '[' to the start of the type
-                                    args.Add(Parse(name, ref pos, true, aqn));
-                                    if (pos >= name.Length)
+                                    args.Add(Parse(typeName, ref pos, true, aqn));
+                                    if (pos >= typeName.Length)
                                         throw new ArgumentException("Invalid generic arguments spec", "typeName");
 
-                                    if (name[pos] == ']')
+                                    if (typeName[pos] == ']')
                                         break;
-                                    if (name[pos] == ',')
+                                    if (typeName[pos] == ',')
                                         ++pos; // skip ',' to the start of the next arg
                                     else
-                                        throw new ArgumentException("Invalid generic arguments separator " + name[pos], "typeName");
+                                        throw new ArgumentException(string.Format("Invalid generic arguments separator '{0}'", typeName[pos]), "typeName");
 
                                 }
-                                if (pos >= name.Length || name[pos] != ']')
+                                if (pos >= typeName.Length || typeName[pos] != ']')
                                     throw new ArgumentException("Error parsing generic params spec", "typeName");
                                 data.generic_params = args;
                             }
@@ -273,23 +273,23 @@ namespace Zetbox.API.Utils
                             { //array spec
                                 int dimensions = 1;
                                 bool bound = false;
-                                while (pos < name.Length && name[pos] != ']')
+                                while (pos < typeName.Length && typeName[pos] != ']')
                                 {
-                                    if (name[pos] == '*')
+                                    if (typeName[pos] == '*')
                                     {
                                         if (bound)
                                             throw new ArgumentException("Array spec cannot have 2 bound dimensions", "typeName");
                                         bound = true;
                                     }
-                                    else if (name[pos] != ',')
-                                        throw new ArgumentException("Invalid character in array spec " + name[pos], "typeName");
+                                    else if (typeName[pos] != ',')
+                                        throw new ArgumentException(string.Format("Invalid character in array spec '{0}'", typeName[pos]), "typeName");
                                     else
                                         ++dimensions;
 
                                     ++pos;
-                                    SkipSpace(name, ref pos);
+                                    SkipSpace(typeName, ref pos);
                                 }
-                                if (name[pos] != ']')
+                                if (typeName[pos] != ']')
                                     throw new ArgumentException("Error parsing array spec", "typeName");
                                 if (dimensions > 1 && bound)
                                     throw new ArgumentException("Invalid array spec, multi-dimensional array cannot be bound", "typeName");
@@ -305,7 +305,7 @@ namespace Zetbox.API.Utils
                             }
                             throw new ArgumentException("Unmatched ']'", "typeName");
                         default:
-                            throw new ArgumentException("Bad type def, can't handle '" + name[pos] + "'" + " at " + pos, "typeName");
+                            throw new ArgumentException(string.Format("Bad type def, can't handle '{0}' at {1}", typeName[pos], pos), "typeName");
                     }
                 }
             }
