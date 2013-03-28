@@ -93,14 +93,6 @@ namespace Zetbox.App.Packaging
 
                 AddMetaObjects(result, () => ctx.GetQuery<Assembly>().Where(i => i.Module.ID == moduleID)
                     .ToList().OrderBy(i => i.Name).ThenBy(i => i.ExportGuid));
-                AddMetaObjects(result, () => ctx.GetQuery<TypeRef>().Where(i => i.Assembly.Module.ID == moduleID)
-                    .ToList().OrderBy(i => i.Assembly.Name).ThenBy(i => i.FullName).ThenBy(i => i.ExportGuid));
-                AddMetaObjects(result, () => ctx.Internals().GetPersistenceObjectQuery<TypeRef_hasGenericArguments_TypeRef_RelationEntry>().Where(i => i.A.Assembly.Module.ID == moduleID || i.B.Assembly.Module.ID == moduleID)
-                    .ToList().AsQueryable() // client side sorting!
-                    .ToList().OrderBy(i => i.A.Assembly.Name).ThenBy(i => i.B.Assembly.Name)
-                    .ThenBy(i => i.A.FullName).ThenBy(i => i.B.FullName)
-                    .ThenBy(i => i.AIndex).ThenBy(i => i.BIndex)
-                    .ThenBy(i => i.A.ExportGuid).ThenBy(i => i.B.ExportGuid));
 
                 var icons = ctx.GetQuery<Icon>().Where(i => i.Module.ID == moduleID)
                     .ToList().OrderBy(i => i.IconFile).ThenBy(i => i.ExportGuid).ToList();
@@ -110,8 +102,6 @@ namespace Zetbox.App.Packaging
                     .ToList().OrderBy(i => i.ViewModelTypeRef).ThenBy(i => i.ExportGuid));
                 AddMetaObjects(result, () => ctx.GetQuery<ViewDescriptor>().Where(i => i.Module.ID == moduleID)
                     .ToList().OrderBy(i => i.ControlTypeRef).ThenBy(i => i.ExportGuid));
-                AddMetaObjects(result, () => ctx.Internals().GetPersistenceObjectQuery<ViewDescriptor_supports_TypeRef_RelationEntry>().Where(i => i.A.Module.ID == moduleID)
-                    .ToList().OrderBy(i => i.A.ControlTypeRef).ThenBy(i => i.A.ExportGuid));
 
                 AddMetaObjects(result, () => ctx.GetQuery<NavigationEntry>()
                     .Where(i => i.Module.ID == moduleID)
