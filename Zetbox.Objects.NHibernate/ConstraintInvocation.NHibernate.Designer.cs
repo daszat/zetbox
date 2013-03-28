@@ -135,7 +135,7 @@ namespace Zetbox.App.Base
         // referencedInterface=Zetbox.App.Base.TypeRef; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
-        // Target exportable; does call events
+        // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.TypeRef Implementor
@@ -212,8 +212,6 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for Implementor's id, used on dehydration only</summary>
         private int? _fk_Implementor = null;
 
-        /// <summary>Backing store for Implementor's guid, used on import only</summary>
-        private Guid? _fk_guid_Implementor = null;
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Implementor
 		public static event PropertyGetterHandler<Zetbox.App.Base.ConstraintInvocation, Zetbox.App.Base.TypeRef> OnImplementor_Getter;
@@ -410,9 +408,6 @@ namespace Zetbox.App.Base
 
             // fix direct object references
 
-            if (_fk_guid_Implementor.HasValue)
-                this.Implementor = ((Zetbox.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.TypeRef>(_fk_guid_Implementor.Value));
-            else
             if (_fk_Implementor.HasValue)
                 this.Implementor = ((Zetbox.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.TypeRef>(_fk_Implementor.Value));
             else
@@ -612,7 +607,6 @@ namespace Zetbox.App.Base
             xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.Implementor != null ? this.Proxy.Implementor.ExportGuid : (Guid?)null, xml, "Implementor", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.MemberName, xml, "MemberName", "Zetbox.App.Base");
         }
 
@@ -625,9 +619,6 @@ namespace Zetbox.App.Base
                 // Import must have default value set
                 this.Proxy.ExportGuid = XmlStreamer.ReadGuid(xml);
                 this._isExportGuidSet = true;
-                break;
-            case "Zetbox.App.Base|Implementor":
-                this._fk_guid_Implementor = XmlStreamer.ReadNullableGuid(xml);
                 break;
             case "Zetbox.App.Base|MemberName":
                 this.Proxy.MemberName = XmlStreamer.ReadString(xml);

@@ -875,7 +875,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
         // referencedInterface=Zetbox.App.Base.TypeRef; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
-        // Target exportable; does call events
+        // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.TypeRef ViewModelRef
@@ -952,8 +952,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
         /// <summary>Backing store for ViewModelRef's id, used on dehydration only</summary>
         private int? _fk_ViewModelRef = null;
 
-        /// <summary>Backing store for ViewModelRef's guid, used on import only</summary>
-        private Guid? _fk_guid_ViewModelRef = null;
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ViewModelRef
 		public static event PropertyGetterHandler<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.Base.TypeRef> OnViewModelRef_Getter;
@@ -1279,9 +1277,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
             else
                 this.Module = null;
 
-            if (_fk_guid_ViewModelRef.HasValue)
-                this.ViewModelRef = ((Zetbox.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.TypeRef>(_fk_guid_ViewModelRef.Value));
-            else
             if (_fk_ViewModelRef.HasValue)
                 this.ViewModelRef = ((Zetbox.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.TypeRef>(_fk_ViewModelRef.Value));
             else
@@ -1661,7 +1656,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.Deleted, xml, "Deleted", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.Description, xml, "Description", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.Module != null ? this.Proxy.Module.ExportGuid : (Guid?)null, xml, "Module", "Zetbox.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.ViewModelRef != null ? this.Proxy.ViewModelRef.ExportGuid : (Guid?)null, xml, "ViewModelRef", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.ViewModelTypeRef, xml, "ViewModelTypeRef", "Zetbox.App.GUI");
         }
 
@@ -1700,9 +1694,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
                 break;
             case "Zetbox.App.GUI|Module":
                 this._fk_guid_Module = XmlStreamer.ReadNullableGuid(xml);
-                break;
-            case "Zetbox.App.GUI|ViewModelRef":
-                this._fk_guid_ViewModelRef = XmlStreamer.ReadNullableGuid(xml);
                 break;
             case "Zetbox.App.GUI|ViewModelTypeRef":
                 this.Proxy.ViewModelTypeRef = XmlStreamer.ReadString(xml);

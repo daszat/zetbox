@@ -7665,7 +7665,7 @@ namespace Zetbox.App.Base
 {
     // BEGIN Zetbox.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl")]
-    public class TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRefMemoryImpl, Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRefMemoryImpl>, TypeRef_hasGenericArguments_TypeRef_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
+    public class TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRefMemoryImpl, Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRefMemoryImpl>, TypeRef_hasGenericArguments_TypeRef_RelationEntry
     {
         [Obsolete]
         public TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl()
@@ -7708,40 +7708,6 @@ namespace Zetbox.App.Base
         }
         private int _ID;
         // END Zetbox.Generator.Templates.Properties.IdProperty
-        // BEGIN Zetbox.Generator.Templates.Properties.ExportGuidProperty
-        public Guid ExportGuid
-        {
-            get
-            {
-                // create local variable to create single point of return
-                // for the benefit of down-stream templates
-                var __result = _ExportGuid;
-                if (_ExportGuid == Guid.Empty) {
-                    __result = _ExportGuid = Guid.NewGuid();
-                }
-                return __result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_ExportGuid != value)
-                {
-                    var __oldValue = _ExportGuid;
-                    var __newValue = value;
-                    NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
-                    _ExportGuid = __newValue;
-                    NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
-                    if(IsAttached) UpdateChangedInfo = true;
-
-                }
-                else
-                {
-                    SetInitializedProperty("ExportGuid");
-                }
-            }
-        }
-        private Guid _ExportGuid;
-        // END Zetbox.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
         private static readonly Guid _relationID = new Guid("8b41ffa4-8ffa-4d96-b4e5-708188045c71");
@@ -7784,7 +7750,7 @@ namespace Zetbox.App.Base
         // referencedInterface=Zetbox.App.Base.TypeRef; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
         // PositionStorage=A_pos;
-        // Target exportable; does not call events
+        // Target not exportable; does not call events
 
         // implement the user-visible interface
         [XmlIgnore()]
@@ -7812,7 +7778,6 @@ namespace Zetbox.App.Base
             }
         }
 
-        private Guid? _fk_guid_A = null;
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef> _triggerFetchATask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef> TriggerFetchAAsync()
@@ -7906,7 +7871,7 @@ namespace Zetbox.App.Base
         // referencedInterface=Zetbox.App.Base.TypeRef; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
         // PositionStorage=B_pos;
-        // Target exportable; does not call events
+        // Target not exportable; does not call events
 
         // implement the user-visible interface
         [XmlIgnore()]
@@ -7934,7 +7899,6 @@ namespace Zetbox.App.Base
             }
         }
 
-        private Guid? _fk_guid_B = null;
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef> _triggerFetchBTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef> TriggerFetchBAsync()
@@ -8038,7 +8002,6 @@ namespace Zetbox.App.Base
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(this._ExportGuid);
             binStream.Write(A != null ? A.ID : (int?)null);
             binStream.Write(this._A_pos);
             binStream.Write(B != null ? B.ID : (int?)null);
@@ -8051,7 +8014,6 @@ namespace Zetbox.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
-            this._ExportGuid = binStream.ReadGuid();
             this._fk_A = binStream.ReadNullableInt32();
             this._A_pos = binStream.ReadNullableInt32();
             this._fk_B = binStream.ReadNullableInt32();
@@ -8062,40 +8024,6 @@ namespace Zetbox.App.Base
                     ? null
                     : result
                 : baseResult.Concat(result);
-        }
-
-        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
-        {
-            xml.WriteAttributeString("ExportGuid", _ExportGuid.ToString());
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "Zetbox.App.Base");
-        }
-
-        public virtual void MergeImport(System.Xml.XmlReader xml)
-        {
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            switch (xml.NamespaceURI + "|" + xml.LocalName) {
-            case "|ExportGuid":
-                this._ExportGuid = XmlStreamer.ReadGuid(xml);
-                break;
-            case "Zetbox.App.Base|A":
-                this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
-                break;
-            case "Zetbox.App.Base|A_pos":
-                this._A_pos = XmlStreamer.ReadNullableInt32(xml);
-                break;
-            case "Zetbox.App.Base|B":
-                this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
-                break;
-            case "Zetbox.App.Base|B_pos":
-                this._B_pos = XmlStreamer.ReadNullableInt32(xml);
-                break;
-            }
         }
 
         #endregion
@@ -8124,17 +8052,11 @@ namespace Zetbox.App.Base
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
-            if (_fk_guid_A.HasValue)
-                AImpl = (Zetbox.App.Base.TypeRefMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.TypeRef>(_fk_guid_A.Value);
-            else
             if (_fk_A.HasValue)
                 AImpl = (Zetbox.App.Base.TypeRefMemoryImpl)Context.Find<Zetbox.App.Base.TypeRef>(_fk_A.Value);
             else
                 AImpl = null;
 
-            if (_fk_guid_B.HasValue)
-                BImpl = (Zetbox.App.Base.TypeRefMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.TypeRef>(_fk_guid_B.Value);
-            else
             if (_fk_B.HasValue)
                 BImpl = (Zetbox.App.Base.TypeRefMemoryImpl)Context.Find<Zetbox.App.Base.TypeRef>(_fk_B.Value);
             else
@@ -8184,7 +8106,7 @@ namespace Zetbox.App.GUI
 {
     // BEGIN Zetbox.Generator.Templates.CollectionEntries.RelationEntry
     [System.Diagnostics.DebuggerDisplay("ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl")]
-    public class ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.GUI.ViewDescriptorMemoryImpl, Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRefMemoryImpl>, ViewDescriptor_supports_TypeRef_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
+    public class ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.GUI.ViewDescriptorMemoryImpl, Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRefMemoryImpl>, ViewDescriptor_supports_TypeRef_RelationEntry
     {
         [Obsolete]
         public ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl()
@@ -8227,40 +8149,6 @@ namespace Zetbox.App.GUI
         }
         private int _ID;
         // END Zetbox.Generator.Templates.Properties.IdProperty
-        // BEGIN Zetbox.Generator.Templates.Properties.ExportGuidProperty
-        public Guid ExportGuid
-        {
-            get
-            {
-                // create local variable to create single point of return
-                // for the benefit of down-stream templates
-                var __result = _ExportGuid;
-                if (_ExportGuid == Guid.Empty) {
-                    __result = _ExportGuid = Guid.NewGuid();
-                }
-                return __result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_ExportGuid != value)
-                {
-                    var __oldValue = _ExportGuid;
-                    var __newValue = value;
-                    NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
-                    _ExportGuid = __newValue;
-                    NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
-                    if(IsAttached) UpdateChangedInfo = true;
-
-                }
-                else
-                {
-                    SetInitializedProperty("ExportGuid");
-                }
-            }
-        }
-        private Guid _ExportGuid;
-        // END Zetbox.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
         private static readonly Guid _relationID = new Guid("786dae2f-cb6e-454d-93fd-192541df928d");
@@ -8303,7 +8191,7 @@ namespace Zetbox.App.GUI
         // referencedInterface=Zetbox.App.GUI.ViewDescriptor; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
-        // Target exportable; does not call events
+        // Target not exportable; does not call events
 
         // implement the user-visible interface
         [XmlIgnore()]
@@ -8331,7 +8219,6 @@ namespace Zetbox.App.GUI
             }
         }
 
-        private Guid? _fk_guid_A = null;
 
         Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewDescriptor> _triggerFetchATask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewDescriptor> TriggerFetchAAsync()
@@ -8394,7 +8281,7 @@ namespace Zetbox.App.GUI
         // referencedInterface=Zetbox.App.Base.TypeRef; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
-        // Target exportable; does not call events
+        // Target not exportable; does not call events
 
         // implement the user-visible interface
         [XmlIgnore()]
@@ -8422,7 +8309,6 @@ namespace Zetbox.App.GUI
             }
         }
 
-        private Guid? _fk_guid_B = null;
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef> _triggerFetchBTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef> TriggerFetchBAsync()
@@ -8485,7 +8371,6 @@ namespace Zetbox.App.GUI
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(this._ExportGuid);
             binStream.Write(A != null ? A.ID : (int?)null);
             binStream.Write(B != null ? B.ID : (int?)null);
         }
@@ -8496,7 +8381,6 @@ namespace Zetbox.App.GUI
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
-            this._ExportGuid = binStream.ReadGuid();
             this._fk_A = binStream.ReadNullableInt32();
             this._fk_B = binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
@@ -8505,32 +8389,6 @@ namespace Zetbox.App.GUI
                     ? null
                     : result
                 : baseResult.Concat(result);
-        }
-
-        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
-        {
-            xml.WriteAttributeString("ExportGuid", _ExportGuid.ToString());
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Zetbox.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Zetbox.App.GUI");
-        }
-
-        public virtual void MergeImport(System.Xml.XmlReader xml)
-        {
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            switch (xml.NamespaceURI + "|" + xml.LocalName) {
-            case "|ExportGuid":
-                this._ExportGuid = XmlStreamer.ReadGuid(xml);
-                break;
-            case "Zetbox.App.GUI|A":
-                this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
-                break;
-            case "Zetbox.App.GUI|B":
-                this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
-                break;
-            }
         }
 
         #endregion
@@ -8557,17 +8415,11 @@ namespace Zetbox.App.GUI
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
-            if (_fk_guid_A.HasValue)
-                AImpl = (Zetbox.App.GUI.ViewDescriptorMemoryImpl)Context.FindPersistenceObject<Zetbox.App.GUI.ViewDescriptor>(_fk_guid_A.Value);
-            else
             if (_fk_A.HasValue)
                 AImpl = (Zetbox.App.GUI.ViewDescriptorMemoryImpl)Context.Find<Zetbox.App.GUI.ViewDescriptor>(_fk_A.Value);
             else
                 AImpl = null;
 
-            if (_fk_guid_B.HasValue)
-                BImpl = (Zetbox.App.Base.TypeRefMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.TypeRef>(_fk_guid_B.Value);
-            else
             if (_fk_B.HasValue)
                 BImpl = (Zetbox.App.Base.TypeRefMemoryImpl)Context.Find<Zetbox.App.Base.TypeRef>(_fk_B.Value);
             else
@@ -10238,264 +10090,6 @@ namespace Zetbox.App.Test
 
             if (_fk_Parent.HasValue)
                 Parent = (Zetbox.App.Test.MuhblahMemoryImpl)Context.Find<Zetbox.App.Test.Muhblah>(_fk_Parent.Value);
-            else
-                Parent = null;
-
-        }
-
-
-        public override void UpdateParent(string propertyName, IDataObject parentObj)
-        {
-            switch(propertyName)
-            {
-                case "Parent":
-                    {
-                        var __oldValue = _fk_Parent;
-                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
-                        NotifyPropertyChanging("Parent", __oldValue, __newValue);
-                        _fk_Parent = __newValue;
-                        NotifyPropertyChanged("Parent", __oldValue, __newValue);
-                    }
-                    break;
-                default:
-                    base.UpdateParent(propertyName, parentObj);
-                    break;
-            }
-        }
-    }
-    // END Zetbox.Generator.Templates.CollectionEntries.ValueCollectionEntry
-}
-
-namespace Zetbox.App.GUI
-{
-    // BEGIN Zetbox.Generator.Templates.CollectionEntries.ValueCollectionEntry
-    [System.Diagnostics.DebuggerDisplay("ViewDescriptor_SupportedViewModelRefs_CollectionEntryMemoryImpl")]
-    public class ViewDescriptor_SupportedViewModelRefs_CollectionEntryMemoryImpl : Zetbox.DalProvider.Memory.ValueCollectionEntryMemoryImpl<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.GUI.ViewDescriptorMemoryImpl, string>, ViewDescriptor_SupportedViewModelRefs_CollectionEntry, Zetbox.API.IExportableValueCollectionEntryInternal
-    {
-        [Obsolete]
-        public ViewDescriptor_SupportedViewModelRefs_CollectionEntryMemoryImpl()
-            : base(null)
-        {
-        }
-
-        public ViewDescriptor_SupportedViewModelRefs_CollectionEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
-            : base(lazyCtx)
-        {
-        }
-        // BEGIN Zetbox.Generator.Templates.Properties.IdProperty
-        public override int ID
-        {
-            get
-            {
-                // create local variable to create single point of return
-                // for the benefit of down-stream templates
-                var __result = _ID;
-                return __result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_ID != value)
-                {
-                    var __oldValue = _ID;
-                    var __newValue = value;
-                    NotifyPropertyChanging("ID", __oldValue, __newValue);
-                    _ID = __newValue;
-                    NotifyPropertyChanged("ID", __oldValue, __newValue);
-                    if(IsAttached) UpdateChangedInfo = true;
-
-                }
-                else
-                {
-                    SetInitializedProperty("ID");
-                }
-            }
-        }
-        private int _ID;
-        // END Zetbox.Generator.Templates.Properties.IdProperty
-        private static readonly Guid _propertyID = new Guid("b898a824-578e-45e0-a312-193068a2b139");
-        public override Guid PropertyID { get { return _propertyID; } }
-
-
-        /// <summary>
-        /// the A-side value of this CollectionEntry
-        /// </summary>
-        public Zetbox.App.GUI.ViewDescriptor Parent
-        {
-            get
-            {
-                if (_ParentCache != null && _ParentCache.ID == _fk_Parent)
-                    return _ParentCache;
-
-                if (_fk_Parent.HasValue)
-                    _ParentCache = this.Context.Find<Zetbox.App.GUI.ViewDescriptor>(_fk_Parent.Value);
-                else
-                    _ParentCache = null;
-
-                return _ParentCache;
-            }
-            set
-            {
-                if (value == null && !_fk_Parent.HasValue)
-                    return;
-                if (value != null && _fk_Parent.HasValue && value.ID == _fk_Parent.Value)
-                    return;
-
-                _ParentCache = value;
-                if (value != null)
-                    fk_Parent = value.ID;
-                else
-                    fk_Parent = null;
-            }
-        }
-        private Zetbox.App.GUI.ViewDescriptor _ParentCache;
-
-        public int? fk_Parent
-        {
-            get
-            {
-                return _fk_Parent;
-            }
-            set
-            {
-                if (_fk_Parent != value)
-                {
-                    var __oldValue = _fk_Parent;
-                    NotifyPropertyChanging("Parent", __oldValue, value);
-                    _fk_Parent = value;
-                    NotifyPropertyChanged("Parent", __oldValue, value);
-                }
-            }
-        }
-
-        // backing store for serialization
-        private int? _fk_Parent;
-        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
-        public Zetbox.API.IDataObject ParentObject
-        {
-            get { return Parent; }
-            set { Parent = (Zetbox.App.GUI.ViewDescriptorMemoryImpl)value; }
-        }
-        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
-
-        /// <summary>
-        /// the B-side value of this CollectionEntry
-        /// </summary>
-        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingValueProperty
-        public string Value
-        {
-            get
-            {
-                // create local variable to create single point of return
-                // for the benefit of down-stream templates
-                var __result = _Value;
-                return __result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_Value != value)
-                {
-                    var __oldValue = _Value;
-                    var __newValue = value;
-                    NotifyPropertyChanging("Value", __oldValue, __newValue);
-                    _Value = __newValue;
-                    NotifyPropertyChanged("Value", __oldValue, __newValue);
-                    if(IsAttached) UpdateChangedInfo = true;
-
-                }
-                else
-                {
-                    SetInitializedProperty("Value");
-                }
-            }
-        }
-        private string _Value;
-        // END Zetbox.Generator.Templates.Properties.NotifyingValueProperty
-        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
-        public object ValueObject
-        {
-            get { return Value; }
-            set { Value = (string)value; }
-        }
-        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
-
-        #region Serializer
-
-
-        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
-        {
-            base.ToStream(binStream, auxObjects, eagerLoadLists);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(this._fk_Parent);
-            binStream.Write(this._Value);
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
-        {
-            var baseResult = base.FromStream(binStream);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
-            this._fk_Parent = binStream.ReadNullableInt32();
-            this._Value = binStream.ReadString();
-            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
-            return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
-        {
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._fk_Parent, xml, "Parent", "Zetbox.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._Value, xml, "Value", "Zetbox.App.GUI");
-        }
-
-        public virtual void MergeImport(System.Xml.XmlReader xml)
-        {
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            switch (xml.NamespaceURI + "|" + xml.LocalName) {
-            case "Zetbox.App.GUI|Parent":
-                this._fk_Parent = XmlStreamer.ReadNullableInt32(xml);
-                break;
-            case "Zetbox.App.GUI|Value":
-                this._Value = XmlStreamer.ReadString(xml);
-                break;
-            }
-        }
-
-        #endregion
-
-        public override Type GetImplementedInterface()
-        {
-            return typeof(ViewDescriptor_SupportedViewModelRefs_CollectionEntry);
-        }
-
-        public override void ApplyChangesFrom(IPersistenceObject obj)
-        {
-            base.ApplyChangesFrom(obj);
-            var other = (ViewDescriptor_SupportedViewModelRefs_CollectionEntryMemoryImpl)obj;
-            var me = (ViewDescriptor_SupportedViewModelRefs_CollectionEntryMemoryImpl)this;
-
-            me._fk_Parent = other._fk_Parent;
-            me.Value = other.Value;
-        }
-
-
-        public override void ReloadReferences()
-        {
-            // Do not reload references if the current object has been deleted.
-            // TODO: enable when MemoryContext uses MemoryDataObjects
-            //if (this.ObjectState == DataObjectState.Deleted) return;
-
-            if (_fk_Parent.HasValue)
-                Parent = (Zetbox.App.GUI.ViewDescriptorMemoryImpl)Context.Find<Zetbox.App.GUI.ViewDescriptor>(_fk_Parent.Value);
             else
                 Parent = null;
 

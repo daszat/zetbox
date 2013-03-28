@@ -45,7 +45,7 @@ namespace Zetbox.App.Base
         // referencedInterface=Zetbox.App.Base.TypeRef; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
-        // Target exportable; does call events
+        // Target not exportable; does call events
 
         // implement the user-visible interface
         [XmlIgnore()]
@@ -73,7 +73,6 @@ namespace Zetbox.App.Base
             }
         }
 
-        private Guid? _fk_guid_Type = null;
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef> _triggerFetchTypeTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef> TriggerFetchTypeAsync()
@@ -475,9 +474,6 @@ namespace Zetbox.App.Base
 
             // fix direct object references
 
-            if (_fk_guid_Type.HasValue)
-                TypeImpl = (Zetbox.App.Base.TypeRefMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.TypeRef>(_fk_guid_Type.Value);
-            else
             if (_fk_Type.HasValue)
                 TypeImpl = (Zetbox.App.Base.TypeRefMemoryImpl)Context.Find<Zetbox.App.Base.TypeRef>(_fk_Type.Value);
             else
@@ -628,7 +624,6 @@ namespace Zetbox.App.Base
             base.Export(xml, modules);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(Type != null ? Type.ExportGuid : (Guid?)null, xml, "Type", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._TypeRef, xml, "TypeRef", "Zetbox.App.Base");
         }
 
@@ -638,9 +633,6 @@ namespace Zetbox.App.Base
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
-            case "Zetbox.App.Base|Type":
-                this._fk_guid_Type = XmlStreamer.ReadNullableGuid(xml);
-                break;
             case "Zetbox.App.Base|TypeRef":
                 this._TypeRef = XmlStreamer.ReadString(xml);
                 break;

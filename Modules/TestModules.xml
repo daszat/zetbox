@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-03-28T10:52:35Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-03-28T09:17:27Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="a56d9701-d98e-49ab-bd49-a491d09e2d46">
     <ZetboxBase:ChangedOn>2011-08-06T08:30:47.664236Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
@@ -2982,7 +2982,6 @@ public static void GetSummaryReportCanExecReason(Projekt obj, MethodReturnEventA
     <ZetboxBase:Method>447088b9-ea3e-4c72-b1fe-761d430c4003</ZetboxBase:Method>
     <ZetboxBase:Parameter_pos>1</ZetboxBase:Parameter_pos>
     <ZetboxBase:Name>TestCLRObjectParameter</ZetboxBase:Name>
-    <ZetboxBase:Type>d9403577-df05-45ac-b468-e74a9f762c8a</ZetboxBase:Type>
     <ZetboxBase:TypeRef>System.Guid, mscorlib</ZetboxBase:TypeRef>
   </ZetboxBase:CLRObjectParameter>
   <ZetboxBase:DateTimeParameter ExportGuid="9200143f-437e-4c8d-9150-fcdb6c3e4e11">
@@ -3066,7 +3065,6 @@ public static void GetSummaryReportCanExecReason(Projekt obj, MethodReturnEventA
     <ZetboxBase:Method>dbb73c2e-e751-4249-b63a-f4417c3177b4</ZetboxBase:Method>
     <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
     <ZetboxBase:Name>retVal</ZetboxBase:Name>
-    <ZetboxBase:Type>c51c8086-60b2-410e-96c4-c1a32c1f57ee</ZetboxBase:Type>
     <ZetboxBase:TypeRef>System.Object, mscorlib</ZetboxBase:TypeRef>
   </ZetboxBase:CLRObjectParameter>
   <ZetboxBase:StringParameter ExportGuid="9ac69d2b-5c95-498d-9b35-b0215cabed8d">
@@ -3541,35 +3539,30 @@ public static void GetSummaryReportCanExecReason(Projekt obj, MethodReturnEventA
     <GUI:Deleted>false</GUI:Deleted>
     <GUI:Description>ViewModel for Projekte Calendar Workspace</GUI:Description>
     <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
-    <GUI:ViewModelRef>42e9d44a-70df-4b32-8e2f-3fd9520ac4e2</GUI:ViewModelRef>
     <GUI:ViewModelTypeRef>ERROR</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="b8952a09-fd76-4bd8-a714-7d676ab89126">
     <GUI:Deleted>false</GUI:Deleted>
     <GUI:Description>ViewModel for Projekte Calendar Task</GUI:Description>
     <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
-    <GUI:ViewModelRef>b985589e-bfde-47af-ac16-ac276d5f9c38</GUI:ViewModelRef>
     <GUI:ViewModelTypeRef>ERROR</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="3643897e-b586-493c-9e23-3f37129cca03">
     <GUI:Deleted>false</GUI:Deleted>
     <GUI:Description>ViewModel für Projekte Navigation Action, showing a report</GUI:Description>
     <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
-    <GUI:ViewModelRef>ea530e24-b1fb-499e-9eb4-1b12643092b4</GUI:ViewModelRef>
     <GUI:ViewModelTypeRef>Zetbox.App.Projekte.Client.ViewModel.Projekte.ReportScreenViewModel, Zetbox.App.Projekte.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="ec83ad5c-a62a-4407-81d4-6f6ab15ef633">
     <GUI:Deleted>false</GUI:Deleted>
     <GUI:Description>ViewModel für Projekte Navigation Action, showing a calendar</GUI:Description>
     <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
-    <GUI:ViewModelRef>348c7a43-1571-4c17-9e5c-2a86506752f7</GUI:ViewModelRef>
     <GUI:ViewModelTypeRef>Zetbox.App.Projekte.Client.ViewModel.Projekte.ShowCalendarNavigationActionViewModel, Zetbox.App.Projekte.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="4d307461-610a-4403-92b9-bb686dacf276">
     <GUI:Deleted>false</GUI:Deleted>
     <GUI:Description>ViewModes for Projekte Tasks</GUI:Description>
     <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
-    <GUI:ViewModelRef>0743ae6c-cb50-4684-98d9-ddf7ca922b18</GUI:ViewModelRef>
     <GUI:ViewModelTypeRef>Zetbox.App.Projekte.Client.ViewModel.Projekte.TaskViewModel, Zetbox.App.Projekte.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
   <GUI:NavigationAction ExportGuid="812d22c1-9385-4f5e-84d9-973c8285aae2">
@@ -11526,14 +11519,12 @@ public static void TestMethodCanExecReason(TestObjClass obj, MethodReturnEventAr
     <GUI:Deleted>false</GUI:Deleted>
     <GUI:Description>ViewModel for creating/editing a Test-Event</GUI:Description>
     <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
-    <GUI:ViewModelRef>529c4b47-b9b3-42fe-9269-b7226e51eb2b</GUI:ViewModelRef>
     <GUI:ViewModelTypeRef>Zetbox.App.Projekte.Client.ViewModel.TestModule.EventTestInputViewModel, Zetbox.App.Projekte.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="7f6730fe-c856-4ce2-a72c-5503e1162890">
     <GUI:Deleted>false</GUI:Deleted>
     <GUI:Description>Test screen for InstanceList</GUI:Description>
     <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
-    <GUI:ViewModelRef>5055641c-53a5-484b-b16f-2c203d05484f</GUI:ViewModelRef>
     <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.TestModule.InstanceListTestViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="6dace7b6-5ff2-4fb7-9b0b-328a16355986">
@@ -11541,44 +11532,29 @@ public static void TestMethodCanExecReason(TestObjClass obj, MethodReturnEventAr
     <GUI:Deleted>false</GUI:Deleted>
     <GUI:Description>NavScreenViewModel for testing next events summary display</GUI:Description>
     <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
-    <GUI:ViewModelRef>cbe8316e-491f-43be-a33d-2e93a8fbe2b8</GUI:ViewModelRef>
     <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.TestModule.NextEventsTestNavScreenViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewDescriptor ExportGuid="62c6636c-0cd5-4081-9aaa-c044f05e8020">
     <GUI:ControlKind>aa843e93-7f18-45c5-8608-4470aba9f18a</GUI:ControlKind>
-    <GUI:ControlRef>4f2b6801-1ca5-40bc-9b44-412a911907c5</GUI:ControlRef>
     <GUI:ControlTypeRef>Zetbox.Client.WPF.View.TestModule.EventTestInputEditor, Zetbox.Client.WPF</GUI:ControlTypeRef>
     <GUI:Deleted>false</GUI:Deleted>
     <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
-    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="d2376da7-7632-496d-a2c6-ed5bc8545250">
     <GUI:ControlKind>b2be0e95-d69e-44ff-8d19-2ccd70da2512</GUI:ControlKind>
-    <GUI:ControlRef>83fcfe5f-c8db-4ba3-87aa-36594602e3d8</GUI:ControlRef>
     <GUI:ControlTypeRef>Zetbox.Client.WPF.View.TestModule.InstanceListTestDisplay, Zetbox.Client.WPF</GUI:ControlTypeRef>
     <GUI:Deleted>false</GUI:Deleted>
     <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
-    <GUI:SupportedViewModelRefs>
-      <CollectionEntry>
-        <GUI:Value>Zetbox.Client.Presentables.TestModule.InstanceListTestViewModel, Zetbox.Client</GUI:Value>
-      </CollectionEntry>
-    </GUI:SupportedViewModelRefs>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="02b7be0a-e2e2-4836-ac5b-dd370268a6ae">
     <GUI:ControlKind>8455ee76-f3c5-4d73-8d3f-d79200b95976</GUI:ControlKind>
-    <GUI:ControlRef>0a55d134-2456-4858-9305-77e0c67cd16f</GUI:ControlRef>
     <GUI:ControlTypeRef>Zetbox.Client.WPF.View.TestModule.NextEventsTestNavScreenDisplay, Zetbox.Client.WPF</GUI:ControlTypeRef>
     <GUI:Deleted>false</GUI:Deleted>
     <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
-    <GUI:SupportedViewModelRefs />
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
-  <GUI:ViewDescriptor_supports_TypeRef_RelationEntry ExportGuid="c3e6543b-f643-49d7-ac7c-8ef925bb77fc">
-    <GUI:A>d2376da7-7632-496d-a2c6-ed5bc8545250</GUI:A>
-    <GUI:B>5055641c-53a5-484b-b16f-2c203d05484f</GUI:B>
-  </GUI:ViewDescriptor_supports_TypeRef_RelationEntry>
   <GUI:NavigationSearchScreen ExportGuid="8d9b6f62-d5bc-4129-92c6-8e250ddafe43">
     <GUI:ChangedOn>2012-08-21T11:04:20.471418Z</GUI:ChangedOn>
     <GUI:CreatedOn>2012-08-21T13:04:20.471418Z</GUI:CreatedOn>

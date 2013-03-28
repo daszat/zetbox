@@ -168,13 +168,6 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                         () => "Nothing selected"));
                     lst.Add(assemblyLstMdl);
 
-                    // TypeRefs
-                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
-                        typeof(TypeRef).GetObjectClass(FrozenContext),
-                        () => DataContext.GetQuery<TypeRef>().Where(i => i.Assembly.Module == CurrentModule).OrderBy(i => i.FullName));
-                    SetupViewModel(lstMdl);
-                    lst.Add(lstMdl);
-
                     // Application
                     lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
                         typeof(Application).GetObjectClass(FrozenContext),

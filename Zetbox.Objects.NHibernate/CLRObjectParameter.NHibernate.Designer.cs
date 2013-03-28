@@ -56,7 +56,7 @@ namespace Zetbox.App.Base
         // referencedInterface=Zetbox.App.Base.TypeRef; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
-        // Target exportable; does call events
+        // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.TypeRef Type
@@ -133,8 +133,6 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for Type's id, used on dehydration only</summary>
         private int? _fk_Type = null;
 
-        /// <summary>Backing store for Type's guid, used on import only</summary>
-        private Guid? _fk_guid_Type = null;
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Type
 		public static event PropertyGetterHandler<Zetbox.App.Base.CLRObjectParameter, Zetbox.App.Base.TypeRef> OnType_Getter;
@@ -454,9 +452,6 @@ namespace Zetbox.App.Base
 
             // fix direct object references
 
-            if (_fk_guid_Type.HasValue)
-                this.Type = ((Zetbox.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.TypeRef>(_fk_guid_Type.Value));
-            else
             if (_fk_Type.HasValue)
                 this.Type = ((Zetbox.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.TypeRef>(_fk_Type.Value));
             else
@@ -631,7 +626,6 @@ namespace Zetbox.App.Base
             base.Export(xml, modules);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.Type != null ? this.Proxy.Type.ExportGuid : (Guid?)null, xml, "Type", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.TypeRef, xml, "TypeRef", "Zetbox.App.Base");
         }
 
@@ -641,9 +635,6 @@ namespace Zetbox.App.Base
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
-            case "Zetbox.App.Base|Type":
-                this._fk_guid_Type = XmlStreamer.ReadNullableGuid(xml);
-                break;
             case "Zetbox.App.Base|TypeRef":
                 this.Proxy.TypeRef = XmlStreamer.ReadString(xml);
                 break;

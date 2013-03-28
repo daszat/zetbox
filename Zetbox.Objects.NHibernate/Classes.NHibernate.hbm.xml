@@ -1326,11 +1326,6 @@
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 
-        <!-- ValueTypeProperty isList -->
-        <set name="SupportedViewModelRefs"  inverse="true" batch-size="100">
-            <key column="`fk_ViewDescriptor`" />
-            <one-to-many class="Zetbox.App.GUI.ViewDescriptor_SupportedViewModelRefs_CollectionEntryNHibernateImpl+ViewDescriptor_SupportedViewModelRefs_CollectionEntryProxy,Zetbox.Objects.NHibernateImpl" />
-        </set>
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
         <!-- rel=ViewDescriptor_supports_TypeRef_RelationEntry -->

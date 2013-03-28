@@ -24,7 +24,7 @@ namespace Zetbox.App.Base
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="ServiceDescriptorEfImpl")]
     [System.Diagnostics.DebuggerDisplay("ServiceDescriptor")]
-    public class ServiceDescriptorEfImpl : BaseServerDataObject_EntityFramework, ServiceDescriptor, Zetbox.API.IExportableInternal
+    public class ServiceDescriptorEfImpl : BaseServerDataObject_EntityFramework, ServiceDescriptor
     {
         private static readonly Guid _objectClassID = new Guid("d1bf8a7e-a8c0-435b-9dfe-b5ab61e71d1a");
         public override Guid ObjectClassID { get { return _objectClassID; } }
@@ -659,7 +659,7 @@ namespace Zetbox.App.Base
         // referencedInterface=Zetbox.App.Base.Module; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
-        // Target exportable
+        // Target not exportable
 
         // implement the user-visible interface
         [XmlIgnore()]
@@ -672,7 +672,6 @@ namespace Zetbox.App.Base
 
         private int? _fk_Module;
 
-        private Guid? _fk_guid_Module = null;
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_ServiceDescriptor_has_Module", "Module")]
@@ -762,7 +761,7 @@ namespace Zetbox.App.Base
         // referencedInterface=Zetbox.App.Base.TypeRef; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
-        // Target exportable
+        // Target not exportable
 
         // implement the user-visible interface
         [XmlIgnore()]
@@ -775,7 +774,6 @@ namespace Zetbox.App.Base
 
         private int? _fk_TypeRef;
 
-        private Guid? _fk_guid_TypeRef = null;
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_ServiceDescriptor_describes_a_TypeRef", "TypeRef")]
@@ -919,17 +917,11 @@ namespace Zetbox.App.Base
             else
                 CreatedByImpl = null;
 
-            if (_fk_guid_Module.HasValue)
-                ModuleImpl = (Zetbox.App.Base.ModuleEfImpl)Context.FindPersistenceObject<Zetbox.App.Base.Module>(_fk_guid_Module.Value);
-            else
             if (_fk_Module.HasValue)
                 ModuleImpl = (Zetbox.App.Base.ModuleEfImpl)Context.Find<Zetbox.App.Base.Module>(_fk_Module.Value);
             else
                 ModuleImpl = null;
 
-            if (_fk_guid_TypeRef.HasValue)
-                TypeRefImpl = (Zetbox.App.Base.TypeRefEfImpl)Context.FindPersistenceObject<Zetbox.App.Base.TypeRef>(_fk_guid_TypeRef.Value);
-            else
             if (_fk_TypeRef.HasValue)
                 TypeRefImpl = (Zetbox.App.Base.TypeRefEfImpl)Context.Find<Zetbox.App.Base.TypeRef>(_fk_TypeRef.Value);
             else
@@ -1223,56 +1215,6 @@ namespace Zetbox.App.Base
                     ? null
                     : result
                 : baseResult.Concat(result);
-        }
-
-        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
-        {
-            xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Zetbox.App.Base");
-            System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)_DeploymentRestriction, xml, "DeploymentRestriction", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._Description, xml, "Description", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(TypeRef != null ? TypeRef.ExportGuid : (Guid?)null, xml, "TypeRef", "Zetbox.App.Base");
-        }
-
-        public virtual void MergeImport(System.Xml.XmlReader xml)
-        {
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            switch (xml.NamespaceURI + "|" + xml.LocalName) {
-            case "Zetbox.App.Base|ChangedOn":
-                // Import must have default value set
-                this._ChangedOn = XmlStreamer.ReadDateTime(xml);
-                this._isChangedOnSet = true;
-                break;
-            case "Zetbox.App.Base|CreatedOn":
-                // Import must have default value set
-                this._CreatedOn = XmlStreamer.ReadDateTime(xml);
-                this._isCreatedOnSet = true;
-                break;
-            case "Zetbox.App.Base|DeploymentRestriction":
-                _DeploymentRestriction = (Zetbox.App.Base.DeploymentRestriction?)XmlStreamer.ReadNullableInt32(xml);
-               break;
-            case "Zetbox.App.Base|Description":
-                this._Description = XmlStreamer.ReadString(xml);
-                break;
-            case "Zetbox.App.Base|ExportGuid":
-                // Import must have default value set
-                this._ExportGuid = XmlStreamer.ReadGuid(xml);
-                this._isExportGuidSet = true;
-                break;
-            case "Zetbox.App.Base|Module":
-                this._fk_guid_Module = XmlStreamer.ReadNullableGuid(xml);
-                break;
-            case "Zetbox.App.Base|TypeRef":
-                this._fk_guid_TypeRef = XmlStreamer.ReadNullableGuid(xml);
-                break;
-            }
         }
 
         #endregion

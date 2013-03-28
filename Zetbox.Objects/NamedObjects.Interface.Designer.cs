@@ -2810,10 +2810,6 @@ namespace Zetbox {
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("25da3568-f362-4441-841e-7c163b10b983"); }
                                 }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> SupportedViewModelRefs
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("b898a824-578e-45e0-a312-193068a2b139"); }
-                                }
                                 public static TypedGuid<global::Zetbox.App.Base.Property> SupportedViewModels
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("4698cfda-6b1d-4cd7-8350-630a1adab1a8"); }

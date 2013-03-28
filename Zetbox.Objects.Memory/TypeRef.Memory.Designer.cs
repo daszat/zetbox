@@ -21,7 +21,7 @@ namespace Zetbox.App.Base
     /// This class models a reference to a specific, concrete Type. Generic Types have all parameters filled.
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("TypeRef")]
-    public class TypeRefMemoryImpl : Zetbox.DalProvider.Memory.DataObjectMemoryImpl, TypeRef, Zetbox.API.IExportableInternal
+    public class TypeRefMemoryImpl : Zetbox.DalProvider.Memory.DataObjectMemoryImpl, TypeRef
     {
         private static readonly Guid _objectClassID = new Guid("87766ae2-89a4-4c37-ab25-583a710c55e5");
         public override Guid ObjectClassID { get { return _objectClassID; } }
@@ -45,7 +45,7 @@ namespace Zetbox.App.Base
         // referencedInterface=Zetbox.App.Base.Assembly; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
-        // Target exportable; does call events
+        // Target not exportable; does call events
 
         // implement the user-visible interface
         [XmlIgnore()]
@@ -73,7 +73,6 @@ namespace Zetbox.App.Base
             }
         }
 
-        private Guid? _fk_guid_Assembly = null;
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Assembly> _triggerFetchAssemblyTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Assembly> TriggerFetchAssemblyAsync()
@@ -765,7 +764,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.TypeRef> OnGeneri
         // referencedInterface=Zetbox.App.Base.TypeRef; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
-        // Target exportable; does call events
+        // Target not exportable; does call events
 
         // implement the user-visible interface
         [XmlIgnore()]
@@ -793,7 +792,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.TypeRef> OnGeneri
             }
         }
 
-        private Guid? _fk_guid_Parent = null;
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef> _triggerFetchParentTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef> TriggerFetchParentAsync()
@@ -1322,9 +1320,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.TypeRef> OnGeneri
 
             // fix direct object references
 
-            if (_fk_guid_Assembly.HasValue)
-                AssemblyImpl = (Zetbox.App.Base.AssemblyMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.Assembly>(_fk_guid_Assembly.Value);
-            else
             if (_fk_Assembly.HasValue)
                 AssemblyImpl = (Zetbox.App.Base.AssemblyMemoryImpl)Context.Find<Zetbox.App.Base.Assembly>(_fk_Assembly.Value);
             else
@@ -1340,9 +1335,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.TypeRef> OnGeneri
             else
                 CreatedByImpl = null;
 
-            if (_fk_guid_Parent.HasValue)
-                ParentImpl = (Zetbox.App.Base.TypeRefMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.TypeRef>(_fk_guid_Parent.Value);
-            else
             if (_fk_Parent.HasValue)
                 ParentImpl = (Zetbox.App.Base.TypeRefMemoryImpl)Context.Find<Zetbox.App.Base.TypeRef>(_fk_Parent.Value);
             else
@@ -1621,60 +1613,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.TypeRef> OnGeneri
                     ? null
                     : result
                 : baseResult.Concat(result);
-        }
-
-        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
-        {
-            xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(Assembly != null ? Assembly.ExportGuid : (Guid?)null, xml, "Assembly", "Zetbox.App.Base");
-            System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Zetbox.App.Base");
-            System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._Deleted, xml, "Deleted", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._FullName, xml, "FullName", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(Parent != null ? Parent.ExportGuid : (Guid?)null, xml, "Parent", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._ToStringCache, xml, "ToStringCache", "Zetbox.App.Base");
-        }
-
-        public virtual void MergeImport(System.Xml.XmlReader xml)
-        {
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            switch (xml.NamespaceURI + "|" + xml.LocalName) {
-            case "Zetbox.App.Base|Assembly":
-                this._fk_guid_Assembly = XmlStreamer.ReadNullableGuid(xml);
-                break;
-            case "Zetbox.App.Base|ChangedOn":
-                // Import must have default value set
-                this._ChangedOn = XmlStreamer.ReadDateTime(xml);
-                this._isChangedOnSet = true;
-                break;
-            case "Zetbox.App.Base|CreatedOn":
-                // Import must have default value set
-                this._CreatedOn = XmlStreamer.ReadDateTime(xml);
-                this._isCreatedOnSet = true;
-                break;
-            case "Zetbox.App.Base|Deleted":
-                this._Deleted = XmlStreamer.ReadNullableBoolean(xml);
-                break;
-            case "Zetbox.App.Base|ExportGuid":
-                // Import must have default value set
-                this._ExportGuid = XmlStreamer.ReadGuid(xml);
-                this._isExportGuidSet = true;
-                break;
-            case "Zetbox.App.Base|FullName":
-                this._FullName = XmlStreamer.ReadString(xml);
-                break;
-            case "Zetbox.App.Base|Parent":
-                this._fk_guid_Parent = XmlStreamer.ReadNullableGuid(xml);
-                break;
-            case "Zetbox.App.Base|ToStringCache":
-                this._ToStringCache = XmlStreamer.ReadString(xml);
-                break;
-            }
         }
 
         #endregion

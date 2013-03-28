@@ -2613,7 +2613,6 @@
       <EntityTypeMapping TypeName="Model.TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl">
         <MappingFragment StoreEntitySet="TypeRef_hasGenericArguments_TypeRef_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
-		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
           <ScalarProperty Name="A_pos" ColumnName="fk_TypeRef_pos" />
           <ScalarProperty Name="B_pos" ColumnName="fk_GenericArguments_pos" />
         </MappingFragment>
@@ -2693,7 +2692,6 @@
       <EntityTypeMapping TypeName="Model.ViewDescriptor_supports_TypeRef_RelationEntryEfImpl">
         <MappingFragment StoreEntitySet="ViewDescriptor_supports_TypeRef_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
-		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -6206,25 +6204,6 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Muhblah" IsNull="false"/>
-    </AssociationSetMapping>
-    <EntitySetMapping Name="ViewDescriptor_SupportedViewModelRefs_CollectionEntryEfImpl">
-      <EntityTypeMapping TypeName="Model.ViewDescriptor_SupportedViewModelRefs_CollectionEntryEfImpl">
-        <MappingFragment StoreEntitySet="ViewDescriptor_SupportedViewModelRefs_CollectionEntry">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="Value" ColumnName="SupportedViewModelRefs" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <AssociationSetMapping Name="FK_ViewDescriptor_value_SupportedViewModelRefs"
-                           TypeName="Model.FK_ViewDescriptor_value_SupportedViewModelRefs"
-                           StoreEntitySet="ViewDescriptor_SupportedViewModelRefs_CollectionEntry" >
-      <EndProperty Name="ViewDescriptor">
-        <ScalarProperty Name="ID" ColumnName="fk_ViewDescriptor"/>
-      </EndProperty>
-      <EndProperty Name="CollectionEntry">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_ViewDescriptor" IsNull="false"/>
     </AssociationSetMapping>
 
     <!-- EntitySetMappings and AssociationSetMappings for object-struct CollectionEntrys -->

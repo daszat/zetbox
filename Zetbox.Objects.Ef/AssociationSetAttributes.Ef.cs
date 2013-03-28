@@ -3408,14 +3408,6 @@ using Zetbox.DalProvider.Ef;
     )]
 
 
-// object-value association
-[assembly: EdmRelationship(
-    "Model", "FK_ViewDescriptor_value_SupportedViewModelRefs",
-    "ViewDescriptor", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.ViewDescriptorEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ViewDescriptor_SupportedViewModelRefs_CollectionEntryEfImpl)
-    )]
-
-
 
 // object-struct association
 [assembly: EdmRelationship(

@@ -347,8 +347,7 @@ namespace Zetbox.App.Packaging
                 ctx.GetQuery<Zetbox.App.Base.Module>().Max(d => d.ChangedOn),
                 ctx.GetQuery<Zetbox.App.Base.Property>().Max(d => d.ChangedOn),
                 ctx.GetQuery<Zetbox.App.Base.Relation>().Max(d => d.ChangedOn),
-                ctx.GetQuery<Zetbox.App.Base.RelationEnd>().Max(d => d.ChangedOn),
-                ctx.GetQuery<Zetbox.App.Base.TypeRef>().Max(d => d.ChangedOn)
+                ctx.GetQuery<Zetbox.App.Base.RelationEnd>().Max(d => d.ChangedOn)
             }.Max();
 
             writer.WriteAttributeString("date", XmlConvert.ToString(lastChanged ?? DateTime.Now, XmlDateTimeSerializationMode.Utc));

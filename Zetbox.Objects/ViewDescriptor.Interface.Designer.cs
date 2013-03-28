@@ -51,13 +51,6 @@ namespace Zetbox.App.GUI
         }
 
         /// <summary>
-        /// A View supports one or more ViewModels.
-        /// </summary>
-
-        [Zetbox.API.DefinitionGuid("b898a824-578e-45e0-a312-193068a2b139")]
-        ICollection<string> SupportedViewModelRefs { get; }
-
-        /// <summary>
         /// A View supports one or more ViewModels
         /// </summary>
 

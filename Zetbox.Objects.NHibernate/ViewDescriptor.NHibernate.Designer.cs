@@ -153,7 +153,7 @@ namespace Zetbox.App.GUI
         // referencedInterface=Zetbox.App.Base.TypeRef; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
-        // Target exportable; does call events
+        // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         public Zetbox.App.Base.TypeRef ControlRef
@@ -230,8 +230,6 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for ControlRef's id, used on dehydration only</summary>
         private int? _fk_ControlRef = null;
 
-        /// <summary>Backing store for ControlRef's guid, used on import only</summary>
-        private Guid? _fk_guid_ControlRef = null;
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ControlRef
 		public static event PropertyGetterHandler<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.Base.TypeRef> OnControlRef_Getter;
@@ -550,49 +548,6 @@ namespace Zetbox.App.GUI
         public static event PropertyIsValidHandler<Zetbox.App.GUI.ViewDescriptor> OnModule_IsValid;
 
         /// <summary>
-        /// A View supports one or more ViewModels.
-        /// </summary>
-        // value list property
-
-        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ValueCollectionProperty
-        public ICollection<string> SupportedViewModelRefs
-        {
-            get
-            {
-                if (_SupportedViewModelRefs == null)
-                {
-                    _SupportedViewModelRefs = new ClientValueCollectionWrapper<ViewDescriptor, string, Zetbox.App.GUI.ViewDescriptor_SupportedViewModelRefs_CollectionEntry, Zetbox.App.GUI.ViewDescriptor_SupportedViewModelRefs_CollectionEntryNHibernateImpl, ICollection<Zetbox.App.GUI.ViewDescriptor_SupportedViewModelRefs_CollectionEntryNHibernateImpl>>(
-                            this.Context,
-                            this,
-                            () => { this.NotifyPropertyChanged("SupportedViewModelRefs", null, null); if(OnSupportedViewModelRefs_PostSetter != null && IsAttached) OnSupportedViewModelRefs_PostSetter(this); },
-                            SupportedViewModelRefsCollection);
-                }
-                return _SupportedViewModelRefs;
-            }
-        }
-
-        private ProjectedCollection<Zetbox.App.GUI.ViewDescriptor_SupportedViewModelRefs_CollectionEntryNHibernateImpl.ViewDescriptor_SupportedViewModelRefs_CollectionEntryProxy, Zetbox.App.GUI.ViewDescriptor_SupportedViewModelRefs_CollectionEntryNHibernateImpl> SupportedViewModelRefsCollection
-        {
-            get {
-                if (_SupportedViewModelRefsCollection == null)
-                {
-                    _SupportedViewModelRefsCollection = new ProjectedCollection<Zetbox.App.GUI.ViewDescriptor_SupportedViewModelRefs_CollectionEntryNHibernateImpl.ViewDescriptor_SupportedViewModelRefs_CollectionEntryProxy, Zetbox.App.GUI.ViewDescriptor_SupportedViewModelRefs_CollectionEntryNHibernateImpl>(
-                        () => this.Proxy.SupportedViewModelRefs,
-                        p => (Zetbox.App.GUI.ViewDescriptor_SupportedViewModelRefs_CollectionEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                        d => (Zetbox.App.GUI.ViewDescriptor_SupportedViewModelRefs_CollectionEntryNHibernateImpl.ViewDescriptor_SupportedViewModelRefs_CollectionEntryProxy)((NHibernatePersistenceObject)d).NHibernateProxy);
-                }
-                return _SupportedViewModelRefsCollection;
-            }
-        }
-
-        private ClientValueCollectionWrapper<ViewDescriptor, string, Zetbox.App.GUI.ViewDescriptor_SupportedViewModelRefs_CollectionEntry, Zetbox.App.GUI.ViewDescriptor_SupportedViewModelRefs_CollectionEntryNHibernateImpl, ICollection<Zetbox.App.GUI.ViewDescriptor_SupportedViewModelRefs_CollectionEntryNHibernateImpl>> _SupportedViewModelRefs;
-        private ProjectedCollection<Zetbox.App.GUI.ViewDescriptor_SupportedViewModelRefs_CollectionEntryNHibernateImpl.ViewDescriptor_SupportedViewModelRefs_CollectionEntryProxy, Zetbox.App.GUI.ViewDescriptor_SupportedViewModelRefs_CollectionEntryNHibernateImpl> _SupportedViewModelRefsCollection;
-        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ValueCollectionProperty
-public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewDescriptor> OnSupportedViewModelRefs_PostSetter;
-
-        public static event PropertyIsValidHandler<Zetbox.App.GUI.ViewDescriptor> OnSupportedViewModelRefs_IsValid;
-
-        /// <summary>
         /// A View supports one or more ViewModels
         /// </summary>
         // collection entry list property
@@ -794,9 +749,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewDescriptor> On
             else
                 this.ControlKind = null;
 
-            if (_fk_guid_ControlRef.HasValue)
-                this.ControlRef = ((Zetbox.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.TypeRef>(_fk_guid_ControlRef.Value));
-            else
             if (_fk_ControlRef.HasValue)
                 this.ControlRef = ((Zetbox.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.TypeRef>(_fk_ControlRef.Value));
             else
@@ -877,15 +829,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewDescriptor> On
                         obj => obj.Module,
                         (obj, val) => obj.Module = val,
 						obj => OnModule_IsValid), 
-                    // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorNHibernateImpl<ViewDescriptor, ICollection<string>>(
-                        lazyCtx,
-                        new Guid("b898a824-578e-45e0-a312-193068a2b139"),
-                        "SupportedViewModelRefs",
-                        null,
-                        obj => obj.SupportedViewModelRefs,
-                        null, // lists are read-only properties
-                        obj => OnSupportedViewModelRefs_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorNHibernateImpl<ViewDescriptor, ICollection<Zetbox.App.Base.TypeRef>>(
                         lazyCtx,
@@ -984,10 +927,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewDescriptor> On
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_ViewDescriptor != null) OnNotifyDeleting_ViewDescriptor(this);
-            foreach(NHibernatePersistenceObject x in SupportedViewModelRefsCollection) {
-                x.ParentsToDelete.Add(this);
-                ChildrenToDelete.Add(x);
-            }
 
             // FK_View_has_ControlRef
             if (ControlRef != null) {
@@ -1005,7 +944,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewDescriptor> On
                 ParentsToDelete.Add((NHibernatePersistenceObject)ControlKind);
             }
 
-            SupportedViewModelRefs.Clear();
             SupportedViewModels.Clear();
             ControlKind = null;
             ControlRef = null;
@@ -1020,7 +958,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewDescriptor> On
         {
             public ViewDescriptorProxy()
             {
-                SupportedViewModelRefs = new Collection<Zetbox.App.GUI.ViewDescriptor_SupportedViewModelRefs_CollectionEntryNHibernateImpl.ViewDescriptor_SupportedViewModelRefs_CollectionEntryProxy>();
                 SupportedViewModels = new Collection<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl.ViewDescriptor_supports_TypeRef_RelationEntryProxy>();
             }
 
@@ -1040,10 +977,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewDescriptor> On
             public virtual Guid ExportGuid { get; set; }
 
             public virtual Zetbox.App.Base.ModuleNHibernateImpl.ModuleProxy Module { get; set; }
-
-            public virtual ICollection<Zetbox.App.GUI.ViewDescriptor_SupportedViewModelRefs_CollectionEntryNHibernateImpl.ViewDescriptor_SupportedViewModelRefs_CollectionEntryProxy> SupportedViewModelRefs { get; set; }
-
-            public virtual int? SupportedViewModelRefs_pos { get; set; }
 
             public virtual ICollection<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl.ViewDescriptor_supports_TypeRef_RelationEntryProxy> SupportedViewModels { get; set; }
 
@@ -1073,7 +1006,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewDescriptor> On
                 binStream.Write(this.Proxy.ExportGuid);
             }
             binStream.Write(this.Proxy.Module != null ? OurContext.GetIdFromProxy(this.Proxy.Module) : (int?)null);
-            binStream.WriteCollectionEntries(this.SupportedViewModelRefsCollection);
 
             binStream.Write(eagerLoadLists);
             if (eagerLoadLists && auxObjects != null)
@@ -1125,12 +1057,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewDescriptor> On
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.ControlKind != null ? this.Proxy.ControlKind.ExportGuid : (Guid?)null, xml, "ControlKind", "Zetbox.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.ControlRef != null ? this.Proxy.ControlRef.ExportGuid : (Guid?)null, xml, "ControlRef", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.ControlTypeRef, xml, "ControlTypeRef", "Zetbox.App.GUI");
             System.Diagnostics.Debug.Assert(this._isDeletedSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.Deleted, xml, "Deleted", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.Module != null ? this.Proxy.Module.ExportGuid : (Guid?)null, xml, "Module", "Zetbox.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ExportCollectionEntries(this.SupportedViewModelRefsCollection.OrderBy(i => i.Value), xml, "SupportedViewModelRefs", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream((int?)Proxy.Toolkit, xml, "Toolkit", "Zetbox.App.GUI");
         }
 
@@ -1141,9 +1071,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewDescriptor> On
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
             case "Zetbox.App.GUI|ControlKind":
                 this._fk_guid_ControlKind = XmlStreamer.ReadNullableGuid(xml);
-                break;
-            case "Zetbox.App.GUI|ControlRef":
-                this._fk_guid_ControlRef = XmlStreamer.ReadNullableGuid(xml);
                 break;
             case "Zetbox.App.GUI|ControlTypeRef":
                 this.Proxy.ControlTypeRef = XmlStreamer.ReadString(xml);
@@ -1160,9 +1087,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewDescriptor> On
                 break;
             case "Zetbox.App.GUI|Module":
                 this._fk_guid_Module = XmlStreamer.ReadNullableGuid(xml);
-                break;
-            case "Zetbox.App.GUI|SupportedViewModelRefs":
-                XmlStreamer.MergeImportCollectionEntries(this, this.SupportedViewModelRefsCollection, xml);
                 break;
             case "Zetbox.App.GUI|Toolkit":
                 Proxy.Toolkit = (Zetbox.App.GUI.Toolkit)XmlStreamer.ReadNullableInt32(xml);

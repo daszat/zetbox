@@ -7382,7 +7382,7 @@ namespace Zetbox.App.Base
     // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
     [EdmEntityType(NamespaceName="Model", Name="TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl")]
     [System.Diagnostics.DebuggerDisplay("TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl")]
-    public class TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRefEfImpl, Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRefEfImpl>, TypeRef_hasGenericArguments_TypeRef_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
+    public class TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRefEfImpl, Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRefEfImpl>, TypeRef_hasGenericArguments_TypeRef_RelationEntry
     {
         [Obsolete]
         public TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl()
@@ -7426,51 +7426,6 @@ namespace Zetbox.App.Base
         }
         private int _ID;
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
-        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public Guid ExportGuid
-        {
-            get
-            {
-                // create local variable to create single point of return
-                // for the benefit of down-stream templates
-                var __result = _ExportGuid;
-                if (_ExportGuid_store == Guid.Empty) {
-                    __result = _ExportGuid_store = Guid.NewGuid();
-                }
-                return __result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_ExportGuid != value)
-                {
-                    var __oldValue = _ExportGuid;
-                    var __newValue = value;
-                    NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
-                    _ExportGuid = __newValue;
-                    NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
-                    if(IsAttached) UpdateChangedInfo = true;
-
-                }
-                else
-                {
-                    SetInitializedProperty("ExportGuid");
-                }
-            }
-        }
-        private Guid _ExportGuid_store;
-        private Guid _ExportGuid {
-            get { return _ExportGuid_store; }
-            set {
-                ReportEfPropertyChanging("ExportGuid");
-                _ExportGuid_store = value;
-                ReportEfPropertyChanged("ExportGuid");
-            }
-        }
-        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
         private static readonly Guid _relationID = new Guid("8b41ffa4-8ffa-4d96-b4e5-708188045c71");
@@ -7513,7 +7468,7 @@ namespace Zetbox.App.Base
         // referencedInterface=Zetbox.App.Base.TypeRef; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
         // PositionStorage=A_pos;
-        // Target exportable
+        // Target not exportable
 
         // implement the user-visible interface
         [XmlIgnore()]
@@ -7526,7 +7481,6 @@ namespace Zetbox.App.Base
 
         private int? _fk_A;
 
-        private Guid? _fk_guid_A = null;
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_TypeRef_hasGenericArguments_GenericArguments_A", "TypeRef")]
@@ -7627,7 +7581,7 @@ namespace Zetbox.App.Base
         // referencedInterface=Zetbox.App.Base.TypeRef; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
         // PositionStorage=B_pos;
-        // Target exportable
+        // Target not exportable
 
         // implement the user-visible interface
         [XmlIgnore()]
@@ -7640,7 +7594,6 @@ namespace Zetbox.App.Base
 
         private int? _fk_B;
 
-        private Guid? _fk_guid_B = null;
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_TypeRef_hasGenericArguments_GenericArguments_B", "GenericArguments")]
@@ -7751,7 +7704,6 @@ namespace Zetbox.App.Base
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(this._ExportGuid);
             {
                 var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.TypeRefEfImpl>("Model.FK_TypeRef_hasGenericArguments_GenericArguments_A", "TypeRef");
                 var key = r.EntityKey;
@@ -7775,7 +7727,6 @@ namespace Zetbox.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
-            this._ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
             this._A_pos = binStream.ReadNullableInt32();
             binStream.Read(out this._fk_B);
@@ -7786,40 +7737,6 @@ namespace Zetbox.App.Base
                     ? null
                     : result
                 : baseResult.Concat(result);
-        }
-
-        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
-        {
-            xml.WriteAttributeString("ExportGuid", _ExportGuid.ToString());
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "Zetbox.App.Base");
-        }
-
-        public virtual void MergeImport(System.Xml.XmlReader xml)
-        {
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            switch (xml.NamespaceURI + "|" + xml.LocalName) {
-            case "|ExportGuid":
-                this._ExportGuid = XmlStreamer.ReadGuid(xml);
-                break;
-            case "Zetbox.App.Base|A":
-                this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
-                break;
-            case "Zetbox.App.Base|A_pos":
-                this._A_pos = XmlStreamer.ReadNullableInt32(xml);
-                break;
-            case "Zetbox.App.Base|B":
-                this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
-                break;
-            case "Zetbox.App.Base|B_pos":
-                this._B_pos = XmlStreamer.ReadNullableInt32(xml);
-                break;
-            }
         }
 
         #endregion
@@ -7848,17 +7765,11 @@ namespace Zetbox.App.Base
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
-            if (_fk_guid_A.HasValue)
-                AImpl = (Zetbox.App.Base.TypeRefEfImpl)Context.FindPersistenceObject<Zetbox.App.Base.TypeRef>(_fk_guid_A.Value);
-            else
             if (_fk_A.HasValue)
                 AImpl = (Zetbox.App.Base.TypeRefEfImpl)Context.Find<Zetbox.App.Base.TypeRef>(_fk_A.Value);
             else
                 AImpl = null;
 
-            if (_fk_guid_B.HasValue)
-                BImpl = (Zetbox.App.Base.TypeRefEfImpl)Context.FindPersistenceObject<Zetbox.App.Base.TypeRef>(_fk_guid_B.Value);
-            else
             if (_fk_B.HasValue)
                 BImpl = (Zetbox.App.Base.TypeRefEfImpl)Context.Find<Zetbox.App.Base.TypeRef>(_fk_B.Value);
             else
@@ -7909,7 +7820,7 @@ namespace Zetbox.App.GUI
     // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
     [EdmEntityType(NamespaceName="Model", Name="ViewDescriptor_supports_TypeRef_RelationEntryEfImpl")]
     [System.Diagnostics.DebuggerDisplay("ViewDescriptor_supports_TypeRef_RelationEntryEfImpl")]
-    public class ViewDescriptor_supports_TypeRef_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.GUI.ViewDescriptorEfImpl, Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRefEfImpl>, ViewDescriptor_supports_TypeRef_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
+    public class ViewDescriptor_supports_TypeRef_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.GUI.ViewDescriptorEfImpl, Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRefEfImpl>, ViewDescriptor_supports_TypeRef_RelationEntry
     {
         [Obsolete]
         public ViewDescriptor_supports_TypeRef_RelationEntryEfImpl()
@@ -7953,51 +7864,6 @@ namespace Zetbox.App.GUI
         }
         private int _ID;
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
-        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public Guid ExportGuid
-        {
-            get
-            {
-                // create local variable to create single point of return
-                // for the benefit of down-stream templates
-                var __result = _ExportGuid;
-                if (_ExportGuid_store == Guid.Empty) {
-                    __result = _ExportGuid_store = Guid.NewGuid();
-                }
-                return __result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_ExportGuid != value)
-                {
-                    var __oldValue = _ExportGuid;
-                    var __newValue = value;
-                    NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
-                    _ExportGuid = __newValue;
-                    NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
-                    if(IsAttached) UpdateChangedInfo = true;
-
-                }
-                else
-                {
-                    SetInitializedProperty("ExportGuid");
-                }
-            }
-        }
-        private Guid _ExportGuid_store;
-        private Guid _ExportGuid {
-            get { return _ExportGuid_store; }
-            set {
-                ReportEfPropertyChanging("ExportGuid");
-                _ExportGuid_store = value;
-                ReportEfPropertyChanged("ExportGuid");
-            }
-        }
-        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
         private static readonly Guid _relationID = new Guid("786dae2f-cb6e-454d-93fd-192541df928d");
@@ -8040,7 +7906,7 @@ namespace Zetbox.App.GUI
         // referencedInterface=Zetbox.App.GUI.ViewDescriptor; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
-        // Target exportable
+        // Target not exportable
 
         // implement the user-visible interface
         [XmlIgnore()]
@@ -8053,7 +7919,6 @@ namespace Zetbox.App.GUI
 
         private int? _fk_A;
 
-        private Guid? _fk_guid_A = null;
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_ViewDescriptor_supports_ViewModelTypeRefs_A", "ViewDescriptor")]
@@ -8112,7 +7977,7 @@ namespace Zetbox.App.GUI
         // referencedInterface=Zetbox.App.Base.TypeRef; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
-        // Target exportable
+        // Target not exportable
 
         // implement the user-visible interface
         [XmlIgnore()]
@@ -8125,7 +7990,6 @@ namespace Zetbox.App.GUI
 
         private int? _fk_B;
 
-        private Guid? _fk_guid_B = null;
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_ViewDescriptor_supports_ViewModelTypeRefs_B", "ViewModelTypeRefs")]
@@ -8184,7 +8048,6 @@ namespace Zetbox.App.GUI
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(this._ExportGuid);
             {
                 var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ViewDescriptorEfImpl>("Model.FK_ViewDescriptor_supports_ViewModelTypeRefs_A", "ViewDescriptor");
                 var key = r.EntityKey;
@@ -8206,7 +8069,6 @@ namespace Zetbox.App.GUI
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
-            this._ExportGuid = binStream.ReadGuid();
             binStream.Read(out this._fk_A);
             binStream.Read(out this._fk_B);
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
@@ -8215,32 +8077,6 @@ namespace Zetbox.App.GUI
                     ? null
                     : result
                 : baseResult.Concat(result);
-        }
-
-        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
-        {
-            xml.WriteAttributeString("ExportGuid", _ExportGuid.ToString());
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Zetbox.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Zetbox.App.GUI");
-        }
-
-        public virtual void MergeImport(System.Xml.XmlReader xml)
-        {
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            switch (xml.NamespaceURI + "|" + xml.LocalName) {
-            case "|ExportGuid":
-                this._ExportGuid = XmlStreamer.ReadGuid(xml);
-                break;
-            case "Zetbox.App.GUI|A":
-                this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
-                break;
-            case "Zetbox.App.GUI|B":
-                this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
-                break;
-            }
         }
 
         #endregion
@@ -8267,17 +8103,11 @@ namespace Zetbox.App.GUI
             // TODO: enable when MemoryContext uses MemoryDataObjects
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
-            if (_fk_guid_A.HasValue)
-                AImpl = (Zetbox.App.GUI.ViewDescriptorEfImpl)Context.FindPersistenceObject<Zetbox.App.GUI.ViewDescriptor>(_fk_guid_A.Value);
-            else
             if (_fk_A.HasValue)
                 AImpl = (Zetbox.App.GUI.ViewDescriptorEfImpl)Context.Find<Zetbox.App.GUI.ViewDescriptor>(_fk_A.Value);
             else
                 AImpl = null;
 
-            if (_fk_guid_B.HasValue)
-                BImpl = (Zetbox.App.Base.TypeRefEfImpl)Context.FindPersistenceObject<Zetbox.App.Base.TypeRef>(_fk_guid_B.Value);
-            else
             if (_fk_B.HasValue)
                 BImpl = (Zetbox.App.Base.TypeRefEfImpl)Context.Find<Zetbox.App.Base.TypeRef>(_fk_B.Value);
             else
@@ -9961,305 +9791,6 @@ public Muhblah_StringCollection_CollectionEntryEfImpl(Func<IFrozenContext> lazyC
 
             if (_fk_Parent.HasValue)
                 Parent = (Zetbox.App.Test.MuhblahEfImpl)Context.Find<Zetbox.App.Test.Muhblah>(_fk_Parent.Value);
-            else
-                Parent = null;
-
-        }
-
-
-        public override void UpdateParent(string propertyName, IDataObject parentObj)
-        {
-            switch(propertyName)
-            {
-                case "Parent":
-                    {
-                        var __oldValue = _fk_Parent;
-                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
-                        NotifyPropertyChanging("Parent", __oldValue, __newValue);
-                        _fk_Parent = __newValue;
-                        NotifyPropertyChanged("Parent", __oldValue, __newValue);
-                    }
-                    break;
-                default:
-                    base.UpdateParent(propertyName, parentObj);
-                    break;
-            }
-        }
-    }
-    // END Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.ValueCollectionEntry
-}
-
-namespace Zetbox.App.GUI
-{
-    // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.ValueCollectionEntry
-    [EdmEntityType(NamespaceName="Model", Name="ViewDescriptor_SupportedViewModelRefs_CollectionEntryEfImpl")]
-    [System.Diagnostics.DebuggerDisplay("ViewDescriptor_SupportedViewModelRefs_CollectionEntryEfImpl")]
-    public class ViewDescriptor_SupportedViewModelRefs_CollectionEntryEfImpl : Zetbox.DalProvider.Ef.ValueCollectionEntryEfImpl<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.GUI.ViewDescriptorEfImpl, string>, ViewDescriptor_SupportedViewModelRefs_CollectionEntry, Zetbox.API.IExportableValueCollectionEntryInternal
-    {
-[Obsolete]
-public ViewDescriptor_SupportedViewModelRefs_CollectionEntryEfImpl()
-: base(null)
-{
-}
-public ViewDescriptor_SupportedViewModelRefs_CollectionEntryEfImpl(Func<IFrozenContext> lazyCtx)
-    : base(lazyCtx)
-{
-}
-        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
-        [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
-        public override int ID
-        {
-            get
-            {
-                // create local variable to create single point of return
-                // for the benefit of down-stream templates
-                var __result = _ID;
-                return __result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_ID != value)
-                {
-                    var __oldValue = _ID;
-                    var __newValue = value;
-                    NotifyPropertyChanging("ID", __oldValue, __newValue);
-                    _ID = __newValue;
-                    NotifyPropertyChanged("ID", __oldValue, __newValue);
-                    if(IsAttached) UpdateChangedInfo = true;
-
-                }
-                else
-                {
-                    SetInitializedProperty("ID");
-                }
-            }
-        }
-        private int _ID;
-        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
-        private static readonly Guid _propertyID = new Guid("b898a824-578e-45e0-a312-193068a2b139");
-        public override Guid PropertyID { get { return _propertyID; } }
-
-
-        /// <summary>
-        /// the A-side value of this CollectionEntry
-        /// </summary>
-        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
-        // fkBackingName=_fk_Parent; fkGuidBackingName=;
-        // referencedInterface=Zetbox.App.GUI.ViewDescriptor; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=SupportedViewModelRefs; is list;
-        // PositionStorage=none;
-        // Target not exportable
-
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Zetbox.App.GUI.ViewDescriptor Parent
-        {
-            get { return ParentImpl; }
-            set { ParentImpl = (Zetbox.App.GUI.ViewDescriptorEfImpl)value; }
-        }
-
-        private int? _fk_Parent;
-
-
-        // internal implementation, EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_ViewDescriptor_value_SupportedViewModelRefs", "ViewDescriptor")]
-        public Zetbox.App.GUI.ViewDescriptorEfImpl ParentImpl
-        {
-            get
-            {
-                Zetbox.App.GUI.ViewDescriptorEfImpl __value;
-                EntityReference<Zetbox.App.GUI.ViewDescriptorEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ViewDescriptorEfImpl>(
-                        "Model.FK_ViewDescriptor_value_SupportedViewModelRefs",
-                        "ViewDescriptor");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load();
-                }
-                __value = r.Value;
-                return __value;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
-
-                EntityReference<Zetbox.App.GUI.ViewDescriptorEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ViewDescriptorEfImpl>(
-                        "Model.FK_ViewDescriptor_value_SupportedViewModelRefs",
-                        "ViewDescriptor");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load();
-                }
-                Zetbox.App.GUI.ViewDescriptorEfImpl __oldValue = (Zetbox.App.GUI.ViewDescriptorEfImpl)r.Value;
-                Zetbox.App.GUI.ViewDescriptorEfImpl __newValue = (Zetbox.App.GUI.ViewDescriptorEfImpl)value;
-
-                // Changing Event fires before anything is touched
-                NotifyPropertyChanging("Parent", __oldValue, __newValue);
-                if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("SupportedViewModelRefs", null, null);
-                }
-                if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("SupportedViewModelRefs", null, null);
-                }
-
-                r.Value = (Zetbox.App.GUI.ViewDescriptorEfImpl)__newValue;
-
-                // everything is done. fire the Changed event
-                NotifyPropertyChanged("Parent", __oldValue, __newValue);
-                if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanged("SupportedViewModelRefs", null, null);
-                }
-                if (__newValue != null) {
-                    __newValue.NotifyPropertyChanged("SupportedViewModelRefs", null, null);
-                }
-                if(IsAttached) UpdateChangedInfo = true;
-            }
-        }
-
-        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
-        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
-        public Zetbox.API.IDataObject ParentObject
-        {
-            get { return Parent; }
-            set { Parent = (Zetbox.App.GUI.ViewDescriptorEfImpl)value; }
-        }
-        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
-
-        /// <summary>
-        /// the B-side value of this CollectionEntry
-        /// </summary>
-        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        [EdmScalarProperty()]
-        public string Value
-        {
-            get
-            {
-                // create local variable to create single point of return
-                // for the benefit of down-stream templates
-                var __result = _Value;
-                return __result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_Value != value)
-                {
-                    var __oldValue = _Value;
-                    var __newValue = value;
-                    NotifyPropertyChanging("Value", __oldValue, __newValue);
-                    _Value = __newValue;
-                    NotifyPropertyChanged("Value", __oldValue, __newValue);
-                    if(IsAttached) UpdateChangedInfo = true;
-
-                }
-                else
-                {
-                    SetInitializedProperty("Value");
-                }
-            }
-        }
-        private string _Value_store;
-        private string _Value {
-            get { return _Value_store; }
-            set {
-                ReportEfPropertyChanging("Value");
-                _Value_store = value;
-                ReportEfPropertyChanged("Value");
-            }
-        }
-        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
-        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
-        public object ValueObject
-        {
-            get { return Value; }
-            set { Value = (string)value; }
-        }
-        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
-
-        #region Serializer
-
-
-        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
-        {
-            base.ToStream(binStream, auxObjects, eagerLoadLists);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ViewDescriptorEfImpl>("Model.FK_ViewDescriptor_value_SupportedViewModelRefs", "ViewDescriptor");
-                var key = r.EntityKey;
-                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
-            }
-            binStream.Write(this._Value);
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
-        {
-            var baseResult = base.FromStream(binStream);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
-            binStream.Read(out this._fk_Parent);
-            this._Value = binStream.ReadString();
-            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
-            return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
-        {
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._Value, xml, "Value", "Zetbox.App.GUI");
-        }
-
-        public virtual void MergeImport(System.Xml.XmlReader xml)
-        {
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            switch (xml.NamespaceURI + "|" + xml.LocalName) {
-            case "Zetbox.App.GUI|Value":
-                this._Value = XmlStreamer.ReadString(xml);
-                break;
-            }
-        }
-
-        #endregion
-
-        public override Type GetImplementedInterface()
-        {
-            return typeof(ViewDescriptor_SupportedViewModelRefs_CollectionEntry);
-        }
-
-        public override void ApplyChangesFrom(IPersistenceObject obj)
-        {
-            base.ApplyChangesFrom(obj);
-            var other = (ViewDescriptor_SupportedViewModelRefs_CollectionEntryEfImpl)obj;
-            var me = (ViewDescriptor_SupportedViewModelRefs_CollectionEntryEfImpl)this;
-
-            me._fk_Parent = other._fk_Parent;
-            me.Value = other.Value;
-        }
-
-
-        public override void ReloadReferences()
-        {
-            // Do not reload references if the current object has been deleted.
-            // TODO: enable when MemoryContext uses MemoryDataObjects
-            //if (this.ObjectState == DataObjectState.Deleted) return;
-
-            if (_fk_Parent.HasValue)
-                Parent = (Zetbox.App.GUI.ViewDescriptorEfImpl)Context.Find<Zetbox.App.GUI.ViewDescriptor>(_fk_Parent.Value);
             else
                 Parent = null;
 

@@ -137,7 +137,7 @@ namespace Zetbox.App.Base
         // referencedInterface=Zetbox.App.Base.TypeRef; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
-        // Target exportable
+        // Target not exportable
 
         // implement the user-visible interface
         [XmlIgnore()]
@@ -150,7 +150,6 @@ namespace Zetbox.App.Base
 
         private int? _fk_Implementor;
 
-        private Guid? _fk_guid_Implementor = null;
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_ConstraintInvocation_has_TypeRef", "TypeRef")]
@@ -405,9 +404,6 @@ namespace Zetbox.App.Base
 
             // fix direct object references
 
-            if (_fk_guid_Implementor.HasValue)
-                ImplementorImpl = (Zetbox.App.Base.TypeRefEfImpl)Context.FindPersistenceObject<Zetbox.App.Base.TypeRef>(_fk_guid_Implementor.Value);
-            else
             if (_fk_Implementor.HasValue)
                 ImplementorImpl = (Zetbox.App.Base.TypeRefEfImpl)Context.Find<Zetbox.App.Base.TypeRef>(_fk_Implementor.Value);
             else
@@ -611,7 +607,6 @@ namespace Zetbox.App.Base
             xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(Implementor != null ? Implementor.ExportGuid : (Guid?)null, xml, "Implementor", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._MemberName, xml, "MemberName", "Zetbox.App.Base");
         }
 
@@ -624,9 +619,6 @@ namespace Zetbox.App.Base
                 // Import must have default value set
                 this._ExportGuid = XmlStreamer.ReadGuid(xml);
                 this._isExportGuidSet = true;
-                break;
-            case "Zetbox.App.Base|Implementor":
-                this._fk_guid_Implementor = XmlStreamer.ReadNullableGuid(xml);
                 break;
             case "Zetbox.App.Base|MemberName":
                 this._MemberName = XmlStreamer.ReadString(xml);

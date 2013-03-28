@@ -357,7 +357,6 @@
                     column="`fk_GenericArguments_pos`" />
         <property name="B_pos"
                   column="`fk_TypeRef_pos`" />
-        <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
     </class>
     <class name="Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl+ViewDescriptor_supports_TypeRef_RelationEntryProxy"
            proxy="Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl+ViewDescriptor_supports_TypeRef_RelationEntryProxy"
@@ -375,7 +374,6 @@
                      column="`fk_ViewDescriptor`" />
         <many-to-one name="B"
                      column="`fk_ViewModelTypeRefs`" />
-        <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
     </class>
     <class name="Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl+ViewModelDescriptor_displayedBy_ControlKind_RelationEntryProxy"
            proxy="Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl+ViewModelDescriptor_displayedBy_ControlKind_RelationEntryProxy"
@@ -472,29 +470,6 @@
         <property name="Value" 
                   column="`StringCollection`" 
                   optimistic-lock="false"/>
-    </class>
-
-    <class name="Zetbox.App.GUI.ViewDescriptor_SupportedViewModelRefs_CollectionEntryNHibernateImpl+ViewDescriptor_SupportedViewModelRefs_CollectionEntryProxy"
-           proxy="Zetbox.App.GUI.ViewDescriptor_SupportedViewModelRefs_CollectionEntryNHibernateImpl+ViewDescriptor_SupportedViewModelRefs_CollectionEntryProxy"
-           table="`ViewDescriptors_SupportedViewModelRefsCollection`"
-           schema="`gui`" >
-
-        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
-            <generator class="native">
-                <param name="schema">`gui`</param>
-                <param name="sequence">`ViewDescriptors_SupportedViewModelRefsCollection_ID_seq`</param>
-            </generator>
-        </id>
-
-        <many-to-one name="Parent"
-                     column="`fk_ViewDescriptor`" />
-        <!-- ValueTypeProperty isValue -->
-        <property name="Value" 
-                  column="`SupportedViewModelRefs`" 
-                  optimistic-lock="false"/>
-        <!-- export guid is not needed since serialization is always "in-place"
-        <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
-        -->
     </class>
 
     <!-- CompoundObjectCollectionEntries -->
