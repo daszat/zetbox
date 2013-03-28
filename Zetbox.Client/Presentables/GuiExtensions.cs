@@ -25,6 +25,7 @@ namespace Zetbox.App.Extensions
     using Zetbox.App.Base;
     using Zetbox.App.GUI;
     using Zetbox.API.Utils;
+    using Zetbox.Client.GUI;
 
     /// <summary>
     /// A set of extension methods for the GUI module.
@@ -131,7 +132,16 @@ namespace Zetbox.App.Extensions
             {
                 var allTypes = GetAllTypes(self);
                 // As allTypes is sorted from most specific to least specific, so first or default is perfect.
-                var match = allTypes.SelectMany(t => candidates.Where(c => c.SupportedViewModelRefs.Contains(t.GetSimpleName()))).FirstOrDefault();
+                var match = allTypes.SelectMany(t => candidates.Where(c =>
+                {
+                    var viewType = Type.GetType(c.ControlTypeRef, throwOnError: false);
+                    if (viewType == null) return false;
+                    var supportedViewModels = viewType.GetInterfaces()
+                        .Where(i => { var ifType = i.GetType(); return ifType.IsGenericType && ifType.GetGenericTypeDefinition() == typeof(IHasViewModel<>); })
+                        .Select(i => i.GetGenericArguments().Single());
+
+                    return supportedViewModels.Contains(t);
+                })).FirstOrDefault();
 
                 // Try the most common
                 if (match == null)
@@ -161,6 +171,7 @@ namespace Zetbox.App.Extensions
                 type = type.BaseType;
             }
 
+            // append ALL interfaces after the inheritance list
             allTypes.AddRange(Type.GetType(self.ViewModelTypeRef).GetInterfaces().OrderBy(i => i.FullName));
             return allTypes;
         }
