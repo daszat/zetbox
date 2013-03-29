@@ -212,10 +212,6 @@ namespace Zetbox {
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("ac1d5ac9-d909-438f-a4f5-f64ea6904944"); }
                             }
-                            public static TypedGuid<global::Zetbox.App.Base.DataType> ConstraintInvocation
-                            {
-                                get { return new TypedGuid<global::Zetbox.App.Base.DataType>("038230c3-ee0b-4a04-b89b-fe342ac8f069"); }
-                            }
                             public static TypedGuid<global::Zetbox.App.Base.DataType> CurrentDateTimeDefaultValue
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("8b202069-2dd3-470c-bb3f-956f44884298"); }
@@ -795,28 +791,6 @@ namespace Zetbox {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("49f759b3-de60-4cee-be06-c712e901c24e"); }
                                 }
                             }
-                            public static class ConstraintInvocation_Methods
-                            {
-                                public static TypedGuid<global::Zetbox.App.Base.Method> GetCodeTemplate
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Method>("356d7770-d2b7-49dc-9549-9b8bc22df953"); }
-                                }
-                            }
-                            public static class ConstraintInvocation_Properties
-                            {
-                                public static TypedGuid<global::Zetbox.App.Base.Property> ExportGuid
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("06d4a536-d9c4-487f-9861-ac15429e42de"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> Implementor
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("4b8486d5-2c48-4485-9824-d0a4a8bbbbca"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> MemberName
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("fd6ac977-3eab-4b2c-952a-2a1ad043b99a"); }
-                                }
-                            }
                             public static class CurrentSchema_Properties
                             {
                                 public static TypedGuid<global::Zetbox.App.Base.Property> Schema
@@ -1224,17 +1198,6 @@ namespace Zetbox {
                                 public static TypedGuid<global::Zetbox.App.Base.Property> Min
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("8afdbf66-c979-4c09-8872-1a44aa1dbf72"); }
-                                }
-                            }
-                            public static class InvokingConstraint_Properties
-                            {
-                                public static TypedGuid<global::Zetbox.App.Base.Property> GetErrorTextInvocation
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("3b5d70f7-b6fd-4e39-b912-5a644a5de716"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> IsValidInvocation
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("3c98da56-1c21-4849-87b1-81bf72d17e70"); }
                                 }
                             }
                             public static class Method_Methods

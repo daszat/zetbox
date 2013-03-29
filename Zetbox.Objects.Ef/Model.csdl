@@ -27,7 +27,6 @@
     </AssociationSet>
     <EntitySet Name="CompanyEfImpl" EntityType="Model.CompanyEfImpl" />
     <EntitySet Name="ConstraintEfImpl" EntityType="Model.ConstraintEfImpl" />
-    <EntitySet Name="ConstraintInvocationEfImpl" EntityType="Model.ConstraintInvocationEfImpl" />
     <EntitySet Name="ControlKindEfImpl" EntityType="Model.ControlKindEfImpl" />
     <EntitySet Name="CurrentSchemaEfImpl" EntityType="Model.CurrentSchemaEfImpl" />
     <EntitySet Name="DataTypeEfImpl" EntityType="Model.DataTypeEfImpl" />
@@ -491,14 +490,6 @@
       <End Role="ConstrainedProperty" EntitySet="PropertyEfImpl" />
       <End Role="Constraints" EntitySet="ConstraintEfImpl" />
     </AssociationSet>
-    <AssociationSet Name="FK_Constraint_invokes_GetErrorTextInvocation" Association="Model.FK_Constraint_invokes_GetErrorTextInvocation" >
-      <End Role="Constraint" EntitySet="ConstraintEfImpl" />
-      <End Role="GetErrorTextInvocation" EntitySet="ConstraintInvocationEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Constraint_invokes_IsValidInvocation" Association="Model.FK_Constraint_invokes_IsValidInvocation" >
-      <End Role="Constraint" EntitySet="ConstraintEfImpl" />
-      <End Role="IsValidInvocation" EntitySet="ConstraintInvocationEfImpl" />
-    </AssociationSet>
     <AssociationSet Name="FK_Constraint_on_Constrained" Association="Model.FK_Constraint_on_Constrained" >
       <End Role="Constraint" EntitySet="InstanceConstraintEfImpl" />
       <End Role="Constrained" EntitySet="DataTypeEfImpl" />
@@ -510,10 +501,6 @@
     <AssociationSet Name="FK_Constraint_was_CreatedBy" Association="Model.FK_Constraint_was_CreatedBy" >
       <End Role="Constraint" EntitySet="ConstraintEfImpl" />
       <End Role="CreatedBy" EntitySet="IdentityEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ConstraintInvocation_has_TypeRef" Association="Model.FK_ConstraintInvocation_has_TypeRef" >
-      <End Role="ConstraintInvocation" EntitySet="ConstraintInvocationEfImpl" />
-      <End Role="TypeRef" EntitySet="TypeRefEfImpl" />
     </AssociationSet>
     <AssociationSet Name="FK_ControlKind_has_Module" Association="Model.FK_ControlKind_has_Module" >
       <End Role="ControlKind" EntitySet="ControlKindEfImpl" />
@@ -1485,18 +1472,6 @@
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
     <Property Name="Reason" Type="String" Nullable="true" MaxLength="400"  />
-  </EntityType>
-  <EntityType Name="ConstraintInvocationEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-    <NavigationProperty Name="ImplementorImpl"
-                        Relationship="Model.FK_ConstraintInvocation_has_TypeRef"
-                        FromRole="ConstraintInvocation"
-                        ToRole="TypeRef" />
-    <Property Name="MemberName" Type="String" Nullable="false" MaxLength="2147483647"  />
   </EntityType>
   <EntityType Name="ControlKindEfImpl">
     <Key>
@@ -3212,14 +3187,6 @@
   <EntityType Name="IntPropertyEfImpl" BaseType="Model.ValueTypePropertyEfImpl">
   </EntityType>
   <EntityType Name="InvokingConstraintEfImpl" BaseType="Model.ConstraintEfImpl">
-    <NavigationProperty Name="GetErrorTextInvocationImpl"
-                        Relationship="Model.FK_Constraint_invokes_GetErrorTextInvocation"
-                        FromRole="Constraint"
-                        ToRole="GetErrorTextInvocation" />
-    <NavigationProperty Name="IsValidInvocationImpl"
-                        Relationship="Model.FK_Constraint_invokes_IsValidInvocation"
-                        FromRole="Constraint"
-                        ToRole="IsValidInvocation" />
   </EntityType>
   <EntityType Name="IsValidIdentifierConstraintEfImpl" BaseType="Model.ConstraintEfImpl">
   </EntityType>
@@ -4823,22 +4790,6 @@
          Type="Model.ConstraintEfImpl" 
          Multiplicity="*" />
   </Association>
-  <Association Name="FK_Constraint_invokes_GetErrorTextInvocation" >
-    <End Role="Constraint"
-         Type="Model.InvokingConstraintEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="GetErrorTextInvocation"
-         Type="Model.ConstraintInvocationEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_Constraint_invokes_IsValidInvocation" >
-    <End Role="Constraint"
-         Type="Model.InvokingConstraintEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="IsValidInvocation"
-         Type="Model.ConstraintInvocationEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
   <Association Name="FK_Constraint_on_Constrained" >
     <End Role="Constraint"
          Type="Model.InstanceConstraintEfImpl" 
@@ -4861,14 +4812,6 @@
          Multiplicity="*" />
     <End Role="CreatedBy"
          Type="Model.IdentityEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_ConstraintInvocation_has_TypeRef" >
-    <End Role="ConstraintInvocation"
-         Type="Model.ConstraintInvocationEfImpl" 
-         Multiplicity="*" />
-    <End Role="TypeRef"
-         Type="Model.TypeRefEfImpl" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_ControlKind_has_Module" >

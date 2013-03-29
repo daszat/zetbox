@@ -146,7 +146,6 @@
     <Compile Include="CompoundObjectParameter.Ef.Designer.cs" />
     <Compile Include="CompoundObjectProperty.Ef.Designer.cs" />
     <Compile Include="Constraint.Ef.Designer.cs" />
-    <Compile Include="ConstraintInvocation.Ef.Designer.cs" />
     <Compile Include="ControlKind.Ef.Designer.cs" />
     <Compile Include="CurrentDateTimeDefaultValue.Ef.Designer.cs" />
     <Compile Include="CurrentSchema.Ef.Designer.cs" />

@@ -1458,7 +1458,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.TypeRef> OnGeneri
                 ParentsToDelete.Add((NHibernatePersistenceObject)Parent);
             }
             // should fetch && remember parent for CLRObjectParameter_isOf_TypeRef_RelationEntry
-            // should fetch && remember parent for ConstraintInvocation_has_TypeRef_RelationEntry
             // should fetch && remember parent for ViewModelDescriptor_has_TypeRef_RelationEntry
             // should fetch && remember parent for ServiceDescriptor_describes_a_TypeRef_RelationEntry
             // FK_TypeRef_has_Assembly

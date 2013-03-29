@@ -143,7 +143,6 @@
     <Compile Include="CompoundObjectParameter.Memory.Designer.cs" />
     <Compile Include="CompoundObjectProperty.Memory.Designer.cs" />
     <Compile Include="Constraint.Memory.Designer.cs" />
-    <Compile Include="ConstraintInvocation.Memory.Designer.cs" />
     <Compile Include="ControlKind.Memory.Designer.cs" />
     <Compile Include="CurrentDateTimeDefaultValue.Memory.Designer.cs" />
     <Compile Include="CurrentSchema.Memory.Designer.cs" />

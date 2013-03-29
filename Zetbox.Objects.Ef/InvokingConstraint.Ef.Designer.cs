@@ -43,212 +43,6 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-    /*
-    Relation: FK_Constraint_invokes_GetErrorTextInvocation
-    A: One InvokingConstraint as Constraint
-    B: One ConstraintInvocation as GetErrorTextInvocation
-    Preferred Storage: MergeIntoA
-    */
-        // object reference property
-        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for GetErrorTextInvocation
-        // fkBackingName=_fk_GetErrorTextInvocation; fkGuidBackingName=_fk_guid_GetErrorTextInvocation;
-        // referencedInterface=Zetbox.App.Base.ConstraintInvocation; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
-        // PositionStorage=none;
-        // Target exportable
-
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Zetbox.App.Base.ConstraintInvocation GetErrorTextInvocation
-        {
-            get { return GetErrorTextInvocationImpl; }
-            set { GetErrorTextInvocationImpl = (Zetbox.App.Base.ConstraintInvocationEfImpl)value; }
-        }
-
-        private int? _fk_GetErrorTextInvocation;
-
-        private Guid? _fk_guid_GetErrorTextInvocation = null;
-
-        // internal implementation, EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Constraint_invokes_GetErrorTextInvocation", "GetErrorTextInvocation")]
-        public Zetbox.App.Base.ConstraintInvocationEfImpl GetErrorTextInvocationImpl
-        {
-            get
-            {
-                Zetbox.App.Base.ConstraintInvocationEfImpl __value;
-                EntityReference<Zetbox.App.Base.ConstraintInvocationEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.ConstraintInvocationEfImpl>(
-                        "Model.FK_Constraint_invokes_GetErrorTextInvocation",
-                        "GetErrorTextInvocation");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load();
-                }
-                __value = r.Value;
-                if (OnGetErrorTextInvocation_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.ConstraintInvocation>(__value);
-                    OnGetErrorTextInvocation_Getter(this, e);
-                    __value = (Zetbox.App.Base.ConstraintInvocationEfImpl)e.Result;
-                }
-                return __value;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
-
-                EntityReference<Zetbox.App.Base.ConstraintInvocationEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.ConstraintInvocationEfImpl>(
-                        "Model.FK_Constraint_invokes_GetErrorTextInvocation",
-                        "GetErrorTextInvocation");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load();
-                }
-                Zetbox.App.Base.ConstraintInvocationEfImpl __oldValue = (Zetbox.App.Base.ConstraintInvocationEfImpl)r.Value;
-                Zetbox.App.Base.ConstraintInvocationEfImpl __newValue = (Zetbox.App.Base.ConstraintInvocationEfImpl)value;
-
-                // Changing Event fires before anything is touched
-                NotifyPropertyChanging("GetErrorTextInvocation", __oldValue, __newValue);
-
-                if (OnGetErrorTextInvocation_PreSetter != null)
-                {
-                    var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.ConstraintInvocation>(__oldValue, __newValue);
-                    OnGetErrorTextInvocation_PreSetter(this, e);
-                    __newValue = (Zetbox.App.Base.ConstraintInvocationEfImpl)e.Result;
-                }
-
-                r.Value = (Zetbox.App.Base.ConstraintInvocationEfImpl)__newValue;
-
-                if (OnGetErrorTextInvocation_PostSetter != null)
-                {
-                    var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.ConstraintInvocation>(__oldValue, __newValue);
-                    OnGetErrorTextInvocation_PostSetter(this, e);
-                }
-
-                // everything is done. fire the Changed event
-                NotifyPropertyChanged("GetErrorTextInvocation", __oldValue, __newValue);
-                if(IsAttached) UpdateChangedInfo = true;
-            }
-        }
-
-        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for GetErrorTextInvocation
-		public static event PropertyGetterHandler<Zetbox.App.Base.InvokingConstraint, Zetbox.App.Base.ConstraintInvocation> OnGetErrorTextInvocation_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Base.InvokingConstraint, Zetbox.App.Base.ConstraintInvocation> OnGetErrorTextInvocation_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Base.InvokingConstraint, Zetbox.App.Base.ConstraintInvocation> OnGetErrorTextInvocation_PostSetter;
-
-        public static event PropertyIsValidHandler<Zetbox.App.Base.InvokingConstraint> OnGetErrorTextInvocation_IsValid;
-
-        /// <summary>
-        /// 
-        /// </summary>
-    /*
-    Relation: FK_Constraint_invokes_IsValidInvocation
-    A: One InvokingConstraint as Constraint
-    B: One ConstraintInvocation as IsValidInvocation
-    Preferred Storage: MergeIntoA
-    */
-        // object reference property
-        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for IsValidInvocation
-        // fkBackingName=_fk_IsValidInvocation; fkGuidBackingName=_fk_guid_IsValidInvocation;
-        // referencedInterface=Zetbox.App.Base.ConstraintInvocation; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
-        // PositionStorage=none;
-        // Target exportable
-
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Zetbox.App.Base.ConstraintInvocation IsValidInvocation
-        {
-            get { return IsValidInvocationImpl; }
-            set { IsValidInvocationImpl = (Zetbox.App.Base.ConstraintInvocationEfImpl)value; }
-        }
-
-        private int? _fk_IsValidInvocation;
-
-        private Guid? _fk_guid_IsValidInvocation = null;
-
-        // internal implementation, EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Constraint_invokes_IsValidInvocation", "IsValidInvocation")]
-        public Zetbox.App.Base.ConstraintInvocationEfImpl IsValidInvocationImpl
-        {
-            get
-            {
-                Zetbox.App.Base.ConstraintInvocationEfImpl __value;
-                EntityReference<Zetbox.App.Base.ConstraintInvocationEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.ConstraintInvocationEfImpl>(
-                        "Model.FK_Constraint_invokes_IsValidInvocation",
-                        "IsValidInvocation");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load();
-                }
-                __value = r.Value;
-                if (OnIsValidInvocation_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.ConstraintInvocation>(__value);
-                    OnIsValidInvocation_Getter(this, e);
-                    __value = (Zetbox.App.Base.ConstraintInvocationEfImpl)e.Result;
-                }
-                return __value;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
-
-                EntityReference<Zetbox.App.Base.ConstraintInvocationEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.ConstraintInvocationEfImpl>(
-                        "Model.FK_Constraint_invokes_IsValidInvocation",
-                        "IsValidInvocation");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load();
-                }
-                Zetbox.App.Base.ConstraintInvocationEfImpl __oldValue = (Zetbox.App.Base.ConstraintInvocationEfImpl)r.Value;
-                Zetbox.App.Base.ConstraintInvocationEfImpl __newValue = (Zetbox.App.Base.ConstraintInvocationEfImpl)value;
-
-                // Changing Event fires before anything is touched
-                NotifyPropertyChanging("IsValidInvocation", __oldValue, __newValue);
-
-                if (OnIsValidInvocation_PreSetter != null)
-                {
-                    var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.ConstraintInvocation>(__oldValue, __newValue);
-                    OnIsValidInvocation_PreSetter(this, e);
-                    __newValue = (Zetbox.App.Base.ConstraintInvocationEfImpl)e.Result;
-                }
-
-                r.Value = (Zetbox.App.Base.ConstraintInvocationEfImpl)__newValue;
-
-                if (OnIsValidInvocation_PostSetter != null)
-                {
-                    var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.ConstraintInvocation>(__oldValue, __newValue);
-                    OnIsValidInvocation_PostSetter(this, e);
-                }
-
-                // everything is done. fire the Changed event
-                NotifyPropertyChanged("IsValidInvocation", __oldValue, __newValue);
-                if(IsAttached) UpdateChangedInfo = true;
-            }
-        }
-
-        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for IsValidInvocation
-		public static event PropertyGetterHandler<Zetbox.App.Base.InvokingConstraint, Zetbox.App.Base.ConstraintInvocation> OnIsValidInvocation_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Base.InvokingConstraint, Zetbox.App.Base.ConstraintInvocation> OnIsValidInvocation_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Base.InvokingConstraint, Zetbox.App.Base.ConstraintInvocation> OnIsValidInvocation_PostSetter;
-
-        public static event PropertyIsValidHandler<Zetbox.App.Base.InvokingConstraint> OnIsValidInvocation_IsValid;
-
-        /// <summary>
-        /// 
-        /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetErrorText_InvokingConstraint")]
         public override string GetErrorText(System.Object constrainedObject, System.Object constrainedValue)
@@ -384,8 +178,6 @@ namespace Zetbox.App.Base
             var otherImpl = (InvokingConstraintEfImpl)obj;
             var me = (InvokingConstraint)this;
 
-            this._fk_GetErrorTextInvocation = otherImpl._fk_GetErrorTextInvocation;
-            this._fk_IsValidInvocation = otherImpl._fk_IsValidInvocation;
         }
         public override void SetNew()
         {
@@ -393,19 +185,6 @@ namespace Zetbox.App.Base
         }
         #region Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
-        {
-            base.OnPropertyChanged(property, oldValue, newValue);
-
-            // Do not audit calculated properties
-            switch (property)
-            {
-                case "GetErrorTextInvocation":
-                case "IsValidInvocation":
-                    AuditPropertyChange(property, oldValue, newValue);
-                    break;
-            }
-        }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
@@ -416,65 +195,8 @@ namespace Zetbox.App.Base
             base.ReloadReferences();
 
             // fix direct object references
-
-            if (_fk_guid_GetErrorTextInvocation.HasValue)
-                GetErrorTextInvocationImpl = (Zetbox.App.Base.ConstraintInvocationEfImpl)Context.FindPersistenceObject<Zetbox.App.Base.ConstraintInvocation>(_fk_guid_GetErrorTextInvocation.Value);
-            else
-            if (_fk_GetErrorTextInvocation.HasValue)
-                GetErrorTextInvocationImpl = (Zetbox.App.Base.ConstraintInvocationEfImpl)Context.Find<Zetbox.App.Base.ConstraintInvocation>(_fk_GetErrorTextInvocation.Value);
-            else
-                GetErrorTextInvocationImpl = null;
-
-            if (_fk_guid_IsValidInvocation.HasValue)
-                IsValidInvocationImpl = (Zetbox.App.Base.ConstraintInvocationEfImpl)Context.FindPersistenceObject<Zetbox.App.Base.ConstraintInvocation>(_fk_guid_IsValidInvocation.Value);
-            else
-            if (_fk_IsValidInvocation.HasValue)
-                IsValidInvocationImpl = (Zetbox.App.Base.ConstraintInvocationEfImpl)Context.Find<Zetbox.App.Base.ConstraintInvocation>(_fk_IsValidInvocation.Value);
-            else
-                IsValidInvocationImpl = null;
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
-        private static readonly object _propertiesLock = new object();
-        private static System.ComponentModel.PropertyDescriptor[] _properties;
-
-        private void _InitializePropertyDescriptors(Func<IFrozenContext> lazyCtx)
-        {
-            if (_properties != null) return;
-            lock (_propertiesLock)
-            {
-                // recheck for a lost race after aquiring the lock
-                if (_properties != null) return;
-
-                _properties = new System.ComponentModel.PropertyDescriptor[] {
-                    // else
-                    new PropertyDescriptorEfImpl<InvokingConstraint, Zetbox.App.Base.ConstraintInvocation>(
-                        lazyCtx,
-                        new Guid("3b5d70f7-b6fd-4e39-b912-5a644a5de716"),
-                        "GetErrorTextInvocation",
-                        null,
-                        obj => obj.GetErrorTextInvocation,
-                        (obj, val) => obj.GetErrorTextInvocation = val,
-						obj => OnGetErrorTextInvocation_IsValid), 
-                    // else
-                    new PropertyDescriptorEfImpl<InvokingConstraint, Zetbox.App.Base.ConstraintInvocation>(
-                        lazyCtx,
-                        new Guid("3c98da56-1c21-4849-87b1-81bf72d17e70"),
-                        "IsValidInvocation",
-                        null,
-                        obj => obj.IsValidInvocation,
-                        (obj, val) => obj.IsValidInvocation = val,
-						obj => OnIsValidInvocation_IsValid), 
-                    // position columns
-                };
-            }
-        }
-
-        protected override void CollectProperties(Func<IFrozenContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
-        {
-            base.CollectProperties(lazyCtx, props);
-            _InitializePropertyDescriptors(lazyCtx);
-            props.AddRange(_properties);
-        }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         #region Zetbox.Generator.Templates.ObjectClasses.DefaultMethods
 
@@ -527,8 +249,6 @@ namespace Zetbox.App.Base
         [EventBasedMethod("OnNotifyCreated_InvokingConstraint")]
         public override void NotifyCreated()
         {
-            SetNotInitializedProperty("GetErrorTextInvocation");
-            SetNotInitializedProperty("IsValidInvocation");
             base.NotifyCreated();
             if (OnNotifyCreated_InvokingConstraint != null) OnNotifyCreated_InvokingConstraint(this);
         }
@@ -539,8 +259,6 @@ namespace Zetbox.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_InvokingConstraint != null) OnNotifyDeleting_InvokingConstraint(this);
-            GetErrorTextInvocation = null;
-            IsValidInvocation = null;
         }
         public static event ObjectEventHandler<InvokingConstraint> OnNotifyDeleting_InvokingConstraint;
 
@@ -554,22 +272,6 @@ namespace Zetbox.App.Base
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            {
-                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ConstraintInvocationEfImpl>("Model.FK_Constraint_invokes_GetErrorTextInvocation", "GetErrorTextInvocation");
-                var key = r.EntityKey;
-                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
-            }
-            if (auxObjects != null) {
-                auxObjects.Add(GetErrorTextInvocation);
-            }
-            {
-                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ConstraintInvocationEfImpl>("Model.FK_Constraint_invokes_IsValidInvocation", "IsValidInvocation");
-                var key = r.EntityKey;
-                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
-            }
-            if (auxObjects != null) {
-                auxObjects.Add(IsValidInvocation);
-            }
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -578,8 +280,6 @@ namespace Zetbox.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
-            binStream.Read(out this._fk_GetErrorTextInvocation);
-            binStream.Read(out this._fk_IsValidInvocation);
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
@@ -593,8 +293,6 @@ namespace Zetbox.App.Base
             base.Export(xml, modules);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(GetErrorTextInvocation != null ? GetErrorTextInvocation.ExportGuid : (Guid?)null, xml, "GetErrorTextInvocation", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(IsValidInvocation != null ? IsValidInvocation.ExportGuid : (Guid?)null, xml, "IsValidInvocation", "Zetbox.App.Base");
         }
 
         public override void MergeImport(System.Xml.XmlReader xml)
@@ -602,14 +300,6 @@ namespace Zetbox.App.Base
             base.MergeImport(xml);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            switch (xml.NamespaceURI + "|" + xml.LocalName) {
-            case "Zetbox.App.Base|GetErrorTextInvocation":
-                this._fk_guid_GetErrorTextInvocation = XmlStreamer.ReadNullableGuid(xml);
-                break;
-            case "Zetbox.App.Base|IsValidInvocation":
-                this._fk_guid_IsValidInvocation = XmlStreamer.ReadNullableGuid(xml);
-                break;
-            }
         }
 
         #endregion

@@ -4053,12 +4053,6 @@
             
 
             <!-- define the properties -->
-<!-- ObjectReferenceProperty -->
-        <many-to-one name="GetErrorTextInvocation" column="`InvokingConstraints_fk_GetErrorTextInvocation`" class="Zetbox.App.Base.ConstraintInvocationNHibernateImpl+ConstraintInvocationProxy, Zetbox.Objects.NHibernateImpl" unique="true" />
-
-<!-- ObjectReferenceProperty -->
-        <many-to-one name="IsValidInvocation" column="`InvokingConstraints_fk_IsValidInvocation`" class="Zetbox.App.Base.ConstraintInvocationNHibernateImpl+ConstraintInvocationProxy, Zetbox.Objects.NHibernateImpl" unique="true" />
-
 
             <!-- define the subclasses -->
 
@@ -4179,38 +4173,6 @@
             <!-- define the subclasses -->
 
         </subclass>
-
-    </class>
-    <class name="Zetbox.App.Base.ConstraintInvocationNHibernateImpl+ConstraintInvocationProxy, Zetbox.Objects.NHibernateImpl"
-           proxy="Zetbox.App.Base.ConstraintInvocationNHibernateImpl+ConstraintInvocationProxy, Zetbox.Objects.NHibernateImpl"
-           schema="`base`"
-           table="`ConstraintInvocations`"
-           abstract="false"
-           dynamic-update="false"
-           optimistic-lock="none"
-           batch-size="100">
-
-        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
-            <generator class="native">
-                <param name="schema">`base`</param>
-                <param name="sequence">`ConstraintInvocations_ID_seq`</param>
-            </generator>
-        </id>
-
-        <!-- define the properties -->
-        <!-- ValueTypeProperty isValue -->
-        <property name="ExportGuid" 
-                  column="`ExportGuid`" 
-                  optimistic-lock="false"/>
-<!-- ObjectReferenceProperty -->
-        <many-to-one name="Implementor" column="`fk_TypeRef`" class="Zetbox.App.Base.TypeRefNHibernateImpl+TypeRefProxy, Zetbox.Objects.NHibernateImpl" />
-
-        <!-- ValueTypeProperty isValue -->
-        <property name="MemberName" 
-                  column="`MemberName`" 
-                  optimistic-lock="false"/>
-
-        <!-- define the subclasses -->
 
     </class>
     <class name="Zetbox.App.Base.CurrentSchemaNHibernateImpl+CurrentSchemaProxy, Zetbox.Objects.NHibernateImpl"

@@ -158,7 +158,6 @@
     <Compile Include="CompoundObjectParameter.NHibernate.Designer.cs" />
     <Compile Include="CompoundObjectProperty.NHibernate.Designer.cs" />
     <Compile Include="Constraint.NHibernate.Designer.cs" />
-    <Compile Include="ConstraintInvocation.NHibernate.Designer.cs" />
     <Compile Include="ControlKind.NHibernate.Designer.cs" />
     <Compile Include="CurrentDateTimeDefaultValue.NHibernate.Designer.cs" />
     <Compile Include="CurrentSchema.NHibernate.Designer.cs" />

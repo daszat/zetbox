@@ -656,36 +656,6 @@ using Zetbox.DalProvider.Ef;
 
 
 	/*
-    Relation: FK_Constraint_invokes_GetErrorTextInvocation
-    A: One InvokingConstraint as Constraint
-    B: One ConstraintInvocation as GetErrorTextInvocation
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_Constraint_invokes_GetErrorTextInvocation",
-    "Constraint", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.InvokingConstraintEfImpl),
-    "GetErrorTextInvocation", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ConstraintInvocationEfImpl)
-    )]
-
-
-	/*
-    Relation: FK_Constraint_invokes_IsValidInvocation
-    A: One InvokingConstraint as Constraint
-    B: One ConstraintInvocation as IsValidInvocation
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_Constraint_invokes_IsValidInvocation",
-    "Constraint", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.InvokingConstraintEfImpl),
-    "IsValidInvocation", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ConstraintInvocationEfImpl)
-    )]
-
-
-	/*
     Relation: FK_Constraint_on_Constrained
     A: ZeroOrMore InstanceConstraint as Constraint
     B: ZeroOrOne DataType as Constrained
@@ -727,21 +697,6 @@ using Zetbox.DalProvider.Ef;
     "Model", "FK_Constraint_was_CreatedBy",
     "Constraint", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.ConstraintEfImpl),
     "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
-    )]
-
-
-	/*
-    Relation: FK_ConstraintInvocation_has_TypeRef
-    A: ZeroOrMore ConstraintInvocation as ConstraintInvocation
-    B: ZeroOrOne TypeRef as TypeRef
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_ConstraintInvocation_has_TypeRef",
-    "ConstraintInvocation", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.ConstraintInvocationEfImpl),
-    "TypeRef", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.TypeRefEfImpl)
     )]
 
 
