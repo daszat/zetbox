@@ -285,7 +285,9 @@ namespace Zetbox.DalProvider.Client
 
             private object EvaluateMemberAccess(MemberExpression me)
             {
-                var obj = EvaluateToValue(me.Expression);
+                var obj = me.Expression == null
+                    ? null
+                    : EvaluateToValue(me.Expression);
                 var propertyInfo = me.Member as PropertyInfo;
                 if (propertyInfo != null)
                 {
