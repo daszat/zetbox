@@ -128,9 +128,6 @@ namespace Zetbox.Client.WPF
             catch (Exception ex)
             {
                 ShowExceptionReporter(ex);
-            }
-            finally
-            {
                 // unable to start, exit
                 System.Environment.Exit(1);
             }
