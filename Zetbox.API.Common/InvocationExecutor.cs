@@ -20,13 +20,13 @@ namespace Zetbox.API.Common
 
     public class InvocationExecutor : Zetbox.API.Common.IInvocationExecutor
     {
-        private IDeploymentRestrictor _restrictor;
+        //private IDeploymentRestrictor _restrictor;
         private ILifetimeScope _scope;
-        public InvocationExecutor(IDeploymentRestrictor restrictor, ILifetimeScope scope)
+        public InvocationExecutor(/*IDeploymentRestrictor restrictor, */ILifetimeScope scope)
         {
-            if (restrictor == null) throw new ArgumentNullException("restrictor");
+            //if (restrictor == null) throw new ArgumentNullException("restrictor");
             if (scope == null) throw new ArgumentNullException("scope");
-            _restrictor = restrictor;
+            //_restrictor = restrictor;
             _scope = scope;
         }
 
@@ -39,8 +39,9 @@ namespace Zetbox.API.Common
         {
             return obj != null
                 && !string.IsNullOrWhiteSpace(obj.MemberName)
-                && !string.IsNullOrWhiteSpace(obj.ImplementorName);
-            // TODO: && _restrictor.IsAcceptableDeploymentRestriction((int)obj.Implementor.Assembly.DeploymentRestrictions);
+                && !string.IsNullOrWhiteSpace(obj.ImplementorName)
+                && Type.GetType(obj.ImplementorName, throwOnError: false) != null;
+            //  && _restrictor.IsAcceptableDeploymentRestriction((int)obj.Implementor.Assembly.DeploymentRestrictions);
         }
 
         /// <summary>
