@@ -965,12 +965,16 @@ namespace Zetbox.Server.SchemaManagement
 
             var colName = Construct.ForeignKeyColumnName(otherEnd);
             var indexName = Construct.IndexName(tblName.Name, colName);
+            var checkConstraintName = Construct.CheckConstraintName(tblName.Name, colName);
 
             if (db.CheckFKConstraintExists(tblName, assocName))
                 db.DropFKConstraint(tblName, assocName);
 
             if (db.CheckIndexExists(tblName, indexName))
                 db.DropIndex(tblName, indexName);
+
+            if (db.CheckCheckConstraintExists(tblName, checkConstraintName))
+                db.DropCheckConstraint(tblName, checkConstraintName);
 
             if (db.CheckColumnExists(tblName, colName))
                 db.DropColumn(tblName, colName);
@@ -1969,11 +1973,17 @@ namespace Zetbox.Server.SchemaManagement
             var colName = Construct.ForeignKeyColumnName(otherEnd);
             var assocName = rel.GetRelationAssociationName(role);
             var indexName = Construct.IndexName(tblName.Name, colName);
+            var checkConstraintName = Construct.CheckConstraintName(tblName.Name, colName);
 
             if (db.CheckFKConstraintExists(tblName, assocName))
                 db.DropFKConstraint(tblName, assocName);
+
             if (db.CheckIndexExists(tblName, indexName))
                 db.DropIndex(tblName, indexName);
+
+            if (db.CheckCheckConstraintExists(tblName, checkConstraintName))
+                db.DropCheckConstraint(tblName, checkConstraintName);
+
             if (db.CheckColumnExists(tblName, colName))
                 db.DropColumn(tblName, colName);
 
@@ -2914,7 +2924,11 @@ namespace Zetbox.Server.SchemaManagement
 
             var tblName = objClass.GetTableRef(db);
             var colName = Construct.ColumnName(savedProp, prefix);
+            var checkConstraintName = Construct.CheckConstraintName(tblName.Name, colName);
             Log.InfoFormat("Drop Column: {0}.{1}", tblName, colName);
+            if (db.CheckCheckConstraintExists(tblName, checkConstraintName))
+                db.DropCheckConstraint(tblName, checkConstraintName);
+
             if (db.CheckColumnExists(tblName, colName))
                 db.DropColumn(tblName, colName);
 
