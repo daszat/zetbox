@@ -87,10 +87,8 @@ namespace Zetbox.Client.WPF
             return result;
         }
 
-        private IContainer CreateMasterContainer(ZetboxConfig config)
+        protected virtual void ConfigureContainerBuilder(ZetboxConfig config, ContainerBuilder builder)
         {
-            var builder = Zetbox.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Client.Modules);
-
             builder
                 .RegisterType<Launcher>()
                 .SingleInstance();
@@ -100,8 +98,6 @@ namespace Zetbox.Client.WPF
                     p.Named<object>("requestedKind"),
                     c.Resolve<IFrozenContext>()))
                 .InstancePerDependency();
-
-            return builder.Build();
         }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -158,7 +154,9 @@ namespace Zetbox.Client.WPF
                 serverDomain.Start(config);
             }
 
-            container = CreateMasterContainer(config);
+            var builder = Zetbox.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Client.Modules);
+            ConfigureContainerBuilder(config, builder);
+            container = builder.Build();
             API.AppDomainInitializer.InitializeFrom(container);
 
             StartupScreen.SetInfo(Zetbox.Client.Properties.Resources.Startup_Launcher);
