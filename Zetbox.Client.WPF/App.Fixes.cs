@@ -96,7 +96,7 @@ namespace Zetbox.Client.WPF
         /// <summary>
         /// Calls currently needed Database fixes
         /// </summary>
-        internal static void FixupDatabase(Func<IZetboxContext> ctxFactory)
+        protected virtual void FixupDatabase(Func<IZetboxContext> ctxFactory)
         {
             //ImportIcons(ctxFactory());
             //FixIcons(ctxFactory());

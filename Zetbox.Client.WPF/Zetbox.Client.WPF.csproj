@@ -581,7 +581,9 @@
     <Compile Include="App.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App.Fixes.cs" />
+    <Compile Include="App.Fixes.cs">
+      <DependentUpon>App.cs</DependentUpon>
+    </Compile>
     <Compile Include="DebugConsole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
