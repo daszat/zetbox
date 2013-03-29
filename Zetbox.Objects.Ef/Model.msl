@@ -2604,6 +2604,7 @@
       <EntityTypeMapping TypeName="Model.TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl">
         <MappingFragment StoreEntitySet="TypeRef_hasGenericArguments_TypeRef_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
+		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
           <ScalarProperty Name="A_pos" ColumnName="fk_TypeRef_pos" />
           <ScalarProperty Name="B_pos" ColumnName="fk_GenericArguments_pos" />
         </MappingFragment>
@@ -2683,6 +2684,7 @@
       <EntityTypeMapping TypeName="Model.ViewDescriptor_supports_TypeRef_RelationEntryEfImpl">
         <MappingFragment StoreEntitySet="ViewDescriptor_supports_TypeRef_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
+		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

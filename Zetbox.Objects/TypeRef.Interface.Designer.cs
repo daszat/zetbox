@@ -11,7 +11,7 @@ namespace Zetbox.App.Base
     /// This class models a reference to a specific, concrete Type. Generic Types have all parameters filled.
     /// </summary>
     [Zetbox.API.DefinitionGuid("87766ae2-89a4-4c37-ab25-583a710c55e5")]
-    public interface TypeRef : IDataObject, Zetbox.App.Base.IChangedBy 
+    public interface TypeRef : IDataObject, Zetbox.App.Base.IChangedBy, Zetbox.App.Base.IExportable 
     {
 
         /// <summary>
@@ -28,15 +28,6 @@ namespace Zetbox.App.Base
         /// </summary>
         [Zetbox.API.DefinitionGuid("aa1a4c98-2ae0-45d9-a343-7db43ca6430e")]
         bool? Deleted {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Export Guid
-        /// </summary>
-        [Zetbox.API.DefinitionGuid("48430be7-e17f-48ad-ac8b-7f9cb5341318")]
-        Guid ExportGuid {
             get;
             set;
         }

@@ -3564,6 +3564,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+	<Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="fk_TypeRef" Type="int" Nullable="true" />
     <Property Name="fk_TypeRef_pos" Type="int" Nullable="true" />
     <Property Name="fk_GenericArguments" Type="int" Nullable="true" />
@@ -3643,6 +3644,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+	<Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="fk_ViewDescriptor" Type="int" Nullable="true" />
     <Property Name="fk_ViewModelTypeRefs" Type="int" Nullable="true" />
   </EntityType>

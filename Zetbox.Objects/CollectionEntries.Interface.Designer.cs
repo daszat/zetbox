@@ -296,7 +296,7 @@ namespace Zetbox.App.Base
     /// ObjectCollectionEntry for 
     /// </summary>
     [Zetbox.API.DefinitionGuid("8b41ffa4-8ffa-4d96-b4e5-708188045c71")]
-    public interface TypeRef_hasGenericArguments_TypeRef_RelationEntry : IRelationListEntry<TypeRef, TypeRef> 
+    public interface TypeRef_hasGenericArguments_TypeRef_RelationEntry : IRelationListEntry<TypeRef, TypeRef>, Zetbox.App.Base.IExportable 
     {
 
     }
@@ -312,7 +312,7 @@ namespace Zetbox.App.GUI
     /// ObjectCollectionEntry for 
     /// </summary>
     [Zetbox.API.DefinitionGuid("786dae2f-cb6e-454d-93fd-192541df928d")]
-    public interface ViewDescriptor_supports_TypeRef_RelationEntry : IRelationEntry<ViewDescriptor, TypeRef> 
+    public interface ViewDescriptor_supports_TypeRef_RelationEntry : IRelationEntry<ViewDescriptor, TypeRef>, Zetbox.App.Base.IExportable 
     {
 
     }
