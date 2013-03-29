@@ -465,7 +465,7 @@ namespace Zetbox.App.Extensions
         {
             _cache = _context
                 .GetQuery<ViewModelDescriptor>()
-                .Where(obj => obj.ViewModelTypeRef != "ERROR")
+                .Where(obj => obj.ViewModelTypeRef != "ERROR" && !string.IsNullOrWhiteSpace(obj.ViewModelTypeRef))
                 .ToDictionary(obj => obj.ViewModelTypeRef);
         }
 
