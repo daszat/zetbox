@@ -121,19 +121,19 @@ namespace Zetbox.Client.WPF
         private static void MigrateTypeRefs(IZetboxContext ctx)
         {
             // ViewModelDescriptor
-            foreach (var vmd in ctx.GetQuery<ViewModelDescriptor>())
+            foreach (var vmd in ctx.GetQuery<ViewModelDescriptor>().Where(v => v.ViewModelRef != null))
             {
                 vmd.ViewModelTypeRef = GetSimpleName(vmd.ViewModelRef);
             }
 
             // ViewDescriptor
-            foreach (var vd in ctx.GetQuery<ViewDescriptor>())
+            foreach (var vd in ctx.GetQuery<ViewDescriptor>().Where(v => v.ControlRef != null))
             {
                 vd.ControlTypeRef = GetSimpleName(vd.ControlRef);
             }
 
             // CLRObjectParameter
-            foreach (var clrop in ctx.GetQuery<CLRObjectParameter>())
+            foreach (var clrop in ctx.GetQuery<CLRObjectParameter>().Where(c => c.Type != null))
             {
                 clrop.TypeRef = GetSimpleName(clrop.Type);
             }
