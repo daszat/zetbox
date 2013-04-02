@@ -20,11 +20,10 @@ namespace Zetbox.App.Extensions
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
-
     using Zetbox.API;
+    using Zetbox.API.Utils;
     using Zetbox.App.Base;
     using Zetbox.App.GUI;
-    using Zetbox.API.Utils;
     using Zetbox.Client.GUI;
 
     /// <summary>
@@ -121,7 +120,7 @@ namespace Zetbox.App.Extensions
                 }
                 else
                 {
-                    Logging.Log.WarnFormat("Couldn't find ViewDescriptor for '{1}' matching ControlKind: '{0}'", requestedControlKind, self.ViewModelTypeRef);
+                    Logging.Log.WarnFormat("Couldn't find View for '{1}' matching ControlKind: '{0}'", requestedControlKind, self.ViewModelTypeRef);
                 }
             }
             else if (candidates.Count == 1)
@@ -146,7 +145,7 @@ namespace Zetbox.App.Extensions
                 // Log a warning if nothing found
                 if (match == null)
                 {
-                    Logging.Log.WarnFormat("Couldn't find ViewDescriptor for '{1}' matching ControlKind: '{0}'", requestedControlKind, self.GetType().FullName);
+                    Logging.Log.WarnFormat("Couldn't find View for '{1}' matching ControlKind: '{0}'", requestedControlKind, self.ViewModelTypeRef);
                 }
                 result = match;
             }
