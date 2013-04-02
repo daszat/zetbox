@@ -200,21 +200,6 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <PropertyGroup>
-    <!-- deploys the compiled binaries into the local inetpub for debugging -->
-    <PostBuildEvent Condition=" '$(OS)' == 'Windows_NT' ">
-xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Common" "$(ProjectDir)\bin\Common"
-xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Server" "$(ProjectDir)\bin\Server"
-xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Client" "$(ProjectDir)\Client"
-xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Bootstrapper" "$(ProjectDir)\Bootstrapper"
-del "$(ProjectDir)\bin\Zetbox.Objects.*"
-    </PostBuildEvent>
-    <PostBuildEvent Condition=" '$(OS)' != 'Windows_NT' ">
-bash -c 'cp -r "$(SolutionDir)/bin/$(Configuration)"/{Common,Server} "$(ProjectDir)/bin"'
-bash -c 'cp -r "$(SolutionDir)/bin/$(Configuration)"/{Client,Bootstrapper} "$(ProjectDir)"'
-bash -c 'rm -f "$(ProjectDir)"/bin/Zetbox.Objects.*'
-     </PostBuildEvent>
-  </PropertyGroup>
   <!--
     deploys this webapp to $(SolutionDir)\bin\$(Configuration).HttpService 
 	code from http://stackoverflow.com/questions/776635/replicate-vs2008-publish-web-site-from-command-line/1407910#1407910
@@ -233,7 +218,18 @@ bash -c 'rm -f "$(ProjectDir)"/bin/Zetbox.Objects.*'
     <GitVersionFile TemplateFile="Properties\VersionInfo.cs" DestinationFile="Properties\VersionInfo.Designer.cs" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>
-</PostBuildEvent>
+    <!-- deploys the compiled binaries into the local inetpub for debugging -->
+    <PostBuildEvent Condition=" '$(OS)' == 'Windows_NT' ">
+xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Common" "$(ProjectDir)\bin\Common"
+xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Server" "$(ProjectDir)\bin\Server"
+xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Client" "$(ProjectDir)\Client"
+xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Bootstrapper" "$(ProjectDir)\Bootstrapper"
+del "$(ProjectDir)\bin\Zetbox.Objects.*"
+    </PostBuildEvent>
+    <PostBuildEvent Condition=" '$(OS)' != 'Windows_NT' ">
+bash -c 'cp -r "$(SolutionDir)/bin/$(Configuration)"/{Common,Server} "$(ProjectDir)/bin"'
+bash -c 'cp -r "$(SolutionDir)/bin/$(Configuration)"/{Client,Bootstrapper} "$(ProjectDir)"'
+bash -c 'rm -f "$(ProjectDir)"/bin/Zetbox.Objects.*'
+     </PostBuildEvent>
   </PropertyGroup>
 </Project>
