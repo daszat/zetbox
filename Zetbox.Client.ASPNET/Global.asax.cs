@@ -13,18 +13,19 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Routing;
-
 namespace Zetbox.Client.ASPNET
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web;
+    using Autofac.Integration.Mvc;
+    using System.Web.Mvc;
+    using System.Web.Routing;
+    using Zetbox.Client;
+
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
     // visit http://go.microsoft.com/?LinkId=9394801
-
     public class MvcApplication : ZetboxMvcApplication
     {
         public override void RegisterGlobalFilters(GlobalFilterCollection filters)
@@ -41,6 +42,14 @@ namespace Zetbox.Client.ASPNET
                 "{controller}/{action}/{id}", // URL with parameters
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
             );
+        }
+
+        protected override void ConfigureContainerBuilder(Autofac.ContainerBuilder builder)
+        {
+            base.ConfigureContainerBuilder(builder);
+
+            builder.RegisterControllers(typeof(MvcApplication).Assembly);
+            builder.RegisterViewModels(typeof(MvcApplication).Assembly);
         }
     }
 }

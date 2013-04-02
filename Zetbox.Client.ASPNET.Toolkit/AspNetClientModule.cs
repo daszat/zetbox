@@ -21,15 +21,27 @@ namespace Zetbox.Client.ASPNET
     using System.Text;
     using System.ComponentModel;
     using Autofac;
+    using Autofac.Integration.Mvc;
     using Zetbox.Client.Presentables;
     using Zetbox.API;
     using Zetbox.API.Common;
     using Zetbox.API.Common.GUI;
     using Zetbox.API.Client;
-    
+
+    public class ZetboxContextHttpScope
+    {
+        public ZetboxContextHttpScope(IZetboxContext ctx)
+        {
+            Context = ctx;
+        }
+
+        public IZetboxContext Context { get; private set; }
+    }
+
     [Description("The ASP.NET MVC Client Module")]
     public class AspNetClientModule : Module
     {
+        #region ViewModelDependencies
         private class ViewModelDependencies : IViewModelDependencies
         {
             public ViewModelDependencies(IViewModelFactory f, IFrozenContext frozenCtx, IIdentityResolver idResolver, IIconConverter iconConverter)
@@ -69,6 +81,7 @@ namespace Zetbox.Client.ASPNET
                 private set;
             }
         }
+        #endregion
 
         protected override void Load(ContainerBuilder moduleBuilder)
         {
@@ -89,6 +102,21 @@ namespace Zetbox.Client.ASPNET
                 .Register<LoggingProblemReporter>(c => new LoggingProblemReporter())
                 .As<IProblemReporter>()
                 .SingleInstance();
+
+            moduleBuilder
+                .Register<ZetboxContextHttpScope>(c => new ZetboxContextHttpScope(c.Resolve<IZetboxContext>()))
+                .InstancePerHttpRequest();
+
+            moduleBuilder
+                .RegisterType<AspNetViewModelFactory>()
+                .As<IViewModelFactory>()
+                .As<IToolkit>()
+                .SingleInstance();
+
+            moduleBuilder
+                .RegisterType<Zetbox.Client.GUI.DialogCreator>()
+                .AsSelf()
+                .InstancePerDependency();
 
             moduleBuilder.RegisterViewModels(typeof(ClientModule).Assembly);
         }

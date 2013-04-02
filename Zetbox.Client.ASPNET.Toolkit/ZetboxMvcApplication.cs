@@ -70,7 +70,10 @@ namespace Zetbox.Client.ASPNET
 
         private IContainer CreateMasterContainer(ZetboxConfig config)
         {
-            var builder = Zetbox.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Client.Modules);
+            var allModules = config.Server.Modules
+                     .Concat(config.Client.Modules);
+
+            var builder = Zetbox.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, allModules);
             ConfigureContainerBuilder(builder);
             var container = builder.Build();
             API.AppDomainInitializer.InitializeFrom(container);

@@ -13,32 +13,28 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using Zetbox.Client.ASPNET.Models;
-using Zetbox.Client.Presentables;
-
-namespace Zetbox.Client.ASPNET.Controllers
+namespace Zetbox.Client.ASPNET
 {
-    public class HomeController : ZetboxController
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Web.Mvc;
+    using Zetbox.Client.Presentables;
+    using Zetbox.API;
+
+    public class ZetboxController : Controller
     {
-        public HomeController(IViewModelFactory vmf, ZetboxContextHttpScope contextScope)
-            : base(vmf, contextScope)
+        protected IViewModelFactory ViewModelFactory { get; private set; }
+        protected IZetboxContext DataContext
         {
-
+            get; private set;
         }
 
-        public ActionResult Index()
+        public ZetboxController(IViewModelFactory vmf, ZetboxContextHttpScope contextScope)
         {
-            return View(ViewModelFactory.CreateViewModel<SearchViewModel.Factory>().Invoke(DataContext, null));
-        }
-
-        public ActionResult About()
-        {
-            return View();
+            this.ViewModelFactory = vmf;
+            this.DataContext = contextScope.Context;
         }
     }
 }

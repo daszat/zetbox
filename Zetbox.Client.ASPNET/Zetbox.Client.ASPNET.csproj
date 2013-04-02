@@ -82,6 +82,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\SearchViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -173,6 +174,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Zetbox.API.Client\Zetbox.API.Client.csproj">
+      <Project>{DD11A4F6-24C2-4935-8042-DE49CA6B32C0}</Project>
+      <Name>Zetbox.API.Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Zetbox.API.Common\Zetbox.API.Common.csproj">
       <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>
       <Name>Zetbox.API.Common</Name>
@@ -187,6 +192,10 @@
       <Project>{03ACD22D-30DF-436F-8B44-6A1CE180E950}</Project>
       <Name>Zetbox.Client.ASPNET.Toolkit</Name>
       <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Zetbox.Client\Zetbox.Client.csproj">
+      <Project>{A736E13F-D349-4CE5-A397-8438F58D0B9D}</Project>
+      <Name>Zetbox.Client</Name>
     </ProjectReference>
     <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
