@@ -43,7 +43,7 @@ Building on Windows
   * [PG] Change the database password in all ConnectionStrings in all PostgreSQL configurations in Configs\Local or use the provided default for the login role.
   * Open a Visual Studio Command Prompt and navigate to the checkout
     * Set the desired database and ORM provider with "set zenv=Local\NHibernate\PostgreSQL" or "set zenv=Local\EF\MSSQL"
-    * Install our custom nuget source with ".nuget\nuget.exe sources add -name zetbox -source http://office.dasz.at/ngf/nuget"
+    * Install our custom nuget source with ".nuget\nuget.exe sources add -name zetbox -source https://office.dasz.at/ngf/api/v2/"
 	* Allow unsigned Powershell scripts to run. Execute "set-executionpolicy -executionPolicy RemoteSigned" in an PowerShell running as Administrator. Take care that you set the policy for both 32- and 64-bit mode.
     * Initialize the database and generated objects by running the "!FullReset.cmd" script.
   * To run the standalone WCF host, you need to set the proper urlacl. Edit and run the "urlreservation.cmd" as administrator
