@@ -131,15 +131,16 @@ namespace Zetbox.App.Extensions
             {
                 var allTypes = GetAllTypes(self);
                 // As allTypes is sorted from most specific to least specific, so first or default is perfect.
-                var match = allTypes.SelectMany(t => candidates.Where(c =>
+                var match = allTypes.SelectMany(vmType => candidates.Where(candidate =>
                 {
-                    var viewType = Type.GetType(c.ControlTypeRef, throwOnError: false);
+                    var viewType = Type.GetType(candidate.ControlTypeRef, throwOnError: false);
                     if (viewType == null) return false;
                     var supportedViewModels = viewType.GetInterfaces()
-                        .Where(i => { var ifType = i.GetType(); return ifType.IsGenericType && ifType.GetGenericTypeDefinition() == typeof(IHasViewModel<>); })
-                        .Select(i => i.GetGenericArguments().Single());
+                        .Where(ifType => ifType.IsGenericType && ifType.GetGenericTypeDefinition() == typeof(IHasViewModel<>))
+                        .Select(ifType => ifType.GetGenericArguments().Single());
 
-                    return supportedViewModels.Contains(t);
+                    // walk the inheritance chain and check whether the view supports one of our parents
+                    return vmType.AndParents(t => t.BaseType).Any(t => supportedViewModels.Contains(t));
                 })).FirstOrDefault();
 
                 // Log a warning if nothing found
