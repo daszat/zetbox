@@ -84,6 +84,14 @@ namespace Zetbox.DalProvider.Memory
                         manager.Init(args.Context.Resolve<IFrozenContext>());
                     })
                     .SingleInstance();
+
+                // Make the Func<IFrozenContext> a single instance
+                moduleBuilder.Register<Func<IFrozenContext>>(c => {
+                    var frozenCtx = c.Resolve<IFrozenContext>();
+                    return () => frozenCtx;
+                })
+                .SingleInstance();
+                
             }
             catch (FileNotFoundException ex)
             {

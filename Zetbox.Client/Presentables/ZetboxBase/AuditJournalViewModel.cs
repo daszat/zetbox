@@ -27,7 +27,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     using Zetbox.Client.Presentables.ValueViewModels;
 
     [ViewModelDescriptor]
-    public class AuditJournalViewModel : CompoundListViewModel
+    public class AuditJournalViewModel : CompoundCollectionViewModel
     {
         public new delegate AuditJournalViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
         private List<KeyValuePair<JournalEntryKey, string>> _journalEntries;
@@ -39,7 +39,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public AuditJournalViewModel(
             IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
-            ICompoundCollectionValueModel<IList<ICompoundObject>> mdl)
+            ICompoundCollectionValueModel<ICollection<ICompoundObject>> mdl)
             : base(appCtx, dataCtx, parent, mdl)
         {
             var notifier = mdl.Value as INotifyCollectionChanged;

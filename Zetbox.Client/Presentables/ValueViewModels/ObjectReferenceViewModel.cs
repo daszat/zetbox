@@ -518,12 +518,13 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 return new ZbTask<Tuple<List<ViewModel>, bool>>(new Tuple<List<ViewModel>, bool>(new List<ViewModel>(), false));
             }
 
-            var fetchTask = qry.Take(PossibleValuesLimit + 1).OfType<IDataObject>().ToListAsync();
+            var fetchTask = qry.Take(PossibleValuesLimit + 1).ToListAsync();
 
             var lstTask = new ZbTask<Tuple<List<ViewModel>, bool>>(fetchTask)
                 .OnResult(t =>
                 {
                     var mdlList = fetchTask.Result
+                                .OfType<IDataObject>()
                                 .Take(PossibleValuesLimit)
                                 .Select(i => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), i))
                                 .Cast<ViewModel>()

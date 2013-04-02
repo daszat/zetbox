@@ -20,6 +20,8 @@ namespace Zetbox.Client.ASPNET
     using System.Linq;
     using System.Text;
     using System.Web.Mvc;
+    using Autofac;
+    using Zetbox.Client.Presentables;
 
     public interface IZetboxModelBinder : IModelBinder
     { 
@@ -27,9 +29,17 @@ namespace Zetbox.Client.ASPNET
 
     public class ZetboxModelBinder : DefaultModelBinder, IZetboxModelBinder
     {
+        IViewModelFactory _vmf;
+        
+        public ZetboxModelBinder(IViewModelFactory vmf)
+        {
+            _vmf = vmf;
+        }
+
         protected override object CreateModel(ControllerContext controllerContext, ModelBindingContext bindingContext, Type modelType)
         {
-            return DependencyResolver.Current.GetService(modelType);
+            var scope = DependencyResolver.Current.GetService<ZetboxContextHttpScope>();
+            return _vmf.CreateViewModel<ViewModel.Factory>(modelType).Invoke(scope.Context, null);
         }
     }
 }
