@@ -2866,6 +2866,17 @@ namespace Zetbox.Server.SchemaManagement
             return false;
         }
 
+        private HashSet<ProcRef> _triggedRightsProcs = new HashSet<ProcRef>();
+
+        public void ExecuteTriggeredRefreshRights()
+        {
+            foreach (var refreshRightsOnProcedureName in _triggedRightsProcs)
+            {
+                db.ExecRefreshRightsOnProcedure(refreshRightsOnProcedureName);
+            }
+            _triggedRightsProcs.Clear();
+        }
+
         public void DoChangeObjectClassACL(ObjectClass objClass)
         {
             var rightsViewUnmaterializedName = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesRightsViewUnmaterializedName(objClass));
@@ -2876,7 +2887,7 @@ namespace Zetbox.Server.SchemaManagement
             DoCreateRightsViewUnmaterialized(objClass);
 
             DoCreateOrReplaceUpdateRightsTrigger(objClass);
-            db.ExecRefreshRightsOnProcedure(refreshRightsOnProcedureName);
+            _triggedRightsProcs.Add(refreshRightsOnProcedureName);
         }
         #endregion
 

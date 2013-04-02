@@ -102,10 +102,10 @@ namespace Zetbox.Server.SchemaManagement
                 Case.DoCreateRightsViewUnmaterialized(objClass);
                 if (!db.CheckProcedureExists(refreshRightsOnProcedureName))
                     db.CreateRefreshRightsOnProcedure(refreshRightsOnProcedureName, rightsViewUnmaterializedName, tblName, tblRightsName);
-                // Either the procedure has to be called, then it was done by the respective case
-                // or, we just removed it to keep the dependency away, then nothing has changed.
-                //db.ExecRefreshRightsOnProcedure(refreshRightsOnProcedureName);
             }
+            // Either we just removed it to keep the dependency away, then nothing has changed
+            // or, the case has triggered the execution and we do it now that everything is in place again.
+            Case.ExecuteTriggeredRefreshRights();
         }
 
         private void CreateFinalCheckConstraints()
