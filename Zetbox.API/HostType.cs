@@ -25,7 +25,11 @@ namespace Zetbox.API
         /// <summary>
         /// A special type of server
         /// </summary>
-        AspNet,
+        AspNetService,
+        /// <summary>
+        /// A web client
+        /// </summary>
+        AspNetClient,
         /// <summary>
         /// no predefined personality. This is used only in very rare cases.
         /// </summary>

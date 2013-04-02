@@ -97,7 +97,8 @@ namespace Zetbox.API.Utils
             string hostTypeDir = string.Empty;
             switch (config.HostType)
             {
-                case HostType.AspNet:
+                case HostType.AspNetClient:
+                case HostType.AspNetService:
                     hostTypeDir = "bin";
                     break;
                 case HostType.Client:

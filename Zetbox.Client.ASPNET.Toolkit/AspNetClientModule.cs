@@ -119,6 +119,7 @@ namespace Zetbox.Client.ASPNET
                 .InstancePerDependency();
 
             moduleBuilder.RegisterViewModels(typeof(ClientModule).Assembly);
+            moduleBuilder.RegisterModule((Module)Activator.CreateInstance(Type.GetType("Zetbox.App.Projekte.Client.CustomClientActionsModule, Zetbox.App.Projekte.Client", true)));
         }
     }
 }

@@ -50,7 +50,7 @@ namespace Zetbox.Client.ASPNET
             var configsPath = Path.Combine(zbBasePath, "Configs");
 
             var config = ZetboxConfig.FromFile(
-                HostType.AspNet,
+                HostType.AspNetClient,
                 string.IsNullOrEmpty(cfgFile) ? string.Empty : Server.MapPath(cfgFile),
                 ZetboxConfig.GetDefaultConfigName("Zetbox.Client.AspNet.xml", configsPath));
 
