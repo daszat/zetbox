@@ -94,14 +94,14 @@ namespace Zetbox.Server.SchemaManagement
                 var rightsViewUnmaterializedName = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesRightsViewUnmaterializedName(objClass));
                 var refreshRightsOnProcedureName = db.GetProcedureName(objClass.Module.SchemaName, Construct.SecurityRulesRefreshRightsOnProcedureName(objClass));
 
-                if (db.CheckViewExists(rightsViewUnmaterializedName)) continue;
+                Log.InfoFormat("Refreshing ObjectClass Security Rules: {0}", objClass.Name);
 
-                Log.InfoFormat("New ObjectClass Security Rules: {0}", objClass.Name);
-
-                Case.DoCreateOrReplaceUpdateRightsTrigger(objClass);
-                Case.DoCreateRightsViewUnmaterialized(objClass);
+                if (!db.CheckViewExists(rightsViewUnmaterializedName))
+                    Case.DoCreateRightsViewUnmaterialized(objClass);
                 if (!db.CheckProcedureExists(refreshRightsOnProcedureName))
                     db.CreateRefreshRightsOnProcedure(refreshRightsOnProcedureName, rightsViewUnmaterializedName, tblName, tblRightsName);
+
+                Case.DoCreateOrReplaceUpdateRightsTrigger(objClass);
             }
             // Either we just removed it to keep the dependency away, then nothing has changed
             // or, the case has triggered the execution and we do it now that everything is in place again.
