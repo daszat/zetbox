@@ -48,6 +48,9 @@
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.4.1.10331.0\lib\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -170,9 +173,25 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Zetbox.API.Common\Zetbox.API.Common.csproj">
+      <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>
+      <Name>Zetbox.API.Common</Name>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj">
+      <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
+      <Name>Zetbox.API</Name>
+      <Private>True</Private>
+    </ProjectReference>
     <ProjectReference Include="..\Zetbox.Client.ASPNET.Toolkit\Zetbox.Client.ASPNET.Toolkit.csproj">
       <Project>{03ACD22D-30DF-436F-8B44-6A1CE180E950}</Project>
       <Name>Zetbox.Client.ASPNET.Toolkit</Name>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj">
+      <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
+      <Name>Zetbox.Objects</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
@@ -206,4 +225,17 @@
     </VisualStudio>
   </ProjectExtensions>
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <PropertyGroup>
+    <!-- deploys the compiled binaries into the local inetpub for debugging -->
+    <PostBuildEvent Condition=" '$(OS)' == 'Windows_NT' ">
+xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Common" "$(ProjectDir)\bin\Common"
+xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Server" "$(ProjectDir)\bin\Server"
+xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Client" "$(ProjectDir)\bin\Client"
+del "$(ProjectDir)\bin\Zetbox.Objects.*"
+    </PostBuildEvent>
+    <PostBuildEvent Condition=" '$(OS)' != 'Windows_NT' ">
+bash -c 'cp -r "$(SolutionDir)/bin/$(Configuration)"/{Client,Common,Server} "$(ProjectDir)/bin"'
+bash -c 'rm -f "$(ProjectDir)"/bin/Zetbox.Objects.*'
+     </PostBuildEvent>
+  </PropertyGroup>
 </Project>

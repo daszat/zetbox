@@ -21,32 +21,91 @@ namespace Zetbox.Client.ASPNET
     using System.Text;
     using System.Web.Mvc;
     using System.Web.Routing;
+    using Autofac;
+    using Autofac.Configuration;
+    using Autofac.Integration.Mvc;
+    using Autofac.Core;
+    using Zetbox.Client.Presentables;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Utils;
+    using System.IO;
+    using Zetbox.API;
 
     public abstract class ZetboxMvcApplication : System.Web.HttpApplication
     {
-        public static void RegisterGlobalFilters(GlobalFilterCollection filters)
-        {
-            filters.Add(new HandleErrorAttribute());
-        }
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Client.ASPNET");
 
-        public static void RegisterRoutes(RouteCollection routes)
-        {
-            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
-            routes.MapRoute(
-                "Default", // Route name
-                "{controller}/{action}/{id}", // URL with parameters
-                new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
-            );
-
-        }
+        public abstract void RegisterGlobalFilters(GlobalFilterCollection filters);
+        public abstract void RegisterRoutes(RouteCollection routes);
 
         protected void Application_Start()
         {
+            Logging.Configure();
+            Log.Info("Starting Zetbox Web Application");
+
+            var cfgFile = System.Configuration.ConfigurationManager.AppSettings["ConfigFile"];
+
+            var appBasePath = Server.MapPath("~/");
+            var zbBasePath = Path.Combine(appBasePath, "..");
+            var configsPath = Path.Combine(zbBasePath, "Configs");
+
+            var config = ZetboxConfig.FromFile(
+                HostType.AspNet,
+                string.IsNullOrEmpty(cfgFile) ? string.Empty : Server.MapPath(cfgFile),
+                ZetboxConfig.GetDefaultConfigName("Zetbox.Client.AspNet.xml", configsPath));
+
+            // Make DocumentStore relative to HttpService
+            config.Server.DocumentStore = Path.Combine(appBasePath, config.Server.DocumentStore);
+
+            AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
+            var container = CreateMasterContainer(config);
+
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+
             AreaRegistration.RegisterAllAreas();
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
+        }
+
+        private IContainer CreateMasterContainer(ZetboxConfig config)
+        {
+            var builder = Zetbox.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Client.Modules);
+            ConfigureContainerBuilder(builder);
+            var container = builder.Build();
+            API.AppDomainInitializer.InitializeFrom(container);
+
+            SetupModelBinder(container);
+            return container;
+        }
+
+        protected virtual void SetupModelBinder(IContainer container)
+        {
+            foreach (var vmType in container
+                .ComponentRegistry
+                .Registrations
+                .SelectMany(r => r.Services.OfType<TypedService>())
+                .Where(s => typeof(ViewModel).IsAssignableFrom(s.ServiceType))
+                .Where(s => s.ServiceType.IsAbstract == false)
+                .Select(s => s.ServiceType))
+            {
+                ModelBinders.Binders.Add(vmType, container.Resolve<IZetboxModelBinder>());
+            }
+        }
+
+        protected virtual void ConfigureContainerBuilder(ContainerBuilder builder)
+        {
+            builder.RegisterControllers(typeof(ZetboxMvcApplication).Assembly);
+            builder.RegisterModelBinders(typeof(ZetboxMvcApplication).Assembly);
+            builder.RegisterModelBinderProvider();
+
+            builder
+                .RegisterType<ZetboxModelBinder>()
+                .As<IZetboxModelBinder>()
+                .SingleInstance();
+
+            builder
+                .RegisterModule<AspNetClientModule>();
         }
     }
 }
