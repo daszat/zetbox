@@ -33,13 +33,7 @@ namespace Zetbox.Client.ASPNET.Controllers
 
         public ActionResult Index()
         {
-            return View(ViewModelFactory.CreateViewModel<ProjectSearchViewModel.Factory>().Invoke(DataContext, null));
-        }
-
-        [HttpPost]
-        public ActionResult Index(ProjectSearchViewModel mdl, string foo)
-        {
-            return View(mdl);
+            return View();
         }
 
         public ActionResult About()

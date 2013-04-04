@@ -29,6 +29,7 @@ namespace Zetbox.Client.ASPNET
 
     public static class HtmlHelpers
     {
+        #region Widget
         private class WidgetContainer : IDisposable
         {
             private readonly TextWriter _writer;
@@ -54,36 +55,60 @@ namespace Zetbox.Client.ASPNET
         {
             return new WidgetContainer(html.ViewContext.Writer, title);
         }
+        #endregion
 
-        public static MvcHtmlString ZbLabel(this HtmlHelper html, ILabeledViewModel vmdl)
+        #region Label
+        public static MvcHtmlString ZbLabelFor<TModel>(this HtmlHelper<TModel> html, Expression<Func<TModel, ILabeledViewModel>> expression)
         {
+            var vmdl = (ILabeledViewModel)System.Web.Mvc.ModelMetadata.FromLambdaExpression<TModel, ILabeledViewModel>(expression, html.ViewData).Model;
             return LabelExtensions.Label(html, vmdl.Label);
         }
+        #endregion
 
-        public static MvcHtmlString ZbLabelFor<T>(this HtmlHelper<T> html, Expression<Func<T, ILabeledViewModel>> expression)
+        #region Display
+        public static MvcHtmlString ZbDisplayFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, string templateName = null, string htmlFieldName = null, object additionalViewData = null)
+            where TValue : BaseValueViewModel
         {
-            var result = (ILabeledViewModel)System.Web.Mvc.ModelMetadata.FromLambdaExpression<T, ILabeledViewModel>(expression, html.ViewData).Model;
-            return LabelExtensions.Label(html, result.Label);
+            var newExpression = AppendMember<TModel, TValue>(expression, "FormattedValue");
+            var vmdl = (BaseValueViewModel)System.Web.Mvc.ModelMetadata.FromLambdaExpression<TModel, TValue>(expression, html.ViewData).Model;
+            return DisplayExtensions.DisplayFor<TModel, string>(html, newExpression, templateName, htmlFieldName, additionalViewData);
         }
+        #endregion
 
+        #region Editor
         public static MvcHtmlString ZbEditorFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, string templateName = null, string htmlFieldName = null, object additionalViewData = null)
             where TValue : BaseValueViewModel
         {
-            var body = expression.Body;
-            var formattedValueExpression = Expression.MakeMemberAccess(body, typeof(BaseValueViewModel).GetMember("FormattedValue").Single());
-            var newLambda = Expression.Lambda<Func<TModel, string>>(formattedValueExpression, expression.Parameters.ToArray());
-
-            return EditorExtensions.EditorFor<TModel, string>(html, newLambda, templateName, htmlFieldName, additionalViewData);
+            var newExpression = AppendMember<TModel, TValue>(expression, "FormattedValue");
+            var vmdl = (BaseValueViewModel)System.Web.Mvc.ModelMetadata.FromLambdaExpression<TModel, TValue>(expression, html.ViewData).Model;
+            if (vmdl.IsReadOnly)
+            {
+                return DisplayExtensions.DisplayFor<TModel, string>(html, newExpression, templateName, htmlFieldName, additionalViewData);
+            }
+            else
+            {
+                return EditorExtensions.EditorFor<TModel, string>(html, newExpression, templateName, htmlFieldName, additionalViewData);
+            }
         }
+        #endregion
 
+        #region TextBox
         public static MvcHtmlString ZbTextBoxFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, object htmlAttributes = null)
             where TValue : BaseValueViewModel
         {
-            var body = expression.Body;
-            var formattedValueExpression = Expression.MakeMemberAccess(body, typeof(BaseValueViewModel).GetMember("FormattedValue").Single());
-            var newLambda = Expression.Lambda<Func<TModel, string>>(formattedValueExpression, expression.Parameters.ToArray());
-
-            return InputExtensions.TextBoxFor<TModel, string>(html, newLambda, htmlAttributes);
+            return InputExtensions.TextBoxFor<TModel, string>(html, AppendMember<TModel, TValue>(expression, "FormattedValue"), htmlAttributes);
         }
+        #endregion
+
+        #region Helper
+        private static Expression<Func<TModel, string>> AppendMember<TModel, TValue>(Expression<Func<TModel, TValue>> expression, string member)
+            where TValue : BaseValueViewModel
+        {
+            var body = expression.Body;
+            var formattedValueExpression = Expression.MakeMemberAccess(body, typeof(BaseValueViewModel).GetMember(member).Single());
+            var newLambda = Expression.Lambda<Func<TModel, string>>(formattedValueExpression, expression.Parameters.ToArray());
+            return newLambda;
+        }
+        #endregion
     }
 }

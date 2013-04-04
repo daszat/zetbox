@@ -1,62 +1,48 @@
 ﻿@model Zetbox.Client.ASPNET.Models.ProjektEditViewModel
 @using Zetbox.Client.ASPNET
-
 @{
     ViewBag.Title = "Edit a Project";
 }
-
-<h2>Edit</h2>
-
+<h2>@Html.ZbDisplayFor(model => model.Object.PropertyModelsByName["Name"])</h2>
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
-
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true)
-    <fieldset>
-        <legend>Project</legend>
-
+    <div class="AreaGroup1">
         <div class="editor-label">
             @Html.ZbLabelFor(model => model.Object.PropertyModelsByName["Name"])
         </div>
         <div class="editor-field">
             @Html.ZbEditorFor(model => model.Object.PropertyModelsByName["Name"])
         </div>
-
         <div class="editor-label">
             @Html.ZbLabelFor(model => model.Object.PropertyModelsByName["Kundenname"])
         </div>
         <div class="editor-field">
             @Html.ZbEditorFor(model => model.Object.PropertyModelsByName["Kundenname"])
         </div>
-
         <div class="editor-label">
             @Html.ZbLabelFor(model => model.Object.PropertyModelsByName["Von"])
         </div>
         <div class="editor-field">
             @Html.ZbEditorFor(model => model.Object.PropertyModelsByName["Von"], "DateTime")
         </div>
-
         <div class="editor-label">
             @Html.ZbLabelFor(model => model.Object.PropertyModelsByName["Bis"])
         </div>
         <div class="editor-field">
             @Html.ZbEditorFor(model => model.Object.PropertyModelsByName["Bis"], "DateTime")
         </div>
-        
         <div class="editor-label">
             @Html.ZbLabelFor(model => model.Object.PropertyModelsByName["AufwandGes"])
         </div>
         <div class="editor-field">
             @Html.ZbEditorFor(model => model.Object.PropertyModelsByName["AufwandGes"])
         </div>
-        
-        <p>
-            <input type="submit" value="Save" />
-        </p>
-    </fieldset>
+    </div>
+    <p>
+        <input type="submit" value="Save" />
+        @Html.ActionLink("Back to Details", "Detail", new { id = Model.ID })        
+    </p>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

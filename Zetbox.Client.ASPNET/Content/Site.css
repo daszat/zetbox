@@ -392,11 +392,17 @@ table
     border: 1px solid #ccc;
     border-width: 1px;
     line-height: 18px;
-    margin: 0 0 22px 0;
+    margin: 0 0 10px 0;
     text-align: left;
     padding: 0 5px;
 }
-table .even
+
+table.strech
+{
+    width: 100%;
+}
+
+table.even
 {
     background: #ddd;
 }
@@ -411,4 +417,29 @@ tr
 th, td
 {
     padding: 5px 3px;
+}
+
+.edit-link-container 
+{
+    float: right;
+}
+
+.AreaGroup1
+{
+    background-color: #dddddd;
+    padding: 10px;
+    margin: 0 0 10px 0;
+}
+
+.ItemGroup1
+{
+    background-color: #c2e0ff;
+    padding: 10px;
+    margin: 0 0 10px 0;
+}
+
+.Toolbar
+{
+    background-color: #dddddd;
+    padding: 2px;
 }

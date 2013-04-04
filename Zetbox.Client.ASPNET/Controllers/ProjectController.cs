@@ -15,6 +15,17 @@ namespace Zetbox.Client.ASPNET.Controllers
         {
         }
 
+        public ActionResult Index()
+        {
+            return View(ViewModelFactory.CreateViewModel<ProjectSearchViewModel.Factory>().Invoke(DataContext, null));
+        }
+
+        [HttpPost]
+        public ActionResult Index(ProjectSearchViewModel mdl, string foo)
+        {
+            return View(mdl);
+        }
+
         //
         // GET: /Project/
         public ActionResult Edit(int id)
@@ -30,6 +41,15 @@ namespace Zetbox.Client.ASPNET.Controllers
         {
             DataContext.SubmitChanges();
             return View(prj);
+        }
+
+        //
+        // GET: /Project/
+        public ActionResult Detail(int id)
+        {
+            var vmdl = ViewModelFactory.CreateViewModel<ProjektEditViewModel.Factory>().Invoke(DataContext, null);
+            vmdl.ID = id;
+            return View(vmdl);
         }
     }
 }

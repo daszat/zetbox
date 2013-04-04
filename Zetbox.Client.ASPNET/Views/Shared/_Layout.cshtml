@@ -27,6 +27,7 @@
                     <ul>
                         <li>@Html.ActionLink("Home", "Index", "Home")</li>
                         <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Projects", "Index", "Project")</li>
                     </ul>
                 }
                 @using (Html.Widget("Logon"))
@@ -65,6 +66,7 @@
     <script type="text/javascript">
         $(function () {
             $(".datePicker").datepicker({ showOn: 'focus', dateFormat: 'dd.mm.yy' });
+            $("input[type=submit], input[type=button], .button").button();
         });
     </script>
 </body>

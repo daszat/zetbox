@@ -8,7 +8,7 @@ namespace Zetbox.Client.ASPNET.Models
     using Zetbox.API;
     using Zetbox.Client.Presentables.ValueViewModels;
 
-    [ViewModelDescriptor]
+    // No descriptor
     public class ProjektEditViewModel : ViewModel
     {
         public new delegate ProjektEditViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
@@ -24,15 +24,6 @@ namespace Zetbox.Client.ASPNET.Models
         }
 
         public int ID { get; set; }
-
-        public BaseValueViewModel Bis
-        {
-            get
-            {
-                return Object.PropertyModelsByName["Bis"];
-            }
-        }
-
 
         private DataObjectViewModel _object;
         public DataObjectViewModel Object

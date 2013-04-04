@@ -1,0 +1,79 @@
+﻿@model Zetbox.Client.ASPNET.Models.ProjektEditViewModel
+@using Zetbox.Client.ASPNET
+@{
+    ViewBag.Title = "Details of a Project";
+}
+<h2>@Html.ZbDisplayFor(model => model.Object.PropertyModelsByName["Name"])</h2>
+<div class="AreaGroup1">
+    <div class="edit-link-container">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "button" })
+    </div>
+    <div class="editor-label">
+        @Html.ZbLabelFor(model => model.Object.PropertyModelsByName["Kundenname"])
+    </div>
+    <div class="editor-field">
+        @Html.ZbDisplayFor(model => model.Object.PropertyModelsByName["Kundenname"])
+    </div>
+    <div class="editor-label">
+        @Html.ZbLabelFor(model => model.Object.PropertyModelsByName["Von"])
+    </div>
+    <div class="editor-field">
+        @Html.ZbDisplayFor(model => model.Object.PropertyModelsByName["Von"], "DateTime")
+    </div>
+    <div class="editor-label">
+        @Html.ZbLabelFor(model => model.Object.PropertyModelsByName["Bis"])
+    </div>
+    <div class="editor-field">
+        @Html.ZbDisplayFor(model => model.Object.PropertyModelsByName["Bis"], "DateTime")
+    </div>
+    <div class="editor-label">
+        @Html.ZbLabelFor(model => model.Object.PropertyModelsByName["AufwandGes"])
+    </div>
+    <div class="editor-field">
+        @Html.ZbDisplayFor(model => model.Object.PropertyModelsByName["AufwandGes"])
+    </div>
+</div>
+<div class="Toolbar">
+    @Html.ActionLink("New", "Create", "Task", new { id = Model.ID }, new { @class = "button" })
+</div>
+<table class="strech">
+    <tr>
+        <th>
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            Aufwand
+        </th>
+        <th>
+            DatumVon
+        </th>
+        <th>
+            Created By
+        </th>
+    </tr>
+    @foreach (var task in ((Zetbox.Client.Presentables.ValueViewModels.ObjectCollectionViewModel)Model.Object.PropertyModelsByName["Tasks"]).Value)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink("Details", "Detail", "Task", new { ID = task.ID }, null)
+            </td>
+            <td>
+                @Html.ZbDisplayFor(model => task.PropertyModelsByName["Name"])
+            </td>
+            <td>
+                @Html.ZbDisplayFor(model => task.PropertyModelsByName["Aufwand"])
+            </td>
+            <td>
+                @Html.ZbDisplayFor(model => task.PropertyModelsByName["DatumVon"])
+            </td>
+            <td>
+                @Html.ZbDisplayFor(model => task.PropertyModelsByName["CreatedBy"])
+            </td>
+        </tr>
+    }
+</table>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
