@@ -146,6 +146,13 @@ this.WriteObjects("        private bool ",  name , "_was_eagerLoaded = false;\r\
 #line 136 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 } 
 #line 137 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+this.WriteObjects("\r\n");
+this.WriteObjects("        public Zetbox.API.Async.ZbTask TriggerFetch",  name , "Async()\r\n");
+this.WriteObjects("        {\r\n");
+this.WriteObjects("            return new Zetbox.API.Async.ZbTask<",  exposedListType , "<",  referencedInterface , ">>(this.",  name , ");\r\n");
+this.WriteObjects("        }\r\n");
+this.WriteObjects("\r\n");
+#line 143 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 AddSerialization(serializationList, name, eagerLoading); 
 
         }

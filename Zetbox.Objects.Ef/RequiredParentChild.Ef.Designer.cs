@@ -216,6 +216,11 @@ namespace Zetbox.App.Test
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchParentAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Test.RequiredParent>(this.Parent);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
 		public static event PropertyGetterHandler<Zetbox.App.Test.RequiredParentChild, Zetbox.App.Test.RequiredParent> OnParent_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Test.RequiredParentChild, Zetbox.App.Test.RequiredParent> OnParent_PreSetter;
@@ -258,6 +263,17 @@ namespace Zetbox.App.Test
             }
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Parent":
+                return TriggerFetchParentAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

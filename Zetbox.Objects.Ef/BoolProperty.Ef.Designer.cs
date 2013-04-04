@@ -136,6 +136,11 @@ namespace Zetbox.App.Base
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchFalseIconAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon>(this.FalseIcon);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for FalseIcon
 		public static event PropertyGetterHandler<Zetbox.App.Base.BoolProperty, Zetbox.App.GUI.Icon> OnFalseIcon_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.BoolProperty, Zetbox.App.GUI.Icon> OnFalseIcon_PreSetter;
@@ -308,6 +313,11 @@ namespace Zetbox.App.Base
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchNullIconAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon>(this.NullIcon);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for NullIcon
 		public static event PropertyGetterHandler<Zetbox.App.Base.BoolProperty, Zetbox.App.GUI.Icon> OnNullIcon_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.BoolProperty, Zetbox.App.GUI.Icon> OnNullIcon_PreSetter;
@@ -478,6 +488,11 @@ namespace Zetbox.App.Base
                 NotifyPropertyChanged("TrueIcon", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchTrueIconAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon>(this.TrueIcon);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for TrueIcon
@@ -914,6 +929,21 @@ namespace Zetbox.App.Base
             }
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "FalseIcon":
+                return TriggerFetchFalseIconAsync();
+            case "NullIcon":
+                return TriggerFetchNullIconAsync();
+            case "TrueIcon":
+                return TriggerFetchTrueIconAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

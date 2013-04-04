@@ -128,19 +128,25 @@ this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        private ",  wrapperClass , "<",  referencedInterface , ", ",  referencedImplementation , "> ",  wrapperName , ";\r\n");
 this.WriteObjects("\r\n");
-#line 112 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
+this.WriteObjects("        public Zetbox.API.Async.ZbTask TriggerFetch",  name , "Async()\r\n");
+this.WriteObjects("        {\r\n");
+this.WriteObjects("            return new Zetbox.API.Async.ZbTask<",  exposedListType , "<",  referencedInterface , ">>(this.",  name , ");\r\n");
+this.WriteObjects("        }\r\n");
+this.WriteObjects("\r\n");
+this.WriteObjects("\r\n");
+#line 118 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
 if (eagerLoading) { 
-#line 113 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 119 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
 this.WriteObjects("        private List<int> ",  name , "Ids;\r\n");
 this.WriteObjects("        private bool ",  name , "_was_eagerLoaded = false;\r\n");
-#line 116 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 122 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
 if (serializationList != null)
         {
             serializationList.Add("Serialization.EagerLoadingSerialization", Zetbox.Generator.Templates.Serialization.SerializerType.Binary, null, null, name, true, false, null);
         }
     }
 
-#line 122 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 128 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
 this.WriteObjects("\r\n");
 
         }

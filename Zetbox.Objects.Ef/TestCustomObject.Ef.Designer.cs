@@ -166,6 +166,12 @@ namespace Zetbox.App.Test
         }
         private EntityCollectionWrapper<Zetbox.App.Test.Muhblah, Zetbox.App.Test.MuhblahEfImpl> _MubBlah_List_Nav;
 
+        public Zetbox.API.Async.ZbTask TriggerFetchMubBlah_List_NavAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Test.Muhblah>>(this.MubBlah_List_Nav);
+        }
+
+
 
 public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject> OnMubBlah_List_Nav_PostSetter;
 
@@ -278,6 +284,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchMubBlah_NavAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Test.Muhblah>(this.MubBlah_Nav);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for MubBlah_Nav
 		public static event PropertyGetterHandler<Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.Muhblah> OnMubBlah_Nav_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.Muhblah> OnMubBlah_Nav_PreSetter;
@@ -332,6 +343,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             }
         }
         private ASideCollectionWrapper<Zetbox.App.Test.Muhblah, Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryEfImpl, EntityCollection<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryEfImpl>> _MuhBlah_ManyList_Nav;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchMuhBlah_ManyList_NavAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Test.Muhblah>>(this.MuhBlah_ManyList_Nav);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject> OnMuhBlah_ManyList_Nav_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.TestCustomObject> OnMuhBlah_ManyList_Nav_IsValid;
@@ -441,6 +458,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                 }
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchMuhBlah_One_NavAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Test.Muhblah>(this.MuhBlah_One_Nav);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for MuhBlah_One_Nav
@@ -753,6 +775,23 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             }
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "MubBlah_List_Nav":
+                return TriggerFetchMubBlah_List_NavAsync();
+            case "MubBlah_Nav":
+                return TriggerFetchMubBlah_NavAsync();
+            case "MuhBlah_ManyList_Nav":
+                return TriggerFetchMuhBlah_ManyList_NavAsync();
+            case "MuhBlah_One_Nav":
+                return TriggerFetchMuhBlah_One_NavAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

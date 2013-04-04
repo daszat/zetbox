@@ -87,6 +87,12 @@ namespace at.dasz.DocumentManagement
             }
         }
         private BSideListWrapper<at.dasz.DocumentManagement.Document, Zetbox.App.Base.Blob, at.dasz.DocumentManagement.Document_has_Blob_RelationEntryEfImpl, EntityCollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryEfImpl>> _Revisions;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchRevisionsAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<IList<Zetbox.App.Base.Blob>>(this.Revisions);
+        }
+
 public static event PropertyListChangedHandler<at.dasz.DocumentManagement.Document> OnRevisions_PostSetter;
 
         public static event PropertyIsValidHandler<at.dasz.DocumentManagement.Document> OnRevisions_IsValid;
@@ -309,6 +315,17 @@ public static event PropertyListChangedHandler<at.dasz.DocumentManagement.Docume
             }
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Revisions":
+                return TriggerFetchRevisionsAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

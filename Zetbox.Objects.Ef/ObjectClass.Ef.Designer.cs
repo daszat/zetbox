@@ -91,6 +91,12 @@ namespace Zetbox.App.Base
         }
         private EntityCollectionWrapper<Zetbox.App.Base.AccessControl, Zetbox.App.Base.AccessControlEfImpl> _AccessControlList;
 
+        public Zetbox.API.Async.ZbTask TriggerFetchAccessControlListAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.AccessControl>>(this.AccessControlList);
+        }
+
+
 
 public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAccessControlList_PostSetter;
 
@@ -202,6 +208,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
                 }
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchBaseObjectClassAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass>(this.BaseObjectClass);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for BaseObjectClass
@@ -363,6 +374,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchDefaultViewModelDescriptorAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor>(this.DefaultViewModelDescriptor);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultViewModelDescriptor
 		public static event PropertyGetterHandler<Zetbox.App.Base.ObjectClass, Zetbox.App.GUI.ViewModelDescriptor> OnDefaultViewModelDescriptor_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.ObjectClass, Zetbox.App.GUI.ViewModelDescriptor> OnDefaultViewModelDescriptor_PreSetter;
@@ -420,6 +436,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
             }
         }
         private EntityCollectionWrapper<Zetbox.App.GUI.ObjectClassFilterConfiguration, Zetbox.App.GUI.ObjectClassFilterConfigurationEfImpl> _FilterConfigurations;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchFilterConfigurationsAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.GUI.ObjectClassFilterConfiguration>>(this.FilterConfigurations);
+        }
+
 
 
 public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFilterConfigurations_PostSetter;
@@ -722,6 +744,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
             }
         }
         private EntityCollectionWrapper<Zetbox.App.Base.ObjectClass, Zetbox.App.Base.ObjectClassEfImpl> _SubClasses;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchSubClassesAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.ObjectClass>>(this.SubClasses);
+        }
+
 
 
 public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSubClasses_PostSetter;
@@ -1397,6 +1425,25 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             }
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "AccessControlList":
+                return TriggerFetchAccessControlListAsync();
+            case "BaseObjectClass":
+                return TriggerFetchBaseObjectClassAsync();
+            case "DefaultViewModelDescriptor":
+                return TriggerFetchDefaultViewModelDescriptorAsync();
+            case "FilterConfigurations":
+                return TriggerFetchFilterConfigurationsAsync();
+            case "SubClasses":
+                return TriggerFetchSubClassesAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

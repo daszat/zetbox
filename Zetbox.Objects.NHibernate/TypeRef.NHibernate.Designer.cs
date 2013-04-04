@@ -139,6 +139,11 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for Assembly's guid, used on import only</summary>
         private Guid? _fk_guid_Assembly = null;
 
+    public Zetbox.API.Async.ZbTask TriggerFetchAssemblyAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Assembly>(this.Assembly);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Assembly
 		public static event PropertyGetterHandler<Zetbox.App.Base.TypeRef, Zetbox.App.Base.Assembly> OnAssembly_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.TypeRef, Zetbox.App.Base.Assembly> OnAssembly_PreSetter;
@@ -231,6 +236,11 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for ChangedBy's id, used on dehydration only</summary>
         private int? _fk_ChangedBy = null;
 
+
+    public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
 		public static event PropertyGetterHandler<Zetbox.App.Base.TypeRef, Zetbox.App.Base.Identity> OnChangedBy_Getter;
@@ -402,6 +412,11 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for CreatedBy's id, used on dehydration only</summary>
         private int? _fk_CreatedBy = null;
 
+
+    public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
 		public static event PropertyGetterHandler<Zetbox.App.Base.TypeRef, Zetbox.App.Base.Identity> OnCreatedBy_Getter;
@@ -711,6 +726,12 @@ namespace Zetbox.App.Base
 		private NHibernateBSideListWrapper<Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl> _GenericArguments;
 		// ignored, but required for Serialization
         private bool GenericArguments_was_eagerLoaded = false;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchGenericArgumentsAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<IList<Zetbox.App.Base.TypeRef>>(this.GenericArguments);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Base.TypeRef> OnGenericArguments_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.TypeRef> OnGenericArguments_IsValid;
@@ -802,6 +823,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.TypeRef> OnGeneri
 
         /// <summary>Backing store for Parent's guid, used on import only</summary>
         private Guid? _fk_guid_Parent = null;
+
+    public Zetbox.API.Async.ZbTask TriggerFetchParentAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef>(this.Parent);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
 		public static event PropertyGetterHandler<Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRef> OnParent_Getter;
@@ -1230,6 +1256,25 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.TypeRef> OnGeneri
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Assembly":
+                return TriggerFetchAssemblyAsync();
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            case "GenericArguments":
+                return TriggerFetchGenericArgumentsAsync();
+            case "Parent":
+                return TriggerFetchParentAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

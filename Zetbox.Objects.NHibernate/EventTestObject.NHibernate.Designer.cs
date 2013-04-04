@@ -134,6 +134,11 @@ namespace Zetbox.App.Test
         private int? _fk_Event = null;
 
 
+    public Zetbox.API.Async.ZbTask TriggerFetchEventAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Event>(this.Event);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Event
 		public static event PropertyGetterHandler<Zetbox.App.Test.EventTestObject, Zetbox.App.Calendar.Event> OnEvent_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Test.EventTestObject, Zetbox.App.Calendar.Event> OnEvent_PreSetter;
@@ -253,6 +258,17 @@ namespace Zetbox.App.Test
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Event":
+                return TriggerFetchEventAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

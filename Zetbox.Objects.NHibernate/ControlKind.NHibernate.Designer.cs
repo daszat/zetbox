@@ -80,6 +80,12 @@ namespace Zetbox.App.GUI
         }
     
         private OneNRelationList<Zetbox.App.GUI.ControlKind> _ChildControlKinds;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchChildControlKindsAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.GUI.ControlKind>>(this.ChildControlKinds);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChildControlKinds_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.ControlKind> OnChildControlKinds_IsValid;
@@ -249,6 +255,11 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
 
         /// <summary>Backing store for Module's guid, used on import only</summary>
         private Guid? _fk_guid_Module = null;
+
+    public Zetbox.API.Async.ZbTask TriggerFetchModuleAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(this.Module);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
 		public static event PropertyGetterHandler<Zetbox.App.GUI.ControlKind, Zetbox.App.Base.Module> OnModule_Getter;
@@ -426,6 +437,11 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
         /// <summary>Backing store for Parent's guid, used on import only</summary>
         private Guid? _fk_guid_Parent = null;
 
+    public Zetbox.API.Async.ZbTask TriggerFetchParentAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(this.Parent);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
 		public static event PropertyGetterHandler<Zetbox.App.GUI.ControlKind, Zetbox.App.GUI.ControlKind> OnParent_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.ControlKind, Zetbox.App.GUI.ControlKind> OnParent_PreSetter;
@@ -575,6 +591,21 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "ChildControlKinds":
+                return TriggerFetchChildControlKindsAsync();
+            case "Module":
+                return TriggerFetchModuleAsync();
+            case "Parent":
+                return TriggerFetchParentAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

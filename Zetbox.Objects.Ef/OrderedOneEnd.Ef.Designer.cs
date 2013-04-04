@@ -91,6 +91,12 @@ namespace Zetbox.App.Test
         }
         private EntityListWrapper<Zetbox.App.Test.OrderedNEnd, Zetbox.App.Test.OrderedNEndEfImpl> _NEnds;
 
+        public Zetbox.API.Async.ZbTask TriggerFetchNEndsAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<IList<Zetbox.App.Test.OrderedNEnd>>(this.NEnds);
+        }
+
+
 
 public static event PropertyListChangedHandler<Zetbox.App.Test.OrderedOneEnd> OnNEnds_PostSetter;
 
@@ -209,6 +215,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.OrderedOneEnd> On
             }
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "NEnds":
+                return TriggerFetchNEndsAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

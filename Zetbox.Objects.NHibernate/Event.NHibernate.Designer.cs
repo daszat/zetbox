@@ -216,6 +216,11 @@ namespace Zetbox.App.Calendar
         /// <summary>Backing store for Calendar's guid, used on import only</summary>
         private Guid? _fk_guid_Calendar = null;
 
+    public Zetbox.API.Async.ZbTask TriggerFetchCalendarAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Calendar>(this.Calendar);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Calendar
 		public static event PropertyGetterHandler<Zetbox.App.Calendar.Event, Zetbox.App.Calendar.Calendar> OnCalendar_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.Event, Zetbox.App.Calendar.Calendar> OnCalendar_PreSetter;
@@ -308,6 +313,11 @@ namespace Zetbox.App.Calendar
         /// <summary>Backing store for ChangedBy's id, used on dehydration only</summary>
         private int? _fk_ChangedBy = null;
 
+
+    public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
 		public static event PropertyGetterHandler<Zetbox.App.Calendar.Event, Zetbox.App.Base.Identity> OnChangedBy_Getter;
@@ -479,6 +489,11 @@ namespace Zetbox.App.Calendar
         /// <summary>Backing store for CreatedBy's id, used on dehydration only</summary>
         private int? _fk_CreatedBy = null;
 
+
+    public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
 		public static event PropertyGetterHandler<Zetbox.App.Calendar.Event, Zetbox.App.Base.Identity> OnCreatedBy_Getter;
@@ -1215,6 +1230,21 @@ namespace Zetbox.App.Calendar
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Calendar":
+                return TriggerFetchCalendarAsync();
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

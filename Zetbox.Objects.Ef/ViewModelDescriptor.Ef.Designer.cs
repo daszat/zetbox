@@ -136,6 +136,11 @@ namespace Zetbox.App.GUI
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchDefaultDisplayKindAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(this.DefaultDisplayKind);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultDisplayKind
 		public static event PropertyGetterHandler<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ControlKind> OnDefaultDisplayKind_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ControlKind> OnDefaultDisplayKind_PreSetter;
@@ -237,6 +242,11 @@ namespace Zetbox.App.GUI
                 NotifyPropertyChanged("DefaultEditorKind", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchDefaultEditorKindAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(this.DefaultEditorKind);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultEditorKind
@@ -342,6 +352,11 @@ namespace Zetbox.App.GUI
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchDefaultGridCellDisplayKindAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(this.DefaultGridCellDisplayKind);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultGridCellDisplayKind
 		public static event PropertyGetterHandler<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ControlKind> OnDefaultGridCellDisplayKind_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ControlKind> OnDefaultGridCellDisplayKind_PreSetter;
@@ -445,6 +460,11 @@ namespace Zetbox.App.GUI
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchDefaultGridCellEditorKindAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(this.DefaultGridCellEditorKind);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultGridCellEditorKind
 		public static event PropertyGetterHandler<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ControlKind> OnDefaultGridCellEditorKind_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ControlKind> OnDefaultGridCellEditorKind_PreSetter;
@@ -546,6 +566,11 @@ namespace Zetbox.App.GUI
                 NotifyPropertyChanged("DefaultGridCellPreEditorKind", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchDefaultGridCellPreEditorKindAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(this.DefaultGridCellPreEditorKind);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultGridCellPreEditorKind
@@ -884,6 +909,11 @@ namespace Zetbox.App.GUI
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchModuleAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(this.Module);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
 		public static event PropertyGetterHandler<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.Base.Module> OnModule_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.Base.Module> OnModule_PreSetter;
@@ -938,6 +968,12 @@ namespace Zetbox.App.GUI
             }
         }
         private BSideCollectionWrapper<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ControlKind, Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl>> _SecondaryControlKinds;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchSecondaryControlKindsAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.GUI.ControlKind>>(this.SecondaryControlKinds);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescriptor> OnSecondaryControlKinds_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.ViewModelDescriptor> OnSecondaryControlKinds_IsValid;
@@ -1036,6 +1072,11 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
                 NotifyPropertyChanged("ViewModelRef", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchViewModelRefAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef>(this.ViewModelRef);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ViewModelRef
@@ -1242,6 +1283,31 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
             }
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "DefaultDisplayKind":
+                return TriggerFetchDefaultDisplayKindAsync();
+            case "DefaultEditorKind":
+                return TriggerFetchDefaultEditorKindAsync();
+            case "DefaultGridCellDisplayKind":
+                return TriggerFetchDefaultGridCellDisplayKindAsync();
+            case "DefaultGridCellEditorKind":
+                return TriggerFetchDefaultGridCellEditorKindAsync();
+            case "DefaultGridCellPreEditorKind":
+                return TriggerFetchDefaultGridCellPreEditorKindAsync();
+            case "Module":
+                return TriggerFetchModuleAsync();
+            case "SecondaryControlKinds":
+                return TriggerFetchSecondaryControlKindsAsync();
+            case "ViewModelRef":
+                return TriggerFetchViewModelRefAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

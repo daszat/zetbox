@@ -125,6 +125,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         }
     
         private OneNRelationList<Zetbox.App.Projekte.Auftrag> _Auftraege;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchAuftraegeAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Projekte.Auftrag>>(this.Auftraege);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAuftraege_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Projekte.Projekt> OnAuftraege_IsValid;
@@ -326,6 +332,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         private int? _fk_ChangedBy = null;
 
 
+    public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
 		public static event PropertyGetterHandler<Zetbox.App.Projekte.Projekt, Zetbox.App.Base.Identity> OnChangedBy_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Projekte.Projekt, Zetbox.App.Base.Identity> OnChangedBy_PreSetter;
@@ -496,6 +507,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         /// <summary>Backing store for CreatedBy's id, used on dehydration only</summary>
         private int? _fk_CreatedBy = null;
 
+
+    public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
 		public static event PropertyGetterHandler<Zetbox.App.Projekte.Projekt, Zetbox.App.Base.Identity> OnCreatedBy_Getter;
@@ -863,6 +879,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
 		private NHibernateBSideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl> _Mitarbeiter;
 		// ignored, but required for Serialization
         private bool Mitarbeiter_was_eagerLoaded = false;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchMitarbeiterAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<IList<Zetbox.App.Projekte.Mitarbeiter>>(this.Mitarbeiter);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnMitarbeiter_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Projekte.Projekt> OnMitarbeiter_IsValid;
@@ -956,6 +978,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnMi
         }
     
         private OneNRelationList<Zetbox.App.Projekte.Task> _Tasks;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchTasksAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Projekte.Task>>(this.Tasks);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTasks_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Projekte.Projekt> OnTasks_IsValid;
@@ -1191,6 +1219,25 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Auftraege":
+                return TriggerFetchAuftraegeAsync();
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            case "Mitarbeiter":
+                return TriggerFetchMitarbeiterAsync();
+            case "Tasks":
+                return TriggerFetchTasksAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

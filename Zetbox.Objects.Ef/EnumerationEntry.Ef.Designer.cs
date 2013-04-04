@@ -135,6 +135,11 @@ namespace Zetbox.App.Base
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
 		public static event PropertyGetterHandler<Zetbox.App.Base.EnumerationEntry, Zetbox.App.Base.Identity> OnChangedBy_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.EnumerationEntry, Zetbox.App.Base.Identity> OnChangedBy_PreSetter;
@@ -319,6 +324,11 @@ namespace Zetbox.App.Base
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
@@ -587,6 +597,11 @@ namespace Zetbox.App.Base
                 }
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchEnumerationAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Enumeration>(this.Enumeration);
         }
 
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
@@ -1043,6 +1058,21 @@ namespace Zetbox.App.Base
             }
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            case "Enumeration":
+                return TriggerFetchEnumerationAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

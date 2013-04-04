@@ -136,6 +136,11 @@ namespace Zetbox.App.Base
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchEnumValueAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.EnumerationEntry>(this.EnumValue);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for EnumValue
 		public static event PropertyGetterHandler<Zetbox.App.Base.EnumDefaultValue, Zetbox.App.Base.EnumerationEntry> OnEnumValue_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.EnumDefaultValue, Zetbox.App.Base.EnumerationEntry> OnEnumValue_PreSetter;
@@ -239,6 +244,17 @@ namespace Zetbox.App.Base
             }
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "EnumValue":
+                return TriggerFetchEnumValueAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

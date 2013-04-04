@@ -91,6 +91,12 @@ namespace Zetbox.App.GUI
         }
         private EntityCollectionWrapper<Zetbox.App.GUI.ControlKind, Zetbox.App.GUI.ControlKindEfImpl> _ChildControlKinds;
 
+        public Zetbox.API.Async.ZbTask TriggerFetchChildControlKindsAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.GUI.ControlKind>>(this.ChildControlKinds);
+        }
+
+
 
 public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChildControlKinds_PostSetter;
 
@@ -272,6 +278,11 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
                 NotifyPropertyChanged("Module", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchModuleAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(this.Module);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
@@ -458,6 +469,11 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchParentAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(this.Parent);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
 		public static event PropertyGetterHandler<Zetbox.App.GUI.ControlKind, Zetbox.App.GUI.ControlKind> OnParent_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.ControlKind, Zetbox.App.GUI.ControlKind> OnParent_PreSetter;
@@ -579,6 +595,21 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
             }
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "ChildControlKinds":
+                return TriggerFetchChildControlKindsAsync();
+            case "Module":
+                return TriggerFetchModuleAsync();
+            case "Parent":
+                return TriggerFetchParentAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

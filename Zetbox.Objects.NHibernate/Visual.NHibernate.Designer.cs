@@ -77,6 +77,12 @@ namespace Zetbox.App.GUI
 		private NHibernateBSideCollectionWrapper<Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl> _Children;
 		// ignored, but required for Serialization
         private bool Children_was_eagerLoaded = false;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchChildrenAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.GUI.Visual>>(this.Children);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.GUI.Visual> OnChildren_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.Visual> OnChildren_IsValid;
@@ -110,6 +116,12 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.Visual> OnChildren
 		private NHibernateBSideCollectionWrapper<Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl> _ContextMenu;
 		// ignored, but required for Serialization
         private bool ContextMenu_was_eagerLoaded = false;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchContextMenuAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.GUI.Visual>>(this.ContextMenu);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.GUI.Visual> OnContextMenu_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.Visual> OnContextMenu_IsValid;
@@ -258,6 +270,11 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.Visual> OnContextM
         private int? _fk_Method = null;
 
 
+    public Zetbox.API.Async.ZbTask TriggerFetchMethodAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Method>(this.Method);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Method
 		public static event PropertyGetterHandler<Zetbox.App.GUI.Visual, Zetbox.App.Base.Method> OnMethod_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.Visual, Zetbox.App.Base.Method> OnMethod_PreSetter;
@@ -351,6 +368,11 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.Visual> OnContextM
         private int? _fk_Property = null;
 
 
+    public Zetbox.API.Async.ZbTask TriggerFetchPropertyAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Property>(this.Property);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Property
 		public static event PropertyGetterHandler<Zetbox.App.GUI.Visual, Zetbox.App.Base.Property> OnProperty_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.Visual, Zetbox.App.Base.Property> OnProperty_PreSetter;
@@ -435,6 +457,23 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.Visual> OnContextM
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Children":
+                return TriggerFetchChildrenAsync();
+            case "ContextMenu":
+                return TriggerFetchContextMenuAsync();
+            case "Method":
+                return TriggerFetchMethodAsync();
+            case "Property":
+                return TriggerFetchPropertyAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

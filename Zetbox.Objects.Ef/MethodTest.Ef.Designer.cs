@@ -91,6 +91,12 @@ namespace Zetbox.App.Test
         }
         private EntityCollectionWrapper<Zetbox.App.Test.MethodTest, Zetbox.App.Test.MethodTestEfImpl> _Children;
 
+        public Zetbox.API.Async.ZbTask TriggerFetchChildrenAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Test.MethodTest>>(this.Children);
+        }
+
+
 
 public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChildren_PostSetter;
 
@@ -201,6 +207,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
                 }
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchParentAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Test.MethodTest>(this.Parent);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
@@ -957,6 +968,19 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
             }
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Children":
+                return TriggerFetchChildrenAsync();
+            case "Parent":
+                return TriggerFetchParentAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

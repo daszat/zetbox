@@ -82,6 +82,12 @@ namespace Zetbox.App.Base
         }
     
         private OneNRelationList<Zetbox.App.Base.AccessControl> _AccessControlList;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchAccessControlListAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.AccessControl>>(this.AccessControlList);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAccessControlList_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.ObjectClass> OnAccessControlList_IsValid;
@@ -196,6 +202,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
 
         /// <summary>Backing store for BaseObjectClass's guid, used on import only</summary>
         private Guid? _fk_guid_BaseObjectClass = null;
+
+    public Zetbox.API.Async.ZbTask TriggerFetchBaseObjectClassAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass>(this.BaseObjectClass);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for BaseObjectClass
 		public static event PropertyGetterHandler<Zetbox.App.Base.ObjectClass, Zetbox.App.Base.ObjectClass> OnBaseObjectClass_Getter;
@@ -345,6 +356,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         /// <summary>Backing store for DefaultViewModelDescriptor's guid, used on import only</summary>
         private Guid? _fk_guid_DefaultViewModelDescriptor = null;
 
+    public Zetbox.API.Async.ZbTask TriggerFetchDefaultViewModelDescriptorAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor>(this.DefaultViewModelDescriptor);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultViewModelDescriptor
 		public static event PropertyGetterHandler<Zetbox.App.Base.ObjectClass, Zetbox.App.GUI.ViewModelDescriptor> OnDefaultViewModelDescriptor_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.ObjectClass, Zetbox.App.GUI.ViewModelDescriptor> OnDefaultViewModelDescriptor_PreSetter;
@@ -383,6 +399,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         }
     
         private OneNRelationList<Zetbox.App.GUI.ObjectClassFilterConfiguration> _FilterConfigurations;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchFilterConfigurationsAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.GUI.ObjectClassFilterConfiguration>>(this.FilterConfigurations);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFilterConfigurations_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.ObjectClass> OnFilterConfigurations_IsValid;
@@ -652,6 +674,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
         }
     
         private OneNRelationList<Zetbox.App.Base.ObjectClass> _SubClasses;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchSubClassesAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.ObjectClass>>(this.SubClasses);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSubClasses_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.ObjectClass> OnSubClasses_IsValid;
@@ -1317,6 +1345,25 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "AccessControlList":
+                return TriggerFetchAccessControlListAsync();
+            case "BaseObjectClass":
+                return TriggerFetchBaseObjectClassAsync();
+            case "DefaultViewModelDescriptor":
+                return TriggerFetchDefaultViewModelDescriptorAsync();
+            case "FilterConfigurations":
+                return TriggerFetchFilterConfigurationsAsync();
+            case "SubClasses":
+                return TriggerFetchSubClassesAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

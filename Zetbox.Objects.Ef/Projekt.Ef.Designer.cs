@@ -137,6 +137,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         }
         private EntityCollectionWrapper<Zetbox.App.Projekte.Auftrag, Zetbox.App.Projekte.AuftragEfImpl> _Auftraege;
 
+        public Zetbox.API.Async.ZbTask TriggerFetchAuftraegeAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Projekte.Auftrag>>(this.Auftraege);
+        }
+
+
 
 public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAuftraege_PostSetter;
 
@@ -364,6 +370,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
 		public static event PropertyGetterHandler<Zetbox.App.Projekte.Projekt, Zetbox.App.Base.Identity> OnChangedBy_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Projekte.Projekt, Zetbox.App.Base.Identity> OnChangedBy_PreSetter;
@@ -548,6 +559,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
@@ -981,6 +997,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
             }
         }
         private BSideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryEfImpl, EntityCollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryEfImpl>> _Mitarbeiter;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchMitarbeiterAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<IList<Zetbox.App.Projekte.Mitarbeiter>>(this.Mitarbeiter);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnMitarbeiter_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Projekte.Projekt> OnMitarbeiter_IsValid;
@@ -1104,6 +1126,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnMi
             }
         }
         private EntityCollectionWrapper<Zetbox.App.Projekte.Task, Zetbox.App.Projekte.TaskEfImpl> _Tasks;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchTasksAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Projekte.Task>>(this.Tasks);
+        }
+
 
 
 public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTasks_PostSetter;
@@ -1328,6 +1356,25 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
             }
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Auftraege":
+                return TriggerFetchAuftraegeAsync();
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            case "Mitarbeiter":
+                return TriggerFetchMitarbeiterAsync();
+            case "Tasks":
+                return TriggerFetchTasksAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

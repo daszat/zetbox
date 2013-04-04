@@ -213,6 +213,11 @@ namespace Zetbox.App.Base
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.CalculatedObjectReferenceProperty>(this.A);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
@@ -283,6 +288,11 @@ namespace Zetbox.App.Base
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Property>(this.B);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -632,6 +642,11 @@ namespace Zetbox.App.Calendar
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Calendar>(this.A);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
@@ -702,6 +717,11 @@ namespace Zetbox.App.Calendar
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Group>(this.B);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -1002,6 +1022,11 @@ namespace Zetbox.App.Calendar
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Calendar>(this.A);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
@@ -1071,6 +1096,11 @@ namespace Zetbox.App.Calendar
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.B);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -1383,6 +1413,11 @@ namespace Zetbox.App.Calendar
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Calendar>(this.A);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
@@ -1453,6 +1488,11 @@ namespace Zetbox.App.Calendar
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Group>(this.B);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -1753,6 +1793,11 @@ namespace Zetbox.App.Calendar
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Calendar>(this.A);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
@@ -1822,6 +1867,11 @@ namespace Zetbox.App.Calendar
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.B);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -2134,6 +2184,11 @@ namespace Zetbox.App.Base
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.DataType>(this.A);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
@@ -2204,6 +2259,11 @@ namespace Zetbox.App.Base
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Interface>(this.B);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -2550,6 +2610,11 @@ namespace at.dasz.DocumentManagement
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.Document>(this.A);
+        }
+
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -2662,6 +2727,11 @@ namespace at.dasz.DocumentManagement
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Blob>(this.B);
         }
 
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
@@ -3028,6 +3098,11 @@ namespace Zetbox.App.Base
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.A);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
@@ -3097,6 +3172,11 @@ namespace Zetbox.App.Base
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Group>(this.B);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -3409,6 +3489,11 @@ namespace Zetbox.App.Base
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.IndexConstraint>(this.A);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
@@ -3479,6 +3564,11 @@ namespace Zetbox.App.Base
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Property>(this.B);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -3779,6 +3869,11 @@ namespace Zetbox.App.Test
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Test.Muhblah>(this.A);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
@@ -3848,6 +3943,11 @@ namespace Zetbox.App.Test
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Test.TestCustomObject>(this.B);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -4114,6 +4214,11 @@ namespace Zetbox.App.Test
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Test.N_to_M_relations_A>(this.A);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
@@ -4183,6 +4288,11 @@ namespace Zetbox.App.Test
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Test.N_to_M_relations_B>(this.B);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -4495,6 +4605,11 @@ namespace Zetbox.App.GUI
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.NavigationEntry>(this.A);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
@@ -4565,6 +4680,11 @@ namespace Zetbox.App.GUI
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Group>(this.B);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -4914,6 +5034,11 @@ namespace Zetbox.App.GUI
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectReferenceProperty>(this.A);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
@@ -4984,6 +5109,11 @@ namespace Zetbox.App.GUI
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Method>(this.B);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -5330,6 +5460,11 @@ namespace Zetbox.App.Projekte
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Projekte.Projekt>(this.A);
+        }
+
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -5442,6 +5577,11 @@ namespace Zetbox.App.Projekte
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Projekte.Mitarbeiter>(this.B);
         }
 
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
@@ -5854,6 +5994,11 @@ namespace Zetbox.App.Base
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.RoleMembership>(this.A);
+        }
+
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -5966,6 +6111,11 @@ namespace Zetbox.App.Base
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Relation>(this.B);
         }
 
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
@@ -6378,6 +6528,11 @@ namespace Zetbox.App.SchemaMigration
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.SchemaMigration.SourceColumn>(this.A);
+        }
+
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -6490,6 +6645,11 @@ namespace Zetbox.App.SchemaMigration
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Property>(this.B);
         }
 
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
@@ -6859,6 +7019,11 @@ namespace Zetbox.App.GUI
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Template>(this.A);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
@@ -6928,6 +7093,11 @@ namespace Zetbox.App.GUI
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Visual>(this.B);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -7194,6 +7364,11 @@ namespace Zetbox.App.Test
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Test.TestStudent>(this.A);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
@@ -7263,6 +7438,11 @@ namespace Zetbox.App.Test
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Test.Fragebogen>(this.B);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -7575,6 +7755,11 @@ namespace Zetbox.App.Base
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef>(this.A);
+        }
+
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -7687,6 +7872,11 @@ namespace Zetbox.App.Base
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef>(this.B);
         }
 
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
@@ -8102,6 +8292,11 @@ namespace Zetbox.App.GUI
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewDescriptor>(this.A);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
@@ -8172,6 +8367,11 @@ namespace Zetbox.App.GUI
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef>(this.B);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -8521,6 +8721,11 @@ namespace Zetbox.App.GUI
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor>(this.A);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
@@ -8591,6 +8796,11 @@ namespace Zetbox.App.GUI
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(this.B);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -8891,6 +9101,11 @@ namespace Zetbox.App.GUI
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Visual>(this.A);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
@@ -8960,6 +9175,11 @@ namespace Zetbox.App.GUI
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Visual>(this.B);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -9226,6 +9446,11 @@ namespace Zetbox.App.GUI
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Visual>(this.A);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
 
         /// <summary>
@@ -9295,6 +9520,11 @@ namespace Zetbox.App.GUI
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Visual>(this.B);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
@@ -9540,6 +9770,11 @@ public Kunde_EMails_CollectionEntryEfImpl(Func<IFrozenContext> lazyCtx)
                 }
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchParentAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Projekte.Kunde>(this.Parent);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
@@ -9841,6 +10076,11 @@ public Muhblah_StringCollection_CollectionEntryEfImpl(Func<IFrozenContext> lazyC
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchParentAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Test.Muhblah>(this.Parent);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
         public Zetbox.API.IDataObject ParentObject
@@ -10122,6 +10362,11 @@ public Projekt_AuditJournal_CollectionEntryEfImpl(Func<IFrozenContext> lazyCtx)
                 }
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchParentAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Projekte.Projekt>(this.Parent);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
@@ -10444,6 +10689,11 @@ public TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl(Func<IFrozenCont
                 }
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchParentAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Test.TestCustomObject>(this.Parent);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent

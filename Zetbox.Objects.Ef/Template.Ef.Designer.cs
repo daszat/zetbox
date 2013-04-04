@@ -135,6 +135,11 @@ namespace Zetbox.App.GUI
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchDisplayedTypeAssemblyAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Assembly>(this.DisplayedTypeAssembly);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DisplayedTypeAssembly
 		public static event PropertyGetterHandler<Zetbox.App.GUI.Template, Zetbox.App.Base.Assembly> OnDisplayedTypeAssembly_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.Template, Zetbox.App.Base.Assembly> OnDisplayedTypeAssembly_PreSetter;
@@ -327,6 +332,12 @@ namespace Zetbox.App.GUI
             }
         }
         private BSideCollectionWrapper<Zetbox.App.GUI.Template, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryEfImpl>> _Menu;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchMenuAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.GUI.Visual>>(this.Menu);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.GUI.Template> OnMenu_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.Template> OnMenu_IsValid;
@@ -424,6 +435,11 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.Template> OnMenu_P
                 NotifyPropertyChanged("VisualTree", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchVisualTreeAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Visual>(this.VisualTree);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for VisualTree
@@ -546,6 +562,21 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.Template> OnMenu_P
             }
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "DisplayedTypeAssembly":
+                return TriggerFetchDisplayedTypeAssemblyAsync();
+            case "Menu":
+                return TriggerFetchMenuAsync();
+            case "VisualTree":
+                return TriggerFetchVisualTreeAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

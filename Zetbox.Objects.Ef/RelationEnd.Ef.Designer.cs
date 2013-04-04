@@ -148,6 +148,11 @@ namespace Zetbox.App.Base
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchAParentAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Relation>(this.AParent);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for AParent
 		public static event PropertyGetterHandler<Zetbox.App.Base.RelationEnd, Zetbox.App.Base.Relation> OnAParent_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.RelationEnd, Zetbox.App.Base.Relation> OnAParent_PreSetter;
@@ -263,6 +268,11 @@ namespace Zetbox.App.Base
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchBParentAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Relation>(this.BParent);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for BParent
 		public static event PropertyGetterHandler<Zetbox.App.Base.RelationEnd, Zetbox.App.Base.Relation> OnBParent_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.RelationEnd, Zetbox.App.Base.Relation> OnBParent_PreSetter;
@@ -363,6 +373,11 @@ namespace Zetbox.App.Base
                 NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
@@ -549,6 +564,11 @@ namespace Zetbox.App.Base
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
@@ -995,6 +1015,11 @@ namespace Zetbox.App.Base
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchNavigatorAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectReferenceProperty>(this.Navigator);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Navigator
 		public static event PropertyGetterHandler<Zetbox.App.Base.RelationEnd, Zetbox.App.Base.ObjectReferenceProperty> OnNavigator_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.RelationEnd, Zetbox.App.Base.ObjectReferenceProperty> OnNavigator_PreSetter;
@@ -1195,6 +1220,11 @@ namespace Zetbox.App.Base
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchTypeAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass>(this.Type);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Type
 		public static event PropertyGetterHandler<Zetbox.App.Base.RelationEnd, Zetbox.App.Base.ObjectClass> OnType_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.RelationEnd, Zetbox.App.Base.ObjectClass> OnType_PreSetter;
@@ -1349,6 +1379,27 @@ namespace Zetbox.App.Base
             }
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "AParent":
+                return TriggerFetchAParentAsync();
+            case "BParent":
+                return TriggerFetchBParentAsync();
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            case "Navigator":
+                return TriggerFetchNavigatorAsync();
+            case "Type":
+                return TriggerFetchTypeAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

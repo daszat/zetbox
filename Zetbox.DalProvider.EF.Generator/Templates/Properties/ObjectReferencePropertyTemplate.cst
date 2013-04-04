@@ -156,6 +156,11 @@
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetch<%= name %>Async()
+        {
+            return new Zetbox.API.Async.ZbTask<<%= referencedInterface %>>(this.<%= name %>);
+        }
+
 <%
     AddSerialization(serializationList, name, fkBackingName, fkGuidBackingName, referencedImplementation, associationName, targetRoleName);
 

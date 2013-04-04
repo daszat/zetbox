@@ -169,6 +169,12 @@ namespace Zetbox.App.Base
             }
         }
         private ASideCollectionWrapper<Zetbox.App.Base.Identity, Zetbox.App.Base.Group, Zetbox.App.Base.Identity_memberOf_Group_RelationEntryEfImpl, EntityCollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryEfImpl>> _Member;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchMemberAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.Identity>>(this.Member);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Base.Group> OnMember_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.Group> OnMember_IsValid;
@@ -267,6 +273,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Group> OnMember_P
                 NotifyPropertyChanged("Module", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchModuleAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(this.Module);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
@@ -457,6 +468,19 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Group> OnMember_P
             }
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Member":
+                return TriggerFetchMemberAsync();
+            case "Module":
+                return TriggerFetchModuleAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

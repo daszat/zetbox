@@ -136,6 +136,11 @@ namespace Zetbox.App.Base
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchCompoundObjectDefinitionAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.CompoundObject>(this.CompoundObjectDefinition);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CompoundObjectDefinition
 		public static event PropertyGetterHandler<Zetbox.App.Base.CompoundObjectProperty, Zetbox.App.Base.CompoundObject> OnCompoundObjectDefinition_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.CompoundObjectProperty, Zetbox.App.Base.CompoundObject> OnCompoundObjectDefinition_PreSetter;
@@ -633,6 +638,17 @@ namespace Zetbox.App.Base
             }
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "CompoundObjectDefinition":
+                return TriggerFetchCompoundObjectDefinitionAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

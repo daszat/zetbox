@@ -216,6 +216,11 @@ namespace Zetbox.App.Test
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchFragebogenAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Test.Fragebogen>(this.Fragebogen);
+        }
+
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -443,6 +448,17 @@ namespace Zetbox.App.Test
             }
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Fragebogen":
+                return TriggerFetchFragebogenAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

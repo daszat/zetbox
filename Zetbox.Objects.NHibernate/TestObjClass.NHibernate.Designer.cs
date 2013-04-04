@@ -246,6 +246,11 @@ namespace Zetbox.App.Test
         private int? _fk_ObjectProp = null;
 
 
+    public Zetbox.API.Async.ZbTask TriggerFetchObjectPropAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Projekte.Kunde>(this.ObjectProp);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ObjectProp
 		public static event PropertyGetterHandler<Zetbox.App.Test.TestObjClass, Zetbox.App.Projekte.Kunde> OnObjectProp_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Test.TestObjClass, Zetbox.App.Projekte.Kunde> OnObjectProp_PreSetter;
@@ -585,6 +590,17 @@ namespace Zetbox.App.Test
             base.Recalculate(property);
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "ObjectProp":
+                return TriggerFetchObjectPropAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

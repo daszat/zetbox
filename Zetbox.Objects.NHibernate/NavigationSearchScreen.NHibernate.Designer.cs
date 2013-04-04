@@ -774,6 +774,11 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for RequestedEditorKind's guid, used on import only</summary>
         private Guid? _fk_guid_RequestedEditorKind = null;
 
+    public Zetbox.API.Async.ZbTask TriggerFetchRequestedEditorKindAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(this.RequestedEditorKind);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedEditorKind
 		public static event PropertyGetterHandler<Zetbox.App.GUI.NavigationSearchScreen, Zetbox.App.GUI.ControlKind> OnRequestedEditorKind_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.NavigationSearchScreen, Zetbox.App.GUI.ControlKind> OnRequestedEditorKind_PreSetter;
@@ -868,6 +873,11 @@ namespace Zetbox.App.GUI
 
         /// <summary>Backing store for RequestedWorkspaceKind's guid, used on import only</summary>
         private Guid? _fk_guid_RequestedWorkspaceKind = null;
+
+    public Zetbox.API.Async.ZbTask TriggerFetchRequestedWorkspaceKindAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(this.RequestedWorkspaceKind);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedWorkspaceKind
 		public static event PropertyGetterHandler<Zetbox.App.GUI.NavigationSearchScreen, Zetbox.App.GUI.ControlKind> OnRequestedWorkspaceKind_Getter;
@@ -1196,6 +1206,11 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for Type's guid, used on import only</summary>
         private Guid? _fk_guid_Type = null;
 
+    public Zetbox.API.Async.ZbTask TriggerFetchTypeAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass>(this.Type);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Type
 		public static event PropertyGetterHandler<Zetbox.App.GUI.NavigationSearchScreen, Zetbox.App.Base.ObjectClass> OnType_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.NavigationSearchScreen, Zetbox.App.Base.ObjectClass> OnType_PreSetter;
@@ -1430,6 +1445,21 @@ namespace Zetbox.App.GUI
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "RequestedEditorKind":
+                return TriggerFetchRequestedEditorKindAsync();
+            case "RequestedWorkspaceKind":
+                return TriggerFetchRequestedWorkspaceKindAsync();
+            case "Type":
+                return TriggerFetchTypeAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

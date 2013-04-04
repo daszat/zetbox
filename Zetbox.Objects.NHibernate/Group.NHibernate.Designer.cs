@@ -156,6 +156,12 @@ namespace Zetbox.App.Base
 		private NHibernateASideCollectionWrapper<Zetbox.App.Base.Identity, Zetbox.App.Base.Group, Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl> _Member;
 		// ignored, but required for Serialization
         private bool Member_was_eagerLoaded = false;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchMemberAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.Identity>>(this.Member);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Base.Group> OnMember_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.Group> OnMember_IsValid;
@@ -247,6 +253,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Group> OnMember_P
 
         /// <summary>Backing store for Module's guid, used on import only</summary>
         private Guid? _fk_guid_Module = null;
+
+    public Zetbox.API.Async.ZbTask TriggerFetchModuleAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(this.Module);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
 		public static event PropertyGetterHandler<Zetbox.App.Base.Group, Zetbox.App.Base.Module> OnModule_Getter;
@@ -444,6 +455,19 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Group> OnMember_P
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Member":
+                return TriggerFetchMemberAsync();
+            case "Module":
+                return TriggerFetchModuleAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

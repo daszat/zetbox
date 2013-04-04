@@ -215,6 +215,11 @@ namespace Zetbox.App.Test
         private int? _fk_Fragebogen = null;
 
 
+    public Zetbox.API.Async.ZbTask TriggerFetchFragebogenAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Test.Fragebogen>(this.Fragebogen);
+    }
+
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
         public virtual int? gute_Antworten_pos
         {
@@ -427,6 +432,17 @@ namespace Zetbox.App.Test
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Fragebogen":
+                return TriggerFetchFragebogenAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

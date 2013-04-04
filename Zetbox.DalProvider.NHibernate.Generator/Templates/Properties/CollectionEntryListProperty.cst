@@ -73,4 +73,10 @@
 		private <%= backingCollectionType %><<%= aSideType %>, <%= bSideType %>, <%= entryType %>> <%= backingName %>;
 		// ignored, but required for Serialization
         private bool <%= name %>_was_eagerLoaded = false;
+
+        public Zetbox.API.Async.ZbTask TriggerFetch<%= name %>Async()
+        {
+            return new Zetbox.API.Async.ZbTask<<%= exposedCollectionInterface %><<%= referencedInterface %>>>(this.<%= name %>);
+        }
+
 <% AddSerialization(serializationList, name, eagerLoading); %>

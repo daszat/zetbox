@@ -136,6 +136,11 @@ namespace Zetbox.App.GUI
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchControlKindAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(this.ControlKind);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ControlKind
 		public static event PropertyGetterHandler<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.GUI.ControlKind> OnControlKind_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.GUI.ControlKind> OnControlKind_PreSetter;
@@ -237,6 +242,11 @@ namespace Zetbox.App.GUI
                 NotifyPropertyChanged("ControlRef", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchControlRefAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef>(this.ControlRef);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ControlRef
@@ -575,6 +585,11 @@ namespace Zetbox.App.GUI
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchModuleAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(this.Module);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
 		public static event PropertyGetterHandler<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.Base.Module> OnModule_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.Base.Module> OnModule_PreSetter;
@@ -630,6 +645,12 @@ namespace Zetbox.App.GUI
         }
         private BSideCollectionWrapper<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.Base.TypeRef, Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryEfImpl>> _SupportedViewModels;
         private bool SupportedViewModels_was_eagerLoaded = false;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchSupportedViewModelsAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.TypeRef>>(this.SupportedViewModels);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewDescriptor> OnSupportedViewModels_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.ViewDescriptor> OnSupportedViewModels_IsValid;
@@ -771,6 +792,23 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewDescriptor> On
             }
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "ControlKind":
+                return TriggerFetchControlKindAsync();
+            case "ControlRef":
+                return TriggerFetchControlRefAsync();
+            case "Module":
+                return TriggerFetchModuleAsync();
+            case "SupportedViewModels":
+                return TriggerFetchSupportedViewModelsAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

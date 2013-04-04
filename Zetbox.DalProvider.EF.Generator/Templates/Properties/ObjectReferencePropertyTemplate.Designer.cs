@@ -206,7 +206,12 @@ this.WriteObjects("                if(IsAttached) UpdateChangedInfo = true;\r\n"
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
-#line 160 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+this.WriteObjects("        public Zetbox.API.Async.ZbTask TriggerFetch",  name , "Async()\r\n");
+this.WriteObjects("        {\r\n");
+this.WriteObjects("            return new Zetbox.API.Async.ZbTask<",  referencedInterface , ">(this.",  name , ");\r\n");
+this.WriteObjects("        }\r\n");
+this.WriteObjects("\r\n");
+#line 165 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 AddSerialization(serializationList, name, fkBackingName, fkGuidBackingName, referencedImplementation, associationName, targetRoleName);
 
     if (!String.IsNullOrEmpty(positionPropertyName))
@@ -216,7 +221,7 @@ AddSerialization(serializationList, name, fkBackingName, fkGuidBackingName, refe
             "int?", positionPropertyName, moduleNamespace, false, disableExport);
     }
 
-#line 169 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 174 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("        // END ",  this.GetType() , " for ",  name , "\r\n");
 
         }

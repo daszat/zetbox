@@ -169,6 +169,12 @@ namespace Zetbox.App.Base
             }
         }
         private BSideCollectionWrapper<Zetbox.App.Base.IndexConstraint, Zetbox.App.Base.Property, Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl, EntityCollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl>> _Properties;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchPropertiesAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.Property>>(this.Properties);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Base.IndexConstraint> OnProperties_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.IndexConstraint> OnProperties_IsValid;
@@ -343,6 +349,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.IndexConstraint> 
             }
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Properties":
+                return TriggerFetchPropertiesAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

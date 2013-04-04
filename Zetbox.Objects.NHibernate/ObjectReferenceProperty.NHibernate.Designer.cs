@@ -214,6 +214,12 @@ namespace Zetbox.App.Base
 		private NHibernateBSideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl> _Methods;
 		// ignored, but required for Serialization
         private bool Methods_was_eagerLoaded = false;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchMethodsAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.Method>>(this.Methods);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferenceProperty> OnMethods_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.ObjectReferenceProperty> OnMethods_IsValid;
@@ -321,6 +327,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
 
         /// <summary>Backing store for RelationEnd's guid, used on import only</summary>
         private Guid? _fk_guid_RelationEnd = null;
+
+    public Zetbox.API.Async.ZbTask TriggerFetchRelationEndAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.RelationEnd>(this.RelationEnd);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RelationEnd
 		public static event PropertyGetterHandler<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.RelationEnd> OnRelationEnd_Getter;
@@ -775,6 +786,19 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Methods":
+                return TriggerFetchMethodsAsync();
+            case "RelationEnd":
+                return TriggerFetchRelationEndAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

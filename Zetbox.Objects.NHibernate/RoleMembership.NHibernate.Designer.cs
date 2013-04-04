@@ -77,6 +77,12 @@ namespace Zetbox.App.Base
 		private NHibernateBSideListWrapper<Zetbox.App.Base.RoleMembership, Zetbox.App.Base.Relation, Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl> _Relations;
 		// ignored, but required for Serialization
         private bool Relations_was_eagerLoaded = false;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchRelationsAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<IList<Zetbox.App.Base.Relation>>(this.Relations);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Base.RoleMembership> OnRelations_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.RoleMembership> OnRelations_IsValid;
@@ -113,6 +119,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.RoleMembership> O
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Relations":
+                return TriggerFetchRelationsAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

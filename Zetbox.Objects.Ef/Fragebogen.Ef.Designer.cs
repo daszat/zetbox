@@ -91,6 +91,12 @@ namespace Zetbox.App.Test
         }
         private EntityListWrapper<Zetbox.App.Test.Antwort, Zetbox.App.Test.AntwortEfImpl> _Antworten;
 
+        public Zetbox.API.Async.ZbTask TriggerFetchAntwortenAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<IList<Zetbox.App.Test.Antwort>>(this.Antworten);
+        }
+
+
         private List<int> AntwortenIds;
         private bool Antworten_was_eagerLoaded = false;
 
@@ -214,6 +220,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
             }
         }
         private ASideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl, EntityCollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl>> _Student;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchStudentAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Test.TestStudent>>(this.Student);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnStudent_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.Fragebogen> OnStudent_IsValid;
@@ -263,6 +275,19 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnStu
             }
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Antworten":
+                return TriggerFetchAntwortenAsync();
+            case "Student":
+                return TriggerFetchStudentAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

@@ -103,6 +103,13 @@ this.WriteObjects("        private bool ",  name , "_was_eagerLoaded = false;\r\
 #line 72 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ObjectListProperty.cst"
 } 
 #line 73 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ObjectListProperty.cst"
+this.WriteObjects("\r\n");
+this.WriteObjects("        public Zetbox.API.Async.ZbTask TriggerFetch",  name , "Async()\r\n");
+this.WriteObjects("        {\r\n");
+this.WriteObjects("            return new Zetbox.API.Async.ZbTask<",  exposedListType , "<",  referencedInterface , ">>(this.",  name , ");\r\n");
+this.WriteObjects("        }\r\n");
+this.WriteObjects("\r\n");
+#line 79 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ObjectListProperty.cst"
 AddSerialization(serializationList, name, eagerLoading); 
 
         }

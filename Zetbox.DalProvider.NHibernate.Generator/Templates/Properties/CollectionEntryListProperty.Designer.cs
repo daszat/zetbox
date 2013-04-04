@@ -101,7 +101,13 @@ this.WriteObjects("\r\n");
 this.WriteObjects("		private ",  backingCollectionType , "<",  aSideType , ", ",  bSideType , ", ",  entryType , "> ",  backingName , ";\r\n");
 this.WriteObjects("		// ignored, but required for Serialization\r\n");
 this.WriteObjects("        private bool ",  name , "_was_eagerLoaded = false;\r\n");
-#line 76 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+this.WriteObjects("\r\n");
+this.WriteObjects("        public Zetbox.API.Async.ZbTask TriggerFetch",  name , "Async()\r\n");
+this.WriteObjects("        {\r\n");
+this.WriteObjects("            return new Zetbox.API.Async.ZbTask<",  exposedCollectionInterface , "<",  referencedInterface , ">>(this.",  name , ");\r\n");
+this.WriteObjects("        }\r\n");
+this.WriteObjects("\r\n");
+#line 82 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 AddSerialization(serializationList, name, eagerLoading); 
 
         }

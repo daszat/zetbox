@@ -135,6 +135,11 @@ namespace Zetbox.App.SchemaMigration
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
 		public static event PropertyGetterHandler<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.Base.Identity> OnChangedBy_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.Base.Identity> OnChangedBy_PreSetter;
@@ -472,6 +477,11 @@ namespace Zetbox.App.SchemaMigration
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
 		public static event PropertyGetterHandler<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.Base.Identity> OnCreatedBy_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.Base.Identity> OnCreatedBy_PreSetter;
@@ -761,6 +771,12 @@ namespace Zetbox.App.SchemaMigration
         }
         private BSideListWrapper<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.Base.Property, Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryEfImpl, EntityCollection<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryEfImpl>> _DestinationProperty;
         private bool DestinationProperty_was_eagerLoaded = false;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchDestinationPropertyAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<IList<Zetbox.App.Base.Property>>(this.DestinationProperty);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.SourceColumn> OnDestinationProperty_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.SchemaMigration.SourceColumn> OnDestinationProperty_IsValid;
@@ -815,6 +831,12 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             }
         }
         private EntityCollectionWrapper<Zetbox.App.SchemaMigration.SourceEnum, Zetbox.App.SchemaMigration.SourceEnumEfImpl> _EnumEntries;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchEnumEntriesAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.SchemaMigration.SourceEnum>>(this.EnumEntries);
+        }
+
 
 
 public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.SourceColumn> OnEnumEntries_PostSetter;
@@ -1149,6 +1171,11 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchReferencesAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.SchemaMigration.SourceColumn>(this.References);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for References
 		public static event PropertyGetterHandler<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.SchemaMigration.SourceColumn> OnReferences_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.SchemaMigration.SourceColumn> OnReferences_PreSetter;
@@ -1206,6 +1233,12 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             }
         }
         private EntityCollectionWrapper<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.SchemaMigration.SourceColumnEfImpl> _Referers;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchReferersAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.SchemaMigration.SourceColumn>>(this.Referers);
+        }
+
 
 
 public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.SourceColumn> OnReferers_PostSetter;
@@ -1387,6 +1420,11 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                 }
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchSourceTableAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.SchemaMigration.SourceTable>(this.SourceTable);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for SourceTable
@@ -1614,6 +1652,29 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             }
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            case "DestinationProperty":
+                return TriggerFetchDestinationPropertyAsync();
+            case "EnumEntries":
+                return TriggerFetchEnumEntriesAsync();
+            case "References":
+                return TriggerFetchReferencesAsync();
+            case "Referers":
+                return TriggerFetchReferersAsync();
+            case "SourceTable":
+                return TriggerFetchSourceTableAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

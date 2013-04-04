@@ -136,6 +136,11 @@ namespace at.dasz.DocumentManagement
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchBlobAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Blob>(this.Blob);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Blob
 		public static event PropertyGetterHandler<at.dasz.DocumentManagement.File, Zetbox.App.Base.Blob> OnBlob_Getter;
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, Zetbox.App.Base.Blob> OnBlob_PreSetter;
@@ -236,6 +241,11 @@ namespace at.dasz.DocumentManagement
                 NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
@@ -422,6 +432,11 @@ namespace at.dasz.DocumentManagement
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
@@ -901,6 +916,21 @@ namespace at.dasz.DocumentManagement
             }
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Blob":
+                return TriggerFetchBlobAsync();
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

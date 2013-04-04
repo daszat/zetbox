@@ -412,6 +412,11 @@ namespace Zetbox.App.Base
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchReferencedObjectClassAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass>(this.ReferencedObjectClass);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ReferencedObjectClass
 		public static event PropertyGetterHandler<Zetbox.App.Base.ObjectReferencePlaceholderProperty, Zetbox.App.Base.ObjectClass> OnReferencedObjectClass_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.ObjectReferencePlaceholderProperty, Zetbox.App.Base.ObjectClass> OnReferencedObjectClass_PreSetter;
@@ -846,6 +851,17 @@ namespace Zetbox.App.Base
             }
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "ReferencedObjectClass":
+                return TriggerFetchReferencedObjectClassAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

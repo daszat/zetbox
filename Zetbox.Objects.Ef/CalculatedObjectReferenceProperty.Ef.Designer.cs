@@ -88,6 +88,12 @@ namespace Zetbox.App.Base
         }
         private BSideCollectionWrapper<Zetbox.App.Base.CalculatedObjectReferenceProperty, Zetbox.App.Base.Property, Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl, EntityCollection<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl>> _Inputs;
         private bool Inputs_was_eagerLoaded = false;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchInputsAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.Property>>(this.Inputs);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Base.CalculatedObjectReferenceProperty> OnInputs_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.CalculatedObjectReferenceProperty> OnInputs_IsValid;
@@ -186,6 +192,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.CalculatedObjectR
                 NotifyPropertyChanged("ReferencedClass", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchReferencedClassAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass>(this.ReferencedClass);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ReferencedClass
@@ -554,6 +565,19 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.CalculatedObjectR
             }
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Inputs":
+                return TriggerFetchInputsAsync();
+            case "ReferencedClass":
+                return TriggerFetchReferencedClassAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

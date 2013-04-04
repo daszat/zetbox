@@ -148,6 +148,11 @@ namespace Zetbox.App.Calendar
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchBaseWorkScheduleAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.WorkSchedule>(this.BaseWorkSchedule);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for BaseWorkSchedule
 		public static event PropertyGetterHandler<Zetbox.App.Calendar.WorkSchedule, Zetbox.App.Calendar.WorkSchedule> OnBaseWorkSchedule_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.WorkSchedule, Zetbox.App.Calendar.WorkSchedule> OnBaseWorkSchedule_PreSetter;
@@ -248,6 +253,11 @@ namespace Zetbox.App.Calendar
                 NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
@@ -392,6 +402,12 @@ namespace Zetbox.App.Calendar
         }
         private EntityCollectionWrapper<Zetbox.App.Calendar.WorkSchedule, Zetbox.App.Calendar.WorkScheduleEfImpl> _ChildWorkSchedule;
 
+        public Zetbox.API.Async.ZbTask TriggerFetchChildWorkScheduleAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Calendar.WorkSchedule>>(this.ChildWorkSchedule);
+        }
+
+
 
 public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule> OnChildWorkSchedule_PostSetter;
 
@@ -490,6 +506,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
@@ -761,6 +782,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchModuleAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(this.Module);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
 		public static event PropertyGetterHandler<Zetbox.App.Calendar.WorkSchedule, Zetbox.App.Base.Module> OnModule_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.WorkSchedule, Zetbox.App.Base.Module> OnModule_PreSetter;
@@ -887,6 +913,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
             }
         }
         private EntityCollectionWrapper<Zetbox.App.Calendar.WorkScheduleRule, Zetbox.App.Calendar.WorkScheduleRuleEfImpl> _WorkScheduleRules;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchWorkScheduleRulesAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Calendar.WorkScheduleRule>>(this.WorkScheduleRules);
+        }
+
 
 
 public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule> OnWorkScheduleRules_PostSetter;
@@ -1144,6 +1176,27 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
             }
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "BaseWorkSchedule":
+                return TriggerFetchBaseWorkScheduleAsync();
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "ChildWorkSchedule":
+                return TriggerFetchChildWorkScheduleAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            case "Module":
+                return TriggerFetchModuleAsync();
+            case "WorkScheduleRules":
+                return TriggerFetchWorkScheduleRulesAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

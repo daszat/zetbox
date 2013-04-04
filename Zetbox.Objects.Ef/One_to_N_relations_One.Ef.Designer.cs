@@ -160,6 +160,12 @@ namespace Zetbox.App.Test
         }
         private EntityCollectionWrapper<Zetbox.App.Test.One_to_N_relations_N, Zetbox.App.Test.One_to_N_relations_NEfImpl> _NSide;
 
+        public Zetbox.API.Async.ZbTask TriggerFetchNSideAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Test.One_to_N_relations_N>>(this.NSide);
+        }
+
+
 
 public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relations_One> OnNSide_PostSetter;
 
@@ -209,6 +215,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relation
             }
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "NSide":
+                return TriggerFetchNSideAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

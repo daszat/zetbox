@@ -137,6 +137,12 @@ namespace Zetbox.App.Base
         }
     
         private OneNRelationList<Zetbox.App.Base.EnumerationEntry> _EnumerationEntries;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchEnumerationEntriesAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<IList<Zetbox.App.Base.EnumerationEntry>>(this.EnumerationEntries);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Base.Enumeration> OnEnumerationEntries_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.Enumeration> OnEnumerationEntries_IsValid;
@@ -630,6 +636,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Enumeration> OnEn
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "EnumerationEntries":
+                return TriggerFetchEnumerationEntriesAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

@@ -225,6 +225,12 @@ namespace Zetbox.App.Base
             }
         }
         private BSideCollectionWrapper<Zetbox.App.Base.Identity, Zetbox.App.Base.Group, Zetbox.App.Base.Identity_memberOf_Group_RelationEntryEfImpl, EntityCollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryEfImpl>> _Groups;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchGroupsAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.Group>>(this.Groups);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroups_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.Identity> OnGroups_IsValid;
@@ -417,6 +423,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
             }
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Groups":
+                return TriggerFetchGroupsAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

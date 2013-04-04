@@ -28,15 +28,5 @@ namespace Zetbox.DalProvider.Memory.Generator.Templates.ObjectClasses
             : base(_host, ctx, cls)
         {
         }
-
-        protected override void ApplyTriggerFetchTemplate()
-        {
-            var propNames = this.DataType.Properties
-                .OfType<ObjectReferenceProperty>()
-                .Select(p => p.Name)
-                .OrderBy(p => p)
-                .ToList();
-            Templates.ObjectClasses.TriggerFetchMethod.Call(Host, propNames);
-        }
     }
 }

@@ -91,6 +91,12 @@ namespace Zetbox.App.Test
         }
         private EntityCollectionWrapper<Zetbox.App.Test.SecurityTestChild, Zetbox.App.Test.SecurityTestChildEfImpl> _Children;
 
+        public Zetbox.API.Async.ZbTask TriggerFetchChildrenAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Test.SecurityTestChild>>(this.Children);
+        }
+
+
 
 public static event PropertyListChangedHandler<Zetbox.App.Test.SecurityTestParent> OnChildren_PostSetter;
 
@@ -209,6 +215,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.SecurityTestParen
             }
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Children":
+                return TriggerFetchChildrenAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

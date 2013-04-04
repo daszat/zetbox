@@ -79,6 +79,12 @@ namespace Zetbox.App.Test
         }
     
         private OneNRelationList<Zetbox.App.Test.MethodTest> _Children;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchChildrenAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Test.MethodTest>>(this.Children);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChildren_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.MethodTest> OnChildren_IsValid;
@@ -191,6 +197,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
         /// <summary>Backing store for Parent's id, used on dehydration only</summary>
         private int? _fk_Parent = null;
 
+
+    public Zetbox.API.Async.ZbTask TriggerFetchParentAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Test.MethodTest>(this.Parent);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
 		public static event PropertyGetterHandler<Zetbox.App.Test.MethodTest, Zetbox.App.Test.MethodTest> OnParent_Getter;
@@ -954,6 +965,19 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Children":
+                return TriggerFetchChildrenAsync();
+            case "Parent":
+                return TriggerFetchParentAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

@@ -147,6 +147,11 @@ namespace Zetbox.App.Test
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchOneEndAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Test.OrderedOneEnd>(this.OneEnd);
+        }
+
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -301,6 +306,17 @@ namespace Zetbox.App.Test
             }
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "OneEnd":
+                return TriggerFetchOneEndAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

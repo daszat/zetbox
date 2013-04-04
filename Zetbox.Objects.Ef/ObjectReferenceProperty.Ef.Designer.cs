@@ -238,6 +238,12 @@ namespace Zetbox.App.Base
             }
         }
         private BSideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl>> _Methods;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchMethodsAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.Method>>(this.Methods);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferenceProperty> OnMethods_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.ObjectReferenceProperty> OnMethods_IsValid;
@@ -348,6 +354,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
                 }
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchRelationEndAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.RelationEnd>(this.RelationEnd);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RelationEnd
@@ -784,6 +795,19 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
             }
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Methods":
+                return TriggerFetchMethodsAsync();
+            case "RelationEnd":
+                return TriggerFetchRelationEndAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

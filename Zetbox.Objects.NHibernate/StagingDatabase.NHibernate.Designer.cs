@@ -137,6 +137,11 @@ namespace Zetbox.App.SchemaMigration
         private int? _fk_ChangedBy = null;
 
 
+    public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
 		public static event PropertyGetterHandler<Zetbox.App.SchemaMigration.StagingDatabase, Zetbox.App.Base.Identity> OnChangedBy_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.SchemaMigration.StagingDatabase, Zetbox.App.Base.Identity> OnChangedBy_PreSetter;
@@ -365,6 +370,11 @@ namespace Zetbox.App.SchemaMigration
         /// <summary>Backing store for CreatedBy's id, used on dehydration only</summary>
         private int? _fk_CreatedBy = null;
 
+
+    public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
 		public static event PropertyGetterHandler<Zetbox.App.SchemaMigration.StagingDatabase, Zetbox.App.Base.Identity> OnCreatedBy_Getter;
@@ -698,6 +708,11 @@ namespace Zetbox.App.SchemaMigration
         /// <summary>Backing store for MigrationProject's guid, used on import only</summary>
         private Guid? _fk_guid_MigrationProject = null;
 
+    public Zetbox.API.Async.ZbTask TriggerFetchMigrationProjectAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.SchemaMigration.MigrationProject>(this.MigrationProject);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for MigrationProject
 		public static event PropertyGetterHandler<Zetbox.App.SchemaMigration.StagingDatabase, Zetbox.App.SchemaMigration.MigrationProject> OnMigrationProject_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.SchemaMigration.StagingDatabase, Zetbox.App.SchemaMigration.MigrationProject> OnMigrationProject_PreSetter;
@@ -852,6 +867,12 @@ namespace Zetbox.App.SchemaMigration
         }
     
         private OneNRelationList<Zetbox.App.SchemaMigration.SourceTable> _SourceTables;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchSourceTablesAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.SchemaMigration.SourceTable>>(this.SourceTables);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.StagingDatabase> OnSourceTables_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.SchemaMigration.StagingDatabase> OnSourceTables_IsValid;
@@ -955,6 +976,23 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Stagin
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            case "MigrationProject":
+                return TriggerFetchMigrationProjectAsync();
+            case "SourceTables":
+                return TriggerFetchSourceTablesAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

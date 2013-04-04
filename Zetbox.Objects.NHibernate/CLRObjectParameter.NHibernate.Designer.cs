@@ -136,6 +136,11 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for Type's guid, used on import only</summary>
         private Guid? _fk_guid_Type = null;
 
+    public Zetbox.API.Async.ZbTask TriggerFetchTypeAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef>(this.Type);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Type
 		public static event PropertyGetterHandler<Zetbox.App.Base.CLRObjectParameter, Zetbox.App.Base.TypeRef> OnType_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.CLRObjectParameter, Zetbox.App.Base.TypeRef> OnType_PreSetter;
@@ -444,6 +449,17 @@ namespace Zetbox.App.Base
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Type":
+                return TriggerFetchTypeAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

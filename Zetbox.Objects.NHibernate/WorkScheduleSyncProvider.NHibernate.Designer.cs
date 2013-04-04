@@ -134,6 +134,11 @@ namespace Zetbox.App.Calendar
         private int? _fk_Calendar = null;
 
 
+    public Zetbox.API.Async.ZbTask TriggerFetchCalendarAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Calendar>(this.Calendar);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Calendar
 		public static event PropertyGetterHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider, Zetbox.App.Calendar.Calendar> OnCalendar_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider, Zetbox.App.Calendar.Calendar> OnCalendar_PreSetter;
@@ -226,6 +231,11 @@ namespace Zetbox.App.Calendar
         /// <summary>Backing store for WorkSchedule's id, used on dehydration only</summary>
         private int? _fk_WorkSchedule = null;
 
+
+    public Zetbox.API.Async.ZbTask TriggerFetchWorkScheduleAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.WorkSchedule>(this.WorkSchedule);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for WorkSchedule
 		public static event PropertyGetterHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider, Zetbox.App.Calendar.WorkSchedule> OnWorkSchedule_Getter;
@@ -421,6 +431,19 @@ namespace Zetbox.App.Calendar
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Calendar":
+                return TriggerFetchCalendarAsync();
+            case "WorkSchedule":
+                return TriggerFetchWorkScheduleAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

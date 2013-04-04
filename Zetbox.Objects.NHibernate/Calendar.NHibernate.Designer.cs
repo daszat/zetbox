@@ -137,6 +137,11 @@ namespace Zetbox.App.Calendar
         private int? _fk_ChangedBy = null;
 
 
+    public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
 		public static event PropertyGetterHandler<Zetbox.App.Calendar.Calendar, Zetbox.App.Base.Identity> OnChangedBy_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.Calendar, Zetbox.App.Base.Identity> OnChangedBy_PreSetter;
@@ -307,6 +312,11 @@ namespace Zetbox.App.Calendar
         /// <summary>Backing store for CreatedBy's id, used on dehydration only</summary>
         private int? _fk_CreatedBy = null;
 
+
+    public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
 		public static event PropertyGetterHandler<Zetbox.App.Calendar.Calendar, Zetbox.App.Base.Identity> OnCreatedBy_Getter;
@@ -500,6 +510,12 @@ namespace Zetbox.App.Calendar
 		private NHibernateBSideCollectionWrapper<Zetbox.App.Calendar.Calendar, Zetbox.App.Base.Group, Zetbox.App.Calendar.Calendar_shared_r_Group_RelationEntryNHibernateImpl> _GroupReaders;
 		// ignored, but required for Serialization
         private bool GroupReaders_was_eagerLoaded = false;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchGroupReadersAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.Group>>(this.GroupReaders);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnGroupReaders_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Calendar.Calendar> OnGroupReaders_IsValid;
@@ -533,6 +549,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnG
 		private NHibernateBSideCollectionWrapper<Zetbox.App.Calendar.Calendar, Zetbox.App.Base.Group, Zetbox.App.Calendar.Calendar_shared_w_Group_RelationEntryNHibernateImpl> _GroupWriters;
 		// ignored, but required for Serialization
         private bool GroupWriters_was_eagerLoaded = false;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchGroupWritersAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.Group>>(this.GroupWriters);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnGroupWriters_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Calendar.Calendar> OnGroupWriters_IsValid;
@@ -681,6 +703,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnG
         private int? _fk_Owner = null;
 
 
+    public Zetbox.API.Async.ZbTask TriggerFetchOwnerAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.Owner);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Owner
 		public static event PropertyGetterHandler<Zetbox.App.Calendar.Calendar, Zetbox.App.Base.Identity> OnOwner_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.Calendar, Zetbox.App.Base.Identity> OnOwner_PreSetter;
@@ -717,6 +744,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnG
 		private NHibernateBSideCollectionWrapper<Zetbox.App.Calendar.Calendar, Zetbox.App.Base.Identity, Zetbox.App.Calendar.Calendar_shared_r_Identity_RelationEntryNHibernateImpl> _Readers;
 		// ignored, but required for Serialization
         private bool Readers_was_eagerLoaded = false;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchReadersAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.Identity>>(this.Readers);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnReaders_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Calendar.Calendar> OnReaders_IsValid;
@@ -750,6 +783,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnR
 		private NHibernateBSideCollectionWrapper<Zetbox.App.Calendar.Calendar, Zetbox.App.Base.Identity, Zetbox.App.Calendar.Calendar_shared_w_Identity_RelationEntryNHibernateImpl> _Writers;
 		// ignored, but required for Serialization
         private bool Writers_was_eagerLoaded = false;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchWritersAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.Identity>>(this.Writers);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnWriters_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Calendar.Calendar> OnWriters_IsValid;
@@ -913,6 +952,29 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnW
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            case "GroupReaders":
+                return TriggerFetchGroupReadersAsync();
+            case "GroupWriters":
+                return TriggerFetchGroupWritersAsync();
+            case "Owner":
+                return TriggerFetchOwnerAsync();
+            case "Readers":
+                return TriggerFetchReadersAsync();
+            case "Writers":
+                return TriggerFetchWritersAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

@@ -239,7 +239,12 @@ this.WriteObjects("        private Guid? ",  fkGuidBackingName , " = null;\r\n")
 } 
 #line 180 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("\r\n");
-#line 182 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+this.WriteObjects("    public Zetbox.API.Async.ZbTask TriggerFetch",  name , "Async()\r\n");
+this.WriteObjects("    {\r\n");
+this.WriteObjects("        return new Zetbox.API.Async.ZbTask<",  referencedInterface , ">(this.",  name , ");\r\n");
+this.WriteObjects("    }\r\n");
+this.WriteObjects("\r\n");
+#line 187 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 AddSerialization(serializationList, name, fkBackingName, fkGuidBackingName);
 
     if (!String.IsNullOrEmpty(positionPropertyName))
@@ -249,7 +254,7 @@ AddSerialization(serializationList, name, fkBackingName, fkGuidBackingName);
             "int?", positionPropertyName, moduleNamespace, false, disableExport);
     }
 
-#line 191 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
+#line 196 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("        // END ",  this.GetType() , " for ",  name , "\r\n");
 
         }

@@ -136,6 +136,11 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for DefaultPropertyViewModelDescriptor's guid, used on import only</summary>
         private Guid? _fk_guid_DefaultPropertyViewModelDescriptor = null;
 
+    public Zetbox.API.Async.ZbTask TriggerFetchDefaultPropertyViewModelDescriptorAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor>(this.DefaultPropertyViewModelDescriptor);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultPropertyViewModelDescriptor
 		public static event PropertyGetterHandler<Zetbox.App.Base.CompoundObject, Zetbox.App.GUI.ViewModelDescriptor> OnDefaultPropertyViewModelDescriptor_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.CompoundObject, Zetbox.App.GUI.ViewModelDescriptor> OnDefaultPropertyViewModelDescriptor_PreSetter;
@@ -383,6 +388,17 @@ namespace Zetbox.App.Base
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "DefaultPropertyViewModelDescriptor":
+                return TriggerFetchDefaultPropertyViewModelDescriptorAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

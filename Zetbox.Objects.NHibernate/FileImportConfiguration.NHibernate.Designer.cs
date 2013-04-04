@@ -137,6 +137,11 @@ namespace at.dasz.DocumentManagement
         private int? _fk_ChangedBy = null;
 
 
+    public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
 		public static event PropertyGetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, Zetbox.App.Base.Identity> OnChangedBy_Getter;
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, Zetbox.App.Base.Identity> OnChangedBy_PreSetter;
@@ -307,6 +312,11 @@ namespace at.dasz.DocumentManagement
         /// <summary>Backing store for CreatedBy's id, used on dehydration only</summary>
         private int? _fk_CreatedBy = null;
 
+
+    public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
 		public static event PropertyGetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, Zetbox.App.Base.Identity> OnCreatedBy_Getter;
@@ -557,6 +567,11 @@ namespace at.dasz.DocumentManagement
         private int? _fk_Identity = null;
 
 
+    public Zetbox.API.Async.ZbTask TriggerFetchIdentityAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.Identity);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Identity
 		public static event PropertyGetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, Zetbox.App.Base.Identity> OnIdentity_Getter;
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.FileImportConfiguration, Zetbox.App.Base.Identity> OnIdentity_PreSetter;
@@ -764,6 +779,21 @@ namespace at.dasz.DocumentManagement
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            case "Identity":
+                return TriggerFetchIdentityAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

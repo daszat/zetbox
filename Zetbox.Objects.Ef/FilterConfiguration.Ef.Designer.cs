@@ -135,6 +135,11 @@ namespace Zetbox.App.GUI
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
 		public static event PropertyGetterHandler<Zetbox.App.GUI.FilterConfiguration, Zetbox.App.Base.Identity> OnChangedBy_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.FilterConfiguration, Zetbox.App.Base.Identity> OnChangedBy_PreSetter;
@@ -319,6 +324,11 @@ namespace Zetbox.App.GUI
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
@@ -659,6 +669,11 @@ namespace Zetbox.App.GUI
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchModuleAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(this.Module);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
 		public static event PropertyGetterHandler<Zetbox.App.GUI.FilterConfiguration, Zetbox.App.Base.Module> OnModule_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.FilterConfiguration, Zetbox.App.Base.Module> OnModule_PreSetter;
@@ -831,6 +846,11 @@ namespace Zetbox.App.GUI
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchRequestedKindAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(this.RequestedKind);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedKind
 		public static event PropertyGetterHandler<Zetbox.App.GUI.FilterConfiguration, Zetbox.App.GUI.ControlKind> OnRequestedKind_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.FilterConfiguration, Zetbox.App.GUI.ControlKind> OnRequestedKind_PreSetter;
@@ -1001,6 +1021,11 @@ namespace Zetbox.App.GUI
                 NotifyPropertyChanged("ViewModelDescriptor", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchViewModelDescriptorAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor>(this.ViewModelDescriptor);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ViewModelDescriptor
@@ -1191,6 +1216,25 @@ namespace Zetbox.App.GUI
             }
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            case "Module":
+                return TriggerFetchModuleAsync();
+            case "RequestedKind":
+                return TriggerFetchRequestedKindAsync();
+            case "ViewModelDescriptor":
+                return TriggerFetchViewModelDescriptorAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

@@ -135,6 +135,11 @@ namespace Zetbox.App.Calendar
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchCalendarAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Calendar>(this.Calendar);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Calendar
 		public static event PropertyGetterHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider, Zetbox.App.Calendar.Calendar> OnCalendar_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider, Zetbox.App.Calendar.Calendar> OnCalendar_PreSetter;
@@ -235,6 +240,11 @@ namespace Zetbox.App.Calendar
                 NotifyPropertyChanged("WorkSchedule", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchWorkScheduleAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.WorkSchedule>(this.WorkSchedule);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for WorkSchedule
@@ -403,6 +413,19 @@ namespace Zetbox.App.Calendar
             }
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Calendar":
+                return TriggerFetchCalendarAsync();
+            case "WorkSchedule":
+                return TriggerFetchWorkScheduleAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

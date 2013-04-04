@@ -209,6 +209,11 @@ namespace Zetbox.App.Calendar
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchCalendarAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Calendar>(this.Calendar);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Calendar
 		public static event PropertyGetterHandler<Zetbox.App.Calendar.Event, Zetbox.App.Calendar.Calendar> OnCalendar_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.Event, Zetbox.App.Calendar.Calendar> OnCalendar_PreSetter;
@@ -309,6 +314,11 @@ namespace Zetbox.App.Calendar
                 NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
@@ -495,6 +505,11 @@ namespace Zetbox.App.Calendar
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
@@ -1294,6 +1309,21 @@ namespace Zetbox.App.Calendar
             }
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Calendar":
+                return TriggerFetchCalendarAsync();
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

@@ -136,6 +136,11 @@ namespace Zetbox.App.Base
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchAssemblyAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Assembly>(this.Assembly);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Assembly
 		public static event PropertyGetterHandler<Zetbox.App.Base.TypeRef, Zetbox.App.Base.Assembly> OnAssembly_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.TypeRef, Zetbox.App.Base.Assembly> OnAssembly_PreSetter;
@@ -236,6 +241,11 @@ namespace Zetbox.App.Base
                 NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
@@ -422,6 +432,11 @@ namespace Zetbox.App.Base
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
@@ -783,6 +798,12 @@ namespace Zetbox.App.Base
         }
         private BSideListWrapper<Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl, EntityCollection<Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl>> _GenericArguments;
         private bool GenericArguments_was_eagerLoaded = false;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchGenericArgumentsAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<IList<Zetbox.App.Base.TypeRef>>(this.GenericArguments);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Base.TypeRef> OnGenericArguments_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.TypeRef> OnGenericArguments_IsValid;
@@ -881,6 +902,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.TypeRef> OnGeneri
                 NotifyPropertyChanged("Parent", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchParentAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef>(this.Parent);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
@@ -1275,6 +1301,25 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.TypeRef> OnGeneri
             }
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Assembly":
+                return TriggerFetchAssemblyAsync();
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            case "GenericArguments":
+                return TriggerFetchGenericArgumentsAsync();
+            case "Parent":
+                return TriggerFetchParentAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

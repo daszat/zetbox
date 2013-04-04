@@ -134,6 +134,11 @@ namespace Zetbox.App.GUI
         private int? _fk_DisplayedTypeAssembly = null;
 
 
+    public Zetbox.API.Async.ZbTask TriggerFetchDisplayedTypeAssemblyAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Assembly>(this.DisplayedTypeAssembly);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DisplayedTypeAssembly
 		public static event PropertyGetterHandler<Zetbox.App.GUI.Template, Zetbox.App.Base.Assembly> OnDisplayedTypeAssembly_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.Template, Zetbox.App.Base.Assembly> OnDisplayedTypeAssembly_PreSetter;
@@ -286,6 +291,12 @@ namespace Zetbox.App.GUI
 		private NHibernateBSideCollectionWrapper<Zetbox.App.GUI.Template, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl> _Menu;
 		// ignored, but required for Serialization
         private bool Menu_was_eagerLoaded = false;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchMenuAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.GUI.Visual>>(this.Menu);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.GUI.Template> OnMenu_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.Template> OnMenu_IsValid;
@@ -375,6 +386,11 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.Template> OnMenu_P
         /// <summary>Backing store for VisualTree's id, used on dehydration only</summary>
         private int? _fk_VisualTree = null;
 
+
+    public Zetbox.API.Async.ZbTask TriggerFetchVisualTreeAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Visual>(this.VisualTree);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for VisualTree
 		public static event PropertyGetterHandler<Zetbox.App.GUI.Template, Zetbox.App.GUI.Visual> OnVisualTree_Getter;
@@ -524,6 +540,21 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.Template> OnMenu_P
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "DisplayedTypeAssembly":
+                return TriggerFetchDisplayedTypeAssemblyAsync();
+            case "Menu":
+                return TriggerFetchMenuAsync();
+            case "VisualTree":
+                return TriggerFetchVisualTreeAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

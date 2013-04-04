@@ -77,6 +77,12 @@ namespace Zetbox.App.Test
 		private NHibernateASideCollectionWrapper<Zetbox.App.Test.N_to_M_relations_A, Zetbox.App.Test.N_to_M_relations_B, Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryNHibernateImpl> _ASide;
 		// ignored, but required for Serialization
         private bool ASide_was_eagerLoaded = false;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchASideAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Test.N_to_M_relations_A>>(this.ASide);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Test.N_to_M_relations_B> OnASide_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.N_to_M_relations_B> OnASide_IsValid;
@@ -184,6 +190,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.N_to_M_relations_
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "ASide":
+                return TriggerFetchASideAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

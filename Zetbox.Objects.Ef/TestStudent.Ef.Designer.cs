@@ -156,6 +156,12 @@ namespace Zetbox.App.Test
             }
         }
         private BSideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl, EntityCollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl>> _Testbogen;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchTestbogenAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Test.Fragebogen>>(this.Testbogen);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Test.TestStudent> OnTestbogen_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.TestStudent> OnTestbogen_IsValid;
@@ -204,6 +210,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestStudent> OnTe
             }
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Testbogen":
+                return TriggerFetchTestbogenAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

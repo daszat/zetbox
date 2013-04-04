@@ -135,6 +135,11 @@ namespace Zetbox.App.SchemaMigration
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
 		public static event PropertyGetterHandler<Zetbox.App.SchemaMigration.MigrationProject, Zetbox.App.Base.Identity> OnChangedBy_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.SchemaMigration.MigrationProject, Zetbox.App.Base.Identity> OnChangedBy_PreSetter;
@@ -319,6 +324,11 @@ namespace Zetbox.App.SchemaMigration
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
@@ -577,6 +587,11 @@ namespace Zetbox.App.SchemaMigration
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchDestinationModuleAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(this.DestinationModule);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DestinationModule
 		public static event PropertyGetterHandler<Zetbox.App.SchemaMigration.MigrationProject, Zetbox.App.Base.Module> OnDestinationModule_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.SchemaMigration.MigrationProject, Zetbox.App.Base.Module> OnDestinationModule_PreSetter;
@@ -716,6 +731,12 @@ namespace Zetbox.App.SchemaMigration
             }
         }
         private EntityCollectionWrapper<Zetbox.App.SchemaMigration.StagingDatabase, Zetbox.App.SchemaMigration.StagingDatabaseEfImpl> _StagingDatabases;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchStagingDatabasesAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.SchemaMigration.StagingDatabase>>(this.StagingDatabases);
+        }
+
 
 
 public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.MigrationProject> OnStagingDatabases_PostSetter;
@@ -904,6 +925,23 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Migrat
             }
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            case "DestinationModule":
+                return TriggerFetchDestinationModuleAsync();
+            case "StagingDatabases":
+                return TriggerFetchStagingDatabasesAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {
