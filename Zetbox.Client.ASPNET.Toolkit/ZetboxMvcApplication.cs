@@ -58,9 +58,8 @@ namespace Zetbox.Client.ASPNET
             config.Server.DocumentStore = Path.Combine(appBasePath, config.Server.DocumentStore);
 
             AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
-            var container = CreateMasterContainer(config);
 
-            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+            CreateMasterContainer(config);
 
             AreaRegistration.RegisterAllAreas();
 
@@ -68,32 +67,25 @@ namespace Zetbox.Client.ASPNET
             RegisterRoutes(RouteTable.Routes);
         }
 
-        private IContainer CreateMasterContainer(ZetboxConfig config)
+        private void CreateMasterContainer(ZetboxConfig config)
         {
             var allModules = config.Server.Modules
                      .Concat(config.Client.Modules);
 
             var builder = Zetbox.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, allModules);
             ConfigureContainerBuilder(builder);
+
             var container = builder.Build();
-            API.AppDomainInitializer.InitializeFrom(container);
 
             SetupModelBinder(container);
-            return container;
+            API.AppDomainInitializer.InitializeFrom(container);
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
         }
 
         protected virtual void SetupModelBinder(IContainer container)
         {
-            foreach (var vmType in container
-                .ComponentRegistry
-                .Registrations
-                .SelectMany(r => r.Services.OfType<TypedService>())
-                .Where(s => typeof(ViewModel).IsAssignableFrom(s.ServiceType))
-                .Where(s => s.ServiceType.IsAbstract == false)
-                .Select(s => s.ServiceType))
-            {
-                ModelBinders.Binders.Add(vmType, container.Resolve<IZetboxModelBinder>());
-            }
+            ModelBinderProviders.BinderProviders.Add(container.Resolve<IZetboxViewModelBinderProvider>());
+            ModelBinderProviders.BinderProviders.Add(container.Resolve<ILookupDictionaryModelBinderProvider>());
         }
 
         protected virtual void ConfigureContainerBuilder(ContainerBuilder builder)
@@ -103,8 +95,23 @@ namespace Zetbox.Client.ASPNET
             builder.RegisterModelBinderProvider();
 
             builder
-                .RegisterType<ZetboxModelBinder>()
-                .As<IZetboxModelBinder>()
+                .RegisterType<ZetboxViewModelBinderProvider>()
+                .As<IZetboxViewModelBinderProvider>()
+                .SingleInstance();
+
+            builder
+                .RegisterType<ZetboxViewModelBinder>()
+                .As<IZetboxViewModelBinder>()
+                .SingleInstance();
+
+            builder
+                .RegisterType<LookupDictionaryModelBinderProvider>()
+                .As<ILookupDictionaryModelBinderProvider>()
+                .SingleInstance();
+
+            builder
+                .RegisterType<LookupDictionaryModelBinder>()
+                .As<ILookupDictionaryModelBinder>()
                 .SingleInstance();
 
             builder

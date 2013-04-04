@@ -62,7 +62,7 @@
     <Compile Include="HtmlHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ZetboxController.cs" />
-    <Compile Include="ZetboxModelBinder.cs" />
+    <Compile Include="ModelBinder.cs" />
     <Compile Include="ZetboxMvcApplication.cs" />
   </ItemGroup>
   <ItemGroup>
