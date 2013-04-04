@@ -26,16 +26,36 @@ namespace Zetbox.Client.ASPNET
 
         public int ID { get; set; }
 
-        private DataObjectViewModel _object;
-        public DataObjectViewModel Object
+        private TModel _object;
+        public TModel Object
         {
             get
             {
                 if (_object == null)
                 {
-                    _object = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, DataContext.Find<TModel>(ID));
+                    if (ID != default(int))
+                    {
+                        _object = DataContext.Find<TModel>(ID);
+                    }
+                    else
+                    {
+                        _object = DataContext.Create<TModel>();
+                    }
                 }
                 return _object;
+            }
+        }
+
+        private DataObjectViewModel _viewModel;
+        public DataObjectViewModel ViewModel
+        {
+            get
+            {
+                if (_viewModel == null)
+                {
+                    _viewModel = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, Object);
+                }
+                return _viewModel;
             }
         }
     }

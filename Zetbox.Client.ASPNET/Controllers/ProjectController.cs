@@ -37,15 +37,13 @@ namespace Zetbox.Client.ASPNET.Controllers
         //
         // GET: /Project/
         [HttpPost]
-        public ActionResult Edit(DataObjectEditViewModel<Zetbox.App.Projekte.Projekt> prj)
+        public ActionResult Edit(DataObjectEditViewModel<Zetbox.App.Projekte.Projekt> mdl)
         {
             DataContext.SubmitChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", new { id = mdl.ID });
         }
 
-        //
-        // GET: /Project/
-        public ActionResult Detail(int id)
+        public ActionResult Details(int id)
         {
             var vmdl = ViewModelFactory.CreateViewModel<DataObjectEditViewModel<Zetbox.App.Projekte.Projekt>.Factory>().Invoke(DataContext, null);
             vmdl.ID = id;

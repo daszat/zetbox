@@ -3,38 +3,38 @@
 @{
     ViewBag.Title = "Details of a Project";
 }
-<h2>@Html.ZbDisplayFor(model => model.Object.PropertyModelsByName["Name"])</h2>
+<h2>@Html.ZbDisplayFor(model => model.ViewModel.PropertyModelsByName["Name"])</h2>
 <div class="AreaGroup1">
     <div class="edit-link-container">
         @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "button" })
     </div>
     <div class="editor-label">
-        @Html.ZbLabelFor(model => model.Object.PropertyModelsByName["Kundenname"])
+        @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["Kundenname"])
     </div>
     <div class="editor-field">
-        @Html.ZbDisplayFor(model => model.Object.PropertyModelsByName["Kundenname"])
+        @Html.ZbDisplayFor(model => model.ViewModel.PropertyModelsByName["Kundenname"])
     </div>
     <div class="editor-label">
-        @Html.ZbLabelFor(model => model.Object.PropertyModelsByName["Von"])
+        @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["Von"])
     </div>
     <div class="editor-field">
-        @Html.ZbDisplayFor(model => model.Object.PropertyModelsByName["Von"], "DateTime")
+        @Html.ZbDisplayFor(model => model.ViewModel.PropertyModelsByName["Von"], "DateTime")
     </div>
     <div class="editor-label">
-        @Html.ZbLabelFor(model => model.Object.PropertyModelsByName["Bis"])
+        @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["Bis"])
     </div>
     <div class="editor-field">
-        @Html.ZbDisplayFor(model => model.Object.PropertyModelsByName["Bis"], "DateTime")
+        @Html.ZbDisplayFor(model => model.ViewModel.PropertyModelsByName["Bis"], "DateTime")
     </div>
     <div class="editor-label">
-        @Html.ZbLabelFor(model => model.Object.PropertyModelsByName["AufwandGes"])
+        @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["AufwandGes"])
     </div>
     <div class="editor-field">
-        @Html.ZbDisplayFor(model => model.Object.PropertyModelsByName["AufwandGes"])
+        @Html.ZbDisplayFor(model => model.ViewModel.PropertyModelsByName["AufwandGes"])
     </div>
 </div>
 <div class="Toolbar">
-    @Html.ActionLink("New", "Create", "Task", new { id = Model.ID }, new { @class = "button" })
+    @Html.ActionLink("New", "Create", "Task", new { project = Model.ID }, new { @class = "button" })
 </div>
 <table class="strech">
     <tr>
@@ -53,11 +53,11 @@
             Created By
         </th>
     </tr>
-    @foreach (var task in ((Zetbox.Client.Presentables.ValueViewModels.ObjectCollectionViewModel)Model.Object.PropertyModelsByName["Tasks"]).Value)
+    @foreach (var task in ((Zetbox.Client.Presentables.ValueViewModels.ObjectCollectionViewModel)Model.ViewModel.PropertyModelsByName["Tasks"]).Value)
     {
         <tr>
             <td>
-                @Html.ActionLink("Details", "Detail", "Task", new { ID = task.ID }, null)
+                @Html.ActionLink("Details", "Details", "Task", new { ID = task.ID }, null)
             </td>
             <td>
                 @Html.ZbDisplayFor(model => task.PropertyModelsByName["Name"])

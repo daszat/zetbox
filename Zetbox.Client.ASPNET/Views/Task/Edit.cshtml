@@ -1,9 +1,9 @@
-﻿@model Zetbox.Client.ASPNET.DataObjectEditViewModel<Zetbox.App.Projekte.Projekt>
+﻿@model Zetbox.Client.ASPNET.DataObjectEditViewModel<Zetbox.App.Projekte.Task>
 @using Zetbox.Client.ASPNET
 @{
-    ViewBag.Title = "Edit a Project";
+    ViewBag.Title = "Edit a Task";
 }
-<h2>@Html.ZbDisplayFor(model => model.ViewModel.PropertyModelsByName["Name"])</h2>
+<h2>@Html.ZbDisplayFor(model => model.ViewModel.PropertyModelsByName["Name"]) (@Html.ZbDisplayFor(model => model.ViewModel.PropertyModelsByName["Projekt"]))</h2>
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 @using (Html.BeginForm())
@@ -17,28 +17,28 @@
             @Html.ZbEditorFor(model => model.ViewModel.PropertyModelsByName["Name"])
         </div>
         <div class="editor-label">
-            @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["Kundenname"])
+            @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["Aufwand"])
         </div>
         <div class="editor-field">
-            @Html.ZbEditorFor(model => model.ViewModel.PropertyModelsByName["Kundenname"])
+            @Html.ZbEditorFor(model => model.ViewModel.PropertyModelsByName["Aufwand"])
         </div>
         <div class="editor-label">
-            @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["Von"])
+            @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["DatumVon"])
         </div>
         <div class="editor-field">
-            @Html.ZbEditorFor(model => model.ViewModel.PropertyModelsByName["Von"], "DateTime")
+            @Html.ZbEditorFor(model => model.ViewModel.PropertyModelsByName["DatumVon"], "DateTime")
         </div>
         <div class="editor-label">
-            @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["Bis"])
+            @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["DatumBis"])
         </div>
         <div class="editor-field">
-            @Html.ZbEditorFor(model => model.ViewModel.PropertyModelsByName["Bis"], "DateTime")
+            @Html.ZbEditorFor(model => model.ViewModel.PropertyModelsByName["DatumBis"], "DateTime")
         </div>
         <div class="editor-label">
-            @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["AufwandGes"])
+            @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["Projekt"])
         </div>
         <div class="editor-field">
-            @Html.ZbEditorFor(model => model.ViewModel.PropertyModelsByName["AufwandGes"])
+            @Html.ZbEditorFor(model => model.ViewModel.PropertyModelsByName["Projekt"])
         </div>
     </div>
     <p>
