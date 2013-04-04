@@ -12,8 +12,7 @@ namespace Zetbox.Client.ASPNET.Models
     using System.Web.Mvc;
     using System.ComponentModel;
 
-    [ViewModelDescriptor]
-    public class ProjectSearchViewModel : ViewModel
+    public class ProjectSearchViewModel : SearchViewModel<Zetbox.App.Projekte.Projekt>
     {
         public new delegate ProjectSearchViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
 
@@ -40,16 +39,12 @@ namespace Zetbox.Client.ASPNET.Models
             }
         }
 
-        public IEnumerable<DataObjectViewModel> Result
+        protected override IQueryable<App.Projekte.Projekt> ApplyFilter(IQueryable<App.Projekte.Projekt> qry)
         {
-            get
-            {
-                var qry = DataContext.GetQuery<Zetbox.App.Projekte.Projekt>();
-                if (!string.IsNullOrWhiteSpace(ProjectName.Value))
-                    qry = qry.Where(p => p.Name.Contains(ProjectName.Value));
+            if (!string.IsNullOrWhiteSpace(ProjectName.Value))
+                qry = qry.Where(p => p.Name.Contains(ProjectName.Value));
 
-                return qry.ToList().Select(p => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, p));
-            }
+            return qry;
         }
     }
 }

@@ -114,8 +114,9 @@ namespace Zetbox.Client.ASPNET
                 .As<ILookupDictionaryModelBinder>()
                 .SingleInstance();
 
-            builder
-                .RegisterModule<AspNetClientModule>();
+            builder.RegisterModule<AspNetClientModule>();
+
+            builder.RegisterViewModels(typeof(ZetboxMvcApplication).Assembly);
         }
     }
 }

@@ -1,4 +1,4 @@
-namespace Zetbox.Client.ASPNET.Models
+namespace Zetbox.Client.ASPNET
 {
     using System;
     using System.Collections.Generic;
@@ -9,18 +9,19 @@ namespace Zetbox.Client.ASPNET.Models
     using Zetbox.Client.Presentables.ValueViewModels;
 
     // No descriptor
-    public class ProjektEditViewModel : ViewModel
+    public class DataObjectEditViewModel<TModel> : ViewModel
+        where TModel : class, IDataObject
     {
-        public new delegate ProjektEditViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
+        public new delegate DataObjectEditViewModel<TModel> Factory(IZetboxContext dataCtx, ViewModel parent);
 
-        public ProjektEditViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent)
+        public DataObjectEditViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent)
             : base(appCtx, dataCtx, parent)
         {
         }
 
         public override string Name
         {
-            get { return "ProjektEditViewModel"; }
+            get { return "DataObjectEditViewModel"; }
         }
 
         public int ID { get; set; }
@@ -32,7 +33,7 @@ namespace Zetbox.Client.ASPNET.Models
             {
                 if (_object == null)
                 {
-                    _object = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, DataContext.Find<Zetbox.App.Projekte.Projekt>(ID));
+                    _object = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, DataContext.Find<TModel>(ID));
                 }
                 return _object;
             }

@@ -30,24 +30,24 @@ namespace Zetbox.Client.ASPNET.Controllers
         // GET: /Project/
         public ActionResult Edit(int id)
         {
-            var vmdl = ViewModelFactory.CreateViewModel<ProjektEditViewModel.Factory>().Invoke(DataContext, null);
+            var vmdl = ViewModelFactory.CreateViewModel<DataObjectEditViewModel<Zetbox.App.Projekte.Projekt>.Factory>().Invoke(DataContext, null);
             vmdl.ID = id;
             return View(vmdl);
         }
         //
         // GET: /Project/
         [HttpPost]
-        public ActionResult Edit(ProjektEditViewModel prj)
+        public ActionResult Edit(DataObjectEditViewModel<Zetbox.App.Projekte.Projekt> prj)
         {
             DataContext.SubmitChanges();
-            return View(prj);
+            return RedirectToAction("Index");
         }
 
         //
         // GET: /Project/
         public ActionResult Detail(int id)
         {
-            var vmdl = ViewModelFactory.CreateViewModel<ProjektEditViewModel.Factory>().Invoke(DataContext, null);
+            var vmdl = ViewModelFactory.CreateViewModel<DataObjectEditViewModel<Zetbox.App.Projekte.Projekt>.Factory>().Invoke(DataContext, null);
             vmdl.ID = id;
             return View(vmdl);
         }
