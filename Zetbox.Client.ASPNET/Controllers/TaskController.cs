@@ -38,11 +38,19 @@ namespace Zetbox.Client.ASPNET.Controllers
         // POST: /Task/Create
 
         [HttpPost]
-        public ActionResult Create(int project, TaskEditViewModel mdl)
+        public ActionResult Create(int project, TaskEditViewModel vmdl)
         {
-            mdl.Object.Projekt = DataContext.Find<Zetbox.App.Projekte.Projekt>(project);
-            DataContext.SubmitChanges();
-            return RedirectToAction("Details", "Project", new { id = project });
+            vmdl.ProjectID = project;
+            vmdl.Object.Projekt = DataContext.Find<Zetbox.App.Projekte.Projekt>(project);
+            if (ModelState.IsValid)
+            {
+                DataContext.SubmitChanges();
+                return RedirectToAction("Details", "Project", new { id = project });
+            }
+            else
+            {
+                return View(vmdl);
+            }
         }
 
         //
@@ -59,10 +67,18 @@ namespace Zetbox.Client.ASPNET.Controllers
         // POST: /Task/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(TaskEditViewModel mdl)
+        public ActionResult Edit(TaskEditViewModel vmdl)
         {
-            DataContext.SubmitChanges();
-            return RedirectToAction("Details", new { id = mdl.ID });
+            TryValidateModel(vmdl);
+            if (ModelState.IsValid)
+            {
+                DataContext.SubmitChanges();
+                return RedirectToAction("Details", new { id = vmdl.ID });
+            }
+            else
+            {
+                return View(vmdl);
+            }
         }
 
         //
