@@ -71,7 +71,7 @@ namespace Zetbox.Client.ASPNET
         {
             var newExpression = AppendMember<TModel, TValue>(expression, "FormattedValue");
             var vmdl = (BaseValueViewModel)System.Web.Mvc.ModelMetadata.FromLambdaExpression<TModel, TValue>(expression, html.ViewData).Model;
-            return DisplayExtensions.DisplayFor<TModel, string>(html, newExpression, templateName, htmlFieldName, additionalViewData);
+            return DisplayExtensions.DisplayFor<TModel, string>(html, newExpression, GetTemplate(vmdl, templateName), htmlFieldName, additionalViewData);
         }
         #endregion
 
@@ -83,11 +83,11 @@ namespace Zetbox.Client.ASPNET
             var vmdl = (BaseValueViewModel)System.Web.Mvc.ModelMetadata.FromLambdaExpression<TModel, TValue>(expression, html.ViewData).Model;
             if (vmdl.IsReadOnly)
             {
-                return DisplayExtensions.DisplayFor<TModel, string>(html, newExpression, templateName, htmlFieldName, additionalViewData);
+                return DisplayExtensions.DisplayFor<TModel, string>(html, newExpression, GetTemplate(vmdl, templateName), htmlFieldName, additionalViewData);
             }
             else
             {
-                return EditorExtensions.EditorFor<TModel, string>(html, newExpression, templateName, htmlFieldName, additionalViewData);
+                return EditorExtensions.EditorFor<TModel, string>(html, newExpression, GetTemplate(vmdl, templateName), htmlFieldName, additionalViewData);
             }
         }
         #endregion
@@ -108,6 +108,36 @@ namespace Zetbox.Client.ASPNET
             var formattedValueExpression = Expression.MakeMemberAccess(body, typeof(BaseValueViewModel).GetMember(member).Single());
             var newLambda = Expression.Lambda<Func<TModel, string>>(formattedValueExpression, expression.Parameters.ToArray());
             return newLambda;
+        }
+
+        /// <summary>
+        /// Resolve only very basic kind of views. Don't use the ViewDescriptor infrastructure. In ASP.NET the HTML is fully controlled by the developer.
+        /// Also, don't resole ObjectList/Collections -> this will render a table.
+        /// </summary>
+        /// <typeparam name="TValue"></typeparam>
+        /// <param name="templateName"></param>
+        /// <returns></returns>
+        private static string GetTemplate(object vmdl, string templateName)
+        {
+            if (vmdl == null) return templateName;
+
+            var type = vmdl.GetType();
+            if (typeof(NullableDateTimePropertyViewModel).IsAssignableFrom(type))
+            {
+                return templateName ?? "DateTime";
+            }
+            else if (typeof(ObjectReferenceViewModel).IsAssignableFrom(type))
+            {
+                return templateName ?? "ObjectReference";
+            }
+            else if (typeof(EnumerationValueViewModel).IsAssignableFrom(type))
+            {
+                return templateName ?? "Enumeration";
+            }
+            else
+            {
+                return templateName;
+            }
         }
         #endregion
     }
