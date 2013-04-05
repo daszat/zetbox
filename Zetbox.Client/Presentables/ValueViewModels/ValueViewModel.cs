@@ -246,8 +246,11 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             {
                 return ValueModel.GetUntypedValue();
             }
+            set
+            {
+                ValueModel.SetUntypedValue(value);
+            }
         }
-
         #endregion
 
         #region IFormattedValueViewModel Members

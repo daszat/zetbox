@@ -1,4 +1,4 @@
-﻿@model Zetbox.Client.ASPNET.DataObjectEditViewModel<Zetbox.App.Projekte.Task>
+﻿@model Zetbox.Client.ASPNET.Models.TaskEditViewModel
 @using Zetbox.Client.ASPNET
 @{
     ViewBag.Title = "Edit a Task";
@@ -38,11 +38,18 @@
             @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["Projekt"])
         </div>
         <div class="editor-field">
-            @Html.ZbEditorFor(model => model.ViewModel.PropertyModelsByName["Projekt"])
+            @Html.DropDownListFor(model => model.ViewModel.PropertyModelsByName["Projekt"], 
+                ((Zetbox.Client.Presentables.ValueViewModels.ObjectReferenceViewModel)Model.ViewModel.PropertyModelsByName["Projekt"])
+                    .PossibleValues
+                    .Select(i => new SelectListItem() 
+                    { 
+                        Value = ((Zetbox.Client.Presentables.DataObjectViewModel)i).ID.ToString(), 
+                        Text = i.Name 
+                    }))
         </div>
     </div>
     <p>
         <input type="submit" value="Save" />
-        @Html.ActionLink("Back to Details", "Details", new { id = Model.ID })        
+        @Html.ActionLink("Back to Details", "Details", new { id = Model.ID })
     </p>
 }

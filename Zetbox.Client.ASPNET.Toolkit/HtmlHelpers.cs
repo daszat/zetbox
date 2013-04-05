@@ -69,25 +69,54 @@ namespace Zetbox.Client.ASPNET
         public static MvcHtmlString ZbDisplayFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, string templateName = null, string htmlFieldName = null, object additionalViewData = null)
             where TValue : BaseValueViewModel
         {
-            var newExpression = AppendMember<TModel, TValue>(expression, "FormattedValue");
+            var newExpression = AppendMember<TModel, TValue, string>(expression, "FormattedValue");
             var vmdl = (BaseValueViewModel)System.Web.Mvc.ModelMetadata.FromLambdaExpression<TModel, TValue>(expression, html.ViewData).Model;
             return DisplayExtensions.DisplayFor<TModel, string>(html, newExpression, GetTemplate(vmdl, templateName), htmlFieldName, additionalViewData);
         }
         #endregion
 
         #region Editor
+        /// <summary>
+        /// Select a default editor. Only usable for very primitiv types (int, string, DateTime). These types are rendered through EditorFor() & "FormattedValue" appended to the original expression. Enums are supported by rendering a dropdown.
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <typeparam name="TValue"></typeparam>
+        /// <param name="html"></param>
+        /// <param name="expression"></param>
+        /// <param name="templateName"></param>
+        /// <param name="htmlFieldName"></param>
+        /// <param name="additionalViewData"></param>
+        /// <returns></returns>
         public static MvcHtmlString ZbEditorFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, string templateName = null, string htmlFieldName = null, object additionalViewData = null)
             where TValue : BaseValueViewModel
         {
-            var newExpression = AppendMember<TModel, TValue>(expression, "FormattedValue");
-            var vmdl = (BaseValueViewModel)System.Web.Mvc.ModelMetadata.FromLambdaExpression<TModel, TValue>(expression, html.ViewData).Model;
+            var vmdl = (BaseValueViewModel)ModelMetadata.FromLambdaExpression<TModel, TValue>(expression, html.ViewData).Model;
+            var type = vmdl.GetType();
             if (vmdl.IsReadOnly)
             {
-                return DisplayExtensions.DisplayFor<TModel, string>(html, newExpression, GetTemplate(vmdl, templateName), htmlFieldName, additionalViewData);
+                return DisplayExtensions.DisplayFor<TModel, string>(html, AppendMember<TModel, TValue, string>(expression, "FormattedValue"), GetTemplate(vmdl, templateName), htmlFieldName, additionalViewData);
             }
             else
             {
-                return EditorExtensions.EditorFor<TModel, string>(html, newExpression, GetTemplate(vmdl, templateName), htmlFieldName, additionalViewData);
+                if (typeof(EnumerationValueViewModel).IsAssignableFrom(type))
+                {
+                    var enumVmdl = (EnumerationValueViewModel)vmdl;
+                    return SelectExtensions.DropDownList(
+                        html,
+                        ExpressionHelper.GetExpressionText(expression) + ".Value",
+                        enumVmdl
+                            .PossibleValues
+                            .Select(i => new SelectListItem() 
+                            {
+                                Text = i.Value,
+                                Value = i.Key != null ? i.Key.Value.ToString() : string.Empty,
+                                Selected = i.Key == enumVmdl.Value
+                            }));
+                }
+                else
+                {
+                    return EditorExtensions.EditorFor<TModel, string>(html, AppendMember<TModel, TValue, string>(expression, "FormattedValue"), GetTemplate(vmdl, templateName), htmlFieldName, additionalViewData);
+                }
             }
         }
         #endregion
@@ -96,23 +125,24 @@ namespace Zetbox.Client.ASPNET
         public static MvcHtmlString ZbTextBoxFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, object htmlAttributes = null)
             where TValue : BaseValueViewModel
         {
-            return InputExtensions.TextBoxFor<TModel, string>(html, AppendMember<TModel, TValue>(expression, "FormattedValue"), htmlAttributes);
+            return InputExtensions.TextBoxFor<TModel, string>(html, AppendMember<TModel, TValue, string>(expression, "FormattedValue"), htmlAttributes);
         }
         #endregion
 
         #region Helper
-        private static Expression<Func<TModel, string>> AppendMember<TModel, TValue>(Expression<Func<TModel, TValue>> expression, string member)
+        private static Expression<Func<TModel, TReturnValue>> AppendMember<TModel, TValue, TReturnValue>(Expression<Func<TModel, TValue>> expression, string member)
             where TValue : BaseValueViewModel
         {
-            var body = expression.Body;
-            var formattedValueExpression = Expression.MakeMemberAccess(body, typeof(BaseValueViewModel).GetMember(member).Single());
-            var newLambda = Expression.Lambda<Func<TModel, string>>(formattedValueExpression, expression.Parameters.ToArray());
-            return newLambda;
+            return Expression.Lambda<Func<TModel, TReturnValue>>(
+                        Expression.Property(expression.Body, member), 
+                        expression.Parameters.ToArray());
         }
 
         /// <summary>
         /// Resolve only very basic kind of views. Don't use the ViewDescriptor infrastructure. In ASP.NET the HTML is fully controlled by the developer.
         /// Also, don't resole ObjectList/Collections -> this will render a table.
+        /// Object references are also too complicated to be handled here.
+        /// This method is used by EditorFor & DisplayFor. EditorFor would never resolve Enums & ObjRefs.
         /// </summary>
         /// <typeparam name="TValue"></typeparam>
         /// <param name="templateName"></param>

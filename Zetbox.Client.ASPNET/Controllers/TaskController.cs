@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Zetbox.Client.Presentables;
+using Zetbox.Client.ASPNET.Models;
 
 namespace Zetbox.Client.ASPNET.Controllers
 {
@@ -18,7 +19,7 @@ namespace Zetbox.Client.ASPNET.Controllers
 
         public ActionResult Details(int id)
         {
-            var vmdl = ViewModelFactory.CreateViewModel<DataObjectEditViewModel<Zetbox.App.Projekte.Task>.Factory>().Invoke(DataContext, null);
+            var vmdl = ViewModelFactory.CreateViewModel<TaskEditViewModel.Factory>().Invoke(DataContext, null);
             vmdl.ID = id;
             return View(vmdl);
         }
@@ -26,9 +27,10 @@ namespace Zetbox.Client.ASPNET.Controllers
         //
         // GET: /Task/Create
 
-        public ActionResult Create()
+        public ActionResult Create(int project)
         {
-            var vmdl = ViewModelFactory.CreateViewModel<DataObjectEditViewModel<Zetbox.App.Projekte.Task>.Factory>().Invoke(DataContext, null);
+            var vmdl = ViewModelFactory.CreateViewModel<TaskEditViewModel.Factory>().Invoke(DataContext, null);
+            vmdl.Project = project;
             return View(vmdl);
         }
 
@@ -36,7 +38,7 @@ namespace Zetbox.Client.ASPNET.Controllers
         // POST: /Task/Create
 
         [HttpPost]
-        public ActionResult Create(int project, DataObjectEditViewModel<Zetbox.App.Projekte.Task> mdl)
+        public ActionResult Create(int project, TaskEditViewModel mdl)
         {
             mdl.Object.Projekt = DataContext.Find<Zetbox.App.Projekte.Projekt>(project);
             DataContext.SubmitChanges();
@@ -48,7 +50,7 @@ namespace Zetbox.Client.ASPNET.Controllers
 
         public ActionResult Edit(int id)
         {
-            var vmdl = ViewModelFactory.CreateViewModel<DataObjectEditViewModel<Zetbox.App.Projekte.Task>.Factory>().Invoke(DataContext, null);
+            var vmdl = ViewModelFactory.CreateViewModel<TaskEditViewModel.Factory>().Invoke(DataContext, null);
             vmdl.ID = id;
             return View(vmdl);
         }
@@ -57,7 +59,7 @@ namespace Zetbox.Client.ASPNET.Controllers
         // POST: /Task/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(DataObjectEditViewModel<Zetbox.App.Projekte.Task> mdl)
+        public ActionResult Edit(TaskEditViewModel mdl)
         {
             DataContext.SubmitChanges();
             return RedirectToAction("Details", new { id = mdl.ID });

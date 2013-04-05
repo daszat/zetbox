@@ -21,7 +21,7 @@ namespace Zetbox.Client.ASPNET.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(ProjectSearchViewModel mdl, string foo)
+        public ActionResult Index(ProjectSearchViewModel mdl)
         {
             return View(mdl);
         }

@@ -12,7 +12,7 @@ namespace Zetbox.Client.ASPNET
     using System.Web.Mvc;
     using System.ComponentModel;
 
-    public abstract class SearchViewModel<TModel> : ViewModel
+    public class SearchViewModel<TModel> : ViewModel
         where TModel : class, IDataObject
     {
         public new delegate SearchViewModel<TModel> Factory(IZetboxContext dataCtx, ViewModel parent);
@@ -27,7 +27,10 @@ namespace Zetbox.Client.ASPNET
             get { return "SearchViewModel"; }
         }
 
-        protected abstract IQueryable<TModel> ApplyFilter(IQueryable<TModel> qry);
+        protected virtual IQueryable<TModel> ApplyFilter(IQueryable<TModel> qry)
+        {
+            return qry;
+        }
 
         public IEnumerable<DataObjectViewModel> Result
         {

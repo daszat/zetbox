@@ -125,7 +125,7 @@ namespace Zetbox.Client.ASPNET
 
                     ModelBindingContext innerBindingContext = new ModelBindingContext()
                     {
-                        ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(() => currentValue, TValue), // ?
+                        ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(() => currentValue, currentValue.GetType()),
                         ModelName = modelName,
                         ModelState = bindingContext.ModelState,
                         PropertyFilter = bindingContext.PropertyFilter,
