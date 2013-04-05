@@ -21,6 +21,14 @@ namespace Zetbox.Client.ASPNET.Models
         {
         }
 
-        public int Project { get; set; }
+        public int ProjectID { get; set; }
+
+        public DataObjectViewModel ProjectViewModel
+        {
+            get
+            {
+                return DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, DataContext.Find<Zetbox.App.Projekte.Projekt>(ProjectID));
+            }
+        }
     }
 }

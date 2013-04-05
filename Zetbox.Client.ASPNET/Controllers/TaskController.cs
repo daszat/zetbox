@@ -30,7 +30,7 @@ namespace Zetbox.Client.ASPNET.Controllers
         public ActionResult Create(int project)
         {
             var vmdl = ViewModelFactory.CreateViewModel<TaskEditViewModel.Factory>().Invoke(DataContext, null);
-            vmdl.Project = project;
+            vmdl.ProjectID = project;
             return View(vmdl);
         }
 

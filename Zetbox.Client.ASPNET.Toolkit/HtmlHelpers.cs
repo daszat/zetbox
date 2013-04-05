@@ -142,7 +142,7 @@ namespace Zetbox.Client.ASPNET
         /// Resolve only very basic kind of views. Don't use the ViewDescriptor infrastructure. In ASP.NET the HTML is fully controlled by the developer.
         /// Also, don't resole ObjectList/Collections -> this will render a table.
         /// Object references are also too complicated to be handled here.
-        /// This method is used by EditorFor & DisplayFor. EditorFor would never resolve Enums & ObjRefs.
+        /// This method is used by EditorFor & DisplayFor. EditorFor would never resolve Enums - they will be rendered passing by value & possible values. All other by passing FormattedValue
         /// </summary>
         /// <typeparam name="TValue"></typeparam>
         /// <param name="templateName"></param>
@@ -156,13 +156,33 @@ namespace Zetbox.Client.ASPNET
             {
                 return templateName ?? "DateTime";
             }
-            else if (typeof(ObjectReferenceViewModel).IsAssignableFrom(type))
+            else if (typeof(NullableDecimalPropertyViewModel).IsAssignableFrom(type))
             {
-                return templateName ?? "ObjectReference";
+                return templateName ?? "Decimal";
+            }
+            else if (typeof(NullableIntPropertyViewModel).IsAssignableFrom(type))
+            {
+                return templateName ?? "Integer";
+            }
+            else if (typeof(NullableDoublePropertyViewModel).IsAssignableFrom(type))
+            {
+                return templateName ?? "Double";
+            }
+            else if (typeof(NullableGuidPropertyViewModel).IsAssignableFrom(type))
+            {
+                return templateName ?? "Guid";
+            }
+            else if (typeof(StringValueViewModel).IsAssignableFrom(type))
+            {
+                return templateName ?? "String";
             }
             else if (typeof(EnumerationValueViewModel).IsAssignableFrom(type))
             {
                 return templateName ?? "Enumeration";
+            }
+            else if (typeof(ObjectReferenceViewModel).IsAssignableFrom(type))
+            {
+                return templateName ?? "ObjectReference";
             }
             else
             {

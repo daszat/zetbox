@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Create a Task";
 }
-<h2>Create a Task in Project (@Html.ZbDisplayFor(model => model.ViewModel.PropertyModelsByName["Projekt"]))</h2>
+<h2>Create a Task in Project @Html.DisplayFor(model => model.ProjectViewModel.Name)</h2>
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 @using (Html.BeginForm())
@@ -37,6 +37,6 @@
     </div>
     <p>
         <input type="submit" value="Save" />
-        @Html.ActionLink("Back to Project", "Details", "Project", new { id = Model.Project }, null)
+        @Html.ActionLink("Back to Project", "Details", "Project", new { id = Model.ProjectID }, null)
     </p>
 }
