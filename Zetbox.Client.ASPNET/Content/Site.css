@@ -453,3 +453,9 @@ th, td
     background-color: #dddddd;
     padding: 2px;
 }
+
+.validation-summary-errors,
+.field-validation-error
+{
+    color: Red;
+}

@@ -78,8 +78,15 @@ namespace Zetbox.Client.ASPNET
             var container = builder.Build();
 
             SetupModelBinder(container);
+            SetupValidatorProvider(container);
+
             API.AppDomainInitializer.InitializeFrom(container);
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+        }
+
+        private static void SetupValidatorProvider(IContainer container)
+        {
+            ModelValidatorProviders.Providers.Add((ModelValidatorProvider)container.Resolve<IViewModelValidatorProvider>());
         }
 
         protected virtual void SetupModelBinder(IContainer container)
@@ -112,6 +119,11 @@ namespace Zetbox.Client.ASPNET
             builder
                 .RegisterType<LookupDictionaryModelBinder>()
                 .As<ILookupDictionaryModelBinder>()
+                .SingleInstance();
+
+            builder
+                .RegisterType<ViewModelValidatorProvider>()
+                .As<IViewModelValidatorProvider>()
                 .SingleInstance();
 
             builder.RegisterModule<AspNetClientModule>();

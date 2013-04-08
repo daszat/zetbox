@@ -42,6 +42,8 @@ namespace Zetbox.Client.ASPNET.Controllers
         {
             vmdl.ProjectID = project;
             vmdl.Object.Projekt = DataContext.Find<Zetbox.App.Projekte.Projekt>(project);
+            TryValidateModel(vmdl);
+            ModelState.AddModelError("ViewModel.PropertyModelsByName[Name]", "Hello error from Controller");
             if (ModelState.IsValid)
             {
                 DataContext.SubmitChanges();

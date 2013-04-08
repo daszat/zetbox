@@ -132,7 +132,15 @@ namespace Zetbox.Client.ASPNET
                         ValueProvider = bindingContext.ValueProvider
                     };
 
-                    valueBinder.BindModel(controllerContext, innerBindingContext);
+                    var vmdl = valueBinder.BindModel(controllerContext, innerBindingContext) as ViewModel;
+                    if (vmdl != null)
+                    {
+                        var error = ((IDataErrorInfo)vmdl).Error;
+                        if(!string.IsNullOrWhiteSpace(error))
+                        {
+                            bindingContext.ModelState.AddModelError(modelName, error);
+                        }
+                    }
                 }
             }
 

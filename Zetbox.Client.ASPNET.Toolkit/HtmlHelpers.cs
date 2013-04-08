@@ -106,7 +106,7 @@ namespace Zetbox.Client.ASPNET
                         ExpressionHelper.GetExpressionText(expression) + ".Value",
                         enumVmdl
                             .PossibleValues
-                            .Select(i => new SelectListItem() 
+                            .Select(i => new SelectListItem()
                             {
                                 Text = i.Value,
                                 Value = i.Key != null ? i.Key.Value.ToString() : string.Empty,
@@ -117,6 +117,23 @@ namespace Zetbox.Client.ASPNET
                 {
                     return EditorExtensions.EditorFor<TModel, string>(html, AppendMember<TModel, TValue, string>(expression, "FormattedValue"), GetTemplate(vmdl, templateName), htmlFieldName, additionalViewData);
                 }
+            }
+        }
+        #endregion
+
+        #region ValidationMessageFor
+        public static MvcHtmlString ZbValidationMessageFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, string validationMessage = null, object htmlAttributes = null)
+             where TValue : BaseValueViewModel
+        {
+            var vmdl = (BaseValueViewModel)ModelMetadata.FromLambdaExpression<TModel, TValue>(expression, html.ViewData).Model;
+            var type = vmdl.GetType();
+            if (typeof(EnumerationValueViewModel).IsAssignableFrom(type))
+            {
+                return ValidationExtensions.ValidationMessageFor<TModel, string>(html, AppendMember<TModel, TValue, string>(expression, "Value"), validationMessage, htmlAttributes);
+            }
+            else
+            {
+                return ValidationExtensions.ValidationMessageFor<TModel, string>(html, AppendMember<TModel, TValue, string>(expression, "FormattedValue"), validationMessage, htmlAttributes);
             }
         }
         #endregion
@@ -134,7 +151,7 @@ namespace Zetbox.Client.ASPNET
             where TValue : BaseValueViewModel
         {
             return Expression.Lambda<Func<TModel, TReturnValue>>(
-                        Expression.Property(expression.Body, member), 
+                        Expression.Property(expression.Body, member),
                         expression.Parameters.ToArray());
         }
 
