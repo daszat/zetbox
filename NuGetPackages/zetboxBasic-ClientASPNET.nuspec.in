@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <metadata>
-    <id>zetboxBasic-ClientWpf</id>
+    <id>zetboxBasic-ClientASPNET</id>
     <version>1.0.$REVNUM$.$DIRTY$</version>
     <title>zetbox Basic - client ASP.NET MVC components</title>
     <authors>dasz.at OG</authors>
