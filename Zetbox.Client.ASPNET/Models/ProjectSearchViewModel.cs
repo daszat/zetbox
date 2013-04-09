@@ -21,11 +21,6 @@ namespace Zetbox.Client.ASPNET.Models
         {
         }
 
-        public override string Name
-        {
-            get { return "SearchViewModel"; }
-        }
-
         private StringValueViewModel _ProjectName;
         public StringValueViewModel ProjectName
         {
