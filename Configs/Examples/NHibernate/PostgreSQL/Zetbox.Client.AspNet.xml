@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ZetboxConfig xmlns="http://dasz.at/Zetbox/">
+  <ConfigName>ASP.NET MVC Configuration</ConfigName>
+  <Client>
+    <Culture>de-AT</Culture>
+    <UICulture>de-AT</UICulture>
+    <Modules>
+    </Modules>
+  </Client>
+  <Server StartServer="true">
+    <ConnectionStrings>
+      <Database Name="Zetbox" Schema="POSTGRESQL" Provider="NHibernate.Dialect.PostgreSQL82Dialect">Server=localhost;Port=5432;Database=zetbox;User Id=zetbox;Password=b-cXqMyXEYea2kkjUhkS</Database>
+    </ConnectionStrings>
+    <DocumentStore>DocumentStore\Server\</DocumentStore>
+    <Modules>
+      <Module>Zetbox.Server.ServerModule, Zetbox.Server</Module>
+      <Module>Zetbox.DalProvider.NHibernate.NHibernateProvider, Zetbox.DalProvider.NHibernate</Module>
+    </Modules>
+  </Server>
+</ZetboxConfig>
