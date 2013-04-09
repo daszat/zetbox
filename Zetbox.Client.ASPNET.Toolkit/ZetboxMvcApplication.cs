@@ -86,7 +86,8 @@ namespace Zetbox.Client.ASPNET
 
         private static void SetupValidatorProvider(IContainer container)
         {
-            ModelValidatorProviders.Providers.Add((ModelValidatorProvider)container.Resolve<IViewModelValidatorProvider>());
+            // TODO: Disable until validation in zetbox has been refactored
+            // ModelValidatorProviders.Providers.Add((ModelValidatorProvider)container.Resolve<IViewModelValidatorProvider>());
         }
 
         protected virtual void SetupModelBinder(IContainer container)
