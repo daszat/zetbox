@@ -21,7 +21,7 @@ namespace Zetbox.Client.ASPNET
 
         public override string Name
         {
-            get { return "DataObjectEditViewModel"; }
+            get { return ViewModel.Name; }
         }
 
         public int ID { get; set; }
