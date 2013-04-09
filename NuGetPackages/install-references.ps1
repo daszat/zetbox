@@ -11,7 +11,8 @@ $ourReferences = (
    "Zetbox.API.Server",
    "Zetbox.Client",
    "Zetbox.Client.WPF",
-   "Zetbox.Client.WPF.Toolkit"
+   "Zetbox.Client.WPF.Toolkit",
+   "Zetbox.Client.ASPNET.Toolkit"
 )
 
 foreach ($reference in $project.Object.References)
