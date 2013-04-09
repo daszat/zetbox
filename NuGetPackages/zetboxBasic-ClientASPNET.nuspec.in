@@ -14,6 +14,7 @@
     <copyright>Copyright © 2012 dasz.at OG</copyright>
     <tags>Platform Database ORM Applications</tags>
     <dependencies>
+      <dependency id="Autofac.Mvc3" version="[2.6.3.862]" />
       <dependency id="zetboxBasic-Client" version="[1.0.$REVNUM$.$DIRTY$]" />
     </dependencies>
   </metadata>
@@ -22,6 +23,9 @@
     <file src="Client\Zetbox.Client.ASPNET.Toolkit.pdb" target="lib\net40" />
     <file src="Client\Zetbox.Client.ASPNET.Toolkit.xml" target="lib\net40" />
 
-    <file src="install-references.ps1" target="tools\install.ps1" />
+    <!-- 
+      Do not run this. Web applications needs copy local true
+      <file src="install-references.ps1" target="tools\install.ps1" />
+    -->
   </files>
 </package>
