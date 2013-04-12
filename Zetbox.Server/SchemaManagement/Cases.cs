@@ -1672,16 +1672,18 @@ namespace Zetbox.Server.SchemaManagement
                 if (savedRel.HasStorage(RelationEndRole.A))
                 {
                     var tbl = aType.GetTableRef(db);
+                    var refTbl = bType.GetTableRef(db);
                     var old_tbl = old_aType.GetTableRef(db);
-                    db.RenameFKConstraint(tbl, savedRel.GetAssociationName(), tbl, old_fkBName, rel.GetAssociationName(), false);
+                    db.RenameFKConstraint(tbl, savedRel.GetAssociationName(), refTbl, old_fkBName, rel.GetAssociationName(), false);
                     db.RenameColumn(tbl, old_fkBName, fkBName);
                     db.RenameIndex(tbl, Construct.IndexName(old_tbl.Name, old_fkBName), Construct.IndexName(tbl.Name, fkBName));
                 }
                 else if (savedRel.HasStorage(RelationEndRole.B))
                 {
                     var tbl = bType.GetTableRef(db);
+                    var refTbl = aType.GetTableRef(db);
                     var old_tbl = old_bType.GetTableRef(db);
-                    db.RenameFKConstraint(tbl, savedRel.GetAssociationName(), tbl, old_fkAName, rel.GetAssociationName(), false);
+                    db.RenameFKConstraint(tbl, savedRel.GetAssociationName(), refTbl, old_fkAName, rel.GetAssociationName(), false);
                     db.RenameColumn(tbl, old_fkAName, fkAName);
                     db.RenameIndex(tbl, Construct.IndexName(old_tbl.Name, old_fkAName), Construct.IndexName(tbl.Name, fkAName));
                 }
@@ -1691,16 +1693,18 @@ namespace Zetbox.Server.SchemaManagement
                 if (savedRel.HasStorage(RelationEndRole.A))
                 {
                     var tbl = aType.GetTableRef(db);
+                    var refTbl = bType.GetTableRef(db);
                     var old_tbl = old_aType.GetTableRef(db);
-                    db.RenameFKConstraint(tbl, savedRel.GetRelationAssociationName(RelationEndRole.A), tbl, old_fkAName, rel.GetRelationAssociationName(RelationEndRole.A), false);
+                    db.RenameFKConstraint(tbl, savedRel.GetRelationAssociationName(RelationEndRole.A), refTbl, old_fkAName, rel.GetRelationAssociationName(RelationEndRole.A), false);
                     db.RenameColumn(tbl, old_fkBName, fkBName);
                     db.RenameIndex(tbl, Construct.IndexName(old_tbl.Name, old_fkBName), Construct.IndexName(tbl.Name, fkBName));
                 }
                 if (savedRel.HasStorage(RelationEndRole.B))
                 {
                     var tbl = bType.GetTableRef(db);
+                    var refTbl = aType.GetTableRef(db);
                     var old_tbl = old_bType.GetTableRef(db);
-                    db.RenameFKConstraint(tbl, savedRel.GetRelationAssociationName(RelationEndRole.B), tbl, old_fkBName, rel.GetRelationAssociationName(RelationEndRole.B), false);
+                    db.RenameFKConstraint(tbl, savedRel.GetRelationAssociationName(RelationEndRole.B), refTbl, old_fkBName, rel.GetRelationAssociationName(RelationEndRole.B), false);
                     db.RenameColumn(tbl, old_fkAName, fkAName);
                     db.RenameIndex(tbl, Construct.IndexName(old_tbl.Name, old_fkAName), Construct.IndexName(tbl.Name, fkAName));
                 }
