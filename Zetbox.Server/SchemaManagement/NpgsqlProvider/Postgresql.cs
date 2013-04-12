@@ -812,7 +812,7 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
             if (tblName == null) throw new ArgumentNullException("tblName");
 
             ExecuteNonQuery(String.Format(
-                "ALTER INDEX {0}.{1} RENAME TO {0}.{2}",
+                "ALTER INDEX {0}.{1} RENAME TO {2}",
                 QuoteIdentifier(tblName.Schema),
                 QuoteIdentifier(oldIdxName),
                 QuoteIdentifier(newIdxName)));
