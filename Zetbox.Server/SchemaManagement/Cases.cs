@@ -3031,11 +3031,20 @@ namespace Zetbox.Server.SchemaManagement
             var objClass = (ObjectClass)uc.Constrained;
             var tblName = objClass.GetTableRef(db);
             var columns = Construct.GetUCColNames(uc);
-            Log.InfoFormat("New Index Constraint: {0} on {1}({2})", uc.Reason, tblName, string.Join(", ", columns));
-            if (db.CheckIndexPossible(tblName, Construct.IndexName(objClass.TableName, columns), uc.IsUnique, false, columns))
+            var log_idxName = string.Format("{0} on {1}({2})", uc.Reason, tblName, string.Join(", ", columns));
+            Log.InfoFormat("New Index Constraint: {0}", log_idxName);
+            if (db.CheckIndexExists(tblName, Construct.IndexName(objClass.TableName, columns)))
+            {
+                Log.WarnFormat("Cannot create Index Constraint, it already exists: {0}", log_idxName);
+            }
+            else if (db.CheckIndexPossible(tblName, Construct.IndexName(objClass.TableName, columns), uc.IsUnique, false, columns))
+            {
                 db.CreateIndex(tblName, Construct.IndexName(objClass.TableName, columns), uc.IsUnique, false, columns);
+            }
             else
-                Log.WarnFormat("Cannot create Index Constraint: {0} on {1}({2})", uc.Reason, tblName, string.Join(", ", columns));
+            {
+                Log.WarnFormat("Cannot create Index Constraint, if a unique index should be created, the column(s) may contain non unique data: {0}", log_idxName);
+            }
         }
         #endregion
 
