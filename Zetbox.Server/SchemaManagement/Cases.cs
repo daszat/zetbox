@@ -3074,6 +3074,12 @@ namespace Zetbox.Server.SchemaManagement
             {
                 if (!savedCols.Contains(c)) return true;
             }
+
+            var objClass = (ObjectClass)uc.Constrained;
+            var savedObjClass = (ObjectClass)saved.Constrained;
+
+            if (Construct.IndexName(savedObjClass.TableName, savedCols) != Construct.IndexName(objClass.TableName, newCols)) return true;
+
             return false;
         }
         public void DoChangeIndexConstraint(IndexConstraint uc)

@@ -219,35 +219,34 @@ namespace Zetbox.Server.SchemaManagement
             foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.Name))
             {
                 Log.DebugFormat("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
-
                 UpdateIndexConstraints(objClass);
-                UpdateDeletedIndexConstraints(objClass);
             }
             Log.Debug(String.Empty);
         }
 
         private void UpdateIndexConstraints(ObjectClass objClass)
         {
-            foreach (var uc in objClass.Constraints.OfType<IndexConstraint>())
-            {
-                if (Case.IsNewIndexConstraint(uc))
-                {
-                    Case.DoNewIndexConstraint(uc);
-                }
-                else if (Case.IsChangeIndexConstraint(uc))
-                {
-                    Case.DoChangeIndexConstraint(uc);
-                }
-            }
-        }
-
-        private void UpdateDeletedIndexConstraints(ObjectClass objClass)
-        {
             foreach (IndexConstraint uc in Case.savedSchema.GetQuery<IndexConstraint>().Where(p => p.Constrained.ExportGuid == objClass.ExportGuid))
             {
                 if (Case.IsDeleteIndexConstraint(uc))
                 {
                     Case.DoDeleteIndexConstraint(uc);
+                }
+            }
+
+            foreach (var uc in objClass.Constraints.OfType<IndexConstraint>())
+            {
+                if (Case.IsChangeIndexConstraint(uc))
+                {
+                    Case.DoChangeIndexConstraint(uc);
+                }
+            }
+
+            foreach (var uc in objClass.Constraints.OfType<IndexConstraint>())
+            {
+                if (Case.IsNewIndexConstraint(uc))
+                {
+                    Case.DoNewIndexConstraint(uc);
                 }
             }
         }
