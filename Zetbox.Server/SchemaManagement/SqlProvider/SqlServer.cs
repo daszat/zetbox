@@ -776,9 +776,8 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
 
         public override bool CheckIndexExists(TableRef tblName, string idxName)
         {
-            return (int)ExecuteScalar("SELECT COUNT(*) from sys.sysindexes WHERE id = OBJECT_ID(@tbl) AND [name] = @index",
+            return (int)ExecuteScalar("SELECT COUNT(*) from sys.sysindexes WHERE [name] = @index",
                 new Dictionary<string, object>(){
-                    { "@tbl", FormatSchemaName(tblName) },
                     { "@index", idxName },
                 }) > 0;
         }

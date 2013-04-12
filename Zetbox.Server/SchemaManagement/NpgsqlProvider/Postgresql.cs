@@ -768,10 +768,9 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
                         JOIN pg_class idx ON (indexrelid = idx.oid)
                         JOIN pg_class tbl ON (indrelid = tbl.oid)
                         JOIN pg_namespace ON (tbl.relnamespace = pg_namespace.oid)
-                    WHERE nspname = @schema AND tbl.relname = @table AND idx.relname = @index",
+                    WHERE nspname = @schema AND idx.relname = @index",
                 new Dictionary<string, object>(){
                     { "@schema", tblName.Schema },
-                    { "@table", tblName.Name },
                     { "@index", idxName.MaxLength(PG_MAX_IDENTIFIER_LENGTH) },
                 });
         }
