@@ -2926,6 +2926,49 @@ namespace Zetbox.Server.SchemaManagement
         }
         #endregion
 
+        #region RenameObjectClassACL
+        public bool IsRenameObjectClassACL(ObjectClass objClass)
+        {
+            if (objClass.NeedsRightsTable()) return false;
+            ObjectClass savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+            if(savedObjClass == null || !savedObjClass.NeedsRightsTable()) return false;
+
+            return objClass.TableName != savedObjClass.TableName;
+        }
+        public void DoRenameObjectClassACL(ObjectClass objClass)
+        {
+            ObjectClass savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+
+            var tblName = objClass.GetTableRef(db);
+            var savedTblName = savedObjClass.GetTableRef(db);
+            var tblRightsName = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesTableName(objClass));
+            var savedTblRightsName = db.GetTableName(savedObjClass.Module.SchemaName, Construct.SecurityRulesTableName(savedObjClass));
+
+            var rightsViewUnmaterializedName = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesRightsViewUnmaterializedName(objClass));
+            var savedRightsViewUnmaterializedName = db.GetTableName(savedObjClass.Module.SchemaName, Construct.SecurityRulesRightsViewUnmaterializedName(savedObjClass));
+
+            var refreshRightsOnProcedureName = db.GetProcedureName(objClass.Module.SchemaName, Construct.SecurityRulesRefreshRightsOnProcedureName(objClass));
+            var savedRefreshRightsOnProcedureName = db.GetProcedureName(savedObjClass.Module.SchemaName, Construct.SecurityRulesRefreshRightsOnProcedureName(savedObjClass)); 
+            
+            var updateRightsTriggerName = new TriggerRef(tblName, Construct.SecurityRulesUpdateRightsTriggerName(objClass));
+            var savedUpdateRightsTriggerName = new TriggerRef(savedTblName, Construct.SecurityRulesUpdateRightsTriggerName(savedObjClass));
+
+            Log.InfoFormat("Renaming ObjectClass Security Rules: {0}", objClass.Name);
+
+            db.DropTrigger(savedUpdateRightsTriggerName);
+            db.DropProcedure(savedRefreshRightsOnProcedureName);
+            db.DropView(savedRightsViewUnmaterializedName);
+
+            db.RenameTable(savedTblRightsName, tblRightsName);
+            db.RenameIndex(tblRightsName, Construct.SecurityRulesIndexName(savedObjClass), Construct.SecurityRulesIndexName(objClass));
+            db.RenameFKConstraint(tblRightsName, Construct.SecurityRulesFKName(savedObjClass), objClass.GetTableRef(db), "ID", Construct.SecurityRulesFKName(objClass), true);
+
+            DoCreateOrReplaceUpdateRightsTrigger(objClass);
+            DoCreateRightsViewUnmaterialized(objClass);
+            db.CreateRefreshRightsOnProcedure(refreshRightsOnProcedureName, rightsViewUnmaterializedName, tblName, tblRightsName);
+        }
+        #endregion
+
         #region DeleteValueTypeProperty
         public bool IsDeleteValueTypeProperty(ValueTypeProperty savedProp)
         {

@@ -347,6 +347,10 @@ namespace Zetbox.Server.SchemaManagement
                 {
                     Case.DoNewObjectClassACL(objClass);
                 }
+                if (Case.IsRenameObjectClassACL(objClass))
+                {
+                    Case.DoRenameObjectClassACL(objClass);
+                }
                 if (Case.IsChangeObjectClassACL(objClass))
                 {
                     Case.DoChangeObjectClassACL(objClass);
