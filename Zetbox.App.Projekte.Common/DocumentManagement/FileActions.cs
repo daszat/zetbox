@@ -34,14 +34,5 @@ namespace at.dasz.DocumentManagement
         {
             e.Result = obj.Name;
         }
-
-        [Invocation]
-        public static void NotifyDeleting(at.dasz.DocumentManagement.File obj)
-        {
-            if (obj.Blob != null)
-            {
-                obj.Context.Delete(obj.Blob);
-            }
-        }
     }
 }

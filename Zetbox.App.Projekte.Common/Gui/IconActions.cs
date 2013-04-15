@@ -25,23 +25,10 @@ namespace Zetbox.App.GUI
     public static class IconActions
     {
         [Invocation]
-        public static void preSet_Blob(Zetbox.App.GUI.Icon obj, PropertyPreSetterEventArgs<Zetbox.App.Base.Blob> e)
-        {
-            // Delete old blob
-            if (e.OldValue != null && e.OldValue != e.NewValue)
-            {
-                obj.Context.Delete(e.OldValue);
-            }
-
-            e.Result = e.NewValue;
-        }
-
-        [Invocation]
         public static void ToString(Icon obj, MethodReturnEventArgs<string> e)
         {
             e.Result = obj.IconFile;
         }
-
 
         [Invocation]
         public static void GetName(Icon obj, MethodReturnEventArgs<string> e)

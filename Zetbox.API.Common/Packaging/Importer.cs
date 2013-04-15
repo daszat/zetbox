@@ -126,6 +126,9 @@ namespace Zetbox.App.Packaging
                 Log.InfoFormat("Deleting {0} objects marked for deletion", objectsToDelete.Count());
                 foreach (var pairToDelete in objectsToDelete)
                 {
+                    // Don't delete blobs, the blob garbage collector should delete them.
+                    if (pairToDelete.Value is Blob) continue; 
+
                     ctx.Delete(pairToDelete.Value);
                 }
                 Log.Info("Deployment finished");
