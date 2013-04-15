@@ -22,8 +22,8 @@
                      column="`fk_InputProperties`" />
         <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
     </class>
-    <class name="Zetbox.App.Calendar.Calendar_shared_r_Group_RelationEntryNHibernateImpl+Calendar_shared_r_Group_RelationEntryProxy"
-           proxy="Zetbox.App.Calendar.Calendar_shared_r_Group_RelationEntryNHibernateImpl+Calendar_shared_r_Group_RelationEntryProxy"
+    <class name="Zetbox.App.Calendar.CalendarBook_shared_r_Group_RelationEntryNHibernateImpl+CalendarBook_shared_r_Group_RelationEntryProxy"
+           proxy="Zetbox.App.Calendar.CalendarBook_shared_r_Group_RelationEntryNHibernateImpl+CalendarBook_shared_r_Group_RelationEntryProxy"
            table="`Calendar_shared_r_GroupReaders`"
            schema="`calendar`" >
 
@@ -40,8 +40,8 @@
                      column="`fk_GroupReaders`" />
         <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
     </class>
-    <class name="Zetbox.App.Calendar.Calendar_shared_r_Identity_RelationEntryNHibernateImpl+Calendar_shared_r_Identity_RelationEntryProxy"
-           proxy="Zetbox.App.Calendar.Calendar_shared_r_Identity_RelationEntryNHibernateImpl+Calendar_shared_r_Identity_RelationEntryProxy"
+    <class name="Zetbox.App.Calendar.CalendarBook_shared_r_Identity_RelationEntryNHibernateImpl+CalendarBook_shared_r_Identity_RelationEntryProxy"
+           proxy="Zetbox.App.Calendar.CalendarBook_shared_r_Identity_RelationEntryNHibernateImpl+CalendarBook_shared_r_Identity_RelationEntryProxy"
            table="`Calendar_shared_r_Readers`"
            schema="`calendar`" >
 
@@ -57,8 +57,8 @@
         <many-to-one name="B"
                      column="`fk_Readers`" />
     </class>
-    <class name="Zetbox.App.Calendar.Calendar_shared_w_Group_RelationEntryNHibernateImpl+Calendar_shared_w_Group_RelationEntryProxy"
-           proxy="Zetbox.App.Calendar.Calendar_shared_w_Group_RelationEntryNHibernateImpl+Calendar_shared_w_Group_RelationEntryProxy"
+    <class name="Zetbox.App.Calendar.CalendarBook_shared_w_Group_RelationEntryNHibernateImpl+CalendarBook_shared_w_Group_RelationEntryProxy"
+           proxy="Zetbox.App.Calendar.CalendarBook_shared_w_Group_RelationEntryNHibernateImpl+CalendarBook_shared_w_Group_RelationEntryProxy"
            table="`Calendar_shared_w_GroupWriters`"
            schema="`calendar`" >
 
@@ -75,8 +75,8 @@
                      column="`fk_GroupWriters`" />
         <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
     </class>
-    <class name="Zetbox.App.Calendar.Calendar_shared_w_Identity_RelationEntryNHibernateImpl+Calendar_shared_w_Identity_RelationEntryProxy"
-           proxy="Zetbox.App.Calendar.Calendar_shared_w_Identity_RelationEntryNHibernateImpl+Calendar_shared_w_Identity_RelationEntryProxy"
+    <class name="Zetbox.App.Calendar.CalendarBook_shared_w_Identity_RelationEntryNHibernateImpl+CalendarBook_shared_w_Identity_RelationEntryProxy"
+           proxy="Zetbox.App.Calendar.CalendarBook_shared_w_Identity_RelationEntryNHibernateImpl+CalendarBook_shared_w_Identity_RelationEntryProxy"
            table="`Calendar_shared_w_Writers`"
            schema="`calendar`" >
 

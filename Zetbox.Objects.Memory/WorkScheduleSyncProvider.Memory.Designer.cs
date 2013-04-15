@@ -42,7 +42,7 @@ namespace Zetbox.App.Calendar
         /// </summary>
             // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Calendar
         // fkBackingName=_fk_Calendar; fkGuidBackingName=_fk_guid_Calendar;
-        // referencedInterface=Zetbox.App.Calendar.Calendar; moduleNamespace=Zetbox.App.Calendar;
+        // referencedInterface=Zetbox.App.Calendar.CalendarBook; moduleNamespace=Zetbox.App.Calendar;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable; does call events
@@ -51,10 +51,10 @@ namespace Zetbox.App.Calendar
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
-        public Zetbox.App.Calendar.Calendar Calendar
+        public Zetbox.App.Calendar.CalendarBook Calendar
         {
             get { return CalendarImpl; }
-            set { CalendarImpl = (Zetbox.App.Calendar.CalendarMemoryImpl)value; }
+            set { CalendarImpl = (Zetbox.App.Calendar.CalendarBookMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
@@ -74,21 +74,21 @@ namespace Zetbox.App.Calendar
         }
 
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Calendar> _triggerFetchCalendarTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Calendar> TriggerFetchCalendarAsync()
+        Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.CalendarBook> _triggerFetchCalendarTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.CalendarBook> TriggerFetchCalendarAsync()
         {
             if (_triggerFetchCalendarTask != null) return _triggerFetchCalendarTask;
 
             if (_fk_Calendar.HasValue)
-                _triggerFetchCalendarTask = Context.FindAsync<Zetbox.App.Calendar.Calendar>(_fk_Calendar.Value);
+                _triggerFetchCalendarTask = Context.FindAsync<Zetbox.App.Calendar.CalendarBook>(_fk_Calendar.Value);
             else
-                _triggerFetchCalendarTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Calendar>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchCalendarTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.CalendarBook>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             _triggerFetchCalendarTask.OnResult(t =>
             {
                 if (OnCalendar_Getter != null)
                 {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Calendar.Calendar>(t.Result);
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Calendar.CalendarBook>(t.Result);
                     OnCalendar_Getter(this, e);
                     t.Result = e.Result;
                 }
@@ -99,11 +99,11 @@ namespace Zetbox.App.Calendar
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        internal Zetbox.App.Calendar.CalendarMemoryImpl CalendarImpl
+        internal Zetbox.App.Calendar.CalendarBookMemoryImpl CalendarImpl
         {
             get
             {
-                return (Zetbox.App.Calendar.CalendarMemoryImpl)TriggerFetchCalendarAsync().Result;
+                return (Zetbox.App.Calendar.CalendarBookMemoryImpl)TriggerFetchCalendarAsync().Result;
             }
             set
             {
@@ -126,9 +126,9 @@ namespace Zetbox.App.Calendar
 
                 if (OnCalendar_PreSetter != null && IsAttached)
                 {
-                    var e = new PropertyPreSetterEventArgs<Zetbox.App.Calendar.Calendar>(__oldValue, __newValue);
+                    var e = new PropertyPreSetterEventArgs<Zetbox.App.Calendar.CalendarBook>(__oldValue, __newValue);
                     OnCalendar_PreSetter(this, e);
-                    __newValue = (Zetbox.App.Calendar.CalendarMemoryImpl)e.Result;
+                    __newValue = (Zetbox.App.Calendar.CalendarBookMemoryImpl)e.Result;
                 }
 
                 // next, set the local reference
@@ -140,15 +140,15 @@ namespace Zetbox.App.Calendar
 
                 if (OnCalendar_PostSetter != null && IsAttached)
                 {
-                    var e = new PropertyPostSetterEventArgs<Zetbox.App.Calendar.Calendar>(__oldValue, __newValue);
+                    var e = new PropertyPostSetterEventArgs<Zetbox.App.Calendar.CalendarBook>(__oldValue, __newValue);
                     OnCalendar_PostSetter(this, e);
                 }
             }
         }
         // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Calendar
-		public static event PropertyGetterHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider, Zetbox.App.Calendar.Calendar> OnCalendar_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider, Zetbox.App.Calendar.Calendar> OnCalendar_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider, Zetbox.App.Calendar.Calendar> OnCalendar_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider, Zetbox.App.Calendar.CalendarBook> OnCalendar_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider, Zetbox.App.Calendar.CalendarBook> OnCalendar_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider, Zetbox.App.Calendar.CalendarBook> OnCalendar_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider> OnCalendar_IsValid;
 
@@ -478,7 +478,7 @@ namespace Zetbox.App.Calendar
             // fix direct object references
 
             if (_fk_Calendar.HasValue)
-                CalendarImpl = (Zetbox.App.Calendar.CalendarMemoryImpl)Context.Find<Zetbox.App.Calendar.Calendar>(_fk_Calendar.Value);
+                CalendarImpl = (Zetbox.App.Calendar.CalendarBookMemoryImpl)Context.Find<Zetbox.App.Calendar.CalendarBook>(_fk_Calendar.Value);
             else
                 CalendarImpl = null;
 
@@ -501,7 +501,7 @@ namespace Zetbox.App.Calendar
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorMemoryImpl<WorkScheduleSyncProvider, Zetbox.App.Calendar.Calendar>(
+                    new PropertyDescriptorMemoryImpl<WorkScheduleSyncProvider, Zetbox.App.Calendar.CalendarBook>(
                         lazyCtx,
                         new Guid("f67558bb-7415-4a41-9196-7c39426746df"),
                         "Calendar",

@@ -14,15 +14,15 @@ namespace Zetbox.Client.Presentables.Calendar
     [ViewModelDescriptor]
     public class CalendarViewModel : DataObjectViewModel
     {
-        public new delegate CalendarViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Calendar calendar);
+        public new delegate CalendarViewModel Factory(IZetboxContext dataCtx, ViewModel parent, CalendarBook calendar);
 
-        public CalendarViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, Calendar calendar)
+        public CalendarViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, CalendarBook calendar)
             : base(appCtx, dataCtx, parent, calendar)
         {
             this.Calendar = calendar;
         }
 
-        public Calendar Calendar { get; private set; }
+        public CalendarBook Calendar { get; private set; }
 
         protected override void OnObjectPropertyChanged(string propName)
         {

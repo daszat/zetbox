@@ -46,13 +46,13 @@ namespace Zetbox.App.Calendar
     /*
     Relation: FK_SyncAccount_for_Calendar
     A: ZeroOrMore WorkScheduleSyncProvider as SyncAccount
-    B: One Calendar as Calendar
+    B: One CalendarBook as Calendar
     Preferred Storage: MergeIntoA
     */
         // object reference property
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Calendar
         // fkBackingName=_fk_Calendar; fkGuidBackingName=_fk_guid_Calendar;
-        // referencedInterface=Zetbox.App.Calendar.Calendar; moduleNamespace=Zetbox.App.Calendar;
+        // referencedInterface=Zetbox.App.Calendar.CalendarBook; moduleNamespace=Zetbox.App.Calendar;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable
@@ -60,10 +60,10 @@ namespace Zetbox.App.Calendar
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Zetbox.App.Calendar.Calendar Calendar
+        public Zetbox.App.Calendar.CalendarBook Calendar
         {
             get { return CalendarImpl; }
-            set { CalendarImpl = (Zetbox.App.Calendar.CalendarEfImpl)value; }
+            set { CalendarImpl = (Zetbox.App.Calendar.CalendarBookEfImpl)value; }
         }
 
         private int? _fk_Calendar;
@@ -71,13 +71,13 @@ namespace Zetbox.App.Calendar
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_SyncAccount_for_Calendar", "Calendar")]
-        public Zetbox.App.Calendar.CalendarEfImpl CalendarImpl
+        public Zetbox.App.Calendar.CalendarBookEfImpl CalendarImpl
         {
             get
             {
-                Zetbox.App.Calendar.CalendarEfImpl __value;
-                EntityReference<Zetbox.App.Calendar.CalendarEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Calendar.CalendarEfImpl>(
+                Zetbox.App.Calendar.CalendarBookEfImpl __value;
+                EntityReference<Zetbox.App.Calendar.CalendarBookEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Calendar.CalendarBookEfImpl>(
                         "Model.FK_SyncAccount_for_Calendar",
                         "Calendar");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -88,9 +88,9 @@ namespace Zetbox.App.Calendar
                 __value = r.Value;
                 if (OnCalendar_Getter != null)
                 {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Calendar.Calendar>(__value);
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Calendar.CalendarBook>(__value);
                     OnCalendar_Getter(this, e);
-                    __value = (Zetbox.App.Calendar.CalendarEfImpl)e.Result;
+                    __value = (Zetbox.App.Calendar.CalendarBookEfImpl)e.Result;
                 }
                 return __value;
             }
@@ -99,8 +99,8 @@ namespace Zetbox.App.Calendar
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<Zetbox.App.Calendar.CalendarEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Calendar.CalendarEfImpl>(
+                EntityReference<Zetbox.App.Calendar.CalendarBookEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Calendar.CalendarBookEfImpl>(
                         "Model.FK_SyncAccount_for_Calendar",
                         "Calendar");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -108,24 +108,24 @@ namespace Zetbox.App.Calendar
                 {
                     r.Load();
                 }
-                Zetbox.App.Calendar.CalendarEfImpl __oldValue = (Zetbox.App.Calendar.CalendarEfImpl)r.Value;
-                Zetbox.App.Calendar.CalendarEfImpl __newValue = (Zetbox.App.Calendar.CalendarEfImpl)value;
+                Zetbox.App.Calendar.CalendarBookEfImpl __oldValue = (Zetbox.App.Calendar.CalendarBookEfImpl)r.Value;
+                Zetbox.App.Calendar.CalendarBookEfImpl __newValue = (Zetbox.App.Calendar.CalendarBookEfImpl)value;
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("Calendar", __oldValue, __newValue);
 
                 if (OnCalendar_PreSetter != null)
                 {
-                    var e = new PropertyPreSetterEventArgs<Zetbox.App.Calendar.Calendar>(__oldValue, __newValue);
+                    var e = new PropertyPreSetterEventArgs<Zetbox.App.Calendar.CalendarBook>(__oldValue, __newValue);
                     OnCalendar_PreSetter(this, e);
-                    __newValue = (Zetbox.App.Calendar.CalendarEfImpl)e.Result;
+                    __newValue = (Zetbox.App.Calendar.CalendarBookEfImpl)e.Result;
                 }
 
-                r.Value = (Zetbox.App.Calendar.CalendarEfImpl)__newValue;
+                r.Value = (Zetbox.App.Calendar.CalendarBookEfImpl)__newValue;
 
                 if (OnCalendar_PostSetter != null)
                 {
-                    var e = new PropertyPostSetterEventArgs<Zetbox.App.Calendar.Calendar>(__oldValue, __newValue);
+                    var e = new PropertyPostSetterEventArgs<Zetbox.App.Calendar.CalendarBook>(__oldValue, __newValue);
                     OnCalendar_PostSetter(this, e);
                 }
 
@@ -137,13 +137,13 @@ namespace Zetbox.App.Calendar
 
         public Zetbox.API.Async.ZbTask TriggerFetchCalendarAsync()
         {
-            return new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Calendar>(this.Calendar);
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.CalendarBook>(this.Calendar);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Calendar
-		public static event PropertyGetterHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider, Zetbox.App.Calendar.Calendar> OnCalendar_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider, Zetbox.App.Calendar.Calendar> OnCalendar_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider, Zetbox.App.Calendar.Calendar> OnCalendar_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider, Zetbox.App.Calendar.CalendarBook> OnCalendar_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider, Zetbox.App.Calendar.CalendarBook> OnCalendar_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider, Zetbox.App.Calendar.CalendarBook> OnCalendar_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider> OnCalendar_IsValid;
 
@@ -437,7 +437,7 @@ namespace Zetbox.App.Calendar
             // fix direct object references
 
             if (_fk_Calendar.HasValue)
-                CalendarImpl = (Zetbox.App.Calendar.CalendarEfImpl)Context.Find<Zetbox.App.Calendar.Calendar>(_fk_Calendar.Value);
+                CalendarImpl = (Zetbox.App.Calendar.CalendarBookEfImpl)Context.Find<Zetbox.App.Calendar.CalendarBook>(_fk_Calendar.Value);
             else
                 CalendarImpl = null;
 
@@ -460,7 +460,7 @@ namespace Zetbox.App.Calendar
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorEfImpl<WorkScheduleSyncProvider, Zetbox.App.Calendar.Calendar>(
+                    new PropertyDescriptorEfImpl<WorkScheduleSyncProvider, Zetbox.App.Calendar.CalendarBook>(
                         lazyCtx,
                         new Guid("f67558bb-7415-4a41-9196-7c39426746df"),
                         "Calendar",
@@ -568,7 +568,7 @@ namespace Zetbox.App.Calendar
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
-                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Calendar.CalendarEfImpl>("Model.FK_SyncAccount_for_Calendar", "Calendar");
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Calendar.CalendarBookEfImpl>("Model.FK_SyncAccount_for_Calendar", "Calendar");
                 var key = r.EntityKey;
                 binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }

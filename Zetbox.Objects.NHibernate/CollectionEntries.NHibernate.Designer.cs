@@ -448,29 +448,29 @@ namespace Zetbox.App.Base
 namespace Zetbox.App.Calendar
 {
     // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
-    [System.Diagnostics.DebuggerDisplay("Calendar_shared_r_Group_RelationEntryNHibernateImpl")]
-    public class Calendar_shared_r_Group_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.Calendar.Calendar, Zetbox.App.Calendar.CalendarNHibernateImpl, Zetbox.App.Base.Group, Zetbox.App.Base.GroupNHibernateImpl>, Calendar_shared_r_Group_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
+    [System.Diagnostics.DebuggerDisplay("CalendarBook_shared_r_Group_RelationEntryNHibernateImpl")]
+    public class CalendarBook_shared_r_Group_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Calendar.CalendarBookNHibernateImpl, Zetbox.App.Base.Group, Zetbox.App.Base.GroupNHibernateImpl>, CalendarBook_shared_r_Group_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
-        public Calendar_shared_r_Group_RelationEntryNHibernateImpl()
+        public CalendarBook_shared_r_Group_RelationEntryNHibernateImpl()
             : this(null)
         {
         }
 
         /// <summary>Create a new unattached instance</summary>
-        public Calendar_shared_r_Group_RelationEntryNHibernateImpl(Func<IFrozenContext> lazyCtx)
-            : this(lazyCtx, new Calendar_shared_r_Group_RelationEntryProxy())
+        public CalendarBook_shared_r_Group_RelationEntryNHibernateImpl(Func<IFrozenContext> lazyCtx)
+            : this(lazyCtx, new CalendarBook_shared_r_Group_RelationEntryProxy())
         {
         }
 
         /// <summary>Create a instance, wrapping the specified proxy</summary>
-        public Calendar_shared_r_Group_RelationEntryNHibernateImpl(Func<IFrozenContext> lazyCtx, Calendar_shared_r_Group_RelationEntryProxy proxy)
+        public CalendarBook_shared_r_Group_RelationEntryNHibernateImpl(Func<IFrozenContext> lazyCtx, CalendarBook_shared_r_Group_RelationEntryProxy proxy)
             : base(lazyCtx) // do not pass proxy to base data object
         {
             this.Proxy = proxy;
         }
 
         /// <summary>the NHibernate proxy of the represented entity</summary>
-        internal readonly Calendar_shared_r_Group_RelationEntryProxy Proxy;
+        internal readonly CalendarBook_shared_r_Group_RelationEntryProxy Proxy;
 
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
         public Guid ExportGuid
@@ -520,7 +520,7 @@ namespace Zetbox.App.Calendar
             set
             {
                 // settor will do checking for us
-                A = (Zetbox.App.Calendar.Calendar)value;
+                A = (Zetbox.App.Calendar.CalendarBook)value;
             }
         }
 
@@ -545,17 +545,17 @@ namespace Zetbox.App.Calendar
         /// </summary>
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Zetbox.App.Calendar.Calendar; moduleNamespace=Zetbox.App.Calendar;
+        // referencedInterface=Zetbox.App.Calendar.CalendarBook; moduleNamespace=Zetbox.App.Calendar;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Zetbox.App.Calendar.Calendar A
+        public Zetbox.App.Calendar.CalendarBook A
         {
             get
             {
-                Zetbox.App.Calendar.CalendarNHibernateImpl __value = (Zetbox.App.Calendar.CalendarNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                Zetbox.App.Calendar.CalendarBookNHibernateImpl __value = (Zetbox.App.Calendar.CalendarBookNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
                 return __value;
@@ -573,8 +573,8 @@ namespace Zetbox.App.Calendar
                 }
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Zetbox.App.Calendar.CalendarNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
-                var __newValue = (Zetbox.App.Calendar.CalendarNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.Calendar.CalendarBookNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                var __newValue = (Zetbox.App.Calendar.CalendarBookNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -612,7 +612,7 @@ namespace Zetbox.App.Calendar
 
     public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Calendar>(this.A);
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.CalendarBook>(this.A);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
@@ -754,14 +754,14 @@ namespace Zetbox.App.Calendar
 
         public override Type GetImplementedInterface()
         {
-            return typeof(Calendar_shared_r_Group_RelationEntry);
+            return typeof(CalendarBook_shared_r_Group_RelationEntry);
         }
 
         public override void ApplyChangesFrom(IPersistenceObject obj)
         {
             base.ApplyChangesFrom(obj);
-            var other = (Calendar_shared_r_Group_RelationEntryNHibernateImpl)obj;
-            var me = (Calendar_shared_r_Group_RelationEntryNHibernateImpl)this;
+            var other = (CalendarBook_shared_r_Group_RelationEntryNHibernateImpl)obj;
+            var me = (CalendarBook_shared_r_Group_RelationEntryNHibernateImpl)this;
 
             me._fk_A = other._fk_A;
             me._fk_B = other._fk_B;
@@ -775,10 +775,10 @@ namespace Zetbox.App.Calendar
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                this.A = ((Zetbox.App.Calendar.CalendarNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Calendar.Calendar>(_fk_guid_A.Value));
+                this.A = ((Zetbox.App.Calendar.CalendarBookNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Calendar.CalendarBook>(_fk_guid_A.Value));
             else
             if (_fk_A.HasValue)
-                this.A = ((Zetbox.App.Calendar.CalendarNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Calendar.Calendar>(_fk_A.Value));
+                this.A = ((Zetbox.App.Calendar.CalendarBookNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Calendar.CalendarBook>(_fk_A.Value));
             else
                 this.A = null;
 
@@ -851,19 +851,19 @@ namespace Zetbox.App.Calendar
             this.B = null;
         }
 
-        public class Calendar_shared_r_Group_RelationEntryProxy
+        public class CalendarBook_shared_r_Group_RelationEntryProxy
             : IProxyObject, ISortKey<int>
         {
-            public Calendar_shared_r_Group_RelationEntryProxy()
+            public CalendarBook_shared_r_Group_RelationEntryProxy()
             {
             }
 
             public virtual int ID { get; set; }
 
-            public virtual Type ZetboxWrapper { get { return typeof(Calendar_shared_r_Group_RelationEntryNHibernateImpl); } }
-            public virtual Type ZetboxProxy { get { return typeof(Calendar_shared_r_Group_RelationEntryProxy); } }
+            public virtual Type ZetboxWrapper { get { return typeof(CalendarBook_shared_r_Group_RelationEntryNHibernateImpl); } }
+            public virtual Type ZetboxProxy { get { return typeof(CalendarBook_shared_r_Group_RelationEntryProxy); } }
 
-            public virtual Zetbox.App.Calendar.CalendarNHibernateImpl.CalendarProxy A { get; set; }
+            public virtual Zetbox.App.Calendar.CalendarBookNHibernateImpl.CalendarBookProxy A { get; set; }
 
             public virtual Zetbox.App.Base.GroupNHibernateImpl.GroupProxy B { get; set; }
 
@@ -879,29 +879,29 @@ namespace Zetbox.App.Calendar
 namespace Zetbox.App.Calendar
 {
     // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
-    [System.Diagnostics.DebuggerDisplay("Calendar_shared_r_Identity_RelationEntryNHibernateImpl")]
-    public class Calendar_shared_r_Identity_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.Calendar.Calendar, Zetbox.App.Calendar.CalendarNHibernateImpl, Zetbox.App.Base.Identity, Zetbox.App.Base.IdentityNHibernateImpl>, Calendar_shared_r_Identity_RelationEntry
+    [System.Diagnostics.DebuggerDisplay("CalendarBook_shared_r_Identity_RelationEntryNHibernateImpl")]
+    public class CalendarBook_shared_r_Identity_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Calendar.CalendarBookNHibernateImpl, Zetbox.App.Base.Identity, Zetbox.App.Base.IdentityNHibernateImpl>, CalendarBook_shared_r_Identity_RelationEntry
     {
-        public Calendar_shared_r_Identity_RelationEntryNHibernateImpl()
+        public CalendarBook_shared_r_Identity_RelationEntryNHibernateImpl()
             : this(null)
         {
         }
 
         /// <summary>Create a new unattached instance</summary>
-        public Calendar_shared_r_Identity_RelationEntryNHibernateImpl(Func<IFrozenContext> lazyCtx)
-            : this(lazyCtx, new Calendar_shared_r_Identity_RelationEntryProxy())
+        public CalendarBook_shared_r_Identity_RelationEntryNHibernateImpl(Func<IFrozenContext> lazyCtx)
+            : this(lazyCtx, new CalendarBook_shared_r_Identity_RelationEntryProxy())
         {
         }
 
         /// <summary>Create a instance, wrapping the specified proxy</summary>
-        public Calendar_shared_r_Identity_RelationEntryNHibernateImpl(Func<IFrozenContext> lazyCtx, Calendar_shared_r_Identity_RelationEntryProxy proxy)
+        public CalendarBook_shared_r_Identity_RelationEntryNHibernateImpl(Func<IFrozenContext> lazyCtx, CalendarBook_shared_r_Identity_RelationEntryProxy proxy)
             : base(lazyCtx) // do not pass proxy to base data object
         {
             this.Proxy = proxy;
         }
 
         /// <summary>the NHibernate proxy of the represented entity</summary>
-        internal readonly Calendar_shared_r_Identity_RelationEntryProxy Proxy;
+        internal readonly CalendarBook_shared_r_Identity_RelationEntryProxy Proxy;
         #region RelationEntry.ApplyClassHeadTemplate
 
         private static readonly Guid _relationID = new Guid("385c829b-02d6-48d0-8184-b3b5df6c25be");
@@ -916,7 +916,7 @@ namespace Zetbox.App.Calendar
             set
             {
                 // settor will do checking for us
-                A = (Zetbox.App.Calendar.Calendar)value;
+                A = (Zetbox.App.Calendar.CalendarBook)value;
             }
         }
 
@@ -941,17 +941,17 @@ namespace Zetbox.App.Calendar
         /// </summary>
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Zetbox.App.Calendar.Calendar; moduleNamespace=Zetbox.App.Calendar;
+        // referencedInterface=Zetbox.App.Calendar.CalendarBook; moduleNamespace=Zetbox.App.Calendar;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Zetbox.App.Calendar.Calendar A
+        public Zetbox.App.Calendar.CalendarBook A
         {
             get
             {
-                Zetbox.App.Calendar.CalendarNHibernateImpl __value = (Zetbox.App.Calendar.CalendarNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                Zetbox.App.Calendar.CalendarBookNHibernateImpl __value = (Zetbox.App.Calendar.CalendarBookNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
                 return __value;
@@ -969,8 +969,8 @@ namespace Zetbox.App.Calendar
                 }
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Zetbox.App.Calendar.CalendarNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
-                var __newValue = (Zetbox.App.Calendar.CalendarNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.Calendar.CalendarBookNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                var __newValue = (Zetbox.App.Calendar.CalendarBookNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -1006,7 +1006,7 @@ namespace Zetbox.App.Calendar
 
     public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Calendar>(this.A);
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.CalendarBook>(this.A);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
@@ -1118,14 +1118,14 @@ namespace Zetbox.App.Calendar
 
         public override Type GetImplementedInterface()
         {
-            return typeof(Calendar_shared_r_Identity_RelationEntry);
+            return typeof(CalendarBook_shared_r_Identity_RelationEntry);
         }
 
         public override void ApplyChangesFrom(IPersistenceObject obj)
         {
             base.ApplyChangesFrom(obj);
-            var other = (Calendar_shared_r_Identity_RelationEntryNHibernateImpl)obj;
-            var me = (Calendar_shared_r_Identity_RelationEntryNHibernateImpl)this;
+            var other = (CalendarBook_shared_r_Identity_RelationEntryNHibernateImpl)obj;
+            var me = (CalendarBook_shared_r_Identity_RelationEntryNHibernateImpl)this;
 
             me._fk_A = other._fk_A;
             me._fk_B = other._fk_B;
@@ -1139,7 +1139,7 @@ namespace Zetbox.App.Calendar
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_A.HasValue)
-                this.A = ((Zetbox.App.Calendar.CalendarNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Calendar.Calendar>(_fk_A.Value));
+                this.A = ((Zetbox.App.Calendar.CalendarBookNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Calendar.CalendarBook>(_fk_A.Value));
             else
                 this.A = null;
 
@@ -1209,19 +1209,19 @@ namespace Zetbox.App.Calendar
             this.B = null;
         }
 
-        public class Calendar_shared_r_Identity_RelationEntryProxy
+        public class CalendarBook_shared_r_Identity_RelationEntryProxy
             : IProxyObject, ISortKey<int>
         {
-            public Calendar_shared_r_Identity_RelationEntryProxy()
+            public CalendarBook_shared_r_Identity_RelationEntryProxy()
             {
             }
 
             public virtual int ID { get; set; }
 
-            public virtual Type ZetboxWrapper { get { return typeof(Calendar_shared_r_Identity_RelationEntryNHibernateImpl); } }
-            public virtual Type ZetboxProxy { get { return typeof(Calendar_shared_r_Identity_RelationEntryProxy); } }
+            public virtual Type ZetboxWrapper { get { return typeof(CalendarBook_shared_r_Identity_RelationEntryNHibernateImpl); } }
+            public virtual Type ZetboxProxy { get { return typeof(CalendarBook_shared_r_Identity_RelationEntryProxy); } }
 
-            public virtual Zetbox.App.Calendar.CalendarNHibernateImpl.CalendarProxy A { get; set; }
+            public virtual Zetbox.App.Calendar.CalendarBookNHibernateImpl.CalendarBookProxy A { get; set; }
 
             public virtual Zetbox.App.Base.IdentityNHibernateImpl.IdentityProxy B { get; set; }
 
@@ -1235,29 +1235,29 @@ namespace Zetbox.App.Calendar
 namespace Zetbox.App.Calendar
 {
     // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
-    [System.Diagnostics.DebuggerDisplay("Calendar_shared_w_Group_RelationEntryNHibernateImpl")]
-    public class Calendar_shared_w_Group_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.Calendar.Calendar, Zetbox.App.Calendar.CalendarNHibernateImpl, Zetbox.App.Base.Group, Zetbox.App.Base.GroupNHibernateImpl>, Calendar_shared_w_Group_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
+    [System.Diagnostics.DebuggerDisplay("CalendarBook_shared_w_Group_RelationEntryNHibernateImpl")]
+    public class CalendarBook_shared_w_Group_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Calendar.CalendarBookNHibernateImpl, Zetbox.App.Base.Group, Zetbox.App.Base.GroupNHibernateImpl>, CalendarBook_shared_w_Group_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
-        public Calendar_shared_w_Group_RelationEntryNHibernateImpl()
+        public CalendarBook_shared_w_Group_RelationEntryNHibernateImpl()
             : this(null)
         {
         }
 
         /// <summary>Create a new unattached instance</summary>
-        public Calendar_shared_w_Group_RelationEntryNHibernateImpl(Func<IFrozenContext> lazyCtx)
-            : this(lazyCtx, new Calendar_shared_w_Group_RelationEntryProxy())
+        public CalendarBook_shared_w_Group_RelationEntryNHibernateImpl(Func<IFrozenContext> lazyCtx)
+            : this(lazyCtx, new CalendarBook_shared_w_Group_RelationEntryProxy())
         {
         }
 
         /// <summary>Create a instance, wrapping the specified proxy</summary>
-        public Calendar_shared_w_Group_RelationEntryNHibernateImpl(Func<IFrozenContext> lazyCtx, Calendar_shared_w_Group_RelationEntryProxy proxy)
+        public CalendarBook_shared_w_Group_RelationEntryNHibernateImpl(Func<IFrozenContext> lazyCtx, CalendarBook_shared_w_Group_RelationEntryProxy proxy)
             : base(lazyCtx) // do not pass proxy to base data object
         {
             this.Proxy = proxy;
         }
 
         /// <summary>the NHibernate proxy of the represented entity</summary>
-        internal readonly Calendar_shared_w_Group_RelationEntryProxy Proxy;
+        internal readonly CalendarBook_shared_w_Group_RelationEntryProxy Proxy;
 
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
         public Guid ExportGuid
@@ -1307,7 +1307,7 @@ namespace Zetbox.App.Calendar
             set
             {
                 // settor will do checking for us
-                A = (Zetbox.App.Calendar.Calendar)value;
+                A = (Zetbox.App.Calendar.CalendarBook)value;
             }
         }
 
@@ -1332,17 +1332,17 @@ namespace Zetbox.App.Calendar
         /// </summary>
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Zetbox.App.Calendar.Calendar; moduleNamespace=Zetbox.App.Calendar;
+        // referencedInterface=Zetbox.App.Calendar.CalendarBook; moduleNamespace=Zetbox.App.Calendar;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Zetbox.App.Calendar.Calendar A
+        public Zetbox.App.Calendar.CalendarBook A
         {
             get
             {
-                Zetbox.App.Calendar.CalendarNHibernateImpl __value = (Zetbox.App.Calendar.CalendarNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                Zetbox.App.Calendar.CalendarBookNHibernateImpl __value = (Zetbox.App.Calendar.CalendarBookNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
                 return __value;
@@ -1360,8 +1360,8 @@ namespace Zetbox.App.Calendar
                 }
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Zetbox.App.Calendar.CalendarNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
-                var __newValue = (Zetbox.App.Calendar.CalendarNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.Calendar.CalendarBookNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                var __newValue = (Zetbox.App.Calendar.CalendarBookNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -1399,7 +1399,7 @@ namespace Zetbox.App.Calendar
 
     public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Calendar>(this.A);
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.CalendarBook>(this.A);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
@@ -1541,14 +1541,14 @@ namespace Zetbox.App.Calendar
 
         public override Type GetImplementedInterface()
         {
-            return typeof(Calendar_shared_w_Group_RelationEntry);
+            return typeof(CalendarBook_shared_w_Group_RelationEntry);
         }
 
         public override void ApplyChangesFrom(IPersistenceObject obj)
         {
             base.ApplyChangesFrom(obj);
-            var other = (Calendar_shared_w_Group_RelationEntryNHibernateImpl)obj;
-            var me = (Calendar_shared_w_Group_RelationEntryNHibernateImpl)this;
+            var other = (CalendarBook_shared_w_Group_RelationEntryNHibernateImpl)obj;
+            var me = (CalendarBook_shared_w_Group_RelationEntryNHibernateImpl)this;
 
             me._fk_A = other._fk_A;
             me._fk_B = other._fk_B;
@@ -1562,10 +1562,10 @@ namespace Zetbox.App.Calendar
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                this.A = ((Zetbox.App.Calendar.CalendarNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Calendar.Calendar>(_fk_guid_A.Value));
+                this.A = ((Zetbox.App.Calendar.CalendarBookNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Calendar.CalendarBook>(_fk_guid_A.Value));
             else
             if (_fk_A.HasValue)
-                this.A = ((Zetbox.App.Calendar.CalendarNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Calendar.Calendar>(_fk_A.Value));
+                this.A = ((Zetbox.App.Calendar.CalendarBookNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Calendar.CalendarBook>(_fk_A.Value));
             else
                 this.A = null;
 
@@ -1638,19 +1638,19 @@ namespace Zetbox.App.Calendar
             this.B = null;
         }
 
-        public class Calendar_shared_w_Group_RelationEntryProxy
+        public class CalendarBook_shared_w_Group_RelationEntryProxy
             : IProxyObject, ISortKey<int>
         {
-            public Calendar_shared_w_Group_RelationEntryProxy()
+            public CalendarBook_shared_w_Group_RelationEntryProxy()
             {
             }
 
             public virtual int ID { get; set; }
 
-            public virtual Type ZetboxWrapper { get { return typeof(Calendar_shared_w_Group_RelationEntryNHibernateImpl); } }
-            public virtual Type ZetboxProxy { get { return typeof(Calendar_shared_w_Group_RelationEntryProxy); } }
+            public virtual Type ZetboxWrapper { get { return typeof(CalendarBook_shared_w_Group_RelationEntryNHibernateImpl); } }
+            public virtual Type ZetboxProxy { get { return typeof(CalendarBook_shared_w_Group_RelationEntryProxy); } }
 
-            public virtual Zetbox.App.Calendar.CalendarNHibernateImpl.CalendarProxy A { get; set; }
+            public virtual Zetbox.App.Calendar.CalendarBookNHibernateImpl.CalendarBookProxy A { get; set; }
 
             public virtual Zetbox.App.Base.GroupNHibernateImpl.GroupProxy B { get; set; }
 
@@ -1666,29 +1666,29 @@ namespace Zetbox.App.Calendar
 namespace Zetbox.App.Calendar
 {
     // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
-    [System.Diagnostics.DebuggerDisplay("Calendar_shared_w_Identity_RelationEntryNHibernateImpl")]
-    public class Calendar_shared_w_Identity_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.Calendar.Calendar, Zetbox.App.Calendar.CalendarNHibernateImpl, Zetbox.App.Base.Identity, Zetbox.App.Base.IdentityNHibernateImpl>, Calendar_shared_w_Identity_RelationEntry
+    [System.Diagnostics.DebuggerDisplay("CalendarBook_shared_w_Identity_RelationEntryNHibernateImpl")]
+    public class CalendarBook_shared_w_Identity_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Calendar.CalendarBookNHibernateImpl, Zetbox.App.Base.Identity, Zetbox.App.Base.IdentityNHibernateImpl>, CalendarBook_shared_w_Identity_RelationEntry
     {
-        public Calendar_shared_w_Identity_RelationEntryNHibernateImpl()
+        public CalendarBook_shared_w_Identity_RelationEntryNHibernateImpl()
             : this(null)
         {
         }
 
         /// <summary>Create a new unattached instance</summary>
-        public Calendar_shared_w_Identity_RelationEntryNHibernateImpl(Func<IFrozenContext> lazyCtx)
-            : this(lazyCtx, new Calendar_shared_w_Identity_RelationEntryProxy())
+        public CalendarBook_shared_w_Identity_RelationEntryNHibernateImpl(Func<IFrozenContext> lazyCtx)
+            : this(lazyCtx, new CalendarBook_shared_w_Identity_RelationEntryProxy())
         {
         }
 
         /// <summary>Create a instance, wrapping the specified proxy</summary>
-        public Calendar_shared_w_Identity_RelationEntryNHibernateImpl(Func<IFrozenContext> lazyCtx, Calendar_shared_w_Identity_RelationEntryProxy proxy)
+        public CalendarBook_shared_w_Identity_RelationEntryNHibernateImpl(Func<IFrozenContext> lazyCtx, CalendarBook_shared_w_Identity_RelationEntryProxy proxy)
             : base(lazyCtx) // do not pass proxy to base data object
         {
             this.Proxy = proxy;
         }
 
         /// <summary>the NHibernate proxy of the represented entity</summary>
-        internal readonly Calendar_shared_w_Identity_RelationEntryProxy Proxy;
+        internal readonly CalendarBook_shared_w_Identity_RelationEntryProxy Proxy;
         #region RelationEntry.ApplyClassHeadTemplate
 
         private static readonly Guid _relationID = new Guid("af8843f9-0085-47ec-bcb6-f0f8a22a2c03");
@@ -1703,7 +1703,7 @@ namespace Zetbox.App.Calendar
             set
             {
                 // settor will do checking for us
-                A = (Zetbox.App.Calendar.Calendar)value;
+                A = (Zetbox.App.Calendar.CalendarBook)value;
             }
         }
 
@@ -1728,17 +1728,17 @@ namespace Zetbox.App.Calendar
         /// </summary>
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Zetbox.App.Calendar.Calendar; moduleNamespace=Zetbox.App.Calendar;
+        // referencedInterface=Zetbox.App.Calendar.CalendarBook; moduleNamespace=Zetbox.App.Calendar;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Zetbox.App.Calendar.Calendar A
+        public Zetbox.App.Calendar.CalendarBook A
         {
             get
             {
-                Zetbox.App.Calendar.CalendarNHibernateImpl __value = (Zetbox.App.Calendar.CalendarNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                Zetbox.App.Calendar.CalendarBookNHibernateImpl __value = (Zetbox.App.Calendar.CalendarBookNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
                 return __value;
@@ -1756,8 +1756,8 @@ namespace Zetbox.App.Calendar
                 }
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Zetbox.App.Calendar.CalendarNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
-                var __newValue = (Zetbox.App.Calendar.CalendarNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.Calendar.CalendarBookNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                var __newValue = (Zetbox.App.Calendar.CalendarBookNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -1793,7 +1793,7 @@ namespace Zetbox.App.Calendar
 
     public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Calendar>(this.A);
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.CalendarBook>(this.A);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
@@ -1905,14 +1905,14 @@ namespace Zetbox.App.Calendar
 
         public override Type GetImplementedInterface()
         {
-            return typeof(Calendar_shared_w_Identity_RelationEntry);
+            return typeof(CalendarBook_shared_w_Identity_RelationEntry);
         }
 
         public override void ApplyChangesFrom(IPersistenceObject obj)
         {
             base.ApplyChangesFrom(obj);
-            var other = (Calendar_shared_w_Identity_RelationEntryNHibernateImpl)obj;
-            var me = (Calendar_shared_w_Identity_RelationEntryNHibernateImpl)this;
+            var other = (CalendarBook_shared_w_Identity_RelationEntryNHibernateImpl)obj;
+            var me = (CalendarBook_shared_w_Identity_RelationEntryNHibernateImpl)this;
 
             me._fk_A = other._fk_A;
             me._fk_B = other._fk_B;
@@ -1926,7 +1926,7 @@ namespace Zetbox.App.Calendar
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_A.HasValue)
-                this.A = ((Zetbox.App.Calendar.CalendarNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Calendar.Calendar>(_fk_A.Value));
+                this.A = ((Zetbox.App.Calendar.CalendarBookNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Calendar.CalendarBook>(_fk_A.Value));
             else
                 this.A = null;
 
@@ -1996,19 +1996,19 @@ namespace Zetbox.App.Calendar
             this.B = null;
         }
 
-        public class Calendar_shared_w_Identity_RelationEntryProxy
+        public class CalendarBook_shared_w_Identity_RelationEntryProxy
             : IProxyObject, ISortKey<int>
         {
-            public Calendar_shared_w_Identity_RelationEntryProxy()
+            public CalendarBook_shared_w_Identity_RelationEntryProxy()
             {
             }
 
             public virtual int ID { get; set; }
 
-            public virtual Type ZetboxWrapper { get { return typeof(Calendar_shared_w_Identity_RelationEntryNHibernateImpl); } }
-            public virtual Type ZetboxProxy { get { return typeof(Calendar_shared_w_Identity_RelationEntryProxy); } }
+            public virtual Type ZetboxWrapper { get { return typeof(CalendarBook_shared_w_Identity_RelationEntryNHibernateImpl); } }
+            public virtual Type ZetboxProxy { get { return typeof(CalendarBook_shared_w_Identity_RelationEntryProxy); } }
 
-            public virtual Zetbox.App.Calendar.CalendarNHibernateImpl.CalendarProxy A { get; set; }
+            public virtual Zetbox.App.Calendar.CalendarBookNHibernateImpl.CalendarBookProxy A { get; set; }
 
             public virtual Zetbox.App.Base.IdentityNHibernateImpl.IdentityProxy B { get; set; }
 

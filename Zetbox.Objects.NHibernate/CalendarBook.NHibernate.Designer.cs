@@ -19,27 +19,27 @@ namespace Zetbox.App.Calendar
     using Zetbox.DalProvider.NHibernate;
 
     /// <summary>
-    /// A container item for events
+    /// A container (book) for events
     /// </summary>
-    [System.Diagnostics.DebuggerDisplay("Calendar")]
-    public class CalendarNHibernateImpl : Zetbox.DalProvider.NHibernate.DataObjectNHibernateImpl, Calendar, Zetbox.API.IExportableInternal
+    [System.Diagnostics.DebuggerDisplay("CalendarBook")]
+    public class CalendarBookNHibernateImpl : Zetbox.DalProvider.NHibernate.DataObjectNHibernateImpl, CalendarBook, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("1450be5f-2266-4367-8a56-1f0bee5699c4");
         public override Guid ObjectClassID { get { return _objectClassID; } }
 
-        public CalendarNHibernateImpl()
+        public CalendarBookNHibernateImpl()
             : this(null)
         {
         }
 
         /// <summary>Create a new unattached instance</summary>
-        public CalendarNHibernateImpl(Func<IFrozenContext> lazyCtx)
-            : this(lazyCtx, new CalendarProxy())
+        public CalendarBookNHibernateImpl(Func<IFrozenContext> lazyCtx)
+            : this(lazyCtx, new CalendarBookProxy())
         {
         }
 
         /// <summary>Create a instance, wrapping the specified proxy</summary>
-        public CalendarNHibernateImpl(Func<IFrozenContext> lazyCtx, CalendarProxy proxy)
+        public CalendarBookNHibernateImpl(Func<IFrozenContext> lazyCtx, CalendarBookProxy proxy)
             : base(lazyCtx) // do not pass proxy to base data object
         {
             this.Proxy = proxy;
@@ -49,7 +49,7 @@ namespace Zetbox.App.Calendar
         }
 
         /// <summary>the NHibernate proxy of the represented entity</summary>
-        internal readonly CalendarProxy Proxy;
+        internal readonly CalendarBookProxy Proxy;
 
         /// <summary>
         /// Identity which changed this object
@@ -143,11 +143,11 @@ namespace Zetbox.App.Calendar
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
-		public static event PropertyGetterHandler<Zetbox.App.Calendar.Calendar, Zetbox.App.Base.Identity> OnChangedBy_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.Calendar, Zetbox.App.Base.Identity> OnChangedBy_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.Calendar, Zetbox.App.Base.Identity> OnChangedBy_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Identity> OnChangedBy_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Identity> OnChangedBy_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Identity> OnChangedBy_PostSetter;
 
-        public static event PropertyIsValidHandler<Zetbox.App.Calendar.Calendar> OnChangedBy_IsValid;
+        public static event PropertyIsValidHandler<Zetbox.App.Calendar.CalendarBook> OnChangedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was changed
@@ -213,7 +213,7 @@ namespace Zetbox.App.Calendar
                         object __tmp_value = __p.DefaultValue.GetDefaultValue();
                         __result = this.Proxy.ChangedOn = (DateTime)__tmp_value;
                     } else {
-                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'Zetbox.App.Calendar.Calendar.ChangedOn'");
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'Zetbox.App.Calendar.CalendarBook.ChangedOn'");
                     }
                 }
             return __result;
@@ -221,11 +221,11 @@ namespace Zetbox.App.Calendar
 
         private bool _isChangedOnSet = false;
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
-		public static event PropertyGetterHandler<Zetbox.App.Calendar.Calendar, DateTime> OnChangedOn_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.Calendar, DateTime> OnChangedOn_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.Calendar, DateTime> OnChangedOn_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Calendar.CalendarBook, DateTime> OnChangedOn_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.CalendarBook, DateTime> OnChangedOn_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.CalendarBook, DateTime> OnChangedOn_PostSetter;
 
-        public static event PropertyIsValidHandler<Zetbox.App.Calendar.Calendar> OnChangedOn_IsValid;
+        public static event PropertyIsValidHandler<Zetbox.App.Calendar.CalendarBook> OnChangedOn_IsValid;
 
         /// <summary>
         /// Identity which created this object
@@ -319,11 +319,11 @@ namespace Zetbox.App.Calendar
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
-		public static event PropertyGetterHandler<Zetbox.App.Calendar.Calendar, Zetbox.App.Base.Identity> OnCreatedBy_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.Calendar, Zetbox.App.Base.Identity> OnCreatedBy_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.Calendar, Zetbox.App.Base.Identity> OnCreatedBy_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Identity> OnCreatedBy_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Identity> OnCreatedBy_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Identity> OnCreatedBy_PostSetter;
 
-        public static event PropertyIsValidHandler<Zetbox.App.Calendar.Calendar> OnCreatedBy_IsValid;
+        public static event PropertyIsValidHandler<Zetbox.App.Calendar.CalendarBook> OnCreatedBy_IsValid;
 
         /// <summary>
         /// Date and time where this object was created
@@ -389,7 +389,7 @@ namespace Zetbox.App.Calendar
                         object __tmp_value = __p.DefaultValue.GetDefaultValue();
                         __result = this.Proxy.CreatedOn = (DateTime)__tmp_value;
                     } else {
-                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'Zetbox.App.Calendar.Calendar.CreatedOn'");
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'Zetbox.App.Calendar.CalendarBook.CreatedOn'");
                     }
                 }
             return __result;
@@ -397,11 +397,11 @@ namespace Zetbox.App.Calendar
 
         private bool _isCreatedOnSet = false;
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
-		public static event PropertyGetterHandler<Zetbox.App.Calendar.Calendar, DateTime> OnCreatedOn_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.Calendar, DateTime> OnCreatedOn_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.Calendar, DateTime> OnCreatedOn_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Calendar.CalendarBook, DateTime> OnCreatedOn_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.CalendarBook, DateTime> OnCreatedOn_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.CalendarBook, DateTime> OnCreatedOn_PostSetter;
 
-        public static event PropertyIsValidHandler<Zetbox.App.Calendar.Calendar> OnCreatedOn_IsValid;
+        public static event PropertyIsValidHandler<Zetbox.App.Calendar.CalendarBook> OnCreatedOn_IsValid;
 
         /// <summary>
         /// Export Guid
@@ -467,7 +467,7 @@ namespace Zetbox.App.Calendar
                         object __tmp_value = __p.DefaultValue.GetDefaultValue();
                         __result = this.Proxy.ExportGuid = (Guid)__tmp_value;
                     } else {
-                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'Zetbox.App.Calendar.Calendar.ExportGuid'");
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'Zetbox.App.Calendar.CalendarBook.ExportGuid'");
                     }
                 }
             return __result;
@@ -475,11 +475,11 @@ namespace Zetbox.App.Calendar
 
         private bool _isExportGuidSet = false;
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
-		public static event PropertyGetterHandler<Zetbox.App.Calendar.Calendar, Guid> OnExportGuid_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.Calendar, Guid> OnExportGuid_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.Calendar, Guid> OnExportGuid_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Calendar.CalendarBook, Guid> OnExportGuid_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.CalendarBook, Guid> OnExportGuid_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.CalendarBook, Guid> OnExportGuid_PostSetter;
 
-        public static event PropertyIsValidHandler<Zetbox.App.Calendar.Calendar> OnExportGuid_IsValid;
+        public static event PropertyIsValidHandler<Zetbox.App.Calendar.CalendarBook> OnExportGuid_IsValid;
 
         /// <summary>
         /// 
@@ -493,13 +493,13 @@ namespace Zetbox.App.Calendar
 				if (_GroupReaders == null)
 				{
 					_GroupReaders 
-						= new NHibernateBSideCollectionWrapper<Zetbox.App.Calendar.Calendar, Zetbox.App.Base.Group, Zetbox.App.Calendar.Calendar_shared_r_Group_RelationEntryNHibernateImpl>(
+						= new NHibernateBSideCollectionWrapper<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Group, Zetbox.App.Calendar.CalendarBook_shared_r_Group_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<Zetbox.App.Calendar.Calendar_shared_r_Group_RelationEntryNHibernateImpl.Calendar_shared_r_Group_RelationEntryProxy, Zetbox.App.Calendar.Calendar_shared_r_Group_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Zetbox.App.Calendar.CalendarBook_shared_r_Group_RelationEntryNHibernateImpl.CalendarBook_shared_r_Group_RelationEntryProxy, Zetbox.App.Calendar.CalendarBook_shared_r_Group_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.GroupReaders,
-                                p => (Zetbox.App.Calendar.Calendar_shared_r_Group_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.Calendar.Calendar_shared_r_Group_RelationEntryNHibernateImpl.Calendar_shared_r_Group_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Zetbox.App.Calendar.Calendar_shared_r_Group_RelationEntryNHibernateImpl>)null);
+                                p => (Zetbox.App.Calendar.CalendarBook_shared_r_Group_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Zetbox.App.Calendar.CalendarBook_shared_r_Group_RelationEntryNHibernateImpl.CalendarBook_shared_r_Group_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
+                            entry => (IRelationListSync<Zetbox.App.Calendar.CalendarBook_shared_r_Group_RelationEntryNHibernateImpl>)null);
                     _GroupReaders.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("GroupReaders", null, null); if(OnGroupReaders_PostSetter != null && IsAttached) OnGroupReaders_PostSetter(this); };
                     if (GroupReaders_was_eagerLoaded) { GroupReaders_was_eagerLoaded = false; }
 				}
@@ -507,7 +507,7 @@ namespace Zetbox.App.Calendar
 			}
 		}
 
-		private NHibernateBSideCollectionWrapper<Zetbox.App.Calendar.Calendar, Zetbox.App.Base.Group, Zetbox.App.Calendar.Calendar_shared_r_Group_RelationEntryNHibernateImpl> _GroupReaders;
+		private NHibernateBSideCollectionWrapper<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Group, Zetbox.App.Calendar.CalendarBook_shared_r_Group_RelationEntryNHibernateImpl> _GroupReaders;
 		// ignored, but required for Serialization
         private bool GroupReaders_was_eagerLoaded = false;
 
@@ -516,9 +516,9 @@ namespace Zetbox.App.Calendar
             return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.Group>>(this.GroupReaders);
         }
 
-public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnGroupReaders_PostSetter;
+public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook> OnGroupReaders_PostSetter;
 
-        public static event PropertyIsValidHandler<Zetbox.App.Calendar.Calendar> OnGroupReaders_IsValid;
+        public static event PropertyIsValidHandler<Zetbox.App.Calendar.CalendarBook> OnGroupReaders_IsValid;
 
         /// <summary>
         /// 
@@ -532,13 +532,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnG
 				if (_GroupWriters == null)
 				{
 					_GroupWriters 
-						= new NHibernateBSideCollectionWrapper<Zetbox.App.Calendar.Calendar, Zetbox.App.Base.Group, Zetbox.App.Calendar.Calendar_shared_w_Group_RelationEntryNHibernateImpl>(
+						= new NHibernateBSideCollectionWrapper<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Group, Zetbox.App.Calendar.CalendarBook_shared_w_Group_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<Zetbox.App.Calendar.Calendar_shared_w_Group_RelationEntryNHibernateImpl.Calendar_shared_w_Group_RelationEntryProxy, Zetbox.App.Calendar.Calendar_shared_w_Group_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Zetbox.App.Calendar.CalendarBook_shared_w_Group_RelationEntryNHibernateImpl.CalendarBook_shared_w_Group_RelationEntryProxy, Zetbox.App.Calendar.CalendarBook_shared_w_Group_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.GroupWriters,
-                                p => (Zetbox.App.Calendar.Calendar_shared_w_Group_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.Calendar.Calendar_shared_w_Group_RelationEntryNHibernateImpl.Calendar_shared_w_Group_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Zetbox.App.Calendar.Calendar_shared_w_Group_RelationEntryNHibernateImpl>)null);
+                                p => (Zetbox.App.Calendar.CalendarBook_shared_w_Group_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Zetbox.App.Calendar.CalendarBook_shared_w_Group_RelationEntryNHibernateImpl.CalendarBook_shared_w_Group_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
+                            entry => (IRelationListSync<Zetbox.App.Calendar.CalendarBook_shared_w_Group_RelationEntryNHibernateImpl>)null);
                     _GroupWriters.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("GroupWriters", null, null); if(OnGroupWriters_PostSetter != null && IsAttached) OnGroupWriters_PostSetter(this); };
                     if (GroupWriters_was_eagerLoaded) { GroupWriters_was_eagerLoaded = false; }
 				}
@@ -546,7 +546,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnG
 			}
 		}
 
-		private NHibernateBSideCollectionWrapper<Zetbox.App.Calendar.Calendar, Zetbox.App.Base.Group, Zetbox.App.Calendar.Calendar_shared_w_Group_RelationEntryNHibernateImpl> _GroupWriters;
+		private NHibernateBSideCollectionWrapper<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Group, Zetbox.App.Calendar.CalendarBook_shared_w_Group_RelationEntryNHibernateImpl> _GroupWriters;
 		// ignored, but required for Serialization
         private bool GroupWriters_was_eagerLoaded = false;
 
@@ -555,9 +555,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnG
             return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.Group>>(this.GroupWriters);
         }
 
-public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnGroupWriters_PostSetter;
+public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook> OnGroupWriters_PostSetter;
 
-        public static event PropertyIsValidHandler<Zetbox.App.Calendar.Calendar> OnGroupWriters_IsValid;
+        public static event PropertyIsValidHandler<Zetbox.App.Calendar.CalendarBook> OnGroupWriters_IsValid;
 
         /// <summary>
         /// 
@@ -611,11 +611,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnG
         }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
-		public static event PropertyGetterHandler<Zetbox.App.Calendar.Calendar, string> OnName_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.Calendar, string> OnName_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.Calendar, string> OnName_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Calendar.CalendarBook, string> OnName_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.CalendarBook, string> OnName_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.CalendarBook, string> OnName_PostSetter;
 
-        public static event PropertyIsValidHandler<Zetbox.App.Calendar.Calendar> OnName_IsValid;
+        public static event PropertyIsValidHandler<Zetbox.App.Calendar.CalendarBook> OnName_IsValid;
 
         /// <summary>
         /// 
@@ -709,11 +709,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnG
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Owner
-		public static event PropertyGetterHandler<Zetbox.App.Calendar.Calendar, Zetbox.App.Base.Identity> OnOwner_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.Calendar, Zetbox.App.Base.Identity> OnOwner_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.Calendar, Zetbox.App.Base.Identity> OnOwner_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Identity> OnOwner_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Identity> OnOwner_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Identity> OnOwner_PostSetter;
 
-        public static event PropertyIsValidHandler<Zetbox.App.Calendar.Calendar> OnOwner_IsValid;
+        public static event PropertyIsValidHandler<Zetbox.App.Calendar.CalendarBook> OnOwner_IsValid;
 
         /// <summary>
         /// 
@@ -727,13 +727,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnG
 				if (_Readers == null)
 				{
 					_Readers 
-						= new NHibernateBSideCollectionWrapper<Zetbox.App.Calendar.Calendar, Zetbox.App.Base.Identity, Zetbox.App.Calendar.Calendar_shared_r_Identity_RelationEntryNHibernateImpl>(
+						= new NHibernateBSideCollectionWrapper<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Identity, Zetbox.App.Calendar.CalendarBook_shared_r_Identity_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<Zetbox.App.Calendar.Calendar_shared_r_Identity_RelationEntryNHibernateImpl.Calendar_shared_r_Identity_RelationEntryProxy, Zetbox.App.Calendar.Calendar_shared_r_Identity_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Zetbox.App.Calendar.CalendarBook_shared_r_Identity_RelationEntryNHibernateImpl.CalendarBook_shared_r_Identity_RelationEntryProxy, Zetbox.App.Calendar.CalendarBook_shared_r_Identity_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.Readers,
-                                p => (Zetbox.App.Calendar.Calendar_shared_r_Identity_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.Calendar.Calendar_shared_r_Identity_RelationEntryNHibernateImpl.Calendar_shared_r_Identity_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Zetbox.App.Calendar.Calendar_shared_r_Identity_RelationEntryNHibernateImpl>)null);
+                                p => (Zetbox.App.Calendar.CalendarBook_shared_r_Identity_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Zetbox.App.Calendar.CalendarBook_shared_r_Identity_RelationEntryNHibernateImpl.CalendarBook_shared_r_Identity_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
+                            entry => (IRelationListSync<Zetbox.App.Calendar.CalendarBook_shared_r_Identity_RelationEntryNHibernateImpl>)null);
                     _Readers.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Readers", null, null); if(OnReaders_PostSetter != null && IsAttached) OnReaders_PostSetter(this); };
                     if (Readers_was_eagerLoaded) { Readers_was_eagerLoaded = false; }
 				}
@@ -741,7 +741,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnG
 			}
 		}
 
-		private NHibernateBSideCollectionWrapper<Zetbox.App.Calendar.Calendar, Zetbox.App.Base.Identity, Zetbox.App.Calendar.Calendar_shared_r_Identity_RelationEntryNHibernateImpl> _Readers;
+		private NHibernateBSideCollectionWrapper<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Identity, Zetbox.App.Calendar.CalendarBook_shared_r_Identity_RelationEntryNHibernateImpl> _Readers;
 		// ignored, but required for Serialization
         private bool Readers_was_eagerLoaded = false;
 
@@ -750,9 +750,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnG
             return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.Identity>>(this.Readers);
         }
 
-public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnReaders_PostSetter;
+public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook> OnReaders_PostSetter;
 
-        public static event PropertyIsValidHandler<Zetbox.App.Calendar.Calendar> OnReaders_IsValid;
+        public static event PropertyIsValidHandler<Zetbox.App.Calendar.CalendarBook> OnReaders_IsValid;
 
         /// <summary>
         /// 
@@ -766,13 +766,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnR
 				if (_Writers == null)
 				{
 					_Writers 
-						= new NHibernateBSideCollectionWrapper<Zetbox.App.Calendar.Calendar, Zetbox.App.Base.Identity, Zetbox.App.Calendar.Calendar_shared_w_Identity_RelationEntryNHibernateImpl>(
+						= new NHibernateBSideCollectionWrapper<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Identity, Zetbox.App.Calendar.CalendarBook_shared_w_Identity_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<Zetbox.App.Calendar.Calendar_shared_w_Identity_RelationEntryNHibernateImpl.Calendar_shared_w_Identity_RelationEntryProxy, Zetbox.App.Calendar.Calendar_shared_w_Identity_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Zetbox.App.Calendar.CalendarBook_shared_w_Identity_RelationEntryNHibernateImpl.CalendarBook_shared_w_Identity_RelationEntryProxy, Zetbox.App.Calendar.CalendarBook_shared_w_Identity_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.Writers,
-                                p => (Zetbox.App.Calendar.Calendar_shared_w_Identity_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.Calendar.Calendar_shared_w_Identity_RelationEntryNHibernateImpl.Calendar_shared_w_Identity_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Zetbox.App.Calendar.Calendar_shared_w_Identity_RelationEntryNHibernateImpl>)null);
+                                p => (Zetbox.App.Calendar.CalendarBook_shared_w_Identity_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Zetbox.App.Calendar.CalendarBook_shared_w_Identity_RelationEntryNHibernateImpl.CalendarBook_shared_w_Identity_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
+                            entry => (IRelationListSync<Zetbox.App.Calendar.CalendarBook_shared_w_Identity_RelationEntryNHibernateImpl>)null);
                     _Writers.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Writers", null, null); if(OnWriters_PostSetter != null && IsAttached) OnWriters_PostSetter(this); };
                     if (Writers_was_eagerLoaded) { Writers_was_eagerLoaded = false; }
 				}
@@ -780,7 +780,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnR
 			}
 		}
 
-		private NHibernateBSideCollectionWrapper<Zetbox.App.Calendar.Calendar, Zetbox.App.Base.Identity, Zetbox.App.Calendar.Calendar_shared_w_Identity_RelationEntryNHibernateImpl> _Writers;
+		private NHibernateBSideCollectionWrapper<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Identity, Zetbox.App.Calendar.CalendarBook_shared_w_Identity_RelationEntryNHibernateImpl> _Writers;
 		// ignored, but required for Serialization
         private bool Writers_was_eagerLoaded = false;
 
@@ -789,42 +789,42 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnR
             return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.Identity>>(this.Writers);
         }
 
-public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnWriters_PostSetter;
+public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook> OnWriters_PostSetter;
 
-        public static event PropertyIsValidHandler<Zetbox.App.Calendar.Calendar> OnWriters_IsValid;
+        public static event PropertyIsValidHandler<Zetbox.App.Calendar.CalendarBook> OnWriters_IsValid;
 
         /// <summary>
         /// Gets a list of ViewModels that can create a new event. Multiple implementations can support different kind of events
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
-        [EventBasedMethod("OnGetNewEventViewModels_Calendar")]
+        [EventBasedMethod("OnGetNewEventViewModels_CalendarBook")]
         public virtual void GetNewEventViewModels(System.Object args)
         {
             // base.GetNewEventViewModels();
-            if (OnGetNewEventViewModels_Calendar != null)
+            if (OnGetNewEventViewModels_CalendarBook != null)
             {
-                OnGetNewEventViewModels_Calendar(this, args);
+                OnGetNewEventViewModels_CalendarBook(this, args);
             }
             else
             {
-                throw new NotImplementedException("No handler registered on method Calendar.GetNewEventViewModels");
+                throw new NotImplementedException("No handler registered on method CalendarBook.GetNewEventViewModels");
             }
         }
         public delegate void GetNewEventViewModels_Handler<T>(T obj, System.Object args);
-        public static event GetNewEventViewModels_Handler<Calendar> OnGetNewEventViewModels_Calendar;
+        public static event GetNewEventViewModels_Handler<CalendarBook> OnGetNewEventViewModels_CalendarBook;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
-		public static event CanExecMethodEventHandler<Calendar> OnGetNewEventViewModels_Calendar_CanExec;
+		public static event CanExecMethodEventHandler<CalendarBook> OnGetNewEventViewModels_CalendarBook_CanExec;
 
-        [EventBasedMethod("OnGetNewEventViewModels_Calendar_CanExec")]
+        [EventBasedMethod("OnGetNewEventViewModels_CalendarBook_CanExec")]
         public virtual bool GetNewEventViewModelsCanExec
         {
 			get 
 			{
 				var e = new MethodReturnEventArgs<bool>();
-				if (OnGetNewEventViewModels_Calendar_CanExec != null)
+				if (OnGetNewEventViewModels_CalendarBook_CanExec != null)
 				{
-					OnGetNewEventViewModels_Calendar_CanExec(this, e);
+					OnGetNewEventViewModels_CalendarBook_CanExec(this, e);
 				}
 				else
 				{
@@ -835,17 +835,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnW
         }
 
 		// CanExecReason
-		public static event CanExecReasonMethodEventHandler<Calendar> OnGetNewEventViewModels_Calendar_CanExecReason;
+		public static event CanExecReasonMethodEventHandler<CalendarBook> OnGetNewEventViewModels_CalendarBook_CanExecReason;
 
-        [EventBasedMethod("OnGetNewEventViewModels_Calendar_CanExecReason")]
+        [EventBasedMethod("OnGetNewEventViewModels_CalendarBook_CanExecReason")]
         public virtual string GetNewEventViewModelsCanExecReason
         {
 			get 
 			{
 				var e = new MethodReturnEventArgs<string>();
-				if (OnGetNewEventViewModels_Calendar_CanExecReason != null)
+				if (OnGetNewEventViewModels_CalendarBook_CanExecReason != null)
 				{
-					OnGetNewEventViewModels_Calendar_CanExecReason(this, e);
+					OnGetNewEventViewModels_CalendarBook_CanExecReason(this, e);
 				}
 				else
 				{
@@ -858,15 +858,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnW
 
         public override Type GetImplementedInterface()
         {
-            return typeof(Calendar);
+            return typeof(CalendarBook);
         }
 
         public override void ApplyChangesFrom(IPersistenceObject obj)
         {
             base.ApplyChangesFrom(obj);
-            var other = (Calendar)obj;
-            var otherImpl = (CalendarNHibernateImpl)obj;
-            var me = (Calendar)this;
+            var other = (CalendarBook)obj;
+            var otherImpl = (CalendarBookNHibernateImpl)obj;
+            var me = (CalendarBook)this;
 
             me.ChangedOn = other.ChangedOn;
             me.CreatedOn = other.CreatedOn;
@@ -1014,7 +1014,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnW
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorNHibernateImpl<Calendar, Zetbox.App.Base.Identity>(
+                    new PropertyDescriptorNHibernateImpl<CalendarBook, Zetbox.App.Base.Identity>(
                         lazyCtx,
                         new Guid("c74f0224-1302-4fc2-8629-837d7c96db34"),
                         "ChangedBy",
@@ -1023,7 +1023,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnW
                         (obj, val) => obj.ChangedBy = val,
 						obj => OnChangedBy_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<Calendar, DateTime>(
+                    new PropertyDescriptorNHibernateImpl<CalendarBook, DateTime>(
                         lazyCtx,
                         new Guid("eab5c36d-7583-4e2f-8907-989ea0de6944"),
                         "ChangedOn",
@@ -1032,7 +1032,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnW
                         (obj, val) => obj.ChangedOn = val,
 						obj => OnChangedOn_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<Calendar, Zetbox.App.Base.Identity>(
+                    new PropertyDescriptorNHibernateImpl<CalendarBook, Zetbox.App.Base.Identity>(
                         lazyCtx,
                         new Guid("d86a1fd0-5bb1-4ce9-bdcb-9516bb09a401"),
                         "CreatedBy",
@@ -1041,7 +1041,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnW
                         (obj, val) => obj.CreatedBy = val,
 						obj => OnCreatedBy_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<Calendar, DateTime>(
+                    new PropertyDescriptorNHibernateImpl<CalendarBook, DateTime>(
                         lazyCtx,
                         new Guid("cd5dfdf4-22ac-4a5d-831e-442f2a9349a5"),
                         "CreatedOn",
@@ -1050,7 +1050,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnW
                         (obj, val) => obj.CreatedOn = val,
 						obj => OnCreatedOn_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<Calendar, Guid>(
+                    new PropertyDescriptorNHibernateImpl<CalendarBook, Guid>(
                         lazyCtx,
                         new Guid("a14ab2a0-8621-42ed-81d0-b82e55621831"),
                         "ExportGuid",
@@ -1059,7 +1059,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnW
                         (obj, val) => obj.ExportGuid = val,
 						obj => OnExportGuid_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorNHibernateImpl<Calendar, ICollection<Zetbox.App.Base.Group>>(
+                    new PropertyDescriptorNHibernateImpl<CalendarBook, ICollection<Zetbox.App.Base.Group>>(
                         lazyCtx,
                         new Guid("5ae7dd37-9789-47a6-b679-3ccaecbbb75d"),
                         "GroupReaders",
@@ -1068,7 +1068,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnW
                         null, // lists are read-only properties
                         obj => OnGroupReaders_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorNHibernateImpl<Calendar, ICollection<Zetbox.App.Base.Group>>(
+                    new PropertyDescriptorNHibernateImpl<CalendarBook, ICollection<Zetbox.App.Base.Group>>(
                         lazyCtx,
                         new Guid("d960ba8e-1605-4a70-b950-4e12c4c1ae75"),
                         "GroupWriters",
@@ -1077,7 +1077,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnW
                         null, // lists are read-only properties
                         obj => OnGroupWriters_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<Calendar, string>(
+                    new PropertyDescriptorNHibernateImpl<CalendarBook, string>(
                         lazyCtx,
                         new Guid("e1647548-92ee-4fae-9155-faad7d7e9187"),
                         "Name",
@@ -1086,7 +1086,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnW
                         (obj, val) => obj.Name = val,
 						obj => OnName_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<Calendar, Zetbox.App.Base.Identity>(
+                    new PropertyDescriptorNHibernateImpl<CalendarBook, Zetbox.App.Base.Identity>(
                         lazyCtx,
                         new Guid("7e39185f-5826-481f-b0fd-bc0ffd1400ad"),
                         "Owner",
@@ -1095,7 +1095,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnW
                         (obj, val) => obj.Owner = val,
 						obj => OnOwner_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorNHibernateImpl<Calendar, ICollection<Zetbox.App.Base.Identity>>(
+                    new PropertyDescriptorNHibernateImpl<CalendarBook, ICollection<Zetbox.App.Base.Identity>>(
                         lazyCtx,
                         new Guid("ebd1fd99-f1c9-4260-832d-5ef5c48e7660"),
                         "Readers",
@@ -1104,7 +1104,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnW
                         null, // lists are read-only properties
                         obj => OnReaders_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorNHibernateImpl<Calendar, ICollection<Zetbox.App.Base.Identity>>(
+                    new PropertyDescriptorNHibernateImpl<CalendarBook, ICollection<Zetbox.App.Base.Identity>>(
                         lazyCtx,
                         new Guid("e52271a9-ca1a-486d-95c0-795a502af48e"),
                         "Writers",
@@ -1127,55 +1127,55 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnW
         #region Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
 
         [System.Diagnostics.DebuggerHidden()]
-        [EventBasedMethod("OnToString_Calendar")]
+        [EventBasedMethod("OnToString_CalendarBook")]
         public override string ToString()
         {
             MethodReturnEventArgs<string> e = new MethodReturnEventArgs<string>();
             e.Result = base.ToString();
-            if (OnToString_Calendar != null)
+            if (OnToString_CalendarBook != null)
             {
-                OnToString_Calendar(this, e);
+                OnToString_CalendarBook(this, e);
             }
             return e.Result;
         }
-        public static event ToStringHandler<Calendar> OnToString_Calendar;
+        public static event ToStringHandler<CalendarBook> OnToString_CalendarBook;
 
         [System.Diagnostics.DebuggerHidden()]
-        [EventBasedMethod("OnObjectIsValid_Calendar")]
+        [EventBasedMethod("OnObjectIsValid_CalendarBook")]
         protected override ObjectIsValidResult ObjectIsValid()
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
             var b = base.ObjectIsValid();
             e.IsValid = b.IsValid;
             e.Errors.AddRange(b.Errors);
-            if (OnObjectIsValid_Calendar != null)
+            if (OnObjectIsValid_CalendarBook != null)
             {
-                OnObjectIsValid_Calendar(this, e);
+                OnObjectIsValid_CalendarBook(this, e);
             }
             return new ObjectIsValidResult(e.IsValid, e.Errors);
         }
-        public static event ObjectIsValidHandler<Calendar> OnObjectIsValid_Calendar;
+        public static event ObjectIsValidHandler<CalendarBook> OnObjectIsValid_CalendarBook;
 
-        [EventBasedMethod("OnNotifyPreSave_Calendar")]
+        [EventBasedMethod("OnNotifyPreSave_CalendarBook")]
         public override void NotifyPreSave()
         {
             FetchChangedOnOrDefault();
             FetchCreatedOnOrDefault();
             FetchExportGuidOrDefault();
             base.NotifyPreSave();
-            if (OnNotifyPreSave_Calendar != null) OnNotifyPreSave_Calendar(this);
+            if (OnNotifyPreSave_CalendarBook != null) OnNotifyPreSave_CalendarBook(this);
         }
-        public static event ObjectEventHandler<Calendar> OnNotifyPreSave_Calendar;
+        public static event ObjectEventHandler<CalendarBook> OnNotifyPreSave_CalendarBook;
 
-        [EventBasedMethod("OnNotifyPostSave_Calendar")]
+        [EventBasedMethod("OnNotifyPostSave_CalendarBook")]
         public override void NotifyPostSave()
         {
             base.NotifyPostSave();
-            if (OnNotifyPostSave_Calendar != null) OnNotifyPostSave_Calendar(this);
+            if (OnNotifyPostSave_CalendarBook != null) OnNotifyPostSave_CalendarBook(this);
         }
-        public static event ObjectEventHandler<Calendar> OnNotifyPostSave_Calendar;
+        public static event ObjectEventHandler<CalendarBook> OnNotifyPostSave_CalendarBook;
 
-        [EventBasedMethod("OnNotifyCreated_Calendar")]
+        [EventBasedMethod("OnNotifyCreated_CalendarBook")]
         public override void NotifyCreated()
         {
             SetNotInitializedProperty("ChangedBy");
@@ -1183,15 +1183,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnW
             SetNotInitializedProperty("Name");
             SetNotInitializedProperty("Owner");
             base.NotifyCreated();
-            if (OnNotifyCreated_Calendar != null) OnNotifyCreated_Calendar(this);
+            if (OnNotifyCreated_CalendarBook != null) OnNotifyCreated_CalendarBook(this);
         }
-        public static event ObjectEventHandler<Calendar> OnNotifyCreated_Calendar;
+        public static event ObjectEventHandler<CalendarBook> OnNotifyCreated_CalendarBook;
 
-        [EventBasedMethod("OnNotifyDeleting_Calendar")]
+        [EventBasedMethod("OnNotifyDeleting_CalendarBook")]
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-            if (OnNotifyDeleting_Calendar != null) OnNotifyDeleting_Calendar(this);
+            if (OnNotifyDeleting_CalendarBook != null) OnNotifyDeleting_CalendarBook(this);
 
             // FK_Calendar_has_Owner
             if (Owner != null) {
@@ -1208,8 +1208,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnW
                 ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
             }
-            // should fetch && remember parent for Event_of_Calendar_RelationEntry
-            // should fetch && remember parent for WorkScheduleSyncProvider_for_Calendar_RelationEntry
+            // should fetch && remember parent for Event_of_CalendarBook_RelationEntry
+            // should fetch && remember parent for WorkScheduleSyncProvider_for_CalendarBook_RelationEntry
 
             GroupReaders.Clear();
             GroupWriters.Clear();
@@ -1219,25 +1219,25 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnW
             CreatedBy = null;
             Owner = null;
         }
-        public static event ObjectEventHandler<Calendar> OnNotifyDeleting_Calendar;
+        public static event ObjectEventHandler<CalendarBook> OnNotifyDeleting_CalendarBook;
 
         #endregion // Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
 
-        public class CalendarProxy
+        public class CalendarBookProxy
             : IProxyObject, ISortKey<int>
         {
-            public CalendarProxy()
+            public CalendarBookProxy()
             {
-                GroupReaders = new Collection<Zetbox.App.Calendar.Calendar_shared_r_Group_RelationEntryNHibernateImpl.Calendar_shared_r_Group_RelationEntryProxy>();
-                GroupWriters = new Collection<Zetbox.App.Calendar.Calendar_shared_w_Group_RelationEntryNHibernateImpl.Calendar_shared_w_Group_RelationEntryProxy>();
-                Readers = new Collection<Zetbox.App.Calendar.Calendar_shared_r_Identity_RelationEntryNHibernateImpl.Calendar_shared_r_Identity_RelationEntryProxy>();
-                Writers = new Collection<Zetbox.App.Calendar.Calendar_shared_w_Identity_RelationEntryNHibernateImpl.Calendar_shared_w_Identity_RelationEntryProxy>();
+                GroupReaders = new Collection<Zetbox.App.Calendar.CalendarBook_shared_r_Group_RelationEntryNHibernateImpl.CalendarBook_shared_r_Group_RelationEntryProxy>();
+                GroupWriters = new Collection<Zetbox.App.Calendar.CalendarBook_shared_w_Group_RelationEntryNHibernateImpl.CalendarBook_shared_w_Group_RelationEntryProxy>();
+                Readers = new Collection<Zetbox.App.Calendar.CalendarBook_shared_r_Identity_RelationEntryNHibernateImpl.CalendarBook_shared_r_Identity_RelationEntryProxy>();
+                Writers = new Collection<Zetbox.App.Calendar.CalendarBook_shared_w_Identity_RelationEntryNHibernateImpl.CalendarBook_shared_w_Identity_RelationEntryProxy>();
             }
 
             public virtual int ID { get; set; }
 
-            public virtual Type ZetboxWrapper { get { return typeof(CalendarNHibernateImpl); } }
-            public virtual Type ZetboxProxy { get { return typeof(CalendarProxy); } }
+            public virtual Type ZetboxWrapper { get { return typeof(CalendarBookNHibernateImpl); } }
+            public virtual Type ZetboxProxy { get { return typeof(CalendarBookProxy); } }
 
             public virtual Zetbox.App.Base.IdentityNHibernateImpl.IdentityProxy ChangedBy { get; set; }
 
@@ -1249,19 +1249,19 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnW
 
             public virtual Guid ExportGuid { get; set; }
 
-            public virtual ICollection<Zetbox.App.Calendar.Calendar_shared_r_Group_RelationEntryNHibernateImpl.Calendar_shared_r_Group_RelationEntryProxy> GroupReaders { get; set; }
+            public virtual ICollection<Zetbox.App.Calendar.CalendarBook_shared_r_Group_RelationEntryNHibernateImpl.CalendarBook_shared_r_Group_RelationEntryProxy> GroupReaders { get; set; }
 
-            public virtual ICollection<Zetbox.App.Calendar.Calendar_shared_w_Group_RelationEntryNHibernateImpl.Calendar_shared_w_Group_RelationEntryProxy> GroupWriters { get; set; }
+            public virtual ICollection<Zetbox.App.Calendar.CalendarBook_shared_w_Group_RelationEntryNHibernateImpl.CalendarBook_shared_w_Group_RelationEntryProxy> GroupWriters { get; set; }
 
             public virtual string Name { get; set; }
 
             public virtual Zetbox.App.Base.IdentityNHibernateImpl.IdentityProxy Owner { get; set; }
 
-            public virtual ICollection<Zetbox.App.Calendar.Calendar_shared_r_Identity_RelationEntryNHibernateImpl.Calendar_shared_r_Identity_RelationEntryProxy> Readers { get; set; }
+            public virtual ICollection<Zetbox.App.Calendar.CalendarBook_shared_r_Identity_RelationEntryNHibernateImpl.CalendarBook_shared_r_Identity_RelationEntryProxy> Readers { get; set; }
 
-            public virtual ICollection<Zetbox.App.Calendar.Calendar_shared_w_Identity_RelationEntryNHibernateImpl.Calendar_shared_w_Identity_RelationEntryProxy> Writers { get; set; }
+            public virtual ICollection<Zetbox.App.Calendar.CalendarBook_shared_w_Identity_RelationEntryNHibernateImpl.CalendarBook_shared_w_Identity_RelationEntryProxy> Writers { get; set; }
 
-            public virtual ICollection<Calendar_RightsNHibernateImpl> SecurityRightsCollectionImpl { get; set; }
+            public virtual ICollection<CalendarBook_RightsNHibernateImpl> SecurityRightsCollectionImpl { get; set; }
 
         }
 
@@ -1379,9 +1379,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.Calendar> OnW
 
     }
 
-        public class Calendar_RightsNHibernateImpl
+        public class CalendarBook_RightsNHibernateImpl
         {
-            public Calendar_RightsNHibernateImpl()
+            public CalendarBook_RightsNHibernateImpl()
             {
             }
 

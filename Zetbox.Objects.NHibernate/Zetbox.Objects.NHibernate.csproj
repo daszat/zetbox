@@ -149,7 +149,7 @@
     <Compile Include="BoolParameter.NHibernate.Designer.cs" />
     <Compile Include="BoolProperty.NHibernate.Designer.cs" />
     <Compile Include="CalculatedObjectReferenceProperty.NHibernate.Designer.cs" />
-    <Compile Include="Calendar.NHibernate.Designer.cs" />
+    <Compile Include="CalendarBook.NHibernate.Designer.cs" />
     <Compile Include="ClientReadOnlyConstraint.NHibernate.Designer.cs" />
     <Compile Include="CLRObjectParameter.NHibernate.Designer.cs" />
     <Compile Include="CommonWorkScheduleRule.NHibernate.Designer.cs" />

@@ -307,9 +307,9 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CalendarEfImpl">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.CalendarEfImpl)">
-	    <MappingFragment StoreEntitySet="Calendar">
+    <EntitySetMapping Name="CalendarBookEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.CalendarBookEfImpl)">
+	    <MappingFragment StoreEntitySet="CalendarBook">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
@@ -318,20 +318,20 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Calendar_Rights">
-      <EntityTypeMapping TypeName="Model.Calendar_Rights">
-        <MappingFragment StoreEntitySet="Calendar_Rights">
+    <EntitySetMapping Name="CalendarBook_Rights">
+      <EntityTypeMapping TypeName="Model.CalendarBook_Rights">
+        <MappingFragment StoreEntitySet="CalendarBook_Rights">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Identity" ColumnName="Identity" />
           <ScalarProperty Name="Right" ColumnName="Right" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="FK_Calendars_Rights" TypeName="Model.FK_Calendars_Rights" StoreEntitySet="Calendar_Rights">
-      <EndProperty Name="Calendar">
+    <AssociationSetMapping Name="FK_CalendarBooks_Rights" TypeName="Model.FK_CalendarBooks_Rights" StoreEntitySet="CalendarBook_Rights">
+      <EndProperty Name="CalendarBook">
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
-      <EndProperty Name="Calendar_Rights">
+      <EndProperty Name="CalendarBook_Rights">
         <ScalarProperty Name="ID" ColumnName="ID" />
         <ScalarProperty Name="Identity" ColumnName="Identity" />
       </EndProperty>
@@ -1970,13 +1970,13 @@
 
     <!--
     Relation: FK_Calendar_shared_r_GroupReaders
-    A: ZeroOrMore Calendar as Calendar
+    A: ZeroOrMore CalendarBook as Calendar
     B: ZeroOrMore Group as GroupReaders
     Preferred Storage: Separate
     -->
-    <EntitySetMapping Name="Calendar_shared_r_Group_RelationEntryEfImpl">
-      <EntityTypeMapping TypeName="Model.Calendar_shared_r_Group_RelationEntryEfImpl">
-        <MappingFragment StoreEntitySet="Calendar_shared_r_Group_RelationEntry">
+    <EntitySetMapping Name="CalendarBook_shared_r_Group_RelationEntryEfImpl">
+      <EntityTypeMapping TypeName="Model.CalendarBook_shared_r_Group_RelationEntryEfImpl">
+        <MappingFragment StoreEntitySet="CalendarBook_shared_r_Group_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
 		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
         </MappingFragment>
@@ -1985,7 +1985,7 @@
     <!-- A to CollectionEntry -->
     <AssociationSetMapping Name="FK_Calendar_shared_r_GroupReaders_A"
                            TypeName="Model.FK_Calendar_shared_r_GroupReaders_A"
-                           StoreEntitySet="Calendar_shared_r_Group_RelationEntry" >
+                           StoreEntitySet="CalendarBook_shared_r_Group_RelationEntry" >
       <EndProperty Name="Calendar">
         <ScalarProperty Name="ID" ColumnName="fk_Calendar"/>
       </EndProperty>
@@ -1997,7 +1997,7 @@
     <!-- B to CollectionEntry -->
     <AssociationSetMapping Name="FK_Calendar_shared_r_GroupReaders_B"
                            TypeName="Model.FK_Calendar_shared_r_GroupReaders_B"
-                           StoreEntitySet="Calendar_shared_r_Group_RelationEntry" >
+                           StoreEntitySet="CalendarBook_shared_r_Group_RelationEntry" >
       <EndProperty Name="GroupReaders">
         <ScalarProperty Name="ID" ColumnName="fk_GroupReaders"/>
       </EndProperty>
@@ -2009,13 +2009,13 @@
 
     <!--
     Relation: FK_Calendar_shared_r_Readers
-    A: ZeroOrMore Calendar as Calendar
+    A: ZeroOrMore CalendarBook as Calendar
     B: ZeroOrMore Identity as Readers
     Preferred Storage: Separate
     -->
-    <EntitySetMapping Name="Calendar_shared_r_Identity_RelationEntryEfImpl">
-      <EntityTypeMapping TypeName="Model.Calendar_shared_r_Identity_RelationEntryEfImpl">
-        <MappingFragment StoreEntitySet="Calendar_shared_r_Identity_RelationEntry">
+    <EntitySetMapping Name="CalendarBook_shared_r_Identity_RelationEntryEfImpl">
+      <EntityTypeMapping TypeName="Model.CalendarBook_shared_r_Identity_RelationEntryEfImpl">
+        <MappingFragment StoreEntitySet="CalendarBook_shared_r_Identity_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -2023,7 +2023,7 @@
     <!-- A to CollectionEntry -->
     <AssociationSetMapping Name="FK_Calendar_shared_r_Readers_A"
                            TypeName="Model.FK_Calendar_shared_r_Readers_A"
-                           StoreEntitySet="Calendar_shared_r_Identity_RelationEntry" >
+                           StoreEntitySet="CalendarBook_shared_r_Identity_RelationEntry" >
       <EndProperty Name="Calendar">
         <ScalarProperty Name="ID" ColumnName="fk_Calendar"/>
       </EndProperty>
@@ -2035,7 +2035,7 @@
     <!-- B to CollectionEntry -->
     <AssociationSetMapping Name="FK_Calendar_shared_r_Readers_B"
                            TypeName="Model.FK_Calendar_shared_r_Readers_B"
-                           StoreEntitySet="Calendar_shared_r_Identity_RelationEntry" >
+                           StoreEntitySet="CalendarBook_shared_r_Identity_RelationEntry" >
       <EndProperty Name="Readers">
         <ScalarProperty Name="ID" ColumnName="fk_Readers"/>
       </EndProperty>
@@ -2047,13 +2047,13 @@
 
     <!--
     Relation: FK_Calendar_shared_w_GroupWriters
-    A: ZeroOrMore Calendar as Calendar
+    A: ZeroOrMore CalendarBook as Calendar
     B: ZeroOrMore Group as GroupWriters
     Preferred Storage: Separate
     -->
-    <EntitySetMapping Name="Calendar_shared_w_Group_RelationEntryEfImpl">
-      <EntityTypeMapping TypeName="Model.Calendar_shared_w_Group_RelationEntryEfImpl">
-        <MappingFragment StoreEntitySet="Calendar_shared_w_Group_RelationEntry">
+    <EntitySetMapping Name="CalendarBook_shared_w_Group_RelationEntryEfImpl">
+      <EntityTypeMapping TypeName="Model.CalendarBook_shared_w_Group_RelationEntryEfImpl">
+        <MappingFragment StoreEntitySet="CalendarBook_shared_w_Group_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
 		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
         </MappingFragment>
@@ -2062,7 +2062,7 @@
     <!-- A to CollectionEntry -->
     <AssociationSetMapping Name="FK_Calendar_shared_w_GroupWriters_A"
                            TypeName="Model.FK_Calendar_shared_w_GroupWriters_A"
-                           StoreEntitySet="Calendar_shared_w_Group_RelationEntry" >
+                           StoreEntitySet="CalendarBook_shared_w_Group_RelationEntry" >
       <EndProperty Name="Calendar">
         <ScalarProperty Name="ID" ColumnName="fk_Calendar"/>
       </EndProperty>
@@ -2074,7 +2074,7 @@
     <!-- B to CollectionEntry -->
     <AssociationSetMapping Name="FK_Calendar_shared_w_GroupWriters_B"
                            TypeName="Model.FK_Calendar_shared_w_GroupWriters_B"
-                           StoreEntitySet="Calendar_shared_w_Group_RelationEntry" >
+                           StoreEntitySet="CalendarBook_shared_w_Group_RelationEntry" >
       <EndProperty Name="GroupWriters">
         <ScalarProperty Name="ID" ColumnName="fk_GroupWriters"/>
       </EndProperty>
@@ -2086,13 +2086,13 @@
 
     <!--
     Relation: FK_Calendar_shared_w_Writers
-    A: ZeroOrMore Calendar as Calendar
+    A: ZeroOrMore CalendarBook as Calendar
     B: ZeroOrMore Identity as Writers
     Preferred Storage: Separate
     -->
-    <EntitySetMapping Name="Calendar_shared_w_Identity_RelationEntryEfImpl">
-      <EntityTypeMapping TypeName="Model.Calendar_shared_w_Identity_RelationEntryEfImpl">
-        <MappingFragment StoreEntitySet="Calendar_shared_w_Identity_RelationEntry">
+    <EntitySetMapping Name="CalendarBook_shared_w_Identity_RelationEntryEfImpl">
+      <EntityTypeMapping TypeName="Model.CalendarBook_shared_w_Identity_RelationEntryEfImpl">
+        <MappingFragment StoreEntitySet="CalendarBook_shared_w_Identity_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -2100,7 +2100,7 @@
     <!-- A to CollectionEntry -->
     <AssociationSetMapping Name="FK_Calendar_shared_w_Writers_A"
                            TypeName="Model.FK_Calendar_shared_w_Writers_A"
-                           StoreEntitySet="Calendar_shared_w_Identity_RelationEntry" >
+                           StoreEntitySet="CalendarBook_shared_w_Identity_RelationEntry" >
       <EndProperty Name="Calendar">
         <ScalarProperty Name="ID" ColumnName="fk_Calendar"/>
       </EndProperty>
@@ -2112,7 +2112,7 @@
     <!-- B to CollectionEntry -->
     <AssociationSetMapping Name="FK_Calendar_shared_w_Writers_B"
                            TypeName="Model.FK_Calendar_shared_w_Writers_B"
-                           StoreEntitySet="Calendar_shared_w_Identity_RelationEntry" >
+                           StoreEntitySet="CalendarBook_shared_w_Identity_RelationEntry" >
       <EndProperty Name="Writers">
         <ScalarProperty Name="ID" ColumnName="fk_Writers"/>
       </EndProperty>
@@ -3236,13 +3236,13 @@
     </AssociationSetMapping>
     <!--
     Relation: FK_Calendar_has_Owner
-    A: ZeroOrMore Calendar as Calendar
+    A: ZeroOrMore CalendarBook as Calendar
     B: One Identity as Owner
     Preferred Storage: MergeIntoA
     -->
     <AssociationSetMapping Name="FK_Calendar_has_Owner"
                            TypeName="Model.FK_Calendar_has_Owner"
-                           StoreEntitySet="Calendar" >
+                           StoreEntitySet="CalendarBook" >
       <EndProperty Name="Owner">
         <ScalarProperty Name="ID" ColumnName="fk_Owner"/>
       </EndProperty>
@@ -3253,13 +3253,13 @@
     </AssociationSetMapping>
     <!--
     Relation: FK_Calendar_was_ChangedBy
-    A: ZeroOrMore Calendar as Calendar
+    A: ZeroOrMore CalendarBook as Calendar
     B: ZeroOrOne Identity as ChangedBy
     Preferred Storage: MergeIntoA
     -->
     <AssociationSetMapping Name="FK_Calendar_was_ChangedBy"
                            TypeName="Model.FK_Calendar_was_ChangedBy"
-                           StoreEntitySet="Calendar" >
+                           StoreEntitySet="CalendarBook" >
       <EndProperty Name="ChangedBy">
         <ScalarProperty Name="ID" ColumnName="fk_ChangedBy"/>
       </EndProperty>
@@ -3270,13 +3270,13 @@
     </AssociationSetMapping>
     <!--
     Relation: FK_Calendar_was_CreatedBy
-    A: ZeroOrMore Calendar as Calendar
+    A: ZeroOrMore CalendarBook as Calendar
     B: ZeroOrOne Identity as CreatedBy
     Preferred Storage: MergeIntoA
     -->
     <AssociationSetMapping Name="FK_Calendar_was_CreatedBy"
                            TypeName="Model.FK_Calendar_was_CreatedBy"
-                           StoreEntitySet="Calendar" >
+                           StoreEntitySet="CalendarBook" >
       <EndProperty Name="CreatedBy">
         <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
       </EndProperty>
@@ -3764,7 +3764,7 @@
     <!--
     Relation: FK_Event_of_Calendar
     A: ZeroOrMore Event as Event
-    B: One Calendar as Calendar
+    B: One CalendarBook as Calendar
     Preferred Storage: MergeIntoA
     -->
     <AssociationSetMapping Name="FK_Event_of_Calendar"
@@ -5566,7 +5566,7 @@
     <!--
     Relation: FK_SyncAccount_for_Calendar
     A: ZeroOrMore WorkScheduleSyncProvider as SyncAccount
-    B: One Calendar as Calendar
+    B: One CalendarBook as Calendar
     Preferred Storage: MergeIntoA
     -->
     <AssociationSetMapping Name="FK_SyncAccount_for_Calendar"

@@ -23,7 +23,7 @@ using Zetbox.API;
 
     public class NewEventViewModelsArgs
     {
-        public NewEventViewModelsArgs(IZetboxContext ctx, IViewModelFactory viewModelFactory, ViewModel parent, cal.Calendar calendar, DateTime selectedStartDate, bool isAllDay)
+        public NewEventViewModelsArgs(IZetboxContext ctx, IViewModelFactory viewModelFactory, ViewModel parent, cal.CalendarBook calendar, DateTime selectedStartDate, bool isAllDay)
         {
             this.DataContext = ctx;
             this.ViewModelFactory = viewModelFactory;
@@ -40,7 +40,7 @@ using Zetbox.API;
         public ViewModel Parent { get; private set; }
         public DateTime SelectedStartDate { get; private set; }
         public bool IsAllDay { get; private set; }
-        public cal.Calendar Calendar { get; private set; }
+        public cal.CalendarBook Calendar { get; private set; }
 
         public List<IEventInputViewModel> ViewModels { get; private set; }
 

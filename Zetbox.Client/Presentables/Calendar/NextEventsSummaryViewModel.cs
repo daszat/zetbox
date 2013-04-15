@@ -134,7 +134,7 @@ namespace Zetbox.Client.Presentables.Calendar
         private ZbTask<List<int>> FetchCalendar()
         {
             var myCalendarsTask = DataContext
-                .GetQuery<Calendar>().Where(i => i.Owner == CurrentIdentity)
+                .GetQuery<CalendarBook>().Where(i => i.Owner == CurrentIdentity)
                 .ToListAsync();
             var configTask = GetSavedConfigAsync();
             return new ZbTask<List<int>>(new ZbTask[] { myCalendarsTask, configTask })

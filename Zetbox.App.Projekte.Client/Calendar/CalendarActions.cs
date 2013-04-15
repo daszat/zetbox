@@ -34,7 +34,7 @@ namespace Zetbox.App.Calendar
         }
 
         [Invocation]
-        public static void NotifyCreated(Calendar obj)
+        public static void NotifyCreated(CalendarBook obj)
         {
             var ctx = obj.Context;
             // sets the current identity as the default owner
@@ -43,7 +43,7 @@ namespace Zetbox.App.Calendar
         }
 
         [Invocation]
-        public static void GetNewEventViewModels(Calendar obj, object /* I'm so sorry, Zetbox.Objects.dll cannot use custom classes */ args)
+        public static void GetNewEventViewModels(CalendarBook obj, object /* I'm so sorry, Zetbox.Objects.dll cannot use custom classes */ args)
         {
             var eventArgs = (NewEventViewModelsArgs)args;
             eventArgs.ViewModels.Insert(0, eventArgs.ViewModelFactory.CreateViewModel<EventInputViewModel.Factory>()

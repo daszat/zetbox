@@ -449,16 +449,16 @@ namespace Zetbox.App.Base
 namespace Zetbox.App.Calendar
 {
     // BEGIN Zetbox.Generator.Templates.CollectionEntries.RelationEntry
-    [System.Diagnostics.DebuggerDisplay("Calendar_shared_r_Group_RelationEntryMemoryImpl")]
-    public class Calendar_shared_r_Group_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Calendar.Calendar, Zetbox.App.Calendar.CalendarMemoryImpl, Zetbox.App.Base.Group, Zetbox.App.Base.GroupMemoryImpl>, Calendar_shared_r_Group_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
+    [System.Diagnostics.DebuggerDisplay("CalendarBook_shared_r_Group_RelationEntryMemoryImpl")]
+    public class CalendarBook_shared_r_Group_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Calendar.CalendarBookMemoryImpl, Zetbox.App.Base.Group, Zetbox.App.Base.GroupMemoryImpl>, CalendarBook_shared_r_Group_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
         [Obsolete]
-        public Calendar_shared_r_Group_RelationEntryMemoryImpl()
+        public CalendarBook_shared_r_Group_RelationEntryMemoryImpl()
             : base(null)
         {
         }
 
-        public Calendar_shared_r_Group_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
+        public CalendarBook_shared_r_Group_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }
@@ -541,7 +541,7 @@ namespace Zetbox.App.Calendar
             set
             {
                 // settor will do checking for us
-                A = (Zetbox.App.Calendar.Calendar)value;
+                A = (Zetbox.App.Calendar.CalendarBook)value;
             }
         }
 
@@ -566,7 +566,7 @@ namespace Zetbox.App.Calendar
         /// </summary>
             // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Zetbox.App.Calendar.Calendar; moduleNamespace=Zetbox.App.Calendar;
+        // referencedInterface=Zetbox.App.Calendar.CalendarBook; moduleNamespace=Zetbox.App.Calendar;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable; does not call events
@@ -575,10 +575,10 @@ namespace Zetbox.App.Calendar
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
-        public Zetbox.App.Calendar.Calendar A
+        public Zetbox.App.Calendar.CalendarBook A
         {
             get { return AImpl; }
-            set { AImpl = (Zetbox.App.Calendar.CalendarMemoryImpl)value; }
+            set { AImpl = (Zetbox.App.Calendar.CalendarBookMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
@@ -599,15 +599,15 @@ namespace Zetbox.App.Calendar
 
         private Guid? _fk_guid_A = null;
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Calendar> _triggerFetchATask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Calendar> TriggerFetchAAsync()
+        Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.CalendarBook> _triggerFetchATask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.CalendarBook> TriggerFetchAAsync()
         {
             if (_triggerFetchATask != null) return _triggerFetchATask;
 
             if (_fk_A.HasValue)
-                _triggerFetchATask = Context.FindAsync<Zetbox.App.Calendar.Calendar>(_fk_A.Value);
+                _triggerFetchATask = Context.FindAsync<Zetbox.App.Calendar.CalendarBook>(_fk_A.Value);
             else
-                _triggerFetchATask = new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Calendar>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchATask = new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.CalendarBook>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
 
             return _triggerFetchATask;
@@ -615,11 +615,11 @@ namespace Zetbox.App.Calendar
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        internal Zetbox.App.Calendar.CalendarMemoryImpl AImpl
+        internal Zetbox.App.Calendar.CalendarBookMemoryImpl AImpl
         {
             get
             {
-                return (Zetbox.App.Calendar.CalendarMemoryImpl)TriggerFetchAAsync().Result;
+                return (Zetbox.App.Calendar.CalendarBookMemoryImpl)TriggerFetchAAsync().Result;
             }
             set
             {
@@ -803,14 +803,14 @@ namespace Zetbox.App.Calendar
 
         public override Type GetImplementedInterface()
         {
-            return typeof(Calendar_shared_r_Group_RelationEntry);
+            return typeof(CalendarBook_shared_r_Group_RelationEntry);
         }
 
         public override void ApplyChangesFrom(IPersistenceObject obj)
         {
             base.ApplyChangesFrom(obj);
-            var other = (Calendar_shared_r_Group_RelationEntryMemoryImpl)obj;
-            var me = (Calendar_shared_r_Group_RelationEntryMemoryImpl)this;
+            var other = (CalendarBook_shared_r_Group_RelationEntryMemoryImpl)obj;
+            var me = (CalendarBook_shared_r_Group_RelationEntryMemoryImpl)this;
 
             me._fk_A = other._fk_A;
             me._fk_B = other._fk_B;
@@ -824,10 +824,10 @@ namespace Zetbox.App.Calendar
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                AImpl = (Zetbox.App.Calendar.CalendarMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Calendar.Calendar>(_fk_guid_A.Value);
+                AImpl = (Zetbox.App.Calendar.CalendarBookMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Calendar.CalendarBook>(_fk_guid_A.Value);
             else
             if (_fk_A.HasValue)
-                AImpl = (Zetbox.App.Calendar.CalendarMemoryImpl)Context.Find<Zetbox.App.Calendar.Calendar>(_fk_A.Value);
+                AImpl = (Zetbox.App.Calendar.CalendarBookMemoryImpl)Context.Find<Zetbox.App.Calendar.CalendarBook>(_fk_A.Value);
             else
                 AImpl = null;
 
@@ -882,16 +882,16 @@ namespace Zetbox.App.Calendar
 namespace Zetbox.App.Calendar
 {
     // BEGIN Zetbox.Generator.Templates.CollectionEntries.RelationEntry
-    [System.Diagnostics.DebuggerDisplay("Calendar_shared_r_Identity_RelationEntryMemoryImpl")]
-    public class Calendar_shared_r_Identity_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Calendar.Calendar, Zetbox.App.Calendar.CalendarMemoryImpl, Zetbox.App.Base.Identity, Zetbox.App.Base.IdentityMemoryImpl>, Calendar_shared_r_Identity_RelationEntry
+    [System.Diagnostics.DebuggerDisplay("CalendarBook_shared_r_Identity_RelationEntryMemoryImpl")]
+    public class CalendarBook_shared_r_Identity_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Calendar.CalendarBookMemoryImpl, Zetbox.App.Base.Identity, Zetbox.App.Base.IdentityMemoryImpl>, CalendarBook_shared_r_Identity_RelationEntry
     {
         [Obsolete]
-        public Calendar_shared_r_Identity_RelationEntryMemoryImpl()
+        public CalendarBook_shared_r_Identity_RelationEntryMemoryImpl()
             : base(null)
         {
         }
 
-        public Calendar_shared_r_Identity_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
+        public CalendarBook_shared_r_Identity_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }
@@ -940,7 +940,7 @@ namespace Zetbox.App.Calendar
             set
             {
                 // settor will do checking for us
-                A = (Zetbox.App.Calendar.Calendar)value;
+                A = (Zetbox.App.Calendar.CalendarBook)value;
             }
         }
 
@@ -965,7 +965,7 @@ namespace Zetbox.App.Calendar
         /// </summary>
             // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Zetbox.App.Calendar.Calendar; moduleNamespace=Zetbox.App.Calendar;
+        // referencedInterface=Zetbox.App.Calendar.CalendarBook; moduleNamespace=Zetbox.App.Calendar;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable; does not call events
@@ -974,10 +974,10 @@ namespace Zetbox.App.Calendar
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
-        public Zetbox.App.Calendar.Calendar A
+        public Zetbox.App.Calendar.CalendarBook A
         {
             get { return AImpl; }
-            set { AImpl = (Zetbox.App.Calendar.CalendarMemoryImpl)value; }
+            set { AImpl = (Zetbox.App.Calendar.CalendarBookMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
@@ -997,15 +997,15 @@ namespace Zetbox.App.Calendar
         }
 
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Calendar> _triggerFetchATask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Calendar> TriggerFetchAAsync()
+        Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.CalendarBook> _triggerFetchATask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.CalendarBook> TriggerFetchAAsync()
         {
             if (_triggerFetchATask != null) return _triggerFetchATask;
 
             if (_fk_A.HasValue)
-                _triggerFetchATask = Context.FindAsync<Zetbox.App.Calendar.Calendar>(_fk_A.Value);
+                _triggerFetchATask = Context.FindAsync<Zetbox.App.Calendar.CalendarBook>(_fk_A.Value);
             else
-                _triggerFetchATask = new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Calendar>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchATask = new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.CalendarBook>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
 
             return _triggerFetchATask;
@@ -1013,11 +1013,11 @@ namespace Zetbox.App.Calendar
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        internal Zetbox.App.Calendar.CalendarMemoryImpl AImpl
+        internal Zetbox.App.Calendar.CalendarBookMemoryImpl AImpl
         {
             get
             {
-                return (Zetbox.App.Calendar.CalendarMemoryImpl)TriggerFetchAAsync().Result;
+                return (Zetbox.App.Calendar.CalendarBookMemoryImpl)TriggerFetchAAsync().Result;
             }
             set
             {
@@ -1172,14 +1172,14 @@ namespace Zetbox.App.Calendar
 
         public override Type GetImplementedInterface()
         {
-            return typeof(Calendar_shared_r_Identity_RelationEntry);
+            return typeof(CalendarBook_shared_r_Identity_RelationEntry);
         }
 
         public override void ApplyChangesFrom(IPersistenceObject obj)
         {
             base.ApplyChangesFrom(obj);
-            var other = (Calendar_shared_r_Identity_RelationEntryMemoryImpl)obj;
-            var me = (Calendar_shared_r_Identity_RelationEntryMemoryImpl)this;
+            var other = (CalendarBook_shared_r_Identity_RelationEntryMemoryImpl)obj;
+            var me = (CalendarBook_shared_r_Identity_RelationEntryMemoryImpl)this;
 
             me._fk_A = other._fk_A;
             me._fk_B = other._fk_B;
@@ -1193,7 +1193,7 @@ namespace Zetbox.App.Calendar
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_A.HasValue)
-                AImpl = (Zetbox.App.Calendar.CalendarMemoryImpl)Context.Find<Zetbox.App.Calendar.Calendar>(_fk_A.Value);
+                AImpl = (Zetbox.App.Calendar.CalendarBookMemoryImpl)Context.Find<Zetbox.App.Calendar.CalendarBook>(_fk_A.Value);
             else
                 AImpl = null;
 
@@ -1245,16 +1245,16 @@ namespace Zetbox.App.Calendar
 namespace Zetbox.App.Calendar
 {
     // BEGIN Zetbox.Generator.Templates.CollectionEntries.RelationEntry
-    [System.Diagnostics.DebuggerDisplay("Calendar_shared_w_Group_RelationEntryMemoryImpl")]
-    public class Calendar_shared_w_Group_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Calendar.Calendar, Zetbox.App.Calendar.CalendarMemoryImpl, Zetbox.App.Base.Group, Zetbox.App.Base.GroupMemoryImpl>, Calendar_shared_w_Group_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
+    [System.Diagnostics.DebuggerDisplay("CalendarBook_shared_w_Group_RelationEntryMemoryImpl")]
+    public class CalendarBook_shared_w_Group_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Calendar.CalendarBookMemoryImpl, Zetbox.App.Base.Group, Zetbox.App.Base.GroupMemoryImpl>, CalendarBook_shared_w_Group_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
         [Obsolete]
-        public Calendar_shared_w_Group_RelationEntryMemoryImpl()
+        public CalendarBook_shared_w_Group_RelationEntryMemoryImpl()
             : base(null)
         {
         }
 
-        public Calendar_shared_w_Group_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
+        public CalendarBook_shared_w_Group_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }
@@ -1337,7 +1337,7 @@ namespace Zetbox.App.Calendar
             set
             {
                 // settor will do checking for us
-                A = (Zetbox.App.Calendar.Calendar)value;
+                A = (Zetbox.App.Calendar.CalendarBook)value;
             }
         }
 
@@ -1362,7 +1362,7 @@ namespace Zetbox.App.Calendar
         /// </summary>
             // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Zetbox.App.Calendar.Calendar; moduleNamespace=Zetbox.App.Calendar;
+        // referencedInterface=Zetbox.App.Calendar.CalendarBook; moduleNamespace=Zetbox.App.Calendar;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable; does not call events
@@ -1371,10 +1371,10 @@ namespace Zetbox.App.Calendar
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
-        public Zetbox.App.Calendar.Calendar A
+        public Zetbox.App.Calendar.CalendarBook A
         {
             get { return AImpl; }
-            set { AImpl = (Zetbox.App.Calendar.CalendarMemoryImpl)value; }
+            set { AImpl = (Zetbox.App.Calendar.CalendarBookMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
@@ -1395,15 +1395,15 @@ namespace Zetbox.App.Calendar
 
         private Guid? _fk_guid_A = null;
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Calendar> _triggerFetchATask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Calendar> TriggerFetchAAsync()
+        Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.CalendarBook> _triggerFetchATask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.CalendarBook> TriggerFetchAAsync()
         {
             if (_triggerFetchATask != null) return _triggerFetchATask;
 
             if (_fk_A.HasValue)
-                _triggerFetchATask = Context.FindAsync<Zetbox.App.Calendar.Calendar>(_fk_A.Value);
+                _triggerFetchATask = Context.FindAsync<Zetbox.App.Calendar.CalendarBook>(_fk_A.Value);
             else
-                _triggerFetchATask = new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Calendar>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchATask = new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.CalendarBook>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
 
             return _triggerFetchATask;
@@ -1411,11 +1411,11 @@ namespace Zetbox.App.Calendar
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        internal Zetbox.App.Calendar.CalendarMemoryImpl AImpl
+        internal Zetbox.App.Calendar.CalendarBookMemoryImpl AImpl
         {
             get
             {
-                return (Zetbox.App.Calendar.CalendarMemoryImpl)TriggerFetchAAsync().Result;
+                return (Zetbox.App.Calendar.CalendarBookMemoryImpl)TriggerFetchAAsync().Result;
             }
             set
             {
@@ -1599,14 +1599,14 @@ namespace Zetbox.App.Calendar
 
         public override Type GetImplementedInterface()
         {
-            return typeof(Calendar_shared_w_Group_RelationEntry);
+            return typeof(CalendarBook_shared_w_Group_RelationEntry);
         }
 
         public override void ApplyChangesFrom(IPersistenceObject obj)
         {
             base.ApplyChangesFrom(obj);
-            var other = (Calendar_shared_w_Group_RelationEntryMemoryImpl)obj;
-            var me = (Calendar_shared_w_Group_RelationEntryMemoryImpl)this;
+            var other = (CalendarBook_shared_w_Group_RelationEntryMemoryImpl)obj;
+            var me = (CalendarBook_shared_w_Group_RelationEntryMemoryImpl)this;
 
             me._fk_A = other._fk_A;
             me._fk_B = other._fk_B;
@@ -1620,10 +1620,10 @@ namespace Zetbox.App.Calendar
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                AImpl = (Zetbox.App.Calendar.CalendarMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Calendar.Calendar>(_fk_guid_A.Value);
+                AImpl = (Zetbox.App.Calendar.CalendarBookMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Calendar.CalendarBook>(_fk_guid_A.Value);
             else
             if (_fk_A.HasValue)
-                AImpl = (Zetbox.App.Calendar.CalendarMemoryImpl)Context.Find<Zetbox.App.Calendar.Calendar>(_fk_A.Value);
+                AImpl = (Zetbox.App.Calendar.CalendarBookMemoryImpl)Context.Find<Zetbox.App.Calendar.CalendarBook>(_fk_A.Value);
             else
                 AImpl = null;
 
@@ -1678,16 +1678,16 @@ namespace Zetbox.App.Calendar
 namespace Zetbox.App.Calendar
 {
     // BEGIN Zetbox.Generator.Templates.CollectionEntries.RelationEntry
-    [System.Diagnostics.DebuggerDisplay("Calendar_shared_w_Identity_RelationEntryMemoryImpl")]
-    public class Calendar_shared_w_Identity_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Calendar.Calendar, Zetbox.App.Calendar.CalendarMemoryImpl, Zetbox.App.Base.Identity, Zetbox.App.Base.IdentityMemoryImpl>, Calendar_shared_w_Identity_RelationEntry
+    [System.Diagnostics.DebuggerDisplay("CalendarBook_shared_w_Identity_RelationEntryMemoryImpl")]
+    public class CalendarBook_shared_w_Identity_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Calendar.CalendarBookMemoryImpl, Zetbox.App.Base.Identity, Zetbox.App.Base.IdentityMemoryImpl>, CalendarBook_shared_w_Identity_RelationEntry
     {
         [Obsolete]
-        public Calendar_shared_w_Identity_RelationEntryMemoryImpl()
+        public CalendarBook_shared_w_Identity_RelationEntryMemoryImpl()
             : base(null)
         {
         }
 
-        public Calendar_shared_w_Identity_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
+        public CalendarBook_shared_w_Identity_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }
@@ -1736,7 +1736,7 @@ namespace Zetbox.App.Calendar
             set
             {
                 // settor will do checking for us
-                A = (Zetbox.App.Calendar.Calendar)value;
+                A = (Zetbox.App.Calendar.CalendarBook)value;
             }
         }
 
@@ -1761,7 +1761,7 @@ namespace Zetbox.App.Calendar
         /// </summary>
             // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Zetbox.App.Calendar.Calendar; moduleNamespace=Zetbox.App.Calendar;
+        // referencedInterface=Zetbox.App.Calendar.CalendarBook; moduleNamespace=Zetbox.App.Calendar;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable; does not call events
@@ -1770,10 +1770,10 @@ namespace Zetbox.App.Calendar
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
-        public Zetbox.App.Calendar.Calendar A
+        public Zetbox.App.Calendar.CalendarBook A
         {
             get { return AImpl; }
-            set { AImpl = (Zetbox.App.Calendar.CalendarMemoryImpl)value; }
+            set { AImpl = (Zetbox.App.Calendar.CalendarBookMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
@@ -1793,15 +1793,15 @@ namespace Zetbox.App.Calendar
         }
 
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Calendar> _triggerFetchATask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Calendar> TriggerFetchAAsync()
+        Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.CalendarBook> _triggerFetchATask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.CalendarBook> TriggerFetchAAsync()
         {
             if (_triggerFetchATask != null) return _triggerFetchATask;
 
             if (_fk_A.HasValue)
-                _triggerFetchATask = Context.FindAsync<Zetbox.App.Calendar.Calendar>(_fk_A.Value);
+                _triggerFetchATask = Context.FindAsync<Zetbox.App.Calendar.CalendarBook>(_fk_A.Value);
             else
-                _triggerFetchATask = new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Calendar>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchATask = new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.CalendarBook>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
 
             return _triggerFetchATask;
@@ -1809,11 +1809,11 @@ namespace Zetbox.App.Calendar
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        internal Zetbox.App.Calendar.CalendarMemoryImpl AImpl
+        internal Zetbox.App.Calendar.CalendarBookMemoryImpl AImpl
         {
             get
             {
-                return (Zetbox.App.Calendar.CalendarMemoryImpl)TriggerFetchAAsync().Result;
+                return (Zetbox.App.Calendar.CalendarBookMemoryImpl)TriggerFetchAAsync().Result;
             }
             set
             {
@@ -1968,14 +1968,14 @@ namespace Zetbox.App.Calendar
 
         public override Type GetImplementedInterface()
         {
-            return typeof(Calendar_shared_w_Identity_RelationEntry);
+            return typeof(CalendarBook_shared_w_Identity_RelationEntry);
         }
 
         public override void ApplyChangesFrom(IPersistenceObject obj)
         {
             base.ApplyChangesFrom(obj);
-            var other = (Calendar_shared_w_Identity_RelationEntryMemoryImpl)obj;
-            var me = (Calendar_shared_w_Identity_RelationEntryMemoryImpl)this;
+            var other = (CalendarBook_shared_w_Identity_RelationEntryMemoryImpl)obj;
+            var me = (CalendarBook_shared_w_Identity_RelationEntryMemoryImpl)this;
 
             me._fk_A = other._fk_A;
             me._fk_B = other._fk_B;
@@ -1989,7 +1989,7 @@ namespace Zetbox.App.Calendar
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_A.HasValue)
-                AImpl = (Zetbox.App.Calendar.CalendarMemoryImpl)Context.Find<Zetbox.App.Calendar.Calendar>(_fk_A.Value);
+                AImpl = (Zetbox.App.Calendar.CalendarBookMemoryImpl)Context.Find<Zetbox.App.Calendar.CalendarBook>(_fk_A.Value);
             else
                 AImpl = null;
 

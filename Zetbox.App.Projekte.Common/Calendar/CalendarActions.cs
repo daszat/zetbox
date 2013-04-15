@@ -25,7 +25,7 @@ namespace Zetbox.App.Calendar
     public static class CalendarActions
     {
         [Invocation]
-        public static void ToString(Calendar obj, MethodReturnEventArgs<System.String> e)
+        public static void ToString(CalendarBook obj, MethodReturnEventArgs<System.String> e)
         {
             e.Result = obj.Name;
         }

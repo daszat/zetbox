@@ -35,7 +35,7 @@ namespace Zetbox.App.Calendar
     /// ObjectCollectionEntry for 
     /// </summary>
     [Zetbox.API.DefinitionGuid("775789a3-032e-478e-a01e-ec9f51580c5d")]
-    public interface Calendar_shared_r_Group_RelationEntry : IRelationEntry<Calendar, Group>, Zetbox.App.Base.IExportable 
+    public interface CalendarBook_shared_r_Group_RelationEntry : IRelationEntry<CalendarBook, Group>, Zetbox.App.Base.IExportable 
     {
 
     }
@@ -51,7 +51,7 @@ namespace Zetbox.App.Calendar
     /// ObjectCollectionEntry for 
     /// </summary>
     [Zetbox.API.DefinitionGuid("385c829b-02d6-48d0-8184-b3b5df6c25be")]
-    public interface Calendar_shared_r_Identity_RelationEntry : IRelationEntry<Calendar, Identity> 
+    public interface CalendarBook_shared_r_Identity_RelationEntry : IRelationEntry<CalendarBook, Identity> 
     {
 
     }
@@ -67,7 +67,7 @@ namespace Zetbox.App.Calendar
     /// ObjectCollectionEntry for 
     /// </summary>
     [Zetbox.API.DefinitionGuid("93f20ca2-6935-41bc-8f80-7a441b3cf69d")]
-    public interface Calendar_shared_w_Group_RelationEntry : IRelationEntry<Calendar, Group>, Zetbox.App.Base.IExportable 
+    public interface CalendarBook_shared_w_Group_RelationEntry : IRelationEntry<CalendarBook, Group>, Zetbox.App.Base.IExportable 
     {
 
     }
@@ -83,7 +83,7 @@ namespace Zetbox.App.Calendar
     /// ObjectCollectionEntry for 
     /// </summary>
     [Zetbox.API.DefinitionGuid("af8843f9-0085-47ec-bcb6-f0f8a22a2c03")]
-    public interface Calendar_shared_w_Identity_RelationEntry : IRelationEntry<Calendar, Identity> 
+    public interface CalendarBook_shared_w_Identity_RelationEntry : IRelationEntry<CalendarBook, Identity> 
     {
 
     }

@@ -53,23 +53,23 @@ namespace Zetbox.App.Calendar
         /// </summary>
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Calendar
         // fkBackingName=this.Proxy.Calendar; fkGuidBackingName=_fk_guid_Calendar;
-        // referencedInterface=Zetbox.App.Calendar.Calendar; moduleNamespace=Zetbox.App.Calendar;
+        // referencedInterface=Zetbox.App.Calendar.CalendarBook; moduleNamespace=Zetbox.App.Calendar;
         // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable; does call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Zetbox.App.Calendar.Calendar Calendar
+        public Zetbox.App.Calendar.CalendarBook Calendar
         {
             get
             {
-                Zetbox.App.Calendar.CalendarNHibernateImpl __value = (Zetbox.App.Calendar.CalendarNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Calendar);
+                Zetbox.App.Calendar.CalendarBookNHibernateImpl __value = (Zetbox.App.Calendar.CalendarBookNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Calendar);
 
                 if (OnCalendar_Getter != null)
                 {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Calendar.Calendar>(__value);
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Calendar.CalendarBook>(__value);
                     OnCalendar_Getter(this, e);
-                    __value = (Zetbox.App.Calendar.CalendarNHibernateImpl)e.Result;
+                    __value = (Zetbox.App.Calendar.CalendarBookNHibernateImpl)e.Result;
                 }
 
                 return __value;
@@ -87,8 +87,8 @@ namespace Zetbox.App.Calendar
                 }
 
                 // cache old value to remove inverse references later
-                var __oldValue = (Zetbox.App.Calendar.CalendarNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Calendar);
-                var __newValue = (Zetbox.App.Calendar.CalendarNHibernateImpl)value;
+                var __oldValue = (Zetbox.App.Calendar.CalendarBookNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Calendar);
+                var __newValue = (Zetbox.App.Calendar.CalendarBookNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -103,9 +103,9 @@ namespace Zetbox.App.Calendar
 
                 if (OnCalendar_PreSetter != null && IsAttached)
                 {
-                    var e = new PropertyPreSetterEventArgs<Zetbox.App.Calendar.Calendar>(__oldValue, __newValue);
+                    var e = new PropertyPreSetterEventArgs<Zetbox.App.Calendar.CalendarBook>(__oldValue, __newValue);
                     OnCalendar_PreSetter(this, e);
-                    __newValue = (Zetbox.App.Calendar.CalendarNHibernateImpl)e.Result;
+                    __newValue = (Zetbox.App.Calendar.CalendarBookNHibernateImpl)e.Result;
                 }
 
                 // next, set the local reference
@@ -124,7 +124,7 @@ namespace Zetbox.App.Calendar
 
                 if (OnCalendar_PostSetter != null && IsAttached)
                 {
-                    var e = new PropertyPostSetterEventArgs<Zetbox.App.Calendar.Calendar>(__oldValue, __newValue);
+                    var e = new PropertyPostSetterEventArgs<Zetbox.App.Calendar.CalendarBook>(__oldValue, __newValue);
                     OnCalendar_PostSetter(this, e);
                 }
             }
@@ -136,13 +136,13 @@ namespace Zetbox.App.Calendar
 
     public Zetbox.API.Async.ZbTask TriggerFetchCalendarAsync()
     {
-        return new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Calendar>(this.Calendar);
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.CalendarBook>(this.Calendar);
     }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Calendar
-		public static event PropertyGetterHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider, Zetbox.App.Calendar.Calendar> OnCalendar_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider, Zetbox.App.Calendar.Calendar> OnCalendar_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider, Zetbox.App.Calendar.Calendar> OnCalendar_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider, Zetbox.App.Calendar.CalendarBook> OnCalendar_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider, Zetbox.App.Calendar.CalendarBook> OnCalendar_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider, Zetbox.App.Calendar.CalendarBook> OnCalendar_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Calendar.WorkScheduleSyncProvider> OnCalendar_IsValid;
 
@@ -394,8 +394,8 @@ namespace Zetbox.App.Calendar
             {
                 case "Calendar":
                     {
-                        var __oldValue = (Zetbox.App.Calendar.CalendarNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Calendar);
-                        var __newValue = (Zetbox.App.Calendar.CalendarNHibernateImpl)parentObj;
+                        var __oldValue = (Zetbox.App.Calendar.CalendarBookNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Calendar);
+                        var __newValue = (Zetbox.App.Calendar.CalendarBookNHibernateImpl)parentObj;
                         NotifyPropertyChanging("Calendar", __oldValue, __newValue);
                         this.Proxy.Calendar = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("Calendar", __oldValue, __newValue);
@@ -455,7 +455,7 @@ namespace Zetbox.App.Calendar
             // fix direct object references
 
             if (_fk_Calendar.HasValue)
-                this.Calendar = ((Zetbox.App.Calendar.CalendarNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Calendar.Calendar>(_fk_Calendar.Value));
+                this.Calendar = ((Zetbox.App.Calendar.CalendarBookNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Calendar.CalendarBook>(_fk_Calendar.Value));
             else
                 this.Calendar = null;
 
@@ -478,7 +478,7 @@ namespace Zetbox.App.Calendar
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
                     // else
-                    new PropertyDescriptorNHibernateImpl<WorkScheduleSyncProvider, Zetbox.App.Calendar.Calendar>(
+                    new PropertyDescriptorNHibernateImpl<WorkScheduleSyncProvider, Zetbox.App.Calendar.CalendarBook>(
                         lazyCtx,
                         new Guid("f67558bb-7415-4a41-9196-7c39426746df"),
                         "Calendar",
@@ -600,7 +600,7 @@ namespace Zetbox.App.Calendar
 
             public override Type ZetboxProxy { get { return typeof(WorkScheduleSyncProviderProxy); } }
 
-            public virtual Zetbox.App.Calendar.CalendarNHibernateImpl.CalendarProxy Calendar { get; set; }
+            public virtual Zetbox.App.Calendar.CalendarBookNHibernateImpl.CalendarBookProxy Calendar { get; set; }
 
             public virtual Zetbox.App.Calendar.WorkScheduleNHibernateImpl.WorkScheduleProxy WorkSchedule { get; set; }
 

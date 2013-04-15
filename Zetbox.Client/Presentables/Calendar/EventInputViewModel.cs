@@ -20,9 +20,9 @@ namespace Zetbox.Client.Presentables.Calendar
     [ViewModelDescriptor]
     public class EventInputViewModel : ViewModel, IEventInputViewModel
     {
-        public new delegate EventInputViewModel Factory(IZetboxContext dataCtx, ViewModel parent, cal.Calendar targetCalendar, DateTime selectedStartDate, bool isAllDay);
+        public new delegate EventInputViewModel Factory(IZetboxContext dataCtx, ViewModel parent, cal.CalendarBook targetCalendar, DateTime selectedStartDate, bool isAllDay);
 
-        public EventInputViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, cal.Calendar targetCalendar, DateTime selectedStartDate, bool isAllDay)
+        public EventInputViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, cal.CalendarBook targetCalendar, DateTime selectedStartDate, bool isAllDay)
             : base(appCtx, dataCtx, parent)
         {
             if (targetCalendar == null) throw new ArgumentNullException("targetCalendar");
@@ -33,7 +33,7 @@ namespace Zetbox.Client.Presentables.Calendar
 
         public DateTime SelectedStartDate { get; private set; }
         public bool InitialIsAllDay { get; private set; }
-        public cal.Calendar TargetCalendar { get; private set; }
+        public cal.CalendarBook TargetCalendar { get; private set; }
 
         public override string Name
         {

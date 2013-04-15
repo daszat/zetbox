@@ -134,7 +134,7 @@
     <Compile Include="BoolParameter.Memory.Designer.cs" />
     <Compile Include="BoolProperty.Memory.Designer.cs" />
     <Compile Include="CalculatedObjectReferenceProperty.Memory.Designer.cs" />
-    <Compile Include="Calendar.Memory.Designer.cs" />
+    <Compile Include="CalendarBook.Memory.Designer.cs" />
     <Compile Include="ClientReadOnlyConstraint.Memory.Designer.cs" />
     <Compile Include="CLRObjectParameter.Memory.Designer.cs" />
     <Compile Include="CommonWorkScheduleRule.Memory.Designer.cs" />

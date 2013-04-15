@@ -13,9 +13,9 @@ namespace Zetbox.App.Projekte.Client.ViewModel.TestModule
     [ViewModelDescriptor]
     public class EventTestInputViewModel : EventInputViewModel, IEventInputViewModel
     {
-        public new delegate EventTestInputViewModel Factory(IZetboxContext dataCtx, ViewModel parent, cal.Calendar targetCalendar, DateTime selectedStartDate, bool isAllDay);
+        public new delegate EventTestInputViewModel Factory(IZetboxContext dataCtx, ViewModel parent, cal.CalendarBook targetCalendar, DateTime selectedStartDate, bool isAllDay);
 
-        public EventTestInputViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, cal.Calendar targetCalendar, DateTime selectedStartDate, bool isAllDay)
+        public EventTestInputViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, cal.CalendarBook targetCalendar, DateTime selectedStartDate, bool isAllDay)
             : base(appCtx, dataCtx, parent, targetCalendar, selectedStartDate, isAllDay)
         {
             // Zetbox.App.Test.EventTestObject

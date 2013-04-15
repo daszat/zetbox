@@ -1913,8 +1913,10 @@ namespace Zetbox {
                         }
                         public static class Calendar
                         {
-                            // Cannot render: member names cannot be the same as their enclosing type
-                            // public static TypedGuid<global::Zetbox.App.Base.DataType> Calendar
+                            public static TypedGuid<global::Zetbox.App.Base.DataType> CalendarBook
+                            {
+                                get { return new TypedGuid<global::Zetbox.App.Base.DataType>("1450be5f-2266-4367-8a56-1f0bee5699c4"); }
+                            }
                             public static TypedGuid<global::Zetbox.App.Base.DataType> CommonWorkScheduleRule
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("198bab3d-85a9-4d11-99e1-5e3f9420bdae"); }
@@ -1955,14 +1957,14 @@ namespace Zetbox {
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("c4ba4a07-d4b7-4ae7-8621-0e9126ad18cc"); }
                             }
-                            public static class Calendar_Methods
+                            public static class CalendarBook_Methods
                             {
                                 public static TypedGuid<global::Zetbox.App.Base.Method> GetNewEventViewModels
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Method>("cbb06469-f6fb-4e2e-a434-7f91cdb8c09a"); }
                                 }
                             }
-                            public static class Calendar_Properties
+                            public static class CalendarBook_Properties
                             {
                                 public static TypedGuid<global::Zetbox.App.Base.Property> ChangedBy
                                 {

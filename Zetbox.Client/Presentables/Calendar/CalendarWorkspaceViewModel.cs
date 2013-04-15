@@ -33,9 +33,9 @@ namespace Zetbox.Client.Presentables.Calendar
     #region CalendarSelectionViewModel
     public class CalendarSelectionViewModel : ViewModel
     {
-        public new delegate CalendarSelectionViewModel Factory(IZetboxContext dataCtx, Zetbox.Client.Presentables.ViewModel parent, cal.Calendar calendar, bool isFavorite);
+        public new delegate CalendarSelectionViewModel Factory(IZetboxContext dataCtx, Zetbox.Client.Presentables.ViewModel parent, cal.CalendarBook calendar, bool isFavorite);
 
-        public CalendarSelectionViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, Zetbox.Client.Presentables.ViewModel parent, cal.Calendar calendar, bool isFavorite)
+        public CalendarSelectionViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, Zetbox.Client.Presentables.ViewModel parent, cal.CalendarBook calendar, bool isFavorite)
             : base(appCtx, dataCtx, parent)
         {
             if (calendar == null) throw new ArgumentNullException("calendar");
@@ -46,7 +46,7 @@ namespace Zetbox.Client.Presentables.Calendar
         }
 
 
-        public cal.Calendar Calendar { get; private set; }
+        public cal.CalendarBook Calendar { get; private set; }
         private CalendarViewModel _calendarViewModel;
         public CalendarViewModel CalendarViewModel
         {
@@ -193,7 +193,7 @@ namespace Zetbox.Client.Presentables.Calendar
                     var config = GetSavedConfig();
 
                     var myID = CurrentIdentity != null ? CurrentIdentity.ID : 0;
-                    _Items = DataContext.GetQuery<cal.Calendar>()
+                    _Items = DataContext.GetQuery<cal.CalendarBook>()
                         .ToList()
                         .OrderBy(i => i.Owner != null && i.Owner.ID == myID ?  1 : 2)
                         .ThenBy(i => i.Name)
@@ -287,7 +287,7 @@ namespace Zetbox.Client.Presentables.Calendar
             }
         }
 
-        protected CalendarConfiguration ExtractItem(cal.Calendar cal, CalendarConfigurationList config)
+        protected CalendarConfiguration ExtractItem(cal.CalendarBook cal, CalendarConfigurationList config)
         {
             if (config == null) return null;
             return config.Configs.FirstOrDefault(i => i.Calendar == cal.ID);
@@ -406,7 +406,7 @@ namespace Zetbox.Client.Presentables.Calendar
 
             using (var ctx = _ctxFactory())
             {
-                var calendar = ctx.Find<cal.Calendar>(SelectedItem.Calendar.ID);
+                var calendar = ctx.Find<cal.CalendarBook>(SelectedItem.Calendar.ID);
                 var dlg = ViewModelFactory.CreateViewModel<NewEventDialogViewModel.Factory>().Invoke(ctx, null);
 
                 var args = new NewEventViewModelsArgs(ctx, ViewModelFactory, dlg, calendar, selectedDate, isAllDay);

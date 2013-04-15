@@ -77,7 +77,7 @@ namespace Zetbox.Client.ASPNET
 
         #region Editor
         /// <summary>
-        /// Select a default editor. Only usable for very primitiv types (int, string, DateTime). These types are rendered through EditorFor() & "FormattedValue" appended to the original expression. Enums are supported by rendering a dropdown.
+        /// Select a default editor. Only usable for very primitiv types (int, string, DateTime). These types are rendered through EditorFor() and "FormattedValue" appended to the original expression. Enums are supported by rendering a dropdown.
         /// </summary>
         /// <typeparam name="TModel"></typeparam>
         /// <typeparam name="TValue"></typeparam>
@@ -159,7 +159,7 @@ namespace Zetbox.Client.ASPNET
         /// Resolve only very basic kind of views. Don't use the ViewDescriptor infrastructure. In ASP.NET the HTML is fully controlled by the developer.
         /// Also, don't resole ObjectList/Collections -> this will render a table.
         /// Object references are also too complicated to be handled here.
-        /// This method is used by EditorFor & DisplayFor. EditorFor would never resolve Enums - they will be rendered passing by value & possible values. All other by passing FormattedValue
+        /// This method is used by EditorFor and DisplayFor. EditorFor would never resolve Enums - they will be rendered passing by value and possible values. All other by passing FormattedValue
         /// </summary>
         /// <typeparam name="TValue"></typeparam>
         /// <param name="templateName"></param>

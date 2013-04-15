@@ -137,7 +137,7 @@
     <Compile Include="BoolParameter.Ef.Designer.cs" />
     <Compile Include="BoolProperty.Ef.Designer.cs" />
     <Compile Include="CalculatedObjectReferenceProperty.Ef.Designer.cs" />
-    <Compile Include="Calendar.Ef.Designer.cs" />
+    <Compile Include="CalendarBook.Ef.Designer.cs" />
     <Compile Include="ClientReadOnlyConstraint.Ef.Designer.cs" />
     <Compile Include="CLRObjectParameter.Ef.Designer.cs" />
     <Compile Include="CommonWorkScheduleRule.Ef.Designer.cs" />

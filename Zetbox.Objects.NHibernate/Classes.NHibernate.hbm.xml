@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
                    default-cascade="save-update">
-    <class name="Zetbox.App.Calendar.CalendarNHibernateImpl+CalendarProxy, Zetbox.Objects.NHibernateImpl"
-           proxy="Zetbox.App.Calendar.CalendarNHibernateImpl+CalendarProxy, Zetbox.Objects.NHibernateImpl"
+    <class name="Zetbox.App.Calendar.CalendarBookNHibernateImpl+CalendarBookProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.Calendar.CalendarBookNHibernateImpl+CalendarBookProxy, Zetbox.Objects.NHibernateImpl"
            schema="`calendar`"
-           table="`Calendars`"
+           table="`CalendarBooks`"
            abstract="false"
            dynamic-update="true"
            optimistic-lock="dirty"
@@ -13,7 +13,7 @@
         <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
             <generator class="native">
                 <param name="schema">`calendar`</param>
-                <param name="sequence">`Calendars_ID_seq`</param>
+                <param name="sequence">`CalendarBooks_ID_seq`</param>
             </generator>
         </id>
 
@@ -38,20 +38,20 @@
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
-        <!-- rel=Calendar_shared_r_Group_RelationEntry -->
+        <!-- rel=CalendarBook_shared_r_Group_RelationEntry -->
         <!-- relEnd=Calendar otherEnd=GroupReaders -->
         <set name="GroupReaders" table="`Calendar_shared_r_GroupReaders`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
             <key column="`fk_Calendar`" />
-            <one-to-many class="Zetbox.App.Calendar.Calendar_shared_r_Group_RelationEntryNHibernateImpl+Calendar_shared_r_Group_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.Calendar.CalendarBook_shared_r_Group_RelationEntryNHibernateImpl+CalendarBook_shared_r_Group_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
-        <!-- rel=Calendar_shared_w_Group_RelationEntry -->
+        <!-- rel=CalendarBook_shared_w_Group_RelationEntry -->
         <!-- relEnd=Calendar otherEnd=GroupWriters -->
         <set name="GroupWriters" table="`Calendar_shared_w_GroupWriters`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
             <key column="`fk_Calendar`" />
-            <one-to-many class="Zetbox.App.Calendar.Calendar_shared_w_Group_RelationEntryNHibernateImpl+Calendar_shared_w_Group_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.Calendar.CalendarBook_shared_w_Group_RelationEntryNHibernateImpl+CalendarBook_shared_w_Group_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
         <!-- ValueTypeProperty isValue -->
@@ -63,32 +63,32 @@
 
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
-        <!-- rel=Calendar_shared_r_Identity_RelationEntry -->
+        <!-- rel=CalendarBook_shared_r_Identity_RelationEntry -->
         <!-- relEnd=Calendar otherEnd=Readers -->
         <set name="Readers" table="`Calendar_shared_r_Readers`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
             <key column="`fk_Calendar`" />
-            <one-to-many class="Zetbox.App.Calendar.Calendar_shared_r_Identity_RelationEntryNHibernateImpl+Calendar_shared_r_Identity_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.Calendar.CalendarBook_shared_r_Identity_RelationEntryNHibernateImpl+CalendarBook_shared_r_Identity_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
-        <!-- rel=Calendar_shared_w_Identity_RelationEntry -->
+        <!-- rel=CalendarBook_shared_w_Identity_RelationEntry -->
         <!-- relEnd=Calendar otherEnd=Writers -->
         <set name="Writers" table="`Calendar_shared_w_Writers`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
             <key column="`fk_Calendar`" />
-            <one-to-many class="Zetbox.App.Calendar.Calendar_shared_w_Identity_RelationEntryNHibernateImpl+Calendar_shared_w_Identity_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.Calendar.CalendarBook_shared_w_Identity_RelationEntryNHibernateImpl+CalendarBook_shared_w_Identity_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
 
         <!-- map rights -->
         <set name="SecurityRightsCollectionImpl"
              schema="`calendar`"
-             table="`Calendars_Rights`"
+             table="`CalendarBooks_Rights`"
              lazy="true"
              fetch="select" 
              batch-size="100" >
             <key column="`ID`" />
-            <composite-element class="Zetbox.App.Calendar.Calendar_RightsNHibernateImpl, Zetbox.Objects.NHibernateImpl">
+            <composite-element class="Zetbox.App.Calendar.CalendarBook_RightsNHibernateImpl, Zetbox.Objects.NHibernateImpl">
                 <property name="Identity" column="`Identity`" />
                 <property name="Right" column="`Right`" />
             </composite-element>
@@ -123,7 +123,7 @@
                   column="`Body`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="Calendar" column="`fk_Calendar`" class="Zetbox.App.Calendar.CalendarNHibernateImpl+CalendarProxy, Zetbox.Objects.NHibernateImpl" />
+        <many-to-one name="Calendar" column="`fk_Calendar`" class="Zetbox.App.Calendar.CalendarBookNHibernateImpl+CalendarBookProxy, Zetbox.Objects.NHibernateImpl" />
 
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
@@ -312,7 +312,7 @@
 
             <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="Calendar" column="`fk_Calendar`" class="Zetbox.App.Calendar.CalendarNHibernateImpl+CalendarProxy, Zetbox.Objects.NHibernateImpl" />
+        <many-to-one name="Calendar" column="`fk_Calendar`" class="Zetbox.App.Calendar.CalendarBookNHibernateImpl+CalendarBookProxy, Zetbox.Objects.NHibernateImpl" />
 
 <!-- ObjectReferenceProperty -->
         <many-to-one name="WorkSchedule" column="`fk_WorkSchedule`" class="Zetbox.App.Calendar.WorkScheduleNHibernateImpl+WorkScheduleProxy, Zetbox.Objects.NHibernateImpl" />

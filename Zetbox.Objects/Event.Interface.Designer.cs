@@ -27,7 +27,7 @@ namespace Zetbox.App.Calendar
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("d80b3380-9cc2-4237-960c-9cd409d793e3")]
-        Zetbox.App.Calendar.Calendar Calendar {
+        Zetbox.App.Calendar.CalendarBook Calendar {
             get;
             set;
         }
