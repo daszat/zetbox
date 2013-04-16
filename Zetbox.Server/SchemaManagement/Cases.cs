@@ -2950,7 +2950,6 @@ namespace Zetbox.Server.SchemaManagement
             var refreshRightsOnProcedureName = db.GetProcedureName(objClass.Module.SchemaName, Construct.SecurityRulesRefreshRightsOnProcedureName(objClass));
             var savedRefreshRightsOnProcedureName = db.GetProcedureName(savedObjClass.Module.SchemaName, Construct.SecurityRulesRefreshRightsOnProcedureName(savedObjClass)); 
             
-            var updateRightsTriggerName = new TriggerRef(tblName, Construct.SecurityRulesUpdateRightsTriggerName(objClass));
             var savedUpdateRightsTriggerName = new TriggerRef(savedTblName, Construct.SecurityRulesUpdateRightsTriggerName(savedObjClass));
 
             Log.InfoFormat("Renaming ObjectClass Security Rules: {0}", objClass.Name);
