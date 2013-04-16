@@ -22,7 +22,7 @@ namespace Zetbox.App.Calendar
     using Zetbox.API;
 
     [Implementor]
-    public static class CalendarActions
+    public static class CalendarBookActions
     {
         [Invocation]
         public static void ToString(CalendarBook obj, MethodReturnEventArgs<System.String> e)

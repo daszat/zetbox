@@ -25,10 +25,10 @@ namespace Zetbox.App.Calendar
     using Zetbox.App.Base;
 
     [Implementor]
-    public class CalendarActions
+    public class CalendarBookActions
     {
         private static IIdentityResolver _idResolver = null;
-        public CalendarActions(IIdentityResolver idResolver)
+        public CalendarBookActions(IIdentityResolver idResolver)
         {
             _idResolver = idResolver;
         }
