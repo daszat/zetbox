@@ -322,6 +322,11 @@ namespace Zetbox.Server.SchemaManagement
             _provider.RenameColumn(tblName, oldColName, newColName);
         }
 
+        public void RenameDiscriminatorValue(TableRef tblName, string oldValue, string newValue)
+        {
+            _provider.RenameDiscriminatorValue(tblName, oldValue, newValue);
+        }
+
         public void RenameFKConstraint(TableRef tblName, string oldConstraintName, TableRef refTblName, string colName, string newConstraintName, bool onDeleteCascade)
         {
             _provider.RenameFKConstraint(tblName, oldConstraintName, refTblName, colName, newConstraintName, onDeleteCascade);

@@ -142,7 +142,8 @@ namespace Zetbox.Server.SchemaManagement
                         }
                     }
 
-                    cmd.ExecuteNonQuery();
+                    int rows = cmd.ExecuteNonQuery();
+                    QueryLog.DebugFormat("{0} rows affected", rows);
                 }
             }
             catch
@@ -436,6 +437,15 @@ namespace Zetbox.Server.SchemaManagement
         public abstract void CreateTable(TableRef tblName, bool idAsIdentityColumn, bool createPrimaryKey);
 
         public abstract void RenameTable(TableRef oldTblName, TableRef newTblName);
+
+        public virtual void RenameDiscriminatorValue(TableRef tblName, string oldValue, string newValue)
+        {
+            ExecuteNonQuery(string.Format("UPDATE {0} SET {1} = '{2}' WHERE {1} = '{3}'", 
+                FormatSchemaName(tblName),
+                QuoteIdentifier(TableMapper.DiscriminatorColumnName),
+                newValue,
+                oldValue));
+        }
 
         public virtual void DropTable(TableRef tblName)
         {

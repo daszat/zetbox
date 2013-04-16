@@ -677,8 +677,9 @@ namespace Zetbox.API.Server
         /// <param name="oldTblName"></param>
         /// <param name="newTblName"></param>
         void RenameTable(TableRef oldTblName, TableRef newTblName);
-
         void DropTable(TableRef tblName);
+
+        void RenameDiscriminatorValue(TableRef tblName, string oldValue, string newValue);
 
         bool CheckColumnExists(TableRef tblName, string colName);
         IEnumerable<string> GetTableColumnNames(TableRef tblName);
@@ -887,6 +888,5 @@ namespace Zetbox.API.Server
         /// <param name="type">A Type to locate the Resource's Assembly</param>
         /// <param name="scriptResourceNameFormat">the Resource path to locate the SQL script. "{0}" is replaced by the ConfigName.</param>
         void ExecuteSqlResource(Type type, string scriptResourceNameFormat);
-
     }
 }

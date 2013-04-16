@@ -796,6 +796,11 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
             throw new NotSupportedException();
         }
 
+        void ISchemaProvider.RenameDiscriminatorValue(TableRef tblName, string oldValue, string newValue)
+        {
+            throw new NotSupportedException();
+        }
+
         /// <summary>Not supported.</summary>
         void ISchemaProvider.RenameColumn(TableRef tblName, string oldColName, string newColName)
         {

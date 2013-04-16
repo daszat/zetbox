@@ -171,10 +171,11 @@ namespace Zetbox.Server.SchemaManagement
 
             Log.InfoFormat("Renaming table from '{0}' to '{1}'", savedObjClass.TableName, objClass.TableName);
 
+            var tbl = objClass.GetTableRef(db);
             var mapping = objClass.GetTableMapping();
             if (mapping == TableMapping.TPT || (mapping == TableMapping.TPH && objClass.BaseObjectClass == null))
             {
-                db.RenameTable(savedObjClass.GetTableRef(db), objClass.GetTableRef(db));
+                db.RenameTable(savedObjClass.GetTableRef(db), tbl);
             }
             else if (mapping == TableMapping.TPH && objClass.BaseObjectClass != null)
             {
@@ -184,6 +185,11 @@ namespace Zetbox.Server.SchemaManagement
                 }
 
                 // FK names will be changed in DoChangeRelationName case
+            }
+
+            if (mapping == TableMapping.TPH)
+            {
+                db.RenameDiscriminatorValue(tbl, Construct.DiscriminatorValue(savedObjClass), Construct.DiscriminatorValue(objClass));
             }
 
             PostMigration(ClassMigrationEventType.RenameTable, savedObjClass, objClass);
