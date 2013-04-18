@@ -385,12 +385,13 @@ namespace Zetbox.Client.Presentables.Calendar
 
         public bool CanNew()
         {
-            return SelectedItem != null && SelectedItem.CalendarViewModel.CanWrite;
+            return SelectedItem != null && SelectedItem.CalendarViewModel.CanWrite && SelectedItem.Selected;
         }
 
         public string CanNewReason()
         {
             if (SelectedItem == null) return CommonCommandsResources.DataObjectCommand_NothingSelected;
+            if (!SelectedItem.Selected) return CommonCommandsResources.DataObjectCommand_NothingSelected;
             if (!SelectedItem.CalendarViewModel.CanWrite) return CommonCommandsResources.DataObjectCommand_NotAllowed;
             return string.Empty;
         }
