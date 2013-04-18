@@ -9,6 +9,7 @@
                   Title="{Binding Name}"
                   Height="600"
                   Width="800"
+                  WindowState="Maximized"
                   IsTabStop="False"
                   commands:SmartRoutedUICommand.IsCommandSink="True">
     <!--
