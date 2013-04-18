@@ -63,7 +63,7 @@ namespace Zetbox.Client.Presentables.Calendar
 
         void _calendarViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            switch(e.PropertyName)
+            switch (e.PropertyName)
             {
                 case "Color":
                     OnPropertyChanged("Color");
@@ -195,7 +195,7 @@ namespace Zetbox.Client.Presentables.Calendar
                     var myID = CurrentIdentity != null ? CurrentIdentity.ID : 0;
                     _Items = DataContext.GetQuery<cal.CalendarBook>()
                         .ToList()
-                        .OrderBy(i => i.Owner != null && i.Owner.ID == myID ?  1 : 2)
+                        .OrderBy(i => i.Owner != null && i.Owner.ID == myID ? 1 : 2)
                         .ThenBy(i => i.Name)
                         .Select((i, idx) =>
                         {
@@ -390,8 +390,8 @@ namespace Zetbox.Client.Presentables.Calendar
 
         public string CanNewReason()
         {
-            if(SelectedItem == null ) return CommonCommandsResources.DataObjectCommand_NothingSelected;
-            if(!SelectedItem.CalendarViewModel.CanWrite) return CommonCommandsResources.DataObjectCommand_NotAllowed;
+            if (SelectedItem == null) return CommonCommandsResources.DataObjectCommand_NothingSelected;
+            if (!SelectedItem.CalendarViewModel.CanWrite) return CommonCommandsResources.DataObjectCommand_NotAllowed;
             return string.Empty;
         }
 
@@ -475,9 +475,9 @@ namespace Zetbox.Client.Presentables.Calendar
             {
                 if (_SelectAllCommand == null)
                 {
-                    _SelectAllCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, 
+                    _SelectAllCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
                         CalendarResources.SelectAllCommand_Label,
-                        CalendarResources.SelectAllCommand_Tooltip, 
+                        CalendarResources.SelectAllCommand_Tooltip,
                         SelectAll, null, null);
                 }
                 return _SelectAllCommand;
@@ -556,8 +556,8 @@ namespace Zetbox.Client.Presentables.Calendar
             {
                 if (_printCommandGroup == null)
                 {
-                    _printCommandGroup = ViewModelFactory.CreateViewModel<ContainerCommand.Factory>().Invoke(DataContext, this, 
-                        CalendarResources.PrintCommandGroup_Label, 
+                    _printCommandGroup = ViewModelFactory.CreateViewModel<ContainerCommand.Factory>().Invoke(DataContext, this,
+                        CalendarResources.PrintCommandGroup_Label,
                         CalendarResources.PrintCommandGroup_Tooltip,
                         PrintTodayCommand,
                         PrintThisWeekCommand,
@@ -578,11 +578,11 @@ namespace Zetbox.Client.Presentables.Calendar
             {
                 if (_PrintTodayCommand == null)
                 {
-                    _PrintTodayCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, 
-                        this, 
+                    _PrintTodayCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext,
+                        this,
                         CalendarResources.PrintTodayCommand_Label,
-                        CalendarResources.PrintTodayCommand_Tooltip, 
-                        PrintToday, 
+                        CalendarResources.PrintTodayCommand_Tooltip,
+                        PrintToday,
                         null, null);
                     _PrintTodayCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.Printer_png.Find(FrozenContext));
                 }
@@ -606,8 +606,8 @@ namespace Zetbox.Client.Presentables.Calendar
                 {
                     _PrintThisWeekCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
                         CalendarResources.PrintThisWeekCommand_Label,
-                        CalendarResources.PrintThisWeekCommand_Tooltip, 
-                        PrintThisWeek, 
+                        CalendarResources.PrintThisWeekCommand_Tooltip,
+                        PrintThisWeek,
                         null, null);
                     _PrintThisWeekCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.Printer_png.Find(FrozenContext));
                 }
@@ -632,8 +632,8 @@ namespace Zetbox.Client.Presentables.Calendar
                 {
                     _PrintTwoWeeksCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
                         CalendarResources.PrintTwoWeeksCommand_Label,
-                        CalendarResources.PrintTwoWeeksCommand_Tooltip, 
-                        PrintTwoWeeks, 
+                        CalendarResources.PrintTwoWeeksCommand_Tooltip,
+                        PrintTwoWeeks,
                         null, null);
                     _PrintTwoWeeksCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.Printer_png.Find(FrozenContext));
                 }
@@ -658,7 +658,7 @@ namespace Zetbox.Client.Presentables.Calendar
                 {
                     _PrintMonthCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
                         CalendarResources.PrintMonthCommand_Label,
-                        CalendarResources.PrintMonthCommand_Tooltip, 
+                        CalendarResources.PrintMonthCommand_Tooltip,
                         PrintMonth,
                         null, null);
                     _PrintMonthCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.Printer_png.Find(FrozenContext));
@@ -745,8 +745,8 @@ namespace Zetbox.Client.Presentables.Calendar
             {
                 // Me too
                 OnPropertyChanged("SelectedItems");
-            } 
-            else if(e.PropertyName == "ShowFullWeek")
+            }
+            else if (e.PropertyName == "ShowFullWeek")
             {
                 var config = GetSavedConfig();
                 config.ShowFullWeek = _weekCalender.ShowFullWeek;
@@ -757,7 +757,14 @@ namespace Zetbox.Client.Presentables.Calendar
 
         #region Misc
         public bool IsReadOnly { get { return false; } }
-        bool IDeleteCommandParameter.AllowDelete { get { return true; } }
+        bool IDeleteCommandParameter.AllowDelete
+        {
+            get
+            {
+                return CurrentView.SelectedItem != null ? CurrentView.SelectedItem.Event.Source.HasObject() == false : false;
+            }
+        }
+
         IEnumerable<ViewModel> ICommandParameter.SelectedItems
         {
             get
