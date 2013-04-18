@@ -35,6 +35,14 @@ namespace Zetbox.Client.Presentables.Calendar
         public bool InitialIsAllDay { get; private set; }
         public cal.CalendarBook TargetCalendar { get; private set; }
 
+        public string RecurrenceLabel
+        {
+            get
+            {
+                return CalendarResources.RecurrenceLabel;
+            }
+        }
+
         public override string Name
         {
             get { return "Event"; }

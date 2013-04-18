@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="Zetbox.Client.WPF.View.Calendar.EventEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit">
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Top"
+                   Margin="{StaticResource AreaGroup1Margin}">
+            <Image DockPanel.Dock="Left"
+                   Source="{Binding Icon, Converter={StaticResource ImageConverter}}"
+                   Width="{StaticResource BigControlHeight}"
+                   Height="{StaticResource BigControlHeight}" />
+            <TextBlock Text="{Binding Name}"
+                       Style="{StaticResource zbTitle}"
+                       Margin="10 0 0 0"
+                       HorizontalAlignment="Left" />
+        </DockPanel>
+        <StackPanel>
+            <ctrls:LabeledView DataContext="{Binding PropertyModelsByName[Summary]}" />
+            <ctrls:LabeledView DataContext="{Binding PropertyModelsByName[Location]}" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <ctrls:LabeledView Grid.Row="0"
+                                   Grid.Column="0"
+                                   DataContext="{Binding PropertyModelsByName[StartDate]}" />
+                <ctrls:LabeledView Grid.Row="1"
+                                   Grid.Column="0"
+                                   DataContext="{Binding PropertyModelsByName[EndDate]}" />
+                <ctrls:LabeledView Grid.Row="0"
+                                   Grid.Column="1"
+                                   DataContext="{Binding PropertyModelsByName[IsAllDay]}" />
+            </Grid>
+            <ctrls:LabeledView DataContext="{Binding PropertyModelsByName[Body]}" />
+            <Expander Grid.Row="0"
+                      Grid.Column="1"
+                      Style="{StaticResource Item1Expander}"
+                      Header="{Binding RecurrenceLabel}">
+                <ContentPresenter Content="{Binding PropertyModelsByName[Recurrence], Mode=OneWay}"
+                                  ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+            </Expander>
+        </StackPanel>
+    </DockPanel>
+</UserControl>

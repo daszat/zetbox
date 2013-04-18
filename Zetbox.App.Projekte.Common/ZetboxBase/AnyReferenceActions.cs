@@ -51,11 +51,21 @@ namespace Zetbox.App.Base
                 {
                     e.Result = (IDataObject)ctx.FindPersistenceObject(ifType, obj.ObjGuid.Value);
                 }
-                else
+                else if (obj.ObjID != null)
                 {
                     e.Result = ctx.Find(ifType, obj.ObjID.Value);
                 }
+                else
+                {
+                    e.Result = null;
+                }
             }
+        }
+
+        [Invocation]
+        public static void HasObject(AnyReference obj, MethodReturnEventArgs<bool> e)
+        {
+            e.Result = obj.ObjClass != null;
         }
 
         [Invocation]

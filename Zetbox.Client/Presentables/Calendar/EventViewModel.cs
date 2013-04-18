@@ -42,6 +42,14 @@ namespace Zetbox.Client.Presentables.Calendar
             }
         }
 
+        public string RecurrenceLabel
+        {
+            get
+            {
+                return CalendarResources.RecurrenceLabel;
+            }
+        }
+
         private NullableDateTimePropertyViewModel _startDateVmdl;
         private NullableDateTimePropertyViewModel _endDateVmdl;
 

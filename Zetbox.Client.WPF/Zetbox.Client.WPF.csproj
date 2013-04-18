@@ -166,6 +166,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\Calendar\EventEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Calendar\NewEventDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -605,6 +609,9 @@
     </Compile>
     <Compile Include="StartupScreen.xaml.cs">
       <DependentUpon>StartupScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Calendar\EventEditor.xaml.cs">
+      <DependentUpon>EventEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Calendar\NewEventDialog.xaml.cs">
       <DependentUpon>NewEventDialog.xaml</DependentUpon>

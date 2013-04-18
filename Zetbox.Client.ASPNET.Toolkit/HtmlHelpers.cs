@@ -161,7 +161,7 @@ namespace Zetbox.Client.ASPNET
         /// Object references are also too complicated to be handled here.
         /// This method is used by EditorFor and DisplayFor. EditorFor would never resolve Enums - they will be rendered passing by value and possible values. All other by passing FormattedValue
         /// </summary>
-        /// <typeparam name="TValue"></typeparam>
+        /// <param name="vmdl"></param>
         /// <param name="templateName"></param>
         /// <returns></returns>
         private static string GetTemplate(object vmdl, string templateName)

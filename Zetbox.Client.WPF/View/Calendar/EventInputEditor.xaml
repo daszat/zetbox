@@ -29,9 +29,10 @@
             <ctrls:LabeledView DataContext="{Binding Body}" />
             <Expander Grid.Row="0"
                       Grid.Column="1"
-                      Style="{StaticResource Item1Expander}"                      
-                      Header="Recurrence rule">
-                <ctrls:LabeledView DataContext="{Binding Recurrence}" />
+                      Style="{StaticResource Item1Expander}"
+                      Header="{Binding RecurrenceLabel}">
+                <ContentPresenter Content="{Binding Recurrence, Mode=OneWay}"
+                                  ContentTemplateSelector="{StaticResource defaultTemplateSelector}"/>
             </Expander>
         </StackPanel>
     </ScrollViewer>
