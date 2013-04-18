@@ -19,10 +19,10 @@ namespace Zetbox.API.AbstractConsumerTests.ContextTests
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using NUnit.Framework;
     using Zetbox.API;
     using Zetbox.App.Base;
     using Zetbox.App.Test;
-    using NUnit.Framework;
 
     public class when_searching
         : AbstractTestFixture
@@ -80,6 +80,15 @@ namespace Zetbox.API.AbstractConsumerTests.ContextTests
             Assert.That(secondHalf[2], Is.SameAs(objs[7]), "7");
             Assert.That(secondHalf[3], Is.SameAs(objs[8]), "8");
             Assert.That(secondHalf[4], Is.SameAs(objs[9]), "9");
+        }
+
+        [Test]
+        public void should_reject_projections_to_IPersistenceObject()
+        {
+            var ctx = GetContext();
+            var qry = ctx.GetQuery<TestObjClass>().Select(t => new { X = t });
+
+            Assert.That(qry.ToList(), Throws.InstanceOf<NotImplementedException>());
         }
     }
 }

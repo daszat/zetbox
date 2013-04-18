@@ -163,6 +163,15 @@ namespace Zetbox.API.Server
             {
                 ResetProvider();
 
+                // detect projections to (anonymous) generic types referencing business objects
+                if (typeof(T).IsGenericType
+                    && typeof(T).GetGenericArguments()
+                        .SelectMany(argument => argument.AndChildren(t => t.IsGenericType ? t.GetGenericArguments() : new Type[] { }))
+                        .Any(t => typeof(IPersistenceObject).IsAssignableFrom(t)))
+                {
+                    throw new NotImplementedException("Projecting to anonymous type with IPersistenceObject members not yet implemented.");
+                }
+
                 using (Logging.Linq.DebugTraceMethodCall("ExecuteEnumerable"))
                 {
                     if (Logging.Linq.IsInfoEnabled)
