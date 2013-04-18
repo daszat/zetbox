@@ -135,10 +135,10 @@
                     x:Name="details">
                 <Expander IsExpanded="True"
                           Header="{Binding DetailsLabel}">
-                    <StackPanel DataContext="{Binding CurrentView.SelectedItem}"
+                    <Grid DataContext="{Binding CurrentView.SelectedItem}"
                                 Height="300">
-                        <StackPanel.Style>
-                            <Style TargetType="{x:Type StackPanel}">
+                        <Grid.Style>
+                            <Style TargetType="{x:Type Grid}">
                                 <Style.Triggers>
                                     <Trigger Property="DataContext"
                                              Value="{x:Null}">
@@ -147,18 +147,31 @@
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
-                        </StackPanel.Style>
-                        <StackPanel.Background>
+                        </Grid.Style>
+                        <Grid.Background>
                             <LinearGradientBrush>
                                 <GradientStop Color="{Binding Color, Converter={StaticResource LighterShadeConverter}}"
                                               Offset="-0.5" />
                                 <GradientStop Color="{Binding Color}"
                                               Offset="1.0" />
                             </LinearGradientBrush>
-                        </StackPanel.Background>
-                        <ctrls:LabeledView DataContext="{Binding PropertyModelsByName[Summary]}" />
-                        <ctrls:LabeledView DataContext="{Binding PropertyModelsByName[Location]}" />
-                        <Grid>
+                        </Grid.Background>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <ctrls:LabeledView Grid.Row="0" 
+                                           DataContext="{Binding PropertyModelsByName[Calendar]}"
+                                           RequestedKind="Zetbox.App.GUI.TextKind"  />
+                        <ctrls:LabeledView Grid.Row="1"
+                                           DataContext="{Binding PropertyModelsByName[Summary]}" />
+                        <ctrls:LabeledView Grid.Row="2"
+                                           DataContext="{Binding PropertyModelsByName[Location]}" />
+                        <Grid Grid.Row="3">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
@@ -177,11 +190,13 @@
                                                Grid.Column="1"
                                                DataContext="{Binding PropertyModelsByName[IsAllDay]}" />
                         </Grid>
-                        <ctrls:LabeledView DataContext="{Binding PropertyModelsByName[Body]}" />
-                        <ctrls:CommandButton CommandViewModel="{Binding DataContext.OpenCommand, ElementName=details}"
+                        <ctrls:LabeledView Grid.Row="4"
+                                           DataContext="{Binding PropertyModelsByName[Body]}" />
+                        <ctrls:CommandButton Grid.Row="5"
+                                             CommandViewModel="{Binding DataContext.OpenCommand, ElementName=details}"
                                              HorizontalAlignment="Left"
                                              Style="{StaticResource ImageButton}" />
-                    </StackPanel>
+                    </Grid>
                 </Expander>
             </Border>
         </Grid>

@@ -27,6 +27,17 @@
                                  Style="{StaticResource addedMargins}" />
 
         </UniformGrid>
+        <DockPanel DockPanel.Dock="Top"
+                   Margin="{StaticResource AreaGroup1Margin}">
+            <Image DockPanel.Dock="Left"
+                   Source="{Binding CalendarViewModel.Icon, Converter={StaticResource ImageConverter}}"
+                   Width="{StaticResource BigControlHeight}"
+                   Height="{StaticResource BigControlHeight}" />
+            <TextBlock Text="{Binding CalendarViewModel.Name}"
+                       Style="{StaticResource zbTitle}"
+                       Margin="10 0 0 0"
+                       HorizontalAlignment="Left" />
+        </DockPanel>
         <TabControl ItemsSource="{Binding InputViewModels}"
                     SelectedValue="{Binding SelectedInputViewModel}"
                     Style="{StaticResource AreaGroup1TabControl}"

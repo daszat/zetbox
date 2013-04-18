@@ -7,21 +7,32 @@ namespace Zetbox.Client.Presentables.Calendar
     using Zetbox.Client.Presentables;
     using Zetbox.API;
     using Zetbox.Client.Presentables.ZetboxBase;
+    using Zetbox.App.Calendar;
 
     [ViewModelDescriptor]
     public class NewEventDialogViewModel : WindowViewModel
     {
-        public new delegate NewEventDialogViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
+        public new delegate NewEventDialogViewModel Factory(IZetboxContext dataCtx, ViewModel parent, CalendarBook calendar);
 
-        public NewEventDialogViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent)
+        public NewEventDialogViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, CalendarBook calendar)
             : base(appCtx, dataCtx, parent)
         {
             Result = false;
+            Calendar = calendar;
         }
 
         public override string Name
         {
             get { return "New event"; }
+        }
+
+        public CalendarBook Calendar { get; private set; }
+        public DataObjectViewModel CalendarViewModel
+        {
+            get
+            {
+                return DataObjectViewModel.Fetch(ViewModelFactory, DataContext, Parent, Calendar);
+            }
         }
 
         public bool Result { get; private set; }

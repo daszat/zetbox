@@ -16,6 +16,8 @@
                        HorizontalAlignment="Left" />
         </DockPanel>
         <StackPanel>
+            <ctrls:LabeledView DataContext="{Binding PropertyModelsByName[Calendar]}"
+                               RequestedKind="Zetbox.App.GUI.TextKind" />
             <ctrls:LabeledView DataContext="{Binding PropertyModelsByName[Summary]}" />
             <ctrls:LabeledView DataContext="{Binding PropertyModelsByName[Location]}" />
             <Grid>

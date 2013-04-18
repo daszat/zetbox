@@ -407,7 +407,7 @@ namespace Zetbox.Client.Presentables.Calendar
             using (var ctx = _ctxFactory())
             {
                 var calendar = ctx.Find<cal.CalendarBook>(SelectedItem.Calendar.ID);
-                var dlg = ViewModelFactory.CreateViewModel<NewEventDialogViewModel.Factory>().Invoke(ctx, null);
+                var dlg = ViewModelFactory.CreateViewModel<NewEventDialogViewModel.Factory>().Invoke(ctx, null, calendar);
 
                 var args = new NewEventViewModelsArgs(ctx, ViewModelFactory, dlg, calendar, selectedDate, isAllDay);
                 calendar.GetNewEventViewModels(args);
