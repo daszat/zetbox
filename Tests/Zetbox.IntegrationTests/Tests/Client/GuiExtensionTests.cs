@@ -29,6 +29,7 @@ namespace Zetbox.IntegrationTests.Client
     public class GuiExtensionTests : AbstractTestFixture
     {
         [Test]
+        [Ignore("Test fails on linux due to trying to reflect on WPF classes which do not exist")]
         public void should_resolve_ViewDescriptor()
         {
             var ctx = GetContext();
