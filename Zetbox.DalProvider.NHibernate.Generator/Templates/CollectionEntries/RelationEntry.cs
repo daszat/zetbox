@@ -72,10 +72,8 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries
             string positionPropertyName = rel.NeedsPositionStorage(endRole)
                 ? name + Zetbox.API.Helper.PositionSuffix
                 : null;
-            string inverseNavigatorName = relEnd.Navigator != null
-                ? relEnd.Navigator.Name
-                : null;
-            bool inverseNavigatorIsList = relEnd.Navigator != null && relEnd.Navigator.GetIsList();
+            string inverseNavigatorName = null; // do not care about inverse navigator
+            bool inverseNavigatorIsList = false;
             bool eagerLoading = relEnd.Navigator != null && relEnd.Navigator.EagerLoading;
             bool relDataTypeExportable = rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable();
             bool callGetterSetterEvents = false;

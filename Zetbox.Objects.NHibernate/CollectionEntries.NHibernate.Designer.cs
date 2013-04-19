@@ -115,7 +115,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.Base.CalculatedObjectReferenceProperty; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=Inputs; is list;
+        // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable; does not call events
 
@@ -156,13 +156,6 @@ namespace Zetbox.App.Base
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("Inputs", null, null);
-                }
-                if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("Inputs", null, null);
-                }
-
                 // next, set the local reference
                 if (__newValue == null)
                 {
@@ -173,22 +166,6 @@ namespace Zetbox.App.Base
                     this.Proxy.A = __newValue.Proxy;
                 }
 
-                // now fixup redundant, inverse references
-                // The inverse navigator will also fire events when changed, so should
-                // only be touched after setting the local value above.
-                // TODO: for complete correctness, the "other" Changing event should also fire
-                //       before the local value is changed
-                if (__oldValue != null)
-                {
-                    // remove from old list
-                    (__oldValue.Inputs as IRelationListSync<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
-                }
-
-                if (__newValue != null)
-                {
-                    // add to new list
-                    (__newValue.Inputs as IRelationListSync<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
-                }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
@@ -569,7 +546,7 @@ namespace Zetbox.App.Calendar
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.Calendar.CalendarBook; moduleNamespace=Zetbox.App.Calendar;
-        // inverse Navigator=GroupReaders; is list;
+        // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable; does not call events
 
@@ -610,13 +587,6 @@ namespace Zetbox.App.Calendar
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("GroupReaders", null, null);
-                }
-                if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("GroupReaders", null, null);
-                }
-
                 // next, set the local reference
                 if (__newValue == null)
                 {
@@ -627,22 +597,6 @@ namespace Zetbox.App.Calendar
                     this.Proxy.A = __newValue.Proxy;
                 }
 
-                // now fixup redundant, inverse references
-                // The inverse navigator will also fire events when changed, so should
-                // only be touched after setting the local value above.
-                // TODO: for complete correctness, the "other" Changing event should also fire
-                //       before the local value is changed
-                if (__oldValue != null)
-                {
-                    // remove from old list
-                    (__oldValue.GroupReaders as IRelationListSync<Zetbox.App.Calendar.CalendarBook_shared_r_Group_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
-                }
-
-                if (__newValue != null)
-                {
-                    // add to new list
-                    (__newValue.GroupReaders as IRelationListSync<Zetbox.App.Calendar.CalendarBook_shared_r_Group_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
-                }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
@@ -988,7 +942,7 @@ namespace Zetbox.App.Calendar
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.Calendar.CalendarBook; moduleNamespace=Zetbox.App.Calendar;
-        // inverse Navigator=Readers; is list;
+        // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable; does not call events
 
@@ -1029,13 +983,6 @@ namespace Zetbox.App.Calendar
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("Readers", null, null);
-                }
-                if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("Readers", null, null);
-                }
-
                 // next, set the local reference
                 if (__newValue == null)
                 {
@@ -1046,22 +993,6 @@ namespace Zetbox.App.Calendar
                     this.Proxy.A = __newValue.Proxy;
                 }
 
-                // now fixup redundant, inverse references
-                // The inverse navigator will also fire events when changed, so should
-                // only be touched after setting the local value above.
-                // TODO: for complete correctness, the "other" Changing event should also fire
-                //       before the local value is changed
-                if (__oldValue != null)
-                {
-                    // remove from old list
-                    (__oldValue.Readers as IRelationListSync<Zetbox.App.Calendar.CalendarBook_shared_r_Identity_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
-                }
-
-                if (__newValue != null)
-                {
-                    // add to new list
-                    (__newValue.Readers as IRelationListSync<Zetbox.App.Calendar.CalendarBook_shared_r_Identity_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
-                }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
@@ -1402,7 +1333,7 @@ namespace Zetbox.App.Calendar
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.Calendar.CalendarBook; moduleNamespace=Zetbox.App.Calendar;
-        // inverse Navigator=GroupWriters; is list;
+        // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable; does not call events
 
@@ -1443,13 +1374,6 @@ namespace Zetbox.App.Calendar
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("GroupWriters", null, null);
-                }
-                if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("GroupWriters", null, null);
-                }
-
                 // next, set the local reference
                 if (__newValue == null)
                 {
@@ -1460,22 +1384,6 @@ namespace Zetbox.App.Calendar
                     this.Proxy.A = __newValue.Proxy;
                 }
 
-                // now fixup redundant, inverse references
-                // The inverse navigator will also fire events when changed, so should
-                // only be touched after setting the local value above.
-                // TODO: for complete correctness, the "other" Changing event should also fire
-                //       before the local value is changed
-                if (__oldValue != null)
-                {
-                    // remove from old list
-                    (__oldValue.GroupWriters as IRelationListSync<Zetbox.App.Calendar.CalendarBook_shared_w_Group_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
-                }
-
-                if (__newValue != null)
-                {
-                    // add to new list
-                    (__newValue.GroupWriters as IRelationListSync<Zetbox.App.Calendar.CalendarBook_shared_w_Group_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
-                }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
@@ -1821,7 +1729,7 @@ namespace Zetbox.App.Calendar
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.Calendar.CalendarBook; moduleNamespace=Zetbox.App.Calendar;
-        // inverse Navigator=Writers; is list;
+        // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable; does not call events
 
@@ -1862,13 +1770,6 @@ namespace Zetbox.App.Calendar
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("Writers", null, null);
-                }
-                if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("Writers", null, null);
-                }
-
                 // next, set the local reference
                 if (__newValue == null)
                 {
@@ -1879,22 +1780,6 @@ namespace Zetbox.App.Calendar
                     this.Proxy.A = __newValue.Proxy;
                 }
 
-                // now fixup redundant, inverse references
-                // The inverse navigator will also fire events when changed, so should
-                // only be touched after setting the local value above.
-                // TODO: for complete correctness, the "other" Changing event should also fire
-                //       before the local value is changed
-                if (__oldValue != null)
-                {
-                    // remove from old list
-                    (__oldValue.Writers as IRelationListSync<Zetbox.App.Calendar.CalendarBook_shared_w_Identity_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
-                }
-
-                if (__newValue != null)
-                {
-                    // add to new list
-                    (__newValue.Writers as IRelationListSync<Zetbox.App.Calendar.CalendarBook_shared_w_Identity_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
-                }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
@@ -2235,7 +2120,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.Base.DataType; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=ImplementsInterfaces; is list;
+        // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable; does not call events
 
@@ -2276,13 +2161,6 @@ namespace Zetbox.App.Base
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("ImplementsInterfaces", null, null);
-                }
-                if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("ImplementsInterfaces", null, null);
-                }
-
                 // next, set the local reference
                 if (__newValue == null)
                 {
@@ -2293,22 +2171,6 @@ namespace Zetbox.App.Base
                     this.Proxy.A = __newValue.Proxy;
                 }
 
-                // now fixup redundant, inverse references
-                // The inverse navigator will also fire events when changed, so should
-                // only be touched after setting the local value above.
-                // TODO: for complete correctness, the "other" Changing event should also fire
-                //       before the local value is changed
-                if (__oldValue != null)
-                {
-                    // remove from old list
-                    (__oldValue.ImplementsInterfaces as IRelationListSync<Zetbox.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
-                }
-
-                if (__newValue != null)
-                {
-                    // add to new list
-                    (__newValue.ImplementsInterfaces as IRelationListSync<Zetbox.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
-                }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
@@ -2689,7 +2551,7 @@ namespace at.dasz.DocumentManagement
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=at.dasz.DocumentManagement.Document; moduleNamespace=at.dasz.DocumentManagement;
-        // inverse Navigator=Revisions; is list;
+        // inverse Navigator=none; is reference;
         // PositionStorage=A_pos;
         // Target exportable; does not call events
 
@@ -2730,13 +2592,6 @@ namespace at.dasz.DocumentManagement
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("Revisions", null, null);
-                }
-                if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("Revisions", null, null);
-                }
-
                 // next, set the local reference
                 if (__newValue == null)
                 {
@@ -2747,22 +2602,6 @@ namespace at.dasz.DocumentManagement
                     this.Proxy.A = __newValue.Proxy;
                 }
 
-                // now fixup redundant, inverse references
-                // The inverse navigator will also fire events when changed, so should
-                // only be touched after setting the local value above.
-                // TODO: for complete correctness, the "other" Changing event should also fire
-                //       before the local value is changed
-                if (__oldValue != null)
-                {
-                    // remove from old list
-                    (__oldValue.Revisions as IRelationListSync<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
-                }
-
-                if (__newValue != null)
-                {
-                    // add to new list
-                    (__newValue.Revisions as IRelationListSync<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
-                }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
@@ -3208,7 +3047,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=Groups; is list;
+        // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable; does not call events
 
@@ -3249,13 +3088,6 @@ namespace Zetbox.App.Base
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("Groups", null, null);
-                }
-                if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("Groups", null, null);
-                }
-
                 // next, set the local reference
                 if (__newValue == null)
                 {
@@ -3266,22 +3098,6 @@ namespace Zetbox.App.Base
                     this.Proxy.A = __newValue.Proxy;
                 }
 
-                // now fixup redundant, inverse references
-                // The inverse navigator will also fire events when changed, so should
-                // only be touched after setting the local value above.
-                // TODO: for complete correctness, the "other" Changing event should also fire
-                //       before the local value is changed
-                if (__oldValue != null)
-                {
-                    // remove from old list
-                    (__oldValue.Groups as IRelationListSync<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
-                }
-
-                if (__newValue != null)
-                {
-                    // add to new list
-                    (__newValue.Groups as IRelationListSync<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
-                }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
@@ -3306,7 +3122,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=this.Proxy.B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Zetbox.App.Base.Group; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=Member; is list;
+        // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable; does not call events
 
@@ -3347,13 +3163,6 @@ namespace Zetbox.App.Base
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
 
-                if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("Member", null, null);
-                }
-                if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("Member", null, null);
-                }
-
                 // next, set the local reference
                 if (__newValue == null)
                 {
@@ -3364,22 +3173,6 @@ namespace Zetbox.App.Base
                     this.Proxy.B = __newValue.Proxy;
                 }
 
-                // now fixup redundant, inverse references
-                // The inverse navigator will also fire events when changed, so should
-                // only be touched after setting the local value above.
-                // TODO: for complete correctness, the "other" Changing event should also fire
-                //       before the local value is changed
-                if (__oldValue != null)
-                {
-                    // remove from old list
-                    (__oldValue.Member as IRelationListSync<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
-                }
-
-                if (__newValue != null)
-                {
-                    // add to new list
-                    (__newValue.Member as IRelationListSync<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
-                }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
@@ -3645,7 +3438,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.Base.IndexConstraint; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=Properties; is list;
+        // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable; does not call events
 
@@ -3686,13 +3479,6 @@ namespace Zetbox.App.Base
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("Properties", null, null);
-                }
-                if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("Properties", null, null);
-                }
-
                 // next, set the local reference
                 if (__newValue == null)
                 {
@@ -3703,22 +3489,6 @@ namespace Zetbox.App.Base
                     this.Proxy.A = __newValue.Proxy;
                 }
 
-                // now fixup redundant, inverse references
-                // The inverse navigator will also fire events when changed, so should
-                // only be touched after setting the local value above.
-                // TODO: for complete correctness, the "other" Changing event should also fire
-                //       before the local value is changed
-                if (__oldValue != null)
-                {
-                    // remove from old list
-                    (__oldValue.Properties as IRelationListSync<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
-                }
-
-                if (__newValue != null)
-                {
-                    // add to new list
-                    (__newValue.Properties as IRelationListSync<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
-                }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
@@ -4064,7 +3834,7 @@ namespace Zetbox.App.Test
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.Test.Muhblah; moduleNamespace=Zetbox.App.Test;
-        // inverse Navigator=TestCustomObjects_ManyList_Nav; is list;
+        // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable; does not call events
 
@@ -4105,13 +3875,6 @@ namespace Zetbox.App.Test
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("TestCustomObjects_ManyList_Nav", null, null);
-                }
-                if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("TestCustomObjects_ManyList_Nav", null, null);
-                }
-
                 // next, set the local reference
                 if (__newValue == null)
                 {
@@ -4122,22 +3885,6 @@ namespace Zetbox.App.Test
                     this.Proxy.A = __newValue.Proxy;
                 }
 
-                // now fixup redundant, inverse references
-                // The inverse navigator will also fire events when changed, so should
-                // only be touched after setting the local value above.
-                // TODO: for complete correctness, the "other" Changing event should also fire
-                //       before the local value is changed
-                if (__oldValue != null)
-                {
-                    // remove from old list
-                    (__oldValue.TestCustomObjects_ManyList_Nav as IRelationListSync<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
-                }
-
-                if (__newValue != null)
-                {
-                    // add to new list
-                    (__newValue.TestCustomObjects_ManyList_Nav as IRelationListSync<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
-                }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
@@ -4162,7 +3909,7 @@ namespace Zetbox.App.Test
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=this.Proxy.B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Zetbox.App.Test.TestCustomObject; moduleNamespace=Zetbox.App.Test;
-        // inverse Navigator=MuhBlah_ManyList_Nav; is list;
+        // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable; does not call events
 
@@ -4203,13 +3950,6 @@ namespace Zetbox.App.Test
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
 
-                if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("MuhBlah_ManyList_Nav", null, null);
-                }
-                if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("MuhBlah_ManyList_Nav", null, null);
-                }
-
                 // next, set the local reference
                 if (__newValue == null)
                 {
@@ -4220,22 +3960,6 @@ namespace Zetbox.App.Test
                     this.Proxy.B = __newValue.Proxy;
                 }
 
-                // now fixup redundant, inverse references
-                // The inverse navigator will also fire events when changed, so should
-                // only be touched after setting the local value above.
-                // TODO: for complete correctness, the "other" Changing event should also fire
-                //       before the local value is changed
-                if (__oldValue != null)
-                {
-                    // remove from old list
-                    (__oldValue.MuhBlah_ManyList_Nav as IRelationListSync<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
-                }
-
-                if (__newValue != null)
-                {
-                    // add to new list
-                    (__newValue.MuhBlah_ManyList_Nav as IRelationListSync<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
-                }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
@@ -4466,7 +4190,7 @@ namespace Zetbox.App.Test
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.Test.N_to_M_relations_A; moduleNamespace=Zetbox.App.Test;
-        // inverse Navigator=BSide; is list;
+        // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable; does not call events
 
@@ -4507,13 +4231,6 @@ namespace Zetbox.App.Test
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("BSide", null, null);
-                }
-                if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("BSide", null, null);
-                }
-
                 // next, set the local reference
                 if (__newValue == null)
                 {
@@ -4524,22 +4241,6 @@ namespace Zetbox.App.Test
                     this.Proxy.A = __newValue.Proxy;
                 }
 
-                // now fixup redundant, inverse references
-                // The inverse navigator will also fire events when changed, so should
-                // only be touched after setting the local value above.
-                // TODO: for complete correctness, the "other" Changing event should also fire
-                //       before the local value is changed
-                if (__oldValue != null)
-                {
-                    // remove from old list
-                    (__oldValue.BSide as IRelationListSync<Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
-                }
-
-                if (__newValue != null)
-                {
-                    // add to new list
-                    (__newValue.BSide as IRelationListSync<Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
-                }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
@@ -4564,7 +4265,7 @@ namespace Zetbox.App.Test
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=this.Proxy.B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Zetbox.App.Test.N_to_M_relations_B; moduleNamespace=Zetbox.App.Test;
-        // inverse Navigator=ASide; is list;
+        // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable; does not call events
 
@@ -4605,13 +4306,6 @@ namespace Zetbox.App.Test
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
 
-                if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("ASide", null, null);
-                }
-                if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("ASide", null, null);
-                }
-
                 // next, set the local reference
                 if (__newValue == null)
                 {
@@ -4622,22 +4316,6 @@ namespace Zetbox.App.Test
                     this.Proxy.B = __newValue.Proxy;
                 }
 
-                // now fixup redundant, inverse references
-                // The inverse navigator will also fire events when changed, so should
-                // only be touched after setting the local value above.
-                // TODO: for complete correctness, the "other" Changing event should also fire
-                //       before the local value is changed
-                if (__oldValue != null)
-                {
-                    // remove from old list
-                    (__oldValue.ASide as IRelationListSync<Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
-                }
-
-                if (__newValue != null)
-                {
-                    // add to new list
-                    (__newValue.ASide as IRelationListSync<Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
-                }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
@@ -4903,7 +4581,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.GUI.NavigationEntry; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=Groups; is list;
+        // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable; does not call events
 
@@ -4944,13 +4622,6 @@ namespace Zetbox.App.GUI
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("Groups", null, null);
-                }
-                if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("Groups", null, null);
-                }
-
                 // next, set the local reference
                 if (__newValue == null)
                 {
@@ -4961,22 +4632,6 @@ namespace Zetbox.App.GUI
                     this.Proxy.A = __newValue.Proxy;
                 }
 
-                // now fixup redundant, inverse references
-                // The inverse navigator will also fire events when changed, so should
-                // only be touched after setting the local value above.
-                // TODO: for complete correctness, the "other" Changing event should also fire
-                //       before the local value is changed
-                if (__oldValue != null)
-                {
-                    // remove from old list
-                    (__oldValue.Groups as IRelationListSync<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
-                }
-
-                if (__newValue != null)
-                {
-                    // add to new list
-                    (__newValue.Groups as IRelationListSync<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
-                }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
@@ -5357,7 +5012,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.Base.ObjectReferenceProperty; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=Methods; is list;
+        // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable; does not call events
 
@@ -5398,13 +5053,6 @@ namespace Zetbox.App.GUI
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("Methods", null, null);
-                }
-                if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("Methods", null, null);
-                }
-
                 // next, set the local reference
                 if (__newValue == null)
                 {
@@ -5415,22 +5063,6 @@ namespace Zetbox.App.GUI
                     this.Proxy.A = __newValue.Proxy;
                 }
 
-                // now fixup redundant, inverse references
-                // The inverse navigator will also fire events when changed, so should
-                // only be touched after setting the local value above.
-                // TODO: for complete correctness, the "other" Changing event should also fire
-                //       before the local value is changed
-                if (__oldValue != null)
-                {
-                    // remove from old list
-                    (__oldValue.Methods as IRelationListSync<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
-                }
-
-                if (__newValue != null)
-                {
-                    // add to new list
-                    (__newValue.Methods as IRelationListSync<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
-                }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
@@ -5457,7 +5089,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=this.Proxy.B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Zetbox.App.Base.Method; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=ShowByProperties; is list;
+        // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable; does not call events
 
@@ -5498,13 +5130,6 @@ namespace Zetbox.App.GUI
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
 
-                if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("ShowByProperties", null, null);
-                }
-                if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("ShowByProperties", null, null);
-                }
-
                 // next, set the local reference
                 if (__newValue == null)
                 {
@@ -5515,22 +5140,6 @@ namespace Zetbox.App.GUI
                     this.Proxy.B = __newValue.Proxy;
                 }
 
-                // now fixup redundant, inverse references
-                // The inverse navigator will also fire events when changed, so should
-                // only be touched after setting the local value above.
-                // TODO: for complete correctness, the "other" Changing event should also fire
-                //       before the local value is changed
-                if (__oldValue != null)
-                {
-                    // remove from old list
-                    (__oldValue.ShowByProperties as IRelationListSync<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
-                }
-
-                if (__newValue != null)
-                {
-                    // add to new list
-                    (__newValue.ShowByProperties as IRelationListSync<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
-                }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
@@ -5834,7 +5443,7 @@ namespace Zetbox.App.Projekte
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.Projekte.Projekt; moduleNamespace=Zetbox.App.Projekte;
-        // inverse Navigator=Mitarbeiter; is list;
+        // inverse Navigator=none; is reference;
         // PositionStorage=A_pos;
         // Target exportable; does not call events
 
@@ -5875,13 +5484,6 @@ namespace Zetbox.App.Projekte
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("Mitarbeiter", null, null);
-                }
-                if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("Mitarbeiter", null, null);
-                }
-
                 // next, set the local reference
                 if (__newValue == null)
                 {
@@ -5892,22 +5494,6 @@ namespace Zetbox.App.Projekte
                     this.Proxy.A = __newValue.Proxy;
                 }
 
-                // now fixup redundant, inverse references
-                // The inverse navigator will also fire events when changed, so should
-                // only be touched after setting the local value above.
-                // TODO: for complete correctness, the "other" Changing event should also fire
-                //       before the local value is changed
-                if (__oldValue != null)
-                {
-                    // remove from old list
-                    (__oldValue.Mitarbeiter as IRelationListSync<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
-                }
-
-                if (__newValue != null)
-                {
-                    // add to new list
-                    (__newValue.Mitarbeiter as IRelationListSync<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
-                }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
@@ -5964,7 +5550,7 @@ namespace Zetbox.App.Projekte
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=this.Proxy.B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Zetbox.App.Projekte.Mitarbeiter; moduleNamespace=Zetbox.App.Projekte;
-        // inverse Navigator=Projekte; is list;
+        // inverse Navigator=none; is reference;
         // PositionStorage=B_pos;
         // Target exportable; does not call events
 
@@ -6005,13 +5591,6 @@ namespace Zetbox.App.Projekte
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
 
-                if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("Projekte", null, null);
-                }
-                if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("Projekte", null, null);
-                }
-
                 // next, set the local reference
                 if (__newValue == null)
                 {
@@ -6022,22 +5601,6 @@ namespace Zetbox.App.Projekte
                     this.Proxy.B = __newValue.Proxy;
                 }
 
-                // now fixup redundant, inverse references
-                // The inverse navigator will also fire events when changed, so should
-                // only be touched after setting the local value above.
-                // TODO: for complete correctness, the "other" Changing event should also fire
-                //       before the local value is changed
-                if (__oldValue != null)
-                {
-                    // remove from old list
-                    (__oldValue.Projekte as IRelationListSync<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
-                }
-
-                if (__newValue != null)
-                {
-                    // add to new list
-                    (__newValue.Projekte as IRelationListSync<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
-                }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
@@ -6411,7 +5974,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.Base.RoleMembership; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=Relations; is list;
+        // inverse Navigator=none; is reference;
         // PositionStorage=A_pos;
         // Target exportable; does not call events
 
@@ -6452,13 +6015,6 @@ namespace Zetbox.App.Base
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("Relations", null, null);
-                }
-                if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("Relations", null, null);
-                }
-
                 // next, set the local reference
                 if (__newValue == null)
                 {
@@ -6469,22 +6025,6 @@ namespace Zetbox.App.Base
                     this.Proxy.A = __newValue.Proxy;
                 }
 
-                // now fixup redundant, inverse references
-                // The inverse navigator will also fire events when changed, so should
-                // only be touched after setting the local value above.
-                // TODO: for complete correctness, the "other" Changing event should also fire
-                //       before the local value is changed
-                if (__oldValue != null)
-                {
-                    // remove from old list
-                    (__oldValue.Relations as IRelationListSync<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
-                }
-
-                if (__newValue != null)
-                {
-                    // add to new list
-                    (__newValue.Relations as IRelationListSync<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
-                }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
@@ -6965,7 +6505,7 @@ namespace Zetbox.App.SchemaMigration
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.SchemaMigration.SourceColumn; moduleNamespace=Zetbox.App.SchemaMigration;
-        // inverse Navigator=DestinationProperty; is list;
+        // inverse Navigator=none; is reference;
         // PositionStorage=A_pos;
         // Target exportable; does not call events
 
@@ -7006,13 +6546,6 @@ namespace Zetbox.App.SchemaMigration
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("DestinationProperty", null, null);
-                }
-                if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("DestinationProperty", null, null);
-                }
-
                 // next, set the local reference
                 if (__newValue == null)
                 {
@@ -7023,22 +6556,6 @@ namespace Zetbox.App.SchemaMigration
                     this.Proxy.A = __newValue.Proxy;
                 }
 
-                // now fixup redundant, inverse references
-                // The inverse navigator will also fire events when changed, so should
-                // only be touched after setting the local value above.
-                // TODO: for complete correctness, the "other" Changing event should also fire
-                //       before the local value is changed
-                if (__oldValue != null)
-                {
-                    // remove from old list
-                    (__oldValue.DestinationProperty as IRelationListSync<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
-                }
-
-                if (__newValue != null)
-                {
-                    // add to new list
-                    (__newValue.DestinationProperty as IRelationListSync<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
-                }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
@@ -7484,7 +7001,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.GUI.Template; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=Menu; is list;
+        // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable; does not call events
 
@@ -7525,13 +7042,6 @@ namespace Zetbox.App.GUI
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("Menu", null, null);
-                }
-                if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("Menu", null, null);
-                }
-
                 // next, set the local reference
                 if (__newValue == null)
                 {
@@ -7542,22 +7052,6 @@ namespace Zetbox.App.GUI
                     this.Proxy.A = __newValue.Proxy;
                 }
 
-                // now fixup redundant, inverse references
-                // The inverse navigator will also fire events when changed, so should
-                // only be touched after setting the local value above.
-                // TODO: for complete correctness, the "other" Changing event should also fire
-                //       before the local value is changed
-                if (__oldValue != null)
-                {
-                    // remove from old list
-                    (__oldValue.Menu as IRelationListSync<Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
-                }
-
-                if (__newValue != null)
-                {
-                    // add to new list
-                    (__newValue.Menu as IRelationListSync<Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
-                }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
@@ -7863,7 +7357,7 @@ namespace Zetbox.App.Test
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.Test.TestStudent; moduleNamespace=Zetbox.App.Test;
-        // inverse Navigator=Testbogen; is list;
+        // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable; does not call events
 
@@ -7904,13 +7398,6 @@ namespace Zetbox.App.Test
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("Testbogen", null, null);
-                }
-                if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("Testbogen", null, null);
-                }
-
                 // next, set the local reference
                 if (__newValue == null)
                 {
@@ -7921,22 +7408,6 @@ namespace Zetbox.App.Test
                     this.Proxy.A = __newValue.Proxy;
                 }
 
-                // now fixup redundant, inverse references
-                // The inverse navigator will also fire events when changed, so should
-                // only be touched after setting the local value above.
-                // TODO: for complete correctness, the "other" Changing event should also fire
-                //       before the local value is changed
-                if (__oldValue != null)
-                {
-                    // remove from old list
-                    (__oldValue.Testbogen as IRelationListSync<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
-                }
-
-                if (__newValue != null)
-                {
-                    // add to new list
-                    (__newValue.Testbogen as IRelationListSync<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
-                }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
@@ -7961,7 +7432,7 @@ namespace Zetbox.App.Test
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=this.Proxy.B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Zetbox.App.Test.Fragebogen; moduleNamespace=Zetbox.App.Test;
-        // inverse Navigator=Student; is list;
+        // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable; does not call events
 
@@ -8002,13 +7473,6 @@ namespace Zetbox.App.Test
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
 
-                if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("Student", null, null);
-                }
-                if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("Student", null, null);
-                }
-
                 // next, set the local reference
                 if (__newValue == null)
                 {
@@ -8019,22 +7483,6 @@ namespace Zetbox.App.Test
                     this.Proxy.B = __newValue.Proxy;
                 }
 
-                // now fixup redundant, inverse references
-                // The inverse navigator will also fire events when changed, so should
-                // only be touched after setting the local value above.
-                // TODO: for complete correctness, the "other" Changing event should also fire
-                //       before the local value is changed
-                if (__oldValue != null)
-                {
-                    // remove from old list
-                    (__oldValue.Student as IRelationListSync<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
-                }
-
-                if (__newValue != null)
-                {
-                    // add to new list
-                    (__newValue.Student as IRelationListSync<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
-                }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("B", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
@@ -8300,7 +7748,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.Base.TypeRef; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=GenericArguments; is list;
+        // inverse Navigator=none; is reference;
         // PositionStorage=A_pos;
         // Target exportable; does not call events
 
@@ -8341,13 +7789,6 @@ namespace Zetbox.App.Base
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("GenericArguments", null, null);
-                }
-                if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("GenericArguments", null, null);
-                }
-
                 // next, set the local reference
                 if (__newValue == null)
                 {
@@ -8358,22 +7799,6 @@ namespace Zetbox.App.Base
                     this.Proxy.A = __newValue.Proxy;
                 }
 
-                // now fixup redundant, inverse references
-                // The inverse navigator will also fire events when changed, so should
-                // only be touched after setting the local value above.
-                // TODO: for complete correctness, the "other" Changing event should also fire
-                //       before the local value is changed
-                if (__oldValue != null)
-                {
-                    // remove from old list
-                    (__oldValue.GenericArguments as IRelationListSync<Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
-                }
-
-                if (__newValue != null)
-                {
-                    // add to new list
-                    (__newValue.GenericArguments as IRelationListSync<Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
-                }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
@@ -8854,7 +8279,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.GUI.ViewDescriptor; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=SupportedViewModels; is list;
+        // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable; does not call events
 
@@ -8895,13 +8320,6 @@ namespace Zetbox.App.GUI
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("SupportedViewModels", null, null);
-                }
-                if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("SupportedViewModels", null, null);
-                }
-
                 // next, set the local reference
                 if (__newValue == null)
                 {
@@ -8912,22 +8330,6 @@ namespace Zetbox.App.GUI
                     this.Proxy.A = __newValue.Proxy;
                 }
 
-                // now fixup redundant, inverse references
-                // The inverse navigator will also fire events when changed, so should
-                // only be touched after setting the local value above.
-                // TODO: for complete correctness, the "other" Changing event should also fire
-                //       before the local value is changed
-                if (__oldValue != null)
-                {
-                    // remove from old list
-                    (__oldValue.SupportedViewModels as IRelationListSync<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
-                }
-
-                if (__newValue != null)
-                {
-                    // add to new list
-                    (__newValue.SupportedViewModels as IRelationListSync<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
-                }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
@@ -9308,7 +8710,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.GUI.ViewModelDescriptor; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=SecondaryControlKinds; is list;
+        // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target exportable; does not call events
 
@@ -9349,13 +8751,6 @@ namespace Zetbox.App.GUI
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("SecondaryControlKinds", null, null);
-                }
-                if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("SecondaryControlKinds", null, null);
-                }
-
                 // next, set the local reference
                 if (__newValue == null)
                 {
@@ -9366,22 +8761,6 @@ namespace Zetbox.App.GUI
                     this.Proxy.A = __newValue.Proxy;
                 }
 
-                // now fixup redundant, inverse references
-                // The inverse navigator will also fire events when changed, so should
-                // only be touched after setting the local value above.
-                // TODO: for complete correctness, the "other" Changing event should also fire
-                //       before the local value is changed
-                if (__oldValue != null)
-                {
-                    // remove from old list
-                    (__oldValue.SecondaryControlKinds as IRelationListSync<Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
-                }
-
-                if (__newValue != null)
-                {
-                    // add to new list
-                    (__newValue.SecondaryControlKinds as IRelationListSync<Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
-                }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
@@ -9727,7 +9106,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.GUI.Visual; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=Children; is list;
+        // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable; does not call events
 
@@ -9768,13 +9147,6 @@ namespace Zetbox.App.GUI
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("Children", null, null);
-                }
-                if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("Children", null, null);
-                }
-
                 // next, set the local reference
                 if (__newValue == null)
                 {
@@ -9785,22 +9157,6 @@ namespace Zetbox.App.GUI
                     this.Proxy.A = __newValue.Proxy;
                 }
 
-                // now fixup redundant, inverse references
-                // The inverse navigator will also fire events when changed, so should
-                // only be touched after setting the local value above.
-                // TODO: for complete correctness, the "other" Changing event should also fire
-                //       before the local value is changed
-                if (__oldValue != null)
-                {
-                    // remove from old list
-                    (__oldValue.Children as IRelationListSync<Zetbox.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
-                }
-
-                if (__newValue != null)
-                {
-                    // add to new list
-                    (__newValue.Children as IRelationListSync<Zetbox.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
-                }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
@@ -10106,7 +9462,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.GUI.Visual; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=ContextMenu; is list;
+        // inverse Navigator=none; is reference;
         // PositionStorage=none;
         // Target not exportable; does not call events
 
@@ -10147,13 +9503,6 @@ namespace Zetbox.App.GUI
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                if (__oldValue != null) {
-                    __oldValue.NotifyPropertyChanging("ContextMenu", null, null);
-                }
-                if (__newValue != null) {
-                    __newValue.NotifyPropertyChanging("ContextMenu", null, null);
-                }
-
                 // next, set the local reference
                 if (__newValue == null)
                 {
@@ -10164,22 +9513,6 @@ namespace Zetbox.App.GUI
                     this.Proxy.A = __newValue.Proxy;
                 }
 
-                // now fixup redundant, inverse references
-                // The inverse navigator will also fire events when changed, so should
-                // only be touched after setting the local value above.
-                // TODO: for complete correctness, the "other" Changing event should also fire
-                //       before the local value is changed
-                if (__oldValue != null)
-                {
-                    // remove from old list
-                    (__oldValue.ContextMenu as IRelationListSync<Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
-                }
-
-                if (__newValue != null)
-                {
-                    // add to new list
-                    (__newValue.ContextMenu as IRelationListSync<Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
-                }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
