@@ -32,10 +32,13 @@ namespace Zetbox.IntegrationTests.Client
         public void should_resolve_ViewDescriptor()
         {
             var ctx = GetContext();
-            var vmd = ctx.GetQuery<ViewModelDescriptor>().First(v => v.ViewModelTypeRef == "Zetbox.Client.Presentables.DataObjectViewModel, Zetbox.Client");
-            var vd = vmd.GetViewDescriptor(Toolkit.WPF);
 
-            Assert.That(vd, Is.Not.Null);
+            var vmd = ctx.GetQuery<ViewModelDescriptor>().First(v => v.ViewModelTypeRef == "Zetbox.Client.Presentables.DataObjectViewModel, Zetbox.Client");
+            Assert.That(vmd, Is.Not.Null, "ViewModelDescriptor");
+
+            var vd = vmd.GetViewDescriptor(Toolkit.WPF);
+            Assert.That(vd, Is.Not.Null, "ViewDescriptor");
+
             Assert.That(vd.ControlTypeRef, Is.EqualTo("Zetbox.Client.WPF.View.ObjectEditor.DataObjectEditor, Zetbox.Client.WPF"));
         }
     }
