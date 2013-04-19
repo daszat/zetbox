@@ -88,7 +88,7 @@ namespace Zetbox.API.AbstractConsumerTests.ContextTests
             var ctx = GetContext();
             var qry = ctx.GetQuery<TestObjClass>().Select(t => new { X = t });
 
-            Assert.That(qry.ToList(), Throws.InstanceOf<NotImplementedException>());
+            Assert.That(() => qry.ToList(), Throws.InstanceOf<NotImplementedException>());
         }
     }
 }
