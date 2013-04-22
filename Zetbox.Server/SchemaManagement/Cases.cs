@@ -3107,11 +3107,11 @@ namespace Zetbox.Server.SchemaManagement
             var objClass = (ObjectClass)uc.Constrained;
             var tblName = objClass.GetTableRef(db);
             var columns = Construct.GetUCColNames(uc);
-            if (db.CheckIndexExists(tblName, Construct.IndexName(objClass.TableName, columns)))
+            var idxName = Construct.IndexName(objClass.TableName, columns);
+            if (db.CheckIndexExists(tblName, idxName))
             {
                 Log.InfoFormat("Drop Index Constraint: {0} on {1}({2})", uc.Reason, objClass.TableName, string.Join(", ", columns));
-                if (db.CheckIndexExists(tblName, Construct.IndexName(objClass.TableName, columns)))
-                    db.DropIndex(tblName, Construct.IndexName(objClass.TableName, columns));
+                db.DropIndex(tblName, idxName);
             }
         }
         #endregion
