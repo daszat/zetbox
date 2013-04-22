@@ -126,6 +126,9 @@
   <data name="CalendarItemsLabel" xml:space="preserve">
     <value>Calendars</value>
   </data>
+  <data name="CalendarLabel" xml:space="preserve">
+    <value>Calendar</value>
+  </data>
   <data name="ClearAllCommand_Label" xml:space="preserve">
     <value>Only self</value>
   </data>

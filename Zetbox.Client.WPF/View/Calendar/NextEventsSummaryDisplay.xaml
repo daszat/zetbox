@@ -17,11 +17,17 @@
         <ctrls:ZetboxListView ItemsSource="{Binding NextEventsAsync, Mode=OneWay, ValidatesOnDataErrors=true}">
             <ctrls:ZetboxListView.View>
                 <GridView>
+                    <GridViewColumn Header="{Binding CalendarLabel}"
+                                    Width="100"
+                                    DisplayMemberBinding="{Binding CalendarName}" />
                     <GridViewColumn Header="{Binding DateLabel}"
+                                    Width="75"
                                     DisplayMemberBinding="{Binding DateText}" />
                     <GridViewColumn Header="{Binding FromLabel}"
+                                    Width="50"
                                     DisplayMemberBinding="{Binding FromText}" />
                     <GridViewColumn Header="{Binding UntilLabel}"
+                                    Width="50"
                                     DisplayMemberBinding="{Binding UntilText}" />
                     <GridViewColumn Header="{Binding SummaryLabel}"
                                     Width="300"

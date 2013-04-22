@@ -50,6 +50,7 @@ namespace Zetbox.Client.Presentables.Calendar
         public string UntilLabel { get { return CalendarResources.UntilLabel; } }
         public string SummaryLabel { get { return CalendarResources.SummaryLabel; } }
         public string LocationLabel { get { return CalendarResources.LocationLabel; } }
+        public string CalendarLabel { get { return CalendarResources.CalendarLabel; } }
         #endregion
 
         private RefreshCommand _refreshCommand;

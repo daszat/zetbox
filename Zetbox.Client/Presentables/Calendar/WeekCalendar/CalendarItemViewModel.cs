@@ -55,6 +55,8 @@ namespace Zetbox.Client.Presentables.Calendar
                     OnPropertyChanged("Color");
                     break;
                 case "Location":
+                    OnPropertyChanged("Location");
+                    break;
                 case "Body":
                     // not used
                     break;
@@ -179,6 +181,22 @@ namespace Zetbox.Client.Presentables.Calendar
             get
             {
                 return EventViewModel.Event.Summary;
+            }
+        }
+
+        public string Location
+        {
+            get
+            {
+                return EventViewModel.Event.Location;
+            }
+        }
+
+        public string CalendarName
+        {
+            get
+            {
+                return EventViewModel.Event.Calendar != null ? EventViewModel.Event.Calendar.Name : string.Empty;
             }
         }
 
