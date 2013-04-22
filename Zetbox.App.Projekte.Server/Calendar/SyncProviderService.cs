@@ -95,6 +95,10 @@ namespace Zetbox.App.Projekte.Server.Calendar
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                Logging.Log.Error("Error during calendar sync", ex);
+            }
             finally
             {
                 // No need for lock -> my thread has set _isRunning to true
