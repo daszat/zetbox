@@ -85,6 +85,8 @@ namespace Zetbox.Server.SchemaManagement
 
         private void CreateFinalRightsInfrastructure()
         {
+            Log.Info("Recreating Rights Infrastructure");
+
             foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.Name))
             {
                 if (!objClass.NeedsRightsTable()) continue;
@@ -110,6 +112,8 @@ namespace Zetbox.Server.SchemaManagement
 
         private void CreateFinalCheckConstraints()
         {
+            Log.Info("Recreating Check Constraints");
+
             // this does more than required (dropping already existing), but good enough for now.
             // has to be revisited if someone else creates check constraints.
             Workaround_UpdateTPHNotNullCheckConstraint();
@@ -117,6 +121,8 @@ namespace Zetbox.Server.SchemaManagement
 
         private void DropVolatileObjects()
         {
+            Log.Info("Dropping volatile objects");
+
             // .ToList() -> There is already an open DataReader associated with this Command which must be closed first
             foreach (var triggerName in db.GetTriggerNames().ToList())
             {

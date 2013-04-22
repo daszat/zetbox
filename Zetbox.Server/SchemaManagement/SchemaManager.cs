@@ -74,12 +74,13 @@ namespace Zetbox.Server.SchemaManagement
 
         private void WriteReportHeader(string reportName)
         {
+            var headerLog = log4net.LogManager.GetLogger("Zetbox.Server.Schema.ReportHeader");
             var connectionString = config.Server.GetConnectionString(Helper.ZetboxConnectionStringKey);
 
-            Log.InfoFormat("== {0} ==", reportName);
-            Log.InfoFormat("Date: {0}", DateTime.Now);
-            Log.InfoFormat("Database: {0}", db.GetSafeConnectionString(connectionString.ConnectionString));
-            Log.Info(String.Empty);
+            headerLog.InfoFormat("== {0} ==", reportName);
+            headerLog.InfoFormat("Date: {0}", DateTime.Now);
+            headerLog.InfoFormat("Database: {0}", db.GetSafeConnectionString(connectionString.ConnectionString));
+            headerLog.Info(String.Empty);
         }
 
         #endregion
