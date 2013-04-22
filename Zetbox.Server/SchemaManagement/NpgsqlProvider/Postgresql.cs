@@ -1283,7 +1283,6 @@ END$BODY$
 
         public override void CreateEmptyRightsViewUnmaterialized(TableRef viewName)
         {
-            Log.DebugFormat("Creating *empty* unmaterialized rights view \"{0}\"", viewName);
             ExecuteNonQuery(String.Format(@"CREATE VIEW {0} AS SELECT 0 AS ""ID"", 0 AS ""Identity"", 0 AS ""Right"" WHERE 0 = 1", FormatSchemaName(viewName)));
         }
 
@@ -1291,7 +1290,6 @@ END$BODY$
         {
             if (acls == null)
                 throw new ArgumentNullException("acls");
-            Log.DebugFormat("Creating unmaterialized rights view for \"{0}\"", tblName);
 
             StringBuilder view = new StringBuilder();
             view.AppendFormat(@"CREATE VIEW {0} AS
@@ -1344,7 +1342,6 @@ FROM (", FormatSchemaName(viewName));
             TableRef tblName,
             TableRef tblNameRights)
         {
-            Log.DebugFormat("Creating refresh rights procedure for \"{0}\"", tblName);
             ExecuteNonQuery(String.Format(
                 @"
 CREATE FUNCTION {0}(IN refreshID integer) RETURNS void AS
@@ -1367,13 +1364,11 @@ LANGUAGE 'plpgsql' VOLATILE",
 
         public override void ExecRefreshRightsOnProcedure(ProcRef procName)
         {
-            Log.DebugFormat("Refreshing rights for [{0}]", procName);
             ExecuteNonQuery(String.Format(@"SELECT {0}(NULL)", FormatSchemaName(procName)));
         }
 
         public override void ExecRefreshAllRightsProcedure()
         {
-            Log.DebugFormat("Refreshing all rights");
             ExecuteNonQuery(string.Format(@"SELECT {0}(NULL)", FormatSchemaName(GetProcedureName("dbo", Construct.SecurityRulesRefreshAllRightsProcedureName()))));
         }
 
@@ -1845,7 +1840,6 @@ END$BODY$
 
         public override void RefreshDbStats()
         {
-            Log.Info("Vacuuming database");
             ExecuteNonQuery("VACUUM ANALYZE");
         }
 

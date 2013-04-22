@@ -338,6 +338,11 @@ namespace Zetbox.API.Server
     {
         public TableRef TableName { get; set; }
         public string ConstraintName { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("{0}.{1}", TableName, ConstraintName);
+        }
     }
 
     public class ACL

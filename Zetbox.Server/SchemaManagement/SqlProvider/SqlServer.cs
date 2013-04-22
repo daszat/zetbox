@@ -805,8 +805,6 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
 
             string colSpec = string.Join(", ", columns.Select(c => "[" + c + "]").ToArray());
 
-            Log.DebugFormat("Creating index {0}.[{1}] ({2})", FormatSchemaName(tblName), idxName, colSpec);
-
             string appendIndexFilter = string.Empty;
             if (unique && !clustered && columns.Length == 1)
             {
@@ -1011,7 +1009,6 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
 
         public override void CopyColumnData(TableRef srcTblName, string srcColName, TableRef tblName, string colName)
         {
-            Log.DebugFormat("Copying data from [{0}].[{1}] to [{2}].[{3}]", srcTblName, srcColName, tblName, colName);
             ExecuteNonQuery(string.Format("UPDATE dest SET dest.[{0}] = src.[{1}] FROM {2} dest INNER JOIN {3} src ON dest.ID = src.ID",
                 colName, srcColName, FormatSchemaName(tblName), FormatSchemaName(srcTblName)));
         }
@@ -1066,21 +1063,18 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
 
         public override void MigrateFKs(TableRef srcTblName, string srcColName, TableRef tblName, string colName)
         {
-            Log.DebugFormat("Migrating FK data from [{0}].[{1}] to [{2}].[{3}]", srcTblName, srcColName, tblName, colName);
-            ExecuteNonQuery(string.Format("UPDATE dest SET dest.[{0}] = src.[ID] FROM [{2}] dest INNER JOIN [{3}] src ON dest.ID = src.[{1}]",
+            ExecuteNonQuery(string.Format("UPDATE dest cSET dest.[{0}] = src.[ID] FROM [{2}] dest INNER JOIN [{3}] src ON dest.ID = src.[{1}]",
                 colName, srcColName, FormatSchemaName(tblName), FormatSchemaName(srcTblName)));
         }
 
         public override void InsertFKs(TableRef srcTblName, string srcColName, TableRef tblName, string colName, string fkColName)
         {
-            Log.DebugFormat("Inserting FK data from [{0}]([{1}]) to [{2}]([{3}],[{4}])", srcTblName, srcColName, tblName, colName, fkColName);
             ExecuteNonQuery(string.Format("INSERT INTO {0} ([{1}], [{2}]) SELECT [ID], [{3}] FROM {4} WHERE [{3}] IS NOT NULL",
                 FormatSchemaName(tblName), colName, fkColName, srcColName, FormatSchemaName(srcTblName)));
         }
 
         public override void CopyFKs(TableRef srcTblName, string srcColName, TableRef destTblName, string destColName, string srcFKColName)
         {
-            Log.DebugFormat("Copy FK data from [{0}]([{1}]) to [{2}]([{3}])", srcTblName, srcColName, destTblName, destColName);
             ExecuteNonQuery(string.Format("UPDATE dest SET dest.[{0}] = src.[{1}] FROM {2} dest  INNER JOIN {3} src ON src.[{4}] = dest.[ID]",
                 destColName, srcColName, FormatSchemaName(destTblName), FormatSchemaName(srcTblName), srcFKColName));
         }
@@ -1100,8 +1094,6 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
             if (tblName == null) throw new ArgumentNullException("tblName");
             if (tblList == null) throw new ArgumentNullException("tblList");
             if (triggerName.Database != tblName.Database || triggerName.Schema != tblName.Schema) throw new ArgumentOutOfRangeException("tblName", string.Format("tblName and triggerName must reference the same database and schema, but don't: tbl:{0}.{1} != trg:{2}.{3}", tblName.Database, tblName.Schema, triggerName.Database, triggerName.Schema));
-
-            Log.DebugFormat("Creating trigger to update rights [{0}]", FormatSchemaName(triggerName));
 
             StringBuilder sb = new StringBuilder();
             sb.AppendFormat(@"CREATE TRIGGER [{0}]
@@ -1187,7 +1179,6 @@ END");
 
         public override void CreateEmptyRightsViewUnmaterialized(TableRef viewName)
         {
-            Log.DebugFormat("Creating *empty* unmaterialized rights view [{0}]", viewName);
             ExecuteNonQuery(string.Format(@"CREATE VIEW {0} AS SELECT 0 [ID], 0 [Identity], 0 [Right] WHERE 0 = 1", FormatSchemaName(viewName)));
         }
 
@@ -1199,7 +1190,6 @@ END");
                 throw new ArgumentNullException("tblName");
             if (acls == null)
                 throw new ArgumentNullException("acls");
-            Log.DebugFormat("Creating unmaterialized rights view for [{0}]", tblName);
 
             StringBuilder view = new StringBuilder();
             view.AppendFormat(@"CREATE VIEW [{0}].[{1}] AS
@@ -1243,7 +1233,6 @@ FROM (", viewName.Schema, viewName.Name);
 
         public override void CreateRefreshRightsOnProcedure(ProcRef procName, TableRef viewUnmaterializedName, TableRef tblName, TableRef tblNameRights)
         {
-            Log.DebugFormat("Creating refresh rights procedure for [{0}]", tblName);
             ExecuteNonQuery(string.Format(@"CREATE PROCEDURE {0} (@ID INT = NULL) AS
                     BEGIN
                         SET NOCOUNT ON
@@ -1266,13 +1255,11 @@ FROM (", viewName.Schema, viewName.Name);
 
         public override void ExecRefreshRightsOnProcedure(ProcRef procName)
         {
-            Log.DebugFormat("Refreshing rights for [{0}]", procName);
             ExecuteNonQuery(string.Format(@"EXEC {0}", FormatSchemaName(procName)));
         }
 
         public override void ExecRefreshAllRightsProcedure()
         {
-            Log.DebugFormat("Refreshing all rights");
             ExecuteNonQuery(string.Format(@"EXEC {0}", FormatSchemaName(GetProcedureName("dbo", Construct.SecurityRulesRefreshAllRightsProcedureName()))));
         }
 
@@ -1606,6 +1593,7 @@ END";
         public override void RefreshDbStats()
         {
             // do nothing
+            Log.Info("Nothing to do");
         }
     }
 }
