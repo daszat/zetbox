@@ -270,9 +270,6 @@ namespace Zetbox.API.AbstractConsumerTests.N_to_M_relations
             aSide1.BSide.Add(bSide1);
             SubmitAndReload();
 
-            // TODO: remove this after case 2115 is fixed
-            aSide1.BSide.Clear();
-
             ctx.Delete(aSide1);
             ctx.Delete(bSide1);
 
