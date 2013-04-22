@@ -3,7 +3,7 @@
   <ConfigName>Zetbox.DalProvider.NHibernate's Test MSSQL Configuration</ConfigName>
   <Server StartServer="false">
     <ConnectionStrings>
-      <Database Name="Zetbox" Schema="MSSQL" Provider="NHibernate.Dialect.MsSql2005Dialect">Data Source=.\SQLEXPRESS;Initial Catalog=zetbox_test;Integrated Security=True;MultipleActiveResultSets=true;</Database>
+      <Database Name="Zetbox" Schema="MSSQL" Provider="NHibernate.Dialect.MsSql2005Dialect">Data Source=.\SQLEXPRESS;Initial Catalog=zetbox;Integrated Security=True;MultipleActiveResultSets=true;</Database>
     </ConnectionStrings>
     <DocumentStore>DocumentStore\Server\</DocumentStore>
     <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>
