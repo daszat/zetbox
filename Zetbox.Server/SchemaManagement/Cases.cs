@@ -2937,7 +2937,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             if (objClass.NeedsRightsTable()) return false;
             ObjectClass savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
-            if(savedObjClass == null || !savedObjClass.NeedsRightsTable()) return false;
+            if (savedObjClass == null || !savedObjClass.NeedsRightsTable()) return false;
 
             return objClass.TableName != savedObjClass.TableName;
         }
@@ -2954,8 +2954,8 @@ namespace Zetbox.Server.SchemaManagement
             var savedRightsViewUnmaterializedName = db.GetTableName(savedObjClass.Module.SchemaName, Construct.SecurityRulesRightsViewUnmaterializedName(savedObjClass));
 
             var refreshRightsOnProcedureName = db.GetProcedureName(objClass.Module.SchemaName, Construct.SecurityRulesRefreshRightsOnProcedureName(objClass));
-            var savedRefreshRightsOnProcedureName = db.GetProcedureName(savedObjClass.Module.SchemaName, Construct.SecurityRulesRefreshRightsOnProcedureName(savedObjClass)); 
-            
+            var savedRefreshRightsOnProcedureName = db.GetProcedureName(savedObjClass.Module.SchemaName, Construct.SecurityRulesRefreshRightsOnProcedureName(savedObjClass));
+
             var savedUpdateRightsTriggerName = new TriggerRef(savedTblName, Construct.SecurityRulesUpdateRightsTriggerName(savedObjClass));
 
             Log.InfoFormat("Renaming ObjectClass Security Rules: {0}", objClass.Name);
