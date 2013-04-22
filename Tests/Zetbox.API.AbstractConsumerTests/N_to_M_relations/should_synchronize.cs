@@ -19,9 +19,9 @@ namespace Zetbox.API.AbstractConsumerTests.N_to_M_relations
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using NUnit.Framework;
     using Zetbox.API;
     using Zetbox.App.Test;
-    using NUnit.Framework;
 
     public abstract class should_synchronize
         : AbstractTestFixture
@@ -274,6 +274,48 @@ namespace Zetbox.API.AbstractConsumerTests.N_to_M_relations
             ctx.Delete(bSide1);
 
             ctx.SubmitChanges();
+        }
+
+        [Test]
+        public void when_removing_from_aSide()
+        {
+            aSide1.BSide.Add(bSide1);
+            SubmitAndReload();
+
+            aSide1.BSide.Remove(bSide1);
+            Assert.That(bSide1.ASide, Has.No.Contains(aSide1));
+            ctx.SubmitChanges();
+        }
+
+        [Test]
+        public void when_removing_from_bSide()
+        {
+            bSide1.ASide.Add(aSide1);
+            SubmitAndReload();
+
+            bSide1.ASide.Remove(aSide1);
+
+            Assert.That(aSide1.BSide, Has.No.Contains(bSide1));
+            ctx.SubmitChanges();
+        }
+
+        [Test]
+        public void when_deleting_RelationEntry()
+        {
+            aSide1.BSide.Add(bSide1);
+            var relEntry = ctx.AttachedObjects.OfType<N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntry>().Single();
+            SubmitAndReload();
+
+            relEntry = ctx.FindPersistenceObject<N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntry>(relEntry.ID);
+            ctx.Delete(relEntry);
+
+            Assert.That(aSide1.BSide, Is.Empty);
+            Assert.That(bSide1.ASide, Is.Empty);
+
+            SubmitAndReload();
+
+            Assert.That(aSide1.BSide, Is.Empty);
+            Assert.That(bSide1.ASide, Is.Empty);
         }
     }
 }
