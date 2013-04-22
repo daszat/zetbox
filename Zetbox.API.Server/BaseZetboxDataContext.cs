@@ -223,6 +223,9 @@ namespace Zetbox.API.Server
             CheckDisposed();
             if (obj == null) { throw new ArgumentNullException("obj"); }
 
+            // Do not notify an object a second time.
+            if (obj.ObjectState == DataObjectState.Deleted) { return; }
+
             if (!obj.CurrentAccessRights.HasDeleteRights())
             {
                 throw new System.Security.SecurityException(string.Format("The current identity has no rights to delete this Object: {0}({1})", GetInterfaceType(obj).Type.FullName, obj.ID));
