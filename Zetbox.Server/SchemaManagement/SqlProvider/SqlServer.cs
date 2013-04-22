@@ -19,6 +19,7 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
     using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
+    using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Linq.Expressions;
@@ -30,7 +31,6 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
     using Zetbox.API.SchemaManagement;
     using Zetbox.API.Server;
     using Zetbox.API.Utils;
-    using System.Globalization;
 
     public class SqlServer
         : AdoNetSchemaProvider<SqlConnection, SqlTransaction, SqlCommand>
@@ -776,8 +776,9 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
 
         public override bool CheckIndexExists(TableRef tblName, string idxName)
         {
-            return (int)ExecuteScalar("SELECT COUNT(*) from sys.sysindexes WHERE [name] = @index",
+            return (int)ExecuteScalar("SELECT COUNT(*) from sys.sysindexes WHERE id = OBJECT_ID(@tbl) AND [name] = @index",
                 new Dictionary<string, object>(){
+                    { "@tbl", FormatSchemaName(tblName) },
                     { "@index", idxName },
                 }) > 0;
         }
