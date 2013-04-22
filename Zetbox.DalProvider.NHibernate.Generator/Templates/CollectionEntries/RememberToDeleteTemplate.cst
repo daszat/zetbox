@@ -27,13 +27,18 @@
 <%@ Import Namespace="Zetbox.App.Extensions" %>
 <%@ Import Namespace="Zetbox.Generator" %>
 <%@ Import Namespace="Zetbox.Generator.Extensions" %>
+<%@ Parameter Name="manageCollection" Type="bool" %>
+<%@ Parameter Name="aRefsObj" Type="bool" %>
 <%@ Parameter Name="aName" Type="string" %>
+<%@ Parameter Name="aCollectionName" Type="string" %>
+<%@ Parameter Name="bRefsObj" Type="bool" %>
 <%@ Parameter Name="bName" Type="string" %>
+<%@ Parameter Name="bCollectionName" Type="string" %>
 
         public override void NotifyDeleting()
         {
             base.NotifyDeleting();
-<% if (!string.IsNullOrEmpty(aName)) { %>
+<% if (aRefsObj) { %>
 
             // Follow <%= aName %>
             if (this.<%= aName %> != null && this.<%= aName %>.ObjectState == DataObjectState.Deleted)
@@ -42,7 +47,7 @@
                 ((NHibernatePersistenceObject)this.<%= aName %>).ChildrenToDelete.Add(this);
             }
 <% } %>
-<% if (!string.IsNullOrEmpty(bName)) { %>
+<% if (bRefsObj) { %>
 
             // Follow <%= bName %>
             if (this.<%= bName %> != null && this.<%= bName %>.ObjectState == DataObjectState.Deleted)
@@ -51,13 +56,27 @@
                 ((NHibernatePersistenceObject)this.<%= bName %>).ChildrenToDelete.Add(this);
             }
 <% } %>
-<% if (!string.IsNullOrEmpty(aName)) { %>
+<% var manageA = manageCollection && !string.IsNullOrEmpty(aName) && !string.IsNullOrEmpty(aCollectionName); %>
+<% var manageB = manageCollection && !string.IsNullOrEmpty(bName) && !string.IsNullOrEmpty(bCollectionName); %>
+<% if (manageA) { %>
+
+            // remove from collections manually to notify NHibernate if necessary
+            if (this.<%= aName %> != null && this.<%= aName %>.<%= aCollectionName %>.Contains(this.<%= bName %>)) this.<%= aName %>.<%= aCollectionName %>.Remove(this.<%= bName %>);
+<% } %>
+<% if (manageA && manageB) { %>
+            else
+<% } %>
+<% if (manageB) { %>
+            // The other direction is handled by the infrastructure (but <%= aName %> might be null)
+            if (this.<%= bName %> != null && this.<%= bName %>.<%= bCollectionName %>.Contains(this.<%= aName %>)) this.<%= bName %>.<%= bCollectionName %>.Remove(this.<%= aName %>);
+<% } %>
+<% if (aRefsObj) { %>
 
             // reset pointers on being deleted
             // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
             this.<%= aName %> = null;
 <% } %>
-<% if (!string.IsNullOrEmpty(bName)) { %>
+<% if (bRefsObj) { %>
             this.<%= bName %> = null;
 <% } %>
         }

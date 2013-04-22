@@ -414,6 +414,9 @@ namespace Zetbox.App.Base
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
             }
 
+            // remove from collections manually to notify NHibernate if necessary
+            if (this.A != null && this.A.Inputs.Contains(this.B)) this.A.Inputs.Remove(this.B);
+
             // reset pointers on being deleted
             // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
             this.A = null;
@@ -845,6 +848,9 @@ namespace Zetbox.App.Calendar
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
             }
 
+            // remove from collections manually to notify NHibernate if necessary
+            if (this.A != null && this.A.GroupReaders.Contains(this.B)) this.A.GroupReaders.Remove(this.B);
+
             // reset pointers on being deleted
             // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
             this.A = null;
@@ -1202,6 +1208,9 @@ namespace Zetbox.App.Calendar
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.B);
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
             }
+
+            // remove from collections manually to notify NHibernate if necessary
+            if (this.A != null && this.A.Readers.Contains(this.B)) this.A.Readers.Remove(this.B);
 
             // reset pointers on being deleted
             // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
@@ -1632,6 +1641,9 @@ namespace Zetbox.App.Calendar
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
             }
 
+            // remove from collections manually to notify NHibernate if necessary
+            if (this.A != null && this.A.GroupWriters.Contains(this.B)) this.A.GroupWriters.Remove(this.B);
+
             // reset pointers on being deleted
             // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
             this.A = null;
@@ -1989,6 +2001,9 @@ namespace Zetbox.App.Calendar
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.B);
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
             }
+
+            // remove from collections manually to notify NHibernate if necessary
+            if (this.A != null && this.A.Writers.Contains(this.B)) this.A.Writers.Remove(this.B);
 
             // reset pointers on being deleted
             // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
@@ -2418,6 +2433,9 @@ namespace Zetbox.App.Base
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.B);
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
             }
+
+            // remove from collections manually to notify NHibernate if necessary
+            if (this.A != null && this.A.ImplementsInterfaces.Contains(this.B)) this.A.ImplementsInterfaces.Remove(this.B);
 
             // reset pointers on being deleted
             // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
@@ -2946,6 +2964,9 @@ namespace at.dasz.DocumentManagement
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
             }
 
+            // remove from collections manually to notify NHibernate if necessary
+            if (this.A != null && this.A.Revisions.Contains(this.B)) this.A.Revisions.Remove(this.B);
+
             // reset pointers on being deleted
             // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
             this.A = null;
@@ -3307,6 +3328,12 @@ namespace Zetbox.App.Base
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.B);
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
             }
+
+            // remove from collections manually to notify NHibernate if necessary
+            if (this.A != null && this.A.Groups.Contains(this.B)) this.A.Groups.Remove(this.B);
+            else
+            // The other direction is handled by the infrastructure (but A might be null)
+            if (this.B != null && this.B.Member.Contains(this.A)) this.B.Member.Remove(this.A);
 
             // reset pointers on being deleted
             // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
@@ -3737,6 +3764,9 @@ namespace Zetbox.App.Base
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
             }
 
+            // remove from collections manually to notify NHibernate if necessary
+            if (this.A != null && this.A.Properties.Contains(this.B)) this.A.Properties.Remove(this.B);
+
             // reset pointers on being deleted
             // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
             this.A = null;
@@ -4095,6 +4125,12 @@ namespace Zetbox.App.Test
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
             }
 
+            // remove from collections manually to notify NHibernate if necessary
+            if (this.A != null && this.A.TestCustomObjects_ManyList_Nav.Contains(this.B)) this.A.TestCustomObjects_ManyList_Nav.Remove(this.B);
+            else
+            // The other direction is handled by the infrastructure (but A might be null)
+            if (this.B != null && this.B.MuhBlah_ManyList_Nav.Contains(this.A)) this.B.MuhBlah_ManyList_Nav.Remove(this.A);
+
             // reset pointers on being deleted
             // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
             this.A = null;
@@ -4450,6 +4486,12 @@ namespace Zetbox.App.Test
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.B);
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
             }
+
+            // remove from collections manually to notify NHibernate if necessary
+            if (this.A != null && this.A.BSide.Contains(this.B)) this.A.BSide.Remove(this.B);
+            else
+            // The other direction is handled by the infrastructure (but A might be null)
+            if (this.B != null && this.B.ASide.Contains(this.A)) this.B.ASide.Remove(this.A);
 
             // reset pointers on being deleted
             // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
@@ -4879,6 +4921,9 @@ namespace Zetbox.App.GUI
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.B);
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
             }
+
+            // remove from collections manually to notify NHibernate if necessary
+            if (this.A != null && this.A.Groups.Contains(this.B)) this.A.Groups.Remove(this.B);
 
             // reset pointers on being deleted
             // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
@@ -5310,6 +5355,12 @@ namespace Zetbox.App.GUI
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.B);
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
             }
+
+            // remove from collections manually to notify NHibernate if necessary
+            if (this.A != null && this.A.Methods.Contains(this.B)) this.A.Methods.Remove(this.B);
+            else
+            // The other direction is handled by the infrastructure (but A might be null)
+            if (this.B != null && this.B.ShowByProperties.Contains(this.A)) this.B.ShowByProperties.Remove(this.A);
 
             // reset pointers on being deleted
             // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
@@ -5837,6 +5888,12 @@ namespace Zetbox.App.Projekte
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.B);
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
             }
+
+            // remove from collections manually to notify NHibernate if necessary
+            if (this.A != null && this.A.Mitarbeiter.Contains(this.B)) this.A.Mitarbeiter.Remove(this.B);
+            else
+            // The other direction is handled by the infrastructure (but A might be null)
+            if (this.B != null && this.B.Projekte.Contains(this.A)) this.B.Projekte.Remove(this.A);
 
             // reset pointers on being deleted
             // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
@@ -6369,6 +6426,9 @@ namespace Zetbox.App.Base
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
             }
 
+            // remove from collections manually to notify NHibernate if necessary
+            if (this.A != null && this.A.Relations.Contains(this.B)) this.A.Relations.Remove(this.B);
+
             // reset pointers on being deleted
             // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
             this.A = null;
@@ -6900,6 +6960,9 @@ namespace Zetbox.App.SchemaMigration
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
             }
 
+            // remove from collections manually to notify NHibernate if necessary
+            if (this.A != null && this.A.DestinationProperty.Contains(this.B)) this.A.DestinationProperty.Remove(this.B);
+
             // reset pointers on being deleted
             // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
             this.A = null;
@@ -7262,6 +7325,9 @@ namespace Zetbox.App.GUI
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
             }
 
+            // remove from collections manually to notify NHibernate if necessary
+            if (this.A != null && this.A.Menu.Contains(this.B)) this.A.Menu.Remove(this.B);
+
             // reset pointers on being deleted
             // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
             this.A = null;
@@ -7617,6 +7683,12 @@ namespace Zetbox.App.Test
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.B);
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
             }
+
+            // remove from collections manually to notify NHibernate if necessary
+            if (this.A != null && this.A.Testbogen.Contains(this.B)) this.A.Testbogen.Remove(this.B);
+            else
+            // The other direction is handled by the infrastructure (but A might be null)
+            if (this.B != null && this.B.Student.Contains(this.A)) this.B.Student.Remove(this.A);
 
             // reset pointers on being deleted
             // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
@@ -8143,6 +8215,9 @@ namespace Zetbox.App.Base
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
             }
 
+            // remove from collections manually to notify NHibernate if necessary
+            if (this.A != null && this.A.GenericArguments.Contains(this.B)) this.A.GenericArguments.Remove(this.B);
+
             // reset pointers on being deleted
             // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
             this.A = null;
@@ -8578,6 +8653,9 @@ namespace Zetbox.App.GUI
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
             }
 
+            // remove from collections manually to notify NHibernate if necessary
+            if (this.A != null && this.A.SupportedViewModels.Contains(this.B)) this.A.SupportedViewModels.Remove(this.B);
+
             // reset pointers on being deleted
             // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
             this.A = null;
@@ -9009,6 +9087,9 @@ namespace Zetbox.App.GUI
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
             }
 
+            // remove from collections manually to notify NHibernate if necessary
+            if (this.A != null && this.A.SecondaryControlKinds.Contains(this.B)) this.A.SecondaryControlKinds.Remove(this.B);
+
             // reset pointers on being deleted
             // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
             this.A = null;
@@ -9367,6 +9448,9 @@ namespace Zetbox.App.GUI
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
             }
 
+            // remove from collections manually to notify NHibernate if necessary
+            if (this.A != null && this.A.Children.Contains(this.B)) this.A.Children.Remove(this.B);
+
             // reset pointers on being deleted
             // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
             this.A = null;
@@ -9722,6 +9806,9 @@ namespace Zetbox.App.GUI
                 ParentsToDelete.Add((NHibernatePersistenceObject)this.B);
                 ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
             }
+
+            // remove from collections manually to notify NHibernate if necessary
+            if (this.A != null && this.A.ContextMenu.Contains(this.B)) this.A.ContextMenu.Remove(this.B);
 
             // reset pointers on being deleted
             // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round

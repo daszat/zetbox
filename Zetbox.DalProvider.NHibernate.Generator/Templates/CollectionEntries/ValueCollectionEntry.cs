@@ -144,7 +144,10 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries
             this.WriteLine("        }");
             this.WriteLine("");
 
-            RememberToDeleteTemplate.Call(Host, "Parent", null);
+            RememberToDeleteTemplate.Call(Host,
+                false,
+                true, "Parent", prop.Name,
+                false, "Value", null);
 
             ObjectClasses.ProxyClass.Call(Host, ctx, interfaceName, new KeyValuePair<string, string>[0], typeAndNameList);
         }

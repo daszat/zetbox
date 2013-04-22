@@ -21,7 +21,7 @@ namespace Zetbox.DalProvider.NHibernate
     using System.Text;
 
     using Zetbox.API;
-    
+
     public abstract class RelationEntryNHibernateImpl<TA, TAImpl, TB, TBImpl>
         : NHibernatePersistenceObject
         where TA : class, IDataObject

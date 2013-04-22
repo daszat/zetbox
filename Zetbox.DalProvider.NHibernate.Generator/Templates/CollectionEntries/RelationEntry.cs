@@ -136,7 +136,10 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries
                 typeAndNameList.Add(new KeyValuePair<string, string>("Guid", "ExportGuid"));
             }
 
-            RememberToDeleteTemplate.Call(Host, "A", "B");
+            RememberToDeleteTemplate.Call(Host,
+                true,
+                true, "A", rel.A.Navigator != null ? rel.A.Navigator.Name : null,
+                true, "B", rel.B.Navigator != null ? rel.B.Navigator.Name : null);
 
             ObjectClasses.ProxyClass.Call(Host, ctx, interfaceName, new KeyValuePair<string, string>[0], typeAndNameList);
         }
