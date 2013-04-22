@@ -306,7 +306,12 @@ namespace Zetbox.API.AbstractConsumerTests.N_to_M_relations
             var relEntry = ctx.AttachedObjects.OfType<N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntry>().Single();
             SubmitAndReload();
 
-            relEntry = ctx.FindPersistenceObject<N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntry>(relEntry.ID);
+            // doesn't work on the client, because the RelationEntry cannot pass the GetList facade
+            // relEntry = ctx.FindPersistenceObject<N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntry>(relEntry.ID);
+
+            // trigger loading the relation entry
+            Assert.That(aSide1.BSide.ToList(), Has.Member(bSide1));
+            relEntry = ctx.AttachedObjects.OfType<N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntry>().Single();
             ctx.Delete(relEntry);
 
             Assert.That(aSide1.BSide, Is.Empty);
