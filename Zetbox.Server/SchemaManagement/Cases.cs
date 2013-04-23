@@ -402,11 +402,11 @@ namespace Zetbox.Server.SchemaManagement
 
         private static void CheckValueTypePropertyHasWarnings(ValueTypeProperty prop)
         {
-            if (prop is StringProperty)
+            if (Log.IsWarnEnabled && prop is StringProperty)
             {
                 if (((StringProperty)prop).GetLengthConstraint() == null)
                 {
-                    Log.Warn("String property must have a string range constraint");
+                    Log.WarnFormat("String property [{0}].[{1}] must have a string range constraint", prop.ObjectClass.Name, prop.Name);
                 }
             }
         }
