@@ -193,9 +193,6 @@ namespace Zetbox.Server.SchemaManagement
             }
 
             PostMigration(ClassMigrationEventType.RenameTable, savedObjClass, objClass);
-
-            // remember the changed name to make other cases work correctly
-            savedObjClass.TableName = objClass.TableName;
         }
         #endregion
 
