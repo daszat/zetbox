@@ -2935,7 +2935,7 @@ namespace Zetbox.Server.SchemaManagement
         #region RenameObjectClassACL
         public bool IsRenameObjectClassACL(ObjectClass objClass)
         {
-            if (objClass.NeedsRightsTable()) return false;
+            if (!objClass.NeedsRightsTable()) return false;
             ObjectClass savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
             if (savedObjClass == null || !savedObjClass.NeedsRightsTable()) return false;
 
@@ -2960,9 +2960,12 @@ namespace Zetbox.Server.SchemaManagement
 
             Log.InfoFormat("Renaming ObjectClass Security Rules: {0}", objClass.Name);
 
-            db.DropTrigger(savedUpdateRightsTriggerName);
-            db.DropProcedure(savedRefreshRightsOnProcedureName);
-            db.DropView(savedRightsViewUnmaterializedName);
+            if (db.CheckTriggerExists(savedUpdateRightsTriggerName))
+                db.DropTrigger(savedUpdateRightsTriggerName);
+            if (db.CheckProcedureExists(savedRefreshRightsOnProcedureName))
+                db.DropProcedure(savedRefreshRightsOnProcedureName);
+            if (db.CheckViewExists(savedRightsViewUnmaterializedName))
+                db.DropView(savedRightsViewUnmaterializedName);
 
             db.RenameTable(savedTblRightsName, tblRightsName);
             db.RenameIndex(tblRightsName, Construct.SecurityRulesIndexName(savedObjClass), Construct.SecurityRulesIndexName(objClass));
