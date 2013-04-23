@@ -555,10 +555,24 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
             // Drop an existing constraint
             if (!add)
             {
-                ExecuteNonQuery(string.Format("IF OBJECT_ID('{0}') IS NOT NULL\nALTER TABLE {1} DROP CONSTRAINT {2}",
-                    FormatSchemaName(new ConstraintRef(tblName.Database, tblName.Schema, defConstrName)),
-                    FormatSchemaName(tblName),
-                    QuoteIdentifier(defConstrName)));
+                var existingDefaultConstraintName = (string)ExecuteScalar(@"SELECT obj.name FROM sys.sysconstraints c
+INNER JOIN sys.sysobjects obj on (c.constid = obj.id)
+INNER JOIN sys.sysobjects tbl on (c.id = tbl.id)
+INNER JOIN sys.syscolumns col on (c.colid = col.colid AND col.id = tbl.id)
+WHERE tbl.id = OBJECT_ID(@table) and col.name = @column AND obj.xtype = 'D'",
+                    new Dictionary<string, object>()
+                    {
+                        { "@table", FormatSchemaName(tblName) },
+                        { "@column", colName },
+                    });
+
+                if (!string.IsNullOrWhiteSpace(existingDefaultConstraintName))
+                {
+                    ExecuteNonQuery(string.Format("ALTER TABLE {0} DROP CONSTRAINT {1}",
+                        FormatSchemaName(tblName),
+                        QuoteIdentifier(existingDefaultConstraintName)));
+                }
+
                 ExecuteNonQuery(string.Format("IF OBJECT_ID('{0}') IS NOT NULL\nALTER TABLE {1} DROP CONSTRAINT {2}",
                     FormatSchemaName(new ConstraintRef(tblName.Database, tblName.Schema, checkConstrName)),
                     FormatSchemaName(tblName),
