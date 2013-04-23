@@ -355,13 +355,13 @@ namespace Zetbox.Server.SchemaManagement
 
         public void CreateColumn(TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, params DatabaseConstraint[] constraints)
         {
-            Log.InfoFormat("CreateColumn(tblName={0}, colName={1}, type={2}, size={3}, scale={4}, isNullable={5}, constraints=[{6}])", tblName, colName, type, size, scale, isNullable, string.Join(", ", constraints.Select(c => c.ToString())));
+            Log.InfoFormat("CreateColumn(tblName={0}, colName={1}, type={2}, size={3}, scale={4}, isNullable={5}, constraints=[{6}])", tblName, colName, type, size, scale, isNullable, constraints != null ? string.Join(", ", constraints.Where(c => c != null).Select(c => c.ToString())) : string.Empty);
             _provider.CreateColumn(tblName, colName, type, size, scale, isNullable, constraints);
         }
 
         public void AlterColumn(TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, params DatabaseConstraint[] constraints)
         {
-            Log.InfoFormat("AlterColumn(tblName={0}, colName={1}, type={2}, size={3}, scale={4}, isNullable={5}, constraints=[{6}])", tblName, colName, type, size, scale, isNullable, string.Join(", ", constraints.Select(c => c.ToString())));
+            Log.InfoFormat("AlterColumn(tblName={0}, colName={1}, type={2}, size={3}, scale={4}, isNullable={5}, constraints=[{6}])", tblName, colName, type, size, scale, isNullable, constraints != null ? string.Join(", ", constraints.Where(c => c != null).Select(c => c.ToString())) : string.Empty);
             _provider.AlterColumn(tblName, colName, type, size, scale, isNullable, constraints);
         }
 
