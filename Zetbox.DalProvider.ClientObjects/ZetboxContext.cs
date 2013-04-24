@@ -845,6 +845,21 @@ namespace Zetbox.DalProvider.Client
             return result;
         }
 
+        private T MakeAccessDeniedProxy<T>(Guid exportGuid)
+            where T : class, IPersistenceObject
+        {
+            var result = CreateUnattached<T>();
+            checked
+            {
+                // Fake a ID, when a guid is given, the ID is unknown
+                (result as BasePersistenceObject).ID = --_newIDCounter;
+            }
+            ((Zetbox.App.Base.IExportable)result).ExportGuid = exportGuid;
+            Attach(result);
+            ((IClientObject)result).MakeAccessDeniedProxy();
+            return result;
+        }
+
         /// <summary>
         /// Find the Object of the given type by ID
         /// TODO: This is quite redundant here as it only uses other IZetboxContext Methods.
@@ -957,7 +972,7 @@ namespace Zetbox.DalProvider.Client
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public T FindPersistenceObject<T>(Guid exportGuid) where T : class, IPersistenceObject
         {
-            return GetPersistenceObjectQuery<T>().Single(o => ((Zetbox.App.Base.IExportable)o).ExportGuid == exportGuid);
+            return GetPersistenceObjectQuery<T>().SingleOrDefault(o => ((Zetbox.App.Base.IExportable)o).ExportGuid == exportGuid) ?? MakeAccessDeniedProxy<T>(exportGuid);
         }
 
         /// <summary>
