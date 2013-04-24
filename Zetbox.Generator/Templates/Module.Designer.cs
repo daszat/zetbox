@@ -70,6 +70,16 @@ this.WriteObjects("    // marker class to provide stable and correct assembly re
 this.WriteObjects("    internal sealed class ",  shortName , "ActionsManager\r\n");
 this.WriteObjects("        : BaseCustomActionsManager, I",  shortName , "ActionsManager\r\n");
 this.WriteObjects("    {\r\n");
+this.WriteObjects("        private static object _syncRoot = new object();\r\n");
+this.WriteObjects("        private static bool _isInitialised = false;\r\n");
+this.WriteObjects("\r\n");
+this.WriteObjects("        protected override object SyncRoot { get { return _syncRoot; } }\r\n");
+this.WriteObjects("        protected override bool IsInitialised\r\n");
+this.WriteObjects("        {\r\n");
+this.WriteObjects("            get { return _isInitialised; }\r\n");
+this.WriteObjects("            set { _isInitialised = value; }\r\n");
+this.WriteObjects("        }\r\n");
+this.WriteObjects("\r\n");
 this.WriteObjects("        public ",  shortName , "ActionsManager(ILifetimeScope container, IDeploymentRestrictor restrictor)\r\n");
 this.WriteObjects("            : base(container, restrictor, \"",  ImplementationSuffix , "\")\r\n");
 this.WriteObjects("        {\r\n");

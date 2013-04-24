@@ -37,8 +37,6 @@ namespace Zetbox.App.Extensions
         : ICustomActionsManager
     {
         protected readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Common.BaseCustomActionsManager");
-        private readonly static object _initLock = new object();
-        private readonly static Dictionary<Type, Type> _initImpls = new Dictionary<Type, Type>();
 
         private readonly IDeploymentRestrictor _restrictor;
         private readonly ILifetimeScope _container;
@@ -74,6 +72,14 @@ namespace Zetbox.App.Extensions
         Dictionary<MethodKey, List<MethodInfo>> _reflectedMethods = new Dictionary<MethodKey, List<MethodInfo>>();
         Dictionary<MethodKey, bool> _attachedMethods = new Dictionary<MethodKey, bool>();
 
+        /// <summary>
+        /// This provides a per-dalProvider synchronisation root to protect the initialisation
+        /// </summary>
+        protected abstract object SyncRoot { get; }
+        /// <summary>
+        /// This returns per DalProvider whether the custom actions are already initialised. It is set by the Init() function. Only access it while holding the SyncRoot lock.
+        /// </summary>
+        protected abstract bool IsInitialised { get; set; }
 
         /// <summary>
         /// Gets or sets the extra suffix which is used to create the implementation class' name.
@@ -103,10 +109,10 @@ namespace Zetbox.App.Extensions
         /// </summary>
         public virtual void Init(IReadOnlyZetboxContext ctx)
         {
-            lock (_initLock)
+            lock (SyncRoot)
             {
                 var implType = this.GetType();
-                if (_initImpls.ContainsKey(implType)) return;
+                if (IsInitialised) return;
                 try
                 {
                     using (Log.InfoTraceMethodCallFormat("Init", "Initializing Actions for [{0}] by [{1}]", ExtraSuffix, implType.Name))
@@ -126,7 +132,7 @@ namespace Zetbox.App.Extensions
                 }
                 finally
                 {
-                    _initImpls[implType] = implType;
+                    IsInitialised = true;
                 }
             }
         }
