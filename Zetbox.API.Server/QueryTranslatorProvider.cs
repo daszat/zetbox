@@ -445,23 +445,27 @@ namespace Zetbox.API.Server
 
         protected override Expression VisitUnary(UnaryExpression u)
         {
+            var targetType = u.Type;
+
             // Ignore Converts for all IExportable and IPersistenceObject casts. This may happen even if we don't yet
             // know what the underlying type is. The database will catch that.
             // Also remove casts to assignment compatible types, except when casting to Nullable<T>. The latter casts
             // are necessary to keep operator methods happy, since they do not accept mixed nullability arguments.
             if (u.NodeType == ExpressionType.Convert)
             {
-                var castToIExportable = typeof(Zetbox.App.Base.IExportable).IsAssignableFrom(u.Type) || u.Type.IsIExportableInternal();
-                var castToIPersistenceObject = u.Type.IsIPersistenceObject();
-                var upCast = u.Type.IsAssignableFrom(u.Operand.Type);
-                var nullableCast = upCast && !u.Operand.Type.IsGenericType && u.Type == typeof(Nullable<>).MakeGenericType(u.Operand.Type);
+                var operandType = u.Operand.Type;
+
+                var castToIExportable = typeof(Zetbox.App.Base.IExportable).IsAssignableFrom(targetType) || targetType.IsIExportableInternal();
+                var castToIPersistenceObject = targetType.IsIPersistenceObject();
+                var upCast = targetType.IsAssignableFrom(operandType);
+                var nullableCast = upCast && !operandType.IsGenericType && operandType.IsValueType && targetType == typeof(Nullable<>).MakeGenericType(operandType);
                 if (castToIExportable || castToIPersistenceObject || (upCast && !nullableCast))
                 {
                     return Visit(u.Operand);
                 }
             }
 
-            return Expression.MakeUnary(u.NodeType, Visit(u.Operand), TranslateType(u.Type), u.Method);
+            return Expression.MakeUnary(u.NodeType, Visit(u.Operand), TranslateType(targetType), u.Method);
         }
 
         protected override Expression VisitLambda(LambdaExpression lambda)
