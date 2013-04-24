@@ -37,14 +37,11 @@ namespace Zetbox.App.Extensions
         : ICustomActionsManager
     {
         protected readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Common.BaseCustomActionsManager");
-        private readonly object _initLock = new object();
+        private readonly static object _initLock = new object();
+        private readonly static Dictionary<Type, Type> _initImpls = new Dictionary<Type, Type>();
 
         private readonly IDeploymentRestrictor _restrictor;
         private readonly ILifetimeScope _container;
-        private bool _isInitialized = false;
-
-        Dictionary<MethodKey, List<MethodInfo>> _reflectedMethods = new Dictionary<MethodKey, List<MethodInfo>>();
-        Dictionary<MethodKey, bool> _attachedMethods = new Dictionary<MethodKey, bool>();
 
         private struct MethodKey
         {
@@ -73,6 +70,9 @@ namespace Zetbox.App.Extensions
                 return key;
             }
         }
+
+        Dictionary<MethodKey, List<MethodInfo>> _reflectedMethods = new Dictionary<MethodKey, List<MethodInfo>>();
+        Dictionary<MethodKey, bool> _attachedMethods = new Dictionary<MethodKey, bool>();
 
 
         /// <summary>
@@ -105,10 +105,10 @@ namespace Zetbox.App.Extensions
         {
             lock (_initLock)
             {
-                if (_isInitialized) return;
+                var implType = this.GetType();
+                if (_initImpls.ContainsKey(implType)) return;
                 try
                 {
-                    var implType = this.GetType();
                     using (Log.InfoTraceMethodCallFormat("Init", "Initializing Actions for [{0}] by [{1}]", ExtraSuffix, implType.Name))
                     {
                         Log.TraceTotalMemory("Before BaseCustomActionsManager.Init()");
@@ -126,9 +126,9 @@ namespace Zetbox.App.Extensions
                 }
                 finally
                 {
-                    _isInitialized = true;
+                    _initImpls[implType] = implType;
                 }
-            }            
+            }
         }
 
         private void ReflectMethods(IReadOnlyZetboxContext metaCtx)

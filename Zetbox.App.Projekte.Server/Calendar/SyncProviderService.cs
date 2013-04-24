@@ -52,7 +52,7 @@ namespace Zetbox.App.Projekte.Server.Calendar
             _ctxFactory = ctxFactory;
         }
 
-        private const int TIMER_DUE_TIME_SEC = 5; // For debugging another problem reduce due time to 5 sec. was: 30; // Avoid start during service startup
+        private const int TIMER_DUE_TIME_SEC = 30; // Avoid start during service startup
         private const int TIMER_INTERVAL_SEC = 10;
         private Timer _timer;
         private static readonly object _lock = new object();
