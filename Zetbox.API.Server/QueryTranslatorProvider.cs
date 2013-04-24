@@ -286,7 +286,8 @@ namespace Zetbox.API.Server
                             MethodInfo newMethod = typeof(Queryable).GetMethods()
                                    .Single(mi => mi.Name == m.Method.Name
                                        && mi.GetParameters().Length == 2
-                                       && ExtractArgCount(mi.GetParameters()[1].ParameterType.GetGenericArguments().Single()) == predicateArgCount)
+                                       && ExtractArgCount(mi.GetParameters()[1].ParameterType.GetGenericArguments().Single()) == predicateArgCount
+                                       && mi.GetParameters()[1].ParameterType.GetGenericArguments().Single().GetGenericArguments()[1] == newPredicate.Type.GetGenericArguments()[1])
                                    .MakeGenericMethod(sourceType);
 
                             return Expression.Call(null, newMethod, new[] { source, newPredicate });
