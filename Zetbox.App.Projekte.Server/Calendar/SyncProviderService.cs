@@ -52,15 +52,15 @@ namespace Zetbox.App.Projekte.Server.Calendar
             _ctxFactory = ctxFactory;
         }
 
-        private const int TIMER_DUE_TIME = 5;
-        private const int TIMER_INTERVAL = 10;
+        private const int TIMER_DUE_TIME_SEC = 30; // Avoid start during service startup
+        private const int TIMER_INTERVAL_SEC = 10;
         private Timer _timer;
         private static readonly object _lock = new object();
         private bool _isRunning = false; // protection for been called twice
 
         public void Start()
         {
-            _timer = new Timer(_timer_callback, null, TIMER_DUE_TIME * 1000, TIMER_INTERVAL * 1000);
+            _timer = new Timer(_timer_callback, null, TIMER_DUE_TIME_SEC * 1000, TIMER_INTERVAL_SEC * 1000);
         }
 
         public void Stop()
