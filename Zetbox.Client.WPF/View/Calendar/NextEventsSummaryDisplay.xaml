@@ -17,11 +17,8 @@
         <ctrls:ZetboxListView ItemsSource="{Binding NextEventsAsync, Mode=OneWay, ValidatesOnDataErrors=true}">
             <ctrls:ZetboxListView.View>
                 <GridView>
-                    <GridViewColumn Header="{Binding CalendarLabel}"
-                                    Width="100"
-                                    DisplayMemberBinding="{Binding CalendarName}" />
                     <GridViewColumn Header="{Binding DateLabel}"
-                                    Width="75"
+                                    Width="85"
                                     DisplayMemberBinding="{Binding DateText}" />
                     <GridViewColumn Header="{Binding FromLabel}"
                                     Width="50"
@@ -35,6 +32,9 @@
                     <GridViewColumn Header="{Binding LocationLabel}"
                                     Width="200"
                                     DisplayMemberBinding="{Binding Location}" />
+                    <GridViewColumn Header="{Binding CalendarLabel}"
+                                    Width="100"
+                                    DisplayMemberBinding="{Binding CalendarName}" />
                 </GridView>
             </ctrls:ZetboxListView.View>
         </ctrls:ZetboxListView>
