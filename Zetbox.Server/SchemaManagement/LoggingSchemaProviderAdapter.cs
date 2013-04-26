@@ -539,7 +539,8 @@ namespace Zetbox.Server.SchemaManagement
             {
                 foreach (var tbl in tblList)
                 {
-                    Log.DebugFormat("Updating [{0}] via [{1}]", tbl.TblName, string.Join(" => ", tbl.Relations.Select(r => r.ToString())));
+                    Log.DebugFormat("Updating [{0}] via [{1}]", tbl.TblName, string.Join(" => ", tbl.ObjectRelations.Select(r => r.ToString())));
+                    Log.DebugFormat("                   [{0}]", string.Join(" => ", tbl.IdentityRelations.Select(r => r.ToString())));
                 }
             }
             _provider.CreateUpdateRightsTrigger(triggerName, tblName, tblList, dependingCols);

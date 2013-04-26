@@ -1201,7 +1201,8 @@ $BODY$BEGIN
 
             foreach (var tbl in tblList)
             {
-                if (tbl.Relations.Count == 0)
+                // directly at the object, we can simplify
+                if (tbl.ObjectRelations.Count == 0)
                 {
                     sb.AppendFormat(@"
     IF TG_OP = 'DELETE' OR TG_OP = 'UPDATE' THEN
@@ -1217,49 +1218,27 @@ $BODY$BEGIN
                 }
                 else
                 {
-                    StringBuilder select = new StringBuilder();
-                    select.AppendFormat("SELECT t1.\"ID\" FROM {0} t1", FormatSchemaName(tbl.TblName));
-                    int idx = 2;
-                    var lastRel = tbl.Relations.Last();
-                    foreach (var rel in tbl.Relations)
-                    {
-                        select.AppendLine();
-                        if (rel == lastRel)
-                        {
-                            select.AppendFormat(@"      WHERE ({0}.{1} = t{2}.{3})",
-                                "{0}",
-                                QuoteIdentifier(rel.JoinColumnName.Single().ColumnName),
-                                idx - 1,
-                                QuoteIdentifier(rel.FKColumnName.Single().ColumnName));
-                        }
-                        else
-                        {
-                            select.AppendFormat(@"      INNER JOIN {0} t{1} ON (t{1}.{2} = t{3}.{4})",
-                                FormatSchemaName(rel.JoinTableName),
-                                idx,
-                                QuoteIdentifier(rel.JoinColumnName.Single().ColumnName),
-                                idx - 1,
-                                QuoteIdentifier(rel.FKColumnName.Single().ColumnName));
-                        }
-                        idx++;
-                    }
-                    string selectFormat = select.ToString();
+                    string selectObjectFormat = FormatSelectJoin(tbl.TblName, tbl.ObjectRelations);
+                    string selectIdentityFormat = tbl.IdentityRelations.Count == 0 ? string.Empty : FormatSelectJoin(GetTableName("base", "Identities"), tbl.IdentityRelations);
 
                     sb.AppendFormat(@"
     IF TG_OP = 'DELETE' OR TG_OP = 'UPDATE' THEN
-        DELETE FROM {0} WHERE ""ID"" IN ({1});
+        DELETE FROM {0} WHERE ""ID"" IN ({1}) AND {2};
     END IF;
     IF TG_OP = 'INSERT' OR TG_OP = 'UPDATE' THEN
-        DELETE FROM {0} WHERE ""ID"" IN ({2});
+        DELETE FROM {0} rights WHERE ""ID"" IN ({3}) AND {4};
         INSERT INTO {0} (""ID"", ""Identity"", ""Right"")
-            SELECT rights.""ID"", rights.""Identity"", rights.""Right"" FROM {3} as rights
-                INNER JOIN ({2}) as acl ON (acl.""ID"" = rights.""ID"");
+            SELECT rights.""ID"", rights.""Identity"", rights.""Right"" FROM {5} as rights
+                INNER JOIN ({3}) as acl ON (acl.""ID"" = rights.""ID"")
+            WHERE {4};
     END IF;
 ",
-                        FormatSchemaName(tbl.TblNameRights),
-                        String.Format(selectFormat, "OLD"),
-                        String.Format(selectFormat, "NEW"),
-                        FormatSchemaName(tbl.ViewUnmaterializedName));
+                        FormatSchemaName(tbl.TblNameRights),            // 0
+                        String.Format(selectObjectFormat, "OLD"),       // 1
+                        string.IsNullOrWhiteSpace(selectIdentityFormat) ? "1=1" : String.Format(@"""Identity"" IN ({0})", string.Format(selectIdentityFormat, "OLD")),     // 2
+                        String.Format(selectObjectFormat, "NEW"),       // 3
+                        string.IsNullOrWhiteSpace(selectIdentityFormat) ? "1=1" : String.Format(@"rights.""Identity"" IN ({0})", string.Format(selectIdentityFormat, "NEW")),     // 4
+                        FormatSchemaName(tbl.ViewUnmaterializedName));  // 5
 
                 }
                 sb.AppendLine();
@@ -1279,6 +1258,37 @@ END$BODY$
                 FormatSchemaName(tblName),
                 QuoteIdentifier(triggerName.Schema)
                 ));
+        }
+
+        private string FormatSelectJoin(TableRef tbl, List<Join> joins)
+        {
+            StringBuilder select = new StringBuilder();
+            select.AppendFormat("SELECT t1.\"ID\" FROM {0} t1", FormatSchemaName(tbl));
+            int idx = 2;
+            var lastRel = joins.Last();
+            foreach (var rel in joins)
+            {
+                select.AppendLine();
+                if (rel == lastRel)
+                {
+                    select.AppendFormat(@"      WHERE ({0}.{1} = t{2}.{3})",
+                        "{0}",
+                        QuoteIdentifier(rel.JoinColumnName.Single().ColumnName),
+                        idx - 1,
+                        QuoteIdentifier(rel.FKColumnName.Single().ColumnName));
+                }
+                else
+                {
+                    select.AppendFormat(@"      INNER JOIN {0} t{1} ON (t{1}.{2} = t{3}.{4})",
+                        FormatSchemaName(rel.JoinTableName),
+                        idx,
+                        QuoteIdentifier(rel.JoinColumnName.Single().ColumnName),
+                        idx - 1,
+                        QuoteIdentifier(rel.FKColumnName.Single().ColumnName));
+                }
+                idx++;
+            }
+            return select.ToString();
         }
 
         public override void CreateEmptyRightsViewUnmaterialized(TableRef viewName)

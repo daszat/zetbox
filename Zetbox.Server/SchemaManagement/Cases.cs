@@ -2755,6 +2755,9 @@ namespace Zetbox.Server.SchemaManagement
                     .Where(rm => rm.Relations
                         .Where(r => r.A.Type == objClass || r.B.Type == objClass).Count() > 0).Count() > 0)
                 .Distinct().ToList().Where(o => o.NeedsRightsTable() && o != objClass);
+
+            var identity = (ObjectClass)NamedObjects.Base.Classes.Zetbox.App.Base.Identity.Find(objClass.Context);
+
             foreach (var dep in list)
             {
                 Log.DebugFormat("  Additional update Table: {0}", dep.TableName);
@@ -2771,7 +2774,8 @@ namespace Zetbox.Server.SchemaManagement
                         };
                         try
                         {
-                            rt.Relations.AddRange(SchemaManager.CreateJoinList(db, dep, ac.Relations, rel));
+                            rt.ObjectRelations.AddRange(SchemaManager.CreateJoinList(db, dep, ac.Relations.TakeWhileInclusive(r => r != rel)));
+                            rt.IdentityRelations.AddRange(SchemaManager.CreateJoinList(db, identity, ac.Relations.Reverse().TakeWhile(r => r != rel)));
                         }
                         catch (Zetbox.Server.SchemaManagement.SchemaManager.JoinListException ex)
                         {
@@ -2809,6 +2813,8 @@ namespace Zetbox.Server.SchemaManagement
                         .Where(r => r == rel).Count() > 0).Count() > 0)
                 .Distinct().ToList().Where(o => o.NeedsRightsTable());
 
+            var identity = (ObjectClass)NamedObjects.Base.Classes.Zetbox.App.Base.Identity.Find(rel.Context);
+
             foreach (var dep in list)
             {
                 Log.DebugFormat("  Additional update Table: {0}", dep.TableName);
@@ -2825,8 +2831,8 @@ namespace Zetbox.Server.SchemaManagement
                         try
                         {
                             // Ignore last one - this is our n:m end
-                            var joinList = SchemaManager.CreateJoinList(db, dep, ac.Relations, rel);
-                            rt.Relations.AddRange(joinList.Take(joinList.Count - 1));
+                            rt.ObjectRelations.AddRange(SchemaManager.CreateJoinList(db, dep, ac.Relations.TakeWhile(r => r != rel)));
+                            rt.IdentityRelations.AddRange(SchemaManager.CreateJoinList(db, identity, ac.Relations.Reverse().TakeWhile(r => r != rel)));
                         }
                         catch (Zetbox.Server.SchemaManagement.SchemaManager.JoinListException ex)
                         {

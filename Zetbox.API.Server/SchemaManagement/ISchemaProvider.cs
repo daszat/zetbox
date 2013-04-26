@@ -504,14 +504,16 @@ namespace Zetbox.API.Server
     {
         public RightsTrigger()
         {
-            this.Relations = new List<Join>();
+            this.ObjectRelations = new List<Join>();
+            this.IdentityRelations = new List<Join>();
         }
 
         public TableRef ViewUnmaterializedName { get; set; }
         public TableRef TblNameRights { get; set; }
         public TableRef TblName { get; set; }
 
-        public List<Join> Relations { get; private set; }
+        public List<Join> ObjectRelations { get; private set; }
+        public List<Join> IdentityRelations { get; private set; }
     }
 
     public class Column

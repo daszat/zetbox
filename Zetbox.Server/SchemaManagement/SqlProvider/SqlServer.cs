@@ -1141,8 +1141,8 @@ SET NOCOUNT ON", triggerName.Name, FormatSchemaName(tblName));
 
             foreach (var tbl in tblList)
             {
-                StringBuilder select = new StringBuilder();
-                if (tbl.Relations.Count == 0)
+                // directly at the object, we can simplify
+                if (tbl.ObjectRelations.Count == 0)
                 {
                     sb.AppendFormat(@"
     DELETE FROM {0} WHERE [ID] IN (SELECT [ID] FROM @changed_new)
@@ -1158,28 +1158,24 @@ SET NOCOUNT ON", triggerName.Name, FormatSchemaName(tblName));
                 }
                 else
                 {
-                    select.AppendFormat("SELECT t1.[ID] FROM {0} t1", FormatSchemaName(tbl.TblName));
-                    int idx = 2;
-                    var lastRel = tbl.Relations.Last();
-                    foreach (var rel in tbl.Relations)
-                    {
-                        select.AppendLine();
-                        select.AppendFormat(@"      INNER JOIN {0} t{1} ON t{1}.[{2}] = t{3}.[{4}]",
-                            (rel == lastRel) ? "{0}" : FormatSchemaName(rel.JoinTableName),
-                            idx,
-                            rel.JoinColumnName.Single().ColumnName,
-                            idx - 1,
-                            rel.FKColumnName.Single().ColumnName);
-                        idx++;
-                    }
-                    select.AppendFormat("\n      WHERE t{0}.[ID] in (select [ID] from {{1}})", idx - 1);
-                    string selectFormat = select.ToString();
-                    sb.AppendFormat("    DELETE FROM {0}\n    WHERE [ID] IN ({1})", FormatSchemaName(tbl.TblNameRights), string.Format(selectFormat, "inserted", "@changed_new"));
+                    string selectObjectFormat = FormatSelectJoin(tbl.TblName, tbl.ObjectRelations);
+                    string selectIdentityFormat = tbl.IdentityRelations.Count == 0 ? "(1=1)" : ("[Identity] IN (" + FormatSelectJoin(GetTableName("base", "Identities"), tbl.IdentityRelations) + ")");
+
+                    sb.AppendFormat("    DELETE FROM {0}\n    WHERE [ID] IN ({1}) AND {2}",
+                        FormatSchemaName(tbl.TblNameRights),
+                        string.Format(selectObjectFormat, "inserted", "@changed_new"),
+                        string.Format(selectIdentityFormat, "inserted", "@changed_new"));
                     sb.AppendLine();
-                    sb.AppendFormat("    DELETE FROM {0}\n    WHERE [ID] IN ({1})", FormatSchemaName(tbl.TblNameRights), string.Format(selectFormat, "deleted", "@deleted"));
+                    sb.AppendFormat("    DELETE FROM {0}\n    WHERE [ID] IN ({1}) AND {2}",
+                        FormatSchemaName(tbl.TblNameRights),
+                        string.Format(selectObjectFormat, "deleted", "@deleted"),
+                        string.Format(selectIdentityFormat, "deleted", "@deleted"));
                     sb.AppendLine();
-                    sb.AppendFormat("    INSERT INTO {0} ([ID], [Identity], [Right])\n    SELECT [ID], [Identity], [Right]\n    FROM {2}\n    WHERE [ID] IN ({1})",
-                        FormatSchemaName(tbl.TblNameRights), string.Format(selectFormat, "inserted", "@changed_new"), FormatSchemaName(tbl.ViewUnmaterializedName));
+                    sb.AppendFormat("    INSERT INTO {0} ([ID], [Identity], [Right])\n    SELECT [ID], [Identity], [Right]\n    FROM {3}\n    WHERE [ID] IN ({1}) AND {2}",
+                        FormatSchemaName(tbl.TblNameRights),                                // 0
+                        string.Format(selectObjectFormat, "inserted", "@changed_new"),      // 1
+                        string.Format(selectIdentityFormat, "inserted", "@changed_new"),    // 2
+                        FormatSchemaName(tbl.ViewUnmaterializedName));                      // 3
                     sb.AppendLine();
                     sb.AppendLine();
                 }
@@ -1189,6 +1185,27 @@ SET NOCOUNT ON", triggerName.Name, FormatSchemaName(tblName));
 SET NOCOUNT OFF
 END");
             ExecuteNonQuery(sb.ToString());
+        }
+
+        private string FormatSelectJoin(TableRef tbl, List<Join> joins)
+        {
+            StringBuilder select = new StringBuilder();
+            select.AppendFormat("SELECT t1.[ID] FROM {0} t1", FormatSchemaName(tbl));
+            int idx = 2;
+            var lastRel = joins.Last();
+            foreach (var rel in joins)
+            {
+                select.AppendLine();
+                select.AppendFormat(@"      INNER JOIN {0} t{1} ON t{1}.[{2}] = t{3}.[{4}]",
+                    (rel == lastRel) ? "{0}" : FormatSchemaName(rel.JoinTableName),
+                    idx,
+                    rel.JoinColumnName.Single().ColumnName,
+                    idx - 1,
+                    rel.FKColumnName.Single().ColumnName);
+                idx++;
+            }
+            select.AppendFormat("\n      WHERE t{0}.[ID] in (select [ID] from {{1}})", idx - 1);
+            return select.ToString();
         }
 
         public override void CreateEmptyRightsViewUnmaterialized(TableRef viewName)

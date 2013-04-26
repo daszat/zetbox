@@ -108,19 +108,20 @@ namespace Zetbox.Server.SchemaManagement
             }
         }
 
+        /// <summary>
+        /// Creates a list of joins linking objects according to the specified relations list.
+        /// </summary>
+        /// <param name="db">the underlying schema provider</param>
+        /// <param name="objClass">the starting point</param>
+        /// <param name="relations">the relations to follow</param>
+        /// <returns>a list of joins</returns>
         public static IList<Join> CreateJoinList(ISchemaProvider db, ObjectClass objClass, IEnumerable<Relation> relations)
-        {
-            return CreateJoinList(db, objClass, relations, null);
-        }
-
-        public static IList<Join> CreateJoinList(ISchemaProvider db, ObjectClass objClass, IEnumerable<Relation> relations, Relation until)
         {
             if (db == null) throw new ArgumentNullException("db");
             if (objClass == null) throw new ArgumentNullException("objClass");
             if (relations == null) throw new ArgumentNullException("relations");
 
             List<Join> result = new List<Join>();
-            string lastColumName = "ID";
             Join lastJoin = ColumnRef.PrimaryTable;
             ObjectClass lastType = objClass;
             foreach (var rel in relations)
@@ -149,7 +150,7 @@ namespace Zetbox.Server.SchemaManagement
                     result.Add(viewRel);
                     viewRel.JoinTableName = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
                     viewRel.JoinColumnName = new[] { new ColumnRef(Construct.ForeignKeyColumnName(lastRelEnd), ColumnRef.Local) };
-                    viewRel.FKColumnName = new[] { new ColumnRef(lastColumName, lastJoin) };
+                    viewRel.FKColumnName = new[] { new ColumnRef("ID", lastJoin) };
                     lastJoin = viewRel;
 
                     viewRel = new Join();
@@ -158,7 +159,6 @@ namespace Zetbox.Server.SchemaManagement
                     viewRel.JoinColumnName = new[] { new ColumnRef("ID", ColumnRef.Local) };
                     viewRel.FKColumnName = new[] { new ColumnRef(Construct.ForeignKeyColumnName(nextRelEnd), lastJoin) };
 
-                    lastColumName = "ID"; // viewRel.FKColumnName.Single().ColumnName;
                     lastJoin = viewRel;
                 }
                 else
@@ -194,12 +194,10 @@ namespace Zetbox.Server.SchemaManagement
                     }
                     viewRel.JoinColumnName = new[] { new ColumnRef(localCol, ColumnRef.Local) };
                     viewRel.FKColumnName = new[] { new ColumnRef(fkCol, lastJoin) };
-                    lastColumName = localCol;
                     lastJoin = viewRel;
                 }
 
                 lastType = nextRelEnd.Type;
-                if (rel == until) return result;
             }
             return result;
         }
