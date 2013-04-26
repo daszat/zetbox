@@ -511,5 +511,35 @@ namespace Zetbox.API
         {
             return lst.Cast<T>().AsQueryable();
         }
+
+        /// <summary>
+        /// Returns elements from a sequence as long as a specified condition is true, including the element where it became false.
+        /// </summary>
+        /// <remarks>
+        /// q.TakeWhileInclusive(e => e == x) is equivalent to q.TakeWhile(e => e == x).Concat(new { x }), only faster ;-)
+        /// </remarks>
+        public static IEnumerable<T> TakeWhileInclusive<T>(
+            this IEnumerable<T> elements,
+            Func<T, bool> predicate)
+        {
+            if (elements == null) throw new ArgumentNullException("elements");
+            if (predicate == null) throw new ArgumentNullException("predicate");
+            return DoTakeWhileInclusive(elements, predicate);
+        }
+
+        private static IEnumerable<T> DoTakeWhileInclusive<T>(
+            IEnumerable<T> elements,
+            Func<T, bool> predicate)
+        {
+            foreach (T element in elements)
+            {
+                if (!predicate(element))
+                {
+                    yield return element;
+                    yield break;
+                }
+                yield return element;
+            }
+        }
     }
 }
