@@ -341,7 +341,7 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
         {
             // TODO: check schema/database
             return (int)ExecuteScalar("SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@tbl) AND type IN (N'U')",
-                new Dictionary<string, object>() { 
+                new Dictionary<string, object>() {
                     { "@tbl", FormatSchemaName(tblName) }
                 }) > 0;
         }
@@ -433,9 +433,9 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
         public override bool CheckColumnExists(TableRef tblName, string colName)
         {
             return (int)ExecuteScalar(@"SELECT COUNT(*)
-                FROM sys.objects o 
+                FROM sys.objects o
                     INNER JOIN sys.columns c ON c.object_id=o.object_id
-                WHERE o.object_id = OBJECT_ID(@tbl) 
+                WHERE o.object_id = OBJECT_ID(@tbl)
                     AND o.type IN (N'U', N'V')
                     AND c.Name = @name",
                 new Dictionary<string, object>(){
@@ -448,7 +448,7 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
         {
             return ExecuteReader(
                @"SELECT c.name
-                        FROM sys.objects o 
+                        FROM sys.objects o
                             INNER JOIN sys.columns c ON c.object_id=o.object_id
                         WHERE o.object_id = OBJECT_ID(@tbl)
                             AND o.type IN (N'U', N'V')",
@@ -462,7 +462,7 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
         {
             return ExecuteReader(
                 @"SELECT c.name, TYPE_NAME(system_type_id) type, max_length, is_nullable
-                    FROM sys.objects o 
+                    FROM sys.objects o
                         INNER JOIN sys.columns c ON c.object_id=o.object_id
                     WHERE o.object_id = OBJECT_ID(@tbl)
                         AND o.type IN (N'U', N'V')",
@@ -601,8 +601,8 @@ WHERE tbl.id = OBJECT_ID(@table) and col.name = @column AND obj.xtype = 'D'",
                 SELECT OBJECT_NAME(referencing_id) AS referencing_entity_name
                     FROM sys.sql_expression_dependencies AS sed
                     WHERE referenced_schema_name = @schema
-	                    AND referenced_entity_name = @tblName
-	                    AND COL_NAME(referenced_id, referenced_minor_id) = @colName",
+                        AND referenced_entity_name = @tblName
+                        AND COL_NAME(referenced_id, referenced_minor_id) = @colName",
                 new Dictionary<string, object>()
                 {
                     { "@schema", tblName.Schema },
@@ -636,9 +636,9 @@ WHERE tbl.id = OBJECT_ID(@table) and col.name = @column AND obj.xtype = 'D'",
                 SELECT c.is_nullable
                 FROM sys.objects o
                     INNER JOIN sys.columns c ON c.object_id=o.object_id
-                WHERE o.object_id = OBJECT_ID(@table) 
-		            AND o.type IN (N'U', N'V')
-		            AND c.Name = @column",
+                WHERE o.object_id = OBJECT_ID(@table)
+                    AND o.type IN (N'U', N'V')
+                    AND c.Name = @column",
                 new Dictionary<string, object>(){
                     { "@table", FormatSchemaName(tblName) },
                     { "@column", colName },
@@ -662,9 +662,9 @@ WHERE tbl.id = OBJECT_ID(@table) and col.name = @column AND obj.xtype = 'D'",
                 SELECT c.max_length / 2
                 FROM sys.objects o
                     INNER JOIN sys.columns c ON c.object_id=o.object_id
-	            WHERE o.object_id = OBJECT_ID(@table) 
-		            AND o.type IN (N'U', N'V')
-		            AND c.Name = @column",
+                WHERE o.object_id = OBJECT_ID(@table)
+                    AND o.type IN (N'U', N'V')
+                    AND c.Name = @column",
                 new Dictionary<string, object>(){
                     { "@table", FormatSchemaName(tblName) },
                     { "@column", colName },
@@ -714,7 +714,7 @@ WHERE tbl.id = OBJECT_ID(@table) and col.name = @column AND obj.xtype = 'D'",
             return (int)ExecuteScalar(String.Format(
                 @"SELECT COUNT(*) FROM (
                     SELECT TOP 1 {1} FROM {0} WHERE {1} IS NOT NULL
-                    GROUP BY {1} 
+                    GROUP BY {1}
                     HAVING COUNT({1}) > 1) AS tbl",
                 FormatSchemaName(tbl),
                 QuoteIdentifier(colName))) == 0;
@@ -763,7 +763,7 @@ WHERE tbl.id = OBJECT_ID(@table) and col.name = @column AND obj.xtype = 'D'",
         public override void CreateFKConstraint(TableRef tblName, TableRef refTblName, string colName, string newConstraintName, bool onDeleteCascade)
         {
             ExecuteNonQuery(string.Format(@"
-                ALTER TABLE {0} WITH CHECK 
+                ALTER TABLE {0} WITH CHECK
                 ADD CONSTRAINT [{1}] FOREIGN KEY([{2}])
                 REFERENCES {3} ([ID]){4}",
                 FormatSchemaName(tblName),
@@ -1120,23 +1120,23 @@ SET NOCOUNT ON", triggerName.Name, FormatSchemaName(tblName));
             // optimaziation
             if (dependingCols != null && dependingCols.Count > 0)
             {
-                sb.Append(@"	declare @changed_new table (ID int)
-	declare @deleted table (ID int)
-	
-	insert into @changed_new
-	select i.[ID] 
-	from inserted i inner join deleted d on i.[ID] = d.[ID]
-	where ");
-                sb.AppendLine(string.Join(" OR ", dependingCols.Select(c => string.Format("\n		coalesce(d.{0}, -1) <> coalesce(i.{0}, -1)", QuoteIdentifier(c))).ToArray()));
-                sb.AppendLine(@"	union all
-	select i.[ID]
-	from inserted i 
-	where i.[ID] not in(select [ID] from deleted)
-	
-	insert into @deleted
-	select d.[ID] 
-	from deleted d 
-	where d.[ID] not in(select [ID] from inserted)");
+                sb.Append(@"    declare @changed_new table (ID int)
+    declare @deleted table (ID int)
+
+    insert into @changed_new
+    select i.[ID]
+    from inserted i inner join deleted d on i.[ID] = d.[ID]
+    where ");
+                sb.AppendLine(string.Join(" OR ", dependingCols.Select(c => string.Format("\n        coalesce(d.{0}, -1) <> coalesce(i.{0}, -1)", QuoteIdentifier(c))).ToArray()));
+                sb.AppendLine(@"    union all
+    select i.[ID]
+    from inserted i
+    where i.[ID] not in(select [ID] from deleted)
+
+    insert into @deleted
+    select d.[ID]
+    from deleted d
+    where d.[ID] not in(select [ID] from inserted)");
             }
 
             foreach (var tbl in tblList)
@@ -1147,7 +1147,7 @@ SET NOCOUNT ON", triggerName.Name, FormatSchemaName(tblName));
                     sb.AppendFormat(@"
     DELETE FROM {0} WHERE [ID] IN (SELECT [ID] FROM @changed_new)
     DELETE FROM {0} WHERE [ID] IN (SELECT [ID] FROM @deleted)
-    INSERT INTO {0} ([ID], [Identity], [Right]) 
+    INSERT INTO {0} ([ID], [Identity], [Right])
         SELECT [ID], [Identity], [Right]
         FROM {1}
         WHERE [ID] IN (SELECT [ID] FROM @changed_new)",
@@ -1207,11 +1207,11 @@ END");
 
             StringBuilder view = new StringBuilder();
             view.AppendFormat(@"CREATE VIEW [{0}].[{1}] AS
-SELECT	[ID], [Identity], 
-		(case SUM([Right] & 1) when 0 then 0 else 1 end) +
-		(case SUM([Right] & 2) when 0 then 0 else 2 end) +
-		(case SUM([Right] & 4) when 0 then 0 else 4 end) +
-		(case SUM([Right] & 8) when 0 then 0 else 8 end) [Right] 
+SELECT    [ID], [Identity],
+        (case SUM([Right] & 1) when 0 then 0 else 1 end) +
+        (case SUM([Right] & 2) when 0 then 0 else 2 end) +
+        (case SUM([Right] & 4) when 0 then 0 else 4 end) +
+        (case SUM([Right] & 8) when 0 then 0 else 8 end) [Right]
 FROM (", viewName.Schema, viewName.Name);
             view.AppendLine();
 
@@ -1250,16 +1250,16 @@ FROM (", viewName.Schema, viewName.Name);
             ExecuteNonQuery(string.Format(@"CREATE PROCEDURE {0} (@ID INT = NULL) AS
                     BEGIN
                         SET NOCOUNT ON
-	                    IF (@ID IS NULL)
-		                    BEGIN
-			                    TRUNCATE TABLE {1}
-			                    INSERT INTO {1} ([ID], [Identity], [Right]) SELECT [ID], [Identity], [Right] FROM {2}
-		                    END
-	                    ELSE
-		                    BEGIN
-			                    DELETE FROM {1} WHERE ID = @ID
-			                    INSERT INTO {1} ([ID], [Identity], [Right]) SELECT [ID], [Identity], [Right] FROM {2} WHERE [ID] = @ID
-		                    END
+                        IF (@ID IS NULL)
+                            BEGIN
+                                TRUNCATE TABLE {1}
+                                INSERT INTO {1} ([ID], [Identity], [Right]) SELECT [ID], [Identity], [Right] FROM {2}
+                            END
+                        ELSE
+                            BEGIN
+                                DELETE FROM {1} WHERE ID = @ID
+                                INSERT INTO {1} ([ID], [Identity], [Right]) SELECT [ID], [Identity], [Right] FROM {2} WHERE [ID] = @ID
+                            END
                         SET NOCOUNT OFF
                     END",
                 FormatSchemaName(procName),
@@ -1360,19 +1360,19 @@ DECLARE
 @seqID int,
 @seqDataID int
 BEGIN
-	SELECT @result = d.CurrentNumber + 1, @seqID = s.ID, @seqDataID = d.ID
-	FROM base.[Sequences] s
-		LEFT JOIN base.[SequenceData] d WITH(UPDLOCK) ON (s.ID = d.[fk_Sequence])
-	WHERE s.ExportGuid = @seqNumber
+    SELECT @result = d.CurrentNumber + 1, @seqID = s.ID, @seqDataID = d.ID
+    FROM base.[Sequences] s
+        LEFT JOIN base.[SequenceData] d WITH(UPDLOCK) ON (s.ID = d.[fk_Sequence])
+    WHERE s.ExportGuid = @seqNumber
 
     IF @result IS NULL
     BEGIN
-		SELECT @result = 1;
+        SELECT @result = 1;
         INSERT INTO base.[SequenceData] ([fk_Sequence], [CurrentNumber]) VALUES (@seqID, @result);
     END
 
     UPDATE base.[SequenceData] SET CurrentNumber = @result WHERE [ID] = @seqDataID
-	SELECT @result -- don't ask, EF requires for SQL server an resultset as output, for npgsql not now, because we've implemented it quick and dirty
+    SELECT @result -- don't ask, EF requires for SQL server an resultset as output, for npgsql not now, because we've implemented it quick and dirty
 END";
 
         public override void CreateSequenceNumberProcedure()

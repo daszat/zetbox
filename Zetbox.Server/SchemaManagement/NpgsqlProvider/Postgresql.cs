@@ -589,9 +589,9 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
             return (bool)ExecuteScalar(@"
                 SELECT (d.adbin IS NOT NULL AND d.adbin <> '') as has_default
                 FROM pg_class c
-	                LEFT JOIN pg_namespace n ON n.oid = c.relnamespace
-	                LEFT JOIN pg_attribute a ON c.oid = a.attrelid
-	                LEFT JOIN pg_attrdef d ON c.oid = d.adrelid AND a.attnum = d.adnum
+                    LEFT JOIN pg_namespace n ON n.oid = c.relnamespace
+                    LEFT JOIN pg_attribute a ON c.oid = a.attrelid
+                    LEFT JOIN pg_attrdef d ON c.oid = d.adrelid AND a.attnum = d.adnum
                 WHERE n.nspname = @schema AND c.relname = @table AND a.attname = @column",
                 new Dictionary<string, object>() { 
                     { "@schema", tblName.Schema },
@@ -608,8 +608,8 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
             return (int)ExecuteScalar(@"
                 SELECT a.atttypmod - 4 -- adjust for varchar implementation, which is storing the length too
                 FROM pg_class c
-	                LEFT JOIN pg_namespace n ON n.oid = c.relnamespace
-	                LEFT JOIN pg_attribute a ON c.oid = a.attrelid
+                    LEFT JOIN pg_namespace n ON n.oid = c.relnamespace
+                    LEFT JOIN pg_attribute a ON c.oid = a.attrelid
                 WHERE n.nspname = @schema AND c.relname = @table AND a.attname = @column",
                 new Dictionary<string, object>() { 
                     { "@schema", tblName.Schema },
@@ -1187,7 +1187,7 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
 $BODY$BEGIN
 ");
 
-            // optimaziation
+            // optimization
             if (dependingCols != null && dependingCols.Count > 0)
             {
                 sb.AppendLine("  IF TG_OP = 'UPDATE' THEN");
@@ -1204,15 +1204,15 @@ $BODY$BEGIN
                 if (tbl.Relations.Count == 0)
                 {
                     sb.AppendFormat(@"
-	IF TG_OP = 'DELETE' OR TG_OP = 'UPDATE' THEN
-		DELETE FROM {0} WHERE {2} = OLD.{2};
-	END IF;
-	IF TG_OP = 'INSERT' OR TG_OP = 'UPDATE' THEN
-		DELETE FROM {0} WHERE {2} = NEW.{2};
-		INSERT INTO {0} ({2}, ""Identity"", ""Right"")
-			SELECT {2}, ""Identity"", ""Right"" FROM {1}
-			WHERE {2} = NEW.{2};
-	END IF;
+    IF TG_OP = 'DELETE' OR TG_OP = 'UPDATE' THEN
+        DELETE FROM {0} WHERE {2} = OLD.{2};
+    END IF;
+    IF TG_OP = 'INSERT' OR TG_OP = 'UPDATE' THEN
+        DELETE FROM {0} WHERE {2} = NEW.{2};
+        INSERT INTO {0} ({2}, ""Identity"", ""Right"")
+            SELECT {2}, ""Identity"", ""Right"" FROM {1}
+            WHERE {2} = NEW.{2};
+    END IF;
 ", FormatSchemaName(tbl.TblNameRights), FormatSchemaName(tbl.ViewUnmaterializedName), QuoteIdentifier("ID"));
                 }
                 else
@@ -1246,15 +1246,15 @@ $BODY$BEGIN
                     string selectFormat = select.ToString();
 
                     sb.AppendFormat(@"
-	IF TG_OP = 'DELETE' OR TG_OP = 'UPDATE' THEN
-		DELETE FROM {0} WHERE ""ID"" IN ({1});
-	END IF;
-	IF TG_OP = 'INSERT' OR TG_OP = 'UPDATE' THEN
-		DELETE FROM {0} WHERE ""ID"" IN ({2});
-		INSERT INTO {0} (""ID"", ""Identity"", ""Right"")
-			SELECT rights.""ID"", rights.""Identity"", rights.""Right"" FROM {3} as rights
+    IF TG_OP = 'DELETE' OR TG_OP = 'UPDATE' THEN
+        DELETE FROM {0} WHERE ""ID"" IN ({1});
+    END IF;
+    IF TG_OP = 'INSERT' OR TG_OP = 'UPDATE' THEN
+        DELETE FROM {0} WHERE ""ID"" IN ({2});
+        INSERT INTO {0} (""ID"", ""Identity"", ""Right"")
+            SELECT rights.""ID"", rights.""Identity"", rights.""Right"" FROM {3} as rights
                 INNER JOIN ({2}) as acl ON (acl.""ID"" = rights.""ID"");
-	END IF;
+    END IF;
 ",
                         FormatSchemaName(tbl.TblNameRights),
                         String.Format(selectFormat, "OLD"),
@@ -1266,7 +1266,7 @@ $BODY$BEGIN
                 sb.AppendLine();
             }
 
-            sb.Append(@"	RETURN NULL;
+            sb.Append(@"    RETURN NULL;
 END$BODY$
   LANGUAGE 'plpgsql' VOLATILE
 ");
@@ -1294,10 +1294,10 @@ END$BODY$
             StringBuilder view = new StringBuilder();
             view.AppendFormat(@"CREATE VIEW {0} AS
 SELECT  ""ID"", ""Identity"", 
-		(case SUM(""Right"" & 1) when 0 then 0 else 1 end) +
-		(case SUM(""Right"" & 2) when 0 then 0 else 2 end) +
-		(case SUM(""Right"" & 4) when 0 then 0 else 4 end) +
-		(case SUM(""Right"" & 8) when 0 then 0 else 8 end) AS ""Right"" 
+        (case SUM(""Right"" & 1) when 0 then 0 else 1 end) +
+        (case SUM(""Right"" & 2) when 0 then 0 else 2 end) +
+        (case SUM(""Right"" & 4) when 0 then 0 else 4 end) +
+        (case SUM(""Right"" & 8) when 0 then 0 else 8 end) AS ""Right""
 FROM (", FormatSchemaName(viewName));
             view.AppendLine();
 
@@ -1462,8 +1462,8 @@ UPDATE ""base"".""SequenceData"" sd SET ""CurrentNumber"" = ""CurrentNumber"" + 
 SELECT ""CurrentNumber"" INTO result FROM ""base"".""SequenceData"" sd JOIN ""base"".""Sequences"" s ON (s.""ID"" = sd.""fk_Sequence"") WHERE s.""ExportGuid"" = ""seqNumber"";
 
 IF result IS NULL THEN
-	result := 1;
-	INSERT INTO ""base"".""SequenceData"" (""fk_Sequence"", ""CurrentNumber"")
+    result := 1;
+    INSERT INTO ""base"".""SequenceData"" (""fk_Sequence"", ""CurrentNumber"")
         SELECT s.""ID"", 1 FROM ""base"".""Sequences"" s WHERE s.""ExportGuid"" = ""seqNumber"";
 END IF;
 
