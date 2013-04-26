@@ -156,7 +156,7 @@ namespace Zetbox.API.SchemaManagement
             var relEnd = rel.GetOtherEnd(otherEnd);
 
             if (rel.GetRelationType() != RelationType.n_m && !relEnd.Parent.HasStorage(relEnd.GetRole()))
-                throw new ArgumentException("otherEnd", "The relation has no storage where the requested name should be");
+                throw new ArgumentException("The relation has no storage where the requested name should be", "otherEnd");
 
             if (relEnd.Type.GetTableMapping() == TableMapping.TPH
                 && relEnd.Type.BaseObjectClass != null
