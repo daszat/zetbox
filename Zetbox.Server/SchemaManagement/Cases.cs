@@ -2830,9 +2830,13 @@ namespace Zetbox.Server.SchemaManagement
                         };
                         try
                         {
-                            // Ignore last one - this is our n:m end
-                            rt.ObjectRelations.AddRange(SchemaManager.CreateJoinList(db, dep, ac.Relations.TakeWhile(r => r != rel)));
-                            rt.IdentityRelations.AddRange(SchemaManager.CreateJoinList(db, identity, ac.Relations.Reverse().TakeWhile(r => r != rel)));
+                            // Ignore last join - our n:m end has two (in & out), but we only need the incoming one
+                            var objJoinList = SchemaManager.CreateJoinList(db, dep, ac.Relations.TakeWhileInclusive(r => r != rel));
+                            rt.ObjectRelations.AddRange(objJoinList.Take(objJoinList.Count - 1));
+
+                            // Ignore last join - our n:m end has two (in & out), but we only need the incoming one
+                            var idJoinList = SchemaManager.CreateJoinList(db, identity, ac.Relations.Reverse().TakeWhileInclusive(r => r != rel));
+                            rt.IdentityRelations.AddRange(idJoinList.Take(idJoinList.Count - 1));
                         }
                         catch (Zetbox.Server.SchemaManagement.SchemaManager.JoinListException ex)
                         {
