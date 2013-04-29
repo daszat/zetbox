@@ -22,7 +22,7 @@ namespace Zetbox.Client.Presentables.Calendar
             : base(appCtx, dataCtx, parent, evt)
         {
             this.Event = evt;
-            this.IsReadOnly = Event.IsViewReadOnly;
+            this.isReadOnlyStore = Event.IsViewReadOnly;
         }
 
         public Event Event { get; private set; }

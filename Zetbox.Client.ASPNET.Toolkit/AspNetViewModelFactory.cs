@@ -23,7 +23,7 @@ namespace Zetbox.Client.ASPNET
             get { return App.GUI.Toolkit.ASPNET; }
         }
 
-        protected override void ShowInView(ViewModel mdl, object view, bool activate, bool asDialog)
+        protected override void ShowInView(ViewModel mdl, object view, bool activate, bool asDialog, ViewModel ownerMdl)
         {
             throw new NotSupportedException();
         }

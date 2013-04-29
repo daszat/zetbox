@@ -38,10 +38,10 @@ namespace Zetbox.Client.GUI
             Show(_doNothing);
         }
 
-        public void Show(Action<object[]> ok)
+        public void Show(Action<object[]> ok, ViewModel ownerMdl = null)
         {
             var dlg = ViewModelFactory.CreateViewModel<ValueInputTaskViewModel.Factory>().Invoke(DataContext, null, Title, ValueModels, ok);
-            ViewModelFactory.ShowDialog(dlg);
+            ViewModelFactory.ShowDialog(dlg, ownerMdl ?? ViewModelFactory.GetWorkspace(DataContext));
         }
     }
 

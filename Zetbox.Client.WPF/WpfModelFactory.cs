@@ -50,16 +50,16 @@ namespace Zetbox.Client.WPF
         /// </summary>
         private int windowCounter = 0;
 
-        private List<Window> _windowList = new List<Window>();
+        private Dictionary<ViewModel, Window> _windowList = new Dictionary<ViewModel, Window>();
 
         /// <inheritdoc/>
-        protected override void ShowInView(ViewModel mdl, object view, bool activate, bool asDialog)
+        protected override void ShowInView(ViewModel mdl, object view, bool activate, bool asDialog, ViewModel ownerMdl)
         {
             var window = view as Window;
 
             if (window != null)
             {
-                if (_windowList.Contains(window))
+                if (_windowList.ContainsValue(window))
                 {
                     window.Activate();
                 }
@@ -69,11 +69,17 @@ namespace Zetbox.Client.WPF
                     window.ShowActivated = activate;
                     if (asDialog)
                     {
+                        if (_windowList.ContainsKey(ownerMdl))
+                        {
+                            var owner = _windowList[ownerMdl];
+                            if(owner != window)
+                                window.Owner = owner;
+                        }
                         window.ShowDialog();
                     }
                     else
                     {
-                        _windowList.Add(window);
+                        _windowList.Add(mdl, window);
                         window.Closed += new EventHandler(window_Closed);
 
                         window.Show();
@@ -100,7 +106,8 @@ namespace Zetbox.Client.WPF
         /// <param name="e"></param>
         void window_Closed(object sender, EventArgs e)
         {
-            _windowList.Remove(sender);
+            var wnd = (Window)sender;
+            _windowList.Remove(_windowList.Single(kv => kv.Value == wnd).Key);
             if (--windowCounter == 0)
             {
                 Application.Current.Shutdown();

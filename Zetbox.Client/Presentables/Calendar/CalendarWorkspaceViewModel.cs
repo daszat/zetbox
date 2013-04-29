@@ -360,7 +360,7 @@ namespace Zetbox.Client.Presentables.Calendar
                 ws.ShowObject(source);
             else
                 ws.ShowObject(evt.Event);
-            ViewModelFactory.ShowDialog(ws); // TODO: Realy? A Dialog? Discuss
+            ViewModelFactory.ShowDialog(ws, this);
 
             _fetchCache.Invalidate();
             CurrentView.Refresh(); // A dialog makes it easy to know when the time for a refresh has come

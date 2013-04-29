@@ -299,7 +299,8 @@ namespace Zetbox.Client.Presentables
 
         protected bool isReadOnlyStore = false;
         /// <summary>
-        /// Specifies, that the underlying object should be read only. Note: this sets every property to read only true.
+        /// Specifies, that the underlying object should be read only. Note: this sets every property to read only true. 
+        /// In constructors use isReadOnlyStore instead. It will be propergated down later.
         /// </summary>
         public virtual bool IsReadOnly
         {
@@ -317,7 +318,7 @@ namespace Zetbox.Client.Presentables
                     {
                         foreach (var e in _propertyModels)
                         {
-                            e.Value.IsReadOnly = IsReadOnly;
+                            e.Value.IsReadOnly = isReadOnlyStore;
                         }
                     }
                     OnPropertyChanged("IsReadOnly");

@@ -60,7 +60,7 @@ namespace Zetbox.API.AbstractConsumerTests
         }
 
         public ViewModel LastShownModel { get; private set; }
-        protected override void ShowInView(ViewModel mdl, object view, bool activate, bool asDialog)
+        protected override void ShowInView(ViewModel mdl, object view, bool activate, bool asDialog, ViewModel ownerMdl)
         {
             LastShownModel = mdl;
         }

@@ -41,7 +41,7 @@ namespace Zetbox.Client.Mocks
             get { return Toolkit.TEST; }
         }
 
-        protected override void ShowInView(ViewModel mdl, object view, bool activate, bool asDialog)
+        protected override void ShowInView(ViewModel mdl, object view, bool activate, bool asDialog, ViewModel ownerMdl)
         {
         }
 

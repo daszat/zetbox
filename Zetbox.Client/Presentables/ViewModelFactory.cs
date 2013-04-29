@@ -503,7 +503,7 @@ namespace Zetbox.Client.Presentables
             }
             else
             {
-                ShowInView(mdl, CreateSpecificView(mdl, kind), activate, false);
+                ShowInView(mdl, CreateSpecificView(mdl, kind), activate, false, null);
             }
         }
 
@@ -521,7 +521,7 @@ namespace Zetbox.Client.Presentables
 
             if (dom == null)
             {
-                ShowInView(mdl, CreateDefaultView(mdl), activate, false);
+                ShowInView(mdl, CreateDefaultView(mdl), activate, false, null);
             }
             else
             {
@@ -568,27 +568,22 @@ namespace Zetbox.Client.Presentables
             }
         }
 
-        public void ShowDialog(ViewModel mdl)
-        {
-            ShowDialog(mdl, null);
-        }
-
-        public void ShowDialog(ViewModel mdl, Zetbox.App.GUI.ControlKind kind)
+        public void ShowDialog(ViewModel mdl, ViewModel ownerModel, Zetbox.App.GUI.ControlKind kind = null)
         {
             if (mdl == null)
                 throw new ArgumentNullException("mdl");
 
             if (kind == null)
             {
-                ShowInView(mdl, CreateDefaultView(mdl), true, true);
+                ShowInView(mdl, CreateDefaultView(mdl), true, true, ownerModel ?? mdl.GetWorkspace());
             }
             else
             {
-                ShowInView(mdl, CreateSpecificView(mdl, kind), true, true);
+                ShowInView(mdl, CreateSpecificView(mdl, kind), true, true, ownerModel ?? mdl.GetWorkspace());
             }
         }
 
-        protected abstract void ShowInView(ViewModel mdl, object view, bool activate, bool asDialog);
+        protected abstract void ShowInView(ViewModel mdl, object view, bool activate, bool asDialog, ViewModel ownerModel);
 
         #endregion
 
