@@ -50,8 +50,8 @@ namespace Zetbox.App.Calendar
                 .Invoke(eventArgs.DataContext, eventArgs.Parent, obj, eventArgs.SelectedStartDate, eventArgs.IsAllDay));
 
             // For testing only!
-            eventArgs.ViewModels.Add(eventArgs.ViewModelFactory.CreateViewModel<Zetbox.App.Projekte.Client.ViewModel.TestModule.EventTestInputViewModel.Factory>()
-                .Invoke(eventArgs.DataContext, eventArgs.Parent, obj, eventArgs.SelectedStartDate, eventArgs.IsAllDay));
+            //eventArgs.ViewModels.Add(eventArgs.ViewModelFactory.CreateViewModel<Zetbox.App.Projekte.Client.ViewModel.TestModule.EventTestInputViewModel.Factory>()
+            //    .Invoke(eventArgs.DataContext, eventArgs.Parent, obj, eventArgs.SelectedStartDate, eventArgs.IsAllDay));
         }
     }
 }
