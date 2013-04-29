@@ -348,8 +348,14 @@ namespace Zetbox.Client.Presentables.Calendar
         {
             if (evt == null) return;
             var ctx = _ctxFactory();
-            var ws = ViewModelFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(ctx, null);
             var source = evt.Event.Source.GetObject(ctx);
+            if (source != null && !source.CurrentAccessRights.HasReadRights())
+            {
+                ViewModelFactory.ShowMessage(CalendarResources.CannotOpenNoRightsMessage, CalendarResources.CannotOpenNoRightsCaption);
+                return;
+            }
+
+            var ws = ViewModelFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(ctx, null);
             if (source != null)
                 ws.ShowObject(source);
             else

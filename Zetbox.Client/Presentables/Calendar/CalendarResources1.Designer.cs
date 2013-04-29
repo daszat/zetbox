@@ -97,6 +97,24 @@ namespace Zetbox.Client.Presentables.Calendar {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Access Denied.
+        /// </summary>
+        internal static string CannotOpenNoRightsCaption {
+            get {
+                return ResourceManager.GetString("CannotOpenNoRightsCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have no read rights on this event.
+        /// </summary>
+        internal static string CannotOpenNoRightsMessage {
+            get {
+                return ResourceManager.GetString("CannotOpenNoRightsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Only self.
         /// </summary>
         internal static string ClearAllCommand_Label {

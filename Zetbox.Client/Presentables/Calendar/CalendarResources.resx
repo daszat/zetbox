@@ -129,6 +129,12 @@
   <data name="CalendarLabel" xml:space="preserve">
     <value>Calendar</value>
   </data>
+  <data name="CannotOpenNoRightsCaption" xml:space="preserve">
+    <value>Access Denied</value>
+  </data>
+  <data name="CannotOpenNoRightsMessage" xml:space="preserve">
+    <value>You have no read rights on this event</value>
+  </data>
   <data name="ClearAllCommand_Label" xml:space="preserve">
     <value>Only self</value>
   </data>
