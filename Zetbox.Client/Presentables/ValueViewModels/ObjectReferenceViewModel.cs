@@ -48,18 +48,18 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             if (relEnd == null && mdl.IsReadOnly)
             {
                 // could be e.g. a calculated object ref property
-                _allowClear = false;
+                _allowSelectValue = false;
                 _allowCreateNewItem = false;
                 _allowCreateNewItemOnSelect = false;
-                _allowSelectValue = false;
+                _allowClear = false;
             }
             else if (relEnd == null && !mdl.IsReadOnly)
             {
                 // could be e.g. a filter
-                _allowClear = true;
+                _allowSelectValue = true;
                 _allowCreateNewItem = false;
                 _allowCreateNewItemOnSelect = false;
-                _allowSelectValue = true;
+                _allowClear = true;
             }
             else
             {
@@ -69,7 +69,9 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                     var relType = rel.GetRelationType();
                     if (relType == RelationType.one_n && rel.Containment == ContainmentSpecification.Independent)
                     {
-                        _allowCreateNewItem = false; // search first
+                        // search first
+                        _allowSelectValue = true;
+                        _allowCreateNewItem = false; 
                         _allowCreateNewItemOnSelect = true;
                     }
                     else if (relType == RelationType.one_one)
@@ -77,12 +79,17 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         if ((rel.Containment == ContainmentSpecification.AContainsB && rel.A == relEnd) ||
                            (rel.Containment == ContainmentSpecification.BContainsA && rel.B == relEnd))
                         {
-                            _allowSelectValue = false; // This end is creating the value, don't change another item
+                            // This end is creating the value, don't change another item
+                            _allowSelectValue = false;
+                            _allowCreateNewItem = true;
                         }
                         else
                         {
-                            _allowCreateNewItem = false; // possibility to change parent, but do not create a new one
-                            _allowCreateNewItemOnSelect = false;
+                            // possibility to change parent, but do not create a new one
+                            // search first
+                            _allowSelectValue = true;
+                            _allowCreateNewItem = false; 
+                            _allowCreateNewItemOnSelect = true; 
                         }
                     }
                 }
