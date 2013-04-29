@@ -623,6 +623,7 @@
           <ScalarProperty Name="EndDate" ColumnName="EndDate" />
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
           <ScalarProperty Name="IsAllDay" ColumnName="IsAllDay" />
+          <ScalarProperty Name="IsViewReadOnly" ColumnName="IsViewReadOnly" />
           <ScalarProperty Name="Location" ColumnName="Location" />
           <ScalarProperty Name="StartDate" ColumnName="StartDate" />
           <ScalarProperty Name="Summary" ColumnName="Summary" />

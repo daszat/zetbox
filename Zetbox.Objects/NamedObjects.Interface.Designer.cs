@@ -2063,6 +2063,10 @@ namespace Zetbox {
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("d8ddeb5c-7c5d-4780-8540-857932cb3813"); }
                                 }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> IsViewReadOnly
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("15534345-ecd4-407b-a605-236375eafa66"); }
+                                }
                                 public static TypedGuid<global::Zetbox.App.Base.Property> Location
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("3c517754-f4a4-459e-8a24-3b85e1949b21"); }

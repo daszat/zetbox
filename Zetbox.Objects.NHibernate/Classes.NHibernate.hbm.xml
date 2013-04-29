@@ -152,6 +152,10 @@
                   column="`IsAllDay`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
+        <property name="IsViewReadOnly" 
+                  column="`IsViewReadOnly`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
         <property name="Location" 
                   column="`Location`" 
                   optimistic-lock="false"/>

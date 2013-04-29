@@ -65,6 +65,7 @@ namespace Zetbox.App.Calendar
             _isCreatedOnSet = Proxy.ID > 0;
             _isExportGuidSet = Proxy.ID > 0;
             _isIsAllDaySet = Proxy.ID > 0;
+            _isIsViewReadOnlySet = Proxy.ID > 0;
         }
 
         /// <summary>the NHibernate proxy of the represented entity</summary>
@@ -795,6 +796,84 @@ namespace Zetbox.App.Calendar
         public static event PropertyIsValidHandler<Zetbox.App.Calendar.Event> OnIsAllDay_IsValid;
 
         /// <summary>
+        /// The current event is read only. This property is set by code.
+        /// </summary>
+
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        public bool IsViewReadOnly
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = FetchIsViewReadOnlyOrDefault();
+                if (OnIsViewReadOnly_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<bool>(__result);
+                    OnIsViewReadOnly_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isIsViewReadOnlySet = true;
+                if (Proxy.IsViewReadOnly != value)
+                {
+                    var __oldValue = Proxy.IsViewReadOnly;
+                    var __newValue = value;
+                    if (OnIsViewReadOnly_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnIsViewReadOnly_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("IsViewReadOnly", __oldValue, __newValue);
+                    Proxy.IsViewReadOnly = __newValue;
+                    NotifyPropertyChanged("IsViewReadOnly", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnIsViewReadOnly_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnIsViewReadOnly_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("IsViewReadOnly");
+                }
+            }
+        }
+
+
+        private bool FetchIsViewReadOnlyOrDefault()
+        {
+            var __result = Proxy.IsViewReadOnly;
+                if (!_isIsViewReadOnlySet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("15534345-ecd4-407b-a605-236375eafa66"));
+                    if (__p != null) {
+                        _isIsViewReadOnlySet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this.Proxy.IsViewReadOnly = (bool)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'Zetbox.App.Calendar.Event.IsViewReadOnly'");
+                    }
+                }
+            return __result;
+        }
+
+        private bool _isIsViewReadOnlySet = false;
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<Zetbox.App.Calendar.Event, bool> OnIsViewReadOnly_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.Event, bool> OnIsViewReadOnly_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.Event, bool> OnIsViewReadOnly_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Calendar.Event> OnIsViewReadOnly_IsValid;
+
+        /// <summary>
         /// 
         /// </summary>
 
@@ -1138,6 +1217,7 @@ namespace Zetbox.App.Calendar
             me.EndDate = other.EndDate;
             me.ExportGuid = other.ExportGuid;
             me.IsAllDay = other.IsAllDay;
+            me.IsViewReadOnly = other.IsViewReadOnly;
             me.Location = other.Location;
             me.StartDate = other.StartDate;
             me.Summary = other.Summary;
@@ -1219,6 +1299,7 @@ namespace Zetbox.App.Calendar
                 case "EndDate":
                 case "ExportGuid":
                 case "IsAllDay":
+                case "IsViewReadOnly":
                 case "Location":
                 case "Recurrence":
                 case "Source":
@@ -1368,6 +1449,15 @@ namespace Zetbox.App.Calendar
                         (obj, val) => obj.IsAllDay = val,
 						obj => OnIsAllDay_IsValid), 
                     // else
+                    new PropertyDescriptorNHibernateImpl<Event, bool>(
+                        lazyCtx,
+                        new Guid("15534345-ecd4-407b-a605-236375eafa66"),
+                        "IsViewReadOnly",
+                        null,
+                        obj => obj.IsViewReadOnly,
+                        (obj, val) => obj.IsViewReadOnly = val,
+						obj => OnIsViewReadOnly_IsValid), 
+                    // else
                     new PropertyDescriptorNHibernateImpl<Event, string>(
                         lazyCtx,
                         new Guid("3c517754-f4a4-459e-8a24-3b85e1949b21"),
@@ -1472,6 +1562,7 @@ namespace Zetbox.App.Calendar
             FetchCreatedOnOrDefault();
             FetchExportGuidOrDefault();
             FetchIsAllDayOrDefault();
+            FetchIsViewReadOnlyOrDefault();
             base.NotifyPreSave();
             if (OnNotifyPreSave_Event != null) OnNotifyPreSave_Event(this);
         }
@@ -1563,6 +1654,8 @@ namespace Zetbox.App.Calendar
 
             public virtual bool IsAllDay { get; set; }
 
+            public virtual bool IsViewReadOnly { get; set; }
+
             public virtual string Location { get; set; }
 
             public virtual Zetbox.App.Base.RecurrenceRuleNHibernateImpl Recurrence { get; set; }
@@ -1624,6 +1717,10 @@ namespace Zetbox.App.Calendar
             if (this._isIsAllDaySet) {
                 binStream.Write(this.Proxy.IsAllDay);
             }
+            binStream.Write(this._isIsViewReadOnlySet);
+            if (this._isIsViewReadOnlySet) {
+                binStream.Write(this.Proxy.IsViewReadOnly);
+            }
             binStream.Write(this.Proxy.Location);
             binStream.Write(this.Recurrence);
             binStream.Write(this.Source);
@@ -1658,6 +1755,10 @@ namespace Zetbox.App.Calendar
             this._isIsAllDaySet = binStream.ReadBoolean();
             if (this._isIsAllDaySet) {
                 this.Proxy.IsAllDay = binStream.ReadBoolean();
+            }
+            this._isIsViewReadOnlySet = binStream.ReadBoolean();
+            if (this._isIsViewReadOnlySet) {
+                this.Proxy.IsViewReadOnly = binStream.ReadBoolean();
             }
             this.Proxy.Location = binStream.ReadString();
             {
@@ -1695,6 +1796,8 @@ namespace Zetbox.App.Calendar
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Calendar")) XmlStreamer.ToStream(this.Proxy.EndDate, xml, "EndDate", "Zetbox.App.Calendar");
             System.Diagnostics.Debug.Assert(this._isIsAllDaySet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Calendar")) XmlStreamer.ToStream(this.Proxy.IsAllDay, xml, "IsAllDay", "Zetbox.App.Calendar");
+            System.Diagnostics.Debug.Assert(this._isIsViewReadOnlySet, "Exported objects need to have all default values evaluated");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Calendar")) XmlStreamer.ToStream(this.Proxy.IsViewReadOnly, xml, "IsViewReadOnly", "Zetbox.App.Calendar");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Calendar")) XmlStreamer.ToStream(this.Proxy.Location, xml, "Location", "Zetbox.App.Calendar");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Calendar")) XmlStreamer.ExportCompoundObject(this.Recurrence, xml, "Recurrence", "Zetbox.App.Calendar");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Calendar")) XmlStreamer.ExportCompoundObject(this.Source, xml, "Source", "Zetbox.App.Calendar");
@@ -1736,6 +1839,11 @@ namespace Zetbox.App.Calendar
                 // Import must have default value set
                 this.Proxy.IsAllDay = XmlStreamer.ReadBoolean(xml);
                 this._isIsAllDaySet = true;
+                break;
+            case "Zetbox.App.Calendar|IsViewReadOnly":
+                // Import must have default value set
+                this.Proxy.IsViewReadOnly = XmlStreamer.ReadBoolean(xml);
+                this._isIsViewReadOnlySet = true;
                 break;
             case "Zetbox.App.Calendar|Location":
                 this.Proxy.Location = XmlStreamer.ReadString(xml);

@@ -1629,6 +1629,7 @@
     <Property Name="EndDate" Type="DateTime" Nullable="false"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
     <Property Name="IsAllDay" Type="Boolean" Nullable="false"  />
+    <Property Name="IsViewReadOnly" Type="Boolean" Nullable="false"  />
     <Property Name="Location" Type="String" Nullable="true" MaxLength="200"  />
     <Property Name="RecurrenceImpl"
               Type="Model.RecurrenceRuleEfImpl"

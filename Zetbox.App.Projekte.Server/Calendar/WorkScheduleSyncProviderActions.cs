@@ -65,6 +65,7 @@ namespace Zetbox.App.Calendar
                     evt.StartDate = dt;
                     evt.EndDate = dt;
                     evt.IsAllDay = true;
+                    evt.IsViewReadOnly = true;
                     counter++;
                 }
                 

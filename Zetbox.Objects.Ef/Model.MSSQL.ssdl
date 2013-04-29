@@ -1774,6 +1774,7 @@
     <Property Name="EndDate" Type="datetime2" Nullable="false" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="IsAllDay" Type="bit" Nullable="false" />
+    <Property Name="IsViewReadOnly" Type="bit" Nullable="false" />
     <Property Name="Location" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="StartDate" Type="datetime2" Nullable="false" />
     <Property Name="Summary" Type="nvarchar" MaxLength="200" Nullable="false" />

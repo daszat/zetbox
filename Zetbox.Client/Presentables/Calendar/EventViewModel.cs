@@ -22,6 +22,7 @@ namespace Zetbox.Client.Presentables.Calendar
             : base(appCtx, dataCtx, parent, evt)
         {
             this.Event = evt;
+            this.IsReadOnly = Event.IsViewReadOnly;
         }
 
         public Event Event { get; private set; }
@@ -38,6 +39,9 @@ namespace Zetbox.Client.Presentables.Calendar
                         _calendarViewModel = null;
                         OnPropertyChanged("CalendarViewModel");
                     }
+                    break;
+                case "IsViewReadOnly":
+                    this.IsReadOnly = Event.IsViewReadOnly;
                     break;
             }
         }

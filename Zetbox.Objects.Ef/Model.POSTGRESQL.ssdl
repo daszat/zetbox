@@ -1774,6 +1774,7 @@
     <Property Name="EndDate" Type="timestamp" Nullable="false" />
     <Property Name="ExportGuid" Type="uuid" Nullable="false" />
     <Property Name="IsAllDay" Type="bool" Nullable="false" />
+    <Property Name="IsViewReadOnly" Type="bool" Nullable="false" />
     <Property Name="Location" Type="varchar" MaxLength="200" Nullable="true" />
     <Property Name="StartDate" Type="timestamp" Nullable="false" />
     <Property Name="Summary" Type="varchar" MaxLength="200" Nullable="false" />

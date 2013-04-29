@@ -51,6 +51,15 @@ namespace Zetbox.App.Calendar
         }
 
         /// <summary>
+        /// The current event is read only. This property is set by code.
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("15534345-ecd4-407b-a605-236375eafa66")]
+        bool IsViewReadOnly {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("3c517754-f4a4-459e-8a24-3b85e1949b21")]
