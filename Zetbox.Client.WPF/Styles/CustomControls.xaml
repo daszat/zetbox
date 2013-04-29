@@ -120,7 +120,7 @@
                                 Style="{StaticResource ControlBorderStyle}"
                                 IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
                                 BorderThickness="1,1,0,1">
-                            <Image Source="{Binding Icon, Converter={StaticResource ImageConverter}}"
+                            <Image Source="{Binding ValueAsync.IconAsync, Mode=OneWay, Converter={StaticResource ImageConverter}}"
                                    Margin="3 0 3 0"
                                    Width="14"
                                    Height="14" />
@@ -131,7 +131,7 @@
                                   IsEditable="True"
                                   Text="{Binding SearchString, Mode=OneWayToSource}"
                                   ItemsSource="{Binding PossibleValuesAsync, Mode=OneWay, ValidatesOnDataErrors=true}"
-                                  SelectedItem="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+                                  SelectedItem="{Binding ValueAsync, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
                                   IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
                                   HorizontalContentAlignment="Stretch">
                             <ComboBox.ItemTemplate>

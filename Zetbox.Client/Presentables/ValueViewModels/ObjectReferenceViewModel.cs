@@ -416,12 +416,31 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
+        public override DataObjectViewModel Value
+        {
+            get
+            {
+                return base.Value;
+            }
+            set
+            {
+                // TODO: cancel running task
+                if (_fetchValueTask != null)
+                    _fetchValueTask.Wait();
+                base.Value = value;
+            }
+        }
+
         public override DataObjectViewModel ValueAsync
         {
             get
             {
                 GetValueFromModel();
                 return _valueCache;
+            }
+            set
+            {
+                this.Value = value;
             }
         }
         #endregion

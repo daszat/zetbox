@@ -391,7 +391,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
-        public abstract TValue ValueAsync { get; }
+        public abstract TValue ValueAsync { get; set; }
 
         #endregion
 
@@ -799,7 +799,11 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                return Value;
+                return this.Value;
+            }
+            set
+            {
+                this.Value = value;
             }
         }
 
@@ -854,7 +858,11 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                return Value;
+                return this.Value;
+            }
+            set
+            {
+                this.Value = value;
             }
         }
 

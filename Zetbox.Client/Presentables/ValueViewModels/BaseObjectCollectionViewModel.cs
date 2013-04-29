@@ -619,6 +619,10 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 GetValueFromModel();
                 return _valueCache;
             }
+            set
+            {
+                throw new NotSupportedException();
+            }
         }
 
         protected override void SetValueToModel(IReadOnlyObservableList<DataObjectViewModel> value)

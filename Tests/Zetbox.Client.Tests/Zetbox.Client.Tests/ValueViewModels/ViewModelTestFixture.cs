@@ -45,7 +45,8 @@ namespace Zetbox.Client.Tests.ValueViewModels
 
             public override object ValueAsync
             {
-                get { return Value; }
+                get { return this.Value; }
+                set { this.Value = value; }
             }
 
             protected override string FormatValue(object value)
