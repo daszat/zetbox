@@ -222,7 +222,7 @@ namespace Zetbox.Client.Presentables
 
         private string GetCategorySortKey(string cat)
         {
-            switch(cat)
+            switch (cat)
             {
                 case "Summary": return "1|Summary";
                 case "Main": return "2|Main";
@@ -463,6 +463,7 @@ namespace Zetbox.Client.Presentables
                 if (Object.CurrentAccessRights.HasOnlyReadRightsOrNone()) return Highlight.Deactivated;
                 // Reflect readonly only on changable context
                 if (!DataContext.IsReadonly && (!IsEnabled || IsReadOnly)) return Highlight.Deactivated;
+                if (Object is IDeactivatable && ((IDeactivatable)Object).IsDeactivated) return Highlight.Deactivated;
                 return Highlight.None;
             }
         }
@@ -475,6 +476,7 @@ namespace Zetbox.Client.Presentables
                 if (Object.CurrentAccessRights.HasOnlyReadRightsOrNone()) return Highlight.Deactivated;
                 // Reflect readonly only on changable context
                 if (!DataContext.IsReadonly && (!IsEnabled || IsReadOnly)) return Highlight.Deactivated;
+                if (Object is IDeactivatable && ((IDeactivatable)Object).IsDeactivated) return Highlight.Deactivated;
                 return Highlight.None;
             }
         }
@@ -508,8 +510,15 @@ namespace Zetbox.Client.Presentables
         private void Object_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             // notify consumers if ID has changed
-            if (e.PropertyName == "ID")
-                OnPropertyChanged("ID");
+            switch (e.PropertyName)
+            {
+                case "ID":
+                    OnPropertyChanged("ID");
+                    break;
+                case "IsDeactivated":
+                    OnHighlightChanged();
+                    break;
+            }
 
             UpdateToStringCache();
             OnPropertyChanged("ObjectState");
