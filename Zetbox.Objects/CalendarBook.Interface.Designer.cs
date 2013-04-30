@@ -11,7 +11,7 @@ namespace Zetbox.App.Calendar
     /// A container (book) for events
     /// </summary>
     [Zetbox.API.DefinitionGuid("1450be5f-2266-4367-8a56-1f0bee5699c4")]
-    public interface CalendarBook : IDataObject, Zetbox.App.Base.IChangedBy, Zetbox.App.Base.IExportable 
+    public interface CalendarBook : IDataObject, Zetbox.App.Base.IChangedBy, Zetbox.App.Base.IDeactivatable, Zetbox.App.Base.IExportable 
     {
 
         /// <summary>

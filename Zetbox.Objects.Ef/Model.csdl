@@ -1406,6 +1406,7 @@
                         Relationship="Model.FK_Calendar_shared_w_GroupWriters_A"
                         FromRole="Calendar"
                         ToRole="CollectionEntry" />
+    <Property Name="IsDeactivated" Type="Boolean" Nullable="false"  />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="200"  />
     <NavigationProperty Name="OwnerImpl"
                         Relationship="Model.FK_Calendar_has_Owner"

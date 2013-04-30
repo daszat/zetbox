@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-04-29T14:36:01Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-04-30T15:35:44Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -537,6 +537,10 @@ public static void ObjectIsValid(YearlyCalendarRule obj, ObjectIsValidEventArgs 
     <ZetboxBase:A>1450be5f-2266-4367-8a56-1f0bee5699c4</ZetboxBase:A>
     <ZetboxBase:B>a73f2d0a-786b-483d-b474-b9d9df42b8b3</ZetboxBase:B>
   </ZetboxBase:DataType_implements_Interface_RelationEntry>
+  <ZetboxBase:DataType_implements_Interface_RelationEntry ExportGuid="8cb5ef8f-c50e-459e-8ba3-56d9ba98e79d">
+    <ZetboxBase:A>1450be5f-2266-4367-8a56-1f0bee5699c4</ZetboxBase:A>
+    <ZetboxBase:B>606a487e-35da-4ce9-91d1-f0cd844d7a35</ZetboxBase:B>
+  </ZetboxBase:DataType_implements_Interface_RelationEntry>
   <ZetboxBase:DataType_implements_Interface_RelationEntry ExportGuid="8b8b1c9d-4da8-4ea4-a188-2aab126fce7d">
     <ZetboxBase:A>1450be5f-2266-4367-8a56-1f0bee5699c4</ZetboxBase:A>
     <ZetboxBase:B>4ae6616a-eca3-47a5-b502-8e3c3913c2f0</ZetboxBase:B>
@@ -579,7 +583,7 @@ public static void ObjectIsValid(YearlyCalendarRule obj, ObjectIsValidEventArgs 
   </ZetboxBase:DataType_implements_Interface_RelationEntry>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="c74f0224-1302-4fc2-8629-837d7c96db34">
     <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2013-02-18T16:49:56.234449Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-04-30T13:35:44.545868Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(Calendar obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -608,14 +612,14 @@ public static void isValid_ChangedBy(Calendar obj, PropertyIsValidEventArgs e)
     <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
     <ZetboxBase:Name>ChangedBy</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>1450be5f-2266-4367-8a56-1f0bee5699c4</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>10</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>11</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <ZetboxBase:EagerLoading>false</ZetboxBase:EagerLoading>
     <ZetboxBase:RelationEnd>f5f687c0-b318-4ba9-aa1d-25c92abda5de</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="eab5c36d-7583-4e2f-8907-989ea0de6944">
     <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2013-02-18T16:49:56.234449Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-04-30T13:35:44.545868Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(Calendar obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -645,7 +649,7 @@ public static void isValid_ChangedOn(Calendar obj, PropertyIsValidEventArgs e)
     <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
     <ZetboxBase:Name>ChangedOn</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>1450be5f-2266-4367-8a56-1f0bee5699c4</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>8</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>9</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>fc74b434-3801-4e4a-ab67-e65a9e014005</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -653,7 +657,7 @@ public static void isValid_ChangedOn(Calendar obj, PropertyIsValidEventArgs e)
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="d86a1fd0-5bb1-4ce9-bdcb-9516bb09a401">
     <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2013-02-18T16:49:56.234449Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-04-30T13:35:44.545868Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(Calendar obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -682,14 +686,14 @@ public static void isValid_CreatedBy(Calendar obj, PropertyIsValidEventArgs e)
     <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
     <ZetboxBase:Name>CreatedBy</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>1450be5f-2266-4367-8a56-1f0bee5699c4</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>9</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>10</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <ZetboxBase:EagerLoading>false</ZetboxBase:EagerLoading>
     <ZetboxBase:RelationEnd>8218fad5-64d5-451b-906c-ae9bce29ab03</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="cd5dfdf4-22ac-4a5d-831e-442f2a9349a5">
     <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2013-02-18T16:49:56.234449Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-04-30T13:35:44.545868Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(Calendar obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -719,7 +723,7 @@ public static void isValid_CreatedOn(Calendar obj, PropertyIsValidEventArgs e)
     <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
     <ZetboxBase:Name>CreatedOn</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>1450be5f-2266-4367-8a56-1f0bee5699c4</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>7</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>8</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>fc74b434-3801-4e4a-ab67-e65a9e014005</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -727,7 +731,7 @@ public static void isValid_CreatedOn(Calendar obj, PropertyIsValidEventArgs e)
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:GuidProperty ExportGuid="a14ab2a0-8621-42ed-81d0-b82e55621831">
     <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2013-02-18T16:49:56.234449Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-04-30T13:35:44.545868Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(Calendar obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -757,7 +761,7 @@ public static void isValid_ExportGuid(Calendar obj, PropertyIsValidEventArgs e)
     <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
     <ZetboxBase:Name>ExportGuid</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>1450be5f-2266-4367-8a56-1f0bee5699c4</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>11</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>12</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>2b6fb70f-a382-4057-a139-cc33333d619d</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -833,6 +837,45 @@ public static void isValid_GroupWriters(Calendar obj, PropertyIsValidEventArgs e
     <ZetboxBase:EagerLoading>false</ZetboxBase:EagerLoading>
     <ZetboxBase:RelationEnd>c5a7baa1-59cd-4166-a256-21e6ac0f7467</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
+  <ZetboxBase:BoolProperty ExportGuid="31fc6dbe-e1ad-4853-9aaf-01f9055cef67">
+    <ZetboxBase:CategoryTags>Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2013-04-30T13:35:44.545868Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_IsDeactivated(CalendarBook obj, PropertyGetterEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_IsDeactivated(CalendarBook obj, PropertyPreSetterEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_IsDeactivated(CalendarBook obj, PropertyPostSetterEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_IsDeactivated(CalendarBook obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.IsDeactivated == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-04-30T13:35:44.545868Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultValue>2cea2c0e-aef4-4ad4-a283-e46b14ff7331</ZetboxBase:DefaultValue>
+    <ZetboxBase:Description>If true, the item will be hidden in any search</ZetboxBase:Description>
+    <ZetboxBase:Label>Is deactivated</ZetboxBase:Label>
+    <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
+    <ZetboxBase:Name>IsDeactivated</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>1450be5f-2266-4367-8a56-1f0bee5699c4</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>7</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>09d1f453-d0d9-429e-88e7-e84b33de7c2e</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:BoolProperty>
   <ZetboxBase:StringProperty ExportGuid="e1647548-92ee-4fae-9155-faad7d7e9187">
     <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-02-20T13:52:32.115317Z</ZetboxBase:ChangedOn>
@@ -3540,6 +3583,11 @@ public static void isValid_WorkSchedule(WorkScheduleSyncAccount obj, PropertyIsV
     <ZetboxBase:ConstrainedProperty>a14ab2a0-8621-42ed-81d0-b82e55621831</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2013-02-18T16:15:31.497352Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="0e5812d9-0ffe-4917-a321-402ad7d897cf">
+    <ZetboxBase:ChangedOn>2013-04-30T13:35:44.545868Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>31fc6dbe-e1ad-4853-9aaf-01f9055cef67</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-04-30T13:35:44.545868Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="dff4eaeb-3b19-4d5d-b3c5-c20e6e269b94">
     <ZetboxBase:ChangedOn>2013-02-18T16:15:19.121645Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>e1647548-92ee-4fae-9155-faad7d7e9187</ZetboxBase:ConstrainedProperty>
@@ -3934,6 +3982,12 @@ public static void isValid_WorkSchedule(WorkScheduleSyncAccount obj, PropertyIsV
     <ZetboxBase:CreatedOn>2013-02-18T16:15:31.497352Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Property>a14ab2a0-8621-42ed-81d0-b82e55621831</ZetboxBase:Property>
   </ZetboxBase:NewGuidDefaultValue>
+  <ZetboxBase:BoolDefaultValue ExportGuid="2cea2c0e-aef4-4ad4-a283-e46b14ff7331">
+    <ZetboxBase:ChangedOn>2013-04-30T13:35:44.545868Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-04-30T13:35:44.545868Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Property>31fc6dbe-e1ad-4853-9aaf-01f9055cef67</ZetboxBase:Property>
+    <ZetboxBase:BoolValue>false</ZetboxBase:BoolValue>
+  </ZetboxBase:BoolDefaultValue>
   <ZetboxBase:CurrentDateTimeDefaultValue ExportGuid="40010001-e285-4179-a063-08933e3e989e">
     <ZetboxBase:ChangedOn>2013-02-18T16:28:03.506365Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2013-02-18T16:28:03.506365Z</ZetboxBase:CreatedOn>

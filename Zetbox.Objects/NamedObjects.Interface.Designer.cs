@@ -1994,6 +1994,10 @@ namespace Zetbox {
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("d960ba8e-1605-4a70-b950-4e12c4c1ae75"); }
                                 }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> IsDeactivated
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("31fc6dbe-e1ad-4853-9aaf-01f9055cef67"); }
+                                }
                                 public static TypedGuid<global::Zetbox.App.Base.Property> Name
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("e1647548-92ee-4fae-9155-faad7d7e9187"); }

@@ -619,6 +619,88 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
         public static event PropertyIsValidHandler<Zetbox.App.Calendar.CalendarBook> OnGroupWriters_IsValid;
 
         /// <summary>
+        /// If true, the item will be hidden in any search
+        /// </summary>
+        // value type property
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public bool IsDeactivated
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _IsDeactivated;
+                if (!_isIsDeactivatedSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("31fc6dbe-e1ad-4853-9aaf-01f9055cef67"));
+                    if (__p != null) {
+                        _isIsDeactivatedSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this._IsDeactivated = (bool)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'CalendarBook.IsDeactivated'");
+                    }
+                }
+                if (OnIsDeactivated_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<bool>(__result);
+                    OnIsDeactivated_Getter(this, __e);
+                    __result = _IsDeactivated = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isIsDeactivatedSet = true;
+                if (_IsDeactivated != value)
+                {
+                    var __oldValue = _IsDeactivated;
+                    var __newValue = value;
+                    if (OnIsDeactivated_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnIsDeactivated_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("IsDeactivated", __oldValue, __newValue);
+                    _IsDeactivated = __newValue;
+                    NotifyPropertyChanged("IsDeactivated", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnIsDeactivated_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnIsDeactivated_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("IsDeactivated");
+                }
+            }
+        }
+        private bool _IsDeactivated_store;
+        private bool _IsDeactivated {
+            get { return _IsDeactivated_store; }
+            set {
+                ReportEfPropertyChanging("IsDeactivated");
+                _IsDeactivated_store = value;
+                ReportEfPropertyChanged("IsDeactivated");
+            }
+        }
+        private bool _isIsDeactivatedSet = false;
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Zetbox.App.Calendar.CalendarBook, bool> OnIsDeactivated_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.CalendarBook, bool> OnIsDeactivated_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.CalendarBook, bool> OnIsDeactivated_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Calendar.CalendarBook> OnIsDeactivated_IsValid;
+
+        /// <summary>
         /// 
         /// </summary>
         // value type property
@@ -986,6 +1068,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
             me.ChangedOn = other.ChangedOn;
             me.CreatedOn = other.CreatedOn;
             me.ExportGuid = other.ExportGuid;
+            me.IsDeactivated = other.IsDeactivated;
             me.Name = other.Name;
             this._fk_ChangedBy = otherImpl._fk_ChangedBy;
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
@@ -1009,6 +1092,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
                 case "CreatedBy":
                 case "CreatedOn":
                 case "ExportGuid":
+                case "IsDeactivated":
                 case "Name":
                 case "Owner":
                     AuditPropertyChange(property, oldValue, newValue);
@@ -1154,6 +1238,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
                         obj => obj.GroupWriters,
                         null, // lists are read-only properties
                         obj => OnGroupWriters_IsValid), 
+                    // else
+                    new PropertyDescriptorEfImpl<CalendarBook, bool>(
+                        lazyCtx,
+                        new Guid("31fc6dbe-e1ad-4853-9aaf-01f9055cef67"),
+                        "IsDeactivated",
+                        null,
+                        obj => obj.IsDeactivated,
+                        (obj, val) => obj.IsDeactivated = val,
+						obj => OnIsDeactivated_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<CalendarBook, string>(
                         lazyCtx,
@@ -1375,6 +1468,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
             if (this._isExportGuidSet) {
                 binStream.Write(this._ExportGuid);
             }
+            binStream.Write(this._isIsDeactivatedSet);
+            if (this._isIsDeactivatedSet) {
+                binStream.Write(this._IsDeactivated);
+            }
             binStream.Write(this._Name);
             {
                 var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.IdentityEfImpl>("Model.FK_Calendar_has_Owner", "Owner");
@@ -1403,6 +1500,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
             if (this._isExportGuidSet) {
                 this._ExportGuid = binStream.ReadGuid();
             }
+            this._isIsDeactivatedSet = binStream.ReadBoolean();
+            if (this._isIsDeactivatedSet) {
+                this._IsDeactivated = binStream.ReadBoolean();
+            }
             this._Name = binStream.ReadString();
             binStream.Read(out this._fk_Owner);
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
@@ -1422,6 +1523,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Calendar")) XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Zetbox.App.Calendar");
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Calendar")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Zetbox.App.Calendar");
+            System.Diagnostics.Debug.Assert(this._isIsDeactivatedSet, "Exported objects need to have all default values evaluated");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Calendar")) XmlStreamer.ToStream(this._IsDeactivated, xml, "IsDeactivated", "Zetbox.App.Calendar");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Calendar")) XmlStreamer.ToStream(this._Name, xml, "Name", "Zetbox.App.Calendar");
         }
 
@@ -1444,6 +1547,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
                 // Import must have default value set
                 this._ExportGuid = XmlStreamer.ReadGuid(xml);
                 this._isExportGuidSet = true;
+                break;
+            case "Zetbox.App.Calendar|IsDeactivated":
+                // Import must have default value set
+                this._IsDeactivated = XmlStreamer.ReadBoolean(xml);
+                this._isIsDeactivatedSet = true;
                 break;
             case "Zetbox.App.Calendar|Name":
                 this._Name = XmlStreamer.ReadString(xml);

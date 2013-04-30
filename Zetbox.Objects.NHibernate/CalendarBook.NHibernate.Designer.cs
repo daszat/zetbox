@@ -46,6 +46,7 @@ namespace Zetbox.App.Calendar
             _isChangedOnSet = Proxy.ID > 0;
             _isCreatedOnSet = Proxy.ID > 0;
             _isExportGuidSet = Proxy.ID > 0;
+            _isIsDeactivatedSet = Proxy.ID > 0;
         }
 
         /// <summary>the NHibernate proxy of the represented entity</summary>
@@ -560,6 +561,84 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
         public static event PropertyIsValidHandler<Zetbox.App.Calendar.CalendarBook> OnGroupWriters_IsValid;
 
         /// <summary>
+        /// If true, the item will be hidden in any search
+        /// </summary>
+
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        public bool IsDeactivated
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = FetchIsDeactivatedOrDefault();
+                if (OnIsDeactivated_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<bool>(__result);
+                    OnIsDeactivated_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isIsDeactivatedSet = true;
+                if (Proxy.IsDeactivated != value)
+                {
+                    var __oldValue = Proxy.IsDeactivated;
+                    var __newValue = value;
+                    if (OnIsDeactivated_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnIsDeactivated_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("IsDeactivated", __oldValue, __newValue);
+                    Proxy.IsDeactivated = __newValue;
+                    NotifyPropertyChanged("IsDeactivated", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnIsDeactivated_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnIsDeactivated_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("IsDeactivated");
+                }
+            }
+        }
+
+
+        private bool FetchIsDeactivatedOrDefault()
+        {
+            var __result = Proxy.IsDeactivated;
+                if (!_isIsDeactivatedSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("31fc6dbe-e1ad-4853-9aaf-01f9055cef67"));
+                    if (__p != null) {
+                        _isIsDeactivatedSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this.Proxy.IsDeactivated = (bool)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'Zetbox.App.Calendar.CalendarBook.IsDeactivated'");
+                    }
+                }
+            return __result;
+        }
+
+        private bool _isIsDeactivatedSet = false;
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<Zetbox.App.Calendar.CalendarBook, bool> OnIsDeactivated_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.CalendarBook, bool> OnIsDeactivated_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Calendar.CalendarBook, bool> OnIsDeactivated_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Calendar.CalendarBook> OnIsDeactivated_IsValid;
+
+        /// <summary>
         /// 
         /// </summary>
 
@@ -871,6 +950,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
             me.ChangedOn = other.ChangedOn;
             me.CreatedOn = other.CreatedOn;
             me.ExportGuid = other.ExportGuid;
+            me.IsDeactivated = other.IsDeactivated;
             me.Name = other.Name;
             this._fk_ChangedBy = otherImpl._fk_ChangedBy;
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
@@ -931,6 +1011,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
                 case "CreatedBy":
                 case "CreatedOn":
                 case "ExportGuid":
+                case "IsDeactivated":
                 case "Name":
                 case "Owner":
                     AuditPropertyChange(property, oldValue, newValue);
@@ -1077,6 +1158,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
                         null, // lists are read-only properties
                         obj => OnGroupWriters_IsValid), 
                     // else
+                    new PropertyDescriptorNHibernateImpl<CalendarBook, bool>(
+                        lazyCtx,
+                        new Guid("31fc6dbe-e1ad-4853-9aaf-01f9055cef67"),
+                        "IsDeactivated",
+                        null,
+                        obj => obj.IsDeactivated,
+                        (obj, val) => obj.IsDeactivated = val,
+						obj => OnIsDeactivated_IsValid), 
+                    // else
                     new PropertyDescriptorNHibernateImpl<CalendarBook, string>(
                         lazyCtx,
                         new Guid("e1647548-92ee-4fae-9155-faad7d7e9187"),
@@ -1162,6 +1252,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
             FetchChangedOnOrDefault();
             FetchCreatedOnOrDefault();
             FetchExportGuidOrDefault();
+            FetchIsDeactivatedOrDefault();
             base.NotifyPreSave();
             if (OnNotifyPreSave_CalendarBook != null) OnNotifyPreSave_CalendarBook(this);
         }
@@ -1253,6 +1344,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
 
             public virtual ICollection<Zetbox.App.Calendar.CalendarBook_shared_w_Group_RelationEntryNHibernateImpl.CalendarBook_shared_w_Group_RelationEntryProxy> GroupWriters { get; set; }
 
+            public virtual bool IsDeactivated { get; set; }
+
             public virtual string Name { get; set; }
 
             public virtual Zetbox.App.Base.IdentityNHibernateImpl.IdentityProxy Owner { get; set; }
@@ -1303,6 +1396,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
             if (this._isExportGuidSet) {
                 binStream.Write(this.Proxy.ExportGuid);
             }
+            binStream.Write(this._isIsDeactivatedSet);
+            if (this._isIsDeactivatedSet) {
+                binStream.Write(this.Proxy.IsDeactivated);
+            }
             binStream.Write(this.Proxy.Name);
             binStream.Write(this.Proxy.Owner != null ? OurContext.GetIdFromProxy(this.Proxy.Owner) : (int?)null);
         }
@@ -1327,6 +1424,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
             if (this._isExportGuidSet) {
                 this.Proxy.ExportGuid = binStream.ReadGuid();
             }
+            this._isIsDeactivatedSet = binStream.ReadBoolean();
+            if (this._isIsDeactivatedSet) {
+                this.Proxy.IsDeactivated = binStream.ReadBoolean();
+            }
             this.Proxy.Name = binStream.ReadString();
             binStream.Read(out this._fk_Owner);
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
@@ -1346,6 +1447,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Calendar")) XmlStreamer.ToStream(this.Proxy.ChangedOn, xml, "ChangedOn", "Zetbox.App.Calendar");
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Calendar")) XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "Zetbox.App.Calendar");
+            System.Diagnostics.Debug.Assert(this._isIsDeactivatedSet, "Exported objects need to have all default values evaluated");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Calendar")) XmlStreamer.ToStream(this.Proxy.IsDeactivated, xml, "IsDeactivated", "Zetbox.App.Calendar");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Calendar")) XmlStreamer.ToStream(this.Proxy.Name, xml, "Name", "Zetbox.App.Calendar");
         }
 
@@ -1368,6 +1471,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
                 // Import must have default value set
                 this.Proxy.ExportGuid = XmlStreamer.ReadGuid(xml);
                 this._isExportGuidSet = true;
+                break;
+            case "Zetbox.App.Calendar|IsDeactivated":
+                // Import must have default value set
+                this.Proxy.IsDeactivated = XmlStreamer.ReadBoolean(xml);
+                this._isIsDeactivatedSet = true;
                 break;
             case "Zetbox.App.Calendar|Name":
                 this.Proxy.Name = XmlStreamer.ReadString(xml);

@@ -1589,6 +1589,7 @@
     <Property Name="ChangedOn" Type="timestamp" Nullable="false" />
     <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
     <Property Name="ExportGuid" Type="uuid" Nullable="false" />
+    <Property Name="IsDeactivated" Type="bool" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
   </EntityType>
     <EntityType Name="CalendarBook_Rights">

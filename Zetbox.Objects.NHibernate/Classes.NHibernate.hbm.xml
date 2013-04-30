@@ -55,6 +55,10 @@
         </set>
 
         <!-- ValueTypeProperty isValue -->
+        <property name="IsDeactivated" 
+                  column="`IsDeactivated`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
                   optimistic-lock="false"/>
