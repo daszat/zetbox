@@ -69,7 +69,7 @@ namespace Zetbox.Client.WPF
                     window.ShowActivated = activate;
                     if (asDialog)
                     {
-                        if (_windowList.ContainsKey(ownerMdl))
+                        if (ownerMdl != null && _windowList.ContainsKey(ownerMdl))
                         {
                             var owner = _windowList[ownerMdl];
                             if (owner != window)
