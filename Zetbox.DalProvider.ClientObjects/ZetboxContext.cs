@@ -877,11 +877,12 @@ namespace Zetbox.DalProvider.Client
                 return new ZbTask<T>(ZbTask.Synchron, () => (T)cacheHit);
 
             return GetQuery<T>()
-                    .SingleOrDefaultAsync(o => o.ID == ID)
-                    .OnResult(t =>
-                    {
-                        if (t.Result == null) t.Result = MakeAccessDeniedProxy<T>(ID);
-                    });
+                .WithDeactivated()
+                .SingleOrDefaultAsync(o => o.ID == ID)
+                .OnResult(t =>
+                {
+                    if (t.Result == null) t.Result = MakeAccessDeniedProxy<T>(ID);
+                });
         }
 
         /// <summary>
@@ -939,7 +940,10 @@ namespace Zetbox.DalProvider.Client
             }
             else
             {
-                return GetPersistenceObjectQuery<T>().SingleOrDefault(o => o.ID == ID) ?? MakeAccessDeniedProxy<T>(ID);
+                return GetPersistenceObjectQuery<T>()
+                    .WithDeactivated()
+                    .SingleOrDefault(o => o.ID == ID)
+                    ?? MakeAccessDeniedProxy<T>(ID);
             }
         }
 
@@ -972,7 +976,10 @@ namespace Zetbox.DalProvider.Client
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public T FindPersistenceObject<T>(Guid exportGuid) where T : class, IPersistenceObject
         {
-            return GetPersistenceObjectQuery<T>().SingleOrDefault(o => ((Zetbox.App.Base.IExportable)o).ExportGuid == exportGuid) ?? MakeAccessDeniedProxy<T>(exportGuid);
+            return GetPersistenceObjectQuery<T>()
+                .WithDeactivated()
+                .SingleOrDefault(o => ((Zetbox.App.Base.IExportable)o).ExportGuid == exportGuid)
+                ?? MakeAccessDeniedProxy<T>(exportGuid);
         }
 
         /// <summary>
@@ -1002,7 +1009,9 @@ namespace Zetbox.DalProvider.Client
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public IEnumerable<T> FindPersistenceObjects<T>(IEnumerable<Guid> exportGuids) where T : class, IPersistenceObject
         {
-            return GetPersistenceObjectQuery<T>().Where(o => exportGuids.Contains(((Zetbox.App.Base.IExportable)o).ExportGuid));
+            return GetPersistenceObjectQuery<T>()
+                .WithDeactivated()
+                .Where(o => exportGuids.Contains(((Zetbox.App.Base.IExportable)o).ExportGuid));
         }
 
         /// <inheritdoc />
