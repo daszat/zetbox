@@ -42,6 +42,8 @@ namespace Zetbox.API.Server
         /// <returns>the filtered and ordered list of objects, containing at most <paramref name="maxListCount"/> objects</returns>
         IEnumerable<IStreamable> GetList(Guid version, IZetboxContext ctx, int maxListCount, List<Expression> filter, List<OrderBy> orderBy);
 
+        IEnumerable<IStreamable> GetObjects(Guid version, Expression query);
+
         /// <summary>
         /// Return the list of objects referenced by the specified property.
         /// </summary>
@@ -142,6 +144,11 @@ namespace Zetbox.API.Server
             }
 
             return result.Take(maxListCount).ToList().Cast<IStreamable>();
+        }
+
+        public IEnumerable<IStreamable> GetObjects(Guid version, Expression query)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

@@ -27,6 +27,22 @@ namespace Zetbox.API.Client.ZetboxService {
         [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://dasz.at/Zetbox/IZetboxService/GetListExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
         byte[] GetList(System.Guid version, Zetbox.API.SerializableType type, int maxListCount, bool eagerLoadLists, Zetbox.API.SerializableExpression[] filter, Zetbox.API.OrderByContract[] orderBy);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://dasz.at/Zetbox/IZetboxService/GetObjects", ReplyAction="http://dasz.at/Zetbox/IZetboxService/GetObjectsResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://dasz.at/Zetbox/IZetboxService/GetObjectsExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Zetbox.API.InvalidZetboxGeneratedVersionException), Action="http://dasz.at/Zetbox/IZetboxService/GetObjectsInvalidZetboxGeneratedVersionExcep" +
+            "tionFault", Name="InvalidZetboxGeneratedVersionException", Namespace="http://schemas.datacontract.org/2004/07/Zetbox.API")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Zetbox.API.SerializableParameterExpression))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Zetbox.API.SerializableCompoundExpression))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Zetbox.API.SerializableMethodCallExpression))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Zetbox.API.SerializableNewExpression))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Zetbox.API.SerializableLambdaExpression))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Zetbox.API.SerializableBinaryExpression))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Zetbox.API.SerializableUnaryExpression))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Zetbox.API.SerializableMemberExpression))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Zetbox.API.SerializableConditionalExpression))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Zetbox.API.SerializableConstantExpression))]
+        byte[] GetObjects(System.Guid version, Zetbox.API.SerializableExpression query);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://dasz.at/Zetbox/IZetboxService/GetListOf", ReplyAction="http://dasz.at/Zetbox/IZetboxService/GetListOfResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://dasz.at/Zetbox/IZetboxService/GetListOfExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
         [System.ServiceModel.FaultContractAttribute(typeof(Zetbox.API.InvalidZetboxGeneratedVersionException), Action="http://dasz.at/Zetbox/IZetboxService/GetListOfInvalidZetboxGeneratedVersionExcept" +
@@ -34,9 +50,9 @@ namespace Zetbox.API.Client.ZetboxService {
         byte[] GetListOf(System.Guid version, Zetbox.API.SerializableType type, int ID, string property);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://dasz.at/Zetbox/IZetboxService/FetchRelation", ReplyAction="http://dasz.at/Zetbox/IZetboxService/FetchRelationResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://dasz.at/Zetbox/IZetboxService/FetchRelationExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
         [System.ServiceModel.FaultContractAttribute(typeof(Zetbox.API.InvalidZetboxGeneratedVersionException), Action="http://dasz.at/Zetbox/IZetboxService/FetchRelationInvalidZetboxGeneratedVersionEx" +
             "ceptionFault", Name="InvalidZetboxGeneratedVersionException", Namespace="http://schemas.datacontract.org/2004/07/Zetbox.API")]
-        [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://dasz.at/Zetbox/IZetboxService/FetchRelationExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
         byte[] FetchRelation(System.Guid version, System.Guid relId, int role, int ID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://dasz.at/Zetbox/IZetboxService/GetBlobStream", ReplyAction="http://dasz.at/Zetbox/IZetboxService/GetBlobStreamResponse")]
@@ -47,15 +63,15 @@ namespace Zetbox.API.Client.ZetboxService {
         
         // CODEGEN: Generating message contract since the wrapper name (BlobMessage) of message BlobMessage does not match the default value (SetBlobStream)
         [System.ServiceModel.OperationContractAttribute(Action="http://dasz.at/Zetbox/IZetboxService/SetBlobStream", ReplyAction="http://dasz.at/Zetbox/IZetboxService/SetBlobStreamResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://dasz.at/Zetbox/IZetboxService/SetBlobStreamExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
         [System.ServiceModel.FaultContractAttribute(typeof(Zetbox.API.InvalidZetboxGeneratedVersionException), Action="http://dasz.at/Zetbox/IZetboxService/SetBlobStreamInvalidZetboxGeneratedVersionEx" +
             "ceptionFault", Name="InvalidZetboxGeneratedVersionException", Namespace="http://schemas.datacontract.org/2004/07/Zetbox.API")]
-        [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://dasz.at/Zetbox/IZetboxService/SetBlobStreamExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
         Zetbox.API.Client.ZetboxService.BlobResponse SetBlobStream(Zetbox.API.Client.ZetboxService.BlobMessage request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://dasz.at/Zetbox/IZetboxService/InvokeServerMethod", ReplyAction="http://dasz.at/Zetbox/IZetboxService/InvokeServerMethodResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://dasz.at/Zetbox/IZetboxService/InvokeServerMethodExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
         [System.ServiceModel.FaultContractAttribute(typeof(Zetbox.API.InvalidZetboxGeneratedVersionException), Action="http://dasz.at/Zetbox/IZetboxService/InvokeServerMethodInvalidZetboxGeneratedVers" +
             "ionExceptionFault", Name="InvalidZetboxGeneratedVersionException", Namespace="http://schemas.datacontract.org/2004/07/Zetbox.API")]
+        [System.ServiceModel.FaultContractAttribute(typeof(System.Exception), Action="http://dasz.at/Zetbox/IZetboxService/InvokeServerMethodExceptionFault", Name="Exception", Namespace="http://schemas.datacontract.org/2004/07/System")]
         byte[] InvokeServerMethod(out byte[] retChangedObjects, System.Guid version, Zetbox.API.SerializableType type, int ID, string method, Zetbox.API.SerializableType[] parameterTypes, byte[] parameter, byte[] changedObjects, Zetbox.API.ObjectNotificationRequest[] notificationRequests);
     }
     
@@ -142,6 +158,10 @@ namespace Zetbox.API.Client.ZetboxService {
         
         public byte[] GetList(System.Guid version, Zetbox.API.SerializableType type, int maxListCount, bool eagerLoadLists, Zetbox.API.SerializableExpression[] filter, Zetbox.API.OrderByContract[] orderBy) {
             return base.Channel.GetList(version, type, maxListCount, eagerLoadLists, filter, orderBy);
+        }
+        
+        public byte[] GetObjects(System.Guid version, Zetbox.API.SerializableExpression query) {
+            return base.Channel.GetObjects(version, query);
         }
         
         public byte[] GetListOf(System.Guid version, Zetbox.API.SerializableType type, int ID, string property) {

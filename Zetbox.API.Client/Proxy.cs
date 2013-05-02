@@ -41,6 +41,7 @@ namespace Zetbox.API.Client
         : IDisposable
     {
         IEnumerable<IDataObject> GetList(InterfaceType ifType, int maxListCount, bool eagerLoadLists, IEnumerable<Expression> filter, IEnumerable<OrderBy> orderBy, out List<IStreamable> auxObjects);
+        IEnumerable<IDataObject> GetObjects(InterfaceType ifType, Expression query, out List<IStreamable> auxObjects);
         IEnumerable<IDataObject> GetListOf(InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects);
 
         IEnumerable<IPersistenceObject> SetObjects(IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests);
@@ -174,6 +175,11 @@ namespace Zetbox.API.Client
             {
                 _perfCounter.DecrementGetList(ifType, resultCount, ticks);
             }
+        }
+
+        public IEnumerable<IDataObject> GetObjects(InterfaceType ifType, Expression query, out List<IStreamable> auxObjects)
+        {
+            throw new NotImplementedException();
         }
 
         public IEnumerable<IDataObject> GetListOf(InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects)

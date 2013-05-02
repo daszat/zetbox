@@ -159,6 +159,17 @@ namespace Zetbox.Server
         }
 
         /// <summary>
+        /// Returns a list of objects from the datastore, as requested by the query.
+        /// </summary>
+        /// <param name="version">Current version of generated Zetbox.Objects assembly</param>
+        /// <param name="query">A full LINQ query returning zero, one or more objects (FirstOrDefault, Single, Where, Skip, Take, etc.)</param>
+        /// <returns>the found objects</returns>
+        public byte[] GetObjects(Guid version, SerializableExpression query)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
         /// Sends a list of auxiliary objects to the specified ZetboxStreamWriter while avoiding to send objects twice.
         /// </summary>
         /// <param name="sw">the stream to write to</param>

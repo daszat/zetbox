@@ -169,6 +169,11 @@ namespace Zetbox.API.Client
                 });
         }
 
+        public byte[] GetObjects(Guid version, SerializableExpression query)
+        {
+            throw new NotImplementedException();
+        }
+
         public byte[] GetListOf(Guid version, SerializableType type, int ID, string property)
         {
             if (type == null) throw new ArgumentNullException("type");

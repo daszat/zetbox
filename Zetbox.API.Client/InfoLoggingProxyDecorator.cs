@@ -70,6 +70,11 @@ namespace Zetbox.API.Client
             }
         }
 
+        public IEnumerable<IDataObject> GetObjects(InterfaceType ifType, Expression query, out List<IStreamable> auxObjects)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<IDataObject> GetListOf(InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects)
         {
             using (Logging.Facade.InfoTraceMethodCallFormat("GetListOf", "{0} [{1}].{2}", ifType, ID, property))

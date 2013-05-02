@@ -223,11 +223,26 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetObjects">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="version" type="ser:guid" />
+        <xs:element xmlns:q51="http://dasz.at/Zetbox/" minOccurs="0" name="query" nillable="true" type="q51:Expression" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetObjectsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetObjectsResult" nillable="true" type="xs:base64Binary" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetListOf">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="version" type="ser:guid" />
-        <xs:element xmlns:q51="http://dasz.at/Zetbox/" minOccurs="0" name="type" nillable="true" type="q51:Type" />
+        <xs:element xmlns:q52="http://dasz.at/Zetbox/" minOccurs="0" name="type" nillable="true" type="q52:Type" />
         <xs:element minOccurs="0" name="ID" type="xs:int" />
         <xs:element minOccurs="0" name="property" nillable="true" type="xs:string" />
       </xs:sequence>
@@ -268,14 +283,14 @@
   <xs:element name="GetBlobStreamResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q52="http://schemas.microsoft.com/Message" name="GetBlobStreamResult" type="q52:StreamBody" />
+        <xs:element xmlns:q53="http://schemas.microsoft.com/Message" name="GetBlobStreamResult" type="q53:StreamBody" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="BlobMessage">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q53="http://schemas.microsoft.com/Message" name="Stream" type="q53:StreamBody" />
+        <xs:element xmlns:q54="http://schemas.microsoft.com/Message" name="Stream" type="q54:StreamBody" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -285,7 +300,7 @@
   <xs:element name="BlobResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q54="http://schemas.microsoft.com/Message" name="BlobInstance" type="q54:StreamBody" />
+        <xs:element xmlns:q55="http://schemas.microsoft.com/Message" name="BlobInstance" type="q55:StreamBody" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -294,13 +309,13 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="version" type="ser:guid" />
-        <xs:element xmlns:q55="http://dasz.at/Zetbox/" minOccurs="0" name="type" nillable="true" type="q55:Type" />
+        <xs:element xmlns:q56="http://dasz.at/Zetbox/" minOccurs="0" name="type" nillable="true" type="q56:Type" />
         <xs:element minOccurs="0" name="ID" type="xs:int" />
         <xs:element minOccurs="0" name="method" nillable="true" type="xs:string" />
-        <xs:element xmlns:q56="http://dasz.at/Zetbox/" minOccurs="0" name="parameterTypes" nillable="true" type="q56:ArrayOfType" />
+        <xs:element xmlns:q57="http://dasz.at/Zetbox/" minOccurs="0" name="parameterTypes" nillable="true" type="q57:ArrayOfType" />
         <xs:element minOccurs="0" name="parameter" nillable="true" type="xs:base64Binary" />
         <xs:element minOccurs="0" name="changedObjects" nillable="true" type="xs:base64Binary" />
-        <xs:element xmlns:q57="http://dasz.at/Zetbox/" minOccurs="0" name="notificationRequests" nillable="true" type="q57:ArrayOfObjectNotificationRequest" />
+        <xs:element xmlns:q58="http://dasz.at/Zetbox/" minOccurs="0" name="notificationRequests" nillable="true" type="q58:ArrayOfObjectNotificationRequest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

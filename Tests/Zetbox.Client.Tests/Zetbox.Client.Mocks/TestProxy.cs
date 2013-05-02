@@ -62,6 +62,11 @@ namespace Zetbox.Client.Mocks
             }
         }
 
+        public IEnumerable<IDataObject> GetObjects(InterfaceType ifType, Expression query, out List<IStreamable> auxObjects)
+        {
+            throw new NotImplementedException();
+        }
+
         private static IEnumerable<IDataObject> GetList_TestObjClass()
         {
             List<TestObjClass> result = new List<TestObjClass>();

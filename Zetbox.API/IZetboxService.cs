@@ -65,6 +65,17 @@ namespace Zetbox.API
         byte[] GetList(Guid version, SerializableType type, int maxListCount, bool eagerLoadLists, SerializableExpression[] filter, OrderByContract[] orderBy);
 
         /// <summary>
+        /// Returns a list of objects from the datastore, as requested by the query.
+        /// </summary>
+        /// <param name="version">Current version of generated Zetbox.Objects assembly</param>
+        /// <param name="query">A full LINQ query returning zero, one or more objects (FirstOrDefault, Single, Where, Skip, Take, etc.)</param>
+        /// <returns>the found objects</returns>
+        [OperationContract]
+        [FaultContract(typeof(Exception))]
+        [FaultContract(typeof(InvalidZetboxGeneratedVersionException))]
+        byte[] GetObjects(Guid version, SerializableExpression query);
+
+        /// <summary>
         /// returns a list of objects referenced by a specified Property. Use an equivalent query in GetList() instead.
         /// </summary>
         /// <param name="version">Current version of generated Zetbox.Objects assembly</param>

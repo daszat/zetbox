@@ -248,6 +248,82 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="ZetboxService_Endpoint_GetObjects_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="ZetboxService_Endpoint_GetObjects_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="ZetboxService_Endpoint_GetObjects_ExceptionFault_Fault">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="ZetboxService_Endpoint_GetObjects_InvalidZetboxGeneratedVersionExceptionFault_Fault">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsp:Policy wsu:Id="ZetboxService_Endpoint_GetListOf_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -362,7 +438,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="ZetboxService_Endpoint_FetchRelation_InvalidZetboxGeneratedVersionExceptionFault_Fault">
+  <wsp:Policy wsu:Id="ZetboxService_Endpoint_FetchRelation_ExceptionFault_Fault">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -381,7 +457,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="ZetboxService_Endpoint_FetchRelation_ExceptionFault_Fault">
+  <wsp:Policy wsu:Id="ZetboxService_Endpoint_FetchRelation_InvalidZetboxGeneratedVersionExceptionFault_Fault">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -522,7 +598,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="ZetboxService_Endpoint_SetBlobStream_InvalidZetboxGeneratedVersionExceptionFault_Fault">
+  <wsp:Policy wsu:Id="ZetboxService_Endpoint_SetBlobStream_ExceptionFault_Fault">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -541,7 +617,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="ZetboxService_Endpoint_SetBlobStream_ExceptionFault_Fault">
+  <wsp:Policy wsu:Id="ZetboxService_Endpoint_SetBlobStream_InvalidZetboxGeneratedVersionExceptionFault_Fault">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -598,7 +674,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="ZetboxService_Endpoint_InvokeServerMethod_ExceptionFault_Fault">
+  <wsp:Policy wsu:Id="ZetboxService_Endpoint_InvokeServerMethod_InvalidZetboxGeneratedVersionExceptionFault_Fault">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -617,7 +693,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="ZetboxService_Endpoint_InvokeServerMethod_InvalidZetboxGeneratedVersionExceptionFault_Fault">
+  <wsp:Policy wsu:Id="ZetboxService_Endpoint_InvokeServerMethod_ExceptionFault_Fault">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -679,6 +755,25 @@
         <soap12:fault use="literal" name="ExceptionFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
+    <wsdl:operation name="GetObjects">
+      <soap12:operation soapAction="http://dasz.at/Zetbox/IZetboxService/GetObjects" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#ZetboxService_Endpoint_GetObjects_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#ZetboxService_Endpoint_GetObjects_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ExceptionFault">
+        <wsp:PolicyReference URI="#ZetboxService_Endpoint_GetObjects_ExceptionFault_Fault" />
+        <soap12:fault use="literal" name="ExceptionFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="InvalidZetboxGeneratedVersionExceptionFault">
+        <wsp:PolicyReference URI="#ZetboxService_Endpoint_GetObjects_InvalidZetboxGeneratedVersionExceptionFault_Fault" />
+        <soap12:fault use="literal" name="InvalidZetboxGeneratedVersionExceptionFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
     <wsdl:operation name="GetListOf">
       <soap12:operation soapAction="http://dasz.at/Zetbox/IZetboxService/GetListOf" style="document" />
       <wsdl:input>
@@ -708,13 +803,13 @@
         <wsp:PolicyReference URI="#ZetboxService_Endpoint_FetchRelation_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="InvalidZetboxGeneratedVersionExceptionFault">
-        <wsp:PolicyReference URI="#ZetboxService_Endpoint_FetchRelation_InvalidZetboxGeneratedVersionExceptionFault_Fault" />
-        <soap12:fault use="literal" name="InvalidZetboxGeneratedVersionExceptionFault" namespace="" />
-      </wsdl:fault>
       <wsdl:fault name="ExceptionFault">
         <wsp:PolicyReference URI="#ZetboxService_Endpoint_FetchRelation_ExceptionFault_Fault" />
         <soap12:fault use="literal" name="ExceptionFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="InvalidZetboxGeneratedVersionExceptionFault">
+        <wsp:PolicyReference URI="#ZetboxService_Endpoint_FetchRelation_InvalidZetboxGeneratedVersionExceptionFault_Fault" />
+        <soap12:fault use="literal" name="InvalidZetboxGeneratedVersionExceptionFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="GetBlobStream">
@@ -750,13 +845,13 @@
         <soap12:header message="i0:BlobResponse_Headers" part="ID" use="literal" />
         <soap12:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="InvalidZetboxGeneratedVersionExceptionFault">
-        <wsp:PolicyReference URI="#ZetboxService_Endpoint_SetBlobStream_InvalidZetboxGeneratedVersionExceptionFault_Fault" />
-        <soap12:fault use="literal" name="InvalidZetboxGeneratedVersionExceptionFault" namespace="" />
-      </wsdl:fault>
       <wsdl:fault name="ExceptionFault">
         <wsp:PolicyReference URI="#ZetboxService_Endpoint_SetBlobStream_ExceptionFault_Fault" />
         <soap12:fault use="literal" name="ExceptionFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="InvalidZetboxGeneratedVersionExceptionFault">
+        <wsp:PolicyReference URI="#ZetboxService_Endpoint_SetBlobStream_InvalidZetboxGeneratedVersionExceptionFault_Fault" />
+        <soap12:fault use="literal" name="InvalidZetboxGeneratedVersionExceptionFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="InvokeServerMethod">
@@ -769,13 +864,13 @@
         <wsp:PolicyReference URI="#ZetboxService_Endpoint_InvokeServerMethod_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="ExceptionFault">
-        <wsp:PolicyReference URI="#ZetboxService_Endpoint_InvokeServerMethod_ExceptionFault_Fault" />
-        <soap12:fault use="literal" name="ExceptionFault" namespace="" />
-      </wsdl:fault>
       <wsdl:fault name="InvalidZetboxGeneratedVersionExceptionFault">
         <wsp:PolicyReference URI="#ZetboxService_Endpoint_InvokeServerMethod_InvalidZetboxGeneratedVersionExceptionFault_Fault" />
         <soap12:fault use="literal" name="InvalidZetboxGeneratedVersionExceptionFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ExceptionFault">
+        <wsp:PolicyReference URI="#ZetboxService_Endpoint_InvokeServerMethod_ExceptionFault_Fault" />
+        <soap12:fault use="literal" name="ExceptionFault" namespace="" />
       </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>
