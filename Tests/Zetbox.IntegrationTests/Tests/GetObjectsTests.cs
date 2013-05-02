@@ -29,13 +29,12 @@ using NUnit.Framework.Constraints;
 namespace Zetbox.IntegrationTests
 {
     [TestFixture]
-    public class GetListTests : AbstractIntegrationTestFixture
+    public class GetObjectsTests : AbstractIntegrationTestFixture
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Tests.Integration.GetList");
-
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Tests.Integration.GetObjects");
 
         [Test]
-        public void GetList()
+        public void GetObjects()
         {
             using (IZetboxContext ctx = GetContext())
             {
@@ -45,7 +44,7 @@ namespace Zetbox.IntegrationTests
         }
 
         [Test]
-        public void GetList_Twice()
+        public void GetObjects_Twice()
         {
             using (IZetboxContext ctx = GetContext())
             {
@@ -67,7 +66,7 @@ namespace Zetbox.IntegrationTests
         }
 
         [Test]
-        public void GetList_Twice_on_same_query()
+        public void GetObjects_Twice_on_same_query()
         {
             using (IZetboxContext ctx = GetContext())
             {
@@ -90,7 +89,7 @@ namespace Zetbox.IntegrationTests
         }
 
         [Test]
-        public void GetObject_GetList()
+        public void GetObject_GetObjects()
         {
             using (IZetboxContext ctx = GetContext())
             {
@@ -111,7 +110,7 @@ namespace Zetbox.IntegrationTests
         }
 
         [Test]
-        public void GetList_GetOneObject()
+        public void GetObjects_GetOneObject()
         {
             using (IZetboxContext ctx = GetContext())
             {
@@ -130,7 +129,7 @@ namespace Zetbox.IntegrationTests
 
 
         [Test]
-        public void GetListWithTake()
+        public void GetObjectsWithTake()
         {
             using (IZetboxContext ctx = GetContext())
             {
@@ -140,7 +139,7 @@ namespace Zetbox.IntegrationTests
         }
 
         [Test]
-        public void GetListWithTakeAndWhere()
+        public void GetObjectsWithTakeAndWhere()
         {
             using (IZetboxContext ctx = GetContext())
             {
@@ -150,7 +149,7 @@ namespace Zetbox.IntegrationTests
         }
 
         [Test]
-        public void GetListWithTakeAndWhere_Twice()
+        public void GetObjectsWithTakeAndWhere_Twice()
         {
             using (IZetboxContext ctx = GetContext())
             {
@@ -163,7 +162,7 @@ namespace Zetbox.IntegrationTests
         }
 
         [Test]
-        public void GetListWithTakeAndMultipleWhere()
+        public void GetObjectsWithTakeAndMultipleWhere()
         {
             using (IZetboxContext ctx = GetContext())
             {
@@ -173,7 +172,7 @@ namespace Zetbox.IntegrationTests
         }
 
         [Test]
-        public void GetListWithOrderBy()
+        public void GetObjectsWithOrderBy()
         {
             using (IZetboxContext ctx = GetContext())
             {
@@ -184,7 +183,7 @@ namespace Zetbox.IntegrationTests
         }
 
         [Test]
-        public void GetListWithOrderByAndWhere()
+        public void GetObjectsWithOrderByAndWhere()
         {
             using (IZetboxContext ctx = GetContext())
             {
@@ -195,7 +194,7 @@ namespace Zetbox.IntegrationTests
         }
 
         [Test]
-        public void GetListWithOrderByThenOrderBy()
+        public void GetObjectsWithOrderByThenOrderBy()
         {
             using (IZetboxContext ctx = GetContext())
             {
@@ -206,7 +205,7 @@ namespace Zetbox.IntegrationTests
         }
 
         [Test]
-        public void GetListWithParameterLegal()
+        public void GetObjectsWithParameterLegal()
         {
             using (IZetboxContext ctx = GetContext())
             {
@@ -220,7 +219,7 @@ namespace Zetbox.IntegrationTests
                 Assert.That(test.Count, Is.EqualTo(1));
                 foreach (var t in test)
                 {
-                    Log.DebugFormat("GetListWithParameterLegal: {0}", t.Name);
+                    Log.DebugFormat("GetObjectsWithParameterLegal: {0}", t.Name);
                 }
             }
         }
@@ -228,7 +227,7 @@ namespace Zetbox.IntegrationTests
         [Test]
         [ExpectedException(typeof(System.ServiceModel.FaultException))]
         [Ignore("Illegal Expression checking disabled for now")]
-        public void GetListWithParameterIllegalAggreggation()
+        public void GetObjectsWithParameterIllegalAggreggation()
         {
             using (IZetboxContext ctx = GetContext())
             {
@@ -238,13 +237,13 @@ namespace Zetbox.IntegrationTests
 
                 foreach (var t in test)
                 {
-                    Log.DebugFormat("GetListWithParameterIllegalAggreggation: {0}", t.Name);
+                    Log.DebugFormat("GetObjectsWithParameterIllegalAggreggation: {0}", t.Name);
                 }
             }
         }
 
         [Test]
-        public void GetListWithEnum()
+        public void GetObjectsWithEnum()
         {
             using (IZetboxContext ctx = GetContext())
             {
@@ -259,7 +258,7 @@ namespace Zetbox.IntegrationTests
         }
 
         [Test]
-        public void GetListWithProjection()
+        public void GetObjectsWithProjection()
         {
             using (IZetboxContext ctx = GetContext())
             {
@@ -267,13 +266,13 @@ namespace Zetbox.IntegrationTests
                            select new { A = z.Name, B = z.TableName };
                 foreach (var t in test)
                 {
-                    Log.DebugFormat("GetListWithProjection: {0}", t.A);
+                    Log.DebugFormat("GetObjectsWithProjection: {0}", t.A);
                 }
             }
         }
 
         [Test]
-        public void GetListWithSingle()
+        public void GetObjectsWithSingle()
         {
             using (IZetboxContext ctx = GetContext())
             {
@@ -283,7 +282,7 @@ namespace Zetbox.IntegrationTests
         }
 
         [Test]
-        public void GetListSingle()
+        public void GetObjectsSingle()
         {
             using (IZetboxContext ctx = GetContext())
             {
@@ -293,7 +292,7 @@ namespace Zetbox.IntegrationTests
         }
 
         [Test]
-        public void GetListWithFirst()
+        public void GetObjectsWithFirst()
         {
             using (IZetboxContext ctx = GetContext())
             {
@@ -303,7 +302,7 @@ namespace Zetbox.IntegrationTests
         }
 
         [Test]
-        public void GetListFirst()
+        public void GetObjectsFirst()
         {
             using (IZetboxContext ctx = GetContext())
             {
@@ -324,7 +323,7 @@ namespace Zetbox.IntegrationTests
         /// http://blogs.msdn.com/mattwar/archive/2007/08/01/linq-building-an-iqueryable-provider-part-iii.aspx
         /// </summary>
         [Test]
-        public void GetListWithPropertyAccessor()
+        public void GetObjectsWithPropertyAccessor()
         {
             using (IZetboxContext ctx = GetContext())
             {
@@ -338,7 +337,7 @@ namespace Zetbox.IntegrationTests
         }
 
         [Test]
-        public void GetListWithPropertyObjectAccessor()
+        public void GetObjectsWithPropertyObjectAccessor()
         {
             using (IZetboxContext ctx = GetContext())
             {
@@ -353,7 +352,7 @@ namespace Zetbox.IntegrationTests
         }
 
         [Test]
-        public void GetListWithObjectFilter()
+        public void GetObjectsWithObjectFilter()
         {
             using (IZetboxContext ctx = GetContext())
             {
@@ -366,7 +365,7 @@ namespace Zetbox.IntegrationTests
         }
 
         [Test]
-        public void GetListWithObjectFilterAndCast()
+        public void GetObjectsWithObjectFilterAndCast()
         {
             using (IZetboxContext ctx = GetContext())
             {

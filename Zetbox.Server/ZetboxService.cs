@@ -110,55 +110,6 @@ namespace Zetbox.Server
         }
 
         /// <summary>
-        /// Returns a list of objects from the datastore, matching the specified filters.
-        /// </summary>
-        /// <param name="version">Current version of generated Zetbox.Objects assembly</param>
-        /// <param name="type">Type of Objects</param>
-        /// <param name="maxListCount">Max. ammount of objects</param>
-        /// <param name="eagerLoadLists">If true list properties will be eager loaded</param>
-        /// <param name="filter">Serializable linq expression used a filter</param>
-        /// <param name="orderBy">List of derializable linq expressions used as orderby</param>
-        /// <returns>the found objects</returns>
-        public byte[] GetList(Guid version, SerializableType type, int maxListCount, bool eagerLoadLists, SerializableExpression[] filter, OrderByContract[] orderBy)
-        {
-            using (Logging.Facade.DebugTraceMethodCallFormat("GetList", "type={0}", type))
-            {
-                DebugLogIdentity();
-                try
-                {
-                    if (type == null) { throw new ArgumentNullException("type"); }
-                    var ifType = _iftFactory(type.GetSystemType());
-                    int resultCount = 0;
-                    var ticks = _perfCounter.IncrementGetList(ifType);
-                    try
-                    {
-                        using (IZetboxContext ctx = _ctxFactory())
-                        {
-                            var filterExpressions = filter != null ? filter.Select(f => SerializableExpression.ToExpression(ctx, f, _iftFactory)).ToList() : null;
-                            IEnumerable<IStreamable> lst = _sohFactory
-                                .GetServerObjectHandler(ifType)
-                                .GetList(version, ctx, maxListCount,
-                                    filterExpressions,
-                                    orderBy != null ? orderBy.Select(o => new OrderBy(o.Type, SerializableExpression.ToExpression(ctx, o.Expression, _iftFactory))).ToList() : null);
-                            resultCount = lst.Count();
-                            return SendObjects(lst, eagerLoadLists).ToArray();
-                        }
-                    }
-                    finally
-                    {
-                        _perfCounter.DecrementGetList(ifType, resultCount, ticks);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Helper.ThrowFaultException(ex);
-                    // Never called, Handle errors throws an Exception
-                    return null;
-                }
-            }
-        }
-
-        /// <summary>
         /// Returns a list of objects from the datastore, as requested by the query.
         /// </summary>
         /// <param name="version">Current version of generated Zetbox.Objects assembly</param>
@@ -179,7 +130,7 @@ namespace Zetbox.Server
                         ? type.GetGenericArguments()[0]
                         : type);
                     int resultCount = 0;
-                    var ticks = _perfCounter.IncrementGetList(ifType);
+                    var ticks = _perfCounter.IncrementGetObjects(ifType);
                     try
                     {
                         using (IZetboxContext ctx = _ctxFactory())
@@ -193,7 +144,7 @@ namespace Zetbox.Server
                     }
                     finally
                     {
-                        _perfCounter.DecrementGetList(ifType, resultCount, ticks);
+                        _perfCounter.DecrementGetObjects(ifType, resultCount, ticks);
                     }
                 }
                 catch (Exception ex)
@@ -288,7 +239,7 @@ namespace Zetbox.Server
         }
 
         /// <summary>
-        /// returns a list of objects referenced by a specified Property. Use an equivalent query in GetList() instead.
+        /// returns a list of objects referenced by a specified Property. Use an equivalent query in GetObjects() instead.
         /// </summary>
         /// <param name="version">Current version of generated Zetbox.Objects assembly</param>
         /// <param name="type">Type of Object</param>

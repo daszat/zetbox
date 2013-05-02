@@ -74,19 +74,16 @@ namespace Zetbox.DalProvider.Client.Mocks
             _backingStore.SubmitChanges();
         }
 
-        public IEnumerable<IDataObject> GetList(IReadOnlyZetboxContext requestingCtx, InterfaceType ifType, int maxListCount, bool eagerLoadLists, IEnumerable<Expression> filter, IEnumerable<OrderBy> orderBy, out List<IStreamable> auxObjects)
+        public IEnumerable<IDataObject> GetObjects(IReadOnlyZetboxContext requestingCtx, InterfaceType ifType, Expression query, out List<IStreamable> auxObjects)
         {
             List<IStreamable> tmpAuxObjects = null;
             IEnumerable<IDataObject> result = null;
 
             var handler = _memoryFactory.GetServerObjectHandler(ifType);
-            var objects = handler.GetList(
+            var objects = handler.GetObjects(
                 ZetboxGeneratedVersionAttribute.Current,
-                _backingStore,
-                maxListCount,
-                filter != null ? filter.ToList() : null,
-                orderBy != null ? orderBy.ToList() : null);
-            var bytes = SendObjects(objects, eagerLoadLists).ToArray();
+                query);
+            var bytes = SendObjects(objects, true).ToArray();
 
             using (var sr = new ZetboxStreamReader(_map, new BinaryReader(new MemoryStream(bytes))))
             {
@@ -94,11 +91,6 @@ namespace Zetbox.DalProvider.Client.Mocks
             }
             auxObjects = tmpAuxObjects;
             return result;
-        }
-
-        public IEnumerable<IDataObject> GetObjects(IReadOnlyZetboxContext requestingCtx, InterfaceType ifType, Expression query, out List<IStreamable> auxObjects)
-        {
-            throw new NotImplementedException();
         }
 
         public IEnumerable<IDataObject> GetListOf(InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects)

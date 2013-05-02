@@ -50,21 +50,6 @@ namespace Zetbox.API
         byte[] SetObjects(Guid version, byte[] msg, ObjectNotificationRequest[] notificationRequests);
 
         /// <summary>
-        /// Returns a list of objects from the datastore, matching the specified filters.
-        /// </summary>
-        /// <param name="version">Current version of generated Zetbox.Objects assembly</param>
-        /// <param name="type">Type of Objects</param>
-        /// <param name="maxListCount">Max. ammount of objects</param>
-        /// <param name="eagerLoadLists">If true list properties will be eager loaded</param>
-        /// <param name="filter">Serializable linq expression used a filter</param>
-        /// <param name="orderBy">List of derializable linq expressions used as orderby</param>
-        /// <returns>the found objects</returns>
-        [OperationContract]
-        [FaultContract(typeof(Exception))]
-        [FaultContract(typeof(InvalidZetboxGeneratedVersionException))]
-        byte[] GetList(Guid version, SerializableType type, int maxListCount, bool eagerLoadLists, SerializableExpression[] filter, OrderByContract[] orderBy);
-
-        /// <summary>
         /// Returns a list of objects from the datastore, as requested by the query.
         /// </summary>
         /// <param name="version">Current version of generated Zetbox.Objects assembly</param>
@@ -76,7 +61,7 @@ namespace Zetbox.API
         byte[] GetObjects(Guid version, SerializableExpression query);
 
         /// <summary>
-        /// returns a list of objects referenced by a specified Property. Use an equivalent query in GetList() instead.
+        /// returns a list of objects referenced by a specified Property. Use an equivalent query in GetObjects() instead.
         /// </summary>
         /// <param name="version">Current version of generated Zetbox.Objects assembly</param>
         /// <param name="type">Type of Object</param>

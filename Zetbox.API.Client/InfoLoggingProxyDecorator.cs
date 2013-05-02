@@ -53,23 +53,6 @@ namespace Zetbox.API.Client
             _implementor = implementor;
         }
 
-        public IEnumerable<IDataObject> GetList(IReadOnlyZetboxContext requestingCtx, InterfaceType ifType, int maxListCount, bool eagerLoadLists, IEnumerable<Expression> filter, IEnumerable<OrderBy> orderBy, out List<IStreamable> auxObjects)
-        {
-            using (Logging.Facade.InfoTraceMethodCallFormat("GetList", "Type=[{0}]", ifType.ToString()))
-            {
-                CheckUiThread();
-                try
-                {
-                    return _implementor.GetList(requestingCtx, ifType, maxListCount, eagerLoadLists, filter, orderBy, out auxObjects);
-                }
-                catch (Exception ex)
-                {
-                    Logging.Facade.Error("GetList", ex);
-                    throw;
-                }
-            }
-        }
-
         public IEnumerable<IDataObject> GetObjects(IReadOnlyZetboxContext requestingCtx, InterfaceType ifType, Expression query, out List<IStreamable> auxObjects)
         {
             using (Logging.Facade.InfoTraceMethodCallFormat("GetObjects", "Type=[{0}]", ifType.ToString()))

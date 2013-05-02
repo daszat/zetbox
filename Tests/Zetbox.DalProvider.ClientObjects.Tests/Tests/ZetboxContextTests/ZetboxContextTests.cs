@@ -85,7 +85,7 @@ namespace Zetbox.DalProvider.Client.Tests.ZetboxContextTests
         }
 
         [Test]
-        public void GetList()
+        public void GetObjects()
         {
             List<TestObjClass> list = ctx.GetQuery<TestObjClass>().ToList();
             Assert.That(list, Is.Not.Null);
@@ -96,7 +96,7 @@ namespace Zetbox.DalProvider.Client.Tests.ZetboxContextTests
         }
 
         [Test]
-        public void GetList_Twice()
+        public void GetObjects_Twice()
         {
             List<TestObjClass> list1 = ctx.GetQuery<TestObjClass>().ToList();
             Assert.That(list1, Is.Not.Null);
@@ -147,7 +147,7 @@ namespace Zetbox.DalProvider.Client.Tests.ZetboxContextTests
         }
 
         [Test]
-        public void GetObject_GetList()
+        public void GetObject_GetObjects()
         {
             TestObjClass obj = ctx.Find<TestObjClass>(1);
             Assert.That(obj, Is.Not.Null);
@@ -184,7 +184,7 @@ namespace Zetbox.DalProvider.Client.Tests.ZetboxContextTests
         }
 
         [Test]
-        public void GetList_GetListOf()
+        public void GetObjects_GetListOf()
         {
             List<TestObjClass> list = ctx.GetQuery<TestObjClass>().ToList();
             Assert.That(list, Is.Not.Null);

@@ -32,16 +32,11 @@ namespace Zetbox.API.Server
     public interface IServerObjectHandler
     {
         /// <summary>
-        /// Return a list of objects matching the specified parameters.
+        /// Return a list of objects matching the specified query.
         /// </summary>
         /// <param name="version">Current version of generated Zetbox.Objects assembly</param>
-        /// <param name="ctx">the server context to use for loading the objects</param>
-        /// <param name="maxListCount">how many objects to load at most</param>
-        /// <param name="filter">a Linq filter to apply</param>
-        /// <param name="orderBy">a number of linq expressions to order by</param>
-        /// <returns>the filtered and ordered list of objects, containing at most <paramref name="maxListCount"/> objects</returns>
-        IEnumerable<IStreamable> GetList(Guid version, IZetboxContext ctx, int maxListCount, List<Expression> filter, List<OrderBy> orderBy);
-
+        /// <param name="query">a Linq query to execute</param>
+        /// <returns>the filtered and ordered list of objects</returns>
         IEnumerable<IStreamable> GetObjects(Guid version, Expression query);
 
         /// <summary>
@@ -91,59 +86,6 @@ namespace Zetbox.API.Server
         /// </summary>
         public ServerObjectHandler()
         {
-        }
-
-        public IEnumerable<IStreamable> GetList(Guid version, IZetboxContext ctx, int maxListCount, List<Expression> filter, List<OrderBy> orderBy)
-        {
-            if (ctx == null) { throw new ArgumentNullException("ctx"); }
-            ZetboxGeneratedVersionAttribute.Check(version);
-
-            if (maxListCount > Zetbox.API.Helper.MAXLISTCOUNT)
-            {
-                maxListCount = Zetbox.API.Helper.MAXLISTCOUNT;
-            }
-
-            var result = ctx.GetQuery<T>();
-
-            if (filter != null)
-            {
-                foreach (var f in filter)
-                {
-                    if (f.IsMethodCallExpression("WithDeactivated", typeof(ZetboxContextQueryableExtensions)))
-                    {
-                        result = result.WithDeactivated<T>();
-                    }
-                    else
-                    {
-                        result = (IQueryable<T>)result.AddFilter(f);
-                    }
-                }
-            }
-
-            if (orderBy != null)
-            {
-                bool first = true;
-                foreach (var o in orderBy)
-                {
-                    if (first)
-                    {
-                        if (o.Type == OrderByType.ASC)
-                            result = result.AddOrderBy<T>(o.Expression);
-                        else
-                            result = result.AddOrderByDescending<T>(o.Expression);
-                    }
-                    else
-                    {
-                        if (o.Type == OrderByType.ASC)
-                            result = result.AddThenBy<T>(o.Expression);
-                        else
-                            result = result.AddThenByDescending<T>(o.Expression);
-                    }
-                    first = false;
-                }
-            }
-
-            return result.Take(maxListCount).ToList().Cast<IStreamable>();
         }
 
         public IEnumerable<IStreamable> GetObjects(Guid version, Expression query)

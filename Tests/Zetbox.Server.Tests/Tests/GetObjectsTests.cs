@@ -27,9 +27,9 @@ namespace Zetbox.Server.Tests
     using Zetbox.App.Base;
 
     [TestFixture]
-    public class GetListTests : AbstractServerTestFixture
+    public class GetObjectsTests : AbstractServerTestFixture
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Tests.Server.GetList");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Tests.Server.GetObjects");
 
         private IReadOnlyZetboxContext ctx;
 
@@ -40,14 +40,14 @@ namespace Zetbox.Server.Tests
         }
 
         [Test]
-        public void GetList()
+        public void GetObjects()
         {
             var list = ctx.GetQuery<Zetbox.App.Base.ObjectClass>().ToList();
             Assert.That(list.Count, Is.GreaterThan(0));
         }
 
         [Test]
-        public void GetList_Twice()
+        public void GetObjects_Twice()
         {
             List<Zetbox.App.Base.ObjectClass> list1 = ctx.GetQuery<Zetbox.App.Base.ObjectClass>().ToList();
             Assert.That(list1, Is.Not.Null);
@@ -66,7 +66,7 @@ namespace Zetbox.Server.Tests
         }
 
         [Test]
-        public void GetObject_GetList()
+        public void GetObject_GetObjects()
         {
             var prop = ctx.Find<Zetbox.App.Base.Property>(1);
             Assert.That(prop, Is.Not.Null);
@@ -84,7 +84,7 @@ namespace Zetbox.Server.Tests
         }
 
         [Test]
-        public void GetList_GetOneObject()
+        public void GetObjects_GetOneObject()
         {
             var list_objclass = ctx.GetQuery<Zetbox.App.Base.DataType>().ToList();
             Assert.That(list_objclass.Count, Is.GreaterThan(0));
@@ -100,21 +100,21 @@ namespace Zetbox.Server.Tests
 
 
         [Test]
-        public void GetList_With_Take()
+        public void GetObjects_With_Take()
         {
             var list = ctx.GetQuery<Zetbox.App.Base.ObjectClass>().Take(10).ToList();
             Assert.That(list.Count, Is.EqualTo(10));
         }
 
         [Test]
-        public void GetList_With_Take_And_Where()
+        public void GetObjects_With_Take_And_Where()
         {
             var list = ctx.GetQuery<Zetbox.App.Base.ObjectClass>().Where(o => o.Module.Name == "ZetboxBase").Take(10).ToList();
             Assert.That(list.Count, Is.EqualTo(10));
         }
 
         [Test]
-        public void GetList_With_OrderBy()
+        public void GetObjects_With_OrderBy()
         {
             var list = ctx.GetQuery<Zetbox.App.Base.ObjectClass>().OrderBy(o => o.Name).ToList();
             Assert.That(list.Count, Is.GreaterThan(0));
@@ -132,7 +132,7 @@ namespace Zetbox.Server.Tests
         }
 
         [Test]
-        public void GetList_With_OrderBy_And_Where()
+        public void GetObjects_With_OrderBy_And_Where()
         {
             var list = ctx.GetQuery<Zetbox.App.Base.ObjectClass>().Where(o => o.Module.Name == "ZetboxBase").OrderBy(o => o.Name).ToList();
             Assert.That(list.Count, Is.GreaterThan(0));
@@ -150,7 +150,7 @@ namespace Zetbox.Server.Tests
         }
 
         [Test]
-        public void GetList_With_OrderBy_ThenOrderBy()
+        public void GetObjects_With_OrderBy_ThenOrderBy()
         {
             var list = ctx.GetQuery<Zetbox.App.Base.ObjectClass>().OrderBy(o => o.Module.Name).ThenBy(o => o.Name).ToList();
             Assert.That(list.Count, Is.GreaterThan(0));
@@ -168,7 +168,7 @@ namespace Zetbox.Server.Tests
         }
 
         [Test]
-        public void GetList_With_Parameter_Legal()
+        public void GetObjects_With_Parameter_Legal()
         {
             var test = (from m in ctx.GetQuery<Zetbox.App.Base.Module>()
                         where
@@ -180,24 +180,24 @@ namespace Zetbox.Server.Tests
             Assert.That(test.Count, Is.EqualTo(1));
             foreach (var t in test)
             {
-                Log.DebugFormat("GetListWithParameterLegal: {0}", t.Name);
+                Log.DebugFormat("GetObjectsWithParameterLegal: {0}", t.Name);
             }
         }
 
         [Test]
-        public void GetList_With_Projection()
+        public void GetObjects_With_Projection()
         {
             var test = from z in ctx.GetQuery<ObjectClass>()
                        select new { A = z.Name, B = z.TableName };
             foreach (var t in test)
             {
-                Log.DebugFormat("GetListWithProjection: {0}", t.A);
+                Log.DebugFormat("GetObjectsWithProjection: {0}", t.A);
             }
         }
 
         [Test]
         [Ignore("Case 471")]
-        public void GetList_With_Single()
+        public void GetObjects_With_Single()
         {
             var guiModule = ctx.GetQuery<Zetbox.App.Base.Module>().Where(m => m.Name == "GUI").Single();
             Assert.That(guiModule, Is.Not.Null);
@@ -206,7 +206,7 @@ namespace Zetbox.Server.Tests
 
         [Test]
         [Ignore("Case 471")]
-        public void GetList_Single()
+        public void GetObjects_Single()
         {
             var guiModule = ctx.GetQuery<Zetbox.App.Base.Module>().Single(m => m.Name == "GUI");
             Assert.That(guiModule, Is.Not.Null);
@@ -214,7 +214,7 @@ namespace Zetbox.Server.Tests
         }
 
         [Test]
-        public void GetList_With_First()
+        public void GetObjects_With_First()
         {
             var guiModule = ctx.GetQuery<Zetbox.App.Base.Module>().Where(m => m.Name == "GUI").First();
             Assert.That(guiModule, Is.Not.Null);
@@ -222,7 +222,7 @@ namespace Zetbox.Server.Tests
         }
 
         [Test]
-        public void GetList_First()
+        public void GetObjects_First()
         {
             var guiModule = ctx.GetQuery<Zetbox.App.Base.Module>().First(m => m.Name == "GUI");
             Assert.That(guiModule, Is.Not.Null);
@@ -239,7 +239,7 @@ namespace Zetbox.Server.Tests
         /// http://blogs.msdn.com/mattwar/archive/2007/08/01/linq-building-an-iqueryable-provider-part-iii.aspx
         /// </summary>
         [Test]
-        public void GetList_With_PropertyAccessor()
+        public void GetObjects_With_PropertyAccessor()
         {
             Test t = new Test();
             t.TestProp = "foo";
@@ -250,7 +250,7 @@ namespace Zetbox.Server.Tests
         }
 
         [Test]
-        public void GetList_With_PropertyObjectAccessor()
+        public void GetObjects_With_PropertyObjectAccessor()
         {
             int mID = ctx.GetQuery<Zetbox.App.Base.ObjectClass>().First().Module.ID;
             using (var otherCtx = GetContext())
@@ -263,7 +263,7 @@ namespace Zetbox.Server.Tests
 
         [Test]
         [Ignore("Case 1760: Enum member access does not work yet")]
-        public void GetList_With_EnumAccessor()
+        public void GetObjects_With_EnumAccessor()
         {
             StorageType v = StorageType.MergeIntoA;
             var result = ctx.GetQuery<Zetbox.App.Base.Relation>()
@@ -273,7 +273,7 @@ namespace Zetbox.Server.Tests
         }
 
         [Test]
-        public void GetList_With_EnumAccessor_Constant()
+        public void GetObjects_With_EnumAccessor_Constant()
         {
             var result = ctx.GetQuery<Zetbox.App.Base.Relation>()
                 .Where(i => i.Storage == StorageType.MergeIntoA).ToList();
@@ -283,7 +283,7 @@ namespace Zetbox.Server.Tests
 
         [Test]
         [Ignore("Case 1760: Enum member access does not work yet")]
-        public void GetList_With_Nullable_EnumAccessor()
+        public void GetObjects_With_Nullable_EnumAccessor()
         {
             DateTimeStyles v = DateTimeStyles.Date;
             var result = ctx.GetQuery<Zetbox.App.Base.DateTimeProperty>()
@@ -293,7 +293,7 @@ namespace Zetbox.Server.Tests
         }
 
         [Test]
-        public void GetList_With_Nullable_EnumAccessor_Constant()
+        public void GetObjects_With_Nullable_EnumAccessor_Constant()
         {
             var result = ctx.GetQuery<Zetbox.App.Base.DateTimeProperty>()
                 .Where(i => i.DateTimeStyle == DateTimeStyles.Date).ToList();
@@ -303,7 +303,7 @@ namespace Zetbox.Server.Tests
 
         [Test]
         [Ignore("Case 1760: Enum member access does not work yet")]
-        public void GetList_With_Nullable_EnumAccessor_Nullable_Value()
+        public void GetObjects_With_Nullable_EnumAccessor_Nullable_Value()
         {
             DateTimeStyles? v = DateTimeStyles.Date;
             var result = ctx.GetQuery<Zetbox.App.Base.DateTimeProperty>()
@@ -313,7 +313,7 @@ namespace Zetbox.Server.Tests
         }
 
         [Test]
-        public void GetList_With_Nullable_EnumAccessor_Nullable_Constant()
+        public void GetObjects_With_Nullable_EnumAccessor_Nullable_Constant()
         {
             var result = ctx.GetQuery<Zetbox.App.Base.DateTimeProperty>()
                 .Where(i => i.DateTimeStyle == (DateTimeStyles?)DateTimeStyles.Date).ToList();
@@ -323,7 +323,7 @@ namespace Zetbox.Server.Tests
 
         [Test]
         [Ignore("Case 1760: Enum member access does not work yet")]
-        public void GetList_With_Nullable_EnumAccessor_With_Null_Value()
+        public void GetObjects_With_Nullable_EnumAccessor_With_Null_Value()
         {
             DateTimeStyles? v = null;
             var result = ctx.GetQuery<Zetbox.App.Base.DateTimeProperty>()
@@ -333,7 +333,7 @@ namespace Zetbox.Server.Tests
         }
 
         [Test]
-        public void GetList_With_Nullable_EnumAccessor_With_Null_Constant()
+        public void GetObjects_With_Nullable_EnumAccessor_With_Null_Constant()
         {
             var result = ctx.GetQuery<Zetbox.App.Base.DateTimeProperty>()
                 .Where(i => i.DateTimeStyle == null).ToList();
@@ -342,7 +342,7 @@ namespace Zetbox.Server.Tests
         }
 
         [Test]
-        public void GetListWithObjectFilter()
+        public void GetObjectsWithObjectFilter()
         {
             using (IZetboxContext ctx = GetContext())
             {
@@ -355,7 +355,7 @@ namespace Zetbox.Server.Tests
         }
 
         [Test]
-        public void GetListWithObjectFilterAndCast()
+        public void GetObjectsWithObjectFilterAndCast()
         {
             using (IZetboxContext ctx = GetContext())
             {
@@ -368,7 +368,7 @@ namespace Zetbox.Server.Tests
         }
 
         [Test]
-        public void GetListWithObjectFilterAndCastAndOtherFilter()
+        public void GetObjectsWithObjectFilterAndCastAndOtherFilter()
         {
             using (IZetboxContext ctx = GetContext())
             {
@@ -383,7 +383,7 @@ namespace Zetbox.Server.Tests
         [Test]
         [ExpectedException]
         [Ignore("Undefined behaviour: different between NH and EF")]
-        public void GetListWithObjectFilterAndCastAndOtherGenericFilter()
+        public void GetObjectsWithObjectFilterAndCastAndOtherGenericFilter()
         {
             // Strange, but does not work
             using (IZetboxContext ctx = GetContext())
@@ -397,7 +397,7 @@ namespace Zetbox.Server.Tests
         }
 
         [Test]
-        public void GetListWithInvalidButExcusedCast()
+        public void GetObjectsWithInvalidButExcusedCast()
         {
             using (IZetboxContext ctx = GetContext())
             {
@@ -411,7 +411,7 @@ namespace Zetbox.Server.Tests
 
         [Test]
         [ExpectedException]
-        public void GetListWithInvalidCast()
+        public void GetObjectsWithInvalidCast()
         {
             using (IZetboxContext ctx = GetContext())
             {
@@ -426,7 +426,7 @@ namespace Zetbox.Server.Tests
 
         [Test]
         [ExpectedException]
-        public void GetListWithSemivalidCast()
+        public void GetObjectsWithSemivalidCast()
         {
             using (IZetboxContext ctx = GetContext())
             {

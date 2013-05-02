@@ -128,22 +128,15 @@ namespace Zetbox.Server.HttpService
                             SendByteArray(context, result, writerFactory);
                             break;
                         }
-                    case "GetList": // byte[] GetList(SerializableType type, int maxListCount, bool eagerLoadLists, SerializableExpression[] filter, OrderByContract[] orderBy);
+                    case "GetObjects": // byte[] GetObjects(SerializableExpression query);
                         {
-                            var type = reader.ReadSerializableType();
-                            int maxListCount = reader.ReadInt32();
-                            bool eagerLoadLists = reader.ReadBoolean();
-
                             var iftFactory = scope.Resolve<InterfaceType.Factory>();
 
-                            SerializableExpression[] filter;
-                            reader.Read(out filter, iftFactory);
+                            SerializableExpression query;
+                            reader.Read(out query, iftFactory);
 
-                            OrderByContract[] orderBy;
-                            reader.Read(out orderBy, iftFactory);
-
-                            Log.DebugFormat("GetList(type=[{0}], maxListCount={1}, eagerLoadLists={2}, SerializableExpression[{3}], OrderByContract[{4}])", type, maxListCount, eagerLoadLists, filter != null ? filter.Length : -1, orderBy != null ? orderBy.Length : -1);
-                            var result = service.GetList(version, type, maxListCount, eagerLoadLists, filter, orderBy);
+                            Log.DebugFormat("GetObjects(query=[{0}])", query);
+                            var result = service.GetObjects(version, query);
                             SendByteArray(context, result, writerFactory);
                             break;
                         }
@@ -284,7 +277,7 @@ namespace Zetbox.Server.HttpService
             context.Response.StatusCode = (int)HttpStatusCode.Conflict;
             context.Response.ContentType = "text/xml";
             exContainer.ToXmlStream(context.Response.OutputStream);
-            context.Response.OutputStream.Flush();            
+            context.Response.OutputStream.Flush();
         }
 
         private void SendByteArray(HttpContext context, byte[] result, ZetboxStreamWriter.Factory writerFactory)

@@ -24,8 +24,8 @@ namespace Zetbox.API.PerfCounter
         long IncrementSubmitChanges();
         void DecrementSubmitChanges(int objectCount, long startTicks);
 
-        long IncrementGetList(Zetbox.API.InterfaceType ifType);
-        void DecrementGetList(Zetbox.API.InterfaceType ifType, int resultSize, long startTicks);
+        long IncrementGetObjects(Zetbox.API.InterfaceType ifType);
+        void DecrementGetObjects(Zetbox.API.InterfaceType ifType, int resultSize, long startTicks);
 
         long IncrementGetListOf(Zetbox.API.InterfaceType ifType);
         void DecrementGetListOf(Zetbox.API.InterfaceType ifType, int resultSize, long startTicks);
@@ -49,8 +49,8 @@ namespace Zetbox.API.PerfCounter
         void IncrementFetchRelation(Zetbox.API.InterfaceType ifType);
         void DecrementFetchRelation(Zetbox.API.InterfaceType ifType, int resultSize, long startTicks, long endTicks);
 
-        void IncrementGetList(Zetbox.API.InterfaceType ifType);
-        void DecrementGetList(Zetbox.API.InterfaceType ifType, int resultSize, long startTicks, long endTicks);
+        void IncrementGetObjects(Zetbox.API.InterfaceType ifType);
+        void DecrementGetObjects(Zetbox.API.InterfaceType ifType, int resultSize, long startTicks, long endTicks);
 
         void IncrementGetListOf(Zetbox.API.InterfaceType ifType);
         void DecrementGetListOf(Zetbox.API.InterfaceType ifType, int resultSize, long startTicks, long endTicks);

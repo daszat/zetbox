@@ -154,23 +154,6 @@ namespace Zetbox.API.Client
                 });
         }
 
-        public byte[] GetList(Guid version, SerializableType type, int maxListCount, bool eagerLoadLists, SerializableExpression[] filter, OrderByContract[] orderBy)
-        {
-            if (type == null) throw new ArgumentNullException("type");
-
-            return MakeRequest(GetListUri,
-                reqStream =>
-                {
-                    reqStream.Write(version);
-                    reqStream.Write(type);
-                    reqStream.Write(maxListCount);
-                    reqStream.Write(eagerLoadLists);
-                    reqStream.Write(filter);
-                    reqStream.Write(orderBy);
-                    reqStream.WriteRaw(Encoding.ASCII.GetBytes("\n"));// required for basic.authenticated POST to apache
-                });
-        }
-
         public byte[] GetObjects(Guid version, SerializableExpression query)
         {
             return MakeRequest(GetObjectsUri,

@@ -164,10 +164,10 @@ namespace Zetbox.API.PerfCounter
             }
         }
 
-        public void IncrementGetList(InterfaceType ifType)
+        public void IncrementGetObjects(InterfaceType ifType)
         {
         }
-        public void DecrementGetList(InterfaceType ifType, int resultSize, long startTicks, long endTicks)
+        public void DecrementGetObjects(InterfaceType ifType, int resultSize, long startTicks, long endTicks)
         {
             lock (counterLock)
             {

@@ -1,11 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/System" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/System" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/Zetbox.API" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Zetbox.API" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:6666/ZetboxService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-  <xs:complexType name="Exception">
+  <xs:import schemaLocation="http://localhost:6666/ZetboxService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System" />
+  <xs:complexType name="ZetboxContextExceptionSerializationHelper">
     <xs:sequence>
-      <xs:any minOccurs="0" maxOccurs="unbounded" namespace="##local" processContents="skip" />
+      <xs:element name="_x003C_Message_x003E_k__BackingField" nillable="true" type="xs:string" />
     </xs:sequence>
-    <xs:attribute ref="ser:FactoryType" />
   </xs:complexType>
-  <xs:element name="Exception" nillable="true" type="tns:Exception" />
+  <xs:element name="ZetboxContextExceptionSerializationHelper" nillable="true" type="tns:ZetboxContextExceptionSerializationHelper" />
+  <xs:complexType name="ConcurrencyExceptionMessage">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ZetboxContextExceptionSerializationHelper">
+        <xs:sequence>
+          <xs:element name="_x003C_Details_x003E_k__BackingField" nillable="true" type="tns:ArrayOfConcurrencyExceptionDetail" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ConcurrencyExceptionMessage" nillable="true" type="tns:ConcurrencyExceptionMessage" />
+  <xs:complexType name="ArrayOfConcurrencyExceptionDetail">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ConcurrencyExceptionDetail" nillable="true" type="tns:ConcurrencyExceptionDetail" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfConcurrencyExceptionDetail" nillable="true" type="tns:ArrayOfConcurrencyExceptionDetail" />
+  <xs:complexType name="ConcurrencyExceptionDetail">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ChangedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ChangedOn" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ClsGuid" type="ser:guid" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="ObjectAsString" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ConcurrencyExceptionDetail" nillable="true" type="tns:ConcurrencyExceptionDetail" />
+  <xs:complexType name="FKViolationExceptionMessage">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ZetboxContextExceptionSerializationHelper">
+        <xs:sequence>
+          <xs:element name="_x003C_Details_x003E_k__BackingField" nillable="true" type="tns:ArrayOfFKViolationExceptionDetail" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="FKViolationExceptionMessage" nillable="true" type="tns:FKViolationExceptionMessage" />
+  <xs:complexType name="ArrayOfFKViolationExceptionDetail">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FKViolationExceptionDetail" nillable="true" type="tns:FKViolationExceptionDetail" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFKViolationExceptionDetail" nillable="true" type="tns:ArrayOfFKViolationExceptionDetail" />
+  <xs:complexType name="FKViolationExceptionDetail">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DatabaseError" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RelGuid" type="ser:guid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FKViolationExceptionDetail" nillable="true" type="tns:FKViolationExceptionDetail" />
+  <xs:complexType name="UniqueConstraintViolationExceptionMessage">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ZetboxContextExceptionSerializationHelper">
+        <xs:sequence>
+          <xs:element name="_x003C_Details_x003E_k__BackingField" nillable="true" type="tns:ArrayOfUniqueConstraintViolationExceptionDetail" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="UniqueConstraintViolationExceptionMessage" nillable="true" type="tns:UniqueConstraintViolationExceptionMessage" />
+  <xs:complexType name="ArrayOfUniqueConstraintViolationExceptionDetail">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UniqueConstraintViolationExceptionDetail" nillable="true" type="tns:UniqueConstraintViolationExceptionDetail" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUniqueConstraintViolationExceptionDetail" nillable="true" type="tns:ArrayOfUniqueConstraintViolationExceptionDetail" />
+  <xs:complexType name="UniqueConstraintViolationExceptionDetail">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DatabaseError" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IdxGuid" type="ser:guid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UniqueConstraintViolationExceptionDetail" nillable="true" type="tns:UniqueConstraintViolationExceptionDetail" />
+  <xs:complexType name="InvalidZetboxGeneratedVersionException">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/System" base="q1:Exception" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="InvalidZetboxGeneratedVersionException" nillable="true" type="tns:InvalidZetboxGeneratedVersionException" />
 </xs:schema>

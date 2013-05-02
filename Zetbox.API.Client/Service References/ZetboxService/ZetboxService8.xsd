@@ -2,7 +2,7 @@
 <xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" elementFormDefault="qualified" targetNamespace="http://dasz.at/Zetbox/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:6666/ZetboxService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:import schemaLocation="http://localhost:6666/ZetboxService?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-  <xs:import schemaLocation="http://localhost:6666/ZetboxService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Zetbox.API" />
+  <xs:import schemaLocation="http://localhost:6666/ZetboxService?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Zetbox.API" />
   <xs:import schemaLocation="http://localhost:6666/ZetboxService?xsd=xsd5" namespace="http://schemas.microsoft.com/Message" />
   <xs:element name="SetObjects">
     <xs:complexType>
@@ -53,31 +53,37 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element xmlns:q12="http://dasz.at/Zetbox/" name="ZetboxContextExceptionMessage" nillable="true" type="q12:ZetboxContextExceptionMessage" />
-  <xs:element name="GetList">
+  <xs:element name="GetObjects">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="version" type="ser:guid" />
-        <xs:element xmlns:q13="http://dasz.at/Zetbox/" minOccurs="0" name="type" nillable="true" type="q13:Type" />
-        <xs:element minOccurs="0" name="maxListCount" type="xs:int" />
-        <xs:element minOccurs="0" name="eagerLoadLists" type="xs:boolean" />
-        <xs:element xmlns:q14="http://dasz.at/Zetbox/" minOccurs="0" name="filter" nillable="true" type="q14:ArrayOfExpression" />
-        <xs:element xmlns:q15="http://dasz.at/Zetbox/" minOccurs="0" name="orderBy" nillable="true" type="q15:ArrayOfOrderBy" />
+        <xs:element xmlns:q13="http://dasz.at/Zetbox/" minOccurs="0" name="query" nillable="true" type="q13:Expression" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:complexType name="ArrayOfExpression">
-    <xs:sequence>
-      <xs:element xmlns:q16="http://dasz.at/Zetbox/" minOccurs="0" maxOccurs="unbounded" name="Expression" nillable="true" type="q16:Expression" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element xmlns:q17="http://dasz.at/Zetbox/" name="ArrayOfExpression" nillable="true" type="q17:ArrayOfExpression" />
   <xs:complexType name="Expression">
     <xs:sequence>
       <xs:element minOccurs="0" name="NodeType" type="xs:int" />
-      <xs:element xmlns:q18="http://dasz.at/Zetbox/" minOccurs="0" name="Type" nillable="true" type="q18:Type" />
+      <xs:element xmlns:q14="http://dasz.at/Zetbox/" minOccurs="0" name="Type" nillable="true" type="q14:Type" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element xmlns:q19="http://dasz.at/Zetbox/" name="Expression" nillable="true" type="q19:Expression" />
+  <xs:element xmlns:q15="http://dasz.at/Zetbox/" name="Expression" nillable="true" type="q15:Expression" />
+  <xs:complexType name="CompoundExpression">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q16="http://dasz.at/Zetbox/" base="q16:Expression">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Children" nillable="true" type="q16:ArrayOfExpression" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element xmlns:q17="http://dasz.at/Zetbox/" name="CompoundExpression" nillable="true" type="q17:CompoundExpression" />
+  <xs:complexType name="ArrayOfExpression">
+    <xs:sequence>
+      <xs:element xmlns:q18="http://dasz.at/Zetbox/" minOccurs="0" maxOccurs="unbounded" name="Expression" nillable="true" type="q18:Expression" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q19="http://dasz.at/Zetbox/" name="ArrayOfExpression" nillable="true" type="q19:ArrayOfExpression" />
   <xs:complexType name="NewExpression">
     <xs:complexContent mixed="false">
       <xs:extension xmlns:q20="http://dasz.at/Zetbox/" base="q20:CompoundExpression">
@@ -89,29 +95,32 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element xmlns:q21="http://dasz.at/Zetbox/" name="NewExpression" nillable="true" type="q21:NewExpression" />
-  <xs:complexType name="CompoundExpression">
+  <xs:complexType name="SerializableConstructorInfo">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q22="http://dasz.at/Zetbox/" base="q22:Expression">
+      <xs:extension xmlns:q22="http://dasz.at/Zetbox/" base="q22:SerializableMemberInfo">
         <xs:sequence>
-          <xs:element minOccurs="0" name="Children" nillable="true" type="q22:ArrayOfExpression" />
+          <xs:element minOccurs="0" name="ParameterTypes" nillable="true" type="q22:ArrayOfType" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element xmlns:q23="http://dasz.at/Zetbox/" name="CompoundExpression" nillable="true" type="q23:CompoundExpression" />
-  <xs:complexType name="MemberExpression">
-    <xs:complexContent mixed="false">
-      <xs:extension xmlns:q24="http://dasz.at/Zetbox/" base="q24:CompoundExpression">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="MemberName" nillable="true" type="xs:string" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
+  <xs:element xmlns:q23="http://dasz.at/Zetbox/" name="SerializableConstructorInfo" nillable="true" type="q23:SerializableConstructorInfo" />
+  <xs:complexType name="SerializableMemberInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element xmlns:q24="http://dasz.at/Zetbox/" minOccurs="0" name="Type" nillable="true" type="q24:Type" />
+    </xs:sequence>
   </xs:complexType>
-  <xs:element xmlns:q25="http://dasz.at/Zetbox/" name="MemberExpression" nillable="true" type="q25:MemberExpression" />
+  <xs:element xmlns:q25="http://dasz.at/Zetbox/" name="SerializableMemberInfo" nillable="true" type="q25:SerializableMemberInfo" />
+  <xs:complexType name="ArrayOfSerializableMemberInfo">
+    <xs:sequence>
+      <xs:element xmlns:q26="http://dasz.at/Zetbox/" minOccurs="0" maxOccurs="unbounded" name="SerializableMemberInfo" nillable="true" type="q26:SerializableMemberInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element xmlns:q27="http://dasz.at/Zetbox/" name="ArrayOfSerializableMemberInfo" nillable="true" type="q27:ArrayOfSerializableMemberInfo" />
   <xs:complexType name="ParameterExpression">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q26="http://dasz.at/Zetbox/" base="q26:Expression">
+      <xs:extension xmlns:q28="http://dasz.at/Zetbox/" base="q28:Expression">
         <xs:sequence>
           <xs:element minOccurs="0" name="Guid" type="ser:guid" />
           <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
@@ -119,15 +128,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element xmlns:q27="http://dasz.at/Zetbox/" name="ParameterExpression" nillable="true" type="q27:ParameterExpression" />
-  <xs:complexType name="UnaryExpression">
-    <xs:complexContent mixed="false">
-      <xs:extension xmlns:q28="http://dasz.at/Zetbox/" base="q28:CompoundExpression">
-        <xs:sequence />
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element xmlns:q29="http://dasz.at/Zetbox/" name="UnaryExpression" nillable="true" type="q29:UnaryExpression" />
+  <xs:element xmlns:q29="http://dasz.at/Zetbox/" name="ParameterExpression" nillable="true" type="q29:ParameterExpression" />
   <xs:complexType name="ContextSourceExpression">
     <xs:complexContent mixed="false">
       <xs:extension xmlns:q30="http://dasz.at/Zetbox/" base="q30:Expression">
@@ -136,20 +137,14 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element xmlns:q31="http://dasz.at/Zetbox/" name="ContextSourceExpression" nillable="true" type="q31:ContextSourceExpression" />
-  <xs:complexType name="MethodCallExpression">
+  <xs:complexType name="UnaryExpression">
     <xs:complexContent mixed="false">
       <xs:extension xmlns:q32="http://dasz.at/Zetbox/" base="q32:CompoundExpression">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="GenericArguments" nillable="true" type="q32:ArrayOfType" />
-          <xs:element minOccurs="0" name="MethodName" nillable="true" type="xs:string" />
-          <xs:element minOccurs="0" name="ObjectExpression" nillable="true" type="q32:Expression" />
-          <xs:element minOccurs="0" name="ParameterTypes" nillable="true" type="q32:ArrayOfType" />
-          <xs:element minOccurs="0" name="SerializableMethodType" nillable="true" type="q32:Type" />
-        </xs:sequence>
+        <xs:sequence />
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element xmlns:q33="http://dasz.at/Zetbox/" name="MethodCallExpression" nillable="true" type="q33:MethodCallExpression" />
+  <xs:element xmlns:q33="http://dasz.at/Zetbox/" name="UnaryExpression" nillable="true" type="q33:UnaryExpression" />
   <xs:complexType name="BinaryExpression">
     <xs:complexContent mixed="false">
       <xs:extension xmlns:q34="http://dasz.at/Zetbox/" base="q34:CompoundExpression">
@@ -188,57 +183,30 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element xmlns:q41="http://dasz.at/Zetbox/" name="LambdaExpression" nillable="true" type="q41:LambdaExpression" />
-  <xs:complexType name="SerializableConstructorInfo">
+  <xs:complexType name="MemberExpression">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q42="http://dasz.at/Zetbox/" base="q42:SerializableMemberInfo">
+      <xs:extension xmlns:q42="http://dasz.at/Zetbox/" base="q42:CompoundExpression">
         <xs:sequence>
-          <xs:element minOccurs="0" name="ParameterTypes" nillable="true" type="q42:ArrayOfType" />
+          <xs:element minOccurs="0" name="MemberName" nillable="true" type="xs:string" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element xmlns:q43="http://dasz.at/Zetbox/" name="SerializableConstructorInfo" nillable="true" type="q43:SerializableConstructorInfo" />
-  <xs:complexType name="SerializableMemberInfo">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
-      <xs:element xmlns:q44="http://dasz.at/Zetbox/" minOccurs="0" name="Type" nillable="true" type="q44:Type" />
-    </xs:sequence>
+  <xs:element xmlns:q43="http://dasz.at/Zetbox/" name="MemberExpression" nillable="true" type="q43:MemberExpression" />
+  <xs:complexType name="MethodCallExpression">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q44="http://dasz.at/Zetbox/" base="q44:CompoundExpression">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="GenericArguments" nillable="true" type="q44:ArrayOfType" />
+          <xs:element minOccurs="0" name="MethodName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ObjectExpression" nillable="true" type="q44:Expression" />
+          <xs:element minOccurs="0" name="ParameterTypes" nillable="true" type="q44:ArrayOfType" />
+          <xs:element minOccurs="0" name="SerializableMethodType" nillable="true" type="q44:Type" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
-  <xs:element xmlns:q45="http://dasz.at/Zetbox/" name="SerializableMemberInfo" nillable="true" type="q45:SerializableMemberInfo" />
-  <xs:complexType name="ArrayOfSerializableMemberInfo">
-    <xs:sequence>
-      <xs:element xmlns:q46="http://dasz.at/Zetbox/" minOccurs="0" maxOccurs="unbounded" name="SerializableMemberInfo" nillable="true" type="q46:SerializableMemberInfo" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element xmlns:q47="http://dasz.at/Zetbox/" name="ArrayOfSerializableMemberInfo" nillable="true" type="q47:ArrayOfSerializableMemberInfo" />
-  <xs:complexType name="ArrayOfOrderBy">
-    <xs:sequence>
-      <xs:element xmlns:q48="http://dasz.at/Zetbox/" minOccurs="0" maxOccurs="unbounded" name="OrderBy" nillable="true" type="q48:OrderBy" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element xmlns:q49="http://dasz.at/Zetbox/" name="ArrayOfOrderBy" nillable="true" type="q49:ArrayOfOrderBy" />
-  <xs:complexType name="OrderBy">
-    <xs:sequence>
-      <xs:element xmlns:q50="http://dasz.at/Zetbox/" minOccurs="0" name="Expression" nillable="true" type="q50:Expression" />
-      <xs:element xmlns:q51="http://schemas.datacontract.org/2004/07/Zetbox.API" minOccurs="0" name="Type" type="q51:OrderByType" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element xmlns:q52="http://dasz.at/Zetbox/" name="OrderBy" nillable="true" type="q52:OrderBy" />
-  <xs:element name="GetListResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="GetListResult" nillable="true" type="xs:base64Binary" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetObjects">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="version" type="ser:guid" />
-        <xs:element xmlns:q53="http://dasz.at/Zetbox/" minOccurs="0" name="query" nillable="true" type="q53:Expression" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
+  <xs:element xmlns:q45="http://dasz.at/Zetbox/" name="MethodCallExpression" nillable="true" type="q45:MethodCallExpression" />
   <xs:element name="GetObjectsResponse">
     <xs:complexType>
       <xs:sequence>
@@ -250,7 +218,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="version" type="ser:guid" />
-        <xs:element xmlns:q54="http://dasz.at/Zetbox/" minOccurs="0" name="type" nillable="true" type="q54:Type" />
+        <xs:element xmlns:q46="http://dasz.at/Zetbox/" minOccurs="0" name="type" nillable="true" type="q46:Type" />
         <xs:element minOccurs="0" name="ID" type="xs:int" />
         <xs:element minOccurs="0" name="property" nillable="true" type="xs:string" />
       </xs:sequence>
@@ -291,14 +259,14 @@
   <xs:element name="GetBlobStreamResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q55="http://schemas.microsoft.com/Message" name="GetBlobStreamResult" type="q55:StreamBody" />
+        <xs:element xmlns:q47="http://schemas.microsoft.com/Message" name="GetBlobStreamResult" type="q47:StreamBody" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="BlobMessage">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q56="http://schemas.microsoft.com/Message" name="Stream" type="q56:StreamBody" />
+        <xs:element xmlns:q48="http://schemas.microsoft.com/Message" name="Stream" type="q48:StreamBody" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -308,7 +276,7 @@
   <xs:element name="BlobResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q57="http://schemas.microsoft.com/Message" name="BlobInstance" type="q57:StreamBody" />
+        <xs:element xmlns:q49="http://schemas.microsoft.com/Message" name="BlobInstance" type="q49:StreamBody" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -317,13 +285,13 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="version" type="ser:guid" />
-        <xs:element xmlns:q58="http://dasz.at/Zetbox/" minOccurs="0" name="type" nillable="true" type="q58:Type" />
+        <xs:element xmlns:q50="http://dasz.at/Zetbox/" minOccurs="0" name="type" nillable="true" type="q50:Type" />
         <xs:element minOccurs="0" name="ID" type="xs:int" />
         <xs:element minOccurs="0" name="method" nillable="true" type="xs:string" />
-        <xs:element xmlns:q59="http://dasz.at/Zetbox/" minOccurs="0" name="parameterTypes" nillable="true" type="q59:ArrayOfType" />
+        <xs:element xmlns:q51="http://dasz.at/Zetbox/" minOccurs="0" name="parameterTypes" nillable="true" type="q51:ArrayOfType" />
         <xs:element minOccurs="0" name="parameter" nillable="true" type="xs:base64Binary" />
         <xs:element minOccurs="0" name="changedObjects" nillable="true" type="xs:base64Binary" />
-        <xs:element xmlns:q60="http://dasz.at/Zetbox/" minOccurs="0" name="notificationRequests" nillable="true" type="q60:ArrayOfObjectNotificationRequest" />
+        <xs:element xmlns:q52="http://dasz.at/Zetbox/" minOccurs="0" name="notificationRequests" nillable="true" type="q52:ArrayOfObjectNotificationRequest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

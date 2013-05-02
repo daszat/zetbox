@@ -229,13 +229,13 @@ namespace Zetbox.API.PerfCounter
             _FetchRelation.Decrement(resultSize, startTicks, endTicks);
         }
 
-        public void IncrementGetList(InterfaceType ifType)
+        public void IncrementGetObjects(InterfaceType ifType)
         {
             if (!initialized) return;
             _GetList.Increment();
         }
 
-        public void DecrementGetList(InterfaceType ifType, int resultSize, long startTicks, long endTicks)
+        public void DecrementGetObjects(InterfaceType ifType, int resultSize, long startTicks, long endTicks)
         {
             if (!initialized) return;
             _GetList.Decrement(resultSize, startTicks, endTicks);

@@ -96,7 +96,7 @@
     <Compile Include="Tests\CompoundObjects\when_roundtrip.cs" />
     <Compile Include="Tests\DefaultValues\when_submitting.cs" />
     <Compile Include="Tests\Enums\when_querying.cs" />
-    <Compile Include="Tests\GetListTests.cs" />
+    <Compile Include="Tests\GetObjectsTests.cs" />
     <Compile Include="Tests\InheritanceTests.cs" />
     <Compile Include="Tests\ListPropertiesTests.cs" />
     <Compile Include="Tests\Methods\when_invoking_on_server.cs" />
