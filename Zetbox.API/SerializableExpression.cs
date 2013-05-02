@@ -133,6 +133,22 @@ namespace Zetbox.API
         Parameter,
         New,
         Conditional,
+        ContextSource,
+    }
+
+    /// <summary>
+    /// Use this class to register typemappings for serializable expressions in the proxy. e.g. to map the provider's query implementation to IQueryable.
+    /// </summary>
+    [Serializable]
+    public sealed class SerializingTypeMap : Dictionary<Type, Type>
+    {
+        public SerializingTypeMap() : base() { }
+        public SerializingTypeMap(IDictionary<Type, Type> dictionary) : base(dictionary) { }
+        public SerializingTypeMap(IEqualityComparer<Type> comparer) : base(comparer) { }
+        public SerializingTypeMap(int capacity) : base(capacity) { }
+        public SerializingTypeMap(IDictionary<Type, Type> dictionary, IEqualityComparer<Type> comparer) : base(dictionary, comparer) { }
+        public SerializingTypeMap(int capacity, IEqualityComparer<Type> comparer) : base(capacity, comparer) { }
+        private SerializingTypeMap(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
     }
 
     /// <summary>
@@ -151,6 +167,7 @@ namespace Zetbox.API
     [KnownType(typeof(SerializableNewExpression))]
     [KnownType(typeof(SerializableParameterExpression))]
     [KnownType(typeof(SerializableUnaryExpression))]
+    [KnownType(typeof(SerializableContextSourceExpression))]
     public abstract partial class SerializableExpression
     {
 
@@ -158,12 +175,15 @@ namespace Zetbox.API
         /// Creates a serializable Expression from a Expression
         /// </summary>
         /// <param name="e">Linq Expression</param>
+        /// <param name="ctx"></param>
         /// <param name="iftFactory"></param>
+        /// <param name="implTypeChecker"></param>
+        /// <param name="typeMaps"></param>
         /// <returns>serializable Expression</returns>
-        public static SerializableExpression FromExpression(Expression e, InterfaceType.Factory iftFactory)
+        public static SerializableExpression FromExpression(Expression e, IReadOnlyZetboxContext ctx, InterfaceType.Factory iftFactory, IImplementationTypeChecker implTypeChecker, IEnumerable<SerializingTypeMap> typeMaps)
         {
-            SerializationContext ctx = new SerializationContext();
-            return FromExpression(e, ctx, iftFactory);
+            SerializationContext sCtx = new SerializationContext(ctx, iftFactory, implTypeChecker, typeMaps);
+            return FromExpression(e, sCtx);
         }
 
         /// <summary>
@@ -171,20 +191,28 @@ namespace Zetbox.API
         /// </summary>
         /// <param name="e">Linq Expression</param>
         /// <param name="ctx">Serialization Context</param>
-        /// <param name="iftFactory"></param>
         // TODO: use ExpressionTreeVisitor/Translator
-        internal static SerializableExpression FromExpression(Expression e, SerializationContext ctx, InterfaceType.Factory iftFactory)
+        internal static SerializableExpression FromExpression(Expression e, SerializationContext ctx)
         {
             if (e == null) throw new ArgumentNullException("e");
 
             if (e is BinaryExpression)
-                return new SerializableBinaryExpression((BinaryExpression)e, ctx, iftFactory);
+                return new SerializableBinaryExpression((BinaryExpression)e, ctx);
 
             if (e is UnaryExpression)
-                return new SerializableUnaryExpression((UnaryExpression)e, ctx, iftFactory);
+                return new SerializableUnaryExpression((UnaryExpression)e, ctx);
 
             if (e is ConstantExpression)
-                return new SerializableConstantExpression((ConstantExpression)e, ctx, iftFactory);
+            {
+                if (typeof(IQueryable).IsAssignableFrom(e.Type))
+                {
+                    return new SerializableContextSourceExpression((ConstantExpression)e, ctx);
+                }
+                else
+                {
+                    return new SerializableConstantExpression((ConstantExpression)e, ctx);
+                }
+            }
 
             if (e is MemberExpression)
             {
@@ -194,34 +222,34 @@ namespace Zetbox.API
                     ConstantExpression left = (ConstantExpression)exp.Expression;
                     if (exp.Member is PropertyInfo)
                     {
-                        return new SerializableConstantExpression(Expression.Constant(((PropertyInfo)exp.Member).GetValue(left.Value, null)), ctx, iftFactory);
+                        return new SerializableConstantExpression(Expression.Constant(((PropertyInfo)exp.Member).GetValue(left.Value, null)), ctx);
                     }
                     else if (exp.Member is FieldInfo)
                     {
-                        return new SerializableConstantExpression(Expression.Constant(((FieldInfo)exp.Member).GetValue(left.Value)), ctx, iftFactory);
+                        return new SerializableConstantExpression(Expression.Constant(((FieldInfo)exp.Member).GetValue(left.Value)), ctx);
                     }
                     else
                     {
                         throw new NotImplementedException();
                     }
                 }
-                return new SerializableMemberExpression((MemberExpression)e, ctx, iftFactory);
+                return new SerializableMemberExpression((MemberExpression)e, ctx);
             }
 
             if (e is LambdaExpression)
-                return new SerializableLambdaExpression((LambdaExpression)e, ctx, iftFactory);
+                return new SerializableLambdaExpression((LambdaExpression)e, ctx);
 
             if (e is MethodCallExpression)
-                return new SerializableMethodCallExpression((MethodCallExpression)e, ctx, iftFactory);
+                return new SerializableMethodCallExpression((MethodCallExpression)e, ctx);
 
             if (e is ParameterExpression)
-                return new SerializableParameterExpression((ParameterExpression)e, ctx, iftFactory);
+                return new SerializableParameterExpression((ParameterExpression)e, ctx);
 
             if (e is NewExpression)
-                return new SerializableNewExpression((NewExpression)e, ctx, iftFactory);
+                return new SerializableNewExpression((NewExpression)e, ctx);
 
             if (e is ConditionalExpression)
-                return new SerializableConditionalExpression((ConditionalExpression)e, ctx, iftFactory);
+                return new SerializableConditionalExpression((ConditionalExpression)e, ctx);
 
             throw new NotSupportedException(string.Format("Nodetype {0} is not supported: {1}", e.NodeType, e.ToString()));
         }
@@ -229,13 +257,15 @@ namespace Zetbox.API
         /// <summary>
         /// Converts a SerializableExpression to a Linq Expression
         /// </summary>
+        /// <param name="ctx">An optional context to use for SerializableContextSourceExpressions.</param>
+        /// <param name="e">The expression to translate from.</param>
+        /// <param name="iftFactory"></param>
         /// <returns>Linq Expression</returns>
-        public static Expression ToExpression(SerializableExpression e)
+        public static Expression ToExpression(IReadOnlyZetboxContext ctx, SerializableExpression e, InterfaceType.Factory iftFactory)
         {
-            if (e == null)
-                throw new ArgumentNullException("e");
-            SerializationContext ctx = new SerializationContext();
-            return e.ToExpressionInternal(ctx);
+            if (e == null) throw new ArgumentNullException("e");
+
+            return e.ToExpressionInternal(new SerializationContext(ctx, iftFactory));
         }
 
         /// <summary>
@@ -243,16 +273,60 @@ namespace Zetbox.API
         /// </summary>
         internal class SerializationContext
         {
-            private Dictionary<Guid, Expression> _Parameter = new Dictionary<Guid, Expression>();
+            private readonly IReadOnlyZetboxContext _ctx;
+            private readonly InterfaceType.Factory _iftFactory;
+            private readonly IImplementationTypeChecker _implTypeChecker;
+            private readonly Dictionary<Guid, Expression> _parameter = new Dictionary<Guid, Expression>();
+            private readonly Dictionary<Type, Type> _typeMap;
+
+            public IReadOnlyZetboxContext SourceContext { get { return _ctx; } }
+
             /// <summary>
             /// Collection of LINQ Parameter
             /// </summary>
-            public Dictionary<Guid, Expression> Parameter
+            public Dictionary<Guid, Expression> Parameter { get { return _parameter; } }
+
+            public SerializationContext(IReadOnlyZetboxContext ctx, InterfaceType.Factory iftFactory, IImplementationTypeChecker implTypeChecker = null, IEnumerable<SerializingTypeMap> typeMaps = null)
             {
-                get
+                _ctx = ctx;
+                _iftFactory = iftFactory;
+                _implTypeChecker = implTypeChecker;
+                _typeMap = typeMaps != null
+                    ? typeMaps.SelectMany(m => m).ToDictionary(kv => kv.Key, kv => kv.Value)
+                    : new Dictionary<Type, Type>();
+            }
+
+            private Type MapType(Type type)
+            {
+                if (_typeMap == null || _typeMap.Count == 0) return type;
+
+                Type result;
+
+                // direct match
+                if (_typeMap.TryGetValue(type, out result))
+                    return result;
+
+                // generic types can match with both their definition and their args
+                if (type.IsGenericType)
                 {
-                    return _Parameter;
+                    var typeDef = type.GetGenericTypeDefinition();
+                    var mappedArgs = type.GetGenericArguments().Select(arg => MapType(arg)).ToArray();
+                    if (_typeMap.TryGetValue(typeDef, out result))
+                        return result.MakeGenericType(mappedArgs);
+                    else
+                        return typeDef.MakeGenericType(mappedArgs);
                 }
+
+                // nothing matched
+                return type;
+            }
+
+            public InterfaceType Factory(Type t)
+            {
+                t = MapType(t);
+                return _implTypeChecker != null && _implTypeChecker.IsImplementationType(t)
+                    ? _ctx.GetImplementationType(t).ToInterfaceType()
+                    : _iftFactory(t);
             }
         }
 
@@ -279,11 +353,9 @@ namespace Zetbox.API
         /// </summary>
         /// <param name="e">Linq Expression</param>
         /// <param name="ctx">Serialization Context</param>
-        /// <param name="iftFactory"></param>
-        internal SerializableExpression(Expression e, SerializationContext ctx, InterfaceType.Factory iftFactory)
+        internal SerializableExpression(Expression e, SerializationContext ctx)
         {
-            this.iftFactory = iftFactory;
-            SerializableType = iftFactory(e.Type).ToSerializableType();
+            SerializableType = ctx.Factory(e.Type).ToSerializableType();
             NodeType = (int)e.NodeType;
         }
 
@@ -311,9 +383,6 @@ namespace Zetbox.API
             }
         }
 
-        [NonSerialized]
-        protected readonly InterfaceType.Factory iftFactory;
-
         /// <summary>
         /// Converts a SerializableExpression to a Linq Expression
         /// </summary>
@@ -336,8 +405,6 @@ namespace Zetbox.API
 
         internal SerializableExpression(ZetboxStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
         {
-            this.iftFactory = iftFactory;
-
             SerializableType t;
             binReader.Read(out t);
             this.SerializableType = t;
@@ -393,6 +460,8 @@ namespace Zetbox.API
                     return new SerializableNewExpression(binStream, ctx, iftFactory);
                 case SerializableExpressionType.Conditional:
                     return new SerializableConditionalExpression(binStream, ctx, iftFactory);
+                case SerializableExpressionType.ContextSource:
+                    return new SerializableContextSourceExpression(binStream, ctx, iftFactory);
                 default:
                     throw new NotImplementedException(string.Format("Unknown SerializableExpressionType encountered: [{0}]", type));
             }
@@ -419,8 +488,8 @@ namespace Zetbox.API
     [DataContract(Namespace = "http://dasz.at/Zetbox/", Name = "CompoundExpression")]
     public abstract class SerializableCompoundExpression : SerializableExpression
     {
-        internal SerializableCompoundExpression(Expression e, SerializableExpression.SerializationContext ctx, InterfaceType.Factory iftFactory)
-            : base(e, ctx, iftFactory)
+        internal SerializableCompoundExpression(Expression e, SerializableExpression.SerializationContext ctx)
+            : base(e, ctx)
         {
             this.Children = new SerializableExpression[] { };
         }
@@ -444,7 +513,7 @@ namespace Zetbox.API
 
         internal override void ToStream(ZetboxStreamWriter binStream, StreamSerializationContext ctx)
         {
-            // do net render SerializableExpressionType for abstract, intermediate class
+            // do not render SerializableExpressionType for abstract, intermediate class
             base.ToStream(binStream, ctx);
             for (int i = 0; i < Children.Length; i++)
             {
@@ -464,10 +533,10 @@ namespace Zetbox.API
     [DataContract(Namespace = "http://dasz.at/Zetbox/", Name = "BinaryExpression")]
     public class SerializableBinaryExpression : SerializableCompoundExpression
     {
-        internal SerializableBinaryExpression(BinaryExpression e, SerializableExpression.SerializationContext ctx, InterfaceType.Factory iftFactory)
-            : base(e, ctx, iftFactory)
+        internal SerializableBinaryExpression(BinaryExpression e, SerializableExpression.SerializationContext ctx)
+            : base(e, ctx)
         {
-            Children = new[] { SerializableExpression.FromExpression(e.Left, ctx, iftFactory), SerializableExpression.FromExpression(e.Right, ctx, iftFactory) };
+            Children = new[] { SerializableExpression.FromExpression(e.Left, ctx), SerializableExpression.FromExpression(e.Right, ctx) };
         }
 
         internal SerializableBinaryExpression(ZetboxStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
@@ -496,10 +565,10 @@ namespace Zetbox.API
     [DataContract(Namespace = "http://dasz.at/Zetbox/", Name = "UnaryExpression")]
     public class SerializableUnaryExpression : SerializableCompoundExpression
     {
-        internal SerializableUnaryExpression(UnaryExpression e, SerializableExpression.SerializationContext ctx, InterfaceType.Factory iftFactory)
-            : base(e, ctx, iftFactory)
+        internal SerializableUnaryExpression(UnaryExpression e, SerializableExpression.SerializationContext ctx)
+            : base(e, ctx)
         {
-            Children = new[] { SerializableExpression.FromExpression(e.Operand, ctx, iftFactory) };
+            Children = new[] { SerializableExpression.FromExpression(e.Operand, ctx) };
         }
 
         internal SerializableUnaryExpression(ZetboxStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
@@ -528,8 +597,8 @@ namespace Zetbox.API
     [DataContract(Namespace = "http://dasz.at/Zetbox/", Name = "ConstantExpression")]
     public class SerializableConstantExpression : SerializableExpression
     {
-        internal SerializableConstantExpression(ConstantExpression e, SerializationContext ctx, InterfaceType.Factory iftFactory)
-            : base(e, ctx, iftFactory)
+        internal SerializableConstantExpression(ConstantExpression e, SerializationContext ctx)
+            : base(e, ctx)
         {
             // Handle Enums
             if (e.Value != null && e.Value.GetType().IsEnum)
@@ -591,11 +660,11 @@ namespace Zetbox.API
     [DataContract(Namespace = "http://dasz.at/Zetbox/", Name = "MemberExpression")]
     public class SerializableMemberExpression : SerializableCompoundExpression
     {
-        internal SerializableMemberExpression(MemberExpression e, SerializationContext ctx, InterfaceType.Factory iftFactory)
-            : base(e, ctx, iftFactory)
+        internal SerializableMemberExpression(MemberExpression e, SerializationContext ctx)
+            : base(e, ctx)
         {
             MemberName = e.Member.Name;
-            Children = new[] { SerializableExpression.FromExpression(e.Expression, ctx, iftFactory) };
+            Children = new[] { SerializableExpression.FromExpression(e.Expression, ctx) };
         }
 
         internal SerializableMemberExpression(ZetboxStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
@@ -634,19 +703,19 @@ namespace Zetbox.API
     [DataContract(Namespace = "http://dasz.at/Zetbox/", Name = "MethodCallExpression")]
     public class SerializableMethodCallExpression : SerializableCompoundExpression
     {
-        internal SerializableMethodCallExpression(MethodCallExpression e, SerializationContext ctx, InterfaceType.Factory iftFactory)
-            : base(e, ctx, iftFactory)
+        internal SerializableMethodCallExpression(MethodCallExpression e, SerializationContext ctx)
+            : base(e, ctx)
         {
-            if (e.Object != null) ObjectExpression = SerializableExpression.FromExpression(e.Object, ctx, iftFactory);
+            if (e.Object != null) ObjectExpression = SerializableExpression.FromExpression(e.Object, ctx);
 
             MethodName = e.Method.Name;
-            SerializableMethodType = iftFactory(e.Method.DeclaringType).ToSerializableType();
-            ParameterTypes = e.Method.GetParameters().Select(p => iftFactory(p.ParameterType).ToSerializableType()).ToArray();
-            GenericArguments = e.Method.GetGenericArguments().Select(p => iftFactory(p).ToSerializableType()).ToArray();
+            SerializableMethodType = ctx.Factory(e.Method.DeclaringType).ToSerializableType();
+            ParameterTypes = e.Method.GetParameters().Select(p => ctx.Factory(p.ParameterType).ToSerializableType()).ToArray();
+            GenericArguments = e.Method.GetGenericArguments().Select(p => ctx.Factory(p).ToSerializableType()).ToArray();
 
             if (e.Arguments != null)
             {
-                Children = e.Arguments.Select(a => SerializableExpression.FromExpression(a, ctx, iftFactory)).ToArray();
+                Children = e.Arguments.Select(a => SerializableExpression.FromExpression(a, ctx)).ToArray();
             }
         }
 
@@ -801,11 +870,11 @@ namespace Zetbox.API
     [DataContract(Namespace = "http://dasz.at/Zetbox/", Name = "LambdaExpression")]
     public class SerializableLambdaExpression : SerializableCompoundExpression
     {
-        internal SerializableLambdaExpression(LambdaExpression e, SerializationContext ctx, InterfaceType.Factory iftFactory)
-            : base(e, ctx, iftFactory)
+        internal SerializableLambdaExpression(LambdaExpression e, SerializationContext ctx)
+            : base(e, ctx)
         {
-            Children = new[] { SerializableExpression.FromExpression(e.Body, ctx, iftFactory) }
-                .Union(e.Parameters.Select(p => SerializableExpression.FromExpression(p, ctx, iftFactory))).ToArray();
+            Children = new[] { SerializableExpression.FromExpression(e.Body, ctx) }
+                .Union(e.Parameters.Select(p => SerializableExpression.FromExpression(p, ctx))).ToArray();
         }
 
         internal SerializableLambdaExpression(ZetboxStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
@@ -838,8 +907,8 @@ namespace Zetbox.API
     [DataContract(Namespace = "http://dasz.at/Zetbox/", Name = "ParameterExpression")]
     public class SerializableParameterExpression : SerializableExpression
     {
-        internal SerializableParameterExpression(ParameterExpression e, SerializationContext ctx, InterfaceType.Factory iftFactory)
-            : base(e, ctx, iftFactory)
+        internal SerializableParameterExpression(ParameterExpression e, SerializationContext ctx)
+            : base(e, ctx)
         {
             this.Name = e.Name;
             if (!ctx.Parameter.ContainsValue(e))
@@ -912,16 +981,16 @@ namespace Zetbox.API
         [DataMember(Name = "Members")]
         public SerializableMemberInfo[] Members;
 
-        internal SerializableNewExpression(NewExpression source, SerializationContext ctx, InterfaceType.Factory iftFactory)
-            : base(source, ctx, iftFactory)
+        internal SerializableNewExpression(NewExpression source, SerializationContext ctx)
+            : base(source, ctx)
         {
-            Constructor = new SerializableConstructorInfo(source.Constructor, iftFactory);
+            Constructor = new SerializableConstructorInfo(source.Constructor, ctx.Factory);
             if (source.Members != null)
             {
-                Members = source.Members.Select(i => new SerializableMemberInfo(i, iftFactory)).ToArray();
+                Members = source.Members.Select(i => new SerializableMemberInfo(i, ctx.Factory)).ToArray();
             }
 
-            Children = source.Arguments.Select(a => SerializableExpression.FromExpression(a, ctx, iftFactory)).ToArray();
+            Children = source.Arguments.Select(a => SerializableExpression.FromExpression(a, ctx)).ToArray();
         }
 
         internal SerializableNewExpression(ZetboxStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
@@ -981,12 +1050,12 @@ namespace Zetbox.API
         [DataMember(Name = "IfFalse")]
         public SerializableExpression IfFalse { get; set; }
 
-        internal SerializableConditionalExpression(ConditionalExpression source, SerializationContext ctx, InterfaceType.Factory iftFactory)
-            : base(source, ctx, iftFactory)
+        internal SerializableConditionalExpression(ConditionalExpression source, SerializationContext ctx)
+            : base(source, ctx)
         {
-            Test = SerializableExpression.FromExpression(source.Test, ctx, iftFactory);
-            IfTrue = SerializableExpression.FromExpression(source.IfTrue, ctx, iftFactory);
-            IfFalse = SerializableExpression.FromExpression(source.IfFalse, ctx, iftFactory);
+            Test = SerializableExpression.FromExpression(source.Test, ctx);
+            IfTrue = SerializableExpression.FromExpression(source.IfTrue, ctx);
+            IfFalse = SerializableExpression.FromExpression(source.IfFalse, ctx);
         }
 
         internal SerializableConditionalExpression(ZetboxStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
@@ -1015,4 +1084,33 @@ namespace Zetbox.API
     }
     #endregion
 
+    #region ContextSourceExpression
+    /// <summary>
+    /// Serializable ContextSource Expression. This is a "virtual" expression standing in for the IQueryable&lt;T&gt; from the underlying GetQuery call.
+    /// </summary>
+    [Serializable]
+    [DataContract(Namespace = "http://dasz.at/Zetbox/", Name = "ContextSourceExpression")]
+    public class SerializableContextSourceExpression : SerializableExpression
+    {
+        internal SerializableContextSourceExpression(ConstantExpression e, SerializationContext ctx)
+            : base(e, ctx)
+        {
+            // override node type to ContextSource
+            NodeType = (int)SerializableExpressionType.ContextSource;
+        }
+
+        internal SerializableContextSourceExpression(ZetboxStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
+            : base(binReader, ctx, iftFactory)
+        {
+        }
+
+        internal override Expression ToExpressionInternal(SerializationContext ctx)
+        {
+            // The ContextSource must be an IQueryable<T>, which is the argument we need for GetQuery
+            var queryItemType = Type.GetGenericArguments()[0];
+            var mi = typeof(IReadOnlyZetboxContext).GetMethod("GetQuery").MakeGenericMethod(queryItemType);
+            return Expression.Constant(mi.Invoke(ctx.SourceContext, null), Type);
+        }
+    }
+    #endregion
 }

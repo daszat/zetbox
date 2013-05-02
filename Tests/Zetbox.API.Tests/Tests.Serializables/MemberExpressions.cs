@@ -20,13 +20,10 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-
-using Zetbox.API.Utils;
-
+using Autofac;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
-
-using Autofac;
+using Zetbox.API.Utils;
 
 namespace Zetbox.API.Tests.Serializables
 {
@@ -40,7 +37,7 @@ namespace Zetbox.API.Tests.Serializables
             base.SetUp();
         }
 
-        // TODO: Discuss: do we really want to optimize Linq epxressions when serializing?
+        // TODO: Discuss: do we really want to optimize Linq expressions when serializing?
         //       currently, this seems to be a side-effect of the ExpressionEvaluator
         //       in the far future, we might want to extract expression optimisation into a
         //       (mode) standalone component
@@ -51,7 +48,7 @@ namespace Zetbox.API.Tests.Serializables
             var objExpr = Expression.Constant(testString);
             MemberExpression expr = Expression.MakeMemberAccess(objExpr, typeof(string).GetMember("Length").First());
 
-            var result = SerializableExpression.ToExpression(SerializableExpression.FromExpression(expr, scope.Resolve<InterfaceType.Factory>()));
+            var result = SerializableExpression.ToExpression(null, SerializableExpression.FromExpression(expr, null, scope.Resolve<InterfaceType.Factory>(), null, null), iftFactory);
 
             AssertExpressions.AreEqual(result, Expression.Constant(testString.Length));
         }

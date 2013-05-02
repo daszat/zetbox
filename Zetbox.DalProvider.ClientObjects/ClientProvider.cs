@@ -72,6 +72,13 @@ namespace Zetbox.DalProvider.Client
                 .As<ImplementationType>()
                 .InstancePerDependency();
 
+            moduleBuilder
+                .Register<SerializingTypeMap>(c => new SerializingTypeMap()
+                {
+                    { typeof(ZetboxContextQuery<>), typeof(IQueryable<>) },
+                })
+                .SingleInstance();
+
             // the following function has to be thread-independent of any context to allow the proxy to be async
             moduleBuilder.Register<UnattachedObjectFactory>(c =>
                 {

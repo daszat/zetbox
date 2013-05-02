@@ -34,7 +34,7 @@ namespace Zetbox.Client.Mocks
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IDataObject> GetList(InterfaceType ifType, int maxListCount, bool withEagerLoading, IEnumerable<Expression> filter, IEnumerable<OrderBy> orderBy, out List<IStreamable> auxObjects)
+        public IEnumerable<IDataObject> GetList(IReadOnlyZetboxContext requestingCtx, InterfaceType ifType, int maxListCount, bool withEagerLoading, IEnumerable<Expression> filter, IEnumerable<OrderBy> orderBy, out List<IStreamable> auxObjects)
         {
             if (orderBy != null) throw new ArgumentException("OrderBy is not supported yet");
 
@@ -62,7 +62,7 @@ namespace Zetbox.Client.Mocks
             }
         }
 
-        public IEnumerable<IDataObject> GetObjects(InterfaceType ifType, Expression query, out List<IStreamable> auxObjects)
+        public IEnumerable<IDataObject> GetObjects(IReadOnlyZetboxContext requestingCtx, InterfaceType ifType, Expression query, out List<IStreamable> auxObjects)
         {
             throw new NotImplementedException();
         }

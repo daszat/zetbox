@@ -28,11 +28,11 @@
   <wsdl:message name="IZetboxService_GetList_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetListResponse" />
   </wsdl:message>
-  <wsdl:message name="IZetboxService_GetList_InvalidZetboxGeneratedVersionExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/Zetbox.API" name="detail" element="q2:InvalidZetboxGeneratedVersionException" />
-  </wsdl:message>
   <wsdl:message name="IZetboxService_GetList_ExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/System" name="detail" element="q3:Exception" />
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/System" name="detail" element="q2:Exception" />
+  </wsdl:message>
+  <wsdl:message name="IZetboxService_GetList_InvalidZetboxGeneratedVersionExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/Zetbox.API" name="detail" element="q3:InvalidZetboxGeneratedVersionException" />
   </wsdl:message>
   <wsdl:message name="IZetboxService_GetObjects_InputMessage">
     <wsdl:part name="parameters" element="tns:GetObjects" />
@@ -108,11 +108,11 @@
   <wsdl:message name="IZetboxService_InvokeServerMethod_OutputMessage">
     <wsdl:part name="parameters" element="tns:InvokeServerMethodResponse" />
   </wsdl:message>
-  <wsdl:message name="IZetboxService_InvokeServerMethod_InvalidZetboxGeneratedVersionExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q14="http://schemas.datacontract.org/2004/07/Zetbox.API" name="detail" element="q14:InvalidZetboxGeneratedVersionException" />
-  </wsdl:message>
   <wsdl:message name="IZetboxService_InvokeServerMethod_ExceptionFault_FaultMessage">
-    <wsdl:part xmlns:q15="http://schemas.datacontract.org/2004/07/System" name="detail" element="q15:Exception" />
+    <wsdl:part xmlns:q14="http://schemas.datacontract.org/2004/07/System" name="detail" element="q14:Exception" />
+  </wsdl:message>
+  <wsdl:message name="IZetboxService_InvokeServerMethod_InvalidZetboxGeneratedVersionExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q15="http://schemas.datacontract.org/2004/07/Zetbox.API" name="detail" element="q15:InvalidZetboxGeneratedVersionException" />
   </wsdl:message>
   <wsdl:portType msc:usingSession="false" name="IZetboxService">
     <wsdl:operation name="SetObjects">
@@ -124,8 +124,8 @@
     <wsdl:operation name="GetList">
       <wsdl:input wsaw:Action="http://dasz.at/Zetbox/IZetboxService/GetList" message="tns:IZetboxService_GetList_InputMessage" />
       <wsdl:output wsaw:Action="http://dasz.at/Zetbox/IZetboxService/GetListResponse" message="tns:IZetboxService_GetList_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://dasz.at/Zetbox/IZetboxService/GetListInvalidZetboxGeneratedVersionExceptionFault" name="InvalidZetboxGeneratedVersionExceptionFault" message="tns:IZetboxService_GetList_InvalidZetboxGeneratedVersionExceptionFault_FaultMessage" />
       <wsdl:fault wsaw:Action="http://dasz.at/Zetbox/IZetboxService/GetListExceptionFault" name="ExceptionFault" message="tns:IZetboxService_GetList_ExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://dasz.at/Zetbox/IZetboxService/GetListInvalidZetboxGeneratedVersionExceptionFault" name="InvalidZetboxGeneratedVersionExceptionFault" message="tns:IZetboxService_GetList_InvalidZetboxGeneratedVersionExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetObjects">
       <wsdl:input wsaw:Action="http://dasz.at/Zetbox/IZetboxService/GetObjects" message="tns:IZetboxService_GetObjects_InputMessage" />
@@ -160,8 +160,8 @@
     <wsdl:operation name="InvokeServerMethod">
       <wsdl:input wsaw:Action="http://dasz.at/Zetbox/IZetboxService/InvokeServerMethod" message="tns:IZetboxService_InvokeServerMethod_InputMessage" />
       <wsdl:output wsaw:Action="http://dasz.at/Zetbox/IZetboxService/InvokeServerMethodResponse" message="tns:IZetboxService_InvokeServerMethod_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://dasz.at/Zetbox/IZetboxService/InvokeServerMethodInvalidZetboxGeneratedVersionExceptionFault" name="InvalidZetboxGeneratedVersionExceptionFault" message="tns:IZetboxService_InvokeServerMethod_InvalidZetboxGeneratedVersionExceptionFault_FaultMessage" />
       <wsdl:fault wsaw:Action="http://dasz.at/Zetbox/IZetboxService/InvokeServerMethodExceptionFault" name="ExceptionFault" message="tns:IZetboxService_InvokeServerMethod_ExceptionFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://dasz.at/Zetbox/IZetboxService/InvokeServerMethodInvalidZetboxGeneratedVersionExceptionFault" name="InvalidZetboxGeneratedVersionExceptionFault" message="tns:IZetboxService_InvokeServerMethod_InvalidZetboxGeneratedVersionExceptionFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>

@@ -13,6 +13,8 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 
+// #define DEBUG_FORCE_SYNCHRON
+
 namespace Zetbox.API.Async
 {
     using System;
@@ -100,6 +102,10 @@ namespace Zetbox.API.Async
         /// </summary>
         protected ZbTask(SynchronizationContext syncContext, IEnumerable<ZbTask> innerTasks)
         {
+#if DEBUG_FORCE_SYNCHRON
+            syncContext = Synchron;
+#endif
+
             if (innerTasks == null)
                 innerTasks = Enumerable.Empty<ZbTask>();
 

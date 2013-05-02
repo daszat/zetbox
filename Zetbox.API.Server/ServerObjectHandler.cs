@@ -148,7 +148,35 @@ namespace Zetbox.API.Server
 
         public IEnumerable<IStreamable> GetObjects(Guid version, Expression query)
         {
-            throw new NotImplementedException();
+            if (query == null) { throw new ArgumentNullException("query"); }
+            ZetboxGeneratedVersionAttribute.Check(version);
+
+            // TODO: replace with GetQuery().Provider.CreateQuery(ctx, query) ~~~
+            var result = Expression.Lambda(query).Compile().DynamicInvoke();
+
+            // empty result or default
+            if (result == null) return Enumerable.Empty<IStreamable>();
+
+            // simple cast possible
+            var asStreamable = result as IEnumerable<IStreamable>;
+            if (asStreamable != null)
+                return asStreamable;
+
+            // requires re-streaming
+            var asEnumerable = result as IEnumerable;
+            if (asEnumerable != null)
+                return DoGetObjects(asEnumerable);
+
+            // single object
+            return new IStreamable[] { (IStreamable)result };
+        }
+
+        private IEnumerable<IStreamable> DoGetObjects(object result)
+        {
+            foreach (IStreamable obj in (IEnumerable)result)
+            {
+                yield return obj;
+            }
         }
 
         /// <summary>

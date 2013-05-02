@@ -49,11 +49,6 @@ namespace Zetbox.DalProvider.Client
         private int _maxListCount = API.Helper.MAXLISTCOUNT;
 
         /// <summary>
-        /// 
-        /// </summary>
-        private bool? _eagerLoadLists = null;
-
-        /// <summary>
         /// Filter Expression for GetList SearchType.
         /// </summary>
         private LinkedList<Expression> _filter = null;
@@ -78,7 +73,6 @@ namespace Zetbox.DalProvider.Client
         private void ResetState()
         {
             _maxListCount = API.Helper.MAXLISTCOUNT;
-            _eagerLoadLists = null;
             _filter = null;
             _orderBy = null;
         }
@@ -143,13 +137,15 @@ namespace Zetbox.DalProvider.Client
             }
 
             e = TransformExpression(e);
+            var originalExpression = e;
+
             Visit(e);
 
             var getListTask = new ZbTask<Tuple<List<IDataObject>, List<IStreamable>>>(() =>
                 {
-                    List<IStreamable> auxObjects;
-                    var list = _proxy.GetList(_type, _maxListCount, _eagerLoadLists ?? _maxListCount == 1, _filter, _orderBy, out auxObjects).ToList();
-                    return new Tuple<List<IDataObject>, List<IStreamable>>(list, auxObjects);
+                    List<IStreamable> auxObjectsObjects;
+                    var objects = _proxy.GetObjects(_context, _type, originalExpression, out auxObjectsObjects).ToList();
+                    return new Tuple<List<IDataObject>, List<IStreamable>>(objects, auxObjectsObjects);
                 });
 
             return new ZbTask<List<T>>(getListTask)
@@ -227,7 +223,7 @@ namespace Zetbox.DalProvider.Client
                 ZbTask<Tuple<List<IDataObject>, List<IStreamable>>> getListTask = new ZbTask<Tuple<List<IDataObject>, List<IStreamable>>>(() =>
                 {
                     List<IStreamable> auxObjects;
-                    List<IDataObject> serviceResult = _proxy.GetList(_type, _maxListCount, _eagerLoadLists ?? _maxListCount == 1, _filter, _orderBy, out auxObjects).ToList();
+                    List<IDataObject> serviceResult = _proxy.GetObjects(_context, _type, e, out auxObjects).ToList();
                     return new Tuple<List<IDataObject>, List<IStreamable>>(serviceResult, auxObjects);
                 })
                 .OnResult(t =>
@@ -376,10 +372,6 @@ namespace Zetbox.DalProvider.Client
                 }
                 else
                     base.Visit(m.Arguments[0]);
-            }
-            else if (m.IsMethodCallExpression("WithEagerLoading", typeof(ZetboxContextQueryableExtensions)))
-            {
-                _eagerLoadLists = true;
             }
             else if (m.IsMethodCallExpression("WithDeactivated", typeof(ZetboxContextQueryableExtensions)))
             {

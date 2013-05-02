@@ -285,7 +285,7 @@ namespace Zetbox.API.Tests
                                o.IntProperty,
                                o.BoolProperty
                            };
-                return Zetbox.API.SerializableExpression.FromExpression(list.Expression, iftFactory);
+                return Zetbox.API.SerializableExpression.FromExpression(list.Expression, null, iftFactory, null, null);
             }
         }
 

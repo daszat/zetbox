@@ -34,13 +34,13 @@ namespace Zetbox.API.Tests.Serializables
 		[Test]
 		public void FromExpression_null_fails()
 		{
-            Assert.That(() => SerializableExpression.FromExpression(null, iftFactory), Throws.InstanceOf<ArgumentNullException>());
+            Assert.That(() => SerializableExpression.FromExpression(null, null, iftFactory, null, null), Throws.InstanceOf<ArgumentNullException>());
 		}
 
 		[Test]
 		public void ToExpression_null_fails()
 		{
-            Assert.That(() => SerializableExpression.ToExpression(null), Throws.InstanceOf<ArgumentNullException>());
+            Assert.That(() => SerializableExpression.ToExpression(null, null, null), Throws.InstanceOf<ArgumentNullException>());
 		}
 	}
 }

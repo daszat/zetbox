@@ -118,17 +118,17 @@ namespace Zetbox.API
         {
             if (type == null) { throw new ArgumentNullException("type"); }
 
-            // Allow all non-interface types from this Assembly
-            if (!type.IsInterface && type.Assembly == GetAssembly())
+            // Allow all top-level non-interface types from this Assembly
+            if (!type.IsInterface && type.Assembly == GetAssembly() && type.DeclaringType == null)
                 return true;
 
             // Allow all generic types which have only implementation types as arguments
             if (type.IsGenericType)
                 return type.GetGenericArguments().All(t => IsImplementationType(t));
 
-            // Allow all value types from mscorlib
-            if (type.IsValueType && type.Assembly == typeof(int).Assembly)
-                return true;
+            //// Allow all value types from mscorlib
+            //if (type.IsValueType && type.Assembly == typeof(int).Assembly)
+            //    return true;
 
             //// Hack: Allow all types that are not generated at all
             //if (type.Assembly != GetAssembly()

@@ -53,14 +53,14 @@ namespace Zetbox.API.Client
             _implementor = implementor;
         }
 
-        public IEnumerable<IDataObject> GetList(InterfaceType ifType, int maxListCount, bool eagerLoadLists, IEnumerable<Expression> filter, IEnumerable<OrderBy> orderBy, out List<IStreamable> auxObjects)
+        public IEnumerable<IDataObject> GetList(IReadOnlyZetboxContext requestingCtx, InterfaceType ifType, int maxListCount, bool eagerLoadLists, IEnumerable<Expression> filter, IEnumerable<OrderBy> orderBy, out List<IStreamable> auxObjects)
         {
             using (Logging.Facade.InfoTraceMethodCallFormat("GetList", "Type=[{0}]", ifType.ToString()))
             {
                 CheckUiThread();
                 try
                 {
-                    return _implementor.GetList(ifType, maxListCount, eagerLoadLists, filter, orderBy, out auxObjects);
+                    return _implementor.GetList(requestingCtx, ifType, maxListCount, eagerLoadLists, filter, orderBy, out auxObjects);
                 }
                 catch (Exception ex)
                 {
@@ -70,9 +70,21 @@ namespace Zetbox.API.Client
             }
         }
 
-        public IEnumerable<IDataObject> GetObjects(InterfaceType ifType, Expression query, out List<IStreamable> auxObjects)
+        public IEnumerable<IDataObject> GetObjects(IReadOnlyZetboxContext requestingCtx, InterfaceType ifType, Expression query, out List<IStreamable> auxObjects)
         {
-            throw new NotImplementedException();
+            using (Logging.Facade.InfoTraceMethodCallFormat("GetObjects", "Type=[{0}]", ifType.ToString()))
+            {
+                CheckUiThread();
+                try
+                {
+                    return _implementor.GetObjects(requestingCtx, ifType, query, out auxObjects);
+                }
+                catch (Exception ex)
+                {
+                    Logging.Facade.Error("GetObjects", ex);
+                    throw;
+                }
+            }
         }
 
         public IEnumerable<IDataObject> GetListOf(InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects)

@@ -11,10 +11,10 @@
     <MSBuild Projects="Zetbox.Complete.sln" Targets="Rebuild" Properties="Configuration=Minimal" />
 
 	<!-- reset -->
-    <Exec Command="!ResetDatabase Configs\$(zenv)\Zetbox.Cli.xml" />
+    <Exec Command="zbResetDatabase Configs\$(zenv)\Zetbox.Cli.xml" />
 
 	<!-- generate -->
-    <Exec Command="!Generate Configs\$(zenv)\Zetbox.Cli.xml" />
+    <Exec Command="zbGenerate Configs\$(zenv)\Zetbox.Cli.xml" />
 
     <Message Importance="high" Text="Backup and remove old generated code" />
     <ItemGroup>

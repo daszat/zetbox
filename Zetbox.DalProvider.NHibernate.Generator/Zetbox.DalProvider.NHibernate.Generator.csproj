@@ -293,11 +293,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Templates\TypeChecker.Designer.cs">
-      <DependentUpon>TypeChecker.cst</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zetbox.API.Server\Zetbox.API.Server.csproj">
@@ -418,10 +413,6 @@
     <None Include="Templates\Serialization\ObjectReferencePropertySerialization.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ObjectReferencePropertySerialization.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Templates\TypeChecker.cst">
-      <Generator>Arebis Template Processor</Generator>
-      <LastGenOutput>TypeChecker.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

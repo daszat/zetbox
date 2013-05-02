@@ -134,12 +134,12 @@ namespace Zetbox.Server
                     {
                         using (IZetboxContext ctx = _ctxFactory())
                         {
-                            var filterExpressions = filter != null ? filter.Select(f => SerializableExpression.ToExpression(f)).ToList() : null;
+                            var filterExpressions = filter != null ? filter.Select(f => SerializableExpression.ToExpression(ctx, f, _iftFactory)).ToList() : null;
                             IEnumerable<IStreamable> lst = _sohFactory
                                 .GetServerObjectHandler(ifType)
                                 .GetList(version, ctx, maxListCount,
                                     filterExpressions,
-                                    orderBy != null ? orderBy.Select(o => new OrderBy(o.Type, SerializableExpression.ToExpression(o.Expression))).ToList() : null);
+                                    orderBy != null ? orderBy.Select(o => new OrderBy(o.Type, SerializableExpression.ToExpression(ctx, o.Expression, _iftFactory))).ToList() : null);
                             resultCount = lst.Count();
                             return SendObjects(lst, eagerLoadLists).ToArray();
                         }
@@ -166,7 +166,43 @@ namespace Zetbox.Server
         /// <returns>the found objects</returns>
         public byte[] GetObjects(Guid version, SerializableExpression query)
         {
-            throw new NotImplementedException();
+            if (query == null) { throw new ArgumentNullException("query"); }
+            using (Logging.Facade.DebugTraceMethodCallFormat("GetObjects", "query={0}", query))
+            {
+                DebugLogIdentity();
+                try
+                {
+                    ZetboxGeneratedVersionAttribute.Check(version);
+
+                    var type = query.SerializableType.GetSystemType();
+                    var ifType = _iftFactory(type.IsGenericType && typeof(IQueryable).IsAssignableFrom(type)
+                        ? type.GetGenericArguments()[0]
+                        : type);
+                    int resultCount = 0;
+                    var ticks = _perfCounter.IncrementGetList(ifType);
+                    try
+                    {
+                        using (IZetboxContext ctx = _ctxFactory())
+                        {
+                            IEnumerable<IStreamable> lst = _sohFactory
+                                .GetServerObjectHandler(ifType)
+                                .GetObjects(version, SerializableExpression.ToExpression(ctx, query, _iftFactory));
+                            resultCount = lst.Count();
+                            return SendObjects(lst, true).ToArray();
+                        }
+                    }
+                    finally
+                    {
+                        _perfCounter.DecrementGetList(ifType, resultCount, ticks);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Helper.ThrowFaultException(ex);
+                    // Never called, Handle errors throws an Exception
+                    return null;
+                }
+            }
         }
 
         /// <summary>

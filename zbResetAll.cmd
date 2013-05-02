@@ -11,7 +11,7 @@ IF NOT EXIST Configs\Local XCOPY /S/E Configs\Examples Configs\Local\
 IF ERRORLEVEL 1 GOTO FAIL
 
 rem regenerate modules to prove roundtrippability
-call "!Publish.cmd"
+call "zbPublishAll.cmd"
 IF ERRORLEVEL 1 GOTO FAIL
 
 %windir%\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe /v:m Zetbox.Complete.sln
@@ -25,7 +25,7 @@ GOTO EOF
 echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX FAIL XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-echo                               Aborting FullResetDev
+echo                               Aborting zbResetAll
 pause
 rem return error without closing parent shell
 echo A | choice /c:A /n

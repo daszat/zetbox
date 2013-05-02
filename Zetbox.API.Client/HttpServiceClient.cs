@@ -34,6 +34,7 @@ namespace Zetbox.API.Client
 
         private readonly Uri SetObjectsUri;
         private readonly Uri GetListUri;
+        private readonly Uri GetObjectsUri;
         private readonly Uri GetListOfUri;
         private readonly Uri FetchRelationUri;
         private readonly Uri GetBlobStreamUri;
@@ -51,6 +52,7 @@ namespace Zetbox.API.Client
 
             SetObjectsUri = new Uri(ConfigurationManager.AppSettings["serviceUri"] + "/SetObjects");
             GetListUri = new Uri(ConfigurationManager.AppSettings["serviceUri"] + "/GetList");
+            GetObjectsUri = new Uri(ConfigurationManager.AppSettings["serviceUri"] + "/GetObjects");
             GetListOfUri = new Uri(ConfigurationManager.AppSettings["serviceUri"] + "/GetListOf");
             FetchRelationUri = new Uri(ConfigurationManager.AppSettings["serviceUri"] + "/FetchRelation");
             GetBlobStreamUri = new Uri(ConfigurationManager.AppSettings["serviceUri"] + "/GetBlobStream");
@@ -171,7 +173,13 @@ namespace Zetbox.API.Client
 
         public byte[] GetObjects(Guid version, SerializableExpression query)
         {
-            throw new NotImplementedException();
+            return MakeRequest(GetObjectsUri,
+              reqStream =>
+              {
+                  reqStream.Write(version);
+                  reqStream.Write(query);
+                  reqStream.WriteRaw(Encoding.ASCII.GetBytes("\n"));// required for basic.authenticated POST to apache
+              });
         }
 
         public byte[] GetListOf(Guid version, SerializableType type, int ID, string property)

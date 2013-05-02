@@ -40,8 +40,8 @@ namespace Zetbox.API.Client
     public interface IProxy
         : IDisposable
     {
-        IEnumerable<IDataObject> GetList(InterfaceType ifType, int maxListCount, bool eagerLoadLists, IEnumerable<Expression> filter, IEnumerable<OrderBy> orderBy, out List<IStreamable> auxObjects);
-        IEnumerable<IDataObject> GetObjects(InterfaceType ifType, Expression query, out List<IStreamable> auxObjects);
+        IEnumerable<IDataObject> GetList(IReadOnlyZetboxContext requestingCtx, InterfaceType ifType, int maxListCount, bool eagerLoadLists, IEnumerable<Expression> filter, IEnumerable<OrderBy> orderBy, out List<IStreamable> auxObjects);
+        IEnumerable<IDataObject> GetObjects(IReadOnlyZetboxContext requestingCtx, InterfaceType ifType, Expression query, out List<IStreamable> auxObjects);
         IEnumerable<IDataObject> GetListOf(InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects);
 
         IEnumerable<IPersistenceObject> SetObjects(IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests);
@@ -64,24 +64,28 @@ namespace Zetbox.API.Client
         private const int MAX_RETRY_COUNT = 2;
 
         private readonly InterfaceType.Factory _iftFactory;
+        private readonly IImplementationTypeChecker _implTypeChecker;
         private readonly UnattachedObjectFactory _unattachedObjectFactory;
         private readonly ZetboxService.IZetboxService _service;
         private readonly IPerfCounter _perfCounter;
         private readonly ZetboxStreamReader.Factory _readerFactory;
         private readonly ZetboxStreamWriter.Factory _writerFactory;
+        private readonly IEnumerable<SerializingTypeMap> _typeMaps;
 
-        public ProxyImplementation(InterfaceType.Factory iftFactory, UnattachedObjectFactory unattachedObjectFactory, ZetboxService.IZetboxService service, IPerfCounter perfCounter, ZetboxStreamReader.Factory readerFactory, ZetboxStreamWriter.Factory writerFactory)
+        public ProxyImplementation(InterfaceType.Factory iftFactory, IImplementationTypeChecker implTypeChecker, UnattachedObjectFactory unattachedObjectFactory, ZetboxService.IZetboxService service, IPerfCounter perfCounter, ZetboxStreamReader.Factory readerFactory, ZetboxStreamWriter.Factory writerFactory, IEnumerable<SerializingTypeMap> typeMaps)
         {
             if (perfCounter == null) throw new ArgumentNullException("perfCounter");
             if (readerFactory == null) throw new ArgumentNullException("readerFactory");
             if (writerFactory == null) throw new ArgumentNullException("writerFactory");
 
             _iftFactory = iftFactory;
+            _implTypeChecker = implTypeChecker;
             _unattachedObjectFactory = unattachedObjectFactory;
             _service = service;
             _perfCounter = perfCounter;
             _readerFactory = readerFactory;
             _writerFactory = writerFactory;
+            _typeMaps = typeMaps;
         }
 
         private void MakeRequest(Action request)
@@ -137,7 +141,7 @@ namespace Zetbox.API.Client
             if (fault != null) throw new IOException("Error when accessing server", fault);
         }
 
-        public IEnumerable<IDataObject> GetList(InterfaceType ifType, int maxListCount, bool eagerLoadLists, IEnumerable<Expression> filter, IEnumerable<OrderBy> orderBy, out List<IStreamable> auxObjects)
+        public IEnumerable<IDataObject> GetList(IReadOnlyZetboxContext requestingCtx, InterfaceType ifType, int maxListCount, bool eagerLoadLists, IEnumerable<Expression> filter, IEnumerable<OrderBy> orderBy, out List<IStreamable> auxObjects)
         {
             int resultCount = 0;
             List<IStreamable> tmpAuxObjects = null;
@@ -145,8 +149,8 @@ namespace Zetbox.API.Client
             var ticks = _perfCounter.IncrementGetList(ifType);
             try
             {
-                var _filter = filter != null ? filter.Select(f => SerializableExpression.FromExpression(f, _iftFactory)).ToArray() : null;
-                var _orderBy = orderBy != null ? orderBy.Select(o => new OrderByContract() { Type = o.Type, Expression = SerializableExpression.FromExpression(o.Expression, _iftFactory) }).ToArray() : null;
+                var _filter = filter != null ? filter.Select(f => SerializableExpression.FromExpression(f, requestingCtx, _iftFactory, _implTypeChecker, _typeMaps)).ToArray() : null;
+                var _orderBy = orderBy != null ? orderBy.Select(o => new OrderByContract() { Type = o.Type, Expression = SerializableExpression.FromExpression(o.Expression, requestingCtx, _iftFactory, _implTypeChecker, _typeMaps) }).ToArray() : null;
                 byte[] bytes = null;
 
                 MakeRequest(() =>
@@ -177,9 +181,37 @@ namespace Zetbox.API.Client
             }
         }
 
-        public IEnumerable<IDataObject> GetObjects(InterfaceType ifType, Expression query, out List<IStreamable> auxObjects)
+        public IEnumerable<IDataObject> GetObjects(IReadOnlyZetboxContext requestingCtx, InterfaceType ifType, Expression query, out List<IStreamable> auxObjects)
         {
-            throw new NotImplementedException();
+            int resultCount = 0;
+            List<IStreamable> tmpAuxObjects = null;
+            var ticks = _perfCounter.IncrementGetList(ifType);
+            try
+            {
+                byte[] bytes = null;
+
+                MakeRequest(() =>
+                {
+                    bytes = _service.GetObjects(
+                        ZetboxGeneratedVersionAttribute.Current,
+                        SerializableExpression.FromExpression(query, requestingCtx, _iftFactory, _implTypeChecker, _typeMaps));
+                });
+
+                Logging.Facade.DebugFormat("GetObjects retrieved: {0:n0} bytes", bytes.Length);
+
+                IEnumerable<IDataObject> result = null;
+                using (var sr = _readerFactory(new BinaryReader(new MemoryStream(bytes))))
+                {
+                    result = ReceiveObjects(sr, out tmpAuxObjects).Cast<IDataObject>();
+                }
+                resultCount = result.Count();
+                auxObjects = tmpAuxObjects;
+                return result;
+            }
+            finally
+            {
+                _perfCounter.DecrementGetList(ifType, resultCount, ticks);
+            }
         }
 
         public IEnumerable<IDataObject> GetListOf(InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects)
