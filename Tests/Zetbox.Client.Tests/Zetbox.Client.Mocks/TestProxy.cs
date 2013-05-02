@@ -16,16 +16,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
-
 using Zetbox.API;
 using Zetbox.API.Client;
-using System.Reflection;
 using Zetbox.App.Test;
 
 namespace Zetbox.Client.Mocks
 {
-    public class TestProxy 
+    public class TestProxy
         : IProxy
     {
         private int newID = 10;
@@ -35,7 +34,7 @@ namespace Zetbox.Client.Mocks
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IDataObject> GetList( InterfaceType ifType, int maxListCount, bool withEagerLoading, IEnumerable<Expression> filter, IEnumerable<OrderBy> orderBy, out List<IStreamable> auxObjects)
+        public IEnumerable<IDataObject> GetList(InterfaceType ifType, int maxListCount, bool withEagerLoading, IEnumerable<Expression> filter, IEnumerable<OrderBy> orderBy, out List<IStreamable> auxObjects)
         {
             if (orderBy != null) throw new ArgumentException("OrderBy is not supported yet");
 

@@ -12,28 +12,29 @@
 //
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.ServiceModel;
-using System.Text;
-using System.Xml;
-using System.Xml.Serialization;
-using System.Diagnostics;
 
 namespace Zetbox.API
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using System.Runtime.Serialization;
+    using System.Runtime.Serialization.Formatters.Binary;
+    using System.ServiceModel;
+    using System.Text;
+    using System.Xml;
+    using System.Xml.Serialization;
+
     /// <summary>
     /// Kist Stream Service Contract
     /// TODO: Add FaultContracts
     /// TODO: Remove GetListOf
     /// </summary>
-    [ServiceContract(SessionMode=SessionMode.NotAllowed, Namespace="http://dasz.at/Zetbox/")]
+    [ServiceContract(SessionMode = SessionMode.NotAllowed, Namespace = "http://dasz.at/Zetbox/")]
     public interface IZetboxService
     {
         /// <summary>
@@ -169,7 +170,7 @@ namespace Zetbox.API
         public int[] IDs { get; set; }
     }
 
-    [DataContract(Namespace = "http://dasz.at/Zetbox/", Name="OrderBy")]
+    [DataContract(Namespace = "http://dasz.at/Zetbox/", Name = "OrderBy")]
     [Serializable]
     [KnownType(typeof(SerializableType))]
     [KnownType(typeof(SerializableBinaryExpression))]
@@ -260,7 +261,7 @@ namespace Zetbox.API
         {
             this.Details = ex.Details;
         }
-        
+
         public override ZetboxContextErrorException ToException()
         {
             return new FKViolationException(Message, Details);
@@ -283,7 +284,7 @@ namespace Zetbox.API
         {
             this.Details = ex.Details;
         }
-        
+
         public override ZetboxContextErrorException ToException()
         {
             return new UniqueConstraintViolationException(Message, Details);

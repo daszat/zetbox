@@ -77,7 +77,7 @@ namespace Zetbox.API.Client
                 CheckUiThread();
                 try
                 {
-                    return _implementor.GetListOf( ifType, ID, property, out  auxObjects);
+                    return _implementor.GetListOf(ifType, ID, property, out  auxObjects);
                 }
                 catch (Exception ex)
                 {
@@ -94,7 +94,7 @@ namespace Zetbox.API.Client
                 CheckUiThread();
                 try
                 {
-                    return _implementor.SetObjects( objects, notificationRequests);
+                    return _implementor.SetObjects(objects, notificationRequests);
                 }
                 catch (Exception ex)
                 {
@@ -111,7 +111,7 @@ namespace Zetbox.API.Client
                 CheckUiThread();
                 try
                 {
-                    return _implementor.InvokeServerMethod( ifType, ID, method, retValType, parameterTypes, parameter, objects, notificationRequests, out changedObjects, out auxObjects);
+                    return _implementor.InvokeServerMethod(ifType, ID, method, retValType, parameterTypes, parameter, objects, notificationRequests, out changedObjects, out auxObjects);
                 }
                 catch (Exception ex)
                 {

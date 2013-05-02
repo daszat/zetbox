@@ -134,11 +134,11 @@ namespace Zetbox.Server
                     {
                         using (IZetboxContext ctx = _ctxFactory())
                         {
-                            var filterExpresstions = filter != null ? filter.Select(f => SerializableExpression.ToExpression(f)).ToList() : null;
+                            var filterExpressions = filter != null ? filter.Select(f => SerializableExpression.ToExpression(f)).ToList() : null;
                             IEnumerable<IStreamable> lst = _sohFactory
                                 .GetServerObjectHandler(ifType)
                                 .GetList(version, ctx, maxListCount,
-                                    filterExpresstions,
+                                    filterExpressions,
                                     orderBy != null ? orderBy.Select(o => new OrderBy(o.Type, SerializableExpression.ToExpression(o.Expression))).ToList() : null);
                             resultCount = lst.Count();
                             return SendObjects(lst, eagerLoadLists).ToArray();
