@@ -111,6 +111,7 @@
     <Compile Include="InvocationExecutor.cs" />
     <Compile Include="IMetaDataResolver.cs" />
     <Compile Include="IRelationListSync.cs" />
+    <Compile Include="LinqExtensions.cs" />
     <Compile Include="Reporting\ReportingErrorReporter.cs" />
     <Compile Include="ZetboxContextExtensions.cs" />
     <Compile Include="MethodExtensions.cs" />
