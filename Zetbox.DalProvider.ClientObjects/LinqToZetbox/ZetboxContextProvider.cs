@@ -32,7 +32,7 @@ namespace Zetbox.DalProvider.Client
     /// <summary>
     /// Provider for Zetbox Linq Provider. See http://blogs.msdn.com/mattwar/archive/2007/07/30/linq-building-an-iqueryable-provider-part-i.aspx for details.
     /// </summary>
-    public class ZetboxContextProvider : ExpressionTreeVisitor, IZetboxQueryProvider, IAsyncQueryProvider
+    internal class ZetboxContextProvider : IZetboxQueryProvider, IAsyncQueryProvider
     {
         /// <summary>
         /// The result type of this provider
@@ -56,8 +56,6 @@ namespace Zetbox.DalProvider.Client
             this.perfCounter = perfCounter;
         }
 
-        #region CallService
-
         private Expression TransformExpression(Expression e)
         {
             e = QueryTranslator.Translate(e);
@@ -65,7 +63,6 @@ namespace Zetbox.DalProvider.Client
             e = ConstantEvaluator.PartialEval(e);
             return e;
         }
-        #endregion
 
         #region Operations GetListOf/GetList/GetObject/InvokeServerMethod
 
@@ -115,7 +112,7 @@ namespace Zetbox.DalProvider.Client
 
             query = TransformExpression(query);
 
-            Visit(query);
+            ValidateServerExpression.CheckValid(query);
 
             var getListTask = new ZbTask<Tuple<List<IDataObject>, List<IStreamable>>>(() =>
                 {
@@ -170,7 +167,7 @@ namespace Zetbox.DalProvider.Client
             // Visit
             query = TransformExpression(query);
 
-            Visit(query);
+            ValidateServerExpression.CheckValid(query);
 
             // Try to find a local object first
             var result = ExecuteFromLocalObjects<T>(query);
@@ -319,35 +316,6 @@ namespace Zetbox.DalProvider.Client
             return this.ExecuteAsync(expression).Result;
         }
 
-        #endregion
-
-        #region Visits
-        protected override void VisitMethodCall(MethodCallExpression m)
-        {
-            if (m.IsMethodCallExpression("Select") || m.IsMethodCallExpression("GroupBy"))
-            {
-                throw new NotSupportedException("Projections and groupings cannot be transported to the server. Please use ToList().");
-            }
-            else if (m.IsMethodCallExpression(typeof(ZetboxContextQueryableExtensions)))
-            {
-                // Lets serialize, server has to ensure security
-                m.Arguments.ForEach(a => Visit(a));
-            }
-            else if (m.IsMethodCallExpression(typeof(IQueryable)) || m.IsMethodCallExpression(typeof(Queryable)) || m.IsMethodCallExpression(typeof(IEnumerable)) || m.IsMethodCallExpression(typeof(string)))
-            {
-                // Lets serialize, server has to ensure security
-                m.Arguments.ForEach(a => Visit(a));
-            }
-            else
-            {
-                // Fail fast, if we know that the expression is invalid
-                throw new NotSupportedException(string.Format("Method Call '{0}' is not allowed", m.Method.Name));
-            }
-
-            // Do not call base - only first expression is important
-        }
-        #endregion
-
         public ZbTask<object> ExecuteAsync(Expression expression)
         {
             var task = GetObjectCallAsync<IDataObject>(expression);
@@ -357,6 +325,40 @@ namespace Zetbox.DalProvider.Client
         public ZbTask<TResult> ExecuteAsync<TResult>(Expression expression)
         {
             return GetObjectCallAsync<TResult>(expression);
+        }
+        #endregion
+
+        private class ValidateServerExpression : ExpressionTreeVisitor
+        {
+            public static void CheckValid(Expression e)
+            {
+                new ValidateServerExpression().Visit(e);
+            }
+
+            protected override void VisitMethodCall(MethodCallExpression m)
+            {
+                if (m.IsMethodCallExpression("Select") || m.IsMethodCallExpression("GroupBy"))
+                {
+                    throw new NotSupportedException("Projections and groupings cannot be transported to the server. Please use ToList().");
+                }
+                else if (m.IsMethodCallExpression(typeof(ZetboxContextQueryableExtensions)))
+                {
+                    // Lets serialize, server has to ensure security
+                    m.Arguments.ForEach(a => Visit(a));
+                }
+                else if (m.IsMethodCallExpression(typeof(IQueryable)) || m.IsMethodCallExpression(typeof(Queryable)) || m.IsMethodCallExpression(typeof(IEnumerable)) || m.IsMethodCallExpression(typeof(string)))
+                {
+                    // Lets serialize, server has to ensure security
+                    m.Arguments.ForEach(a => Visit(a));
+                }
+                else
+                {
+                    // Fail fast, if we know that the expression is invalid
+                    throw new NotSupportedException(string.Format("Method Call '{0}' is not allowed", m.Method.Name));
+                }
+
+                // Do not call base - only first expression is important
+            }
         }
     }
 }
