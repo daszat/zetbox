@@ -258,12 +258,44 @@ namespace Zetbox.IntegrationTests
         }
 
         [Test]
+        [ExpectedException(typeof(NotSupportedException))]
         public void GetObjectsWithProjection()
         {
             using (IZetboxContext ctx = GetContext())
             {
-                var test = from z in ctx.GetQuery<ObjectClass>()
-                           select new { A = z.Name, B = z.TableName };
+                var test = ctx.GetQuery<ObjectClass>()
+                    .Select(z => new { A = z.Name, B = z.TableName });
+                foreach (var t in test)
+                {
+                    Log.DebugFormat("GetObjectsWithProjection: {0}", t.A);
+                }
+            }
+        }
+
+        [Test]
+        [ExpectedException(typeof(NotSupportedException))]
+        public void GetObjectsWithGroupBy()
+        {
+            using (IZetboxContext ctx = GetContext())
+            {
+                var test = ctx.GetQuery<ObjectClass>()
+                    .GroupBy(z => z.Name)
+                    .ToList();
+                foreach (var t in test)
+                {
+                    Log.DebugFormat("GetObjectsWithGroupBy: {0}", t.Key);
+                }
+            }
+        }
+
+        [Test]
+        public void GetObjectsWithProjectedList()
+        {
+            using (IZetboxContext ctx = GetContext())
+            {
+                var test = ctx.GetQuery<ObjectClass>()
+                    .ToList()  // required as projection cannot be transferred to server
+                    .Select(z => new { A = z.Name, B = z.TableName });
                 foreach (var t in test)
                 {
                     Log.DebugFormat("GetObjectsWithProjection: {0}", t.A);

@@ -19,8 +19,8 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
-using Zetbox.API.Async;
 using System.Xml.Serialization;
+using Zetbox.API.Async;
 
 namespace Zetbox.API
 {
@@ -533,6 +533,9 @@ namespace Zetbox.API
         }
     }
 
+    /// <summary>
+    /// Methods that are allowed over the facade.
+    /// </summary>
     public static class ZetboxContextQueryableExtensions
     {
         public static IQueryable<T> WithEagerLoading<T>(this IQueryable<T> query)
@@ -540,13 +543,21 @@ namespace Zetbox.API
             if (query == null) throw new ArgumentNullException("query");
             if (query.Provider is IZetboxQueryProvider)
             {
+                var mi = typeof(ZetboxContextQueryableExtensions).FindGenericMethod("WithEagerLoading", new Type[] { typeof(T) }, new Type[] { typeof(IQueryable<T>) });
+
                 return query.Provider.CreateQuery<T>(
-                    System.Linq.Expressions.Expression.Call(typeof(ZetboxContextQueryableExtensions), "WithEagerLoading", new Type[] { typeof(T) }, query.Expression));
+                    System.Linq.Expressions.Expression.Call(mi, query.Expression));
             }
             else
             {
                 return query;
             }
+        }
+
+        public static IEnumerable<T> WithEagerLoading<T>(this IEnumerable<T> query)
+        {
+            if (query == null) throw new ArgumentNullException("query");
+            return query;
         }
 
         public static IQueryable WithEagerLoading(this IQueryable query)
@@ -554,13 +565,21 @@ namespace Zetbox.API
             if (query == null) throw new ArgumentNullException("query");
             if (query.Provider is IZetboxQueryProvider)
             {
+                var mi = typeof(ZetboxContextQueryableExtensions).FindGenericMethod("WithEagerLoading", new Type[] { query.ElementType }, new Type[] { typeof(IQueryable<>).MakeGenericType(query.ElementType) });
+
                 return query.Provider.CreateQuery(
-                    System.Linq.Expressions.Expression.Call(typeof(ZetboxContextQueryableExtensions), "WithEagerLoading", new Type[] { query.ElementType }, query.Expression));
+                    System.Linq.Expressions.Expression.Call(mi, query.Expression));
             }
             else
             {
                 return query;
             }
+        }
+
+        public static System.Collections.IEnumerable WithEagerLoading(this System.Collections.IEnumerable query)
+        {
+            if (query == null) throw new ArgumentNullException("query");
+            return query;
         }
 
         public static IQueryable<T> WithDeactivated<T>(this IQueryable<T> query)
@@ -568,8 +587,10 @@ namespace Zetbox.API
             if (query == null) throw new ArgumentNullException("query");
             if (query.Provider is IZetboxQueryProvider)
             {
+                var mi = typeof(ZetboxContextQueryableExtensions).FindGenericMethod("WithDeactivated", new Type[] { typeof(T) }, new Type[] { typeof(IQueryable<T>) });
+
                 return query.Provider.CreateQuery<T>(
-                    System.Linq.Expressions.Expression.Call(typeof(ZetboxContextQueryableExtensions), "WithDeactivated", new Type[] { typeof(T) }, query.Expression));
+                    System.Linq.Expressions.Expression.Call(mi, query.Expression));
             }
             else
             {
@@ -577,18 +598,33 @@ namespace Zetbox.API
             }
         }
 
+        public static IEnumerable<T> WithDeactivated<T>(this IEnumerable<T> query)
+        {
+            if (query == null) throw new ArgumentNullException("query");
+            return query;
+        }
+
         public static IQueryable WithDeactivated(this IQueryable query)
         {
             if (query == null) throw new ArgumentNullException("query");
             if (query.Provider is IZetboxQueryProvider)
             {
+                var mi = typeof(ZetboxContextQueryableExtensions).FindGenericMethod("WithDeactivated", new Type[] { query.ElementType }, new Type[] { typeof(IQueryable<>).MakeGenericType(query.ElementType) });
+
                 return query.Provider.CreateQuery(
-                    System.Linq.Expressions.Expression.Call(typeof(ZetboxContextQueryableExtensions), "WithDeactivated", new Type[] { query.ElementType }, query.Expression));
+                    System.Linq.Expressions.Expression.Call(mi, query.Expression));
             }
             else
             {
                 return query;
             }
+        }
+
+
+        public static System.Collections.IEnumerable WithDeactivated(this System.Collections.IEnumerable query)
+        {
+            if (query == null) throw new ArgumentNullException("query");
+            return query;
         }
     }
 

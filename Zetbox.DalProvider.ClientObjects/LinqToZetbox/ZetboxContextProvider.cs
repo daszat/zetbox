@@ -43,15 +43,6 @@ namespace Zetbox.DalProvider.Client
         /// </summary>
         private ZetboxContextImpl _context;
 
-        /// <summary>
-        /// Filter Expression for GetList SearchType.
-        /// </summary>
-        private LinkedList<Expression> _filter = null;
-        /// <summary>
-        /// OrderBy Expression for GetList SearchType.
-        /// </summary>
-        private LinkedList<OrderBy> _orderBy = null;
-
         private IProxy _proxy;
         private readonly IPerfCounter perfCounter;
 
@@ -63,12 +54,6 @@ namespace Zetbox.DalProvider.Client
             _type = ifType;
             _proxy = proxy;
             this.perfCounter = perfCounter;
-        }
-
-        private void ResetState()
-        {
-            _filter = null;
-            _orderBy = null;
         }
 
         #region CallService
@@ -116,29 +101,26 @@ namespace Zetbox.DalProvider.Client
         /// <summary>
         /// Performs a GetListCallAsync
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="query"></param>
         /// <returns></returns>
-        internal ZbTask<List<T>> GetListCallAsync<T>(Expression e)
+        internal ZbTask<List<T>> GetListCallAsync<T>(Expression query)
         {
             int objectCount = 0;
             var ticks = perfCounter.IncrementQuery(_type);
 
-            ResetState();
-
             if (Logging.Linq.IsInfoEnabled)
             {
-                Logging.Linq.Info(e.ToString());
+                Logging.Linq.Info(query.ToString());
             }
 
-            e = TransformExpression(e);
-            var originalExpression = e;
+            query = TransformExpression(query);
 
-            Visit(e);
+            Visit(query);
 
             var getListTask = new ZbTask<Tuple<List<IDataObject>, List<IStreamable>>>(() =>
                 {
                     List<IStreamable> auxObjectsObjects;
-                    var objects = _proxy.GetObjects(_context, _type, originalExpression, out auxObjectsObjects).ToList();
+                    var objects = _proxy.GetObjects(_context, _type, query, out auxObjectsObjects).ToList();
                     return new Tuple<List<IDataObject>, List<IStreamable>>(objects, auxObjectsObjects);
                 });
 
@@ -157,28 +139,11 @@ namespace Zetbox.DalProvider.Client
                         objectCount = serviceResult.Count;
 
                         // in the face of local changes, we have to re-query against local objects, to provide a consistent view of the objects
-                        var result = _context.IsModified ? QueryFromLocalObjectsHack(_type).Cast<IDataObject>().ToList() : serviceResult;
+                        var result = _context.IsModified ? QueryFromLocalObjectsHack(_type, query).Cast<IDataObject>().ToList() : serviceResult;
 
                         _context.PlaybackNotifications();
 
-                        // Projection
-                        if (e.IsMethodCallExpression("Select"))
-                        {
-                            // Get Selector and SourceType
-                            // Sourcetype should be of type IDataObject
-                            MethodCallExpression me = e as MethodCallExpression;
-                            LambdaExpression selector = (LambdaExpression)me.Arguments[1].StripQuotes();
-                            Type sourceType = selector.Parameters[0].Type;
-
-                            // AddSelector needs a list of the correct type, so we add a cast before selecting
-                            // TODO: revisit with covariant structures
-                            IQueryable selectResult = result.AsQueryable().AddCast(sourceType).AddSelector(selector, sourceType, selector.Body.Type); // typeof(T).FindElementTypes().First());
-                            t.Result = selectResult.Cast<T>().ToList();
-                        }
-                        else
-                        {
-                            t.Result = result.Cast<T>().ToList();
-                        }
+                        t.Result = result.Cast<T>().ToList();
                     }
                     finally
                     {
@@ -191,33 +156,33 @@ namespace Zetbox.DalProvider.Client
         /// <summary>
         /// Performs a GetListCallAsync but returns a single Object
         /// </summary>
-        /// <param name="e"></param>
+        /// <param name="query"></param>
         /// <returns>A Object an Expeption, if the Object was not found.</returns>
-        private ZbTask<T> GetObjectCallAsync<T>(Expression e)
+        private ZbTask<T> GetObjectCallAsync<T>(Expression query)
         {
             var ticks = perfCounter.IncrementQuery(_type);
-            ResetState();
 
             if (Logging.Linq.IsInfoEnabled)
             {
-                Logging.Linq.Info(e.ToString());
+                Logging.Linq.Info(query.ToString());
             }
 
             // Visit
-            e = TransformExpression(e);
-            Visit(e);
+            query = TransformExpression(query);
+
+            Visit(query);
 
             // Try to find a local object first
-            var result = QueryFromLocalObjects<T>();
+            var result = ExecuteFromLocalObjects<T>(query);
 
             ZbTask<T> task;
             // If nothing found local -> goto Server
-            if (result.Count == 0)
+            if (result == null)
             {
-                ZbTask<Tuple<List<IDataObject>, List<IStreamable>>> getListTask = new ZbTask<Tuple<List<IDataObject>, List<IStreamable>>>(() =>
+                ZbTask<Tuple<List<IDataObject>, List<IStreamable>>> getObjectTask = new ZbTask<Tuple<List<IDataObject>, List<IStreamable>>>(() =>
                 {
                     List<IStreamable> auxObjects;
-                    List<IDataObject> serviceResult = _proxy.GetObjects(_context, _type, e, out auxObjects).ToList();
+                    List<IDataObject> serviceResult = _proxy.GetObjects(_context, _type, query, out auxObjects).ToList();
                     return new Tuple<List<IDataObject>, List<IStreamable>>(serviceResult, auxObjects);
                 })
                 .OnResult(t =>
@@ -230,12 +195,12 @@ namespace Zetbox.DalProvider.Client
 
                     foreach (IDataObject obj in t.Result.Item1)
                     {
-                        result.Add((T)_context.AttachRespectingIsolationLevel(obj));
+                        result = (T)_context.AttachRespectingIsolationLevel(obj);
                     }
 
                     _context.PlaybackNotifications();
                 });
-                task = new ZbTask<T>(getListTask);
+                task = new ZbTask<T>(getObjectTask);
             }
             else
             {
@@ -246,49 +211,83 @@ namespace Zetbox.DalProvider.Client
             {
                 try
                 {
-                    if (e.IsMethodCallExpression("First"))
+                    if (result == null
+                        && (query.IsMethodCallExpression("First")
+                            || query.IsMethodCallExpression("Single")))
                     {
-                        t.Result = result.First();
-                    }
-                    else if (e.IsMethodCallExpression("FirstOrDefault"))
-                    {
-                        t.Result = result.FirstOrDefault();
-                    }
-                    else if (e.IsMethodCallExpression("Single"))
-                    {
-                        t.Result = result.Single();
-                    }
-                    else if (e.IsMethodCallExpression("SingleOrDefault"))
-                    {
-                        t.Result = result.SingleOrDefault();
+                        throw new InvalidOperationException("No element found");
                     }
                     else
                     {
-                        throw new NotSupportedException("Expression is not supported");
+                        t.Result = result;
                     }
                 }
                 finally
                 {
-                    perfCounter.DecrementQuery(_type, result.Count, ticks);
+                    perfCounter.DecrementQuery(_type, result == null ? 0 : 1, ticks);
                 }
             });
         }
 
         #region Local Object handling
-        private IList QueryFromLocalObjectsHack(InterfaceType ifType)
+        private IList QueryFromLocalObjectsHack(InterfaceType ifType, Expression query)
         {
             MethodInfo mi = typeof(ZetboxContextProvider).GetMethod("QueryFromLocalObjects", BindingFlags.Instance | BindingFlags.NonPublic)
                 .MakeGenericMethod(ifType.Type);
-            return (IList)mi.Invoke(this, new object[] { });
+            return (IList)mi.Invoke(this, new object[] { query });
         }
 
-        private List<T> QueryFromLocalObjects<T>()
+        private List<T> QueryFromLocalObjects<T>(Expression query)
         {
-            List<T> result = new List<T>();
-            var list = _context.AttachedObjects.AsQueryable().Where(o => o != null && o.ObjectState != DataObjectState.Deleted).OfType<T>();
-            if (_filter != null) _filter.ForEach(f => list = list.AddFilter(f));
-            list.ForEach<T>(result.Add);
-            return result;
+            var localObjects = _context.AttachedObjects.AsQueryable().Where(o => o != null && o.ObjectState != DataObjectState.Deleted).OfType<T>();
+            var replacedQuery = new SourceReplacer<T>(localObjects).Visit(query);
+            return localObjects.Provider.CreateQuery<T>(replacedQuery).ToList();
+        }
+
+        /// <summary>
+        /// Always returns a value of T. May be null if nothing was found
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        private T ExecuteFromLocalObjects<T>(Expression query)
+        {
+            var localObjects = _context.AttachedObjects.AsQueryable().Where(o => o != null && o.ObjectState != DataObjectState.Deleted).OfType<T>();
+            var replacedQuery = new SourceReplacer<T>(localObjects).Visit(query) as MethodCallExpression;
+            Expression resultQuery = replacedQuery;
+
+            if (replacedQuery.IsMethodCallExpression("First"))
+                resultQuery = Expression.Call(typeof(Queryable), "FirstOrDefault",
+                    new Type[] { replacedQuery.Type.GetGenericArguments()[0] }, replacedQuery.Arguments.ToArray());
+
+            if (replacedQuery.IsMethodCallExpression("Single"))
+                resultQuery = Expression.Call(typeof(Queryable), "SingleOrDefault",
+                    new Type[] { replacedQuery.Type.GetGenericArguments()[0] }, replacedQuery.Arguments.ToArray());
+
+            return (T)localObjects.Provider.Execute<T>(resultQuery);
+        }
+
+        private class SourceReplacer<T> : ExpressionTreeTranslator
+        {
+            private readonly Expression _newSource;
+
+            public SourceReplacer(IQueryable<T> newSource)
+            {
+                _newSource = newSource.Expression;
+            }
+
+            protected override Expression VisitConstant(ConstantExpression c)
+            {
+                if (typeof(IQueryable<T>).IsAssignableFrom(c.Type))
+                    return _newSource;
+                else
+                    return base.VisitConstant(c);
+            }
+
+            protected override Expression VisitMethodCall(MethodCallExpression m)
+            {
+                return base.VisitMethodCall(m);
+            }
         }
         #endregion
 
@@ -325,75 +324,23 @@ namespace Zetbox.DalProvider.Client
         #region Visits
         protected override void VisitMethodCall(MethodCallExpression m)
         {
-            if (m.IsMethodCallExpression("Where"))
+            if (m.IsMethodCallExpression("Select") || m.IsMethodCallExpression("GroupBy"))
             {
-                if (_filter == null) _filter = new LinkedList<Expression>();
-                _filter.AddFirst(m.Arguments[1]);
-                base.Visit(m.Arguments[0]);
+                throw new NotSupportedException("Projections and groupings cannot be transported to the server. Please use ToList().");
             }
-            else if (m.IsMethodCallExpression("OrderBy") || m.IsMethodCallExpression("ThenBy"))
-            {
-                if (_orderBy == null) _orderBy = new LinkedList<OrderBy>();
-                _orderBy.AddFirst(new OrderBy(OrderByType.ASC, m.Arguments[1]));
-                base.Visit(m.Arguments[0]);
-            }
-            else if (m.IsMethodCallExpression("OrderByDescending") || m.IsMethodCallExpression("ThenByDescending"))
-            {
-                if (_orderBy == null) _orderBy = new LinkedList<OrderBy>();
-                _orderBy.AddFirst(new OrderBy(OrderByType.DESC, m.Arguments[1]));
-                base.Visit(m.Arguments[0]);
-            }
-            else if (m.IsMethodCallExpression("Select"))
-            {
-                base.Visit(m.Arguments[0]);
-            }
-            else if (m.IsMethodCallExpression("Take"))
-            {
-                // _maxListCount = m.Arguments[1].GetExpressionValue<int>();
-                base.Visit(m.Arguments[0]);
-            }
-            else if (m.IsMethodCallExpression("First") ||
-                        m.IsMethodCallExpression("FirstOrDefault") ||
-                        m.IsMethodCallExpression("Single") ||
-                        m.IsMethodCallExpression("SingleOrDefault")
-                )
-            {
-                // _maxListCount = 1;
-                if (m.Arguments.Count == 2)
-                {
-                    if (_filter == null) _filter = new LinkedList<Expression>();
-                    _filter.AddFirst(m.Arguments[1]);
-                }
-                else
-                    base.Visit(m.Arguments[0]);
-            }
-            else if (m.IsMethodCallExpression("WithDeactivated", typeof(ZetboxContextQueryableExtensions)))
-            {
-                if (_filter == null) _filter = new LinkedList<Expression>();
-                _filter.AddFirst(Expression.Call(typeof(ZetboxContextQueryableExtensions), "WithDeactivated", new Type[] { _type.Type }, Expression.Constant(null, typeof(IQueryable<>).MakeGenericType(_type.Type))));
-                base.Visit(m.Arguments[0]);
-            }
-            else if (m.IsMethodCallExpression(typeof(IQueryable)))
+            else if (m.IsMethodCallExpression(typeof(ZetboxContextQueryableExtensions)))
             {
                 // Lets serialize, server has to ensure security
-                m.Arguments.ForEach(a => base.Visit(a));
+                m.Arguments.ForEach(a => Visit(a));
             }
-            else if (m.IsMethodCallExpression(typeof(Queryable)))
+            else if (m.IsMethodCallExpression(typeof(IQueryable)) || m.IsMethodCallExpression(typeof(Queryable)) || m.IsMethodCallExpression(typeof(IEnumerable)) || m.IsMethodCallExpression(typeof(string)))
             {
                 // Lets serialize, server has to ensure security
-                m.Arguments.ForEach(a => base.Visit(a));
-            }
-            else if (m.IsMethodCallExpression(typeof(IEnumerable)))
-            {
-                // Lets serialize, server has to ensure security
-                m.Arguments.ForEach(a => base.Visit(a));
-            }
-            else if (m.IsMethodCallExpression(typeof(string)))
-            {
-                m.Arguments.ForEach(a => base.Visit(a));
+                m.Arguments.ForEach(a => Visit(a));
             }
             else
             {
+                // Fail fast, if we know that the expression is invalid
                 throw new NotSupportedException(string.Format("Method Call '{0}' is not allowed", m.Method.Name));
             }
 
