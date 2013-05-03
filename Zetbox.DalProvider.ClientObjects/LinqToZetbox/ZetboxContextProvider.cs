@@ -102,6 +102,8 @@ namespace Zetbox.DalProvider.Client
         /// <returns></returns>
         internal ZbTask<List<T>> GetListCallAsync<T>(Expression query)
         {
+            if (!typeof(T).IsIPersistenceObject()) throw new NotSupportedException("Server-side projections are not supported. Use a server-side method or a client-side projection");
+
             int objectCount = 0;
             var ticks = perfCounter.IncrementQuery(_type);
 
@@ -157,6 +159,8 @@ namespace Zetbox.DalProvider.Client
         /// <returns>A Object an Expeption, if the Object was not found.</returns>
         private ZbTask<T> GetObjectCallAsync<T>(Expression query)
         {
+            if (!typeof(T).IsIPersistenceObject()) throw new NotSupportedException("Server-side aggregations are not supported. Use a server-side method or a client-side aggregation");
+
             var ticks = perfCounter.IncrementQuery(_type);
 
             if (Logging.Linq.IsInfoEnabled)
