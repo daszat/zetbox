@@ -24,10 +24,10 @@ namespace Zetbox.DalProvider.Client
     using System.Reflection;
     using System.Text;
     using Zetbox.API;
+    using Zetbox.API.Async;
     using Zetbox.API.Client;
     using Zetbox.API.Client.PerfCounter;
     using Zetbox.API.Utils;
-    using Zetbox.API.Async;
 
     /// <summary>
     /// Provider for Zetbox Linq Provider. See http://blogs.msdn.com/mattwar/archive/2007/07/30/linq-building-an-iqueryable-provider-part-i.aspx for details.
@@ -258,11 +258,11 @@ namespace Zetbox.DalProvider.Client
 
             if (replacedQuery.IsMethodCallExpression("First"))
                 resultQuery = Expression.Call(typeof(Queryable), "FirstOrDefault",
-                    new Type[] { replacedQuery.Type.GetGenericArguments()[0] }, replacedQuery.Arguments.ToArray());
+                    new Type[] { replacedQuery.Type }, replacedQuery.Arguments.ToArray());
 
             if (replacedQuery.IsMethodCallExpression("Single"))
                 resultQuery = Expression.Call(typeof(Queryable), "SingleOrDefault",
-                    new Type[] { replacedQuery.Type.GetGenericArguments()[0] }, replacedQuery.Arguments.ToArray());
+                    new Type[] { replacedQuery.Type }, replacedQuery.Arguments.ToArray());
 
             return (T)localObjects.Provider.Execute<T>(resultQuery);
         }
