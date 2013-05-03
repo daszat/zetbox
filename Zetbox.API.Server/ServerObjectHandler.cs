@@ -102,7 +102,15 @@ namespace Zetbox.API.Server
 
             if (execute)
             {
-                return new IStreamable[] { (IStreamable)ctx.GetQuery<T>().Provider.Execute<T>(query) };
+                var result = (IStreamable)ctx.GetQuery<T>().Provider.Execute<T>(query);
+                if (result == null)
+                {
+                    return Enumerable.Empty<IStreamable>();
+                }
+                else
+                {
+                    return new IStreamable[] { result };
+                }
             }
             else
             {
