@@ -36,7 +36,7 @@ namespace Zetbox.DalProvider.Client.Mocks
 
         public IEnumerable<IRelationEntry> GetCollectionEntries(
             Guid version,
-            IZetboxContext ctx,
+            IReadOnlyZetboxContext ctx,
             Guid relId, RelationEndRole endRole,
             int parentId)
         {
@@ -76,7 +76,7 @@ namespace Zetbox.DalProvider.Client.Mocks
     internal sealed class MemoryObjectHandlerFactory
         : ServerObjectHandlerFactory
     {
-        public override IServerCollectionHandler GetServerCollectionHandler(IZetboxContext ctx, InterfaceType aType, InterfaceType bType, RelationEndRole endRole)
+        public override IServerCollectionHandler GetServerCollectionHandler(IReadOnlyZetboxContext ctx, InterfaceType aType, InterfaceType bType, RelationEndRole endRole)
         {
             if (ctx == null) throw new ArgumentNullException("ctx");
             return GetServerCollectionHandlerHelper(

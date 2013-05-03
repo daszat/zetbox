@@ -38,7 +38,7 @@ namespace Zetbox.API.Server
         /// <param name="ctx">The context to query.</param>
         /// <param name="query">a Linq query to execute</param>
         /// <returns>the filtered and ordered list of objects</returns>
-        IEnumerable<IStreamable> GetObjects(Guid version, IZetboxContext ctx, Expression query);
+        IEnumerable<IStreamable> GetObjects(Guid version, IReadOnlyZetboxContext ctx, Expression query);
 
         /// <summary>
         /// Return the list of objects referenced by the specified property.
@@ -48,7 +48,7 @@ namespace Zetbox.API.Server
         /// <param name="ID">the ID of the referencing object</param>
         /// <param name="property">the name of the referencing property</param>
         /// <returns>the list of objects</returns>
-        IEnumerable<IStreamable> GetListOf(Guid version, IZetboxContext ctx, int ID, string property);
+        IEnumerable<IStreamable> GetListOf(Guid version, IReadOnlyZetboxContext ctx, int ID, string property);
 
         object InvokeServerMethod(Guid version, IZetboxContext ctx, int ID, string method, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects);
     }
@@ -63,12 +63,12 @@ namespace Zetbox.API.Server
 
     public interface IServerCollectionHandler
     {
-        IEnumerable<IRelationEntry> GetCollectionEntries(Guid version, IZetboxContext ctx, Guid relId, RelationEndRole endRole, int parentId);
+        IEnumerable<IRelationEntry> GetCollectionEntries(Guid version, IReadOnlyZetboxContext ctx, Guid relId, RelationEndRole endRole, int parentId);
     }
 
     public interface IServerDocumentHandler
     {
-        Stream GetBlobStream(Guid version, IZetboxContext ctx, int ID);
+        Stream GetBlobStream(Guid version, IReadOnlyZetboxContext ctx, int ID);
         Zetbox.App.Base.Blob SetBlobStream(Guid version, IZetboxContext ctx, Stream blob, string filename, string mimetype);
     }
 
@@ -89,8 +89,9 @@ namespace Zetbox.API.Server
         {
         }
 
-        public IEnumerable<IStreamable> GetObjects(Guid version, IZetboxContext ctx, Expression query)
+        public IEnumerable<IStreamable> GetObjects(Guid version, IReadOnlyZetboxContext ctx, Expression query)
         {
+            if (ctx == null) { throw new ArgumentNullException("ctx"); }
             if (query == null) { throw new ArgumentNullException("query"); }
             ZetboxGeneratedVersionAttribute.Check(version);
 
@@ -115,7 +116,7 @@ namespace Zetbox.API.Server
         /// <code>property</code> of the object with the <code>ID</code>
         /// </summary>
         /// <returns>the list of values in the property</returns>
-        public IEnumerable<IStreamable> GetListOf(Guid version, IZetboxContext ctx, int ID, string property)
+        public IEnumerable<IStreamable> GetListOf(Guid version, IReadOnlyZetboxContext ctx, int ID, string property)
         {
             if (ctx == null) throw new ArgumentNullException("ctx");
             if (ID <= API.Helper.INVALIDID) throw new ArgumentException("ID must not be invalid");
@@ -277,7 +278,7 @@ namespace Zetbox.API.Server
 
     public class ServerDocumentHandler : IServerDocumentHandler
     {
-        public Stream GetBlobStream(Guid version, IZetboxContext ctx, int ID)
+        public Stream GetBlobStream(Guid version, IReadOnlyZetboxContext ctx, int ID)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
             ZetboxGeneratedVersionAttribute.Check(version);

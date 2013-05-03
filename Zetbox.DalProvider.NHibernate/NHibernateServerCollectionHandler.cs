@@ -35,7 +35,7 @@ namespace Zetbox.DalProvider.NHibernate
 
         public IEnumerable<IRelationEntry> GetCollectionEntries(
             Guid version,
-            IZetboxContext ctx,
+            IReadOnlyZetboxContext ctx,
             Guid relId, RelationEndRole endRole,
             int parentId)
         {

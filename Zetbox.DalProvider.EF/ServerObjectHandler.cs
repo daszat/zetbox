@@ -50,8 +50,8 @@ namespace Zetbox.DalProvider.Ef
     {
 
         public IEnumerable<IRelationEntry> GetCollectionEntries(
-            Guid version, 
-            IZetboxContext ctx,
+            Guid version,
+            IReadOnlyZetboxContext ctx,
             Guid relId, RelationEndRole endRole,
             int parentId)
         {

@@ -29,7 +29,7 @@ namespace Zetbox.DalProvider.NHibernate
         public NHibernateServerObjectHandlerFactory() { }
 
         public override IServerCollectionHandler GetServerCollectionHandler(
-            IZetboxContext ctx, 
+            IReadOnlyZetboxContext ctx,
             InterfaceType aType,
             InterfaceType bType,
             RelationEndRole endRole)

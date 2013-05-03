@@ -89,7 +89,7 @@ namespace Zetbox.API.Server
         #region IServerObjectHandlerFactory Members
 
         /// <inheritdoc/>
-        public abstract IServerCollectionHandler GetServerCollectionHandler(IZetboxContext ctx, InterfaceType aType, InterfaceType bType, RelationEndRole endRole);
+        public abstract IServerCollectionHandler GetServerCollectionHandler(IReadOnlyZetboxContext ctx, InterfaceType aType, InterfaceType bType, RelationEndRole endRole);
 
         /// <inheritdoc/>
         public IServerObjectHandler GetServerObjectHandler(InterfaceType type)

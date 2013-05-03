@@ -28,7 +28,7 @@ namespace Zetbox.DalProvider.Ef
         public EfServerObjectHandlerFactory() { }
 
         public override IServerCollectionHandler GetServerCollectionHandler(
-            IZetboxContext ctx, 
+            IReadOnlyZetboxContext ctx,
             InterfaceType aType,
             InterfaceType bType,
             RelationEndRole endRole)
