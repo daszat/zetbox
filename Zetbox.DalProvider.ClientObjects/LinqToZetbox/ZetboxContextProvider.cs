@@ -44,11 +44,6 @@ namespace Zetbox.DalProvider.Client
         private ZetboxContextImpl _context;
 
         /// <summary>
-        /// 
-        /// </summary>
-        private int _maxListCount = API.Helper.MAXLISTCOUNT;
-
-        /// <summary>
         /// Filter Expression for GetList SearchType.
         /// </summary>
         private LinkedList<Expression> _filter = null;
@@ -72,7 +67,6 @@ namespace Zetbox.DalProvider.Client
 
         private void ResetState()
         {
-            _maxListCount = API.Helper.MAXLISTCOUNT;
             _filter = null;
             _orderBy = null;
         }
@@ -355,7 +349,7 @@ namespace Zetbox.DalProvider.Client
             }
             else if (m.IsMethodCallExpression("Take"))
             {
-                _maxListCount = m.Arguments[1].GetExpressionValue<int>();
+                // _maxListCount = m.Arguments[1].GetExpressionValue<int>();
                 base.Visit(m.Arguments[0]);
             }
             else if (m.IsMethodCallExpression("First") ||
@@ -364,7 +358,7 @@ namespace Zetbox.DalProvider.Client
                         m.IsMethodCallExpression("SingleOrDefault")
                 )
             {
-                _maxListCount = 1;
+                // _maxListCount = 1;
                 if (m.Arguments.Count == 2)
                 {
                     if (_filter == null) _filter = new LinkedList<Expression>();
