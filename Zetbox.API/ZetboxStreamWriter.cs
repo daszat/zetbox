@@ -445,7 +445,10 @@ namespace Zetbox.API
 
             if (_typeMap.GuidMap.ContainsKey(type))
             {
-                Write(_typeMap.GuidMap[type]);
+                var guid = _typeMap.GuidMap[type];
+                if (guid == Guid.Empty)
+                    throw new InvalidOperationException(string.Format("Type [{0}] has invalid DefinitionGuid: [{1}]", type, guid));
+                Write(guid);
             }
             else
             {

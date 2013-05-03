@@ -605,6 +605,8 @@ namespace Zetbox.API
             Guid guid = ReadGuid();
             if (guid != Guid.Empty)
             {
+                if (!_typeMap.Map.ContainsKey(guid))
+                    throw new InvalidOperationException(string.Format("Read TypeGuid [{0}], but no mapped type found!", guid));
                 result = _typeMap.Map[guid];
             }
             else
