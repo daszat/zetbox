@@ -105,7 +105,7 @@ namespace Zetbox.API.Server
             }
             else
             {
-                return ctx.GetQuery<T>().Provider.CreateQuery<T>(query).ToList().Cast<IStreamable>();
+                return ctx.GetQuery<T>().Provider.CreateQuery<T>(query).Take(Helper.MAXLISTCOUNT).ToList().Cast<IStreamable>();
             }
         }
 
