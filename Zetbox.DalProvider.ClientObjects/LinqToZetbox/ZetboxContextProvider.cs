@@ -275,7 +275,7 @@ namespace Zetbox.DalProvider.Client
 
             protected override Expression VisitConstant(ConstantExpression c)
             {
-                if (typeof(IQueryable<T>).IsAssignableFrom(c.Type))
+                if (c.Type.IsGenericType && typeof(ZetboxContextQuery<>).IsAssignableFrom(c.Type.GetGenericTypeDefinition()))
                     return _newSource;
                 else
                     return base.VisitConstant(c);
