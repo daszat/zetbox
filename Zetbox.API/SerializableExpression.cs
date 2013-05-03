@@ -1095,8 +1095,6 @@ namespace Zetbox.API
         internal SerializableContextSourceExpression(ConstantExpression e, SerializationContext ctx)
             : base(e, ctx)
         {
-            // override node type to ContextSource
-            NodeType = (int)SerializableExpressionType.ContextSource;
         }
 
         internal SerializableContextSourceExpression(ZetboxStreamReader binReader, StreamSerializationContext ctx, InterfaceType.Factory iftFactory)
@@ -1111,6 +1109,12 @@ namespace Zetbox.API
             var mi = typeof(IReadOnlyZetboxContext).GetMethod("GetQuery").MakeGenericMethod(queryItemType);
             var qry = mi.Invoke(ctx.SourceContext, null);
             return Expression.Constant(qry, qry.GetType());
+        }
+
+        internal override void ToStream(ZetboxStreamWriter binStream, StreamSerializationContext ctx)
+        {
+            binStream.Write((byte)SerializableExpressionType.ContextSource);
+            base.ToStream(binStream, ctx);
         }
     }
     #endregion
