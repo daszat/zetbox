@@ -33,7 +33,6 @@ namespace Zetbox.API.Client
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.API.Client.HttpServiceClient");
 
         private readonly Uri SetObjectsUri;
-        private readonly Uri GetListUri;
         private readonly Uri GetObjectsUri;
         private readonly Uri GetListOfUri;
         private readonly Uri FetchRelationUri;
@@ -51,7 +50,6 @@ namespace Zetbox.API.Client
             if (writerFactory == null) throw new ArgumentNullException("writerFactory");
 
             SetObjectsUri = new Uri(ConfigurationManager.AppSettings["serviceUri"] + "/SetObjects");
-            GetListUri = new Uri(ConfigurationManager.AppSettings["serviceUri"] + "/GetList");
             GetObjectsUri = new Uri(ConfigurationManager.AppSettings["serviceUri"] + "/GetObjects");
             GetListOfUri = new Uri(ConfigurationManager.AppSettings["serviceUri"] + "/GetListOf");
             FetchRelationUri = new Uri(ConfigurationManager.AppSettings["serviceUri"] + "/FetchRelation");
