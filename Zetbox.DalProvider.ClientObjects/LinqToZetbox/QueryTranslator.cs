@@ -64,5 +64,17 @@ namespace Zetbox.DalProvider.Client
                 return base.VisitUnary(u);
             }
         }
+
+        protected override Expression VisitMethodCall(MethodCallExpression m)
+        {
+            if (m.IsIgnorableCastExpression())
+            {
+                return Visit(m.Arguments[0]);
+            }
+            else
+            {
+                return base.VisitMethodCall(m);
+            }
+        }
     }
 }
