@@ -82,6 +82,7 @@ namespace Zetbox.DalProvider.Client.Mocks
             var handler = _memoryFactory.GetServerObjectHandler(ifType);
             var objects = handler.GetObjects(
                 ZetboxGeneratedVersionAttribute.Current,
+                requestingCtx,
                 query);
             var bytes = SendObjects(objects, true).ToArray();
 

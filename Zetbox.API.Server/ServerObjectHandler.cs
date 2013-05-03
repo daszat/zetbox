@@ -35,9 +35,10 @@ namespace Zetbox.API.Server
         /// Return a list of objects matching the specified query.
         /// </summary>
         /// <param name="version">Current version of generated Zetbox.Objects assembly</param>
+        /// <param name="ctx">The context to query.</param>
         /// <param name="query">a Linq query to execute</param>
         /// <returns>the filtered and ordered list of objects</returns>
-        IEnumerable<IStreamable> GetObjects(Guid version, Expression query);
+        IEnumerable<IStreamable> GetObjects(Guid version, IZetboxContext ctx, Expression query);
 
         /// <summary>
         /// Return the list of objects referenced by the specified property.
@@ -88,36 +89,23 @@ namespace Zetbox.API.Server
         {
         }
 
-        public IEnumerable<IStreamable> GetObjects(Guid version, Expression query)
+        public IEnumerable<IStreamable> GetObjects(Guid version, IZetboxContext ctx, Expression query)
         {
             if (query == null) { throw new ArgumentNullException("query"); }
             ZetboxGeneratedVersionAttribute.Check(version);
 
-            // TODO: replace with GetQuery().Provider.CreateQuery(ctx, query) ~~~
-            var result = Expression.Lambda(query).Compile().DynamicInvoke();
+            //// TODO: replace with GetQuery().Provider.CreateQuery(ctx, query) ~~~
+            //var result = Expression.Lambda(query).Compile().DynamicInvoke();
 
-            // empty result or default
-            if (result == null) return Enumerable.Empty<IStreamable>();
+            var execute = query.IsMethodCallExpression("First") || query.IsMethodCallExpression("FirstOrDefault") || query.IsMethodCallExpression("Single") || query.IsMethodCallExpression("SingleOrDefault");
 
-            // simple cast possible
-            var asStreamable = result as IEnumerable<IStreamable>;
-            if (asStreamable != null)
-                return asStreamable;
-
-            // requires re-streaming
-            var asEnumerable = result as IEnumerable;
-            if (asEnumerable != null)
-                return DoGetObjects(asEnumerable);
-
-            // single object
-            return new IStreamable[] { (IStreamable)result };
-        }
-
-        private IEnumerable<IStreamable> DoGetObjects(object result)
-        {
-            foreach (IStreamable obj in (IEnumerable)result)
+            if (execute)
             {
-                yield return obj;
+                return new IStreamable[] { (IStreamable)ctx.GetQuery<T>().Provider.Execute<T>(query) };
+            }
+            else
+            {
+                return ctx.GetQuery<T>().Provider.CreateQuery<T>(query).ToList().Cast<IStreamable>();
             }
         }
 

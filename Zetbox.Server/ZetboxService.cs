@@ -137,7 +137,7 @@ namespace Zetbox.Server
                         {
                             IEnumerable<IStreamable> lst = _sohFactory
                                 .GetServerObjectHandler(ifType)
-                                .GetObjects(version, SerializableExpression.ToExpression(ctx, query, _iftFactory));
+                                .GetObjects(version, ctx, SerializableExpression.ToExpression(ctx, query, _iftFactory));
                             resultCount = lst.Count();
                             return SendObjects(lst, true).ToArray();
                         }

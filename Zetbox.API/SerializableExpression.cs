@@ -1109,7 +1109,8 @@ namespace Zetbox.API
             // The ContextSource must be an IQueryable<T>, which is the argument we need for GetQuery
             var queryItemType = Type.GetGenericArguments()[0];
             var mi = typeof(IReadOnlyZetboxContext).GetMethod("GetQuery").MakeGenericMethod(queryItemType);
-            return Expression.Constant(mi.Invoke(ctx.SourceContext, null), Type);
+            var qry = mi.Invoke(ctx.SourceContext, null);
+            return Expression.Constant(qry, qry.GetType());
         }
     }
     #endregion
