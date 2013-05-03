@@ -770,7 +770,7 @@ namespace Zetbox.DalProvider.Ef
         public override ImplementationType ToImplementationType(InterfaceType t)
         {
             CheckDisposed();
-            return _implTypeFactory(Type.GetType(t.Type.FullName + "Ef" + Zetbox.API.Helper.ImplementationSuffix + "," + EfProvider.ServerAssembly));
+            return _implTypeFactory(Type.GetType(t.Type.FullName + "Ef" + Zetbox.API.Helper.ImplementationSuffix + "," + EfProvider.ServerAssembly, throwOnError: true));
         }
 
         public override ImplementationType GetImplementationType(Type t)
