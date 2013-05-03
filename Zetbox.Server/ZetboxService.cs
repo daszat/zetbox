@@ -139,7 +139,7 @@ namespace Zetbox.Server
                                 .GetServerObjectHandler(ifType)
                                 .GetObjects(version, ctx, SerializableExpression.ToExpression(ctx, query, _iftFactory));
                             resultCount = lst.Count();
-                            return SendObjects(lst, true).ToArray();
+                            return SendObjects(lst, resultCount <= 1).ToArray();
                         }
                     }
                     finally
