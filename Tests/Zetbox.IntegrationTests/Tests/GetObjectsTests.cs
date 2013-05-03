@@ -17,14 +17,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
-
+using NUnit.Framework;
+using NUnit.Framework.Constraints;
 using Zetbox.API;
 using Zetbox.API.Client;
 using Zetbox.App.Base;
 using Zetbox.Client;
-
-using NUnit.Framework;
-using NUnit.Framework.Constraints;
 
 namespace Zetbox.IntegrationTests
 {
@@ -285,6 +283,42 @@ namespace Zetbox.IntegrationTests
                 {
                     Log.DebugFormat("GetObjectsWithGroupBy: {0}", t.Key);
                 }
+            }
+        }
+
+        [Test]
+        [ExpectedException(typeof(NotSupportedException))]
+        public void GetObjectsWithCount()
+        {
+            using (IZetboxContext ctx = GetContext())
+            {
+                var test = ctx.GetQuery<ObjectClass>()
+                    .Count();
+                Log.DebugFormat("GetObjectsWithCount: {0}", test);
+            }
+        }
+
+        [Test]
+        [ExpectedException(typeof(NotSupportedException))]
+        public void GetObjectsWithMin()
+        {
+            using (IZetboxContext ctx = GetContext())
+            {
+                var test = ctx.GetQuery<ObjectClass>()
+                    .Min(cls => cls.ID);
+                Log.DebugFormat("GetObjectsWithMin: {0}", test);
+            }
+        }
+
+        [Test]
+        [ExpectedException(typeof(NotSupportedException))]
+        public void GetObjectsWithAverage()
+        {
+            using (IZetboxContext ctx = GetContext())
+            {
+                var test = ctx.GetQuery<ObjectClass>()
+                    .Average(cls => cls.ID);
+                Log.DebugFormat("GetObjectsWithAverage: {0}", test);
             }
         }
 
