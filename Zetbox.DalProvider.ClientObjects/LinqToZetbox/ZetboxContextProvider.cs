@@ -350,7 +350,11 @@ namespace Zetbox.DalProvider.Client
                     // Lets serialize, server has to ensure security
                     m.Arguments.ForEach(a => Visit(a));
                 }
-                else if (m.IsMethodCallExpression(typeof(IQueryable)) || m.IsMethodCallExpression(typeof(Queryable)) || m.IsMethodCallExpression(typeof(IEnumerable)) || m.IsMethodCallExpression(typeof(string)))
+                else if (m.IsMethodCallExpression(typeof(IQueryable))
+                      || m.IsMethodCallExpression(typeof(Queryable))
+                      || m.IsMethodCallExpression(typeof(IEnumerable))
+                      || m.IsMethodCallExpression(typeof(Enumerable))
+                      || m.IsMethodCallExpression(typeof(string)))
                 {
                     // Lets serialize, server has to ensure security
                     m.Arguments.ForEach(a => Visit(a));
