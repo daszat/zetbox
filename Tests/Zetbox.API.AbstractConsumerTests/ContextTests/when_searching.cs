@@ -58,7 +58,6 @@ namespace Zetbox.API.AbstractConsumerTests.ContextTests
         }
 
         [Test]
-        [Ignore("Case 2686: implement client-side Skip/Take")]
         public void and_skipping()
         {
             var ctx = GetContext();
