@@ -28,7 +28,6 @@ namespace Zetbox.API.AbstractConsumerTests.ContextTests
         : AbstractTestFixture
     {
         IZetboxContext ctx;
-        List<ObjectClass> objs;
         List<Guid> guids;
 
         public override void SetUp()
