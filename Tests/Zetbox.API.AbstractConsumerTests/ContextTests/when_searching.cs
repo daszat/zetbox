@@ -27,35 +27,6 @@ namespace Zetbox.API.AbstractConsumerTests.ContextTests
     public class when_searching
         : AbstractTestFixture
     {
-        [Test]
-        public void multiple_guids_should_return_all_objects()
-        {
-            var ctx = GetContext();
-            var objs = ctx.GetQuery<ObjectClass>().Take(10).ToList();
-            var guids = objs.Select(cls => cls.ExportGuid);
-
-            ctx = GetContext();
-
-            var foundGuids = ctx.FindPersistenceObjects<ObjectClass>(guids).ToList().Select(cls => cls.ExportGuid);
-            Assert.That(foundGuids, Is.EquivalentTo(guids));
-        }
-
-        [Test]
-        public void multiple_guids_should_not_return_nulls()
-        {
-            var ctx = GetContext();
-            var objs = ctx.GetQuery<ObjectClass>().Take(10).ToList();
-            var guids = objs.Select(cls => cls.ExportGuid);
-            var lookupGuids = guids.Concat(new[] { Guid.Empty }); // add illegal value
-
-            ctx = GetContext();
-
-            var foundObjs = ctx.FindPersistenceObjects<ObjectClass>(lookupGuids).ToList();
-            Assert.That(foundObjs, Has.No.Member(null), "FindPersistenceObjects returned a null entry");
-
-            var foundGuids = foundObjs.Select(cls => cls.ExportGuid);
-            Assert.That(foundGuids, Is.EquivalentTo(guids));
-        }
 
         [Test]
         public void and_skipping()
@@ -81,13 +52,35 @@ namespace Zetbox.API.AbstractConsumerTests.ContextTests
             Assert.That(secondHalf[4], Is.SameAs(objs[9]), "9");
         }
 
+        [TestCase(10, 10, 10)]
+        [TestCase(20, 10, 10)]
+        [TestCase(10, 20, 10, Ignore = true, IgnoreReason = "NHibernate bug, see Case 9162")]
+        public void and_taking_twice(int first, int second, int expected)
+        {
+            var ctx = GetContext();
+            var baseQuery = ctx.GetQuery<ObjectClass>().OrderBy(o => o.ID);
+            var objs = baseQuery.Take(first).Take(second).ToList();
+            Assert.That(objs.Count, Is.EqualTo(expected), string.Format("Did not receive correct amount of objects after Take({0}).Take({1})", first, second));
+        }
+
+        [TestCase(10, 10, 10)]
+        [TestCase(20, 10, 10)]
+        [TestCase(10, 20, 10)]
+        public void and_taking_twice_after_where(int first, int second, int expected)
+        {
+            var ctx = GetContext();
+            var baseQuery = ctx.GetQuery<ObjectClass>().OrderBy(o => o.ID);
+            var objs = baseQuery.Take(first).Where(o => o.Name.Length > 1).Take(second).ToList();
+            Assert.That(objs.Count, Is.EqualTo(expected), string.Format("Did not receive correct amount of objects after Take({0}).Take({1})", first, second));
+        }
+
         [Test]
         public void should_reject_projections_to_IPersistenceObject()
         {
             var ctx = GetContext();
             var qry = ctx.GetQuery<TestObjClass>().Select(t => new { X = t });
 
-            Assert.That(() => qry.ToList(), Throws.InstanceOf<NotImplementedException>());
+            Assert.That(() => qry.ToList(), Throws.InstanceOf<NotSupportedException>());
         }
     }
 }

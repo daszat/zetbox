@@ -358,7 +358,7 @@ namespace Zetbox.DalProvider.Client
                 else
                 {
                     // Fail fast, if we know that the expression is invalid
-                    throw new NotSupportedException(string.Format("Method Call '{0}' is not allowed", m.Method.Name));
+                    throw new NotSupportedException(string.Format("Method Call '{0}.{1}' is not allowed", m.Method.DeclaringType.FullName, m.Method.Name));
                 }
 
                 // Do not call base - only first expression is important

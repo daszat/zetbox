@@ -13,21 +13,37 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace Zetbox.DalProvider.Ef.Tests.ContextTests
+namespace Zetbox.IntegrationTests.ContextTests
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-
-    using Zetbox.API;
-    using Zetbox.App.Base;
-    using Zetbox.App.Test;
-
     using NUnit.Framework;
 
+    public class when_concurrency
+        : Zetbox.API.AbstractConsumerTests.ContextTests.when_concurrency
+    {
+    }
+
+    public class when_deleting_n_m
+      : Zetbox.API.AbstractConsumerTests.ContextTests.when_deleting_n_m
+    {
+    }
+
     public class when_deleting_one_to_n
-        : Zetbox.API.AbstractConsumerTests.ContextTests.when_deleting_one_to_n
+       : Zetbox.API.AbstractConsumerTests.ContextTests.when_deleting_one_to_n
+    {
+    }
+
+    public class when_searching
+        : Zetbox.API.AbstractConsumerTests.ContextTests.when_searching
+    {
+    }
+
+    [Ignore("Facade serialization for this query not implemented")]
+    public class when_searching_for_multiple_guids
+        : Zetbox.API.AbstractConsumerTests.ContextTests.when_searching_for_multiple_guids
     {
     }
 }

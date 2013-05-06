@@ -400,8 +400,10 @@ namespace Zetbox.API
         {
             if (e == null) { throw new ArgumentNullException("e"); }
 
-            return e.NodeType == ExpressionType.Call &&
-                ((MethodCallExpression)e).Method.DeclaringType == type;
+            var mce = e as MethodCallExpression;
+            return e.NodeType == ExpressionType.Call
+                && (mce.Method.DeclaringType == type
+                || (mce.Method.DeclaringType.IsGenericType && mce.Method.DeclaringType.GetGenericTypeDefinition() == type));
         }
 
         public static StringBuilder Trace(this Expression e)

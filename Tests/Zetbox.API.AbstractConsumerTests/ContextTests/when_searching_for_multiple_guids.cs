@@ -1,4 +1,4 @@
-// This file is part of zetbox.
+﻿// This file is part of zetbox.
 //
 // Zetbox is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as
@@ -24,42 +24,42 @@ namespace Zetbox.API.AbstractConsumerTests.ContextTests
     using Zetbox.App.Base;
     using Zetbox.App.Test;
 
-    public abstract class when_deleting_n_m
+    public class when_searching_for_multiple_guids
         : AbstractTestFixture
     {
         IZetboxContext ctx;
-        N_to_M_relations_A a1;
-        N_to_M_relations_B b1;
-        N_to_M_relations_B b2;
+        List<ObjectClass> objs;
+        List<Guid> guids;
 
         public override void SetUp()
         {
             base.SetUp();
-
             ctx = GetContext();
-
-            a1 = ctx.Create<N_to_M_relations_A>();
-            b1 = ctx.Create<N_to_M_relations_B>();
-            b2 = ctx.Create<N_to_M_relations_B>();
-
-            a1.BSide.Add(b1);
-            a1.BSide.Add(b2);
-
-            ctx.SubmitChanges();
+            var objs = ctx.GetQuery<ObjectClass>().Take(10).ToList();
+            guids = objs.Select(cls => cls.ExportGuid).ToList();
         }
 
         [Test]
-        public void should_remove_n_m()
+        public void should_return_all_objects()
         {
-            ctx.Delete(a1);
-            ctx.Delete(b1);
-            ctx.Delete(b2);
+            ctx = GetContext();
 
-            Assert.That(a1.ObjectState, Is.EqualTo(DataObjectState.Deleted));
-            Assert.That(b1.ObjectState, Is.EqualTo(DataObjectState.Deleted));
-            Assert.That(b2.ObjectState, Is.EqualTo(DataObjectState.Deleted));
+            var foundGuids = ctx.FindPersistenceObjects<ObjectClass>(guids).ToList().Select(cls => cls.ExportGuid);
+            Assert.That(foundGuids, Is.EquivalentTo(guids));
+        }
 
-            ctx.SubmitChanges();
+        [Test]
+        public void should_not_return_nulls()
+        {
+            var lookupGuids = guids.Concat(new[] { Guid.Empty }); // add illegal value
+
+            ctx = GetContext();
+
+            var foundObjs = ctx.FindPersistenceObjects<ObjectClass>(lookupGuids).ToList();
+            Assert.That(foundObjs, Has.No.Member(null), "FindPersistenceObjects returned a null entry");
+
+            var foundGuids = foundObjs.Select(cls => cls.ExportGuid);
+            Assert.That(foundGuids, Is.EquivalentTo(guids));
         }
     }
 }

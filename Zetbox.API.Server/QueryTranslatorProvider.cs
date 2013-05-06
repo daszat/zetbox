@@ -169,7 +169,7 @@ namespace Zetbox.API.Server
                         .SelectMany(argument => argument.AndChildren(t => t.IsGenericType ? t.GetGenericArguments() : new Type[] { }))
                         .Any(t => typeof(IPersistenceObject).IsAssignableFrom(t)))
                 {
-                    throw new NotImplementedException("Projecting to anonymous type with IPersistenceObject members not yet implemented.");
+                    throw new NotSupportedException("Projecting to anonymous type with IPersistenceObject members not yet supported.");
                 }
 
                 using (Logging.Linq.DebugTraceMethodCall("ExecuteEnumerable"))

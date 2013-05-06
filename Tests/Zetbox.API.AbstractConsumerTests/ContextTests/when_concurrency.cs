@@ -19,13 +19,11 @@ namespace Zetbox.API.AbstractConsumerTests.ContextTests
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-
+    using NUnit.Framework;
     using Zetbox.API;
     using Zetbox.App.Base;
-    using Zetbox.App.Test;
-
-    using NUnit.Framework;
     using Zetbox.App.Projekte;
+    using Zetbox.App.Test;
 
     public abstract class when_concurrency
         : AbstractTestFixture

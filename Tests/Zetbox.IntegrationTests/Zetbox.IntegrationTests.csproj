@@ -94,6 +94,7 @@
     <Compile Include="Tests\CompoundObjects\when_changing_a_CompoundObject_list.cs" />
     <Compile Include="Tests\CompoundObjects\when_changing.cs" />
     <Compile Include="Tests\CompoundObjects\when_roundtrip.cs" />
+    <Compile Include="Tests\ContextTests.cs" />
     <Compile Include="Tests\DefaultValues\when_submitting.cs" />
     <Compile Include="Tests\Enums\when_querying.cs" />
     <Compile Include="Tests\GetObjectsTests.cs" />

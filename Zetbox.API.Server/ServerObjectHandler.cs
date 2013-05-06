@@ -114,7 +114,23 @@ namespace Zetbox.API.Server
             }
             else
             {
-                return ctx.GetQuery<T>().Provider.CreateQuery<T>(query).Take(Helper.MAXLISTCOUNT).ToList().Cast<IStreamable>();
+                if (!query.IsMethodCallExpression("Take"))
+                {
+                    return ctx.GetQuery<T>().Provider.CreateQuery<T>(query).Take(Helper.MAXLISTCOUNT).ToList().Cast<IStreamable>();
+                }
+                else
+                {
+                    var takeQ = query as MethodCallExpression;
+                    var countExp = takeQ.Arguments[1] as ConstantExpression;
+                    if ((int)countExp.Value > Helper.MAXLISTCOUNT)
+                    {
+                        return ctx.GetQuery<T>().Provider.CreateQuery<T>(query).Take(Helper.MAXLISTCOUNT).ToList().Cast<IStreamable>();
+                    }
+                    else
+                    {
+                        return ctx.GetQuery<T>().Provider.CreateQuery<T>(query).ToList().Cast<IStreamable>();
+                    }
+                }
             }
         }
 
