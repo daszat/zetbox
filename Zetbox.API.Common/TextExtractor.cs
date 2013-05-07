@@ -22,6 +22,7 @@ namespace Zetbox.API.Common
     using Autofac;
     using System.IO;
     using System.ComponentModel;
+    using Zetbox.API.Utils;
 
     public interface ITextExtractor
     {
@@ -98,7 +99,13 @@ namespace Zetbox.API.Common
     {
         public string GetText(Stream data)
         {
-            var sr = new StreamReader(data);
+            bool isUtf8 = true;
+            if (data.CanSeek)
+            {
+                isUtf8 = Utf8Checker.IsUtf8(data);
+                data.Seek(0, SeekOrigin.Begin);
+            }
+            var sr = new StreamReader(data, isUtf8 ? Encoding.UTF8 : Encoding.Default);
             return sr.ReadToEnd();
         }
     }
