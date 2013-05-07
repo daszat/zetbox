@@ -89,7 +89,10 @@ namespace Zetbox.API.Common
 
             if (_scope.IsRegisteredWithName<ITextExtractorProvider>(mimeType))
             {
-                return _scope.ResolveNamed<ITextExtractorProvider>(mimeType).GetText(data, TextLengthLimit);
+                return _scope
+                            .ResolveNamed<ITextExtractorProvider>(mimeType)
+                            .GetText(data, TextLengthLimit)
+                            .MaxLength(TextLengthLimit); // final limitation, if a provider returns too much data
             }
             else
             {
@@ -131,19 +134,29 @@ namespace Zetbox.API.Common
         {
             if (data == null) throw new ArgumentNullException("data");
 
-            var inputDocument = PdfReader.Open(data, PdfDocumentOpenMode.ReadOnly);
-            var result = new StringBuilder();
-
-            foreach (PdfPage page in inputDocument.Pages)
+            try
             {
-                for (int index = 0; index < page.Contents.Elements.Count; index++)
-                {
-                    var stream = page.Contents.Elements.GetDictionary(index).Stream;
-                    result.AppendLine(PDFParser.ExtractTextFromPDFBytes(stream.Value));
-                }
-            }
+                var inputDocument = PdfReader.Open(data, PdfDocumentOpenMode.ReadOnly);
+                var result = new StringBuilder();
 
-            return result.ToString();
+                foreach (PdfPage page in inputDocument.Pages)
+                {
+                    for (int index = 0; index < page.Contents.Elements.Count; index++)
+                    {
+                        var stream = page.Contents.Elements.GetDictionary(index).Stream;
+                        result.AppendLine(PDFParser.ExtractTextFromPDFBytes(stream.Value, limit - result.Length));
+
+                        if (result.Length >= limit) return result.ToString();
+                    }
+                }
+
+                return result.ToString();
+            }
+            catch (Exception ex)
+            {
+                Logging.Log.Warn("Unable to extract text from given PDF", ex);
+                return string.Empty;
+            }
         }
     }
 
@@ -173,8 +186,9 @@ namespace Zetbox.API.Common
         /// and extracts text.
         /// </summary>
         /// <param name="input">uncompressed</param>
+        /// <param name="limit">limit</param>
         /// <returns></returns>
-        public static string ExtractTextFromPDFBytes(byte[] input)
+        public static string ExtractTextFromPDFBytes(byte[] input, int limit)
         {
             if (input == null || input.Length == 0) return string.Empty;
 
@@ -290,6 +304,8 @@ namespace Zetbox.API.Common
                     {
                         inTextObject = true;
                     }
+
+                    if (result.Length >= limit) break;
                 }
                 return result.ToString();
             }
