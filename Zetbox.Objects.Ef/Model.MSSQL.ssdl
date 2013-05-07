@@ -45,6 +45,7 @@
     </AssociationSet>
     <EntitySet Name="EventTestObject" EntityType="Model.Store.EventTestObject" Schema="test" Table="EventTestObjects"/>
     <EntitySet Name="ExceptionLogEntry" EntityType="Model.Store.ExceptionLogEntry" Schema="base" Table="ExceptionLog"/>
+    <EntitySet Name="Excerpt" EntityType="Model.Store.Excerpt" Schema="doc" Table="Excerpts"/>
     <EntitySet Name="File" EntityType="Model.Store.File" Schema="doc" Table="Files"/>
     <EntitySet Name="FileImportConfiguration" EntityType="Model.Store.FileImportConfiguration" Schema="doc" Table="FileImportConfigurations"/>
     <EntitySet Name="FilterConfiguration" EntityType="Model.Store.FilterConfiguration" Schema="gui" Table="FilterConfigurations"/>
@@ -141,6 +142,12 @@
     <AssociationSet Name="FK_Enumeration_DataType_ID" Association="Model.Store.FK_Enumeration_DataType_ID" >
       <End Role="A_DataType" EntitySet="DataType" />
       <End Role="B_Enumeration" EntitySet="Enumeration" />
+    </AssociationSet>
+    <EntitySet Name="FullTextIndexConstraint" EntityType="Model.Store.FullTextIndexConstraint" Schema="base" Table="FullTextIndexConstraints"/>
+    <!-- inherits from IndexConstraint -->
+    <AssociationSet Name="FK_FullTextIndexConstraint_IndexConstraint_ID" Association="Model.Store.FK_FullTextIndexConstraint_IndexConstraint_ID" >
+      <End Role="A_IndexConstraint" EntitySet="IndexConstraint" />
+      <End Role="B_FullTextIndexConstraint" EntitySet="FullTextIndexConstraint" />
     </AssociationSet>
     <EntitySet Name="GroupMembership" EntityType="Model.Store.GroupMembership" Schema="base" Table="GroupMemberships"/>
     <!-- inherits from AccessControl -->
@@ -824,6 +831,10 @@
     <AssociationSet Name="FK_File_has_Blob" Association="Model.Store.FK_File_has_Blob" >
       <End Role="File" EntitySet="File" />
       <End Role="Blob" EntitySet="Blob" />
+    </AssociationSet>
+    <AssociationSet Name="FK_File_has_Excerpt" Association="Model.Store.FK_File_has_Excerpt" >
+      <End Role="File" EntitySet="File" />
+      <End Role="Excerpt" EntitySet="Excerpt" />
     </AssociationSet>
     <AssociationSet Name="FK_File_was_ChangedBy" Association="Model.Store.FK_File_was_ChangedBy" >
       <End Role="File" EntitySet="File" />
@@ -1844,6 +1855,15 @@
     <Property Name="Thread" Type="nvarchar" MaxLength="255" Nullable="false" />
   </EntityType>
 	
+  <EntityType Name="Excerpt">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_File" Type="int" />
+    <Property Name="Text" Type="nvarchar" Nullable="false" />
+  </EntityType>
+	
   <EntityType Name="File">
     <Key>
       <PropertyRef Name="ID" />
@@ -1855,7 +1875,7 @@
     <Property Name="ChangedOn" Type="datetime2" Nullable="false" />
     <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="1000" Nullable="true" />
+    <Property Name="Name" Type="nvarchar" MaxLength="1024" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="FileImportConfiguration">
@@ -1906,6 +1926,13 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="BogenNummer" Type="int" Nullable="true" />
+  </EntityType>
+	
+  <EntityType Name="FullTextIndexConstraint">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="Group">
@@ -4613,6 +4640,20 @@
   </Association>
 
 
+  <Association Name="FK_File_has_Excerpt">
+    <End Role="File" Type="Model.Store.File" Multiplicity="0..1" />
+    <End Role="Excerpt" Type="Model.Store.Excerpt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="File">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Excerpt">
+        <PropertyRef Name="fk_File" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
   <Association Name="FK_File_was_ChangedBy">
     <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
     <End Role="File" Type="Model.Store.File" Multiplicity="*" />
@@ -6535,6 +6576,18 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_Enumeration">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FullTextIndexConstraint_IndexConstraint_ID">
+    <End Role="A_IndexConstraint" Type="Model.Store.IndexConstraint" Multiplicity="1" />
+    <End Role="B_FullTextIndexConstraint" Type="Model.Store.FullTextIndexConstraint" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_IndexConstraint">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_FullTextIndexConstraint">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>

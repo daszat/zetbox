@@ -144,11 +144,13 @@
     <Compile Include="Event.Interface.Designer.cs" />
     <Compile Include="EventTestObject.Interface.Designer.cs" />
     <Compile Include="ExceptionLogEntry.Interface.Designer.cs" />
+    <Compile Include="Excerpt.Interface.Designer.cs" />
     <Compile Include="File.Interface.Designer.cs" />
     <Compile Include="FileImportConfiguration.Interface.Designer.cs" />
     <Compile Include="FilterConfiguration.Interface.Designer.cs" />
     <Compile Include="FixedYearlyWorkScheduleRule.Interface.Designer.cs" />
     <Compile Include="Fragebogen.Interface.Designer.cs" />
+    <Compile Include="FullTextIndexConstraint.Interface.Designer.cs" />
     <Compile Include="Group.Interface.Designer.cs" />
     <Compile Include="GroupMembership.Interface.Designer.cs" />
     <Compile Include="GuidProperty.Interface.Designer.cs" />

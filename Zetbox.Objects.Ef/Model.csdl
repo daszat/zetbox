@@ -41,6 +41,7 @@
     </AssociationSet>
     <EntitySet Name="EventTestObjectEfImpl" EntityType="Model.EventTestObjectEfImpl" />
     <EntitySet Name="ExceptionLogEntryEfImpl" EntityType="Model.ExceptionLogEntryEfImpl" />
+    <EntitySet Name="ExcerptEfImpl" EntityType="Model.ExcerptEfImpl" />
     <EntitySet Name="FileEfImpl" EntityType="Model.FileEfImpl" />
     <EntitySet Name="FileImportConfigurationEfImpl" EntityType="Model.FileImportConfigurationEfImpl" />
     <EntitySet Name="FilterConfigurationEfImpl" EntityType="Model.FilterConfigurationEfImpl" />
@@ -589,6 +590,10 @@
     <AssociationSet Name="FK_File_has_Blob" Association="Model.FK_File_has_Blob" >
       <End Role="File" EntitySet="FileEfImpl" />
       <End Role="Blob" EntitySet="BlobEfImpl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_File_has_Excerpt" Association="Model.FK_File_has_Excerpt" >
+      <End Role="File" EntitySet="FileEfImpl" />
+      <End Role="Excerpt" EntitySet="ExcerptEfImpl" />
     </AssociationSet>
     <AssociationSet Name="FK_File_was_ChangedBy" Association="Model.FK_File_was_ChangedBy" >
       <End Role="File" EntitySet="FileEfImpl" />
@@ -1689,6 +1694,17 @@
     <Property Name="Message" Type="String" Nullable="false" MaxLength="4000"  />
     <Property Name="Thread" Type="String" Nullable="false" MaxLength="255"  />
   </EntityType>
+  <EntityType Name="ExcerptEfImpl">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="FileImpl"
+                        Relationship="Model.FK_File_has_Excerpt"
+                        FromRole="Excerpt"
+                        ToRole="File" />
+    <Property Name="Text" Type="String" Nullable="false" MaxLength="2147483647"  />
+  </EntityType>
   <EntityType Name="FileEfImpl" Abstract="true">
     <Key>
       <PropertyRef Name="ID" />
@@ -1708,8 +1724,12 @@
                         FromRole="File"
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
+    <NavigationProperty Name="ExcerptImpl"
+                        Relationship="Model.FK_File_has_Excerpt"
+                        FromRole="File"
+                        ToRole="Excerpt" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-    <Property Name="Name" Type="String" Nullable="true" MaxLength="1000"  />
+    <Property Name="Name" Type="String" Nullable="true" MaxLength="1024"  />
   </EntityType>
   <EntityType Name="FileImportConfigurationEfImpl">
     <Key>
@@ -3155,6 +3175,8 @@
   <EntityType Name="FixedYearlyWorkScheduleRuleEfImpl" BaseType="Model.YearlyWorkScheduleRuleEfImpl">
     <Property Name="Day" Type="Int32" Nullable="false"  />
     <Property Name="Month" Type="Int32" Nullable="false"  />
+  </EntityType>
+  <EntityType Name="FullTextIndexConstraintEfImpl" BaseType="Model.IndexConstraintEfImpl">
   </EntityType>
   <EntityType Name="GroupMembershipEfImpl" BaseType="Model.AccessControlEfImpl">
     <NavigationProperty Name="GroupImpl"
@@ -4992,6 +5014,14 @@
          Multiplicity="*" />
     <End Role="Blob"
          Type="Model.BlobEfImpl" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_File_has_Excerpt" >
+    <End Role="File"
+         Type="Model.FileEfImpl" 
+         Multiplicity="0..1" />
+    <End Role="Excerpt"
+         Type="Model.ExcerptEfImpl" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_File_was_ChangedBy" >

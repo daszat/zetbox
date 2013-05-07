@@ -1067,6 +1067,21 @@ using Zetbox.DalProvider.Ef;
 
 
 	/*
+    Relation: FK_File_has_Excerpt
+    A: One File as File
+    B: ZeroOrOne Excerpt as Excerpt
+    Preferred Storage: MergeIntoB
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_File_has_Excerpt",
+    "File", RelationshipMultiplicity.ZeroOrOne, typeof(at.dasz.DocumentManagement.FileEfImpl),
+    "Excerpt", RelationshipMultiplicity.ZeroOrOne, typeof(at.dasz.DocumentManagement.ExcerptEfImpl)
+    )]
+
+
+	/*
     Relation: FK_File_was_ChangedBy
     A: ZeroOrMore File as File
     B: ZeroOrOne Identity as ChangedBy

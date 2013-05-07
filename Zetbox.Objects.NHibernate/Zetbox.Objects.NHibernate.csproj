@@ -185,11 +185,13 @@
     <Compile Include="Event.NHibernate.Designer.cs" />
     <Compile Include="EventTestObject.NHibernate.Designer.cs" />
     <Compile Include="ExceptionLogEntry.NHibernate.Designer.cs" />
+    <Compile Include="Excerpt.NHibernate.Designer.cs" />
     <Compile Include="File.NHibernate.Designer.cs" />
     <Compile Include="FileImportConfiguration.NHibernate.Designer.cs" />
     <Compile Include="FilterConfiguration.NHibernate.Designer.cs" />
     <Compile Include="FixedYearlyWorkScheduleRule.NHibernate.Designer.cs" />
     <Compile Include="Fragebogen.NHibernate.Designer.cs" />
+    <Compile Include="FullTextIndexConstraint.NHibernate.Designer.cs" />
     <Compile Include="Group.NHibernate.Designer.cs" />
     <Compile Include="GroupMembership.NHibernate.Designer.cs" />
     <Compile Include="GuidProperty.NHibernate.Designer.cs" />

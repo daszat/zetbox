@@ -693,6 +693,14 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ExcerptEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.ExcerptEfImpl)">
+	    <MappingFragment StoreEntitySet="Excerpt">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="FileEfImpl">
       <EntityTypeMapping TypeName="IsTypeOf(Model.FileEfImpl)">
 	    <MappingFragment StoreEntitySet="File">
@@ -865,6 +873,11 @@
 	    <MappingFragment StoreEntitySet="IndexConstraint">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="IsUnique" ColumnName="IsUnique" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.FullTextIndexConstraintEfImpl)">
+	    <MappingFragment StoreEntitySet="FullTextIndexConstraint">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -3830,6 +3843,23 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Blob" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_File_has_Excerpt
+    A: One File as File
+    B: ZeroOrOne Excerpt as Excerpt
+    Preferred Storage: MergeIntoB
+    -->
+    <AssociationSetMapping Name="FK_File_has_Excerpt"
+                           TypeName="Model.FK_File_has_Excerpt"
+                           StoreEntitySet="Excerpt" >
+      <EndProperty Name="File">
+        <ScalarProperty Name="ID" ColumnName="fk_File"/>
+      </EndProperty>
+      <EndProperty Name="Excerpt">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_File" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_File_was_ChangedBy

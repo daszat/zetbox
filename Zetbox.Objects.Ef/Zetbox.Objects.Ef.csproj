@@ -173,11 +173,13 @@
     <Compile Include="Event.Ef.Designer.cs" />
     <Compile Include="EventTestObject.Ef.Designer.cs" />
     <Compile Include="ExceptionLogEntry.Ef.Designer.cs" />
+    <Compile Include="Excerpt.Ef.Designer.cs" />
     <Compile Include="File.Ef.Designer.cs" />
     <Compile Include="FileImportConfiguration.Ef.Designer.cs" />
     <Compile Include="FilterConfiguration.Ef.Designer.cs" />
     <Compile Include="FixedYearlyWorkScheduleRule.Ef.Designer.cs" />
     <Compile Include="Fragebogen.Ef.Designer.cs" />
+    <Compile Include="FullTextIndexConstraint.Ef.Designer.cs" />
     <Compile Include="Group.Ef.Designer.cs" />
     <Compile Include="GroupMembership.Ef.Designer.cs" />
     <Compile Include="GuidProperty.Ef.Designer.cs" />

@@ -24,6 +24,15 @@ namespace at.dasz.DocumentManagement
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("76e29530-9252-4c2a-bae4-503f3b6dcd29")]
+        at.dasz.DocumentManagement.Excerpt Excerpt {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Filename
         /// </summary>
         [Zetbox.API.DefinitionGuid("1c5f2bea-9915-4634-8ff9-5fd6f0871704")]
@@ -31,6 +40,11 @@ namespace at.dasz.DocumentManagement
             get;
             set;
         }
+
+        /// <summary>
+        /// Creates an excerpt from the current file
+        /// </summary>
+        void ExtractText();
 
         /// <summary>
         /// Handles the change of the current blob

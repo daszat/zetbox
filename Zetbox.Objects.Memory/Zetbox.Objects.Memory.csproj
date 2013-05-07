@@ -170,11 +170,13 @@
     <Compile Include="Event.Memory.Designer.cs" />
     <Compile Include="EventTestObject.Memory.Designer.cs" />
     <Compile Include="ExceptionLogEntry.Memory.Designer.cs" />
+    <Compile Include="Excerpt.Memory.Designer.cs" />
     <Compile Include="File.Memory.Designer.cs" />
     <Compile Include="FileImportConfiguration.Memory.Designer.cs" />
     <Compile Include="FilterConfiguration.Memory.Designer.cs" />
     <Compile Include="FixedYearlyWorkScheduleRule.Memory.Designer.cs" />
     <Compile Include="Fragebogen.Memory.Designer.cs" />
+    <Compile Include="FullTextIndexConstraint.Memory.Designer.cs" />
     <Compile Include="Group.Memory.Designer.cs" />
     <Compile Include="GroupMembership.Memory.Designer.cs" />
     <Compile Include="GuidProperty.Memory.Designer.cs" />

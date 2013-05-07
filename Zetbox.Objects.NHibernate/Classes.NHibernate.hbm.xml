@@ -537,6 +537,34 @@
         </subclass>
 
     </class>
+    <class name="at.dasz.DocumentManagement.ExcerptNHibernateImpl+ExcerptProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="at.dasz.DocumentManagement.ExcerptNHibernateImpl+ExcerptProxy, Zetbox.Objects.NHibernateImpl"
+           schema="`doc`"
+           table="`Excerpts`"
+           abstract="false"
+           dynamic-update="false"
+           optimistic-lock="none"
+           batch-size="100">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`doc`</param>
+                <param name="sequence">`Excerpts_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="File" column="`fk_File`" class="at.dasz.DocumentManagement.FileNHibernateImpl+FileProxy, Zetbox.Objects.NHibernateImpl" unique="true" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="Text" 
+                  column="`Text`" 
+                  optimistic-lock="false"/>
+
+        <!-- define the subclasses -->
+
+    </class>
     <class name="at.dasz.DocumentManagement.FileNHibernateImpl+FileProxy, Zetbox.Objects.NHibernateImpl"
            proxy="at.dasz.DocumentManagement.FileNHibernateImpl+FileProxy, Zetbox.Objects.NHibernateImpl"
            schema="`doc`"
@@ -571,6 +599,8 @@
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
                   optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <one-to-one name="Excerpt" class="at.dasz.DocumentManagement.ExcerptNHibernateImpl+ExcerptProxy, Zetbox.Objects.NHibernateImpl" constrained="false" property-ref="File" />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
@@ -4841,6 +4871,21 @@
 
 
             <!-- define the subclasses -->
+        <joined-subclass
+                name="Zetbox.App.Base.FullTextIndexConstraintNHibernateImpl+FullTextIndexConstraintProxy, Zetbox.Objects.NHibernateImpl"
+                proxy="Zetbox.App.Base.FullTextIndexConstraintNHibernateImpl+FullTextIndexConstraintProxy, Zetbox.Objects.NHibernateImpl"
+                schema="`base`"
+                table="`FullTextIndexConstraints`"
+                dynamic-update="false">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
 
         </joined-subclass>
 

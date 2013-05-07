@@ -76,6 +76,68 @@ public static event PropertyListChangedHandler<at.dasz.DocumentManagement.Docume
         public static event PropertyIsValidHandler<at.dasz.DocumentManagement.Document> OnRevisions_IsValid;
 
         /// <summary>
+        /// Creates an excerpt from the current file
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnExtractText_Document")]
+        public override void ExtractText()
+        {
+            // base.ExtractText();
+            if (OnExtractText_Document != null)
+            {
+                OnExtractText_Document(this);
+            }
+            else
+            {
+                base.ExtractText();
+            }
+        }
+        public static event ExtractText_Handler<Document> OnExtractText_Document;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<Document> OnExtractText_Document_CanExec;
+
+        [EventBasedMethod("OnExtractText_Document_CanExec")]
+        public override bool ExtractTextCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnExtractText_Document_CanExec != null)
+				{
+					OnExtractText_Document_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.ExtractTextCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Document> OnExtractText_Document_CanExecReason;
+
+        [EventBasedMethod("OnExtractText_Document_CanExecReason")]
+        public override string ExtractTextCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnExtractText_Document_CanExecReason != null)
+				{
+					OnExtractText_Document_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.ExtractTextCanExecReason;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
+        /// <summary>
         /// Handles the change of the current blob
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method

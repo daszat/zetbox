@@ -17,22 +17,65 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Zetbox.API;
+using Zetbox.API.Common;
 
 namespace at.dasz.DocumentManagement
 {
     [Implementor]
-    public static class FileActions
+    public class FileActions
     {
+        private static ITextExtractor _textExtractor;
+        public FileActions(ITextExtractor textExtractor)
+        {
+            _textExtractor = textExtractor;
+        }
+
         [Invocation]
-        public static void preSet_Blob(at.dasz.DocumentManagement.File obj, PropertyPreSetterEventArgs<Zetbox.App.Base.Blob> e)
+        public static void ToString(File obj, MethodReturnEventArgs<System.String> e)
+        {
+            e.Result = obj.Name;
+        }
+
+        [Invocation]
+        public static void preSet_Blob(File obj, PropertyPreSetterEventArgs<Zetbox.App.Base.Blob> e)
         {
             e.Result = obj.HandleBlobChange(e.OldValue, e.NewValue);
         }
 
         [Invocation]
-        public static void ToString(at.dasz.DocumentManagement.File obj, MethodReturnEventArgs<System.String> e)
+        public static void postSet_Blob(File obj, PropertyPreSetterEventArgs<Zetbox.App.Base.Blob> e)
         {
-            e.Result = obj.Name;
+            obj.ExtractText();
+        }
+
+        [Invocation]
+        public static void ExtractText(File obj)
+        {
+            var blob = obj.Blob;
+
+            if (blob != null)
+            {
+                var txt = _textExtractor.GetText(obj.Blob.GetStream(), blob.MimeType);
+                var excerpt = obj.Excerpt;
+                if (string.IsNullOrWhiteSpace(txt))
+                {
+                    if (excerpt != null)
+                    {
+                        // no excerpt -> delete excerpt object
+                        obj.Context.Delete(excerpt);
+                        obj.Excerpt = null;
+                    }
+                }
+                else
+                {
+                    if (excerpt == null)
+                    {
+                        excerpt = obj.Excerpt = obj.Context.Create<Excerpt>();
+                        excerpt.File = obj;
+                    }
+                    excerpt.Text = txt;
+                }
+            }
         }
     }
 }

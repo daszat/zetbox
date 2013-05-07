@@ -83,6 +83,7 @@
     <Compile Include="Calendar\EasterWorkScheduleRuleActions.cs" />
     <Compile Include="Calendar\FixedYearlyWorkScheduleRuleActions.cs" />
     <Compile Include="Calendar\YearlyWorkScheduleRuleActions.cs" />
+    <Compile Include="DocumentManagement\ExcerptActions.cs" />
     <Compile Include="DocumentManagement\FileImportService.cs" />
     <Compile Include="DocumentManagement\ImportedFileActions.cs" />
     <Compile Include="Gui\FilterConfigurationActions.cs" />

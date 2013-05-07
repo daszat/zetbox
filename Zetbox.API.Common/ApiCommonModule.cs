@@ -52,6 +52,8 @@ namespace Zetbox.API.Common
                 .As<IIconConverter>()
                 .SingleInstance();
 
+            builder.RegisterModule<TextExtractor.Module>();
+
             builder.RegisterModule<Zetbox.Objects.InterfaceModule>();
             builder.RegisterModule((Module)Activator.CreateInstance(Type.GetType("Zetbox.DalProvider.Memory.MemoryProvider, Zetbox.DalProvider.Memory", true)));
         }
