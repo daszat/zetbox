@@ -33,12 +33,14 @@ namespace Zetbox.API.Common
 
     public interface ITextExtractorProvider
     {
-        string GetText(Stream data);
+        string GetText(Stream data, int limit);
     }
 
 
     public class TextExtractor : ITextExtractor
     {
+        public static readonly int TextLengthLimit = 100 * 1024; // 100 KB
+
         [Description("Default Text Extractor service registration")]
         public class Module : Autofac.Module
         {
@@ -87,7 +89,7 @@ namespace Zetbox.API.Common
 
             if (_scope.IsRegisteredWithName<ITextExtractorProvider>(mimeType))
             {
-                return _scope.ResolveNamed<ITextExtractorProvider>(mimeType).GetText(data);
+                return _scope.ResolveNamed<ITextExtractorProvider>(mimeType).GetText(data, TextLengthLimit);
             }
             else
             {
@@ -99,7 +101,7 @@ namespace Zetbox.API.Common
     #region ITextExtractorProvider
     public class TextTextExtractorProvider : ITextExtractorProvider
     {
-        public string GetText(Stream data)
+        public string GetText(Stream data, int limit)
         {
             if (data == null) throw new ArgumentNullException("data");
 
@@ -110,13 +112,22 @@ namespace Zetbox.API.Common
                 data.Seek(0, SeekOrigin.Begin);
             }
             var sr = new StreamReader(data, isUtf8 ? Encoding.UTF8 : Encoding.Default);
-            return sr.ReadToEnd();
+            var result = new StringBuilder();
+
+            var buffer = new char[1024];
+            int cnt;
+            while ((cnt = sr.ReadBlock(buffer, 0, buffer.Length)) > 0 && result.Length < limit)
+            {
+                result.Append(buffer, 0, cnt);
+            }
+
+            return result.ToString();
         }
     }
 
     public class PdfTextExtractorProvider : ITextExtractorProvider
     {
-        public string GetText(Stream data)
+        public string GetText(Stream data, int limit)
         {
             if (data == null) throw new ArgumentNullException("data");
 
@@ -326,7 +337,7 @@ namespace Zetbox.API.Common
 
     public class WordTextExtractorProvider : ITextExtractorProvider
     {
-        public string GetText(Stream data)
+        public string GetText(Stream data, int limit)
         {
             return string.Empty;
         }
