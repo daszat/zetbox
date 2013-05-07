@@ -47,6 +47,24 @@ namespace Zetbox.API.Common
                     .RegisterType<TextExtractor>()
                     .As<ITextExtractor>()
                     .SingleInstance();
+
+                builder
+                    .RegisterType<TextTextExtractorProvider>()
+                    .As<ITextExtractorProvider>()
+                    .Named<ITextExtractorProvider>("text/plain")
+                    .SingleInstance();
+
+                builder
+                    .RegisterType<PdfTextExtractorProvider>()
+                    .As<ITextExtractorProvider>()
+                    .Named<ITextExtractorProvider>("application/pdf")
+                    .SingleInstance();
+
+                builder
+                    .RegisterType<WordTextExtractorProvider>()
+                    .As<ITextExtractorProvider>()
+                    .Named<ITextExtractorProvider>("application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+                    .SingleInstance();
             }
         }
 
@@ -82,6 +100,22 @@ namespace Zetbox.API.Common
         {
             var sr = new StreamReader(data);
             return sr.ReadToEnd();
+        }
+    }
+
+    public class PdfTextExtractorProvider : ITextExtractorProvider
+    {
+        public string GetText(Stream data)
+        {
+            return string.Empty;
+        }
+    }
+
+    public class WordTextExtractorProvider : ITextExtractorProvider
+    {
+        public string GetText(Stream data)
+        {
+            return string.Empty;
         }
     }
     #endregion

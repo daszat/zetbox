@@ -43,9 +43,18 @@ namespace at.dasz.DocumentManagement
         }
 
         [Invocation]
-        public static void postSet_Blob(File obj, PropertyPreSetterEventArgs<Zetbox.App.Base.Blob> e)
+        public static void postSet_Blob(File obj, PropertyPostSetterEventArgs<Zetbox.App.Base.Blob> e)
         {
             obj.ExtractText();
+        }
+
+        [Invocation]
+        public static void postSet_Excerpt(File obj, PropertyPostSetterEventArgs<Excerpt> e)
+        {
+            if (e.OldValue != null)
+            {
+                obj.Context.Delete(e.OldValue);
+            }
         }
 
         [Invocation]
@@ -63,7 +72,6 @@ namespace at.dasz.DocumentManagement
                     {
                         // no excerpt -> delete excerpt object
                         obj.Context.Delete(excerpt);
-                        obj.Excerpt = null;
                     }
                 }
                 else
