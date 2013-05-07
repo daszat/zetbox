@@ -81,7 +81,7 @@ namespace at.dasz.DocumentManagement
                         excerpt = obj.Excerpt = obj.Context.Create<Excerpt>();
                         excerpt.File = obj;
                     }
-                    excerpt.Text = txt;
+                    excerpt.Text = txt.Trim();
                 }
             }
         }
