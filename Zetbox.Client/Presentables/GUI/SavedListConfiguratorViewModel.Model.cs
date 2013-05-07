@@ -121,7 +121,7 @@ namespace Zetbox.Client.Presentables.GUI
                         IsUserFilter = fvm.IsUserFilter,
                         Properties = fvm.SourceProperties != null ? fvm.SourceProperties.Select(i => i.ExportGuid).ToArray() : null,
                         Values = fvm.FilterViewModel.Arguments.Select(i => ExtractUntypedValue(i.UntypedValue)).ToArray(),
-                        Expression = fvm.FilterViewModel.Filter.ValueSource.Expression,
+                        Expression = fvm.FilterViewModel.Filter.ValueSource != null ? fvm.FilterViewModel.Filter.ValueSource.Expression : string.Empty,
                     });
                 }
 
