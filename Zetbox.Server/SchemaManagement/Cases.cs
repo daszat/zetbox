@@ -3085,7 +3085,8 @@ namespace Zetbox.Server.SchemaManagement
         #region NewIndexConstraint
         public bool IsNewIndexConstraint(IndexConstraint uc)
         {
-            return uc.Constrained is ObjectClass && savedSchema.FindPersistenceObject<IndexConstraint>(uc.ExportGuid) == null;
+            var isFulltextConstraint = uc is FullTextIndexConstraint;
+            return !isFulltextConstraint && uc.Constrained is ObjectClass && savedSchema.FindPersistenceObject<IndexConstraint>(uc.ExportGuid) == null;
         }
         public void DoNewIndexConstraint(IndexConstraint uc)
         {
@@ -3113,7 +3114,8 @@ namespace Zetbox.Server.SchemaManagement
         #region DeleteIndexConstraint
         public bool IsDeleteIndexConstraint(IndexConstraint uc)
         {
-            return uc.Constrained is ObjectClass && schema.FindPersistenceObject<IndexConstraint>(uc.ExportGuid) == null;
+            var isFulltextConstraint = uc is FullTextIndexConstraint;
+            return !isFulltextConstraint && uc.Constrained is ObjectClass && schema.FindPersistenceObject<IndexConstraint>(uc.ExportGuid) == null;
         }
         public void DoDeleteIndexConstraint(IndexConstraint uc)
         {
@@ -3132,7 +3134,9 @@ namespace Zetbox.Server.SchemaManagement
         #region ChangeIndexConstraint
         public bool IsChangeIndexConstraint(IndexConstraint uc)
         {
-            if (!(uc is IndexConstraint)) return false;
+            var isFulltextConstraint = uc is FullTextIndexConstraint;
+            if (!isFulltextConstraint) return false;
+
             var saved = savedSchema.FindPersistenceObject<IndexConstraint>(uc.ExportGuid);
             if (saved == null) return false;
 
