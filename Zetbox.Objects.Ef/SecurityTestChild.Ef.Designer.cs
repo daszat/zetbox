@@ -1092,15 +1092,21 @@ namespace Zetbox.App.Test
         {
             get
             {
-				if(Context == null) return Zetbox.API.AccessRights.Full;
+                if(Context == null) return Zetbox.API.AccessRights.Full;
                 if (__currentAccessRights == null)
                 {
-					__currentAccessRights = base.CurrentAccessRights;
-					var secRight = SecurityRightsCollectionImpl.FirstOrDefault(i => i.Identity == Context.Internals().IdentityID); // TODO: should be SingleOrDefault() instead of FirstOrDefault()
+                    __currentAccessRights = base.CurrentAccessRights;
+                    var secRight = SecurityRightsCollectionImpl.FirstOrDefault(i => i.Identity == Context.Internals().IdentityID); // TODO: should be SingleOrDefault() instead of FirstOrDefault()
                     __currentAccessRights |= secRight != null ? (Zetbox.API.AccessRights)secRight.Right : Zetbox.API.AccessRights.None;
                 }
                 return __currentAccessRights.Value;
             }
+        }
+
+        protected override void ResetCurrentAccessRights()
+        {
+            base.ResetCurrentAccessRights();
+            __currentAccessRights = null;
         }
 
         [EdmRelationshipNavigationProperty("Model", "FK_SecurityTestChildren_Rights", "SecurityTestChild_Rights")]

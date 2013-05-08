@@ -87,6 +87,12 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
                 this.WriteLine("             return __currentAccessRights.Value; }");
                 this.WriteLine("        }");
                 this.WriteLine();
+                this.WriteLine("        protected override void ResetCurrentAccessRights()");
+                this.WriteLine("        {");
+                this.WriteLine("                base.ResetCurrentAccessRights();");
+                this.WriteLine("                __currentAccessRights = null;");
+                this.WriteLine("        }");
+                this.WriteLine();
             }
         }
 

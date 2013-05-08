@@ -1426,6 +1426,12 @@ namespace Zetbox.App.Projekte
              return __currentAccessRights.Value; }
         }
 
+        protected override void ResetCurrentAccessRights()
+        {
+                base.ResetCurrentAccessRights();
+                __currentAccessRights = null;
+        }
+
 
         #region Serializer
 

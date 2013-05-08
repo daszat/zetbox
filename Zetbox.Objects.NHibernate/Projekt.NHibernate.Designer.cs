@@ -1609,6 +1609,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
              return __currentAccessRights.Value; }
         }
 
+        protected override void ResetCurrentAccessRights()
+        {
+                base.ResetCurrentAccessRights();
+                __currentAccessRights = null;
+        }
+
 
         #region Serializer
 

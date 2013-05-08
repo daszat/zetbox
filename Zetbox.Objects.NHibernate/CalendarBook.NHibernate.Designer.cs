@@ -1373,6 +1373,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
              return __currentAccessRights.Value; }
         }
 
+        protected override void ResetCurrentAccessRights()
+        {
+                base.ResetCurrentAccessRights();
+                __currentAccessRights = null;
+        }
+
 
         #region Serializer
 

@@ -96,7 +96,7 @@ namespace Zetbox.API
             }
         }
 
-        protected void ResetCurrentAccessRights()
+        protected virtual void ResetCurrentAccessRights()
         {
             __currentAccessRights = null;
         }
