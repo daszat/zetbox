@@ -104,6 +104,7 @@
     <Compile Include="Converter\ImageCtrlConverter.cs" />
     <Compile Include="Converter\ObjectStateConverter.cs" />
     <Compile Include="CustomControls\ContentAdorner.cs" />
+    <Compile Include="CustomControls\DataObjectActionsTray.cs" />
     <Compile Include="CustomControls\ObjectHeader.cs" />
     <Compile Include="CustomControls\CustomControlsResources.Designer.cs">
       <AutoGen>True</AutoGen>

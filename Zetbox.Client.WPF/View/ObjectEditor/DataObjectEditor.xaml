@@ -27,17 +27,7 @@
     <!-- TODO: Background="{Binding HighlightAsync, Converter={StaticResource HighlightPanelBackgroundConverter}}"-->
     <DockPanel>
         <ctrls:ObjectHeader DockPanel.Dock="Top" />
-
-        <ToolBarTray DockPanel.Dock="Top">
-            <ctrls:WorkaroundToolBar ItemsSource="{Binding Actions}">
-                <ctrls:WorkaroundToolBar.Resources>
-                    <DataTemplate DataType="{x:Type client:ActionViewModel}">
-                        <ctrls:CommandButton CommandViewModel="{Binding}"
-                                             Style="{StaticResource ImageToolbarButton}" />
-                    </DataTemplate>
-                </ctrls:WorkaroundToolBar.Resources>
-            </ctrls:WorkaroundToolBar>
-        </ToolBarTray>
+        <ctrls:DataObjectActionsTray DockPanel.Dock="Top" />
 
         <TabControl x:Name="PropertyGroupTabs"
                     Style="{StaticResource AreaGroup1TabControl}"
