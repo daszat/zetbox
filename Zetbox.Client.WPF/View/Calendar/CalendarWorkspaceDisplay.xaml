@@ -55,7 +55,7 @@
                       Grid.Row="0"
                       Grid.RowSpan="2"
                       Style="{StaticResource Area1Expander}"
-                      IsExpanded="{Binding ShowItemsList}"
+                      IsExpanded="True"
                       ExpandDirection="Right"
                       Header="{Binding ItemsLabel}"
                       Expanded="Expander_Expanded"
