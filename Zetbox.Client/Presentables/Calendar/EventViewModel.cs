@@ -136,61 +136,62 @@ namespace Zetbox.Client.Presentables.Calendar
 
         public List<CalendarItemViewModel> CreateCalendarItemViewModels(DateTime displayFrom, DateTime displayTo)
         {
-            if (Event.StartDate <= Event.EndDate)
+            var startDate = Event.StartDate;
+            var endDate = Event.EndDate;
+            if (endDate < startDate)
             {
-                List<CalendarItemViewModel> result = new List<CalendarItemViewModel>();
-                var duration = Event.EndDate - Event.StartDate;
+                Logging.Client.WarnFormat("Appointment item {0} has an invalid time range of {1} > {2}", Event.Summary, startDate, endDate);
+                endDate = startDate.AddMinutes(30);
+            }
 
-                List<DateTime> occurences;
-                if (Event.Recurrence.Frequency == null)
-                {
-                    occurences = new List<DateTime>() { Event.StartDate };
-                }
-                else
-                {
-                    if (displayFrom < Event.StartDate)
-                        displayFrom = Event.StartDate;
+            List<CalendarItemViewModel> result = new List<CalendarItemViewModel>();
+            var duration = endDate - startDate;
 
-                    if (Event.Recurrence.Until.HasValue && Event.Recurrence.Until.Value < displayTo)
-                        displayTo = Event.Recurrence.Until.Value;
-
-                    occurences = Event.Recurrence.GetWithinInterval(Event.StartDate, displayFrom, displayTo).ToList();
-                }
-
-                foreach (var o in occurences)
-                {
-                    var event_StartDate = o;
-                    var event_EndDate = o + duration;
-
-                    var from = event_StartDate;
-                    var until = event_EndDate;
-
-                    if (from < displayFrom) from = displayFrom.Date + from.TimeOfDay;
-                    if (until > displayTo) until = displayTo;
-                    if (Event.IsAllDay)
-                    {
-                        until = until.AddDays(1);
-                    }
-
-                    for (var current = from; current < until; current = current.Date.AddDays(1))
-                    {
-                        var vmdl = ViewModelFactory.CreateViewModel<CalendarItemViewModel.Factory>()
-                        .Invoke(
-                            DataContext,
-                            this,
-                            this);
-                        vmdl.From = current.Date == event_StartDate.Date ? current : current.Date;
-                        vmdl.Until = current.Date == event_EndDate.Date ? event_EndDate : current.Date.AddDays(1);
-                        result.Add(vmdl);
-                    }
-                }
-                return result;
+            List<DateTime> occurences;
+            if (Event.Recurrence.Frequency == null)
+            {
+                occurences = new List<DateTime>() { startDate };
             }
             else
             {
-                Logging.Client.WarnFormat("Appointment item {0} has an invalid time range of {1} - {2}", Event.Summary, Event.StartDate, Event.EndDate);
-                return new List<CalendarItemViewModel>();
+                if (displayFrom < startDate)
+                    displayFrom = startDate;
+
+                if (Event.Recurrence.Until.HasValue && Event.Recurrence.Until.Value < displayTo)
+                    displayTo = Event.Recurrence.Until.Value;
+
+                occurences = Event.Recurrence.GetWithinInterval(Event.StartDate, displayFrom, displayTo).ToList();
             }
+
+            foreach (var o in occurences)
+            {
+                var event_StartDate = o;
+                var event_EndDate = o + duration;
+
+                var from = event_StartDate;
+                var until = event_EndDate;
+
+                if (from < displayFrom) from = displayFrom;
+                if (until > displayTo) until = displayTo;
+                if (Event.IsAllDay)
+                {
+                    until = until.AddDays(1);
+                }
+
+                for (var current = from; current < until; current = current.Date.AddDays(1))
+                {
+                    var vmdl = ViewModelFactory.CreateViewModel<CalendarItemViewModel.Factory>()
+                    .Invoke(
+                        DataContext,
+                        this,
+                        this);
+                    vmdl.From = current.Date == event_StartDate.Date ? current : current.Date;
+                    vmdl.Until = current.Date == event_EndDate.Date ? event_EndDate : current.Date.AddDays(1);
+                    result.Add(vmdl);
+                }
+            }
+            return result;
+
         }
     }
 }
