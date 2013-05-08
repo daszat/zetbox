@@ -17,6 +17,7 @@ namespace Zetbox.Client.Presentables
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
@@ -27,8 +28,8 @@ namespace Zetbox.Client.Presentables
     using Zetbox.App.Extensions;
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables.ValueViewModels;
-    
-    public class CompoundObjectViewModel 
+
+    public class CompoundObjectViewModel
         : ViewModel
     {
         public new delegate CompoundObjectViewModel Factory(IZetboxContext dataCtx, ViewModel parent, ICompoundObject obj);
@@ -58,52 +59,217 @@ namespace Zetbox.Client.Presentables
             // all updates done
         }
 
-        #region Public Interface
-
         private ICompoundObject _object;
         public ICompoundObject Object { get { return _object; } }
 
-        private ReadOnlyProjectedList<Property, BaseValueViewModel> _propertyModels;
+        #region Property Management
+
+        private List<Property> _propertyList = null;
+        private void FetchPropertyList()
+        {
+            if (_propertyList == null)
+            {
+                // load properties from MetaContext
+                var cpDef = _object.GetCompoundObjectDefinition(FrozenContext);
+                _propertyList = new List<Property>();
+                foreach (Property p in cpDef.Properties)
+                {
+                    _propertyList.Add(p);
+                }
+            }
+        }
+
+        private ReadOnlyProjectedList<Property, BaseValueViewModel> _propertyModelList;
+        /// <summary>
+        /// A read only list of all known BaseValueViewModels fetched from the ObjectClass.
+        /// </summary>
         public IReadOnlyList<BaseValueViewModel> PropertyModels
         {
             get
             {
-                if (_propertyModels == null)
+                if (_propertyModelList == null)
                 {
-                    _propertyModels = new ReadOnlyProjectedList<Property, BaseValueViewModel>(
-                        FetchPropertyList().ToList(),
-                        property => BaseValueViewModel.Fetch(ViewModelFactory, DataContext, this, property, property.GetPropertyValueModel(Object)),
+                    FetchPropertyModels();
+                    _propertyModelList = new ReadOnlyProjectedList<Property, BaseValueViewModel>(
+                        _propertyList,
+                        p => _propertyModels[p],
                         m => null); //m.Property);
+                    OnPropertyModelsCreated();
                 }
-                return _propertyModels;
+                return _propertyModelList;
             }
         }
-        private LookupDictionary<string, Property, ViewModel> _propertyModelsByName;
-        public LookupDictionary<string, Property, ViewModel> PropertyModelsByName
+
+        /// <summary>
+        /// Called after the PropertyModels list has been created.
+        /// </summary>
+        protected virtual void OnPropertyModelsCreated()
+        {
+        }
+
+        private LookupDictionary<Property, Property, BaseValueViewModel> _propertyModels;
+        private void FetchPropertyModels()
+        {
+            if (_propertyModels == null)
+            {
+                FetchPropertyList();
+                _propertyModels = new LookupDictionary<Property, Property, BaseValueViewModel>(
+                    _propertyList,
+                    k => k,
+                    v =>
+                    {
+                        var result = BaseValueViewModel.Fetch(ViewModelFactory, DataContext, this, v, v.GetPropertyValueModel(Object));
+                        result.IsReadOnly = IsReadOnly;
+                        return result;
+                    });
+            }
+        }
+
+        private LookupDictionary<string, Property, BaseValueViewModel> _propertyModelsByName;
+        /// <summary>
+        /// Dictionary of BaseValueViewModels with the property name as the key.
+        /// </summary>
+        public LookupDictionary<string, Property, BaseValueViewModel> PropertyModelsByName
         {
             get
             {
                 if (_propertyModelsByName == null)
                 {
-                    _propertyModelsByName = new LookupDictionary<string, Property, ViewModel>(FetchPropertyList().ToList(), 
-                        prop => prop.Name,
-                        prop => BaseValueViewModel.Fetch(ViewModelFactory, DataContext, this, prop, prop.GetPropertyValueModel(Object)));
+                    FetchPropertyModels();
+                    _propertyModelsByName = new LookupDictionary<string, Property, BaseValueViewModel>(
+                        _propertyList,
+                        k => k.Name,
+                        v => _propertyModels[v]
+                    );
+                    OnPropertyModelsByNameCreated();
                 }
                 return _propertyModelsByName;
             }
         }
 
-        private IEnumerable<Property> FetchPropertyList()
+        /// <summary>
+        /// Called after the PropertyModelsByName dictionary has been created.
+        /// </summary>
+        protected virtual void OnPropertyModelsByNameCreated()
         {
-            // load properties from MetaContext
-            var cls = _object.GetCompoundObjectDefinition(FrozenContext);
-            var props = new List<Property>();
-            foreach (Property p in cls.Properties)
-            {
-                props.Add(p);
-            }
+        }
 
-            return props;
+        private ReadOnlyCollection<PropertyGroupViewModel> _propertyGroups;
+
+        /// <summary>
+        /// A read only collection of property groups. See CreatePropertyGroups for more information.
+        /// </summary>
+        public ReadOnlyCollection<PropertyGroupViewModel> PropertyGroups
+        {
+            get
+            {
+                if (_propertyGroups == null)
+                {
+                    _propertyGroups = new ReadOnlyCollection<PropertyGroupViewModel>(CreatePropertyGroups());
+
+                }
+                return _propertyGroups;
+            }
+        }
+
+        /// <summary>
+        /// Creates the property groups list.
+        /// </summary>
+        /// <remarks>
+        /// Property groups are created based on the properties summary tags. Due to the fact, 
+        /// that properties can have more than one summary
+        /// tag, properties may appear in more than one property group. Properties with no
+        /// summary tags appears in the "Uncategorised" group. Note, that currently
+        /// summary tags may not contain spaces as the space is defined as the seperator.
+        /// You can override this method to add custom property groups.
+        /// </remarks>
+        /// <returns>List of property groups</returns>
+        protected virtual List<PropertyGroupViewModel> CreatePropertyGroups()
+        {
+            FetchPropertyModels();
+            var isAdmin = CurrentIdentity != null ? CurrentIdentity.IsAdmininistrator() : false;
+            return _propertyList
+                        .SelectMany(p => (String.IsNullOrEmpty(p.CategoryTags) ? Properties.Resources.Uncategorised : p.CategoryTags)
+                                            .Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+                                            .Select(s => new { Category = s.Trim(), SortKey = GetCategorySortKey(s.Trim()), Property = p }))
+                        .Where(x => isAdmin || x.Category != "Hidden")
+                        .GroupBy(x => x.SortKey, x => x)
+                        .OrderBy(group => group.Key)
+                        .Select(group =>
+                        {
+                            var lst = group.Select(p => _propertyModels[p.Property]).Cast<ViewModel>().ToList();
+
+                            if (lst.Count == 1)
+                            {
+                                return (PropertyGroupViewModel)ViewModelFactory.CreateViewModel<SinglePropertyGroupViewModel.Factory>().Invoke(
+                                    DataContext, this, group.First().Category, lst);
+                            }
+                            else
+                            {
+                                return (PropertyGroupViewModel)ViewModelFactory.CreateViewModel<MultiplePropertyGroupViewModel.Factory>().Invoke(
+                                    DataContext, this, group.First().Category, lst);
+                            }
+                        })
+                        .ToList();
+        }
+
+        private string GetCategorySortKey(string cat)
+        {
+            switch (cat)
+            {
+                case "Summary": return "1|Summary";
+                case "Main": return "2|Main";
+                default: return "3|" + cat;
+                case "Meta": return "4|Meta";
+            }
+        }
+
+        public LookupDictionary<string, PropertyGroupViewModel, PropertyGroupViewModel> PropertyGroupsByName
+        {
+            get
+            {
+                return new LookupDictionary<string, PropertyGroupViewModel, PropertyGroupViewModel>(PropertyGroups, mdl => mdl.Title, mdl => mdl);
+            }
+        }
+
+        private PropertyGroupViewModel _selectedPropertyGroup;
+        public PropertyGroupViewModel SelectedPropertyGroup
+        {
+            get
+            {
+                if (_selectedPropertyGroup == null && PropertyGroups.Count > 0)
+                {
+                    var main = PropertyGroupsByName.ContainsKey("Main") ? PropertyGroupsByName["Main"] : null;
+                    var summary = PropertyGroupsByName.ContainsKey("Summary") ? PropertyGroupsByName["Summary"] : null;
+                    _selectedPropertyGroup = main ?? summary ?? PropertyGroups.FirstOrDefault();
+                }
+                return _selectedPropertyGroup;
+            }
+            set
+            {
+                // only accept new value if it is a contained model
+                // Do not accept null's
+                if (value != null && (PropertyGroupsByName.ContainsKey(value.Name) && PropertyGroupsByName[value.Name] == value))
+                {
+                    _selectedPropertyGroup = value;
+                    OnPropertyChanged("SelectedPropertyGroup");
+                    OnPropertyChanged("SelectedPropertyGroupName");
+                }
+            }
+        }
+        public string SelectedPropertyGroupName
+        {
+            get
+            {
+                return SelectedPropertyGroup == null ? null : SelectedPropertyGroup.Name;
+            }
+            set
+            {
+                if (PropertyGroupsByName.ContainsKey(value))
+                {
+                    SelectedPropertyGroup = PropertyGroupsByName[value];
+                }
+            }
         }
         #endregion
 
@@ -115,6 +281,35 @@ namespace Zetbox.Client.Presentables
         public override string ToString()
         {
             return Name;
+        }
+
+        protected bool isReadOnlyStore = false;
+        /// <summary>
+        /// Specifies, that the underlying object should be read only. Note: this sets every property to read only true. 
+        /// In constructors use isReadOnlyStore instead. It will be propergated down later.
+        /// </summary>
+        public virtual bool IsReadOnly
+        {
+            get
+            {
+                if (DataContext.IsElevatedMode) return false;
+                return isReadOnlyStore;
+            }
+            set
+            {
+                if (isReadOnlyStore != value)
+                {
+                    isReadOnlyStore = value;
+                    if (_propertyModels != null)
+                    {
+                        foreach (var e in _propertyModels)
+                        {
+                            e.Value.IsReadOnly = isReadOnlyStore;
+                        }
+                    }
+                    OnPropertyChanged("IsReadOnly");
+                }
+            }
         }
     }
 }
