@@ -4670,6 +4670,33 @@ public static void AppliesToCanExecReason(CalendarRule obj, MethodReturnEventArg
     <ZetboxBase:Rights>8</ZetboxBase:Rights>
     <ZetboxBase:Group>76d43cf2-4ddf-4a3a-9ad6-28cabfdddff1</ZetboxBase:Group>
   </ZetboxBase:GroupMembership>
+  <ZetboxBase:GroupMembership ExportGuid="829a7e6a-82d0-43f1-8954-002336eec692">
+    <ZetboxBase:ChangedOn>2013-05-08T10:12:09.64289Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-05-08T10:12:09.64289Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Group Administrator has Full rights</ZetboxBase:Description>
+    <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
+    <ZetboxBase:ObjectClass>901a2ddd-1330-4129-b8a2-92b8e655d168</ZetboxBase:ObjectClass>
+    <ZetboxBase:Rights>15</ZetboxBase:Rights>
+    <ZetboxBase:Group>9c46f2b1-09d9-46b8-a7bf-812850921030</ZetboxBase:Group>
+  </ZetboxBase:GroupMembership>
+  <ZetboxBase:GroupMembership ExportGuid="9a2698ae-b798-4de5-8530-aca399873e44">
+    <ZetboxBase:ChangedOn>2013-05-08T10:11:10.31889Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-05-08T10:11:10.31889Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Group Everyone has Read rights</ZetboxBase:Description>
+    <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
+    <ZetboxBase:ObjectClass>ee70b186-09ae-43a3-afb2-a632c47765b9</ZetboxBase:ObjectClass>
+    <ZetboxBase:Rights>1</ZetboxBase:Rights>
+    <ZetboxBase:Group>76d43cf2-4ddf-4a3a-9ad6-28cabfdddff1</ZetboxBase:Group>
+  </ZetboxBase:GroupMembership>
+  <ZetboxBase:GroupMembership ExportGuid="d1ce2425-3c0e-4dd8-b8bc-87f1c1530b0e">
+    <ZetboxBase:ChangedOn>2013-05-08T10:10:59.34189Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-05-08T10:10:59.34189Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Group Everyone has Read rights</ZetboxBase:Description>
+    <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
+    <ZetboxBase:ObjectClass>901a2ddd-1330-4129-b8a2-92b8e655d168</ZetboxBase:ObjectClass>
+    <ZetboxBase:Rights>1</ZetboxBase:Rights>
+    <ZetboxBase:Group>76d43cf2-4ddf-4a3a-9ad6-28cabfdddff1</ZetboxBase:Group>
+  </ZetboxBase:GroupMembership>
   <ZetboxBase:GroupMembership ExportGuid="dd6a85d9-8cd7-4535-98be-6139d65d0868">
     <ZetboxBase:ChangedOn>2013-02-18T16:57:25.593151Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2013-02-18T16:57:25.593151Z</ZetboxBase:CreatedOn>
@@ -4678,6 +4705,15 @@ public static void AppliesToCanExecReason(CalendarRule obj, MethodReturnEventArg
     <ZetboxBase:ObjectClass>fd0b9bf4-0891-4317-9d2e-d08a410d5c4c</ZetboxBase:ObjectClass>
     <ZetboxBase:Rights>8</ZetboxBase:Rights>
     <ZetboxBase:Group>76d43cf2-4ddf-4a3a-9ad6-28cabfdddff1</ZetboxBase:Group>
+  </ZetboxBase:GroupMembership>
+  <ZetboxBase:GroupMembership ExportGuid="ebf591c9-7d16-4f4c-add1-689aa072252a">
+    <ZetboxBase:ChangedOn>2013-05-08T10:12:22.40589Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-05-08T10:12:22.40589Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Group Administrator has Full rights</ZetboxBase:Description>
+    <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
+    <ZetboxBase:ObjectClass>ee70b186-09ae-43a3-afb2-a632c47765b9</ZetboxBase:ObjectClass>
+    <ZetboxBase:Rights>15</ZetboxBase:Rights>
+    <ZetboxBase:Group>9c46f2b1-09d9-46b8-a7bf-812850921030</ZetboxBase:Group>
   </ZetboxBase:GroupMembership>
   <GUI:ControlKind ExportGuid="4f6223e7-2319-441f-93fc-650d68a252f3">
     <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
