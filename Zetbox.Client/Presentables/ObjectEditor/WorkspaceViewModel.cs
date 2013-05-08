@@ -516,7 +516,14 @@ namespace Zetbox.Client.Presentables.ObjectEditor
         #endregion
 
         #region IDeleteCommandParameter members
-        bool IDeleteCommandParameter.IsReadOnly { get { return false; } }
+        bool IDeleteCommandParameter.IsReadOnly
+        {
+            get
+            {
+                var dovm = SelectedItem as DataObjectViewModel;
+                return dovm != null ? dovm.IsReadOnly : true;
+            }
+        }
         bool IDeleteCommandParameter.AllowDelete { get { return true; } }
         IEnumerable<ViewModel> ICommandParameter.SelectedItems { get { return SelectedItem == null ? null : new[] { SelectedItem }; } }
         #endregion
