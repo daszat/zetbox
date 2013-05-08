@@ -148,6 +148,12 @@ namespace Zetbox.Client.Presentables.Calendar
                 }
                 else
                 {
+                    if (displayFrom < Event.StartDate)
+                        displayFrom = Event.StartDate;
+
+                    if (Event.Recurrence.Until.HasValue && Event.Recurrence.Until.Value < displayTo)
+                        displayTo = Event.Recurrence.Until.Value;
+
                     occurences = Event.Recurrence.GetWithinInterval(Event.StartDate, displayFrom, displayTo).ToList();
                 }
 
