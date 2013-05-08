@@ -164,7 +164,7 @@ M: System.Boolean Zetbox.DalProvider.Ef.EntityCollectionWrapper`2::Contains(TInt
 M: System.Boolean Zetbox.DalProvider.Ef.EntityCollectionWrapper`2::Remove(TInterface)
 M: System.Void Zetbox.DalProvider.Ef.EntityCollectionWrapper`2::CopyTo(System.Array,System.Int32)
 M: System.Void Zetbox.DalProvider.Ef.EntityListWrapper`2::Insert(System.Int32,TInterface)
-M: System.Void Zetbox.Client.Presentables.ModuleEditor.WorkspaceViewModel::.ctor(Zetbox.Client.Presentables.IViewModelDependencies,Zetbox.API.IZetboxContext,Zetbox.Client.Presentables.ViewModel,System.Func`2<Zetbox.API.Client.ClientIsolationLevel,Zetbox.API.IZetboxContext>)
+M: System.Void Zetbox.Client.Presentables.ModuleEditor.WorkspaceViewModel::.ctor(Zetbox.Client.Presentables.IViewModelDependencies,Zetbox.API.IZetboxContext,Zetbox.Client.Presentables.ViewModel,System.Func`2<Zetbox.API.ContextIsolationLevel,Zetbox.API.IZetboxContext>)
 
 R: Gendarme.Rules.Portability.DoNotHardcodePathsRule
 # Package URIs are FS-independent

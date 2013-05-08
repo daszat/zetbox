@@ -853,5 +853,10 @@ namespace Zetbox.DalProvider.Ef
                 _transaction = null;
             }
         }
+
+        public override ContextIsolationLevel IsolationLevel
+        {
+            get { return ContextIsolationLevel.PreferContextCache; }
+        }
     }
 }

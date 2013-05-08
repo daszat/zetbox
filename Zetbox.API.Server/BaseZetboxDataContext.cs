@@ -915,5 +915,7 @@ namespace Zetbox.API.Server
         }
         public bool IsElevatedMode { get { return true; } }
         public event EventHandler IsElevatedModeChanged { add { } remove { } }
+
+        public abstract ContextIsolationLevel IsolationLevel { get; }
     }
 }

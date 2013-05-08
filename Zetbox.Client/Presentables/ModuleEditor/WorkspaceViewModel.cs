@@ -34,10 +34,10 @@ namespace Zetbox.Client.Presentables.ModuleEditor
     {
         public new delegate WorkspaceViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
 
-        protected readonly Func<ClientIsolationLevel, IZetboxContext> ctxFactory;
+        protected readonly Func<ContextIsolationLevel, IZetboxContext> ctxFactory;
 
-        public WorkspaceViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, Func<ClientIsolationLevel, IZetboxContext> ctxFactory)
-            : base(appCtx, ctxFactory(ClientIsolationLevel.MergeServerData), parent) // Use another data context, this workspace does not edit anything
+        public WorkspaceViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, Func<ContextIsolationLevel, IZetboxContext> ctxFactory)
+            : base(appCtx, ctxFactory(ContextIsolationLevel.MergeQueryData), parent) // Use another data context, this workspace does not edit anything
         {
             if (ctxFactory == null) throw new ArgumentNullException("ctxFactory");
             this.ctxFactory = ctxFactory;
@@ -150,7 +150,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                         {
                             foreach (var mdl in assemblyLstMdl.SelectedItems)
                             {
-                                var ctx = ctxFactory(ClientIsolationLevel.PrefereClientData);
+                                var ctx = ctxFactory(ContextIsolationLevel.PreferContextCache);
 
                                 var a = ctx.Find<Assembly>(mdl.ID);
                                 var workspaceShown = a.RegenerateTypeRefs();
@@ -314,7 +314,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
         public void EditCurrentModule()
         {
             if (CurrentModule == null) return;
-            var newCtx = ctxFactory(ClientIsolationLevel.PrefereClientData);
+            var newCtx = ctxFactory(ContextIsolationLevel.PreferContextCache);
             var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx, null);
 
             newWorkspace.ShowObject(CurrentModule);

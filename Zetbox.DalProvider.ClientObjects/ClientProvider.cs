@@ -42,7 +42,7 @@ namespace Zetbox.DalProvider.Client
             moduleBuilder.Register((c, p) =>
                 {
                     var ilp = p.FirstOrDefault() as TypedParameter;
-                    var il = ilp != null ? (ClientIsolationLevel)ilp.Value : ClientIsolationLevel.PrefereClientData;
+                    var il = ilp != null ? (ContextIsolationLevel)ilp.Value : ContextIsolationLevel.PreferContextCache;
 
                     return new ZetboxContextImpl(
                         il,

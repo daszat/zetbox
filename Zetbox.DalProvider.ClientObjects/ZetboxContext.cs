@@ -36,8 +36,6 @@ namespace Zetbox.DalProvider.Client
     public interface IZetboxClientContextInternals
     {
         object InvokeServerMethod<T>(T obj, string name, Type retValType, IEnumerable<Type> parameterTypes, params object[] parameter) where T : class, IDataObject;
-
-        ClientIsolationLevel IsolationLevel { get; }
     }
 
     /// <summary>
@@ -65,7 +63,7 @@ namespace Zetbox.DalProvider.Client
         private readonly InterfaceType.Factory _iftFactory;
         private readonly ClientImplementationType.ClientFactory _implTypeFactory;
         private readonly UnattachedObjectFactory _unattachedObjectFactory;
-        private readonly ClientIsolationLevel _clientIsolationLevel;
+        private readonly ContextIsolationLevel _clientIsolationLevel;
         private readonly IPerfCounter _perfCounter;
         private readonly IIdentityResolver _identityResolver;
 
@@ -80,7 +78,7 @@ namespace Zetbox.DalProvider.Client
         [SuppressMessage("Microsoft.Performance", "CA1805:DoNotInitializeUnnecessarily", Justification = "Uses global constant")]
         private int _newIDCounter = Helper.INVALIDID;
 
-        public ZetboxContextImpl(ClientIsolationLevel il, ZetboxConfig config, IProxy proxy, string clientImplementationAssembly, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, ClientImplementationType.ClientFactory implTypeFactory, UnattachedObjectFactory unattachedObjectFactory, IPerfCounter perfCounter, IIdentityResolver identityResolver)
+        public ZetboxContextImpl(ContextIsolationLevel il, ZetboxConfig config, IProxy proxy, string clientImplementationAssembly, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, ClientImplementationType.ClientFactory implTypeFactory, UnattachedObjectFactory unattachedObjectFactory, IPerfCounter perfCounter, IIdentityResolver identityResolver)
         {
             if (perfCounter == null) throw new ArgumentNullException("perfCounter");
             this._clientIsolationLevel = il;
@@ -139,7 +137,7 @@ namespace Zetbox.DalProvider.Client
         {
             get
             {
-                return _clientIsolationLevel != ClientIsolationLevel.PrefereClientData;
+                return _clientIsolationLevel != ContextIsolationLevel.PreferContextCache;
             }
         }
 
@@ -415,7 +413,7 @@ namespace Zetbox.DalProvider.Client
         {
             var localobj = this.Attach(obj);
 
-            if (_clientIsolationLevel == ClientIsolationLevel.MergeServerData && obj != localobj)
+            if (_clientIsolationLevel == ContextIsolationLevel.MergeQueryData && obj != localobj)
             {
                 RecordNotifications(localobj);
                 localobj.ApplyChangesFrom(obj);
@@ -1300,7 +1298,7 @@ namespace Zetbox.DalProvider.Client
             return handler.Result;
         }
 
-        public ClientIsolationLevel IsolationLevel { get { return _clientIsolationLevel; } }
+        public ContextIsolationLevel IsolationLevel { get { return _clientIsolationLevel; } }
 
         #endregion
 

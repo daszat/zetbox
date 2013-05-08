@@ -29,6 +29,18 @@ namespace Zetbox.API
         void Created(IZetboxContext ctx);
     }
 
+    public enum ContextIsolationLevel
+    {
+        /// <summary>
+        /// Uses received data after each query
+        /// </summary>
+        MergeQueryData = 1,
+        /// <summary>
+        /// Uses cached data from the context after each query
+        /// </summary>
+        PreferContextCache = 2
+    }
+
     public interface IReadOnlyZetboxContext
         : IDisposable
     {
@@ -227,6 +239,11 @@ namespace Zetbox.API
         /// </summary>
         /// <remarks>The caller is responsible for disposing stored objects. See <see cref="Disposing"/> Event.</remarks>
         IDictionary<object, object> TransientState { get; }
+
+        /// <summary>
+        /// Indicates the isolation level of this context.
+        /// </summary>
+        ContextIsolationLevel IsolationLevel { get; }
     }
 
     /// <summary>

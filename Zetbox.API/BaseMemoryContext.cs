@@ -643,7 +643,6 @@ namespace Zetbox.API
 
         #region IZetboxContext Members
 
-
         public int GetSequenceNumber(Guid sequenceGuid)
         {
             throw new NotImplementedException();
@@ -668,6 +667,8 @@ namespace Zetbox.API
         {
             // Allways alowed
         }
+
+        public abstract ContextIsolationLevel IsolationLevel { get; }
 
         #endregion
 

@@ -627,7 +627,6 @@ namespace Zetbox.DalProvider.NHibernate
             return ToProxyType(ToImplementationType(ifType));
         }
 
-
         protected override int ExecGetSequenceNumber(Guid sequenceGuid)
         {
             return CallGetSequenceNumber(sequenceGuid, "GetSequenceNumber");
@@ -772,6 +771,11 @@ namespace Zetbox.DalProvider.NHibernate
             }
             var implType = t.DeclaringType;
             return implType;
+        }
+
+        public override ContextIsolationLevel IsolationLevel
+        {
+            get { return ContextIsolationLevel.PreferContextCache; }
         }
     }
 }

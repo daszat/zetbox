@@ -142,5 +142,10 @@ namespace Zetbox.DalProvider.Memory
                 }
             });
         }
+
+        public override ContextIsolationLevel IsolationLevel
+        {
+            get { return ContextIsolationLevel.PreferContextCache; }
+        }
     }
 }

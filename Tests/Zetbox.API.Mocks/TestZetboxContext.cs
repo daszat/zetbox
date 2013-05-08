@@ -285,7 +285,6 @@ namespace Zetbox.API.Mocks
 
         #region IReadOnlyZetboxContext Members
 
-
         public System.IO.Stream GetStream(int ID)
         {
             throw new NotImplementedException();
@@ -361,6 +360,9 @@ namespace Zetbox.API.Mocks
                 return _TransientState;
             }
         }
+
+        public ContextIsolationLevel IsolationLevel { get { return ContextIsolationLevel.PreferContextCache; } }
+
         #endregion
 
         /// <summary>

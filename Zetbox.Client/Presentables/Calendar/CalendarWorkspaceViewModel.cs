@@ -24,11 +24,11 @@ namespace Zetbox.Client.Presentables.Calendar
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
     using Zetbox.App.GUI;
+    using Zetbox.Client.GUI;
     using Zetbox.Client.Presentables;
     using Zetbox.Client.Presentables.ZetboxBase;
-    using cal = Zetbox.App.Calendar;
     using Zetbox.Client.Reporting;
-    using Zetbox.Client.GUI;
+    using cal = Zetbox.App.Calendar;
 
     #region CalendarSelectionViewModel
     public class CalendarSelectionViewModel : ViewModel

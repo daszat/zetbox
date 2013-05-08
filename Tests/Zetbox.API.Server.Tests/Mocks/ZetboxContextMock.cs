@@ -195,5 +195,10 @@ namespace Zetbox.API.Server.Mocks
         {
             throw new NotImplementedException();
         }
+
+        public override ContextIsolationLevel IsolationLevel
+        {
+            get { return ContextIsolationLevel.PreferContextCache; }
+        }
     }
 }

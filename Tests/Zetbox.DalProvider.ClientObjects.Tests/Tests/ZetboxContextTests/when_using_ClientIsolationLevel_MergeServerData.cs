@@ -37,7 +37,7 @@ namespace Zetbox.DalProvider.Client.Tests.ZetboxContextTests
 
             Logging.Log.Info("ZetboxContextTests.SetUp() is called");
 
-            ctx = scope.Resolve<Func<ClientIsolationLevel, IZetboxContext>>().Invoke(ClientIsolationLevel.MergeServerData);
+            ctx = scope.Resolve<Func<ContextIsolationLevel, IZetboxContext>>().Invoke(ContextIsolationLevel.MergeQueryData);
         }
 
         [Test]

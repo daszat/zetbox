@@ -88,7 +88,6 @@
   <ItemGroup>
     <Compile Include="ClientApiModule.cs" />
     <Compile Include="ClientDeploymentRestrictor.cs" />
-    <Compile Include="ClientIsolationLevel.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="HttpServiceClient.cs" />
     <Compile Include="ICredentialsResolver.cs" />
