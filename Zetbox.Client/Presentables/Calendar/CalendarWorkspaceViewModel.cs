@@ -159,6 +159,8 @@ namespace Zetbox.Client.Presentables.Calendar
             : base(appCtx, dataCtx, parent)
         {
             if (ctxFactory == null) throw new ArgumentNullException("ctxFactory");
+            if (dataCtx.IsolationLevel != ContextIsolationLevel.MergeQueryData) throw new ArgumentOutOfRangeException("dataCtx", string.Format("CalendarWorkspaceViewModel requires a MergeQueryData context. The specified dataCtx ({0}) has {1}", dataCtx, dataCtx.IsolationLevel));
+
             _ctxFactory = ctxFactory;
             _rptFactory = rptFactory;
 
