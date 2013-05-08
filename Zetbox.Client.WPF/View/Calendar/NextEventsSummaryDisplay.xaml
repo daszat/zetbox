@@ -14,7 +14,10 @@
                                  Style="{StaticResource ImageButton}" />
             <TextBlock Text="{Binding NextEventsLabel}" />
         </DockPanel>
-        <ctrls:ZetboxListView ItemsSource="{Binding NextEventsAsync, Mode=OneWay, ValidatesOnDataErrors=true}">
+        <ctrls:ZetboxListView ItemsSource="{Binding NextEventsAsync, Mode=OneWay, ValidatesOnDataErrors=true}"
+                              SelectedItem="{Binding SelectedItem}"
+                              SelectionMode="Single"
+                              MouseDoubleClick="ItemActivatedHandler">
             <ctrls:ZetboxListView.View>
                 <GridView>
                     <GridViewColumn Header="{Binding DateLabel}"

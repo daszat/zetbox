@@ -31,5 +31,22 @@ namespace Zetbox.Client.WPF.View.Calendar
         {
             get { return (NextEventsSummaryViewModel)DataContext; }
         }
+
+        #region ItemActivatedHandler
+        /// <summary>
+        /// Opens a new WorkspaceModel in its default view with the double clicked item opened.
+        /// </summary>
+        /// <param name="sender">the sender of this event, a <see cref="ListViewItem"/> is expected</param>
+        /// <param name="e">the arguments of this event</param>
+        protected void ItemActivatedHandler(object sender, RoutedEventArgs e)
+        {
+            if (ViewModel != null && ViewModel.SelectedItem != null)
+            {
+                ViewModel.Open();
+            }
+
+            e.Handled = true;
+        }
+        #endregion
     }
 }

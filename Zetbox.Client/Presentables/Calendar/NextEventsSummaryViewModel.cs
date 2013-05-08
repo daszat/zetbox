@@ -4,26 +4,26 @@ namespace Zetbox.Client.Presentables.Calendar
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Zetbox.Client.Presentables;
+    using System.Threading;
     using Zetbox.API;
-    using Zetbox.Client.Presentables.ZetboxBase;
+    using Zetbox.API.Async;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
     using Zetbox.App.Calendar;
     using Zetbox.App.Extensions;
     using Zetbox.App.GUI;
-    using Zetbox.API.Async;
-    using Zetbox.App.Base;
-    using Zetbox.API.Utils;
-    using System.Threading;
+    using Zetbox.Client.Presentables;
+    using Zetbox.Client.Presentables.ZetboxBase;
 
     [ViewModelDescriptor]
     public class NextEventsSummaryViewModel : ViewModel, IRefreshCommandListener
     {
         public new delegate NextEventsSummaryViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
 
-        private FetchCache _fetchCache;
-        private Func<IZetboxContext> _ctxFactory;
-        private System.Timers.Timer _timer;
-        private SynchronizationContext _syncContext;
+        private readonly FetchCache _fetchCache;
+        private readonly Func<IZetboxContext> _ctxFactory;
+        private readonly System.Timers.Timer _timer;
+        private readonly SynchronizationContext _syncContext;
 
         public NextEventsSummaryViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, Func<IZetboxContext> ctxFactory)
             : base(appCtx, dataCtx, parent)
@@ -82,6 +82,7 @@ namespace Zetbox.Client.Presentables.Calendar
 
         public void Refresh()
         {
+            _fetchCache.Invalidate();
             if (_NextEventsTask != null)
                 _NextEventsTask.Invalidate();
             OnPropertyChanged("NextEvents");
@@ -180,7 +181,6 @@ namespace Zetbox.Client.Presentables.Calendar
                 });
         }
 
-
         public IEnumerable<CalendarItemViewModel> NextEvents
         {
             get { return EnsureNextEventsTask().Get(); }
@@ -189,6 +189,70 @@ namespace Zetbox.Client.Presentables.Calendar
         public IEnumerable<CalendarItemViewModel> NextEventsAsync
         {
             get { return EnsureNextEventsTask().GetAsync(); }
+        }
+
+        #endregion
+
+        #region SelectedItem
+        private CalendarItemViewModel _selectedItem;
+        public CalendarItemViewModel SelectedItem
+        {
+            get { return _selectedItem; }
+            set
+            {
+                if (_selectedItem != value)
+                {
+                    _selectedItem = value;
+                    OnPropertyChanged("SelectedItem");
+                }
+            }
+        }
+        #endregion
+
+        #region Open command
+        private ICommandViewModel _OpenCommand = null;
+        public ICommandViewModel OpenCommand
+        {
+            get
+            {
+                if (_OpenCommand == null)
+                {
+                    _OpenCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, CommonCommandsResources.OpenDataObjectCommand_Name, CommonCommandsResources.OpenDataObjectCommand_Tooltip, Open, CanOpen, CanOpenReason);
+                }
+                return _OpenCommand;
+            }
+        }
+
+        public bool CanOpen()
+        {
+            return SelectedItem != null;
+        }
+
+        public string CanOpenReason()
+        {
+            return CommonCommandsResources.DataObjectCommand_NothingSelected;
+        }
+
+        public void Open()
+        {
+            if (!CanOpen()) return;
+            var ctx = _ctxFactory();
+            var source = SelectedItem.Event.Source.GetObject(ctx);
+            if (source != null && !source.CurrentAccessRights.HasReadRights())
+            {
+                ViewModelFactory.ShowMessage(CalendarResources.CannotOpenNoRightsMessage, CalendarResources.CannotOpenNoRightsCaption);
+                return;
+            }
+
+            var ws = ViewModelFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(ctx, null);
+            if (source != null)
+                ws.ShowObject(source);
+            else
+                ws.ShowObject(SelectedItem.Event);
+            ViewModelFactory.ShowDialog(ws, this);
+
+            _fetchCache.Invalidate();
+            Refresh(); // A dialog makes it easy to know when the time for a refresh has come
         }
 
         #endregion
