@@ -23,8 +23,9 @@
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
     -->
 
-
     <DockPanel>
+        <ctrls:ObjectHeader DockPanel.Dock="Top" />
+
         <ToolBarTray DockPanel.Dock="Top">
             <ctrls:WorkaroundToolBar ItemsSource="{Binding Actions}">
                 <ctrls:WorkaroundToolBar.Resources>
@@ -35,16 +36,6 @@
                 </ctrls:WorkaroundToolBar.Resources>
             </ctrls:WorkaroundToolBar>
         </ToolBarTray>
-        <DockPanel DockPanel.Dock="Top">
-            <Image DockPanel.Dock="Left"
-                   Source="{Binding Icon, Converter={StaticResource ImageConverter}}"
-                   Margin="4,2,2,2"
-                   Width="14"
-                   Height="14" />
-            <TextBlock Text="{Binding Name}"
-                       HorizontalAlignment="Center"
-                       FontWeight="Bold" />
-        </DockPanel>
 
         <ScrollViewer HorizontalScrollBarVisibility="Disabled">
             <DockPanel>
@@ -54,20 +45,20 @@
                           Margin="5">
                     <DockPanel>
                         <ctrls:LabeledView DockPanel.Dock="Top"
-                                          Margin="5,0,5,0"
-                                          DataContext="{Binding PropertyModelsByName[Description], UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
+                                           Margin="5,0,5,0"
+                                           DataContext="{Binding PropertyModelsByName[Description], UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
 
                         <ctrls:LabeledView DockPanel.Dock="Top"
-                                          Margin="5,0,5,0"
-                                          DataContext="{Binding PropertyModelsByName[Module], UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
+                                           Margin="5,0,5,0"
+                                           DataContext="{Binding PropertyModelsByName[Module], UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
 
                         <ctrls:LabeledView DockPanel.Dock="Top"
-                                          Margin="5,0,5,0"
-                                          DataContext="{Binding PropertyModelsByName[Storage], UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
+                                           Margin="5,0,5,0"
+                                           DataContext="{Binding PropertyModelsByName[Storage], UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
 
                         <ctrls:LabeledView DockPanel.Dock="Top"
-                                          Margin="5,0,5,0"
-                                          DataContext="{Binding PropertyModelsByName[Containment], UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
+                                           Margin="5,0,5,0"
+                                           DataContext="{Binding PropertyModelsByName[Containment], UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
                     </DockPanel>
                 </GroupBox>
 

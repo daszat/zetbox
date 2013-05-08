@@ -26,17 +26,7 @@
 
     <!-- TODO: Background="{Binding HighlightAsync, Converter={StaticResource HighlightPanelBackgroundConverter}}"-->
     <DockPanel>
-        <DockPanel DockPanel.Dock="Top"
-                   Margin="{StaticResource AreaGroup1Margin}">
-            <Image DockPanel.Dock="Left"
-                   Source="{Binding Icon, Converter={StaticResource ImageConverter}}"
-                   Width="{StaticResource BigControlHeight}"
-                   Height="{StaticResource BigControlHeight}" />
-            <TextBlock Text="{Binding Name}"
-                       Style="{StaticResource zbTitle}"
-                       Margin="10 0 0 0"
-                       HorizontalAlignment="Left" />
-        </DockPanel>
+        <ctrls:ObjectHeader DockPanel.Dock="Top" />
 
         <ToolBarTray DockPanel.Dock="Top">
             <ctrls:WorkaroundToolBar ItemsSource="{Binding Actions}">

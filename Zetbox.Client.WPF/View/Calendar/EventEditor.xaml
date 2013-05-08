@@ -4,29 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit">
     <DockPanel>
-        <DockPanel DockPanel.Dock="Top"
-                   Margin="{StaticResource AreaGroup1Margin}">
-            <Image DockPanel.Dock="Left"
-                   Source="{Binding Icon, Converter={StaticResource ImageConverter}}"
-                   Width="{StaticResource BigControlHeight}"
-                   Height="{StaticResource BigControlHeight}" />
-            <TextBlock Text="{Binding Name}"
-                       Margin="10 0 0 0"
-                       HorizontalAlignment="Left">
-                <TextBlock.Style>
-                    <Style TargetType="{x:Type TextBlock}"
-                           BasedOn="{StaticResource zbTitle}">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding ObjectState}"
-                                         Value="Deleted">
-                                <Setter Property="TextBlock.TextDecorations"
-                                        Value="Strikethrough" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBlock.Style>
-            </TextBlock>
-        </DockPanel>
+        <ctrls:ObjectHeader DockPanel.Dock="Top" />
+        
         <StackPanel>
             <ctrls:LabeledView DataContext="{Binding PropertyModelsByName[Calendar]}"
                                RequestedKind="Zetbox.App.GUI.TextKind" />
