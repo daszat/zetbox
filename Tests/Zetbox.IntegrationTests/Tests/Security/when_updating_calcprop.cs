@@ -55,7 +55,7 @@ namespace Zetbox.IntegrationTests.Security
         public class in_same_context : when_updating_calcprop
         {
             [Test]
-            public void should_have_full_rights()
+            public void should_have_correct_rights()
             {
                 Assert.That(parent.CurrentAccessRights.HasWriteRights(), Is.True);
                 Assert.That(parent.CurrentAccessRights.HasDeleteRights(), Is.True);
@@ -63,8 +63,7 @@ namespace Zetbox.IntegrationTests.Security
                 Assert.That(child1.CurrentAccessRights.HasWriteRights(), Is.True);
                 Assert.That(child1.CurrentAccessRights.HasDeleteRights(), Is.True);
 
-                Assert.That(child2.CurrentAccessRights.HasWriteRights(), Is.True);
-                Assert.That(child2.CurrentAccessRights.HasDeleteRights(), Is.True);
+                Assert.That(child2.CurrentAccessRights.HasNoRights());
             }
 
             [Test]
@@ -72,7 +71,7 @@ namespace Zetbox.IntegrationTests.Security
             {
                 Assert.That(parent.Name, Is.EqualTo("MyParent"));
                 Assert.That(child1.ParentName, Is.EqualTo("MyParent"));
-                Assert.That(child2.ParentName, Is.EqualTo("MyParent"));
+                Assert.That(string.IsNullOrEmpty(child2.ParentName), Is.True, child2.ParentName);
             }
 
             [Test]
@@ -81,7 +80,7 @@ namespace Zetbox.IntegrationTests.Security
                 parent.Name = "MyParentChanged";
                 Assert.That(parent.Name, Is.EqualTo("MyParentChanged"));
                 Assert.That(child1.ParentName, Is.EqualTo("MyParentChanged"));
-                Assert.That(child2.ParentName, Is.EqualTo("MyParentChanged"));
+                Assert.That(string.IsNullOrEmpty(child2.ParentName), Is.True, child2.ParentName);
             }
 
             [Test]

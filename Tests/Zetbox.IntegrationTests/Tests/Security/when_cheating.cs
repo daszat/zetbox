@@ -29,6 +29,7 @@ namespace Zetbox.IntegrationTests.Security
     using Zetbox.App.Test;
     using Zetbox.Client.Presentables;
     using System.IO;
+    using System.Security;
 
     public abstract class when_cheating : AbstractSecurityTest
     {
@@ -73,7 +74,7 @@ namespace Zetbox.IntegrationTests.Security
             //[ExpectedException(typeof(FaultException), UserMessage = "The current identity has no rights to modify an Object", MatchType = MessageMatch.StartsWith)]
             public override void should_not_send_when_no_rights()
             {
-                Assert.That(() => base.should_not_send_when_no_rights(), Throws.InstanceOf<FaultException>().Or.InstanceOf<IOException>());
+                Assert.That(() => base.should_not_send_when_no_rights(), Throws.InstanceOf<FaultException>().Or.InstanceOf<IOException>().Or.InstanceOf<SecurityException>());
             }
         }
 
