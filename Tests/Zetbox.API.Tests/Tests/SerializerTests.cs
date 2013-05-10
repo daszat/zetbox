@@ -378,7 +378,8 @@ namespace Zetbox.API.Tests
                 TestStream<TestCompoundObjectImpl>(
                     v => sw.Write(v),
                     () => sr.ReadCompoundObject<TestCompoundObjectImpl>(),
-                    new TestCompoundObjectImpl() { TestProperty = testString }, null);
+                    new TestCompoundObjectImpl() { TestProperty = testString },
+                    new TestCompoundObjectImpl() {  });
             }
         }
     }
