@@ -3135,7 +3135,7 @@ namespace Zetbox.Server.SchemaManagement
         public bool IsChangeIndexConstraint(IndexConstraint uc)
         {
             var isFulltextConstraint = uc is FullTextIndexConstraint;
-            if (!isFulltextConstraint) return false;
+            if (isFulltextConstraint) return false;
 
             var saved = savedSchema.FindPersistenceObject<IndexConstraint>(uc.ExportGuid);
             if (saved == null) return false;

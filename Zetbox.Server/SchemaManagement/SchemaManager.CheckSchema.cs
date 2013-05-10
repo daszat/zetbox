@@ -619,7 +619,7 @@ namespace Zetbox.Server.SchemaManagement
             foreach (var uc in objClass.Constraints.OfType<IndexConstraint>())
             {
                 var isFulltextConstraint = uc is FullTextIndexConstraint;
-                if (!isFulltextConstraint) continue;
+                if (isFulltextConstraint) continue;
 
                 var tblName = objClass.GetTableRef(db);
                 var columns = Construct.GetUCColNames(uc);
