@@ -116,10 +116,7 @@ namespace Zetbox.Server.Tests.Security
                 Assert.That(child1.CurrentAccessRights.HasWriteRights(), Is.True);
                 Assert.That(child1.CurrentAccessRights.HasDeleteRights(), Is.True);
 
-                // Big diff. to client impl. -> on the server, there are always read rights
-                Assert.That(child2.CurrentAccessRights.HasReadRights(), Is.True);
-                Assert.That(child2.CurrentAccessRights.HasWriteRights(), Is.False);
-                Assert.That(child2.CurrentAccessRights.HasDeleteRights(), Is.False);
+                Assert.That(child2.CurrentAccessRights.HasNoRights());
             }
         }
 
