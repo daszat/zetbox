@@ -108,7 +108,7 @@ namespace Zetbox.Server.Tests.Security
         public class in_same_context : when_updating_calcprop
         {
             [Test]
-            public void should_have_full_rights()
+            public void should_have_correct_rights()
             {
                 Assert.That(parent.CurrentAccessRights.HasWriteRights(), Is.True);
                 Assert.That(parent.CurrentAccessRights.HasDeleteRights(), Is.True);
@@ -116,8 +116,10 @@ namespace Zetbox.Server.Tests.Security
                 Assert.That(child1.CurrentAccessRights.HasWriteRights(), Is.True);
                 Assert.That(child1.CurrentAccessRights.HasDeleteRights(), Is.True);
 
-                Assert.That(child2.CurrentAccessRights.HasWriteRights(), Is.True);
-                Assert.That(child2.CurrentAccessRights.HasDeleteRights(), Is.True);
+                // Big diff. to client impl. -> on the server, there are always read rights
+                Assert.That(child2.CurrentAccessRights.HasReadRights(), Is.True);
+                Assert.That(child2.CurrentAccessRights.HasWriteRights(), Is.False);
+                Assert.That(child2.CurrentAccessRights.HasDeleteRights(), Is.False);
             }
         }
 
