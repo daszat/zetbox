@@ -340,6 +340,9 @@ namespace Zetbox.DalProvider.NHibernate
 
                 foreach (var obj in saveOrUpdateList)
                 {
+                    // Reflect changes in database
+                    _nhSession.Refresh(obj.NHibernateProxy);
+
                     _attachedObjects.Add(obj);
                     _attachedObjectsByProxy.Add(obj);
                 }
