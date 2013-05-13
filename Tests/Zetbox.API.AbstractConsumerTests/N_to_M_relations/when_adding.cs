@@ -19,9 +19,9 @@ namespace Zetbox.API.AbstractConsumerTests.N_to_M_relations
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using NUnit.Framework;
     using Zetbox.API;
     using Zetbox.App.Test;
-    using NUnit.Framework;
 
     public static class when_adding
     {
@@ -85,17 +85,18 @@ namespace Zetbox.API.AbstractConsumerTests.N_to_M_relations
             }
 
             [Test]
-            public void should_notify_right_end()
+            public void should_notify_both_ends()
             {
-                bool notifiedA = false;
-                aSide1.PropertyChanged += (s, e) => { if (e.PropertyName == "BSide") notifiedA = true; };
+                int notifiedA = 0;
+                aSide1.PropertyChanged += (s, e) => { if (e.PropertyName == "BSide") notifiedA++; };
 
-                bool notifiedB = false;
-                bSide1.PropertyChanged += (s, e) => { if (e.PropertyName == "ASide") notifiedB = true; };
-                
+                int notifiedB = 0;
+                bSide1.PropertyChanged += (s, e) => { if (e.PropertyName == "ASide") notifiedB++; };
+
                 aSide1.BSide.Add(bSide1);
-                Assert.That(notifiedA, Is.True, "A was not notified");
-                Assert.That(notifiedB, Is.False, "B was notified");
+
+                Assert.That(notifiedA, Is.EqualTo(1), "A");
+                Assert.That(notifiedB, Is.EqualTo(0), "B");
             }
         }
 
@@ -159,19 +160,19 @@ namespace Zetbox.API.AbstractConsumerTests.N_to_M_relations
             }
 
             [Test]
-            public void should_notify_right_end()
+            public void should_notify_both_ends()
             {
-                bool notifiedA = false;
-                aSide1.PropertyChanged += (s, e) => { if (e.PropertyName == "BSide") notifiedA = true; };
+                int notifiedA = 0;
+                aSide1.PropertyChanged += (s, e) => { if (e.PropertyName == "BSide") notifiedA++; };
 
-                bool notifiedB = false;
-                bSide1.PropertyChanged += (s, e) => { if (e.PropertyName == "ASide") notifiedB = true; };
+                int notifiedB = 0;
+                bSide1.PropertyChanged += (s, e) => { if (e.PropertyName == "ASide") notifiedB++; };
 
                 bSide1.ASide.Add(aSide1);
-                Assert.That(notifiedA, Is.False, "A was notified");
-                Assert.That(notifiedB, Is.True, "B was not notified");
-            }
 
+                Assert.That(notifiedA, Is.EqualTo(0), "A");
+                Assert.That(notifiedB, Is.EqualTo(1), "B");
+            }
         }
     }
 }
