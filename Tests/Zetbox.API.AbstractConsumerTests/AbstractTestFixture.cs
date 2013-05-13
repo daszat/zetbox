@@ -21,9 +21,9 @@ namespace Zetbox.API.AbstractConsumerTests
     using System.Linq;
     using System.Text;
     using Autofac;
+    using NUnit.Framework;
     using Zetbox.API.Configuration;
     using Zetbox.API.Utils;
-    using NUnit.Framework;
 
     public abstract class AbstractTestFixture
     {
@@ -45,6 +45,11 @@ namespace Zetbox.API.AbstractConsumerTests
         protected virtual IZetboxContext GetContext()
         {
             return scope.Resolve<IZetboxContext>();
+        }
+
+        protected virtual IZetboxContext GetMergingContext()
+        {
+            return scope.Resolve<Func<ContextIsolationLevel, IZetboxContext>>().Invoke(ContextIsolationLevel.MergeQueryData);
         }
 
         protected void TestChangeNotification<TNOTIFIER>(TNOTIFIER notifier, string expectedPropertyName, Action doChange, Action changingAsserts, Action changedAsserts)
