@@ -115,15 +115,8 @@ namespace Zetbox.API.Server
             // No AccessControlList - full rights
             if (!rootClass.HasAccessControlList()) return Zetbox.API.AccessRights.Full;
 
-            var rights = rootClass.GetGroupAccessRights(Identity);
-            if (rights.HasValue)
-            {
-                return rights.Value;
-            }
-            else
-            {
-                return rootClass.NeedsRightsTable() ? Zetbox.API.AccessRights.None : Zetbox.API.AccessRights.Full;
-            }
+            // return the rights given by group membership. if none is found, deny access
+            return rootClass.GetGroupAccessRights(Identity) ?? Zetbox.API.AccessRights.None;
         }
 
         /// <summary>
@@ -185,15 +178,7 @@ namespace Zetbox.API.Server
             if (obj is IDataObject && obj.ObjectState == DataObjectState.New)
             {
                 var ifType = GetInterfaceType(obj);
-                var cls = metaDataResolver.GetObjectClass(ifType);
-                if (cls == null)
-                {
-                    Logging.Log.WarnFormat("obj=[{0}] ifType=[{1}]", obj.GetType().AssemblyQualifiedName, ifType.Type.AssemblyQualifiedName);
-                    Logging.Log.WarnFormat("metaDataResolver=[{0}] => [{1}]", metaDataResolver.GetType().AssemblyQualifiedName, metaDataResolver.ToString());
-                    throw new ApplicationException("Unexpected failure from metadata resolver");
-                }
-                cls = cls.GetRootClass();
-                if (identityStore != null && cls.HasAccessControlList() && !cls.GetGroupAccessRights(identityStore).HasCreateRights())
+                if (!GetGroupAccessRights(ifType).HasCreateRights())
                 {
                     throw new System.Security.SecurityException(string.Format("The current identity has no rights to create an Object of type '{0}'", ifType.Type.FullName));
                 }
@@ -467,11 +452,11 @@ namespace Zetbox.API.Server
             if (ifType.Type == typeof(Zetbox.App.Base.Blob))
                 throw new InvalidOperationException("Creating a Blob is not supported. Use CreateBlob() instead");
 
-            ObjectClass cls = metaDataResolver.GetObjectClass(ifType).GetRootClass();
-            if (identityStore != null && cls.HasAccessControlList() && !cls.GetGroupAccessRights(identityStore).HasCreateRights())
+            if (!GetGroupAccessRights(ifType).HasCreateRights())
             {
                 throw new System.Security.SecurityException(string.Format("The current identity has no rights to create an Object of type '{0}'", ifType.Type.FullName));
             }
+
             return (IDataObject)CreateInternal(ifType);
         }
 

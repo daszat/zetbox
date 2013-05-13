@@ -616,7 +616,7 @@ namespace Zetbox.API.Server
             // Only ACL's on Root classes are allowed
             var rootClass = objClass.GetRootClass();
 
-            if (Ctx.GetGroupAccessRights(ifType).HasReadRights())
+            if (!rootClass.HasAccessControlList() || Ctx.GetGroupAccessRights(ifType).HasReadRights())
             {
                 return e;
             }
