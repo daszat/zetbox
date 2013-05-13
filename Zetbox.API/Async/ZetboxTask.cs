@@ -13,16 +13,14 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 
-// #define DEBUG_FORCE_SYNCHRON
-
 namespace Zetbox.API.Async
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
     using System.Text;
     using System.Threading;
-    using System.Reflection;
 
     public enum ZbTaskState
     {
@@ -60,6 +58,13 @@ namespace Zetbox.API.Async
     {
         public static readonly SynchronizationContext Synchron = null;
         public static readonly IEnumerable<ZbTask> NoInnerTasks = null;
+
+        private static bool _debugForceSynchron = false;
+        public static bool DebugForceSynchron
+        {
+            get { return _debugForceSynchron; }
+            set { _debugForceSynchron = value; }
+        }
 
         private readonly object _lockObject = new object();
         protected object SyncRoot { get { return _lockObject; } }
@@ -102,10 +107,6 @@ namespace Zetbox.API.Async
         /// </summary>
         protected ZbTask(SynchronizationContext syncContext, IEnumerable<ZbTask> innerTasks)
         {
-#if DEBUG_FORCE_SYNCHRON
-            syncContext = Synchron;
-#endif
-
             if (innerTasks == null)
                 innerTasks = Enumerable.Empty<ZbTask>();
 
@@ -187,11 +188,11 @@ namespace Zetbox.API.Async
                     lock (_lockObject) State = ZbTaskState.Failed;
 
                     // If we're synchronous, it's *much* cleaner to just trow the exception and let it be handled immediately.
-                    if (_syncContext == Synchron)
+                    if (_syncContext == Synchron || _debugForceSynchron)
                         throw;
                 }
             };
-            if (_syncContext != null)
+            if (_syncContext != null && !_debugForceSynchron)
             {
                 ThreadPool.QueueUserWorkItem(tpState =>
                 {
