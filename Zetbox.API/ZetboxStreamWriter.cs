@@ -386,6 +386,8 @@ namespace Zetbox.API
         public void Write(ICompoundObject val)
         {
             TraceCurrentPos();
+            if (val == null)
+                Log.Warn("Writing null compoundobject");
             SerializerTrace("Writing ICompoundObject {0}", val);
             if (val != null)
             {
