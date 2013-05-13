@@ -17,14 +17,14 @@ namespace Zetbox.API.Common
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
     using System.Linq;
     using System.Text;
     using Autofac;
-    using System.IO;
-    using System.ComponentModel;
-    using Zetbox.API.Utils;
     using PdfSharp.Pdf;
     using PdfSharp.Pdf.IO;
+    using Zetbox.API.Utils;
 
     public interface ITextExtractor
     {
@@ -83,8 +83,8 @@ namespace Zetbox.API.Common
 
         public string GetText(Stream data, string mimeType)
         {
-            if(data == null) throw new ArgumentNullException("data");
-            if(string.IsNullOrEmpty(mimeType)) return string.Empty;
+            if (data == null) throw new ArgumentNullException("data");
+            if (string.IsNullOrEmpty(mimeType)) return string.Empty;
             mimeType = mimeType.ToLower().Trim();
 
             if (_scope.IsRegisteredWithName<ITextExtractorProvider>(mimeType))
@@ -134,29 +134,32 @@ namespace Zetbox.API.Common
         {
             if (data == null) throw new ArgumentNullException("data");
 
-            try
-            {
-                var inputDocument = PdfReader.Open(data, PdfDocumentOpenMode.ReadOnly);
-                var result = new StringBuilder();
+            return String.Empty;
 
-                foreach (PdfPage page in inputDocument.Pages)
-                {
-                    for (int index = 0; index < page.Contents.Elements.Count; index++)
-                    {
-                        var stream = page.Contents.Elements.GetDictionary(index).Stream;
-                        result.AppendLine(PDFParser.ExtractTextFromPDFBytes(stream.Value, limit - result.Length));
+            // Case 9187: Extracting from PdfSharp-created PDFs returns binary garbage
+            //try
+            //{
+            //    var inputDocument = PdfReader.Open(data, PdfDocumentOpenMode.ReadOnly);
+            //    var result = new StringBuilder();
 
-                        if (result.Length >= limit) return result.ToString();
-                    }
-                }
+            //    foreach (PdfPage page in inputDocument.Pages)
+            //    {
+            //        for (int index = 0; index < page.Contents.Elements.Count; index++)
+            //        {
+            //            var stream = page.Contents.Elements.GetDictionary(index).Stream;
+            //            result.AppendLine(PDFParser.ExtractTextFromPDFBytes(stream.Value, limit - result.Length));
 
-                return result.ToString();
-            }
-            catch (Exception ex)
-            {
-                Logging.Log.Warn("Unable to extract text from given PDF", ex);
-                return string.Empty;
-            }
+            //            if (result.Length >= limit) return result.ToString();
+            //        }
+            //    }
+
+            //    return result.ToString();
+            //}
+            //catch (Exception ex)
+            //{
+            //    Logging.Log.Warn("Unable to extract text from given PDF", ex);
+            //    return string.Empty;
+            //}
         }
     }
 
