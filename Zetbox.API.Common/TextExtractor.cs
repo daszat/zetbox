@@ -137,6 +137,7 @@ namespace Zetbox.API.Common
             return String.Empty;
 
             // Case 9187: Extracting from PdfSharp-created PDFs returns binary garbage
+            // uses DONOTUSE code below
             //try
             //{
             //    var inputDocument = PdfReader.Open(data, PdfDocumentOpenMode.ReadOnly);
@@ -163,6 +164,7 @@ namespace Zetbox.API.Common
         }
     }
 
+#if DONOTUSE
     #region PDFParser
     class PDFParser
     {
@@ -353,6 +355,7 @@ namespace Zetbox.API.Common
         }
     }
     #endregion
+#endif
 
     public class WordTextExtractorProvider : ITextExtractorProvider
     {
