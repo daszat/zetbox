@@ -762,10 +762,18 @@ namespace Zetbox.API.Server
         void RenameFKConstraint(TableRef tblName, string oldConstraintName, TableRef refTblName, string colName, string newConstraintName, bool onDeleteCascade);
         void DropFKConstraint(TableRef tblName, string constraintName);
 
+        /// <summary>
+        /// Checks if an index of fulltext index exists
+        /// </summary>
+        /// <param name="tblName"></param>
+        /// <param name="idxName"></param>
+        /// <returns></returns>
         bool CheckIndexExists(TableRef tblName, string idxName);
         bool CheckIndexPossible(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns);
         void CreateIndex(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns);
+        void CreateFullTextIndex(TableRef tblName, string idxName, params string[] columns);
         void DropIndex(TableRef tblName, string idxName);
+        void DropFullTextIndex(TableRef tblName, string idxName);
         /// <summary>
         /// Renames the given object. The provider has to detect noop's. The provider must throw an exception, when the object was not found
         /// </summary>

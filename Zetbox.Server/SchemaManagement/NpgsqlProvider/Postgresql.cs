@@ -794,6 +794,17 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
             }
         }
 
+        public override void CreateFullTextIndex(TableRef tblName, string idxName, params string[] columns)
+        {
+            if (columns == null || columns.Length == 0) throw new ArgumentOutOfRangeException("columns", string.Format("Cannot create index {0} without columns", idxName));
+
+            ExecuteNonQuery(String.Format(
+                "CREATE INDEX {0} ON {1} USING gin(to_tsvector({2}))",
+                QuoteIdentifier(idxName),
+                FormatSchemaName(tblName),
+                String.Join(" || ' ' || ", columns.Select(c => "coalesce(" + QuoteIdentifier(c) + ",'')").ToArray())));
+        }
+
         public override void DropIndex(TableRef tblName, string idxName)
         {
             if (tblName == null)
@@ -804,6 +815,12 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
                 QuoteIdentifier(tblName.Schema),
                 QuoteIdentifier(idxName)));
         }
+
+        public override void DropFullTextIndex(TableRef tblName, string idxName)
+        {
+            DropIndex(tblName, idxName);
+        }
+
 
         public override void RenameIndex(TableRef tblName, string oldIdxName, string newIdxName)
         {

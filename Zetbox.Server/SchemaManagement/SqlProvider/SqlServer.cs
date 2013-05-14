@@ -846,9 +846,19 @@ WHERE tbl.id = OBJECT_ID(@table) and col.name = @column AND obj.xtype = 'D'",
                 appendIndexFilter));
         }
 
+        public override void CreateFullTextIndex(TableRef tblName, string idxName, params string[] columns)
+        {
+            throw new NotImplementedException();
+        }
+
         public override void DropIndex(TableRef tblName, string idxName)
         {
             ExecuteNonQuery(string.Format("DROP INDEX [{0}] ON {1}", idxName, FormatSchemaName(tblName)));
+        }
+
+        public override void DropFullTextIndex(TableRef tblName, string idxName)
+        {
+            throw new NotImplementedException();
         }
 
         public override void RenameIndex(TableRef tblName, string oldIdxName, string newIdxName)

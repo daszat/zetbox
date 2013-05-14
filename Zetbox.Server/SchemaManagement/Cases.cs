@@ -3111,6 +3111,32 @@ namespace Zetbox.Server.SchemaManagement
         }
         #endregion
 
+        #region NewFullTextIndexConstraint
+        public bool IsNewFullTextIndexConstraint(IndexConstraint uc)
+        {
+            var isFulltextConstraint = uc is FullTextIndexConstraint;
+            return isFulltextConstraint && uc.Constrained is ObjectClass && savedSchema.FindPersistenceObject<IndexConstraint>(uc.ExportGuid) == null;
+        }
+        public void DoNewFullTextIndexConstraint(IndexConstraint uc)
+        {
+            var objClass = (ObjectClass)uc.Constrained;
+            var tblName = objClass.GetTableRef(db);
+            var columns = Construct.GetUCColNames(uc);
+            var log_idxName = string.Format("{0} on {1}({2})", uc.Reason, tblName, string.Join(", ", columns));
+            Log.InfoFormat("New FullText Index Constraint: {0}", log_idxName);
+            var idxName = Construct.IndexName(objClass.TableName, columns);
+            if (db.CheckIndexExists(tblName, idxName))
+            {
+                Log.WarnFormat("Cannot create FullText Index Constraint, another index already exists: {0}", log_idxName);
+            }
+            else
+            {
+                // Index is always possible as IsUnique is not evaluated
+                db.CreateFullTextIndex(tblName, idxName, columns);
+            }
+        }
+        #endregion
+
         #region DeleteIndexConstraint
         public bool IsDeleteIndexConstraint(IndexConstraint uc)
         {
@@ -3131,16 +3157,35 @@ namespace Zetbox.Server.SchemaManagement
         }
         #endregion
 
+        #region DeleteFullTextIndexConstraint
+        public bool IsDeleteFullTextIndexConstraint(IndexConstraint uc)
+        {
+            var isFulltextConstraint = uc is FullTextIndexConstraint;
+            return isFulltextConstraint && uc.Constrained is ObjectClass && schema.FindPersistenceObject<IndexConstraint>(uc.ExportGuid) == null;
+        }
+        public void DoDeleteFullTextIndexConstraint(IndexConstraint uc)
+        {
+            var objClass = (ObjectClass)uc.Constrained;
+            var tblName = objClass.GetTableRef(db);
+            var columns = Construct.GetUCColNames(uc);
+            var idxName = Construct.IndexName(objClass.TableName, columns);
+            if (db.CheckIndexExists(tblName, idxName))
+            {
+                Log.InfoFormat("Drop FullText Index Constraint: {0} on {1}({2})", uc.Reason, objClass.TableName, string.Join(", ", columns));
+                db.DropFullTextIndex(tblName, idxName);
+            }
+        }
+        #endregion
+
         #region ChangeIndexConstraint
         public bool IsChangeIndexConstraint(IndexConstraint uc)
         {
             var isFulltextConstraint = uc is FullTextIndexConstraint;
-            if (isFulltextConstraint) return false;
 
             var saved = savedSchema.FindPersistenceObject<IndexConstraint>(uc.ExportGuid);
             if (saved == null) return false;
 
-            if (uc.IsUnique != saved.IsUnique) return true;
+            if (!isFulltextConstraint && uc.IsUnique != saved.IsUnique) return true; // FullText Index are not unique, ignore changes
 
             var newCols = Construct.GetUCColNames(uc);
             var savedCols = Construct.GetUCColNames(saved);
@@ -3160,8 +3205,17 @@ namespace Zetbox.Server.SchemaManagement
         public void DoChangeIndexConstraint(IndexConstraint uc)
         {
             var saved = savedSchema.FindPersistenceObject<IndexConstraint>(uc.ExportGuid);
-            DoDeleteIndexConstraint(saved);
-            DoNewIndexConstraint(uc);
+            var isFulltextConstraint = uc is FullTextIndexConstraint;
+            if (isFulltextConstraint)
+            {
+                DoDeleteFullTextIndexConstraint(saved);
+                DoNewFullTextIndexConstraint(uc);
+            }
+            else
+            {
+                DoDeleteIndexConstraint(saved);
+                DoNewIndexConstraint(uc);
+            }
         }
         #endregion
 

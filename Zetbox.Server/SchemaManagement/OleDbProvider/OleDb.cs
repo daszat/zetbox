@@ -723,6 +723,12 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
             throw new NotSupportedException();
         }
 
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.DropFullTextIndex(TableRef tblName, string idxName)
+        {
+            throw new NotSupportedException();
+        }
+
         void ISchemaProvider.RenameIndex(TableRef tblName, string oldIdxName, string newIdxName)
         {
             throw new NotSupportedException();
@@ -730,6 +736,12 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
 
         /// <summary>Not supported.</summary>
         void ISchemaProvider.CreateIndex(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns)
+        {
+            throw new NotSupportedException();
+        }
+        
+        /// <summary>Not supported.</summary>
+        void ISchemaProvider.CreateFullTextIndex(TableRef tblName, string idxName, params string[] columns)
         {
             throw new NotSupportedException();
         }

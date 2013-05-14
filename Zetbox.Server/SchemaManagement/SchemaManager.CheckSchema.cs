@@ -618,18 +618,30 @@ namespace Zetbox.Server.SchemaManagement
         {
             foreach (var uc in objClass.Constraints.OfType<IndexConstraint>())
             {
-                var isFulltextConstraint = uc is FullTextIndexConstraint;
-                if (isFulltextConstraint) continue;
-
                 var tblName = objClass.GetTableRef(db);
                 var columns = Construct.GetUCColNames(uc);
                 var idxName = Construct.IndexName(tblName.Name, columns);
-                if (!db.CheckIndexExists(tblName, idxName))
+
+                if (uc is FullTextIndexConstraint)
                 {
-                    Log.WarnFormat("Index Constraint '{0}' is missing", idxName);
-                    if (repair)
+                    if (!db.CheckIndexExists(tblName, idxName))
                     {
-                        Case.DoNewIndexConstraint(uc);
+                        Log.WarnFormat("FullText Index Constraint '{0}' is missing", idxName);
+                        if (repair)
+                        {
+                            Case.DoNewFullTextIndexConstraint(uc);
+                        }
+                    }
+                }
+                else
+                {
+                    if (!db.CheckIndexExists(tblName, idxName))
+                    {
+                        Log.WarnFormat("Index Constraint '{0}' is missing", idxName);
+                        if (repair)
+                        {
+                            Case.DoNewIndexConstraint(uc);
+                        }
                     }
                 }
             }

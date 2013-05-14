@@ -450,6 +450,12 @@ namespace Zetbox.Server.SchemaManagement
             _provider.DropIndex(tblName, idxName);
         }
 
+        public void DropFullTextIndex(TableRef tblName, string idxName)
+        {
+            Log.InfoFormat("Dropping fulltext index [{0}].[{1}]", tblName, idxName);
+            _provider.DropFullTextIndex(tblName, idxName);
+        }
+
         public void RenameIndex(TableRef tblName, string oldIdxName, string newIdxName)
         {
             Log.InfoFormat("Renaming index [{0}].[{1}] -> [{2}]", tblName, oldIdxName, newIdxName);
@@ -528,6 +534,14 @@ namespace Zetbox.Server.SchemaManagement
             using (Log.InfoTraceMethodCallFormat("CreateIndex", "Creating index [{0}].[{1}]: unique={2} clustered={3} columns=[{4}]", tblName, idxName, unique, clustered, string.Join(", ", columns)))
             {
                 _provider.CreateIndex(tblName, idxName, unique, clustered, columns);
+            }
+        }
+
+        public void CreateFullTextIndex(TableRef tblName, string idxName, params string[] columns)
+        {
+            using (Log.InfoTraceMethodCallFormat("CreateFullTextIndex", "Creating fulltext index [{0}].[{1}]: columns=[{2}]", tblName, idxName, string.Join(", ", columns)))
+            {
+                _provider.CreateFullTextIndex(tblName, idxName, columns);
             }
         }
 
