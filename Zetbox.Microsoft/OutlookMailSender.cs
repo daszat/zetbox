@@ -33,7 +33,7 @@ namespace Zetbox.Microsoft
     /// <summary>
     /// Sends MailMessages using Outlook
     /// </summary>
-    public class OutlookMailSender : IMailSender
+    public class OutlookMailSender : IInteractiveMailSender
     {
         private const int E_ABORT = -2147467260;
 
@@ -124,6 +124,7 @@ namespace Zetbox.Microsoft
                 builder
                     .RegisterType<OutlookMailSender>()
                     .As<IMailSender>()
+                    .As<IInteractiveMailSender>()
                     .SingleInstance(); // Stateless
             }
         }

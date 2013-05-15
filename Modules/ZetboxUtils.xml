@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-05-07T16:28:06Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-05-15T16:23:01Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -4615,49 +4615,49 @@ public static void AppliesToCanExecReason(CalendarRule obj, MethodReturnEventArg
   <GUI:ViewDescriptor ExportGuid="0cde1819-061a-4552-911b-e979a57b8e69">
     <GUI:ControlKind>6bf65558-8687-492d-8fdc-f35fe928e647</GUI:ControlKind>
     <GUI:ControlTypeRef>Zetbox.Client.WPF.View.Calendar.CalendarWorkspaceDisplay, Zetbox.Client.WPF</GUI:ControlTypeRef>
-    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Deleted>true</GUI:Deleted>
     <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="6ba8f03b-4c07-4fca-8d6c-242f670d6a4b">
     <GUI:ControlKind>06bf9adc-c5bc-4552-abdc-18a96c527962</GUI:ControlKind>
     <GUI:ControlTypeRef>Zetbox.Client.WPF.View.Calendar.EventEditor, Zetbox.Client.WPF</GUI:ControlTypeRef>
-    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Deleted>true</GUI:Deleted>
     <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="22623940-b48f-463d-a978-36ca9777e2c5">
     <GUI:ControlKind>5fc3d661-81de-4fb6-a012-aa67971a08c7</GUI:ControlKind>
     <GUI:ControlTypeRef>Zetbox.Client.WPF.View.Calendar.EventInputEditor, Zetbox.Client.WPF</GUI:ControlTypeRef>
-    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Deleted>true</GUI:Deleted>
     <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="dc80a0be-2eac-4c51-bf76-45ae17b3a947">
     <GUI:ControlKind>916f91a3-aba5-4d61-9a45-297c02d77e83</GUI:ControlKind>
     <GUI:ControlTypeRef>Zetbox.Client.WPF.View.Calendar.NewEventDialog, Zetbox.Client.WPF</GUI:ControlTypeRef>
-    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Deleted>true</GUI:Deleted>
     <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="71d1247a-9ccb-454a-b5c7-115a7c00f603">
     <GUI:ControlKind>4f6223e7-2319-441f-93fc-650d68a252f3</GUI:ControlKind>
     <GUI:ControlTypeRef>Zetbox.Client.WPF.View.Calendar.NextEventsSummaryDisplay, Zetbox.Client.WPF</GUI:ControlTypeRef>
-    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Deleted>true</GUI:Deleted>
     <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="cc2521f1-6368-4cc8-94f1-eb9e7080211b">
     <GUI:ControlKind>df5134d6-18f1-43b9-96d3-9283bc2b09a8</GUI:ControlKind>
     <GUI:ControlTypeRef>Zetbox.Client.WPF.View.Calendar.WeekCalendar, Zetbox.Client.WPF</GUI:ControlTypeRef>
-    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Deleted>true</GUI:Deleted>
     <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="4cfc8a24-f512-4f19-82fd-76641535abf5">
     <GUI:ControlKind>f9fc5f32-8dbd-4c86-8e94-2794336da0ac</GUI:ControlKind>
     <GUI:ControlTypeRef>Zetbox.Client.WPF.View.Calendar.WorkScheduleRuleInstanceDisplay, Zetbox.Client.WPF</GUI:ControlTypeRef>
-    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Deleted>true</GUI:Deleted>
     <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
@@ -6501,28 +6501,28 @@ public static void MakeStaticFileCanExecReason(ImportedFile obj, MethodReturnEve
   <GUI:ViewDescriptor ExportGuid="a9d450c0-1882-476a-b0b8-270df5c00623">
     <GUI:ControlKind>24338f74-ec90-48a5-90ff-b9830082cb12</GUI:ControlKind>
     <GUI:ControlTypeRef>Zetbox.Client.WPF.View.DocumentManagement.DocumentWithPreviewEditor, Zetbox.Client.WPF</GUI:ControlTypeRef>
-    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Deleted>true</GUI:Deleted>
     <GUI:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="34bc1764-65bd-4ed9-b382-2f80c36f0e83">
     <GUI:ControlKind>b22d6746-5704-4ea7-934a-c3648081bd0a</GUI:ControlKind>
     <GUI:ControlTypeRef>Zetbox.Client.WPF.View.DocumentManagement.FileWithPreviewEditor, Zetbox.Client.WPF</GUI:ControlTypeRef>
-    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Deleted>true</GUI:Deleted>
     <GUI:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="ba118051-6439-4abf-b7ef-51b4cd8403bb">
     <GUI:ControlKind>d414b18f-e90a-4b69-a45a-4224c62f74cb</GUI:ControlKind>
     <GUI:ControlTypeRef>Zetbox.Client.WPF.View.DocumentManagement.ImageEditor, Zetbox.Client.WPF</GUI:ControlTypeRef>
-    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Deleted>true</GUI:Deleted>
     <GUI:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="6228388d-92e9-42d5-b7c4-07b862f2a5f2">
     <GUI:ControlKind>d72c2283-b956-461f-b47e-93d81c8bf896</GUI:ControlKind>
     <GUI:ControlTypeRef>Zetbox.Client.WPF.View.DocumentManagement.ImportedFileWithPreviewEditor, Zetbox.Client.WPF</GUI:ControlTypeRef>
-    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Deleted>true</GUI:Deleted>
     <GUI:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
@@ -6606,28 +6606,28 @@ public static void MakeStaticFileCanExecReason(ImportedFile obj, MethodReturnEve
   <GUI:ViewDescriptor ExportGuid="8231add1-e9c3-465a-8418-6bf97626412d">
     <GUI:ControlKind>1b67c8b9-fd42-4852-b6e4-3b8bd5e853d5</GUI:ControlKind>
     <GUI:ControlTypeRef>Zetbox.Client.WPF.View.ModuleEditor.ControlKindHierarchyDisplay, Zetbox.Client.WPF</GUI:ControlTypeRef>
-    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Deleted>true</GUI:Deleted>
     <GUI:Module>0fe1ab38-860a-414f-a599-b0b86a22ce1a</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="eff0da6d-04b6-4e53-9be6-2b04baad83fb">
     <GUI:ControlKind>545aac34-3b0e-441d-87db-386dd711970d</GUI:ControlKind>
     <GUI:ControlTypeRef>Zetbox.Client.WPF.View.ModuleEditor.DiagramDisplay, Zetbox.Client.WPF</GUI:ControlTypeRef>
-    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Deleted>true</GUI:Deleted>
     <GUI:Module>0fe1ab38-860a-414f-a599-b0b86a22ce1a</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="80142359-337c-4c6f-8932-9d5fc99fd5d9">
     <GUI:ControlKind>f236ecd4-d9dc-4fc3-a4a9-6da8ef1a228e</GUI:ControlKind>
     <GUI:ControlTypeRef>Zetbox.Client.WPF.View.ModuleEditor.NavigationScreenHierarchyDisplay, Zetbox.Client.WPF</GUI:ControlTypeRef>
-    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Deleted>true</GUI:Deleted>
     <GUI:Module>0fe1ab38-860a-414f-a599-b0b86a22ce1a</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="a2d6a70e-093b-4984-8c3a-e2570b7f990f">
     <GUI:ControlKind>66c71e86-39d1-4a19-a3c7-11b03168f598</GUI:ControlKind>
     <GUI:ControlTypeRef>Zetbox.Client.WPF.View.ModuleEditor.WorkspaceDisplay, Zetbox.Client.WPF</GUI:ControlTypeRef>
-    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Deleted>true</GUI:Deleted>
     <GUI:Module>0fe1ab38-860a-414f-a599-b0b86a22ce1a</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
@@ -10764,7 +10764,7 @@ public static void CreateObjectClassCanExecReason(SourceTable obj, MethodReturnE
   <GUI:ViewDescriptor ExportGuid="d6d547ad-d7e6-496a-bba4-8090269598cf">
     <GUI:ControlKind>3b955f8c-4112-4bcf-9a49-20ef05c04518</GUI:ControlKind>
     <GUI:ControlTypeRef>Zetbox.Client.WPF.View.SchemaMigration.DestinationPropertyEditor, Zetbox.Client.WPF</GUI:ControlTypeRef>
-    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Deleted>true</GUI:Deleted>
     <GUI:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>

@@ -3052,6 +3052,10 @@ namespace Zetbox {
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("ced272ca-9998-49a9-8056-b1efe012909c"); }
                                 }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> EMail
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("45f182ca-fa93-4126-b04f-09f472b1ea9c"); }
+                                }
                                 public static TypedGuid<global::Zetbox.App.Base.Property> ExportGuid
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("fc57ee0f-1ba5-445c-9007-a5ec1507cf39"); }
@@ -4462,6 +4466,10 @@ namespace Zetbox {
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("974fae02-0f72-4631-bcf3-edbebbafea4f"); }
                 }
+                public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_EmailStringEditorKind
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("729939d2-b67e-4576-a22f-181879e57d0d"); }
+                }
                 public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_EnumerationSelectorKind
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("9d414225-460a-4c54-8e36-e368804e387f"); }
@@ -5114,6 +5122,10 @@ namespace Zetbox {
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ValueViewModels_CompoundObjectPropertyViewModel
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("a63b9f47-18b7-463d-a06b-7b636de9553f"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ValueViewModels_EmailStringValueViewModel
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("b039d23f-5b33-4cfa-b1e0-253daffca06a"); }
                 }
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ValueViewModels_EnumerationValueViewModel
                 {

@@ -1996,6 +1996,7 @@
                         FromRole="Mitarbeiter"
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
+    <Property Name="EMail" Type="String" Nullable="true" MaxLength="100"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
     <Property Name="Geburtstag" Type="DateTime" Nullable="true"  />
     <NavigationProperty Name="IdentityImpl"

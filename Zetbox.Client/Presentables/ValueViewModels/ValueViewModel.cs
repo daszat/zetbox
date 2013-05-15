@@ -1092,6 +1092,52 @@ namespace Zetbox.Client.Presentables.ValueViewModels
     }
 
     [ViewModelDescriptor]
+    public class EmailStringValueViewModel
+        : StringValueViewModel
+    {
+        public new delegate EmailStringValueViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
+
+        private readonly IInteractiveMailSender _mailSender;
+
+        public EmailStringValueViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, IValueModel mdl, IInteractiveMailSender mailSender = null)
+            : base(dependencies, dataCtx, parent, mdl)
+        {
+            _mailSender = mailSender;
+        }
+
+        private ICommandViewModel _SendMailCommand = null;
+        public ICommandViewModel SendMailCommand
+        {
+            get
+            {
+                if (_SendMailCommand == null)
+                {
+                    _SendMailCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                        DataContext,
+                        this,
+                        ValueViewModelResources.SendMailCommand_Name,
+                        ValueViewModelResources.SendMailCommand_Tooltip,
+                        () => SendMail(),
+                        () => _mailSender != null && !string.IsNullOrWhiteSpace(Value),
+                        null);
+                    _SendMailCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.pen_png.Find(FrozenContext));
+                }
+                return _SendMailCommand;
+            }
+        }
+
+        public void SendMail()
+        {
+            if(_mailSender != null)
+            {
+                var msg = new System.Net.Mail.MailMessage();
+                msg.To.Add(Value);
+                _mailSender.Send(msg);
+            };
+        }
+    }
+
+    [ViewModelDescriptor]
     public class NullableGuidPropertyViewModel : NullableStructValueViewModel<Guid>
     {
         public new delegate NullableGuidPropertyViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);

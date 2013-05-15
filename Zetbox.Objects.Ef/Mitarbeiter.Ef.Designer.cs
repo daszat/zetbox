@@ -423,6 +423,75 @@ namespace Zetbox.App.Projekte
         public static event PropertyIsValidHandler<Zetbox.App.Projekte.Mitarbeiter> OnCreatedOn_IsValid;
 
         /// <summary>
+        /// 
+        /// </summary>
+        // value type property
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public string EMail
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _EMail;
+                if (OnEMail_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnEMail_Getter(this, __e);
+                    __result = _EMail = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_EMail != value)
+                {
+                    var __oldValue = _EMail;
+                    var __newValue = value;
+                    if (OnEMail_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnEMail_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("EMail", __oldValue, __newValue);
+                    _EMail = __newValue;
+                    NotifyPropertyChanged("EMail", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnEMail_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnEMail_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("EMail");
+                }
+            }
+        }
+        private string _EMail_store;
+        private string _EMail {
+            get { return _EMail_store; }
+            set {
+                ReportEfPropertyChanging("EMail");
+                _EMail_store = value;
+                ReportEfPropertyChanged("EMail");
+            }
+        }
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Zetbox.App.Projekte.Mitarbeiter, string> OnEMail_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Projekte.Mitarbeiter, string> OnEMail_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Projekte.Mitarbeiter, string> OnEMail_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Projekte.Mitarbeiter> OnEMail_IsValid;
+
+        /// <summary>
         /// Export Guid
         /// </summary>
         // value type property
@@ -1024,6 +1093,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Mitarbeiter> 
 
             me.ChangedOn = other.ChangedOn;
             me.CreatedOn = other.CreatedOn;
+            me.EMail = other.EMail;
             me.ExportGuid = other.ExportGuid;
             me.Geburtstag = other.Geburtstag;
             me.Name = other.Name;
@@ -1050,6 +1120,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Mitarbeiter> 
                 case "ChangedOn":
                 case "CreatedBy":
                 case "CreatedOn":
+                case "EMail":
                 case "ExportGuid":
                 case "Geburtstag":
                 case "Identity":
@@ -1163,6 +1234,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Mitarbeiter> 
                         obj => obj.CreatedOn,
                         (obj, val) => obj.CreatedOn = val,
 						obj => OnCreatedOn_IsValid), 
+                    // else
+                    new PropertyDescriptorEfImpl<Mitarbeiter, string>(
+                        lazyCtx,
+                        new Guid("45f182ca-fa93-4126-b04f-09f472b1ea9c"),
+                        "EMail",
+                        null,
+                        obj => obj.EMail,
+                        (obj, val) => obj.EMail = val,
+						obj => OnEMail_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<Mitarbeiter, Guid>(
                         lazyCtx,
@@ -1291,6 +1371,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Mitarbeiter> 
         {
             SetNotInitializedProperty("ChangedBy");
             SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("EMail");
             SetNotInitializedProperty("Geburtstag");
             SetNotInitializedProperty("Identity");
             SetNotInitializedProperty("Name");
@@ -1373,6 +1454,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Mitarbeiter> 
             if (this._isCreatedOnSet) {
                 binStream.Write(this._CreatedOn);
             }
+            binStream.Write(this._EMail);
             binStream.Write(this._isExportGuidSet);
             if (this._isExportGuidSet) {
                 binStream.Write(this._ExportGuid);
@@ -1404,6 +1486,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Mitarbeiter> 
             if (this._isCreatedOnSet) {
                 this._CreatedOn = binStream.ReadDateTime();
             }
+            this._EMail = binStream.ReadString();
             this._isExportGuidSet = binStream.ReadBoolean();
             if (this._isExportGuidSet) {
                 this._ExportGuid = binStream.ReadGuid();
@@ -1430,6 +1513,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Mitarbeiter> 
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Projekte")) XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Zetbox.App.Projekte");
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Projekte")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Zetbox.App.Projekte");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Projekte")) XmlStreamer.ToStream(this._EMail, xml, "EMail", "Zetbox.App.Projekte");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Projekte")) XmlStreamer.ToStream(this._Geburtstag, xml, "Geburtstag", "Zetbox.App.Projekte");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Projekte")) XmlStreamer.ToStream(this._Name, xml, "Name", "Zetbox.App.Projekte");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Projekte")) XmlStreamer.ToStream(this._SVNr, xml, "SVNr", "Zetbox.App.Projekte");
@@ -1450,6 +1534,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Mitarbeiter> 
                 // Import must have default value set
                 this._CreatedOn = XmlStreamer.ReadDateTime(xml);
                 this._isCreatedOnSet = true;
+                break;
+            case "Zetbox.App.Projekte|EMail":
+                this._EMail = XmlStreamer.ReadString(xml);
                 break;
             case "Zetbox.App.Projekte|ExportGuid":
                 // Import must have default value set

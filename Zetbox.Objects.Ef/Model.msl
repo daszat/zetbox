@@ -950,6 +950,7 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="EMail" ColumnName="EMail" />
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
           <ScalarProperty Name="Geburtstag" ColumnName="Geburtstag" />
           <ScalarProperty Name="Name" ColumnName="Name" />

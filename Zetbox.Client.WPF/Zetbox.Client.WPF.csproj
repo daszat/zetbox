@@ -692,6 +692,7 @@
     <Compile Include="View\ZetboxBase\CompoundListEditor.xaml.cs">
       <DependentUpon>CompoundListEditor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ZetboxBase\NullableEMailTextBoxEditor.cs" />
     <Compile Include="View\ZetboxBase\RecurrenceRulePropertyEditor.xaml.cs">
       <DependentUpon>RecurrenceRulePropertyEditor.xaml</DependentUpon>
     </Compile>

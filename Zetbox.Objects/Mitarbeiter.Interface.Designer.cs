@@ -15,6 +15,15 @@ namespace Zetbox.App.Projekte
     {
 
         /// <summary>
+        /// 
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("45f182ca-fa93-4126-b04f-09f472b1ea9c")]
+        string EMail {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Herzlichen Glückwunsch zum Geburtstag
         /// </summary>
         [Zetbox.API.DefinitionGuid("b10bf288-1252-49c3-9129-cfabb1637c47")]

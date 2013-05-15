@@ -2091,6 +2091,7 @@
     <Property Name="fk_CreatedBy" Type="int4" />
     <Property Name="ChangedOn" Type="timestamp" Nullable="false" />
     <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
+    <Property Name="EMail" Type="varchar" MaxLength="100" Nullable="true" />
     <Property Name="ExportGuid" Type="uuid" Nullable="false" />
     <Property Name="Geburtstag" Type="timestamp" Nullable="true" />
     <Property Name="Name" Type="varchar" MaxLength="100" Nullable="true" />
