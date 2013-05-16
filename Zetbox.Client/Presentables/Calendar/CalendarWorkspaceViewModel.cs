@@ -221,7 +221,8 @@ namespace Zetbox.Client.Presentables.Calendar
         {
             if (e.PropertyName == "Selected")
             {
-                _fetchCache.SetCalendars(Items.Where(i => i.Selected).Select(i => i.Calendar.ID));
+                _fetchCache.SetCalendars(VisibleItems.Select(i => i.Calendar.ID));
+                OnPropertyChanged("VisibleItems");
                 if (_shouldUpdateCalendarItems)
                 {
                     CurrentView.Refresh();
@@ -236,6 +237,14 @@ namespace Zetbox.Client.Presentables.Calendar
                     config.Configs.Add(new CalendarConfiguration() { Calendar = item.Calendar.ID, Color = item.Color });
                 }
                 SaveConfig(config);
+            }
+        }
+
+        public IEnumerable<CalendarSelectionViewModel> VisibleItems
+        {
+            get
+            {
+                return Items.Where(i => i.Selected);
             }
         }
 
@@ -741,7 +750,7 @@ namespace Zetbox.Client.Presentables.Calendar
                     _weekCalender.Open += (s, e) => Open(e.Event);
                     _weekCalender.ShowFullWeek = config != null && config.ShowFullWeek;
                     // Initial refresh
-                    _fetchCache.SetCalendars(Items.Where(i => i.Selected).Select(i => i.Calendar.ID));
+                    _fetchCache.SetCalendars(VisibleItems.Select(i => i.Calendar.ID));
                     _weekCalender.Refresh();
                 }
                 return _weekCalender;
