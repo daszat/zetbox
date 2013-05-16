@@ -26,6 +26,9 @@ namespace Zetbox.Client.Presentables.Calendar
 
     public class CalendarItemViewModel : ViewModel
     {
+        public static readonly float ITEMS_GAP = 12.0f;
+        public static readonly float HOUR_HEIGHT = 44.0f;
+
         public new delegate CalendarItemViewModel Factory(IZetboxContext dataCtx, ViewModel parent, EventViewModel obj);
 
         public CalendarItemViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, EventViewModel obj)
@@ -212,7 +215,7 @@ namespace Zetbox.Client.Presentables.Calendar
         {
             get
             {
-                return new PointF((float)(OverlappingIndex * SlotWidth * ActualWidth) - 1.0f, (float)From.TimeOfDay.TotalHours * 44.0f - 1.0f);
+                return new PointF((float)(OverlappingIndex * SlotWidth * ActualWidth) - 1.0f, (float)From.TimeOfDay.TotalHours * HOUR_HEIGHT - 1.0f);
             }
         }
 
@@ -234,7 +237,7 @@ namespace Zetbox.Client.Presentables.Calendar
             {
                 var length = (Until - From).TotalHours;
                 // display at least half a line
-                return (int)(Math.Max(0.5, length) * 44.0) + 1;
+                return (int)(Math.Max(0.5, length) * HOUR_HEIGHT) + 1;
             }
         }
 
@@ -247,7 +250,7 @@ namespace Zetbox.Client.Presentables.Calendar
         {
             get
             {
-                return DayCalendar != null ? DayCalendar.ActualWidth - 6 : 0;
+                return DayCalendar != null ? DayCalendar.ActualWidth - ITEMS_GAP : 0;
             }
         }
 
