@@ -41,7 +41,9 @@
     <commands:Converter x:Key="CommandConverter" />
     <converter:ObjectStateToTextConverter x:Key="ObjectStateToTextConverter" />
     <converter:ObjectStateToTextVisibilityConverter x:Key="ObjectStateToTextVisibilityConverter" />
+
     <converter:LighterShadeConverter x:Key="LighterShadeConverter" />
+    <converter:DarkerShadeConverter x:Key="DarkerShadeConverter" />
 
     <tk:TypeNameTemplateSelector x:Key="TypeNameTemplateSelector" />
 

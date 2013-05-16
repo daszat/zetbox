@@ -23,9 +23,9 @@
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
     -->
 
-    <Border BorderBrush="#6593CF"
+    <Border BorderBrush="{Binding Color}"
             BorderThickness="0,1,0,1"
-            Background="#30000000"
+            Background="{Binding Color}"
             SnapsToDevicePixels="true">
         <Border BorderBrush="#9493CF"
                 BorderThickness="0,0,1,0"

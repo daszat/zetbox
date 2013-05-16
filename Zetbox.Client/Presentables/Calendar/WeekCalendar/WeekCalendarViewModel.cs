@@ -277,6 +277,23 @@ namespace Zetbox.Client.Presentables.Calendar
             }
         }
 
+        private CalendarViewModel _selectedCalendar;
+        public CalendarViewModel SelectedCalendar
+        {
+            get
+            {
+                return _selectedCalendar;
+            }
+            set
+            {
+                if (_selectedCalendar != value)
+                {
+                    _selectedCalendar = value;
+                    OnPropertyChanged("SelectedCalendar");
+                }
+            }
+        }
+
         private IEnumerable<CalendarItemViewModel> FindCalendarItemViewModel(EventViewModel mdl)
         {
             if (mdl == null) Enumerable.Empty<CalendarItemViewModel>();
@@ -304,24 +321,5 @@ namespace Zetbox.Client.Presentables.Calendar
         }
 
         public static readonly string DefaultColor = "#F1F5E3";
-    }
-
-    public class NewEventArgs : EventArgs
-    {
-        public NewEventArgs(DateTime dt, bool isAllDay)
-        {
-            Date = dt;
-            IsAllDay = isAllDay;
-        }
-        public DateTime Date { get; private set; }
-        public bool IsAllDay { get; private set; }
-    }
-    public class OpenEventArgs : EventArgs
-    {
-        public OpenEventArgs(EventViewModel evt)
-        {
-            Event = evt;
-        }
-        public EventViewModel Event { get; private set; }
     }
 }

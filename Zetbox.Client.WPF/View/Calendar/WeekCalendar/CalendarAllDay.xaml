@@ -25,11 +25,11 @@
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
     -->
 
-    <Border BorderBrush="#9493CF"
+    <Border BorderBrush="{Binding Color}"
             BorderThickness="0,0,1,1"
             SnapsToDevicePixels="true"
             x:Name="allDayBorder"
-            Background="#E3EFFF"
+            Background="{Binding Color}"
             MouseLeftButtonDown="Empty_MouseLeftButtonDown">
         <ItemsControl ItemsSource="{Binding AllDayItems}">
             <ItemsControl.ItemsPanel>
@@ -49,9 +49,9 @@
                             x:Name="item">
                         <Border.Background>
                             <LinearGradientBrush>
-                                <GradientStop Color="{Binding Color, Converter={StaticResource LighterShadeConverter}}"
+                                <GradientStop Color="{Binding Color, Converter={StaticResource LighterShadeConverter}, ConverterParameter=0.4}"
                                               Offset="-0.5" />
-                                <GradientStop Color="{Binding Color}"
+                                <GradientStop Color="{Binding Color, Converter={StaticResource DarkerShadeConverter}, ConverterParameter=0.1}"
                                               Offset="1.0" />
                             </LinearGradientBrush>
                         </Border.Background>

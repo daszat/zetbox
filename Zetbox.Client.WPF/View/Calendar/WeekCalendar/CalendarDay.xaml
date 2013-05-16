@@ -29,7 +29,7 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate DataType="{x:Type viewmdl:TimeSlotItemViewModel}">
                         <Border Background="{Binding Background}"
-                                BorderBrush="#9493CF"
+                                BorderBrush="{Binding Color, Converter={StaticResource DarkerShadeConverter}}"
                                 BorderThickness="{Binding BorderThickness, Converter={StaticResource SystemDrawingConverter}}"
                                 SnapsToDevicePixels="true"
                                 Height="22"

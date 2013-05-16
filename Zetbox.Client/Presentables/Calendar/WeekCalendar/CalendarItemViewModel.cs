@@ -54,14 +54,14 @@ namespace Zetbox.Client.Presentables.Calendar
                     OnPropertyChanged("Name");
                     OnPropertyChanged("Summary");
                     break;
-                case "Color":
-                    OnPropertyChanged("Color");
-                    break;
                 case "Location":
                     OnPropertyChanged("Location");
                     break;
                 case "Body":
                     // not used
+                    break;
+                case "Color":
+                    OnPropertyChanged("Color");
                     break;
             }
         }

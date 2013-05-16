@@ -88,6 +88,7 @@
             </StackPanel>
             <TabControl Grid.Column="0"
                         Grid.Row="1"
+                        Margin="50,0,0,0"
                         ItemsSource="{Binding Parent.VisibleItems}"
                         SelectedItem="{Binding Parent.SelectedItem}">
                 <TabControl.Template>
@@ -111,7 +112,7 @@
                                                 Margin="0,0,0,0"
                                                 Background="{Binding Color}"
                                                 BorderBrush="#6593CF"
-                                                BorderThickness="1,1,1,1">
+                                                BorderThickness="1,1,1,0">
                                             <TextBlock x:Name="ContentSite"
                                                        VerticalAlignment="Center"
                                                        HorizontalAlignment="Center"
@@ -144,10 +145,12 @@
                     </Style>
                 </TabControl.ItemContainerStyle>
             </TabControl>
-            <Border BorderBrush="#6593CF"
+            <Border BorderBrush="{Binding Parent.SelectedItem.Color}"
                     BorderThickness="0,0,1,1"
                     Grid.Column="0"
                     Grid.Row="2"
+                    Margin="50,0,0,0"
+                    x:Name="someBorder"
                     SnapsToDevicePixels="true" />
             <ScrollViewer x:Name="scrollDayHeaders"
                           Grid.Row="2"
@@ -171,15 +174,9 @@
                     </Grid.ColumnDefinitions>
                     <Border Grid.Column="0"
                             Grid.Row="0"
-                            BorderBrush="#6593CF"
-                            BorderThickness="0,1,0,1"
-                            Background="#30000000"
-                            SnapsToDevicePixels="true" />
-                    <Border Grid.Column="0"
-                            Grid.Row="0"
                             Grid.RowSpan="2"
                             BorderBrush="#9493CF"
-                            BorderThickness="0,0,1,0"
+                            BorderThickness="0,0,1,1"
                             SnapsToDevicePixels="true" />
                     <!-- Header -->
                     <local:CalendarDayHeader Grid.Column="1"

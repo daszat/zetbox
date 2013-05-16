@@ -30,6 +30,25 @@ namespace Zetbox.Client.Presentables.Calendar
             : base(dependencies, dataCtx, parent)
         {
             this._Day = day.Date;
+            parent.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(parent_PropertyChanged);
+        }
+
+        void parent_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            switch(e.PropertyName)
+            {
+                case "SelectedCalendar":
+                    if (_TimeSlotItems != null && WeekCalendar.SelectedCalendar != null)
+                    {
+                        foreach (var ts in _TimeSlotItems)
+                        {
+                            ts.Color = this.Color;
+                        }
+                    }
+                    OnPropertyChanged("Color");
+                    break;
+
+            }
         }
 
         public WeekCalendarViewModel WeekCalendar
@@ -37,6 +56,14 @@ namespace Zetbox.Client.Presentables.Calendar
             get
             {
                 return (WeekCalendarViewModel)Parent;
+            }
+        }
+
+        public string Color
+        {
+            get
+            {
+                return WeekCalendar.SelectedCalendar != null ? WeekCalendar.SelectedCalendar.Color : string.Empty;
             }
         }
 
@@ -137,10 +164,11 @@ namespace Zetbox.Client.Presentables.Calendar
                 if (_TimeSlotItems == null)
                 {
                     _TimeSlotItems = new List<TimeSlotItemViewModel>();
+                    var color = this.Color;
                     for (int i = 0; i < 24; i++)
                     {
-                        _TimeSlotItems.Add(new TimeSlotItemViewModel(Day, i, 0));
-                        _TimeSlotItems.Add(new TimeSlotItemViewModel(Day, i, 30));
+                        _TimeSlotItems.Add(new TimeSlotItemViewModel(Day, i, 0) { Color = color });
+                        _TimeSlotItems.Add(new TimeSlotItemViewModel(Day, i, 30) { Color = color });
                     }
                 }
                 return _TimeSlotItems;

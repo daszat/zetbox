@@ -111,26 +111,16 @@ namespace Zetbox.Client.Presentables.Calendar
             switch (e.PropertyName)
             {
                 case "Color":
-                    if (string.IsNullOrWhiteSpace(_color))
-                        OnPropertyChanged("Color");
+                    OnPropertyChanged("Color");
                     break;
             }
         }
 
-        private string _color;
         public string Color
         {
             get
             {
-                return string.IsNullOrWhiteSpace(_color) ? CalendarViewModel.Color : _color;
-            }
-            set
-            {
-                if (_color != value)
-                {
-                    _color = value;
-                    OnPropertyChanged("Color");
-                }
+                return CalendarViewModel.Color;
             }
         }
 

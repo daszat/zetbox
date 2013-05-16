@@ -20,6 +20,7 @@ namespace Zetbox.Client.Presentables.Calendar
     using System.Linq;
     using System.Text;
     using System.Windows.Media;
+    using System.Drawing;
 
     public sealed class TimeSlotItemViewModel : INotifyPropertyChanged
     {
@@ -104,6 +105,24 @@ namespace Zetbox.Client.Presentables.Calendar
             }
         }
 
+        private string _color;
+        public string Color
+        {
+            get
+            {
+                return _color;
+            }
+            set
+            {
+                if (_color != value)
+                {
+                    _color = value;
+                    OnPropertyChanged("Color");
+                    Background = GetBackground();
+                }
+            }
+        }
+
         private string _background;
         public string Background
         {
@@ -123,7 +142,37 @@ namespace Zetbox.Client.Presentables.Calendar
 
         private string GetBackground()
         {
-            return Day.DayOfWeek == DayOfWeek.Saturday || Day.DayOfWeek == DayOfWeek.Sunday || Hour < 8 || Hour > 16 ? "#E0FFFF" : "White";
+            try
+            {
+                if (Day.DayOfWeek == DayOfWeek.Saturday || Day.DayOfWeek == DayOfWeek.Sunday || Hour < 8 || Hour > 16)
+                {
+                    if (string.IsNullOrWhiteSpace(_color)) return "#E0FFFF";
+                    var c = ColorTranslator.FromHtml(_color);
+                    const double f = 0.6;
+                    return System.Drawing.ColorTranslator.ToHtml(System.Drawing.Color.FromArgb(
+                        c.A,
+                        Math.Min(255, (int)((1.0 - f) * c.R + 255.0 * f)),
+                        Math.Min(255, (int)((1.0 - f) * c.G + 255.0 * f)),
+                        Math.Min(255, (int)((1.0 - f) * c.B + 255.0 * f))
+                    ));
+                }
+                else
+                {
+                    if (string.IsNullOrWhiteSpace(_color)) return "#FFFFFF";
+                    var c = ColorTranslator.FromHtml(_color);
+                    const double f = 0.8;
+                    return System.Drawing.ColorTranslator.ToHtml(System.Drawing.Color.FromArgb(
+                        c.A,
+                        Math.Min(255, (int)((1.0 - f) * c.R + 255.0 * f)),
+                        Math.Min(255, (int)((1.0 - f) * c.G + 255.0 * f)),
+                        Math.Min(255, (int)((1.0 - f) * c.B + 255.0 * f))
+                    ));
+                }
+            }
+            catch
+            {
+                return "#FFFFFF";
+            }
         }
 
         public DateTime DateTime

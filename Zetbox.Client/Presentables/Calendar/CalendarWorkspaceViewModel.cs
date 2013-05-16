@@ -260,6 +260,7 @@ namespace Zetbox.Client.Presentables.Calendar
                 if (_selectedItem != value)
                 {
                     _selectedItem = value;
+                    CurrentView.SelectedCalendar = value != null ? value.CalendarViewModel : null;
                     OnPropertyChanged("SelectedItem");
                 }
             }
@@ -751,6 +752,7 @@ namespace Zetbox.Client.Presentables.Calendar
                     _weekCalender.ShowFullWeek = config != null && config.ShowFullWeek;
                     // Initial refresh
                     _fetchCache.SetCalendars(VisibleItems.Select(i => i.Calendar.ID));
+                    _weekCalender.SelectedCalendar = this.SelectedItem != null ? this.SelectedItem.CalendarViewModel : null;
                     _weekCalender.Refresh();
                 }
                 return _weekCalender;

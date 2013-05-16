@@ -124,7 +124,7 @@ namespace Zetbox.Client.WPF.View.Calendar
                     foreach (var item in ViewModel.DayItems)
                     {
                         var itemColor = (Color)ColorConverter.ConvertFromString(item.Color);
-                        var borderBackground = new LinearGradientBrush(LighterShadeConverter.ConvertFromColor(itemColor), itemColor, 0.0);
+                        var borderBackground = new LinearGradientBrush(LighterShadeConverter.MakeLighter(itemColor), itemColor, 0.0);
                         borderBackground.Freeze();
 
                         var border = new Border()
