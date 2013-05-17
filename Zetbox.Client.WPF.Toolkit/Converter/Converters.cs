@@ -346,7 +346,9 @@ namespace Zetbox.Client.WPF.Converter
 
             if (type == typeof(string))
             {
-                color = (Color)ColorConverter.ConvertFromString((string)value);
+                var str = (string)value;
+                if (string.IsNullOrWhiteSpace(str)) return Binding.DoNothing;
+                color = (Color)ColorConverter.ConvertFromString(str);
             }
             else if (type == typeof(Color))
             {
@@ -356,6 +358,7 @@ namespace Zetbox.Client.WPF.Converter
             {
                 return value;
             }
+
             color = ShadeColor(color, amount);
             if (typeof(Color).IsAssignableFrom(targetType))
             {
