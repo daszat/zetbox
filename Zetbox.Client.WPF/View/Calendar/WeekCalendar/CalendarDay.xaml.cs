@@ -65,8 +65,6 @@ namespace Zetbox.Client.WPF.View.Calendar
                 var borderThickness = new Thickness(1, 1, 1, 1);
                 var selectedBorderThickness = new Thickness(3, 3, 3, 3);
                 
-                var borderBrush = new SolidColorBrush(Color.FromRgb(0x5d, 0x8c, 0xc9));
-                borderBrush.Freeze();
                 var lightFontBrush = new SolidColorBrush(Colors.Gray);
                 lightFontBrush.Freeze();
 
@@ -81,11 +79,6 @@ namespace Zetbox.Client.WPF.View.Calendar
                         {
                             Property = Border.BorderThicknessProperty,
                             Value = borderThickness,
-                        },
-                        new Setter 
-                        {
-                            Property = Border.BorderBrushProperty,
-                            Value = borderBrush,
                         },
                         new Setter 
                         {
@@ -154,6 +147,10 @@ namespace Zetbox.Client.WPF.View.Calendar
                     foreach (var item in ViewModel.DayItems)
                     {
                         var itemColor = (Color)ColorConverter.ConvertFromString(item.Color);
+
+                        var borderBrush = new SolidColorBrush(DarkerShadeConverter.MakeDarker(itemColor));
+                        borderBrush.Freeze();
+
                         var borderBackground = new LinearGradientBrush(LighterShadeConverter.MakeLighter(itemColor), itemColor, 0.0);
                         borderBackground.Freeze();
 
@@ -164,6 +161,7 @@ namespace Zetbox.Client.WPF.View.Calendar
                             HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch,
                             SnapsToDevicePixels = true,
                             Background = borderBackground,
+                            BorderBrush = borderBrush,
                             DataContext = item,
                             Style = itemBorderStyle,
                         };
