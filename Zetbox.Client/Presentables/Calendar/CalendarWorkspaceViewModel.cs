@@ -763,8 +763,10 @@ namespace Zetbox.Client.Presentables.Calendar
         {
             if (e.PropertyName == "SelectedItem")
             {
-                // Me too
-                OnPropertyChanged("SelectedItems");
+                if (_weekCalender.SelectedItem != null)
+                {
+                    this.SelectedItem = this.Items.FirstOrDefault(i => i.CalendarViewModel == _weekCalender.SelectedItem.CalendarViewModel);
+                }
             }
             else if (e.PropertyName == "ShowFullWeek")
             {
