@@ -1389,6 +1389,26 @@ namespace Zetbox.API
                 return str;
             }
         }
+
+        public static System.Drawing.Color Lighter(this System.Drawing.Color c, double amount)
+        {
+            return System.Drawing.Color.FromArgb(
+                        c.A,
+                        Math.Min(255, (int)((1.0 - amount) * c.R + 255.0 * amount)),
+                        Math.Min(255, (int)((1.0 - amount) * c.G + 255.0 * amount)),
+                        Math.Min(255, (int)((1.0 - amount) * c.B + 255.0 * amount))
+                    );
+        }
+
+        public static System.Drawing.Color Darker(this System.Drawing.Color c, double amount)
+        {
+            return System.Drawing.Color.FromArgb(
+                        c.A,
+                        Math.Min(255, (int)((1.0 - amount) * c.R)),
+                        Math.Min(255, (int)((1.0 - amount) * c.G)),
+                        Math.Min(255, (int)((1.0 - amount) * c.B))
+                    );
+        }
     }
 
     public static class FileExtensions

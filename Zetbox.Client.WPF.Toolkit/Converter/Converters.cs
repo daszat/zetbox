@@ -401,9 +401,9 @@ namespace Zetbox.Client.WPF.Converter
         public static Color MakeDarker(Color value, float darker = 0.5f)
         {
             return Color.FromScRgb(value.ScA,
-                (1f - darker) * value.ScR,
-                (1f - darker) * value.ScG,
-                (1f - darker) * value.ScB);
+                (1.0f - darker) * value.ScR,
+                (1.0f - darker) * value.ScG,
+                (1.0f - darker) * value.ScB);
         }
 
         protected override Color ShadeColor(Color value, float lighter = 0.5f)

@@ -21,6 +21,7 @@ namespace Zetbox.Client.Presentables.Calendar
     using System.Text;
     using System.Windows.Media;
     using System.Drawing;
+    using Zetbox.API;
 
     public sealed class TimeSlotItemViewModel : INotifyPropertyChanged
     {
@@ -147,26 +148,12 @@ namespace Zetbox.Client.Presentables.Calendar
                 if (Day.DayOfWeek == DayOfWeek.Saturday || Day.DayOfWeek == DayOfWeek.Sunday || Hour < 8 || Hour > 16)
                 {
                     if (string.IsNullOrWhiteSpace(_color)) return "#E0FFFF";
-                    var c = ColorTranslator.FromHtml(_color);
-                    const double f = 0.6;
-                    return System.Drawing.ColorTranslator.ToHtml(System.Drawing.Color.FromArgb(
-                        c.A,
-                        Math.Min(255, (int)((1.0 - f) * c.R + 255.0 * f)),
-                        Math.Min(255, (int)((1.0 - f) * c.G + 255.0 * f)),
-                        Math.Min(255, (int)((1.0 - f) * c.B + 255.0 * f))
-                    ));
+                    return ColorTranslator.ToHtml(ColorTranslator.FromHtml(_color).Lighter(0.6));
                 }
                 else
                 {
                     if (string.IsNullOrWhiteSpace(_color)) return "#FFFFFF";
-                    var c = ColorTranslator.FromHtml(_color);
-                    const double f = 0.8;
-                    return System.Drawing.ColorTranslator.ToHtml(System.Drawing.Color.FromArgb(
-                        c.A,
-                        Math.Min(255, (int)((1.0 - f) * c.R + 255.0 * f)),
-                        Math.Min(255, (int)((1.0 - f) * c.G + 255.0 * f)),
-                        Math.Min(255, (int)((1.0 - f) * c.B + 255.0 * f))
-                    ));
+                    return ColorTranslator.ToHtml(ColorTranslator.FromHtml(_color).Lighter(0.8));
                 }
             }
             catch
