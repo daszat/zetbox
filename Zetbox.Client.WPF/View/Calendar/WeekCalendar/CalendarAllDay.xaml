@@ -25,11 +25,10 @@
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
     -->
 
-    <Border BorderBrush="{Binding Color}"
+    <Border BorderBrush="{Binding Color, Converter={StaticResource DarkerShadeConverter}}"
             BorderThickness="0,0,1,1"
             SnapsToDevicePixels="true"
             x:Name="allDayBorder"
-            Background="{Binding Color}"
             MouseLeftButtonDown="Empty_MouseLeftButtonDown">
         <ItemsControl ItemsSource="{Binding AllDayItems}">
             <ItemsControl.ItemsPanel>

@@ -23,17 +23,12 @@
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
     -->
 
-    <Border BorderBrush="{Binding Color}"
-            BorderThickness="0,1,0,1"
-            Background="{Binding Color}"
+    <Border BorderBrush="{Binding Color, Converter={StaticResource DarkerShadeConverter}}"
+            BorderThickness="0,1,1,1"
             SnapsToDevicePixels="true">
-        <Border BorderBrush="#9493CF"
-                BorderThickness="0,0,1,0"
-                SnapsToDevicePixels="true">
-            <ToggleButton IsChecked="{Binding Zoom}"
-                          HorizontalAlignment="Stretch"
-                          VerticalAlignment="Center"
-                          Content="{Binding DayText}" />
-        </Border>
+        <ToggleButton IsChecked="{Binding Zoom}"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Center"
+                      Content="{Binding DayText}" />
     </Border>
 </UserControl>

@@ -110,9 +110,16 @@
                                     <Grid>
                                         <Border Name="Border"
                                                 Margin="0,0,0,0"
-                                                Background="{Binding Color}"
                                                 BorderBrush="#6593CF"
                                                 BorderThickness="1,1,1,0">
+                                            <Border.Background>
+                                                <LinearGradientBrush>
+                                                    <GradientStop Color="{Binding Color, Converter={StaticResource LighterShadeConverter}}"
+                                                                  Offset="-0.5" />
+                                                    <GradientStop Color="{Binding Color}"
+                                                                  Offset="1.0" />
+                                                </LinearGradientBrush>
+                                            </Border.Background>
                                             <TextBlock x:Name="ContentSite"
                                                        VerticalAlignment="Center"
                                                        HorizontalAlignment="Center"
@@ -150,8 +157,17 @@
                     Grid.Column="0"
                     Grid.Row="2"
                     Margin="50,0,0,0"
-                    x:Name="someBorder"
-                    SnapsToDevicePixels="true" />
+                    x:Name="headerBorder"
+                    SnapsToDevicePixels="true">
+                <Border.Background>
+                    <LinearGradientBrush>
+                        <GradientStop Color="{Binding Parent.SelectedItem.Color, Converter={StaticResource LighterShadeConverter}}"
+                                      Offset="-0.5" />
+                        <GradientStop Color="{Binding Parent.SelectedItem.Color}"
+                                      Offset="1.0" />
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
             <ScrollViewer x:Name="scrollDayHeaders"
                           Grid.Row="2"
                           Grid.Column="0">
