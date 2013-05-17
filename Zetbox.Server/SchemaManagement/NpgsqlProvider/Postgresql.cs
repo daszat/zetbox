@@ -798,11 +798,21 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
         {
             if (columns == null || columns.Length == 0) throw new ArgumentOutOfRangeException("columns", string.Format("Cannot create index {0} without columns", idxName));
 
-            ExecuteNonQuery(String.Format(
-                "CREATE INDEX {0} ON {1} USING gin(to_tsvector({2}))",
-                QuoteIdentifier(idxName),
-                FormatSchemaName(tblName),
-                String.Join(" || ' ' || ", columns.Select(c => "coalesce(" + QuoteIdentifier(c) + ",'')").ToArray())));
+            var def_lang_cfg = ExecuteScalar("show default_text_search_config") as string;
+
+            if (string.IsNullOrWhiteSpace(def_lang_cfg))
+                throw new InvalidOperationException("Unable to create fulltext index. There is not default text search config. 'show default_text_search_config' returned an empty result");
+
+            ExecuteNonQuery(
+                String.Format(
+                    "CREATE INDEX {0} ON {1} USING gin(to_tsvector(@cfg, {2}))",
+                    QuoteIdentifier(idxName),
+                    FormatSchemaName(tblName),
+                    String.Join(" || ' ' || ", columns.Select(c => "coalesce(" + QuoteIdentifier(c) + ",'')").ToArray())),
+                 new Dictionary<string, object>(){
+                    { "@cfg", def_lang_cfg }
+                 }
+            );
         }
 
         public override void DropIndex(TableRef tblName, string idxName)
