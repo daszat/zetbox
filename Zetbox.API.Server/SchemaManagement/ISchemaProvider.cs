@@ -763,12 +763,13 @@ namespace Zetbox.API.Server
         void DropFKConstraint(TableRef tblName, string constraintName);
 
         /// <summary>
-        /// Checks if an index of fulltext index exists
+        /// Checks if an index index exists
         /// </summary>
         /// <param name="tblName"></param>
         /// <param name="idxName"></param>
         /// <returns></returns>
         bool CheckIndexExists(TableRef tblName, string idxName);
+        bool CheckFullTextIndexExists(TableRef tblName, string idxName);
         bool CheckIndexPossible(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns);
         void CreateIndex(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns);
         void CreateFullTextIndex(TableRef tblName, string idxName, params string[] columns);

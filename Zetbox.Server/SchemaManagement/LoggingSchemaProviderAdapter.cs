@@ -225,6 +225,13 @@ namespace Zetbox.Server.SchemaManagement
             return result;
         }
 
+        public bool CheckFullTextIndexExists(TableRef tblName, string idxName)
+        {
+            var result = _provider.CheckFullTextIndexExists(tblName, idxName);
+            LogExistance("FullTextIndex", idxName, result, "in " + tblName);
+            return result;
+        }
+
         public bool CheckTableContainsData(TableRef tblName)
         {
             var result = _provider.CheckTableContainsData(tblName);

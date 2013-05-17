@@ -797,6 +797,14 @@ WHERE tbl.id = OBJECT_ID(@table) and col.name = @column AND obj.xtype = 'D'",
                 }) > 0;
         }
 
+        public override bool CheckFullTextIndexExists(TableRef tblName, string idxName)
+        {
+            return (int)ExecuteScalar("SELECT COUNT(*) from sys.fulltext_indexes WHERE object_id = OBJECT_ID(@tbl)",
+                new Dictionary<string, object>(){
+                    { "@tbl", FormatSchemaName(tblName) }
+                }) > 0;
+        }
+
         public override bool CheckIndexPossible(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns)
         {
             if (!unique && !clustered) return true;
@@ -848,7 +856,25 @@ WHERE tbl.id = OBJECT_ID(@table) and col.name = @column AND obj.xtype = 'D'",
 
         public override void CreateFullTextIndex(TableRef tblName, string idxName, params string[] columns)
         {
-            throw new NotImplementedException();
+            if (columns == null || columns.Length == 0) throw new ArgumentOutOfRangeException("columns", string.Format("Cannot create index {0} without columns", idxName));
+
+            if ((int)ExecuteScalar("select SERVERPROPERTY('IsFullTextInstalled')") == 0)
+            {
+                Logging.Log.Error("Cannot create fulltext index. Fulltext search is not installed on this MS SQL Server.");
+                return;
+            }
+
+            if ((int)ExecuteScalar("select COUNT(*) from sys.fulltext_catalogs where is_default = 1") == 0)
+            {
+                ExecuteNonQuery("CREATE FULLTEXT CATALOG [zetbox_fulltext_catalog] AS DEFAULT");
+            }
+            
+            string colSpec = string.Join(", ", columns.Select(c => "[" + c + "]").ToArray());
+
+            ExecuteNonQuery(string.Format("CREATE FULLTEXT INDEX ON {0} ({1}) KEY INDEX [PK_{2}]",
+                    FormatSchemaName(tblName),
+                    colSpec,
+                    tblName.Name));
         }
 
         public override void DropIndex(TableRef tblName, string idxName)
@@ -858,7 +884,7 @@ WHERE tbl.id = OBJECT_ID(@table) and col.name = @column AND obj.xtype = 'D'",
 
         public override void DropFullTextIndex(TableRef tblName, string idxName)
         {
-            throw new NotImplementedException();
+            ExecuteNonQuery(string.Format("DROP FULLTEXT INDEX ON {0}", FormatSchemaName(tblName)));
         }
 
         public override void RenameIndex(TableRef tblName, string oldIdxName, string newIdxName)

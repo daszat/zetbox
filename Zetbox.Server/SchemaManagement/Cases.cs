@@ -3125,7 +3125,7 @@ namespace Zetbox.Server.SchemaManagement
             var log_idxName = string.Format("{0} on {1}({2})", uc.Reason, tblName, string.Join(", ", columns));
             Log.InfoFormat("New FullText Index Constraint: {0}", log_idxName);
             var idxName = Construct.IndexName(objClass.TableName, columns);
-            if (db.CheckIndexExists(tblName, idxName))
+            if (db.CheckFullTextIndexExists(tblName, idxName))
             {
                 Log.WarnFormat("Cannot create FullText Index Constraint, another index already exists: {0}", log_idxName);
             }
@@ -3169,7 +3169,7 @@ namespace Zetbox.Server.SchemaManagement
             var tblName = objClass.GetTableRef(db);
             var columns = Construct.GetUCColNames(uc);
             var idxName = Construct.IndexName(objClass.TableName, columns);
-            if (db.CheckIndexExists(tblName, idxName))
+            if (db.CheckFullTextIndexExists(tblName, idxName))
             {
                 Log.InfoFormat("Drop FullText Index Constraint: {0} on {1}({2})", uc.Reason, objClass.TableName, string.Join(", ", columns));
                 db.DropFullTextIndex(tblName, idxName);

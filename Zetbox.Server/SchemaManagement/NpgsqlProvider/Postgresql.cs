@@ -775,6 +775,11 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
                 });
         }
 
+        public override bool CheckFullTextIndexExists(TableRef tblName, string idxName)
+        {
+            return CheckIndexExists(tblName, idxName);
+        }
+
         public override void CreateIndex(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns)
         {
             if (columns == null || columns.Length == 0) throw new ArgumentOutOfRangeException("columns", string.Format("Cannot create index {0} without columns", idxName));

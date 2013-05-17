@@ -624,7 +624,7 @@ namespace Zetbox.Server.SchemaManagement
 
                 if (uc is FullTextIndexConstraint)
                 {
-                    if (!db.CheckIndexExists(tblName, idxName))
+                    if (!db.CheckFullTextIndexExists(tblName, idxName))
                     {
                         Log.WarnFormat("FullText Index Constraint '{0}' is missing", idxName);
                         if (repair)

@@ -522,6 +522,7 @@ namespace Zetbox.Server.SchemaManagement
         }
 
         public abstract bool CheckIndexExists(TableRef tblName, string idxName);
+        public abstract bool CheckFullTextIndexExists(TableRef tblName, string idxName);
 
         public abstract bool CheckIndexPossible(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns);
 

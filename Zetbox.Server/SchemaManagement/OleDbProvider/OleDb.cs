@@ -718,6 +718,12 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
         }
 
         /// <summary>Not supported.</summary>
+        bool ISchemaProvider.CheckFullTextIndexExists(TableRef tblName, string idxName)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
         void ISchemaProvider.DropIndex(TableRef tblName, string idxName)
         {
             throw new NotSupportedException();
