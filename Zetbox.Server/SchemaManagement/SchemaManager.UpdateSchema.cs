@@ -238,6 +238,10 @@ namespace Zetbox.Server.SchemaManagement
                 {
                     Case.DoDeleteIndexConstraint(uc);
                 }
+                if (Case.IsDeleteFullTextIndexConstraint(uc))
+                {
+                    Case.DoDeleteFullTextIndexConstraint(uc);
+                }
             }
 
             foreach (var uc in objClass.Constraints.OfType<IndexConstraint>())
@@ -253,6 +257,10 @@ namespace Zetbox.Server.SchemaManagement
                 if (Case.IsNewIndexConstraint(uc))
                 {
                     Case.DoNewIndexConstraint(uc);
+                }
+                if (Case.IsNewFullTextIndexConstraint(uc))
+                {
+                    Case.DoNewFullTextIndexConstraint(uc);
                 }
             }
         }
