@@ -38,7 +38,8 @@ namespace Zetbox.Client.Presentables.Calendar
             switch(e.PropertyName)
             {
                 case "SelectedCalendar":
-                    if (_TimeSlotItems != null && WeekCalendar.SelectedCalendar != null)
+                    var selectedCalendar = WeekCalendar.SelectedCalendar;
+                    if (_TimeSlotItems != null && selectedCalendar != null)
                     {
                         foreach (var ts in _TimeSlotItems)
                         {
@@ -46,8 +47,14 @@ namespace Zetbox.Client.Presentables.Calendar
                         }
                     }
                     OnPropertyChanged("Color");
+                    if (_CalendarItems != null)
+                    {
+                        foreach (var item in _CalendarItems)
+                        {
+                            item.IsInSelectedCalendar = item.EventViewModel.CalendarViewModel == selectedCalendar;
+                        }
+                    }
                     break;
-
             }
         }
 
@@ -190,9 +197,11 @@ namespace Zetbox.Client.Presentables.Calendar
 
                 if (_CalendarItems.Count > 0)
                 {
+                    var selectedCalendar = WeekCalendar.SelectedCalendar;
                     foreach (var i in _CalendarItems)
                     {
                         i.DayCalendar = this;
+                        i.IsInSelectedCalendar = i.EventViewModel.CalendarViewModel == selectedCalendar;
                     }
 
                     CalcOverlapping();

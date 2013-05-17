@@ -270,5 +270,22 @@ namespace Zetbox.Client.Presentables.Calendar
                 }
             }
         }
+
+        private bool _isInSelectedCalendar = false;
+        public bool IsInSelectedCalendar
+        {
+            get
+            {
+                return _isInSelectedCalendar;
+            }
+            set
+            {
+                if (_isInSelectedCalendar != value)
+                {
+                    _isInSelectedCalendar = value;
+                    OnPropertyChanged("IsInSelectedCalendar");
+                }
+            }
+        }        
     }
 }

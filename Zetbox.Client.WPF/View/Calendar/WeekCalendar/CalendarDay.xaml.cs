@@ -64,11 +64,15 @@ namespace Zetbox.Client.WPF.View.Calendar
             {
                 var borderThickness = new Thickness(1, 1, 1, 1);
                 var selectedBorderThickness = new Thickness(3, 3, 3, 3);
+                
                 var borderBrush = new SolidColorBrush(Color.FromRgb(0x5d, 0x8c, 0xc9));
                 borderBrush.Freeze();
+                var lightFontBrush = new SolidColorBrush(Colors.Gray);
+                lightFontBrush.Freeze();
+
                 var borderPadding = new Thickness(5, 3, 3, 3);
                 var selectedBorderPadding = new Thickness(3, 1, 1, 1);
-                var isSelectedStyle = new Style()
+                var itemBorderStyle = new Style()
                 {
                     TargetType = typeof(Border),
                     Setters =
@@ -113,6 +117,32 @@ namespace Zetbox.Client.WPF.View.Calendar
                                     Value = selectedBorderPadding,
                                 },
                             }
+                        },
+                        new DataTrigger()
+                        {
+                            Binding = new Binding() { Path = new PropertyPath("IsInSelectedCalendar") },
+                            Value = true,
+                            Setters =
+                            {
+                                new Setter 
+                                {
+                                    Property = TextBlock.FontWeightProperty,
+                                    Value = FontWeights.Bold,
+                                },
+                            }
+                        },
+                        new DataTrigger()
+                        {
+                            Binding = new Binding() { Path = new PropertyPath("IsInSelectedCalendar") },
+                            Value = false,
+                            Setters =
+                            {
+                                new Setter 
+                                {
+                                    Property = TextBlock.ForegroundProperty,
+                                    Value = lightFontBrush,
+                                },
+                            }
                         }
                     }
                 };
@@ -135,7 +165,7 @@ namespace Zetbox.Client.WPF.View.Calendar
                             SnapsToDevicePixels = true,
                             Background = borderBackground,
                             DataContext = item,
-                            Style = isSelectedStyle,
+                            Style = itemBorderStyle,
                         };
                         Canvas.SetLeft(border, item.Position.X);
                         Canvas.SetTop(border, item.Position.Y);
@@ -147,7 +177,6 @@ namespace Zetbox.Client.WPF.View.Calendar
                                 new TextBlock() 
                                 {
                                     Text = item.Summary,
-                                    FontWeight = FontWeights.Bold,
                                 },
                                 new TextBlock() 
                                 {

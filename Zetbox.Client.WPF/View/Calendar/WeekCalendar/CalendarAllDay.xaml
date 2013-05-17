@@ -55,8 +55,7 @@
                             </LinearGradientBrush>
                         </Border.Background>
                         <StackPanel>
-                            <TextBlock Text="{Binding Summary}"
-                                       FontWeight="Bold" />
+                            <TextBlock Text="{Binding Summary}" />
                         </StackPanel>
                     </Border>
                     <DataTemplate.Triggers>
@@ -70,6 +69,18 @@
                                     TargetName="item" />
                             <Setter Property="BorderBrush"
                                     Value="Black"
+                                    TargetName="item" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsInSelectedCalendar}"
+                                     Value="True">
+                            <Setter Property="TextBlock.FontWeight"
+                                    Value="Bold"
+                                    TargetName="item" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsInSelectedCalendar}"
+                                     Value="False">
+                            <Setter Property="TextBlock.Foreground"
+                                    Value="Gray"
                                     TargetName="item" />
                         </DataTrigger>
                     </DataTemplate.Triggers>
