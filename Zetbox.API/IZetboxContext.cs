@@ -555,6 +555,7 @@ namespace Zetbox.API
     /// </summary>
     public static class ZetboxContextQueryableExtensions
     {
+        #region WithEagerLoading
         public static IQueryable<T> WithEagerLoading<T>(this IQueryable<T> query)
         {
             if (query == null) throw new ArgumentNullException("query");
@@ -598,7 +599,9 @@ namespace Zetbox.API
             if (query == null) throw new ArgumentNullException("query");
             return query;
         }
+        #endregion
 
+        #region WithDeactivated
         public static IQueryable<T> WithDeactivated<T>(this IQueryable<T> query)
         {
             if (query == null) throw new ArgumentNullException("query");
@@ -637,12 +640,19 @@ namespace Zetbox.API
             }
         }
 
-
         public static System.Collections.IEnumerable WithDeactivated(this System.Collections.IEnumerable query)
         {
             if (query == null) throw new ArgumentNullException("query");
             return query;
         }
+        #endregion
+
+        #region TextContains
+        public static bool TextContains(this string str, string filter)
+        {
+            throw new NotImplementedException("This method is not implemented as it's only used in a Linq Query and will be send to the fulltext search of a sql database.");
+        }
+        #endregion
     }
 
     public static class ContextTransientStateExtensions
