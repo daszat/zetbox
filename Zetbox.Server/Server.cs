@@ -293,9 +293,13 @@ namespace Zetbox.Server
         public void RunFixes()
         {
             using (Log.InfoTraceMethodCall("RunFixes"))
-            //using (var subContainer = container.BeginLifetimeScope())
+            using (var subContainer = container.BeginLifetimeScope())
             {
-                //var ctx = subContainer.Resolve<IZetboxServerContext>();
+                var ctx = subContainer.Resolve<IZetboxServerContext>();
+
+                var test = ctx.GetQuery<at.dasz.DocumentManagement.Excerpt>().Where(e => e.Text.TextContains("document")).ToList();
+                Log.InfoFormat("Found {0} Excerpts", test.Count);
+
                 //var entries = ctx.Internals().GetPersistenceObjectQuery(ctx.GetInterfaceType(typeof(Assembly))).Cast<Type>().Where(o => ((IExportable)o).ExportGuid == Guid.Empty).ToList();
 
 

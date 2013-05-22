@@ -612,6 +612,8 @@ namespace Zetbox.Server.SchemaManagement
         public abstract void EnsureInfrastructure();
         public abstract void DropAllObjects();
 
+        public abstract void SetupFullTextSearchInfrastructure();
+
         #endregion
 
         #region Zetbox Schema Handling

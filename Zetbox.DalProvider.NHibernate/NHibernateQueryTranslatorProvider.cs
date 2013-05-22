@@ -23,7 +23,8 @@ namespace Zetbox.DalProvider.NHibernate
     using Zetbox.API.Common;
     using Zetbox.API.Server;
     using Zetbox.App.Base;
-using Zetbox.API.Server.PerfCounter;
+    using Zetbox.API.Server.PerfCounter;
+    using global::NHibernate.Linq;
 
     internal sealed class NHibernateQueryTranslatorProvider<T>
         : QueryTranslatorProvider<T>
@@ -65,6 +66,32 @@ using Zetbox.API.Server.PerfCounter;
             if (_implChecker.IsImplementationType(result) && !type.IsICompoundObject())
                 result = _ctx.ToProxyType(_ctx.GetImplementationType(result));
             return result;
+        }
+
+        protected override System.Linq.Expressions.Expression VisitMethodCall(System.Linq.Expressions.MethodCallExpression m)
+        {
+            if (m.IsMethodCallExpression("TextContains", typeof(ZetboxContextQueryableExtensions)))
+            {
+                var prop = Visit(m.Arguments[0]);
+                var value = Visit(m.Arguments[1]);
+                var mi = typeof(NHibernateFullTextMethods).FindMethod("zb_fulltext_search", new[] { typeof(string), typeof(string) });
+                return System.Linq.Expressions.Expression.Equal( // avoid nhibernate bug?
+                    System.Linq.Expressions.Expression.Call(null, mi, new[] { prop, value }),
+                    System.Linq.Expressions.Expression.Constant(true));
+            }
+            else
+            {
+                return base.VisitMethodCall(m);
+            }
+        }
+    }
+
+    public static class NHibernateFullTextMethods
+    {
+        [LinqExtensionMethod]
+        public static bool zb_fulltext_search(this String input, String search)
+        {
+            throw new NotImplementedException();
         }
     }
 }

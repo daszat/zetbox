@@ -1009,6 +1009,18 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
         {
         }
 
+        public override void SetupFullTextSearchInfrastructure()
+        {
+            ExecuteNonQuery(@"CREATE OR REPLACE FUNCTION zb_fulltext_search(col text, search text)
+RETURNS boolean AS
+$BODY$
+BEGIN
+        RETURN to_tsvector(col) @@ plainto_tsquery(search);
+END;
+$BODY$
+LANGUAGE plpgsql VOLATILE");
+        }
+
         public override void DropAllObjects()
         {
             foreach (var proc in GetProcedureNames().ToList())

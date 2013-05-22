@@ -856,6 +856,12 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
         }
 
         /// <summary>Not supported.</summary>
+        void ISchemaProvider.SetupFullTextSearchInfrastructure()
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
         bool ISchemaProvider.CheckSchemaExists(string schemaName)
         {
             throw new NotSupportedException();

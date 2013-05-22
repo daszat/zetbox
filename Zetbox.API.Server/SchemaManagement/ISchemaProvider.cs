@@ -840,6 +840,8 @@ namespace Zetbox.API.Server
         void EnsureInfrastructure();
         void DropAllObjects();
 
+        void SetupFullTextSearchInfrastructure();
+
         #endregion
 
         #region Zetbox Schema Handling

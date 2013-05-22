@@ -697,6 +697,12 @@ namespace Zetbox.Server.SchemaManagement
             _provider.EnsureInfrastructure();
         }
 
+        public void SetupFullTextSearchInfrastructure()
+        {
+            Log.Debug("Ensuring FullTextSearch Infrastructure is available on target");
+            _provider.SetupFullTextSearchInfrastructure();
+        }
+
         public bool CheckDatabaseExists(string dbName)
         {
             Log.Debug("Checking whether database [{0}] exists");

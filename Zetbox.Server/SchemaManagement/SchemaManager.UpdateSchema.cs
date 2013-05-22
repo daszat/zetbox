@@ -63,6 +63,8 @@ namespace Zetbox.Server.SchemaManagement
                     CreateFinalCheckConstraints();
                     CreateFinalRightsInfrastructure();
 
+                    db.SetupFullTextSearchInfrastructure();
+
                     SaveSchema(schema);
 
                     foreach (var gmf in _globalMigrationFragments)
