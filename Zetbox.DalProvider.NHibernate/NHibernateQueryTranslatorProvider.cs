@@ -74,8 +74,10 @@ namespace Zetbox.DalProvider.NHibernate
             {
                 var prop = Visit(m.Arguments[0]);
                 var value = Visit(m.Arguments[1]);
-                var mi = typeof(NHibernateFullTextMethods).FindMethod("zb_fulltext_search", new[] { typeof(string), typeof(string) });
-                return System.Linq.Expressions.Expression.Equal( // avoid nhibernate bug?
+                //var mi = typeof(NHibernateFullTextMethods).FindMethod("zb_fulltext_search", new[] { typeof(string), typeof(string) });
+                var mi = typeof(NHibernateFullTextMethods).FindMethod("freetext", new[] { typeof(string), typeof(string) });
+
+                return System.Linq.Expressions.Expression.Equal( // avoid nhibernate bug https://nhibernate.jira.com/browse/NH-2839 ?
                     System.Linq.Expressions.Expression.Call(null, mi, new[] { prop, value }),
                     System.Linq.Expressions.Expression.Constant(true));
             }
@@ -90,6 +92,12 @@ namespace Zetbox.DalProvider.NHibernate
     {
         [LinqExtensionMethod]
         public static bool zb_fulltext_search(this String input, String search)
+        {
+            throw new NotImplementedException();
+        }
+
+        [LinqExtensionMethod]
+        public static bool freetext(this String input, String search)
         {
             throw new NotImplementedException();
         }

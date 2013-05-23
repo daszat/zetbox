@@ -1011,7 +1011,7 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
 
         public override void SetupFullTextSearchInfrastructure()
         {
-            ExecuteNonQuery(@"CREATE OR REPLACE FUNCTION zb_fulltext_search(col text, search text)
+            ExecuteNonQuery(@"CREATE OR REPLACE FUNCTION freetext(col text, search text)
 RETURNS boolean AS
 $BODY$
 BEGIN

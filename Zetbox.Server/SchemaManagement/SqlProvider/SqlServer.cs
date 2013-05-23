@@ -996,9 +996,7 @@ WHERE tbl.id = OBJECT_ID(@table) and col.name = @column AND obj.xtype = 'D'",
 
         public override void SetupFullTextSearchInfrastructure()
         {
-            var zb_search_name =  new ProcRef("", "dbo", "zb_fulltext_search");
-            if (CheckFunctionExists(zb_search_name)) DropFunction(zb_search_name);
-            // ExecuteNonQuery("CREATE FUNCTION zb_fulltext_search");
+            // Nothing needed yet
         }
 
         #endregion

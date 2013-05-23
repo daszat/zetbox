@@ -297,7 +297,7 @@ namespace Zetbox.Server
             {
                 var ctx = subContainer.Resolve<IZetboxServerContext>();
 
-                var test = ctx.GetQuery<at.dasz.DocumentManagement.Excerpt>().Where(e => e.Text.TextContains("document")).ToList();
+                var test = ctx.GetQuery<at.dasz.DocumentManagement.Excerpt>().Where(e => e.Text.TextContains("project document")).ToList();
                 Log.InfoFormat("Found {0} Excerpts", test.Count);
 
                 //var entries = ctx.Internals().GetPersistenceObjectQuery(ctx.GetInterfaceType(typeof(Assembly))).Cast<Type>().Where(o => ((IExportable)o).ExportGuid == Guid.Empty).ToList();
