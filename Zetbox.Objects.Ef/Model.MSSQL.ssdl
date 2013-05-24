@@ -6839,4 +6839,8 @@
         <Parameter Name="seqNumber" Type="uniqueidentifier" Mode="In" />
 		<Parameter Name="result" Type="int" Mode="Out" />
     </Function>
+  <Function Name="freetext" Aggregate="false" BuiltIn="true" IsComposable="true" ReturnType="bit" Schema="">
+    <Parameter Name="column" Mode="In" Type="nvarchar" />
+    <Parameter Name="search" Mode="In" Type="nvarchar" />
+  </Function>
 </Schema>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Model" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
   <EntityContainer Name="Entities">
-  
     <!-- EntitySets for all classes -->
     <EntitySet Name="AbstractModuleMemberEfImpl" EntityType="Model.AbstractModuleMemberEfImpl" />
     <EntitySet Name="AccessControlEfImpl" EntityType="Model.AccessControlEfImpl" />
@@ -6145,5 +6144,4 @@
     <Property Name="AreaCode" Type="String" Nullable="true" MaxLength="50"  />
     <Property Name="Number" Type="String" Nullable="true" MaxLength="50"  />
   </ComplexType>
-
 </Schema>

@@ -25,6 +25,7 @@ namespace Zetbox.DalProvider.Ef
     using Zetbox.API.Server;
     using Zetbox.App.Base;
     using Zetbox.API.Server.PerfCounter;
+    using linq = System.Linq.Expressions;
 
     internal sealed class EfQueryTranslatorProvider<T>
         : QueryTranslatorProvider<T>
@@ -59,6 +60,36 @@ namespace Zetbox.DalProvider.Ef
             {
                 return base.VisitConstant(c);
             }
+        }
+
+        protected override System.Linq.Expressions.Expression VisitMethodCall(System.Linq.Expressions.MethodCallExpression m)
+        {
+            if (m.IsMethodCallExpression("TextContains", typeof(ZetboxContextQueryableExtensions)))
+            {
+                var prop = Visit(m.Arguments[0]);
+                var value = Visit(m.Arguments[1]);
+                var mi = typeof(EntityFrameworkFullTextMethods).FindMethod("freetext", new[] { typeof(string), typeof(string) });
+
+                return linq.Expression.OrElse(
+                    linq.Expression.Call(null, mi, new[] { prop, value }),
+                    linq.Expression.Equal(
+                        linq.Expression.Constant(true),
+                        linq.Expression.Constant(false))
+                );
+            }
+            else
+            {
+                return base.VisitMethodCall(m);
+            }
+        }
+    }
+
+    public static class EntityFrameworkFullTextMethods
+    {
+        [System.Data.Objects.DataClasses.EdmFunction("Model.Store", "freetext")]
+        public static bool freetext(this String input, String search)
+        {
+            throw new NotImplementedException();
         }
     }
 }

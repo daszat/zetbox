@@ -6839,4 +6839,8 @@
         <Parameter Name="seqNumber" Type="uuid" Mode="In" />
 		<Parameter Name="result" Type="int4" Mode="Out" />
     </Function>
+  <Function Name="freetext" ReturnType="bool" BuiltIn="false" Schema="public">
+    <Parameter Name="column" Mode="In" Type="text" />
+    <Parameter Name="search" Mode="In" Type="text" />
+  </Function>
 </Schema>
