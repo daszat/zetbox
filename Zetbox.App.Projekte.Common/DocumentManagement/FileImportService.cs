@@ -17,20 +17,22 @@ namespace Zetbox.App.Projekte.DocumentManagement
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.IO;
     using System.Linq;
+    using System.Text.RegularExpressions;
     using System.Threading;
     using at.dasz.DocumentManagement;
     using Autofac;
     using Zetbox.API;
+    using Zetbox.API.Configuration;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
-    using Zetbox.API.Configuration;
-    using System.ComponentModel;
 
     public class FileImportService : IService
     {
-        [Feature(NotOnFallback=true)]
+        #region Autofac Module
+        [Feature(NotOnFallback = true)]
         [Description("Zetbox file import service")]
         public class Module : Autofac.Module
         {
@@ -45,54 +47,92 @@ namespace Zetbox.App.Projekte.DocumentManagement
                     .SingleInstance();
             }
         }
+        #endregion
 
-        private object _lock = new object();
-        private List<FileSystemWatcher> _watcher = new List<FileSystemWatcher>();
-        private Func<IZetboxContext> _ctxFactory;
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.App.Projekte.DocumentManagement.FileImportService");
+
+        private readonly ILifetimeScope _scopeFactory;
+
+        /// <summary>A queue of currently processing files. Access to this Queue is protected by the _fileQueueLock.</summary>
         private Queue<string> _fileQueue = new Queue<string>();
-        private Thread _workerThread;
-        private bool _isRunning = true;
+        /// <summary>A queue of deferred processing files. Access to this Queue is protected by the _fileQueueLock.</summary>
+        /// <remarks>Files that create an error on uploading (e.g. still being accessed locally) are put here. A timer puts them back onto the _fileQueue, where they'll be processed as usual.</remarks>
+        private Queue<string> _deferredFileQueue = new Queue<string>();
+
+        /// <summary>The lock for accessing the FileQueues.</summary>
+        /// <remarks>Using a single lock for both Queues makes for simpler programming (no deadlock) and it is not expected that there is much contention from the Timer on this lock.</remarks>
+        private readonly object _fileQueueLock = new object();
+
+        private List<FileSystemWatcher> _watchers = new List<FileSystemWatcher>();
+        private Thread _uploaderThread;
+
+        private const int TIMER_DUE_TIME_SEC = 30; // Avoid start during service startup
+        private const int TIMER_INTERVAL_SEC = 10;
+        private Timer _deferralTimer;
+
+        /// <summary>This is set to signal the _uploaderThread to shut down.</summary>
+        private ManualResetEvent _shutdownEvent;
+        /// <summary>This is set to signal the _uploaderThread that new files are available.</summary>
         private AutoResetEvent _fileEvent;
 
-        public FileImportService(Func<IZetboxContext> ctxFactory)
+        public FileImportService(ILifetimeScope scopeFactory)
         {
-            if (ctxFactory == null) throw new ArgumentNullException("ctxFactory");
+            if (scopeFactory == null) throw new ArgumentNullException("scopeFactory");
 
-            _ctxFactory = ctxFactory;
+            _scopeFactory = scopeFactory;
         }
 
         #region IService Members
 
         public void Start()
         {
-            _isRunning = true;
+            if (_shutdownEvent != null)
+            {
+                Log.Warn("Tried to Start() an already running FileImportService. Ignored.");
+                return;
+            }
+            _shutdownEvent = new ManualResetEvent(false);
             _fileEvent = new AutoResetEvent(false);
 
-            ThreadPool.QueueUserWorkItem(initFileWatcher);
+            ThreadPool.QueueUserWorkItem(InitialiseFileWatchers);
 
             // start background thread
-            _workerThread = new Thread(backgroundThread);
-            _workerThread.Priority = ThreadPriority.BelowNormal;
-            _workerThread.IsBackground = true;
-            _workerThread.Start();
+            _uploaderThread = new Thread(UploaderThread);
+            _uploaderThread.Priority = ThreadPriority.BelowNormal;
+            _uploaderThread.IsBackground = true;
+            _uploaderThread.Start();
+
+            _deferralTimer = new Timer(state => RetryDeferredFiles(), null, TIMER_DUE_TIME_SEC * 1000, TIMER_INTERVAL_SEC * 1000);
         }
 
         public void Stop()
         {
-            _isRunning = false;
-            foreach (var w in _watcher)
+            _deferralTimer.Dispose();
+            _deferralTimer = null;
+
+            RetryDeferredFiles();
+
+            // signal the _workerThread to shutdown.
+            _shutdownEvent.Set();
+
+            // shortcut waiting for new files. If there are any in the queue, they will still be processed.
+            _fileEvent.Set();
+
+            foreach (var w in _watchers)
             {
                 w.Dispose();
             }
-            _watcher.Clear();
+            _watchers.Clear();
 
-            if (!_workerThread.Join(2000))
+            if (!_uploaderThread.Join(2000))
             {
-                _workerThread.Abort();
+                _uploaderThread.Abort();
             }
-            _workerThread = null;
+            _uploaderThread = null;
             _fileEvent.Close();
             _fileEvent = null;
+            _shutdownEvent.Close();
+            _shutdownEvent = null;
         }
 
         public string DisplayName { get { return "Fileimporter"; } }
@@ -100,18 +140,23 @@ namespace Zetbox.App.Projekte.DocumentManagement
 
         #endregion
 
-        private void initFileWatcher(object state)
+        private void InitialiseFileWatchers(object state)
         {
             try
             {
-                using (var ctx = _ctxFactory())
+                using (var scope = _scopeFactory.BeginLifetimeScope())
+                using (var ctx = scope.Resolve<IZetboxContext>())
                 {
-                    var machine = System.Environment.MachineName.ToLower();
+                    var machine = Environment.MachineName.ToLower();
 
                     var configs = ctx.GetQuery<FileImportConfiguration>()
                                     .Where(i => (i.MachineName.ToLower() == machine)
                                              || (i.MachineName == null))
                                     .ToList();
+
+                    // match environment variable references
+                    var regex = new Regex(@"\.*%(\w*)%\.*");
+
                     foreach (var cfg in configs)
                     {
                         try
@@ -119,19 +164,20 @@ namespace Zetbox.App.Projekte.DocumentManagement
                             if (!string.IsNullOrEmpty(cfg.PickupDirectory))
                             {
                                 var dir = cfg.PickupDirectory;
-                                System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@"\.*%(\w*)%\.*");
-                                dir = regex.Replace(dir, (m) => System.Environment.GetEnvironmentVariable(m.Groups[1].Value));
+                                dir = regex.Replace(dir, (m) => Environment.GetEnvironmentVariable(m.Groups[1].Value));
 
                                 if (Directory.Exists(dir))
                                 {
                                     var watcher = new FileSystemWatcher(dir, "*.*");
+                                    watcher.BeginInit();
                                     watcher.IncludeSubdirectories = true;
                                     watcher.Created += watcher_Changed;
                                     watcher.Changed += watcher_Changed;
                                     watcher.EnableRaisingEvents = true;
+                                    watcher.EndInit();
 
-                                    _watcher.Add(watcher);
-                                    Logging.Log.InfoFormat("Directory '{0}' added to file watcher", dir);
+                                    _watchers.Add(watcher);
+                                    Log.InfoFormat("Now watching directory '{0}'", dir);
 
                                     foreach (var f in Directory.GetFiles(dir, "*.*", SearchOption.AllDirectories))
                                     {
@@ -140,24 +186,24 @@ namespace Zetbox.App.Projekte.DocumentManagement
                                 }
                                 else
                                 {
-                                    Logging.Log.WarnFormat("Directory '{0}' does not exists", dir);
+                                    Log.WarnFormat("Directory '{0}' does not exists", dir);
                                 }
                             }
                         }
                         catch (Exception ex)
                         {
-                            Logging.Log.Warn("Error initializing file importer config " + cfg.ToString(), ex);
+                            Log.Warn("Error initializing file importer config " + cfg.ToString(), ex);
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                Logging.Log.Warn("Error initializing file importer", ex);
+                Log.Warn("Error initializing file importer", ex);
             }
         }
 
-        void watcher_Changed(object sender, FileSystemEventArgs e)
+        private void watcher_Changed(object sender, FileSystemEventArgs e)
         {
             Enqueue(e.FullPath);
         }
@@ -166,8 +212,8 @@ namespace Zetbox.App.Projekte.DocumentManagement
         {
             if (!string.IsNullOrEmpty(file))
             {
-                Logging.Log.InfoFormat("Adding '{0}' to queue", file);
-                lock (_lock)
+                Log.InfoFormat("Adding '{0}' to queue", file);
+                lock (_fileQueueLock)
                 {
                     _fileQueue.Enqueue(file);
                 }
@@ -175,9 +221,21 @@ namespace Zetbox.App.Projekte.DocumentManagement
             }
         }
 
+        private void Defer(string file)
+        {
+            if (!string.IsNullOrEmpty(file))
+            {
+                Log.InfoFormat("Adding '{0}' to deferred queue", file);
+                lock (_fileQueueLock)
+                {
+                    _deferredFileQueue.Enqueue(file);
+                }
+            }
+        }
+
         private string Dequeue()
         {
-            lock (_lock)
+            lock (_fileQueueLock)
             {
                 if (_fileQueue.Count > 0)
                     return _fileQueue.Dequeue();
@@ -186,24 +244,33 @@ namespace Zetbox.App.Projekte.DocumentManagement
             }
         }
 
-        public void backgroundThread()
+        private void RetryDeferredFiles()
         {
-            while (_isRunning)
+            lock (_fileQueueLock)
             {
-                _fileEvent.WaitOne(1000);
-                while (_isRunning)
+                if (_deferredFileQueue.Count > 0)
                 {
-                    var file = Dequeue();
-                    if (file == null) break;
-                    try
+                    Log.InfoFormat("Flushing {0} items from the deferred queue to the processing queue", _deferredFileQueue.Count);
+                    while (_deferredFileQueue.Count > 0)
+                        _fileQueue.Enqueue(_deferredFileQueue.Dequeue());
+                    _fileEvent.Set();
+                }
+            }
+        }
+
+        private void UploaderThread()
+        {
+            // run until signalled, no waiting
+            while (!_shutdownEvent.WaitOne(0))
+            {
+                // wait until files appear or Stop() is called
+                if (_fileEvent.WaitOne(-1))
+                {
+                    string file;
+                    // process all queued files
+                    while ((file = Dequeue()) != null)
                     {
                         ProcessFile(file);
-                    }
-                    catch (Exception ex)
-                    {
-                        Logging.Log.Error("Error in FileImport", ex);
-                        // Put back to queue, at the end
-                        Enqueue(file);
                     }
                 }
             }
@@ -211,38 +278,47 @@ namespace Zetbox.App.Projekte.DocumentManagement
 
         private void ProcessFile(string file)
         {
-            Logging.Log.InfoFormat("FileImport: processing '{0}'", file);
-            if (System.IO.File.Exists(file))
+            try
             {
-                using (var s = TryGetExclusiveLock(file))
+                Log.InfoFormat("processing '{0}'", file);
+                if (System.IO.File.Exists(file))
                 {
-                    if (s != null)
+                    using (var s = TryGetExclusiveLock(file))
                     {
-                        // Upload
-                        using (Logging.Log.DebugTraceMethodCall("Uploading file", file))
-                        using (var ctx = _ctxFactory())
+                        if (s != null)
                         {
-                            var blobID = ctx.CreateBlob(s, Path.GetFileName(file), new System.IO.FileInfo(file).GetMimeType());
-                            var importedFile = ctx.Create<ImportedFile>();
-                            importedFile.Blob = ctx.Find<Blob>(blobID);
-                            importedFile.Name = importedFile.Blob.OriginalName;
-                            ctx.SubmitChanges();
-                        }
+                            // Upload
+                            using (Log.DebugTraceMethodCall("Uploading file", file))
+                            using (var scope = _scopeFactory.BeginLifetimeScope())
+                            using (var ctx = scope.Resolve<IZetboxContext>())
+                            {
+                                var blobID = ctx.CreateBlob(s, Path.GetFileName(file), new System.IO.FileInfo(file).GetMimeType());
+                                var importedFile = ctx.Create<ImportedFile>();
+                                importedFile.Blob = ctx.Find<Blob>(blobID);
+                                importedFile.Name = importedFile.Blob.OriginalName;
+                                ctx.SubmitChanges();
+                            }
 
-                        // Success -> delete file
-                        s.Dispose();
-                        System.IO.File.Delete(file);
-                    }
-                    else
-                    {
-                        Logging.Log.DebugFormat("FileImport: unable to get exclusive lock, putting back to queue");
-                        Enqueue(file);
+                            // Success -> delete file
+                            s.Dispose();
+                            System.IO.File.Delete(file);
+                        }
+                        else
+                        {
+                            Log.DebugFormat("unable to get exclusive lock");
+                            Defer(file);
+                        }
                     }
                 }
+                else
+                {
+                    Log.DebugFormat("FileImport: '{0}' has been deleted", file);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                Logging.Log.DebugFormat("FileImport: '{0}' has been deleted", file);
+                Log.Error("Error in ProcessFile", ex);
+                Defer(file);
             }
         }
 
