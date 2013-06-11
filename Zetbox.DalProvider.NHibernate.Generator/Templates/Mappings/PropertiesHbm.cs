@@ -134,7 +134,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
             //string fkOtherColumnAttr = String.Format("column=\"`{0}`\"", Construct.ForeignKeyColumnName(otherEnd));
 
             // always map as set, the wrapper has to translate/order the elements
-            this.WriteObjects("        <set ", nameAttr, " ", tableAttr, " inverse=\"true\" cascade=\"all-delete-orphan\" batch-size=\"100\" ");
+            this.WriteObjects("        <set ", nameAttr, " ", tableAttr, " inverse=\"true\" cascade=\"none\" batch-size=\"100\" ");
             if (prop.EagerLoading)
             {
                 // TODO: re-think and re-test eagerloading
