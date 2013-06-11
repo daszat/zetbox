@@ -1133,6 +1133,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             {
                 // see http://stackoverflow.com/q/528090/4918
                 var parsed = new MailAddress(addr);
+                GC.KeepAlive(parsed);
                 return true;
             }
             catch
