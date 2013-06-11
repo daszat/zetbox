@@ -233,6 +233,7 @@ namespace Zetbox.API
         {
             get 
             {
+                // The CompundObject doesn't have to be thread safe. Therefore we can test _ISortKey_ID outside of the lock.
                 if (_ISortKey_ID == 0)
                 {
                     lock (_ISortKey_ID_current_lock)

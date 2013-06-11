@@ -24,14 +24,14 @@ namespace Zetbox.API.Utils
 
     public abstract class Cache : INotifyPropertyChanged
     {
-        private static readonly object _staticlock = new object();
+        private static readonly object _cacheLock = new object();
 
         private static List<Cache> _caches = new List<Cache>();
         public static event EventHandler CachesCollectionChanged = null;
 
         protected Cache()
         {
-            lock (_staticlock)
+            lock (_cacheLock)
             {
                 _caches.Add(this);
             }
@@ -44,7 +44,7 @@ namespace Zetbox.API.Utils
 
         ~Cache()
         {
-            lock (_staticlock)
+            lock (_cacheLock)
             {
                 _caches.Remove(this);
             }
@@ -57,7 +57,7 @@ namespace Zetbox.API.Utils
 
         public static void ClearAll()
         {
-            lock (_staticlock)
+            lock (_cacheLock)
             {
                 foreach (var c in _caches)
                 {
@@ -75,7 +75,7 @@ namespace Zetbox.API.Utils
         {
             get
             {
-                lock (_staticlock)
+                lock (_cacheLock)
                 {
                     return _caches.AsReadOnly();
                 }
@@ -98,7 +98,7 @@ namespace Zetbox.API.Utils
             return Name;
         }
 
-        public virtual void ItemAdded()
+        protected virtual void ItemAdded()
         {
             PropertyChangedEventHandler temp = PropertyChanged;
             if (temp != null)
@@ -107,7 +107,7 @@ namespace Zetbox.API.Utils
             }
         }
 
-        public virtual void ItemRemoved()
+        protected virtual void ItemRemoved()
         {
             PropertyChangedEventHandler temp = PropertyChanged;
             if (temp != null)

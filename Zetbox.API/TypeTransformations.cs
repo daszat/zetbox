@@ -43,10 +43,9 @@ namespace Zetbox.API
         {
             get
             {
-                if (_implTypeCheckers == null)
-                    lock (_lock)
-                        if (_implTypeCheckers == null)
-                            _implTypeCheckers = new ReadOnlyCollection<IImplementationTypeChecker>(_implTypeCheckersFactory().ToList());
+                lock (_lock)
+                    if (_implTypeCheckers == null)
+                        _implTypeCheckers = _implTypeCheckersFactory().ToList().AsReadOnly();
 
                 return _implTypeCheckers;
             }
@@ -146,14 +145,14 @@ namespace Zetbox.API
     {
         public delegate InterfaceType Factory(Type type);
 
-        private static readonly object _lockCache = new object();
+        private static readonly object _cacheLock = new object();
         private static Dictionary<Type, InterfaceType> _cache = new Dictionary<Type, InterfaceType>();
         private static Dictionary<InterfaceType, InterfaceType> _rootTypeCache = new Dictionary<InterfaceType, InterfaceType>();
 
         // TODO: Mit david nochmals besprechen
         internal static InterfaceType Create(Type type, IInterfaceTypeChecker typeChecker)
         {
-            lock (_lockCache)
+            lock (_cacheLock)
             {
                 if (type == null) return new InterfaceType(); // Possible, because a Type could be loaded from an XML File which does not exists in this Zetbox instance
                 if (_cache.ContainsKey(type)) return _cache[type];
@@ -207,7 +206,7 @@ namespace Zetbox.API
         /// <returns>the root InterfaceType of this InterfaceType's data model</returns>
         public InterfaceType GetRootType()
         {
-            lock (_lockCache)
+            lock (_cacheLock)
             {
                 if (_rootTypeCache.ContainsKey(this)) return _rootTypeCache[this];
 
