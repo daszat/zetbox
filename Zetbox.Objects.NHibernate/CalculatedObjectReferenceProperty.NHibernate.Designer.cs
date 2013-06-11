@@ -65,8 +65,7 @@ namespace Zetbox.App.Base
 							new ProjectedCollection<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryProxy, Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.Inputs,
                                 p => (Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl>)null);
+                                ce => (Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
                     _Inputs.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Inputs", null, null); if(OnInputs_PostSetter != null && IsAttached) OnInputs_PostSetter(this); };
                     if (Inputs_was_eagerLoaded) { Inputs_was_eagerLoaded = false; }
 				}

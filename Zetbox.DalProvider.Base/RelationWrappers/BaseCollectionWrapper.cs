@@ -127,9 +127,11 @@ namespace Zetbox.DalProvider.Base.RelationWrappers
 
         public virtual void Add(TItem item)
         {
-            TEntry entry = InitialiseEntry(CreateEntry(item), item);
+            TEntry entry = CreateEntry(item);
             OnEntryAdding(entry);
-            Collection.Add(entry);
+            entry = InitialiseEntry(entry, item);
+            // Relations keep their collections synchronized by reacting to RelationEntry.A/B changes
+            //Collection.Add(entry);
             OnEntryAdded(entry);
         }
 

@@ -770,8 +770,7 @@ namespace Zetbox.App.Projekte
 							new ProjectedCollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl.Projekt_haben_Mitarbeiter_RelationEntryProxy, Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.Projekte,
                                 p => (Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl.Projekt_haben_Mitarbeiter_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl>)entry.A.Mitarbeiter);
+                                ce => (Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl.Projekt_haben_Mitarbeiter_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
                     _Projekte.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Projekte", null, null); if(OnProjekte_PostSetter != null && IsAttached) OnProjekte_PostSetter(this); };
                     if (Projekte_was_eagerLoaded) { Projekte_was_eagerLoaded = false; }
 				}

@@ -79,18 +79,7 @@ this.WriteObjects("							this, \r\n");
 this.WriteObjects("							new ProjectedCollection<",  entryProxyType , ", ",  entryType , ">(\r\n");
 this.WriteObjects("                                () => this.Proxy.",  name , ",\r\n");
 this.WriteObjects("                                p => (",  entryType , ")OurContext.AttachAndWrap(p),\r\n");
-this.WriteObjects("                                ce => (",  entryProxyType , ")((NHibernatePersistenceObject)ce).NHibernateProxy),\r\n");
-#line 61 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"
-if (!String.IsNullOrEmpty(inverseNavigatorName)) { 
-#line 62 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"
-this.WriteObjects("                            entry => (IRelationListSync<",  entryType , ">)entry.",  role == RelationEndRole.A ? "B" : "A" , ".",  inverseNavigatorName , ");\r\n");
-#line 63 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"
-} else { 
-#line 64 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"
-this.WriteObjects("                            entry => (IRelationListSync<",  entryType , ">)null);\r\n");
-#line 65 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"
-} 
-#line 66 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+this.WriteObjects("                                ce => (",  entryProxyType , ")((NHibernatePersistenceObject)ce).NHibernateProxy));\r\n");
 this.WriteObjects("                    ",  backingName , ".CollectionChanged += (s, e) => { this.NotifyPropertyChanged(\"",  name , "\", null, null); if(",  eventName , " != null && IsAttached) ",  eventName, "(this); };\r\n");
 this.WriteObjects("                    if (",  name , "_was_eagerLoaded) { ",  name , "_was_eagerLoaded = false; }\r\n");
 this.WriteObjects("				}\r\n");
@@ -107,7 +96,7 @@ this.WriteObjects("        {\r\n");
 this.WriteObjects("            return new Zetbox.API.Async.ZbTask<",  exposedCollectionInterface , "<",  referencedInterface , ">>(this.",  name , ");\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
-#line 82 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 77 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 AddSerialization(serializationList, name, eagerLoading); 
 
         }

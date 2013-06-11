@@ -144,8 +144,7 @@ namespace Zetbox.App.Base
 							new ProjectedCollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl.IndexConstraint_ensures_unique_on_Property_RelationEntryProxy, Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.Properties,
                                 p => (Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl.IndexConstraint_ensures_unique_on_Property_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl>)null);
+                                ce => (Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl.IndexConstraint_ensures_unique_on_Property_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
                     _Properties.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Properties", null, null); if(OnProperties_PostSetter != null && IsAttached) OnProperties_PostSetter(this); };
                     if (Properties_was_eagerLoaded) { Properties_was_eagerLoaded = false; }
 				}

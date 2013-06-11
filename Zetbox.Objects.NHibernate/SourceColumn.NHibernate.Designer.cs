@@ -673,8 +673,7 @@ namespace Zetbox.App.SchemaMigration
 							new ProjectedCollection<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl.SourceColumn_created_Property_RelationEntryProxy, Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.DestinationProperty,
                                 p => (Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl.SourceColumn_created_Property_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl>)null);
+                                ce => (Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl.SourceColumn_created_Property_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
                     _DestinationProperty.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("DestinationProperty", null, null); if(OnDestinationProperty_PostSetter != null && IsAttached) OnDestinationProperty_PostSetter(this); };
                     if (DestinationProperty_was_eagerLoaded) { DestinationProperty_was_eagerLoaded = false; }
 				}

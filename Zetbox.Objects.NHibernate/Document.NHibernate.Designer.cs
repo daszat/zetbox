@@ -65,8 +65,7 @@ namespace at.dasz.DocumentManagement
 							new ProjectedCollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl.Document_has_Blob_RelationEntryProxy, at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.Revisions,
                                 p => (at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl.Document_has_Blob_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl>)null);
+                                ce => (at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl.Document_has_Blob_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
                     _Revisions.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Revisions", null, null); if(OnRevisions_PostSetter != null && IsAttached) OnRevisions_PostSetter(this); };
                     if (Revisions_was_eagerLoaded) { Revisions_was_eagerLoaded = false; }
 				}

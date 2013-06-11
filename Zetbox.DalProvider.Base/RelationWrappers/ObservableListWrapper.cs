@@ -52,7 +52,7 @@ namespace Zetbox.DalProvider.Base.RelationWrappers
 
         public event NotifyCollectionChangedEventHandler CollectionChanged;
 
-        private void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
+        protected void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
         {
             if (CollectionChanged != null)
             {
@@ -92,7 +92,7 @@ namespace Zetbox.DalProvider.Base.RelationWrappers
 
         public event NotifyCollectionChangedEventHandler CollectionChanged;
 
-        private void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
+        protected void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
         {
             if (CollectionChanged != null)
             {

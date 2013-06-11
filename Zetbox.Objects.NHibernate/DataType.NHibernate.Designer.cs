@@ -702,8 +702,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
 							new ProjectedCollection<Zetbox.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl.DataType_implements_Interface_RelationEntryProxy, Zetbox.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.ImplementsInterfaces,
                                 p => (Zetbox.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl.DataType_implements_Interface_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Zetbox.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl>)null);
+                                ce => (Zetbox.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl.DataType_implements_Interface_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
                     _ImplementsInterfaces.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("ImplementsInterfaces", null, null); if(OnImplementsInterfaces_PostSetter != null && IsAttached) OnImplementsInterfaces_PostSetter(this); };
                     if (ImplementsInterfaces_was_eagerLoaded) { ImplementsInterfaces_was_eagerLoaded = false; }
 				}

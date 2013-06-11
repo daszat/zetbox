@@ -881,8 +881,7 @@ namespace Zetbox.App.GUI
 							new ProjectedCollection<Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryProxy, Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.SecondaryControlKinds,
                                 p => (Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl>)null);
+                                ce => (Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
                     _SecondaryControlKinds.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("SecondaryControlKinds", null, null); if(OnSecondaryControlKinds_PostSetter != null && IsAttached) OnSecondaryControlKinds_PostSetter(this); };
                     if (SecondaryControlKinds_was_eagerLoaded) { SecondaryControlKinds_was_eagerLoaded = false; }
 				}

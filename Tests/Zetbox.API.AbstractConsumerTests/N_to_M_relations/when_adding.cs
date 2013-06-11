@@ -47,7 +47,6 @@ namespace Zetbox.API.AbstractConsumerTests.N_to_M_relations
             public void should_remember_locally_two_items()
             {
                 aSide1.BSide.Add(bSide1);
-                Assert.That(aSide1.BSide, Is.EquivalentTo(new[] { bSide1 }));
                 aSide1.BSide.Add(bSide2);
                 Assert.That(aSide1.BSide, Is.EquivalentTo(new[] { bSide1, bSide2 }));
             }
@@ -122,7 +121,6 @@ namespace Zetbox.API.AbstractConsumerTests.N_to_M_relations
             public void should_remember_locally_two_items()
             {
                 bSide1.ASide.Add(aSide1);
-                Assert.That(bSide1.ASide, Is.EquivalentTo(new[] { aSide1 }));
                 bSide1.ASide.Add(aSide2);
                 Assert.That(bSide1.ASide, Is.EquivalentTo(new[] { aSide1, aSide2 }));
             }

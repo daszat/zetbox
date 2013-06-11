@@ -714,8 +714,7 @@ namespace Zetbox.App.Base
 							new ProjectedCollection<Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl.TypeRef_hasGenericArguments_TypeRef_RelationEntryProxy, Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.GenericArguments,
                                 p => (Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl.TypeRef_hasGenericArguments_TypeRef_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl>)null);
+                                ce => (Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl.TypeRef_hasGenericArguments_TypeRef_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
                     _GenericArguments.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("GenericArguments", null, null); if(OnGenericArguments_PostSetter != null && IsAttached) OnGenericArguments_PostSetter(this); };
                     if (GenericArguments_was_eagerLoaded) { GenericArguments_was_eagerLoaded = false; }
 				}

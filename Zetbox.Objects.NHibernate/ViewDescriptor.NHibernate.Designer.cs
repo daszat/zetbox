@@ -581,8 +581,7 @@ namespace Zetbox.App.GUI
 							new ProjectedCollection<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl.ViewDescriptor_supports_TypeRef_RelationEntryProxy, Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.SupportedViewModels,
                                 p => (Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl.ViewDescriptor_supports_TypeRef_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl>)null);
+                                ce => (Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl.ViewDescriptor_supports_TypeRef_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
                     _SupportedViewModels.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("SupportedViewModels", null, null); if(OnSupportedViewModels_PostSetter != null && IsAttached) OnSupportedViewModels_PostSetter(this); };
                     if (SupportedViewModels_was_eagerLoaded) { SupportedViewModels_was_eagerLoaded = false; }
 				}

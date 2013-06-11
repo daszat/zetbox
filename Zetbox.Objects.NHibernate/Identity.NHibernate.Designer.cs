@@ -181,8 +181,7 @@ namespace Zetbox.App.Base
 							new ProjectedCollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl.Identity_memberOf_Group_RelationEntryProxy, Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.Groups,
                                 p => (Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl.Identity_memberOf_Group_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl>)entry.B.Member);
+                                ce => (Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl.Identity_memberOf_Group_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
                     _Groups.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Groups", null, null); if(OnGroups_PostSetter != null && IsAttached) OnGroups_PostSetter(this); };
                     if (Groups_was_eagerLoaded) { Groups_was_eagerLoaded = false; }
 				}

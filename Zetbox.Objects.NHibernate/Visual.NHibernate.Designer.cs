@@ -65,8 +65,7 @@ namespace Zetbox.App.GUI
 							new ProjectedCollection<Zetbox.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl.Visual_contains_Visual_RelationEntryProxy, Zetbox.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.Children,
                                 p => (Zetbox.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl.Visual_contains_Visual_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Zetbox.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl>)null);
+                                ce => (Zetbox.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl.Visual_contains_Visual_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
                     _Children.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Children", null, null); if(OnChildren_PostSetter != null && IsAttached) OnChildren_PostSetter(this); };
                     if (Children_was_eagerLoaded) { Children_was_eagerLoaded = false; }
 				}
@@ -104,8 +103,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.Visual> OnChildren
 							new ProjectedCollection<Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl.Visual_hasContextMenu_Visual_RelationEntryProxy, Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.ContextMenu,
                                 p => (Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl.Visual_hasContextMenu_Visual_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl>)null);
+                                ce => (Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl.Visual_hasContextMenu_Visual_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
                     _ContextMenu.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("ContextMenu", null, null); if(OnContextMenu_PostSetter != null && IsAttached) OnContextMenu_PostSetter(this); };
                     if (ContextMenu_was_eagerLoaded) { ContextMenu_was_eagerLoaded = false; }
 				}

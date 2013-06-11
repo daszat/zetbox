@@ -65,8 +65,7 @@ namespace Zetbox.App.Base
 							new ProjectedCollection<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl.RoleMembership_resolves_Relation_RelationEntryProxy, Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.Relations,
                                 p => (Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl.RoleMembership_resolves_Relation_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl>)null);
+                                ce => (Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl.RoleMembership_resolves_Relation_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
                     _Relations.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Relations", null, null); if(OnRelations_PostSetter != null && IsAttached) OnRelations_PostSetter(this); };
                     if (Relations_was_eagerLoaded) { Relations_was_eagerLoaded = false; }
 				}

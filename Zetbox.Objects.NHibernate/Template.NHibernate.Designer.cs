@@ -279,8 +279,7 @@ namespace Zetbox.App.GUI
 							new ProjectedCollection<Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl.Template_hasMenu_Visual_RelationEntryProxy, Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.Menu,
                                 p => (Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl.Template_hasMenu_Visual_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl>)null);
+                                ce => (Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl.Template_hasMenu_Visual_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
                     _Menu.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Menu", null, null); if(OnMenu_PostSetter != null && IsAttached) OnMenu_PostSetter(this); };
                     if (Menu_was_eagerLoaded) { Menu_was_eagerLoaded = false; }
 				}

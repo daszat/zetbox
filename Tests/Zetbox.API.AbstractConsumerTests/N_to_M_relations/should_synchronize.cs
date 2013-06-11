@@ -322,5 +322,19 @@ namespace Zetbox.API.AbstractConsumerTests.N_to_M_relations
             Assert.That(aSide1.BSide, Is.Empty);
             Assert.That(bSide1.ASide, Is.Empty);
         }
+
+        /// <summary>
+        /// This is what happens when SetObjects is posted with a new RelationEntry.
+        /// </summary>
+        [Test]
+        public void when_creating_RelationEntry()
+        {
+            var relEntry = ctx.Internals().CreateRelationCollectionEntry<N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntry>();
+            relEntry.A = aSide1;
+            relEntry.B = bSide1;
+
+            Assert.That(aSide1.BSide, Is.EquivalentTo(new[] { bSide1 }));
+            Assert.That(bSide1.ASide, Is.EquivalentTo(new[] { aSide1 }));
+        }
     }
 }

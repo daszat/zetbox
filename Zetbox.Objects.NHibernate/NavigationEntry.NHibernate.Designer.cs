@@ -597,8 +597,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
 							new ProjectedCollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl.NavigationEntry_accessed_by_Group_RelationEntryProxy, Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.Groups,
                                 p => (Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl.NavigationEntry_accessed_by_Group_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl>)null);
+                                ce => (Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl.NavigationEntry_accessed_by_Group_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
                     _Groups.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Groups", null, null); if(OnGroups_PostSetter != null && IsAttached) OnGroups_PostSetter(this); };
                     if (Groups_was_eagerLoaded) { Groups_was_eagerLoaded = false; }
 				}
