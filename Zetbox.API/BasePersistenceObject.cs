@@ -175,7 +175,7 @@ namespace Zetbox.API
             this.ID = obj.ID;
         }
 
-        public virtual void SynchronizeCollections<T>(ICollection<T> me, ICollection<T> other) where T : class, IValueCollectionEntry
+        public virtual void SynchronizeCollections<T>(ICollection<T> me, ICollection<T> other) where T : BasePersistenceObject, IValueCollectionEntry
         {
             if (me == null) throw new ArgumentNullException("me");
             if (other == null) throw new ArgumentNullException("other");
@@ -194,6 +194,9 @@ namespace Zetbox.API
                 }
                 else
                 {
+                    // record notifications of collection entry changes while we're recording ourselves.
+                    if (IsRecordingNotifications)
+                        meItem.RecordNotifications();
                     meItem.ApplyChangesFrom(otherItem);
                 }
             }
