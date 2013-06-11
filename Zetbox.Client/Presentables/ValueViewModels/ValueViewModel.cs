@@ -20,6 +20,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Linq;
+    using System.Net.Mail;
     using System.Text;
     using System.Text.RegularExpressions;
     using Zetbox.API;
@@ -1118,22 +1119,51 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         ValueViewModelResources.SendMailCommand_Name,
                         ValueViewModelResources.SendMailCommand_Tooltip,
                         () => SendMail(),
-                        () => _mailSender != null && !string.IsNullOrWhiteSpace(Value),
-                        null);
+                        () => _mailSender != null && !string.IsNullOrWhiteSpace(Value) && IsMailaddress(Value),
+                        SendMailReason);
                     _SendMailCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.pen_png.Find(FrozenContext));
                 }
                 return _SendMailCommand;
             }
         }
 
+        private static bool IsMailaddress(string addr)
+        {
+            try
+            {
+                // see http://stackoverflow.com/q/528090/4918
+                var parsed = new MailAddress(addr);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public void SendMail()
         {
-            if(_mailSender != null)
+            if (_mailSender != null && IsMailaddress(Value))
             {
-                var msg = new System.Net.Mail.MailMessage();
-                msg.To.Add(Value);
-                _mailSender.Send(msg);
+                try
+                {
+                    var msg = new System.Net.Mail.MailMessage();
+                    msg.To.Add(Value);
+                    _mailSender.Send(msg);
+                }
+                catch
+                {
+                    // Do nothing.
+                }
             };
+        }
+
+        public string SendMailReason()
+        {
+            if (_mailSender == null) return ValueViewModelResources.NoMailSender;
+            if (string.IsNullOrWhiteSpace(Value)) return ValueViewModelResources.NoMailAddress;
+            if (!IsMailaddress(Value)) return ValueViewModelResources.InvalidMailFormat;
+            return string.Empty;
         }
     }
 
