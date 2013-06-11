@@ -16,19 +16,19 @@
 namespace Zetbox.App.Projekte.Server.Calendar
 {
     using System;
-    using System.Linq;
     using System.ComponentModel;
+    using System.Linq;
     using System.Threading;
     using Autofac;
     using Zetbox.API;
     using Zetbox.API.Configuration;
     using Zetbox.API.Server;
-    using cal = Zetbox.App.Calendar;
-    using Zetbox.API.Utils;
+    using Zetbox.App.Calendar;
 
     public class SyncProviderService : IService
     {
-        [Feature(NotOnFallback=true)]
+        #region Autofac Module
+        [Feature(NotOnFallback = true)]
         [Description("Zetbox calendar sync provider service")]
         public class Module : Autofac.Module
         {
@@ -43,23 +43,36 @@ namespace Zetbox.App.Projekte.Server.Calendar
                     .SingleInstance();
             }
         }
+        #endregion
 
-        private Func<IZetboxServerContext> _ctxFactory;
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.App.Projekte.Server.Calendar.SyncProviderService");
 
-        public SyncProviderService(Func<IZetboxServerContext> ctxFactory)
+        private readonly ILifetimeScope _scopeFactory;
+
+        public SyncProviderService(ILifetimeScope scopeFactory)
         {
-            if(ctxFactory == null) throw new ArgumentNullException("ctxFactory");
-            _ctxFactory = ctxFactory;
+            if (scopeFactory == null) throw new ArgumentNullException("scopeFactory");
+            _scopeFactory = scopeFactory;
         }
 
         private const int TIMER_DUE_TIME_SEC = 30; // Avoid start during service startup
         private const int TIMER_INTERVAL_SEC = 10;
         private Timer _timer;
-        private static readonly object _lock = new object();
-        private bool _isRunning = false; // protection for been called twice
+
+        /// <summary>Is true while the _timer_callback is running. Use _isRunningLock to protect access.</summary>
+        private bool _isRunning = false;
+
+        /// <summary>The lock for accessing _isRunning.</summary>
+        private readonly object _isRunningLock = new object();
 
         public void Start()
         {
+            if (_timer != null)
+            {
+                Log.Warn("Tried to Start() again. Ignoring.");
+                return;
+            }
+
             _timer = new Timer(_timer_callback, null, TIMER_DUE_TIME_SEC * 1000, TIMER_INTERVAL_SEC * 1000);
         }
 
@@ -71,49 +84,52 @@ namespace Zetbox.App.Projekte.Server.Calendar
 
         private void _timer_callback(object state)
         {
-            lock (_lock)
+            lock (_isRunningLock)
             {
                 if (_isRunning) return;
                 _isRunning = true;
             }
             try
             {
-                using (var ctx = _ctxFactory())
+                using (var scope = _scopeFactory.BeginLifetimeScope())
+                using (var ctx = scope.Resolve<IZetboxServerContext>())
                 {
                     var now = DateTime.Now;
-                    var provider = ctx.GetQuery<cal.SyncProvider>()
+                    var provider = ctx.GetQuery<SyncProvider>()
                         .Where(i => i.NextSync <= now)
                         .OrderBy(i => i.NextSync)
                         .FirstOrDefault();
 
                     if (provider != null)
                     {
-                        Logging.Server.Info(string.Format("Starting calendar sync on provider {0}", provider.Name));
+                        Log.InfoFormat("Starting calendar sync on provider {0}", provider.Name);
                         provider.PerformSync();
                         ctx.SubmitChanges();
-                        Logging.Server.Info(string.Format("calendar sync finished, next sync will be on the {0}", provider.NextSync));
+                        Log.InfoFormat("calendar sync finished, next sync will be on the {0}", provider.NextSync);
                     }
                 }
             }
             catch (Exception ex)
             {
-                Logging.Log.Error("Error during calendar sync", ex);
+                Log.Error("Error during calendar sync", ex);
             }
             finally
             {
-                // No need for lock -> my thread has set _isRunning to true
-                _isRunning = false;
+                lock (_isRunningLock)
+                {
+                    _isRunning = false;
+                }
             }
         }
 
         public string DisplayName
         {
-            get { return "Sync provider service"; }
+            get { return "Calendar SyncProvider Service"; }
         }
 
         public string Description
         {
-            get { return "Executes sync provider based on their next sync date."; }
+            get { return "Executes sync providers based on their next sync date."; }
         }
     }
 }
