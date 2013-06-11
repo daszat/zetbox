@@ -415,7 +415,7 @@ namespace Zetbox.DalProvider.Client
 
             if (_clientIsolationLevel == ContextIsolationLevel.MergeQueryData && obj != localobj)
             {
-                RecordNotifications(localobj);
+                ((BasePersistenceObject)localobj).RecordNotifications();
                 localobj.ApplyChangesFrom(obj);
                 // reset ObjectState to new truth
                 ((IClientObject)localobj).SetUnmodified();
@@ -424,25 +424,9 @@ namespace Zetbox.DalProvider.Client
             return localobj;
         }
 
-        private List<BasePersistenceObject> _objectsToPlayBackNotifications = null;
-
-        internal void RecordNotifications(IPersistenceObject obj)
-        {
-            if (_objectsToPlayBackNotifications == null)
-            {
-                _objectsToPlayBackNotifications = new List<BasePersistenceObject>();
-            }
-            var bpo = (BasePersistenceObject)obj;
-            bpo.RecordNotifications();
-            _objectsToPlayBackNotifications.Add(bpo);
-        }
-
         internal void PlaybackNotifications()
         {
-            if (_objectsToPlayBackNotifications == null)
-                return;
-            _objectsToPlayBackNotifications.ForEach(obj => obj.PlaybackNotifications());
-            _objectsToPlayBackNotifications = null;
+            AttachedObjects.ForEach(obj => ((BasePersistenceObject)obj).PlaybackNotifications());
         }
 
         /// <summary>
@@ -627,7 +611,7 @@ namespace Zetbox.DalProvider.Client
                         obj = (IClientObject)underlyingObject;
                     }
 
-                    ctx.RecordNotifications(underlyingObject);
+                    ((BasePersistenceObject)underlyingObject).RecordNotifications();
                     if (obj != objFromServer)
                     {
                         underlyingObject.ApplyChangesFrom(objFromServer);
