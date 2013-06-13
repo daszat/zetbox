@@ -330,6 +330,10 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             {
                 ClearValueCache();
             }
+            else if (e.PropertyName == "HighlightAsync")
+            {
+                OnHighlightChanged();
+            }
             base.OnValueModelPropertyChanged(e);
         }
 
@@ -339,6 +343,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             {
                 case "ValueAsync":
                     OnPropertyChanged("SelectedItems");
+                    OnHighlightChanged();
                     break;
                 case "Value":
                     ClearValueCache();
@@ -713,7 +718,11 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 },
                 createTask: () =>
                 {
-                    return new ZbTask<Highlight>(GetValueFromModel(), () => Value != null && Value.Highlight != Highlight.None ? Value.Highlight : base.Highlight);
+                    var result = new ZbTask<Highlight>(GetValueFromModelAsync());
+                    // This must be done on the UI-Thread
+                    // Accessing any property might trigger accesses to the zetbox context
+                    result.OnResult(t => t.Result = Value != null && Value.Highlight != Highlight.None ? Value.Highlight : base.Highlight);
+                    return result;
                 },
                 set: (Highlight value) =>
                 {
