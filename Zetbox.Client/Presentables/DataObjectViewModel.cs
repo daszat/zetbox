@@ -472,12 +472,8 @@ namespace Zetbox.Client.Presentables
         {
             get
             {
-                if (DataContext.IsElevatedMode) return Highlight.Bad;
-                if (Object.CurrentAccessRights.HasOnlyReadRightsOrNone()) return Highlight.Deactivated;
-                // Reflect readonly only on changable context
-                if (!DataContext.IsReadonly && (!IsEnabled || IsReadOnly)) return Highlight.Deactivated;
-                if (Object is IDeactivatable && ((IDeactivatable)Object).IsDeactivated) return Highlight.Deactivated;
-                return Highlight.None;
+                // no async version required: nothing dangerous happens there.
+                return Highlight;
             }
         }
 

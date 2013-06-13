@@ -367,7 +367,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         #region IValueViewModel<TValue> Members
 
-        protected abstract ZbTask<TValue> GetValueFromModel();
+        protected abstract ZbTask<TValue> GetValueFromModelAsync();
 
         /// <summary>
         /// Writes the specified value to the model, circumventing the state machine.
@@ -378,7 +378,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                return GetValueFromModel().Result;
+                return GetValueFromModelAsync().Result;
             }
             set
             {
@@ -444,7 +444,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 {
                     case ValueViewModelState.Blurred_UnmodifiedValue:
                     case ValueViewModelState.ImplicitFocus_WritingModel:
-                        return FormatValue(this.GetValueFromModel().Result);
+                        return FormatValue(this.GetValueFromModelAsync().Result);
                     case ValueViewModelState.Blurred_PartialUserInput:
                     case ValueViewModelState.ImplicitFocus_PartialUserInput:
                     case ValueViewModelState.Focused_PartialUserInput:
@@ -489,7 +489,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                GetValueFromModel()
+                GetValueFromModelAsync()
                     .OnResult(t =>
                     {
                         var tmp = FormattedValue;
@@ -692,7 +692,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 case ValueViewModelState.Blurred_UnmodifiedValue:
                     try
                     {
-                        _partialUserInput = FormatValue(this.GetValueFromModel().Result);
+                        _partialUserInput = FormatValue(this.GetValueFromModelAsync().Result);
                     }
                     finally
                     {
@@ -834,7 +834,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
-        protected override ZbTask<TValue?> GetValueFromModel()
+        protected override ZbTask<TValue?> GetValueFromModelAsync()
         {
             return new ZbTask<TValue?>(ZbTask.Synchron, () => ValueModel.Value);
         }
@@ -885,7 +885,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
-        protected override ZbTask<TValue> GetValueFromModel()
+        protected override ZbTask<TValue> GetValueFromModelAsync()
         {
             return new ZbTask<TValue>(ZbTask.Synchron, () => ValueModel.Value);
         }
@@ -1322,11 +1322,11 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 return result;
             }
 
-            protected override ZbTask<TimeSpan?> GetValueFromModel()
+            protected override ZbTask<TimeSpan?> GetValueFromModelAsync()
             {
                 return new ZbTask<TimeSpan?>(ZbTask.Synchron, () =>
                 {
-                    var val = Parent.GetValueFromModel().Result;
+                    var val = Parent.GetValueFromModelAsync().Result;
                     if (val == null) return null;
                     return val.Value.TimeOfDay;
                 });
@@ -1334,7 +1334,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
             protected override void SetValueToModel(TimeSpan? value)
             {
-                if (Parent.GetValueFromModel().Result == null && value == null)
+                if (Parent.GetValueFromModelAsync().Result == null && value == null)
                 {
                     Parent.SetValueToModel(null);
                 }
@@ -1349,7 +1349,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             private DateTime? GetNewValue(TimeSpan? value)
             {
                 DateTime? result;
-                var date = (Parent.GetValueFromModel().Result ?? DateTime.MinValue).Date;
+                var date = (Parent.GetValueFromModelAsync().Result ?? DateTime.MinValue).Date;
                 if (date == DateTime.MinValue.Date)
                 {
                     if (value == null || value == TimeSpan.Zero)
@@ -1416,11 +1416,11 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 return value == null ? String.Empty : value.Value.ToShortDateString();
             }
 
-            protected override ZbTask<DateTime?> GetValueFromModel()
+            protected override ZbTask<DateTime?> GetValueFromModelAsync()
             {
                 return new ZbTask<DateTime?>(ZbTask.Synchron, () =>
                 {
-                    var t = Parent.GetValueFromModel();
+                    var t = Parent.GetValueFromModelAsync();
                     t.Wait();
                     var modelValue = t.Result;
                     if (modelValue.HasValue)
@@ -1444,7 +1444,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
             protected override void SetValueToModel(DateTime? value)
             {
-                if (Parent.GetValueFromModel() == null && value == null)
+                if (Parent.GetValueFromModelAsync() == null && value == null)
                 {
                     Parent.SetValueToModel(null);
                 }
@@ -1459,7 +1459,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             private DateTime? GetNewValue(DateTime? value)
             {
                 DateTime? result;
-                var time = (Parent.GetValueFromModel().Result ?? DateTime.MinValue).TimeOfDay;
+                var time = (Parent.GetValueFromModelAsync().Result ?? DateTime.MinValue).TimeOfDay;
                 if (time == DateTime.MinValue.TimeOfDay)
                 {
                     if (value == DateTime.MinValue)
@@ -1845,7 +1845,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                UpdateValueCache(GetValueFromModel().Result);
+                UpdateValueCache(GetValueFromModelAsync().Result);
                 return _year;
             }
             set
@@ -1864,7 +1864,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                UpdateValueCache(GetValueFromModel().Result);
+                UpdateValueCache(GetValueFromModelAsync().Result);
                 return _month;
             }
             set
@@ -1902,7 +1902,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         private DateTime? GetValueFromComponents()
         {
-            var oldDate = GetValueFromModel().Result;
+            var oldDate = GetValueFromModelAsync().Result;
             var localDateValid = Year != null && Month != null && Year > 0 && Month >= 1 && Month <= 12;
 
             if (localDateValid)

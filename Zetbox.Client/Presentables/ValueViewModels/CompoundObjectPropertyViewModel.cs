@@ -73,7 +73,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         private bool _valueCacheInititalized = false;
         private CompoundObjectViewModel _valueCache;
 
-        protected override ZbTask<CompoundObjectViewModel> GetValueFromModel()
+        protected override ZbTask<CompoundObjectViewModel> GetValueFromModelAsync()
         {
             return new ZbTask<CompoundObjectViewModel>(ZbTask.Synchron, () =>
             {

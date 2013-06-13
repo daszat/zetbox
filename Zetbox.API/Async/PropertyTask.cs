@@ -65,7 +65,7 @@ namespace Zetbox.API.Async
         }
 
         /// <summary>
-        /// Try getting the value. This may return an invalid or out-dated value.
+        /// Try getting the value. This may return an invalid or out-dated value, but does not block.
         /// </summary>
         /// <remarks>
         /// <para>

@@ -71,7 +71,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                     {
                         // search first
                         _allowSelectValue = true;
-                        _allowCreateNewItem = false; 
+                        _allowCreateNewItem = false;
                         _allowCreateNewItemOnSelect = true;
                     }
                     else if (relType == RelationType.one_one)
@@ -88,8 +88,8 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                             // possibility to change parent, but do not create a new one
                             // search first
                             _allowSelectValue = true;
-                            _allowCreateNewItem = false; 
-                            _allowCreateNewItemOnSelect = true; 
+                            _allowCreateNewItem = false;
+                            _allowCreateNewItemOnSelect = true;
                         }
                     }
                 }
@@ -350,7 +350,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         }
 
         private ZbTask<DataObjectViewModel> _fetchValueTask;
-        protected override ZbTask<DataObjectViewModel> GetValueFromModel()
+        protected override ZbTask<DataObjectViewModel> GetValueFromModelAsync()
         {
             if (_fetchValueTask == null)
             {
@@ -435,11 +435,12 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                GetValueFromModel();
+                GetValueFromModelAsync();
                 return _valueCache;
             }
             set
             {
+                // reuse synchronous setter to await/cancel a potential running fetch task
                 this.Value = value;
             }
         }
