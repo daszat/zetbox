@@ -16,14 +16,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using NUnit.Framework;
 using Zetbox.API;
 using Zetbox.API.AbstractConsumerTests;
 using Zetbox.API.Client;
 using Zetbox.App.Base;
 using Zetbox.App.Projekte;
-
-using NUnit.Framework;
 
 namespace Zetbox.IntegrationTests
 {
@@ -316,5 +314,82 @@ namespace Zetbox.IntegrationTests
 
         #endregion
 
+        #region Regressions
+
+        [Test]
+        public void changing_relationChain_should_update_acl_description_9573()
+        {
+            Clean9573();
+
+            int aclId;
+            string aclDescription;
+            using (var ctx = GetContext())
+            {
+                var cls = ctx.Create<ObjectClass>();
+                cls.Name = "Test9573";
+                cls.TableName = "Test9573";
+                cls.Module = ctx.GetQuery<Module>().Where(m => m.Name == "TestModule").First();
+
+                var acl = ctx.Create<RoleMembership>();
+                cls.AccessControlList.Add(acl);
+
+                var rel = ctx.GetQuery<Relation>().First();
+                acl.Relations.Add(rel);
+                acl.Rights = Zetbox.App.Base.AccessRights.Full;
+                acl.Module = cls.Module;
+                acl.Notes = "Test object";
+
+                // fetch calculated description after creating the object
+                // and before modifying it with submit changes
+                aclDescription = acl.Description;
+                Assert.That(aclDescription, Is.Not.Empty, "before submitChanges");
+
+                ctx.SubmitChanges();
+
+                Assert.That(acl.Description, Is.EqualTo(aclDescription), "after submitChanges");
+
+                aclId = acl.ID;
+            }
+
+            using (var ctx = GetContext())
+            {
+                var acl = ctx.Find<RoleMembership>(aclId);
+                var rel = ctx.GetQuery<Relation>().First();
+                acl.Relations.Add(rel);
+
+                Assert.That(acl.Description, Is.Not.EqualTo(aclDescription), "modified, before submitChanges");
+                aclDescription = acl.Description;
+
+                ctx.SubmitChanges();
+                Assert.That(acl.Description, Is.EqualTo(aclDescription), "modified, after submitChanges");
+            }
+
+            using (var ctx = GetContext())
+            {
+                var acl = ctx.Find<RoleMembership>(aclId);
+
+                Assert.That(acl.Description, Is.EqualTo(aclDescription), "reloaded");
+            }
+        }
+
+        private void Clean9573()
+        {
+            using (var ctx = GetContext())
+            {
+                foreach (var cls in ctx.GetQuery<ObjectClass>().Where(c => c.Name == "Test9573"))
+                {
+                    ctx.Delete(cls);
+                }
+                ctx.SubmitChanges();
+            }
+        }
+
+        #endregion
+
+        public override void TearDown()
+        {
+            Clean9573();
+            base.TearDown();
+        }
     }
 }
