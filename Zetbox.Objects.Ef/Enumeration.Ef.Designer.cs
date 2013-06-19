@@ -146,13 +146,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var c = GetEnumerationEntriesImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetEnumerationEntriesImplCollection();
             }
         }
         private EntityListWrapper<Zetbox.App.Base.EnumerationEntry, Zetbox.App.Base.EnumerationEntryEfImpl> _EnumerationEntries;
@@ -166,6 +160,14 @@ namespace Zetbox.App.Base
                     .GetRelatedCollection<Zetbox.App.Base.EnumerationEntryEfImpl>(
                         "Model.FK_Enumeration_has_EnumerationEntries",
                         "EnumerationEntries");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_EnumerationEntriesImplEntityCollection.IsLoaded)
+                {
+                    _EnumerationEntriesImplEntityCollection.Load();
+                }
                 _EnumerationEntriesImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("EnumerationEntries", null, null); if (OnEnumerationEntries_PostSetter != null && IsAttached) OnEnumerationEntries_PostSetter(this); };
             }
             return _EnumerationEntriesImplEntityCollection;

@@ -117,13 +117,7 @@
         {
             get
             {
-                var c = Get<%= efName %>Collection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return Get<%= efName %>Collection();
             }
         }
 
@@ -137,6 +131,14 @@
                         .GetRelatedCollection<<%= ceName %>>(
                             "Model.<%= assocName %>",
                             "<%= targetRoleName %>");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_<%= efName %>EntityCollection.IsLoaded)
+                {
+                    _<%= efName %>EntityCollection.Load();
+                }
                 _<%= efName %>EntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("<%= name %>", null, null); if(<%= eventName %> != null && IsAttached) <%= eventName%>(this); };
             }
             return _<%= efName %>EntityCollection;

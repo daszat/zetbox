@@ -856,13 +856,7 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                var c = GetSourceColumnImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetSourceColumnImplCollection();
             }
         }
         private EntityCollectionWrapper<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.SchemaMigration.SourceColumnEfImpl> _SourceColumn;
@@ -876,6 +870,14 @@ namespace Zetbox.App.SchemaMigration
                     .GetRelatedCollection<Zetbox.App.SchemaMigration.SourceColumnEfImpl>(
                         "Model.FK_SourceColumn_belongs_to_SourceTable",
                         "SourceColumn");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_SourceColumnImplEntityCollection.IsLoaded)
+                {
+                    _SourceColumnImplEntityCollection.Load();
+                }
                 _SourceColumnImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("SourceColumn", null, null); if (OnSourceColumn_PostSetter != null && IsAttached) OnSourceColumn_PostSetter(this); };
             }
             return _SourceColumnImplEntityCollection;

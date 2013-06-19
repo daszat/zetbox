@@ -211,13 +211,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var c = GetGroupsImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetGroupsImplCollection();
             }
         }
 
@@ -231,6 +225,14 @@ namespace Zetbox.App.Base
                         .GetRelatedCollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryEfImpl>(
                             "Model.FK_Identities_memberOf_Groups_A",
                             "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_GroupsImplEntityCollection.IsLoaded)
+                {
+                    _GroupsImplEntityCollection.Load();
+                }
                 _GroupsImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Groups", null, null); if(OnGroups_PostSetter != null && IsAttached) OnGroups_PostSetter(this); };
             }
             return _GroupsImplEntityCollection;

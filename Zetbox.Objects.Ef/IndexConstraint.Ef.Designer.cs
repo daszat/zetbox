@@ -155,13 +155,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var c = GetPropertiesImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetPropertiesImplCollection();
             }
         }
 
@@ -175,6 +169,14 @@ namespace Zetbox.App.Base
                         .GetRelatedCollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl>(
                             "Model.FK_UniqueContraints_ensures_unique_on_Properties_A",
                             "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_PropertiesImplEntityCollection.IsLoaded)
+                {
+                    _PropertiesImplEntityCollection.Load();
+                }
                 _PropertiesImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Properties", null, null); if(OnProperties_PostSetter != null && IsAttached) OnProperties_PostSetter(this); };
             }
             return _PropertiesImplEntityCollection;

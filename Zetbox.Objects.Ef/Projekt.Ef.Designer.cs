@@ -69,13 +69,7 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                var c = GetAuditJournalImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetAuditJournalImplCollection();
             }
         }
 
@@ -87,6 +81,14 @@ namespace Zetbox.App.Projekte
                     .GetRelatedCollection<Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryEfImpl>(
                         "Model.FK_Projekt_value_AuditJournal",
                         "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_AuditJournalImplEntityCollection.IsLoaded)
+                {
+                    _AuditJournalImplEntityCollection.Load();
+                }
                 _AuditJournalImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("AuditJournal", null, null); if (OnAuditJournal_PostSetter != null && IsAttached) OnAuditJournal_PostSetter(this); };
             }
             return _AuditJournalImplEntityCollection;
@@ -134,13 +136,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         {
             get
             {
-                var c = GetAuftraegeImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetAuftraegeImplCollection();
             }
         }
         private EntityCollectionWrapper<Zetbox.App.Projekte.Auftrag, Zetbox.App.Projekte.AuftragEfImpl> _Auftraege;
@@ -154,6 +150,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                     .GetRelatedCollection<Zetbox.App.Projekte.AuftragEfImpl>(
                         "Model.FK_Projekt_has_Auftraege",
                         "Auftraege");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_AuftraegeImplEntityCollection.IsLoaded)
+                {
+                    _AuftraegeImplEntityCollection.Load();
+                }
                 _AuftraegeImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Auftraege", null, null); if (OnAuftraege_PostSetter != null && IsAttached) OnAuftraege_PostSetter(this); };
             }
             return _AuftraegeImplEntityCollection;
@@ -1004,13 +1008,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         {
             get
             {
-                var c = GetMitarbeiterImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetMitarbeiterImplCollection();
             }
         }
 
@@ -1024,6 +1022,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                         .GetRelatedCollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryEfImpl>(
                             "Model.FK_Projekte_haben_Mitarbeiter_A",
                             "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_MitarbeiterImplEntityCollection.IsLoaded)
+                {
+                    _MitarbeiterImplEntityCollection.Load();
+                }
                 _MitarbeiterImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Mitarbeiter", null, null); if(OnMitarbeiter_PostSetter != null && IsAttached) OnMitarbeiter_PostSetter(this); };
             }
             return _MitarbeiterImplEntityCollection;
@@ -1145,13 +1151,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnMi
         {
             get
             {
-                var c = GetTasksImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetTasksImplCollection();
             }
         }
         private EntityCollectionWrapper<Zetbox.App.Projekte.Task, Zetbox.App.Projekte.TaskEfImpl> _Tasks;
@@ -1165,6 +1165,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnMi
                     .GetRelatedCollection<Zetbox.App.Projekte.TaskEfImpl>(
                         "Model.FK_Projekt_has_Tasks",
                         "Tasks");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_TasksImplEntityCollection.IsLoaded)
+                {
+                    _TasksImplEntityCollection.Load();
+                }
                 _TasksImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Tasks", null, null); if (OnTasks_PostSetter != null && IsAttached) OnTasks_PostSetter(this); };
             }
             return _TasksImplEntityCollection;

@@ -783,13 +783,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var c = GetGenericArgumentsImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetGenericArgumentsImplCollection();
             }
         }
 
@@ -803,6 +797,14 @@ namespace Zetbox.App.Base
                         .GetRelatedCollection<Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl>(
                             "Model.FK_TypeRef_hasGenericArguments_GenericArguments_A",
                             "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_GenericArgumentsImplEntityCollection.IsLoaded)
+                {
+                    _GenericArgumentsImplEntityCollection.Load();
+                }
                 _GenericArgumentsImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("GenericArguments", null, null); if(OnGenericArguments_PostSetter != null && IsAttached) OnGenericArguments_PostSetter(this); };
             }
             return _GenericArgumentsImplEntityCollection;

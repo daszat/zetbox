@@ -318,13 +318,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var c = GetMenuImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetMenuImplCollection();
             }
         }
 
@@ -338,6 +332,14 @@ namespace Zetbox.App.GUI
                         .GetRelatedCollection<Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryEfImpl>(
                             "Model.FK_Template_hasMenu_Menu_A",
                             "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_MenuImplEntityCollection.IsLoaded)
+                {
+                    _MenuImplEntityCollection.Load();
+                }
                 _MenuImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Menu", null, null); if(OnMenu_PostSetter != null && IsAttached) OnMenu_PostSetter(this); };
             }
             return _MenuImplEntityCollection;

@@ -73,13 +73,7 @@ namespace at.dasz.DocumentManagement
         {
             get
             {
-                var c = GetRevisionsImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetRevisionsImplCollection();
             }
         }
 
@@ -93,6 +87,14 @@ namespace at.dasz.DocumentManagement
                         .GetRelatedCollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryEfImpl>(
                             "Model.FK_Document_has_Revisions_A",
                             "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_RevisionsImplEntityCollection.IsLoaded)
+                {
+                    _RevisionsImplEntityCollection.Load();
+                }
                 _RevisionsImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Revisions", null, null); if(OnRevisions_PostSetter != null && IsAttached) OnRevisions_PostSetter(this); };
             }
             return _RevisionsImplEntityCollection;

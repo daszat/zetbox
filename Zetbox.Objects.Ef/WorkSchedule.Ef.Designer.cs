@@ -388,13 +388,7 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                var c = GetChildWorkScheduleImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetChildWorkScheduleImplCollection();
             }
         }
         private EntityCollectionWrapper<Zetbox.App.Calendar.WorkSchedule, Zetbox.App.Calendar.WorkScheduleEfImpl> _ChildWorkSchedule;
@@ -408,6 +402,14 @@ namespace Zetbox.App.Calendar
                     .GetRelatedCollection<Zetbox.App.Calendar.WorkScheduleEfImpl>(
                         "Model.FK_BaseWorkSchedule_has_ChildWorkSchedules",
                         "ChildWorkSchedules");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_ChildWorkScheduleImplEntityCollection.IsLoaded)
+                {
+                    _ChildWorkScheduleImplEntityCollection.Load();
+                }
                 _ChildWorkScheduleImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("ChildWorkSchedule", null, null); if (OnChildWorkSchedule_PostSetter != null && IsAttached) OnChildWorkSchedule_PostSetter(this); };
             }
             return _ChildWorkScheduleImplEntityCollection;
@@ -910,13 +912,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
         {
             get
             {
-                var c = GetWorkScheduleRulesImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetWorkScheduleRulesImplCollection();
             }
         }
         private EntityCollectionWrapper<Zetbox.App.Calendar.WorkScheduleRule, Zetbox.App.Calendar.WorkScheduleRuleEfImpl> _WorkScheduleRules;
@@ -930,6 +926,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
                     .GetRelatedCollection<Zetbox.App.Calendar.WorkScheduleRuleEfImpl>(
                         "Model.FK_WorkSchedule_has_WorkScheduleRules",
                         "WorkScheduleRules");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_WorkScheduleRulesImplEntityCollection.IsLoaded)
+                {
+                    _WorkScheduleRulesImplEntityCollection.Load();
+                }
                 _WorkScheduleRulesImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("WorkScheduleRules", null, null); if (OnWorkScheduleRules_PostSetter != null && IsAttached) OnWorkScheduleRules_PostSetter(this); };
             }
             return _WorkScheduleRulesImplEntityCollection;

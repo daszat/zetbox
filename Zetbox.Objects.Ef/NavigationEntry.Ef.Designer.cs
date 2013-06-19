@@ -268,13 +268,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var c = GetChildrenImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetChildrenImplCollection();
             }
         }
         private EntityListWrapper<Zetbox.App.GUI.NavigationEntry, Zetbox.App.GUI.NavigationEntryEfImpl> _Children;
@@ -288,6 +282,14 @@ namespace Zetbox.App.GUI
                     .GetRelatedCollection<Zetbox.App.GUI.NavigationEntryEfImpl>(
                         "Model.FK_Parent_navigates_to_Children",
                         "Children");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_ChildrenImplEntityCollection.IsLoaded)
+                {
+                    _ChildrenImplEntityCollection.Load();
+                }
                 _ChildrenImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Children", null, null); if (OnChildren_PostSetter != null && IsAttached) OnChildren_PostSetter(this); };
             }
             return _ChildrenImplEntityCollection;
@@ -678,13 +680,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         {
             get
             {
-                var c = GetGroupsImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetGroupsImplCollection();
             }
         }
 
@@ -698,6 +694,14 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                         .GetRelatedCollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryEfImpl>(
                             "Model.FK_NavigationScreen_accessed_by_Groups_A",
                             "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_GroupsImplEntityCollection.IsLoaded)
+                {
+                    _GroupsImplEntityCollection.Load();
+                }
                 _GroupsImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Groups", null, null); if(OnGroups_PostSetter != null && IsAttached) OnGroups_PostSetter(this); };
             }
             return _GroupsImplEntityCollection;

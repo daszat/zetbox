@@ -142,13 +142,7 @@ namespace Zetbox.App.Test
         {
             get
             {
-                var c = GetTestbogenImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetTestbogenImplCollection();
             }
         }
 
@@ -162,6 +156,14 @@ namespace Zetbox.App.Test
                         .GetRelatedCollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl>(
                             "Model.FK_Student_füllt_aus_Testbogen_A",
                             "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_TestbogenImplEntityCollection.IsLoaded)
+                {
+                    _TestbogenImplEntityCollection.Load();
+                }
                 _TestbogenImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Testbogen", null, null); if(OnTestbogen_PostSetter != null && IsAttached) OnTestbogen_PostSetter(this); };
             }
             return _TestbogenImplEntityCollection;

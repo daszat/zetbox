@@ -268,13 +268,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var c = GetConstraintsImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetConstraintsImplCollection();
             }
         }
         private EntityCollectionWrapper<Zetbox.App.Base.InstanceConstraint, Zetbox.App.Base.InstanceConstraintEfImpl> _Constraints;
@@ -288,6 +282,14 @@ namespace Zetbox.App.Base
                     .GetRelatedCollection<Zetbox.App.Base.InstanceConstraintEfImpl>(
                         "Model.FK_Constraint_on_Constrained",
                         "Constraint");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_ConstraintsImplEntityCollection.IsLoaded)
+                {
+                    _ConstraintsImplEntityCollection.Load();
+                }
                 _ConstraintsImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Constraints", null, null); if (OnConstraints_PostSetter != null && IsAttached) OnConstraints_PostSetter(this); };
             }
             return _ConstraintsImplEntityCollection;
@@ -788,13 +790,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
         {
             get
             {
-                var c = GetImplementsInterfacesImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetImplementsInterfacesImplCollection();
             }
         }
 
@@ -808,6 +804,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
                         .GetRelatedCollection<Zetbox.App.Base.DataType_implements_Interface_RelationEntryEfImpl>(
                             "Model.FK_DataType_implements_ImplementedInterfaces_A",
                             "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_ImplementsInterfacesImplEntityCollection.IsLoaded)
+                {
+                    _ImplementsInterfacesImplEntityCollection.Load();
+                }
                 _ImplementsInterfacesImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("ImplementsInterfaces", null, null); if(OnImplementsInterfaces_PostSetter != null && IsAttached) OnImplementsInterfaces_PostSetter(this); };
             }
             return _ImplementsInterfacesImplEntityCollection;
@@ -860,13 +864,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnImple
         {
             get
             {
-                var c = GetMethodsImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetMethodsImplCollection();
             }
         }
         private EntityCollectionWrapper<Zetbox.App.Base.Method, Zetbox.App.Base.MethodEfImpl> _Methods;
@@ -880,6 +878,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnImple
                     .GetRelatedCollection<Zetbox.App.Base.MethodEfImpl>(
                         "Model.FK_ObjectClass_has_Methods",
                         "Methods");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_MethodsImplEntityCollection.IsLoaded)
+                {
+                    _MethodsImplEntityCollection.Load();
+                }
                 _MethodsImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Methods", null, null); if (OnMethods_PostSetter != null && IsAttached) OnMethods_PostSetter(this); };
             }
             return _MethodsImplEntityCollection;
@@ -1111,13 +1117,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMetho
         {
             get
             {
-                var c = GetPropertiesImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetPropertiesImplCollection();
             }
         }
         private EntityListWrapper<Zetbox.App.Base.Property, Zetbox.App.Base.PropertyEfImpl> _Properties;
@@ -1131,6 +1131,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMetho
                     .GetRelatedCollection<Zetbox.App.Base.PropertyEfImpl>(
                         "Model.FK_ObjectClass_has_Properties",
                         "Properties");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_PropertiesImplEntityCollection.IsLoaded)
+                {
+                    _PropertiesImplEntityCollection.Load();
+                }
                 _PropertiesImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Properties", null, null); if (OnProperties_PostSetter != null && IsAttached) OnProperties_PostSetter(this); };
             }
             return _PropertiesImplEntityCollection;

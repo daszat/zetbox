@@ -224,13 +224,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var c = GetMethodsImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetMethodsImplCollection();
             }
         }
 
@@ -244,6 +238,14 @@ namespace Zetbox.App.Base
                         .GetRelatedCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl>(
                             "Model.FK_ObjRefProp_shows_Methods_A",
                             "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_MethodsImplEntityCollection.IsLoaded)
+                {
+                    _MethodsImplEntityCollection.Load();
+                }
                 _MethodsImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Methods", null, null); if(OnMethods_PostSetter != null && IsAttached) OnMethods_PostSetter(this); };
             }
             return _MethodsImplEntityCollection;

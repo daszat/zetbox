@@ -73,13 +73,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var c = GetInputsImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetInputsImplCollection();
             }
         }
 
@@ -93,6 +87,14 @@ namespace Zetbox.App.Base
                         .GetRelatedCollection<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl>(
                             "Model.FK_CalculatedReference_dependsOn_InputProperties_A",
                             "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_InputsImplEntityCollection.IsLoaded)
+                {
+                    _InputsImplEntityCollection.Load();
+                }
                 _InputsImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Inputs", null, null); if(OnInputs_PostSetter != null && IsAttached) OnInputs_PostSetter(this); };
             }
             return _InputsImplEntityCollection;

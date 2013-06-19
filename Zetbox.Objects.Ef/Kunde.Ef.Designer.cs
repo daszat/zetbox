@@ -520,13 +520,7 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                var c = GetEMailsImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetEMailsImplCollection();
             }
         }
 
@@ -538,6 +532,14 @@ namespace Zetbox.App.Projekte
                     .GetRelatedCollection<Zetbox.App.Projekte.Kunde_EMails_CollectionEntryEfImpl>(
                         "Model.FK_Kunde_value_EMails",
                         "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_EMailsImplEntityCollection.IsLoaded)
+                {
+                    _EMailsImplEntityCollection.Load();
+                }
                 _EMailsImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("EMails", null, null); if (OnEMails_PostSetter != null && IsAttached) OnEMails_PostSetter(this); };
             }
             return _EMailsImplEntityCollection;

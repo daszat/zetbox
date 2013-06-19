@@ -853,13 +853,7 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                var c = GetProjekteImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetProjekteImplCollection();
             }
         }
 
@@ -873,6 +867,14 @@ namespace Zetbox.App.Projekte
                         .GetRelatedCollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryEfImpl>(
                             "Model.FK_Projekte_haben_Mitarbeiter_B",
                             "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_ProjekteImplEntityCollection.IsLoaded)
+                {
+                    _ProjekteImplEntityCollection.Load();
+                }
                 _ProjekteImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Projekte", null, null); if(OnProjekte_PostSetter != null && IsAttached) OnProjekte_PostSetter(this); };
             }
             return _ProjekteImplEntityCollection;

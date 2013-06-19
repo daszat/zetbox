@@ -756,13 +756,7 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                var c = GetDestinationPropertyImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetDestinationPropertyImplCollection();
             }
         }
 
@@ -776,6 +770,14 @@ namespace Zetbox.App.SchemaMigration
                         .GetRelatedCollection<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryEfImpl>(
                             "Model.FK_SourceColumn_created_Property_A",
                             "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_DestinationPropertyImplEntityCollection.IsLoaded)
+                {
+                    _DestinationPropertyImplEntityCollection.Load();
+                }
                 _DestinationPropertyImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("DestinationProperty", null, null); if(OnDestinationProperty_PostSetter != null && IsAttached) OnDestinationProperty_PostSetter(this); };
             }
             return _DestinationPropertyImplEntityCollection;
@@ -829,13 +831,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         {
             get
             {
-                var c = GetEnumEntriesImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetEnumEntriesImplCollection();
             }
         }
         private EntityCollectionWrapper<Zetbox.App.SchemaMigration.SourceEnum, Zetbox.App.SchemaMigration.SourceEnumEfImpl> _EnumEntries;
@@ -849,6 +845,14 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                     .GetRelatedCollection<Zetbox.App.SchemaMigration.SourceEnumEfImpl>(
                         "Model.FK_SourceColumn_may_have_EnumEntries",
                         "EnumEntries");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_EnumEntriesImplEntityCollection.IsLoaded)
+                {
+                    _EnumEntriesImplEntityCollection.Load();
+                }
                 _EnumEntriesImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("EnumEntries", null, null); if (OnEnumEntries_PostSetter != null && IsAttached) OnEnumEntries_PostSetter(this); };
             }
             return _EnumEntriesImplEntityCollection;
@@ -1241,13 +1245,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         {
             get
             {
-                var c = GetReferersImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetReferersImplCollection();
             }
         }
         private EntityCollectionWrapper<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.SchemaMigration.SourceColumnEfImpl> _Referers;
@@ -1261,6 +1259,14 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                     .GetRelatedCollection<Zetbox.App.SchemaMigration.SourceColumnEfImpl>(
                         "Model.FK_FK_Column_references_PK_Column",
                         "FK_Column");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_ReferersImplEntityCollection.IsLoaded)
+                {
+                    _ReferersImplEntityCollection.Load();
+                }
                 _ReferersImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Referers", null, null); if (OnReferers_PostSetter != null && IsAttached) OnReferers_PostSetter(this); };
             }
             return _ReferersImplEntityCollection;

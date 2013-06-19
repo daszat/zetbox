@@ -77,13 +77,7 @@ namespace Zetbox.App.Test
         {
             get
             {
-                var c = GetChildrenImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetChildrenImplCollection();
             }
         }
         private EntityCollectionWrapper<Zetbox.App.Test.MethodTest, Zetbox.App.Test.MethodTestEfImpl> _Children;
@@ -97,6 +91,14 @@ namespace Zetbox.App.Test
                     .GetRelatedCollection<Zetbox.App.Test.MethodTestEfImpl>(
                         "Model.FK_Parent_has_Children",
                         "Children");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_ChildrenImplEntityCollection.IsLoaded)
+                {
+                    _ChildrenImplEntityCollection.Load();
+                }
                 _ChildrenImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Children", null, null); if (OnChildren_PostSetter != null && IsAttached) OnChildren_PostSetter(this); };
             }
             return _ChildrenImplEntityCollection;

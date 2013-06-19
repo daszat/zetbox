@@ -73,13 +73,7 @@ namespace Zetbox.App.Test
         {
             get
             {
-                var c = GetBSideImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetBSideImplCollection();
             }
         }
 
@@ -93,6 +87,14 @@ namespace Zetbox.App.Test
                         .GetRelatedCollection<Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl>(
                             "Model.FK_ASide_connectsTo_BSide_A",
                             "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_BSideImplEntityCollection.IsLoaded)
+                {
+                    _BSideImplEntityCollection.Load();
+                }
                 _BSideImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("BSide", null, null); if(OnBSide_PostSetter != null && IsAttached) OnBSide_PostSetter(this); };
             }
             return _BSideImplEntityCollection;

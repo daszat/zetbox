@@ -393,13 +393,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var c = GetConstraintsImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetConstraintsImplCollection();
             }
         }
         private EntityCollectionWrapper<Zetbox.App.Base.Constraint, Zetbox.App.Base.ConstraintEfImpl> _Constraints;
@@ -413,6 +407,14 @@ namespace Zetbox.App.Base
                     .GetRelatedCollection<Zetbox.App.Base.ConstraintEfImpl>(
                         "Model.FK_ConstrainedProperty_has_Constraints",
                         "Constraints");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_ConstraintsImplEntityCollection.IsLoaded)
+                {
+                    _ConstraintsImplEntityCollection.Load();
+                }
                 _ConstraintsImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Constraints", null, null); if (OnConstraints_PostSetter != null && IsAttached) OnConstraints_PostSetter(this); };
             }
             return _ConstraintsImplEntityCollection;

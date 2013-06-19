@@ -630,13 +630,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var c = GetSupportedViewModelsImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetSupportedViewModelsImplCollection();
             }
         }
 
@@ -650,6 +644,14 @@ namespace Zetbox.App.GUI
                         .GetRelatedCollection<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryEfImpl>(
                             "Model.FK_ViewDescriptor_supports_ViewModelTypeRefs_A",
                             "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_SupportedViewModelsImplEntityCollection.IsLoaded)
+                {
+                    _SupportedViewModelsImplEntityCollection.Load();
+                }
                 _SupportedViewModelsImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("SupportedViewModels", null, null); if(OnSupportedViewModels_PostSetter != null && IsAttached) OnSupportedViewModels_PostSetter(this); };
             }
             return _SupportedViewModelsImplEntityCollection;

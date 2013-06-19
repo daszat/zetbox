@@ -937,13 +937,7 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                var c = GetSourceTablesImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetSourceTablesImplCollection();
             }
         }
         private EntityCollectionWrapper<Zetbox.App.SchemaMigration.SourceTable, Zetbox.App.SchemaMigration.SourceTableEfImpl> _SourceTables;
@@ -957,6 +951,14 @@ namespace Zetbox.App.SchemaMigration
                     .GetRelatedCollection<Zetbox.App.SchemaMigration.SourceTableEfImpl>(
                         "Model.FK_SourceTables_are_contained_in_StagingDatabase",
                         "SourceTables");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_SourceTablesImplEntityCollection.IsLoaded)
+                {
+                    _SourceTablesImplEntityCollection.Load();
+                }
                 _SourceTablesImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("SourceTables", null, null); if (OnSourceTables_PostSetter != null && IsAttached) OnSourceTables_PostSetter(this); };
             }
             return _SourceTablesImplEntityCollection;

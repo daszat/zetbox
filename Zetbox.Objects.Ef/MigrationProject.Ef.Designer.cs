@@ -718,13 +718,7 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                var c = GetStagingDatabasesImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetStagingDatabasesImplCollection();
             }
         }
         private EntityCollectionWrapper<Zetbox.App.SchemaMigration.StagingDatabase, Zetbox.App.SchemaMigration.StagingDatabaseEfImpl> _StagingDatabases;
@@ -738,6 +732,14 @@ namespace Zetbox.App.SchemaMigration
                     .GetRelatedCollection<Zetbox.App.SchemaMigration.StagingDatabaseEfImpl>(
                         "Model.FK_MigrationProject_reads_from_StagingDatabases",
                         "StagingDatabases");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_StagingDatabasesImplEntityCollection.IsLoaded)
+                {
+                    _StagingDatabasesImplEntityCollection.Load();
+                }
                 _StagingDatabasesImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("StagingDatabases", null, null); if (OnStagingDatabases_PostSetter != null && IsAttached) OnStagingDatabases_PostSetter(this); };
             }
             return _StagingDatabasesImplEntityCollection;

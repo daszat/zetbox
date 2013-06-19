@@ -69,13 +69,7 @@ namespace Zetbox.App.Test
         {
             get
             {
-                var c = GetStringCollectionImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetStringCollectionImplCollection();
             }
         }
 
@@ -87,6 +81,14 @@ namespace Zetbox.App.Test
                     .GetRelatedCollection<Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryEfImpl>(
                         "Model.FK_Muhblah_value_StringCollection",
                         "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_StringCollectionImplEntityCollection.IsLoaded)
+                {
+                    _StringCollectionImplEntityCollection.Load();
+                }
                 _StringCollectionImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("StringCollection", null, null); if (OnStringCollection_PostSetter != null && IsAttached) OnStringCollection_PostSetter(this); };
             }
             return _StringCollectionImplEntityCollection;
@@ -203,13 +205,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnString
         {
             get
             {
-                var c = GetTestCustomObjects_List_NavImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetTestCustomObjects_List_NavImplCollection();
             }
         }
         private EntityCollectionWrapper<Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.TestCustomObjectEfImpl> _TestCustomObjects_List_Nav;
@@ -223,6 +219,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnString
                     .GetRelatedCollection<Zetbox.App.Test.TestCustomObjectEfImpl>(
                         "Model.FK_MB_Role_has_TCO_Lst_Role",
                         "TCO_Lst_Role");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_TestCustomObjects_List_NavImplEntityCollection.IsLoaded)
+                {
+                    _TestCustomObjects_List_NavImplEntityCollection.Load();
+                }
                 _TestCustomObjects_List_NavImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("TestCustomObjects_List_Nav", null, null); if (OnTestCustomObjects_List_Nav_PostSetter != null && IsAttached) OnTestCustomObjects_List_Nav_PostSetter(this); };
             }
             return _TestCustomObjects_List_NavImplEntityCollection;
@@ -271,13 +275,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         {
             get
             {
-                var c = GetTestCustomObjects_ManyList_NavImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetTestCustomObjects_ManyList_NavImplCollection();
             }
         }
 
@@ -291,6 +289,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                         .GetRelatedCollection<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryEfImpl>(
                             "Model.FK_MB_Many_Role_has_TCO_ManyList_Role_A",
                             "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_TestCustomObjects_ManyList_NavImplEntityCollection.IsLoaded)
+                {
+                    _TestCustomObjects_ManyList_NavImplEntityCollection.Load();
+                }
                 _TestCustomObjects_ManyList_NavImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("TestCustomObjects_ManyList_Nav", null, null); if(OnTestCustomObjects_ManyList_Nav_PostSetter != null && IsAttached) OnTestCustomObjects_ManyList_Nav_PostSetter(this); };
             }
             return _TestCustomObjects_ManyList_NavImplEntityCollection;

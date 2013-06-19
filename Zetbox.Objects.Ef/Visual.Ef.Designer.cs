@@ -73,13 +73,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var c = GetChildrenImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetChildrenImplCollection();
             }
         }
 
@@ -93,6 +87,14 @@ namespace Zetbox.App.GUI
                         .GetRelatedCollection<Zetbox.App.GUI.Visual_contains_Visual_RelationEntryEfImpl>(
                             "Model.FK_Visual_contains_Children_A",
                             "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_ChildrenImplEntityCollection.IsLoaded)
+                {
+                    _ChildrenImplEntityCollection.Load();
+                }
                 _ChildrenImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Children", null, null); if(OnChildren_PostSetter != null && IsAttached) OnChildren_PostSetter(this); };
             }
             return _ChildrenImplEntityCollection;
@@ -141,13 +143,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.Visual> OnChildren
         {
             get
             {
-                var c = GetContextMenuImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetContextMenuImplCollection();
             }
         }
 
@@ -161,6 +157,14 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.Visual> OnChildren
                         .GetRelatedCollection<Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryEfImpl>(
                             "Model.FK_Visual_hasContextMenu_ContextMenu_A",
                             "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_ContextMenuImplEntityCollection.IsLoaded)
+                {
+                    _ContextMenuImplEntityCollection.Load();
+                }
                 _ContextMenuImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("ContextMenu", null, null); if(OnContextMenu_PostSetter != null && IsAttached) OnContextMenu_PostSetter(this); };
             }
             return _ContextMenuImplEntityCollection;

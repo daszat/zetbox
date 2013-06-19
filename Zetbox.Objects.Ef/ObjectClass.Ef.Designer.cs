@@ -77,13 +77,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var c = GetAccessControlListImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetAccessControlListImplCollection();
             }
         }
         private EntityCollectionWrapper<Zetbox.App.Base.AccessControl, Zetbox.App.Base.AccessControlEfImpl> _AccessControlList;
@@ -97,6 +91,14 @@ namespace Zetbox.App.Base
                     .GetRelatedCollection<Zetbox.App.Base.AccessControlEfImpl>(
                         "Model.FK_ObjectClass_has_AccessControlList",
                         "AccessControlList");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_AccessControlListImplEntityCollection.IsLoaded)
+                {
+                    _AccessControlListImplEntityCollection.Load();
+                }
                 _AccessControlListImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("AccessControlList", null, null); if (OnAccessControlList_PostSetter != null && IsAttached) OnAccessControlList_PostSetter(this); };
             }
             return _AccessControlListImplEntityCollection;
@@ -433,13 +435,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         {
             get
             {
-                var c = GetFilterConfigurationsImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetFilterConfigurationsImplCollection();
             }
         }
         private EntityCollectionWrapper<Zetbox.App.GUI.ObjectClassFilterConfiguration, Zetbox.App.GUI.ObjectClassFilterConfigurationEfImpl> _FilterConfigurations;
@@ -453,6 +449,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
                     .GetRelatedCollection<Zetbox.App.GUI.ObjectClassFilterConfigurationEfImpl>(
                         "Model.FK_ObjectClass_Has_FilterConfigurations",
                         "FilterConfigurations");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_FilterConfigurationsImplEntityCollection.IsLoaded)
+                {
+                    _FilterConfigurationsImplEntityCollection.Load();
+                }
                 _FilterConfigurationsImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("FilterConfigurations", null, null); if (OnFilterConfigurations_PostSetter != null && IsAttached) OnFilterConfigurations_PostSetter(this); };
             }
             return _FilterConfigurationsImplEntityCollection;
@@ -751,13 +755,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
         {
             get
             {
-                var c = GetSubClassesImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetSubClassesImplCollection();
             }
         }
         private EntityCollectionWrapper<Zetbox.App.Base.ObjectClass, Zetbox.App.Base.ObjectClassEfImpl> _SubClasses;
@@ -771,6 +769,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
                     .GetRelatedCollection<Zetbox.App.Base.ObjectClassEfImpl>(
                         "Model.FK_BaseObjectClass_has_SubClasses",
                         "SubClasses");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_SubClassesImplEntityCollection.IsLoaded)
+                {
+                    _SubClassesImplEntityCollection.Load();
+                }
                 _SubClassesImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("SubClasses", null, null); if (OnSubClasses_PostSetter != null && IsAttached) OnSubClasses_PostSetter(this); };
             }
             return _SubClassesImplEntityCollection;

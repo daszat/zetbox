@@ -954,13 +954,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var c = GetSecondaryControlKindsImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetSecondaryControlKindsImplCollection();
             }
         }
 
@@ -974,6 +968,14 @@ namespace Zetbox.App.GUI
                         .GetRelatedCollection<Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl>(
                             "Model.FK_Presentable_displayedBy_SecondaryControlKinds_A",
                             "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_SecondaryControlKindsImplEntityCollection.IsLoaded)
+                {
+                    _SecondaryControlKindsImplEntityCollection.Load();
+                }
                 _SecondaryControlKindsImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("SecondaryControlKinds", null, null); if(OnSecondaryControlKinds_PostSetter != null && IsAttached) OnSecondaryControlKinds_PostSetter(this); };
             }
             return _SecondaryControlKindsImplEntityCollection;

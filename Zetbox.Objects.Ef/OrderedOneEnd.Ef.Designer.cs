@@ -77,13 +77,7 @@ namespace Zetbox.App.Test
         {
             get
             {
-                var c = GetNEndsImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetNEndsImplCollection();
             }
         }
         private EntityListWrapper<Zetbox.App.Test.OrderedNEnd, Zetbox.App.Test.OrderedNEndEfImpl> _NEnds;
@@ -97,6 +91,14 @@ namespace Zetbox.App.Test
                     .GetRelatedCollection<Zetbox.App.Test.OrderedNEndEfImpl>(
                         "Model.FK_OneEnd_hasMany_NEnds",
                         "NEnds");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_NEndsImplEntityCollection.IsLoaded)
+                {
+                    _NEndsImplEntityCollection.Load();
+                }
                 _NEndsImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("NEnds", null, null); if (OnNEnds_PostSetter != null && IsAttached) OnNEnds_PostSetter(this); };
             }
             return _NEndsImplEntityCollection;

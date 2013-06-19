@@ -73,13 +73,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var c = GetRelationsImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetRelationsImplCollection();
             }
         }
 
@@ -93,6 +87,14 @@ namespace Zetbox.App.Base
                         .GetRelatedCollection<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryEfImpl>(
                             "Model.FK_RoleMembership_resolves_Relations_A",
                             "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_RelationsImplEntityCollection.IsLoaded)
+                {
+                    _RelationsImplEntityCollection.Load();
+                }
                 _RelationsImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Relations", null, null); if(OnRelations_PostSetter != null && IsAttached) OnRelations_PostSetter(this); };
             }
             return _RelationsImplEntityCollection;

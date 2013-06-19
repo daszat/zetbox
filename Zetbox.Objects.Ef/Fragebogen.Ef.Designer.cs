@@ -77,13 +77,7 @@ namespace Zetbox.App.Test
         {
             get
             {
-                var c = GetAntwortenImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetAntwortenImplCollection();
             }
         }
         private EntityListWrapper<Zetbox.App.Test.Antwort, Zetbox.App.Test.AntwortEfImpl> _Antworten;
@@ -97,6 +91,14 @@ namespace Zetbox.App.Test
                     .GetRelatedCollection<Zetbox.App.Test.AntwortEfImpl>(
                         "Model.FK_Ein_Fragebogen_enthaelt_gute_Antworten",
                         "gute_Antworten");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_AntwortenImplEntityCollection.IsLoaded)
+                {
+                    _AntwortenImplEntityCollection.Load();
+                }
                 _AntwortenImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Antworten", null, null); if (OnAntworten_PostSetter != null && IsAttached) OnAntworten_PostSetter(this); };
             }
             return _AntwortenImplEntityCollection;
@@ -216,13 +218,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
         {
             get
             {
-                var c = GetStudentImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetStudentImplCollection();
             }
         }
 
@@ -236,6 +232,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
                         .GetRelatedCollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl>(
                             "Model.FK_Student_füllt_aus_Testbogen_B",
                             "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_StudentImplEntityCollection.IsLoaded)
+                {
+                    _StudentImplEntityCollection.Load();
+                }
                 _StudentImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Student", null, null); if(OnStudent_PostSetter != null && IsAttached) OnStudent_PostSetter(this); };
             }
             return _StudentImplEntityCollection;

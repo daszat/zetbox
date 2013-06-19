@@ -537,13 +537,7 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                var c = GetGroupReadersImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetGroupReadersImplCollection();
             }
         }
 
@@ -557,6 +551,14 @@ namespace Zetbox.App.Calendar
                         .GetRelatedCollection<Zetbox.App.Calendar.CalendarBook_shared_r_Group_RelationEntryEfImpl>(
                             "Model.FK_Calendar_shared_r_GroupReaders_A",
                             "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_GroupReadersImplEntityCollection.IsLoaded)
+                {
+                    _GroupReadersImplEntityCollection.Load();
+                }
                 _GroupReadersImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("GroupReaders", null, null); if(OnGroupReaders_PostSetter != null && IsAttached) OnGroupReaders_PostSetter(this); };
             }
             return _GroupReadersImplEntityCollection;
@@ -605,13 +607,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
         {
             get
             {
-                var c = GetGroupWritersImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetGroupWritersImplCollection();
             }
         }
 
@@ -625,6 +621,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
                         .GetRelatedCollection<Zetbox.App.Calendar.CalendarBook_shared_w_Group_RelationEntryEfImpl>(
                             "Model.FK_Calendar_shared_w_GroupWriters_A",
                             "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_GroupWritersImplEntityCollection.IsLoaded)
+                {
+                    _GroupWritersImplEntityCollection.Load();
+                }
                 _GroupWritersImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("GroupWriters", null, null); if(OnGroupWriters_PostSetter != null && IsAttached) OnGroupWriters_PostSetter(this); };
             }
             return _GroupWritersImplEntityCollection;
@@ -931,13 +935,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
         {
             get
             {
-                var c = GetReadersImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetReadersImplCollection();
             }
         }
 
@@ -951,6 +949,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
                         .GetRelatedCollection<Zetbox.App.Calendar.CalendarBook_shared_r_Identity_RelationEntryEfImpl>(
                             "Model.FK_Calendar_shared_r_Readers_A",
                             "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_ReadersImplEntityCollection.IsLoaded)
+                {
+                    _ReadersImplEntityCollection.Load();
+                }
                 _ReadersImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Readers", null, null); if(OnReaders_PostSetter != null && IsAttached) OnReaders_PostSetter(this); };
             }
             return _ReadersImplEntityCollection;
@@ -999,13 +1005,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
         {
             get
             {
-                var c = GetWritersImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetWritersImplCollection();
             }
         }
 
@@ -1019,6 +1019,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
                         .GetRelatedCollection<Zetbox.App.Calendar.CalendarBook_shared_w_Identity_RelationEntryEfImpl>(
                             "Model.FK_Calendar_shared_w_Writers_A",
                             "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_WritersImplEntityCollection.IsLoaded)
+                {
+                    _WritersImplEntityCollection.Load();
+                }
                 _WritersImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Writers", null, null); if(OnWriters_PostSetter != null && IsAttached) OnWriters_PostSetter(this); };
             }
             return _WritersImplEntityCollection;

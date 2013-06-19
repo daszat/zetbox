@@ -77,13 +77,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var c = GetChildControlKindsImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetChildControlKindsImplCollection();
             }
         }
         private EntityCollectionWrapper<Zetbox.App.GUI.ControlKind, Zetbox.App.GUI.ControlKindEfImpl> _ChildControlKinds;
@@ -97,6 +91,14 @@ namespace Zetbox.App.GUI
                     .GetRelatedCollection<Zetbox.App.GUI.ControlKindEfImpl>(
                         "Model.FK_ChildControlKinds_have_a_Parent",
                         "ChildControlKinds");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_ChildControlKindsImplEntityCollection.IsLoaded)
+                {
+                    _ChildControlKindsImplEntityCollection.Load();
+                }
                 _ChildControlKindsImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("ChildControlKinds", null, null); if (OnChildControlKinds_PostSetter != null && IsAttached) OnChildControlKinds_PostSetter(this); };
             }
             return _ChildControlKindsImplEntityCollection;

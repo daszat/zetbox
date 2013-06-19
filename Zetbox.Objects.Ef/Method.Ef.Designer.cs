@@ -1347,13 +1347,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var c = GetParameterImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetParameterImplCollection();
             }
         }
         private EntityListWrapper<Zetbox.App.Base.BaseParameter, Zetbox.App.Base.BaseParameterEfImpl> _Parameter;
@@ -1367,6 +1361,14 @@ namespace Zetbox.App.Base
                     .GetRelatedCollection<Zetbox.App.Base.BaseParameterEfImpl>(
                         "Model.FK_Method_has_Parameter",
                         "Parameter");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_ParameterImplEntityCollection.IsLoaded)
+                {
+                    _ParameterImplEntityCollection.Load();
+                }
                 _ParameterImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Parameter", null, null); if (OnParameter_PostSetter != null && IsAttached) OnParameter_PostSetter(this); };
             }
             return _ParameterImplEntityCollection;
@@ -1415,13 +1417,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnParamet
         {
             get
             {
-                var c = GetShowByPropertiesImplCollection();
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetShowByPropertiesImplCollection();
             }
         }
 
@@ -1435,6 +1431,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnParamet
                         .GetRelatedCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl>(
                             "Model.FK_ObjRefProp_shows_Methods_B",
                             "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_ShowByPropertiesImplEntityCollection.IsLoaded)
+                {
+                    _ShowByPropertiesImplEntityCollection.Load();
+                }
                 _ShowByPropertiesImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("ShowByProperties", null, null); if(OnShowByProperties_PostSetter != null && IsAttached) OnShowByProperties_PostSetter(this); };
             }
             return _ShowByPropertiesImplEntityCollection;
