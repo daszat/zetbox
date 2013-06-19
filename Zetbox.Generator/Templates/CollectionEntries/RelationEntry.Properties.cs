@@ -69,6 +69,7 @@ namespace Zetbox.Generator.Templates.CollectionEntries
                 : null;
             string inverseNavigatorName = null;
             bool inverseNavigatorIsList = false;
+            bool getInverseCollection = false;
             bool eagerLoading = relEnd.Navigator != null && relEnd.Navigator.EagerLoading;
             bool relDataTypeExportable = rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable();
             bool callGetterSetterEvents = false;
@@ -90,6 +91,7 @@ namespace Zetbox.Generator.Templates.CollectionEntries
                 positionPropertyName,
                 inverseNavigatorName,
                 inverseNavigatorIsList,
+                getInverseCollection,
                 eagerLoading,
                 relDataTypeExportable,
                 callGetterSetterEvents,

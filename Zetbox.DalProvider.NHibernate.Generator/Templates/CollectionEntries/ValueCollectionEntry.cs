@@ -64,12 +64,13 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries
                 string.Empty /*targetRoleNameUnused*/,
                 positionPropertyName,
                 inverseNavigatorName,
-                true /*inverseNavigatorIsList*/,
-                false /*eagerLoading*/,
-                false /*relDataTypeExportable*/,
-                false /*callGetterSetterEvents*/,
-                prop.IsCalculated(),
-                prop.DisableExport == true);
+                inverseNavigatorIsList: true,
+                getInverseCollection: false,
+                eagerLoading: false,
+                relDataTypeExportable: false,
+                callGetterSetterEvents: false,
+                isCalculated: prop.IsCalculated(),
+                disableExport: prop.DisableExport == true);
 
             Templates.Properties.DelegatingProperty.Call(
                 Host, ctx,

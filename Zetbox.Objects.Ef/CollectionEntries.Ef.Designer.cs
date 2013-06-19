@@ -149,7 +149,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.Base.CalculatedObjectReferenceProperty; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // will get inverse collection for notifications for InputsImpl
         // PositionStorage=none;
         // Target exportable
 
@@ -202,6 +202,10 @@ namespace Zetbox.App.Base
                 Zetbox.App.Base.CalculatedObjectReferencePropertyEfImpl __oldValue = (Zetbox.App.Base.CalculatedObjectReferencePropertyEfImpl)r.Value;
                 Zetbox.App.Base.CalculatedObjectReferencePropertyEfImpl __newValue = (Zetbox.App.Base.CalculatedObjectReferencePropertyEfImpl)value;
 
+                // fetch collection proxy and attach change notifications
+                if (__oldValue != null) __oldValue.GetInputsImplCollection();
+                if (__newValue != null) __newValue.GetInputsImplCollection();
+
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
@@ -226,7 +230,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Zetbox.App.Base.Property; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable
 
@@ -578,7 +582,7 @@ namespace Zetbox.App.Calendar
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.Calendar.CalendarBook; moduleNamespace=Zetbox.App.Calendar;
-        // inverse Navigator=none; is reference;
+        // will get inverse collection for notifications for GroupReadersImpl
         // PositionStorage=none;
         // Target exportable
 
@@ -631,6 +635,10 @@ namespace Zetbox.App.Calendar
                 Zetbox.App.Calendar.CalendarBookEfImpl __oldValue = (Zetbox.App.Calendar.CalendarBookEfImpl)r.Value;
                 Zetbox.App.Calendar.CalendarBookEfImpl __newValue = (Zetbox.App.Calendar.CalendarBookEfImpl)value;
 
+                // fetch collection proxy and attach change notifications
+                if (__oldValue != null) __oldValue.GetGroupReadersImplCollection();
+                if (__newValue != null) __newValue.GetGroupReadersImplCollection();
+
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
@@ -655,7 +663,7 @@ namespace Zetbox.App.Calendar
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Zetbox.App.Base.Group; moduleNamespace=Zetbox.App.Calendar;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable
 
@@ -959,7 +967,7 @@ namespace Zetbox.App.Calendar
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.Calendar.CalendarBook; moduleNamespace=Zetbox.App.Calendar;
-        // inverse Navigator=none; is reference;
+        // will get inverse collection for notifications for ReadersImpl
         // PositionStorage=none;
         // Target not exportable
 
@@ -1011,6 +1019,10 @@ namespace Zetbox.App.Calendar
                 Zetbox.App.Calendar.CalendarBookEfImpl __oldValue = (Zetbox.App.Calendar.CalendarBookEfImpl)r.Value;
                 Zetbox.App.Calendar.CalendarBookEfImpl __newValue = (Zetbox.App.Calendar.CalendarBookEfImpl)value;
 
+                // fetch collection proxy and attach change notifications
+                if (__oldValue != null) __oldValue.GetReadersImplCollection();
+                if (__newValue != null) __newValue.GetReadersImplCollection();
+
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
@@ -1035,7 +1047,7 @@ namespace Zetbox.App.Calendar
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Calendar;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable
 
@@ -1349,7 +1361,7 @@ namespace Zetbox.App.Calendar
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.Calendar.CalendarBook; moduleNamespace=Zetbox.App.Calendar;
-        // inverse Navigator=none; is reference;
+        // will get inverse collection for notifications for GroupWritersImpl
         // PositionStorage=none;
         // Target exportable
 
@@ -1402,6 +1414,10 @@ namespace Zetbox.App.Calendar
                 Zetbox.App.Calendar.CalendarBookEfImpl __oldValue = (Zetbox.App.Calendar.CalendarBookEfImpl)r.Value;
                 Zetbox.App.Calendar.CalendarBookEfImpl __newValue = (Zetbox.App.Calendar.CalendarBookEfImpl)value;
 
+                // fetch collection proxy and attach change notifications
+                if (__oldValue != null) __oldValue.GetGroupWritersImplCollection();
+                if (__newValue != null) __newValue.GetGroupWritersImplCollection();
+
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
@@ -1426,7 +1442,7 @@ namespace Zetbox.App.Calendar
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Zetbox.App.Base.Group; moduleNamespace=Zetbox.App.Calendar;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable
 
@@ -1730,7 +1746,7 @@ namespace Zetbox.App.Calendar
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.Calendar.CalendarBook; moduleNamespace=Zetbox.App.Calendar;
-        // inverse Navigator=none; is reference;
+        // will get inverse collection for notifications for WritersImpl
         // PositionStorage=none;
         // Target not exportable
 
@@ -1782,6 +1798,10 @@ namespace Zetbox.App.Calendar
                 Zetbox.App.Calendar.CalendarBookEfImpl __oldValue = (Zetbox.App.Calendar.CalendarBookEfImpl)r.Value;
                 Zetbox.App.Calendar.CalendarBookEfImpl __newValue = (Zetbox.App.Calendar.CalendarBookEfImpl)value;
 
+                // fetch collection proxy and attach change notifications
+                if (__oldValue != null) __oldValue.GetWritersImplCollection();
+                if (__newValue != null) __newValue.GetWritersImplCollection();
+
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
@@ -1806,7 +1826,7 @@ namespace Zetbox.App.Calendar
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Calendar;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable
 
@@ -2120,7 +2140,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.Base.DataType; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // will get inverse collection for notifications for ImplementsInterfacesImpl
         // PositionStorage=none;
         // Target exportable
 
@@ -2173,6 +2193,10 @@ namespace Zetbox.App.Base
                 Zetbox.App.Base.DataTypeEfImpl __oldValue = (Zetbox.App.Base.DataTypeEfImpl)r.Value;
                 Zetbox.App.Base.DataTypeEfImpl __newValue = (Zetbox.App.Base.DataTypeEfImpl)value;
 
+                // fetch collection proxy and attach change notifications
+                if (__oldValue != null) __oldValue.GetImplementsInterfacesImplCollection();
+                if (__newValue != null) __newValue.GetImplementsInterfacesImplCollection();
+
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
@@ -2197,7 +2221,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Zetbox.App.Base.Interface; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable
 
@@ -2546,7 +2570,7 @@ namespace at.dasz.DocumentManagement
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=at.dasz.DocumentManagement.Document; moduleNamespace=at.dasz.DocumentManagement;
-        // inverse Navigator=none; is reference;
+        // will get inverse collection for notifications for RevisionsImpl
         // PositionStorage=A_pos;
         // Target exportable
 
@@ -2598,6 +2622,10 @@ namespace at.dasz.DocumentManagement
                 }
                 at.dasz.DocumentManagement.DocumentEfImpl __oldValue = (at.dasz.DocumentManagement.DocumentEfImpl)r.Value;
                 at.dasz.DocumentManagement.DocumentEfImpl __newValue = (at.dasz.DocumentManagement.DocumentEfImpl)value;
+
+                // fetch collection proxy and attach change notifications
+                if (__oldValue != null) __oldValue.GetRevisionsImplCollection();
+                if (__newValue != null) __newValue.GetRevisionsImplCollection();
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
@@ -2665,7 +2693,7 @@ namespace at.dasz.DocumentManagement
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Zetbox.App.Base.Blob; moduleNamespace=at.dasz.DocumentManagement;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=B_pos;
         // Target exportable
 
@@ -3035,7 +3063,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // will get inverse collection for notifications for GroupsImpl
         // PositionStorage=none;
         // Target not exportable
 
@@ -3087,6 +3115,10 @@ namespace Zetbox.App.Base
                 Zetbox.App.Base.IdentityEfImpl __oldValue = (Zetbox.App.Base.IdentityEfImpl)r.Value;
                 Zetbox.App.Base.IdentityEfImpl __newValue = (Zetbox.App.Base.IdentityEfImpl)value;
 
+                // fetch collection proxy and attach change notifications
+                if (__oldValue != null) __oldValue.GetGroupsImplCollection();
+                if (__newValue != null) __newValue.GetGroupsImplCollection();
+
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
@@ -3111,7 +3143,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Zetbox.App.Base.Group; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // will get inverse collection for notifications for MemberImpl
         // PositionStorage=none;
         // Target not exportable
 
@@ -3162,6 +3194,10 @@ namespace Zetbox.App.Base
                 }
                 Zetbox.App.Base.GroupEfImpl __oldValue = (Zetbox.App.Base.GroupEfImpl)r.Value;
                 Zetbox.App.Base.GroupEfImpl __newValue = (Zetbox.App.Base.GroupEfImpl)value;
+
+                // fetch collection proxy and attach change notifications
+                if (__oldValue != null) __oldValue.GetMemberImplCollection();
+                if (__newValue != null) __newValue.GetMemberImplCollection();
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
@@ -3425,7 +3461,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.Base.IndexConstraint; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // will get inverse collection for notifications for PropertiesImpl
         // PositionStorage=none;
         // Target exportable
 
@@ -3478,6 +3514,10 @@ namespace Zetbox.App.Base
                 Zetbox.App.Base.IndexConstraintEfImpl __oldValue = (Zetbox.App.Base.IndexConstraintEfImpl)r.Value;
                 Zetbox.App.Base.IndexConstraintEfImpl __newValue = (Zetbox.App.Base.IndexConstraintEfImpl)value;
 
+                // fetch collection proxy and attach change notifications
+                if (__oldValue != null) __oldValue.GetPropertiesImplCollection();
+                if (__newValue != null) __newValue.GetPropertiesImplCollection();
+
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
@@ -3502,7 +3542,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Zetbox.App.Base.Property; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable
 
@@ -3806,7 +3846,7 @@ namespace Zetbox.App.Test
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.Test.Muhblah; moduleNamespace=Zetbox.App.Test;
-        // inverse Navigator=none; is reference;
+        // will get inverse collection for notifications for TestCustomObjects_ManyList_NavImpl
         // PositionStorage=none;
         // Target not exportable
 
@@ -3858,6 +3898,10 @@ namespace Zetbox.App.Test
                 Zetbox.App.Test.MuhblahEfImpl __oldValue = (Zetbox.App.Test.MuhblahEfImpl)r.Value;
                 Zetbox.App.Test.MuhblahEfImpl __newValue = (Zetbox.App.Test.MuhblahEfImpl)value;
 
+                // fetch collection proxy and attach change notifications
+                if (__oldValue != null) __oldValue.GetTestCustomObjects_ManyList_NavImplCollection();
+                if (__newValue != null) __newValue.GetTestCustomObjects_ManyList_NavImplCollection();
+
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
@@ -3882,7 +3926,7 @@ namespace Zetbox.App.Test
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Zetbox.App.Test.TestCustomObject; moduleNamespace=Zetbox.App.Test;
-        // inverse Navigator=none; is reference;
+        // will get inverse collection for notifications for MuhBlah_ManyList_NavImpl
         // PositionStorage=none;
         // Target not exportable
 
@@ -3933,6 +3977,10 @@ namespace Zetbox.App.Test
                 }
                 Zetbox.App.Test.TestCustomObjectEfImpl __oldValue = (Zetbox.App.Test.TestCustomObjectEfImpl)r.Value;
                 Zetbox.App.Test.TestCustomObjectEfImpl __newValue = (Zetbox.App.Test.TestCustomObjectEfImpl)value;
+
+                // fetch collection proxy and attach change notifications
+                if (__oldValue != null) __oldValue.GetMuhBlah_ManyList_NavImplCollection();
+                if (__newValue != null) __newValue.GetMuhBlah_ManyList_NavImplCollection();
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
@@ -4151,7 +4199,7 @@ namespace Zetbox.App.Test
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.Test.N_to_M_relations_A; moduleNamespace=Zetbox.App.Test;
-        // inverse Navigator=none; is reference;
+        // will get inverse collection for notifications for BSideImpl
         // PositionStorage=none;
         // Target not exportable
 
@@ -4203,6 +4251,10 @@ namespace Zetbox.App.Test
                 Zetbox.App.Test.N_to_M_relations_AEfImpl __oldValue = (Zetbox.App.Test.N_to_M_relations_AEfImpl)r.Value;
                 Zetbox.App.Test.N_to_M_relations_AEfImpl __newValue = (Zetbox.App.Test.N_to_M_relations_AEfImpl)value;
 
+                // fetch collection proxy and attach change notifications
+                if (__oldValue != null) __oldValue.GetBSideImplCollection();
+                if (__newValue != null) __newValue.GetBSideImplCollection();
+
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
@@ -4227,7 +4279,7 @@ namespace Zetbox.App.Test
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Zetbox.App.Test.N_to_M_relations_B; moduleNamespace=Zetbox.App.Test;
-        // inverse Navigator=none; is reference;
+        // will get inverse collection for notifications for ASideImpl
         // PositionStorage=none;
         // Target not exportable
 
@@ -4278,6 +4330,10 @@ namespace Zetbox.App.Test
                 }
                 Zetbox.App.Test.N_to_M_relations_BEfImpl __oldValue = (Zetbox.App.Test.N_to_M_relations_BEfImpl)r.Value;
                 Zetbox.App.Test.N_to_M_relations_BEfImpl __newValue = (Zetbox.App.Test.N_to_M_relations_BEfImpl)value;
+
+                // fetch collection proxy and attach change notifications
+                if (__oldValue != null) __oldValue.GetASideImplCollection();
+                if (__newValue != null) __newValue.GetASideImplCollection();
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
@@ -4541,7 +4597,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.GUI.NavigationEntry; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // will get inverse collection for notifications for GroupsImpl
         // PositionStorage=none;
         // Target exportable
 
@@ -4594,6 +4650,10 @@ namespace Zetbox.App.GUI
                 Zetbox.App.GUI.NavigationEntryEfImpl __oldValue = (Zetbox.App.GUI.NavigationEntryEfImpl)r.Value;
                 Zetbox.App.GUI.NavigationEntryEfImpl __newValue = (Zetbox.App.GUI.NavigationEntryEfImpl)value;
 
+                // fetch collection proxy and attach change notifications
+                if (__oldValue != null) __oldValue.GetGroupsImplCollection();
+                if (__newValue != null) __newValue.GetGroupsImplCollection();
+
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
@@ -4618,7 +4678,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Zetbox.App.Base.Group; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable
 
@@ -4970,7 +5030,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.Base.ObjectReferenceProperty; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // will get inverse collection for notifications for MethodsImpl
         // PositionStorage=none;
         // Target exportable
 
@@ -5023,6 +5083,10 @@ namespace Zetbox.App.GUI
                 Zetbox.App.Base.ObjectReferencePropertyEfImpl __oldValue = (Zetbox.App.Base.ObjectReferencePropertyEfImpl)r.Value;
                 Zetbox.App.Base.ObjectReferencePropertyEfImpl __newValue = (Zetbox.App.Base.ObjectReferencePropertyEfImpl)value;
 
+                // fetch collection proxy and attach change notifications
+                if (__oldValue != null) __oldValue.GetMethodsImplCollection();
+                if (__newValue != null) __newValue.GetMethodsImplCollection();
+
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
@@ -5047,7 +5111,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Zetbox.App.Base.Method; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // will get inverse collection for notifications for ShowByPropertiesImpl
         // PositionStorage=none;
         // Target exportable
 
@@ -5099,6 +5163,10 @@ namespace Zetbox.App.GUI
                 }
                 Zetbox.App.Base.MethodEfImpl __oldValue = (Zetbox.App.Base.MethodEfImpl)r.Value;
                 Zetbox.App.Base.MethodEfImpl __newValue = (Zetbox.App.Base.MethodEfImpl)value;
+
+                // fetch collection proxy and attach change notifications
+                if (__oldValue != null) __oldValue.GetShowByPropertiesImplCollection();
+                if (__newValue != null) __newValue.GetShowByPropertiesImplCollection();
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
@@ -5396,7 +5464,7 @@ namespace Zetbox.App.Projekte
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.Projekte.Projekt; moduleNamespace=Zetbox.App.Projekte;
-        // inverse Navigator=none; is reference;
+        // will get inverse collection for notifications for MitarbeiterImpl
         // PositionStorage=A_pos;
         // Target exportable
 
@@ -5448,6 +5516,10 @@ namespace Zetbox.App.Projekte
                 }
                 Zetbox.App.Projekte.ProjektEfImpl __oldValue = (Zetbox.App.Projekte.ProjektEfImpl)r.Value;
                 Zetbox.App.Projekte.ProjektEfImpl __newValue = (Zetbox.App.Projekte.ProjektEfImpl)value;
+
+                // fetch collection proxy and attach change notifications
+                if (__oldValue != null) __oldValue.GetMitarbeiterImplCollection();
+                if (__newValue != null) __newValue.GetMitarbeiterImplCollection();
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
@@ -5515,7 +5587,7 @@ namespace Zetbox.App.Projekte
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Zetbox.App.Projekte.Mitarbeiter; moduleNamespace=Zetbox.App.Projekte;
-        // inverse Navigator=none; is reference;
+        // will get inverse collection for notifications for ProjekteImpl
         // PositionStorage=B_pos;
         // Target exportable
 
@@ -5567,6 +5639,10 @@ namespace Zetbox.App.Projekte
                 }
                 Zetbox.App.Projekte.MitarbeiterEfImpl __oldValue = (Zetbox.App.Projekte.MitarbeiterEfImpl)r.Value;
                 Zetbox.App.Projekte.MitarbeiterEfImpl __newValue = (Zetbox.App.Projekte.MitarbeiterEfImpl)value;
+
+                // fetch collection proxy and attach change notifications
+                if (__oldValue != null) __oldValue.GetProjekteImplCollection();
+                if (__newValue != null) __newValue.GetProjekteImplCollection();
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
@@ -5930,7 +6006,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.Base.RoleMembership; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // will get inverse collection for notifications for RelationsImpl
         // PositionStorage=A_pos;
         // Target exportable
 
@@ -5982,6 +6058,10 @@ namespace Zetbox.App.Base
                 }
                 Zetbox.App.Base.RoleMembershipEfImpl __oldValue = (Zetbox.App.Base.RoleMembershipEfImpl)r.Value;
                 Zetbox.App.Base.RoleMembershipEfImpl __newValue = (Zetbox.App.Base.RoleMembershipEfImpl)value;
+
+                // fetch collection proxy and attach change notifications
+                if (__oldValue != null) __oldValue.GetRelationsImplCollection();
+                if (__newValue != null) __newValue.GetRelationsImplCollection();
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
@@ -6049,7 +6129,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Zetbox.App.Base.Relation; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=B_pos;
         // Target exportable
 
@@ -6464,7 +6544,7 @@ namespace Zetbox.App.SchemaMigration
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.SchemaMigration.SourceColumn; moduleNamespace=Zetbox.App.SchemaMigration;
-        // inverse Navigator=none; is reference;
+        // will get inverse collection for notifications for DestinationPropertyImpl
         // PositionStorage=A_pos;
         // Target exportable
 
@@ -6516,6 +6596,10 @@ namespace Zetbox.App.SchemaMigration
                 }
                 Zetbox.App.SchemaMigration.SourceColumnEfImpl __oldValue = (Zetbox.App.SchemaMigration.SourceColumnEfImpl)r.Value;
                 Zetbox.App.SchemaMigration.SourceColumnEfImpl __newValue = (Zetbox.App.SchemaMigration.SourceColumnEfImpl)value;
+
+                // fetch collection proxy and attach change notifications
+                if (__oldValue != null) __oldValue.GetDestinationPropertyImplCollection();
+                if (__newValue != null) __newValue.GetDestinationPropertyImplCollection();
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
@@ -6583,7 +6667,7 @@ namespace Zetbox.App.SchemaMigration
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Zetbox.App.Base.Property; moduleNamespace=Zetbox.App.SchemaMigration;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=B_pos;
         // Target exportable
 
@@ -6956,7 +7040,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.GUI.Template; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // will get inverse collection for notifications for MenuImpl
         // PositionStorage=none;
         // Target not exportable
 
@@ -7008,6 +7092,10 @@ namespace Zetbox.App.GUI
                 Zetbox.App.GUI.TemplateEfImpl __oldValue = (Zetbox.App.GUI.TemplateEfImpl)r.Value;
                 Zetbox.App.GUI.TemplateEfImpl __newValue = (Zetbox.App.GUI.TemplateEfImpl)value;
 
+                // fetch collection proxy and attach change notifications
+                if (__oldValue != null) __oldValue.GetMenuImplCollection();
+                if (__newValue != null) __newValue.GetMenuImplCollection();
+
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
@@ -7032,7 +7120,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Zetbox.App.GUI.Visual; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable
 
@@ -7301,7 +7389,7 @@ namespace Zetbox.App.Test
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.Test.TestStudent; moduleNamespace=Zetbox.App.Test;
-        // inverse Navigator=none; is reference;
+        // will get inverse collection for notifications for TestbogenImpl
         // PositionStorage=none;
         // Target not exportable
 
@@ -7353,6 +7441,10 @@ namespace Zetbox.App.Test
                 Zetbox.App.Test.TestStudentEfImpl __oldValue = (Zetbox.App.Test.TestStudentEfImpl)r.Value;
                 Zetbox.App.Test.TestStudentEfImpl __newValue = (Zetbox.App.Test.TestStudentEfImpl)value;
 
+                // fetch collection proxy and attach change notifications
+                if (__oldValue != null) __oldValue.GetTestbogenImplCollection();
+                if (__newValue != null) __newValue.GetTestbogenImplCollection();
+
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
@@ -7377,7 +7469,7 @@ namespace Zetbox.App.Test
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Zetbox.App.Test.Fragebogen; moduleNamespace=Zetbox.App.Test;
-        // inverse Navigator=none; is reference;
+        // will get inverse collection for notifications for StudentImpl
         // PositionStorage=none;
         // Target not exportable
 
@@ -7428,6 +7520,10 @@ namespace Zetbox.App.Test
                 }
                 Zetbox.App.Test.FragebogenEfImpl __oldValue = (Zetbox.App.Test.FragebogenEfImpl)r.Value;
                 Zetbox.App.Test.FragebogenEfImpl __newValue = (Zetbox.App.Test.FragebogenEfImpl)value;
+
+                // fetch collection proxy and attach change notifications
+                if (__oldValue != null) __oldValue.GetStudentImplCollection();
+                if (__newValue != null) __newValue.GetStudentImplCollection();
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("B", __oldValue, __newValue);
@@ -7691,7 +7787,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.Base.TypeRef; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // will get inverse collection for notifications for GenericArgumentsImpl
         // PositionStorage=A_pos;
         // Target exportable
 
@@ -7743,6 +7839,10 @@ namespace Zetbox.App.Base
                 }
                 Zetbox.App.Base.TypeRefEfImpl __oldValue = (Zetbox.App.Base.TypeRefEfImpl)r.Value;
                 Zetbox.App.Base.TypeRefEfImpl __newValue = (Zetbox.App.Base.TypeRefEfImpl)value;
+
+                // fetch collection proxy and attach change notifications
+                if (__oldValue != null) __oldValue.GetGenericArgumentsImplCollection();
+                if (__newValue != null) __newValue.GetGenericArgumentsImplCollection();
 
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
@@ -7810,7 +7910,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Zetbox.App.Base.TypeRef; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=B_pos;
         // Target exportable
 
@@ -8228,7 +8328,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.GUI.ViewDescriptor; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // will get inverse collection for notifications for SupportedViewModelsImpl
         // PositionStorage=none;
         // Target exportable
 
@@ -8281,6 +8381,10 @@ namespace Zetbox.App.GUI
                 Zetbox.App.GUI.ViewDescriptorEfImpl __oldValue = (Zetbox.App.GUI.ViewDescriptorEfImpl)r.Value;
                 Zetbox.App.GUI.ViewDescriptorEfImpl __newValue = (Zetbox.App.GUI.ViewDescriptorEfImpl)value;
 
+                // fetch collection proxy and attach change notifications
+                if (__oldValue != null) __oldValue.GetSupportedViewModelsImplCollection();
+                if (__newValue != null) __newValue.GetSupportedViewModelsImplCollection();
+
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
@@ -8305,7 +8409,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Zetbox.App.Base.TypeRef; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable
 
@@ -8657,7 +8761,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.GUI.ViewModelDescriptor; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // will get inverse collection for notifications for SecondaryControlKindsImpl
         // PositionStorage=none;
         // Target exportable
 
@@ -8710,6 +8814,10 @@ namespace Zetbox.App.GUI
                 Zetbox.App.GUI.ViewModelDescriptorEfImpl __oldValue = (Zetbox.App.GUI.ViewModelDescriptorEfImpl)r.Value;
                 Zetbox.App.GUI.ViewModelDescriptorEfImpl __newValue = (Zetbox.App.GUI.ViewModelDescriptorEfImpl)value;
 
+                // fetch collection proxy and attach change notifications
+                if (__oldValue != null) __oldValue.GetSecondaryControlKindsImplCollection();
+                if (__newValue != null) __newValue.GetSecondaryControlKindsImplCollection();
+
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
@@ -8734,7 +8842,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Zetbox.App.GUI.ControlKind; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable
 
@@ -9038,7 +9146,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.GUI.Visual; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // will get inverse collection for notifications for ChildrenImpl
         // PositionStorage=none;
         // Target not exportable
 
@@ -9090,6 +9198,10 @@ namespace Zetbox.App.GUI
                 Zetbox.App.GUI.VisualEfImpl __oldValue = (Zetbox.App.GUI.VisualEfImpl)r.Value;
                 Zetbox.App.GUI.VisualEfImpl __newValue = (Zetbox.App.GUI.VisualEfImpl)value;
 
+                // fetch collection proxy and attach change notifications
+                if (__oldValue != null) __oldValue.GetChildrenImplCollection();
+                if (__newValue != null) __newValue.GetChildrenImplCollection();
+
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
@@ -9114,7 +9226,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Zetbox.App.GUI.Visual; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable
 
@@ -9383,7 +9495,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
         // referencedInterface=Zetbox.App.GUI.Visual; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // will get inverse collection for notifications for ContextMenuImpl
         // PositionStorage=none;
         // Target not exportable
 
@@ -9435,6 +9547,10 @@ namespace Zetbox.App.GUI
                 Zetbox.App.GUI.VisualEfImpl __oldValue = (Zetbox.App.GUI.VisualEfImpl)r.Value;
                 Zetbox.App.GUI.VisualEfImpl __newValue = (Zetbox.App.GUI.VisualEfImpl)value;
 
+                // fetch collection proxy and attach change notifications
+                if (__oldValue != null) __oldValue.GetContextMenuImplCollection();
+                if (__newValue != null) __newValue.GetContextMenuImplCollection();
+
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
@@ -9459,7 +9575,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
         // referencedInterface=Zetbox.App.GUI.Visual; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable
 

@@ -41,6 +41,7 @@
 <%@ Parameter Name="positionPropertyName" Type="string" %>
 <%@ Parameter Name="inverseNavigatorName" Type="string" %>
 <%@ Parameter Name="inverseNavigatorIsList" Type="bool" %>
+<%@ Parameter Name="getInverseCollection" Type="bool" %>
 <%@ Parameter Name="eagerLoading" Type="bool" %>
 <%@ Parameter Name="relDataTypeExportable" Type="bool" %>
 <%@ Parameter Name="callGetterSetterEvents" Type="bool" %>
