@@ -132,7 +132,7 @@ namespace Zetbox.DalProvider.Base.RelationWrappers
             entry = InitialiseEntry(entry, item);
             // Relations keep their collections synchronized by reacting to RelationEntry.A/B changes
             //Collection.Add(entry);
-            OnEntryAdded(entry);
+            //OnEntryAdded(entry);
         }
 
         public virtual void Clear()

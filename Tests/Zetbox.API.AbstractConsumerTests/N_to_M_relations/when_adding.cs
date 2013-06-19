@@ -95,7 +95,7 @@ namespace Zetbox.API.AbstractConsumerTests.N_to_M_relations
                 aSide1.BSide.Add(bSide1);
 
                 Assert.That(notifiedA, Is.EqualTo(1), "A");
-                Assert.That(notifiedB, Is.EqualTo(0), "B");
+                Assert.That(notifiedB, Is.EqualTo(1), "B");
             }
         }
 
@@ -168,7 +168,7 @@ namespace Zetbox.API.AbstractConsumerTests.N_to_M_relations
 
                 bSide1.ASide.Add(aSide1);
 
-                Assert.That(notifiedA, Is.EqualTo(0), "A");
+                Assert.That(notifiedA, Is.EqualTo(1), "A");
                 Assert.That(notifiedB, Is.EqualTo(1), "B");
             }
         }

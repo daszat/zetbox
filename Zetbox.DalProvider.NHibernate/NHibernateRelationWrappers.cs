@@ -136,14 +136,16 @@ namespace Zetbox.DalProvider.NHibernate
 
         public override void AddWithoutSetParent(TEntry item)
         {
+            OnEntryAdding(item);
             Collection.Add(item);
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item));
+            OnEntryAdded(item);
         }
 
         public override void RemoveWithoutClearParent(TEntry item)
         {
+            OnEntryRemoving(item);
             Collection.Remove(item);
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, item));
+            OnEntryRemoved(item);
         }
 
         IEnumerator<IRelationEntry> IEnumerable<IRelationEntry>.GetEnumerator()
