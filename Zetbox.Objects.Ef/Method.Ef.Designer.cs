@@ -1321,7 +1321,7 @@ namespace Zetbox.App.Base
     */
         // object list property
         // object list property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -1334,7 +1334,7 @@ namespace Zetbox.App.Base
                     _Parameter = new EntityListWrapper<Zetbox.App.Base.BaseParameter, Zetbox.App.Base.BaseParameterEfImpl>(
                             this.Context, ParameterImpl,
                             () => this.NotifyPropertyChanging("Parameter", null, null),
-                            () => { this.NotifyPropertyChanged("Parameter", null, null); if(OnParameter_PostSetter != null && IsAttached) OnParameter_PostSetter(this); },
+                            null, // see GetParameterImplCollection()
                             (item) => item.NotifyPropertyChanging("Method", null, null),
                             (item) => item.NotifyPropertyChanged("Method", null, null), "Method", "Parameter_pos");
                 }
@@ -1347,10 +1347,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.Base.BaseParameterEfImpl>(
-                        "Model.FK_Method_has_Parameter",
-                        "Parameter");
+                var c = GetParameterImplCollection();
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
@@ -1361,13 +1358,26 @@ namespace Zetbox.App.Base
         }
         private EntityListWrapper<Zetbox.App.Base.BaseParameter, Zetbox.App.Base.BaseParameterEfImpl> _Parameter;
 
+        private EntityCollection<Zetbox.App.Base.BaseParameterEfImpl> _ParameterImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Base.BaseParameterEfImpl> GetParameterImplCollection()
+        {
+            if (_ParameterImplEntityCollection == null)
+            {
+                _ParameterImplEntityCollection = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Zetbox.App.Base.BaseParameterEfImpl>(
+                        "Model.FK_Method_has_Parameter",
+                        "Parameter");
+                _ParameterImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Parameter", null, null); if (OnParameter_PostSetter != null && IsAttached) OnParameter_PostSetter(this); };
+            }
+            return _ParameterImplEntityCollection;
+        }
+
         public Zetbox.API.Async.ZbTask TriggerFetchParameterAsync()
         {
             return new Zetbox.API.Async.ZbTask<IList<Zetbox.App.Base.BaseParameter>>(this.Parameter);
         }
 
-
-
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
 public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnParameter_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.Method> OnParameter_IsValid;
@@ -1405,18 +1415,29 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnParamet
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl>(
-                        "Model.FK_ObjRefProp_shows_Methods_B",
-                        "CollectionEntry");
+                var c = GetShowByPropertiesImplCollection();
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
                     c.Load();
                 }
-                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("ShowByProperties", null, null); if(OnShowByProperties_PostSetter != null && IsAttached) OnShowByProperties_PostSetter(this); };
                 return c;
             }
+        }
+
+        private EntityCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl> _ShowByPropertiesImplEntityCollection;
+        internal EntityCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl> GetShowByPropertiesImplCollection()
+        {
+            if (_ShowByPropertiesImplEntityCollection == null)
+            {
+                _ShowByPropertiesImplEntityCollection
+                    = ((IEntityWithRelationships)(this)).RelationshipManager
+                        .GetRelatedCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl>(
+                            "Model.FK_ObjRefProp_shows_Methods_B",
+                            "CollectionEntry");
+                _ShowByPropertiesImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("ShowByProperties", null, null); if(OnShowByProperties_PostSetter != null && IsAttached) OnShowByProperties_PostSetter(this); };
+            }
+            return _ShowByPropertiesImplEntityCollection;
         }
         private ASideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl>> _ShowByProperties;
 

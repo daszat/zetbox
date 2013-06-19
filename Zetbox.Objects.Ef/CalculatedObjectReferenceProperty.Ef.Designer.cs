@@ -73,18 +73,29 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl>(
-                        "Model.FK_CalculatedReference_dependsOn_InputProperties_A",
-                        "CollectionEntry");
+                var c = GetInputsImplCollection();
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
                     c.Load();
                 }
-                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Inputs", null, null); if(OnInputs_PostSetter != null && IsAttached) OnInputs_PostSetter(this); };
                 return c;
             }
+        }
+
+        private EntityCollection<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl> _InputsImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl> GetInputsImplCollection()
+        {
+            if (_InputsImplEntityCollection == null)
+            {
+                _InputsImplEntityCollection
+                    = ((IEntityWithRelationships)(this)).RelationshipManager
+                        .GetRelatedCollection<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl>(
+                            "Model.FK_CalculatedReference_dependsOn_InputProperties_A",
+                            "CollectionEntry");
+                _InputsImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Inputs", null, null); if(OnInputs_PostSetter != null && IsAttached) OnInputs_PostSetter(this); };
+            }
+            return _InputsImplEntityCollection;
         }
         private BSideCollectionWrapper<Zetbox.App.Base.CalculatedObjectReferenceProperty, Zetbox.App.Base.Property, Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl, EntityCollection<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl>> _Inputs;
         private bool Inputs_was_eagerLoaded = false;

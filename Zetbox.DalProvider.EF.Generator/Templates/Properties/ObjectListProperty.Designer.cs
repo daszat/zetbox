@@ -79,7 +79,7 @@ RelationEnd relEnd = rel.GetEndFromRole(endRole);
 	var eventName = "On" + name + "_PostSetter";
 
 #line 66 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
-this.WriteObjects("           // ",  this.GetType() , "\r\n");
+this.WriteObjects("        // BEGIN ",  this.GetType() , "\r\n");
 this.WriteObjects("        // implement the user-visible interface\r\n");
 this.WriteObjects("        [XmlIgnore()]\r\n");
 this.WriteObjects("        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]\r\n");
@@ -92,7 +92,7 @@ this.WriteObjects("                {\r\n");
 this.WriteObjects("                    ",  wrapperName , " = new ",  wrapperClass , "<",  referencedInterface , ", ",  referencedImplementation , ">(\r\n");
 this.WriteObjects("                            this.Context, ",  efName , ",\r\n");
 this.WriteObjects("                            () => this.NotifyPropertyChanging(\"",  name , "\", null, null),\r\n");
-this.WriteObjects("                            () => { this.NotifyPropertyChanged(\"",  name , "\", null, null); if(",  eventName , " != null && IsAttached) ",  eventName, "(this); },\r\n");
+this.WriteObjects("                            null, // see Get",  efName , "Collection()\r\n");
 this.WriteObjects("                            (item) => item.NotifyPropertyChanging(\"",  otherName , "\", null, null),\r\n");
 this.WriteObjects("                            (item) => item.NotifyPropertyChanged(\"",  otherName , "\", null, null)");
 #line 82 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
@@ -114,10 +114,7 @@ this.WriteObjects("        public EntityCollection<",  referencedImplementation 
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get\r\n");
 this.WriteObjects("            {\r\n");
-this.WriteObjects("                var c = ((IEntityWithRelationships)(this)).RelationshipManager\r\n");
-this.WriteObjects("                    .GetRelatedCollection<",  referencedImplementation , ">(\r\n");
-this.WriteObjects("                        \"Model.",  assocName , "\",\r\n");
-this.WriteObjects("                        \"",  targetRoleName , "\");\r\n");
+this.WriteObjects("                var c = Get",  efName , "Collection();\r\n");
 this.WriteObjects("                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)\r\n");
 this.WriteObjects("                    && !c.IsLoaded)\r\n");
 this.WriteObjects("                {\r\n");
@@ -128,26 +125,39 @@ this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        private ",  wrapperClass , "<",  referencedInterface , ", ",  referencedImplementation , "> ",  wrapperName , ";\r\n");
 this.WriteObjects("\r\n");
+this.WriteObjects("        private EntityCollection<",  referencedImplementation , "> _",  efName , "EntityCollection;\r\n");
+this.WriteObjects("        internal EntityCollection<",  referencedImplementation , "> Get",  efName , "Collection()\r\n");
+this.WriteObjects("        {\r\n");
+this.WriteObjects("            if (_",  efName , "EntityCollection == null)\r\n");
+this.WriteObjects("            {\r\n");
+this.WriteObjects("                _",  efName , "EntityCollection = ((IEntityWithRelationships)(this)).RelationshipManager\r\n");
+this.WriteObjects("                    .GetRelatedCollection<",  referencedImplementation , ">(\r\n");
+this.WriteObjects("                        \"Model.",  assocName , "\",\r\n");
+this.WriteObjects("                        \"",  targetRoleName , "\");\r\n");
+this.WriteObjects("                _",  efName , "EntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged(\"",  name , "\", null, null); if (",  eventName , " != null && IsAttached) ",  eventName, "(this); };\r\n");
+this.WriteObjects("            }\r\n");
+this.WriteObjects("            return _",  efName , "EntityCollection;\r\n");
+this.WriteObjects("        }\r\n");
+this.WriteObjects("\r\n");
 this.WriteObjects("        public Zetbox.API.Async.ZbTask TriggerFetch",  name , "Async()\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            return new Zetbox.API.Async.ZbTask<",  exposedListType , "<",  referencedInterface , ">>(this.",  name , ");\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
-this.WriteObjects("\r\n");
-#line 118 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 128 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
 if (eagerLoading) { 
-#line 119 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 129 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
 this.WriteObjects("        private List<int> ",  name , "Ids;\r\n");
 this.WriteObjects("        private bool ",  name , "_was_eagerLoaded = false;\r\n");
-#line 122 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 132 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
 if (serializationList != null)
         {
             serializationList.Add("Serialization.EagerLoadingSerialization", Zetbox.Generator.Templates.Serialization.SerializerType.Binary, null, null, name, true, false, null);
         }
     }
 
-#line 128 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
-this.WriteObjects("\r\n");
+#line 138 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectListProperty.cst"
+this.WriteObjects("        // END ",  this.GetType() , "\r\n");
 
         }
 

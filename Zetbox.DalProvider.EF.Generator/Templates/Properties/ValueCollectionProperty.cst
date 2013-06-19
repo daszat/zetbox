@@ -14,10 +14,10 @@
     You should have received a copy of the GNU Lesser General Public
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 --%>
-<%@ CodeTemplate Language="C#" 
-	Name="Properties.ValueCollectionProperty"
-	ClassName="Zetbox.DalProvider.Ef.Generator.Templates.Properties.ValueCollectionProperty" 
-	Inherits="Zetbox.Generator.ResourceTemplate" %>
+<%@ CodeTemplate Language="C#"
+    Name="Properties.ValueCollectionProperty"
+    ClassName="Zetbox.DalProvider.Ef.Generator.Templates.Properties.ValueCollectionProperty"
+    Inherits="Zetbox.Generator.ResourceTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Collections.Generic" %>
 <%@ Import Namespace="System.Diagnostics" %>
@@ -33,35 +33,35 @@
 <%
 
     Debug.Assert(prop is ValueTypeProperty ? ((ValueTypeProperty)prop).IsList : ((CompoundObjectProperty)prop).IsList);
-	bool hasPersistentOrder = prop is ValueTypeProperty ? ((ValueTypeProperty)prop).HasPersistentOrder : ((CompoundObjectProperty)prop).HasPersistentOrder;
+    bool hasPersistentOrder = prop is ValueTypeProperty ? ((ValueTypeProperty)prop).HasPersistentOrder : ((CompoundObjectProperty)prop).HasPersistentOrder;
 
-	// the name of the property to create
-	string name = prop.Name;
-	// the ef-visible property's name
-	string efName = name + ImplementationPropertySuffix;
-	// the name of the private backing store for the conversion wrapper list
-	string wrapperName = "_" + name;
-	// the name of the wrapper class for wrapping the EntityCollection
-	string wrapperClass = (hasPersistentOrder ? "EfValueListWrapper" : "EfValueCollectionWrapper");
-	
-	// the name of the EF association
-	string assocName = prop.GetAssociationName();
-	string targetRoleName = "CollectionEntry";
+    // the name of the property to create
+    string name = prop.Name;
+    // the ef-visible property's name
+    string efName = name + ImplementationPropertySuffix;
+    // the name of the private backing store for the conversion wrapper list
+    string wrapperName = "_" + name;
+    // the name of the wrapper class for wrapping the EntityCollection
+    string wrapperClass = (hasPersistentOrder ? "EfValueListWrapper" : "EfValueCollectionWrapper");
 
-	// which generic interface to use for the collection
-	string exposedListType = hasPersistentOrder ? "IList" : "ICollection";
+    // the name of the EF association
+    string assocName = prop.GetAssociationName();
+    string targetRoleName = "CollectionEntry";
 
-	// which Zetbox interface this is 
-	string thisInterface = prop.ObjectClass.Name;
-	// which type this list contains
-	string referencedType = prop.GetElementTypeString();
-	// collection entries in this list
-	string referencedCollectionEntry = prop.GetCollectionEntryFullName() + ImplementationSuffix;
+    // which generic interface to use for the collection
+    string exposedListType = hasPersistentOrder ? "IList" : "ICollection";
+
+    // which Zetbox interface this is
+    string thisInterface = prop.ObjectClass.Name;
+    // which type this list contains
+    string referencedType = prop.GetElementTypeString();
+    // collection entries in this list
+    string referencedCollectionEntry = prop.GetCollectionEntryFullName() + ImplementationSuffix;
 
     AddSerialization(serializationList, efName);
-	var eventName = "On" + name + "_PostSetter";
+    var eventName = "On" + name + "_PostSetter";
 %>
-   		// <%= this.GetType() %>
+        // <%= this.GetType() %>
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -72,24 +72,21 @@
                 if (<%= wrapperName %> == null)
                 {
                     <%= wrapperName %> = new <%= wrapperClass %><<%= thisInterface %>, <%= referencedType %>, <%= referencedCollectionEntry %>, EntityCollection<<%= referencedCollectionEntry %>>>(
-						this.Context,
+                        this.Context,
                         this,
-              			() => { this.NotifyPropertyChanged("<%= name %>", null, null); if(<%= eventName %> != null && IsAttached) <%= eventName%>(this); },
-          	            <%= efName %>);
+                        null, // see Get<%= efName %>Collection()
+                        <%= efName %>);
                 }
                 return <%= wrapperName %>;
             }
         }
-        
+
         [EdmRelationshipNavigationProperty("Model", "<%= assocName %>", "<%= targetRoleName %>")]
         public EntityCollection<<%= referencedCollectionEntry %>> <%= efName %>
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<<%= referencedCollectionEntry %>>(
-                        "Model.<%= assocName %>",
-                        "<%= targetRoleName %>");
+                var c = Get<%= efName %>Collection();
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
@@ -98,4 +95,18 @@
                 return c;
             }
         }
+
+        internal EntityCollection<<%= referencedCollectionEntry %>> Get<%= efName %>Collection()
+        {
+            if (_<%= efName %>EntityCollection == null)
+            {
+                _<%= efName %>EntityCollection = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<<%= referencedCollectionEntry %>>(
+                        "Model.<%= assocName %>",
+                        "<%= targetRoleName %>");
+                _<%= efName %>EntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("<%= name %>", null, null); if (<%= eventName %> != null && IsAttached) <%= eventName%>(this); };
+            }
+            return _<%= efName %>EntityCollection;
+        }
+        private EntityCollection<<%= referencedCollectionEntry %>> _<%= efName %>EntityCollection;
         private <%= wrapperClass %><<%= thisInterface %>, <%= referencedType %>, <%= referencedCollectionEntry %>, EntityCollection<<%= referencedCollectionEntry %>>> <%= wrapperName %>;

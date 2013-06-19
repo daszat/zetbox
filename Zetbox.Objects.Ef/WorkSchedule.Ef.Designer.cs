@@ -362,7 +362,7 @@ namespace Zetbox.App.Calendar
     */
         // object list property
         // object list property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -375,7 +375,7 @@ namespace Zetbox.App.Calendar
                     _ChildWorkSchedule = new EntityCollectionWrapper<Zetbox.App.Calendar.WorkSchedule, Zetbox.App.Calendar.WorkScheduleEfImpl>(
                             this.Context, ChildWorkScheduleImpl,
                             () => this.NotifyPropertyChanging("ChildWorkSchedule", null, null),
-                            () => { this.NotifyPropertyChanged("ChildWorkSchedule", null, null); if(OnChildWorkSchedule_PostSetter != null && IsAttached) OnChildWorkSchedule_PostSetter(this); },
+                            null, // see GetChildWorkScheduleImplCollection()
                             (item) => item.NotifyPropertyChanging("BaseWorkSchedule", null, null),
                             (item) => item.NotifyPropertyChanged("BaseWorkSchedule", null, null));
                 }
@@ -388,10 +388,7 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.Calendar.WorkScheduleEfImpl>(
-                        "Model.FK_BaseWorkSchedule_has_ChildWorkSchedules",
-                        "ChildWorkSchedules");
+                var c = GetChildWorkScheduleImplCollection();
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
@@ -402,13 +399,26 @@ namespace Zetbox.App.Calendar
         }
         private EntityCollectionWrapper<Zetbox.App.Calendar.WorkSchedule, Zetbox.App.Calendar.WorkScheduleEfImpl> _ChildWorkSchedule;
 
+        private EntityCollection<Zetbox.App.Calendar.WorkScheduleEfImpl> _ChildWorkScheduleImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Calendar.WorkScheduleEfImpl> GetChildWorkScheduleImplCollection()
+        {
+            if (_ChildWorkScheduleImplEntityCollection == null)
+            {
+                _ChildWorkScheduleImplEntityCollection = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Zetbox.App.Calendar.WorkScheduleEfImpl>(
+                        "Model.FK_BaseWorkSchedule_has_ChildWorkSchedules",
+                        "ChildWorkSchedules");
+                _ChildWorkScheduleImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("ChildWorkSchedule", null, null); if (OnChildWorkSchedule_PostSetter != null && IsAttached) OnChildWorkSchedule_PostSetter(this); };
+            }
+            return _ChildWorkScheduleImplEntityCollection;
+        }
+
         public Zetbox.API.Async.ZbTask TriggerFetchChildWorkScheduleAsync()
         {
             return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Calendar.WorkSchedule>>(this.ChildWorkSchedule);
         }
 
-
-
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
 public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule> OnChildWorkSchedule_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Calendar.WorkSchedule> OnChildWorkSchedule_IsValid;
@@ -874,7 +884,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
     */
         // object list property
         // object list property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -887,7 +897,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
                     _WorkScheduleRules = new EntityCollectionWrapper<Zetbox.App.Calendar.WorkScheduleRule, Zetbox.App.Calendar.WorkScheduleRuleEfImpl>(
                             this.Context, WorkScheduleRulesImpl,
                             () => this.NotifyPropertyChanging("WorkScheduleRules", null, null),
-                            () => { this.NotifyPropertyChanged("WorkScheduleRules", null, null); if(OnWorkScheduleRules_PostSetter != null && IsAttached) OnWorkScheduleRules_PostSetter(this); },
+                            null, // see GetWorkScheduleRulesImplCollection()
                             (item) => item.NotifyPropertyChanging("WorkSchedule", null, null),
                             (item) => item.NotifyPropertyChanged("WorkSchedule", null, null));
                 }
@@ -900,10 +910,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.Calendar.WorkScheduleRuleEfImpl>(
-                        "Model.FK_WorkSchedule_has_WorkScheduleRules",
-                        "WorkScheduleRules");
+                var c = GetWorkScheduleRulesImplCollection();
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
@@ -914,13 +921,26 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
         }
         private EntityCollectionWrapper<Zetbox.App.Calendar.WorkScheduleRule, Zetbox.App.Calendar.WorkScheduleRuleEfImpl> _WorkScheduleRules;
 
+        private EntityCollection<Zetbox.App.Calendar.WorkScheduleRuleEfImpl> _WorkScheduleRulesImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Calendar.WorkScheduleRuleEfImpl> GetWorkScheduleRulesImplCollection()
+        {
+            if (_WorkScheduleRulesImplEntityCollection == null)
+            {
+                _WorkScheduleRulesImplEntityCollection = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Zetbox.App.Calendar.WorkScheduleRuleEfImpl>(
+                        "Model.FK_WorkSchedule_has_WorkScheduleRules",
+                        "WorkScheduleRules");
+                _WorkScheduleRulesImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("WorkScheduleRules", null, null); if (OnWorkScheduleRules_PostSetter != null && IsAttached) OnWorkScheduleRules_PostSetter(this); };
+            }
+            return _WorkScheduleRulesImplEntityCollection;
+        }
+
         public Zetbox.API.Async.ZbTask TriggerFetchWorkScheduleRulesAsync()
         {
             return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Calendar.WorkScheduleRule>>(this.WorkScheduleRules);
         }
 
-
-
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
 public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule> OnWorkScheduleRules_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Calendar.WorkSchedule> OnWorkScheduleRules_IsValid;

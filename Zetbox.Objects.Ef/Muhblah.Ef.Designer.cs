@@ -44,7 +44,7 @@ namespace Zetbox.App.Test
         /// 
         /// </summary>
         // value list property
-   		// Zetbox.DalProvider.Ef.Generator.Templates.Properties.ValueCollectionProperty
+        // Zetbox.DalProvider.Ef.Generator.Templates.Properties.ValueCollectionProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -55,24 +55,21 @@ namespace Zetbox.App.Test
                 if (_StringCollection == null)
                 {
                     _StringCollection = new EfValueCollectionWrapper<Muhblah, string, Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryEfImpl, EntityCollection<Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryEfImpl>>(
-						this.Context,
+                        this.Context,
                         this,
-              			() => { this.NotifyPropertyChanged("StringCollection", null, null); if(OnStringCollection_PostSetter != null && IsAttached) OnStringCollection_PostSetter(this); },
-          	            StringCollectionImpl);
+                        null, // see GetStringCollectionImplCollection()
+                        StringCollectionImpl);
                 }
                 return _StringCollection;
             }
         }
-        
+
         [EdmRelationshipNavigationProperty("Model", "FK_Muhblah_value_StringCollection", "CollectionEntry")]
         public EntityCollection<Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryEfImpl> StringCollectionImpl
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryEfImpl>(
-                        "Model.FK_Muhblah_value_StringCollection",
-                        "CollectionEntry");
+                var c = GetStringCollectionImplCollection();
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
@@ -81,6 +78,20 @@ namespace Zetbox.App.Test
                 return c;
             }
         }
+
+        internal EntityCollection<Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryEfImpl> GetStringCollectionImplCollection()
+        {
+            if (_StringCollectionImplEntityCollection == null)
+            {
+                _StringCollectionImplEntityCollection = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryEfImpl>(
+                        "Model.FK_Muhblah_value_StringCollection",
+                        "CollectionEntry");
+                _StringCollectionImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("StringCollection", null, null); if (OnStringCollection_PostSetter != null && IsAttached) OnStringCollection_PostSetter(this); };
+            }
+            return _StringCollectionImplEntityCollection;
+        }
+        private EntityCollection<Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryEfImpl> _StringCollectionImplEntityCollection;
         private EfValueCollectionWrapper<Muhblah, string, Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryEfImpl, EntityCollection<Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryEfImpl>> _StringCollection;
 public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnStringCollection_PostSetter;
 
@@ -166,7 +177,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnString
     */
         // object list property
         // object list property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -179,7 +190,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnString
                     _TestCustomObjects_List_Nav = new EntityCollectionWrapper<Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.TestCustomObjectEfImpl>(
                             this.Context, TestCustomObjects_List_NavImpl,
                             () => this.NotifyPropertyChanging("TestCustomObjects_List_Nav", null, null),
-                            () => { this.NotifyPropertyChanged("TestCustomObjects_List_Nav", null, null); if(OnTestCustomObjects_List_Nav_PostSetter != null && IsAttached) OnTestCustomObjects_List_Nav_PostSetter(this); },
+                            null, // see GetTestCustomObjects_List_NavImplCollection()
                             (item) => item.NotifyPropertyChanging("MubBlah_Nav", null, null),
                             (item) => item.NotifyPropertyChanged("MubBlah_Nav", null, null));
                 }
@@ -192,10 +203,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnString
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.Test.TestCustomObjectEfImpl>(
-                        "Model.FK_MB_Role_has_TCO_Lst_Role",
-                        "TCO_Lst_Role");
+                var c = GetTestCustomObjects_List_NavImplCollection();
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
@@ -206,13 +214,26 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnString
         }
         private EntityCollectionWrapper<Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.TestCustomObjectEfImpl> _TestCustomObjects_List_Nav;
 
+        private EntityCollection<Zetbox.App.Test.TestCustomObjectEfImpl> _TestCustomObjects_List_NavImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Test.TestCustomObjectEfImpl> GetTestCustomObjects_List_NavImplCollection()
+        {
+            if (_TestCustomObjects_List_NavImplEntityCollection == null)
+            {
+                _TestCustomObjects_List_NavImplEntityCollection = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Zetbox.App.Test.TestCustomObjectEfImpl>(
+                        "Model.FK_MB_Role_has_TCO_Lst_Role",
+                        "TCO_Lst_Role");
+                _TestCustomObjects_List_NavImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("TestCustomObjects_List_Nav", null, null); if (OnTestCustomObjects_List_Nav_PostSetter != null && IsAttached) OnTestCustomObjects_List_Nav_PostSetter(this); };
+            }
+            return _TestCustomObjects_List_NavImplEntityCollection;
+        }
+
         public Zetbox.API.Async.ZbTask TriggerFetchTestCustomObjects_List_NavAsync()
         {
             return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Test.TestCustomObject>>(this.TestCustomObjects_List_Nav);
         }
 
-
-
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
 public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCustomObjects_List_Nav_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.Muhblah> OnTestCustomObjects_List_Nav_IsValid;
@@ -250,18 +271,29 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryEfImpl>(
-                        "Model.FK_MB_Many_Role_has_TCO_ManyList_Role_A",
-                        "CollectionEntry");
+                var c = GetTestCustomObjects_ManyList_NavImplCollection();
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
                     c.Load();
                 }
-                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("TestCustomObjects_ManyList_Nav", null, null); if(OnTestCustomObjects_ManyList_Nav_PostSetter != null && IsAttached) OnTestCustomObjects_ManyList_Nav_PostSetter(this); };
                 return c;
             }
+        }
+
+        private EntityCollection<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryEfImpl> _TestCustomObjects_ManyList_NavImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryEfImpl> GetTestCustomObjects_ManyList_NavImplCollection()
+        {
+            if (_TestCustomObjects_ManyList_NavImplEntityCollection == null)
+            {
+                _TestCustomObjects_ManyList_NavImplEntityCollection
+                    = ((IEntityWithRelationships)(this)).RelationshipManager
+                        .GetRelatedCollection<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryEfImpl>(
+                            "Model.FK_MB_Many_Role_has_TCO_ManyList_Role_A",
+                            "CollectionEntry");
+                _TestCustomObjects_ManyList_NavImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("TestCustomObjects_ManyList_Nav", null, null); if(OnTestCustomObjects_ManyList_Nav_PostSetter != null && IsAttached) OnTestCustomObjects_ManyList_Nav_PostSetter(this); };
+            }
+            return _TestCustomObjects_ManyList_NavImplEntityCollection;
         }
         private BSideCollectionWrapper<Zetbox.App.Test.Muhblah, Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryEfImpl, EntityCollection<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryEfImpl>> _TestCustomObjects_ManyList_Nav;
 

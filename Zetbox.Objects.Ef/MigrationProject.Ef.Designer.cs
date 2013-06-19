@@ -692,7 +692,7 @@ namespace Zetbox.App.SchemaMigration
     */
         // object list property
         // object list property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -705,7 +705,7 @@ namespace Zetbox.App.SchemaMigration
                     _StagingDatabases = new EntityCollectionWrapper<Zetbox.App.SchemaMigration.StagingDatabase, Zetbox.App.SchemaMigration.StagingDatabaseEfImpl>(
                             this.Context, StagingDatabasesImpl,
                             () => this.NotifyPropertyChanging("StagingDatabases", null, null),
-                            () => { this.NotifyPropertyChanged("StagingDatabases", null, null); if(OnStagingDatabases_PostSetter != null && IsAttached) OnStagingDatabases_PostSetter(this); },
+                            null, // see GetStagingDatabasesImplCollection()
                             (item) => item.NotifyPropertyChanging("MigrationProject", null, null),
                             (item) => item.NotifyPropertyChanged("MigrationProject", null, null));
                 }
@@ -718,10 +718,7 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.SchemaMigration.StagingDatabaseEfImpl>(
-                        "Model.FK_MigrationProject_reads_from_StagingDatabases",
-                        "StagingDatabases");
+                var c = GetStagingDatabasesImplCollection();
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
@@ -732,13 +729,26 @@ namespace Zetbox.App.SchemaMigration
         }
         private EntityCollectionWrapper<Zetbox.App.SchemaMigration.StagingDatabase, Zetbox.App.SchemaMigration.StagingDatabaseEfImpl> _StagingDatabases;
 
+        private EntityCollection<Zetbox.App.SchemaMigration.StagingDatabaseEfImpl> _StagingDatabasesImplEntityCollection;
+        internal EntityCollection<Zetbox.App.SchemaMigration.StagingDatabaseEfImpl> GetStagingDatabasesImplCollection()
+        {
+            if (_StagingDatabasesImplEntityCollection == null)
+            {
+                _StagingDatabasesImplEntityCollection = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Zetbox.App.SchemaMigration.StagingDatabaseEfImpl>(
+                        "Model.FK_MigrationProject_reads_from_StagingDatabases",
+                        "StagingDatabases");
+                _StagingDatabasesImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("StagingDatabases", null, null); if (OnStagingDatabases_PostSetter != null && IsAttached) OnStagingDatabases_PostSetter(this); };
+            }
+            return _StagingDatabasesImplEntityCollection;
+        }
+
         public Zetbox.API.Async.ZbTask TriggerFetchStagingDatabasesAsync()
         {
             return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.SchemaMigration.StagingDatabase>>(this.StagingDatabases);
         }
 
-
-
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
 public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.MigrationProject> OnStagingDatabases_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.SchemaMigration.MigrationProject> OnStagingDatabases_IsValid;

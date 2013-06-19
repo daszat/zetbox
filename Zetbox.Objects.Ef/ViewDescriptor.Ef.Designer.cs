@@ -630,18 +630,29 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryEfImpl>(
-                        "Model.FK_ViewDescriptor_supports_ViewModelTypeRefs_A",
-                        "CollectionEntry");
+                var c = GetSupportedViewModelsImplCollection();
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
                     c.Load();
                 }
-                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("SupportedViewModels", null, null); if(OnSupportedViewModels_PostSetter != null && IsAttached) OnSupportedViewModels_PostSetter(this); };
                 return c;
             }
+        }
+
+        private EntityCollection<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryEfImpl> _SupportedViewModelsImplEntityCollection;
+        internal EntityCollection<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryEfImpl> GetSupportedViewModelsImplCollection()
+        {
+            if (_SupportedViewModelsImplEntityCollection == null)
+            {
+                _SupportedViewModelsImplEntityCollection
+                    = ((IEntityWithRelationships)(this)).RelationshipManager
+                        .GetRelatedCollection<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryEfImpl>(
+                            "Model.FK_ViewDescriptor_supports_ViewModelTypeRefs_A",
+                            "CollectionEntry");
+                _SupportedViewModelsImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("SupportedViewModels", null, null); if(OnSupportedViewModels_PostSetter != null && IsAttached) OnSupportedViewModels_PostSetter(this); };
+            }
+            return _SupportedViewModelsImplEntityCollection;
         }
         private BSideCollectionWrapper<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.Base.TypeRef, Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryEfImpl>> _SupportedViewModels;
         private bool SupportedViewModels_was_eagerLoaded = false;

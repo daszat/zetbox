@@ -853,18 +853,29 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryEfImpl>(
-                        "Model.FK_Projekte_haben_Mitarbeiter_B",
-                        "CollectionEntry");
+                var c = GetProjekteImplCollection();
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
                     c.Load();
                 }
-                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Projekte", null, null); if(OnProjekte_PostSetter != null && IsAttached) OnProjekte_PostSetter(this); };
                 return c;
             }
+        }
+
+        private EntityCollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryEfImpl> _ProjekteImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryEfImpl> GetProjekteImplCollection()
+        {
+            if (_ProjekteImplEntityCollection == null)
+            {
+                _ProjekteImplEntityCollection
+                    = ((IEntityWithRelationships)(this)).RelationshipManager
+                        .GetRelatedCollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryEfImpl>(
+                            "Model.FK_Projekte_haben_Mitarbeiter_B",
+                            "CollectionEntry");
+                _ProjekteImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Projekte", null, null); if(OnProjekte_PostSetter != null && IsAttached) OnProjekte_PostSetter(this); };
+            }
+            return _ProjekteImplEntityCollection;
         }
         private ASideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryEfImpl, EntityCollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryEfImpl>> _Projekte;
 

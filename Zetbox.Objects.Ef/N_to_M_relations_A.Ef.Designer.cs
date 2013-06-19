@@ -73,18 +73,29 @@ namespace Zetbox.App.Test
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl>(
-                        "Model.FK_ASide_connectsTo_BSide_A",
-                        "CollectionEntry");
+                var c = GetBSideImplCollection();
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
                     c.Load();
                 }
-                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("BSide", null, null); if(OnBSide_PostSetter != null && IsAttached) OnBSide_PostSetter(this); };
                 return c;
             }
+        }
+
+        private EntityCollection<Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl> _BSideImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl> GetBSideImplCollection()
+        {
+            if (_BSideImplEntityCollection == null)
+            {
+                _BSideImplEntityCollection
+                    = ((IEntityWithRelationships)(this)).RelationshipManager
+                        .GetRelatedCollection<Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl>(
+                            "Model.FK_ASide_connectsTo_BSide_A",
+                            "CollectionEntry");
+                _BSideImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("BSide", null, null); if(OnBSide_PostSetter != null && IsAttached) OnBSide_PostSetter(this); };
+            }
+            return _BSideImplEntityCollection;
         }
         private BSideCollectionWrapper<Zetbox.App.Test.N_to_M_relations_A, Zetbox.App.Test.N_to_M_relations_B, Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl, EntityCollection<Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl>> _BSide;
 

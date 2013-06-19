@@ -73,18 +73,29 @@ namespace at.dasz.DocumentManagement
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryEfImpl>(
-                        "Model.FK_Document_has_Revisions_A",
-                        "CollectionEntry");
+                var c = GetRevisionsImplCollection();
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
                     c.Load();
                 }
-                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Revisions", null, null); if(OnRevisions_PostSetter != null && IsAttached) OnRevisions_PostSetter(this); };
                 return c;
             }
+        }
+
+        private EntityCollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryEfImpl> _RevisionsImplEntityCollection;
+        internal EntityCollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryEfImpl> GetRevisionsImplCollection()
+        {
+            if (_RevisionsImplEntityCollection == null)
+            {
+                _RevisionsImplEntityCollection
+                    = ((IEntityWithRelationships)(this)).RelationshipManager
+                        .GetRelatedCollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryEfImpl>(
+                            "Model.FK_Document_has_Revisions_A",
+                            "CollectionEntry");
+                _RevisionsImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Revisions", null, null); if(OnRevisions_PostSetter != null && IsAttached) OnRevisions_PostSetter(this); };
+            }
+            return _RevisionsImplEntityCollection;
         }
         private BSideListWrapper<at.dasz.DocumentManagement.Document, Zetbox.App.Base.Blob, at.dasz.DocumentManagement.Document_has_Blob_RelationEntryEfImpl, EntityCollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryEfImpl>> _Revisions;
 

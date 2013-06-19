@@ -120,7 +120,7 @@ namespace Zetbox.App.Base
     */
         // object list property
         // object list property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -133,7 +133,7 @@ namespace Zetbox.App.Base
                     _EnumerationEntries = new EntityListWrapper<Zetbox.App.Base.EnumerationEntry, Zetbox.App.Base.EnumerationEntryEfImpl>(
                             this.Context, EnumerationEntriesImpl,
                             () => this.NotifyPropertyChanging("EnumerationEntries", null, null),
-                            () => { this.NotifyPropertyChanged("EnumerationEntries", null, null); if(OnEnumerationEntries_PostSetter != null && IsAttached) OnEnumerationEntries_PostSetter(this); },
+                            null, // see GetEnumerationEntriesImplCollection()
                             (item) => item.NotifyPropertyChanging("Enumeration", null, null),
                             (item) => item.NotifyPropertyChanged("Enumeration", null, null), "Enumeration", "EnumerationEntries_pos");
                 }
@@ -146,10 +146,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.Base.EnumerationEntryEfImpl>(
-                        "Model.FK_Enumeration_has_EnumerationEntries",
-                        "EnumerationEntries");
+                var c = GetEnumerationEntriesImplCollection();
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
@@ -160,13 +157,26 @@ namespace Zetbox.App.Base
         }
         private EntityListWrapper<Zetbox.App.Base.EnumerationEntry, Zetbox.App.Base.EnumerationEntryEfImpl> _EnumerationEntries;
 
+        private EntityCollection<Zetbox.App.Base.EnumerationEntryEfImpl> _EnumerationEntriesImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Base.EnumerationEntryEfImpl> GetEnumerationEntriesImplCollection()
+        {
+            if (_EnumerationEntriesImplEntityCollection == null)
+            {
+                _EnumerationEntriesImplEntityCollection = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Zetbox.App.Base.EnumerationEntryEfImpl>(
+                        "Model.FK_Enumeration_has_EnumerationEntries",
+                        "EnumerationEntries");
+                _EnumerationEntriesImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("EnumerationEntries", null, null); if (OnEnumerationEntries_PostSetter != null && IsAttached) OnEnumerationEntries_PostSetter(this); };
+            }
+            return _EnumerationEntriesImplEntityCollection;
+        }
+
         public Zetbox.API.Async.ZbTask TriggerFetchEnumerationEntriesAsync()
         {
             return new Zetbox.API.Async.ZbTask<IList<Zetbox.App.Base.EnumerationEntry>>(this.EnumerationEntries);
         }
 
-
-
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
 public static event PropertyListChangedHandler<Zetbox.App.Base.Enumeration> OnEnumerationEntries_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.Enumeration> OnEnumerationEntries_IsValid;

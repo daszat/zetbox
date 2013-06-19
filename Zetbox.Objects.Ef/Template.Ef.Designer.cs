@@ -318,18 +318,29 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryEfImpl>(
-                        "Model.FK_Template_hasMenu_Menu_A",
-                        "CollectionEntry");
+                var c = GetMenuImplCollection();
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
                     c.Load();
                 }
-                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Menu", null, null); if(OnMenu_PostSetter != null && IsAttached) OnMenu_PostSetter(this); };
                 return c;
             }
+        }
+
+        private EntityCollection<Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryEfImpl> _MenuImplEntityCollection;
+        internal EntityCollection<Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryEfImpl> GetMenuImplCollection()
+        {
+            if (_MenuImplEntityCollection == null)
+            {
+                _MenuImplEntityCollection
+                    = ((IEntityWithRelationships)(this)).RelationshipManager
+                        .GetRelatedCollection<Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryEfImpl>(
+                            "Model.FK_Template_hasMenu_Menu_A",
+                            "CollectionEntry");
+                _MenuImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Menu", null, null); if(OnMenu_PostSetter != null && IsAttached) OnMenu_PostSetter(this); };
+            }
+            return _MenuImplEntityCollection;
         }
         private BSideCollectionWrapper<Zetbox.App.GUI.Template, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryEfImpl>> _Menu;
 

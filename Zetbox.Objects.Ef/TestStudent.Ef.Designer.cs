@@ -142,18 +142,29 @@ namespace Zetbox.App.Test
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl>(
-                        "Model.FK_Student_füllt_aus_Testbogen_A",
-                        "CollectionEntry");
+                var c = GetTestbogenImplCollection();
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
                     c.Load();
                 }
-                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Testbogen", null, null); if(OnTestbogen_PostSetter != null && IsAttached) OnTestbogen_PostSetter(this); };
                 return c;
             }
+        }
+
+        private EntityCollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl> _TestbogenImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl> GetTestbogenImplCollection()
+        {
+            if (_TestbogenImplEntityCollection == null)
+            {
+                _TestbogenImplEntityCollection
+                    = ((IEntityWithRelationships)(this)).RelationshipManager
+                        .GetRelatedCollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl>(
+                            "Model.FK_Student_füllt_aus_Testbogen_A",
+                            "CollectionEntry");
+                _TestbogenImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Testbogen", null, null); if(OnTestbogen_PostSetter != null && IsAttached) OnTestbogen_PostSetter(this); };
+            }
+            return _TestbogenImplEntityCollection;
         }
         private BSideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl, EntityCollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl>> _Testbogen;
 

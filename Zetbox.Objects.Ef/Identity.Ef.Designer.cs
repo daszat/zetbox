@@ -211,18 +211,29 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryEfImpl>(
-                        "Model.FK_Identities_memberOf_Groups_A",
-                        "CollectionEntry");
+                var c = GetGroupsImplCollection();
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
                     c.Load();
                 }
-                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Groups", null, null); if(OnGroups_PostSetter != null && IsAttached) OnGroups_PostSetter(this); };
                 return c;
             }
+        }
+
+        private EntityCollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryEfImpl> _GroupsImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryEfImpl> GetGroupsImplCollection()
+        {
+            if (_GroupsImplEntityCollection == null)
+            {
+                _GroupsImplEntityCollection
+                    = ((IEntityWithRelationships)(this)).RelationshipManager
+                        .GetRelatedCollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryEfImpl>(
+                            "Model.FK_Identities_memberOf_Groups_A",
+                            "CollectionEntry");
+                _GroupsImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Groups", null, null); if(OnGroups_PostSetter != null && IsAttached) OnGroups_PostSetter(this); };
+            }
+            return _GroupsImplEntityCollection;
         }
         private BSideCollectionWrapper<Zetbox.App.Base.Identity, Zetbox.App.Base.Group, Zetbox.App.Base.Identity_memberOf_Group_RelationEntryEfImpl, EntityCollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryEfImpl>> _Groups;
 

@@ -954,18 +954,29 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl>(
-                        "Model.FK_Presentable_displayedBy_SecondaryControlKinds_A",
-                        "CollectionEntry");
+                var c = GetSecondaryControlKindsImplCollection();
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
                     c.Load();
                 }
-                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("SecondaryControlKinds", null, null); if(OnSecondaryControlKinds_PostSetter != null && IsAttached) OnSecondaryControlKinds_PostSetter(this); };
                 return c;
             }
+        }
+
+        private EntityCollection<Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl> _SecondaryControlKindsImplEntityCollection;
+        internal EntityCollection<Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl> GetSecondaryControlKindsImplCollection()
+        {
+            if (_SecondaryControlKindsImplEntityCollection == null)
+            {
+                _SecondaryControlKindsImplEntityCollection
+                    = ((IEntityWithRelationships)(this)).RelationshipManager
+                        .GetRelatedCollection<Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl>(
+                            "Model.FK_Presentable_displayedBy_SecondaryControlKinds_A",
+                            "CollectionEntry");
+                _SecondaryControlKindsImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("SecondaryControlKinds", null, null); if(OnSecondaryControlKinds_PostSetter != null && IsAttached) OnSecondaryControlKinds_PostSetter(this); };
+            }
+            return _SecondaryControlKindsImplEntityCollection;
         }
         private BSideCollectionWrapper<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ControlKind, Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl>> _SecondaryControlKinds;
 

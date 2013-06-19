@@ -783,18 +783,29 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl>(
-                        "Model.FK_TypeRef_hasGenericArguments_GenericArguments_A",
-                        "CollectionEntry");
+                var c = GetGenericArgumentsImplCollection();
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
                     c.Load();
                 }
-                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("GenericArguments", null, null); if(OnGenericArguments_PostSetter != null && IsAttached) OnGenericArguments_PostSetter(this); };
                 return c;
             }
+        }
+
+        private EntityCollection<Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl> _GenericArgumentsImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl> GetGenericArgumentsImplCollection()
+        {
+            if (_GenericArgumentsImplEntityCollection == null)
+            {
+                _GenericArgumentsImplEntityCollection
+                    = ((IEntityWithRelationships)(this)).RelationshipManager
+                        .GetRelatedCollection<Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl>(
+                            "Model.FK_TypeRef_hasGenericArguments_GenericArguments_A",
+                            "CollectionEntry");
+                _GenericArgumentsImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("GenericArguments", null, null); if(OnGenericArguments_PostSetter != null && IsAttached) OnGenericArguments_PostSetter(this); };
+            }
+            return _GenericArgumentsImplEntityCollection;
         }
         private BSideListWrapper<Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl, EntityCollection<Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl>> _GenericArguments;
         private bool GenericArguments_was_eagerLoaded = false;

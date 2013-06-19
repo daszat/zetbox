@@ -44,7 +44,7 @@ namespace Zetbox.App.Projekte
         /// Eine Liste der Änderungen an diesem Datensatz.
         /// </summary>
         // CompoundObject list property
-   		// Zetbox.DalProvider.Ef.Generator.Templates.Properties.ValueCollectionProperty
+        // Zetbox.DalProvider.Ef.Generator.Templates.Properties.ValueCollectionProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -55,24 +55,21 @@ namespace Zetbox.App.Projekte
                 if (_AuditJournal == null)
                 {
                     _AuditJournal = new EfValueCollectionWrapper<Projekt, Zetbox.App.Base.AuditEntry, Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryEfImpl, EntityCollection<Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryEfImpl>>(
-						this.Context,
+                        this.Context,
                         this,
-              			() => { this.NotifyPropertyChanged("AuditJournal", null, null); if(OnAuditJournal_PostSetter != null && IsAttached) OnAuditJournal_PostSetter(this); },
-          	            AuditJournalImpl);
+                        null, // see GetAuditJournalImplCollection()
+                        AuditJournalImpl);
                 }
                 return _AuditJournal;
             }
         }
-        
+
         [EdmRelationshipNavigationProperty("Model", "FK_Projekt_value_AuditJournal", "CollectionEntry")]
         public EntityCollection<Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryEfImpl> AuditJournalImpl
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryEfImpl>(
-                        "Model.FK_Projekt_value_AuditJournal",
-                        "CollectionEntry");
+                var c = GetAuditJournalImplCollection();
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
@@ -81,6 +78,20 @@ namespace Zetbox.App.Projekte
                 return c;
             }
         }
+
+        internal EntityCollection<Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryEfImpl> GetAuditJournalImplCollection()
+        {
+            if (_AuditJournalImplEntityCollection == null)
+            {
+                _AuditJournalImplEntityCollection = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryEfImpl>(
+                        "Model.FK_Projekt_value_AuditJournal",
+                        "CollectionEntry");
+                _AuditJournalImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("AuditJournal", null, null); if (OnAuditJournal_PostSetter != null && IsAttached) OnAuditJournal_PostSetter(this); };
+            }
+            return _AuditJournalImplEntityCollection;
+        }
+        private EntityCollection<Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryEfImpl> _AuditJournalImplEntityCollection;
         private EfValueCollectionWrapper<Projekt, Zetbox.App.Base.AuditEntry, Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryEfImpl, EntityCollection<Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryEfImpl>> _AuditJournal;
 public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAuditJournal_PostSetter;
 
@@ -97,7 +108,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
     */
         // object list property
         // object list property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -110,7 +121,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                     _Auftraege = new EntityCollectionWrapper<Zetbox.App.Projekte.Auftrag, Zetbox.App.Projekte.AuftragEfImpl>(
                             this.Context, AuftraegeImpl,
                             () => this.NotifyPropertyChanging("Auftraege", null, null),
-                            () => { this.NotifyPropertyChanged("Auftraege", null, null); if(OnAuftraege_PostSetter != null && IsAttached) OnAuftraege_PostSetter(this); },
+                            null, // see GetAuftraegeImplCollection()
                             (item) => item.NotifyPropertyChanging("Projekt", null, null),
                             (item) => item.NotifyPropertyChanged("Projekt", null, null));
                 }
@@ -123,10 +134,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.Projekte.AuftragEfImpl>(
-                        "Model.FK_Projekt_has_Auftraege",
-                        "Auftraege");
+                var c = GetAuftraegeImplCollection();
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
@@ -137,13 +145,26 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         }
         private EntityCollectionWrapper<Zetbox.App.Projekte.Auftrag, Zetbox.App.Projekte.AuftragEfImpl> _Auftraege;
 
+        private EntityCollection<Zetbox.App.Projekte.AuftragEfImpl> _AuftraegeImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Projekte.AuftragEfImpl> GetAuftraegeImplCollection()
+        {
+            if (_AuftraegeImplEntityCollection == null)
+            {
+                _AuftraegeImplEntityCollection = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Zetbox.App.Projekte.AuftragEfImpl>(
+                        "Model.FK_Projekt_has_Auftraege",
+                        "Auftraege");
+                _AuftraegeImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Auftraege", null, null); if (OnAuftraege_PostSetter != null && IsAttached) OnAuftraege_PostSetter(this); };
+            }
+            return _AuftraegeImplEntityCollection;
+        }
+
         public Zetbox.API.Async.ZbTask TriggerFetchAuftraegeAsync()
         {
             return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Projekte.Auftrag>>(this.Auftraege);
         }
 
-
-
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
 public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAuftraege_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Projekte.Projekt> OnAuftraege_IsValid;
@@ -983,18 +1004,29 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryEfImpl>(
-                        "Model.FK_Projekte_haben_Mitarbeiter_A",
-                        "CollectionEntry");
+                var c = GetMitarbeiterImplCollection();
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
                     c.Load();
                 }
-                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Mitarbeiter", null, null); if(OnMitarbeiter_PostSetter != null && IsAttached) OnMitarbeiter_PostSetter(this); };
                 return c;
             }
+        }
+
+        private EntityCollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryEfImpl> _MitarbeiterImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryEfImpl> GetMitarbeiterImplCollection()
+        {
+            if (_MitarbeiterImplEntityCollection == null)
+            {
+                _MitarbeiterImplEntityCollection
+                    = ((IEntityWithRelationships)(this)).RelationshipManager
+                        .GetRelatedCollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryEfImpl>(
+                            "Model.FK_Projekte_haben_Mitarbeiter_A",
+                            "CollectionEntry");
+                _MitarbeiterImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Mitarbeiter", null, null); if(OnMitarbeiter_PostSetter != null && IsAttached) OnMitarbeiter_PostSetter(this); };
+            }
+            return _MitarbeiterImplEntityCollection;
         }
         private BSideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryEfImpl, EntityCollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryEfImpl>> _Mitarbeiter;
 
@@ -1087,7 +1119,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnMi
     */
         // object list property
         // object list property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -1100,7 +1132,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnMi
                     _Tasks = new EntityCollectionWrapper<Zetbox.App.Projekte.Task, Zetbox.App.Projekte.TaskEfImpl>(
                             this.Context, TasksImpl,
                             () => this.NotifyPropertyChanging("Tasks", null, null),
-                            () => { this.NotifyPropertyChanged("Tasks", null, null); if(OnTasks_PostSetter != null && IsAttached) OnTasks_PostSetter(this); },
+                            null, // see GetTasksImplCollection()
                             (item) => item.NotifyPropertyChanging("Projekt", null, null),
                             (item) => item.NotifyPropertyChanged("Projekt", null, null));
                 }
@@ -1113,10 +1145,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnMi
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.Projekte.TaskEfImpl>(
-                        "Model.FK_Projekt_has_Tasks",
-                        "Tasks");
+                var c = GetTasksImplCollection();
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
@@ -1127,13 +1156,26 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnMi
         }
         private EntityCollectionWrapper<Zetbox.App.Projekte.Task, Zetbox.App.Projekte.TaskEfImpl> _Tasks;
 
+        private EntityCollection<Zetbox.App.Projekte.TaskEfImpl> _TasksImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Projekte.TaskEfImpl> GetTasksImplCollection()
+        {
+            if (_TasksImplEntityCollection == null)
+            {
+                _TasksImplEntityCollection = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Zetbox.App.Projekte.TaskEfImpl>(
+                        "Model.FK_Projekt_has_Tasks",
+                        "Tasks");
+                _TasksImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Tasks", null, null); if (OnTasks_PostSetter != null && IsAttached) OnTasks_PostSetter(this); };
+            }
+            return _TasksImplEntityCollection;
+        }
+
         public Zetbox.API.Async.ZbTask TriggerFetchTasksAsync()
         {
             return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Projekte.Task>>(this.Tasks);
         }
 
-
-
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
 public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTasks_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Projekte.Projekt> OnTasks_IsValid;

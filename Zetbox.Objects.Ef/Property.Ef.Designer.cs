@@ -367,7 +367,7 @@ namespace Zetbox.App.Base
     */
         // object list property
         // object list property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -380,7 +380,7 @@ namespace Zetbox.App.Base
                     _Constraints = new EntityCollectionWrapper<Zetbox.App.Base.Constraint, Zetbox.App.Base.ConstraintEfImpl>(
                             this.Context, ConstraintsImpl,
                             () => this.NotifyPropertyChanging("Constraints", null, null),
-                            () => { this.NotifyPropertyChanged("Constraints", null, null); if(OnConstraints_PostSetter != null && IsAttached) OnConstraints_PostSetter(this); },
+                            null, // see GetConstraintsImplCollection()
                             (item) => item.NotifyPropertyChanging("ConstrainedProperty", null, null),
                             (item) => item.NotifyPropertyChanged("ConstrainedProperty", null, null));
                 }
@@ -393,10 +393,7 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.Base.ConstraintEfImpl>(
-                        "Model.FK_ConstrainedProperty_has_Constraints",
-                        "Constraints");
+                var c = GetConstraintsImplCollection();
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
@@ -407,15 +404,28 @@ namespace Zetbox.App.Base
         }
         private EntityCollectionWrapper<Zetbox.App.Base.Constraint, Zetbox.App.Base.ConstraintEfImpl> _Constraints;
 
+        private EntityCollection<Zetbox.App.Base.ConstraintEfImpl> _ConstraintsImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Base.ConstraintEfImpl> GetConstraintsImplCollection()
+        {
+            if (_ConstraintsImplEntityCollection == null)
+            {
+                _ConstraintsImplEntityCollection = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Zetbox.App.Base.ConstraintEfImpl>(
+                        "Model.FK_ConstrainedProperty_has_Constraints",
+                        "Constraints");
+                _ConstraintsImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Constraints", null, null); if (OnConstraints_PostSetter != null && IsAttached) OnConstraints_PostSetter(this); };
+            }
+            return _ConstraintsImplEntityCollection;
+        }
+
         public Zetbox.API.Async.ZbTask TriggerFetchConstraintsAsync()
         {
             return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.Constraint>>(this.Constraints);
         }
 
-
         private List<int> ConstraintsIds;
         private bool Constraints_was_eagerLoaded = false;
-
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
 public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConstraints_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.Property> OnConstraints_IsValid;

@@ -495,7 +495,7 @@ namespace Zetbox.App.Projekte
         /// EMails des Kunden - können mehrere sein
         /// </summary>
         // value list property
-   		// Zetbox.DalProvider.Ef.Generator.Templates.Properties.ValueCollectionProperty
+        // Zetbox.DalProvider.Ef.Generator.Templates.Properties.ValueCollectionProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -506,24 +506,21 @@ namespace Zetbox.App.Projekte
                 if (_EMails == null)
                 {
                     _EMails = new EfValueCollectionWrapper<Kunde, string, Zetbox.App.Projekte.Kunde_EMails_CollectionEntryEfImpl, EntityCollection<Zetbox.App.Projekte.Kunde_EMails_CollectionEntryEfImpl>>(
-						this.Context,
+                        this.Context,
                         this,
-              			() => { this.NotifyPropertyChanged("EMails", null, null); if(OnEMails_PostSetter != null && IsAttached) OnEMails_PostSetter(this); },
-          	            EMailsImpl);
+                        null, // see GetEMailsImplCollection()
+                        EMailsImpl);
                 }
                 return _EMails;
             }
         }
-        
+
         [EdmRelationshipNavigationProperty("Model", "FK_Kunde_value_EMails", "CollectionEntry")]
         public EntityCollection<Zetbox.App.Projekte.Kunde_EMails_CollectionEntryEfImpl> EMailsImpl
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.Projekte.Kunde_EMails_CollectionEntryEfImpl>(
-                        "Model.FK_Kunde_value_EMails",
-                        "CollectionEntry");
+                var c = GetEMailsImplCollection();
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
@@ -532,6 +529,20 @@ namespace Zetbox.App.Projekte
                 return c;
             }
         }
+
+        internal EntityCollection<Zetbox.App.Projekte.Kunde_EMails_CollectionEntryEfImpl> GetEMailsImplCollection()
+        {
+            if (_EMailsImplEntityCollection == null)
+            {
+                _EMailsImplEntityCollection = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Zetbox.App.Projekte.Kunde_EMails_CollectionEntryEfImpl>(
+                        "Model.FK_Kunde_value_EMails",
+                        "CollectionEntry");
+                _EMailsImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("EMails", null, null); if (OnEMails_PostSetter != null && IsAttached) OnEMails_PostSetter(this); };
+            }
+            return _EMailsImplEntityCollection;
+        }
+        private EntityCollection<Zetbox.App.Projekte.Kunde_EMails_CollectionEntryEfImpl> _EMailsImplEntityCollection;
         private EfValueCollectionWrapper<Kunde, string, Zetbox.App.Projekte.Kunde_EMails_CollectionEntryEfImpl, EntityCollection<Zetbox.App.Projekte.Kunde_EMails_CollectionEntryEfImpl>> _EMails;
 public static event PropertyListChangedHandler<Zetbox.App.Projekte.Kunde> OnEMails_PostSetter;
 

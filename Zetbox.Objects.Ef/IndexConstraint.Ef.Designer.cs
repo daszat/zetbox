@@ -155,18 +155,29 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl>(
-                        "Model.FK_UniqueContraints_ensures_unique_on_Properties_A",
-                        "CollectionEntry");
+                var c = GetPropertiesImplCollection();
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
                     c.Load();
                 }
-                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Properties", null, null); if(OnProperties_PostSetter != null && IsAttached) OnProperties_PostSetter(this); };
                 return c;
             }
+        }
+
+        private EntityCollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl> _PropertiesImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl> GetPropertiesImplCollection()
+        {
+            if (_PropertiesImplEntityCollection == null)
+            {
+                _PropertiesImplEntityCollection
+                    = ((IEntityWithRelationships)(this)).RelationshipManager
+                        .GetRelatedCollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl>(
+                            "Model.FK_UniqueContraints_ensures_unique_on_Properties_A",
+                            "CollectionEntry");
+                _PropertiesImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Properties", null, null); if(OnProperties_PostSetter != null && IsAttached) OnProperties_PostSetter(this); };
+            }
+            return _PropertiesImplEntityCollection;
         }
         private BSideCollectionWrapper<Zetbox.App.Base.IndexConstraint, Zetbox.App.Base.Property, Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl, EntityCollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl>> _Properties;
 

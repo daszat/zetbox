@@ -224,18 +224,29 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl>(
-                        "Model.FK_ObjRefProp_shows_Methods_A",
-                        "CollectionEntry");
+                var c = GetMethodsImplCollection();
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
                     c.Load();
                 }
-                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Methods", null, null); if(OnMethods_PostSetter != null && IsAttached) OnMethods_PostSetter(this); };
                 return c;
             }
+        }
+
+        private EntityCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl> _MethodsImplEntityCollection;
+        internal EntityCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl> GetMethodsImplCollection()
+        {
+            if (_MethodsImplEntityCollection == null)
+            {
+                _MethodsImplEntityCollection
+                    = ((IEntityWithRelationships)(this)).RelationshipManager
+                        .GetRelatedCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl>(
+                            "Model.FK_ObjRefProp_shows_Methods_A",
+                            "CollectionEntry");
+                _MethodsImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Methods", null, null); if(OnMethods_PostSetter != null && IsAttached) OnMethods_PostSetter(this); };
+            }
+            return _MethodsImplEntityCollection;
         }
         private BSideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl>> _Methods;
 

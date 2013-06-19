@@ -51,7 +51,7 @@ namespace Zetbox.App.Test
     */
         // object list property
         // object list property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -64,7 +64,7 @@ namespace Zetbox.App.Test
                     _Antworten = new EntityListWrapper<Zetbox.App.Test.Antwort, Zetbox.App.Test.AntwortEfImpl>(
                             this.Context, AntwortenImpl,
                             () => this.NotifyPropertyChanging("Antworten", null, null),
-                            () => { this.NotifyPropertyChanged("Antworten", null, null); if(OnAntworten_PostSetter != null && IsAttached) OnAntworten_PostSetter(this); },
+                            null, // see GetAntwortenImplCollection()
                             (item) => item.NotifyPropertyChanging("Fragebogen", null, null),
                             (item) => item.NotifyPropertyChanged("Fragebogen", null, null), "Ein_Fragebogen", "gute_Antworten_pos");
                 }
@@ -77,10 +77,7 @@ namespace Zetbox.App.Test
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.Test.AntwortEfImpl>(
-                        "Model.FK_Ein_Fragebogen_enthaelt_gute_Antworten",
-                        "gute_Antworten");
+                var c = GetAntwortenImplCollection();
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
@@ -91,15 +88,28 @@ namespace Zetbox.App.Test
         }
         private EntityListWrapper<Zetbox.App.Test.Antwort, Zetbox.App.Test.AntwortEfImpl> _Antworten;
 
+        private EntityCollection<Zetbox.App.Test.AntwortEfImpl> _AntwortenImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Test.AntwortEfImpl> GetAntwortenImplCollection()
+        {
+            if (_AntwortenImplEntityCollection == null)
+            {
+                _AntwortenImplEntityCollection = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Zetbox.App.Test.AntwortEfImpl>(
+                        "Model.FK_Ein_Fragebogen_enthaelt_gute_Antworten",
+                        "gute_Antworten");
+                _AntwortenImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Antworten", null, null); if (OnAntworten_PostSetter != null && IsAttached) OnAntworten_PostSetter(this); };
+            }
+            return _AntwortenImplEntityCollection;
+        }
+
         public Zetbox.API.Async.ZbTask TriggerFetchAntwortenAsync()
         {
             return new Zetbox.API.Async.ZbTask<IList<Zetbox.App.Test.Antwort>>(this.Antworten);
         }
 
-
         private List<int> AntwortenIds;
         private bool Antworten_was_eagerLoaded = false;
-
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
 public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAntworten_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.Fragebogen> OnAntworten_IsValid;
@@ -206,18 +216,29 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl>(
-                        "Model.FK_Student_füllt_aus_Testbogen_B",
-                        "CollectionEntry");
+                var c = GetStudentImplCollection();
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
                     c.Load();
                 }
-                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Student", null, null); if(OnStudent_PostSetter != null && IsAttached) OnStudent_PostSetter(this); };
                 return c;
             }
+        }
+
+        private EntityCollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl> _StudentImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl> GetStudentImplCollection()
+        {
+            if (_StudentImplEntityCollection == null)
+            {
+                _StudentImplEntityCollection
+                    = ((IEntityWithRelationships)(this)).RelationshipManager
+                        .GetRelatedCollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl>(
+                            "Model.FK_Student_füllt_aus_Testbogen_B",
+                            "CollectionEntry");
+                _StudentImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Student", null, null); if(OnStudent_PostSetter != null && IsAttached) OnStudent_PostSetter(this); };
+            }
+            return _StudentImplEntityCollection;
         }
         private ASideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl, EntityCollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl>> _Student;
 

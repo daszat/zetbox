@@ -911,7 +911,7 @@ namespace Zetbox.App.SchemaMigration
     */
         // object list property
         // object list property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -924,7 +924,7 @@ namespace Zetbox.App.SchemaMigration
                     _SourceTables = new EntityCollectionWrapper<Zetbox.App.SchemaMigration.SourceTable, Zetbox.App.SchemaMigration.SourceTableEfImpl>(
                             this.Context, SourceTablesImpl,
                             () => this.NotifyPropertyChanging("SourceTables", null, null),
-                            () => { this.NotifyPropertyChanged("SourceTables", null, null); if(OnSourceTables_PostSetter != null && IsAttached) OnSourceTables_PostSetter(this); },
+                            null, // see GetSourceTablesImplCollection()
                             (item) => item.NotifyPropertyChanging("StagingDatabase", null, null),
                             (item) => item.NotifyPropertyChanged("StagingDatabase", null, null));
                 }
@@ -937,10 +937,7 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.SchemaMigration.SourceTableEfImpl>(
-                        "Model.FK_SourceTables_are_contained_in_StagingDatabase",
-                        "SourceTables");
+                var c = GetSourceTablesImplCollection();
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
@@ -951,13 +948,26 @@ namespace Zetbox.App.SchemaMigration
         }
         private EntityCollectionWrapper<Zetbox.App.SchemaMigration.SourceTable, Zetbox.App.SchemaMigration.SourceTableEfImpl> _SourceTables;
 
+        private EntityCollection<Zetbox.App.SchemaMigration.SourceTableEfImpl> _SourceTablesImplEntityCollection;
+        internal EntityCollection<Zetbox.App.SchemaMigration.SourceTableEfImpl> GetSourceTablesImplCollection()
+        {
+            if (_SourceTablesImplEntityCollection == null)
+            {
+                _SourceTablesImplEntityCollection = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Zetbox.App.SchemaMigration.SourceTableEfImpl>(
+                        "Model.FK_SourceTables_are_contained_in_StagingDatabase",
+                        "SourceTables");
+                _SourceTablesImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("SourceTables", null, null); if (OnSourceTables_PostSetter != null && IsAttached) OnSourceTables_PostSetter(this); };
+            }
+            return _SourceTablesImplEntityCollection;
+        }
+
         public Zetbox.API.Async.ZbTask TriggerFetchSourceTablesAsync()
         {
             return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.SchemaMigration.SourceTable>>(this.SourceTables);
         }
 
-
-
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
 public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.StagingDatabase> OnSourceTables_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.SchemaMigration.StagingDatabase> OnSourceTables_IsValid;

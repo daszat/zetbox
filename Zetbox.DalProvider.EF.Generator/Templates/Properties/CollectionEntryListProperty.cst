@@ -117,18 +117,29 @@
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<<%= ceName %>>(
-                        "Model.<%= assocName %>",
-                        "<%= targetRoleName %>");
+                var c = Get<%= efName %>Collection();
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
                     c.Load();
                 }
-                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("<%= name %>", null, null); if(<%= eventName %> != null && IsAttached) <%= eventName%>(this); };
                 return c;
             }
+        }
+
+        private EntityCollection<<%= ceName %>> _<%= efName %>EntityCollection;
+        internal EntityCollection<<%= ceName %>> Get<%= efName %>Collection()
+        {
+            if (_<%= efName %>EntityCollection == null)
+            {
+                _<%= efName %>EntityCollection
+                    = ((IEntityWithRelationships)(this)).RelationshipManager
+                        .GetRelatedCollection<<%= ceName %>>(
+                            "Model.<%= assocName %>",
+                            "<%= targetRoleName %>");
+                _<%= efName %>EntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("<%= name %>", null, null); if(<%= eventName %> != null && IsAttached) <%= eventName%>(this); };
+            }
+            return _<%= efName %>EntityCollection;
         }
         private <%= wrapperClass %><<%= rel.A.Type.GetDataTypeString() %>, <%= rel.B.Type.GetDataTypeString() %>, <%= ceName %>, EntityCollection<<%= ceName %>>> <%= wrapperName %>;
 <% if (eagerLoading) { %>

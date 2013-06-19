@@ -125,34 +125,45 @@ this.WriteObjects("        public EntityCollection<",  ceName , "> ",  efName , 
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get\r\n");
 this.WriteObjects("            {\r\n");
-this.WriteObjects("                var c = ((IEntityWithRelationships)(this)).RelationshipManager\r\n");
-this.WriteObjects("                    .GetRelatedCollection<",  ceName , ">(\r\n");
-this.WriteObjects("                        \"Model.",  assocName , "\",\r\n");
-this.WriteObjects("                        \"",  targetRoleName , "\");\r\n");
+this.WriteObjects("                var c = Get",  efName , "Collection();\r\n");
 this.WriteObjects("                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)\r\n");
 this.WriteObjects("                    && !c.IsLoaded)\r\n");
 this.WriteObjects("                {\r\n");
 this.WriteObjects("                    c.Load();\r\n");
 this.WriteObjects("                }\r\n");
-this.WriteObjects("                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged(\"",  name , "\", null, null); if(",  eventName , " != null && IsAttached) ",  eventName, "(this); };\r\n");
 this.WriteObjects("                return c;\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
+this.WriteObjects("\r\n");
+this.WriteObjects("        private EntityCollection<",  ceName , "> _",  efName , "EntityCollection;\r\n");
+this.WriteObjects("        internal EntityCollection<",  ceName , "> Get",  efName , "Collection()\r\n");
+this.WriteObjects("        {\r\n");
+this.WriteObjects("            if (_",  efName , "EntityCollection == null)\r\n");
+this.WriteObjects("            {\r\n");
+this.WriteObjects("                _",  efName , "EntityCollection\r\n");
+this.WriteObjects("                    = ((IEntityWithRelationships)(this)).RelationshipManager\r\n");
+this.WriteObjects("                        .GetRelatedCollection<",  ceName , ">(\r\n");
+this.WriteObjects("                            \"Model.",  assocName , "\",\r\n");
+this.WriteObjects("                            \"",  targetRoleName , "\");\r\n");
+this.WriteObjects("                _",  efName , "EntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged(\"",  name , "\", null, null); if(",  eventName , " != null && IsAttached) ",  eventName, "(this); };\r\n");
+this.WriteObjects("            }\r\n");
+this.WriteObjects("            return _",  efName , "EntityCollection;\r\n");
+this.WriteObjects("        }\r\n");
 this.WriteObjects("        private ",  wrapperClass , "<",  rel.A.Type.GetDataTypeString() , ", ",  rel.B.Type.GetDataTypeString() , ", ",  ceName , ", EntityCollection<",  ceName , ">> ",  wrapperName , ";\r\n");
-#line 134 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 145 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 if (eagerLoading) { 
-#line 135 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 146 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 this.WriteObjects("        private bool ",  name , "_was_eagerLoaded = false;\r\n");
-#line 136 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 147 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 } 
-#line 137 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 148 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        public Zetbox.API.Async.ZbTask TriggerFetch",  name , "Async()\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            return new Zetbox.API.Async.ZbTask<",  exposedListType , "<",  referencedInterface , ">>(this.",  name , ");\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
-#line 143 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CollectionEntryListProperty.cst"
+#line 154 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\CollectionEntryListProperty.cst"
 AddSerialization(serializationList, name, eagerLoading); 
 
         }

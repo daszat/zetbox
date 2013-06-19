@@ -242,7 +242,7 @@ namespace Zetbox.App.GUI
     */
         // object list property
         // object list property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -255,7 +255,7 @@ namespace Zetbox.App.GUI
                     _Children = new EntityListWrapper<Zetbox.App.GUI.NavigationEntry, Zetbox.App.GUI.NavigationEntryEfImpl>(
                             this.Context, ChildrenImpl,
                             () => this.NotifyPropertyChanging("Children", null, null),
-                            () => { this.NotifyPropertyChanged("Children", null, null); if(OnChildren_PostSetter != null && IsAttached) OnChildren_PostSetter(this); },
+                            null, // see GetChildrenImplCollection()
                             (item) => item.NotifyPropertyChanging("Parent", null, null),
                             (item) => item.NotifyPropertyChanged("Parent", null, null), "Parent", "Children_pos");
                 }
@@ -268,10 +268,7 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.GUI.NavigationEntryEfImpl>(
-                        "Model.FK_Parent_navigates_to_Children",
-                        "Children");
+                var c = GetChildrenImplCollection();
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
@@ -282,13 +279,26 @@ namespace Zetbox.App.GUI
         }
         private EntityListWrapper<Zetbox.App.GUI.NavigationEntry, Zetbox.App.GUI.NavigationEntryEfImpl> _Children;
 
+        private EntityCollection<Zetbox.App.GUI.NavigationEntryEfImpl> _ChildrenImplEntityCollection;
+        internal EntityCollection<Zetbox.App.GUI.NavigationEntryEfImpl> GetChildrenImplCollection()
+        {
+            if (_ChildrenImplEntityCollection == null)
+            {
+                _ChildrenImplEntityCollection = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Zetbox.App.GUI.NavigationEntryEfImpl>(
+                        "Model.FK_Parent_navigates_to_Children",
+                        "Children");
+                _ChildrenImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Children", null, null); if (OnChildren_PostSetter != null && IsAttached) OnChildren_PostSetter(this); };
+            }
+            return _ChildrenImplEntityCollection;
+        }
+
         public Zetbox.API.Async.ZbTask TriggerFetchChildrenAsync()
         {
             return new Zetbox.API.Async.ZbTask<IList<Zetbox.App.GUI.NavigationEntry>>(this.Children);
         }
 
-
-
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
 public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> OnChildren_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.NavigationEntry> OnChildren_IsValid;
@@ -668,18 +678,29 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryEfImpl>(
-                        "Model.FK_NavigationScreen_accessed_by_Groups_A",
-                        "CollectionEntry");
+                var c = GetGroupsImplCollection();
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
                     c.Load();
                 }
-                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Groups", null, null); if(OnGroups_PostSetter != null && IsAttached) OnGroups_PostSetter(this); };
                 return c;
             }
+        }
+
+        private EntityCollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryEfImpl> _GroupsImplEntityCollection;
+        internal EntityCollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryEfImpl> GetGroupsImplCollection()
+        {
+            if (_GroupsImplEntityCollection == null)
+            {
+                _GroupsImplEntityCollection
+                    = ((IEntityWithRelationships)(this)).RelationshipManager
+                        .GetRelatedCollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryEfImpl>(
+                            "Model.FK_NavigationScreen_accessed_by_Groups_A",
+                            "CollectionEntry");
+                _GroupsImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Groups", null, null); if(OnGroups_PostSetter != null && IsAttached) OnGroups_PostSetter(this); };
+            }
+            return _GroupsImplEntityCollection;
         }
         private BSideCollectionWrapper<Zetbox.App.GUI.NavigationEntry, Zetbox.App.Base.Group, Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryEfImpl>> _Groups;
         private bool Groups_was_eagerLoaded = false;

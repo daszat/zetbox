@@ -51,7 +51,7 @@ namespace Zetbox.App.Test
     */
         // object list property
         // object list property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -64,7 +64,7 @@ namespace Zetbox.App.Test
                     _Children = new EntityCollectionWrapper<Zetbox.App.Test.SecurityTestChild, Zetbox.App.Test.SecurityTestChildEfImpl>(
                             this.Context, ChildrenImpl,
                             () => this.NotifyPropertyChanging("Children", null, null),
-                            () => { this.NotifyPropertyChanged("Children", null, null); if(OnChildren_PostSetter != null && IsAttached) OnChildren_PostSetter(this); },
+                            null, // see GetChildrenImplCollection()
                             (item) => item.NotifyPropertyChanging("Parent", null, null),
                             (item) => item.NotifyPropertyChanged("Parent", null, null));
                 }
@@ -77,10 +77,7 @@ namespace Zetbox.App.Test
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.Test.SecurityTestChildEfImpl>(
-                        "Model.FK_Parent_has_Children2",
-                        "Children2");
+                var c = GetChildrenImplCollection();
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
@@ -91,13 +88,26 @@ namespace Zetbox.App.Test
         }
         private EntityCollectionWrapper<Zetbox.App.Test.SecurityTestChild, Zetbox.App.Test.SecurityTestChildEfImpl> _Children;
 
+        private EntityCollection<Zetbox.App.Test.SecurityTestChildEfImpl> _ChildrenImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Test.SecurityTestChildEfImpl> GetChildrenImplCollection()
+        {
+            if (_ChildrenImplEntityCollection == null)
+            {
+                _ChildrenImplEntityCollection = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Zetbox.App.Test.SecurityTestChildEfImpl>(
+                        "Model.FK_Parent_has_Children2",
+                        "Children2");
+                _ChildrenImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Children", null, null); if (OnChildren_PostSetter != null && IsAttached) OnChildren_PostSetter(this); };
+            }
+            return _ChildrenImplEntityCollection;
+        }
+
         public Zetbox.API.Async.ZbTask TriggerFetchChildrenAsync()
         {
             return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Test.SecurityTestChild>>(this.Children);
         }
 
-
-
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
 public static event PropertyListChangedHandler<Zetbox.App.Test.SecurityTestParent> OnChildren_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.SecurityTestParent> OnChildren_IsValid;

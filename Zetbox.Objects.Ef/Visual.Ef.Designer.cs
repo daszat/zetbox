@@ -73,18 +73,29 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.GUI.Visual_contains_Visual_RelationEntryEfImpl>(
-                        "Model.FK_Visual_contains_Children_A",
-                        "CollectionEntry");
+                var c = GetChildrenImplCollection();
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
                     c.Load();
                 }
-                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Children", null, null); if(OnChildren_PostSetter != null && IsAttached) OnChildren_PostSetter(this); };
                 return c;
             }
+        }
+
+        private EntityCollection<Zetbox.App.GUI.Visual_contains_Visual_RelationEntryEfImpl> _ChildrenImplEntityCollection;
+        internal EntityCollection<Zetbox.App.GUI.Visual_contains_Visual_RelationEntryEfImpl> GetChildrenImplCollection()
+        {
+            if (_ChildrenImplEntityCollection == null)
+            {
+                _ChildrenImplEntityCollection
+                    = ((IEntityWithRelationships)(this)).RelationshipManager
+                        .GetRelatedCollection<Zetbox.App.GUI.Visual_contains_Visual_RelationEntryEfImpl>(
+                            "Model.FK_Visual_contains_Children_A",
+                            "CollectionEntry");
+                _ChildrenImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Children", null, null); if(OnChildren_PostSetter != null && IsAttached) OnChildren_PostSetter(this); };
+            }
+            return _ChildrenImplEntityCollection;
         }
         private BSideCollectionWrapper<Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual_contains_Visual_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.Visual_contains_Visual_RelationEntryEfImpl>> _Children;
 
@@ -130,18 +141,29 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.Visual> OnChildren
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryEfImpl>(
-                        "Model.FK_Visual_hasContextMenu_ContextMenu_A",
-                        "CollectionEntry");
+                var c = GetContextMenuImplCollection();
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
                     c.Load();
                 }
-                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("ContextMenu", null, null); if(OnContextMenu_PostSetter != null && IsAttached) OnContextMenu_PostSetter(this); };
                 return c;
             }
+        }
+
+        private EntityCollection<Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryEfImpl> _ContextMenuImplEntityCollection;
+        internal EntityCollection<Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryEfImpl> GetContextMenuImplCollection()
+        {
+            if (_ContextMenuImplEntityCollection == null)
+            {
+                _ContextMenuImplEntityCollection
+                    = ((IEntityWithRelationships)(this)).RelationshipManager
+                        .GetRelatedCollection<Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryEfImpl>(
+                            "Model.FK_Visual_hasContextMenu_ContextMenu_A",
+                            "CollectionEntry");
+                _ContextMenuImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("ContextMenu", null, null); if(OnContextMenu_PostSetter != null && IsAttached) OnContextMenu_PostSetter(this); };
+            }
+            return _ContextMenuImplEntityCollection;
         }
         private BSideCollectionWrapper<Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryEfImpl>> _ContextMenu;
 

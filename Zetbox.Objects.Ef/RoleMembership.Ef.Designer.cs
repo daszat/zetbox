@@ -73,18 +73,29 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryEfImpl>(
-                        "Model.FK_RoleMembership_resolves_Relations_A",
-                        "CollectionEntry");
+                var c = GetRelationsImplCollection();
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
                     && !c.IsLoaded)
                 {
                     c.Load();
                 }
-                c.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Relations", null, null); if(OnRelations_PostSetter != null && IsAttached) OnRelations_PostSetter(this); };
                 return c;
             }
+        }
+
+        private EntityCollection<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryEfImpl> _RelationsImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryEfImpl> GetRelationsImplCollection()
+        {
+            if (_RelationsImplEntityCollection == null)
+            {
+                _RelationsImplEntityCollection
+                    = ((IEntityWithRelationships)(this)).RelationshipManager
+                        .GetRelatedCollection<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryEfImpl>(
+                            "Model.FK_RoleMembership_resolves_Relations_A",
+                            "CollectionEntry");
+                _RelationsImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Relations", null, null); if(OnRelations_PostSetter != null && IsAttached) OnRelations_PostSetter(this); };
+            }
+            return _RelationsImplEntityCollection;
         }
         private BSideListWrapper<Zetbox.App.Base.RoleMembership, Zetbox.App.Base.Relation, Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryEfImpl, EntityCollection<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryEfImpl>> _Relations;
 
