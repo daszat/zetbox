@@ -172,16 +172,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Templates\Serialization\CollectionSerialization.cs" />
-    <Compile Include="Templates\Properties\EfListWrapper.cs">
-      <DependentUpon>EfListWrapper.cst</DependentUpon>
-    </Compile>
-    <Compile Include="Templates\Properties\EfListWrapper.Designer.cs">
-      <DependentUpon>EfListWrapper.cst</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Templates\Properties\IdProperty.cs" />
-    <Compile Include="Templates\Properties\ListProperty.cs" />
     <Compile Include="Templates\Properties\NotifyingEfProperties.cs" />
     <Compile Include="Templates\Properties\NotifyingValueProperty.cs" />
     <Compile Include="Templates\Properties\ObjectListProperty.Designer.cs">
@@ -290,10 +281,6 @@
     <None Include="Templates\Properties\EnumPropertyShim.cst">
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>EnumPropertyShim.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Templates\Properties\EfListWrapper.cst">
-      <Generator>Arebis Template Processor</Generator>
-      <LastGenOutput>EfListWrapper.Designer.cs</LastGenOutput>
     </None>
     <None Include="Templates\Properties\ObjectListProperty.cst">
       <Generator>Arebis Template Processor</Generator>
