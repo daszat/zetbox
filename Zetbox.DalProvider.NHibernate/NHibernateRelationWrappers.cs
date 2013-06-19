@@ -34,16 +34,28 @@ namespace Zetbox.DalProvider.NHibernate
         {
         }
 
+        public override void Add(TA item)
+        {
+            TEntry entry = CreateEntry(item);
+            OnEntryAdding(entry);
+            entry = InitialiseEntry(entry, item);
+            // Relations keep their collections synchronized by reacting to RelationEntry.A/B changes
+            //Collection.Add(entry);
+            //OnEntryAdded(entry);
+        }
+
         public override void AddWithoutSetParent(TEntry item)
         {
+            OnEntryAdding(item);
             Collection.Add(item);
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item));
+            OnEntryAdded(item);
         }
 
         public override void RemoveWithoutClearParent(TEntry item)
         {
+            OnEntryRemoving(item);
             Collection.Remove(item);
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, item));
+            OnEntryRemoved(item);
         }
 
         IEnumerator<IRelationEntry> IEnumerable<IRelationEntry>.GetEnumerator()
@@ -63,16 +75,28 @@ namespace Zetbox.DalProvider.NHibernate
         {
         }
 
+        public override void Add(TB item)
+        {
+            TEntry entry = CreateEntry(item);
+            OnEntryAdding(entry);
+            entry = InitialiseEntry(entry, item);
+            // Relations keep their collections synchronized by reacting to RelationEntry.A/B changes
+            //Collection.Add(entry);
+            //OnEntryAdded(entry);
+        }
+
         public override void AddWithoutSetParent(TEntry item)
         {
+            OnEntryAdding(item);
             Collection.Add(item);
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item));
+            OnEntryAdded(item);
         }
 
         public override void RemoveWithoutClearParent(TEntry item)
         {
+            OnEntryRemoving(item);
             Collection.Remove(item);
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, item));
+            OnEntryRemoved(item);
         }
 
         IEnumerator<IRelationEntry> IEnumerable<IRelationEntry>.GetEnumerator()
@@ -93,16 +117,28 @@ namespace Zetbox.DalProvider.NHibernate
         {
         }
 
+        public override void Add(TA item)
+        {
+            TEntry entry = CreateEntry(item);
+            OnEntryAdding(entry);
+            entry = InitialiseEntry(entry, item);
+            // Relations keep their collections synchronized by reacting to RelationEntry.A/B changes
+            //Collection.Add(entry);
+            //OnEntryAdded(entry);
+        }
+
         public override void AddWithoutSetParent(TEntry item)
         {
+            OnEntryAdding(item);
             Collection.Add(item);
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item));
+            OnEntryAdded(item);
         }
 
         public override void RemoveWithoutClearParent(TEntry item)
         {
+            OnEntryRemoving(item);
             Collection.Remove(item);
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, item));
+            OnEntryRemoved(item);
         }
 
         IEnumerator<IRelationEntry> IEnumerable<IRelationEntry>.GetEnumerator()
@@ -132,6 +168,16 @@ namespace Zetbox.DalProvider.NHibernate
         public NHibernateBSideListWrapper(TA parentObject, ICollection<TEntry> baseCollection)
             : base(parentObject, baseCollection)
         {
+        }
+
+        public override void Add(TB item)
+        {
+            TEntry entry = CreateEntry(item);
+            OnEntryAdding(entry);
+            entry = InitialiseEntry(entry, item);
+            // Relations keep their collections synchronized by reacting to RelationEntry.A/B changes
+            //Collection.Add(entry);
+            //OnEntryAdded(entry);
         }
 
         public override void AddWithoutSetParent(TEntry item)
