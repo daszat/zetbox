@@ -14,10 +14,10 @@
     You should have received a copy of the GNU Lesser General Public
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 --%>
-<%@ CodeTemplate Language="C#" 
-	Name="Properties.CollectionEntryListProperty"
-	ClassName="Zetbox.Generator.Templates.Properties.CollectionEntryListProperty" 
-	Inherits="Zetbox.Generator.MemberTemplate" %>
+<%@ CodeTemplate Language="C#"
+    Name="Properties.CollectionEntryListProperty"
+    ClassName="Zetbox.Generator.Templates.Properties.CollectionEntryListProperty"
+    Inherits="Zetbox.Generator.MemberTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="Zetbox.API" %>
 <%@ Import Namespace="Zetbox.API.Server" %>
@@ -40,59 +40,67 @@
 <%@ Parameter Name="eagerLoading" Type="bool" %>
 <%
     string taskName = "_triggerFetch" + name + "Task";
-   	string eventName = "On" + name + "_PostSetter";
+    string eventName = "On" + name + "_PostSetter";
 %>
-   		// <%= this.GetType() %>
-		<%= GetModifiers() %> <%= exposedCollectionInterface %><<%= referencedInterface %>> <%= name %>
-		{
-			get
-			{
-				if (<%= backingName %> == null)
-				{
+        // BEGIN <%= this.GetType() %> for <%= name %>
+        <%= GetModifiers() %> <%= exposedCollectionInterface %><<%= referencedInterface %>> <%= name %>
+        {
+            get
+            {
+                if (<%= backingName %> == null)
+                {
                     TriggerFetch<%= name %>Async().Wait();
-				}
-				return (<%= exposedCollectionInterface %><<%= referencedInterface %>>)<%= backingName %>;
-			}
-		}
-        
+                }
+                return (<%= exposedCollectionInterface %><<%= referencedInterface %>>)<%= backingName %>;
+            }
+        }
+
         Zetbox.API.Async.ZbTask <%= taskName %>;
         public Zetbox.API.Async.ZbTask TriggerFetch<%= name %>Async()
         {
             if (<%= taskName %> != null) return <%= taskName %>;
 <%
-	// eagerly loaded relation already has the objects loaded
-	if (!eagerLoading)
-	{
+    // eagerly loaded relation already has the objects loaded
+    if (!eagerLoading)
+    {
 %>
-			<%= taskName %> = Context.FetchRelationAsync<<%= entryType %>>(new Guid("<%= relId %>"), RelationEndRole.<%= role %>, this);
+            <%= taskName %> = Context.FetchRelationAsync<<%= entryType %>>(new Guid("<%= relId %>"), RelationEndRole.<%= role %>, this);
 <%
-	}
-	else
-	{
+    }
+    else
+    {
 %>
-			if (!<%= name %>_was_eagerLoaded) <%= taskName %> = Context.FetchRelationAsync<<%= entryType %>>(new Guid("<%= relId %>"), RelationEndRole.<%= role %>, this);
+            if (!<%= name %>_was_eagerLoaded) <%= taskName %> = Context.FetchRelationAsync<<%= entryType %>>(new Guid("<%= relId %>"), RelationEndRole.<%= role %>, this);
             else <%= taskName %> = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, null);
 <%
-	}
+    }
 %>
-			<%= taskName %>.OnResult(r => 
+            <%= taskName %>.OnResult(r =>
             {
-                <%= backingName %> 
-				= new <%= backingCollectionType %><<%= aSideType %>, <%= bSideType %>, <%= entryType %>, ICollection<<%= entryType %>>>(
-					this, 
-					new RelationshipFilter<%= role %>SideCollection<<%= entryType %>>(this.Context, this));
-                    <%= backingName %>.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("<%= name %>", null, null); if(<%= eventName %> != null && IsAttached) <%= eventName%>(this); };
+                <%= backingName %>
+                    = new <%= backingCollectionType %><<%= aSideType %>, <%= bSideType %>, <%= entryType %>, ICollection<<%= entryType %>>>(
+                        this,
+                        new RelationshipFilter<%= role %>SideCollection<<%= entryType %>>(this.Context, this));
+                        <%= backingName %>.CollectionChanged += (s, e) => { On<%= name %>CollectionChanged(); };
             });
             return <%= taskName %>;
         }
 
-		private <%= backingCollectionType %><<%= aSideType %>, <%= bSideType %>, <%= entryType %>, ICollection<<%= entryType %>>> <%= backingName %>;
+        internal void On<%= name %>CollectionChanged()
+        {
+            NotifyPropertyChanged("<%= name %>", null, null);
+            if (<%= eventName %> != null && IsAttached)
+                <%= eventName %>(this);
+        }
+
+        private <%= backingCollectionType %><<%= aSideType %>, <%= bSideType %>, <%= entryType %>, ICollection<<%= entryType %>>> <%= backingName %>;
 <%
-	if (eagerLoading)
-	{
-%>		
-		private bool <%= name %>_was_eagerLoaded = false;
+    if (eagerLoading)
+    {
+%>
+        private bool <%= name %>_was_eagerLoaded = false;
 <%
-	}
+    }
         AddSerialization(serializationList, name, eagerLoading);
 %>
+        // END <%= this.GetType() %> for <%= name %>

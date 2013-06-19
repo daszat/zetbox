@@ -40,7 +40,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Constrained
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Constrained
         // fkBackingName=_fk_Constrained; fkGuidBackingName=_fk_guid_Constrained;
         // referencedInterface=Zetbox.App.Base.DataType; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=Constraints; is list;

@@ -28,7 +28,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.Properties
 		protected string positionPropertyName;
 		protected string inverseNavigatorName;
 		protected bool inverseNavigatorIsList;
-		protected bool getInverseCollection;
+		protected bool notifyInverseCollection;
 		protected bool eagerLoading;
 		protected bool relDataTypeExportable;
 		protected bool callGetterSetterEvents;
@@ -36,14 +36,14 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.Properties
 		protected bool disableExport;
 
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Zetbox.Generator.Templates.Serialization.SerializationMembersList serializationList, string moduleNamespace, string ownInterface, string name, string implName, string eventName, string fkBackingName, string fkGuidBackingName, string referencedInterface, string referencedImplementation, string associationName, string targetRoleName, string positionPropertyName, string inverseNavigatorName, bool inverseNavigatorIsList, bool getInverseCollection, bool eagerLoading, bool relDataTypeExportable, bool callGetterSetterEvents, bool isCalculated, bool disableExport)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Zetbox.Generator.Templates.Serialization.SerializationMembersList serializationList, string moduleNamespace, string ownInterface, string name, string implName, string eventName, string fkBackingName, string fkGuidBackingName, string referencedInterface, string referencedImplementation, string associationName, string targetRoleName, string positionPropertyName, string inverseNavigatorName, bool inverseNavigatorIsList, bool notifyInverseCollection, bool eagerLoading, bool relDataTypeExportable, bool callGetterSetterEvents, bool isCalculated, bool disableExport)
         {
             if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
 
-            _host.CallTemplate("Properties.ObjectReferencePropertyTemplate", ctx, serializationList, moduleNamespace, ownInterface, name, implName, eventName, fkBackingName, fkGuidBackingName, referencedInterface, referencedImplementation, associationName, targetRoleName, positionPropertyName, inverseNavigatorName, inverseNavigatorIsList, getInverseCollection, eagerLoading, relDataTypeExportable, callGetterSetterEvents, isCalculated, disableExport);
+            _host.CallTemplate("Properties.ObjectReferencePropertyTemplate", ctx, serializationList, moduleNamespace, ownInterface, name, implName, eventName, fkBackingName, fkGuidBackingName, referencedInterface, referencedImplementation, associationName, targetRoleName, positionPropertyName, inverseNavigatorName, inverseNavigatorIsList, notifyInverseCollection, eagerLoading, relDataTypeExportable, callGetterSetterEvents, isCalculated, disableExport);
         }
 
-        public ObjectReferencePropertyTemplate(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Zetbox.Generator.Templates.Serialization.SerializationMembersList serializationList, string moduleNamespace, string ownInterface, string name, string implName, string eventName, string fkBackingName, string fkGuidBackingName, string referencedInterface, string referencedImplementation, string associationName, string targetRoleName, string positionPropertyName, string inverseNavigatorName, bool inverseNavigatorIsList, bool getInverseCollection, bool eagerLoading, bool relDataTypeExportable, bool callGetterSetterEvents, bool isCalculated, bool disableExport)
+        public ObjectReferencePropertyTemplate(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Zetbox.Generator.Templates.Serialization.SerializationMembersList serializationList, string moduleNamespace, string ownInterface, string name, string implName, string eventName, string fkBackingName, string fkGuidBackingName, string referencedInterface, string referencedImplementation, string associationName, string targetRoleName, string positionPropertyName, string inverseNavigatorName, bool inverseNavigatorIsList, bool notifyInverseCollection, bool eagerLoading, bool relDataTypeExportable, bool callGetterSetterEvents, bool isCalculated, bool disableExport)
             : base(_host)
         {
 			this.ctx = ctx;
@@ -62,7 +62,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.Properties
 			this.positionPropertyName = positionPropertyName;
 			this.inverseNavigatorName = inverseNavigatorName;
 			this.inverseNavigatorIsList = inverseNavigatorIsList;
-			this.getInverseCollection = getInverseCollection;
+			this.notifyInverseCollection = notifyInverseCollection;
 			this.eagerLoading = eagerLoading;
 			this.relDataTypeExportable = relDataTypeExportable;
 			this.callGetterSetterEvents = callGetterSetterEvents;
@@ -78,11 +78,11 @@ this.WriteObjects("        // BEGIN ",  this.GetType() , " for ",  name , "\r\n"
 this.WriteObjects("        // fkBackingName=",  fkBackingName , "; fkGuidBackingName=",  fkGuidBackingName , ";\r\n");
 this.WriteObjects("        // referencedInterface=",  referencedInterface , "; moduleNamespace=",  moduleNamespace , ";\r\n");
 #line 53 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-if (getInverseCollection && !String.IsNullOrEmpty(inverseNavigatorName)) { 
+if (notifyInverseCollection && !String.IsNullOrEmpty(inverseNavigatorName)) { 
 #line 54 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("        // will get inverse collection for notifications for ",  inverseNavigatorName , "\r\n");
 #line 55 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-} else if (!getInverseCollection && !String.IsNullOrEmpty(inverseNavigatorName)) { 
+} else if (!notifyInverseCollection && !String.IsNullOrEmpty(inverseNavigatorName)) { 
 #line 56 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("        // inverse Navigator=",  String.IsNullOrEmpty(inverseNavigatorName) ? "none" : inverseNavigatorName , "; ",  inverseNavigatorIsList ? "is list" : "is reference" , ";\r\n");
 #line 57 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
@@ -163,7 +163,7 @@ this.WriteObjects("                ",  referencedImplementation , " __oldValue =
 this.WriteObjects("                ",  referencedImplementation , " __newValue = (",  referencedImplementation , ")value;\r\n");
 this.WriteObjects("\r\n");
 #line 122 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-if (getInverseCollection && !String.IsNullOrEmpty(inverseNavigatorName)) { 
+if (notifyInverseCollection && !String.IsNullOrEmpty(inverseNavigatorName)) { 
 #line 123 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("                // fetch collection proxy and attach change notifications\r\n");
 this.WriteObjects("                if (__oldValue != null) __oldValue.Get",  inverseNavigatorName , "Collection();\r\n");
@@ -175,7 +175,7 @@ this.WriteObjects("\r\n");
 this.WriteObjects("                // Changing Event fires before anything is touched\r\n");
 this.WriteObjects("                NotifyPropertyChanging(\"",  name , "\", __oldValue, __newValue);\r\n");
 #line 130 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-if (!getInverseCollection && !String.IsNullOrEmpty(inverseNavigatorName)) { 
+if (!notifyInverseCollection && !String.IsNullOrEmpty(inverseNavigatorName)) { 
 #line 131 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("                if (__oldValue != null) {\r\n");
 this.WriteObjects("                    __oldValue.NotifyPropertyChanging(\"",  inverseNavigatorName , "\", null, null);\r\n");
@@ -217,7 +217,7 @@ this.WriteObjects("\r\n");
 this.WriteObjects("                // everything is done. fire the Changed event\r\n");
 this.WriteObjects("                NotifyPropertyChanged(\"",  name , "\", __oldValue, __newValue);\r\n");
 #line 160 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
-if (!getInverseCollection && !String.IsNullOrEmpty(inverseNavigatorName)) { 
+if (!notifyInverseCollection && !String.IsNullOrEmpty(inverseNavigatorName)) { 
 #line 161 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\Properties\ObjectReferencePropertyTemplate.cst"
 this.WriteObjects("                if (__oldValue != null) {\r\n");
 this.WriteObjects("                    __oldValue.NotifyPropertyChanged(\"",  inverseNavigatorName , "\", null, null);\r\n");

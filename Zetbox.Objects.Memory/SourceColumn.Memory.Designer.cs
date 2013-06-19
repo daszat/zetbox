@@ -40,10 +40,10 @@ namespace Zetbox.App.SchemaMigration
         /// <summary>
         /// Identity which changed this object
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.SchemaMigration;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -357,10 +357,10 @@ namespace Zetbox.App.SchemaMigration
         /// <summary>
         /// Identity which created this object
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.SchemaMigration;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -662,39 +662,46 @@ namespace Zetbox.App.SchemaMigration
         /// 
         /// </summary>
         // collection entry list property
-   		// Zetbox.Generator.Templates.Properties.CollectionEntryListProperty
-		public IList<Zetbox.App.Base.Property> DestinationProperty
-		{
-			get
-			{
-				if (_DestinationProperty == null)
-				{
+        // BEGIN Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for DestinationProperty
+        public IList<Zetbox.App.Base.Property> DestinationProperty
+        {
+            get
+            {
+                if (_DestinationProperty == null)
+                {
                     TriggerFetchDestinationPropertyAsync().Wait();
-				}
-				return (IList<Zetbox.App.Base.Property>)_DestinationProperty;
-			}
-		}
-        
+                }
+                return (IList<Zetbox.App.Base.Property>)_DestinationProperty;
+            }
+        }
+
         Zetbox.API.Async.ZbTask _triggerFetchDestinationPropertyTask;
         public Zetbox.API.Async.ZbTask TriggerFetchDestinationPropertyAsync()
         {
             if (_triggerFetchDestinationPropertyTask != null) return _triggerFetchDestinationPropertyTask;
-			if (!DestinationProperty_was_eagerLoaded) _triggerFetchDestinationPropertyTask = Context.FetchRelationAsync<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl>(new Guid("fb27e3f8-3615-4f3b-ae2a-2b89b8782e27"), RelationEndRole.A, this);
+            if (!DestinationProperty_was_eagerLoaded) _triggerFetchDestinationPropertyTask = Context.FetchRelationAsync<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl>(new Guid("fb27e3f8-3615-4f3b-ae2a-2b89b8782e27"), RelationEndRole.A, this);
             else _triggerFetchDestinationPropertyTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, null);
-			_triggerFetchDestinationPropertyTask.OnResult(r => 
+            _triggerFetchDestinationPropertyTask.OnResult(r =>
             {
-                _DestinationProperty 
-				= new ObservableBSideListWrapper<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.Base.Property, Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl, ICollection<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl>>(
-					this, 
-					new RelationshipFilterASideCollection<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl>(this.Context, this));
-                    _DestinationProperty.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("DestinationProperty", null, null); if(OnDestinationProperty_PostSetter != null && IsAttached) OnDestinationProperty_PostSetter(this); };
+                _DestinationProperty
+                    = new ObservableBSideListWrapper<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.Base.Property, Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl, ICollection<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl>>(
+                        this,
+                        new RelationshipFilterASideCollection<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl>(this.Context, this));
+                        _DestinationProperty.CollectionChanged += (s, e) => { OnDestinationPropertyCollectionChanged(); };
             });
             return _triggerFetchDestinationPropertyTask;
         }
 
-		private ObservableBSideListWrapper<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.Base.Property, Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl, ICollection<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl>> _DestinationProperty;
-		
-		private bool DestinationProperty_was_eagerLoaded = false;
+        internal void OnDestinationPropertyCollectionChanged()
+        {
+            NotifyPropertyChanged("DestinationProperty", null, null);
+            if (OnDestinationProperty_PostSetter != null && IsAttached)
+                OnDestinationProperty_PostSetter(this);
+        }
+
+        private ObservableBSideListWrapper<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.Base.Property, Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl, ICollection<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl>> _DestinationProperty;
+        private bool DestinationProperty_was_eagerLoaded = false;
+        // END Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for DestinationProperty
 public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.SourceColumn> OnDestinationProperty_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.SchemaMigration.SourceColumn> OnDestinationProperty_IsValid;
@@ -740,21 +747,27 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                     serverList = new List<Zetbox.App.SchemaMigration.SourceEnum>();
                 });
             }
-    
+
             _triggerFetchEnumEntriesTask.OnResult(t =>
             {
                 _EnumEntries = new OneNRelationList<Zetbox.App.SchemaMigration.SourceEnum>(
                     "SourceColumn",
                     null,
                     this,
-                    () => { this.NotifyPropertyChanged("EnumEntries", null, null); if(OnEnumEntries_PostSetter != null && IsAttached) OnEnumEntries_PostSetter(this); },
-                    serverList);    
+                    OnEnumEntriesCollectionChanged,
+                    serverList);
             });
-            return _triggerFetchEnumEntriesTask;    
+            return _triggerFetchEnumEntriesTask;
         }
-    
-        private OneNRelationList<Zetbox.App.SchemaMigration.SourceEnum> _EnumEntries;
 
+        internal void OnEnumEntriesCollectionChanged()
+        {
+            NotifyPropertyChanged("EnumEntries", null, null);
+            if (OnEnumEntries_PostSetter != null && IsAttached)
+                OnEnumEntries_PostSetter(this);
+        }
+
+        private OneNRelationList<Zetbox.App.SchemaMigration.SourceEnum> _EnumEntries;
 public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.SourceColumn> OnEnumEntries_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.SchemaMigration.SourceColumn> OnEnumEntries_IsValid;
@@ -949,7 +962,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         /// <summary>
         /// 
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for References
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for References
         // fkBackingName=_fk_References; fkGuidBackingName=_fk_guid_References;
         // referencedInterface=Zetbox.App.SchemaMigration.SourceColumn; moduleNamespace=Zetbox.App.SchemaMigration;
         // inverse Navigator=Referers; is list;
@@ -1119,21 +1132,27 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                     serverList = new List<Zetbox.App.SchemaMigration.SourceColumn>();
                 });
             }
-    
+
             _triggerFetchReferersTask.OnResult(t =>
             {
                 _Referers = new OneNRelationList<Zetbox.App.SchemaMigration.SourceColumn>(
                     "References",
                     null,
                     this,
-                    () => { this.NotifyPropertyChanged("Referers", null, null); if(OnReferers_PostSetter != null && IsAttached) OnReferers_PostSetter(this); },
-                    serverList);    
+                    OnReferersCollectionChanged,
+                    serverList);
             });
-            return _triggerFetchReferersTask;    
+            return _triggerFetchReferersTask;
         }
-    
-        private OneNRelationList<Zetbox.App.SchemaMigration.SourceColumn> _Referers;
 
+        internal void OnReferersCollectionChanged()
+        {
+            NotifyPropertyChanged("Referers", null, null);
+            if (OnReferers_PostSetter != null && IsAttached)
+                OnReferers_PostSetter(this);
+        }
+
+        private OneNRelationList<Zetbox.App.SchemaMigration.SourceColumn> _Referers;
 public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.SourceColumn> OnReferers_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.SchemaMigration.SourceColumn> OnReferers_IsValid;
@@ -1199,7 +1218,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         /// <summary>
         /// 
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for SourceTable
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for SourceTable
         // fkBackingName=_fk_SourceTable; fkGuidBackingName=_fk_guid_SourceTable;
         // referencedInterface=Zetbox.App.SchemaMigration.SourceTable; moduleNamespace=Zetbox.App.SchemaMigration;
         // inverse Navigator=SourceColumn; is list;

@@ -40,10 +40,10 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// Identity which changed this object
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -266,21 +266,27 @@ namespace Zetbox.App.GUI
                     serverList = new List<Zetbox.App.GUI.NavigationEntry>();
                 });
             }
-    
+
             _triggerFetchChildrenTask.OnResult(t =>
             {
                 _Children = new OneNRelationList<Zetbox.App.GUI.NavigationEntry>(
                     "Parent",
                     "Children_pos",
                     this,
-                    () => { this.NotifyPropertyChanged("Children", null, null); if(OnChildren_PostSetter != null && IsAttached) OnChildren_PostSetter(this); },
-                    serverList);    
+                    OnChildrenCollectionChanged,
+                    serverList);
             });
-            return _triggerFetchChildrenTask;    
+            return _triggerFetchChildrenTask;
         }
-    
-        private OneNRelationList<Zetbox.App.GUI.NavigationEntry> _Children;
 
+        internal void OnChildrenCollectionChanged()
+        {
+            NotifyPropertyChanged("Children", null, null);
+            if (OnChildren_PostSetter != null && IsAttached)
+                OnChildren_PostSetter(this);
+        }
+
+        private OneNRelationList<Zetbox.App.GUI.NavigationEntry> _Children;
 public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> OnChildren_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.NavigationEntry> OnChildren_IsValid;
@@ -346,10 +352,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         /// <summary>
         /// Identity which created this object
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -606,39 +612,46 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         /// 
         /// </summary>
         // collection entry list property
-   		// Zetbox.Generator.Templates.Properties.CollectionEntryListProperty
-		public ICollection<Zetbox.App.Base.Group> Groups
-		{
-			get
-			{
-				if (_Groups == null)
-				{
+        // BEGIN Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for Groups
+        public ICollection<Zetbox.App.Base.Group> Groups
+        {
+            get
+            {
+                if (_Groups == null)
+                {
                     TriggerFetchGroupsAsync().Wait();
-				}
-				return (ICollection<Zetbox.App.Base.Group>)_Groups;
-			}
-		}
-        
+                }
+                return (ICollection<Zetbox.App.Base.Group>)_Groups;
+            }
+        }
+
         Zetbox.API.Async.ZbTask _triggerFetchGroupsTask;
         public Zetbox.API.Async.ZbTask TriggerFetchGroupsAsync()
         {
             if (_triggerFetchGroupsTask != null) return _triggerFetchGroupsTask;
-			if (!Groups_was_eagerLoaded) _triggerFetchGroupsTask = Context.FetchRelationAsync<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl>(new Guid("b88c12ac-eabe-4aee-913e-5edd9d2a193a"), RelationEndRole.A, this);
+            if (!Groups_was_eagerLoaded) _triggerFetchGroupsTask = Context.FetchRelationAsync<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl>(new Guid("b88c12ac-eabe-4aee-913e-5edd9d2a193a"), RelationEndRole.A, this);
             else _triggerFetchGroupsTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, null);
-			_triggerFetchGroupsTask.OnResult(r => 
+            _triggerFetchGroupsTask.OnResult(r =>
             {
-                _Groups 
-				= new ObservableBSideCollectionWrapper<Zetbox.App.GUI.NavigationEntry, Zetbox.App.Base.Group, Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl>>(
-					this, 
-					new RelationshipFilterASideCollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl>(this.Context, this));
-                    _Groups.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Groups", null, null); if(OnGroups_PostSetter != null && IsAttached) OnGroups_PostSetter(this); };
+                _Groups
+                    = new ObservableBSideCollectionWrapper<Zetbox.App.GUI.NavigationEntry, Zetbox.App.Base.Group, Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl>>(
+                        this,
+                        new RelationshipFilterASideCollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl>(this.Context, this));
+                        _Groups.CollectionChanged += (s, e) => { OnGroupsCollectionChanged(); };
             });
             return _triggerFetchGroupsTask;
         }
 
-		private ObservableBSideCollectionWrapper<Zetbox.App.GUI.NavigationEntry, Zetbox.App.Base.Group, Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl>> _Groups;
-		
-		private bool Groups_was_eagerLoaded = false;
+        internal void OnGroupsCollectionChanged()
+        {
+            NotifyPropertyChanged("Groups", null, null);
+            if (OnGroups_PostSetter != null && IsAttached)
+                OnGroups_PostSetter(this);
+        }
+
+        private ObservableBSideCollectionWrapper<Zetbox.App.GUI.NavigationEntry, Zetbox.App.Base.Group, Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl>> _Groups;
+        private bool Groups_was_eagerLoaded = false;
+        // END Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for Groups
 public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> OnGroups_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.NavigationEntry> OnGroups_IsValid;
@@ -646,10 +659,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         /// <summary>
         /// 
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
         // fkBackingName=_fk_Module; fkGuidBackingName=_fk_guid_Module;
         // referencedInterface=Zetbox.App.Base.Module; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -762,7 +775,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         /// <summary>
         /// 
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
         // fkBackingName=_fk_Parent; fkGuidBackingName=_fk_guid_Parent;
         // referencedInterface=Zetbox.App.GUI.NavigationEntry; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=Children; is list;
@@ -925,10 +938,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         /// <summary>
         /// 
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedKind
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedKind
         // fkBackingName=_fk_RequestedKind; fkGuidBackingName=_fk_guid_RequestedKind;
         // referencedInterface=Zetbox.App.GUI.ControlKind; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -1099,10 +1112,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         /// <summary>
         /// 
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ViewModelDescriptor
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ViewModelDescriptor
         // fkBackingName=_fk_ViewModelDescriptor; fkGuidBackingName=_fk_guid_ViewModelDescriptor;
         // referencedInterface=Zetbox.App.GUI.ViewModelDescriptor; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 

@@ -40,10 +40,10 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Group
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Group
         // fkBackingName=_fk_Group; fkGuidBackingName=_fk_guid_Group;
         // referencedInterface=Zetbox.App.Base.Group; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 

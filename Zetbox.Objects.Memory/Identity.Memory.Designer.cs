@@ -157,36 +157,44 @@ namespace Zetbox.App.Base
         /// Identites are member of groups
         /// </summary>
         // collection entry list property
-   		// Zetbox.Generator.Templates.Properties.CollectionEntryListProperty
-		public ICollection<Zetbox.App.Base.Group> Groups
-		{
-			get
-			{
-				if (_Groups == null)
-				{
+        // BEGIN Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for Groups
+        public ICollection<Zetbox.App.Base.Group> Groups
+        {
+            get
+            {
+                if (_Groups == null)
+                {
                     TriggerFetchGroupsAsync().Wait();
-				}
-				return (ICollection<Zetbox.App.Base.Group>)_Groups;
-			}
-		}
-        
+                }
+                return (ICollection<Zetbox.App.Base.Group>)_Groups;
+            }
+        }
+
         Zetbox.API.Async.ZbTask _triggerFetchGroupsTask;
         public Zetbox.API.Async.ZbTask TriggerFetchGroupsAsync()
         {
             if (_triggerFetchGroupsTask != null) return _triggerFetchGroupsTask;
-			_triggerFetchGroupsTask = Context.FetchRelationAsync<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>(new Guid("3efb7ae8-ba6b-40e3-9482-b45d1c101743"), RelationEndRole.A, this);
-			_triggerFetchGroupsTask.OnResult(r => 
+            _triggerFetchGroupsTask = Context.FetchRelationAsync<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>(new Guid("3efb7ae8-ba6b-40e3-9482-b45d1c101743"), RelationEndRole.A, this);
+            _triggerFetchGroupsTask.OnResult(r =>
             {
-                _Groups 
-				= new ObservableBSideCollectionWrapper<Zetbox.App.Base.Identity, Zetbox.App.Base.Group, Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>>(
-					this, 
-					new RelationshipFilterASideCollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>(this.Context, this));
-                    _Groups.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Groups", null, null); if(OnGroups_PostSetter != null && IsAttached) OnGroups_PostSetter(this); };
+                _Groups
+                    = new ObservableBSideCollectionWrapper<Zetbox.App.Base.Identity, Zetbox.App.Base.Group, Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>>(
+                        this,
+                        new RelationshipFilterASideCollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>(this.Context, this));
+                        _Groups.CollectionChanged += (s, e) => { OnGroupsCollectionChanged(); };
             });
             return _triggerFetchGroupsTask;
         }
 
-		private ObservableBSideCollectionWrapper<Zetbox.App.Base.Identity, Zetbox.App.Base.Group, Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>> _Groups;
+        internal void OnGroupsCollectionChanged()
+        {
+            NotifyPropertyChanged("Groups", null, null);
+            if (OnGroups_PostSetter != null && IsAttached)
+                OnGroups_PostSetter(this);
+        }
+
+        private ObservableBSideCollectionWrapper<Zetbox.App.Base.Identity, Zetbox.App.Base.Group, Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>> _Groups;
+        // END Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for Groups
 public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroups_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.Identity> OnGroups_IsValid;

@@ -67,9 +67,11 @@ namespace Zetbox.Generator.Templates.CollectionEntries
             string positionPropertyName = rel.NeedsPositionStorage(endRole)
                 ? name + Zetbox.API.Helper.PositionSuffix
                 : null;
-            string inverseNavigatorName = null;
-            bool inverseNavigatorIsList = false;
-            bool getInverseCollection = false;
+            string inverseNavigatorName = relEnd.Navigator != null
+                ? relEnd.Navigator.Name
+                : null;
+            bool inverseNavigatorIsList = relEnd.Navigator != null && relEnd.Navigator.GetIsList();
+            bool notifyInverseCollection = true;
             bool eagerLoading = relEnd.Navigator != null && relEnd.Navigator.EagerLoading;
             bool relDataTypeExportable = rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable();
             bool callGetterSetterEvents = false;
@@ -91,7 +93,7 @@ namespace Zetbox.Generator.Templates.CollectionEntries
                 positionPropertyName,
                 inverseNavigatorName,
                 inverseNavigatorIsList,
-                getInverseCollection,
+                notifyInverseCollection,
                 eagerLoading,
                 relDataTypeExportable,
                 callGetterSetterEvents,

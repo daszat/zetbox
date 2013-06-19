@@ -40,10 +40,10 @@ namespace Zetbox.App.Test
         /// <summary>
         /// 
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Event
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Event
         // fkBackingName=_fk_Event; fkGuidBackingName=_fk_guid_Event;
         // referencedInterface=Zetbox.App.Calendar.Event; moduleNamespace=Zetbox.App.Test;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 

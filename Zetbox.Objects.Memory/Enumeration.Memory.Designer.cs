@@ -136,21 +136,27 @@ namespace Zetbox.App.Base
                     serverList = new List<Zetbox.App.Base.EnumerationEntry>();
                 });
             }
-    
+
             _triggerFetchEnumerationEntriesTask.OnResult(t =>
             {
                 _EnumerationEntries = new OneNRelationList<Zetbox.App.Base.EnumerationEntry>(
                     "Enumeration",
                     "EnumerationEntries_pos",
                     this,
-                    () => { this.NotifyPropertyChanged("EnumerationEntries", null, null); if(OnEnumerationEntries_PostSetter != null && IsAttached) OnEnumerationEntries_PostSetter(this); },
-                    serverList);    
+                    OnEnumerationEntriesCollectionChanged,
+                    serverList);
             });
-            return _triggerFetchEnumerationEntriesTask;    
+            return _triggerFetchEnumerationEntriesTask;
         }
-    
-        private OneNRelationList<Zetbox.App.Base.EnumerationEntry> _EnumerationEntries;
 
+        internal void OnEnumerationEntriesCollectionChanged()
+        {
+            NotifyPropertyChanged("EnumerationEntries", null, null);
+            if (OnEnumerationEntries_PostSetter != null && IsAttached)
+                OnEnumerationEntries_PostSetter(this);
+        }
+
+        private OneNRelationList<Zetbox.App.Base.EnumerationEntry> _EnumerationEntries;
 public static event PropertyListChangedHandler<Zetbox.App.Base.Enumeration> OnEnumerationEntries_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.Enumeration> OnEnumerationEntries_IsValid;

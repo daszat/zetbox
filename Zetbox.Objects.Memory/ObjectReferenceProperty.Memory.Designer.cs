@@ -170,36 +170,44 @@ namespace Zetbox.App.Base
         /// This property will show these methods
         /// </summary>
         // collection entry list property
-   		// Zetbox.Generator.Templates.Properties.CollectionEntryListProperty
-		public ICollection<Zetbox.App.Base.Method> Methods
-		{
-			get
-			{
-				if (_Methods == null)
-				{
+        // BEGIN Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for Methods
+        public ICollection<Zetbox.App.Base.Method> Methods
+        {
+            get
+            {
+                if (_Methods == null)
+                {
                     TriggerFetchMethodsAsync().Wait();
-				}
-				return (ICollection<Zetbox.App.Base.Method>)_Methods;
-			}
-		}
-        
+                }
+                return (ICollection<Zetbox.App.Base.Method>)_Methods;
+            }
+        }
+
         Zetbox.API.Async.ZbTask _triggerFetchMethodsTask;
         public Zetbox.API.Async.ZbTask TriggerFetchMethodsAsync()
         {
             if (_triggerFetchMethodsTask != null) return _triggerFetchMethodsTask;
-			_triggerFetchMethodsTask = Context.FetchRelationAsync<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>(new Guid("02b3e9d5-fc2e-4ffe-8867-0977b88437cc"), RelationEndRole.A, this);
-			_triggerFetchMethodsTask.OnResult(r => 
+            _triggerFetchMethodsTask = Context.FetchRelationAsync<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>(new Guid("02b3e9d5-fc2e-4ffe-8867-0977b88437cc"), RelationEndRole.A, this);
+            _triggerFetchMethodsTask.OnResult(r =>
             {
-                _Methods 
-				= new ObservableBSideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>>(
-					this, 
-					new RelationshipFilterASideCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>(this.Context, this));
-                    _Methods.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Methods", null, null); if(OnMethods_PostSetter != null && IsAttached) OnMethods_PostSetter(this); };
+                _Methods
+                    = new ObservableBSideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>>(
+                        this,
+                        new RelationshipFilterASideCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>(this.Context, this));
+                        _Methods.CollectionChanged += (s, e) => { OnMethodsCollectionChanged(); };
             });
             return _triggerFetchMethodsTask;
         }
 
-		private ObservableBSideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>> _Methods;
+        internal void OnMethodsCollectionChanged()
+        {
+            NotifyPropertyChanged("Methods", null, null);
+            if (OnMethods_PostSetter != null && IsAttached)
+                OnMethods_PostSetter(this);
+        }
+
+        private ObservableBSideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>> _Methods;
+        // END Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for Methods
 public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferenceProperty> OnMethods_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.ObjectReferenceProperty> OnMethods_IsValid;
@@ -207,7 +215,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
         /// <summary>
         /// The RelationEnd describing this Property
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RelationEnd
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RelationEnd
         // fkBackingName=_fk_RelationEnd; fkGuidBackingName=_fk_guid_RelationEnd;
         // referencedInterface=Zetbox.App.Base.RelationEnd; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=Navigator; is reference;

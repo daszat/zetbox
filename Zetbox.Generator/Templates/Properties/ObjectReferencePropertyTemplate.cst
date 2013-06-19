@@ -14,7 +14,7 @@
     You should have received a copy of the GNU Lesser General Public
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 --%>
-    <%@ CodeTemplate Language="C#"
+<%@ CodeTemplate Language="C#"
     Name="Properties.ObjectReferencePropertyTemplate"
     ClassName="Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate"
     Inherits="Zetbox.Generator.MemberTemplate" %>
@@ -41,7 +41,7 @@
 <%@ Parameter Name="positionPropertyName" Type="string" %>
 <%@ Parameter Name="inverseNavigatorName" Type="string" %>
 <%@ Parameter Name="inverseNavigatorIsList" Type="bool" %>
-<%@ Parameter Name="getInverseCollection" Type="bool" %>
+<%@ Parameter Name="notifyInverseCollection" Type="bool" %>
 <%@ Parameter Name="eagerLoading" Type="bool" %>
 <%@ Parameter Name="relDataTypeExportable" Type="bool" %>
 <%@ Parameter Name="callGetterSetterEvents" Type="bool" %>
@@ -53,7 +53,13 @@
         // BEGIN <%= this.GetType() %> for <%= name %>
         // fkBackingName=<%= fkBackingName %>; fkGuidBackingName=<%= fkGuidBackingName %>;
         // referencedInterface=<%= referencedInterface %>; moduleNamespace=<%= moduleNamespace %>;
+<% if (notifyInverseCollection && !String.IsNullOrEmpty(inverseNavigatorName)) { %>
+        // will get inverse collection for notifications for <%= inverseNavigatorName %>
+<% } else if (!notifyInverseCollection && !String.IsNullOrEmpty(inverseNavigatorName)) { %>
         // inverse Navigator=<%= String.IsNullOrEmpty(inverseNavigatorName) ? "none" : inverseNavigatorName %>; <%= inverseNavigatorIsList ? "is list" : "is reference" %>;
+<% } else { %>
+        // no inverse navigator handling
+<% } %>
         // PositionStorage=<%= String.IsNullOrEmpty(positionPropertyName) ? "none" : positionPropertyName %>;
         // Target <%= relDataTypeExportable ? String.Empty : "not " %>exportable; does <%= callGetterSetterEvents ? String.Empty : "not " %>call events
 
@@ -101,8 +107,8 @@
                     t.Result = e.Result;
                 }
             });
-<% }                                                                                                %>
 
+<% }                                                                                                %>
             return <%= taskName %>;
         }
 
@@ -133,6 +139,18 @@
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("<%= name %>", __oldValue, __newValue);
 
+<% if (notifyInverseCollection && !String.IsNullOrEmpty(inverseNavigatorName)) {                    %>
+                if (__oldValue != null)
+                {
+                    __oldValue.NotifyPropertyChanging("<%= inverseNavigatorName %>", null, null);
+                }
+
+                if (__newValue != null)
+                {
+                    __newValue.NotifyPropertyChanging("<%= inverseNavigatorName %>", null, null);
+                }
+
+<% }                                                                                                %>
 <% if (callGetterSetterEvents) {                                                                    %>
                 if (<%= eventName %>_PreSetter != null && IsAttached)
                 {
@@ -140,12 +158,20 @@
                     <%= eventName %>_PreSetter(this, e);
                     __newValue = (<%= referencedImplementation %>)e.Result;
                 }
-<% }                                                                                                %>
 
+<% }                                                                                                %>
                 // next, set the local reference
                 <%= fkBackingName %> = __newValue == null ? (int?)null : __newValue.ID;
 
-<% if (!String.IsNullOrEmpty(inverseNavigatorName)) {                                               %>
+<% if (notifyInverseCollection && !String.IsNullOrEmpty(inverseNavigatorName)) {                    %>
+                if (__oldValue != null)
+                    __oldValue.On<%= inverseNavigatorName %>CollectionChanged();
+
+                if (__newValue != null)
+                    __newValue.On<%= inverseNavigatorName %>CollectionChanged();
+
+<% }                                                                                                %>
+<% if (!notifyInverseCollection && !String.IsNullOrEmpty(inverseNavigatorName)) {                   %>
                 // now fixup redundant, inverse references
                 // The inverse navigator will also fire events when changed, so should
                 // only be touched after setting the local value above.
@@ -177,8 +203,8 @@
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("<%= name %>", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
-
 <% if (callGetterSetterEvents) {                                                                    %>
+
                 if (<%= eventName %>_PostSetter != null && IsAttached)
                 {
                     var e = new PropertyPostSetterEventArgs<<%= referencedInterface %>>(__oldValue, __newValue);

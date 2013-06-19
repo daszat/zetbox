@@ -14,9 +14,9 @@
     You should have received a copy of the GNU Lesser General Public
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 --%>
-<%@ CodeTemplate Language="C#"    
+<%@ CodeTemplate Language="C#"
     Name="Properties.ObjectListProperty"
-    ClassName="Zetbox.Generator.Templates.Properties.ObjectListProperty"    
+    ClassName="Zetbox.Generator.Templates.Properties.ObjectListProperty"
     Inherits="Zetbox.Generator.MemberTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="Zetbox.API" %>
@@ -43,11 +43,11 @@
 
     string idsListName = name + "Ids";
     string taskName = "_triggerFetch" + name + "Task";
-    
+
     // whether or not the collection will be eagerly loaded
     bool eagerLoading = relEnd.Navigator != null && relEnd.Navigator.EagerLoading;
 
-   	var eventName = "On" + name + "_PostSetter";
+    var eventName = "On" + name + "_PostSetter";
 %>
         // <%= this.GetType() %>
         // implement the user-visible interface
@@ -105,21 +105,27 @@
                     serverList = new List<<%= referencedInterface %>>();
                 });
             }
-    
+
             <%= taskName %>.OnResult(t =>
             {
                 <%= wrapperName %> = new <%= wrapperClass %><<%= referencedInterface %>>(
                     "<%= otherName %>",
                     <% if (!String.IsNullOrEmpty(positionPropertyName)) { %>"<%= positionPropertyName %>"<% } else { %>null<% } %>,
                     this,
-                    () => { this.NotifyPropertyChanged("<%= name %>", null, null); if(<%= eventName %> != null && IsAttached) <%= eventName%>(this); },
-                    serverList);    
+                    On<%= name %>CollectionChanged,
+                    serverList);
             });
-            return <%= taskName %>;    
+            return <%= taskName %>;
         }
-    
-        private <%= wrapperClass %><<%= referencedInterface %>> <%= wrapperName %>;
 
+        internal void On<%= name %>CollectionChanged()
+        {
+            NotifyPropertyChanged("<%= name %>", null, null);
+            if (<%= eventName %> != null && IsAttached)
+                <%= eventName %>(this);
+        }
+
+        private <%= wrapperClass %><<%= referencedInterface %>> <%= wrapperName %>;
 <%
     if (eagerLoading)
     {

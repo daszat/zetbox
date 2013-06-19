@@ -93,7 +93,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Properties
                 ? otherEnd.Navigator.Name
                 : null;
             bool inverseNavigatorIsList = otherEnd.Navigator != null && otherEnd.Navigator.GetIsList();
-            bool getInverseCollection = false;
+            bool notifyInverseCollection = false;
 
             bool eagerLoading = relEnd.Navigator != null && relEnd.Navigator.EagerLoading;
             bool relDataTypeExportable = rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable();
@@ -115,7 +115,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Properties
                 positionPropertyName,
                 inverseNavigatorName,
                 inverseNavigatorIsList,
-                getInverseCollection,
+                notifyInverseCollection,
                 eagerLoading,
                 relDataTypeExportable,
                 callGetterSetterEvents,

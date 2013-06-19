@@ -54,7 +54,7 @@ namespace Zetbox.App.Test
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Event
         // fkBackingName=this.Proxy.Event; fkGuidBackingName=_fk_guid_Event;
         // referencedInterface=Zetbox.App.Calendar.Event; moduleNamespace=Zetbox.App.Test;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 

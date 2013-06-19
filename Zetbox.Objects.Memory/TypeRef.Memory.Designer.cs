@@ -40,10 +40,10 @@ namespace Zetbox.App.Base
         /// <summary>
         /// The assembly containing the referenced Type.
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Assembly
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Assembly
         // fkBackingName=_fk_Assembly; fkGuidBackingName=_fk_guid_Assembly;
         // referencedInterface=Zetbox.App.Base.Assembly; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -156,10 +156,10 @@ namespace Zetbox.App.Base
         /// <summary>
         /// Identity which changed this object
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -344,10 +344,10 @@ namespace Zetbox.App.Base
         /// <summary>
         /// Identity which created this object
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -720,39 +720,46 @@ namespace Zetbox.App.Base
         /// list of type arguments
         /// </summary>
         // collection entry list property
-   		// Zetbox.Generator.Templates.Properties.CollectionEntryListProperty
-		public IList<Zetbox.App.Base.TypeRef> GenericArguments
-		{
-			get
-			{
-				if (_GenericArguments == null)
-				{
+        // BEGIN Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for GenericArguments
+        public IList<Zetbox.App.Base.TypeRef> GenericArguments
+        {
+            get
+            {
+                if (_GenericArguments == null)
+                {
                     TriggerFetchGenericArgumentsAsync().Wait();
-				}
-				return (IList<Zetbox.App.Base.TypeRef>)_GenericArguments;
-			}
-		}
-        
+                }
+                return (IList<Zetbox.App.Base.TypeRef>)_GenericArguments;
+            }
+        }
+
         Zetbox.API.Async.ZbTask _triggerFetchGenericArgumentsTask;
         public Zetbox.API.Async.ZbTask TriggerFetchGenericArgumentsAsync()
         {
             if (_triggerFetchGenericArgumentsTask != null) return _triggerFetchGenericArgumentsTask;
-			if (!GenericArguments_was_eagerLoaded) _triggerFetchGenericArgumentsTask = Context.FetchRelationAsync<Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl>(new Guid("8b41ffa4-8ffa-4d96-b4e5-708188045c71"), RelationEndRole.A, this);
+            if (!GenericArguments_was_eagerLoaded) _triggerFetchGenericArgumentsTask = Context.FetchRelationAsync<Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl>(new Guid("8b41ffa4-8ffa-4d96-b4e5-708188045c71"), RelationEndRole.A, this);
             else _triggerFetchGenericArgumentsTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, null);
-			_triggerFetchGenericArgumentsTask.OnResult(r => 
+            _triggerFetchGenericArgumentsTask.OnResult(r =>
             {
-                _GenericArguments 
-				= new ObservableBSideListWrapper<Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl>>(
-					this, 
-					new RelationshipFilterASideCollection<Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl>(this.Context, this));
-                    _GenericArguments.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("GenericArguments", null, null); if(OnGenericArguments_PostSetter != null && IsAttached) OnGenericArguments_PostSetter(this); };
+                _GenericArguments
+                    = new ObservableBSideListWrapper<Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl>>(
+                        this,
+                        new RelationshipFilterASideCollection<Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl>(this.Context, this));
+                        _GenericArguments.CollectionChanged += (s, e) => { OnGenericArgumentsCollectionChanged(); };
             });
             return _triggerFetchGenericArgumentsTask;
         }
 
-		private ObservableBSideListWrapper<Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl>> _GenericArguments;
-		
-		private bool GenericArguments_was_eagerLoaded = false;
+        internal void OnGenericArgumentsCollectionChanged()
+        {
+            NotifyPropertyChanged("GenericArguments", null, null);
+            if (OnGenericArguments_PostSetter != null && IsAttached)
+                OnGenericArguments_PostSetter(this);
+        }
+
+        private ObservableBSideListWrapper<Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl>> _GenericArguments;
+        private bool GenericArguments_was_eagerLoaded = false;
+        // END Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for GenericArguments
 public static event PropertyListChangedHandler<Zetbox.App.Base.TypeRef> OnGenericArguments_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.TypeRef> OnGenericArguments_IsValid;
@@ -760,10 +767,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.TypeRef> OnGeneri
         /// <summary>
         /// The TypeRef of the BaseClass of the referenced Type
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
         // fkBackingName=_fk_Parent; fkGuidBackingName=_fk_guid_Parent;
         // referencedInterface=Zetbox.App.Base.TypeRef; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 

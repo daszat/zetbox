@@ -78,21 +78,27 @@ namespace Zetbox.App.Test
                     serverList = new List<Zetbox.App.Test.SecurityTestChild>();
                 });
             }
-    
+
             _triggerFetchChildrenTask.OnResult(t =>
             {
                 _Children = new OneNRelationList<Zetbox.App.Test.SecurityTestChild>(
                     "Parent",
                     null,
                     this,
-                    () => { this.NotifyPropertyChanged("Children", null, null); if(OnChildren_PostSetter != null && IsAttached) OnChildren_PostSetter(this); },
-                    serverList);    
+                    OnChildrenCollectionChanged,
+                    serverList);
             });
-            return _triggerFetchChildrenTask;    
+            return _triggerFetchChildrenTask;
         }
-    
-        private OneNRelationList<Zetbox.App.Test.SecurityTestChild> _Children;
 
+        internal void OnChildrenCollectionChanged()
+        {
+            NotifyPropertyChanged("Children", null, null);
+            if (OnChildren_PostSetter != null && IsAttached)
+                OnChildren_PostSetter(this);
+        }
+
+        private OneNRelationList<Zetbox.App.Test.SecurityTestChild> _Children;
 public static event PropertyListChangedHandler<Zetbox.App.Test.SecurityTestParent> OnChildren_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.SecurityTestParent> OnChildren_IsValid;

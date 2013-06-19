@@ -78,21 +78,27 @@ namespace Zetbox.App.GUI
                     serverList = new List<Zetbox.App.GUI.ControlKind>();
                 });
             }
-    
+
             _triggerFetchChildControlKindsTask.OnResult(t =>
             {
                 _ChildControlKinds = new OneNRelationList<Zetbox.App.GUI.ControlKind>(
                     "Parent",
                     null,
                     this,
-                    () => { this.NotifyPropertyChanged("ChildControlKinds", null, null); if(OnChildControlKinds_PostSetter != null && IsAttached) OnChildControlKinds_PostSetter(this); },
-                    serverList);    
+                    OnChildControlKindsCollectionChanged,
+                    serverList);
             });
-            return _triggerFetchChildControlKindsTask;    
+            return _triggerFetchChildControlKindsTask;
         }
-    
-        private OneNRelationList<Zetbox.App.GUI.ControlKind> _ChildControlKinds;
 
+        internal void OnChildControlKindsCollectionChanged()
+        {
+            NotifyPropertyChanged("ChildControlKinds", null, null);
+            if (OnChildControlKinds_PostSetter != null && IsAttached)
+                OnChildControlKinds_PostSetter(this);
+        }
+
+        private OneNRelationList<Zetbox.App.GUI.ControlKind> _ChildControlKinds;
 public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChildControlKinds_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.ControlKind> OnChildControlKinds_IsValid;
@@ -171,10 +177,10 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
         /// <summary>
         /// 
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
         // fkBackingName=_fk_Module; fkGuidBackingName=_fk_guid_Module;
         // referencedInterface=Zetbox.App.Base.Module; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -345,7 +351,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
         /// <summary>
         /// 
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
         // fkBackingName=_fk_Parent; fkGuidBackingName=_fk_guid_Parent;
         // referencedInterface=Zetbox.App.GUI.ControlKind; moduleNamespace=Zetbox.App.GUI;
         // inverse Navigator=ChildControlKinds; is list;

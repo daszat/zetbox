@@ -41,7 +41,7 @@
 <%@ Parameter Name="positionPropertyName" Type="string" %>
 <%@ Parameter Name="inverseNavigatorName" Type="string" %>
 <%@ Parameter Name="inverseNavigatorIsList" Type="bool" %>
-<%@ Parameter Name="getInverseCollection" Type="bool" %>
+<%@ Parameter Name="notifyInverseCollection" Type="bool" %>
 <%@ Parameter Name="eagerLoading" Type="bool" %>
 <%@ Parameter Name="relDataTypeExportable" Type="bool" %>
 <%@ Parameter Name="callGetterSetterEvents" Type="bool" %>
@@ -50,9 +50,9 @@
         // BEGIN <%= this.GetType() %> for <%= name %>
         // fkBackingName=<%= fkBackingName %>; fkGuidBackingName=<%= fkGuidBackingName %>;
         // referencedInterface=<%= referencedInterface %>; moduleNamespace=<%= moduleNamespace %>;
-<% if (getInverseCollection && !String.IsNullOrEmpty(inverseNavigatorName)) { %>
+<% if (notifyInverseCollection && !String.IsNullOrEmpty(inverseNavigatorName)) { %>
         // will get inverse collection for notifications for <%= inverseNavigatorName %>
-<% } else if (!getInverseCollection && !String.IsNullOrEmpty(inverseNavigatorName)) { %>
+<% } else if (!notifyInverseCollection && !String.IsNullOrEmpty(inverseNavigatorName)) { %>
         // inverse Navigator=<%= String.IsNullOrEmpty(inverseNavigatorName) ? "none" : inverseNavigatorName %>; <%= inverseNavigatorIsList ? "is list" : "is reference" %>;
 <% } else { %>
         // no inverse navigator handling
@@ -119,7 +119,7 @@
                 <%= referencedImplementation %> __oldValue = (<%= referencedImplementation %>)r.Value;
                 <%= referencedImplementation %> __newValue = (<%= referencedImplementation %>)value;
 
-<% if (getInverseCollection && !String.IsNullOrEmpty(inverseNavigatorName)) { %>
+<% if (notifyInverseCollection && !String.IsNullOrEmpty(inverseNavigatorName)) { %>
                 // fetch collection proxy and attach change notifications
                 if (__oldValue != null) __oldValue.Get<%= inverseNavigatorName %>Collection();
                 if (__newValue != null) __newValue.Get<%= inverseNavigatorName %>Collection();
@@ -127,7 +127,7 @@
 <% } %>
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("<%= name %>", __oldValue, __newValue);
-<% if (!getInverseCollection && !String.IsNullOrEmpty(inverseNavigatorName)) { %>
+<% if (!notifyInverseCollection && !String.IsNullOrEmpty(inverseNavigatorName)) { %>
                 if (__oldValue != null) {
                     __oldValue.NotifyPropertyChanging("<%= inverseNavigatorName %>", null, null);
                 }
@@ -157,7 +157,7 @@
 <% } %>
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("<%= name %>", __oldValue, __newValue);
-<% if (!getInverseCollection && !String.IsNullOrEmpty(inverseNavigatorName)) { %>
+<% if (!notifyInverseCollection && !String.IsNullOrEmpty(inverseNavigatorName)) { %>
                 if (__oldValue != null) {
                     __oldValue.NotifyPropertyChanged("<%= inverseNavigatorName %>", null, null);
                 }

@@ -78,21 +78,27 @@ namespace Zetbox.App.Test
                     serverList = new List<Zetbox.App.Test.MethodTest>();
                 });
             }
-    
+
             _triggerFetchChildrenTask.OnResult(t =>
             {
                 _Children = new OneNRelationList<Zetbox.App.Test.MethodTest>(
                     "Parent",
                     null,
                     this,
-                    () => { this.NotifyPropertyChanged("Children", null, null); if(OnChildren_PostSetter != null && IsAttached) OnChildren_PostSetter(this); },
-                    serverList);    
+                    OnChildrenCollectionChanged,
+                    serverList);
             });
-            return _triggerFetchChildrenTask;    
+            return _triggerFetchChildrenTask;
         }
-    
-        private OneNRelationList<Zetbox.App.Test.MethodTest> _Children;
 
+        internal void OnChildrenCollectionChanged()
+        {
+            NotifyPropertyChanged("Children", null, null);
+            if (OnChildren_PostSetter != null && IsAttached)
+                OnChildren_PostSetter(this);
+        }
+
+        private OneNRelationList<Zetbox.App.Test.MethodTest> _Children;
 public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChildren_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.MethodTest> OnChildren_IsValid;
@@ -100,7 +106,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
         /// <summary>
         /// 
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
         // fkBackingName=_fk_Parent; fkGuidBackingName=_fk_guid_Parent;
         // referencedInterface=Zetbox.App.Test.MethodTest; moduleNamespace=Zetbox.App.Test;
         // inverse Navigator=Children; is list;

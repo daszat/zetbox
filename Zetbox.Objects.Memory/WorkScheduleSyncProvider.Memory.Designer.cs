@@ -40,10 +40,10 @@ namespace Zetbox.App.Calendar
         /// <summary>
         /// 
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Calendar
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Calendar
         // fkBackingName=_fk_Calendar; fkGuidBackingName=_fk_guid_Calendar;
         // referencedInterface=Zetbox.App.Calendar.CalendarBook; moduleNamespace=Zetbox.App.Calendar;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -155,10 +155,10 @@ namespace Zetbox.App.Calendar
         /// <summary>
         /// 
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for WorkSchedule
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for WorkSchedule
         // fkBackingName=_fk_WorkSchedule; fkGuidBackingName=_fk_guid_WorkSchedule;
         // referencedInterface=Zetbox.App.Calendar.WorkSchedule; moduleNamespace=Zetbox.App.Calendar;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 

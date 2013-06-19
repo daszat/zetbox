@@ -65,7 +65,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries
                 positionPropertyName,
                 inverseNavigatorName,
                 inverseNavigatorIsList: true,
-                getInverseCollection: false,
+                notifyInverseCollection: false,
                 eagerLoading: false,
                 relDataTypeExportable: false,
                 callGetterSetterEvents: false,

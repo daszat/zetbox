@@ -54,7 +54,7 @@ namespace Zetbox.App.Calendar
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Calendar
         // fkBackingName=this.Proxy.Calendar; fkGuidBackingName=_fk_guid_Calendar;
         // referencedInterface=Zetbox.App.Calendar.CalendarBook; moduleNamespace=Zetbox.App.Calendar;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -152,7 +152,7 @@ namespace Zetbox.App.Calendar
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for WorkSchedule
         // fkBackingName=this.Proxy.WorkSchedule; fkGuidBackingName=_fk_guid_WorkSchedule;
         // referencedInterface=Zetbox.App.Calendar.WorkSchedule; moduleNamespace=Zetbox.App.Calendar;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 

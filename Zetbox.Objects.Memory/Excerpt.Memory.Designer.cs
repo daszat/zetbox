@@ -40,7 +40,7 @@ namespace at.dasz.DocumentManagement
         /// <summary>
         /// 
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for File
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for File
         // fkBackingName=_fk_File; fkGuidBackingName=_fk_guid_File;
         // referencedInterface=at.dasz.DocumentManagement.File; moduleNamespace=at.dasz.DocumentManagement;
         // inverse Navigator=Excerpt; is reference;

@@ -89,21 +89,27 @@ namespace Zetbox.App.Test
                     serverList = new List<Zetbox.App.Test.Antwort>();
                 });
             }
-    
+
             _triggerFetchAntwortenTask.OnResult(t =>
             {
                 _Antworten = new OneNRelationList<Zetbox.App.Test.Antwort>(
                     "Fragebogen",
                     "gute_Antworten_pos",
                     this,
-                    () => { this.NotifyPropertyChanged("Antworten", null, null); if(OnAntworten_PostSetter != null && IsAttached) OnAntworten_PostSetter(this); },
-                    serverList);    
+                    OnAntwortenCollectionChanged,
+                    serverList);
             });
-            return _triggerFetchAntwortenTask;    
+            return _triggerFetchAntwortenTask;
         }
-    
-        private OneNRelationList<Zetbox.App.Test.Antwort> _Antworten;
 
+        internal void OnAntwortenCollectionChanged()
+        {
+            NotifyPropertyChanged("Antworten", null, null);
+            if (OnAntworten_PostSetter != null && IsAttached)
+                OnAntworten_PostSetter(this);
+        }
+
+        private OneNRelationList<Zetbox.App.Test.Antwort> _Antworten;
         private List<int> AntwortenIds;
         private bool Antworten_was_eagerLoaded = false;
 public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAntworten_PostSetter;
@@ -172,36 +178,44 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
         /// 
         /// </summary>
         // collection entry list property
-   		// Zetbox.Generator.Templates.Properties.CollectionEntryListProperty
-		public ICollection<Zetbox.App.Test.TestStudent> Student
-		{
-			get
-			{
-				if (_Student == null)
-				{
+        // BEGIN Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for Student
+        public ICollection<Zetbox.App.Test.TestStudent> Student
+        {
+            get
+            {
+                if (_Student == null)
+                {
                     TriggerFetchStudentAsync().Wait();
-				}
-				return (ICollection<Zetbox.App.Test.TestStudent>)_Student;
-			}
-		}
-        
+                }
+                return (ICollection<Zetbox.App.Test.TestStudent>)_Student;
+            }
+        }
+
         Zetbox.API.Async.ZbTask _triggerFetchStudentTask;
         public Zetbox.API.Async.ZbTask TriggerFetchStudentAsync()
         {
             if (_triggerFetchStudentTask != null) return _triggerFetchStudentTask;
-			_triggerFetchStudentTask = Context.FetchRelationAsync<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>(new Guid("6819ca86-571c-4d59-bc30-cc1fb0decc9e"), RelationEndRole.B, this);
-			_triggerFetchStudentTask.OnResult(r => 
+            _triggerFetchStudentTask = Context.FetchRelationAsync<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>(new Guid("6819ca86-571c-4d59-bc30-cc1fb0decc9e"), RelationEndRole.B, this);
+            _triggerFetchStudentTask.OnResult(r =>
             {
-                _Student 
-				= new ObservableASideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>>(
-					this, 
-					new RelationshipFilterBSideCollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>(this.Context, this));
-                    _Student.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Student", null, null); if(OnStudent_PostSetter != null && IsAttached) OnStudent_PostSetter(this); };
+                _Student
+                    = new ObservableASideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>>(
+                        this,
+                        new RelationshipFilterBSideCollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>(this.Context, this));
+                        _Student.CollectionChanged += (s, e) => { OnStudentCollectionChanged(); };
             });
             return _triggerFetchStudentTask;
         }
 
-		private ObservableASideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>> _Student;
+        internal void OnStudentCollectionChanged()
+        {
+            NotifyPropertyChanged("Student", null, null);
+            if (OnStudent_PostSetter != null && IsAttached)
+                OnStudent_PostSetter(this);
+        }
+
+        private ObservableASideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>> _Student;
+        // END Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for Student
 public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnStudent_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.Fragebogen> OnStudent_IsValid;

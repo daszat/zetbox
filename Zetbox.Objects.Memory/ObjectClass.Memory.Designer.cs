@@ -78,21 +78,27 @@ namespace Zetbox.App.Base
                     serverList = new List<Zetbox.App.Base.AccessControl>();
                 });
             }
-    
+
             _triggerFetchAccessControlListTask.OnResult(t =>
             {
                 _AccessControlList = new OneNRelationList<Zetbox.App.Base.AccessControl>(
                     "ObjectClass",
                     null,
                     this,
-                    () => { this.NotifyPropertyChanged("AccessControlList", null, null); if(OnAccessControlList_PostSetter != null && IsAttached) OnAccessControlList_PostSetter(this); },
-                    serverList);    
+                    OnAccessControlListCollectionChanged,
+                    serverList);
             });
-            return _triggerFetchAccessControlListTask;    
+            return _triggerFetchAccessControlListTask;
         }
-    
-        private OneNRelationList<Zetbox.App.Base.AccessControl> _AccessControlList;
 
+        internal void OnAccessControlListCollectionChanged()
+        {
+            NotifyPropertyChanged("AccessControlList", null, null);
+            if (OnAccessControlList_PostSetter != null && IsAttached)
+                OnAccessControlList_PostSetter(this);
+        }
+
+        private OneNRelationList<Zetbox.App.Base.AccessControl> _AccessControlList;
 public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAccessControlList_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.ObjectClass> OnAccessControlList_IsValid;
@@ -100,7 +106,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         /// <summary>
         /// Pointer auf die Basisklasse
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for BaseObjectClass
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for BaseObjectClass
         // fkBackingName=_fk_BaseObjectClass; fkGuidBackingName=_fk_guid_BaseObjectClass;
         // referencedInterface=Zetbox.App.Base.ObjectClass; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=SubClasses; is list;
@@ -277,10 +283,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         /// <summary>
         /// The default ViewModel to use for this ObjectClass
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultViewModelDescriptor
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultViewModelDescriptor
         // fkBackingName=_fk_DefaultViewModelDescriptor; fkGuidBackingName=_fk_guid_DefaultViewModelDescriptor;
         // referencedInterface=Zetbox.App.GUI.ViewModelDescriptor; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -431,21 +437,27 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
                     serverList = new List<Zetbox.App.GUI.ObjectClassFilterConfiguration>();
                 });
             }
-    
+
             _triggerFetchFilterConfigurationsTask.OnResult(t =>
             {
                 _FilterConfigurations = new OneNRelationList<Zetbox.App.GUI.ObjectClassFilterConfiguration>(
                     "ObjectClass",
                     null,
                     this,
-                    () => { this.NotifyPropertyChanged("FilterConfigurations", null, null); if(OnFilterConfigurations_PostSetter != null && IsAttached) OnFilterConfigurations_PostSetter(this); },
-                    serverList);    
+                    OnFilterConfigurationsCollectionChanged,
+                    serverList);
             });
-            return _triggerFetchFilterConfigurationsTask;    
+            return _triggerFetchFilterConfigurationsTask;
         }
-    
-        private OneNRelationList<Zetbox.App.GUI.ObjectClassFilterConfiguration> _FilterConfigurations;
 
+        internal void OnFilterConfigurationsCollectionChanged()
+        {
+            NotifyPropertyChanged("FilterConfigurations", null, null);
+            if (OnFilterConfigurations_PostSetter != null && IsAttached)
+                OnFilterConfigurations_PostSetter(this);
+        }
+
+        private OneNRelationList<Zetbox.App.GUI.ObjectClassFilterConfiguration> _FilterConfigurations;
 public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFilterConfigurations_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.ObjectClass> OnFilterConfigurations_IsValid;
@@ -704,21 +716,27 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
                     serverList = new List<Zetbox.App.Base.ObjectClass>();
                 });
             }
-    
+
             _triggerFetchSubClassesTask.OnResult(t =>
             {
                 _SubClasses = new OneNRelationList<Zetbox.App.Base.ObjectClass>(
                     "BaseObjectClass",
                     null,
                     this,
-                    () => { this.NotifyPropertyChanged("SubClasses", null, null); if(OnSubClasses_PostSetter != null && IsAttached) OnSubClasses_PostSetter(this); },
-                    serverList);    
+                    OnSubClassesCollectionChanged,
+                    serverList);
             });
-            return _triggerFetchSubClassesTask;    
+            return _triggerFetchSubClassesTask;
         }
-    
-        private OneNRelationList<Zetbox.App.Base.ObjectClass> _SubClasses;
 
+        internal void OnSubClassesCollectionChanged()
+        {
+            NotifyPropertyChanged("SubClasses", null, null);
+            if (OnSubClasses_PostSetter != null && IsAttached)
+                OnSubClasses_PostSetter(this);
+        }
+
+        private OneNRelationList<Zetbox.App.Base.ObjectClass> _SubClasses;
 public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSubClasses_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.ObjectClass> OnSubClasses_IsValid;

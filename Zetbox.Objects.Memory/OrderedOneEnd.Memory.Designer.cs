@@ -78,21 +78,27 @@ namespace Zetbox.App.Test
                     serverList = new List<Zetbox.App.Test.OrderedNEnd>();
                 });
             }
-    
+
             _triggerFetchNEndsTask.OnResult(t =>
             {
                 _NEnds = new OneNRelationList<Zetbox.App.Test.OrderedNEnd>(
                     "OneEnd",
                     "NEnds_pos",
                     this,
-                    () => { this.NotifyPropertyChanged("NEnds", null, null); if(OnNEnds_PostSetter != null && IsAttached) OnNEnds_PostSetter(this); },
-                    serverList);    
+                    OnNEndsCollectionChanged,
+                    serverList);
             });
-            return _triggerFetchNEndsTask;    
+            return _triggerFetchNEndsTask;
         }
-    
-        private OneNRelationList<Zetbox.App.Test.OrderedNEnd> _NEnds;
 
+        internal void OnNEndsCollectionChanged()
+        {
+            NotifyPropertyChanged("NEnds", null, null);
+            if (OnNEnds_PostSetter != null && IsAttached)
+                OnNEnds_PostSetter(this);
+        }
+
+        private OneNRelationList<Zetbox.App.Test.OrderedNEnd> _NEnds;
 public static event PropertyListChangedHandler<Zetbox.App.Test.OrderedOneEnd> OnNEnds_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.OrderedOneEnd> OnNEnds_IsValid;

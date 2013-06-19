@@ -40,10 +40,10 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// 
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ControlKind
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ControlKind
         // fkBackingName=_fk_ControlKind; fkGuidBackingName=_fk_guid_ControlKind;
         // referencedInterface=Zetbox.App.GUI.ControlKind; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -156,10 +156,10 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// The control implementing this View
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ControlRef
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ControlRef
         // fkBackingName=_fk_ControlRef; fkGuidBackingName=_fk_guid_ControlRef;
         // referencedInterface=Zetbox.App.Base.TypeRef; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -472,10 +472,10 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// 
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
         // fkBackingName=_fk_Module; fkGuidBackingName=_fk_guid_Module;
         // referencedInterface=Zetbox.App.Base.Module; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -589,39 +589,46 @@ namespace Zetbox.App.GUI
         /// A View supports one or more ViewModels
         /// </summary>
         // collection entry list property
-   		// Zetbox.Generator.Templates.Properties.CollectionEntryListProperty
-		public ICollection<Zetbox.App.Base.TypeRef> SupportedViewModels
-		{
-			get
-			{
-				if (_SupportedViewModels == null)
-				{
+        // BEGIN Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for SupportedViewModels
+        public ICollection<Zetbox.App.Base.TypeRef> SupportedViewModels
+        {
+            get
+            {
+                if (_SupportedViewModels == null)
+                {
                     TriggerFetchSupportedViewModelsAsync().Wait();
-				}
-				return (ICollection<Zetbox.App.Base.TypeRef>)_SupportedViewModels;
-			}
-		}
-        
+                }
+                return (ICollection<Zetbox.App.Base.TypeRef>)_SupportedViewModels;
+            }
+        }
+
         Zetbox.API.Async.ZbTask _triggerFetchSupportedViewModelsTask;
         public Zetbox.API.Async.ZbTask TriggerFetchSupportedViewModelsAsync()
         {
             if (_triggerFetchSupportedViewModelsTask != null) return _triggerFetchSupportedViewModelsTask;
-			if (!SupportedViewModels_was_eagerLoaded) _triggerFetchSupportedViewModelsTask = Context.FetchRelationAsync<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl>(new Guid("786dae2f-cb6e-454d-93fd-192541df928d"), RelationEndRole.A, this);
+            if (!SupportedViewModels_was_eagerLoaded) _triggerFetchSupportedViewModelsTask = Context.FetchRelationAsync<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl>(new Guid("786dae2f-cb6e-454d-93fd-192541df928d"), RelationEndRole.A, this);
             else _triggerFetchSupportedViewModelsTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, null);
-			_triggerFetchSupportedViewModelsTask.OnResult(r => 
+            _triggerFetchSupportedViewModelsTask.OnResult(r =>
             {
-                _SupportedViewModels 
-				= new ObservableBSideCollectionWrapper<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.Base.TypeRef, Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl>>(
-					this, 
-					new RelationshipFilterASideCollection<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl>(this.Context, this));
-                    _SupportedViewModels.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("SupportedViewModels", null, null); if(OnSupportedViewModels_PostSetter != null && IsAttached) OnSupportedViewModels_PostSetter(this); };
+                _SupportedViewModels
+                    = new ObservableBSideCollectionWrapper<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.Base.TypeRef, Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl>>(
+                        this,
+                        new RelationshipFilterASideCollection<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl>(this.Context, this));
+                        _SupportedViewModels.CollectionChanged += (s, e) => { OnSupportedViewModelsCollectionChanged(); };
             });
             return _triggerFetchSupportedViewModelsTask;
         }
 
-		private ObservableBSideCollectionWrapper<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.Base.TypeRef, Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl>> _SupportedViewModels;
-		
-		private bool SupportedViewModels_was_eagerLoaded = false;
+        internal void OnSupportedViewModelsCollectionChanged()
+        {
+            NotifyPropertyChanged("SupportedViewModels", null, null);
+            if (OnSupportedViewModels_PostSetter != null && IsAttached)
+                OnSupportedViewModels_PostSetter(this);
+        }
+
+        private ObservableBSideCollectionWrapper<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.Base.TypeRef, Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl>> _SupportedViewModels;
+        private bool SupportedViewModels_was_eagerLoaded = false;
+        // END Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for SupportedViewModels
 public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewDescriptor> OnSupportedViewModels_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.ViewDescriptor> OnSupportedViewModels_IsValid;

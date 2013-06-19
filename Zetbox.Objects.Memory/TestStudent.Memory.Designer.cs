@@ -99,36 +99,44 @@ namespace Zetbox.App.Test
         /// 
         /// </summary>
         // collection entry list property
-   		// Zetbox.Generator.Templates.Properties.CollectionEntryListProperty
-		public ICollection<Zetbox.App.Test.Fragebogen> Testbogen
-		{
-			get
-			{
-				if (_Testbogen == null)
-				{
+        // BEGIN Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for Testbogen
+        public ICollection<Zetbox.App.Test.Fragebogen> Testbogen
+        {
+            get
+            {
+                if (_Testbogen == null)
+                {
                     TriggerFetchTestbogenAsync().Wait();
-				}
-				return (ICollection<Zetbox.App.Test.Fragebogen>)_Testbogen;
-			}
-		}
-        
+                }
+                return (ICollection<Zetbox.App.Test.Fragebogen>)_Testbogen;
+            }
+        }
+
         Zetbox.API.Async.ZbTask _triggerFetchTestbogenTask;
         public Zetbox.API.Async.ZbTask TriggerFetchTestbogenAsync()
         {
             if (_triggerFetchTestbogenTask != null) return _triggerFetchTestbogenTask;
-			_triggerFetchTestbogenTask = Context.FetchRelationAsync<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>(new Guid("6819ca86-571c-4d59-bc30-cc1fb0decc9e"), RelationEndRole.A, this);
-			_triggerFetchTestbogenTask.OnResult(r => 
+            _triggerFetchTestbogenTask = Context.FetchRelationAsync<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>(new Guid("6819ca86-571c-4d59-bc30-cc1fb0decc9e"), RelationEndRole.A, this);
+            _triggerFetchTestbogenTask.OnResult(r =>
             {
-                _Testbogen 
-				= new ObservableBSideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>>(
-					this, 
-					new RelationshipFilterASideCollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>(this.Context, this));
-                    _Testbogen.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Testbogen", null, null); if(OnTestbogen_PostSetter != null && IsAttached) OnTestbogen_PostSetter(this); };
+                _Testbogen
+                    = new ObservableBSideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>>(
+                        this,
+                        new RelationshipFilterASideCollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>(this.Context, this));
+                        _Testbogen.CollectionChanged += (s, e) => { OnTestbogenCollectionChanged(); };
             });
             return _triggerFetchTestbogenTask;
         }
 
-		private ObservableBSideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>> _Testbogen;
+        internal void OnTestbogenCollectionChanged()
+        {
+            NotifyPropertyChanged("Testbogen", null, null);
+            if (OnTestbogen_PostSetter != null && IsAttached)
+                OnTestbogen_PostSetter(this);
+        }
+
+        private ObservableBSideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>> _Testbogen;
+        // END Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for Testbogen
 public static event PropertyListChangedHandler<Zetbox.App.Test.TestStudent> OnTestbogen_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.TestStudent> OnTestbogen_IsValid;

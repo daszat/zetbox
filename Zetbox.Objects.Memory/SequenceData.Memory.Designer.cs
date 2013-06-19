@@ -98,7 +98,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Sequence
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Sequence
         // fkBackingName=_fk_Sequence; fkGuidBackingName=_fk_guid_Sequence;
         // referencedInterface=Zetbox.App.Base.Sequence; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=Data; is reference;

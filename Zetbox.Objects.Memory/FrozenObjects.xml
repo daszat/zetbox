@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-05-15T16:23:01.05201Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-05-15T16:23:01Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -585,22 +585,22 @@ public static void ObjectIsValid(YearlyCalendarRule obj, ObjectIsValidEventArgs 
     <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-04-30T13:35:44.545868Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_ChangedBy(CalendarBook obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
+public static void get_ChangedBy(Calendar obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_ChangedBy(CalendarBook obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
+public static void preSet_ChangedBy(Calendar obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_ChangedBy(CalendarBook obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
+public static void postSet_ChangedBy(Calendar obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_ChangedBy(CalendarBook obj, PropertyIsValidEventArgs e)
+public static void isValid_ChangedBy(Calendar obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.ChangedBy == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -621,22 +621,22 @@ public static void isValid_ChangedBy(CalendarBook obj, PropertyIsValidEventArgs 
     <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-04-30T13:35:44.545868Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_ChangedOn(CalendarBook obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
+public static void get_ChangedOn(Calendar obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_ChangedOn(CalendarBook obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
+public static void preSet_ChangedOn(Calendar obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_ChangedOn(CalendarBook obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
+public static void postSet_ChangedOn(Calendar obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_ChangedOn(CalendarBook obj, PropertyIsValidEventArgs e)
+public static void isValid_ChangedOn(Calendar obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.ChangedOn == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -659,22 +659,22 @@ public static void isValid_ChangedOn(CalendarBook obj, PropertyIsValidEventArgs 
     <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-04-30T13:35:44.545868Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_CreatedBy(CalendarBook obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
+public static void get_CreatedBy(Calendar obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_CreatedBy(CalendarBook obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
+public static void preSet_CreatedBy(Calendar obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_CreatedBy(CalendarBook obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
+public static void postSet_CreatedBy(Calendar obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_CreatedBy(CalendarBook obj, PropertyIsValidEventArgs e)
+public static void isValid_CreatedBy(Calendar obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.CreatedBy == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -695,22 +695,22 @@ public static void isValid_CreatedBy(CalendarBook obj, PropertyIsValidEventArgs 
     <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-04-30T13:35:44.545868Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_CreatedOn(CalendarBook obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
+public static void get_CreatedOn(Calendar obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_CreatedOn(CalendarBook obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
+public static void preSet_CreatedOn(Calendar obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_CreatedOn(CalendarBook obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
+public static void postSet_CreatedOn(Calendar obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_CreatedOn(CalendarBook obj, PropertyIsValidEventArgs e)
+public static void isValid_CreatedOn(Calendar obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.CreatedOn == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -733,22 +733,22 @@ public static void isValid_CreatedOn(CalendarBook obj, PropertyIsValidEventArgs 
     <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-04-30T13:35:44.545868Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_ExportGuid(CalendarBook obj, PropertyGetterEventArgs&lt;Guid&gt; e)
+public static void get_ExportGuid(Calendar obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_ExportGuid(CalendarBook obj, PropertyPreSetterEventArgs&lt;Guid&gt; e)
+public static void preSet_ExportGuid(Calendar obj, PropertyPreSetterEventArgs&lt;Guid&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_ExportGuid(CalendarBook obj, PropertyPostSetterEventArgs&lt;Guid&gt; e)
+public static void postSet_ExportGuid(Calendar obj, PropertyPostSetterEventArgs&lt;Guid&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_ExportGuid(CalendarBook obj, PropertyIsValidEventArgs e)
+public static void isValid_ExportGuid(Calendar obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.ExportGuid == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -771,22 +771,22 @@ public static void isValid_ExportGuid(CalendarBook obj, PropertyIsValidEventArgs
     <ZetboxBase:CategoryTags>Main</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-02-18T16:49:56.234449Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_GroupReaders(CalendarBook obj, PropertyGetterEventArgs&lt;ICollection&lt;Zetbox.App.Base.Group&gt;&gt; e)
+public static void get_GroupReaders(Calendar obj, PropertyGetterEventArgs&lt;ICollection&lt;Zetbox.App.Base.Group&gt;&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_GroupReaders(CalendarBook obj, PropertyPreSetterEventArgs&lt;ICollection&lt;Zetbox.App.Base.Group&gt;&gt; e)
+public static void preSet_GroupReaders(Calendar obj, PropertyPreSetterEventArgs&lt;ICollection&lt;Zetbox.App.Base.Group&gt;&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_GroupReaders(CalendarBook obj, PropertyPostSetterEventArgs&lt;ICollection&lt;Zetbox.App.Base.Group&gt;&gt; e)
+public static void postSet_GroupReaders(Calendar obj, PropertyPostSetterEventArgs&lt;ICollection&lt;Zetbox.App.Base.Group&gt;&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_GroupReaders(CalendarBook obj, PropertyIsValidEventArgs e)
+public static void isValid_GroupReaders(Calendar obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.GroupReaders == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -806,22 +806,22 @@ public static void isValid_GroupReaders(CalendarBook obj, PropertyIsValidEventAr
     <ZetboxBase:CategoryTags>Main</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-02-18T16:49:56.234449Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_GroupWriters(CalendarBook obj, PropertyGetterEventArgs&lt;ICollection&lt;Zetbox.App.Base.Group&gt;&gt; e)
+public static void get_GroupWriters(Calendar obj, PropertyGetterEventArgs&lt;ICollection&lt;Zetbox.App.Base.Group&gt;&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_GroupWriters(CalendarBook obj, PropertyPreSetterEventArgs&lt;ICollection&lt;Zetbox.App.Base.Group&gt;&gt; e)
+public static void preSet_GroupWriters(Calendar obj, PropertyPreSetterEventArgs&lt;ICollection&lt;Zetbox.App.Base.Group&gt;&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_GroupWriters(CalendarBook obj, PropertyPostSetterEventArgs&lt;ICollection&lt;Zetbox.App.Base.Group&gt;&gt; e)
+public static void postSet_GroupWriters(Calendar obj, PropertyPostSetterEventArgs&lt;ICollection&lt;Zetbox.App.Base.Group&gt;&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_GroupWriters(CalendarBook obj, PropertyIsValidEventArgs e)
+public static void isValid_GroupWriters(Calendar obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.GroupWriters == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -880,22 +880,22 @@ public static void isValid_IsDeactivated(CalendarBook obj, PropertyIsValidEventA
     <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-02-20T13:52:32.115317Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_Name(CalendarBook obj, PropertyGetterEventArgs&lt;string&gt; e)
+public static void get_Name(Calendar obj, PropertyGetterEventArgs&lt;string&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_Name(CalendarBook obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+public static void preSet_Name(Calendar obj, PropertyPreSetterEventArgs&lt;string&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_Name(CalendarBook obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+public static void postSet_Name(Calendar obj, PropertyPostSetterEventArgs&lt;string&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_Name(CalendarBook obj, PropertyIsValidEventArgs e)
+public static void isValid_Name(Calendar obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.Name == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -916,22 +916,22 @@ public static void isValid_Name(CalendarBook obj, PropertyIsValidEventArgs e)
     <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-02-18T16:49:56.234449Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_Owner(CalendarBook obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
+public static void get_Owner(Calendar obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_Owner(CalendarBook obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
+public static void preSet_Owner(Calendar obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_Owner(CalendarBook obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
+public static void postSet_Owner(Calendar obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_Owner(CalendarBook obj, PropertyIsValidEventArgs e)
+public static void isValid_Owner(Calendar obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.Owner == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -951,22 +951,22 @@ public static void isValid_Owner(CalendarBook obj, PropertyIsValidEventArgs e)
     <ZetboxBase:CategoryTags>Main</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-02-18T16:49:56.234449Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_Readers(CalendarBook obj, PropertyGetterEventArgs&lt;ICollection&lt;Zetbox.App.Base.Identity&gt;&gt; e)
+public static void get_Readers(Calendar obj, PropertyGetterEventArgs&lt;ICollection&lt;Zetbox.App.Base.Identity&gt;&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_Readers(CalendarBook obj, PropertyPreSetterEventArgs&lt;ICollection&lt;Zetbox.App.Base.Identity&gt;&gt; e)
+public static void preSet_Readers(Calendar obj, PropertyPreSetterEventArgs&lt;ICollection&lt;Zetbox.App.Base.Identity&gt;&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_Readers(CalendarBook obj, PropertyPostSetterEventArgs&lt;ICollection&lt;Zetbox.App.Base.Identity&gt;&gt; e)
+public static void postSet_Readers(Calendar obj, PropertyPostSetterEventArgs&lt;ICollection&lt;Zetbox.App.Base.Identity&gt;&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_Readers(CalendarBook obj, PropertyIsValidEventArgs e)
+public static void isValid_Readers(Calendar obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.Readers == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -986,22 +986,22 @@ public static void isValid_Readers(CalendarBook obj, PropertyIsValidEventArgs e)
     <ZetboxBase:CategoryTags>Main</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-02-18T16:49:56.234449Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_Writers(CalendarBook obj, PropertyGetterEventArgs&lt;ICollection&lt;Zetbox.App.Base.Identity&gt;&gt; e)
+public static void get_Writers(Calendar obj, PropertyGetterEventArgs&lt;ICollection&lt;Zetbox.App.Base.Identity&gt;&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_Writers(CalendarBook obj, PropertyPreSetterEventArgs&lt;ICollection&lt;Zetbox.App.Base.Identity&gt;&gt; e)
+public static void preSet_Writers(Calendar obj, PropertyPreSetterEventArgs&lt;ICollection&lt;Zetbox.App.Base.Identity&gt;&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_Writers(CalendarBook obj, PropertyPostSetterEventArgs&lt;ICollection&lt;Zetbox.App.Base.Identity&gt;&gt; e)
+public static void postSet_Writers(Calendar obj, PropertyPostSetterEventArgs&lt;ICollection&lt;Zetbox.App.Base.Identity&gt;&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_Writers(CalendarBook obj, PropertyIsValidEventArgs e)
+public static void isValid_Writers(Calendar obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.Writers == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -1021,22 +1021,22 @@ public static void isValid_Writers(CalendarBook obj, PropertyIsValidEventArgs e)
     <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_DayOfWeek(DayOfWeekWorkScheduleRule obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.DayOfWeek&gt; e)
+public static void get_DayOfWeek(DayOfWeekCalendarRule obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.DayOfWeek&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_DayOfWeek(DayOfWeekWorkScheduleRule obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Base.DayOfWeek&gt; e)
+public static void preSet_DayOfWeek(DayOfWeekCalendarRule obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Base.DayOfWeek&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_DayOfWeek(DayOfWeekWorkScheduleRule obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Base.DayOfWeek&gt; e)
+public static void postSet_DayOfWeek(DayOfWeekCalendarRule obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Base.DayOfWeek&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_DayOfWeek(DayOfWeekWorkScheduleRule obj, PropertyIsValidEventArgs e)
+public static void isValid_DayOfWeek(DayOfWeekCalendarRule obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.DayOfWeek == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -1059,22 +1059,22 @@ public static void isValid_DayOfWeek(DayOfWeekWorkScheduleRule obj, PropertyIsVa
     <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_Offset(EasterWorkScheduleRule obj, PropertyGetterEventArgs&lt;int?&gt; e)
+public static void get_Offset(EasterCalendarRule obj, PropertyGetterEventArgs&lt;int?&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_Offset(EasterWorkScheduleRule obj, PropertyPreSetterEventArgs&lt;int?&gt; e)
+public static void preSet_Offset(EasterCalendarRule obj, PropertyPreSetterEventArgs&lt;int?&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_Offset(EasterWorkScheduleRule obj, PropertyPostSetterEventArgs&lt;int?&gt; e)
+public static void postSet_Offset(EasterCalendarRule obj, PropertyPostSetterEventArgs&lt;int?&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_Offset(EasterWorkScheduleRule obj, PropertyIsValidEventArgs e)
+public static void isValid_Offset(EasterCalendarRule obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.Offset == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -1132,17 +1132,17 @@ public static void isValid_Body(Event obj, PropertyIsValidEventArgs e)
     <ZetboxBase:CategoryTags>Main</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-02-20T08:43:20.362217Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_Calendar(Event obj, PropertyGetterEventArgs&lt;Zetbox.App.Calendar.CalendarBook&gt; e)
+public static void get_Calendar(Event obj, PropertyGetterEventArgs&lt;Zetbox.App.Calendar.Calendar&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_Calendar(Event obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Calendar.CalendarBook&gt; e)
+public static void preSet_Calendar(Event obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Calendar.Calendar&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_Calendar(Event obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Calendar.CalendarBook&gt; e)
+public static void postSet_Calendar(Event obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Calendar.Calendar&gt; e)
 {
 }
 
@@ -1688,22 +1688,22 @@ public static void isValid_SyncHash(Event obj, PropertyIsValidEventArgs e)
     <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_Day(FixedYearlyWorkScheduleRule obj, PropertyGetterEventArgs&lt;int&gt; e)
+public static void get_Day(FixedYearlyCalendarRule obj, PropertyGetterEventArgs&lt;int&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_Day(FixedYearlyWorkScheduleRule obj, PropertyPreSetterEventArgs&lt;int&gt; e)
+public static void preSet_Day(FixedYearlyCalendarRule obj, PropertyPreSetterEventArgs&lt;int&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_Day(FixedYearlyWorkScheduleRule obj, PropertyPostSetterEventArgs&lt;int&gt; e)
+public static void postSet_Day(FixedYearlyCalendarRule obj, PropertyPostSetterEventArgs&lt;int&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_Day(FixedYearlyWorkScheduleRule obj, PropertyIsValidEventArgs e)
+public static void isValid_Day(FixedYearlyCalendarRule obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.Day == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -1724,22 +1724,22 @@ public static void isValid_Day(FixedYearlyWorkScheduleRule obj, PropertyIsValidE
     <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_Month(FixedYearlyWorkScheduleRule obj, PropertyGetterEventArgs&lt;int&gt; e)
+public static void get_Month(FixedYearlyCalendarRule obj, PropertyGetterEventArgs&lt;int&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_Month(FixedYearlyWorkScheduleRule obj, PropertyPreSetterEventArgs&lt;int&gt; e)
+public static void preSet_Month(FixedYearlyCalendarRule obj, PropertyPreSetterEventArgs&lt;int&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_Month(FixedYearlyWorkScheduleRule obj, PropertyPostSetterEventArgs&lt;int&gt; e)
+public static void postSet_Month(FixedYearlyCalendarRule obj, PropertyPostSetterEventArgs&lt;int&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_Month(FixedYearlyWorkScheduleRule obj, PropertyIsValidEventArgs e)
+public static void isValid_Month(FixedYearlyCalendarRule obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.Month == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -1798,22 +1798,22 @@ public static void isValid_CalendarConfiguration(Identity obj, PropertyIsValidEv
     <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-03-25T13:02:38.246794Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_ChangedBy(SyncProvider obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
+public static void get_ChangedBy(SyncAccount obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_ChangedBy(SyncProvider obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
+public static void preSet_ChangedBy(SyncAccount obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_ChangedBy(SyncProvider obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
+public static void postSet_ChangedBy(SyncAccount obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_ChangedBy(SyncProvider obj, PropertyIsValidEventArgs e)
+public static void isValid_ChangedBy(SyncAccount obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.ChangedBy == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -1834,22 +1834,22 @@ public static void isValid_ChangedBy(SyncProvider obj, PropertyIsValidEventArgs 
     <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-03-25T13:02:38.246794Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_ChangedOn(SyncProvider obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
+public static void get_ChangedOn(SyncAccount obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_ChangedOn(SyncProvider obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
+public static void preSet_ChangedOn(SyncAccount obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_ChangedOn(SyncProvider obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
+public static void postSet_ChangedOn(SyncAccount obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_ChangedOn(SyncProvider obj, PropertyIsValidEventArgs e)
+public static void isValid_ChangedOn(SyncAccount obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.ChangedOn == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -1872,22 +1872,22 @@ public static void isValid_ChangedOn(SyncProvider obj, PropertyIsValidEventArgs 
     <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-03-25T13:02:38.246794Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_CreatedBy(SyncProvider obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
+public static void get_CreatedBy(SyncAccount obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_CreatedBy(SyncProvider obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
+public static void preSet_CreatedBy(SyncAccount obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_CreatedBy(SyncProvider obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
+public static void postSet_CreatedBy(SyncAccount obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_CreatedBy(SyncProvider obj, PropertyIsValidEventArgs e)
+public static void isValid_CreatedBy(SyncAccount obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.CreatedBy == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -1908,22 +1908,22 @@ public static void isValid_CreatedBy(SyncProvider obj, PropertyIsValidEventArgs 
     <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-03-25T13:02:38.246794Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_CreatedOn(SyncProvider obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
+public static void get_CreatedOn(SyncAccount obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_CreatedOn(SyncProvider obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
+public static void preSet_CreatedOn(SyncAccount obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_CreatedOn(SyncProvider obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
+public static void postSet_CreatedOn(SyncAccount obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_CreatedOn(SyncProvider obj, PropertyIsValidEventArgs e)
+public static void isValid_CreatedOn(SyncAccount obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.CreatedOn == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -1946,22 +1946,22 @@ public static void isValid_CreatedOn(SyncProvider obj, PropertyIsValidEventArgs 
     <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-03-25T13:02:38.246794Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_Name(SyncProvider obj, PropertyGetterEventArgs&lt;string&gt; e)
+public static void get_Name(SyncAccount obj, PropertyGetterEventArgs&lt;string&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_Name(SyncProvider obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+public static void preSet_Name(SyncAccount obj, PropertyPreSetterEventArgs&lt;string&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_Name(SyncProvider obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+public static void postSet_Name(SyncAccount obj, PropertyPostSetterEventArgs&lt;string&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_Name(SyncProvider obj, PropertyIsValidEventArgs e)
+public static void isValid_Name(SyncAccount obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.Name == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -1982,22 +1982,22 @@ public static void isValid_Name(SyncProvider obj, PropertyIsValidEventArgs e)
     <ZetboxBase:CategoryTags>Main</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-03-25T13:02:38.246794Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_NextSync(SyncProvider obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
+public static void get_NextSync(SyncAccount obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_NextSync(SyncProvider obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
+public static void preSet_NextSync(SyncAccount obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_NextSync(SyncProvider obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
+public static void postSet_NextSync(SyncAccount obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_NextSync(SyncProvider obj, PropertyIsValidEventArgs e)
+public static void isValid_NextSync(SyncAccount obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.NextSync == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -2055,22 +2055,22 @@ public static void isValid_BaseWorkSchedule(WorkSchedule obj, PropertyIsValidEve
     <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-02-18T14:34:30.773699Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_ChangedBy(WorkSchedule obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
+public static void get_ChangedBy(Calendar obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_ChangedBy(WorkSchedule obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
+public static void preSet_ChangedBy(Calendar obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_ChangedBy(WorkSchedule obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
+public static void postSet_ChangedBy(Calendar obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_ChangedBy(WorkSchedule obj, PropertyIsValidEventArgs e)
+public static void isValid_ChangedBy(Calendar obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.ChangedBy == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -2091,22 +2091,22 @@ public static void isValid_ChangedBy(WorkSchedule obj, PropertyIsValidEventArgs 
     <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-02-18T14:34:30.773699Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_ChangedOn(WorkSchedule obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
+public static void get_ChangedOn(Calendar obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_ChangedOn(WorkSchedule obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
+public static void preSet_ChangedOn(Calendar obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_ChangedOn(WorkSchedule obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
+public static void postSet_ChangedOn(Calendar obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_ChangedOn(WorkSchedule obj, PropertyIsValidEventArgs e)
+public static void isValid_ChangedOn(Calendar obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.ChangedOn == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -2164,22 +2164,22 @@ public static void isValid_ChildWorkSchedule(WorkSchedule obj, PropertyIsValidEv
     <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-02-18T14:34:30.773699Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_CreatedBy(WorkSchedule obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
+public static void get_CreatedBy(Calendar obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_CreatedBy(WorkSchedule obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
+public static void preSet_CreatedBy(Calendar obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_CreatedBy(WorkSchedule obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
+public static void postSet_CreatedBy(Calendar obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_CreatedBy(WorkSchedule obj, PropertyIsValidEventArgs e)
+public static void isValid_CreatedBy(Calendar obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.CreatedBy == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -2200,22 +2200,22 @@ public static void isValid_CreatedBy(WorkSchedule obj, PropertyIsValidEventArgs 
     <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-02-18T14:34:30.773699Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_CreatedOn(WorkSchedule obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
+public static void get_CreatedOn(Calendar obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_CreatedOn(WorkSchedule obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
+public static void preSet_CreatedOn(Calendar obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_CreatedOn(WorkSchedule obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
+public static void postSet_CreatedOn(Calendar obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_CreatedOn(WorkSchedule obj, PropertyIsValidEventArgs e)
+public static void isValid_CreatedOn(Calendar obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.CreatedOn == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -2238,22 +2238,22 @@ public static void isValid_CreatedOn(WorkSchedule obj, PropertyIsValidEventArgs 
     <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-02-18T14:34:30.773699Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_ExportGuid(WorkSchedule obj, PropertyGetterEventArgs&lt;Guid&gt; e)
+public static void get_ExportGuid(Calendar obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_ExportGuid(WorkSchedule obj, PropertyPreSetterEventArgs&lt;Guid&gt; e)
+public static void preSet_ExportGuid(Calendar obj, PropertyPreSetterEventArgs&lt;Guid&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_ExportGuid(WorkSchedule obj, PropertyPostSetterEventArgs&lt;Guid&gt; e)
+public static void postSet_ExportGuid(Calendar obj, PropertyPostSetterEventArgs&lt;Guid&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_ExportGuid(WorkSchedule obj, PropertyIsValidEventArgs e)
+public static void isValid_ExportGuid(Calendar obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.ExportGuid == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -2276,22 +2276,22 @@ public static void isValid_ExportGuid(WorkSchedule obj, PropertyIsValidEventArgs
     <ZetboxBase:CategoryTags>MetaData</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2012-04-05T05:26:14.807132Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_Module(WorkSchedule obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Module&gt; e)
+public static void get_Module(Calendar obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Module&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_Module(WorkSchedule obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Base.Module&gt; e)
+public static void preSet_Module(Calendar obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Base.Module&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_Module(WorkSchedule obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Base.Module&gt; e)
+public static void postSet_Module(Calendar obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Base.Module&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_Module(WorkSchedule obj, PropertyIsValidEventArgs e)
+public static void isValid_Module(Calendar obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.Module == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -2313,22 +2313,22 @@ public static void isValid_Module(WorkSchedule obj, PropertyIsValidEventArgs e)
     <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-02-18T14:34:30.773699Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_Name(WorkSchedule obj, PropertyGetterEventArgs&lt;string&gt; e)
+public static void get_Name(Calendar obj, PropertyGetterEventArgs&lt;string&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_Name(WorkSchedule obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+public static void preSet_Name(Calendar obj, PropertyPreSetterEventArgs&lt;string&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_Name(WorkSchedule obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+public static void postSet_Name(Calendar obj, PropertyPostSetterEventArgs&lt;string&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_Name(WorkSchedule obj, PropertyIsValidEventArgs e)
+public static void isValid_Name(Calendar obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.Name == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -2349,17 +2349,17 @@ public static void isValid_Name(WorkSchedule obj, PropertyIsValidEventArgs e)
     <ZetboxBase:CategoryTags>Rules</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-02-18T14:34:30.773699Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_WorkScheduleRules(WorkSchedule obj, PropertyGetterEventArgs&lt;ICollection&lt;Zetbox.App.Calendar.WorkScheduleRule&gt;&gt; e)
+public static void get_WorkScheduleRules(WorkSchedule obj, PropertyGetterEventArgs&lt;ICollection&lt;Zetbox.App.Calendar.CalendarRule&gt;&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_WorkScheduleRules(WorkSchedule obj, PropertyPreSetterEventArgs&lt;ICollection&lt;Zetbox.App.Calendar.WorkScheduleRule&gt;&gt; e)
+public static void preSet_WorkScheduleRules(WorkSchedule obj, PropertyPreSetterEventArgs&lt;ICollection&lt;Zetbox.App.Calendar.CalendarRule&gt;&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_WorkScheduleRules(WorkSchedule obj, PropertyPostSetterEventArgs&lt;ICollection&lt;Zetbox.App.Calendar.WorkScheduleRule&gt;&gt; e)
+public static void postSet_WorkScheduleRules(WorkSchedule obj, PropertyPostSetterEventArgs&lt;ICollection&lt;Zetbox.App.Calendar.CalendarRule&gt;&gt; e)
 {
 }
 
@@ -2384,22 +2384,22 @@ public static void isValid_WorkScheduleRules(WorkSchedule obj, PropertyIsValidEv
     <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-02-18T14:37:16.905201Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_ChangedBy(WorkScheduleRule obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
+public static void get_ChangedBy(CalendarRule obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_ChangedBy(WorkScheduleRule obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
+public static void preSet_ChangedBy(CalendarRule obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_ChangedBy(WorkScheduleRule obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
+public static void postSet_ChangedBy(CalendarRule obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_ChangedBy(WorkScheduleRule obj, PropertyIsValidEventArgs e)
+public static void isValid_ChangedBy(CalendarRule obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.ChangedBy == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -2420,22 +2420,22 @@ public static void isValid_ChangedBy(WorkScheduleRule obj, PropertyIsValidEventA
     <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-02-18T14:37:16.905201Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_ChangedOn(WorkScheduleRule obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
+public static void get_ChangedOn(CalendarRule obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_ChangedOn(WorkScheduleRule obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
+public static void preSet_ChangedOn(CalendarRule obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_ChangedOn(WorkScheduleRule obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
+public static void postSet_ChangedOn(CalendarRule obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_ChangedOn(WorkScheduleRule obj, PropertyIsValidEventArgs e)
+public static void isValid_ChangedOn(CalendarRule obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.ChangedOn == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -2458,22 +2458,22 @@ public static void isValid_ChangedOn(WorkScheduleRule obj, PropertyIsValidEventA
     <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-02-18T14:37:16.905201Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_CreatedBy(WorkScheduleRule obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
+public static void get_CreatedBy(CalendarRule obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_CreatedBy(WorkScheduleRule obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
+public static void preSet_CreatedBy(CalendarRule obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_CreatedBy(WorkScheduleRule obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
+public static void postSet_CreatedBy(CalendarRule obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_CreatedBy(WorkScheduleRule obj, PropertyIsValidEventArgs e)
+public static void isValid_CreatedBy(CalendarRule obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.CreatedBy == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -2494,22 +2494,22 @@ public static void isValid_CreatedBy(WorkScheduleRule obj, PropertyIsValidEventA
     <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-02-18T14:37:16.905201Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_CreatedOn(WorkScheduleRule obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
+public static void get_CreatedOn(CalendarRule obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_CreatedOn(WorkScheduleRule obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
+public static void preSet_CreatedOn(CalendarRule obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_CreatedOn(WorkScheduleRule obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
+public static void postSet_CreatedOn(CalendarRule obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_CreatedOn(WorkScheduleRule obj, PropertyIsValidEventArgs e)
+public static void isValid_CreatedOn(CalendarRule obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.CreatedOn == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -2532,22 +2532,22 @@ public static void isValid_CreatedOn(WorkScheduleRule obj, PropertyIsValidEventA
     <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-02-18T14:37:16.905201Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_ExportGuid(WorkScheduleRule obj, PropertyGetterEventArgs&lt;Guid&gt; e)
+public static void get_ExportGuid(CalendarRule obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_ExportGuid(WorkScheduleRule obj, PropertyPreSetterEventArgs&lt;Guid&gt; e)
+public static void preSet_ExportGuid(CalendarRule obj, PropertyPreSetterEventArgs&lt;Guid&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_ExportGuid(WorkScheduleRule obj, PropertyPostSetterEventArgs&lt;Guid&gt; e)
+public static void postSet_ExportGuid(CalendarRule obj, PropertyPostSetterEventArgs&lt;Guid&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_ExportGuid(WorkScheduleRule obj, PropertyIsValidEventArgs e)
+public static void isValid_ExportGuid(CalendarRule obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.ExportGuid == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -2570,22 +2570,22 @@ public static void isValid_ExportGuid(WorkScheduleRule obj, PropertyIsValidEvent
     <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-02-18T14:37:16.905201Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_IsWorkingDay(WorkScheduleRule obj, PropertyGetterEventArgs&lt;bool&gt; e)
+public static void get_IsWorkingDay(CalendarRule obj, PropertyGetterEventArgs&lt;bool&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_IsWorkingDay(WorkScheduleRule obj, PropertyPreSetterEventArgs&lt;bool&gt; e)
+public static void preSet_IsWorkingDay(CalendarRule obj, PropertyPreSetterEventArgs&lt;bool&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_IsWorkingDay(WorkScheduleRule obj, PropertyPostSetterEventArgs&lt;bool&gt; e)
+public static void postSet_IsWorkingDay(CalendarRule obj, PropertyPostSetterEventArgs&lt;bool&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_IsWorkingDay(WorkScheduleRule obj, PropertyIsValidEventArgs e)
+public static void isValid_IsWorkingDay(CalendarRule obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.IsWorkingDay == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -2609,22 +2609,22 @@ public static void isValid_IsWorkingDay(WorkScheduleRule obj, PropertyIsValidEve
     <ZetboxBase:CategoryTags>MetaData</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-02-18T14:37:16.905201Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_Module(WorkScheduleRule obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Module&gt; e)
+public static void get_Module(CalendarRule obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Module&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_Module(WorkScheduleRule obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Base.Module&gt; e)
+public static void preSet_Module(CalendarRule obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Base.Module&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_Module(WorkScheduleRule obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Base.Module&gt; e)
+public static void postSet_Module(CalendarRule obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Base.Module&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_Module(WorkScheduleRule obj, PropertyIsValidEventArgs e)
+public static void isValid_Module(CalendarRule obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.Module == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -2646,22 +2646,22 @@ public static void isValid_Module(WorkScheduleRule obj, PropertyIsValidEventArgs
     <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-02-18T14:37:16.905201Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_Name(WorkScheduleRule obj, PropertyGetterEventArgs&lt;string&gt; e)
+public static void get_Name(CalendarRule obj, PropertyGetterEventArgs&lt;string&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_Name(WorkScheduleRule obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+public static void preSet_Name(CalendarRule obj, PropertyPreSetterEventArgs&lt;string&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_Name(WorkScheduleRule obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+public static void postSet_Name(CalendarRule obj, PropertyPostSetterEventArgs&lt;string&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_Name(WorkScheduleRule obj, PropertyIsValidEventArgs e)
+public static void isValid_Name(CalendarRule obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.Name == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -2683,22 +2683,22 @@ public static void isValid_Name(WorkScheduleRule obj, PropertyIsValidEventArgs e
     <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-02-18T14:37:16.905201Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_ValidFrom(WorkScheduleRule obj, PropertyGetterEventArgs&lt;DateTime?&gt; e)
+public static void get_ValidFrom(CalendarRule obj, PropertyGetterEventArgs&lt;DateTime?&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_ValidFrom(WorkScheduleRule obj, PropertyPreSetterEventArgs&lt;DateTime?&gt; e)
+public static void preSet_ValidFrom(CalendarRule obj, PropertyPreSetterEventArgs&lt;DateTime?&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_ValidFrom(WorkScheduleRule obj, PropertyPostSetterEventArgs&lt;DateTime?&gt; e)
+public static void postSet_ValidFrom(CalendarRule obj, PropertyPostSetterEventArgs&lt;DateTime?&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_ValidFrom(WorkScheduleRule obj, PropertyIsValidEventArgs e)
+public static void isValid_ValidFrom(CalendarRule obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.ValidFrom == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -2722,22 +2722,22 @@ public static void isValid_ValidFrom(WorkScheduleRule obj, PropertyIsValidEventA
     <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-02-18T14:37:16.905201Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_ValidUntil(WorkScheduleRule obj, PropertyGetterEventArgs&lt;DateTime?&gt; e)
+public static void get_ValidUntil(CalendarRule obj, PropertyGetterEventArgs&lt;DateTime?&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_ValidUntil(WorkScheduleRule obj, PropertyPreSetterEventArgs&lt;DateTime?&gt; e)
+public static void preSet_ValidUntil(CalendarRule obj, PropertyPreSetterEventArgs&lt;DateTime?&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_ValidUntil(WorkScheduleRule obj, PropertyPostSetterEventArgs&lt;DateTime?&gt; e)
+public static void postSet_ValidUntil(CalendarRule obj, PropertyPostSetterEventArgs&lt;DateTime?&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_ValidUntil(WorkScheduleRule obj, PropertyIsValidEventArgs e)
+public static void isValid_ValidUntil(CalendarRule obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.ValidUntil == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -2761,22 +2761,22 @@ public static void isValid_ValidUntil(WorkScheduleRule obj, PropertyIsValidEvent
     <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-02-18T14:37:16.905201Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_WorkingHours(WorkScheduleRule obj, PropertyGetterEventArgs&lt;decimal&gt; e)
+public static void get_WorkingHours(CalendarRule obj, PropertyGetterEventArgs&lt;decimal&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_WorkingHours(WorkScheduleRule obj, PropertyPreSetterEventArgs&lt;decimal&gt; e)
+public static void preSet_WorkingHours(CalendarRule obj, PropertyPreSetterEventArgs&lt;decimal&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_WorkingHours(WorkScheduleRule obj, PropertyPostSetterEventArgs&lt;decimal&gt; e)
+public static void postSet_WorkingHours(CalendarRule obj, PropertyPostSetterEventArgs&lt;decimal&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_WorkingHours(WorkScheduleRule obj, PropertyIsValidEventArgs e)
+public static void isValid_WorkingHours(CalendarRule obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.WorkingHours == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -2836,22 +2836,22 @@ public static void isValid_WorkSchedule(WorkScheduleRule obj, PropertyIsValidEve
     <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-03-25T13:49:21.158111Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_Calendar(WorkScheduleSyncProvider obj, PropertyGetterEventArgs&lt;Zetbox.App.Calendar.CalendarBook&gt; e)
+public static void get_Calendar(WorkScheduleSyncAccount obj, PropertyGetterEventArgs&lt;Zetbox.App.Calendar.Calendar&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_Calendar(WorkScheduleSyncProvider obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Calendar.CalendarBook&gt; e)
+public static void preSet_Calendar(WorkScheduleSyncAccount obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Calendar.Calendar&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_Calendar(WorkScheduleSyncProvider obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Calendar.CalendarBook&gt; e)
+public static void postSet_Calendar(WorkScheduleSyncAccount obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Calendar.Calendar&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_Calendar(WorkScheduleSyncProvider obj, PropertyIsValidEventArgs e)
+public static void isValid_Calendar(WorkScheduleSyncAccount obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.Calendar == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -2871,22 +2871,22 @@ public static void isValid_Calendar(WorkScheduleSyncProvider obj, PropertyIsVali
     <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-03-25T13:49:21.158111Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_WorkSchedule(WorkScheduleSyncProvider obj, PropertyGetterEventArgs&lt;Zetbox.App.Calendar.WorkSchedule&gt; e)
+public static void get_WorkSchedule(WorkScheduleSyncAccount obj, PropertyGetterEventArgs&lt;Zetbox.App.Calendar.WorkSchedule&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_WorkSchedule(WorkScheduleSyncProvider obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Calendar.WorkSchedule&gt; e)
+public static void preSet_WorkSchedule(WorkScheduleSyncAccount obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Calendar.WorkSchedule&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_WorkSchedule(WorkScheduleSyncProvider obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Calendar.WorkSchedule&gt; e)
+public static void postSet_WorkSchedule(WorkScheduleSyncAccount obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Calendar.WorkSchedule&gt; e)
 {
 }
 
 [Invocation]
-public static void isValid_WorkSchedule(WorkScheduleSyncProvider obj, PropertyIsValidEventArgs e)
+public static void isValid_WorkSchedule(WorkScheduleSyncAccount obj, PropertyIsValidEventArgs e)
 {
 	e.IsValid = obj.WorkSchedule == ...;
 	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
@@ -17683,6 +17683,23 @@ public static void get_AufwandGes(Projekt obj, PropertyGetterEventArgs&lt;double
 {
 }
 
+[Invocation]
+public static void preSet_AufwandGes(Projekt obj, PropertyPreSetterEventArgs&lt;double?&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_AufwandGes(Projekt obj, PropertyPostSetterEventArgs&lt;double?&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_AufwandGes(Projekt obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.AufwandGes == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description />
@@ -19484,7 +19501,7 @@ public static void isValid_Projekt(Task obj, PropertyIsValidEventArgs e)
   <ZetboxBase:RoleMembership ExportGuid="1126a629-7fa7-4e5a-9e59-53a703f8e908">
     <ZetboxBase:ChangedOn>2011-08-06T08:31:13.170289Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-01-31T02:03:53Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Description>CreatedBy has Full rights</ZetboxBase:Description>
+    <ZetboxBase:Description>Creator may delete Projetcts</ZetboxBase:Description>
     <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
     <ZetboxBase:ObjectClass>885939e8-82e1-4fdf-b80e-5f612d5131d3</ZetboxBase:ObjectClass>
     <ZetboxBase:Rights>15</ZetboxBase:Rights>
@@ -19492,7 +19509,6 @@ public static void isValid_Projekt(Task obj, PropertyIsValidEventArgs e)
   <ZetboxBase:RoleMembership ExportGuid="223373dd-35b2-47a9-be57-0a5630fb7d35">
     <ZetboxBase:ChangedOn>2011-08-06T08:31:13.170289Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-02-02T21:48:14Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Description>CreatedBy has Full rights</ZetboxBase:Description>
     <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
     <ZetboxBase:ObjectClass>3fbb42ca-a084-491d-9135-85ed24f1ef78</ZetboxBase:ObjectClass>
     <ZetboxBase:Rights>15</ZetboxBase:Rights>
@@ -19500,7 +19516,6 @@ public static void isValid_Projekt(Task obj, PropertyIsValidEventArgs e)
   <ZetboxBase:RoleMembership ExportGuid="26259895-b4d4-4735-93ca-895fbe64cba3">
     <ZetboxBase:ChangedOn>2011-08-06T08:31:13.170289Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-02-02T21:54:25Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Description>Projekt.Mitarbeiter.Identity has Read rights</ZetboxBase:Description>
     <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
     <ZetboxBase:ObjectClass>f6e11d1d-a832-413a-bf1d-5ecf5f7bc79d</ZetboxBase:ObjectClass>
     <ZetboxBase:Rights>1</ZetboxBase:Rights>
@@ -19508,7 +19523,6 @@ public static void isValid_Projekt(Task obj, PropertyIsValidEventArgs e)
   <ZetboxBase:RoleMembership ExportGuid="2710dcb0-8e0f-43db-95c5-02e18c01f40f">
     <ZetboxBase:ChangedOn>2011-08-06T08:31:13.170289Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-02-02T21:51:49Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Description>CreatedBy has Full rights</ZetboxBase:Description>
     <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
     <ZetboxBase:ObjectClass>f6e11d1d-a832-413a-bf1d-5ecf5f7bc79d</ZetboxBase:ObjectClass>
     <ZetboxBase:Rights>15</ZetboxBase:Rights>
@@ -19516,7 +19530,6 @@ public static void isValid_Projekt(Task obj, PropertyIsValidEventArgs e)
   <ZetboxBase:RoleMembership ExportGuid="374744d2-680a-4d51-b65e-2301dad65849">
     <ZetboxBase:ChangedOn>2011-08-06T08:31:13.170289Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-02-02T21:50:00Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Description>Projekt.Mitarbeiter.Identity has Change rights</ZetboxBase:Description>
     <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
     <ZetboxBase:ObjectClass>3fbb42ca-a084-491d-9135-85ed24f1ef78</ZetboxBase:ObjectClass>
     <ZetboxBase:Rights>3</ZetboxBase:Rights>
@@ -19524,7 +19537,6 @@ public static void isValid_Projekt(Task obj, PropertyIsValidEventArgs e)
   <ZetboxBase:RoleMembership ExportGuid="3f419c0f-df37-44d4-a035-5b19020ec261">
     <ZetboxBase:ChangedOn>2011-08-06T08:31:13.170289Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-01-30T05:49:06Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Description>Mitarbeiter.Identity has Change rights</ZetboxBase:Description>
     <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
     <ZetboxBase:ObjectClass>885939e8-82e1-4fdf-b80e-5f612d5131d3</ZetboxBase:ObjectClass>
     <ZetboxBase:Rights>3</ZetboxBase:Rights>
@@ -19852,7 +19864,7 @@ public static void GetSummaryReportCanExecReason(Projekt obj, MethodReturnEventA
   <ZetboxBase:GroupMembership ExportGuid="b4abcf53-5464-4942-a36b-bbc124315df2">
     <ZetboxBase:ChangedOn>2011-08-06T08:31:12.610257Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-02-03T05:12:00Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Description>Group Everyone has Create rights</ZetboxBase:Description>
+    <ZetboxBase:Description>Everyone is allowed to create</ZetboxBase:Description>
     <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
     <ZetboxBase:ObjectClass>3fbb42ca-a084-491d-9135-85ed24f1ef78</ZetboxBase:ObjectClass>
     <ZetboxBase:Rights>8</ZetboxBase:Rights>
@@ -19861,7 +19873,7 @@ public static void GetSummaryReportCanExecReason(Projekt obj, MethodReturnEventA
   <ZetboxBase:GroupMembership ExportGuid="b96e9be2-c9dc-494c-8762-b1e0f43b33b2">
     <ZetboxBase:ChangedOn>2011-08-06T08:31:12.614258Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-02-03T05:13:20Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Description>Group Everyone has Create rights</ZetboxBase:Description>
+    <ZetboxBase:Description>Everyone is allowed to create</ZetboxBase:Description>
     <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
     <ZetboxBase:ObjectClass>f6e11d1d-a832-413a-bf1d-5ecf5f7bc79d</ZetboxBase:ObjectClass>
     <ZetboxBase:Rights>8</ZetboxBase:Rights>
@@ -19870,7 +19882,7 @@ public static void GetSummaryReportCanExecReason(Projekt obj, MethodReturnEventA
   <ZetboxBase:GroupMembership ExportGuid="ff0e2b1a-0e1e-49a2-90bb-391e880c04f3">
     <ZetboxBase:ChangedOn>2011-08-06T08:31:12.617258Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-02-03T05:09:26Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Description>Group Everyone has Create rights</ZetboxBase:Description>
+    <ZetboxBase:Description>Every one is allowed to create</ZetboxBase:Description>
     <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
     <ZetboxBase:ObjectClass>885939e8-82e1-4fdf-b80e-5f612d5131d3</ZetboxBase:ObjectClass>
     <ZetboxBase:Rights>8</ZetboxBase:Rights>
@@ -29045,6 +29057,23 @@ public static void get_ParentName(SecurityTestChild obj, PropertyGetterEventArgs
 {
 }
 
+[Invocation]
+public static void preSet_ParentName(SecurityTestChild obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ParentName(SecurityTestChild obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ParentName(SecurityTestChild obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ParentName == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2012-06-29T05:02:17.619327Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
@@ -29566,6 +29595,23 @@ public static void isValid_SmallDecimal(TestDecimal obj, PropertyIsValidEventArg
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CalculatedEnumeration(TestObjClass obj, PropertyGetterEventArgs&lt;Zetbox.App.Test.TestEnum&gt; e)
 {
+}
+
+[Invocation]
+public static void preSet_CalculatedEnumeration(TestObjClass obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Test.TestEnum&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_CalculatedEnumeration(TestObjClass obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Test.TestEnum&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_CalculatedEnumeration(TestObjClass obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.CalculatedEnumeration == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
 }
 
 </ZetboxBase:CodeTemplate>
@@ -31350,7 +31396,6 @@ public static void isValid_BString(TPHDerivedBObj obj, PropertyIsValidEventArgs 
   <ZetboxBase:RoleMembership ExportGuid="5321160a-9207-4b84-8644-5d6820221ca7">
     <ZetboxBase:ChangedOn>2012-06-29T04:54:29.745566Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2012-06-29T04:54:29.745566Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Description>Identity has Full rights</ZetboxBase:Description>
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
     <ZetboxBase:ObjectClass>09dfa3cf-4a15-48ed-b76a-c330ac7379e0</ZetboxBase:ObjectClass>
     <ZetboxBase:Rights>15</ZetboxBase:Rights>
@@ -32029,7 +32074,6 @@ public static void TestMethodCanExecReason(TestObjClass obj, MethodReturnEventAr
   <ZetboxBase:GroupMembership ExportGuid="fc40d608-3ae9-4885-84c3-0726de05cdea">
     <ZetboxBase:ChangedOn>2012-06-29T04:54:29.745566Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2012-06-29T04:54:29.745566Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Description>Group Everyone has Create rights</ZetboxBase:Description>
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
     <ZetboxBase:ObjectClass>09dfa3cf-4a15-48ed-b76a-c330ac7379e0</ZetboxBase:ObjectClass>
     <ZetboxBase:Rights>8</ZetboxBase:Rights>
@@ -36677,6 +36721,23 @@ public static void get_Description(AccessControl obj, PropertyGetterEventArgs&lt
 {
 }
 
+[Invocation]
+public static void preSet_Description(AccessControl obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Description(AccessControl obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Description(AccessControl obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Description == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2010-01-29T22:11:51Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
@@ -39905,6 +39966,23 @@ public static void get_TotalDays(DateTimeRange obj, PropertyGetterEventArgs&lt;i
 {
 }
 
+[Invocation]
+public static void preSet_TotalDays(DateTimeRange obj, PropertyPreSetterEventArgs&lt;int?&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_TotalDays(DateTimeRange obj, PropertyPostSetterEventArgs&lt;int?&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_TotalDays(DateTimeRange obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.TotalDays == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2011-10-29T04:26:26.407177Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Label>Total days</ZetboxBase:Label>
@@ -42216,6 +42294,23 @@ public static void get_CodeTemplate(Method obj, PropertyGetterEventArgs&lt;strin
 {
 }
 
+[Invocation]
+public static void preSet_CodeTemplate(Method obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_CodeTemplate(Method obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_CodeTemplate(Method obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.CodeTemplate == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2011-06-09T05:26:33Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>Provides a code template for the method</ZetboxBase:Description>
@@ -43013,6 +43108,23 @@ public static void get_CodeTemplate(ObjectClass obj, PropertyGetterEventArgs&lt;
 {
 }
 
+[Invocation]
+public static void preSet_CodeTemplate(ObjectClass obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_CodeTemplate(ObjectClass obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_CodeTemplate(ObjectClass obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.CodeTemplate == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2012-02-10T16:43:30.323003Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>Provides a code template for default methods</ZetboxBase:Description>
@@ -43665,6 +43777,23 @@ public static void isValid_ChangedOn(Property obj, PropertyIsValidEventArgs e)
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CodeTemplate(Property obj, PropertyGetterEventArgs&lt;string&gt; e)
 {
+}
+
+[Invocation]
+public static void preSet_CodeTemplate(Property obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_CodeTemplate(Property obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_CodeTemplate(Property obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.CodeTemplate == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
 }
 
 </ZetboxBase:CodeTemplate>
@@ -45434,6 +45563,23 @@ public static void isValid_Navigator(RelationEnd obj, PropertyIsValidEventArgs e
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_Parent(RelationEnd obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Relation&gt; e)
 {
+}
+
+[Invocation]
+public static void preSet_Parent(RelationEnd obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Base.Relation&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Parent(RelationEnd obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Base.Relation&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Parent(RelationEnd obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Parent == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
 }
 
 </ZetboxBase:CodeTemplate>

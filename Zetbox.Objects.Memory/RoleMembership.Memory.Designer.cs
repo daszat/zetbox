@@ -41,36 +41,44 @@ namespace Zetbox.App.Base
         /// 
         /// </summary>
         // collection entry list property
-   		// Zetbox.Generator.Templates.Properties.CollectionEntryListProperty
-		public IList<Zetbox.App.Base.Relation> Relations
-		{
-			get
-			{
-				if (_Relations == null)
-				{
+        // BEGIN Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for Relations
+        public IList<Zetbox.App.Base.Relation> Relations
+        {
+            get
+            {
+                if (_Relations == null)
+                {
                     TriggerFetchRelationsAsync().Wait();
-				}
-				return (IList<Zetbox.App.Base.Relation>)_Relations;
-			}
-		}
-        
+                }
+                return (IList<Zetbox.App.Base.Relation>)_Relations;
+            }
+        }
+
         Zetbox.API.Async.ZbTask _triggerFetchRelationsTask;
         public Zetbox.API.Async.ZbTask TriggerFetchRelationsAsync()
         {
             if (_triggerFetchRelationsTask != null) return _triggerFetchRelationsTask;
-			_triggerFetchRelationsTask = Context.FetchRelationAsync<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryMemoryImpl>(new Guid("f74d425f-e733-4cba-baca-f4a05fbc0a80"), RelationEndRole.A, this);
-			_triggerFetchRelationsTask.OnResult(r => 
+            _triggerFetchRelationsTask = Context.FetchRelationAsync<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryMemoryImpl>(new Guid("f74d425f-e733-4cba-baca-f4a05fbc0a80"), RelationEndRole.A, this);
+            _triggerFetchRelationsTask.OnResult(r =>
             {
-                _Relations 
-				= new ObservableBSideListWrapper<Zetbox.App.Base.RoleMembership, Zetbox.App.Base.Relation, Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryMemoryImpl>>(
-					this, 
-					new RelationshipFilterASideCollection<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryMemoryImpl>(this.Context, this));
-                    _Relations.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Relations", null, null); if(OnRelations_PostSetter != null && IsAttached) OnRelations_PostSetter(this); };
+                _Relations
+                    = new ObservableBSideListWrapper<Zetbox.App.Base.RoleMembership, Zetbox.App.Base.Relation, Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryMemoryImpl>>(
+                        this,
+                        new RelationshipFilterASideCollection<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryMemoryImpl>(this.Context, this));
+                        _Relations.CollectionChanged += (s, e) => { OnRelationsCollectionChanged(); };
             });
             return _triggerFetchRelationsTask;
         }
 
-		private ObservableBSideListWrapper<Zetbox.App.Base.RoleMembership, Zetbox.App.Base.Relation, Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryMemoryImpl>> _Relations;
+        internal void OnRelationsCollectionChanged()
+        {
+            NotifyPropertyChanged("Relations", null, null);
+            if (OnRelations_PostSetter != null && IsAttached)
+                OnRelations_PostSetter(this);
+        }
+
+        private ObservableBSideListWrapper<Zetbox.App.Base.RoleMembership, Zetbox.App.Base.Relation, Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryMemoryImpl>> _Relations;
+        // END Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for Relations
 public static event PropertyListChangedHandler<Zetbox.App.Base.RoleMembership> OnRelations_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.RoleMembership> OnRelations_IsValid;
