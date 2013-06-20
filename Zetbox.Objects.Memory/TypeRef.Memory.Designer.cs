@@ -745,7 +745,7 @@ namespace Zetbox.App.Base
                     = new ObservableBSideListWrapper<Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRef, Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl>>(
                         this,
                         new RelationshipFilterASideCollection<Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryMemoryImpl>(this.Context, this));
-                        _GenericArguments.CollectionChanged += (s, e) => { OnGenericArgumentsCollectionChanged(); };
+                        // _GenericArguments.CollectionChanged is managed by OnGenericArgumentsCollectionChanged() and called from the RelationEntry
             });
             return _triggerFetchGenericArgumentsTask;
         }

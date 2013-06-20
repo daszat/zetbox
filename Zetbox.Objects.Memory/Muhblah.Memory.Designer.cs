@@ -217,7 +217,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                     = new ObservableBSideCollectionWrapper<Zetbox.App.Test.Muhblah, Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>>(
                         this,
                         new RelationshipFilterASideCollection<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>(this.Context, this));
-                        _TestCustomObjects_ManyList_Nav.CollectionChanged += (s, e) => { OnTestCustomObjects_ManyList_NavCollectionChanged(); };
+                        // _TestCustomObjects_ManyList_Nav.CollectionChanged is managed by OnTestCustomObjects_ManyList_NavCollectionChanged() and called from the RelationEntry
             });
             return _triggerFetchTestCustomObjects_ManyList_NavTask;
         }

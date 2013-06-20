@@ -614,7 +614,7 @@ namespace Zetbox.App.GUI
                     = new ObservableBSideCollectionWrapper<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.Base.TypeRef, Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl>>(
                         this,
                         new RelationshipFilterASideCollection<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryMemoryImpl>(this.Context, this));
-                        _SupportedViewModels.CollectionChanged += (s, e) => { OnSupportedViewModelsCollectionChanged(); };
+                        // _SupportedViewModels.CollectionChanged is managed by OnSupportedViewModelsCollectionChanged() and called from the RelationEntry
             });
             return _triggerFetchSupportedViewModelsTask;
         }

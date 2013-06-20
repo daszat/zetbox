@@ -65,7 +65,7 @@ namespace at.dasz.DocumentManagement
                     = new ObservableBSideListWrapper<at.dasz.DocumentManagement.Document, Zetbox.App.Base.Blob, at.dasz.DocumentManagement.Document_has_Blob_RelationEntryMemoryImpl, ICollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryMemoryImpl>>(
                         this,
                         new RelationshipFilterASideCollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryMemoryImpl>(this.Context, this));
-                        _Revisions.CollectionChanged += (s, e) => { OnRevisionsCollectionChanged(); };
+                        // _Revisions.CollectionChanged is managed by OnRevisionsCollectionChanged() and called from the RelationEntry
             });
             return _triggerFetchRevisionsTask;
         }

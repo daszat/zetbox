@@ -687,7 +687,7 @@ namespace Zetbox.App.SchemaMigration
                     = new ObservableBSideListWrapper<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.Base.Property, Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl, ICollection<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl>>(
                         this,
                         new RelationshipFilterASideCollection<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryMemoryImpl>(this.Context, this));
-                        _DestinationProperty.CollectionChanged += (s, e) => { OnDestinationPropertyCollectionChanged(); };
+                        // _DestinationProperty.CollectionChanged is managed by OnDestinationPropertyCollectionChanged() and called from the RelationEntry
             });
             return _triggerFetchDestinationPropertyTask;
         }

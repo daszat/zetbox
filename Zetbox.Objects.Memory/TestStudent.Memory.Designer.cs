@@ -123,7 +123,7 @@ namespace Zetbox.App.Test
                     = new ObservableBSideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>>(
                         this,
                         new RelationshipFilterASideCollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>(this.Context, this));
-                        _Testbogen.CollectionChanged += (s, e) => { OnTestbogenCollectionChanged(); };
+                        // _Testbogen.CollectionChanged is managed by OnTestbogenCollectionChanged() and called from the RelationEntry
             });
             return _triggerFetchTestbogenTask;
         }

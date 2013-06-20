@@ -1335,7 +1335,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnParamet
                     = new ObservableASideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>>(
                         this,
                         new RelationshipFilterBSideCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>(this.Context, this));
-                        _ShowByProperties.CollectionChanged += (s, e) => { OnShowByPropertiesCollectionChanged(); };
+                        // _ShowByProperties.CollectionChanged is managed by OnShowByPropertiesCollectionChanged() and called from the RelationEntry
             });
             return _triggerFetchShowByPropertiesTask;
         }

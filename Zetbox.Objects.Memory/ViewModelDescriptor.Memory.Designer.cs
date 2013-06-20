@@ -961,7 +961,7 @@ namespace Zetbox.App.GUI
                     = new ObservableBSideCollectionWrapper<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ControlKind, Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl>>(
                         this,
                         new RelationshipFilterASideCollection<Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl>(this.Context, this));
-                        _SecondaryControlKinds.CollectionChanged += (s, e) => { OnSecondaryControlKindsCollectionChanged(); };
+                        // _SecondaryControlKinds.CollectionChanged is managed by OnSecondaryControlKindsCollectionChanged() and called from the RelationEntry
             });
             return _triggerFetchSecondaryControlKindsTask;
         }

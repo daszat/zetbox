@@ -66,7 +66,7 @@ namespace Zetbox.App.Base
                     = new ObservableBSideCollectionWrapper<Zetbox.App.Base.CalculatedObjectReferenceProperty, Zetbox.App.Base.Property, Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl>>(
                         this,
                         new RelationshipFilterASideCollection<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl>(this.Context, this));
-                        _Inputs.CollectionChanged += (s, e) => { OnInputsCollectionChanged(); };
+                        // _Inputs.CollectionChanged is managed by OnInputsCollectionChanged() and called from the RelationEntry
             });
             return _triggerFetchInputsTask;
         }

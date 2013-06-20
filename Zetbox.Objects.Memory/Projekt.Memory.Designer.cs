@@ -889,7 +889,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
                     = new ObservableBSideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl, ICollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl>>(
                         this,
                         new RelationshipFilterASideCollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl>(this.Context, this));
-                        _Mitarbeiter.CollectionChanged += (s, e) => { OnMitarbeiterCollectionChanged(); };
+                        // _Mitarbeiter.CollectionChanged is managed by OnMitarbeiterCollectionChanged() and called from the RelationEntry
             });
             return _triggerFetchMitarbeiterTask;
         }

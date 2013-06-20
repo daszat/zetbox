@@ -65,7 +65,7 @@ namespace Zetbox.App.Base
                     = new ObservableBSideListWrapper<Zetbox.App.Base.RoleMembership, Zetbox.App.Base.Relation, Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryMemoryImpl>>(
                         this,
                         new RelationshipFilterASideCollection<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryMemoryImpl>(this.Context, this));
-                        _Relations.CollectionChanged += (s, e) => { OnRelationsCollectionChanged(); };
+                        // _Relations.CollectionChanged is managed by OnRelationsCollectionChanged() and called from the RelationEntry
             });
             return _triggerFetchRelationsTask;
         }

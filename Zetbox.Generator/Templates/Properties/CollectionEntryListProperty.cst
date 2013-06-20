@@ -81,7 +81,7 @@
                     = new <%= backingCollectionType %><<%= aSideType %>, <%= bSideType %>, <%= entryType %>, ICollection<<%= entryType %>>>(
                         this,
                         new RelationshipFilter<%= role %>SideCollection<<%= entryType %>>(this.Context, this));
-                        <%= backingName %>.CollectionChanged += (s, e) => { On<%= name %>CollectionChanged(); };
+                        // <%= backingName %>.CollectionChanged is managed by On<%= name %>CollectionChanged() and called from the RelationEntry
             });
             return <%= taskName %>;
         }

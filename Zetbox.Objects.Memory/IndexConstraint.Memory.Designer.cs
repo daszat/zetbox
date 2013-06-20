@@ -136,7 +136,7 @@ namespace Zetbox.App.Base
                     = new ObservableBSideCollectionWrapper<Zetbox.App.Base.IndexConstraint, Zetbox.App.Base.Property, Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl>>(
                         this,
                         new RelationshipFilterASideCollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl>(this.Context, this));
-                        _Properties.CollectionChanged += (s, e) => { OnPropertiesCollectionChanged(); };
+                        // _Properties.CollectionChanged is managed by OnPropertiesCollectionChanged() and called from the RelationEntry
             });
             return _triggerFetchPropertiesTask;
         }

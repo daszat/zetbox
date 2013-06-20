@@ -103,7 +103,7 @@ this.WriteObjects("                ",  backingName , "\r\n");
 this.WriteObjects("                    = new ",  backingCollectionType , "<",  aSideType , ", ",  bSideType , ", ",  entryType , ", ICollection<",  entryType , ">>(\r\n");
 this.WriteObjects("                        this,\r\n");
 this.WriteObjects("                        new RelationshipFilter",  role , "SideCollection<",  entryType , ">(this.Context, this));\r\n");
-this.WriteObjects("                        ",  backingName , ".CollectionChanged += (s, e) => { On",  name , "CollectionChanged(); };\r\n");
+this.WriteObjects("                        // ",  backingName , ".CollectionChanged is managed by On",  name , "CollectionChanged() and called from the RelationEntry\r\n");
 this.WriteObjects("            });\r\n");
 this.WriteObjects("            return ",  taskName , ";\r\n");
 this.WriteObjects("        }\r\n");

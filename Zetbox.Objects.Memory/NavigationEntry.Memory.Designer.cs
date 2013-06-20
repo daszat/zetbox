@@ -637,7 +637,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                     = new ObservableBSideCollectionWrapper<Zetbox.App.GUI.NavigationEntry, Zetbox.App.Base.Group, Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl>>(
                         this,
                         new RelationshipFilterASideCollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl>(this.Context, this));
-                        _Groups.CollectionChanged += (s, e) => { OnGroupsCollectionChanged(); };
+                        // _Groups.CollectionChanged is managed by OnGroupsCollectionChanged() and called from the RelationEntry
             });
             return _triggerFetchGroupsTask;
         }

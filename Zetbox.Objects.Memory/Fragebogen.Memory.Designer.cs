@@ -202,7 +202,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
                     = new ObservableASideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>>(
                         this,
                         new RelationshipFilterBSideCollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>(this.Context, this));
-                        _Student.CollectionChanged += (s, e) => { OnStudentCollectionChanged(); };
+                        // _Student.CollectionChanged is managed by OnStudentCollectionChanged() and called from the RelationEntry
             });
             return _triggerFetchStudentTask;
         }

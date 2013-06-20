@@ -136,7 +136,7 @@ namespace Zetbox.App.Base
                     = new ObservableASideCollectionWrapper<Zetbox.App.Base.Identity, Zetbox.App.Base.Group, Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>>(
                         this,
                         new RelationshipFilterBSideCollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>(this.Context, this));
-                        _Member.CollectionChanged += (s, e) => { OnMemberCollectionChanged(); };
+                        // _Member.CollectionChanged is managed by OnMemberCollectionChanged() and called from the RelationEntry
             });
             return _triggerFetchMemberTask;
         }

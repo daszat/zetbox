@@ -803,7 +803,7 @@ namespace Zetbox.App.Projekte
                     = new ObservableASideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl, ICollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl>>(
                         this,
                         new RelationshipFilterBSideCollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl>(this.Context, this));
-                        _Projekte.CollectionChanged += (s, e) => { OnProjekteCollectionChanged(); };
+                        // _Projekte.CollectionChanged is managed by OnProjekteCollectionChanged() and called from the RelationEntry
             });
             return _triggerFetchProjekteTask;
         }

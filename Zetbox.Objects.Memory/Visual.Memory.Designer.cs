@@ -65,7 +65,7 @@ namespace Zetbox.App.GUI
                     = new ObservableBSideCollectionWrapper<Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual_contains_Visual_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.Visual_contains_Visual_RelationEntryMemoryImpl>>(
                         this,
                         new RelationshipFilterASideCollection<Zetbox.App.GUI.Visual_contains_Visual_RelationEntryMemoryImpl>(this.Context, this));
-                        _Children.CollectionChanged += (s, e) => { OnChildrenCollectionChanged(); };
+                        // _Children.CollectionChanged is managed by OnChildrenCollectionChanged() and called from the RelationEntry
             });
             return _triggerFetchChildrenTask;
         }
@@ -111,7 +111,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.Visual> OnChildren
                     = new ObservableBSideCollectionWrapper<Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryMemoryImpl>>(
                         this,
                         new RelationshipFilterASideCollection<Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryMemoryImpl>(this.Context, this));
-                        _ContextMenu.CollectionChanged += (s, e) => { OnContextMenuCollectionChanged(); };
+                        // _ContextMenu.CollectionChanged is managed by OnContextMenuCollectionChanged() and called from the RelationEntry
             });
             return _triggerFetchContextMenuTask;
         }

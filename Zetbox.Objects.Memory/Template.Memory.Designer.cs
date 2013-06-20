@@ -296,7 +296,7 @@ namespace Zetbox.App.GUI
                     = new ObservableBSideCollectionWrapper<Zetbox.App.GUI.Template, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryMemoryImpl>>(
                         this,
                         new RelationshipFilterASideCollection<Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryMemoryImpl>(this.Context, this));
-                        _Menu.CollectionChanged += (s, e) => { OnMenuCollectionChanged(); };
+                        // _Menu.CollectionChanged is managed by OnMenuCollectionChanged() and called from the RelationEntry
             });
             return _triggerFetchMenuTask;
         }

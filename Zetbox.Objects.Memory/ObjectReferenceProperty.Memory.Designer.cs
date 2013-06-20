@@ -194,7 +194,7 @@ namespace Zetbox.App.Base
                     = new ObservableBSideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>>(
                         this,
                         new RelationshipFilterASideCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>(this.Context, this));
-                        _Methods.CollectionChanged += (s, e) => { OnMethodsCollectionChanged(); };
+                        // _Methods.CollectionChanged is managed by OnMethodsCollectionChanged() and called from the RelationEntry
             });
             return _triggerFetchMethodsTask;
         }

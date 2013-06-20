@@ -765,7 +765,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
                     = new ObservableBSideCollectionWrapper<Zetbox.App.Base.DataType, Zetbox.App.Base.Interface, Zetbox.App.Base.DataType_implements_Interface_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.DataType_implements_Interface_RelationEntryMemoryImpl>>(
                         this,
                         new RelationshipFilterASideCollection<Zetbox.App.Base.DataType_implements_Interface_RelationEntryMemoryImpl>(this.Context, this));
-                        _ImplementsInterfaces.CollectionChanged += (s, e) => { OnImplementsInterfacesCollectionChanged(); };
+                        // _ImplementsInterfaces.CollectionChanged is managed by OnImplementsInterfacesCollectionChanged() and called from the RelationEntry
             });
             return _triggerFetchImplementsInterfacesTask;
         }

@@ -65,7 +65,7 @@ namespace Zetbox.App.Test
                     = new ObservableASideCollectionWrapper<Zetbox.App.Test.N_to_M_relations_A, Zetbox.App.Test.N_to_M_relations_B, Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryMemoryImpl>>(
                         this,
                         new RelationshipFilterBSideCollection<Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryMemoryImpl>(this.Context, this));
-                        _ASide.CollectionChanged += (s, e) => { OnASideCollectionChanged(); };
+                        // _ASide.CollectionChanged is managed by OnASideCollectionChanged() and called from the RelationEntry
             });
             return _triggerFetchASideTask;
         }
