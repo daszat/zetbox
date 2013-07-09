@@ -100,7 +100,7 @@ namespace Zetbox.API.AbstractConsumerTests.Blobs
             ctx.SubmitChanges();
 
             var checkCtx = GetContext();
-            var checkStaticFile = ctx.Find<StaticFile>(staticFile.ID);
+            var checkStaticFile = checkCtx.Find<StaticFile>(staticFile.ID);
             Assert.That(checkStaticFile.Blob.ID, Is.EqualTo(blob_id));
 
             checkCtx.Delete(checkStaticFile);
