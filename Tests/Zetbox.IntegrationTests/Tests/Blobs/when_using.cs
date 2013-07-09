@@ -23,8 +23,7 @@ using Zetbox.API;
 namespace Zetbox.IntegrationTests.Blobs
 {
     [TestFixture]
-    public class when_using
-            : Zetbox.API.AbstractConsumerTests.Blobs.when_using
+    public class when_using : Zetbox.API.AbstractConsumerTests.Blobs.when_using
     {
     }
 }

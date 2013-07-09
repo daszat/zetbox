@@ -14,11 +14,12 @@
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using at.dasz.DocumentManagement;
 using NUnit.Framework;
 using Zetbox.App.Base;
-using System.IO;
 
 namespace Zetbox.API.AbstractConsumerTests.Blobs
 {
@@ -82,6 +83,21 @@ namespace Zetbox.API.AbstractConsumerTests.Blobs
             var sr = new StreamReader(s);
             var txt = sr.ReadToEnd();
             Assert.That(txt, Is.EqualTo(txt_data));
+        }
+
+        [Test]
+        public void should_be_usable_as_StaticFile()
+        {
+            var staticFile = ctx.Create<StaticFile>();
+            staticFile.Blob = ctx.Find<Blob>(blob_id);
+            ctx.SubmitChanges();
+
+            var checkCtx = GetContext();
+            var checkStaticFile = ctx.Find<StaticFile>(staticFile.ID);
+            Assert.That(checkStaticFile.Blob.ID, Is.EqualTo(blob_id));
+
+            checkCtx.Delete(checkStaticFile);
+            Assert.That(() => checkCtx.SubmitChanges(), Throws.Nothing);
         }
     }
 }
