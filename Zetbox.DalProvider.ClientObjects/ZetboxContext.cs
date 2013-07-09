@@ -1028,6 +1028,11 @@ namespace Zetbox.DalProvider.Client
             }
         }
 
+        /// <summary>
+        /// Create and store a Blob.
+        /// </summary>
+        /// <remarks>In contrast to the servers's implementation, this does submit the blob immediately. This may cause orphaned blobs in the database.</remarks>        
+        /// <returns>the ID of the created Blob</returns>
         public int CreateBlob(Stream s, string filename, string mimetype)
         {
             var blob = proxy.SetBlobStream(s, filename, mimetype);

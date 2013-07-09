@@ -27,5 +27,9 @@ namespace Zetbox.DalProvider.Client.Tests.Blobs
     public class when_using
         : Zetbox.API.AbstractConsumerTests.Blobs.when_using
     {
+        protected override NUnit.Framework.Constraints.IResolveConstraint CreateBlobIdConstraint()
+        {
+            return Is.GreaterThan(0);
+        }
     }
 }

@@ -19,6 +19,7 @@ using System.Linq;
 using System.Text;
 using at.dasz.DocumentManagement;
 using NUnit.Framework;
+using NUnit.Framework.Constraints;
 using Zetbox.App.Base;
 
 namespace Zetbox.API.AbstractConsumerTests.Blobs
@@ -26,23 +27,29 @@ namespace Zetbox.API.AbstractConsumerTests.Blobs
     public abstract class when_using : BlobFixture
     {
         [Test]
-        public void should_be_created()
-        {
-            var id = ctx.CreateBlob(data, filename, mimetype);
-            Assert.That(id, Is.GreaterThan(0));
-        }
-
-        [Test]
         public void should_not_be_created_trough_create()
         {
             Assert.That(() => ctx.Create<Blob>(), Throws.InstanceOf<InvalidOperationException>());
+        }
+
+        /// <summary>
+        /// Hook to model the client/server differences. See CreateBlob comments.
+        /// </summary>
+        /// <returns></returns>
+        protected abstract IResolveConstraint CreateBlobIdConstraint();
+
+        [Test]
+        public void should_be_created()
+        {
+            var id = ctx.CreateBlob(data, filename, mimetype);
+            Assert.That(id, CreateBlobIdConstraint());
         }
 
         [Test]
         public void should_be_created_and_retreived()
         {
             var id = ctx.CreateBlob(data, filename2, mimetype);
-            Assert.That(id, Is.GreaterThan(0));
+            Assert.That(id, CreateBlobIdConstraint());
             var blob = ctx.Find<Blob>(id);
             Assert.That(blob, Is.Not.Null);
             Assert.That(blob.OriginalName, Is.EqualTo(filename2));
@@ -98,6 +105,16 @@ namespace Zetbox.API.AbstractConsumerTests.Blobs
 
             checkCtx.Delete(checkStaticFile);
             Assert.That(() => checkCtx.SubmitChanges(), Throws.Nothing);
+        }
+
+        [Test]
+        public void should_be_usable_as_new_StaticFile()
+        {
+            var staticFile = ctx.Create<StaticFile>();
+            staticFile.Blob = ctx.Find<Blob>(blob_id);
+
+            ctx.Delete(staticFile);
+            Assert.That(() => ctx.SubmitChanges(), Throws.Nothing);
         }
     }
 }

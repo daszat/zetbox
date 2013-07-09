@@ -656,6 +656,11 @@ namespace Zetbox.API.Server
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public abstract IEnumerable<T> FindPersistenceObjects<T>(IEnumerable<Guid> exportGuids) where T : class, IPersistenceObject;
 
+        /// <summary>
+        /// Create and store a Blob.
+        /// </summary>
+        /// <remarks>In contrast to the client's implementation, this does not submit the blob immediately. This may cause orphaned files in the document store. A separate task will re-link those files.</remarks>        
+        /// <returns>the (transient) ID of the created Blob</returns>
         public int CreateBlob(Stream s, string filename, string mimetype)
         {
             CheckDisposed();
