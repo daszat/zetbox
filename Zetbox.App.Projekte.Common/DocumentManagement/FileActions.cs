@@ -24,6 +24,8 @@ namespace at.dasz.DocumentManagement
     [Implementor]
     public class FileActions
     {
+        public static readonly string DELETE_KEY = "Deleting";
+
         private static ITextExtractor _textExtractor;
         public FileActions(ITextExtractor textExtractor)
         {
@@ -46,6 +48,13 @@ namespace at.dasz.DocumentManagement
         public static void postSet_Blob(File obj, PropertyPostSetterEventArgs<Zetbox.App.Base.Blob> e)
         {
             obj.ExtractText();
+        }
+
+        // required for StaticFile.HandleBlobChange
+        [Invocation]
+        public static void NotifyDeleting(File obj)
+        {
+            obj.TransientState[DELETE_KEY] = true;
         }
 
         [Invocation]
