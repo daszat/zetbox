@@ -18,9 +18,9 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
-
-using NUnit.Framework;
 using System.Xml;
+using System.Xml.Serialization;
+using NUnit.Framework;
 
 namespace Zetbox.API.AbstractConsumerTests.BinarySerializers
 {
@@ -65,7 +65,7 @@ namespace Zetbox.API.AbstractConsumerTests.BinarySerializers
         public void Export(XmlWriter xml, string[] modules)
         {
         }
-        
+
         public void MergeImport(XmlReader xml)
         {
         }
@@ -159,7 +159,10 @@ namespace Zetbox.API.AbstractConsumerTests.BinarySerializers
         #endregion
 
         #region TransientState
+        [NonSerialized]
         private Dictionary<object, object> _transientState;
+        /// <inheritdoc />
+        [XmlIgnore]
         public Dictionary<object, object> TransientState
         {
             get

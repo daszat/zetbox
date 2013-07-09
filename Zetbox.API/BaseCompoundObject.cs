@@ -22,6 +22,7 @@ namespace Zetbox.API
     using System.Linq;
     using System.Text;
     using System.Xml;
+    using System.Xml.Serialization;
 
     /// <summary>
     /// Implements basic (serialisation) infrastructure of ICompoundObject objects
@@ -250,7 +251,10 @@ namespace Zetbox.API
         #endregion
 
         #region TransientState
+        [NonSerialized]
         private Dictionary<object, object> _transientState;
+        /// <inheritdoc />
+        [XmlIgnore]
         public Dictionary<object, object> TransientState
         {
             get

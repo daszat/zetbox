@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml.Serialization;
 using Zetbox.API.Async;
 
 namespace Zetbox.API.Mocks
@@ -347,17 +348,20 @@ namespace Zetbox.API.Mocks
         {
             return GetImplementationType(Type.GetType(t.Type.FullName + Zetbox.API.Helper.ImplementationSuffix + "," + typeof(TestZetboxContext).Assembly.FullName, true));
         }
-        private IDictionary<object, object> _TransientState = null;
+
+        [NonSerialized]
+        private Dictionary<object, object> _transientState;
         /// <inheritdoc />
+        [XmlIgnore]
         public IDictionary<object, object> TransientState
         {
             get
             {
-                if (_TransientState == null)
+                if (_transientState == null)
                 {
-                    _TransientState = new Dictionary<object, object>();
+                    _transientState = new Dictionary<object, object>();
                 }
-                return _TransientState;
+                return _transientState;
             }
         }
 

@@ -23,6 +23,7 @@ namespace Zetbox.DalProvider.Client
     using System.IO;
     using System.Linq;
     using System.Text;
+    using System.Xml.Serialization;
     using Zetbox.API;
     using Zetbox.API.Async;
     using Zetbox.API.Client;
@@ -1146,18 +1147,20 @@ namespace Zetbox.DalProvider.Client
             return _implTypeFactory(t);
         }
 
-        private IDictionary<object, object> _TransientState = null;
+        [NonSerialized]
+        private Dictionary<object, object> _transientState;
         /// <inheritdoc />
+        [XmlIgnore]
         public IDictionary<object, object> TransientState
         {
             get
             {
                 CheckDisposed();
-                if (_TransientState == null)
+                if (_transientState == null)
                 {
-                    _TransientState = new Dictionary<object, object>();
+                    _transientState = new Dictionary<object, object>();
                 }
-                return _TransientState;
+                return _transientState;
             }
         }
         #endregion

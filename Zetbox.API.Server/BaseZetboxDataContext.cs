@@ -23,6 +23,7 @@ namespace Zetbox.API.Server
     using System.IO;
     using System.Linq;
     using System.Text;
+    using System.Xml.Serialization;
     using Zetbox.API.Async;
     using Zetbox.API.Common;
     using Zetbox.API.Configuration;
@@ -798,18 +799,20 @@ namespace Zetbox.API.Server
         public abstract ImplementationType GetImplementationType(Type t);
         public abstract ImplementationType ToImplementationType(InterfaceType t);
 
-        private IDictionary<object, object> _TransientState = null;
+        [NonSerialized]
+        private Dictionary<object, object> _transientState;
         /// <inheritdoc />
+        [XmlIgnore]
         public IDictionary<object, object> TransientState
         {
             get
             {
                 CheckDisposed();
-                if (_TransientState == null)
+                if (_transientState == null)
                 {
-                    _TransientState = new Dictionary<object, object>();
+                    _transientState = new Dictionary<object, object>();
                 }
-                return _TransientState;
+                return _transientState;
             }
         }
 

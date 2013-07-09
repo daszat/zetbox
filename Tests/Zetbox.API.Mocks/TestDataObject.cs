@@ -315,7 +315,10 @@ namespace Zetbox.API.Mocks
         }
 
         #region TransientState
+        [NonSerialized]
         private Dictionary<object, object> _transientState;
+        /// <inheritdoc />
+        [XmlIgnore]
         public Dictionary<object, object> TransientState
         {
             get

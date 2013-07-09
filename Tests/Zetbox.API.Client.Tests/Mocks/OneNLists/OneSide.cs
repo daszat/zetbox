@@ -20,8 +20,9 @@ namespace Zetbox.API.Client.Mocks.OneNLists
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
-    using Zetbox.DalProvider.Base.RelationWrappers;
+    using System.Xml.Serialization;
     using Zetbox.API.Async;
+    using Zetbox.DalProvider.Base.RelationWrappers;
 
     class OneSide : IOneSide
     {
@@ -327,7 +328,10 @@ namespace Zetbox.API.Client.Mocks.OneNLists
         }
 
         #region TransientState
+        [NonSerialized]
         private Dictionary<object, object> _transientState;
+        /// <inheritdoc />
+        [XmlIgnore]
         public Dictionary<object, object> TransientState
         {
             get

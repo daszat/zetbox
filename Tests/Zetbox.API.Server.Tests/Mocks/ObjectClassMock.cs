@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml.Serialization;
 using Zetbox.API.Async;
 using Zetbox.App.GUI;
 
@@ -510,7 +511,10 @@ namespace Zetbox.API.Server.Mocks
         }
 
         #region TransientState
+        [NonSerialized]
         private Dictionary<object, object> _transientState;
+        /// <inheritdoc />
+        [XmlIgnore]
         public Dictionary<object, object> TransientState
         {
             get
