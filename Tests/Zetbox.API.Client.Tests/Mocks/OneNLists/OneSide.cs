@@ -325,5 +325,20 @@ namespace Zetbox.API.Client.Mocks.OneNLists
         {
             throw new NotImplementedException();
         }
+
+        #region TransientState
+        private Dictionary<object, object> _transientState;
+        public Dictionary<object, object> TransientState
+        {
+            get
+            {
+                if (_transientState == null)
+                {
+                    _transientState = new Dictionary<object, object>();
+                }
+                return _transientState;
+            }
+        }
+        #endregion
     }
 }

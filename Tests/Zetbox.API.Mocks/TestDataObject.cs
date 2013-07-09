@@ -22,7 +22,7 @@ namespace Zetbox.API.Mocks
     using System.Linq;
     using System.Text;
     using System.Xml.Serialization;
-using Zetbox.API.Async;
+    using Zetbox.API.Async;
 
     public interface TestDataObject : IDataObject
     {
@@ -313,5 +313,20 @@ using Zetbox.API.Async;
         {
             throw new NotImplementedException();
         }
+
+        #region TransientState
+        private Dictionary<object, object> _transientState;
+        public Dictionary<object, object> TransientState
+        {
+            get
+            {
+                if (_transientState == null)
+                {
+                    _transientState = new Dictionary<object, object>();
+                }
+                return _transientState;
+            }
+        }
+        #endregion
     }
 }

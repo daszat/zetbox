@@ -382,6 +382,11 @@ namespace Zetbox.API
 
         Guid ObjectClassID { get; }
         #endregion
+
+        /// <summary>
+        /// The transient state of this instance. Used by businesslogic to store temporary data.
+        /// </summary>
+        Dictionary<object, object> TransientState { get; }
     }
 
     /// <summary>
@@ -432,6 +437,11 @@ namespace Zetbox.API
         /// </summary>
         /// <param name="xml">XmlReader to deserialize to.</param>
         void MergeImport(XmlReader xml);
+
+        /// <summary>
+        /// The transient state of this instance. Used by businesslogic to store temporary data.
+        /// </summary>
+        Dictionary<object, object> TransientState { get; }
     }
 
     /// <summary>

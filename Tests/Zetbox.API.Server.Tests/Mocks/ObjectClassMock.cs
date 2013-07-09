@@ -16,8 +16,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Zetbox.App.GUI;
 using Zetbox.API.Async;
+using Zetbox.App.GUI;
 
 namespace Zetbox.API.Server.Mocks
 {
@@ -503,12 +503,25 @@ namespace Zetbox.API.Server.Mocks
         }
         #endregion
 
-
-
         public App.Base.TableMapping? TableMapping
         {
             get;
             set;
         }
+
+        #region TransientState
+        private Dictionary<object, object> _transientState;
+        public Dictionary<object, object> TransientState
+        {
+            get
+            {
+                if (_transientState == null)
+                {
+                    _transientState = new Dictionary<object, object>();
+                }
+                return _transientState;
+            }
+        }
+        #endregion
     }
 }

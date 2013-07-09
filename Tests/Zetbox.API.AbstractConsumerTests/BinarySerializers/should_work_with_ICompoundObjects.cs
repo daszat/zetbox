@@ -157,6 +157,21 @@ namespace Zetbox.API.AbstractConsumerTests.BinarySerializers
             }
         }
         #endregion
+
+        #region TransientState
+        private Dictionary<object, object> _transientState;
+        public Dictionary<object, object> TransientState
+        {
+            get
+            {
+                if (_transientState == null)
+                {
+                    _transientState = new Dictionary<object, object>();
+                }
+                return _transientState;
+            }
+        }
+        #endregion
     }
 
     public abstract class should_work_with_ICompoundObjects<T> : SerializerTestFixture
