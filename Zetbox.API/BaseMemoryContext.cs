@@ -134,8 +134,8 @@ namespace Zetbox.API
             // TODO: Implement Delete on Memory Context
             //((BasePersistenceObject)obj).SetDeleted();
 
-            OnObjectDeleted(obj);
             obj.NotifyDeleting();
+            OnObjectDeleted(obj);
         }
 
         /// <inheritdoc />

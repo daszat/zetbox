@@ -540,8 +540,8 @@ namespace Zetbox.DalProvider.Client
             ((IClientObject)obj).SetDeleted();
 
             IsModified = true;
-            OnObjectDeleted(obj);
             obj.NotifyDeleting();
+            OnObjectDeleted(obj);
         }
 
         private abstract class ExchangeObjectsHandler
