@@ -514,7 +514,7 @@ namespace Zetbox.Client.Presentables.DtoViewModels
             {
                 valueModel = new DtoValueViewModel(dependencies, dataCtx, parent, fileOpener, tmpService, string.Format("value:{0}.{1} = {2}", parentProp.DeclaringType, parentProp.Name, dto))
                 {
-                    Value = asPercent ? string.Format("{0:0.00} %", 100 * Convert.ToDouble(dto)) : string.Format(formatString ?? "{0:0.00}", dto),
+                    Value = asPercent ? string.Format("{0:n2} %", 100 * Convert.ToDouble(dto)) : string.Format(formatString ?? "{0:n2}", dto),
                     ValueAlignment = ContentAlignment.MiddleRight,
                     Title = title,
                     Description = description,
