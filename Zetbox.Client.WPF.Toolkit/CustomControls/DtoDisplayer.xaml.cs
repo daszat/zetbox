@@ -30,6 +30,59 @@ namespace Zetbox.Client.WPF.CustomControls
     using System.Windows.Shapes;
     using Zetbox.Client.Presentables.DtoViewModels;
     using Zetbox.Client.WPF.Toolkit;
+    using System.ComponentModel;
+
+    public class DtoOverlayGrid : Grid, INotifyPropertyChanged
+    {
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        {
+            base.OnPropertyChanged(e);
+
+            if (e.Property == Grid.IsMouseOverProperty)
+            {
+                _isMouseOver = (bool)e.NewValue;
+                OnPropertyChanged("ShowLayer");
+                var parent = VisualTreeHelper.GetParent(this);
+                while (parent != null)
+                {
+                    if (parent is DtoOverlayGrid)
+                    {
+                        var dtoOverlayGrid = (DtoOverlayGrid)parent;
+                        dtoOverlayGrid.SetStop(_isMouseOver);
+                        break;
+                    }
+                    parent = VisualTreeHelper.GetParent(parent);
+                }
+            }
+        }
+
+        private bool _isMouseOver = false;
+        private bool _stop = false;
+        
+        protected void SetStop(bool value)
+        {
+            _stop = value;
+            OnPropertyChanged("ShowLayer");
+        }
+
+        public bool ShowLayer
+        {
+            get 
+            {
+                return _isMouseOver && !_stop;
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string name)
+        {
+            var temp = PropertyChanged;
+            if (temp != null)
+            {
+                temp(this, new PropertyChangedEventArgs(name));
+            }
+        }
+    }
 
     /// <summary>
     /// Interaction logic for DtoDisplayer.xaml
