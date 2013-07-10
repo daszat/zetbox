@@ -253,37 +253,40 @@
         </DataTemplate>
         <DataTemplate DataType="{x:Type dto:DtoGroupedViewModel}">
             <ContentControl ContentTemplate="{StaticResource ExportOverlayTemplate}">
-                <GroupBox Header="{Binding Title}">
-                    <DockPanel x:Name="DtoGroup"
-                               Background="{Binding Background}">
-                        <TextBlock x:Name="Description"
-                                   DockPanel.Dock="Bottom"
-                                   Margin="3"
-                                   Text="{Binding Description}"
-                                   Background="{Binding Background}"
-                                   Visibility="{Binding Description, Converter={StaticResource EmptyStringToCollapsedConverter}}"
-                                   FontSize="12" />
-                        <StackPanel x:Name="Commands"
-                                    Visibility="{Binding IsPrintableRoot, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                    DockPanel.Dock="Bottom"
-                                    Orientation="Horizontal"
-                                    Margin="2"
-                                    HorizontalAlignment="Right">
-                            <ctrls:CommandButton x:Name="GroupPrintButton"
-                                                 CommandViewModel="{Binding PrintCommand}"
-                                                 Style="{StaticResource ImageButton}"
-                                                 Image="/Zetbox.Client.WPF.Toolkit;component/Images/printer.png" />
-                            <ctrls:CommandButton x:Name="GroupExportButton"
-                                                 CommandViewModel="{Binding ExportCommand}"
-                                                 Visibility="{Binding IsExportable, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                                 Style="{StaticResource ImageButton}"
-                                                 Image="/Zetbox.Client.WPF.Toolkit;component/Images/printer.png" />
-                        </StackPanel>
-                        <ItemsControl x:Name="Items"
-                                      Margin="3,0"
-                                      ItemsSource="{Binding Items}" />
-                    </DockPanel>
-                </GroupBox>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                              VerticalScrollBarVisibility="Auto">
+                    <GroupBox Header="{Binding Title}">
+                        <DockPanel x:Name="DtoGroup"
+                                   Background="{Binding Background}">
+                            <TextBlock x:Name="Description"
+                                       DockPanel.Dock="Bottom"
+                                       Margin="3"
+                                       Text="{Binding Description}"
+                                       Background="{Binding Background}"
+                                       Visibility="{Binding Description, Converter={StaticResource EmptyStringToCollapsedConverter}}"
+                                       FontSize="12" />
+                            <StackPanel x:Name="Commands"
+                                        Visibility="{Binding IsPrintableRoot, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                        DockPanel.Dock="Bottom"
+                                        Orientation="Horizontal"
+                                        Margin="2"
+                                        HorizontalAlignment="Right">
+                                <ctrls:CommandButton x:Name="GroupPrintButton"
+                                                     CommandViewModel="{Binding PrintCommand}"
+                                                     Style="{StaticResource ImageButton}"
+                                                     Image="/Zetbox.Client.WPF.Toolkit;component/Images/printer.png" />
+                                <ctrls:CommandButton x:Name="GroupExportButton"
+                                                     CommandViewModel="{Binding ExportCommand}"
+                                                     Visibility="{Binding IsExportable, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                     Style="{StaticResource ImageButton}"
+                                                     Image="/Zetbox.Client.WPF.Toolkit;component/Images/printer.png" />
+                            </StackPanel>
+                            <ItemsControl x:Name="Items"
+                                          Margin="3,0"
+                                          ItemsSource="{Binding Items}" />
+                        </DockPanel>
+                    </GroupBox>
+                </ScrollViewer>
             </ContentControl>
         </DataTemplate>
     </UserControl.Resources>
