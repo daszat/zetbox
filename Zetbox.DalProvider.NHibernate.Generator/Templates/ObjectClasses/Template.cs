@@ -258,7 +258,8 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses
         {
             Properties.ProxyProperty.Call(Host, ctx,
                 serList, prop.Module.Namespace, prop.GetElementTypeString(), prop.Name, false, true,
-                prop.DefaultValue != null, prop.ObjectClass.GetDataTypeString(),
+                prop.DefaultValue != null && !prop.IsCalculated(), // No default value for calculated properties, default values are used then for database migration
+                prop.ObjectClass.GetDataTypeString(),
                 prop.GetClassName(),
                 prop.IsNullable(),
                 "_is" + prop.Name + "Set",
