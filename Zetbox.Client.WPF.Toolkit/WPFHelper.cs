@@ -259,7 +259,7 @@ namespace Zetbox.Client.WPF.Toolkit
                         break;
                     case ColumnDisplayModel.ColumnType.PropertyModel:
                         {
-                            if (sortProperty != null) col.SetValue(sortProperty, desc.Path);
+                            if (sortProperty != null) col.SetValue(sortProperty, desc.DynamicOrderByExpression);
 
                             var tmp = desc.Path.Split('.').Select(i => String.Format("PropertyModelsByName[{0}]", i));
                             var binding = string.Join(".ValueAsync.", tmp.ToArray());

@@ -26,7 +26,7 @@ namespace Zetbox.IntegrationTests.Client
 
     public class ViewModelFactoryTests : AbstractTestFixture
     {
-        private IViewModelFactory vmf;
+        protected IViewModelFactory vmf;
 
         public override void SetUp()
         {

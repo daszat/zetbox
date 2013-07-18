@@ -731,10 +731,10 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             var result = FilterList.AppendFilter(_query());
 
-            if (!string.IsNullOrEmpty(_sortProperty))
+            if (!string.IsNullOrEmpty(_orderByExpression))
             {
-                result = result.OrderBy(string.Format("it.{0} {1}",                // Sorting CompoundObject does not work
-                                _sortProperty,                         // Maybe we should implement a custom comparer
+                result = result.OrderBy(string.Format("{0} {1}",                // Sorting CompoundObject does not work
+                                _orderByExpression,                         // Maybe we should implement a custom comparer
                                 _sortDirection == System.ComponentModel.ListSortDirection.Descending ? "desc" : string.Empty));
             }
 
@@ -800,14 +800,14 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             var tmp = FilterList.AppendPostFilter(new List<DataObjectViewModel>(_instancesFromServer));
 
             // Sort
-            if (!string.IsNullOrEmpty(_sortProperty))
+            if (!string.IsNullOrEmpty(_orderByExpression))
             {
                 _filteredInstances =
                     new List<DataObjectViewModel>(
                         tmp.Select(vm => vm.Object)                            // Back to a plain list of IDataObjects
                            .AsQueryable(this.InterfaceType.Type)               // To a typed List
-                           .OrderBy(string.Format("it.{0} {1}",                // Sorting CompoundObject does not work
-                                        _sortProperty,                         // Maybe we should implement a custom comparer
+                           .OrderBy(string.Format("{0} {1}",                // Sorting CompoundObject does not work
+                                        _orderByExpression,                         // Maybe we should implement a custom comparer
                                         _sortDirection == System.ComponentModel.ListSortDirection.Descending ? "desc" : string.Empty))
                            .Cast<IDataObject>()
                            .Select(obj => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj))

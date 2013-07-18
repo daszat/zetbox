@@ -90,6 +90,7 @@
     <Compile Include="Tests\BinarySerializers\should_work_with_ICompoundObjects.cs" />
     <Compile Include="Tests\Blobs\when_using.cs" />
     <Compile Include="Tests\Client\GuiExtensionTests.cs" />
+    <Compile Include="Tests\Client\InstanceListTests.cs" />
     <Compile Include="Tests\Client\ViewModelFactoryTests.cs" />
     <Compile Include="Tests\CompoundObjects\when_changing_a_CompoundObject_list.cs" />
     <Compile Include="Tests\CompoundObjects\when_changing.cs" />

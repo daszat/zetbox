@@ -20,16 +20,16 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
     public partial class InstanceListViewModel
     {
-        private string _sortProperty = null;
+        private string _orderByExpression = null;
         private System.ComponentModel.ListSortDirection _sortDirection = System.ComponentModel.ListSortDirection.Ascending;
 
-        public string SortProperty { get { return _sortProperty; } }
+        public string SortProperty { get { return _orderByExpression; } }
         public System.ComponentModel.ListSortDirection SortDirection { get { return _sortDirection; } }
 
-        public void Sort(string propName, System.ComponentModel.ListSortDirection direction)
+        public void Sort(string orderByExpression, System.ComponentModel.ListSortDirection direction)
         {
-            if (string.IsNullOrEmpty(propName)) throw new ArgumentNullException("propName");
-            _sortProperty = propName;
+            if (string.IsNullOrEmpty(orderByExpression)) throw new ArgumentNullException("propName");
+            _orderByExpression = orderByExpression;
             _sortDirection = direction;
             if (_instancesFromServer.Count < Helper.MAXLISTCOUNT)
             {
@@ -41,15 +41,15 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        public void SetInitialSort(string propName)
+        public void SetInitialSort(string orderByExpression)
         {
-            SetInitialSort(propName, System.ComponentModel.ListSortDirection.Ascending);
+            SetInitialSort(orderByExpression, System.ComponentModel.ListSortDirection.Ascending);
         }
 
-        public void SetInitialSort(string propName, System.ComponentModel.ListSortDirection direction)
+        public void SetInitialSort(string orderByExpression, System.ComponentModel.ListSortDirection direction)
         {
-            if (string.IsNullOrEmpty(propName)) throw new ArgumentNullException("propName");
-            _sortProperty = propName;
+            if (string.IsNullOrEmpty(orderByExpression)) throw new ArgumentNullException("propName");
+            _orderByExpression = orderByExpression;
             _sortDirection = direction;
         }
     }
