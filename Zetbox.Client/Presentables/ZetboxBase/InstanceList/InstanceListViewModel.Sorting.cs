@@ -28,7 +28,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public void Sort(string orderByExpression, System.ComponentModel.ListSortDirection direction)
         {
-            if (string.IsNullOrEmpty(orderByExpression)) throw new ArgumentNullException("propName");
+            if (string.IsNullOrEmpty(orderByExpression)) throw new ArgumentNullException("orderByExpression");
             _orderByExpression = orderByExpression;
             _sortDirection = direction;
             if (_instancesFromServer.Count < Helper.MAXLISTCOUNT)
@@ -48,7 +48,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public void SetInitialSort(string orderByExpression, System.ComponentModel.ListSortDirection direction)
         {
-            if (string.IsNullOrEmpty(orderByExpression)) throw new ArgumentNullException("propName");
+            if (string.IsNullOrEmpty(orderByExpression)) throw new ArgumentNullException("orderByExpression");
             _orderByExpression = orderByExpression;
             _sortDirection = direction;
         }
