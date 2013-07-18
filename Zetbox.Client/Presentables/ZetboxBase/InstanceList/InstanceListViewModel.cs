@@ -569,6 +569,17 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
+        public void AddDisplayColumn(Property[] propPath)
+        {
+            DisplayedColumns.Columns.Add(ColumnDisplayModel.Create(GridDisplayConfiguration.Mode.ReadOnly, propPath));
+        }
+
+        public void RemoveDisplayColumn(Property property)
+        {
+            var col = DisplayedColumns.Columns.FirstOrDefault(c => c.Property == property);
+            if (col != null) DisplayedColumns.Columns.Remove(col);
+        }
+
         /// <summary>
         /// Properties displayed in <see cref="DisplayedColumns"/>
         /// </summary>

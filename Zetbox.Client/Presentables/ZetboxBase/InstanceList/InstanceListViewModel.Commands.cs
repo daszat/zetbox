@@ -248,13 +248,12 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             {
                 if (e.Item.IsSelected)
                 {
-                    DisplayedColumns.Columns.Add(ColumnDisplayModel.Create(GridDisplayConfiguration.Mode.ReadOnly, e.Item.Properties));
+                    AddDisplayColumn(e.Item.Properties);
                     ViewMethod = InstanceListViewMethod.Details;
                 }
                 else
                 {
-                    var col = DisplayedColumns.Columns.FirstOrDefault(c => c.Property == e.Item.Property);
-                    if (col != null) DisplayedColumns.Columns.Remove(col);
+                    RemoveDisplayColumn(e.Item.Property);
                 }
             };
             ViewModelFactory.ShowDialog(dlg);

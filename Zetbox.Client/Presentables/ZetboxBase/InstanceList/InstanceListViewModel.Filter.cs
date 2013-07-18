@@ -71,7 +71,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         void _filterList_UserFilterAdded(object sender, UserFilterAddedEventArgs e)
         {
             if (DisplayedProperties.Any(dp => dp.SequenceEqual(e.Properties))) return;
-            DisplayedColumns.Columns.Add(ColumnDisplayModel.Create(GridDisplayConfiguration.Mode.ReadOnly, e.Properties.ToArray()));
+            AddDisplayColumn(e.Properties.ToArray());
         }
 
         /// <summary>
