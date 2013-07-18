@@ -88,6 +88,7 @@ namespace Zetbox.App.Base
         private static TimeSpan GetIntervalTimeSpan(Frequency? freq, int? interval)
         {
             var i = Math.Abs(interval ?? 1);
+            i = i + 1; // Include also next interval
             switch (freq)
             {
                 case Frequency.Yearly:
