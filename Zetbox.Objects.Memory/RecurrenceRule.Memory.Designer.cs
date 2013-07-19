@@ -1003,6 +1003,70 @@ namespace Zetbox.App.Base
         /// 
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetRelative_RecurrenceRule")]
+        public virtual DateTime GetRelative(DateTime dt)
+        {
+            var e = new MethodReturnEventArgs<DateTime>();
+            if (OnGetRelative_RecurrenceRule != null)
+            {
+                OnGetRelative_RecurrenceRule(this, e, dt);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on RecurrenceRule.GetRelative");
+            }
+            return e.Result;
+        }
+        public delegate void GetRelative_Handler<T>(T obj, MethodReturnEventArgs<DateTime> ret, DateTime dt);
+        public static event GetRelative_Handler<RecurrenceRule> OnGetRelative_RecurrenceRule;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<RecurrenceRule> OnGetRelative_RecurrenceRule_CanExec;
+
+        [EventBasedMethod("OnGetRelative_RecurrenceRule_CanExec")]
+        public virtual bool GetRelativeCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetRelative_RecurrenceRule_CanExec != null)
+				{
+					OnGetRelative_RecurrenceRule_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<RecurrenceRule> OnGetRelative_RecurrenceRule_CanExecReason;
+
+        [EventBasedMethod("OnGetRelative_RecurrenceRule_CanExecReason")]
+        public virtual string GetRelativeCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetRelative_RecurrenceRule_CanExecReason != null)
+				{
+					OnGetRelative_RecurrenceRule_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
+        /// <summary>
+        /// 
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetWithinInterval_RecurrenceRule")]
         public virtual IEnumerable<DateTime> GetWithinInterval(DateTime start, DateTime from, DateTime until)
         {

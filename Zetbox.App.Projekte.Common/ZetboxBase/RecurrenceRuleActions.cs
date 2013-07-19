@@ -138,6 +138,28 @@ namespace Zetbox.App.Base
             if (e.Result == default(DateTime)) e.Result = dt;
         }
 
+        [Invocation]
+        public static void GetRelative(RecurrenceRule obj, MethodReturnEventArgs<DateTime> e, DateTime dt)
+        {
+            if (obj.Count.HasValue == false)
+            {
+                e.Result = obj.GetNext(dt, dt);
+            }
+            else if (obj.Count == 1)
+            {
+                throw new InvalidOperationException("count cannot be 1, would return dt");
+            }
+            else
+            {
+                var result = dt;
+                for (int i = 0; i < obj.Count; i++)
+                {
+                    result = obj.GetNext(result, result);
+                }
+                e.Result = result;
+            }
+        }
+
         private static IEnumerable<int> ToInt(string val)
         {
             if (string.IsNullOrWhiteSpace(val)) throw new ArgumentNullException("val");
@@ -206,41 +228,49 @@ namespace Zetbox.App.Base
                 interval = 1;
             }
 
+            if (obj.Until.HasValue && obj.Until < until)
+            {
+                until = obj.Until.Value;
+            }
 
             var result = new List<DateTime>();
             var current = start;
             AddToResult(result, current, from, until);
+            int count = 1;
 
-            while (current <= until)
+            while (current <= until && (obj.Count.HasValue == false || obj.Count > count))
             {
-
                 switch (obj.Frequency.Value)
                 {
                     case Frequency.Yearly:
                         current = current.AddYears(interval);
-                        AddToResult(result, current, from, until);
+                        count += AddToResult(result, current, from, until);
                         break;
                     case Frequency.Monthly:
-                        current = current.AddMonths(interval);
                         if (obj.ByMonthDay != null)
                         {
-                            foreach (var day in ToInt(obj.ByMonthDay))
+                            for (int i = 0; i < 2; i++)
                             {
-                                var first = current.FirstMonthDay().Add(current.TimeOfDay);
-                                var last = current.LastMonthDay().Add(current.TimeOfDay);
-                                if (day >= 0)
+                                foreach (var day in ToInt(obj.ByMonthDay))
                                 {
-                                    AddToResult(result, first.AddDays(day - 1), from, until);
+                                    if (day >= 0)
+                                    {
+                                        var first = current.FirstMonthDay().Add(current.TimeOfDay);
+                                        count += AddToResult(result, first.AddDays(day - 1), from, until);
+                                    }
+                                    else
+                                    {
+                                        var last = current.LastMonthDay().Add(current.TimeOfDay);
+                                        count += AddToResult(result, last.AddDays(day + 1), from, until);
+                                    }
                                 }
-                                else
-                                {
-                                    AddToResult(result, last.AddDays(day + 1), from, until);
-                                }
+                                current = current.AddMonths(interval);
                             }
                         }
                         else
                         {
-                            AddToResult(result, current, from, until);
+                            current = current.AddMonths(interval);
+                            count += AddToResult(result, current, from, until);
                         }
                         break;
                     case Frequency.Weekly:
@@ -250,29 +280,29 @@ namespace Zetbox.App.Base
                             var first = current.FirstWeekDay().Add(current.TimeOfDay);
                             foreach (var wd in ToWeekdays(obj.ByDay))
                             {
-                                AddToResult(result, first.AddDays((((int)wd - 1) % 7)), from, until);
+                                count += AddToResult(result, first.AddDays((((int)wd - 1) % 7)), from, until);
                             }
                         }
                         else
                         {
-                            AddToResult(result, current, from, until);
+                            count += AddToResult(result, current, from, until);
                         }
                         break;
                     case Frequency.Daily:
                         current = current.AddDays(interval);
-                        AddToResult(result, current, from, until);
+                        count += AddToResult(result, current, from, until);
                         break;
                     case Frequency.Hourly:
                         current = current.AddHours(interval);
-                        AddToResult(result, current, from, until);
+                        count += AddToResult(result, current, from, until);
                         break;
                     case Frequency.Minutely:
                         current = current.AddMinutes(interval);
-                        AddToResult(result, current, from, until);
+                        count += AddToResult(result, current, from, until);
                         break;
                     case Frequency.Secondly:
                         current = current.AddSeconds(interval);
-                        AddToResult(result, current, from, until);
+                        count += AddToResult(result, current, from, until);
                         break;
                     default:
                         break;
@@ -282,12 +312,15 @@ namespace Zetbox.App.Base
             e.Result = result;
         }
 
-        private static void AddToResult(List<DateTime> result, DateTime current, DateTime start, DateTime until)
+        private static int AddToResult(List<DateTime> result, DateTime current, DateTime start, DateTime until)
         {
-            if (current >= start && current <= until)
+            if (current >= start && current <= until 
+                && (result.Count == 0 || result.Last() < current))
             {
                 result.Add(current);
+                return 1;
             }
+            return 0;
         }
     }
 }

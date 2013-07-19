@@ -163,6 +163,11 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
+        DateTime GetRelative(DateTime dt);
+
+        /// <summary>
+        /// 
+        /// </summary>
         IEnumerable<DateTime> GetWithinInterval(DateTime start, DateTime from, DateTime until);
     }
 }

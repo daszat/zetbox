@@ -29939,6 +29939,30 @@ public static void GetNextCanExecReason(RecurrenceRule obj, MethodReturnEventArg
     <ZetboxBase:Name>GetNext</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>3d4ec88b-fe8e-452e-a71d-03143a75aeb0</ZetboxBase:ObjectClass>
   </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="51666841-ec7e-4e6f-a9a1-bcc06f9ff272">
+    <ZetboxBase:ChangedOn>2013-07-19T08:48:54.484338Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void GetRelative(RecurrenceRule obj, MethodReturnEventArgs&lt;DateTime&gt; e, DateTime dt)
+{
+}
+
+[Invocation]
+public static void GetRelativeCanExec(RecurrenceRule obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetRelativeCanExecReason(RecurrenceRule obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-07-19T08:48:54.484338Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:InvokeOnServer>false</ZetboxBase:InvokeOnServer>
+    <GUI:IsDisplayable>false</GUI:IsDisplayable>
+    <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
+    <ZetboxBase:Name>GetRelative</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>3d4ec88b-fe8e-452e-a71d-03143a75aeb0</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
   <ZetboxBase:Method ExportGuid="6869e3bd-d208-4c0f-b0f3-b305c2d669b4">
     <ZetboxBase:ChangedOn>2013-03-22T10:11:06.129156Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
@@ -30935,6 +30959,28 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <ZetboxBase:Method>01781028-acda-4618-89a6-78256aa1a94b</ZetboxBase:Method>
     <ZetboxBase:Parameter_pos>1</ZetboxBase:Parameter_pos>
     <ZetboxBase:Name>start</ZetboxBase:Name>
+    <ZetboxBase:DateTimeStyle>1</ZetboxBase:DateTimeStyle>
+  </ZetboxBase:DateTimeParameter>
+  <ZetboxBase:DateTimeParameter ExportGuid="593505f0-59be-4821-ae95-b80fac98b01e">
+    <ZetboxBase:ChangedOn>2013-07-19T08:48:54.484338Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-07-19T08:48:54.484338Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>51666841-ec7e-4e6f-a9a1-bcc06f9ff272</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>1</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>dt</ZetboxBase:Name>
+    <ZetboxBase:DateTimeStyle>1</ZetboxBase:DateTimeStyle>
+  </ZetboxBase:DateTimeParameter>
+  <ZetboxBase:DateTimeParameter ExportGuid="a397e974-c0d6-4e40-a2fe-15bb5e592d15">
+    <ZetboxBase:ChangedOn>2013-07-19T08:48:54.484338Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-07-19T08:48:54.484338Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>true</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>51666841-ec7e-4e6f-a9a1-bcc06f9ff272</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>retVal</ZetboxBase:Name>
     <ZetboxBase:DateTimeStyle>1</ZetboxBase:DateTimeStyle>
   </ZetboxBase:DateTimeParameter>
   <ZetboxBase:DateTimeParameter ExportGuid="83b03e47-4e76-4053-9b0b-39f50ed7b61b">
