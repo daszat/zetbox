@@ -282,6 +282,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\ZetboxBase\TagPropertyEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\ZetboxBase\RecurrenceRulePropertyEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -691,6 +695,9 @@
     </Compile>
     <Compile Include="View\ZetboxBase\CompoundListEditor.xaml.cs">
       <DependentUpon>CompoundListEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ZetboxBase\TagPropertyEditor.xaml.cs">
+      <DependentUpon>TagPropertyEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ZetboxBase\NullableEMailTextBoxEditor.cs" />
     <Compile Include="View\ZetboxBase\RecurrenceRulePropertyEditor.xaml.cs">

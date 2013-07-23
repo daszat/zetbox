@@ -275,6 +275,7 @@
     <Compile Include="StringProperty.NHibernate.Designer.cs" />
     <Compile Include="StringRangeConstraint.NHibernate.Designer.cs" />
     <Compile Include="SyncProvider.NHibernate.Designer.cs" />
+    <Compile Include="TagCache.NHibernate.Designer.cs" />
     <Compile Include="Task.NHibernate.Designer.cs" />
     <Compile Include="Template.NHibernate.Designer.cs" />
     <Compile Include="TestCustomObject.NHibernate.Designer.cs" />

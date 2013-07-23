@@ -95,6 +95,7 @@
     <EntitySet Name="SourceTableEfImpl" EntityType="Model.SourceTableEfImpl" />
     <EntitySet Name="StagingDatabaseEfImpl" EntityType="Model.StagingDatabaseEfImpl" />
     <EntitySet Name="SyncProviderEfImpl" EntityType="Model.SyncProviderEfImpl" />
+    <EntitySet Name="TagCacheEfImpl" EntityType="Model.TagCacheEfImpl" />
     <EntitySet Name="TaskEfImpl" EntityType="Model.TaskEfImpl" />
     <EntitySet Name="Task_Rights" EntityType="Model.Task_Rights" />
     <AssociationSet Name="FK_Tasks_Rights" Association="Model.FK_Tasks_Rights">
@@ -1730,6 +1731,7 @@
                         ToRole="Excerpt" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
     <Property Name="Name" Type="String" Nullable="true" MaxLength="1024"  />
+    <Property Name="Tags" Type="String" Nullable="true" MaxLength="2000"  />
   </EntityType>
   <EntityType Name="FileImportConfigurationEfImpl">
     <Key>
@@ -2696,6 +2698,13 @@
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="100"  />
     <Property Name="NextSync" Type="DateTime" Nullable="false"  />
+  </EntityType>
+  <EntityType Name="TagCacheEfImpl">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100"  />
   </EntityType>
   <EntityType Name="TaskEfImpl">
     <Key>

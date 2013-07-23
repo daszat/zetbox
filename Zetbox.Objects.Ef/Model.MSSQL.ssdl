@@ -99,6 +99,7 @@
     <EntitySet Name="SourceTable" EntityType="Model.Store.SourceTable" Schema="migration" Table="SourceTables"/>
     <EntitySet Name="StagingDatabase" EntityType="Model.Store.StagingDatabase" Schema="migration" Table="StagingDatabases"/>
     <EntitySet Name="SyncProvider" EntityType="Model.Store.SyncProvider" Schema="calendar" Table="SyncProviders"/>
+    <EntitySet Name="TagCache" EntityType="Model.Store.TagCache" Schema="gui" Table="TagCaches"/>
     <EntitySet Name="Task" EntityType="Model.Store.Task" Schema="projekte" Table="Tasks"/>
     <EntitySet Name="Task_Rights" EntityType="Model.Store.Task_Rights" Schema="projekte" Table="Tasks_Rights"/>
     <AssociationSet Name="FK_Tasks_Rights" Association="Model.Store.FK_Tasks_Rights">
@@ -1876,6 +1877,7 @@
     <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="1024" Nullable="true" />
+    <Property Name="Tags" Type="nvarchar" MaxLength="2000" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="FileImportConfiguration">
@@ -2662,6 +2664,14 @@
     <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="NextSync" Type="datetime2" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="TagCache">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="Task">

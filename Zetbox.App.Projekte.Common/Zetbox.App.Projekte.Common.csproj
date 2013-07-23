@@ -86,6 +86,7 @@
     <Compile Include="DocumentManagement\ExcerptActions.cs" />
     <Compile Include="DocumentManagement\FileImportService.cs" />
     <Compile Include="DocumentManagement\ImportedFileActions.cs" />
+    <Compile Include="Gui\TagCacheActions.cs" />
     <Compile Include="Gui\FilterConfigurationActions.cs" />
     <Compile Include="Gui\PropertyFilterConfigurationActions.cs" />
     <Compile Include="Gui\NavigationEntryActions.cs" />

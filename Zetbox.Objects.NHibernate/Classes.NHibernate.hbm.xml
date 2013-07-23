@@ -609,6 +609,10 @@
         <property name="Name" 
                   column="`Name`" 
                   optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Tags" 
+                  column="`Tags`" 
+                  optimistic-lock="false"/>
 
         <!-- define the subclasses -->
         <joined-subclass
@@ -1278,6 +1282,31 @@
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Type" column="`fk_Type`" class="Zetbox.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Zetbox.Objects.NHibernateImpl" />
 
+
+        <!-- define the subclasses -->
+
+    </class>
+    <class name="Zetbox.App.GUI.TagCacheNHibernateImpl+TagCacheProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.GUI.TagCacheNHibernateImpl+TagCacheProxy, Zetbox.Objects.NHibernateImpl"
+           schema="`gui`"
+           table="`TagCaches`"
+           abstract="false"
+           dynamic-update="false"
+           optimistic-lock="none"
+           batch-size="100">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`gui`</param>
+                <param name="sequence">`TagCaches_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="Name" 
+                  column="`Name`" 
+                  optimistic-lock="false"/>
 
         <!-- define the subclasses -->
 

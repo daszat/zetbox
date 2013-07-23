@@ -42,6 +42,15 @@ namespace at.dasz.DocumentManagement
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("b4f41179-44f8-4235-b272-48f3f1452da7")]
+        string Tags {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Creates an excerpt from the current file
         /// </summary>
         void ExtractText();

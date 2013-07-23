@@ -801,6 +801,75 @@ namespace at.dasz.DocumentManagement
         public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnName_IsValid;
 
         /// <summary>
+        /// 
+        /// </summary>
+        // value type property
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public string Tags
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _Tags;
+                if (OnTags_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnTags_Getter(this, __e);
+                    __result = _Tags = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_Tags != value)
+                {
+                    var __oldValue = _Tags;
+                    var __newValue = value;
+                    if (OnTags_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnTags_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("Tags", __oldValue, __newValue);
+                    _Tags = __newValue;
+                    NotifyPropertyChanged("Tags", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnTags_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnTags_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("Tags");
+                }
+            }
+        }
+        private string _Tags_store;
+        private string _Tags {
+            get { return _Tags_store; }
+            set {
+                ReportEfPropertyChanging("Tags");
+                _Tags_store = value;
+                ReportEfPropertyChanged("Tags");
+            }
+        }
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<at.dasz.DocumentManagement.File, string> OnTags_Getter;
+		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, string> OnTags_PreSetter;
+		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, string> OnTags_PostSetter;
+
+        public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnTags_IsValid;
+
+        /// <summary>
         /// Creates an excerpt from the current file
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
@@ -1069,6 +1138,7 @@ namespace at.dasz.DocumentManagement
             me.CreatedOn = other.CreatedOn;
             me.ExportGuid = other.ExportGuid;
             me.Name = other.Name;
+            me.Tags = other.Tags;
             this._fk_Blob = otherImpl._fk_Blob;
             this._fk_ChangedBy = otherImpl._fk_ChangedBy;
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
@@ -1095,6 +1165,7 @@ namespace at.dasz.DocumentManagement
                 case "Excerpt":
                 case "ExportGuid":
                 case "Name":
+                case "Tags":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }
@@ -1246,6 +1317,15 @@ namespace at.dasz.DocumentManagement
                         obj => obj.Name,
                         (obj, val) => obj.Name = val,
 						obj => OnName_IsValid), 
+                    // else
+                    new PropertyDescriptorEfImpl<File, string>(
+                        lazyCtx,
+                        new Guid("b4f41179-44f8-4235-b272-48f3f1452da7"),
+                        "Tags",
+                        null,
+                        obj => obj.Tags,
+                        (obj, val) => obj.Tags = val,
+						obj => OnTags_IsValid), 
                     // position columns
                 };
             }
@@ -1314,6 +1394,7 @@ namespace at.dasz.DocumentManagement
             SetNotInitializedProperty("CreatedBy");
             SetNotInitializedProperty("Excerpt");
             SetNotInitializedProperty("Name");
+            SetNotInitializedProperty("Tags");
             base.NotifyCreated();
             if (OnNotifyCreated_File != null) OnNotifyCreated_File(this);
         }
@@ -1409,6 +1490,7 @@ namespace at.dasz.DocumentManagement
                 binStream.Write(this._ExportGuid);
             }
             binStream.Write(this._Name);
+            binStream.Write(this._Tags);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -1434,6 +1516,7 @@ namespace at.dasz.DocumentManagement
                 this._ExportGuid = binStream.ReadGuid();
             }
             this._Name = binStream.ReadString();
+            this._Tags = binStream.ReadString();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
@@ -1453,6 +1536,7 @@ namespace at.dasz.DocumentManagement
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "at.dasz.DocumentManagement");
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this._Name, xml, "Name", "at.dasz.DocumentManagement");
+            if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this._Tags, xml, "Tags", "at.dasz.DocumentManagement");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -1480,6 +1564,9 @@ namespace at.dasz.DocumentManagement
                 break;
             case "at.dasz.DocumentManagement|Name":
                 this._Name = XmlStreamer.ReadString(xml);
+                break;
+            case "at.dasz.DocumentManagement|Tags":
+                this._Tags = XmlStreamer.ReadString(xml);
                 break;
             }
         }

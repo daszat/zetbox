@@ -260,6 +260,7 @@
     <Compile Include="StringProperty.Memory.Designer.cs" />
     <Compile Include="StringRangeConstraint.Memory.Designer.cs" />
     <Compile Include="SyncProvider.Memory.Designer.cs" />
+    <Compile Include="TagCache.Memory.Designer.cs" />
     <Compile Include="Task.Memory.Designer.cs" />
     <Compile Include="Template.Memory.Designer.cs" />
     <Compile Include="TestCustomObject.Memory.Designer.cs" />

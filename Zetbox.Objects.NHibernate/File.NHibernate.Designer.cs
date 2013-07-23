@@ -754,6 +754,64 @@ namespace at.dasz.DocumentManagement
         public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnName_IsValid;
 
         /// <summary>
+        /// 
+        /// </summary>
+
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        public string Tags
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = Proxy.Tags;
+                if (OnTags_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnTags_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (Proxy.Tags != value)
+                {
+                    var __oldValue = Proxy.Tags;
+                    var __newValue = value;
+                    if (OnTags_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnTags_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("Tags", __oldValue, __newValue);
+                    Proxy.Tags = __newValue;
+                    NotifyPropertyChanged("Tags", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnTags_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnTags_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("Tags");
+                }
+            }
+        }
+
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<at.dasz.DocumentManagement.File, string> OnTags_Getter;
+		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, string> OnTags_PreSetter;
+		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, string> OnTags_PostSetter;
+
+        public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnTags_IsValid;
+
+        /// <summary>
         /// Creates an excerpt from the current file
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
@@ -1022,6 +1080,7 @@ namespace at.dasz.DocumentManagement
             me.CreatedOn = other.CreatedOn;
             me.ExportGuid = other.ExportGuid;
             me.Name = other.Name;
+            me.Tags = other.Tags;
             this._fk_Blob = otherImpl._fk_Blob;
             this._fk_ChangedBy = otherImpl._fk_ChangedBy;
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
@@ -1085,6 +1144,7 @@ namespace at.dasz.DocumentManagement
                 case "Excerpt":
                 case "ExportGuid":
                 case "Name":
+                case "Tags":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }
@@ -1236,6 +1296,15 @@ namespace at.dasz.DocumentManagement
                         obj => obj.Name,
                         (obj, val) => obj.Name = val,
 						obj => OnName_IsValid), 
+                    // else
+                    new PropertyDescriptorNHibernateImpl<File, string>(
+                        lazyCtx,
+                        new Guid("b4f41179-44f8-4235-b272-48f3f1452da7"),
+                        "Tags",
+                        null,
+                        obj => obj.Tags,
+                        (obj, val) => obj.Tags = val,
+						obj => OnTags_IsValid), 
                     // position columns
                 };
             }
@@ -1307,6 +1376,7 @@ namespace at.dasz.DocumentManagement
             SetNotInitializedProperty("CreatedBy");
             SetNotInitializedProperty("Excerpt");
             SetNotInitializedProperty("Name");
+            SetNotInitializedProperty("Tags");
             base.NotifyCreated();
             if (OnNotifyCreated_File != null) OnNotifyCreated_File(this);
         }
@@ -1376,6 +1446,8 @@ namespace at.dasz.DocumentManagement
 
             public virtual string Name { get; set; }
 
+            public virtual string Tags { get; set; }
+
         }
 
         // make proxy available for the provider
@@ -1405,6 +1477,7 @@ namespace at.dasz.DocumentManagement
                 binStream.Write(this.Proxy.ExportGuid);
             }
             binStream.Write(this.Proxy.Name);
+            binStream.Write(this.Proxy.Tags);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -1430,6 +1503,7 @@ namespace at.dasz.DocumentManagement
                 this.Proxy.ExportGuid = binStream.ReadGuid();
             }
             this.Proxy.Name = binStream.ReadString();
+            this.Proxy.Tags = binStream.ReadString();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
@@ -1449,6 +1523,7 @@ namespace at.dasz.DocumentManagement
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "at.dasz.DocumentManagement");
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this.Proxy.Name, xml, "Name", "at.dasz.DocumentManagement");
+            if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this.Proxy.Tags, xml, "Tags", "at.dasz.DocumentManagement");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -1476,6 +1551,9 @@ namespace at.dasz.DocumentManagement
                 break;
             case "at.dasz.DocumentManagement|Name":
                 this.Proxy.Name = XmlStreamer.ReadString(xml);
+                break;
+            case "at.dasz.DocumentManagement|Tags":
+                this.Proxy.Tags = XmlStreamer.ReadString(xml);
                 break;
             }
         }

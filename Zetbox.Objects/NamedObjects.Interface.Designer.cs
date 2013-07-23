@@ -115,6 +115,10 @@ namespace Zetbox {
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("1c5f2bea-9915-4634-8ff9-5fd6f0871704"); }
                                 }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Tags
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("b4f41179-44f8-4235-b272-48f3f1452da7"); }
+                                }
                             }
                             public static class FileImportConfiguration_Properties
                             {
@@ -2366,6 +2370,10 @@ namespace Zetbox {
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("0c65fbda-a2ac-475c-af94-ee705381ee08"); }
                             }
+                            public static TypedGuid<global::Zetbox.App.Base.DataType> TagCache
+                            {
+                                get { return new TypedGuid<global::Zetbox.App.Base.DataType>("891c1e32-7545-49d5-9c14-da0e7e061e8f"); }
+                            }
                             public static TypedGuid<global::Zetbox.App.Base.DataType> Template
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("c677d3fe-7dfe-4ea5-91e0-d1b0df9118be"); }
@@ -2752,6 +2760,20 @@ namespace Zetbox {
                                 public static TypedGuid<global::Zetbox.App.Base.Property> Type
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("93775971-e361-4495-8107-3398205589ec"); }
+                                }
+                            }
+                            public static class TagCache_Methods
+                            {
+                                public static TypedGuid<global::Zetbox.App.Base.Method> Rebuild
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Method>("8aa42a51-e2f7-4c59-82e4-65861353144c"); }
+                                }
+                            }
+                            public static class TagCache_Properties
+                            {
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Name
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("3fe05228-66d6-42dd-8a0f-526ba4ac4503"); }
                                 }
                             }
                             public static class Template_Methods
@@ -4658,6 +4680,10 @@ namespace Zetbox {
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("ab09eaba-507b-4dce-9fbd-589adbc9580b"); }
                 }
+                public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_TagEditorKind
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("11bb1ff6-0484-4552-b250-b0ab16654533"); }
+                }
                 public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_TextboxKind
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("2279b0a6-36b8-4c97-b1fd-9eb1710e74f3"); }
@@ -5218,6 +5244,10 @@ namespace Zetbox {
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ZetboxBase_RoleMembershipViewModel
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("882ba118-6545-4ba8-83de-0e973a38fc3e"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ZetboxBase_TagPropertyEditorViewModel
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("e54ea765-7720-4633-aa17-f67f9cfafa9f"); }
                 }
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ZetboxBase_TypeRefPropertyViewModel
                 {

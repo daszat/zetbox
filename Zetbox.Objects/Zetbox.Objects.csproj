@@ -234,6 +234,7 @@
     <Compile Include="StringProperty.Interface.Designer.cs" />
     <Compile Include="StringRangeConstraint.Interface.Designer.cs" />
     <Compile Include="SyncProvider.Interface.Designer.cs" />
+    <Compile Include="TagCache.Interface.Designer.cs" />
     <Compile Include="Task.Interface.Designer.cs" />
     <Compile Include="Template.Interface.Designer.cs" />
     <Compile Include="TestCustomObject.Interface.Designer.cs" />

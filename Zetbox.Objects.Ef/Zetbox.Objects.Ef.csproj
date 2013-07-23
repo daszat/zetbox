@@ -263,6 +263,7 @@
     <Compile Include="StringProperty.Ef.Designer.cs" />
     <Compile Include="StringRangeConstraint.Ef.Designer.cs" />
     <Compile Include="SyncProvider.Ef.Designer.cs" />
+    <Compile Include="TagCache.Ef.Designer.cs" />
     <Compile Include="Task.Ef.Designer.cs" />
     <Compile Include="Template.Ef.Designer.cs" />
     <Compile Include="TestCustomObject.Ef.Designer.cs" />
