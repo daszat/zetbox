@@ -27,6 +27,30 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
         public TagPropertyEditor()
         {
             InitializeComponent();
+            this.Loaded += new RoutedEventHandler(TagPropertyEditor_Loaded);
+        }
+
+        void TagPropertyEditor_LostFocus(object sender, RoutedEventArgs e)
+        {
+            myPopup.IsOpen = false;
+        }
+
+        void TagPropertyEditor_Loaded(object sender, RoutedEventArgs args)
+        {
+            Window w = Window.GetWindow(btnDropDown);
+            if (w != null)
+            {
+                w.LocationChanged += (s,e) =>
+                {
+                    var offset = myPopup.HorizontalOffset;
+                    myPopup.HorizontalOffset = offset + 1;
+                    myPopup.HorizontalOffset = offset;
+                };
+                w.Deactivated += (s, e) =>
+                {
+                    myPopup.IsOpen = false;
+                };
+            }
         }
 
         public TagPropertyEditorViewModel ViewModel
@@ -37,6 +61,16 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
         protected override FrameworkElement MainControl
         {
             get { return txt; }
+        }
+
+        private void txt_GotFocus(object sender, RoutedEventArgs e)
+        {
+            myPopup.IsOpen = true;
+        }
+        
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            myPopup.IsOpen = false;
         }
     }
 }

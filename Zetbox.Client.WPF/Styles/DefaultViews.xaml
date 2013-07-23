@@ -318,8 +318,9 @@
     <Style TargetType="ctrls:CommandButton"
            BasedOn="{StaticResource zbButtonTemplate}" />
 
-    <Style TargetType="ctrls:DropDownButton"
-           BasedOn="{StaticResource zbButtonTemplate}">
+    <Style x:Key="zbDropDownButtonStyle"
+           BasedOn="{StaticResource zbButtonTemplate}"
+           TargetType="ButtonBase">
         <Setter Property="Padding"
                 Value="0" />
         <Setter Property="Margin"
@@ -336,6 +337,10 @@
                 </DataTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <Style TargetType="ctrls:DropDownButton"
+           BasedOn="{StaticResource zbDropDownButtonStyle}">
     </Style>
 
     <Style x:Key="ImageButton"

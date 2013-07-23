@@ -29,25 +29,66 @@
         <ContextMenu ItemsSource="{Binding Commands}"
                      ItemContainerStyle="{StaticResource CommandMenuItem}" />
     </ctrls:PropertyEditor.ContextMenu>
-    <DockPanel>
-        <ctrls:DropDownButton DockPanel.Dock="Left">
-            <ctrls:DropDownButton.DropDown>
-                <ContextMenu ItemsSource="{Binding Commands}"
-                             ItemContainerStyle="{StaticResource CommandMenuItem}" />
-            </ctrls:DropDownButton.DropDown>
-        </ctrls:DropDownButton>
-        <kevin:InfoTextBox x:Name="txt"
-                           Text="{Binding FormattedValue, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
-                           TextBoxInfo="{Binding ToolTip}"
-                           VerticalAlignment="Top"
-                           IsReadOnly="{Binding IsReadOnly}">
-            <kevin:InfoTextBox.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Command="{Binding ClearValueCommand, Converter={StaticResource CommandConverter}}"
-                              Header="{Binding ClearValueCommand.Label}"
-                              ToolTip="{Binding ClearValueCommand.ToolTip}" />
-                </ContextMenu>
-            </kevin:InfoTextBox.ContextMenu>
-        </kevin:InfoTextBox>
-    </DockPanel>
+    <Grid ToolTip="{Binding ToolTip, Mode=OneWay}"
+          VerticalAlignment="Top">
+        <Grid.ContextMenu>
+            <ContextMenu ItemsSource="{Binding Commands}"
+                         ItemContainerStyle="{StaticResource CommandMenuItem}" />
+        </Grid.ContextMenu>
+        <DockPanel x:Name="panel">
+            <ToggleButton DockPanel.Dock="Left"
+                          x:Name="btnDropDown"
+                          Style="{StaticResource zbDropDownButtonStyle}">
+            </ToggleButton>
+            <kevin:InfoTextBox x:Name="txt"
+                               Text="{Binding FormattedValue, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+                               TextBoxInfo="{Binding ToolTip}"
+                               VerticalAlignment="Top"
+                               IsReadOnly="{Binding IsReadOnly}"
+                               GotFocus="txt_GotFocus">
+                <kevin:InfoTextBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Command="{Binding ClearValueCommand, Converter={StaticResource CommandConverter}}"
+                                  Header="{Binding ClearValueCommand.Label}"
+                                  ToolTip="{Binding ClearValueCommand.ToolTip}" />
+                    </ContextMenu>
+                </kevin:InfoTextBox.ContextMenu>
+            </kevin:InfoTextBox>
+        </DockPanel>
+        <Popup x:Name="myPopup"
+               IsOpen="{Binding IsChecked, ElementName=btnDropDown}"
+               PlacementTarget="{Binding ElementName=btnDropDown}"
+               Width="{Binding ActualWidth, ElementName=panel}"
+               StaysOpen="True"
+               AllowsTransparency="True">
+            <Border Background="White"
+                    Margin="0 0 2 2"
+                    Padding="2">
+                <Border.Effect>
+                    <DropShadowEffect Color="Black"
+                                      ShadowDepth="1.5"
+                                      Opacity=".5" />
+                </Border.Effect>
+                <DockPanel Height="150">
+                    <Button DockPanel.Dock="Bottom"
+                            x:Name="btnClose"
+                            Click="btnClose_Click"
+                            HorizontalAlignment="Left">Close</Button>
+                    <ListView ItemsSource="{Binding PossibleValuesAsync}"
+                              VerticalContentAlignment="Center">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <DockPanel>
+                                    <CheckBox DockPanel.Dock="Left"
+                                              IsChecked="{Binding IsChecked}" />
+                                    <TextBlock Text="{Binding Text}"
+                                               Margin="5,0,0,0" />
+                                </DockPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </DockPanel>
+            </Border>
+        </Popup>
+    </Grid>
 </ctrls:PropertyEditor>
