@@ -99,18 +99,9 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 {
                     t.Result = fetchTask
                         .Result
-                        .Select(tag => new TagEntryViewModel(this, false, tag.Name, false)) // using the very basic & simple view model
+                        .Select(tag => new TagEntryViewModel(tag, this, false)) // using the very basic & simple view model
                         .ToList();
                 });
-            //return new ZbTask<List<TagEntryViewModel>>(new List<TagEntryViewModel>()
-            //{
-            //    new TagEntryViewModel(this, false, "Hello", false),
-            //    new TagEntryViewModel(this, false, "World", false),
-            //    new TagEntryViewModel(this, false, "Summary", false),
-            //    new TagEntryViewModel(this, false, "Main", false),
-            //    new TagEntryViewModel(this, false, "Meta", false),
-            //    new TagEntryViewModel(this, false, "Hidden", false),
-            //});
         }
 
         public void ResetPossibleValues()
@@ -132,41 +123,46 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         private void EnsureValuePossible(string value)
         {
             if (_possibleValues == null) return;
+
             if (string.IsNullOrWhiteSpace(value))
             {
                 foreach (var toUncheck in _possibleValues)
                 {
                     toUncheck.IsChecked = false;
                 }
-                return;
             }
-
-            var allItems = SplitValueItems(value);
-            foreach (var item in allItems)
+            else
             {
-                var lowerItem = item.ToLower().Trim();
-                // Add if not found
-                var tagItem = _possibleValues.FirstOrDefault(i => i.Text.ToLower() == lowerItem);
-                if (tagItem == null)
+                var allItems = SplitValueItems(value);
+                foreach (var item in allItems)
                 {
-                    _possibleValues.Add(new TagEntryViewModel(this, true, item, true));
+                    var lowerItem = item.ToLower().Trim();
+                    var tagItem = _possibleValues.FirstOrDefault(i => i.Text.ToLower() == lowerItem);
+                    if (tagItem == null)
+                    {
+                        // Add if not found
+                        var newTag = DataContext.Create<TagCache>();
+                        newTag.Name = item;
+                        _possibleValues.Add(new TagEntryViewModel(newTag, this, true));
+                    }
+                    else
+                    {
+                        tagItem.IsChecked = true;
+                    }
                 }
-                else
+
+                allItems = allItems.Select(i => i.ToLower()).ToArray();
+
+                foreach (var toDelete in _possibleValues.Where(i => i.CurrentlyAdded == true && !allItems.Contains(i.Text.ToLower())).ToList())
                 {
-                    tagItem.IsChecked = true;
+                    DataContext.Delete(toDelete.Tag);
+                    _possibleValues.Remove(toDelete);
                 }
-            }
 
-            allItems = allItems.Select(i => i.ToLower()).ToArray();
-
-            foreach (var toDelete in _possibleValues.Where(i => i.CurrentlyAdded == true && !allItems.Contains(i.Text.ToLower())).ToList())
-            {
-                _possibleValues.Remove(toDelete);
-            }
-
-            foreach (var toUncheck in _possibleValues.Where(i => !allItems.Contains(i.Text.ToLower())).ToList())
-            {
-                toUncheck.IsChecked = false;
+                foreach (var toUncheck in _possibleValues.Where(i => !allItems.Contains(i.Text.ToLower())).ToList())
+                {
+                    toUncheck.IsChecked = false;
+                }
             }
         }
 
@@ -192,17 +188,21 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     public sealed class TagEntryViewModel : INotifyPropertyChanged
     {
         private readonly TagPropertyEditorViewModel _parent;
-        public TagEntryViewModel(TagPropertyEditorViewModel parent, bool isChecked, string text, bool currentlyAdded)
+        public TagEntryViewModel(TagCache tag, TagPropertyEditorViewModel parent, bool isChecked)
         {
             if (parent == null) throw new ArgumentNullException("parent");
+            if (tag == null) throw new ArgumentNullException("tag");
+
             _parent = parent;
             _isChecked = isChecked;
-            _text = text;
+            _text = tag.Name;
 
-            CurrentlyAdded = currentlyAdded;
+            this.Tag = tag;
+            this.CurrentlyAdded = tag.ObjectState == DataObjectState.New;
         }
 
         public bool CurrentlyAdded { get; private set; }
+        public TagCache Tag { get; private set; }
 
         private bool _isChecked = false;
         public bool IsChecked
