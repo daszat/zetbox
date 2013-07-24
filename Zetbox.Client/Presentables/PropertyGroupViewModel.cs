@@ -44,7 +44,7 @@ namespace Zetbox.Client.Presentables
             IEnumerable<ViewModel> obj)
             : base(appCtx, dataCtx, parent)
         {
-            _title = title;
+            _title = title.Replace('_', ' ');
             properties = new ObservableCollection<ViewModel>(obj);
             properties.CollectionChanged += PropertyListChanged;
             foreach (var prop in properties)
