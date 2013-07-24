@@ -93,7 +93,10 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         protected virtual ZbTask<List<TagEntryViewModel>> GetPossibleValuesAsync()
         {
-            var fetchTask = DataContext.GetQuery<TagCache>().ToListAsync();
+            var fetchTask = DataContext
+                                .GetQuery<TagCache>()
+                                .OrderBy(t => t.Name)
+                                .ToListAsync();
             return new ZbTask<List<TagEntryViewModel>>(fetchTask)
                 .OnResult(t =>
                 {
