@@ -97,6 +97,7 @@ M: System.Linq.IQueryable`1<T> Zetbox.App.Packaging.Exporter::FetchRelationEntri
 M: System.Linq.IQueryable`1<T> Zetbox.App.Packaging.Exporter::FetchRelationEntriesB(Zetbox.API.IReadOnlyZetboxContext,System.Int32)
 M: System.Linq.IQueryable`1<T> Zetbox.App.Packaging.Exporter::FetchRelationEntriesAB(Zetbox.API.IReadOnlyZetboxContext,System.Int32)
 M: System.Collections.Generic.List`1<T> Zetbox.DalProvider.Client.ZetboxContextProvider::QueryFromLocalObjects(System.Linq.Expressions.Expression)
+M: System.Linq.IQueryable Zetbox.App.GUI.TagCacheActions::GetUntypedQueryHack(Zetbox.API.IZetboxContext)
 # false positive
 M: System.Linq.Expressions.ParameterExpression Zetbox.API.Server.QueryTranslatorProvider`1::VisitParameter(System.Linq.Expressions.ParameterExpression,System.Type)
 

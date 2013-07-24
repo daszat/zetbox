@@ -168,6 +168,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public void AddTag(string text)
         {
+            if (string.IsNullOrWhiteSpace(text)) return;
             var lowerText = text.ToLower();
             if (SplitValueItems(Value).Any(i => i.ToLower() == lowerText) == false)
             {
@@ -177,6 +178,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public void RemoveTag(string text)
         {
+            if (string.IsNullOrWhiteSpace(text)) return;
             var lowerText = text.ToLower();
             if (SplitValueItems(Value).Any(i => i.ToLower() == lowerText) == true)
             {
