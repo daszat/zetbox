@@ -34,26 +34,31 @@ namespace Zetbox.App.Projekte.Server
             base.Load(moduleBuilder);
 
             moduleBuilder.RegisterModule<Zetbox.App.Projekte.Common.CustomCommonActionsModule>();
-
             moduleBuilder.RegisterZetboxImplementors(typeof(CustomServerActionsModule).Assembly);
 
+            // Register explicit overrides here
             moduleBuilder.RegisterCmdLineAction("rebuildtags", "Recreates the tag cache",
                 scope =>
                 {
-                    var ctx = scope.Resolve<IZetboxContext>();
-                    var oneTag = ctx.GetQuery<Zetbox.App.GUI.TagCache>().FirstOrDefault();
-                    if (oneTag == null)
+                    using (var ctx = scope.Resolve<IZetboxServerContext>())
                     {
-                        oneTag = ctx.Create<Zetbox.App.GUI.TagCache>();
-                    }
-                    oneTag.Rebuild();
-                    if (string.IsNullOrWhiteSpace(oneTag.Name))
-                        ctx.Delete(oneTag);
+                        var oneTag = ctx.GetQuery<Zetbox.App.GUI.TagCache>().FirstOrDefault();
+                        if (oneTag == null)
+                        {
+                            oneTag = ctx.Create<Zetbox.App.GUI.TagCache>();
+                        }
+                        oneTag.Rebuild();
+                        if (string.IsNullOrWhiteSpace(oneTag.Name))
+                            ctx.Delete(oneTag);
 
-                    ctx.SubmitChanges();
+                        ctx.SubmitChanges();
+                    }
                 });
 
-            // Register explicit overrides here
+            moduleBuilder
+                    .RegisterType<Zetbox.App.Projekte.Server.Gui.TagCacheService>()
+                    .AsImplementedInterfaces()
+                    .SingleInstance();
         }
     }
 }
