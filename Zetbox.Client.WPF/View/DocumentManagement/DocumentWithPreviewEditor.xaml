@@ -37,6 +37,7 @@
                 <StackPanel>
                     <ctrls:LabeledView DataContext="{Binding PropertyModelsByName[Name]}" />
                     <ctrls:LabeledView DataContext="{Binding PropertyModelsByName[Tags]}" />
+                    <ctrls:LabeledView DataContext="{Binding PropertyModelsByName[AttachedTo]}" />
                 </StackPanel>
             </TabItem>
             <TabItem Header="Revisions">

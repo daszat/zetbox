@@ -15,6 +15,15 @@ namespace at.dasz.DocumentManagement
     {
 
         /// <summary>
+        /// Primary attached to
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("98c240a8-e01c-4567-865d-3d83848c8eb1")]
+        Zetbox.App.Base.AnyReference AttachedTo {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Current File Content
         /// </summary>
         [Zetbox.API.DefinitionGuid("ef5addda-340f-4a87-83c9-3ee419519343")]

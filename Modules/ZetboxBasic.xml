@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-07-23T09:13:49Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-07-24T12:58:19Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="84f486f7-19fe-49ad-8e4a-6c05089e7684">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.650235Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
@@ -19585,7 +19585,7 @@ public static void isValid_Min(IntegerRangeConstraint obj, PropertyIsValidEventA
   </ZetboxBase:IntProperty>
   <ZetboxBase:StringProperty ExportGuid="d984fab4-5b62-4a5d-af6a-98cde8337729">
     <ZetboxBase:CategoryTags>Main, Summary</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:13.120035Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-07-24T10:54:35.820864Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CategoryTags(Method obj, PropertyGetterEventArgs&lt;string&gt; e)
 {
@@ -19615,7 +19615,7 @@ public static void isValid_CategoryTags(Method obj, PropertyIsValidEventArgs e)
     <ZetboxBase:Name>CategoryTags</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>ef79c0b9-55e0-45ad-8233-1ff8f852661f</ZetboxBase:ObjectClass>
     <ZetboxBase:Properties_pos>900</ZetboxBase:Properties_pos>
-    <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
+    <GUI:ValueModelDescriptor>e54ea765-7720-4633-aa17-f67f9cfafa9f</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
     <ZetboxBase:IsList>false</ZetboxBase:IsList>

@@ -43,6 +43,15 @@ namespace at.dasz.DocumentManagement
             : base(lazyCtx) // do not pass proxy to base data object
         {
             this.Proxy = proxy;
+            if (this.Proxy.AttachedTo == null)
+            {
+                this.Proxy.AttachedTo = new Zetbox.App.Base.AnyReferenceNHibernateImpl(this, "AttachedTo", lazyCtx, null);
+            }
+            else
+            {
+                this.Proxy.AttachedTo.AttachToObject(this, "AttachedTo");
+            }
+
             _isChangedOnSet = Proxy.ID > 0;
             _isCreatedOnSet = Proxy.ID > 0;
             _isExportGuidSet = Proxy.ID > 0;
@@ -50,6 +59,53 @@ namespace at.dasz.DocumentManagement
 
         /// <summary>the NHibernate proxy of the represented entity</summary>
         internal readonly FileProxy Proxy;
+
+        /// <summary>
+        /// Primary attached to
+        /// </summary>
+        // CompoundObject property
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.CompoundObjectPropertyTemplate
+        // implement the user-visible interface
+        public Zetbox.App.Base.AnyReference AttachedTo
+        {
+            get { return AttachedToImpl; }
+            set { AttachedToImpl = (Zetbox.App.Base.AnyReferenceNHibernateImpl)value; }
+        }
+
+        /// <summary>backing property for AttachedTo, takes care of attaching/detaching the values</summary>
+        public Zetbox.App.Base.AnyReferenceNHibernateImpl AttachedToImpl
+        {
+            get
+            {
+                return this.Proxy.AttachedTo;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (value == null)
+                    throw new ArgumentNullException("value");
+                if (!object.Equals(this.Proxy.AttachedTo, value))
+                {
+                    var __oldValue = this.Proxy.AttachedTo;
+                    var __newValue = value;
+
+                    NotifyPropertyChanging("AttachedTo", __oldValue, __newValue);
+
+                    if (this.Proxy.AttachedTo != null)
+                    {
+                        this.Proxy.AttachedTo.DetachFromObject(this, "AttachedTo");
+                    }
+                    __newValue = (Zetbox.App.Base.AnyReferenceNHibernateImpl)__newValue.Clone();
+                    this.Proxy.AttachedTo = __newValue;
+                    this.Proxy.AttachedTo.AttachToObject(this, "AttachedTo");
+
+                    NotifyPropertyChanged("AttachedTo", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+                }
+            }
+        }
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.CompoundObjectPropertyTemplate
+        public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnAttachedTo_IsValid;
 
         /// <summary>
         /// Current File Content
@@ -1081,6 +1137,13 @@ namespace at.dasz.DocumentManagement
             me.ExportGuid = other.ExportGuid;
             me.Name = other.Name;
             me.Tags = other.Tags;
+            if (me.AttachedTo == null && other.AttachedTo != null) {
+                me.AttachedTo = (Zetbox.App.Base.AnyReference)other.AttachedTo.Clone();
+            } else if (me.AttachedTo != null && other.AttachedTo == null) {
+                me.AttachedTo = null;
+            } else if (me.AttachedTo != null && other.AttachedTo != null) {
+                me.AttachedTo.ApplyChangesFrom(other.AttachedTo);
+            }
             this._fk_Blob = otherImpl._fk_Blob;
             this._fk_ChangedBy = otherImpl._fk_ChangedBy;
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
@@ -1136,6 +1199,7 @@ namespace at.dasz.DocumentManagement
             // Do not audit calculated properties
             switch (property)
             {
+                case "AttachedTo":
                 case "Blob":
                 case "ChangedBy":
                 case "ChangedOn":
@@ -1224,6 +1288,15 @@ namespace at.dasz.DocumentManagement
                 if (_properties != null) return;
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
+                    // else
+                    new PropertyDescriptorNHibernateImpl<File, Zetbox.App.Base.AnyReference>(
+                        lazyCtx,
+                        new Guid("98c240a8-e01c-4567-865d-3d83848c8eb1"),
+                        "AttachedTo",
+                        null,
+                        obj => obj.AttachedTo,
+                        (obj, val) => obj.AttachedTo = val,
+						obj => OnAttachedTo_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<File, Zetbox.App.Base.Blob>(
                         lazyCtx,
@@ -1430,6 +1503,8 @@ namespace at.dasz.DocumentManagement
             public virtual Type ZetboxWrapper { get { return typeof(FileNHibernateImpl); } }
             public virtual Type ZetboxProxy { get { return typeof(FileProxy); } }
 
+            public virtual Zetbox.App.Base.AnyReferenceNHibernateImpl AttachedTo { get; set; }
+
             public virtual Zetbox.App.Base.BlobNHibernateImpl.BlobProxy Blob { get; set; }
 
             public virtual Zetbox.App.Base.IdentityNHibernateImpl.IdentityProxy ChangedBy { get; set; }
@@ -1460,6 +1535,7 @@ namespace at.dasz.DocumentManagement
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
+            binStream.Write(this.AttachedTo);
             binStream.Write(this.Proxy.Blob != null ? OurContext.GetIdFromProxy(this.Proxy.Blob) : (int?)null);
             binStream.Write(this.Proxy.ChangedBy != null ? OurContext.GetIdFromProxy(this.Proxy.ChangedBy) : (int?)null);
             binStream.Write(this._isChangedOnSet);
@@ -1486,6 +1562,11 @@ namespace at.dasz.DocumentManagement
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
+            {
+                // use backing store to avoid notifications
+                this.AttachedToImpl = binStream.ReadCompoundObject<Zetbox.App.Base.AnyReferenceNHibernateImpl>();
+                this.AttachedToImpl.AttachToObject(this, "AttachedTo");
+            }
             binStream.Read(out this._fk_Blob);
             binStream.Read(out this._fk_ChangedBy);
             this._isChangedOnSet = binStream.ReadBoolean();
@@ -1517,6 +1598,7 @@ namespace at.dasz.DocumentManagement
             xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
+            if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ExportCompoundObject(this.AttachedTo, xml, "AttachedTo", "at.dasz.DocumentManagement");
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this.Proxy.Blob != null ? this.Proxy.Blob.ExportGuid : (Guid?)null, xml, "Blob", "at.dasz.DocumentManagement");
             System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this.Proxy.ChangedOn, xml, "ChangedOn", "at.dasz.DocumentManagement");
@@ -1531,6 +1613,9 @@ namespace at.dasz.DocumentManagement
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "at.dasz.DocumentManagement|AttachedTo":
+                XmlStreamer.MergeImportCompoundObject(this.AttachedToImpl, xml);
+                break;
             case "at.dasz.DocumentManagement|Blob":
                 this._fk_guid_Blob = XmlStreamer.ReadNullableGuid(xml);
                 break;

@@ -582,6 +582,21 @@
         </id>
 
         <!-- define the properties -->
+        <!-- CompoundObjectProperty isValue -->
+        <component name="AttachedTo" class="Zetbox.App.Base.AnyReferenceNHibernateImpl,Zetbox.Objects.NHibernateImpl">
+        <!-- ValueTypeProperty isValue -->
+        <property name="ObjClass" 
+                  column="`AttachedTo_ObjClass`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ObjGuid" 
+                  column="`AttachedTo_ObjGuid`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ObjID" 
+                  column="`AttachedTo_ObjID`" 
+                  optimistic-lock="false"/>
+        </component>
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Blob" column="`fk_Blob`" class="Zetbox.App.Base.BlobNHibernateImpl+BlobProxy, Zetbox.Objects.NHibernateImpl" />
 

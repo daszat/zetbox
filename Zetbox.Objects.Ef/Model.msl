@@ -710,6 +710,11 @@
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Tags" ColumnName="Tags" />
+          <ComplexProperty Name="AttachedToImpl" TypeName="Model.AnyReferenceEfImpl">
+          <ScalarProperty Name="ObjClass" ColumnName="AttachedTo_ObjClass" />
+          <ScalarProperty Name="ObjGuid" ColumnName="AttachedTo_ObjGuid" />
+          <ScalarProperty Name="ObjID" ColumnName="AttachedTo_ObjID" />
+          </ComplexProperty>
 	    </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.DocumentEfImpl)">

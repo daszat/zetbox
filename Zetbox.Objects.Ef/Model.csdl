@@ -1711,6 +1711,9 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="AttachedToImpl"
+              Type="Model.AnyReferenceEfImpl"
+              Nullable="false" />
     <NavigationProperty Name="BlobImpl"
                         Relationship="Model.FK_File_has_Blob"
                         FromRole="File"

@@ -1878,6 +1878,9 @@
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="1024" Nullable="true" />
     <Property Name="Tags" Type="nvarchar" MaxLength="2000" Nullable="true" />
+    <Property Name="AttachedTo_ObjClass" Type="uniqueidentifier" Nullable="true" />
+    <Property Name="AttachedTo_ObjGuid" Type="uniqueidentifier" Nullable="true" />
+    <Property Name="AttachedTo_ObjID" Type="int" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="FileImportConfiguration">

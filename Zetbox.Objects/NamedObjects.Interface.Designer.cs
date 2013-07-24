@@ -83,6 +83,10 @@ namespace Zetbox {
                             }
                             public static class File_Properties
                             {
+                                public static TypedGuid<global::Zetbox.App.Base.Property> AttachedTo
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("98c240a8-e01c-4567-865d-3d83848c8eb1"); }
+                                }
                                 public static TypedGuid<global::Zetbox.App.Base.Property> Blob
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("ef5addda-340f-4a87-83c9-3ee419519343"); }

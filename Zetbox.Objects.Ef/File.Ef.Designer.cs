@@ -33,12 +33,74 @@ namespace at.dasz.DocumentManagement
         public FileEfImpl()
             : base(null)
         {
+            AttachedToImpl = new Zetbox.App.Base.AnyReferenceEfImpl(null, this, "AttachedTo");
         }
 
         public FileEfImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
+            AttachedToImpl = new Zetbox.App.Base.AnyReferenceEfImpl(lazyCtx, this, "AttachedTo");
         }
+
+        /// <summary>
+        /// Primary attached to
+        /// </summary>
+        // CompoundObject property
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.CompoundObjectPropertyTemplate
+        // implement the user-visible interface
+        public Zetbox.App.Base.AnyReference AttachedTo
+        {
+            get { return AttachedToImpl; }
+            set { AttachedToImpl = (Zetbox.App.Base.AnyReferenceEfImpl)value; }
+        }
+
+        /// <summary>backing store for AttachedTo</summary>
+        private Zetbox.App.Base.AnyReferenceEfImpl _AttachedTo_store;
+        private Zetbox.App.Base.AnyReferenceEfImpl _AttachedTo {
+            get { return _AttachedTo_store; }
+            set {
+                ReportEfPropertyChanging("AttachedToImpl");
+                _AttachedTo_store = value;
+                ReportEfPropertyChanged("AttachedToImpl");
+            }
+        }
+
+        /// <summary>backing property for AttachedTo, takes care of attaching/detaching the values, mapped via EF</summary>
+        [XmlIgnore()]
+        [EdmComplexProperty()]
+        public Zetbox.App.Base.AnyReferenceEfImpl AttachedToImpl
+        {
+            get
+            {
+                return _AttachedTo;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (value == null)
+                    throw new ArgumentNullException("value");
+                if (!object.Equals(_AttachedTo, value))
+                {
+                    var __oldValue = _AttachedTo;
+                    var __newValue = value;
+
+                    NotifyPropertyChanging("AttachedTo", __oldValue, __newValue);
+
+                    if (_AttachedTo != null)
+                    {
+                        _AttachedTo.DetachFromObject(this, "AttachedTo");
+                    }
+                    __newValue = (Zetbox.App.Base.AnyReferenceEfImpl)__newValue.Clone();
+                    _AttachedTo = __newValue;
+                    _AttachedTo.AttachToObject(this, "AttachedTo");
+
+                    NotifyPropertyChanged("AttachedTo", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+                }
+            }
+        }
+           // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.CompoundObjectPropertyTemplate
+        public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnAttachedTo_IsValid;
 
         /// <summary>
         /// Current File Content
@@ -1139,6 +1201,13 @@ namespace at.dasz.DocumentManagement
             me.ExportGuid = other.ExportGuid;
             me.Name = other.Name;
             me.Tags = other.Tags;
+            if (me.AttachedTo == null && other.AttachedTo != null) {
+                me.AttachedTo = (Zetbox.App.Base.AnyReference)other.AttachedTo.Clone();
+            } else if (me.AttachedTo != null && other.AttachedTo == null) {
+                me.AttachedTo = null;
+            } else if (me.AttachedTo != null && other.AttachedTo != null) {
+                me.AttachedTo.ApplyChangesFrom(other.AttachedTo);
+            }
             this._fk_Blob = otherImpl._fk_Blob;
             this._fk_ChangedBy = otherImpl._fk_ChangedBy;
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
@@ -1157,6 +1226,7 @@ namespace at.dasz.DocumentManagement
             // Do not audit calculated properties
             switch (property)
             {
+                case "AttachedTo":
                 case "Blob":
                 case "ChangedBy":
                 case "ChangedOn":
@@ -1245,6 +1315,15 @@ namespace at.dasz.DocumentManagement
                 if (_properties != null) return;
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
+                    // else
+                    new PropertyDescriptorEfImpl<File, Zetbox.App.Base.AnyReference>(
+                        lazyCtx,
+                        new Guid("98c240a8-e01c-4567-865d-3d83848c8eb1"),
+                        "AttachedTo",
+                        null,
+                        obj => obj.AttachedTo,
+                        (obj, val) => obj.AttachedTo = val,
+						obj => OnAttachedTo_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<File, Zetbox.App.Base.Blob>(
                         lazyCtx,
@@ -1454,6 +1533,7 @@ namespace at.dasz.DocumentManagement
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
+            binStream.Write(this.AttachedTo);
             {
                 var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.BlobEfImpl>("Model.FK_File_has_Blob", "Blob");
                 var key = r.EntityKey;
@@ -1499,6 +1579,11 @@ namespace at.dasz.DocumentManagement
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
+            {
+                // use backing store to avoid notifications
+                this.AttachedToImpl = binStream.ReadCompoundObject<Zetbox.App.Base.AnyReferenceEfImpl>();
+                this.AttachedToImpl.AttachToObject(this, "AttachedTo");
+            }
             binStream.Read(out this._fk_Blob);
             binStream.Read(out this._fk_ChangedBy);
             this._isChangedOnSet = binStream.ReadBoolean();
@@ -1530,6 +1615,7 @@ namespace at.dasz.DocumentManagement
             xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
+            if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ExportCompoundObject(this.AttachedTo, xml, "AttachedTo", "at.dasz.DocumentManagement");
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(Blob != null ? Blob.ExportGuid : (Guid?)null, xml, "Blob", "at.dasz.DocumentManagement");
             System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "at.dasz.DocumentManagement");
@@ -1544,6 +1630,9 @@ namespace at.dasz.DocumentManagement
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "at.dasz.DocumentManagement|AttachedTo":
+                XmlStreamer.MergeImportCompoundObject(this.AttachedToImpl, xml);
+                break;
             case "at.dasz.DocumentManagement|Blob":
                 this._fk_guid_Blob = XmlStreamer.ReadNullableGuid(xml);
                 break;
