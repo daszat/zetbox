@@ -26,6 +26,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
     using Zetbox.App.GUI;
     using Zetbox.Client.Presentables.GUI;
     using Zetbox.Client.Presentables.ZetboxBase;
+using System.ComponentModel;
 
     [ViewModelDescriptor]
     public class NavigationScreenHierarchyViewModel : ViewModel, IRefreshCommandListener, IDeleteCommandParameter, IOpenCommandParameter, INewCommandParameter
@@ -82,6 +83,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                         .Where(i => i.Module.ID == moduleID)
                         .Where(i => i.Parent == null)
                         .OrderBy(i => i.Title)
+                        .ToList()
                         .Select(i => NavigationEntryViewModel.Fetch(ViewModelFactory, DataContext, this, i))));
                 }
                 return _rootScreens;
