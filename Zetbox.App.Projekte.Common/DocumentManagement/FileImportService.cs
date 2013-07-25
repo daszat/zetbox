@@ -29,7 +29,7 @@ namespace Zetbox.App.Projekte.DocumentManagement
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
 
-    public class FileImportService : IService
+    public class FileImportService : ThreadedQueueService<string>
     {
         #region Autofac Module
         [Feature(NotOnFallback = true)]
@@ -49,33 +49,13 @@ namespace Zetbox.App.Projekte.DocumentManagement
         }
         #endregion
 
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.App.Projekte.DocumentManagement.FileImportService");
-
         private readonly ILifetimeScope _scopeFactory;
-
-        /// <summary>A queue of currently processing files. Access to this Queue is protected by the _fileQueueLock.</summary>
-        private Queue<string> _fileQueue = new Queue<string>();
-        /// <summary>A queue of deferred processing files. Access to this Queue is protected by the _fileQueueLock.</summary>
-        /// <remarks>Files that create an error on uploading (e.g. still being accessed locally) are put here. A timer puts them back onto the _fileQueue, where they'll be processed as usual.</remarks>
-        private Queue<string> _deferredFileQueue = new Queue<string>();
-
-        /// <summary>The lock for accessing the FileQueues.</summary>
-        /// <remarks>Using a single lock for both Queues makes for simpler programming (no deadlock) and it is not expected that there is much contention from the Timer on this lock.</remarks>
-        private readonly object _fileQueueLock = new object();
-
-        private List<FileSystemWatcher> _watchers = new List<FileSystemWatcher>();
-        private Thread _uploaderThread;
-
-        private const int TIMER_DUE_TIME_SEC = 30; // Avoid start during service startup
-        private const int TIMER_INTERVAL_SEC = 10;
-        private Timer _deferralTimer;
-
-        /// <summary>This is set to signal the _uploaderThread to shut down.</summary>
-        private ManualResetEvent _shutdownEvent;
-        /// <summary>This is set to signal the _uploaderThread that new files are available.</summary>
-        private AutoResetEvent _fileEvent;
+        private readonly List<FileSystemWatcher> _watchers = new List<FileSystemWatcher>();
 
         public FileImportService(ILifetimeScope scopeFactory)
+            : base(startupDelay: new TimeSpan(0, 0, 30),
+                    retryInterval: new TimeSpan(0, 0, 10),
+                    shutdownTimeout: new TimeSpan(0, 0, 2))
         {
             if (scopeFactory == null) throw new ArgumentNullException("scopeFactory");
 
@@ -84,61 +64,29 @@ namespace Zetbox.App.Projekte.DocumentManagement
 
         #region IService Members
 
-        public void Start()
+        protected override void OnStart()
         {
-            if (_shutdownEvent != null)
-            {
-                Log.Warn("Tried to Start() an already running FileImportService. Ignored.");
-                return;
-            }
-            _shutdownEvent = new ManualResetEvent(false);
-            _fileEvent = new AutoResetEvent(false);
-
+            base.OnStart();
             ThreadPool.QueueUserWorkItem(InitialiseFileWatchers);
-
-            // start background thread
-            _uploaderThread = new Thread(UploaderThread);
-            _uploaderThread.Priority = ThreadPriority.BelowNormal;
-            _uploaderThread.IsBackground = true;
-            _uploaderThread.Start();
-
-            _deferralTimer = new Timer(state => RetryDeferredFiles(), null, TIMER_DUE_TIME_SEC * 1000, TIMER_INTERVAL_SEC * 1000);
         }
 
-        public void Stop()
+        protected override void OnStop()
         {
-            _deferralTimer.Dispose();
-            _deferralTimer = null;
-
-            RetryDeferredFiles();
-
-            // signal the _workerThread to shutdown.
-            _shutdownEvent.Set();
-
-            // shortcut waiting for new files. If there are any in the queue, they will still be processed.
-            _fileEvent.Set();
+            base.OnStop();
 
             foreach (var w in _watchers)
             {
                 w.Dispose();
             }
             _watchers.Clear();
-
-            if (!_uploaderThread.Join(2000))
-            {
-                _uploaderThread.Abort();
-            }
-            _uploaderThread = null;
-            _fileEvent.Close();
-            _fileEvent = null;
-            _shutdownEvent.Close();
-            _shutdownEvent = null;
         }
 
-        public string DisplayName { get { return "Fileimporter"; } }
-        public string Description { get { return "Watches a directory and automatically imports new files as Blobs."; } }
+        public override string DisplayName { get { return "Fileimporter"; } }
+        public override string Description { get { return "Watches a directory and automatically imports new files as Blobs."; } }
 
         #endregion
+
+        #region File Watching
 
         private void InitialiseFileWatchers(object state)
         {
@@ -208,75 +156,15 @@ namespace Zetbox.App.Projekte.DocumentManagement
             Enqueue(e.FullPath);
         }
 
-        private void Enqueue(string file)
+        #endregion
+
+        protected override bool OnEnqueue(string item)
         {
-            if (!string.IsNullOrEmpty(file))
-            {
-                Log.InfoFormat("Adding '{0}' to queue", file);
-                lock (_fileQueueLock)
-                {
-                    _fileQueue.Enqueue(file);
-                }
-                _fileEvent.Set();
-            }
+            // ignore empty file names
+            return !string.IsNullOrWhiteSpace(item);
         }
 
-        private void Defer(string file)
-        {
-            if (!string.IsNullOrEmpty(file))
-            {
-                Log.InfoFormat("Adding '{0}' to deferred queue", file);
-                lock (_fileQueueLock)
-                {
-                    _deferredFileQueue.Enqueue(file);
-                }
-            }
-        }
-
-        private string Dequeue()
-        {
-            lock (_fileQueueLock)
-            {
-                if (_fileQueue.Count > 0)
-                    return _fileQueue.Dequeue();
-                else
-                    return null;
-            }
-        }
-
-        private void RetryDeferredFiles()
-        {
-            lock (_fileQueueLock)
-            {
-                if (_deferredFileQueue.Count > 0)
-                {
-                    Log.InfoFormat("Flushing {0} items from the deferred queue to the processing queue", _deferredFileQueue.Count);
-                    while (_deferredFileQueue.Count > 0)
-                        _fileQueue.Enqueue(_deferredFileQueue.Dequeue());
-                    _fileEvent.Set();
-                }
-            }
-        }
-
-        private void UploaderThread()
-        {
-            // run until signalled, no waiting
-            while (!_shutdownEvent.WaitOne(0))
-            {
-                // wait until files appear or Stop() is called
-                if (_fileEvent.WaitOne(-1))
-                {
-                    string file;
-                    // process all queued files
-                    while ((file = Dequeue()) != null)
-                    {
-                        ProcessFile(file);
-                    }
-                }
-            }
-        }
-
-        private void ProcessFile(string file)
+        protected override void ProcessItem(string file)
         {
             try
             {
