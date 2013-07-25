@@ -98,9 +98,23 @@ namespace Zetbox.API.Server
             //// TODO: replace with GetQuery().Provider.CreateQuery(ctx, query) ~~~
             //var result = Expression.Lambda(query).Compile().DynamicInvoke();
 
-            var execute = query.IsMethodCallExpression("First") || query.IsMethodCallExpression("FirstOrDefault") || query.IsMethodCallExpression("Single") || query.IsMethodCallExpression("SingleOrDefault");
+            var isExecute = query.IsMethodCallExpression("First") || query.IsMethodCallExpression("FirstOrDefault") || query.IsMethodCallExpression("Single") || query.IsMethodCallExpression("SingleOrDefault");
 
-            if (execute)
+            // TODO: handle paging (Skip/Take)
+            var isFulltextQuery = query.IsMethodCallExpression("FulltextMatch", typeof(ZetboxContextQueryableExtensions));
+
+            if (isFulltextQuery)
+            {
+                throw new NotImplementedException();
+
+                //var filterArg = ((MethodCallExpression)query).Arguments[1] as ConstantExpression;
+                //var filter = (string)(filterArg.Value);
+
+                // query lucene.net
+                // fetch matched objects from db
+                // return objects
+            }
+            else if (isExecute)
             {
                 var result = (IStreamable)ctx.GetQuery<T>().Provider.Execute<T>(query);
                 if (result == null)

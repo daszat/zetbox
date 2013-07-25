@@ -301,6 +301,32 @@ namespace Zetbox.Client.Models
         }
     }
 
+    public class FulltextFilterModel : FilterModel
+    {
+        public FulltextFilterModel(IReadOnlyZetboxContext frozenCtx)
+            : base()
+        {
+            if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
+            base.IsServerSideFilter = true;
+            base.Label = FilterModelsResources.FulltextFilterModel_Label;
+            base.ViewModelType = ViewModelDescriptors.Zetbox_Client_Presentables_FilterViewModels_SingleValueFilterViewModel.Find(frozenCtx);
+            base.FilterArguments.Add(new FilterArgumentConfig(
+                new ClassValueModel<string>(base.Label, FilterModelsResources.FulltextFilterModel_Description, true, false),
+                ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_StringValueViewModel.Find(frozenCtx)
+            ));
+
+            base.RefreshOnFilterChanged = false;
+        }
+
+        public override IQueryable GetQuery(IQueryable src)
+        {
+            if (FilterArgument.Value != null)
+                return src.FulltextMatch(FilterArgument.Value.ToString());
+            else
+                return src;
+        }
+    }
+
     public class SingleValueFilterModel : FilterModel
     {
         public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, string predicate, Guid enumDef)

@@ -120,6 +120,12 @@
   <data name="From" xml:space="preserve">
     <value>From</value>
   </data>
+  <data name="FulltextFilterModel_Description" xml:space="preserve">
+    <value>Search for any text</value>
+  </data>
+  <data name="FulltextFilterModel_Label" xml:space="preserve">
+    <value>Search</value>
+  </data>
   <data name="To" xml:space="preserve">
     <value>To</value>
   </data>

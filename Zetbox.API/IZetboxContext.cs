@@ -619,6 +619,8 @@ namespace Zetbox.API
     /// </summary>
     public static class ZetboxContextQueryableExtensions
     {
+        #region Eagerloading
+
         public static IQueryable<T> WithEagerLoading<T>(this IQueryable<T> query)
         {
             if (query == null) throw new ArgumentNullException("query");
@@ -663,6 +665,10 @@ namespace Zetbox.API
             return query;
         }
 
+        #endregion
+
+        #region WithDeactivated
+
         public static IQueryable<T> WithDeactivated<T>(this IQueryable<T> query)
         {
             if (query == null) throw new ArgumentNullException("query");
@@ -701,12 +707,48 @@ namespace Zetbox.API
             }
         }
 
-
         public static System.Collections.IEnumerable WithDeactivated(this System.Collections.IEnumerable query)
         {
             if (query == null) throw new ArgumentNullException("query");
             return query;
         }
+
+        #endregion
+
+        #region Fulltext
+
+        public static IQueryable<T> FulltextMatch<T>(this IQueryable<T> query, string filter)
+        {
+            if (query == null) throw new ArgumentNullException("query");
+            if (query.Provider is IZetboxQueryProvider)
+            {
+                var mi = typeof(ZetboxContextQueryableExtensions).FindGenericMethod("FulltextMatch", new Type[] { typeof(T) }, new Type[] { typeof(IQueryable<T>), typeof(string) });
+
+                return query.Provider.CreateQuery<T>(
+                    System.Linq.Expressions.Expression.Call(mi, query.Expression));
+            }
+            else
+            {
+                return query;
+            }
+        }
+
+        public static IQueryable FulltextMatch(this IQueryable query, string filter)
+        {
+            if (query == null) throw new ArgumentNullException("query");
+            if (query.Provider is IZetboxQueryProvider)
+            {
+                var mi = typeof(ZetboxContextQueryableExtensions).FindGenericMethod("FulltextMatch", new Type[] { query.ElementType }, new Type[] { typeof(IQueryable<>).MakeGenericType(query.ElementType), typeof(string) });
+
+                return query.Provider.CreateQuery(
+                    System.Linq.Expressions.Expression.Call(mi, query.Expression));
+            }
+            else
+            {
+                return query;
+            }
+        }
+        #endregion
     }
 
     public static class ContextTransientStateExtensions
