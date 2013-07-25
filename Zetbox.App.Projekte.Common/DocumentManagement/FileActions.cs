@@ -47,7 +47,10 @@ namespace at.dasz.DocumentManagement
         [Invocation]
         public static void postSet_Blob(File obj, PropertyPostSetterEventArgs<Zetbox.App.Base.Blob> e)
         {
-            obj.ExtractText();
+            if (e.OldValue != e.NewValue)
+            {
+                obj.ExtractText();
+            }
         }
 
         // required for StaticFile.HandleBlobChange
