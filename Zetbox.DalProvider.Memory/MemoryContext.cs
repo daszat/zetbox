@@ -36,8 +36,8 @@ namespace Zetbox.DalProvider.Memory
         private readonly FuncCache<Type, MemoryImplementationType> _implTypeFactoryCache;
         private readonly MemoryImplementationType.MemoryFactory _implTypeFactory;
 
-        public MemoryContext(InterfaceType.Factory iftFactory, Func<IFrozenContext> lazyCtx, MemoryImplementationType.MemoryFactory implTypeFactory)
-            : base(iftFactory, lazyCtx)
+        public MemoryContext(InterfaceType.Factory iftFactory, Func<IFrozenContext> lazyCtx, MemoryImplementationType.MemoryFactory implTypeFactory, IEnumerable<IZetboxContextEventListener> eventListeners)
+            : base(iftFactory, lazyCtx, eventListeners)
         {
             _implTypeFactoryCache = new FuncCache<Type, MemoryImplementationType>(t => implTypeFactory(t));
             _implTypeFactory = t => _implTypeFactoryCache.Invoke(t);
@@ -46,20 +46,28 @@ namespace Zetbox.DalProvider.Memory
         public override int SubmitChanges()
         {
             int count = 0;
-            var removals = new List<IPersistenceObject>();
+            var added = new List<IDataObject>();
+            var modified = new List<IDataObject>();
+            var deleted = new List<IPersistenceObject>();
             foreach (var o in objects)
             {
+                var ido = o as IDataObject;
                 switch (o.ObjectState)
                 {
                     case DataObjectState.New:
+                        ((BaseMemoryPersistenceObject)o).SetUnmodified();
+                        count += 1;
+                        if (ido != null) added.Add(ido);
+                        break;
                     case DataObjectState.Modified:
                         ((BaseMemoryPersistenceObject)o).SetUnmodified();
                         count += 1;
+                        if (ido != null) modified.Add(ido);
                         break;
                     case DataObjectState.Unmodified:
                         break;
                     case DataObjectState.Deleted:
-                        removals.Add(o);
+                        deleted.Add(o);
                         break;
                     case DataObjectState.NotDeserialized:
                     case DataObjectState.Detached:
@@ -67,10 +75,13 @@ namespace Zetbox.DalProvider.Memory
                         throw new NotSupportedException(string.Format("Unexpected ObjectState encountered: {0}", o.ObjectState));
                 }
             }
-            foreach (var r in removals)
+            foreach (var r in deleted)
             {
                 objects.Remove(r);
             }
+
+            ZetboxContextEventListenerHelper.OnSubmitted(eventListeners, this, added, modified, deleted.OfType<IDataObject>());
+
             return count;
         }
 

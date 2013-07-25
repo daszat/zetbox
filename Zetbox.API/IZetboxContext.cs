@@ -21,12 +21,76 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using Zetbox.API.Async;
+using Zetbox.API.Utils;
 
 namespace Zetbox.API
 {
     public interface IZetboxContextDebugger
     {
         void Created(IZetboxContext ctx);
+    }
+
+    public interface IZetboxContextEventListener
+    {
+        void Created(IReadOnlyZetboxContext ctx);
+        void Submitted(IReadOnlyZetboxContext ctx, IEnumerable<IDataObject> added, IEnumerable<IDataObject> modified, IEnumerable<Tuple<InterfaceType, int, Guid?>> deleted);
+        void Disposed(IReadOnlyZetboxContext ctx);
+    }
+
+    public static class ZetboxContextEventListenerHelper
+    {
+        public static void OnCreated(IEnumerable<IZetboxContextEventListener> eventListener, IReadOnlyZetboxContext ctx)
+        {
+            if (eventListener == null) return;
+            foreach (var evl in eventListener)
+            {
+                try
+                {
+                    evl.Created(ctx);
+                }
+                catch (Exception ex)
+                {
+                    Logging.Log.WarnOnce(string.Format("Error when notifying ZetboxContextEventListener.OnCreated: {0}: {1}", ex.GetType().Name, ex.Message));
+                    Logging.Log.Debug("Error when notifying ZetboxContextEventListener.OnCreated", ex);
+                }
+            }
+        }
+        public static void OnSubmitted(IEnumerable<IZetboxContextEventListener> eventListener, IReadOnlyZetboxContext ctx, IEnumerable<IDataObject> added, IEnumerable<IDataObject> modified, IEnumerable<IDataObject> deleted)
+        {
+            if (eventListener == null) return;
+            foreach (var evl in eventListener)
+            {
+                try
+                {
+                    evl.Submitted(ctx, added, modified, deleted.Select(obj =>
+                        new Tuple<InterfaceType, int, Guid?>(
+                            ctx.GetInterfaceType(obj),
+                            obj.ID,
+                            obj is IExportableInternal ? ((IExportableInternal)obj).ExportGuid : (Guid?)null)));
+                }
+                catch (Exception ex)
+                {
+                    Logging.Log.WarnOnce(string.Format("Error when notifying ZetboxContextEventListener.OnSubmitted: {0}: {1}", ex.GetType().Name, ex.Message));
+                    Logging.Log.Debug("Error when notifying ZetboxContextEventListener.OnSubmitted", ex);
+                }
+            }
+        }
+        public static void OnDisposed(IEnumerable<IZetboxContextEventListener> eventListener, IReadOnlyZetboxContext ctx)
+        {
+            if (eventListener == null) return;
+            foreach (var evl in eventListener)
+            {
+                try
+                {
+                    evl.Disposed(ctx);
+                }
+                catch (Exception ex)
+                {
+                    Logging.Log.WarnOnce(string.Format("Error when notifying ZetboxContextEventListener.OnDisposed: {0}: {1}", ex.GetType().Name, ex.Message));
+                    Logging.Log.Debug("Error when notifying ZetboxContextEventListener.OnDisposed", ex);
+                }
+            }
+        }
     }
 
     public enum ContextIsolationLevel

@@ -39,6 +39,7 @@ namespace Zetbox.API
         private readonly InterfaceType.Factory _iftFactory;
         protected InterfaceType.Factory IftFactory { get { return _iftFactory; } }
         protected readonly Func<IFrozenContext> lazyCtx;
+        protected readonly IEnumerable<IZetboxContextEventListener> eventListeners;
 
         /// <summary>Empty stand-in for object classes without instances.</summary>
         /// <remarks>Used by GetPersistenceObjectQuery()</remarks>
@@ -58,13 +59,14 @@ namespace Zetbox.API
         /// <summary>
         /// Initializes a new instance of the BaseMemoryContext class, using the specified assemblies for interfaces and implementation.
         /// </summary>
-        protected BaseMemoryContext(InterfaceType.Factory iftFactory, Func<IFrozenContext> lazyCtx)
+        protected BaseMemoryContext(InterfaceType.Factory iftFactory, Func<IFrozenContext> lazyCtx, IEnumerable<IZetboxContextEventListener> eventListeners)
         {
             this.objects = new ContextCache<int>(this, item => item.ID);
             this.iftFactoryCache = new FuncCache<Type, InterfaceType>(t => iftFactory(t));
             this._iftFactory = t => iftFactoryCache.Invoke(t);
             ZetboxContextDebuggerSingleton.Created(this);
             this.lazyCtx = lazyCtx;
+            this.eventListeners = eventListeners;
         }
 
         /// <inheritdoc />
@@ -532,6 +534,8 @@ namespace Zetbox.API
             }
             // nothing to dispose
             IsDisposed = true;
+
+            ZetboxContextEventListenerHelper.OnDisposed(eventListeners, this);
         }
 
         /// <summary>Not implemented.</summary>

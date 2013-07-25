@@ -16,19 +16,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Zetbox.API.Async;
 using Zetbox.API.Common;
 using Zetbox.API.Configuration;
 using Zetbox.API.Server.Tests;
 using Zetbox.App.Base;
-using Zetbox.API.Async;
 
 namespace Zetbox.API.Server.Mocks
 {
     public class ZetboxContextMock : BaseZetboxDataContext, IFrozenContext
     {
         public Dictionary<int, TestObjClassImpl> TestObjClasses = new Dictionary<int, TestObjClassImpl>();
-        public ZetboxContextMock(IMetaDataResolver metaDataResolver, Identity identity, ZetboxConfig config, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory)
-            : base(metaDataResolver, identity, config, lazyCtx, iftFactory)
+        public ZetboxContextMock(IMetaDataResolver metaDataResolver, Identity identity, ZetboxConfig config, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, IEnumerable<IZetboxContextEventListener> eventListeners)
+            : base(metaDataResolver, identity, config, lazyCtx, iftFactory, eventListeners)
         {
             TestObjClasses[1] = new TestObjClassImpl() { ID = 1 };
             TestObjClasses[3] = new TestObjClassImpl() { ID = 3 };

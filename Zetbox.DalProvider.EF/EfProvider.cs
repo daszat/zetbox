@@ -17,6 +17,7 @@ namespace Zetbox.DalProvider.Ef
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
     using System.Reflection;
     using System.Text;
@@ -26,9 +27,8 @@ namespace Zetbox.DalProvider.Ef
     using Zetbox.API.Common;
     using Zetbox.API.Configuration;
     using Zetbox.API.Server;
-    using Zetbox.API.Utils;
     using Zetbox.API.Server.PerfCounter;
-    using System.ComponentModel;
+    using Zetbox.API.Utils;
 
     public interface IEfActionsManager : ICustomActionsManager { }
 
@@ -60,12 +60,13 @@ namespace Zetbox.DalProvider.Ef
                             c.Resolve<InterfaceType.Factory>(),
                             c.Resolve<EfImplementationType.EfFactory>(),
                             c.Resolve<IPerfCounter>(),
-                            c.ResolveNamed<ISqlErrorTranslator>(cfg.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey).SchemaProvider)
+                            c.ResolveNamed<ISqlErrorTranslator>(cfg.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey).SchemaProvider),
+                            c.Resolve<IEnumerable<IZetboxContextEventListener>>()
                             );
                     }
                 })
                 .As<IZetboxServerContext>()
-                .OnActivated(args =>                              
+                .OnActivated(args =>
                 {
                     var manager = args.Context.Resolve<IEfActionsManager>();
                     manager.Init(args.Context.Resolve<IFrozenContext>());
@@ -88,7 +89,8 @@ namespace Zetbox.DalProvider.Ef
                             c.Resolve<InterfaceType.Factory>(),
                             c.Resolve<EfImplementationType.EfFactory>(),
                             c.Resolve<IPerfCounter>(),
-                            c.ResolveNamed<ISqlErrorTranslator>(cfg.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey).SchemaProvider)
+                            c.ResolveNamed<ISqlErrorTranslator>(cfg.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey).SchemaProvider),
+                            c.Resolve<IEnumerable<IZetboxContextEventListener>>()
                             );
                     }
                 })
@@ -97,6 +99,8 @@ namespace Zetbox.DalProvider.Ef
                 {
                     var manager = args.Context.Resolve<IEfActionsManager>();
                     manager.Init(args.Context.Resolve<IFrozenContext>());
+
+                    ZetboxContextEventListenerHelper.OnCreated(args.Context.Resolve<IEnumerable<IZetboxContextEventListener>>(), args.Instance);
                 })
                 .InstancePerDependency();
 
@@ -115,7 +119,8 @@ namespace Zetbox.DalProvider.Ef
                             c.Resolve<InterfaceType.Factory>(),
                             c.Resolve<EfImplementationType.EfFactory>(),
                             c.Resolve<IPerfCounter>(),
-                            c.ResolveNamed<ISqlErrorTranslator>(cfg.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey).SchemaProvider)
+                            c.ResolveNamed<ISqlErrorTranslator>(cfg.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey).SchemaProvider),
+                            c.Resolve<IEnumerable<IZetboxContextEventListener>>()
                             );
                         return result;
                     }
@@ -125,6 +130,8 @@ namespace Zetbox.DalProvider.Ef
                 {
                     var manager = args.Context.Resolve<IEfActionsManager>();
                     manager.Init(args.Context.Resolve<IFrozenContext>());
+
+                    ZetboxContextEventListenerHelper.OnCreated(args.Context.Resolve<IEnumerable<IZetboxContextEventListener>>(), args.Instance);
                 })
                 .InstancePerDependency();
 

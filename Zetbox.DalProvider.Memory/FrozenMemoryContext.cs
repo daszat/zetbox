@@ -25,8 +25,8 @@ namespace Zetbox.DalProvider.Memory
     public sealed class FrozenMemoryContext
        : MemoryContext, IFrozenContext
     {
-        public FrozenMemoryContext(InterfaceType.Factory iftFactory, Func<IFrozenContext> lazyCtx, MemoryImplementationType.MemoryFactory implTypeFactory)
-            : base(iftFactory, lazyCtx, implTypeFactory)
+        public FrozenMemoryContext(InterfaceType.Factory iftFactory, Func<IFrozenContext> lazyCtx, MemoryImplementationType.MemoryFactory implTypeFactory, IEnumerable<IZetboxContextEventListener> eventListeners)
+            : base(iftFactory, lazyCtx, implTypeFactory, eventListeners)
         {
         }
 

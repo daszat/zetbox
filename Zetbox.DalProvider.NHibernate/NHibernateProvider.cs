@@ -17,6 +17,7 @@ namespace Zetbox.DalProvider.NHibernate
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
     using System.Text;
     using Autofac;
@@ -28,7 +29,6 @@ namespace Zetbox.DalProvider.NHibernate
     using Zetbox.API.Server.PerfCounter;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
-    using System.ComponentModel;
 
     [Feature]
     [Description("nHibernate (NH) provider")]
@@ -74,7 +74,8 @@ namespace Zetbox.DalProvider.NHibernate
                         c.Resolve<global::NHibernate.ISessionFactory>(),
                         c.Resolve<INHibernateImplementationTypeChecker>(),
                         c.Resolve<IPerfCounter>(),
-                            c.ResolveNamed<ISqlErrorTranslator>(cfg.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey).SchemaProvider)
+                        c.ResolveNamed<ISqlErrorTranslator>(cfg.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey).SchemaProvider),
+                        c.Resolve<IEnumerable<IZetboxContextEventListener>>()
                         );
                 })
                 .As<IZetboxContext>()
@@ -132,7 +133,8 @@ namespace Zetbox.DalProvider.NHibernate
                         c.Resolve<global::NHibernate.ISessionFactory>(),
                         c.Resolve<INHibernateImplementationTypeChecker>(),
                         c.Resolve<IPerfCounter>(),
-                        c.ResolveNamed<ISqlErrorTranslator>(cfg.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey).SchemaProvider)
+                        c.ResolveNamed<ISqlErrorTranslator>(cfg.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey).SchemaProvider),
+                        c.Resolve<IEnumerable<IZetboxContextEventListener>>()
                         );
                 })
                 .As<TInterface>()
@@ -140,6 +142,8 @@ namespace Zetbox.DalProvider.NHibernate
                 {
                     var manager = args.Context.Resolve<INHibernateActionsManager>();
                     manager.Init(args.Context.Resolve<IFrozenContext>());
+
+                    ZetboxContextEventListenerHelper.OnCreated(args.Context.Resolve<IEnumerable<IZetboxContextEventListener>>(), args.Instance);
                 });
         }
     }

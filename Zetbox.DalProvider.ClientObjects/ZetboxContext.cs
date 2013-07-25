@@ -67,6 +67,7 @@ namespace Zetbox.DalProvider.Client
         private readonly ContextIsolationLevel _clientIsolationLevel;
         private readonly IPerfCounter _perfCounter;
         private readonly IIdentityResolver _identityResolver;
+        private readonly IEnumerable<IZetboxContextEventListener> _eventListeners;
 
         /// <summary>
         /// List of Objects (IDataObject and ICollectionEntry) in this Context.
@@ -79,7 +80,7 @@ namespace Zetbox.DalProvider.Client
         [SuppressMessage("Microsoft.Performance", "CA1805:DoNotInitializeUnnecessarily", Justification = "Uses global constant")]
         private int _newIDCounter = Helper.INVALIDID;
 
-        public ZetboxContextImpl(ContextIsolationLevel il, ZetboxConfig config, IProxy proxy, string clientImplementationAssembly, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, ClientImplementationType.ClientFactory implTypeFactory, UnattachedObjectFactory unattachedObjectFactory, IPerfCounter perfCounter, IIdentityResolver identityResolver)
+        public ZetboxContextImpl(ContextIsolationLevel il, ZetboxConfig config, IProxy proxy, string clientImplementationAssembly, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, ClientImplementationType.ClientFactory implTypeFactory, UnattachedObjectFactory unattachedObjectFactory, IPerfCounter perfCounter, IIdentityResolver identityResolver, IEnumerable<IZetboxContextEventListener> eventListeners)
         {
             if (perfCounter == null) throw new ArgumentNullException("perfCounter");
             this._clientIsolationLevel = il;
@@ -93,6 +94,7 @@ namespace Zetbox.DalProvider.Client
             this._unattachedObjectFactory = unattachedObjectFactory;
             this._perfCounter = perfCounter;
             this._identityResolver = identityResolver;
+            this._eventListeners = eventListeners;
 
             CreatedAt = new StackTrace(true);
             ZetboxContextDebuggerSingleton.Created(this);
@@ -124,6 +126,8 @@ namespace Zetbox.DalProvider.Client
             }
             // TODO: use correct Dispose implementation pattern
             GC.SuppressFinalize(this);
+
+            ZetboxContextEventListenerHelper.OnDisposed(_eventListeners, this);
         }
 
         public bool IsDisposed
@@ -762,8 +766,29 @@ namespace Zetbox.DalProvider.Client
                 // TODO: Add a better Cache Refresh Strategie
                 // CacheController<IDataObject>.Current.Clear();
 
+                var added = new List<IDataObject>();
+                var modified = new List<IDataObject>();
+                var deleted = new List<IDataObject>();
+                foreach (var ido in AttachedObjects.OfType<IDataObject>())
+                {
+                    switch (ido.ObjectState)
+                    {
+                        case DataObjectState.New:
+                            added.Add(ido);
+                            break;
+                        case DataObjectState.Modified:
+                            modified.Add(ido);
+                            break;
+                        case DataObjectState.Deleted:
+                            deleted.Add(ido);
+                            break;
+                    }
+                }
+
                 if (_submitChangesHandler == null) _submitChangesHandler = new SubmitChangesHandler();
                 result = _submitChangesHandler.ExchangeObjects(this);
+
+                ZetboxContextEventListenerHelper.OnSubmitted(_eventListeners, this, added, modified, deleted);
             }
             finally
             {

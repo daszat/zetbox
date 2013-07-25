@@ -42,6 +42,7 @@ namespace Zetbox.API.Server
         protected readonly InterfaceType.Factory iftFactory;
         protected readonly Func<IFrozenContext> lazyCtx;
         protected readonly ZetboxConfig config;
+        protected readonly IEnumerable<IZetboxContextEventListener> eventListeners;
 
         /// <summary>
         /// Initializes a new instance of the BaseZetboxDataContext class using the specified <see cref="Identity"/>.
@@ -51,7 +52,8 @@ namespace Zetbox.API.Server
         /// <param name="config"></param>
         /// <param name="lazyCtx"></param>
         /// <param name="iftFactory"></param>
-        protected BaseZetboxDataContext(IMetaDataResolver metaDataResolver, Identity identity, ZetboxConfig config, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory)
+        /// <param name="eventListeners"></param>
+        protected BaseZetboxDataContext(IMetaDataResolver metaDataResolver, Identity identity, ZetboxConfig config, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, IEnumerable<IZetboxContextEventListener> eventListeners)
         {
             if (metaDataResolver == null) { throw new ArgumentNullException("metaDataResolver"); }
             if (config == null) { throw new ArgumentNullException("config"); }
@@ -63,6 +65,7 @@ namespace Zetbox.API.Server
             this.iftFactoryCache = new FuncCache<Type, InterfaceType>(r => iftFactory(r));
             this.iftFactory = t => iftFactoryCache.Invoke(t);
             this.lazyCtx = lazyCtx;
+            this.eventListeners = eventListeners;
         }
 
         /// <summary>
@@ -80,6 +83,8 @@ namespace Zetbox.API.Server
             }
             GC.SuppressFinalize(this);
             IsDisposed = true;
+
+            ZetboxContextEventListenerHelper.OnDisposed(eventListeners, this);
         }
 
         /// <summary>
@@ -364,6 +369,11 @@ namespace Zetbox.API.Server
         public abstract int SubmitRestore();
 
         Identity localIdentity = null;
+
+        private List<IDataObject> _added;
+        private List<IDataObject> _modified;
+        private List<IDataObject> _deleted;
+
         /// <summary>
         /// 
         /// </summary>
@@ -372,9 +382,25 @@ namespace Zetbox.API.Server
         {
             var now = DateTime.Now;
 
+            _added = new List<IDataObject>();
+            _modified = new List<IDataObject>();
+            _deleted = new List<IDataObject>();
+
             foreach (IDataObject obj in modifiedObjects)
             {
                 var state = obj.ObjectState;
+                switch (state)
+                {
+                    case DataObjectState.New:
+                        _added.Add(obj);
+                        break;
+                    case DataObjectState.Modified:
+                        _modified.Add(obj);
+                        break;
+                    case DataObjectState.Deleted:
+                        _deleted.Add(obj);
+                        break;
+                }
 
                 // Blob check
                 if (obj is Zetbox.App.Base.Blob && state == DataObjectState.Modified)
@@ -423,6 +449,13 @@ namespace Zetbox.API.Server
         protected virtual void NotifyChanged(IEnumerable<IDataObject> modifiedObjects)
         {
             modifiedObjects.Where(obj => obj.ObjectState != DataObjectState.Deleted).ForEach(obj => obj.NotifyPostSave());
+
+        }
+
+        protected void OnSubmitted()
+        {
+            ZetboxContextEventListenerHelper.OnSubmitted(eventListeners, this, _added, _modified, _deleted);
+            _added = _modified = _deleted = null;
         }
 
         /// <summary>

@@ -23,10 +23,10 @@ namespace Zetbox.DalProvider.Client
     using Autofac;
     using Zetbox.API;
     using Zetbox.API.Client;
-    using Zetbox.API.Configuration;
-    using Zetbox.API.Utils;
     using Zetbox.API.Client.PerfCounter;
     using Zetbox.API.Common;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Utils;
 
     public interface IClientActionsManager : ICustomActionsManager { }
 
@@ -54,7 +54,8 @@ namespace Zetbox.DalProvider.Client
                         c.Resolve<ClientImplementationType.ClientFactory>(),
                         c.Resolve<UnattachedObjectFactory>(),
                         c.Resolve<IPerfCounter>(),
-                        c.Resolve<IIdentityResolver>());
+                        c.Resolve<IIdentityResolver>(),
+                        c.Resolve<IEnumerable<IZetboxContextEventListener>>());
                 })
                 .AsSelf()
                 .As<IZetboxContext>()

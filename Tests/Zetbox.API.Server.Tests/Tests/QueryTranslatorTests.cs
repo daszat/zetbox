@@ -21,12 +21,12 @@ namespace Zetbox.API.Server.Tests
     using System.Linq.Expressions;
     using System.Text;
     using Autofac;
+    using NUnit.Framework;
     using Zetbox.API.Common;
     using Zetbox.API.Configuration;
     using Zetbox.API.Server.Mocks;
     using Zetbox.API.Server.PerfCounter;
     using Zetbox.App.Base;
-    using NUnit.Framework;
 
     internal class TestQueryTranslatorProvider<T> : QueryTranslatorProvider<T>
     {
@@ -57,7 +57,13 @@ namespace Zetbox.API.Server.Tests
         public override void SetUp()
         {
             base.SetUp();
-            ctx = new ZetboxContextMock(scope.Resolve<IMetaDataResolver>(), null, scope.Resolve<ZetboxConfig>(), scope.Resolve<Func<IFrozenContext>>(), scope.Resolve<InterfaceType.Factory>());
+            ctx = new ZetboxContextMock(
+                scope.Resolve<IMetaDataResolver>(),
+                null,
+                scope.Resolve<ZetboxConfig>(),
+                scope.Resolve<Func<IFrozenContext>>(),
+                scope.Resolve<InterfaceType.Factory>(),
+                scope.Resolve<IEnumerable<IZetboxContextEventListener>>());
         }
 
         [Test]

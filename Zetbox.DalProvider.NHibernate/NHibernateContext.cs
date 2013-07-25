@@ -61,8 +61,9 @@ namespace Zetbox.DalProvider.NHibernate
             global::NHibernate.ISessionFactory nhSessionFactory,
             INHibernateImplementationTypeChecker implChecker,
             IPerfCounter perfCounter,
-            ISqlErrorTranslator sqlErrorTranslator)
-            : base(metaDataResolver, identity, config, lazyCtx, iftFactory)
+            ISqlErrorTranslator sqlErrorTranslator,
+            IEnumerable<IZetboxContextEventListener> eventListeners)
+            : base(metaDataResolver, identity, config, lazyCtx, iftFactory, eventListeners)
         {
             if (perfCounter == null) throw new ArgumentNullException("perfCounter");
             if (sqlErrorTranslator == null) throw new ArgumentNullException("sqlErrorTranslator");
@@ -245,6 +246,8 @@ namespace Zetbox.DalProvider.NHibernate
             NotifyChanged(notifyList);
 
             UpdateObjectState();
+
+            OnSubmitted();
 
             return objects.Count;
         }
