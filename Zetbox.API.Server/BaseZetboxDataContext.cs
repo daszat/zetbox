@@ -420,9 +420,9 @@ namespace Zetbox.API.Server
             }
         }
 
-        protected virtual void NotifyChanged(IEnumerable<IDataObject> changedOrAdded)
+        protected virtual void NotifyChanged(IEnumerable<IDataObject> modifiedObjects)
         {
-            changedOrAdded.ForEach(obj => obj.NotifyPostSave());
+            modifiedObjects.Where(obj => obj.ObjectState != DataObjectState.Deleted).ForEach(obj => obj.NotifyPostSave());
         }
 
         /// <summary>
