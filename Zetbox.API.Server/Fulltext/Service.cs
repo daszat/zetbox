@@ -80,17 +80,18 @@ namespace Zetbox.API.Server.Fulltext
             {
                 var clsId = string.Format(CultureInfo.InvariantCulture, "{0}#{1}", add.Item1.Type.FullName, add.Item2);
                 var doc = new Document();
-                doc.Add(new Field("__class", add.Item1.Type.FullName, Field.Store.YES, Field.Index.NOT_ANALYZED_NO_NORMS));
-                doc.Add(new Field("__class_id", clsId, Field.Store.YES, Field.Index.NOT_ANALYZED_NO_NORMS));
-                doc.Add(new Field("__body", add.Item3, Field.Store.NO, Field.Index.ANALYZED));
+                doc.Add(new Field(Module.FIELD_CLASS, add.Item1.Type.FullName, Field.Store.YES, Field.Index.NOT_ANALYZED_NO_NORMS));
+                doc.Add(new Field(Module.FIELD_CLASS_ID, clsId, Field.Store.YES, Field.Index.NOT_ANALYZED_NO_NORMS));
+                doc.Add(new Field(Module.FIELD_ID, add.Item2.ToString(CultureInfo.InvariantCulture), Field.Store.YES, Field.Index.NOT_ANALYZED_NO_NORMS));
+                doc.Add(new Field(Module.FIELD_BODY, add.Item3, Field.Store.NO, Field.Index.ANALYZED));
 
-                _indexWriter.UpdateDocument(new Term("__class_id", clsId), doc);
+                _indexWriter.UpdateDocument(new Term(Module.FIELD_CLASS_ID, clsId), doc);
             }
 
             foreach (var del in item.deleted)
             {
                 var clsId = string.Format(CultureInfo.InvariantCulture, "{0}#{1}", del.Item1.Type.FullName, del.Item2);
-                _indexWriter.DeleteDocuments(new Term("__class_id", clsId));
+                _indexWriter.DeleteDocuments(new Term(Module.FIELD_CLASS_ID, clsId));
             }
 
             _indexWriter.Commit();

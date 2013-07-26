@@ -35,6 +35,11 @@ namespace Zetbox.API.Server.Fulltext
     [Feature(NotOnFallback = true)]
     public sealed class Module : Autofac.Module
     {
+        public static readonly string FIELD_CLASS = "__class";
+        public static readonly string FIELD_CLASS_ID = "__class_id";
+        public static readonly string FIELD_ID = "__id";
+        public static readonly string FIELD_BODY = "__body";
+
         protected override void Load(Autofac.ContainerBuilder builder)
         {
             base.Load(builder);
