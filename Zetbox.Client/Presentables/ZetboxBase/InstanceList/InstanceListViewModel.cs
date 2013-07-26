@@ -733,14 +733,14 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
             if (!string.IsNullOrEmpty(_orderByExpression))
             {
-                result = result.OrderBy(string.Format("{0} {1}",                // Sorting CompoundObject does not work
+                result = result.OrderBy(string.Format("{0} {1}",            // Sorting CompoundObject does not work
                                 _orderByExpression,                         // Maybe we should implement a custom comparer
                                 _sortDirection == System.ComponentModel.ListSortDirection.Descending ? "desc" : string.Empty));
             }
 
             // Limit to maxlistcount
             // Due to the fact, that the client provider is appending 
-            // local objects to the query we have to ad an additional limit
+            // local objects to the query we have to add an additional limit
             result = result.Take(Zetbox.API.Helper.MAXLISTCOUNT);
 
             return result;

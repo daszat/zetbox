@@ -16,18 +16,18 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Collections.Specialized;
     using System.Linq;
     using System.Text;
-    using Zetbox.Client.Presentables;
     using Zetbox.API;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
-    using Zetbox.Client.Presentables.FilterViewModels;
-    using Zetbox.Client.Models;
-    using System.Collections.Specialized;
-    using System.Collections.ObjectModel;
     using Zetbox.App.GUI;
+    using Zetbox.Client.Models;
+    using Zetbox.Client.Presentables;
+    using Zetbox.Client.Presentables.FilterViewModels;
 
     [ViewModelDescriptor]
     public class FilterListViewModel : ViewModel
@@ -266,11 +266,11 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             if (mdl is IUIFilterModel)
             {
                 var uimdl = (IUIFilterModel)mdl;
-                
+
                 var vmdl = FilterViewModel.Fetch(ViewModelFactory, DataContext, this, uimdl);
                 vmdl.RequestedKind = uimdl.RequestedKind;
                 vmdl.RespectRequiredFilter = RespectRequiredFilter;
-                
+
                 var levmdl = FilterListEntryViewModel.Fetch(ViewModelFactory, DataContext, this, vmdl);
                 levmdl.IsUserFilter = allowRemove;
                 levmdl.SourceProperties = sourceProperties;
@@ -294,7 +294,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 _FilterViewModels.Add(vmdl);
                 _FilterListEntryViewModels.Add(levmdl);
             }
-            if(allowRemove) UpdateRespectRequieredFilter();
+            if (allowRemove) UpdateRespectRequieredFilter();
 
             OnPropertyChanged("RespectRequiredFilter");
             OnPropertyChanged("HasUserFilter");
@@ -359,7 +359,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         InstanceListViewModelResources.AddFilterCommand,
                         InstanceListViewModelResources.AddFilterCommand_Tooltip,
                         AddFilter,
-                        () => AllowFilter && AllowUserFilter, 
+                        () => AllowFilter && AllowUserFilter,
                         null);
                     _AddFilterCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext));
                 }
