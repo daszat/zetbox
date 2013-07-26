@@ -21,9 +21,11 @@ namespace Zetbox.API.Server
     using System.IO;
     using System.Linq;
     using System.Linq.Expressions;
+    using Lucene.Net.Index;
     using Lucene.Net.QueryParsers;
     using Lucene.Net.Search;
     using Zetbox.API;
+    using Zetbox.API.Common;
     using Zetbox.API.Server.Fulltext;
     using Zetbox.API.Utils;
     using Zetbox.App.Extensions;
@@ -188,7 +190,20 @@ namespace Zetbox.API.Server
             var searcher = _searchDependencies.SearcherManager.Aquire();
             try
             {
-                var hits = searcher.Search(qry, Helper.MAXLISTCOUNT);
+                var finalQuery = new BooleanQuery();
+                finalQuery.Add(new BooleanClause(qry, Occur.MUST));
+
+                if (typeof(T) != typeof(IDataObject))
+                {
+                    var classQuery = new BooleanQuery();
+                    foreach (var cls in _searchDependencies.Resolver.GetObjectClass(ctx.GetInterfaceType(typeof(T))).AndChildren(cls => cls.SubClasses).Where(cls => !cls.IsAbstract))
+                    {
+                        classQuery.Add(new BooleanClause(new TermQuery(new Term(Module.FIELD_CLASS, string.Format("{0}.{1}", cls.Module.Namespace, cls.Name))), Occur.SHOULD));
+                    }
+                    finalQuery.Add(new BooleanClause(classQuery, Occur.MUST));
+                }
+
+                var hits = searcher.Search(finalQuery, Helper.MAXLISTCOUNT);
                 var anyRefs = hits.ScoreDocs.Select(doc => searcher.Doc(doc.Doc)).ToLookup(doc => doc.Get(Fulltext.Module.FIELD_CLASS), doc => doc.Get(Fulltext.Module.FIELD_ID));
 
                 var result = new List<IStreamable>();
