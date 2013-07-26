@@ -33,7 +33,7 @@ namespace Zetbox.API
     public interface IZetboxContextEventListener
     {
         void Created(IReadOnlyZetboxContext ctx);
-        void Submitted(IReadOnlyZetboxContext ctx, IEnumerable<IDataObject> added, IEnumerable<IDataObject> modified, IEnumerable<Tuple<InterfaceType, int, Guid?>> deleted);
+        void Submitted(IReadOnlyZetboxContext ctx, IEnumerable<IDataObject> added, IEnumerable<IDataObject> modified, IEnumerable<Tuple<InterfaceType, int>> deleted);
         void Disposed(IReadOnlyZetboxContext ctx);
     }
 
@@ -63,10 +63,9 @@ namespace Zetbox.API
                 try
                 {
                     evl.Submitted(ctx, added, modified, deleted.Select(obj =>
-                        new Tuple<InterfaceType, int, Guid?>(
+                        new Tuple<InterfaceType, int>(
                             ctx.GetInterfaceType(obj),
-                            obj.ID,
-                            obj is IExportableInternal ? ((IExportableInternal)obj).ExportGuid : (Guid?)null)));
+                            obj.ID)));
                 }
                 catch (Exception ex)
                 {

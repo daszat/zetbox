@@ -104,6 +104,7 @@
     <Compile Include="ApiCommonModule.cs" />
     <Compile Include="BaseCustomActionsManager.cs" />
     <Compile Include="CompoundObjectExtensions.cs" />
+    <Compile Include="Fulltext\DataObjectFormatter.cs" />
     <Compile Include="GUI\IconConverter.cs" />
     <Compile Include="GUI\SavedListConfig.cs" />
     <Compile Include="IdentityExtensions.cs" />
