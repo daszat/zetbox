@@ -126,90 +126,100 @@ namespace Zetbox.API.Server
             if (query == null) { throw new ArgumentNullException("query"); }
             ZetboxGeneratedVersionAttribute.Check(version);
 
-            //// TODO: replace with GetQuery().Provider.CreateQuery(ctx, query) ~~~
-            //var result = Expression.Lambda(query).Compile().DynamicInvoke();
-
             var isExecute = query.IsMethodCallExpression("First") || query.IsMethodCallExpression("FirstOrDefault") || query.IsMethodCallExpression("Single") || query.IsMethodCallExpression("SingleOrDefault");
-
-            // TODO: handle paging (Skip/Take)
 
             var ftDetector = new FulltextDetector();
             ftDetector.Visit(query);
 
             if (ftDetector.IsFulltext)
             {
-                if (_searchDependencies == null) throw new InvalidOperationException("No Fulltext Support registered");
-
-                var qry = _searchDependencies.Parser.Parse(ftDetector.Filter);
-
-                var searcher = _searchDependencies.SearcherManager.Aquire();
-                try
-                {
-                    var hits = searcher.Search(qry, Helper.MAXLISTCOUNT);
-                    var anyRefs = hits.ScoreDocs.Select(doc => searcher.Doc(doc.Doc)).ToLookup(doc => doc.Get(Fulltext.Module.FIELD_CLASS), doc => doc.Get(Fulltext.Module.FIELD_ID));
-
-                    var result = new List<IStreamable>();
-
-                    // TODO: do batching here
-                    foreach (var ids in anyRefs)
-                    {
-                        var ifType = ctx.GetInterfaceType(ids.Key);
-                        foreach (var idStr in ids)
-                        {
-                            try
-                            {
-                                int id;
-                                if (int.TryParse(idStr, out id))
-                                {
-                                    var obj = ctx.Find(ifType, id);
-                                    result.Add(obj);
-                                }
-                            }
-                            catch (ArgumentOutOfRangeException)
-                            {
-                                // TODO: mark stale lucene doc for deletion
-                                continue;
-                            }
-                        }
-                    }
-                    return result;
-                }
-                finally
-                {
-                    _searchDependencies.SearcherManager.Release(searcher);
-                }
+                return FulltextSearch(ctx, ftDetector.Filter);
             }
             else if (isExecute)
             {
-                var result = (IStreamable)ctx.GetQuery<T>().Provider.Execute<T>(query);
-                if (result == null)
-                {
-                    return Enumerable.Empty<IStreamable>();
-                }
-                else
-                {
-                    return new IStreamable[] { result };
-                }
+                return Execute(ctx, query);
             }
             else
             {
-                if (!query.IsMethodCallExpression("Take"))
+                return Query(ctx, query);
+            }
+        }
+
+        private static IEnumerable<IStreamable> Query(IReadOnlyZetboxContext ctx, Expression query)
+        {
+            if (!query.IsMethodCallExpression("Take"))
+            {
+                return ctx.GetQuery<T>().Provider.CreateQuery<T>(query).Take(Helper.MAXLISTCOUNT).ToList().Cast<IStreamable>();
+            }
+            else
+            {
+                var takeQ = query as MethodCallExpression;
+                var countExp = takeQ.Arguments[1] as ConstantExpression;
+                if ((int)countExp.Value > Helper.MAXLISTCOUNT)
                 {
                     return ctx.GetQuery<T>().Provider.CreateQuery<T>(query).Take(Helper.MAXLISTCOUNT).ToList().Cast<IStreamable>();
                 }
                 else
                 {
-                    var takeQ = query as MethodCallExpression;
-                    var countExp = takeQ.Arguments[1] as ConstantExpression;
-                    if ((int)countExp.Value > Helper.MAXLISTCOUNT)
+                    return ctx.GetQuery<T>().Provider.CreateQuery<T>(query).ToList().Cast<IStreamable>();
+                }
+            }
+        }
+
+        private static IEnumerable<IStreamable> Execute(IReadOnlyZetboxContext ctx, Expression query)
+        {
+            var result = (IStreamable)ctx.GetQuery<T>().Provider.Execute<T>(query);
+            if (result == null)
+            {
+                return Enumerable.Empty<IStreamable>();
+            }
+            else
+            {
+                return new IStreamable[] { result };
+            }
+        }
+
+        private IEnumerable<IStreamable> FulltextSearch(IReadOnlyZetboxContext ctx, string query)
+        {
+            if (_searchDependencies == null) throw new InvalidOperationException("No Fulltext Support registered");
+
+            var qry = _searchDependencies.Parser.Parse(query);
+
+            var searcher = _searchDependencies.SearcherManager.Aquire();
+            try
+            {
+                var hits = searcher.Search(qry, Helper.MAXLISTCOUNT);
+                var anyRefs = hits.ScoreDocs.Select(doc => searcher.Doc(doc.Doc)).ToLookup(doc => doc.Get(Fulltext.Module.FIELD_CLASS), doc => doc.Get(Fulltext.Module.FIELD_ID));
+
+                var result = new List<IStreamable>();
+
+                // TODO: do batching here
+                foreach (var ids in anyRefs)
+                {
+                    var ifType = ctx.GetInterfaceType(ids.Key);
+                    foreach (var idStr in ids)
                     {
-                        return ctx.GetQuery<T>().Provider.CreateQuery<T>(query).Take(Helper.MAXLISTCOUNT).ToList().Cast<IStreamable>();
-                    }
-                    else
-                    {
-                        return ctx.GetQuery<T>().Provider.CreateQuery<T>(query).ToList().Cast<IStreamable>();
+                        try
+                        {
+                            int id;
+                            if (int.TryParse(idStr, out id))
+                            {
+                                var obj = ctx.Find(ifType, id);
+                                result.Add(obj);
+                            }
+                        }
+                        catch (ArgumentOutOfRangeException)
+                        {
+                            // TODO: mark stale lucene doc for deletion
+                            continue;
+                        }
                     }
                 }
+                return result;
+            }
+            finally
+            {
+                _searchDependencies.SearcherManager.Release(searcher);
             }
         }
 
