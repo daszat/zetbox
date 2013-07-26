@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
@@ -721,10 +722,13 @@ namespace Zetbox.API
             if (query == null) throw new ArgumentNullException("query");
             if (query.Provider is IZetboxQueryProvider)
             {
-                var mi = typeof(ZetboxContextQueryableExtensions).FindGenericMethod("FulltextMatch", new Type[] { typeof(T) }, new Type[] { typeof(IQueryable<T>), typeof(string) });
+                var mi = typeof(ZetboxContextQueryableExtensions).FindGenericMethod(
+                    "FulltextMatch",
+                    new Type[] { typeof(T) },
+                    new Type[] { typeof(IQueryable<T>), typeof(string) });
 
                 return query.Provider.CreateQuery<T>(
-                    System.Linq.Expressions.Expression.Call(mi, query.Expression));
+                    System.Linq.Expressions.Expression.Call(mi, query.Expression, Expression.Constant(filter)));
             }
             else
             {
@@ -737,10 +741,13 @@ namespace Zetbox.API
             if (query == null) throw new ArgumentNullException("query");
             if (query.Provider is IZetboxQueryProvider)
             {
-                var mi = typeof(ZetboxContextQueryableExtensions).FindGenericMethod("FulltextMatch", new Type[] { query.ElementType }, new Type[] { typeof(IQueryable<>).MakeGenericType(query.ElementType), typeof(string) });
+                var mi = typeof(ZetboxContextQueryableExtensions).FindGenericMethod(
+                    "FulltextMatch",
+                    new Type[] { query.ElementType },
+                    new Type[] { typeof(IQueryable<>).MakeGenericType(query.ElementType), typeof(string) });
 
                 return query.Provider.CreateQuery(
-                    System.Linq.Expressions.Expression.Call(mi, query.Expression));
+                    System.Linq.Expressions.Expression.Call(mi, query.Expression, Expression.Constant(filter)));
             }
             else
             {
