@@ -91,6 +91,7 @@ M: System.Collections.Generic.List`1<Zetbox.API.IDataObject> Zetbox.API.BaseMemo
 M: System.Collections.Generic.List`1<Zetbox.API.IDataObject> Zetbox.API.Server.BaseZetboxDataContext::GetAllHack()
 # Helper method which is only called by reflection from GetParcel
 M: System.Collections.Generic.List`1<Zetbox.API.IDataObject> Zetbox.Server.Server::GetParcelHack(Zetbox.API.Server.IZetboxServerContext,System.Int32,System.Int32)
+M: System.Collections.Generic.List`1<Zetbox.API.IDataObject> Zetbox.API.Server.Fulltext.Rebuilder::GetParcelHack(Zetbox.API.Server.IZetboxServerContext,System.Int32,System.Int32)
 # Helper method which is only called by reflection
 M: Zetbox.API.Async.ZbTask`1<Zetbox.API.IDataObject> Zetbox.DalProvider.Client.ZetboxContextImpl::FindAsyncGenericHelper(System.Int32)
 M: System.Linq.IQueryable`1<T> Zetbox.App.Packaging.Exporter::FetchRelationEntriesA(Zetbox.API.IReadOnlyZetboxContext,System.Int32)

@@ -135,6 +135,7 @@
     <Compile Include="BaseServerDataObject.cs" />
     <Compile Include="Fulltext\Listener.cs" />
     <Compile Include="Fulltext\Module.cs" />
+    <Compile Include="Fulltext\Rebuilder.cs" />
     <Compile Include="Fulltext\SearcherManager.cs" />
     <Compile Include="Fulltext\Service.cs" />
     <Compile Include="SqlErrorTranslator.cs" />

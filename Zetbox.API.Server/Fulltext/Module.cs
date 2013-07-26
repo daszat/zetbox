@@ -32,6 +32,7 @@ namespace Zetbox.API.Server.Fulltext
     using Lucene.Net.Store;
     using Zetbox.API.Common;
     using Zetbox.API.Configuration;
+    using Zetbox.API.Utils;
 
     public sealed class LuceneSearchDeps
     {
@@ -113,6 +114,37 @@ namespace Zetbox.API.Server.Fulltext
             builder
                 .Register<LuceneSearchDeps>(c => new LuceneSearchDeps(c.Resolve<SearcherManager>(), c.Resolve<QueryParser>(), c.Resolve<IMetaDataResolver>()))
                 .InstancePerDependency();
+
+            builder
+                .Register<Rebuilder>(c => new Rebuilder(c.Resolve<ILifetimeScope>(), c.Resolve<IndexWriter>(), c.Resolve<Common.Fulltext.DataObjectFormatter>()))
+                .InstancePerDependency();
+
+            builder
+                .RegisterCmdLineAction("rebuild-fulltext-index=", "Rebuild and optimize the fulltext index. You can add a comma separated list of class names (including the namespace) to rebuild the index for only those classes. When no filter is given, all classes are rebuilt.",
+                (scope, v) =>
+                {
+                    var rebuilder = scope.Resolve<Rebuilder>();
+                    if (!string.IsNullOrWhiteSpace(v))
+                    {
+                        rebuilder.Rebuild(v.Split(','));
+                    }
+                    else
+                    {
+                        rebuilder.Rebuild();
+                    }
+                });
+
+            builder
+                 .RegisterCmdLineAction("optimize-fulltext-index=", "Optimize the fulltext index.",
+                 (scope, v) =>
+                 {
+                     var Log = log4net.LogManager.GetLogger("Zetbox.API.Server.Fulltext.Optimizer");
+                     using (Log.InfoTraceMethodCall("Optimize"))
+                     {
+                         var indexWriter = scope.Resolve<IndexWriter>();
+                         indexWriter.Optimize();
+                     }
+                 });
         }
     }
 }
