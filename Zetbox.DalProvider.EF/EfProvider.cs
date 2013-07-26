@@ -136,8 +136,8 @@ namespace Zetbox.DalProvider.Ef
                 .InstancePerDependency();
 
             moduleBuilder
-                .Register(c => new EfServerObjectHandlerFactory())
-                .As(typeof(IServerObjectHandlerFactory));
+                .Register(c => new EfServerObjectHandlerFactory(c.ResolveOptional<Zetbox.API.Server.Fulltext.LuceneSearchDeps>()))
+                .As<IServerObjectHandlerFactory>();
 
             moduleBuilder.RegisterType<EfImplementationType>();
 

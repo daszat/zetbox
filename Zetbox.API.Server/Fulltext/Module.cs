@@ -27,9 +27,22 @@ namespace Zetbox.API.Server.Fulltext
     using Lucene.Net.Analysis.De;
     using Lucene.Net.Analysis.Standard;
     using Lucene.Net.Index;
+    using Lucene.Net.QueryParsers;
     using Lucene.Net.Search;
     using Lucene.Net.Store;
     using Zetbox.API.Configuration;
+
+    public sealed class LuceneSearchDeps
+    {
+        internal LuceneSearchDeps(SearcherManager searcherManager, QueryParser parser)
+        {
+            this.SearcherManager = searcherManager;
+            this.Parser = parser;
+        }
+
+        public SearcherManager SearcherManager { get; private set; }
+        public QueryParser Parser { get; private set; }
+    }
 
     [Description("A service for full-text indexing of all objects")]
     [Feature(NotOnFallback = true)]
@@ -50,7 +63,8 @@ namespace Zetbox.API.Server.Fulltext
                 .SingleInstance();
 
             builder
-                .Register<Service>(c => new Service(c.Resolve<IndexWriter>()))
+                .Register<Service>(c => new Service(c.Resolve<IndexWriter>(), c.Resolve<SearcherManager>()))
+                .AsSelf()
                 .AsImplementedInterfaces()
                 .SingleInstance();
 
@@ -86,8 +100,16 @@ namespace Zetbox.API.Server.Fulltext
                 .SingleInstance();
 
             builder
-                .RegisterType<IndexSearcher>()
+                .Register<SearcherManager>(c => new SearcherManager(c.Resolve<Lucene.Net.Store.Directory>()))
                 .SingleInstance();
+
+            builder
+               .Register<QueryParser>(c => new QueryParser(Lucene.Net.Util.Version.LUCENE_30, FIELD_BODY, c.Resolve<Analyzer>()))
+               .InstancePerLifetimeScope();
+
+            builder
+                .Register<LuceneSearchDeps>(c => new LuceneSearchDeps(c.Resolve<SearcherManager>(), c.Resolve<QueryParser>()))
+                .InstancePerDependency();
         }
     }
 }

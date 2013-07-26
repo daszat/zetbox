@@ -21,7 +21,10 @@ namespace Zetbox.API.Server
     using System.IO;
     using System.Linq;
     using System.Linq.Expressions;
+    using Lucene.Net.QueryParsers;
+    using Lucene.Net.Search;
     using Zetbox.API;
+    using Zetbox.API.Server.Fulltext;
     using Zetbox.API.Utils;
     using Zetbox.App.Extensions;
 
@@ -72,6 +75,31 @@ namespace Zetbox.API.Server
         Zetbox.App.Base.Blob SetBlobStream(Guid version, IZetboxContext ctx, Stream blob, string filename, string mimetype);
     }
 
+    internal sealed class FulltextDetector : ExpressionTreeVisitor
+    {
+        public FulltextDetector()
+        {
+            IsFulltext = false;
+        }
+
+        public bool IsFulltext { get; private set; }
+
+        public string Filter { get; private set; }
+
+        protected override void VisitMethodCall(MethodCallExpression m)
+        {
+            base.VisitMethodCall(m);
+
+            if (m.IsMethodCallExpression("FulltextMatch", typeof(ZetboxContextQueryableExtensions)))
+            {
+                if (IsFulltext) throw new InvalidOperationException("Found two fulltext specs in a single query");
+
+                IsFulltext = true;
+                Filter = (string)(m.Arguments[1] as ConstantExpression).Value;
+            }
+        }
+    }
+
     /// <summary>
     /// Basic server "business" logic. This handles mapping from the service to the actual provider.
     /// </summary>
@@ -82,11 +110,14 @@ namespace Zetbox.API.Server
         : IServerObjectHandler
         where T : class, IDataObject
     {
+        private readonly LuceneSearchDeps _searchDependencies;
+
         /// <summary>
         /// Events registrieren
         /// </summary>
-        public ServerObjectHandler()
+        public ServerObjectHandler(LuceneSearchDeps searchDependencies = null)
         {
+            _searchDependencies = searchDependencies;
         }
 
         public IEnumerable<IStreamable> GetObjects(Guid version, IReadOnlyZetboxContext ctx, Expression query)
@@ -101,18 +132,52 @@ namespace Zetbox.API.Server
             var isExecute = query.IsMethodCallExpression("First") || query.IsMethodCallExpression("FirstOrDefault") || query.IsMethodCallExpression("Single") || query.IsMethodCallExpression("SingleOrDefault");
 
             // TODO: handle paging (Skip/Take)
-            var isFulltextQuery = query.IsMethodCallExpression("FulltextMatch", typeof(ZetboxContextQueryableExtensions));
 
-            if (isFulltextQuery)
+            var ftDetector = new FulltextDetector();
+            ftDetector.Visit(query);
+
+            if (ftDetector.IsFulltext)
             {
-                throw new NotImplementedException();
+                if (_searchDependencies == null) throw new InvalidOperationException("No Fulltext Support registered");
 
-                //var filterArg = ((MethodCallExpression)query).Arguments[1] as ConstantExpression;
-                //var filter = (string)(filterArg.Value);
+                var qry = _searchDependencies.Parser.Parse(ftDetector.Filter);
 
-                // query lucene.net
-                // fetch matched objects from db
-                // return objects
+                var searcher = _searchDependencies.SearcherManager.Aquire();
+                try
+                {
+                    var hits = searcher.Search(qry, Helper.MAXLISTCOUNT);
+                    var anyRefs = hits.ScoreDocs.Select(doc => searcher.Doc(doc.Doc)).ToLookup(doc => doc.Get(Fulltext.Module.FIELD_CLASS), doc => doc.Get(Fulltext.Module.FIELD_ID));
+
+                    var result = new List<IStreamable>();
+
+                    // TODO: do batching here
+                    foreach (var ids in anyRefs)
+                    {
+                        var ifType = ctx.GetInterfaceType(ids.Key);
+                        foreach (var idStr in ids)
+                        {
+                            try
+                            {
+                                int id;
+                                if (int.TryParse(idStr, out id))
+                                {
+                                    var obj = ctx.Find(ifType, id);
+                                    result.Add(obj);
+                                }
+                            }
+                            catch (ArgumentOutOfRangeException)
+                            {
+                                // TODO: mark stale lucene doc for deletion
+                                continue;
+                            }
+                        }
+                    }
+                    return result;
+                }
+                finally
+                {
+                    _searchDependencies.SearcherManager.Release(searcher);
+                }
             }
             else if (isExecute)
             {

@@ -221,6 +221,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         AddFilter(new WithDeactivatedFilterModel(FrozenContext));
                     }
                 }
+
+                AddFilter(new FulltextFilterModel(FrozenContext));
             }
         }
 

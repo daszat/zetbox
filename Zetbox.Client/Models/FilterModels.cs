@@ -321,7 +321,7 @@ namespace Zetbox.Client.Models
         public override IQueryable GetQuery(IQueryable src)
         {
             if (FilterArgument.Value != null)
-                return src.FulltextMatch(FilterArgument.Value.ToString());
+                return src.FulltextMatch(FilterArgument.Value.GetUntypedValue().ToString());
             else
                 return src;
         }

@@ -46,12 +46,15 @@ namespace Zetbox.API.Server.Fulltext
     internal sealed class Service : ThreadedQueueService<IndexUpdate>
     {
         private readonly IndexWriter _indexWriter;
+        private readonly SearcherManager _searcherManager;
 
-        internal Service(IndexWriter indexWriter)
+        internal Service(IndexWriter indexWriter, SearcherManager searcherManager)
         {
             if (indexWriter == null) throw new ArgumentNullException("indexWriter");
+            if (searcherManager == null) throw new ArgumentNullException("searcherManager");
 
             _indexWriter = indexWriter;
+            _searcherManager = searcherManager;
         }
 
         #region IService Members
@@ -95,6 +98,7 @@ namespace Zetbox.API.Server.Fulltext
             }
 
             _indexWriter.Commit();
+            _searcherManager.MaybeReopen();
         }
     }
 }

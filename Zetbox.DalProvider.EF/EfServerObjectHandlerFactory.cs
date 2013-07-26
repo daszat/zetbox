@@ -21,11 +21,15 @@ namespace Zetbox.DalProvider.Ef
 
     using Zetbox.API;
     using Zetbox.API.Server;
+    using Zetbox.API.Server.Fulltext;
 
     public sealed class EfServerObjectHandlerFactory
         : ServerObjectHandlerFactory
     {
-        public EfServerObjectHandlerFactory() { }
+        public EfServerObjectHandlerFactory(LuceneSearchDeps searchDependencies = null)
+            : base(searchDependencies)
+        {
+        }
 
         public override IServerCollectionHandler GetServerCollectionHandler(
             IReadOnlyZetboxContext ctx,

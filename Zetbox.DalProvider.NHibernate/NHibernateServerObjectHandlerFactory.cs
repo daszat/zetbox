@@ -22,11 +22,16 @@ namespace Zetbox.DalProvider.NHibernate
 
     using Zetbox.API;
     using Zetbox.API.Server;
+    using Zetbox.API.Server.Fulltext;
 
     public sealed class NHibernateServerObjectHandlerFactory
         : ServerObjectHandlerFactory
     {
-        public NHibernateServerObjectHandlerFactory() { }
+        public NHibernateServerObjectHandlerFactory(LuceneSearchDeps searchDependencies = null)
+            : base(searchDependencies)
+        {
+        }
+
 
         public override IServerCollectionHandler GetServerCollectionHandler(
             IReadOnlyZetboxContext ctx,

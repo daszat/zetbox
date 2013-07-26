@@ -19,6 +19,7 @@ namespace Zetbox.API.Server
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using Zetbox.API.Server.Fulltext;
     using Zetbox.API.Utils;
 
     /// <summary>
@@ -30,8 +31,11 @@ namespace Zetbox.API.Server
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Server");
 
-        protected ServerObjectHandlerFactory()
+        private readonly LuceneSearchDeps _searchDependencies;
+
+        protected ServerObjectHandlerFactory(LuceneSearchDeps searchDependencies)
         {
+            _searchDependencies = searchDependencies;
         }
 
         protected IServerObjectHandler GetServerObjectHandlerHelper(
@@ -41,7 +45,7 @@ namespace Zetbox.API.Server
             try
             {
                 Type result = objectHandlerType.MakeGenericType(intfType.Type);
-                return (IServerObjectHandler)Activator.CreateInstance(result);
+                return (IServerObjectHandler)Activator.CreateInstance(result, _searchDependencies);
             }
             catch (Exception ex)
             {

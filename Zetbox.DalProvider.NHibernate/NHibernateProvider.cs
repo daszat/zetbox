@@ -100,8 +100,8 @@ namespace Zetbox.DalProvider.NHibernate
                 .InstancePerDependency();
 
             moduleBuilder
-                .Register(c => new NHibernateServerObjectHandlerFactory())
-                .As(typeof(IServerObjectHandlerFactory));
+                .Register(c => new NHibernateServerObjectHandlerFactory(c.ResolveOptional<Zetbox.API.Server.Fulltext.LuceneSearchDeps>()))
+                .As<IServerObjectHandlerFactory>();
 
             moduleBuilder
                 .RegisterType<NHInterceptor>()
