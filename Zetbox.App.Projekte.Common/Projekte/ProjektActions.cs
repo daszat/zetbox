@@ -33,6 +33,12 @@ namespace Zetbox.App.Projekte
         }
 
         [Invocation]
+        public static void GetFulltextIndexBody(Projekt obj, MethodReturnEventArgs<string> e)
+        {
+            e.Result = obj.Name + "\n" + obj.Kundenname;
+        }
+
+        [Invocation]
         public static void postSet_Tasks(Projekt obj)
         {
             obj.Recalculate("AufwandGes");

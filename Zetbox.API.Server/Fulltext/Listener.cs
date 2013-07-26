@@ -19,6 +19,7 @@ namespace Zetbox.API.Server.Fulltext
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using Zetbox.App.Base;
 
     internal sealed class Listener : IZetboxContextEventListener
     {
@@ -54,7 +55,11 @@ namespace Zetbox.API.Server.Fulltext
 
         private string ExtractText(IDataObject obj)
         {
-            // TODO: query ICustomFulltextFormat
+            var customFormatter = obj as ICustomFulltextFormat;
+            if (customFormatter != null)
+            {
+                return customFormatter.GetFulltextIndexBody();
+            }
             return _formatter.Format(obj);
         }
     }

@@ -1263,6 +1263,70 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
         /// 
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetFulltextIndexBody_Projekt")]
+        public virtual string GetFulltextIndexBody()
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetFulltextIndexBody_Projekt != null)
+            {
+                OnGetFulltextIndexBody_Projekt(this, e);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on Projekt.GetFulltextIndexBody");
+            }
+            return e.Result;
+        }
+        public delegate void GetFulltextIndexBody_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+        public static event GetFulltextIndexBody_Handler<Projekt> OnGetFulltextIndexBody_Projekt;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<Projekt> OnGetFulltextIndexBody_Projekt_CanExec;
+
+        [EventBasedMethod("OnGetFulltextIndexBody_Projekt_CanExec")]
+        public virtual bool GetFulltextIndexBodyCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetFulltextIndexBody_Projekt_CanExec != null)
+				{
+					OnGetFulltextIndexBody_Projekt_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Projekt> OnGetFulltextIndexBody_Projekt_CanExecReason;
+
+        [EventBasedMethod("OnGetFulltextIndexBody_Projekt_CanExecReason")]
+        public virtual string GetFulltextIndexBodyCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetFulltextIndexBody_Projekt_CanExecReason != null)
+				{
+					OnGetFulltextIndexBody_Projekt_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
+        /// <summary>
+        /// 
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnGetSummaryReport_Projekt")]
         public virtual System.Object GetSummaryReport(string title, Zetbox.App.Base.DateTimeRange range)
         {

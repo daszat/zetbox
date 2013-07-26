@@ -258,6 +258,7 @@
     <Compile Include="CollectionEntries.Interface.Designer.cs" />
     <Compile Include="IAuditable.Interface.Designer.cs" />
     <Compile Include="IChangedBy.Interface.Designer.cs" />
+    <Compile Include="ICustomFulltextFormat.Interface.Designer.cs" />
     <Compile Include="IDeactivatable.Interface.Designer.cs" />
     <Compile Include="IExportable.Interface.Designer.cs" />
     <Compile Include="IInvocation.Interface.Designer.cs" />

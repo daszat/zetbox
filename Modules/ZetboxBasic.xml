@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-07-24T12:58:19Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-07-26T12:45:11Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="84f486f7-19fe-49ad-8e4a-6c05089e7684">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.650235Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
@@ -11467,6 +11467,16 @@ public static void ObjectIsValid(GuidProperty obj, ObjectIsValidEventArgs e)
     <ZetboxBase:Description>IChangedBy</ZetboxBase:Description>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>IChangedBy</ZetboxBase:Name>
+    <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
+    <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
+    <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
+  </ZetboxBase:Interface>
+  <ZetboxBase:Interface ExportGuid="353e603d-3fff-47d3-9b4b-6b2c63ba3f50">
+    <ZetboxBase:ChangedOn>2013-07-26T10:45:11.805862Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-07-26T10:45:11.805862Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Provides a custom implementation to get the DataObject's string representation for full text indexing.</ZetboxBase:Description>
+    <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
+    <ZetboxBase:Name>ICustomFulltextFormat</ZetboxBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
@@ -29560,6 +29570,30 @@ public static void GetNameCanExecReason(Group obj, MethodReturnEventArgs&lt;stri
     <ZetboxBase:Name>GetName</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>01a06aef-8fe4-4cb6-b348-ee4bcd11f5af</ZetboxBase:ObjectClass>
   </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="bcdf14fa-0981-43e8-9e03-35b96173565f">
+    <ZetboxBase:ChangedOn>2013-07-26T10:45:11.805862Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void GetFulltextIndexBody(ICustomFulltextFormat obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void GetFulltextIndexBodyCanExec(ICustomFulltextFormat obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetFulltextIndexBodyCanExecReason(ICustomFulltextFormat obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-07-26T10:45:11.805862Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:InvokeOnServer>false</ZetboxBase:InvokeOnServer>
+    <GUI:IsDisplayable>false</GUI:IsDisplayable>
+    <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
+    <ZetboxBase:Name>GetFulltextIndexBody</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>353e603d-3fff-47d3-9b4b-6b2c63ba3f50</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
   <ZetboxBase:Method ExportGuid="5305b463-31bd-4ee4-af9a-c93d2cd7af31">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
@@ -30770,6 +30804,16 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <ZetboxBase:Method>1650e45f-933c-42b7-b397-824ba8dc1608</ZetboxBase:Method>
     <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
     <ZetboxBase:Name>name</ZetboxBase:Name>
+  </ZetboxBase:StringParameter>
+  <ZetboxBase:StringParameter ExportGuid="f3cc427e-0adb-406d-a869-c688c8e74948">
+    <ZetboxBase:ChangedOn>2013-07-26T10:45:11.805862Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-07-26T10:45:11.805862Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>true</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>bcdf14fa-0981-43e8-9e03-35b96173565f</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>retVal</ZetboxBase:Name>
   </ZetboxBase:StringParameter>
   <ZetboxBase:StringParameter ExportGuid="3b9969db-2565-4e93-b615-1eef1f8b4d42">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:01.139804Z</ZetboxBase:ChangedOn>

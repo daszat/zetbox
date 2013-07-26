@@ -3113,6 +3113,10 @@ namespace Zetbox {
                             }
                             public static class Projekt_Methods
                             {
+                                public static TypedGuid<global::Zetbox.App.Base.Method> GetFulltextIndexBody
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Method>("c23973be-19c4-407a-b5a6-0d03d2817886"); }
+                                }
                                 public static TypedGuid<global::Zetbox.App.Base.Method> GetSummaryReport
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Method>("dbb73c2e-e751-4249-b63a-f4417c3177b4"); }

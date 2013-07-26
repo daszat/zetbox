@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-07-23T09:13:49Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-07-26T12:45:11Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="a56d9701-d98e-49ab-bd49-a491d09e2d46">
     <ZetboxBase:ChangedOn>2011-08-06T08:30:47.664236Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
@@ -274,6 +274,10 @@ public static void ObjectIsValid(Task obj, ObjectIsValidEventArgs e)
   <ZetboxBase:DataType_implements_Interface_RelationEntry ExportGuid="0f9d7471-7f42-4e62-a59a-cb22b702bd7f">
     <ZetboxBase:A>885939e8-82e1-4fdf-b80e-5f612d5131d3</ZetboxBase:A>
     <ZetboxBase:B>a73f2d0a-786b-483d-b474-b9d9df42b8b3</ZetboxBase:B>
+  </ZetboxBase:DataType_implements_Interface_RelationEntry>
+  <ZetboxBase:DataType_implements_Interface_RelationEntry ExportGuid="75519479-3d1c-4f85-aeb6-521101b7f3d4">
+    <ZetboxBase:A>885939e8-82e1-4fdf-b80e-5f612d5131d3</ZetboxBase:A>
+    <ZetboxBase:B>353e603d-3fff-47d3-9b4b-6b2c63ba3f50</ZetboxBase:B>
   </ZetboxBase:DataType_implements_Interface_RelationEntry>
   <ZetboxBase:DataType_implements_Interface_RelationEntry ExportGuid="21117d5e-73c0-4667-9766-7c90216d2d0e">
     <ZetboxBase:A>885939e8-82e1-4fdf-b80e-5f612d5131d3</ZetboxBase:A>
@@ -3535,6 +3539,30 @@ public static void TestMethodForParameterCanExecReason(Mitarbeiter obj, MethodRe
     <ZetboxBase:Name>TestMethodForParameter</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>77933a20-338a-4961-b751-62ffa0a75c6a</ZetboxBase:ObjectClass>
   </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="c23973be-19c4-407a-b5a6-0d03d2817886">
+    <ZetboxBase:ChangedOn>2013-07-26T11:08:55.727466Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void GetFulltextIndexBody(Projekt obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void GetFulltextIndexBodyCanExec(Projekt obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetFulltextIndexBodyCanExecReason(Projekt obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-07-26T11:08:55.727466Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:InvokeOnServer>false</ZetboxBase:InvokeOnServer>
+    <GUI:IsDisplayable>false</GUI:IsDisplayable>
+    <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
+    <ZetboxBase:Name>GetFulltextIndexBody</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>885939e8-82e1-4fdf-b80e-5f612d5131d3</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
   <ZetboxBase:Method ExportGuid="dbb73c2e-e751-4249-b63a-f4417c3177b4">
     <ZetboxBase:ChangedOn>2012-05-17T12:29:28.307352Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
@@ -3641,6 +3669,16 @@ public static void GetSummaryReportCanExecReason(Projekt obj, MethodReturnEventA
     <ZetboxBase:Method>447088b9-ea3e-4c72-b1fe-761d430c4003</ZetboxBase:Method>
     <ZetboxBase:Parameter_pos>6</ZetboxBase:Parameter_pos>
     <ZetboxBase:Name>TestString</ZetboxBase:Name>
+  </ZetboxBase:StringParameter>
+  <ZetboxBase:StringParameter ExportGuid="a298840d-fc43-4557-8916-979f644c9be2">
+    <ZetboxBase:ChangedOn>2013-07-26T11:08:55.727466Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-07-26T11:08:55.727466Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>true</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>c23973be-19c4-407a-b5a6-0d03d2817886</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>retVal</ZetboxBase:Name>
   </ZetboxBase:StringParameter>
   <ZetboxBase:CompoundObjectParameter ExportGuid="29a287ee-0350-4460-b4c3-ced5f7e2aee0">
     <ZetboxBase:ChangedOn>2011-10-29T11:05:26.956865Z</ZetboxBase:ChangedOn>
