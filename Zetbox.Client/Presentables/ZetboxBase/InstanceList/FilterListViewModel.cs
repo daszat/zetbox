@@ -258,20 +258,19 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         }
                     }
 
-                    if (_filter.Count == 0)
+                    if (HasFulltextSupport)
                     {
-                        // Add default ToString Filter only if there is no filter configuration
+                        AddFilter(new FulltextFilterModel(FrozenContext));
+                    }
+                    else if (_filter.Count == 0)
+                    {
+                        // Add default ToString Filter only if there is no filter configuration & no fulltext filter can be applied
                         AddFilter(new ToStringFilterModel(FrozenContext));
                     }
 
                     if (_type.ImplementsIDeactivatable())
                     {
                         AddFilter(new WithDeactivatedFilterModel(FrozenContext));
-                    }
-
-                    if (HasFulltextSupport)
-                    {
-                        AddFilter(new FulltextFilterModel(FrozenContext));
                     }
                 }
             }
