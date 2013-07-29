@@ -14,6 +14,7 @@
 	  <Module>Zetbox.Microsoft.OutlookMailSender+Module, Zetbox.Microsoft</Module>
       <Module>Zetbox.API.MailProblemReporter+Module, Zetbox.API</Module>
       <Module>Zetbox.App.Projekte.DocumentManagement.FileImportService+Module, Zetbox.App.Projekte.Common</Module>
+	  <Module>Zetbox.Client.DefaultFulltextSupport+Module, Zetbox.Client</Module>
     </Modules>
   </Client>
 </ZetboxConfig>

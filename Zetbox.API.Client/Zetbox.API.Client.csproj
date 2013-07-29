@@ -91,6 +91,7 @@
     <Compile Include="Helper.cs" />
     <Compile Include="HttpServiceClient.cs" />
     <Compile Include="ICredentialsResolver.cs" />
+    <Compile Include="IFulltextSupport.cs" />
     <Compile Include="InfoLoggingProxyDecorator.cs" />
     <Compile Include="IDelayedTask.cs" />
     <Compile Include="IScreenshotTool.cs" />

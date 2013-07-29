@@ -28,6 +28,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables;
     using Zetbox.Client.Presentables.FilterViewModels;
+    using Zetbox.API.Client;
 
     [ViewModelDescriptor]
     public class FilterListViewModel : ViewModel
@@ -35,16 +36,33 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         public new delegate FilterListViewModel Factory(IZetboxContext dataCtx, ViewModel parent, ObjectClass type);
 
         private ObjectClass _type;
+        private IFulltextSupport _fulltextSupport;
 
-        public FilterListViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, ObjectClass type)
+        public FilterListViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, ObjectClass type, IFulltextSupport fulltextSupport = null)
             : base(appCtx, dataCtx, parent)
         {
+            if (type == null) throw new ArgumentNullException("type");
+
             _type = type;
+            _fulltextSupport = fulltextSupport;
         }
 
         public override string Name
         {
             get { return FilterListViewModelResources.Name; }
+        }
+
+        private bool? _hasFulltextSupportCache;
+        public bool HasFulltextSupport
+        {
+            get
+            {
+                if (_hasFulltextSupportCache == null)
+                {
+                    _hasFulltextSupportCache = _fulltextSupport != null && _fulltextSupport.HasIndexedFields(_type);
+                }
+                return _hasFulltextSupportCache.Value;
+            }
         }
 
         private bool _enableAutoFilter = true;
@@ -150,6 +168,19 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
+        private void UpdateExclusiveFilter()
+        {
+            if (_FilterViewModels != null)
+            {
+                var exclusiveFilterActice = _FilterViewModels.Any(f => f.Filter.IsExclusiveFilter && f.Filter.Enabled);
+                foreach (var vm in _FilterViewModels)
+                {
+                    vm.IsEnabled = exclusiveFilterActice == false // no exclusive Filter set, enable all other
+                               || (vm.Filter.IsExclusiveFilter && vm.Filter.Enabled && vm.IsEnabled);
+                }
+            }
+        }
+
         public bool HasUserFilter
         {
             get
@@ -220,9 +251,12 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                     {
                         AddFilter(new WithDeactivatedFilterModel(FrozenContext));
                     }
-                }
 
-                AddFilter(new FulltextFilterModel(FrozenContext));
+                    if (HasFulltextSupport)
+                    {
+                        AddFilter(new FulltextFilterModel(FrozenContext));
+                    }
+                }
             }
         }
 
@@ -278,20 +312,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 levmdl.SourceProperties = sourceProperties;
 
                 // attach change events
-                uimdl.FilterChanged += new EventHandler(delegate(object s, EventArgs a)
-                {
-                    var f = s as FilterModel;
-                    if (f == null || !f.RefreshOnFilterChanged) return;
-
-                    if (f.IsServerSideFilter)
-                    {
-                        OnExecuteFilter();
-                    }
-                    else
-                    {
-                        OnExecutePostFilter();
-                    }
-                });
+                uimdl.FilterChanged += OnUIFilterChanged;
 
                 _FilterViewModels.Add(vmdl);
                 _FilterListEntryViewModels.Add(levmdl);
@@ -327,6 +348,24 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             OnPropertyChanged("FilterViewModels");
             OnPropertyChanged("FilterListEntryViewModels");
             return true;
+        }
+
+        private void OnUIFilterChanged(object sender, EventArgs e)
+        {
+            var filter = sender as FilterModel;
+            if (filter == null) return;
+
+            UpdateExclusiveFilter();
+
+            if (!filter.RefreshOnFilterChanged) return;
+            if (filter.IsServerSideFilter)
+            {
+                OnExecuteFilter();
+            }
+            else
+            {
+                OnExecutePostFilter();
+            }
         }
 
         public event EventHandler ExecutePostFilter;

@@ -82,6 +82,8 @@ namespace Zetbox.Client.Models
         FilterArgumentConfig FilterArgument { get; }
 
         event EventHandler FilterChanged;
+
+        bool IsExclusiveFilter { get; }
     }
 
     public abstract class FilterModel
@@ -246,6 +248,14 @@ namespace Zetbox.Client.Models
         }
 
         #endregion
+
+        #region IUIFilterModel Members
+        public bool IsExclusiveFilter
+        {
+            get;
+            protected set;
+        }
+        #endregion
     }
 
 
@@ -308,6 +318,7 @@ namespace Zetbox.Client.Models
         {
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
             base.IsServerSideFilter = true;
+            base.IsExclusiveFilter = true;
             base.Label = FilterModelsResources.FulltextFilterModel_Label;
             base.ViewModelType = ViewModelDescriptors.Zetbox_Client_Presentables_FilterViewModels_SingleValueFilterViewModel.Find(frozenCtx);
             base.FilterArguments.Add(new FilterArgumentConfig(

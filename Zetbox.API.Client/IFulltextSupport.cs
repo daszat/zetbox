@@ -1,4 +1,4 @@
-// This file is part of zetbox.
+﻿// This file is part of zetbox.
 //
 // Zetbox is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as
@@ -12,33 +12,21 @@
 //
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
-namespace Zetbox.API
+
+namespace Zetbox.API.Client
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using System.Collections;
-    using System.Linq.Expressions;
+    using Zetbox.API.Configuration;
+    using System.ComponentModel;
+    using Autofac;
+    using Zetbox.App.Base;
 
-    public interface IFilterModel
+    public interface IFulltextSupport
     {
-        IQueryable GetQuery(IQueryable src);
-        LambdaExpression GetExpression(IQueryable src);
-        IEnumerable GetResult(IEnumerable src);
-        bool IsServerSideFilter { get; }
-
-        IFilterValueSource ValueSource { get; set; }
-
-        /// <summary>
-        /// Indicates that the filter value has been set and the filter is active.
-        /// </summary>
-        bool Enabled { get; }
-        bool Required { get; }
-    }
-
-    public interface IFilterValueSource
-    {
-        string Expression { get; }
+        bool IsValidSearch(string text);
+        bool HasIndexedFields(ObjectClass cls);
     }
 }
