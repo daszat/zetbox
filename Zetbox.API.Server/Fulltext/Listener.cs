@@ -20,19 +20,23 @@ namespace Zetbox.API.Server.Fulltext
     using System.Linq;
     using System.Text;
     using Zetbox.App.Base;
+    using Zetbox.API.Common;
 
     internal sealed class Listener : IZetboxContextEventListener
     {
         private readonly IQueue _queue;
         private readonly Common.Fulltext.DataObjectFormatter _formatter;
+        private readonly IMetaDataResolver _resolver;
 
-        internal Listener(IQueue queue, Common.Fulltext.DataObjectFormatter formatter)
+        internal Listener(IQueue queue, Common.Fulltext.DataObjectFormatter formatter, IMetaDataResolver resolver)
         {
             if (queue == null) throw new ArgumentNullException("queue");
             if (formatter == null) throw new ArgumentNullException("formatter");
+            if (resolver == null) throw new ArgumentNullException("resolver");
 
             _queue = queue;
             _formatter = formatter;
+            _resolver = resolver;
         }
 
         public void Created(IReadOnlyZetboxContext ctx)
@@ -43,24 +47,22 @@ namespace Zetbox.API.Server.Fulltext
         {
             _queue.Enqueue(new IndexUpdate()
             {
-                added = added.Select(obj => new Tuple<InterfaceType, int, string>(ctx.GetInterfaceType(obj), obj.ID, ExtractText(obj))).ToList(),
-                modified = modified.Select(obj => new Tuple<InterfaceType, int, string>(ctx.GetInterfaceType(obj), obj.ID, ExtractText(obj))).ToList(),
+                added = added.Select(obj => new Tuple<InterfaceType, int, IndexUpdate.Text>(
+                    ctx.GetInterfaceType(obj), 
+                    obj.ID, 
+                    Rebuilder.ExtractText(obj, _formatter, _resolver)
+                )).ToList(),
+                modified = modified.Select(obj => new Tuple<InterfaceType, int, IndexUpdate.Text>(
+                    ctx.GetInterfaceType(obj), 
+                    obj.ID,
+                    Rebuilder.ExtractText(obj, _formatter, _resolver)
+                )).ToList(),
                 deleted = deleted.ToList()
             });
         }
 
         public void Disposed(IReadOnlyZetboxContext ctx)
         {
-        }
-
-        private string ExtractText(IDataObject obj)
-        {
-            var customFormatter = obj as ICustomFulltextFormat;
-            if (customFormatter != null)
-            {
-                return customFormatter.GetFulltextIndexBody();
-            }
-            return _formatter.Format(obj);
-        }
+        }        
     }
 }

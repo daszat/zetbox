@@ -26,6 +26,7 @@ namespace Zetbox.API.Server.Fulltext
     using Zetbox.API.Common;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
 
     internal class Rebuilder
     {
@@ -33,17 +34,49 @@ namespace Zetbox.API.Server.Fulltext
         private readonly ILifetimeScope _scope;
         private readonly IndexWriter _indexWriter;
         private readonly Common.Fulltext.DataObjectFormatter _formatter;
+        private readonly IMetaDataResolver _resolver;
 
-        public Rebuilder(ILifetimeScope scope, IndexWriter indexWriter, Common.Fulltext.DataObjectFormatter formatter)
+        public Rebuilder(ILifetimeScope scope, IndexWriter indexWriter, Common.Fulltext.DataObjectFormatter formatter, IMetaDataResolver resolver)
         {
             if (scope == null) throw new ArgumentNullException("scope");
             if (indexWriter == null) throw new ArgumentNullException("indexWriter");
             if (formatter == null) throw new ArgumentNullException("formatter");
+            if (resolver == null) throw new ArgumentNullException("resolver");
 
             _scope = scope;
             _indexWriter = indexWriter;
             _formatter = formatter;
+            _resolver = resolver;
         }
+
+        #region shared helper
+        public static IndexUpdate.Text ExtractText(IDataObject obj, Common.Fulltext.DataObjectFormatter formatter, IMetaDataResolver resolver)
+        {
+            var result = new IndexUpdate.Text();
+            var customFormatter = obj as ICustomFulltextFormat;
+            if (customFormatter != null)
+            {
+                result.Body = customFormatter.GetFulltextIndexBody();
+            }
+            else
+            {
+                result.Body = formatter.Format(obj);
+            }
+
+            var cls = resolver.GetObjectClass(obj.Context.GetInterfaceType(obj));
+            result.Fields = new Dictionary<string, string>();
+            foreach (var prop in cls.GetAllProperties().OfType<StringProperty>().OrderBy(p => p.Name))
+            {
+                var txtVal = obj.GetPropertyValue<string>(prop.Name);
+                if (!string.IsNullOrWhiteSpace(txtVal))
+                {
+                    result.Fields[prop.Name] = txtVal;
+                }
+            }
+
+            return result;
+        }
+        #endregion
 
         private List<IDataObject> GetParcelHack<T>(IZetboxServerContext ctx, int lastID, int count)
             where T : class, IDataObject
@@ -63,16 +96,6 @@ namespace Zetbox.API.Server.Fulltext
         {
             var mi = this.GetType().FindGenericMethod("GetParcelHack", new[] { t }, new Type[] { typeof(IZetboxServerContext), typeof(int), typeof(int) }, isPrivate: true);
             return (List<IDataObject>)mi.Invoke(this, new object[] { ctx, lastID, count });
-        }
-
-        private string ExtractText(IDataObject obj)
-        {
-            var customFormatter = obj as ICustomFulltextFormat;
-            if (customFormatter != null)
-            {
-                return customFormatter.GetFulltextIndexBody();
-            }
-            return _formatter.Format(obj);
         }
 
         public void Rebuild(params string[] classFilter)
@@ -103,11 +126,17 @@ namespace Zetbox.API.Server.Fulltext
                             foreach (var obj in parcel)
                             {
                                 var clsId = string.Format(CultureInfo.InvariantCulture, "{0}#{1}", dtType.FullName, obj.ID);
+                                var txt = ExtractText(obj, _formatter, _resolver);
+
                                 var doc = new Document();
                                 doc.Add(new Field(Module.FIELD_CLASS, dtType.FullName, Field.Store.YES, Field.Index.NOT_ANALYZED_NO_NORMS));
                                 doc.Add(new Field(Module.FIELD_CLASS_ID, clsId, Field.Store.YES, Field.Index.NOT_ANALYZED_NO_NORMS));
                                 doc.Add(new Field(Module.FIELD_ID, obj.ID.ToString(CultureInfo.InvariantCulture), Field.Store.YES, Field.Index.NOT_ANALYZED_NO_NORMS));
-                                doc.Add(new Field(Module.FIELD_BODY, ExtractText(obj), Field.Store.NO, Field.Index.ANALYZED));
+                                doc.Add(new Field(Module.FIELD_BODY, txt.Body, Field.Store.NO, Field.Index.ANALYZED));
+                                if (txt.Fields != null)
+                                {
+                                    txt.Fields.ForEach(kvp => doc.Add(new Field(kvp.Key, kvp.Value, Field.Store.NO, Field.Index.ANALYZED)));
+                                }
 
                                 _indexWriter.AddDocument(doc);
 

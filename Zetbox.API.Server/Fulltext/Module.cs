@@ -75,7 +75,7 @@ namespace Zetbox.API.Server.Fulltext
                 .SingleInstance();
 
             builder
-                .Register<Listener>(c => new Listener(c.Resolve<IQueue>(), c.Resolve<Common.Fulltext.DataObjectFormatter>()))
+                .Register<Listener>(c => new Listener(c.Resolve<IQueue>(), c.Resolve<Common.Fulltext.DataObjectFormatter>(), c.Resolve<IMetaDataResolver>()))
                 .AsImplementedInterfaces()
                 .SingleInstance();
 
@@ -123,7 +123,7 @@ namespace Zetbox.API.Server.Fulltext
                 .InstancePerDependency();
 
             builder
-                .Register<Rebuilder>(c => new Rebuilder(c.Resolve<ILifetimeScope>(), c.Resolve<IndexWriter>(), c.Resolve<Common.Fulltext.DataObjectFormatter>()))
+                .Register<Rebuilder>(c => new Rebuilder(c.Resolve<ILifetimeScope>(), c.Resolve<IndexWriter>(), c.Resolve<Common.Fulltext.DataObjectFormatter>(), c.Resolve<IMetaDataResolver>()))
                 .InstancePerDependency();
 
             builder

@@ -5,10 +5,30 @@ using System.Text;
 
 namespace Zetbox.API.Server.Fulltext
 {
-    public struct IndexUpdate
+    public class IndexUpdate
     {
-        public List<Tuple<InterfaceType, int, string>> added;
-        public List<Tuple<InterfaceType, int, string>> modified;
+        public class Text
+        {
+            public Text()
+            {
+            }
+
+            public Text(string body)
+            {
+                this.Body = body;
+            }
+
+            public string Body { get; set; }
+
+            public Dictionary<string, string> Fields { get; set; }
+        }
+
+        public static readonly List<Tuple<InterfaceType, int, Text>> NothingAdded = new List<Tuple<InterfaceType, int, Text>>();
+        public static readonly List<Tuple<InterfaceType, int, Text>> NothingModified = new List<Tuple<InterfaceType, int, Text>>();
+        public static readonly List<Tuple<InterfaceType, int>> NothingDeleted = new List<Tuple<InterfaceType, int>>();
+
+        public List<Tuple<InterfaceType, int, Text>> added;
+        public List<Tuple<InterfaceType, int, Text>> modified;
         public List<Tuple<InterfaceType, int>> deleted;
 
         public bool IsValid { get { return added != null && modified != null && deleted != null; } }
@@ -41,9 +61,9 @@ namespace Zetbox.API.Server.Fulltext
         {
             if (_service != null)
             {
-                if (item.added == null) item.added = new List<Tuple<InterfaceType, int, string>>();
-                if (item.modified == null) item.modified = new List<Tuple<InterfaceType, int, string>>();
-                if (item.deleted == null) item.deleted = new List<Tuple<InterfaceType, int>>();
+                if (item.added == null) item.added = IndexUpdate.NothingAdded;
+                if (item.modified == null) item.modified = IndexUpdate.NothingModified;
+                if (item.deleted == null) item.deleted = IndexUpdate.NothingDeleted;
 
                 _service.Enqueue(item);
             }
