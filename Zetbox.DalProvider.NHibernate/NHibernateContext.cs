@@ -480,16 +480,8 @@ namespace Zetbox.DalProvider.NHibernate
                 }
                 catch (System.Reflection.TargetInvocationException ex)
                 {
-                    if (ex.InnerException is ZetboxObjectNotFoundException)
-                    {
-                        // wrap in new AOORE, to preserve all stack traces
-                        throw new ZetboxObjectNotFoundException(ex.InnerException.Message, ex);
-                    }
-                    else
-                    {
-                        // huhu, something bad happened
-                        throw;
-                    }
+                    // unwrap "business" exception
+                    throw ex.InnerException;
                 }
             });
         }
@@ -519,16 +511,8 @@ namespace Zetbox.DalProvider.NHibernate
             }
             catch (System.Reflection.TargetInvocationException ex)
             {
-                if (ex.InnerException is ZetboxObjectNotFoundException)
-                {
-                    // wrap in new AOORE, to preserve all stack traces
-                    throw new ZetboxObjectNotFoundException(ex.InnerException.Message, ex);
-                }
-                else
-                {
-                    // huhu, something bad happened
-                    throw;
-                }
+                // unwrap "business" exception
+                throw ex.InnerException;
             }
         }
 

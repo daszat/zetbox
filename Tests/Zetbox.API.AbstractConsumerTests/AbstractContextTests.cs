@@ -399,12 +399,22 @@ namespace Zetbox.API.AbstractConsumerTests
         }
 
         [Test]
-        [ExpectedException(typeof(ZetboxObjectNotFoundException))]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void Find_T_fails_on_invalid_ID()
         {
             using (IZetboxContext ctx = GetContext())
             {
                 ctx.Find<TestObjClass>(Zetbox.API.Helper.INVALIDID);
+            }
+        }
+
+        [Test]
+        [ExpectedException(typeof(ZetboxObjectNotFoundException))]
+        public void Find_T_fails_on_unknown_ID()
+        {
+            using (IZetboxContext ctx = GetContext())
+            {
+                ctx.Find<TestObjClass>(12345);
             }
         }
 
@@ -421,12 +431,22 @@ namespace Zetbox.API.AbstractConsumerTests
         }
 
         [Test]
-        [ExpectedException(typeof(ZetboxObjectNotFoundException))]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void Find_ObjectType_fails_on_invalid_ID()
         {
             using (IZetboxContext ctx = GetContext())
             {
                 ctx.Find(iftFactory(typeof(TestObjClass)), Zetbox.API.Helper.INVALIDID);
+            }
+        }
+
+        [Test]
+        [ExpectedException(typeof(ZetboxObjectNotFoundException))]
+        public void Find_ObjectType_fails_on_unknwon_ID()
+        {
+            using (IZetboxContext ctx = GetContext())
+            {
+                ctx.Find(iftFactory(typeof(TestObjClass)), 12345);
             }
         }
 
