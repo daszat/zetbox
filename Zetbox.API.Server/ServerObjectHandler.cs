@@ -214,19 +214,25 @@ namespace Zetbox.API.Server
                     var ifType = ctx.GetInterfaceType(ids.Key);
                     foreach (var idStr in ids)
                     {
-                        try
+                        int id;
+                        if (int.TryParse(idStr, out id))
                         {
-                            int id;
-                            if (int.TryParse(idStr, out id))
+                            try
                             {
                                 var obj = ctx.Find(ifType, id);
                                 result.Add(obj);
                             }
+                            catch (ZetboxObjectNotFoundException)
+                            {
+                                _searchDependencies.Queue.Enqueue(new IndexUpdate()
+                                {
+                                    deleted = new List<Tuple<InterfaceType, int>>() { new Tuple<InterfaceType, int>(ifType, id) }
+                                });
+                            }
                         }
-                        catch (ArgumentOutOfRangeException)
+                        else
                         {
-                            // TODO: mark stale lucene doc for deletion
-                            continue;
+                            Logging.Facade.WarnOnce(string.Format("Found a not parsable object ID '{0}' in fulltext catalog", idStr));
                         }
                     }
                 }

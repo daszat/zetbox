@@ -36,16 +36,18 @@ namespace Zetbox.API.Server.Fulltext
 
     public sealed class LuceneSearchDeps
     {
-        internal LuceneSearchDeps(SearcherManager searcherManager, QueryParser parser, IMetaDataResolver resolver)
+        internal LuceneSearchDeps(SearcherManager searcherManager, QueryParser parser, IMetaDataResolver resolver, IQueue queue)
         {
             this.SearcherManager = searcherManager;
             this.Parser = parser;
             this.Resolver = resolver;
+            this.Queue = queue;
         }
 
         public SearcherManager SearcherManager { get; private set; }
         public QueryParser Parser { get; private set; }
         public IMetaDataResolver Resolver { get; private set; }
+        public IQueue Queue { get; private set; }
     }
 
     [Description("A service for full-text indexing of all objects")]
@@ -62,13 +64,18 @@ namespace Zetbox.API.Server.Fulltext
             base.Load(builder);
 
             builder
-                .Register<Listener>(c => new Listener(c.Resolve<Service>(), c.Resolve<Common.Fulltext.DataObjectFormatter>()))
+                .Register<Service>(c => new Service(c.Resolve<IndexWriter>(), c.Resolve<SearcherManager>()))
+                .AsSelf()
                 .AsImplementedInterfaces()
                 .SingleInstance();
 
             builder
-                .Register<Service>(c => new Service(c.Resolve<IndexWriter>(), c.Resolve<SearcherManager>()))
-                .AsSelf()
+                .Register<ServiceQueue>(c => new ServiceQueue(c.Resolve<Service>()))
+                .AsImplementedInterfaces()
+                .SingleInstance();
+
+            builder
+                .Register<Listener>(c => new Listener(c.Resolve<IQueue>(), c.Resolve<Common.Fulltext.DataObjectFormatter>()))
                 .AsImplementedInterfaces()
                 .SingleInstance();
 
@@ -112,7 +119,7 @@ namespace Zetbox.API.Server.Fulltext
                .InstancePerLifetimeScope();
 
             builder
-                .Register<LuceneSearchDeps>(c => new LuceneSearchDeps(c.Resolve<SearcherManager>(), c.Resolve<QueryParser>(), c.Resolve<IMetaDataResolver>()))
+                .Register<LuceneSearchDeps>(c => new LuceneSearchDeps(c.Resolve<SearcherManager>(), c.Resolve<QueryParser>(), c.Resolve<IMetaDataResolver>(), c.Resolve<IQueue>()))
                 .InstancePerDependency();
 
             builder

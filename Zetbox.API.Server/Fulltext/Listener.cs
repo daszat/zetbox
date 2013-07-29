@@ -23,15 +23,15 @@ namespace Zetbox.API.Server.Fulltext
 
     internal sealed class Listener : IZetboxContextEventListener
     {
-        private readonly Service _service;
+        private readonly IQueue _queue;
         private readonly Common.Fulltext.DataObjectFormatter _formatter;
 
-        internal Listener(Service service, Common.Fulltext.DataObjectFormatter formatter)
+        internal Listener(IQueue queue, Common.Fulltext.DataObjectFormatter formatter)
         {
-            if (service == null) throw new ArgumentNullException("service");
+            if (queue == null) throw new ArgumentNullException("queue");
             if (formatter == null) throw new ArgumentNullException("formatter");
 
-            _service = service;
+            _queue = queue;
             _formatter = formatter;
         }
 
@@ -41,7 +41,7 @@ namespace Zetbox.API.Server.Fulltext
 
         public void Submitted(IReadOnlyZetboxContext ctx, IEnumerable<IDataObject> added, IEnumerable<IDataObject> modified, IEnumerable<Tuple<InterfaceType, int>> deleted)
         {
-            _service.Enqueue(new IndexUpdate()
+            _queue.Enqueue(new IndexUpdate()
             {
                 added = added.Select(obj => new Tuple<InterfaceType, int, string>(ctx.GetInterfaceType(obj), obj.ID, ExtractText(obj))).ToList(),
                 modified = modified.Select(obj => new Tuple<InterfaceType, int, string>(ctx.GetInterfaceType(obj), obj.ID, ExtractText(obj))).ToList(),

@@ -25,24 +25,6 @@ namespace Zetbox.API.Server.Fulltext
     using Lucene.Net.Index;
     using Lucene.Net.Search;
 
-    internal struct IndexUpdate
-    {
-        public List<Tuple<InterfaceType, int, string>> added;
-        public List<Tuple<InterfaceType, int, string>> modified;
-        public List<Tuple<InterfaceType, int>> deleted;
-
-        public bool IsValid { get { return added != null && modified != null && deleted != null; } }
-        public bool IsEmpty
-        {
-            get
-            {
-                return (added == null || added.Count == 0)
-                    && (modified == null || modified.Count == 0)
-                    && (deleted == null || deleted.Count == 0);
-            }
-        }
-    }
-
     internal sealed class Service : ThreadedQueueService<IndexUpdate>
     {
         private readonly IndexWriter _indexWriter;
