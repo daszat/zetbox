@@ -480,10 +480,10 @@ namespace Zetbox.DalProvider.NHibernate
                 }
                 catch (System.Reflection.TargetInvocationException ex)
                 {
-                    if (ex.InnerException is ArgumentOutOfRangeException)
+                    if (ex.InnerException is ZetboxObjectNotFoundException)
                     {
                         // wrap in new AOORE, to preserve all stack traces
-                        throw new ArgumentOutOfRangeException("ID", ex);
+                        throw new ZetboxObjectNotFoundException(ex.InnerException.Message, ex);
                     }
                     else
                     {
@@ -501,7 +501,7 @@ namespace Zetbox.DalProvider.NHibernate
             return new ZbTask<T>(ZbTask.Synchron, () =>
             {
                 var result = FindPersistenceObject<T>(ID);
-                if (result == null) { throw new ArgumentOutOfRangeException("ID", String.Format("no object of type {0} with ID={1}", typeof(T).FullName, ID)); }
+                if (result == null) { throw new ZetboxObjectNotFoundException(typeof(T), ID); }
                 return result;
             });
         }
@@ -519,10 +519,10 @@ namespace Zetbox.DalProvider.NHibernate
             }
             catch (System.Reflection.TargetInvocationException ex)
             {
-                if (ex.InnerException is ArgumentOutOfRangeException)
+                if (ex.InnerException is ZetboxObjectNotFoundException)
                 {
                     // wrap in new AOORE, to preserve all stack traces
-                    throw new ArgumentOutOfRangeException("ID", ex);
+                    throw new ZetboxObjectNotFoundException(ex.InnerException.Message, ex);
                 }
                 else
                 {

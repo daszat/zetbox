@@ -305,7 +305,7 @@ namespace Zetbox.API.AbstractConsumerTests
                 foreach (var obj in objects)
                 {
                     Assert.That(obj.ID, Is.GreaterThan(Helper.INVALIDID));
-                    Assert.That(() => testCtx.Find<TestObjClass>(obj.ID), Throws.InstanceOf<ArgumentOutOfRangeException>());
+                    Assert.That(() => testCtx.Find<TestObjClass>(obj.ID), Throws.InstanceOf<ZetboxObjectNotFoundException>());
                 }
             }
         }
@@ -399,7 +399,7 @@ namespace Zetbox.API.AbstractConsumerTests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        [ExpectedException(typeof(ZetboxObjectNotFoundException))]
         public void Find_T_fails_on_invalid_ID()
         {
             using (IZetboxContext ctx = GetContext())
@@ -421,7 +421,7 @@ namespace Zetbox.API.AbstractConsumerTests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        [ExpectedException(typeof(ZetboxObjectNotFoundException))]
         public void Find_ObjectType_fails_on_invalid_ID()
         {
             using (IZetboxContext ctx = GetContext())
