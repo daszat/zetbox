@@ -112,7 +112,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         this);
                     _RefreshCommand.CanRefresh += (s, e) =>
                     {
-                        e.CanRefresh = !FilterList.RequiredFilterMissing;
+                        e.CanRefresh = FilterList.IsFilterValid;
                         if (!e.CanRefresh)
                         {
                             e.CanRefreshReason = FilterListEntryViewModelResources.RequiredFilterMissingReason;

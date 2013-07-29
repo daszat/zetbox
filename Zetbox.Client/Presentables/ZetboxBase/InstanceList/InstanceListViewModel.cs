@@ -756,7 +756,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         /// </summary>
         public void Refresh()
         {
-            if (FilterList.RequiredFilterMissing)
+            if (!FilterList.IsFilterValid)
                 return;
 
             try
@@ -774,7 +774,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         ZbTask _loadInstancesCoreTask;
         private ZbTask LoadInstancesCore()
         {
-            if (_loadInstancesCoreTask != null || FilterList.RequiredFilterMissing || IsInInit) return _loadInstancesCoreTask;
+            if (_loadInstancesCoreTask != null || FilterList.IsFilterValid == false || IsInInit) return _loadInstancesCoreTask;
 
             SetBusy();
             var execQueryTask = GetQuery().ToListAsync(); // No order by - may be set from outside in LinqQuery! .Cast<IDataObject>().ToList().OrderBy(obj => obj.ToString()))

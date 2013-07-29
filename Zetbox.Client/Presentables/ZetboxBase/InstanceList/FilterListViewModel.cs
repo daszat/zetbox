@@ -181,6 +181,14 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
+        public bool IsExclusiveFilterActive
+        {
+
+            get{
+                return _FilterViewModels != null && _FilterViewModels.Any(f => f.Filter.IsExclusiveFilter && f.Filter.Enabled);
+        }
+        }
+
         public bool HasUserFilter
         {
             get
@@ -194,7 +202,16 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             get
             {
-                return RespectRequiredFilter && Filter.Count(f => !f.Enabled && f.Required) > 0;
+                return RespectRequiredFilter && Filter.Any(f => !f.Enabled && f.Required);
+            }
+        }
+
+        public bool IsFilterValid
+        {
+            get
+            {
+                return IsExclusiveFilterActive
+                    || !RequiredFilterMissing;
             }
         }
 
