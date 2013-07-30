@@ -181,6 +181,11 @@ namespace Zetbox.Client.Presentables.FilterViewModels
             }
         }
 
+        protected override string GetHelpText()
+        {
+            return Filter.HelpText;
+        }
+
         public bool Required
         {
             get

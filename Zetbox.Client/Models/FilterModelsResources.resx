@@ -123,6 +123,42 @@
   <data name="FulltextFilterModel_Description" xml:space="preserve">
     <value>Fulltext search for any text</value>
   </data>
+  <data name="FulltextFilterModel_HelpText" xml:space="preserve">
+    <value>&lt;p&gt;More information can be found here: &lt;a href="http://lucene.apache.org/core/3_0_3/queryparsersyntax.html"&gt;http://lucene.apache.org/core/3_0_3/queryparsersyntax.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2&gt;Terms&lt;/h2&gt;
+&lt;pre&gt;test hello&lt;/pre&gt;
+&lt;pre&gt;"test" "hello"&lt;/pre&gt;
+&lt;pre&gt;"test hello"&lt;/pre&gt;
+
+&lt;h2&gt;Fields&lt;/h2&gt;
+&lt;p&gt;When performing a search you can either specify a field, or use the default field&lt;/p&gt;
+&lt;pre&gt;title:"The Right Way" AND text:go&lt;/pre&gt;
+&lt;pre&gt;title:"Do it right" AND right&lt;/pre&gt;
+
+&lt;h2&gt;Wildcard Searches&lt;/h2&gt;
+&lt;pre&gt;te?t&lt;/pre&gt;
+&lt;pre&gt;test*&lt;/pre&gt;
+&lt;pre&gt;te*t&lt;/pre&gt;
+
+&lt;h2&gt;Boolean Operators&lt;/h2&gt;
+&lt;pre&gt;"jakarta apache" jakarta&lt;/pre&gt;
+&lt;p&gt;is the same as:&lt;/p&gt;
+&lt;pre&gt;"jakarta apache" OR jakarta&lt;/pre&gt;
+&lt;p&gt;And:&lt;/p&gt;
+&lt;pre&gt;"jakarta apache" AND "Apache Lucene"&lt;/pre&gt;
+&lt;pre&gt;+jakarta lucene&lt;/pre&gt;
+&lt;p&gt;Not:&lt;/p&gt;
+&lt;pre&gt;"jakarta apache" NOT "Apache Lucene"&lt;/pre&gt;
+
+&lt;h2&gt;Grouping&lt;/h2&gt;
+&lt;pre&gt;(jakarta OR apache) AND website&lt;/pre&gt;
+
+&lt;h2&gt;Escaping Special Characters&lt;/h2&gt;
+&lt;pre&gt;+ - &amp;&amp; || ! ( ) { } [ ] ^ " ~ * ? : \&lt;/pre&gt;
+&lt;p&gt;Must be escaped with \&lt;/p&gt;
+&lt;pre&gt;\(1\+1\)\:2&lt;/pre&gt;</value>
+  </data>
   <data name="FulltextFilterModel_Label" xml:space="preserve">
     <value>Fulltext search</value>
   </data>

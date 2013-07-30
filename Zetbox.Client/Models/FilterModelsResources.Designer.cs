@@ -79,6 +79,28 @@ namespace Zetbox.Client.Models {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;p&gt;More information can be found here: &lt;a href=&quot;http://lucene.apache.org/core/3_0_3/queryparsersyntax.html&quot;&gt;http://lucene.apache.org/core/3_0_3/queryparsersyntax.html&lt;/a&gt;&lt;/p&gt;
+        ///
+        ///&lt;h2&gt;Terms&lt;/h2&gt;
+        ///&lt;pre&gt;test hello&lt;/pre&gt;
+        ///&lt;pre&gt;&quot;test&quot; &quot;hello&quot;&lt;/pre&gt;
+        ///&lt;pre&gt;&quot;test hello&quot;&lt;/pre&gt;
+        ///
+        ///&lt;h2&gt;Fields&lt;/h2&gt;
+        ///&lt;p&gt;When performing a search you can either specify a field, or use the default field&lt;/p&gt;
+        ///&lt;pre&gt;title:&quot;The Right Way&quot; AND text:go&lt;/pre&gt;
+        ///&lt;pre&gt;title:&quot;Do it right&quot; AND right&lt;/pre&gt;
+        ///
+        ///&lt;h2&gt;Wildcard Searches&lt;/h2&gt;
+        ///&lt;pre&gt;te?t&lt;/pre&gt;        /// [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string FulltextFilterModel_HelpText {
+            get {
+                return ResourceManager.GetString("FulltextFilterModel_HelpText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fulltext search.
         /// </summary>
         internal static string FulltextFilterModel_Label {

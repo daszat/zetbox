@@ -78,6 +78,8 @@ namespace Zetbox.Client.Models
         ControlKind RequestedKind { get; set; }
 
         string Label { get; }
+        string HelpText { get; }
+
         ObservableCollection<FilterArgumentConfig> FilterArguments { get; }
         FilterArgumentConfig FilterArgument { get; }
 
@@ -225,6 +227,12 @@ namespace Zetbox.Client.Models
             set;
         }
 
+        public string HelpText
+        {
+            get;
+            set;
+        }
+
         public virtual bool Enabled
         {
             get
@@ -320,6 +328,7 @@ namespace Zetbox.Client.Models
             base.IsServerSideFilter = true;
             base.IsExclusiveFilter = true;
             base.Label = FilterModelsResources.FulltextFilterModel_Label;
+            base.HelpText = FilterModelsResources.FulltextFilterModel_HelpText;
             base.ViewModelType = ViewModelDescriptors.Zetbox_Client_Presentables_FilterViewModels_SingleValueFilterViewModel.Find(frozenCtx);
             base.FilterArguments.Add(new FilterArgumentConfig(
                 new ClassValueModel<string>(base.Label, FilterModelsResources.FulltextFilterModel_Description, true, false),
