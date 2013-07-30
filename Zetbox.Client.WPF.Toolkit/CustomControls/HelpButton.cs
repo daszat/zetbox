@@ -64,7 +64,7 @@ namespace Zetbox.Client.WPF.CustomControls
             if (vmdl != null && vmdl.HasHelpText)
             {
                 var html = new WebBrowser();
-                var header = "<html><body style=\"background:#FFFFE0;font-family: Verdana, Arial; font-size: 0.8em;\">";
+                var header = "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/></head><body style=\"background:#FFFFE0;font-family: Verdana, Arial; font-size: 0.8em;\">";
                 var footer = "</body></html>";
                 html.NavigateToString(header + vmdl.HelpText + footer);
 
