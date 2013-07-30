@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ExportContainerCommand" xml:space="preserve">
     <value>Export</value>
@@ -155,5 +155,17 @@
   </data>
   <data name="SelectColumnsCommand_Tooltip" xml:space="preserve">
     <value>Select columns</value>
+  </data>
+  <data name="NextPageCommand" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="NextPageCommand_Tooltip" xml:space="preserve">
+    <value>Next page</value>
+  </data>
+  <data name="PrevPageCommand" xml:space="preserve">
+    <value>Prev</value>
+  </data>
+  <data name="PrevPageCommand_Tooltip" xml:space="preserve">
+    <value>Previous page</value>
   </data>
 </root>

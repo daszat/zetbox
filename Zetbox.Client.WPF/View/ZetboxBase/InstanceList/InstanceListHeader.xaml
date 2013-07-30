@@ -7,7 +7,8 @@
              xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
              xmlns:local="clr-namespace:Zetbox.Client.WPF.View.ZetboxBase"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300"
+             d:DesignWidth="300">
     <!--
     This file is part of zetbox.
 
@@ -26,21 +27,30 @@
     -->
     <DockPanel>
         <local:SavedListConfiguratorDisplay DockPanel.Dock="Right"
-                    DataContext="{Binding SavedListConfigurations}"
-                    Visibility="{Binding Parent.ShowConfig, Converter={StaticResource BooleanToVisibilityConverter}}"
-                    Focusable="False"
-                    Width="200"/>
-
-        <Grid>
-            <Border Background="Yellow" Visibility="{Binding InstancesCountWarning, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            <StackPanel Margin="5 0 0 0"
-                        Orientation="Horizontal"
-                        VerticalAlignment="Center">
-                <TextBlock Text="{Binding InstancesCountAsText}" />
-                <TextBlock Margin="20 0 0 0"
-                   Text="{Binding InstancesCountWarningText}"
-                   Visibility="{Binding InstancesCountWarning, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-            </StackPanel>
-        </Grid>
+                                            DataContext="{Binding SavedListConfigurations}"
+                                            Visibility="{Binding Parent.ShowConfig, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                            Focusable="False"
+                                            Width="200" />
+        <StackPanel Margin="5 0 0 0"
+                    Orientation="Horizontal"
+                    VerticalAlignment="Center">
+            <ctrls:CommandButton CommandViewModel="{Binding PrevPageCommand}"
+                                 Style="{StaticResource ImageOnlyButton}"
+                                 Width="{StaticResource NormalControlHeight}"
+                                 Height="{StaticResource NormalControlHeight}"
+                                 Background="Transparent"
+                                 Padding="0"
+                                 Margin="0" />
+            <TextBlock Text="{Binding InstancesCountAsText}"
+                       Margin="5 0 5 0"
+                       VerticalAlignment="Center" />
+            <ctrls:CommandButton CommandViewModel="{Binding NextPageCommand}"
+                                 Style="{StaticResource ImageOnlyButton}"
+                                 Width="{StaticResource NormalControlHeight}"
+                                 Height="{StaticResource NormalControlHeight}"
+                                 Background="Transparent"
+                                 Padding="0"
+                                 Margin="0"/>
+        </StackPanel>
     </DockPanel>
 </UserControl>

@@ -263,26 +263,26 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             get
             {
-                if (!string.IsNullOrEmpty(InstancesCountAsTextFormatString))
-                    return string.Format(InstancesCountAsTextFormatString, InstancesCount);
+                string countStr = string.Empty;
+
+                if (InstancesCount >= Helper.MAXLISTCOUNT || CurrentPage != 1)
+                {
+                    var from = (CurrentPage - 1) * Helper.MAXLISTCOUNT;
+                    countStr = string.Format("{0} - {1}", from + 1, from + InstancesCount);
+                }
                 else
-                    return string.Format("{0} {1}", InstancesCount, InstanceListViewModelResources.InstancesCountAsText);
-            }
-        }
+                {
+                    countStr = InstancesCount.ToString();
+                }
 
-        public bool InstancesCountWarning
-        {
-            get
-            {
-                return InstancesCount >= Helper.MAXLISTCOUNT;
-            }
-        }
-
-        public string InstancesCountWarningText
-        {
-            get
-            {
-                return InstancesCount >= Helper.MAXLISTCOUNT ? InstanceListViewModelResources.InstancesCountWarning : string.Empty;
+                if (!string.IsNullOrEmpty(InstancesCountAsTextFormatString))
+                {
+                    return string.Format(InstancesCountAsTextFormatString, countStr);
+                }
+                else
+                {
+                    return string.Format("{0} {1}", countStr, InstanceListViewModelResources.InstancesCountAsText);
+                }
             }
         }
 
@@ -738,10 +738,12 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                                 _sortDirection == System.ComponentModel.ListSortDirection.Descending ? "desc" : string.Empty));
             }
 
+            var skip = (CurrentPage - 1) * Zetbox.API.Helper.MAXLISTCOUNT;
+
             // Limit to maxlistcount
             // Due to the fact, that the client provider is appending 
             // local objects to the query we have to add an additional limit
-            result = result.Take(Zetbox.API.Helper.MAXLISTCOUNT);
+            result = result.Skip(skip).Take(Zetbox.API.Helper.MAXLISTCOUNT);
 
             return result;
         }
@@ -756,8 +758,18 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         /// </summary>
         public void Refresh()
         {
+            Refresh(true);   
+        }
+
+        private void Refresh(bool resetCurrentPage)
+        {
             if (!FilterList.IsFilterValid)
                 return;
+
+            if (resetCurrentPage)
+            {
+                CurrentPage = 1;
+            }
 
             try
             {

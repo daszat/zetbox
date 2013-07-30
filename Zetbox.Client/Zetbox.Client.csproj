@@ -218,6 +218,7 @@
     <Compile Include="Presentables\ValueViewModels\CompoundListViewModel.cs" />
     <Compile Include="Presentables\ZetboxBase\GroupMembershipViewModel.cs" />
     <Compile Include="Presentables\ZetboxBase\AnyReferencePropertyViewModel.cs" />
+    <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModel.Paging.cs" />
     <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModel.Commands.cs" />
     <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModel.PrintExport.cs" />
     <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModel.GridSupport.cs" />
