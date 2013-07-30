@@ -216,6 +216,11 @@
     <Compile Include="Presentables\TestModule\NextEventsTestNavScreenViewModel.cs" />
     <Compile Include="Presentables\ValueViewModels\CompoundCollectionViewModel.cs" />
     <Compile Include="Presentables\ValueViewModels\CompoundListViewModel.cs" />
+    <Compile Include="Presentables\ViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Presentables\ZetboxBase\GroupMembershipViewModel.cs" />
     <Compile Include="Presentables\ZetboxBase\AnyReferencePropertyViewModel.cs" />
     <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModel.Paging.cs" />
@@ -430,6 +435,11 @@
     <EmbeddedResource Include="Presentables\Calendar\CalendarResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>CalendarResources1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\ViewModelResources.de.resx" />
+    <EmbeddedResource Include="Presentables\ViewModelResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reporting\Calendar\EventsResources.de.resx" />
     <EmbeddedResource Include="Reporting\Calendar\EventsResources.resx">

@@ -55,9 +55,9 @@ namespace Zetbox.Client.Presentables
             get { return ExceptionReporterViewModelResources.Name; }
         }
 
-        public string HelpText
+        public string HelpUsText
         {
-            get { return ExceptionReporterViewModelResources.HelpText; }
+            get { return ExceptionReporterViewModelResources.HelpUsText; }
         }
 
         public string ExceptionDetailsLabel

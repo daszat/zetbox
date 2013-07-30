@@ -27,6 +27,7 @@ namespace Zetbox.Client.Presentables
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
     using Zetbox.App.GUI;
+    using Zetbox.Client.GUI;
 
     public interface IViewModelDependencies
     {
@@ -364,6 +365,71 @@ namespace Zetbox.Client.Presentables
         }
         #endregion
 
+        #region Help command
+        private ICommandViewModel _HelpCommand = null;
+
+        /// <summary>
+        /// It's not the question _if_ you should display a help command, the question is _where_!
+        /// </summary>
+        public ICommandViewModel HelpCommand
+        {
+            get
+            {
+                if (_HelpCommand == null)
+                {
+                    _HelpCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, ViewModelResources.HelpCommand, ViewModelResources.HelpCommand_Tooltip, Help, CanHelp, null);
+                    _HelpCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.info_png.Find(FrozenContext));
+                }
+                return _HelpCommand;
+            }
+        }
+
+        public bool CanHelp()
+        {
+            return HasHelpText;
+        }
+
+        public void Help()
+        {
+            if (!CanHelp()) return;
+
+            // The basic implementation - a toolkit might implement it better
+            var dlg = ViewModelFactory.CreateDialog(DataContext, ViewModelResources.HelpCommand)
+                .AddTextBlock(ViewModelResources.HelpCommand, HelpText);
+            dlg.Show();
+        }
+
+        public bool HasHelpText
+        {
+            get
+            {
+                return !string.IsNullOrWhiteSpace(HelpText);
+            }
+        }
+
+        private string _helpText;
+        public string HelpText
+        {
+            get
+            {
+                return _helpText ?? GetHelpText();
+            }
+            set
+            {
+                if (_helpText != null)
+                {
+                    _helpText = value;
+                    OnPropertyChanged("HelpText");
+                    OnPropertyChanged("HasHelpText");
+                }
+            }
+        }
+
+        protected virtual string GetHelpText()
+        {
+            return string.Empty;
+        }
+        #endregion
     }
 
     public struct Highlight

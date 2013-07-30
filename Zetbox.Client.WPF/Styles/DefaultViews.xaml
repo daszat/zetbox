@@ -2536,6 +2536,8 @@
                                Source="{Binding Icon, Converter={StaticResource ImageConverter}}"
                                Width="{StaticResource BigControlHeight}"
                                Height="{StaticResource BigControlHeight}" />
+                        <ctrls:HelpButton DockPanel.Dock="Right"
+                                          Margin="0,0,5,0" />
                         <TextBlock Text="{Binding Name}"
                                    Margin="10 0 0 0"
                                    HorizontalAlignment="Left"
@@ -2576,5 +2578,23 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <Style x:Key="PopupWindow"
+           TargetType="Window">
+        <Setter Property="ResizeMode"
+                Value="CanResize" />
+        <Setter Property="ShowInTaskbar"
+                Value="True" />
+        <Setter Property="Topmost"
+                Value="True" />
+        <Setter Property="Width"
+                Value="480" />
+        <Setter Property="Height"
+                Value="200" />
+        <Setter Property="WindowStyle"
+                Value="ToolWindow" />
+        <Setter Property="Background"
+                Value="#FFFFFFE0" />
     </Style>
 </ResourceDictionary>
