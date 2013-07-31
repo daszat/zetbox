@@ -203,7 +203,7 @@ namespace Zetbox.API.Server
                     finalQuery.Add(new BooleanClause(classQuery, Occur.MUST));
                 }
 
-                var hits = searcher.Search(finalQuery, Helper.MAXLISTCOUNT);
+                var hits = searcher.Search(finalQuery, int.MaxValue);
                 var anyRefs = hits.ScoreDocs.Select(doc => searcher.Doc(doc.Doc)).ToLookup(doc => doc.Get(Fulltext.Module.FIELD_CLASS), doc => doc.Get(Fulltext.Module.FIELD_ID));
 
                 var result = new List<IStreamable>();
@@ -220,7 +220,12 @@ namespace Zetbox.API.Server
                             try
                             {
                                 var obj = ctx.Find(ifType, id);
-                                result.Add(obj);
+                                if (obj.CurrentAccessRights.HasReadRights())
+                                {
+                                    result.Add(obj);
+                                    if (result.Count >= Helper.MAXLISTCOUNT)
+                                        return result;
+                                }
                             }
                             catch (ZetboxObjectNotFoundException)
                             {
