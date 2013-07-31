@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Collections.ObjectModel;
 
 namespace Zetbox.API.Server.Fulltext
 {
@@ -23,13 +24,13 @@ namespace Zetbox.API.Server.Fulltext
             public Dictionary<string, string> Fields { get; set; }
         }
 
-        public static readonly List<Tuple<InterfaceType, int, Text>> NothingAdded = new List<Tuple<InterfaceType, int, Text>>();
-        public static readonly List<Tuple<InterfaceType, int, Text>> NothingModified = new List<Tuple<InterfaceType, int, Text>>();
-        public static readonly List<Tuple<InterfaceType, int>> NothingDeleted = new List<Tuple<InterfaceType, int>>();
+        public static readonly ReadOnlyCollection<Tuple<InterfaceType, int, Text>> NothingAdded = new List<Tuple<InterfaceType, int, Text>>().AsReadOnly();
+        public static readonly ReadOnlyCollection<Tuple<InterfaceType, int, Text>> NothingModified = new List<Tuple<InterfaceType, int, Text>>().AsReadOnly();
+        public static readonly ReadOnlyCollection<Tuple<InterfaceType, int>> NothingDeleted = new List<Tuple<InterfaceType, int>>().AsReadOnly();
 
-        public List<Tuple<InterfaceType, int, Text>> added;
-        public List<Tuple<InterfaceType, int, Text>> modified;
-        public List<Tuple<InterfaceType, int>> deleted;
+        public ReadOnlyCollection<Tuple<InterfaceType, int, Text>> added;
+        public ReadOnlyCollection<Tuple<InterfaceType, int, Text>> modified;
+        public ReadOnlyCollection<Tuple<InterfaceType, int>> deleted;
 
         public bool IsValid { get { return added != null && modified != null && deleted != null; } }
         public bool IsEmpty

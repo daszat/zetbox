@@ -51,13 +51,13 @@ namespace Zetbox.API.Server.Fulltext
                     ctx.GetInterfaceType(obj), 
                     obj.ID, 
                     Rebuilder.ExtractText(obj, _formatter, _resolver)
-                )).ToList(),
+                )).ToList().AsReadOnly(),
                 modified = modified.Select(obj => new Tuple<InterfaceType, int, IndexUpdate.Text>(
                     ctx.GetInterfaceType(obj), 
                     obj.ID,
                     Rebuilder.ExtractText(obj, _formatter, _resolver)
-                )).ToList(),
-                deleted = deleted.ToList()
+                )).ToList().AsReadOnly(),
+                deleted = deleted.ToList().AsReadOnly()
             });
         }
 
