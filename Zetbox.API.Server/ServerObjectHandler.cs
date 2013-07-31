@@ -185,7 +185,7 @@ namespace Zetbox.API.Server
         {
             if (_searchDependencies == null) throw new InvalidOperationException("No Fulltext Support registered");
 
-            var qry = _searchDependencies.Parser.Parse(query);
+            var qry = _searchDependencies.Parser.Parse(query.ToLowerInvariant());
 
             var searcher = _searchDependencies.SearcherManager.Aquire();
             try
@@ -226,7 +226,7 @@ namespace Zetbox.API.Server
                             {
                                 _searchDependencies.Queue.Enqueue(new IndexUpdate()
                                 {
-                                    deleted = new List<Tuple<InterfaceType, int>>() { new Tuple<InterfaceType, int>(ifType, id) }
+                                    deleted = new List<Tuple<InterfaceType, int>>() { new Tuple<InterfaceType, int>(ifType, id) }.AsReadOnly()
                                 });
                             }
                         }

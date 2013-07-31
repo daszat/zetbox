@@ -135,7 +135,7 @@ namespace Zetbox.API.Server.Fulltext
                                 doc.Add(new Field(Module.FIELD_BODY, txt.Body, Field.Store.NO, Field.Index.ANALYZED));
                                 if (txt.Fields != null)
                                 {
-                                    txt.Fields.ForEach(kvp => doc.Add(new Field(kvp.Key, kvp.Value, Field.Store.NO, Field.Index.ANALYZED)));
+                                    txt.Fields.ForEach(kvp => doc.Add(new Field(kvp.Key.ToLowerInvariant(), kvp.Value, Field.Store.NO, Field.Index.ANALYZED)));
                                 }
 
                                 _indexWriter.AddDocument(doc);
