@@ -124,7 +124,7 @@
     <value>Volltextsuche nach beliebigem Text</value>
   </data>
   <data name="FulltextFilterModel_HelpText" xml:space="preserve">
-    <value>&lt;p&gt;Weitere Informationen (Englisch): &lt;a href="http://lucene.apache.org/core/3_0_3/queryparsersyntax.html"&gt;http://lucene.apache.org/core/3_0_3/queryparsersyntax.html&lt;/a&gt;&lt;/p&gt;
+    <value>&lt;p&gt;Weitere Informationen (Englisch): &lt;a href="http://lucene.apache.org/core/3_0_3/queryparsersyntax.html" target="_blank"&gt;http://lucene.apache.org/core/3_0_3/queryparsersyntax.html&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2&gt;Ausdrücke&lt;/h2&gt;
 &lt;pre&gt;test hello&lt;/pre&gt;

@@ -79,7 +79,7 @@ namespace Zetbox.Client.Models {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;p&gt;More information can be found here: &lt;a href=&quot;http://lucene.apache.org/core/3_0_3/queryparsersyntax.html&quot;&gt;http://lucene.apache.org/core/3_0_3/queryparsersyntax.html&lt;/a&gt;&lt;/p&gt;
+        ///   Looks up a localized string similar to &lt;p&gt;More information can be found here: &lt;a href=&quot;http://lucene.apache.org/core/3_0_3/queryparsersyntax.html&quot; target=&quot;_blank&quot;&gt;http://lucene.apache.org/core/3_0_3/queryparsersyntax.html&lt;/a&gt;&lt;/p&gt;
         ///
         ///&lt;h2&gt;Terms&lt;/h2&gt;
         ///&lt;pre&gt;test hello&lt;/pre&gt;
@@ -92,7 +92,7 @@ namespace Zetbox.Client.Models {
         ///&lt;pre&gt;title:&quot;Do it right&quot; AND right&lt;/pre&gt;
         ///
         ///&lt;h2&gt;Wildcard Searches&lt;/h2&gt;
-        ///&lt;pre&gt;te?t&lt;/pre&gt;        /// [rest of string was truncated]&quot;;.
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string FulltextFilterModel_HelpText {
             get {
