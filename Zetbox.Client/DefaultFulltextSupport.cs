@@ -24,6 +24,7 @@ namespace Zetbox.Client
     using Autofac;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
+    using Zetbox.API;
     using Zetbox.API.Client;
 
     public class DefaultFulltextSupport : IFulltextSupport
@@ -50,6 +51,8 @@ namespace Zetbox.Client
 
         public bool HasIndexedFields(ObjectClass cls)
         {
+            if (cls.ImplementsICustomFulltextFormat()) return true;
+
             foreach (var prop in cls.GetAllProperties())
             {
                 if (prop is StringProperty /* && further restictions */) return true;

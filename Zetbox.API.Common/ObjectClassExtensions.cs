@@ -276,6 +276,26 @@ namespace Zetbox.App.Extensions
             return false;
         }
 
+        public static bool ImplementsICustomFulltextFormat(this ObjectClass cls)
+        {
+            return ImplementsICustomFulltextFormat(cls, true);
+        }
+
+        public static bool ImplementsICustomFulltextFormat(this ObjectClass cls, bool lookupInBase)
+        {
+            if (cls == null) { throw new ArgumentNullException("cls"); }
+
+            while (cls != null)
+            {
+                // TODO: use named objects
+                if (cls.ImplementsInterfaces.Count(o => o.Name == "ICustomFulltextFormat" && o.Module.Name == "ZetboxBase") == 1)
+                    return true;
+                if (!lookupInBase) return false;
+                cls = cls.BaseObjectClass;
+            }
+            return false;
+        }
+
         public static IList<Property> GetAllProperties(this DataType cls)
         {
             if (cls == null) { throw new ArgumentNullException("cls"); }
