@@ -64,10 +64,23 @@ namespace Zetbox.API.Server.Fulltext
             }
 
             var cls = resolver.GetObjectClass(obj.Context.GetInterfaceType(obj));
+            var allProps = cls.GetAllProperties();
             result.Fields = new Dictionary<string, string>();
-            foreach (var prop in cls.GetAllProperties().OfType<StringProperty>().OrderBy(p => p.Name))
+
+
+            foreach (var prop in allProps.OfType<StringProperty>().OrderBy(p => p.Name))
             {
                 var txtVal = obj.GetPropertyValue<string>(prop.Name);
+                if (!string.IsNullOrWhiteSpace(txtVal))
+                {
+                    result.Fields[prop.Name] = txtVal;
+                }
+            }
+
+            foreach (var prop in allProps.OfType<EnumerationProperty>().OrderBy(p => p.Name))
+            {
+                var enumVal = obj.GetPropertyValue<int>(prop.Name);
+                var txtVal = prop.Enumeration.GetLabelByValue(enumVal);
                 if (!string.IsNullOrWhiteSpace(txtVal))
                 {
                     result.Fields[prop.Name] = txtVal;

@@ -36,11 +36,26 @@ namespace Zetbox.API.Common.Fulltext
             if (obj == null) return string.Empty;
 
             var cls = _resolver.GetObjectClass(obj.Context.GetInterfaceType(obj));
+            var allProps = cls.GetAllProperties();
             var result = new StringBuilder();
 
-            foreach (var prop in cls.GetAllProperties().OfType<StringProperty>().OrderBy(p => p.Name))
+            foreach (var prop in allProps.OfType<StringProperty>().OrderBy(p => p.Name))
             {
-                result.AppendLine(obj.GetPropertyValue<string>(prop.Name));
+                var txtVal = obj.GetPropertyValue<string>(prop.Name);
+                if (!string.IsNullOrWhiteSpace(txtVal))
+                {
+                    result.AppendLine(txtVal);
+                }
+            }
+
+            foreach (var prop in allProps.OfType<EnumerationProperty>().OrderBy(p => p.Name))
+            {
+                var enumVal = obj.GetPropertyValue<int>(prop.Name);
+                var txtVal = prop.Enumeration.GetLabelByValue(enumVal);
+                if (!string.IsNullOrWhiteSpace(txtVal))
+                {
+                    result.AppendLine(txtVal);
+                }
             }
 
             return result.ToString();

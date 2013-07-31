@@ -56,7 +56,7 @@ namespace Zetbox.Client
             foreach (var prop in cls.GetAllProperties())
             {
                 if (prop is StringProperty /* && further restictions */) return true;
-                // if (prop is EnumerationProperty) return true;
+                if (prop is EnumerationProperty) return true;
             }
 
             return false;
