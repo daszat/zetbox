@@ -20,6 +20,8 @@
       <dependency id="Autofac" version="[2.6.3.862]" />
       <dependency id="log4net" version="[2.0.0]" />
       <dependency id="Mono.Cecil" version="[0.9.5.4]" />
+      <dependency id="Lucene.Net" version="[3.0.3]" />
+      <dependency id="Lucene.Net.Contrib" version="[3.0.3]" />
       <dependency id="PDFsharp-MigraDoc-GDI-dasz" version="[1.32.3886.0]" />
     </dependencies>
   </metadata>
