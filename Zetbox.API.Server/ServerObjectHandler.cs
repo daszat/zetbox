@@ -204,11 +204,12 @@ namespace Zetbox.API.Server
                     finalQuery.Add(new BooleanClause(classQuery, Occur.MUST));
                 }
 
+                Logging.Server.Debug("Starting fulltext search: " + finalQuery.ToString());
                 var hits = searcher.Search(finalQuery, int.MaxValue);
                 var anyRefs = hits.ScoreDocs.Select(doc => searcher.Doc(doc.Doc)).ToLookup(doc => doc.Get(Fulltext.Module.FIELD_CLASS), doc => doc.Get(Fulltext.Module.FIELD_ID));
 
+                Logging.Server.Debug("Fetching fulltext results");
                 var result = new List<IStreamable>();
-
                 // TODO: do batching here
                 foreach (var ids in anyRefs)
                 {
@@ -238,7 +239,7 @@ namespace Zetbox.API.Server
                         }
                         else
                         {
-                            Logging.Facade.WarnOnce(string.Format("Found a not parsable object ID '{0}' in fulltext catalog", idStr));
+                            Logging.Server.WarnOnce(string.Format("Found a not parsable object ID '{0}' in fulltext catalog", idStr));
                         }
                     }
                 }
