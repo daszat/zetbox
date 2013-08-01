@@ -124,7 +124,9 @@
     <value>Volltextsuche nach beliebigem Text</value>
   </data>
   <data name="FulltextFilterModel_HelpText" xml:space="preserve">
-    <value>&lt;p&gt;Weitere Informationen (Englisch): &lt;a href="http://lucene.apache.org/core/3_0_3/queryparsersyntax.html" target="_blank"&gt;http://lucene.apache.org/core/3_0_3/queryparsersyntax.html&lt;/a&gt;&lt;/p&gt;
+    <value>&lt;h1&gt;Volltext Suche&lt;/h1&gt;
+&lt;p&gt;&lt;b&gt;Wichtig:&lt;/b&gt; Zur Zeit gibt es noch Einschränkungen: Alle anderen Felder sind während einer Volltext Suche deaktiviert. Blättern in den Ergebnissen ist noch nicht implementiert.&lt;/p&gt;
+&lt;p&gt;Weitere Informationen (Englisch): &lt;a href="http://lucene.apache.org/core/3_0_3/queryparsersyntax.html" target="_blank"&gt;http://lucene.apache.org/core/3_0_3/queryparsersyntax.html&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2&gt;Ausdrücke&lt;/h2&gt;
 &lt;pre&gt;test hello&lt;/pre&gt;
@@ -142,6 +144,7 @@
 &lt;pre&gt;te*t&lt;/pre&gt;
 
 &lt;h2&gt;Boolesche Operationen&lt;/h2&gt;
+&lt;p&gt;&lt;b&gt;Wichtig:&lt;/b&gt; Boolesche Operationen müssen GROSS GESCHRIEBEN WERDEN.&lt;/p&gt;
 &lt;pre&gt;"jakarta apache" jakarta&lt;/pre&gt;
 &lt;p&gt;ist das Selbe wie:&lt;/p&gt;
 &lt;pre&gt;"jakarta apache" OR jakarta&lt;/pre&gt;

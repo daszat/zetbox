@@ -79,7 +79,9 @@ namespace Zetbox.Client.Models {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;p&gt;More information can be found here: &lt;a href=&quot;http://lucene.apache.org/core/3_0_3/queryparsersyntax.html&quot; target=&quot;_blank&quot;&gt;http://lucene.apache.org/core/3_0_3/queryparsersyntax.html&lt;/a&gt;&lt;/p&gt;
+        ///   Looks up a localized string similar to &lt;h1&gt;Fulltext search&lt;/h1&gt;
+        ///&lt;p&gt;&lt;b&gt;Note:&lt;/b&gt; Currently, there are some restrictions: All other search fields are disabled during a fulltext search and paging is not yet supported.&lt;/p&gt;
+        ///&lt;p&gt;More information can be found here: &lt;a href=&quot;http://lucene.apache.org/core/3_0_3/queryparsersyntax.html&quot; target=&quot;_blank&quot;&gt;http://lucene.apache.org/core/3_0_3/queryparsersyntax.html&lt;/a&gt;&lt;/p&gt;
         ///
         ///&lt;h2&gt;Terms&lt;/h2&gt;
         ///&lt;pre&gt;test hello&lt;/pre&gt;
@@ -87,12 +89,7 @@ namespace Zetbox.Client.Models {
         ///&lt;pre&gt;&quot;test hello&quot;&lt;/pre&gt;
         ///
         ///&lt;h2&gt;Fields&lt;/h2&gt;
-        ///&lt;p&gt;When performing a search you can either specify a field, or use the default field&lt;/p&gt;
-        ///&lt;pre&gt;title:&quot;The Right Way&quot; AND text:go&lt;/pre&gt;
-        ///&lt;pre&gt;title:&quot;Do it right&quot; AND right&lt;/pre&gt;
-        ///
-        ///&lt;h2&gt;Wildcard Searches&lt;/h2&gt;
-        /// [rest of string was truncated]&quot;;.
+        ///&lt;p&gt;When performing a searc [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string FulltextFilterModel_HelpText {
             get {

@@ -124,7 +124,9 @@
     <value>Fulltext search for any text</value>
   </data>
   <data name="FulltextFilterModel_HelpText" xml:space="preserve">
-    <value>&lt;p&gt;More information can be found here: &lt;a href="http://lucene.apache.org/core/3_0_3/queryparsersyntax.html" target="_blank"&gt;http://lucene.apache.org/core/3_0_3/queryparsersyntax.html&lt;/a&gt;&lt;/p&gt;
+    <value>&lt;h1&gt;Fulltext search&lt;/h1&gt;
+&lt;p&gt;&lt;b&gt;Note:&lt;/b&gt; Currently, there are some restrictions: All other search fields are disabled during a fulltext search and paging is not yet supported.&lt;/p&gt;
+&lt;p&gt;More information can be found here: &lt;a href="http://lucene.apache.org/core/3_0_3/queryparsersyntax.html" target="_blank"&gt;http://lucene.apache.org/core/3_0_3/queryparsersyntax.html&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2&gt;Terms&lt;/h2&gt;
 &lt;pre&gt;test hello&lt;/pre&gt;
@@ -142,6 +144,7 @@
 &lt;pre&gt;te*t&lt;/pre&gt;
 
 &lt;h2&gt;Boolean Operators&lt;/h2&gt;
+&lt;p&gt;&lt;b&gt;Note:&lt;/b&gt; Boolean operators must be ALL CAPS&lt;/p&gt;
 &lt;pre&gt;"jakarta apache" jakarta&lt;/pre&gt;
 &lt;p&gt;is the same as:&lt;/p&gt;
 &lt;pre&gt;"jakarta apache" OR jakarta&lt;/pre&gt;
