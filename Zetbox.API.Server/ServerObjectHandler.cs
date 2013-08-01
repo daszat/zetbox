@@ -185,7 +185,8 @@ namespace Zetbox.API.Server
         {
             if (_searchDependencies == null) throw new InvalidOperationException("No Fulltext Support registered");
 
-            var qry = _searchDependencies.Parser.Parse(query.ToLowerInvariant());
+            var qry = _searchDependencies.Parser.Parse(query);
+            qry = new ServerQueryTranslator().VisitQuery(qry);
 
             var searcher = _searchDependencies.SearcherManager.Aquire();
             try
@@ -246,6 +247,16 @@ namespace Zetbox.API.Server
             finally
             {
                 _searchDependencies.SearcherManager.Release(searcher);
+            }
+        }
+
+        private sealed class ServerQueryTranslator : QueryTranslator
+        {
+            protected override string VisitField(string f)
+            {
+                return !string.IsNullOrWhiteSpace(f)
+                            ? f.ToLower()
+                            : f;
             }
         }
 
