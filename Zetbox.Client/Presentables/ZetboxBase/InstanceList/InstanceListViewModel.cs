@@ -51,6 +51,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         protected readonly IFileOpener fileOpener;
         protected readonly ITempFileService tmpService;
+        protected readonly Lazy<IScreenshotTool> screenshotTool;
 
         /// <summary>
         /// Initializes a new instance of the DataTypeViewModel class.
@@ -59,6 +60,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         /// <param name="config"></param>
         /// <param name="fileOpener"></param>
         /// <param name="tmpService"></param>
+        /// <param name="screenshotTool"></param>
         /// <param name="dataCtx">the data context to use</param>
         /// <param name="parent">Parent ViewModel</param>
         /// <param name="type">the data type to model. If null, qry must be a Query of a valid DataType</param>
@@ -68,6 +70,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             ZetboxConfig config,
             IFileOpener fileOpener,
             ITempFileService tmpService,
+            Lazy<IScreenshotTool> screenshotTool,
             IZetboxContext dataCtx, ViewModel parent,
             ObjectClass type,
             Func<IQueryable> qry)
@@ -77,8 +80,10 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             if (type == null) throw new ArgumentNullException("type");
             if (fileOpener == null) throw new ArgumentNullException("fileOpener");
             if (tmpService == null) throw new ArgumentNullException("tmpService");
+            if (screenshotTool == null) throw new ArgumentNullException("screenshotTool");
             this.fileOpener = fileOpener;
             this.tmpService = tmpService;
+            this.screenshotTool = screenshotTool;
 
             _type = type;
             if (qry == null)
@@ -758,7 +763,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         /// </summary>
         public void Refresh()
         {
-            Refresh(true);   
+            Refresh(true);
         }
 
         private void Refresh(bool resetCurrentPage)
@@ -786,6 +791,17 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             SetBusy();
             var execQueryTask = GetQuery().ToListAsync(); // No order by - may be set from outside in LinqQuery! .Cast<IDataObject>().ToList().OrderBy(obj => obj.ToString()))
             _loadInstancesCoreTask = new ZbTask(execQueryTask);
+            _loadInstancesCoreTask.OnError(ex =>
+            {
+                ClearBusy();
+
+                var errorVmdl = ViewModelFactory.CreateViewModel<ExceptionReporterViewModel.Factory>().Invoke(
+                    DataContext,
+                    this,
+                    ex,
+                    screenshotTool.Value.GetScreenshot());
+                ViewModelFactory.ShowDialog(errorVmdl);
+            });
             _loadInstancesCoreTask.OnResult(t =>
                 {
                     _instancesFromServer = execQueryTask.Result.Cast<IDataObject>()

@@ -23,6 +23,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
     using Zetbox.API.Configuration;
     using Zetbox.App.Base;
     using Zetbox.Client.Presentables.ZetboxBase;
+    using Zetbox.API.Client;
 
     public class TreeItemInstanceListViewModel : InstanceListViewModel
     {
@@ -33,10 +34,11 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             ZetboxConfig config,
             IFileOpener fileOpener,
             ITempFileService tmpService,
+            Lazy<IScreenshotTool> screenshotTool,
             IZetboxContext dataCtx, ViewModel parent,
             ObjectClass type,
             Func<IQueryable> qry)
-            : base(appCtx, config, fileOpener, tmpService, dataCtx, parent, type, qry)
+            : base(appCtx, config, fileOpener, tmpService, screenshotTool, dataCtx, parent, type, qry)
         {
         }
 
