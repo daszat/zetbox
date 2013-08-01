@@ -48,7 +48,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public bool CanNextPage()
         {
-            return InstancesCount >= Helper.MAXLISTCOUNT;
+            return InstancesCount >= Helper.MAXLISTCOUNT 
+                && FilterList.IsExclusiveFilterActive == false; // Currently fulltext search does not support paging
         }
 
         public void NextPage()
@@ -84,7 +85,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public bool CanPrevPage()
         {
-            return CurrentPage > 1;
+            return CurrentPage > 1
+                && FilterList.IsExclusiveFilterActive == false; // Currently fulltext search does not support paging
         }
 
         public void PrevPage()

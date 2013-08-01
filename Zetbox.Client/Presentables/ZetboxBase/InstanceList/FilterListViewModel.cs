@@ -172,10 +172,10 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             if (_FilterViewModels != null)
             {
-                var exclusiveFilterActice = _FilterViewModels.Any(f => f.Filter.IsExclusiveFilter && f.Filter.Enabled);
+                var isExclusiveFilterActive = IsExclusiveFilterActive;
                 foreach (var vm in _FilterViewModels)
                 {
-                    vm.IsEnabled = exclusiveFilterActice == false // no exclusive Filter set, enable all other
+                    vm.IsEnabled = isExclusiveFilterActive == false // no exclusive Filter set, enable all other
                                || (vm.Filter.IsExclusiveFilter && vm.Filter.Enabled && vm.IsEnabled);
                 }
             }
@@ -183,10 +183,10 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public bool IsExclusiveFilterActive
         {
-
-            get{
+            get
+            {
                 return _FilterViewModels != null && _FilterViewModels.Any(f => f.Filter.IsExclusiveFilter && f.Filter.Enabled);
-        }
+            }
         }
 
         public bool HasUserFilter
@@ -334,7 +334,9 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 _FilterListEntryViewModels.Add(levmdl);
             }
             if (allowRemove) UpdateRespectRequieredFilter();
+            UpdateExclusiveFilter();
 
+            OnPropertyChanged("IsExclusiveFilterActive");
             OnPropertyChanged("RespectRequiredFilter");
             OnPropertyChanged("HasUserFilter");
             OnPropertyChanged("Filter");
@@ -356,7 +358,9 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 _FilterListEntryViewModels.Remove(levmdl);
             }
             UpdateRespectRequieredFilter();
+            UpdateExclusiveFilter();
 
+            OnPropertyChanged("IsExclusiveFilterActive");
             OnPropertyChanged("RespectRequiredFilter");
             OnPropertyChanged("HasUserFilter");
             OnPropertyChanged("ShowFilter");
@@ -372,15 +376,18 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             if (filter == null) return;
 
             UpdateExclusiveFilter();
+            OnPropertyChanged("IsExclusiveFilterActive");
 
-            if (!filter.RefreshOnFilterChanged) return;
-            if (filter.IsServerSideFilter)
+            if (filter.RefreshOnFilterChanged)
             {
-                OnExecuteFilter();
-            }
-            else
-            {
-                OnExecutePostFilter();
+                if (filter.IsServerSideFilter)
+                {
+                    OnExecuteFilter();
+                }
+                else
+                {
+                    OnExecutePostFilter();
+                }
             }
         }
 
