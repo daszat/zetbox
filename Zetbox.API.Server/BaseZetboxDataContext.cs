@@ -609,7 +609,6 @@ namespace Zetbox.API.Server
         public IDataObject Find(InterfaceType ifType, int ID)
         {
             var t = FindAsync(ifType, ID);
-            t.Wait();
             return t.Result;
         }
 
@@ -624,7 +623,6 @@ namespace Zetbox.API.Server
         public T Find<T>(int ID) where T : class, IDataObject
         {
             var t = FindAsync<T>(ID);
-            t.Wait();
             return t.Result;
         }
 

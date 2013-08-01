@@ -263,7 +263,6 @@ namespace Zetbox.DalProvider.Client
         public List<T> GetListOf<T>(IDataObject obj, string propertyName) where T : class, IDataObject
         {
             var t = GetListOfAsync<T>(obj, propertyName);
-            t.Wait();
             return t.Result;
         }
 
@@ -299,7 +298,6 @@ namespace Zetbox.DalProvider.Client
         public IList<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject container) where T : class, IRelationEntry
         {
             var t = FetchRelationAsync<T>(relationId, role, container);
-            t.Wait();
             return t.Result;
         }
 
@@ -839,7 +837,6 @@ namespace Zetbox.DalProvider.Client
         public IDataObject Find(InterfaceType ifType, int ID)
         {
             var t = FindAsync(ifType, ID);
-            t.Wait();
             return t.Result;
         }
 
@@ -905,7 +902,6 @@ namespace Zetbox.DalProvider.Client
             where T : class, IDataObject
         {
             var t = FindAsync<T>(ID);
-            t.Wait();
             return t.Result;
         }
 

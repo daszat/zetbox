@@ -125,7 +125,6 @@ namespace Zetbox.DalProvider.Memory
         IList<T> IReadOnlyZetboxContext.FetchRelation<T>(Guid relId, RelationEndRole endRole, IDataObject parent)
         {
             var t = ((IReadOnlyZetboxContext)this).FetchRelationAsync<T>(relId, endRole, parent);
-            t.Wait();
             return t.Result;
         }
 

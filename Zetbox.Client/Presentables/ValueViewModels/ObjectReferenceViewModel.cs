@@ -410,15 +410,8 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             _valueCache = null;
             _valueCacheInititalized = false;
 
-            // TODO: cancel running task
-            try
-            {
-                if (_fetchValueTask != null) _fetchValueTask.Wait();
-            }
-            finally
-            {
-                _fetchValueTask = null;
-            }
+            if (_fetchValueTask != null) _fetchValueTask.Cancel();
+            _fetchValueTask = null;
         }
 
         public override DataObjectViewModel Value
@@ -429,9 +422,8 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
             set
             {
-                // TODO: cancel running task
                 if (_fetchValueTask != null)
-                    _fetchValueTask.Wait();
+                    _fetchValueTask.Cancel();
                 base.Value = value;
             }
         }

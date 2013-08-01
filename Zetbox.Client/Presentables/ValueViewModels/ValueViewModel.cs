@@ -1421,7 +1421,6 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 return new ZbTask<DateTime?>(ZbTask.Synchron, () =>
                 {
                     var t = Parent.GetValueFromModelAsync();
-                    t.Wait();
                     var modelValue = t.Result;
                     if (modelValue.HasValue)
                     {

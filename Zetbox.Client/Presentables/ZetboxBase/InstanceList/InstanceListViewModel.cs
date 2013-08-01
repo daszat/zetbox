@@ -771,15 +771,10 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 CurrentPage = 1;
             }
 
-            try
-            {
-                if (_loadInstancesCoreTask != null)
-                    _loadInstancesCoreTask.Wait();
-            }
-            finally
-            {
-                _loadInstancesCoreTask = null;
-            }
+            if (_loadInstancesCoreTask != null)
+                _loadInstancesCoreTask.Cancel();
+            _loadInstancesCoreTask = null;
+
             LoadInstancesCore();
         }
 

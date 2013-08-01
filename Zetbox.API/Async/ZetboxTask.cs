@@ -51,7 +51,11 @@ namespace Zetbox.API.Async
         /// <summary>
         /// The task has encountered an exception and did not run to completion.
         /// </summary>
-        Failed
+        Failed,
+        /// <summary>
+        /// The task was canceled by a user.
+        /// </summary>
+        Canceled,
     }
 
     public class ZbTask
@@ -199,7 +203,7 @@ namespace Zetbox.API.Async
                     work();
                     lock (_lockObject)
                     {
-                        if (State != ZbTaskState.Failed) State = ZbTaskState.ResultEventsPosted;
+                        if (State != ZbTaskState.Failed && State != ZbTaskState.Canceled) State = ZbTaskState.ResultEventsPosted;
                         if (IsWaiting > 0)
                         {
                             Monitor.PulseAll(_lockObject);
@@ -216,7 +220,7 @@ namespace Zetbox.API.Async
                 work();
                 lock (_lockObject)
                 {
-                    if (State != ZbTaskState.Failed) State = ZbTaskState.ResultEventsPosted;
+                    if (State != ZbTaskState.Failed && State != ZbTaskState.Canceled) State = ZbTaskState.ResultEventsPosted;
                     if (IsWaiting > 0)
                     {
                         Monitor.PulseAll(_lockObject);
@@ -297,6 +301,8 @@ namespace Zetbox.API.Async
                     case ZbTaskState.Failed:
                         ThrowException();
                         break;
+                    case ZbTaskState.Canceled:
+                        break;
                 }
             }
             return this;
@@ -323,6 +329,8 @@ namespace Zetbox.API.Async
                     case ZbTaskState.Failed:
                         ThrowException();
                         break;
+                    case ZbTaskState.Canceled:
+                        break;
                 }
             }
             return this;
@@ -335,9 +343,37 @@ namespace Zetbox.API.Async
             CallResultActions();
         }
 
+        /// <summary>
+        /// Force State to Canceled, even when the Task failed, we want to ignore it.
+        /// </summary>
+        public void Cancel()
+        {
+            // TODO: implement proper cancel support
+            try
+            {
+                foreach (var innerTask in innerZbTasks)
+                {
+                    innerTask.Cancel();
+                }
+            }
+            catch
+            {
+                // ignore
+            }
+            finally
+            {
+                lock (_lockObject) State = ZbTaskState.Canceled;
+            }
+        }
+
         protected void CallAsyncContinuations()
         {
-            lock (_lockObject) State = ZbTaskState.AsyncContinuationsRunning;
+            lock (_lockObject)
+            {
+                if (State == ZbTaskState.Canceled) return;
+
+                State = ZbTaskState.AsyncContinuationsRunning;
+            }
             foreach (var action in asyncContinuationActions)
             {
                 action();
@@ -370,6 +406,8 @@ namespace Zetbox.API.Async
                     case ZbTaskState.Failed:
                         ThrowException();
                         // never reached:
+                        return;
+                    case ZbTaskState.Canceled:
                         return;
                 }
             }
@@ -480,6 +518,7 @@ namespace Zetbox.API.Async
             get
             {
                 Wait();
+                lock (SyncRoot) if (State == ZbTaskState.Canceled) throw new InvalidOperationException("Task is already canceled.");
                 return _result;
             }
             set

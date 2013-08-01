@@ -213,7 +213,6 @@ namespace Zetbox.API
         IList<T> IReadOnlyZetboxContext.FetchRelation<T>(Guid relId, RelationEndRole role, IDataObject parent)
         {
             var t = ((IReadOnlyZetboxContext)this).FetchRelationAsync<T>(relId, role, parent);
-            t.Wait();
             return t.Result;
         }
 
@@ -382,7 +381,6 @@ namespace Zetbox.API
         public IDataObject Find(InterfaceType ifType, int ID)
         {
             var t = FindAsync(ifType, ID);
-            t.Wait();
             return t.Result;
         }
 
@@ -402,7 +400,6 @@ namespace Zetbox.API
             where T : class, IDataObject
         {
             var t = FindAsync<T>(ID);
-            t.Wait();
             return t.Result;
         }
 
