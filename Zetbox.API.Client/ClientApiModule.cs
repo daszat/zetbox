@@ -61,6 +61,11 @@ namespace Zetbox.API.Client
                 .OnActivated(args => args.Instance.Initialize(args.Context.Resolve<IFrozenContext>()))
                 .OnRelease(obj => obj.Dump())
                 .SingleInstance();
+
+            moduleBuilder
+                .Register<TestScreenshotTool>(c => new TestScreenshotTool())
+                .As<IScreenshotTool>()
+                .SingleInstance();
         }
     }
 
