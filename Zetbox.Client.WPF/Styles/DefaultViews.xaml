@@ -2514,7 +2514,7 @@
             </Grid.ColumnDefinitions>
             <Border Grid.Row="1"
                     Grid.Column="1"
-                    Background="#AAAAAAAA"
+                    Background="White"
                     Padding="5"
                     CornerRadius="10"
                     Height="30">
