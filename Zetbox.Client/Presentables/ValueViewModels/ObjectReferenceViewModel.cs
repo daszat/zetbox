@@ -424,6 +424,9 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             {
                 if (_fetchValueTask != null)
                     _fetchValueTask.Cancel();
+
+                _fetchValueTask = null;
+
                 base.Value = value;
             }
         }
