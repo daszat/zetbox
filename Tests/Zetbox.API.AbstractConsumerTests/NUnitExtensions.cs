@@ -15,6 +15,12 @@ namespace Zetbox.API.AbstractConsumerTests
             var ex = Assert.Throws<TargetInvocationException>(() => action());
 
             Assert.That(ex, Is.Not.Null);
+
+            while (ex.InnerException is TargetInvocationException)
+            {
+                ex = (TargetInvocationException)ex.InnerException;
+            }
+
             Assert.That(ex.InnerException, Is.InstanceOf<T>());
         }
     }
