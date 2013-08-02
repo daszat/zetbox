@@ -16,9 +16,14 @@
 namespace Zetbox.Client.Presentables.ZetboxBase
 {
     using System;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Linq.Dynamic;
     using System.Text;
+    using Zetbox.API;
+    using Zetbox.API.Async;
     using Zetbox.Client.Models;
 
     public partial class InstanceListViewModel
@@ -134,44 +139,93 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 sw = new StreamWriter(tmpFile, false, Encoding.Default);
             else
                 sw = new StreamWriter(tmpFile, false, Encoding.UTF8); // use this constructor to ensure BOM
-            using (sw)
-            {
-                var cols = DisplayedColumns.Columns
+
+            var cols = DisplayedColumns.Columns
                     .Where(i => i.Type != ColumnDisplayModel.ColumnType.MethodModel)
                     .ToList();
-                // Header
-                sw.WriteLine(string.Join(";",
-                    cols.Select(i => i.Header).ToArray()));
+            // Header
+            sw.WriteLine(string.Join(";",
+                cols.Select(i => i.Header).ToArray()));
 
-                // Data
-                foreach (var obj in Instances)
+            var unpagedQuery = GetUnpagedQuery();
+
+            GetPagedQuery(0, Helper.MAXLISTCOUNT, unpagedQuery)
+                .OnError(ex => sw.Dispose())
+                .OnResult(OnExportPageResultFactory(sw, cols, 0, Helper.MAXLISTCOUNT, unpagedQuery, tmpFile));
+
+        }
+
+        private Action<ZbTask<IEnumerable>> OnExportPageResultFactory(StreamWriter sw, List<ColumnDisplayModel> cols, int page, int pageSize, IQueryable unpagedQuery, string tmpFile)
+        {
+            return t =>
+            {
+                bool queryAgain = ExportPage(sw, cols, t.Result.Cast<IDataObject>()) == pageSize;
+
+                if (queryAgain)
                 {
-                    for (int colIdx = 0; colIdx < cols.Count; colIdx++)
+                    GetPagedQuery(page + 1, pageSize, unpagedQuery)
+                        .OnError(ex => sw.Dispose())
+                        .OnResult(OnExportPageResultFactory(sw, cols, page + 1, pageSize, unpagedQuery, tmpFile));
+                }
+                else
+                {
+                    sw.Dispose();
+                    fileOpener.ShellExecute(tmpFile);
+                }
+            };
+        }
+
+
+        private int ExportPage(StreamWriter sw, List<ColumnDisplayModel> cols, IEnumerable<IDataObject> instances)
+        {
+            var dmvos = instances
+                .Select(obj => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj));
+
+            int count = 0;
+            // Data
+            foreach (var obj in dmvos)
+            {
+                count += 1;
+
+                // This check has to be done AFTER counting
+                // to avoid the edgecase of pageSize deleted objects followed by more data
+                if (obj.ObjectState == DataObjectState.Deleted)
+                    continue;
+
+                for (int colIdx = 0; colIdx < cols.Count; colIdx++)
+                {
+                    string val = cols[colIdx].ExtractFormattedValue(obj);
+                    if (val != null)
                     {
-                        string val = cols[colIdx].ExtractFormattedValue(obj);
-                        if (val != null)
+                        var needsQuoting = val.IndexOfAny(new[] { ';', '\n', '\r', '"' }) >= 0;
+                        if (needsQuoting)
                         {
-                            var needsQuoting = val.IndexOfAny(new[] { ';', '\n', '\r', '"' }) >= 0;
-                            if (needsQuoting)
-                            {
-                                val = val.Replace("\"", "\"\"");
-                                val = "\"" + val + "\"";
-                            }
-                            sw.Write(val);
+                            val = val.Replace("\"", "\"\"");
+                            val = "\"" + val + "\"";
                         }
-                        if (colIdx < cols.Count - 1)
-                        {
-                            sw.Write(";");
-                        }
-                        else
-                        {
-                            sw.WriteLine();
-                        }
+                        sw.Write(val);
+                    }
+                    if (colIdx < cols.Count - 1)
+                    {
+                        sw.Write(";");
+                    }
+                    else
+                    {
+                        sw.WriteLine();
                     }
                 }
             }
 
-            fileOpener.ShellExecute(tmpFile);
+            return count;
+        }
+
+        private static ZbTask<System.Collections.IEnumerable> GetPagedQuery(int page, int pageSize, IQueryable unpagedQuery)
+        {
+            var qryTask = unpagedQuery
+                .Skip(page * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+            return qryTask;
         }
 
         private ICommandViewModel _ExportContainerCommand = null;

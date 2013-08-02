@@ -734,14 +734,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         private Func<IQueryable> _query;
         protected virtual IQueryable GetQuery()
         {
-            var result = FilterList.AppendFilter(_query());
-
-            if (!string.IsNullOrEmpty(_orderByExpression))
-            {
-                result = result.OrderBy(string.Format("{0} {1}",            // Sorting CompoundObject does not work
-                                _orderByExpression,                         // Maybe we should implement a custom comparer
-                                _sortDirection == System.ComponentModel.ListSortDirection.Descending ? "desc" : string.Empty));
-            }
+            var result = GetUnpagedQuery();
 
             var skip = (CurrentPage - 1) * Zetbox.API.Helper.MAXLISTCOUNT;
 
@@ -750,6 +743,19 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             // local objects to the query we have to add an additional limit
             result = result.Skip(skip).Take(Zetbox.API.Helper.MAXLISTCOUNT);
 
+            return result;
+        }
+
+        private IQueryable GetUnpagedQuery()
+        {
+            var result = FilterList.AppendFilter(_query());
+
+            if (!string.IsNullOrEmpty(_orderByExpression))
+            {
+                result = result.OrderBy(string.Format("{0} {1}",            // Sorting CompoundObject does not work
+                                _orderByExpression,                         // Maybe we should implement a custom comparer
+                                _sortDirection == System.ComponentModel.ListSortDirection.Descending ? "desc" : string.Empty));
+            }
             return result;
         }
 
