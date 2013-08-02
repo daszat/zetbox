@@ -132,6 +132,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public void Export()
         {
+            SetBusy();
+
             var tmpFile = tmpService.CreateWithExtension("_Export.csv"); // Excel can't open two files with the same name, located in another folder!
             StreamWriter sw;
             // http://stackoverflow.com/questions/545666/how-to-translate-ms-windows-os-version-numbers-into-product-names-in-net
@@ -150,7 +152,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             var unpagedQuery = GetUnpagedQuery();
 
             GetPagedQuery(0, Helper.MAXLISTCOUNT, unpagedQuery)
-                .OnError(ex => sw.Dispose())
+                .OnError(ex => OnExportPageError(sw, ex))
                 .OnResult(OnExportPageResultFactory(sw, cols, 0, Helper.MAXLISTCOUNT, unpagedQuery, tmpFile));
 
         }
@@ -164,59 +166,81 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 if (queryAgain)
                 {
                     GetPagedQuery(page + 1, pageSize, unpagedQuery)
-                        .OnError(ex => sw.Dispose())
+                        .OnError(ex => OnExportPageError(sw, ex))
                         .OnResult(OnExportPageResultFactory(sw, cols, page + 1, pageSize, unpagedQuery, tmpFile));
                 }
                 else
                 {
                     sw.Dispose();
                     fileOpener.ShellExecute(tmpFile);
+                    ClearBusy();
                 }
             };
         }
 
+        private void OnExportPageError(StreamWriter sw, Exception ex)
+        {
+            sw.Dispose();
+            ClearBusy();
+
+            var errorVmdl = ViewModelFactory.CreateViewModel<ExceptionReporterViewModel.Factory>().Invoke(
+                DataContext,
+                this,
+                ex,
+                screenshotTool.Value.GetScreenshot());
+
+            ViewModelFactory.ShowDialog(errorVmdl);
+        }
 
         private int ExportPage(StreamWriter sw, List<ColumnDisplayModel> cols, IEnumerable<IDataObject> instances)
         {
-            var dmvos = instances
-                .Select(obj => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj));
-
-            int count = 0;
-            // Data
-            foreach (var obj in dmvos)
+            try
             {
-                count += 1;
+                var dmvos = instances
+                    .Select(obj => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj));
 
-                // This check has to be done AFTER counting
-                // to avoid the edgecase of pageSize deleted objects followed by more data
-                if (obj.ObjectState == DataObjectState.Deleted)
-                    continue;
-
-                for (int colIdx = 0; colIdx < cols.Count; colIdx++)
+                int count = 0;
+                // Data
+                foreach (var obj in dmvos)
                 {
-                    string val = cols[colIdx].ExtractFormattedValue(obj);
-                    if (val != null)
+                    count += 1;
+
+                    // This check has to be done AFTER counting
+                    // to avoid the edgecase of pageSize deleted objects followed by more data
+                    if (obj.ObjectState == DataObjectState.Deleted)
+                        continue;
+
+                    for (int colIdx = 0; colIdx < cols.Count; colIdx++)
                     {
-                        var needsQuoting = val.IndexOfAny(new[] { ';', '\n', '\r', '"' }) >= 0;
-                        if (needsQuoting)
+                        string val = cols[colIdx].ExtractFormattedValue(obj);
+                        if (val != null)
                         {
-                            val = val.Replace("\"", "\"\"");
-                            val = "\"" + val + "\"";
+                            var needsQuoting = val.IndexOfAny(new[] { ';', '\n', '\r', '"' }) >= 0;
+                            if (needsQuoting)
+                            {
+                                val = val.Replace("\"", "\"\"");
+                                val = "\"" + val + "\"";
+                            }
+                            sw.Write(val);
                         }
-                        sw.Write(val);
-                    }
-                    if (colIdx < cols.Count - 1)
-                    {
-                        sw.Write(";");
-                    }
-                    else
-                    {
-                        sw.WriteLine();
+                        if (colIdx < cols.Count - 1)
+                        {
+                            sw.Write(";");
+                        }
+                        else
+                        {
+                            sw.WriteLine();
+                        }
                     }
                 }
-            }
 
-            return count;
+                return count;
+            }
+            catch (Exception ex)
+            {
+                OnExportPageError(sw, ex);
+                return 0;
+            }
         }
 
         private static ZbTask<System.Collections.IEnumerable> GetPagedQuery(int page, int pageSize, IQueryable unpagedQuery)
