@@ -62,6 +62,7 @@ namespace Zetbox.API.Async
     {
         public static ZbTask OnError(this ZbTask self, Action<Exception> errorAction)
         {
+            if (self == null) throw new ArgumentNullException("self");
             if (errorAction == null) throw new ArgumentNullException("errorAction");
             self.AddErrorAction(errorAction);
             return self;
@@ -69,6 +70,7 @@ namespace Zetbox.API.Async
 
         public static ZbTask<T> OnError<T>(this ZbTask<T> self, Action<Exception> errorAction)
         {
+            if (self == null) throw new ArgumentNullException("self");
             if (errorAction == null) throw new ArgumentNullException("errorAction");
             self.AddErrorAction(errorAction);
             return self;

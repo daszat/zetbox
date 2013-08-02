@@ -179,7 +179,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             };
         }
 
-        private void OnExportPageError(StreamWriter sw, Exception ex)
+        private void OnExportPageError(IDisposable sw, Exception ex)
         {
             sw.Dispose();
             ClearBusy();
