@@ -123,4 +123,51 @@
       </Code>
     </Snippet>
   </CodeSnippet>
+
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Notifying Property snippet</Title>
+      <Author>dasz.at OG</Author>
+      <Description>Inserts a notifying property.</Description>
+      <Shortcut>propnotify</Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>Name</ID>
+          <Type>String</Type>
+          <ToolTip>Replace with a name.</ToolTip>
+          <Default>Name</Default>
+        </Literal>
+        <Literal>
+          <ID>Type</ID>
+          <Type>String</Type>
+          <ToolTip>Replace with a type.</ToolTip>
+          <Default>string</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="CSharp" Kind="method body">
+        <![CDATA[
+        private $Type$ _$Name$;
+        public $Type$ $Name$
+        {
+            get 
+			{ 
+				return _$Name$; 
+			}
+            set 
+			{ 
+				if(_$Name$ != value)
+				{
+					_$Name$ = value;
+					OnPropertyChanged("$Name$");
+				}
+			}
+        }
+]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+  
+  
 </CodeSnippets>
