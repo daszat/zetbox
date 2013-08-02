@@ -97,7 +97,7 @@ namespace Zetbox.API.Async
         public void Invalidate()
         {
             if (_task != null)
-                _task.Cancel();
+                _task.Wait();
             _task = null;
         }
     }
