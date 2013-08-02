@@ -132,7 +132,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public void Export()
         {
-            SetBusy();
+            SetBusy(string.Format(InstanceListViewModelResources.ExportBusyMessageFormat, 1));
 
             var tmpFile = tmpService.CreateWithExtension("_Export.csv"); // Excel can't open two files with the same name, located in another folder!
             StreamWriter sw;
@@ -165,6 +165,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
                 if (queryAgain)
                 {
+                    CurrentBusyMessage = string.Format(InstanceListViewModelResources.ExportBusyMessageFormat, page + 1);
                     GetPagedQuery(page + 1, pageSize, unpagedQuery)
                         .OnError(ex => OnExportPageError(sw, ex))
                         .OnResult(OnExportPageResultFactory(sw, cols, page + 1, pageSize, unpagedQuery, tmpFile));

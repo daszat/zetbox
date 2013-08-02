@@ -168,4 +168,7 @@
   <data name="PrevPageCommand_Tooltip" xml:space="preserve">
     <value>Previous page</value>
   </data>
+  <data name="ExportBusyMessageFormat" xml:space="preserve">
+    <value>Exporting page {0}</value>
+  </data>
 </root>

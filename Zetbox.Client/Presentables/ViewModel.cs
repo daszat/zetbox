@@ -179,10 +179,12 @@ namespace Zetbox.Client.Presentables
             }
         }
 
-        public void SetBusy()
+        public void SetBusy(string message = null)
         {
             _isBusy++;
             OnPropertyChanged("IsBusy");
+
+            CurrentBusyMessage = message ?? ViewModelResources.DefaultBusyMessage;
 
             if (_isBusy == 1)
                 OnPropertyChanged("IsEnabled");
@@ -200,6 +202,23 @@ namespace Zetbox.Client.Presentables
                 Logging.Log.Warn("ClearBusy called too often or without a prev. SetBusy call");
             }
             OnPropertyChanged("IsBusy");
+        }
+
+        private string _currentBusyMessage;
+        public string CurrentBusyMessage
+        {
+            get
+            {
+                return _currentBusyMessage;
+            }
+            set
+            {
+                if (_currentBusyMessage != value)
+                {
+                    _currentBusyMessage = value;
+                    OnPropertyChanged("CurrentBusyMessage");
+                }
+            }
         }
 
         private bool _isEnabled = true;

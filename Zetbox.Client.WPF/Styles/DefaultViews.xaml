@@ -2499,7 +2499,7 @@
            BasedOn="{StaticResource LabeledViewStyle}">
     </Style>
 
-    <DataTemplate x:Key="FakeProgressOverlay">
+    <DataTemplate x:Key="FakeProgressOverlay" DataType="FrameworkElement">
         <Grid Background="#88888888">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -2518,7 +2518,8 @@
                     Padding="5"
                     CornerRadius="10"
                     Height="30">
-                <TextBlock HorizontalAlignment="Center">Bitte warten...</TextBlock>
+                <TextBlock HorizontalAlignment="Center"
+                           Text="{Binding Path=AdornedElement.DataContext.CurrentBusyMessage, RelativeSource={RelativeSource AncestorType={x:Type ctrls:ContentAdorner}}}" />
             </Border>
             <ProgressBar Grid.Row="2"
                          Grid.Column="1"
