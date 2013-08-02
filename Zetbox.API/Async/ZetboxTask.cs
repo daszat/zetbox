@@ -507,6 +507,7 @@ namespace Zetbox.API.Async
             {
                 // Stop processing
                 Fail(ex);
+                RunErrorHandlers();
             }
         }
     }
