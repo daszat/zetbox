@@ -24,6 +24,7 @@ namespace Zetbox.API.AbstractConsumerTests
     using Zetbox.App.Base;
     using Zetbox.App.Test;
     using NUnit.Framework;
+    using System.Reflection;
 
     public abstract class AbstractContextTests
         : AbstractTestFixture
@@ -305,7 +306,9 @@ namespace Zetbox.API.AbstractConsumerTests
                 foreach (var obj in objects)
                 {
                     Assert.That(obj.ID, Is.GreaterThan(Helper.INVALIDID));
-                    Assert.That(() => testCtx.Find<TestObjClass>(obj.ID), Throws.InstanceOf<ZetboxObjectNotFoundException>());
+                    NUnitExtensions.ThrowsTargetInvocationException<ZetboxObjectNotFoundException>(
+                        () => testCtx.Find<TestObjClass>(obj.ID)
+                    );
                 }
             }
         }
@@ -399,22 +402,24 @@ namespace Zetbox.API.AbstractConsumerTests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void Find_T_fails_on_invalid_ID()
         {
             using (IZetboxContext ctx = GetContext())
             {
-                ctx.Find<TestObjClass>(Zetbox.API.Helper.INVALIDID);
+                NUnitExtensions.ThrowsTargetInvocationException<ArgumentOutOfRangeException>(
+                    () => ctx.Find<TestObjClass>(Zetbox.API.Helper.INVALIDID)
+                );
             }
         }
 
         [Test]
-        [ExpectedException(typeof(ZetboxObjectNotFoundException))]
         public void Find_T_fails_on_unknown_ID()
         {
             using (IZetboxContext ctx = GetContext())
             {
-                ctx.Find<TestObjClass>(12345);
+                NUnitExtensions.ThrowsTargetInvocationException<ZetboxObjectNotFoundException>(
+                    () => ctx.Find<TestObjClass>(12345)
+                );
             }
         }
 
@@ -431,22 +436,24 @@ namespace Zetbox.API.AbstractConsumerTests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void Find_ObjectType_fails_on_invalid_ID()
         {
             using (IZetboxContext ctx = GetContext())
             {
-                ctx.Find(iftFactory(typeof(TestObjClass)), Zetbox.API.Helper.INVALIDID);
+                NUnitExtensions.ThrowsTargetInvocationException<ArgumentOutOfRangeException>(
+                    () => ctx.Find(iftFactory(typeof(TestObjClass)), Zetbox.API.Helper.INVALIDID)
+                );
             }
         }
 
         [Test]
-        [ExpectedException(typeof(ZetboxObjectNotFoundException))]
         public void Find_ObjectType_fails_on_unknwon_ID()
         {
             using (IZetboxContext ctx = GetContext())
             {
-                ctx.Find(iftFactory(typeof(TestObjClass)), 12345);
+                NUnitExtensions.ThrowsTargetInvocationException<ZetboxObjectNotFoundException>(
+                    () => ctx.Find(iftFactory(typeof(TestObjClass)), 12345)
+                );
             }
         }
 
@@ -463,24 +470,26 @@ namespace Zetbox.API.AbstractConsumerTests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void GetListOf_T_WrongPropertyName_fails()
         {
             using (IZetboxContext ctx = GetContext())
             {
                 var obj = ctx.GetQuery<TestObjClass>().First(o => o.ID == firstId);
-                ctx.GetListOf<TestObjClass>(obj, "NotAProperty");
+                NUnitExtensions.ThrowsTargetInvocationException<ArgumentOutOfRangeException>(
+                    () => ctx.GetListOf<TestObjClass>(obj, "NotAProperty")
+                );
             }
         }
 
         [Test]
-        [ExpectedException(typeof(InvalidCastException))]
         public void GetListOf_T_WrongItemType_fails()
         {
             using (IZetboxContext ctx = GetContext())
             {
                 var obj = ctx.GetQuery<ObjectClass>().First(o => o.Name == "DataType");
-                ctx.GetListOf<TestObjClass>(obj, "SubClasses").ToList();
+                 NUnitExtensions.ThrowsTargetInvocationException<InvalidCastException>(
+                    () => ctx.GetListOf<TestObjClass>(obj, "SubClasses").ToList()
+                );
             }
         }
 
