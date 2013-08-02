@@ -58,6 +58,23 @@ namespace Zetbox.API.Async
         Canceled,
     }
 
+    public static class ZbTaskExtensions
+    {
+        public static ZbTask OnError(this ZbTask self, Action<Exception> errorAction)
+        {
+            if (errorAction == null) throw new ArgumentNullException("errorAction");
+            self.AddErrorAction(errorAction);
+            return self;
+        }
+
+        public static ZbTask<T> OnError<T>(this ZbTask<T> self, Action<Exception> errorAction)
+        {
+            if (errorAction == null) throw new ArgumentNullException("errorAction");
+            self.AddErrorAction(errorAction);
+            return self;
+        }
+    }
+
     public class ZbTask
     {
         public static readonly SynchronizationContext Synchron = null;
@@ -364,10 +381,8 @@ namespace Zetbox.API.Async
             return this;
         }
 
-        public ZbTask OnError(Action<Exception> errorAction)
+        internal void AddErrorAction(Action<Exception> errorAction)
         {
-            if (errorAction == null) throw new ArgumentNullException("errorAction");
-
             lock (_lockObject)
             {
                 switch (State)
@@ -388,7 +403,6 @@ namespace Zetbox.API.Async
                         break;
                 }
             }
-            return this;
         }
 
         /// <summary>
