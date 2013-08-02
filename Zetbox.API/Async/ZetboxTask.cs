@@ -415,6 +415,9 @@ namespace Zetbox.API.Async
         /// </summary>
         public void Cancel()
         {
+            // finished Tasks cannot be canceled
+            lock (_lockObject) if (State == ZbTaskState.Finished) return;
+
             // TODO: implement proper cancel support
             try
             {
