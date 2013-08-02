@@ -103,11 +103,21 @@ namespace Zetbox.Client.WPF.CustomControls
         {
             var target = (FrameworkElement)sender;
 
-            //
-            // TODO: Remove old template
-            //
-
-            if (e.NewValue != null)
+            if (e.NewValue == null)
+            {
+                if (target.IsLoaded)
+                {
+                    RemoveContentAdorner(target);
+                }
+                else
+                {
+                    //
+                    // Controls not loaded don't have an adorner layer yet.
+                    //
+                    target.Loaded -= OnAdornerTargetLoaded;
+                }
+            }
+            else
             {
                 if (target.IsLoaded)
                 {
@@ -130,20 +140,37 @@ namespace Zetbox.Client.WPF.CustomControls
             ApplyContentAdorner(target);
         }
 
-        private static void ApplyContentAdorner(FrameworkElement target)
+        private static AdornerLayer GetRealAdornerLayer(FrameworkElement target)
         {
             var adornerLayer = AdornerLayer.GetAdornerLayer(target);
             if (adornerLayer == null)
             {
                 // windows do not have an adorner layer, try their first (and only) child
                 target = LogicalTreeHelper.GetChildren(target).OfType<FrameworkElement>().FirstOrDefault();
-                if (target == null) return; // no children found
+                if (target == null) return null; // no children found
                 adornerLayer = AdornerLayer.GetAdornerLayer(target);
-                if (adornerLayer == null) return; // nothing adornable found
+                if (adornerLayer == null) return null; // nothing adornable found
             }
-            var adorner = new ContentAdorner(target);
+            return adornerLayer;
+        }
 
-            adornerLayer.Add(adorner);
+        private static void ApplyContentAdorner(FrameworkElement target)
+        {
+            var adornerLayer = GetRealAdornerLayer(target);
+            if (adornerLayer == null) return;
+
+            adornerLayer.Add(new ContentAdorner(target));
+        }
+
+        private static void RemoveContentAdorner(FrameworkElement target)
+        {
+            var adornerLayer = GetRealAdornerLayer(target);
+            if (adornerLayer == null) return;
+
+            foreach (var adorner in adornerLayer.GetAdorners(target).OfType<ContentAdorner>().ToList())
+            {
+                adornerLayer.Remove(adorner);
+            }
         }
 
         protected override Visual GetVisualChild(int index)
