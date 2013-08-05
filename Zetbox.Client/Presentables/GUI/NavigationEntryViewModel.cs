@@ -208,9 +208,14 @@ namespace Zetbox.Client.Presentables.GUI
                         _children.Add(NavigationEntryViewModel.Fetch(ViewModelFactory, DataContext, this, s));
                     }
                     _childrenRO = new ReadOnlyObservableCollection<NavigationEntryViewModel>(_children);
+                    OnChildrenLoaded();
                 }
                 return _childrenRO;
             }
+        }
+
+        protected virtual void OnChildrenLoaded()
+        {
         }
 
         private ObservableCollection<CommandViewModel> _additionalCommandsRW;
