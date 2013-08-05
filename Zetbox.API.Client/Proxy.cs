@@ -414,18 +414,22 @@ namespace Zetbox.API.Client
 
                 if (retValType.IsIStreamable())
                 {
-                    var br = _readerFactory.Invoke(new BinaryReader(resultStream));
-                    result = ReceiveObjects(br, out auxObjects).Cast<IPersistenceObject>().FirstOrDefault();
+                    using (var br = _readerFactory.Invoke(new BinaryReader(resultStream)))
+                    {
+                        result = ReceiveObjects(br, out auxObjects).Cast<IPersistenceObject>().FirstOrDefault();
+                    }
                 }
                 else if (retValType.IsIEnumerable() && retValType.FindElementTypes().Any(t => t.IsIPersistenceObject()))
                 {
-                    var br = _readerFactory.Invoke(new BinaryReader(resultStream));
-                    IList lst = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(retValType.FindElementTypes().Single(t => t.IsIPersistenceObject())));
-                    foreach (object resultObj in ReceiveObjects(br, out auxObjects))
+                    using (var br = _readerFactory.Invoke(new BinaryReader(resultStream)))
                     {
-                        lst.Add(resultObj);
+                        IList lst = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(retValType.FindElementTypes().Single(t => t.IsIPersistenceObject())));
+                        foreach (object resultObj in ReceiveObjects(br, out auxObjects))
+                        {
+                            lst.Add(resultObj);
+                        }
+                        result = lst;
                     }
-                    result = lst;
                 }
                 else if (resultStream.Length > 0)
                 {

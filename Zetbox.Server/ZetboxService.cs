@@ -198,6 +198,7 @@ namespace Zetbox.Server
             HashSet<IStreamable> auxObjects = new HashSet<IStreamable>();
 
             var result = new MemoryStream();
+            // Don't Dispose sw, to keep result open.
             var sw = _writerFactory.Invoke(new BinaryWriter(result));
             foreach (IStreamable obj in lst)
             {
@@ -469,15 +470,17 @@ namespace Zetbox.Server
                         var parameter = new MemoryStream(parameterArray);
                         parameter.Seek(0, SeekOrigin.Begin);
                         List<object> parameterList = new List<object>();
-                        var parameterReader = _readerFactory.Invoke(new BinaryReader(parameter));
-                        foreach (var t in parameterTypes)
+                        using (var parameterReader = _readerFactory.Invoke(new BinaryReader(parameter)))
                         {
-                            object val;
-                            parameterReader.Read(out val,
-                                t.GetSystemType().IsIStreamable()
-                                    ? ctx.ToImplementationType(ctx.GetInterfaceType(t.GetSystemType())).Type
-                                    : t.GetSystemType());
-                            parameterList.Add(val);
+                            foreach (var t in parameterTypes)
+                            {
+                                object val;
+                                parameterReader.Read(out val,
+                                    t.GetSystemType().IsIStreamable()
+                                        ? ctx.ToImplementationType(ctx.GetInterfaceType(t.GetSystemType())).Type
+                                        : t.GetSystemType());
+                                parameterList.Add(val);
+                            }
                         }
 
                         var changedObjects = new MemoryStream(changedObjectsArray);

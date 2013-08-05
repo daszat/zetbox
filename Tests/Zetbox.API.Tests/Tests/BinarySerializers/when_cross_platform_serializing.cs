@@ -45,6 +45,13 @@ namespace Zetbox.API.Tests.BinarySerializers
             writer = writerFactory.Invoke(new BinaryWriter(stream));
         }
 
+        public override void TearDown()
+        {
+            reader.Dispose();
+            writer.Dispose();
+            base.TearDown();
+        }
+
         private void ResetStream(bool dump = false)
         {
             if (dump)

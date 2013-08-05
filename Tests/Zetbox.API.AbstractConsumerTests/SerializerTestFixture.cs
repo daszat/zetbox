@@ -54,6 +54,13 @@ namespace Zetbox.API.AbstractConsumerTests
             sr = scope.Resolve<ZetboxStreamReader.Factory>().Invoke(new BinaryReader(ms));
         }
 
+        public override void TearDown()
+        {
+            sw.Dispose();
+            sr.Dispose();
+            base.TearDown();
+        }
+
         protected void TestStream<T>(Action<T> write, Func<T> read, params T[] values)
         {
             Assert.That(values, Is.Not.Empty, "need values to test");
