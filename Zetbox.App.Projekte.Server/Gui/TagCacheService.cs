@@ -94,7 +94,7 @@ namespace Zetbox.App.Projekte.Server.Gui
                         ctx.Delete(oneTag);
 
                     var changes = ctx.SubmitChanges();
-                    Log.InfoFormat("Tag cache rebuilded, submitted {0} changes", changes);
+                    Log.InfoFormat("Tag cache rebuilt, submitted {0} changes", changes);
                 }
             }
             catch (Exception ex)
