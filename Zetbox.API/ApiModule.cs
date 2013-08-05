@@ -68,12 +68,12 @@ namespace Zetbox.API
                 .SingleInstance();
 
             builder
-                .RegisterType<ZetboxStreamReader>()
+                .RegisterType<ZetboxStreamReader.Factory>()
                 .AsSelf()
                 .InstancePerDependency();
 
             builder
-                .RegisterType<ZetboxStreamWriter>()
+                .RegisterType<ZetboxStreamWriter.Factory>()
                 .AsSelf()
                 .InstancePerDependency();
 
