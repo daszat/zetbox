@@ -145,6 +145,28 @@ namespace Zetbox.API
     {
         public delegate InterfaceType Factory(Type type);
 
+        /// <summary>
+        /// Small helper to avoid autofac accesses.
+        /// </summary>
+        /// <remarks>This is used by the proxy, where off-thread accesses may deadlock on
+        /// autofac when a query is run from within an autofac resolution on the main thread.
+        /// Also, this is a basic operation that does not profit from the Autofac lifecycle
+        /// management. Removing this from Autofac should help in reducing the overhead.</remarks>
+        public sealed class FactoryImpl
+        {
+            private readonly IInterfaceTypeChecker _typeChecker;
+            public FactoryImpl(IInterfaceTypeChecker typeChecker)
+            {
+                if (typeChecker == null) throw new ArgumentNullException("typeChecker");
+                _typeChecker = typeChecker;
+            }
+
+            public InterfaceType Invoke(Type type)
+            {
+                return Create(type, _typeChecker);
+            }
+        }
+
         private static readonly object _cacheLock = new object();
         private static Dictionary<Type, InterfaceType> _cache = new Dictionary<Type, InterfaceType>();
         private static Dictionary<InterfaceType, InterfaceType> _rootTypeCache = new Dictionary<InterfaceType, InterfaceType>();
