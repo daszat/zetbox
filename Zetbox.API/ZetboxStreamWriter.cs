@@ -30,7 +30,7 @@ namespace Zetbox.API
         /// Small helper to avoid off-thread autofac accesses.
         /// </summary>
         /// <remarks>Since the readers and writers are used in the thread pool, they may deadlock on autofac when a query is run from within an autofac resolution on the main thread.</remarks>
-        public class Factory
+        public sealed class Factory
         {
             private readonly TypeMap _map;
             public Factory(TypeMap map)
