@@ -198,7 +198,7 @@ namespace Zetbox.Server
             HashSet<IStreamable> auxObjects = new HashSet<IStreamable>();
 
             var result = new MemoryStream();
-            var sw = _writerFactory(new BinaryWriter(result));
+            var sw = _writerFactory.Invoke(new BinaryWriter(result));
             foreach (IStreamable obj in lst)
             {
                 sw.Write(true);
@@ -225,7 +225,7 @@ namespace Zetbox.Server
         private List<IPersistenceObject> ReadObjects(Stream msg, IZetboxContext ctx)
         {
             var objects = new List<IPersistenceObject>();
-            var sr = _readerFactory(new BinaryReader(msg));
+            var sr = _readerFactory.Invoke(new BinaryReader(msg));
             while (sr.ReadBoolean())
             {
                 // Deserialize
@@ -469,7 +469,7 @@ namespace Zetbox.Server
                         var parameter = new MemoryStream(parameterArray);
                         parameter.Seek(0, SeekOrigin.Begin);
                         List<object> parameterList = new List<object>();
-                        var parameterReader = _readerFactory(new BinaryReader(parameter));
+                        var parameterReader = _readerFactory.Invoke(new BinaryReader(parameter));
                         foreach (var t in parameterTypes)
                         {
                             object val;

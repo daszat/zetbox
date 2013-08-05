@@ -27,7 +27,24 @@ namespace Zetbox.API
 
     public class ZetboxStreamReader : IDisposable
     {
-        public delegate ZetboxStreamReader Factory(BinaryReader source);
+        /// <summary>
+        /// Small helper to avoid off-thread autofac accesses.
+        /// </summary>
+        /// <remarks>Since the readers and writers are used in the thread pool, they may deadlock on autofac when a query is run from within an autofac resolution on the main thread.</remarks>
+        public class Factory
+        {
+            private readonly TypeMap _map;
+            public Factory(TypeMap map)
+            {
+                if (map == null) throw new ArgumentNullException("map");
+                _map = map;
+            }
+
+            public ZetboxStreamReader Invoke(BinaryReader source)
+            {
+                return new ZetboxStreamReader(_map, source);
+            }
+        }
 
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Serialization");
 

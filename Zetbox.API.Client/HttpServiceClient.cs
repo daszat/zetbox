@@ -67,14 +67,14 @@ namespace Zetbox.API.Client
             var req = InitializeRequest(destination);
 
             using (var reqStream = req.GetRequestStream())
-            using (var reqWriter = _writerFactory(new BinaryWriter(reqStream)))
+            using (var reqWriter = _writerFactory.Invoke(new BinaryWriter(reqStream)))
             {
                 sendRequest(reqWriter);
             }
             try
             {
                 using (var response = req.GetResponse())
-                using (var input = _readerFactory(new BinaryReader(response.GetResponseStream())))
+                using (var input = _readerFactory.Invoke(new BinaryReader(response.GetResponseStream())))
                 {
                     return input.ReadByteArray();
                 }
@@ -198,7 +198,7 @@ namespace Zetbox.API.Client
             try
             {
                 using (var reqStream = req.GetRequestStream())
-                using (var reqWriter = _writerFactory(new BinaryWriter(reqStream)))
+                using (var reqWriter = _writerFactory.Invoke(new BinaryWriter(reqStream)))
                 {
                     reqWriter.Write(version);
                 }
@@ -224,7 +224,7 @@ namespace Zetbox.API.Client
 
             var req = InitializeRequest(SetBlobStreamUri);
             using (var reqStream = req.GetRequestStream())
-            using (var reqWriter = _writerFactory(new BinaryWriter(reqStream)))
+            using (var reqWriter = _writerFactory.Invoke(new BinaryWriter(reqStream)))
             using (var upload = new MemoryStream())
             {
                 reqWriter.Write(request.Version);
@@ -238,7 +238,7 @@ namespace Zetbox.API.Client
             {
                 using (var response = req.GetResponse())
                 using (var input = response.GetResponseStream())
-                using (var reader = _readerFactory(new BinaryReader(input)))
+                using (var reader = _readerFactory.Invoke(new BinaryReader(input)))
                 {
                     int id;
                     reader.Read(out id);
@@ -267,7 +267,7 @@ namespace Zetbox.API.Client
 
             var req = InitializeRequest(InvokeServerMethodUri);
             using (var reqStream = req.GetRequestStream())
-            using (var reqWriter = _writerFactory(new BinaryWriter(reqStream)))
+            using (var reqWriter = _writerFactory.Invoke(new BinaryWriter(reqStream)))
             {
                 reqWriter.Write(version);
                 reqWriter.Write(type);
@@ -282,7 +282,7 @@ namespace Zetbox.API.Client
             {
                 using (var response = req.GetResponse())
                 using (var input = response.GetResponseStream())
-                using (var reader = _readerFactory(new BinaryReader(input)))
+                using (var reader = _readerFactory.Invoke(new BinaryReader(input)))
                 {
                     reader.Read(out retChangedObjects);
                     return reader.ReadByteArray();

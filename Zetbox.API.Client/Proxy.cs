@@ -159,7 +159,7 @@ namespace Zetbox.API.Client
                 Logging.Facade.DebugFormat("GetObjects retrieved: {0:n0} bytes", bytes.Length);
 
                 IEnumerable<IDataObject> result = null;
-                using (var sr = _readerFactory(new BinaryReader(new MemoryStream(bytes))))
+                using (var sr = _readerFactory.Invoke(new BinaryReader(new MemoryStream(bytes))))
                 {
                     result = ReceiveObjects(sr, out tmpAuxObjects).Cast<IDataObject>();
                 }
@@ -189,7 +189,7 @@ namespace Zetbox.API.Client
                 });
 
                 IEnumerable<IDataObject> result = null;
-                using (var sr = _readerFactory(new BinaryReader(new MemoryStream(bytes))))
+                using (var sr = _readerFactory.Invoke(new BinaryReader(new MemoryStream(bytes))))
                 {
                     result = ReceiveObjects(sr, out tmpAuxObjects).Cast<IDataObject>();
                 }
@@ -212,7 +212,7 @@ namespace Zetbox.API.Client
                 IEnumerable<IPersistenceObject> result = null;
                 // Serialize
                 using (var ms = new MemoryStream())
-                using (var sw = _writerFactory(new BinaryWriter(ms)))
+                using (var sw = _writerFactory.Invoke(new BinaryWriter(ms)))
                 {
                     SendObjects(objects, sw);
                     byte[] bytes = null;
@@ -224,7 +224,7 @@ namespace Zetbox.API.Client
                         bytes = _service.SetObjects(ZetboxGeneratedVersionAttribute.Current, _ms, _nReq);
                     });
 
-                    using (var sr = _readerFactory(new BinaryReader(new MemoryStream(bytes))))
+                    using (var sr = _readerFactory.Invoke(new BinaryReader(new MemoryStream(bytes))))
                     {
                         // merge auxiliary objects into primary set objects result
                         List<IStreamable> auxObjects;
@@ -308,7 +308,7 @@ namespace Zetbox.API.Client
                     bytes = _service.FetchRelation(ZetboxGeneratedVersionAttribute.Current, relationId, (int)role, parentId);
                 });
                 using (MemoryStream s = new MemoryStream(bytes))
-                using (var sr = _readerFactory(new BinaryReader(s)))
+                using (var sr = _readerFactory.Invoke(new BinaryReader(s)))
                 {
                     result = ReceiveObjects(sr, out tmpAuxObjects).Cast<T>();
                 }
@@ -347,7 +347,7 @@ namespace Zetbox.API.Client
                 response = _service.SetBlobStream(msg);
             });
 
-            using (var sr = _readerFactory(new BinaryReader(response.BlobInstance)))
+            using (var sr = _readerFactory.Invoke(new BinaryReader(response.BlobInstance)))
             {
                 // ignore auxObjects for blobs, which should not have them
                 result = ReceiveObjectList(sr).Cast<Zetbox.App.Base.Blob>().Single();
@@ -366,7 +366,7 @@ namespace Zetbox.API.Client
             byte[] bytes = null;
 
             using (var parameterStream = new MemoryStream())
-            using (var parameterWriter = _writerFactory(new BinaryWriter(parameterStream)))
+            using (var parameterWriter = _writerFactory.Invoke(new BinaryWriter(parameterStream)))
             {
                 foreach (var paramVal in parameter)
                 {
@@ -374,7 +374,7 @@ namespace Zetbox.API.Client
                 }
 
                 using (var changedObjectsStream = new MemoryStream())
-                using (var sw = _writerFactory(new BinaryWriter(changedObjectsStream)))
+                using (var sw = _writerFactory.Invoke(new BinaryWriter(changedObjectsStream)))
                 {
                     SendObjects(objects, sw);
 
@@ -405,7 +405,7 @@ namespace Zetbox.API.Client
             using (var resultStream = new MemoryStream(bytes))
             {
                 using (var retChangedObjects = new MemoryStream(retChangedObjectsArray))
-                using (var br = _readerFactory(new BinaryReader(retChangedObjects)))
+                using (var br = _readerFactory.Invoke(new BinaryReader(retChangedObjects)))
                 {
                     tmpChangedObjects = ReceiveObjectList(br).Cast<IPersistenceObject>();
                 }
@@ -414,12 +414,12 @@ namespace Zetbox.API.Client
 
                 if (retValType.IsIStreamable())
                 {
-                    var br = _readerFactory(new BinaryReader(resultStream));
+                    var br = _readerFactory.Invoke(new BinaryReader(resultStream));
                     result = ReceiveObjects(br, out auxObjects).Cast<IPersistenceObject>().FirstOrDefault();
                 }
                 else if (retValType.IsIEnumerable() && retValType.FindElementTypes().Any(t => t.IsIPersistenceObject()))
                 {
-                    var br = _readerFactory(new BinaryReader(resultStream));
+                    var br = _readerFactory.Invoke(new BinaryReader(resultStream));
                     IList lst = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(retValType.FindElementTypes().Single(t => t.IsIPersistenceObject())));
                     foreach (object resultObj in ReceiveObjects(br, out auxObjects))
                     {

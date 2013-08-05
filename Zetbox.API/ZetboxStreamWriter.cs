@@ -26,8 +26,24 @@ namespace Zetbox.API
 
     public sealed class ZetboxStreamWriter : IDisposable
     {
-        public delegate ZetboxStreamWriter Factory(BinaryWriter destination);
+        /// <summary>
+        /// Small helper to avoid off-thread autofac accesses.
+        /// </summary>
+        /// <remarks>Since the readers and writers are used in the thread pool, they may deadlock on autofac when a query is run from within an autofac resolution on the main thread.</remarks>
+        public class Factory
+        {
+            private readonly TypeMap _map;
+            public Factory(TypeMap map)
+            {
+                if (map == null) throw new ArgumentNullException("map");
+                _map = map;
+            }
 
+            public ZetboxStreamWriter Invoke(BinaryWriter destination)
+            {
+                return new ZetboxStreamWriter(_map, destination);
+            }
+        }
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Serialization");
 
         private readonly TypeMap _typeMap;

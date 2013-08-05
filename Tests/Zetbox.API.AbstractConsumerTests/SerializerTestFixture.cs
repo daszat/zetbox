@@ -20,9 +20,9 @@ namespace Zetbox.API.AbstractConsumerTests
     using System.Linq;
     using System.Reflection;
     using Autofac;
+    using NUnit.Framework;
     using Zetbox.API;
     using Zetbox.API.Utils;
-    using NUnit.Framework;
 
     public abstract class SerializerTestFixture : AbstractTestFixture
     {

@@ -113,7 +113,7 @@ namespace Zetbox.Server.HttpService
                     context.Request.HttpMethod,
                     context.Request.Url,
                     username);
-                var reader = readerFactory(new BinaryReader(context.Request.InputStream));
+                var reader = readerFactory.Invoke(new BinaryReader(context.Request.InputStream));
 
                 var version = reader.ReadGuid();
                 switch (context.Request.Url.Segments.Last())
@@ -190,7 +190,7 @@ namespace Zetbox.Server.HttpService
 
                             context.Response.StatusCode = 200;
                             context.Response.ContentType = "application/octet-stream";
-                            using (var writer = writerFactory(new BinaryWriter(context.Response.OutputStream)))
+                            using (var writer = writerFactory.Invoke(new BinaryWriter(context.Response.OutputStream)))
                             using (var dataStream = new MemoryStream())
                             {
                                 writer.Write(result.ID);
@@ -226,7 +226,7 @@ namespace Zetbox.Server.HttpService
 
                             context.Response.StatusCode = 200;
                             context.Response.ContentType = "application/octet-stream";
-                            using (var writer = writerFactory(new BinaryWriter(context.Response.OutputStream)))
+                            using (var writer = writerFactory.Invoke(new BinaryWriter(context.Response.OutputStream)))
                             {
                                 writer.Write(retChangedObjects);
                                 writer.Write(result);
@@ -284,7 +284,7 @@ namespace Zetbox.Server.HttpService
         {
             context.Response.StatusCode = (int)HttpStatusCode.OK;
             context.Response.ContentType = "application/octet-stream";
-            using (var writer = writerFactory(new BinaryWriter(context.Response.OutputStream)))
+            using (var writer = writerFactory.Invoke(new BinaryWriter(context.Response.OutputStream)))
             {
                 writer.Write(result);
                 writer.Flush();
