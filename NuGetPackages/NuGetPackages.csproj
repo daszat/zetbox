@@ -92,7 +92,9 @@
     <None Include="zetboxBasic-ClientASPNET.nuspec.in">
       <SubType>Designer</SubType>
     </None>
-    <None Include="zetboxBasic-Server.nuspec.in" />
+    <None Include="zetboxBasic-Server.nuspec.in">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="zetboxBasic-Common.nuspec.in">
       <SubType>Designer</SubType>
     </None>
