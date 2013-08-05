@@ -23,6 +23,9 @@
     <file src="Server\Zetbox.API.Server.pdb" target="lib\net40" />
     <file src="Server\Zetbox.API.Server.xml" target="lib\net40" />
 
+    <file src="Server\Lucene.Net.dll" target="zetbox\Server" />
+    <file src="Server\Lucene.Net.Contrib.*.dll" target="zetbox\Server" />
+
     <file src="install-references.ps1" target="tools\install.ps1" />
   </files>
 </package>
