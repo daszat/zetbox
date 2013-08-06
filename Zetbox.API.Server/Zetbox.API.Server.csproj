@@ -140,6 +140,7 @@
     <Compile Include="Fulltext\Rebuilder.cs" />
     <Compile Include="Fulltext\SearcherManager.cs" />
     <Compile Include="Fulltext\Service.cs" />
+    <Compile Include="IResourceGenerator.cs" />
     <Compile Include="SqlErrorTranslator.cs" />
     <Compile Include="SchemaManagement\Construct.cs" />
     <Compile Include="DbTypeMapper.cs" />

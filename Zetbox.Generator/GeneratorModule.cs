@@ -23,13 +23,15 @@ namespace Zetbox.Generator
     using Zetbox.API;
     using Zetbox.API.Configuration;
     using System.ComponentModel;
+    using Zetbox.Generator.ResourceGenerator;
+    using Zetbox.API.Server;
 
     [Feature]
     [Description("Basic generator infrastructure using MS Build")]
     public sealed class GeneratorModule
         : Module
     {
-        internal static void RegisterCmdLine(ContainerBuilder builder)
+        internal static void RegisterCommon(ContainerBuilder builder)
         {
             builder
                 .RegisterCmdLineAction("generate", "generates and compiles new data classes",
@@ -44,6 +46,37 @@ namespace Zetbox.Generator
                 {
                     scope.Resolve<Compiler>().CompileCode();
                 });
+
+            builder
+                .RegisterCmdLineListAction("generate-resources:", "generates resources for the given modules or * or empty for all modules",
+                (scope, arg) =>
+                {
+                    if (arg == null || arg.Length == 0) arg = new string[] { "*" };
+                    scope.Resolve<ResourceCmdLineHandler>().Generate(arg);
+                });
+
+            builder
+                .RegisterType<ResourceCmdLineHandler>()
+                .AsSelf()
+                .InstancePerDependency();
+
+            builder
+                .RegisterType<Zetbox.Generator.ResourceGenerator.ResourceGenerator>()
+                .As<IResourceGenerator>()
+                .InstancePerDependency();
+
+            #region Register resource tasks
+            builder
+                .RegisterType<DataTypeTask>()
+                .As<IResourceGeneratorTask>()
+                .SingleInstance();
+
+            builder
+                .RegisterType<CategoryTagTask>()
+                .As<IResourceGeneratorTask>()
+                .SingleInstance();
+
+            #endregion
         }
 
         protected override void Load(ContainerBuilder builder)
@@ -60,7 +93,7 @@ namespace Zetbox.Generator
                 .As<Compiler>()
                 .SingleInstance();
 
-            GeneratorModule.RegisterCmdLine(builder);
+            GeneratorModule.RegisterCommon(builder);
         }
     }
 
@@ -83,7 +116,7 @@ namespace Zetbox.Generator
                 .As<Compiler>()
                 .SingleInstance();
 
-            GeneratorModule.RegisterCmdLine(builder);
+            GeneratorModule.RegisterCommon(builder);
         }
     }
 }
