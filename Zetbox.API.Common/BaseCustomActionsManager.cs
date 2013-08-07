@@ -71,6 +71,7 @@ namespace Zetbox.App.Extensions
 
         Dictionary<MethodKey, List<MethodInfo>> _reflectedMethods = new Dictionary<MethodKey, List<MethodInfo>>();
         Dictionary<MethodKey, bool> _attachedMethods = new Dictionary<MethodKey, bool>();
+        Dictionary<string, System.Reflection.Assembly> _assets = new Dictionary<string, System.Reflection.Assembly>();
 
         /// <summary>
         /// This provides a per-dalProvider synchronisation root to protect the initialisation
@@ -119,7 +120,7 @@ namespace Zetbox.App.Extensions
                     {
                         Log.TraceTotalMemory("Before BaseCustomActionsManager.Init()");
 
-                        ReflectMethods(ctx);
+                        ReflectMethodsAndAssets(ctx);
                         CreateInvokeInfosForDataTypes(ctx);
 
                         foreach (var key in _reflectedMethods.Where(i => !_attachedMethods.ContainsKey(i.Key)).Select(i => i.Key))
@@ -137,7 +138,7 @@ namespace Zetbox.App.Extensions
             }
         }
 
-        private void ReflectMethods(IReadOnlyZetboxContext metaCtx)
+        private void ReflectMethodsAndAssets(IReadOnlyZetboxContext metaCtx)
         {
             if (metaCtx == null) { throw new ArgumentNullException("metaCtx"); }
 
@@ -152,9 +153,9 @@ namespace Zetbox.App.Extensions
                         continue;
                     }
 
-                    System.Reflection.Assembly a;
-                    a = System.Reflection.Assembly.Load(assembly.Name);
+                    var a = System.Reflection.Assembly.Load(assembly.Name);
 
+                    // Methods
                     foreach (var t in a.GetTypes())
                     {
                         if (t.GetCustomAttributes(typeof(Implementor), false).Length != 0)
@@ -186,6 +187,12 @@ namespace Zetbox.App.Extensions
                                 }
                             }
                         }
+                    }
+
+                    // Assets
+                    foreach (AssetsFor assetAttribute in a.GetCustomAttributes(typeof(AssetsFor), false))
+                    {
+                        _assets[assetAttribute.Module] = a;
                     }
                 }
                 catch (ReflectionTypeLoadException ex)

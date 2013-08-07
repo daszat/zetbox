@@ -31508,6 +31508,13 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>Zetbox.App.Projekte.Server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78</ZetboxBase:Name>
   </ZetboxBase:Assembly>
+  <ZetboxBase:Assembly ExportGuid="a6a50ba6-1801-42f6-8a48-893bac2595bc">
+    <ZetboxBase:ChangedOn>2013-08-07T08:15:19.828553Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-08-07T08:15:19.828553Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DeploymentRestrictions>0</ZetboxBase:DeploymentRestrictions>
+    <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
+    <ZetboxBase:Name>Zetbox.Assets, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78</ZetboxBase:Name>
+  </ZetboxBase:Assembly>
   <ZetboxBase:Assembly ExportGuid="242a1ea6-e8e1-420c-824d-0d2707ece25d">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:08.964049Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>

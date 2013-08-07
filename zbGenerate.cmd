@@ -16,6 +16,9 @@ set config=%1
 bin\Debug\Zetbox.Cli.exe %configs% -fallback -generate
 IF ERRORLEVEL 1 GOTO FAIL
 
+bin\Debug\Zetbox.Cli.exe %configs% -generate-resources
+IF ERRORLEVEL 1 GOTO FAIL
+
 echo ********************************************************************************
 echo ************************************ Success ***********************************
 echo ********************************************************************************
