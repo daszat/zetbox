@@ -29,6 +29,7 @@ namespace Zetbox.App.Extensions
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
+using Zetbox.API.Common;
 
     /// <summary>
     /// A utility class implementing basic operations and caching needed by all CustomActionsManagers.
@@ -69,9 +70,9 @@ namespace Zetbox.App.Extensions
             }
         }
 
-        Dictionary<MethodKey, List<MethodInfo>> _reflectedMethods = new Dictionary<MethodKey, List<MethodInfo>>();
-        Dictionary<MethodKey, bool> _attachedMethods = new Dictionary<MethodKey, bool>();
-        Dictionary<string, System.Reflection.Assembly> _assets = new Dictionary<string, System.Reflection.Assembly>();
+        private readonly Dictionary<MethodKey, List<MethodInfo>> _reflectedMethods = new Dictionary<MethodKey, List<MethodInfo>>();
+        private readonly Dictionary<MethodKey, bool> _attachedMethods = new Dictionary<MethodKey, bool>();
+        private readonly IAssetsManager _assetsMgr;
 
         /// <summary>
         /// This provides a per-dalProvider synchronisation root to protect the initialisation
@@ -102,6 +103,8 @@ namespace Zetbox.App.Extensions
             _container = container;
             ExtraSuffix = extraSuffix;
             ImplementationAssemblyName = this.GetType().Assembly.FullName;
+
+            container.TryResolve<IAssetsManager>(out _assetsMgr);
         }
 
         /// <summary>
@@ -190,9 +193,12 @@ namespace Zetbox.App.Extensions
                     }
 
                     // Assets
-                    foreach (AssetsFor assetAttribute in a.GetCustomAttributes(typeof(AssetsFor), false))
+                    if (_assetsMgr != null)
                     {
-                        _assets[assetAttribute.Module] = a;
+                        foreach (AssetsFor assetAttribute in a.GetCustomAttributes(typeof(AssetsFor), false))
+                        {
+                            _assetsMgr.AddAssembly(assetAttribute.Module, a);
+                        }
                     }
                 }
                 catch (ReflectionTypeLoadException ex)

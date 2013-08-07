@@ -44,12 +44,13 @@ namespace Zetbox.Client.ASPNET
         #region ViewModelDependencies
         private class ViewModelDependencies : IViewModelDependencies
         {
-            public ViewModelDependencies(IViewModelFactory f, IFrozenContext frozenCtx, IIdentityResolver idResolver, IIconConverter iconConverter)
+            public ViewModelDependencies(IViewModelFactory f, IFrozenContext frozenCtx, IIdentityResolver idResolver, IIconConverter iconConverter, IAssetsManager assetMgr)
             {
                 Factory = f;
                 FrozenContext = frozenCtx;
                 IdentityResolver = idResolver;
                 IconConverter = iconConverter;
+                Assets = assetMgr;
             }
 
             #region IViewModelDependencies Members
@@ -72,14 +73,19 @@ namespace Zetbox.Client.ASPNET
                 private set;
             }
 
-            #endregion
-
-
             public IIconConverter IconConverter
             {
                 get;
                 private set;
             }
+
+            public IAssetsManager Assets
+            {
+                get;
+                private set;
+            }
+
+            #endregion
         }
         #endregion
 
@@ -95,7 +101,8 @@ namespace Zetbox.Client.ASPNET
                     c.Resolve<IViewModelFactory>(),
                     c.Resolve<IFrozenContext>(),
                     c.Resolve<IIdentityResolver>(),
-                    c.Resolve<IIconConverter>()))
+                    c.Resolve<IIconConverter>(),
+                    c.Resolve<IAssetsManager>()))
                 .As<IViewModelDependencies>();
 
             moduleBuilder

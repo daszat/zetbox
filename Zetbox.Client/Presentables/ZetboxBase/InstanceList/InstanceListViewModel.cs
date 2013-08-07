@@ -523,7 +523,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             get
             {
-                return _name ?? string.Format(InstanceListViewModelResources.Name, _type.Name);
+                return _name ?? string.Format(InstanceListViewModelResources.Name, DataTypeViewModel.Name);
             }
         }
 

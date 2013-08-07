@@ -50,6 +50,11 @@ namespace Zetbox.Client.Presentables
         /// IIconConverter instance
         /// </summary>
         IIconConverter IconConverter { get; }
+
+        /// <summary>
+        /// IAssetManager instance
+        /// </summary>
+        IAssetsManager Assets { get; }
     }
 
     [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
@@ -102,6 +107,8 @@ namespace Zetbox.Client.Presentables
         /// The IconConverter instance
         /// </summary>
         public IIconConverter IconConverter { get { return _dependencies.IconConverter; } }
+
+        public IAssetsManager Assets { get { return _dependencies.Assets; } }
 
         /// <summary>
         /// A <see cref="IZetboxContext"/> to access the current user's data
@@ -574,6 +581,11 @@ namespace Zetbox.Client.Presentables
         }
 
         public IIconConverter IconConverter
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public IAssetsManager Assets
         {
             get { throw new NotImplementedException(); }
         }

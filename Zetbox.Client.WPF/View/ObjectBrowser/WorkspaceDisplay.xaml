@@ -75,7 +75,7 @@
                             <Image Source="{Binding Icon, Converter={StaticResource ImageConverter}}"
                                    Width="14"
                                    Height="14" />
-                            <TextBlock Text="{Binding DataTypeViewModel.PropertyModelsByName[Name].Value}"
+                            <TextBlock Text="{Binding DataTypeViewModel.Name}"
                                        Margin="3,0,0,0" />
                         </StackPanel>
                     </DataTemplate>

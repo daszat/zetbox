@@ -40,6 +40,17 @@ namespace Zetbox.Client.Presentables
         }
         private DataType _dataType;
 
+        public override string Name
+        {
+            get
+            {
+                if (_dataType.Module != null)
+                    return Assets.GetString(_dataType.Module, "ZetboxBase.DataTypes", _dataType.Module.Namespace + "." + _dataType.Name, _dataType.Name);
+                else 
+                    return _dataType.Name;
+            }
+        }
+
         protected override List<PropertyGroupViewModel> CreatePropertyGroups()
         {
             var result = base.CreatePropertyGroups();

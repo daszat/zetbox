@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ZetboxBase\CategoryTags.resx" />
+    <EmbeddedResource Include="ZetboxBase\DataTypes.de.resx" />
     <EmbeddedResource Include="ZetboxBase\DataTypes.resx" />
     <EmbeddedResource Include="ZetboxBase\Enumerations\Zetbox.App.Base.AccessRights.resx" />
     <EmbeddedResource Include="ZetboxBase\Enumerations\Zetbox.App.Base.ContainmentSpecification.resx" />
