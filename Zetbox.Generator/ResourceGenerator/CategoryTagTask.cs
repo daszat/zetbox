@@ -24,21 +24,23 @@ namespace Zetbox.Generator.ResourceGenerator
 
     internal class CategoryTagTask : IResourceGeneratorTask
     {
-        public void Generate(IResourceGenerator generator, IZetboxServerContext ctx, App.Base.Module module)
+        public void Generate(IResourceGenerator generator, IZetboxServerContext ctx, IEnumerable<Zetbox.App.Base.Module> modules)
         {
+            var moduleNames = modules.Select(m => m.Name).ToArray();
             var splitArray = ",".ToCharArray();
+
             var propTags = ctx.GetQuery<Property>()
-                            .Where(p => p.Module.Name == module.Name)
                             .Where(p => p.CategoryTags != null)
                             .ToList()
+                            .Where(p => moduleNames.Contains(p.Module.Name))
                             .SelectMany(p => p.CategoryTags.Split(splitArray, StringSplitOptions.RemoveEmptyEntries))
                             .Select(t => t.Trim())
                             .Distinct()
                             .ToList();
             var methodTags = ctx.GetQuery<Method>()
-                            .Where(m => m.Module.Name == module.Name)
                             .Where(m => m.CategoryTags != null)
                             .ToList()
+                            .Where(m => moduleNames.Contains(m.Module.Name))
                             .SelectMany(m => m.CategoryTags.Split(splitArray, StringSplitOptions.RemoveEmptyEntries))
                             .Select(t => t.Trim())
                             .Distinct()

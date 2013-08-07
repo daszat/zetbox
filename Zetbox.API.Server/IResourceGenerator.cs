@@ -41,6 +41,6 @@ namespace Zetbox.API.Server
 
     public interface IResourceGeneratorTask
     {
-        void Generate(IResourceGenerator generator, IZetboxServerContext ctx, Zetbox.App.Base.Module module);
+        void Generate(IResourceGenerator generator, IZetboxServerContext ctx, IEnumerable<Zetbox.App.Base.Module> modules);
     }
 }

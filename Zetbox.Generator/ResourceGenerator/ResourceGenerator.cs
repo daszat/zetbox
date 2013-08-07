@@ -49,20 +49,17 @@ namespace Zetbox.Generator.ResourceGenerator
             var allData = arg.Contains("*");
             var modules = GetModules(ctx, arg);
 
-            foreach (var module in modules)
-            {
-                var basePath = System.IO.Path.Combine(config.Server.CodeGenOutputPath, "Assets", module.Name + ".Assets");
+                var basePath = System.IO.Path.Combine(config.Server.CodeGenOutputPath, "Assets");
                 System.IO.Directory.CreateDirectory(basePath);
 
                 var gen = _container.Resolve<ResourceGeneratorFactory>().Invoke(basePath);
                 foreach (var task in _tasks)
                 {
-                    task.Generate(gen, ctx, module);
+                    task.Generate(gen, ctx, modules);
                 }
-            }
         }
 
-        private static List<Zetbox.App.Base.Module> GetModules(IReadOnlyZetboxContext ctx, string[] moduleNames)
+        private static Zetbox.App.Base.Module[] GetModules(IReadOnlyZetboxContext ctx, string[] moduleNames)
         {
             var moduleList = new List<Zetbox.App.Base.Module>();
             if (moduleNames.Contains("*"))
@@ -82,7 +79,7 @@ namespace Zetbox.Generator.ResourceGenerator
                     moduleList.Add(module);
                 }
             }
-            return moduleList.OrderBy(m => m.Name).ToList();
+            return moduleList.OrderBy(m => m.Name).ToArray();
         }
     }
 
