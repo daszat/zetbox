@@ -418,16 +418,17 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             if (Listener != null) Listener.Refresh();
         }
 
-        private static void DoDelete(IZetboxContext ctx, IDataObject obj)
+        private void DoDelete(IZetboxContext ctx, IDataObject obj)
         {
             var deactivatable = obj as IDeactivatable;
-            if (deactivatable != null)
+            if (deactivatable == null
+                || (ctx.IsElevatedMode && ViewModelFactory.GetDecisionFromUser(CommonCommandsResources.DeleteDataObjectCommand_ElevatedDeleteDeactivated, CommonCommandsResources.DeleteDataObjectCommand_ElevatedDeleteDeactivated_Title)))
             {
-                deactivatable.IsDeactivated = true;
+                ctx.Delete(obj);
             }
             else
             {
-                ctx.Delete(obj);
+                deactivatable.IsDeactivated = true;
             }
         }
 

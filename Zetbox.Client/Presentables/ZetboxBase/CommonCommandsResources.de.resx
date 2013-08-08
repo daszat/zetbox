@@ -135,6 +135,13 @@
   <data name="DeleteDataObjectCommand_Confirm_Title" xml:space="preserve">
     <value>Löschen von Datensätzen</value>
   </data>
+  <data name="DeleteDataObjectCommand_ElevatedDeleteDeactivated" xml:space="preserve">
+    <value>Wollen Sie den Datensatz komplett löschen (Ok) oder nur deaktivieren (Abbrechen?</value>
+  </data>
+  <data name="DeleteDataObjectCommand_ElevatedDeleteDeactivated_Title" xml:space="preserve">
+    <value>Komplett löschen?</value>
+    <comment> </comment>
+  </data>
   <data name="DeleteDataObjectCommand_Name" xml:space="preserve">
     <value>Löschen</value>
   </data>

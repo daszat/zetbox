@@ -135,6 +135,13 @@
   <data name="DeleteDataObjectCommand_Confirm_Title" xml:space="preserve">
     <value>Deleting items</value>
   </data>
+  <data name="DeleteDataObjectCommand_ElevatedDeleteDeactivated" xml:space="preserve">
+    <value>Do you want to delete (Ok) or deactivate (Cancel) this object?</value>
+  </data>
+  <data name="DeleteDataObjectCommand_ElevatedDeleteDeactivated_Title" xml:space="preserve">
+    <value>Delete completely?</value>
+    <comment> </comment>
+  </data>
   <data name="DeleteDataObjectCommand_Name" xml:space="preserve">
     <value>Delete</value>
   </data>
