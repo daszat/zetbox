@@ -24,13 +24,13 @@ namespace Zetbox.Client.Models
     using System.Linq.Dynamic;
     using System.Linq.Expressions;
     using System.Text;
+    using System.Text.RegularExpressions;
     using Zetbox.API;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
     using Zetbox.App.GUI;
     using Zetbox.Client.Presentables.ValueViewModels;
     using ViewModelDescriptors = Zetbox.NamedObjects.Gui.ViewModelDescriptors;
-    using System.Text.RegularExpressions;
 
     public class FilterEvaluator
     {
@@ -806,6 +806,84 @@ namespace Zetbox.Client.Models
         protected override string GetPredicate()
         {
             return string.Format("{0} >= @0 AND {0} <= @1", ValueSource.Expression);
+        }
+
+        public DateTimeValueModel From
+        {
+            get
+            {
+                return (DateTimeValueModel)FilterArguments[0].Value;
+            }
+        }
+
+        public DateTimeValueModel To
+        {
+            get
+            {
+                return (DateTimeValueModel)FilterArguments[1].Value;
+            }
+        }
+    }
+
+    public class DateRangeIntersectFilterModel : FilterModel
+    {
+        public static DateRangeIntersectFilterModel Create(IFrozenContext frozenCtx, string label, IFilterValueSource fromValueSource, IFilterValueSource toValueSource, ControlKind requestedKind, bool setYearDefault, bool setQuaterDefault, bool setMonthDefault)
+        {
+            if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
+
+            var mdl = new DateRangeIntersectFilterModel();
+            mdl.Label = label;
+            mdl.ValueSource = fromValueSource;
+            mdl.ToValueSource = toValueSource;
+            mdl.ViewModelType = ViewModelDescriptors.Zetbox_Client_Presentables_FilterViewModels_DateRangeFilterViewModel.Find(frozenCtx);
+            mdl.RequestedKind = requestedKind;
+
+            var fromMdl = new DateTimeValueModel(FilterModelsResources.From, "", true, false, DateTimeStyles.Date);
+            var toMdl = new DateTimeValueModel(FilterModelsResources.To, "", true, false, DateTimeStyles.Date);
+
+            mdl.FilterArguments.Add(new FilterArgumentConfig(
+                fromMdl,
+                /*cfg.ArgumentViewModel ?? */ ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableDateTimePropertyViewModel.Find(frozenCtx)));
+            mdl.FilterArguments.Add(new FilterArgumentConfig(
+                toMdl,
+                /*cfg.ArgumentViewModel ?? */ ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableDateTimePropertyViewModel.Find(frozenCtx)));
+
+            if (setYearDefault)
+            {
+                // Defaults to this month
+                fromMdl.Value = DateTime.Today.FirstYearDay();
+                toMdl.Value = DateTime.Today.LastYearDay();
+            }
+            else if (setQuaterDefault)
+            {
+                // Defaults to this month
+                fromMdl.Value = DateTime.Today.FirstQuaterDay();
+                toMdl.Value = DateTime.Today.LastQuaterDay();
+            }
+            else if (setMonthDefault)
+            {
+                // Defaults to this month
+                fromMdl.Value = DateTime.Today.FirstMonthDay();
+                toMdl.Value = DateTime.Today.LastMonthDay();
+            }
+
+            return mdl;
+        }
+
+        protected DateRangeIntersectFilterModel()
+        {
+            base.RefreshOnFilterChanged = true;
+        }
+
+        protected override string GetPredicate()
+        {
+            return string.Format("({0} >= @0 AND {0} < @1) OR ({1} >= @0 AND {1} < @1) OR ({0} < @0 AND {1} >= @1)", ValueSource.Expression, ToValueSource.Expression);
+        }
+
+        public IFilterValueSource ToValueSource
+        {
+            get;
+            set;
         }
 
         public DateTimeValueModel From
