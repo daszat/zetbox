@@ -31,6 +31,8 @@ namespace Zetbox.Client.Presentables
     {
         public new delegate DataTypeViewModel Factory(IZetboxContext dataCtx, ViewModel parent, DataType dt);
 
+        private readonly DataType _dataType;
+
         public DataTypeViewModel(
             IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
             DataType dt)
@@ -38,7 +40,6 @@ namespace Zetbox.Client.Presentables
         {
             _dataType = dt;
         }
-        private DataType _dataType;
 
         public override string Name
         {
@@ -46,8 +47,19 @@ namespace Zetbox.Client.Presentables
             {
                 if (_dataType.Module != null)
                     return Assets.GetString(_dataType.Module, "ZetboxBase.DataTypes", _dataType.Module.Namespace + "." + _dataType.Name, _dataType.Name);
-                else 
+                else
                     return _dataType.Name;
+            }
+        }
+
+        public string Description
+        {
+            get
+            {
+                if (_dataType.Module != null)
+                    return Assets.GetString(_dataType.Module, "ZetboxBase.DataTypes", _dataType.Module.Namespace + "." + _dataType.Name + "_description", _dataType.Description);
+                else
+                    return _dataType.Description;
             }
         }
 
@@ -85,7 +97,11 @@ namespace Zetbox.Client.Presentables
             {
                 case "Name":
                 case "Module":
+                    OnPropertyChanged("Name");
                     OnPropertyChanged("DescribedType");
+                    break;
+                case "Description":
+                    OnPropertyChanged("Description");
                     break;
             }
         }

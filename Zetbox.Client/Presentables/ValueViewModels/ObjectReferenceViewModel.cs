@@ -179,6 +179,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get { return Value == null ? "(null)" : "Reference to " + Value.Name; }
         }
+
         #endregion
 
         #region Commands

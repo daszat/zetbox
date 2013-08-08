@@ -66,7 +66,6 @@ namespace Zetbox.API.Common
             }
         }
 
-
         public void AddAssembly(string moduleName, System.Reflection.Assembly a)
         {
             _assetsAssemblies[moduleName] = a;

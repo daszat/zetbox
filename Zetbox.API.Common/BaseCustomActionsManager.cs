@@ -26,10 +26,10 @@ namespace Zetbox.App.Extensions
     using Autofac;
     using Autofac.Core.Registration;
     using Zetbox.API;
+    using Zetbox.API.Common;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
-using Zetbox.API.Common;
 
     /// <summary>
     /// A utility class implementing basic operations and caching needed by all CustomActionsManagers.
