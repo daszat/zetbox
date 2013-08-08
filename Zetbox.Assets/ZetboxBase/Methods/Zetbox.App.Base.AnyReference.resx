@@ -117,66 +117,45 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="GetObject" xml:space="preserve">
+  <data name="GetObject_label" xml:space="preserve">
     <value>GetObject</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="GetObject_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
   <data name="GetObject_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetObject(retVal)" xml:space="preserve">
+  <data name="GetObject(retVal)_label" xml:space="preserve">
     <value>retVal</value>
-  </data>
-  <data name="GetObject(retVal)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetObject(retVal)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetObject(ctx)" xml:space="preserve">
+  <data name="GetObject(ctx)_label" xml:space="preserve">
     <value>ctx</value>
-  </data>
-  <data name="GetObject(ctx)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetObject(ctx)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="HasObject" xml:space="preserve">
+  <data name="HasObject_label" xml:space="preserve">
     <value>HasObject</value>
-  </data>
-  <data name="HasObject_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="HasObject_description" xml:space="preserve">
     <value>Returns true if the any reference is set to an instance of an object. It's not guaranteed that the object still exists</value>
   </data>
-  <data name="HasObject(retVal)" xml:space="preserve">
+  <data name="HasObject(retVal)_label" xml:space="preserve">
     <value>retVal</value>
-  </data>
-  <data name="HasObject(retVal)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="HasObject(retVal)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="SetObject" xml:space="preserve">
+  <data name="SetObject_label" xml:space="preserve">
     <value>SetObject</value>
-  </data>
-  <data name="SetObject_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="SetObject_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="SetObject(newObj)" xml:space="preserve">
+  <data name="SetObject(newObj)_label" xml:space="preserve">
     <value>newObj</value>
-  </data>
-  <data name="SetObject(newObj)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="SetObject(newObj)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />

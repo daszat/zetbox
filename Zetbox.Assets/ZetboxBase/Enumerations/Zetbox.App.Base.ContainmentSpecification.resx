@@ -117,30 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Independent" xml:space="preserve">
+  <data name="Independent_label" xml:space="preserve">
     <value>Independent</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Independent_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Independent_description" xml:space="preserve">
     <value>This relation does not specify a containment.</value>
   </data>
-  <data name="AContainsB" xml:space="preserve">
+  <data name="AContainsB_label" xml:space="preserve">
     <value>AContainsB</value>
-  </data>
-  <data name="AContainsB_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="AContainsB_description" xml:space="preserve">
     <value>B is an integral part of A.</value>
   </data>
-  <data name="BContainsA" xml:space="preserve">
+  <data name="BContainsA_label" xml:space="preserve">
     <value>BContainsA</value>
-  </data>
-  <data name="BContainsA_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="BContainsA_description" xml:space="preserve">
     <value>A is an integral part of B.</value>

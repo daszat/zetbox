@@ -117,39 +117,27 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Blob" xml:space="preserve">
+  <data name="Blob_label" xml:space="preserve">
     <value>Blob</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Blob_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
   <data name="Blob_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="ExportGuid" xml:space="preserve">
+  <data name="ExportGuid_label" xml:space="preserve">
     <value>ExportGuid</value>
-  </data>
-  <data name="ExportGuid_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ExportGuid_description" xml:space="preserve">
     <value>Export Guid</value>
   </data>
-  <data name="IconFile" xml:space="preserve">
+  <data name="IconFile_label" xml:space="preserve">
     <value>IconFile</value>
-  </data>
-  <data name="IconFile_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="IconFile_description" xml:space="preserve">
     <value>Filename of the Icon</value>
   </data>
-  <data name="Module" xml:space="preserve">
+  <data name="Module_label" xml:space="preserve">
     <value>Module</value>
-  </data>
-  <data name="Module_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Module_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />

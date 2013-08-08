@@ -117,21 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="GetCodeTemplate" xml:space="preserve">
+  <data name="GetCodeTemplate_label" xml:space="preserve">
     <value>GetCodeTemplate</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="GetCodeTemplate_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
   <data name="GetCodeTemplate_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetCodeTemplate(ReturnValue)" xml:space="preserve">
+  <data name="GetCodeTemplate(ReturnValue)_label" xml:space="preserve">
     <value>ReturnValue</value>
-  </data>
-  <data name="GetCodeTemplate(ReturnValue)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetCodeTemplate(ReturnValue)_description" xml:space="preserve">
     <value>Returns</value>

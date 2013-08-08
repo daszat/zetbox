@@ -117,75 +117,51 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="GetErrorText" xml:space="preserve">
+  <data name="GetErrorText_label" xml:space="preserve">
     <value>GetErrorText</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="GetErrorText_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetErrorText_description" xml:space="preserve">
     <value />
   </data>
-  <data name="GetErrorText(result)" xml:space="preserve">
+  <data name="GetErrorText(result)_label" xml:space="preserve">
     <value>result</value>
   </data>
-  <data name="GetErrorText(result)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="GetErrorText(result)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetErrorText(constrainedObject)" xml:space="preserve">
+  <data name="GetErrorText(constrainedObject)_label" xml:space="preserve">
     <value>constrainedObject</value>
-  </data>
-  <data name="GetErrorText(constrainedObject)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetErrorText(constrainedObject)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetErrorText(constrainedValue)" xml:space="preserve">
+  <data name="GetErrorText(constrainedValue)_label" xml:space="preserve">
     <value>constrainedValue</value>
-  </data>
-  <data name="GetErrorText(constrainedValue)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetErrorText(constrainedValue)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="IsValid" xml:space="preserve">
+  <data name="IsValid_label" xml:space="preserve">
     <value>IsValid</value>
-  </data>
-  <data name="IsValid_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="IsValid_description" xml:space="preserve">
     <value />
   </data>
-  <data name="IsValid(return)" xml:space="preserve">
+  <data name="IsValid(return)_label" xml:space="preserve">
     <value>return</value>
-  </data>
-  <data name="IsValid(return)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="IsValid(return)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="IsValid(constrainedObject)" xml:space="preserve">
+  <data name="IsValid(constrainedObject)_label" xml:space="preserve">
     <value>constrainedObject</value>
-  </data>
-  <data name="IsValid(constrainedObject)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="IsValid(constrainedObject)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="IsValid(constrainedValue)" xml:space="preserve">
+  <data name="IsValid(constrainedValue)_label" xml:space="preserve">
     <value>constrainedValue</value>
-  </data>
-  <data name="IsValid(constrainedValue)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="IsValid(constrainedValue)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />

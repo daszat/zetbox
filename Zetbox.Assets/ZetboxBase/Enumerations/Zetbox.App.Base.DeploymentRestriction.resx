@@ -117,30 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ServerOnly" xml:space="preserve">
+  <data name="ServerOnly_label" xml:space="preserve">
     <value>ServerOnly</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ServerOnly_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ServerOnly_description" xml:space="preserve">
     <value>Item is deployed only on the server</value>
   </data>
-  <data name="ClientOnly" xml:space="preserve">
+  <data name="ClientOnly_label" xml:space="preserve">
     <value>ClientOnly</value>
-  </data>
-  <data name="ClientOnly_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ClientOnly_description" xml:space="preserve">
     <value>Item is deployed only on the client</value>
   </data>
-  <data name="None" xml:space="preserve">
+  <data name="None_label" xml:space="preserve">
     <value>None</value>
-  </data>
-  <data name="None_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="None_description" xml:space="preserve">
     <value>No deployment restriction. Item is deployed on the server and client</value>

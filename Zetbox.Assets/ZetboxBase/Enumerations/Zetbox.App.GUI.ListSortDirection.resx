@@ -117,21 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Ascending" xml:space="preserve">
+  <data name="Ascending_label" xml:space="preserve">
     <value>Ascending</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Ascending_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
   <data name="Ascending_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Descending" xml:space="preserve">
+  <data name="Descending_label" xml:space="preserve">
     <value>Descending</value>
-  </data>
-  <data name="Descending_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Descending_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />

@@ -117,21 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="NEnds" xml:space="preserve">
+  <data name="NEnds_label" xml:space="preserve">
     <value>NEnds</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="NEnds_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
   <data name="NEnds_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="SomeInt" xml:space="preserve">
+  <data name="SomeInt_label" xml:space="preserve">
     <value>SomeInt</value>
-  </data>
-  <data name="SomeInt_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="SomeInt_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />

@@ -117,75 +117,51 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CreateMethod" xml:space="preserve">
+  <data name="CreateMethod_label" xml:space="preserve">
     <value>CreateMethod</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="CreateMethod_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="CreateMethod_description" xml:space="preserve">
     <value>Creates a new Method for this class</value>
   </data>
-  <data name="CreateMethod(result)" xml:space="preserve">
+  <data name="CreateMethod(result)_label" xml:space="preserve">
     <value>result</value>
-  </data>
-  <data name="CreateMethod(result)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="CreateMethod(result)_description" xml:space="preserve">
     <value>the created Method</value>
   </data>
-  <data name="CreateRelation" xml:space="preserve">
+  <data name="CreateRelation_label" xml:space="preserve">
     <value>CreateRelation</value>
-  </data>
-  <data name="CreateRelation_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="CreateRelation_description" xml:space="preserve">
     <value>Implements the "Create new Relation" use case</value>
   </data>
-  <data name="CreateRelation(result)" xml:space="preserve">
+  <data name="CreateRelation(result)_label" xml:space="preserve">
     <value>result</value>
-  </data>
-  <data name="CreateRelation(result)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="CreateRelation(result)_description" xml:space="preserve">
     <value>The newly created Relation</value>
   </data>
-  <data name="GetInheritedMethods" xml:space="preserve">
+  <data name="GetInheritedMethods_label" xml:space="preserve">
     <value>GetInheritedMethods</value>
-  </data>
-  <data name="GetInheritedMethods_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetInheritedMethods_description" xml:space="preserve">
     <value />
   </data>
-  <data name="GetInheritedMethods(Result)" xml:space="preserve">
+  <data name="GetInheritedMethods(Result)_label" xml:space="preserve">
     <value>Result</value>
   </data>
-  <data name="GetInheritedMethods(Result)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="GetInheritedMethods(Result)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetName" xml:space="preserve">
+  <data name="GetName_label" xml:space="preserve">
     <value>GetName</value>
-  </data>
-  <data name="GetName_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetName_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetName(name)" xml:space="preserve">
+  <data name="GetName(name)_label" xml:space="preserve">
     <value>name</value>
-  </data>
-  <data name="GetName(name)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetName(name)_description" xml:space="preserve">
     <value>the requested name</value>

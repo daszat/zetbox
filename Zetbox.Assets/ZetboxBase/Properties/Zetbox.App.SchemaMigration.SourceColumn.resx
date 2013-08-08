@@ -117,36 +117,24 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ChangedBy" xml:space="preserve">
+  <data name="ChangedBy_label" xml:space="preserve">
     <value>ChangedBy</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ChangedBy_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ChangedBy_description" xml:space="preserve">
     <value>Identity which changed this object</value>
   </data>
-  <data name="ChangedOn" xml:space="preserve">
+  <data name="ChangedOn_label" xml:space="preserve">
     <value>ChangedOn</value>
-  </data>
-  <data name="ChangedOn_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ChangedOn_description" xml:space="preserve">
     <value>Date and time where this object was changed</value>
   </data>
-  <data name="Comment" xml:space="preserve">
+  <data name="Comment_label" xml:space="preserve">
     <value>Comment</value>
   </data>
-  <data name="Comment_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Comment_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
-  </data>
-  <data name="CompareNulls" xml:space="preserve">
-    <value>CompareNulls</value>
   </data>
   <data name="CompareNulls_label" xml:space="preserve">
     <value>Compare Nulls</value>
@@ -154,128 +142,86 @@
   <data name="CompareNulls_description" xml:space="preserve">
     <value>In some cases, when joining across source tables, nulls should be compared as equals, instead of not. This is especially true, when "null" is used as a domain value.</value>
   </data>
-  <data name="CreatedBy" xml:space="preserve">
+  <data name="CreatedBy_label" xml:space="preserve">
     <value>CreatedBy</value>
-  </data>
-  <data name="CreatedBy_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="CreatedBy_description" xml:space="preserve">
     <value>Identity which created this object</value>
   </data>
-  <data name="CreatedOn" xml:space="preserve">
+  <data name="CreatedOn_label" xml:space="preserve">
     <value>CreatedOn</value>
-  </data>
-  <data name="CreatedOn_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="CreatedOn_description" xml:space="preserve">
     <value>Date and time where this object was created</value>
   </data>
-  <data name="DbType" xml:space="preserve">
+  <data name="DbType_label" xml:space="preserve">
     <value>DbType</value>
-  </data>
-  <data name="DbType_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="DbType_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Description" xml:space="preserve">
+  <data name="Description_label" xml:space="preserve">
     <value>Description</value>
-  </data>
-  <data name="Description_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Description_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="DestinationProperty" xml:space="preserve">
+  <data name="DestinationProperty_label" xml:space="preserve">
     <value>DestinationProperty</value>
-  </data>
-  <data name="DestinationProperty_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="DestinationProperty_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="EnumEntries" xml:space="preserve">
+  <data name="EnumEntries_label" xml:space="preserve">
     <value>EnumEntries</value>
-  </data>
-  <data name="EnumEntries_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="EnumEntries_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="ExportGuid" xml:space="preserve">
+  <data name="ExportGuid_label" xml:space="preserve">
     <value>ExportGuid</value>
-  </data>
-  <data name="ExportGuid_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ExportGuid_description" xml:space="preserve">
     <value>Export Guid</value>
   </data>
-  <data name="IsNullable" xml:space="preserve">
+  <data name="IsNullable_label" xml:space="preserve">
     <value>IsNullable</value>
-  </data>
-  <data name="IsNullable_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="IsNullable_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Name" xml:space="preserve">
+  <data name="Name_label" xml:space="preserve">
     <value>Name</value>
-  </data>
-  <data name="Name_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Name_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="References" xml:space="preserve">
+  <data name="References_label" xml:space="preserve">
     <value>References</value>
-  </data>
-  <data name="References_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="References_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Referers" xml:space="preserve">
+  <data name="Referers_label" xml:space="preserve">
     <value>Referers</value>
-  </data>
-  <data name="Referers_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Referers_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Size" xml:space="preserve">
+  <data name="Size_label" xml:space="preserve">
     <value>Size</value>
-  </data>
-  <data name="Size_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Size_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="SourceTable" xml:space="preserve">
+  <data name="SourceTable_label" xml:space="preserve">
     <value>SourceTable</value>
-  </data>
-  <data name="SourceTable_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="SourceTable_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Status" xml:space="preserve">
+  <data name="Status_label" xml:space="preserve">
     <value>Status</value>
-  </data>
-  <data name="Status_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Status_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />

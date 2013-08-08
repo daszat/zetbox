@@ -117,18 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="PerformSync" xml:space="preserve">
-    <value>PerformSync</value>
-  </data>
   <data name="PerformSync_label" xml:space="preserve">
     <value>Perform sync</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="PerformSync_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
-  </data>
-  <data name="ScheduleSyncNow" xml:space="preserve">
-    <value>ScheduleSyncNow</value>
   </data>
   <data name="ScheduleSyncNow_label" xml:space="preserve">
     <value>Schedule sync now</value>

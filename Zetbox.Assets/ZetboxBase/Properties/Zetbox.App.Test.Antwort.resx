@@ -117,39 +117,27 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Frage" xml:space="preserve">
+  <data name="Frage_label" xml:space="preserve">
     <value>Frage</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Frage_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
   <data name="Frage_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Fragebogen" xml:space="preserve">
+  <data name="Fragebogen_label" xml:space="preserve">
     <value>Fragebogen</value>
-  </data>
-  <data name="Fragebogen_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Fragebogen_description" xml:space="preserve">
     <value>Workaround for Case 1376</value>
   </data>
-  <data name="FragenNummer" xml:space="preserve">
+  <data name="FragenNummer_label" xml:space="preserve">
     <value>FragenNummer</value>
-  </data>
-  <data name="FragenNummer_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="FragenNummer_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GegebeneAntwort" xml:space="preserve">
+  <data name="GegebeneAntwort_label" xml:space="preserve">
     <value>GegebeneAntwort</value>
-  </data>
-  <data name="GegebeneAntwort_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GegebeneAntwort_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />

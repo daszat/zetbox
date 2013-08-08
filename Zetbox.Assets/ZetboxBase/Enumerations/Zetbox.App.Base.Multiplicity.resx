@@ -117,30 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ZeroOrOne" xml:space="preserve">
+  <data name="ZeroOrOne_label" xml:space="preserve">
     <value>ZeroOrOne</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ZeroOrOne_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ZeroOrOne_description" xml:space="preserve">
     <value>Optional Element (zero or one)</value>
   </data>
-  <data name="One" xml:space="preserve">
+  <data name="One_label" xml:space="preserve">
     <value>One</value>
-  </data>
-  <data name="One_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="One_description" xml:space="preserve">
     <value>Required Element (exactly one)</value>
   </data>
-  <data name="ZeroOrMore" xml:space="preserve">
+  <data name="ZeroOrMore_label" xml:space="preserve">
     <value>ZeroOrMore</value>
-  </data>
-  <data name="ZeroOrMore_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ZeroOrMore_description" xml:space="preserve">
     <value>Optional List Element (zero or more)</value>

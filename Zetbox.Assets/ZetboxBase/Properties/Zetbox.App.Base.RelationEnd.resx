@@ -117,120 +117,80 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AParent" xml:space="preserve">
+  <data name="AParent_label" xml:space="preserve">
     <value>AParent</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="AParent_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="AParent_description" xml:space="preserve">
     <value>The Relation using this RelationEnd as A</value>
   </data>
-  <data name="BParent" xml:space="preserve">
+  <data name="BParent_label" xml:space="preserve">
     <value>BParent</value>
-  </data>
-  <data name="BParent_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="BParent_description" xml:space="preserve">
     <value>The Relation using this RelationEnd as B</value>
   </data>
-  <data name="ChangedBy" xml:space="preserve">
+  <data name="ChangedBy_label" xml:space="preserve">
     <value>ChangedBy</value>
-  </data>
-  <data name="ChangedBy_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ChangedBy_description" xml:space="preserve">
     <value>Identity which changed this object</value>
   </data>
-  <data name="ChangedOn" xml:space="preserve">
+  <data name="ChangedOn_label" xml:space="preserve">
     <value>ChangedOn</value>
-  </data>
-  <data name="ChangedOn_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ChangedOn_description" xml:space="preserve">
     <value>Date and time where this object was changed</value>
   </data>
-  <data name="CreatedBy" xml:space="preserve">
+  <data name="CreatedBy_label" xml:space="preserve">
     <value>CreatedBy</value>
-  </data>
-  <data name="CreatedBy_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="CreatedBy_description" xml:space="preserve">
     <value>Identity which created this object</value>
   </data>
-  <data name="CreatedOn" xml:space="preserve">
+  <data name="CreatedOn_label" xml:space="preserve">
     <value>CreatedOn</value>
-  </data>
-  <data name="CreatedOn_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="CreatedOn_description" xml:space="preserve">
     <value>Date and time where this object was created</value>
   </data>
-  <data name="ExportGuid" xml:space="preserve">
+  <data name="ExportGuid_label" xml:space="preserve">
     <value>ExportGuid</value>
-  </data>
-  <data name="ExportGuid_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ExportGuid_description" xml:space="preserve">
     <value>Export Guid</value>
   </data>
-  <data name="HasPersistentOrder" xml:space="preserve">
+  <data name="HasPersistentOrder_label" xml:space="preserve">
     <value>HasPersistentOrder</value>
-  </data>
-  <data name="HasPersistentOrder_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="HasPersistentOrder_description" xml:space="preserve">
     <value>Is true, if this RelationEnd persists the order of its elements</value>
   </data>
-  <data name="Multiplicity" xml:space="preserve">
+  <data name="Multiplicity_label" xml:space="preserve">
     <value>Multiplicity</value>
-  </data>
-  <data name="Multiplicity_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Multiplicity_description" xml:space="preserve">
     <value>Specifies how many instances may occur on this end of the relation.</value>
   </data>
-  <data name="Navigator" xml:space="preserve">
+  <data name="Navigator_label" xml:space="preserve">
     <value>Navigator</value>
-  </data>
-  <data name="Navigator_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Navigator_description" xml:space="preserve">
     <value>The ORP to navigate FROM this end of the relation. MAY be null.</value>
   </data>
-  <data name="Parent" xml:space="preserve">
+  <data name="Parent_label" xml:space="preserve">
     <value>Parent</value>
-  </data>
-  <data name="Parent_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Parent_description" xml:space="preserve">
     <value>the parent relation</value>
   </data>
-  <data name="RoleName" xml:space="preserve">
+  <data name="RoleName_label" xml:space="preserve">
     <value>RoleName</value>
-  </data>
-  <data name="RoleName_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="RoleName_description" xml:space="preserve">
     <value>This end&amp;apos;s role name in the relation</value>
   </data>
-  <data name="Type" xml:space="preserve">
+  <data name="Type_label" xml:space="preserve">
     <value>Type</value>
-  </data>
-  <data name="Type_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Type_description" xml:space="preserve">
     <value>Specifies which type this End of the relation has. MUST NOT be null.</value>

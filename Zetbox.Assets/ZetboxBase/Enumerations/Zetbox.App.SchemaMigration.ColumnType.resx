@@ -117,246 +117,165 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Guid" xml:space="preserve">
+  <data name="Guid_label" xml:space="preserve">
     <value>Guid</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Guid_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
   <data name="Guid_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Double" xml:space="preserve">
+  <data name="Double_label" xml:space="preserve">
     <value>Double</value>
-  </data>
-  <data name="Double_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Double_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Int16" xml:space="preserve">
+  <data name="Int16_label" xml:space="preserve">
     <value>Int16</value>
-  </data>
-  <data name="Int16_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Int16_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Int64" xml:space="preserve">
+  <data name="Int64_label" xml:space="preserve">
     <value>Int64</value>
-  </data>
-  <data name="Int64_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Int64_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Int32" xml:space="preserve">
+  <data name="Int32_label" xml:space="preserve">
     <value>Int32</value>
-  </data>
-  <data name="Int32_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Int32_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Decimal" xml:space="preserve">
+  <data name="Decimal_label" xml:space="preserve">
     <value>Decimal</value>
-  </data>
-  <data name="Decimal_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Decimal_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="DateTimeOffset" xml:space="preserve">
+  <data name="DateTimeOffset_label" xml:space="preserve">
     <value>DateTimeOffset</value>
-  </data>
-  <data name="DateTimeOffset_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="DateTimeOffset_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Object" xml:space="preserve">
+  <data name="Object_label" xml:space="preserve">
     <value>Object</value>
-  </data>
-  <data name="Object_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Object_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="UInt32" xml:space="preserve">
+  <data name="UInt32_label" xml:space="preserve">
     <value>UInt32</value>
-  </data>
-  <data name="UInt32_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="UInt32_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="UInt16" xml:space="preserve">
+  <data name="UInt16_label" xml:space="preserve">
     <value>UInt16</value>
-  </data>
-  <data name="UInt16_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="UInt16_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="UInt64" xml:space="preserve">
+  <data name="UInt64_label" xml:space="preserve">
     <value>UInt64</value>
-  </data>
-  <data name="UInt64_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="UInt64_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Xml" xml:space="preserve">
+  <data name="Xml_label" xml:space="preserve">
     <value>Xml</value>
-  </data>
-  <data name="Xml_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Xml_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="VarNumeric" xml:space="preserve">
+  <data name="VarNumeric_label" xml:space="preserve">
     <value>VarNumeric</value>
-  </data>
-  <data name="VarNumeric_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="VarNumeric_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Single" xml:space="preserve">
+  <data name="Single_label" xml:space="preserve">
     <value>Single</value>
-  </data>
-  <data name="Single_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Single_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="SByte" xml:space="preserve">
+  <data name="SByte_label" xml:space="preserve">
     <value>SByte</value>
-  </data>
-  <data name="SByte_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="SByte_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="String" xml:space="preserve">
+  <data name="String_label" xml:space="preserve">
     <value>String</value>
-  </data>
-  <data name="String_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="String_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Time" xml:space="preserve">
+  <data name="Time_label" xml:space="preserve">
     <value>Time</value>
-  </data>
-  <data name="Time_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Time_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="StringFixedLength" xml:space="preserve">
+  <data name="StringFixedLength_label" xml:space="preserve">
     <value>StringFixedLength</value>
-  </data>
-  <data name="StringFixedLength_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="StringFixedLength_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Binary" xml:space="preserve">
+  <data name="Binary_label" xml:space="preserve">
     <value>Binary</value>
-  </data>
-  <data name="Binary_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Binary_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Boolean" xml:space="preserve">
+  <data name="Boolean_label" xml:space="preserve">
     <value>Boolean</value>
-  </data>
-  <data name="Boolean_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Boolean_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="AnsiStringFixedLength" xml:space="preserve">
+  <data name="AnsiStringFixedLength_label" xml:space="preserve">
     <value>AnsiStringFixedLength</value>
-  </data>
-  <data name="AnsiStringFixedLength_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="AnsiStringFixedLength_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="AnsiString" xml:space="preserve">
+  <data name="AnsiString_label" xml:space="preserve">
     <value>AnsiString</value>
-  </data>
-  <data name="AnsiString_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="AnsiString_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="DateTime" xml:space="preserve">
+  <data name="DateTime_label" xml:space="preserve">
     <value>DateTime</value>
-  </data>
-  <data name="DateTime_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="DateTime_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="DateTime2" xml:space="preserve">
+  <data name="DateTime2_label" xml:space="preserve">
     <value>DateTime2</value>
-  </data>
-  <data name="DateTime2_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="DateTime2_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Date" xml:space="preserve">
+  <data name="Date_label" xml:space="preserve">
     <value>Date</value>
-  </data>
-  <data name="Date_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Date_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Byte" xml:space="preserve">
+  <data name="Byte_label" xml:space="preserve">
     <value>Byte</value>
-  </data>
-  <data name="Byte_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Byte_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Currency" xml:space="preserve">
+  <data name="Currency_label" xml:space="preserve">
     <value>Currency</value>
-  </data>
-  <data name="Currency_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Currency_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />

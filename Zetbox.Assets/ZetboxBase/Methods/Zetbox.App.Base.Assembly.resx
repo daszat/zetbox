@@ -117,21 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="RegenerateTypeRefs" xml:space="preserve">
+  <data name="RegenerateTypeRefs_label" xml:space="preserve">
     <value>RegenerateTypeRefs</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="RegenerateTypeRefs_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="RegenerateTypeRefs_description" xml:space="preserve">
     <value>Regenerates the stored list of TypeRefs from the loaded assembly</value>
   </data>
-  <data name="RegenerateTypeRefs(workspaceOpened)" xml:space="preserve">
+  <data name="RegenerateTypeRefs(workspaceOpened)_label" xml:space="preserve">
     <value>workspaceOpened</value>
-  </data>
-  <data name="RegenerateTypeRefs(workspaceOpened)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="RegenerateTypeRefs(workspaceOpened)_description" xml:space="preserve">
     <value>True if a Workspace was opened for further user input</value>

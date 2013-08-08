@@ -117,22 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CreateMappingReport" xml:space="preserve">
+  <data name="CreateMappingReport_label" xml:space="preserve">
     <value>CreateMappingReport</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="CreateMappingReport_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="CreateMappingReport_description" xml:space="preserve">
     <value>Creates a mapping report</value>
   </data>
-  <data name="UpdateFromSourceSchema" xml:space="preserve">
+  <data name="UpdateFromSourceSchema_label" xml:space="preserve">
     <value>UpdateFromSourceSchema</value>
   </data>
-  <data name="UpdateFromSourceSchema_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="UpdateFromSourceSchema_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>

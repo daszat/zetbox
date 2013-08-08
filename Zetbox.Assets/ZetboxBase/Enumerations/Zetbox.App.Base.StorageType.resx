@@ -117,39 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Replicate" xml:space="preserve">
+  <data name="Replicate_label" xml:space="preserve">
     <value>Replicate</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Replicate_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Replicate_description" xml:space="preserve">
     <value>The relation information is stored on both sides of the Relation</value>
   </data>
-  <data name="MergeIntoA" xml:space="preserve">
+  <data name="MergeIntoA_label" xml:space="preserve">
     <value>MergeIntoA</value>
-  </data>
-  <data name="MergeIntoA_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="MergeIntoA_description" xml:space="preserve">
     <value>The relation information is stored with the A-side ObjectClass</value>
   </data>
-  <data name="Separate" xml:space="preserve">
+  <data name="Separate_label" xml:space="preserve">
     <value>Separate</value>
-  </data>
-  <data name="Separate_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Separate_description" xml:space="preserve">
     <value>The relation information is stored in a separate entity</value>
   </data>
-  <data name="MergeIntoB" xml:space="preserve">
+  <data name="MergeIntoB_label" xml:space="preserve">
     <value>MergeIntoB</value>
-  </data>
-  <data name="MergeIntoB_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="MergeIntoB_description" xml:space="preserve">
     <value>The relation information is stored with the B-side ObjectClass</value>

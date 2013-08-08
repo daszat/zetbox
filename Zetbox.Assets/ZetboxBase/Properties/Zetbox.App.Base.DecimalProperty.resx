@@ -117,21 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Precision" xml:space="preserve">
+  <data name="Precision_label" xml:space="preserve">
     <value>Precision</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Precision_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Precision_description" xml:space="preserve">
     <value>The maximum total number of decimal digits that can be stored, both to the left and to the right of the decimal point.</value>
   </data>
-  <data name="Scale" xml:space="preserve">
+  <data name="Scale_label" xml:space="preserve">
     <value>Scale</value>
-  </data>
-  <data name="Scale_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Scale_description" xml:space="preserve">
     <value>The maximum number of decimal digits that can be stored to the right of the decimal point.</value>

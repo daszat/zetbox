@@ -117,39 +117,27 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Nullable" xml:space="preserve">
+  <data name="Nullable_label" xml:space="preserve">
     <value>Nullable</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Nullable_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
   <data name="Nullable_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="NullableWithDefault" xml:space="preserve">
+  <data name="NullableWithDefault_label" xml:space="preserve">
     <value>NullableWithDefault</value>
-  </data>
-  <data name="NullableWithDefault_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="NullableWithDefault_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Standard" xml:space="preserve">
+  <data name="Standard_label" xml:space="preserve">
     <value>Standard</value>
-  </data>
-  <data name="Standard_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Standard_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="StandardWithDefault" xml:space="preserve">
+  <data name="StandardWithDefault_label" xml:space="preserve">
     <value>StandardWithDefault</value>
-  </data>
-  <data name="StandardWithDefault_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="StandardWithDefault_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />

@@ -117,30 +117,21 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Constrained" xml:space="preserve">
+  <data name="Constrained_label" xml:space="preserve">
     <value>Constrained</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Constrained_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
   <data name="Constrained_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="ExportGuid" xml:space="preserve">
+  <data name="ExportGuid_label" xml:space="preserve">
     <value>ExportGuid</value>
-  </data>
-  <data name="ExportGuid_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ExportGuid_description" xml:space="preserve">
     <value>Export Guid</value>
   </data>
-  <data name="Reason" xml:space="preserve">
+  <data name="Reason_label" xml:space="preserve">
     <value>Reason</value>
-  </data>
-  <data name="Reason_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Reason_description" xml:space="preserve">
     <value>The reason of this constraint</value>

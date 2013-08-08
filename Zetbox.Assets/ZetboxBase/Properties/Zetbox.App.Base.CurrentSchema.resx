@@ -117,21 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Schema" xml:space="preserve">
+  <data name="Schema_label" xml:space="preserve">
     <value>Schema</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Schema_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Schema_description" xml:space="preserve">
     <value>XML descriptor of the current schema</value>
   </data>
-  <data name="Version" xml:space="preserve">
+  <data name="Version_label" xml:space="preserve">
     <value>Version</value>
-  </data>
-  <data name="Version_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Version_description" xml:space="preserve">
     <value>Version number of this schema</value>

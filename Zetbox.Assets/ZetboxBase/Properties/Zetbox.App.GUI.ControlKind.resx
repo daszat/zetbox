@@ -117,48 +117,33 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ChildControlKinds" xml:space="preserve">
+  <data name="ChildControlKinds_label" xml:space="preserve">
     <value>ChildControlKinds</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ChildControlKinds_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
   <data name="ChildControlKinds_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="ExportGuid" xml:space="preserve">
+  <data name="ExportGuid_label" xml:space="preserve">
     <value>ExportGuid</value>
-  </data>
-  <data name="ExportGuid_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ExportGuid_description" xml:space="preserve">
     <value>Export Guid</value>
   </data>
-  <data name="Module" xml:space="preserve">
+  <data name="Module_label" xml:space="preserve">
     <value>Module</value>
-  </data>
-  <data name="Module_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Module_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Name" xml:space="preserve">
+  <data name="Name_label" xml:space="preserve">
     <value>Name</value>
-  </data>
-  <data name="Name_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Name_description" xml:space="preserve">
     <value>Name of this ControlKind</value>
   </data>
-  <data name="Parent" xml:space="preserve">
+  <data name="Parent_label" xml:space="preserve">
     <value>Parent</value>
-  </data>
-  <data name="Parent_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Parent_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />

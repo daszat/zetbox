@@ -117,111 +117,75 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="A" xml:space="preserve">
+  <data name="A_label" xml:space="preserve">
     <value>A</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="A_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="A_description" xml:space="preserve">
     <value>The A-side of this Relation.</value>
   </data>
-  <data name="B" xml:space="preserve">
+  <data name="B_label" xml:space="preserve">
     <value>B</value>
-  </data>
-  <data name="B_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="B_description" xml:space="preserve">
     <value>The B-side of this Relation.</value>
   </data>
-  <data name="ChangedBy" xml:space="preserve">
+  <data name="ChangedBy_label" xml:space="preserve">
     <value>ChangedBy</value>
-  </data>
-  <data name="ChangedBy_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ChangedBy_description" xml:space="preserve">
     <value>Identity which changed this object</value>
   </data>
-  <data name="ChangedOn" xml:space="preserve">
+  <data name="ChangedOn_label" xml:space="preserve">
     <value>ChangedOn</value>
-  </data>
-  <data name="ChangedOn_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ChangedOn_description" xml:space="preserve">
     <value>Date and time where this object was changed</value>
   </data>
-  <data name="Containment" xml:space="preserve">
+  <data name="Containment_label" xml:space="preserve">
     <value>Containment</value>
-  </data>
-  <data name="Containment_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Containment_description" xml:space="preserve">
     <value>The ContainmentSpecification of this Relation.</value>
   </data>
-  <data name="CreatedBy" xml:space="preserve">
+  <data name="CreatedBy_label" xml:space="preserve">
     <value>CreatedBy</value>
-  </data>
-  <data name="CreatedBy_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="CreatedBy_description" xml:space="preserve">
     <value>Identity which created this object</value>
   </data>
-  <data name="CreatedOn" xml:space="preserve">
+  <data name="CreatedOn_label" xml:space="preserve">
     <value>CreatedOn</value>
-  </data>
-  <data name="CreatedOn_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="CreatedOn_description" xml:space="preserve">
     <value>Date and time where this object was created</value>
   </data>
-  <data name="Description" xml:space="preserve">
+  <data name="Description_label" xml:space="preserve">
     <value>Description</value>
-  </data>
-  <data name="Description_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Description_description" xml:space="preserve">
     <value>Description of this Relation</value>
   </data>
-  <data name="ExportGuid" xml:space="preserve">
+  <data name="ExportGuid_label" xml:space="preserve">
     <value>ExportGuid</value>
-  </data>
-  <data name="ExportGuid_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ExportGuid_description" xml:space="preserve">
     <value>Export Guid</value>
   </data>
-  <data name="Module" xml:space="preserve">
+  <data name="Module_label" xml:space="preserve">
     <value>Module</value>
   </data>
-  <data name="Module_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Module_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Storage" xml:space="preserve">
+  <data name="Storage_label" xml:space="preserve">
     <value>Storage</value>
-  </data>
-  <data name="Storage_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Storage_description" xml:space="preserve">
     <value>Storagetype for 1:1 Relations. Must be null for non 1:1 Relations.</value>
   </data>
-  <data name="Verb" xml:space="preserve">
+  <data name="Verb_label" xml:space="preserve">
     <value>Verb</value>
-  </data>
-  <data name="Verb_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Verb_description" xml:space="preserve">
     <value>Verb of this Relation</value>

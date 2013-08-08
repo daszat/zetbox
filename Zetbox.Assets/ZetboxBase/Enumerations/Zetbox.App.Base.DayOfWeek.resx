@@ -117,66 +117,45 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Sunday" xml:space="preserve">
+  <data name="Sunday_label" xml:space="preserve">
     <value>Sunday</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Sunday_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
   <data name="Sunday_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Monday" xml:space="preserve">
+  <data name="Monday_label" xml:space="preserve">
     <value>Monday</value>
-  </data>
-  <data name="Monday_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Monday_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Tuesday" xml:space="preserve">
+  <data name="Tuesday_label" xml:space="preserve">
     <value>Tuesday</value>
-  </data>
-  <data name="Tuesday_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Tuesday_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Wednesday" xml:space="preserve">
+  <data name="Wednesday_label" xml:space="preserve">
     <value>Wednesday</value>
-  </data>
-  <data name="Wednesday_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Wednesday_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Thursday" xml:space="preserve">
+  <data name="Thursday_label" xml:space="preserve">
     <value>Thursday</value>
-  </data>
-  <data name="Thursday_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Thursday_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Friday" xml:space="preserve">
+  <data name="Friday_label" xml:space="preserve">
     <value>Friday</value>
-  </data>
-  <data name="Friday_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Friday_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Saturday" xml:space="preserve">
+  <data name="Saturday_label" xml:space="preserve">
     <value>Saturday</value>
-  </data>
-  <data name="Saturday_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Saturday_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />

@@ -117,36 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CategoryTags" xml:space="preserve">
+  <data name="CategoryTags_label" xml:space="preserve">
     <value>CategoryTags</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="CategoryTags_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="CategoryTags_description" xml:space="preserve">
     <value>A space separated list of category names containing this Property</value>
   </data>
-  <data name="ChangedBy" xml:space="preserve">
+  <data name="ChangedBy_label" xml:space="preserve">
     <value>ChangedBy</value>
-  </data>
-  <data name="ChangedBy_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ChangedBy_description" xml:space="preserve">
     <value>Identity which changed this object</value>
   </data>
-  <data name="ChangedOn" xml:space="preserve">
+  <data name="ChangedOn_label" xml:space="preserve">
     <value>ChangedOn</value>
-  </data>
-  <data name="ChangedOn_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ChangedOn_description" xml:space="preserve">
     <value>Date and time where this object was changed</value>
-  </data>
-  <data name="CodeTemplate" xml:space="preserve">
-    <value>CodeTemplate</value>
   </data>
   <data name="CodeTemplate_label" xml:space="preserve">
     <value>Code template</value>
@@ -154,53 +141,35 @@
   <data name="CodeTemplate_description" xml:space="preserve">
     <value>Provides a code template for a calculated property</value>
   </data>
-  <data name="Constraints" xml:space="preserve">
+  <data name="Constraints_label" xml:space="preserve">
     <value>Constraints</value>
-  </data>
-  <data name="Constraints_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Constraints_description" xml:space="preserve">
     <value>The list of constraints applying to this Property</value>
   </data>
-  <data name="CreatedBy" xml:space="preserve">
+  <data name="CreatedBy_label" xml:space="preserve">
     <value>CreatedBy</value>
-  </data>
-  <data name="CreatedBy_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="CreatedBy_description" xml:space="preserve">
     <value>Identity which created this object</value>
   </data>
-  <data name="CreatedOn" xml:space="preserve">
+  <data name="CreatedOn_label" xml:space="preserve">
     <value>CreatedOn</value>
-  </data>
-  <data name="CreatedOn_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="CreatedOn_description" xml:space="preserve">
     <value>Date and time where this object was created</value>
   </data>
-  <data name="DefaultValue" xml:space="preserve">
+  <data name="DefaultValue_label" xml:space="preserve">
     <value>DefaultValue</value>
-  </data>
-  <data name="DefaultValue_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="DefaultValue_description" xml:space="preserve">
     <value>Property can have a default value</value>
   </data>
-  <data name="Description" xml:space="preserve">
+  <data name="Description_label" xml:space="preserve">
     <value>Description</value>
-  </data>
-  <data name="Description_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Description_description" xml:space="preserve">
     <value>Description of this Property</value>
-  </data>
-  <data name="DisableExport" xml:space="preserve">
-    <value>DisableExport</value>
   </data>
   <data name="DisableExport_label" xml:space="preserve">
     <value>Disable export</value>
@@ -208,71 +177,48 @@
   <data name="DisableExport_description" xml:space="preserve">
     <value>Disables the export. If not set, export is enabled</value>
   </data>
-  <data name="ExportGuid" xml:space="preserve">
+  <data name="ExportGuid_label" xml:space="preserve">
     <value>ExportGuid</value>
-  </data>
-  <data name="ExportGuid_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ExportGuid_description" xml:space="preserve">
     <value>Export Guid</value>
   </data>
-  <data name="FilterConfiguration" xml:space="preserve">
+  <data name="FilterConfiguration_label" xml:space="preserve">
     <value>FilterConfiguration</value>
   </data>
-  <data name="FilterConfiguration_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="FilterConfiguration_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Label" xml:space="preserve">
+  <data name="Label_label" xml:space="preserve">
     <value>Label</value>
-  </data>
-  <data name="Label_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Label_description" xml:space="preserve">
     <value>Label is displayed to User in UI</value>
   </data>
-  <data name="Module" xml:space="preserve">
+  <data name="Module_label" xml:space="preserve">
     <value>Module</value>
-  </data>
-  <data name="Module_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Module_description" xml:space="preserve">
     <value>Zugehörig zum Modul</value>
   </data>
-  <data name="Name" xml:space="preserve">
+  <data name="Name_label" xml:space="preserve">
     <value>Name</value>
-  </data>
-  <data name="Name_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Name_description" xml:space="preserve">
     <value />
   </data>
-  <data name="ObjectClass" xml:space="preserve">
+  <data name="ObjectClass_label" xml:space="preserve">
     <value>ObjectClass</value>
-  </data>
-  <data name="ObjectClass_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ObjectClass_description" xml:space="preserve">
     <value />
   </data>
-  <data name="RequestedKind" xml:space="preserve">
+  <data name="RequestedKind_label" xml:space="preserve">
     <value>RequestedKind</value>
-  </data>
-  <data name="RequestedKind_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="RequestedKind_description" xml:space="preserve">
     <value>Optional requested ControlKind</value>
-  </data>
-  <data name="RequestedWidth" xml:space="preserve">
-    <value>RequestedWidth</value>
   </data>
   <data name="RequestedWidth_label" xml:space="preserve">
     <value>Requested width</value>
@@ -280,11 +226,8 @@
   <data name="RequestedWidth_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="ValueModelDescriptor" xml:space="preserve">
+  <data name="ValueModelDescriptor_label" xml:space="preserve">
     <value>ValueModelDescriptor</value>
-  </data>
-  <data name="ValueModelDescriptor_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ValueModelDescriptor_description" xml:space="preserve">
     <value>The ViewModel to use for values of this Property</value>

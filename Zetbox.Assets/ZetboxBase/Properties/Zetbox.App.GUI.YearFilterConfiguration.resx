@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="IsCurrentYearDefault" xml:space="preserve">
-    <value>IsCurrentYearDefault</value>
-  </data>
   <data name="IsCurrentYearDefault_label" xml:space="preserve">
     <value>Is current year default</value>
   </data>

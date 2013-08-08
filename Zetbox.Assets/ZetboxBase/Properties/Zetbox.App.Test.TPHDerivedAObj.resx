@@ -117,18 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AInt" xml:space="preserve">
-    <value>AInt</value>
-  </data>
   <data name="AInt_label" xml:space="preserve">
     <value>A Integer</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="AInt_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
-  </data>
-  <data name="AString" xml:space="preserve">
-    <value>AString</value>
   </data>
   <data name="AString_label" xml:space="preserve">
     <value>A String</value>

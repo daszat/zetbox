@@ -117,27 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AccessControlList" xml:space="preserve">
+  <data name="AccessControlList_label" xml:space="preserve">
     <value>AccessControlList</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="AccessControlList_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
   <data name="AccessControlList_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="BaseObjectClass" xml:space="preserve">
+  <data name="BaseObjectClass_label" xml:space="preserve">
     <value>BaseObjectClass</value>
-  </data>
-  <data name="BaseObjectClass_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="BaseObjectClass_description" xml:space="preserve">
     <value>Pointer auf die Basisklasse</value>
-  </data>
-  <data name="CodeTemplate" xml:space="preserve">
-    <value>CodeTemplate</value>
   </data>
   <data name="CodeTemplate_label" xml:space="preserve">
     <value>Code template</value>
@@ -145,62 +136,41 @@
   <data name="CodeTemplate_description" xml:space="preserve">
     <value>Provides a code template for default methods</value>
   </data>
-  <data name="DefaultViewModelDescriptor" xml:space="preserve">
+  <data name="DefaultViewModelDescriptor_label" xml:space="preserve">
     <value>DefaultViewModelDescriptor</value>
-  </data>
-  <data name="DefaultViewModelDescriptor_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="DefaultViewModelDescriptor_description" xml:space="preserve">
     <value>The default ViewModel to use for this ObjectClass</value>
   </data>
-  <data name="FilterConfigurations" xml:space="preserve">
+  <data name="FilterConfigurations_label" xml:space="preserve">
     <value>FilterConfigurations</value>
-  </data>
-  <data name="FilterConfigurations_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="FilterConfigurations_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="IsAbstract" xml:space="preserve">
+  <data name="IsAbstract_label" xml:space="preserve">
     <value>IsAbstract</value>
-  </data>
-  <data name="IsAbstract_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="IsAbstract_description" xml:space="preserve">
     <value>Class is abstract</value>
   </data>
-  <data name="IsFrozenObject" xml:space="preserve">
+  <data name="IsFrozenObject_label" xml:space="preserve">
     <value>IsFrozenObject</value>
-  </data>
-  <data name="IsFrozenObject_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="IsFrozenObject_description" xml:space="preserve">
     <value>if true then all Instances appear in FozenContext.</value>
   </data>
-  <data name="IsSimpleObject" xml:space="preserve">
+  <data name="IsSimpleObject_label" xml:space="preserve">
     <value>IsSimpleObject</value>
-  </data>
-  <data name="IsSimpleObject_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="IsSimpleObject_description" xml:space="preserve">
     <value>Setting this to true marks the instances of this class as &amp;quot;simple.&amp;quot; At first this will only mean that they'll be displayed inline.</value>
   </data>
-  <data name="SubClasses" xml:space="preserve">
+  <data name="SubClasses_label" xml:space="preserve">
     <value>SubClasses</value>
-  </data>
-  <data name="SubClasses_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="SubClasses_description" xml:space="preserve">
     <value>Liste der vererbten Klassen</value>
-  </data>
-  <data name="TableMapping" xml:space="preserve">
-    <value>TableMapping</value>
   </data>
   <data name="TableMapping_label" xml:space="preserve">
     <value>Table mapping</value>
@@ -208,11 +178,8 @@
   <data name="TableMapping_description" xml:space="preserve">
     <value>Kind of table mapping. Only valid on base classes. Default is TPT.</value>
   </data>
-  <data name="TableName" xml:space="preserve">
+  <data name="TableName_label" xml:space="preserve">
     <value>TableName</value>
-  </data>
-  <data name="TableName_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="TableName_description" xml:space="preserve">
     <value>Tabellenname in der Datenbank</value>

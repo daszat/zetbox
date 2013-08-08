@@ -117,201 +117,135 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="GetCurrent" xml:space="preserve">
+  <data name="GetCurrent_label" xml:space="preserve">
     <value>GetCurrent</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="GetCurrent_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
   <data name="GetCurrent_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetCurrent(retval)" xml:space="preserve">
+  <data name="GetCurrent(retval)_label" xml:space="preserve">
     <value>retval</value>
-  </data>
-  <data name="GetCurrent(retval)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetCurrent(retval)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetCurrent(start)" xml:space="preserve">
+  <data name="GetCurrent(start)_label" xml:space="preserve">
     <value>start</value>
-  </data>
-  <data name="GetCurrent(start)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetCurrent(start)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetCurrent" xml:space="preserve">
+  <data name="GetCurrent_label" xml:space="preserve">
     <value>GetCurrent</value>
   </data>
-  <data name="GetCurrent_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
   <data name="GetCurrent_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetCurrent(retval)" xml:space="preserve">
+  <data name="GetCurrent(retval)_label" xml:space="preserve">
     <value>retval</value>
-  </data>
-  <data name="GetCurrent(retval)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetCurrent(retval)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetCurrent(start)" xml:space="preserve">
+  <data name="GetCurrent(start)_label" xml:space="preserve">
     <value>start</value>
-  </data>
-  <data name="GetCurrent(start)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetCurrent(start)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetCurrent(dt)" xml:space="preserve">
+  <data name="GetCurrent(dt)_label" xml:space="preserve">
     <value>dt</value>
-  </data>
-  <data name="GetCurrent(dt)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetCurrent(dt)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetNext" xml:space="preserve">
+  <data name="GetNext_label" xml:space="preserve">
     <value>GetNext</value>
-  </data>
-  <data name="GetNext_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetNext_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetNext(retval)" xml:space="preserve">
+  <data name="GetNext(retval)_label" xml:space="preserve">
     <value>retval</value>
-  </data>
-  <data name="GetNext(retval)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetNext(retval)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetNext(start)" xml:space="preserve">
+  <data name="GetNext(start)_label" xml:space="preserve">
     <value>start</value>
-  </data>
-  <data name="GetNext(start)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetNext(start)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetNext(dt)" xml:space="preserve">
+  <data name="GetNext(dt)_label" xml:space="preserve">
     <value>dt</value>
-  </data>
-  <data name="GetNext(dt)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetNext(dt)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetNext" xml:space="preserve">
+  <data name="GetNext_label" xml:space="preserve">
     <value>GetNext</value>
-  </data>
-  <data name="GetNext_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetNext_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetNext(retval)" xml:space="preserve">
+  <data name="GetNext(retval)_label" xml:space="preserve">
     <value>retval</value>
-  </data>
-  <data name="GetNext(retval)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetNext(retval)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetNext(start)" xml:space="preserve">
+  <data name="GetNext(start)_label" xml:space="preserve">
     <value>start</value>
-  </data>
-  <data name="GetNext(start)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetNext(start)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetRelative" xml:space="preserve">
+  <data name="GetRelative_label" xml:space="preserve">
     <value>GetRelative</value>
-  </data>
-  <data name="GetRelative_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetRelative_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetRelative(retVal)" xml:space="preserve">
+  <data name="GetRelative(retVal)_label" xml:space="preserve">
     <value>retVal</value>
-  </data>
-  <data name="GetRelative(retVal)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetRelative(retVal)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetRelative(dt)" xml:space="preserve">
+  <data name="GetRelative(dt)_label" xml:space="preserve">
     <value>dt</value>
-  </data>
-  <data name="GetRelative(dt)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetRelative(dt)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetWithinInterval" xml:space="preserve">
+  <data name="GetWithinInterval_label" xml:space="preserve">
     <value>GetWithinInterval</value>
-  </data>
-  <data name="GetWithinInterval_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetWithinInterval_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetWithinInterval(retVal)" xml:space="preserve">
+  <data name="GetWithinInterval(retVal)_label" xml:space="preserve">
     <value>retVal</value>
-  </data>
-  <data name="GetWithinInterval(retVal)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetWithinInterval(retVal)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetWithinInterval(start)" xml:space="preserve">
+  <data name="GetWithinInterval(start)_label" xml:space="preserve">
     <value>start</value>
-  </data>
-  <data name="GetWithinInterval(start)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetWithinInterval(start)_description" xml:space="preserve">
     <value>Start of the recurrence</value>
   </data>
-  <data name="GetWithinInterval(from)" xml:space="preserve">
+  <data name="GetWithinInterval(from)_label" xml:space="preserve">
     <value>from</value>
-  </data>
-  <data name="GetWithinInterval(from)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetWithinInterval(from)_description" xml:space="preserve">
     <value>Start of the interval</value>
   </data>
-  <data name="GetWithinInterval(until)" xml:space="preserve">
+  <data name="GetWithinInterval(until)_label" xml:space="preserve">
     <value>until</value>
-  </data>
-  <data name="GetWithinInterval(until)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetWithinInterval(until)_description" xml:space="preserve">
     <value>End of the interval</value>

@@ -117,48 +117,32 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Children" xml:space="preserve">
+  <data name="Children_label" xml:space="preserve">
     <value>Children</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Children_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Children_description" xml:space="preserve">
     <value>if this is a container, here are the visually contained/controlled children of this Visual</value>
   </data>
-  <data name="ContextMenu" xml:space="preserve">
+  <data name="ContextMenu_label" xml:space="preserve">
     <value>ContextMenu</value>
-  </data>
-  <data name="ContextMenu_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ContextMenu_description" xml:space="preserve">
     <value>The context menu for this Visual</value>
   </data>
-  <data name="Description" xml:space="preserve">
+  <data name="Description_label" xml:space="preserve">
     <value>Description</value>
-  </data>
-  <data name="Description_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Description_description" xml:space="preserve">
     <value>A short description of the utility of this visual</value>
   </data>
-  <data name="Method" xml:space="preserve">
+  <data name="Method_label" xml:space="preserve">
     <value>Method</value>
-  </data>
-  <data name="Method_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Method_description" xml:space="preserve">
     <value>The Method whose return value shoud be displayed</value>
   </data>
-  <data name="Property" xml:space="preserve">
+  <data name="Property_label" xml:space="preserve">
     <value>Property</value>
-  </data>
-  <data name="Property_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Property_description" xml:space="preserve">
     <value>The Property to display</value>

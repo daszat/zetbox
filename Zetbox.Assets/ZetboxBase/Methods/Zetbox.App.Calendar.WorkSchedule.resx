@@ -117,111 +117,75 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="GetOffDays" xml:space="preserve">
+  <data name="GetOffDays_label" xml:space="preserve">
     <value>GetOffDays</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="GetOffDays_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetOffDays_description" xml:space="preserve">
     <value>Gets the number of free days between two dates</value>
   </data>
-  <data name="GetOffDays(retVal)" xml:space="preserve">
+  <data name="GetOffDays(retVal)_label" xml:space="preserve">
     <value>retVal</value>
   </data>
-  <data name="GetOffDays(retVal)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="GetOffDays(retVal)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetOffDays(from)" xml:space="preserve">
+  <data name="GetOffDays(from)_label" xml:space="preserve">
     <value>from</value>
-  </data>
-  <data name="GetOffDays(from)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetOffDays(from)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetOffDays(until)" xml:space="preserve">
+  <data name="GetOffDays(until)_label" xml:space="preserve">
     <value>until</value>
-  </data>
-  <data name="GetOffDays(until)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetOffDays(until)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetWorkingDays" xml:space="preserve">
+  <data name="GetWorkingDays_label" xml:space="preserve">
     <value>GetWorkingDays</value>
-  </data>
-  <data name="GetWorkingDays_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetWorkingDays_description" xml:space="preserve">
     <value>Get the number of working days between two dates</value>
   </data>
-  <data name="GetWorkingDays(retVal)" xml:space="preserve">
+  <data name="GetWorkingDays(retVal)_label" xml:space="preserve">
     <value>retVal</value>
-  </data>
-  <data name="GetWorkingDays(retVal)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetWorkingDays(retVal)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetWorkingDays(from)" xml:space="preserve">
+  <data name="GetWorkingDays(from)_label" xml:space="preserve">
     <value>from</value>
-  </data>
-  <data name="GetWorkingDays(from)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetWorkingDays(from)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetWorkingDays(until)" xml:space="preserve">
+  <data name="GetWorkingDays(until)_label" xml:space="preserve">
     <value>until</value>
-  </data>
-  <data name="GetWorkingDays(until)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetWorkingDays(until)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetWorkingHours" xml:space="preserve">
+  <data name="GetWorkingHours_label" xml:space="preserve">
     <value>GetWorkingHours</value>
-  </data>
-  <data name="GetWorkingHours_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetWorkingHours_description" xml:space="preserve">
     <value>Returns the amount of working hours between two dates</value>
   </data>
-  <data name="GetWorkingHours(retVal)" xml:space="preserve">
+  <data name="GetWorkingHours(retVal)_label" xml:space="preserve">
     <value>retVal</value>
-  </data>
-  <data name="GetWorkingHours(retVal)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetWorkingHours(retVal)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetWorkingHours(from)" xml:space="preserve">
+  <data name="GetWorkingHours(from)_label" xml:space="preserve">
     <value>from</value>
-  </data>
-  <data name="GetWorkingHours(from)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetWorkingHours(from)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetWorkingHours(until)" xml:space="preserve">
+  <data name="GetWorkingHours(until)_label" xml:space="preserve">
     <value>until</value>
-  </data>
-  <data name="GetWorkingHours(until)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetWorkingHours(until)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />

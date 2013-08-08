@@ -117,18 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Calendar" xml:space="preserve">
+  <data name="Calendar_label" xml:space="preserve">
     <value>Calendar</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Calendar_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
   <data name="Calendar_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
-  </data>
-  <data name="WorkSchedule" xml:space="preserve">
-    <value>WorkSchedule</value>
   </data>
   <data name="WorkSchedule_label" xml:space="preserve">
     <value>Work schedule</value>

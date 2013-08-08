@@ -117,31 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="First" xml:space="preserve">
+  <data name="First_label" xml:space="preserve">
     <value>First</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="First_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="First_description" xml:space="preserve">
     <value>First Test Entry</value>
   </data>
-  <data name="Second" xml:space="preserve">
+  <data name="Second_label" xml:space="preserve">
     <value>Second</value>
-  </data>
-  <data name="Second_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Second_description" xml:space="preserve">
     <value>Second Test Entry</value>
   </data>
-  <data name="Third" xml:space="preserve">
+  <data name="Third_label" xml:space="preserve">
     <value>Third</value>
   </data>
-  <data name="Third_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Third_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>

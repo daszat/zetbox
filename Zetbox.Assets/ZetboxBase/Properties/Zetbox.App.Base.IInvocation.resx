@@ -117,21 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ImplementorName" xml:space="preserve">
-    <value>ImplementorName</value>
-  </data>
   <data name="ImplementorName_label" xml:space="preserve">
     <value>Implementor name</value>
   </data>
   <data name="ImplementorName_description" xml:space="preserve">
     <value>Typename of the implementor</value>
   </data>
-  <data name="MemberName" xml:space="preserve">
+  <data name="MemberName_label" xml:space="preserve">
     <value>MemberName</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="MemberName_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="MemberName_description" xml:space="preserve">
     <value>Name des implementierenden Members</value>

@@ -117,30 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CompoundObjectDefinition" xml:space="preserve">
+  <data name="CompoundObjectDefinition_label" xml:space="preserve">
     <value>CompoundObjectDefinition</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="CompoundObjectDefinition_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="CompoundObjectDefinition_description" xml:space="preserve">
     <value>Definition of this Compound Object</value>
   </data>
-  <data name="HasPersistentOrder" xml:space="preserve">
+  <data name="HasPersistentOrder_label" xml:space="preserve">
     <value>HasPersistentOrder</value>
-  </data>
-  <data name="HasPersistentOrder_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="HasPersistentOrder_description" xml:space="preserve">
     <value>Whether or not the list has a persistent ordering of elements</value>
   </data>
-  <data name="IsList" xml:space="preserve">
+  <data name="IsList_label" xml:space="preserve">
     <value>IsList</value>
-  </data>
-  <data name="IsList_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="IsList_description" xml:space="preserve">
     <value>Whether or not this CompoundObject property is list valued</value>

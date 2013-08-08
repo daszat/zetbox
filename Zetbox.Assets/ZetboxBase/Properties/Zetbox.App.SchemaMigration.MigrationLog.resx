@@ -117,48 +117,32 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Destination" xml:space="preserve">
+  <data name="Destination_label" xml:space="preserve">
     <value>Destination</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Destination_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Destination_description" xml:space="preserve">
     <value>The destination of this migration step</value>
   </data>
-  <data name="DestinationRows" xml:space="preserve">
+  <data name="DestinationRows_label" xml:space="preserve">
     <value>DestinationRows</value>
-  </data>
-  <data name="DestinationRows_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="DestinationRows_description" xml:space="preserve">
     <value>The number of rows in the destination</value>
   </data>
-  <data name="Source" xml:space="preserve">
+  <data name="Source_label" xml:space="preserve">
     <value>Source</value>
-  </data>
-  <data name="Source_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Source_description" xml:space="preserve">
     <value>The source of the migration step</value>
   </data>
-  <data name="SourceRows" xml:space="preserve">
+  <data name="SourceRows_label" xml:space="preserve">
     <value>SourceRows</value>
-  </data>
-  <data name="SourceRows_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="SourceRows_description" xml:space="preserve">
     <value>The number of rows in this source</value>
   </data>
-  <data name="Timestamp" xml:space="preserve">
+  <data name="Timestamp_label" xml:space="preserve">
     <value>Timestamp</value>
-  </data>
-  <data name="Timestamp_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Timestamp_description" xml:space="preserve">
     <value>When the logentry was written</value>

@@ -117,135 +117,90 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ChangedBy" xml:space="preserve">
+  <data name="ChangedBy_label" xml:space="preserve">
     <value>ChangedBy</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ChangedBy_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ChangedBy_description" xml:space="preserve">
     <value>Identity which changed this object</value>
   </data>
-  <data name="ChangedOn" xml:space="preserve">
+  <data name="ChangedOn_label" xml:space="preserve">
     <value>ChangedOn</value>
-  </data>
-  <data name="ChangedOn_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ChangedOn_description" xml:space="preserve">
     <value>Date and time where this object was changed</value>
   </data>
-  <data name="Constraints" xml:space="preserve">
+  <data name="Constraints_label" xml:space="preserve">
     <value>Constraints</value>
   </data>
-  <data name="Constraints_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Constraints_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="CreatedBy" xml:space="preserve">
+  <data name="CreatedBy_label" xml:space="preserve">
     <value>CreatedBy</value>
-  </data>
-  <data name="CreatedBy_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="CreatedBy_description" xml:space="preserve">
     <value>Identity which created this object</value>
   </data>
-  <data name="CreatedOn" xml:space="preserve">
+  <data name="CreatedOn_label" xml:space="preserve">
     <value>CreatedOn</value>
-  </data>
-  <data name="CreatedOn_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="CreatedOn_description" xml:space="preserve">
     <value>Date and time where this object was created</value>
   </data>
-  <data name="DefaultIcon" xml:space="preserve">
+  <data name="DefaultIcon_label" xml:space="preserve">
     <value>DefaultIcon</value>
-  </data>
-  <data name="DefaultIcon_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="DefaultIcon_description" xml:space="preserve">
     <value>Standard Icon wenn IIcon nicht implementiert ist</value>
   </data>
-  <data name="Description" xml:space="preserve">
+  <data name="Description_label" xml:space="preserve">
     <value>Description</value>
-  </data>
-  <data name="Description_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Description_description" xml:space="preserve">
     <value>Description of this DataType</value>
   </data>
-  <data name="ExportGuid" xml:space="preserve">
+  <data name="ExportGuid_label" xml:space="preserve">
     <value>ExportGuid</value>
-  </data>
-  <data name="ExportGuid_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ExportGuid_description" xml:space="preserve">
     <value>Export Guid</value>
   </data>
-  <data name="ImplementsInterfaces" xml:space="preserve">
+  <data name="ImplementsInterfaces_label" xml:space="preserve">
     <value>ImplementsInterfaces</value>
-  </data>
-  <data name="ImplementsInterfaces_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ImplementsInterfaces_description" xml:space="preserve">
     <value>Interfaces der Objektklasse</value>
   </data>
-  <data name="Methods" xml:space="preserve">
+  <data name="Methods_label" xml:space="preserve">
     <value>Methods</value>
-  </data>
-  <data name="Methods_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Methods_description" xml:space="preserve">
     <value>Liste aller Methoden der Objektklasse.</value>
   </data>
-  <data name="Module" xml:space="preserve">
+  <data name="Module_label" xml:space="preserve">
     <value>Module</value>
-  </data>
-  <data name="Module_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Module_description" xml:space="preserve">
     <value>Modul der Objektklasse</value>
   </data>
-  <data name="Name" xml:space="preserve">
+  <data name="Name_label" xml:space="preserve">
     <value>Name</value>
-  </data>
-  <data name="Name_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Name_description" xml:space="preserve">
     <value>Der Name der Objektklasse</value>
   </data>
-  <data name="Properties" xml:space="preserve">
+  <data name="Properties_label" xml:space="preserve">
     <value>Properties</value>
-  </data>
-  <data name="Properties_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Properties_description" xml:space="preserve">
     <value>Eigenschaften der Objektklasse</value>
   </data>
-  <data name="RequestedKind" xml:space="preserve">
+  <data name="RequestedKind_label" xml:space="preserve">
     <value>RequestedKind</value>
-  </data>
-  <data name="RequestedKind_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="RequestedKind_description" xml:space="preserve">
     <value>Optional requested ControlKind</value>
-  </data>
-  <data name="ShowIconInLists" xml:space="preserve">
-    <value>ShowIconInLists</value>
   </data>
   <data name="ShowIconInLists_label" xml:space="preserve">
     <value>Show icon in lists</value>
@@ -253,20 +208,14 @@
   <data name="ShowIconInLists_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="ShowIdInLists" xml:space="preserve">
+  <data name="ShowIdInLists_label" xml:space="preserve">
     <value>ShowIdInLists</value>
-  </data>
-  <data name="ShowIdInLists_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ShowIdInLists_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="ShowNameInLists" xml:space="preserve">
+  <data name="ShowNameInLists_label" xml:space="preserve">
     <value>ShowNameInLists</value>
-  </data>
-  <data name="ShowNameInLists_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ShowNameInLists_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />

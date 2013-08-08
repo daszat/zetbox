@@ -117,18 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Read" xml:space="preserve">
+  <data name="Read_label" xml:space="preserve">
     <value>Read</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Read_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Read_description" xml:space="preserve">
     <value>May Read</value>
-  </data>
-  <data name="Change" xml:space="preserve">
-    <value>Change</value>
   </data>
   <data name="Change_label" xml:space="preserve">
     <value>Read &amp; Write</value>
@@ -136,29 +129,20 @@
   <data name="Change_description" xml:space="preserve">
     <value>May Read and Write</value>
   </data>
-  <data name="Delete" xml:space="preserve">
+  <data name="Delete_label" xml:space="preserve">
     <value>Delete</value>
-  </data>
-  <data name="Delete_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Delete_description" xml:space="preserve">
     <value>May Delete</value>
   </data>
-  <data name="Create" xml:space="preserve">
+  <data name="Create_label" xml:space="preserve">
     <value>Create</value>
-  </data>
-  <data name="Create_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Create_description" xml:space="preserve">
     <value>May Create</value>
   </data>
-  <data name="Full" xml:space="preserve">
+  <data name="Full_label" xml:space="preserve">
     <value>Full</value>
-  </data>
-  <data name="Full_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Full_description" xml:space="preserve">
     <value>Full Rights: Read, Write, Delete, Create</value>

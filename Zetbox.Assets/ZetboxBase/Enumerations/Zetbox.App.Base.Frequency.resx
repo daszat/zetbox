@@ -117,66 +117,45 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Yearly" xml:space="preserve">
+  <data name="Yearly_label" xml:space="preserve">
     <value>Yearly</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Yearly_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
   <data name="Yearly_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Monthly" xml:space="preserve">
+  <data name="Monthly_label" xml:space="preserve">
     <value>Monthly</value>
-  </data>
-  <data name="Monthly_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Monthly_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Weekly" xml:space="preserve">
+  <data name="Weekly_label" xml:space="preserve">
     <value>Weekly</value>
-  </data>
-  <data name="Weekly_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Weekly_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Daily" xml:space="preserve">
+  <data name="Daily_label" xml:space="preserve">
     <value>Daily</value>
-  </data>
-  <data name="Daily_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Daily_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Hourly" xml:space="preserve">
+  <data name="Hourly_label" xml:space="preserve">
     <value>Hourly</value>
-  </data>
-  <data name="Hourly_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Hourly_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Minutely" xml:space="preserve">
+  <data name="Minutely_label" xml:space="preserve">
     <value>Minutely</value>
-  </data>
-  <data name="Minutely_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Minutely_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Secondly" xml:space="preserve">
+  <data name="Secondly_label" xml:space="preserve">
     <value>Secondly</value>
-  </data>
-  <data name="Secondly_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Secondly_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />

@@ -117,27 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="GetFulltextIndexBody" xml:space="preserve">
+  <data name="GetFulltextIndexBody_label" xml:space="preserve">
     <value>GetFulltextIndexBody</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="GetFulltextIndexBody_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
   <data name="GetFulltextIndexBody_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetFulltextIndexBody(retVal)" xml:space="preserve">
+  <data name="GetFulltextIndexBody(retVal)_label" xml:space="preserve">
     <value>retVal</value>
-  </data>
-  <data name="GetFulltextIndexBody(retVal)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetFulltextIndexBody(retVal)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
-  </data>
-  <data name="GetSummaryReport" xml:space="preserve">
-    <value>GetSummaryReport</value>
   </data>
   <data name="GetSummaryReport_label" xml:space="preserve">
     <value>Summary Report</value>
@@ -145,29 +136,20 @@
   <data name="GetSummaryReport_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetSummaryReport(retVal)" xml:space="preserve">
+  <data name="GetSummaryReport(retVal)_label" xml:space="preserve">
     <value>retVal</value>
-  </data>
-  <data name="GetSummaryReport(retVal)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetSummaryReport(retVal)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetSummaryReport(title)" xml:space="preserve">
+  <data name="GetSummaryReport(title)_label" xml:space="preserve">
     <value>title</value>
-  </data>
-  <data name="GetSummaryReport(title)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetSummaryReport(title)_description" xml:space="preserve">
     <value>Title</value>
   </data>
-  <data name="GetSummaryReport(range)" xml:space="preserve">
+  <data name="GetSummaryReport(range)_label" xml:space="preserve">
     <value>range</value>
-  </data>
-  <data name="GetSummaryReport(range)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetSummaryReport(range)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />

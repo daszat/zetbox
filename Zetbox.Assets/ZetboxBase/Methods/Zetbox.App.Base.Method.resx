@@ -117,57 +117,39 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="GetLabel" xml:space="preserve">
+  <data name="GetLabel_label" xml:space="preserve">
     <value>GetLabel</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="GetLabel_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
   <data name="GetLabel_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetLabel(retVal)" xml:space="preserve">
+  <data name="GetLabel(retVal)_label" xml:space="preserve">
     <value>retVal</value>
-  </data>
-  <data name="GetLabel(retVal)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetLabel(retVal)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetName" xml:space="preserve">
+  <data name="GetName_label" xml:space="preserve">
     <value>GetName</value>
-  </data>
-  <data name="GetName_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetName_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetName(name)" xml:space="preserve">
+  <data name="GetName(name)_label" xml:space="preserve">
     <value>name</value>
-  </data>
-  <data name="GetName(name)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetName(name)_description" xml:space="preserve">
     <value>the requested name</value>
   </data>
-  <data name="GetReturnParameter" xml:space="preserve">
+  <data name="GetReturnParameter_label" xml:space="preserve">
     <value>GetReturnParameter</value>
-  </data>
-  <data name="GetReturnParameter_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetReturnParameter_description" xml:space="preserve">
     <value>Returns the Return Parameter Meta Object of this Method Meta Object.</value>
   </data>
-  <data name="GetReturnParameter(Result)" xml:space="preserve">
+  <data name="GetReturnParameter(Result)_label" xml:space="preserve">
     <value>Result</value>
-  </data>
-  <data name="GetReturnParameter(Result)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetReturnParameter(Result)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />

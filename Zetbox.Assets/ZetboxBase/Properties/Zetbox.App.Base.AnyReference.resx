@@ -117,30 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ObjClass" xml:space="preserve">
+  <data name="ObjClass_label" xml:space="preserve">
     <value>ObjClass</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ObjClass_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ObjClass_description" xml:space="preserve">
     <value>Guid of the referenced object class</value>
   </data>
-  <data name="ObjGuid" xml:space="preserve">
+  <data name="ObjGuid_label" xml:space="preserve">
     <value>ObjGuid</value>
-  </data>
-  <data name="ObjGuid_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ObjGuid_description" xml:space="preserve">
     <value>Guid of referenced object</value>
   </data>
-  <data name="ObjID" xml:space="preserve">
+  <data name="ObjID_label" xml:space="preserve">
     <value>ObjID</value>
-  </data>
-  <data name="ObjID_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ObjID_description" xml:space="preserve">
     <value>ID of the referenced object</value>

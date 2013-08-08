@@ -117,63 +117,42 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Body" xml:space="preserve">
+  <data name="Body_label" xml:space="preserve">
     <value>Body</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Body_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
   <data name="Body_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Calendar" xml:space="preserve">
+  <data name="Calendar_label" xml:space="preserve">
     <value>Calendar</value>
-  </data>
-  <data name="Calendar_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Calendar_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="ChangedBy" xml:space="preserve">
+  <data name="ChangedBy_label" xml:space="preserve">
     <value>ChangedBy</value>
-  </data>
-  <data name="ChangedBy_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ChangedBy_description" xml:space="preserve">
     <value>Identity which changed this object</value>
   </data>
-  <data name="ChangedOn" xml:space="preserve">
+  <data name="ChangedOn_label" xml:space="preserve">
     <value>ChangedOn</value>
-  </data>
-  <data name="ChangedOn_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ChangedOn_description" xml:space="preserve">
     <value>Date and time where this object was changed</value>
   </data>
-  <data name="CreatedBy" xml:space="preserve">
+  <data name="CreatedBy_label" xml:space="preserve">
     <value>CreatedBy</value>
-  </data>
-  <data name="CreatedBy_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="CreatedBy_description" xml:space="preserve">
     <value>Identity which created this object</value>
   </data>
-  <data name="CreatedOn" xml:space="preserve">
+  <data name="CreatedOn_label" xml:space="preserve">
     <value>CreatedOn</value>
-  </data>
-  <data name="CreatedOn_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="CreatedOn_description" xml:space="preserve">
     <value>Date and time where this object was created</value>
-  </data>
-  <data name="EndDate" xml:space="preserve">
-    <value>EndDate</value>
   </data>
   <data name="EndDate_label" xml:space="preserve">
     <value>End</value>
@@ -181,17 +160,11 @@
   <data name="EndDate_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="ExportGuid" xml:space="preserve">
+  <data name="ExportGuid_label" xml:space="preserve">
     <value>ExportGuid</value>
-  </data>
-  <data name="ExportGuid_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ExportGuid_description" xml:space="preserve">
     <value>Export Guid</value>
-  </data>
-  <data name="IsAllDay" xml:space="preserve">
-    <value>IsAllDay</value>
   </data>
   <data name="IsAllDay_label" xml:space="preserve">
     <value>All day</value>
@@ -199,44 +172,29 @@
   <data name="IsAllDay_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="IsViewReadOnly" xml:space="preserve">
-    <value>IsViewReadOnly</value>
-  </data>
   <data name="IsViewReadOnly_label" xml:space="preserve">
     <value>Is readonly in view</value>
   </data>
   <data name="IsViewReadOnly_description" xml:space="preserve">
     <value>The current event is read only. This property is set by code.</value>
   </data>
-  <data name="Location" xml:space="preserve">
+  <data name="Location_label" xml:space="preserve">
     <value>Location</value>
-  </data>
-  <data name="Location_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Location_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Recurrence" xml:space="preserve">
+  <data name="Recurrence_label" xml:space="preserve">
     <value>Recurrence</value>
-  </data>
-  <data name="Recurrence_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Recurrence_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Source" xml:space="preserve">
+  <data name="Source_label" xml:space="preserve">
     <value>Source</value>
-  </data>
-  <data name="Source_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Source_description" xml:space="preserve">
     <value>A attached data item</value>
-  </data>
-  <data name="StartDate" xml:space="preserve">
-    <value>StartDate</value>
   </data>
   <data name="StartDate_label" xml:space="preserve">
     <value>Start</value>
@@ -244,20 +202,14 @@
   <data name="StartDate_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Summary" xml:space="preserve">
+  <data name="Summary_label" xml:space="preserve">
     <value>Summary</value>
-  </data>
-  <data name="Summary_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Summary_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="SyncHash" xml:space="preserve">
+  <data name="SyncHash_label" xml:space="preserve">
     <value>SyncHash</value>
-  </data>
-  <data name="SyncHash_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="SyncHash_description" xml:space="preserve">
     <value>A hash used by a sync provider</value>

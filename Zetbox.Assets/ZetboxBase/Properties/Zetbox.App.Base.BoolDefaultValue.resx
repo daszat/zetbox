@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BoolValue" xml:space="preserve">
-    <value>BoolValue</value>
-  </data>
   <data name="BoolValue_label" xml:space="preserve">
     <value>Bool value</value>
   </data>

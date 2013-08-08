@@ -117,21 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="MaxLength" xml:space="preserve">
+  <data name="MaxLength_label" xml:space="preserve">
     <value>MaxLength</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="MaxLength_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="MaxLength_description" xml:space="preserve">
     <value>The maximal length of this StringProperty or null for unlimited length</value>
   </data>
-  <data name="MinLength" xml:space="preserve">
+  <data name="MinLength_label" xml:space="preserve">
     <value>MinLength</value>
-  </data>
-  <data name="MinLength_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="MinLength_description" xml:space="preserve">
     <value>The minimal length of this StringProperty</value>

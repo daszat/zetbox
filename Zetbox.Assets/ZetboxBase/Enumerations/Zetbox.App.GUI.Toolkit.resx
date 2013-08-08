@@ -117,39 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="WPF" xml:space="preserve">
+  <data name="WPF_label" xml:space="preserve">
     <value>WPF</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="WPF_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="WPF_description" xml:space="preserve">
     <value>WPF Toolkit</value>
   </data>
-  <data name="TEST" xml:space="preserve">
+  <data name="TEST_label" xml:space="preserve">
     <value>TEST</value>
-  </data>
-  <data name="TEST_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="TEST_description" xml:space="preserve">
     <value>TEST Toolkit</value>
   </data>
-  <data name="WinForms" xml:space="preserve">
+  <data name="WinForms_label" xml:space="preserve">
     <value>WinForms</value>
-  </data>
-  <data name="WinForms_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="WinForms_description" xml:space="preserve">
     <value>Windows Forms Toolkit</value>
   </data>
-  <data name="ASPNET" xml:space="preserve">
+  <data name="ASPNET_label" xml:space="preserve">
     <value>ASPNET</value>
-  </data>
-  <data name="ASPNET_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ASPNET_description" xml:space="preserve">
     <value>ASPNET Toolkit</value>

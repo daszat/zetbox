@@ -117,18 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="TPT" xml:space="preserve">
-    <value>TPT</value>
-  </data>
   <data name="TPT_label" xml:space="preserve">
     <value>Table per Type</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="TPT_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
-  </data>
-  <data name="TPH" xml:space="preserve">
-    <value>TPH</value>
   </data>
   <data name="TPH_label" xml:space="preserve">
     <value>Table per Hierarchy</value>

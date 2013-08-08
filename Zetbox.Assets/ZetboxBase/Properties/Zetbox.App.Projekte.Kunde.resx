@@ -117,102 +117,68 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Adresse" xml:space="preserve">
+  <data name="Adresse_label" xml:space="preserve">
     <value>Adresse</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Adresse_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Adresse_description" xml:space="preserve">
     <value>Adresse &amp;amp; Hausnummer</value>
   </data>
-  <data name="ChangedBy" xml:space="preserve">
+  <data name="ChangedBy_label" xml:space="preserve">
     <value>ChangedBy</value>
-  </data>
-  <data name="ChangedBy_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ChangedBy_description" xml:space="preserve">
     <value>Identity which changed this object</value>
   </data>
-  <data name="ChangedOn" xml:space="preserve">
+  <data name="ChangedOn_label" xml:space="preserve">
     <value>ChangedOn</value>
-  </data>
-  <data name="ChangedOn_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ChangedOn_description" xml:space="preserve">
     <value>Date and time where this object was changed</value>
   </data>
-  <data name="CreatedBy" xml:space="preserve">
+  <data name="CreatedBy_label" xml:space="preserve">
     <value>CreatedBy</value>
-  </data>
-  <data name="CreatedBy_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="CreatedBy_description" xml:space="preserve">
     <value>Identity which created this object</value>
   </data>
-  <data name="CreatedOn" xml:space="preserve">
+  <data name="CreatedOn_label" xml:space="preserve">
     <value>CreatedOn</value>
-  </data>
-  <data name="CreatedOn_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="CreatedOn_description" xml:space="preserve">
     <value>Date and time where this object was created</value>
   </data>
-  <data name="EMails" xml:space="preserve">
+  <data name="EMails_label" xml:space="preserve">
     <value>EMails</value>
-  </data>
-  <data name="EMails_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="EMails_description" xml:space="preserve">
     <value>EMails des Kunden - können mehrere sein</value>
   </data>
-  <data name="ExportGuid" xml:space="preserve">
+  <data name="ExportGuid_label" xml:space="preserve">
     <value>ExportGuid</value>
-  </data>
-  <data name="ExportGuid_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ExportGuid_description" xml:space="preserve">
     <value>Export Guid</value>
   </data>
-  <data name="Kundenname" xml:space="preserve">
+  <data name="Kundenname_label" xml:space="preserve">
     <value>Kundenname</value>
-  </data>
-  <data name="Kundenname_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Kundenname_description" xml:space="preserve">
     <value>Name des Kunden</value>
   </data>
-  <data name="Land" xml:space="preserve">
+  <data name="Land_label" xml:space="preserve">
     <value>Land</value>
-  </data>
-  <data name="Land_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Land_description" xml:space="preserve">
     <value>Land</value>
   </data>
-  <data name="Ort" xml:space="preserve">
+  <data name="Ort_label" xml:space="preserve">
     <value>Ort</value>
-  </data>
-  <data name="Ort_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Ort_description" xml:space="preserve">
     <value>Ort</value>
   </data>
-  <data name="PLZ" xml:space="preserve">
+  <data name="PLZ_label" xml:space="preserve">
     <value>PLZ</value>
-  </data>
-  <data name="PLZ_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="PLZ_description" xml:space="preserve">
     <value>Postleitzahl</value>

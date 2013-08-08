@@ -117,57 +117,39 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="GetErrorText" xml:space="preserve">
+  <data name="GetErrorText_label" xml:space="preserve">
     <value>GetErrorText</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="GetErrorText_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
   <data name="GetErrorText_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetErrorText(result)" xml:space="preserve">
+  <data name="GetErrorText(result)_label" xml:space="preserve">
     <value>result</value>
-  </data>
-  <data name="GetErrorText(result)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetErrorText(result)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetErrorText(constrainedObject)" xml:space="preserve">
+  <data name="GetErrorText(constrainedObject)_label" xml:space="preserve">
     <value>constrainedObject</value>
-  </data>
-  <data name="GetErrorText(constrainedObject)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetErrorText(constrainedObject)_description" xml:space="preserve">
     <value>The constrained object to be checked.</value>
   </data>
-  <data name="IsValid" xml:space="preserve">
+  <data name="IsValid_label" xml:space="preserve">
     <value>IsValid</value>
-  </data>
-  <data name="IsValid_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="IsValid_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="IsValid(result)" xml:space="preserve">
+  <data name="IsValid(result)_label" xml:space="preserve">
     <value>result</value>
-  </data>
-  <data name="IsValid(result)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="IsValid(result)_description" xml:space="preserve">
     <value>Whether or not the specified object is valid.</value>
   </data>
-  <data name="IsValid(constrainedObject)" xml:space="preserve">
+  <data name="IsValid(constrainedObject)_label" xml:space="preserve">
     <value>constrainedObject</value>
-  </data>
-  <data name="IsValid(constrainedObject)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="IsValid(constrainedObject)_description" xml:space="preserve">
     <value>The constrained object to be checked.</value>

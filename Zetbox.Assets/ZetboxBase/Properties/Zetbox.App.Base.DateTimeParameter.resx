@@ -117,12 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DateTimeStyle" xml:space="preserve">
+  <data name="DateTimeStyle_label" xml:space="preserve">
     <value>DateTimeStyle</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="DateTimeStyle_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="DateTimeStyle_description" xml:space="preserve">
     <value>Style of Datetime. Can be Date, Time, or Date and Time.</value>

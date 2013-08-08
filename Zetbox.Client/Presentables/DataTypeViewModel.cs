@@ -20,6 +20,7 @@ namespace Zetbox.Client.Presentables
     using System.Linq;
     using System.Text;
     using Zetbox.API;
+    using Zetbox.API.Common;
     using Zetbox.API.Configuration;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
@@ -46,7 +47,7 @@ namespace Zetbox.Client.Presentables
             get
             {
                 if (_dataType.Module != null)
-                    return Assets.GetString(_dataType.Module, "ZetboxBase.DataTypes", _dataType.Module.Namespace + "." + _dataType.Name, _dataType.Name);
+                    return Assets.GetString(_dataType.Module, ZetboxAssetKeys.DataTypes, ZetboxAssetKeys.ConstructNameKey(_dataType), _dataType.Name);
                 else
                     return _dataType.Name;
             }
@@ -57,7 +58,7 @@ namespace Zetbox.Client.Presentables
             get
             {
                 if (_dataType.Module != null)
-                    return Assets.GetString(_dataType.Module, "ZetboxBase.DataTypes", _dataType.Module.Namespace + "." + _dataType.Name + "_description", _dataType.Description);
+                    return Assets.GetString(_dataType.Module, ZetboxAssetKeys.DataTypes, ZetboxAssetKeys.ConstructDescriptionKey(_dataType), _dataType.Description);
                 else
                     return _dataType.Description;
             }

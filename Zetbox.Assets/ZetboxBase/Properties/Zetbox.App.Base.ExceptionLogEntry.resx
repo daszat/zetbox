@@ -117,57 +117,39 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Date" xml:space="preserve">
+  <data name="Date_label" xml:space="preserve">
     <value>Date</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Date_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
   <data name="Date_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Exception" xml:space="preserve">
+  <data name="Exception_label" xml:space="preserve">
     <value>Exception</value>
-  </data>
-  <data name="Exception_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Exception_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Level" xml:space="preserve">
+  <data name="Level_label" xml:space="preserve">
     <value>Level</value>
-  </data>
-  <data name="Level_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Level_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Logger" xml:space="preserve">
+  <data name="Logger_label" xml:space="preserve">
     <value>Logger</value>
-  </data>
-  <data name="Logger_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Logger_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Message" xml:space="preserve">
+  <data name="Message_label" xml:space="preserve">
     <value>Message</value>
-  </data>
-  <data name="Message_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Message_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Thread" xml:space="preserve">
+  <data name="Thread_label" xml:space="preserve">
     <value>Thread</value>
-  </data>
-  <data name="Thread_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Thread_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />

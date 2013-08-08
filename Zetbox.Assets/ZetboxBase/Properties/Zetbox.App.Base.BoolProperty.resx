@@ -117,57 +117,39 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="FalseIcon" xml:space="preserve">
+  <data name="FalseIcon_label" xml:space="preserve">
     <value>FalseIcon</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="FalseIcon_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
   <data name="FalseIcon_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="FalseLabel" xml:space="preserve">
+  <data name="FalseLabel_label" xml:space="preserve">
     <value>FalseLabel</value>
-  </data>
-  <data name="FalseLabel_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="FalseLabel_description" xml:space="preserve">
     <value>A string to describe the "false" value to the user.</value>
   </data>
-  <data name="NullIcon" xml:space="preserve">
+  <data name="NullIcon_label" xml:space="preserve">
     <value>NullIcon</value>
-  </data>
-  <data name="NullIcon_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="NullIcon_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="NullLabel" xml:space="preserve">
+  <data name="NullLabel_label" xml:space="preserve">
     <value>NullLabel</value>
-  </data>
-  <data name="NullLabel_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="NullLabel_description" xml:space="preserve">
     <value>A string to describe the "null" value to the user.</value>
   </data>
-  <data name="TrueIcon" xml:space="preserve">
+  <data name="TrueIcon_label" xml:space="preserve">
     <value>TrueIcon</value>
-  </data>
-  <data name="TrueIcon_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="TrueIcon_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="TrueLabel" xml:space="preserve">
+  <data name="TrueLabel_label" xml:space="preserve">
     <value>TrueLabel</value>
-  </data>
-  <data name="TrueLabel_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="TrueLabel_description" xml:space="preserve">
     <value>A string to describe the "true" value to the user.</value>

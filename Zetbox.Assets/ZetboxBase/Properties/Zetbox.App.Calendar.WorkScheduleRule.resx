@@ -117,54 +117,35 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ChangedBy" xml:space="preserve">
+  <data name="ChangedBy_label" xml:space="preserve">
     <value>ChangedBy</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ChangedBy_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ChangedBy_description" xml:space="preserve">
     <value>Identity which changed this object</value>
   </data>
-  <data name="ChangedOn" xml:space="preserve">
+  <data name="ChangedOn_label" xml:space="preserve">
     <value>ChangedOn</value>
-  </data>
-  <data name="ChangedOn_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ChangedOn_description" xml:space="preserve">
     <value>Date and time where this object was changed</value>
   </data>
-  <data name="CreatedBy" xml:space="preserve">
+  <data name="CreatedBy_label" xml:space="preserve">
     <value>CreatedBy</value>
-  </data>
-  <data name="CreatedBy_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="CreatedBy_description" xml:space="preserve">
     <value>Identity which created this object</value>
   </data>
-  <data name="CreatedOn" xml:space="preserve">
+  <data name="CreatedOn_label" xml:space="preserve">
     <value>CreatedOn</value>
-  </data>
-  <data name="CreatedOn_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="CreatedOn_description" xml:space="preserve">
     <value>Date and time where this object was created</value>
   </data>
-  <data name="ExportGuid" xml:space="preserve">
+  <data name="ExportGuid_label" xml:space="preserve">
     <value>ExportGuid</value>
-  </data>
-  <data name="ExportGuid_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ExportGuid_description" xml:space="preserve">
     <value>Export Guid</value>
-  </data>
-  <data name="IsWorkingDay" xml:space="preserve">
-    <value>IsWorkingDay</value>
   </data>
   <data name="IsWorkingDay_label" xml:space="preserve">
     <value>Is working day</value>
@@ -172,26 +153,17 @@
   <data name="IsWorkingDay_description" xml:space="preserve">
     <value>True if the day is a working day, regardless of the working hours. E.g. Saturday is a working day (in Austria), but most people aktually don't work.</value>
   </data>
-  <data name="Module" xml:space="preserve">
+  <data name="Module_label" xml:space="preserve">
     <value>Module</value>
-  </data>
-  <data name="Module_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Module_description" xml:space="preserve">
     <value>Optional member of a module</value>
   </data>
-  <data name="Name" xml:space="preserve">
+  <data name="Name_label" xml:space="preserve">
     <value>Name</value>
-  </data>
-  <data name="Name_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Name_description" xml:space="preserve">
     <value>The name of the Rule</value>
-  </data>
-  <data name="ValidFrom" xml:space="preserve">
-    <value>ValidFrom</value>
   </data>
   <data name="ValidFrom_label" xml:space="preserve">
     <value>Valid from</value>
@@ -199,17 +171,11 @@
   <data name="ValidFrom_description" xml:space="preserve">
     <value>Optional valid from date</value>
   </data>
-  <data name="ValidUntil" xml:space="preserve">
-    <value>ValidUntil</value>
-  </data>
   <data name="ValidUntil_label" xml:space="preserve">
     <value>Valid until</value>
   </data>
   <data name="ValidUntil_description" xml:space="preserve">
     <value>Optional valid until date</value>
-  </data>
-  <data name="WorkingHours" xml:space="preserve">
-    <value>WorkingHours</value>
   </data>
   <data name="WorkingHours_label" xml:space="preserve">
     <value>Working hours</value>
@@ -217,12 +183,10 @@
   <data name="WorkingHours_description" xml:space="preserve">
     <value>The amount of working hours. 0 if it's a free day.</value>
   </data>
-  <data name="WorkSchedule" xml:space="preserve">
+  <data name="WorkSchedule_label" xml:space="preserve">
     <value>WorkSchedule</value>
   </data>
-  <data name="WorkSchedule_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="WorkSchedule_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>

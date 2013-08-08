@@ -117,21 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="GetDefaultValue" xml:space="preserve">
+  <data name="GetDefaultValue_label" xml:space="preserve">
     <value>GetDefaultValue</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="GetDefaultValue_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetDefaultValue_description" xml:space="preserve">
     <value>GetDefaultValue</value>
   </data>
-  <data name="GetDefaultValue(return)" xml:space="preserve">
+  <data name="GetDefaultValue(return)_label" xml:space="preserve">
     <value>return</value>
-  </data>
-  <data name="GetDefaultValue(return)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetDefaultValue(return)_description" xml:space="preserve">
     <value>Return Value</value>

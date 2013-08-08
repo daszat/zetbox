@@ -117,57 +117,39 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Days" xml:space="preserve">
+  <data name="Days_label" xml:space="preserve">
     <value>Days</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Days_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
   <data name="Days_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Hours" xml:space="preserve">
+  <data name="Hours_label" xml:space="preserve">
     <value>Hours</value>
-  </data>
-  <data name="Hours_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Hours_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Minutes" xml:space="preserve">
+  <data name="Minutes_label" xml:space="preserve">
     <value>Minutes</value>
-  </data>
-  <data name="Minutes_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Minutes_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Months" xml:space="preserve">
+  <data name="Months_label" xml:space="preserve">
     <value>Months</value>
-  </data>
-  <data name="Months_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Months_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Seconds" xml:space="preserve">
+  <data name="Seconds_label" xml:space="preserve">
     <value>Seconds</value>
-  </data>
-  <data name="Seconds_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Seconds_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Years" xml:space="preserve">
+  <data name="Years_label" xml:space="preserve">
     <value>Years</value>
-  </data>
-  <data name="Years_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Years_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />

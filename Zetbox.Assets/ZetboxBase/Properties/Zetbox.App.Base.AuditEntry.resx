@@ -117,54 +117,36 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Identity" xml:space="preserve">
-    <value>Identity</value>
-  </data>
   <data name="Identity_label" xml:space="preserve">
     <value>Identity</value>
   </data>
   <data name="Identity_description" xml:space="preserve">
     <value>The identity that caued this audit</value>
   </data>
-  <data name="MessageFormat" xml:space="preserve">
+  <data name="MessageFormat_label" xml:space="preserve">
     <value>MessageFormat</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="MessageFormat_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="MessageFormat_description" xml:space="preserve">
     <value>The default format to display this change to the user</value>
   </data>
-  <data name="NewValue" xml:space="preserve">
+  <data name="NewValue_label" xml:space="preserve">
     <value>NewValue</value>
   </data>
-  <data name="NewValue_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="NewValue_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="OldValue" xml:space="preserve">
+  <data name="OldValue_label" xml:space="preserve">
     <value>OldValue</value>
-  </data>
-  <data name="OldValue_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="OldValue_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="PropertyName" xml:space="preserve">
+  <data name="PropertyName_label" xml:space="preserve">
     <value>PropertyName</value>
-  </data>
-  <data name="PropertyName_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="PropertyName_description" xml:space="preserve">
     <value>The name of the changed property</value>
-  </data>
-  <data name="Timestamp" xml:space="preserve">
-    <value>Timestamp</value>
   </data>
   <data name="Timestamp_label" xml:space="preserve">
     <value>Changed on</value>

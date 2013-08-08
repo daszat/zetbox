@@ -117,84 +117,57 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="TestMethodForParameter" xml:space="preserve">
+  <data name="TestMethodForParameter_label" xml:space="preserve">
     <value>TestMethodForParameter</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="TestMethodForParameter_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="TestMethodForParameter_description" xml:space="preserve">
     <value />
   </data>
-  <data name="TestMethodForParameter(TestBool)" xml:space="preserve">
+  <data name="TestMethodForParameter(TestBool)_label" xml:space="preserve">
     <value>TestBool</value>
   </data>
-  <data name="TestMethodForParameter(TestBool)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="TestMethodForParameter(TestBool)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="TestMethodForParameter(TestCLRObjectParameter)" xml:space="preserve">
+  <data name="TestMethodForParameter(TestCLRObjectParameter)_label" xml:space="preserve">
     <value>TestCLRObjectParameter</value>
-  </data>
-  <data name="TestMethodForParameter(TestCLRObjectParameter)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="TestMethodForParameter(TestCLRObjectParameter)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="TestMethodForParameter(TestDateTime)" xml:space="preserve">
+  <data name="TestMethodForParameter(TestDateTime)_label" xml:space="preserve">
     <value>TestDateTime</value>
-  </data>
-  <data name="TestMethodForParameter(TestDateTime)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="TestMethodForParameter(TestDateTime)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="TestMethodForParameter(TestDouble)" xml:space="preserve">
+  <data name="TestMethodForParameter(TestDouble)_label" xml:space="preserve">
     <value>TestDouble</value>
-  </data>
-  <data name="TestMethodForParameter(TestDouble)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="TestMethodForParameter(TestDouble)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="TestMethodForParameter(TestInt)" xml:space="preserve">
+  <data name="TestMethodForParameter(TestInt)_label" xml:space="preserve">
     <value>TestInt</value>
-  </data>
-  <data name="TestMethodForParameter(TestInt)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="TestMethodForParameter(TestInt)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="TestMethodForParameter(TestObjectParameter)" xml:space="preserve">
+  <data name="TestMethodForParameter(TestObjectParameter)_label" xml:space="preserve">
     <value>TestObjectParameter</value>
-  </data>
-  <data name="TestMethodForParameter(TestObjectParameter)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="TestMethodForParameter(TestObjectParameter)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="TestMethodForParameter(TestString)" xml:space="preserve">
+  <data name="TestMethodForParameter(TestString)_label" xml:space="preserve">
     <value>TestString</value>
-  </data>
-  <data name="TestMethodForParameter(TestString)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="TestMethodForParameter(TestString)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="TestMethodForParameter(TestDateTimeReturn)" xml:space="preserve">
+  <data name="TestMethodForParameter(TestDateTimeReturn)_label" xml:space="preserve">
     <value>TestDateTimeReturn</value>
-  </data>
-  <data name="TestMethodForParameter(TestDateTimeReturn)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="TestMethodForParameter(TestDateTimeReturn)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />

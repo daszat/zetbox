@@ -117,30 +117,21 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AppliesTo" xml:space="preserve">
-    <value>AppliesTo</value>
-  </data>
   <data name="AppliesTo_label" xml:space="preserve">
     <value>Applies to Range</value>
   </data>
   <data name="AppliesTo_description" xml:space="preserve">
     <value>Checks if the Rule applies to the given date</value>
   </data>
-  <data name="AppliesTo(retVal)" xml:space="preserve">
+  <data name="AppliesTo(retVal)_label" xml:space="preserve">
     <value>retVal</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="AppliesTo(retVal)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
   <data name="AppliesTo(retVal)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="AppliesTo(date)" xml:space="preserve">
+  <data name="AppliesTo(date)_label" xml:space="preserve">
     <value>date</value>
-  </data>
-  <data name="AppliesTo(date)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="AppliesTo(date)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />

@@ -116,6 +116,7 @@
     <Compile Include="LinqExtensions.cs" />
     <Compile Include="Reporting\ReportingErrorReporter.cs" />
     <Compile Include="TextExtractor.cs" />
+    <Compile Include="ZetboxAssetKeys.cs" />
     <Compile Include="ZetboxContextExtensions.cs" />
     <Compile Include="MethodExtensions.cs" />
     <Compile Include="MultiplicityExtensions.cs" />

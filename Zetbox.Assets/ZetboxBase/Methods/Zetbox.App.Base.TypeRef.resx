@@ -117,66 +117,45 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AsType" xml:space="preserve">
+  <data name="AsType_label" xml:space="preserve">
     <value>AsType</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="AsType_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="AsType_description" xml:space="preserve">
     <value>get the referenced &lt;see cref="Type"/&gt;</value>
   </data>
-  <data name="AsType(return)" xml:space="preserve">
+  <data name="AsType(return)_label" xml:space="preserve">
     <value>return</value>
-  </data>
-  <data name="AsType(return)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="AsType(return)_description" xml:space="preserve">
     <value>the referenced Type</value>
   </data>
-  <data name="AsType(throwOnError)" xml:space="preserve">
+  <data name="AsType(throwOnError)_label" xml:space="preserve">
     <value>throwOnError</value>
-  </data>
-  <data name="AsType(throwOnError)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="AsType(throwOnError)_description" xml:space="preserve">
     <value>whether to return null (false) or throw an Exception (true) on error</value>
   </data>
-  <data name="ToTypeName" xml:space="preserve">
+  <data name="ToTypeName_label" xml:space="preserve">
     <value>ToTypeName</value>
   </data>
-  <data name="ToTypeName_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ToTypeName_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="ToTypeName(result)" xml:space="preserve">
+  <data name="ToTypeName(result)_label" xml:space="preserve">
     <value>result</value>
-  </data>
-  <data name="ToTypeName(result)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ToTypeName(result)_description" xml:space="preserve">
     <value>A full type name for the referenced type. Should be parseable by Type.GetType</value>
   </data>
-  <data name="UpdateParent" xml:space="preserve">
+  <data name="UpdateParent_label" xml:space="preserve">
     <value>UpdateParent</value>
-  </data>
-  <data name="UpdateParent_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="UpdateParent_description" xml:space="preserve">
     <value>Update the Parent property to the currently loaded assemblies' state</value>
   </data>
-  <data name="UpdateToStringCache" xml:space="preserve">
+  <data name="UpdateToStringCache_label" xml:space="preserve">
     <value>UpdateToStringCache</value>
-  </data>
-  <data name="UpdateToStringCache_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="UpdateToStringCache_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />

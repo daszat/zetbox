@@ -117,18 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="HasPersistentOrder" xml:space="preserve">
+  <data name="HasPersistentOrder_label" xml:space="preserve">
     <value>HasPersistentOrder</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="HasPersistentOrder_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="HasPersistentOrder_description" xml:space="preserve">
     <value>Whether or not a list-valued property has a index</value>
-  </data>
-  <data name="IsCalculated" xml:space="preserve">
-    <value>IsCalculated</value>
   </data>
   <data name="IsCalculated_label" xml:space="preserve">
     <value>Is calculated</value>
@@ -136,11 +129,8 @@
   <data name="IsCalculated_description" xml:space="preserve">
     <value>If true, a property getter will be invoked to get the properties value. No Backingstore is generated, thus there is no setter.</value>
   </data>
-  <data name="IsList" xml:space="preserve">
+  <data name="IsList_label" xml:space="preserve">
     <value>IsList</value>
-  </data>
-  <data name="IsList_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="IsList_description" xml:space="preserve">
     <value />

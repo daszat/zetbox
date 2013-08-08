@@ -117,129 +117,87 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ByDay" xml:space="preserve">
+  <data name="ByDay_label" xml:space="preserve">
     <value>ByDay</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ByDay_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ByDay_description" xml:space="preserve">
     <value>Specifies a comma separated list of days of the week. Also it may indicate the nth occurrence of the specific day within a month. (MO,TU,1SA,-2SU)</value>
   </data>
-  <data name="ByHour" xml:space="preserve">
+  <data name="ByHour_label" xml:space="preserve">
     <value>ByHour</value>
-  </data>
-  <data name="ByHour_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ByHour_description" xml:space="preserve">
     <value>Specifies a comma separated list of hours. (0,1,22,23)</value>
   </data>
-  <data name="ByMinute" xml:space="preserve">
+  <data name="ByMinute_label" xml:space="preserve">
     <value>ByMinute</value>
-  </data>
-  <data name="ByMinute_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ByMinute_description" xml:space="preserve">
     <value>Specifies a comma separated list of minutes. (0,1,58,59)</value>
   </data>
-  <data name="ByMonth" xml:space="preserve">
+  <data name="ByMonth_label" xml:space="preserve">
     <value>ByMonth</value>
-  </data>
-  <data name="ByMonth_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ByMonth_description" xml:space="preserve">
     <value>Specifies a comma separated list of months of the year (1,2,3,4,11,12)</value>
   </data>
-  <data name="ByMonthDay" xml:space="preserve">
+  <data name="ByMonthDay_label" xml:space="preserve">
     <value>ByMonthDay</value>
-  </data>
-  <data name="ByMonthDay_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ByMonthDay_description" xml:space="preserve">
     <value>Specifies a comma separated list of days of the month. (1,2,30,31,-1,-2,-31)</value>
   </data>
-  <data name="BySecond" xml:space="preserve">
+  <data name="BySecond_label" xml:space="preserve">
     <value>BySecond</value>
-  </data>
-  <data name="BySecond_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="BySecond_description" xml:space="preserve">
     <value>Specifies a comma separated list of seconds. (0,1,58,59)</value>
   </data>
-  <data name="BySetPos" xml:space="preserve">
+  <data name="BySetPos_label" xml:space="preserve">
     <value>BySetPos</value>
-  </data>
-  <data name="BySetPos_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="BySetPos_description" xml:space="preserve">
     <value>Specifies a comma separated list of nth occurrences</value>
   </data>
-  <data name="ByWeekNumber" xml:space="preserve">
+  <data name="ByWeekNumber_label" xml:space="preserve">
     <value>ByWeekNumber</value>
-  </data>
-  <data name="ByWeekNumber_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ByWeekNumber_description" xml:space="preserve">
     <value>Specifies a comma separated list of weeks of the year. Valid values are 1 to 53 or -53 to -1. (1,5,-2)</value>
   </data>
-  <data name="ByYearDay" xml:space="preserve">
+  <data name="ByYearDay_label" xml:space="preserve">
     <value>ByYearDay</value>
-  </data>
-  <data name="ByYearDay_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ByYearDay_description" xml:space="preserve">
     <value>Specifies a comma separated list of days of the year. (1,2,365,366,-1,-2,-366)</value>
   </data>
-  <data name="Count" xml:space="preserve">
+  <data name="Count_label" xml:space="preserve">
     <value>Count</value>
-  </data>
-  <data name="Count_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Count_description" xml:space="preserve">
     <value>Specifies how often the recurrence will be repeated. The start date counts as the first one</value>
   </data>
-  <data name="Frequency" xml:space="preserve">
+  <data name="Frequency_label" xml:space="preserve">
     <value>Frequency</value>
   </data>
-  <data name="Frequency_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Frequency_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Interval" xml:space="preserve">
+  <data name="Interval_label" xml:space="preserve">
     <value>Interval</value>
-  </data>
-  <data name="Interval_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Interval_description" xml:space="preserve">
     <value>Specifies how often the recurrence rule repeats, null is equivalent to 1</value>
   </data>
-  <data name="Until" xml:space="preserve">
+  <data name="Until_label" xml:space="preserve">
     <value>Until</value>
-  </data>
-  <data name="Until_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Until_description" xml:space="preserve">
     <value>Recurrents ends at this date, including this date</value>
   </data>
-  <data name="WeekStart" xml:space="preserve">
+  <data name="WeekStart_label" xml:space="preserve">
     <value>WeekStart</value>
-  </data>
-  <data name="WeekStart_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="WeekStart_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />

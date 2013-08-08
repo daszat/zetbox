@@ -117,57 +117,39 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="GetCurrent" xml:space="preserve">
+  <data name="GetCurrent_label" xml:space="preserve">
     <value>GetCurrent</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="GetCurrent_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
   <data name="GetCurrent_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetCurrent(dt)" xml:space="preserve">
+  <data name="GetCurrent(dt)_label" xml:space="preserve">
     <value>dt</value>
-  </data>
-  <data name="GetCurrent(dt)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetCurrent(dt)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetCurrent(retval)" xml:space="preserve">
+  <data name="GetCurrent(retval)_label" xml:space="preserve">
     <value>retval</value>
-  </data>
-  <data name="GetCurrent(retval)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetCurrent(retval)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetNext" xml:space="preserve">
+  <data name="GetNext_label" xml:space="preserve">
     <value>GetNext</value>
-  </data>
-  <data name="GetNext_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetNext_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetNext(dt)" xml:space="preserve">
+  <data name="GetNext(dt)_label" xml:space="preserve">
     <value>dt</value>
-  </data>
-  <data name="GetNext(dt)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetNext(dt)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetNext(retval)" xml:space="preserve">
+  <data name="GetNext(retval)_label" xml:space="preserve">
     <value>retval</value>
-  </data>
-  <data name="GetNext(retval)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetNext(retval)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />

@@ -117,36 +117,24 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Group1" xml:space="preserve">
+  <data name="Group1_label" xml:space="preserve">
     <value>Group1</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Group1_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
   <data name="Group1_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Group2" xml:space="preserve">
+  <data name="Group2_label" xml:space="preserve">
     <value>Group2</value>
-  </data>
-  <data name="Group2_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Group2_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="ObjParameter" xml:space="preserve">
+  <data name="ObjParameter_label" xml:space="preserve">
     <value>ObjParameter</value>
-  </data>
-  <data name="ObjParameter_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ObjParameter_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
-  </data>
-  <data name="ObjParameter(objParam)" xml:space="preserve">
-    <value>objParam</value>
   </data>
   <data name="ObjParameter(objParam)_label" xml:space="preserve">
     <value>Object parameter</value>
@@ -154,101 +142,68 @@
   <data name="ObjParameter(objParam)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="ObjRet" xml:space="preserve">
+  <data name="ObjRet_label" xml:space="preserve">
     <value>ObjRet</value>
-  </data>
-  <data name="ObjRet_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ObjRet_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="ObjRet(retVal)" xml:space="preserve">
+  <data name="ObjRet(retVal)_label" xml:space="preserve">
     <value>retVal</value>
-  </data>
-  <data name="ObjRet(retVal)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ObjRet(retVal)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Parameterless" xml:space="preserve">
+  <data name="Parameterless_label" xml:space="preserve">
     <value>Parameterless</value>
-  </data>
-  <data name="Parameterless_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Parameterless_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="ServerMethod" xml:space="preserve">
+  <data name="ServerMethod_label" xml:space="preserve">
     <value>ServerMethod</value>
-  </data>
-  <data name="ServerMethod_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ServerMethod_description" xml:space="preserve">
     <value>Does nothing, on the server</value>
   </data>
-  <data name="ServerObjParameter" xml:space="preserve">
+  <data name="ServerObjParameter_label" xml:space="preserve">
     <value>ServerObjParameter</value>
-  </data>
-  <data name="ServerObjParameter_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ServerObjParameter_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="ServerObjParameter(input)" xml:space="preserve">
+  <data name="ServerObjParameter(input)_label" xml:space="preserve">
     <value>input</value>
-  </data>
-  <data name="ServerObjParameter(input)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ServerObjParameter(input)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="ServerObjParameter(retVal)" xml:space="preserve">
+  <data name="ServerObjParameter(retVal)_label" xml:space="preserve">
     <value>retVal</value>
-  </data>
-  <data name="ServerObjParameter(retVal)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ServerObjParameter(retVal)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="ServerParameterless" xml:space="preserve">
+  <data name="ServerParameterless_label" xml:space="preserve">
     <value>ServerParameterless</value>
-  </data>
-  <data name="ServerParameterless_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ServerParameterless_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="StringParameter" xml:space="preserve">
+  <data name="StringParameter_label" xml:space="preserve">
     <value>StringParameter</value>
-  </data>
-  <data name="StringParameter_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="StringParameter_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="StringParameter(str)" xml:space="preserve">
+  <data name="StringParameter(str)_label" xml:space="preserve">
     <value>str</value>
-  </data>
-  <data name="StringParameter(str)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="StringParameter(str)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Summary" xml:space="preserve">
+  <data name="Summary_label" xml:space="preserve">
     <value>Summary</value>
-  </data>
-  <data name="Summary_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="Summary_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />

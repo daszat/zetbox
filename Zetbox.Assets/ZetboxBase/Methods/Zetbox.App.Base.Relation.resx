@@ -117,156 +117,105 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="GetEnd" xml:space="preserve">
+  <data name="GetEnd_label" xml:space="preserve">
     <value>GetEnd</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="GetEnd_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
   <data name="GetEnd_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetEnd(result)" xml:space="preserve">
+  <data name="GetEnd(result)_label" xml:space="preserve">
     <value>result</value>
-  </data>
-  <data name="GetEnd(result)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetEnd(result)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetEnd(prop)" xml:space="preserve">
+  <data name="GetEnd(prop)_label" xml:space="preserve">
     <value>prop</value>
-  </data>
-  <data name="GetEnd(prop)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetEnd(prop)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetEndFromRole" xml:space="preserve">
+  <data name="GetEndFromRole_label" xml:space="preserve">
     <value>GetEndFromRole</value>
-  </data>
-  <data name="GetEndFromRole_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetEndFromRole_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetEndFromRole(result)" xml:space="preserve">
+  <data name="GetEndFromRole(result)_label" xml:space="preserve">
     <value>result</value>
-  </data>
-  <data name="GetEndFromRole(result)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetEndFromRole(result)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetEndFromRole(role)" xml:space="preserve">
+  <data name="GetEndFromRole(role)_label" xml:space="preserve">
     <value>role</value>
-  </data>
-  <data name="GetEndFromRole(role)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetEndFromRole(role)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetEntryInterfaceType" xml:space="preserve">
+  <data name="GetEntryInterfaceType_label" xml:space="preserve">
     <value>GetEntryInterfaceType</value>
-  </data>
-  <data name="GetEntryInterfaceType_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetEntryInterfaceType_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetEntryInterfaceType(result)" xml:space="preserve">
+  <data name="GetEntryInterfaceType(result)_label" xml:space="preserve">
     <value>result</value>
-  </data>
-  <data name="GetEntryInterfaceType(result)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetEntryInterfaceType(result)_description" xml:space="preserve">
     <value>The InterfaceType of the described RelationEntry</value>
   </data>
-  <data name="GetOtherEnd" xml:space="preserve">
+  <data name="GetOtherEnd_label" xml:space="preserve">
     <value>GetOtherEnd</value>
-  </data>
-  <data name="GetOtherEnd_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetOtherEnd_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetOtherEnd(result)" xml:space="preserve">
+  <data name="GetOtherEnd(result)_label" xml:space="preserve">
     <value>result</value>
-  </data>
-  <data name="GetOtherEnd(result)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetOtherEnd(result)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetOtherEnd(relEnd)" xml:space="preserve">
+  <data name="GetOtherEnd(relEnd)_label" xml:space="preserve">
     <value>relEnd</value>
-  </data>
-  <data name="GetOtherEnd(relEnd)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetOtherEnd(relEnd)_description" xml:space="preserve">
     <value />
   </data>
-  <data name="GetRelationType" xml:space="preserve">
+  <data name="GetRelationType_label" xml:space="preserve">
     <value>GetRelationType</value>
-  </data>
-  <data name="GetRelationType_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetRelationType_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="GetRelationType(result)" xml:space="preserve">
+  <data name="GetRelationType(result)_label" xml:space="preserve">
     <value>result</value>
-  </data>
-  <data name="GetRelationType(result)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="GetRelationType(result)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="NeedsPositionStorage" xml:space="preserve">
+  <data name="NeedsPositionStorage_label" xml:space="preserve">
     <value>NeedsPositionStorage</value>
-  </data>
-  <data name="NeedsPositionStorage_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="NeedsPositionStorage_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="NeedsPositionStorage(result)" xml:space="preserve">
+  <data name="NeedsPositionStorage(result)_label" xml:space="preserve">
     <value>result</value>
-  </data>
-  <data name="NeedsPositionStorage(result)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="NeedsPositionStorage(result)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="NeedsPositionStorage(endRole)" xml:space="preserve">
+  <data name="NeedsPositionStorage(endRole)_label" xml:space="preserve">
     <value>endRole</value>
-  </data>
-  <data name="NeedsPositionStorage(endRole)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="NeedsPositionStorage(endRole)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="SwapRelationEnds" xml:space="preserve">
+  <data name="SwapRelationEnds_label" xml:space="preserve">
     <value>SwapRelationEnds</value>
-  </data>
-  <data name="SwapRelationEnds_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="SwapRelationEnds_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />

@@ -117,57 +117,39 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CalculatedEnumeration" xml:space="preserve">
+  <data name="CalculatedEnumeration_label" xml:space="preserve">
     <value>CalculatedEnumeration</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="CalculatedEnumeration_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
   <data name="CalculatedEnumeration_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="MyIntProperty" xml:space="preserve">
+  <data name="MyIntProperty_label" xml:space="preserve">
     <value>MyIntProperty</value>
-  </data>
-  <data name="MyIntProperty_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="MyIntProperty_description" xml:space="preserve">
     <value>test</value>
   </data>
-  <data name="ObjectProp" xml:space="preserve">
+  <data name="ObjectProp_label" xml:space="preserve">
     <value>ObjectProp</value>
-  </data>
-  <data name="ObjectProp_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="ObjectProp_description" xml:space="preserve">
     <value>testtest</value>
   </data>
-  <data name="StringProp" xml:space="preserve">
+  <data name="StringProp_label" xml:space="preserve">
     <value>StringProp</value>
-  </data>
-  <data name="StringProp_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="StringProp_description" xml:space="preserve">
     <value>String Property</value>
   </data>
-  <data name="TestEnumProp" xml:space="preserve">
+  <data name="TestEnumProp_label" xml:space="preserve">
     <value>TestEnumProp</value>
-  </data>
-  <data name="TestEnumProp_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="TestEnumProp_description" xml:space="preserve">
     <value>Test Enumeration Property</value>
   </data>
-  <data name="TestEnumWithDefault" xml:space="preserve">
+  <data name="TestEnumWithDefault_label" xml:space="preserve">
     <value>TestEnumWithDefault</value>
-  </data>
-  <data name="TestEnumWithDefault_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
   </data>
   <data name="TestEnumWithDefault_description" xml:space="preserve">
     <value>Tests whether enums with defaults work</value>
