@@ -404,7 +404,7 @@ namespace Zetbox.Client.Presentables
                 if (_HelpCommand == null)
                 {
                     _HelpCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, ViewModelResources.HelpCommand, ViewModelResources.HelpCommand_Tooltip, Help, CanHelp, null);
-                    _HelpCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.info_png.Find(FrozenContext));
+                    //_HelpCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.info_png.Find(FrozenContext));
                 }
                 return _HelpCommand;
             }
