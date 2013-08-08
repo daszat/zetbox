@@ -16,6 +16,9 @@ set config=%1
 bin\Debug\Zetbox.Cli.exe %config% -fallback -generate -updatedeployedschema -repairschema
 IF ERRORLEVEL 1 GOTO FAIL
 
+bin\Debug\Zetbox.Cli.exe %configs% -generate-resources
+IF ERRORLEVEL 1 GOTO FAIL
+
 rem refresh local code
 call GetCodeGen.cmd
 IF ERRORLEVEL 1 GOTO FAIL
