@@ -15,8 +15,10 @@
     <globalSetting name="CreateNewFileForm.newLanguageComboBox.SelectedIndex">100</globalSetting>
     <globalSetting name="CreateNewFileForm.copyTextsCheckBox.Checked">False</globalSetting>
     <globalSetting name="CreateNewFileForm.automaticallyTranslateCheckBox.Checked">False</globalSetting>
+    <globalSetting name="projectMruItems">&lt;?xml version='1.0' encoding='utf-8'?&gt;&lt;items&gt;&lt;item type="2" checksum="1381320964" /&gt;&lt;/items&gt;</globalSetting>
     <userSetting name="arthur@DASZ.FindText">
     </userSetting>
+    <userSetting name="arthur@DASZ.RecentFiles">P:\zetbox\Zetbox.Assets\ZetboxBase\DataTypes.resx;P:\zetbox\Zetbox.Assets\ZetboxBase\DataTypes.de.resx</userSetting>
     <description>
     </description>
   </configuration>
