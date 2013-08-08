@@ -19,11 +19,11 @@ namespace Zetbox.Generator.ResourceGenerator
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Zetbox.API.Server;
-    using Zetbox.API;
-    using Zetbox.API.Utils;
     using Autofac;
+    using Zetbox.API;
     using Zetbox.API.Configuration;
+    using Zetbox.API.Server;
+    using Zetbox.API.Utils;
 
     internal class ResourceCmdLineHandler
     {
@@ -46,17 +46,16 @@ namespace Zetbox.Generator.ResourceGenerator
             var ctx = _container.Resolve<IZetboxServerContext>();
             var config = _container.Resolve<ZetboxConfig>();
 
-            var allData = arg.Contains("*");
             var modules = GetModules(ctx, arg);
 
-                var basePath = System.IO.Path.Combine(config.Server.CodeGenOutputPath, "Assets");
-                System.IO.Directory.CreateDirectory(basePath);
+            var basePath = System.IO.Path.Combine(config.Server.CodeGenOutputPath, "Assets");
+            System.IO.Directory.CreateDirectory(basePath);
 
-                var gen = _container.Resolve<ResourceGeneratorFactory>().Invoke(basePath);
-                foreach (var task in _tasks)
-                {
-                    task.Generate(gen, ctx, modules);
-                }
+            var gen = _container.Resolve<ResourceGeneratorFactory>().Invoke(basePath);
+            foreach (var task in _tasks)
+            {
+                task.Generate(gen, ctx, modules);
+            }
         }
 
         private static Zetbox.App.Base.Module[] GetModules(IReadOnlyZetboxContext ctx, string[] moduleNames)
