@@ -280,18 +280,25 @@ namespace Zetbox.DalProvider.Client
             return new ZbTask<IList<T>>(fetchTask)
                 .OnResult(t =>
                 {
-                    foreach (IPersistenceObject obj in fetchTask.Result.Item2)
+                    RecordNotifications();
+                    try
                     {
-                        this.AttachRespectingIsolationLevel(obj);
-                    }
+                        foreach (IPersistenceObject obj in fetchTask.Result.Item2)
+                        {
+                            this.AttachRespectingIsolationLevel(obj);
+                        }
 
-                    t.Result = new List<T>();
-                    foreach (IPersistenceObject obj in fetchTask.Result.Item1)
-                    {
-                        var localobj = this.AttachRespectingIsolationLevel(obj);
-                        t.Result.Add((T)localobj);
+                        t.Result = new List<T>();
+                        foreach (IPersistenceObject obj in fetchTask.Result.Item1)
+                        {
+                            var localobj = this.AttachRespectingIsolationLevel(obj);
+                            t.Result.Add((T)localobj);
+                        }
                     }
-                    PlaybackNotifications();
+                    finally
+                    {
+                        PlaybackNotifications();
+                    }
                 });
         }
 
@@ -427,9 +434,19 @@ namespace Zetbox.DalProvider.Client
             return localobj;
         }
 
+        private int _notificationsCounter = 0;
+        internal void RecordNotifications()
+        {
+            AttachedObjects.ForEach(obj => ((BasePersistenceObject)obj).RecordNotifications());
+            _notificationsCounter += 1;
+        }
+
         internal void PlaybackNotifications()
         {
-            AttachedObjects.ForEach(obj => ((BasePersistenceObject)obj).PlaybackNotifications());
+            _notificationsCounter -= 1;
+
+            if (_notificationsCounter == 0)
+                AttachedObjects.ForEach(obj => ((BasePersistenceObject)obj).PlaybackNotifications());
         }
 
         /// <summary>
@@ -551,6 +568,7 @@ namespace Zetbox.DalProvider.Client
         {
             public int ExchangeObjects(ZetboxContextImpl ctx)
             {
+                // TODO: ExchangeObjectsHandler is also used for method calls 
                 NotifyPreSave(ctx);
 
                 var objectsToSubmit = new List<IPersistenceObject>();
@@ -591,67 +609,72 @@ namespace Zetbox.DalProvider.Client
                 // Submit to server
                 var objectsFromServer = this.ExecuteServerCall(ctx, objectsToSubmit, notificationRequests);
 
-                // Apply Changes
-                int counter = 0;
-                var changedObjects = new List<IPersistenceObject>();
-                foreach (var objFromServer in objectsFromServer)
+                ctx.RecordNotifications();
+                try
                 {
-                    IClientObject obj;
-                    IPersistenceObject underlyingObject;
-
-                    if (counter < objectsToAdd.Count)
+                    // Apply Changes
+                    int counter = 0;
+                    var changedObjects = new List<IPersistenceObject>();
+                    foreach (var objFromServer in objectsFromServer)
                     {
-                        obj = (IClientObject)objectsToAdd[counter++];
-                        underlyingObject = obj.UnderlyingObject;
+                        IClientObject obj;
+                        IPersistenceObject underlyingObject;
 
-                        // remove object from cache, since index by ID may change.
-                        // will be re-inserted on attach later
-                        ctx._objects.Remove(underlyingObject);
-                    }
-                    else
-                    {
-                        underlyingObject = ctx.ContainsObject(ctx.GetInterfaceType(objFromServer), objFromServer.ID) ?? objFromServer;
-                        obj = (IClientObject)underlyingObject;
+                        if (counter < objectsToAdd.Count)
+                        {
+                            obj = (IClientObject)objectsToAdd[counter++];
+                            underlyingObject = obj.UnderlyingObject;
+
+                            // remove object from cache, since index by ID may change.
+                            // will be re-inserted on attach later
+                            ctx._objects.Remove(underlyingObject);
+                        }
+                        else
+                        {
+                            underlyingObject = ctx.ContainsObject(ctx.GetInterfaceType(objFromServer), objFromServer.ID) ?? objFromServer;
+                            obj = (IClientObject)underlyingObject;
+                        }
+
+                        ((BasePersistenceObject)underlyingObject).RecordNotifications();
+                        if (obj != objFromServer)
+                        {
+                            underlyingObject.ApplyChangesFrom(objFromServer);
+                        }
+
+                        // reset ObjectState to new truth
+                        switch (objFromServer.ObjectState)
+                        {
+                            case DataObjectState.Deleted:
+                                obj.SetDeleted();
+                                break;
+                            case DataObjectState.Unmodified:
+                                obj.SetUnmodified();
+                                break;
+                            case DataObjectState.New:
+                                FixObjStateNew(obj);
+                                break;
+                            case DataObjectState.Modified:
+                                FixObjStateModified(obj);
+                                break;
+                            case DataObjectState.NotDeserialized:
+                            case DataObjectState.Detached:
+                                throw new InvalidOperationException(string.Format("Invalid state received from server: {0}", objFromServer.ObjectState));
+                            default:
+                                throw new InvalidOperationException(string.Format("Unknown state received from server: {0}", objFromServer.ObjectState));
+                        }
+
+                        changedObjects.Add(underlyingObject);
                     }
 
-                    ((BasePersistenceObject)underlyingObject).RecordNotifications();
-                    if (obj != objFromServer)
-                    {
-                        underlyingObject.ApplyChangesFrom(objFromServer);
-                    }
+                    objectsToDetach.Except(changedObjects).ForEach(obj => ctx.Detach(obj));
+                    changedObjects.ForEach(obj => ctx.Attach(obj));
 
-                    // reset ObjectState to new truth
-                    switch (objFromServer.ObjectState)
-                    {
-                        case DataObjectState.Deleted:
-                            obj.SetDeleted();
-                            break;
-                        case DataObjectState.Unmodified:
-                            obj.SetUnmodified();
-                            break;
-                        case DataObjectState.New:
-                            FixObjStateNew(obj);
-                            break;
-                        case DataObjectState.Modified:
-                            FixObjStateModified(obj);
-                            break;
-                        case DataObjectState.NotDeserialized:
-                        case DataObjectState.Detached:
-                            throw new InvalidOperationException(string.Format("Invalid state received from server: {0}", objFromServer.ObjectState));
-                        default:
-                            throw new InvalidOperationException(string.Format("Unknown state received from server: {0}", objFromServer.ObjectState));
-                    }
-
-                    changedObjects.Add(underlyingObject);
+                    this.UpdateModifiedState(ctx);
                 }
-
-                objectsToDetach.Except(changedObjects).ForEach(obj => ctx.Detach(obj));
-                changedObjects.ForEach(obj => ctx.Attach(obj));
-
-                this.UpdateModifiedState(ctx);
-
-                ctx.PlaybackNotifications();
-
+                finally
+                {
+                    ctx.PlaybackNotifications();
+                }
                 NotifyPostSave();
 
                 return objectsToSubmit.Count;

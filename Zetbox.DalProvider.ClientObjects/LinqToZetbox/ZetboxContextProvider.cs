@@ -81,17 +81,23 @@ namespace Zetbox.DalProvider.Client
                 {
                     t.Result = new List<IDataObject>();
 
-                    foreach (IDataObject obj in serviceTask.Result.Item1)
+                    _context.RecordNotifications();
+                    try
                     {
-                        t.Result.Add((IDataObject)_context.AttachRespectingIsolationLevel(obj));
-                    }
+                        foreach (IDataObject obj in serviceTask.Result.Item1)
+                        {
+                            t.Result.Add((IDataObject)_context.AttachRespectingIsolationLevel(obj));
+                        }
 
-                    foreach (IPersistenceObject obj in serviceTask.Result.Item2)
+                        foreach (IPersistenceObject obj in serviceTask.Result.Item2)
+                        {
+                            _context.AttachRespectingIsolationLevel(obj);
+                        }
+                    }
+                    finally
                     {
-                        _context.AttachRespectingIsolationLevel(obj);
+                        _context.PlaybackNotifications();
                     }
-
-                    _context.PlaybackNotifications();
                 });
         }
 
@@ -126,6 +132,8 @@ namespace Zetbox.DalProvider.Client
             return new ZbTask<List<T>>(getListTask)
                 .OnResult(t =>
                 {
+                    _context.RecordNotifications();
+
                     try
                     {
                         // prepare caches
@@ -140,12 +148,11 @@ namespace Zetbox.DalProvider.Client
                         // in the face of local changes, we have to re-query against local objects, to provide a consistent view of the objects
                         var result = _context.IsModified ? QueryFromLocalObjectsHack(_type, query).Cast<IDataObject>().ToList() : serviceResult;
 
-                        _context.PlaybackNotifications();
-
                         t.Result = result.Cast<T>().ToList();
                     }
                     finally
                     {
+                        _context.PlaybackNotifications();
                         perfCounter.DecrementQuery(_type, objectCount, ticks);
                     }
                 });
@@ -188,18 +195,24 @@ namespace Zetbox.DalProvider.Client
                 })
                 .OnResult(t =>
                 {
-                    // prepare caches
-                    foreach (IPersistenceObject obj in t.Result.Item2)
+                    _context.RecordNotifications();
+                    try
                     {
-                        _context.AttachRespectingIsolationLevel(obj);
-                    }
+                        // prepare caches
+                        foreach (IPersistenceObject obj in t.Result.Item2)
+                        {
+                            _context.AttachRespectingIsolationLevel(obj);
+                        }
 
-                    foreach (IDataObject obj in t.Result.Item1)
+                        foreach (IDataObject obj in t.Result.Item1)
+                        {
+                            result = (T)_context.AttachRespectingIsolationLevel(obj);
+                        }
+                    }
+                    finally
                     {
-                        result = (T)_context.AttachRespectingIsolationLevel(obj);
+                        _context.PlaybackNotifications();
                     }
-
-                    _context.PlaybackNotifications();
                 });
                 task = new ZbTask<T>(getObjectTask);
             }
