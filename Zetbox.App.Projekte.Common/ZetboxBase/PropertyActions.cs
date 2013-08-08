@@ -19,11 +19,18 @@ namespace Zetbox.App.Base
     using System.Linq;
     using System.Text;
     using Zetbox.API;
+    using Zetbox.API.Common;
     using Zetbox.App.Extensions;
 
     [Implementor]
-    public static class PropertyActions
+    public class PropertyActions
     {
+        private static IAssetsManager _assets;
+        public PropertyActions(IAssetsManager assets)
+        {
+            _assets = assets;
+        }
+
         internal static void DecorateElementType(Property obj, MethodReturnEventArgs<string> e, bool isStruct)
         {
             if (obj == null) throw new ArgumentNullException("obj");
@@ -69,6 +76,11 @@ namespace Zetbox.App.Base
         public static void GetLabel(Zetbox.App.Base.Property obj, MethodReturnEventArgs<System.String> e)
         {
             e.Result = !string.IsNullOrEmpty(obj.Label) ? obj.Label : obj.Name;
+
+            if (obj.Module == null || obj.ObjectClass == null)
+                return;
+
+            e.Result = _assets.GetString(obj.Module, ZetboxAssetKeys.ConstructBaseName(obj), ZetboxAssetKeys.ConstructLabelKey(obj), e.Result);
         }
 
         [Invocation]
