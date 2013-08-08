@@ -17,13 +17,13 @@ namespace Zetbox.Client.Presentables.FilterViewModels
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.Linq;
     using System.Text;
     using Zetbox.API;
-    using System.Collections.ObjectModel;
-    using Zetbox.Client.Presentables.ValueViewModels;
     using Zetbox.Client.Models;
-    using System.ComponentModel;
+    using Zetbox.Client.Presentables.ValueViewModels;
 
     [ViewModelDescriptor]
     public class DateRangeFilterViewModel : FilterViewModel

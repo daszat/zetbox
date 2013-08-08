@@ -761,6 +761,14 @@ namespace Zetbox.Client.Models
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
 
             var mdl = new DateRangeFilterModel();
+
+            Setup(mdl, frozenCtx, label, valueSource, requestedKind, setYearDefault, setQuaterDefault, setMonthDefault);
+
+            return mdl;
+        }
+
+        protected static void Setup(DateRangeFilterModel mdl, IFrozenContext frozenCtx, string label, IFilterValueSource valueSource, ControlKind requestedKind, bool setYearDefault, bool setQuaterDefault, bool setMonthDefault)
+        {
             mdl.Label = label;
             mdl.ValueSource = valueSource;
             mdl.ViewModelType = ViewModelDescriptors.Zetbox_Client_Presentables_FilterViewModels_DateRangeFilterViewModel.Find(frozenCtx);
@@ -794,8 +802,6 @@ namespace Zetbox.Client.Models
                 fromMdl.Value = DateTime.Today.FirstMonthDay();
                 toMdl.Value = DateTime.Today.LastMonthDay();
             }
-
-            return mdl;
         }
 
         protected DateRangeFilterModel()
@@ -825,54 +831,16 @@ namespace Zetbox.Client.Models
         }
     }
 
-    public class DateRangeIntersectFilterModel : FilterModel
+    public class DateRangeIntersectFilterModel : DateRangeFilterModel
     {
         public static DateRangeIntersectFilterModel Create(IFrozenContext frozenCtx, string label, IFilterValueSource fromValueSource, IFilterValueSource toValueSource, ControlKind requestedKind, bool setYearDefault, bool setQuaterDefault, bool setMonthDefault)
         {
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
 
             var mdl = new DateRangeIntersectFilterModel();
-            mdl.Label = label;
-            mdl.ValueSource = fromValueSource;
+            DateRangeFilterModel.Setup(mdl, frozenCtx, label, fromValueSource, requestedKind, setYearDefault, setQuaterDefault, setMonthDefault);
             mdl.ToValueSource = toValueSource;
-            mdl.ViewModelType = ViewModelDescriptors.Zetbox_Client_Presentables_FilterViewModels_DateRangeFilterViewModel.Find(frozenCtx);
-            mdl.RequestedKind = requestedKind;
-
-            var fromMdl = new DateTimeValueModel(FilterModelsResources.From, "", true, false, DateTimeStyles.Date);
-            var toMdl = new DateTimeValueModel(FilterModelsResources.To, "", true, false, DateTimeStyles.Date);
-
-            mdl.FilterArguments.Add(new FilterArgumentConfig(
-                fromMdl,
-                /*cfg.ArgumentViewModel ?? */ ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableDateTimePropertyViewModel.Find(frozenCtx)));
-            mdl.FilterArguments.Add(new FilterArgumentConfig(
-                toMdl,
-                /*cfg.ArgumentViewModel ?? */ ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableDateTimePropertyViewModel.Find(frozenCtx)));
-
-            if (setYearDefault)
-            {
-                // Defaults to this month
-                fromMdl.Value = DateTime.Today.FirstYearDay();
-                toMdl.Value = DateTime.Today.LastYearDay();
-            }
-            else if (setQuaterDefault)
-            {
-                // Defaults to this month
-                fromMdl.Value = DateTime.Today.FirstQuaterDay();
-                toMdl.Value = DateTime.Today.LastQuaterDay();
-            }
-            else if (setMonthDefault)
-            {
-                // Defaults to this month
-                fromMdl.Value = DateTime.Today.FirstMonthDay();
-                toMdl.Value = DateTime.Today.LastMonthDay();
-            }
-
             return mdl;
-        }
-
-        protected DateRangeIntersectFilterModel()
-        {
-            base.RefreshOnFilterChanged = true;
         }
 
         protected override string GetPredicate()
@@ -884,22 +852,6 @@ namespace Zetbox.Client.Models
         {
             get;
             set;
-        }
-
-        public DateTimeValueModel From
-        {
-            get
-            {
-                return (DateTimeValueModel)FilterArguments[0].Value;
-            }
-        }
-
-        public DateTimeValueModel To
-        {
-            get
-            {
-                return (DateTimeValueModel)FilterArguments[1].Value;
-            }
         }
     }
 
