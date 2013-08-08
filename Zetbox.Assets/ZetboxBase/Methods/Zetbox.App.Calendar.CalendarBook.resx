@@ -117,23 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Zetbox.App.Calendar.CalendarBook.GetNewEventViewModels" xml:space="preserve">
+  <data name="GetNewEventViewModels" xml:space="preserve">
     <value>GetNewEventViewModels</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Zetbox.App.Calendar.CalendarBook.GetNewEventViewModels_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetNewEventViewModels_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Calendar.CalendarBook.GetNewEventViewModels_description" xml:space="preserve">
+  <data name="GetNewEventViewModels_description" xml:space="preserve">
     <value>Gets a list of ViewModels that can create a new event. Multiple implementations can support different kind of events</value>
   </data>
-  <data name="Zetbox.App.Calendar.CalendarBook.GetNewEventViewModels(args)" xml:space="preserve">
+  <data name="GetNewEventViewModels(args)" xml:space="preserve">
     <value>args</value>
   </data>
-  <data name="Zetbox.App.Calendar.CalendarBook.GetNewEventViewModels(args)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetNewEventViewModels(args)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Calendar.CalendarBook.GetNewEventViewModels(args)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetNewEventViewModels(args)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
 </root>

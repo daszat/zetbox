@@ -117,13 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Zetbox.App.GUI.MonthFilterConfiguration.IsCurrentMonthDefault" xml:space="preserve">
+  <data name="IsCurrentMonthDefault" xml:space="preserve">
     <value>IsCurrentMonthDefault</value>
   </data>
-  <data name="Zetbox.App.GUI.MonthFilterConfiguration.IsCurrentMonthDefault_label" xml:space="preserve">
+  <data name="IsCurrentMonthDefault_label" xml:space="preserve">
     <value>Is current month default</value>
   </data>
-  <data name="Zetbox.App.GUI.MonthFilterConfiguration.IsCurrentMonthDefault_description" xml:space="preserve">
+  <data name="IsCurrentMonthDefault_description" xml:space="preserve">
     <value>If true, the current month will be the default value</value>
   </data>
 </root>

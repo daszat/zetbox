@@ -117,158 +117,158 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Zetbox.App.Base.Relation.GetEnd" xml:space="preserve">
+  <data name="GetEnd" xml:space="preserve">
     <value>GetEnd</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Zetbox.App.Base.Relation.GetEnd_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetEnd_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Relation.GetEnd_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetEnd_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Relation.GetEnd(result)" xml:space="preserve">
+  <data name="GetEnd(result)" xml:space="preserve">
     <value>result</value>
   </data>
-  <data name="Zetbox.App.Base.Relation.GetEnd(result)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetEnd(result)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Relation.GetEnd(result)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetEnd(result)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Relation.GetEnd(prop)" xml:space="preserve">
+  <data name="GetEnd(prop)" xml:space="preserve">
     <value>prop</value>
   </data>
-  <data name="Zetbox.App.Base.Relation.GetEnd(prop)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetEnd(prop)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Relation.GetEnd(prop)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetEnd(prop)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Relation.GetEndFromRole" xml:space="preserve">
+  <data name="GetEndFromRole" xml:space="preserve">
     <value>GetEndFromRole</value>
   </data>
-  <data name="Zetbox.App.Base.Relation.GetEndFromRole_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetEndFromRole_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Relation.GetEndFromRole_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetEndFromRole_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Relation.GetEndFromRole(result)" xml:space="preserve">
+  <data name="GetEndFromRole(result)" xml:space="preserve">
     <value>result</value>
   </data>
-  <data name="Zetbox.App.Base.Relation.GetEndFromRole(result)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetEndFromRole(result)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Relation.GetEndFromRole(result)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetEndFromRole(result)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Relation.GetEndFromRole(role)" xml:space="preserve">
+  <data name="GetEndFromRole(role)" xml:space="preserve">
     <value>role</value>
   </data>
-  <data name="Zetbox.App.Base.Relation.GetEndFromRole(role)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetEndFromRole(role)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Relation.GetEndFromRole(role)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetEndFromRole(role)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Relation.GetEntryInterfaceType" xml:space="preserve">
+  <data name="GetEntryInterfaceType" xml:space="preserve">
     <value>GetEntryInterfaceType</value>
   </data>
-  <data name="Zetbox.App.Base.Relation.GetEntryInterfaceType_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetEntryInterfaceType_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Relation.GetEntryInterfaceType_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetEntryInterfaceType_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Relation.GetEntryInterfaceType(result)" xml:space="preserve">
+  <data name="GetEntryInterfaceType(result)" xml:space="preserve">
     <value>result</value>
   </data>
-  <data name="Zetbox.App.Base.Relation.GetEntryInterfaceType(result)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetEntryInterfaceType(result)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Relation.GetEntryInterfaceType(result)_description" xml:space="preserve">
+  <data name="GetEntryInterfaceType(result)_description" xml:space="preserve">
     <value>The InterfaceType of the described RelationEntry</value>
   </data>
-  <data name="Zetbox.App.Base.Relation.GetOtherEnd" xml:space="preserve">
+  <data name="GetOtherEnd" xml:space="preserve">
     <value>GetOtherEnd</value>
   </data>
-  <data name="Zetbox.App.Base.Relation.GetOtherEnd_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetOtherEnd_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Relation.GetOtherEnd_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetOtherEnd_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Relation.GetOtherEnd(result)" xml:space="preserve">
+  <data name="GetOtherEnd(result)" xml:space="preserve">
     <value>result</value>
   </data>
-  <data name="Zetbox.App.Base.Relation.GetOtherEnd(result)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetOtherEnd(result)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Relation.GetOtherEnd(result)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetOtherEnd(result)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Relation.GetOtherEnd(relEnd)" xml:space="preserve">
+  <data name="GetOtherEnd(relEnd)" xml:space="preserve">
     <value>relEnd</value>
   </data>
-  <data name="Zetbox.App.Base.Relation.GetOtherEnd(relEnd)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetOtherEnd(relEnd)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Relation.GetOtherEnd(relEnd)_description" xml:space="preserve">
+  <data name="GetOtherEnd(relEnd)_description" xml:space="preserve">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Relation.GetRelationType" xml:space="preserve">
+  <data name="GetRelationType" xml:space="preserve">
     <value>GetRelationType</value>
   </data>
-  <data name="Zetbox.App.Base.Relation.GetRelationType_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetRelationType_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Relation.GetRelationType_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetRelationType_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Relation.GetRelationType(result)" xml:space="preserve">
+  <data name="GetRelationType(result)" xml:space="preserve">
     <value>result</value>
   </data>
-  <data name="Zetbox.App.Base.Relation.GetRelationType(result)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetRelationType(result)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Relation.GetRelationType(result)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetRelationType(result)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Relation.NeedsPositionStorage" xml:space="preserve">
+  <data name="NeedsPositionStorage" xml:space="preserve">
     <value>NeedsPositionStorage</value>
   </data>
-  <data name="Zetbox.App.Base.Relation.NeedsPositionStorage_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="NeedsPositionStorage_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Relation.NeedsPositionStorage_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="NeedsPositionStorage_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Relation.NeedsPositionStorage(result)" xml:space="preserve">
+  <data name="NeedsPositionStorage(result)" xml:space="preserve">
     <value>result</value>
   </data>
-  <data name="Zetbox.App.Base.Relation.NeedsPositionStorage(result)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="NeedsPositionStorage(result)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Relation.NeedsPositionStorage(result)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="NeedsPositionStorage(result)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Relation.NeedsPositionStorage(endRole)" xml:space="preserve">
+  <data name="NeedsPositionStorage(endRole)" xml:space="preserve">
     <value>endRole</value>
   </data>
-  <data name="Zetbox.App.Base.Relation.NeedsPositionStorage(endRole)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="NeedsPositionStorage(endRole)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Relation.NeedsPositionStorage(endRole)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="NeedsPositionStorage(endRole)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Relation.SwapRelationEnds" xml:space="preserve">
+  <data name="SwapRelationEnds" xml:space="preserve">
     <value>SwapRelationEnds</value>
   </data>
-  <data name="Zetbox.App.Base.Relation.SwapRelationEnds_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="SwapRelationEnds_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Relation.SwapRelationEnds_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="SwapRelationEnds_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
 </root>

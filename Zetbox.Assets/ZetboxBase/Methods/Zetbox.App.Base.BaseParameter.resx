@@ -117,59 +117,59 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Zetbox.App.Base.BaseParameter.GetLabel" xml:space="preserve">
+  <data name="GetLabel" xml:space="preserve">
     <value>GetLabel</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Zetbox.App.Base.BaseParameter.GetLabel_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetLabel_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.BaseParameter.GetLabel_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetLabel_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.BaseParameter.GetLabel(retVal)" xml:space="preserve">
+  <data name="GetLabel(retVal)" xml:space="preserve">
     <value>retVal</value>
   </data>
-  <data name="Zetbox.App.Base.BaseParameter.GetLabel(retVal)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetLabel(retVal)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.BaseParameter.GetLabel(retVal)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetLabel(retVal)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.BaseParameter.GetParameterType" xml:space="preserve">
+  <data name="GetParameterType" xml:space="preserve">
     <value>GetParameterType</value>
   </data>
-  <data name="Zetbox.App.Base.BaseParameter.GetParameterType_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetParameterType_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.BaseParameter.GetParameterType_description" xml:space="preserve">
+  <data name="GetParameterType_description" xml:space="preserve">
     <value>Returns the resulting Type of this Method-Parameter Meta Object.</value>
   </data>
-  <data name="Zetbox.App.Base.BaseParameter.GetParameterType(ReturnParameter)" xml:space="preserve">
+  <data name="GetParameterType(ReturnParameter)" xml:space="preserve">
     <value>ReturnParameter</value>
   </data>
-  <data name="Zetbox.App.Base.BaseParameter.GetParameterType(ReturnParameter)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetParameterType(ReturnParameter)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.BaseParameter.GetParameterType(ReturnParameter)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetParameterType(ReturnParameter)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.BaseParameter.GetParameterTypeString" xml:space="preserve">
+  <data name="GetParameterTypeString" xml:space="preserve">
     <value>GetParameterTypeString</value>
   </data>
-  <data name="Zetbox.App.Base.BaseParameter.GetParameterTypeString_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetParameterTypeString_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.BaseParameter.GetParameterTypeString_description" xml:space="preserve">
+  <data name="GetParameterTypeString_description" xml:space="preserve">
     <value>Returns the String representation of this Method-Parameter Meta Object.</value>
   </data>
-  <data name="Zetbox.App.Base.BaseParameter.GetParameterTypeString(ReturnParameter)" xml:space="preserve">
+  <data name="GetParameterTypeString(ReturnParameter)" xml:space="preserve">
     <value>ReturnParameter</value>
   </data>
-  <data name="Zetbox.App.Base.BaseParameter.GetParameterTypeString(ReturnParameter)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetParameterTypeString(ReturnParameter)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.BaseParameter.GetParameterTypeString(ReturnParameter)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetParameterTypeString(ReturnParameter)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
 </root>

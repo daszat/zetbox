@@ -54,7 +54,7 @@ namespace Zetbox.Generator.ResourceGenerator
                 {
                     foreach (var prop in grp.OrderBy(p => p.Name))
                     {
-                        var fullName = dtName + "." + prop.Name;
+                        var fullName = prop.Name;
 
                         writer.AddResource(fullName, prop.Name);
                         writer.AddResource(fullName + "_label", prop.Label);
@@ -75,7 +75,7 @@ namespace Zetbox.Generator.ResourceGenerator
                 {
                     foreach (var meth in grp.OrderBy(p => p.Name))
                     {
-                        var fullName = dtName + "." + meth.Name;
+                        var fullName = meth.Name;
                         writer.AddResource(fullName, meth.Name);
                         writer.AddResource(fullName + "_label", meth.Label);
                         writer.AddResource(fullName + "_description", meth.Description);

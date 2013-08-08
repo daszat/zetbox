@@ -117,158 +117,158 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Zetbox.App.Base.Method.CategoryTags" xml:space="preserve">
+  <data name="CategoryTags" xml:space="preserve">
     <value>CategoryTags</value>
   </data>
-  <data name="Zetbox.App.Base.Method.CategoryTags_label" xml:space="preserve">
+  <data name="CategoryTags_label" xml:space="preserve">
     <value>Category Tags</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Zetbox.App.Base.Method.CategoryTags_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="CategoryTags_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Method.ChangedBy" xml:space="preserve">
+  <data name="ChangedBy" xml:space="preserve">
     <value>ChangedBy</value>
   </data>
-  <data name="Zetbox.App.Base.Method.ChangedBy_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ChangedBy_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Method.ChangedBy_description" xml:space="preserve">
+  <data name="ChangedBy_description" xml:space="preserve">
     <value>Identity which changed this object</value>
   </data>
-  <data name="Zetbox.App.Base.Method.ChangedOn" xml:space="preserve">
+  <data name="ChangedOn" xml:space="preserve">
     <value>ChangedOn</value>
   </data>
-  <data name="Zetbox.App.Base.Method.ChangedOn_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ChangedOn_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Method.ChangedOn_description" xml:space="preserve">
+  <data name="ChangedOn_description" xml:space="preserve">
     <value>Date and time where this object was changed</value>
   </data>
-  <data name="Zetbox.App.Base.Method.CodeTemplate" xml:space="preserve">
+  <data name="CodeTemplate" xml:space="preserve">
     <value>CodeTemplate</value>
   </data>
-  <data name="Zetbox.App.Base.Method.CodeTemplate_label" xml:space="preserve">
+  <data name="CodeTemplate_label" xml:space="preserve">
     <value>Code template</value>
   </data>
-  <data name="Zetbox.App.Base.Method.CodeTemplate_description" xml:space="preserve">
+  <data name="CodeTemplate_description" xml:space="preserve">
     <value>Provides a code template for the method</value>
   </data>
-  <data name="Zetbox.App.Base.Method.CreatedBy" xml:space="preserve">
+  <data name="CreatedBy" xml:space="preserve">
     <value>CreatedBy</value>
   </data>
-  <data name="Zetbox.App.Base.Method.CreatedBy_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="CreatedBy_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Method.CreatedBy_description" xml:space="preserve">
+  <data name="CreatedBy_description" xml:space="preserve">
     <value>Identity which created this object</value>
   </data>
-  <data name="Zetbox.App.Base.Method.CreatedOn" xml:space="preserve">
+  <data name="CreatedOn" xml:space="preserve">
     <value>CreatedOn</value>
   </data>
-  <data name="Zetbox.App.Base.Method.CreatedOn_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="CreatedOn_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Method.CreatedOn_description" xml:space="preserve">
+  <data name="CreatedOn_description" xml:space="preserve">
     <value>Date and time where this object was created</value>
   </data>
-  <data name="Zetbox.App.Base.Method.Description" xml:space="preserve">
+  <data name="Description" xml:space="preserve">
     <value>Description</value>
   </data>
-  <data name="Zetbox.App.Base.Method.Description_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Description_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Method.Description_description" xml:space="preserve">
+  <data name="Description_description" xml:space="preserve">
     <value>Description of this Method</value>
   </data>
-  <data name="Zetbox.App.Base.Method.ExportGuid" xml:space="preserve">
+  <data name="ExportGuid" xml:space="preserve">
     <value>ExportGuid</value>
   </data>
-  <data name="Zetbox.App.Base.Method.ExportGuid_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ExportGuid_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Method.ExportGuid_description" xml:space="preserve">
+  <data name="ExportGuid_description" xml:space="preserve">
     <value>Export Guid</value>
   </data>
-  <data name="Zetbox.App.Base.Method.Icon" xml:space="preserve">
+  <data name="Icon" xml:space="preserve">
     <value>Icon</value>
   </data>
-  <data name="Zetbox.App.Base.Method.Icon_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Icon_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Method.Icon_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Icon_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Method.InvokeOnServer" xml:space="preserve">
+  <data name="InvokeOnServer" xml:space="preserve">
     <value>InvokeOnServer</value>
   </data>
-  <data name="Zetbox.App.Base.Method.InvokeOnServer_label" xml:space="preserve">
+  <data name="InvokeOnServer_label" xml:space="preserve">
     <value>Invoke on Server</value>
   </data>
-  <data name="Zetbox.App.Base.Method.InvokeOnServer_description" xml:space="preserve">
+  <data name="InvokeOnServer_description" xml:space="preserve">
     <value>Method will be invoked on server if true</value>
   </data>
-  <data name="Zetbox.App.Base.Method.IsDisplayable" xml:space="preserve">
+  <data name="IsDisplayable" xml:space="preserve">
     <value>IsDisplayable</value>
   </data>
-  <data name="Zetbox.App.Base.Method.IsDisplayable_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="IsDisplayable_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Method.IsDisplayable_description" xml:space="preserve">
+  <data name="IsDisplayable_description" xml:space="preserve">
     <value>Shows this Method in th GUI</value>
   </data>
-  <data name="Zetbox.App.Base.Method.Label" xml:space="preserve">
+  <data name="Label" xml:space="preserve">
     <value>Label</value>
   </data>
-  <data name="Zetbox.App.Base.Method.Label_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Label_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Method.Label_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Label_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Method.Module" xml:space="preserve">
+  <data name="Module" xml:space="preserve">
     <value>Module</value>
   </data>
-  <data name="Zetbox.App.Base.Method.Module_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Module_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Method.Module_description" xml:space="preserve">
+  <data name="Module_description" xml:space="preserve">
     <value>Zugehörig zum Modul</value>
   </data>
-  <data name="Zetbox.App.Base.Method.Name" xml:space="preserve">
+  <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="Zetbox.App.Base.Method.Name_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Name_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Method.Name_description" xml:space="preserve">
+  <data name="Name_description" xml:space="preserve">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Method.ObjectClass" xml:space="preserve">
+  <data name="ObjectClass" xml:space="preserve">
     <value>ObjectClass</value>
   </data>
-  <data name="Zetbox.App.Base.Method.ObjectClass_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ObjectClass_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Method.ObjectClass_description" xml:space="preserve">
+  <data name="ObjectClass_description" xml:space="preserve">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Method.Parameter" xml:space="preserve">
+  <data name="Parameter" xml:space="preserve">
     <value>Parameter</value>
   </data>
-  <data name="Zetbox.App.Base.Method.Parameter_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Parameter_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Method.Parameter_description" xml:space="preserve">
+  <data name="Parameter_description" xml:space="preserve">
     <value>Parameter der Methode</value>
   </data>
-  <data name="Zetbox.App.Base.Method.ShowByProperties" xml:space="preserve">
+  <data name="ShowByProperties" xml:space="preserve">
     <value>ShowByProperties</value>
   </data>
-  <data name="Zetbox.App.Base.Method.ShowByProperties_label" xml:space="preserve">
+  <data name="ShowByProperties_label" xml:space="preserve">
     <value>Show by Properties</value>
   </data>
-  <data name="Zetbox.App.Base.Method.ShowByProperties_description" xml:space="preserve">
+  <data name="ShowByProperties_description" xml:space="preserve">
     <value>This method is show by these properties</value>
   </data>
 </root>

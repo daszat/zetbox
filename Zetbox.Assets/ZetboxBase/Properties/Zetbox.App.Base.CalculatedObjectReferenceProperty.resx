@@ -117,23 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Zetbox.App.Base.CalculatedObjectReferenceProperty.Inputs" xml:space="preserve">
+  <data name="Inputs" xml:space="preserve">
     <value>Inputs</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Zetbox.App.Base.CalculatedObjectReferenceProperty.Inputs_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Inputs_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.CalculatedObjectReferenceProperty.Inputs_description" xml:space="preserve">
+  <data name="Inputs_description" xml:space="preserve">
     <value>The properties on which the calculation depends. This is used to propagate change notifications.</value>
   </data>
-  <data name="Zetbox.App.Base.CalculatedObjectReferenceProperty.ReferencedClass" xml:space="preserve">
+  <data name="ReferencedClass" xml:space="preserve">
     <value>ReferencedClass</value>
   </data>
-  <data name="Zetbox.App.Base.CalculatedObjectReferenceProperty.ReferencedClass_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ReferencedClass_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.CalculatedObjectReferenceProperty.ReferencedClass_description" xml:space="preserve">
+  <data name="ReferencedClass_description" xml:space="preserve">
     <value>the referenced class of objects</value>
   </data>
 </root>

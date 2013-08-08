@@ -117,95 +117,95 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Zetbox.App.Projekte.Task.Aufwand" xml:space="preserve">
+  <data name="Aufwand" xml:space="preserve">
     <value>Aufwand</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Zetbox.App.Projekte.Task.Aufwand_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Aufwand_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Projekte.Task.Aufwand_description" xml:space="preserve">
+  <data name="Aufwand_description" xml:space="preserve">
     <value>Aufwand in Stunden</value>
   </data>
-  <data name="Zetbox.App.Projekte.Task.ChangedBy" xml:space="preserve">
+  <data name="ChangedBy" xml:space="preserve">
     <value>ChangedBy</value>
   </data>
-  <data name="Zetbox.App.Projekte.Task.ChangedBy_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ChangedBy_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Projekte.Task.ChangedBy_description" xml:space="preserve">
+  <data name="ChangedBy_description" xml:space="preserve">
     <value>Identity which changed this object</value>
   </data>
-  <data name="Zetbox.App.Projekte.Task.ChangedOn" xml:space="preserve">
+  <data name="ChangedOn" xml:space="preserve">
     <value>ChangedOn</value>
   </data>
-  <data name="Zetbox.App.Projekte.Task.ChangedOn_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ChangedOn_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Projekte.Task.ChangedOn_description" xml:space="preserve">
+  <data name="ChangedOn_description" xml:space="preserve">
     <value>Date and time where this object was changed</value>
   </data>
-  <data name="Zetbox.App.Projekte.Task.CreatedBy" xml:space="preserve">
+  <data name="CreatedBy" xml:space="preserve">
     <value>CreatedBy</value>
   </data>
-  <data name="Zetbox.App.Projekte.Task.CreatedBy_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="CreatedBy_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Projekte.Task.CreatedBy_description" xml:space="preserve">
+  <data name="CreatedBy_description" xml:space="preserve">
     <value>Identity which created this object</value>
   </data>
-  <data name="Zetbox.App.Projekte.Task.CreatedOn" xml:space="preserve">
+  <data name="CreatedOn" xml:space="preserve">
     <value>CreatedOn</value>
   </data>
-  <data name="Zetbox.App.Projekte.Task.CreatedOn_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="CreatedOn_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Projekte.Task.CreatedOn_description" xml:space="preserve">
+  <data name="CreatedOn_description" xml:space="preserve">
     <value>Date and time where this object was created</value>
   </data>
-  <data name="Zetbox.App.Projekte.Task.DatumBis" xml:space="preserve">
+  <data name="DatumBis" xml:space="preserve">
     <value>DatumBis</value>
   </data>
-  <data name="Zetbox.App.Projekte.Task.DatumBis_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="DatumBis_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Projekte.Task.DatumBis_description" xml:space="preserve">
+  <data name="DatumBis_description" xml:space="preserve">
     <value>Enddatum</value>
   </data>
-  <data name="Zetbox.App.Projekte.Task.DatumVon" xml:space="preserve">
+  <data name="DatumVon" xml:space="preserve">
     <value>DatumVon</value>
   </data>
-  <data name="Zetbox.App.Projekte.Task.DatumVon_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="DatumVon_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Projekte.Task.DatumVon_description" xml:space="preserve">
+  <data name="DatumVon_description" xml:space="preserve">
     <value>Start Datum</value>
   </data>
-  <data name="Zetbox.App.Projekte.Task.ExportGuid" xml:space="preserve">
+  <data name="ExportGuid" xml:space="preserve">
     <value>ExportGuid</value>
   </data>
-  <data name="Zetbox.App.Projekte.Task.ExportGuid_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ExportGuid_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Projekte.Task.ExportGuid_description" xml:space="preserve">
+  <data name="ExportGuid_description" xml:space="preserve">
     <value>Export Guid</value>
   </data>
-  <data name="Zetbox.App.Projekte.Task.Name" xml:space="preserve">
+  <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="Zetbox.App.Projekte.Task.Name_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Name_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Projekte.Task.Name_description" xml:space="preserve">
+  <data name="Name_description" xml:space="preserve">
     <value>Taskname</value>
   </data>
-  <data name="Zetbox.App.Projekte.Task.Projekt" xml:space="preserve">
+  <data name="Projekt" xml:space="preserve">
     <value>Projekt</value>
   </data>
-  <data name="Zetbox.App.Projekte.Task.Projekt_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Projekt_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Projekte.Task.Projekt_description" xml:space="preserve">
+  <data name="Projekt_description" xml:space="preserve">
     <value>Verknüpfung zum Projekt</value>
   </data>
 </root>

@@ -117,41 +117,41 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Zetbox.App.GUI.Icon.Blob" xml:space="preserve">
+  <data name="Blob" xml:space="preserve">
     <value>Blob</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Zetbox.App.GUI.Icon.Blob_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Blob_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.GUI.Icon.Blob_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Blob_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.GUI.Icon.ExportGuid" xml:space="preserve">
+  <data name="ExportGuid" xml:space="preserve">
     <value>ExportGuid</value>
   </data>
-  <data name="Zetbox.App.GUI.Icon.ExportGuid_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ExportGuid_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.GUI.Icon.ExportGuid_description" xml:space="preserve">
+  <data name="ExportGuid_description" xml:space="preserve">
     <value>Export Guid</value>
   </data>
-  <data name="Zetbox.App.GUI.Icon.IconFile" xml:space="preserve">
+  <data name="IconFile" xml:space="preserve">
     <value>IconFile</value>
   </data>
-  <data name="Zetbox.App.GUI.Icon.IconFile_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="IconFile_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.GUI.Icon.IconFile_description" xml:space="preserve">
+  <data name="IconFile_description" xml:space="preserve">
     <value>Filename of the Icon</value>
   </data>
-  <data name="Zetbox.App.GUI.Icon.Module" xml:space="preserve">
+  <data name="Module" xml:space="preserve">
     <value>Module</value>
   </data>
-  <data name="Zetbox.App.GUI.Icon.Module_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Module_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.GUI.Icon.Module_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Module_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
 </root>

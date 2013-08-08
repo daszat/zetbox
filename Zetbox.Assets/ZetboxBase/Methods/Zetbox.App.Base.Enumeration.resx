@@ -117,113 +117,113 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Zetbox.App.Base.Enumeration.GetEntryByName" xml:space="preserve">
+  <data name="GetEntryByName" xml:space="preserve">
     <value>GetEntryByName</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Zetbox.App.Base.Enumeration.GetEntryByName_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetEntryByName_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Enumeration.GetEntryByName_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetEntryByName_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Enumeration.GetEntryByName(name)" xml:space="preserve">
+  <data name="GetEntryByName(name)" xml:space="preserve">
     <value>name</value>
   </data>
-  <data name="Zetbox.App.Base.Enumeration.GetEntryByName(name)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetEntryByName(name)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Enumeration.GetEntryByName(name)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetEntryByName(name)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Enumeration.GetEntryByName(retVal)" xml:space="preserve">
+  <data name="GetEntryByName(retVal)" xml:space="preserve">
     <value>retVal</value>
   </data>
-  <data name="Zetbox.App.Base.Enumeration.GetEntryByName(retVal)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetEntryByName(retVal)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Enumeration.GetEntryByName(retVal)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetEntryByName(retVal)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Enumeration.GetEntryByValue" xml:space="preserve">
+  <data name="GetEntryByValue" xml:space="preserve">
     <value>GetEntryByValue</value>
   </data>
-  <data name="Zetbox.App.Base.Enumeration.GetEntryByValue_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetEntryByValue_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Enumeration.GetEntryByValue_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetEntryByValue_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Enumeration.GetEntryByValue(val)" xml:space="preserve">
+  <data name="GetEntryByValue(val)" xml:space="preserve">
     <value>val</value>
   </data>
-  <data name="Zetbox.App.Base.Enumeration.GetEntryByValue(val)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetEntryByValue(val)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Enumeration.GetEntryByValue(val)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetEntryByValue(val)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Enumeration.GetEntryByValue(retVal)" xml:space="preserve">
+  <data name="GetEntryByValue(retVal)" xml:space="preserve">
     <value>retVal</value>
   </data>
-  <data name="Zetbox.App.Base.Enumeration.GetEntryByValue(retVal)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetEntryByValue(retVal)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Enumeration.GetEntryByValue(retVal)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetEntryByValue(retVal)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Enumeration.GetLabelByName" xml:space="preserve">
+  <data name="GetLabelByName" xml:space="preserve">
     <value>GetLabelByName</value>
   </data>
-  <data name="Zetbox.App.Base.Enumeration.GetLabelByName_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetLabelByName_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Enumeration.GetLabelByName_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetLabelByName_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Enumeration.GetLabelByName(name)" xml:space="preserve">
+  <data name="GetLabelByName(name)" xml:space="preserve">
     <value>name</value>
   </data>
-  <data name="Zetbox.App.Base.Enumeration.GetLabelByName(name)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetLabelByName(name)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Enumeration.GetLabelByName(name)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetLabelByName(name)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Enumeration.GetLabelByName(retVal)" xml:space="preserve">
+  <data name="GetLabelByName(retVal)" xml:space="preserve">
     <value>retVal</value>
   </data>
-  <data name="Zetbox.App.Base.Enumeration.GetLabelByName(retVal)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetLabelByName(retVal)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Enumeration.GetLabelByName(retVal)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetLabelByName(retVal)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Enumeration.GetLabelByValue" xml:space="preserve">
+  <data name="GetLabelByValue" xml:space="preserve">
     <value>GetLabelByValue</value>
   </data>
-  <data name="Zetbox.App.Base.Enumeration.GetLabelByValue_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetLabelByValue_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Enumeration.GetLabelByValue_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetLabelByValue_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Enumeration.GetLabelByValue(val)" xml:space="preserve">
+  <data name="GetLabelByValue(val)" xml:space="preserve">
     <value>val</value>
   </data>
-  <data name="Zetbox.App.Base.Enumeration.GetLabelByValue(val)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetLabelByValue(val)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Enumeration.GetLabelByValue(val)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetLabelByValue(val)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Enumeration.GetLabelByValue(retVal)" xml:space="preserve">
+  <data name="GetLabelByValue(retVal)" xml:space="preserve">
     <value>retVal</value>
   </data>
-  <data name="Zetbox.App.Base.Enumeration.GetLabelByValue(retVal)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetLabelByValue(retVal)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Enumeration.GetLabelByValue(retVal)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetLabelByValue(retVal)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
 </root>

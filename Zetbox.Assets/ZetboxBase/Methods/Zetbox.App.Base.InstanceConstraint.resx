@@ -117,59 +117,59 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Zetbox.App.Base.InstanceConstraint.GetErrorText" xml:space="preserve">
+  <data name="GetErrorText" xml:space="preserve">
     <value>GetErrorText</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Zetbox.App.Base.InstanceConstraint.GetErrorText_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetErrorText_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.InstanceConstraint.GetErrorText_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetErrorText_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.InstanceConstraint.GetErrorText(result)" xml:space="preserve">
+  <data name="GetErrorText(result)" xml:space="preserve">
     <value>result</value>
   </data>
-  <data name="Zetbox.App.Base.InstanceConstraint.GetErrorText(result)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetErrorText(result)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.InstanceConstraint.GetErrorText(result)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetErrorText(result)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.InstanceConstraint.GetErrorText(constrainedObject)" xml:space="preserve">
+  <data name="GetErrorText(constrainedObject)" xml:space="preserve">
     <value>constrainedObject</value>
   </data>
-  <data name="Zetbox.App.Base.InstanceConstraint.GetErrorText(constrainedObject)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetErrorText(constrainedObject)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.InstanceConstraint.GetErrorText(constrainedObject)_description" xml:space="preserve">
+  <data name="GetErrorText(constrainedObject)_description" xml:space="preserve">
     <value>The constrained object to be checked.</value>
   </data>
-  <data name="Zetbox.App.Base.InstanceConstraint.IsValid" xml:space="preserve">
+  <data name="IsValid" xml:space="preserve">
     <value>IsValid</value>
   </data>
-  <data name="Zetbox.App.Base.InstanceConstraint.IsValid_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="IsValid_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.InstanceConstraint.IsValid_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="IsValid_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.InstanceConstraint.IsValid(result)" xml:space="preserve">
+  <data name="IsValid(result)" xml:space="preserve">
     <value>result</value>
   </data>
-  <data name="Zetbox.App.Base.InstanceConstraint.IsValid(result)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="IsValid(result)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.InstanceConstraint.IsValid(result)_description" xml:space="preserve">
+  <data name="IsValid(result)_description" xml:space="preserve">
     <value>Whether or not the specified object is valid.</value>
   </data>
-  <data name="Zetbox.App.Base.InstanceConstraint.IsValid(constrainedObject)" xml:space="preserve">
+  <data name="IsValid(constrainedObject)" xml:space="preserve">
     <value>constrainedObject</value>
   </data>
-  <data name="Zetbox.App.Base.InstanceConstraint.IsValid(constrainedObject)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="IsValid(constrainedObject)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.InstanceConstraint.IsValid(constrainedObject)_description" xml:space="preserve">
+  <data name="IsValid(constrainedObject)_description" xml:space="preserve">
     <value>The constrained object to be checked.</value>
   </data>
 </root>

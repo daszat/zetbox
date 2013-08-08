@@ -117,41 +117,41 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Zetbox.App.Test.PropertyStringTest.Nullable" xml:space="preserve">
+  <data name="Nullable" xml:space="preserve">
     <value>Nullable</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Zetbox.App.Test.PropertyStringTest.Nullable_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Nullable_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Test.PropertyStringTest.Nullable_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Nullable_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Test.PropertyStringTest.NullableWithDefault" xml:space="preserve">
+  <data name="NullableWithDefault" xml:space="preserve">
     <value>NullableWithDefault</value>
   </data>
-  <data name="Zetbox.App.Test.PropertyStringTest.NullableWithDefault_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="NullableWithDefault_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Test.PropertyStringTest.NullableWithDefault_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="NullableWithDefault_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Test.PropertyStringTest.Standard" xml:space="preserve">
+  <data name="Standard" xml:space="preserve">
     <value>Standard</value>
   </data>
-  <data name="Zetbox.App.Test.PropertyStringTest.Standard_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Standard_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Test.PropertyStringTest.Standard_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Standard_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Test.PropertyStringTest.StandardWithDefault" xml:space="preserve">
+  <data name="StandardWithDefault" xml:space="preserve">
     <value>StandardWithDefault</value>
   </data>
-  <data name="Zetbox.App.Test.PropertyStringTest.StandardWithDefault_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="StandardWithDefault_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Test.PropertyStringTest.StandardWithDefault_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="StandardWithDefault_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
 </root>

@@ -117,50 +117,50 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Zetbox.App.Base.DataType.GetDataType" xml:space="preserve">
+  <data name="GetDataType" xml:space="preserve">
     <value>GetDataType</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Zetbox.App.Base.DataType.GetDataType_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetDataType_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.DataType.GetDataType_description" xml:space="preserve">
+  <data name="GetDataType_description" xml:space="preserve">
     <value>Returns the resulting Type of this Datatype Meta Object.</value>
   </data>
-  <data name="Zetbox.App.Base.DataType.GetDataType(ReturnParameter)" xml:space="preserve">
+  <data name="GetDataType(ReturnParameter)" xml:space="preserve">
     <value>ReturnParameter</value>
   </data>
-  <data name="Zetbox.App.Base.DataType.GetDataType(ReturnParameter)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetDataType(ReturnParameter)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.DataType.GetDataType(ReturnParameter)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetDataType(ReturnParameter)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.DataType.GetDataTypeString" xml:space="preserve">
+  <data name="GetDataTypeString" xml:space="preserve">
     <value>GetDataTypeString</value>
   </data>
-  <data name="Zetbox.App.Base.DataType.GetDataTypeString_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetDataTypeString_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.DataType.GetDataTypeString_description" xml:space="preserve">
+  <data name="GetDataTypeString_description" xml:space="preserve">
     <value>Returns the String representation of this Datatype Meta Object.</value>
   </data>
-  <data name="Zetbox.App.Base.DataType.GetDataTypeString(ReturnParameter)" xml:space="preserve">
+  <data name="GetDataTypeString(ReturnParameter)" xml:space="preserve">
     <value>ReturnParameter</value>
   </data>
-  <data name="Zetbox.App.Base.DataType.GetDataTypeString(ReturnParameter)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetDataTypeString(ReturnParameter)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.DataType.GetDataTypeString(ReturnParameter)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetDataTypeString(ReturnParameter)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.DataType.ImplementInterfaces" xml:space="preserve">
+  <data name="ImplementInterfaces" xml:space="preserve">
     <value>ImplementInterfaces</value>
   </data>
-  <data name="Zetbox.App.Base.DataType.ImplementInterfaces_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ImplementInterfaces_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.DataType.ImplementInterfaces_description" xml:space="preserve">
+  <data name="ImplementInterfaces_description" xml:space="preserve">
     <value>Implements all available interfaces as Properties and Methods</value>
   </data>
 </root>

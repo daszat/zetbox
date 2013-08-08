@@ -117,104 +117,104 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Zetbox.App.Base.TypeRef.Assembly" xml:space="preserve">
+  <data name="Assembly" xml:space="preserve">
     <value>Assembly</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Zetbox.App.Base.TypeRef.Assembly_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Assembly_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.TypeRef.Assembly_description" xml:space="preserve">
+  <data name="Assembly_description" xml:space="preserve">
     <value>The assembly containing the referenced Type.</value>
   </data>
-  <data name="Zetbox.App.Base.TypeRef.ChangedBy" xml:space="preserve">
+  <data name="ChangedBy" xml:space="preserve">
     <value>ChangedBy</value>
   </data>
-  <data name="Zetbox.App.Base.TypeRef.ChangedBy_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ChangedBy_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.TypeRef.ChangedBy_description" xml:space="preserve">
+  <data name="ChangedBy_description" xml:space="preserve">
     <value>Identity which changed this object</value>
   </data>
-  <data name="Zetbox.App.Base.TypeRef.ChangedOn" xml:space="preserve">
+  <data name="ChangedOn" xml:space="preserve">
     <value>ChangedOn</value>
   </data>
-  <data name="Zetbox.App.Base.TypeRef.ChangedOn_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ChangedOn_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.TypeRef.ChangedOn_description" xml:space="preserve">
+  <data name="ChangedOn_description" xml:space="preserve">
     <value>Date and time where this object was changed</value>
   </data>
-  <data name="Zetbox.App.Base.TypeRef.CreatedBy" xml:space="preserve">
+  <data name="CreatedBy" xml:space="preserve">
     <value>CreatedBy</value>
   </data>
-  <data name="Zetbox.App.Base.TypeRef.CreatedBy_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="CreatedBy_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.TypeRef.CreatedBy_description" xml:space="preserve">
+  <data name="CreatedBy_description" xml:space="preserve">
     <value>Identity which created this object</value>
   </data>
-  <data name="Zetbox.App.Base.TypeRef.CreatedOn" xml:space="preserve">
+  <data name="CreatedOn" xml:space="preserve">
     <value>CreatedOn</value>
   </data>
-  <data name="Zetbox.App.Base.TypeRef.CreatedOn_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="CreatedOn_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.TypeRef.CreatedOn_description" xml:space="preserve">
+  <data name="CreatedOn_description" xml:space="preserve">
     <value>Date and time where this object was created</value>
   </data>
-  <data name="Zetbox.App.Base.TypeRef.Deleted" xml:space="preserve">
+  <data name="Deleted" xml:space="preserve">
     <value>Deleted</value>
   </data>
-  <data name="Zetbox.App.Base.TypeRef.Deleted_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Deleted_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.TypeRef.Deleted_description" xml:space="preserve">
+  <data name="Deleted_description" xml:space="preserve">
     <value>If the TypeRef could not be found in the containing assembly this property is set to true, otherwise to null</value>
   </data>
-  <data name="Zetbox.App.Base.TypeRef.ExportGuid" xml:space="preserve">
+  <data name="ExportGuid" xml:space="preserve">
     <value>ExportGuid</value>
   </data>
-  <data name="Zetbox.App.Base.TypeRef.ExportGuid_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ExportGuid_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.TypeRef.ExportGuid_description" xml:space="preserve">
+  <data name="ExportGuid_description" xml:space="preserve">
     <value>Export Guid</value>
   </data>
-  <data name="Zetbox.App.Base.TypeRef.FullName" xml:space="preserve">
+  <data name="FullName" xml:space="preserve">
     <value>FullName</value>
   </data>
-  <data name="Zetbox.App.Base.TypeRef.FullName_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="FullName_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.TypeRef.FullName_description" xml:space="preserve">
+  <data name="FullName_description" xml:space="preserve">
     <value />
   </data>
-  <data name="Zetbox.App.Base.TypeRef.GenericArguments" xml:space="preserve">
+  <data name="GenericArguments" xml:space="preserve">
     <value>GenericArguments</value>
   </data>
-  <data name="Zetbox.App.Base.TypeRef.GenericArguments_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GenericArguments_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.TypeRef.GenericArguments_description" xml:space="preserve">
+  <data name="GenericArguments_description" xml:space="preserve">
     <value>list of type arguments</value>
   </data>
-  <data name="Zetbox.App.Base.TypeRef.Parent" xml:space="preserve">
+  <data name="Parent" xml:space="preserve">
     <value>Parent</value>
   </data>
-  <data name="Zetbox.App.Base.TypeRef.Parent_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Parent_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.TypeRef.Parent_description" xml:space="preserve">
+  <data name="Parent_description" xml:space="preserve">
     <value>The TypeRef of the BaseClass of the referenced Type</value>
   </data>
-  <data name="Zetbox.App.Base.TypeRef.ToStringCache" xml:space="preserve">
+  <data name="ToStringCache" xml:space="preserve">
     <value>ToStringCache</value>
   </data>
-  <data name="Zetbox.App.Base.TypeRef.ToStringCache_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ToStringCache_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.TypeRef.ToStringCache_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ToStringCache_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
 </root>

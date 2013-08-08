@@ -117,176 +117,176 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Zetbox.App.Base.Property.CategoryTags" xml:space="preserve">
+  <data name="CategoryTags" xml:space="preserve">
     <value>CategoryTags</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Zetbox.App.Base.Property.CategoryTags_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="CategoryTags_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Property.CategoryTags_description" xml:space="preserve">
+  <data name="CategoryTags_description" xml:space="preserve">
     <value>A space separated list of category names containing this Property</value>
   </data>
-  <data name="Zetbox.App.Base.Property.ChangedBy" xml:space="preserve">
+  <data name="ChangedBy" xml:space="preserve">
     <value>ChangedBy</value>
   </data>
-  <data name="Zetbox.App.Base.Property.ChangedBy_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ChangedBy_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Property.ChangedBy_description" xml:space="preserve">
+  <data name="ChangedBy_description" xml:space="preserve">
     <value>Identity which changed this object</value>
   </data>
-  <data name="Zetbox.App.Base.Property.ChangedOn" xml:space="preserve">
+  <data name="ChangedOn" xml:space="preserve">
     <value>ChangedOn</value>
   </data>
-  <data name="Zetbox.App.Base.Property.ChangedOn_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ChangedOn_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Property.ChangedOn_description" xml:space="preserve">
+  <data name="ChangedOn_description" xml:space="preserve">
     <value>Date and time where this object was changed</value>
   </data>
-  <data name="Zetbox.App.Base.Property.CodeTemplate" xml:space="preserve">
+  <data name="CodeTemplate" xml:space="preserve">
     <value>CodeTemplate</value>
   </data>
-  <data name="Zetbox.App.Base.Property.CodeTemplate_label" xml:space="preserve">
+  <data name="CodeTemplate_label" xml:space="preserve">
     <value>Code template</value>
   </data>
-  <data name="Zetbox.App.Base.Property.CodeTemplate_description" xml:space="preserve">
+  <data name="CodeTemplate_description" xml:space="preserve">
     <value>Provides a code template for a calculated property</value>
   </data>
-  <data name="Zetbox.App.Base.Property.Constraints" xml:space="preserve">
+  <data name="Constraints" xml:space="preserve">
     <value>Constraints</value>
   </data>
-  <data name="Zetbox.App.Base.Property.Constraints_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Constraints_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Property.Constraints_description" xml:space="preserve">
+  <data name="Constraints_description" xml:space="preserve">
     <value>The list of constraints applying to this Property</value>
   </data>
-  <data name="Zetbox.App.Base.Property.CreatedBy" xml:space="preserve">
+  <data name="CreatedBy" xml:space="preserve">
     <value>CreatedBy</value>
   </data>
-  <data name="Zetbox.App.Base.Property.CreatedBy_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="CreatedBy_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Property.CreatedBy_description" xml:space="preserve">
+  <data name="CreatedBy_description" xml:space="preserve">
     <value>Identity which created this object</value>
   </data>
-  <data name="Zetbox.App.Base.Property.CreatedOn" xml:space="preserve">
+  <data name="CreatedOn" xml:space="preserve">
     <value>CreatedOn</value>
   </data>
-  <data name="Zetbox.App.Base.Property.CreatedOn_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="CreatedOn_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Property.CreatedOn_description" xml:space="preserve">
+  <data name="CreatedOn_description" xml:space="preserve">
     <value>Date and time where this object was created</value>
   </data>
-  <data name="Zetbox.App.Base.Property.DefaultValue" xml:space="preserve">
+  <data name="DefaultValue" xml:space="preserve">
     <value>DefaultValue</value>
   </data>
-  <data name="Zetbox.App.Base.Property.DefaultValue_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="DefaultValue_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Property.DefaultValue_description" xml:space="preserve">
+  <data name="DefaultValue_description" xml:space="preserve">
     <value>Property can have a default value</value>
   </data>
-  <data name="Zetbox.App.Base.Property.Description" xml:space="preserve">
+  <data name="Description" xml:space="preserve">
     <value>Description</value>
   </data>
-  <data name="Zetbox.App.Base.Property.Description_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Description_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Property.Description_description" xml:space="preserve">
+  <data name="Description_description" xml:space="preserve">
     <value>Description of this Property</value>
   </data>
-  <data name="Zetbox.App.Base.Property.DisableExport" xml:space="preserve">
+  <data name="DisableExport" xml:space="preserve">
     <value>DisableExport</value>
   </data>
-  <data name="Zetbox.App.Base.Property.DisableExport_label" xml:space="preserve">
+  <data name="DisableExport_label" xml:space="preserve">
     <value>Disable export</value>
   </data>
-  <data name="Zetbox.App.Base.Property.DisableExport_description" xml:space="preserve">
+  <data name="DisableExport_description" xml:space="preserve">
     <value>Disables the export. If not set, export is enabled</value>
   </data>
-  <data name="Zetbox.App.Base.Property.ExportGuid" xml:space="preserve">
+  <data name="ExportGuid" xml:space="preserve">
     <value>ExportGuid</value>
   </data>
-  <data name="Zetbox.App.Base.Property.ExportGuid_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ExportGuid_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Property.ExportGuid_description" xml:space="preserve">
+  <data name="ExportGuid_description" xml:space="preserve">
     <value>Export Guid</value>
   </data>
-  <data name="Zetbox.App.Base.Property.FilterConfiguration" xml:space="preserve">
+  <data name="FilterConfiguration" xml:space="preserve">
     <value>FilterConfiguration</value>
   </data>
-  <data name="Zetbox.App.Base.Property.FilterConfiguration_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="FilterConfiguration_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Property.FilterConfiguration_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="FilterConfiguration_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Property.Label" xml:space="preserve">
+  <data name="Label" xml:space="preserve">
     <value>Label</value>
   </data>
-  <data name="Zetbox.App.Base.Property.Label_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Label_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Property.Label_description" xml:space="preserve">
+  <data name="Label_description" xml:space="preserve">
     <value>Label is displayed to User in UI</value>
   </data>
-  <data name="Zetbox.App.Base.Property.Module" xml:space="preserve">
+  <data name="Module" xml:space="preserve">
     <value>Module</value>
   </data>
-  <data name="Zetbox.App.Base.Property.Module_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Module_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Property.Module_description" xml:space="preserve">
+  <data name="Module_description" xml:space="preserve">
     <value>Zugehörig zum Modul</value>
   </data>
-  <data name="Zetbox.App.Base.Property.Name" xml:space="preserve">
+  <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="Zetbox.App.Base.Property.Name_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Name_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Property.Name_description" xml:space="preserve">
+  <data name="Name_description" xml:space="preserve">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Property.ObjectClass" xml:space="preserve">
+  <data name="ObjectClass" xml:space="preserve">
     <value>ObjectClass</value>
   </data>
-  <data name="Zetbox.App.Base.Property.ObjectClass_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ObjectClass_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Property.ObjectClass_description" xml:space="preserve">
+  <data name="ObjectClass_description" xml:space="preserve">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Property.RequestedKind" xml:space="preserve">
+  <data name="RequestedKind" xml:space="preserve">
     <value>RequestedKind</value>
   </data>
-  <data name="Zetbox.App.Base.Property.RequestedKind_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="RequestedKind_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Property.RequestedKind_description" xml:space="preserve">
+  <data name="RequestedKind_description" xml:space="preserve">
     <value>Optional requested ControlKind</value>
   </data>
-  <data name="Zetbox.App.Base.Property.RequestedWidth" xml:space="preserve">
+  <data name="RequestedWidth" xml:space="preserve">
     <value>RequestedWidth</value>
   </data>
-  <data name="Zetbox.App.Base.Property.RequestedWidth_label" xml:space="preserve">
+  <data name="RequestedWidth_label" xml:space="preserve">
     <value>Requested width</value>
   </data>
-  <data name="Zetbox.App.Base.Property.RequestedWidth_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="RequestedWidth_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Property.ValueModelDescriptor" xml:space="preserve">
+  <data name="ValueModelDescriptor" xml:space="preserve">
     <value>ValueModelDescriptor</value>
   </data>
-  <data name="Zetbox.App.Base.Property.ValueModelDescriptor_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ValueModelDescriptor_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Property.ValueModelDescriptor_description" xml:space="preserve">
+  <data name="ValueModelDescriptor_description" xml:space="preserve">
     <value>The ViewModel to use for values of this Property</value>
   </data>
 </root>

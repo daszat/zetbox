@@ -117,13 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Zetbox.App.Test.TPHDerivedBObj.BString" xml:space="preserve">
+  <data name="BString" xml:space="preserve">
     <value>BString</value>
   </data>
-  <data name="Zetbox.App.Test.TPHDerivedBObj.BString_label" xml:space="preserve">
+  <data name="BString_label" xml:space="preserve">
     <value>BSTR</value>
   </data>
-  <data name="Zetbox.App.Test.TPHDerivedBObj.BString_description" xml:space="preserve">
+  <data name="BString_description" xml:space="preserve">
     <value>Not the "good old BSTR" from MS Com Objects - just a string called B</value>
   </data>
 </root>

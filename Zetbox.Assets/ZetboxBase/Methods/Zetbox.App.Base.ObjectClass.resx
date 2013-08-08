@@ -117,77 +117,77 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Zetbox.App.Base.ObjectClass.CreateMethod" xml:space="preserve">
+  <data name="CreateMethod" xml:space="preserve">
     <value>CreateMethod</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Zetbox.App.Base.ObjectClass.CreateMethod_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="CreateMethod_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.ObjectClass.CreateMethod_description" xml:space="preserve">
+  <data name="CreateMethod_description" xml:space="preserve">
     <value>Creates a new Method for this class</value>
   </data>
-  <data name="Zetbox.App.Base.ObjectClass.CreateMethod(result)" xml:space="preserve">
+  <data name="CreateMethod(result)" xml:space="preserve">
     <value>result</value>
   </data>
-  <data name="Zetbox.App.Base.ObjectClass.CreateMethod(result)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="CreateMethod(result)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.ObjectClass.CreateMethod(result)_description" xml:space="preserve">
+  <data name="CreateMethod(result)_description" xml:space="preserve">
     <value>the created Method</value>
   </data>
-  <data name="Zetbox.App.Base.ObjectClass.CreateRelation" xml:space="preserve">
+  <data name="CreateRelation" xml:space="preserve">
     <value>CreateRelation</value>
   </data>
-  <data name="Zetbox.App.Base.ObjectClass.CreateRelation_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="CreateRelation_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.ObjectClass.CreateRelation_description" xml:space="preserve">
+  <data name="CreateRelation_description" xml:space="preserve">
     <value>Implements the "Create new Relation" use case</value>
   </data>
-  <data name="Zetbox.App.Base.ObjectClass.CreateRelation(result)" xml:space="preserve">
+  <data name="CreateRelation(result)" xml:space="preserve">
     <value>result</value>
   </data>
-  <data name="Zetbox.App.Base.ObjectClass.CreateRelation(result)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="CreateRelation(result)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.ObjectClass.CreateRelation(result)_description" xml:space="preserve">
+  <data name="CreateRelation(result)_description" xml:space="preserve">
     <value>The newly created Relation</value>
   </data>
-  <data name="Zetbox.App.Base.ObjectClass.GetInheritedMethods" xml:space="preserve">
+  <data name="GetInheritedMethods" xml:space="preserve">
     <value>GetInheritedMethods</value>
   </data>
-  <data name="Zetbox.App.Base.ObjectClass.GetInheritedMethods_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetInheritedMethods_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.ObjectClass.GetInheritedMethods_description" xml:space="preserve">
+  <data name="GetInheritedMethods_description" xml:space="preserve">
     <value />
   </data>
-  <data name="Zetbox.App.Base.ObjectClass.GetInheritedMethods(Result)" xml:space="preserve">
+  <data name="GetInheritedMethods(Result)" xml:space="preserve">
     <value>Result</value>
   </data>
-  <data name="Zetbox.App.Base.ObjectClass.GetInheritedMethods(Result)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetInheritedMethods(Result)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.ObjectClass.GetInheritedMethods(Result)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetInheritedMethods(Result)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.ObjectClass.GetName" xml:space="preserve">
+  <data name="GetName" xml:space="preserve">
     <value>GetName</value>
   </data>
-  <data name="Zetbox.App.Base.ObjectClass.GetName_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetName_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.ObjectClass.GetName_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetName_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.ObjectClass.GetName(name)" xml:space="preserve">
+  <data name="GetName(name)" xml:space="preserve">
     <value>name</value>
   </data>
-  <data name="Zetbox.App.Base.ObjectClass.GetName(name)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetName(name)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.ObjectClass.GetName(name)_description" xml:space="preserve">
+  <data name="GetName(name)_description" xml:space="preserve">
     <value>the requested name</value>
   </data>
 </root>

@@ -117,113 +117,113 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Zetbox.App.SchemaMigration.SourceTable.ChangedBy" xml:space="preserve">
+  <data name="ChangedBy" xml:space="preserve">
     <value>ChangedBy</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Zetbox.App.SchemaMigration.SourceTable.ChangedBy_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ChangedBy_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.SchemaMigration.SourceTable.ChangedBy_description" xml:space="preserve">
+  <data name="ChangedBy_description" xml:space="preserve">
     <value>Identity which changed this object</value>
   </data>
-  <data name="Zetbox.App.SchemaMigration.SourceTable.ChangedOn" xml:space="preserve">
+  <data name="ChangedOn" xml:space="preserve">
     <value>ChangedOn</value>
   </data>
-  <data name="Zetbox.App.SchemaMigration.SourceTable.ChangedOn_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ChangedOn_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.SchemaMigration.SourceTable.ChangedOn_description" xml:space="preserve">
+  <data name="ChangedOn_description" xml:space="preserve">
     <value>Date and time where this object was changed</value>
   </data>
-  <data name="Zetbox.App.SchemaMigration.SourceTable.Comment" xml:space="preserve">
+  <data name="Comment" xml:space="preserve">
     <value>Comment</value>
   </data>
-  <data name="Zetbox.App.SchemaMigration.SourceTable.Comment_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Comment_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.SchemaMigration.SourceTable.Comment_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Comment_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.SchemaMigration.SourceTable.CreatedBy" xml:space="preserve">
+  <data name="CreatedBy" xml:space="preserve">
     <value>CreatedBy</value>
   </data>
-  <data name="Zetbox.App.SchemaMigration.SourceTable.CreatedBy_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="CreatedBy_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.SchemaMigration.SourceTable.CreatedBy_description" xml:space="preserve">
+  <data name="CreatedBy_description" xml:space="preserve">
     <value>Identity which created this object</value>
   </data>
-  <data name="Zetbox.App.SchemaMigration.SourceTable.CreatedOn" xml:space="preserve">
+  <data name="CreatedOn" xml:space="preserve">
     <value>CreatedOn</value>
   </data>
-  <data name="Zetbox.App.SchemaMigration.SourceTable.CreatedOn_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="CreatedOn_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.SchemaMigration.SourceTable.CreatedOn_description" xml:space="preserve">
+  <data name="CreatedOn_description" xml:space="preserve">
     <value>Date and time where this object was created</value>
   </data>
-  <data name="Zetbox.App.SchemaMigration.SourceTable.Description" xml:space="preserve">
+  <data name="Description" xml:space="preserve">
     <value>Description</value>
   </data>
-  <data name="Zetbox.App.SchemaMigration.SourceTable.Description_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Description_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.SchemaMigration.SourceTable.Description_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Description_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.SchemaMigration.SourceTable.DestinationObjectClass" xml:space="preserve">
+  <data name="DestinationObjectClass" xml:space="preserve">
     <value>DestinationObjectClass</value>
   </data>
-  <data name="Zetbox.App.SchemaMigration.SourceTable.DestinationObjectClass_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="DestinationObjectClass_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.SchemaMigration.SourceTable.DestinationObjectClass_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="DestinationObjectClass_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.SchemaMigration.SourceTable.ExportGuid" xml:space="preserve">
+  <data name="ExportGuid" xml:space="preserve">
     <value>ExportGuid</value>
   </data>
-  <data name="Zetbox.App.SchemaMigration.SourceTable.ExportGuid_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ExportGuid_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.SchemaMigration.SourceTable.ExportGuid_description" xml:space="preserve">
+  <data name="ExportGuid_description" xml:space="preserve">
     <value>Export Guid</value>
   </data>
-  <data name="Zetbox.App.SchemaMigration.SourceTable.Name" xml:space="preserve">
+  <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="Zetbox.App.SchemaMigration.SourceTable.Name_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Name_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.SchemaMigration.SourceTable.Name_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Name_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.SchemaMigration.SourceTable.SourceColumn" xml:space="preserve">
+  <data name="SourceColumn" xml:space="preserve">
     <value>SourceColumn</value>
   </data>
-  <data name="Zetbox.App.SchemaMigration.SourceTable.SourceColumn_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="SourceColumn_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.SchemaMigration.SourceTable.SourceColumn_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="SourceColumn_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.SchemaMigration.SourceTable.StagingDatabase" xml:space="preserve">
+  <data name="StagingDatabase" xml:space="preserve">
     <value>StagingDatabase</value>
   </data>
-  <data name="Zetbox.App.SchemaMigration.SourceTable.StagingDatabase_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="StagingDatabase_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.SchemaMigration.SourceTable.StagingDatabase_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="StagingDatabase_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.SchemaMigration.SourceTable.Status" xml:space="preserve">
+  <data name="Status" xml:space="preserve">
     <value>Status</value>
   </data>
-  <data name="Zetbox.App.SchemaMigration.SourceTable.Status_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Status_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.SchemaMigration.SourceTable.Status_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Status_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
 </root>

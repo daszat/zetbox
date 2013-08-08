@@ -117,59 +117,59 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="at.dasz.DocumentManagement.ImportedFile.MakeDocument" xml:space="preserve">
+  <data name="MakeDocument" xml:space="preserve">
     <value>MakeDocument</value>
   </data>
-  <data name="at.dasz.DocumentManagement.ImportedFile.MakeDocument_label" xml:space="preserve">
+  <data name="MakeDocument_label" xml:space="preserve">
     <value>Make document</value>
   </data>
-  <data name="at.dasz.DocumentManagement.ImportedFile.MakeDocument_description" xml:space="preserve">
+  <data name="MakeDocument_description" xml:space="preserve">
     <value>Converts the imported file to a document</value>
   </data>
-  <data name="at.dasz.DocumentManagement.ImportedFile.MakeDocument(retVal)" xml:space="preserve">
+  <data name="MakeDocument(retVal)" xml:space="preserve">
     <value>retVal</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="at.dasz.DocumentManagement.ImportedFile.MakeDocument(retVal)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="MakeDocument(retVal)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="at.dasz.DocumentManagement.ImportedFile.MakeDocument(retVal)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="MakeDocument(retVal)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="at.dasz.DocumentManagement.ImportedFile.MakeDynamicFile" xml:space="preserve">
+  <data name="MakeDynamicFile" xml:space="preserve">
     <value>MakeDynamicFile</value>
   </data>
-  <data name="at.dasz.DocumentManagement.ImportedFile.MakeDynamicFile_label" xml:space="preserve">
+  <data name="MakeDynamicFile_label" xml:space="preserve">
     <value>Make file</value>
   </data>
-  <data name="at.dasz.DocumentManagement.ImportedFile.MakeDynamicFile_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="MakeDynamicFile_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="at.dasz.DocumentManagement.ImportedFile.MakeDynamicFile(retVal)" xml:space="preserve">
+  <data name="MakeDynamicFile(retVal)" xml:space="preserve">
     <value>retVal</value>
   </data>
-  <data name="at.dasz.DocumentManagement.ImportedFile.MakeDynamicFile(retVal)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="MakeDynamicFile(retVal)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="at.dasz.DocumentManagement.ImportedFile.MakeDynamicFile(retVal)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="MakeDynamicFile(retVal)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="at.dasz.DocumentManagement.ImportedFile.MakeStaticFile" xml:space="preserve">
+  <data name="MakeStaticFile" xml:space="preserve">
     <value>MakeStaticFile</value>
   </data>
-  <data name="at.dasz.DocumentManagement.ImportedFile.MakeStaticFile_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="MakeStaticFile_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="at.dasz.DocumentManagement.ImportedFile.MakeStaticFile_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="MakeStaticFile_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="at.dasz.DocumentManagement.ImportedFile.MakeStaticFile(retVal)" xml:space="preserve">
+  <data name="MakeStaticFile(retVal)" xml:space="preserve">
     <value>retVal</value>
   </data>
-  <data name="at.dasz.DocumentManagement.ImportedFile.MakeStaticFile(retVal)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="MakeStaticFile(retVal)_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="at.dasz.DocumentManagement.ImportedFile.MakeStaticFile(retVal)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="MakeStaticFile(retVal)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
 </root>

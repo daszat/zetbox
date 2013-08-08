@@ -117,50 +117,50 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Zetbox.App.Base.Identity.CalendarConfiguration" xml:space="preserve">
+  <data name="CalendarConfiguration" xml:space="preserve">
     <value>CalendarConfiguration</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Zetbox.App.Base.Identity.CalendarConfiguration_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="CalendarConfiguration_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Identity.CalendarConfiguration_description" xml:space="preserve">
+  <data name="CalendarConfiguration_description" xml:space="preserve">
     <value>Storage for the users calendar configuration</value>
   </data>
-  <data name="Zetbox.App.Base.Identity.DisplayName" xml:space="preserve">
+  <data name="DisplayName" xml:space="preserve">
     <value>DisplayName</value>
   </data>
-  <data name="Zetbox.App.Base.Identity.DisplayName_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="DisplayName_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Identity.DisplayName_description" xml:space="preserve">
+  <data name="DisplayName_description" xml:space="preserve">
     <value>Displayname of this identity</value>
   </data>
-  <data name="Zetbox.App.Base.Identity.Groups" xml:space="preserve">
+  <data name="Groups" xml:space="preserve">
     <value>Groups</value>
   </data>
-  <data name="Zetbox.App.Base.Identity.Groups_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Groups_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Identity.Groups_description" xml:space="preserve">
+  <data name="Groups_description" xml:space="preserve">
     <value>Identites are member of groups</value>
   </data>
-  <data name="Zetbox.App.Base.Identity.Password" xml:space="preserve">
+  <data name="Password" xml:space="preserve">
     <value>Password</value>
   </data>
-  <data name="Zetbox.App.Base.Identity.Password_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Password_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Identity.Password_description" xml:space="preserve">
+  <data name="Password_description" xml:space="preserve">
     <value>Password of a generic identity</value>
   </data>
-  <data name="Zetbox.App.Base.Identity.UserName" xml:space="preserve">
+  <data name="UserName" xml:space="preserve">
     <value>UserName</value>
   </data>
-  <data name="Zetbox.App.Base.Identity.UserName_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="UserName_label" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Zetbox.App.Base.Identity.UserName_description" xml:space="preserve">
+  <data name="UserName_description" xml:space="preserve">
     <value>Username of a generic identity</value>
   </data>
 </root>
