@@ -797,17 +797,17 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             SetBusy();
             var execQueryTask = GetQuery().ToListAsync(); // No order by - may be set from outside in LinqQuery! .Cast<IDataObject>().ToList().OrderBy(obj => obj.ToString()))
             _loadInstancesCoreTask = new ZbTask(execQueryTask);
-            _loadInstancesCoreTask.OnError(ex =>
-            {
-                ClearBusy();
-
-                var errorVmdl = ViewModelFactory.CreateViewModel<ExceptionReporterViewModel.Factory>().Invoke(
-                    DataContext,
-                    this,
-                    ex,
-                    screenshotTool.Value.GetScreenshot());
-                ViewModelFactory.ShowDialog(errorVmdl);
-            });
+            _loadInstancesCoreTask
+                .Finally(ClearBusy)
+                .OnError(ex =>
+                {
+                    var errorVmdl = ViewModelFactory.CreateViewModel<ExceptionReporterViewModel.Factory>().Invoke(
+                        DataContext,
+                        this,
+                        ex,
+                        screenshotTool.Value.GetScreenshot());
+                    ViewModelFactory.ShowDialog(errorVmdl);
+                });
             _loadInstancesCoreTask.OnResult(t =>
                 {
                     _instancesFromServer = execQueryTask.Result.Cast<IDataObject>()
