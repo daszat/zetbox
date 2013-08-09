@@ -258,6 +258,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\PasswordDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\TestModule\EventTestInputEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -676,6 +680,14 @@
     <Compile Include="View\ModuleEditor\DiagramDisplay.xaml.cs">
       <DependentUpon>DiagramDisplay.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\PasswordDialog.xaml.cs">
+      <DependentUpon>PasswordDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PasswordDialogResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PasswordDialogResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="View\TestModule\EventTestInputEditor.xaml.cs">
       <DependentUpon>EventTestInputEditor.xaml</DependentUpon>
     </Compile>
@@ -913,6 +925,11 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PasswordDialogResources.de.resx" />
+    <EmbeddedResource Include="View\PasswordDialogResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>PasswordDialogResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="WpfToolkitResources.de.resx" />
     <EmbeddedResource Include="WpfToolkitResources.resx">

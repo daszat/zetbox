@@ -17,14 +17,15 @@ namespace Zetbox.Client.WPF
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
     using System.Text;
     using Autofac;
     using Zetbox.API;
     using Zetbox.API.Client;
-    using Zetbox.Client.Presentables;
     using Zetbox.API.Configuration;
-    using System.ComponentModel;
+    using Zetbox.Client.Presentables;
+    using Zetbox.Client.WPF.View;
 
     [Feature]
     [Description("Client Toolkit Module for WPF")]
@@ -39,6 +40,12 @@ namespace Zetbox.Client.WPF
                 .As<IViewModelFactory>()
                 .As<IToolkit>()
                 .SingleInstance();
+
+            builder
+                .RegisterType<PasswordDialog.Adapter>()
+                .As<IPasswordDialog>()
+                .InstancePerDependency();
         }
+
     }
 }
