@@ -24,7 +24,8 @@
     -->
 
     <Border BorderBrush="{Binding Color, Converter={StaticResource DarkerShadeConverter}}"
-            BorderThickness="0,1,1,1"
+            BorderThickness="0,1,1,0"
+            x:Name="dayHeaderBorder"
             SnapsToDevicePixels="true">
         <ToggleButton IsChecked="{Binding Zoom}"
                       HorizontalAlignment="Stretch"

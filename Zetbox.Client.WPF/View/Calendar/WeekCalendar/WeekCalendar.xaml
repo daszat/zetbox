@@ -40,6 +40,7 @@
                 <RowDefinition Height="38" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
@@ -152,31 +153,15 @@
                     </Style>
                 </TabControl.ItemContainerStyle>
             </TabControl>
-            <Border BorderBrush="{Binding Parent.SelectedItem.Color}"
-                    BorderThickness="0,0,1,1"
-                    Grid.Column="0"
-                    Grid.Row="2"
-                    Margin="50,0,0,0"
-                    x:Name="headerBorder"
-                    SnapsToDevicePixels="true">
-                <Border.Background>
-                    <LinearGradientBrush>
-                        <GradientStop Color="{Binding Parent.SelectedItem.Color, Converter={StaticResource LighterShadeConverter}}"
-                                      Offset="-0.5" />
-                        <GradientStop Color="{Binding Parent.SelectedItem.Color}"
-                                      Offset="1.0" />
-                    </LinearGradientBrush>
-                </Border.Background>
-            </Border>
-            <ScrollViewer x:Name="scrollDayHeaders"
-                          Grid.Row="2"
-                          Grid.Column="0">
+            <!-- AllDay Items -->
+            <ScrollViewer x:Name="scrollAllDayItems"
+                          Grid.Row="3"
+                          Grid.Column="0"
+                          MinHeight="32"
+                          MaxHeight="128">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto"
-                                       MinHeight="32"
-                                       MaxHeight="128" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="50" />
@@ -188,62 +173,91 @@
                         <ColumnDefinition Width="{Binding DayItems[5].WidthPercent, Converter={StaticResource PercentToGridLengthConverter}}" />
                         <ColumnDefinition Width="{Binding DayItems[6].WidthPercent, Converter={StaticResource PercentToGridLengthConverter}}" />
                     </Grid.ColumnDefinitions>
-                    <Border Grid.Column="0"
-                            Grid.Row="0"
-                            Grid.RowSpan="2"
-                            BorderBrush="#9493CF"
-                            BorderThickness="0,0,1,1"
-                            SnapsToDevicePixels="true" />
-                    <!-- Header -->
-                    <local:CalendarDayHeader Grid.Column="1"
-                                             Grid.Row="0"
-                                             DataContext="{Binding DayItems[0]}" />
-                    <local:CalendarDayHeader Grid.Column="2"
-                                             Grid.Row="0"
-                                             DataContext="{Binding DayItems[1]}" />
-                    <local:CalendarDayHeader Grid.Column="3"
-                                             Grid.Row="0"
-                                             DataContext="{Binding DayItems[2]}" />
-                    <local:CalendarDayHeader Grid.Column="4"
-                                             Grid.Row="0"
-                                             DataContext="{Binding DayItems[3]}" />
-                    <local:CalendarDayHeader Grid.Column="5"
-                                             Grid.Row="0"
-                                             DataContext="{Binding DayItems[4]}" />
-                    <local:CalendarDayHeader Grid.Column="6"
-                                             Grid.Row="0"
-                                             DataContext="{Binding DayItems[5]}" />
-                    <local:CalendarDayHeader Grid.Column="7"
-                                             Grid.Row="0"
-                                             DataContext="{Binding DayItems[6]}" />
-
                     <!-- All Day -->
                     <local:CalendarAllDay Grid.Column="1"
-                                          Grid.Row="1"
                                           DataContext="{Binding DayItems[0]}" />
                     <local:CalendarAllDay Grid.Column="2"
-                                          Grid.Row="1"
                                           DataContext="{Binding DayItems[1]}" />
                     <local:CalendarAllDay Grid.Column="3"
-                                          Grid.Row="1"
                                           DataContext="{Binding DayItems[2]}" />
                     <local:CalendarAllDay Grid.Column="4"
-                                          Grid.Row="1"
                                           DataContext="{Binding DayItems[3]}" />
                     <local:CalendarAllDay Grid.Column="5"
-                                          Grid.Row="1"
                                           DataContext="{Binding DayItems[4]}" />
                     <local:CalendarAllDay Grid.Column="6"
-                                          Grid.Row="1"
                                           DataContext="{Binding DayItems[5]}" />
                     <local:CalendarAllDay Grid.Column="7"
-                                          Grid.Row="1"
                                           DataContext="{Binding DayItems[6]}" />
                 </Grid>
             </ScrollViewer>
+            <!-- Border for AllDay Items -->
+            <Border Grid.Row="3"
+                    Grid.Column="0"
+                    BorderBrush="#9493CF"
+                    BorderThickness="0,1,1,1"
+                    x:Name="allDayItemsBorder"
+                    SnapsToDevicePixels="true" />
+
+            <!-- Header -->
+            <Grid x:Name="dayHeaders"
+                  Grid.Row="2"
+                  Grid.Column="0"
+                  Width="{Binding ViewportWidth, ElementName=scrollAllDayItems}"
+                  HorizontalAlignment="Left">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="{Binding DayItems[0].WidthPercent, Converter={StaticResource PercentToGridLengthConverter}}" />
+                    <ColumnDefinition Width="{Binding DayItems[1].WidthPercent, Converter={StaticResource PercentToGridLengthConverter}}" />
+                    <ColumnDefinition Width="{Binding DayItems[2].WidthPercent, Converter={StaticResource PercentToGridLengthConverter}}" />
+                    <ColumnDefinition Width="{Binding DayItems[3].WidthPercent, Converter={StaticResource PercentToGridLengthConverter}}" />
+                    <ColumnDefinition Width="{Binding DayItems[4].WidthPercent, Converter={StaticResource PercentToGridLengthConverter}}" />
+                    <ColumnDefinition Width="{Binding DayItems[5].WidthPercent, Converter={StaticResource PercentToGridLengthConverter}}" />
+                    <ColumnDefinition Width="{Binding DayItems[6].WidthPercent, Converter={StaticResource PercentToGridLengthConverter}}" />
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0"
+                        Grid.Row="0"
+                        BorderBrush="#9493CF"
+                        BorderThickness="0,0,1,0"
+                        x:Name="headerLeftBorder"
+                        SnapsToDevicePixels="true" />
+                <Border BorderBrush="{Binding Parent.SelectedItem.Color}"
+                        BorderThickness="0,0,1,0"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="7"
+                        Grid.Row="0"
+                        x:Name="headerBackgroundBorder"
+                        SnapsToDevicePixels="true">
+                    <Border.Background>
+                        <LinearGradientBrush>
+                            <GradientStop Color="{Binding Parent.SelectedItem.Color, Converter={StaticResource LighterShadeConverter}}"
+                                          Offset="-0.5" />
+                            <GradientStop Color="{Binding Parent.SelectedItem.Color}"
+                                          Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                <local:CalendarDayHeader Grid.Column="1"
+                                         DataContext="{Binding DayItems[0]}" />
+                <local:CalendarDayHeader Grid.Column="2"
+                                         DataContext="{Binding DayItems[1]}" />
+                <local:CalendarDayHeader Grid.Column="3"
+                                         DataContext="{Binding DayItems[2]}" />
+                <local:CalendarDayHeader Grid.Column="4"
+                                         DataContext="{Binding DayItems[3]}" />
+                <local:CalendarDayHeader Grid.Column="5"
+                                         DataContext="{Binding DayItems[4]}" />
+                <local:CalendarDayHeader Grid.Column="6"
+                                         DataContext="{Binding DayItems[5]}" />
+                <local:CalendarDayHeader Grid.Column="7"
+                                         DataContext="{Binding DayItems[6]}" />
+            </Grid>
+
             <!-- Day Items -->
             <ScrollViewer x:Name="scrollDayEntries"
-                          Grid.Row="3"
+                          Grid.Row="4"
                           Grid.Column="0">
                 <Grid>
                     <Grid.ColumnDefinitions>

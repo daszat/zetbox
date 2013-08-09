@@ -26,7 +26,7 @@
     -->
 
     <Border BorderBrush="{Binding Color, Converter={StaticResource DarkerShadeConverter}}"
-            BorderThickness="0,0,1,1"
+            BorderThickness="0,0,1,0"
             SnapsToDevicePixels="true"
             x:Name="allDayBorder"
             MouseLeftButtonDown="Empty_MouseLeftButtonDown">
