@@ -230,6 +230,10 @@ namespace Zetbox.Client.Models
             {
                 return "null";
             }
+            else if (p is CalculatedObjectReferenceProperty)
+            {
+                return "null";
+            }
             else if (p is CompoundObjectProperty)
             {
                 return "null";
