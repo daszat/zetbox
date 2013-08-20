@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,16 +117,82 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Apps" xml:space="preserve">
-    <value>Apps</value>
+  <data name="AllDayLabel" xml:space="preserve">
+    <value>[Åľľ đäy !!! !!! !!! !!! !!! !!!]</value>
   </data>
-  <data name="Browse" xml:space="preserve">
-    <value>Browse</value>
+  <data name="BodyLabel" xml:space="preserve">
+    <value>[ßőđy !!! !!! !!!]</value>
   </data>
-  <data name="Name" xml:space="preserve">
-    <value>zetbox</value>
+  <data name="CalendarItemsLabel" xml:space="preserve">
+    <value>[Cäľęŉđäřş !!! !!! !!! !!! !!! !!! !!! !!!]</value>
   </data>
-  <data name="SimpleObjects" xml:space="preserve">
-    <value>Simple Objects</value>
+  <data name="CalendarLabel" xml:space="preserve">
+    <value>[Cäľęŉđäř !!! !!! !!! !!! !!! !!! !!!]</value>
+  </data>
+  <data name="CannotOpenNoRightsCaption" xml:space="preserve">
+    <value>[Åččęşş Đęŉįęđ !!! !!!]</value>
+  </data>
+  <data name="CannotOpenNoRightsMessage" xml:space="preserve">
+    <value>[Ÿőū ĥävę ŉő řęäđ řįģĥŧş őŉ ŧĥįş ęvęŉŧ !!! !!!]</value>
+  </data>
+  <data name="ClearAllCommand_Label" xml:space="preserve">
+    <value>[Øŉľy şęľƒ !!! !!! !!! !!! !!! !!! !!! !!!]</value>
+  </data>
+  <data name="ClearAllCommand_Tooltip" xml:space="preserve">
+    <value>[Ŝęľęčŧ őŉľy şęľƒ !!! !!!]</value>
+  </data>
+  <data name="DateLabel" xml:space="preserve">
+    <value>[Đäŧę !!! !!! !!!]</value>
+  </data>
+  <data name="DetailsLabel" xml:space="preserve">
+    <value>[Đęŧäįľş !!! !!! !!! !!! !!! !!!]</value>
+  </data>
+  <data name="DlgDateRangeTitle" xml:space="preserve">
+    <value>[Ēŉŧęř ä řäŉģę !!! !!!]</value>
+  </data>
+  <data name="FromLabel" xml:space="preserve">
+    <value>[Fřőm !!! !!! !!!]</value>
+  </data>
+  <data name="LocationLabel" xml:space="preserve">
+    <value>[Ŀőčäŧįőŉ !!! !!! !!! !!! !!! !!! !!!]</value>
+  </data>
+  <data name="NextEventsLabel" xml:space="preserve">
+    <value>[Ůpčőmmįŉģ ęvęŉŧş !!! !!!]</value>
+  </data>
+  <data name="PrintCommandGroup_Label" xml:space="preserve">
+    <value>[Přįŉŧ !!! !!! !!! !!!]</value>
+  </data>
+  <data name="PrintMonthCommand_Label" xml:space="preserve">
+    <value>[Mőŉŧĥ !!! !!! !!! !!!]</value>
+  </data>
+  <data name="PrintSheetCommand_Label" xml:space="preserve">
+    <value>[Ŝĥęęŧş !!! !!! !!! !!! !!!]</value>
+  </data>
+  <data name="PrintThisWeekCommand_Label" xml:space="preserve">
+    <value>[Ŧĥįş ŵęęĸ !!! !!! !!! !!! !!! !!! !!! !!!]</value>
+  </data>
+  <data name="PrintTodayCommand_Label" xml:space="preserve">
+    <value>[Ŧőđäy !!! !!! !!! !!!]</value>
+  </data>
+  <data name="PrintTwoWeeksCommand_Label" xml:space="preserve">
+    <value>[2 ŵęęĸş !!! !!! !!! !!! !!! !!!]</value>
+  </data>
+  <data name="RecurrenceLabel" xml:space="preserve">
+    <value>[Ŗęčūřřęŉčę !!! !!!]</value>
+  </data>
+  <data name="SelectAllCommand_Label" xml:space="preserve">
+    <value>[Åľľ !!! !!!]</value>
+  </data>
+  <data name="SelectAllCommand_Tooltip" xml:space="preserve">
+    <value>[Ŝęľęčŧ äľľ !!! !!!]</value>
+  </data>
+  <data name="SummaryLabel" xml:space="preserve">
+    <value>[Ŝūmmäřy !!! !!! !!! !!! !!! !!!]</value>
+  </data>
+  <data name="UntilLabel" xml:space="preserve">
+    <value>[Ůŉŧįľ !!! !!! !!! !!!]</value>
+  </data>
+  <data name="WorkspaceName" xml:space="preserve">
+    <value>[Cäľęŉđäř Ŵőřĸşpäčę !!! !!!]</value>
   </data>
 </root>

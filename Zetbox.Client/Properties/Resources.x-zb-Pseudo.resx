@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,16 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Apps" xml:space="preserve">
-    <value>Apps</value>
+  <data name="ExitButton" xml:space="preserve">
+    <value>[Ēχįŧ !!! !!! !!!]</value>
   </data>
-  <data name="Browse" xml:space="preserve">
-    <value>Browse</value>
+  <data name="Startup_AssemblyResolver" xml:space="preserve">
+    <value>[ßőőŧşŧřäppįŉģ Åşşęmþľy Ŗęşőľvęř !!! !!!]</value>
   </data>
-  <data name="Name" xml:space="preserve">
-    <value>zetbox</value>
+  <data name="Startup_EnsuringCredentials" xml:space="preserve">
+    <value>[Ğęŧŧįŉģ čřęđęŉŧįäľş !!! !!!]</value>
   </data>
-  <data name="SimpleObjects" xml:space="preserve">
-    <value>Simple Objects</value>
+  <data name="Startup_InitApp" xml:space="preserve">
+    <value>[Ĩŉįŧ äppľįčäŧįőŉ !!! !!!]</value>
+  </data>
+  <data name="Startup_Launcher" xml:space="preserve">
+    <value>[Ĩŉįŧįäľįžįŉģ Ŀäūŉčĥęř !!! !!!]</value>
+  </data>
+  <data name="Startup_Message" xml:space="preserve">
+    <value>[Żęŧþőχ įş şŧäřŧįŉģ... !!! !!!]</value>
+  </data>
+  <data name="Startup_NoServerStart" xml:space="preserve">
+    <value>[Ńő şęřvęř şŧäřŧ řęqūįřęđ !!! !!!]</value>
+  </data>
+  <data name="Startup_Server" xml:space="preserve">
+    <value>[Ŝŧäřŧįŉģ Ŝęřvęř !!! !!!]</value>
+  </data>
+  <data name="Summary" xml:space="preserve">
+    <value>[Ŝūmmäřy !!! !!! !!! !!! !!! !!!]</value>
+  </data>
+  <data name="Uncategorised" xml:space="preserve">
+    <value>[Ůŉčäŧęģőřįşęđ !!! !!!]</value>
   </data>
 </root>

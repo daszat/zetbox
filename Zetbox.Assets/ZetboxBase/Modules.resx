@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,16 +117,53 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Apps" xml:space="preserve">
-    <value>Apps</value>
+  <data name="Calendar" xml:space="preserve">
+    <value>Calendar</value>
   </data>
-  <data name="Browse" xml:space="preserve">
-    <value>Browse</value>
+  <data name="Calendar_description" xml:space="preserve">
+    <value>Calendar Module</value>
   </data>
-  <data name="Name" xml:space="preserve">
-    <value>zetbox</value>
+  <data name="DocumentManagement" xml:space="preserve">
+    <value>DocumentManagement</value>
   </data>
-  <data name="SimpleObjects" xml:space="preserve">
-    <value>Simple Objects</value>
+  <data name="DocumentManagement_description" xml:space="preserve">
+    <value>Module for managing Files and Documents</value>
+  </data>
+  <data name="GUI" xml:space="preserve">
+    <value>GUI</value>
+  </data>
+  <data name="GUI_description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ModuleEditor" xml:space="preserve">
+    <value>ModuleEditor</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ModuleEditor_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Projekte" xml:space="preserve">
+    <value>Projekte</value>
+  </data>
+  <data name="Projekte_description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SchemaMigration" xml:space="preserve">
+    <value>SchemaMigration</value>
+  </data>
+  <data name="SchemaMigration_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="TestModule" xml:space="preserve">
+    <value>TestModule</value>
+  </data>
+  <data name="TestModule_description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ZetboxBase" xml:space="preserve">
+    <value>ZetboxBase</value>
+  </data>
+  <data name="ZetboxBase_description" xml:space="preserve">
+    <value />
   </data>
 </root>

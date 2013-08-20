@@ -120,6 +120,22 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
             }
         }
 
+        public string AppsMenuItemString
+        {
+            get
+            {
+                return WorkspaceViewModelResources.Apps;
+            }
+        }
+
+        public string RootNodeNameAsString
+        {
+            get
+            {
+                return WorkspaceViewModelResources.Browse;
+            }
+        }
+
         #endregion
 
         public override string Name

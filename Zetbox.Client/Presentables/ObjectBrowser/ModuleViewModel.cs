@@ -24,6 +24,7 @@ using Zetbox.API.Configuration;
 using Zetbox.App.Base;
 using Zetbox.App.Extensions;
 using Zetbox.Client.Presentables.ZetboxBase;
+using Zetbox.API.Common;
 
 namespace Zetbox.Client.Presentables.ObjectBrowser
 {
@@ -36,7 +37,7 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
             {
                 get
                 {
-                    return "Simple Objects";
+                    return WorkspaceViewModelResources.SimpleObjects;
                 }
             }
             public IEnumerable Children { get; set; }
@@ -50,6 +51,14 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
         {
             _module = mdl;
             _module.PropertyChanged += ModulePropertyChanged;
+        }
+
+        public override string Name
+        {
+            get
+            {
+                return Assets.GetString(_module, ZetboxAssetKeys.Modules, ZetboxAssetKeys.ConstructNameKey(_module), _module.Name);
+            }
         }
 
         #region public interface

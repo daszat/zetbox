@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,16 +117,67 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Apps" xml:space="preserve">
-    <value>Apps</value>
+  <data name="From" xml:space="preserve">
+    <value>[Fřőm !!! !!! !!!]</value>
   </data>
-  <data name="Browse" xml:space="preserve">
-    <value>Browse</value>
+  <data name="FulltextFilterModel_Description" xml:space="preserve">
+    <value>[Fūľľŧęχŧ şęäřčĥ ƒőř äŉy ŧęχŧ !!! !!!]</value>
   </data>
-  <data name="Name" xml:space="preserve">
-    <value>zetbox</value>
+  <data name="FulltextFilterModel_HelpText" xml:space="preserve">
+    <value>[&lt;h1&gt;Fūľľŧęχŧ şęäřčĥ&lt;/h1&gt;
+&lt;p&gt;&lt;b&gt;Ńőŧę:&lt;/b&gt; Cūřřęŉŧľy, ŧĥęřę äřę şőmę řęşŧřįčŧįőŉş: Åľľ őŧĥęř şęäřčĥ ƒįęľđş äřę đįşäþľęđ đūřįŉģ ä ƒūľľŧęχŧ şęäřčĥ äŉđ päģįŉģ įş ŉőŧ yęŧ şūppőřŧęđ.&lt;/p&gt;
+&lt;p&gt;Mőřę įŉƒőřmäŧįőŉ čäŉ þę ƒőūŉđ ĥęřę: &lt;a href="http://lucene.apache.org/core/3_0_3/queryparsersyntax.html" target="_blank"&gt;ĥŧŧp://ľūčęŉę.äpäčĥę.őřģ/čőřę/3_0_3/qūęřypäřşęřşyŉŧäχ.ĥŧmľ&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2&gt;Ŧęřmş&lt;/h2&gt;
+&lt;pre&gt;ŧęşŧ ĥęľľő&lt;/pre&gt;
+&lt;pre&gt;"ŧęşŧ" "ĥęľľő"&lt;/pre&gt;
+&lt;pre&gt;"ŧęşŧ ĥęľľő"&lt;/pre&gt;
+
+&lt;h2&gt;Fįęľđş&lt;/h2&gt;
+&lt;p&gt;Ŵĥęŉ pęřƒőřmįŉģ ä şęäřčĥ yőū čäŉ ęįŧĥęř şpęčįƒy ä ƒįęľđ, őř ūşę ŧĥę đęƒäūľŧ ƒįęľđ&lt;/p&gt;
+&lt;pre&gt;ŧįŧľę:"Ŧĥę Ŗįģĥŧ Ŵäy" ÅŃĐ ŧęχŧ:ģő&lt;/pre&gt;
+&lt;pre&gt;ŧįŧľę:"Đő įŧ řįģĥŧ" ÅŃĐ řįģĥŧ&lt;/pre&gt;
+
+&lt;h2&gt;Ŵįľđčäřđ Ŝęäřčĥęş&lt;/h2&gt;
+&lt;pre&gt;ŧę?ŧ&lt;/pre&gt;
+&lt;pre&gt;ŧęşŧ*&lt;/pre&gt;
+&lt;pre&gt;ŧę*ŧ&lt;/pre&gt;
+
+&lt;h2&gt;ßőőľęäŉ Øpęřäŧőřş&lt;/h2&gt;
+&lt;p&gt;&lt;b&gt;Ńőŧę:&lt;/b&gt; ßőőľęäŉ őpęřäŧőřş mūşŧ þę ÅĿĿ CÅPŜ&lt;/p&gt;
+&lt;pre&gt;"ĵäĸäřŧä äpäčĥę" ĵäĸäřŧä&lt;/pre&gt;
+&lt;p&gt;įş ŧĥę şämę äş:&lt;/p&gt;
+&lt;pre&gt;"ĵäĸäřŧä äpäčĥę" ØŖ ĵäĸäřŧä&lt;/pre&gt;
+&lt;p&gt;Åŉđ:&lt;/p&gt;
+&lt;pre&gt;"ĵäĸäřŧä äpäčĥę" ÅŃĐ "Åpäčĥę Ŀūčęŉę"&lt;/pre&gt;
+&lt;pre&gt;+ĵäĸäřŧä ľūčęŉę&lt;/pre&gt;
+&lt;p&gt;Ńőŧ:&lt;/p&gt;
+&lt;pre&gt;"ĵäĸäřŧä äpäčĥę" ŃØŦ "Åpäčĥę Ŀūčęŉę"&lt;/pre&gt;
+
+&lt;h2&gt;Ğřőūpįŉģ&lt;/h2&gt;
+&lt;pre&gt;(ĵäĸäřŧä ØŖ äpäčĥę) ÅŃĐ ŵęþşįŧę&lt;/pre&gt;
+
+&lt;h2&gt;Ēşčäpįŉģ Ŝpęčįäľ Cĥäřäčŧęřş&lt;/h2&gt;
+&lt;pre&gt;+ - &amp;&amp; || ! ( ) { } [ ] ^ " ~ * ? : \&lt;/pre&gt;
+&lt;p&gt;Mūşŧ þę ęşčäpęđ ŵįŧĥ \&lt;/p&gt;
+&lt;pre&gt;\(1\+1\)\:2&lt;/pre&gt; !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!!]</value>
   </data>
-  <data name="SimpleObjects" xml:space="preserve">
-    <value>Simple Objects</value>
+  <data name="FulltextFilterModel_Label" xml:space="preserve">
+    <value>[Fūľľŧęχŧ şęäřčĥ !!! !!!]</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>[Ŧő !!! !!!]</value>
+  </data>
+  <data name="ToStringFilterModel_Description" xml:space="preserve">
+    <value>[Ŧęχŧ čőŉŧäįŉęđ įŉ äŉ Ĩŧęm !!! !!!]</value>
+  </data>
+  <data name="ToStringFilterModel_Label" xml:space="preserve">
+    <value>[Ŧęχŧ !!! !!! !!!]</value>
+  </data>
+  <data name="WithDeactivatedFilterModel_Description" xml:space="preserve">
+    <value>[Ŵįŧĥ đęäčŧįväŧęđ įŧęmş !!! !!!]</value>
+  </data>
+  <data name="WithDeactivatedFilterModel_Label" xml:space="preserve">
+    <value>[ŴįŧĥĐęäčŧįväŧęđ !!! !!!]</value>
   </data>
 </root>

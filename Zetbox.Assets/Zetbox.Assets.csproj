@@ -63,6 +63,8 @@
     <None Include="Zetbox.snk" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ZetboxBase\Applications.resx" />
+    <EmbeddedResource Include="ZetboxBase\Applications.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="ZetboxBase\CategoryTags.resx" />
     <EmbeddedResource Include="ZetboxBase\CategoryTags.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="ZetboxBase\DataTypes.de.resx" />
@@ -200,6 +202,8 @@
     <EmbeddedResource Include="ZetboxBase\Methods\Zetbox.App.Test.RecurrenceRuleTester.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="ZetboxBase\Methods\Zetbox.App.Test.TestObjClass.resx" />
     <EmbeddedResource Include="ZetboxBase\Methods\Zetbox.App.Test.TestObjClass.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="ZetboxBase\Modules.resx" />
+    <EmbeddedResource Include="ZetboxBase\Modules.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="ZetboxBase\Properties\at.dasz.DocumentManagement.Document.resx" />
     <EmbeddedResource Include="ZetboxBase\Properties\at.dasz.DocumentManagement.Document.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="ZetboxBase\Properties\at.dasz.DocumentManagement.Excerpt.resx" />

@@ -20,6 +20,7 @@ using Zetbox.API;
 using Zetbox.API.Client;
 using Zetbox.App.GUI;
 using Zetbox.Client.Presentables.GUI;
+using Zetbox.API.Common;
 
 namespace Zetbox.Client.Presentables.ZetboxBase
 {
@@ -40,7 +41,6 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             if (app == null) throw new ArgumentNullException("app");
             this.ctxFactory = ctxFactory;
             this.app = app;
-            _name = app.Name;
             _wndMdlType = app.WorkspaceViewModel != null
                 ? Type.GetType(app.WorkspaceViewModel.ViewModelTypeRef, true)
                 : null;
@@ -63,10 +63,15 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        private string _name;
         public override string Name
         {
-            get { return _name; }
+            get
+            {
+                if (app.Module != null)
+                    return Assets.GetString(app.Module, ZetboxAssetKeys.Applications, ZetboxAssetKeys.ConstructNameKey(app), app.Name);
+                else
+                    return app.Name;
+            }
         }
 
         #region Open Application

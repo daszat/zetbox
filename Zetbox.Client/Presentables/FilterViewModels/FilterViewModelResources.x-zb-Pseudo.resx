@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,16 +117,46 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Apps" xml:space="preserve">
-    <value>Apps</value>
+  <data name="AllYear" xml:space="preserve">
+    <value>[Åľľ !!! !!!]</value>
   </data>
-  <data name="Browse" xml:space="preserve">
-    <value>Browse</value>
+  <data name="Empty" xml:space="preserve">
+    <value>[(ęmpŧy) !!! !!! !!! !!! !!! !!!]</value>
+  </data>
+  <data name="HalfYear" xml:space="preserve">
+    <value>[Ħäľƒ-yęäř !!! !!! !!! !!! !!! !!! !!! !!!]</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>zetbox</value>
+    <value>[Å Fįľŧęř !!! !!! !!! !!! !!! !!! !!!]</value>
   </data>
-  <data name="SimpleObjects" xml:space="preserve">
-    <value>Simple Objects</value>
+  <data name="OperatorContains" xml:space="preserve">
+    <value>[čőŉŧäįŉş !!! !!! !!! !!! !!! !!! !!!]</value>
+  </data>
+  <data name="OperatorEquals" xml:space="preserve">
+    <value>[įş ęqūäľ ŧő !!! !!!]</value>
+  </data>
+  <data name="OperatorGreater" xml:space="preserve">
+    <value>[įş ģřęäŧęř ŧĥäŉ !!! !!!]</value>
+  </data>
+  <data name="OperatorGreaterOrEqual" xml:space="preserve">
+    <value>[įş ģřęäŧęř őř ęqūäľ !!! !!!]</value>
+  </data>
+  <data name="OperatorIsNotNull" xml:space="preserve">
+    <value>[įş ŉőŧ ŉūľľ !!! !!!]</value>
+  </data>
+  <data name="OperatorIsNull" xml:space="preserve">
+    <value>[įş ŉūľľ !!! !!! !!! !!! !!! !!!]</value>
+  </data>
+  <data name="OperatorLess" xml:space="preserve">
+    <value>[įş ľęşş ŧĥäŉ !!! !!!]</value>
+  </data>
+  <data name="OperatorLessOrEqual" xml:space="preserve">
+    <value>[įş ľęşş őř ęqūäľ !!! !!!]</value>
+  </data>
+  <data name="OperatorNot" xml:space="preserve">
+    <value>[įş ŉőŧ !!! !!! !!! !!! !!!]</value>
+  </data>
+  <data name="Quater" xml:space="preserve">
+    <value>[Qūäŧęř !!! !!! !!! !!! !!!]</value>
   </data>
 </root>

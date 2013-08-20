@@ -76,6 +76,15 @@ namespace Zetbox.Generator
                 .As<IResourceGeneratorTask>()
                 .SingleInstance();
 
+            builder
+                .RegisterType<ModuleTask>()
+                .As<IResourceGeneratorTask>()
+                .SingleInstance();
+
+            builder
+                .RegisterType<ApplicationTask>()
+                .As<IResourceGeneratorTask>()
+                .SingleInstance();
             #endregion
         }
 

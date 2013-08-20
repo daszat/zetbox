@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,16 +117,52 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Apps" xml:space="preserve">
-    <value>Apps</value>
+  <data name="ClearValueCommand_Name" xml:space="preserve">
+    <value>[Cľęäř väľūę !!! !!!]</value>
   </data>
-  <data name="Browse" xml:space="preserve">
-    <value>Browse</value>
+  <data name="ClearValueCommand_Tooltip" xml:space="preserve">
+    <value>[Ŝęŧş ŧĥę väľūę ŧő ŉőŧĥįŉģ !!! !!!]</value>
   </data>
-  <data name="Name" xml:space="preserve">
-    <value>zetbox</value>
+  <data name="DateIsRequired" xml:space="preserve">
+    <value>[Å đäŧę väľūę įş řęqūįřęđ !!! !!!]</value>
   </data>
-  <data name="SimpleObjects" xml:space="preserve">
-    <value>Simple Objects</value>
+  <data name="DecimalOutOfRange" xml:space="preserve">
+    <value>[Ŧĥę väľūę '{0}' įş ŉőŧ įŉ ŧĥę äľľőŵęđ řäŉģę (mäχ. {1} pľäčęş þęƒőřę ŧĥę čőmmä) !!! !!! !!! !!! !!!]</value>
+  </data>
+  <data name="EditCommand_Name" xml:space="preserve">
+    <value>[Ēđįŧ !!! !!! !!!]</value>
+  </data>
+  <data name="EditCommand_Tooltip" xml:space="preserve">
+    <value>[Øpęŉş ä Ēđįŧőř Đįäľőģ !!! !!!]</value>
+  </data>
+  <data name="ErrorConvertingType" xml:space="preserve">
+    <value>[Ůŉäþľę ŧő čőŉvęřŧ ŧypę !!! !!!]</value>
+  </data>
+  <data name="ErrorEmptyValue" xml:space="preserve">
+    <value>[Ēmpŧy väľūę !!! !!!]</value>
+  </data>
+  <data name="False" xml:space="preserve">
+    <value>[Fäľşę !!! !!! !!! !!!]</value>
+  </data>
+  <data name="InvalidMailFormat" xml:space="preserve">
+    <value>[Ĩŉväľįđ ƒőřmäŧ !!! !!!]</value>
+  </data>
+  <data name="NoMailAddress" xml:space="preserve">
+    <value>[Ńő äđđřęşş !!! !!!]</value>
+  </data>
+  <data name="NoMailSender" xml:space="preserve">
+    <value>[Ńő mäįľ şęŉđęř čőŉƒįģūřęđ !!! !!!]</value>
+  </data>
+  <data name="SendMailCommand_Name" xml:space="preserve">
+    <value>[Ŝęŉđ Mäįľ !!! !!! !!! !!! !!! !!! !!! !!!]</value>
+  </data>
+  <data name="SendMailCommand_Tooltip" xml:space="preserve">
+    <value>[Øpęŉş ä mäįľ přőģřäm ŧő şęŉđ ä ęmäįľ !!! !!!]</value>
+  </data>
+  <data name="TimeIsRequired" xml:space="preserve">
+    <value>[Å ŧįmę väľūę įş řęqūįřęđ !!! !!!]</value>
+  </data>
+  <data name="True" xml:space="preserve">
+    <value>[Ŧřūę !!! !!! !!!]</value>
   </data>
 </root>

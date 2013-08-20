@@ -431,26 +431,58 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ZetboxContextExceptionHandlerResources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CredentialsResolverResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Models\FilterModelsResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\ActionViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\CacheDebuggerViewModelResources.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="Presentables\Calendar\CalendarResources.de.resx" />
     <EmbeddedResource Include="Presentables\Calendar\CalendarResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>CalendarResources1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\Calendar\CalendarResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\DataObjectSelectionTaskViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\DataObjectViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\DocumentManagement\ImportedFileNavigationSearchScreenViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\ErrorListViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\ExceptionReporterViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\FilterViewModels\FilterViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\GUI\MultiLineEditorDialogViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\GUI\NavigatorViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\GUI\SavedListConfiguratorViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\ObjectBrowser\WorkspaceViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\ObjectEditor\WorkspaceViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\ParameterInputTaskViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\SimpleDataObjectEditorTaskViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\ValueInputTaskViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\ValueViewModels\BaseObjectCollectionViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\ValueViewModels\ObjectReferenceViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\ValueViewModels\ValueViewModelResources.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="Presentables\ViewModelResources.de.resx" />
     <EmbeddedResource Include="Presentables\ViewModelResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\ViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\ZetboxBase\ApplicationViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\ZetboxBase\CommonCommandsResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\ZetboxBase\InstanceList\FilterListEntryViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\ZetboxBase\InstanceList\FilterListViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\ZetboxBase\PropertySelectionTaskViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\ZetboxBase\RelationChainViewModelResources.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="Reporting\Calendar\EventsResources.de.resx" />
     <EmbeddedResource Include="Reporting\Calendar\EventsResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>EventsResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reporting\Calendar\EventsResources.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="ZetboxContextExceptionHandlerResources.de.resx" />
     <EmbeddedResource Include="ZetboxContextExceptionHandlerResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ZetboxContextExceptionHandlerResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="ZetboxContextExceptionHandlerResources.x-zb-Pseudo.resx" />
     <None Include="packages.config" />
     <None Include="Properties\VersionInfo.cs" />
     <Compile Include="Properties\VersionInfo.Designer.cs">

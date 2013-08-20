@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,16 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Apps" xml:space="preserve">
-    <value>Apps</value>
+  <data name="Heading" xml:space="preserve">
+    <value>[Cäľęŉđäř !!! !!! !!! !!! !!! !!! !!!]</value>
   </data>
-  <data name="Browse" xml:space="preserve">
-    <value>Browse</value>
+  <data name="HeadingSublineFormat" xml:space="preserve">
+    <value>[ƒřőm {0} ūŉŧįľ {1} !!! !!!]</value>
   </data>
-  <data name="Name" xml:space="preserve">
-    <value>zetbox</value>
-  </data>
-  <data name="SimpleObjects" xml:space="preserve">
-    <value>Simple Objects</value>
+  <data name="Page" xml:space="preserve">
+    <value>[Päģę !!! !!! !!!]</value>
   </data>
 </root>

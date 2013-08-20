@@ -8,7 +8,7 @@
                   xmlns:clientZetboxBase="clr-namespace:Zetbox.Client.Presentables.ZetboxBase;assembly=Zetbox.Client"
                   xmlns:commands="clr-namespace:Zetbox.Client.WPF.Commands;assembly=Zetbox.Client.WPF.Toolkit"
                   commands:SmartRoutedUICommand.IsCommandSink="True"
-                  Title="dasLauncher"
+                  Title="{Binding Name}"
                   Height="600"
                   Width="800">
     <!--
@@ -30,7 +30,7 @@
 
     <DockPanel>
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="Apps"
+            <MenuItem Header="{Binding AppsMenuItemString}"
                       ItemsSource="{Binding Applications}">
                 <MenuItem.ItemContainerStyle>
                     <Style TargetType="{x:Type MenuItem}">
@@ -65,7 +65,7 @@
                             <Image Source="{Binding Icon, Converter={StaticResource ImageConverter}}"
                                    Width="14"
                                    Height="14" />
-                            <TextBlock Text="{Binding PropertyModelsByName[Name].Value}"
+                            <TextBlock Text="{Binding Name}"
                                        Margin="3,0,0,0" />
                         </StackPanel>
                     </HierarchicalDataTemplate>
@@ -88,7 +88,7 @@
                         </StackPanel>
                     </HierarchicalDataTemplate>
                 </TreeView.Resources>
-                <TreeViewItem Header="Browse"
+                <TreeViewItem Header="{Binding RootNodeNameAsString}"
                               ItemsSource="{Binding Modules}"
                               IsExpanded="True" />
             </TreeView>

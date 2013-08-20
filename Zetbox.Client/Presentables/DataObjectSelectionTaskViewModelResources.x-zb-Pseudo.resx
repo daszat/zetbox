@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,16 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Apps" xml:space="preserve">
-    <value>Apps</value>
+  <data name="Cancel" xml:space="preserve">
+    <value>[Cäŉčęľ !!! !!! !!! !!! !!!]</value>
   </data>
-  <data name="Browse" xml:space="preserve">
-    <value>Browse</value>
+  <data name="Cancel_Tooltip" xml:space="preserve">
+    <value>[Cäŉčęľ ŧĥįş şęľęčŧįőŉ ŧäşĸ !!! !!!]</value>
+  </data>
+  <data name="Choose" xml:space="preserve">
+    <value>[Ŝęľęčŧ !!! !!! !!! !!! !!!]</value>
+  </data>
+  <data name="Choose_Tooltip" xml:space="preserve">
+    <value>[Ŝęľęčŧş ŧĥę čūřřęŉŧ įŧęm !!! !!!]</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>zetbox</value>
-  </data>
-  <data name="SimpleObjects" xml:space="preserve">
-    <value>Simple Objects</value>
+    <value>[Ŝęľęčŧ äŉ őþĵęčŧ őƒ Ŧypę {0} !!! !!!]</value>
   </data>
 </root>

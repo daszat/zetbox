@@ -20,6 +20,7 @@ namespace Zetbox.API.Common
     using System.Linq;
     using System.Text;
     using Zetbox.App.Base;
+    using Zetbox.App.GUI;
 
     public static class ZetboxAssetKeys
     {
@@ -34,6 +35,36 @@ namespace Zetbox.API.Common
         public static string ConstructDescriptionKey(DataType dt)
         {
             return dt.Module.Namespace + "." + dt.Name + "_description";
+        }
+
+        #endregion
+
+        #region Modules
+
+        public static readonly string Modules = "ZetboxBase.Modules";
+
+        public static string ConstructNameKey(Module m)
+        {
+            return m.Name;
+        }
+        public static string ConstructDescriptionKey(Module m)
+        {
+            return m.Name + "_description";
+        }
+
+        #endregion
+
+        #region Applications
+
+        public static readonly string Applications = "ZetboxBase.Applications";
+
+        public static string ConstructNameKey(Application app)
+        {
+            return app.Module.Namespace + "." + app.Name;
+        }
+        public static string ConstructDescriptionKey(Application app)
+        {
+            return app.Module.Namespace + "." + app.Name + "_description";
         }
 
         #endregion

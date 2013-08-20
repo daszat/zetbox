@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,16 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Apps" xml:space="preserve">
-    <value>Apps</value>
+  <data name="AddExistingCommand_Name" xml:space="preserve">
+    <value>[Åđđ ęχįşŧįŉģ !!! !!!]</value>
   </data>
-  <data name="Browse" xml:space="preserve">
-    <value>Browse</value>
+  <data name="AddExistingCommand_Tooltip" xml:space="preserve">
+    <value>[Åđđş äŉ ęχįşŧįŉģ įŧęm įŉŧő ŧĥįş ľįşŧ. !!! !!!]</value>
   </data>
-  <data name="Name" xml:space="preserve">
-    <value>zetbox</value>
+  <data name="CreateNewCommand_Name" xml:space="preserve">
+    <value>[Åđđ ŉęŵ !!! !!! !!! !!! !!! !!!]</value>
   </data>
-  <data name="SimpleObjects" xml:space="preserve">
-    <value>Simple Objects</value>
+  <data name="CreateNewCommand_Tooltip" xml:space="preserve">
+    <value>[Cřęäŧęş ä ŉęŵ Ĩŧęm şūįŧäþľę ƒőř äđđįŉģ ŧő ŧĥę ľįşŧ. !!! !!! !!!]</value>
+  </data>
+  <data name="MoreItems" xml:space="preserve">
+    <value>[({0}): {1}... !!! !!!]</value>
+  </data>
+  <data name="OneItem" xml:space="preserve">
+    <value>[{0} !!! !!!]</value>
+  </data>
+  <data name="RemoveCommand_Name" xml:space="preserve">
+    <value>[Ŗęmővę !!! !!! !!! !!! !!!]</value>
+  </data>
+  <data name="RemoveCommand_Tooltip" xml:space="preserve">
+    <value>[Ŗęmővę şęľęčŧįőŉ ƒřőm ľįşŧ !!! !!!]</value>
   </data>
 </root>

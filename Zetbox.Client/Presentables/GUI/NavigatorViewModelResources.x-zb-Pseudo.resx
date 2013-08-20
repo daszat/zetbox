@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,16 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Apps" xml:space="preserve">
-    <value>Apps</value>
+  <data name="BackCommand_Name" xml:space="preserve">
+    <value>[ßäčĸ !!! !!! !!!]</value>
   </data>
-  <data name="Browse" xml:space="preserve">
-    <value>Browse</value>
+  <data name="BackCommand_Tooltip" xml:space="preserve">
+    <value>[Ńävįģäŧęş þäčĸ ŧő ŧĥę ľäşŧ şčřęęŉ !!! !!!]</value>
   </data>
-  <data name="Name" xml:space="preserve">
-    <value>zetbox</value>
+  <data name="CanClose" xml:space="preserve">
+    <value>[Đő yőū ŵäŉŧ ŧő čľőşę ŧĥįş Åppľįčäŧįőŉ? !!! !!!]</value>
   </data>
-  <data name="SimpleObjects" xml:space="preserve">
-    <value>Simple Objects</value>
+  <data name="CanClose_Title" xml:space="preserve">
+    <value>[Cľőşę Åppľįčäŧįőŉ !!! !!!]</value>
+  </data>
+  <data name="HomeCommand_Name" xml:space="preserve">
+    <value>[Ħőmę !!! !!! !!!]</value>
+  </data>
+  <data name="HomeCommand_Tooltip" xml:space="preserve">
+    <value>[Ńävįģäŧęş þäčĸ ŧő ŧĥę ŧőp-mőşŧ şčřęęŉ !!! !!!]</value>
+  </data>
+  <data name="NavigateToCommand_Name" xml:space="preserve">
+    <value>[Ğő ŧő ... !!! !!! !!! !!! !!! !!! !!! !!!]</value>
+  </data>
+  <data name="NavigateToCommand_Tooltip" xml:space="preserve">
+    <value>[Ńävįģäŧęş ŧő ŧĥę şęľęčŧęđ şčřęęŉ !!! !!!]</value>
   </data>
 </root>

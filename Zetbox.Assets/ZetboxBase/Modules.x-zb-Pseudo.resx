@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,16 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Apps" xml:space="preserve">
-    <value>Apps</value>
+  <data name="Calendar" xml:space="preserve">
+    <value>[Cäľęŉđäř !!! !!! !!! !!! !!! !!! !!!]</value>
   </data>
-  <data name="Browse" xml:space="preserve">
-    <value>Browse</value>
+  <data name="Calendar_description" xml:space="preserve">
+    <value>[Cäľęŉđäř Mőđūľę !!! !!!]</value>
   </data>
-  <data name="Name" xml:space="preserve">
-    <value>zetbox</value>
+  <data name="DocumentManagement" xml:space="preserve">
+    <value>[ĐőčūmęŉŧMäŉäģęmęŉŧ !!! !!!]</value>
   </data>
-  <data name="SimpleObjects" xml:space="preserve">
-    <value>Simple Objects</value>
+  <data name="DocumentManagement_description" xml:space="preserve">
+    <value>[Mőđūľę ƒőř mäŉäģįŉģ Fįľęş äŉđ Đőčūmęŉŧş !!! !!!]</value>
+  </data>
+  <data name="GUI" xml:space="preserve">
+    <value>[ĞŮĨ !!! !!!]</value>
+  </data>
+  <data name="ModuleEditor" xml:space="preserve">
+    <value>[MőđūľęĒđįŧőř !!! !!!]</value>
+  </data>
+  <data name="Projekte" xml:space="preserve">
+    <value>[Přőĵęĸŧę !!! !!! !!! !!! !!! !!! !!!]</value>
+  </data>
+  <data name="SchemaMigration" xml:space="preserve">
+    <value>[ŜčĥęmäMįģřäŧįőŉ !!! !!!]</value>
+  </data>
+  <data name="TestModule" xml:space="preserve">
+    <value>[ŦęşŧMőđūľę !!! !!!]</value>
+  </data>
+  <data name="ZetboxBase" xml:space="preserve">
+    <value>[Żęŧþőχßäşę !!! !!!]</value>
   </data>
 </root>
