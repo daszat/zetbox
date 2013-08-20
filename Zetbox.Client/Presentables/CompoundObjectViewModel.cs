@@ -28,6 +28,7 @@ namespace Zetbox.Client.Presentables
     using Zetbox.App.Extensions;
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables.ValueViewModels;
+    using Zetbox.API.Common;
 
     public class CompoundObjectViewModel
         : ViewModel
@@ -188,6 +189,8 @@ namespace Zetbox.Client.Presentables
         {
             FetchPropertyModels();
             var isAdmin = CurrentIdentity != null ? CurrentIdentity.IsAdmininistrator() : false;
+            var zbBaseModule = FrozenContext.GetQuery<Module>().Single(m => m.Name == "ZetboxBase");
+
             return _propertyList
                         .SelectMany(p => (String.IsNullOrEmpty(p.CategoryTags) ? Properties.Resources.Uncategorised : p.CategoryTags)
                                             .Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
@@ -197,17 +200,24 @@ namespace Zetbox.Client.Presentables
                         .OrderBy(group => group.Key)
                         .Select(group =>
                         {
+                            var tag = group.First().Category;
                             var lst = group.Select(p => _propertyModels[p.Property]).Cast<ViewModel>().ToList();
+
+                            var translatedTag = Assets.GetString(zbBaseModule, ZetboxAssetKeys.CategoryTags, tag);
+                            if (string.IsNullOrWhiteSpace(translatedTag))
+                            {
+                                translatedTag = Assets.GetString(group.First().Property.Module, ZetboxAssetKeys.CategoryTags, tag, tag);
+                            }
 
                             if (lst.Count == 1)
                             {
                                 return (PropertyGroupViewModel)ViewModelFactory.CreateViewModel<SinglePropertyGroupViewModel.Factory>().Invoke(
-                                    DataContext, this, group.First().Category, lst);
+                                    DataContext, this, translatedTag, lst);
                             }
                             else
                             {
                                 return (PropertyGroupViewModel)ViewModelFactory.CreateViewModel<MultiplePropertyGroupViewModel.Factory>().Invoke(
-                                    DataContext, this, group.First().Category, lst);
+                                    DataContext, this, translatedTag, lst);
                             }
                         })
                         .ToList();

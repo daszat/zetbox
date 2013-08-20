@@ -134,5 +134,9 @@ namespace Zetbox.API.Common
         }
 
         #endregion
+
+        #region CategoryTags
+        public static readonly string CategoryTags = "ZetboxBase.CategoryTags";
+        #endregion
     }
 }

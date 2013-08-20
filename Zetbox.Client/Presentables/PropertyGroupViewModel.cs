@@ -62,7 +62,6 @@ namespace Zetbox.Client.Presentables
             {
                 if (_titleCache == null)
                 {
-                    // TODO: Translate category tags
                     _titleCache = _title.Replace('_', ' ');
                 }
                 return _titleCache;

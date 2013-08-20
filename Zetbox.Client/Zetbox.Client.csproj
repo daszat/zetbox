@@ -471,6 +471,7 @@
     <EmbeddedResource Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModelResources.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="Presentables\ZetboxBase\PropertySelectionTaskViewModelResources.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="Presentables\ZetboxBase\RelationChainViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Properties\Resources.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="Reporting\Calendar\EventsResources.de.resx" />
     <EmbeddedResource Include="Reporting\Calendar\EventsResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

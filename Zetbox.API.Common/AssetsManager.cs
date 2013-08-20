@@ -58,7 +58,7 @@ namespace Zetbox.API.Common
                 var rm = GetResourceManager(module, baseName);
                 if (rm == null) return defaultString;
 
-                return rm.GetString(key);
+                return rm.GetString(key) ?? defaultString;
             }
             catch
             {

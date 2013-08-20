@@ -27,33 +27,39 @@ namespace Zetbox.Generator.ResourceGenerator
         public void Generate(IResourceGenerator generator, IZetboxServerContext ctx, IEnumerable<Zetbox.App.Base.Module> modules)
         {
             var moduleNames = modules.Select(m => m.Name).ToArray();
-            var splitArray = ",".ToCharArray();
 
-            var propTags = ctx.GetQuery<Property>()
-                            .Where(p => p.CategoryTags != null)
-                            .ToList()
-                            .Where(p => moduleNames.Contains(p.Module.Name))
-                            .SelectMany(p => p.CategoryTags.Split(splitArray, StringSplitOptions.RemoveEmptyEntries))
-                            .Select(t => t.Trim())
-                            .Distinct()
-                            .ToList();
-            var methodTags = ctx.GetQuery<Method>()
-                            .Where(m => m.CategoryTags != null)
-                            .ToList()
-                            .Where(m => moduleNames.Contains(m.Module.Name))
-                            .SelectMany(m => m.CategoryTags.Split(splitArray, StringSplitOptions.RemoveEmptyEntries))
-                            .Select(t => t.Trim())
-                            .Distinct()
-                            .ToList();
-
+            var tags = GetTags(ctx, moduleNames);
+            var exceptTags = moduleNames.Contains("ZetboxBase") 
+                    ? new List<string>() 
+                    : GetTags(ctx, "ZetboxBase", "GUI");
+            
             using (var writer = generator.AddFile("ZetboxBase\\CategoryTags"))
             {
-                foreach (var tag in propTags.Union(methodTags).Distinct().OrderBy(i => i))
+                foreach (var tag in tags.Except(exceptTags).OrderBy(i => i))
                 {
                     if(!string.IsNullOrWhiteSpace(tag))
                         writer.AddResource(tag, tag);
                 }
             }
+        }
+
+        private static List<string> GetTags(IZetboxServerContext ctx, params string[] moduleNames)
+        {
+            var splitArray = ",".ToCharArray();
+            var propTags = ctx.GetQuery<Property>()
+                                .Where(p => p.CategoryTags != null)
+                                .ToList()
+                                .Where(p => moduleNames.Contains(p.Module.Name))
+                                .SelectMany(p => p.CategoryTags.Split(splitArray, StringSplitOptions.RemoveEmptyEntries))
+                                .Select(t => t.Trim());
+            var methodTags = ctx.GetQuery<Method>()
+                                .Where(m => m.CategoryTags != null)
+                                .ToList()
+                                .Where(m => moduleNames.Contains(m.Module.Name))
+                                .SelectMany(m => m.CategoryTags.Split(splitArray, StringSplitOptions.RemoveEmptyEntries))
+                                .Select(t => t.Trim());
+
+            return propTags.Union(methodTags).Distinct().ToList();
         }
     }
 }
