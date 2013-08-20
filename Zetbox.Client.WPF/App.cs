@@ -143,7 +143,7 @@ namespace Zetbox.Client.WPF
         {
             InitializeSplashScreenImageResource();
 
-            StartupScreen.ShowSplashScreen(Zetbox.Client.Properties.Resources.Startup_Message, Zetbox.Client.Properties.Resources.Startup_InitApp, 6);
+            StartupScreen.ShowSplashScreen(Zetbox.Client.Properties.Resources.Startup_Message, Zetbox.Client.Properties.Resources.Startup_InitApp, 6, config);
             if (config.Server != null && config.Server.StartServer)
             {
                 StartupScreen.SetInfo(Zetbox.Client.Properties.Resources.Startup_Server);
