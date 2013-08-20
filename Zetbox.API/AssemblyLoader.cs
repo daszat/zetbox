@@ -118,6 +118,10 @@ namespace Zetbox.API
                     hostTypePaths.Add("Client");
                     hostTypePaths.Add("Server");
                     break;
+                case HostType.All:
+                    hostTypePaths.Add("Client");
+                    hostTypePaths.Add("Server");
+                    break;
                 case HostType.None:
                 default:
                     break;

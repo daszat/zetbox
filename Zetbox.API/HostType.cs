@@ -20,7 +20,13 @@ namespace Zetbox.API
     /// </summary>
     public enum HostType
     {
+        /// <summary>
+        /// Client host type
+        /// </summary>
         Client,
+        /// <summary>
+        /// Server host type
+        /// </summary>
         Server,
         /// <summary>
         /// A special type of server
@@ -33,6 +39,10 @@ namespace Zetbox.API
         /// <summary>
         /// no predefined personality. This is used only in very rare cases.
         /// </summary>
-        None
+        None,
+        /// <summary>
+        /// hosttype for cli tools
+        /// </summary>
+        All,
     }
 }

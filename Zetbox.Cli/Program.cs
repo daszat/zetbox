@@ -134,7 +134,7 @@ namespace Zetbox.Cli
                 args = args.Except(fallbackOpts).ToArray();
             }
 
-            var cfg = ZetboxConfig.FromFile(HostType.Server, configFilePath, "Zetbox.Cli.xml");
+            var cfg = ZetboxConfig.FromFile(HostType.All, configFilePath, "Zetbox.Cli.xml");
             cfg.IsFallback = isFallback;
             return cfg;
         }
