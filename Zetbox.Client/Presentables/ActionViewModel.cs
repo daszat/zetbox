@@ -24,6 +24,7 @@ namespace Zetbox.Client.Presentables
     using System.Text;
     using Zetbox.API;
     using Zetbox.App.Base;
+    using Zetbox.API.Common;
 
     [ViewModelDescriptor]
     public class ActionViewModel
@@ -57,11 +58,22 @@ namespace Zetbox.Client.Presentables
             }
         }
 
+        public string Description
+        {
+            get
+            {
+                if (Method.Module != null)
+                    return Assets.GetString(Method.Module, ZetboxAssetKeys.ConstructBaseName(Method), ZetboxAssetKeys.ConstructDescriptionKey(Method), Method.Description);
+                else
+                    return Method.Description;
+            }
+        }
+
         public override string ToolTip
         {
             get
             {
-                return string.IsNullOrEmpty(Reason) ? Method.Description : Reason;
+                return string.IsNullOrEmpty(Reason) ? this.Description : Reason;
             }
             protected set
             {
@@ -193,8 +205,13 @@ namespace Zetbox.Client.Presentables
         {
             switch (e.PropertyName)
             {
-                case "Name": OnPropertyChanged("Label"); break;
-                case "Description": OnPropertyChanged("ToolTip"); break;
+                case "Name": 
+                    OnPropertyChanged("Label"); 
+                    break;
+                case "Description": 
+                    OnPropertyChanged("Description"); 
+                    OnPropertyChanged("ToolTip");
+                    break;
             }
         }
 

@@ -89,7 +89,6 @@ namespace Zetbox.API.Common
         #endregion
 
         #region Methods
-
         public static string ConstructBaseName(Method meth)
         {
             return "ZetboxBase.Methods." + meth.ObjectClass.Module.Namespace + "." + meth.ObjectClass.Name;
