@@ -156,6 +156,9 @@
   <data name="LocationLabel" xml:space="preserve">
     <value>[Ŀőčäŧįőŉ !!! !!! !!! !!! !!! !!! !!!]</value>
   </data>
+  <data name="NewEventLabel" xml:space="preserve">
+    <value>[Ńęŵ Ēvęŉŧ !!! !!! !!! !!! !!! !!! !!! !!!]</value>
+  </data>
   <data name="NextEventsLabel" xml:space="preserve">
     <value>[Ůpčőmmįŉģ ęvęŉŧş !!! !!!]</value>
   </data>

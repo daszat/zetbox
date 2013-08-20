@@ -47,7 +47,10 @@ namespace Zetbox.Client.Presentables.Calendar
             {
                 if (_NextWeekCommand == null)
                 {
-                    _NextWeekCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Nächste", "", NextWeek, null, null);
+                    _NextWeekCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, 
+                        WeekCalendar.WeekCalendarViewModelResources.NextWeekCommand_Label,
+                        WeekCalendar.WeekCalendarViewModelResources.NextWeekCommand_Tooltip, 
+                        NextWeek, null, null);
                     _NextWeekCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.forward_png.Find(FrozenContext));
                 }
                 return _NextWeekCommand;
@@ -66,7 +69,10 @@ namespace Zetbox.Client.Presentables.Calendar
             {
                 if (_PrevWeekCommand == null)
                 {
-                    _PrevWeekCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Vorherige", "", PrevWeek, null, null);
+                    _PrevWeekCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
+                        WeekCalendar.WeekCalendarViewModelResources.PrevWeekCommand_Label,
+                        WeekCalendar.WeekCalendarViewModelResources.PrevWeekCommand_Tooltip,
+                        PrevWeek, null, null);
                     _PrevWeekCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.back_png.Find(FrozenContext));
                 }
                 return _PrevWeekCommand;
@@ -85,7 +91,10 @@ namespace Zetbox.Client.Presentables.Calendar
             {
                 if (_ThisWeekCommand == null)
                 {
-                    _ThisWeekCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Heute", "", ThisWeek, null, null);
+                    _ThisWeekCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
+                        WeekCalendar.WeekCalendarViewModelResources.ThisWeekCommand_Label,
+                        WeekCalendar.WeekCalendarViewModelResources.ThisWeekCommand_Tooltip,
+                        ThisWeek, null, null);
                     _ThisWeekCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.date_png.Find(FrozenContext));
                 }
                 return _ThisWeekCommand;
@@ -182,7 +191,7 @@ namespace Zetbox.Client.Presentables.Calendar
         {
             get
             {
-                return "Volle Woche anzeigen";
+                return WeekCalendar.WeekCalendarViewModelResources.ShowFullWeekLabel;
             }
         }
 
@@ -208,7 +217,9 @@ namespace Zetbox.Client.Presentables.Calendar
             {
                 if (_JumpToDateCommand == null)
                 {
-                    _JumpToDateCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Anzeigen", "Zeigt das Datum im Kalender an",
+                    _JumpToDateCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
+                        WeekCalendar.WeekCalendarViewModelResources.JumpToDateCommand_Label,
+                        WeekCalendar.WeekCalendarViewModelResources.JumpToDateCommand_Tooltip, 
                         JumpToDate,
                         () => _jumpToDateMdl != null && _jumpToDateMdl.Value.HasValue,
                         null);
@@ -249,7 +260,7 @@ namespace Zetbox.Client.Presentables.Calendar
 
         public override string Name
         {
-            get { return "Wochenkalender"; }
+            get { return WeekCalendar.WeekCalendarViewModelResources.Name; }
         }
 
         private readonly Func<DateTime, DateTime, ZbTask<IEnumerable<EventViewModel>>> _Source = null;

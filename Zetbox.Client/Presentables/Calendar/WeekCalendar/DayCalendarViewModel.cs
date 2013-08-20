@@ -379,5 +379,13 @@ namespace Zetbox.Client.Presentables.Calendar
                 return new PointF(0.0f, (float)DateTime.Now.TimeOfDay.TotalHours * 44.0f - 1.0f);
             }
         }
+
+        public string NewEventLabel
+        {
+            get
+            {
+                return CalendarResources.NewEventLabel;
+            }
+        }
     }
 }

@@ -44,7 +44,7 @@
                                         Background="#10000000"
                                         Opacity="0"
                                         x:Name="item">
-                                    <TextBlock Text="Neuer Termin"
+                                    <TextBlock Text="{Binding NewEventLabel}"
                                                HorizontalAlignment="Center"
                                                VerticalAlignment="Center"
                                                Foreground="#A39DD8" />

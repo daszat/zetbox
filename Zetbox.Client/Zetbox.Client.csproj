@@ -169,6 +169,11 @@
     <Compile Include="Presentables\Calendar\WeekCalendar\LedgerViewModel.cs" />
     <Compile Include="Presentables\Calendar\WeekCalendar\TimeSlotItemViewModel.cs" />
     <Compile Include="Presentables\Calendar\WeekCalendar\WeekCalendarViewModel.cs" />
+    <Compile Include="Presentables\Calendar\WeekCalendar\WeekCalendarViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WeekCalendarViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Presentables\DataObjectViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -441,6 +446,12 @@
       <LastGenOutput>CalendarResources1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentables\Calendar\CalendarResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\Calendar\WeekCalendar\WeekCalendarViewModelResources.de.resx" />
+    <EmbeddedResource Include="Presentables\Calendar\WeekCalendar\WeekCalendarViewModelResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>WeekCalendarViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\Calendar\WeekCalendar\WeekCalendarViewModelResources.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="Presentables\DataObjectSelectionTaskViewModelResources.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="Presentables\DataObjectViewModelResources.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="Presentables\DocumentManagement\ImportedFileNavigationSearchScreenViewModelResources.x-zb-Pseudo.resx" />

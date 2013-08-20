@@ -202,5 +202,13 @@ namespace Zetbox.Client.Presentables.Calendar
                 temp(this, new PropertyChangedEventArgs(property));
             }
         }
+
+        public string NewEventLabel
+        {
+            get
+            {
+                return CalendarResources.NewEventLabel;
+            }
+        }
     }
 }

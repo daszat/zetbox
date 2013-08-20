@@ -117,103 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AllDayLabel" xml:space="preserve">
-    <value>Ganztägig</value>
+  <data name="JumpToDateCommand_Label" xml:space="preserve">
+    <value>[Ŝĥőŵ !!! !!! !!!]</value>
   </data>
-  <data name="BodyLabel" xml:space="preserve">
-    <value>Text</value>
+  <data name="JumpToDateCommand_Tooltip" xml:space="preserve">
+    <value>[Ŝĥőŵş ŧĥę đäy įŉ ŧĥę čäľęŉđäř !!! !!!]</value>
   </data>
-  <data name="CalendarItemsLabel" xml:space="preserve">
-    <value>Kalender</value>
+  <data name="Name" xml:space="preserve">
+    <value>[Ŵęęĸ čäľęŉđäř !!! !!!]</value>
   </data>
-  <data name="CalendarLabel" xml:space="preserve">
-    <value>Kalender</value>
+  <data name="NextWeekCommand_Label" xml:space="preserve">
+    <value>[Ńęχŧ !!! !!! !!!]</value>
   </data>
-  <data name="CannotOpenNoRightsCaption" xml:space="preserve">
-    <value>Keine Rechte</value>
+  <data name="PrevWeekCommand_Label" xml:space="preserve">
+    <value>[Přęv !!! !!! !!!]</value>
   </data>
-  <data name="CannotOpenNoRightsMessage" xml:space="preserve">
-    <value>Sie haben keine Berechtigungen diesen Termin anzuzeigen</value>
+  <data name="ShowFullWeekLabel" xml:space="preserve">
+    <value>[Fūľľ ŵęęĸ !!! !!! !!! !!! !!! !!! !!! !!!]</value>
   </data>
-  <data name="ClearAllCommand_Label" xml:space="preserve">
-    <value>Nur selbst</value>
-  </data>
-  <data name="ClearAllCommand_Tooltip" xml:space="preserve">
-    <value>Nur sich selbst auswählen</value>
-  </data>
-  <data name="DateLabel" xml:space="preserve">
-    <value>Datum</value>
-  </data>
-  <data name="DetailsLabel" xml:space="preserve">
-    <value>Details</value>
-  </data>
-  <data name="DlgDateRangeTitle" xml:space="preserve">
-    <value>Bereich angeben</value>
-  </data>
-  <data name="FromLabel" xml:space="preserve">
-    <value>Von</value>
-  </data>
-  <data name="LocationLabel" xml:space="preserve">
-    <value>Ort</value>
-  </data>
-  <data name="NewEventLabel" xml:space="preserve">
-    <value>Neuer Termin</value>
-  </data>
-  <data name="NextEventsLabel" xml:space="preserve">
-    <value>Nächste Termine</value>
-  </data>
-  <data name="PrintCommandGroup_Label" xml:space="preserve">
-    <value>Drucken</value>
-  </data>
-  <data name="PrintCommandGroup_Tooltip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PrintMonthCommand_Label" xml:space="preserve">
-    <value>Monat</value>
-  </data>
-  <data name="PrintMonthCommand_Tooltip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PrintSheetCommand_Label" xml:space="preserve">
-    <value>Blätter</value>
-  </data>
-  <data name="PrintSheetCommand_Tooltip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PrintThisWeekCommand_Label" xml:space="preserve">
-    <value>Diese Woche</value>
-  </data>
-  <data name="PrintThisWeekCommand_Tooltip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PrintTodayCommand_Label" xml:space="preserve">
-    <value>Heute</value>
-  </data>
-  <data name="PrintTodayCommand_Tooltip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PrintTwoWeeksCommand_Label" xml:space="preserve">
-    <value>2 Wochen</value>
-  </data>
-  <data name="PrintTwoWeeksCommand_Tooltip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="RecurrenceLabel" xml:space="preserve">
-    <value>Serientermin</value>
-  </data>
-  <data name="SelectAllCommand_Label" xml:space="preserve">
-    <value>Alle</value>
-  </data>
-  <data name="SelectAllCommand_Tooltip" xml:space="preserve">
-    <value>Alle auswählen</value>
-  </data>
-  <data name="SummaryLabel" xml:space="preserve">
-    <value>Betreff</value>
-  </data>
-  <data name="UntilLabel" xml:space="preserve">
-    <value>Bis</value>
-  </data>
-  <data name="WorkspaceName" xml:space="preserve">
-    <value>Kalender</value>
+  <data name="ThisWeekCommand_Label" xml:space="preserve">
+    <value>[Ŧőđäy !!! !!! !!! !!!]</value>
   </data>
 </root>
