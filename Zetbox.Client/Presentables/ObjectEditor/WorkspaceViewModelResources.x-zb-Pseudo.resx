@@ -141,6 +141,9 @@
   <data name="SaveAndCloseCommand_Tooltip" xml:space="preserve">
     <value>[Ŝävęş őūŧşŧäŉđįŉģ čĥäŉģęş ŧő ŧĥę đäŧä şŧőřę äŉđ čľőşęş ŧĥę čūřřęŉŧ ŵőřĸşpäčę. !!! !!! !!! !!! !!!]</value>
   </data>
+  <data name="SaveChangesHint" xml:space="preserve">
+    <value>[Ŧő pęřşįşŧ őūŧşŧäŉđįŉģ čĥäŉģęş přęşş şävę !!! !!!]</value>
+  </data>
   <data name="SaveCommand_Name" xml:space="preserve">
     <value>[Ŝävę !!! !!! !!!]</value>
   </data>

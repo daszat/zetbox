@@ -141,6 +141,9 @@
   <data name="SaveAndCloseCommand_Tooltip" xml:space="preserve">
     <value>Saves outstanding changes to the data store and closes the current workspace.</value>
   </data>
+  <data name="SaveChangesHint" xml:space="preserve">
+    <value>To persist outstanding changes press save</value>
+  </data>
   <data name="SaveCommand_Name" xml:space="preserve">
     <value>Save</value>
   </data>

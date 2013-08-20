@@ -127,6 +127,14 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             }
         }
 
+        public string SaveChangesHintText
+        {
+            get
+            {
+                return WorkspaceViewModelResources.SaveChangesHint;
+            }
+        }
+
         void dataCtx_IsModifiedChanged(object sender, EventArgs e)
         {
             OnPropertyChanged("IsContextModified");

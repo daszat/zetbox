@@ -110,7 +110,7 @@
                         </StackPanel>
                     </Border>
                 </ToggleButton>
-                <TextBlock Text="Um die Änderungen zu übernehmen drücken Sie bitte Speichern"
+                <TextBlock Text="{Binding SaveChangesHintText}"
                            Visibility="{Binding IsContextModified, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}"
                            VerticalAlignment="Bottom"
                            Margin="0"
