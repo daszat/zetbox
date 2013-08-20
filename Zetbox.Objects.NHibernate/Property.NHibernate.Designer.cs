@@ -1611,6 +1611,70 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         public static event PropertyIsValidHandler<Zetbox.App.Base.Property> OnValueModelDescriptor_IsValid;
 
         /// <summary>
+        /// Returns the translated description
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetDescription_Property")]
+        public virtual string GetDescription()
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetDescription_Property != null)
+            {
+                OnGetDescription_Property(this, e);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on Property.GetDescription");
+            }
+            return e.Result;
+        }
+        public delegate void GetDescription_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+        public static event GetDescription_Handler<Property> OnGetDescription_Property;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<Property> OnGetDescription_Property_CanExec;
+
+        [EventBasedMethod("OnGetDescription_Property_CanExec")]
+        public virtual bool GetDescriptionCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetDescription_Property_CanExec != null)
+				{
+					OnGetDescription_Property_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Property> OnGetDescription_Property_CanExecReason;
+
+        [EventBasedMethod("OnGetDescription_Property_CanExecReason")]
+        public virtual string GetDescriptionCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetDescription_Property_CanExecReason != null)
+				{
+					OnGetDescription_Property_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
+        /// <summary>
         /// The element type for multi-valued properties. The property type string in all other cases.
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method

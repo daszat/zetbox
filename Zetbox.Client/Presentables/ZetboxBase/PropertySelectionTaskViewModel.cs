@@ -27,6 +27,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     using Zetbox.App.SchemaMigration;
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables.ValueViewModels;
+    using Zetbox.API.Common;
 
     [ViewModelDescriptor]
     public class PropertySelectionTaskViewModel : WindowViewModel
@@ -315,7 +316,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             get
             {
-                return _prop.Name;
+                return _prop.GetLabel();
             }
         }
 

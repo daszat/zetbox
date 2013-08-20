@@ -270,6 +270,69 @@ namespace Zetbox.App.Base
         public static event PropertyIsValidHandler<Zetbox.App.Base.CompoundObjectProperty> OnIsList_IsValid;
 
         /// <summary>
+        /// Returns the translated description
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetDescription_CompoundObjectProperty")]
+        public override string GetDescription()
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetDescription_CompoundObjectProperty != null)
+            {
+                OnGetDescription_CompoundObjectProperty(this, e);
+            }
+            else
+            {
+                e.Result = base.GetDescription();
+            }
+            return e.Result;
+        }
+        public static event GetDescription_Handler<CompoundObjectProperty> OnGetDescription_CompoundObjectProperty;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<CompoundObjectProperty> OnGetDescription_CompoundObjectProperty_CanExec;
+
+        [EventBasedMethod("OnGetDescription_CompoundObjectProperty_CanExec")]
+        public override bool GetDescriptionCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetDescription_CompoundObjectProperty_CanExec != null)
+				{
+					OnGetDescription_CompoundObjectProperty_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDescriptionCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<CompoundObjectProperty> OnGetDescription_CompoundObjectProperty_CanExecReason;
+
+        [EventBasedMethod("OnGetDescription_CompoundObjectProperty_CanExecReason")]
+        public override string GetDescriptionCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetDescription_CompoundObjectProperty_CanExecReason != null)
+				{
+					OnGetDescription_CompoundObjectProperty_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDescriptionCanExecReason;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
+        /// <summary>
         /// The element type for multi-valued properties. The property type string in all other cases.
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method

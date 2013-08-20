@@ -49,6 +49,69 @@ namespace Zetbox.App.Base
         internal new readonly GuidPropertyProxy Proxy;
 
         /// <summary>
+        /// Returns the translated description
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetDescription_GuidProperty")]
+        public override string GetDescription()
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetDescription_GuidProperty != null)
+            {
+                OnGetDescription_GuidProperty(this, e);
+            }
+            else
+            {
+                e.Result = base.GetDescription();
+            }
+            return e.Result;
+        }
+        public static event GetDescription_Handler<GuidProperty> OnGetDescription_GuidProperty;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<GuidProperty> OnGetDescription_GuidProperty_CanExec;
+
+        [EventBasedMethod("OnGetDescription_GuidProperty_CanExec")]
+        public override bool GetDescriptionCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetDescription_GuidProperty_CanExec != null)
+				{
+					OnGetDescription_GuidProperty_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDescriptionCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<GuidProperty> OnGetDescription_GuidProperty_CanExecReason;
+
+        [EventBasedMethod("OnGetDescription_GuidProperty_CanExecReason")]
+        public override string GetDescriptionCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetDescription_GuidProperty_CanExecReason != null)
+				{
+					OnGetDescription_GuidProperty_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDescriptionCanExecReason;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
+        /// <summary>
         /// The element type for multi-valued properties. The property type string in all other cases.
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method

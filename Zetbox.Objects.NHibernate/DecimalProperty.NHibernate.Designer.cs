@@ -165,6 +165,69 @@ namespace Zetbox.App.Base
         public static event PropertyIsValidHandler<Zetbox.App.Base.DecimalProperty> OnScale_IsValid;
 
         /// <summary>
+        /// Returns the translated description
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetDescription_DecimalProperty")]
+        public override string GetDescription()
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetDescription_DecimalProperty != null)
+            {
+                OnGetDescription_DecimalProperty(this, e);
+            }
+            else
+            {
+                e.Result = base.GetDescription();
+            }
+            return e.Result;
+        }
+        public static event GetDescription_Handler<DecimalProperty> OnGetDescription_DecimalProperty;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<DecimalProperty> OnGetDescription_DecimalProperty_CanExec;
+
+        [EventBasedMethod("OnGetDescription_DecimalProperty_CanExec")]
+        public override bool GetDescriptionCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetDescription_DecimalProperty_CanExec != null)
+				{
+					OnGetDescription_DecimalProperty_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDescriptionCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<DecimalProperty> OnGetDescription_DecimalProperty_CanExecReason;
+
+        [EventBasedMethod("OnGetDescription_DecimalProperty_CanExecReason")]
+        public override string GetDescriptionCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetDescription_DecimalProperty_CanExecReason != null)
+				{
+					OnGetDescription_DecimalProperty_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDescriptionCanExecReason;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
+        /// <summary>
         /// The element type for multi-valued properties. The property type string in all other cases.
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method

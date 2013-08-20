@@ -382,6 +382,69 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
         public static event PropertyIsValidHandler<Zetbox.App.Base.ObjectReferenceProperty> OnRelationEnd_IsValid;
 
         /// <summary>
+        /// Returns the translated description
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetDescription_ObjectReferenceProperty")]
+        public override string GetDescription()
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetDescription_ObjectReferenceProperty != null)
+            {
+                OnGetDescription_ObjectReferenceProperty(this, e);
+            }
+            else
+            {
+                e.Result = base.GetDescription();
+            }
+            return e.Result;
+        }
+        public static event GetDescription_Handler<ObjectReferenceProperty> OnGetDescription_ObjectReferenceProperty;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<ObjectReferenceProperty> OnGetDescription_ObjectReferenceProperty_CanExec;
+
+        [EventBasedMethod("OnGetDescription_ObjectReferenceProperty_CanExec")]
+        public override bool GetDescriptionCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetDescription_ObjectReferenceProperty_CanExec != null)
+				{
+					OnGetDescription_ObjectReferenceProperty_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDescriptionCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<ObjectReferenceProperty> OnGetDescription_ObjectReferenceProperty_CanExecReason;
+
+        [EventBasedMethod("OnGetDescription_ObjectReferenceProperty_CanExecReason")]
+        public override string GetDescriptionCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetDescription_ObjectReferenceProperty_CanExecReason != null)
+				{
+					OnGetDescription_ObjectReferenceProperty_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDescriptionCanExecReason;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
+        /// <summary>
         /// The element type for multi-valued properties. The property type string in all other cases.
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method

@@ -44,7 +44,7 @@ namespace Zetbox.Client.Presentables
             IEnumerable<ViewModel> obj)
             : base(appCtx, dataCtx, parent)
         {
-            _title = (title ?? string.Empty).Replace('_', ' ');
+            _title = title ?? string.Empty;
             properties = new ObservableCollection<ViewModel>(obj);
             properties.CollectionChanged += PropertyListChanged;
             foreach (var prop in properties)
@@ -55,8 +55,20 @@ namespace Zetbox.Client.Presentables
 
         #region Public Interface
 
-        public string Title { get { return _title; } }
-        public string ToolTip { get { return _title; } }
+        private string _titleCache;
+        public string Title
+        {
+            get
+            {
+                if (_titleCache == null)
+                {
+                    // TODO: Translate category tags
+                    _titleCache = _title.Replace('_', ' ');
+                }
+                return _titleCache;
+            }
+        }
+        public string ToolTip { get { return Title; } }
 
         public override string Name
         {

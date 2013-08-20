@@ -120,7 +120,7 @@ namespace Zetbox.Client.Models
                 throw new ArgumentNullException("prop");
 
             var lb = prop.GetLabel();
-            var description = prop.Description;
+            var description = prop.GetDescription();
             var rk = prop.RequestedKind;
 
             if (prop is IntProperty)
@@ -255,7 +255,7 @@ namespace Zetbox.Client.Models
 
         public string Description
         {
-            get { return Property.Description; }
+            get { return Property.GetDescription(); }
         }
 
         private bool? _IsReadOnly = null;

@@ -84,6 +84,17 @@ namespace Zetbox.App.Base
         }
 
         [Invocation]
+        public static void GetDescription(Property obj, MethodReturnEventArgs<string> e)
+        {
+            e.Result = obj.Description;
+
+            if (obj.Module == null || obj.ObjectClass == null)
+                return;
+
+            e.Result = _assets.GetString(obj.Module, ZetboxAssetKeys.ConstructBaseName(obj), ZetboxAssetKeys.ConstructDescriptionKey(obj), e.Result);
+        }
+
+        [Invocation]
         public static void ToString(Property obj, MethodReturnEventArgs<string> e)
         {
             if (obj.ObjectClass == null)

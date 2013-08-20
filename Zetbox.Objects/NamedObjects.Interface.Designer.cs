@@ -1495,6 +1495,10 @@ namespace Zetbox {
                             }
                             public static class Property_Methods
                             {
+                                public static TypedGuid<global::Zetbox.App.Base.Method> GetDescription
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Method>("6915a5f7-5054-4eb2-80dd-a3b57c77a9a9"); }
+                                }
                                 public static TypedGuid<global::Zetbox.App.Base.Method> GetElementTypeString
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Method>("def3e6b9-de3b-4dcd-9b79-0af3f011a1c4"); }

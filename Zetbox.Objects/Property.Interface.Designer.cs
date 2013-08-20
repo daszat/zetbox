@@ -129,6 +129,11 @@ namespace Zetbox.App.Base
         }
 
         /// <summary>
+        /// Returns the translated description
+        /// </summary>
+        string GetDescription();
+
+        /// <summary>
         /// The element type for multi-valued properties. The property type string in all other cases.
         /// </summary>
         string GetElementTypeString();

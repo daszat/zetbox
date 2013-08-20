@@ -52692,6 +52692,31 @@ public static void GetIsListCanExecReason(ObjectReferenceProperty obj, MethodRet
     <ZetboxBase:Name>GetIsList</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>f1baf69c-a341-4a3a-b321-e782e1458e87</ZetboxBase:ObjectClass>
   </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="6915a5f7-5054-4eb2-80dd-a3b57c77a9a9">
+    <ZetboxBase:ChangedOn>2013-08-20T11:26:25.51916Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void GetDescription(Property obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void GetDescriptionCanExec(Property obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetDescriptionCanExecReason(Property obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-08-20T11:26:25.51916Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Returns the translated description</ZetboxBase:Description>
+    <ZetboxBase:InvokeOnServer>false</ZetboxBase:InvokeOnServer>
+    <GUI:IsDisplayable>false</GUI:IsDisplayable>
+    <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
+    <ZetboxBase:Name>GetDescription</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>e5f93f63-9cb8-40a5-8118-d1d9e479370c</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
   <ZetboxBase:Method ExportGuid="def3e6b9-de3b-4dcd-9b79-0af3f011a1c4">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
@@ -53776,6 +53801,16 @@ public static void UpdateToStringCacheCanExecReason(TypeRef obj, MethodReturnEve
     <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
     <ZetboxBase:Name>result</ZetboxBase:Name>
   </ZetboxBase:BoolParameter>
+  <ZetboxBase:StringParameter ExportGuid="d4532888-d555-42d0-a8fe-3a5b460f3fed">
+    <ZetboxBase:ChangedOn>2013-08-20T11:26:25.51916Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-08-20T11:26:25.51916Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>true</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>6915a5f7-5054-4eb2-80dd-a3b57c77a9a9</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>retVal</ZetboxBase:Name>
+  </ZetboxBase:StringParameter>
   <ZetboxBase:StringParameter ExportGuid="fa6008e1-41ef-4ed1-9ec1-0a0cfa361334">
     <ZetboxBase:ChangedOn>2011-12-07T01:50:12.09668Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-12-07T01:50:12.09668Z</ZetboxBase:CreatedOn>
