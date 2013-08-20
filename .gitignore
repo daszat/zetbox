@@ -29,5 +29,3 @@ VersionInfo.Designer.cs
 /Templates/ProjectTemplates/ZetboxApp/packages/Mono.Security.*
 /Templates/ProjectTemplates/ZetboxApp/packages/Npgsql.*
 
-# resource files for testing i18n
-*.de-AT.resx
