@@ -27,8 +27,6 @@ namespace Zetbox.Generator.ResourceGenerator
     {
         public void Generate(IResourceGenerator generator, IZetboxServerContext ctx, IEnumerable<Zetbox.App.Base.Module> modules)
         {
-            var moduleNames = modules.Select(m => m.Name).ToArray();
-
             using (var writer = generator.AddFile("ZetboxBase\\Modules")) // See ZetboxAssetKeys.Modules
             {
                 foreach (var m in modules.OrderBy(m => m.Name))
