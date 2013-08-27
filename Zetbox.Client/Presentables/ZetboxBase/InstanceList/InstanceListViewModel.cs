@@ -913,19 +913,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 if (_savedListConfigurations == null)
                 {
                     _savedListConfigurations = ViewModelFactory.CreateViewModel<SavedListConfiguratorViewModel.Factory>().Invoke(DataContext, this);
-                    _savedListConfigurations.PropertyChanged += _savedListConfigurations_PropertyChanged;
                 }
                 return _savedListConfigurations;
-            }
-        }
-
-        void _savedListConfigurations_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case "SelectedItem":
-                    Refresh();
-                    break;
             }
         }
         #endregion
