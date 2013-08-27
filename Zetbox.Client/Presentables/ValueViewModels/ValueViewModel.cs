@@ -1049,14 +1049,10 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                if (!string.IsNullOrEmpty(Value) && Value.Length > ShortTextLength)
-                {
-                    return Value.Replace("\r", "").Replace('\n', ' ').Substring(0, ShortTextLength) + "...";
-                }
-                else
-                {
-                    return Value;
-                }
+                return Value
+                        .MaxLength(ShortTextLength, "...")
+                        .Replace("\r", "")
+                        .Replace('\n', ' ');
             }
         }
 
