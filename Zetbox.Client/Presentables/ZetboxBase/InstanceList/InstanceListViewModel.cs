@@ -783,7 +783,10 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
 
             if (_loadInstancesCoreTask != null)
+            {
+                ClearBusy();
                 _loadInstancesCoreTask.Cancel();
+            }
             _loadInstancesCoreTask = null;
 
             LoadInstancesCore();
@@ -816,7 +819,6 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         .ToList();
 
                     UpdateFilteredInstances();
-                    ClearBusy();
                 });
             return _loadInstancesCoreTask;
         }

@@ -362,6 +362,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             {
                 SetBusy();
                 _fetchValueTask = new ZbTask<DataObjectViewModel>(ValueModel.GetValueAsync());
+                _fetchValueTask.Finally(ClearBusy);
                 // Avoid stackoverflow
                 _fetchValueTask.OnResult(t =>
                 {
@@ -377,7 +378,6 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         OnPropertyChanged("ValueAsync");
                     }
                     t.Result = _valueCache;
-                    ClearBusy();
                 });
             }
 
@@ -411,7 +411,11 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             _valueCache = null;
             _valueCacheInititalized = false;
 
-            if (_fetchValueTask != null) _fetchValueTask.Cancel();
+            if (_fetchValueTask != null)
+            {
+                ClearBusy();
+                _fetchValueTask.Cancel();
+            }
             _fetchValueTask = null;
         }
 
@@ -424,7 +428,10 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             set
             {
                 if (_fetchValueTask != null)
+                {
+                    ClearBusy();
                     _fetchValueTask.Cancel();
+                }
 
                 _fetchValueTask = null;
 
