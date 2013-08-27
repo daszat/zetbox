@@ -784,7 +784,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
             if (_loadInstancesCoreTask != null)
             {
-                ClearBusy();
+                ClearBusy(); // TODO: Workaround! Cancel should call Finally?
                 _loadInstancesCoreTask.Cancel();
             }
             _loadInstancesCoreTask = null;

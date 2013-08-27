@@ -413,7 +413,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
             if (_fetchValueTask != null)
             {
-                ClearBusy();
+                ClearBusy(); // TODO: Workaround! Cancel should call Finally?
                 _fetchValueTask.Cancel();
             }
             _fetchValueTask = null;
@@ -429,7 +429,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             {
                 if (_fetchValueTask != null)
                 {
-                    ClearBusy();
+                    ClearBusy(); // TODO: Workaround! Cancel should call Finally?
                     _fetchValueTask.Cancel();
                 }
 
