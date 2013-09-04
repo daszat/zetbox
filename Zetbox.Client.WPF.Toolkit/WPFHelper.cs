@@ -80,6 +80,16 @@ namespace Zetbox.Client.WPF.Toolkit
             return null;
         }
 
+        public static T FindVisualParent<T>(this DependencyObject depObj) where T : DependencyObject
+        {
+            while (depObj != null)
+            {
+                if (depObj != null && depObj is T) return (T)depObj;
+                depObj = VisualTreeHelper.GetParent(depObj);
+            }
+            return null;
+        }
+
         public static double TranslateWidth(WidthHint? w)
         {
             if (w == null) return WIDTH_MEDIUM;
