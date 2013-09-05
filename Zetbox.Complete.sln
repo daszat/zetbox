@@ -1460,6 +1460,7 @@ Global
 		{C071C75B-9FE5-4AF2-BD32-C3C1DD110928}.Minimal|Any CPU.ActiveCfg = Debug|Any CPU
 		{C071C75B-9FE5-4AF2-BD32-C3C1DD110928}.Minimal|Any CPU.Build.0 = Debug|Any CPU
 		{C071C75B-9FE5-4AF2-BD32-C3C1DD110928}.Minimal|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C071C75B-9FE5-4AF2-BD32-C3C1DD110928}.Minimal|Mixed Platforms.Build.0 = Debug|Any CPU
 		{C071C75B-9FE5-4AF2-BD32-C3C1DD110928}.Minimal|x86.ActiveCfg = Debug|Any CPU
 		{C071C75B-9FE5-4AF2-BD32-C3C1DD110928}.Release|.NET.ActiveCfg = Release|Any CPU
 		{C071C75B-9FE5-4AF2-BD32-C3C1DD110928}.Release|Any CPU.ActiveCfg = Release|Any CPU
