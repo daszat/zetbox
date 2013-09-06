@@ -32,19 +32,19 @@ namespace Zetbox.API.Server.Fulltext
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.API.Server.Fulltext.Rebuilder");
         private readonly ILifetimeScope _scope;
-        private readonly IndexWriter _indexWriter;
+        private readonly Func<IndexWriter> _indexWriterFactory;
         private readonly Common.Fulltext.DataObjectFormatter _formatter;
         private readonly IMetaDataResolver _resolver;
 
-        public Rebuilder(ILifetimeScope scope, IndexWriter indexWriter, Common.Fulltext.DataObjectFormatter formatter, IMetaDataResolver resolver)
+        public Rebuilder(ILifetimeScope scope, Func<IndexWriter> indexWriterFactory, Common.Fulltext.DataObjectFormatter formatter, IMetaDataResolver resolver)
         {
             if (scope == null) throw new ArgumentNullException("scope");
-            if (indexWriter == null) throw new ArgumentNullException("indexWriter");
+            if (indexWriterFactory == null) throw new ArgumentNullException("indexWriterFactory");
             if (formatter == null) throw new ArgumentNullException("formatter");
             if (resolver == null) throw new ArgumentNullException("resolver");
 
             _scope = scope;
-            _indexWriter = indexWriter;
+            _indexWriterFactory = indexWriterFactory;
             _formatter = formatter;
             _resolver = resolver;
         }
@@ -114,8 +114,9 @@ namespace Zetbox.API.Server.Fulltext
         public void Rebuild(params string[] classFilter)
         {
             using (Log.InfoTraceMethodCall("Rebuild"))
+            using(var idxWriter = _indexWriterFactory())
             {
-                _indexWriter.DeleteAll();
+                idxWriter.DeleteAll();
 
                 var frozenCtx = _scope.Resolve<IFrozenContext>();
                 var subContainer = _scope.BeginLifetimeScope();
@@ -151,7 +152,7 @@ namespace Zetbox.API.Server.Fulltext
                                     txt.Fields.ForEach(kvp => doc.Add(new Field(kvp.Key.ToLowerInvariant(), kvp.Value, Field.Store.NO, Field.Index.ANALYZED)));
                                 }
 
-                                _indexWriter.AddDocument(doc);
+                                idxWriter.AddDocument(doc);
 
                                 objCounter++;
                                 lastID = obj.ID;
@@ -162,8 +163,8 @@ namespace Zetbox.API.Server.Fulltext
                             ctx = subContainer.Resolve<IZetboxServerContext>();
                         } while (parcel != null && parcel.Count > 0);
                     }
-                    _indexWriter.Commit();
-                    _indexWriter.Optimize();
+                    idxWriter.Commit();
+                    idxWriter.Optimize();
                 }
                 finally
                 {

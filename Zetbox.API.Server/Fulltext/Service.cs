@@ -27,15 +27,15 @@ namespace Zetbox.API.Server.Fulltext
 
     internal sealed class Service : ThreadedQueueService<IndexUpdate>
     {
-        private readonly IndexWriter _indexWriter;
+        private readonly Func<IndexWriter> _indexWriterFactory;
         private readonly SearcherManager _searcherManager;
 
-        internal Service(IndexWriter indexWriter, SearcherManager searcherManager)
+        internal Service(Func<IndexWriter> indexWriterFactory, SearcherManager searcherManager)
         {
-            if (indexWriter == null) throw new ArgumentNullException("indexWriter");
+            if (indexWriterFactory == null) throw new ArgumentNullException("indexWriterFactory");
             if (searcherManager == null) throw new ArgumentNullException("searcherManager");
 
-            _indexWriter = indexWriter;
+            _indexWriterFactory = indexWriterFactory;
             _searcherManager = searcherManager;
         }
 
@@ -61,32 +61,35 @@ namespace Zetbox.API.Server.Fulltext
 
         protected override void ProcessItem(IndexUpdate item)
         {
-            foreach (var idxItem in item.added.Concat(item.modified))
+            using (var idxWriter = _indexWriterFactory())
             {
-                var clsId = string.Format(CultureInfo.InvariantCulture, "{0}#{1}", idxItem.Item1.Type.FullName, idxItem.Item2);
-                var txt = idxItem.Item3;
-
-                var doc = new Document();
-                doc.Add(new Field(Module.FIELD_CLASS, idxItem.Item1.Type.FullName, Field.Store.YES, Field.Index.NOT_ANALYZED_NO_NORMS));
-                doc.Add(new Field(Module.FIELD_CLASS_ID, clsId, Field.Store.YES, Field.Index.NOT_ANALYZED_NO_NORMS));
-                doc.Add(new Field(Module.FIELD_ID, idxItem.Item2.ToString(CultureInfo.InvariantCulture), Field.Store.YES, Field.Index.NOT_ANALYZED_NO_NORMS));
-                doc.Add(new Field(Module.FIELD_BODY, txt.Body, Field.Store.NO, Field.Index.ANALYZED));
-                if (txt.Fields != null)
+                foreach (var idxItem in item.added.Concat(item.modified))
                 {
-                    txt.Fields.ForEach(kvp => doc.Add(new Field(kvp.Key.ToLowerInvariant(), kvp.Value, Field.Store.NO, Field.Index.ANALYZED)));
+                    var clsId = string.Format(CultureInfo.InvariantCulture, "{0}#{1}", idxItem.Item1.Type.FullName, idxItem.Item2);
+                    var txt = idxItem.Item3;
+
+                    var doc = new Document();
+                    doc.Add(new Field(Module.FIELD_CLASS, idxItem.Item1.Type.FullName, Field.Store.YES, Field.Index.NOT_ANALYZED_NO_NORMS));
+                    doc.Add(new Field(Module.FIELD_CLASS_ID, clsId, Field.Store.YES, Field.Index.NOT_ANALYZED_NO_NORMS));
+                    doc.Add(new Field(Module.FIELD_ID, idxItem.Item2.ToString(CultureInfo.InvariantCulture), Field.Store.YES, Field.Index.NOT_ANALYZED_NO_NORMS));
+                    doc.Add(new Field(Module.FIELD_BODY, txt.Body, Field.Store.NO, Field.Index.ANALYZED));
+                    if (txt.Fields != null)
+                    {
+                        txt.Fields.ForEach(kvp => doc.Add(new Field(kvp.Key.ToLowerInvariant(), kvp.Value, Field.Store.NO, Field.Index.ANALYZED)));
+                    }
+
+                    idxWriter.UpdateDocument(new Term(Module.FIELD_CLASS_ID, clsId), doc);
                 }
 
-                _indexWriter.UpdateDocument(new Term(Module.FIELD_CLASS_ID, clsId), doc);
-            }
+                foreach (var del in item.deleted)
+                {
+                    var clsId = string.Format(CultureInfo.InvariantCulture, "{0}#{1}", del.Item1.Type.FullName, del.Item2);
+                    idxWriter.DeleteDocuments(new Term(Module.FIELD_CLASS_ID, clsId));
+                }
 
-            foreach (var del in item.deleted)
-            {
-                var clsId = string.Format(CultureInfo.InvariantCulture, "{0}#{1}", del.Item1.Type.FullName, del.Item2);
-                _indexWriter.DeleteDocuments(new Term(Module.FIELD_CLASS_ID, clsId));
+                idxWriter.Commit();
+                _searcherManager.MaybeReopen();
             }
-
-            _indexWriter.Commit();
-            _searcherManager.MaybeReopen();
         }
     }
 }

@@ -64,7 +64,7 @@ namespace Zetbox.API.Server.Fulltext
             base.Load(builder);
 
             builder
-                .Register<Service>(c => new Service(c.Resolve<IndexWriter>(), c.Resolve<SearcherManager>()))
+                .Register<Service>(c => new Service(c.Resolve<Func<IndexWriter>>(), c.Resolve<SearcherManager>()))
                 .AsSelf()
                 .AsImplementedInterfaces()
                 .SingleInstance();
@@ -108,7 +108,7 @@ namespace Zetbox.API.Server.Fulltext
 
                     return new IndexWriter(directory, analyzer, IndexWriter.MaxFieldLength.LIMITED);
                 })
-                .SingleInstance();
+                .InstancePerDependency();
 
             builder
                 .Register<SearcherManager>(c => new SearcherManager(c.Resolve<Lucene.Net.Store.Directory>()))
@@ -123,7 +123,7 @@ namespace Zetbox.API.Server.Fulltext
                 .InstancePerDependency();
 
             builder
-                .Register<Rebuilder>(c => new Rebuilder(c.Resolve<ILifetimeScope>(), c.Resolve<IndexWriter>(), c.Resolve<Common.Fulltext.DataObjectFormatter>(), c.Resolve<IMetaDataResolver>()))
+                .Register<Rebuilder>(c => new Rebuilder(c.Resolve<ILifetimeScope>(), c.Resolve<Func<IndexWriter>>(), c.Resolve<Common.Fulltext.DataObjectFormatter>(), c.Resolve<IMetaDataResolver>()))
                 .InstancePerDependency();
 
             builder
@@ -148,8 +148,10 @@ namespace Zetbox.API.Server.Fulltext
                      var Log = log4net.LogManager.GetLogger("Zetbox.API.Server.Fulltext.Optimizer");
                      using (Log.InfoTraceMethodCall("Optimize"))
                      {
-                         var indexWriter = scope.Resolve<IndexWriter>();
-                         indexWriter.Optimize();
+                         using (var indexWriter = scope.Resolve<IndexWriter>())
+                         {
+                             indexWriter.Optimize();
+                         }
                      }
                  });
         }
