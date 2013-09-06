@@ -147,6 +147,14 @@ namespace Zetbox.Client.WPF.CustomControls
         private bool _selectedItemsChangedByViewModel = false;
         private bool _selectedItemsChangedByList = false;
 
+        protected override void OnItemsSourceChanged(IEnumerable oldValue, IEnumerable newValue)
+        {
+            if(this.ItemsSource != newValue) // JFC, WTF!
+            {
+                base.OnItemsSourceChanged(oldValue, newValue);
+            }
+        }
+
         private void ZetboxDataGrid_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (_selectedItemsChangedByList) return;
