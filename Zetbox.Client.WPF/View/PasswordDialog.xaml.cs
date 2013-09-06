@@ -41,8 +41,14 @@ namespace Zetbox.Client.WPF.View
             _passwordLabel.Text = PasswordDialogResources.Password;
             _login.Content = PasswordDialogResources.Login;
             _cancel.Content = PasswordDialogResources.Cancel;
+            this.Loaded += PasswordDialog_Loaded;
         }
 
+        void PasswordDialog_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.Activate();
+        }
+        
         protected override void OnContentRendered(EventArgs e)
         {
             base.OnContentRendered(e);

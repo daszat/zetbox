@@ -177,7 +177,15 @@ namespace Zetbox.Client.WPF
                 }
                 catch (AuthenticationException)
                 {
-                    MessageBox.Show(WpfToolkitResources.App_InvalidCredentials, WpfToolkitResources.App_InvalidCredentials_Caption, MessageBoxButton.OK, MessageBoxImage.Stop);
+                    // http://stackoverflow.com/questions/576503/how-to-set-wpf-messagebox-owner-to-desktop-window-because-splashscreen-closes-me
+                    // wtf! make messagebox modal
+                    Window temp = new Window() 
+                    { 
+                        Visibility = Visibility.Hidden, 
+                        Topmost = true 
+                    };
+                    temp.Show();
+                    MessageBox.Show(temp, WpfToolkitResources.App_InvalidCredentials, WpfToolkitResources.App_InvalidCredentials_Caption, MessageBoxButton.OK, MessageBoxImage.Stop);
                     Environment.Exit(1);
                 }
             }
