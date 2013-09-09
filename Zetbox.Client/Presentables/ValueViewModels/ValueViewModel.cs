@@ -1049,6 +1049,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
+                if (string.IsNullOrEmpty(Value)) return string.Empty;
                 return Value
                         .MaxLength(ShortTextLength, "...")
                         .Replace("\r", "")
