@@ -125,12 +125,10 @@ namespace Zetbox.Client.Presentables
         {
             if (obj == null) throw new ArgumentNullException("obj");
 
-            // TODO: Move DefaultViewModelDescriptor back to DataType
-            var t = typeof(CompoundObjectViewModel);
-            //var t = obj.GetCompoundObjectDefinition(FrozenContext)
-            //    .DefaultViewModelDescriptor
-            //    .ViewModelRef
-            //    .AsType(true);
+            var vmd = obj.GetCompoundObjectDefinition(FrozenContext).DefaultViewModelDescriptor;
+            var t = vmd != null 
+                ? vmd.ViewModelRef.AsType(true) 
+                :  typeof(CompoundObjectViewModel);
             return CreateViewModel<TModelFactory>(ResolveFactory(t));
         }
 
