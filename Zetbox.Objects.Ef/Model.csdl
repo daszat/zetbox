@@ -508,6 +508,10 @@
       <End Role="ControlKind" EntitySet="ControlKindEfImpl" />
       <End Role="Module" EntitySet="ModuleEfImpl" />
     </AssociationSet>
+    <AssociationSet Name="FK_CPObj_has_DefaultViewModelDescriptor" Association="Model.FK_CPObj_has_DefaultViewModelDescriptor" >
+      <End Role="CPObj" EntitySet="DataTypeEfImpl" />
+      <End Role="DefaultViewModelDescriptor" EntitySet="ViewModelDescriptorEfImpl" />
+    </AssociationSet>
     <AssociationSet Name="FK_CPParameter_has_CompoundObject" Association="Model.FK_CPParameter_has_CompoundObject" >
       <End Role="CPParameter" EntitySet="BaseParameterEfImpl" />
       <End Role="CompoundObject" EntitySet="DataTypeEfImpl" />
@@ -3102,6 +3106,10 @@
                         Relationship="Model.FK_Presentable_may_has_DefaultPropViewModelDescriptor"
                         FromRole="Presentable"
                         ToRole="DefaultPropViewModelDescriptor" />
+    <NavigationProperty Name="DefaultViewModelDescriptorImpl"
+                        Relationship="Model.FK_CPObj_has_DefaultViewModelDescriptor"
+                        FromRole="CPObj"
+                        ToRole="DefaultViewModelDescriptor" />
   </EntityType>
   <EntityType Name="CompoundObjectParameterEfImpl" BaseType="Model.BaseParameterEfImpl">
     <NavigationProperty Name="CompoundObjectImpl"
@@ -4859,6 +4867,14 @@
          Multiplicity="*" />
     <End Role="Module"
          Type="Model.ModuleEfImpl" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_CPObj_has_DefaultViewModelDescriptor" >
+    <End Role="CPObj"
+         Type="Model.CompoundObjectEfImpl" 
+         Multiplicity="*" />
+    <End Role="DefaultViewModelDescriptor"
+         Type="Model.ViewModelDescriptorEfImpl" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_CPParameter_has_CompoundObject" >

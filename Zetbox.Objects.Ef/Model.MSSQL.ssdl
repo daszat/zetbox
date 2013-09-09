@@ -749,6 +749,10 @@
       <End Role="ControlKind" EntitySet="ControlKind" />
       <End Role="Module" EntitySet="Module" />
     </AssociationSet>
+    <AssociationSet Name="FK_CPObj_has_DefaultViewModelDescriptor" Association="Model.Store.FK_CPObj_has_DefaultViewModelDescriptor" >
+      <End Role="CPObj" EntitySet="CompoundObject" />
+      <End Role="DefaultViewModelDescriptor" EntitySet="ViewModelDescriptor" />
+    </AssociationSet>
     <AssociationSet Name="FK_CPParameter_has_CompoundObject" Association="Model.Store.FK_CPParameter_has_CompoundObject" >
       <End Role="CPParameter" EntitySet="BaseParameter" />
       <End Role="CompoundObject" EntitySet="CompoundObject" />
@@ -1641,6 +1645,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="fk_DefaultViewModelDescriptor" Type="int" />
     <Property Name="fk_DefaultPropViewModelDescriptor" Type="int" />
   </EntityType>
 	
@@ -4355,6 +4360,20 @@
       </Principal>
       <Dependent Role="ControlKind">
         <PropertyRef Name="fk_Module" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_CPObj_has_DefaultViewModelDescriptor">
+    <End Role="DefaultViewModelDescriptor" Type="Model.Store.ViewModelDescriptor" Multiplicity="0..1" />
+    <End Role="CPObj" Type="Model.Store.CompoundObject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DefaultViewModelDescriptor">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CPObj">
+        <PropertyRef Name="fk_DefaultViewModelDescriptor" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

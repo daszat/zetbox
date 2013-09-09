@@ -1559,6 +1559,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
             if (OnNotifyDeleting_ViewModelDescriptor != null) OnNotifyDeleting_ViewModelDescriptor(this);
 
             // should fetch && remember parent for Application_opens_a_ViewModelDescriptor_RelationEntry
+            // should fetch && remember parent for CompoundObject_has_ViewModelDescriptor_RelationEntry
             // FK_Descriptor_has_ViewModelRef
             if (ViewModelRef != null) {
                 ((NHibernatePersistenceObject)ViewModelRef).ChildrenToDelete.Add(this);

@@ -123,4 +123,10 @@
   <data name="DefaultPropertyViewModelDescriptor_description" xml:space="preserve">
     <value>An optional default ViewModelDescriptor for Properties of this type</value>
   </data>
+  <data name="DefaultViewModelDescriptor_label" xml:space="preserve">
+    <value>DefaultViewModelDescriptor</value>
+  </data>
+  <data name="DefaultViewModelDescriptor_description" xml:space="preserve">
+    <value>The default ViewModel to use for this Compound Object</value>
+  </data>
 </root>

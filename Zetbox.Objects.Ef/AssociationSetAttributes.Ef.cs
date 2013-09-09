@@ -716,6 +716,21 @@ using Zetbox.DalProvider.Ef;
 
 
 	/*
+    Relation: FK_CPObj_has_DefaultViewModelDescriptor
+    A: ZeroOrMore CompoundObject as CPObj
+    B: ZeroOrOne ViewModelDescriptor as DefaultViewModelDescriptor
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_CPObj_has_DefaultViewModelDescriptor",
+    "CPObj", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.CompoundObjectEfImpl),
+    "DefaultViewModelDescriptor", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.ViewModelDescriptorEfImpl)
+    )]
+
+
+	/*
     Relation: FK_CPParameter_has_CompoundObject
     A: ZeroOrMore CompoundObjectParameter as CPParameter
     B: One CompoundObject as CompoundObject

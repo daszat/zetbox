@@ -4397,6 +4397,9 @@
 <!-- ObjectReferenceProperty -->
         <many-to-one name="DefaultPropertyViewModelDescriptor" column="`fk_DefaultPropViewModelDescriptor`" class="Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl+ViewModelDescriptorProxy, Zetbox.Objects.NHibernateImpl" />
 
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="DefaultViewModelDescriptor" column="`fk_DefaultViewModelDescriptor`" class="Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl+ViewModelDescriptorProxy, Zetbox.Objects.NHibernateImpl" />
+
 
             <!-- define the subclasses -->
 

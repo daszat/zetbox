@@ -761,6 +761,10 @@ namespace Zetbox {
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("908757d2-053b-40c5-89f8-9e5f79b5fe83"); }
                                 }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> DefaultViewModelDescriptor
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("863dece6-ff86-41c5-82ad-ec520adf6309"); }
+                                }
                             }
                             public static class CompoundObjectParameter_Properties
                             {

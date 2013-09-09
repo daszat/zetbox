@@ -3503,6 +3503,23 @@
       <Condition ColumnName="fk_Module" IsNull="false"/>
     </AssociationSetMapping>
     <!--
+    Relation: FK_CPObj_has_DefaultViewModelDescriptor
+    A: ZeroOrMore CompoundObject as CPObj
+    B: ZeroOrOne ViewModelDescriptor as DefaultViewModelDescriptor
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_CPObj_has_DefaultViewModelDescriptor"
+                           TypeName="Model.FK_CPObj_has_DefaultViewModelDescriptor"
+                           StoreEntitySet="CompoundObject" >
+      <EndProperty Name="DefaultViewModelDescriptor">
+        <ScalarProperty Name="ID" ColumnName="fk_DefaultViewModelDescriptor"/>
+      </EndProperty>
+      <EndProperty Name="CPObj">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_DefaultViewModelDescriptor" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
     Relation: FK_CPParameter_has_CompoundObject
     A: ZeroOrMore CompoundObjectParameter as CPParameter
     B: One CompoundObject as CompoundObject
