@@ -28,6 +28,16 @@ namespace Zetbox.Client.WPF.CustomControls
 {
     public class ZetboxListView : ListView
     {
+        static ZetboxListView()
+        {
+            EventManager.RegisterClassHandler(typeof(ListViewItem), MouseLeftButtonDownEvent, new MouseButtonEventHandler(ListViewItem_HandleMouseLeftButtonDownEvent));
+        }
+
+        public ZetboxListView()
+        {
+            this.AddHandler(UIElement.MouseLeftButtonDownEvent, new MouseButtonEventHandler(HandledMouseLeftButtonDownEvent), true);
+        }
+
         #region SelectionChanged
         public object SelectedZetboxItems
         {
@@ -149,6 +159,16 @@ namespace Zetbox.Client.WPF.CustomControls
         public static readonly DependencyProperty DisableSelectionOnPreviewProperty =
             DependencyProperty.Register("DisableSelectionOnPreview", typeof(bool), typeof(ZetboxListView), new UIPropertyMetadata(false));
 
+
+        private class SelectionState
+        {
+            public MouseButtonEventArgs PreviewedEvent;
+            public MouseButtonEventArgs ListViewItemEvent;
+            public MouseButtonEventArgs HandledEvent;
+        }
+
+        private SelectionState _currentSelectionState;
+
         /// <summary>
         /// make use of event tunneling for selecting items when a click event occurred in a child element
         /// </summary>
@@ -158,6 +178,38 @@ namespace Zetbox.Client.WPF.CustomControls
         {
             base.OnPreviewMouseLeftButtonDown(e);
 
+            _currentSelectionState = new SelectionState();
+            _currentSelectionState.PreviewedEvent = e;
+        }
+
+        private static void ListViewItem_HandleMouseLeftButtonDownEvent(object sender, MouseButtonEventArgs e)
+        {
+            var lvi = sender as ListViewItem;
+            if (lvi == null) return;
+
+            var listView = lvi.FindVisualParent<ZetboxListView>();
+            if (listView == null) return;
+
+            if (listView._currentSelectionState == null) listView._currentSelectionState = new SelectionState();
+            listView._currentSelectionState.ListViewItemEvent = e;
+        }
+
+        private void HandledMouseLeftButtonDownEvent(object sender, MouseButtonEventArgs e)
+        {
+            if (_currentSelectionState == null) _currentSelectionState = new SelectionState();
+            _currentSelectionState.HandledEvent = e;
+
+            if (_currentSelectionState.ListViewItemEvent == null
+             && _currentSelectionState.HandledEvent != null
+             && _currentSelectionState.PreviewedEvent != null
+             && _currentSelectionState.HandledEvent.Timestamp == _currentSelectionState.PreviewedEvent.Timestamp)
+            {
+                SelectListViewItems(_currentSelectionState.HandledEvent);
+            }
+        }
+
+        private void SelectListViewItems(MouseButtonEventArgs e)
+        {
             if (!DisableSelectionOnPreview)
             {
                 var src = e.OriginalSource as DependencyObject;
@@ -166,7 +218,7 @@ namespace Zetbox.Client.WPF.CustomControls
                     var lvi = src.FindVisualParent<ListViewItem>();
                     if (lvi != null)
                     {
-                        switch(SelectionMode) 
+                        switch (SelectionMode)
                         {
                             case SelectionMode.Single:
                                 this.SelectedItem = lvi.DataContext;
