@@ -1753,6 +1753,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnShowByP
                 ObjectClassImpl = (Zetbox.App.Base.DataTypeMemoryImpl)Context.Find<Zetbox.App.Base.DataType>(_fk_ObjectClass.Value);
             else
                 ObjectClassImpl = null;
+            // fix cached lists references
+            _triggerFetchParameterTask = null;
+            _Parameter = null;
+            _triggerFetchShowByPropertiesTask = null;
+            _ShowByProperties = null;
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

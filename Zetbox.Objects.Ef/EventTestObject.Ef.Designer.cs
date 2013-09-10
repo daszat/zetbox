@@ -276,6 +276,7 @@ namespace Zetbox.App.Test
                 EventImpl = (Zetbox.App.Calendar.EventEfImpl)Context.Find<Zetbox.App.Calendar.Event>(_fk_Event.Value);
             else
                 EventImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

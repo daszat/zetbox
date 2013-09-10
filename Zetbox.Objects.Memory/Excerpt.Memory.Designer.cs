@@ -305,6 +305,7 @@ namespace at.dasz.DocumentManagement
                 FileImpl = (at.dasz.DocumentManagement.FileMemoryImpl)Context.Find<at.dasz.DocumentManagement.File>(_fk_File.Value);
             else
                 FileImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

@@ -1368,6 +1368,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
                 CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
             else
                 CreatedByImpl = null;
+            // fix cached lists references
+            _triggerFetchAuftraegeTask = null;
+            _Auftraege = null;
+            _triggerFetchMitarbeiterTask = null;
+            _Mitarbeiter = null;
+            _triggerFetchTasksTask = null;
+            _Tasks = null;
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

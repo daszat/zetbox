@@ -226,6 +226,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.OrderedOneEnd> On
             base.ReloadReferences();
 
             // fix direct object references
+            // fix cached lists references
+            _triggerFetchNEndsTask = null;
+            _NEnds = null;
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

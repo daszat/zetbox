@@ -46,10 +46,7 @@ this.WriteObjects("\r\n");
 this.WriteObjects("            // fix direct object references\r\n");
 #line 41 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadReferences.cst"
 // TODO: Use only 1 side relation ends
-    foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>()
-        .Where(orp => !orp.IsList())
-        .OrderBy(orp => orp.ObjectClass.Name)
-        .ThenBy(orp => orp.Name))
+    foreach(var prop in GetDirectObjectReferences())
     {
         Relation rel = Zetbox.App.Extensions.RelationExtensions.Lookup(ctx, prop);
         RelationEnd relEnd = rel.GetEnd(prop);
@@ -64,9 +61,24 @@ this.WriteObjects("            // fix direct object references\r\n");
         bool isExportable = relEnd.Type.ImplementsIExportable() && otherEnd.Type.ImplementsIExportable();
 
         ReloadOneReference.Call(Host, ctx, referencedInterface, referencedImplementation, name, implName, fkBackingName, fkGuidBackingName, isExportable);
-    }
+    }        
 
-#line 62 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadReferences.cst"
+#line 59 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadReferences.cst"
+this.WriteObjects("            // fix cached lists references\r\n");
+#line 61 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadReferences.cst"
+foreach(var prop in GetListReferences())
+    {
+        string name = prop.Name;
+        string taskName = "_triggerFetch" + name + "Task";
+        string backingName = "_" + name;
+
+#line 67 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadReferences.cst"
+this.WriteObjects("            ",  taskName , " = null;\r\n");
+this.WriteObjects("            ",  backingName , " = null;\r\n");
+#line 70 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadReferences.cst"
+}
+
+#line 72 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadReferences.cst"
 this.WriteObjects("        }\r\n");
 
         }

@@ -883,6 +883,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
                 RelationEndImpl = (Zetbox.App.Base.RelationEndMemoryImpl)Context.Find<Zetbox.App.Base.RelationEnd>(_fk_RelationEnd.Value);
             else
                 RelationEndImpl = null;
+            // fix cached lists references
+            _triggerFetchMethodsTask = null;
+            _Methods = null;
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

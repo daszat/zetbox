@@ -24,8 +24,26 @@ namespace Zetbox.Generator.Templates.ObjectClasses
 
     using Zetbox.API;
     using Zetbox.App.Base;
+    using Zetbox.Generator.Extensions;
 
     public partial class ReloadReferences
     {
+        public virtual IEnumerable<ObjectReferenceProperty> GetDirectObjectReferences()
+        {
+            return cls.Properties
+                        .OfType<ObjectReferenceProperty>()
+                        .Where(orp => !orp.IsList())
+                        .OrderBy(orp => orp.ObjectClass.Name)
+                        .ThenBy(orp => orp.Name);
+        }
+
+        public virtual IEnumerable<ObjectReferenceProperty> GetListReferences()
+        {
+            return cls.Properties
+                        .OfType<ObjectReferenceProperty>()
+                        .Where(orp => orp.IsList())
+                        .OrderBy(orp => orp.ObjectClass.Name)
+                        .ThenBy(orp => orp.Name);
+        }
     }
 }

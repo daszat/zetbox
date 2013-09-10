@@ -530,6 +530,11 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.Visual> OnContextM
                 PropertyImpl = (Zetbox.App.Base.PropertyMemoryImpl)Context.Find<Zetbox.App.Base.Property>(_fk_Property.Value);
             else
                 PropertyImpl = null;
+            // fix cached lists references
+            _triggerFetchChildrenTask = null;
+            _Children = null;
+            _triggerFetchContextMenuTask = null;
+            _ContextMenu = null;
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

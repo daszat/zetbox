@@ -1842,6 +1842,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
                 RequestedKindImpl = (Zetbox.App.GUI.ControlKindEfImpl)Context.Find<Zetbox.App.GUI.ControlKind>(_fk_RequestedKind.Value);
             else
                 RequestedKindImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

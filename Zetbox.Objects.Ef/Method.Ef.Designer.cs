@@ -1800,6 +1800,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnShowByP
                 ObjectClassImpl = (Zetbox.App.Base.DataTypeEfImpl)Context.Find<Zetbox.App.Base.DataType>(_fk_ObjectClass.Value);
             else
                 ObjectClassImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

@@ -1265,6 +1265,7 @@ namespace Zetbox.App.Calendar
                 WorkScheduleImpl = (Zetbox.App.Calendar.WorkScheduleEfImpl)Context.Find<Zetbox.App.Calendar.WorkSchedule>(_fk_WorkSchedule.Value);
             else
                 WorkScheduleImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

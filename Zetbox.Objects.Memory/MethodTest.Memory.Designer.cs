@@ -1016,6 +1016,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
                 ParentImpl = (Zetbox.App.Test.MethodTestMemoryImpl)Context.Find<Zetbox.App.Test.MethodTest>(_fk_Parent.Value);
             else
                 ParentImpl = null;
+            // fix cached lists references
+            _triggerFetchChildrenTask = null;
+            _Children = null;
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

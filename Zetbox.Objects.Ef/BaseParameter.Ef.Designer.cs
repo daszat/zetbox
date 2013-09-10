@@ -1383,6 +1383,7 @@ namespace Zetbox.App.Base
                 MethodImpl = (Zetbox.App.Base.MethodEfImpl)Context.Find<Zetbox.App.Base.Method>(_fk_Method.Value);
             else
                 MethodImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

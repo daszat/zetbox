@@ -2362,6 +2362,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 ValueModelDescriptorImpl = (Zetbox.App.GUI.ViewModelDescriptorEfImpl)Context.Find<Zetbox.App.GUI.ViewModelDescriptor>(_fk_ValueModelDescriptor.Value);
             else
                 ValueModelDescriptorImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

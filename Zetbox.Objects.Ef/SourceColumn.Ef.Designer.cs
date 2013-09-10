@@ -1747,6 +1747,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                 SourceTableImpl = (Zetbox.App.SchemaMigration.SourceTableEfImpl)Context.Find<Zetbox.App.SchemaMigration.SourceTable>(_fk_SourceTable.Value);
             else
                 SourceTableImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

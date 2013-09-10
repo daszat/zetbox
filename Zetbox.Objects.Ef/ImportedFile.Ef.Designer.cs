@@ -519,6 +519,7 @@ namespace at.dasz.DocumentManagement
             base.ReloadReferences();
 
             // fix direct object references
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         #endregion // Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor

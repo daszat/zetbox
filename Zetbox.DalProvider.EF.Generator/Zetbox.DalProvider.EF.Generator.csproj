@@ -91,6 +91,7 @@
     <Compile Include="Templates\AssemblyInfoTemplate.cs" />
     <Compile Include="Templates\CompoundObjects\Template.cs" />
     <Compile Include="Templates\ObjectClasses\OnPropertyChange.cs" />
+    <Compile Include="Templates\ObjectClasses\ReloadReferences.cs" />
     <Compile Include="Templates\Properties\EfScalarPropHelper.cs" />
     <Compile Include="Templates\Properties\EnumPropertyShim.Designer.cs">
       <AutoGen>True</AutoGen>

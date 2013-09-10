@@ -288,6 +288,7 @@ namespace Zetbox.App.Base
                 SequenceImpl = (Zetbox.App.Base.SequenceEfImpl)Context.Find<Zetbox.App.Base.Sequence>(_fk_Sequence.Value);
             else
                 SequenceImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

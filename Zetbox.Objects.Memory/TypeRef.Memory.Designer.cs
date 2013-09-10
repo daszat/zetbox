@@ -1354,6 +1354,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.TypeRef> OnGeneri
                 ParentImpl = (Zetbox.App.Base.TypeRefMemoryImpl)Context.Find<Zetbox.App.Base.TypeRef>(_fk_Parent.Value);
             else
                 ParentImpl = null;
+            // fix cached lists references
+            _triggerFetchGenericArgumentsTask = null;
+            _GenericArguments = null;
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

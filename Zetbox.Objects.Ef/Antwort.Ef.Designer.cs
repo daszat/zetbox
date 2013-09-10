@@ -473,6 +473,7 @@ namespace Zetbox.App.Test
                 FragebogenImpl = (Zetbox.App.Test.FragebogenEfImpl)Context.Find<Zetbox.App.Test.Fragebogen>(_fk_Fragebogen.Value);
             else
                 FragebogenImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

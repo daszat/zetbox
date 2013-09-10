@@ -981,6 +981,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Migrat
                 DestinationModuleImpl = (Zetbox.App.Base.ModuleEfImpl)Context.Find<Zetbox.App.Base.Module>(_fk_DestinationModule.Value);
             else
                 DestinationModuleImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

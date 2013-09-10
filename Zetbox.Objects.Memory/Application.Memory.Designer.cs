@@ -1116,6 +1116,7 @@ namespace Zetbox.App.GUI
                 WorkspaceViewModelImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)Context.Find<Zetbox.App.GUI.ViewModelDescriptor>(_fk_WorkspaceViewModel.Value);
             else
                 WorkspaceViewModelImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

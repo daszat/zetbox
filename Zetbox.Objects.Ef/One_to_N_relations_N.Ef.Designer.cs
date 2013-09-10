@@ -288,6 +288,7 @@ namespace Zetbox.App.Test
                 OneSideImpl = (Zetbox.App.Test.One_to_N_relations_OneEfImpl)Context.Find<Zetbox.App.Test.One_to_N_relations_One>(_fk_OneSide.Value);
             else
                 OneSideImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

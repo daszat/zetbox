@@ -915,6 +915,7 @@ namespace Zetbox.App.Test
                 ParentImpl = (Zetbox.App.Test.SecurityTestParentMemoryImpl)Context.Find<Zetbox.App.Test.SecurityTestParent>(_fk_Parent.Value);
             else
                 ParentImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

@@ -272,6 +272,7 @@ namespace Zetbox.App.Base
                 EnumValueImpl = (Zetbox.App.Base.EnumerationEntryEfImpl)Context.Find<Zetbox.App.Base.EnumerationEntry>(_fk_EnumValue.Value);
             else
                 EnumValueImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

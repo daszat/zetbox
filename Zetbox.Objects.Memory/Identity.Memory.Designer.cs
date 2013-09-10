@@ -386,6 +386,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
             base.ReloadReferences();
 
             // fix direct object references
+            // fix cached lists references
+            _triggerFetchGroupsTask = null;
+            _Groups = null;
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

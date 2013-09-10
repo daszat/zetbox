@@ -1301,6 +1301,7 @@ namespace at.dasz.DocumentManagement
                 ExcerptImpl = (at.dasz.DocumentManagement.ExcerptEfImpl)Context.Find<at.dasz.DocumentManagement.Excerpt>(_fk_Excerpt.Value);
             else
                 ExcerptImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

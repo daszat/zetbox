@@ -206,6 +206,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestStudent> OnTe
             base.ReloadReferences();
 
             // fix direct object references
+            // fix cached lists references
+            _triggerFetchTestbogenTask = null;
+            _Testbogen = null;
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

@@ -935,6 +935,7 @@ namespace Zetbox.App.SchemaMigration
                 SourceColumnImpl = (Zetbox.App.SchemaMigration.SourceColumnMemoryImpl)Context.Find<Zetbox.App.SchemaMigration.SourceColumn>(_fk_SourceColumn.Value);
             else
                 SourceColumnImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

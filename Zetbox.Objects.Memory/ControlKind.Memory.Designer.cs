@@ -662,6 +662,9 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
                 ParentImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.Find<Zetbox.App.GUI.ControlKind>(_fk_Parent.Value);
             else
                 ParentImpl = null;
+            // fix cached lists references
+            _triggerFetchChildControlKindsTask = null;
+            _ChildControlKinds = null;
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

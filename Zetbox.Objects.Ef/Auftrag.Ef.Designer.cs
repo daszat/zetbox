@@ -1154,6 +1154,7 @@ namespace Zetbox.App.Projekte
                 ProjektImpl = (Zetbox.App.Projekte.ProjektEfImpl)Context.Find<Zetbox.App.Projekte.Projekt>(_fk_Projekt.Value);
             else
                 ProjektImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

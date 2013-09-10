@@ -331,6 +331,7 @@ namespace Zetbox.App.Test
                 OneEndImpl = (Zetbox.App.Test.OrderedOneEndEfImpl)Context.Find<Zetbox.App.Test.OrderedOneEnd>(_fk_OneEnd.Value);
             else
                 OneEndImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

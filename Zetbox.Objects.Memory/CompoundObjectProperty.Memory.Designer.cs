@@ -731,6 +731,7 @@ namespace Zetbox.App.Base
                 CompoundObjectDefinitionImpl = (Zetbox.App.Base.CompoundObjectMemoryImpl)Context.Find<Zetbox.App.Base.CompoundObject>(_fk_CompoundObjectDefinition.Value);
             else
                 CompoundObjectDefinitionImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

@@ -1213,6 +1213,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
                 OwnerImpl = (Zetbox.App.Base.IdentityEfImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_Owner.Value);
             else
                 OwnerImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

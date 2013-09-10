@@ -604,6 +604,9 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.Template> OnMenu_P
                 VisualTreeImpl = (Zetbox.App.GUI.VisualMemoryImpl)Context.Find<Zetbox.App.GUI.Visual>(_fk_VisualTree.Value);
             else
                 VisualTreeImpl = null;
+            // fix cached lists references
+            _triggerFetchMenuTask = null;
+            _Menu = null;
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();
