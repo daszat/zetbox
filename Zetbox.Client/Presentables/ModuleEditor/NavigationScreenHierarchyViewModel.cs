@@ -26,7 +26,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
     using Zetbox.App.GUI;
     using Zetbox.Client.Presentables.GUI;
     using Zetbox.Client.Presentables.ZetboxBase;
-using System.ComponentModel;
+    using System.ComponentModel;
 
     [ViewModelDescriptor]
     public class NavigationScreenHierarchyViewModel : ViewModel, IRefreshCommandListener, IDeleteCommandParameter, IOpenCommandParameter, INewCommandParameter
@@ -53,8 +53,8 @@ using System.ComponentModel;
             return Name;
         }
 
-        private NavigationEntryViewModel _selectedItem;
-        public NavigationEntryViewModel SelectedItem
+        private NavigationEntryEditorViewModel _selectedItem;
+        public NavigationEntryEditorViewModel SelectedItem
         {
             get
             {
@@ -70,21 +70,21 @@ using System.ComponentModel;
             }
         }
 
-        private ReadOnlyObservableCollection<NavigationEntryViewModel> _rootScreens = null;
-        public ReadOnlyObservableCollection<NavigationEntryViewModel> RootScreens
+        private ReadOnlyObservableCollection<NavigationEntryEditorViewModel> _rootScreens = null;
+        public ReadOnlyObservableCollection<NavigationEntryEditorViewModel> RootScreens
         {
             get
             {
                 if (_rootScreens == null)
                 {
                     var moduleID = Module.ID;
-                    _rootScreens = new ReadOnlyObservableCollection<NavigationEntryViewModel>(new ObservableCollection<NavigationEntryViewModel>(
+                    _rootScreens = new ReadOnlyObservableCollection<NavigationEntryEditorViewModel>(new ObservableCollection<NavigationEntryEditorViewModel>(
                         DataContext.GetQuery<NavigationScreen>()
                         .Where(i => i.Module.ID == moduleID)
                         .Where(i => i.Parent == null)
                         .OrderBy(i => i.Title)
                         .ToList()
-                        .Select(i => NavigationEntryViewModel.Fetch(ViewModelFactory, DataContext, this, i))));
+                        .Select(i => ViewModelFactory.CreateViewModel<NavigationEntryEditorViewModel.Factory>().Invoke(DataContext, this, i))));
                 }
                 return _rootScreens;
             }
@@ -185,7 +185,7 @@ using System.ComponentModel;
         #region IDeleteCommandParameter members
         bool IDeleteCommandParameter.IsReadOnly { get { return false; } }
         bool IDeleteCommandParameter.AllowDelete { get { return true; } }
-        IEnumerable<ViewModel> ICommandParameter.SelectedItems { get { return SelectedItem == null ? null : new[] { SelectedItem }; } }
+        IEnumerable<ViewModel> ICommandParameter.SelectedItems { get { return SelectedItem == null ? null : new[] { DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, SelectedItem.NavEntry) }; } }
         #endregion
 
         #region IOpenCommandParameter members
@@ -196,5 +196,45 @@ using System.ComponentModel;
         bool INewCommandParameter.IsReadOnly { get { return false; } }
         bool INewCommandParameter.AllowAddNew { get { return true; } }
         #endregion
+    }
+
+    public class NavigationEntryEditorViewModel : ViewModel
+    {
+        public new delegate NavigationEntryEditorViewModel Factory(IZetboxContext dataCtx, ViewModel parent, NavigationEntry navEntry);
+
+        public NavigationEntryEditorViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, NavigationEntry navEntry)
+            : base(appCtx, dataCtx, parent)
+        {
+            this.NavEntry = navEntry;
+        }
+
+        public NavigationEntry NavEntry { get; private set; }
+
+        public override string Name
+        {
+            get { return NavEntry.Title; }
+        }
+
+        public string Title
+        {
+            get { return NavEntry.Title; }
+        }
+
+        public int ID
+        {
+            get
+            {
+                return NavEntry.ID;
+            }
+        }
+
+        public IEnumerable<NavigationEntryEditorViewModel> Children
+        {
+            get
+            {
+                NavEntry.TriggerFetch("Children");
+                return NavEntry.Children.Select(i => ViewModelFactory.CreateViewModel<NavigationEntryEditorViewModel.Factory>().Invoke(DataContext, this, i));
+            }
+        }
     }
 }

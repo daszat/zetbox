@@ -53,7 +53,7 @@ namespace Zetbox.Client.WPF.View.ModuleEditor
 
         private void NavTree_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
-            var item = NavTree.SelectedItem as NavigationEntryViewModel;
+            var item = NavTree.SelectedItem as NavigationEntryEditorViewModel;
             if (item != null)
             {
                 this.ViewModel.SelectedItem = item;
