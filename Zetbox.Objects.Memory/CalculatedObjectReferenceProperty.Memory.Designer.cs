@@ -673,8 +673,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.CalculatedObjectR
             else
                 ReferencedClassImpl = null;
             // fix cached lists references
-            _triggerFetchInputsTask = null;
-            _Inputs = null;
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

@@ -1355,8 +1355,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.TypeRef> OnGeneri
             else
                 ParentImpl = null;
             // fix cached lists references
-            _triggerFetchGenericArgumentsTask = null;
-            _GenericArguments = null;
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

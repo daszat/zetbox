@@ -207,8 +207,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.N_to_M_relations_
 
             // fix direct object references
             // fix cached lists references
-            _triggerFetchBSideTask = null;
-            _BSide = null;
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

@@ -1121,14 +1121,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
             else
                 OwnerImpl = null;
             // fix cached lists references
-            _triggerFetchGroupReadersTask = null;
-            _GroupReaders = null;
-            _triggerFetchGroupWritersTask = null;
-            _GroupWriters = null;
-            _triggerFetchReadersTask = null;
-            _Readers = null;
-            _triggerFetchWritersTask = null;
-            _Writers = null;
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

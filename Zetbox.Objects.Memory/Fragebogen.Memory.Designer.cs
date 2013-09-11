@@ -289,10 +289,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnStu
 
             // fix direct object references
             // fix cached lists references
-            _triggerFetchAntwortenTask = null;
-            _Antworten = null;
-            _triggerFetchStudentTask = null;
-            _Student = null;
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

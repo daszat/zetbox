@@ -13,8 +13,7 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 
-
-namespace Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses
+namespace Zetbox.DalProvider.Client.Generator.Templates.ObjectClasses
 {
     using System;
     using System.Collections.Generic;
@@ -22,6 +21,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses
     using System.Text;
     using Zetbox.API;
     using Zetbox.App.Base;
+    using Zetbox.Generator.Extensions;
     using Templates = Zetbox.Generator.Templates;
 
     public class ReloadReferences : Templates.ObjectClasses.ReloadReferences
@@ -34,7 +34,11 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses
 
         public override IEnumerable<ObjectReferenceProperty> GetListReferences()
         {
-            return new ObjectReferenceProperty[] { }; // handled by EF
+            return cls.Properties
+                .OfType<ObjectReferenceProperty>()
+                .Where(orp => orp.IsList())
+                .OrderBy(orp => orp.ObjectClass.Name)
+                .ThenBy(orp => orp.Name);
         }
     }
 }

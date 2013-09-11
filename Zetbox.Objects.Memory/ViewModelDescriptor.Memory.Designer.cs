@@ -1445,8 +1445,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
             else
                 ViewModelRefImpl = null;
             // fix cached lists references
-            _triggerFetchSecondaryControlKindsTask = null;
-            _SecondaryControlKinds = null;
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

@@ -490,8 +490,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Group> OnMember_P
             else
                 ModuleImpl = null;
             // fix cached lists references
-            _triggerFetchMemberTask = null;
-            _Member = null;
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

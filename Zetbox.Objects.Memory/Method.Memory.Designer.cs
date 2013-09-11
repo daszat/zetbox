@@ -1754,10 +1754,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnShowByP
             else
                 ObjectClassImpl = null;
             // fix cached lists references
-            _triggerFetchParameterTask = null;
-            _Parameter = null;
-            _triggerFetchShowByPropertiesTask = null;
-            _ShowByProperties = null;
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

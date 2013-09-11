@@ -1144,8 +1144,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Mitarbeiter> 
             else
                 IdentityImpl = null;
             // fix cached lists references
-            _triggerFetchProjekteTask = null;
-            _Projekte = null;
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

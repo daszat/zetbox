@@ -1321,8 +1321,6 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             else
                 StagingDatabaseImpl = null;
             // fix cached lists references
-            _triggerFetchSourceColumnTask = null;
-            _SourceColumn = null;
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

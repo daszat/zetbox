@@ -1369,12 +1369,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
             else
                 CreatedByImpl = null;
             // fix cached lists references
-            _triggerFetchAuftraegeTask = null;
-            _Auftraege = null;
-            _triggerFetchMitarbeiterTask = null;
-            _Mitarbeiter = null;
-            _triggerFetchTasksTask = null;
-            _Tasks = null;
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

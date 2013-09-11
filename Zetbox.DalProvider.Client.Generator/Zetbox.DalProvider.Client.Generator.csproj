@@ -104,6 +104,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Templates\ObjectClasses\OnPropertyChange.cs" />
+    <Compile Include="Templates\ObjectClasses\ReloadReferences.cs" />
     <Compile Include="Templates\ObjectClasses\Template.cs" />
     <Compile Include="Templates\ProjectFile.cs" />
     <Compile Include="Templates\Serialization\CollectionSerialization.cs" />

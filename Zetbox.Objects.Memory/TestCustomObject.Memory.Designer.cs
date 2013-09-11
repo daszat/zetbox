@@ -790,10 +790,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             else
                 MuhBlah_One_NavImpl = null;
             // fix cached lists references
-            _triggerFetchMubBlah_List_NavTask = null;
-            _MubBlah_List_Nav = null;
-            _triggerFetchMuhBlah_ManyList_NavTask = null;
-            _MuhBlah_ManyList_Nav = null;
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

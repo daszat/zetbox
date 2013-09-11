@@ -1448,12 +1448,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             else
                 DefaultViewModelDescriptorImpl = null;
             // fix cached lists references
-            _triggerFetchAccessControlListTask = null;
-            _AccessControlList = null;
-            _triggerFetchFilterConfigurationsTask = null;
-            _FilterConfigurations = null;
-            _triggerFetchSubClassesTask = null;
-            _SubClasses = null;
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

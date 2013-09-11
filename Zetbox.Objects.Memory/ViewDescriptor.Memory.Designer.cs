@@ -835,8 +835,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewDescriptor> On
             else
                 ModuleImpl = null;
             // fix cached lists references
-            _triggerFetchSupportedViewModelsTask = null;
-            _SupportedViewModels = null;
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

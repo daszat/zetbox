@@ -1832,14 +1832,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             else
                 RequestedKindImpl = null;
             // fix cached lists references
-            _triggerFetchConstraintsTask = null;
-            _Constraints = null;
-            _triggerFetchImplementsInterfacesTask = null;
-            _ImplementsInterfaces = null;
-            _triggerFetchMethodsTask = null;
-            _Methods = null;
-            _triggerFetchPropertiesTask = null;
-            _Properties = null;
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();
