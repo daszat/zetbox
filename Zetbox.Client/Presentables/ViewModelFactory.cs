@@ -562,6 +562,11 @@ namespace Zetbox.Client.Presentables
             }
             else
             {
+                if (dom.Object == null || dom.Object.Context == null)
+                {
+                    // Invalid object, like a deleted one
+                    return false; 
+                }
                 return Managers.ContainsKey(dom.Object.Context);
             }
         }
