@@ -80,9 +80,11 @@
 <%      } %>
             this._fk_<%= prop.Name %> = otherImpl._fk_<%= prop.Name %>;
 <% } %>
+
+
 <% // reset backing store and fetch task to reload lists %>
-<% foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>().Where(p => p.IsList()).OrderBy(p => p.Name)) { %>
-            this._triggerFetch<%= prop.Name %>Task = null;
-            this._<%= prop.Name %> = null;
-<% } %>
+<% // foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>().Where(p => p.IsList()).OrderBy(p => p.Name)) { %>
+<% //            this._triggerFetch<%= prop.Name %>Task = null; %>
+<% //            this._<%= prop.Name %> = null;                 %>
+<% // } %>
         }

@@ -32,13 +32,13 @@ namespace Zetbox.DalProvider.Client.Generator.Templates.ObjectClasses
 
         }
 
-        public override IEnumerable<ObjectReferenceProperty> GetListReferences()
-        {
-            return cls.Properties
-                .OfType<ObjectReferenceProperty>()
-                .Where(orp => orp.IsList())
-                .OrderBy(orp => orp.ObjectClass.Name)
-                .ThenBy(orp => orp.Name);
-        }
+        //public override IEnumerable<ObjectReferenceProperty> GetListReferences()
+        //{
+        //    return cls.Properties
+        //        .OfType<ObjectReferenceProperty>()
+        //        .Where(orp => orp.IsList())
+        //        .OrderBy(orp => orp.ObjectClass.Name)
+        //        .ThenBy(orp => orp.Name);
+        //}
     }
 }
