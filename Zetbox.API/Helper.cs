@@ -1409,6 +1409,29 @@ namespace Zetbox.API
                         Math.Min(255, (int)((1.0 - amount) * c.B))
                     );
         }
+
+        /// <summary>
+        /// http://code.logos.com/blog/2008/01/nullpropagating_extension_meth.html
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="U"></typeparam>
+        /// <param name="t"></param>
+        /// <param name="fn"></param>
+        /// <returns></returns>
+        public static U IfNotNull<T, U>(this T t, Func<T, U> fn)
+        {
+            return t != null ? fn(t) : default(U);
+        }
+
+        public static string IfNullOrEmpty(this string str, string def)
+        {
+            return string.IsNullOrEmpty(str) ? def : str;
+        }
+
+        public static string IfNullOrWhiteSpace(this string str, string def)
+        {
+            return string.IsNullOrWhiteSpace(str) ? def : str;
+        }
     }
 
     public static class FileExtensions
