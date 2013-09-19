@@ -78,13 +78,16 @@ namespace Zetbox.Microsoft
                 }
 
                 mail.Subject = msg.Subject;
-                if (msg.IsBodyHtml)
+                if (!string.IsNullOrWhiteSpace(msg.Body)) // preserve signature
                 {
-                    mail.HTMLBody = msg.Body;
-                }
-                else
-                {
-                    mail.Body = msg.Body;
+                    if (msg.IsBodyHtml)
+                    {
+                        mail.HTMLBody = msg.Body;
+                    }
+                    else
+                    {
+                        mail.Body = msg.Body;
+                    }
                 }
 
                 foreach (var a in msg.Attachments)
