@@ -2,7 +2,7 @@
 
 set name=zetbox - dev
 set assembly=Zetbox.Client.Bootstrapper
-set version=1.0.5710.0
+set version=1.0.0.0
 set publisher=dasz.at OG
 set providerurl=http://dasz.at/foobar
 
