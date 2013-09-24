@@ -756,6 +756,13 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                                 _orderByExpression,                         // Maybe we should implement a custom comparer
                                 _sortDirection == System.ComponentModel.ListSortDirection.Descending ? "desc" : string.Empty));
             }
+            else
+            {
+                // default sort.
+                // 1. It's a good idea to have a predictable result 
+                // 2. EF needs that: case 10019: The method 'Skip' is only supported for sorted input in LINQ to Entities. The method 'OrderBy' must be called before the method
+                result = result.OrderBy("ID"); 
+            }
             return result;
         }
 
