@@ -440,7 +440,7 @@ namespace Zetbox.Server.SchemaManagement
 
         public virtual void RenameDiscriminatorValue(TableRef tblName, string oldValue, string newValue)
         {
-            ExecuteNonQuery(string.Format("UPDATE {0} SET {1} = '{2}' WHERE {1} = '{3}'", 
+            ExecuteNonQuery(string.Format("UPDATE {0} SET {1} = '{2}' WHERE {1} = '{3}'",
                 FormatSchemaName(tblName),
                 QuoteIdentifier(TableMapper.DiscriminatorColumnName),
                 newValue,
@@ -498,6 +498,8 @@ namespace Zetbox.Server.SchemaManagement
         public abstract bool CheckFKColumnContainsUniqueValues(TableRef tblName, string colName);
 
         public abstract bool CheckColumnContainsValues(TableRef tblName, string colName);
+
+        protected abstract bool CheckColumnsNullEquality(TableRef tblName, string aColName, string bColName);
 
         public abstract long CountRows(TableRef tblName);
 
@@ -665,9 +667,9 @@ namespace Zetbox.Server.SchemaManagement
 
         #region zetbox Accelerators
 
-        public virtual bool CheckPositionColumnValidity(TableRef tblName, string posName)
+        public virtual bool CheckPositionColumnValidity(TableRef tblName, string fkName, string posName)
         {
-            var failed = CheckColumnContainsNulls(tblName, posName);
+            var failed = CheckColumnsNullEquality(tblName, fkName, posName);
             if (failed)
             {
                 Log.WarnFormat("Order Column [{0}].[{1}] contains NULLs.", tblName, posName);

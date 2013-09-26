@@ -728,6 +728,16 @@ WHERE tbl.id = OBJECT_ID(@table) and col.name = @column AND obj.xtype = 'D'",
                 QuoteIdentifier(colName))) > 0;
         }
 
+        protected override bool CheckColumnsNullEquality(TableRef tblName, string aColName, string bColName)
+        {
+            return (int)ExecuteScalar(
+                string.Format("select count(*) from (select top 1 * from {0} where ({1} is null and {2} is not null) or ({1} is not null and {2} is null)) as data",
+                    FormatSchemaName(tblName),
+                    QuoteIdentifier(aColName),
+                    QuoteIdentifier(bColName))
+                ) > 0;
+        }
+
         public override long CountRows(TableRef tblName)
         {
             return (int)ExecuteScalar(String.Format(

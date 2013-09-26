@@ -288,9 +288,9 @@ namespace Zetbox.Server.SchemaManagement
             return result;
         }
 
-        public bool CheckPositionColumnValidity(TableRef tblName, string positionColumnName)
+        public bool CheckPositionColumnValidity(TableRef tblName, string fkName, string positionColumnName)
         {
-            var result = _provider.CheckPositionColumnValidity(tblName, positionColumnName);
+            var result = _provider.CheckPositionColumnValidity(tblName, fkName, positionColumnName);
             Log.DebugFormat(result ? "Position column {0} of {1} is valid" : "Position column {0} of {1} is NOT valid", positionColumnName, tblName);
             return result;
         }

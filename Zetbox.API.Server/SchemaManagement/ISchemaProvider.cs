@@ -842,7 +842,7 @@ namespace Zetbox.API.Server
 
         #region zetbox Accelerators
 
-        bool CheckPositionColumnValidity(TableRef tblName, string positionColumnName);
+        bool CheckPositionColumnValidity(TableRef tblName, string fkName, string posName);
         bool RepairPositionColumn(TableRef tblName, string positionColumnName);
 
         #endregion

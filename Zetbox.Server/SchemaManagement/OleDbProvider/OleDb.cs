@@ -592,7 +592,7 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
         }
 
         /// <summary>Not supported.</summary>
-        bool ISchemaProvider.CheckPositionColumnValidity(TableRef tblName, string posName)
+        bool ISchemaProvider.CheckPositionColumnValidity(TableRef tblName, string fkName, string posName)
         {
             throw new NotSupportedException();
         }

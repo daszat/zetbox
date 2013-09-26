@@ -675,6 +675,16 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
                 QuoteIdentifier(colName)));
         }
 
+        protected override bool CheckColumnsNullEquality(TableRef tblName, string aColName, string bColName)
+        {
+            return (bool)ExecuteScalar(
+                string.Format("select count(*) > 0 from (select * from {0} where ({1} is null and {2} is not null) or ({1} is not null and {2} is null) limit 1) as data",
+                    FormatSchemaName(tblName),
+                    QuoteIdentifier(aColName),
+                    QuoteIdentifier(bColName))
+                );
+        }
+
         public override long CountRows(TableRef tblName)
         {
             return (long)ExecuteScalar(String.Format(

@@ -475,7 +475,7 @@ namespace Zetbox.Server.SchemaManagement
 
             if (isIndexed)
             {
-                CheckOrderColumn(tblName, indexName);
+                CheckOrderColumn(tblName, colName, indexName);
             }
             if (!isIndexed && db.CheckColumnExists(tblName, indexName))
             {
@@ -854,7 +854,7 @@ namespace Zetbox.Server.SchemaManagement
             }
         }
 
-        private void CheckOrderColumn(TableRef tblName, string indexName)
+        private void CheckOrderColumn(TableRef tblName, string fkName, string indexName)
         {
             CheckColumn(tblName, indexName, System.Data.DbType.Int32, 0, 0, true, null);
             if (repair)
@@ -868,7 +868,7 @@ namespace Zetbox.Server.SchemaManagement
                     db.RepairPositionColumn(tblName, indexName);
                 }
             }
-            else if (!db.CheckPositionColumnValidity(tblName, indexName))
+            else if (!db.CheckPositionColumnValidity(tblName, fkName, indexName))
             {
                 Log.WarnFormat(
                     "Column [{0}][{1}] contains invalid position column entries",
