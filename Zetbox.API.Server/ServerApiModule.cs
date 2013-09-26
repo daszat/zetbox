@@ -138,9 +138,13 @@ namespace Zetbox.API.Server
                     {
                         scope.Resolve<IServer>().CheckSchemaFromCurrentMetaData(false);
                     }
-                    else
+                    else if (!string.IsNullOrWhiteSpace(arg))
                     {
                         scope.Resolve<IServer>().CheckSchema(new[] { arg }, false);
+                    }
+                    else
+                    {
+                        Logging.Server.Error("the command checkschema requieres a valid argument ('meta' or a xml file)");
                     }
                 });
 
