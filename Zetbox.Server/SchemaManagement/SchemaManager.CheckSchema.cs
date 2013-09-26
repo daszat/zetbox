@@ -156,7 +156,7 @@ namespace Zetbox.Server.SchemaManagement
 
             // Select all n:m Relations that are in a ACL selector
             foreach (Relation rel in schema.GetQuery<Relation>().ToList()
-                .Where(r => r.GetRelationType() == RelationType.n_m && schema.GetQuery<RoleMembership>().Where(rm => rm.Relations.Contains(r)).Count() > 0))
+                .Where(r => r.GetRelationType() == RelationType.n_m && schema.GetQuery<RoleMembership>().ToList().Where(rm => rm.Relations.Contains(r)).Count() > 0))
             {
                 Log.DebugFormat("Relation: {0}, {1} <-> {2}", rel.Description, rel.A.Type.TableName, rel.B.Type.TableName);
 
@@ -297,7 +297,10 @@ namespace Zetbox.Server.SchemaManagement
                     continue;
                 if (!columns.Contains(propName))
                 {
-                    Log.WarnFormat("Column '[{0}].[{1}]' found in database but no Property was defined", objClass.TableName, propName);
+                    Log.WarnFormat("Column '[{0}].[{1}].[{2}]' found in database but no Property was defined", 
+                        objClass.Module.IfNotNull(o => o.SchemaName),
+                        objClass.TableName, 
+                        propName);
                 }
             }
         }

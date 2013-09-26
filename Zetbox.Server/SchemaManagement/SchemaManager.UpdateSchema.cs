@@ -269,6 +269,7 @@ namespace Zetbox.Server.SchemaManagement
                     && relEnd.AParent != null
                     && (relEnd.AParent.B.Multiplicity == Multiplicity.One
                         || relEnd.AParent.B.Multiplicity == Multiplicity.ZeroOrOne))
+                .ToList()
                 .Select(relEnd => new
                 {
                     OtherEnd = relEnd.AParent.B,
@@ -286,6 +287,7 @@ namespace Zetbox.Server.SchemaManagement
                     && relEnd.BParent != null
                     && (relEnd.BParent.A.Multiplicity == Multiplicity.One
                         || relEnd.BParent.A.Multiplicity == Multiplicity.ZeroOrOne))
+                .ToList()
                 .Select(relEnd => new
                 {
                     OtherEnd = relEnd.BParent.A,
