@@ -7,17 +7,24 @@ echo ***************************************************************************
 
 IF NOT EXIST Configs\Local XCOPY /S/E Configs\Examples Configs\Local\
 
-%windir%\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe /v:m CCNet.msbuild
+rd /s /q ".\bin\"
+rd /s /q ".\Zetbox.Server.HttpService\Common\"
+rd /s /q ".\Zetbox.Server.HttpService\Bootstrapper\"
+rd /s /q ".\Zetbox.Server.HttpService\Client\"
+rd /s /q ".\Zetbox.Server.HttpService\Server\"
+rd /s /q "%LOCALAPPDATA%\AppData\Temp\zetbox"
+
+%windir%\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe /v:m Zetbox.Complete.sln /t:Rebuild /p:Configuration=Minimal
 IF ERRORLEVEL 1 GOTO FAIL
 
-rem regenerate modules to prove roundtrippability
-call "zbPublishAll.cmd"
+call "zbResetDatabase.cmd"
+IF ERRORLEVEL 1 GOTO FAIL
+
+call "zbGenerate.cmd"
 IF ERRORLEVEL 1 GOTO FAIL
 
 %windir%\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe /v:m Zetbox.Complete.sln
 IF ERRORLEVEL 1 GOTO FAIL
-
-IF NOT EXIST bin\Debug\Configs XCOPY /S/E Configs bin\Debug\Configs\
 
 GOTO EOF
 
