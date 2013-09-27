@@ -123,7 +123,7 @@ namespace Zetbox.Generator.ResourceGenerator
 
         public void AddResource(string name, string value)
         {
-            _writer.AddResource(name, value);
+            _writer.AddResource(name, value ?? string.Empty);
         }
 
         public void Dispose()
