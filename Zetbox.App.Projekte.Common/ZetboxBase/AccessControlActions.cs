@@ -55,7 +55,7 @@ namespace Zetbox.App.Base
                 {
                     if (rel == null)
                     {
-                        Logging.Log.WarnFormat("Found a null relation in RoleMembership {0}", obj);
+                        // Only during dehydration - fix this call!
                         continue;
                     }
                     if (rel.A != null && rel.A.Type == nextType)
