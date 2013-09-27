@@ -144,14 +144,13 @@
   <data name="Description_label" xml:space="preserve">
     <value>Description</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Description_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Description_description" xml:space="preserve">
     <value />
   </data>
   <data name="DestinationModule_label" xml:space="preserve">
     <value>DestinationModule</value>
   </data>
-  <data name="DestinationModule_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="DestinationModule_description" xml:space="preserve">
     <value />
   </data>
   <data name="ExportGuid_label" xml:space="preserve">
@@ -163,7 +162,7 @@
   <data name="StagingDatabases_label" xml:space="preserve">
     <value>StagingDatabases</value>
   </data>
-  <data name="StagingDatabases_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="StagingDatabases_description" xml:space="preserve">
     <value />
   </data>
 </root>

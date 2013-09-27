@@ -150,14 +150,13 @@
   <data name="Label_label" xml:space="preserve">
     <value>Label</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Label_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Label_description" xml:space="preserve">
     <value />
   </data>
   <data name="Module_label" xml:space="preserve">
     <value>Module</value>
   </data>
-  <data name="Module_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Module_description" xml:space="preserve">
     <value />
   </data>
   <data name="RefreshOnFilterChanged_label" xml:space="preserve">
@@ -175,13 +174,13 @@
   <data name="Required_label" xml:space="preserve">
     <value>Required</value>
   </data>
-  <data name="Required_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Required_description" xml:space="preserve">
     <value />
   </data>
   <data name="ViewModelDescriptor_label" xml:space="preserve">
     <value>ViewModelDescriptor</value>
   </data>
-  <data name="ViewModelDescriptor_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ViewModelDescriptor_description" xml:space="preserve">
     <value />
   </data>
 </root>

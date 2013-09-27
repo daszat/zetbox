@@ -144,8 +144,7 @@
   <data name="Description_label" xml:space="preserve">
     <value>Description</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Description_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Description_description" xml:space="preserve">
     <value />
   </data>
   <data name="ExportGuid_label" xml:space="preserve">
@@ -157,25 +156,25 @@
   <data name="Module_label" xml:space="preserve">
     <value>Module</value>
   </data>
-  <data name="Module_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Module_description" xml:space="preserve">
     <value />
   </data>
   <data name="Name_label" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="Name_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Name_description" xml:space="preserve">
     <value />
   </data>
   <data name="RootScreen_label" xml:space="preserve">
     <value>RootScreen</value>
   </data>
-  <data name="RootScreen_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="RootScreen_description" xml:space="preserve">
     <value />
   </data>
   <data name="WorkspaceViewModel_label" xml:space="preserve">
     <value>WorkspaceViewModel</value>
   </data>
-  <data name="WorkspaceViewModel_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="WorkspaceViewModel_description" xml:space="preserve">
     <value />
   </data>
 </root>

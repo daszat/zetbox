@@ -120,38 +120,37 @@
   <data name="GetCurrent_label" xml:space="preserve">
     <value>GetCurrent</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="GetCurrent_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetCurrent_description" xml:space="preserve">
     <value />
   </data>
   <data name="GetCurrent(dt)_label" xml:space="preserve">
     <value>dt</value>
   </data>
-  <data name="GetCurrent(dt)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetCurrent(dt)_description" xml:space="preserve">
     <value />
   </data>
   <data name="GetCurrent(retval)_label" xml:space="preserve">
     <value>retval</value>
   </data>
-  <data name="GetCurrent(retval)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetCurrent(retval)_description" xml:space="preserve">
     <value />
   </data>
   <data name="GetNext_label" xml:space="preserve">
     <value>GetNext</value>
   </data>
-  <data name="GetNext_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetNext_description" xml:space="preserve">
     <value />
   </data>
   <data name="GetNext(dt)_label" xml:space="preserve">
     <value>dt</value>
   </data>
-  <data name="GetNext(dt)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetNext(dt)_description" xml:space="preserve">
     <value />
   </data>
   <data name="GetNext(retval)_label" xml:space="preserve">
     <value>retval</value>
   </data>
-  <data name="GetNext(retval)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetNext(retval)_description" xml:space="preserve">
     <value />
   </data>
 </root>

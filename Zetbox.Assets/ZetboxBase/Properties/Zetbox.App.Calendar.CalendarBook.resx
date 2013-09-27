@@ -150,14 +150,13 @@
   <data name="GroupReaders_label" xml:space="preserve">
     <value>GroupReaders</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="GroupReaders_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GroupReaders_description" xml:space="preserve">
     <value />
   </data>
   <data name="GroupWriters_label" xml:space="preserve">
     <value>GroupWriters</value>
   </data>
-  <data name="GroupWriters_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GroupWriters_description" xml:space="preserve">
     <value />
   </data>
   <data name="IsDeactivated_label" xml:space="preserve">
@@ -169,25 +168,25 @@
   <data name="Name_label" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="Name_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Name_description" xml:space="preserve">
     <value />
   </data>
   <data name="Owner_label" xml:space="preserve">
     <value>Owner</value>
   </data>
-  <data name="Owner_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Owner_description" xml:space="preserve">
     <value />
   </data>
   <data name="Readers_label" xml:space="preserve">
     <value>Readers</value>
   </data>
-  <data name="Readers_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Readers_description" xml:space="preserve">
     <value />
   </data>
   <data name="Writers_label" xml:space="preserve">
     <value>Writers</value>
   </data>
-  <data name="Writers_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Writers_description" xml:space="preserve">
     <value />
   </data>
 </root>

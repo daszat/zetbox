@@ -120,20 +120,19 @@
   <data name="IsCurrentMonthDefault_label" xml:space="preserve">
     <value>IsCurrentMonthDefault</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="IsCurrentMonthDefault_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="IsCurrentMonthDefault_description" xml:space="preserve">
     <value />
   </data>
   <data name="IsCurrentQuaterDefault_label" xml:space="preserve">
     <value>IsCurrentQuaterDefault</value>
   </data>
-  <data name="IsCurrentQuaterDefault_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="IsCurrentQuaterDefault_description" xml:space="preserve">
     <value />
   </data>
   <data name="IsCurrentYearDefault_label" xml:space="preserve">
     <value>IsCurrentYearDefault</value>
   </data>
-  <data name="IsCurrentYearDefault_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="IsCurrentYearDefault_description" xml:space="preserve">
     <value />
   </data>
 </root>

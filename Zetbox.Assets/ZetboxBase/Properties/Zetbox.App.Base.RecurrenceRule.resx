@@ -180,8 +180,7 @@
   <data name="Frequency_label" xml:space="preserve">
     <value>Frequency</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Frequency_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Frequency_description" xml:space="preserve">
     <value />
   </data>
   <data name="Interval_label" xml:space="preserve">
@@ -199,7 +198,7 @@
   <data name="WeekStart_label" xml:space="preserve">
     <value>WeekStart</value>
   </data>
-  <data name="WeekStart_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="WeekStart_description" xml:space="preserve">
     <value />
   </data>
 </root>

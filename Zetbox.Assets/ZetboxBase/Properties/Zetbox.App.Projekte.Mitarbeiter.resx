@@ -144,8 +144,7 @@
   <data name="EMail_label" xml:space="preserve">
     <value>EMail</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="EMail_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="EMail_description" xml:space="preserve">
     <value />
   </data>
   <data name="ExportGuid_label" xml:space="preserve">
@@ -163,7 +162,7 @@
   <data name="Identity_label" xml:space="preserve">
     <value>Identity</value>
   </data>
-  <data name="Identity_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Identity_description" xml:space="preserve">
     <value />
   </data>
   <data name="Name_label" xml:space="preserve">

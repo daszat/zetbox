@@ -120,14 +120,13 @@
   <data name="GetErrorText_label" xml:space="preserve">
     <value>GetErrorText</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="GetErrorText_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetErrorText_description" xml:space="preserve">
     <value />
   </data>
   <data name="GetErrorText(result)_label" xml:space="preserve">
     <value>result</value>
   </data>
-  <data name="GetErrorText(result)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetErrorText(result)_description" xml:space="preserve">
     <value />
   </data>
   <data name="GetErrorText(constrainedObject)_label" xml:space="preserve">
@@ -139,7 +138,7 @@
   <data name="IsValid_label" xml:space="preserve">
     <value>IsValid</value>
   </data>
-  <data name="IsValid_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="IsValid_description" xml:space="preserve">
     <value />
   </data>
   <data name="IsValid(result)_label" xml:space="preserve">

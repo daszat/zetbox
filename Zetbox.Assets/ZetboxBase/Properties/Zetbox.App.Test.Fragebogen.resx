@@ -120,20 +120,19 @@
   <data name="Antworten_label" xml:space="preserve">
     <value>Antworten</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Antworten_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Antworten_description" xml:space="preserve">
     <value />
   </data>
   <data name="BogenNummer_label" xml:space="preserve">
     <value>BogenNummer</value>
   </data>
-  <data name="BogenNummer_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="BogenNummer_description" xml:space="preserve">
     <value />
   </data>
   <data name="Student_label" xml:space="preserve">
     <value>Student</value>
   </data>
-  <data name="Student_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Student_description" xml:space="preserve">
     <value />
   </data>
 </root>

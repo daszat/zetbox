@@ -126,20 +126,19 @@
   <data name="GetErrorText(result)_label" xml:space="preserve">
     <value>result</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="GetErrorText(result)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetErrorText(result)_description" xml:space="preserve">
     <value />
   </data>
   <data name="GetErrorText(constrainedObject)_label" xml:space="preserve">
     <value>constrainedObject</value>
   </data>
-  <data name="GetErrorText(constrainedObject)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetErrorText(constrainedObject)_description" xml:space="preserve">
     <value />
   </data>
   <data name="GetErrorText(constrainedValue)_label" xml:space="preserve">
     <value>constrainedValue</value>
   </data>
-  <data name="GetErrorText(constrainedValue)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetErrorText(constrainedValue)_description" xml:space="preserve">
     <value />
   </data>
   <data name="IsValid_label" xml:space="preserve">
@@ -151,19 +150,19 @@
   <data name="IsValid(return)_label" xml:space="preserve">
     <value>return</value>
   </data>
-  <data name="IsValid(return)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="IsValid(return)_description" xml:space="preserve">
     <value />
   </data>
   <data name="IsValid(constrainedObject)_label" xml:space="preserve">
     <value>constrainedObject</value>
   </data>
-  <data name="IsValid(constrainedObject)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="IsValid(constrainedObject)_description" xml:space="preserve">
     <value />
   </data>
   <data name="IsValid(constrainedValue)_label" xml:space="preserve">
     <value>constrainedValue</value>
   </data>
-  <data name="IsValid(constrainedValue)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="IsValid(constrainedValue)_description" xml:space="preserve">
     <value />
   </data>
 </root>

@@ -126,8 +126,7 @@
   <data name="GetDataType(ReturnParameter)_label" xml:space="preserve">
     <value>ReturnParameter</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="GetDataType(ReturnParameter)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetDataType(ReturnParameter)_description" xml:space="preserve">
     <value />
   </data>
   <data name="GetDataTypeString_label" xml:space="preserve">
@@ -139,7 +138,7 @@
   <data name="GetDataTypeString(ReturnParameter)_label" xml:space="preserve">
     <value>ReturnParameter</value>
   </data>
-  <data name="GetDataTypeString(ReturnParameter)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetDataTypeString(ReturnParameter)_description" xml:space="preserve">
     <value />
   </data>
   <data name="ImplementInterfaces_label" xml:space="preserve">

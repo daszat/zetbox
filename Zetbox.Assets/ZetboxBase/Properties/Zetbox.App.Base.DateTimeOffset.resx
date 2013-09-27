@@ -120,38 +120,37 @@
   <data name="Days_label" xml:space="preserve">
     <value>Days</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Days_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Days_description" xml:space="preserve">
     <value />
   </data>
   <data name="Hours_label" xml:space="preserve">
     <value>Hours</value>
   </data>
-  <data name="Hours_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Hours_description" xml:space="preserve">
     <value />
   </data>
   <data name="Minutes_label" xml:space="preserve">
     <value>Minutes</value>
   </data>
-  <data name="Minutes_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Minutes_description" xml:space="preserve">
     <value />
   </data>
   <data name="Months_label" xml:space="preserve">
     <value>Months</value>
   </data>
-  <data name="Months_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Months_description" xml:space="preserve">
     <value />
   </data>
   <data name="Seconds_label" xml:space="preserve">
     <value>Seconds</value>
   </data>
-  <data name="Seconds_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Seconds_description" xml:space="preserve">
     <value />
   </data>
   <data name="Years_label" xml:space="preserve">
     <value>Years</value>
   </data>
-  <data name="Years_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Years_description" xml:space="preserve">
     <value />
   </data>
 </root>

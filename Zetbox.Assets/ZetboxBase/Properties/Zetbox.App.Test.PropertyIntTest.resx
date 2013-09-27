@@ -120,26 +120,25 @@
   <data name="Nullable_label" xml:space="preserve">
     <value>Nullable</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Nullable_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Nullable_description" xml:space="preserve">
     <value />
   </data>
   <data name="NullableWithDefault_label" xml:space="preserve">
     <value>NullableWithDefault</value>
   </data>
-  <data name="NullableWithDefault_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="NullableWithDefault_description" xml:space="preserve">
     <value />
   </data>
   <data name="Standard_label" xml:space="preserve">
     <value>Standard</value>
   </data>
-  <data name="Standard_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Standard_description" xml:space="preserve">
     <value />
   </data>
   <data name="StandardWithDefault_label" xml:space="preserve">
     <value>StandardWithDefault</value>
   </data>
-  <data name="StandardWithDefault_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="StandardWithDefault_description" xml:space="preserve">
     <value />
   </data>
 </root>

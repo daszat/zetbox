@@ -138,8 +138,7 @@
   <data name="Bis_label" xml:space="preserve">
     <value>Bis</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Bis_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Bis_description" xml:space="preserve">
     <value />
   </data>
   <data name="ChangedBy_label" xml:space="preserve">
@@ -175,13 +174,13 @@
   <data name="KickOffAm_label" xml:space="preserve">
     <value>KickOffAm</value>
   </data>
-  <data name="KickOffAm_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="KickOffAm_description" xml:space="preserve">
     <value />
   </data>
   <data name="KickOffBis_label" xml:space="preserve">
     <value>KickOffBis</value>
   </data>
-  <data name="KickOffBis_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="KickOffBis_description" xml:space="preserve">
     <value />
   </data>
   <data name="Kundenname_label" xml:space="preserve">
@@ -211,7 +210,7 @@
   <data name="Von_label" xml:space="preserve">
     <value>Von</value>
   </data>
-  <data name="Von_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Von_description" xml:space="preserve">
     <value />
   </data>
 </root>

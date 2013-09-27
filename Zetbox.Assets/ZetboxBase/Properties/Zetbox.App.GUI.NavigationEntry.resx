@@ -132,8 +132,7 @@
   <data name="Children_label" xml:space="preserve">
     <value>Children</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Children_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Children_description" xml:space="preserve">
     <value />
   </data>
   <data name="Color_label" xml:space="preserve">
@@ -163,25 +162,25 @@
   <data name="Groups_label" xml:space="preserve">
     <value>Groups</value>
   </data>
-  <data name="Groups_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Groups_description" xml:space="preserve">
     <value />
   </data>
   <data name="Module_label" xml:space="preserve">
     <value>Module</value>
   </data>
-  <data name="Module_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Module_description" xml:space="preserve">
     <value />
   </data>
   <data name="Parent_label" xml:space="preserve">
     <value>Parent</value>
   </data>
-  <data name="Parent_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Parent_description" xml:space="preserve">
     <value />
   </data>
   <data name="RequestedKind_label" xml:space="preserve">
     <value>Requested kind</value>
   </data>
-  <data name="RequestedKind_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="RequestedKind_description" xml:space="preserve">
     <value />
   </data>
   <data name="Title_label" xml:space="preserve">
@@ -193,7 +192,7 @@
   <data name="ViewModelDescriptor_label" xml:space="preserve">
     <value>ViewModelDescriptor</value>
   </data>
-  <data name="ViewModelDescriptor_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ViewModelDescriptor_description" xml:space="preserve">
     <value />
   </data>
 </root>

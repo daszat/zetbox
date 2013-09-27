@@ -120,44 +120,43 @@
   <data name="Sunday_label" xml:space="preserve">
     <value>Sunday</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Sunday_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Sunday_description" xml:space="preserve">
     <value />
   </data>
   <data name="Monday_label" xml:space="preserve">
     <value>Monday</value>
   </data>
-  <data name="Monday_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Monday_description" xml:space="preserve">
     <value />
   </data>
   <data name="Tuesday_label" xml:space="preserve">
     <value>Tuesday</value>
   </data>
-  <data name="Tuesday_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Tuesday_description" xml:space="preserve">
     <value />
   </data>
   <data name="Wednesday_label" xml:space="preserve">
     <value>Wednesday</value>
   </data>
-  <data name="Wednesday_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Wednesday_description" xml:space="preserve">
     <value />
   </data>
   <data name="Thursday_label" xml:space="preserve">
     <value>Thursday</value>
   </data>
-  <data name="Thursday_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Thursday_description" xml:space="preserve">
     <value />
   </data>
   <data name="Friday_label" xml:space="preserve">
     <value>Friday</value>
   </data>
-  <data name="Friday_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Friday_description" xml:space="preserve">
     <value />
   </data>
   <data name="Saturday_label" xml:space="preserve">
     <value>Saturday</value>
   </data>
-  <data name="Saturday_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Saturday_description" xml:space="preserve">
     <value />
   </data>
 </root>

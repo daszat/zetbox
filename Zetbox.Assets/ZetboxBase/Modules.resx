@@ -138,8 +138,7 @@
   <data name="ModuleEditor" xml:space="preserve">
     <value>ModuleEditor</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ModuleEditor_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ModuleEditor_description" xml:space="preserve">
     <value />
   </data>
   <data name="Projekte" xml:space="preserve">
@@ -151,7 +150,7 @@
   <data name="SchemaMigration" xml:space="preserve">
     <value>SchemaMigration</value>
   </data>
-  <data name="SchemaMigration_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="SchemaMigration_description" xml:space="preserve">
     <value />
   </data>
   <data name="TestModule" xml:space="preserve">

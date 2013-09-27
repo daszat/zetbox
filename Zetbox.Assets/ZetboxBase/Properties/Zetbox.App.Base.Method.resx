@@ -120,8 +120,7 @@
   <data name="CategoryTags_label" xml:space="preserve">
     <value>Category Tags</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="CategoryTags_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="CategoryTags_description" xml:space="preserve">
     <value />
   </data>
   <data name="ChangedBy_label" xml:space="preserve">
@@ -169,7 +168,7 @@
   <data name="Icon_label" xml:space="preserve">
     <value>Icon</value>
   </data>
-  <data name="Icon_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Icon_description" xml:space="preserve">
     <value />
   </data>
   <data name="InvokeOnServer_label" xml:space="preserve">
@@ -187,7 +186,7 @@
   <data name="Label_label" xml:space="preserve">
     <value>Label</value>
   </data>
-  <data name="Label_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Label_description" xml:space="preserve">
     <value />
   </data>
   <data name="Module_label" xml:space="preserve">

@@ -120,8 +120,7 @@
   <data name="GetName_label" xml:space="preserve">
     <value>GetName</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="GetName_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetName_description" xml:space="preserve">
     <value />
   </data>
   <data name="GetName(name)_label" xml:space="preserve">
@@ -133,13 +132,13 @@
   <data name="Open_label" xml:space="preserve">
     <value>Open</value>
   </data>
-  <data name="Open_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Open_description" xml:space="preserve">
     <value />
   </data>
   <data name="Upload_label" xml:space="preserve">
     <value>Upload</value>
   </data>
-  <data name="Upload_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Upload_description" xml:space="preserve">
     <value />
   </data>
 </root>

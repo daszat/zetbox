@@ -120,116 +120,115 @@
   <data name="AllowAddNew_label" xml:space="preserve">
     <value>AllowAddNew</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="AllowAddNew_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="AllowAddNew_description" xml:space="preserve">
     <value />
   </data>
   <data name="AllowDelete_label" xml:space="preserve">
     <value>AllowDelete</value>
   </data>
-  <data name="AllowDelete_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="AllowDelete_description" xml:space="preserve">
     <value />
   </data>
   <data name="AllowExport_label" xml:space="preserve">
     <value>AllowExport</value>
   </data>
-  <data name="AllowExport_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="AllowExport_description" xml:space="preserve">
     <value />
   </data>
   <data name="AllowOpen_label" xml:space="preserve">
     <value>AllowOpen</value>
   </data>
-  <data name="AllowOpen_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="AllowOpen_description" xml:space="preserve">
     <value />
   </data>
   <data name="AllowSelectColumns_label" xml:space="preserve">
     <value>AllowSelectColumns</value>
   </data>
-  <data name="AllowSelectColumns_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="AllowSelectColumns_description" xml:space="preserve">
     <value />
   </data>
   <data name="AllowUserFilter_label" xml:space="preserve">
     <value>AllowUserFilter</value>
   </data>
-  <data name="AllowUserFilter_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="AllowUserFilter_description" xml:space="preserve">
     <value />
   </data>
   <data name="EnableAutoFilter_label" xml:space="preserve">
     <value>EnableAutoFilter</value>
   </data>
-  <data name="EnableAutoFilter_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="EnableAutoFilter_description" xml:space="preserve">
     <value />
   </data>
   <data name="InitialSort_label" xml:space="preserve">
     <value>Initial sort</value>
   </data>
-  <data name="InitialSort_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="InitialSort_description" xml:space="preserve">
     <value />
   </data>
   <data name="InitialSortDirection_label" xml:space="preserve">
     <value>Initial sort direction</value>
   </data>
-  <data name="InitialSortDirection_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="InitialSortDirection_description" xml:space="preserve">
     <value />
   </data>
   <data name="IsEditable_label" xml:space="preserve">
     <value>IsEditable</value>
   </data>
-  <data name="IsEditable_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="IsEditable_description" xml:space="preserve">
     <value />
   </data>
   <data name="IsMultiselect_label" xml:space="preserve">
     <value>IsMultiselect</value>
   </data>
-  <data name="IsMultiselect_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="IsMultiselect_description" xml:space="preserve">
     <value />
   </data>
   <data name="RequestedEditorKind_label" xml:space="preserve">
     <value>RequestedEditorKind</value>
   </data>
-  <data name="RequestedEditorKind_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="RequestedEditorKind_description" xml:space="preserve">
     <value />
   </data>
   <data name="RequestedWorkspaceKind_label" xml:space="preserve">
     <value>RequestedWorkspaceKind</value>
   </data>
-  <data name="RequestedWorkspaceKind_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="RequestedWorkspaceKind_description" xml:space="preserve">
     <value />
   </data>
   <data name="RespectRequiredFilter_label" xml:space="preserve">
     <value>RespectRequiredFilter</value>
   </data>
-  <data name="RespectRequiredFilter_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="RespectRequiredFilter_description" xml:space="preserve">
     <value />
   </data>
   <data name="ShowCommands_label" xml:space="preserve">
     <value>ShowCommands</value>
   </data>
-  <data name="ShowCommands_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ShowCommands_description" xml:space="preserve">
     <value />
   </data>
   <data name="ShowFilter_label" xml:space="preserve">
     <value>ShowFilter</value>
   </data>
-  <data name="ShowFilter_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ShowFilter_description" xml:space="preserve">
     <value />
   </data>
   <data name="ShowMasterDetail_label" xml:space="preserve">
     <value>ShowMasterDetail</value>
   </data>
-  <data name="ShowMasterDetail_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ShowMasterDetail_description" xml:space="preserve">
     <value />
   </data>
   <data name="Type_label" xml:space="preserve">
     <value>Type</value>
   </data>
-  <data name="Type_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Type_description" xml:space="preserve">
     <value />
   </data>
   <data name="ViewMethod_label" xml:space="preserve">
     <value>ViewMethod</value>
   </data>
-  <data name="ViewMethod_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ViewMethod_description" xml:space="preserve">
     <value />
   </data>
 </root>

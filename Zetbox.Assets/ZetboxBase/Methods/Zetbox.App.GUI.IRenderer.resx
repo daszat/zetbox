@@ -126,20 +126,19 @@
   <data name="ChooseObject(ctx)_label" xml:space="preserve">
     <value>ctx</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ChooseObject(ctx)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ChooseObject(ctx)_description" xml:space="preserve">
     <value />
   </data>
   <data name="ChooseObject(objectType)_label" xml:space="preserve">
     <value>objectType</value>
   </data>
-  <data name="ChooseObject(objectType)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ChooseObject(objectType)_description" xml:space="preserve">
     <value />
   </data>
   <data name="ChooseObject(result)_label" xml:space="preserve">
     <value>result</value>
   </data>
-  <data name="ChooseObject(result)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ChooseObject(result)_description" xml:space="preserve">
     <value />
   </data>
   <data name="ShowMessage_label" xml:space="preserve">
@@ -151,7 +150,7 @@
   <data name="ShowMessage(message)_label" xml:space="preserve">
     <value>message</value>
   </data>
-  <data name="ShowMessage(message)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ShowMessage(message)_description" xml:space="preserve">
     <value />
   </data>
   <data name="ShowObject_label" xml:space="preserve">
@@ -163,7 +162,7 @@
   <data name="ShowObject(obj)_label" xml:space="preserve">
     <value>obj</value>
   </data>
-  <data name="ShowObject(obj)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ShowObject(obj)_description" xml:space="preserve">
     <value />
   </data>
 </root>

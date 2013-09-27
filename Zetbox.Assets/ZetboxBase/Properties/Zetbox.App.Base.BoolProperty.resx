@@ -120,8 +120,7 @@
   <data name="FalseIcon_label" xml:space="preserve">
     <value>FalseIcon</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="FalseIcon_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="FalseIcon_description" xml:space="preserve">
     <value />
   </data>
   <data name="FalseLabel_label" xml:space="preserve">
@@ -133,7 +132,7 @@
   <data name="NullIcon_label" xml:space="preserve">
     <value>NullIcon</value>
   </data>
-  <data name="NullIcon_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="NullIcon_description" xml:space="preserve">
     <value />
   </data>
   <data name="NullLabel_label" xml:space="preserve">
@@ -145,7 +144,7 @@
   <data name="TrueIcon_label" xml:space="preserve">
     <value>TrueIcon</value>
   </data>
-  <data name="TrueIcon_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="TrueIcon_description" xml:space="preserve">
     <value />
   </data>
   <data name="TrueLabel_label" xml:space="preserve">

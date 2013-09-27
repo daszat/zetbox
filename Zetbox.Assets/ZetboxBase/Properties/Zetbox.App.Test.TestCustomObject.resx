@@ -126,26 +126,25 @@
   <data name="MubBlah_List_Nav_label" xml:space="preserve">
     <value>MubBlah_List_Nav</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="MubBlah_List_Nav_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="MubBlah_List_Nav_description" xml:space="preserve">
     <value />
   </data>
   <data name="MubBlah_Nav_label" xml:space="preserve">
     <value>MubBlah_Nav</value>
   </data>
-  <data name="MubBlah_Nav_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="MubBlah_Nav_description" xml:space="preserve">
     <value />
   </data>
   <data name="MuhBlah_ManyList_Nav_label" xml:space="preserve">
     <value>MuhBlah_ManyList_Nav</value>
   </data>
-  <data name="MuhBlah_ManyList_Nav_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="MuhBlah_ManyList_Nav_description" xml:space="preserve">
     <value />
   </data>
   <data name="MuhBlah_One_Nav_label" xml:space="preserve">
     <value>MuhBlah_One_Nav</value>
   </data>
-  <data name="MuhBlah_One_Nav_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="MuhBlah_One_Nav_description" xml:space="preserve">
     <value />
   </data>
   <data name="PersonName_label" xml:space="preserve">
@@ -157,19 +156,19 @@
   <data name="PhoneNumberMobile_label" xml:space="preserve">
     <value>PhoneNumberMobile</value>
   </data>
-  <data name="PhoneNumberMobile_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="PhoneNumberMobile_description" xml:space="preserve">
     <value />
   </data>
   <data name="PhoneNumberOffice_label" xml:space="preserve">
     <value>PhoneNumberOffice</value>
   </data>
-  <data name="PhoneNumberOffice_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="PhoneNumberOffice_description" xml:space="preserve">
     <value />
   </data>
   <data name="PhoneNumbersOther_label" xml:space="preserve">
     <value>PhoneNumbersOther</value>
   </data>
-  <data name="PhoneNumbersOther_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="PhoneNumbersOther_description" xml:space="preserve">
     <value />
   </data>
 </root>

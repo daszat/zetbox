@@ -120,8 +120,7 @@
   <data name="BaseWorkSchedule_label" xml:space="preserve">
     <value>BaseWorkSchedule</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="BaseWorkSchedule_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="BaseWorkSchedule_description" xml:space="preserve">
     <value />
   </data>
   <data name="ChangedBy_label" xml:space="preserve">
@@ -139,7 +138,7 @@
   <data name="ChildWorkSchedule_label" xml:space="preserve">
     <value>ChildWorkSchedule</value>
   </data>
-  <data name="ChildWorkSchedule_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ChildWorkSchedule_description" xml:space="preserve">
     <value />
   </data>
   <data name="CreatedBy_label" xml:space="preserve">
@@ -169,13 +168,13 @@
   <data name="Name_label" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="Name_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Name_description" xml:space="preserve">
     <value />
   </data>
   <data name="WorkScheduleRules_label" xml:space="preserve">
     <value>WorkScheduleRules</value>
   </data>
-  <data name="WorkScheduleRules_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="WorkScheduleRules_description" xml:space="preserve">
     <value />
   </data>
 </root>

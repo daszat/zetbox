@@ -120,98 +120,97 @@
   <data name="None_label" xml:space="preserve">
     <value>None</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="None_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="None_description" xml:space="preserve">
     <value />
   </data>
   <data name="Good_label" xml:space="preserve">
     <value>Good</value>
   </data>
-  <data name="Good_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Good_description" xml:space="preserve">
     <value />
   </data>
   <data name="Neutral_label" xml:space="preserve">
     <value>Neutral</value>
   </data>
-  <data name="Neutral_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Neutral_description" xml:space="preserve">
     <value />
   </data>
   <data name="Bad_label" xml:space="preserve">
     <value>Bad</value>
   </data>
-  <data name="Bad_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Bad_description" xml:space="preserve">
     <value />
   </data>
   <data name="Archived_label" xml:space="preserve">
     <value>Archived</value>
   </data>
-  <data name="Archived_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Archived_description" xml:space="preserve">
     <value />
   </data>
   <data name="Deactivated_label" xml:space="preserve">
     <value>Deactivated</value>
   </data>
-  <data name="Deactivated_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Deactivated_description" xml:space="preserve">
     <value />
   </data>
   <data name="Active_label" xml:space="preserve">
     <value>Active</value>
   </data>
-  <data name="Active_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Active_description" xml:space="preserve">
     <value />
   </data>
   <data name="Output_label" xml:space="preserve">
     <value>Output</value>
   </data>
-  <data name="Output_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Output_description" xml:space="preserve">
     <value />
   </data>
   <data name="Input_label" xml:space="preserve">
     <value>Input</value>
   </data>
-  <data name="Input_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Input_description" xml:space="preserve">
     <value />
   </data>
   <data name="Calculation_label" xml:space="preserve">
     <value>Calculation</value>
   </data>
-  <data name="Calculation_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Calculation_description" xml:space="preserve">
     <value />
   </data>
   <data name="Info_label" xml:space="preserve">
     <value>Info</value>
   </data>
-  <data name="Info_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Info_description" xml:space="preserve">
     <value />
   </data>
   <data name="Warning_label" xml:space="preserve">
     <value>Warning</value>
   </data>
-  <data name="Warning_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Warning_description" xml:space="preserve">
     <value />
   </data>
   <data name="Error_label" xml:space="preserve">
     <value>Error</value>
   </data>
-  <data name="Error_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Error_description" xml:space="preserve">
     <value />
   </data>
   <data name="Fatal_label" xml:space="preserve">
     <value>Fatal</value>
   </data>
-  <data name="Fatal_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Fatal_description" xml:space="preserve">
     <value />
   </data>
   <data name="ActionRequired_label" xml:space="preserve">
     <value>Action Required</value>
   </data>
-  <data name="ActionRequired_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ActionRequired_description" xml:space="preserve">
     <value />
   </data>
   <data name="Note_label" xml:space="preserve">
     <value>Note</value>
   </data>
-  <data name="Note_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Note_description" xml:space="preserve">
     <value />
   </data>
 </root>

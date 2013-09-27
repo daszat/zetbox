@@ -132,8 +132,7 @@
   <data name="ConnectionStringKey_label" xml:space="preserve">
     <value>Connection String Key for Destination</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ConnectionStringKey_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ConnectionStringKey_description" xml:space="preserve">
     <value />
   </data>
   <data name="CreatedBy_label" xml:space="preserve">
@@ -151,7 +150,7 @@
   <data name="Description_label" xml:space="preserve">
     <value>Description</value>
   </data>
-  <data name="Description_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Description_description" xml:space="preserve">
     <value />
   </data>
   <data name="ExportGuid_label" xml:space="preserve">
@@ -163,25 +162,25 @@
   <data name="MigrationProject_label" xml:space="preserve">
     <value>Project</value>
   </data>
-  <data name="MigrationProject_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="MigrationProject_description" xml:space="preserve">
     <value />
   </data>
   <data name="OriginConnectionStringKey_label" xml:space="preserve">
     <value>Connection String Key for Origin</value>
   </data>
-  <data name="OriginConnectionStringKey_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="OriginConnectionStringKey_description" xml:space="preserve">
     <value />
   </data>
   <data name="Schema_label" xml:space="preserve">
     <value>Schema in Destination</value>
   </data>
-  <data name="Schema_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Schema_description" xml:space="preserve">
     <value />
   </data>
   <data name="SourceTables_label" xml:space="preserve">
     <value>Tables</value>
   </data>
-  <data name="SourceTables_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="SourceTables_description" xml:space="preserve">
     <value />
   </data>
 </root>

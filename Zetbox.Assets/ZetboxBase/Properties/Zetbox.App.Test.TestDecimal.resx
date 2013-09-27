@@ -120,20 +120,19 @@
   <data name="Large_label" xml:space="preserve">
     <value>Large</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Large_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Large_description" xml:space="preserve">
     <value />
   </data>
   <data name="NoScale_label" xml:space="preserve">
     <value>NoScale</value>
   </data>
-  <data name="NoScale_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="NoScale_description" xml:space="preserve">
     <value />
   </data>
   <data name="SmallDecimal_label" xml:space="preserve">
     <value>SmallDecimal</value>
   </data>
-  <data name="SmallDecimal_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="SmallDecimal_description" xml:space="preserve">
     <value />
   </data>
 </root>

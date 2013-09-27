@@ -126,8 +126,7 @@
   <data name="GetDescription(retVal)_label" xml:space="preserve">
     <value>retVal</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="GetDescription(retVal)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetDescription(retVal)_description" xml:space="preserve">
     <value />
   </data>
   <data name="GetElementTypeString_label" xml:space="preserve">
@@ -139,25 +138,25 @@
   <data name="GetElementTypeString(result)_label" xml:space="preserve">
     <value>result</value>
   </data>
-  <data name="GetElementTypeString(result)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetElementTypeString(result)_description" xml:space="preserve">
     <value />
   </data>
   <data name="GetLabel_label" xml:space="preserve">
     <value>GetLabel</value>
   </data>
-  <data name="GetLabel_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetLabel_description" xml:space="preserve">
     <value />
   </data>
   <data name="GetLabel(retVal)_label" xml:space="preserve">
     <value>retVal</value>
   </data>
-  <data name="GetLabel(retVal)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetLabel(retVal)_description" xml:space="preserve">
     <value />
   </data>
   <data name="GetName_label" xml:space="preserve">
     <value>GetName</value>
   </data>
-  <data name="GetName_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetName_description" xml:space="preserve">
     <value />
   </data>
   <data name="GetName(name)_label" xml:space="preserve">
@@ -175,7 +174,7 @@
   <data name="GetPropertyType(ReturnParameter)_label" xml:space="preserve">
     <value>ReturnParameter</value>
   </data>
-  <data name="GetPropertyType(ReturnParameter)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetPropertyType(ReturnParameter)_description" xml:space="preserve">
     <value />
   </data>
   <data name="GetPropertyTypeString_label" xml:space="preserve">
@@ -187,7 +186,7 @@
   <data name="GetPropertyTypeString(ReturnParameter)_label" xml:space="preserve">
     <value>ReturnParameter</value>
   </data>
-  <data name="GetPropertyTypeString(ReturnParameter)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetPropertyTypeString(ReturnParameter)_description" xml:space="preserve">
     <value />
   </data>
 </root>

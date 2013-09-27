@@ -132,8 +132,7 @@
   <data name="Constraints_label" xml:space="preserve">
     <value>Constraints</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Constraints_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Constraints_description" xml:space="preserve">
     <value />
   </data>
   <data name="CreatedBy_label" xml:space="preserve">
@@ -205,19 +204,19 @@
   <data name="ShowIconInLists_label" xml:space="preserve">
     <value>Show icon in lists</value>
   </data>
-  <data name="ShowIconInLists_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ShowIconInLists_description" xml:space="preserve">
     <value />
   </data>
   <data name="ShowIdInLists_label" xml:space="preserve">
     <value>ShowIdInLists</value>
   </data>
-  <data name="ShowIdInLists_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ShowIdInLists_description" xml:space="preserve">
     <value />
   </data>
   <data name="ShowNameInLists_label" xml:space="preserve">
     <value>ShowNameInLists</value>
   </data>
-  <data name="ShowNameInLists_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="ShowNameInLists_description" xml:space="preserve">
     <value />
   </data>
 </root>

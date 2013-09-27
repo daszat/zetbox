@@ -162,8 +162,7 @@
   <data name="Label_label" xml:space="preserve">
     <value>Label</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Label_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Label_description" xml:space="preserve">
     <value />
   </data>
   <data name="Name_label" xml:space="preserve">

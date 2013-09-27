@@ -186,8 +186,7 @@
   <data name="FilterConfiguration_label" xml:space="preserve">
     <value>FilterConfiguration</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="FilterConfiguration_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="FilterConfiguration_description" xml:space="preserve">
     <value />
   </data>
   <data name="Label_label" xml:space="preserve">
@@ -223,7 +222,7 @@
   <data name="RequestedWidth_label" xml:space="preserve">
     <value>Requested width</value>
   </data>
-  <data name="RequestedWidth_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="RequestedWidth_description" xml:space="preserve">
     <value />
   </data>
   <data name="ValueModelDescriptor_label" xml:space="preserve">

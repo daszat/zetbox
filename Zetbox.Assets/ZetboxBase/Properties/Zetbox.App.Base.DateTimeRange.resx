@@ -120,20 +120,19 @@
   <data name="From_label" xml:space="preserve">
     <value>From</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="From_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="From_description" xml:space="preserve">
     <value />
   </data>
   <data name="Thru_label" xml:space="preserve">
     <value>Thru</value>
   </data>
-  <data name="Thru_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Thru_description" xml:space="preserve">
     <value />
   </data>
   <data name="TotalDays_label" xml:space="preserve">
     <value>Total days</value>
   </data>
-  <data name="TotalDays_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="TotalDays_description" xml:space="preserve">
     <value />
   </data>
 </root>

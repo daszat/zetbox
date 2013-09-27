@@ -120,14 +120,13 @@
   <data name="AInt_label" xml:space="preserve">
     <value>A Integer</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="AInt_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="AInt_description" xml:space="preserve">
     <value />
   </data>
   <data name="AString_label" xml:space="preserve">
     <value>A String</value>
   </data>
-  <data name="AString_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="AString_description" xml:space="preserve">
     <value />
   </data>
 </root>

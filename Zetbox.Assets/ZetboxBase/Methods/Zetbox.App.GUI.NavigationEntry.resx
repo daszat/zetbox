@@ -120,20 +120,19 @@
   <data name="GetDefaultViewModel_label" xml:space="preserve">
     <value>GetDefaultViewModel</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="GetDefaultViewModel_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetDefaultViewModel_description" xml:space="preserve">
     <value />
   </data>
   <data name="GetDefaultViewModel(retVal)_label" xml:space="preserve">
     <value>retVal</value>
   </data>
-  <data name="GetDefaultViewModel(retVal)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetDefaultViewModel(retVal)_description" xml:space="preserve">
     <value />
   </data>
   <data name="GetDefaultViewModel(dataCtx)_label" xml:space="preserve">
     <value>dataCtx</value>
   </data>
-  <data name="GetDefaultViewModel(dataCtx)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetDefaultViewModel(dataCtx)_description" xml:space="preserve">
     <value />
   </data>
   <data name="GetDefaultViewModel(parent)_label" xml:space="preserve">

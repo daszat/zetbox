@@ -132,8 +132,7 @@
   <data name="Comment_label" xml:space="preserve">
     <value>Comment</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Comment_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Comment_description" xml:space="preserve">
     <value />
   </data>
   <data name="CompareNulls_label" xml:space="preserve">
@@ -157,25 +156,25 @@
   <data name="DbType_label" xml:space="preserve">
     <value>DbType</value>
   </data>
-  <data name="DbType_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="DbType_description" xml:space="preserve">
     <value />
   </data>
   <data name="Description_label" xml:space="preserve">
     <value>Description</value>
   </data>
-  <data name="Description_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Description_description" xml:space="preserve">
     <value />
   </data>
   <data name="DestinationProperty_label" xml:space="preserve">
     <value>DestinationProperty</value>
   </data>
-  <data name="DestinationProperty_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="DestinationProperty_description" xml:space="preserve">
     <value />
   </data>
   <data name="EnumEntries_label" xml:space="preserve">
     <value>EnumEntries</value>
   </data>
-  <data name="EnumEntries_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="EnumEntries_description" xml:space="preserve">
     <value />
   </data>
   <data name="ExportGuid_label" xml:space="preserve">
@@ -187,43 +186,43 @@
   <data name="IsNullable_label" xml:space="preserve">
     <value>IsNullable</value>
   </data>
-  <data name="IsNullable_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="IsNullable_description" xml:space="preserve">
     <value />
   </data>
   <data name="Name_label" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="Name_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Name_description" xml:space="preserve">
     <value />
   </data>
   <data name="References_label" xml:space="preserve">
     <value>References</value>
   </data>
-  <data name="References_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="References_description" xml:space="preserve">
     <value />
   </data>
   <data name="Referers_label" xml:space="preserve">
     <value>Referers</value>
   </data>
-  <data name="Referers_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Referers_description" xml:space="preserve">
     <value />
   </data>
   <data name="Size_label" xml:space="preserve">
     <value>Size</value>
   </data>
-  <data name="Size_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Size_description" xml:space="preserve">
     <value />
   </data>
   <data name="SourceTable_label" xml:space="preserve">
     <value>SourceTable</value>
   </data>
-  <data name="SourceTable_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="SourceTable_description" xml:space="preserve">
     <value />
   </data>
   <data name="Status_label" xml:space="preserve">
     <value>Status</value>
   </data>
-  <data name="Status_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Status_description" xml:space="preserve">
     <value />
   </data>
 </root>

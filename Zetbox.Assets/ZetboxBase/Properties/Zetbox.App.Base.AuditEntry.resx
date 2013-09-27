@@ -132,14 +132,13 @@
   <data name="NewValue_label" xml:space="preserve">
     <value>NewValue</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="NewValue_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="NewValue_description" xml:space="preserve">
     <value />
   </data>
   <data name="OldValue_label" xml:space="preserve">
     <value>OldValue</value>
   </data>
-  <data name="OldValue_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="OldValue_description" xml:space="preserve">
     <value />
   </data>
   <data name="PropertyName_label" xml:space="preserve">

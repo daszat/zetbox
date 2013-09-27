@@ -150,14 +150,13 @@
   <data name="GetInheritedMethods(Result)_label" xml:space="preserve">
     <value>Result</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="GetInheritedMethods(Result)_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetInheritedMethods(Result)_description" xml:space="preserve">
     <value />
   </data>
   <data name="GetName_label" xml:space="preserve">
     <value>GetName</value>
   </data>
-  <data name="GetName_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="GetName_description" xml:space="preserve">
     <value />
   </data>
   <data name="GetName(name)_label" xml:space="preserve">

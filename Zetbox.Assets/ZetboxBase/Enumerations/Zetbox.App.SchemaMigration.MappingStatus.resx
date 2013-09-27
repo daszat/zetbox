@@ -120,26 +120,25 @@
   <data name="CustomSource_label" xml:space="preserve">
     <value>CustomSource</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="CustomSource_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="CustomSource_description" xml:space="preserve">
     <value />
   </data>
   <data name="Ignored_label" xml:space="preserve">
     <value>Ignored</value>
   </data>
-  <data name="Ignored_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Ignored_description" xml:space="preserve">
     <value />
   </data>
   <data name="Mapped_label" xml:space="preserve">
     <value>Mapped</value>
   </data>
-  <data name="Mapped_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Mapped_description" xml:space="preserve">
     <value />
   </data>
   <data name="Questions_label" xml:space="preserve">
     <value>Questions</value>
   </data>
-  <data name="Questions_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Questions_description" xml:space="preserve">
     <value />
   </data>
 </root>

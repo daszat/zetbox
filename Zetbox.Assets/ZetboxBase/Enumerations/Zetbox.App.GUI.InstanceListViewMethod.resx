@@ -120,14 +120,13 @@
   <data name="List_label" xml:space="preserve">
     <value>List</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="List_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="List_description" xml:space="preserve">
     <value />
   </data>
   <data name="Details_label" xml:space="preserve">
     <value>Details</value>
   </data>
-  <data name="Details_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Details_description" xml:space="preserve">
     <value />
   </data>
 </root>

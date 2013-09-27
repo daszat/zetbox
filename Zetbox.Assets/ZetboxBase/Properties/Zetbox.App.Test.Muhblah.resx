@@ -120,56 +120,55 @@
   <data name="StringCollection_label" xml:space="preserve">
     <value>StringCollection</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="StringCollection_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="StringCollection_description" xml:space="preserve">
     <value />
   </data>
   <data name="TestBool_label" xml:space="preserve">
     <value>TestBool</value>
   </data>
-  <data name="TestBool_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="TestBool_description" xml:space="preserve">
     <value />
   </data>
   <data name="TestCustomObjects_List_Nav_label" xml:space="preserve">
     <value>TestCustomObjects_List_Nav</value>
   </data>
-  <data name="TestCustomObjects_List_Nav_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="TestCustomObjects_List_Nav_description" xml:space="preserve">
     <value />
   </data>
   <data name="TestCustomObjects_ManyList_Nav_label" xml:space="preserve">
     <value>TestCustomObjects_ManyList_Nav</value>
   </data>
-  <data name="TestCustomObjects_ManyList_Nav_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="TestCustomObjects_ManyList_Nav_description" xml:space="preserve">
     <value />
   </data>
   <data name="TestCustomObjects_Nav_label" xml:space="preserve">
     <value>TestCustomObjects_Nav</value>
   </data>
-  <data name="TestCustomObjects_Nav_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="TestCustomObjects_Nav_description" xml:space="preserve">
     <value />
   </data>
   <data name="TestCustomObjects_One_Nav_label" xml:space="preserve">
     <value>TestCustomObjects_One_Nav</value>
   </data>
-  <data name="TestCustomObjects_One_Nav_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="TestCustomObjects_One_Nav_description" xml:space="preserve">
     <value />
   </data>
   <data name="TestDateTime_label" xml:space="preserve">
     <value>TestDateTime</value>
   </data>
-  <data name="TestDateTime_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="TestDateTime_description" xml:space="preserve">
     <value />
   </data>
   <data name="TestEnum_label" xml:space="preserve">
     <value>TestEnum</value>
   </data>
-  <data name="TestEnum_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="TestEnum_description" xml:space="preserve">
     <value />
   </data>
   <data name="TestString_label" xml:space="preserve">
     <value>TestString</value>
   </data>
-  <data name="TestString_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="TestString_description" xml:space="preserve">
     <value />
   </data>
 </root>

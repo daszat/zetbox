@@ -120,14 +120,13 @@
   <data name="NEnds_label" xml:space="preserve">
     <value>NEnds</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="NEnds_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="NEnds_description" xml:space="preserve">
     <value />
   </data>
   <data name="SomeInt_label" xml:space="preserve">
     <value>SomeInt</value>
   </data>
-  <data name="SomeInt_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="SomeInt_description" xml:space="preserve">
     <value />
   </data>
 </root>
