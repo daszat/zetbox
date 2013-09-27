@@ -269,7 +269,7 @@ namespace Zetbox.DalProvider.Ef
                             var curIdx = GetIndexProperty(_orderedItems[i]);
                             if (!curIdx.HasValue) continue;
 
-                            if (curIdx.Value < idx)
+                            if (idx < curIdx.Value)
                             {
                                 targetIdx = i;
                                 break;
@@ -432,7 +432,7 @@ namespace Zetbox.DalProvider.Ef
                 }
             }
 
-            UpdateIndexProperty(item, index);
+            UpdateIndexProperty(item, dbIndex);
             underlyingCollection.Add(impl);
 
             NotifyItemChanged(impl);
