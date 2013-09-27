@@ -705,7 +705,9 @@ namespace Zetbox.API.Server
             var blob = (Zetbox.App.Base.Blob)this.CreateInternal(iftFactory(typeof(Zetbox.App.Base.Blob)));
             blob.OriginalName = filename;
             blob.MimeType = mimetype;
-            blob.StoragePath = this.Internals().StoreBlobStream(s, blob.ExportGuid, DateTime.Today /* but should be blob.CreatedOn. Around midnight the path may differ */, filename);
+            blob.StoragePath = this.Internals()
+                .StoreBlobStream(s, blob.ExportGuid, DateTime.Today /* but should be blob.CreatedOn. Around midnight the path may differ */, filename)
+                .ToUniversalPath();
 
             return blob.ID;
         }

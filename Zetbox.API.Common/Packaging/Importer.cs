@@ -367,7 +367,9 @@ namespace Zetbox.App.Packaging
                     var blob = (Blob)obj;
                     using (var stream = s.GetBlob(blob.ExportGuid))
                     {
-                        blob.StoragePath = ctx.Internals().StoreBlobStream(stream, blob.ExportGuid, blob.CreatedOn, blob.OriginalName);
+                        blob.StoragePath = ctx.Internals()
+                            .StoreBlobStream(stream, blob.ExportGuid, blob.CreatedOn, blob.OriginalName)
+                            .ToUniversalPath();
                     }
                 }
 

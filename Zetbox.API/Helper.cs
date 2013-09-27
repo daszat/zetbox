@@ -181,6 +181,19 @@ namespace Zetbox.API
             return result;
         }
 
+        public static string ToUniversalPath(this string path)
+        {
+            if(path == null) return null;
+            return path.Replace('/', '\\');
+        }
+
+        public static string ToLocalPath(this string path)
+        {
+            if (path == null) return null;
+            if (Path.DirectorySeparatorChar == '\\') return path;
+            return path.Replace('\\', Path.DirectorySeparatorChar);
+        }
+
         public static ZbTask TriggerFetch<TObject, TProperty>(this TObject obj, Expression<Func<TObject, TProperty>> property)
             where TObject : IDataObject
         {

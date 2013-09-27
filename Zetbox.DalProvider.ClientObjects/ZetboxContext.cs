@@ -1123,7 +1123,7 @@ namespace Zetbox.DalProvider.Client
             return new ZbTask<FileInfo>(blobTask)
                 .ContinueWith(t =>
                 {
-                    string path = Path.Combine(DocumentCache, blobTask.Result.StoragePath);
+                    string path = Path.Combine(DocumentCache, blobTask.Result.StoragePath.ToLocalPath());
                     if (path.Length >= 256)
                     {
                         var dir = Path.GetDirectoryName(path);
