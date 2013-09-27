@@ -331,7 +331,14 @@ namespace Zetbox.DalProvider.Ef
         #region ICollection Overrides
         public override void Add(TInterface item)
         {
-            UpdateIndexProperty(item, GetIndexProperty(_orderedItems.Last()).Value + 1);
+            if (_orderedItems.Count == 0)
+            {
+                UpdateIndexProperty(item, 0);
+            }
+            else
+            {
+                UpdateIndexProperty(item, GetIndexProperty(_orderedItems.Last()).Value + 1);
+            }
             base.Add(item);
         }
 
