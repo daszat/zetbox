@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-07-26T12:45:11Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-09-09T11:32:28.58944Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -4263,7 +4263,7 @@ public static void isValid_WorkSchedule(WorkScheduleSyncProvider obj, PropertyIs
   <ZetboxBase:Method ExportGuid="cbb06469-f6fb-4e2e-a434-7f91cdb8c09a">
     <ZetboxBase:ChangedOn>2013-02-20T08:39:56.594562Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetNewEventViewModels(CalendarBook obj)
+public static void GetNewEventViewModels(CalendarBook obj, System.Object args)
 {
 }
 
@@ -4342,7 +4342,7 @@ public static void ScheduleSyncNowCanExecReason(SyncProvider obj, MethodReturnEv
   <ZetboxBase:Method ExportGuid="79e9a145-8d0d-400c-a3b8-875c9bda44e8">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetOffDays(WorkSchedule obj)
+public static void GetOffDays(WorkSchedule obj, MethodReturnEventArgs&lt;int&gt; e, DateTime until, DateTime from)
 {
 }
 
@@ -4366,7 +4366,7 @@ public static void GetOffDaysCanExecReason(WorkSchedule obj, MethodReturnEventAr
   <ZetboxBase:Method ExportGuid="1e9a4f60-a4ec-41ae-9f1e-bb80bbe70bc3">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetWorkingDays(WorkSchedule obj)
+public static void GetWorkingDays(WorkSchedule obj, MethodReturnEventArgs&lt;int&gt; e, DateTime until, DateTime from)
 {
 }
 
@@ -4390,7 +4390,7 @@ public static void GetWorkingDaysCanExecReason(WorkSchedule obj, MethodReturnEve
   <ZetboxBase:Method ExportGuid="bb7592bc-26e6-463f-a806-91f56dc9fa6e">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetWorkingHours(WorkSchedule obj)
+public static void GetWorkingHours(WorkSchedule obj, MethodReturnEventArgs&lt;decimal&gt; e, DateTime until, DateTime from)
 {
 }
 
@@ -4415,7 +4415,7 @@ public static void GetWorkingHoursCanExecReason(WorkSchedule obj, MethodReturnEv
     <ZetboxBase:CategoryTags>Hidden</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void AppliesTo(WorkScheduleRule obj)
+public static void AppliesTo(WorkScheduleRule obj, MethodReturnEventArgs&lt;bool&gt; e, DateTime date)
 {
 }
 
@@ -6323,7 +6323,7 @@ public static void ExtractTextCanExecReason(File obj, MethodReturnEventArgs&lt;s
   <ZetboxBase:Method ExportGuid="197e0cfb-34db-4dfa-bde8-29e7e847be99">
     <ZetboxBase:ChangedOn>2013-07-23T07:10:24.284219Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void HandleBlobChange(File obj)
+public static void HandleBlobChange(File obj, MethodReturnEventArgs&lt;Zetbox.App.Base.Blob&gt; e, Zetbox.App.Base.Blob newBlob, Zetbox.App.Base.Blob oldBlob)
 {
 }
 
@@ -6401,7 +6401,7 @@ public static void UploadCanExecReason(File obj, MethodReturnEventArgs&lt;string
     <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void MakeDocument(ImportedFile obj)
+public static void MakeDocument(ImportedFile obj, MethodReturnEventArgs&lt;at.dasz.DocumentManagement.Document&gt; e)
 {
 }
 
@@ -6427,7 +6427,7 @@ public static void MakeDocumentCanExecReason(ImportedFile obj, MethodReturnEvent
     <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void MakeDynamicFile(ImportedFile obj)
+public static void MakeDynamicFile(ImportedFile obj, MethodReturnEventArgs&lt;at.dasz.DocumentManagement.DynamicFile&gt; e)
 {
 }
 
@@ -6451,7 +6451,7 @@ public static void MakeDynamicFileCanExecReason(ImportedFile obj, MethodReturnEv
   <ZetboxBase:Method ExportGuid="e7bc5afb-bc19-4e9f-ad0b-e1e454414392">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void MakeStaticFile(ImportedFile obj)
+public static void MakeStaticFile(ImportedFile obj, MethodReturnEventArgs&lt;at.dasz.DocumentManagement.StaticFile&gt; e)
 {
 }
 

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-07-26T12:45:11Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-09-09T11:32:28.58944Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="a56d9701-d98e-49ab-bd49-a491d09e2d46">
     <ZetboxBase:ChangedOn>2011-08-06T08:30:47.664236Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
@@ -3518,7 +3518,7 @@ public static void RechnungErstellenCanExecReason(Auftrag obj, MethodReturnEvent
   <ZetboxBase:Method ExportGuid="447088b9-ea3e-4c72-b1fe-761d430c4003">
     <ZetboxBase:ChangedOn>2012-04-05T09:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void TestMethodForParameter(Mitarbeiter obj)
+public static void TestMethodForParameter(Mitarbeiter obj, MethodReturnEventArgs&lt;DateTime&gt; e, string TestString, Zetbox.App.Projekte.Auftrag TestObjectParameter, int TestInt, double TestDouble, DateTime TestDateTime, System.Guid TestCLRObjectParameter, bool TestBool)
 {
 }
 
@@ -3566,7 +3566,7 @@ public static void GetFulltextIndexBodyCanExecReason(Projekt obj, MethodReturnEv
   <ZetboxBase:Method ExportGuid="dbb73c2e-e751-4249-b63a-f4417c3177b4">
     <ZetboxBase:ChangedOn>2012-05-17T12:29:28.307352Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetSummaryReport(Projekt obj)
+public static void GetSummaryReport(Projekt obj, MethodReturnEventArgs&lt;System.Object&gt; e, Zetbox.App.Base.DateTimeRange range, string title)
 {
 }
 
@@ -11163,7 +11163,7 @@ public static void isValid_BString(TPHDerivedBObj obj, PropertyIsValidEventArgs 
   <ZetboxBase:Method ExportGuid="9e198988-498a-4936-8546-0a599b6cc613">
     <ZetboxBase:ChangedOn>2012-04-05T09:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void TestMethod(ITestInterface obj)
+public static void TestMethod(ITestInterface obj, DateTime DateTimeParam)
 {
 }
 
@@ -11238,7 +11238,7 @@ public static void Group2CanExecReason(MethodTest obj, MethodReturnEventArgs&lt;
     <ZetboxBase:CategoryTags>Objects</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2012-04-05T09:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void ObjParameter(MethodTest obj)
+public static void ObjParameter(MethodTest obj, Zetbox.App.Test.MethodTest objParam)
 {
 }
 
@@ -11263,7 +11263,7 @@ public static void ObjParameterCanExecReason(MethodTest obj, MethodReturnEventAr
     <ZetboxBase:CategoryTags>Objects</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2012-04-05T09:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void ObjRet(MethodTest obj)
+public static void ObjRet(MethodTest obj, MethodReturnEventArgs&lt;Zetbox.App.Test.MethodTest&gt; e)
 {
 }
 
@@ -11338,7 +11338,7 @@ public static void ServerMethodCanExecReason(MethodTest obj, MethodReturnEventAr
     <ZetboxBase:CategoryTags>Server</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-01-21T11:28:28.241554Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void ServerObjParameter(MethodTest obj)
+public static void ServerObjParameter(MethodTest obj, MethodReturnEventArgs&lt;Zetbox.App.Test.TestObjClass&gt; e, Zetbox.App.Test.TestObjClass input)
 {
 }
 
@@ -11387,7 +11387,7 @@ public static void ServerParameterlessCanExecReason(MethodTest obj, MethodReturn
   <ZetboxBase:Method ExportGuid="7901a41d-6ee0-4283-86fe-f19982464f73">
     <ZetboxBase:ChangedOn>2012-04-05T09:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void StringParameter(MethodTest obj)
+public static void StringParameter(MethodTest obj, string str)
 {
 }
 
@@ -11437,7 +11437,7 @@ public static void SummaryCanExecReason(MethodTest obj, MethodReturnEventArgs&lt
     <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2012-09-26T07:45:30.971203Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetNext(RecurrenceRuleTester obj)
+public static void GetNext(RecurrenceRuleTester obj, MethodReturnEventArgs&lt;DateTime&gt; e, DateTime? dt)
 {
 }
 
@@ -11461,7 +11461,7 @@ public static void GetNextCanExecReason(RecurrenceRuleTester obj, MethodReturnEv
   <ZetboxBase:Method ExportGuid="4d28b129-0786-4add-bddd-ff026c107f5e">
     <ZetboxBase:ChangedOn>2012-04-05T09:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void TestMethod(TestObjClass obj)
+public static void TestMethod(TestObjClass obj, DateTime DateTimeParamForTestMethod)
 {
 }
 

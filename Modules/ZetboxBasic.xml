@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-09-09T11:32:28Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-09-09T11:32:28.58944Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="84f486f7-19fe-49ad-8e4a-6c05089e7684">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.650235Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
@@ -8249,7 +8249,7 @@ public static void isValid_IsCurrentYearDefault(YearFilterConfiguration obj, Pro
   <ZetboxBase:Method ExportGuid="1c141538-b6fc-40a4-adf7-3c4ab438702c">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetName(ControlKind obj)
+public static void GetName(ControlKind obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 
@@ -8272,7 +8272,7 @@ public static void GetNameCanExecReason(ControlKind obj, MethodReturnEventArgs&l
   <ZetboxBase:Method ExportGuid="a12f2c17-a60c-4045-a4a1-220a79033cc5">
     <ZetboxBase:ChangedOn>2012-07-30T23:08:13.673876Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void CreateFilterModel(FilterConfiguration obj)
+public static void CreateFilterModel(FilterConfiguration obj, MethodReturnEventArgs&lt;Zetbox.API.IFilterModel&gt; e, Zetbox.API.IZetboxContext ctx)
 {
 }
 
@@ -8295,7 +8295,7 @@ public static void CreateFilterModelCanExecReason(FilterConfiguration obj, Metho
   <ZetboxBase:Method ExportGuid="b43fba73-38eb-47ac-9274-5c97929a18da">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetLabel(FilterConfiguration obj)
+public static void GetLabel(FilterConfiguration obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 
@@ -8318,7 +8318,7 @@ public static void GetLabelCanExecReason(FilterConfiguration obj, MethodReturnEv
   <ZetboxBase:Method ExportGuid="49d784e1-c879-4041-832a-73daf7f3afc7">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetName(Icon obj)
+public static void GetName(Icon obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 
@@ -8387,7 +8387,7 @@ public static void UploadCanExecReason(Icon obj, MethodReturnEventArgs&lt;string
   <ZetboxBase:Method ExportGuid="4871f987-0022-4c79-a773-aa669b9d8d04">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void ChooseObject(IRenderer obj)
+public static void ChooseObject(IRenderer obj, MethodReturnEventArgs&lt;Zetbox.API.IDataObject&gt; e, System.Type objectType, Zetbox.API.IZetboxContext ctx)
 {
 }
 
@@ -8411,7 +8411,7 @@ public static void ChooseObjectCanExecReason(IRenderer obj, MethodReturnEventArg
   <ZetboxBase:Method ExportGuid="033f91ab-9870-466c-a403-e7430d777f30">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void ShowMessage(IRenderer obj)
+public static void ShowMessage(IRenderer obj, string message)
 {
 }
 
@@ -8435,7 +8435,7 @@ public static void ShowMessageCanExecReason(IRenderer obj, MethodReturnEventArgs
   <ZetboxBase:Method ExportGuid="9225943b-38fb-45f1-a9a8-68a0b6f7e2c7">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void ShowObject(IRenderer obj)
+public static void ShowObject(IRenderer obj, Zetbox.API.IDataObject obj)
 {
 }
 
@@ -8459,7 +8459,7 @@ public static void ShowObjectCanExecReason(IRenderer obj, MethodReturnEventArgs&
   <ZetboxBase:Method ExportGuid="65367ab3-ab6a-41d9-a13c-c8605b9fc233">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetDefaultViewModel(NavigationEntry obj)
+public static void GetDefaultViewModel(NavigationEntry obj, MethodReturnEventArgs&lt;System.Object&gt; e, System.Object parent, Zetbox.API.IZetboxContext dataCtx)
 {
 }
 
@@ -8508,7 +8508,7 @@ public static void RebuildCanExecReason(TagCache obj, MethodReturnEventArgs&lt;s
   <ZetboxBase:Method ExportGuid="80e69c37-0297-4d0c-be08-158ab7a919ff">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void PrepareDefault(Template obj)
+public static void PrepareDefault(Template obj, Zetbox.App.Base.ObjectClass cls)
 {
 }
 
@@ -8532,7 +8532,7 @@ public static void PrepareDefaultCanExecReason(Template obj, MethodReturnEventAr
   <ZetboxBase:Method ExportGuid="b39a072f-df4b-4be0-8ba7-5bd03ae1bc96">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetName(ViewModelDescriptor obj)
+public static void GetName(ViewModelDescriptor obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 
@@ -29117,7 +29117,7 @@ public static void isValid_IsList(ValueTypeProperty obj, PropertyIsValidEventArg
   <ZetboxBase:Method ExportGuid="73d02eaf-f1d2-4df1-85f6-03fbce26df70">
     <ZetboxBase:ChangedOn>2012-07-18T04:39:23.249996Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetObject(AnyReference obj)
+public static void GetObject(AnyReference obj, MethodReturnEventArgs&lt;Zetbox.API.IDataObject&gt; e, Zetbox.API.IZetboxContext ctx)
 {
 }
 
@@ -29141,7 +29141,7 @@ public static void GetObjectCanExecReason(AnyReference obj, MethodReturnEventArg
   <ZetboxBase:Method ExportGuid="e60510a5-6429-44dd-af29-e59176609495">
     <ZetboxBase:ChangedOn>2013-04-18T09:17:32.653612Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void HasObject(AnyReference obj)
+public static void HasObject(AnyReference obj, MethodReturnEventArgs&lt;bool&gt; e)
 {
 }
 
@@ -29165,7 +29165,7 @@ public static void HasObjectCanExecReason(AnyReference obj, MethodReturnEventArg
   <ZetboxBase:Method ExportGuid="0e4a1674-727f-451f-80dc-970b75595a86">
     <ZetboxBase:ChangedOn>2012-07-18T02:51:34.127316Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void SetObject(AnyReference obj)
+public static void SetObject(AnyReference obj, Zetbox.API.IDataObject newObj)
 {
 }
 
@@ -29189,7 +29189,7 @@ public static void SetObjectCanExecReason(AnyReference obj, MethodReturnEventArg
   <ZetboxBase:Method ExportGuid="818507bf-73f7-4e57-9730-ba3c42ddc418">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void RegenerateTypeRefs(Assembly obj)
+public static void RegenerateTypeRefs(Assembly obj, MethodReturnEventArgs&lt;bool&gt; e)
 {
 }
 
@@ -29213,7 +29213,7 @@ public static void RegenerateTypeRefsCanExecReason(Assembly obj, MethodReturnEve
   <ZetboxBase:Method ExportGuid="11a126ed-5ffa-49d5-aa40-4925e3edf8c5">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetLabel(BaseParameter obj)
+public static void GetLabel(BaseParameter obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 
@@ -29236,7 +29236,7 @@ public static void GetLabelCanExecReason(BaseParameter obj, MethodReturnEventArg
   <ZetboxBase:Method ExportGuid="41b67886-d514-4ee3-949e-54a0aed86eac">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetParameterType(BaseParameter obj)
+public static void GetParameterType(BaseParameter obj, MethodReturnEventArgs&lt;System.Type&gt; e)
 {
 }
 
@@ -29260,7 +29260,7 @@ public static void GetParameterTypeCanExecReason(BaseParameter obj, MethodReturn
   <ZetboxBase:Method ExportGuid="32f8f8f2-6546-46ed-8f8a-c8c6ac11dc67">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetParameterTypeString(BaseParameter obj)
+public static void GetParameterTypeString(BaseParameter obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 
@@ -29284,7 +29284,7 @@ public static void GetParameterTypeStringCanExecReason(BaseParameter obj, Method
   <ZetboxBase:Method ExportGuid="29261fd2-02bc-47c1-a857-e0a79924ddd6">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetStream(Blob obj)
+public static void GetStream(Blob obj, MethodReturnEventArgs&lt;System.IO.Stream&gt; e)
 {
 }
 
@@ -29332,7 +29332,7 @@ public static void OpenCanExecReason(Blob obj, MethodReturnEventArgs&lt;string&g
   <ZetboxBase:Method ExportGuid="2056bc89-f6c6-4c27-96aa-12790af6fb24">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetErrorText(Constraint obj)
+public static void GetErrorText(Constraint obj, MethodReturnEventArgs&lt;string&gt; e, System.Object constrainedValue, System.Object constrainedObject)
 {
 }
 
@@ -29356,7 +29356,7 @@ public static void GetErrorTextCanExecReason(Constraint obj, MethodReturnEventAr
   <ZetboxBase:Method ExportGuid="869cbcce-c822-4b86-89ce-bcb11a7b2bb6">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void IsValid(Constraint obj)
+public static void IsValid(Constraint obj, MethodReturnEventArgs&lt;bool&gt; e, System.Object constrainedValue, System.Object constrainedObject)
 {
 }
 
@@ -29380,7 +29380,7 @@ public static void IsValidCanExecReason(Constraint obj, MethodReturnEventArgs&lt
   <ZetboxBase:Method ExportGuid="826c3b7c-c266-48cf-a715-5e39d675642c">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetDataType(DataType obj)
+public static void GetDataType(DataType obj, MethodReturnEventArgs&lt;System.Type&gt; e)
 {
 }
 
@@ -29404,7 +29404,7 @@ public static void GetDataTypeCanExecReason(DataType obj, MethodReturnEventArgs&
   <ZetboxBase:Method ExportGuid="615d770c-ede8-4f0a-bcca-a254c99da892">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetDataTypeString(DataType obj)
+public static void GetDataTypeString(DataType obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 
@@ -29452,7 +29452,7 @@ public static void ImplementInterfacesCanExecReason(DataType obj, MethodReturnEv
   <ZetboxBase:Method ExportGuid="26bb9056-c2da-41a3-84c5-bfa3c48d5644">
     <ZetboxBase:ChangedOn>2013-03-22T10:27:44.345251Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void AddTo(DateTimeOffset obj)
+public static void AddTo(DateTimeOffset obj, MethodReturnEventArgs&lt;DateTime&gt; e, DateTime dt)
 {
 }
 
@@ -29477,7 +29477,7 @@ public static void AddToCanExecReason(DateTimeOffset obj, MethodReturnEventArgs&
   <ZetboxBase:Method ExportGuid="12fcac40-6f16-49d8-9df6-23a42a4f6dee">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetDefaultValue(DefaultPropertyValue obj)
+public static void GetDefaultValue(DefaultPropertyValue obj, MethodReturnEventArgs&lt;System.Object&gt; e)
 {
 }
 
@@ -29501,7 +29501,7 @@ public static void GetDefaultValueCanExecReason(DefaultPropertyValue obj, Method
   <ZetboxBase:Method ExportGuid="81b81495-4256-47e8-8c76-c27b07d29304">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetEntryByName(Enumeration obj)
+public static void GetEntryByName(Enumeration obj, MethodReturnEventArgs&lt;Zetbox.App.Base.EnumerationEntry&gt; e, string name)
 {
 }
 
@@ -29524,7 +29524,7 @@ public static void GetEntryByNameCanExecReason(Enumeration obj, MethodReturnEven
   <ZetboxBase:Method ExportGuid="20a1fe04-4922-476a-b0e6-46f19df8dd69">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetEntryByValue(Enumeration obj)
+public static void GetEntryByValue(Enumeration obj, MethodReturnEventArgs&lt;Zetbox.App.Base.EnumerationEntry&gt; e, int val)
 {
 }
 
@@ -29547,7 +29547,7 @@ public static void GetEntryByValueCanExecReason(Enumeration obj, MethodReturnEve
   <ZetboxBase:Method ExportGuid="978080e5-1b3b-4ea7-b6be-565f1e6d6816">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetLabelByName(Enumeration obj)
+public static void GetLabelByName(Enumeration obj, MethodReturnEventArgs&lt;string&gt; e, string name)
 {
 }
 
@@ -29570,7 +29570,7 @@ public static void GetLabelByNameCanExecReason(Enumeration obj, MethodReturnEven
   <ZetboxBase:Method ExportGuid="5fd175d3-9767-4515-87e2-20419d9a31a3">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetLabelByValue(Enumeration obj)
+public static void GetLabelByValue(Enumeration obj, MethodReturnEventArgs&lt;string&gt; e, int val)
 {
 }
 
@@ -29593,7 +29593,7 @@ public static void GetLabelByValueCanExecReason(Enumeration obj, MethodReturnEve
   <ZetboxBase:Method ExportGuid="f8a6c6b0-eb32-4883-a7f5-4b4049af2aab">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetLabel(EnumerationEntry obj)
+public static void GetLabel(EnumerationEntry obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 
@@ -29616,7 +29616,7 @@ public static void GetLabelCanExecReason(EnumerationEntry obj, MethodReturnEvent
   <ZetboxBase:Method ExportGuid="1650e45f-933c-42b7-b397-824ba8dc1608">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetName(Group obj)
+public static void GetName(Group obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 
@@ -29663,7 +29663,7 @@ public static void GetFulltextIndexBodyCanExecReason(ICustomFulltextFormat obj, 
   <ZetboxBase:Method ExportGuid="5305b463-31bd-4ee4-af9a-c93d2cd7af31">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetCodeTemplate(IInvocation obj)
+public static void GetCodeTemplate(IInvocation obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 
@@ -29686,7 +29686,7 @@ public static void GetCodeTemplateCanExecReason(IInvocation obj, MethodReturnEve
   <ZetboxBase:Method ExportGuid="ded38fac-122d-46a6-8000-9e67e3809b7b">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetName(INamedObject obj)
+public static void GetName(INamedObject obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 
@@ -29710,7 +29710,7 @@ public static void GetNameCanExecReason(INamedObject obj, MethodReturnEventArgs&
   <ZetboxBase:Method ExportGuid="3645a0d5-abb5-4e87-aec1-17ecaa9c1b5f">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetErrorText(InstanceConstraint obj)
+public static void GetErrorText(InstanceConstraint obj, MethodReturnEventArgs&lt;string&gt; e, Zetbox.API.IDataObject constrainedObject)
 {
 }
 
@@ -29733,7 +29733,7 @@ public static void GetErrorTextCanExecReason(InstanceConstraint obj, MethodRetur
   <ZetboxBase:Method ExportGuid="ec91627e-1ac4-492b-8f26-fa8acc105f33">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void IsValid(InstanceConstraint obj)
+public static void IsValid(InstanceConstraint obj, MethodReturnEventArgs&lt;bool&gt; e, Zetbox.API.IDataObject constrainedObject)
 {
 }
 
@@ -29756,7 +29756,7 @@ public static void IsValidCanExecReason(InstanceConstraint obj, MethodReturnEven
   <ZetboxBase:Method ExportGuid="8cd99a2b-e12c-4fae-aabb-0edbd7213cd2">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetLabel(Method obj)
+public static void GetLabel(Method obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 
@@ -29779,7 +29779,7 @@ public static void GetLabelCanExecReason(Method obj, MethodReturnEventArgs&lt;st
   <ZetboxBase:Method ExportGuid="77a3d6b5-59d8-453c-85f6-5dcd704bd80c">
     <ZetboxBase:ChangedOn>2012-08-06T13:34:07.581649Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetName(Method obj)
+public static void GetName(Method obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 
@@ -29802,7 +29802,7 @@ public static void GetNameCanExecReason(Method obj, MethodReturnEventArgs&lt;str
   <ZetboxBase:Method ExportGuid="687f24ab-be66-4ac8-8d43-b033cf05455d">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetReturnParameter(Method obj)
+public static void GetReturnParameter(Method obj, MethodReturnEventArgs&lt;Zetbox.App.Base.BaseParameter&gt; e)
 {
 }
 
@@ -29826,7 +29826,7 @@ public static void GetReturnParameterCanExecReason(Method obj, MethodReturnEvent
   <ZetboxBase:Method ExportGuid="f856d06d-d642-4962-a7b0-3cc6f3c7e107">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetName(Module obj)
+public static void GetName(Module obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 
@@ -29849,7 +29849,7 @@ public static void GetNameCanExecReason(Module obj, MethodReturnEventArgs&lt;str
   <ZetboxBase:Method ExportGuid="babe68fe-d991-4fb8-8c75-fded8973484c">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void CreateMethod(ObjectClass obj)
+public static void CreateMethod(ObjectClass obj, MethodReturnEventArgs&lt;Zetbox.App.Base.Method&gt; e)
 {
 }
 
@@ -29873,7 +29873,7 @@ public static void CreateMethodCanExecReason(ObjectClass obj, MethodReturnEventA
   <ZetboxBase:Method ExportGuid="25b5656a-2b52-4c51-a635-7f49ca478552">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void CreateRelation(ObjectClass obj)
+public static void CreateRelation(ObjectClass obj, MethodReturnEventArgs&lt;Zetbox.App.Base.Relation&gt; e)
 {
 }
 
@@ -29897,7 +29897,7 @@ public static void CreateRelationCanExecReason(ObjectClass obj, MethodReturnEven
   <ZetboxBase:Method ExportGuid="9bf53e7a-3546-4a30-9446-ededdde3dbde">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetInheritedMethods(ObjectClass obj)
+public static void GetInheritedMethods(ObjectClass obj, MethodReturnEventArgs&lt;IEnumerable&lt;Zetbox.App.Base.Method&gt;&gt; e)
 {
 }
 
@@ -29921,7 +29921,7 @@ public static void GetInheritedMethodsCanExecReason(ObjectClass obj, MethodRetur
   <ZetboxBase:Method ExportGuid="171d4016-4373-471f-88e1-9f541ef62949">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetName(ObjectClass obj)
+public static void GetName(ObjectClass obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 
@@ -29944,7 +29944,7 @@ public static void GetNameCanExecReason(ObjectClass obj, MethodReturnEventArgs&l
   <ZetboxBase:Method ExportGuid="2e3df852-a5ef-499b-a294-1705be9177d9">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetIsList(ObjectReferenceProperty obj)
+public static void GetIsList(ObjectReferenceProperty obj, MethodReturnEventArgs&lt;bool&gt; e)
 {
 }
 
@@ -29992,7 +29992,7 @@ public static void GetDescriptionCanExecReason(Property obj, MethodReturnEventAr
   <ZetboxBase:Method ExportGuid="def3e6b9-de3b-4dcd-9b79-0af3f011a1c4">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetElementTypeString(Property obj)
+public static void GetElementTypeString(Property obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 
@@ -30016,7 +30016,7 @@ public static void GetElementTypeStringCanExecReason(Property obj, MethodReturnE
   <ZetboxBase:Method ExportGuid="de43445e-00eb-4614-b59f-2384e6dfa25a">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetLabel(Property obj)
+public static void GetLabel(Property obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 
@@ -30039,7 +30039,7 @@ public static void GetLabelCanExecReason(Property obj, MethodReturnEventArgs&lt;
   <ZetboxBase:Method ExportGuid="023eae25-17b2-421a-a9cc-5722e3697316">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetName(Property obj)
+public static void GetName(Property obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 
@@ -30062,7 +30062,7 @@ public static void GetNameCanExecReason(Property obj, MethodReturnEventArgs&lt;s
   <ZetboxBase:Method ExportGuid="b024fc8a-4e17-4212-acfe-94cc79bf35fd">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetPropertyType(Property obj)
+public static void GetPropertyType(Property obj, MethodReturnEventArgs&lt;System.Type&gt; e)
 {
 }
 
@@ -30086,7 +30086,7 @@ public static void GetPropertyTypeCanExecReason(Property obj, MethodReturnEventA
   <ZetboxBase:Method ExportGuid="a9c1a6ff-ddb2-41a5-9ad0-460b8adea977">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetPropertyTypeString(Property obj)
+public static void GetPropertyTypeString(Property obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 
@@ -30110,7 +30110,7 @@ public static void GetPropertyTypeStringCanExecReason(Property obj, MethodReturn
   <ZetboxBase:Method ExportGuid="625b45a8-79a3-4b73-b3eb-e68cef210d66">
     <ZetboxBase:ChangedOn>2012-09-26T07:39:39.928124Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetCurrent(RecurrenceRule obj)
+public static void GetCurrent(RecurrenceRule obj, MethodReturnEventArgs&lt;DateTime&gt; e, DateTime start)
 {
 }
 
@@ -30134,7 +30134,7 @@ public static void GetCurrentCanExecReason(RecurrenceRule obj, MethodReturnEvent
   <ZetboxBase:Method ExportGuid="a1c94de6-0523-40c8-8651-2cc14a3a836e">
     <ZetboxBase:ChangedOn>2012-09-26T07:39:01.407921Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetCurrent(RecurrenceRule obj)
+public static void GetCurrent(RecurrenceRule obj, MethodReturnEventArgs&lt;DateTime&gt; e, DateTime dt, DateTime start)
 {
 }
 
@@ -30158,7 +30158,7 @@ public static void GetCurrentCanExecReason(RecurrenceRule obj, MethodReturnEvent
   <ZetboxBase:Method ExportGuid="01781028-acda-4618-89a6-78256aa1a94b">
     <ZetboxBase:ChangedOn>2012-09-26T07:38:39.621675Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetNext(RecurrenceRule obj)
+public static void GetNext(RecurrenceRule obj, MethodReturnEventArgs&lt;DateTime&gt; e, DateTime dt, DateTime start)
 {
 }
 
@@ -30182,7 +30182,7 @@ public static void GetNextCanExecReason(RecurrenceRule obj, MethodReturnEventArg
   <ZetboxBase:Method ExportGuid="6236e4e7-799d-411b-aaab-328caf379f00">
     <ZetboxBase:ChangedOn>2012-09-26T07:39:39.928124Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetNext(RecurrenceRule obj)
+public static void GetNext(RecurrenceRule obj, MethodReturnEventArgs&lt;DateTime&gt; e, DateTime start)
 {
 }
 
@@ -30230,7 +30230,7 @@ public static void GetRelativeCanExecReason(RecurrenceRule obj, MethodReturnEven
   <ZetboxBase:Method ExportGuid="6869e3bd-d208-4c0f-b0f3-b305c2d669b4">
     <ZetboxBase:ChangedOn>2013-03-22T10:11:06.129156Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetWithinInterval(RecurrenceRule obj)
+public static void GetWithinInterval(RecurrenceRule obj, MethodReturnEventArgs&lt;IEnumerable&lt;DateTime&gt;&gt; e, DateTime until, DateTime from, DateTime start)
 {
 }
 
@@ -30255,7 +30255,7 @@ public static void GetWithinIntervalCanExecReason(RecurrenceRule obj, MethodRetu
     <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2012-09-26T07:45:30.971203Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetCurrent(RecurrenceRuleTester obj)
+public static void GetCurrent(RecurrenceRuleTester obj, MethodReturnEventArgs&lt;DateTime&gt; e, DateTime? dt)
 {
 }
 
@@ -30279,7 +30279,7 @@ public static void GetCurrentCanExecReason(RecurrenceRuleTester obj, MethodRetur
   <ZetboxBase:Method ExportGuid="a90343d9-8cad-4a32-901c-2d9c5a9e2ea1">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetEnd(Relation obj)
+public static void GetEnd(Relation obj, MethodReturnEventArgs&lt;Zetbox.App.Base.RelationEnd&gt; e, Zetbox.App.Base.ObjectReferenceProperty prop)
 {
 }
 
@@ -30302,7 +30302,7 @@ public static void GetEndCanExecReason(Relation obj, MethodReturnEventArgs&lt;st
   <ZetboxBase:Method ExportGuid="22aeace7-0e26-4312-a855-fb593b5b885f">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetEndFromRole(Relation obj)
+public static void GetEndFromRole(Relation obj, MethodReturnEventArgs&lt;Zetbox.App.Base.RelationEnd&gt; e, Zetbox.API.RelationEndRole role)
 {
 }
 
@@ -30325,7 +30325,7 @@ public static void GetEndFromRoleCanExecReason(Relation obj, MethodReturnEventAr
   <ZetboxBase:Method ExportGuid="f319f875-04be-46e5-a0b9-8b3ff1156d8a">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetEntryInterfaceType(Relation obj)
+public static void GetEntryInterfaceType(Relation obj, MethodReturnEventArgs&lt;Zetbox.API.InterfaceType&gt; e)
 {
 }
 
@@ -30348,7 +30348,7 @@ public static void GetEntryInterfaceTypeCanExecReason(Relation obj, MethodReturn
   <ZetboxBase:Method ExportGuid="1efa6a92-9b87-4895-97e0-bdfa5b23ba0c">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetOtherEnd(Relation obj)
+public static void GetOtherEnd(Relation obj, MethodReturnEventArgs&lt;Zetbox.App.Base.RelationEnd&gt; e, Zetbox.App.Base.RelationEnd relEnd)
 {
 }
 
@@ -30371,7 +30371,7 @@ public static void GetOtherEndCanExecReason(Relation obj, MethodReturnEventArgs&
   <ZetboxBase:Method ExportGuid="19c86409-7ac6-4df3-acea-81ea69968743">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetRelationType(Relation obj)
+public static void GetRelationType(Relation obj, MethodReturnEventArgs&lt;Zetbox.API.RelationType&gt; e)
 {
 }
 
@@ -30394,7 +30394,7 @@ public static void GetRelationTypeCanExecReason(Relation obj, MethodReturnEventA
   <ZetboxBase:Method ExportGuid="f6908fbe-3a3c-4a7a-9902-65d0d84c1efe">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void NeedsPositionStorage(Relation obj)
+public static void NeedsPositionStorage(Relation obj, MethodReturnEventArgs&lt;bool&gt; e, Zetbox.API.RelationEndRole endRole)
 {
 }
 
@@ -30440,7 +30440,7 @@ public static void SwapRelationEndsCanExecReason(Relation obj, MethodReturnEvent
   <ZetboxBase:Method ExportGuid="94a73f26-ed3d-4c4f-959f-28859d25018c">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void CreateNavigator(RelationEnd obj)
+public static void CreateNavigator(RelationEnd obj, MethodReturnEventArgs&lt;Zetbox.App.Base.ObjectReferenceProperty&gt; e)
 {
 }
 
@@ -30463,7 +30463,7 @@ public static void CreateNavigatorCanExecReason(RelationEnd obj, MethodReturnEve
   <ZetboxBase:Method ExportGuid="3efaa439-8bf4-4af0-abf6-0f3d8abbf128">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetName(Sequence obj)
+public static void GetName(Sequence obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 
@@ -30486,7 +30486,7 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
   <ZetboxBase:Method ExportGuid="f99da656-46fc-4846-8655-10f534a00102">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void AsType(TypeRef obj)
+public static void AsType(TypeRef obj, MethodReturnEventArgs&lt;System.Type&gt; e, bool throwOnError)
 {
 }
 
@@ -30510,7 +30510,7 @@ public static void AsTypeCanExecReason(TypeRef obj, MethodReturnEventArgs&lt;str
   <ZetboxBase:Method ExportGuid="ccf89050-d3c6-4987-8f32-892110c7758b">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void ToTypeName(TypeRef obj)
+public static void ToTypeName(TypeRef obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 
