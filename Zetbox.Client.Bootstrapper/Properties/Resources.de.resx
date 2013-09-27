@@ -112,16 +112,16 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Cleanup" xml:space="preserve">
     <value>Alte Dateien aufräumen</value>
   </data>
   <data name="ConnectionError" xml:space="preserve">
-    <value>Verbindungsfehler mit ZToolbox</value>
+    <value>Verbindungsfehler mit zetbox</value>
   </data>
   <data name="Deleting" xml:space="preserve">
     <value>Lösche {0}</value>
@@ -135,10 +135,13 @@
   <data name="LoadingFileinformation" xml:space="preserve">
     <value>Datei Informationen laden</value>
   </data>
+  <data name="MainWindowTitle" xml:space="preserve">
+    <value>zetbox wird geladen von {0}</value>
+  </data>
   <data name="NoAddressError" xml:space="preserve">
-    <value>Keine ZToolbox Adresse angegeben</value>
+    <value>Keine zetbox Adresse angegeben</value>
   </data>
   <data name="StartingZToolbox" xml:space="preserve">
-    <value>ZToolbox wird gestartet ...</value>
+    <value>zetbox wird gestartet ...</value>
   </data>
 </root>
