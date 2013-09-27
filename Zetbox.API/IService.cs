@@ -225,6 +225,7 @@ namespace Zetbox.API
 
         public void Enqueue(T item)
         {
+            if (_itemsEvent == null) return; // service was not started
             if (OnEnqueue(item))
             {
                 Log.InfoFormat("Adding '{0}' to queue", item);
