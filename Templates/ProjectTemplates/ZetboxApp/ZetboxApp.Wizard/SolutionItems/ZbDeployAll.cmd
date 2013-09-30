@@ -14,6 +14,8 @@ set config=%1
 
 call "ZbInstall.cmd" %config%
 
+pushd
+
 %windir%\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe /v:m /p:Configuration=Fallback $safesolutionname$.sln
 IF ERRORLEVEL 1 GOTO FAIL
 
@@ -22,18 +24,22 @@ cd bin\Debug
 Zetbox.Cli.exe %config% -fallback -deploy-update -generate -syncidentities
 IF ERRORLEVEL 1 GOTO FAIL
 
+cd ..\..
+
+%windir%\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe /v:m $safesolutionname$.sln
+IF ERRORLEVEL 1 GOTO FAIL
+
 echo ********************************************************************************
 echo ************************************ Success ***********************************
 echo ********************************************************************************
-cd ..\..
 GOTO EOF
 
 :FAIL
+popd
 echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX FAIL XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 echo                                  Aborting Deploy
-cd ..\..
 rem return error without closing parent shell
 echo A | choice /c:A /n
 
