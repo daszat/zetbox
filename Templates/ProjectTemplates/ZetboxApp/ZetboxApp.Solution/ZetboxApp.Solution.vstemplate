@@ -15,7 +15,6 @@
   </TemplateData>
   <TemplateContent>
     <ProjectCollection>
-      <ProjectTemplateLink ProjectName="$safeprojectname$.Bootstrapper">ZetboxApp.Bootstrapper\ZetboxApp.Bootstrapper.vstemplate</ProjectTemplateLink>
       <ProjectTemplateLink ProjectName="$safeprojectname$.Common">ZetboxApp.Common\ZetboxApp.Common.vstemplate</ProjectTemplateLink>
       <ProjectTemplateLink ProjectName="$safeprojectname$.Client">ZetboxApp.Client\ZetboxApp.Client.vstemplate</ProjectTemplateLink>
       <ProjectTemplateLink ProjectName="$safeprojectname$.Client.Tests">ZetboxApp.Client.Tests\ZetboxApp.Client.Tests.vstemplate</ProjectTemplateLink>

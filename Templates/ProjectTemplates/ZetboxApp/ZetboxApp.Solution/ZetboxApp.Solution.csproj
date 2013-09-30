@@ -76,8 +76,6 @@
     <None Include="ZetboxApp.Client.WPF\ClientWPFModule.cs" />
     <None Include="ZetboxApp.Client\AssemblyInfo.cs" />
     <None Include="ZetboxApp.Client\ClientModule.cs" />
-    <None Include="ZetboxApp.Bootstrapper\AssemblyInfo.cs" />
-    <None Include="ZetboxApp.Bootstrapper\Bootstrapper.cs" />
     <None Include="ZetboxApp.Client.Tests\AssemblyInfo.cs" />
     <None Include="ZetboxApp.Client.Tests\Integration\BasicTests.cs" />
     <None Include="ZetboxApp.WPF\AssemblyInfo.cs" />
@@ -129,15 +127,6 @@
   </ItemGroup>
   <ItemGroup>
     <VSTemplate Include="ZetboxApp.Client\ZetboxApp.Client.vstemplate" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ZetboxApp.Bootstrapper\ProjectTemplate.csproj">
-      <SubType>Designer</SubType>
-    </None>
-    <VSTemplate Include="ZetboxApp.Bootstrapper\ZetboxApp.Bootstrapper.vstemplate">
-      <SubType>Designer</SubType>
-    </VSTemplate>
-    <None Include="ZetboxApp.Bootstrapper\ZetboxApp.Bootstrapper.ico" />
   </ItemGroup>
   <ItemGroup>
     <VSTemplate Include="ZetboxApp.Server.Migrations\ZetboxApp.Server.Migrations.vstemplate" />
