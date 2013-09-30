@@ -16,7 +16,7 @@
       <Module>Zetbox.DalProvider.Memory.Generator.MemoryGeneratorProvider, Zetbox.DalProvider.Memory.Generator</Module>
       <Module>Zetbox.DalProvider.$ormapperclassname$.Generator.NHibernateGeneratorProvider, Zetbox.DalProvider.$ormapperclassname$.Generator</Module>
       <Module>Zetbox.DalProvider.Client.Generator.ClientGeneratorProvider, Zetbox.DalProvider.Client.Generator</Module>
-      <Module NotOnFallback="true">$safesolutionname$.Server.ServerModule, $safesolutionname$.Server</Module>
+      <Module>$safesolutionname$.Server.ServerModule, $safesolutionname$.Server</Module>
     </Modules>
     <ClientFilesLocations>
       <Location Name="Exe" Start="true">bin\Debug\$safesolutionname$.WPF.exe</Location>
@@ -25,13 +25,4 @@
       <Location Name="Client">bin\Debug\Client</Location>
     </ClientFilesLocations>
   </Server>
-  <AssemblySearchPaths EnableShadowCopy="true">
-    <string>Common\Core</string>
-    <string>Server\Core</string>
-    <string>Server\$ormappermodule$</string>
-    <string>Common\App.Zetbox</string>
-    <string>Server\App.Zetbox</string>
-    <string>Common\App.$safesolutionname$</string>
-    <string>Server\App.$safesolutionname$</string>
-  </AssemblySearchPaths>
 </ZetboxConfig>
