@@ -6,16 +6,16 @@ namespace $safeprojectname$.Integration
     using System.Linq;
     using System.Text;
     using NUnit.Framework;
-    using Zetbox.App.Base;
 
     public class BasicTests : Zetbox.API.AbstractConsumerTests.AbstractTestFixture
     {
         [Test]
         public void ConnectionTest()
         {
-            var ctx = GetContext();
-            var result = ctx.GetQuery<ObjectClass>().FirstOrDefault();
-            Assert.That(result, Is.Not.Null);
+            // TODO: uncomment this sample when the first zbResetAll was executed
+            // var ctx = GetContext();
+            // var result = ctx.GetQuery<Zetbox.App.Base.ObjectClass>().FirstOrDefault();
+            // Assert.That(result, Is.Not.Null);
         }
     }
 }
