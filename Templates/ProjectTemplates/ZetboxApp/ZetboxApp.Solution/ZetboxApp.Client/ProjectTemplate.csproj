@@ -49,19 +49,19 @@
       <HintPath>..\packages\log4net.2.0.0\lib\net35-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="MigraDoc.DocumentObjectModel, Version=1.32.3885.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\PDFsharp-MigraDoc-GDI-dasz.1.32.3883.0\lib\net35\MigraDoc.DocumentObjectModel.dll</HintPath>
+      <HintPath>..\packages\PDFsharp-MigraDoc-GDI-dasz.1.32.3886.0\lib\net35\MigraDoc.DocumentObjectModel.dll</HintPath>
     </Reference>
     <Reference Include="MigraDoc.Rendering, Version=1.32.3885.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\PDFsharp-MigraDoc-GDI-dasz.1.32.3883.0\lib\net35\MigraDoc.Rendering.dll</HintPath>
+      <HintPath>..\packages\PDFsharp-MigraDoc-GDI-dasz.1.32.3886.0\lib\net35\MigraDoc.Rendering.dll</HintPath>
     </Reference>
     <Reference Include="MigraDoc.RtfRendering, Version=1.32.3885.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\PDFsharp-MigraDoc-GDI-dasz.1.32.3883.0\lib\net35\MigraDoc.RtfRendering.dll</HintPath>
+      <HintPath>..\packages\PDFsharp-MigraDoc-GDI-dasz.1.32.3886.0\lib\net35\MigraDoc.RtfRendering.dll</HintPath>
     </Reference>
     <Reference Include="PdfSharp, Version=1.32.2608.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\PDFsharp-MigraDoc-GDI-dasz.1.32.3883.0\lib\net35\PdfSharp.dll</HintPath>
+      <HintPath>..\packages\PDFsharp-MigraDoc-GDI-dasz.1.32.3886.0\lib\net35\PdfSharp.dll</HintPath>
     </Reference>
     <Reference Include="PdfSharp.Charting, Version=1.32.2608.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\PDFsharp-MigraDoc-GDI-dasz.1.32.3883.0\lib\net35\PdfSharp.Charting.dll</HintPath>
+      <HintPath>..\packages\PDFsharp-MigraDoc-GDI-dasz.1.32.3886.0\lib\net35\PdfSharp.Charting.dll</HintPath>
     </Reference>
     <Reference Include="System"/>
     <Reference Include="System.Data"/>
@@ -70,16 +70,16 @@
     <Reference Include="Microsoft.CSharp"/>
     <Reference Include="WindowsBase" />
     <Reference Include="Zetbox.API">
-      <HintPath>..\packages\zetboxBasic-Common.1.0.4901.1\lib\net40\Zetbox.API.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic-Common.1.0.5718.1\lib\net40\Zetbox.API.dll</HintPath>
     </Reference>
     <Reference Include="Zetbox.API.Client">
-      <HintPath>..\packages\zetboxBasic-Client.1.0.4901.1\lib\net40\Zetbox.API.Client.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic-Client.1.0.5718.1\lib\net40\Zetbox.API.Client.dll</HintPath>
     </Reference>
     <Reference Include="Zetbox.API.Common">
-      <HintPath>..\packages\zetboxBasic-Common.1.0.4901.1\lib\net40\Zetbox.API.Common.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic-Common.1.0.5718.1\lib\net40\Zetbox.API.Common.dll</HintPath>
     </Reference>
     <Reference Include="Zetbox.Client">
-      <HintPath>..\packages\zetboxBasic-Client.1.0.4901.1\lib\net40\Zetbox.Client.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic-Client.1.0.5718.1\lib\net40\Zetbox.Client.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

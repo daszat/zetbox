@@ -61,13 +61,13 @@
     <Reference Include="System.Xml"/>
     <Reference Include="Microsoft.CSharp"/>
     <Reference Include="Zetbox.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78, processorArchitecture=MSIL">
-      <HintPath>..\packages\zetboxBasic-Common.1.0.4901.1\lib\net40\Zetbox.API.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic-Common.1.0.5718.1\lib\net40\Zetbox.API.dll</HintPath>
     </Reference>
     <Reference Include="Zetbox.API.AbstractConsumerTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78, processorArchitecture=MSIL">
-      <HintPath>..\packages\zetboxBasic-Tests.1.0.4901.1\lib\net40\Zetbox.API.AbstractConsumerTests.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic-Tests.1.0.5718.1\lib\net40\Zetbox.API.AbstractConsumerTests.dll</HintPath>
     </Reference>
     <Reference Include="Zetbox.API.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78, processorArchitecture=MSIL">
-      <HintPath>..\packages\zetboxBasic-Common.1.0.4901.1\lib\net40\Zetbox.API.Common.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic-Common.1.0.5718.1\lib\net40\Zetbox.API.Common.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
