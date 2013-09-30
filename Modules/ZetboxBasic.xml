@@ -8387,7 +8387,7 @@ public static void UploadCanExecReason(Icon obj, MethodReturnEventArgs&lt;string
   <ZetboxBase:Method ExportGuid="4871f987-0022-4c79-a773-aa669b9d8d04">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void ChooseObject(IRenderer obj, MethodReturnEventArgs&lt;Zetbox.API.IDataObject&gt; e, System.Type objectType, Zetbox.API.IZetboxContext ctx)
+public static void ChooseObject(IRenderer obj, MethodReturnEventArgs&lt;Zetbox.API.IDataObject&gt; e, Zetbox.API.IZetboxContext ctx, System.Type objectType)
 {
 }
 
@@ -8459,7 +8459,7 @@ public static void ShowObjectCanExecReason(IRenderer obj, MethodReturnEventArgs&
   <ZetboxBase:Method ExportGuid="65367ab3-ab6a-41d9-a13c-c8605b9fc233">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetDefaultViewModel(NavigationEntry obj, MethodReturnEventArgs&lt;System.Object&gt; e, System.Object parent, Zetbox.API.IZetboxContext dataCtx)
+public static void GetDefaultViewModel(NavigationEntry obj, MethodReturnEventArgs&lt;System.Object&gt; e, Zetbox.API.IZetboxContext dataCtx, System.Object parent)
 {
 }
 
@@ -29332,7 +29332,7 @@ public static void OpenCanExecReason(Blob obj, MethodReturnEventArgs&lt;string&g
   <ZetboxBase:Method ExportGuid="2056bc89-f6c6-4c27-96aa-12790af6fb24">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetErrorText(Constraint obj, MethodReturnEventArgs&lt;string&gt; e, System.Object constrainedValue, System.Object constrainedObject)
+public static void GetErrorText(Constraint obj, MethodReturnEventArgs&lt;string&gt; e, System.Object constrainedObject, System.Object constrainedValue)
 {
 }
 
@@ -29356,7 +29356,7 @@ public static void GetErrorTextCanExecReason(Constraint obj, MethodReturnEventAr
   <ZetboxBase:Method ExportGuid="869cbcce-c822-4b86-89ce-bcb11a7b2bb6">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void IsValid(Constraint obj, MethodReturnEventArgs&lt;bool&gt; e, System.Object constrainedValue, System.Object constrainedObject)
+public static void IsValid(Constraint obj, MethodReturnEventArgs&lt;bool&gt; e, System.Object constrainedObject, System.Object constrainedValue)
 {
 }
 
@@ -30134,7 +30134,7 @@ public static void GetCurrentCanExecReason(RecurrenceRule obj, MethodReturnEvent
   <ZetboxBase:Method ExportGuid="a1c94de6-0523-40c8-8651-2cc14a3a836e">
     <ZetboxBase:ChangedOn>2012-09-26T07:39:01.407921Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetCurrent(RecurrenceRule obj, MethodReturnEventArgs&lt;DateTime&gt; e, DateTime dt, DateTime start)
+public static void GetCurrent(RecurrenceRule obj, MethodReturnEventArgs&lt;DateTime&gt; e, DateTime start, DateTime dt)
 {
 }
 
@@ -30158,7 +30158,7 @@ public static void GetCurrentCanExecReason(RecurrenceRule obj, MethodReturnEvent
   <ZetboxBase:Method ExportGuid="01781028-acda-4618-89a6-78256aa1a94b">
     <ZetboxBase:ChangedOn>2012-09-26T07:38:39.621675Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetNext(RecurrenceRule obj, MethodReturnEventArgs&lt;DateTime&gt; e, DateTime dt, DateTime start)
+public static void GetNext(RecurrenceRule obj, MethodReturnEventArgs&lt;DateTime&gt; e, DateTime start, DateTime dt)
 {
 }
 
@@ -30230,7 +30230,7 @@ public static void GetRelativeCanExecReason(RecurrenceRule obj, MethodReturnEven
   <ZetboxBase:Method ExportGuid="6869e3bd-d208-4c0f-b0f3-b305c2d669b4">
     <ZetboxBase:ChangedOn>2013-03-22T10:11:06.129156Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetWithinInterval(RecurrenceRule obj, MethodReturnEventArgs&lt;IEnumerable&lt;DateTime&gt;&gt; e, DateTime until, DateTime from, DateTime start)
+public static void GetWithinInterval(RecurrenceRule obj, MethodReturnEventArgs&lt;IEnumerable&lt;DateTime&gt;&gt; e, DateTime start, DateTime from, DateTime until)
 {
 }
 

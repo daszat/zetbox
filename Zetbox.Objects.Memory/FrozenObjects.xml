@@ -19,32 +19,32 @@
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void ToString(Calendar obj, MethodReturnEventArgs&lt;string&gt; e)
+public static void ToString(CalendarBook obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 
 [Invocation]
-public static void NotifyPreSave(Calendar obj)
+public static void NotifyPreSave(CalendarBook obj)
 {
 }
 
 [Invocation]
-public static void NotifyPostSave(Calendar obj)
+public static void NotifyPostSave(CalendarBook obj)
 {
 }
 
 [Invocation]
-public static void NotifyCreated(Calendar obj)
+public static void NotifyCreated(CalendarBook obj)
 {
 }
 
 [Invocation]
-public static void NotifyDeleting(Calendar obj)
+public static void NotifyDeleting(CalendarBook obj)
 {
 }
 
 [Invocation]
-public static void ObjectIsValid(Calendar obj, ObjectIsValidEventArgs e)
+public static void ObjectIsValid(CalendarBook obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -67,32 +67,32 @@ public static void ObjectIsValid(Calendar obj, ObjectIsValidEventArgs e)
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
     <ZetboxBase:BaseObjectClass>ee70b186-09ae-43a3-afb2-a632c47765b9</ZetboxBase:BaseObjectClass>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void ToString(CommonCalendarRule obj, MethodReturnEventArgs&lt;string&gt; e)
+public static void ToString(CommonWorkScheduleRule obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 
 [Invocation]
-public static void NotifyPreSave(CommonCalendarRule obj)
+public static void NotifyPreSave(CommonWorkScheduleRule obj)
 {
 }
 
 [Invocation]
-public static void NotifyPostSave(CommonCalendarRule obj)
+public static void NotifyPostSave(CommonWorkScheduleRule obj)
 {
 }
 
 [Invocation]
-public static void NotifyCreated(CommonCalendarRule obj)
+public static void NotifyCreated(CommonWorkScheduleRule obj)
 {
 }
 
 [Invocation]
-public static void NotifyDeleting(CommonCalendarRule obj)
+public static void NotifyDeleting(CommonWorkScheduleRule obj)
 {
 }
 
 [Invocation]
-public static void ObjectIsValid(CommonCalendarRule obj, ObjectIsValidEventArgs e)
+public static void ObjectIsValid(CommonWorkScheduleRule obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -115,32 +115,32 @@ public static void ObjectIsValid(CommonCalendarRule obj, ObjectIsValidEventArgs 
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
     <ZetboxBase:BaseObjectClass>ee70b186-09ae-43a3-afb2-a632c47765b9</ZetboxBase:BaseObjectClass>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void ToString(DayOfWeekCalendarRule obj, MethodReturnEventArgs&lt;string&gt; e)
+public static void ToString(DayOfWeekWorkScheduleRule obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 
 [Invocation]
-public static void NotifyPreSave(DayOfWeekCalendarRule obj)
+public static void NotifyPreSave(DayOfWeekWorkScheduleRule obj)
 {
 }
 
 [Invocation]
-public static void NotifyPostSave(DayOfWeekCalendarRule obj)
+public static void NotifyPostSave(DayOfWeekWorkScheduleRule obj)
 {
 }
 
 [Invocation]
-public static void NotifyCreated(DayOfWeekCalendarRule obj)
+public static void NotifyCreated(DayOfWeekWorkScheduleRule obj)
 {
 }
 
 [Invocation]
-public static void NotifyDeleting(DayOfWeekCalendarRule obj)
+public static void NotifyDeleting(DayOfWeekWorkScheduleRule obj)
 {
 }
 
 [Invocation]
-public static void ObjectIsValid(DayOfWeekCalendarRule obj, ObjectIsValidEventArgs e)
+public static void ObjectIsValid(DayOfWeekWorkScheduleRule obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -163,32 +163,32 @@ public static void ObjectIsValid(DayOfWeekCalendarRule obj, ObjectIsValidEventAr
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
     <ZetboxBase:BaseObjectClass>c4ba4a07-d4b7-4ae7-8621-0e9126ad18cc</ZetboxBase:BaseObjectClass>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void ToString(EasterCalendarRule obj, MethodReturnEventArgs&lt;string&gt; e)
+public static void ToString(EasterWorkScheduleRule obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 
 [Invocation]
-public static void NotifyPreSave(EasterCalendarRule obj)
+public static void NotifyPreSave(EasterWorkScheduleRule obj)
 {
 }
 
 [Invocation]
-public static void NotifyPostSave(EasterCalendarRule obj)
+public static void NotifyPostSave(EasterWorkScheduleRule obj)
 {
 }
 
 [Invocation]
-public static void NotifyCreated(EasterCalendarRule obj)
+public static void NotifyCreated(EasterWorkScheduleRule obj)
 {
 }
 
 [Invocation]
-public static void NotifyDeleting(EasterCalendarRule obj)
+public static void NotifyDeleting(EasterWorkScheduleRule obj)
 {
 }
 
 [Invocation]
-public static void ObjectIsValid(EasterCalendarRule obj, ObjectIsValidEventArgs e)
+public static void ObjectIsValid(EasterWorkScheduleRule obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -259,32 +259,32 @@ public static void ObjectIsValid(Event obj, ObjectIsValidEventArgs e)
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
     <ZetboxBase:BaseObjectClass>c4ba4a07-d4b7-4ae7-8621-0e9126ad18cc</ZetboxBase:BaseObjectClass>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void ToString(FixedYearlyCalendarRule obj, MethodReturnEventArgs&lt;string&gt; e)
+public static void ToString(FixedYearlyWorkScheduleRule obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 
 [Invocation]
-public static void NotifyPreSave(FixedYearlyCalendarRule obj)
+public static void NotifyPreSave(FixedYearlyWorkScheduleRule obj)
 {
 }
 
 [Invocation]
-public static void NotifyPostSave(FixedYearlyCalendarRule obj)
+public static void NotifyPostSave(FixedYearlyWorkScheduleRule obj)
 {
 }
 
 [Invocation]
-public static void NotifyCreated(FixedYearlyCalendarRule obj)
+public static void NotifyCreated(FixedYearlyWorkScheduleRule obj)
 {
 }
 
 [Invocation]
-public static void NotifyDeleting(FixedYearlyCalendarRule obj)
+public static void NotifyDeleting(FixedYearlyWorkScheduleRule obj)
 {
 }
 
 [Invocation]
-public static void ObjectIsValid(FixedYearlyCalendarRule obj, ObjectIsValidEventArgs e)
+public static void ObjectIsValid(FixedYearlyWorkScheduleRule obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -306,32 +306,32 @@ public static void ObjectIsValid(FixedYearlyCalendarRule obj, ObjectIsValidEvent
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void ToString(SyncAccount obj, MethodReturnEventArgs&lt;string&gt; e)
+public static void ToString(SyncProvider obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 
 [Invocation]
-public static void NotifyPreSave(SyncAccount obj)
+public static void NotifyPreSave(SyncProvider obj)
 {
 }
 
 [Invocation]
-public static void NotifyPostSave(SyncAccount obj)
+public static void NotifyPostSave(SyncProvider obj)
 {
 }
 
 [Invocation]
-public static void NotifyCreated(SyncAccount obj)
+public static void NotifyCreated(SyncProvider obj)
 {
 }
 
 [Invocation]
-public static void NotifyDeleting(SyncAccount obj)
+public static void NotifyDeleting(SyncProvider obj)
 {
 }
 
 [Invocation]
-public static void ObjectIsValid(SyncAccount obj, ObjectIsValidEventArgs e)
+public static void ObjectIsValid(SyncProvider obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -353,32 +353,32 @@ public static void ObjectIsValid(SyncAccount obj, ObjectIsValidEventArgs e)
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void ToString(Calendar obj, MethodReturnEventArgs&lt;string&gt; e)
+public static void ToString(WorkSchedule obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 
 [Invocation]
-public static void NotifyPreSave(Calendar obj)
+public static void NotifyPreSave(WorkSchedule obj)
 {
 }
 
 [Invocation]
-public static void NotifyPostSave(Calendar obj)
+public static void NotifyPostSave(WorkSchedule obj)
 {
 }
 
 [Invocation]
-public static void NotifyCreated(Calendar obj)
+public static void NotifyCreated(WorkSchedule obj)
 {
 }
 
 [Invocation]
-public static void NotifyDeleting(Calendar obj)
+public static void NotifyDeleting(WorkSchedule obj)
 {
 }
 
 [Invocation]
-public static void ObjectIsValid(Calendar obj, ObjectIsValidEventArgs e)
+public static void ObjectIsValid(WorkSchedule obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -400,32 +400,32 @@ public static void ObjectIsValid(Calendar obj, ObjectIsValidEventArgs e)
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>true</GUI:ShowNameInLists>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void ToString(CalendarRule obj, MethodReturnEventArgs&lt;string&gt; e)
+public static void ToString(WorkScheduleRule obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 
 [Invocation]
-public static void NotifyPreSave(CalendarRule obj)
+public static void NotifyPreSave(WorkScheduleRule obj)
 {
 }
 
 [Invocation]
-public static void NotifyPostSave(CalendarRule obj)
+public static void NotifyPostSave(WorkScheduleRule obj)
 {
 }
 
 [Invocation]
-public static void NotifyCreated(CalendarRule obj)
+public static void NotifyCreated(WorkScheduleRule obj)
 {
 }
 
 [Invocation]
-public static void NotifyDeleting(CalendarRule obj)
+public static void NotifyDeleting(WorkScheduleRule obj)
 {
 }
 
 [Invocation]
-public static void ObjectIsValid(CalendarRule obj, ObjectIsValidEventArgs e)
+public static void ObjectIsValid(WorkScheduleRule obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -449,32 +449,32 @@ public static void ObjectIsValid(CalendarRule obj, ObjectIsValidEventArgs e)
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
     <ZetboxBase:BaseObjectClass>12ce65c1-e00b-44be-b119-eb520b46616e</ZetboxBase:BaseObjectClass>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void ToString(WorkScheduleSyncAccount obj, MethodReturnEventArgs&lt;string&gt; e)
+public static void ToString(WorkScheduleSyncProvider obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 
 [Invocation]
-public static void NotifyPreSave(WorkScheduleSyncAccount obj)
+public static void NotifyPreSave(WorkScheduleSyncProvider obj)
 {
 }
 
 [Invocation]
-public static void NotifyPostSave(WorkScheduleSyncAccount obj)
+public static void NotifyPostSave(WorkScheduleSyncProvider obj)
 {
 }
 
 [Invocation]
-public static void NotifyCreated(WorkScheduleSyncAccount obj)
+public static void NotifyCreated(WorkScheduleSyncProvider obj)
 {
 }
 
 [Invocation]
-public static void NotifyDeleting(WorkScheduleSyncAccount obj)
+public static void NotifyDeleting(WorkScheduleSyncProvider obj)
 {
 }
 
 [Invocation]
-public static void ObjectIsValid(WorkScheduleSyncAccount obj, ObjectIsValidEventArgs e)
+public static void ObjectIsValid(WorkScheduleSyncProvider obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -497,32 +497,32 @@ public static void ObjectIsValid(WorkScheduleSyncAccount obj, ObjectIsValidEvent
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
     <ZetboxBase:BaseObjectClass>ee70b186-09ae-43a3-afb2-a632c47765b9</ZetboxBase:BaseObjectClass>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void ToString(YearlyCalendarRule obj, MethodReturnEventArgs&lt;string&gt; e)
+public static void ToString(YearlyWorkScheduleRule obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 
 [Invocation]
-public static void NotifyPreSave(YearlyCalendarRule obj)
+public static void NotifyPreSave(YearlyWorkScheduleRule obj)
 {
 }
 
 [Invocation]
-public static void NotifyPostSave(YearlyCalendarRule obj)
+public static void NotifyPostSave(YearlyWorkScheduleRule obj)
 {
 }
 
 [Invocation]
-public static void NotifyCreated(YearlyCalendarRule obj)
+public static void NotifyCreated(YearlyWorkScheduleRule obj)
 {
 }
 
 [Invocation]
-public static void NotifyDeleting(YearlyCalendarRule obj)
+public static void NotifyDeleting(YearlyWorkScheduleRule obj)
 {
 }
 
 [Invocation]
-public static void ObjectIsValid(YearlyCalendarRule obj, ObjectIsValidEventArgs e)
+public static void ObjectIsValid(YearlyWorkScheduleRule obj, ObjectIsValidEventArgs e)
 {
 }
 
@@ -4289,17 +4289,17 @@ public static void GetNewEventViewModelsCanExecReason(CalendarBook obj, MethodRe
     <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-03-25T15:55:18.791383Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void PerformSync(SyncAccount obj)
+public static void PerformSync(SyncProvider obj)
 {
 }
 
 [Invocation]
-public static void PerformSyncCanExec(SyncAccount obj, MethodReturnEventArgs&lt;bool&gt; e)
+public static void PerformSyncCanExec(SyncProvider obj, MethodReturnEventArgs&lt;bool&gt; e)
 {
 }
 
 [Invocation]
-public static void PerformSyncCanExecReason(SyncAccount obj, MethodReturnEventArgs&lt;string&gt; e)
+public static void PerformSyncCanExecReason(SyncProvider obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
@@ -4342,7 +4342,7 @@ public static void ScheduleSyncNowCanExecReason(SyncProvider obj, MethodReturnEv
   <ZetboxBase:Method ExportGuid="79e9a145-8d0d-400c-a3b8-875c9bda44e8">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetOffDays(WorkSchedule obj, MethodReturnEventArgs&lt;int&gt; e, DateTime until, DateTime from)
+public static void GetOffDays(WorkSchedule obj, MethodReturnEventArgs&lt;int&gt; e, DateTime from, DateTime until)
 {
 }
 
@@ -4366,7 +4366,7 @@ public static void GetOffDaysCanExecReason(WorkSchedule obj, MethodReturnEventAr
   <ZetboxBase:Method ExportGuid="1e9a4f60-a4ec-41ae-9f1e-bb80bbe70bc3">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetWorkingDays(WorkSchedule obj, MethodReturnEventArgs&lt;int&gt; e, DateTime until, DateTime from)
+public static void GetWorkingDays(WorkSchedule obj, MethodReturnEventArgs&lt;int&gt; e, DateTime from, DateTime until)
 {
 }
 
@@ -4390,7 +4390,7 @@ public static void GetWorkingDaysCanExecReason(WorkSchedule obj, MethodReturnEve
   <ZetboxBase:Method ExportGuid="bb7592bc-26e6-463f-a806-91f56dc9fa6e">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetWorkingHours(WorkSchedule obj, MethodReturnEventArgs&lt;decimal&gt; e, DateTime until, DateTime from)
+public static void GetWorkingHours(WorkSchedule obj, MethodReturnEventArgs&lt;decimal&gt; e, DateTime from, DateTime until)
 {
 }
 
@@ -6323,7 +6323,7 @@ public static void ExtractTextCanExecReason(File obj, MethodReturnEventArgs&lt;s
   <ZetboxBase:Method ExportGuid="197e0cfb-34db-4dfa-bde8-29e7e847be99">
     <ZetboxBase:ChangedOn>2013-07-23T07:10:24.284219Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void HandleBlobChange(File obj, MethodReturnEventArgs&lt;Zetbox.App.Base.Blob&gt; e, Zetbox.App.Base.Blob newBlob, Zetbox.App.Base.Blob oldBlob)
+public static void HandleBlobChange(File obj, MethodReturnEventArgs&lt;Zetbox.App.Base.Blob&gt; e, Zetbox.App.Base.Blob oldBlob, Zetbox.App.Base.Blob newBlob)
 {
 }
 
@@ -15058,7 +15058,7 @@ public static void UploadCanExecReason(Icon obj, MethodReturnEventArgs&lt;string
   <ZetboxBase:Method ExportGuid="4871f987-0022-4c79-a773-aa669b9d8d04">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void ChooseObject(IRenderer obj, MethodReturnEventArgs&lt;Zetbox.API.IDataObject&gt; e, System.Type objectType, Zetbox.API.IZetboxContext ctx)
+public static void ChooseObject(IRenderer obj, MethodReturnEventArgs&lt;Zetbox.API.IDataObject&gt; e, Zetbox.API.IZetboxContext ctx, System.Type objectType)
 {
 }
 
@@ -15130,7 +15130,7 @@ public static void ShowObjectCanExecReason(IRenderer obj, MethodReturnEventArgs&
   <ZetboxBase:Method ExportGuid="65367ab3-ab6a-41d9-a13c-c8605b9fc233">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetDefaultViewModel(NavigationEntry obj, MethodReturnEventArgs&lt;System.Object&gt; e, System.Object parent, Zetbox.API.IZetboxContext dataCtx)
+public static void GetDefaultViewModel(NavigationEntry obj, MethodReturnEventArgs&lt;System.Object&gt; e, Zetbox.API.IZetboxContext dataCtx, System.Object parent)
 {
 }
 
@@ -19868,7 +19868,7 @@ public static void RechnungErstellenCanExecReason(Auftrag obj, MethodReturnEvent
   <ZetboxBase:Method ExportGuid="447088b9-ea3e-4c72-b1fe-761d430c4003">
     <ZetboxBase:ChangedOn>2012-04-05T09:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void TestMethodForParameter(Mitarbeiter obj, MethodReturnEventArgs&lt;DateTime&gt; e, string TestString, Zetbox.App.Projekte.Auftrag TestObjectParameter, int TestInt, double TestDouble, DateTime TestDateTime, System.Guid TestCLRObjectParameter, bool TestBool)
+public static void TestMethodForParameter(Mitarbeiter obj, MethodReturnEventArgs&lt;DateTime&gt; e, bool TestBool, System.Guid TestCLRObjectParameter, DateTime TestDateTime, double TestDouble, int TestInt, Zetbox.App.Projekte.Auftrag TestObjectParameter, string TestString)
 {
 }
 
@@ -19916,7 +19916,7 @@ public static void GetFulltextIndexBodyCanExecReason(Projekt obj, MethodReturnEv
   <ZetboxBase:Method ExportGuid="dbb73c2e-e751-4249-b63a-f4417c3177b4">
     <ZetboxBase:ChangedOn>2012-05-17T12:29:28.307352Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetSummaryReport(Projekt obj, MethodReturnEventArgs&lt;System.Object&gt; e, Zetbox.App.Base.DateTimeRange range, string title)
+public static void GetSummaryReport(Projekt obj, MethodReturnEventArgs&lt;System.Object&gt; e, string title, Zetbox.App.Base.DateTimeRange range)
 {
 }
 
@@ -52126,7 +52126,7 @@ public static void OpenCanExecReason(Blob obj, MethodReturnEventArgs&lt;string&g
   <ZetboxBase:Method ExportGuid="2056bc89-f6c6-4c27-96aa-12790af6fb24">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetErrorText(Constraint obj, MethodReturnEventArgs&lt;string&gt; e, System.Object constrainedValue, System.Object constrainedObject)
+public static void GetErrorText(Constraint obj, MethodReturnEventArgs&lt;string&gt; e, System.Object constrainedObject, System.Object constrainedValue)
 {
 }
 
@@ -52150,7 +52150,7 @@ public static void GetErrorTextCanExecReason(Constraint obj, MethodReturnEventAr
   <ZetboxBase:Method ExportGuid="869cbcce-c822-4b86-89ce-bcb11a7b2bb6">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void IsValid(Constraint obj, MethodReturnEventArgs&lt;bool&gt; e, System.Object constrainedValue, System.Object constrainedObject)
+public static void IsValid(Constraint obj, MethodReturnEventArgs&lt;bool&gt; e, System.Object constrainedObject, System.Object constrainedValue)
 {
 }
 
@@ -52928,7 +52928,7 @@ public static void GetCurrentCanExecReason(RecurrenceRule obj, MethodReturnEvent
   <ZetboxBase:Method ExportGuid="a1c94de6-0523-40c8-8651-2cc14a3a836e">
     <ZetboxBase:ChangedOn>2012-09-26T07:39:01.407921Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetCurrent(RecurrenceRule obj, MethodReturnEventArgs&lt;DateTime&gt; e, DateTime dt, DateTime start)
+public static void GetCurrent(RecurrenceRule obj, MethodReturnEventArgs&lt;DateTime&gt; e, DateTime start, DateTime dt)
 {
 }
 
@@ -52952,7 +52952,7 @@ public static void GetCurrentCanExecReason(RecurrenceRule obj, MethodReturnEvent
   <ZetboxBase:Method ExportGuid="01781028-acda-4618-89a6-78256aa1a94b">
     <ZetboxBase:ChangedOn>2012-09-26T07:38:39.621675Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetNext(RecurrenceRule obj, MethodReturnEventArgs&lt;DateTime&gt; e, DateTime dt, DateTime start)
+public static void GetNext(RecurrenceRule obj, MethodReturnEventArgs&lt;DateTime&gt; e, DateTime start, DateTime dt)
 {
 }
 
@@ -53024,7 +53024,7 @@ public static void GetRelativeCanExecReason(RecurrenceRule obj, MethodReturnEven
   <ZetboxBase:Method ExportGuid="6869e3bd-d208-4c0f-b0f3-b305c2d669b4">
     <ZetboxBase:ChangedOn>2013-03-22T10:11:06.129156Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetWithinInterval(RecurrenceRule obj, MethodReturnEventArgs&lt;IEnumerable&lt;DateTime&gt;&gt; e, DateTime until, DateTime from, DateTime start)
+public static void GetWithinInterval(RecurrenceRule obj, MethodReturnEventArgs&lt;IEnumerable&lt;DateTime&gt;&gt; e, DateTime start, DateTime from, DateTime until)
 {
 }
 

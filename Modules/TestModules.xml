@@ -3518,7 +3518,7 @@ public static void RechnungErstellenCanExecReason(Auftrag obj, MethodReturnEvent
   <ZetboxBase:Method ExportGuid="447088b9-ea3e-4c72-b1fe-761d430c4003">
     <ZetboxBase:ChangedOn>2012-04-05T09:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void TestMethodForParameter(Mitarbeiter obj, MethodReturnEventArgs&lt;DateTime&gt; e, string TestString, Zetbox.App.Projekte.Auftrag TestObjectParameter, int TestInt, double TestDouble, DateTime TestDateTime, System.Guid TestCLRObjectParameter, bool TestBool)
+public static void TestMethodForParameter(Mitarbeiter obj, MethodReturnEventArgs&lt;DateTime&gt; e, bool TestBool, System.Guid TestCLRObjectParameter, DateTime TestDateTime, double TestDouble, int TestInt, Zetbox.App.Projekte.Auftrag TestObjectParameter, string TestString)
 {
 }
 
@@ -3566,7 +3566,7 @@ public static void GetFulltextIndexBodyCanExecReason(Projekt obj, MethodReturnEv
   <ZetboxBase:Method ExportGuid="dbb73c2e-e751-4249-b63a-f4417c3177b4">
     <ZetboxBase:ChangedOn>2012-05-17T12:29:28.307352Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void GetSummaryReport(Projekt obj, MethodReturnEventArgs&lt;System.Object&gt; e, Zetbox.App.Base.DateTimeRange range, string title)
+public static void GetSummaryReport(Projekt obj, MethodReturnEventArgs&lt;System.Object&gt; e, string title, Zetbox.App.Base.DateTimeRange range)
 {
 }
 
