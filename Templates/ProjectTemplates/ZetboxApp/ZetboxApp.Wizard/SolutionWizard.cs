@@ -86,6 +86,7 @@ namespace ZetboxApp.Wizard
             AddImportTargets();
             SetupConfigurationManager();
             SetProjectReferences();
+            SetStartupProject();
         }
 
         private void SetupConfigurationManager()
@@ -103,7 +104,6 @@ namespace ZetboxApp.Wizard
                 ctx.ShouldBuild = ctx.ProjectName.EndsWith(".Migrations.csproj");
             }
         }
-
 
         private void AddImportTargets()
         {
@@ -208,6 +208,11 @@ namespace ZetboxApp.Wizard
                     vsProj.References.AddProject(allProjects["common"]).CopyLocal = false;
                 }
             }
+        }
+
+        private void SetStartupProject()
+        {
+            _dte.Solution.Properties.Item("StartupProject").Value = _solutionName + ".WPF";
         }
 
         private void MoveProjects()
