@@ -124,7 +124,12 @@ namespace Zetbox.App.Base
                 }
 
                 var simpleAssemblyName = srAssembly.GetSimpleName();
-                var deadDescriptors = ctx.GetQuery<ViewModelDescriptor>().Where(vmd => vmd.ViewModelTypeRef.Contains(simpleAssemblyName)).ToList().Except(liveDescriptors);
+                var deadDescriptors = ctx
+                    .GetQuery<ViewModelDescriptor>()
+                    .ToList()
+                    .Where(vmd => TypeSpec.Parse(vmd.ViewModelTypeRef).AssemblyName.IfNullOrWhiteSpace(string.Empty).Split(',').FirstOrDefault().IfNullOrWhiteSpace(string.Empty).Trim() == simpleAssemblyName)
+                    .Except(liveDescriptors);
+
                 foreach (var d in deadDescriptors)
                 {
                     d.Deleted = true;
@@ -181,7 +186,11 @@ namespace Zetbox.App.Base
                 }
 
                 var simpleAssemblyName = srAssembly.GetSimpleName();
-                var deadDescriptors = ctx.GetQuery<ViewDescriptor>().Where(vmd => vmd.ControlTypeRef.Contains(simpleAssemblyName)).ToList().Except(liveDescriptors);
+                var deadDescriptors = ctx
+                    .GetQuery<ViewDescriptor>()
+                    .ToList()
+                    .Where(vmd => TypeSpec.Parse(vmd.ControlTypeRef).AssemblyName.IfNullOrWhiteSpace(string.Empty).Split(',').FirstOrDefault().IfNullOrWhiteSpace(string.Empty).Trim() == simpleAssemblyName)
+                    .Except(liveDescriptors);
                 foreach (var d in deadDescriptors)
                 {
                     d.Deleted = true;
