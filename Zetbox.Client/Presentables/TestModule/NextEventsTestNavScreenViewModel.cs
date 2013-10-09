@@ -15,7 +15,6 @@ using Zetbox.Client.Presentables.Calendar;
     {
         public new delegate NextEventsTestNavScreenViewModel Factory(IZetboxContext dataCtx, ViewModel parent, NavigationScreen screen);
 
-
         public NextEventsTestNavScreenViewModel(IViewModelDependencies appCtx,
             IZetboxContext dataCtx, ViewModel parent, NavigationScreen screen)
             : base(appCtx, dataCtx, parent, screen)
