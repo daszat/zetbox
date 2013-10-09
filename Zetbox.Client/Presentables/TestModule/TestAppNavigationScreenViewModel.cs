@@ -14,13 +14,10 @@ namespace Zetbox.Client.Presentables.TestModule
     {
         public new delegate TestAppNavigationScreenViewModel Factory(IZetboxContext dataCtx, ViewModel parent, NavigationScreen screen);
 
-        private readonly Func<IZetboxContext> _ctxFactory;
-
-        public TestAppNavigationScreenViewModel(IViewModelDependencies appCtx, Func<IZetboxContext> ctxFactory,
+        public TestAppNavigationScreenViewModel(IViewModelDependencies appCtx,
             IZetboxContext dataCtx, ViewModel parent, NavigationScreen screen)
             : base(appCtx, dataCtx, parent, screen)
         {
-            _ctxFactory = ctxFactory;
         }
 
         protected override List<CommandViewModel> CreateAdditionalCommands()
