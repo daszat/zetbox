@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-09-09T11:32:28.58944Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-09-09T11:32:28Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="a56d9701-d98e-49ab-bd49-a491d09e2d46">
     <ZetboxBase:ChangedOn>2011-08-06T08:30:47.664236Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
@@ -11599,6 +11599,12 @@ public static void TestMethodCanExecReason(TestObjClass obj, MethodReturnEventAr
     <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
     <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.TestModule.NextEventsTestNavScreenViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="ecd12c12-1883-4c54-ad47-b9560642ed71">
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Description>NavScreenViewModel for the root of the test application</GUI:Description>
+    <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.TestModule.TestAppNavigationScreenViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
   <GUI:ViewDescriptor ExportGuid="62c6636c-0cd5-4081-9aaa-c044f05e8020">
     <GUI:ControlKind>aa843e93-7f18-45c5-8608-4470aba9f18a</GUI:ControlKind>
     <GUI:ControlTypeRef>Zetbox.Client.WPF.View.TestModule.EventTestInputEditor, Zetbox.Client.WPF</GUI:ControlTypeRef>
@@ -11777,10 +11783,11 @@ public static void TestMethodCanExecReason(TestObjClass obj, MethodReturnEventAr
     <GUI:ViewModelDescriptor>ebc13c2a-0375-46e6-9fc2-a4ee5afc3568</GUI:ViewModelDescriptor>
   </GUI:NavigationScreen>
   <GUI:NavigationScreen ExportGuid="c727bd24-60b2-4ea9-901f-4d65672563a1">
-    <GUI:ChangedOn>2012-08-02T18:02:21.424417Z</GUI:ChangedOn>
+    <GUI:ChangedOn>2013-10-09T08:40:36.616671Z</GUI:ChangedOn>
     <GUI:CreatedOn>2012-08-02T20:02:21.424417Z</GUI:CreatedOn>
     <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
     <GUI:Title>Tests</GUI:Title>
+    <GUI:ViewModelDescriptor>ecd12c12-1883-4c54-ad47-b9560642ed71</GUI:ViewModelDescriptor>
   </GUI:NavigationScreen>
   <GUI:NavigationScreen ExportGuid="19765517-6d19-4dde-b4ef-80318e7021a7">
     <GUI:ChangedOn>2012-08-21T11:02:01.071444Z</GUI:ChangedOn>
