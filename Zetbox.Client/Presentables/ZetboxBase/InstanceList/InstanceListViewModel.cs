@@ -97,6 +97,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 _query = qry;
             }
 
+            ResetSort(refresh: false);
             dataCtx.IsElevatedModeChanged += new EventHandler(dataCtx_IsElevatedModeChanged);
         }
 

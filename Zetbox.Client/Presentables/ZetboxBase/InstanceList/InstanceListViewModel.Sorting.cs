@@ -16,7 +16,9 @@
 namespace Zetbox.Client.Presentables.ZetboxBase
 {
     using System;
+    using System.Linq;
     using Zetbox.API;
+    using Zetbox.Client.Models;
 
     public partial class InstanceListViewModel
     {
@@ -30,8 +32,21 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public void ResetSort(bool refresh = true)
         {
-            _orderByExpression = _initialOrderByExpression;
-            _sortDirection = _initialSortDirection;
+            if (_initialOrderByExpression != null)
+            {
+                _orderByExpression = _initialOrderByExpression;
+                _sortDirection = _initialSortDirection;
+            }
+            else
+            {
+                var sortProp = _type.AndParents(c => c.BaseObjectClass).FirstOrDefault(c => c.DefaultSortProperty != null).IfNotNull(c => c.DefaultSortProperty);
+                if (sortProp != null)
+                {
+                    _orderByExpression = ColumnDisplayModel.FormatDynamicOrderByExpression(sortProp);
+                    _sortDirection = System.ComponentModel.ListSortDirection.Ascending;
+                }
+            }
+
             if (refresh)
             {
                 if (_instancesFromServer.Count < Helper.MAXLISTCOUNT)
