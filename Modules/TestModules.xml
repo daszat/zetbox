@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-09-09T11:32:28Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-10-11T13:12:58Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="a56d9701-d98e-49ab-bd49-a491d09e2d46">
     <ZetboxBase:ChangedOn>2011-08-06T08:30:47.664236Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
@@ -9,7 +9,7 @@
     <ZetboxBase:SchemaName>projekte</ZetboxBase:SchemaName>
   </ZetboxBase:Module>
   <ZetboxBase:ObjectClass ExportGuid="f6e11d1d-a832-413a-bf1d-5ecf5f7bc79d">
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:08.070755Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-10-11T11:07:52.814352Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
     <GUI:DefaultIcon>0f4acffa-6dc8-4d87-89ee-2d21cfa3d088</GUI:DefaultIcon>
     <ZetboxBase:Description />
@@ -49,6 +49,7 @@ public static void ObjectIsValid(Auftrag obj, ObjectIsValidEventArgs e)
 }
 
 </ZetboxBase:CodeTemplate>
+    <ZetboxBase:DefaultSortProperty>aaffed82-1f4c-4c0f-a52d-3ca4dbdefe94</ZetboxBase:DefaultSortProperty>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
@@ -56,7 +57,7 @@ public static void ObjectIsValid(Auftrag obj, ObjectIsValidEventArgs e)
     <ZetboxBase:TableName>Auftraege</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="b9ddd097-4f45-40c5-87e9-7331ab58727c">
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:08.070755Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-10-11T11:07:52.814352Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
     <GUI:DefaultIcon>59c6ef01-66e7-411e-8326-c16f593ec5e7</GUI:DefaultIcon>
     <ZetboxBase:Description />
@@ -96,6 +97,7 @@ public static void ObjectIsValid(Kunde obj, ObjectIsValidEventArgs e)
 }
 
 </ZetboxBase:CodeTemplate>
+    <ZetboxBase:DefaultSortProperty>2817a845-b2d5-43ed-b0f1-5a6692a62183</ZetboxBase:DefaultSortProperty>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
@@ -103,7 +105,7 @@ public static void ObjectIsValid(Kunde obj, ObjectIsValidEventArgs e)
     <ZetboxBase:TableName>Kunden</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="77933a20-338a-4961-b751-62ffa0a75c6a">
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:08.070755Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-10-11T11:07:52.814352Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
     <GUI:DefaultIcon>8e37eb7b-f38d-4229-96c5-5a593fe8db56</GUI:DefaultIcon>
     <ZetboxBase:Description />
@@ -143,6 +145,7 @@ public static void ObjectIsValid(Mitarbeiter obj, ObjectIsValidEventArgs e)
 }
 
 </ZetboxBase:CodeTemplate>
+    <ZetboxBase:DefaultSortProperty>5aab79fd-3083-4ce1-a558-ed1449ecddce</ZetboxBase:DefaultSortProperty>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
@@ -150,7 +153,7 @@ public static void ObjectIsValid(Mitarbeiter obj, ObjectIsValidEventArgs e)
     <ZetboxBase:TableName>Mitarbeiter</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="885939e8-82e1-4fdf-b80e-5f612d5131d3">
-    <ZetboxBase:ChangedOn>2012-04-24T11:15:58.756492Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-10-11T11:07:52.814352Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
     <GUI:DefaultIcon>1710903b-aa64-4a26-a9fe-cd97fa91d67f</GUI:DefaultIcon>
     <ZetboxBase:Description />
@@ -190,6 +193,7 @@ public static void ObjectIsValid(Projekt obj, ObjectIsValidEventArgs e)
 }
 
 </ZetboxBase:CodeTemplate>
+    <ZetboxBase:DefaultSortProperty>b5482479-fd14-4990-86f4-49872e2eeeb8</ZetboxBase:DefaultSortProperty>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
@@ -197,7 +201,7 @@ public static void ObjectIsValid(Projekt obj, ObjectIsValidEventArgs e)
     <ZetboxBase:TableName>Projekte</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="3fbb42ca-a084-491d-9135-85ed24f1ef78">
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:08.070755Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-10-11T11:07:52.814352Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
     <GUI:DefaultIcon>ed2d3e60-d89b-4fce-92e5-0686a742e2ee</GUI:DefaultIcon>
     <ZetboxBase:Description />
@@ -237,6 +241,7 @@ public static void ObjectIsValid(Task obj, ObjectIsValidEventArgs e)
 }
 
 </ZetboxBase:CodeTemplate>
+    <ZetboxBase:DefaultSortProperty>91595e02-411c-40f2-ab83-4cced76e954d</ZetboxBase:DefaultSortProperty>
     <GUI:DefaultViewModelDescriptor>4d307461-610a-4403-92b9-bb686dacf276</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
