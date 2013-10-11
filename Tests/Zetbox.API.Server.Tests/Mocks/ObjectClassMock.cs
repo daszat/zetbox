@@ -426,6 +426,12 @@ namespace Zetbox.API.Server.Mocks
             get { throw new NotImplementedException(); }
         }
 
+        public Zetbox.App.Base.Property DefaultSortProperty
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
+
         #endregion
 
         #region ICustomTypeDescriptor Members

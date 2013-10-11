@@ -2544,6 +2544,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 x.ParentsToDelete.Add(this);
                 ChildrenToDelete.Add(x);
             }
+            // should fetch && remember children for ObjectClass_has_Property_RelationEntry
             // FK_ObjectClass_has_Properties
             if (ObjectClass != null) {
                 ((NHibernatePersistenceObject)ObjectClass).ChildrenToDelete.Add(this);

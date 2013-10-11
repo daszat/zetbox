@@ -1404,6 +1404,10 @@ namespace Zetbox {
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("7afdb672-f364-4b05-ad5d-ea6d59dc3553"); }
                                 }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> DefaultSortProperty
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("53ca9d62-07c4-4bce-a798-9dd2064b9f31"); }
+                                }
                                 public static TypedGuid<global::Zetbox.App.Base.Property> DefaultViewModelDescriptor
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("11adedb9-d32a-4da9-b986-0534e65df760"); }

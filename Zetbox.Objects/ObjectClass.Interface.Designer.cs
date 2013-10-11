@@ -39,6 +39,15 @@ namespace Zetbox.App.Base
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("53ca9d62-07c4-4bce-a798-9dd2064b9f31")]
+        Zetbox.App.Base.Property DefaultSortProperty {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// The default ViewModel to use for this ObjectClass
         /// </summary>
         [Zetbox.API.DefinitionGuid("11adedb9-d32a-4da9-b986-0534e65df760")]

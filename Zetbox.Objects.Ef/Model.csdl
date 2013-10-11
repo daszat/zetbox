@@ -768,6 +768,10 @@
       <End Role="NavigationScreen" EntitySet="NavigationEntryEfImpl" />
       <End Role="CreatedBy" EntitySet="IdentityEfImpl" />
     </AssociationSet>
+    <AssociationSet Name="FK_ObjClass_has_DefaultSortProperty" Association="Model.FK_ObjClass_has_DefaultSortProperty" >
+      <End Role="ObjClass" EntitySet="DataTypeEfImpl" />
+      <End Role="DefaultSortProperty" EntitySet="PropertyEfImpl" />
+    </AssociationSet>
     <AssociationSet Name="FK_ObjectClass_has_AccessControlList" Association="Model.FK_ObjectClass_has_AccessControlList" >
       <End Role="ObjectClass" EntitySet="DataTypeEfImpl" />
       <End Role="AccessControlList" EntitySet="AccessControlEfImpl" />
@@ -3290,6 +3294,10 @@
                         FromRole="SubClasses"
                         ToRole="BaseObjectClass" />
     <Property Name="CodeTemplate" Type="String" Nullable="true" MaxLength="1000"  />
+    <NavigationProperty Name="DefaultSortPropertyImpl"
+                        Relationship="Model.FK_ObjClass_has_DefaultSortProperty"
+                        FromRole="ObjClass"
+                        ToRole="DefaultSortProperty" />
     <NavigationProperty Name="DefaultViewModelDescriptorImpl"
                         Relationship="Model.FK_Presentable_has_DefaultViewModelDescriptor"
                         FromRole="Presentable"
@@ -5387,6 +5395,14 @@
          Multiplicity="*" />
     <End Role="CreatedBy"
          Type="Model.IdentityEfImpl" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_ObjClass_has_DefaultSortProperty" >
+    <End Role="ObjClass"
+         Type="Model.ObjectClassEfImpl" 
+         Multiplicity="0..1" />
+    <End Role="DefaultSortProperty"
+         Type="Model.PropertyEfImpl" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_ObjectClass_has_AccessControlList" >

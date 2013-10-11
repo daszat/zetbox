@@ -4608,6 +4608,23 @@
       <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
     </AssociationSetMapping>
     <!--
+    Relation: FK_ObjClass_has_DefaultSortProperty
+    A: ZeroOrOne ObjectClass as ObjClass
+    B: ZeroOrOne Property as DefaultSortProperty
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_ObjClass_has_DefaultSortProperty"
+                           TypeName="Model.FK_ObjClass_has_DefaultSortProperty"
+                           StoreEntitySet="ObjectClass" >
+      <EndProperty Name="DefaultSortProperty">
+        <ScalarProperty Name="ID" ColumnName="fk_DefaultSortProperty"/>
+      </EndProperty>
+      <EndProperty Name="ObjClass">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_DefaultSortProperty" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
     Relation: FK_ObjectClass_has_AccessControlList
     A: One ObjectClass as ObjectClass
     B: ZeroOrMore AccessControl as AccessControlList

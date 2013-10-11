@@ -1009,6 +1009,10 @@
       <End Role="NavigationScreen" EntitySet="NavigationEntry" />
       <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
+    <AssociationSet Name="FK_ObjClass_has_DefaultSortProperty" Association="Model.Store.FK_ObjClass_has_DefaultSortProperty" >
+      <End Role="ObjClass" EntitySet="ObjectClass" />
+      <End Role="DefaultSortProperty" EntitySet="Property" />
+    </AssociationSet>
     <AssociationSet Name="FK_ObjectClass_has_AccessControlList" Association="Model.Store.FK_ObjectClass_has_AccessControlList" >
       <End Role="ObjectClass" EntitySet="ObjectClass" />
       <End Role="AccessControlList" EntitySet="AccessControl" />
@@ -2219,6 +2223,7 @@
     </Key>
     <Property Name="ID" Type="int4" Nullable="false" />
     <Property Name="fk_BaseObjectClass" Type="int4" />
+    <Property Name="fk_DefaultSortProperty" Type="int4" />
     <Property Name="fk_DefaultViewModelDescriptor" Type="int4" />
     <Property Name="CodeTemplate" Type="varchar" MaxLength="1000" Nullable="true" />
     <Property Name="IsAbstract" Type="bool" Nullable="false" />
@@ -5270,6 +5275,20 @@
       </Principal>
       <Dependent Role="NavigationScreen">
         <PropertyRef Name="fk_CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_ObjClass_has_DefaultSortProperty">
+    <End Role="DefaultSortProperty" Type="Model.Store.Property" Multiplicity="0..1" />
+    <End Role="ObjClass" Type="Model.Store.ObjectClass" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DefaultSortProperty">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ObjClass">
+        <PropertyRef Name="fk_DefaultSortProperty" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -281,6 +281,122 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
 		public static event PropertyGetterHandler<Zetbox.App.Base.ObjectClass, string> OnCodeTemplate_Getter;
 
         /// <summary>
+        /// 
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultSortProperty
+        // fkBackingName=_fk_DefaultSortProperty; fkGuidBackingName=_fk_guid_DefaultSortProperty;
+        // referencedInterface=Zetbox.App.Base.Property; moduleNamespace=Zetbox.App.Base;
+        // no inverse navigator handling
+        // PositionStorage=none;
+        // Target exportable; does call events
+
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
+        public Zetbox.App.Base.Property DefaultSortProperty
+        {
+            get { return DefaultSortPropertyImpl; }
+            set { DefaultSortPropertyImpl = (Zetbox.App.Base.PropertyMemoryImpl)value; }
+        }
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        private int? __fk_DefaultSortPropertyCache;
+
+        private int? _fk_DefaultSortProperty {
+            get
+            {
+                return __fk_DefaultSortPropertyCache;
+            }
+            set
+            {
+                __fk_DefaultSortPropertyCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchDefaultSortPropertyTask = null;
+            }
+        }
+
+        private Guid? _fk_guid_DefaultSortProperty = null;
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Property> _triggerFetchDefaultSortPropertyTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Property> TriggerFetchDefaultSortPropertyAsync()
+        {
+            if (_triggerFetchDefaultSortPropertyTask != null) return _triggerFetchDefaultSortPropertyTask;
+
+            if (_fk_DefaultSortProperty.HasValue)
+                _triggerFetchDefaultSortPropertyTask = Context.FindAsync<Zetbox.App.Base.Property>(_fk_DefaultSortProperty.Value);
+            else
+                _triggerFetchDefaultSortPropertyTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Property>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchDefaultSortPropertyTask.OnResult(t =>
+            {
+                if (OnDefaultSortProperty_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.Property>(t.Result);
+                    OnDefaultSortProperty_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchDefaultSortPropertyTask;
+        }
+
+        // internal implementation
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        internal Zetbox.App.Base.PropertyMemoryImpl DefaultSortPropertyImpl
+        {
+            get
+            {
+                return (Zetbox.App.Base.PropertyMemoryImpl)TriggerFetchDefaultSortPropertyAsync().Result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
+
+                // shortcut noops
+                if ((value == null && _fk_DefaultSortProperty == null) || (value != null && value.ID == _fk_DefaultSortProperty))
+                {
+                    SetInitializedProperty("DefaultSortProperty");
+                    return;
+                }
+
+                // cache old value to remove inverse references later
+                var __oldValue = DefaultSortPropertyImpl;
+                var __newValue = value;
+
+                // Changing Event fires before anything is touched
+                NotifyPropertyChanging("DefaultSortProperty", __oldValue, __newValue);
+
+                if (OnDefaultSortProperty_PreSetter != null && IsAttached)
+                {
+                    var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.Property>(__oldValue, __newValue);
+                    OnDefaultSortProperty_PreSetter(this, e);
+                    __newValue = (Zetbox.App.Base.PropertyMemoryImpl)e.Result;
+                }
+
+                // next, set the local reference
+                _fk_DefaultSortProperty = __newValue == null ? (int?)null : __newValue.ID;
+
+                // everything is done. fire the Changed event
+                NotifyPropertyChanged("DefaultSortProperty", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
+
+                if (OnDefaultSortProperty_PostSetter != null && IsAttached)
+                {
+                    var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.Property>(__oldValue, __newValue);
+                    OnDefaultSortProperty_PostSetter(this, e);
+                }
+            }
+        }
+        // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultSortProperty
+		public static event PropertyGetterHandler<Zetbox.App.Base.ObjectClass, Zetbox.App.Base.Property> OnDefaultSortProperty_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.ObjectClass, Zetbox.App.Base.Property> OnDefaultSortProperty_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.ObjectClass, Zetbox.App.Base.Property> OnDefaultSortProperty_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Base.ObjectClass> OnDefaultSortProperty_IsValid;
+
+        /// <summary>
         /// The default ViewModel to use for this ObjectClass
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultViewModelDescriptor
@@ -1320,6 +1436,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             me.TableMapping = other.TableMapping;
             me.TableName = other.TableName;
             this._fk_BaseObjectClass = otherImpl._fk_BaseObjectClass;
+            this._fk_DefaultSortProperty = otherImpl._fk_DefaultSortProperty;
             this._fk_DefaultViewModelDescriptor = otherImpl._fk_DefaultViewModelDescriptor;
         }
         public override void SetNew()
@@ -1339,6 +1456,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
                         NotifyPropertyChanging("BaseObjectClass", __oldValue, __newValue);
                         _fk_BaseObjectClass = __newValue;
                         NotifyPropertyChanged("BaseObjectClass", __oldValue, __newValue);
+                    }
+                    break;
+                case "DefaultSortProperty":
+                    {
+                        var __oldValue = _fk_DefaultSortProperty;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("DefaultSortProperty", __oldValue, __newValue);
+                        _fk_DefaultSortProperty = __newValue;
+                        NotifyPropertyChanged("DefaultSortProperty", __oldValue, __newValue);
                     }
                     break;
                 case "DefaultViewModelDescriptor":
@@ -1365,6 +1491,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             switch (property)
             {
                 case "BaseObjectClass":
+                case "DefaultSortProperty":
                 case "DefaultViewModelDescriptor":
                 case "IsAbstract":
                 case "IsFrozenObject":
@@ -1412,6 +1539,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
                 return TriggerFetchAccessControlListAsync();
             case "BaseObjectClass":
                 return TriggerFetchBaseObjectClassAsync();
+            case "DefaultSortProperty":
+                return TriggerFetchDefaultSortPropertyAsync();
             case "DefaultViewModelDescriptor":
                 return TriggerFetchDefaultViewModelDescriptorAsync();
             case "FilterConfigurations":
@@ -1439,6 +1568,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
                 BaseObjectClassImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)Context.Find<Zetbox.App.Base.ObjectClass>(_fk_BaseObjectClass.Value);
             else
                 BaseObjectClassImpl = null;
+
+            if (_fk_guid_DefaultSortProperty.HasValue)
+                DefaultSortPropertyImpl = (Zetbox.App.Base.PropertyMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.Property>(_fk_guid_DefaultSortProperty.Value);
+            else
+            if (_fk_DefaultSortProperty.HasValue)
+                DefaultSortPropertyImpl = (Zetbox.App.Base.PropertyMemoryImpl)Context.Find<Zetbox.App.Base.Property>(_fk_DefaultSortProperty.Value);
+            else
+                DefaultSortPropertyImpl = null;
 
             if (_fk_guid_DefaultViewModelDescriptor.HasValue)
                 DefaultViewModelDescriptorImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)Context.FindPersistenceObject<Zetbox.App.GUI.ViewModelDescriptor>(_fk_guid_DefaultViewModelDescriptor.Value);
@@ -1489,6 +1626,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
                         obj => obj.CodeTemplate,
                         null, // calculated property
 						null), // no constraints on calculated properties
+                    // else
+                    new PropertyDescriptorMemoryImpl<ObjectClass, Zetbox.App.Base.Property>(
+                        lazyCtx,
+                        new Guid("53ca9d62-07c4-4bce-a798-9dd2064b9f31"),
+                        "DefaultSortProperty",
+                        null,
+                        obj => obj.DefaultSortProperty,
+                        (obj, val) => obj.DefaultSortProperty = val,
+						obj => OnDefaultSortProperty_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<ObjectClass, Zetbox.App.GUI.ViewModelDescriptor>(
                         lazyCtx,
@@ -1625,6 +1771,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
         public override void NotifyCreated()
         {
             SetNotInitializedProperty("BaseObjectClass");
+            SetNotInitializedProperty("DefaultSortProperty");
             SetNotInitializedProperty("DefaultViewModelDescriptor");
             SetNotInitializedProperty("TableMapping");
             SetNotInitializedProperty("TableName");
@@ -1643,6 +1790,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             FilterConfigurations.Clear();
             SubClasses.Clear();
             BaseObjectClass = null;
+            DefaultSortProperty = null;
             DefaultViewModelDescriptor = null;
         }
         public static event ObjectEventHandler<ObjectClass> OnNotifyDeleting_ObjectClass;
@@ -1659,6 +1807,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(BaseObjectClass != null ? BaseObjectClass.ID : (int?)null);
             binStream.Write(this._CodeTemplate);
+            binStream.Write(DefaultSortProperty != null ? DefaultSortProperty.ID : (int?)null);
             binStream.Write(DefaultViewModelDescriptor != null ? DefaultViewModelDescriptor.ID : (int?)null);
             binStream.Write(this._isIsAbstractSet);
             if (this._isIsAbstractSet) {
@@ -1684,6 +1833,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             this._fk_BaseObjectClass = binStream.ReadNullableInt32();
             this._CodeTemplate = binStream.ReadString();
+            this._fk_DefaultSortProperty = binStream.ReadNullableInt32();
             this._fk_DefaultViewModelDescriptor = binStream.ReadNullableInt32();
             this._isIsAbstractSet = binStream.ReadBoolean();
             if (this._isIsAbstractSet) {
@@ -1714,6 +1864,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             if (!CurrentAccessRights.HasReadRights()) return;
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(BaseObjectClass != null ? BaseObjectClass.ExportGuid : (Guid?)null, xml, "BaseObjectClass", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._CodeTemplate, xml, "CodeTemplate", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(DefaultSortProperty != null ? DefaultSortProperty.ExportGuid : (Guid?)null, xml, "DefaultSortProperty", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(DefaultViewModelDescriptor != null ? DefaultViewModelDescriptor.ExportGuid : (Guid?)null, xml, "DefaultViewModelDescriptor", "Zetbox.App.GUI");
             System.Diagnostics.Debug.Assert(this._isIsAbstractSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._IsAbstract, xml, "IsAbstract", "Zetbox.App.Base");
@@ -1736,6 +1887,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
                 break;
             case "Zetbox.App.Base|CodeTemplate":
                 this._CodeTemplate = XmlStreamer.ReadString(xml);
+                break;
+            case "Zetbox.App.Base|DefaultSortProperty":
+                this._fk_guid_DefaultSortProperty = XmlStreamer.ReadNullableGuid(xml);
                 break;
             case "Zetbox.App.GUI|DefaultViewModelDescriptor":
                 this._fk_guid_DefaultViewModelDescriptor = XmlStreamer.ReadNullableGuid(xml);
