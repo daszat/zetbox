@@ -195,8 +195,13 @@ namespace Zetbox.Client.Models
                 propsPath.Append('.').Append(p.Name);
                 result.Append(propsPath).Append("==null?").Append(GetStandInValue(p)).Append(":");
             }
-            propsPath.Append('.').Append(props.Last().Name);
+            var lastProp = props.Last();
+            propsPath.Append('.').Append(lastProp.Name);
             result.Append(propsPath);
+            if (lastProp is ObjectReferenceProperty)
+            {
+                result.Append("!=null?").Append(propsPath).Append(".ID:-1");
+            }
             return result.ToString();
         }
 
@@ -228,11 +233,11 @@ namespace Zetbox.Client.Models
             }
             else if (p is ObjectReferenceProperty)
             {
-                return "null";
+                return "-1";
             }
             else if (p is CalculatedObjectReferenceProperty)
             {
-                return "null";
+                return "-1";
             }
             else if (p is CompoundObjectProperty)
             {
