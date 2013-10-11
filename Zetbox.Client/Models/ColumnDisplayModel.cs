@@ -242,6 +242,14 @@ namespace Zetbox.Client.Models
             {
                 return "null";
             }
+            else if (p is DateTimeProperty)
+            {
+                return "null";
+            }
+            else if (p is GuidProperty)
+            {
+                return Guid.Empty.ToString();
+            }
             else if (p is BoolProperty)
             {
                 return "false";
