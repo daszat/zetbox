@@ -19,6 +19,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Xml;
 using Mono.Cecil;
@@ -146,8 +147,7 @@ namespace PrepareEnv
             // asmv1 wants a filename, not an assembly name
             SetOrReplaceAttribute(assemblyIdentity, "name", null, Path.GetFileName(envConfig.ClientExe));
 
-            // the appId has to have a placeholder
-            SetOrReplaceAttribute(assemblyIdentity, "publicKeyToken", null, FormatKey(client.Name.PublicKeyToken));
+            SetOrReplaceAttribute(assemblyIdentity, "publicKeyToken", null, appId.publicKeyToken);
             return client;
         }
 
@@ -280,10 +280,45 @@ namespace PrepareEnv
         {
             Program.LogAction("signing with xmlsec1: [{0}] => [{1}]", templateName, outputName);
 
+            // load manifest input xml
             var docTemplate = new XmlDocument();
             docTemplate.Load(templateName);
             var nsmgr = CreateDefaultXmlNsmgr(docTemplate);
 
+            // insert publisher identity
+            var pfx = UnlockPfx(File.ReadAllBytes(envConfig.ClickOnce.KeyFile));
+            var cert = pfx.Certificates.Cast<X509Certificate>().Single();
+            var publisherName = cert.SubjectName;
+            // as described on http://msdn.microsoft.com/en-us/library/dd996956.aspx
+            var issuerKeyHash = FormatKey(_sha1.ComputeHash(cert.PublicKey));
+
+            var publisherIdentity = docTemplate.CreateElement("publisherIdentity", ASMv2_NS);
+            SetOrReplaceAttribute(publisherIdentity, "name", null, publisherName);
+            SetOrReplaceAttribute(publisherIdentity, "issuerKeyHash", null, issuerKeyHash);
+
+            docTemplate.ChildNodes.OfType<XmlElement>().Last().AppendChild(publisherIdentity);
+
+            var fusionTemplateName = templateName + ".fusion";
+            docTemplate.Save(fusionTemplateName);
+
+            //
+            // Calculate ManifestInformation Hash
+            // ==================================
+            // The Fusion XML engine is always preserving whitespace, therefore we need to
+            // use a specially configured XmlDocument to normalize and sign the Manifest.
+            // 
+            byte[] hash;
+            {
+                var fusionDoc = new XmlDocument();
+                fusionDoc.PreserveWhitespace = true;
+                fusionDoc.Load(fusionTemplateName);
+
+                var transform = new XmlDsigExcC14NTransform();
+                transform.LoadInput(fusionDoc);
+                hash = _sha1.ComputeHash((MemoryStream)transform.GetOutput());
+            }
+
+            // Load SignatureBlock into DOM
             var signatureTemplate = LoadXmlFromResource("PrepareEnv.Templates.SignatureBlock.xml");
             foreach (XmlNode sigNode in signatureTemplate.DocumentElement.ChildNodes)
             {
@@ -296,6 +331,15 @@ namespace PrepareEnv
                 }
             }
 
+            // Set ManifestInformation Hash
+            var manifestInfo = docTemplate.SelectSingleNode("//as:ManifestInformation", nsmgr);
+            SetOrReplaceAttribute(manifestInfo, "Hash", null, FormatKey(hash));
+
+            // Set AuthenticodePublisher's SubjectName
+            var subjectName = docTemplate.SelectSingleNode("//as:AuthenticodePublisher/as:X509SubjectName", nsmgr);
+            subjectName.InnerText = publisherName;
+
+            // Sign everything
             Program.LogDetail("saving to xmlsec1 template: [{0}]", templateName + ".xmlsec1");
             docTemplate.Save(templateName + ".xmlsec1");
 
@@ -483,36 +527,7 @@ namespace PrepareEnv
                 if (data.Length == 0 || data[0] != 0x30)
                     throw; // awww
 
-                PKCS12 pfx;
-
-                try
-                {
-                    pfx = new PKCS12(data);
-                }
-                catch
-                {
-                    try
-                    {
-                        pfx = new PKCS12(data, string.Empty);
-                    }
-                    catch
-                    {
-                        try
-                        {
-                            if (_passphrase == null)
-                            {
-                                Console.Write("Please enter the passphrase for the KeyFile (will be visible when typed): ");
-                                _passphrase = Console.ReadLine();
-                            }
-                            pfx = new PKCS12(data, _passphrase);
-                        }
-                        catch
-                        {
-                            _passphrase = null;
-                            throw;
-                        }
-                    }
-                }
+                var pfx = UnlockPfx(data);
 
                 try
                 {
@@ -527,6 +542,42 @@ namespace PrepareEnv
                     throw;
                 }
             }
+        }
+
+        [DebuggerNonUserCode] // ignore the exception-based control flow in this method
+        private static PKCS12 UnlockPfx(byte[] data)
+        {
+            PKCS12 pfx;
+
+            try
+            {
+                pfx = new PKCS12(data);
+            }
+            catch
+            {
+                try
+                {
+                    pfx = new PKCS12(data, string.Empty);
+                }
+                catch
+                {
+                    try
+                    {
+                        if (_passphrase == null)
+                        {
+                            Console.Write("Please enter the passphrase for the KeyFile (will be visible when typed): ");
+                            _passphrase = Console.ReadLine();
+                        }
+                        pfx = new PKCS12(data, _passphrase);
+                    }
+                    catch
+                    {
+                        _passphrase = null;
+                        throw;
+                    }
+                }
+            }
+            return pfx;
         }
 
         private static string FormatKey(byte[] data)
