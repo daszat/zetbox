@@ -186,9 +186,12 @@ namespace Zetbox.Client.Models
             return colMdl;
         }
 
-        private static string FormatDynamicOrderByExpression(Property[] props_input)
+        public static string FormatDynamicOrderByExpression(params Property[] properties)
         {
-            var props = props_input.ToList();
+            if (properties == null) return string.Empty;
+            if (properties.Length == 0) return string.Empty;
+
+            var props = properties.ToList();
             while (props.Last() is ObjectReferenceProperty)
             {
                 var refProp = (ObjectReferenceProperty)props.Last();
