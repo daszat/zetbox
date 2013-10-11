@@ -186,22 +186,38 @@ namespace Zetbox.Client.Models
             return colMdl;
         }
 
-        private static string FormatDynamicOrderByExpression(Property[] props)
+        private static string FormatDynamicOrderByExpression(Property[] props_input)
         {
+            var props = props_input.ToList();
+            while (props.Last() is ObjectReferenceProperty)
+            {
+                var refProp = (ObjectReferenceProperty)props.Last();
+                var sortProp = refProp.GetReferencedObjectClass()
+                                      .AndParents(c => c.BaseObjectClass)
+                                      .FirstOrDefault(c => c.DefaultSortProperty != null)
+                                      .IfNotNull(c => c.DefaultSortProperty);
+                if (sortProp == null) break;
+                if (props.Contains(sortProp)) break;
+                props.Add(sortProp);
+            }
+
             var result = new StringBuilder();
             var propsPath = new StringBuilder("it");
-            foreach (var p in props.Take(props.Length - 1))
+            var lastProp = props.Last();
+            var standInValue = GetStandInValue(lastProp);
+            foreach (var p in props.Take(props.Count - 1))
             {
                 propsPath.Append('.').Append(p.Name);
-                result.Append(propsPath).Append("==null?").Append(GetStandInValue(p)).Append(":");
+                result.Append(propsPath).Append("==null?").Append(standInValue).Append(":");
             }
-            var lastProp = props.Last();
             propsPath.Append('.').Append(lastProp.Name);
             result.Append(propsPath);
+
             if (lastProp is ObjectReferenceProperty)
             {
                 result.Append("!=null?").Append(propsPath).Append(".ID:-1");
             }
+
             return result.ToString();
         }
 
