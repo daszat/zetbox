@@ -42,7 +42,7 @@ CALLSTACK:$(Get-PSCallStack | Out-String)
 $assembly = "Zetbox.Client.Bootstrapper"
 $outPath = (get-location).Path + "\publish\"
 
-$magePath = "${env:ProgramFiles(x86)}\Microsoft SDKs\Windows\v7.0A\Bin\NETFX 4.0 Tools\mage.exe"
+$magePath = "${env:WindowsSdkDir}\Bin\NETFX 4.0 Tools\mage.exe"
 
 if (!(Test-Path -path "$outPath\$Version")) {
 	mkdir "$outPath\$Version" | out-null
