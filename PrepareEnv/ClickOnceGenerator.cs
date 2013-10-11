@@ -125,7 +125,14 @@ namespace PrepareEnv
             SetOrReplaceAttribute(assemblyIdentity, "version", null, assemblyDef.Name.Version.ToString());
             SetOrReplaceAttribute(assemblyIdentity, "language", null, string.IsNullOrEmpty(assemblyDef.Name.Culture) ? "neutral" : assemblyDef.Name.Culture);
             SetOrReplaceAttribute(assemblyIdentity, "processorArchitecture", null, isX86 ? "x86" : "msil");
-            SetOrReplaceAttribute(assemblyIdentity, "publicKeyToken", null, FormatKey(assemblyDef.Name.PublicKeyToken));
+            if (assemblyDef.Name.PublicKeyToken != null && assemblyDef.Name.PublicKeyToken.Length > 0)
+            {
+                SetOrReplaceAttribute(assemblyIdentity, "publicKeyToken", null, FormatKey(assemblyDef.Name.PublicKeyToken));
+            }
+            else
+            {
+                assemblyIdentity.Attributes.RemoveNamedItem("publicKeyToken");
+            }
         }
 
         private static AssemblyDefinition FillAppId(EnvConfig envConfig, XmlNode assemblyIdentity, AppId appId)
@@ -133,10 +140,14 @@ namespace PrepareEnv
             var client = AssemblyDefinition.ReadAssembly(envConfig.ClientExe);
 
             FillClickOnceAssemblyId(client, assemblyIdentity);
+            // this seems to be a constant
             SetOrReplaceAttribute(assemblyIdentity, "type", null, "win32");
 
             // asmv1 wants a filename, not an assembly name
-            assemblyIdentity.Attributes["name"].Value = Path.GetFileName(envConfig.ClientExe);
+            SetOrReplaceAttribute(assemblyIdentity, "name", null, Path.GetFileName(envConfig.ClientExe));
+
+            // the appId has to have a placeholder
+            SetOrReplaceAttribute(assemblyIdentity, "publicKeyToken", null, FormatKey(client.Name.PublicKeyToken));
             return client;
         }
 
@@ -267,7 +278,7 @@ namespace PrepareEnv
 
         private static void SignXmlSec1(EnvConfig envConfig, string templateName, string outputName, AppId appId)
         {
-            Program.LogAction("signing with xmlsec1");
+            Program.LogAction("signing with xmlsec1: [{0}] => [{1}]", templateName, outputName);
 
             var docTemplate = new XmlDocument();
             docTemplate.Load(templateName);
@@ -285,6 +296,7 @@ namespace PrepareEnv
                 }
             }
 
+            Program.LogDetail("saving to xmlsec1 template: [{0}]", templateName + ".xmlsec1");
             docTemplate.Save(templateName + ".xmlsec1");
 
             var pw = _passphrase == null ? string.Empty : string.Format("--pwd \"{0}\"", _passphrase);
@@ -296,6 +308,7 @@ namespace PrepareEnv
                                             envConfig.ClickOnce.KeyFile,
                                             outputName,
                                             templateName);
+            Program.LogDetail("signing reldata to [{0}.reldata]", outputName);
             var proc = Process.Start(new ProcessStartInfo("xmlsec1", relDataArgs) { UseShellExecute = false });
             proc.WaitForExit();
             if (proc.ExitCode != 0)
@@ -309,6 +322,7 @@ namespace PrepareEnv
                                           envConfig.ClickOnce.KeyFile.EndsWith("pfx") ? "--pkcs12" : "--privkey-pem",
                                           envConfig.ClickOnce.KeyFile,
                                           outputName);
+            Program.LogDetail("signing final to : [{0}]", outputName);
             proc = Process.Start(new ProcessStartInfo("xmlsec1", finalArgs) { UseShellExecute = false });
             proc.WaitForExit();
             if (proc.ExitCode != 0)
@@ -319,7 +333,7 @@ namespace PrepareEnv
 
         private static void SignMage(EnvConfig envConfig, string templateName, string outputName)
         {
-            Program.LogAction("signing with mage");
+            Program.LogAction("signing with mage: [{0}]", outputName);
             var pw = _passphrase == null ? string.Empty : string.Format("-Password {0}", _passphrase);
             var args = string.Format("-Sign {0} -ToFile {1} -Certfile {2} {3}", templateName, outputName, envConfig.ClickOnce.KeyFile, pw);
             var proc = Process.Start(Path.Combine(Environment.GetEnvironmentVariable("WindowsSdkDir"), "Bin", "NETFX 4.0 Tools", "mage.exe"), args);
