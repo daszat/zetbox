@@ -22,14 +22,16 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     {
         private string _orderByExpression = null;
         private System.ComponentModel.ListSortDirection _sortDirection = System.ComponentModel.ListSortDirection.Ascending;
+        private string _initialOrderByExpression = null;
+        private System.ComponentModel.ListSortDirection _initialSortDirection = System.ComponentModel.ListSortDirection.Ascending;
 
         public string SortProperty { get { return _orderByExpression; } }
         public System.ComponentModel.ListSortDirection SortDirection { get { return _sortDirection; } }
 
         public void ResetSort(bool refresh = true)
         {
-            _orderByExpression = null;
-            _sortDirection = System.ComponentModel.ListSortDirection.Ascending;
+            _orderByExpression = _initialOrderByExpression;
+            _sortDirection = _initialSortDirection;
             if (refresh)
             {
                 if (_instancesFromServer.Count < Helper.MAXLISTCOUNT)
@@ -66,8 +68,9 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         public void SetInitialSort(string orderByExpression, System.ComponentModel.ListSortDirection direction)
         {
             if (string.IsNullOrEmpty(orderByExpression)) throw new ArgumentNullException("orderByExpression");
-            _orderByExpression = orderByExpression;
-            _sortDirection = direction;
+            _initialOrderByExpression = orderByExpression;
+            _initialSortDirection = direction;
+            ResetSort(refresh: false);
         }
     }
 }
