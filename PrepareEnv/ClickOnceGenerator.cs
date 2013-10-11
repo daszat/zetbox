@@ -18,10 +18,10 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Xml;
+using Mono.Cecil;
 using Mono.Security;
 using Mono.Security.X509;
 
@@ -91,7 +91,7 @@ namespace PrepareEnv
 
             // set the startup paramters
             var entryPointCli = doc.SelectSingleNode("/asmv1:assembly/asmv2:entryPoint/asmv2:commandLine", nsmgr);
-            entryPointCli.Attributes["file"].Value = Path.GetFileName(clientName.CodeBase);
+            entryPointCli.Attributes["file"].Value = Path.GetFileName(envConfig.ClientExe);
             entryPointCli.Attributes["parameters"].Value = envConfig.ClientParameters;
 
             // insert deployed files
@@ -117,38 +117,27 @@ namespace PrepareEnv
             doc.Save(GetManifestTemplateName(envConfig));
         }
 
-        private static void FillClickOnceAssemblyId(AssemblyName assemblyName, XmlNode assemblyIdentity)
+        private static void FillClickOnceAssemblyId(AssemblyDefinition assemblyDef, XmlNode assemblyIdentity)
         {
-            SetOrReplaceAttribute(assemblyIdentity, "name", null, assemblyName.Name);
-            SetOrReplaceAttribute(assemblyIdentity, "version", null, assemblyName.Version.ToString());
-            if (string.IsNullOrEmpty(assemblyName.CultureInfo.Name))
-            {
-                SetOrReplaceAttribute(assemblyIdentity, "language", null, "neutral");
-            }
-            else
-            {
-                SetOrReplaceAttribute(assemblyIdentity, "language", null, assemblyName.CultureInfo.Name);
-            }
-            SetOrReplaceAttribute(assemblyIdentity, "processorArchitecture", null, assemblyName.ProcessorArchitecture.ToString().ToLowerInvariant());
-            var pkToken = assemblyName.GetPublicKeyToken();
-            if (pkToken != null && pkToken.Length > 0)
-            {
-                SetOrReplaceAttribute(assemblyIdentity, "publicKeyToken", null, FormatKey(pkToken));
-            }
+            var isX86 = (assemblyDef.MainModule.Attributes & ModuleAttributes.Required32Bit) == ModuleAttributes.Required32Bit;
+
+            SetOrReplaceAttribute(assemblyIdentity, "name", null, assemblyDef.Name.Name);
+            SetOrReplaceAttribute(assemblyIdentity, "version", null, assemblyDef.Name.Version.ToString());
+            SetOrReplaceAttribute(assemblyIdentity, "language", null, string.IsNullOrEmpty(assemblyDef.Name.Culture) ? "neutral" : assemblyDef.Name.Culture);
+            SetOrReplaceAttribute(assemblyIdentity, "processorArchitecture", null, isX86 ? "x86" : "msil");
+            SetOrReplaceAttribute(assemblyIdentity, "publicKeyToken", null, FormatKey(assemblyDef.Name.PublicKeyToken));
         }
 
-        private static AssemblyName FillAppId(EnvConfig envConfig, XmlNode assemblyIdentity, AppId appId)
+        private static AssemblyDefinition FillAppId(EnvConfig envConfig, XmlNode assemblyIdentity, AppId appId)
         {
-            var client = Assembly.ReflectionOnlyLoadFrom(envConfig.ClientExe);
-            var clientName = client.GetName();
+            var client = AssemblyDefinition.ReadAssembly(envConfig.ClientExe);
 
-            FillClickOnceAssemblyId(clientName, assemblyIdentity);
-            SetOrReplaceAttribute(assemblyIdentity, "publicKeyToken", null, string.Join(string.Empty, clientName.GetPublicKeyToken().Select(b => string.Format(CultureInfo.InvariantCulture, "{0:x2}", b))));
+            FillClickOnceAssemblyId(client, assemblyIdentity);
             SetOrReplaceAttribute(assemblyIdentity, "type", null, "win32");
 
             // asmv1 wants a filename, not an assembly name
-            assemblyIdentity.Attributes["name"].Value = Path.GetFileName(client.CodeBase);
-            return clientName;
+            assemblyIdentity.Attributes["name"].Value = Path.GetFileName(envConfig.ClientExe);
+            return client;
         }
 
         private static void InsertClickOnceDependency(EnvConfig envConfig, XmlNode dependencyList, XmlNode lastPrerequisite, string file, XmlNamespaceManager nsmgr)
@@ -183,7 +172,7 @@ namespace PrepareEnv
 
                 var assemblyIdentity = doc.CreateNode(XmlNodeType.Element, "assemblyIdentity", ASMv2_NS);
 
-                FillClickOnceAssemblyId(Assembly.ReflectionOnlyLoadFrom(Path.Combine(envConfig.BinaryTarget, file)).GetName(), assemblyIdentity);
+                FillClickOnceAssemblyId(AssemblyDefinition.ReadAssembly(Path.Combine(envConfig.BinaryTarget, file)), assemblyIdentity);
                 dependentAssembly.AppendChild(assemblyIdentity);
 
                 var hash = CreateHashNode(file, nsmgr, doc);
@@ -528,6 +517,10 @@ namespace PrepareEnv
 
         private static string FormatKey(byte[] data)
         {
+            // return placeholder, needed by mage.exe ("Internal error, please try again. The form specified for the subject is not one supported or known by the specified trust provider.")
+            // yay for helpful error messages
+            if (data == null || data.Length == 0)
+                return "0000000000000000";
             return string.Join(string.Empty, data.Select(i => i.ToString("x2")));
         }
         #endregion
