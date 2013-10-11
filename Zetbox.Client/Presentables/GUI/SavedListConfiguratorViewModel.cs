@@ -244,6 +244,7 @@ namespace Zetbox.Client.Presentables.GUI
         public void Reset()
         {
             SelectedItem = null;
+            Parent.ResetSort(refresh: false);
             Parent.FilterList.ResetUserFilter();
             Parent.ResetDisplayedColumns();
         }

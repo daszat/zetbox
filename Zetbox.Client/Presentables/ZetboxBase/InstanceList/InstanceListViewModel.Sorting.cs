@@ -26,6 +26,23 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         public string SortProperty { get { return _orderByExpression; } }
         public System.ComponentModel.ListSortDirection SortDirection { get { return _sortDirection; } }
 
+        public void ResetSort(bool refresh = true)
+        {
+            _orderByExpression = null;
+            _sortDirection = System.ComponentModel.ListSortDirection.Ascending;
+            if (refresh)
+            {
+                if (_instancesFromServer.Count < Helper.MAXLISTCOUNT)
+                {
+                    UpdateFilteredInstances();
+                }
+                else
+                {
+                    Refresh();
+                }
+            }
+        }
+
         public void Sort(string orderByExpression, System.ComponentModel.ListSortDirection direction)
         {
             if (string.IsNullOrEmpty(orderByExpression)) throw new ArgumentNullException("orderByExpression");
