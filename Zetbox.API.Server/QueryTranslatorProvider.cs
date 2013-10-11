@@ -479,7 +479,7 @@ namespace Zetbox.API.Server
             }
             else
             {
-                return c;
+                return Expression.Constant(c.Value, TranslateType(c.Type));
             }
         }
 
