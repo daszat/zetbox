@@ -1719,7 +1719,7 @@
                   column="`Geburtstag`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="Identity" column="`fk_Identity`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" unique="true" />
+        <many-to-one name="Identity" column="`fk_Identity`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" unique="true" cascade="none" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
@@ -2206,7 +2206,7 @@
                   column="`Description`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="DestinationObjectClass" column="`fk_ObjectClass`" class="Zetbox.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Zetbox.Objects.NHibernateImpl" unique="true" />
+        <many-to-one name="DestinationObjectClass" column="`fk_ObjectClass`" class="Zetbox.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Zetbox.Objects.NHibernateImpl" unique="true" cascade="none" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
@@ -2625,7 +2625,7 @@
         <many-to-one name="TestCustomObjects_Nav" column="`fk_TCO_Role`" class="Zetbox.App.Test.TestCustomObjectNHibernateImpl+TestCustomObjectProxy, Zetbox.Objects.NHibernateImpl" />
 
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="TestCustomObjects_One_Nav" column="`fk_TCO_One_Role`" class="Zetbox.App.Test.TestCustomObjectNHibernateImpl+TestCustomObjectProxy, Zetbox.Objects.NHibernateImpl" unique="true" />
+        <many-to-one name="TestCustomObjects_One_Nav" column="`fk_TCO_One_Role`" class="Zetbox.App.Test.TestCustomObjectNHibernateImpl+TestCustomObjectProxy, Zetbox.Objects.NHibernateImpl" unique="true" cascade="none" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="TestDateTime" type="Timestamp"
@@ -4470,7 +4470,7 @@
                   column="`CodeTemplate`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="DefaultSortProperty" column="`fk_DefaultSortProperty`" class="Zetbox.App.Base.PropertyNHibernateImpl+PropertyProxy, Zetbox.Objects.NHibernateImpl" unique="true" />
+        <many-to-one name="DefaultSortProperty" column="`fk_DefaultSortProperty`" class="Zetbox.App.Base.PropertyNHibernateImpl+PropertyProxy, Zetbox.Objects.NHibernateImpl" unique="true" cascade="none" />
 
 <!-- ObjectReferenceProperty -->
         <many-to-one name="DefaultViewModelDescriptor" column="`fk_DefaultViewModelDescriptor`" class="Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl+ViewModelDescriptorProxy, Zetbox.Objects.NHibernateImpl" />
@@ -5292,7 +5292,7 @@
         </set>
 
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="RelationEnd" column="`ObjectReferenceProperties_fk_RelationEnd`" class="Zetbox.App.Base.RelationEndNHibernateImpl+RelationEndProxy, Zetbox.Objects.NHibernateImpl" unique="true" />
+        <many-to-one name="RelationEnd" column="`ObjectReferenceProperties_fk_RelationEnd`" class="Zetbox.App.Base.RelationEndNHibernateImpl+RelationEndProxy, Zetbox.Objects.NHibernateImpl" unique="true" cascade="none" />
 
 
             <!-- define the subclasses -->
