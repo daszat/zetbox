@@ -135,6 +135,12 @@
   <data name="CodeTemplate_description" xml:space="preserve">
     <value>Provides a code template for default methods</value>
   </data>
+  <data name="DefaultSortProperty_label" xml:space="preserve">
+    <value>Default sort property</value>
+  </data>
+  <data name="DefaultSortProperty_description" xml:space="preserve">
+    <value />
+  </data>
   <data name="DefaultViewModelDescriptor_label" xml:space="preserve">
     <value>DefaultViewModelDescriptor</value>
   </data>
