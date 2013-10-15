@@ -39,6 +39,15 @@ namespace Zetbox.App.Base
         ICollection<Zetbox.App.Base.Constraint> Constraints { get; }
 
         /// <summary>
+        /// Properties that have a priority set are used to order instance lists. Smaller values are sorted first.
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("38d94cbf-17d3-407e-8738-1c97892204b1")]
+        int? DefaultSortPriority {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Property can have a default value
         /// </summary>
         [Zetbox.API.DefinitionGuid("590d6a36-2e4b-41bd-a51e-298aba90ce72")]

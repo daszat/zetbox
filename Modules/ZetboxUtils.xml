@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-10-11T13:12:58Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-10-15T09:14:57Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -49,7 +49,6 @@ public static void ObjectIsValid(CalendarBook obj, ObjectIsValidEventArgs e)
 }
 
 </ZetboxBase:CodeTemplate>
-    <ZetboxBase:DefaultSortProperty>e1647548-92ee-4fae-9155-faad7d7e9187</ZetboxBase:DefaultSortProperty>
     <GUI:DefaultViewModelDescriptor>30b2681e-5118-4c0b-a30f-114c580c973e</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
@@ -241,7 +240,6 @@ public static void ObjectIsValid(Event obj, ObjectIsValidEventArgs e)
 }
 
 </ZetboxBase:CodeTemplate>
-    <ZetboxBase:DefaultSortProperty>93bf17bd-4dfb-468d-84d4-75fce8214fa3</ZetboxBase:DefaultSortProperty>
     <GUI:DefaultViewModelDescriptor>590f80a4-27f2-4fb4-b7d3-4b80d13dec75</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
@@ -338,7 +336,6 @@ public static void ObjectIsValid(SyncProvider obj, ObjectIsValidEventArgs e)
 }
 
 </ZetboxBase:CodeTemplate>
-    <ZetboxBase:DefaultSortProperty>1c49698b-a45d-4e84-92a4-b66b334e109d</ZetboxBase:DefaultSortProperty>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>true</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
@@ -386,7 +383,6 @@ public static void ObjectIsValid(WorkSchedule obj, ObjectIsValidEventArgs e)
 }
 
 </ZetboxBase:CodeTemplate>
-    <ZetboxBase:DefaultSortProperty>49cdf3fb-639f-4c20-b9ca-9af1bbe0d4d7</ZetboxBase:DefaultSortProperty>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
@@ -434,7 +430,6 @@ public static void ObjectIsValid(WorkScheduleRule obj, ObjectIsValidEventArgs e)
 }
 
 </ZetboxBase:CodeTemplate>
-    <ZetboxBase:DefaultSortProperty>88bd31d8-6963-49ed-8ac8-31d438744eef</ZetboxBase:DefaultSortProperty>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>true</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
@@ -908,6 +903,7 @@ public static void isValid_Name(CalendarBook obj, PropertyIsValidEventArgs e)
 
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2013-02-18T16:15:19.121645Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultSortPriority>1</ZetboxBase:DefaultSortPriority>
     <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
     <ZetboxBase:Name>Name</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>1450be5f-2266-4367-8a56-1f0bee5699c4</ZetboxBase:ObjectClass>
@@ -1605,6 +1601,7 @@ public static void isValid_StartDate(Event obj, PropertyIsValidEventArgs e)
 
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2013-02-18T16:22:25.934057Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultSortPriority>1</ZetboxBase:DefaultSortPriority>
     <ZetboxBase:Label>Start</ZetboxBase:Label>
     <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
     <ZetboxBase:Name>StartDate</ZetboxBase:Name>
@@ -1974,6 +1971,7 @@ public static void isValid_Name(SyncProvider obj, PropertyIsValidEventArgs e)
 
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2013-03-25T13:01:01.008232Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultSortPriority>1</ZetboxBase:DefaultSortPriority>
     <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
     <ZetboxBase:Name>Name</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>12ce65c1-e00b-44be-b119-eb520b46616e</ZetboxBase:ObjectClass>
@@ -2341,6 +2339,7 @@ public static void isValid_Name(WorkSchedule obj, PropertyIsValidEventArgs e)
 
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2011-06-15T09:38:49Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultSortPriority>1</ZetboxBase:DefaultSortPriority>
     <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
     <ZetboxBase:Name>Name</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>901a2ddd-1330-4129-b8a2-92b8e655d168</ZetboxBase:ObjectClass>
@@ -2674,6 +2673,7 @@ public static void isValid_Name(WorkScheduleRule obj, PropertyIsValidEventArgs e
 
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2011-06-15T09:57:50Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultSortPriority>1</ZetboxBase:DefaultSortPriority>
     <ZetboxBase:Description>The name of the Rule</ZetboxBase:Description>
     <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
     <ZetboxBase:Name>Name</ZetboxBase:Name>
@@ -4943,7 +4943,6 @@ public static void ObjectIsValid(File obj, ObjectIsValidEventArgs e)
 }
 
 </ZetboxBase:CodeTemplate>
-    <ZetboxBase:DefaultSortProperty>1c5f2bea-9915-4634-8ff9-5fd6f0871704</ZetboxBase:DefaultSortProperty>
     <GUI:DefaultViewModelDescriptor>f580a1b4-26c0-46e8-a268-3b3d4b4f15a7</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>true</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
@@ -5538,6 +5537,7 @@ public static void isValid_Name(File obj, PropertyIsValidEventArgs e)
 
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2010-03-10T22:14:05Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultSortPriority>1</ZetboxBase:DefaultSortPriority>
     <ZetboxBase:Description>Filename</ZetboxBase:Description>
     <GUI:FilterConfiguration>553b8fe1-9b2a-45b1-8025-b3ff893ed683</GUI:FilterConfiguration>
     <ZetboxBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</ZetboxBase:Module>
@@ -6932,7 +6932,6 @@ public static void ObjectIsValid(SourceColumn obj, ObjectIsValidEventArgs e)
 }
 
 </ZetboxBase:CodeTemplate>
-    <ZetboxBase:DefaultSortProperty>a27f7d36-fd56-4271-bac0-88e22bc65027</ZetboxBase:DefaultSortProperty>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
@@ -6979,7 +6978,6 @@ public static void ObjectIsValid(SourceEnum obj, ObjectIsValidEventArgs e)
 }
 
 </ZetboxBase:CodeTemplate>
-    <ZetboxBase:DefaultSortProperty>885a90e0-62e0-426a-a3b5-64dca3a38d18</ZetboxBase:DefaultSortProperty>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
@@ -7025,7 +7023,6 @@ public static void ObjectIsValid(SourceTable obj, ObjectIsValidEventArgs e)
 }
 
 </ZetboxBase:CodeTemplate>
-    <ZetboxBase:DefaultSortProperty>f01c1095-cf9b-41f5-b89c-532a86a78cc5</ZetboxBase:DefaultSortProperty>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
@@ -8348,6 +8345,7 @@ public static void isValid_Name(SourceColumn obj, PropertyIsValidEventArgs e)
 
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2010-07-02T05:55:57Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultSortPriority>1</ZetboxBase:DefaultSortPriority>
     <GUI:FilterConfiguration>20eea15e-e7e6-43d8-8807-26cffc295830</GUI:FilterConfiguration>
     <ZetboxBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</ZetboxBase:Module>
     <ZetboxBase:Name>Name</ZetboxBase:Name>
@@ -8820,6 +8818,7 @@ public static void isValid_SourceValue(SourceEnum obj, PropertyIsValidEventArgs 
 
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2010-07-13T08:16:38Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultSortPriority>1</ZetboxBase:DefaultSortPriority>
     <ZetboxBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</ZetboxBase:Module>
     <ZetboxBase:Name>SourceValue</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>138d462f-e432-46a0-8ce2-e7f9893654d4</ZetboxBase:ObjectClass>
@@ -9149,6 +9148,7 @@ public static void isValid_Name(SourceTable obj, PropertyIsValidEventArgs e)
 
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2010-07-02T05:23:49Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultSortPriority>1</ZetboxBase:DefaultSortPriority>
     <ZetboxBase:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</ZetboxBase:Module>
     <ZetboxBase:Name>Name</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>7f95aa3e-0150-4073-8b9e-803226872cc2</ZetboxBase:ObjectClass>

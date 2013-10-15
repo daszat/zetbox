@@ -159,6 +159,12 @@
   <data name="CreatedOn_description" xml:space="preserve">
     <value>Date and time where this object was created</value>
   </data>
+  <data name="DefaultSortPriority_label" xml:space="preserve">
+    <value>Default Sort Priority</value>
+  </data>
+  <data name="DefaultSortPriority_description" xml:space="preserve">
+    <value>Properties that have a priority set are used to order instance lists. Smaller values are sorted first.</value>
+  </data>
   <data name="DefaultValue_label" xml:space="preserve">
     <value>DefaultValue</value>
   </data>

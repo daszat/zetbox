@@ -1009,10 +1009,6 @@
       <End Role="NavigationScreen" EntitySet="NavigationEntry" />
       <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
-    <AssociationSet Name="FK_ObjClass_has_DefaultSortProperty" Association="Model.Store.FK_ObjClass_has_DefaultSortProperty" >
-      <End Role="ObjClass" EntitySet="ObjectClass" />
-      <End Role="DefaultSortProperty" EntitySet="Property" />
-    </AssociationSet>
     <AssociationSet Name="FK_ObjectClass_has_AccessControlList" Association="Model.Store.FK_ObjectClass_has_AccessControlList" >
       <End Role="ObjectClass" EntitySet="ObjectClass" />
       <End Role="AccessControlList" EntitySet="AccessControl" />
@@ -2223,7 +2219,6 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" />
     <Property Name="fk_BaseObjectClass" Type="int" />
-    <Property Name="fk_DefaultSortProperty" Type="int" />
     <Property Name="fk_DefaultViewModelDescriptor" Type="int" />
     <Property Name="CodeTemplate" Type="nvarchar" MaxLength="1000" Nullable="true" />
     <Property Name="IsAbstract" Type="bit" Nullable="false" />
@@ -2327,6 +2322,7 @@
     <Property Name="ChangedOn" Type="datetime2" Nullable="false" />
     <Property Name="CodeTemplate" Type="nvarchar" MaxLength="1000" Nullable="true" />
     <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
+    <Property Name="DefaultSortPriority" Type="int" Nullable="true" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="DisableExport" Type="bit" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
@@ -5275,20 +5271,6 @@
       </Principal>
       <Dependent Role="NavigationScreen">
         <PropertyRef Name="fk_CreatedBy" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_ObjClass_has_DefaultSortProperty">
-    <End Role="DefaultSortProperty" Type="Model.Store.Property" Multiplicity="0..1" />
-    <End Role="ObjClass" Type="Model.Store.ObjectClass" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="DefaultSortProperty">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="ObjClass">
-        <PropertyRef Name="fk_DefaultSortProperty" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

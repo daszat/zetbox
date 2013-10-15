@@ -624,6 +624,75 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         public static event PropertyIsValidHandler<Zetbox.App.Base.Property> OnCreatedOn_IsValid;
 
         /// <summary>
+        /// Properties that have a priority set are used to order instance lists. Smaller values are sorted first.
+        /// </summary>
+        // value type property
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public int? DefaultSortPriority
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _DefaultSortPriority;
+                if (OnDefaultSortPriority_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<int?>(__result);
+                    OnDefaultSortPriority_Getter(this, __e);
+                    __result = _DefaultSortPriority = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_DefaultSortPriority != value)
+                {
+                    var __oldValue = _DefaultSortPriority;
+                    var __newValue = value;
+                    if (OnDefaultSortPriority_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<int?>(__oldValue, __newValue);
+                        OnDefaultSortPriority_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("DefaultSortPriority", __oldValue, __newValue);
+                    _DefaultSortPriority = __newValue;
+                    NotifyPropertyChanged("DefaultSortPriority", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnDefaultSortPriority_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<int?>(__oldValue, __newValue);
+                        OnDefaultSortPriority_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("DefaultSortPriority");
+                }
+            }
+        }
+        private int? _DefaultSortPriority_store;
+        private int? _DefaultSortPriority {
+            get { return _DefaultSortPriority_store; }
+            set {
+                ReportEfPropertyChanging("DefaultSortPriority");
+                _DefaultSortPriority_store = value;
+                ReportEfPropertyChanged("DefaultSortPriority");
+            }
+        }
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Zetbox.App.Base.Property, int?> OnDefaultSortPriority_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.Property, int?> OnDefaultSortPriority_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.Property, int?> OnDefaultSortPriority_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Base.Property> OnDefaultSortPriority_IsValid;
+
+        /// <summary>
         /// Property can have a default value
         /// </summary>
     /*
@@ -2187,6 +2256,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             me.CategoryTags = other.CategoryTags;
             me.ChangedOn = other.ChangedOn;
             me.CreatedOn = other.CreatedOn;
+            me.DefaultSortPriority = other.DefaultSortPriority;
             me.Description = other.Description;
             me.DisableExport = other.DisableExport;
             me.ExportGuid = other.ExportGuid;
@@ -2222,6 +2292,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 case "ChangedOn":
                 case "CreatedBy":
                 case "CreatedOn":
+                case "DefaultSortPriority":
                 case "DefaultValue":
                 case "Description":
                 case "DisableExport":
@@ -2441,6 +2512,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                         (obj, val) => obj.CreatedOn = val,
 						obj => OnCreatedOn_IsValid), 
                     // else
+                    new PropertyDescriptorEfImpl<Property, int?>(
+                        lazyCtx,
+                        new Guid("38d94cbf-17d3-407e-8738-1c97892204b1"),
+                        "DefaultSortPriority",
+                        null,
+                        obj => obj.DefaultSortPriority,
+                        (obj, val) => obj.DefaultSortPriority = val,
+						obj => OnDefaultSortPriority_IsValid), 
+                    // else
                     new PropertyDescriptorEfImpl<Property, Zetbox.App.Base.DefaultPropertyValue>(
                         lazyCtx,
                         new Guid("590d6a36-2e4b-41bd-a51e-298aba90ce72"),
@@ -2624,6 +2704,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             SetNotInitializedProperty("CategoryTags");
             SetNotInitializedProperty("ChangedBy");
             SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("DefaultSortPriority");
             SetNotInitializedProperty("DefaultValue");
             SetNotInitializedProperty("Description");
             SetNotInitializedProperty("DisableExport");
@@ -2736,6 +2817,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             if (this._isCreatedOnSet) {
                 binStream.Write(this._CreatedOn);
             }
+            binStream.Write(this._DefaultSortPriority);
             {
                 var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.DefaultPropertyValueEfImpl>("Model.FK_Property_has_DefaultValue", "DefaultValue");
                 var key = r.EntityKey;
@@ -2814,6 +2896,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             if (this._isCreatedOnSet) {
                 this._CreatedOn = binStream.ReadDateTime();
             }
+            this._DefaultSortPriority = binStream.ReadNullableInt32();
             binStream.Read(out this._fk_DefaultValue);
             this._Description = binStream.ReadString();
             this._DisableExport = binStream.ReadNullableBoolean();
@@ -2849,6 +2932,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._CodeTemplate, xml, "CodeTemplate", "Zetbox.App.Base");
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._DefaultSortPriority, xml, "DefaultSortPriority", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(DefaultValue != null ? DefaultValue.ExportGuid : (Guid?)null, xml, "DefaultValue", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._Description, xml, "Description", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._DisableExport, xml, "DisableExport", "Zetbox.App.Base");
@@ -2883,6 +2967,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 // Import must have default value set
                 this._CreatedOn = XmlStreamer.ReadDateTime(xml);
                 this._isCreatedOnSet = true;
+                break;
+            case "Zetbox.App.Base|DefaultSortPriority":
+                this._DefaultSortPriority = XmlStreamer.ReadNullableInt32(xml);
                 break;
             case "Zetbox.App.Base|DefaultValue":
                 this._fk_guid_DefaultValue = XmlStreamer.ReadNullableGuid(xml);

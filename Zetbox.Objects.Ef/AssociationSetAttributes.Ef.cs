@@ -1781,21 +1781,6 @@ using Zetbox.DalProvider.Ef;
 
 
 	/*
-    Relation: FK_ObjClass_has_DefaultSortProperty
-    A: ZeroOrOne ObjectClass as ObjClass
-    B: ZeroOrOne Property as DefaultSortProperty
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_ObjClass_has_DefaultSortProperty",
-    "ObjClass", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ObjectClassEfImpl),
-    "DefaultSortProperty", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.PropertyEfImpl)
-    )]
-
-
-	/*
     Relation: FK_ObjectClass_has_AccessControlList
     A: One ObjectClass as ObjectClass
     B: ZeroOrMore AccessControl as AccessControlList
