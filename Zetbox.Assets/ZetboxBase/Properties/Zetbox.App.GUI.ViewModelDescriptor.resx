@@ -177,12 +177,6 @@
   <data name="SecondaryControlKinds_description" xml:space="preserve">
     <value />
   </data>
-  <data name="ViewModelRef_label" xml:space="preserve">
-    <value>Depricated ViewModelRef</value>
-  </data>
-  <data name="ViewModelRef_description" xml:space="preserve">
-    <value>The described CLR class&amp;apos; reference</value>
-  </data>
   <data name="ViewModelTypeRef_label" xml:space="preserve">
     <value>ViewModelTypeRef</value>
   </data>

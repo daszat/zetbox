@@ -980,122 +980,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
         public static event PropertyIsValidHandler<Zetbox.App.GUI.ViewModelDescriptor> OnSecondaryControlKinds_IsValid;
 
         /// <summary>
-        /// The described CLR class&amp;apos; reference
-        /// </summary>
-        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ViewModelRef
-        // fkBackingName=_fk_ViewModelRef; fkGuidBackingName=_fk_guid_ViewModelRef;
-        // referencedInterface=Zetbox.App.Base.TypeRef; moduleNamespace=Zetbox.App.GUI;
-        // no inverse navigator handling
-        // PositionStorage=none;
-        // Target exportable; does call events
-
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
-        public Zetbox.App.Base.TypeRef ViewModelRef
-        {
-            get { return ViewModelRefImpl; }
-            set { ViewModelRefImpl = (Zetbox.App.Base.TypeRefMemoryImpl)value; }
-        }
-        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
-
-        private int? __fk_ViewModelRefCache;
-
-        private int? _fk_ViewModelRef {
-            get
-            {
-                return __fk_ViewModelRefCache;
-            }
-            set
-            {
-                __fk_ViewModelRefCache = value;
-                // Recreate task to clear it's cache
-                _triggerFetchViewModelRefTask = null;
-            }
-        }
-
-        private Guid? _fk_guid_ViewModelRef = null;
-
-        Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef> _triggerFetchViewModelRefTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef> TriggerFetchViewModelRefAsync()
-        {
-            if (_triggerFetchViewModelRefTask != null) return _triggerFetchViewModelRefTask;
-
-            if (_fk_ViewModelRef.HasValue)
-                _triggerFetchViewModelRefTask = Context.FindAsync<Zetbox.App.Base.TypeRef>(_fk_ViewModelRef.Value);
-            else
-                _triggerFetchViewModelRefTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef>(Zetbox.API.Async.ZbTask.Synchron, () => null);
-
-            _triggerFetchViewModelRefTask.OnResult(t =>
-            {
-                if (OnViewModelRef_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.TypeRef>(t.Result);
-                    OnViewModelRef_Getter(this, e);
-                    t.Result = e.Result;
-                }
-            });
-
-            return _triggerFetchViewModelRefTask;
-        }
-
-        // internal implementation
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        internal Zetbox.App.Base.TypeRefMemoryImpl ViewModelRefImpl
-        {
-            get
-            {
-                return (Zetbox.App.Base.TypeRefMemoryImpl)TriggerFetchViewModelRefAsync().Result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
-
-                // shortcut noops
-                if ((value == null && _fk_ViewModelRef == null) || (value != null && value.ID == _fk_ViewModelRef))
-                {
-                    SetInitializedProperty("ViewModelRef");
-                    return;
-                }
-
-                // cache old value to remove inverse references later
-                var __oldValue = ViewModelRefImpl;
-                var __newValue = value;
-
-                // Changing Event fires before anything is touched
-                NotifyPropertyChanging("ViewModelRef", __oldValue, __newValue);
-
-                if (OnViewModelRef_PreSetter != null && IsAttached)
-                {
-                    var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.TypeRef>(__oldValue, __newValue);
-                    OnViewModelRef_PreSetter(this, e);
-                    __newValue = (Zetbox.App.Base.TypeRefMemoryImpl)e.Result;
-                }
-
-                // next, set the local reference
-                _fk_ViewModelRef = __newValue == null ? (int?)null : __newValue.ID;
-
-                // everything is done. fire the Changed event
-                NotifyPropertyChanged("ViewModelRef", __oldValue, __newValue);
-                if(IsAttached) UpdateChangedInfo = true;
-
-                if (OnViewModelRef_PostSetter != null && IsAttached)
-                {
-                    var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.TypeRef>(__oldValue, __newValue);
-                    OnViewModelRef_PostSetter(this, e);
-                }
-            }
-        }
-        // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ViewModelRef
-		public static event PropertyGetterHandler<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.Base.TypeRef> OnViewModelRef_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.Base.TypeRef> OnViewModelRef_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.Base.TypeRef> OnViewModelRef_PostSetter;
-
-        public static event PropertyIsValidHandler<Zetbox.App.GUI.ViewModelDescriptor> OnViewModelRef_IsValid;
-
-        /// <summary>
         /// The described CLR class&apos; Type
         /// </summary>
         // value type property
@@ -1239,7 +1123,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
             this._fk_DefaultGridCellEditorKind = otherImpl._fk_DefaultGridCellEditorKind;
             this._fk_DefaultGridCellPreEditorKind = otherImpl._fk_DefaultGridCellPreEditorKind;
             this._fk_Module = otherImpl._fk_Module;
-            this._fk_ViewModelRef = otherImpl._fk_ViewModelRef;
         }
         public override void SetNew()
         {
@@ -1304,15 +1187,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
                         NotifyPropertyChanged("Module", __oldValue, __newValue);
                     }
                     break;
-                case "ViewModelRef":
-                    {
-                        var __oldValue = _fk_ViewModelRef;
-                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
-                        NotifyPropertyChanging("ViewModelRef", __oldValue, __newValue);
-                        _fk_ViewModelRef = __newValue;
-                        NotifyPropertyChanged("ViewModelRef", __oldValue, __newValue);
-                    }
-                    break;
                 default:
                     base.UpdateParent(propertyName, parentObj);
                     break;
@@ -1336,7 +1210,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
                 case "Description":
                 case "ExportGuid":
                 case "Module":
-                case "ViewModelRef":
                 case "ViewModelTypeRef":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
@@ -1373,8 +1246,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
                 return TriggerFetchModuleAsync();
             case "SecondaryControlKinds":
                 return TriggerFetchSecondaryControlKindsAsync();
-            case "ViewModelRef":
-                return TriggerFetchViewModelRefAsync();
             default:
                 return base.TriggerFetch(propName);
             }
@@ -1436,14 +1307,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
                 ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)Context.Find<Zetbox.App.Base.Module>(_fk_Module.Value);
             else
                 ModuleImpl = null;
-
-            if (_fk_guid_ViewModelRef.HasValue)
-                ViewModelRefImpl = (Zetbox.App.Base.TypeRefMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.TypeRef>(_fk_guid_ViewModelRef.Value);
-            else
-            if (_fk_ViewModelRef.HasValue)
-                ViewModelRefImpl = (Zetbox.App.Base.TypeRefMemoryImpl)Context.Find<Zetbox.App.Base.TypeRef>(_fk_ViewModelRef.Value);
-            else
-                ViewModelRefImpl = null;
             // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
@@ -1550,15 +1413,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
                         null, // lists are read-only properties
                         obj => OnSecondaryControlKinds_IsValid), 
                     // else
-                    new PropertyDescriptorMemoryImpl<ViewModelDescriptor, Zetbox.App.Base.TypeRef>(
-                        lazyCtx,
-                        new Guid("554288d1-f5f4-4b22-908b-01525a1d0f9b"),
-                        "ViewModelRef",
-                        null,
-                        obj => obj.ViewModelRef,
-                        (obj, val) => obj.ViewModelRef = val,
-						obj => OnViewModelRef_IsValid), 
-                    // else
                     new PropertyDescriptorMemoryImpl<ViewModelDescriptor, string>(
                         lazyCtx,
                         new Guid("b3cae453-e222-4d24-b6f5-47f47550ad7a"),
@@ -1637,7 +1491,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
             SetNotInitializedProperty("DefaultGridCellPreEditorKind");
             SetNotInitializedProperty("Description");
             SetNotInitializedProperty("Module");
-            SetNotInitializedProperty("ViewModelRef");
             SetNotInitializedProperty("ViewModelTypeRef");
             base.NotifyCreated();
             if (OnNotifyCreated_ViewModelDescriptor != null) OnNotifyCreated_ViewModelDescriptor(this);
@@ -1656,7 +1509,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
             DefaultGridCellEditorKind = null;
             DefaultGridCellPreEditorKind = null;
             Module = null;
-            ViewModelRef = null;
         }
         public static event ObjectEventHandler<ViewModelDescriptor> OnNotifyDeleting_ViewModelDescriptor;
 
@@ -1685,7 +1537,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
                 binStream.Write(this._ExportGuid);
             }
             binStream.Write(Module != null ? Module.ID : (int?)null);
-            binStream.Write(ViewModelRef != null ? ViewModelRef.ID : (int?)null);
             binStream.Write(this._ViewModelTypeRef);
         }
 
@@ -1710,7 +1561,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
                 this._ExportGuid = binStream.ReadGuid();
             }
             this._fk_Module = binStream.ReadNullableInt32();
-            this._fk_ViewModelRef = binStream.ReadNullableInt32();
             this._ViewModelTypeRef = binStream.ReadString();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
@@ -1734,7 +1584,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._Deleted, xml, "Deleted", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._Description, xml, "Description", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Zetbox.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(ViewModelRef != null ? ViewModelRef.ExportGuid : (Guid?)null, xml, "ViewModelRef", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._ViewModelTypeRef, xml, "ViewModelTypeRef", "Zetbox.App.GUI");
         }
 
@@ -1773,9 +1622,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
                 break;
             case "Zetbox.App.GUI|Module":
                 this._fk_guid_Module = XmlStreamer.ReadNullableGuid(xml);
-                break;
-            case "Zetbox.App.GUI|ViewModelRef":
-                this._fk_guid_ViewModelRef = XmlStreamer.ReadNullableGuid(xml);
                 break;
             case "Zetbox.App.GUI|ViewModelTypeRef":
                 this._ViewModelTypeRef = XmlStreamer.ReadString(xml);

@@ -285,7 +285,6 @@
     <Compile Include="TPHBaseObj.NHibernate.Designer.cs" />
     <Compile Include="TPHDerivedAObj.NHibernate.Designer.cs" />
     <Compile Include="TPHDerivedBObj.NHibernate.Designer.cs" />
-    <Compile Include="TypeRef.NHibernate.Designer.cs" />
     <Compile Include="ValueTypeProperty.NHibernate.Designer.cs" />
     <Compile Include="ViewDescriptor.NHibernate.Designer.cs" />
     <Compile Include="ViewModelDescriptor.NHibernate.Designer.cs" />

@@ -85,15 +85,6 @@ namespace Zetbox.App.GUI
         ICollection<Zetbox.App.GUI.ControlKind> SecondaryControlKinds { get; }
 
         /// <summary>
-        /// The described CLR class&amp;apos; reference
-        /// </summary>
-        [Zetbox.API.DefinitionGuid("554288d1-f5f4-4b22-908b-01525a1d0f9b")]
-        Zetbox.App.Base.TypeRef ViewModelRef {
-            get;
-            set;
-        }
-
-        /// <summary>
         /// The described CLR class&apos; Type
         /// </summary>
         [Zetbox.API.DefinitionGuid("b3cae453-e222-4d24-b6f5-47f47550ad7a")]

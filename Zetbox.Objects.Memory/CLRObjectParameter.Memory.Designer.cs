@@ -38,122 +38,6 @@ namespace Zetbox.App.Base
         }
 
         /// <summary>
-        /// 
-        /// </summary>
-        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Type
-        // fkBackingName=_fk_Type; fkGuidBackingName=_fk_guid_Type;
-        // referencedInterface=Zetbox.App.Base.TypeRef; moduleNamespace=Zetbox.App.Base;
-        // no inverse navigator handling
-        // PositionStorage=none;
-        // Target exportable; does call events
-
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
-        public Zetbox.App.Base.TypeRef Type
-        {
-            get { return TypeImpl; }
-            set { TypeImpl = (Zetbox.App.Base.TypeRefMemoryImpl)value; }
-        }
-        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
-
-        private int? __fk_TypeCache;
-
-        private int? _fk_Type {
-            get
-            {
-                return __fk_TypeCache;
-            }
-            set
-            {
-                __fk_TypeCache = value;
-                // Recreate task to clear it's cache
-                _triggerFetchTypeTask = null;
-            }
-        }
-
-        private Guid? _fk_guid_Type = null;
-
-        Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef> _triggerFetchTypeTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef> TriggerFetchTypeAsync()
-        {
-            if (_triggerFetchTypeTask != null) return _triggerFetchTypeTask;
-
-            if (_fk_Type.HasValue)
-                _triggerFetchTypeTask = Context.FindAsync<Zetbox.App.Base.TypeRef>(_fk_Type.Value);
-            else
-                _triggerFetchTypeTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef>(Zetbox.API.Async.ZbTask.Synchron, () => null);
-
-            _triggerFetchTypeTask.OnResult(t =>
-            {
-                if (OnType_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.TypeRef>(t.Result);
-                    OnType_Getter(this, e);
-                    t.Result = e.Result;
-                }
-            });
-
-            return _triggerFetchTypeTask;
-        }
-
-        // internal implementation
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        internal Zetbox.App.Base.TypeRefMemoryImpl TypeImpl
-        {
-            get
-            {
-                return (Zetbox.App.Base.TypeRefMemoryImpl)TriggerFetchTypeAsync().Result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
-
-                // shortcut noops
-                if ((value == null && _fk_Type == null) || (value != null && value.ID == _fk_Type))
-                {
-                    SetInitializedProperty("Type");
-                    return;
-                }
-
-                // cache old value to remove inverse references later
-                var __oldValue = TypeImpl;
-                var __newValue = value;
-
-                // Changing Event fires before anything is touched
-                NotifyPropertyChanging("Type", __oldValue, __newValue);
-
-                if (OnType_PreSetter != null && IsAttached)
-                {
-                    var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.TypeRef>(__oldValue, __newValue);
-                    OnType_PreSetter(this, e);
-                    __newValue = (Zetbox.App.Base.TypeRefMemoryImpl)e.Result;
-                }
-
-                // next, set the local reference
-                _fk_Type = __newValue == null ? (int?)null : __newValue.ID;
-
-                // everything is done. fire the Changed event
-                NotifyPropertyChanged("Type", __oldValue, __newValue);
-                if(IsAttached) UpdateChangedInfo = true;
-
-                if (OnType_PostSetter != null && IsAttached)
-                {
-                    var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.TypeRef>(__oldValue, __newValue);
-                    OnType_PostSetter(this, e);
-                }
-            }
-        }
-        // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Type
-		public static event PropertyGetterHandler<Zetbox.App.Base.CLRObjectParameter, Zetbox.App.Base.TypeRef> OnType_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Base.CLRObjectParameter, Zetbox.App.Base.TypeRef> OnType_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Base.CLRObjectParameter, Zetbox.App.Base.TypeRef> OnType_PostSetter;
-
-        public static event PropertyIsValidHandler<Zetbox.App.Base.CLRObjectParameter> OnType_IsValid;
-
-        /// <summary>
         /// The expected argument type.
         /// </summary>
         // value type property
@@ -413,31 +297,12 @@ namespace Zetbox.App.Base
             var me = (CLRObjectParameter)this;
 
             me.TypeRef = other.TypeRef;
-            this._fk_Type = otherImpl._fk_Type;
         }
         public override void SetNew()
         {
             base.SetNew();
         }
 
-        public override void UpdateParent(string propertyName, IDataObject parentObj)
-        {
-            switch(propertyName)
-            {
-                case "Type":
-                    {
-                        var __oldValue = _fk_Type;
-                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
-                        NotifyPropertyChanging("Type", __oldValue, __newValue);
-                        _fk_Type = __newValue;
-                        NotifyPropertyChanged("Type", __oldValue, __newValue);
-                    }
-                    break;
-                default:
-                    base.UpdateParent(propertyName, parentObj);
-                    break;
-            }
-        }
         #region Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
         protected override void OnPropertyChanged(string property, object oldValue, object newValue)
@@ -447,7 +312,6 @@ namespace Zetbox.App.Base
             // Do not audit calculated properties
             switch (property)
             {
-                case "Type":
                 case "TypeRef":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
@@ -459,8 +323,6 @@ namespace Zetbox.App.Base
         {
             switch(propName)
             {
-            case "Type":
-                return TriggerFetchTypeAsync();
             default:
                 return base.TriggerFetch(propName);
             }
@@ -474,14 +336,6 @@ namespace Zetbox.App.Base
             base.ReloadReferences();
 
             // fix direct object references
-
-            if (_fk_guid_Type.HasValue)
-                TypeImpl = (Zetbox.App.Base.TypeRefMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.TypeRef>(_fk_guid_Type.Value);
-            else
-            if (_fk_Type.HasValue)
-                TypeImpl = (Zetbox.App.Base.TypeRefMemoryImpl)Context.Find<Zetbox.App.Base.TypeRef>(_fk_Type.Value);
-            else
-                TypeImpl = null;
             // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
@@ -497,15 +351,6 @@ namespace Zetbox.App.Base
                 if (_properties != null) return;
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
-                    // else
-                    new PropertyDescriptorMemoryImpl<CLRObjectParameter, Zetbox.App.Base.TypeRef>(
-                        lazyCtx,
-                        new Guid("137292ce-4493-451d-a7fa-1b7cc7df03dd"),
-                        "Type",
-                        null,
-                        obj => obj.Type,
-                        (obj, val) => obj.Type = val,
-						obj => OnType_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<CLRObjectParameter, string>(
                         lazyCtx,
@@ -578,7 +423,6 @@ namespace Zetbox.App.Base
         [EventBasedMethod("OnNotifyCreated_CLRObjectParameter")]
         public override void NotifyCreated()
         {
-            SetNotInitializedProperty("Type");
             SetNotInitializedProperty("TypeRef");
             base.NotifyCreated();
             if (OnNotifyCreated_CLRObjectParameter != null) OnNotifyCreated_CLRObjectParameter(this);
@@ -590,7 +434,6 @@ namespace Zetbox.App.Base
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_CLRObjectParameter != null) OnNotifyDeleting_CLRObjectParameter(this);
-            Type = null;
         }
         public static event ObjectEventHandler<CLRObjectParameter> OnNotifyDeleting_CLRObjectParameter;
 
@@ -604,7 +447,6 @@ namespace Zetbox.App.Base
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(Type != null ? Type.ID : (int?)null);
             binStream.Write(this._TypeRef);
         }
 
@@ -614,7 +456,6 @@ namespace Zetbox.App.Base
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
-            this._fk_Type = binStream.ReadNullableInt32();
             this._TypeRef = binStream.ReadString();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
@@ -629,7 +470,6 @@ namespace Zetbox.App.Base
             base.Export(xml, modules);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(Type != null ? Type.ExportGuid : (Guid?)null, xml, "Type", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._TypeRef, xml, "TypeRef", "Zetbox.App.Base");
         }
 
@@ -639,9 +479,6 @@ namespace Zetbox.App.Base
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
-            case "Zetbox.App.Base|Type":
-                this._fk_guid_Type = XmlStreamer.ReadNullableGuid(xml);
-                break;
             case "Zetbox.App.Base|TypeRef":
                 this._TypeRef = XmlStreamer.ReadString(xml);
                 break;

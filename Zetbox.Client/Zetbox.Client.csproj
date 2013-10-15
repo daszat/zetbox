@@ -375,8 +375,6 @@
     <Compile Include="Presentables\ZetboxBase\AssemblyReferenceViewModel.cs" />
     <Compile Include="Presentables\ZetboxBase\SystemTypeViewModel.cs" />
     <Compile Include="Presentables\ZetboxBase\TagPropertyEditorViewModel.cs" />
-    <Compile Include="Presentables\ZetboxBase\TypeRefPropertyViewModel.Commands.cs" />
-    <Compile Include="Presentables\ZetboxBase\TypeRefPropertyViewModel.cs" />
     <Compile Include="Presentables\ZetboxDebuggerAsViewModel.cs" />
     <Compile Include="Presentables\ValueViewModels\DataObjectViewModelProxy.cs" />
     <Compile Include="Presentables\ValueViewModels\ObjectReferenceHelper.cs" />

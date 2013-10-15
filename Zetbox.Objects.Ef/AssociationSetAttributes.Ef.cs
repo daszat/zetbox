@@ -566,21 +566,6 @@ using Zetbox.DalProvider.Ef;
 
 
 	/*
-    Relation: FK_Child_has_Parent
-    A: ZeroOrMore TypeRef as Child
-    B: ZeroOrOne TypeRef as Parent
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_Child_has_Parent",
-    "Child", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.TypeRefEfImpl),
-    "Parent", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.TypeRefEfImpl)
-    )]
-
-
-	/*
     Relation: FK_ChildControlKinds_have_a_Parent
     A: ZeroOrMore ControlKind as ChildControlKinds
     B: ZeroOrOne ControlKind as Parent
@@ -592,21 +577,6 @@ using Zetbox.DalProvider.Ef;
     "Model", "FK_ChildControlKinds_have_a_Parent",
     "ChildControlKinds", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ControlKindEfImpl),
     "Parent", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.ControlKindEfImpl)
-    )]
-
-
-	/*
-    Relation: FK_ClrObjectParameter_isOf_Type
-    A: ZeroOrMore CLRObjectParameter as ClrObjectParameter
-    B: ZeroOrOne TypeRef as Type
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_ClrObjectParameter_isOf_Type",
-    "ClrObjectParameter", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.CLRObjectParameterEfImpl),
-    "Type", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.TypeRefEfImpl)
     )]
 
 
@@ -850,21 +820,6 @@ using Zetbox.DalProvider.Ef;
     "Model", "FK_DefaultPropertyValue_was_CreatedBy",
     "DefaultPropertyValue", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.DefaultPropertyValueEfImpl),
     "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
-    )]
-
-
-	/*
-    Relation: FK_Descriptor_has_ViewModelRef
-    A: ZeroOrMore ViewModelDescriptor as Descriptor
-    B: ZeroOrOne TypeRef as ViewModelRef
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_Descriptor_has_ViewModelRef",
-    "Descriptor", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ViewModelDescriptorEfImpl),
-    "ViewModelRef", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.TypeRefEfImpl)
     )]
 
 
@@ -2498,21 +2453,6 @@ using Zetbox.DalProvider.Ef;
 
 
 	/*
-    Relation: FK_ServiceDescriptor_describes_a_TypeRef
-    A: ZeroOrMore ServiceDescriptor as ServiceDescriptor
-    B: ZeroOrOne TypeRef as TypeRef
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_ServiceDescriptor_describes_a_TypeRef",
-    "ServiceDescriptor", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.ServiceDescriptorEfImpl),
-    "TypeRef", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.TypeRefEfImpl)
-    )]
-
-
-	/*
     Relation: FK_ServiceDescriptor_has_Module
     A: ZeroOrMore ServiceDescriptor as ServiceDescriptor
     B: One Module as Module
@@ -2987,69 +2927,6 @@ using Zetbox.DalProvider.Ef;
 
 
 	/*
-    Relation: FK_TypeRef_has_Assembly
-    A: ZeroOrMore TypeRef as TypeRef
-    B: One Assembly as Assembly
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_TypeRef_has_Assembly",
-    "TypeRef", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.TypeRefEfImpl),
-    "Assembly", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.AssemblyEfImpl)
-    )]
-
-
-	/*
-    Relation: FK_TypeRef_hasGenericArguments_GenericArguments
-    A: ZeroOrMore TypeRef as TypeRef
-    B: ZeroOrMore TypeRef as GenericArguments
-    Preferred Storage: Separate
-	*/
-
-// The association from A to the CollectionEntry
-[assembly: EdmRelationship("Model", "FK_TypeRef_hasGenericArguments_GenericArguments_A",
-    "TypeRef", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.TypeRefEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl)
-    )]
-// The association from B to the CollectionEntry
-[assembly: EdmRelationship("Model", "FK_TypeRef_hasGenericArguments_GenericArguments_B",
-    "GenericArguments", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.TypeRefEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl)
-    )]
-
-	/*
-    Relation: FK_TypeRef_was_ChangedBy
-    A: ZeroOrMore TypeRef as TypeRef
-    B: ZeroOrOne Identity as ChangedBy
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_TypeRef_was_ChangedBy",
-    "TypeRef", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.TypeRefEfImpl),
-    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
-    )]
-
-
-	/*
-    Relation: FK_TypeRef_was_CreatedBy
-    A: ZeroOrMore TypeRef as TypeRef
-    B: ZeroOrOne Identity as CreatedBy
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_TypeRef_was_CreatedBy",
-    "TypeRef", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.TypeRefEfImpl),
-    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
-    )]
-
-
-	/*
     Relation: FK_UniqueContraints_ensures_unique_on_Properties
     A: ZeroOrMore IndexConstraint as UniqueContraints
     B: ZeroOrMore Property as Properties
@@ -3066,21 +2943,6 @@ using Zetbox.DalProvider.Ef;
     "Properties", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.PropertyEfImpl),
     "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl)
     )]
-
-	/*
-    Relation: FK_View_has_ControlRef
-    A: ZeroOrMore ViewDescriptor as View
-    B: ZeroOrOne TypeRef as ControlRef
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_View_has_ControlRef",
-    "View", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ViewDescriptorEfImpl),
-    "ControlRef", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.TypeRefEfImpl)
-    )]
-
 
 	/*
     Relation: FK_ViewDescriptor_has_Module
@@ -3111,24 +2973,6 @@ using Zetbox.DalProvider.Ef;
     "ControlKind", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.ControlKindEfImpl)
     )]
 
-
-	/*
-    Relation: FK_ViewDescriptor_supports_ViewModelTypeRefs
-    A: ZeroOrMore ViewDescriptor as ViewDescriptor
-    B: ZeroOrMore TypeRef as ViewModelTypeRefs
-    Preferred Storage: Separate
-	*/
-
-// The association from A to the CollectionEntry
-[assembly: EdmRelationship("Model", "FK_ViewDescriptor_supports_ViewModelTypeRefs_A",
-    "ViewDescriptor", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.ViewDescriptorEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryEfImpl)
-    )]
-// The association from B to the CollectionEntry
-[assembly: EdmRelationship("Model", "FK_ViewDescriptor_supports_ViewModelTypeRefs_B",
-    "ViewModelTypeRefs", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.TypeRefEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryEfImpl)
-    )]
 
 	/*
     Relation: FK_ViewModel_displayed_by_DefaultDisplayKind

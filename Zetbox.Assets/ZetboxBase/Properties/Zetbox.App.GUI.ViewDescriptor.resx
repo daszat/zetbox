@@ -123,12 +123,6 @@
   <data name="ControlKind_description" xml:space="preserve">
     <value />
   </data>
-  <data name="ControlRef_label" xml:space="preserve">
-    <value>Depricated ControlRef</value>
-  </data>
-  <data name="ControlRef_description" xml:space="preserve">
-    <value>The control implementing this View</value>
-  </data>
   <data name="ControlTypeRef_label" xml:space="preserve">
     <value>ControlTypeRef</value>
   </data>
@@ -152,12 +146,6 @@
   </data>
   <data name="Module_description" xml:space="preserve">
     <value />
-  </data>
-  <data name="SupportedViewModels_label" xml:space="preserve">
-    <value>Depricated SupportedViewModels</value>
-  </data>
-  <data name="SupportedViewModels_description" xml:space="preserve">
-    <value>A View supports one or more ViewModels</value>
   </data>
   <data name="Toolkit_label" xml:space="preserve">
     <value>Toolkit</value>

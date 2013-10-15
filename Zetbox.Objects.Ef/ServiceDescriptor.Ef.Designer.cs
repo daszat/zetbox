@@ -761,113 +761,6 @@ namespace Zetbox.App.Base
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.ServiceDescriptor> OnModule_IsValid;
 
-        /// <summary>
-        /// 
-        /// </summary>
-    /*
-    Relation: FK_ServiceDescriptor_describes_a_TypeRef
-    A: ZeroOrMore ServiceDescriptor as ServiceDescriptor
-    B: ZeroOrOne TypeRef as TypeRef
-    Preferred Storage: MergeIntoA
-    */
-        // object reference property
-        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for TypeRef
-        // fkBackingName=_fk_TypeRef; fkGuidBackingName=_fk_guid_TypeRef;
-        // referencedInterface=Zetbox.App.Base.TypeRef; moduleNamespace=Zetbox.App.Base;
-        // no inverse navigator handling
-        // PositionStorage=none;
-        // Target not exportable
-
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Zetbox.App.Base.TypeRef TypeRef
-        {
-            get { return TypeRefImpl; }
-            set { TypeRefImpl = (Zetbox.App.Base.TypeRefEfImpl)value; }
-        }
-
-        private int? _fk_TypeRef;
-
-
-        // internal implementation, EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_ServiceDescriptor_describes_a_TypeRef", "TypeRef")]
-        public Zetbox.App.Base.TypeRefEfImpl TypeRefImpl
-        {
-            get
-            {
-                Zetbox.App.Base.TypeRefEfImpl __value;
-                EntityReference<Zetbox.App.Base.TypeRefEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.TypeRefEfImpl>(
-                        "Model.FK_ServiceDescriptor_describes_a_TypeRef",
-                        "TypeRef");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load();
-                }
-                __value = r.Value;
-                if (OnTypeRef_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.TypeRef>(__value);
-                    OnTypeRef_Getter(this, e);
-                    __value = (Zetbox.App.Base.TypeRefEfImpl)e.Result;
-                }
-                return __value;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
-
-                EntityReference<Zetbox.App.Base.TypeRefEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.TypeRefEfImpl>(
-                        "Model.FK_ServiceDescriptor_describes_a_TypeRef",
-                        "TypeRef");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load();
-                }
-                Zetbox.App.Base.TypeRefEfImpl __oldValue = (Zetbox.App.Base.TypeRefEfImpl)r.Value;
-                Zetbox.App.Base.TypeRefEfImpl __newValue = (Zetbox.App.Base.TypeRefEfImpl)value;
-
-                // Changing Event fires before anything is touched
-                NotifyPropertyChanging("TypeRef", __oldValue, __newValue);
-
-                if (OnTypeRef_PreSetter != null)
-                {
-                    var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.TypeRef>(__oldValue, __newValue);
-                    OnTypeRef_PreSetter(this, e);
-                    __newValue = (Zetbox.App.Base.TypeRefEfImpl)e.Result;
-                }
-
-                r.Value = (Zetbox.App.Base.TypeRefEfImpl)__newValue;
-
-                if (OnTypeRef_PostSetter != null)
-                {
-                    var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.TypeRef>(__oldValue, __newValue);
-                    OnTypeRef_PostSetter(this, e);
-                }
-
-                // everything is done. fire the Changed event
-                NotifyPropertyChanged("TypeRef", __oldValue, __newValue);
-                if(IsAttached) UpdateChangedInfo = true;
-            }
-        }
-
-        public Zetbox.API.Async.ZbTask TriggerFetchTypeRefAsync()
-        {
-            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef>(this.TypeRef);
-        }
-
-        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for TypeRef
-		public static event PropertyGetterHandler<Zetbox.App.Base.ServiceDescriptor, Zetbox.App.Base.TypeRef> OnTypeRef_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Base.ServiceDescriptor, Zetbox.App.Base.TypeRef> OnTypeRef_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Base.ServiceDescriptor, Zetbox.App.Base.TypeRef> OnTypeRef_PostSetter;
-
-        public static event PropertyIsValidHandler<Zetbox.App.Base.ServiceDescriptor> OnTypeRef_IsValid;
-
         public override Type GetImplementedInterface()
         {
             return typeof(ServiceDescriptor);
@@ -888,7 +781,6 @@ namespace Zetbox.App.Base
             this._fk_ChangedBy = otherImpl._fk_ChangedBy;
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
             this._fk_Module = otherImpl._fk_Module;
-            this._fk_TypeRef = otherImpl._fk_TypeRef;
         }
         public override void SetNew()
         {
@@ -911,7 +803,6 @@ namespace Zetbox.App.Base
                 case "Description":
                 case "ExportGuid":
                 case "Module":
-                case "TypeRef":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }
@@ -928,8 +819,6 @@ namespace Zetbox.App.Base
                 return TriggerFetchCreatedByAsync();
             case "Module":
                 return TriggerFetchModuleAsync();
-            case "TypeRef":
-                return TriggerFetchTypeRefAsync();
             default:
                 return base.TriggerFetch(propName);
             }
@@ -958,11 +847,6 @@ namespace Zetbox.App.Base
                 ModuleImpl = (Zetbox.App.Base.ModuleEfImpl)Context.Find<Zetbox.App.Base.Module>(_fk_Module.Value);
             else
                 ModuleImpl = null;
-
-            if (_fk_TypeRef.HasValue)
-                TypeRefImpl = (Zetbox.App.Base.TypeRefEfImpl)Context.Find<Zetbox.App.Base.TypeRef>(_fk_TypeRef.Value);
-            else
-                TypeRefImpl = null;
             // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
@@ -1050,15 +934,6 @@ namespace Zetbox.App.Base
                         obj => obj.Module,
                         (obj, val) => obj.Module = val,
 						obj => OnModule_IsValid), 
-                    // else
-                    new PropertyDescriptorEfImpl<ServiceDescriptor, Zetbox.App.Base.TypeRef>(
-                        lazyCtx,
-                        new Guid("2f31a3e7-cead-480a-a515-54da212b45dc"),
-                        "TypeRef",
-                        null,
-                        obj => obj.TypeRef,
-                        (obj, val) => obj.TypeRef = val,
-						obj => OnTypeRef_IsValid), 
                     // position columns
                 };
             }
@@ -1127,7 +1002,6 @@ namespace Zetbox.App.Base
             SetNotInitializedProperty("DeploymentRestriction");
             SetNotInitializedProperty("Description");
             SetNotInitializedProperty("Module");
-            SetNotInitializedProperty("TypeRef");
             base.NotifyCreated();
             if (OnNotifyCreated_ServiceDescriptor != null) OnNotifyCreated_ServiceDescriptor(this);
         }
@@ -1141,7 +1015,6 @@ namespace Zetbox.App.Base
             ChangedBy = null;
             CreatedBy = null;
             Module = null;
-            TypeRef = null;
         }
         public static event ObjectEventHandler<ServiceDescriptor> OnNotifyDeleting_ServiceDescriptor;
 
@@ -1216,11 +1089,6 @@ namespace Zetbox.App.Base
                 var key = r.EntityKey;
                 binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
-            {
-                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.TypeRefEfImpl>("Model.FK_ServiceDescriptor_describes_a_TypeRef", "TypeRef");
-                var key = r.EntityKey;
-                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
-            }
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -1246,7 +1114,6 @@ namespace Zetbox.App.Base
                 this._ExportGuid = binStream.ReadGuid();
             }
             binStream.Read(out this._fk_Module);
-            binStream.Read(out this._fk_TypeRef);
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0

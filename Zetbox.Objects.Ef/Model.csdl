@@ -108,7 +108,6 @@
     <EntitySet Name="TestObjClassEfImpl" EntityType="Model.TestObjClassEfImpl" />
     <EntitySet Name="TestStudentEfImpl" EntityType="Model.TestStudentEfImpl" />
     <EntitySet Name="TPHBaseObjEfImpl" EntityType="Model.TPHBaseObjEfImpl" />
-    <EntitySet Name="TypeRefEfImpl" EntityType="Model.TypeRefEfImpl" />
     <EntitySet Name="ViewDescriptorEfImpl" EntityType="Model.ViewDescriptorEfImpl" />
     <EntitySet Name="ViewModelDescriptorEfImpl" EntityType="Model.ViewModelDescriptorEfImpl" />
     <EntitySet Name="VisualEfImpl" EntityType="Model.VisualEfImpl" />
@@ -277,15 +276,6 @@
       <End Role="Menu" EntitySet="VisualEfImpl" />
       <End Role="CollectionEntry" EntitySet="Template_hasMenu_Visual_RelationEntryEfImpl" />
     </AssociationSet>
-    <EntitySet Name="TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl" EntityType="Model.TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl" />
-    <AssociationSet Name="FK_TypeRef_hasGenericArguments_GenericArguments_A" Association="Model.FK_TypeRef_hasGenericArguments_GenericArguments_A" >
-      <End Role="TypeRef" EntitySet="TypeRefEfImpl" />
-      <End Role="CollectionEntry" EntitySet="TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TypeRef_hasGenericArguments_GenericArguments_B" Association="Model.FK_TypeRef_hasGenericArguments_GenericArguments_B" >
-      <End Role="GenericArguments" EntitySet="TypeRefEfImpl" />
-      <End Role="CollectionEntry" EntitySet="TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl" />
-    </AssociationSet>
     <EntitySet Name="IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl" EntityType="Model.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl" />
     <AssociationSet Name="FK_UniqueContraints_ensures_unique_on_Properties_A" Association="Model.FK_UniqueContraints_ensures_unique_on_Properties_A" >
       <End Role="UniqueContraints" EntitySet="InstanceConstraintEfImpl" />
@@ -294,15 +284,6 @@
     <AssociationSet Name="FK_UniqueContraints_ensures_unique_on_Properties_B" Association="Model.FK_UniqueContraints_ensures_unique_on_Properties_B" >
       <End Role="Properties" EntitySet="PropertyEfImpl" />
       <End Role="CollectionEntry" EntitySet="IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl" />
-    </AssociationSet>
-    <EntitySet Name="ViewDescriptor_supports_TypeRef_RelationEntryEfImpl" EntityType="Model.ViewDescriptor_supports_TypeRef_RelationEntryEfImpl" />
-    <AssociationSet Name="FK_ViewDescriptor_supports_ViewModelTypeRefs_A" Association="Model.FK_ViewDescriptor_supports_ViewModelTypeRefs_A" >
-      <End Role="ViewDescriptor" EntitySet="ViewDescriptorEfImpl" />
-      <End Role="CollectionEntry" EntitySet="ViewDescriptor_supports_TypeRef_RelationEntryEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ViewDescriptor_supports_ViewModelTypeRefs_B" Association="Model.FK_ViewDescriptor_supports_ViewModelTypeRefs_B" >
-      <End Role="ViewModelTypeRefs" EntitySet="TypeRefEfImpl" />
-      <End Role="CollectionEntry" EntitySet="ViewDescriptor_supports_TypeRef_RelationEntryEfImpl" />
     </AssociationSet>
     <EntitySet Name="Visual_contains_Visual_RelationEntryEfImpl" EntityType="Model.Visual_contains_Visual_RelationEntryEfImpl" />
     <AssociationSet Name="FK_Visual_contains_Children_A" Association="Model.FK_Visual_contains_Children_A" >
@@ -468,17 +449,9 @@
       <End Role="Child" EntitySet="SecurityTestChildEfImpl" />
       <End Role="Identity" EntitySet="IdentityEfImpl" />
     </AssociationSet>
-    <AssociationSet Name="FK_Child_has_Parent" Association="Model.FK_Child_has_Parent" >
-      <End Role="Child" EntitySet="TypeRefEfImpl" />
-      <End Role="Parent" EntitySet="TypeRefEfImpl" />
-    </AssociationSet>
     <AssociationSet Name="FK_ChildControlKinds_have_a_Parent" Association="Model.FK_ChildControlKinds_have_a_Parent" >
       <End Role="ChildControlKinds" EntitySet="ControlKindEfImpl" />
       <End Role="Parent" EntitySet="ControlKindEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ClrObjectParameter_isOf_Type" Association="Model.FK_ClrObjectParameter_isOf_Type" >
-      <End Role="ClrObjectParameter" EntitySet="BaseParameterEfImpl" />
-      <End Role="Type" EntitySet="TypeRefEfImpl" />
     </AssociationSet>
     <AssociationSet Name="FK_CompoundObjectProperty_has_CompoundObjectDefinition" Association="Model.FK_CompoundObjectProperty_has_CompoundObjectDefinition" >
       <End Role="CompoundObjectProperty" EntitySet="PropertyEfImpl" />
@@ -539,10 +512,6 @@
     <AssociationSet Name="FK_DefaultPropertyValue_was_CreatedBy" Association="Model.FK_DefaultPropertyValue_was_CreatedBy" >
       <End Role="DefaultPropertyValue" EntitySet="DefaultPropertyValueEfImpl" />
       <End Role="CreatedBy" EntitySet="IdentityEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Descriptor_has_ViewModelRef" Association="Model.FK_Descriptor_has_ViewModelRef" >
-      <End Role="Descriptor" EntitySet="ViewModelDescriptorEfImpl" />
-      <End Role="ViewModelRef" EntitySet="TypeRefEfImpl" />
     </AssociationSet>
     <AssociationSet Name="FK_Document_was_ChangedBy" Association="Model.FK_Document_was_ChangedBy" >
       <End Role="Document" EntitySet="BlobEfImpl" />
@@ -940,10 +909,6 @@
       <End Role="Sequence" EntitySet="SequenceEfImpl" />
       <End Role="CreatedBy" EntitySet="IdentityEfImpl" />
     </AssociationSet>
-    <AssociationSet Name="FK_ServiceDescriptor_describes_a_TypeRef" Association="Model.FK_ServiceDescriptor_describes_a_TypeRef" >
-      <End Role="ServiceDescriptor" EntitySet="ServiceDescriptorEfImpl" />
-      <End Role="TypeRef" EntitySet="TypeRefEfImpl" />
-    </AssociationSet>
     <AssociationSet Name="FK_ServiceDescriptor_has_Module" Association="Model.FK_ServiceDescriptor_has_Module" >
       <End Role="ServiceDescriptor" EntitySet="ServiceDescriptorEfImpl" />
       <End Role="Module" EntitySet="ModuleEfImpl" />
@@ -1055,22 +1020,6 @@
     <AssociationSet Name="FK_TPHBaseObj_was_CreatedBy" Association="Model.FK_TPHBaseObj_was_CreatedBy" >
       <End Role="TPHBaseObj" EntitySet="TPHBaseObjEfImpl" />
       <End Role="CreatedBy" EntitySet="IdentityEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TypeRef_has_Assembly" Association="Model.FK_TypeRef_has_Assembly" >
-      <End Role="TypeRef" EntitySet="TypeRefEfImpl" />
-      <End Role="Assembly" EntitySet="AssemblyEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TypeRef_was_ChangedBy" Association="Model.FK_TypeRef_was_ChangedBy" >
-      <End Role="TypeRef" EntitySet="TypeRefEfImpl" />
-      <End Role="ChangedBy" EntitySet="IdentityEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TypeRef_was_CreatedBy" Association="Model.FK_TypeRef_was_CreatedBy" >
-      <End Role="TypeRef" EntitySet="TypeRefEfImpl" />
-      <End Role="CreatedBy" EntitySet="IdentityEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_View_has_ControlRef" Association="Model.FK_View_has_ControlRef" >
-      <End Role="View" EntitySet="ViewDescriptorEfImpl" />
-      <End Role="ControlRef" EntitySet="TypeRefEfImpl" />
     </AssociationSet>
     <AssociationSet Name="FK_ViewDescriptor_has_Module" Association="Model.FK_ViewDescriptor_has_Module" >
       <End Role="ViewDescriptor" EntitySet="ViewDescriptorEfImpl" />
@@ -2551,10 +2500,6 @@
                         Relationship="Model.FK_ServiceDescriptor_has_Module"
                         FromRole="ServiceDescriptor"
                         ToRole="Module" />
-    <NavigationProperty Name="TypeRefImpl"
-                        Relationship="Model.FK_ServiceDescriptor_describes_a_TypeRef"
-                        FromRole="ServiceDescriptor"
-                        ToRole="TypeRef" />
   </EntityType>
   <EntityType Name="SourceColumnEfImpl">
     <Key>
@@ -2870,38 +2815,6 @@
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="1000"  />
   </EntityType>
-  <EntityType Name="TypeRefEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="AssemblyImpl"
-                        Relationship="Model.FK_TypeRef_has_Assembly"
-                        FromRole="TypeRef"
-                        ToRole="Assembly" />
-    <NavigationProperty Name="ChangedByImpl"
-                        Relationship="Model.FK_TypeRef_was_ChangedBy"
-                        FromRole="TypeRef"
-                        ToRole="ChangedBy" />
-    <Property Name="ChangedOn" Type="DateTime" Nullable="false"  ConcurrencyMode="Fixed"/>
-    <NavigationProperty Name="CreatedByImpl"
-                        Relationship="Model.FK_TypeRef_was_CreatedBy"
-                        FromRole="TypeRef"
-                        ToRole="CreatedBy" />
-    <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
-    <Property Name="Deleted" Type="Boolean" Nullable="true"  />
-    <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-    <Property Name="FullName" Type="String" Nullable="false" MaxLength="200"  />
-    <NavigationProperty Name="GenericArgumentsImpl"
-                        Relationship="Model.FK_TypeRef_hasGenericArguments_GenericArguments_A"
-                        FromRole="TypeRef"
-                        ToRole="CollectionEntry" />
-    <NavigationProperty Name="ParentImpl"
-                        Relationship="Model.FK_Child_has_Parent"
-                        FromRole="Child"
-                        ToRole="Parent" />
-    <Property Name="ToStringCache" Type="String" Nullable="true" MaxLength="1000"  />
-  </EntityType>
   <EntityType Name="ViewDescriptorEfImpl">
     <Key>
       <PropertyRef Name="ID" />
@@ -2911,10 +2824,6 @@
                         Relationship="Model.FK_ViewDescriptor_is_a_ControlKind"
                         FromRole="ViewDescriptor"
                         ToRole="ControlKind" />
-    <NavigationProperty Name="ControlRefImpl"
-                        Relationship="Model.FK_View_has_ControlRef"
-                        FromRole="View"
-                        ToRole="ControlRef" />
     <Property Name="ControlTypeRef" Type="String" Nullable="true" MaxLength="2000"  />
     <Property Name="Deleted" Type="Boolean" Nullable="false"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
@@ -2922,10 +2831,6 @@
                         Relationship="Model.FK_ViewDescriptor_has_Module"
                         FromRole="ViewDescriptor"
                         ToRole="Module" />
-    <NavigationProperty Name="SupportedViewModelsImpl"
-                        Relationship="Model.FK_ViewDescriptor_supports_ViewModelTypeRefs_A"
-                        FromRole="ViewDescriptor"
-                        ToRole="CollectionEntry" />
     <Property Name="ToolkitImpl" Type="Int32" Nullable="false"  />
   </EntityType>
   <EntityType Name="ViewModelDescriptorEfImpl">
@@ -2964,10 +2869,6 @@
                         Relationship="Model.FK_Presentable_displayedBy_SecondaryControlKinds_A"
                         FromRole="Presentable"
                         ToRole="CollectionEntry" />
-    <NavigationProperty Name="ViewModelRefImpl"
-                        Relationship="Model.FK_Descriptor_has_ViewModelRef"
-                        FromRole="Descriptor"
-                        ToRole="ViewModelRef" />
     <Property Name="ViewModelTypeRef" Type="String" Nullable="true" MaxLength="2000"  />
   </EntityType>
   <EntityType Name="VisualEfImpl">
@@ -3094,10 +2995,6 @@
   <EntityType Name="ClientReadOnlyConstraintEfImpl" BaseType="Model.ReadOnlyConstraintEfImpl">
   </EntityType>
   <EntityType Name="CLRObjectParameterEfImpl" BaseType="Model.BaseParameterEfImpl">
-    <NavigationProperty Name="TypeImpl"
-                        Relationship="Model.FK_ClrObjectParameter_isOf_Type"
-                        FromRole="ClrObjectParameter"
-                        ToRole="Type" />
     <Property Name="TypeRef" Type="String" Nullable="true" MaxLength="2000"  />
   </EntityType>
   <EntityType Name="CommonWorkScheduleRuleEfImpl" BaseType="Model.WorkScheduleRuleEfImpl">
@@ -4233,51 +4130,6 @@
   </Association>
   
   <!--
-    Relation: FK_TypeRef_hasGenericArguments_GenericArguments
-    A: ZeroOrMore TypeRef as TypeRef
-    B: ZeroOrMore TypeRef as GenericArguments
-    Preferred Storage: Separate
-  -->
-  <EntityType Name="TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl" >
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-	<Property Name="ExportGuid" Type="Guid" Nullable="false" />
-	
-    
-    <!-- A -->
-    <NavigationProperty Name="AImpl"
-                        Relationship="Model.FK_TypeRef_hasGenericArguments_GenericArguments_A"
-                        FromRole="CollectionEntry"
-                        ToRole="TypeRef" />
-    <Property Name="A_pos" Type="Int32" Nullable="false" />
-
-    <!-- B -->
-    <NavigationProperty Name="BImpl"
-                        Relationship="Model.FK_TypeRef_hasGenericArguments_GenericArguments_B"
-                        FromRole="CollectionEntry"
-                        ToRole="GenericArguments" />
-    <Property Name="B_pos" Type="Int32" Nullable="false" />
-  </EntityType>
-  <Association Name="FK_TypeRef_hasGenericArguments_GenericArguments_A" >
-    <End Role="TypeRef"
-         Type="Model.TypeRefEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="CollectionEntry"
-         Type="Model.TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl"
-         Multiplicity="*" />
-  </Association>
-  <Association Name="FK_TypeRef_hasGenericArguments_GenericArguments_B" >
-    <End Role="GenericArguments"
-         Type="Model.TypeRefEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="CollectionEntry"
-         Type="Model.TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl"
-         Multiplicity="*" />
-  </Association>
-  
-  <!--
     Relation: FK_UniqueContraints_ensures_unique_on_Properties
     A: ZeroOrMore IndexConstraint as UniqueContraints
     B: ZeroOrMore Property as Properties
@@ -4317,49 +4169,6 @@
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
          Type="Model.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl"
-         Multiplicity="*" />
-  </Association>
-  
-  <!--
-    Relation: FK_ViewDescriptor_supports_ViewModelTypeRefs
-    A: ZeroOrMore ViewDescriptor as ViewDescriptor
-    B: ZeroOrMore TypeRef as ViewModelTypeRefs
-    Preferred Storage: Separate
-  -->
-  <EntityType Name="ViewDescriptor_supports_TypeRef_RelationEntryEfImpl" >
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-	<Property Name="ExportGuid" Type="Guid" Nullable="false" />
-	
-    
-    <!-- A -->
-    <NavigationProperty Name="AImpl"
-                        Relationship="Model.FK_ViewDescriptor_supports_ViewModelTypeRefs_A"
-                        FromRole="CollectionEntry"
-                        ToRole="ViewDescriptor" />
-
-    <!-- B -->
-    <NavigationProperty Name="BImpl"
-                        Relationship="Model.FK_ViewDescriptor_supports_ViewModelTypeRefs_B"
-                        FromRole="CollectionEntry"
-                        ToRole="ViewModelTypeRefs" />
-  </EntityType>
-  <Association Name="FK_ViewDescriptor_supports_ViewModelTypeRefs_A" >
-    <End Role="ViewDescriptor"
-         Type="Model.ViewDescriptorEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="CollectionEntry"
-         Type="Model.ViewDescriptor_supports_TypeRef_RelationEntryEfImpl"
-         Multiplicity="*" />
-  </Association>
-  <Association Name="FK_ViewDescriptor_supports_ViewModelTypeRefs_B" >
-    <End Role="ViewModelTypeRefs"
-         Type="Model.TypeRefEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="CollectionEntry"
-         Type="Model.ViewDescriptor_supports_TypeRef_RelationEntryEfImpl"
          Multiplicity="*" />
   </Association>
   
@@ -4790,28 +4599,12 @@
          Type="Model.IdentityEfImpl" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_Child_has_Parent" >
-    <End Role="Child"
-         Type="Model.TypeRefEfImpl" 
-         Multiplicity="*" />
-    <End Role="Parent"
-         Type="Model.TypeRefEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
   <Association Name="FK_ChildControlKinds_have_a_Parent" >
     <End Role="ChildControlKinds"
          Type="Model.ControlKindEfImpl" 
          Multiplicity="*" />
     <End Role="Parent"
          Type="Model.ControlKindEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_ClrObjectParameter_isOf_Type" >
-    <End Role="ClrObjectParameter"
-         Type="Model.CLRObjectParameterEfImpl" 
-         Multiplicity="*" />
-    <End Role="Type"
-         Type="Model.TypeRefEfImpl" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_CompoundObjectProperty_has_CompoundObjectDefinition" >
@@ -4932,14 +4725,6 @@
          Multiplicity="*" />
     <End Role="CreatedBy"
          Type="Model.IdentityEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_Descriptor_has_ViewModelRef" >
-    <End Role="Descriptor"
-         Type="Model.ViewModelDescriptorEfImpl" 
-         Multiplicity="*" />
-    <End Role="ViewModelRef"
-         Type="Model.TypeRefEfImpl" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_Document_was_ChangedBy" >
@@ -5734,14 +5519,6 @@
          Type="Model.IdentityEfImpl" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_ServiceDescriptor_describes_a_TypeRef" >
-    <End Role="ServiceDescriptor"
-         Type="Model.ServiceDescriptorEfImpl" 
-         Multiplicity="*" />
-    <End Role="TypeRef"
-         Type="Model.TypeRefEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
   <Association Name="FK_ServiceDescriptor_has_Module" >
     <End Role="ServiceDescriptor"
          Type="Model.ServiceDescriptorEfImpl" 
@@ -5964,38 +5741,6 @@
          Multiplicity="*" />
     <End Role="CreatedBy"
          Type="Model.IdentityEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_TypeRef_has_Assembly" >
-    <End Role="TypeRef"
-         Type="Model.TypeRefEfImpl" 
-         Multiplicity="*" />
-    <End Role="Assembly"
-         Type="Model.AssemblyEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_TypeRef_was_ChangedBy" >
-    <End Role="TypeRef"
-         Type="Model.TypeRefEfImpl" 
-         Multiplicity="*" />
-    <End Role="ChangedBy"
-         Type="Model.IdentityEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_TypeRef_was_CreatedBy" >
-    <End Role="TypeRef"
-         Type="Model.TypeRefEfImpl" 
-         Multiplicity="*" />
-    <End Role="CreatedBy"
-         Type="Model.IdentityEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_View_has_ControlRef" >
-    <End Role="View"
-         Type="Model.ViewDescriptorEfImpl" 
-         Multiplicity="*" />
-    <End Role="ControlRef"
-         Type="Model.TypeRefEfImpl" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_ViewDescriptor_has_Module" >

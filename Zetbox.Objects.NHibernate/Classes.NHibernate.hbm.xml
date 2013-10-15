@@ -1390,9 +1390,6 @@
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ControlKind" column="`fk_ControlKind`" class="Zetbox.App.GUI.ControlKindNHibernateImpl+ControlKindProxy, Zetbox.Objects.NHibernateImpl" />
 
-<!-- ObjectReferenceProperty -->
-        <many-to-one name="ControlRef" column="`fk_ControlRef`" class="Zetbox.App.Base.TypeRefNHibernateImpl+TypeRefProxy, Zetbox.Objects.NHibernateImpl" />
-
         <!-- ValueTypeProperty isValue -->
         <property name="ControlTypeRef" 
                   column="`ControlTypeRef`" 
@@ -1407,15 +1404,6 @@
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
-
-<!-- ObjectReferenceProperty -->
-        <!-- NMProperty -->
-        <!-- rel=ViewDescriptor_supports_TypeRef_RelationEntry -->
-        <!-- relEnd=ViewDescriptor otherEnd=ViewModelTypeRefs -->
-        <set name="SupportedViewModels" table="`ViewDescriptor_supports_ViewModelTypeRefs`" inverse="true" cascade="none" batch-size="100" >
-            <key column="`fk_ViewDescriptor`" />
-            <one-to-many class="Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl+ViewDescriptor_supports_TypeRef_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
-        </set>
 
         <!-- ValueTypeProperty isValue -->
         <property name="Toolkit" 
@@ -1480,9 +1468,6 @@
             <key column="`fk_Presentable`" />
             <one-to-many class="Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl+ViewModelDescriptor_displayedBy_ControlKind_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
-
-<!-- ObjectReferenceProperty -->
-        <many-to-one name="ViewModelRef" column="`fk_ViewModelRef`" class="Zetbox.App.Base.TypeRefNHibernateImpl+TypeRefProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="ViewModelTypeRef" 
@@ -3890,9 +3875,6 @@
             
 
             <!-- define the properties -->
-<!-- ObjectReferenceProperty -->
-        <many-to-one name="Type" column="`CLRObjectParameters_fk_Type`" class="Zetbox.App.Base.TypeRefNHibernateImpl+TypeRefProxy, Zetbox.Objects.NHibernateImpl" />
-
         <!-- ValueTypeProperty isValue -->
         <property name="TypeRef" 
                   column="`CLRObjectParameters_TypeRef`" 
@@ -5711,75 +5693,6 @@
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 
-<!-- ObjectReferenceProperty -->
-        <many-to-one name="TypeRef" column="`fk_TypeRef`" class="Zetbox.App.Base.TypeRefNHibernateImpl+TypeRefProxy, Zetbox.Objects.NHibernateImpl" />
-
-
-        <!-- define the subclasses -->
-
-    </class>
-    <class name="Zetbox.App.Base.TypeRefNHibernateImpl+TypeRefProxy, Zetbox.Objects.NHibernateImpl"
-           proxy="Zetbox.App.Base.TypeRefNHibernateImpl+TypeRefProxy, Zetbox.Objects.NHibernateImpl"
-           schema="`base`"
-           table="`TypeRefs`"
-           abstract="false"
-           dynamic-update="true"
-           optimistic-lock="dirty"
-           batch-size="100">
-
-        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
-            <generator class="native">
-                <param name="schema">`base`</param>
-                <param name="sequence">`TypeRefs_ID_seq`</param>
-            </generator>
-        </id>
-
-        <!-- define the properties -->
-<!-- ObjectReferenceProperty -->
-        <many-to-one name="Assembly" column="`fk_Assembly`" class="Zetbox.App.Base.AssemblyNHibernateImpl+AssemblyProxy, Zetbox.Objects.NHibernateImpl" />
-
-<!-- ObjectReferenceProperty -->
-        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
-
-        <!-- ValueTypeProperty isValue -->
-        <property name="ChangedOn" type="Timestamp"
-                  column="`ChangedOn`" 
-                  optimistic-lock="true"/>
-<!-- ObjectReferenceProperty -->
-        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
-
-        <!-- ValueTypeProperty isValue -->
-        <property name="CreatedOn" type="Timestamp"
-                  column="`CreatedOn`" 
-                  optimistic-lock="false"/>
-        <!-- ValueTypeProperty isValue -->
-        <property name="Deleted" 
-                  column="`Deleted`" 
-                  optimistic-lock="false"/>
-        <!-- ValueTypeProperty isValue -->
-        <property name="ExportGuid" 
-                  column="`ExportGuid`" 
-                  optimistic-lock="false"/>
-        <!-- ValueTypeProperty isValue -->
-        <property name="FullName" 
-                  column="`FullName`" 
-                  optimistic-lock="false"/>
-<!-- ObjectReferenceProperty -->
-        <!-- NMProperty -->
-        <!-- rel=TypeRef_hasGenericArguments_TypeRef_RelationEntry -->
-        <!-- relEnd=TypeRef otherEnd=GenericArguments -->
-        <set name="GenericArguments" table="`TypeRef_hasGenericArguments_GenericArguments`" inverse="true" cascade="none" batch-size="100" >
-            <key column="`fk_TypeRef`" />
-            <one-to-many class="Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl+TypeRef_hasGenericArguments_TypeRef_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
-        </set>
-
-<!-- ObjectReferenceProperty -->
-        <many-to-one name="Parent" column="`fk_Parent`" class="Zetbox.App.Base.TypeRefNHibernateImpl+TypeRefProxy, Zetbox.Objects.NHibernateImpl" />
-
-        <!-- ValueTypeProperty isValue -->
-        <property name="ToStringCache" 
-                  column="`ToStringCache`" 
-                  optimistic-lock="false"/>
 
         <!-- define the subclasses -->
 

@@ -244,7 +244,6 @@
     <Compile Include="TPHBaseObj.Interface.Designer.cs" />
     <Compile Include="TPHDerivedAObj.Interface.Designer.cs" />
     <Compile Include="TPHDerivedBObj.Interface.Designer.cs" />
-    <Compile Include="TypeRef.Interface.Designer.cs" />
     <Compile Include="ValueTypeProperty.Interface.Designer.cs" />
     <Compile Include="ViewDescriptor.Interface.Designer.cs" />
     <Compile Include="ViewModelDescriptor.Interface.Designer.cs" />

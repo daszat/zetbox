@@ -603,8 +603,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
             // should fetch && remember parent for Task_was_Identity_RelationEntry
             // should fetch && remember parent for TPHBaseObj_was_Identity_RelationEntry
             // should fetch && remember parent for TPHBaseObj_was_Identity_RelationEntry
-            // should fetch && remember parent for TypeRef_was_Identity_RelationEntry
-            // should fetch && remember parent for TypeRef_was_Identity_RelationEntry
             // should fetch && remember parent for WorkSchedule_was_Identity_RelationEntry
             // should fetch && remember parent for WorkSchedule_was_Identity_RelationEntry
             // should fetch && remember parent for WorkScheduleRule_was_Identity_RelationEntry

@@ -337,46 +337,6 @@
         <many-to-one name="B"
                      column="`fk_Testbogen`" />
     </class>
-    <class name="Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl+TypeRef_hasGenericArguments_TypeRef_RelationEntryProxy"
-           proxy="Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl+TypeRef_hasGenericArguments_TypeRef_RelationEntryProxy"
-           table="`TypeRef_hasGenericArguments_GenericArguments`"
-           schema="`base`" >
-
-        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
-            <generator class="native">
-                <param name="schema">`base`</param>
-                <param name="sequence">`TypeRef_hasGenericArguments_GenericArguments_ID_seq`</param>
-            </generator>
-        </id>
-
-        <many-to-one name="A"
-                     column="`fk_TypeRef`" />
-        <many-to-one name="B"
-                     column="`fk_GenericArguments`" />
-        <property name="A_pos"
-                    column="`fk_GenericArguments_pos`" />
-        <property name="B_pos"
-                  column="`fk_TypeRef_pos`" />
-        <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
-    </class>
-    <class name="Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl+ViewDescriptor_supports_TypeRef_RelationEntryProxy"
-           proxy="Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl+ViewDescriptor_supports_TypeRef_RelationEntryProxy"
-           table="`ViewDescriptor_supports_ViewModelTypeRefs`"
-           schema="`gui`" >
-
-        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
-            <generator class="native">
-                <param name="schema">`gui`</param>
-                <param name="sequence">`ViewDescriptor_supports_ViewModelTypeRefs_ID_seq`</param>
-            </generator>
-        </id>
-
-        <many-to-one name="A"
-                     column="`fk_ViewDescriptor`" />
-        <many-to-one name="B"
-                     column="`fk_ViewModelTypeRefs`" />
-        <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
-    </class>
     <class name="Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl+ViewModelDescriptor_displayedBy_ControlKind_RelationEntryProxy"
            proxy="Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl+ViewModelDescriptor_displayedBy_ControlKind_RelationEntryProxy"
            table="`Presentable_displayedBy_SecondaryControlKinds`"

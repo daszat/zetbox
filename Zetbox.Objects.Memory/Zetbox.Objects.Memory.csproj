@@ -270,7 +270,6 @@
     <Compile Include="TPHBaseObj.Memory.Designer.cs" />
     <Compile Include="TPHDerivedAObj.Memory.Designer.cs" />
     <Compile Include="TPHDerivedBObj.Memory.Designer.cs" />
-    <Compile Include="TypeRef.Memory.Designer.cs" />
     <Compile Include="ValueTypeProperty.Memory.Designer.cs" />
     <Compile Include="ViewDescriptor.Memory.Designer.cs" />
     <Compile Include="ViewModelDescriptor.Memory.Designer.cs" />

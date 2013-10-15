@@ -40,14 +40,5 @@ namespace Zetbox.App.Base
             get;
             set;
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        [Zetbox.API.DefinitionGuid("2f31a3e7-cead-480a-a515-54da212b45dc")]
-        Zetbox.App.Base.TypeRef TypeRef {
-            get;
-            set;
-        }
     }
 }

@@ -165,10 +165,4 @@
   <data name="Module_description" xml:space="preserve">
     <value />
   </data>
-  <data name="TypeRef_label" xml:space="preserve">
-    <value>TypeRef</value>
-  </data>
-  <data name="TypeRef_description" xml:space="preserve">
-    <value />
-  </data>
 </root>

@@ -992,114 +992,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
         public static event PropertyIsValidHandler<Zetbox.App.GUI.ViewModelDescriptor> OnSecondaryControlKinds_IsValid;
 
         /// <summary>
-        /// The described CLR class&amp;apos; reference
-        /// </summary>
-    /*
-    Relation: FK_Descriptor_has_ViewModelRef
-    A: ZeroOrMore ViewModelDescriptor as Descriptor
-    B: ZeroOrOne TypeRef as ViewModelRef
-    Preferred Storage: MergeIntoA
-    */
-        // object reference property
-        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ViewModelRef
-        // fkBackingName=_fk_ViewModelRef; fkGuidBackingName=_fk_guid_ViewModelRef;
-        // referencedInterface=Zetbox.App.Base.TypeRef; moduleNamespace=Zetbox.App.GUI;
-        // no inverse navigator handling
-        // PositionStorage=none;
-        // Target exportable
-
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Zetbox.App.Base.TypeRef ViewModelRef
-        {
-            get { return ViewModelRefImpl; }
-            set { ViewModelRefImpl = (Zetbox.App.Base.TypeRefEfImpl)value; }
-        }
-
-        private int? _fk_ViewModelRef;
-
-        private Guid? _fk_guid_ViewModelRef = null;
-
-        // internal implementation, EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_Descriptor_has_ViewModelRef", "ViewModelRef")]
-        public Zetbox.App.Base.TypeRefEfImpl ViewModelRefImpl
-        {
-            get
-            {
-                Zetbox.App.Base.TypeRefEfImpl __value;
-                EntityReference<Zetbox.App.Base.TypeRefEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.TypeRefEfImpl>(
-                        "Model.FK_Descriptor_has_ViewModelRef",
-                        "ViewModelRef");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load();
-                }
-                __value = r.Value;
-                if (OnViewModelRef_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.TypeRef>(__value);
-                    OnViewModelRef_Getter(this, e);
-                    __value = (Zetbox.App.Base.TypeRefEfImpl)e.Result;
-                }
-                return __value;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
-
-                EntityReference<Zetbox.App.Base.TypeRefEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.TypeRefEfImpl>(
-                        "Model.FK_Descriptor_has_ViewModelRef",
-                        "ViewModelRef");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load();
-                }
-                Zetbox.App.Base.TypeRefEfImpl __oldValue = (Zetbox.App.Base.TypeRefEfImpl)r.Value;
-                Zetbox.App.Base.TypeRefEfImpl __newValue = (Zetbox.App.Base.TypeRefEfImpl)value;
-
-                // Changing Event fires before anything is touched
-                NotifyPropertyChanging("ViewModelRef", __oldValue, __newValue);
-
-                if (OnViewModelRef_PreSetter != null)
-                {
-                    var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.TypeRef>(__oldValue, __newValue);
-                    OnViewModelRef_PreSetter(this, e);
-                    __newValue = (Zetbox.App.Base.TypeRefEfImpl)e.Result;
-                }
-
-                r.Value = (Zetbox.App.Base.TypeRefEfImpl)__newValue;
-
-                if (OnViewModelRef_PostSetter != null)
-                {
-                    var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.TypeRef>(__oldValue, __newValue);
-                    OnViewModelRef_PostSetter(this, e);
-                }
-
-                // everything is done. fire the Changed event
-                NotifyPropertyChanged("ViewModelRef", __oldValue, __newValue);
-                if(IsAttached) UpdateChangedInfo = true;
-            }
-        }
-
-        public Zetbox.API.Async.ZbTask TriggerFetchViewModelRefAsync()
-        {
-            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef>(this.ViewModelRef);
-        }
-
-        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ViewModelRef
-		public static event PropertyGetterHandler<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.Base.TypeRef> OnViewModelRef_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.Base.TypeRef> OnViewModelRef_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.Base.TypeRef> OnViewModelRef_PostSetter;
-
-        public static event PropertyIsValidHandler<Zetbox.App.GUI.ViewModelDescriptor> OnViewModelRef_IsValid;
-
-        /// <summary>
         /// The described CLR class&apos; Type
         /// </summary>
         // value type property
@@ -1254,7 +1146,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
             this._fk_DefaultGridCellEditorKind = otherImpl._fk_DefaultGridCellEditorKind;
             this._fk_DefaultGridCellPreEditorKind = otherImpl._fk_DefaultGridCellPreEditorKind;
             this._fk_Module = otherImpl._fk_Module;
-            this._fk_ViewModelRef = otherImpl._fk_ViewModelRef;
         }
         public override void SetNew()
         {
@@ -1278,7 +1169,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
                 case "Description":
                 case "ExportGuid":
                 case "Module":
-                case "ViewModelRef":
                 case "ViewModelTypeRef":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
@@ -1315,8 +1205,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
                 return TriggerFetchModuleAsync();
             case "SecondaryControlKinds":
                 return TriggerFetchSecondaryControlKindsAsync();
-            case "ViewModelRef":
-                return TriggerFetchViewModelRefAsync();
             default:
                 return base.TriggerFetch(propName);
             }
@@ -1378,14 +1266,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
                 ModuleImpl = (Zetbox.App.Base.ModuleEfImpl)Context.Find<Zetbox.App.Base.Module>(_fk_Module.Value);
             else
                 ModuleImpl = null;
-
-            if (_fk_guid_ViewModelRef.HasValue)
-                ViewModelRefImpl = (Zetbox.App.Base.TypeRefEfImpl)Context.FindPersistenceObject<Zetbox.App.Base.TypeRef>(_fk_guid_ViewModelRef.Value);
-            else
-            if (_fk_ViewModelRef.HasValue)
-                ViewModelRefImpl = (Zetbox.App.Base.TypeRefEfImpl)Context.Find<Zetbox.App.Base.TypeRef>(_fk_ViewModelRef.Value);
-            else
-                ViewModelRefImpl = null;
             // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
@@ -1492,15 +1372,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
                         null, // lists are read-only properties
                         obj => OnSecondaryControlKinds_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<ViewModelDescriptor, Zetbox.App.Base.TypeRef>(
-                        lazyCtx,
-                        new Guid("554288d1-f5f4-4b22-908b-01525a1d0f9b"),
-                        "ViewModelRef",
-                        null,
-                        obj => obj.ViewModelRef,
-                        (obj, val) => obj.ViewModelRef = val,
-						obj => OnViewModelRef_IsValid), 
-                    // else
                     new PropertyDescriptorEfImpl<ViewModelDescriptor, string>(
                         lazyCtx,
                         new Guid("b3cae453-e222-4d24-b6f5-47f47550ad7a"),
@@ -1579,7 +1450,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
             SetNotInitializedProperty("DefaultGridCellPreEditorKind");
             SetNotInitializedProperty("Description");
             SetNotInitializedProperty("Module");
-            SetNotInitializedProperty("ViewModelRef");
             SetNotInitializedProperty("ViewModelTypeRef");
             base.NotifyCreated();
             if (OnNotifyCreated_ViewModelDescriptor != null) OnNotifyCreated_ViewModelDescriptor(this);
@@ -1598,7 +1468,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
             DefaultGridCellEditorKind = null;
             DefaultGridCellPreEditorKind = null;
             Module = null;
-            ViewModelRef = null;
         }
         public static event ObjectEventHandler<ViewModelDescriptor> OnNotifyDeleting_ViewModelDescriptor;
 
@@ -1689,14 +1558,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
                 var key = r.EntityKey;
                 binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
-            {
-                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.TypeRefEfImpl>("Model.FK_Descriptor_has_ViewModelRef", "ViewModelRef");
-                var key = r.EntityKey;
-                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
-            }
-            if (auxObjects != null) {
-                auxObjects.Add(ViewModelRef);
-            }
             binStream.Write(this._ViewModelTypeRef);
         }
 
@@ -1721,7 +1582,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
                 this._ExportGuid = binStream.ReadGuid();
             }
             binStream.Read(out this._fk_Module);
-            binStream.Read(out this._fk_ViewModelRef);
             this._ViewModelTypeRef = binStream.ReadString();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
@@ -1745,7 +1605,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._Deleted, xml, "Deleted", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._Description, xml, "Description", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Zetbox.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(ViewModelRef != null ? ViewModelRef.ExportGuid : (Guid?)null, xml, "ViewModelRef", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._ViewModelTypeRef, xml, "ViewModelTypeRef", "Zetbox.App.GUI");
         }
 
@@ -1784,9 +1643,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
                 break;
             case "Zetbox.App.GUI|Module":
                 this._fk_guid_Module = XmlStreamer.ReadNullableGuid(xml);
-                break;
-            case "Zetbox.App.GUI|ViewModelRef":
-                this._fk_guid_ViewModelRef = XmlStreamer.ReadNullableGuid(xml);
                 break;
             case "Zetbox.App.GUI|ViewModelTypeRef":
                 this._ViewModelTypeRef = XmlStreamer.ReadString(xml);

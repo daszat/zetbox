@@ -133,7 +133,6 @@
     <Compile Include="Tests\Security\when_cheating.cs" />
     <Compile Include="Tests\Security\when_updating_calcprop.cs" />
     <Compile Include="Tests\Simple.cs" />
-    <Compile Include="Tests\TypeRefs\should_convert_types_correctly.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

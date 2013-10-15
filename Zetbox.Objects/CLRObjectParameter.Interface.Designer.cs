@@ -15,15 +15,6 @@ namespace Zetbox.App.Base
     {
 
         /// <summary>
-        /// 
-        /// </summary>
-        [Zetbox.API.DefinitionGuid("137292ce-4493-451d-a7fa-1b7cc7df03dd")]
-        Zetbox.App.Base.TypeRef Type {
-            get;
-            set;
-        }
-
-        /// <summary>
         /// The expected argument type.
         /// </summary>
         [Zetbox.API.DefinitionGuid("9cb49ab3-72bd-46d0-a3b0-f4b20428aee5")]

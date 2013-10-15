@@ -156,7 +156,6 @@
     <Compile Include="ZetboxBase\PropertyActions.cs" />
     <Compile Include="ZetboxBase\EnumerationActions.cs" />
     <Compile Include="ZetboxBase\EnumerationEntryActions.cs" />
-    <Compile Include="ZetboxBase\TypeRefActions.cs" />
     <Compile Include="ZetboxBase\ObjectReferencePlaceholderPropertyActions.cs" />
     <Compile Include="ZetboxBase\MethodActions.cs" />
     <Compile Include="ZetboxBase\ObjectClassActions.cs" />

@@ -112,7 +112,6 @@
     <EntitySet Name="TestObjClass" EntityType="Model.Store.TestObjClass" Schema="test" Table="TestObjClasses"/>
     <EntitySet Name="TestStudent" EntityType="Model.Store.TestStudent" Schema="test" Table="TestStudenten"/>
     <EntitySet Name="TPHBaseObj" EntityType="Model.Store.TPHBaseObj" Schema="test" Table="TPHBaseObjs"/>
-    <EntitySet Name="TypeRef" EntityType="Model.Store.TypeRef" Schema="base" Table="TypeRefs"/>
     <EntitySet Name="ViewDescriptor" EntityType="Model.Store.ViewDescriptor" Schema="gui" Table="ViewDescriptors"/>
     <EntitySet Name="ViewModelDescriptor" EntityType="Model.Store.ViewModelDescriptor" Schema="gui" Table="ViewModelDescriptors"/>
     <EntitySet Name="Visual" EntityType="Model.Store.Visual" Schema="gui" Table="Visuals"/>
@@ -507,22 +506,6 @@
     </AssociationSet>
     
     <!-- 
-    Relation: FK_TypeRef_hasGenericArguments_GenericArguments
-    A: ZeroOrMore TypeRef as TypeRef
-    B: ZeroOrMore TypeRef as GenericArguments
-    Preferred Storage: Separate
-    -->
-    <EntitySet Name="TypeRef_hasGenericArguments_TypeRef_RelationEntry" EntityType="Model.Store.TypeRef_hasGenericArguments_TypeRef_RelationEntry" Schema="base" Table="TypeRef_hasGenericArguments_GenericArguments" />
-    <AssociationSet Name="FK_TypeRef_hasGenericArguments_GenericArguments_A" Association="Model.Store.FK_TypeRef_hasGenericArguments_GenericArguments_A" >
-      <End Role="TypeRef" EntitySet="TypeRef" />
-      <End Role="CollectionEntry" EntitySet="TypeRef_hasGenericArguments_TypeRef_RelationEntry" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TypeRef_hasGenericArguments_GenericArguments_B" Association="Model.Store.FK_TypeRef_hasGenericArguments_GenericArguments_B" >
-      <End Role="CollectionEntry" EntitySet="TypeRef_hasGenericArguments_TypeRef_RelationEntry" />
-      <End Role="GenericArguments" EntitySet="TypeRef" />
-    </AssociationSet>
-    
-    <!-- 
     Relation: FK_UniqueContraints_ensures_unique_on_Properties
     A: ZeroOrMore IndexConstraint as UniqueContraints
     B: ZeroOrMore Property as Properties
@@ -536,22 +519,6 @@
     <AssociationSet Name="FK_UniqueContraints_ensures_unique_on_Properties_B" Association="Model.Store.FK_UniqueContraints_ensures_unique_on_Properties_B" >
       <End Role="CollectionEntry" EntitySet="IndexConstraint_ensures_unique_on_Property_RelationEntry" />
       <End Role="Properties" EntitySet="Property" />
-    </AssociationSet>
-    
-    <!-- 
-    Relation: FK_ViewDescriptor_supports_ViewModelTypeRefs
-    A: ZeroOrMore ViewDescriptor as ViewDescriptor
-    B: ZeroOrMore TypeRef as ViewModelTypeRefs
-    Preferred Storage: Separate
-    -->
-    <EntitySet Name="ViewDescriptor_supports_TypeRef_RelationEntry" EntityType="Model.Store.ViewDescriptor_supports_TypeRef_RelationEntry" Schema="gui" Table="ViewDescriptor_supports_ViewModelTypeRefs" />
-    <AssociationSet Name="FK_ViewDescriptor_supports_ViewModelTypeRefs_A" Association="Model.Store.FK_ViewDescriptor_supports_ViewModelTypeRefs_A" >
-      <End Role="ViewDescriptor" EntitySet="ViewDescriptor" />
-      <End Role="CollectionEntry" EntitySet="ViewDescriptor_supports_TypeRef_RelationEntry" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ViewDescriptor_supports_ViewModelTypeRefs_B" Association="Model.Store.FK_ViewDescriptor_supports_ViewModelTypeRefs_B" >
-      <End Role="CollectionEntry" EntitySet="ViewDescriptor_supports_TypeRef_RelationEntry" />
-      <End Role="ViewModelTypeRefs" EntitySet="TypeRef" />
     </AssociationSet>
     
     <!-- 
@@ -709,17 +676,9 @@
       <End Role="Child" EntitySet="SecurityTestChild" />
       <End Role="Identity" EntitySet="Identity" />
     </AssociationSet>
-    <AssociationSet Name="FK_Child_has_Parent" Association="Model.Store.FK_Child_has_Parent" >
-      <End Role="Child" EntitySet="TypeRef" />
-      <End Role="Parent" EntitySet="TypeRef" />
-    </AssociationSet>
     <AssociationSet Name="FK_ChildControlKinds_have_a_Parent" Association="Model.Store.FK_ChildControlKinds_have_a_Parent" >
       <End Role="ChildControlKinds" EntitySet="ControlKind" />
       <End Role="Parent" EntitySet="ControlKind" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ClrObjectParameter_isOf_Type" Association="Model.Store.FK_ClrObjectParameter_isOf_Type" >
-      <End Role="ClrObjectParameter" EntitySet="BaseParameter" />
-      <End Role="Type" EntitySet="TypeRef" />
     </AssociationSet>
     <AssociationSet Name="FK_CompoundObjectProperty_has_CompoundObjectDefinition" Association="Model.Store.FK_CompoundObjectProperty_has_CompoundObjectDefinition" >
       <End Role="CompoundObjectProperty" EntitySet="Property" />
@@ -780,10 +739,6 @@
     <AssociationSet Name="FK_DefaultPropertyValue_was_CreatedBy" Association="Model.Store.FK_DefaultPropertyValue_was_CreatedBy" >
       <End Role="DefaultPropertyValue" EntitySet="DefaultPropertyValue" />
       <End Role="CreatedBy" EntitySet="Identity" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Descriptor_has_ViewModelRef" Association="Model.Store.FK_Descriptor_has_ViewModelRef" >
-      <End Role="Descriptor" EntitySet="ViewModelDescriptor" />
-      <End Role="ViewModelRef" EntitySet="TypeRef" />
     </AssociationSet>
     <AssociationSet Name="FK_Document_was_ChangedBy" Association="Model.Store.FK_Document_was_ChangedBy" >
       <End Role="Document" EntitySet="Blob" />
@@ -1181,10 +1136,6 @@
       <End Role="Sequence" EntitySet="Sequence" />
       <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
-    <AssociationSet Name="FK_ServiceDescriptor_describes_a_TypeRef" Association="Model.Store.FK_ServiceDescriptor_describes_a_TypeRef" >
-      <End Role="ServiceDescriptor" EntitySet="ServiceDescriptor" />
-      <End Role="TypeRef" EntitySet="TypeRef" />
-    </AssociationSet>
     <AssociationSet Name="FK_ServiceDescriptor_has_Module" Association="Model.Store.FK_ServiceDescriptor_has_Module" >
       <End Role="ServiceDescriptor" EntitySet="ServiceDescriptor" />
       <End Role="Module" EntitySet="Module" />
@@ -1296,22 +1247,6 @@
     <AssociationSet Name="FK_TPHBaseObj_was_CreatedBy" Association="Model.Store.FK_TPHBaseObj_was_CreatedBy" >
       <End Role="TPHBaseObj" EntitySet="TPHBaseObj" />
       <End Role="CreatedBy" EntitySet="Identity" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TypeRef_has_Assembly" Association="Model.Store.FK_TypeRef_has_Assembly" >
-      <End Role="TypeRef" EntitySet="TypeRef" />
-      <End Role="Assembly" EntitySet="Assembly" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TypeRef_was_ChangedBy" Association="Model.Store.FK_TypeRef_was_ChangedBy" >
-      <End Role="TypeRef" EntitySet="TypeRef" />
-      <End Role="ChangedBy" EntitySet="Identity" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TypeRef_was_CreatedBy" Association="Model.Store.FK_TypeRef_was_CreatedBy" >
-      <End Role="TypeRef" EntitySet="TypeRef" />
-      <End Role="CreatedBy" EntitySet="Identity" />
-    </AssociationSet>
-    <AssociationSet Name="FK_View_has_ControlRef" Association="Model.Store.FK_View_has_ControlRef" >
-      <End Role="View" EntitySet="ViewDescriptor" />
-      <End Role="ControlRef" EntitySet="TypeRef" />
     </AssociationSet>
     <AssociationSet Name="FK_ViewDescriptor_has_Module" Association="Model.Store.FK_ViewDescriptor_has_Module" >
       <End Role="ViewDescriptor" EntitySet="ViewDescriptor" />
@@ -1571,7 +1506,6 @@
     <Property Name="IsReturnParameter" Type="bool" Nullable="false" />
     <Property Name="Label" Type="varchar" MaxLength="200" Nullable="true" />
     <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
-    <Property Name="CLRObjectParameters_fk_Type" Type="int4" />
     <Property Name="CLRObjectParameters_TypeRef" Type="varchar" MaxLength="2000" Nullable="true" />
     <Property Name="CompoundObjectParameters_fk_CompoundObject" Type="int4" />
     <Property Name="DateTimeParameters_DateTimeStyle" Type="int4" Nullable="true" />
@@ -2572,7 +2506,6 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_TypeRef" Type="int4" />
     <Property Name="fk_Module" Type="int4" />
     <Property Name="fk_ChangedBy" Type="int4" />
     <Property Name="fk_CreatedBy" Type="int4" />
@@ -2796,29 +2729,11 @@
     <Property Name="TPHDerivedBObjs_BString" Type="varchar" MaxLength="100" Nullable="true" />
   </EntityType>
 	
-  <EntityType Name="TypeRef">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_Parent" Type="int4" />
-    <Property Name="fk_Assembly" Type="int4" />
-    <Property Name="fk_ChangedBy" Type="int4" />
-    <Property Name="fk_CreatedBy" Type="int4" />
-    <Property Name="ChangedOn" Type="timestamp" Nullable="false" />
-    <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
-    <Property Name="Deleted" Type="bool" Nullable="true" />
-    <Property Name="ExportGuid" Type="uuid" Nullable="false" />
-    <Property Name="FullName" Type="varchar" MaxLength="200" Nullable="false" />
-    <Property Name="ToStringCache" Type="varchar" MaxLength="1000" Nullable="true" />
-  </EntityType>
-	
   <EntityType Name="ViewDescriptor">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_ControlRef" Type="int4" />
     <Property Name="fk_Module" Type="int4" />
     <Property Name="fk_ControlKind" Type="int4" />
     <Property Name="ControlTypeRef" Type="varchar" MaxLength="2000" Nullable="true" />
@@ -2832,7 +2747,6 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_ViewModelRef" Type="int4" />
     <Property Name="fk_DefaultKind" Type="int4" />
     <Property Name="fk_DefaultDisplayKind" Type="int4" />
     <Property Name="fk_DefaultGridCellEditorKind" Type="int4" />
@@ -3608,47 +3522,6 @@
   </Association>
 
 	
-  <EntityType Name="TypeRef_hasGenericArguments_TypeRef_RelationEntry">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
-	<Property Name="ExportGuid" Type="uuid" Nullable="false" />
-    <Property Name="fk_TypeRef" Type="int4" Nullable="true" />
-    <Property Name="fk_TypeRef_pos" Type="int4" Nullable="true" />
-    <Property Name="fk_GenericArguments" Type="int4" Nullable="true" />
-    <Property Name="fk_GenericArguments_pos" Type="int4" Nullable="true" />
-  </EntityType>
-
-  <!-- A to CollectionEntry -->
-  <Association Name="FK_TypeRef_hasGenericArguments_GenericArguments_A">
-    <End Role="TypeRef" Type="Model.Store.TypeRef" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.TypeRef_hasGenericArguments_TypeRef_RelationEntry" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TypeRef">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_TypeRef" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-  <!-- B to CollectionEntry -->
-  <Association Name="FK_TypeRef_hasGenericArguments_GenericArguments_B">
-    <End Role="GenericArguments" Type="Model.Store.TypeRef" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.TypeRef_hasGenericArguments_TypeRef_RelationEntry" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="GenericArguments">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_GenericArguments" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-	
   <EntityType Name="IndexConstraint_ensures_unique_on_Property_RelationEntry">
     <Key>
       <PropertyRef Name="ID" />
@@ -3683,45 +3556,6 @@
       </Principal>
       <Dependent Role="CollectionEntry">
         <PropertyRef Name="fk_Properties" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-	
-  <EntityType Name="ViewDescriptor_supports_TypeRef_RelationEntry">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
-	<Property Name="ExportGuid" Type="uuid" Nullable="false" />
-    <Property Name="fk_ViewDescriptor" Type="int4" Nullable="true" />
-    <Property Name="fk_ViewModelTypeRefs" Type="int4" Nullable="true" />
-  </EntityType>
-
-  <!-- A to CollectionEntry -->
-  <Association Name="FK_ViewDescriptor_supports_ViewModelTypeRefs_A">
-    <End Role="ViewDescriptor" Type="Model.Store.ViewDescriptor" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.ViewDescriptor_supports_TypeRef_RelationEntry" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ViewDescriptor">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_ViewDescriptor" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-  <!-- B to CollectionEntry -->
-  <Association Name="FK_ViewDescriptor_supports_ViewModelTypeRefs_B">
-    <End Role="ViewModelTypeRefs" Type="Model.Store.TypeRef" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.ViewDescriptor_supports_TypeRef_RelationEntry" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ViewModelTypeRefs">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_ViewModelTypeRefs" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -4226,20 +4060,6 @@
   </Association>
 
 
-  <Association Name="FK_Child_has_Parent">
-    <End Role="Parent" Type="Model.Store.TypeRef" Multiplicity="0..1" />
-    <End Role="Child" Type="Model.Store.TypeRef" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Parent">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Child">
-        <PropertyRef Name="fk_Parent" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
   <Association Name="FK_ChildControlKinds_have_a_Parent">
     <End Role="Parent" Type="Model.Store.ControlKind" Multiplicity="0..1" />
     <End Role="ChildControlKinds" Type="Model.Store.ControlKind" Multiplicity="*" />
@@ -4249,20 +4069,6 @@
       </Principal>
       <Dependent Role="ChildControlKinds">
         <PropertyRef Name="fk_Parent" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_ClrObjectParameter_isOf_Type">
-    <End Role="Type" Type="Model.Store.TypeRef" Multiplicity="0..1" />
-    <End Role="ClrObjectParameter" Type="Model.Store.BaseParameter" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Type">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="ClrObjectParameter">
-        <PropertyRef Name="CLRObjectParameters_fk_Type" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -4473,20 +4279,6 @@
       </Principal>
       <Dependent Role="DefaultPropertyValue">
         <PropertyRef Name="fk_CreatedBy" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_Descriptor_has_ViewModelRef">
-    <End Role="ViewModelRef" Type="Model.Store.TypeRef" Multiplicity="0..1" />
-    <End Role="Descriptor" Type="Model.Store.ViewModelDescriptor" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ViewModelRef">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Descriptor">
-        <PropertyRef Name="fk_ViewModelRef" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -5878,20 +5670,6 @@
   </Association>
 
 
-  <Association Name="FK_ServiceDescriptor_describes_a_TypeRef">
-    <End Role="TypeRef" Type="Model.Store.TypeRef" Multiplicity="0..1" />
-    <End Role="ServiceDescriptor" Type="Model.Store.ServiceDescriptor" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TypeRef">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="ServiceDescriptor">
-        <PropertyRef Name="fk_TypeRef" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
   <Association Name="FK_ServiceDescriptor_has_Module">
     <End Role="Module" Type="Model.Store.Module" Multiplicity="0..1" />
     <End Role="ServiceDescriptor" Type="Model.Store.ServiceDescriptor" Multiplicity="*" />
@@ -6279,62 +6057,6 @@
       </Principal>
       <Dependent Role="TPHBaseObj">
         <PropertyRef Name="fk_CreatedBy" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_TypeRef_has_Assembly">
-    <End Role="Assembly" Type="Model.Store.Assembly" Multiplicity="0..1" />
-    <End Role="TypeRef" Type="Model.Store.TypeRef" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Assembly">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="TypeRef">
-        <PropertyRef Name="fk_Assembly" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_TypeRef_was_ChangedBy">
-    <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <End Role="TypeRef" Type="Model.Store.TypeRef" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ChangedBy">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="TypeRef">
-        <PropertyRef Name="fk_ChangedBy" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_TypeRef_was_CreatedBy">
-    <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <End Role="TypeRef" Type="Model.Store.TypeRef" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="CreatedBy">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="TypeRef">
-        <PropertyRef Name="fk_CreatedBy" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_View_has_ControlRef">
-    <End Role="ControlRef" Type="Model.Store.TypeRef" Multiplicity="0..1" />
-    <End Role="View" Type="Model.Store.ViewDescriptor" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ControlRef">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="View">
-        <PropertyRef Name="fk_ControlRef" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

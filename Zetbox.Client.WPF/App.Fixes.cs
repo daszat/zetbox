@@ -105,42 +105,8 @@ namespace Zetbox.Client.WPF
             //PrintControlKindTypes();
             //FixupCallImplementInterfaces(ctx);
             //CreateTestClasses(ctxFactory);
-
-            MigrateTypeRefs(ctxFactory());
         }
-
-        private static string GetSimpleName(TypeRef tr)
-        {
-            var type = tr.AsType(false);
-            if (type == null)
-                return null;
-            else
-                return TypeExtensions.GetSimpleName(type);
-        }
-
-        private static void MigrateTypeRefs(IZetboxContext ctx)
-        {
-            // ViewModelDescriptor
-            foreach (var vmd in ctx.GetQuery<ViewModelDescriptor>().Where(v => v.ViewModelRef != null && v.ViewModelTypeRef == null))
-            {
-                vmd.ViewModelTypeRef = GetSimpleName(vmd.ViewModelRef);
-            }
-
-            // ViewDescriptor
-            foreach (var vd in ctx.GetQuery<ViewDescriptor>().Where(v => v.ControlRef != null && v.ControlTypeRef == null))
-            {
-                vd.ControlTypeRef = GetSimpleName(vd.ControlRef);
-            }
-
-            // CLRObjectParameter
-            foreach (var clrop in ctx.GetQuery<CLRObjectParameter>().Where(c => c.Type != null && c.TypeRef == null))
-            {
-                clrop.TypeRef = GetSimpleName(clrop.Type);
-            }
-
-            ctx.SubmitChanges();
-        }
-
+       
         //private static void CreateTestClasses(Func<IZetboxContext> ctxFactory)
         //{
         //    using (var ctx = ctxFactory())

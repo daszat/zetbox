@@ -129,50 +129,8 @@ namespace Zetbox.Server
                 UpdateSchema(files);
                 Deploy(files);
                 CheckSchema(false);
-
-                ////////////////////// TEMP //////////////////////
-                using (var subContainer = container.BeginLifetimeScope())
-                {
-                    var ctx = subContainer.Resolve<IZetboxServerContext>();
-                    MigrateTypeRefs(ctx);
-                }
-                ////////////////////// TEMP //////////////////////
             }
         }
-
-        #region TEMP
-        private static string GetSimpleName(TypeRef tr)
-        {
-            var type = tr.AsType(false);
-            if (type == null)
-                return null;
-            else
-                return Zetbox.API.TypeExtensions.GetSimpleName(type);
-        }
-
-        private static void MigrateTypeRefs(IZetboxContext ctx)
-        {
-            // ViewModelDescriptor
-            foreach (var vmd in ctx.GetQuery<ViewModelDescriptor>().Where(v => v.ViewModelRef != null && v.ViewModelTypeRef == null))
-            {
-                vmd.ViewModelTypeRef = GetSimpleName(vmd.ViewModelRef);
-            }
-
-            // ViewDescriptor
-            foreach (var vd in ctx.GetQuery<ViewDescriptor>().Where(v => v.ControlRef != null && v.ControlTypeRef == null))
-            {
-                vd.ControlTypeRef = GetSimpleName(vd.ControlRef);
-            }
-
-            // CLRObjectParameter
-            foreach (var clrop in ctx.GetQuery<CLRObjectParameter>().Where(c => c.Type != null && c.TypeRef == null))
-            {
-                clrop.TypeRef = GetSimpleName(clrop.Type);
-            }
-
-            ctx.SubmitChanges();
-        }
-        #endregion
 
         public void Deploy(params string[] files)
         {

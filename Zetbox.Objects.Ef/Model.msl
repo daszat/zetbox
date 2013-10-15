@@ -1814,19 +1814,6 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TypeRefEfImpl">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.TypeRefEfImpl)">
-	    <MappingFragment StoreEntitySet="TypeRef">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
-          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
-          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
-          <ScalarProperty Name="FullName" ColumnName="FullName" />
-          <ScalarProperty Name="ToStringCache" ColumnName="ToStringCache" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="ViewDescriptorEfImpl">
       <EntityTypeMapping TypeName="IsTypeOf(Model.ViewDescriptorEfImpl)">
 	    <MappingFragment StoreEntitySet="ViewDescriptor">
@@ -2637,47 +2624,6 @@
     </AssociationSetMapping>
 
     <!--
-    Relation: FK_TypeRef_hasGenericArguments_GenericArguments
-    A: ZeroOrMore TypeRef as TypeRef
-    B: ZeroOrMore TypeRef as GenericArguments
-    Preferred Storage: Separate
-    -->
-    <EntitySetMapping Name="TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl">
-      <EntityTypeMapping TypeName="Model.TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl">
-        <MappingFragment StoreEntitySet="TypeRef_hasGenericArguments_TypeRef_RelationEntry">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
-          <ScalarProperty Name="A_pos" ColumnName="fk_TypeRef_pos" />
-          <ScalarProperty Name="B_pos" ColumnName="fk_GenericArguments_pos" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <!-- A to CollectionEntry -->
-    <AssociationSetMapping Name="FK_TypeRef_hasGenericArguments_GenericArguments_A"
-                           TypeName="Model.FK_TypeRef_hasGenericArguments_GenericArguments_A"
-                           StoreEntitySet="TypeRef_hasGenericArguments_TypeRef_RelationEntry" >
-      <EndProperty Name="TypeRef">
-        <ScalarProperty Name="ID" ColumnName="fk_TypeRef"/>
-      </EndProperty>
-      <EndProperty Name="CollectionEntry">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_TypeRef" IsNull="false"/>
-    </AssociationSetMapping>
-    <!-- B to CollectionEntry -->
-    <AssociationSetMapping Name="FK_TypeRef_hasGenericArguments_GenericArguments_B"
-                           TypeName="Model.FK_TypeRef_hasGenericArguments_GenericArguments_B"
-                           StoreEntitySet="TypeRef_hasGenericArguments_TypeRef_RelationEntry" >
-      <EndProperty Name="GenericArguments">
-        <ScalarProperty Name="ID" ColumnName="fk_GenericArguments"/>
-      </EndProperty>
-      <EndProperty Name="CollectionEntry">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_GenericArguments" IsNull="false"/>
-    </AssociationSetMapping>
-
-    <!--
     Relation: FK_UniqueContraints_ensures_unique_on_Properties
     A: ZeroOrMore IndexConstraint as UniqueContraints
     B: ZeroOrMore Property as Properties
@@ -2714,45 +2660,6 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Properties" IsNull="false"/>
-    </AssociationSetMapping>
-
-    <!--
-    Relation: FK_ViewDescriptor_supports_ViewModelTypeRefs
-    A: ZeroOrMore ViewDescriptor as ViewDescriptor
-    B: ZeroOrMore TypeRef as ViewModelTypeRefs
-    Preferred Storage: Separate
-    -->
-    <EntitySetMapping Name="ViewDescriptor_supports_TypeRef_RelationEntryEfImpl">
-      <EntityTypeMapping TypeName="Model.ViewDescriptor_supports_TypeRef_RelationEntryEfImpl">
-        <MappingFragment StoreEntitySet="ViewDescriptor_supports_TypeRef_RelationEntry">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <!-- A to CollectionEntry -->
-    <AssociationSetMapping Name="FK_ViewDescriptor_supports_ViewModelTypeRefs_A"
-                           TypeName="Model.FK_ViewDescriptor_supports_ViewModelTypeRefs_A"
-                           StoreEntitySet="ViewDescriptor_supports_TypeRef_RelationEntry" >
-      <EndProperty Name="ViewDescriptor">
-        <ScalarProperty Name="ID" ColumnName="fk_ViewDescriptor"/>
-      </EndProperty>
-      <EndProperty Name="CollectionEntry">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_ViewDescriptor" IsNull="false"/>
-    </AssociationSetMapping>
-    <!-- B to CollectionEntry -->
-    <AssociationSetMapping Name="FK_ViewDescriptor_supports_ViewModelTypeRefs_B"
-                           TypeName="Model.FK_ViewDescriptor_supports_ViewModelTypeRefs_B"
-                           StoreEntitySet="ViewDescriptor_supports_TypeRef_RelationEntry" >
-      <EndProperty Name="ViewModelTypeRefs">
-        <ScalarProperty Name="ID" ColumnName="fk_ViewModelTypeRefs"/>
-      </EndProperty>
-      <EndProperty Name="CollectionEntry">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_ViewModelTypeRefs" IsNull="false"/>
     </AssociationSetMapping>
 
     <!--
@@ -3345,23 +3252,6 @@
       <Condition ColumnName="fk_Identity" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_Child_has_Parent
-    A: ZeroOrMore TypeRef as Child
-    B: ZeroOrOne TypeRef as Parent
-    Preferred Storage: MergeIntoA
-    -->
-    <AssociationSetMapping Name="FK_Child_has_Parent"
-                           TypeName="Model.FK_Child_has_Parent"
-                           StoreEntitySet="TypeRef" >
-      <EndProperty Name="Parent">
-        <ScalarProperty Name="ID" ColumnName="fk_Parent"/>
-      </EndProperty>
-      <EndProperty Name="Child">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_Parent" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
     Relation: FK_ChildControlKinds_have_a_Parent
     A: ZeroOrMore ControlKind as ChildControlKinds
     B: ZeroOrOne ControlKind as Parent
@@ -3377,23 +3267,6 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Parent" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_ClrObjectParameter_isOf_Type
-    A: ZeroOrMore CLRObjectParameter as ClrObjectParameter
-    B: ZeroOrOne TypeRef as Type
-    Preferred Storage: MergeIntoA
-    -->
-    <AssociationSetMapping Name="FK_ClrObjectParameter_isOf_Type"
-                           TypeName="Model.FK_ClrObjectParameter_isOf_Type"
-                           StoreEntitySet="BaseParameter" >
-      <EndProperty Name="Type">
-        <ScalarProperty Name="ID" ColumnName="CLRObjectParameters_fk_Type"/>
-      </EndProperty>
-      <EndProperty Name="ClrObjectParameter">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="CLRObjectParameters_fk_Type" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_CompoundObjectProperty_has_CompoundObjectDefinition
@@ -3649,23 +3522,6 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_Descriptor_has_ViewModelRef
-    A: ZeroOrMore ViewModelDescriptor as Descriptor
-    B: ZeroOrOne TypeRef as ViewModelRef
-    Preferred Storage: MergeIntoA
-    -->
-    <AssociationSetMapping Name="FK_Descriptor_has_ViewModelRef"
-                           TypeName="Model.FK_Descriptor_has_ViewModelRef"
-                           StoreEntitySet="ViewModelDescriptor" >
-      <EndProperty Name="ViewModelRef">
-        <ScalarProperty Name="ID" ColumnName="fk_ViewModelRef"/>
-      </EndProperty>
-      <EndProperty Name="Descriptor">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_ViewModelRef" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Document_was_ChangedBy
@@ -5351,23 +5207,6 @@
       <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_ServiceDescriptor_describes_a_TypeRef
-    A: ZeroOrMore ServiceDescriptor as ServiceDescriptor
-    B: ZeroOrOne TypeRef as TypeRef
-    Preferred Storage: MergeIntoA
-    -->
-    <AssociationSetMapping Name="FK_ServiceDescriptor_describes_a_TypeRef"
-                           TypeName="Model.FK_ServiceDescriptor_describes_a_TypeRef"
-                           StoreEntitySet="ServiceDescriptor" >
-      <EndProperty Name="TypeRef">
-        <ScalarProperty Name="ID" ColumnName="fk_TypeRef"/>
-      </EndProperty>
-      <EndProperty Name="ServiceDescriptor">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_TypeRef" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
     Relation: FK_ServiceDescriptor_has_Module
     A: ZeroOrMore ServiceDescriptor as ServiceDescriptor
     B: One Module as Module
@@ -5842,74 +5681,6 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_TypeRef_has_Assembly
-    A: ZeroOrMore TypeRef as TypeRef
-    B: One Assembly as Assembly
-    Preferred Storage: MergeIntoA
-    -->
-    <AssociationSetMapping Name="FK_TypeRef_has_Assembly"
-                           TypeName="Model.FK_TypeRef_has_Assembly"
-                           StoreEntitySet="TypeRef" >
-      <EndProperty Name="Assembly">
-        <ScalarProperty Name="ID" ColumnName="fk_Assembly"/>
-      </EndProperty>
-      <EndProperty Name="TypeRef">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_Assembly" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_TypeRef_was_ChangedBy
-    A: ZeroOrMore TypeRef as TypeRef
-    B: ZeroOrOne Identity as ChangedBy
-    Preferred Storage: MergeIntoA
-    -->
-    <AssociationSetMapping Name="FK_TypeRef_was_ChangedBy"
-                           TypeName="Model.FK_TypeRef_was_ChangedBy"
-                           StoreEntitySet="TypeRef" >
-      <EndProperty Name="ChangedBy">
-        <ScalarProperty Name="ID" ColumnName="fk_ChangedBy"/>
-      </EndProperty>
-      <EndProperty Name="TypeRef">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_ChangedBy" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_TypeRef_was_CreatedBy
-    A: ZeroOrMore TypeRef as TypeRef
-    B: ZeroOrOne Identity as CreatedBy
-    Preferred Storage: MergeIntoA
-    -->
-    <AssociationSetMapping Name="FK_TypeRef_was_CreatedBy"
-                           TypeName="Model.FK_TypeRef_was_CreatedBy"
-                           StoreEntitySet="TypeRef" >
-      <EndProperty Name="CreatedBy">
-        <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
-      </EndProperty>
-      <EndProperty Name="TypeRef">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_View_has_ControlRef
-    A: ZeroOrMore ViewDescriptor as View
-    B: ZeroOrOne TypeRef as ControlRef
-    Preferred Storage: MergeIntoA
-    -->
-    <AssociationSetMapping Name="FK_View_has_ControlRef"
-                           TypeName="Model.FK_View_has_ControlRef"
-                           StoreEntitySet="ViewDescriptor" >
-      <EndProperty Name="ControlRef">
-        <ScalarProperty Name="ID" ColumnName="fk_ControlRef"/>
-      </EndProperty>
-      <EndProperty Name="View">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_ControlRef" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_ViewDescriptor_has_Module

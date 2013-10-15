@@ -137,7 +137,6 @@
     <Compile Include="Reporting\ReportTemplate.cs" />
     <Compile Include="StreamExtensions.cs" />
     <Compile Include="ThreadPrincipalResolver.cs" />
-    <Compile Include="TypeRefExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj">

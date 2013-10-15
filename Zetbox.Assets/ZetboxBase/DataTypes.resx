@@ -1221,12 +1221,6 @@
   <data name="Zetbox.App.Test.TPHDerivedBObj_description" xml:space="preserve">
     <value>TPH derived object named "B"</value>
   </data>
-  <data name="Zetbox.App.Base.TypeRef" xml:space="preserve">
-    <value>TypeRef</value>
-  </data>
-  <data name="Zetbox.App.Base.TypeRef_description" xml:space="preserve">
-    <value>This class models a reference to a specific, concrete Type. Generic Types have all parameters filled.</value>
-  </data>
   <data name="Zetbox.App.Base.ValueTypeProperty" xml:space="preserve">
     <value>ValueTypeProperty</value>
   </data>

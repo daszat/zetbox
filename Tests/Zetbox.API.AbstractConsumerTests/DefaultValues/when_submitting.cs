@@ -30,9 +30,8 @@ namespace Zetbox.API.AbstractConsumerTests.DefaultValues
         public void should_persist_a_guid_value()
         {
             var ctx = GetContext();
-            var obj = ctx.Create<TypeRef>();
-            obj.FullName = "TestRef";
-            obj.Assembly = ctx.GetQuery<Assembly>().First();
+            var obj = ctx.Create<Assembly>();
+            obj.Name = "TestAssembly";
 
             // set value explicitly
             var expectedExportGuid = obj.ExportGuid = Guid.NewGuid();
@@ -42,7 +41,7 @@ namespace Zetbox.API.AbstractConsumerTests.DefaultValues
             var originalId = obj.ID;
 
             ctx = GetContext();
-            obj = ctx.Find<TypeRef>(originalId);
+            obj = ctx.Find<Assembly>(originalId);
 
             Assert.That(obj.ExportGuid, Is.EqualTo(expectedExportGuid));
         }
@@ -75,9 +74,8 @@ namespace Zetbox.API.AbstractConsumerTests.DefaultValues
         public void should_persist_a_guid_value()
         {
             var ctx = GetContext();
-            var obj = ctx.Create<TypeRef>();
-            obj.FullName = "TestRef";
-            obj.Assembly = ctx.GetQuery<Assembly>().First();
+            var obj = ctx.Create<Assembly>();
+            obj.Name = "TestRef";
             ctx.SubmitChanges();
 
             // read TestEnumWithDefault after submit to test server-side initialisation
@@ -85,7 +83,7 @@ namespace Zetbox.API.AbstractConsumerTests.DefaultValues
             var originalId = obj.ID;
 
             ctx = GetContext();
-            obj = ctx.Find<TypeRef>(originalId);
+            obj = ctx.Find<Assembly>(originalId);
 
             Assert.That(obj.ExportGuid, Is.EqualTo(expectedExportGuid));
         }
@@ -117,9 +115,8 @@ namespace Zetbox.API.AbstractConsumerTests.DefaultValues
         public void should_persist_a_guid_value()
         {
             var ctx = GetContext();
-            var obj = ctx.Create<TypeRef>();
-            obj.FullName = "TestRef";
-            obj.Assembly = ctx.GetQuery<Assembly>().First();
+            var obj = ctx.Create<Assembly>();
+            obj.Name = "TestRef";
 
             // read ExportGuid before submit to test client-side initialisation
             var expectedExportGuid = obj.ExportGuid;
@@ -129,7 +126,7 @@ namespace Zetbox.API.AbstractConsumerTests.DefaultValues
             var originalId = obj.ID;
 
             ctx = GetContext();
-            obj = ctx.Find<TypeRef>(originalId);
+            obj = ctx.Find<Assembly>(originalId);
 
             Assert.That(obj.ExportGuid, Is.EqualTo(expectedExportGuid));
         }

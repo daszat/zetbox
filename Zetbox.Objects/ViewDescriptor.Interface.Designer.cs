@@ -24,15 +24,6 @@ namespace Zetbox.App.GUI
         }
 
         /// <summary>
-        /// The control implementing this View
-        /// </summary>
-        [Zetbox.API.DefinitionGuid("eff6276d-975b-4a0d-bd3c-ad76af2189c3")]
-        Zetbox.App.Base.TypeRef ControlRef {
-            get;
-            set;
-        }
-
-        /// <summary>
         /// The control implementing this View.
         /// </summary>
         [Zetbox.API.DefinitionGuid("180968cf-8705-433f-9346-e726c8552737")]
@@ -49,13 +40,6 @@ namespace Zetbox.App.GUI
             get;
             set;
         }
-
-        /// <summary>
-        /// A View supports one or more ViewModels
-        /// </summary>
-
-        [Zetbox.API.DefinitionGuid("4698cfda-6b1d-4cd7-8350-630a1adab1a8")]
-        ICollection<Zetbox.App.Base.TypeRef> SupportedViewModels { get; }
 
         /// <summary>
         /// Which toolkit provides this View
