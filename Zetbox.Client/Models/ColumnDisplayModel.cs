@@ -197,8 +197,10 @@ namespace Zetbox.Client.Models
                 var refProp = (ObjectReferenceProperty)props.Last();
                 var sortProp = refProp.GetReferencedObjectClass()
                                       .AndParents(c => c.BaseObjectClass)
-                                      .FirstOrDefault(c => c.DefaultSortProperty != null)
-                                      .IfNotNull(c => c.DefaultSortProperty);
+                                      .SelectMany(c => c.Properties)
+                                      .Where(p => p.DefaultSortPriority != null)
+                                      .OrderBy(p => p.DefaultSortPriority)
+                                      .FirstOrDefault();
                 if (sortProp == null) break;
                 if (props.Contains(sortProp)) break;
                 props.Add(sortProp);

@@ -39,7 +39,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
             else
             {
-                var sortProp = _type.AndParents(c => c.BaseObjectClass).FirstOrDefault(c => c.DefaultSortProperty != null).IfNotNull(c => c.DefaultSortProperty);
+                var sortProp = _type.AndParents(c => c.BaseObjectClass).SelectMany(c => c.Properties).Where(p => p.DefaultSortPriority != null).OrderBy(p => p.DefaultSortPriority).FirstOrDefault();
                 if (sortProp != null)
                 {
                     _orderByExpression = ColumnDisplayModel.FormatDynamicOrderByExpression(sortProp);

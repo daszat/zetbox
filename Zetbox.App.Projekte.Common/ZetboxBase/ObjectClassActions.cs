@@ -111,12 +111,5 @@ namespace Zetbox.App.Base
             e.IsValid = obj.TableMapping == null || (obj.TableMapping != null && obj.BaseObjectClass == null);
             e.Error = e.IsValid ? string.Empty : "TableMapping is valid only on base classes.";
         }
-
-        [Invocation]
-        public static void isValid_DefaultSortProperty(ObjectClass obj, PropertyIsValidEventArgs e)
-        {
-            e.IsValid = obj.DefaultSortProperty == null || obj.DefaultSortProperty.ObjectClass == obj;
-            e.Error = e.IsValid ? string.Empty : "The given DefaultSortProperty does not belong to the current object class";
-        }
     }
 }
