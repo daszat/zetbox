@@ -375,12 +375,27 @@ namespace PrepareEnv
             }
         }
 
+        private static string WindowsSdkDir
+        {
+            get
+            {
+                var result = new[] {
+                    Environment.GetEnvironmentVariable("WindowsSdkDir"),
+                    @"C:\Program Files\Microsoft SDKs\Windows\v7.1",
+                    @"C:\Program Files\Microsoft SDKs\Windows\v6.0"
+                }.FirstOrDefault(p => p != null && Directory.Exists(p));
+                if (result == null)
+                    throw new InvalidOperationException("%WindowsSdkDir% is empty or doesn't exist");
+                return result;
+            }
+        }
+
         private static void SignMage(EnvConfig envConfig, string templateName, string outputName)
         {
             Program.LogAction("signing with mage: [{0}]", outputName);
             var pw = _passphrase == null ? string.Empty : string.Format("-Password {0}", _passphrase);
             var args = string.Format("-Sign {0} -ToFile {1} -Certfile {2} {3}", templateName, outputName, envConfig.ClickOnce.KeyFile, pw);
-            var proc = Process.Start(Path.Combine(Environment.GetEnvironmentVariable("WindowsSdkDir"), "Bin", "NETFX 4.0 Tools", "mage.exe"), args);
+            var proc = Process.Start(Path.Combine(WindowsSdkDir, "Bin", "NETFX 4.0 Tools", "mage.exe"), args);
             proc.WaitForExit();
             if (proc.ExitCode != 0)
             {
