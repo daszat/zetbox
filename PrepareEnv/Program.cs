@@ -165,15 +165,9 @@ namespace PrepareEnv
             envConfig.BinaryTarget = PrepareConfigPath(envConfig.BinaryTarget);
             envConfig.TestsTarget = PrepareConfigPath(envConfig.TestsTarget);
 
-            if (envConfig.BinaryTarget != null)
-            {
-                envConfig.ClientExe = PrepareConfigPath(Path.Combine(envConfig.BinaryTarget, envConfig.ClientExe ?? "Zetbox.WPF.exe"));
-            }
-            else
-            {
-                envConfig.ClientExe = PrepareConfigPath(envConfig.ClientExe ?? "Zetbox.WPF.exe");
-            }
+            envConfig.ClientExe = ExpandEnvVars(envConfig.ClientExe ?? "Zetbox.WPF.exe");
             envConfig.ClientParameters = PrepareConfigPath(envConfig.ClientParameters);
+
             if (envConfig.ClickOnce != null)
             {
                 envConfig.ClickOnce.Publisher = ExpandEnvVars(envConfig.ClickOnce.Publisher);
@@ -182,8 +176,8 @@ namespace PrepareEnv
                 envConfig.ClickOnce.Product = ExpandEnvVars(envConfig.ClickOnce.Product) ?? string.Format("{0}'s zetbox client", envConfig.ClickOnce.Publisher);
                 envConfig.ClickOnce.SupportUrl = ExpandEnvVars(envConfig.ClickOnce.SupportUrl);
                 envConfig.ClickOnce.ErrorReportUrl = ExpandEnvVars(envConfig.ClickOnce.ErrorReportUrl);
-                // use local .application if no URL is specified
-                envConfig.ClickOnce.UpdateUrl = ExpandEnvVars(envConfig.ClickOnce.UpdateUrl) ?? new Uri(Path.GetFullPath(Path.GetFileNameWithoutExtension(envConfig.ClientExe) + ".application")).AbsoluteUri;
+                // if no URL is specified, the ClickOnce installer will use the .application location automatically
+                envConfig.ClickOnce.UpdateUrl = ExpandEnvVars(envConfig.ClickOnce.UpdateUrl);
                 envConfig.ClickOnce.KeyFile = PrepareConfigPath(envConfig.ClickOnce.KeyFile);
                 envConfig.ClickOnce.DeploymentVersion = ExpandEnvVars(envConfig.ClickOnce.DeploymentVersion);
             }

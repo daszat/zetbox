@@ -103,7 +103,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="zetboxBasic.nuspec.in" />
-    <None Include="zetboxBasic-All.nuspec.in" />
+    <None Include="zetboxBasic-All.nuspec.in">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="zetboxBasic-EF.nuspec.in">
       <SubType>Designer</SubType>
     </None>

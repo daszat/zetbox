@@ -60,20 +60,31 @@ namespace PrepareEnv
         {
             if (envConfig.ClickOnce == null) return;
 
-            var appId = new AppId()
+            var origCurrDir = Environment.CurrentDirectory;
+            try
             {
-                name = envConfig.ClickOnce.Product + ".exe",
-                version = "1.0.0.0",
-                publicKeyToken = FormatKey(PublicKeyTokenFromPfx(envConfig.ClickOnce.KeyFile)),
-                language = "neutral",
-                processorArchitecture = "bar",
-                type = "win32",
-            };
+                Environment.CurrentDirectory = envConfig.BinaryTarget;
+                Program.LogDetail("Changed CWD to BinaryTarget: [{0}]", Environment.CurrentDirectory);
+                var appId = new AppId()
+                {
+                    name = envConfig.ClickOnce.Product + ".exe",
+                    version = "1.0.0.0",
+                    publicKeyToken = FormatKey(PublicKeyTokenFromPfx(envConfig.ClickOnce.KeyFile)),
+                    language = "neutral",
+                    processorArchitecture = "bar",
+                    type = "win32",
+                };
 
-            CreateClickOnceManifest(envConfig, appId);
-            Sign(envConfig, appId, GetManifestTemplateName(envConfig), GetManifestName(envConfig));
-            CreateClickOnceAppplication(envConfig, appId);
-            Sign(envConfig, appId, GetAppTemplateName(envConfig), GetAppName(envConfig));
+                CreateClickOnceManifest(envConfig, appId);
+                Sign(envConfig, appId, GetManifestTemplateName(envConfig), GetManifestName(envConfig));
+                CreateClickOnceAppplication(envConfig, appId);
+                Sign(envConfig, appId, GetAppTemplateName(envConfig), GetAppName(envConfig));
+            }
+            finally
+            {
+                Environment.CurrentDirectory = origCurrDir;
+                Program.LogDetail("Changed CWD back to [{0}]", Environment.CurrentDirectory);
+            }
         }
 
         private static void CreateClickOnceManifest(EnvConfig envConfig, AppId appId)
@@ -100,9 +111,9 @@ namespace PrepareEnv
             var lastPrerequisite = doc.SelectNodes("/asmv1:assembly/asmv2:dependency", nsmgr).OfType<XmlNode>().Last();
             foreach (var baseName in new[] { "Common", "Client" })
             {
-                foreach (var pattern in new[] { "*.dll", "*.dll.deploy", "*.exe", "*.exe.deploy", "*.exe.config", "*.exe.config.deploy" })
+                foreach (var pattern in new[] { "*.dll", "*.exe", "*.exe.config" })
                 {
-                    foreach (var file in Directory.EnumerateFiles(Path.Combine(envConfig.BinaryTarget, baseName), pattern, SearchOption.AllDirectories))
+                    foreach (var file in Directory.EnumerateFiles(baseName, pattern, SearchOption.AllDirectories))
                     {
                         InsertClickOnceDependency(envConfig, dependencyList, lastPrerequisite, file, nsmgr);
                     }
@@ -153,20 +164,7 @@ namespace PrepareEnv
 
         private static void InsertClickOnceDependency(EnvConfig envConfig, XmlNode dependencyList, XmlNode lastPrerequisite, string file, XmlNamespaceManager nsmgr)
         {
-            file = Path.GetFullPath(file);
-            if (!File.Exists(file))
-            {
-                Program.LogAction("Skipping [{0}]: does not exist.", file);
-            }
-
-            var fullBinaryTarget = Path.GetFullPath(envConfig.BinaryTarget);
-            if (!file.StartsWith(fullBinaryTarget))
-            {
-                Program.LogAction("Skipping [{0}]: not part of BinaryTarget=[{1}].", file, fullBinaryTarget);
-                return;
-            }
-            var codebase = file.Substring(fullBinaryTarget.Length + 1);
-
+            var deployTarget = Path.Combine(GetClickOnceOutputPath(envConfig), file);
             var doc = dependencyList.OwnerDocument;
 
             if (file.EndsWith(".dll") || file.EndsWith(".dll.deploy") || file.EndsWith(".exe") || file.EndsWith(".exe.deploy"))
@@ -178,7 +176,7 @@ namespace PrepareEnv
                 var dependentAssembly = doc.CreateNode(XmlNodeType.Element, "dependentAssembly", ASMv2_NS);
                 SetOrReplaceAttribute(dependentAssembly, "dependencyType", null, "install");
                 SetOrReplaceAttribute(dependentAssembly, "allowDelayedBinding", null, "true");
-                SetOrReplaceAttribute(dependentAssembly, "codebase", null, codebase.Replace('/', '\\'));
+                SetOrReplaceAttribute(dependentAssembly, "codebase", null, file.Replace('/', '\\'));
                 SetOrReplaceAttribute(dependentAssembly, "size", null, string.Format(CultureInfo.InvariantCulture, "{0}", new FileInfo(file).Length));
 
                 var assemblyIdentity = doc.CreateNode(XmlNodeType.Element, "assemblyIdentity", ASMv2_NS);
@@ -191,13 +189,15 @@ namespace PrepareEnv
                 dependentAssembly.AppendChild(hash);
                 dependency.AppendChild(dependentAssembly);
                 dependencyList.InsertAfter(dependency, lastPrerequisite);
+
+                deployTarget += ".deploy";
             }
             else if (file.EndsWith(".manifest"))
             {
                 var dependency = doc.CreateNode(XmlNodeType.Element, "dependency", ASMv2_NS);
                 var dependentAssembly = doc.CreateNode(XmlNodeType.Element, "dependentAssembly", ASMv2_NS);
                 SetOrReplaceAttribute(dependentAssembly, "dependencyType", null, "install");
-                SetOrReplaceAttribute(dependentAssembly, "codebase", null, codebase.Replace('/', '\\'));
+                SetOrReplaceAttribute(dependentAssembly, "codebase", null, file.Replace('/', '\\'));
                 SetOrReplaceAttribute(dependentAssembly, "size", null, string.Format(CultureInfo.InvariantCulture, "{0}", new FileInfo(file).Length));
 
                 var manifest = new XmlDocument();
@@ -222,7 +222,7 @@ namespace PrepareEnv
             else
             {
                 var fileNode = doc.CreateNode(XmlNodeType.Element, "file", ASMv2_NS);
-                SetOrReplaceAttribute(fileNode, "name", null, codebase.Replace('/', '\\'));
+                SetOrReplaceAttribute(fileNode, "name", null, file.Replace('/', '\\'));
                 SetOrReplaceAttribute(fileNode, "size", null, string.Format(CultureInfo.InvariantCulture, "{0}", new FileInfo(file).Length));
 
                 var hash = doc.CreateNode(XmlNodeType.Element, "hash", ASMv2_NS);
@@ -241,7 +241,12 @@ namespace PrepareEnv
                 fileNode.AppendChild(hash);
 
                 dependencyList.InsertAfter(fileNode, lastPrerequisite);
+
+                deployTarget += ".deploy";
             }
+
+            Directory.CreateDirectory(Path.GetDirectoryName(deployTarget));
+            File.Copy(file, deployTarget, true);
         }
 
         private static XmlNode CreateHashNode(string file, XmlNamespaceManager nsmgr, XmlDocument doc)
@@ -493,6 +498,12 @@ namespace PrepareEnv
 
         #region Other Utilities
 
+        private static string GetClickOnceOutputPath(EnvConfig envConfig)
+        {
+            return "ClickOnceClient";
+        }
+
+        // will be copied by InsertClickOnceDependency
         private static string GetManifestName(EnvConfig envConfig)
         {
             return envConfig.ClientExe + ".manifest";
@@ -505,12 +516,13 @@ namespace PrepareEnv
 
         private static string GetAppName(EnvConfig envConfig)
         {
-            return Path.Combine(envConfig.BinaryTarget, Path.GetFileNameWithoutExtension(envConfig.ClientExe) + ".application");
+            return Path.Combine(GetClickOnceOutputPath(envConfig), Path.GetFileNameWithoutExtension(envConfig.ClientExe) + ".application");
         }
 
+        // template should not go to ClickOnceOutputPath
         private static string GetAppTemplateName(EnvConfig envConfig)
         {
-            return GetAppName(envConfig) + ".tmpl";
+            return Path.GetFileNameWithoutExtension(envConfig.ClientExe) + ".application.tmpl";
         }
 
         private static void UpdateSha1(XmlNode hash, string filename, XmlNamespaceManager nsmgr)
