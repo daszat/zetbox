@@ -23,18 +23,13 @@ namespace Zetbox.IntegrationTests.DefaultValues
     using Zetbox.App.Base;
     using Zetbox.App.Test;
 
-    public class when_submitting_after_write
-        : Zetbox.API.AbstractConsumerTests.DefaultValues.when_submitting_after_write
+    public class when_persisting_enums
+        : Zetbox.API.AbstractConsumerTests.DefaultValues.when_persisting_enums
     {
     }
 
-    public class when_submitting_without_read
-        : Zetbox.API.AbstractConsumerTests.DefaultValues.when_submitting_without_read
-    {
-    }
-
-    public class when_submitting_with_read
-        : Zetbox.API.AbstractConsumerTests.DefaultValues.when_submitting_with_read
+    public class when_persisting_guids
+        : Zetbox.API.AbstractConsumerTests.DefaultValues.when_persisting_guids
     {
     }
 }
