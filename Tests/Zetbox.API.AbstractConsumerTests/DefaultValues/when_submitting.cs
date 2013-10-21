@@ -102,7 +102,7 @@ namespace Zetbox.API.AbstractConsumerTests.DefaultValues
         {
             base.SetUp();
             ctx = GetContext();
-            var obj = ctx.Create<TestObjClass>();
+            obj = ctx.Create<TestObjClass>();
             obj.StringProp = "Some String";
         }
 
