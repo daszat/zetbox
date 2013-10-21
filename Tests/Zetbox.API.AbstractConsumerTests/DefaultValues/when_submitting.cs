@@ -32,6 +32,7 @@ namespace Zetbox.API.AbstractConsumerTests.DefaultValues
             var ctx = GetContext();
             var obj = ctx.Create<Assembly>();
             obj.Name = "TestAssembly";
+            obj.Module = ctx.GetQuery<Module>().First(m => m.Name == "TestModule");
 
             // set value explicitly
             var expectedExportGuid = obj.ExportGuid = Guid.NewGuid();
@@ -55,7 +56,7 @@ namespace Zetbox.API.AbstractConsumerTests.DefaultValues
 
             // set value explicitly
             var expectedEnum = obj.TestEnumWithDefault = TestEnum.Third;
-            
+
             ctx.SubmitChanges();
 
             var originalId = obj.ID;
@@ -76,6 +77,7 @@ namespace Zetbox.API.AbstractConsumerTests.DefaultValues
             var ctx = GetContext();
             var obj = ctx.Create<Assembly>();
             obj.Name = "TestRef";
+            obj.Module = ctx.GetQuery<Module>().First(m => m.Name == "TestModule");
             ctx.SubmitChanges();
 
             // read TestEnumWithDefault after submit to test server-side initialisation
@@ -117,6 +119,7 @@ namespace Zetbox.API.AbstractConsumerTests.DefaultValues
             var ctx = GetContext();
             var obj = ctx.Create<Assembly>();
             obj.Name = "TestRef";
+            obj.Module = ctx.GetQuery<Module>().First(m => m.Name == "TestModule");
 
             // read ExportGuid before submit to test client-side initialisation
             var expectedExportGuid = obj.ExportGuid;
