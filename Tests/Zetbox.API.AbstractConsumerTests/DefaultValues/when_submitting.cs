@@ -47,6 +47,7 @@ namespace Zetbox.API.AbstractConsumerTests.DefaultValues
             {
                 ctx.Delete(o);
             }
+            ctx.SubmitChanges();
             base.TearDown();
         }
 
