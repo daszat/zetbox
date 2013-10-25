@@ -69,7 +69,7 @@ namespace Zetbox.API.AbstractConsumerTests
                 ContainerBuilder builder;
                 switch (GetHostType())
                 {
-                    case HostType.AspNet:
+                    case HostType.AspNetService:
                     case HostType.Server:
                         Log.Info("Adding Server Modules");
                         builder = Zetbox.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Server.Modules);

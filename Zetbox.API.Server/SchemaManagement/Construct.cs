@@ -154,6 +154,7 @@ namespace Zetbox.API.SchemaManagement
 
             var rel = otherEnd.GetParent();
             var relEnd = rel.GetOtherEnd(otherEnd);
+
             if (relEnd.Type.GetTableMapping() == TableMapping.TPH
                 && relEnd.Type.BaseObjectClass != null
                 && rel.HasStorage(relEnd.GetRole()))
@@ -250,10 +251,16 @@ namespace Zetbox.API.SchemaManagement
             if (objClass == null) { throw new ArgumentNullException("objClass"); }
             return objClass.TableName + "_Rights_unmaterialized";
         }
+
+        public static string SecurityRulesRefreshRightsOnProcedurePrefix()
+        {
+            return "RefreshRightsOn_";
+        }
+
         public static string SecurityRulesRefreshRightsOnProcedureName(ObjectClass objClass)
         {
             if (objClass == null) { throw new ArgumentNullException("objClass"); }
-            return "RefreshRightsOn_" + objClass.TableName;
+            return SecurityRulesRefreshRightsOnProcedurePrefix() + objClass.TableName;
         }
 
         public static string SecurityRulesRefreshAllRightsProcedureName()

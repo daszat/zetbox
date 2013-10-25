@@ -27,7 +27,24 @@ namespace Zetbox.API
 
     public class ZetboxStreamReader : IDisposable
     {
-        public delegate ZetboxStreamReader Factory(BinaryReader source);
+        /// <summary>
+        /// Small helper to avoid off-thread autofac accesses.
+        /// </summary>
+        /// <remarks>Since the readers and writers are used in the thread pool, they may deadlock on autofac when a query is run from within an autofac resolution on the main thread.</remarks>
+        public sealed class Factory
+        {
+            private readonly TypeMap _map;
+            public Factory(TypeMap map)
+            {
+                if (map == null) throw new ArgumentNullException("map");
+                _map = map;
+            }
+
+            public ZetboxStreamReader Invoke(BinaryReader source)
+            {
+                return new ZetboxStreamReader(_map, source);
+            }
+        }
 
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Serialization");
 
@@ -535,18 +552,16 @@ namespace Zetbox.API
         /// </summary>
         public ICompoundObject ReadCompoundObject(Type t)
         {
-            ICompoundObject result;
             TraceCurrentPos();
+            var result = (ICompoundObject)Activator.CreateInstance(t);
             if (_source.ReadBoolean())
             {
-                result = (ICompoundObject)Activator.CreateInstance(t);
                 result.FromStream(this);
                 // CompoundObjects cannot have lists
                 SerializerTrace("read {0} value: [{1}]", t, result);
             }
             else
             {
-                result = null;
                 SerializerTrace("read {0} value: [null]", t);
             }
             return result;
@@ -605,6 +620,8 @@ namespace Zetbox.API
             Guid guid = ReadGuid();
             if (guid != Guid.Empty)
             {
+                if (!_typeMap.Map.ContainsKey(guid))
+                    throw new InvalidOperationException(string.Format("Read TypeGuid [{0}], but no mapped type found!", guid));
                 result = _typeMap.Map[guid];
             }
             else

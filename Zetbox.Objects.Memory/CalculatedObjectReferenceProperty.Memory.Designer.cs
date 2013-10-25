@@ -41,48 +41,57 @@ namespace Zetbox.App.Base
         /// The properties on which the calculation depends. This is used to propagate change notifications.
         /// </summary>
         // collection entry list property
-   		// Zetbox.Generator.Templates.Properties.CollectionEntryListProperty
-		public ICollection<Zetbox.App.Base.Property> Inputs
-		{
-			get
-			{
-				if (_Inputs == null)
-				{
+        // BEGIN Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for Inputs
+        public ICollection<Zetbox.App.Base.Property> Inputs
+        {
+            get
+            {
+                if (_Inputs == null)
+                {
                     TriggerFetchInputsAsync().Wait();
-				}
-				return (ICollection<Zetbox.App.Base.Property>)_Inputs;
-			}
-		}
-        
+                }
+                return (ICollection<Zetbox.App.Base.Property>)_Inputs;
+            }
+        }
+
         Zetbox.API.Async.ZbTask _triggerFetchInputsTask;
         public Zetbox.API.Async.ZbTask TriggerFetchInputsAsync()
         {
             if (_triggerFetchInputsTask != null) return _triggerFetchInputsTask;
-			if (!Inputs_was_eagerLoaded) _triggerFetchInputsTask = Context.FetchRelationAsync<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl>(new Guid("47595643-e8d0-48ef-82c7-2d24de8a784e"), RelationEndRole.A, this);
+            if (!Inputs_was_eagerLoaded) _triggerFetchInputsTask = Context.FetchRelationAsync<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl>(new Guid("47595643-e8d0-48ef-82c7-2d24de8a784e"), RelationEndRole.A, this);
             else _triggerFetchInputsTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, null);
-			_triggerFetchInputsTask.OnResult(r => 
+            _triggerFetchInputsTask.OnResult(r =>
             {
-                _Inputs 
-				= new ObservableBSideCollectionWrapper<Zetbox.App.Base.CalculatedObjectReferenceProperty, Zetbox.App.Base.Property, Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl>>(
-					this, 
-					new RelationshipFilterASideCollection<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl>(this.Context, this));
+                _Inputs
+                    = new ObservableBSideCollectionWrapper<Zetbox.App.Base.CalculatedObjectReferenceProperty, Zetbox.App.Base.Property, Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl>>(
+                        this,
+                        new RelationshipFilterASideCollection<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl>(this.Context, this));
+                        // _Inputs.CollectionChanged is managed by OnInputsCollectionChanged() and called from the RelationEntry
             });
             return _triggerFetchInputsTask;
         }
 
-		private ObservableBSideCollectionWrapper<Zetbox.App.Base.CalculatedObjectReferenceProperty, Zetbox.App.Base.Property, Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl>> _Inputs;
-		
-		private bool Inputs_was_eagerLoaded = false;
+        internal void OnInputsCollectionChanged()
+        {
+            NotifyPropertyChanged("Inputs", null, null);
+            if (OnInputs_PostSetter != null && IsAttached)
+                OnInputs_PostSetter(this);
+        }
+
+        private ObservableBSideCollectionWrapper<Zetbox.App.Base.CalculatedObjectReferenceProperty, Zetbox.App.Base.Property, Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl>> _Inputs;
+        private bool Inputs_was_eagerLoaded = false;
+        // END Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for Inputs
+public static event PropertyListChangedHandler<Zetbox.App.Base.CalculatedObjectReferenceProperty> OnInputs_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.CalculatedObjectReferenceProperty> OnInputs_IsValid;
 
         /// <summary>
         /// the referenced class of objects
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ReferencedClass
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ReferencedClass
         // fkBackingName=_fk_ReferencedClass; fkGuidBackingName=_fk_guid_ReferencedClass;
         // referencedInterface=Zetbox.App.Base.ObjectClass; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -191,6 +200,69 @@ namespace Zetbox.App.Base
 		public static event PropertyPostSetterHandler<Zetbox.App.Base.CalculatedObjectReferenceProperty, Zetbox.App.Base.ObjectClass> OnReferencedClass_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.CalculatedObjectReferenceProperty> OnReferencedClass_IsValid;
+
+        /// <summary>
+        /// Returns the translated description
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetDescription_CalculatedObjectReferenceProperty")]
+        public override string GetDescription()
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetDescription_CalculatedObjectReferenceProperty != null)
+            {
+                OnGetDescription_CalculatedObjectReferenceProperty(this, e);
+            }
+            else
+            {
+                e.Result = base.GetDescription();
+            }
+            return e.Result;
+        }
+        public static event GetDescription_Handler<CalculatedObjectReferenceProperty> OnGetDescription_CalculatedObjectReferenceProperty;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<CalculatedObjectReferenceProperty> OnGetDescription_CalculatedObjectReferenceProperty_CanExec;
+
+        [EventBasedMethod("OnGetDescription_CalculatedObjectReferenceProperty_CanExec")]
+        public override bool GetDescriptionCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetDescription_CalculatedObjectReferenceProperty_CanExec != null)
+				{
+					OnGetDescription_CalculatedObjectReferenceProperty_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDescriptionCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<CalculatedObjectReferenceProperty> OnGetDescription_CalculatedObjectReferenceProperty_CanExecReason;
+
+        [EventBasedMethod("OnGetDescription_CalculatedObjectReferenceProperty_CanExecReason")]
+        public override string GetDescriptionCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetDescription_CalculatedObjectReferenceProperty_CanExecReason != null)
+				{
+					OnGetDescription_CalculatedObjectReferenceProperty_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDescriptionCanExecReason;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// The element type for multi-valued properties. The property type string in all other cases.
@@ -600,6 +672,7 @@ namespace Zetbox.App.Base
                 ReferencedClassImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)Context.Find<Zetbox.App.Base.ObjectClass>(_fk_ReferencedClass.Value);
             else
                 ReferencedClassImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

@@ -12,9 +12,7 @@
     <Modules>
       <Module>Zetbox.Client.ClientModule, Zetbox.Client</Module>
       <Module>Zetbox.API.Client.HttpClientModule, Zetbox.API.Client</Module>
-      <Module NotOnFallback="true">$safesolutionname$.Client.ClientModule, $safesolutionname$.Client</Module>
+      <Module>$safesolutionname$.Client.ClientModule, $safesolutionname$.Client</Module>
     </Modules>
   </Client>
-  <AssemblySearchPaths EnableShadowCopy="true">
-  </AssemblySearchPaths>
 </ZetboxConfig>

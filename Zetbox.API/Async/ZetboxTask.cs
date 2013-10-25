@@ -18,9 +18,9 @@ namespace Zetbox.API.Async
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
     using System.Text;
     using System.Threading;
-    using System.Reflection;
 
     public enum ZbTaskState
     {
@@ -51,7 +51,46 @@ namespace Zetbox.API.Async
         /// <summary>
         /// The task has encountered an exception and did not run to completion.
         /// </summary>
-        Failed
+        Failed,
+        /// <summary>
+        /// The task was canceled by a user.
+        /// </summary>
+        Canceled,
+    }
+
+    public static class ZbTaskExtensions
+    {
+        public static ZbTask OnError(this ZbTask self, Action<Exception> errorAction)
+        {
+            if (self == null) throw new ArgumentNullException("self");
+            if (errorAction == null) throw new ArgumentNullException("errorAction");
+            self.AddErrorAction(errorAction);
+            return self;
+        }
+
+        public static ZbTask<T> OnError<T>(this ZbTask<T> self, Action<Exception> errorAction)
+        {
+            if (self == null) throw new ArgumentNullException("self");
+            if (errorAction == null) throw new ArgumentNullException("errorAction");
+            self.AddErrorAction(errorAction);
+            return self;
+        }
+
+        public static ZbTask Finally(this ZbTask self, Action finallyAction)
+        {
+            if (self == null) throw new ArgumentNullException("self");
+            if (finallyAction == null) throw new ArgumentNullException("finallyAction");
+            self.AddFinallyAction(finallyAction);
+            return self;
+        }
+
+        public static ZbTask<T> Finally<T>(this ZbTask<T> self, Action finallyAction)
+        {
+            if (self == null) throw new ArgumentNullException("self");
+            if (finallyAction == null) throw new ArgumentNullException("finallyAction");
+            self.AddFinallyAction(finallyAction);
+            return self;
+        }
     }
 
     public class ZbTask
@@ -59,11 +98,20 @@ namespace Zetbox.API.Async
         public static readonly SynchronizationContext Synchron = null;
         public static readonly IEnumerable<ZbTask> NoInnerTasks = null;
 
+        private static bool _debugForceSynchron = false;
+        public static bool DebugForceSynchron
+        {
+            get { return _debugForceSynchron; }
+            set { _debugForceSynchron = value; }
+        }
+
         private readonly object _lockObject = new object();
         protected object SyncRoot { get { return _lockObject; } }
 
         protected readonly List<Action> asyncContinuationActions = new List<Action>();
         protected readonly List<Action> resultActions = new List<Action>();
+        protected readonly List<Action<Exception>> errorActions = new List<Action<Exception>>();
+        protected readonly List<Action> finallyActions = new List<Action>();
         protected readonly List<ZbTask> innerZbTasks;
         protected int numRunningTasks;
 
@@ -79,8 +127,28 @@ namespace Zetbox.API.Async
             protected set;
         }
 
+        protected void Fail(Exception ex)
+        {
+            lock (_lockObject) if (State == ZbTaskState.Canceled) return;
+
+            Exception = ex;
+            lock (_lockObject) State = ZbTaskState.Failed;
+        }
+
+        protected void RunErrorHandlers()
+        {
+            foreach (var a in errorActions)
+            {
+                a(Exception);
+            }
+
+            // Error handler should be executed only once
+            errorActions.Clear();
+        }
+
         protected void ThrowException()
         {
+            RunErrorHandlers();
             throw new TargetInvocationException("An exception occurred while executing a task or one of it's continuation actions: " + Exception.Message, Exception);
         }
 
@@ -125,7 +193,13 @@ namespace Zetbox.API.Async
                 {
                     // attach to innerZbTask directly
                     innerZbTasks.ForEach(innerTask =>
-                        innerTask.ContinueWith(t =>
+                        innerTask
+                        .OnError(ex =>
+                        {
+                            Fail(ex);
+                            RunErrorHandlers();
+                        })
+                        .ContinueWith(t =>
                         {
                             if (Interlocked.Decrement(ref numRunningTasks) == 0)
                             {
@@ -148,7 +222,13 @@ namespace Zetbox.API.Async
                 {
                     // has to be deferred until the innerZbTask has run
                     innerZbTasks.ForEach(innerTask =>
-                        innerTask.OnResult(t =>
+                        innerTask
+                        .OnError(ex =>
+                        {
+                            Fail(ex);
+                            RunErrorHandlers();
+                        })
+                        .OnResult(t =>
                         {
                             if (Interlocked.Decrement(ref numRunningTasks) == 0)
                             {
@@ -177,22 +257,17 @@ namespace Zetbox.API.Async
                 catch (Exception ex)
                 {
                     // Stop processing
-                    Exception = ex;
-                    lock (_lockObject) State = ZbTaskState.Failed;
-
-                    // If we're synchronous, it's *much* cleaner to just trow the exception and let it be handled immediately.
-                    if (_syncContext == Synchron)
-                        throw;
+                    Fail(ex);
                 }
             };
-            if (_syncContext != null)
+            if (_syncContext != null && !_debugForceSynchron)
             {
                 ThreadPool.QueueUserWorkItem(tpState =>
                 {
                     work();
                     lock (_lockObject)
                     {
-                        if (State != ZbTaskState.Failed) State = ZbTaskState.ResultEventsPosted;
+                        if (State != ZbTaskState.Failed && State != ZbTaskState.Canceled) State = ZbTaskState.ResultEventsPosted;
                         if (IsWaiting > 0)
                         {
                             Monitor.PulseAll(_lockObject);
@@ -209,7 +284,7 @@ namespace Zetbox.API.Async
                 work();
                 lock (_lockObject)
                 {
-                    if (State != ZbTaskState.Failed) State = ZbTaskState.ResultEventsPosted;
+                    if (State != ZbTaskState.Failed && State != ZbTaskState.Canceled) State = ZbTaskState.ResultEventsPosted;
                     if (IsWaiting > 0)
                     {
                         Monitor.PulseAll(_lockObject);
@@ -288,7 +363,9 @@ namespace Zetbox.API.Async
                         continuationAction(this);
                         break;
                     case ZbTaskState.Failed:
-                        ThrowException();
+                        RunErrorHandlers();
+                        break;
+                    case ZbTaskState.Canceled:
                         break;
                 }
             }
@@ -314,23 +391,114 @@ namespace Zetbox.API.Async
                         continuationAction(this);
                         break;
                     case ZbTaskState.Failed:
-                        ThrowException();
+                        RunErrorHandlers();
+                        break;
+                    case ZbTaskState.Canceled:
                         break;
                 }
             }
             return this;
         }
 
+        internal void AddErrorAction(Action<Exception> errorAction)
+        {
+            lock (_lockObject)
+            {
+                switch (State)
+                {
+                    case ZbTaskState.Waiting:
+                    case ZbTaskState.Running:
+                    case ZbTaskState.AsyncContinuationsRunning:
+                    case ZbTaskState.ResultEventsPosted:
+                    case ZbTaskState.ResultEventRunning:
+                    case ZbTaskState.Finished:
+                        errorActions.Add(errorAction);
+                        break;
+                    case ZbTaskState.Failed:
+                        errorActions.Add(errorAction);
+                        RunErrorHandlers();
+                        break;
+                    case ZbTaskState.Canceled:
+                        break;
+                }
+            }
+        }
+
+        internal void AddFinallyAction(Action finallyAction)
+        {
+            lock (_lockObject)
+            {
+                switch (State)
+                {
+                    case ZbTaskState.Waiting:
+                    case ZbTaskState.Running:
+                    case ZbTaskState.AsyncContinuationsRunning:
+                    case ZbTaskState.ResultEventsPosted:
+                    case ZbTaskState.ResultEventRunning:
+                        finallyActions.Add(finallyAction);
+                        break;
+                    case ZbTaskState.Finished:
+                    case ZbTaskState.Failed:
+                    case ZbTaskState.Canceled:
+                        finallyAction();
+                        break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Waits on the finishing of the task or throws an exception on failure.
+        /// </summary>
         public void Wait()
         {
-            if (innerZbTasks.Count > 0) innerZbTasks.ForEach(it => it.Wait());
+            try
+            {
+                if (innerZbTasks.Count > 0) innerZbTasks.ForEach(it => it.Wait());
+            }
+            catch (Exception ex)
+            {
+                Fail(ex);
+            }
 
             CallResultActions();
+
+            lock (_lockObject) if (State == ZbTaskState.Failed) ThrowException();
+        }
+
+        /// <summary>
+        /// Force State to Canceled, even when the Task failed, we want to ignore it.
+        /// </summary>
+        public void Cancel()
+        {
+            // finished Tasks cannot be canceled
+            lock (_lockObject) if (State == ZbTaskState.Finished) return;
+
+            // TODO: implement proper cancel support
+            try
+            {
+                foreach (var innerTask in innerZbTasks)
+                {
+                    innerTask.Cancel();
+                }
+            }
+            catch
+            {
+                // ignore
+            }
+            finally
+            {
+                lock (_lockObject) State = ZbTaskState.Canceled;
+            }
         }
 
         protected void CallAsyncContinuations()
         {
-            lock (_lockObject) State = ZbTaskState.AsyncContinuationsRunning;
+            lock (_lockObject)
+            {
+                if (State == ZbTaskState.Canceled) return;
+
+                State = ZbTaskState.AsyncContinuationsRunning;
+            }
             foreach (var action in asyncContinuationActions)
             {
                 action();
@@ -339,53 +507,87 @@ namespace Zetbox.API.Async
 
         protected void CallResultActions()
         {
-            lock (_lockObject)
-            {
-            RECHECK:
-                switch (State)
-                {
-                    case ZbTaskState.Waiting:
-                    case ZbTaskState.Running:
-                    case ZbTaskState.AsyncContinuationsRunning:
-                        IsWaiting += 1;
-                        Monitor.Wait(_lockObject);
-                        IsWaiting -= 1;
-                        // something happened: we have to decide whether we are the
-                        // "lucky" thread to continue execution or whether someone else
-                        // already did the work for us
-                        goto RECHECK;
-                    case ZbTaskState.ResultEventsPosted:
-                        State = ZbTaskState.ResultEventRunning;
-                        break;
-                    case ZbTaskState.ResultEventRunning:
-                    case ZbTaskState.Finished:
-                        return;
-                    case ZbTaskState.Failed:
-                        ThrowException();
-                        // never reached:
-                        return;
-                }
-            }
-
             try
             {
-                foreach (var action in resultActions)
+                lock (_lockObject)
+                {
+                RECHECK:
+                    switch (State)
+                    {
+                        case ZbTaskState.Waiting:
+                        case ZbTaskState.Running:
+                        case ZbTaskState.AsyncContinuationsRunning:
+                            IsWaiting += 1;
+                            Monitor.Wait(_lockObject);
+                            IsWaiting -= 1;
+                            // something happened: we have to decide whether we are the
+                            // "lucky" thread to continue execution or whether someone else
+                            // already did the work for us
+                            goto RECHECK;
+                        case ZbTaskState.ResultEventsPosted:
+                            State = ZbTaskState.ResultEventRunning;
+                            break;
+                        case ZbTaskState.ResultEventRunning:
+                        case ZbTaskState.Finished:
+                            return;
+                        case ZbTaskState.Failed:
+                            RunErrorHandlers();
+                            return;
+                        case ZbTaskState.Canceled:
+                            return;
+                    }
+                }
+
+                try
+                {
+                    foreach (var action in resultActions)
+                    {
+                        action();
+                    }
+                    lock (_lockObject) State = ZbTaskState.Finished;
+                }
+                catch (Exception ex)
+                {
+                    // Stop processing
+                    Fail(ex);
+                    RunErrorHandlers();
+                }
+            }
+            finally
+            {
+                RunFinallyActions();
+            }
+        }
+
+        /// <summary>
+        /// May be called multiple times without ill effects.
+        /// </summary>
+        protected void RunFinallyActions()
+        {
+            var exceptions = new List<Exception>();
+            List<Action> actions;
+            lock (_lockObject)
+            {
+                actions = new List<Action>(finallyActions);
+                finallyActions.Clear();
+            }
+            foreach (var action in actions)
+            {
+                try
                 {
                     action();
                 }
+                catch (Exception ex)
+                {
+                    exceptions.Add(ex);
+                }
             }
-            catch (Exception ex)
+            if (exceptions.Count > 0)
             {
-                // Stop processing
-                Exception = ex;
-                lock (_lockObject) State = ZbTaskState.Failed;
-
-                // We're already on the Result thread, so we can throw the exception on
-                // at least the first consumer will get a proper StackTrace
-                throw;
+                var ex = new InvalidOperationException("Exception while finalizing ZbTask");
+                ex.Data["exceptions"] = exceptions;
+                throw ex;
             }
-
-            lock (_lockObject) State = ZbTaskState.Finished;
         }
     }
 
@@ -472,7 +674,8 @@ namespace Zetbox.API.Async
         {
             get
             {
-                Wait();
+                Wait(); // will throw on failure
+                lock (SyncRoot) if (State == ZbTaskState.Canceled) throw new InvalidOperationException("Task is already canceled.");
                 return _result;
             }
             set
@@ -494,7 +697,7 @@ namespace Zetbox.API.Async
         /// </summary>
         /// <param name="innerTaskFactory">The task which will create the task we'll be acting on.</param>
         /// <param name="task">the transformation we have to do.</param>
-        public ZbFutureTask(ZbTask<ZbTask<TIntermediate>> innerTaskFactory, Func<TIntermediate, TResult> task)
+        public ZbFutureTask(ZbTask<ZbTask<TIntermediate>> innerTaskFactory, Func<TIntermediate, TResult> task = null)
             : base(innerTaskFactory != null ? innerTaskFactory.SyncContext : Synchron, new[] { innerTaskFactory })
         {
             if (innerTaskFactory == null) throw new ArgumentNullException("innerTaskFactory");

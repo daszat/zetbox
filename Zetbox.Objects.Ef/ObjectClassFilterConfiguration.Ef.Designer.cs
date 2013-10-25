@@ -148,6 +148,11 @@ namespace Zetbox.App.GUI
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchObjectClassAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass>(this.ObjectClass);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ObjectClass
 		public static event PropertyGetterHandler<Zetbox.App.GUI.ObjectClassFilterConfiguration, Zetbox.App.Base.ObjectClass> OnObjectClass_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.ObjectClassFilterConfiguration, Zetbox.App.Base.ObjectClass> OnObjectClass_PreSetter;
@@ -315,6 +320,17 @@ namespace Zetbox.App.GUI
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "ObjectClass":
+                return TriggerFetchObjectClassAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
@@ -331,6 +347,7 @@ namespace Zetbox.App.GUI
                 ObjectClassImpl = (Zetbox.App.Base.ObjectClassEfImpl)Context.Find<Zetbox.App.Base.ObjectClass>(_fk_ObjectClass.Value);
             else
                 ObjectClassImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

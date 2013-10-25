@@ -24,20 +24,22 @@ namespace Zetbox.App.GUI
         }
 
         /// <summary>
-        /// The control implementing this View
+        /// The control implementing this View.
         /// </summary>
-        [Zetbox.API.DefinitionGuid("eff6276d-975b-4a0d-bd3c-ad76af2189c3")]
-        Zetbox.App.Base.TypeRef ControlRef {
+        [Zetbox.API.DefinitionGuid("180968cf-8705-433f-9346-e726c8552737")]
+        string ControlTypeRef {
             get;
             set;
         }
 
         /// <summary>
-        /// A View supports one or more ViewModels
+        /// Indicates that the referenced control type is deleted. Descriptors with this flag set require action to finally delete them and handle their users.
         /// </summary>
-
-        [Zetbox.API.DefinitionGuid("4698cfda-6b1d-4cd7-8350-630a1adab1a8")]
-        ICollection<Zetbox.App.Base.TypeRef> SupportedViewModels { get; }
+        [Zetbox.API.DefinitionGuid("4b256764-6a40-47cb-a222-242a36e06457")]
+        bool Deleted {
+            get;
+            set;
+        }
 
         /// <summary>
         /// Which toolkit provides this View

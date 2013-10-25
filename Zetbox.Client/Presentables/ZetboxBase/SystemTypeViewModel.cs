@@ -24,7 +24,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     using Zetbox.App.Base;
     
     /// <summary>
-    /// Models a <see cref="System.Type"/>. Contains references to the Assembly and the respective TypeRef.
+    /// Models a <see cref="System.Type"/>. Contains references to the Assembly and the respective Type.
     /// </summary>
     public class SystemTypeViewModel
         : ViewModel

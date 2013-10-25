@@ -53,7 +53,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Enumeration
         // fkBackingName=_fk_Enumeration; fkGuidBackingName=_fk_guid_Enumeration;
         // referencedInterface=Zetbox.App.Base.Enumeration; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable
 
@@ -136,12 +136,80 @@ namespace Zetbox.App.Base
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchEnumerationAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Enumeration>(this.Enumeration);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Enumeration
 		public static event PropertyGetterHandler<Zetbox.App.Base.EnumerationProperty, Zetbox.App.Base.Enumeration> OnEnumeration_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.EnumerationProperty, Zetbox.App.Base.Enumeration> OnEnumeration_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.Base.EnumerationProperty, Zetbox.App.Base.Enumeration> OnEnumeration_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.EnumerationProperty> OnEnumeration_IsValid;
+
+        /// <summary>
+        /// Returns the translated description
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetDescription_EnumerationProperty")]
+        public override string GetDescription()
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetDescription_EnumerationProperty != null)
+            {
+                OnGetDescription_EnumerationProperty(this, e);
+            }
+            else
+            {
+                e.Result = base.GetDescription();
+            }
+            return e.Result;
+        }
+        public static event GetDescription_Handler<EnumerationProperty> OnGetDescription_EnumerationProperty;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<EnumerationProperty> OnGetDescription_EnumerationProperty_CanExec;
+
+        [EventBasedMethod("OnGetDescription_EnumerationProperty_CanExec")]
+        public override bool GetDescriptionCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetDescription_EnumerationProperty_CanExec != null)
+				{
+					OnGetDescription_EnumerationProperty_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDescriptionCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<EnumerationProperty> OnGetDescription_EnumerationProperty_CanExecReason;
+
+        [EventBasedMethod("OnGetDescription_EnumerationProperty_CanExecReason")]
+        public override string GetDescriptionCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetDescription_EnumerationProperty_CanExecReason != null)
+				{
+					OnGetDescription_EnumerationProperty_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDescriptionCanExecReason;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// The element type for multi-valued properties. The property type string in all other cases.
@@ -492,6 +560,17 @@ namespace Zetbox.App.Base
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Enumeration":
+                return TriggerFetchEnumerationAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
@@ -508,6 +587,7 @@ namespace Zetbox.App.Base
                 EnumerationImpl = (Zetbox.App.Base.EnumerationEfImpl)Context.Find<Zetbox.App.Base.Enumeration>(_fk_Enumeration.Value);
             else
                 EnumerationImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

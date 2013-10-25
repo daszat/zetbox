@@ -73,21 +73,104 @@ namespace at.dasz.DocumentManagement
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryEfImpl>(
-                        "Model.FK_Document_has_Revisions_A",
-                        "CollectionEntry");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetRevisionsImplCollection();
             }
+        }
+
+        private EntityCollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryEfImpl> _RevisionsImplEntityCollection;
+        internal EntityCollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryEfImpl> GetRevisionsImplCollection()
+        {
+            if (_RevisionsImplEntityCollection == null)
+            {
+                _RevisionsImplEntityCollection
+                    = ((IEntityWithRelationships)(this)).RelationshipManager
+                        .GetRelatedCollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryEfImpl>(
+                            "Model.FK_Document_has_Revisions_A",
+                            "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_RevisionsImplEntityCollection.IsLoaded)
+                {
+                    _RevisionsImplEntityCollection.Load();
+                }
+                _RevisionsImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Revisions", null, null); if(OnRevisions_PostSetter != null && IsAttached) OnRevisions_PostSetter(this); };
+            }
+            return _RevisionsImplEntityCollection;
         }
         private BSideListWrapper<at.dasz.DocumentManagement.Document, Zetbox.App.Base.Blob, at.dasz.DocumentManagement.Document_has_Blob_RelationEntryEfImpl, EntityCollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryEfImpl>> _Revisions;
 
+        public Zetbox.API.Async.ZbTask TriggerFetchRevisionsAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<IList<Zetbox.App.Base.Blob>>(this.Revisions);
+        }
+
+public static event PropertyListChangedHandler<at.dasz.DocumentManagement.Document> OnRevisions_PostSetter;
+
         public static event PropertyIsValidHandler<at.dasz.DocumentManagement.Document> OnRevisions_IsValid;
+
+        /// <summary>
+        /// Creates an excerpt from the current file
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnExtractText_Document")]
+        public override void ExtractText()
+        {
+            // base.ExtractText();
+            if (OnExtractText_Document != null)
+            {
+                OnExtractText_Document(this);
+            }
+            else
+            {
+                base.ExtractText();
+            }
+        }
+        public static event ExtractText_Handler<Document> OnExtractText_Document;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<Document> OnExtractText_Document_CanExec;
+
+        [EventBasedMethod("OnExtractText_Document_CanExec")]
+        public override bool ExtractTextCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnExtractText_Document_CanExec != null)
+				{
+					OnExtractText_Document_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.ExtractTextCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Document> OnExtractText_Document_CanExecReason;
+
+        [EventBasedMethod("OnExtractText_Document_CanExecReason")]
+        public override string ExtractTextCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnExtractText_Document_CanExecReason != null)
+				{
+					OnExtractText_Document_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.ExtractTextCanExecReason;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Handles the change of the current blob
@@ -308,6 +391,17 @@ namespace at.dasz.DocumentManagement
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Revisions":
+                return TriggerFetchRevisionsAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
@@ -316,6 +410,7 @@ namespace at.dasz.DocumentManagement
             base.ReloadReferences();
 
             // fix direct object references
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

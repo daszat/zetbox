@@ -36,7 +36,7 @@ namespace Zetbox.API.PerfCounter
         {
             try
             {
-                if (objects != null && _objectsLogger != null)
+                if (objects != null && _objectsLogger != null && _objectsLogger.IsInfoEnabled)
                 {
                     foreach (var omc in objects.Values)
                     {
@@ -48,7 +48,7 @@ namespace Zetbox.API.PerfCounter
                     }
                 }
 
-                if (totals != null && _mainLogger != null)
+                if (totals != null && _mainLogger != null && _mainLogger.IsInfoEnabled)
                 {
                     var data = totals.OrderBy(kvp => kvp.Key);
                     CheckFirstMainWrite(data);
@@ -63,7 +63,7 @@ namespace Zetbox.API.PerfCounter
 
         private static void CheckFirstObjectWrite(IOrderedEnumerable<KeyValuePair<string, string>> data)
         {
-            if (firstObjectWrite)
+            if (firstObjectWrite && _objectsLogger.IsInfoEnabled)
             {
                 lock (firstObjectWriteLock)
                 {
@@ -78,7 +78,7 @@ namespace Zetbox.API.PerfCounter
 
         private static void CheckFirstMainWrite(IOrderedEnumerable<KeyValuePair<string, string>> data)
         {
-            if (firstMainWrite)
+            if (firstMainWrite && _mainLogger.IsInfoEnabled)
             {
                 lock (firstMainWriteLock)
                 {

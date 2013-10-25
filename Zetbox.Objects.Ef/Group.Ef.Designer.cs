@@ -155,19 +155,40 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryEfImpl>(
-                        "Model.FK_Identities_memberOf_Groups_B",
-                        "CollectionEntry");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetMemberImplCollection();
             }
         }
+
+        private EntityCollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryEfImpl> _MemberImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryEfImpl> GetMemberImplCollection()
+        {
+            if (_MemberImplEntityCollection == null)
+            {
+                _MemberImplEntityCollection
+                    = ((IEntityWithRelationships)(this)).RelationshipManager
+                        .GetRelatedCollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryEfImpl>(
+                            "Model.FK_Identities_memberOf_Groups_B",
+                            "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_MemberImplEntityCollection.IsLoaded)
+                {
+                    _MemberImplEntityCollection.Load();
+                }
+                _MemberImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Member", null, null); if(OnMember_PostSetter != null && IsAttached) OnMember_PostSetter(this); };
+            }
+            return _MemberImplEntityCollection;
+        }
         private ASideCollectionWrapper<Zetbox.App.Base.Identity, Zetbox.App.Base.Group, Zetbox.App.Base.Identity_memberOf_Group_RelationEntryEfImpl, EntityCollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryEfImpl>> _Member;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchMemberAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.Identity>>(this.Member);
+        }
+
+public static event PropertyListChangedHandler<Zetbox.App.Base.Group> OnMember_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.Group> OnMember_IsValid;
 
@@ -184,7 +205,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
         // fkBackingName=_fk_Module; fkGuidBackingName=_fk_guid_Module;
         // referencedInterface=Zetbox.App.Base.Module; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable
 
@@ -265,6 +286,11 @@ namespace Zetbox.App.Base
                 NotifyPropertyChanged("Module", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchModuleAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(this.Module);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
@@ -456,6 +482,19 @@ namespace Zetbox.App.Base
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Member":
+                return TriggerFetchMemberAsync();
+            case "Module":
+                return TriggerFetchModuleAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
@@ -472,6 +511,7 @@ namespace Zetbox.App.Base
                 ModuleImpl = (Zetbox.App.Base.ModuleEfImpl)Context.Find<Zetbox.App.Base.Module>(_fk_Module.Value);
             else
                 ModuleImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

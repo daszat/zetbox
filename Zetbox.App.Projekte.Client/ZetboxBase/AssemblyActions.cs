@@ -16,15 +16,16 @@ namespace Zetbox.App.Base
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Text;
     using Zetbox.API;
     using Zetbox.API.Utils;
-    using Zetbox.App.GUI;
-    using Zetbox.Client.Presentables;
-    using System.IO;
-    using Zetbox.Client.GUI;
     using Zetbox.App.Extensions;
+    using Zetbox.App.GUI;
+    using Zetbox.Client.GUI;
+    using Zetbox.Client.Presentables;
+    using SR = System.Reflection;
 
     /// <summary>
     /// Client implementation
@@ -46,26 +47,16 @@ namespace Zetbox.App.Base
             {
                 var ctx = assembly.Context;
 
-                // pre-load context
-                var oldTypes = ctx.GetQuery<TypeRef>()
-                    .WithEagerLoading()
-                    .Where(tr => tr.Assembly.ID == assembly.ID)
-                    .ToLookup(tr => tr.FullName);
-
                 try
                 {
-                    var newTypes = LoadAndCreateTypes(assembly, ctx);
-                    MarkOldTypesAsDeleted(ctx, oldTypes, newTypes);
-                    UpdateTypeParents(newTypes);
+                    SR.Assembly srAssembly = ReflectAssembly(assembly);
 
-                    CreateViewModelDescriptors(ctx, newTypes);
-                    CreateViewDescriptors(ctx, newTypes);
+                    CreateViewModelDescriptors(ctx, srAssembly);
+                    CreateViewDescriptors(ctx, srAssembly);
 
                     var newDescriptors = new List<IDataObject>();
                     newDescriptors.AddRange(ctx.AttachedObjects.OfType<ViewModelDescriptor>().Where(d => d.ObjectState == DataObjectState.New).Cast<IDataObject>().ToList());
                     newDescriptors.AddRange(ctx.AttachedObjects.OfType<ViewDescriptor>().Where(d => d.ObjectState == DataObjectState.New).Cast<IDataObject>().ToList());
-                    newDescriptors.AddRange(ctx.AttachedObjects.OfType<ServiceDescriptor>().Where(d => d.ObjectState == DataObjectState.New).Cast<IDataObject>().ToList());
-                    newDescriptors.AddRange(ctx.AttachedObjects.OfType<Assembly>().Where(d => d.ObjectState == DataObjectState.New).Cast<IDataObject>().ToList());
 
                     if (newDescriptors.Count > 0)
                     {
@@ -92,20 +83,21 @@ namespace Zetbox.App.Base
             }
         }
 
-        private static void CreateViewModelDescriptors(IZetboxContext ctx, Dictionary<int, TypeRef> newTypes)
+        private static void CreateViewModelDescriptors(IZetboxContext ctx, SR.Assembly srAssembly)
         {
             using (Logging.Log.InfoTraceMethodCallFormat("CreateViewModelDescriptors", "Creating ViewModelDescriptors"))
             {
-                foreach (var tr in newTypes.Values)
+                var liveDescriptors = new HashSet<ViewModelDescriptor>();
+
+                foreach (var type in srAssembly.GetTypes())
                 {
-                    var type = tr.AsType(false);
                     if (type != null)
                     {
                         object attr;
                         // http://blogs.msdn.com/b/kaevans/archive/2005/10/24/484186.aspx
                         if (type.Assembly.ReflectionOnly)
                         {
-                            attr = System.Reflection.CustomAttributeData.GetCustomAttributes(type).FirstOrDefault(i => i.Constructor.DeclaringType.FullName == typeof(ViewModelDescriptorAttribute).FullName);
+                            attr = SR.CustomAttributeData.GetCustomAttributes(type).FirstOrDefault(i => i.Constructor.DeclaringType.FullName == typeof(ViewModelDescriptorAttribute).FullName);
                         }
                         else
                         {
@@ -113,26 +105,46 @@ namespace Zetbox.App.Base
                         }
                         if (attr != null)
                         {
-                            var descr = ctx.GetQuery<ViewModelDescriptor>().FirstOrDefault(i => i.ViewModelRef == tr);
+                            var typeName = type.GetSimpleName();
+                            var descr = ctx.GetQuery<ViewModelDescriptor>().FirstOrDefault(i => i.ViewModelTypeRef == typeName);
                             if (descr == null)
                             {
                                 descr = ctx.Create<ViewModelDescriptor>();
-                                descr.ViewModelRef = tr;
+                                descr.ViewModelTypeRef = typeName;
                                 descr.Description = "TODO: Add description";
                             }
+                            else
+                            {
+                                descr.Deleted = false;
+                            }
+
+                            liveDescriptors.Add(descr);
                         }
                     }
+                }
+
+                var simpleAssemblyName = srAssembly.GetSimpleName();
+                var deadDescriptors = ctx
+                    .GetQuery<ViewModelDescriptor>()
+                    .ToList()
+                    .Where(vmd => TypeSpec.Parse(vmd.ViewModelTypeRef).AssemblyName.IfNullOrWhiteSpace(string.Empty).Split(',').FirstOrDefault().IfNullOrWhiteSpace(string.Empty).Trim() == simpleAssemblyName)
+                    .Except(liveDescriptors);
+
+                foreach (var d in deadDescriptors)
+                {
+                    d.Deleted = true;
                 }
             }
         }
 
-        private static void CreateViewDescriptors(IZetboxContext ctx, Dictionary<int, TypeRef> newTypes)
+        private static void CreateViewDescriptors(IZetboxContext ctx, SR.Assembly srAssembly)
         {
             using (Logging.Log.InfoTraceMethodCallFormat("CreateViewDescriptors", "Creating ViewDescriptors"))
             {
-                foreach (var tr in newTypes.Values)
+                var liveDescriptors = new HashSet<ViewDescriptor>();
+
+                foreach (var type in srAssembly.GetTypes())
                 {
-                    var type = tr.AsType(false);
                     if (type != null)
                     {
                         object attr;
@@ -140,8 +152,8 @@ namespace Zetbox.App.Base
                         // http://blogs.msdn.com/b/kaevans/archive/2005/10/24/484186.aspx
                         if (type.Assembly.ReflectionOnly)
                         {
-                            attr = System.Reflection.CustomAttributeData.GetCustomAttributes(type).FirstOrDefault(i => i.Constructor.DeclaringType.FullName == typeof(ViewDescriptorAttribute).FullName);
-                            if (attr != null) tk = (Toolkit)((System.Reflection.CustomAttributeData)attr).ConstructorArguments.Single().Value;
+                            attr = SR.CustomAttributeData.GetCustomAttributes(type).FirstOrDefault(i => i.Constructor.DeclaringType.FullName == typeof(ViewDescriptorAttribute).FullName);
+                            if (attr != null) tk = (Toolkit)((SR.CustomAttributeData)attr).ConstructorArguments.Single().Value;
                         }
                         else
                         {
@@ -150,99 +162,77 @@ namespace Zetbox.App.Base
                         }
                         if (attr != null)
                         {
-                            var descr = ctx.GetQuery<ViewDescriptor>().FirstOrDefault(i => i.ControlRef == tr);
-                            if (descr == null)
+                            var typeName = type.GetSimpleName();
+
+                            // if a view can be used under multiple ControlKinds, it needs to have multiple ViewDescriptors
+                            var descrList = ctx.GetQuery<ViewDescriptor>().Where(i => i.ControlTypeRef == typeName).ToList();
+                            if (descrList.Count == 0)
                             {
-                                descr = ctx.Create<ViewDescriptor>();
-                                descr.ControlRef = tr;
+                                var descr = ctx.Create<ViewDescriptor>();
+                                descr.ControlTypeRef = typeName;
                                 if (tk != null) descr.Toolkit = tk.Value;
+                                liveDescriptors.Add(descr);
+                            }
+                            else
+                            {
+                                foreach (var descr in descrList)
+                                {
+                                    descr.Deleted = false;
+                                    liveDescriptors.Add(descr);
+                                }
                             }
                         }
                     }
                 }
+
+                var simpleAssemblyName = srAssembly.GetSimpleName();
+                var deadDescriptors = ctx
+                    .GetQuery<ViewDescriptor>()
+                    .ToList()
+                    .Where(vmd => TypeSpec.Parse(vmd.ControlTypeRef).AssemblyName.IfNullOrWhiteSpace(string.Empty).Split(',').FirstOrDefault().IfNullOrWhiteSpace(string.Empty).Trim() == simpleAssemblyName)
+                    .Except(liveDescriptors);
+                foreach (var d in deadDescriptors)
+                {
+                    d.Deleted = true;
+                }
             }
         }
 
-        private static void UpdateTypeParents(Dictionary<int, TypeRef> newTypes)
+        /// <summary>
+        /// Loads the referenced Assembly into the ReflectionOnly Context. May ask the user to locate the file.
+        /// </summary>
+        /// <param name="assembly"></param>
+        /// <returns></returns>
+        private static SR.Assembly ReflectAssembly(Assembly assembly)
         {
-            using (Logging.Log.InfoTraceMethodCallFormat("UpdateTypeParents", "Updating parents"))
+            SR.Assembly a = null;
+            try
             {
-                // update parent infos
-                foreach (var tr in newTypes.Values)
+                a = SR.Assembly.ReflectionOnlyLoad(assembly.Name);
+            }
+            catch (FileNotFoundException)
+            {
+            }
+            if (a == null)
+            {
+                // Try AssemblyLoader directly
+                a = AssemblyLoader.ReflectionOnlyLoadFrom(assembly.Name);
+            }
+            if (a == null)
+            {
+                // Ask user
+                var f = _mdlFactory.GetSourceFileNameFromUser("Assembly files|*.dll;*.exe", "All files|*.*");
+                if (!string.IsNullOrEmpty(f))
                 {
-                    tr.UpdateParent();
+                    a = SR.Assembly.ReflectionOnlyLoadFrom(f);
                 }
             }
-        }
-
-        private static void MarkOldTypesAsDeleted(IZetboxContext ctx, ILookup<string, TypeRef> oldTypes, Dictionary<int, TypeRef> newTypes)
-        {
-            using (Logging.Log.InfoTraceMethodCallFormat("MarkOldTypesAsDeleted", "Updating refs"))
+            if (a == null)
             {
-                // Delete unused Refs
-                foreach (var tr in oldTypes.SelectMany(g => g))
-                {
-                    var type = tr.AsType(false);
-                    if (type == null)
-                    {
-                        Logging.Log.Warn("Should delete " + tr.FullName);
-                        tr.Deleted = true;
-                    }
-                    else if (!type.IsGenericType)
-                    {
-                        if (!newTypes.ContainsKey(tr.ID))
-                        {
-                            Logging.Log.Warn("Should delete " + tr.FullName);
-                            tr.Deleted = true;
-                        }
-                    }
-                    else
-                    {
-                        tr.Deleted = null;
-                    }
-                }
+                // Give it up
+                throw new InvalidOperationException("Unable to load assembly: " + assembly.Name);
             }
+            return a;
         }
-
-        private static Dictionary<int, TypeRef> LoadAndCreateTypes(Assembly assembly, IZetboxContext ctx)
-        {
-            using (Logging.Log.InfoTraceMethodCall("Loading new types"))
-            {
-                System.Reflection.Assembly a = null;
-                try
-                {
-                    a = System.Reflection.Assembly.ReflectionOnlyLoad(assembly.Name);
-                }
-                catch (FileNotFoundException)
-                {
-                }
-                if (a == null)
-                {
-                    // Try AssemblyLoader directly
-                    a = AssemblyLoader.ReflectionOnlyLoadFrom(assembly.Name);
-                }
-                if (a == null)
-                {
-                    // Ask user
-                    var f = _mdlFactory.GetSourceFileNameFromUser("Assembly files|*.dll;*.exe", "All files|*.*");
-                    if (!string.IsNullOrEmpty(f))
-                    {
-                        a = System.Reflection.Assembly.ReflectionOnlyLoadFrom(f);
-                    }
-                }
-                if (a == null)
-                {
-                    // Give it up
-                    throw new InvalidOperationException("Unable to load assembly: " + assembly.Name);
-                }
-                var newTypes = a
-                    .GetExportedTypes()
-                    .Where(t => !t.IsGenericTypeDefinition)
-                    .Select(t => t.ToRef(ctx))
-                    .ToDictionary(tr => tr.ID);
-                return newTypes;
-            }
-        }
-
     }
 }

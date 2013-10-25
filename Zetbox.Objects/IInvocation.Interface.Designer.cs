@@ -15,10 +15,10 @@ namespace Zetbox.App.Base
     {
 
         /// <summary>
-        /// The type implementing this invocation
+        /// Typename of the implementor
         /// </summary>
-        [Zetbox.API.DefinitionGuid("f3caf1b1-867b-4c09-8377-e7542fd51be2")]
-        Zetbox.App.Base.TypeRef Implementor {
+        [Zetbox.API.DefinitionGuid("3e094c00-1f82-438c-a1a6-7aef3a64f44b")]
+        string ImplementorName {
             get;
             set;
         }

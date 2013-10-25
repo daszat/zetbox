@@ -28,13 +28,11 @@ namespace Zetbox.App.Projekte.Client.ViewModel.Projekte
     {
         public new delegate ShowCalendarNavigationActionViewModel Factory(IZetboxContext dataCtx, ViewModel parent, NavigationAction screen);
 
-        private readonly Func<IZetboxContext> _ctxFactory;
 
-        public ShowCalendarNavigationActionViewModel(IViewModelDependencies appCtx, Func<IZetboxContext> ctxFactory,
+        public ShowCalendarNavigationActionViewModel(IViewModelDependencies appCtx,
             IZetboxContext dataCtx, ViewModel parent, NavigationAction screen)
             : base(appCtx, dataCtx, parent, screen)
         {
-            _ctxFactory = ctxFactory;
         }
 
         public override bool CanExecute()
@@ -44,7 +42,7 @@ namespace Zetbox.App.Projekte.Client.ViewModel.Projekte
 
         public override void Execute()
         {
-            ViewModelFactory.ShowModel(ViewModelFactory.CreateViewModel<CalendarWorkspaceViewModel.Factory>().Invoke(_ctxFactory(), null), true);
+            ViewModelFactory.ShowMessage("Syncronisation of milestones is not implemented yet", "Not implemented yet");
         }
     }
 }

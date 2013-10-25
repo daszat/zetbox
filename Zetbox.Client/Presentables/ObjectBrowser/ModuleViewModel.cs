@@ -13,6 +13,7 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -23,10 +24,11 @@ using Zetbox.API.Configuration;
 using Zetbox.App.Base;
 using Zetbox.App.Extensions;
 using Zetbox.Client.Presentables.ZetboxBase;
-using System.Collections;
+using Zetbox.API.Common;
 
 namespace Zetbox.Client.Presentables.ObjectBrowser
 {
+    [ViewModelDescriptor]
     public class ModuleViewModel : DataObjectViewModel
     {
         public class TreeNodeSimpleObjects
@@ -35,7 +37,7 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
             {
                 get
                 {
-                    return "Simple Objects";
+                    return WorkspaceViewModelResources.SimpleObjects;
                 }
             }
             public IEnumerable Children { get; set; }
@@ -49,6 +51,14 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
         {
             _module = mdl;
             _module.PropertyChanged += ModulePropertyChanged;
+        }
+
+        public override string Name
+        {
+            get
+            {
+                return Assets.GetString(_module, ZetboxAssetKeys.Modules, ZetboxAssetKeys.ConstructNameKey(_module), _module.Name);
+            }
         }
 
         #region public interface

@@ -137,6 +137,7 @@
     <Compile Include="BoolParameter.Ef.Designer.cs" />
     <Compile Include="BoolProperty.Ef.Designer.cs" />
     <Compile Include="CalculatedObjectReferenceProperty.Ef.Designer.cs" />
+    <Compile Include="CalendarBook.Ef.Designer.cs" />
     <Compile Include="ClientReadOnlyConstraint.Ef.Designer.cs" />
     <Compile Include="CLRObjectParameter.Ef.Designer.cs" />
     <Compile Include="CommonWorkScheduleRule.Ef.Designer.cs" />
@@ -145,7 +146,6 @@
     <Compile Include="CompoundObjectParameter.Ef.Designer.cs" />
     <Compile Include="CompoundObjectProperty.Ef.Designer.cs" />
     <Compile Include="Constraint.Ef.Designer.cs" />
-    <Compile Include="ConstraintInvocation.Ef.Designer.cs" />
     <Compile Include="ControlKind.Ef.Designer.cs" />
     <Compile Include="CurrentDateTimeDefaultValue.Ef.Designer.cs" />
     <Compile Include="CurrentSchema.Ef.Designer.cs" />
@@ -170,12 +170,16 @@
     <Compile Include="EnumerationEntry.Ef.Designer.cs" />
     <Compile Include="EnumerationProperty.Ef.Designer.cs" />
     <Compile Include="EnumParameter.Ef.Designer.cs" />
+    <Compile Include="Event.Ef.Designer.cs" />
+    <Compile Include="EventTestObject.Ef.Designer.cs" />
     <Compile Include="ExceptionLogEntry.Ef.Designer.cs" />
+    <Compile Include="Excerpt.Ef.Designer.cs" />
     <Compile Include="File.Ef.Designer.cs" />
     <Compile Include="FileImportConfiguration.Ef.Designer.cs" />
     <Compile Include="FilterConfiguration.Ef.Designer.cs" />
     <Compile Include="FixedYearlyWorkScheduleRule.Ef.Designer.cs" />
     <Compile Include="Fragebogen.Ef.Designer.cs" />
+    <Compile Include="FullTextIndexConstraint.Ef.Designer.cs" />
     <Compile Include="Group.Ef.Designer.cs" />
     <Compile Include="GroupMembership.Ef.Designer.cs" />
     <Compile Include="GuidProperty.Ef.Designer.cs" />
@@ -242,6 +246,7 @@
     <Compile Include="RequiredParentChild.Ef.Designer.cs" />
     <Compile Include="RoleMembership.Ef.Designer.cs" />
     <Compile Include="SavedListConfiguration.Ef.Designer.cs" />
+    <Compile Include="SecurityChangeRight.Ef.Designer.cs" />
     <Compile Include="SecurityTestChild.Ef.Designer.cs" />
     <Compile Include="SecurityTestParent.Ef.Designer.cs" />
     <Compile Include="Sequence.Ef.Designer.cs" />
@@ -257,6 +262,8 @@
     <Compile Include="StringParameter.Ef.Designer.cs" />
     <Compile Include="StringProperty.Ef.Designer.cs" />
     <Compile Include="StringRangeConstraint.Ef.Designer.cs" />
+    <Compile Include="SyncProvider.Ef.Designer.cs" />
+    <Compile Include="TagCache.Ef.Designer.cs" />
     <Compile Include="Task.Ef.Designer.cs" />
     <Compile Include="Template.Ef.Designer.cs" />
     <Compile Include="TestCustomObject.Ef.Designer.cs" />
@@ -266,7 +273,6 @@
     <Compile Include="TPHBaseObj.Ef.Designer.cs" />
     <Compile Include="TPHDerivedAObj.Ef.Designer.cs" />
     <Compile Include="TPHDerivedBObj.Ef.Designer.cs" />
-    <Compile Include="TypeRef.Ef.Designer.cs" />
     <Compile Include="ValueTypeProperty.Ef.Designer.cs" />
     <Compile Include="ViewDescriptor.Ef.Designer.cs" />
     <Compile Include="ViewModelDescriptor.Ef.Designer.cs" />
@@ -274,11 +280,13 @@
     <Compile Include="Visual.Ef.Designer.cs" />
     <Compile Include="WorkSchedule.Ef.Designer.cs" />
     <Compile Include="WorkScheduleRule.Ef.Designer.cs" />
+    <Compile Include="WorkScheduleSyncProvider.Ef.Designer.cs" />
     <Compile Include="YearFilterConfiguration.Ef.Designer.cs" />
     <Compile Include="YearlyWorkScheduleRule.Ef.Designer.cs" />
     <Compile Include="CollectionEntries.Ef.Designer.cs" />
     <Compile Include="AnyReference.Ef.Designer.cs" />
     <Compile Include="AuditEntry.Ef.Designer.cs" />
+    <Compile Include="DateTimeOffset.Ef.Designer.cs" />
     <Compile Include="DateTimeRange.Ef.Designer.cs" />
     <Compile Include="RecurrenceRule.Ef.Designer.cs" />
     <Compile Include="TestPhoneCompoundObject.Ef.Designer.cs" />

@@ -148,6 +148,11 @@ namespace Zetbox.App.Calendar
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchBaseWorkScheduleAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.WorkSchedule>(this.BaseWorkSchedule);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for BaseWorkSchedule
 		public static event PropertyGetterHandler<Zetbox.App.Calendar.WorkSchedule, Zetbox.App.Calendar.WorkSchedule> OnBaseWorkSchedule_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.WorkSchedule, Zetbox.App.Calendar.WorkSchedule> OnBaseWorkSchedule_PreSetter;
@@ -168,7 +173,7 @@ namespace Zetbox.App.Calendar
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Calendar;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable
 
@@ -248,6 +253,11 @@ namespace Zetbox.App.Calendar
                 NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
@@ -352,7 +362,7 @@ namespace Zetbox.App.Calendar
     */
         // object list property
         // object list property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -365,7 +375,7 @@ namespace Zetbox.App.Calendar
                     _ChildWorkSchedule = new EntityCollectionWrapper<Zetbox.App.Calendar.WorkSchedule, Zetbox.App.Calendar.WorkScheduleEfImpl>(
                             this.Context, ChildWorkScheduleImpl,
                             () => this.NotifyPropertyChanging("ChildWorkSchedule", null, null),
-                            () => { this.NotifyPropertyChanged("ChildWorkSchedule", null, null); if(OnChildWorkSchedule_PostSetter != null && IsAttached) OnChildWorkSchedule_PostSetter(this); },
+                            null, // see GetChildWorkScheduleImplCollection()
                             (item) => item.NotifyPropertyChanging("BaseWorkSchedule", null, null),
                             (item) => item.NotifyPropertyChanged("BaseWorkSchedule", null, null));
                 }
@@ -378,21 +388,39 @@ namespace Zetbox.App.Calendar
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.Calendar.WorkScheduleEfImpl>(
-                        "Model.FK_BaseWorkSchedule_has_ChildWorkSchedules",
-                        "ChildWorkSchedules");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetChildWorkScheduleImplCollection();
             }
         }
         private EntityCollectionWrapper<Zetbox.App.Calendar.WorkSchedule, Zetbox.App.Calendar.WorkScheduleEfImpl> _ChildWorkSchedule;
 
+        private EntityCollection<Zetbox.App.Calendar.WorkScheduleEfImpl> _ChildWorkScheduleImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Calendar.WorkScheduleEfImpl> GetChildWorkScheduleImplCollection()
+        {
+            if (_ChildWorkScheduleImplEntityCollection == null)
+            {
+                _ChildWorkScheduleImplEntityCollection = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Zetbox.App.Calendar.WorkScheduleEfImpl>(
+                        "Model.FK_BaseWorkSchedule_has_ChildWorkSchedules",
+                        "ChildWorkSchedules");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_ChildWorkScheduleImplEntityCollection.IsLoaded)
+                {
+                    _ChildWorkScheduleImplEntityCollection.Load();
+                }
+                _ChildWorkScheduleImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("ChildWorkSchedule", null, null); if (OnChildWorkSchedule_PostSetter != null && IsAttached) OnChildWorkSchedule_PostSetter(this); };
+            }
+            return _ChildWorkScheduleImplEntityCollection;
+        }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchChildWorkScheduleAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Calendar.WorkSchedule>>(this.ChildWorkSchedule);
+        }
+
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
 public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule> OnChildWorkSchedule_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Calendar.WorkSchedule> OnChildWorkSchedule_IsValid;
@@ -410,7 +438,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Calendar;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable
 
@@ -490,6 +518,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
@@ -678,7 +711,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
         // fkBackingName=_fk_Module; fkGuidBackingName=_fk_guid_Module;
         // referencedInterface=Zetbox.App.Base.Module; moduleNamespace=Zetbox.App.Calendar;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable
 
@@ -759,6 +792,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
                 NotifyPropertyChanged("Module", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchModuleAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(this.Module);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
@@ -848,7 +886,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
     */
         // object list property
         // object list property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -861,7 +899,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
                     _WorkScheduleRules = new EntityCollectionWrapper<Zetbox.App.Calendar.WorkScheduleRule, Zetbox.App.Calendar.WorkScheduleRuleEfImpl>(
                             this.Context, WorkScheduleRulesImpl,
                             () => this.NotifyPropertyChanging("WorkScheduleRules", null, null),
-                            () => { this.NotifyPropertyChanged("WorkScheduleRules", null, null); if(OnWorkScheduleRules_PostSetter != null && IsAttached) OnWorkScheduleRules_PostSetter(this); },
+                            null, // see GetWorkScheduleRulesImplCollection()
                             (item) => item.NotifyPropertyChanging("WorkSchedule", null, null),
                             (item) => item.NotifyPropertyChanged("WorkSchedule", null, null));
                 }
@@ -874,21 +912,39 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.Calendar.WorkScheduleRuleEfImpl>(
-                        "Model.FK_WorkSchedule_has_WorkScheduleRules",
-                        "WorkScheduleRules");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetWorkScheduleRulesImplCollection();
             }
         }
         private EntityCollectionWrapper<Zetbox.App.Calendar.WorkScheduleRule, Zetbox.App.Calendar.WorkScheduleRuleEfImpl> _WorkScheduleRules;
 
+        private EntityCollection<Zetbox.App.Calendar.WorkScheduleRuleEfImpl> _WorkScheduleRulesImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Calendar.WorkScheduleRuleEfImpl> GetWorkScheduleRulesImplCollection()
+        {
+            if (_WorkScheduleRulesImplEntityCollection == null)
+            {
+                _WorkScheduleRulesImplEntityCollection = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Zetbox.App.Calendar.WorkScheduleRuleEfImpl>(
+                        "Model.FK_WorkSchedule_has_WorkScheduleRules",
+                        "WorkScheduleRules");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_WorkScheduleRulesImplEntityCollection.IsLoaded)
+                {
+                    _WorkScheduleRulesImplEntityCollection.Load();
+                }
+                _WorkScheduleRulesImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("WorkScheduleRules", null, null); if (OnWorkScheduleRules_PostSetter != null && IsAttached) OnWorkScheduleRules_PostSetter(this); };
+            }
+            return _WorkScheduleRulesImplEntityCollection;
+        }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchWorkScheduleRulesAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Calendar.WorkScheduleRule>>(this.WorkScheduleRules);
+        }
+
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
 public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule> OnWorkScheduleRules_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Calendar.WorkSchedule> OnWorkScheduleRules_IsValid;
@@ -1145,6 +1201,27 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "BaseWorkSchedule":
+                return TriggerFetchBaseWorkScheduleAsync();
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "ChildWorkSchedule":
+                return TriggerFetchChildWorkScheduleAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            case "Module":
+                return TriggerFetchModuleAsync();
+            case "WorkScheduleRules":
+                return TriggerFetchWorkScheduleRulesAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
@@ -1179,6 +1256,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
                 ModuleImpl = (Zetbox.App.Base.ModuleEfImpl)Context.Find<Zetbox.App.Base.Module>(_fk_Module.Value);
             else
                 ModuleImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

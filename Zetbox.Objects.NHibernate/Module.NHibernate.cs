@@ -63,35 +63,33 @@ namespace Zetbox.Objects
 
 
     internal sealed class NHibernateImplementationTypeChecker
-        : Zetbox.API.BaseTypeChecker, INHibernateImplementationTypeChecker
+        : Zetbox.API.BaseImplementationTypeChecker, INHibernateImplementationTypeChecker
     {
         public NHibernateImplementationTypeChecker(Func<IEnumerable<IImplementationTypeChecker>> implTypeCheckersFactory)
             : base(implTypeCheckersFactory)
         {
         }
 
-        public bool IsImplementationType(Type type)
+        protected override System.Reflection.Assembly GetAssembly()
         {
-            if (type == null) { throw new ArgumentNullException("type"); }
-
-			var myAssembly = typeof(NHibernateImplementationTypeChecker).Assembly;
-
-            // Allow all top-level types from the generated assembly
-            if (type.Assembly == myAssembly && type.DeclaringType == null)
-                return true;
-
-            // Allow all generic types which have only implementation types as arguments
-            if (type.IsGenericType)
-                return type.GetGenericArguments().All(t => IsImplementationType(t));
-
-            return false;
-		}
-	}
+            return typeof(NHibernateImplementationTypeChecker).Assembly;
+        }
+    }
 
     // marker class to provide stable and correct assembly reference
     internal sealed class NHibernateActionsManager
         : BaseCustomActionsManager, INHibernateActionsManager
     {
+        private static object _syncRoot = new object();
+        private static bool _isInitialised = false;
+
+        protected override object SyncRoot { get { return _syncRoot; } }
+        protected override bool IsInitialised
+        {
+            get { return _isInitialised; }
+            set { _isInitialised = value; }
+        }
+
         public NHibernateActionsManager(ILifetimeScope container, IDeploymentRestrictor restrictor)
             : base(container, restrictor, "NHibernateImpl")
         {

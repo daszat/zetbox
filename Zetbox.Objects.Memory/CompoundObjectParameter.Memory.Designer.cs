@@ -40,10 +40,10 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CompoundObject
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CompoundObject
         // fkBackingName=_fk_CompoundObject; fkGuidBackingName=_fk_guid_CompoundObject;
         // referencedInterface=Zetbox.App.Base.CompoundObject; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -422,6 +422,7 @@ namespace Zetbox.App.Base
                 CompoundObjectImpl = (Zetbox.App.Base.CompoundObjectMemoryImpl)Context.Find<Zetbox.App.Base.CompoundObject>(_fk_CompoundObject.Value);
             else
                 CompoundObjectImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

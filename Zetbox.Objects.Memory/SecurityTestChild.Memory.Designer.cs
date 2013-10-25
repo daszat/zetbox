@@ -40,10 +40,10 @@ namespace Zetbox.App.Test
         /// <summary>
         /// Identity which changed this object
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Test;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -228,10 +228,10 @@ namespace Zetbox.App.Test
         /// <summary>
         /// Identity which created this object
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Test;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -416,10 +416,10 @@ namespace Zetbox.App.Test
         /// <summary>
         /// 
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Identity
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Identity
         // fkBackingName=_fk_Identity; fkGuidBackingName=_fk_guid_Identity;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Test;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -589,7 +589,7 @@ namespace Zetbox.App.Test
         /// <summary>
         /// 
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
         // fkBackingName=_fk_Parent; fkGuidBackingName=_fk_guid_Parent;
         // referencedInterface=Zetbox.App.Test.SecurityTestParent; moduleNamespace=Zetbox.App.Test;
         // inverse Navigator=Children; is list;
@@ -915,6 +915,7 @@ namespace Zetbox.App.Test
                 ParentImpl = (Zetbox.App.Test.SecurityTestParentMemoryImpl)Context.Find<Zetbox.App.Test.SecurityTestParent>(_fk_Parent.Value);
             else
                 ParentImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

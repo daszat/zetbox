@@ -369,7 +369,7 @@ namespace Zetbox.API.Utils
         {
             if (log == null || !log.IsDebugEnabled) { return; }
 
-            log.DebugFormat(msg + ": Consuming {0:0.00} kB Memory", (double)GC.GetTotalMemory(true) / 1024.0);
+            log.DebugFormat(msg + ": Consuming {0:n2} kB Memory", (double)GC.GetTotalMemory(true) / 1024.0);
         }
 
         private static object _warnOnceLock = new object();

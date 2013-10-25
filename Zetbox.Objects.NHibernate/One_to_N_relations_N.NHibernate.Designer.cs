@@ -215,6 +215,11 @@ namespace Zetbox.App.Test
         private int? _fk_OneSide = null;
 
 
+    public Zetbox.API.Async.ZbTask TriggerFetchOneSideAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Test.One_to_N_relations_One>(this.OneSide);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for OneSide
 		public static event PropertyGetterHandler<Zetbox.App.Test.One_to_N_relations_N, Zetbox.App.Test.One_to_N_relations_One> OnOneSide_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Test.One_to_N_relations_N, Zetbox.App.Test.One_to_N_relations_One> OnOneSide_PreSetter;
@@ -276,6 +281,17 @@ namespace Zetbox.App.Test
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "OneSide":
+                return TriggerFetchOneSideAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

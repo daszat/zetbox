@@ -53,7 +53,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultPropertyViewModelDescriptor
         // fkBackingName=_fk_DefaultPropertyViewModelDescriptor; fkGuidBackingName=_fk_guid_DefaultPropertyViewModelDescriptor;
         // referencedInterface=Zetbox.App.GUI.ViewModelDescriptor; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable
 
@@ -136,12 +136,125 @@ namespace Zetbox.App.Base
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchDefaultPropertyViewModelDescriptorAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor>(this.DefaultPropertyViewModelDescriptor);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultPropertyViewModelDescriptor
 		public static event PropertyGetterHandler<Zetbox.App.Base.CompoundObject, Zetbox.App.GUI.ViewModelDescriptor> OnDefaultPropertyViewModelDescriptor_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.CompoundObject, Zetbox.App.GUI.ViewModelDescriptor> OnDefaultPropertyViewModelDescriptor_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.Base.CompoundObject, Zetbox.App.GUI.ViewModelDescriptor> OnDefaultPropertyViewModelDescriptor_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.CompoundObject> OnDefaultPropertyViewModelDescriptor_IsValid;
+
+        /// <summary>
+        /// The default ViewModel to use for this Compound Object
+        /// </summary>
+    /*
+    Relation: FK_CPObj_has_DefaultViewModelDescriptor
+    A: ZeroOrMore CompoundObject as CPObj
+    B: ZeroOrOne ViewModelDescriptor as DefaultViewModelDescriptor
+    Preferred Storage: MergeIntoA
+    */
+        // object reference property
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultViewModelDescriptor
+        // fkBackingName=_fk_DefaultViewModelDescriptor; fkGuidBackingName=_fk_guid_DefaultViewModelDescriptor;
+        // referencedInterface=Zetbox.App.GUI.ViewModelDescriptor; moduleNamespace=Zetbox.App.Base;
+        // no inverse navigator handling
+        // PositionStorage=none;
+        // Target exportable
+
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Zetbox.App.GUI.ViewModelDescriptor DefaultViewModelDescriptor
+        {
+            get { return DefaultViewModelDescriptorImpl; }
+            set { DefaultViewModelDescriptorImpl = (Zetbox.App.GUI.ViewModelDescriptorEfImpl)value; }
+        }
+
+        private int? _fk_DefaultViewModelDescriptor;
+
+        private Guid? _fk_guid_DefaultViewModelDescriptor = null;
+
+        // internal implementation, EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_CPObj_has_DefaultViewModelDescriptor", "DefaultViewModelDescriptor")]
+        public Zetbox.App.GUI.ViewModelDescriptorEfImpl DefaultViewModelDescriptorImpl
+        {
+            get
+            {
+                Zetbox.App.GUI.ViewModelDescriptorEfImpl __value;
+                EntityReference<Zetbox.App.GUI.ViewModelDescriptorEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ViewModelDescriptorEfImpl>(
+                        "Model.FK_CPObj_has_DefaultViewModelDescriptor",
+                        "DefaultViewModelDescriptor");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load();
+                }
+                __value = r.Value;
+                if (OnDefaultViewModelDescriptor_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.ViewModelDescriptor>(__value);
+                    OnDefaultViewModelDescriptor_Getter(this, e);
+                    __value = (Zetbox.App.GUI.ViewModelDescriptorEfImpl)e.Result;
+                }
+                return __value;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
+
+                EntityReference<Zetbox.App.GUI.ViewModelDescriptorEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ViewModelDescriptorEfImpl>(
+                        "Model.FK_CPObj_has_DefaultViewModelDescriptor",
+                        "DefaultViewModelDescriptor");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load();
+                }
+                Zetbox.App.GUI.ViewModelDescriptorEfImpl __oldValue = (Zetbox.App.GUI.ViewModelDescriptorEfImpl)r.Value;
+                Zetbox.App.GUI.ViewModelDescriptorEfImpl __newValue = (Zetbox.App.GUI.ViewModelDescriptorEfImpl)value;
+
+                // Changing Event fires before anything is touched
+                NotifyPropertyChanging("DefaultViewModelDescriptor", __oldValue, __newValue);
+
+                if (OnDefaultViewModelDescriptor_PreSetter != null)
+                {
+                    var e = new PropertyPreSetterEventArgs<Zetbox.App.GUI.ViewModelDescriptor>(__oldValue, __newValue);
+                    OnDefaultViewModelDescriptor_PreSetter(this, e);
+                    __newValue = (Zetbox.App.GUI.ViewModelDescriptorEfImpl)e.Result;
+                }
+
+                r.Value = (Zetbox.App.GUI.ViewModelDescriptorEfImpl)__newValue;
+
+                if (OnDefaultViewModelDescriptor_PostSetter != null)
+                {
+                    var e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.ViewModelDescriptor>(__oldValue, __newValue);
+                    OnDefaultViewModelDescriptor_PostSetter(this, e);
+                }
+
+                // everything is done. fire the Changed event
+                NotifyPropertyChanged("DefaultViewModelDescriptor", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
+            }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchDefaultViewModelDescriptorAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor>(this.DefaultViewModelDescriptor);
+        }
+
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultViewModelDescriptor
+		public static event PropertyGetterHandler<Zetbox.App.Base.CompoundObject, Zetbox.App.GUI.ViewModelDescriptor> OnDefaultViewModelDescriptor_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.CompoundObject, Zetbox.App.GUI.ViewModelDescriptor> OnDefaultViewModelDescriptor_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.CompoundObject, Zetbox.App.GUI.ViewModelDescriptor> OnDefaultViewModelDescriptor_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Base.CompoundObject> OnDefaultViewModelDescriptor_IsValid;
 
         /// <summary>
         /// Returns the resulting Type of this Datatype Meta Object.
@@ -344,6 +457,7 @@ namespace Zetbox.App.Base
             var me = (CompoundObject)this;
 
             this._fk_DefaultPropertyViewModelDescriptor = otherImpl._fk_DefaultPropertyViewModelDescriptor;
+            this._fk_DefaultViewModelDescriptor = otherImpl._fk_DefaultViewModelDescriptor;
         }
         public override void SetNew()
         {
@@ -359,11 +473,25 @@ namespace Zetbox.App.Base
             switch (property)
             {
                 case "DefaultPropertyViewModelDescriptor":
+                case "DefaultViewModelDescriptor":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "DefaultPropertyViewModelDescriptor":
+                return TriggerFetchDefaultPropertyViewModelDescriptorAsync();
+            case "DefaultViewModelDescriptor":
+                return TriggerFetchDefaultViewModelDescriptorAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {
@@ -381,6 +509,15 @@ namespace Zetbox.App.Base
                 DefaultPropertyViewModelDescriptorImpl = (Zetbox.App.GUI.ViewModelDescriptorEfImpl)Context.Find<Zetbox.App.GUI.ViewModelDescriptor>(_fk_DefaultPropertyViewModelDescriptor.Value);
             else
                 DefaultPropertyViewModelDescriptorImpl = null;
+
+            if (_fk_guid_DefaultViewModelDescriptor.HasValue)
+                DefaultViewModelDescriptorImpl = (Zetbox.App.GUI.ViewModelDescriptorEfImpl)Context.FindPersistenceObject<Zetbox.App.GUI.ViewModelDescriptor>(_fk_guid_DefaultViewModelDescriptor.Value);
+            else
+            if (_fk_DefaultViewModelDescriptor.HasValue)
+                DefaultViewModelDescriptorImpl = (Zetbox.App.GUI.ViewModelDescriptorEfImpl)Context.Find<Zetbox.App.GUI.ViewModelDescriptor>(_fk_DefaultViewModelDescriptor.Value);
+            else
+                DefaultViewModelDescriptorImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();
@@ -404,6 +541,15 @@ namespace Zetbox.App.Base
                         obj => obj.DefaultPropertyViewModelDescriptor,
                         (obj, val) => obj.DefaultPropertyViewModelDescriptor = val,
 						obj => OnDefaultPropertyViewModelDescriptor_IsValid), 
+                    // else
+                    new PropertyDescriptorEfImpl<CompoundObject, Zetbox.App.GUI.ViewModelDescriptor>(
+                        lazyCtx,
+                        new Guid("863dece6-ff86-41c5-82ad-ec520adf6309"),
+                        "DefaultViewModelDescriptor",
+                        null,
+                        obj => obj.DefaultViewModelDescriptor,
+                        (obj, val) => obj.DefaultViewModelDescriptor = val,
+						obj => OnDefaultViewModelDescriptor_IsValid), 
                     // position columns
                 };
             }
@@ -468,6 +614,7 @@ namespace Zetbox.App.Base
         public override void NotifyCreated()
         {
             SetNotInitializedProperty("DefaultPropertyViewModelDescriptor");
+            SetNotInitializedProperty("DefaultViewModelDescriptor");
             base.NotifyCreated();
             if (OnNotifyCreated_CompoundObject != null) OnNotifyCreated_CompoundObject(this);
         }
@@ -479,6 +626,7 @@ namespace Zetbox.App.Base
             base.NotifyDeleting();
             if (OnNotifyDeleting_CompoundObject != null) OnNotifyDeleting_CompoundObject(this);
             DefaultPropertyViewModelDescriptor = null;
+            DefaultViewModelDescriptor = null;
         }
         public static event ObjectEventHandler<CompoundObject> OnNotifyDeleting_CompoundObject;
 
@@ -497,6 +645,11 @@ namespace Zetbox.App.Base
                 var key = r.EntityKey;
                 binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
+            {
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ViewModelDescriptorEfImpl>("Model.FK_CPObj_has_DefaultViewModelDescriptor", "DefaultViewModelDescriptor");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
+            }
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -506,6 +659,7 @@ namespace Zetbox.App.Base
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             binStream.Read(out this._fk_DefaultPropertyViewModelDescriptor);
+            binStream.Read(out this._fk_DefaultViewModelDescriptor);
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
@@ -520,6 +674,7 @@ namespace Zetbox.App.Base
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(DefaultPropertyViewModelDescriptor != null ? DefaultPropertyViewModelDescriptor.ExportGuid : (Guid?)null, xml, "DefaultPropertyViewModelDescriptor", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(DefaultViewModelDescriptor != null ? DefaultViewModelDescriptor.ExportGuid : (Guid?)null, xml, "DefaultViewModelDescriptor", "Zetbox.App.Base");
         }
 
         public override void MergeImport(System.Xml.XmlReader xml)
@@ -530,6 +685,9 @@ namespace Zetbox.App.Base
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
             case "Zetbox.App.Base|DefaultPropertyViewModelDescriptor":
                 this._fk_guid_DefaultPropertyViewModelDescriptor = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Zetbox.App.Base|DefaultViewModelDescriptor":
+                this._fk_guid_DefaultViewModelDescriptor = XmlStreamer.ReadNullableGuid(xml);
                 break;
             }
         }

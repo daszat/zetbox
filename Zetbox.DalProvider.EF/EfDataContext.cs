@@ -83,8 +83,8 @@ namespace Zetbox.DalProvider.Ef
         /// <summary>
         /// Internal Constructor
         /// </summary>
-        public EfDataContext(IMetaDataResolver metaDataResolver, Identity identity, ZetboxConfig config, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, EfImplementationType.EfFactory implTypeFactory, IPerfCounter perfCounter, ISqlErrorTranslator sqlErrorTranslator)
-            : base(metaDataResolver, identity, config, lazyCtx, iftFactory)
+        public EfDataContext(IMetaDataResolver metaDataResolver, Identity identity, ZetboxConfig config, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, EfImplementationType.EfFactory implTypeFactory, IPerfCounter perfCounter, ISqlErrorTranslator sqlErrorTranslator, IEnumerable<IZetboxContextEventListener> eventListeners)
+            : base(metaDataResolver, identity, config, lazyCtx, iftFactory, eventListeners)
         {
             if (perfCounter == null) throw new ArgumentNullException("perfCounter");
             if (sqlErrorTranslator == null) throw new ArgumentNullException("sqlErrorTranslator");
@@ -256,7 +256,15 @@ namespace Zetbox.DalProvider.Ef
                 }
                 else
                 {
-                    throw new NotImplementedException();
+                    switch (role)
+                    {
+                        case RelationEndRole.A:
+                            return GetPersistenceObjectQuery<T>().Where(i => i.AObject == parent).ToList();
+                        case RelationEndRole.B:
+                            return GetPersistenceObjectQuery<T>().Where(i => i.BObject == parent).ToList();
+                        default:
+                            throw new NotImplementedException(String.Format("Unknown RelationEndRole [{0}]", role));
+                    }
                 }
             });
         }
@@ -348,6 +356,8 @@ namespace Zetbox.DalProvider.Ef
                 NotifyChanged(notifySaveList);
 
                 UpdateObjectState();
+
+                OnSubmitted();
             }
             finally
             {
@@ -358,7 +368,6 @@ namespace Zetbox.DalProvider.Ef
 
         private void UpdateObjectState()
         {
-
             foreach (var o in AttachedObjects.Cast<BaseServerPersistenceObject>().ToList())
             {
                 switch (o.ObjectState)
@@ -583,7 +592,7 @@ namespace Zetbox.DalProvider.Ef
             {
                 var result = AttachedObjects.OfType<T>().SingleOrDefault(o => o.ID == ID)
                     ?? (T)EfFindById(GetInterfaceType(typeof(T)), ID);
-                if (result == null) { throw new ArgumentOutOfRangeException("ID", String.Format("no object of type {0} with ID={1}", typeof(T).FullName, ID)); }
+                if (result == null) { throw new ZetboxObjectNotFoundException(typeof(T), ID); }
                 return result;
             });
         }
@@ -762,7 +771,7 @@ namespace Zetbox.DalProvider.Ef
         public override ImplementationType ToImplementationType(InterfaceType t)
         {
             CheckDisposed();
-            return _implTypeFactory(Type.GetType(t.Type.FullName + "Ef" + Zetbox.API.Helper.ImplementationSuffix + "," + EfProvider.ServerAssembly));
+            return _implTypeFactory(Type.GetType(t.Type.FullName + "Ef" + Zetbox.API.Helper.ImplementationSuffix + "," + EfProvider.ServerAssembly, throwOnError: true));
         }
 
         public override ImplementationType GetImplementationType(Type t)
@@ -844,6 +853,11 @@ namespace Zetbox.DalProvider.Ef
                 _transaction.Rollback();
                 _transaction = null;
             }
+        }
+
+        public override ContextIsolationLevel IsolationLevel
+        {
+            get { return ContextIsolationLevel.PreferContextCache; }
         }
     }
 }

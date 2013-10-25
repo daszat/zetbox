@@ -27,8 +27,7 @@ namespace Zetbox.Client.Presentables
         void ShowModel(ViewModel mdl, bool activate);
         void ShowModel(ViewModel mdl, Zetbox.App.GUI.ControlKind kind, bool activate);
 
-        void ShowDialog(ViewModel mdl);
-        void ShowDialog(ViewModel mdl, Zetbox.App.GUI.ControlKind kind);
+        void ShowDialog(ViewModel mdl, ViewModel ownerMdl = null, Zetbox.App.GUI.ControlKind kind = null);
 
         bool CanShowModel(ViewModel mdl);
 

@@ -63,7 +63,7 @@
 
 	var eventName = "On" + name + "_PostSetter";
 %>
-           // <%= this.GetType() %>
+        // BEGIN <%= this.GetType() %>
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -76,7 +76,7 @@
                     <%= wrapperName %> = new <%= wrapperClass %><<%= referencedInterface %>, <%= referencedImplementation %>>(
                             this.Context, <%= efName %>,
                             () => this.NotifyPropertyChanging("<%= name %>", null, null),
-                            () => { this.NotifyPropertyChanged("<%= name %>", null, null); if(<%= eventName %> != null && IsAttached) <%= eventName%>(this); },
+                            null, // see Get<%= efName %>Collection()
                             (item) => item.NotifyPropertyChanging("<%= otherName %>", null, null),
                             (item) => item.NotifyPropertyChanged("<%= otherName %>", null, null)<%
     // TODO: improve this!
@@ -95,19 +95,37 @@
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<<%= referencedImplementation %>>(
-                        "Model.<%= assocName %>",
-                        "<%= targetRoleName %>");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return Get<%= efName %>Collection();
             }
         }
         private <%= wrapperClass %><<%= referencedInterface %>, <%= referencedImplementation %>> <%= wrapperName %>;
+
+        private EntityCollection<<%= referencedImplementation %>> _<%= efName %>EntityCollection;
+        internal EntityCollection<<%= referencedImplementation %>> Get<%= efName %>Collection()
+        {
+            if (_<%= efName %>EntityCollection == null)
+            {
+                _<%= efName %>EntityCollection = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<<%= referencedImplementation %>>(
+                        "Model.<%= assocName %>",
+                        "<%= targetRoleName %>");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_<%= efName %>EntityCollection.IsLoaded)
+                {
+                    _<%= efName %>EntityCollection.Load();
+                }
+                _<%= efName %>EntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("<%= name %>", null, null); if (<%= eventName %> != null && IsAttached) <%= eventName%>(this); };
+            }
+            return _<%= efName %>EntityCollection;
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetch<%= name %>Async()
+        {
+            return new Zetbox.API.Async.ZbTask<<%= exposedListType %><<%= referencedInterface %>>>(this.<%= name %>);
+        }
 
 <% if (eagerLoading) { %>
         private List<int> <%= name %>Ids;
@@ -119,4 +137,4 @@
         }
     }
 %>
-
+        // END <%= this.GetType() %>

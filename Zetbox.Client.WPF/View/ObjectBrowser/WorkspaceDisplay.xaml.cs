@@ -39,6 +39,7 @@ namespace Zetbox.Client.WPF.View.ObjectBrowser
     /// <summary>
     /// Interaction logic for WorkspaceDisplay.xaml, a read-only display of a <see cref="Zetbox.Client.Presentables.ObjectBrowser.WorkspaceViewModel"/>.
     /// </summary>
+    [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
     public partial class WorkspaceDisplay : WindowView, IHasViewModel<WorkspaceViewModel>
     {
         /// <summary>

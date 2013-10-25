@@ -29,14 +29,15 @@ namespace Zetbox.Client.Presentables.ModuleEditor
     using Zetbox.Client.Presentables.ZetboxBase;
     using ObjectEditorWorkspace = Zetbox.Client.Presentables.ObjectEditor.WorkspaceViewModel;
 
+    [ViewModelDescriptor]
     public class WorkspaceViewModel : WindowViewModel, IRefreshCommandListener, INewCommandParameter
     {
         public new delegate WorkspaceViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
 
-        protected readonly Func<ClientIsolationLevel, IZetboxContext> ctxFactory;
+        protected readonly Func<ContextIsolationLevel, IZetboxContext> ctxFactory;
 
-        public WorkspaceViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, Func<ClientIsolationLevel, IZetboxContext> ctxFactory)
-            : base(appCtx, ctxFactory(ClientIsolationLevel.MergeServerData), parent) // Use another data context, this workspace does not edit anything
+        public WorkspaceViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, Func<ContextIsolationLevel, IZetboxContext> ctxFactory)
+            : base(appCtx, ctxFactory(ContextIsolationLevel.MergeQueryData), parent) // Use another data context, this workspace does not edit anything
         {
             if (ctxFactory == null) throw new ArgumentNullException("ctxFactory");
             this.ctxFactory = ctxFactory;
@@ -149,7 +150,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                         {
                             foreach (var mdl in assemblyLstMdl.SelectedItems)
                             {
-                                var ctx = ctxFactory(ClientIsolationLevel.PrefereClientData);
+                                var ctx = ctxFactory(ContextIsolationLevel.PreferContextCache);
 
                                 var a = ctx.Find<Assembly>(mdl.ID);
                                 var workspaceShown = a.RegenerateTypeRefs();
@@ -166,13 +167,6 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                         () => assemblyLstMdl.SelectedItems.Count > 0,
                         () => "Nothing selected"));
                     lst.Add(assemblyLstMdl);
-
-                    // TypeRefs
-                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
-                        typeof(TypeRef).GetObjectClass(FrozenContext),
-                        () => DataContext.GetQuery<TypeRef>().Where(i => i.Assembly.Module == CurrentModule).OrderBy(i => i.FullName));
-                    SetupViewModel(lstMdl);
-                    lst.Add(lstMdl);
 
                     // Application
                     lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
@@ -196,13 +190,6 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                     lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
                         typeof(ViewModelDescriptor).GetObjectClass(FrozenContext),
                         () => DataContext.GetQuery<ViewModelDescriptor>().Where(i => i.Module == CurrentModule).OrderBy(i => i.Description));
-                    SetupViewModel(lstMdl);
-                    lst.Add(lstMdl);
-
-                    // ServiceDescriptor
-                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
-                        typeof(ServiceDescriptor).GetObjectClass(FrozenContext),
-                        () => DataContext.GetQuery<ServiceDescriptor>().Where(i => i.Module == CurrentModule).OrderBy(i => i.Description));
                     SetupViewModel(lstMdl);
                     lst.Add(lstMdl);
 
@@ -327,7 +314,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
         public void EditCurrentModule()
         {
             if (CurrentModule == null) return;
-            var newCtx = ctxFactory(ClientIsolationLevel.PrefereClientData);
+            var newCtx = ctxFactory(ContextIsolationLevel.PreferContextCache);
             var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx, null);
 
             newWorkspace.ShowObject(CurrentModule);

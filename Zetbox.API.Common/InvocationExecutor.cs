@@ -4,11 +4,11 @@ namespace Zetbox.API.Common
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
-    using Zetbox.App.Base;
-    using Zetbox.API.Utils;
     using System.Reflection;
+    using System.Text;
     using Autofac;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
 
     public interface IInvocationExecutor
     {
@@ -20,13 +20,13 @@ namespace Zetbox.API.Common
 
     public class InvocationExecutor : Zetbox.API.Common.IInvocationExecutor
     {
-        private IDeploymentRestrictor _restrictor;
+        //private IDeploymentRestrictor _restrictor;
         private ILifetimeScope _scope;
-        public InvocationExecutor(IDeploymentRestrictor restrictor, ILifetimeScope scope)
+        public InvocationExecutor(/*IDeploymentRestrictor restrictor, */ILifetimeScope scope)
         {
-            if (restrictor == null) throw new ArgumentNullException("restrictor");
+            //if (restrictor == null) throw new ArgumentNullException("restrictor");
             if (scope == null) throw new ArgumentNullException("scope");
-            _restrictor = restrictor;
+            //_restrictor = restrictor;
             _scope = scope;
         }
 
@@ -37,10 +37,11 @@ namespace Zetbox.API.Common
         /// <returns></returns>
         public bool HasValidInvocation(IInvocation obj)
         {
-            return obj != null && 
-                   !string.IsNullOrEmpty(obj.MemberName) && 
-                   obj.Implementor != null && 
-                   _restrictor.IsAcceptableDeploymentRestriction((int)obj.Implementor.Assembly.DeploymentRestrictions);
+            return obj != null
+                && !string.IsNullOrWhiteSpace(obj.MemberName)
+                && !string.IsNullOrWhiteSpace(obj.ImplementorName)
+                && Type.GetType(obj.ImplementorName, throwOnError: false) != null;
+            //  && _restrictor.IsAcceptableDeploymentRestriction((int)obj.Implementor.Assembly.DeploymentRestrictions);
         }
 
         /// <summary>
@@ -58,7 +59,7 @@ namespace Zetbox.API.Common
             var delegateInfo = prototype.GetMethod("Invoke");
             if (delegateInfo == null) throw new ArgumentOutOfRangeException("prototype", "Does not look like a delegate type");
 
-            var implementor = obj.Implementor.AsType(false);
+            var implementor = Type.GetType(obj.ImplementorName, throwOnError: false);
             if (implementor == null)
             {
                 return false;
@@ -77,22 +78,22 @@ namespace Zetbox.API.Common
         /// <returns>the result of the invocation</returns>
         public TResult CallInvocation<TResult>(IInvocation obj, Type prototype, params object[] parameter)
         {
-            if(obj == null) throw new ArgumentNullException("obj");
+            if (obj == null) throw new ArgumentNullException("obj");
             if (prototype == null) throw new ArgumentNullException("prototype");
             if (!HasValidInvocation(obj)) throw new InvalidOperationException("Object has no valid invocation");
 
             var delegateInfo = prototype.GetMethod("Invoke");
             if (delegateInfo == null) throw new ArgumentOutOfRangeException("prototype", "Does not look like a delegate type");
 
-            var implementor = obj.Implementor.AsType(false);
+            var implementor = Type.GetType(obj.ImplementorName, throwOnError: false);
             if (implementor == null)
             {
-                throw new InvalidOperationException(string.Format("Implementor [{0}] not found", obj.Implementor));
+                throw new InvalidOperationException(string.Format("Implementor [{0}] not found", obj.ImplementorName));
             }
             var methodInfo = implementor.FindMethod(obj.MemberName, delegateInfo.GetParameters().Select(p => p.ParameterType).ToArray());
             if (methodInfo == null)
             {
-                throw new InvalidOperationException(string.Format("Method [{0}](object,object) not found in [{1}]", obj.MemberName, obj.Implementor));
+                throw new InvalidOperationException(string.Format("Method [{0}](object,object) not found in [{1}]", obj.MemberName, obj.ImplementorName));
             }
 
             if (methodInfo.IsStatic)

@@ -98,10 +98,10 @@ namespace Zetbox.App.Projekte
         /// <summary>
         /// Identity which changed this object
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Projekte;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -286,10 +286,10 @@ namespace Zetbox.App.Projekte
         /// <summary>
         /// Identity which created this object
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Projekte;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -723,7 +723,7 @@ namespace Zetbox.App.Projekte
         /// <summary>
         /// Verknüpfung zum Projekt
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Projekt
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Projekt
         // fkBackingName=_fk_Projekt; fkGuidBackingName=_fk_guid_Projekt;
         // referencedInterface=Zetbox.App.Projekte.Projekt; moduleNamespace=Zetbox.App.Projekte;
         // inverse Navigator=Tasks; is list;
@@ -982,6 +982,7 @@ namespace Zetbox.App.Projekte
                 ProjektImpl = (Zetbox.App.Projekte.ProjektMemoryImpl)Context.Find<Zetbox.App.Projekte.Projekt>(_fk_Projekt.Value);
             else
                 ProjektImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

@@ -276,6 +276,70 @@ namespace Zetbox.App.Base
         // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
+        /// Returns true if the any reference is set to an instance of an object. It&apos;s not guaranteed that the object still exists
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnHasObject_AnyReference")]
+        public virtual bool HasObject()
+        {
+            var e = new MethodReturnEventArgs<bool>();
+            if (OnHasObject_AnyReference != null)
+            {
+                OnHasObject_AnyReference(this, e);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on AnyReference.HasObject");
+            }
+            return e.Result;
+        }
+        public delegate void HasObject_Handler<T>(T obj, MethodReturnEventArgs<bool> ret);
+        public static event HasObject_Handler<AnyReference> OnHasObject_AnyReference;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<AnyReference> OnHasObject_AnyReference_CanExec;
+
+        [EventBasedMethod("OnHasObject_AnyReference_CanExec")]
+        public virtual bool HasObjectCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnHasObject_AnyReference_CanExec != null)
+				{
+					OnHasObject_AnyReference_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<AnyReference> OnHasObject_AnyReference_CanExecReason;
+
+        [EventBasedMethod("OnHasObject_AnyReference_CanExecReason")]
+        public virtual string HasObjectCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnHasObject_AnyReference_CanExecReason != null)
+				{
+					OnHasObject_AnyReference_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
+        /// <summary>
         /// 
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method

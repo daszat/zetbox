@@ -23,12 +23,13 @@ namespace Zetbox.API.Server
     using System.IO;
     using System.Linq;
     using System.Text;
+    using System.Xml.Serialization;
+    using Zetbox.API.Async;
     using Zetbox.API.Common;
     using Zetbox.API.Configuration;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
-    using Zetbox.API.Async;
 
     public delegate IZetboxContext ServerZetboxContextFactory(Identity identity);
 
@@ -41,6 +42,7 @@ namespace Zetbox.API.Server
         protected readonly InterfaceType.Factory iftFactory;
         protected readonly Func<IFrozenContext> lazyCtx;
         protected readonly ZetboxConfig config;
+        protected readonly IEnumerable<IZetboxContextEventListener> eventListeners;
 
         /// <summary>
         /// Initializes a new instance of the BaseZetboxDataContext class using the specified <see cref="Identity"/>.
@@ -50,7 +52,8 @@ namespace Zetbox.API.Server
         /// <param name="config"></param>
         /// <param name="lazyCtx"></param>
         /// <param name="iftFactory"></param>
-        protected BaseZetboxDataContext(IMetaDataResolver metaDataResolver, Identity identity, ZetboxConfig config, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory)
+        /// <param name="eventListeners"></param>
+        protected BaseZetboxDataContext(IMetaDataResolver metaDataResolver, Identity identity, ZetboxConfig config, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, IEnumerable<IZetboxContextEventListener> eventListeners)
         {
             if (metaDataResolver == null) { throw new ArgumentNullException("metaDataResolver"); }
             if (config == null) { throw new ArgumentNullException("config"); }
@@ -62,6 +65,7 @@ namespace Zetbox.API.Server
             this.iftFactoryCache = new FuncCache<Type, InterfaceType>(r => iftFactory(r));
             this.iftFactory = t => iftFactoryCache.Invoke(t);
             this.lazyCtx = lazyCtx;
+            this.eventListeners = eventListeners;
         }
 
         /// <summary>
@@ -79,6 +83,8 @@ namespace Zetbox.API.Server
             }
             GC.SuppressFinalize(this);
             IsDisposed = true;
+
+            ZetboxContextEventListenerHelper.OnDisposed(eventListeners, this);
         }
 
         /// <summary>
@@ -115,15 +121,8 @@ namespace Zetbox.API.Server
             // No AccessControlList - full rights
             if (!rootClass.HasAccessControlList()) return Zetbox.API.AccessRights.Full;
 
-            var rights = rootClass.GetGroupAccessRights(Identity);
-            if (rights.HasValue)
-            {
-                return rights.Value;
-            }
-            else
-            {
-                return rootClass.NeedsRightsTable() ? Zetbox.API.AccessRights.None : Zetbox.API.AccessRights.Full;
-            }
+            // return the rights given by group membership. if none is found, deny access
+            return rootClass.GetGroupAccessRights(Identity) ?? Zetbox.API.AccessRights.None;
         }
 
         /// <summary>
@@ -185,15 +184,7 @@ namespace Zetbox.API.Server
             if (obj is IDataObject && obj.ObjectState == DataObjectState.New)
             {
                 var ifType = GetInterfaceType(obj);
-                var cls = metaDataResolver.GetObjectClass(ifType);
-                if (cls == null)
-                {
-                    Logging.Log.WarnFormat("obj=[{0}] ifType=[{1}]", obj.GetType().AssemblyQualifiedName, ifType.Type.AssemblyQualifiedName);
-                    Logging.Log.WarnFormat("metaDataResolver=[{0}] => [{1}]", metaDataResolver.GetType().AssemblyQualifiedName, metaDataResolver.ToString());
-                    throw new ApplicationException("Unexpected failure from metadata resolver");
-                }
-                cls = cls.GetRootClass();
-                if (identityStore != null && cls.HasAccessControlList() && !cls.GetGroupAccessRights(identityStore).HasCreateRights())
+                if (!GetGroupAccessRights(ifType).HasCreateRights())
                 {
                     throw new System.Security.SecurityException(string.Format("The current identity has no rights to create an Object of type '{0}'", ifType.Type.FullName));
                 }
@@ -223,16 +214,17 @@ namespace Zetbox.API.Server
             CheckDisposed();
             if (obj == null) { throw new ArgumentNullException("obj"); }
 
+            // Do not notify an object a second time.
+            if (obj.ObjectState == DataObjectState.Deleted) { return; }
+
             if (!obj.CurrentAccessRights.HasDeleteRights())
             {
                 throw new System.Security.SecurityException(string.Format("The current identity has no rights to delete this Object: {0}({1})", GetInterfaceType(obj).Type.FullName, obj.ID));
             }
 
             IsModified = true;
-            if (obj is IDataObject)
-            {
-                ((IDataObject)obj).NotifyDeleting();
-            }
+
+            obj.NotifyDeleting();
 
             DoDeleteObject(obj);
 
@@ -267,7 +259,7 @@ namespace Zetbox.API.Server
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public List<IDataObject> GetAll(InterfaceType t)
         {
-            var mi = this.GetType().FindGenericMethod(true, "GetAllHack", new[] { t.Type }, new Type[0]);
+            var mi = this.GetType().FindGenericMethod("GetAllHack", new[] { t.Type }, new Type[0], isPrivate: true);
             return (List<IDataObject>)mi.Invoke(this, new object[0]);
         }
 
@@ -278,6 +270,26 @@ namespace Zetbox.API.Server
         /// <returns>IQueryable</returns>
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public abstract IQueryable<T> GetPersistenceObjectQuery<T>() where T : class, IPersistenceObject;
+
+        /// <summary>
+        /// Returns a PersistenceObject Query by InterfaceType
+        /// </summary>
+        /// <returns>IQueryable</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        public virtual IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType)
+        {
+            CheckDisposed();
+            try
+            {
+                // See Case 552
+                return (IQueryable<IPersistenceObject>)this.GetType().FindGenericMethod("GetPersistenceObjectQuery", new Type[] { ifType.Type }, new Type[0]).Invoke(this, new object[0]);
+            }
+            catch (System.Reflection.TargetInvocationException tiex)
+            {
+                // unwrap "business" exception
+                throw tiex.InnerException;
+            }
+        }
 
         /// <summary>
         /// Returns the List referenced by the given Name.
@@ -357,6 +369,11 @@ namespace Zetbox.API.Server
         public abstract int SubmitRestore();
 
         Identity localIdentity = null;
+
+        private List<IDataObject> _added;
+        private List<IDataObject> _modified;
+        private List<IDataObject> _deleted;
+
         /// <summary>
         /// 
         /// </summary>
@@ -365,9 +382,25 @@ namespace Zetbox.API.Server
         {
             var now = DateTime.Now;
 
+            _added = new List<IDataObject>();
+            _modified = new List<IDataObject>();
+            _deleted = new List<IDataObject>();
+
             foreach (IDataObject obj in modifiedObjects)
             {
                 var state = obj.ObjectState;
+                switch (state)
+                {
+                    case DataObjectState.New:
+                        _added.Add(obj);
+                        break;
+                    case DataObjectState.Modified:
+                        _modified.Add(obj);
+                        break;
+                    case DataObjectState.Deleted:
+                        _deleted.Add(obj);
+                        break;
+                }
 
                 // Blob check
                 if (obj is Zetbox.App.Base.Blob && state == DataObjectState.Modified)
@@ -376,7 +409,8 @@ namespace Zetbox.API.Server
                 }
 
                 // Update IChangedBy 
-                if (obj is Zetbox.App.Base.IChangedBy && state != DataObjectState.Deleted)
+                // Only, if it's not read only. IsReadonly == true is a indicator for a object with no rights & only the fact, that only a calculated property has been changed
+                if (obj.IsReadonly == false && obj is Zetbox.App.Base.IChangedBy && state != DataObjectState.Deleted)
                 {
                     // if the object is new, ChangedBy/ChangedOn has to be set even if nothing else changed
                     var updateChangedInfo = obj is BaseNotifyingObject && ((BaseNotifyingObject)obj).UpdateChangedInfo || state == DataObjectState.New;
@@ -412,9 +446,16 @@ namespace Zetbox.API.Server
             }
         }
 
-        protected virtual void NotifyChanged(IEnumerable<IDataObject> changedOrAdded)
+        protected virtual void NotifyChanged(IEnumerable<IDataObject> modifiedObjects)
         {
-            changedOrAdded.ForEach(obj => obj.NotifyPostSave());
+            modifiedObjects.Where(obj => obj.ObjectState != DataObjectState.Deleted).ForEach(obj => obj.NotifyPostSave());
+
+        }
+
+        protected void OnSubmitted()
+        {
+            ZetboxContextEventListenerHelper.OnSubmitted(eventListeners, this, _added, _modified, _deleted);
+            _added = _modified = _deleted = null;
         }
 
         /// <summary>
@@ -430,10 +471,7 @@ namespace Zetbox.API.Server
             AttachAsNew(obj);
             IsModified = true;
             OnObjectCreated(obj);
-            if (obj is IDataObject)
-            {
-                ((IDataObject)obj).NotifyCreated();
-            }
+            obj.NotifyCreated();
             return obj;
         }
 
@@ -448,11 +486,11 @@ namespace Zetbox.API.Server
             if (ifType.Type == typeof(Zetbox.App.Base.Blob))
                 throw new InvalidOperationException("Creating a Blob is not supported. Use CreateBlob() instead");
 
-            ObjectClass cls = metaDataResolver.GetObjectClass(ifType).GetRootClass();
-            if (identityStore != null && cls.HasAccessControlList() && !cls.GetGroupAccessRights(identityStore).HasCreateRights())
+            if (!GetGroupAccessRights(ifType).HasCreateRights())
             {
                 throw new System.Security.SecurityException(string.Format("The current identity has no rights to create an Object of type '{0}'", ifType.Type.FullName));
             }
+
             return (IDataObject)CreateInternal(ifType);
         }
 
@@ -571,7 +609,6 @@ namespace Zetbox.API.Server
         public IDataObject Find(InterfaceType ifType, int ID)
         {
             var t = FindAsync(ifType, ID);
-            t.Wait();
             return t.Result;
         }
 
@@ -586,7 +623,6 @@ namespace Zetbox.API.Server
         public T Find<T>(int ID) where T : class, IDataObject
         {
             var t = FindAsync<T>(ID);
-            t.Wait();
             return t.Result;
         }
 
@@ -651,6 +687,11 @@ namespace Zetbox.API.Server
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public abstract IEnumerable<T> FindPersistenceObjects<T>(IEnumerable<Guid> exportGuids) where T : class, IPersistenceObject;
 
+        /// <summary>
+        /// Create and store a Blob.
+        /// </summary>
+        /// <remarks>In contrast to the client's implementation, this does not submit the blob immediately. This may cause orphaned files in the document store. A separate task will re-link those files.</remarks>        
+        /// <returns>the (transient) ID of the created Blob</returns>
         public int CreateBlob(Stream s, string filename, string mimetype)
         {
             CheckDisposed();
@@ -664,7 +705,9 @@ namespace Zetbox.API.Server
             var blob = (Zetbox.App.Base.Blob)this.CreateInternal(iftFactory(typeof(Zetbox.App.Base.Blob)));
             blob.OriginalName = filename;
             blob.MimeType = mimetype;
-            blob.StoragePath = this.Internals().StoreBlobStream(s, blob.ExportGuid, DateTime.Today /* but should be blob.CreatedOn. Around midnight the path may differ */, filename);
+            blob.StoragePath = this.Internals()
+                .StoreBlobStream(s, blob.ExportGuid, DateTime.Today /* but should be blob.CreatedOn. Around midnight the path may differ */, filename)
+                .ToUniversalPath();
 
             return blob.ID;
         }
@@ -794,18 +837,20 @@ namespace Zetbox.API.Server
         public abstract ImplementationType GetImplementationType(Type t);
         public abstract ImplementationType ToImplementationType(InterfaceType t);
 
-        private IDictionary<object, object> _TransientState = null;
+        [NonSerialized]
+        private Dictionary<object, object> _transientState;
         /// <inheritdoc />
+        [XmlIgnore]
         public IDictionary<object, object> TransientState
         {
             get
             {
                 CheckDisposed();
-                if (_TransientState == null)
+                if (_transientState == null)
                 {
-                    _TransientState = new Dictionary<object, object>();
+                    _transientState = new Dictionary<object, object>();
                 }
-                return _TransientState;
+                return _transientState;
             }
         }
 
@@ -897,5 +942,7 @@ namespace Zetbox.API.Server
         }
         public bool IsElevatedMode { get { return true; } }
         public event EventHandler IsElevatedModeChanged { add { } remove { } }
+
+        public abstract ContextIsolationLevel IsolationLevel { get; }
     }
 }

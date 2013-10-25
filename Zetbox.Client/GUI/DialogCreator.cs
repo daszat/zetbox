@@ -38,10 +38,10 @@ namespace Zetbox.Client.GUI
             Show(_doNothing);
         }
 
-        public void Show(Action<object[]> ok)
+        public void Show(Action<object[]> ok, ViewModel ownerMdl = null)
         {
             var dlg = ViewModelFactory.CreateViewModel<ValueInputTaskViewModel.Factory>().Invoke(DataContext, null, Title, ValueModels, ok);
-            ViewModelFactory.ShowDialog(dlg);
+            ViewModelFactory.ShowDialog(dlg, ownerMdl ?? ViewModelFactory.GetWorkspace(DataContext));
         }
     }
 
@@ -56,7 +56,7 @@ namespace Zetbox.Client.GUI
             if (value != null)
                 mdl.Value = value;
 
-            var vmdl = c.ViewModelFactory.CreateViewModel<ClassValueViewModel<string>.Factory>().Invoke(c.DataContext, null, mdl);
+            var vmdl = c.ViewModelFactory.CreateViewModel<StringValueViewModel.Factory>().Invoke(c.DataContext, null, mdl);
 
             if (requestedKind != null)
                 vmdl.RequestedKind = requestedKind;
@@ -80,6 +80,22 @@ namespace Zetbox.Client.GUI
         {
             if (c == null) throw new ArgumentNullException("c");
             return AddString(c, label, value, allowNullInput: true, requestedKind: Zetbox.NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_TextKind.Find(c.FrozenCtx));
+        }
+
+        public static DialogCreator AddDateTime(this DialogCreator c, string label, DateTime? value = null, App.Base.DateTimeStyles style = App.Base.DateTimeStyles.Date, bool allowNullInput = false, bool isReadOnly = false, ControlKind requestedKind = null)
+        {
+            if (c == null) throw new ArgumentNullException("c");
+
+            var mdl = new DateTimeValueModel(label, "", allowNullInput, isReadOnly, style);
+            mdl.Value = value;
+
+            var vmdl = c.ViewModelFactory.CreateViewModel<NullableDateTimePropertyViewModel.Factory>().Invoke(c.DataContext, null, mdl);
+
+            if (requestedKind != null)
+                vmdl.RequestedKind = requestedKind;
+
+            c.ValueModels.Add(vmdl);
+            return c;
         }
     }
 }

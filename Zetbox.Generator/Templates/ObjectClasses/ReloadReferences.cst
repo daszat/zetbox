@@ -39,10 +39,7 @@
             // fix direct object references
 <%
 	// TODO: Use only 1 side relation ends
-    foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>()
-        .Where(orp => !orp.IsList())
-        .OrderBy(orp => orp.ObjectClass.Name)
-        .ThenBy(orp => orp.Name))
+    foreach(var prop in GetDirectObjectReferences())
     {
         Relation rel = Zetbox.App.Extensions.RelationExtensions.Lookup(ctx, prop);
         RelationEnd relEnd = rel.GetEnd(prop);
@@ -57,6 +54,19 @@
         bool isExportable = relEnd.Type.ImplementsIExportable() && otherEnd.Type.ImplementsIExportable();
 
         ReloadOneReference.Call(Host, ctx, referencedInterface, referencedImplementation, name, implName, fkBackingName, fkGuidBackingName, isExportable);
+    }        
+%>
+            // fix cached lists references
+<%
+    foreach(var prop in GetListReferences())
+    {
+        string name = prop.Name;
+        string taskName = "_triggerFetch" + name + "Task";
+        string backingName = "_" + name;
+%>
+            <%= taskName %> = null;
+            <%= backingName %> = null;
+<%
     }
 %>
         }

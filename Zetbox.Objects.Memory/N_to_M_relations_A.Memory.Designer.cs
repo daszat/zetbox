@@ -41,35 +41,45 @@ namespace Zetbox.App.Test
         /// 
         /// </summary>
         // collection entry list property
-   		// Zetbox.Generator.Templates.Properties.CollectionEntryListProperty
-		public ICollection<Zetbox.App.Test.N_to_M_relations_B> BSide
-		{
-			get
-			{
-				if (_BSide == null)
-				{
+        // BEGIN Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for BSide
+        public ICollection<Zetbox.App.Test.N_to_M_relations_B> BSide
+        {
+            get
+            {
+                if (_BSide == null)
+                {
                     TriggerFetchBSideAsync().Wait();
-				}
-				return (ICollection<Zetbox.App.Test.N_to_M_relations_B>)_BSide;
-			}
-		}
-        
+                }
+                return (ICollection<Zetbox.App.Test.N_to_M_relations_B>)_BSide;
+            }
+        }
+
         Zetbox.API.Async.ZbTask _triggerFetchBSideTask;
         public Zetbox.API.Async.ZbTask TriggerFetchBSideAsync()
         {
             if (_triggerFetchBSideTask != null) return _triggerFetchBSideTask;
-			_triggerFetchBSideTask = Context.FetchRelationAsync<Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryMemoryImpl>(new Guid("3555da6e-0e9b-4f7c-903e-a51f3cce7cd9"), RelationEndRole.A, this);
-			_triggerFetchBSideTask.OnResult(r => 
+            _triggerFetchBSideTask = Context.FetchRelationAsync<Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryMemoryImpl>(new Guid("3555da6e-0e9b-4f7c-903e-a51f3cce7cd9"), RelationEndRole.A, this);
+            _triggerFetchBSideTask.OnResult(r =>
             {
-                _BSide 
-				= new ObservableBSideCollectionWrapper<Zetbox.App.Test.N_to_M_relations_A, Zetbox.App.Test.N_to_M_relations_B, Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryMemoryImpl>>(
-					this, 
-					new RelationshipFilterASideCollection<Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryMemoryImpl>(this.Context, this));
+                _BSide
+                    = new ObservableBSideCollectionWrapper<Zetbox.App.Test.N_to_M_relations_A, Zetbox.App.Test.N_to_M_relations_B, Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryMemoryImpl>>(
+                        this,
+                        new RelationshipFilterASideCollection<Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryMemoryImpl>(this.Context, this));
+                        // _BSide.CollectionChanged is managed by OnBSideCollectionChanged() and called from the RelationEntry
             });
             return _triggerFetchBSideTask;
         }
 
-		private ObservableBSideCollectionWrapper<Zetbox.App.Test.N_to_M_relations_A, Zetbox.App.Test.N_to_M_relations_B, Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryMemoryImpl>> _BSide;
+        internal void OnBSideCollectionChanged()
+        {
+            NotifyPropertyChanged("BSide", null, null);
+            if (OnBSide_PostSetter != null && IsAttached)
+                OnBSide_PostSetter(this);
+        }
+
+        private ObservableBSideCollectionWrapper<Zetbox.App.Test.N_to_M_relations_A, Zetbox.App.Test.N_to_M_relations_B, Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryMemoryImpl>> _BSide;
+        // END Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for BSide
+public static event PropertyListChangedHandler<Zetbox.App.Test.N_to_M_relations_A> OnBSide_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.N_to_M_relations_A> OnBSide_IsValid;
 
@@ -196,6 +206,7 @@ namespace Zetbox.App.Test
             base.ReloadReferences();
 
             // fix direct object references
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

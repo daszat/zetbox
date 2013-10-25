@@ -22,6 +22,7 @@ namespace Zetbox.DalProvider.Client
     using System.Text;
 
     using Zetbox.API;
+    using Zetbox.API.Common;
 
     internal class QueryTranslator : ExpressionTreeTranslator
     {
@@ -50,6 +51,30 @@ namespace Zetbox.DalProvider.Client
                     );
             }
             return base.VisitBinary(b);
+        }
+
+        protected override Expression VisitUnary(UnaryExpression u)
+        {
+            if (u.IsIgnorableCastExpression())
+            {
+                return Visit(u.Operand);
+            }
+            else
+            {
+                return base.VisitUnary(u);
+            }
+        }
+
+        protected override Expression VisitMethodCall(MethodCallExpression m)
+        {
+            if (m.IsIgnorableCastExpression())
+            {
+                return Visit(m.Arguments[0]);
+            }
+            else
+            {
+                return base.VisitMethodCall(m);
+            }
         }
     }
 }

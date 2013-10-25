@@ -40,10 +40,10 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for FalseIcon
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for FalseIcon
         // fkBackingName=_fk_FalseIcon; fkGuidBackingName=_fk_guid_FalseIcon;
         // referencedInterface=Zetbox.App.GUI.Icon; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -214,10 +214,10 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for NullIcon
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for NullIcon
         // fkBackingName=_fk_NullIcon; fkGuidBackingName=_fk_guid_NullIcon;
         // referencedInterface=Zetbox.App.GUI.Icon; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -388,10 +388,10 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for TrueIcon
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for TrueIcon
         // fkBackingName=_fk_TrueIcon; fkGuidBackingName=_fk_guid_TrueIcon;
         // referencedInterface=Zetbox.App.GUI.Icon; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -558,6 +558,69 @@ namespace Zetbox.App.Base
 		public static event PropertyPostSetterHandler<Zetbox.App.Base.BoolProperty, string> OnTrueLabel_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.BoolProperty> OnTrueLabel_IsValid;
+
+        /// <summary>
+        /// Returns the translated description
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetDescription_BoolProperty")]
+        public override string GetDescription()
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetDescription_BoolProperty != null)
+            {
+                OnGetDescription_BoolProperty(this, e);
+            }
+            else
+            {
+                e.Result = base.GetDescription();
+            }
+            return e.Result;
+        }
+        public static event GetDescription_Handler<BoolProperty> OnGetDescription_BoolProperty;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<BoolProperty> OnGetDescription_BoolProperty_CanExec;
+
+        [EventBasedMethod("OnGetDescription_BoolProperty_CanExec")]
+        public override bool GetDescriptionCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetDescription_BoolProperty_CanExec != null)
+				{
+					OnGetDescription_BoolProperty_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDescriptionCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<BoolProperty> OnGetDescription_BoolProperty_CanExecReason;
+
+        [EventBasedMethod("OnGetDescription_BoolProperty_CanExecReason")]
+        public override string GetDescriptionCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetDescription_BoolProperty_CanExecReason != null)
+				{
+					OnGetDescription_BoolProperty_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDescriptionCanExecReason;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// The element type for multi-valued properties. The property type string in all other cases.
@@ -1002,6 +1065,7 @@ namespace Zetbox.App.Base
                 TrueIconImpl = (Zetbox.App.GUI.IconMemoryImpl)Context.Find<Zetbox.App.GUI.Icon>(_fk_TrueIcon.Value);
             else
                 TrueIconImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

@@ -74,12 +74,13 @@ namespace Zetbox.Server.SchemaManagement
 
         private void WriteReportHeader(string reportName)
         {
+            var headerLog = log4net.LogManager.GetLogger("Zetbox.Server.Schema.Report.Header");
             var connectionString = config.Server.GetConnectionString(Helper.ZetboxConnectionStringKey);
 
-            Log.InfoFormat("== {0} ==", reportName);
-            Log.InfoFormat("Date: {0}", DateTime.Now);
-            Log.InfoFormat("Database: {0}", db.GetSafeConnectionString(connectionString.ConnectionString));
-            Log.Info(String.Empty);
+            headerLog.WarnFormat("== {0} ==", reportName);
+            headerLog.WarnFormat("Date: {0}", DateTime.Now);
+            headerLog.WarnFormat("Database: {0}", db.GetSafeConnectionString(connectionString.ConnectionString));
+            headerLog.Warn(String.Empty);
         }
 
         #endregion
@@ -107,19 +108,20 @@ namespace Zetbox.Server.SchemaManagement
             }
         }
 
+        /// <summary>
+        /// Creates a list of joins linking objects according to the specified relations list.
+        /// </summary>
+        /// <param name="db">the underlying schema provider</param>
+        /// <param name="objClass">the starting point</param>
+        /// <param name="relations">the relations to follow</param>
+        /// <returns>a list of joins</returns>
         public static IList<Join> CreateJoinList(ISchemaProvider db, ObjectClass objClass, IEnumerable<Relation> relations)
-        {
-            return CreateJoinList(db, objClass, relations, null);
-        }
-
-        public static IList<Join> CreateJoinList(ISchemaProvider db, ObjectClass objClass, IEnumerable<Relation> relations, Relation until)
         {
             if (db == null) throw new ArgumentNullException("db");
             if (objClass == null) throw new ArgumentNullException("objClass");
             if (relations == null) throw new ArgumentNullException("relations");
 
             List<Join> result = new List<Join>();
-            string lastColumName = "ID";
             Join lastJoin = ColumnRef.PrimaryTable;
             ObjectClass lastType = objClass;
             foreach (var rel in relations)
@@ -148,7 +150,7 @@ namespace Zetbox.Server.SchemaManagement
                     result.Add(viewRel);
                     viewRel.JoinTableName = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
                     viewRel.JoinColumnName = new[] { new ColumnRef(Construct.ForeignKeyColumnName(lastRelEnd), ColumnRef.Local) };
-                    viewRel.FKColumnName = new[] { new ColumnRef(lastColumName, lastJoin) };
+                    viewRel.FKColumnName = new[] { new ColumnRef("ID", lastJoin) };
                     lastJoin = viewRel;
 
                     viewRel = new Join();
@@ -157,7 +159,6 @@ namespace Zetbox.Server.SchemaManagement
                     viewRel.JoinColumnName = new[] { new ColumnRef("ID", ColumnRef.Local) };
                     viewRel.FKColumnName = new[] { new ColumnRef(Construct.ForeignKeyColumnName(nextRelEnd), lastJoin) };
 
-                    lastColumName = "ID"; // viewRel.FKColumnName.Single().ColumnName;
                     lastJoin = viewRel;
                 }
                 else
@@ -193,12 +194,10 @@ namespace Zetbox.Server.SchemaManagement
                     }
                     viewRel.JoinColumnName = new[] { new ColumnRef(localCol, ColumnRef.Local) };
                     viewRel.FKColumnName = new[] { new ColumnRef(fkCol, lastJoin) };
-                    lastColumName = localCol;
                     lastJoin = viewRel;
                 }
 
                 lastType = nextRelEnd.Type;
-                if (rel == until) return result;
             }
             return result;
         }
@@ -212,8 +211,8 @@ namespace Zetbox.Server.SchemaManagement
 
             // Only TPT or TPH base columns can have default constraints
             // And only member of object classes - no CP objects!
-            var defaultPossibleValue = objClass != null && (objClass.GetTableMapping() == TableMapping.TPT || objClass.BaseObjectClass == null); 
-            if(!defaultPossibleValue) return null;
+            var defaultPossibleValue = objClass != null && (objClass.GetTableMapping() == TableMapping.TPT || objClass.BaseObjectClass == null);
+            if (!defaultPossibleValue) return null;
 
             var defValue = prop.DefaultValue;
             if (defValue is Zetbox.App.Base.NewGuidDefaultValue)
@@ -273,7 +272,7 @@ namespace Zetbox.Server.SchemaManagement
             using (Logging.Log.DebugTraceMethodCall("SaveSchema"))
             using (var ms = new MemoryStream())
             {
-                Exporter.PublishFromContext(schema, ms, new string[] { "*" }, "in-memory buffer for SaveSchema");
+                Exporter.PublishFromContext(schema, ms, Exporter.Filter.Schema, new string[] { "*" }, "in-memory buffer for SaveSchema");
                 string schemaStr = Encoding.UTF8.GetString(ms.GetBuffer()).TrimEnd((char)0); // Trim possible C++/Database/whatever ending 0 char
                 db.SaveSchema(schemaStr);
             }

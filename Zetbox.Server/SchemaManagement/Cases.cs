@@ -171,10 +171,11 @@ namespace Zetbox.Server.SchemaManagement
 
             Log.InfoFormat("Renaming table from '{0}' to '{1}'", savedObjClass.TableName, objClass.TableName);
 
+            var tbl = objClass.GetTableRef(db);
             var mapping = objClass.GetTableMapping();
             if (mapping == TableMapping.TPT || (mapping == TableMapping.TPH && objClass.BaseObjectClass == null))
             {
-                db.RenameTable(savedObjClass.GetTableRef(db), objClass.GetTableRef(db));
+                db.RenameTable(savedObjClass.GetTableRef(db), tbl);
             }
             else if (mapping == TableMapping.TPH && objClass.BaseObjectClass != null)
             {
@@ -184,6 +185,11 @@ namespace Zetbox.Server.SchemaManagement
                 }
 
                 // FK names will be changed in DoChangeRelationName case
+            }
+
+            if (mapping == TableMapping.TPH)
+            {
+                db.RenameDiscriminatorValue(tbl, Construct.DiscriminatorValue(savedObjClass), Construct.DiscriminatorValue(objClass));
             }
 
             PostMigration(ClassMigrationEventType.RenameTable, savedObjClass, objClass);
@@ -393,11 +399,11 @@ namespace Zetbox.Server.SchemaManagement
 
         private static void CheckValueTypePropertyHasWarnings(ValueTypeProperty prop)
         {
-            if (prop is StringProperty)
+            if (Log.IsWarnEnabled && prop is StringProperty)
             {
                 if (((StringProperty)prop).GetLengthConstraint() == null)
                 {
-                    Log.Warn("String property must have a string range constraint");
+                    Log.WarnFormat("String property [{0}].[{1}] must have a string range constraint", prop.ObjectClass.Name, prop.Name);
                 }
             }
         }
@@ -863,8 +869,12 @@ namespace Zetbox.Server.SchemaManagement
 
             var tblName = relEnd.Type.GetTableRef(db);
             var colName = Construct.ForeignKeyColumnName(otherEnd);
+            var idxName = Construct.IndexName(tblName.Name, colName);
 
+            // MS SQL Server (and Postgres?) cannot alter columns when a index exists
+            if (db.CheckIndexExists(tblName, idxName)) db.DropIndex(tblName, idxName);
             db.AlterColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable(), null);
+            db.CreateIndex(tblName, idxName, false, false, colName);
 
             PostMigration(RelationMigrationEventType.ChangeToNullable, savedRel, rel);
         }
@@ -907,6 +917,7 @@ namespace Zetbox.Server.SchemaManagement
 
             var tblName = relEnd.Type.GetTableRef(db);
             var colName = Construct.ForeignKeyColumnName(otherEnd);
+            var idxName = Construct.IndexName(tblName.Name, colName);
 
             if (db.CheckColumnContainsNulls(tblName, colName))
             {
@@ -914,7 +925,10 @@ namespace Zetbox.Server.SchemaManagement
             }
             else
             {
+                // MS SQL Server (and Postgres?) cannot alter columns when a index exists
+                if (db.CheckIndexExists(tblName, idxName)) db.DropIndex(tblName, idxName);
                 db.AlterColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable(), null);
+                db.CreateIndex(tblName, idxName, false, false, colName);
             }
 
             PostMigration(RelationMigrationEventType.ChangeToNotNullable, savedRel, rel);
@@ -955,10 +969,18 @@ namespace Zetbox.Server.SchemaManagement
                 return;
             }
 
+            var colName = Construct.ForeignKeyColumnName(otherEnd);
+            var indexName = Construct.IndexName(tblName.Name, colName);
+            var checkConstraintName = Construct.CheckConstraintName(tblName.Name, colName);
+
             if (db.CheckFKConstraintExists(tblName, assocName))
                 db.DropFKConstraint(tblName, assocName);
 
-            string colName = Construct.ForeignKeyColumnName(otherEnd);
+            if (db.CheckIndexExists(tblName, indexName))
+                db.DropIndex(tblName, indexName);
+
+            if (db.CheckCheckConstraintExists(tblName, checkConstraintName))
+                db.DropCheckConstraint(tblName, checkConstraintName);
 
             if (db.CheckColumnExists(tblName, colName))
                 db.DropColumn(tblName, colName);
@@ -1630,6 +1652,9 @@ namespace Zetbox.Server.SchemaManagement
             var aType = rel.A.Type;
             var bType = rel.B.Type;
 
+            var old_aType = savedRel.A.Type;
+            var old_bType = savedRel.B.Type;
+
             if (rel.GetRelationType() == RelationType.n_m)
             {
                 var srcRelTbl = db.GetTableName(savedRel.Module.SchemaName, savedRel.GetRelationTableName());
@@ -1639,32 +1664,34 @@ namespace Zetbox.Server.SchemaManagement
                     aType.GetTableRef(db), old_fkAName, rel.GetRelationAssociationName(RelationEndRole.A), false);
                 db.RenameFKConstraint(srcRelTbl, savedRel.GetRelationAssociationName(RelationEndRole.B),
                     bType.GetTableRef(db), old_fkBName, rel.GetRelationAssociationName(RelationEndRole.B), false);
-                Log.Warn("Renaming indexes for n:m relations is not implemented yet");
 
                 db.RenameTable(srcRelTbl, destRelTbl);
 
                 db.RenameColumn(destRelTbl, old_fkAName, fkAName);
                 db.RenameColumn(destRelTbl, old_fkBName, fkBName);
+
+                db.RenameIndex(srcRelTbl, Construct.IndexName(srcRelTbl.Name, old_fkAName), Construct.IndexName(destRelTbl.Name, fkAName));
+                db.RenameIndex(srcRelTbl, Construct.IndexName(srcRelTbl.Name, old_fkBName), Construct.IndexName(destRelTbl.Name, fkBName));
             }
             else if (rel.GetRelationType() == RelationType.one_n)
             {
-                if (savedRel.HasStorage(RelationEndRole.A) &&
-                    old_fkBName != fkBName)
+                if (savedRel.HasStorage(RelationEndRole.A))
                 {
                     var tbl = aType.GetTableRef(db);
-                    db.RenameFKConstraint(tbl, savedRel.GetAssociationName(),
-                       aType.GetTableRef(db), old_fkBName, rel.GetAssociationName(), false);
-                    Log.Warn("Renaming fk_col index for 1:n relations is not implemented yet");
+                    var refTbl = bType.GetTableRef(db);
+                    var old_tbl = old_aType.GetTableRef(db);
+                    db.RenameFKConstraint(tbl, savedRel.GetAssociationName(), refTbl, old_fkBName, rel.GetAssociationName(), false);
                     db.RenameColumn(tbl, old_fkBName, fkBName);
+                    db.RenameIndex(tbl, Construct.IndexName(old_tbl.Name, old_fkBName), Construct.IndexName(tbl.Name, fkBName));
                 }
-                else if (savedRel.HasStorage(RelationEndRole.B) &&
-                    old_fkAName != fkAName)
+                else if (savedRel.HasStorage(RelationEndRole.B))
                 {
                     var tbl = bType.GetTableRef(db);
-                    db.RenameFKConstraint(tbl, savedRel.GetAssociationName(),
-                       bType.GetTableRef(db), old_fkAName, rel.GetAssociationName(), false);
-                    Log.Warn("Renaming fk_col index for 1:n relations is not implemented yet");
+                    var refTbl = aType.GetTableRef(db);
+                    var old_tbl = old_bType.GetTableRef(db);
+                    db.RenameFKConstraint(tbl, savedRel.GetAssociationName(), refTbl, old_fkAName, rel.GetAssociationName(), false);
                     db.RenameColumn(tbl, old_fkAName, fkAName);
+                    db.RenameIndex(tbl, Construct.IndexName(old_tbl.Name, old_fkAName), Construct.IndexName(tbl.Name, fkAName));
                 }
             }
             else if (rel.GetRelationType() == RelationType.one_one)
@@ -1672,24 +1699,20 @@ namespace Zetbox.Server.SchemaManagement
                 if (savedRel.HasStorage(RelationEndRole.A))
                 {
                     var tbl = aType.GetTableRef(db);
-                    db.RenameFKConstraint(tbl, savedRel.GetRelationAssociationName(RelationEndRole.A),
-                        aType.GetTableRef(db), old_fkAName, rel.GetRelationAssociationName(RelationEndRole.A), false);
-                    Log.Warn("Renaming fk_col index for 1:1 relations is not implemented yet");
-                    if (old_fkBName != fkBName)
-                    {
-                        db.RenameColumn(tbl, old_fkBName, fkBName);
-                    }
+                    var refTbl = bType.GetTableRef(db);
+                    var old_tbl = old_aType.GetTableRef(db);
+                    db.RenameFKConstraint(tbl, savedRel.GetRelationAssociationName(RelationEndRole.A), refTbl, old_fkAName, rel.GetRelationAssociationName(RelationEndRole.A), false);
+                    db.RenameColumn(tbl, old_fkBName, fkBName);
+                    db.RenameIndex(tbl, Construct.IndexName(old_tbl.Name, old_fkBName), Construct.IndexName(tbl.Name, fkBName));
                 }
                 if (savedRel.HasStorage(RelationEndRole.B))
                 {
                     var tbl = bType.GetTableRef(db);
-                    db.RenameFKConstraint(tbl, savedRel.GetRelationAssociationName(RelationEndRole.B),
-                        bType.GetTableRef(db), old_fkBName, rel.GetRelationAssociationName(RelationEndRole.B), false);
-                    Log.Warn("Renaming fk_col index for 1:1 relations is not implemented yet");
-                    if (old_fkAName != fkAName)
-                    {
-                        db.RenameColumn(tbl, old_fkAName, fkAName);
-                    }
+                    var refTbl = aType.GetTableRef(db);
+                    var old_tbl = old_bType.GetTableRef(db);
+                    db.RenameFKConstraint(tbl, savedRel.GetRelationAssociationName(RelationEndRole.B), refTbl, old_fkBName, rel.GetRelationAssociationName(RelationEndRole.B), false);
+                    db.RenameColumn(tbl, old_fkAName, fkAName);
+                    db.RenameIndex(tbl, Construct.IndexName(old_tbl.Name, old_fkAName), Construct.IndexName(tbl.Name, fkAName));
                 }
             }
 
@@ -1959,9 +1982,18 @@ namespace Zetbox.Server.SchemaManagement
             var tblName = relEnd.Type.GetTableRef(db);
             var colName = Construct.ForeignKeyColumnName(otherEnd);
             var assocName = rel.GetRelationAssociationName(role);
+            var indexName = Construct.IndexName(tblName.Name, colName);
+            var checkConstraintName = Construct.CheckConstraintName(tblName.Name, colName);
 
             if (db.CheckFKConstraintExists(tblName, assocName))
                 db.DropFKConstraint(tblName, assocName);
+
+            if (db.CheckIndexExists(tblName, indexName))
+                db.DropIndex(tblName, indexName);
+
+            if (db.CheckCheckConstraintExists(tblName, checkConstraintName))
+                db.DropCheckConstraint(tblName, checkConstraintName);
+
             if (db.CheckColumnExists(tblName, colName))
                 db.DropColumn(tblName, colName);
 
@@ -2173,8 +2205,12 @@ namespace Zetbox.Server.SchemaManagement
 
             var tblName = relEnd.Type.GetTableRef(db);
             var colName = Construct.ForeignKeyColumnName(otherEnd);
+            var idxName = Construct.IndexName(tblName.Name, colName);
 
+            // MS SQL Server (and Postgres?) cannot alter columns when a index exists
+            if (db.CheckIndexExists(tblName, idxName)) db.DropIndex(tblName, idxName);
             db.AlterColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable(), null);
+            db.CreateIndex(tblName, idxName, false, false, colName);
 
             PostMigration(RelationMigrationEventType.ChangeToNotNullable, savedRel, rel);
         }
@@ -2205,6 +2241,7 @@ namespace Zetbox.Server.SchemaManagement
 
             var tblName = relEnd.Type.GetTableRef(db);
             var colName = Construct.ForeignKeyColumnName(otherEnd);
+            var idxName = Construct.IndexName(tblName.Name, colName);
 
             if (db.CheckColumnContainsNulls(tblName, colName))
             {
@@ -2212,7 +2249,10 @@ namespace Zetbox.Server.SchemaManagement
             }
             else
             {
+                // MS SQL Server (and Postgres?) cannot alter columns when a index exists
+                if (db.CheckIndexExists(tblName, idxName)) db.DropIndex(tblName, idxName);
                 db.AlterColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, otherEnd.IsNullable(), null);
+                db.CreateIndex(tblName, idxName, false, false, colName);
             }
 
             PostMigration(RelationMigrationEventType.ChangeToNullable, savedRel, rel);
@@ -2646,7 +2686,7 @@ namespace Zetbox.Server.SchemaManagement
             var rightsViewUnmaterializedName = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesRightsViewUnmaterializedName(objClass));
             var refreshRightsOnProcedureName = db.GetProcedureName(objClass.Module.SchemaName, Construct.SecurityRulesRefreshRightsOnProcedureName(objClass));
 
-            DoCreateUpdateRightsTrigger(objClass);
+            DoCreateOrReplaceUpdateRightsTrigger(objClass);
             DoCreateRightsViewUnmaterialized(objClass);
             db.CreateRefreshRightsOnProcedure(refreshRightsOnProcedureName, rightsViewUnmaterializedName, tblName, tblRightsName);
             db.ExecRefreshRightsOnProcedure(refreshRightsOnProcedureName);
@@ -2664,7 +2704,6 @@ namespace Zetbox.Server.SchemaManagement
                 db.CreateEmptyRightsViewUnmaterialized(rightsViewUnmaterializedName);
                 return;
             }
-
 
             List<ACL> viewAcls = new List<ACL>();
             foreach (var ac in objClass.AccessControlList.OfType<RoleMembership>())
@@ -2694,12 +2733,13 @@ namespace Zetbox.Server.SchemaManagement
             db.CreateRightsViewUnmaterialized(rightsViewUnmaterializedName, tblName, tblRightsName, viewAcls);
         }
 
-        public void DoCreateUpdateRightsTrigger(ObjectClass objClass)
+        public void DoCreateOrReplaceUpdateRightsTrigger(ObjectClass objClass)
         {
-            var updateRightsTriggerName = Construct.SecurityRulesUpdateRightsTriggerName(objClass);
             var tblName = objClass.GetTableRef(db);
-            if (db.CheckTriggerExists(tblName, updateRightsTriggerName))
-                db.DropTrigger(tblName, updateRightsTriggerName);
+            var updateRightsTriggerName = new TriggerRef(tblName, Construct.SecurityRulesUpdateRightsTriggerName(objClass));
+
+            if (db.CheckTriggerExists(updateRightsTriggerName))
+                db.DropTrigger(updateRightsTriggerName);
 
             var tblList = new List<RightsTrigger>();
             tblList.Add(new RightsTrigger()
@@ -2715,6 +2755,9 @@ namespace Zetbox.Server.SchemaManagement
                     .Where(rm => rm.Relations
                         .Where(r => r.A.Type == objClass || r.B.Type == objClass).Count() > 0).Count() > 0)
                 .Distinct().ToList().Where(o => o.NeedsRightsTable() && o != objClass);
+
+            var identity = (ObjectClass)NamedObjects.Base.Classes.Zetbox.App.Base.Identity.Find(objClass.Context);
+
             foreach (var dep in list)
             {
                 Log.DebugFormat("  Additional update Table: {0}", dep.TableName);
@@ -2731,7 +2774,8 @@ namespace Zetbox.Server.SchemaManagement
                         };
                         try
                         {
-                            rt.Relations.AddRange(SchemaManager.CreateJoinList(db, dep, ac.Relations, rel));
+                            rt.ObjectRelations.AddRange(SchemaManager.CreateJoinList(db, dep, ac.Relations.TakeWhileInclusive(r => r != rel)));
+                            rt.IdentityRelations.AddRange(SchemaManager.CreateJoinList(db, identity, ac.Relations.Reverse().TakeWhile(r => r != rel)));
                         }
                         catch (Zetbox.Server.SchemaManagement.SchemaManager.JoinListException ex)
                         {
@@ -2754,10 +2798,11 @@ namespace Zetbox.Server.SchemaManagement
 
         public void DoCreateUpdateRightsTrigger(Relation rel)
         {
-            var updateRightsTriggerName = Construct.SecurityRulesUpdateRightsTriggerName(rel);
             var tblName = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
-            if (db.CheckTriggerExists(tblName, updateRightsTriggerName))
-                db.DropTrigger(tblName, updateRightsTriggerName);
+            var updateRightsTriggerName = new TriggerRef(tblName, Construct.SecurityRulesUpdateRightsTriggerName(rel));
+
+            if (db.CheckTriggerExists(updateRightsTriggerName))
+                db.DropTrigger(updateRightsTriggerName);
 
             var tblList = new List<RightsTrigger>();
 
@@ -2767,6 +2812,8 @@ namespace Zetbox.Server.SchemaManagement
                     .Where(rm => rm.Relations
                         .Where(r => r == rel).Count() > 0).Count() > 0)
                 .Distinct().ToList().Where(o => o.NeedsRightsTable());
+
+            var identity = (ObjectClass)NamedObjects.Base.Classes.Zetbox.App.Base.Identity.Find(rel.Context);
 
             foreach (var dep in list)
             {
@@ -2783,9 +2830,13 @@ namespace Zetbox.Server.SchemaManagement
                         };
                         try
                         {
-                            // Ignore last one - this is our n:m end
-                            var joinList = SchemaManager.CreateJoinList(db, dep, ac.Relations, rel);
-                            rt.Relations.AddRange(joinList.Take(joinList.Count - 1));
+                            // Ignore last join - our n:m end has two (in & out), but we only need the incoming one
+                            var objJoinList = SchemaManager.CreateJoinList(db, dep, ac.Relations.TakeWhileInclusive(r => r != rel));
+                            rt.ObjectRelations.AddRange(objJoinList.Take(objJoinList.Count - 1));
+
+                            // Ignore last join - our n:m end has two (in & out), but we only need the incoming one
+                            var idJoinList = SchemaManager.CreateJoinList(db, identity, ac.Relations.Reverse().TakeWhileInclusive(r => r != rel));
+                            rt.IdentityRelations.AddRange(idJoinList.Take(idJoinList.Count - 1));
                         }
                         catch (Zetbox.Server.SchemaManagement.SchemaManager.JoinListException ex)
                         {
@@ -2835,6 +2886,17 @@ namespace Zetbox.Server.SchemaManagement
             return false;
         }
 
+        private HashSet<ProcRef> _triggedRightsProcs = new HashSet<ProcRef>();
+
+        public void ExecuteTriggeredRefreshRights()
+        {
+            foreach (var refreshRightsOnProcedureName in _triggedRightsProcs)
+            {
+                db.ExecRefreshRightsOnProcedure(refreshRightsOnProcedureName);
+            }
+            _triggedRightsProcs.Clear();
+        }
+
         public void DoChangeObjectClassACL(ObjectClass objClass)
         {
             var rightsViewUnmaterializedName = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesRightsViewUnmaterializedName(objClass));
@@ -2843,7 +2905,9 @@ namespace Zetbox.Server.SchemaManagement
             if (db.CheckViewExists(rightsViewUnmaterializedName))
                 db.DropView(rightsViewUnmaterializedName);
             DoCreateRightsViewUnmaterialized(objClass);
-            db.ExecRefreshRightsOnProcedure(refreshRightsOnProcedureName);
+
+            DoCreateOrReplaceUpdateRightsTrigger(objClass);
+            _triggedRightsProcs.Add(refreshRightsOnProcedureName);
         }
         #endregion
 
@@ -2860,12 +2924,12 @@ namespace Zetbox.Server.SchemaManagement
             var tblRightsName = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesTableName(objClass));
             var rightsViewUnmaterializedName = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesRightsViewUnmaterializedName(objClass));
             var refreshRightsOnProcedureName = Construct.SecurityRulesRefreshRightsOnProcedureName(objClass);
-            var updateRightsTriggerName = Construct.SecurityRulesUpdateRightsTriggerName(objClass);
+            var updateRightsTriggerName = new TriggerRef(tblName, Construct.SecurityRulesUpdateRightsTriggerName(objClass));
 
             Log.InfoFormat("Delete ObjectClass Security Rules: {0}", objClass.Name);
 
-            if (db.CheckTriggerExists(tblName, updateRightsTriggerName))
-                db.DropTrigger(tblName, updateRightsTriggerName);
+            if (db.CheckTriggerExists(updateRightsTriggerName))
+                db.DropTrigger(updateRightsTriggerName);
 
             if (db.CheckProcedureExists(db.GetProcedureName(objClass.Module.SchemaName, refreshRightsOnProcedureName)))
                 db.DropProcedure(db.GetProcedureName(objClass.Module.SchemaName, refreshRightsOnProcedureName));
@@ -2875,6 +2939,51 @@ namespace Zetbox.Server.SchemaManagement
 
             if (db.CheckTableExists(tblRightsName))
                 db.DropTable(tblRightsName);
+        }
+        #endregion
+
+        #region RenameObjectClassACL
+        public bool IsRenameObjectClassACL(ObjectClass objClass)
+        {
+            if (!objClass.NeedsRightsTable()) return false;
+            ObjectClass savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+            if (savedObjClass == null || !savedObjClass.NeedsRightsTable()) return false;
+
+            return objClass.TableName != savedObjClass.TableName;
+        }
+        public void DoRenameObjectClassACL(ObjectClass objClass)
+        {
+            ObjectClass savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
+
+            var tblName = objClass.GetTableRef(db);
+            var savedTblName = savedObjClass.GetTableRef(db);
+            var tblRightsName = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesTableName(objClass));
+            var savedTblRightsName = db.GetTableName(savedObjClass.Module.SchemaName, Construct.SecurityRulesTableName(savedObjClass));
+
+            var rightsViewUnmaterializedName = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesRightsViewUnmaterializedName(objClass));
+            var savedRightsViewUnmaterializedName = db.GetTableName(savedObjClass.Module.SchemaName, Construct.SecurityRulesRightsViewUnmaterializedName(savedObjClass));
+
+            var refreshRightsOnProcedureName = db.GetProcedureName(objClass.Module.SchemaName, Construct.SecurityRulesRefreshRightsOnProcedureName(objClass));
+            var savedRefreshRightsOnProcedureName = db.GetProcedureName(savedObjClass.Module.SchemaName, Construct.SecurityRulesRefreshRightsOnProcedureName(savedObjClass));
+
+            var savedUpdateRightsTriggerName = new TriggerRef(savedTblName, Construct.SecurityRulesUpdateRightsTriggerName(savedObjClass));
+
+            Log.InfoFormat("Renaming ObjectClass Security Rules: {0}", objClass.Name);
+
+            if (db.CheckTriggerExists(savedUpdateRightsTriggerName))
+                db.DropTrigger(savedUpdateRightsTriggerName);
+            if (db.CheckProcedureExists(savedRefreshRightsOnProcedureName))
+                db.DropProcedure(savedRefreshRightsOnProcedureName);
+            if (db.CheckViewExists(savedRightsViewUnmaterializedName))
+                db.DropView(savedRightsViewUnmaterializedName);
+
+            db.RenameTable(savedTblRightsName, tblRightsName);
+            db.RenameIndex(tblRightsName, Construct.SecurityRulesIndexName(savedObjClass), Construct.SecurityRulesIndexName(objClass));
+            db.RenameFKConstraint(tblRightsName, Construct.SecurityRulesFKName(savedObjClass), objClass.GetTableRef(db), "ID", Construct.SecurityRulesFKName(objClass), true);
+
+            DoCreateOrReplaceUpdateRightsTrigger(objClass);
+            DoCreateRightsViewUnmaterialized(objClass);
+            db.CreateRefreshRightsOnProcedure(refreshRightsOnProcedureName, rightsViewUnmaterializedName, tblName, tblRightsName);
         }
         #endregion
 
@@ -2891,7 +3000,11 @@ namespace Zetbox.Server.SchemaManagement
 
             var tblName = objClass.GetTableRef(db);
             var colName = Construct.ColumnName(savedProp, prefix);
+            var checkConstraintName = Construct.CheckConstraintName(tblName.Name, colName);
             Log.InfoFormat("Drop Column: {0}.{1}", tblName, colName);
+            if (db.CheckCheckConstraintExists(tblName, checkConstraintName))
+                db.DropCheckConstraint(tblName, checkConstraintName);
+
             if (db.CheckColumnExists(tblName, colName))
                 db.DropColumn(tblName, colName);
 
@@ -2972,36 +3085,48 @@ namespace Zetbox.Server.SchemaManagement
         #region NewIndexConstraint
         public bool IsNewIndexConstraint(IndexConstraint uc)
         {
-            return uc.Constrained is ObjectClass && savedSchema.FindPersistenceObject<IndexConstraint>(uc.ExportGuid) == null;
+            var isFulltextConstraint = uc is FullTextIndexConstraint;
+            return !isFulltextConstraint && uc.Constrained is ObjectClass && savedSchema.FindPersistenceObject<IndexConstraint>(uc.ExportGuid) == null;
         }
         public void DoNewIndexConstraint(IndexConstraint uc)
         {
             var objClass = (ObjectClass)uc.Constrained;
             var tblName = objClass.GetTableRef(db);
             var columns = Construct.GetUCColNames(uc);
-            Log.InfoFormat("New Index Constraint: {0} on {1}({2})", uc.Reason, tblName, string.Join(", ", columns));
-            if (db.CheckIndexPossible(tblName, Construct.IndexName(objClass.TableName, columns), uc.IsUnique, false, columns))
-                db.CreateIndex(tblName, Construct.IndexName(objClass.TableName, columns), uc.IsUnique, false, columns);
+            var log_idxName = string.Format("{0} on {1}({2})", uc.Reason, tblName, string.Join(", ", columns));
+            Log.InfoFormat("New Index Constraint: {0}", log_idxName);
+            var idxName = Construct.IndexName(objClass.TableName, columns);
+            if (db.CheckIndexExists(tblName, idxName))
+            {
+                Log.WarnFormat("Cannot create Index Constraint, it already exists: {0}", log_idxName);
+            }
+            else if (db.CheckIndexPossible(tblName, idxName, uc.IsUnique, false, columns))
+            {
+                db.CreateIndex(tblName, idxName, uc.IsUnique, false, columns);
+            }
             else
-                Log.WarnFormat("Cannot create Index Constraint: {0} on {1}({2})", uc.Reason, tblName, string.Join(", ", columns));
+            {
+                Log.WarnFormat("Cannot create Index Constraint, if a unique index should be created, the column(s) may contain non unique data: {0}", log_idxName);
+            }
         }
         #endregion
 
         #region DeleteIndexConstraint
         public bool IsDeleteIndexConstraint(IndexConstraint uc)
         {
-            return uc.Constrained is ObjectClass && schema.FindPersistenceObject<IndexConstraint>(uc.ExportGuid) == null;
+            var isFulltextConstraint = uc is FullTextIndexConstraint;
+            return !isFulltextConstraint && uc.Constrained is ObjectClass && schema.FindPersistenceObject<IndexConstraint>(uc.ExportGuid) == null;
         }
         public void DoDeleteIndexConstraint(IndexConstraint uc)
         {
             var objClass = (ObjectClass)uc.Constrained;
             var tblName = objClass.GetTableRef(db);
             var columns = Construct.GetUCColNames(uc);
-            if (db.CheckIndexExists(tblName, Construct.IndexName(objClass.TableName, columns)))
+            var idxName = Construct.IndexName(objClass.TableName, columns);
+            if (db.CheckIndexExists(tblName, idxName))
             {
                 Log.InfoFormat("Drop Index Constraint: {0} on {1}({2})", uc.Reason, objClass.TableName, string.Join(", ", columns));
-                if (db.CheckIndexExists(tblName, Construct.IndexName(objClass.TableName, columns)))
-                    db.DropIndex(tblName, Construct.IndexName(objClass.TableName, columns));
+                db.DropIndex(tblName, idxName);
             }
         }
         #endregion
@@ -3009,7 +3134,9 @@ namespace Zetbox.Server.SchemaManagement
         #region ChangeIndexConstraint
         public bool IsChangeIndexConstraint(IndexConstraint uc)
         {
-            if (!(uc is IndexConstraint)) return false;
+            var isFulltextConstraint = uc is FullTextIndexConstraint;
+            if (isFulltextConstraint) return false;
+
             var saved = savedSchema.FindPersistenceObject<IndexConstraint>(uc.ExportGuid);
             if (saved == null) return false;
 
@@ -3022,6 +3149,12 @@ namespace Zetbox.Server.SchemaManagement
             {
                 if (!savedCols.Contains(c)) return true;
             }
+
+            var objClass = (ObjectClass)uc.Constrained;
+            var savedObjClass = (ObjectClass)saved.Constrained;
+
+            if (Construct.IndexName(savedObjClass.TableName, savedCols) != Construct.IndexName(objClass.TableName, newCols)) return true;
+
             return false;
         }
         public void DoChangeIndexConstraint(IndexConstraint uc)

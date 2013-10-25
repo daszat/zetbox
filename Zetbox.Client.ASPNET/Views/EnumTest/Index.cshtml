@@ -1,0 +1,30 @@
+﻿@model Zetbox.Client.ASPNET.SearchViewModel<Zetbox.App.Test.PropertyEnumTest>
+@using Zetbox.Client.ASPNET
+@{
+    ViewBag.Title = "Enum Test";
+}
+
+<h2>Enum Test</h2>
+<div class="Toolbar ui-widget-header ui-corner-all">
+    @Html.ActionLink("New", "Create", null, new { @class = "button" })
+</div>
+<table class="strech">
+    <tr>
+        <th>
+        </th>
+        <th style="width:100%;">
+            Name
+        </th>
+    </tr>
+    @foreach (var obj in Model.Result)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink("Details", "Details", new { ID = obj.ID })
+            </td>
+            <td>
+                @obj.Name
+            </td>
+        </tr>
+    }
+</table>

@@ -17,30 +17,84 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Zetbox.API;
+using Zetbox.API.Common;
 
 namespace at.dasz.DocumentManagement
 {
     [Implementor]
-    public static class FileActions
+    public class FileActions
     {
-        [Invocation]
-        public static void preSet_Blob(at.dasz.DocumentManagement.File obj, PropertyPreSetterEventArgs<Zetbox.App.Base.Blob> e)
+        public static readonly string DELETE_KEY = "Deleting";
+
+        private static ITextExtractor _textExtractor;
+        public FileActions(ITextExtractor textExtractor)
         {
-            e.Result = obj.HandleBlobChange(e.OldValue, e.NewValue);
+            _textExtractor = textExtractor;
         }
 
         [Invocation]
-        public static void ToString(at.dasz.DocumentManagement.File obj, MethodReturnEventArgs<System.String> e)
+        public static void ToString(File obj, MethodReturnEventArgs<System.String> e)
         {
             e.Result = obj.Name;
         }
 
         [Invocation]
-        public static void NotifyDeleting(at.dasz.DocumentManagement.File obj)
+        public static void preSet_Blob(File obj, PropertyPreSetterEventArgs<Zetbox.App.Base.Blob> e)
         {
-            if (obj.Blob != null)
+            e.Result = obj.HandleBlobChange(e.OldValue, e.NewValue);
+        }
+
+        [Invocation]
+        public static void postSet_Blob(File obj, PropertyPostSetterEventArgs<Zetbox.App.Base.Blob> e)
+        {
+            if (e.OldValue != e.NewValue)
             {
-                obj.Context.Delete(obj.Blob);
+                obj.ExtractText();
+            }
+        }
+
+        // required for StaticFile.HandleBlobChange
+        [Invocation]
+        public static void NotifyDeleting(File obj)
+        {
+            obj.TransientState[DELETE_KEY] = true;
+        }
+
+        [Invocation]
+        public static void postSet_Excerpt(File obj, PropertyPostSetterEventArgs<Excerpt> e)
+        {
+            if (e.OldValue != null)
+            {
+                obj.Context.Delete(e.OldValue);
+            }
+        }
+
+        [Invocation]
+        public static void ExtractText(File obj)
+        {
+            var blob = obj.Blob;
+
+            if (blob != null)
+            {
+                var txt = _textExtractor.GetText(obj.Blob.GetStream(), blob.MimeType);
+                var excerpt = obj.Excerpt;
+                if (string.IsNullOrWhiteSpace(txt))
+                {
+                    if (excerpt != null)
+                    {
+                        // no excerpt -> delete excerpt object
+                        obj.Context.Delete(excerpt);
+                    }
+                }
+                else
+                {
+                    if (excerpt == null)
+                    {
+                        excerpt = obj.Excerpt = obj.Context.Create<Excerpt>();
+                        excerpt.File = obj;
+                    }
+                    excerpt.Text = txt.Trim();
+                }
             }
         }
     }

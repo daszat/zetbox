@@ -29,6 +29,10 @@ namespace Zetbox.API
         void Send(MailMessage msg);
     }
 
+    public interface IInteractiveMailSender : IMailSender
+    {
+    }
+
     /// <summary>
     /// Sends an MailMessage through the System.Net.Mail.SmtpClient class
     /// Can be configured in the app.config file, see http://msdn.microsoft.com/en-us/library/w355a94k.aspx
@@ -78,7 +82,7 @@ namespace Zetbox.API
     /// <summary>
     /// Sends an MailMessage using the mailto:// shell execute method
     /// </summary>
-    public class MailtoMailSender : IMailSender
+    public class MailtoMailSender : IInteractiveMailSender
     {
         public void Send(MailMessage msg)
         {
@@ -127,6 +131,7 @@ namespace Zetbox.API
                 builder
                     .RegisterType<MailtoMailSender>()
                     .As<IMailSender>()
+                    .As<IInteractiveMailSender>()
                     .SingleInstance(); // Stateless
             }
         }

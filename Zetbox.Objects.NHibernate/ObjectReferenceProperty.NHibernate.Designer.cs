@@ -202,8 +202,8 @@ namespace Zetbox.App.Base
 							new ProjectedCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl.ObjectReferenceProperty_shows_Method_RelationEntryProxy, Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.Methods,
                                 p => (Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl.ObjectReferenceProperty_shows_Method_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl>)entry.B.ShowByProperties);
+                                ce => (Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl.ObjectReferenceProperty_shows_Method_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
+                    _Methods.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Methods", null, null); if(OnMethods_PostSetter != null && IsAttached) OnMethods_PostSetter(this); };
                     if (Methods_was_eagerLoaded) { Methods_was_eagerLoaded = false; }
 				}
 				return (ICollection<Zetbox.App.Base.Method>)_Methods;
@@ -213,6 +213,13 @@ namespace Zetbox.App.Base
 		private NHibernateBSideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl> _Methods;
 		// ignored, but required for Serialization
         private bool Methods_was_eagerLoaded = false;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchMethodsAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.Method>>(this.Methods);
+        }
+
+public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferenceProperty> OnMethods_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.ObjectReferenceProperty> OnMethods_IsValid;
 
@@ -320,12 +327,80 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for RelationEnd's guid, used on import only</summary>
         private Guid? _fk_guid_RelationEnd = null;
 
+    public Zetbox.API.Async.ZbTask TriggerFetchRelationEndAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.RelationEnd>(this.RelationEnd);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RelationEnd
 		public static event PropertyGetterHandler<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.RelationEnd> OnRelationEnd_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.RelationEnd> OnRelationEnd_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.RelationEnd> OnRelationEnd_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.ObjectReferenceProperty> OnRelationEnd_IsValid;
+
+        /// <summary>
+        /// Returns the translated description
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetDescription_ObjectReferenceProperty")]
+        public override string GetDescription()
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetDescription_ObjectReferenceProperty != null)
+            {
+                OnGetDescription_ObjectReferenceProperty(this, e);
+            }
+            else
+            {
+                e.Result = base.GetDescription();
+            }
+            return e.Result;
+        }
+        public static event GetDescription_Handler<ObjectReferenceProperty> OnGetDescription_ObjectReferenceProperty;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<ObjectReferenceProperty> OnGetDescription_ObjectReferenceProperty_CanExec;
+
+        [EventBasedMethod("OnGetDescription_ObjectReferenceProperty_CanExec")]
+        public override bool GetDescriptionCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetDescription_ObjectReferenceProperty_CanExec != null)
+				{
+					OnGetDescription_ObjectReferenceProperty_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDescriptionCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<ObjectReferenceProperty> OnGetDescription_ObjectReferenceProperty_CanExecReason;
+
+        [EventBasedMethod("OnGetDescription_ObjectReferenceProperty_CanExecReason")]
+        public override string GetDescriptionCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetDescription_ObjectReferenceProperty_CanExecReason != null)
+				{
+					OnGetDescription_ObjectReferenceProperty_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDescriptionCanExecReason;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// The element type for multi-valued properties. The property type string in all other cases.
@@ -773,6 +848,19 @@ namespace Zetbox.App.Base
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Methods":
+                return TriggerFetchMethodsAsync();
+            case "RelationEnd":
+                return TriggerFetchRelationEndAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

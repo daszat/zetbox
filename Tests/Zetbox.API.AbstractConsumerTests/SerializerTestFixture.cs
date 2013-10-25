@@ -20,9 +20,9 @@ namespace Zetbox.API.AbstractConsumerTests
     using System.Linq;
     using System.Reflection;
     using Autofac;
+    using NUnit.Framework;
     using Zetbox.API;
     using Zetbox.API.Utils;
-    using NUnit.Framework;
 
     public abstract class SerializerTestFixture : AbstractTestFixture
     {
@@ -52,6 +52,13 @@ namespace Zetbox.API.AbstractConsumerTests
             ms = new MemoryStream();
             sw = scope.Resolve<ZetboxStreamWriter.Factory>().Invoke(new BinaryWriter(ms));
             sr = scope.Resolve<ZetboxStreamReader.Factory>().Invoke(new BinaryReader(ms));
+        }
+
+        public override void TearDown()
+        {
+            sw.Dispose();
+            sr.Dispose();
+            base.TearDown();
         }
 
         protected void TestStream<T>(Action<T> write, Func<T> read, params T[] values)

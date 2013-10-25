@@ -51,7 +51,7 @@ namespace Zetbox.App.Test
     */
         // object list property
         // object list property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -64,7 +64,7 @@ namespace Zetbox.App.Test
                     _NEnds = new EntityListWrapper<Zetbox.App.Test.OrderedNEnd, Zetbox.App.Test.OrderedNEndEfImpl>(
                             this.Context, NEndsImpl,
                             () => this.NotifyPropertyChanging("NEnds", null, null),
-                            () => { this.NotifyPropertyChanged("NEnds", null, null); if(OnNEnds_PostSetter != null && IsAttached) OnNEnds_PostSetter(this); },
+                            null, // see GetNEndsImplCollection()
                             (item) => item.NotifyPropertyChanging("OneEnd", null, null),
                             (item) => item.NotifyPropertyChanged("OneEnd", null, null), "OneEnd", "NEnds_pos");
                 }
@@ -77,21 +77,39 @@ namespace Zetbox.App.Test
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.Test.OrderedNEndEfImpl>(
-                        "Model.FK_OneEnd_hasMany_NEnds",
-                        "NEnds");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetNEndsImplCollection();
             }
         }
         private EntityListWrapper<Zetbox.App.Test.OrderedNEnd, Zetbox.App.Test.OrderedNEndEfImpl> _NEnds;
 
+        private EntityCollection<Zetbox.App.Test.OrderedNEndEfImpl> _NEndsImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Test.OrderedNEndEfImpl> GetNEndsImplCollection()
+        {
+            if (_NEndsImplEntityCollection == null)
+            {
+                _NEndsImplEntityCollection = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Zetbox.App.Test.OrderedNEndEfImpl>(
+                        "Model.FK_OneEnd_hasMany_NEnds",
+                        "NEnds");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_NEndsImplEntityCollection.IsLoaded)
+                {
+                    _NEndsImplEntityCollection.Load();
+                }
+                _NEndsImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("NEnds", null, null); if (OnNEnds_PostSetter != null && IsAttached) OnNEnds_PostSetter(this); };
+            }
+            return _NEndsImplEntityCollection;
+        }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchNEndsAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<IList<Zetbox.App.Test.OrderedNEnd>>(this.NEnds);
+        }
+
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
 public static event PropertyListChangedHandler<Zetbox.App.Test.OrderedOneEnd> OnNEnds_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.OrderedOneEnd> OnNEnds_IsValid;
@@ -210,6 +228,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.OrderedOneEnd> On
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "NEnds":
+                return TriggerFetchNEndsAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
@@ -218,6 +247,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.OrderedOneEnd> On
             base.ReloadReferences();
 
             // fix direct object references
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

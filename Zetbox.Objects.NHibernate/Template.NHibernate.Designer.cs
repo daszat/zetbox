@@ -54,7 +54,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DisplayedTypeAssembly
         // fkBackingName=this.Proxy.DisplayedTypeAssembly; fkGuidBackingName=_fk_guid_DisplayedTypeAssembly;
         // referencedInterface=Zetbox.App.Base.Assembly; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -133,6 +133,11 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for DisplayedTypeAssembly's id, used on dehydration only</summary>
         private int? _fk_DisplayedTypeAssembly = null;
 
+
+    public Zetbox.API.Async.ZbTask TriggerFetchDisplayedTypeAssemblyAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Assembly>(this.DisplayedTypeAssembly);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DisplayedTypeAssembly
 		public static event PropertyGetterHandler<Zetbox.App.GUI.Template, Zetbox.App.Base.Assembly> OnDisplayedTypeAssembly_Getter;
@@ -274,8 +279,8 @@ namespace Zetbox.App.GUI
 							new ProjectedCollection<Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl.Template_hasMenu_Visual_RelationEntryProxy, Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.Menu,
                                 p => (Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl.Template_hasMenu_Visual_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl>)null);
+                                ce => (Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl.Template_hasMenu_Visual_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
+                    _Menu.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Menu", null, null); if(OnMenu_PostSetter != null && IsAttached) OnMenu_PostSetter(this); };
                     if (Menu_was_eagerLoaded) { Menu_was_eagerLoaded = false; }
 				}
 				return (ICollection<Zetbox.App.GUI.Visual>)_Menu;
@@ -286,6 +291,13 @@ namespace Zetbox.App.GUI
 		// ignored, but required for Serialization
         private bool Menu_was_eagerLoaded = false;
 
+        public Zetbox.API.Async.ZbTask TriggerFetchMenuAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.GUI.Visual>>(this.Menu);
+        }
+
+public static event PropertyListChangedHandler<Zetbox.App.GUI.Template> OnMenu_PostSetter;
+
         public static event PropertyIsValidHandler<Zetbox.App.GUI.Template> OnMenu_IsValid;
 
         /// <summary>
@@ -294,7 +306,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for VisualTree
         // fkBackingName=this.Proxy.VisualTree; fkGuidBackingName=_fk_guid_VisualTree;
         // referencedInterface=Zetbox.App.GUI.Visual; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -373,6 +385,11 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for VisualTree's id, used on dehydration only</summary>
         private int? _fk_VisualTree = null;
 
+
+    public Zetbox.API.Async.ZbTask TriggerFetchVisualTreeAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Visual>(this.VisualTree);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for VisualTree
 		public static event PropertyGetterHandler<Zetbox.App.GUI.Template, Zetbox.App.GUI.Visual> OnVisualTree_Getter;
@@ -522,6 +539,21 @@ namespace Zetbox.App.GUI
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "DisplayedTypeAssembly":
+                return TriggerFetchDisplayedTypeAssemblyAsync();
+            case "Menu":
+                return TriggerFetchMenuAsync();
+            case "VisualTree":
+                return TriggerFetchVisualTreeAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

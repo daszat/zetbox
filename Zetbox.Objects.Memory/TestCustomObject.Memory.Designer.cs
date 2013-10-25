@@ -142,21 +142,27 @@ namespace Zetbox.App.Test
                     serverList = new List<Zetbox.App.Test.Muhblah>();
                 });
             }
-    
+
             _triggerFetchMubBlah_List_NavTask.OnResult(t =>
             {
                 _MubBlah_List_Nav = new OneNRelationList<Zetbox.App.Test.Muhblah>(
                     "TestCustomObjects_Nav",
                     null,
                     this,
-                    () => { this.NotifyPropertyChanged("MubBlah_List_Nav", null, null); if(OnMubBlah_List_Nav_PostSetter != null && IsAttached) OnMubBlah_List_Nav_PostSetter(this); },
-                    serverList);    
+                    OnMubBlah_List_NavCollectionChanged,
+                    serverList);
             });
-            return _triggerFetchMubBlah_List_NavTask;    
+            return _triggerFetchMubBlah_List_NavTask;
         }
-    
-        private OneNRelationList<Zetbox.App.Test.Muhblah> _MubBlah_List_Nav;
 
+        internal void OnMubBlah_List_NavCollectionChanged()
+        {
+            NotifyPropertyChanged("MubBlah_List_Nav", null, null);
+            if (OnMubBlah_List_Nav_PostSetter != null && IsAttached)
+                OnMubBlah_List_Nav_PostSetter(this);
+        }
+
+        private OneNRelationList<Zetbox.App.Test.Muhblah> _MubBlah_List_Nav;
 public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject> OnMubBlah_List_Nav_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.TestCustomObject> OnMubBlah_List_Nav_IsValid;
@@ -164,7 +170,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         /// <summary>
         /// 
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for MubBlah_Nav
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for MubBlah_Nav
         // fkBackingName=_fk_MubBlah_Nav; fkGuidBackingName=_fk_guid_MubBlah_Nav;
         // referencedInterface=Zetbox.App.Test.Muhblah; moduleNamespace=Zetbox.App.Test;
         // inverse Navigator=TestCustomObjects_List_Nav; is list;
@@ -296,42 +302,52 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         /// 
         /// </summary>
         // collection entry list property
-   		// Zetbox.Generator.Templates.Properties.CollectionEntryListProperty
-		public ICollection<Zetbox.App.Test.Muhblah> MuhBlah_ManyList_Nav
-		{
-			get
-			{
-				if (_MuhBlah_ManyList_Nav == null)
-				{
+        // BEGIN Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for MuhBlah_ManyList_Nav
+        public ICollection<Zetbox.App.Test.Muhblah> MuhBlah_ManyList_Nav
+        {
+            get
+            {
+                if (_MuhBlah_ManyList_Nav == null)
+                {
                     TriggerFetchMuhBlah_ManyList_NavAsync().Wait();
-				}
-				return (ICollection<Zetbox.App.Test.Muhblah>)_MuhBlah_ManyList_Nav;
-			}
-		}
-        
+                }
+                return (ICollection<Zetbox.App.Test.Muhblah>)_MuhBlah_ManyList_Nav;
+            }
+        }
+
         Zetbox.API.Async.ZbTask _triggerFetchMuhBlah_ManyList_NavTask;
         public Zetbox.API.Async.ZbTask TriggerFetchMuhBlah_ManyList_NavAsync()
         {
             if (_triggerFetchMuhBlah_ManyList_NavTask != null) return _triggerFetchMuhBlah_ManyList_NavTask;
-			_triggerFetchMuhBlah_ManyList_NavTask = Context.FetchRelationAsync<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>(new Guid("d1e0da3e-ce64-4587-b62d-70c0f4371d97"), RelationEndRole.B, this);
-			_triggerFetchMuhBlah_ManyList_NavTask.OnResult(r => 
+            _triggerFetchMuhBlah_ManyList_NavTask = Context.FetchRelationAsync<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>(new Guid("d1e0da3e-ce64-4587-b62d-70c0f4371d97"), RelationEndRole.B, this);
+            _triggerFetchMuhBlah_ManyList_NavTask.OnResult(r =>
             {
-                _MuhBlah_ManyList_Nav 
-				= new ObservableASideCollectionWrapper<Zetbox.App.Test.Muhblah, Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>>(
-					this, 
-					new RelationshipFilterBSideCollection<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>(this.Context, this));
+                _MuhBlah_ManyList_Nav
+                    = new ObservableASideCollectionWrapper<Zetbox.App.Test.Muhblah, Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>>(
+                        this,
+                        new RelationshipFilterBSideCollection<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>(this.Context, this));
+                        // _MuhBlah_ManyList_Nav.CollectionChanged is managed by OnMuhBlah_ManyList_NavCollectionChanged() and called from the RelationEntry
             });
             return _triggerFetchMuhBlah_ManyList_NavTask;
         }
 
-		private ObservableASideCollectionWrapper<Zetbox.App.Test.Muhblah, Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>> _MuhBlah_ManyList_Nav;
+        internal void OnMuhBlah_ManyList_NavCollectionChanged()
+        {
+            NotifyPropertyChanged("MuhBlah_ManyList_Nav", null, null);
+            if (OnMuhBlah_ManyList_Nav_PostSetter != null && IsAttached)
+                OnMuhBlah_ManyList_Nav_PostSetter(this);
+        }
+
+        private ObservableASideCollectionWrapper<Zetbox.App.Test.Muhblah, Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>> _MuhBlah_ManyList_Nav;
+        // END Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for MuhBlah_ManyList_Nav
+public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject> OnMuhBlah_ManyList_Nav_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.TestCustomObject> OnMuhBlah_ManyList_Nav_IsValid;
 
         /// <summary>
         /// 
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for MuhBlah_One_Nav
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for MuhBlah_One_Nav
         // fkBackingName=_fk_MuhBlah_One_Nav; fkGuidBackingName=_fk_guid_MuhBlah_One_Nav;
         // referencedInterface=Zetbox.App.Test.Muhblah; moduleNamespace=Zetbox.App.Test;
         // inverse Navigator=TestCustomObjects_One_Nav; is reference;
@@ -564,10 +580,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                     NotifyPropertyChanged("PhoneNumberMobile", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
                 }
-                else
-                {
-                    SetInitializedProperty("PhoneNumberMobile");
-                }
             }
         }
         // END Zetbox.Generator.Templates.Properties.CompoundObjectPropertyTemplate
@@ -619,10 +631,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
 
                     NotifyPropertyChanged("PhoneNumberOffice", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
-                }
-                else
-                {
-                    SetInitializedProperty("PhoneNumberOffice");
                 }
             }
         }
@@ -781,6 +789,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                 MuhBlah_One_NavImpl = (Zetbox.App.Test.MuhblahMemoryImpl)Context.Find<Zetbox.App.Test.Muhblah>(_fk_MuhBlah_One_Nav.Value);
             else
                 MuhBlah_One_NavImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();
@@ -943,8 +952,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             SetNotInitializedProperty("MubBlah_Nav");
             SetNotInitializedProperty("MuhBlah_One_Nav");
             SetNotInitializedProperty("PersonName");
-            SetNotInitializedProperty("PhoneNumberMobile");
-            SetNotInitializedProperty("PhoneNumberOffice");
             base.NotifyCreated();
             if (OnNotifyCreated_TestCustomObject != null) OnNotifyCreated_TestCustomObject(this);
         }

@@ -216,6 +216,11 @@ namespace Zetbox.App.Test
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchOneSideAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Test.One_to_N_relations_One>(this.OneSide);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for OneSide
 		public static event PropertyGetterHandler<Zetbox.App.Test.One_to_N_relations_N, Zetbox.App.Test.One_to_N_relations_One> OnOneSide_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Test.One_to_N_relations_N, Zetbox.App.Test.One_to_N_relations_One> OnOneSide_PreSetter;
@@ -259,6 +264,17 @@ namespace Zetbox.App.Test
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "OneSide":
+                return TriggerFetchOneSideAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
@@ -272,6 +288,7 @@ namespace Zetbox.App.Test
                 OneSideImpl = (Zetbox.App.Test.One_to_N_relations_OneEfImpl)Context.Find<Zetbox.App.Test.One_to_N_relations_One>(_fk_OneSide.Value);
             else
                 OneSideImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

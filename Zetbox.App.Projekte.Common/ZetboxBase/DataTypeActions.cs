@@ -156,6 +156,36 @@ namespace Zetbox.App.Base
                     {
                         var dv = prop.DefaultValue;
                         var newDV = (DefaultPropertyValue)ctx.Create(ctx.GetInterfaceType(dv));
+                        // Only known, other may not make sense
+                        // CurrentDateTime & NewGuid make no sense
+                        if (newDV is BoolDefaultValue)
+                        {
+                            ((BoolDefaultValue)newDV).BoolValue = ((BoolDefaultValue)dv).BoolValue;
+                        }
+                        else if (newDV is IntDefaultValue)
+                        {
+                            ((IntDefaultValue)newDV).IntValue = ((IntDefaultValue)dv).IntValue;
+                        }
+                        else if (newDV is DoubleDefaultValue)
+                        {
+                            ((DoubleDefaultValue)newDV).DoubleValue = ((DoubleDefaultValue)dv).DoubleValue;
+                        }
+                        else if (newDV is DecimalDefaultValue)
+                        {
+                            ((DecimalDefaultValue)newDV).DecimalValue = ((DecimalDefaultValue)dv).DecimalValue;
+                        }
+                        else if (newDV is EnumDefaultValue)
+                        {
+                            ((EnumDefaultValue)newDV).EnumValue = ((EnumDefaultValue)dv).EnumValue;
+                        }
+                        else if (newDV is EnumDefaultValue)
+                        {
+                            ((EnumDefaultValue)newDV).EnumValue = ((EnumDefaultValue)dv).EnumValue;
+                        }
+                        else if (newDV is StringDefaultValue)
+                        {
+                            ((StringDefaultValue)newDV).DefaultValue = ((StringDefaultValue)dv).DefaultValue;
+                        } 
                         newProp.DefaultValue = newDV;
                     }
                 }

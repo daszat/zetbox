@@ -34,7 +34,12 @@ namespace Zetbox.Generator.Templates.ObjectClasses
 
         protected virtual void ApplyPreCreatedTemplate()
         {
-            foreach (var prop in dt.Properties.Where(p => !p.IsList() && p.DefaultValue == null && !p.IsCalculated()).OrderBy(p => p.Name))
+            foreach (var prop in dt.Properties
+                .Where(p => !p.IsList())
+                .Where(p => p.DefaultValue == null)
+                .Where(p => !p.IsCalculated())
+                .Where(p => !(p is CompoundObjectProperty)) // Exclude CompoundObject Properties
+                .OrderBy(p => p.Name))
             {
                 this.WriteObjects("            SetNotInitializedProperty(\"", prop.Name, "\");\r\n");
             }

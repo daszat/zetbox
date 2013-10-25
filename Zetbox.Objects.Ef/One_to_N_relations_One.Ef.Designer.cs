@@ -120,7 +120,7 @@ namespace Zetbox.App.Test
     */
         // object list property
         // object list property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -133,7 +133,7 @@ namespace Zetbox.App.Test
                     _NSide = new EntityCollectionWrapper<Zetbox.App.Test.One_to_N_relations_N, Zetbox.App.Test.One_to_N_relations_NEfImpl>(
                             this.Context, NSideImpl,
                             () => this.NotifyPropertyChanging("NSide", null, null),
-                            () => { this.NotifyPropertyChanged("NSide", null, null); if(OnNSide_PostSetter != null && IsAttached) OnNSide_PostSetter(this); },
+                            null, // see GetNSideImplCollection()
                             (item) => item.NotifyPropertyChanging("OneSide", null, null),
                             (item) => item.NotifyPropertyChanged("OneSide", null, null));
                 }
@@ -146,21 +146,39 @@ namespace Zetbox.App.Test
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.Test.One_to_N_relations_NEfImpl>(
-                        "Model.FK_OneSide_connectsTo_NSide",
-                        "NSide");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetNSideImplCollection();
             }
         }
         private EntityCollectionWrapper<Zetbox.App.Test.One_to_N_relations_N, Zetbox.App.Test.One_to_N_relations_NEfImpl> _NSide;
 
+        private EntityCollection<Zetbox.App.Test.One_to_N_relations_NEfImpl> _NSideImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Test.One_to_N_relations_NEfImpl> GetNSideImplCollection()
+        {
+            if (_NSideImplEntityCollection == null)
+            {
+                _NSideImplEntityCollection = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Zetbox.App.Test.One_to_N_relations_NEfImpl>(
+                        "Model.FK_OneSide_connectsTo_NSide",
+                        "NSide");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_NSideImplEntityCollection.IsLoaded)
+                {
+                    _NSideImplEntityCollection.Load();
+                }
+                _NSideImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("NSide", null, null); if (OnNSide_PostSetter != null && IsAttached) OnNSide_PostSetter(this); };
+            }
+            return _NSideImplEntityCollection;
+        }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchNSideAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Test.One_to_N_relations_N>>(this.NSide);
+        }
+
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
 public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relations_One> OnNSide_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.One_to_N_relations_One> OnNSide_IsValid;
@@ -210,6 +228,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relation
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "NSide":
+                return TriggerFetchNSideAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
@@ -218,6 +247,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relation
             base.ReloadReferences();
 
             // fix direct object references
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

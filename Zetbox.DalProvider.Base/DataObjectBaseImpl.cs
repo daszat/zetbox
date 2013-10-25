@@ -43,16 +43,6 @@ namespace Zetbox.DalProvider.Base
         /// </summary>
         public virtual void NotifyPostSave() { }
 
-        /// <summary>
-        /// Fires an Event after an Object is created.
-        /// </summary>
-        public virtual void NotifyCreated() { }
-
-        /// <summary>
-        /// Fires an Event before an Object is deleted.
-        /// </summary>
-        public virtual void NotifyDeleting() { }
-
         public abstract Guid ObjectClassID { get; }
 
         public virtual void UpdateParent(string propertyName, IDataObject parentObj)

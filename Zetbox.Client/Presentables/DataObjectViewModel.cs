@@ -32,6 +32,7 @@ namespace Zetbox.Client.Presentables
     using Zetbox.App.GUI;
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables.ValueViewModels;
+    using Zetbox.API.Common;
 
     /// <summary>
     /// Proxies a whole IDataObject
@@ -195,6 +196,8 @@ namespace Zetbox.Client.Presentables
         {
             FetchPropertyModels();
             var isAdmin = CurrentIdentity != null ? CurrentIdentity.IsAdmininistrator() : false;
+            var zbBaseModule = FrozenContext.GetQuery<Module>().Single(m => m.Name == "ZetboxBase");
+
             return _propertyList
                         .SelectMany(p => (String.IsNullOrEmpty(p.CategoryTags) ? Properties.Resources.Uncategorised : p.CategoryTags)
                                             .Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
@@ -204,17 +207,24 @@ namespace Zetbox.Client.Presentables
                         .OrderBy(group => group.Key)
                         .Select(group =>
                         {
+                            var tag = group.First().Category;
                             var lst = group.Select(p => _propertyModels[p.Property]).Cast<ViewModel>().ToList();
+
+                            var translatedTag = Assets.GetString(zbBaseModule, ZetboxAssetKeys.CategoryTags, tag);
+                            if (string.IsNullOrWhiteSpace(translatedTag))
+                            {
+                                translatedTag = Assets.GetString(group.First().Property.Module, ZetboxAssetKeys.CategoryTags, tag, tag);
+                            }
 
                             if (lst.Count == 1)
                             {
                                 return (PropertyGroupViewModel)ViewModelFactory.CreateViewModel<SinglePropertyGroupViewModel.Factory>().Invoke(
-                                    DataContext, this, group.First().Category, lst);
+                                    DataContext, this, translatedTag, lst);
                             }
                             else
                             {
                                 return (PropertyGroupViewModel)ViewModelFactory.CreateViewModel<MultiplePropertyGroupViewModel.Factory>().Invoke(
-                                    DataContext, this, group.First().Category, lst);
+                                    DataContext, this, translatedTag, lst);
                             }
                         })
                         .ToList();
@@ -222,7 +232,7 @@ namespace Zetbox.Client.Presentables
 
         private string GetCategorySortKey(string cat)
         {
-            switch(cat)
+            switch (cat)
             {
                 case "Summary": return "1|Summary";
                 case "Main": return "2|Main";
@@ -299,7 +309,8 @@ namespace Zetbox.Client.Presentables
 
         protected bool isReadOnlyStore = false;
         /// <summary>
-        /// Specifies, that the underlying object should be read only. Note: this sets every property to read only true.
+        /// Specifies, that the underlying object should be read only. Note: this sets every property to read only true. 
+        /// In constructors use isReadOnlyStore instead. It will be propergated down later.
         /// </summary>
         public virtual bool IsReadOnly
         {
@@ -317,7 +328,7 @@ namespace Zetbox.Client.Presentables
                     {
                         foreach (var e in _propertyModels)
                         {
-                            e.Value.IsReadOnly = IsReadOnly;
+                            e.Value.IsReadOnly = isReadOnlyStore;
                         }
                     }
                     OnPropertyChanged("IsReadOnly");
@@ -462,6 +473,7 @@ namespace Zetbox.Client.Presentables
                 if (Object.CurrentAccessRights.HasOnlyReadRightsOrNone()) return Highlight.Deactivated;
                 // Reflect readonly only on changable context
                 if (!DataContext.IsReadonly && (!IsEnabled || IsReadOnly)) return Highlight.Deactivated;
+                if (Object is IDeactivatable && ((IDeactivatable)Object).IsDeactivated) return Highlight.Deactivated;
                 return Highlight.None;
             }
         }
@@ -470,11 +482,8 @@ namespace Zetbox.Client.Presentables
         {
             get
             {
-                if (DataContext.IsElevatedMode) return Highlight.Bad;
-                if (Object.CurrentAccessRights.HasOnlyReadRightsOrNone()) return Highlight.Deactivated;
-                // Reflect readonly only on changable context
-                if (!DataContext.IsReadonly && (!IsEnabled || IsReadOnly)) return Highlight.Deactivated;
-                return Highlight.None;
+                // no async version required: nothing dangerous happens there.
+                return Highlight;
             }
         }
 
@@ -507,8 +516,15 @@ namespace Zetbox.Client.Presentables
         private void Object_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             // notify consumers if ID has changed
-            if (e.PropertyName == "ID")
-                OnPropertyChanged("ID");
+            switch (e.PropertyName)
+            {
+                case "ID":
+                    OnPropertyChanged("ID");
+                    break;
+                case "IsDeactivated":
+                    OnHighlightChanged();
+                    break;
+            }
 
             UpdateToStringCache();
             OnPropertyChanged("ObjectState");

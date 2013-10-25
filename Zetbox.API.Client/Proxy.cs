@@ -40,7 +40,7 @@ namespace Zetbox.API.Client
     public interface IProxy
         : IDisposable
     {
-        IEnumerable<IDataObject> GetList(InterfaceType ifType, int maxListCount, bool eagerLoadLists, IEnumerable<Expression> filter, IEnumerable<OrderBy> orderBy, out List<IStreamable> auxObjects);
+        IEnumerable<IDataObject> GetObjects(IReadOnlyZetboxContext requestingCtx, InterfaceType ifType, Expression query, out List<IStreamable> auxObjects);
         IEnumerable<IDataObject> GetListOf(InterfaceType ifType, int ID, string property, out List<IStreamable> auxObjects);
 
         IEnumerable<IPersistenceObject> SetObjects(IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests);
@@ -63,24 +63,28 @@ namespace Zetbox.API.Client
         private const int MAX_RETRY_COUNT = 2;
 
         private readonly InterfaceType.Factory _iftFactory;
+        private readonly IImplementationTypeChecker _implTypeChecker;
         private readonly UnattachedObjectFactory _unattachedObjectFactory;
         private readonly ZetboxService.IZetboxService _service;
         private readonly IPerfCounter _perfCounter;
         private readonly ZetboxStreamReader.Factory _readerFactory;
         private readonly ZetboxStreamWriter.Factory _writerFactory;
+        private readonly IEnumerable<SerializingTypeMap> _typeMaps;
 
-        public ProxyImplementation(InterfaceType.Factory iftFactory, UnattachedObjectFactory unattachedObjectFactory, ZetboxService.IZetboxService service, IPerfCounter perfCounter, ZetboxStreamReader.Factory readerFactory, ZetboxStreamWriter.Factory writerFactory)
+        public ProxyImplementation(InterfaceType.Factory iftFactory, IImplementationTypeChecker implTypeChecker, UnattachedObjectFactory unattachedObjectFactory, ZetboxService.IZetboxService service, IPerfCounter perfCounter, ZetboxStreamReader.Factory readerFactory, ZetboxStreamWriter.Factory writerFactory, IEnumerable<SerializingTypeMap> typeMaps)
         {
             if (perfCounter == null) throw new ArgumentNullException("perfCounter");
             if (readerFactory == null) throw new ArgumentNullException("readerFactory");
             if (writerFactory == null) throw new ArgumentNullException("writerFactory");
 
             _iftFactory = iftFactory;
+            _implTypeChecker = implTypeChecker;
             _unattachedObjectFactory = unattachedObjectFactory;
             _service = service;
             _perfCounter = perfCounter;
             _readerFactory = readerFactory;
             _writerFactory = writerFactory;
+            _typeMaps = typeMaps;
         }
 
         private void MakeRequest(Action request)
@@ -136,33 +140,26 @@ namespace Zetbox.API.Client
             if (fault != null) throw new IOException("Error when accessing server", fault);
         }
 
-        public IEnumerable<IDataObject> GetList(InterfaceType ifType, int maxListCount, bool eagerLoadLists, IEnumerable<Expression> filter, IEnumerable<OrderBy> orderBy, out List<IStreamable> auxObjects)
+        public IEnumerable<IDataObject> GetObjects(IReadOnlyZetboxContext requestingCtx, InterfaceType ifType, Expression query, out List<IStreamable> auxObjects)
         {
             int resultCount = 0;
             List<IStreamable> tmpAuxObjects = null;
-            var _ifType = ifType.ToSerializableType();
-            var ticks = _perfCounter.IncrementGetList(ifType);
+            var ticks = _perfCounter.IncrementGetObjects(ifType);
             try
             {
-                var _filter = filter != null ? filter.Select(f => SerializableExpression.FromExpression(f, _iftFactory)).ToArray() : null;
-                var _orderBy = orderBy != null ? orderBy.Select(o => new OrderByContract() { Type = o.Type, Expression = SerializableExpression.FromExpression(o.Expression, _iftFactory) }).ToArray() : null;
                 byte[] bytes = null;
 
                 MakeRequest(() =>
                 {
-                    bytes = _service.GetList(
+                    bytes = _service.GetObjects(
                         ZetboxGeneratedVersionAttribute.Current,
-                        _ifType,
-                        maxListCount,
-                        eagerLoadLists,
-                        _filter,
-                        _orderBy);
+                        SerializableExpression.FromExpression(query, requestingCtx, _iftFactory, _implTypeChecker, _typeMaps));
                 });
 
-                Logging.Facade.DebugFormat("GetList retrieved: {0:n0} bytes", bytes.Length);
+                Logging.Facade.DebugFormat("GetObjects retrieved: {0:n0} bytes", bytes.Length);
 
                 IEnumerable<IDataObject> result = null;
-                using (var sr = _readerFactory(new BinaryReader(new MemoryStream(bytes))))
+                using (var sr = _readerFactory.Invoke(new BinaryReader(new MemoryStream(bytes))))
                 {
                     result = ReceiveObjects(sr, out tmpAuxObjects).Cast<IDataObject>();
                 }
@@ -172,7 +169,7 @@ namespace Zetbox.API.Client
             }
             finally
             {
-                _perfCounter.DecrementGetList(ifType, resultCount, ticks);
+                _perfCounter.DecrementGetObjects(ifType, resultCount, ticks);
             }
         }
 
@@ -192,7 +189,7 @@ namespace Zetbox.API.Client
                 });
 
                 IEnumerable<IDataObject> result = null;
-                using (var sr = _readerFactory(new BinaryReader(new MemoryStream(bytes))))
+                using (var sr = _readerFactory.Invoke(new BinaryReader(new MemoryStream(bytes))))
                 {
                     result = ReceiveObjects(sr, out tmpAuxObjects).Cast<IDataObject>();
                 }
@@ -215,7 +212,7 @@ namespace Zetbox.API.Client
                 IEnumerable<IPersistenceObject> result = null;
                 // Serialize
                 using (var ms = new MemoryStream())
-                using (var sw = _writerFactory(new BinaryWriter(ms)))
+                using (var sw = _writerFactory.Invoke(new BinaryWriter(ms)))
                 {
                     SendObjects(objects, sw);
                     byte[] bytes = null;
@@ -227,7 +224,7 @@ namespace Zetbox.API.Client
                         bytes = _service.SetObjects(ZetboxGeneratedVersionAttribute.Current, _ms, _nReq);
                     });
 
-                    using (var sr = _readerFactory(new BinaryReader(new MemoryStream(bytes))))
+                    using (var sr = _readerFactory.Invoke(new BinaryReader(new MemoryStream(bytes))))
                     {
                         // merge auxiliary objects into primary set objects result
                         List<IStreamable> auxObjects;
@@ -311,7 +308,7 @@ namespace Zetbox.API.Client
                     bytes = _service.FetchRelation(ZetboxGeneratedVersionAttribute.Current, relationId, (int)role, parentId);
                 });
                 using (MemoryStream s = new MemoryStream(bytes))
-                using (var sr = _readerFactory(new BinaryReader(s)))
+                using (var sr = _readerFactory.Invoke(new BinaryReader(s)))
                 {
                     result = ReceiveObjects(sr, out tmpAuxObjects).Cast<T>();
                 }
@@ -350,7 +347,7 @@ namespace Zetbox.API.Client
                 response = _service.SetBlobStream(msg);
             });
 
-            using (var sr = _readerFactory(new BinaryReader(response.BlobInstance)))
+            using (var sr = _readerFactory.Invoke(new BinaryReader(response.BlobInstance)))
             {
                 // ignore auxObjects for blobs, which should not have them
                 result = ReceiveObjectList(sr).Cast<Zetbox.App.Base.Blob>().Single();
@@ -369,7 +366,7 @@ namespace Zetbox.API.Client
             byte[] bytes = null;
 
             using (var parameterStream = new MemoryStream())
-            using (var parameterWriter = _writerFactory(new BinaryWriter(parameterStream)))
+            using (var parameterWriter = _writerFactory.Invoke(new BinaryWriter(parameterStream)))
             {
                 foreach (var paramVal in parameter)
                 {
@@ -377,7 +374,7 @@ namespace Zetbox.API.Client
                 }
 
                 using (var changedObjectsStream = new MemoryStream())
-                using (var sw = _writerFactory(new BinaryWriter(changedObjectsStream)))
+                using (var sw = _writerFactory.Invoke(new BinaryWriter(changedObjectsStream)))
                 {
                     SendObjects(objects, sw);
 
@@ -408,7 +405,7 @@ namespace Zetbox.API.Client
             using (var resultStream = new MemoryStream(bytes))
             {
                 using (var retChangedObjects = new MemoryStream(retChangedObjectsArray))
-                using (var br = _readerFactory(new BinaryReader(retChangedObjects)))
+                using (var br = _readerFactory.Invoke(new BinaryReader(retChangedObjects)))
                 {
                     tmpChangedObjects = ReceiveObjectList(br).Cast<IPersistenceObject>();
                 }
@@ -417,18 +414,22 @@ namespace Zetbox.API.Client
 
                 if (retValType.IsIStreamable())
                 {
-                    var br = _readerFactory(new BinaryReader(resultStream));
-                    result = ReceiveObjects(br, out auxObjects).Cast<IPersistenceObject>().FirstOrDefault();
+                    using (var br = _readerFactory.Invoke(new BinaryReader(resultStream)))
+                    {
+                        result = ReceiveObjects(br, out auxObjects).Cast<IPersistenceObject>().FirstOrDefault();
+                    }
                 }
                 else if (retValType.IsIEnumerable() && retValType.FindElementTypes().Any(t => t.IsIPersistenceObject()))
                 {
-                    var br = _readerFactory(new BinaryReader(resultStream));
-                    IList lst = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(retValType.FindElementTypes().Single(t => t.IsIPersistenceObject())));
-                    foreach (object resultObj in ReceiveObjects(br, out auxObjects))
+                    using (var br = _readerFactory.Invoke(new BinaryReader(resultStream)))
                     {
-                        lst.Add(resultObj);
+                        IList lst = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(retValType.FindElementTypes().Single(t => t.IsIPersistenceObject())));
+                        foreach (object resultObj in ReceiveObjects(br, out auxObjects))
+                        {
+                            lst.Add(resultObj);
+                        }
+                        result = lst;
                     }
-                    result = lst;
                 }
                 else if (resultStream.Length > 0)
                 {

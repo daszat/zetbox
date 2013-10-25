@@ -88,10 +88,10 @@
   <ItemGroup>
     <Compile Include="ClientApiModule.cs" />
     <Compile Include="ClientDeploymentRestrictor.cs" />
-    <Compile Include="ClientIsolationLevel.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="HttpServiceClient.cs" />
     <Compile Include="ICredentialsResolver.cs" />
+    <Compile Include="IFulltextSupport.cs" />
     <Compile Include="InfoLoggingProxyDecorator.cs" />
     <Compile Include="IDelayedTask.cs" />
     <Compile Include="IScreenshotTool.cs" />
@@ -212,6 +212,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\test.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -27,7 +27,7 @@ namespace at.dasz.DocumentManagement
         [Invocation]
         public static void HandleBlobChange(StaticFile obj, MethodReturnEventArgs<Blob> e, Blob oldBlob, Blob newBlob)
         {
-            if (oldBlob != null && newBlob != oldBlob)
+            if (!obj.TransientState.ContainsKey(FileActions.DELETE_KEY) && oldBlob != null && newBlob != oldBlob)
             {
                 throw new InvalidOperationException("Changing blob on static files is not allowed");
             }

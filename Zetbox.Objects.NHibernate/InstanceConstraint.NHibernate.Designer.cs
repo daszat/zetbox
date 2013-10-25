@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// 
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("InstanceConstraint")]
-    public class InstanceConstraintNHibernateImpl : Zetbox.DalProvider.NHibernate.DataObjectNHibernateImpl, InstanceConstraint, Zetbox.API.IExportableInternal
+    public abstract class InstanceConstraintNHibernateImpl : Zetbox.DalProvider.NHibernate.DataObjectNHibernateImpl, InstanceConstraint, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("25a83f49-3cff-4baf-850d-8d185bb329ec");
         public override Guid ObjectClassID { get { return _objectClassID; } }
@@ -159,6 +159,11 @@ namespace Zetbox.App.Base
 
         /// <summary>Backing store for Constrained's guid, used on import only</summary>
         private Guid? _fk_guid_Constrained = null;
+
+    public Zetbox.API.Async.ZbTask TriggerFetchConstrainedAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.DataType>(this.Constrained);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Constrained
 		public static event PropertyGetterHandler<Zetbox.App.Base.InstanceConstraint, Zetbox.App.Base.DataType> OnConstrained_Getter;
@@ -487,6 +492,17 @@ namespace Zetbox.App.Base
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Constrained":
+                return TriggerFetchConstrainedAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

@@ -23,16 +23,29 @@
     </AssociationSet>
     <EntitySet Name="BaseParameter" EntityType="Model.Store.BaseParameter" Schema="base" Table="BaseParameters"/>
     <EntitySet Name="Blob" EntityType="Model.Store.Blob" Schema="base" Table="Blobs"/>
+    <EntitySet Name="CalendarBook" EntityType="Model.Store.CalendarBook" Schema="calendar" Table="CalendarBooks"/>
+    <EntitySet Name="CalendarBook_Rights" EntityType="Model.Store.CalendarBook_Rights" Schema="calendar" Table="CalendarBooks_Rights"/>
+    <AssociationSet Name="FK_CalendarBooks_Rights" Association="Model.Store.FK_CalendarBooks_Rights">
+      <End Role="CalendarBook" EntitySet="CalendarBook" />
+      <End Role="CalendarBook_Rights" EntitySet="CalendarBook_Rights" />
+    </AssociationSet>
     <EntitySet Name="Company" EntityType="Model.Store.Company" Schema="test" Table="Companies"/>
     <EntitySet Name="Constraint" EntityType="Model.Store.Constraint" Schema="base" Table="Constraints"/>
-    <EntitySet Name="ConstraintInvocation" EntityType="Model.Store.ConstraintInvocation" Schema="base" Table="ConstraintInvocations"/>
     <EntitySet Name="ControlKind" EntityType="Model.Store.ControlKind" Schema="gui" Table="ControlKinds"/>
     <EntitySet Name="CurrentSchema" EntityType="Model.Store.CurrentSchema" Schema="base" Table="CurrentSchema"/>
     <EntitySet Name="DataType" EntityType="Model.Store.DataType" Schema="base" Table="DataTypes"/>
     <EntitySet Name="DeactivatableTestObject" EntityType="Model.Store.DeactivatableTestObject" Schema="test" Table="DeactivatableTestObjects"/>
     <EntitySet Name="DefaultPropertyValue" EntityType="Model.Store.DefaultPropertyValue" Schema="base" Table="DefaultPropertyValues"/>
     <EntitySet Name="EnumerationEntry" EntityType="Model.Store.EnumerationEntry" Schema="base" Table="EnumerationEntries"/>
+    <EntitySet Name="Event" EntityType="Model.Store.Event" Schema="calendar" Table="Events"/>
+    <EntitySet Name="Event_Rights" EntityType="Model.Store.Event_Rights" Schema="calendar" Table="Events_Rights"/>
+    <AssociationSet Name="FK_Events_Rights" Association="Model.Store.FK_Events_Rights">
+      <End Role="Event" EntitySet="Event" />
+      <End Role="Event_Rights" EntitySet="Event_Rights" />
+    </AssociationSet>
+    <EntitySet Name="EventTestObject" EntityType="Model.Store.EventTestObject" Schema="test" Table="EventTestObjects"/>
     <EntitySet Name="ExceptionLogEntry" EntityType="Model.Store.ExceptionLogEntry" Schema="base" Table="ExceptionLog"/>
+    <EntitySet Name="Excerpt" EntityType="Model.Store.Excerpt" Schema="doc" Table="Excerpts"/>
     <EntitySet Name="File" EntityType="Model.Store.File" Schema="doc" Table="Files"/>
     <EntitySet Name="FileImportConfiguration" EntityType="Model.Store.FileImportConfiguration" Schema="doc" Table="FileImportConfigurations"/>
     <EntitySet Name="FilterConfiguration" EntityType="Model.Store.FilterConfiguration" Schema="gui" Table="FilterConfigurations"/>
@@ -70,6 +83,7 @@
     <EntitySet Name="RequiredParent" EntityType="Model.Store.RequiredParent" Schema="test" Table="RequiredParents"/>
     <EntitySet Name="RequiredParentChild" EntityType="Model.Store.RequiredParentChild" Schema="test" Table="RequiredParentChildren"/>
     <EntitySet Name="SavedListConfiguration" EntityType="Model.Store.SavedListConfiguration" Schema="gui" Table="SavedListConfigurations"/>
+    <EntitySet Name="SecurityChangeRight" EntityType="Model.Store.SecurityChangeRight" Schema="test" Table="SecurityChangeRights"/>
     <EntitySet Name="SecurityTestChild" EntityType="Model.Store.SecurityTestChild" Schema="test" Table="SecurityTestChildren"/>
     <EntitySet Name="SecurityTestChild_Rights" EntityType="Model.Store.SecurityTestChild_Rights" Schema="test" Table="SecurityTestChildren_Rights"/>
     <AssociationSet Name="FK_SecurityTestChildren_Rights" Association="Model.Store.FK_SecurityTestChildren_Rights">
@@ -84,6 +98,8 @@
     <EntitySet Name="SourceEnum" EntityType="Model.Store.SourceEnum" Schema="migration" Table="SourceEnums"/>
     <EntitySet Name="SourceTable" EntityType="Model.Store.SourceTable" Schema="migration" Table="SourceTables"/>
     <EntitySet Name="StagingDatabase" EntityType="Model.Store.StagingDatabase" Schema="migration" Table="StagingDatabases"/>
+    <EntitySet Name="SyncProvider" EntityType="Model.Store.SyncProvider" Schema="calendar" Table="SyncProviders"/>
+    <EntitySet Name="TagCache" EntityType="Model.Store.TagCache" Schema="gui" Table="TagCaches"/>
     <EntitySet Name="Task" EntityType="Model.Store.Task" Schema="projekte" Table="Tasks"/>
     <EntitySet Name="Task_Rights" EntityType="Model.Store.Task_Rights" Schema="projekte" Table="Tasks_Rights"/>
     <AssociationSet Name="FK_Tasks_Rights" Association="Model.Store.FK_Tasks_Rights">
@@ -96,7 +112,6 @@
     <EntitySet Name="TestObjClass" EntityType="Model.Store.TestObjClass" Schema="test" Table="TestObjClasses"/>
     <EntitySet Name="TestStudent" EntityType="Model.Store.TestStudent" Schema="test" Table="TestStudenten"/>
     <EntitySet Name="TPHBaseObj" EntityType="Model.Store.TPHBaseObj" Schema="test" Table="TPHBaseObjs"/>
-    <EntitySet Name="TypeRef" EntityType="Model.Store.TypeRef" Schema="base" Table="TypeRefs"/>
     <EntitySet Name="ViewDescriptor" EntityType="Model.Store.ViewDescriptor" Schema="gui" Table="ViewDescriptors"/>
     <EntitySet Name="ViewModelDescriptor" EntityType="Model.Store.ViewModelDescriptor" Schema="gui" Table="ViewModelDescriptors"/>
     <EntitySet Name="Visual" EntityType="Model.Store.Visual" Schema="gui" Table="Visuals"/>
@@ -127,6 +142,12 @@
     <AssociationSet Name="FK_Enumeration_DataType_ID" Association="Model.Store.FK_Enumeration_DataType_ID" >
       <End Role="A_DataType" EntitySet="DataType" />
       <End Role="B_Enumeration" EntitySet="Enumeration" />
+    </AssociationSet>
+    <EntitySet Name="FullTextIndexConstraint" EntityType="Model.Store.FullTextIndexConstraint" Schema="base" Table="FullTextIndexConstraints"/>
+    <!-- inherits from IndexConstraint -->
+    <AssociationSet Name="FK_FullTextIndexConstraint_IndexConstraint_ID" Association="Model.Store.FK_FullTextIndexConstraint_IndexConstraint_ID" >
+      <End Role="A_IndexConstraint" EntitySet="IndexConstraint" />
+      <End Role="B_FullTextIndexConstraint" EntitySet="FullTextIndexConstraint" />
     </AssociationSet>
     <EntitySet Name="GroupMembership" EntityType="Model.Store.GroupMembership" Schema="base" Table="GroupMemberships"/>
     <!-- inherits from AccessControl -->
@@ -188,6 +209,12 @@
       <End Role="A_File" EntitySet="File" />
       <End Role="B_StaticFile" EntitySet="StaticFile" />
     </AssociationSet>
+    <EntitySet Name="WorkScheduleSyncProvider" EntityType="Model.Store.WorkScheduleSyncProvider" Schema="calendar" Table="WorkScheduleSyncProvider"/>
+    <!-- inherits from SyncProvider -->
+    <AssociationSet Name="FK_WorkScheduleSyncProvider_SyncProvider_ID" Association="Model.Store.FK_WorkScheduleSyncProvider_SyncProvider_ID" >
+      <End Role="A_SyncProvider" EntitySet="SyncProvider" />
+      <End Role="B_WorkScheduleSyncProvider" EntitySet="WorkScheduleSyncProvider" />
+    </AssociationSet>
 
     <!-- EntitySets and AssociationSet for all object-object CollectionEntrys -->
     <!-- 
@@ -220,6 +247,70 @@
     <AssociationSet Name="FK_CalculatedReference_dependsOn_InputProperties_B" Association="Model.Store.FK_CalculatedReference_dependsOn_InputProperties_B" >
       <End Role="CollectionEntry" EntitySet="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" />
       <End Role="InputProperties" EntitySet="Property" />
+    </AssociationSet>
+    
+    <!-- 
+    Relation: FK_Calendar_shared_r_GroupReaders
+    A: ZeroOrMore CalendarBook as Calendar
+    B: ZeroOrMore Group as GroupReaders
+    Preferred Storage: Separate
+    -->
+    <EntitySet Name="CalendarBook_shared_r_Group_RelationEntry" EntityType="Model.Store.CalendarBook_shared_r_Group_RelationEntry" Schema="calendar" Table="Calendar_shared_r_GroupReaders" />
+    <AssociationSet Name="FK_Calendar_shared_r_GroupReaders_A" Association="Model.Store.FK_Calendar_shared_r_GroupReaders_A" >
+      <End Role="Calendar" EntitySet="CalendarBook" />
+      <End Role="CollectionEntry" EntitySet="CalendarBook_shared_r_Group_RelationEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Calendar_shared_r_GroupReaders_B" Association="Model.Store.FK_Calendar_shared_r_GroupReaders_B" >
+      <End Role="CollectionEntry" EntitySet="CalendarBook_shared_r_Group_RelationEntry" />
+      <End Role="GroupReaders" EntitySet="Group" />
+    </AssociationSet>
+    
+    <!-- 
+    Relation: FK_Calendar_shared_r_Readers
+    A: ZeroOrMore CalendarBook as Calendar
+    B: ZeroOrMore Identity as Readers
+    Preferred Storage: Separate
+    -->
+    <EntitySet Name="CalendarBook_shared_r_Identity_RelationEntry" EntityType="Model.Store.CalendarBook_shared_r_Identity_RelationEntry" Schema="calendar" Table="Calendar_shared_r_Readers" />
+    <AssociationSet Name="FK_Calendar_shared_r_Readers_A" Association="Model.Store.FK_Calendar_shared_r_Readers_A" >
+      <End Role="Calendar" EntitySet="CalendarBook" />
+      <End Role="CollectionEntry" EntitySet="CalendarBook_shared_r_Identity_RelationEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Calendar_shared_r_Readers_B" Association="Model.Store.FK_Calendar_shared_r_Readers_B" >
+      <End Role="CollectionEntry" EntitySet="CalendarBook_shared_r_Identity_RelationEntry" />
+      <End Role="Readers" EntitySet="Identity" />
+    </AssociationSet>
+    
+    <!-- 
+    Relation: FK_Calendar_shared_w_GroupWriters
+    A: ZeroOrMore CalendarBook as Calendar
+    B: ZeroOrMore Group as GroupWriters
+    Preferred Storage: Separate
+    -->
+    <EntitySet Name="CalendarBook_shared_w_Group_RelationEntry" EntityType="Model.Store.CalendarBook_shared_w_Group_RelationEntry" Schema="calendar" Table="Calendar_shared_w_GroupWriters" />
+    <AssociationSet Name="FK_Calendar_shared_w_GroupWriters_A" Association="Model.Store.FK_Calendar_shared_w_GroupWriters_A" >
+      <End Role="Calendar" EntitySet="CalendarBook" />
+      <End Role="CollectionEntry" EntitySet="CalendarBook_shared_w_Group_RelationEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Calendar_shared_w_GroupWriters_B" Association="Model.Store.FK_Calendar_shared_w_GroupWriters_B" >
+      <End Role="CollectionEntry" EntitySet="CalendarBook_shared_w_Group_RelationEntry" />
+      <End Role="GroupWriters" EntitySet="Group" />
+    </AssociationSet>
+    
+    <!-- 
+    Relation: FK_Calendar_shared_w_Writers
+    A: ZeroOrMore CalendarBook as Calendar
+    B: ZeroOrMore Identity as Writers
+    Preferred Storage: Separate
+    -->
+    <EntitySet Name="CalendarBook_shared_w_Identity_RelationEntry" EntityType="Model.Store.CalendarBook_shared_w_Identity_RelationEntry" Schema="calendar" Table="Calendar_shared_w_Writers" />
+    <AssociationSet Name="FK_Calendar_shared_w_Writers_A" Association="Model.Store.FK_Calendar_shared_w_Writers_A" >
+      <End Role="Calendar" EntitySet="CalendarBook" />
+      <End Role="CollectionEntry" EntitySet="CalendarBook_shared_w_Identity_RelationEntry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Calendar_shared_w_Writers_B" Association="Model.Store.FK_Calendar_shared_w_Writers_B" >
+      <End Role="CollectionEntry" EntitySet="CalendarBook_shared_w_Identity_RelationEntry" />
+      <End Role="Writers" EntitySet="Identity" />
     </AssociationSet>
     
     <!-- 
@@ -415,22 +506,6 @@
     </AssociationSet>
     
     <!-- 
-    Relation: FK_TypeRef_hasGenericArguments_GenericArguments
-    A: ZeroOrMore TypeRef as TypeRef
-    B: ZeroOrMore TypeRef as GenericArguments
-    Preferred Storage: Separate
-    -->
-    <EntitySet Name="TypeRef_hasGenericArguments_TypeRef_RelationEntry" EntityType="Model.Store.TypeRef_hasGenericArguments_TypeRef_RelationEntry" Schema="base" Table="TypeRef_hasGenericArguments_GenericArguments" />
-    <AssociationSet Name="FK_TypeRef_hasGenericArguments_GenericArguments_A" Association="Model.Store.FK_TypeRef_hasGenericArguments_GenericArguments_A" >
-      <End Role="TypeRef" EntitySet="TypeRef" />
-      <End Role="CollectionEntry" EntitySet="TypeRef_hasGenericArguments_TypeRef_RelationEntry" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TypeRef_hasGenericArguments_GenericArguments_B" Association="Model.Store.FK_TypeRef_hasGenericArguments_GenericArguments_B" >
-      <End Role="CollectionEntry" EntitySet="TypeRef_hasGenericArguments_TypeRef_RelationEntry" />
-      <End Role="GenericArguments" EntitySet="TypeRef" />
-    </AssociationSet>
-    
-    <!-- 
     Relation: FK_UniqueContraints_ensures_unique_on_Properties
     A: ZeroOrMore IndexConstraint as UniqueContraints
     B: ZeroOrMore Property as Properties
@@ -444,22 +519,6 @@
     <AssociationSet Name="FK_UniqueContraints_ensures_unique_on_Properties_B" Association="Model.Store.FK_UniqueContraints_ensures_unique_on_Properties_B" >
       <End Role="CollectionEntry" EntitySet="IndexConstraint_ensures_unique_on_Property_RelationEntry" />
       <End Role="Properties" EntitySet="Property" />
-    </AssociationSet>
-    
-    <!-- 
-    Relation: FK_ViewDescriptor_supports_ViewModelTypeRefs
-    A: ZeroOrMore ViewDescriptor as ViewDescriptor
-    B: ZeroOrMore TypeRef as ViewModelTypeRefs
-    Preferred Storage: Separate
-    -->
-    <EntitySet Name="ViewDescriptor_supports_TypeRef_RelationEntry" EntityType="Model.Store.ViewDescriptor_supports_TypeRef_RelationEntry" Schema="gui" Table="ViewDescriptor_supports_ViewModelTypeRefs" />
-    <AssociationSet Name="FK_ViewDescriptor_supports_ViewModelTypeRefs_A" Association="Model.Store.FK_ViewDescriptor_supports_ViewModelTypeRefs_A" >
-      <End Role="ViewDescriptor" EntitySet="ViewDescriptor" />
-      <End Role="CollectionEntry" EntitySet="ViewDescriptor_supports_TypeRef_RelationEntry" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ViewDescriptor_supports_ViewModelTypeRefs_B" Association="Model.Store.FK_ViewDescriptor_supports_ViewModelTypeRefs_B" >
-      <End Role="CollectionEntry" EntitySet="ViewDescriptor_supports_TypeRef_RelationEntry" />
-      <End Role="ViewModelTypeRefs" EntitySet="TypeRef" />
     </AssociationSet>
     
     <!-- 
@@ -601,21 +660,25 @@
       <End Role="CalculatedReference" EntitySet="Property" />
       <End Role="ReferencedClass" EntitySet="ObjectClass" />
     </AssociationSet>
+    <AssociationSet Name="FK_Calendar_has_Owner" Association="Model.Store.FK_Calendar_has_Owner" >
+      <End Role="Calendar" EntitySet="CalendarBook" />
+      <End Role="Owner" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Calendar_was_ChangedBy" Association="Model.Store.FK_Calendar_was_ChangedBy" >
+      <End Role="Calendar" EntitySet="CalendarBook" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Calendar_was_CreatedBy" Association="Model.Store.FK_Calendar_was_CreatedBy" >
+      <End Role="Calendar" EntitySet="CalendarBook" />
+      <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
     <AssociationSet Name="FK_Child_allow_Identity" Association="Model.Store.FK_Child_allow_Identity" >
       <End Role="Child" EntitySet="SecurityTestChild" />
       <End Role="Identity" EntitySet="Identity" />
     </AssociationSet>
-    <AssociationSet Name="FK_Child_has_Parent" Association="Model.Store.FK_Child_has_Parent" >
-      <End Role="Child" EntitySet="TypeRef" />
-      <End Role="Parent" EntitySet="TypeRef" />
-    </AssociationSet>
     <AssociationSet Name="FK_ChildControlKinds_have_a_Parent" Association="Model.Store.FK_ChildControlKinds_have_a_Parent" >
       <End Role="ChildControlKinds" EntitySet="ControlKind" />
       <End Role="Parent" EntitySet="ControlKind" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ClrObjectParameter_isOf_Type" Association="Model.Store.FK_ClrObjectParameter_isOf_Type" >
-      <End Role="ClrObjectParameter" EntitySet="BaseParameter" />
-      <End Role="Type" EntitySet="TypeRef" />
     </AssociationSet>
     <AssociationSet Name="FK_CompoundObjectProperty_has_CompoundObjectDefinition" Association="Model.Store.FK_CompoundObjectProperty_has_CompoundObjectDefinition" >
       <End Role="CompoundObjectProperty" EntitySet="Property" />
@@ -629,14 +692,6 @@
       <End Role="ConstrainedProperty" EntitySet="Property" />
       <End Role="Constraints" EntitySet="Constraint" />
     </AssociationSet>
-    <AssociationSet Name="FK_Constraint_invokes_GetErrorTextInvocation" Association="Model.Store.FK_Constraint_invokes_GetErrorTextInvocation" >
-      <End Role="Constraint" EntitySet="Constraint" />
-      <End Role="GetErrorTextInvocation" EntitySet="ConstraintInvocation" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Constraint_invokes_IsValidInvocation" Association="Model.Store.FK_Constraint_invokes_IsValidInvocation" >
-      <End Role="Constraint" EntitySet="Constraint" />
-      <End Role="IsValidInvocation" EntitySet="ConstraintInvocation" />
-    </AssociationSet>
     <AssociationSet Name="FK_Constraint_on_Constrained" Association="Model.Store.FK_Constraint_on_Constrained" >
       <End Role="Constraint" EntitySet="InstanceConstraint" />
       <End Role="Constrained" EntitySet="DataType" />
@@ -649,13 +704,13 @@
       <End Role="Constraint" EntitySet="Constraint" />
       <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
-    <AssociationSet Name="FK_ConstraintInvocation_has_TypeRef" Association="Model.Store.FK_ConstraintInvocation_has_TypeRef" >
-      <End Role="ConstraintInvocation" EntitySet="ConstraintInvocation" />
-      <End Role="TypeRef" EntitySet="TypeRef" />
-    </AssociationSet>
     <AssociationSet Name="FK_ControlKind_has_Module" Association="Model.Store.FK_ControlKind_has_Module" >
       <End Role="ControlKind" EntitySet="ControlKind" />
       <End Role="Module" EntitySet="Module" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CPObj_has_DefaultViewModelDescriptor" Association="Model.Store.FK_CPObj_has_DefaultViewModelDescriptor" >
+      <End Role="CPObj" EntitySet="CompoundObject" />
+      <End Role="DefaultViewModelDescriptor" EntitySet="ViewModelDescriptor" />
     </AssociationSet>
     <AssociationSet Name="FK_CPParameter_has_CompoundObject" Association="Model.Store.FK_CPParameter_has_CompoundObject" >
       <End Role="CPParameter" EntitySet="BaseParameter" />
@@ -684,10 +739,6 @@
     <AssociationSet Name="FK_DefaultPropertyValue_was_CreatedBy" Association="Model.Store.FK_DefaultPropertyValue_was_CreatedBy" >
       <End Role="DefaultPropertyValue" EntitySet="DefaultPropertyValue" />
       <End Role="CreatedBy" EntitySet="Identity" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Descriptor_has_ViewModelRef" Association="Model.Store.FK_Descriptor_has_ViewModelRef" >
-      <End Role="Descriptor" EntitySet="ViewModelDescriptor" />
-      <End Role="ViewModelRef" EntitySet="TypeRef" />
     </AssociationSet>
     <AssociationSet Name="FK_Document_was_ChangedBy" Association="Model.Store.FK_Document_was_ChangedBy" >
       <End Role="Document" EntitySet="Blob" />
@@ -725,9 +776,25 @@
       <End Role="EnumParameter" EntitySet="BaseParameter" />
       <End Role="Enumeration" EntitySet="Enumeration" />
     </AssociationSet>
+    <AssociationSet Name="FK_Event_of_Calendar" Association="Model.Store.FK_Event_of_Calendar" >
+      <End Role="Event" EntitySet="Event" />
+      <End Role="Calendar" EntitySet="CalendarBook" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Event_was_ChangedBy" Association="Model.Store.FK_Event_was_ChangedBy" >
+      <End Role="Event" EntitySet="Event" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Event_was_CreatedBy" Association="Model.Store.FK_Event_was_CreatedBy" >
+      <End Role="Event" EntitySet="Event" />
+      <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
     <AssociationSet Name="FK_File_has_Blob" Association="Model.Store.FK_File_has_Blob" >
       <End Role="File" EntitySet="File" />
       <End Role="Blob" EntitySet="Blob" />
+    </AssociationSet>
+    <AssociationSet Name="FK_File_has_Excerpt" Association="Model.Store.FK_File_has_Excerpt" >
+      <End Role="File" EntitySet="File" />
+      <End Role="Excerpt" EntitySet="Excerpt" />
     </AssociationSet>
     <AssociationSet Name="FK_File_was_ChangedBy" Association="Model.Store.FK_File_was_ChangedBy" >
       <End Role="File" EntitySet="File" />
@@ -1069,10 +1136,6 @@
       <End Role="Sequence" EntitySet="Sequence" />
       <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
-    <AssociationSet Name="FK_ServiceDescriptor_describes_a_TypeRef" Association="Model.Store.FK_ServiceDescriptor_describes_a_TypeRef" >
-      <End Role="ServiceDescriptor" EntitySet="ServiceDescriptor" />
-      <End Role="TypeRef" EntitySet="TypeRef" />
-    </AssociationSet>
     <AssociationSet Name="FK_ServiceDescriptor_has_Module" Association="Model.Store.FK_ServiceDescriptor_has_Module" >
       <End Role="ServiceDescriptor" EntitySet="ServiceDescriptor" />
       <End Role="Module" EntitySet="Module" />
@@ -1137,6 +1200,22 @@
       <End Role="StagingDatabase" EntitySet="StagingDatabase" />
       <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
+    <AssociationSet Name="FK_SyncAccount_for_Calendar" Association="Model.Store.FK_SyncAccount_for_Calendar" >
+      <End Role="SyncAccount" EntitySet="WorkScheduleSyncProvider" />
+      <End Role="Calendar" EntitySet="CalendarBook" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SyncAccount_of_WorkSchedule" Association="Model.Store.FK_SyncAccount_of_WorkSchedule" >
+      <End Role="SyncAccount" EntitySet="WorkScheduleSyncProvider" />
+      <End Role="WorkSchedule" EntitySet="WorkSchedule" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SyncAccount_was_ChangedBy" Association="Model.Store.FK_SyncAccount_was_ChangedBy" >
+      <End Role="SyncAccount" EntitySet="SyncProvider" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SyncAccount_was_CreatedBy" Association="Model.Store.FK_SyncAccount_was_CreatedBy" >
+      <End Role="SyncAccount" EntitySet="SyncProvider" />
+      <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
     <AssociationSet Name="FK_Task_was_ChangedBy" Association="Model.Store.FK_Task_was_ChangedBy" >
       <End Role="Task" EntitySet="Task" />
       <End Role="ChangedBy" EntitySet="Identity" />
@@ -1153,6 +1232,10 @@
       <End Role="Template" EntitySet="Template" />
       <End Role="VisualTree" EntitySet="Visual" />
     </AssociationSet>
+    <AssociationSet Name="FK_Test_of_Event" Association="Model.Store.FK_Test_of_Event" >
+      <End Role="Test" EntitySet="EventTestObject" />
+      <End Role="Event" EntitySet="Event" />
+    </AssociationSet>
     <AssociationSet Name="FK_TestObjClass_has_ObjectProp" Association="Model.Store.FK_TestObjClass_has_ObjectProp" >
       <End Role="TestObjClass" EntitySet="TestObjClass" />
       <End Role="ObjectProp" EntitySet="Kunde" />
@@ -1164,22 +1247,6 @@
     <AssociationSet Name="FK_TPHBaseObj_was_CreatedBy" Association="Model.Store.FK_TPHBaseObj_was_CreatedBy" >
       <End Role="TPHBaseObj" EntitySet="TPHBaseObj" />
       <End Role="CreatedBy" EntitySet="Identity" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TypeRef_has_Assembly" Association="Model.Store.FK_TypeRef_has_Assembly" >
-      <End Role="TypeRef" EntitySet="TypeRef" />
-      <End Role="Assembly" EntitySet="Assembly" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TypeRef_was_ChangedBy" Association="Model.Store.FK_TypeRef_was_ChangedBy" >
-      <End Role="TypeRef" EntitySet="TypeRef" />
-      <End Role="ChangedBy" EntitySet="Identity" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TypeRef_was_CreatedBy" Association="Model.Store.FK_TypeRef_was_CreatedBy" >
-      <End Role="TypeRef" EntitySet="TypeRef" />
-      <End Role="CreatedBy" EntitySet="Identity" />
-    </AssociationSet>
-    <AssociationSet Name="FK_View_has_ControlRef" Association="Model.Store.FK_View_has_ControlRef" >
-      <End Role="View" EntitySet="ViewDescriptor" />
-      <End Role="ControlRef" EntitySet="TypeRef" />
     </AssociationSet>
     <AssociationSet Name="FK_ViewDescriptor_has_Module" Association="Model.Store.FK_ViewDescriptor_has_Module" >
       <End Role="ViewDescriptor" EntitySet="ViewDescriptor" />
@@ -1360,7 +1427,7 @@
     <Property Name="fk_CreatedBy" Type="int4" />
     <Property Name="ChangedOn" Type="timestamp" Nullable="false" />
     <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
-    <Property Name="Description" Type="varchar" MaxLength="1000" Nullable="true" />
+    <Property Name="Description" Type="varchar" MaxLength="200" Nullable="true" />
     <Property Name="ExportGuid" Type="uuid" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
   </EntityType>
@@ -1439,7 +1506,7 @@
     <Property Name="IsReturnParameter" Type="bool" Nullable="false" />
     <Property Name="Label" Type="varchar" MaxLength="200" Nullable="true" />
     <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
-    <Property Name="CLRObjectParameters_fk_Type" Type="int4" />
+    <Property Name="CLRObjectParameters_TypeRef" Type="varchar" MaxLength="2000" Nullable="true" />
     <Property Name="CompoundObjectParameters_fk_CompoundObject" Type="int4" />
     <Property Name="DateTimeParameters_DateTimeStyle" Type="int4" Nullable="true" />
     <Property Name="EnumParameters_fk_Enumeration" Type="int4" />
@@ -1461,6 +1528,44 @@
     <Property Name="StoragePath" Type="varchar" MaxLength="500" Nullable="false" />
   </EntityType>
 	
+  <EntityType Name="CalendarBook">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Owner" Type="int4" />
+    <Property Name="fk_ChangedBy" Type="int4" />
+    <Property Name="fk_CreatedBy" Type="int4" />
+    <Property Name="ChangedOn" Type="timestamp" Nullable="false" />
+    <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
+    <Property Name="ExportGuid" Type="uuid" Nullable="false" />
+    <Property Name="IsDeactivated" Type="bool" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+    <EntityType Name="CalendarBook_Rights">
+      <Key>
+        <PropertyRef Name="ID" />
+        <PropertyRef Name="Identity" />
+      </Key>
+      <Property Name="ID" Type="int4" Nullable="false" />
+      <Property Name="Identity" Type="int4" Nullable="false" />
+      <Property Name="Right" Type="int4" Nullable="false" />
+    </EntityType>
+    <Association Name="FK_CalendarBooks_Rights">
+      <End Role="CalendarBook" Type="Model.Store.CalendarBook" Multiplicity="1">
+        <OnDelete Action="Cascade" />
+      </End>
+      <End Role="CalendarBook_Rights" Type="Model.Store.CalendarBook_Rights" Multiplicity="*" />
+      <ReferentialConstraint>
+        <Principal Role="CalendarBook">
+          <PropertyRef Name="ID" />
+        </Principal>
+        <Dependent Role="CalendarBook_Rights">
+          <PropertyRef Name="ID" />
+        </Dependent>
+      </ReferentialConstraint>
+    </Association>
+	
   <EntityType Name="Company">
     <Key>
       <PropertyRef Name="ID" />
@@ -1474,6 +1579,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int4" Nullable="false" />
+    <Property Name="fk_DefaultViewModelDescriptor" Type="int4" />
     <Property Name="fk_DefaultPropViewModelDescriptor" Type="int4" />
   </EntityType>
 	
@@ -1492,20 +1598,8 @@
     <Property Name="Reason" Type="varchar" MaxLength="400" Nullable="true" />
     <Property Name="IntegerRangeConstraints_Max" Type="int4" Nullable="true" />
     <Property Name="IntegerRangeConstraints_Min" Type="int4" Nullable="true" />
-    <Property Name="InvokingConstraints_fk_GetErrorTextInvocation" Type="int4" />
-    <Property Name="InvokingConstraints_fk_IsValidInvocation" Type="int4" />
     <Property Name="StringRangeConstraints_MaxLength" Type="int4" Nullable="true" />
     <Property Name="StringRangeConstraints_MinLength" Type="int4" Nullable="true" />
-  </EntityType>
-	
-  <EntityType Name="ConstraintInvocation">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_TypeRef" Type="int4" />
-    <Property Name="ExportGuid" Type="uuid" Nullable="false" />
-    <Property Name="MemberName" Type="varchar" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="ControlKind">
@@ -1617,6 +1711,77 @@
     <Property Name="Value" Type="int4" Nullable="false" />
   </EntityType>
 	
+  <EntityType Name="Event">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="__Discriminator" Type="varchar" Nullable="false" />
+    <Property Name="fk_Calendar" Type="int4" />
+    <Property Name="fk_ChangedBy" Type="int4" />
+    <Property Name="fk_CreatedBy" Type="int4" />
+    <Property Name="Body" Type="varchar" Nullable="true" />
+    <Property Name="ChangedOn" Type="timestamp" Nullable="false" />
+    <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
+    <Property Name="EndDate" Type="timestamp" Nullable="false" />
+    <Property Name="ExportGuid" Type="uuid" Nullable="false" />
+    <Property Name="IsAllDay" Type="bool" Nullable="false" />
+    <Property Name="IsViewReadOnly" Type="bool" Nullable="false" />
+    <Property Name="Location" Type="varchar" MaxLength="200" Nullable="true" />
+    <Property Name="StartDate" Type="timestamp" Nullable="false" />
+    <Property Name="Summary" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="SyncHash" Type="varchar" MaxLength="500" Nullable="true" />
+    <Property Name="Recurrence_ByDay" Type="varchar" MaxLength="100" Nullable="true" />
+    <Property Name="Recurrence_ByHour" Type="varchar" MaxLength="100" Nullable="true" />
+    <Property Name="Recurrence_ByMinute" Type="varchar" MaxLength="100" Nullable="true" />
+    <Property Name="Recurrence_ByMonth" Type="varchar" MaxLength="100" Nullable="true" />
+    <Property Name="Recurrence_ByMonthDay" Type="varchar" MaxLength="100" Nullable="true" />
+    <Property Name="Recurrence_BySecond" Type="varchar" MaxLength="100" Nullable="true" />
+    <Property Name="Recurrence_BySetPos" Type="varchar" MaxLength="100" Nullable="true" />
+    <Property Name="Recurrence_ByWeekNumber" Type="varchar" MaxLength="100" Nullable="true" />
+    <Property Name="Recurrence_ByYearDay" Type="varchar" MaxLength="100" Nullable="true" />
+    <Property Name="Recurrence_Count" Type="int4" Nullable="true" />
+    <Property Name="Recurrence_Frequency" Type="int4" Nullable="true" />
+    <Property Name="Recurrence_Interval" Type="int4" Nullable="true" />
+    <Property Name="Recurrence_Until" Type="timestamp" Nullable="true" />
+    <Property Name="Recurrence_WeekStart" Type="int4" Nullable="true" />
+    <Property Name="Source_ObjClass" Type="uuid" Nullable="true" />
+    <Property Name="Source_ObjGuid" Type="uuid" Nullable="true" />
+    <Property Name="Source_ObjID" Type="int4" Nullable="true" />
+  </EntityType>
+    <EntityType Name="Event_Rights">
+      <Key>
+        <PropertyRef Name="ID" />
+        <PropertyRef Name="Identity" />
+      </Key>
+      <Property Name="ID" Type="int4" Nullable="false" />
+      <Property Name="Identity" Type="int4" Nullable="false" />
+      <Property Name="Right" Type="int4" Nullable="false" />
+    </EntityType>
+    <Association Name="FK_Events_Rights">
+      <End Role="Event" Type="Model.Store.Event" Multiplicity="1">
+        <OnDelete Action="Cascade" />
+      </End>
+      <End Role="Event_Rights" Type="Model.Store.Event_Rights" Multiplicity="*" />
+      <ReferentialConstraint>
+        <Principal Role="Event">
+          <PropertyRef Name="ID" />
+        </Principal>
+        <Dependent Role="Event_Rights">
+          <PropertyRef Name="ID" />
+        </Dependent>
+      </ReferentialConstraint>
+    </Association>
+	
+  <EntityType Name="EventTestObject">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Event" Type="int4" />
+    <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+	
   <EntityType Name="ExceptionLogEntry">
     <Key>
       <PropertyRef Name="ID" />
@@ -1630,6 +1795,15 @@
     <Property Name="Thread" Type="varchar" MaxLength="255" Nullable="false" />
   </EntityType>
 	
+  <EntityType Name="Excerpt">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_File" Type="int4" />
+    <Property Name="Text" Type="varchar" Nullable="false" />
+  </EntityType>
+	
   <EntityType Name="File">
     <Key>
       <PropertyRef Name="ID" />
@@ -1641,7 +1815,11 @@
     <Property Name="ChangedOn" Type="timestamp" Nullable="false" />
     <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
     <Property Name="ExportGuid" Type="uuid" Nullable="false" />
-    <Property Name="Name" Type="varchar" MaxLength="1000" Nullable="true" />
+    <Property Name="Name" Type="varchar" MaxLength="1024" Nullable="true" />
+    <Property Name="Tags" Type="varchar" MaxLength="2000" Nullable="true" />
+    <Property Name="AttachedTo_ObjClass" Type="uuid" Nullable="true" />
+    <Property Name="AttachedTo_ObjGuid" Type="uuid" Nullable="true" />
+    <Property Name="AttachedTo_ObjID" Type="int4" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="FileImportConfiguration">
@@ -1694,6 +1872,13 @@
     <Property Name="BogenNummer" Type="int4" Nullable="true" />
   </EntityType>
 	
+  <EntityType Name="FullTextIndexConstraint">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int4" Nullable="false" />
+  </EntityType>
+	
   <EntityType Name="Group">
     <Key>
       <PropertyRef Name="ID" />
@@ -1728,6 +1913,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CalendarConfiguration" Type="varchar" Nullable="true" />
     <Property Name="DisplayName" Type="varchar" MaxLength="200" Nullable="true" />
     <Property Name="Password" Type="varchar" MaxLength="100" Nullable="true" />
     <Property Name="UserName" Type="varchar" MaxLength="100" Nullable="true" />
@@ -1849,6 +2035,7 @@
     <Property Name="fk_CreatedBy" Type="int4" />
     <Property Name="ChangedOn" Type="timestamp" Nullable="false" />
     <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
+    <Property Name="EMail" Type="varchar" MaxLength="100" Nullable="true" />
     <Property Name="ExportGuid" Type="uuid" Nullable="false" />
     <Property Name="Geburtstag" Type="timestamp" Nullable="true" />
     <Property Name="Name" Type="varchar" MaxLength="100" Nullable="true" />
@@ -2069,6 +2256,7 @@
     <Property Name="ChangedOn" Type="timestamp" Nullable="false" />
     <Property Name="CodeTemplate" Type="varchar" MaxLength="1000" Nullable="true" />
     <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
+    <Property Name="DefaultSortPriority" Type="int4" Nullable="true" />
     <Property Name="Description" Type="varchar" MaxLength="200" Nullable="true" />
     <Property Name="DisableExport" Type="bool" Nullable="true" />
     <Property Name="ExportGuid" Type="uuid" Nullable="false" />
@@ -2148,15 +2336,20 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Rule_DaysOffset" Type="float8" Nullable="true" />
-    <Property Name="Rule_EveryDay" Type="bool" Nullable="false" />
-    <Property Name="Rule_EveryDayOfWeek" Type="int4" Nullable="true" />
-    <Property Name="Rule_EveryMonth" Type="bool" Nullable="false" />
-    <Property Name="Rule_EveryQuater" Type="bool" Nullable="false" />
-    <Property Name="Rule_EveryYear" Type="bool" Nullable="false" />
-    <Property Name="Rule_HoursOffset" Type="float8" Nullable="true" />
-    <Property Name="Rule_MinutesOffset" Type="float8" Nullable="true" />
-    <Property Name="Rule_MonthsOffset" Type="int4" Nullable="true" />
+    <Property Name="Rule_ByDay" Type="varchar" MaxLength="100" Nullable="true" />
+    <Property Name="Rule_ByHour" Type="varchar" MaxLength="100" Nullable="true" />
+    <Property Name="Rule_ByMinute" Type="varchar" MaxLength="100" Nullable="true" />
+    <Property Name="Rule_ByMonth" Type="varchar" MaxLength="100" Nullable="true" />
+    <Property Name="Rule_ByMonthDay" Type="varchar" MaxLength="100" Nullable="true" />
+    <Property Name="Rule_BySecond" Type="varchar" MaxLength="100" Nullable="true" />
+    <Property Name="Rule_BySetPos" Type="varchar" MaxLength="100" Nullable="true" />
+    <Property Name="Rule_ByWeekNumber" Type="varchar" MaxLength="100" Nullable="true" />
+    <Property Name="Rule_ByYearDay" Type="varchar" MaxLength="100" Nullable="true" />
+    <Property Name="Rule_Count" Type="int4" Nullable="true" />
+    <Property Name="Rule_Frequency" Type="int4" Nullable="true" />
+    <Property Name="Rule_Interval" Type="int4" Nullable="true" />
+    <Property Name="Rule_Until" Type="timestamp" Nullable="true" />
+    <Property Name="Rule_WeekStart" Type="int4" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="Relation">
@@ -2227,6 +2420,14 @@
     <Property Name="fk_Owner" Type="int4" />
     <Property Name="Configuration" Type="varchar" Nullable="true" />
     <Property Name="ExportGuid" Type="uuid" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="SecurityChangeRight">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="varchar" MaxLength="200" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="SecurityTestChild">
@@ -2305,7 +2506,6 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_TypeRef" Type="int4" />
     <Property Name="fk_Module" Type="int4" />
     <Property Name="fk_ChangedBy" Type="int4" />
     <Property Name="fk_CreatedBy" Type="int4" />
@@ -2393,6 +2593,27 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int4" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="SyncProvider">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_ChangedBy" Type="int4" />
+    <Property Name="fk_CreatedBy" Type="int4" />
+    <Property Name="ChangedOn" Type="timestamp" Nullable="false" />
+    <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="NextSync" Type="timestamp" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="TagCache">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="Task">
@@ -2508,31 +2729,15 @@
     <Property Name="TPHDerivedBObjs_BString" Type="varchar" MaxLength="100" Nullable="true" />
   </EntityType>
 	
-  <EntityType Name="TypeRef">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_Parent" Type="int4" />
-    <Property Name="fk_Assembly" Type="int4" />
-    <Property Name="fk_ChangedBy" Type="int4" />
-    <Property Name="fk_CreatedBy" Type="int4" />
-    <Property Name="ChangedOn" Type="timestamp" Nullable="false" />
-    <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
-    <Property Name="Deleted" Type="bool" Nullable="true" />
-    <Property Name="ExportGuid" Type="uuid" Nullable="false" />
-    <Property Name="FullName" Type="varchar" MaxLength="200" Nullable="false" />
-    <Property Name="ToStringCache" Type="varchar" MaxLength="1000" Nullable="true" />
-  </EntityType>
-	
   <EntityType Name="ViewDescriptor">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_ControlRef" Type="int4" />
     <Property Name="fk_Module" Type="int4" />
     <Property Name="fk_ControlKind" Type="int4" />
+    <Property Name="ControlTypeRef" Type="varchar" MaxLength="2000" Nullable="true" />
+    <Property Name="Deleted" Type="bool" Nullable="false" />
     <Property Name="ExportGuid" Type="uuid" Nullable="false" />
     <Property Name="Toolkit" Type="int4" Nullable="false" />
   </EntityType>
@@ -2542,15 +2747,16 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_ViewModelRef" Type="int4" />
     <Property Name="fk_DefaultKind" Type="int4" />
     <Property Name="fk_DefaultDisplayKind" Type="int4" />
     <Property Name="fk_DefaultGridCellEditorKind" Type="int4" />
     <Property Name="fk_DefaultGridDisplayKind" Type="int4" />
     <Property Name="fk_DefaultGridCellKind" Type="int4" />
     <Property Name="fk_Module" Type="int4" />
+    <Property Name="Deleted" Type="bool" Nullable="false" />
     <Property Name="Description" Type="varchar" MaxLength="4000" Nullable="false" />
     <Property Name="ExportGuid" Type="uuid" Nullable="false" />
+    <Property Name="ViewModelTypeRef" Type="varchar" MaxLength="2000" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="Visual">
@@ -2600,6 +2806,15 @@
     <Property Name="EasterWorkScheduleRules_Offset" Type="int4" Nullable="true" />
     <Property Name="FixedYearlyWorkScheduleRules_Day" Type="int4" Nullable="true" />
     <Property Name="FixedYearlyWorkScheduleRules_Month" Type="int4" Nullable="true" />
+  </EntityType>
+	
+  <EntityType Name="WorkScheduleSyncProvider">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int4" Nullable="false" />
+    <Property Name="fk_Calendar" Type="int4" />
+    <Property Name="fk_WorkSchedule" Type="int4" />
   </EntityType>
 
   <!-- EntityTypes for all object-object CollectionEntrys with their associations -->
@@ -2676,6 +2891,160 @@
       </Principal>
       <Dependent Role="CollectionEntry">
         <PropertyRef Name="fk_InputProperties" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+	
+  <EntityType Name="CalendarBook_shared_r_Group_RelationEntry">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+	<Property Name="ExportGuid" Type="uuid" Nullable="false" />
+    <Property Name="fk_Calendar" Type="int4" Nullable="true" />
+    <Property Name="fk_GroupReaders" Type="int4" Nullable="true" />
+  </EntityType>
+
+  <!-- A to CollectionEntry -->
+  <Association Name="FK_Calendar_shared_r_GroupReaders_A">
+    <End Role="Calendar" Type="Model.Store.CalendarBook" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.CalendarBook_shared_r_Group_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Calendar">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_Calendar" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+  <!-- B to CollectionEntry -->
+  <Association Name="FK_Calendar_shared_r_GroupReaders_B">
+    <End Role="GroupReaders" Type="Model.Store.Group" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.CalendarBook_shared_r_Group_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GroupReaders">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_GroupReaders" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+	
+  <EntityType Name="CalendarBook_shared_r_Identity_RelationEntry">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Calendar" Type="int4" Nullable="true" />
+    <Property Name="fk_Readers" Type="int4" Nullable="true" />
+  </EntityType>
+
+  <!-- A to CollectionEntry -->
+  <Association Name="FK_Calendar_shared_r_Readers_A">
+    <End Role="Calendar" Type="Model.Store.CalendarBook" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.CalendarBook_shared_r_Identity_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Calendar">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_Calendar" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+  <!-- B to CollectionEntry -->
+  <Association Name="FK_Calendar_shared_r_Readers_B">
+    <End Role="Readers" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.CalendarBook_shared_r_Identity_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Readers">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_Readers" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+	
+  <EntityType Name="CalendarBook_shared_w_Group_RelationEntry">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+	<Property Name="ExportGuid" Type="uuid" Nullable="false" />
+    <Property Name="fk_Calendar" Type="int4" Nullable="true" />
+    <Property Name="fk_GroupWriters" Type="int4" Nullable="true" />
+  </EntityType>
+
+  <!-- A to CollectionEntry -->
+  <Association Name="FK_Calendar_shared_w_GroupWriters_A">
+    <End Role="Calendar" Type="Model.Store.CalendarBook" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.CalendarBook_shared_w_Group_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Calendar">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_Calendar" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+  <!-- B to CollectionEntry -->
+  <Association Name="FK_Calendar_shared_w_GroupWriters_B">
+    <End Role="GroupWriters" Type="Model.Store.Group" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.CalendarBook_shared_w_Group_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GroupWriters">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_GroupWriters" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+	
+  <EntityType Name="CalendarBook_shared_w_Identity_RelationEntry">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Calendar" Type="int4" Nullable="true" />
+    <Property Name="fk_Writers" Type="int4" Nullable="true" />
+  </EntityType>
+
+  <!-- A to CollectionEntry -->
+  <Association Name="FK_Calendar_shared_w_Writers_A">
+    <End Role="Calendar" Type="Model.Store.CalendarBook" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.CalendarBook_shared_w_Identity_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Calendar">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_Calendar" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+  <!-- B to CollectionEntry -->
+  <Association Name="FK_Calendar_shared_w_Writers_B">
+    <End Role="Writers" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.CalendarBook_shared_w_Identity_RelationEntry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Writers">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CollectionEntry">
+        <PropertyRef Name="fk_Writers" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3153,47 +3522,6 @@
   </Association>
 
 	
-  <EntityType Name="TypeRef_hasGenericArguments_TypeRef_RelationEntry">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
-	<Property Name="ExportGuid" Type="uuid" Nullable="false" />
-    <Property Name="fk_TypeRef" Type="int4" Nullable="true" />
-    <Property Name="fk_TypeRef_pos" Type="int4" Nullable="true" />
-    <Property Name="fk_GenericArguments" Type="int4" Nullable="true" />
-    <Property Name="fk_GenericArguments_pos" Type="int4" Nullable="true" />
-  </EntityType>
-
-  <!-- A to CollectionEntry -->
-  <Association Name="FK_TypeRef_hasGenericArguments_GenericArguments_A">
-    <End Role="TypeRef" Type="Model.Store.TypeRef" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.TypeRef_hasGenericArguments_TypeRef_RelationEntry" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TypeRef">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_TypeRef" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-  <!-- B to CollectionEntry -->
-  <Association Name="FK_TypeRef_hasGenericArguments_GenericArguments_B">
-    <End Role="GenericArguments" Type="Model.Store.TypeRef" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.TypeRef_hasGenericArguments_TypeRef_RelationEntry" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="GenericArguments">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_GenericArguments" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-	
   <EntityType Name="IndexConstraint_ensures_unique_on_Property_RelationEntry">
     <Key>
       <PropertyRef Name="ID" />
@@ -3228,45 +3556,6 @@
       </Principal>
       <Dependent Role="CollectionEntry">
         <PropertyRef Name="fk_Properties" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-	
-  <EntityType Name="ViewDescriptor_supports_TypeRef_RelationEntry">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
-	<Property Name="ExportGuid" Type="uuid" Nullable="false" />
-    <Property Name="fk_ViewDescriptor" Type="int4" Nullable="true" />
-    <Property Name="fk_ViewModelTypeRefs" Type="int4" Nullable="true" />
-  </EntityType>
-
-  <!-- A to CollectionEntry -->
-  <Association Name="FK_ViewDescriptor_supports_ViewModelTypeRefs_A">
-    <End Role="ViewDescriptor" Type="Model.Store.ViewDescriptor" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.ViewDescriptor_supports_TypeRef_RelationEntry" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ViewDescriptor">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_ViewDescriptor" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-  <!-- B to CollectionEntry -->
-  <Association Name="FK_ViewDescriptor_supports_ViewModelTypeRefs_B">
-    <End Role="ViewModelTypeRefs" Type="Model.Store.TypeRef" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.ViewDescriptor_supports_TypeRef_RelationEntry" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ViewModelTypeRefs">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_ViewModelTypeRefs" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3715,6 +4004,48 @@
   </Association>
 
 
+  <Association Name="FK_Calendar_has_Owner">
+    <End Role="Owner" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <End Role="Calendar" Type="Model.Store.CalendarBook" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Owner">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Calendar">
+        <PropertyRef Name="fk_Owner" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Calendar_was_ChangedBy">
+    <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <End Role="Calendar" Type="Model.Store.CalendarBook" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChangedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Calendar">
+        <PropertyRef Name="fk_ChangedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Calendar_was_CreatedBy">
+    <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <End Role="Calendar" Type="Model.Store.CalendarBook" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreatedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Calendar">
+        <PropertyRef Name="fk_CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
   <Association Name="FK_Child_allow_Identity">
     <End Role="Identity" Type="Model.Store.Identity" Multiplicity="0..1" />
     <End Role="Child" Type="Model.Store.SecurityTestChild" Multiplicity="*" />
@@ -3729,20 +4060,6 @@
   </Association>
 
 
-  <Association Name="FK_Child_has_Parent">
-    <End Role="Parent" Type="Model.Store.TypeRef" Multiplicity="0..1" />
-    <End Role="Child" Type="Model.Store.TypeRef" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Parent">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Child">
-        <PropertyRef Name="fk_Parent" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
   <Association Name="FK_ChildControlKinds_have_a_Parent">
     <End Role="Parent" Type="Model.Store.ControlKind" Multiplicity="0..1" />
     <End Role="ChildControlKinds" Type="Model.Store.ControlKind" Multiplicity="*" />
@@ -3752,20 +4069,6 @@
       </Principal>
       <Dependent Role="ChildControlKinds">
         <PropertyRef Name="fk_Parent" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_ClrObjectParameter_isOf_Type">
-    <End Role="Type" Type="Model.Store.TypeRef" Multiplicity="0..1" />
-    <End Role="ClrObjectParameter" Type="Model.Store.BaseParameter" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Type">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="ClrObjectParameter">
-        <PropertyRef Name="CLRObjectParameters_fk_Type" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3813,34 +4116,6 @@
   </Association>
 
 
-  <Association Name="FK_Constraint_invokes_GetErrorTextInvocation">
-    <End Role="GetErrorTextInvocation" Type="Model.Store.ConstraintInvocation" Multiplicity="0..1" />
-    <End Role="Constraint" Type="Model.Store.Constraint" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="GetErrorTextInvocation">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Constraint">
-        <PropertyRef Name="InvokingConstraints_fk_GetErrorTextInvocation" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_Constraint_invokes_IsValidInvocation">
-    <End Role="IsValidInvocation" Type="Model.Store.ConstraintInvocation" Multiplicity="0..1" />
-    <End Role="Constraint" Type="Model.Store.Constraint" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="IsValidInvocation">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Constraint">
-        <PropertyRef Name="InvokingConstraints_fk_IsValidInvocation" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
   <Association Name="FK_Constraint_on_Constrained">
     <End Role="Constrained" Type="Model.Store.DataType" Multiplicity="0..1" />
     <End Role="Constraint" Type="Model.Store.InstanceConstraint" Multiplicity="*" />
@@ -3883,20 +4158,6 @@
   </Association>
 
 
-  <Association Name="FK_ConstraintInvocation_has_TypeRef">
-    <End Role="TypeRef" Type="Model.Store.TypeRef" Multiplicity="0..1" />
-    <End Role="ConstraintInvocation" Type="Model.Store.ConstraintInvocation" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TypeRef">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="ConstraintInvocation">
-        <PropertyRef Name="fk_TypeRef" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
   <Association Name="FK_ControlKind_has_Module">
     <End Role="Module" Type="Model.Store.Module" Multiplicity="0..1" />
     <End Role="ControlKind" Type="Model.Store.ControlKind" Multiplicity="*" />
@@ -3906,6 +4167,20 @@
       </Principal>
       <Dependent Role="ControlKind">
         <PropertyRef Name="fk_Module" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_CPObj_has_DefaultViewModelDescriptor">
+    <End Role="DefaultViewModelDescriptor" Type="Model.Store.ViewModelDescriptor" Multiplicity="0..1" />
+    <End Role="CPObj" Type="Model.Store.CompoundObject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DefaultViewModelDescriptor">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CPObj">
+        <PropertyRef Name="fk_DefaultViewModelDescriptor" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -4004,20 +4279,6 @@
       </Principal>
       <Dependent Role="DefaultPropertyValue">
         <PropertyRef Name="fk_CreatedBy" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_Descriptor_has_ViewModelRef">
-    <End Role="ViewModelRef" Type="Model.Store.TypeRef" Multiplicity="0..1" />
-    <End Role="Descriptor" Type="Model.Store.ViewModelDescriptor" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ViewModelRef">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Descriptor">
-        <PropertyRef Name="fk_ViewModelRef" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -4149,6 +4410,48 @@
   </Association>
 
 
+  <Association Name="FK_Event_of_Calendar">
+    <End Role="Calendar" Type="Model.Store.CalendarBook" Multiplicity="0..1" />
+    <End Role="Event" Type="Model.Store.Event" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Calendar">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Event">
+        <PropertyRef Name="fk_Calendar" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Event_was_ChangedBy">
+    <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <End Role="Event" Type="Model.Store.Event" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChangedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Event">
+        <PropertyRef Name="fk_ChangedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_Event_was_CreatedBy">
+    <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <End Role="Event" Type="Model.Store.Event" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreatedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Event">
+        <PropertyRef Name="fk_CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
   <Association Name="FK_File_has_Blob">
     <End Role="Blob" Type="Model.Store.Blob" Multiplicity="0..1" />
     <End Role="File" Type="Model.Store.File" Multiplicity="*" />
@@ -4158,6 +4461,20 @@
       </Principal>
       <Dependent Role="File">
         <PropertyRef Name="fk_Blob" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_File_has_Excerpt">
+    <End Role="File" Type="Model.Store.File" Multiplicity="0..1" />
+    <End Role="Excerpt" Type="Model.Store.Excerpt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="File">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Excerpt">
+        <PropertyRef Name="fk_File" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -5353,20 +5670,6 @@
   </Association>
 
 
-  <Association Name="FK_ServiceDescriptor_describes_a_TypeRef">
-    <End Role="TypeRef" Type="Model.Store.TypeRef" Multiplicity="0..1" />
-    <End Role="ServiceDescriptor" Type="Model.Store.ServiceDescriptor" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TypeRef">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="ServiceDescriptor">
-        <PropertyRef Name="fk_TypeRef" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
   <Association Name="FK_ServiceDescriptor_has_Module">
     <End Role="Module" Type="Model.Store.Module" Multiplicity="0..1" />
     <End Role="ServiceDescriptor" Type="Model.Store.ServiceDescriptor" Multiplicity="*" />
@@ -5591,6 +5894,62 @@
   </Association>
 
 
+  <Association Name="FK_SyncAccount_for_Calendar">
+    <End Role="Calendar" Type="Model.Store.CalendarBook" Multiplicity="0..1" />
+    <End Role="SyncAccount" Type="Model.Store.WorkScheduleSyncProvider" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Calendar">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SyncAccount">
+        <PropertyRef Name="fk_Calendar" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_SyncAccount_of_WorkSchedule">
+    <End Role="WorkSchedule" Type="Model.Store.WorkSchedule" Multiplicity="0..1" />
+    <End Role="SyncAccount" Type="Model.Store.WorkScheduleSyncProvider" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WorkSchedule">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SyncAccount">
+        <PropertyRef Name="fk_WorkSchedule" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_SyncAccount_was_ChangedBy">
+    <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <End Role="SyncAccount" Type="Model.Store.SyncProvider" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChangedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SyncAccount">
+        <PropertyRef Name="fk_ChangedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_SyncAccount_was_CreatedBy">
+    <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <End Role="SyncAccount" Type="Model.Store.SyncProvider" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreatedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SyncAccount">
+        <PropertyRef Name="fk_CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
   <Association Name="FK_Task_was_ChangedBy">
     <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
     <End Role="Task" Type="Model.Store.Task" Multiplicity="*" />
@@ -5647,6 +6006,20 @@
   </Association>
 
 
+  <Association Name="FK_Test_of_Event">
+    <End Role="Event" Type="Model.Store.Event" Multiplicity="0..1" />
+    <End Role="Test" Type="Model.Store.EventTestObject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Event">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Test">
+        <PropertyRef Name="fk_Event" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
   <Association Name="FK_TestObjClass_has_ObjectProp">
     <End Role="ObjectProp" Type="Model.Store.Kunde" Multiplicity="0..1" />
     <End Role="TestObjClass" Type="Model.Store.TestObjClass" Multiplicity="*" />
@@ -5684,62 +6057,6 @@
       </Principal>
       <Dependent Role="TPHBaseObj">
         <PropertyRef Name="fk_CreatedBy" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_TypeRef_has_Assembly">
-    <End Role="Assembly" Type="Model.Store.Assembly" Multiplicity="0..1" />
-    <End Role="TypeRef" Type="Model.Store.TypeRef" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Assembly">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="TypeRef">
-        <PropertyRef Name="fk_Assembly" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_TypeRef_was_ChangedBy">
-    <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <End Role="TypeRef" Type="Model.Store.TypeRef" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ChangedBy">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="TypeRef">
-        <PropertyRef Name="fk_ChangedBy" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_TypeRef_was_CreatedBy">
-    <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <End Role="TypeRef" Type="Model.Store.TypeRef" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="CreatedBy">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="TypeRef">
-        <PropertyRef Name="fk_CreatedBy" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_View_has_ControlRef">
-    <End Role="ControlRef" Type="Model.Store.TypeRef" Multiplicity="0..1" />
-    <End Role="View" Type="Model.Store.ViewDescriptor" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ControlRef">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="View">
-        <PropertyRef Name="fk_ControlRef" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -6019,6 +6336,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_FullTextIndexConstraint_IndexConstraint_ID">
+    <End Role="A_IndexConstraint" Type="Model.Store.IndexConstraint" Multiplicity="1" />
+    <End Role="B_FullTextIndexConstraint" Type="Model.Store.FullTextIndexConstraint" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_IndexConstraint">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_FullTextIndexConstraint">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_GroupMembership_AccessControl_ID">
     <End Role="A_AccessControl" Type="Model.Store.AccessControl" Multiplicity="1" />
     <End Role="B_GroupMembership" Type="Model.Store.GroupMembership" Multiplicity="0..1" />
@@ -6135,6 +6464,18 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="B_StaticFile">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WorkScheduleSyncProvider_SyncProvider_ID">
+    <End Role="A_SyncProvider" Type="Model.Store.SyncProvider" Multiplicity="1" />
+    <End Role="B_WorkScheduleSyncProvider" Type="Model.Store.WorkScheduleSyncProvider" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="A_SyncProvider">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="B_WorkScheduleSyncProvider">
         <PropertyRef Name="ID" />
       </Dependent>
     </ReferentialConstraint>

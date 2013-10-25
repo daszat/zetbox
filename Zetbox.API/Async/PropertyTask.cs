@@ -65,7 +65,7 @@ namespace Zetbox.API.Async
         }
 
         /// <summary>
-        /// Try getting the value. This may return an invalid or out-dated value.
+        /// Try getting the value. This may return an invalid or out-dated value, but does not block.
         /// </summary>
         /// <remarks>
         /// <para>
@@ -96,16 +96,9 @@ namespace Zetbox.API.Async
         /// </summary>
         public void Invalidate()
         {
-            // To avoid subtle race conditions after invalidating a task, we have to ensure that the task has finished before throwing it away.
-            // TODO: instead canceling would provide an easier way: "if (_task != null) _task.Cancel();"
-            try
-            {
-                if (_task != null) _task.Wait();
-            }
-            finally
-            {
-                _task = null;
-            }
+            if (_task != null)
+                _task.Wait();
+            _task = null;
         }
     }
 }

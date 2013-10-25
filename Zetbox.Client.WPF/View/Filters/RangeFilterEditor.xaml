@@ -6,7 +6,8 @@
              xmlns:tk="clr-namespace:Zetbox.Client.WPF.Toolkit;assembly=Zetbox.Client.WPF.Toolkit"
              xmlns:view="clr-namespace:Zetbox.Client.WPF.View.ZetboxBase"
              xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
-             ToolTip="{Binding ToolTip}">
+             ToolTip="{Binding ToolTip}"
+             IsEnabled="{Binding IsEnabled}">
     <!--
     This file is part of zetbox.
 

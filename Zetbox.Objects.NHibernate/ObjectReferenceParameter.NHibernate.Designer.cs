@@ -54,7 +54,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ObjectClass
         // fkBackingName=this.Proxy.ObjectClass; fkGuidBackingName=_fk_guid_ObjectClass;
         // referencedInterface=Zetbox.App.Base.ObjectClass; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -135,6 +135,11 @@ namespace Zetbox.App.Base
 
         /// <summary>Backing store for ObjectClass's guid, used on import only</summary>
         private Guid? _fk_guid_ObjectClass = null;
+
+    public Zetbox.API.Async.ZbTask TriggerFetchObjectClassAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass>(this.ObjectClass);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ObjectClass
 		public static event PropertyGetterHandler<Zetbox.App.Base.ObjectReferenceParameter, Zetbox.App.Base.ObjectClass> OnObjectClass_Getter;
@@ -384,6 +389,17 @@ namespace Zetbox.App.Base
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "ObjectClass":
+                return TriggerFetchObjectClassAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

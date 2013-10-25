@@ -22,5 +22,14 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
+        /// <summary>
+        /// The default ViewModel to use for this Compound Object
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("863dece6-ff86-41c5-82ad-ec520adf6309")]
+        Zetbox.App.GUI.ViewModelDescriptor DefaultViewModelDescriptor {
+            get;
+            set;
+        }
     }
 }

@@ -31,8 +31,14 @@ namespace Zetbox.API
             base.Load(builder);
 
             builder
-                .Register<InterfaceType>((c, p) => InterfaceType.Create(p.Named<Type>("type"), c.Resolve<IInterfaceTypeChecker>()))
-                .InstancePerDependency();
+                .RegisterType<InterfaceType.FactoryImpl>()
+                .InstancePerLifetimeScope();
+
+            // register the FactoryImpl's method as factory
+            // this way the ABI doesn't change
+            builder
+                .Register<InterfaceType.Factory>(c => c.Resolve<InterfaceType.FactoryImpl>().Invoke)
+                .InstancePerLifetimeScope();
 
             builder
                 .Register<LoggingProblemReporter>(c => new LoggingProblemReporter())
@@ -68,12 +74,12 @@ namespace Zetbox.API
                 .SingleInstance();
 
             builder
-                .RegisterType<ZetboxStreamReader>()
+                .RegisterType<ZetboxStreamReader.Factory>()
                 .AsSelf()
                 .InstancePerDependency();
 
             builder
-                .RegisterType<ZetboxStreamWriter>()
+                .RegisterType<ZetboxStreamWriter.Factory>()
                 .AsSelf()
                 .InstancePerDependency();
 

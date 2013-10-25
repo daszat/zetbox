@@ -100,6 +100,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Calendar\CalendarBookActions.cs" />
+    <Compile Include="Calendar\EventActions.cs" />
     <Compile Include="CustomClientActionsModule.cs" />
     <Compile Include="DerivedReportTest\Common\DocumentStyles1.Designer.cs">
       <DependentUpon>DocumentStyles.cst</DependentUpon>
@@ -119,10 +121,10 @@
     <Compile Include="Gui\RangeFilterConfigurationActions.cs" />
     <Compile Include="Gui\SinglePropertyFilterConfigurationActions.cs" />
     <Compile Include="Gui\IconActions.cs" />
+    <Compile Include="ViewModel\TestModule\EventTestInputViewModel.cs" />
     <Compile Include="ZetboxBase\BoolPropertyActions.cs" />
     <Compile Include="ZetboxBase\CalculatedObjectReferencePropertyActions.cs" />
     <Compile Include="ZetboxBase\MethodActions.cs" />
-    <Compile Include="ZetboxBase\IndexConstraintActions.cs" />
     <Compile Include="ZetboxBase\PropertyActions.cs" />
     <Compile Include="ZetboxBase\DataTypeActions.cs" />
     <Compile Include="ZetboxBase\DateTimePropertyActions.cs" />
@@ -141,7 +143,6 @@
     <Compile Include="ZetboxBase\RelationActions.cs" />
     <Compile Include="Projekte\ProjektActions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModel\Projekte\CalendarTaskViewModel.cs" />
     <Compile Include="Projekte\Reporting\Common\DocumentInfo1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -169,7 +170,6 @@
     <Compile Include="Projekte\Reporting\ReportTemplate.cs" />
     <Compile Include="ViewModel\Projekte\ReportScreenViewModel.cs" />
     <Compile Include="ViewModel\Projekte\ShowCalendarNavigationActionViewModel.cs" />
-    <Compile Include="ViewModel\Projekte\CalendarWorkspaceViewModel.cs" />
     <Compile Include="ViewModel\Projekte\TaskViewModel.cs" />
     <None Include="DerivedReportTest\Common\DocumentStyles.cst">
       <Generator>Arebis Template Processor</Generator>

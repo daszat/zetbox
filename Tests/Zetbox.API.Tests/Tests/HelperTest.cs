@@ -388,7 +388,7 @@ namespace Zetbox.API.Tests
         [TestCase("TwoParametersReturnsPrivate", new[] { typeof(string), typeof(string) })]
         public void FindGenericMethod_Private(string methodName, Type[] typeArguments)
         {
-            var result = typeof(FgmTestClass).FindGenericMethod(true, methodName, typeArguments, null);
+            var result = typeof(FgmTestClass).FindGenericMethod(methodName, typeArguments, null, isPrivate: true);
             Assert.That(result, Is.Not.Null);
             Assert.That(result.Name, Is.EqualTo(methodName));
         }

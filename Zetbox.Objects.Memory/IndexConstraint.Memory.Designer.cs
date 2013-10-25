@@ -112,35 +112,45 @@ namespace Zetbox.App.Base
         /// 
         /// </summary>
         // collection entry list property
-   		// Zetbox.Generator.Templates.Properties.CollectionEntryListProperty
-		public ICollection<Zetbox.App.Base.Property> Properties
-		{
-			get
-			{
-				if (_Properties == null)
-				{
+        // BEGIN Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for Properties
+        public ICollection<Zetbox.App.Base.Property> Properties
+        {
+            get
+            {
+                if (_Properties == null)
+                {
                     TriggerFetchPropertiesAsync().Wait();
-				}
-				return (ICollection<Zetbox.App.Base.Property>)_Properties;
-			}
-		}
-        
+                }
+                return (ICollection<Zetbox.App.Base.Property>)_Properties;
+            }
+        }
+
         Zetbox.API.Async.ZbTask _triggerFetchPropertiesTask;
         public Zetbox.API.Async.ZbTask TriggerFetchPropertiesAsync()
         {
             if (_triggerFetchPropertiesTask != null) return _triggerFetchPropertiesTask;
-			_triggerFetchPropertiesTask = Context.FetchRelationAsync<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl>(new Guid("29235ba6-5979-4ed8-8e75-6bd0837c7f28"), RelationEndRole.A, this);
-			_triggerFetchPropertiesTask.OnResult(r => 
+            _triggerFetchPropertiesTask = Context.FetchRelationAsync<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl>(new Guid("29235ba6-5979-4ed8-8e75-6bd0837c7f28"), RelationEndRole.A, this);
+            _triggerFetchPropertiesTask.OnResult(r =>
             {
-                _Properties 
-				= new ObservableBSideCollectionWrapper<Zetbox.App.Base.IndexConstraint, Zetbox.App.Base.Property, Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl>>(
-					this, 
-					new RelationshipFilterASideCollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl>(this.Context, this));
+                _Properties
+                    = new ObservableBSideCollectionWrapper<Zetbox.App.Base.IndexConstraint, Zetbox.App.Base.Property, Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl>>(
+                        this,
+                        new RelationshipFilterASideCollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl>(this.Context, this));
+                        // _Properties.CollectionChanged is managed by OnPropertiesCollectionChanged() and called from the RelationEntry
             });
             return _triggerFetchPropertiesTask;
         }
 
-		private ObservableBSideCollectionWrapper<Zetbox.App.Base.IndexConstraint, Zetbox.App.Base.Property, Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl>> _Properties;
+        internal void OnPropertiesCollectionChanged()
+        {
+            NotifyPropertyChanged("Properties", null, null);
+            if (OnProperties_PostSetter != null && IsAttached)
+                OnProperties_PostSetter(this);
+        }
+
+        private ObservableBSideCollectionWrapper<Zetbox.App.Base.IndexConstraint, Zetbox.App.Base.Property, Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl>> _Properties;
+        // END Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for Properties
+public static event PropertyListChangedHandler<Zetbox.App.Base.IndexConstraint> OnProperties_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.IndexConstraint> OnProperties_IsValid;
 
@@ -335,6 +345,7 @@ namespace Zetbox.App.Base
             base.ReloadReferences();
 
             // fix direct object references
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

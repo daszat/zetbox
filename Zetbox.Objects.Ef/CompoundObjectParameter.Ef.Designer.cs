@@ -53,7 +53,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CompoundObject
         // fkBackingName=_fk_CompoundObject; fkGuidBackingName=_fk_guid_CompoundObject;
         // referencedInterface=Zetbox.App.Base.CompoundObject; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable
 
@@ -134,6 +134,11 @@ namespace Zetbox.App.Base
                 NotifyPropertyChanged("CompoundObject", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchCompoundObjectAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.CompoundObject>(this.CompoundObject);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CompoundObject
@@ -366,6 +371,17 @@ namespace Zetbox.App.Base
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "CompoundObject":
+                return TriggerFetchCompoundObjectAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
@@ -382,6 +398,7 @@ namespace Zetbox.App.Base
                 CompoundObjectImpl = (Zetbox.App.Base.CompoundObjectEfImpl)Context.Find<Zetbox.App.Base.CompoundObject>(_fk_CompoundObject.Value);
             else
                 CompoundObjectImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

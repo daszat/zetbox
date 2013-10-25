@@ -33,7 +33,7 @@ namespace Zetbox.Microsoft
     /// <summary>
     /// Sends MailMessages using Outlook
     /// </summary>
-    public class OutlookMailSender : IMailSender
+    public class OutlookMailSender : IInteractiveMailSender
     {
         private const int E_ABORT = -2147467260;
 
@@ -52,52 +52,62 @@ namespace Zetbox.Microsoft
         {
             if (msg == null) throw new ArgumentNullException("msg");
 
-            Outlook.Application app = new Outlook.Application();
-            var ns = app.GetNamespace("MAPI");
-            ns.Logon();
-
             try
             {
-                var fld = ns.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderOutbox);
-                Outlook.MailItem mail = (Outlook.MailItem)fld.Items.Add();
+                Outlook.Application app = new Outlook.Application();
+                var ns = app.GetNamespace("MAPI");
+                ns.Logon();
 
-                foreach (var to in msg.To)
+                try
                 {
-                    var r = mail.Recipients.Add(to.Address);
-                    r.Type = (int)Outlook.OlMailRecipientType.olTo;
-                }
-                foreach (var to in msg.CC)
-                {
-                    var r = mail.Recipients.Add(to.Address);
-                    r.Type = (int)Outlook.OlMailRecipientType.olCC;
-                }
-                foreach (var to in msg.Bcc)
-                {
-                    var r = mail.Recipients.Add(to.Address);
-                    r.Type = (int)Outlook.OlMailRecipientType.olBCC;
-                }
+                    var fld = ns.GetDefaultFolder(Outlook.OlDefaultFolders.olFolderOutbox);
+                    Outlook.MailItem mail = (Outlook.MailItem)fld.Items.Add();
 
-                mail.Subject = msg.Subject;
-                if (msg.IsBodyHtml)
-                {
-                    mail.HTMLBody = msg.Body;
-                }
-                else
-                {
-                    mail.Body = msg.Body;
-                }
-
-                foreach (var a in msg.Attachments)
-                {
-                    var tmpFile = _tmpService.Create(a.Name);
-                    using (var fs = File.OpenWrite(tmpFile))
+                    foreach (var to in msg.To)
                     {
-                        a.ContentStream.CopyAllTo(fs);
+                        var r = mail.Recipients.Add(to.Address);
+                        r.Type = (int)Outlook.OlMailRecipientType.olTo;
                     }
-                    var olAttachment = mail.Attachments.Add(tmpFile, Type.Missing, Type.Missing, a.Name);
-                }
+                    foreach (var to in msg.CC)
+                    {
+                        var r = mail.Recipients.Add(to.Address);
+                        r.Type = (int)Outlook.OlMailRecipientType.olCC;
+                    }
+                    foreach (var to in msg.Bcc)
+                    {
+                        var r = mail.Recipients.Add(to.Address);
+                        r.Type = (int)Outlook.OlMailRecipientType.olBCC;
+                    }
 
-                mail.Display();
+                    mail.Subject = msg.Subject;
+                    if (!string.IsNullOrWhiteSpace(msg.Body)) // preserve signature
+                    {
+                        if (msg.IsBodyHtml)
+                        {
+                            mail.HTMLBody = msg.Body;
+                        }
+                        else
+                        {
+                            mail.Body = msg.Body;
+                        }
+                    }
+
+                    foreach (var a in msg.Attachments)
+                    {
+                        var tmpFile = _tmpService.Create(a.Name);
+                        using (var fs = File.OpenWrite(tmpFile))
+                        {
+                            a.ContentStream.CopyAllTo(fs);
+                        }
+                        var olAttachment = mail.Attachments.Add(tmpFile, Type.Missing, Type.Missing, a.Name);
+                    }
+
+                    mail.Display();
+                }
+                finally
+                {
+                    ns.Logoff();
+                }
             }
             catch (COMException ex)
             {
@@ -106,10 +116,6 @@ namespace Zetbox.Microsoft
                         ? OutlookMailSenderResources.AbortErrorMessage
                         : OutlookMailSenderResources.GenericErrorMessage,
                     OutlookMailSenderResources.ErrorCaption);
-            }
-            finally
-            {
-                ns.Logoff();
             }
         }
 
@@ -124,6 +130,7 @@ namespace Zetbox.Microsoft
                 builder
                     .RegisterType<OutlookMailSender>()
                     .As<IMailSender>()
+                    .As<IInteractiveMailSender>()
                     .SingleInstance(); // Stateless
             }
         }

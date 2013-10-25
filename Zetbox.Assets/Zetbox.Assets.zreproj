@@ -1,0 +1,1089 @@
+<?xml version='1.0' encoding='utf-8'?>
+<project>
+  <configuration createBackupFiles="False" hideEmptyRows="False" hideTranslatedRows="False" useSpellChecker="True" neutralLanguageCode="en-US" languagesToDisplay="en-US;de">
+    <globalSetting name="Filter-ResourceEditorGrid">&lt;XtraSerializer version="1.0" application="View"&gt;
+  &lt;property name="#LayoutVersion" /&gt;
+  &lt;property name="ActiveFilterString" /&gt;
+&lt;/XtraSerializer&gt;</globalSetting>
+    <globalSetting name="Sort-ResourceEditorGrid">&lt;XtraSerializer version="1.0" application="View"&gt;
+  &lt;property name="#LayoutVersion" /&gt;
+  &lt;property name="SortInfo"&gt;~Xtra#Base64AAEAAAD/////AQAAAAAAAAAMAgAAAF5EZXZFeHByZXNzLlh0cmFHcmlkLnYxMS4xLCBWZXJzaW9uPTExLjEuMTIuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iODhkMTc1NGQ3MDBlNDlhBQEAAAA4RGV2RXhwcmVzcy5YdHJhR3JpZC5Db2x1bW5zLkdyaWRDb2x1bW5Tb3J0SW5mb0NvbGxlY3Rpb24EAAAACmdyb3VwQ291bnQFY2xvbmUPY2xvbmVHcm91cENvdW50E0NvbGxlY3Rpb25CYXNlK2xpc3QAAwADCLMBU3lzdGVtLkNvbGxlY3Rpb25zLkdlbmVyaWMuTGlzdGAxW1tEZXZFeHByZXNzLlh0cmFHcmlkLkNvbHVtbnMuR3JpZENvbHVtblNvcnRJbmZvLCBEZXZFeHByZXNzLlh0cmFHcmlkLnYxMS4xLCBWZXJzaW9uPTExLjEuMTIuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1iODhkMTc1NGQ3MDBlNDlhXV0IHFN5c3RlbS5Db2xsZWN0aW9ucy5BcnJheUxpc3QCAAAAAAAAAAkDAAAAAAAAAAkEAAAABAMAAACzAVN5c3RlbS5Db2xsZWN0aW9ucy5HZW5lcmljLkxpc3RgMVtbRGV2RXhwcmVzcy5YdHJhR3JpZC5Db2x1bW5zLkdyaWRDb2x1bW5Tb3J0SW5mbywgRGV2RXhwcmVzcy5YdHJhR3JpZC52MTEuMSwgVmVyc2lvbj0xMS4xLjEyLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjg4ZDE3NTRkNzAwZTQ5YV1dAwAAAAZfaXRlbXMFX3NpemUIX3ZlcnNpb24EAAAwRGV2RXhwcmVzcy5YdHJhR3JpZC5Db2x1bW5zLkdyaWRDb2x1bW5Tb3J0SW5mb1tdAgAAAAgICQUAAAAAAAAAAAAAAAQEAAAAHFN5c3RlbS5Db2xsZWN0aW9ucy5BcnJheUxpc3QDAAAABl9pdGVtcwVfc2l6ZQhfdmVyc2lvbgUAAAgICQYAAAABAAAABAAAAAcFAAAAAAEAAAAAAAAABC5EZXZFeHByZXNzLlh0cmFHcmlkLkNvbHVtbnMuR3JpZENvbHVtblNvcnRJbmZvAgAAABAGAAAABAAAAAkHAAAADQMMCAAAABlEZXZFeHByZXNzLlh0cmFHcmlkLnYxMS4xBQcAAAAuRGV2RXhwcmVzcy5YdHJhR3JpZC5Db2x1bW5zLkdyaWRDb2x1bW5Tb3J0SW5mbwIAAAAJU29ydE9yZGVyCkNvbHVtbk5hbWUAAQgIAAAAAQAAAAYJAAAAB2NvbE5hbWUL&lt;/property&gt;
+&lt;/XtraSerializer&gt;</globalSetting>
+    <globalSetting name="CreateNewFileForm.prefixTextBox.Text">####</globalSetting>
+    <globalSetting name="CreateNewFileForm.prefixCheckBox.Checked">False</globalSetting>
+    <globalSetting name="CreateNewFileForm.referenceLanguageComboBox.SelectedIndex">0</globalSetting>
+    <globalSetting name="CreateNewFileForm.newLanguageComboBox.SelectedIndex">100</globalSetting>
+    <globalSetting name="CreateNewFileForm.copyTextsCheckBox.Checked">False</globalSetting>
+    <globalSetting name="CreateNewFileForm.automaticallyTranslateCheckBox.Checked">False</globalSetting>
+    <globalSetting name="projectMruItems">&lt;?xml version='1.0' encoding='utf-8'?&gt;&lt;items&gt;&lt;item type="2" checksum="1381320964" /&gt;&lt;/items&gt;</globalSetting>
+    <userSetting name="arthur@DASZ.FindText">
+    </userSetting>
+    <userSetting name="arthur@DASZ.RecentFiles">P:\zetbox\Zetbox.Assets\ZetboxBase\DataTypes.resx;P:\zetbox\Zetbox.Assets\ZetboxBase\DataTypes.de.resx</userSetting>
+    <description>
+    </description>
+  </configuration>
+  <fileGroups>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\CategoryTags.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\CategoryTags.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\DataTypes.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\DataTypes.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <file filePath="ZetboxBase\DataTypes.de.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\DataTypes.de.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Enumerations\Zetbox.App.Base.AccessRights.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Enumerations\Zetbox.App.Base.AccessRights.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Enumerations\Zetbox.App.Base.ContainmentSpecification.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Enumerations\Zetbox.App.Base.ContainmentSpecification.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Enumerations\Zetbox.App.Base.DateTimeStyles.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Enumerations\Zetbox.App.Base.DateTimeStyles.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Enumerations\Zetbox.App.Base.DayOfWeek.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Enumerations\Zetbox.App.Base.DayOfWeek.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Enumerations\Zetbox.App.Base.DeploymentRestriction.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Enumerations\Zetbox.App.Base.DeploymentRestriction.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Enumerations\Zetbox.App.Base.Frequency.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Enumerations\Zetbox.App.Base.Frequency.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Enumerations\Zetbox.App.Base.Multiplicity.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Enumerations\Zetbox.App.Base.Multiplicity.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Enumerations\Zetbox.App.Base.StorageType.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Enumerations\Zetbox.App.Base.StorageType.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Enumerations\Zetbox.App.Base.TableMapping.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Enumerations\Zetbox.App.Base.TableMapping.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Enumerations\Zetbox.App.GUI.HighlightState.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Enumerations\Zetbox.App.GUI.HighlightState.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Enumerations\Zetbox.App.GUI.InstanceListViewMethod.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Enumerations\Zetbox.App.GUI.InstanceListViewMethod.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Enumerations\Zetbox.App.GUI.ListSortDirection.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Enumerations\Zetbox.App.GUI.ListSortDirection.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Enumerations\Zetbox.App.GUI.Toolkit.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Enumerations\Zetbox.App.GUI.Toolkit.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Enumerations\Zetbox.App.GUI.WidthHint.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Enumerations\Zetbox.App.GUI.WidthHint.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Enumerations\Zetbox.App.SchemaMigration.ColumnType.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Enumerations\Zetbox.App.SchemaMigration.ColumnType.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Enumerations\Zetbox.App.SchemaMigration.MappingStatus.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Enumerations\Zetbox.App.SchemaMigration.MappingStatus.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Enumerations\Zetbox.App.Test.TestEnum.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Enumerations\Zetbox.App.Test.TestEnum.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\at.dasz.DocumentManagement.File.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\at.dasz.DocumentManagement.File.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\at.dasz.DocumentManagement.ImportedFile.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\at.dasz.DocumentManagement.ImportedFile.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.Base.AnyReference.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.Base.AnyReference.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.Base.Assembly.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.Base.Assembly.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.Base.BaseParameter.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.Base.BaseParameter.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.Base.Blob.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.Base.Blob.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.Base.Constraint.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.Base.Constraint.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.Base.DataType.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.Base.DataType.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.Base.DateTimeOffset.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.Base.DateTimeOffset.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.Base.DefaultPropertyValue.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.Base.DefaultPropertyValue.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.Base.Enumeration.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.Base.Enumeration.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.Base.EnumerationEntry.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.Base.EnumerationEntry.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.Base.Group.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.Base.Group.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.Base.ICustomFulltextFormat.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.Base.ICustomFulltextFormat.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.Base.IInvocation.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.Base.IInvocation.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.Base.INamedObject.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.Base.INamedObject.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.Base.InstanceConstraint.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.Base.InstanceConstraint.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.Base.Method.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.Base.Method.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.Base.Module.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.Base.Module.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.Base.ObjectClass.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.Base.ObjectClass.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.Base.ObjectReferenceProperty.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.Base.ObjectReferenceProperty.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.Base.Property.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.Base.Property.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.Base.RecurrenceRule.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.Base.RecurrenceRule.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.Base.Relation.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.Base.Relation.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.Base.RelationEnd.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.Base.RelationEnd.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.Base.Sequence.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.Base.Sequence.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.Base.TypeRef.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.Base.TypeRef.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.Calendar.CalendarBook.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.Calendar.CalendarBook.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.Calendar.SyncProvider.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.Calendar.SyncProvider.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.Calendar.WorkSchedule.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.Calendar.WorkSchedule.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.Calendar.WorkScheduleRule.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.Calendar.WorkScheduleRule.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.GUI.ControlKind.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.GUI.ControlKind.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.GUI.FilterConfiguration.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.GUI.FilterConfiguration.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.GUI.Icon.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.GUI.Icon.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.GUI.IRenderer.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.GUI.IRenderer.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.GUI.NavigationEntry.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.GUI.NavigationEntry.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.GUI.TagCache.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.GUI.TagCache.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.GUI.Template.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.GUI.Template.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.GUI.ViewModelDescriptor.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.GUI.ViewModelDescriptor.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.Projekte.Auftrag.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.Projekte.Auftrag.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.Projekte.Mitarbeiter.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.Projekte.Mitarbeiter.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.Projekte.Projekt.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.Projekte.Projekt.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.SchemaMigration.MigrationProject.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.SchemaMigration.MigrationProject.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.SchemaMigration.SourceColumn.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.SchemaMigration.SourceColumn.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.SchemaMigration.SourceTable.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.SchemaMigration.SourceTable.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.Test.ITestInterface.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.Test.ITestInterface.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.Test.MethodTest.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.Test.MethodTest.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.Test.RecurrenceRuleTester.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.Test.RecurrenceRuleTester.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Methods\Zetbox.App.Test.TestObjClass.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Methods\Zetbox.App.Test.TestObjClass.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\at.dasz.DocumentManagement.Document.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\at.dasz.DocumentManagement.Document.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\at.dasz.DocumentManagement.Excerpt.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\at.dasz.DocumentManagement.Excerpt.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\at.dasz.DocumentManagement.File.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\at.dasz.DocumentManagement.File.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\at.dasz.DocumentManagement.FileImportConfiguration.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\at.dasz.DocumentManagement.FileImportConfiguration.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.AbstractModuleMember.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.AbstractModuleMember.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.AccessControl.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.AccessControl.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.AnyReference.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.AnyReference.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.Assembly.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.Assembly.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.AuditEntry.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.AuditEntry.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.BaseParameter.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.BaseParameter.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.Blob.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.Blob.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.BoolDefaultValue.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.BoolDefaultValue.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.BoolProperty.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.BoolProperty.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.CalculatedObjectReferenceProperty.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.CalculatedObjectReferenceProperty.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.CLRObjectParameter.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.CLRObjectParameter.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.CompoundObject.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.CompoundObject.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.CompoundObjectParameter.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.CompoundObjectParameter.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.CompoundObjectProperty.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.CompoundObjectProperty.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.Constraint.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.Constraint.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.CurrentSchema.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.CurrentSchema.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.DataType.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.DataType.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.DateTimeOffset.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.DateTimeOffset.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.DateTimeParameter.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.DateTimeParameter.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.DateTimeProperty.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.DateTimeProperty.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.DateTimeRange.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.DateTimeRange.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.DecimalDefaultValue.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.DecimalDefaultValue.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.DecimalProperty.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.DecimalProperty.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.DefaultPropertyValue.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.DefaultPropertyValue.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.DoubleDefaultValue.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.DoubleDefaultValue.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.EnumDefaultValue.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.EnumDefaultValue.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.Enumeration.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.Enumeration.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.EnumerationEntry.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.EnumerationEntry.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.EnumerationProperty.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.EnumerationProperty.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.EnumParameter.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.EnumParameter.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.ExceptionLogEntry.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.ExceptionLogEntry.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.Group.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.Group.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.GroupMembership.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.GroupMembership.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.IAuditable.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.IAuditable.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.IChangedBy.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.IChangedBy.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.IDeactivatable.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.IDeactivatable.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.Identity.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.Identity.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.IExportable.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.IExportable.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.IInvocation.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.IInvocation.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.IModuleMember.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.IModuleMember.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.IndexConstraint.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.IndexConstraint.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.InstanceConstraint.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.InstanceConstraint.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.IntDefaultValue.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.IntDefaultValue.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.IntegerRangeConstraint.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.IntegerRangeConstraint.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.Method.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.Method.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.Module.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.Module.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.ObjectClass.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.ObjectClass.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.ObjectReferenceParameter.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.ObjectReferenceParameter.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.ObjectReferencePlaceholderProperty.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.ObjectReferencePlaceholderProperty.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.ObjectReferenceProperty.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.ObjectReferenceProperty.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.Property.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.Property.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.RecurrenceRule.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.RecurrenceRule.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.Relation.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.Relation.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.RelationEnd.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.RelationEnd.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.RoleMembership.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.RoleMembership.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.Sequence.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.Sequence.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.SequenceData.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.SequenceData.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.ServiceDescriptor.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.ServiceDescriptor.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.StringDefaultValue.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.StringDefaultValue.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.StringRangeConstraint.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.StringRangeConstraint.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.TypeRef.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.TypeRef.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Base.ValueTypeProperty.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Base.ValueTypeProperty.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Calendar.CalendarBook.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Calendar.CalendarBook.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Calendar.DayOfWeekWorkScheduleRule.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Calendar.DayOfWeekWorkScheduleRule.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Calendar.EasterWorkScheduleRule.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Calendar.EasterWorkScheduleRule.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Calendar.Event.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Calendar.Event.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Calendar.FixedYearlyWorkScheduleRule.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Calendar.FixedYearlyWorkScheduleRule.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Calendar.SyncProvider.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Calendar.SyncProvider.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Calendar.WorkSchedule.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Calendar.WorkSchedule.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Calendar.WorkScheduleRule.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Calendar.WorkScheduleRule.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Calendar.WorkScheduleSyncProvider.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Calendar.WorkScheduleSyncProvider.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.GUI.Application.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.GUI.Application.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.GUI.ControlKind.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.GUI.ControlKind.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.GUI.DateRangeFilterConfiguration.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.GUI.DateRangeFilterConfiguration.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.GUI.FilterConfiguration.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.GUI.FilterConfiguration.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.GUI.Icon.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.GUI.Icon.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.GUI.IRenderer.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.GUI.IRenderer.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.GUI.MonthFilterConfiguration.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.GUI.MonthFilterConfiguration.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.GUI.NavigationEntry.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.GUI.NavigationEntry.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.GUI.NavigationSearchScreen.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.GUI.NavigationSearchScreen.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.GUI.ObjectClassFilterConfiguration.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.GUI.ObjectClassFilterConfiguration.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.GUI.OptionalPredicateFilterConfiguration.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.GUI.OptionalPredicateFilterConfiguration.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.GUI.PropertyFilterConfiguration.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.GUI.PropertyFilterConfiguration.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.GUI.SavedListConfiguration.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.GUI.SavedListConfiguration.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.GUI.TagCache.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.GUI.TagCache.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.GUI.Template.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.GUI.Template.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.GUI.ViewDescriptor.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.GUI.ViewDescriptor.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.GUI.ViewModelDescriptor.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.GUI.ViewModelDescriptor.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.GUI.Visual.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.GUI.Visual.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.GUI.YearFilterConfiguration.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.GUI.YearFilterConfiguration.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Projekte.Auftrag.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Projekte.Auftrag.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Projekte.Kunde.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Projekte.Kunde.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Projekte.Mitarbeiter.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Projekte.Mitarbeiter.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Projekte.Projekt.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Projekte.Projekt.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Projekte.Task.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Projekte.Task.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.SchemaMigration.IMigrationInfo.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.SchemaMigration.IMigrationInfo.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.SchemaMigration.MigrationLog.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.SchemaMigration.MigrationLog.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.SchemaMigration.MigrationProject.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.SchemaMigration.MigrationProject.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.SchemaMigration.SourceColumn.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.SchemaMigration.SourceColumn.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.SchemaMigration.SourceEnum.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.SchemaMigration.SourceEnum.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.SchemaMigration.SourceTable.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.SchemaMigration.SourceTable.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.SchemaMigration.StagingDatabase.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.SchemaMigration.StagingDatabase.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Test.ANewObjectClass.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Test.ANewObjectClass.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Test.Antwort.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Test.Antwort.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Test.AnyReferenceTestObject.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Test.AnyReferenceTestObject.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Test.Company.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Test.Company.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Test.DeactivatableTestObject.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Test.DeactivatableTestObject.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Test.EventTestObject.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Test.EventTestObject.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Test.Fragebogen.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Test.Fragebogen.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Test.ITestInterface.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Test.ITestInterface.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Test.MethodTest.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Test.MethodTest.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Test.Muhblah.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Test.Muhblah.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Test.N_to_M_relations_A.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Test.N_to_M_relations_A.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Test.N_to_M_relations_B.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Test.N_to_M_relations_B.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Test.One_to_N_relations_N.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Test.One_to_N_relations_N.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Test.One_to_N_relations_One.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Test.One_to_N_relations_One.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Test.OrderedNEnd.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Test.OrderedNEnd.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Test.OrderedOneEnd.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Test.OrderedOneEnd.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Test.PropertyBoolTest.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Test.PropertyBoolTest.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Test.PropertyDateTimeTest.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Test.PropertyDateTimeTest.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Test.PropertyDecimalTest.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Test.PropertyDecimalTest.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Test.PropertyDoubleTest.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Test.PropertyDoubleTest.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Test.PropertyEnumTest.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Test.PropertyEnumTest.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Test.PropertyGuidTest.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Test.PropertyGuidTest.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Test.PropertyIntTest.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Test.PropertyIntTest.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Test.PropertyStringTest.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Test.PropertyStringTest.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Test.RecurrenceRuleTester.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Test.RecurrenceRuleTester.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Test.RequiredParent.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Test.RequiredParent.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Test.RequiredParentChild.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Test.RequiredParentChild.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Test.SecurityChangeRight.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Test.SecurityChangeRight.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Test.SecurityTestChild.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Test.SecurityTestChild.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Test.SecurityTestParent.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Test.SecurityTestParent.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Test.TestCustomObject.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Test.TestCustomObject.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Test.TestDecimal.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Test.TestDecimal.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Test.TestObjClass.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Test.TestObjClass.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Test.TestPhoneCompoundObject.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Test.TestPhoneCompoundObject.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Test.TestStudent.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Test.TestStudent.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Test.TPHBaseObj.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Test.TPHBaseObj.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Test.TPHDerivedAObj.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Test.TPHDerivedAObj.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+    <fileGroup name="" projectFolderUniqueID="00000000-0000-0000-0000-000000000000" orderPosition="0" ignoreDuringExportAndImport="False" uniqueID="00000000-0000-0000-0000-000000000000">
+      <file filePath="ZetboxBase\Properties\Zetbox.App.Test.TPHDerivedBObj.resx" absoluteFilePath="P:\zetbox\Zetbox.Assets\ZetboxBase\Properties\Zetbox.App.Test.TPHDerivedBObj.resx" uniqueID="00000000-0000-0000-0000-000000000000" />
+      <remarks>
+      </remarks>
+    </fileGroup>
+  </fileGroups>
+  <projectFolders />
+</project>

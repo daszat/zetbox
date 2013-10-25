@@ -122,7 +122,7 @@ namespace Zetbox.App.Projekte
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Projekte;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable
 
@@ -202,6 +202,11 @@ namespace Zetbox.App.Projekte
                 NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
@@ -308,7 +313,7 @@ namespace Zetbox.App.Projekte
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Projekte;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable
 
@@ -388,6 +393,11 @@ namespace Zetbox.App.Projekte
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
@@ -485,7 +495,7 @@ namespace Zetbox.App.Projekte
         /// EMails des Kunden - können mehrere sein
         /// </summary>
         // value list property
-   		// Zetbox.DalProvider.Ef.Generator.Templates.Properties.ValueCollectionProperty
+        // Zetbox.DalProvider.Ef.Generator.Templates.Properties.ValueCollectionProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -496,32 +506,45 @@ namespace Zetbox.App.Projekte
                 if (_EMails == null)
                 {
                     _EMails = new EfValueCollectionWrapper<Kunde, string, Zetbox.App.Projekte.Kunde_EMails_CollectionEntryEfImpl, EntityCollection<Zetbox.App.Projekte.Kunde_EMails_CollectionEntryEfImpl>>(
-						this.Context,
+                        this.Context,
                         this,
-              			() => { this.NotifyPropertyChanged("EMails", null, null); if(OnEMails_PostSetter != null && IsAttached) OnEMails_PostSetter(this); },
-          	            EMailsImpl);
+                        null, // see GetEMailsImplCollection()
+                        EMailsImpl);
                 }
                 return _EMails;
             }
         }
-        
+
         [EdmRelationshipNavigationProperty("Model", "FK_Kunde_value_EMails", "CollectionEntry")]
         public EntityCollection<Zetbox.App.Projekte.Kunde_EMails_CollectionEntryEfImpl> EMailsImpl
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
+                return GetEMailsImplCollection();
+            }
+        }
+
+        internal EntityCollection<Zetbox.App.Projekte.Kunde_EMails_CollectionEntryEfImpl> GetEMailsImplCollection()
+        {
+            if (_EMailsImplEntityCollection == null)
+            {
+                _EMailsImplEntityCollection = ((IEntityWithRelationships)(this)).RelationshipManager
                     .GetRelatedCollection<Zetbox.App.Projekte.Kunde_EMails_CollectionEntryEfImpl>(
                         "Model.FK_Kunde_value_EMails",
                         "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
+                    && !_EMailsImplEntityCollection.IsLoaded)
                 {
-                    c.Load();
+                    _EMailsImplEntityCollection.Load();
                 }
-                return c;
+                _EMailsImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("EMails", null, null); if (OnEMails_PostSetter != null && IsAttached) OnEMails_PostSetter(this); };
             }
+            return _EMailsImplEntityCollection;
         }
+        private EntityCollection<Zetbox.App.Projekte.Kunde_EMails_CollectionEntryEfImpl> _EMailsImplEntityCollection;
         private EfValueCollectionWrapper<Kunde, string, Zetbox.App.Projekte.Kunde_EMails_CollectionEntryEfImpl, EntityCollection<Zetbox.App.Projekte.Kunde_EMails_CollectionEntryEfImpl>> _EMails;
 public static event PropertyListChangedHandler<Zetbox.App.Projekte.Kunde> OnEMails_PostSetter;
 
@@ -937,6 +960,19 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Kunde> OnEMai
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
@@ -955,6 +991,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Kunde> OnEMai
                 CreatedByImpl = (Zetbox.App.Base.IdentityEfImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
             else
                 CreatedByImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

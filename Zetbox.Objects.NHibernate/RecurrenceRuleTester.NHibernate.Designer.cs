@@ -99,10 +99,6 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanged("Rule", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
                 }
-                else
-                {
-                    SetInitializedProperty("Rule");
-                }
             }
         }
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.CompoundObjectPropertyTemplate
@@ -277,6 +273,15 @@ namespace Zetbox.App.Test
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
@@ -371,7 +376,6 @@ namespace Zetbox.App.Test
         [EventBasedMethod("OnNotifyCreated_RecurrenceRuleTester")]
         public override void NotifyCreated()
         {
-            SetNotInitializedProperty("Rule");
             base.NotifyCreated();
             if (OnNotifyCreated_RecurrenceRuleTester != null) OnNotifyCreated_RecurrenceRuleTester(this);
         }

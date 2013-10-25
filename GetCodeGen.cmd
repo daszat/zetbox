@@ -32,6 +32,8 @@ del /Q .\Zetbox.Objects.Memory\*.*
 
 xcopy /y bin\CodeGen\Zetbox.Objects.Memory\*.* .\Zetbox.Objects.Memory
 
+rem *********** Assets *********** 
+xcopy /y /s bin\CodeGen\Assets\*.* .\Zetbox.Assets
 
 rem *********** Assemblies *********** 
 rem Do not copy assemblies
@@ -40,3 +42,4 @@ rem *********** Build ***********
 rem do not rebuild code as we can't find Arebis
 rem C:\Windows\Microsoft.NET\Framework\v3.5\MSBuild.exe /m Zetbox.Complete.sln
 
+exit /b 0

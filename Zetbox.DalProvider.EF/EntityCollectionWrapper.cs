@@ -248,9 +248,54 @@ namespace Zetbox.DalProvider.Ef
             if (String.IsNullOrEmpty(pointerProperty)) { throw new ArgumentOutOfRangeException("pointerProperty"); }
             if (String.IsNullOrEmpty(positionProperty)) { throw new ArgumentOutOfRangeException("positionProperty"); }
 
+            underlyingCollection.AssociationChanged += new System.ComponentModel.CollectionChangeEventHandler(underlyingCollection_AssociationChanged);
             _pointerProperty = pointerProperty;
             _positionProperty = positionProperty;
             ResetOrderedItems();
+        }
+
+        void underlyingCollection_AssociationChanged(object sender, System.ComponentModel.CollectionChangeEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case System.ComponentModel.CollectionChangeAction.Add:
+                    var element = (TImpl)e.Element;
+                    var idx = GetIndexProperty(element);
+                    if (idx.HasValue && idx != Zetbox.API.Helper.LASTINDEXPOSITION)
+                    {
+                        int targetIdx = -1;
+                        for (int i = 0; i < _orderedItems.Count; i++)
+                        {
+                            var curIdx = GetIndexProperty(_orderedItems[i]);
+                            if (!curIdx.HasValue) continue;
+
+                            if (idx < curIdx.Value)
+                            {
+                                targetIdx = i;
+                                break;
+                            }
+                        }
+                        if (targetIdx == -1)
+                        {
+                            _orderedItems.Add(element);
+                        }
+                        else
+                        {
+                            _orderedItems.Insert(targetIdx, element);
+                        }
+                    }
+                    else
+                    {
+                        _orderedItems.Add(element);
+                    }
+                    break;
+                case System.ComponentModel.CollectionChangeAction.Refresh:
+                    ResetOrderedItems();
+                    break;
+                case System.ComponentModel.CollectionChangeAction.Remove:
+                    _orderedItems.Remove(e.Element);
+                    break;
+            }
         }
 
         private void ResetOrderedItems()
@@ -286,9 +331,15 @@ namespace Zetbox.DalProvider.Ef
         #region ICollection Overrides
         public override void Add(TInterface item)
         {
+            if (_orderedItems.Count == 0)
+            {
+                UpdateIndexProperty(item, 0);
+            }
+            else
+            {
+                UpdateIndexProperty(item, GetIndexProperty(_orderedItems.Last()).Value + 1);
+            }
             base.Add(item);
-            _orderedItems.Add((TImpl)item);
-            UpdateIndexProperty(item, underlyingCollection.Count - 1);
         }
 
         public override void Clear()
@@ -297,8 +348,8 @@ namespace Zetbox.DalProvider.Ef
             {
                 UpdateIndexProperty(i, null);
             }
+            _orderedItems.Clear(); // Do not rely on EF to fire clear event
             base.Clear();
-            _orderedItems.Clear();
         }
 
         public override bool Remove(TInterface item)
@@ -306,7 +357,6 @@ namespace Zetbox.DalProvider.Ef
             var result = base.Remove(item);
             if (result)
             {
-                _orderedItems.Remove((TImpl)item);
                 UpdateIndexProperty(item, null);
             }
             return result;
@@ -329,14 +379,10 @@ namespace Zetbox.DalProvider.Ef
         public void Insert(int index, TInterface item)
         {
             if (item == null)
-            {
-                NotifyOwnerChanging();
-                _orderedItems.Insert(index, null);
-                FixIndices();
-                underlyingCollection.Add(null);
-                NotifyOwnerChanged();
-                return;
-            }
+                throw new NotSupportedException("adding nulls to a zetbox collections is not supported.");
+
+            if (index < 0 || index > _orderedItems.Count)
+                throw new ArgumentOutOfRangeException("index");
 
             var impl = item as TImpl;
             if (impl == null) { throw new ArgumentOutOfRangeException("item", String.Format("item is of wrong type: [{0}] instead of [{1}]", item.GetType().AssemblyQualifiedName, typeof(TImpl).AssemblyQualifiedName)); }
@@ -344,11 +390,49 @@ namespace Zetbox.DalProvider.Ef
             NotifyOwnerChanging();
             NotifyItemChanging(impl);
 
-            // insert item without index and rely on FixIndices
-            // to set the proper index and propagate changes
-            UpdateIndexProperty(item, null);
-            _orderedItems.Insert(index, impl);
+            // fix indices to ensure direct index mapping
+            // should be cheap when nothing has changed
             FixIndices();
+
+            int dbIndex;
+
+            if (_orderedItems.Count == 0)
+            {
+                dbIndex = 0;
+            }
+            else if (index == 0)
+            {
+                if (GetIndexProperty(_orderedItems.First()) == 0)
+                {
+                    UpdateIndexProperty(_orderedItems.First(), 1);
+                    FixIndices();
+                }
+
+                dbIndex = 0;
+            }
+            else if (index == _orderedItems.Count)
+            {
+                dbIndex = GetIndexProperty(_orderedItems.Last()).Value + 1;
+            }
+            else
+            {
+                var targetIdx = GetIndexProperty(_orderedItems[index]).Value;
+                var prevIdx = GetIndexProperty(_orderedItems[index - 1]).Value;
+
+                if (targetIdx - prevIdx == 1)
+                {
+                    UpdateIndexProperty(_orderedItems[index], targetIdx + 1);
+                    FixIndices();
+
+                    dbIndex = targetIdx;
+                }
+                else
+                {
+                    dbIndex = prevIdx + (targetIdx - prevIdx) / 2;
+                }
+            }
+
+            UpdateIndexProperty(item, dbIndex);
             underlyingCollection.Add(impl);
 
             NotifyItemChanged(impl);
@@ -358,7 +442,6 @@ namespace Zetbox.DalProvider.Ef
         public void RemoveAt(int index)
         {
             TInterface item = _orderedItems[index];
-            _orderedItems.RemoveAt(index);
             UpdateIndexProperty(item, null);
             base.Remove(item);
         }

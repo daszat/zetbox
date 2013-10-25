@@ -51,7 +51,7 @@ namespace Zetbox.App.Base
     */
         // object list property
         // object list property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -64,7 +64,7 @@ namespace Zetbox.App.Base
                     _AccessControlList = new EntityCollectionWrapper<Zetbox.App.Base.AccessControl, Zetbox.App.Base.AccessControlEfImpl>(
                             this.Context, AccessControlListImpl,
                             () => this.NotifyPropertyChanging("AccessControlList", null, null),
-                            () => { this.NotifyPropertyChanged("AccessControlList", null, null); if(OnAccessControlList_PostSetter != null && IsAttached) OnAccessControlList_PostSetter(this); },
+                            null, // see GetAccessControlListImplCollection()
                             (item) => item.NotifyPropertyChanging("ObjectClass", null, null),
                             (item) => item.NotifyPropertyChanged("ObjectClass", null, null));
                 }
@@ -77,21 +77,39 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.Base.AccessControlEfImpl>(
-                        "Model.FK_ObjectClass_has_AccessControlList",
-                        "AccessControlList");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetAccessControlListImplCollection();
             }
         }
         private EntityCollectionWrapper<Zetbox.App.Base.AccessControl, Zetbox.App.Base.AccessControlEfImpl> _AccessControlList;
 
+        private EntityCollection<Zetbox.App.Base.AccessControlEfImpl> _AccessControlListImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Base.AccessControlEfImpl> GetAccessControlListImplCollection()
+        {
+            if (_AccessControlListImplEntityCollection == null)
+            {
+                _AccessControlListImplEntityCollection = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Zetbox.App.Base.AccessControlEfImpl>(
+                        "Model.FK_ObjectClass_has_AccessControlList",
+                        "AccessControlList");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_AccessControlListImplEntityCollection.IsLoaded)
+                {
+                    _AccessControlListImplEntityCollection.Load();
+                }
+                _AccessControlListImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("AccessControlList", null, null); if (OnAccessControlList_PostSetter != null && IsAttached) OnAccessControlList_PostSetter(this); };
+            }
+            return _AccessControlListImplEntityCollection;
+        }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchAccessControlListAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.AccessControl>>(this.AccessControlList);
+        }
+
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
 public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAccessControlList_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.ObjectClass> OnAccessControlList_IsValid;
@@ -204,6 +222,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchBaseObjectClassAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass>(this.BaseObjectClass);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for BaseObjectClass
 		public static event PropertyGetterHandler<Zetbox.App.Base.ObjectClass, Zetbox.App.Base.ObjectClass> OnBaseObjectClass_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.ObjectClass, Zetbox.App.Base.ObjectClass> OnBaseObjectClass_PreSetter;
@@ -280,7 +303,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultViewModelDescriptor
         // fkBackingName=_fk_DefaultViewModelDescriptor; fkGuidBackingName=_fk_guid_DefaultViewModelDescriptor;
         // referencedInterface=Zetbox.App.GUI.ViewModelDescriptor; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable
 
@@ -363,6 +386,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchDefaultViewModelDescriptorAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor>(this.DefaultViewModelDescriptor);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultViewModelDescriptor
 		public static event PropertyGetterHandler<Zetbox.App.Base.ObjectClass, Zetbox.App.GUI.ViewModelDescriptor> OnDefaultViewModelDescriptor_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.ObjectClass, Zetbox.App.GUI.ViewModelDescriptor> OnDefaultViewModelDescriptor_PreSetter;
@@ -381,7 +409,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
     */
         // object list property
         // object list property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -394,7 +422,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
                     _FilterConfigurations = new EntityCollectionWrapper<Zetbox.App.GUI.ObjectClassFilterConfiguration, Zetbox.App.GUI.ObjectClassFilterConfigurationEfImpl>(
                             this.Context, FilterConfigurationsImpl,
                             () => this.NotifyPropertyChanging("FilterConfigurations", null, null),
-                            () => { this.NotifyPropertyChanged("FilterConfigurations", null, null); if(OnFilterConfigurations_PostSetter != null && IsAttached) OnFilterConfigurations_PostSetter(this); },
+                            null, // see GetFilterConfigurationsImplCollection()
                             (item) => item.NotifyPropertyChanging("ObjectClass", null, null),
                             (item) => item.NotifyPropertyChanged("ObjectClass", null, null));
                 }
@@ -407,21 +435,39 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.GUI.ObjectClassFilterConfigurationEfImpl>(
-                        "Model.FK_ObjectClass_Has_FilterConfigurations",
-                        "FilterConfigurations");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetFilterConfigurationsImplCollection();
             }
         }
         private EntityCollectionWrapper<Zetbox.App.GUI.ObjectClassFilterConfiguration, Zetbox.App.GUI.ObjectClassFilterConfigurationEfImpl> _FilterConfigurations;
 
+        private EntityCollection<Zetbox.App.GUI.ObjectClassFilterConfigurationEfImpl> _FilterConfigurationsImplEntityCollection;
+        internal EntityCollection<Zetbox.App.GUI.ObjectClassFilterConfigurationEfImpl> GetFilterConfigurationsImplCollection()
+        {
+            if (_FilterConfigurationsImplEntityCollection == null)
+            {
+                _FilterConfigurationsImplEntityCollection = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Zetbox.App.GUI.ObjectClassFilterConfigurationEfImpl>(
+                        "Model.FK_ObjectClass_Has_FilterConfigurations",
+                        "FilterConfigurations");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_FilterConfigurationsImplEntityCollection.IsLoaded)
+                {
+                    _FilterConfigurationsImplEntityCollection.Load();
+                }
+                _FilterConfigurationsImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("FilterConfigurations", null, null); if (OnFilterConfigurations_PostSetter != null && IsAttached) OnFilterConfigurations_PostSetter(this); };
+            }
+            return _FilterConfigurationsImplEntityCollection;
+        }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchFilterConfigurationsAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.GUI.ObjectClassFilterConfiguration>>(this.FilterConfigurations);
+        }
+
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
 public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFilterConfigurations_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.ObjectClass> OnFilterConfigurations_IsValid;
@@ -683,7 +729,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
     */
         // object list property
         // object list property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -696,7 +742,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
                     _SubClasses = new EntityCollectionWrapper<Zetbox.App.Base.ObjectClass, Zetbox.App.Base.ObjectClassEfImpl>(
                             this.Context, SubClassesImpl,
                             () => this.NotifyPropertyChanging("SubClasses", null, null),
-                            () => { this.NotifyPropertyChanged("SubClasses", null, null); if(OnSubClasses_PostSetter != null && IsAttached) OnSubClasses_PostSetter(this); },
+                            null, // see GetSubClassesImplCollection()
                             (item) => item.NotifyPropertyChanging("BaseObjectClass", null, null),
                             (item) => item.NotifyPropertyChanged("BaseObjectClass", null, null));
                 }
@@ -709,21 +755,39 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.Base.ObjectClassEfImpl>(
-                        "Model.FK_BaseObjectClass_has_SubClasses",
-                        "SubClasses");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetSubClassesImplCollection();
             }
         }
         private EntityCollectionWrapper<Zetbox.App.Base.ObjectClass, Zetbox.App.Base.ObjectClassEfImpl> _SubClasses;
 
+        private EntityCollection<Zetbox.App.Base.ObjectClassEfImpl> _SubClassesImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Base.ObjectClassEfImpl> GetSubClassesImplCollection()
+        {
+            if (_SubClassesImplEntityCollection == null)
+            {
+                _SubClassesImplEntityCollection = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Zetbox.App.Base.ObjectClassEfImpl>(
+                        "Model.FK_BaseObjectClass_has_SubClasses",
+                        "SubClasses");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_SubClassesImplEntityCollection.IsLoaded)
+                {
+                    _SubClassesImplEntityCollection.Load();
+                }
+                _SubClassesImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("SubClasses", null, null); if (OnSubClasses_PostSetter != null && IsAttached) OnSubClasses_PostSetter(this); };
+            }
+            return _SubClassesImplEntityCollection;
+        }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchSubClassesAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.ObjectClass>>(this.SubClasses);
+        }
+
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
 public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSubClasses_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.ObjectClass> OnSubClasses_IsValid;
@@ -1398,6 +1462,25 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "AccessControlList":
+                return TriggerFetchAccessControlListAsync();
+            case "BaseObjectClass":
+                return TriggerFetchBaseObjectClassAsync();
+            case "DefaultViewModelDescriptor":
+                return TriggerFetchDefaultViewModelDescriptorAsync();
+            case "FilterConfigurations":
+                return TriggerFetchFilterConfigurationsAsync();
+            case "SubClasses":
+                return TriggerFetchSubClassesAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
@@ -1422,6 +1505,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
                 DefaultViewModelDescriptorImpl = (Zetbox.App.GUI.ViewModelDescriptorEfImpl)Context.Find<Zetbox.App.GUI.ViewModelDescriptor>(_fk_DefaultViewModelDescriptor.Value);
             else
                 DefaultViewModelDescriptorImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

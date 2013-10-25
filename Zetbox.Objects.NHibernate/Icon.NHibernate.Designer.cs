@@ -55,7 +55,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Blob
         // fkBackingName=this.Proxy.Blob; fkGuidBackingName=_fk_guid_Blob;
         // referencedInterface=Zetbox.App.Base.Blob; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -136,6 +136,11 @@ namespace Zetbox.App.GUI
 
         /// <summary>Backing store for Blob's guid, used on import only</summary>
         private Guid? _fk_guid_Blob = null;
+
+    public Zetbox.API.Async.ZbTask TriggerFetchBlobAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Blob>(this.Blob);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Blob
 		public static event PropertyGetterHandler<Zetbox.App.GUI.Icon, Zetbox.App.Base.Blob> OnBlob_Getter;
@@ -286,7 +291,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
         // fkBackingName=this.Proxy.Module; fkGuidBackingName=_fk_guid_Module;
         // referencedInterface=Zetbox.App.Base.Module; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -367,6 +372,11 @@ namespace Zetbox.App.GUI
 
         /// <summary>Backing store for Module's guid, used on import only</summary>
         private Guid? _fk_guid_Module = null;
+
+    public Zetbox.API.Async.ZbTask TriggerFetchModuleAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(this.Module);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
 		public static event PropertyGetterHandler<Zetbox.App.GUI.Icon, Zetbox.App.Base.Module> OnModule_Getter;
@@ -632,6 +642,19 @@ namespace Zetbox.App.GUI
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Blob":
+                return TriggerFetchBlobAsync();
+            case "Module":
+                return TriggerFetchModuleAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

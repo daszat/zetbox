@@ -37,6 +37,7 @@ namespace Zetbox.Client.Presentables
 
     public delegate void DataObjectSelectionTaskCreatedEventHandler(object sender, DataObjectSelectionTaskEventArgs e);
 
+    [ViewModelDescriptor]
     public class DataObjectSelectionTaskViewModel
         : WindowViewModel, IRefreshCommandListener
     {

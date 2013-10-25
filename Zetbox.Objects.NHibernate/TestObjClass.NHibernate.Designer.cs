@@ -166,7 +166,7 @@ namespace Zetbox.App.Test
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ObjectProp
         // fkBackingName=this.Proxy.ObjectProp; fkGuidBackingName=_fk_guid_ObjectProp;
         // referencedInterface=Zetbox.App.Projekte.Kunde; moduleNamespace=Zetbox.App.Test;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -245,6 +245,11 @@ namespace Zetbox.App.Test
         /// <summary>Backing store for ObjectProp's id, used on dehydration only</summary>
         private int? _fk_ObjectProp = null;
 
+
+    public Zetbox.API.Async.ZbTask TriggerFetchObjectPropAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Projekte.Kunde>(this.ObjectProp);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ObjectProp
 		public static event PropertyGetterHandler<Zetbox.App.Test.TestObjClass, Zetbox.App.Projekte.Kunde> OnObjectProp_Getter;
@@ -585,6 +590,17 @@ namespace Zetbox.App.Test
             base.Recalculate(property);
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "ObjectProp":
+                return TriggerFetchObjectPropAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

@@ -48,18 +48,18 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             if (relEnd == null && mdl.IsReadOnly)
             {
                 // could be e.g. a calculated object ref property
-                _allowClear = false;
+                _allowSelectValue = false;
                 _allowCreateNewItem = false;
                 _allowCreateNewItemOnSelect = false;
-                _allowSelectValue = false;
+                _allowClear = false;
             }
             else if (relEnd == null && !mdl.IsReadOnly)
             {
                 // could be e.g. a filter
-                _allowClear = true;
+                _allowSelectValue = true;
                 _allowCreateNewItem = false;
                 _allowCreateNewItemOnSelect = false;
-                _allowSelectValue = true;
+                _allowClear = true;
             }
             else
             {
@@ -69,7 +69,9 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                     var relType = rel.GetRelationType();
                     if (relType == RelationType.one_n && rel.Containment == ContainmentSpecification.Independent)
                     {
-                        _allowCreateNewItem = false; // search first
+                        // search first
+                        _allowSelectValue = true;
+                        _allowCreateNewItem = false;
                         _allowCreateNewItemOnSelect = true;
                     }
                     else if (relType == RelationType.one_one)
@@ -77,12 +79,17 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         if ((rel.Containment == ContainmentSpecification.AContainsB && rel.A == relEnd) ||
                            (rel.Containment == ContainmentSpecification.BContainsA && rel.B == relEnd))
                         {
-                            _allowSelectValue = false; // This end is creating the value, don't change another item
+                            // This end is creating the value, don't change another item
+                            _allowSelectValue = false;
+                            _allowCreateNewItem = true;
                         }
                         else
                         {
-                            _allowCreateNewItem = false; // possibility to change parent, but do not create a new one
-                            _allowCreateNewItemOnSelect = false;
+                            // possibility to change parent, but do not create a new one
+                            // search first
+                            _allowSelectValue = true;
+                            _allowCreateNewItem = false;
+                            _allowCreateNewItemOnSelect = true;
                         }
                     }
                 }
@@ -172,6 +179,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get { return Value == null ? "(null)" : "Reference to " + Value.Name; }
         }
+
         #endregion
 
         #region Commands
@@ -323,6 +331,10 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             {
                 ClearValueCache();
             }
+            else if (e.PropertyName == "HighlightAsync")
+            {
+                OnHighlightChanged();
+            }
             base.OnValueModelPropertyChanged(e);
         }
 
@@ -332,6 +344,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             {
                 case "ValueAsync":
                     OnPropertyChanged("SelectedItems");
+                    OnHighlightChanged();
                     break;
                 case "Value":
                     ClearValueCache();
@@ -343,12 +356,13 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         }
 
         private ZbTask<DataObjectViewModel> _fetchValueTask;
-        protected override ZbTask<DataObjectViewModel> GetValueFromModel()
+        protected override ZbTask<DataObjectViewModel> GetValueFromModelAsync()
         {
             if (_fetchValueTask == null)
             {
                 SetBusy();
                 _fetchValueTask = new ZbTask<DataObjectViewModel>(ValueModel.GetValueAsync());
+                _fetchValueTask.Finally(ClearBusy);
                 // Avoid stackoverflow
                 _fetchValueTask.OnResult(t =>
                 {
@@ -364,7 +378,6 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         OnPropertyChanged("ValueAsync");
                     }
                     t.Result = _valueCache;
-                    ClearBusy();
                 });
             }
 
@@ -398,14 +411,31 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             _valueCache = null;
             _valueCacheInititalized = false;
 
-            // TODO: cancel running task
-            try
+            if (_fetchValueTask != null)
             {
-                if (_fetchValueTask != null) _fetchValueTask.Wait();
+                ClearBusy(); // TODO: Workaround! Cancel should call Finally?
+                _fetchValueTask.Cancel();
             }
-            finally
+            _fetchValueTask = null;
+        }
+
+        public override DataObjectViewModel Value
+        {
+            get
             {
+                return base.Value;
+            }
+            set
+            {
+                if (_fetchValueTask != null)
+                {
+                    ClearBusy(); // TODO: Workaround! Cancel should call Finally?
+                    _fetchValueTask.Cancel();
+                }
+
                 _fetchValueTask = null;
+
+                base.Value = value;
             }
         }
 
@@ -413,8 +443,13 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                GetValueFromModel();
+                GetValueFromModelAsync();
                 return _valueCache;
+            }
+            set
+            {
+                // reuse synchronous setter to await/cancel a potential running fetch task
+                this.Value = value;
             }
         }
         #endregion
@@ -498,7 +533,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         public IQueryable GetUntypedQuery(ObjectClass cls)
         {
-            var mi = this.GetType().FindGenericMethod(true, "GetUntypedQueryHack", new[] { cls.GetDescribedInterfaceType().Type }, new Type[0]);
+            var mi = this.GetType().FindGenericMethod("GetUntypedQueryHack", new[] { cls.GetDescribedInterfaceType().Type }, new Type[0], isPrivate: true);
             return (IQueryable)mi.Invoke(this, new object[0]);
         }
 
@@ -518,12 +553,13 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 return new ZbTask<Tuple<List<ViewModel>, bool>>(new Tuple<List<ViewModel>, bool>(new List<ViewModel>(), false));
             }
 
-            var fetchTask = qry.Take(PossibleValuesLimit + 1).OfType<IDataObject>().ToListAsync();
+            var fetchTask = qry.Take(PossibleValuesLimit + 1).ToListAsync();
 
             var lstTask = new ZbTask<Tuple<List<ViewModel>, bool>>(fetchTask)
                 .OnResult(t =>
                 {
                     var mdlList = fetchTask.Result
+                                .OfType<IDataObject>()
                                 .Take(PossibleValuesLimit)
                                 .Select(i => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), i))
                                 .Cast<ViewModel>()
@@ -685,7 +721,11 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 },
                 createTask: () =>
                 {
-                    return new ZbTask<Highlight>(GetValueFromModel(), () => Value != null && Value.Highlight != Highlight.None ? Value.Highlight : base.Highlight);
+                    var result = new ZbTask<Highlight>(GetValueFromModelAsync());
+                    // This must be done on the UI-Thread
+                    // Accessing any property might trigger accesses to the zetbox context
+                    result.OnResult(t => t.Result = Value != null && Value.Highlight != Highlight.None ? Value.Highlight : base.Highlight);
+                    return result;
                 },
                 set: (Highlight value) =>
                 {

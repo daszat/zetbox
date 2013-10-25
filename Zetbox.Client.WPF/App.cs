@@ -87,10 +87,8 @@ namespace Zetbox.Client.WPF
             return result;
         }
 
-        private IContainer CreateMasterContainer(ZetboxConfig config)
+        protected virtual void ConfigureContainerBuilder(ZetboxConfig config, ContainerBuilder builder)
         {
-            var builder = Zetbox.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Client.Modules);
-
             builder
                 .RegisterType<Launcher>()
                 .SingleInstance();
@@ -100,8 +98,6 @@ namespace Zetbox.Client.WPF
                     p.Named<object>("requestedKind"),
                     c.Resolve<IFrozenContext>()))
                 .InstancePerDependency();
-
-            return builder.Build();
         }
 
         protected override void OnStartup(StartupEventArgs e)
@@ -132,7 +128,6 @@ namespace Zetbox.Client.WPF
             catch (Exception ex)
             {
                 ShowExceptionReporter(ex);
-
                 // unable to start, exit
                 System.Environment.Exit(1);
             }
@@ -148,7 +143,7 @@ namespace Zetbox.Client.WPF
         {
             InitializeSplashScreenImageResource();
 
-            StartupScreen.ShowSplashScreen(Zetbox.Client.Properties.Resources.Startup_Message, Zetbox.Client.Properties.Resources.Startup_InitApp, 6);
+            StartupScreen.ShowSplashScreen(Zetbox.Client.Properties.Resources.Startup_Message, Zetbox.Client.Properties.Resources.Startup_InitApp, 6, config);
             if (config.Server != null && config.Server.StartServer)
             {
                 StartupScreen.SetInfo(Zetbox.Client.Properties.Resources.Startup_Server);
@@ -156,7 +151,9 @@ namespace Zetbox.Client.WPF
                 serverDomain.Start(config);
             }
 
-            container = CreateMasterContainer(config);
+            var builder = Zetbox.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Client.Modules);
+            ConfigureContainerBuilder(config, builder);
+            container = builder.Build();
             API.AppDomainInitializer.InitializeFrom(container);
 
             StartupScreen.SetInfo(Zetbox.Client.Properties.Resources.Startup_Launcher);
@@ -180,7 +177,15 @@ namespace Zetbox.Client.WPF
                 }
                 catch (AuthenticationException)
                 {
-                    MessageBox.Show(WpfToolkitResources.App_InvalidCredentials, WpfToolkitResources.App_InvalidCredentials_Caption, MessageBoxButton.OK, MessageBoxImage.Stop);
+                    // http://stackoverflow.com/questions/576503/how-to-set-wpf-messagebox-owner-to-desktop-window-because-splashscreen-closes-me
+                    // wtf! make messagebox modal
+                    Window temp = new Window() 
+                    { 
+                        Visibility = Visibility.Hidden, 
+                        Topmost = true 
+                    };
+                    temp.Show();
+                    MessageBox.Show(temp, WpfToolkitResources.App_InvalidCredentials, WpfToolkitResources.App_InvalidCredentials_Caption, MessageBoxButton.OK, MessageBoxImage.Stop);
                     Environment.Exit(1);
                 }
             }
@@ -335,25 +340,34 @@ namespace Zetbox.Client.WPF
 
         private static void ShowExceptionReporter(Exception ex)
         {
-            var inner = ex.GetInnerException();
-            Logging.Client.Error("Unhandled Exception", inner);
-            if (inner is InvalidZetboxGeneratedVersionException)
+            try
             {
-                MessageBox.Show(
-                    WpfToolkitResources.InvalidZetboxGeneratedVersionException_Message,
-                    WpfToolkitResources.InvalidZetboxGeneratedVersionException_Title,
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Stop);
+                var inner = ex.GetInnerException();
+                Logging.Client.Error("Unhandled Exception", inner);
+                if (inner is InvalidZetboxGeneratedVersionException)
+                {
+                    MessageBox.Show(
+                        WpfToolkitResources.InvalidZetboxGeneratedVersionException_Message,
+                        WpfToolkitResources.InvalidZetboxGeneratedVersionException_Title,
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Stop);
+                }
+                else if (wpfResourcesInitialized && container != null)
+                {
+                    var vmf = container.Resolve<IViewModelFactory>();
+                    var mdl = vmf.CreateViewModel<ExceptionReporterViewModel.Factory>().Invoke(container.Resolve<IZetboxContext>(), null, ex, container.Resolve<IScreenshotTool>().GetScreenshot());
+                    vmf.ShowDialog(mdl);
+                }
+                else
+                {
+                    MessageBox.Show(ex.ToString(), "Unexpected Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
-            else if (wpfResourcesInitialized && container != null)
+            catch (Exception ex2)
             {
-                var vmf = container.Resolve<IViewModelFactory>();
-                var mdl = vmf.CreateViewModel<ExceptionReporterViewModel.Factory>().Invoke(container.Resolve<IZetboxContext>(), null, ex, container.Resolve<IScreenshotTool>().GetScreenshot());
-                vmf.ShowDialog(mdl);
-            }
-            else
-            {
-                MessageBox.Show(ex.ToString());
+                // uh oh!
+                Logging.Client.Error("Error while handling unhandled Exception", ex2);
+                MessageBox.Show(ex.ToString(), "Unexpected Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

@@ -43,6 +43,7 @@ namespace Zetbox.App.GUI
             : base(lazyCtx) // do not pass proxy to base data object
         {
             this.Proxy = proxy;
+            _isDeletedSet = Proxy.ID > 0;
             _isExportGuidSet = Proxy.ID > 0;
         }
 
@@ -55,7 +56,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultDisplayKind
         // fkBackingName=this.Proxy.DefaultDisplayKind; fkGuidBackingName=_fk_guid_DefaultDisplayKind;
         // referencedInterface=Zetbox.App.GUI.ControlKind; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -137,6 +138,11 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for DefaultDisplayKind's guid, used on import only</summary>
         private Guid? _fk_guid_DefaultDisplayKind = null;
 
+    public Zetbox.API.Async.ZbTask TriggerFetchDefaultDisplayKindAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(this.DefaultDisplayKind);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultDisplayKind
 		public static event PropertyGetterHandler<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ControlKind> OnDefaultDisplayKind_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ControlKind> OnDefaultDisplayKind_PreSetter;
@@ -150,7 +156,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultEditorKind
         // fkBackingName=this.Proxy.DefaultEditorKind; fkGuidBackingName=_fk_guid_DefaultEditorKind;
         // referencedInterface=Zetbox.App.GUI.ControlKind; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -232,6 +238,11 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for DefaultEditorKind's guid, used on import only</summary>
         private Guid? _fk_guid_DefaultEditorKind = null;
 
+    public Zetbox.API.Async.ZbTask TriggerFetchDefaultEditorKindAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(this.DefaultEditorKind);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultEditorKind
 		public static event PropertyGetterHandler<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ControlKind> OnDefaultEditorKind_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ControlKind> OnDefaultEditorKind_PreSetter;
@@ -245,7 +256,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultGridCellDisplayKind
         // fkBackingName=this.Proxy.DefaultGridCellDisplayKind; fkGuidBackingName=_fk_guid_DefaultGridCellDisplayKind;
         // referencedInterface=Zetbox.App.GUI.ControlKind; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -327,6 +338,11 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for DefaultGridCellDisplayKind's guid, used on import only</summary>
         private Guid? _fk_guid_DefaultGridCellDisplayKind = null;
 
+    public Zetbox.API.Async.ZbTask TriggerFetchDefaultGridCellDisplayKindAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(this.DefaultGridCellDisplayKind);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultGridCellDisplayKind
 		public static event PropertyGetterHandler<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ControlKind> OnDefaultGridCellDisplayKind_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ControlKind> OnDefaultGridCellDisplayKind_PreSetter;
@@ -340,7 +356,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultGridCellEditorKind
         // fkBackingName=this.Proxy.DefaultGridCellEditorKind; fkGuidBackingName=_fk_guid_DefaultGridCellEditorKind;
         // referencedInterface=Zetbox.App.GUI.ControlKind; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -422,6 +438,11 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for DefaultGridCellEditorKind's guid, used on import only</summary>
         private Guid? _fk_guid_DefaultGridCellEditorKind = null;
 
+    public Zetbox.API.Async.ZbTask TriggerFetchDefaultGridCellEditorKindAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(this.DefaultGridCellEditorKind);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultGridCellEditorKind
 		public static event PropertyGetterHandler<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ControlKind> OnDefaultGridCellEditorKind_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ControlKind> OnDefaultGridCellEditorKind_PreSetter;
@@ -435,7 +456,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultGridCellPreEditorKind
         // fkBackingName=this.Proxy.DefaultGridCellPreEditorKind; fkGuidBackingName=_fk_guid_DefaultGridCellPreEditorKind;
         // referencedInterface=Zetbox.App.GUI.ControlKind; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -517,12 +538,95 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for DefaultGridCellPreEditorKind's guid, used on import only</summary>
         private Guid? _fk_guid_DefaultGridCellPreEditorKind = null;
 
+    public Zetbox.API.Async.ZbTask TriggerFetchDefaultGridCellPreEditorKindAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(this.DefaultGridCellPreEditorKind);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultGridCellPreEditorKind
 		public static event PropertyGetterHandler<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ControlKind> OnDefaultGridCellPreEditorKind_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ControlKind> OnDefaultGridCellPreEditorKind_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ControlKind> OnDefaultGridCellPreEditorKind_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.ViewModelDescriptor> OnDefaultGridCellPreEditorKind_IsValid;
+
+        /// <summary>
+        /// Indicates that the referenced viewmodel type is deleted. Descriptors with this flag set require action to finally delete them and handle their users.
+        /// </summary>
+
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        public bool Deleted
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = FetchDeletedOrDefault();
+                if (OnDeleted_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<bool>(__result);
+                    OnDeleted_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isDeletedSet = true;
+                if (Proxy.Deleted != value)
+                {
+                    var __oldValue = Proxy.Deleted;
+                    var __newValue = value;
+                    if (OnDeleted_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnDeleted_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("Deleted", __oldValue, __newValue);
+                    Proxy.Deleted = __newValue;
+                    NotifyPropertyChanged("Deleted", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnDeleted_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnDeleted_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("Deleted");
+                }
+            }
+        }
+
+
+        private bool FetchDeletedOrDefault()
+        {
+            var __result = Proxy.Deleted;
+                if (!_isDeletedSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("9c3935a1-2d3f-4d43-b8af-638e323b64c6"));
+                    if (__p != null) {
+                        _isDeletedSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this.Proxy.Deleted = (bool)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'Zetbox.App.GUI.ViewModelDescriptor.Deleted'");
+                    }
+                }
+            return __result;
+        }
+
+        private bool _isDeletedSet = false;
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<Zetbox.App.GUI.ViewModelDescriptor, bool> OnDeleted_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.GUI.ViewModelDescriptor, bool> OnDeleted_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.GUI.ViewModelDescriptor, bool> OnDeleted_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.GUI.ViewModelDescriptor> OnDeleted_IsValid;
 
         /// <summary>
         /// describe this ViewModel
@@ -666,7 +770,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
         // fkBackingName=this.Proxy.Module; fkGuidBackingName=_fk_guid_Module;
         // referencedInterface=Zetbox.App.Base.Module; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -748,6 +852,11 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for Module's guid, used on import only</summary>
         private Guid? _fk_guid_Module = null;
 
+    public Zetbox.API.Async.ZbTask TriggerFetchModuleAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(this.Module);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
 		public static event PropertyGetterHandler<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.Base.Module> OnModule_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.Base.Module> OnModule_PreSetter;
@@ -772,8 +881,8 @@ namespace Zetbox.App.GUI
 							new ProjectedCollection<Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryProxy, Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.SecondaryControlKinds,
                                 p => (Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl>)null);
+                                ce => (Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
+                    _SecondaryControlKinds.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("SecondaryControlKinds", null, null); if(OnSecondaryControlKinds_PostSetter != null && IsAttached) OnSecondaryControlKinds_PostSetter(this); };
                     if (SecondaryControlKinds_was_eagerLoaded) { SecondaryControlKinds_was_eagerLoaded = false; }
 				}
 				return (ICollection<Zetbox.App.GUI.ControlKind>)_SecondaryControlKinds;
@@ -784,102 +893,72 @@ namespace Zetbox.App.GUI
 		// ignored, but required for Serialization
         private bool SecondaryControlKinds_was_eagerLoaded = false;
 
+        public Zetbox.API.Async.ZbTask TriggerFetchSecondaryControlKindsAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.GUI.ControlKind>>(this.SecondaryControlKinds);
+        }
+
+public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescriptor> OnSecondaryControlKinds_PostSetter;
+
         public static event PropertyIsValidHandler<Zetbox.App.GUI.ViewModelDescriptor> OnSecondaryControlKinds_IsValid;
 
         /// <summary>
-        /// The described CLR class&amp;apos; reference
+        /// The described CLR class&apos; Type
         /// </summary>
-        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ViewModelRef
-        // fkBackingName=this.Proxy.ViewModelRef; fkGuidBackingName=_fk_guid_ViewModelRef;
-        // referencedInterface=Zetbox.App.Base.TypeRef; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
-        // PositionStorage=none;
-        // Target exportable; does call events
 
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Zetbox.App.Base.TypeRef ViewModelRef
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        public string ViewModelTypeRef
         {
             get
             {
-                Zetbox.App.Base.TypeRefNHibernateImpl __value = (Zetbox.App.Base.TypeRefNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ViewModelRef);
-
-                if (OnViewModelRef_Getter != null)
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = Proxy.ViewModelTypeRef;
+                if (OnViewModelTypeRef_Getter != null)
                 {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.TypeRef>(__value);
-                    OnViewModelRef_Getter(this, e);
-                    __value = (Zetbox.App.Base.TypeRefNHibernateImpl)e.Result;
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnViewModelTypeRef_Getter(this, __e);
+                    __result = __e.Result;
                 }
-
-                return __value;
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
-
-                // shortcut noop with nulls
-                if (value == null && this.Proxy.ViewModelRef == null)
+                if (Proxy.ViewModelTypeRef != value)
                 {
-                    SetInitializedProperty("ViewModelRef");
-                    return;
-                }
+                    var __oldValue = Proxy.ViewModelTypeRef;
+                    var __newValue = value;
+                    if (OnViewModelTypeRef_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnViewModelTypeRef_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("ViewModelTypeRef", __oldValue, __newValue);
+                    Proxy.ViewModelTypeRef = __newValue;
+                    NotifyPropertyChanged("ViewModelTypeRef", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
 
-                // cache old value to remove inverse references later
-                var __oldValue = (Zetbox.App.Base.TypeRefNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ViewModelRef);
-                var __newValue = (Zetbox.App.Base.TypeRefNHibernateImpl)value;
-
-                // shortcut noop on objects
-                // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
-                if (__oldValue == __newValue)
-                {
-                    SetInitializedProperty("ViewModelRef");
-                    return;
-                }
-
-                // Changing Event fires before anything is touched
-                NotifyPropertyChanging("ViewModelRef", __oldValue, __newValue);
-
-                if (OnViewModelRef_PreSetter != null && IsAttached)
-                {
-                    var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.TypeRef>(__oldValue, __newValue);
-                    OnViewModelRef_PreSetter(this, e);
-                    __newValue = (Zetbox.App.Base.TypeRefNHibernateImpl)e.Result;
-                }
-
-                // next, set the local reference
-                if (__newValue == null)
-                {
-                    this.Proxy.ViewModelRef = null;
+                    if (OnViewModelTypeRef_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnViewModelTypeRef_PostSetter(this, __e);
+                    }
                 }
                 else
                 {
-                    this.Proxy.ViewModelRef = __newValue.Proxy;
-                }
-
-                // everything is done. fire the Changed event
-                NotifyPropertyChanged("ViewModelRef", __oldValue, __newValue);
-                if(IsAttached) UpdateChangedInfo = true;
-
-                if (OnViewModelRef_PostSetter != null && IsAttached)
-                {
-                    var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.TypeRef>(__oldValue, __newValue);
-                    OnViewModelRef_PostSetter(this, e);
+                    SetInitializedProperty("ViewModelTypeRef");
                 }
             }
         }
 
-        /// <summary>Backing store for ViewModelRef's id, used on dehydration only</summary>
-        private int? _fk_ViewModelRef = null;
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<Zetbox.App.GUI.ViewModelDescriptor, string> OnViewModelTypeRef_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.GUI.ViewModelDescriptor, string> OnViewModelTypeRef_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.GUI.ViewModelDescriptor, string> OnViewModelTypeRef_PostSetter;
 
-        /// <summary>Backing store for ViewModelRef's guid, used on import only</summary>
-        private Guid? _fk_guid_ViewModelRef = null;
-
-        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ViewModelRef
-		public static event PropertyGetterHandler<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.Base.TypeRef> OnViewModelRef_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.Base.TypeRef> OnViewModelRef_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.Base.TypeRef> OnViewModelRef_PostSetter;
-
-        public static event PropertyIsValidHandler<Zetbox.App.GUI.ViewModelDescriptor> OnViewModelRef_IsValid;
+        public static event PropertyIsValidHandler<Zetbox.App.GUI.ViewModelDescriptor> OnViewModelTypeRef_IsValid;
 
         /// <summary>
         /// 
@@ -957,15 +1036,16 @@ namespace Zetbox.App.GUI
             var otherImpl = (ViewModelDescriptorNHibernateImpl)obj;
             var me = (ViewModelDescriptor)this;
 
+            me.Deleted = other.Deleted;
             me.Description = other.Description;
             me.ExportGuid = other.ExportGuid;
+            me.ViewModelTypeRef = other.ViewModelTypeRef;
             this._fk_DefaultDisplayKind = otherImpl._fk_DefaultDisplayKind;
             this._fk_DefaultEditorKind = otherImpl._fk_DefaultEditorKind;
             this._fk_DefaultGridCellDisplayKind = otherImpl._fk_DefaultGridCellDisplayKind;
             this._fk_DefaultGridCellEditorKind = otherImpl._fk_DefaultGridCellEditorKind;
             this._fk_DefaultGridCellPreEditorKind = otherImpl._fk_DefaultGridCellPreEditorKind;
             this._fk_Module = otherImpl._fk_Module;
-            this._fk_ViewModelRef = otherImpl._fk_ViewModelRef;
         }
         public override void SetNew()
         {
@@ -1030,15 +1110,6 @@ namespace Zetbox.App.GUI
                         NotifyPropertyChanged("Module", __oldValue, __newValue);
                     }
                     break;
-                case "ViewModelRef":
-                    {
-                        var __oldValue = (Zetbox.App.Base.TypeRefNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.ViewModelRef);
-                        var __newValue = (Zetbox.App.Base.TypeRefNHibernateImpl)parentObj;
-                        NotifyPropertyChanging("ViewModelRef", __oldValue, __newValue);
-                        this.Proxy.ViewModelRef = __newValue == null ? null : __newValue.Proxy;
-                        NotifyPropertyChanged("ViewModelRef", __oldValue, __newValue);
-                    }
-                    break;
                 default:
                     base.UpdateParent(propertyName, parentObj);
                     break;
@@ -1058,10 +1129,11 @@ namespace Zetbox.App.GUI
                 case "DefaultGridCellDisplayKind":
                 case "DefaultGridCellEditorKind":
                 case "DefaultGridCellPreEditorKind":
+                case "Deleted":
                 case "Description":
                 case "ExportGuid":
                 case "Module":
-                case "ViewModelRef":
+                case "ViewModelTypeRef":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }
@@ -1078,6 +1150,29 @@ namespace Zetbox.App.GUI
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "DefaultDisplayKind":
+                return TriggerFetchDefaultDisplayKindAsync();
+            case "DefaultEditorKind":
+                return TriggerFetchDefaultEditorKindAsync();
+            case "DefaultGridCellDisplayKind":
+                return TriggerFetchDefaultGridCellDisplayKindAsync();
+            case "DefaultGridCellEditorKind":
+                return TriggerFetchDefaultGridCellEditorKindAsync();
+            case "DefaultGridCellPreEditorKind":
+                return TriggerFetchDefaultGridCellPreEditorKindAsync();
+            case "Module":
+                return TriggerFetchModuleAsync();
+            case "SecondaryControlKinds":
+                return TriggerFetchSecondaryControlKindsAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {
@@ -1135,14 +1230,6 @@ namespace Zetbox.App.GUI
                 this.Module = ((Zetbox.App.Base.ModuleNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Module>(_fk_Module.Value));
             else
                 this.Module = null;
-
-            if (_fk_guid_ViewModelRef.HasValue)
-                this.ViewModelRef = ((Zetbox.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.TypeRef>(_fk_guid_ViewModelRef.Value));
-            else
-            if (_fk_ViewModelRef.HasValue)
-                this.ViewModelRef = ((Zetbox.App.Base.TypeRefNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.TypeRef>(_fk_ViewModelRef.Value));
-            else
-                this.ViewModelRef = null;
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();
@@ -1203,6 +1290,15 @@ namespace Zetbox.App.GUI
                         (obj, val) => obj.DefaultGridCellPreEditorKind = val,
 						obj => OnDefaultGridCellPreEditorKind_IsValid), 
                     // else
+                    new PropertyDescriptorNHibernateImpl<ViewModelDescriptor, bool>(
+                        lazyCtx,
+                        new Guid("9c3935a1-2d3f-4d43-b8af-638e323b64c6"),
+                        "Deleted",
+                        null,
+                        obj => obj.Deleted,
+                        (obj, val) => obj.Deleted = val,
+						obj => OnDeleted_IsValid), 
+                    // else
                     new PropertyDescriptorNHibernateImpl<ViewModelDescriptor, string>(
                         lazyCtx,
                         new Guid("93e25648-50f9-40d8-8753-e5dadab68e1d"),
@@ -1239,14 +1335,14 @@ namespace Zetbox.App.GUI
                         null, // lists are read-only properties
                         obj => OnSecondaryControlKinds_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<ViewModelDescriptor, Zetbox.App.Base.TypeRef>(
+                    new PropertyDescriptorNHibernateImpl<ViewModelDescriptor, string>(
                         lazyCtx,
-                        new Guid("554288d1-f5f4-4b22-908b-01525a1d0f9b"),
-                        "ViewModelRef",
+                        new Guid("b3cae453-e222-4d24-b6f5-47f47550ad7a"),
+                        "ViewModelTypeRef",
                         null,
-                        obj => obj.ViewModelRef,
-                        (obj, val) => obj.ViewModelRef = val,
-						obj => OnViewModelRef_IsValid), 
+                        obj => obj.ViewModelTypeRef,
+                        (obj, val) => obj.ViewModelTypeRef = val,
+						obj => OnViewModelTypeRef_IsValid), 
                     // position columns
                 };
             }
@@ -1294,6 +1390,7 @@ namespace Zetbox.App.GUI
         [EventBasedMethod("OnNotifyPreSave_ViewModelDescriptor")]
         public override void NotifyPreSave()
         {
+            FetchDeletedOrDefault();
             FetchExportGuidOrDefault();
             base.NotifyPreSave();
             if (OnNotifyPreSave_ViewModelDescriptor != null) OnNotifyPreSave_ViewModelDescriptor(this);
@@ -1318,7 +1415,7 @@ namespace Zetbox.App.GUI
             SetNotInitializedProperty("DefaultGridCellPreEditorKind");
             SetNotInitializedProperty("Description");
             SetNotInitializedProperty("Module");
-            SetNotInitializedProperty("ViewModelRef");
+            SetNotInitializedProperty("ViewModelTypeRef");
             base.NotifyCreated();
             if (OnNotifyCreated_ViewModelDescriptor != null) OnNotifyCreated_ViewModelDescriptor(this);
         }
@@ -1331,11 +1428,7 @@ namespace Zetbox.App.GUI
             if (OnNotifyDeleting_ViewModelDescriptor != null) OnNotifyDeleting_ViewModelDescriptor(this);
 
             // should fetch && remember parent for Application_opens_a_ViewModelDescriptor_RelationEntry
-            // FK_Descriptor_has_ViewModelRef
-            if (ViewModelRef != null) {
-                ((NHibernatePersistenceObject)ViewModelRef).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)ViewModelRef);
-            }
+            // should fetch && remember parent for CompoundObject_has_ViewModelDescriptor_RelationEntry
             // should fetch && remember parent for FilterConfiguration_has_ViewModelDescriptor_RelationEntry
             // FK_Presentable_has_DefaultKind
             if (DefaultEditorKind != null) {
@@ -1379,7 +1472,6 @@ namespace Zetbox.App.GUI
             DefaultGridCellEditorKind = null;
             DefaultGridCellPreEditorKind = null;
             Module = null;
-            ViewModelRef = null;
         }
         public static event ObjectEventHandler<ViewModelDescriptor> OnNotifyDeleting_ViewModelDescriptor;
 
@@ -1408,6 +1500,8 @@ namespace Zetbox.App.GUI
 
             public virtual Zetbox.App.GUI.ControlKindNHibernateImpl.ControlKindProxy DefaultGridCellPreEditorKind { get; set; }
 
+            public virtual bool Deleted { get; set; }
+
             public virtual string Description { get; set; }
 
             public virtual Guid ExportGuid { get; set; }
@@ -1416,7 +1510,7 @@ namespace Zetbox.App.GUI
 
             public virtual ICollection<Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryProxy> SecondaryControlKinds { get; set; }
 
-            public virtual Zetbox.App.Base.TypeRefNHibernateImpl.TypeRefProxy ViewModelRef { get; set; }
+            public virtual string ViewModelTypeRef { get; set; }
 
         }
 
@@ -1435,13 +1529,17 @@ namespace Zetbox.App.GUI
             binStream.Write(this.Proxy.DefaultGridCellDisplayKind != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultGridCellDisplayKind) : (int?)null);
             binStream.Write(this.Proxy.DefaultGridCellEditorKind != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultGridCellEditorKind) : (int?)null);
             binStream.Write(this.Proxy.DefaultGridCellPreEditorKind != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultGridCellPreEditorKind) : (int?)null);
+            binStream.Write(this._isDeletedSet);
+            if (this._isDeletedSet) {
+                binStream.Write(this.Proxy.Deleted);
+            }
             binStream.Write(this.Proxy.Description);
             binStream.Write(this._isExportGuidSet);
             if (this._isExportGuidSet) {
                 binStream.Write(this.Proxy.ExportGuid);
             }
             binStream.Write(this.Proxy.Module != null ? OurContext.GetIdFromProxy(this.Proxy.Module) : (int?)null);
-            binStream.Write(this.Proxy.ViewModelRef != null ? OurContext.GetIdFromProxy(this.Proxy.ViewModelRef) : (int?)null);
+            binStream.Write(this.Proxy.ViewModelTypeRef);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -1455,13 +1553,17 @@ namespace Zetbox.App.GUI
             binStream.Read(out this._fk_DefaultGridCellDisplayKind);
             binStream.Read(out this._fk_DefaultGridCellEditorKind);
             binStream.Read(out this._fk_DefaultGridCellPreEditorKind);
+            this._isDeletedSet = binStream.ReadBoolean();
+            if (this._isDeletedSet) {
+                this.Proxy.Deleted = binStream.ReadBoolean();
+            }
             this.Proxy.Description = binStream.ReadString();
             this._isExportGuidSet = binStream.ReadBoolean();
             if (this._isExportGuidSet) {
                 this.Proxy.ExportGuid = binStream.ReadGuid();
             }
             binStream.Read(out this._fk_Module);
-            binStream.Read(out this._fk_ViewModelRef);
+            this.Proxy.ViewModelTypeRef = binStream.ReadString();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
@@ -1480,9 +1582,11 @@ namespace Zetbox.App.GUI
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.DefaultGridCellDisplayKind != null ? this.Proxy.DefaultGridCellDisplayKind.ExportGuid : (Guid?)null, xml, "DefaultGridCellDisplayKind", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.DefaultGridCellEditorKind != null ? this.Proxy.DefaultGridCellEditorKind.ExportGuid : (Guid?)null, xml, "DefaultGridCellEditorKind", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.DefaultGridCellPreEditorKind != null ? this.Proxy.DefaultGridCellPreEditorKind.ExportGuid : (Guid?)null, xml, "DefaultGridCellPreEditorKind", "Zetbox.App.GUI");
+            System.Diagnostics.Debug.Assert(this._isDeletedSet, "Exported objects need to have all default values evaluated");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.Deleted, xml, "Deleted", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.Description, xml, "Description", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.Module != null ? this.Proxy.Module.ExportGuid : (Guid?)null, xml, "Module", "Zetbox.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.ViewModelRef != null ? this.Proxy.ViewModelRef.ExportGuid : (Guid?)null, xml, "ViewModelRef", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.ViewModelTypeRef, xml, "ViewModelTypeRef", "Zetbox.App.GUI");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -1505,6 +1609,11 @@ namespace Zetbox.App.GUI
             case "Zetbox.App.GUI|DefaultGridCellPreEditorKind":
                 this._fk_guid_DefaultGridCellPreEditorKind = XmlStreamer.ReadNullableGuid(xml);
                 break;
+            case "Zetbox.App.GUI|Deleted":
+                // Import must have default value set
+                this.Proxy.Deleted = XmlStreamer.ReadBoolean(xml);
+                this._isDeletedSet = true;
+                break;
             case "Zetbox.App.GUI|Description":
                 this.Proxy.Description = XmlStreamer.ReadString(xml);
                 break;
@@ -1516,8 +1625,8 @@ namespace Zetbox.App.GUI
             case "Zetbox.App.GUI|Module":
                 this._fk_guid_Module = XmlStreamer.ReadNullableGuid(xml);
                 break;
-            case "Zetbox.App.GUI|ViewModelRef":
-                this._fk_guid_ViewModelRef = XmlStreamer.ReadNullableGuid(xml);
+            case "Zetbox.App.GUI|ViewModelTypeRef":
+                this.Proxy.ViewModelTypeRef = XmlStreamer.ReadString(xml);
                 break;
             }
         }

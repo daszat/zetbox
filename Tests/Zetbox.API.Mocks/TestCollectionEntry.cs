@@ -31,7 +31,7 @@ namespace Zetbox.API.Mocks
         /// <summary>
         /// Reflects the current access rights by the current Identity. 
         /// </summary>
-        public AccessRights CurrentAccessRights { get { return Zetbox.API.AccessRights.Full; } }
+        public AccessRights CurrentAccessRights { get { return Zetbox.API.AccessRights.FullInstance; } }
 
         public Guid RelationID { get { return Guid.NewGuid(); } }
         public IDataObject AObject { get; set; }
@@ -97,7 +97,6 @@ namespace Zetbox.API.Mocks
         public event PropertyChangeWithValueEventHandler PropertyChangedWithValue;
         public event PropertyChangeWithValueEventHandler PropertyChangingWithValue;
 
-
         public void NotifyPropertyChanged(string property, object oldValue, object newValue)
         {
             if (PropertyChanged != null)
@@ -150,7 +149,6 @@ namespace Zetbox.API.Mocks
             this.ID = obj.ID;
         }
 
-
         public DataObjectState ObjectState
         {
             get
@@ -162,6 +160,19 @@ namespace Zetbox.API.Mocks
                 throw new NotImplementedException();
             }
         }
+
+        #region Lifecycle Events
+
+        /// <summary>
+        /// Fires an Event after an Object is created.
+        /// </summary>
+        public virtual void NotifyCreated() { }
+        /// <summary>
+        /// Fires an Event before an Object is deleted.
+        /// </summary>
+        public virtual void NotifyDeleting() { }
+
+        #endregion
 
         #region IPersistenceObject Members
 

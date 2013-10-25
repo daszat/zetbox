@@ -163,6 +163,15 @@ namespace Zetbox.API.Server
             {
                 ResetProvider();
 
+                // detect projections to (anonymous) generic types referencing business objects
+                if (typeof(T).IsGenericType
+                    && typeof(T).GetGenericArguments()
+                        .SelectMany(argument => argument.AndChildren(t => t.IsGenericType ? t.GetGenericArguments() : new Type[] { }))
+                        .Any(t => typeof(IPersistenceObject).IsAssignableFrom(t)))
+                {
+                    throw new NotSupportedException("Projecting to anonymous type with IPersistenceObject members not yet supported.");
+                }
+
                 using (Logging.Linq.DebugTraceMethodCall("ExecuteEnumerable"))
                 {
                     if (Logging.Linq.IsInfoEnabled)
@@ -203,115 +212,255 @@ namespace Zetbox.API.Server
             WithDeactivated = false;
             _Parameter = new Dictionary<ParameterExpression, ParameterExpression>();
         }
+
         #endregion
 
         #region Visits
+
         protected override Expression VisitMethodCall(MethodCallExpression m)
         {
-            if (m.IsMethodCallExpression("WithDeactivated", typeof(ZetboxContextQueryableExtensions)))
-            {
-                // save for future use
-                WithDeactivated = true;
-            }
-
-            Expression objExp = base.Visit(m.Object);
-            MethodInfo newMethod = GetMethodInfo(m.Method);
-            ReadOnlyCollection<Expression> args = base.VisitExpressionList(m.Arguments);
             if (m.IsMethodCallExpression("Cast"))
             {
-                // Throw away unneeded casts - no database will handle that
-                // Note: Cast != OfType
-                return args.Single();
+                // Throw away casts, either it is redundant, then we don't need it, or it is wrong, then we'll fail in translation or in the database anyways.
+                return Visit(m.Arguments.Single());
             }
             else if (m.IsMethodCallExpression("WithEagerLoading", typeof(ZetboxContextQueryableExtensions)))
             {
                 // Eager Loading is done automatically on the server - ignore and continue
-                return args.Single();
+                return Visit(m.Arguments.Single());
             }
             else if (m.IsMethodCallExpression("WithDeactivated", typeof(ZetboxContextQueryableExtensions)))
             {
-                // already saved, remove from tree
-                return args.Single();
+                // save for future use
+                WithDeactivated = true;
+                return Visit(m.Arguments.Single());
             }
-            else if (m.IsMethodCallExpression("OrderBy") || m.IsMethodCallExpression("OrderByDescending") || m.IsMethodCallExpression("ThenBy") || m.IsMethodCallExpression("ThenByDescending"))
+            else if (m.IsMethodCallExpression("OfType"))
             {
-                var lambda = (LambdaExpression)args.Skip(1).Single().StripQuotes();
-                if (lambda.Body.Type.IsICompoundObject())
+                var source = Visit(m.Arguments.Single());
+                source = Expression.Call(null, GetMethodInfo(m.Method), source);
+
+                var type = source.Type.FindElementTypes().Single(t => t != typeof(object));
+                return AddFilter(source, Ctx.GetImplementationType(type).ToInterfaceType());
+            }
+            // Methods requiring special translation
+            else if (m.Method.DeclaringType == typeof(Queryable) && m.Method.GetParameters().Length > 1)
+            {
+                var source = Visit(m.Arguments[0]);
+                // unpack IQueryable<T>
+                var sourceType = source.Type.GetGenericArguments().Single();
+
+                switch (m.Method.Name)
                 {
-                    var cpDef = MetaDataResolver.GetCompoundObject(Ctx.GetImplementationType(lambda.Body.Type).ToInterfaceType());
-                    if (cpDef == null) throw new InvalidOperationException("cannot resolve CompoundObject type: " + lambda.Body.Type.AssemblyQualifiedName);
+                    case "All": // bool All<TSource>(this IQueryable<TSource> source, Expression<Func<TSource, bool>> predicate)
+                    case "Any": // bool Any<TSource>(this IQueryable<TSource> source, Expression<Func<TSource, bool>> predicate);
+                    case "Count": // Count<TSource>(this IQueryable<TSource> source, Expression<Func<TSource, bool>> predicate);
+                    case "First": // First<TSource>(this IQueryable<TSource> source, Expression<Func<TSource, bool>> predicate);
+                    case "FirstOrDefault": // FirstOrDefault<TSource>(this IQueryable<TSource> source, Expression<Func<TSource, bool>> predicate);
+                    case "Last": // Last<TSource>(this IQueryable<TSource> source, Expression<Func<TSource, bool>> predicate);
+                    case "LastOrDefault": // LastOrDefault<TSource>(this IQueryable<TSource> source, Expression<Func<TSource, bool>> predicate);
+                    case "LongCount": // LongCount<TSource>(this IQueryable<TSource> source, Expression<Func<TSource, bool>> predicate);
+                    case "Single": // Single<TSource>(this IQueryable<TSource> source, Expression<Func<TSource, bool>> predicate);
+                    case "SingleOrDefault": // SingleOrDefault<TSource>(this IQueryable<TSource> source, Expression<Func<TSource, bool>> predicate);
 
-                    var sourceType = args.First().Type.GetGenericArguments()[0];
-                    var param = lambda.Parameters.Single();
-                    bool isOrderBy = m.IsMethodCallExpression("OrderBy") || m.IsMethodCallExpression("OrderByDescending");
-                    bool isAsc = m.IsMethodCallExpression("OrderBy") || m.IsMethodCallExpression("ThenBy");
-                    var result = args.First();
-                    foreach (var prop in cpDef.Properties)
-                    {
-                        var propType = prop.IsNullable() ? typeof(Nullable<>).MakeGenericType(prop.GetPropertyType()) : prop.GetPropertyType();
-                        var newOrderByLambda = Expression.Quote(
-                            Expression.Lambda(
-                                Expression.MakeMemberAccess(lambda.Body, lambda.Body.Type.GetProperty(prop.Name)),
-                                param)
-                        );
+                    case "SkipWhile": // SkipWhile<TSource>(this IQueryable<TSource> source, Expression<Func<TSource, bool>> predicate);
+                    // case "SkipWhile": // SkipWhile<TSource>(this IQueryable<TSource> source, Expression<Func<TSource, int, bool>> predicate);
+                    case "TakeWhile": // TakeWhile<TSource>(this IQueryable<TSource> source, Expression<Func<TSource, bool>> predicate);
+                    // case "TakeWhile": // TakeWhile<TSource>(this IQueryable<TSource> source, Expression<Func<TSource, int, bool>> predicate);
+                    case "Where": // Where<TSource>(this IQueryable<TSource> source, Expression<Func<TSource, bool>> predicate);
+                    // case "Where": // Where<TSource>(this IQueryable<TSource> source, Expression<Func<TSource, int, bool>> predicate);
 
-                        var sortExpression = Expression.Call(
-                            typeof(Queryable),
-                            isOrderBy
-                                ? (isAsc ? "OrderBy" : "OrderByDescending")
-                                : (isAsc ? "ThenBy" : "ThenByDescending"),
-                            new Type[] { sourceType, propType }, // CP-Objects can only contain value properties, until nested CP-Objects are implemented correctly
-                            result,
-                            newOrderByLambda);
+                    case "Average": // Average<TSource>(this IQueryable<TSource> source, Expression<Func<TSource, (decimal?|decimal|double?|double|float?|float|int?|int|long?|long)>> selector); 
+                    case "Sum": // Sum<TSource>(this IQueryable<TSource> source, Expression<Func<TSource, (decimal?|decimal|double?|double|float?|float|int?|int|long?|long)>> selector);
+                        if (m.Arguments.Count > 2)
+                        {
+                            throw new InvalidOperationException(string.Format("Cannot translate Queryable.{0} call with custom comparer", m.Method.Name));
+                        }
+                        else
+                        {
+                            var newPredicate = VisitQueryArgument(m.Arguments[1], sourceType);
 
-                        result = sortExpression;
-                        isOrderBy = false;
-                    }
+                            // the number of generic arguments to the predicate
+                            var predicateArgCount = ExtractArgCount(newPredicate.Type);
 
-                    return result;
-                }
-                else
-                {
-                    return Expression.Call(objExp, newMethod, args);
+                            MethodInfo newMethod = typeof(Queryable).GetMethods()
+                                   .Single(mi => mi.Name == m.Method.Name
+                                       && mi.GetParameters().Length == 2
+                                       && ExtractArgCount(mi.GetParameters()[1].ParameterType.GetGenericArguments().Single()) == predicateArgCount
+                                       && mi.GetParameters()[1].ParameterType.GetGenericArguments().Single().GetGenericArguments()[1] == newPredicate.Type.GetGenericArguments()[1])
+                                   .MakeGenericMethod(sourceType);
+
+                            return Expression.Call(null, newMethod, new[] { source, newPredicate });
+                        }
+
+                    case "Skip": // Skip<TSource>(this IQueryable<TSource> source, int count);
+                    case "Take": // Take<TSource>(this IQueryable<TSource> source, int count);
+                        {
+                            var newCount = Visit(m.Arguments[1]);
+
+                            MethodInfo newMethod = typeof(Queryable).GetMethods()
+                                   .Single(mi => mi.Name == m.Method.Name
+                                       && mi.GetParameters().Length == 2)
+                                   .MakeGenericMethod(sourceType);
+
+                            return Expression.Call(null, newMethod, new[] { source, newCount });
+                        }
+
+                    case "Max": // Max<TSource, TResult>(this IQueryable<TSource> source, Expression<Func<TSource, TResult>> selector);
+                    case "Min": // Min<TSource, TResult>(this IQueryable<TSource> source, Expression<Func<TSource, TResult>> selector);
+
+                    case "Select": // Select<TSource, TResult>(this IQueryable<TSource> source, Expression<Func<TSource, TResult>> selector);
+                    // case "Select": // Select<TSource, TResult>(this IQueryable<TSource> source, Expression<Func<TSource, int, TResult>> selector);
+
+                    case "OrderBy": // OrderBy<TSource, TKey>(this IQueryable<TSource> source, Expression<Func<TSource, TKey>> keySelector);
+                    case "OrderByDescending": // OrderByDescending<TSource, TKey>(this IQueryable<TSource> source, Expression<Func<TSource, TKey>> keySelector);
+                    case "ThenBy": // ThenBy<TSource, TKey>(this IOrderedQueryable<TSource> source, Expression<Func<TSource, TKey>> keySelector);
+                    case "ThenByDescending": // ThenByDescending<TSource, TKey>(this IOrderedQueryable<TSource> source, Expression<Func<TSource, TKey>> keySelector);
+                        if (m.Arguments.Count > 2)
+                        {
+                            throw new InvalidOperationException(string.Format("Cannot translate {0} call with custom comparer", m.Method.Name));
+                        }
+                        else
+                        {
+                            var newKeySelector = VisitQueryArgument(m.Arguments[1], sourceType);
+
+                            if (newKeySelector.Body.Type.IsICompoundObject() && new[] { "OrderBy", "OrderByDescending", "ThenBy", "ThenByDescending" }.Contains(m.Method.Name))
+                            {
+                                return CreateCompoundOrderByExpression(m, source, sourceType, newKeySelector);
+                            }
+                            else
+                            {
+                                // the number of generic arguments to the predicate
+                                var predicateArgCount = ExtractArgCount(newKeySelector.Type);
+
+                                MethodInfo newMethod = typeof(Queryable).GetMethods()
+                                    .Single(mi => mi.Name == m.Method.Name
+                                        && mi.GetParameters().Length == 2
+                                       && ExtractArgCount(mi.GetParameters()[1].ParameterType.GetGenericArguments().Single()) == predicateArgCount)
+                                    .MakeGenericMethod(sourceType, newKeySelector.Body.Type);
+
+                                return Expression.Call(null, newMethod, new[] { source, newKeySelector });
+                            }
+                        }
+
+                    case "GroupBy": // GroupBy<TSource, TKey>(this IQueryable<TSource> source, Expression<Func<TSource, TKey>> keySelector);
+                        // + Expression<Func<TKey, IEnumerable<TSource>, TResult>> resultSelector);
+                        // + Expression<Func<TSource, TElement>> elementSelector);
+                        // + Expression<Func<TSource, TElement>> elementSelector, Expression<Func<TKey, IEnumerable<TElement>, TResult>> resultSelector);
+                        if (m.Arguments.Count != m.Method.GetGenericArguments().Length)
+                        {
+                            // all feasible forms of GroupBy have exactly one parameter for each generic parameter:
+                            // source => TSource
+                            // keySelector => TKey
+                            // elementSelector => TElement
+                            // resultSelector => TResult
+                            throw new InvalidOperationException(string.Format("Cannot translate {0} call with custom comparer", m.Method.Name));
+                        }
+                        else
+                        {
+                            var selectors = m.Arguments.Skip(1).Select(a => VisitQueryArgument(a, sourceType)).ToList();
+
+                            if (selectors[0].Body.Type.IsICompoundObject())
+                            {
+                                throw new NotImplementedException("grouping by compound objects not yet implemented. See CreateCompoundOrderByExpression for a template");
+                            }
+                            else
+                            {
+                                var parameterTypes = new[] { sourceType }.Concat(selectors.Select(s => s.Body.Type)).ToArray();
+
+                                MethodInfo newMethod = typeof(Queryable).GetMethods()
+                                    .Single(mi => mi.Name == m.Method.Name && mi.GetParameters().Length == parameterTypes.Length)
+                                    .MakeGenericMethod(parameterTypes);
+
+                                var arguments = new[] { source }.Concat(selectors).ToArray();
+                                return Expression.Call(null, newMethod, arguments);
+                            }
+                        }
+
+                    default:
+                        throw new InvalidOperationException(string.Format("Cannot translate Queryable.{0} call", m.Method.Name));
                 }
             }
             else
             {
-                var result = Expression.Call(objExp, newMethod, args);
+                Expression objExp = Visit(m.Object);
+                MethodInfo newMethod = GetMethodInfo(m.Method);
 
-                if (result.IsMethodCallExpression("OfType"))
-                {
-                    var type = result.Type.FindElementTypes().Single(t => t != typeof(object));
-                    return AddFilter(result, Ctx.GetImplementationType(type).ToInterfaceType());
-                }
-                return result;
+                return Expression.Call(objExp, newMethod, VisitExpressionList(m.Arguments));
             }
+        }
+
+        private static int ExtractArgCount(Type t)
+        {
+            return t.GetGenericArguments().Length;
+        }
+
+        /// <summary>
+        /// All Queryable functions take Lamdas whose first argument is of type TSource. This method translates this to use the real underlying source type.
+        /// </summary>
+        /// <param name="argument"></param>
+        /// <param name="sourceType"></param>
+        /// <returns></returns>
+        private LambdaExpression VisitQueryArgument(Expression argument, Type sourceType)
+        {
+            var lambda = (LambdaExpression)argument.StripQuotes();
+            // force the first parameter to underlying source type
+            var newParams = new[] { VisitParameter(lambda.Parameters.First(), sourceType) }.Concat(VisitParameterList(lambda.Parameters.Skip(1).ToList().AsReadOnly()));
+            var newBody = Visit(lambda.Body);
+
+            return Expression.Lambda(newBody, newParams);
+        }
+
+        private Expression CreateCompoundOrderByExpression(MethodCallExpression m, Expression source, Type sourceType, LambdaExpression lambda)
+        {
+            var cpDef = MetaDataResolver.GetCompoundObject(Ctx.GetImplementationType(lambda.Body.Type).ToInterfaceType());
+            if (cpDef == null) throw new InvalidOperationException("cannot resolve CompoundObject type: " + lambda.Body.Type.AssemblyQualifiedName);
+
+            var param = lambda.Parameters.Single();
+            bool isOrderBy = m.IsMethodCallExpression("OrderBy") || m.IsMethodCallExpression("OrderByDescending");
+            bool isAsc = m.IsMethodCallExpression("OrderBy") || m.IsMethodCallExpression("ThenBy");
+            var result = source;
+            foreach (var prop in cpDef.Properties)
+            {
+                var propType = prop.IsNullable() ? typeof(Nullable<>).MakeGenericType(prop.GetPropertyType()) : prop.GetPropertyType();
+                var newOrderByLambda = Expression.Quote(
+                    Expression.Lambda(
+                        Expression.MakeMemberAccess(lambda.Body, lambda.Body.Type.GetProperty(prop.Name)),
+                        param)
+                );
+
+                var sortExpression = Expression.Call(
+                    typeof(Queryable),
+                    isOrderBy
+                        ? (isAsc ? "OrderBy" : "OrderByDescending")
+                        : (isAsc ? "ThenBy" : "ThenByDescending"),
+                    new Type[] { sourceType, propType }, // CP-Objects can only contain value properties, until nested CP-Objects are implemented correctly
+                    result,
+                    newOrderByLambda);
+
+                result = sortExpression;
+                isOrderBy = false;
+            }
+            return result;
         }
 
         protected override Expression VisitUnary(UnaryExpression u)
         {
-            // ignore Converts for IExportable objects
-            if (u.NodeType == ExpressionType.Convert && (typeof(Zetbox.App.Base.IExportable).IsAssignableFrom(u.Type) || u.Type.IsIExportableInternal()))
+            if (u.IsIgnorableCastExpression())
             {
-                return base.Visit(u.Operand);
-            }
-            // ignore Converts for persistence objects
-            else if (u.NodeType == ExpressionType.Convert && u.Type.IsIPersistenceObject())
-            {
-                return base.Visit(u.Operand);
+                return Visit(u.Operand);
             }
             else
             {
-                return Expression.MakeUnary(u.NodeType, base.Visit(u.Operand), TranslateType(u.Type), u.Method);
+                return Expression.MakeUnary(u.NodeType, Visit(u.Operand), TranslateType(u.Type), u.Method);
             }
         }
 
         protected override Expression VisitLambda(LambdaExpression lambda)
         {
-            Type t = TranslateType(lambda.Type);
-            Expression body = base.Visit(lambda.Body);
-            var parameters = base.VisitParameterList(lambda.Parameters);
-            return Expression.Lambda(t, body, parameters);
+            var body = Visit(lambda.Body);
+            var parameters = VisitParameterList(lambda.Parameters);
+            return Expression.Lambda(TranslateType(lambda.Type), body, parameters);
         }
 
         protected override Expression VisitTypeIs(TypeBinaryExpression b)
@@ -337,9 +486,14 @@ namespace Zetbox.API.Server
         private Dictionary<ParameterExpression, ParameterExpression> _Parameter = new Dictionary<ParameterExpression, ParameterExpression>();
         protected override ParameterExpression VisitParameter(ParameterExpression p)
         {
+            return VisitParameter(p, null);
+        }
+
+        private ParameterExpression VisitParameter(ParameterExpression p, Type targetType)
+        {
             if (!_Parameter.ContainsKey(p))
             {
-                _Parameter[p] = Expression.Parameter(TranslateType(p.Type), p.Name);
+                _Parameter[p] = Expression.Parameter(targetType ?? TranslateType(p.Type), p.Name);
             }
             return _Parameter[p];
         }
@@ -462,7 +616,7 @@ namespace Zetbox.API.Server
             // Only ACL's on Root classes are allowed
             var rootClass = objClass.GetRootClass();
 
-            if (Ctx.GetGroupAccessRights(ifType).HasReadRights())
+            if (!rootClass.HasAccessControlList() || Ctx.GetGroupAccessRights(ifType).HasReadRights())
             {
                 return e;
             }

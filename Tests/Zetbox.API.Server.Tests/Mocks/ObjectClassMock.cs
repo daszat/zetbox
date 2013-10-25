@@ -16,8 +16,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Zetbox.App.GUI;
+using System.Xml.Serialization;
 using Zetbox.API.Async;
+using Zetbox.App.GUI;
 
 namespace Zetbox.API.Server.Mocks
 {
@@ -425,6 +426,12 @@ namespace Zetbox.API.Server.Mocks
             get { throw new NotImplementedException(); }
         }
 
+        public Zetbox.App.Base.Property DefaultSortProperty
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
+
         #endregion
 
         #region ICustomTypeDescriptor Members
@@ -503,12 +510,28 @@ namespace Zetbox.API.Server.Mocks
         }
         #endregion
 
-
-
         public App.Base.TableMapping? TableMapping
         {
             get;
             set;
         }
+
+        #region TransientState
+        [NonSerialized]
+        private Dictionary<object, object> _transientState;
+        /// <inheritdoc />
+        [XmlIgnore]
+        public Dictionary<object, object> TransientState
+        {
+            get
+            {
+                if (_transientState == null)
+                {
+                    _transientState = new Dictionary<object, object>();
+                }
+                return _transientState;
+            }
+        }
+        #endregion
     }
 }

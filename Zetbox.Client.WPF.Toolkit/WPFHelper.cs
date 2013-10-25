@@ -80,6 +80,16 @@ namespace Zetbox.Client.WPF.Toolkit
             return null;
         }
 
+        public static T FindVisualParent<T>(this DependencyObject depObj) where T : DependencyObject
+        {
+            while (depObj != null)
+            {
+                if (depObj != null && depObj is T) return (T)depObj;
+                depObj = VisualTreeHelper.GetParent(depObj);
+            }
+            return null;
+        }
+
         public static double TranslateWidth(WidthHint? w)
         {
             if (w == null) return WIDTH_MEDIUM;
@@ -147,14 +157,14 @@ namespace Zetbox.Client.WPF.Toolkit
 
             if (cfg.ShowId)
             {
-                var col = new DataGridTemplateColumn() { CellTemplate = (DataTemplate)lst.FindResource("idCellTemplate"), Header = "ID" };
+                var col = new DataGridTemplateColumn() { CellTemplate = (DataTemplate)lst.FindResource("idCellTemplate"), Header = WPFToolkitResources.ID };
                 lst.Columns.Add(col);
                 // SetSortPropertyName(col, "ID");
             }
 
             if (cfg.ShowName)
             {
-                var col = new DataGridTemplateColumn() { CellTemplate = (DataTemplate)lst.FindResource("nameCellTemplate"), Header = "Name" };
+                var col = new DataGridTemplateColumn() { CellTemplate = (DataTemplate)lst.FindResource("nameCellTemplate"), Header = WPFToolkitResources.Name };
                 lst.Columns.Add(col);
                 // Not possible
                 // SetSortPropertyName(col, "Name");               
@@ -228,14 +238,14 @@ namespace Zetbox.Client.WPF.Toolkit
 
             if (cfg.ShowId)
             {
-                var col = new GridViewColumn() { CellTemplate = (DataTemplate)lst.FindResource("idCellTemplate"), Header = "ID" };
+                var col = new GridViewColumn() { CellTemplate = (DataTemplate)lst.FindResource("idCellTemplate"), Header = WPFToolkitResources.ID };
                 view.Columns.Add(col);
                 // SetSortPropertyName(col, "ID");
             }
 
             if (cfg.ShowName)
             {
-                var col = new GridViewColumn() { CellTemplate = (DataTemplate)lst.FindResource("nameCellTemplate"), Header = "Name" };
+                var col = new GridViewColumn() { CellTemplate = (DataTemplate)lst.FindResource("nameCellTemplate"), Header = WPFToolkitResources.Name };
                 view.Columns.Add(col);
                 // Not possible
                 // SetSortPropertyName(col, "Name");               
@@ -259,7 +269,7 @@ namespace Zetbox.Client.WPF.Toolkit
                         break;
                     case ColumnDisplayModel.ColumnType.PropertyModel:
                         {
-                            if (sortProperty != null) col.SetValue(sortProperty, desc.Path);
+                            if (sortProperty != null) col.SetValue(sortProperty, desc.DynamicOrderByExpression);
 
                             var tmp = desc.Path.Split('.').Select(i => String.Format("PropertyModelsByName[{0}]", i));
                             var binding = string.Join(".ValueAsync.", tmp.ToArray());

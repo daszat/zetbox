@@ -30,6 +30,7 @@ namespace Zetbox.Client.WPF
     using System.Windows.Shapes;
     using System.Windows.Threading;
     using Zetbox.API.Utils;
+    using Zetbox.API.Configuration;
 
     /// <summary>
     /// Interaction logic for SplashScreen.xaml
@@ -52,11 +53,13 @@ namespace Zetbox.Client.WPF
         private static StartupScreen _current = null;
         private static Thread _thread = null;
         private static AutoResetEvent _created = new AutoResetEvent(false);
+        private static ZetboxConfig _config;
 
         private static void Run()
         {
             Log.Debug("Run: Start");
 
+            InitCulture();
             _current = new StartupScreen();
             _current.Show();
             _current.Closed += (sender, e) => _current.Dispatcher.InvokeShutdown();
@@ -66,6 +69,19 @@ namespace Zetbox.Client.WPF
             System.Windows.Threading.Dispatcher.Run();
             _current = null;
             _thread = null;
+        }
+
+        private static void InitCulture()
+        {
+            if (_config == null||_config.Client == null) return;
+            if (!string.IsNullOrEmpty(_config.Client.Culture))
+            {
+                System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.GetCultureInfo(_config.Client.Culture);
+            }
+            if (!string.IsNullOrEmpty(_config.Client.UICulture))
+            {
+                System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo(_config.Client.UICulture);
+            }
         }
 
         /// <summary>
@@ -89,12 +105,14 @@ namespace Zetbox.Client.WPF
             );
         }
 
-        public static void ShowSplashScreen(string message, string info, int steps)
+        public static void ShowSplashScreen(string message, string info, int steps, ZetboxConfig config)
         {
             lock (_lock)
             {
                 if (_current == null)
                 {
+                    _config = config;
+
                     _thread = new Thread(new ThreadStart(Run));
                     _thread.SetApartmentState(ApartmentState.STA);
                     _thread.IsBackground = true; // do not block main process from closing

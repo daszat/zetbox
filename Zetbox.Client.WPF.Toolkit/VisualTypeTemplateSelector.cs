@@ -76,7 +76,7 @@ namespace Zetbox.Client.WPF.Toolkit
             }
 
             if (Logging.Log.IsDebugEnabled) { Logging.Log.DebugFormat("Creating Template with {0}", visualDesc.ToString()); }
-            Type t = visualDesc.ControlRef.AsType(true);
+            Type t = Type.GetType(visualDesc.ControlTypeRef, true);
             DataTemplate result;
 #if !DONT_CACHE_TEMPLATE
             lock (templateCache)

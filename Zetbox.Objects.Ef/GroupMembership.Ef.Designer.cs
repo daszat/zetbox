@@ -53,7 +53,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Group
         // fkBackingName=_fk_Group; fkGuidBackingName=_fk_guid_Group;
         // referencedInterface=Zetbox.App.Base.Group; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable
 
@@ -136,6 +136,11 @@ namespace Zetbox.App.Base
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchGroupAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Group>(this.Group);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Group
 		public static event PropertyGetterHandler<Zetbox.App.Base.GroupMembership, Zetbox.App.Base.Group> OnGroup_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.GroupMembership, Zetbox.App.Base.Group> OnGroup_PreSetter;
@@ -177,6 +182,17 @@ namespace Zetbox.App.Base
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Group":
+                return TriggerFetchGroupAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
@@ -193,6 +209,7 @@ namespace Zetbox.App.Base
                 GroupImpl = (Zetbox.App.Base.GroupEfImpl)Context.Find<Zetbox.App.Base.Group>(_fk_Group.Value);
             else
                 GroupImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

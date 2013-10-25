@@ -40,7 +40,7 @@ namespace Zetbox.App.Test
         /// <summary>
         /// 
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for OneEnd
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for OneEnd
         // fkBackingName=_fk_OneEnd; fkGuidBackingName=_fk_guid_OneEnd;
         // referencedInterface=Zetbox.App.Test.OrderedOneEnd; moduleNamespace=Zetbox.App.Test;
         // inverse Navigator=NEnds; is list;
@@ -337,6 +337,7 @@ namespace Zetbox.App.Test
                 OneEndImpl = (Zetbox.App.Test.OrderedOneEndMemoryImpl)Context.Find<Zetbox.App.Test.OrderedOneEnd>(_fk_OneEnd.Value);
             else
                 OneEndImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

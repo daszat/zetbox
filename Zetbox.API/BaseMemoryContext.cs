@@ -23,10 +23,10 @@ namespace Zetbox.API
     using System.Linq;
     using System.Reflection;
     using System.Text;
-
-    using Zetbox.API.Utils;
     using System.Threading.Tasks;
+    using System.Xml.Serialization;
     using Zetbox.API.Async;
+    using Zetbox.API.Utils;
 
     /// <summary>
     /// A temporary data context without permanent backing store.
@@ -39,6 +39,7 @@ namespace Zetbox.API
         private readonly InterfaceType.Factory _iftFactory;
         protected InterfaceType.Factory IftFactory { get { return _iftFactory; } }
         protected readonly Func<IFrozenContext> lazyCtx;
+        protected readonly IEnumerable<IZetboxContextEventListener> eventListeners;
 
         /// <summary>Empty stand-in for object classes without instances.</summary>
         /// <remarks>Used by GetPersistenceObjectQuery()</remarks>
@@ -58,13 +59,14 @@ namespace Zetbox.API
         /// <summary>
         /// Initializes a new instance of the BaseMemoryContext class, using the specified assemblies for interfaces and implementation.
         /// </summary>
-        protected BaseMemoryContext(InterfaceType.Factory iftFactory, Func<IFrozenContext> lazyCtx)
+        protected BaseMemoryContext(InterfaceType.Factory iftFactory, Func<IFrozenContext> lazyCtx, IEnumerable<IZetboxContextEventListener> eventListeners)
         {
             this.objects = new ContextCache<int>(this, item => item.ID);
             this.iftFactoryCache = new FuncCache<Type, InterfaceType>(t => iftFactory(t));
             this._iftFactory = t => iftFactoryCache.Invoke(t);
             ZetboxContextDebuggerSingleton.Created(this);
             this.lazyCtx = lazyCtx;
+            this.eventListeners = eventListeners;
         }
 
         /// <inheritdoc />
@@ -135,11 +137,8 @@ namespace Zetbox.API
             // TODO: Implement Delete on Memory Context
             //((BasePersistenceObject)obj).SetDeleted();
 
+            obj.NotifyDeleting();
             OnObjectDeleted(obj);
-            if (obj is IDataObject)
-            {
-                ((IDataObject)obj).NotifyDeleting();
-            }
         }
 
         /// <inheritdoc />
@@ -181,7 +180,7 @@ namespace Zetbox.API
         /// <summary>Retrieves a new query on top of the attached objects.</summary>
         /// <remarks>Implementors can override this method to modify queries 
         /// according to their provider's needs.</remarks>
-        protected virtual IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType)
+        public virtual IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType)
         {
             CheckDisposed();
             //CheckInterfaceAssembly("ifType", ifType.Type);
@@ -214,7 +213,6 @@ namespace Zetbox.API
         IList<T> IReadOnlyZetboxContext.FetchRelation<T>(Guid relId, RelationEndRole role, IDataObject parent)
         {
             var t = ((IReadOnlyZetboxContext)this).FetchRelationAsync<T>(relId, role, parent);
-            t.Wait();
             return t.Result;
         }
 
@@ -357,10 +355,7 @@ namespace Zetbox.API
             }
             Attach(obj);
             OnObjectCreated(obj);
-            if (obj is IDataObject)
-            {
-                ((IDataObject)obj).NotifyCreated();
-            }
+            obj.NotifyCreated();
             return obj;
         }
 
@@ -386,7 +381,6 @@ namespace Zetbox.API
         public IDataObject Find(InterfaceType ifType, int ID)
         {
             var t = FindAsync(ifType, ID);
-            t.Wait();
             return t.Result;
         }
 
@@ -406,7 +400,6 @@ namespace Zetbox.API
             where T : class, IDataObject
         {
             var t = FindAsync<T>(ID);
-            t.Wait();
             return t.Result;
         }
 
@@ -538,6 +531,8 @@ namespace Zetbox.API
             }
             // nothing to dispose
             IsDisposed = true;
+
+            ZetboxContextEventListenerHelper.OnDisposed(eventListeners, this);
         }
 
         /// <summary>Not implemented.</summary>
@@ -596,18 +591,20 @@ namespace Zetbox.API
         public abstract ImplementationType GetImplementationType(Type t);
         public abstract ImplementationType ToImplementationType(InterfaceType t);
 
-        private IDictionary<object, object> _TransientState = null;
+        [NonSerialized]
+        private Dictionary<object, object> _transientState;
         /// <inheritdoc />
+        [XmlIgnore]
         public IDictionary<object, object> TransientState
         {
             get
             {
                 CheckDisposed();
-                if (_TransientState == null)
+                if (_transientState == null)
                 {
-                    _TransientState = new Dictionary<object, object>();
+                    _transientState = new Dictionary<object, object>();
                 }
-                return _TransientState;
+                return _transientState;
             }
         }
 
@@ -650,7 +647,6 @@ namespace Zetbox.API
 
         #region IZetboxContext Members
 
-
         public int GetSequenceNumber(Guid sequenceGuid)
         {
             throw new NotImplementedException();
@@ -675,6 +671,8 @@ namespace Zetbox.API
         {
             // Allways alowed
         }
+
+        public abstract ContextIsolationLevel IsolationLevel { get; }
 
         #endregion
 

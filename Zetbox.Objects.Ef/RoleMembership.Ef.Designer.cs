@@ -73,19 +73,40 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryEfImpl>(
-                        "Model.FK_RoleMembership_resolves_Relations_A",
-                        "CollectionEntry");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetRelationsImplCollection();
             }
         }
+
+        private EntityCollection<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryEfImpl> _RelationsImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryEfImpl> GetRelationsImplCollection()
+        {
+            if (_RelationsImplEntityCollection == null)
+            {
+                _RelationsImplEntityCollection
+                    = ((IEntityWithRelationships)(this)).RelationshipManager
+                        .GetRelatedCollection<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryEfImpl>(
+                            "Model.FK_RoleMembership_resolves_Relations_A",
+                            "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_RelationsImplEntityCollection.IsLoaded)
+                {
+                    _RelationsImplEntityCollection.Load();
+                }
+                _RelationsImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Relations", null, null); if(OnRelations_PostSetter != null && IsAttached) OnRelations_PostSetter(this); };
+            }
+            return _RelationsImplEntityCollection;
+        }
         private BSideListWrapper<Zetbox.App.Base.RoleMembership, Zetbox.App.Base.Relation, Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryEfImpl, EntityCollection<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryEfImpl>> _Relations;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchRelationsAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<IList<Zetbox.App.Base.Relation>>(this.Relations);
+        }
+
+public static event PropertyListChangedHandler<Zetbox.App.Base.RoleMembership> OnRelations_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.RoleMembership> OnRelations_IsValid;
 
@@ -121,6 +142,17 @@ namespace Zetbox.App.Base
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Relations":
+                return TriggerFetchRelationsAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
@@ -129,6 +161,7 @@ namespace Zetbox.App.Base
             base.ReloadReferences();
 
             // fix direct object references
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

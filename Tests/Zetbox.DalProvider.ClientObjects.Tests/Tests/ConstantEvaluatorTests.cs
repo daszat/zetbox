@@ -40,11 +40,20 @@ namespace Zetbox.DalProvider.Client.Tests
         public string property { get; set; }
     }
 
+    enum TestEnum
+    {
+        Foo = 3
+    }
+
     public class ConstantEvaluatorTests
     {
         public IEnumerable<object> GetTestCases()
         {
             yield return new CETData() { Description = "box null to int?", Expression = Expression.Convert(Expression.Constant(null), typeof(int?)), ExpectedValue = null };
+            yield return new CETData() { Description = "box enum to int?", Expression = Expression.Convert(Expression.Constant(TestEnum.Foo), typeof(int?)), ExpectedValue = 3 };
+            yield return new CETData() { Description = "box null to enum? to int?", Expression = Expression.Convert(Expression.Convert(Expression.Constant(null), typeof(TestEnum?)), typeof(int?)), ExpectedValue = null };
+            yield return new CETData() { Description = "convert enum? null to int?", Expression = Expression.Convert(Expression.Constant((TestEnum?)null), typeof(int?)), ExpectedValue = null };
+
             yield return new CETData() { Description = "add int", Expression = Expression.Add(Expression.Constant(1), Expression.Constant(2)), ExpectedValue = 3 };
             yield return new CETData() { Description = "add int to null", Expression = Expression.Add(Expression.Constant(1, typeof(int?)), Expression.Constant(null, typeof(int?))), ExpectedValue = null };
             yield return new CETData() { Description = "add int? to int?", Expression = Expression.Add(Expression.Constant(1, typeof(int?)), Expression.Constant(2, typeof(int?))), ExpectedValue = 3 };
@@ -54,6 +63,12 @@ namespace Zetbox.DalProvider.Client.Tests
             yield return new CETData() { Description = "subtract int", Expression = Expression.Subtract(Expression.Constant(1), Expression.Constant(2)), ExpectedValue = -1 };
             yield return new CETData() { Description = "equality int==int", Expression = Expression.Equal(Expression.Constant(1), Expression.Constant(2)), ExpectedValue = false };
             yield return new CETData() { Description = "equality int!=int", Expression = Expression.NotEqual(Expression.Constant(1), Expression.Constant(2)), ExpectedValue = true };
+
+            yield return new CETData() { Description = "equality int==int?", Expression = Expression.Equal(Expression.Convert(Expression.Constant(1), typeof(int?)), Expression.Convert(Expression.Constant(2), typeof(int?))), ExpectedValue = false };
+            yield return new CETData() { Description = "equality int!=int?", Expression = Expression.NotEqual(Expression.Convert(Expression.Constant(1), typeof(int?)), Expression.Convert(Expression.Constant(2), typeof(int?))), ExpectedValue = true };
+
+            yield return new CETData() { Description = "equality int==int?null", Expression = Expression.Equal(Expression.Convert(Expression.Constant(1), typeof(int?)), Expression.Convert(Expression.Constant(null), typeof(int?))), ExpectedValue = false };
+            yield return new CETData() { Description = "equality int!=int?null", Expression = Expression.NotEqual(Expression.Convert(Expression.Constant(1), typeof(int?)), Expression.Convert(Expression.Constant(null), typeof(int?))), ExpectedValue = true };
 
             var fieldtest = new TestClass() { field = "foo" };
             yield return new CETData() { Description = "field access", Expression = ((Expression<Func<string>>)(() => fieldtest.field)).Body, ExpectedValue = "foo" };

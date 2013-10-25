@@ -41,6 +41,9 @@
 <%@ Parameter Name="serializeRelationEntries" Type="bool" %>
 <%@ Parameter Name="entryProxyType" Type="string" %>
 <%@ Parameter Name="inverseNavigatorName" Type="string" %>
+<%
+   	string eventName = "On" + name + "_PostSetter";
+%>
    		// <%= this.GetType() %>
 		<%= GetModifiers() %> <%= exposedCollectionInterface %><<%= referencedInterface %>> <%= name %>
 		{
@@ -54,12 +57,8 @@
 							new ProjectedCollection<<%= entryProxyType %>, <%= entryType %>>(
                                 () => this.Proxy.<%= name %>,
                                 p => (<%= entryType %>)OurContext.AttachAndWrap(p),
-                                ce => (<%= entryProxyType %>)((NHibernatePersistenceObject)ce).NHibernateProxy),
-<% if (!String.IsNullOrEmpty(inverseNavigatorName)) { %>
-                            entry => (IRelationListSync<<%= entryType %>>)entry.<%= role == RelationEndRole.A ? "B" : "A" %>.<%= inverseNavigatorName %>);
-<% } else { %>
-                            entry => (IRelationListSync<<%= entryType %>>)null);
-<% } %>
+                                ce => (<%= entryProxyType %>)((NHibernatePersistenceObject)ce).NHibernateProxy));
+                    <%= backingName %>.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("<%= name %>", null, null); if(<%= eventName %> != null && IsAttached) <%= eventName%>(this); };
                     if (<%= name %>_was_eagerLoaded) { <%= name %>_was_eagerLoaded = false; }
 				}
 				return (<%= exposedCollectionInterface %><<%= referencedInterface %>>)<%= backingName %>;
@@ -69,4 +68,10 @@
 		private <%= backingCollectionType %><<%= aSideType %>, <%= bSideType %>, <%= entryType %>> <%= backingName %>;
 		// ignored, but required for Serialization
         private bool <%= name %>_was_eagerLoaded = false;
+
+        public Zetbox.API.Async.ZbTask TriggerFetch<%= name %>Async()
+        {
+            return new Zetbox.API.Async.ZbTask<<%= exposedCollectionInterface %><<%= referencedInterface %>>>(this.<%= name %>);
+        }
+
 <% AddSerialization(serializationList, name, eagerLoading); %>

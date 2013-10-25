@@ -18,9 +18,9 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
-
-using NUnit.Framework;
 using System.Xml;
+using System.Xml.Serialization;
+using NUnit.Framework;
 
 namespace Zetbox.API.AbstractConsumerTests.BinarySerializers
 {
@@ -65,7 +65,7 @@ namespace Zetbox.API.AbstractConsumerTests.BinarySerializers
         public void Export(XmlWriter xml, string[] modules)
         {
         }
-        
+
         public void MergeImport(XmlReader xml)
         {
         }
@@ -130,6 +130,49 @@ namespace Zetbox.API.AbstractConsumerTests.BinarySerializers
             if (aStr == null && bStr == null) return 0;
             if (aStr == null) return -1;
             return aStr.CompareTo(bStr);
+        }
+        #endregion
+
+        #region ISortKey<int> member
+        // used for sorting
+
+        private static readonly object _ISortKey_ID_current_lock = new object();
+        private static int _ISortKey_ID_current = 0;
+        private int _ISortKey_ID = 0;
+        int ISortKey<int>.ID
+        {
+            get
+            {
+                if (_ISortKey_ID == 0)
+                {
+                    lock (_ISortKey_ID_current_lock)
+                    {
+                        if (_ISortKey_ID == 0)
+                        {
+                            _ISortKey_ID = ++_ISortKey_ID_current;
+                        }
+                    }
+                }
+                return _ISortKey_ID;
+            }
+        }
+        #endregion
+
+        #region TransientState
+        [NonSerialized]
+        private Dictionary<object, object> _transientState;
+        /// <inheritdoc />
+        [XmlIgnore]
+        public Dictionary<object, object> TransientState
+        {
+            get
+            {
+                if (_transientState == null)
+                {
+                    _transientState = new Dictionary<object, object>();
+                }
+                return _transientState;
+            }
         }
         #endregion
     }

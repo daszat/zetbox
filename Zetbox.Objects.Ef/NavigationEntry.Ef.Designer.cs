@@ -53,7 +53,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable
 
@@ -133,6 +133,11 @@ namespace Zetbox.App.GUI
                 NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
@@ -237,7 +242,7 @@ namespace Zetbox.App.GUI
     */
         // object list property
         // object list property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -250,7 +255,7 @@ namespace Zetbox.App.GUI
                     _Children = new EntityListWrapper<Zetbox.App.GUI.NavigationEntry, Zetbox.App.GUI.NavigationEntryEfImpl>(
                             this.Context, ChildrenImpl,
                             () => this.NotifyPropertyChanging("Children", null, null),
-                            () => { this.NotifyPropertyChanged("Children", null, null); if(OnChildren_PostSetter != null && IsAttached) OnChildren_PostSetter(this); },
+                            null, // see GetChildrenImplCollection()
                             (item) => item.NotifyPropertyChanging("Parent", null, null),
                             (item) => item.NotifyPropertyChanged("Parent", null, null), "Parent", "Children_pos");
                 }
@@ -263,21 +268,39 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.GUI.NavigationEntryEfImpl>(
-                        "Model.FK_Parent_navigates_to_Children",
-                        "Children");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetChildrenImplCollection();
             }
         }
         private EntityListWrapper<Zetbox.App.GUI.NavigationEntry, Zetbox.App.GUI.NavigationEntryEfImpl> _Children;
 
+        private EntityCollection<Zetbox.App.GUI.NavigationEntryEfImpl> _ChildrenImplEntityCollection;
+        internal EntityCollection<Zetbox.App.GUI.NavigationEntryEfImpl> GetChildrenImplCollection()
+        {
+            if (_ChildrenImplEntityCollection == null)
+            {
+                _ChildrenImplEntityCollection = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Zetbox.App.GUI.NavigationEntryEfImpl>(
+                        "Model.FK_Parent_navigates_to_Children",
+                        "Children");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_ChildrenImplEntityCollection.IsLoaded)
+                {
+                    _ChildrenImplEntityCollection.Load();
+                }
+                _ChildrenImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Children", null, null); if (OnChildren_PostSetter != null && IsAttached) OnChildren_PostSetter(this); };
+            }
+            return _ChildrenImplEntityCollection;
+        }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchChildrenAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<IList<Zetbox.App.GUI.NavigationEntry>>(this.Children);
+        }
+
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
 public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> OnChildren_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.NavigationEntry> OnChildren_IsValid;
@@ -364,7 +387,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable
 
@@ -444,6 +467,11 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
@@ -652,20 +680,41 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryEfImpl>(
-                        "Model.FK_NavigationScreen_accessed_by_Groups_A",
-                        "CollectionEntry");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetGroupsImplCollection();
             }
+        }
+
+        private EntityCollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryEfImpl> _GroupsImplEntityCollection;
+        internal EntityCollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryEfImpl> GetGroupsImplCollection()
+        {
+            if (_GroupsImplEntityCollection == null)
+            {
+                _GroupsImplEntityCollection
+                    = ((IEntityWithRelationships)(this)).RelationshipManager
+                        .GetRelatedCollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryEfImpl>(
+                            "Model.FK_NavigationScreen_accessed_by_Groups_A",
+                            "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_GroupsImplEntityCollection.IsLoaded)
+                {
+                    _GroupsImplEntityCollection.Load();
+                }
+                _GroupsImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Groups", null, null); if(OnGroups_PostSetter != null && IsAttached) OnGroups_PostSetter(this); };
+            }
+            return _GroupsImplEntityCollection;
         }
         private BSideCollectionWrapper<Zetbox.App.GUI.NavigationEntry, Zetbox.App.Base.Group, Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryEfImpl>> _Groups;
         private bool Groups_was_eagerLoaded = false;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchGroupsAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.Group>>(this.Groups);
+        }
+
+public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> OnGroups_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.NavigationEntry> OnGroups_IsValid;
 
@@ -682,7 +731,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
         // fkBackingName=_fk_Module; fkGuidBackingName=_fk_guid_Module;
         // referencedInterface=Zetbox.App.Base.Module; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable
 
@@ -763,6 +812,11 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 NotifyPropertyChanged("Module", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchModuleAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(this.Module);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
@@ -880,6 +934,11 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchParentAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.NavigationEntry>(this.Parent);
+        }
+
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -942,7 +1001,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedKind
         // fkBackingName=_fk_RequestedKind; fkGuidBackingName=_fk_guid_RequestedKind;
         // referencedInterface=Zetbox.App.GUI.ControlKind; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable
 
@@ -1023,6 +1082,11 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 NotifyPropertyChanged("RequestedKind", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchRequestedKindAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(this.RequestedKind);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedKind
@@ -1114,7 +1178,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ViewModelDescriptor
         // fkBackingName=_fk_ViewModelDescriptor; fkGuidBackingName=_fk_guid_ViewModelDescriptor;
         // referencedInterface=Zetbox.App.GUI.ViewModelDescriptor; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable
 
@@ -1195,6 +1259,11 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 NotifyPropertyChanged("ViewModelDescriptor", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchViewModelDescriptorAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor>(this.ViewModelDescriptor);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ViewModelDescriptor
@@ -1335,6 +1404,31 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "Children":
+                return TriggerFetchChildrenAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            case "Groups":
+                return TriggerFetchGroupsAsync();
+            case "Module":
+                return TriggerFetchModuleAsync();
+            case "Parent":
+                return TriggerFetchParentAsync();
+            case "RequestedKind":
+                return TriggerFetchRequestedKindAsync();
+            case "ViewModelDescriptor":
+                return TriggerFetchViewModelDescriptorAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
@@ -1385,6 +1479,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 ViewModelDescriptorImpl = (Zetbox.App.GUI.ViewModelDescriptorEfImpl)Context.Find<Zetbox.App.GUI.ViewModelDescriptor>(_fk_ViewModelDescriptor.Value);
             else
                 ViewModelDescriptorImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

@@ -43,7 +43,13 @@ namespace Zetbox.Generator.Templates.Properties
         protected readonly Guid propExportGuid;
 
         public NotifyingDataProperty(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, Serialization.SerializationMembersList serializationList, Property prop)
-            : this(_host, ctx, serializationList, prop.GetElementTypeString(), prop.Name, prop.Module.Namespace, "_" + prop.Name, prop.IsCalculated(), prop.DisableExport == true, prop.ObjectClass.Name, prop.IsNullable(), prop.DefaultValue != null && !prop.IsCalculated(), prop.ExportGuid)
+            : this(_host, ctx, serializationList, 
+                    prop.GetElementTypeString(), 
+                    prop.Name, prop.Module.Namespace, "_" + prop.Name, 
+                    prop.IsCalculated(), prop.DisableExport == true, 
+                    prop.ObjectClass.Name, prop.IsNullable(),
+                    prop.DefaultValue != null && !prop.IsCalculated(), // No default value for calculated properties, default values are used then for database migration
+                    prop.ExportGuid)
         {
         }
 

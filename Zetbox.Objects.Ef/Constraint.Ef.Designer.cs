@@ -24,7 +24,7 @@ namespace Zetbox.App.Base
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="ConstraintEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Constraint")]
-    public class ConstraintEfImpl : BaseServerDataObject_EntityFramework, Constraint, Zetbox.API.IExportableInternal
+    public abstract class ConstraintEfImpl : BaseServerDataObject_EntityFramework, Constraint, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("ac1d5ac9-d909-438f-a4f5-f64ea6904944");
         public override Guid ObjectClassID { get { return _objectClassID; } }
@@ -53,7 +53,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable
 
@@ -133,6 +133,11 @@ namespace Zetbox.App.Base
                 NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
@@ -334,6 +339,11 @@ namespace Zetbox.App.Base
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchConstrainedPropertyAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Property>(this.ConstrainedProperty);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ConstrainedProperty
 		public static event PropertyGetterHandler<Zetbox.App.Base.Constraint, Zetbox.App.Base.Property> OnConstrainedProperty_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.Constraint, Zetbox.App.Base.Property> OnConstrainedProperty_PreSetter;
@@ -354,7 +364,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable
 
@@ -434,6 +444,11 @@ namespace Zetbox.App.Base
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
@@ -852,6 +867,21 @@ namespace Zetbox.App.Base
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "ConstrainedProperty":
+                return TriggerFetchConstrainedPropertyAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
@@ -878,6 +908,7 @@ namespace Zetbox.App.Base
                 CreatedByImpl = (Zetbox.App.Base.IdentityEfImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
             else
                 CreatedByImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

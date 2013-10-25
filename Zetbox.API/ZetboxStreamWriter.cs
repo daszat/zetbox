@@ -26,8 +26,24 @@ namespace Zetbox.API
 
     public sealed class ZetboxStreamWriter : IDisposable
     {
-        public delegate ZetboxStreamWriter Factory(BinaryWriter destination);
+        /// <summary>
+        /// Small helper to avoid off-thread autofac accesses.
+        /// </summary>
+        /// <remarks>Since the readers and writers are used in the thread pool, they may deadlock on autofac when a query is run from within an autofac resolution on the main thread.</remarks>
+        public sealed class Factory
+        {
+            private readonly TypeMap _map;
+            public Factory(TypeMap map)
+            {
+                if (map == null) throw new ArgumentNullException("map");
+                _map = map;
+            }
 
+            public ZetboxStreamWriter Invoke(BinaryWriter destination)
+            {
+                return new ZetboxStreamWriter(_map, destination);
+            }
+        }
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Serialization");
 
         private readonly TypeMap _typeMap;
@@ -386,6 +402,8 @@ namespace Zetbox.API
         public void Write(ICompoundObject val)
         {
             TraceCurrentPos();
+            if (val == null)
+                Log.Warn("Writing null compoundobject");
             SerializerTrace("Writing ICompoundObject {0}", val);
             if (val != null)
             {
@@ -445,7 +463,10 @@ namespace Zetbox.API
 
             if (_typeMap.GuidMap.ContainsKey(type))
             {
-                Write(_typeMap.GuidMap[type]);
+                var guid = _typeMap.GuidMap[type];
+                if (guid == Guid.Empty)
+                    throw new InvalidOperationException(string.Format("Type [{0}] has invalid DefinitionGuid: [{1}]", type, guid));
+                Write(guid);
             }
             else
             {

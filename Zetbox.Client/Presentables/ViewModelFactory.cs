@@ -125,20 +125,76 @@ namespace Zetbox.Client.Presentables
         {
             if (obj == null) throw new ArgumentNullException("obj");
 
-            // TODO: Move DefaultViewModelDescriptor back to DataType
-            var t = typeof(CompoundObjectViewModel);
-            //var t = obj.GetCompoundObjectDefinition(FrozenContext)
-            //    .DefaultViewModelDescriptor
-            //    .ViewModelRef
-            //    .AsType(true);
+            var desc = obj.GetCompoundObjectDefinition(FrozenContext).DefaultViewModelDescriptor;
+            var t = desc != null 
+                ? Type.GetType(desc.ViewModelTypeRef, true)
+                :  typeof(CompoundObjectViewModel);
             return CreateViewModel<TModelFactory>(ResolveFactory(t));
+        }
+
+        private class WorkaroundStringListViewModel : BaseValueViewModel
+        {
+            public new delegate WorkaroundStringListViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Zetbox.Client.Models.IValueModel mdl);
+
+            public WorkaroundStringListViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, Zetbox.Client.Models.IValueModel mdl)
+                : base(dependencies, dataCtx, parent, mdl)
+            {
+            }
+
+            public override ControlKind RequestedKind
+            {
+                get
+                {
+                    return NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_MultiLineTextboxKind.Find(FrozenContext);
+                }
+                set
+                {
+                    base.RequestedKind = value;
+                }
+            }
+
+            public override void Focus()
+            {
+            }
+
+            public override void Blur()
+            {
+            }
+
+            public override bool HasValue
+            {
+                get { return true; }
+            }
+
+            public override string FormattedValue
+            {
+                get
+                {
+                    return string.Empty;
+                }
+                set
+                {
+                    throw new NotImplementedException();
+                }
+            }
+
+            public override string FormattedValueAsync
+            {
+                get { return FormattedValue; }
+            }
         }
 
         public TModelFactory CreateViewModel<TModelFactory>(Property p) where TModelFactory : class
         {
             if (p == null) { throw new ArgumentNullException("p"); }
 
-            if (p.ValueModelDescriptor != null)
+            // TODO: Bad workaround for string list properties
+            var sp = p as StringProperty;
+            if (sp != null && sp.IsList)
+            {
+                return CreateViewModel<TModelFactory>(ResolveFactory(typeof(WorkaroundStringListViewModel.Factory)));
+            }
+            else if (p.ValueModelDescriptor != null)
             {
                 return CreateViewModel<TModelFactory>(p.ValueModelDescriptor);
             }
@@ -170,11 +226,11 @@ namespace Zetbox.Client.Presentables
             }
             else if (param is DoubleParameter && !isList)
             {
-                t = typeof(NullableStructValueViewModel<double>);
+                t = typeof(NullableDoublePropertyViewModel);
             }
             else if (param is IntParameter && !isList)
             {
-                t = typeof(NullableStructValueViewModel<int>);
+                t = typeof(NullableIntPropertyViewModel);
             }
             else if (param is DecimalParameter && !isList)
             {
@@ -182,7 +238,7 @@ namespace Zetbox.Client.Presentables
             }
             else if (param is StringParameter && !isList)
             {
-                t = typeof(ClassValueViewModel<string>);
+                t = typeof(StringValueViewModel);
             }
             else if (param is ObjectReferenceParameter && !isList)
             {
@@ -197,7 +253,7 @@ namespace Zetbox.Client.Presentables
                 var compObj = ((CompoundObjectParameter)param).CompoundObject;
                 if (compObj.DefaultPropertyViewModelDescriptor != null)
                 {
-                    t = compObj.DefaultPropertyViewModelDescriptor.ViewModelRef.AsType(true);
+                    t = Type.GetType(compObj.DefaultPropertyViewModelDescriptor.ViewModelTypeRef, true);
                 }
                 else
                 {
@@ -215,7 +271,7 @@ namespace Zetbox.Client.Presentables
         public TModelFactory CreateViewModel<TModelFactory>(ViewModelDescriptor desc) where TModelFactory : class
         {
             if (desc == null) throw new ArgumentNullException("desc");
-            return CreateViewModel<TModelFactory>(ResolveFactory(desc.ViewModelRef.AsType(true)));
+            return CreateViewModel<TModelFactory>(ResolveFactory(Type.GetType(desc.ViewModelTypeRef, true)));
         }
 
         private static int _resolveCounter = 0;
@@ -434,7 +490,7 @@ namespace Zetbox.Client.Presentables
         /// <returns>a newly created view</returns>
         protected virtual object CreateView(ViewDescriptor vDesc)
         {
-            return vDesc.ControlRef.Create();
+            return Activator.CreateInstance(Type.GetType(vDesc.ControlTypeRef));
         }
 
         public void ShowModel(ViewModel mdl, ControlKind kind, bool activate)
@@ -445,7 +501,7 @@ namespace Zetbox.Client.Presentables
             }
             else
             {
-                ShowInView(mdl, CreateSpecificView(mdl, kind), activate, false);
+                ShowInView(mdl, CreateSpecificView(mdl, kind), activate, false, null);
             }
         }
 
@@ -463,7 +519,7 @@ namespace Zetbox.Client.Presentables
 
             if (dom == null)
             {
-                ShowInView(mdl, CreateDefaultView(mdl), activate, false);
+                ShowInView(mdl, CreateDefaultView(mdl), activate, false, null);
             }
             else
             {
@@ -506,31 +562,31 @@ namespace Zetbox.Client.Presentables
             }
             else
             {
+                if (dom.Object == null || dom.Object.Context == null)
+                {
+                    // Invalid object, like a deleted one
+                    return false; 
+                }
                 return Managers.ContainsKey(dom.Object.Context);
             }
         }
 
-        public void ShowDialog(ViewModel mdl)
-        {
-            ShowDialog(mdl, null);
-        }
-
-        public void ShowDialog(ViewModel mdl, Zetbox.App.GUI.ControlKind kind)
+        public void ShowDialog(ViewModel mdl, ViewModel ownerModel, Zetbox.App.GUI.ControlKind kind = null)
         {
             if (mdl == null)
                 throw new ArgumentNullException("mdl");
 
             if (kind == null)
             {
-                ShowInView(mdl, CreateDefaultView(mdl), true, true);
+                ShowInView(mdl, CreateDefaultView(mdl), true, true, ownerModel ?? mdl.GetWorkspace());
             }
             else
             {
-                ShowInView(mdl, CreateSpecificView(mdl, kind), true, true);
+                ShowInView(mdl, CreateSpecificView(mdl, kind), true, true, ownerModel ?? mdl.GetWorkspace());
             }
         }
 
-        protected abstract void ShowInView(ViewModel mdl, object view, bool activate, bool asDialog);
+        protected abstract void ShowInView(ViewModel mdl, object view, bool activate, bool asDialog, ViewModel ownerModel);
 
         #endregion
 

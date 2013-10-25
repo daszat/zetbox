@@ -33,6 +33,7 @@ namespace Zetbox.Client.WPF.View
     /// <summary>
     /// Interaction logic for ZetboxDebuggerView.xaml
     /// </summary>
+    [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
     public partial class ZetboxDebuggerView : Window
     {
         public ZetboxDebuggerView()

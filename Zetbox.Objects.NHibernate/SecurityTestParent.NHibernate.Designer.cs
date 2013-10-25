@@ -79,6 +79,12 @@ namespace Zetbox.App.Test
         }
     
         private OneNRelationList<Zetbox.App.Test.SecurityTestChild> _Children;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchChildrenAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Test.SecurityTestChild>>(this.Children);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Test.SecurityTestParent> OnChildren_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.SecurityTestParent> OnChildren_IsValid;
@@ -186,6 +192,17 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.SecurityTestParen
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Children":
+                return TriggerFetchChildrenAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

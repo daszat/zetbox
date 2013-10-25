@@ -46,6 +46,8 @@ namespace Zetbox.Server.SchemaManagement
                         gmf.PreMigration(db);
                     }
 
+                    DropVolatileObjects();
+
                     UpdateDatabaseSchemas();
                     UpdateTables();
                     UpdateRelations();
@@ -58,7 +60,8 @@ namespace Zetbox.Server.SchemaManagement
 
                     UpdateProcedures();
 
-                    Workaround_UpdateTPHNotNullCheckConstraint();
+                    CreateFinalCheckConstraints();
+                    CreateFinalRightsInfrastructure();
 
                     SaveSchema(schema);
 
@@ -80,22 +83,85 @@ namespace Zetbox.Server.SchemaManagement
             }
         }
 
+        private void CreateFinalRightsInfrastructure()
+        {
+            Log.Info("Recreating Rights Infrastructure");
+
+            foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.Name))
+            {
+                if (!objClass.NeedsRightsTable()) continue;
+
+                var tblRightsName = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesTableName(objClass));
+                var tblName = objClass.GetTableRef(db);
+                var rightsViewUnmaterializedName = db.GetTableName(objClass.Module.SchemaName, Construct.SecurityRulesRightsViewUnmaterializedName(objClass));
+                var refreshRightsOnProcedureName = db.GetProcedureName(objClass.Module.SchemaName, Construct.SecurityRulesRefreshRightsOnProcedureName(objClass));
+
+                Log.InfoFormat("Refreshing ObjectClass Security Rules: {0}", objClass.Name);
+
+                if (!db.CheckViewExists(rightsViewUnmaterializedName))
+                    Case.DoCreateRightsViewUnmaterialized(objClass);
+                if (!db.CheckProcedureExists(refreshRightsOnProcedureName))
+                    db.CreateRefreshRightsOnProcedure(refreshRightsOnProcedureName, rightsViewUnmaterializedName, tblName, tblRightsName);
+
+                Case.DoCreateOrReplaceUpdateRightsTrigger(objClass);
+            }
+            // Either we just removed it to keep the dependency away, then nothing has changed
+            // or, the case has triggered the execution and we do it now that everything is in place again.
+            Case.ExecuteTriggeredRefreshRights();
+        }
+
+        private void CreateFinalCheckConstraints()
+        {
+            Log.Info("Recreating Check Constraints");
+
+            // this does more than required (dropping already existing), but good enough for now.
+            // has to be revisited if someone else creates check constraints.
+            Workaround_UpdateTPHNotNullCheckConstraint();
+        }
+
+        private void DropVolatileObjects()
+        {
+            Log.Info("Dropping volatile objects");
+
+            // .ToList() -> There is already an open DataReader associated with this Command which must be closed first
+            foreach (var triggerName in db.GetTriggerNames().ToList())
+            {
+                db.DropTrigger(triggerName);
+            }
+
+            foreach (var viewName in db.GetViewNames().ToList())
+            {
+                db.DropView(viewName);
+            }
+
+            // only drop refreshrights procedures
+            foreach (var procName in db.GetProcedureNames().ToList().Where(procRef => procRef.Name.StartsWith(Construct.SecurityRulesRefreshRightsOnProcedurePrefix())))
+            {
+                db.DropProcedure(procName);
+            }
+        }
+
         private void Workaround_UpdateTPHNotNullCheckConstraint()
         {
             foreach (var prop in schema.GetQuery<ValueTypeProperty>())
             {
                 var cls = prop.ObjectClass as ObjectClass;
+                if (cls == null)
+                {
+                    // TODO: handle compounds
+                    continue;
+                }
+                var tblName = cls.GetTableRef(db);
+                var colName = Construct.ColumnName(prop, string.Empty);
+                var checkConstraintName = Construct.CheckConstraintName(tblName.Name, colName);
+
+                if (db.CheckCheckConstraintExists(tblName, checkConstraintName))
+                {
+                    db.DropCheckConstraint(tblName, checkConstraintName);
+                }
+
                 if (!prop.IsNullable() && cls != null && cls.BaseObjectClass != null && cls.GetTableMapping() == TableMapping.TPH)
                 {
-                    var tblName = cls.GetTableRef(db);
-                    var colName = Construct.ColumnName(prop, string.Empty);
-                    var checkConstraintName = Construct.CheckConstraintName(tblName.Name, colName);
-
-                    if (db.CheckCheckConstraintExists(tblName, checkConstraintName))
-                    {
-                        db.DropCheckConstraint(tblName, checkConstraintName);
-                    }
-
                     Case.CreateTPHNotNullCheckConstraint(tblName, colName, cls);
                 }
             }
@@ -110,15 +176,16 @@ namespace Zetbox.Server.SchemaManagement
                     bool hasPersistentOrder;
                     if (Case.TryInspect_1_N_Relation(rel, out assocName, out relEnd, out otherEnd, out tblName, out refTblName, out colName, out hasPersistentOrder, out listPosName))
                     {
+                        var checkConstraintName = Construct.CheckConstraintName(tblName.Name, colName);
+                        if (db.CheckCheckConstraintExists(tblName, checkConstraintName))
+                        {
+                            db.DropCheckConstraint(tblName, checkConstraintName);
+                        }
+
                         var isNullable = otherEnd.IsNullable();
                         var checkNotNull = !isNullable;
                         if (checkNotNull && (relEnd.Type.GetTableMapping() == TableMapping.TPH && relEnd.Type.BaseObjectClass != null))
                         {
-                            var checkConstraintName = Construct.CheckConstraintName(tblName.Name, colName);
-                            if (db.CheckCheckConstraintExists(tblName, checkConstraintName))
-                            {
-                                db.DropCheckConstraint(tblName, checkConstraintName);
-                            }
                             Case.CreateTPHNotNullCheckConstraint(tblName, colName, relEnd.Type);
                         }
                     }
@@ -158,35 +225,34 @@ namespace Zetbox.Server.SchemaManagement
             foreach (ObjectClass objClass in schema.GetQuery<ObjectClass>().OrderBy(o => o.Module.Namespace).ThenBy(o => o.Name))
             {
                 Log.DebugFormat("Objectclass: {0}.{1}", objClass.Module.Namespace, objClass.Name);
-
                 UpdateIndexConstraints(objClass);
-                UpdateDeletedIndexConstraints(objClass);
             }
             Log.Debug(String.Empty);
         }
 
         private void UpdateIndexConstraints(ObjectClass objClass)
         {
-            foreach (var uc in objClass.Constraints.OfType<IndexConstraint>())
-            {
-                if (Case.IsNewIndexConstraint(uc))
-                {
-                    Case.DoNewIndexConstraint(uc);
-                }
-                else if (Case.IsChangeIndexConstraint(uc))
-                {
-                    Case.DoChangeIndexConstraint(uc);
-                }
-            }
-        }
-
-        private void UpdateDeletedIndexConstraints(ObjectClass objClass)
-        {
             foreach (IndexConstraint uc in Case.savedSchema.GetQuery<IndexConstraint>().Where(p => p.Constrained.ExportGuid == objClass.ExportGuid))
             {
                 if (Case.IsDeleteIndexConstraint(uc))
                 {
                     Case.DoDeleteIndexConstraint(uc);
+                }
+            }
+
+            foreach (var uc in objClass.Constraints.OfType<IndexConstraint>())
+            {
+                if (Case.IsChangeIndexConstraint(uc))
+                {
+                    Case.DoChangeIndexConstraint(uc);
+                }
+            }
+
+            foreach (var uc in objClass.Constraints.OfType<IndexConstraint>())
+            {
+                if (Case.IsNewIndexConstraint(uc))
+                {
+                    Case.DoNewIndexConstraint(uc);
                 }
             }
         }
@@ -203,6 +269,7 @@ namespace Zetbox.Server.SchemaManagement
                     && relEnd.AParent != null
                     && (relEnd.AParent.B.Multiplicity == Multiplicity.One
                         || relEnd.AParent.B.Multiplicity == Multiplicity.ZeroOrOne))
+                .ToList()
                 .Select(relEnd => new
                 {
                     OtherEnd = relEnd.AParent.B,
@@ -220,6 +287,7 @@ namespace Zetbox.Server.SchemaManagement
                     && relEnd.BParent != null
                     && (relEnd.BParent.A.Multiplicity == Multiplicity.One
                         || relEnd.BParent.A.Multiplicity == Multiplicity.ZeroOrOne))
+                .ToList()
                 .Select(relEnd => new
                 {
                     OtherEnd = relEnd.BParent.A,
@@ -286,6 +354,10 @@ namespace Zetbox.Server.SchemaManagement
                 if (Case.IsNewObjectClassACL(objClass))
                 {
                     Case.DoNewObjectClassACL(objClass);
+                }
+                if (Case.IsRenameObjectClassACL(objClass))
+                {
+                    Case.DoRenameObjectClassACL(objClass);
                 }
                 if (Case.IsChangeObjectClassACL(objClass))
                 {
@@ -515,11 +587,22 @@ namespace Zetbox.Server.SchemaManagement
         {
             Log.Info("Updating Relations");
             Log.Debug("------------------");
+            var relations = schema.GetQuery<Relation>().OrderBy(r => r.Module.Namespace);
 
-            foreach (Relation rel in schema.GetQuery<Relation>().OrderBy(r => r.Module.Namespace))
+            foreach (Relation rel in relations)
             {
-                Log.DebugFormat("Relation: {0} ({1})", rel.GetAssociationName(), rel.GetRelationType());
+                if (Case.IsChangeRelationName(rel))
+                {
+                    Case.DoChangeRelationName(rel);
+                }
+                if (Case.IsChangeRelationEndTypes(rel))
+                {
+                    Case.DoChangeRelationEndTypes(rel);
+                }
+            }
 
+            foreach (Relation rel in relations)
+            {
                 if (Case.IsChangeRelationType(rel))
                 {
                     if (Case.IsChangeRelationType_from_1_1_to_1_n(rel))
@@ -547,92 +630,95 @@ namespace Zetbox.Server.SchemaManagement
                         Case.DoChangeRelationType_from_n_m_to_1_n(rel);
                     }
                 }
-                else
+            }
+            foreach (Relation rel in relations)
+            {
+                if (rel.GetRelationType() == RelationType.one_n)
                 {
-                    if (rel.GetRelationType() == RelationType.one_n)
+                    if (Case.Is_1_N_RelationChange_FromIndexed_To_NotIndexed(rel))
                     {
-                        if (Case.IsNew_1_N_Relation(rel))
-                        {
-                            Case.DoNew_1_N_Relation(rel);
-                        }
-                        if (Case.Is_1_N_RelationChange_FromIndexed_To_NotIndexed(rel))
-                        {
-                            Case.Do_1_N_RelationChange_FromIndexed_To_NotIndexed(rel);
-                        }
-                        if (Case.Is_1_N_RelationChange_FromNotIndexed_To_Indexed(rel))
-                        {
-                            Case.Do_1_N_RelationChange_FromNotIndexed_To_Indexed(rel);
-                        }
-                        if (Case.Is_1_N_RelationChange_FromNullable_To_NotNullable(rel))
-                        {
-                            Case.Do_1_N_RelationChange_FromNullable_To_NotNullable(rel);
-                        }
-                        if (Case.Is_1_N_RelationChange_FromNotNullable_To_Nullable(rel))
-                        {
-                            Case.Do_1_N_RelationChange_FromNotNullable_To_Nullable(rel);
-                        }
+                        Case.Do_1_N_RelationChange_FromIndexed_To_NotIndexed(rel);
                     }
-                    else if (rel.GetRelationType() == RelationType.n_m)
+                    if (Case.Is_1_N_RelationChange_FromNotIndexed_To_Indexed(rel))
                     {
-                        if (Case.IsNew_N_M_Relation(rel))
-                        {
-                            Case.DoNew_N_M_Relation(rel);
-                        }
-                        if (Case.Is_N_M_RelationChange_FromIndexed_To_NotIndexed(rel, RelationEndRole.A))
-                        {
-                            Case.Do_N_M_RelationChange_FromIndexed_To_NotIndexed(rel, RelationEndRole.A);
-                        }
-                        if (Case.Is_N_M_RelationChange_FromIndexed_To_NotIndexed(rel, RelationEndRole.B))
-                        {
-                            Case.Do_N_M_RelationChange_FromIndexed_To_NotIndexed(rel, RelationEndRole.B);
-                        }
-                        if (Case.Is_N_M_RelationChange_FromNotIndexed_To_Indexed(rel, RelationEndRole.A))
-                        {
-                            Case.Do_N_M_RelationChange_FromNotIndexed_To_Indexed(rel, RelationEndRole.A);
-                        }
-                        if (Case.Is_N_M_RelationChange_FromNotIndexed_To_Indexed(rel, RelationEndRole.B))
-                        {
-                            Case.Do_N_M_RelationChange_FromNotIndexed_To_Indexed(rel, RelationEndRole.B);
-                        }
+                        Case.Do_1_N_RelationChange_FromNotIndexed_To_Indexed(rel);
                     }
-                    else if (rel.GetRelationType() == RelationType.one_one)
+                    if (Case.Is_1_N_RelationChange_FromNullable_To_NotNullable(rel))
                     {
-                        if (Case.IsNew_1_1_Relation(rel))
-                        {
-                            Case.DoNew_1_1_Relation(rel);
-                        }
-                        if (Case.IsChange_1_1_Storage(rel))
-                        {
-                            Case.DoChange_1_1_Storage(rel);
-                        }
-
-                        if (Case.Is_1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.A))
-                        {
-                            Case.Do_1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.A);
-                        }
-                        if (Case.Is_1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.B))
-                        {
-                            Case.Do_1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.B);
-                        }
-
-                        if (Case.Is_1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.A))
-                        {
-                            Case.Do_1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.A);
-                        }
-                        if (Case.Is_1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.B))
-                        {
-                            Case.Do_1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.B);
-                        }
+                        Case.Do_1_N_RelationChange_FromNullable_To_NotNullable(rel);
+                    }
+                    if (Case.Is_1_N_RelationChange_FromNotNullable_To_Nullable(rel))
+                    {
+                        Case.Do_1_N_RelationChange_FromNotNullable_To_Nullable(rel);
+                    }
+                }
+                else if (rel.GetRelationType() == RelationType.n_m)
+                {
+                    if (Case.Is_N_M_RelationChange_FromIndexed_To_NotIndexed(rel, RelationEndRole.A))
+                    {
+                        Case.Do_N_M_RelationChange_FromIndexed_To_NotIndexed(rel, RelationEndRole.A);
+                    }
+                    if (Case.Is_N_M_RelationChange_FromIndexed_To_NotIndexed(rel, RelationEndRole.B))
+                    {
+                        Case.Do_N_M_RelationChange_FromIndexed_To_NotIndexed(rel, RelationEndRole.B);
+                    }
+                    if (Case.Is_N_M_RelationChange_FromNotIndexed_To_Indexed(rel, RelationEndRole.A))
+                    {
+                        Case.Do_N_M_RelationChange_FromNotIndexed_To_Indexed(rel, RelationEndRole.A);
+                    }
+                    if (Case.Is_N_M_RelationChange_FromNotIndexed_To_Indexed(rel, RelationEndRole.B))
+                    {
+                        Case.Do_N_M_RelationChange_FromNotIndexed_To_Indexed(rel, RelationEndRole.B);
+                    }
+                }
+                else if (rel.GetRelationType() == RelationType.one_one)
+                {
+                    if (Case.IsChange_1_1_Storage(rel))
+                    {
+                        Case.DoChange_1_1_Storage(rel);
                     }
 
-                    if (Case.IsChangeRelationEndTypes(rel))
+                    if (Case.Is_1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.A))
                     {
-                        Case.DoChangeRelationEndTypes(rel);
+                        Case.Do_1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.A);
+                    }
+                    if (Case.Is_1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.B))
+                    {
+                        Case.Do_1_1_RelationChange_FromNotNullable_To_Nullable(rel, RelationEndRole.B);
                     }
 
-                    if (Case.IsChangeRelationName(rel))
+                    if (Case.Is_1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.A))
                     {
-                        Case.DoChangeRelationName(rel);
+                        Case.Do_1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.A);
+                    }
+                    if (Case.Is_1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.B))
+                    {
+                        Case.Do_1_1_RelationChange_FromNullable_To_NotNullable(rel, RelationEndRole.B);
+                    }
+                }
+            }
+
+            foreach (Relation rel in relations)
+            {
+                if (rel.GetRelationType() == RelationType.one_n)
+                {
+                    if (Case.IsNew_1_N_Relation(rel))
+                    {
+                        Case.DoNew_1_N_Relation(rel);
+                    }
+                }
+                else if (rel.GetRelationType() == RelationType.n_m)
+                {
+                    if (Case.IsNew_N_M_Relation(rel))
+                    {
+                        Case.DoNew_N_M_Relation(rel);
+                    }
+                }
+                else if (rel.GetRelationType() == RelationType.one_one)
+                {
+                    if (Case.IsNew_1_1_Relation(rel))
+                    {
+                        Case.DoNew_1_1_Relation(rel);
                     }
                 }
             }

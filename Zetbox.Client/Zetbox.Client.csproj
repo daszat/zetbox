@@ -51,6 +51,12 @@
     <NoWarn>1591,1584,1574</NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Arebis.CodeGeneration, Version=1.3.0.0, Culture=neutral, PublicKeyToken=1012dfebee6c8abd, processorArchitecture=MSIL">
+      <HintPath>..\packages\Arebis.CodeGenerator.1.3.0.0\lib\net40\Arebis.CodeGeneration.dll</HintPath>
+    </Reference>
+    <Reference Include="Arebis.CodeGenerator, Version=1.3.0.0, Culture=neutral, PublicKeyToken=1012dfebee6c8abd, processorArchitecture=MSIL">
+      <HintPath>..\packages\Arebis.CodeGenerator.1.3.0.0\lib\net40\Arebis.CodeGenerator.dll</HintPath>
+    </Reference>
     <Reference Include="Autofac">
       <HintPath>..\packages\Autofac.2.6.3.862\lib\NET40\Autofac.dll</HintPath>
     </Reference>
@@ -117,6 +123,7 @@
     <Compile Include="GUI\IHasViewModel.cs" />
     <Compile Include="GUI\IRenderer.cs" />
     <Compile Include="GUI\ViewDescriptorAttribute.cs" />
+    <Compile Include="DefaultFulltextSupport.cs" />
     <Compile Include="Launcher.cs" />
     <Compile Include="Models\FilterModelsResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -140,14 +147,33 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CacheDebuggerViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\Calendar\CalendarItemViewModel.cs" />
+    <Compile Include="Presentables\Calendar\CalendarConfiguration.cs" />
+    <Compile Include="Presentables\Calendar\CalendarResources1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CalendarResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentables\Calendar\CalendarViewModel.cs" />
+    <Compile Include="Presentables\Calendar\FetchCache.cs" />
+    <Compile Include="Presentables\Calendar\ICalendarDisplayViewModel.cs" />
+    <Compile Include="Presentables\Calendar\NewEventDialogViewModel.cs" />
+    <Compile Include="Presentables\Calendar\EventViewModel.cs" />
+    <Compile Include="Presentables\Calendar\EventInputViewModel.cs" />
+    <Compile Include="Presentables\Calendar\NewEventViewModelsArgs.cs" />
+    <Compile Include="Presentables\Calendar\NextEventsSummaryViewModel.cs" />
+    <Compile Include="Presentables\Calendar\WeekCalendar\CalendarItemViewModel.cs" />
     <Compile Include="Presentables\Calendar\CalendarRuleInstanceViewModel.cs" />
-    <Compile Include="Presentables\Calendar\DayCalendarViewModel.cs" />
-    <Compile Include="Presentables\Calendar\IAppointmentViewModel.cs" />
-    <Compile Include="Presentables\Calendar\LedgerItemViewModel.cs" />
-    <Compile Include="Presentables\Calendar\LedgerViewModel.cs" />
-    <Compile Include="Presentables\Calendar\TimeSlotItemViewModel.cs" />
-    <Compile Include="Presentables\Calendar\WeekCalendarViewModel.cs" />
+    <Compile Include="Presentables\Calendar\CalendarWorkspaceViewModel.cs" />
+    <Compile Include="Presentables\Calendar\WeekCalendar\DayCalendarViewModel.cs" />
+    <Compile Include="Presentables\Calendar\WeekCalendar\LedgerItemViewModel.cs" />
+    <Compile Include="Presentables\Calendar\WeekCalendar\LedgerViewModel.cs" />
+    <Compile Include="Presentables\Calendar\WeekCalendar\TimeSlotItemViewModel.cs" />
+    <Compile Include="Presentables\Calendar\WeekCalendar\WeekCalendarViewModel.cs" />
+    <Compile Include="Presentables\Calendar\WeekCalendar\WeekCalendarViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WeekCalendarViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Presentables\DataObjectViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -172,6 +198,7 @@
     <Compile Include="Presentables\DtoViewModels\DtoTableViewModel.cs" />
     <Compile Include="Presentables\DtoViewModels\DtoValueViewModel.cs" />
     <Compile Include="Presentables\FilterViewModels\DateRangeFilterViewModel.cs" />
+    <Compile Include="Presentables\GuiExtensions.cs" />
     <Compile Include="Presentables\GUI\NavigationTreeScreenViewModel.cs" />
     <Compile Include="Presentables\GUI\NavigationTabbedScreenViewModel.cs" />
     <Compile Include="Presentables\GUI\NavigationActionViewModel.cs" />
@@ -191,8 +218,18 @@
     <Compile Include="Presentables\ModuleEditor\DiagramViewModel.cs" />
     <Compile Include="Presentables\PropertiesPrewiewViewModel.cs" />
     <Compile Include="Presentables\TestModule\InstanceListTestViewModel.cs" />
+    <Compile Include="Presentables\TestModule\NextEventsTestNavScreenViewModel.cs" />
+    <Compile Include="Presentables\TestModule\TestAppNavigationScreenViewModel.cs" />
+    <Compile Include="Presentables\ValueViewModels\CompoundCollectionViewModel.cs" />
+    <Compile Include="Presentables\ValueViewModels\CompoundListViewModel.cs" />
+    <Compile Include="Presentables\ViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Presentables\ZetboxBase\GroupMembershipViewModel.cs" />
     <Compile Include="Presentables\ZetboxBase\AnyReferencePropertyViewModel.cs" />
+    <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModel.Paging.cs" />
     <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModel.Commands.cs" />
     <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModel.PrintExport.cs" />
     <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModel.GridSupport.cs" />
@@ -271,6 +308,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>InstanceListViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Presentables\ZetboxBase\RecurrenceRulePropertyViewModel.cs" />
     <Compile Include="Presentables\ZetboxBase\RelationChainViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -316,7 +354,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BaseObjectCollectionViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\ValueViewModels\CompoundListViewModel.cs" />
+    <Compile Include="Presentables\ValueViewModels\BaseCompoundCollectionViewModel.cs" />
     <Compile Include="Presentables\ValueViewModels\CompoundObjectPropertyViewModel.cs" />
     <Compile Include="Presentables\CompoundObjectViewModel.cs" />
     <Compile Include="Presentables\GUI\NavigatorViewModel.cs" />
@@ -336,8 +374,7 @@
     <Compile Include="Presentables\ZetboxBase\AssemblyViewModel.cs" />
     <Compile Include="Presentables\ZetboxBase\AssemblyReferenceViewModel.cs" />
     <Compile Include="Presentables\ZetboxBase\SystemTypeViewModel.cs" />
-    <Compile Include="Presentables\ZetboxBase\TypeRefPropertyViewModel.Commands.cs" />
-    <Compile Include="Presentables\ZetboxBase\TypeRefPropertyViewModel.cs" />
+    <Compile Include="Presentables\ZetboxBase\TagPropertyEditorViewModel.cs" />
     <Compile Include="Presentables\ZetboxDebuggerAsViewModel.cs" />
     <Compile Include="Presentables\ValueViewModels\DataObjectViewModelProxy.cs" />
     <Compile Include="Presentables\ValueViewModels\ObjectReferenceHelper.cs" />
@@ -370,7 +407,23 @@
     <Compile Include="Presentables\DataObjectSelectionTaskViewModel.cs" />
     <Compile Include="Presentables\ObjectEditor\WorkspaceViewModel.cs" />
     <Compile Include="Presentables\WindowViewModel.cs" />
+    <Compile Include="Reporting\Calendar\Events.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Events.cst</DependentUpon>
+    </Compile>
+    <Compile Include="Reporting\Calendar\EventsResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EventsResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Reporting\Calendar\SheetDays.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SheetDays.cst</DependentUpon>
+    </Compile>
     <Compile Include="Reporting\ReportingErrorDialog.cs" />
+    <Compile Include="Reporting\ReportingHost.cs" />
     <Compile Include="ServerDomainManager.cs" />
     <Compile Include="ClientHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -382,11 +435,65 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ZetboxContextExceptionHandlerResources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CredentialsResolverResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Models\FilterModelsResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\ActionViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\CacheDebuggerViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\Calendar\CalendarResources.de.resx" />
+    <EmbeddedResource Include="Presentables\Calendar\CalendarResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CalendarResources1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\Calendar\CalendarResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\Calendar\WeekCalendar\WeekCalendarViewModelResources.de.resx" />
+    <EmbeddedResource Include="Presentables\Calendar\WeekCalendar\WeekCalendarViewModelResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>WeekCalendarViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\Calendar\WeekCalendar\WeekCalendarViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\DataObjectSelectionTaskViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\DataObjectViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\DocumentManagement\ImportedFileNavigationSearchScreenViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\ErrorListViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\ExceptionReporterViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\FilterViewModels\FilterViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\GUI\MultiLineEditorDialogViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\GUI\NavigatorViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\GUI\SavedListConfiguratorViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\ObjectBrowser\WorkspaceViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\ObjectEditor\WorkspaceViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\ParameterInputTaskViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\SimpleDataObjectEditorTaskViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\ValueInputTaskViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\ValueViewModels\BaseObjectCollectionViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\ValueViewModels\ObjectReferenceViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\ValueViewModels\ValueViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\ViewModelResources.de.resx" />
+    <EmbeddedResource Include="Presentables\ViewModelResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\ViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\ZetboxBase\ApplicationViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\ZetboxBase\CommonCommandsResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\ZetboxBase\InstanceList\FilterListEntryViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\ZetboxBase\InstanceList\FilterListViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\ZetboxBase\PropertySelectionTaskViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\ZetboxBase\RelationChainViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Properties\Resources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Reporting\Calendar\EventsResources.de.resx" />
+    <EmbeddedResource Include="Reporting\Calendar\EventsResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>EventsResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporting\Calendar\EventsResources.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="ZetboxContextExceptionHandlerResources.de.resx" />
     <EmbeddedResource Include="ZetboxContextExceptionHandlerResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ZetboxContextExceptionHandlerResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="ZetboxContextExceptionHandlerResources.x-zb-Pseudo.resx" />
     <None Include="packages.config" />
     <None Include="Properties\VersionInfo.cs" />
     <Compile Include="Properties\VersionInfo.Designer.cs">
@@ -578,6 +685,14 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <None Include="Reporting\Calendar\Events.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>Events.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reporting\Calendar\SheetDays.cst">
+      <Generator>Arebis Template Processor</Generator>
+      <LastGenOutput>SheetDays.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Zetbox.snk" />
     <None Include="PresentableModelsDiagram.cd" />
     <None Include="Properties\Settings.settings">

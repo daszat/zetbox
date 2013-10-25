@@ -73,19 +73,40 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.GUI.Visual_contains_Visual_RelationEntryEfImpl>(
-                        "Model.FK_Visual_contains_Children_A",
-                        "CollectionEntry");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetChildrenImplCollection();
             }
         }
+
+        private EntityCollection<Zetbox.App.GUI.Visual_contains_Visual_RelationEntryEfImpl> _ChildrenImplEntityCollection;
+        internal EntityCollection<Zetbox.App.GUI.Visual_contains_Visual_RelationEntryEfImpl> GetChildrenImplCollection()
+        {
+            if (_ChildrenImplEntityCollection == null)
+            {
+                _ChildrenImplEntityCollection
+                    = ((IEntityWithRelationships)(this)).RelationshipManager
+                        .GetRelatedCollection<Zetbox.App.GUI.Visual_contains_Visual_RelationEntryEfImpl>(
+                            "Model.FK_Visual_contains_Children_A",
+                            "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_ChildrenImplEntityCollection.IsLoaded)
+                {
+                    _ChildrenImplEntityCollection.Load();
+                }
+                _ChildrenImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Children", null, null); if(OnChildren_PostSetter != null && IsAttached) OnChildren_PostSetter(this); };
+            }
+            return _ChildrenImplEntityCollection;
+        }
         private BSideCollectionWrapper<Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual_contains_Visual_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.Visual_contains_Visual_RelationEntryEfImpl>> _Children;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchChildrenAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.GUI.Visual>>(this.Children);
+        }
+
+public static event PropertyListChangedHandler<Zetbox.App.GUI.Visual> OnChildren_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.Visual> OnChildren_IsValid;
 
@@ -122,19 +143,40 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryEfImpl>(
-                        "Model.FK_Visual_hasContextMenu_ContextMenu_A",
-                        "CollectionEntry");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetContextMenuImplCollection();
             }
         }
+
+        private EntityCollection<Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryEfImpl> _ContextMenuImplEntityCollection;
+        internal EntityCollection<Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryEfImpl> GetContextMenuImplCollection()
+        {
+            if (_ContextMenuImplEntityCollection == null)
+            {
+                _ContextMenuImplEntityCollection
+                    = ((IEntityWithRelationships)(this)).RelationshipManager
+                        .GetRelatedCollection<Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryEfImpl>(
+                            "Model.FK_Visual_hasContextMenu_ContextMenu_A",
+                            "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_ContextMenuImplEntityCollection.IsLoaded)
+                {
+                    _ContextMenuImplEntityCollection.Load();
+                }
+                _ContextMenuImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("ContextMenu", null, null); if(OnContextMenu_PostSetter != null && IsAttached) OnContextMenu_PostSetter(this); };
+            }
+            return _ContextMenuImplEntityCollection;
+        }
         private BSideCollectionWrapper<Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryEfImpl>> _ContextMenu;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchContextMenuAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.GUI.Visual>>(this.ContextMenu);
+        }
+
+public static event PropertyListChangedHandler<Zetbox.App.GUI.Visual> OnContextMenu_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.Visual> OnContextMenu_IsValid;
 
@@ -220,7 +262,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Method
         // fkBackingName=_fk_Method; fkGuidBackingName=_fk_guid_Method;
         // referencedInterface=Zetbox.App.Base.Method; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable
 
@@ -302,6 +344,11 @@ namespace Zetbox.App.GUI
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchMethodAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Method>(this.Method);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Method
 		public static event PropertyGetterHandler<Zetbox.App.GUI.Visual, Zetbox.App.Base.Method> OnMethod_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.Visual, Zetbox.App.Base.Method> OnMethod_PreSetter;
@@ -322,7 +369,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Property
         // fkBackingName=_fk_Property; fkGuidBackingName=_fk_guid_Property;
         // referencedInterface=Zetbox.App.Base.Property; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable
 
@@ -404,6 +451,11 @@ namespace Zetbox.App.GUI
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchPropertyAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Property>(this.Property);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Property
 		public static event PropertyGetterHandler<Zetbox.App.GUI.Visual, Zetbox.App.Base.Property> OnProperty_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.Visual, Zetbox.App.Base.Property> OnProperty_PreSetter;
@@ -461,6 +513,23 @@ namespace Zetbox.App.GUI
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Children":
+                return TriggerFetchChildrenAsync();
+            case "ContextMenu":
+                return TriggerFetchContextMenuAsync();
+            case "Method":
+                return TriggerFetchMethodAsync();
+            case "Property":
+                return TriggerFetchPropertyAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
@@ -479,6 +548,7 @@ namespace Zetbox.App.GUI
                 PropertyImpl = (Zetbox.App.Base.PropertyEfImpl)Context.Find<Zetbox.App.Base.Property>(_fk_Property.Value);
             else
                 PropertyImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

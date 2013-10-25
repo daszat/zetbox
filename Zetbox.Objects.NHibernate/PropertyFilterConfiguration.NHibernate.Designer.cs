@@ -152,6 +152,11 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for Property's guid, used on import only</summary>
         private Guid? _fk_guid_Property = null;
 
+    public Zetbox.API.Async.ZbTask TriggerFetchPropertyAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Property>(this.Property);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Property
 		public static event PropertyGetterHandler<Zetbox.App.GUI.PropertyFilterConfiguration, Zetbox.App.Base.Property> OnProperty_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.PropertyFilterConfiguration, Zetbox.App.Base.Property> OnProperty_PreSetter;
@@ -337,6 +342,17 @@ namespace Zetbox.App.GUI
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Property":
+                return TriggerFetchPropertyAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

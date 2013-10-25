@@ -40,7 +40,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// The Relation using this RelationEnd as A
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for AParent
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for AParent
         // fkBackingName=_fk_AParent; fkGuidBackingName=_fk_guid_AParent;
         // referencedInterface=Zetbox.App.Base.Relation; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=A; is reference;
@@ -172,7 +172,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// The Relation using this RelationEnd as B
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for BParent
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for BParent
         // fkBackingName=_fk_BParent; fkGuidBackingName=_fk_guid_BParent;
         // referencedInterface=Zetbox.App.Base.Relation; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=B; is reference;
@@ -304,10 +304,10 @@ namespace Zetbox.App.Base
         /// <summary>
         /// Identity which changed this object
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -492,10 +492,10 @@ namespace Zetbox.App.Base
         /// <summary>
         /// Identity which created this object
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -880,7 +880,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// The ORP to navigate FROM this end of the relation. MAY be null.
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Navigator
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Navigator
         // fkBackingName=_fk_Navigator; fkGuidBackingName=_fk_guid_Navigator;
         // referencedInterface=Zetbox.App.Base.ObjectReferenceProperty; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=RelationEnd; is reference;
@@ -1098,10 +1098,10 @@ namespace Zetbox.App.Base
         /// <summary>
         /// Specifies which type this End of the relation has. MUST NOT be null.
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Type
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Type
         // fkBackingName=_fk_Type; fkGuidBackingName=_fk_guid_Type;
         // referencedInterface=Zetbox.App.Base.ObjectClass; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -1467,6 +1467,7 @@ namespace Zetbox.App.Base
                 TypeImpl = (Zetbox.App.Base.ObjectClassMemoryImpl)Context.Find<Zetbox.App.Base.ObjectClass>(_fk_Type.Value);
             else
                 TypeImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

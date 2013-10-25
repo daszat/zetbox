@@ -27,6 +27,7 @@ namespace Zetbox.Client.Presentables
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
     using Zetbox.App.GUI;
+    using Zetbox.Client.GUI;
 
     public interface IViewModelDependencies
     {
@@ -49,6 +50,11 @@ namespace Zetbox.Client.Presentables
         /// IIconConverter instance
         /// </summary>
         IIconConverter IconConverter { get; }
+
+        /// <summary>
+        /// IAssetManager instance
+        /// </summary>
+        IAssetsManager Assets { get; }
     }
 
     [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
@@ -102,12 +108,22 @@ namespace Zetbox.Client.Presentables
         /// </summary>
         public IIconConverter IconConverter { get { return _dependencies.IconConverter; } }
 
+        public IAssetsManager Assets { get { return _dependencies.Assets; } }
+
         /// <summary>
         /// A <see cref="IZetboxContext"/> to access the current user's data
         /// </summary>
         protected IZetboxContext DataContext { get; private set; }
 
+        public ViewModel GetWorkspace()
+        {
+            return ViewModelFactory.GetWorkspace(DataContext);
+        }
+
         private Identity _CurrentIdentity = null;
+        /// <summary>
+        /// Returns the current identity using the IIdentityResolver. Thus, the Identity object does not belong to the current context!
+        /// </summary>
         public Identity CurrentIdentity
         {
             get
@@ -170,10 +186,12 @@ namespace Zetbox.Client.Presentables
             }
         }
 
-        public void SetBusy()
+        public void SetBusy(string message = null)
         {
             _isBusy++;
             OnPropertyChanged("IsBusy");
+
+            CurrentBusyMessage = message ?? ViewModelResources.DefaultBusyMessage;
 
             if (_isBusy == 1)
                 OnPropertyChanged("IsEnabled");
@@ -191,6 +209,23 @@ namespace Zetbox.Client.Presentables
                 Logging.Log.Warn("ClearBusy called too often or without a prev. SetBusy call");
             }
             OnPropertyChanged("IsBusy");
+        }
+
+        private string _currentBusyMessage;
+        public string CurrentBusyMessage
+        {
+            get
+            {
+                return _currentBusyMessage;
+            }
+            set
+            {
+                if (_currentBusyMessage != value)
+                {
+                    _currentBusyMessage = value;
+                    OnPropertyChanged("CurrentBusyMessage");
+                }
+            }
         }
 
         private bool _isEnabled = true;
@@ -356,6 +391,71 @@ namespace Zetbox.Client.Presentables
         }
         #endregion
 
+        #region Help command
+        private ICommandViewModel _HelpCommand = null;
+
+        /// <summary>
+        /// It's not the question _if_ you should display a help command, the question is _where_!
+        /// </summary>
+        public ICommandViewModel HelpCommand
+        {
+            get
+            {
+                if (_HelpCommand == null)
+                {
+                    _HelpCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, ViewModelResources.HelpCommand, ViewModelResources.HelpCommand_Tooltip, Help, CanHelp, null);
+                    _HelpCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.info_png.Find(FrozenContext));
+                }
+                return _HelpCommand;
+            }
+        }
+
+        public bool CanHelp()
+        {
+            return HasHelpText;
+        }
+
+        public void Help()
+        {
+            if (!CanHelp()) return;
+
+            // The basic implementation - a toolkit might implement it better
+            var dlg = ViewModelFactory.CreateDialog(DataContext, ViewModelResources.HelpCommand)
+                .AddTextBlock(ViewModelResources.HelpCommand, HelpText);
+            dlg.Show();
+        }
+
+        public bool HasHelpText
+        {
+            get
+            {
+                return !string.IsNullOrWhiteSpace(HelpText);
+            }
+        }
+
+        private string _helpText;
+        public string HelpText
+        {
+            get
+            {
+                return _helpText ?? GetHelpText();
+            }
+            set
+            {
+                if (_helpText != null)
+                {
+                    _helpText = value;
+                    OnPropertyChanged("HelpText");
+                    OnPropertyChanged("HasHelpText");
+                }
+            }
+        }
+
+        protected virtual string GetHelpText()
+        {
+            return string.Empty;
+        }
+        #endregion
     }
 
     public struct Highlight
@@ -481,6 +581,11 @@ namespace Zetbox.Client.Presentables
         }
 
         public IIconConverter IconConverter
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public IAssetsManager Assets
         {
             get { throw new NotImplementedException(); }
         }

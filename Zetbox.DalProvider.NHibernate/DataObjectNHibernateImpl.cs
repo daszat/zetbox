@@ -20,8 +20,8 @@ namespace Zetbox.DalProvider.NHibernate
     using System.Linq;
     using System.Text;
     using Zetbox.API;
-    using Zetbox.App.Base;
     using Zetbox.API.Async;
+    using Zetbox.App.Base;
 
     public abstract class DataObjectNHibernateImpl
         : NHibernatePersistenceObject, IDataObject
@@ -44,19 +44,14 @@ namespace Zetbox.DalProvider.NHibernate
         /// <inheritdoc />
         public virtual void NotifyPostSave() { }
 
-        /// <inheritdoc />
-        public virtual void NotifyCreated() { }
-        /// <inheritdoc />
-        public virtual void NotifyDeleting() { }
-
         public abstract Guid ObjectClassID { get; }
-
-        #endregion
 
         public virtual void UpdateParent(string propertyName, IDataObject parentObj)
         {
             throw new MemberAccessException(String.Format("No {0} property in {1}", propertyName, GetImplementedInterface().FullName));
         }
+
+        #endregion
 
         int System.IComparable.CompareTo(object other)
         {

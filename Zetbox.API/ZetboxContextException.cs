@@ -127,6 +127,36 @@ namespace Zetbox.API
     }
 
     [Serializable]
+    public class ZetboxObjectNotFoundException
+        : ZetboxContextException
+    {
+        public ZetboxObjectNotFoundException()
+            : base("The given ID could not be found in the current zetbox context")
+        {
+        }
+
+        public ZetboxObjectNotFoundException(Type t, int id)
+            : base(String.Format("no object of type {0} with ID={1}", t != null ? t.FullName : "unknown", id))
+        {
+        }
+
+        public ZetboxObjectNotFoundException(string message)
+            : base(message)
+        {
+        }
+
+        public ZetboxObjectNotFoundException(string message, Exception inner)
+            : base(message, inner)
+        {
+        }
+
+        protected ZetboxObjectNotFoundException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+        }
+    }
+
+    [Serializable]
     [DataContract]
     public class ConcurrencyExceptionDetail
     {

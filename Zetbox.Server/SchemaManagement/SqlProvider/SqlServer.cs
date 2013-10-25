@@ -19,6 +19,7 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
     using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
+    using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Linq.Expressions;
@@ -30,7 +31,6 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
     using Zetbox.API.SchemaManagement;
     using Zetbox.API.Server;
     using Zetbox.API.Utils;
-    using System.Globalization;
 
     public class SqlServer
         : AdoNetSchemaProvider<SqlConnection, SqlTransaction, SqlCommand>
@@ -341,7 +341,7 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
         {
             // TODO: check schema/database
             return (int)ExecuteScalar("SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@tbl) AND type IN (N'U')",
-                new Dictionary<string, object>() { 
+                new Dictionary<string, object>() {
                     { "@tbl", FormatSchemaName(tblName) }
                 }) > 0;
         }
@@ -408,6 +408,8 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
 
         public override void RenameTable(TableRef oldTblName, TableRef newTblName)
         {
+            if (oldTblName == newTblName) return; // noop
+
             if (oldTblName == null)
                 throw new ArgumentNullException("oldTblName");
             if (newTblName == null)
@@ -431,9 +433,9 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
         public override bool CheckColumnExists(TableRef tblName, string colName)
         {
             return (int)ExecuteScalar(@"SELECT COUNT(*)
-                FROM sys.objects o 
+                FROM sys.objects o
                     INNER JOIN sys.columns c ON c.object_id=o.object_id
-                WHERE o.object_id = OBJECT_ID(@tbl) 
+                WHERE o.object_id = OBJECT_ID(@tbl)
                     AND o.type IN (N'U', N'V')
                     AND c.Name = @name",
                 new Dictionary<string, object>(){
@@ -446,7 +448,7 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
         {
             return ExecuteReader(
                @"SELECT c.name
-                        FROM sys.objects o 
+                        FROM sys.objects o
                             INNER JOIN sys.columns c ON c.object_id=o.object_id
                         WHERE o.object_id = OBJECT_ID(@tbl)
                             AND o.type IN (N'U', N'V')",
@@ -460,7 +462,7 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
         {
             return ExecuteReader(
                 @"SELECT c.name, TYPE_NAME(system_type_id) type, max_length, is_nullable
-                    FROM sys.objects o 
+                    FROM sys.objects o
                         INNER JOIN sys.columns c ON c.object_id=o.object_id
                     WHERE o.object_id = OBJECT_ID(@tbl)
                         AND o.type IN (N'U', N'V')",
@@ -553,10 +555,24 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
             // Drop an existing constraint
             if (!add)
             {
-                ExecuteNonQuery(string.Format("IF OBJECT_ID('{0}') IS NOT NULL\nALTER TABLE {1} DROP CONSTRAINT {2}",
-                    FormatSchemaName(new ConstraintRef(tblName.Database, tblName.Schema, defConstrName)),
-                    FormatSchemaName(tblName),
-                    QuoteIdentifier(defConstrName)));
+                var existingDefaultConstraintName = (string)ExecuteScalar(@"SELECT obj.name FROM sys.sysconstraints c
+INNER JOIN sys.sysobjects obj on (c.constid = obj.id)
+INNER JOIN sys.sysobjects tbl on (c.id = tbl.id)
+INNER JOIN sys.syscolumns col on (c.colid = col.colid AND col.id = tbl.id)
+WHERE tbl.id = OBJECT_ID(@table) and col.name = @column AND obj.xtype = 'D'",
+                    new Dictionary<string, object>()
+                    {
+                        { "@table", FormatSchemaName(tblName) },
+                        { "@column", colName },
+                    });
+
+                if (!string.IsNullOrWhiteSpace(existingDefaultConstraintName))
+                {
+                    ExecuteNonQuery(string.Format("ALTER TABLE {0} DROP CONSTRAINT {1}",
+                        FormatSchemaName(tblName),
+                        QuoteIdentifier(existingDefaultConstraintName)));
+                }
+
                 ExecuteNonQuery(string.Format("IF OBJECT_ID('{0}') IS NOT NULL\nALTER TABLE {1} DROP CONSTRAINT {2}",
                     FormatSchemaName(new ConstraintRef(tblName.Database, tblName.Schema, checkConstrName)),
                     FormatSchemaName(tblName),
@@ -579,8 +595,37 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
             }
         }
 
+        private List<string> FindReferencingCheckConstraints(TableRef tblName, string colName)
+        {
+            return ExecuteReader(@"
+                SELECT OBJECT_NAME(referencing_id) AS referencing_entity_name
+                    FROM sys.sql_expression_dependencies AS sed
+                    WHERE referenced_schema_name = @schema
+                        AND referenced_entity_name = @tblName
+                        AND COL_NAME(referenced_id, referenced_minor_id) = @colName",
+                new Dictionary<string, object>()
+                {
+                    { "@schema", tblName.Schema },
+                    { "@tblName", tblName.Name },
+                    { "@colName", colName },
+                })
+                .Select(r => (string)r[0])
+                .ToList();
+        }
+
         public override void RenameColumn(TableRef tblName, string oldColName, string newColName)
         {
+            if (oldColName == newColName) return; // noop
+            // sp_rename cannot cope when check constraints reference the column. wtf?
+            // Workaround_UpdateTPHNotNullCheckConstraint will recreate the constraints for us.
+            foreach (var constraintName in FindReferencingCheckConstraints(tblName, oldColName))
+            {
+                if (CheckCheckConstraintExists(tblName, constraintName))
+                {
+                    DropCheckConstraint(tblName, constraintName);
+                }
+            }
+
             // Do not qualify new name as it will stay part of the original table
             ExecuteNonQuery(string.Format("EXEC sp_rename '{0}.{1}', '{2}', 'COLUMN'", FormatSchemaName(tblName), QuoteIdentifier(oldColName), newColName));
         }
@@ -591,9 +636,9 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
                 SELECT c.is_nullable
                 FROM sys.objects o
                     INNER JOIN sys.columns c ON c.object_id=o.object_id
-                WHERE o.object_id = OBJECT_ID(@table) 
-		            AND o.type IN (N'U', N'V')
-		            AND c.Name = @column",
+                WHERE o.object_id = OBJECT_ID(@table)
+                    AND o.type IN (N'U', N'V')
+                    AND c.Name = @column",
                 new Dictionary<string, object>(){
                     { "@table", FormatSchemaName(tblName) },
                     { "@column", colName },
@@ -617,9 +662,9 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
                 SELECT c.max_length / 2
                 FROM sys.objects o
                     INNER JOIN sys.columns c ON c.object_id=o.object_id
-	            WHERE o.object_id = OBJECT_ID(@table) 
-		            AND o.type IN (N'U', N'V')
-		            AND c.Name = @column",
+                WHERE o.object_id = OBJECT_ID(@table)
+                    AND o.type IN (N'U', N'V')
+                    AND c.Name = @column",
                 new Dictionary<string, object>(){
                     { "@table", FormatSchemaName(tblName) },
                     { "@column", colName },
@@ -669,7 +714,7 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
             return (int)ExecuteScalar(String.Format(
                 @"SELECT COUNT(*) FROM (
                     SELECT TOP 1 {1} FROM {0} WHERE {1} IS NOT NULL
-                    GROUP BY {1} 
+                    GROUP BY {1}
                     HAVING COUNT({1}) > 1) AS tbl",
                 FormatSchemaName(tbl),
                 QuoteIdentifier(colName))) == 0;
@@ -681,6 +726,16 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
                 "SELECT COUNT(*) FROM (SELECT TOP 1 {1} FROM {0} WHERE {1} IS NOT NULL) AS data",
                 FormatSchemaName(tbl),
                 QuoteIdentifier(colName))) > 0;
+        }
+
+        protected override bool CheckColumnsNullEquality(TableRef tblName, string aColName, string bColName)
+        {
+            return (int)ExecuteScalar(
+                string.Format("select count(*) from (select top 1 * from {0} where ({1} is null and {2} is not null) or ({1} is not null and {2} is null)) as data",
+                    FormatSchemaName(tblName),
+                    QuoteIdentifier(aColName),
+                    QuoteIdentifier(bColName))
+                ) > 0;
         }
 
         public override long CountRows(TableRef tblName)
@@ -718,7 +773,7 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
         public override void CreateFKConstraint(TableRef tblName, TableRef refTblName, string colName, string newConstraintName, bool onDeleteCascade)
         {
             ExecuteNonQuery(string.Format(@"
-                ALTER TABLE {0} WITH CHECK 
+                ALTER TABLE {0} WITH CHECK
                 ADD CONSTRAINT [{1}] FOREIGN KEY([{2}])
                 REFERENCES {3} ([ID]){4}",
                 FormatSchemaName(tblName),
@@ -734,6 +789,7 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
 
         public override void RenameFKConstraint(TableRef tblName, string oldConstraintName, TableRef refTblName, string colName, string newConstraintName, bool onDeleteCascade)
         {
+            if (oldConstraintName == newConstraintName) return; // noop
             if (tblName == null) throw new ArgumentNullException("tblName");
             if (string.IsNullOrEmpty(oldConstraintName)) throw new ArgumentNullException("oldConstraintName");
             if (string.IsNullOrEmpty(newConstraintName)) throw new ArgumentNullException("newConstraintName");
@@ -773,8 +829,6 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
 
             string colSpec = string.Join(", ", columns.Select(c => "[" + c + "]").ToArray());
 
-            Log.DebugFormat("Creating index {0}.[{1}] ({2})", FormatSchemaName(tblName), idxName, colSpec);
-
             string appendIndexFilter = string.Empty;
             if (unique && !clustered && columns.Length == 1)
             {
@@ -805,6 +859,13 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
         public override void DropIndex(TableRef tblName, string idxName)
         {
             ExecuteNonQuery(string.Format("DROP INDEX [{0}] ON {1}", idxName, FormatSchemaName(tblName)));
+        }
+
+        public override void RenameIndex(TableRef tblName, string oldIdxName, string newIdxName)
+        {
+            if (oldIdxName == newIdxName) return; // noop
+            // Do not qualify new name as it will be part of the name
+            ExecuteNonQuery(string.Format("EXEC sp_rename '{0}.[{1}]', '{2}', 'INDEX'", FormatSchemaName(tblName), oldIdxName, newIdxName));
         }
 
         public override bool CheckCheckConstraintPossible(TableRef tblName, string colName, string newConstraintName, Dictionary<List<string>, Expression<Func<string, bool>>> checkExpressions)
@@ -839,23 +900,28 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
                 }) > 0;
         }
 
-        public override bool CheckTriggerExists(TableRef objName, string triggerName)
+        public override IEnumerable<TriggerRef> GetTriggerNames()
         {
-            if (objName == null) throw new ArgumentNullException("objName");
+            return ExecuteReader("SELECT s.name, o.name FROM sys.objects o JOIN sys.schemas s ON o.schema_id = s.schema_id WHERE o.type = N'TR'")
+                .Select(rd => new TriggerRef(CurrentConnection.Database, rd.GetString(0), rd.GetString(1)));
+        }
+
+        public override bool CheckTriggerExists(TriggerRef triggerName)
+        {
+            if (triggerName == null) throw new ArgumentNullException("triggerName");
 
             return (int)ExecuteScalar(
-                "SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@trigger) AND parent_object_id = OBJECT_ID(@parent) AND type IN (N'TR')",
+                "SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@trigger) AND type IN (N'TR')",
                 new Dictionary<string, object>(){
-                    { "@trigger", FormatSchemaName(new TriggerRef(objName.Database, objName.Schema, triggerName)) },
-                    { "@parent", FormatSchemaName(objName) },
+                    { "@trigger", FormatSchemaName(triggerName) },
                 }) > 0;
         }
 
-        public override void DropTrigger(TableRef objName, string triggerName)
+        public override void DropTrigger(TriggerRef triggerName)
         {
-            if (objName == null) throw new ArgumentNullException("objName");
+            if (triggerName == null) throw new ArgumentNullException("triggerName");
 
-            ExecuteNonQuery(string.Format("DROP TRIGGER {0}", FormatSchemaName(new TriggerRef(objName.Database, objName.Schema, triggerName))));
+            ExecuteNonQuery(string.Format("DROP TRIGGER {0}", FormatSchemaName(triggerName)));
         }
 
         public override IEnumerable<ProcRef> GetProcedureNames()
@@ -967,7 +1033,6 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
 
         public override void CopyColumnData(TableRef srcTblName, string srcColName, TableRef tblName, string colName)
         {
-            Log.DebugFormat("Copying data from [{0}].[{1}] to [{2}].[{3}]", srcTblName, srcColName, tblName, colName);
             ExecuteNonQuery(string.Format("UPDATE dest SET dest.[{0}] = src.[{1}] FROM {2} dest INNER JOIN {3} src ON dest.ID = src.ID",
                 colName, srcColName, FormatSchemaName(tblName), FormatSchemaName(srcTblName)));
         }
@@ -1022,21 +1087,18 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
 
         public override void MigrateFKs(TableRef srcTblName, string srcColName, TableRef tblName, string colName)
         {
-            Log.DebugFormat("Migrating FK data from [{0}].[{1}] to [{2}].[{3}]", srcTblName, srcColName, tblName, colName);
-            ExecuteNonQuery(string.Format("UPDATE dest SET dest.[{0}] = src.[ID] FROM [{2}] dest INNER JOIN [{3}] src ON dest.ID = src.[{1}]",
+            ExecuteNonQuery(string.Format("UPDATE dest cSET dest.[{0}] = src.[ID] FROM [{2}] dest INNER JOIN [{3}] src ON dest.ID = src.[{1}]",
                 colName, srcColName, FormatSchemaName(tblName), FormatSchemaName(srcTblName)));
         }
 
         public override void InsertFKs(TableRef srcTblName, string srcColName, TableRef tblName, string colName, string fkColName)
         {
-            Log.DebugFormat("Inserting FK data from [{0}]([{1}]) to [{2}]([{3}],[{4}])", srcTblName, srcColName, tblName, colName, fkColName);
             ExecuteNonQuery(string.Format("INSERT INTO {0} ([{1}], [{2}]) SELECT [ID], [{3}] FROM {4} WHERE [{3}] IS NOT NULL",
                 FormatSchemaName(tblName), colName, fkColName, srcColName, FormatSchemaName(srcTblName)));
         }
 
         public override void CopyFKs(TableRef srcTblName, string srcColName, TableRef destTblName, string destColName, string srcFKColName)
         {
-            Log.DebugFormat("Copy FK data from [{0}]([{1}]) to [{2}]([{3}])", srcTblName, srcColName, destTblName, destColName);
             ExecuteNonQuery(string.Format("UPDATE dest SET dest.[{0}] = src.[{1}] FROM {2} dest  INNER JOIN {3} src ON src.[{4}] = dest.[ID]",
                 destColName, srcColName, FormatSchemaName(destTblName), FormatSchemaName(srcTblName), srcFKColName));
         }
@@ -1050,52 +1112,52 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
                 : -1;
         }
 
-        public override void CreateUpdateRightsTrigger(string triggerName, TableRef tblName, List<RightsTrigger> tblList, List<string> dependingCols)
+        public override void CreateUpdateRightsTrigger(TriggerRef triggerName, TableRef tblName, List<RightsTrigger> tblList, List<string> dependingCols)
         {
-            if (tblList == null)
-                throw new ArgumentNullException("tblList");
-
-            Log.DebugFormat("Creating trigger to update rights [{0}]", triggerName);
+            if (triggerName == null) throw new ArgumentNullException("triggerName");
+            if (tblName == null) throw new ArgumentNullException("tblName");
+            if (tblList == null) throw new ArgumentNullException("tblList");
+            if (triggerName.Database != tblName.Database || triggerName.Schema != tblName.Schema) throw new ArgumentOutOfRangeException("tblName", string.Format("tblName and triggerName must reference the same database and schema, but don't: tbl:{0}.{1} != trg:{2}.{3}", tblName.Database, tblName.Schema, triggerName.Database, triggerName.Schema));
 
             StringBuilder sb = new StringBuilder();
             sb.AppendFormat(@"CREATE TRIGGER [{0}]
 ON {1}
 AFTER UPDATE, INSERT, DELETE AS
 BEGIN
-SET NOCOUNT ON", triggerName, FormatSchemaName(tblName));
+SET NOCOUNT ON", triggerName.Name, FormatSchemaName(tblName));
             sb.AppendLine();
 
             // optimaziation
             if (dependingCols != null && dependingCols.Count > 0)
             {
-                sb.Append(@"	declare @changed_new table (ID int)
-	declare @deleted table (ID int)
-	
-	insert into @changed_new
-	select i.[ID] 
-	from inserted i inner join deleted d on i.[ID] = d.[ID]
-	where ");
-                sb.AppendLine(string.Join(" OR ", dependingCols.Select(c => string.Format("\n		coalesce(d.{0}, -1) <> coalesce(i.{0}, -1)", QuoteIdentifier(c))).ToArray()));
-                sb.AppendLine(@"	union all
-	select i.[ID]
-	from inserted i 
-	where i.[ID] not in(select [ID] from deleted)
-	
-	insert into @deleted
-	select d.[ID] 
-	from deleted d 
-	where d.[ID] not in(select [ID] from inserted)");
+                sb.Append(@"    declare @changed_new table (ID int)
+    declare @deleted table (ID int)
+
+    insert into @changed_new
+    select i.[ID]
+    from inserted i inner join deleted d on i.[ID] = d.[ID]
+    where ");
+                sb.AppendLine(string.Join(" OR ", dependingCols.Select(c => string.Format("\n        coalesce(d.{0}, -1) <> coalesce(i.{0}, -1)", QuoteIdentifier(c))).ToArray()));
+                sb.AppendLine(@"    union all
+    select i.[ID]
+    from inserted i
+    where i.[ID] not in(select [ID] from deleted)
+
+    insert into @deleted
+    select d.[ID]
+    from deleted d
+    where d.[ID] not in(select [ID] from inserted)");
             }
 
             foreach (var tbl in tblList)
             {
-                StringBuilder select = new StringBuilder();
-                if (tbl.Relations.Count == 0)
+                // directly at the object, we can simplify
+                if (tbl.ObjectRelations.Count == 0)
                 {
                     sb.AppendFormat(@"
     DELETE FROM {0} WHERE [ID] IN (SELECT [ID] FROM @changed_new)
     DELETE FROM {0} WHERE [ID] IN (SELECT [ID] FROM @deleted)
-    INSERT INTO {0} ([ID], [Identity], [Right]) 
+    INSERT INTO {0} ([ID], [Identity], [Right])
         SELECT [ID], [Identity], [Right]
         FROM {1}
         WHERE [ID] IN (SELECT [ID] FROM @changed_new)",
@@ -1106,28 +1168,24 @@ SET NOCOUNT ON", triggerName, FormatSchemaName(tblName));
                 }
                 else
                 {
-                    select.AppendFormat("SELECT t1.[ID] FROM {0} t1", FormatSchemaName(tbl.TblName));
-                    int idx = 2;
-                    var lastRel = tbl.Relations.Last();
-                    foreach (var rel in tbl.Relations)
-                    {
-                        select.AppendLine();
-                        select.AppendFormat(@"      INNER JOIN {0} t{1} ON t{1}.[{2}] = t{3}.[{4}]",
-                            (rel == lastRel) ? "{0}" : FormatSchemaName(rel.JoinTableName),
-                            idx,
-                            rel.JoinColumnName.Single().ColumnName,
-                            idx - 1,
-                            rel.FKColumnName.Single().ColumnName);
-                        idx++;
-                    }
-                    select.AppendFormat("\n      WHERE t{0}.[ID] in (select [ID] from {{1}})", idx - 1);
-                    string selectFormat = select.ToString();
-                    sb.AppendFormat("    DELETE FROM {0}\n    WHERE [ID] IN ({1})", FormatSchemaName(tbl.TblNameRights), string.Format(selectFormat, "inserted", "@changed_new"));
+                    string selectObjectFormat = FormatSelectJoin(tbl.TblName, tbl.ObjectRelations);
+                    string selectIdentityFormat = tbl.IdentityRelations.Count == 0 ? "(1=1)" : ("[Identity] IN (" + FormatSelectJoin(GetTableName("base", "Identities"), tbl.IdentityRelations) + ")");
+
+                    sb.AppendFormat("    DELETE FROM {0}\n    WHERE [ID] IN ({1}) AND {2}",
+                        FormatSchemaName(tbl.TblNameRights),
+                        string.Format(selectObjectFormat, "inserted", "@changed_new"),
+                        string.Format(selectIdentityFormat, "inserted", "@changed_new"));
                     sb.AppendLine();
-                    sb.AppendFormat("    DELETE FROM {0}\n    WHERE [ID] IN ({1})", FormatSchemaName(tbl.TblNameRights), string.Format(selectFormat, "deleted", "@deleted"));
+                    sb.AppendFormat("    DELETE FROM {0}\n    WHERE [ID] IN ({1}) AND {2}",
+                        FormatSchemaName(tbl.TblNameRights),
+                        string.Format(selectObjectFormat, "deleted", "@deleted"),
+                        string.Format(selectIdentityFormat, "deleted", "@deleted"));
                     sb.AppendLine();
-                    sb.AppendFormat("    INSERT INTO {0} ([ID], [Identity], [Right])\n    SELECT [ID], [Identity], [Right]\n    FROM {2}\n    WHERE [ID] IN ({1})",
-                        FormatSchemaName(tbl.TblNameRights), string.Format(selectFormat, "inserted", "@changed_new"), FormatSchemaName(tbl.ViewUnmaterializedName));
+                    sb.AppendFormat("    INSERT INTO {0} ([ID], [Identity], [Right])\n    SELECT [ID], [Identity], [Right]\n    FROM {3}\n    WHERE [ID] IN ({1}) AND {2}",
+                        FormatSchemaName(tbl.TblNameRights),                                // 0
+                        string.Format(selectObjectFormat, "inserted", "@changed_new"),      // 1
+                        string.Format(selectIdentityFormat, "inserted", "@changed_new"),    // 2
+                        FormatSchemaName(tbl.ViewUnmaterializedName));                      // 3
                     sb.AppendLine();
                     sb.AppendLine();
                 }
@@ -1139,9 +1197,29 @@ END");
             ExecuteNonQuery(sb.ToString());
         }
 
+        private string FormatSelectJoin(TableRef tbl, List<Join> joins)
+        {
+            StringBuilder select = new StringBuilder();
+            select.AppendFormat("SELECT t1.[ID] FROM {0} t1", FormatSchemaName(tbl));
+            int idx = 2;
+            var lastRel = joins.Last();
+            foreach (var rel in joins)
+            {
+                select.AppendLine();
+                select.AppendFormat(@"      INNER JOIN {0} t{1} ON t{1}.[{2}] = t{3}.[{4}]",
+                    (rel == lastRel) ? "{0}" : FormatSchemaName(rel.JoinTableName),
+                    idx,
+                    rel.JoinColumnName.Single().ColumnName,
+                    idx - 1,
+                    rel.FKColumnName.Single().ColumnName);
+                idx++;
+            }
+            select.AppendFormat("\n      WHERE t{0}.[ID] in (select [ID] from {{1}})", idx - 1);
+            return select.ToString();
+        }
+
         public override void CreateEmptyRightsViewUnmaterialized(TableRef viewName)
         {
-            Log.DebugFormat("Creating *empty* unmaterialized rights view [{0}]", viewName);
             ExecuteNonQuery(string.Format(@"CREATE VIEW {0} AS SELECT 0 [ID], 0 [Identity], 0 [Right] WHERE 0 = 1", FormatSchemaName(viewName)));
         }
 
@@ -1153,15 +1231,14 @@ END");
                 throw new ArgumentNullException("tblName");
             if (acls == null)
                 throw new ArgumentNullException("acls");
-            Log.DebugFormat("Creating unmaterialized rights view for [{0}]", tblName);
 
             StringBuilder view = new StringBuilder();
             view.AppendFormat(@"CREATE VIEW [{0}].[{1}] AS
-SELECT	[ID], [Identity], 
-		(case SUM([Right] & 1) when 0 then 0 else 1 end) +
-		(case SUM([Right] & 2) when 0 then 0 else 2 end) +
-		(case SUM([Right] & 4) when 0 then 0 else 4 end) +
-		(case SUM([Right] & 8) when 0 then 0 else 8 end) [Right] 
+SELECT    [ID], [Identity],
+        (case SUM([Right] & 1) when 0 then 0 else 1 end) +
+        (case SUM([Right] & 2) when 0 then 0 else 2 end) +
+        (case SUM([Right] & 4) when 0 then 0 else 4 end) +
+        (case SUM([Right] & 8) when 0 then 0 else 8 end) [Right]
 FROM (", viewName.Schema, viewName.Name);
             view.AppendLine();
 
@@ -1197,20 +1274,19 @@ FROM (", viewName.Schema, viewName.Name);
 
         public override void CreateRefreshRightsOnProcedure(ProcRef procName, TableRef viewUnmaterializedName, TableRef tblName, TableRef tblNameRights)
         {
-            Log.DebugFormat("Creating refresh rights procedure for [{0}]", tblName);
             ExecuteNonQuery(string.Format(@"CREATE PROCEDURE {0} (@ID INT = NULL) AS
                     BEGIN
                         SET NOCOUNT ON
-	                    IF (@ID IS NULL)
-		                    BEGIN
-			                    TRUNCATE TABLE {1}
-			                    INSERT INTO {1} ([ID], [Identity], [Right]) SELECT [ID], [Identity], [Right] FROM {2}
-		                    END
-	                    ELSE
-		                    BEGIN
-			                    DELETE FROM {1} WHERE ID = @ID
-			                    INSERT INTO {1} ([ID], [Identity], [Right]) SELECT [ID], [Identity], [Right] FROM {2} WHERE [ID] = @ID
-		                    END
+                        IF (@ID IS NULL)
+                            BEGIN
+                                TRUNCATE TABLE {1}
+                                INSERT INTO {1} ([ID], [Identity], [Right]) SELECT [ID], [Identity], [Right] FROM {2}
+                            END
+                        ELSE
+                            BEGIN
+                                DELETE FROM {1} WHERE ID = @ID
+                                INSERT INTO {1} ([ID], [Identity], [Right]) SELECT [ID], [Identity], [Right] FROM {2} WHERE [ID] = @ID
+                            END
                         SET NOCOUNT OFF
                     END",
                 FormatSchemaName(procName),
@@ -1220,13 +1296,11 @@ FROM (", viewName.Schema, viewName.Name);
 
         public override void ExecRefreshRightsOnProcedure(ProcRef procName)
         {
-            Log.DebugFormat("Refreshing rights for [{0}]", procName);
             ExecuteNonQuery(string.Format(@"EXEC {0}", FormatSchemaName(procName)));
         }
 
         public override void ExecRefreshAllRightsProcedure()
         {
-            Log.DebugFormat("Refreshing all rights");
             ExecuteNonQuery(string.Format(@"EXEC {0}", FormatSchemaName(GetProcedureName("dbo", Construct.SecurityRulesRefreshAllRightsProcedureName()))));
         }
 
@@ -1313,19 +1387,19 @@ DECLARE
 @seqID int,
 @seqDataID int
 BEGIN
-	SELECT @result = d.CurrentNumber + 1, @seqID = s.ID, @seqDataID = d.ID
-	FROM base.[Sequences] s
-		LEFT JOIN base.[SequenceData] d WITH(UPDLOCK) ON (s.ID = d.[fk_Sequence])
-	WHERE s.ExportGuid = @seqNumber
+    SELECT @result = d.CurrentNumber + 1, @seqID = s.ID, @seqDataID = d.ID
+    FROM base.[Sequences] s
+        LEFT JOIN base.[SequenceData] d WITH(UPDLOCK) ON (s.ID = d.[fk_Sequence])
+    WHERE s.ExportGuid = @seqNumber
 
     IF @result IS NULL
     BEGIN
-		SELECT @result = 1;
+        SELECT @result = 1;
         INSERT INTO base.[SequenceData] ([fk_Sequence], [CurrentNumber]) VALUES (@seqID, @result);
     END
 
     UPDATE base.[SequenceData] SET CurrentNumber = @result WHERE [ID] = @seqDataID
-	SELECT @result -- don't ask, EF requires for SQL server an resultset as output, for npgsql not now, because we've implemented it quick and dirty
+    SELECT @result -- don't ask, EF requires for SQL server an resultset as output, for npgsql not now, because we've implemented it quick and dirty
 END";
 
         public override void CreateSequenceNumberProcedure()
@@ -1511,7 +1585,7 @@ END";
         {
             if (discriminatorFilter == null)
             {
-                WriteGuidDefaultValue(tblName, colName);
+                WriteDefaultValue(tblName, colName, value);
             }
             else
             {
@@ -1560,6 +1634,7 @@ END";
         public override void RefreshDbStats()
         {
             // do nothing
+            Log.Info("Nothing to do");
         }
     }
 }

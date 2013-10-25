@@ -53,7 +53,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Enumeration
         // fkBackingName=_fk_Enumeration; fkGuidBackingName=_fk_guid_Enumeration;
         // referencedInterface=Zetbox.App.Base.Enumeration; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable
 
@@ -134,6 +134,11 @@ namespace Zetbox.App.Base
                 NotifyPropertyChanged("Enumeration", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchEnumerationAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Enumeration>(this.Enumeration);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Enumeration
@@ -366,6 +371,17 @@ namespace Zetbox.App.Base
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Enumeration":
+                return TriggerFetchEnumerationAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
@@ -382,6 +398,7 @@ namespace Zetbox.App.Base
                 EnumerationImpl = (Zetbox.App.Base.EnumerationEfImpl)Context.Find<Zetbox.App.Base.Enumeration>(_fk_Enumeration.Value);
             else
                 EnumerationImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

@@ -21,7 +21,7 @@ namespace Zetbox.App.Base
     /// Descriptor Object for Zetbox Services
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("ServiceDescriptor")]
-    public class ServiceDescriptorMemoryImpl : Zetbox.DalProvider.Memory.DataObjectMemoryImpl, ServiceDescriptor, Zetbox.API.IExportableInternal
+    public class ServiceDescriptorMemoryImpl : Zetbox.DalProvider.Memory.DataObjectMemoryImpl, ServiceDescriptor
     {
         private static readonly Guid _objectClassID = new Guid("d1bf8a7e-a8c0-435b-9dfe-b5ab61e71d1a");
         public override Guid ObjectClassID { get { return _objectClassID; } }
@@ -40,10 +40,10 @@ namespace Zetbox.App.Base
         /// <summary>
         /// Identity which changed this object
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -228,10 +228,10 @@ namespace Zetbox.App.Base
         /// <summary>
         /// Identity which created this object
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -603,12 +603,12 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
         // fkBackingName=_fk_Module; fkGuidBackingName=_fk_guid_Module;
         // referencedInterface=Zetbox.App.Base.Module; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
-        // Target exportable; does call events
+        // Target not exportable; does call events
 
         // implement the user-visible interface
         [XmlIgnore()]
@@ -636,7 +636,6 @@ namespace Zetbox.App.Base
             }
         }
 
-        private Guid? _fk_guid_Module = null;
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module> _triggerFetchModuleTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module> TriggerFetchModuleAsync()
@@ -716,122 +715,6 @@ namespace Zetbox.App.Base
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.ServiceDescriptor> OnModule_IsValid;
 
-        /// <summary>
-        /// 
-        /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for TypeRef
-        // fkBackingName=_fk_TypeRef; fkGuidBackingName=_fk_guid_TypeRef;
-        // referencedInterface=Zetbox.App.Base.TypeRef; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
-        // PositionStorage=none;
-        // Target exportable; does call events
-
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
-        public Zetbox.App.Base.TypeRef TypeRef
-        {
-            get { return TypeRefImpl; }
-            set { TypeRefImpl = (Zetbox.App.Base.TypeRefMemoryImpl)value; }
-        }
-        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
-
-        private int? __fk_TypeRefCache;
-
-        private int? _fk_TypeRef {
-            get
-            {
-                return __fk_TypeRefCache;
-            }
-            set
-            {
-                __fk_TypeRefCache = value;
-                // Recreate task to clear it's cache
-                _triggerFetchTypeRefTask = null;
-            }
-        }
-
-        private Guid? _fk_guid_TypeRef = null;
-
-        Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef> _triggerFetchTypeRefTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef> TriggerFetchTypeRefAsync()
-        {
-            if (_triggerFetchTypeRefTask != null) return _triggerFetchTypeRefTask;
-
-            if (_fk_TypeRef.HasValue)
-                _triggerFetchTypeRefTask = Context.FindAsync<Zetbox.App.Base.TypeRef>(_fk_TypeRef.Value);
-            else
-                _triggerFetchTypeRefTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.TypeRef>(Zetbox.API.Async.ZbTask.Synchron, () => null);
-
-            _triggerFetchTypeRefTask.OnResult(t =>
-            {
-                if (OnTypeRef_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.TypeRef>(t.Result);
-                    OnTypeRef_Getter(this, e);
-                    t.Result = e.Result;
-                }
-            });
-
-            return _triggerFetchTypeRefTask;
-        }
-
-        // internal implementation
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        internal Zetbox.App.Base.TypeRefMemoryImpl TypeRefImpl
-        {
-            get
-            {
-                return (Zetbox.App.Base.TypeRefMemoryImpl)TriggerFetchTypeRefAsync().Result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
-
-                // shortcut noops
-                if ((value == null && _fk_TypeRef == null) || (value != null && value.ID == _fk_TypeRef))
-                {
-                    SetInitializedProperty("TypeRef");
-                    return;
-                }
-
-                // cache old value to remove inverse references later
-                var __oldValue = TypeRefImpl;
-                var __newValue = value;
-
-                // Changing Event fires before anything is touched
-                NotifyPropertyChanging("TypeRef", __oldValue, __newValue);
-
-                if (OnTypeRef_PreSetter != null && IsAttached)
-                {
-                    var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.TypeRef>(__oldValue, __newValue);
-                    OnTypeRef_PreSetter(this, e);
-                    __newValue = (Zetbox.App.Base.TypeRefMemoryImpl)e.Result;
-                }
-
-                // next, set the local reference
-                _fk_TypeRef = __newValue == null ? (int?)null : __newValue.ID;
-
-                // everything is done. fire the Changed event
-                NotifyPropertyChanged("TypeRef", __oldValue, __newValue);
-                if(IsAttached) UpdateChangedInfo = true;
-
-                if (OnTypeRef_PostSetter != null && IsAttached)
-                {
-                    var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.TypeRef>(__oldValue, __newValue);
-                    OnTypeRef_PostSetter(this, e);
-                }
-            }
-        }
-        // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for TypeRef
-		public static event PropertyGetterHandler<Zetbox.App.Base.ServiceDescriptor, Zetbox.App.Base.TypeRef> OnTypeRef_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Base.ServiceDescriptor, Zetbox.App.Base.TypeRef> OnTypeRef_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Base.ServiceDescriptor, Zetbox.App.Base.TypeRef> OnTypeRef_PostSetter;
-
-        public static event PropertyIsValidHandler<Zetbox.App.Base.ServiceDescriptor> OnTypeRef_IsValid;
-
         public override Type GetImplementedInterface()
         {
             return typeof(ServiceDescriptor);
@@ -852,7 +735,6 @@ namespace Zetbox.App.Base
             this._fk_ChangedBy = otherImpl._fk_ChangedBy;
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
             this._fk_Module = otherImpl._fk_Module;
-            this._fk_TypeRef = otherImpl._fk_TypeRef;
         }
         public override void SetNew()
         {
@@ -890,15 +772,6 @@ namespace Zetbox.App.Base
                         NotifyPropertyChanged("Module", __oldValue, __newValue);
                     }
                     break;
-                case "TypeRef":
-                    {
-                        var __oldValue = _fk_TypeRef;
-                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
-                        NotifyPropertyChanging("TypeRef", __oldValue, __newValue);
-                        _fk_TypeRef = __newValue;
-                        NotifyPropertyChanged("TypeRef", __oldValue, __newValue);
-                    }
-                    break;
                 default:
                     base.UpdateParent(propertyName, parentObj);
                     break;
@@ -921,7 +794,6 @@ namespace Zetbox.App.Base
                 case "Description":
                 case "ExportGuid":
                 case "Module":
-                case "TypeRef":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }
@@ -938,8 +810,6 @@ namespace Zetbox.App.Base
                 return TriggerFetchCreatedByAsync();
             case "Module":
                 return TriggerFetchModuleAsync();
-            case "TypeRef":
-                return TriggerFetchTypeRefAsync();
             default:
                 return base.TriggerFetch(propName);
             }
@@ -964,21 +834,11 @@ namespace Zetbox.App.Base
             else
                 CreatedByImpl = null;
 
-            if (_fk_guid_Module.HasValue)
-                ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.Module>(_fk_guid_Module.Value);
-            else
             if (_fk_Module.HasValue)
                 ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)Context.Find<Zetbox.App.Base.Module>(_fk_Module.Value);
             else
                 ModuleImpl = null;
-
-            if (_fk_guid_TypeRef.HasValue)
-                TypeRefImpl = (Zetbox.App.Base.TypeRefMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.TypeRef>(_fk_guid_TypeRef.Value);
-            else
-            if (_fk_TypeRef.HasValue)
-                TypeRefImpl = (Zetbox.App.Base.TypeRefMemoryImpl)Context.Find<Zetbox.App.Base.TypeRef>(_fk_TypeRef.Value);
-            else
-                TypeRefImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();
@@ -1065,15 +925,6 @@ namespace Zetbox.App.Base
                         obj => obj.Module,
                         (obj, val) => obj.Module = val,
 						obj => OnModule_IsValid), 
-                    // else
-                    new PropertyDescriptorMemoryImpl<ServiceDescriptor, Zetbox.App.Base.TypeRef>(
-                        lazyCtx,
-                        new Guid("2f31a3e7-cead-480a-a515-54da212b45dc"),
-                        "TypeRef",
-                        null,
-                        obj => obj.TypeRef,
-                        (obj, val) => obj.TypeRef = val,
-						obj => OnTypeRef_IsValid), 
                     // position columns
                 };
             }
@@ -1142,7 +993,6 @@ namespace Zetbox.App.Base
             SetNotInitializedProperty("DeploymentRestriction");
             SetNotInitializedProperty("Description");
             SetNotInitializedProperty("Module");
-            SetNotInitializedProperty("TypeRef");
             base.NotifyCreated();
             if (OnNotifyCreated_ServiceDescriptor != null) OnNotifyCreated_ServiceDescriptor(this);
         }
@@ -1156,7 +1006,6 @@ namespace Zetbox.App.Base
             ChangedBy = null;
             CreatedBy = null;
             Module = null;
-            TypeRef = null;
         }
         public static event ObjectEventHandler<ServiceDescriptor> OnNotifyDeleting_ServiceDescriptor;
 
@@ -1187,7 +1036,6 @@ namespace Zetbox.App.Base
                 binStream.Write(this._ExportGuid);
             }
             binStream.Write(Module != null ? Module.ID : (int?)null);
-            binStream.Write(TypeRef != null ? TypeRef.ID : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -1213,63 +1061,12 @@ namespace Zetbox.App.Base
                 this._ExportGuid = binStream.ReadGuid();
             }
             this._fk_Module = binStream.ReadNullableInt32();
-            this._fk_TypeRef = binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
                     ? null
                     : result
                 : baseResult.Concat(result);
-        }
-
-        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
-        {
-            xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Zetbox.App.Base");
-            System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)this._DeploymentRestriction, xml, "DeploymentRestriction", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._Description, xml, "Description", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(TypeRef != null ? TypeRef.ExportGuid : (Guid?)null, xml, "TypeRef", "Zetbox.App.Base");
-        }
-
-        public virtual void MergeImport(System.Xml.XmlReader xml)
-        {
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            switch (xml.NamespaceURI + "|" + xml.LocalName) {
-            case "Zetbox.App.Base|ChangedOn":
-                // Import must have default value set
-                this._ChangedOn = XmlStreamer.ReadDateTime(xml);
-                this._isChangedOnSet = true;
-                break;
-            case "Zetbox.App.Base|CreatedOn":
-                // Import must have default value set
-                this._CreatedOn = XmlStreamer.ReadDateTime(xml);
-                this._isCreatedOnSet = true;
-                break;
-            case "Zetbox.App.Base|DeploymentRestriction":
-                this._DeploymentRestriction = (Zetbox.App.Base.DeploymentRestriction?)XmlStreamer.ReadNullableInt32(xml);
-               break;
-            case "Zetbox.App.Base|Description":
-                this._Description = XmlStreamer.ReadString(xml);
-                break;
-            case "Zetbox.App.Base|ExportGuid":
-                // Import must have default value set
-                this._ExportGuid = XmlStreamer.ReadGuid(xml);
-                this._isExportGuidSet = true;
-                break;
-            case "Zetbox.App.Base|Module":
-                this._fk_guid_Module = XmlStreamer.ReadNullableGuid(xml);
-                break;
-            case "Zetbox.App.Base|TypeRef":
-                this._fk_guid_TypeRef = XmlStreamer.ReadNullableGuid(xml);
-                break;
-            }
         }
 
         #endregion

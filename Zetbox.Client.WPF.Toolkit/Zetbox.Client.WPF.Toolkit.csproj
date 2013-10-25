@@ -104,6 +104,9 @@
     <Compile Include="Converter\ImageCtrlConverter.cs" />
     <Compile Include="Converter\ObjectStateConverter.cs" />
     <Compile Include="CustomControls\ContentAdorner.cs" />
+    <Compile Include="CustomControls\HelpButton.cs" />
+    <Compile Include="CustomControls\DataObjectActionsTray.cs" />
+    <Compile Include="CustomControls\ObjectHeader.cs" />
     <Compile Include="CustomControls\CustomControlsResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -135,6 +138,11 @@
     <Compile Include="CustomControls\ZetboxListView.cs" />
     <Compile Include="WPFHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WPFToolkitResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WPFToolkitResources.resx</DependentUpon>
+    </Compile>
     <None Include="packages.config" />
     <None Include="Properties\VersionInfo.cs" />
     <Compile Include="Properties\VersionInfo.Designer.cs">
@@ -192,6 +200,13 @@
       <LastGenOutput>CustomControlsResources.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Zetbox.Client.WPF.CustomControls</CustomToolNamespace>
     </EmbeddedResource>
+    <EmbeddedResource Include="CustomControls\CustomControlsResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="WPFToolkitResources.de.resx" />
+    <EmbeddedResource Include="WPFToolkitResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>WPFToolkitResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WPFToolkitResources.x-zb-Pseudo.resx" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\printer.png" />

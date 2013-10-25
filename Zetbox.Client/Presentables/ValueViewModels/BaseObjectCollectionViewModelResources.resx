@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AddExistingCommand_Name" xml:space="preserve">
     <value>Add existing</value>
@@ -131,6 +131,18 @@
   </data>
   <data name="MoreItems" xml:space="preserve">
     <value>({0}): {1}...</value>
+  </data>
+  <data name="MoveItemDownCommand_Name" xml:space="preserve">
+    <value>Down</value>
+  </data>
+  <data name="MoveItemDownCommand_Tooltip" xml:space="preserve">
+    <value>Moves the item down</value>
+  </data>
+  <data name="MoveItemUpCommand_Name" xml:space="preserve">
+    <value>Up</value>
+  </data>
+  <data name="MoveItemUpCommand_Tooltip" xml:space="preserve">
+    <value>Moves the item up</value>
   </data>
   <data name="NoItems" xml:space="preserve">
     <value />

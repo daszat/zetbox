@@ -20,11 +20,11 @@ namespace Zetbox.API.Server.Tests
     using System.Linq;
     using System.Text;
     using Autofac;
+    using NUnit.Framework;
     using Zetbox.API.Common;
     using Zetbox.API.Configuration;
     using Zetbox.API.Server.Mocks;
-    using NUnit.Framework;
-    
+
     [SetUpFixture]
     public class SetUpFixture : AbstractConsumerTests.AbstractSetUpFixture
     {
@@ -40,7 +40,13 @@ namespace Zetbox.API.Server.Tests
                 .As<IMetaDataResolver>()
                 .InstancePerDependency();
 
-            builder.Register(c => new ZetboxContextMock(c.Resolve<IMetaDataResolver>(), null, c.Resolve<ZetboxConfig>(), c.Resolve<Func<IFrozenContext>>(), c.Resolve<InterfaceType.Factory>()))
+            builder.Register(c => new ZetboxContextMock(
+                    c.Resolve<IMetaDataResolver>(),
+                    null,
+                    c.Resolve<ZetboxConfig>(),
+                    c.Resolve<Func<IFrozenContext>>(),
+                    c.Resolve<InterfaceType.Factory>(),
+                    c.Resolve<IEnumerable<IZetboxContextEventListener>>()))
                 .As<IZetboxContext>()
                 .As<IFrozenContext>()
                 .As<IReadOnlyZetboxContext>()

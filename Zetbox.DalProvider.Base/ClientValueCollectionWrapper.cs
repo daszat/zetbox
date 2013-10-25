@@ -57,7 +57,7 @@ namespace Zetbox.DalProvider.Base
             base.OnEntryAdded(entry);
             if (CollectionChanged != null)
             {
-                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, entry));
+                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, entry.Value));
             }
         }
 
@@ -66,7 +66,7 @@ namespace Zetbox.DalProvider.Base
             base.OnEntryRemoved(entry);
             if (CollectionChanged != null)
             {
-                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, entry));
+                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, entry.Value));
             }
         }
         #endregion
@@ -130,7 +130,7 @@ namespace Zetbox.DalProvider.Base
             base.OnEntryAdded(entry);
             if (CollectionChanged != null)
             {
-                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, entry));
+                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, entry.Value));
             }
         }
 
@@ -139,7 +139,7 @@ namespace Zetbox.DalProvider.Base
             base.OnEntryRemoved(entry);
             if (CollectionChanged != null)
             {
-                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, entry));
+                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, entry.Value));
             }
         }
         #endregion

@@ -22,6 +22,7 @@ namespace Zetbox.DalProvider.Client.Mocks
     using System.Text;
     using Zetbox.API;
     using Zetbox.API.Server;
+    using Zetbox.API.Server.Fulltext;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
     using Zetbox.DalProvider.Memory;
@@ -36,7 +37,7 @@ namespace Zetbox.DalProvider.Client.Mocks
 
         public IEnumerable<IRelationEntry> GetCollectionEntries(
             Guid version,
-            IZetboxContext ctx,
+            IReadOnlyZetboxContext ctx,
             Guid relId, RelationEndRole endRole,
             int parentId)
         {
@@ -76,7 +77,9 @@ namespace Zetbox.DalProvider.Client.Mocks
     internal sealed class MemoryObjectHandlerFactory
         : ServerObjectHandlerFactory
     {
-        public override IServerCollectionHandler GetServerCollectionHandler(IZetboxContext ctx, InterfaceType aType, InterfaceType bType, RelationEndRole endRole)
+        public MemoryObjectHandlerFactory(LuceneSearchDeps searchDependencies = null) : base(searchDependencies) { }
+
+        public override IServerCollectionHandler GetServerCollectionHandler(IReadOnlyZetboxContext ctx, InterfaceType aType, InterfaceType bType, RelationEndRole endRole)
         {
             if (ctx == null) throw new ArgumentNullException("ctx");
             return GetServerCollectionHandlerHelper(

@@ -290,6 +290,11 @@ namespace Zetbox.API.Server
         {
         }
 
+        public TriggerRef(TableRef tblName, string name)
+            : base(tblName != null ? tblName.Database : null, tblName != null ? tblName.Schema : null, name)
+        {
+        }
+
         int IComparable<TriggerRef>.CompareTo(TriggerRef other)
         {
             return ((IComparable<DboRef>)this).CompareTo(other);
@@ -333,6 +338,11 @@ namespace Zetbox.API.Server
     {
         public TableRef TableName { get; set; }
         public string ConstraintName { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("{0}.{1}", TableName, ConstraintName);
+        }
     }
 
     public class ACL
@@ -494,14 +504,16 @@ namespace Zetbox.API.Server
     {
         public RightsTrigger()
         {
-            this.Relations = new List<Join>();
+            this.ObjectRelations = new List<Join>();
+            this.IdentityRelations = new List<Join>();
         }
 
         public TableRef ViewUnmaterializedName { get; set; }
         public TableRef TblNameRights { get; set; }
         public TableRef TblName { get; set; }
 
-        public List<Join> Relations { get; private set; }
+        public List<Join> ObjectRelations { get; private set; }
+        public List<Join> IdentityRelations { get; private set; }
     }
 
     public class Column
@@ -661,16 +673,20 @@ namespace Zetbox.API.Server
 
         bool CheckTableExists(TableRef tblName);
         IEnumerable<TableRef> GetTableNames();
-        IEnumerable<TableRef> GetViewNames();
-        string GetViewDefinition(TableRef view);
 
         void CreateTable(TableRef tblName, IEnumerable<Column> cols);
         void CreateTable(TableRef tblName, bool idAsIdentityColumn);
         void CreateTable(TableRef tblName, bool idAsIdentityColumn, bool createPrimaryKey);
 
+        /// <summary>
+        /// Renames the given object. The provider has to detect noop's. The provider must throw an exception, when the object was not found
+        /// </summary>
+        /// <param name="oldTblName"></param>
+        /// <param name="newTblName"></param>
         void RenameTable(TableRef oldTblName, TableRef newTblName);
-
         void DropTable(TableRef tblName);
+
+        void RenameDiscriminatorValue(TableRef tblName, string oldValue, string newValue);
 
         bool CheckColumnExists(TableRef tblName, string colName);
         IEnumerable<string> GetTableColumnNames(TableRef tblName);
@@ -679,6 +695,12 @@ namespace Zetbox.API.Server
         void CreateColumn(TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, params DatabaseConstraint[] constraints);
         void AlterColumn(TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, params DatabaseConstraint[] constraints);
 
+        /// <summary>
+        /// Renames the given object. The provider has to detect noop's. The provider must throw an exception, when the object was not found
+        /// </summary>
+        /// <param name="tblName"></param>
+        /// <param name="oldColName"></param>
+        /// <param name="newColName"></param>
         void RenameColumn(TableRef tblName, string oldColName, string newColName);
 
         bool GetIsColumnNullable(TableRef tblName, string colName);
@@ -728,6 +750,15 @@ namespace Zetbox.API.Server
         bool CheckFKConstraintExists(TableRef tblName, string fkName);
         IEnumerable<TableConstraintNamePair> GetFKConstraintNames();
         void CreateFKConstraint(TableRef tblName, TableRef refTblName, string colName, string newConstraintName, bool onDeleteCascade);
+        /// <summary>
+        /// Renames the given object. The provider has to detect noop's. The provider must throw an exception, when the object was not found
+        /// </summary>
+        /// <param name="tblName"></param>
+        /// <param name="oldConstraintName"></param>
+        /// <param name="refTblName"></param>
+        /// <param name="colName"></param>
+        /// <param name="newConstraintName"></param>
+        /// <param name="onDeleteCascade"></param>
         void RenameFKConstraint(TableRef tblName, string oldConstraintName, TableRef refTblName, string colName, string newConstraintName, bool onDeleteCascade);
         void DropFKConstraint(TableRef tblName, string constraintName);
 
@@ -735,6 +766,13 @@ namespace Zetbox.API.Server
         bool CheckIndexPossible(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns);
         void CreateIndex(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns);
         void DropIndex(TableRef tblName, string idxName);
+        /// <summary>
+        /// Renames the given object. The provider has to detect noop's. The provider must throw an exception, when the object was not found
+        /// </summary>
+        /// <param name="tblName"></param>
+        /// <param name="oldIdxName"></param>
+        /// <param name="newIdxName"></param>
+        void RenameIndex(TableRef tblName, string oldIdxName, string newIdxName);
 
         /// <summary>
         /// Checks whether a column fulfills certain criteria based on the DiscriminatorColumn
@@ -767,11 +805,14 @@ namespace Zetbox.API.Server
 
         #region Other DB Objects (Views, Triggers, Procedures)
 
+        IEnumerable<TableRef> GetViewNames();
         bool CheckViewExists(TableRef viewName);
+        string GetViewDefinition(TableRef view);
         void DropView(TableRef viewName);
 
-        bool CheckTriggerExists(TableRef objName, string triggerName);
-        void DropTrigger(TableRef objName, string triggerName);
+        IEnumerable<TriggerRef> GetTriggerNames();
+        bool CheckTriggerExists(TriggerRef triggerName);
+        void DropTrigger(TriggerRef triggerName);
 
         ProcRef GetProcedureName(string schemaName, string procName);
         IEnumerable<ProcRef> GetProcedureNames();
@@ -801,7 +842,7 @@ namespace Zetbox.API.Server
 
         #region zetbox Accelerators
 
-        bool CheckPositionColumnValidity(TableRef tblName, string positionColumnName);
+        bool CheckPositionColumnValidity(TableRef tblName, string fkName, string posName);
         bool RepairPositionColumn(TableRef tblName, string positionColumnName);
 
         #endregion
@@ -817,7 +858,7 @@ namespace Zetbox.API.Server
         /// <param name="tblName"></param>
         /// <param name="tblList"></param>
         /// <param name="dependingCols">List of columns triggering a rights update. Typically a list of fk_ cols.</param>
-        void CreateUpdateRightsTrigger(string triggerName, TableRef tblName, List<RightsTrigger> tblList, List<string> dependingCols);
+        void CreateUpdateRightsTrigger(TriggerRef triggerName, TableRef tblName, List<RightsTrigger> tblList, List<string> dependingCols);
         void CreateRightsViewUnmaterialized(TableRef viewName, TableRef tblName, TableRef tblNameRights, IList<ACL> acls);
         void CreateEmptyRightsViewUnmaterialized(TableRef viewName);
         void CreateRefreshRightsOnProcedure(ProcRef procName, TableRef viewUnmaterializedName, TableRef tblName, TableRef tblNameRights);

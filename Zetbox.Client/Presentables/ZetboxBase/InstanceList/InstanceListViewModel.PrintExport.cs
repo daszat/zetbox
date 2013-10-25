@@ -16,9 +16,14 @@
 namespace Zetbox.Client.Presentables.ZetboxBase
 {
     using System;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Linq.Dynamic;
     using System.Text;
+    using Zetbox.API;
+    using Zetbox.API.Async;
     using Zetbox.Client.Models;
 
     public partial class InstanceListViewModel
@@ -127,6 +132,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public void Export()
         {
+            SetBusy(string.Format(InstanceListViewModelResources.ExportBusyMessageFormat, 1));
+
             var tmpFile = tmpService.CreateWithExtension("_Export.csv"); // Excel can't open two files with the same name, located in another folder!
             StreamWriter sw;
             // http://stackoverflow.com/questions/545666/how-to-translate-ms-windows-os-version-numbers-into-product-names-in-net
@@ -134,18 +141,76 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 sw = new StreamWriter(tmpFile, false, Encoding.Default);
             else
                 sw = new StreamWriter(tmpFile, false, Encoding.UTF8); // use this constructor to ensure BOM
-            using (sw)
-            {
-                var cols = DisplayedColumns.Columns
+
+            var cols = DisplayedColumns.Columns
                     .Where(i => i.Type != ColumnDisplayModel.ColumnType.MethodModel)
                     .ToList();
-                // Header
-                sw.WriteLine(string.Join(";",
-                    cols.Select(i => i.Header).ToArray()));
+            // Header
+            sw.WriteLine(string.Join(";",
+                cols.Select(i => i.Header).ToArray()));
 
-                // Data
-                foreach (var obj in Instances)
+            var unpagedQuery = GetUnpagedQuery();
+
+            GetPagedQuery(0, Helper.MAXLISTCOUNT, unpagedQuery)
+                .OnError(ex => OnExportPageError(sw, ex))
+                .OnResult(OnExportPageResultFactory(sw, cols, 0, Helper.MAXLISTCOUNT, unpagedQuery, tmpFile));
+
+        }
+
+        private Action<ZbTask<IEnumerable>> OnExportPageResultFactory(StreamWriter sw, List<ColumnDisplayModel> cols, int page, int pageSize, IQueryable unpagedQuery, string tmpFile)
+        {
+            return t =>
+            {
+                bool queryAgain = ExportPage(sw, cols, t.Result.Cast<IDataObject>()) == pageSize;
+
+                if (queryAgain)
                 {
+                    CurrentBusyMessage = string.Format(InstanceListViewModelResources.ExportBusyMessageFormat, page + 1);
+                    GetPagedQuery(page + 1, pageSize, unpagedQuery)
+                        .OnError(ex => OnExportPageError(sw, ex))
+                        .OnResult(OnExportPageResultFactory(sw, cols, page + 1, pageSize, unpagedQuery, tmpFile));
+                }
+                else
+                {
+                    sw.Dispose();
+                    fileOpener.ShellExecute(tmpFile);
+                    ClearBusy();
+                }
+            };
+        }
+
+        private void OnExportPageError(IDisposable sw, Exception ex)
+        {
+            sw.Dispose();
+            ClearBusy();
+
+            var errorVmdl = ViewModelFactory.CreateViewModel<ExceptionReporterViewModel.Factory>().Invoke(
+                DataContext,
+                this,
+                ex,
+                screenshotTool.Value.GetScreenshot());
+
+            ViewModelFactory.ShowDialog(errorVmdl);
+        }
+
+        private int ExportPage(StreamWriter sw, List<ColumnDisplayModel> cols, IEnumerable<IDataObject> instances)
+        {
+            try
+            {
+                var dmvos = instances
+                    .Select(obj => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj));
+
+                int count = 0;
+                // Data
+                foreach (var obj in dmvos)
+                {
+                    count += 1;
+
+                    // This check has to be done AFTER counting
+                    // to avoid the edgecase of pageSize deleted objects followed by more data
+                    if (obj.ObjectState == DataObjectState.Deleted)
+                        continue;
+
                     for (int colIdx = 0; colIdx < cols.Count; colIdx++)
                     {
                         string val = cols[colIdx].ExtractFormattedValue(obj);
@@ -169,9 +234,23 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         }
                     }
                 }
-            }
 
-            fileOpener.ShellExecute(tmpFile);
+                return count;
+            }
+            catch (Exception ex)
+            {
+                OnExportPageError(sw, ex);
+                return 0;
+            }
+        }
+
+        private static ZbTask<System.Collections.IEnumerable> GetPagedQuery(int page, int pageSize, IQueryable unpagedQuery)
+        {
+            var qryTask = unpagedQuery
+                .Skip(page * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+            return qryTask;
         }
 
         private ICommandViewModel _ExportContainerCommand = null;

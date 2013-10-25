@@ -183,6 +183,19 @@ namespace Zetbox.App.Extensions
             return cls.Module.Namespace + "." + cls.Name;
         }
 
+        public static InterfaceType GetDescribedInterfaceType(this CompoundObject cls)
+        {
+            if (cls == null) { throw new ArgumentNullException("cls"); }
+            return cls.ReadOnlyContext.GetInterfaceType(GetDescribedInterfaceTypeName(cls));
+        }
+
+        public static string GetDescribedInterfaceTypeName(this CompoundObject cls)
+        {
+            if (cls == null) { throw new ArgumentNullException("cls"); }
+            return cls.Module.Namespace + "." + cls.Name;
+        }
+
+
         public static bool ImplementsIExportable(this ObjectClass cls)
         {
             return ImplementsIExportable(cls, true);
@@ -256,6 +269,26 @@ namespace Zetbox.App.Extensions
             {
                 // TODO: use named objects
                 if (cls.ImplementsInterfaces.Count(o => o.Name == "IDeactivatable" && o.Module.Name == "ZetboxBase") == 1)
+                    return true;
+                if (!lookupInBase) return false;
+                cls = cls.BaseObjectClass;
+            }
+            return false;
+        }
+
+        public static bool ImplementsICustomFulltextFormat(this ObjectClass cls)
+        {
+            return ImplementsICustomFulltextFormat(cls, true);
+        }
+
+        public static bool ImplementsICustomFulltextFormat(this ObjectClass cls, bool lookupInBase)
+        {
+            if (cls == null) { throw new ArgumentNullException("cls"); }
+
+            while (cls != null)
+            {
+                // TODO: use named objects
+                if (cls.ImplementsInterfaces.Count(o => o.Name == "ICustomFulltextFormat" && o.Module.Name == "ZetboxBase") == 1)
                     return true;
                 if (!lookupInBase) return false;
                 cls = cls.BaseObjectClass;

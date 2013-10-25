@@ -53,7 +53,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for FalseIcon
         // fkBackingName=_fk_FalseIcon; fkGuidBackingName=_fk_guid_FalseIcon;
         // referencedInterface=Zetbox.App.GUI.Icon; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable
 
@@ -134,6 +134,11 @@ namespace Zetbox.App.Base
                 NotifyPropertyChanged("FalseIcon", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchFalseIconAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon>(this.FalseIcon);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for FalseIcon
@@ -225,7 +230,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for NullIcon
         // fkBackingName=_fk_NullIcon; fkGuidBackingName=_fk_guid_NullIcon;
         // referencedInterface=Zetbox.App.GUI.Icon; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable
 
@@ -306,6 +311,11 @@ namespace Zetbox.App.Base
                 NotifyPropertyChanged("NullIcon", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchNullIconAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon>(this.NullIcon);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for NullIcon
@@ -397,7 +407,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for TrueIcon
         // fkBackingName=_fk_TrueIcon; fkGuidBackingName=_fk_guid_TrueIcon;
         // referencedInterface=Zetbox.App.GUI.Icon; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable
 
@@ -480,6 +490,11 @@ namespace Zetbox.App.Base
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchTrueIconAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon>(this.TrueIcon);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for TrueIcon
 		public static event PropertyGetterHandler<Zetbox.App.Base.BoolProperty, Zetbox.App.GUI.Icon> OnTrueIcon_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.BoolProperty, Zetbox.App.GUI.Icon> OnTrueIcon_PreSetter;
@@ -555,6 +570,69 @@ namespace Zetbox.App.Base
 		public static event PropertyPostSetterHandler<Zetbox.App.Base.BoolProperty, string> OnTrueLabel_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.BoolProperty> OnTrueLabel_IsValid;
+
+        /// <summary>
+        /// Returns the translated description
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetDescription_BoolProperty")]
+        public override string GetDescription()
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetDescription_BoolProperty != null)
+            {
+                OnGetDescription_BoolProperty(this, e);
+            }
+            else
+            {
+                e.Result = base.GetDescription();
+            }
+            return e.Result;
+        }
+        public static event GetDescription_Handler<BoolProperty> OnGetDescription_BoolProperty;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<BoolProperty> OnGetDescription_BoolProperty_CanExec;
+
+        [EventBasedMethod("OnGetDescription_BoolProperty_CanExec")]
+        public override bool GetDescriptionCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetDescription_BoolProperty_CanExec != null)
+				{
+					OnGetDescription_BoolProperty_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDescriptionCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<BoolProperty> OnGetDescription_BoolProperty_CanExecReason;
+
+        [EventBasedMethod("OnGetDescription_BoolProperty_CanExecReason")]
+        public override string GetDescriptionCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetDescription_BoolProperty_CanExecReason != null)
+				{
+					OnGetDescription_BoolProperty_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDescriptionCanExecReason;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// The element type for multi-valued properties. The property type string in all other cases.
@@ -915,6 +993,21 @@ namespace Zetbox.App.Base
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "FalseIcon":
+                return TriggerFetchFalseIconAsync();
+            case "NullIcon":
+                return TriggerFetchNullIconAsync();
+            case "TrueIcon":
+                return TriggerFetchTrueIconAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
@@ -947,6 +1040,7 @@ namespace Zetbox.App.Base
                 TrueIconImpl = (Zetbox.App.GUI.IconEfImpl)Context.Find<Zetbox.App.GUI.Icon>(_fk_TrueIcon.Value);
             else
                 TrueIconImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

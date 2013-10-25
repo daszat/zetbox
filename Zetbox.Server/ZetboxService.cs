@@ -110,43 +110,41 @@ namespace Zetbox.Server
         }
 
         /// <summary>
-        /// Returns a list of objects from the datastore, matching the specified filters.
+        /// Returns a list of objects from the datastore, as requested by the query.
         /// </summary>
         /// <param name="version">Current version of generated Zetbox.Objects assembly</param>
-        /// <param name="type">Type of Objects</param>
-        /// <param name="maxListCount">Max. ammount of objects</param>
-        /// <param name="eagerLoadLists">If true list properties will be eager loaded</param>
-        /// <param name="filter">Serializable linq expression used a filter</param>
-        /// <param name="orderBy">List of derializable linq expressions used as orderby</param>
+        /// <param name="query">A full LINQ query returning zero, one or more objects (FirstOrDefault, Single, Where, Skip, Take, etc.)</param>
         /// <returns>the found objects</returns>
-        public byte[] GetList(Guid version, SerializableType type, int maxListCount, bool eagerLoadLists, SerializableExpression[] filter, OrderByContract[] orderBy)
+        public byte[] GetObjects(Guid version, SerializableExpression query)
         {
-            using (Logging.Facade.DebugTraceMethodCallFormat("GetList", "type={0}", type))
+            if (query == null) { throw new ArgumentNullException("query"); }
+            using (Logging.Facade.DebugTraceMethodCallFormat("GetObjects", "query={0}", query))
             {
                 DebugLogIdentity();
                 try
                 {
-                    if (type == null) { throw new ArgumentNullException("type"); }
-                    var ifType = _iftFactory(type.GetSystemType());
+                    ZetboxGeneratedVersionAttribute.Check(version);
+
+                    var type = query.SerializableType.GetSystemType();
+                    var ifType = _iftFactory(type.IsGenericType && typeof(IQueryable).IsAssignableFrom(type)
+                        ? type.GetGenericArguments()[0]
+                        : type);
                     int resultCount = 0;
-                    var ticks = _perfCounter.IncrementGetList(ifType);
+                    var ticks = _perfCounter.IncrementGetObjects(ifType);
                     try
                     {
                         using (IZetboxContext ctx = _ctxFactory())
                         {
-                            var filterExpresstions = filter != null ? filter.Select(f => SerializableExpression.ToExpression(f)).ToList() : null;
                             IEnumerable<IStreamable> lst = _sohFactory
                                 .GetServerObjectHandler(ifType)
-                                .GetList(version, ctx, maxListCount,
-                                    filterExpresstions,
-                                    orderBy != null ? orderBy.Select(o => new OrderBy(o.Type, SerializableExpression.ToExpression(o.Expression))).ToList() : null);
+                                .GetObjects(version, ctx, SerializableExpression.ToExpression(ctx, query, _iftFactory));
                             resultCount = lst.Count();
-                            return SendObjects(lst, eagerLoadLists).ToArray();
+                            return SendObjects(lst, resultCount <= 1).ToArray();
                         }
                     }
                     finally
                     {
-                        _perfCounter.DecrementGetList(ifType, resultCount, ticks);
+                        _perfCounter.DecrementGetObjects(ifType, resultCount, ticks);
                     }
                 }
                 catch (Exception ex)
@@ -200,7 +198,8 @@ namespace Zetbox.Server
             HashSet<IStreamable> auxObjects = new HashSet<IStreamable>();
 
             var result = new MemoryStream();
-            var sw = _writerFactory(new BinaryWriter(result));
+            // Don't Dispose sw, to keep result open.
+            var sw = _writerFactory.Invoke(new BinaryWriter(result));
             foreach (IStreamable obj in lst)
             {
                 sw.Write(true);
@@ -227,7 +226,7 @@ namespace Zetbox.Server
         private List<IPersistenceObject> ReadObjects(Stream msg, IZetboxContext ctx)
         {
             var objects = new List<IPersistenceObject>();
-            var sr = _readerFactory(new BinaryReader(msg));
+            var sr = _readerFactory.Invoke(new BinaryReader(msg));
             while (sr.ReadBoolean())
             {
                 // Deserialize
@@ -241,7 +240,7 @@ namespace Zetbox.Server
         }
 
         /// <summary>
-        /// returns a list of objects referenced by a specified Property. Use an equivalent query in GetList() instead.
+        /// returns a list of objects referenced by a specified Property. Use an equivalent query in GetObjects() instead.
         /// </summary>
         /// <param name="version">Current version of generated Zetbox.Objects assembly</param>
         /// <param name="type">Type of Object</param>
@@ -471,15 +470,17 @@ namespace Zetbox.Server
                         var parameter = new MemoryStream(parameterArray);
                         parameter.Seek(0, SeekOrigin.Begin);
                         List<object> parameterList = new List<object>();
-                        var parameterReader = _readerFactory(new BinaryReader(parameter));
-                        foreach (var t in parameterTypes)
+                        using (var parameterReader = _readerFactory.Invoke(new BinaryReader(parameter)))
                         {
-                            object val;
-                            parameterReader.Read(out val,
-                                t.GetSystemType().IsIStreamable()
-                                    ? ctx.ToImplementationType(ctx.GetInterfaceType(t.GetSystemType())).Type
-                                    : t.GetSystemType());
-                            parameterList.Add(val);
+                            foreach (var t in parameterTypes)
+                            {
+                                object val;
+                                parameterReader.Read(out val,
+                                    t.GetSystemType().IsIStreamable()
+                                        ? ctx.ToImplementationType(ctx.GetInterfaceType(t.GetSystemType())).Type
+                                        : t.GetSystemType());
+                                parameterList.Add(val);
+                            }
                         }
 
                         var changedObjects = new MemoryStream(changedObjectsArray);

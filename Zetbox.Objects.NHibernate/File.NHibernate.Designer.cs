@@ -43,6 +43,15 @@ namespace at.dasz.DocumentManagement
             : base(lazyCtx) // do not pass proxy to base data object
         {
             this.Proxy = proxy;
+            if (this.Proxy.AttachedTo == null)
+            {
+                this.Proxy.AttachedTo = new Zetbox.App.Base.AnyReferenceNHibernateImpl(this, "AttachedTo", lazyCtx, null);
+            }
+            else
+            {
+                this.Proxy.AttachedTo.AttachToObject(this, "AttachedTo");
+            }
+
             _isChangedOnSet = Proxy.ID > 0;
             _isCreatedOnSet = Proxy.ID > 0;
             _isExportGuidSet = Proxy.ID > 0;
@@ -52,12 +61,59 @@ namespace at.dasz.DocumentManagement
         internal readonly FileProxy Proxy;
 
         /// <summary>
+        /// Primary attached to
+        /// </summary>
+        // CompoundObject property
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.CompoundObjectPropertyTemplate
+        // implement the user-visible interface
+        public Zetbox.App.Base.AnyReference AttachedTo
+        {
+            get { return AttachedToImpl; }
+            set { AttachedToImpl = (Zetbox.App.Base.AnyReferenceNHibernateImpl)value; }
+        }
+
+        /// <summary>backing property for AttachedTo, takes care of attaching/detaching the values</summary>
+        public Zetbox.App.Base.AnyReferenceNHibernateImpl AttachedToImpl
+        {
+            get
+            {
+                return this.Proxy.AttachedTo;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (value == null)
+                    throw new ArgumentNullException("value");
+                if (!object.Equals(this.Proxy.AttachedTo, value))
+                {
+                    var __oldValue = this.Proxy.AttachedTo;
+                    var __newValue = value;
+
+                    NotifyPropertyChanging("AttachedTo", __oldValue, __newValue);
+
+                    if (this.Proxy.AttachedTo != null)
+                    {
+                        this.Proxy.AttachedTo.DetachFromObject(this, "AttachedTo");
+                    }
+                    __newValue = (Zetbox.App.Base.AnyReferenceNHibernateImpl)__newValue.Clone();
+                    this.Proxy.AttachedTo = __newValue;
+                    this.Proxy.AttachedTo.AttachToObject(this, "AttachedTo");
+
+                    NotifyPropertyChanged("AttachedTo", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+                }
+            }
+        }
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.CompoundObjectPropertyTemplate
+        public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnAttachedTo_IsValid;
+
+        /// <summary>
         /// Current File Content
         /// </summary>
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Blob
         // fkBackingName=this.Proxy.Blob; fkGuidBackingName=_fk_guid_Blob;
         // referencedInterface=Zetbox.App.Base.Blob; moduleNamespace=at.dasz.DocumentManagement;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -139,6 +195,11 @@ namespace at.dasz.DocumentManagement
         /// <summary>Backing store for Blob's guid, used on import only</summary>
         private Guid? _fk_guid_Blob = null;
 
+    public Zetbox.API.Async.ZbTask TriggerFetchBlobAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Blob>(this.Blob);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Blob
 		public static event PropertyGetterHandler<at.dasz.DocumentManagement.File, Zetbox.App.Base.Blob> OnBlob_Getter;
 		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, Zetbox.App.Base.Blob> OnBlob_PreSetter;
@@ -152,7 +213,7 @@ namespace at.dasz.DocumentManagement
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=this.Proxy.ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=at.dasz.DocumentManagement;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -231,6 +292,11 @@ namespace at.dasz.DocumentManagement
         /// <summary>Backing store for ChangedBy's id, used on dehydration only</summary>
         private int? _fk_ChangedBy = null;
 
+
+    public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
 		public static event PropertyGetterHandler<at.dasz.DocumentManagement.File, Zetbox.App.Base.Identity> OnChangedBy_Getter;
@@ -323,7 +389,7 @@ namespace at.dasz.DocumentManagement
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=this.Proxy.CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=at.dasz.DocumentManagement;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -402,6 +468,11 @@ namespace at.dasz.DocumentManagement
         /// <summary>Backing store for CreatedBy's id, used on dehydration only</summary>
         private int? _fk_CreatedBy = null;
 
+
+    public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
 		public static event PropertyGetterHandler<at.dasz.DocumentManagement.File, Zetbox.App.Base.Identity> OnCreatedBy_Getter;
@@ -487,6 +558,120 @@ namespace at.dasz.DocumentManagement
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, DateTime> OnCreatedOn_PostSetter;
 
         public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnCreatedOn_IsValid;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Excerpt
+        // fkBackingName=this.Proxy.Excerpt; fkGuidBackingName=_fk_guid_Excerpt;
+        // referencedInterface=at.dasz.DocumentManagement.Excerpt; moduleNamespace=at.dasz.DocumentManagement;
+        // inverse Navigator=File; is reference;
+        // PositionStorage=none;
+        // Target not exportable; does call events
+
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public at.dasz.DocumentManagement.Excerpt Excerpt
+        {
+            get
+            {
+                at.dasz.DocumentManagement.ExcerptNHibernateImpl __value = (at.dasz.DocumentManagement.ExcerptNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Excerpt);
+
+                if (OnExcerpt_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<at.dasz.DocumentManagement.Excerpt>(__value);
+                    OnExcerpt_Getter(this, e);
+                    __value = (at.dasz.DocumentManagement.ExcerptNHibernateImpl)e.Result;
+                }
+
+                return __value;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
+
+                // shortcut noop with nulls
+                if (value == null && this.Proxy.Excerpt == null)
+                {
+                    SetInitializedProperty("Excerpt");
+                    return;
+                }
+
+                // cache old value to remove inverse references later
+                var __oldValue = (at.dasz.DocumentManagement.ExcerptNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.Excerpt);
+                var __newValue = (at.dasz.DocumentManagement.ExcerptNHibernateImpl)value;
+
+                // shortcut noop on objects
+                // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
+                if (__oldValue == __newValue)
+                {
+                    SetInitializedProperty("Excerpt");
+                    return;
+                }
+
+                // Changing Event fires before anything is touched
+                NotifyPropertyChanging("Excerpt", __oldValue, __newValue);
+
+                if (OnExcerpt_PreSetter != null && IsAttached)
+                {
+                    var e = new PropertyPreSetterEventArgs<at.dasz.DocumentManagement.Excerpt>(__oldValue, __newValue);
+                    OnExcerpt_PreSetter(this, e);
+                    __newValue = (at.dasz.DocumentManagement.ExcerptNHibernateImpl)e.Result;
+                }
+
+                // next, set the local reference
+                if (__newValue == null)
+                {
+                    this.Proxy.Excerpt = null;
+                }
+                else
+                {
+                    this.Proxy.Excerpt = __newValue.Proxy;
+                }
+
+                // now fixup redundant, inverse references
+                // The inverse navigator will also fire events when changed, so should
+                // only be touched after setting the local value above.
+                // TODO: for complete correctness, the "other" Changing event should also fire
+                //       before the local value is changed
+                if (__oldValue != null)
+                {
+                    // unset old reference
+                    __oldValue.File = null;
+                }
+
+                if (__newValue != null)
+                {
+                    // set new reference
+                    __newValue.File = this;
+                }
+                // everything is done. fire the Changed event
+                NotifyPropertyChanged("Excerpt", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
+
+                if (OnExcerpt_PostSetter != null && IsAttached)
+                {
+                    var e = new PropertyPostSetterEventArgs<at.dasz.DocumentManagement.Excerpt>(__oldValue, __newValue);
+                    OnExcerpt_PostSetter(this, e);
+                }
+            }
+        }
+
+        /// <summary>Backing store for Excerpt's id, used on dehydration only</summary>
+        private int? _fk_Excerpt = null;
+
+
+    public Zetbox.API.Async.ZbTask TriggerFetchExcerptAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.Excerpt>(this.Excerpt);
+    }
+
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Excerpt
+		public static event PropertyGetterHandler<at.dasz.DocumentManagement.File, at.dasz.DocumentManagement.Excerpt> OnExcerpt_Getter;
+		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, at.dasz.DocumentManagement.Excerpt> OnExcerpt_PreSetter;
+		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, at.dasz.DocumentManagement.Excerpt> OnExcerpt_PostSetter;
+
+        public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnExcerpt_IsValid;
 
         /// <summary>
         /// Export Guid
@@ -623,6 +808,127 @@ namespace at.dasz.DocumentManagement
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, string> OnName_PostSetter;
 
         public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnName_IsValid;
+
+        /// <summary>
+        /// 
+        /// </summary>
+
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        public string Tags
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = Proxy.Tags;
+                if (OnTags_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnTags_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (Proxy.Tags != value)
+                {
+                    var __oldValue = Proxy.Tags;
+                    var __newValue = value;
+                    if (OnTags_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnTags_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("Tags", __oldValue, __newValue);
+                    Proxy.Tags = __newValue;
+                    NotifyPropertyChanged("Tags", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnTags_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnTags_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("Tags");
+                }
+            }
+        }
+
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<at.dasz.DocumentManagement.File, string> OnTags_Getter;
+		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, string> OnTags_PreSetter;
+		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, string> OnTags_PostSetter;
+
+        public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnTags_IsValid;
+
+        /// <summary>
+        /// Creates an excerpt from the current file
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnExtractText_File")]
+        public virtual void ExtractText()
+        {
+            // base.ExtractText();
+            if (OnExtractText_File != null)
+            {
+                OnExtractText_File(this);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on method File.ExtractText");
+            }
+        }
+        public delegate void ExtractText_Handler<T>(T obj);
+        public static event ExtractText_Handler<File> OnExtractText_File;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<File> OnExtractText_File_CanExec;
+
+        [EventBasedMethod("OnExtractText_File_CanExec")]
+        public virtual bool ExtractTextCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnExtractText_File_CanExec != null)
+				{
+					OnExtractText_File_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<File> OnExtractText_File_CanExecReason;
+
+        [EventBasedMethod("OnExtractText_File_CanExecReason")]
+        public virtual string ExtractTextCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnExtractText_File_CanExecReason != null)
+				{
+					OnExtractText_File_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// Handles the change of the current blob
@@ -830,9 +1136,18 @@ namespace at.dasz.DocumentManagement
             me.CreatedOn = other.CreatedOn;
             me.ExportGuid = other.ExportGuid;
             me.Name = other.Name;
+            me.Tags = other.Tags;
+            if (me.AttachedTo == null && other.AttachedTo != null) {
+                me.AttachedTo = (Zetbox.App.Base.AnyReference)other.AttachedTo.Clone();
+            } else if (me.AttachedTo != null && other.AttachedTo == null) {
+                me.AttachedTo = null;
+            } else if (me.AttachedTo != null && other.AttachedTo != null) {
+                me.AttachedTo.ApplyChangesFrom(other.AttachedTo);
+            }
             this._fk_Blob = otherImpl._fk_Blob;
             this._fk_ChangedBy = otherImpl._fk_ChangedBy;
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
+            this._fk_Excerpt = otherImpl._fk_Excerpt;
         }
         public override void SetNew()
         {
@@ -884,18 +1199,49 @@ namespace at.dasz.DocumentManagement
             // Do not audit calculated properties
             switch (property)
             {
+                case "AttachedTo":
                 case "Blob":
                 case "ChangedBy":
                 case "ChangedOn":
                 case "CreatedBy":
                 case "CreatedOn":
+                case "Excerpt":
                 case "ExportGuid":
                 case "Name":
+                case "Tags":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }
         }
+
+        protected override bool ShouldSetModified(string property)
+        {
+            switch (property)
+            {
+                case "Excerpt":
+                    return false;
+                default:
+                    return base.ShouldSetModified(property);
+            }
+        }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Blob":
+                return TriggerFetchBlobAsync();
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            case "Excerpt":
+                return TriggerFetchExcerptAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {
@@ -923,6 +1269,11 @@ namespace at.dasz.DocumentManagement
                 this.CreatedBy = ((Zetbox.App.Base.IdentityNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value));
             else
                 this.CreatedBy = null;
+
+            if (_fk_Excerpt.HasValue)
+                this.Excerpt = ((at.dasz.DocumentManagement.ExcerptNHibernateImpl)OurContext.FindPersistenceObject<at.dasz.DocumentManagement.Excerpt>(_fk_Excerpt.Value));
+            else
+                this.Excerpt = null;
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();
@@ -937,6 +1288,15 @@ namespace at.dasz.DocumentManagement
                 if (_properties != null) return;
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
+                    // else
+                    new PropertyDescriptorNHibernateImpl<File, Zetbox.App.Base.AnyReference>(
+                        lazyCtx,
+                        new Guid("98c240a8-e01c-4567-865d-3d83848c8eb1"),
+                        "AttachedTo",
+                        null,
+                        obj => obj.AttachedTo,
+                        (obj, val) => obj.AttachedTo = val,
+						obj => OnAttachedTo_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<File, Zetbox.App.Base.Blob>(
                         lazyCtx,
@@ -983,6 +1343,15 @@ namespace at.dasz.DocumentManagement
                         (obj, val) => obj.CreatedOn = val,
 						obj => OnCreatedOn_IsValid), 
                     // else
+                    new PropertyDescriptorNHibernateImpl<File, at.dasz.DocumentManagement.Excerpt>(
+                        lazyCtx,
+                        new Guid("76e29530-9252-4c2a-bae4-503f3b6dcd29"),
+                        "Excerpt",
+                        null,
+                        obj => obj.Excerpt,
+                        (obj, val) => obj.Excerpt = val,
+						obj => OnExcerpt_IsValid), 
+                    // else
                     new PropertyDescriptorNHibernateImpl<File, Guid>(
                         lazyCtx,
                         new Guid("91566b41-879d-4e72-b48b-9677cc156649"),
@@ -1000,6 +1369,15 @@ namespace at.dasz.DocumentManagement
                         obj => obj.Name,
                         (obj, val) => obj.Name = val,
 						obj => OnName_IsValid), 
+                    // else
+                    new PropertyDescriptorNHibernateImpl<File, string>(
+                        lazyCtx,
+                        new Guid("b4f41179-44f8-4235-b272-48f3f1452da7"),
+                        "Tags",
+                        null,
+                        obj => obj.Tags,
+                        (obj, val) => obj.Tags = val,
+						obj => OnTags_IsValid), 
                     // position columns
                 };
             }
@@ -1069,7 +1447,9 @@ namespace at.dasz.DocumentManagement
             SetNotInitializedProperty("Blob");
             SetNotInitializedProperty("ChangedBy");
             SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("Excerpt");
             SetNotInitializedProperty("Name");
+            SetNotInitializedProperty("Tags");
             base.NotifyCreated();
             if (OnNotifyCreated_File != null) OnNotifyCreated_File(this);
         }
@@ -1086,6 +1466,11 @@ namespace at.dasz.DocumentManagement
                 ((NHibernatePersistenceObject)Blob).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)Blob);
             }
+            // FK_File_has_Excerpt
+            if (Excerpt != null) {
+                ((NHibernatePersistenceObject)Excerpt).ParentsToDelete.Add(this);
+                ChildrenToDelete.Add((NHibernatePersistenceObject)Excerpt);
+            }
             // FK_File_was_ChangedBy
             if (ChangedBy != null) {
                 ((NHibernatePersistenceObject)ChangedBy).ChildrenToDelete.Add(this);
@@ -1100,6 +1485,7 @@ namespace at.dasz.DocumentManagement
             Blob = null;
             ChangedBy = null;
             CreatedBy = null;
+            Excerpt = null;
         }
         public static event ObjectEventHandler<File> OnNotifyDeleting_File;
 
@@ -1117,6 +1503,8 @@ namespace at.dasz.DocumentManagement
             public virtual Type ZetboxWrapper { get { return typeof(FileNHibernateImpl); } }
             public virtual Type ZetboxProxy { get { return typeof(FileProxy); } }
 
+            public virtual Zetbox.App.Base.AnyReferenceNHibernateImpl AttachedTo { get; set; }
+
             public virtual Zetbox.App.Base.BlobNHibernateImpl.BlobProxy Blob { get; set; }
 
             public virtual Zetbox.App.Base.IdentityNHibernateImpl.IdentityProxy ChangedBy { get; set; }
@@ -1127,9 +1515,13 @@ namespace at.dasz.DocumentManagement
 
             public virtual DateTime CreatedOn { get; set; }
 
+            public virtual at.dasz.DocumentManagement.ExcerptNHibernateImpl.ExcerptProxy Excerpt { get; set; }
+
             public virtual Guid ExportGuid { get; set; }
 
             public virtual string Name { get; set; }
+
+            public virtual string Tags { get; set; }
 
         }
 
@@ -1143,6 +1535,7 @@ namespace at.dasz.DocumentManagement
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
+            binStream.Write(this.AttachedTo);
             binStream.Write(this.Proxy.Blob != null ? OurContext.GetIdFromProxy(this.Proxy.Blob) : (int?)null);
             binStream.Write(this.Proxy.ChangedBy != null ? OurContext.GetIdFromProxy(this.Proxy.ChangedBy) : (int?)null);
             binStream.Write(this._isChangedOnSet);
@@ -1154,11 +1547,13 @@ namespace at.dasz.DocumentManagement
             if (this._isCreatedOnSet) {
                 binStream.Write(this.Proxy.CreatedOn);
             }
+            binStream.Write(this.Proxy.Excerpt != null ? OurContext.GetIdFromProxy(this.Proxy.Excerpt) : (int?)null);
             binStream.Write(this._isExportGuidSet);
             if (this._isExportGuidSet) {
                 binStream.Write(this.Proxy.ExportGuid);
             }
             binStream.Write(this.Proxy.Name);
+            binStream.Write(this.Proxy.Tags);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -1167,6 +1562,11 @@ namespace at.dasz.DocumentManagement
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
+            {
+                // use backing store to avoid notifications
+                this.AttachedToImpl = binStream.ReadCompoundObject<Zetbox.App.Base.AnyReferenceNHibernateImpl>();
+                this.AttachedToImpl.AttachToObject(this, "AttachedTo");
+            }
             binStream.Read(out this._fk_Blob);
             binStream.Read(out this._fk_ChangedBy);
             this._isChangedOnSet = binStream.ReadBoolean();
@@ -1178,11 +1578,13 @@ namespace at.dasz.DocumentManagement
             if (this._isCreatedOnSet) {
                 this.Proxy.CreatedOn = binStream.ReadDateTime();
             }
+            binStream.Read(out this._fk_Excerpt);
             this._isExportGuidSet = binStream.ReadBoolean();
             if (this._isExportGuidSet) {
                 this.Proxy.ExportGuid = binStream.ReadGuid();
             }
             this.Proxy.Name = binStream.ReadString();
+            this.Proxy.Tags = binStream.ReadString();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
@@ -1196,12 +1598,14 @@ namespace at.dasz.DocumentManagement
             xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
+            if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ExportCompoundObject(this.AttachedTo, xml, "AttachedTo", "at.dasz.DocumentManagement");
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this.Proxy.Blob != null ? this.Proxy.Blob.ExportGuid : (Guid?)null, xml, "Blob", "at.dasz.DocumentManagement");
             System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this.Proxy.ChangedOn, xml, "ChangedOn", "at.dasz.DocumentManagement");
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "at.dasz.DocumentManagement");
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this.Proxy.Name, xml, "Name", "at.dasz.DocumentManagement");
+            if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this.Proxy.Tags, xml, "Tags", "at.dasz.DocumentManagement");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -1209,6 +1613,9 @@ namespace at.dasz.DocumentManagement
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "at.dasz.DocumentManagement|AttachedTo":
+                XmlStreamer.MergeImportCompoundObject(this.AttachedToImpl, xml);
+                break;
             case "at.dasz.DocumentManagement|Blob":
                 this._fk_guid_Blob = XmlStreamer.ReadNullableGuid(xml);
                 break;
@@ -1229,6 +1636,9 @@ namespace at.dasz.DocumentManagement
                 break;
             case "at.dasz.DocumentManagement|Name":
                 this.Proxy.Name = XmlStreamer.ReadString(xml);
+                break;
+            case "at.dasz.DocumentManagement|Tags":
+                this.Proxy.Tags = XmlStreamer.ReadString(xml);
                 break;
             }
         }

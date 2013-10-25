@@ -20,6 +20,7 @@ namespace Zetbox.Client.Presentables
     using System.Linq;
     using System.Text;
     using Zetbox.API;
+    using Zetbox.API.Common;
     using Zetbox.API.Configuration;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
@@ -31,6 +32,8 @@ namespace Zetbox.Client.Presentables
     {
         public new delegate DataTypeViewModel Factory(IZetboxContext dataCtx, ViewModel parent, DataType dt);
 
+        private readonly DataType _dataType;
+
         public DataTypeViewModel(
             IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
             DataType dt)
@@ -38,7 +41,28 @@ namespace Zetbox.Client.Presentables
         {
             _dataType = dt;
         }
-        private DataType _dataType;
+
+        public override string Name
+        {
+            get
+            {
+                if (_dataType.Module != null)
+                    return Assets.GetString(_dataType.Module, ZetboxAssetKeys.DataTypes, ZetboxAssetKeys.ConstructNameKey(_dataType), _dataType.Name);
+                else
+                    return _dataType.Name;
+            }
+        }
+
+        public string Description
+        {
+            get
+            {
+                if (_dataType.Module != null)
+                    return Assets.GetString(_dataType.Module, ZetboxAssetKeys.DataTypes, ZetboxAssetKeys.ConstructDescriptionKey(_dataType), _dataType.Description);
+                else
+                    return _dataType.Description;
+            }
+        }
 
         protected override List<PropertyGroupViewModel> CreatePropertyGroups()
         {
@@ -74,7 +98,11 @@ namespace Zetbox.Client.Presentables
             {
                 case "Name":
                 case "Module":
+                    OnPropertyChanged("Name");
                     OnPropertyChanged("DescribedType");
+                    break;
+                case "Description":
+                    OnPropertyChanged("Description");
                     break;
             }
         }

@@ -19,12 +19,10 @@ namespace Zetbox.API.AbstractConsumerTests.ContextTests
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-
+    using NUnit.Framework;
     using Zetbox.API;
     using Zetbox.App.Base;
     using Zetbox.App.Test;
-
-    using NUnit.Framework;
 
     public abstract class when_deleting_one_to_n
         : AbstractTestFixture

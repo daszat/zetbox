@@ -19,9 +19,9 @@ namespace Zetbox.API.AbstractConsumerTests.N_to_M_relations
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using NUnit.Framework;
     using Zetbox.API;
     using Zetbox.App.Test;
-    using NUnit.Framework;
 
     public static class when_adding
     {
@@ -47,7 +47,6 @@ namespace Zetbox.API.AbstractConsumerTests.N_to_M_relations
             public void should_remember_locally_two_items()
             {
                 aSide1.BSide.Add(bSide1);
-                Assert.That(aSide1.BSide, Is.EquivalentTo(new[] { bSide1 }));
                 aSide1.BSide.Add(bSide2);
                 Assert.That(aSide1.BSide, Is.EquivalentTo(new[] { bSide1, bSide2 }));
             }
@@ -82,6 +81,21 @@ namespace Zetbox.API.AbstractConsumerTests.N_to_M_relations
                 aSide1.BSide.Add(bSide1);
                 SubmitAndReload();
                 Assert.That(bSide1.ASide, Is.EquivalentTo(new[] { aSide1 }));
+            }
+
+            [Test]
+            public void should_notify_both_ends()
+            {
+                int notifiedA = 0;
+                aSide1.PropertyChanged += (s, e) => { if (e.PropertyName == "BSide") notifiedA++; };
+
+                int notifiedB = 0;
+                bSide1.PropertyChanged += (s, e) => { if (e.PropertyName == "ASide") notifiedB++; };
+
+                aSide1.BSide.Add(bSide1);
+
+                Assert.That(notifiedA, Is.EqualTo(1), "A");
+                Assert.That(notifiedB, Is.EqualTo(1), "B");
             }
         }
 
@@ -107,7 +121,6 @@ namespace Zetbox.API.AbstractConsumerTests.N_to_M_relations
             public void should_remember_locally_two_items()
             {
                 bSide1.ASide.Add(aSide1);
-                Assert.That(bSide1.ASide, Is.EquivalentTo(new[] { aSide1 }));
                 bSide1.ASide.Add(aSide2);
                 Assert.That(bSide1.ASide, Is.EquivalentTo(new[] { aSide1, aSide2 }));
             }
@@ -135,13 +148,28 @@ namespace Zetbox.API.AbstractConsumerTests.N_to_M_relations
                 bSide1.ASide.Add(aSide1);
                 Assert.That(aSide1.BSide, Is.EquivalentTo(new[] { bSide1 }));
             }
-            [Test]
 
+            [Test]
             public void should_synchronize_other_side_after_persisting()
             {
                 bSide1.ASide.Add(aSide1);
                 SubmitAndReload();
                 Assert.That(aSide1.BSide, Is.EquivalentTo(new[] { bSide1 }));
+            }
+
+            [Test]
+            public void should_notify_both_ends()
+            {
+                int notifiedA = 0;
+                aSide1.PropertyChanged += (s, e) => { if (e.PropertyName == "BSide") notifiedA++; };
+
+                int notifiedB = 0;
+                bSide1.PropertyChanged += (s, e) => { if (e.PropertyName == "ASide") notifiedB++; };
+
+                bSide1.ASide.Add(aSide1);
+
+                Assert.That(notifiedA, Is.EqualTo(1), "A");
+                Assert.That(notifiedB, Is.EqualTo(1), "B");
             }
         }
     }

@@ -15,10 +15,28 @@ namespace at.dasz.DocumentManagement
     {
 
         /// <summary>
+        /// Primary attached to
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("98c240a8-e01c-4567-865d-3d83848c8eb1")]
+        Zetbox.App.Base.AnyReference AttachedTo {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Current File Content
         /// </summary>
         [Zetbox.API.DefinitionGuid("ef5addda-340f-4a87-83c9-3ee419519343")]
         Zetbox.App.Base.Blob Blob {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("76e29530-9252-4c2a-bae4-503f3b6dcd29")]
+        at.dasz.DocumentManagement.Excerpt Excerpt {
             get;
             set;
         }
@@ -31,6 +49,20 @@ namespace at.dasz.DocumentManagement
             get;
             set;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("b4f41179-44f8-4235-b272-48f3f1452da7")]
+        string Tags {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Creates an excerpt from the current file
+        /// </summary>
+        void ExtractText();
 
         /// <summary>
         /// Handles the change of the current blob

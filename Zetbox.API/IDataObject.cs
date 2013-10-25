@@ -19,7 +19,7 @@ namespace Zetbox.API
     using System.ComponentModel;
     using System.IO;
     using System.Xml;
-using Zetbox.API.Async;
+    using Zetbox.API.Async;
 
     /// <summary>
     /// Data Object State
@@ -95,7 +95,8 @@ using Zetbox.API.Async;
 
         // Aggregations
         Change = Read | Write,
-        Full = Read | Write | Delete | Create,
+        FullInstance = Change | Delete,
+        Full = FullInstance | Create,
 
         // Visible to user
         // UI_Read = Read,
@@ -132,6 +133,11 @@ using Zetbox.API.Async;
             return (r & API.AccessRights.Delete) != 0;
         }
 
+        public static bool HasFullInstanceRights(this AccessRights r)
+        {
+            return (r & (AccessRights.Delete | AccessRights.Write)) != 0;
+        }
+
         public static bool HasCreateRights(this AccessRights r)
         {
             return (r & API.AccessRights.Create) != 0;
@@ -140,7 +146,7 @@ using Zetbox.API.Async;
 
         public static bool HasNoRights(this AccessRights? r)
         {
-            return r.HasValue && r == API.AccessRights.None;
+            return r.HasValue || r == API.AccessRights.None;
         }
         public static bool HasOnlyReadRightsOrNone(this AccessRights? r)
         {
@@ -158,6 +164,11 @@ using Zetbox.API.Async;
         public static bool HasDeleteRights(this AccessRights? r)
         {
             return r.HasValue && (r & API.AccessRights.Delete) != 0;
+        }
+
+        public static bool HasFullInstanceRights(this AccessRights? r)
+        {
+            return r.HasValue && (r & (AccessRights.Delete | AccessRights.Write)) != 0;
         }
 
         public static bool HasCreateRights(this AccessRights? r)
@@ -311,6 +322,16 @@ using Zetbox.API.Async;
         /// </summary>
         /// <param name="obj">the object to copy from</param>
         void ApplyChangesFrom(IPersistenceObject obj);
+
+        /// <summary>
+        /// Fires an Event after an Object is created.
+        /// </summary>
+        void NotifyCreated();
+
+        /// <summary>
+        /// Fires an Event before an Object is deleted.
+        /// </summary>
+        void NotifyDeleting();
         #endregion
     }
 
@@ -353,16 +374,6 @@ using Zetbox.API.Async;
         void NotifyPostSave();
 
         /// <summary>
-        /// Fires an Event after an Object is created.
-        /// </summary>
-        void NotifyCreated();
-
-        /// <summary>
-        /// Fires an Event before an Object is deleted.
-        /// </summary>
-        void NotifyDeleting();
-
-        /// <summary>
         /// Update to-one navigators when fixing 1:N relations from the collection
         /// </summary>
         /// <param name="propertyName"></param>
@@ -371,13 +382,18 @@ using Zetbox.API.Async;
 
         Guid ObjectClassID { get; }
         #endregion
+
+        /// <summary>
+        /// The transient state of this instance. Used by businesslogic to store temporary data.
+        /// </summary>
+        Dictionary<object, object> TransientState { get; }
     }
 
     /// <summary>
     /// An ICompoundObject is a simple bag of named values.
     /// </summary>
     /// Supports <see cref="ICloneable"/>, because CompoundObject don't have a independent identity and thus can be copied freely.
-    public interface ICompoundObject : INotifyingObject, ICloneable, IStreamable, IComparable
+    public interface ICompoundObject : INotifyingObject, ICloneable, IStreamable, IComparable, ISortKey<int>
     {
         /// <summary>
         /// Gets a value indicating whether values of this object can be set. This mostly depends on the state of the containing object.
@@ -421,6 +437,11 @@ using Zetbox.API.Async;
         /// </summary>
         /// <param name="xml">XmlReader to deserialize to.</param>
         void MergeImport(XmlReader xml);
+
+        /// <summary>
+        /// The transient state of this instance. Used by businesslogic to store temporary data.
+        /// </summary>
+        Dictionary<object, object> TransientState { get; }
     }
 
     /// <summary>

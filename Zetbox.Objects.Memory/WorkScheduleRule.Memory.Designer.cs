@@ -40,10 +40,10 @@ namespace Zetbox.App.Calendar
         /// <summary>
         /// Identity which changed this object
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Calendar;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -228,10 +228,10 @@ namespace Zetbox.App.Calendar
         /// <summary>
         /// Identity which created this object
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Calendar;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -558,10 +558,10 @@ namespace Zetbox.App.Calendar
         /// <summary>
         /// Optional member of a module
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
         // fkBackingName=_fk_Module; fkGuidBackingName=_fk_guid_Module;
         // referencedInterface=Zetbox.App.Base.Module; moduleNamespace=Zetbox.App.Calendar;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -910,7 +910,7 @@ namespace Zetbox.App.Calendar
         /// <summary>
         /// 
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for WorkSchedule
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for WorkSchedule
         // fkBackingName=_fk_WorkSchedule; fkGuidBackingName=_fk_guid_WorkSchedule;
         // referencedInterface=Zetbox.App.Calendar.WorkSchedule; moduleNamespace=Zetbox.App.Calendar;
         // inverse Navigator=WorkScheduleRules; is list;
@@ -1256,6 +1256,7 @@ namespace Zetbox.App.Calendar
                 WorkScheduleImpl = (Zetbox.App.Calendar.WorkScheduleMemoryImpl)Context.Find<Zetbox.App.Calendar.WorkSchedule>(_fk_WorkSchedule.Value);
             else
                 WorkScheduleImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

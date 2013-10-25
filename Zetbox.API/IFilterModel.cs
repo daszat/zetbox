@@ -30,6 +30,9 @@ namespace Zetbox.API
 
         IFilterValueSource ValueSource { get; set; }
 
+        /// <summary>
+        /// Indicates that the filter value has been set and the filter is active.
+        /// </summary>
         bool Enabled { get; }
         bool Required { get; }
     }

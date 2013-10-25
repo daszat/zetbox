@@ -54,7 +54,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for EnumValue
         // fkBackingName=this.Proxy.EnumValue; fkGuidBackingName=_fk_guid_EnumValue;
         // referencedInterface=Zetbox.App.Base.EnumerationEntry; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -135,6 +135,11 @@ namespace Zetbox.App.Base
 
         /// <summary>Backing store for EnumValue's guid, used on import only</summary>
         private Guid? _fk_guid_EnumValue = null;
+
+    public Zetbox.API.Async.ZbTask TriggerFetchEnumValueAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.EnumerationEntry>(this.EnumValue);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for EnumValue
 		public static event PropertyGetterHandler<Zetbox.App.Base.EnumDefaultValue, Zetbox.App.Base.EnumerationEntry> OnEnumValue_Getter;
@@ -258,6 +263,17 @@ namespace Zetbox.App.Base
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "EnumValue":
+                return TriggerFetchEnumValueAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

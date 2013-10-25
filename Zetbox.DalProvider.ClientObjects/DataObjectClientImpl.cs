@@ -17,12 +17,12 @@ namespace Zetbox.DalProvider.Client
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Text;
     using Zetbox.API;
     using Zetbox.API.Client;
     using Zetbox.DalProvider.Base;
-    using System.IO;
 
     public abstract class DataObjectClientImpl
        : DataObjectBaseImpl, IClientObject
@@ -54,7 +54,7 @@ namespace Zetbox.DalProvider.Client
         /// Reflects the current access rights by the current Identity. 
         /// Base implementations returnes always Full
         /// </summary>
-        private Zetbox.API.AccessRights _currentAccessRights = Zetbox.API.AccessRights.Full;
+        private Zetbox.API.AccessRights _currentAccessRights = Zetbox.API.AccessRights.FullInstance;
         public override Zetbox.API.AccessRights CurrentAccessRights
         {
             get
@@ -72,6 +72,13 @@ namespace Zetbox.DalProvider.Client
         {
             base.ApplyRightsFromStream(rights);
             _currentAccessRights = rights;
+        }
+
+        public override void ApplyChangesFrom(IPersistenceObject obj)
+        {
+            base.ApplyChangesFrom(obj);
+            // Apply access rights from server
+            _currentAccessRights = obj.CurrentAccessRights;
         }
     }
 }

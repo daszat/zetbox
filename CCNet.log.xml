@@ -1,8 +1,0 @@
-<?xml version="1.0" ?>
-
-<!DOCTYPE log4j:events SYSTEM "log4j-events.dtd" [<!ENTITY data SYSTEM "bin/log.xml">]>
-
-<log4j:events version="1.2" xmlns:log4j="http://jakarta.apache.org/log4j/">
-    &data;
-</log4j:events>
-

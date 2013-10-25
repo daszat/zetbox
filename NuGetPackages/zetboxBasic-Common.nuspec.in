@@ -20,12 +20,18 @@
       <dependency id="Autofac" version="[2.6.3.862]" />
       <dependency id="log4net" version="[2.0.0]" />
       <dependency id="Mono.Cecil" version="[0.9.5.4]" />
+      <dependency id="Lucene.Net" version="[3.0.3]" />
+      <dependency id="Lucene.Net.Contrib" version="[3.0.3]" />
       <dependency id="PDFsharp-MigraDoc-GDI-dasz" version="[1.32.3886.0]" />
     </dependencies>
   </metadata>
   <files>
     <file src="Common\Zetbox.API.dll" target="lib\net40" />
+    <file src="Common\Zetbox.API.pdb" target="lib\net40" />
+    <file src="Common\Zetbox.API.xml" target="lib\net40" />
     <file src="Common\Zetbox.API.Common.dll" target="lib\net40" />
+    <file src="Common\Zetbox.API.Common.pdb" target="lib\net40" />
+    <file src="Common\Zetbox.API.Common.xml" target="lib\net40" />
 
     <file src="install-references.ps1" target="tools\install.ps1" />
   </files>

@@ -20,13 +20,14 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     using System.Linq;
     using System.Text;
     using Zetbox.API;
-    using Zetbox.App.Base;
-    using Zetbox.App.SchemaMigration;
     using Zetbox.API.Configuration;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
     using Zetbox.App.Extensions;
+    using Zetbox.App.SchemaMigration;
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables.ValueViewModels;
-    using Zetbox.API.Utils;
+    using Zetbox.API.Common;
 
     [ViewModelDescriptor]
     public class PropertySelectionTaskViewModel : WindowViewModel
@@ -50,15 +51,15 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         }
 
         #region Configuration
-        private bool _followCompundObjects = false;
+        private bool _followCompoundObjects = false;
 
-        public bool FollowCompundObjects
+        public bool FollowCompoundObjects
         {
-            get { return _followCompundObjects; }
+            get { return _followCompoundObjects; }
             set
             {
-                _followCompundObjects = value;
-                OnPropertyChanged("FollowCompundObjects");
+                _followCompoundObjects = value;
+                OnPropertyChanged("FollowCompoundObjects");
             }
         }
         private bool _followRelationsOne = false;
@@ -173,7 +174,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         PropertySelectionTaskViewModelResources.Filter_Description,
                         true, false);
                     _filterMdl.PropertyChanged += (s, e) => { if (e.PropertyName == "Value") OnPropertyChanged("PossibleValues"); };
-                    _filter = ViewModelFactory.CreateViewModel<ClassValueViewModel<string>.Factory>().Invoke(DataContext, this, _filterMdl);
+                    _filter = ViewModelFactory.CreateViewModel<StringValueViewModel.Factory>().Invoke(DataContext, this, _filterMdl);
                 }
                 return _filter;
             }
@@ -315,7 +316,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             get
             {
-                return _prop.Name;
+                return _prop.GetLabel();
             }
         }
 
@@ -364,7 +365,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 if (_PossibleValues == null)
                 {
                     _PossibleValues = new List<SelectedPropertyViewModel>();
-                    if (Parent.FollowCompundObjects && _prop is CompoundObjectProperty)
+                    if (Parent.FollowCompoundObjects && _prop is CompoundObjectProperty)
                     {
                         foreach (var prop in ((CompoundObjectProperty)_prop).CompoundObjectDefinition.Properties)
                         {

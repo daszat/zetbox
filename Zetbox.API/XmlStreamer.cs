@@ -320,18 +320,14 @@ namespace Zetbox.API
                                 }
                             }
                         }
-                        if (parent == null)
+
+                        if (parent != null && parent.Context != null)
                         {
-                            val.Add(obj);
-                        }
-                        else
-                        {
-                            if (parent.Context != null)
-                            {
-                                parent.Context.Internals().AttachAsNew(obj);
-                            }
+                            parent.Context.Internals().AttachAsNew(obj);
                             obj.ParentObject = parent;
                         }
+
+                        val.Add(obj);
                     }
                 }
             }

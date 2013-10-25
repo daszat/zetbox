@@ -40,10 +40,10 @@ namespace Zetbox.App.SchemaMigration
         /// <summary>
         /// Identity which changed this object
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.SchemaMigration;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -286,10 +286,10 @@ namespace Zetbox.App.SchemaMigration
         /// <summary>
         /// Identity which created this object
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.SchemaMigration;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -532,10 +532,10 @@ namespace Zetbox.App.SchemaMigration
         /// <summary>
         /// 
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DestinationObjectClass
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DestinationObjectClass
         // fkBackingName=_fk_DestinationObjectClass; fkGuidBackingName=_fk_guid_DestinationObjectClass;
         // referencedInterface=Zetbox.App.Base.ObjectClass; moduleNamespace=Zetbox.App.SchemaMigration;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -815,21 +815,27 @@ namespace Zetbox.App.SchemaMigration
                     serverList = new List<Zetbox.App.SchemaMigration.SourceColumn>();
                 });
             }
-    
+
             _triggerFetchSourceColumnTask.OnResult(t =>
             {
                 _SourceColumn = new OneNRelationList<Zetbox.App.SchemaMigration.SourceColumn>(
                     "SourceTable",
                     null,
                     this,
-                    () => { this.NotifyPropertyChanged("SourceColumn", null, null); if(OnSourceColumn_PostSetter != null && IsAttached) OnSourceColumn_PostSetter(this); },
-                    serverList);    
+                    OnSourceColumnCollectionChanged,
+                    serverList);
             });
-            return _triggerFetchSourceColumnTask;    
+            return _triggerFetchSourceColumnTask;
         }
-    
-        private OneNRelationList<Zetbox.App.SchemaMigration.SourceColumn> _SourceColumn;
 
+        internal void OnSourceColumnCollectionChanged()
+        {
+            NotifyPropertyChanged("SourceColumn", null, null);
+            if (OnSourceColumn_PostSetter != null && IsAttached)
+                OnSourceColumn_PostSetter(this);
+        }
+
+        private OneNRelationList<Zetbox.App.SchemaMigration.SourceColumn> _SourceColumn;
 public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.SourceTable> OnSourceColumn_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.SchemaMigration.SourceTable> OnSourceColumn_IsValid;
@@ -837,7 +843,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         /// <summary>
         /// 
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for StagingDatabase
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for StagingDatabase
         // fkBackingName=_fk_StagingDatabase; fkGuidBackingName=_fk_guid_StagingDatabase;
         // referencedInterface=Zetbox.App.SchemaMigration.StagingDatabase; moduleNamespace=Zetbox.App.SchemaMigration;
         // inverse Navigator=SourceTables; is list;
@@ -1314,6 +1320,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                 StagingDatabaseImpl = (Zetbox.App.SchemaMigration.StagingDatabaseMemoryImpl)Context.Find<Zetbox.App.SchemaMigration.StagingDatabase>(_fk_StagingDatabase.Value);
             else
                 StagingDatabaseImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

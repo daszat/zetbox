@@ -15,7 +15,7 @@
 
 namespace Zetbox.API.Client
 {
-
+    using System.Collections.Generic;
     using System.ComponentModel;
     using Autofac;
     using Zetbox.API.Client.PerfCounter;
@@ -24,7 +24,6 @@ namespace Zetbox.API.Client
     public sealed class ClientApiModule
         : Autofac.Module
     {
-
         protected override void Load(ContainerBuilder moduleBuilder)
         {
             base.Load(moduleBuilder);
@@ -32,11 +31,13 @@ namespace Zetbox.API.Client
             moduleBuilder
                 .Register<ProxyImplementation>(c => new ProxyImplementation(
                     c.Resolve<InterfaceType.Factory>(),
+                    c.Resolve<IImplementationTypeChecker>(),
                     c.Resolve<UnattachedObjectFactory>(),
                     c.Resolve<Zetbox.API.Client.ZetboxService.IZetboxService>(),
                     c.Resolve<IPerfCounter>(),
                     c.Resolve<ZetboxStreamReader.Factory>(),
-                    c.Resolve<ZetboxStreamWriter.Factory>()
+                    c.Resolve<ZetboxStreamWriter.Factory>(),
+                    c.Resolve<IEnumerable<SerializingTypeMap>>()
                     ))
                 .Named<IProxy>("implementor")
                 .InstancePerDependency(); // No singleton!
@@ -59,6 +60,11 @@ namespace Zetbox.API.Client
                 .As<IPerfCounter>()
                 .OnActivated(args => args.Instance.Initialize(args.Context.Resolve<IFrozenContext>()))
                 .OnRelease(obj => obj.Dump())
+                .SingleInstance();
+
+            moduleBuilder
+                .Register<TestScreenshotTool>(c => new TestScreenshotTool())
+                .As<IScreenshotTool>()
                 .SingleInstance();
         }
     }

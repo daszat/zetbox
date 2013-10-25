@@ -47,6 +47,7 @@
         <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
                  AcceptsReturn="True"
                  AcceptsTab="True"
+                 VerticalContentAlignment="Top"
                  VerticalScrollBarVisibility="Visible"
                  HorizontalScrollBarVisibility="Visible"
                  MinLines="10" />

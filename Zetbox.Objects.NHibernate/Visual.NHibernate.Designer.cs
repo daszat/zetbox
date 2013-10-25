@@ -65,8 +65,8 @@ namespace Zetbox.App.GUI
 							new ProjectedCollection<Zetbox.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl.Visual_contains_Visual_RelationEntryProxy, Zetbox.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.Children,
                                 p => (Zetbox.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl.Visual_contains_Visual_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Zetbox.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl>)null);
+                                ce => (Zetbox.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl.Visual_contains_Visual_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
+                    _Children.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Children", null, null); if(OnChildren_PostSetter != null && IsAttached) OnChildren_PostSetter(this); };
                     if (Children_was_eagerLoaded) { Children_was_eagerLoaded = false; }
 				}
 				return (ICollection<Zetbox.App.GUI.Visual>)_Children;
@@ -76,6 +76,13 @@ namespace Zetbox.App.GUI
 		private NHibernateBSideCollectionWrapper<Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl> _Children;
 		// ignored, but required for Serialization
         private bool Children_was_eagerLoaded = false;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchChildrenAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.GUI.Visual>>(this.Children);
+        }
+
+public static event PropertyListChangedHandler<Zetbox.App.GUI.Visual> OnChildren_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.Visual> OnChildren_IsValid;
 
@@ -96,8 +103,8 @@ namespace Zetbox.App.GUI
 							new ProjectedCollection<Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl.Visual_hasContextMenu_Visual_RelationEntryProxy, Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.ContextMenu,
                                 p => (Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl.Visual_hasContextMenu_Visual_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl>)null);
+                                ce => (Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl.Visual_hasContextMenu_Visual_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
+                    _ContextMenu.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("ContextMenu", null, null); if(OnContextMenu_PostSetter != null && IsAttached) OnContextMenu_PostSetter(this); };
                     if (ContextMenu_was_eagerLoaded) { ContextMenu_was_eagerLoaded = false; }
 				}
 				return (ICollection<Zetbox.App.GUI.Visual>)_ContextMenu;
@@ -107,6 +114,13 @@ namespace Zetbox.App.GUI
 		private NHibernateBSideCollectionWrapper<Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl> _ContextMenu;
 		// ignored, but required for Serialization
         private bool ContextMenu_was_eagerLoaded = false;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchContextMenuAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.GUI.Visual>>(this.ContextMenu);
+        }
+
+public static event PropertyListChangedHandler<Zetbox.App.GUI.Visual> OnContextMenu_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.Visual> OnContextMenu_IsValid;
 
@@ -174,7 +188,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Method
         // fkBackingName=this.Proxy.Method; fkGuidBackingName=_fk_guid_Method;
         // referencedInterface=Zetbox.App.Base.Method; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -254,6 +268,11 @@ namespace Zetbox.App.GUI
         private int? _fk_Method = null;
 
 
+    public Zetbox.API.Async.ZbTask TriggerFetchMethodAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Method>(this.Method);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Method
 		public static event PropertyGetterHandler<Zetbox.App.GUI.Visual, Zetbox.App.Base.Method> OnMethod_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.Visual, Zetbox.App.Base.Method> OnMethod_PreSetter;
@@ -267,7 +286,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Property
         // fkBackingName=this.Proxy.Property; fkGuidBackingName=_fk_guid_Property;
         // referencedInterface=Zetbox.App.Base.Property; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -346,6 +365,11 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for Property's id, used on dehydration only</summary>
         private int? _fk_Property = null;
 
+
+    public Zetbox.API.Async.ZbTask TriggerFetchPropertyAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Property>(this.Property);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Property
 		public static event PropertyGetterHandler<Zetbox.App.GUI.Visual, Zetbox.App.Base.Property> OnProperty_Getter;
@@ -431,6 +455,23 @@ namespace Zetbox.App.GUI
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Children":
+                return TriggerFetchChildrenAsync();
+            case "ContextMenu":
+                return TriggerFetchContextMenuAsync();
+            case "Method":
+                return TriggerFetchMethodAsync();
+            case "Property":
+                return TriggerFetchPropertyAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

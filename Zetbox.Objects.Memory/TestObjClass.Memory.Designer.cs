@@ -143,10 +143,10 @@ namespace Zetbox.App.Test
         /// <summary>
         /// testtest
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ObjectProp
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ObjectProp
         // fkBackingName=_fk_ObjectProp; fkGuidBackingName=_fk_guid_ObjectProp;
         // referencedInterface=Zetbox.App.Projekte.Kunde; moduleNamespace=Zetbox.App.Test;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -606,6 +606,7 @@ namespace Zetbox.App.Test
                 ObjectPropImpl = (Zetbox.App.Projekte.KundeMemoryImpl)Context.Find<Zetbox.App.Projekte.Kunde>(_fk_ObjectProp.Value);
             else
                 ObjectPropImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

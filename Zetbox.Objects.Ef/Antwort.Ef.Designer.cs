@@ -216,6 +216,11 @@ namespace Zetbox.App.Test
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchFragebogenAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Test.Fragebogen>(this.Fragebogen);
+        }
+
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -444,6 +449,17 @@ namespace Zetbox.App.Test
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Fragebogen":
+                return TriggerFetchFragebogenAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
@@ -457,6 +473,7 @@ namespace Zetbox.App.Test
                 FragebogenImpl = (Zetbox.App.Test.FragebogenEfImpl)Context.Find<Zetbox.App.Test.Fragebogen>(_fk_Fragebogen.Value);
             else
                 FragebogenImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

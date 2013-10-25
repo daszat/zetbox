@@ -17,17 +17,17 @@ namespace Zetbox.DalProvider.Memory
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.IO;
     using System.Linq;
     using System.Reflection;
     using System.Text;
     using Autofac;
     using Zetbox.API;
+    using Zetbox.API.Configuration;
     using Zetbox.API.Utils;
     using Zetbox.App.Extensions;
     using Zetbox.App.Packaging;
-    using Zetbox.API.Configuration;
-    using System.ComponentModel;
 
     // Not a feature, will be loaded by ApiCommon module
     [Description("Memory provider")]
@@ -56,6 +56,8 @@ namespace Zetbox.DalProvider.Memory
                 {
                     var manager = args.Context.Resolve<IMemoryActionsManager>();
                     manager.Init(args.Context.Resolve<IFrozenContext>());
+
+                    ZetboxContextEventListenerHelper.OnCreated(args.Context.Resolve<IEnumerable<IZetboxContextEventListener>>(), args.Instance);
                 })
                 .InstancePerDependency();
 
@@ -72,7 +74,8 @@ namespace Zetbox.DalProvider.Memory
                         memCtx = new FrozenMemoryContext(
                             c.Resolve<InterfaceType.Factory>(),
                             () => memCtx,
-                            c.Resolve<MemoryImplementationType.MemoryFactory>());
+                            c.Resolve<MemoryImplementationType.MemoryFactory>(),
+                            c.Resolve<IEnumerable<IZetboxContextEventListener>>());
                         Importer.LoadFromXml(memCtx, generatedAssembly.GetManifestResourceStream("Zetbox.Objects.MemoryImpl.FrozenObjects.xml"), "FrozenContext XML from Assembly");
                         memCtx.Seal();
                         return memCtx;
@@ -82,8 +85,19 @@ namespace Zetbox.DalProvider.Memory
                     {
                         var manager = args.Context.Resolve<IMemoryActionsManager>();
                         manager.Init(args.Context.Resolve<IFrozenContext>());
+
+                        ZetboxContextEventListenerHelper.OnCreated(args.Context.Resolve<IEnumerable<IZetboxContextEventListener>>(), args.Instance);
                     })
                     .SingleInstance();
+
+                // Make the Func<IFrozenContext> a single instance
+                moduleBuilder.Register<Func<IFrozenContext>>(c =>
+                {
+                    var frozenCtx = c.Resolve<IFrozenContext>();
+                    return () => frozenCtx;
+                })
+                .SingleInstance();
+
             }
             catch (FileNotFoundException ex)
             {

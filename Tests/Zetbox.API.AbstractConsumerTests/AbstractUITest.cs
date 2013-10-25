@@ -32,7 +32,7 @@ namespace Zetbox.API.AbstractConsumerTests
         protected MockedViewModelFactory mdlFactory;
         protected IFrozenContext frozenContext;
         protected Func<IZetboxContext> ctxFactory;
-        protected Func<ClientIsolationLevel, IZetboxContext> ctxClientFactory;
+        protected Func<ContextIsolationLevel, IZetboxContext> ctxClientFactory;
 
         public override void SetUp()
         {
@@ -40,7 +40,7 @@ namespace Zetbox.API.AbstractConsumerTests
             mdlFactory = scope.Resolve<MockedViewModelFactory>();
             frozenContext = scope.Resolve<IFrozenContext>();
             ctxFactory = scope.Resolve<Func<IZetboxContext>>();
-            ctxClientFactory = scope.Resolve<Func<ClientIsolationLevel, IZetboxContext>>();
+            ctxClientFactory = scope.Resolve<Func<ContextIsolationLevel, IZetboxContext>>();
         }
 
         protected NavigatorViewModel NavigateTo(IZetboxContext ctx, params Guid[] path)
@@ -60,7 +60,7 @@ namespace Zetbox.API.AbstractConsumerTests
 
         protected IZetboxContext GetClientContext()
         {
-            return ctxClientFactory(ClientIsolationLevel.MergeServerData);
+            return ctxClientFactory(ContextIsolationLevel.MergeQueryData);
         }
     }
 }

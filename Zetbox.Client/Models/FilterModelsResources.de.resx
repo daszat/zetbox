@@ -120,6 +120,51 @@
   <data name="From" xml:space="preserve">
     <value>Von</value>
   </data>
+  <data name="FulltextFilterModel_Description" xml:space="preserve">
+    <value>Volltextsuche nach beliebigem Text</value>
+  </data>
+  <data name="FulltextFilterModel_HelpText" xml:space="preserve">
+    <value>&lt;h1&gt;Volltext Suche&lt;/h1&gt;
+&lt;p&gt;&lt;b&gt;Wichtig:&lt;/b&gt; Zur Zeit gibt es noch Einschränkungen: Alle anderen Felder sind während einer Volltext Suche deaktiviert. Blättern in den Ergebnissen ist noch nicht implementiert.&lt;/p&gt;
+&lt;p&gt;Weitere Informationen (Englisch): &lt;a href="http://lucene.apache.org/core/3_0_3/queryparsersyntax.html" target="_blank"&gt;http://lucene.apache.org/core/3_0_3/queryparsersyntax.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2&gt;Ausdrücke&lt;/h2&gt;
+&lt;pre&gt;test hello&lt;/pre&gt;
+&lt;pre&gt;"test" "hello"&lt;/pre&gt;
+&lt;pre&gt;"test hello"&lt;/pre&gt;
+
+&lt;h2&gt;Felder&lt;/h2&gt;
+&lt;p&gt;Bei Suchen können Felder angegeben werden. Ansonten wird im gesamten Text gesucht.&lt;/p&gt;
+&lt;pre&gt;title:"The Right Way" AND text:go&lt;/pre&gt;
+&lt;pre&gt;title:"Do it right" AND right&lt;/pre&gt;
+
+&lt;h2&gt;Platzhalter&lt;/h2&gt;
+&lt;pre&gt;te?t&lt;/pre&gt;
+&lt;pre&gt;test*&lt;/pre&gt;
+&lt;pre&gt;te*t&lt;/pre&gt;
+
+&lt;h2&gt;Boolesche Operationen&lt;/h2&gt;
+&lt;p&gt;&lt;b&gt;Wichtig:&lt;/b&gt; Boolesche Operationen müssen GROSS GESCHRIEBEN WERDEN.&lt;/p&gt;
+&lt;pre&gt;"jakarta apache" jakarta&lt;/pre&gt;
+&lt;p&gt;ist das Selbe wie:&lt;/p&gt;
+&lt;pre&gt;"jakarta apache" OR jakarta&lt;/pre&gt;
+&lt;p&gt;Und:&lt;/p&gt;
+&lt;pre&gt;"jakarta apache" AND "Apache Lucene"&lt;/pre&gt;
+&lt;pre&gt;+jakarta lucene&lt;/pre&gt;
+&lt;p&gt;Nicht:&lt;/p&gt;
+&lt;pre&gt;"jakarta apache" NOT "Apache Lucene"&lt;/pre&gt;
+
+&lt;h2&gt;Gruppierungen&lt;/h2&gt;
+&lt;pre&gt;(jakarta OR apache) AND website&lt;/pre&gt;
+
+&lt;h2&gt;Spezielle Zeichen&lt;/h2&gt;
+&lt;pre&gt;+ - &amp;&amp; || ! ( ) { } [ ] ^ " ~ * ? : \&lt;/pre&gt;
+&lt;p&gt;Müssen mit \ eingeleitet werden&lt;/p&gt;
+&lt;pre&gt;\(1\+1\)\:2&lt;/pre&gt;</value>
+  </data>
+  <data name="FulltextFilterModel_Label" xml:space="preserve">
+    <value>Volltextsuche</value>
+  </data>
   <data name="To" xml:space="preserve">
     <value>Bis</value>
   </data>

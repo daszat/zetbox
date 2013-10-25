@@ -180,6 +180,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnString
         }
     
         private OneNRelationList<Zetbox.App.Test.TestCustomObject> _TestCustomObjects_List_Nav;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchTestCustomObjects_List_NavAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Test.TestCustomObject>>(this.TestCustomObjects_List_Nav);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCustomObjects_List_Nav_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.Muhblah> OnTestCustomObjects_List_Nav_IsValid;
@@ -201,8 +207,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
 							new ProjectedCollection<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl.Muhblah_has_TestCustomObject_RelationEntryProxy, Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.TestCustomObjects_ManyList_Nav,
                                 p => (Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl.Muhblah_has_TestCustomObject_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl>)entry.B.MuhBlah_ManyList_Nav);
+                                ce => (Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl.Muhblah_has_TestCustomObject_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
+                    _TestCustomObjects_ManyList_Nav.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("TestCustomObjects_ManyList_Nav", null, null); if(OnTestCustomObjects_ManyList_Nav_PostSetter != null && IsAttached) OnTestCustomObjects_ManyList_Nav_PostSetter(this); };
                     if (TestCustomObjects_ManyList_Nav_was_eagerLoaded) { TestCustomObjects_ManyList_Nav_was_eagerLoaded = false; }
 				}
 				return (ICollection<Zetbox.App.Test.TestCustomObject>)_TestCustomObjects_ManyList_Nav;
@@ -212,6 +218,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
 		private NHibernateBSideCollectionWrapper<Zetbox.App.Test.Muhblah, Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl> _TestCustomObjects_ManyList_Nav;
 		// ignored, but required for Serialization
         private bool TestCustomObjects_ManyList_Nav_was_eagerLoaded = false;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchTestCustomObjects_ManyList_NavAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Test.TestCustomObject>>(this.TestCustomObjects_ManyList_Nav);
+        }
+
+public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCustomObjects_ManyList_Nav_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.Muhblah> OnTestCustomObjects_ManyList_Nav_IsValid;
 
@@ -324,6 +337,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         private int? _fk_TestCustomObjects_Nav = null;
 
 
+    public Zetbox.API.Async.ZbTask TriggerFetchTestCustomObjects_NavAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Test.TestCustomObject>(this.TestCustomObjects_Nav);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for TestCustomObjects_Nav
 		public static event PropertyGetterHandler<Zetbox.App.Test.Muhblah, Zetbox.App.Test.TestCustomObject> OnTestCustomObjects_Nav_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Test.Muhblah, Zetbox.App.Test.TestCustomObject> OnTestCustomObjects_Nav_PreSetter;
@@ -432,6 +450,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         /// <summary>Backing store for TestCustomObjects_One_Nav's id, used on dehydration only</summary>
         private int? _fk_TestCustomObjects_One_Nav = null;
 
+
+    public Zetbox.API.Async.ZbTask TriggerFetchTestCustomObjects_One_NavAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Test.TestCustomObject>(this.TestCustomObjects_One_Nav);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for TestCustomObjects_One_Nav
 		public static event PropertyGetterHandler<Zetbox.App.Test.Muhblah, Zetbox.App.Test.TestCustomObject> OnTestCustomObjects_One_Nav_Getter;
@@ -697,6 +720,23 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "TestCustomObjects_List_Nav":
+                return TriggerFetchTestCustomObjects_List_NavAsync();
+            case "TestCustomObjects_ManyList_Nav":
+                return TriggerFetchTestCustomObjects_ManyList_NavAsync();
+            case "TestCustomObjects_Nav":
+                return TriggerFetchTestCustomObjects_NavAsync();
+            case "TestCustomObjects_One_Nav":
+                return TriggerFetchTestCustomObjects_One_NavAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

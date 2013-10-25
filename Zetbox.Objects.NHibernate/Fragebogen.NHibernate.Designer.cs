@@ -81,6 +81,12 @@ namespace Zetbox.App.Test
         private OneNRelationList<Zetbox.App.Test.Antwort> _Antworten;
         private List<int> AntwortenIds;
         private bool Antworten_was_eagerLoaded = false;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchAntwortenAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<IList<Zetbox.App.Test.Antwort>>(this.Antworten);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAntworten_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.Fragebogen> OnAntworten_IsValid;
@@ -160,8 +166,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
 							new ProjectedCollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl.TestStudent_füllt_aus_Fragebogen_RelationEntryProxy, Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.Student,
                                 p => (Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl.TestStudent_füllt_aus_Fragebogen_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl>)entry.A.Testbogen);
+                                ce => (Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl.TestStudent_füllt_aus_Fragebogen_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
+                    _Student.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Student", null, null); if(OnStudent_PostSetter != null && IsAttached) OnStudent_PostSetter(this); };
                     if (Student_was_eagerLoaded) { Student_was_eagerLoaded = false; }
 				}
 				return (ICollection<Zetbox.App.Test.TestStudent>)_Student;
@@ -171,6 +177,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
 		private NHibernateASideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl> _Student;
 		// ignored, but required for Serialization
         private bool Student_was_eagerLoaded = false;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchStudentAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Test.TestStudent>>(this.Student);
+        }
+
+public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnStudent_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.Fragebogen> OnStudent_IsValid;
 
@@ -220,6 +233,19 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Antworten":
+                return TriggerFetchAntwortenAsync();
+            case "Student":
+                return TriggerFetchStudentAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

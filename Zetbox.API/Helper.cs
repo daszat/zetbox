@@ -18,12 +18,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Xml.Serialization;
-using Zetbox.API.Utils;
 using Zetbox.API.Async;
-using System.Linq.Expressions;
+using Zetbox.API.Utils;
 
 namespace Zetbox.API
 {
@@ -181,6 +181,19 @@ namespace Zetbox.API
             return result;
         }
 
+        public static string ToUniversalPath(this string path)
+        {
+            if(path == null) return null;
+            return path.Replace('/', '\\');
+        }
+
+        public static string ToLocalPath(this string path)
+        {
+            if (path == null) return null;
+            if (Path.DirectorySeparatorChar == '\\') return path;
+            return path.Replace('\\', Path.DirectorySeparatorChar);
+        }
+
         public static ZbTask TriggerFetch<TObject, TProperty>(this TObject obj, Expression<Func<TObject, TProperty>> property)
             where TObject : IDataObject
         {
@@ -237,6 +250,68 @@ namespace Zetbox.API
         {
             if (type == null) return false;
             return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>) && type.GetGenericArguments().Single().IsEnum;
+        }
+
+        public static string GetSimpleName(this Assembly assembly)
+        {
+            if (assembly == null) throw new ArgumentNullException("assembly");
+
+            return assembly.FullName.Split(',').First().Trim();
+        }
+
+        public static string GetSimpleName(this Type type, bool addAssemblyNames = true)
+        {
+            if (type == null) throw new ArgumentNullException("type");
+
+            var result = type.Namespace + "." + type.Name;
+
+            if (type.IsGenericType)
+            {
+                result += string.Format("[[{0}]]", string.Join("], [", type.GetGenericArguments().Select(t => t.GetSimpleName(addAssemblyNames))));
+            }
+
+            if (addAssemblyNames)
+            {
+                result += ", " + type.Assembly.GetSimpleName();
+            }
+
+            return result;
+        }
+
+        public static string GetSimpleName(this TypeSpec type, bool addAssemblyNames = true)
+        {
+            if (type == null) throw new ArgumentNullException("type");
+
+            var result = type.Name;
+
+            if (type.IsGenericType)
+            {
+                result += string.Format("[[{0}]]", string.Join("], [", type.GenericArguments.Select(t => t.GetSimpleName(addAssemblyNames))));
+            }
+
+            if (addAssemblyNames)
+            {
+                result += ", " + type.AssemblyName.Split(',').First();
+            }
+
+            return result;
+        }
+
+        public static string ToCSharpTypeRef(this Type t)
+        {
+            if (t == null) { throw new ArgumentNullException("t"); }
+
+            if (t.IsGenericType)
+            {
+                return String.Format("{0}<{1}>",
+                    t.FullName.Split('`')[0], // TODO: hack to get to class name
+                    String.Join(", ", t.GetGenericArguments().Select(arg => arg.ToCSharpTypeRef()).ToArray())
+                    );
+            }
+            else
+            {
+                return t.FullName;
+            }
         }
 
         #region HasGenericDefinition
@@ -978,32 +1053,19 @@ namespace Zetbox.API
         /// Finds a Method with the given method parameter.
         /// </summary>
         /// <param name="type">Type to search in</param>
-        /// <param name="methodName">Methodname to search for</param>
-        /// <param name="typeArguments">type arguments to match</param>
-        /// <param name="parameterTypes">parameter types to match</param>
-        /// <returns>MethodInfo or null if the method was not found</returns>
-        public static MethodInfo FindGenericMethod(this Type type, string methodName, Type[] typeArguments, Type[] parameterTypes)
-        {
-            return type.FindGenericMethod(false, methodName, typeArguments, parameterTypes);
-        }
-
-        /// <summary>
-        /// Finds a Method with the given method parameter.
-        /// </summary>
-        /// <param name="type">Type to search in</param>
         /// <param name="isPrivate">whether or not the method is private</param>
         /// <param name="methodName">Methodname to search for</param>
         /// <param name="typeArguments">type arguments to match</param>
         /// <param name="parameterTypes">parameter types to match</param>
         /// <returns>MethodInfo or null if the method was not found</returns>
-        public static MethodInfo FindGenericMethod(this Type type, bool isPrivate, string methodName, Type[] typeArguments, Type[] parameterTypes)
+        public static MethodInfo FindGenericMethod(this Type type, string methodName, Type[] typeArguments, Type[] parameterTypes, bool isPrivate = false)
         {
             if (type == null) { throw new ArgumentNullException("type"); }
 
             if (parameterTypes == null)
             {
                 MethodInfo mi = isPrivate
-                    ? type.GetMethod(methodName, BindingFlags.Instance | BindingFlags.FlattenHierarchy | BindingFlags.NonPublic)
+                    ? type.GetMethod(methodName, BindingFlags.Instance | BindingFlags.Static | BindingFlags.FlattenHierarchy | BindingFlags.NonPublic)
                     : type.GetMethod(methodName);
 
                 if (mi != null)
@@ -1014,7 +1076,7 @@ namespace Zetbox.API
             else
             {
                 MethodInfo[] methods = isPrivate
-                    ? type.GetMethods(BindingFlags.Instance | BindingFlags.FlattenHierarchy | BindingFlags.NonPublic)
+                    ? type.GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.FlattenHierarchy | BindingFlags.NonPublic)
                     : type.GetMethods();
 
                 foreach (MethodInfo method in methods)
@@ -1045,14 +1107,14 @@ namespace Zetbox.API
             // Look in Basetypes
             if (type.BaseType != null)
             {
-                MethodInfo mi = type.BaseType.FindGenericMethod(isPrivate, methodName, typeArguments, parameterTypes);
+                MethodInfo mi = type.BaseType.FindGenericMethod(methodName, typeArguments, parameterTypes, isPrivate);
                 if (mi != null) return mi;
             }
 
             // Look in Interfaces
             foreach (Type i in type.GetInterfaces())
             {
-                MethodInfo mi = i.FindGenericMethod(isPrivate, methodName, typeArguments, parameterTypes);
+                MethodInfo mi = i.FindGenericMethod(methodName, typeArguments, parameterTypes, isPrivate);
                 if (mi != null) return mi;
             }
 
@@ -1339,6 +1401,50 @@ namespace Zetbox.API
             {
                 return str;
             }
+        }
+
+        public static System.Drawing.Color Lighter(this System.Drawing.Color c, double amount)
+        {
+            return System.Drawing.Color.FromArgb(
+                        c.A,
+                        Math.Min(255, (int)((1.0 - amount) * c.R + 255.0 * amount)),
+                        Math.Min(255, (int)((1.0 - amount) * c.G + 255.0 * amount)),
+                        Math.Min(255, (int)((1.0 - amount) * c.B + 255.0 * amount))
+                    );
+        }
+
+        public static System.Drawing.Color Darker(this System.Drawing.Color c, double amount)
+        {
+            return System.Drawing.Color.FromArgb(
+                        c.A,
+                        Math.Min(255, (int)((1.0 - amount) * c.R)),
+                        Math.Min(255, (int)((1.0 - amount) * c.G)),
+                        Math.Min(255, (int)((1.0 - amount) * c.B))
+                    );
+        }
+
+        /// <summary>
+        /// http://code.logos.com/blog/2008/01/nullpropagating_extension_meth.html
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="U"></typeparam>
+        /// <param name="t"></param>
+        /// <param name="fn"></param>
+        /// <returns></returns>
+        public static U IfNotNull<T, U>(this T t, Func<T, U> fn)
+        {
+            if (fn == null) throw new ArgumentNullException("fn");
+            return t != null ? fn(t) : default(U);
+        }
+
+        public static string IfNullOrEmpty(this string str, string def)
+        {
+            return string.IsNullOrEmpty(str) ? def : str;
+        }
+
+        public static string IfNullOrWhiteSpace(this string str, string def)
+        {
+            return string.IsNullOrWhiteSpace(str) ? def : str;
         }
     }
 

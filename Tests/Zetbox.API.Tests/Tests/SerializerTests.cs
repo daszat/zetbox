@@ -285,7 +285,7 @@ namespace Zetbox.API.Tests
                                o.IntProperty,
                                o.BoolProperty
                            };
-                return Zetbox.API.SerializableExpression.FromExpression(list.Expression, iftFactory);
+                return Zetbox.API.SerializableExpression.FromExpression(list.Expression, null, iftFactory, null, null);
             }
         }
 
@@ -378,7 +378,8 @@ namespace Zetbox.API.Tests
                 TestStream<TestCompoundObjectImpl>(
                     v => sw.Write(v),
                     () => sr.ReadCompoundObject<TestCompoundObjectImpl>(),
-                    new TestCompoundObjectImpl() { TestProperty = testString }, null);
+                    new TestCompoundObjectImpl() { TestProperty = testString },
+                    new TestCompoundObjectImpl() {  });
             }
         }
     }

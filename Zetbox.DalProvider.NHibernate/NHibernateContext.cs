@@ -24,13 +24,13 @@ namespace Zetbox.DalProvider.NHibernate
     using global::NHibernate;
     using global::NHibernate.Linq;
     using Zetbox.API;
+    using Zetbox.API.Async;
     using Zetbox.API.Common;
     using Zetbox.API.Configuration;
     using Zetbox.API.Server;
     using Zetbox.API.Server.PerfCounter;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
-    using Zetbox.API.Async;
 
     public sealed class NHibernateContext
         : BaseZetboxDataContext, IZetboxServerContext
@@ -61,8 +61,9 @@ namespace Zetbox.DalProvider.NHibernate
             global::NHibernate.ISessionFactory nhSessionFactory,
             INHibernateImplementationTypeChecker implChecker,
             IPerfCounter perfCounter,
-            ISqlErrorTranslator sqlErrorTranslator)
-            : base(metaDataResolver, identity, config, lazyCtx, iftFactory)
+            ISqlErrorTranslator sqlErrorTranslator,
+            IEnumerable<IZetboxContextEventListener> eventListeners)
+            : base(metaDataResolver, identity, config, lazyCtx, iftFactory, eventListeners)
         {
             if (perfCounter == null) throw new ArgumentNullException("perfCounter");
             if (sqlErrorTranslator == null) throw new ArgumentNullException("sqlErrorTranslator");
@@ -167,7 +168,7 @@ namespace Zetbox.DalProvider.NHibernate
             return PrepareQueryable(ifType).Cast<Tinterface>();
         }
 
-        public override ZbTask<IList<T>> FetchRelationAsync<T>(Guid relationId, RelationEndRole endRole, IDataObject parent)
+        public override ZbTask<IList<T>> FetchRelationAsync<T>(Guid relationId, RelationEndRole role, IDataObject parent)
         {
             return new ZbTask<IList<T>>(ZbTask.Synchron, () =>
             {
@@ -178,14 +179,14 @@ namespace Zetbox.DalProvider.NHibernate
                 }
                 else
                 {
-                    switch (endRole)
+                    switch (role)
                     {
                         case RelationEndRole.A:
                             return GetPersistenceObjectQuery<T>().Where(i => i.AObject == parent).ToList();
                         case RelationEndRole.B:
                             return GetPersistenceObjectQuery<T>().Where(i => i.BObject == parent).ToList();
                         default:
-                            throw new NotImplementedException(String.Format("Unknown RelationEndRole [{0}]", endRole));
+                            throw new NotImplementedException(String.Format("Unknown RelationEndRole [{0}]", role));
                     }
                 }
             });
@@ -245,6 +246,8 @@ namespace Zetbox.DalProvider.NHibernate
             NotifyChanged(notifyList);
 
             UpdateObjectState();
+
+            OnSubmitted();
 
             return objects.Count;
         }
@@ -308,7 +311,12 @@ namespace Zetbox.DalProvider.NHibernate
                 BeginTransaction();
             try
             {
-                foreach (var obj in RelationTopoSort(notifySaveList.Where(obj => obj.ObjectState == DataObjectState.Deleted)))
+                // ensure that relation entries are always deleted before everyone else.
+                // This is a optimization to avoid having to track Parent/Child on Relations without navigators
+                // Also, we have all objects in hand, so we do not need to risk going to the database again
+                var deletedRelEntries = notifySaveList.Where(obj => obj.ObjectState == DataObjectState.Deleted && obj is IRelationEntry);
+                var otherDeleted = RelationTopoSort(notifySaveList.Where(obj => obj.ObjectState == DataObjectState.Deleted && !(obj is IRelationEntry)));
+                foreach (var obj in deletedRelEntries.Concat(otherDeleted))
                 {
                     _attachedObjects.Remove(obj);
                     _attachedObjectsByProxy.Remove(obj);
@@ -335,6 +343,9 @@ namespace Zetbox.DalProvider.NHibernate
 
                 foreach (var obj in saveOrUpdateList)
                 {
+                    // Reflect changes in database
+                    _nhSession.Refresh(obj.NHibernateProxy);
+
                     _attachedObjects.Add(obj);
                     _attachedObjectsByProxy.Add(obj);
                 }
@@ -376,9 +387,12 @@ namespace Zetbox.DalProvider.NHibernate
         /// Orders the specified input topologically by required relations. The output ordering can be used for deleting objects without violating FKs.
         /// </summary>
         /// <remarks>
+        /// <para>
         /// See http://en.wikipedia.org/wiki/Topological_ordering#CITEREFKahn1962
+        /// </para>
+        /// <para>The result is ordered Children first according to GetChildrenToDelete()/GetParentsToDelete(). That means that everyone that should be deleted BEFORE X must be returned (transitively) by X.GetChildrenToDelete</para>
         /// </remarks>
-        private IEnumerable<NHibernatePersistenceObject> RelationTopoSort(IEnumerable<NHibernatePersistenceObject> input)
+        private List<NHibernatePersistenceObject> RelationTopoSort(IEnumerable<NHibernatePersistenceObject> input)
         {
             List<NHibernatePersistenceObject> result = new List<NHibernatePersistenceObject>();
             var edges = input.ToDictionary(i => i, i => i.GetChildrenToDelete());
@@ -466,16 +480,8 @@ namespace Zetbox.DalProvider.NHibernate
                 }
                 catch (System.Reflection.TargetInvocationException ex)
                 {
-                    if (ex.InnerException is ArgumentOutOfRangeException)
-                    {
-                        // wrap in new AOORE, to preserve all stack traces
-                        throw new ArgumentOutOfRangeException("ID", ex);
-                    }
-                    else
-                    {
-                        // huhu, something bad happened
-                        throw;
-                    }
+                    // unwrap "business" exception
+                    throw ex.InnerException;
                 }
             });
         }
@@ -487,7 +493,7 @@ namespace Zetbox.DalProvider.NHibernate
             return new ZbTask<T>(ZbTask.Synchron, () =>
             {
                 var result = FindPersistenceObject<T>(ID);
-                if (result == null) { throw new ArgumentOutOfRangeException("ID", String.Format("no object of type {0} with ID={1}", typeof(T).FullName, ID)); }
+                if (result == null) { throw new ZetboxObjectNotFoundException(typeof(T), ID); }
                 return result;
             });
         }
@@ -505,16 +511,8 @@ namespace Zetbox.DalProvider.NHibernate
             }
             catch (System.Reflection.TargetInvocationException ex)
             {
-                if (ex.InnerException is ArgumentOutOfRangeException)
-                {
-                    // wrap in new AOORE, to preserve all stack traces
-                    throw new ArgumentOutOfRangeException("ID", ex);
-                }
-                else
-                {
-                    // huhu, something bad happened
-                    throw;
-                }
+                // unwrap "business" exception
+                throw ex.InnerException;
             }
         }
 
@@ -618,7 +616,6 @@ namespace Zetbox.DalProvider.NHibernate
         {
             return ToProxyType(ToImplementationType(ifType));
         }
-
 
         protected override int ExecGetSequenceNumber(Guid sequenceGuid)
         {
@@ -764,6 +761,11 @@ namespace Zetbox.DalProvider.NHibernate
             }
             var implType = t.DeclaringType;
             return implType;
+        }
+
+        public override ContextIsolationLevel IsolationLevel
+        {
+            get { return ContextIsolationLevel.PreferContextCache; }
         }
     }
 }

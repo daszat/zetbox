@@ -17,20 +17,22 @@ namespace Zetbox.App.Projekte.DocumentManagement
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.IO;
     using System.Linq;
+    using System.Text.RegularExpressions;
     using System.Threading;
     using at.dasz.DocumentManagement;
     using Autofac;
     using Zetbox.API;
+    using Zetbox.API.Configuration;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
-    using Zetbox.API.Configuration;
-    using System.ComponentModel;
 
-    public class FileImportService : IService
+    public class FileImportService : ThreadedQueueService<string>
     {
-        [Feature(NotOnFallback=true)]
+        #region Autofac Module
+        [Feature(NotOnFallback = true)]
         [Description("Zetbox file import service")]
         public class Module : Autofac.Module
         {
@@ -45,73 +47,64 @@ namespace Zetbox.App.Projekte.DocumentManagement
                     .SingleInstance();
             }
         }
+        #endregion
 
-        private object _lock = new object();
-        private List<FileSystemWatcher> _watcher = new List<FileSystemWatcher>();
-        private Func<IZetboxContext> _ctxFactory;
-        private Queue<string> _fileQueue = new Queue<string>();
-        private Thread _workerThread;
-        private bool _isRunning = true;
-        private AutoResetEvent _fileEvent;
+        private readonly ILifetimeScope _scopeFactory;
+        private readonly List<FileSystemWatcher> _watchers = new List<FileSystemWatcher>();
 
-        public FileImportService(Func<IZetboxContext> ctxFactory)
+        public FileImportService(ILifetimeScope scopeFactory)
+            : base(startupDelay: new TimeSpan(0, 0, 30),
+                    retryInterval: new TimeSpan(0, 0, 10),
+                    shutdownTimeout: new TimeSpan(0, 0, 2))
         {
-            if (ctxFactory == null) throw new ArgumentNullException("ctxFactory");
+            if (scopeFactory == null) throw new ArgumentNullException("scopeFactory");
 
-            _ctxFactory = ctxFactory;
+            _scopeFactory = scopeFactory;
         }
 
         #region IService Members
 
-        public void Start()
+        protected override void OnStart()
         {
-            _isRunning = true;
-            _fileEvent = new AutoResetEvent(false);
-
-            ThreadPool.QueueUserWorkItem(initFileWatcher);
-
-            // start background thread
-            _workerThread = new Thread(backgroundThread);
-            _workerThread.Priority = ThreadPriority.BelowNormal;
-            _workerThread.IsBackground = true;
-            _workerThread.Start();
+            base.OnStart();
+            ThreadPool.QueueUserWorkItem(InitialiseFileWatchers);
         }
 
-        public void Stop()
+        protected override void OnStop()
         {
-            _isRunning = false;
-            foreach (var w in _watcher)
+            base.OnStop();
+
+            foreach (var w in _watchers)
             {
                 w.Dispose();
             }
-            _watcher.Clear();
-
-            if (!_workerThread.Join(2000))
-            {
-                _workerThread.Abort();
-            }
-            _workerThread = null;
-            _fileEvent.Close();
-            _fileEvent = null;
+            _watchers.Clear();
         }
 
-        public string DisplayName { get { return "Fileimporter"; } }
-        public string Description { get { return "Watches a directory and automatically imports new files as Blobs."; } }
+        public override string DisplayName { get { return "Fileimporter"; } }
+        public override string Description { get { return "Watches a directory and automatically imports new files as Blobs."; } }
 
         #endregion
 
-        private void initFileWatcher(object state)
+        #region File Watching
+
+        private void InitialiseFileWatchers(object state)
         {
             try
             {
-                using (var ctx = _ctxFactory())
+                using (var scope = _scopeFactory.BeginLifetimeScope())
+                using (var ctx = scope.Resolve<IZetboxContext>())
                 {
-                    var machine = System.Environment.MachineName.ToLower();
+                    var machine = Environment.MachineName.ToLower();
 
                     var configs = ctx.GetQuery<FileImportConfiguration>()
                                     .Where(i => (i.MachineName.ToLower() == machine)
                                              || (i.MachineName == null))
                                     .ToList();
+
+                    // match environment variable references
+                    var regex = new Regex(@"\.*%(\w*)%\.*");
+
                     foreach (var cfg in configs)
                     {
                         try
@@ -119,19 +112,20 @@ namespace Zetbox.App.Projekte.DocumentManagement
                             if (!string.IsNullOrEmpty(cfg.PickupDirectory))
                             {
                                 var dir = cfg.PickupDirectory;
-                                System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex(@"\.*%(\w*)%\.*");
-                                dir = regex.Replace(dir, (m) => System.Environment.GetEnvironmentVariable(m.Groups[1].Value));
+                                dir = regex.Replace(dir, (m) => Environment.GetEnvironmentVariable(m.Groups[1].Value));
 
                                 if (Directory.Exists(dir))
                                 {
                                     var watcher = new FileSystemWatcher(dir, "*.*");
+                                    watcher.BeginInit();
                                     watcher.IncludeSubdirectories = true;
                                     watcher.Created += watcher_Changed;
                                     watcher.Changed += watcher_Changed;
                                     watcher.EnableRaisingEvents = true;
+                                    watcher.EndInit();
 
-                                    _watcher.Add(watcher);
-                                    Logging.Log.InfoFormat("Directory '{0}' added to file watcher", dir);
+                                    _watchers.Add(watcher);
+                                    Log.InfoFormat("Now watching directory '{0}'", dir);
 
                                     foreach (var f in Directory.GetFiles(dir, "*.*", SearchOption.AllDirectories))
                                     {
@@ -140,109 +134,79 @@ namespace Zetbox.App.Projekte.DocumentManagement
                                 }
                                 else
                                 {
-                                    Logging.Log.WarnFormat("Directory '{0}' does not exists", dir);
+                                    Log.WarnFormat("Directory '{0}' does not exists", dir);
                                 }
                             }
                         }
                         catch (Exception ex)
                         {
-                            Logging.Log.Warn("Error initializing file importer config " + cfg.ToString(), ex);
+                            Log.Warn("Error initializing file importer config " + cfg.ToString(), ex);
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
-                Logging.Log.Warn("Error initializing file importer", ex);
+                Log.Warn("Error initializing file importer", ex);
             }
         }
 
-        void watcher_Changed(object sender, FileSystemEventArgs e)
+        private void watcher_Changed(object sender, FileSystemEventArgs e)
         {
             Enqueue(e.FullPath);
         }
 
-        private void Enqueue(string file)
+        #endregion
+
+        protected override bool OnEnqueue(string item)
         {
-            if (!string.IsNullOrEmpty(file))
-            {
-                Logging.Log.InfoFormat("Adding '{0}' to queue", file);
-                lock (_lock)
-                {
-                    _fileQueue.Enqueue(file);
-                }
-                _fileEvent.Set();
-            }
+            // ignore empty file names
+            return !string.IsNullOrWhiteSpace(item);
         }
 
-        private string Dequeue()
+        protected override void ProcessItem(string file)
         {
-            lock (_lock)
+            try
             {
-                if (_fileQueue.Count > 0)
-                    return _fileQueue.Dequeue();
-                else
-                    return null;
-            }
-        }
-
-        public void backgroundThread()
-        {
-            while (_isRunning)
-            {
-                _fileEvent.WaitOne(1000);
-                while (_isRunning)
+                Log.InfoFormat("processing '{0}'", file);
+                if (System.IO.File.Exists(file))
                 {
-                    var file = Dequeue();
-                    if (file == null) break;
-                    try
+                    using (var s = TryGetExclusiveLock(file))
                     {
-                        ProcessFile(file);
-                    }
-                    catch (Exception ex)
-                    {
-                        Logging.Log.Error("Error in FileImport", ex);
-                        // Put back to queue, at the end
-                        Enqueue(file);
-                    }
-                }
-            }
-        }
-
-        private void ProcessFile(string file)
-        {
-            Logging.Log.InfoFormat("FileImport: processing '{0}'", file);
-            if (System.IO.File.Exists(file))
-            {
-                using (var s = TryGetExclusiveLock(file))
-                {
-                    if (s != null)
-                    {
-                        // Upload
-                        using (Logging.Log.DebugTraceMethodCall("Uploading file", file))
-                        using (var ctx = _ctxFactory())
+                        if (s != null)
                         {
-                            var blobID = ctx.CreateBlob(s, Path.GetFileName(file), new System.IO.FileInfo(file).GetMimeType());
-                            var importedFile = ctx.Create<ImportedFile>();
-                            importedFile.Blob = ctx.Find<Blob>(blobID);
-                            importedFile.Name = importedFile.Blob.OriginalName;
-                            ctx.SubmitChanges();
-                        }
+                            // Upload
+                            using (Log.DebugTraceMethodCall("Uploading file", file))
+                            using (var scope = _scopeFactory.BeginLifetimeScope())
+                            using (var ctx = scope.Resolve<IZetboxContext>())
+                            {
+                                var blobID = ctx.CreateBlob(s, Path.GetFileName(file), new System.IO.FileInfo(file).GetMimeType());
+                                var importedFile = ctx.Create<ImportedFile>();
+                                importedFile.Blob = ctx.Find<Blob>(blobID);
+                                importedFile.Name = importedFile.Blob.OriginalName;
+                                ctx.SubmitChanges();
+                            }
 
-                        // Success -> delete file
-                        s.Dispose();
-                        System.IO.File.Delete(file);
-                    }
-                    else
-                    {
-                        Logging.Log.DebugFormat("FileImport: unable to get exclusive lock, putting back to queue");
-                        Enqueue(file);
+                            // Success -> delete file
+                            s.Dispose();
+                            System.IO.File.Delete(file);
+                        }
+                        else
+                        {
+                            Log.DebugFormat("unable to get exclusive lock");
+                            Defer(file);
+                        }
                     }
                 }
+                else
+                {
+                    Log.DebugFormat("FileImport: '{0}' has been deleted", file);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                Logging.Log.DebugFormat("FileImport: '{0}' has been deleted", file);
+                Log.Error("Error in ProcessFile", ex);
+                Defer(file);
             }
         }
 

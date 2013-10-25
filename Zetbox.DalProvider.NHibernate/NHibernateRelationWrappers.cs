@@ -17,71 +17,45 @@ namespace Zetbox.DalProvider.NHibernate
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.Specialized;
     using System.Linq;
     using System.Text;
     using Zetbox.API;
     using Zetbox.DalProvider.Base.RelationWrappers;
 
     public class NHibernateASideCollectionWrapper<TA, TB, TEntry>
-        : ASideCollectionWrapper<TA, TB, TEntry, ICollection<TEntry>>, IEnumerable<IRelationEntry>
+        : ObservableASideCollectionWrapper<TA, TB, TEntry, ICollection<TEntry>>, IEnumerable<IRelationEntry>
         where TA : class, IDataObject
         where TB : class, IDataObject
         where TEntry : class, IRelationEntry<TA, TB>
     {
-        private readonly Func<TEntry, IRelationListSync<TEntry>> _getSyncer;
-
-        public NHibernateASideCollectionWrapper(TB parentObject, ICollection<TEntry> baseCollection, Func<TEntry, IRelationListSync<TEntry>> getSyncer)
+        public NHibernateASideCollectionWrapper(TB parentObject, ICollection<TEntry> baseCollection)
             : base(parentObject, baseCollection)
         {
-            _getSyncer = getSyncer;
         }
 
-        protected override void OnEntryAdding(TEntry entry)
+        public override void Add(TA item)
         {
-            // notify ASide
-            // notify BSide
-            base.OnEntryAdding(entry);
-        }
-
-        protected override void OnEntryAdded(TEntry entry)
-        {
-            var bside = _getSyncer(entry);
-            if (bside != null)
-            {
-                bside.AddWithoutSetParent(entry);
-            }
-            base.OnEntryAdded(entry);
-            // notify BSide
-            // notify ASide
-        }
-
-        protected override void OnEntryRemoving(TEntry entry)
-        {
-            // notify ASide
-            // notify BSide
-            base.OnEntryRemoving(entry);
-        }
-
-        protected override void OnEntryRemoved(TEntry entry)
-        {
-            var bside = _getSyncer(entry);
-            if (bside != null)
-            {
-                bside.RemoveWithoutClearParent(entry);
-            }
-            base.OnEntryRemoved(entry);
-            // notify BSide
-            // notify ASide
+            TEntry entry = CreateEntry(item);
+            OnEntryAdding(entry);
+            entry = InitialiseEntry(entry, item);
+            // Relations keep their collections synchronized by reacting to RelationEntry.A/B changes
+            //Collection.Add(entry);
+            //OnEntryAdded(entry);
         }
 
         public override void AddWithoutSetParent(TEntry item)
         {
+            OnEntryAdding(item);
             Collection.Add(item);
+            OnEntryAdded(item);
         }
 
         public override void RemoveWithoutClearParent(TEntry item)
         {
+            OnEntryRemoving(item);
             Collection.Remove(item);
+            OnEntryRemoved(item);
         }
 
         IEnumerator<IRelationEntry> IEnumerable<IRelationEntry>.GetEnumerator()
@@ -91,65 +65,38 @@ namespace Zetbox.DalProvider.NHibernate
     }
 
     public class NHibernateBSideCollectionWrapper<TA, TB, TEntry>
-        : BSideCollectionWrapper<TA, TB, TEntry, ICollection<TEntry>>, IEnumerable<IRelationEntry>
+        : ObservableBSideCollectionWrapper<TA, TB, TEntry, ICollection<TEntry>>, IEnumerable<IRelationEntry>
         where TA : class, IDataObject
         where TB : class, IDataObject
         where TEntry : class, IRelationEntry<TA, TB>
     {
-        private readonly Func<TEntry, IRelationListSync<TEntry>> _getSyncer;
-
-        public NHibernateBSideCollectionWrapper(TA parentObject, ICollection<TEntry> baseCollection, Func<TEntry, IRelationListSync<TEntry>> getSyncer)
+        public NHibernateBSideCollectionWrapper(TA parentObject, ICollection<TEntry> baseCollection)
             : base(parentObject, baseCollection)
         {
-            _getSyncer = getSyncer;
         }
 
-        protected override void OnEntryAdding(TEntry entry)
+        public override void Add(TB item)
         {
-            // notify ASide
-            // notify BSide
-            base.OnEntryAdding(entry);
-        }
-
-        protected override void OnEntryAdded(TEntry entry)
-        {
-            var aside = _getSyncer(entry);
-            if (aside != null)
-            {
-                aside.AddWithoutSetParent(entry);
-            }
-            base.OnEntryAdded(entry);
-            // notify BSide
-            // notify ASide
-        }
-
-        protected override void OnEntryRemoving(TEntry entry)
-        {
-            // notify ASide
-            // notify BSide
-            base.OnEntryRemoving(entry);
-        }
-
-        protected override void OnEntryRemoved(TEntry entry)
-        {
-            var aside = _getSyncer(entry);
-            if (aside != null)
-            {
-                aside.RemoveWithoutClearParent(entry);
-            }
-            base.OnEntryRemoved(entry);
-            // notify BSide
-            // notify ASide
+            TEntry entry = CreateEntry(item);
+            OnEntryAdding(entry);
+            entry = InitialiseEntry(entry, item);
+            // Relations keep their collections synchronized by reacting to RelationEntry.A/B changes
+            //Collection.Add(entry);
+            //OnEntryAdded(entry);
         }
 
         public override void AddWithoutSetParent(TEntry item)
         {
+            OnEntryAdding(item);
             Collection.Add(item);
+            OnEntryAdded(item);
         }
 
         public override void RemoveWithoutClearParent(TEntry item)
         {
+            OnEntryRemoving(item);
             Collection.Remove(item);
+            OnEntryRemoved(item);
         }
 
         IEnumerator<IRelationEntry> IEnumerable<IRelationEntry>.GetEnumerator()
@@ -160,65 +107,38 @@ namespace Zetbox.DalProvider.NHibernate
 
 
     public class NHibernateASideListWrapper<TA, TB, TEntry>
-        : ASideListWrapper<TA, TB, TEntry, ICollection<TEntry>>, IEnumerable<IRelationEntry>
+        : ObservableASideListWrapper<TA, TB, TEntry, ICollection<TEntry>>, IEnumerable<IRelationEntry>
         where TA : class, IDataObject
         where TB : class, IDataObject
         where TEntry : class, IRelationListEntry<TA, TB>
     {
-        private readonly Func<TEntry, IRelationListSync<TEntry>> _getSyncer;
-
-        public NHibernateASideListWrapper(TB parentObject, ICollection<TEntry> baseCollection, Func<TEntry, IRelationListSync<TEntry>> getSyncer)
+        public NHibernateASideListWrapper(TB parentObject, ICollection<TEntry> baseCollection)
             : base(parentObject, baseCollection)
         {
-            _getSyncer = getSyncer;
         }
 
-        protected override void OnEntryAdding(TEntry entry)
+        public override void Add(TA item)
         {
-            // notify ASide
-            // notify BSide
-            base.OnEntryAdding(entry);
-        }
-
-        protected override void OnEntryAdded(TEntry entry)
-        {
-            var bside = _getSyncer(entry);
-            if (bside != null)
-            {
-                bside.AddWithoutSetParent(entry);
-            }
-            base.OnEntryAdded(entry);
-            // notify BSide
-            // notify ASide
-        }
-
-        protected override void OnEntryRemoving(TEntry entry)
-        {
-            // notify ASide
-            // notify BSide
-            base.OnEntryRemoving(entry);
-        }
-
-        protected override void OnEntryRemoved(TEntry entry)
-        {
-            var bside = _getSyncer(entry);
-            if (bside != null)
-            {
-                bside.RemoveWithoutClearParent(entry);
-            }
-            base.OnEntryRemoved(entry);
-            // notify BSide
-            // notify ASide
+            TEntry entry = CreateEntry(item);
+            OnEntryAdding(entry);
+            entry = InitialiseEntry(entry, item);
+            // Relations keep their collections synchronized by reacting to RelationEntry.A/B changes
+            //Collection.Add(entry);
+            //OnEntryAdded(entry);
         }
 
         public override void AddWithoutSetParent(TEntry item)
         {
+            OnEntryAdding(item);
             Collection.Add(item);
+            OnEntryAdded(item);
         }
 
         public override void RemoveWithoutClearParent(TEntry item)
         {
+            OnEntryRemoving(item);
             Collection.Remove(item);
+            OnEntryRemoved(item);
         }
 
         IEnumerator<IRelationEntry> IEnumerable<IRelationEntry>.GetEnumerator()
@@ -240,65 +160,38 @@ namespace Zetbox.DalProvider.NHibernate
     }
 
     public class NHibernateBSideListWrapper<TA, TB, TEntry>
-        : BSideListWrapper<TA, TB, TEntry, ICollection<TEntry>>, IEnumerable<IRelationEntry>
+        : ObservableBSideListWrapper<TA, TB, TEntry, ICollection<TEntry>>, IEnumerable<IRelationEntry>
         where TA : class, IDataObject
         where TB : class, IDataObject
         where TEntry : class, IRelationListEntry<TA, TB>
     {
-        private readonly Func<TEntry, IRelationListSync<TEntry>> _getSyncer;
-
-        public NHibernateBSideListWrapper(TA parentObject, ICollection<TEntry> baseCollection, Func<TEntry, IRelationListSync<TEntry>> getSyncer)
+        public NHibernateBSideListWrapper(TA parentObject, ICollection<TEntry> baseCollection)
             : base(parentObject, baseCollection)
         {
-            _getSyncer = getSyncer;
         }
 
-        protected override void OnEntryAdding(TEntry entry)
+        public override void Add(TB item)
         {
-            // notify ASide
-            // notify BSide
-            base.OnEntryAdding(entry);
-        }
-
-        protected override void OnEntryAdded(TEntry entry)
-        {
-            var aside = _getSyncer(entry);
-            if (aside != null)
-            {
-                aside.AddWithoutSetParent(entry);
-            }
-            base.OnEntryAdded(entry);
-            // notify BSide
-            // notify ASide
-        }
-
-        protected override void OnEntryRemoving(TEntry entry)
-        {
-            // notify ASide
-            // notify BSide
-            base.OnEntryRemoving(entry);
-        }
-
-        protected override void OnEntryRemoved(TEntry entry)
-        {
-            var aside = _getSyncer(entry);
-            if (aside != null)
-            {
-                aside.RemoveWithoutClearParent(entry);
-            }
-            base.OnEntryRemoved(entry);
-            // notify BSide
-            // notify ASide
+            TEntry entry = CreateEntry(item);
+            OnEntryAdding(entry);
+            entry = InitialiseEntry(entry, item);
+            // Relations keep their collections synchronized by reacting to RelationEntry.A/B changes
+            //Collection.Add(entry);
+            //OnEntryAdded(entry);
         }
 
         public override void AddWithoutSetParent(TEntry item)
         {
+            OnEntryAdding(item);
             Collection.Add(item);
+            OnEntryAdded(item);
         }
 
         public override void RemoveWithoutClearParent(TEntry item)
         {
+            OnEntryRemoving(item);
             Collection.Remove(item);
+            OnEntryRemoved(item);
         }
 
         IEnumerator<IRelationEntry> IEnumerable<IRelationEntry>.GetEnumerator()

@@ -113,146 +113,141 @@ namespace Zetbox.Server.HttpService
                     context.Request.HttpMethod,
                     context.Request.Url,
                     username);
-                var reader = readerFactory(new BinaryReader(context.Request.InputStream));
 
-                var version = reader.ReadGuid();
-                switch (context.Request.Url.Segments.Last())
+                using (var reader = readerFactory.Invoke(new BinaryReader(context.Request.InputStream)))
                 {
-                    case "SetObjects": // byte[] SetObjects(byte[] msg, ObjectNotificationRequest[] notificationRequests);
-                        {
-                            byte[] msg = reader.ReadByteArray();
-                            ObjectNotificationRequest[] notificationRequests;
-                            reader.Read(out notificationRequests);
-                            Log.DebugFormat("SetObjects(byte[{0}], ObjectNotificationRequest[{1}])", msg.Length, notificationRequests.Length);
-                            var result = service.SetObjects(version, msg, notificationRequests);
-                            SendByteArray(context, result, writerFactory);
-                            break;
-                        }
-                    case "GetList": // byte[] GetList(SerializableType type, int maxListCount, bool eagerLoadLists, SerializableExpression[] filter, OrderByContract[] orderBy);
-                        {
-                            var type = reader.ReadSerializableType();
-                            int maxListCount = reader.ReadInt32();
-                            bool eagerLoadLists = reader.ReadBoolean();
-
-                            var iftFactory = scope.Resolve<InterfaceType.Factory>();
-
-                            SerializableExpression[] filter;
-                            reader.Read(out filter, iftFactory);
-
-                            OrderByContract[] orderBy;
-                            reader.Read(out orderBy, iftFactory);
-
-                            Log.DebugFormat("GetList(type=[{0}], maxListCount={1}, eagerLoadLists={2}, SerializableExpression[{3}], OrderByContract[{4}])", type, maxListCount, eagerLoadLists, filter != null ? filter.Length : -1, orderBy != null ? orderBy.Length : -1);
-                            var result = service.GetList(version, type, maxListCount, eagerLoadLists, filter, orderBy);
-                            SendByteArray(context, result, writerFactory);
-                            break;
-                        }
-                    case "GetListOf": // byte[] GetListOf(SerializableType type, int ID, string property);
-                        {
-                            var type = reader.ReadSerializableType();
-                            int ID = reader.ReadInt32();
-                            string property = reader.ReadString();
-
-                            Log.DebugFormat("GetListOf(type=[{0}], ID={1}, property=[{2}])", type, ID, property);
-                            var result = service.GetListOf(version, type, ID, property);
-                            SendByteArray(context, result, writerFactory);
-                            break;
-                        }
-                    case "FetchRelation": // byte[] FetchRelation(Guid relId, int role, int ID)
-                        {
-                            Guid relId = reader.ReadGuid();
-                            int role = reader.ReadInt32();
-                            int ID = reader.ReadInt32();
-
-                            Log.DebugFormat("FetchRelation(relId=[{0}], role={1}, ID=[{2}])", relId, role, ID);
-                            var result = service.FetchRelation(version, relId, role, ID);
-                            SendByteArray(context, result, writerFactory);
-                            break;
-                        }
-                    case "GetBlobStream": // Stream GetBlobStream(int ID)
-                        {
-                            var ID = Int32.Parse(context.Request.QueryString["id"]);
-
-                            Log.DebugFormat("GetBlobStream(ID={0})", ID);
-                            var result = service.GetBlobStream(version, ID);
-                            context.Response.StatusCode = 200;
-                            context.Response.ContentType = "application/octet-stream";
-                            result.CopyAllTo(context.Response.OutputStream);
-                            break;
-                        }
-                    case "SetBlobStream": // BlobResponse SetBlobStream(BlobMessage blob)
-                        {
-                            string fileName = reader.ReadString();
-                            string mimeType = reader.ReadString();
-                            byte[] data = reader.ReadByteArray();
-
-                            Log.DebugFormat("SetBlobStream(fileName=[{0}], mimeType=[{1}], Stream of {2} bytes)", fileName, mimeType, data.Length);
-                            var result = service.SetBlobStream(new BlobMessage()
+                    var version = reader.ReadGuid();
+                    switch (context.Request.Url.Segments.Last())
+                    {
+                        case "SetObjects": // byte[] SetObjects(byte[] msg, ObjectNotificationRequest[] notificationRequests);
                             {
-                                Version = version,
-                                FileName = fileName,
-                                MimeType = mimeType,
-                                Stream = new MemoryStream(data)
-                            });
-
-                            context.Response.StatusCode = 200;
-                            context.Response.ContentType = "application/octet-stream";
-                            using (var writer = writerFactory(new BinaryWriter(context.Response.OutputStream)))
-                            using (var dataStream = new MemoryStream())
-                            {
-                                writer.Write(result.ID);
-                                result.BlobInstance.CopyAllTo(dataStream);
-                                writer.Write(dataStream.ToArray());
+                                byte[] msg = reader.ReadByteArray();
+                                ObjectNotificationRequest[] notificationRequests;
+                                reader.Read(out notificationRequests);
+                                Log.DebugFormat("SetObjects(byte[{0}], ObjectNotificationRequest[{1}])", msg.Length, notificationRequests.Length);
+                                var result = service.SetObjects(version, msg, notificationRequests);
+                                SendByteArray(context, result, writerFactory);
+                                break;
                             }
-                            break;
-                        }
-                    case "InvokeServerMethod": // byte[] InvokeServerMethod(SerializableType type, int ID, string method, SerializableType[] parameterTypes, byte[] parameter, byte[] changedObjects, ObjectNotificationRequest[] notificationRequests, out byte[] retChangedObjects)
-                        {
-                            var type = reader.ReadSerializableType();
-                            int ID = reader.ReadInt32();
-                            string method = reader.ReadString();
-
-                            SerializableType[] parameterTypes = reader.ReadSerializableTypeArray();
-                            byte[] parameter = reader.ReadByteArray();
-                            byte[] changedObjects = reader.ReadByteArray();
-
-                            ObjectNotificationRequest[] notificationRequests;
-                            reader.Read(out notificationRequests);
-
-                            Log.DebugFormat("InvokeServerMethod(type=[{0}], ID={1}, method=[{2}], SerializableType[{3}], byte[{4}], byte[{5}], ObjectNotificationRequest[{6}])",
-                                type,
-                                ID,
-                                method,
-                                parameterTypes.Length,
-                                parameter.Length,
-                                changedObjects.Length,
-                                notificationRequests.Length);
-                            byte[] retChangedObjects;
-                            var result = service.InvokeServerMethod(version, type, ID, method, parameterTypes, parameter, changedObjects, notificationRequests, out retChangedObjects);
-                            Log.DebugFormat("InvokeServerMethod received {0}B retChangedObjects", retChangedObjects.Length);
-
-                            context.Response.StatusCode = 200;
-                            context.Response.ContentType = "application/octet-stream";
-                            using (var writer = writerFactory(new BinaryWriter(context.Response.OutputStream)))
+                        case "GetObjects": // byte[] GetObjects(SerializableExpression query);
                             {
-                                writer.Write(retChangedObjects);
-                                writer.Write(result);
+                                var iftFactory = scope.Resolve<InterfaceType.Factory>();
+
+                                SerializableExpression query;
+                                reader.Read(out query, iftFactory);
+
+                                Log.DebugFormat("GetObjects(query=[{0}])", query);
+                                var result = service.GetObjects(version, query);
+                                SendByteArray(context, result, writerFactory);
+                                break;
                             }
-                            break;
-                        }
-                    default:
-                        {
-                            context.Response.StatusCode = 404;
-                            context.Response.ContentType = "text/plain";
-                            using (var outStream = new StreamWriter(context.Response.OutputStream))
+                        case "GetListOf": // byte[] GetListOf(SerializableType type, int ID, string property);
                             {
-                                Log.WarnFormat("Unknown operation: {0}", context.Request.Url);
-                                outStream.WriteLine("Unknown operation, more details available in the server log");
+                                var type = reader.ReadSerializableType();
+                                int ID = reader.ReadInt32();
+                                string property = reader.ReadString();
+
+                                Log.DebugFormat("GetListOf(type=[{0}], ID={1}, property=[{2}])", type, ID, property);
+                                var result = service.GetListOf(version, type, ID, property);
+                                SendByteArray(context, result, writerFactory);
+                                break;
                             }
-                            break;
-                        }
+                        case "FetchRelation": // byte[] FetchRelation(Guid relId, int role, int ID)
+                            {
+                                Guid relId = reader.ReadGuid();
+                                int role = reader.ReadInt32();
+                                int ID = reader.ReadInt32();
+
+                                Log.DebugFormat("FetchRelation(relId=[{0}], role={1}, ID=[{2}])", relId, role, ID);
+                                var result = service.FetchRelation(version, relId, role, ID);
+                                SendByteArray(context, result, writerFactory);
+                                break;
+                            }
+                        case "GetBlobStream": // Stream GetBlobStream(int ID)
+                            {
+                                var ID = Int32.Parse(context.Request.QueryString["id"]);
+
+                                Log.DebugFormat("GetBlobStream(ID={0})", ID);
+                                var result = service.GetBlobStream(version, ID);
+                                context.Response.StatusCode = 200;
+                                context.Response.ContentType = "application/octet-stream";
+                                result.CopyAllTo(context.Response.OutputStream);
+                                break;
+                            }
+                        case "SetBlobStream": // BlobResponse SetBlobStream(BlobMessage blob)
+                            {
+                                string fileName = reader.ReadString();
+                                string mimeType = reader.ReadString();
+                                byte[] data = reader.ReadByteArray();
+
+                                Log.DebugFormat("SetBlobStream(fileName=[{0}], mimeType=[{1}], Stream of {2} bytes)", fileName, mimeType, data.Length);
+                                var result = service.SetBlobStream(new BlobMessage()
+                                {
+                                    Version = version,
+                                    FileName = fileName,
+                                    MimeType = mimeType,
+                                    Stream = new MemoryStream(data)
+                                });
+
+                                context.Response.StatusCode = 200;
+                                context.Response.ContentType = "application/octet-stream";
+                                using (var writer = writerFactory.Invoke(new BinaryWriter(context.Response.OutputStream)))
+                                using (var dataStream = new MemoryStream())
+                                {
+                                    writer.Write(result.ID);
+                                    result.BlobInstance.CopyAllTo(dataStream);
+                                    writer.Write(dataStream.ToArray());
+                                }
+                                break;
+                            }
+                        case "InvokeServerMethod": // byte[] InvokeServerMethod(SerializableType type, int ID, string method, SerializableType[] parameterTypes, byte[] parameter, byte[] changedObjects, ObjectNotificationRequest[] notificationRequests, out byte[] retChangedObjects)
+                            {
+                                var type = reader.ReadSerializableType();
+                                int ID = reader.ReadInt32();
+                                string method = reader.ReadString();
+
+                                SerializableType[] parameterTypes = reader.ReadSerializableTypeArray();
+                                byte[] parameter = reader.ReadByteArray();
+                                byte[] changedObjects = reader.ReadByteArray();
+
+                                ObjectNotificationRequest[] notificationRequests;
+                                reader.Read(out notificationRequests);
+
+                                Log.DebugFormat("InvokeServerMethod(type=[{0}], ID={1}, method=[{2}], SerializableType[{3}], byte[{4}], byte[{5}], ObjectNotificationRequest[{6}])",
+                                    type,
+                                    ID,
+                                    method,
+                                    parameterTypes.Length,
+                                    parameter.Length,
+                                    changedObjects.Length,
+                                    notificationRequests.Length);
+                                byte[] retChangedObjects;
+                                var result = service.InvokeServerMethod(version, type, ID, method, parameterTypes, parameter, changedObjects, notificationRequests, out retChangedObjects);
+                                Log.DebugFormat("InvokeServerMethod received {0}B retChangedObjects", retChangedObjects.Length);
+
+                                context.Response.StatusCode = 200;
+                                context.Response.ContentType = "application/octet-stream";
+                                using (var writer = writerFactory.Invoke(new BinaryWriter(context.Response.OutputStream)))
+                                {
+                                    writer.Write(retChangedObjects);
+                                    writer.Write(result);
+                                }
+                                break;
+                            }
+                        default:
+                            {
+                                context.Response.StatusCode = 404;
+                                context.Response.ContentType = "text/plain";
+                                using (var outStream = new StreamWriter(context.Response.OutputStream))
+                                {
+                                    Log.WarnFormat("Unknown operation: {0}", context.Request.Url);
+                                    outStream.WriteLine("Unknown operation, more details available in the server log");
+                                }
+                                break;
+                            }
+                    }
+                    Log.DebugFormat("Sending response [{0}]", context.Response.StatusCode);
                 }
-                Log.DebugFormat("Sending response [{0}]", context.Response.StatusCode);
             }
             catch (FaultException<ZetboxContextExceptionMessage> ex)
             {
@@ -284,14 +279,14 @@ namespace Zetbox.Server.HttpService
             context.Response.StatusCode = (int)HttpStatusCode.Conflict;
             context.Response.ContentType = "text/xml";
             exContainer.ToXmlStream(context.Response.OutputStream);
-            context.Response.OutputStream.Flush();            
+            context.Response.OutputStream.Flush();
         }
 
         private void SendByteArray(HttpContext context, byte[] result, ZetboxStreamWriter.Factory writerFactory)
         {
             context.Response.StatusCode = (int)HttpStatusCode.OK;
             context.Response.ContentType = "application/octet-stream";
-            using (var writer = writerFactory(new BinaryWriter(context.Response.OutputStream)))
+            using (var writer = writerFactory.Invoke(new BinaryWriter(context.Response.OutputStream)))
             {
                 writer.Write(result);
                 writer.Flush();

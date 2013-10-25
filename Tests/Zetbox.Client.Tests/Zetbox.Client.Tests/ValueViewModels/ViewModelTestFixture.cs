@@ -45,7 +45,8 @@ namespace Zetbox.Client.Tests.ValueViewModels
 
             public override object ValueAsync
             {
-                get { return Value; }
+                get { return this.Value; }
+                set { this.Value = value; }
             }
 
             protected override string FormatValue(object value)
@@ -90,7 +91,7 @@ namespace Zetbox.Client.Tests.ValueViewModels
                 return State;
             }
 
-            protected override ZbTask<object> GetValueFromModel()
+            protected override ZbTask<object> GetValueFromModelAsync()
             {
                 return new ZbTask<object>(ZbTask.Synchron, () => ValueModel.Value);
             }

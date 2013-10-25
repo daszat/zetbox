@@ -72,8 +72,11 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries
             string positionPropertyName = rel.NeedsPositionStorage(endRole)
                 ? name + Zetbox.API.Helper.PositionSuffix
                 : null;
-            string inverseNavigatorName = null; // do not care about inverse navigator
-            bool inverseNavigatorIsList = false;
+            string inverseNavigatorName = relEnd.Navigator != null
+                ? relEnd.Navigator.Name
+                : null;
+            bool inverseNavigatorIsList = relEnd.Navigator != null && relEnd.Navigator.GetIsList();
+            bool notifyInverseCollection = true;
             bool eagerLoading = relEnd.Navigator != null && relEnd.Navigator.EagerLoading;
             bool relDataTypeExportable = rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable();
             bool callGetterSetterEvents = false;
@@ -95,6 +98,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries
                 positionPropertyName,
                 inverseNavigatorName,
                 inverseNavigatorIsList,
+                notifyInverseCollection,
                 eagerLoading,
                 relDataTypeExportable,
                 callGetterSetterEvents,
@@ -136,7 +140,10 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries
                 typeAndNameList.Add(new KeyValuePair<string, string>("Guid", "ExportGuid"));
             }
 
-            GetDeletedRelatives.Call(Host, "A", "B");
+            RememberToDeleteTemplate.Call(Host,
+                true,
+                true, "A", rel.A.Navigator != null ? rel.A.Navigator.Name : null,
+                true, "B", rel.B.Navigator != null ? rel.B.Navigator.Name : null);
 
             ObjectClasses.ProxyClass.Call(Host, ctx, interfaceName, new KeyValuePair<string, string>[0], typeAndNameList);
         }

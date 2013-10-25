@@ -85,15 +85,20 @@ namespace Zetbox.API
         {
             get
             {
-                if (Context == null) return Zetbox.API.AccessRights.Full;
+                if (Context == null) return Zetbox.API.AccessRights.FullInstance;
                 if (__currentAccessRights == null)
                 {
                     __currentAccessRights = Context.GetGroupAccessRights(Context.GetInterfaceType(this.GetImplementedInterface()));
                     // exclude create rights - not instance specific
-                    __currentAccessRights &= ~Zetbox.API.AccessRights.Create; 
+                    __currentAccessRights &= ~Zetbox.API.AccessRights.Create;
                 }
                 return __currentAccessRights.Value;
             }
+        }
+
+        protected virtual void ResetCurrentAccessRights()
+        {
+            __currentAccessRights = null;
         }
 
         /// <summary>
@@ -121,7 +126,7 @@ namespace Zetbox.API
         public virtual void SetNew()
         {
             // Newly created objects get full rights
-            __currentAccessRights = Zetbox.API.AccessRights.Full;
+            __currentAccessRights = Zetbox.API.AccessRights.FullInstance;
         }
 
         public abstract void SetUnmodified();
@@ -170,7 +175,7 @@ namespace Zetbox.API
             this.ID = obj.ID;
         }
 
-        public virtual void SynchronizeCollections<T>(ICollection<T> me, ICollection<T> other) where T : class, IValueCollectionEntry
+        public virtual void SynchronizeCollections<T>(ICollection<T> me, ICollection<T> other) where T : BasePersistenceObject, IValueCollectionEntry
         {
             if (me == null) throw new ArgumentNullException("me");
             if (other == null) throw new ArgumentNullException("other");
@@ -189,6 +194,9 @@ namespace Zetbox.API
                 }
                 else
                 {
+                    // record notifications of collection entry changes while we're recording ourselves.
+                    if (IsRecordingNotifications)
+                        meItem.RecordNotifications();
                     meItem.ApplyChangesFrom(otherItem);
                 }
             }
@@ -243,12 +251,24 @@ namespace Zetbox.API
             }
         }
 
-
         /// <summary>
         /// Returns the most specific System.Type implemented by this object.
         /// </summary>
         /// <returns>the System.Type of this object</returns>
         public abstract Type GetImplementedInterface();
+
+        #region Lifecycle Events
+
+        /// <summary>
+        /// Fires an Event after an Object is created.
+        /// </summary>
+        public virtual void NotifyCreated() { }
+        /// <summary>
+        /// Fires an Event before an Object is deleted.
+        /// </summary>
+        public virtual void NotifyDeleting() { }
+
+        #endregion
 
         #region IStreamable Members
 
@@ -487,6 +507,24 @@ namespace Zetbox.API
 
         #endregion
 
+        #endregion
+
+        #region TransientState
+        [NonSerialized]
+        private Dictionary<object, object> _transientState;
+        /// <inheritdoc />
+        [XmlIgnore]
+        public Dictionary<object, object> TransientState
+        {
+            get
+            {
+                if (_transientState == null)
+                {
+                    _transientState = new Dictionary<object, object>();
+                }
+                return _transientState;
+            }
+        }
         #endregion
     }
 }

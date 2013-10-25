@@ -1,0 +1,205 @@
+﻿<ctrls:WindowView x:Class="Zetbox.Client.WPF.View.Calendar.CalendarWorkspaceDisplay"
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
+                  xmlns:styles="clr-namespace:Zetbox.Client.WPF.Styles;assembly=Zetbox.Client.WPF.Toolkit"
+                  xmlns:client="clr-namespace:Zetbox.Client.Presentables;assembly=Zetbox.Client"
+                  xmlns:calendar="clr-namespace:Zetbox.Client.Presentables.Calendar;assembly=Zetbox.Client"
+                  xmlns:commands="clr-namespace:Zetbox.Client.WPF.Commands;assembly=Zetbox.Client.WPF.Toolkit"
+                  Title="{Binding Name}"
+                  Height="600"
+                  Width="800"
+                  WindowState="Maximized"
+                  IsTabStop="False"
+                  commands:SmartRoutedUICommand.IsCommandSink="True">
+    <!--
+    This file is part of zetbox.
+
+    Zetbox is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation, either version 3 of
+    the License, or (at your option) any later version.
+
+    Zetbox is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public
+    License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
+    -->
+    <DockPanel>
+        <ToolBarTray DockPanel.Dock="Top">
+            <ctrls:WorkaroundToolBar ItemsSource="{Binding Commands}">
+                <ctrls:WorkaroundToolBar.Resources>
+                    <DataTemplate DataType="{x:Type client:CommandViewModel}">
+                        <ctrls:CommandButton CommandViewModel="{Binding}"
+                                             Style="{StaticResource ImageToolbarButton}" />
+                    </DataTemplate>
+                </ctrls:WorkaroundToolBar.Resources>
+            </ctrls:WorkaroundToolBar>
+        </ToolBarTray>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="column0"
+                                  Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Expander Grid.Column="0"
+                      Grid.Row="0"
+                      Grid.RowSpan="2"
+                      Style="{StaticResource Area1Expander}"
+                      IsExpanded="True"
+                      ExpandDirection="Right"
+                      Header="{Binding ItemsLabel}"
+                      Expanded="Expander_Expanded"
+                      Collapsed="Expander_Collapsed">
+                <DockPanel>
+                    <ctrls:WorkaroundToolBar DockPanel.Dock="Top">
+                        <ctrls:WorkaroundToolBar.Resources>
+                            <Style TargetType="{x:Type ctrls:CommandButton}"
+                                   BasedOn="{StaticResource ImageToolbarButton}" />
+                        </ctrls:WorkaroundToolBar.Resources>
+                        <ctrls:CommandButton CommandViewModel="{Binding SelectAllCommand}"
+                                             Image="/Zetbox.Client.WPF;component/Images/preferences.png" />
+                        <ctrls:CommandButton CommandViewModel="{Binding ClearAllCommand}"
+                                             Image="/Zetbox.Client.WPF;component/Images/Users.png" />
+                    </ctrls:WorkaroundToolBar>
+                    <ListView MinWidth="320"
+                              ItemsSource="{Binding Items}"
+                              SelectionMode="Single"
+                              SelectedItem="{Binding SelectedItem}"
+                              BorderThickness="0"
+                              Margin="2,3,0,0">
+                        <ListView.ItemTemplate>
+                            <DataTemplate DataType="{x:Type calendar:CalendarSelectionViewModel}">
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox IsChecked="{Binding IsFavorite}"
+                                              Width="16"
+                                              Height="16">
+                                        <CheckBox.Template>
+                                            <ControlTemplate TargetType="CheckBox">
+                                                <Image Name="CheckImage"
+                                                       Source="/Zetbox.Client.WPF;component/Images/FavoritesDisabled.png" />
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsChecked"
+                                                             Value="True">
+                                                        <Setter TargetName="CheckImage"
+                                                                Property="Source"
+                                                                Value="/Zetbox.Client.WPF;component/Images/Favorites.png" />
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </CheckBox.Template>
+                                    </CheckBox>
+                                    <CheckBox Margin="5,0,0,0"
+                                              IsChecked="{Binding Selected}" />
+                                    <Border Width="{StaticResource SmallControlHeight}"
+                                            Height="{StaticResource SmallControlHeight}"
+                                            Margin="5,0,0,0"
+                                            Background="{Binding Color}"
+                                            BorderThickness="1"
+                                            BorderBrush="Black"
+                                            CornerRadius="2" />
+                                    <TextBlock Text="{Binding Name}"
+                                               Margin="5,0,0,0" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </DockPanel>
+            </Expander>
+
+            <GridSplitter Grid.Column="1"
+                          Grid.Row="0"
+                          Grid.RowSpan="2"
+                          x:Name="gridSplitter"
+                          ResizeDirection="Columns" />
+
+            <ContentPresenter Grid.Column="2"
+                              Grid.Row="0"
+                              Grid.IsSharedSizeScope="True"
+                              Content="{Binding CurrentView}"
+                              ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+
+            <Border Grid.Column="2"
+                    Grid.Row="1"
+                    Background="#E3EFFF"
+                    BorderBrush="#6593CF"
+                    BorderThickness="1,0,1,1"
+                    x:Name="details">
+                <Expander IsExpanded="True"
+                          Header="{Binding DetailsLabel}">
+                    <Grid DataContext="{Binding CurrentView.SelectedItem}"
+                                Height="300">
+                        <Grid.Style>
+                            <Style TargetType="{x:Type Grid}">
+                                <Style.Triggers>
+                                    <Trigger Property="DataContext"
+                                             Value="{x:Null}">
+                                        <Setter Property="Visibility"
+                                                Value="Hidden" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Grid.Style>
+                        <Grid.Background>
+                            <LinearGradientBrush>
+                                <GradientStop Color="{Binding Color, Converter={StaticResource LighterShadeConverter}}"
+                                              Offset="-0.5" />
+                                <GradientStop Color="{Binding Color}"
+                                              Offset="1.0" />
+                            </LinearGradientBrush>
+                        </Grid.Background>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <ctrls:LabeledView Grid.Row="0" 
+                                           DataContext="{Binding PropertyModelsByName[Calendar]}"
+                                           RequestedKind="Zetbox.App.GUI.TextKind"  />
+                        <ctrls:LabeledView Grid.Row="1"
+                                           DataContext="{Binding PropertyModelsByName[Summary]}" />
+                        <ctrls:LabeledView Grid.Row="2"
+                                           DataContext="{Binding PropertyModelsByName[Location]}" />
+                        <Grid Grid.Row="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <ctrls:LabeledView Grid.Row="0"
+                                               Grid.Column="0"
+                                               DataContext="{Binding PropertyModelsByName[StartDate]}" />
+                            <ctrls:LabeledView Grid.Row="1"
+                                               Grid.Column="0"
+                                               DataContext="{Binding PropertyModelsByName[EndDate]}" />
+                            <ctrls:LabeledView Grid.Row="0"
+                                               Grid.Column="1"
+                                               DataContext="{Binding PropertyModelsByName[IsAllDay]}" />
+                        </Grid>
+                        <ctrls:LabeledView Grid.Row="4"
+                                           DataContext="{Binding PropertyModelsByName[Body]}" />
+                        <ctrls:CommandButton Grid.Row="5"
+                                             CommandViewModel="{Binding DataContext.OpenCommand, ElementName=details}"
+                                             HorizontalAlignment="Left"
+                                             Style="{StaticResource ImageButton}" />
+                    </Grid>
+                </Expander>
+            </Border>
+        </Grid>
+    </DockPanel>
+</ctrls:WindowView>

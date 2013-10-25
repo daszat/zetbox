@@ -574,7 +574,7 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
         }
 
         /// <summary>Not supported.</summary>
-        bool ISchemaProvider.CheckTriggerExists(TableRef objName, string triggerName)
+        bool ISchemaProvider.CheckTriggerExists(TriggerRef triggerName)
         {
             throw new NotSupportedException();
         }
@@ -592,7 +592,7 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
         }
 
         /// <summary>Not supported.</summary>
-        bool ISchemaProvider.CheckPositionColumnValidity(TableRef tblName, string posName)
+        bool ISchemaProvider.CheckPositionColumnValidity(TableRef tblName, string fkName, string posName)
         {
             throw new NotSupportedException();
         }
@@ -688,7 +688,7 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
         }
 
         /// <summary>Not supported.</summary>
-        void ISchemaProvider.DropTrigger(TableRef objName, string triggerName)
+        void ISchemaProvider.DropTrigger(TriggerRef triggerName)
         {
             throw new NotSupportedException();
         }
@@ -723,6 +723,11 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
             throw new NotSupportedException();
         }
 
+        void ISchemaProvider.RenameIndex(TableRef tblName, string oldIdxName, string newIdxName)
+        {
+            throw new NotSupportedException();
+        }
+
         /// <summary>Not supported.</summary>
         void ISchemaProvider.CreateIndex(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns)
         {
@@ -730,7 +735,7 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
         }
 
         /// <summary>Not supported.</summary>
-        void ISchemaProvider.CreateUpdateRightsTrigger(string triggerName, TableRef tblName, List<RightsTrigger> tblList, List<string> dependingCols)
+        void ISchemaProvider.CreateUpdateRightsTrigger(TriggerRef triggerName, TableRef tblName, List<RightsTrigger> tblList, List<string> dependingCols)
         {
             throw new NotSupportedException();
         }
@@ -769,7 +774,6 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
             throw new NotSupportedException();
         }
 
-
         /// <summary>Not supported.</summary>
         void ISchemaProvider.CreatePositionColumnValidCheckProcedures(ILookup<TableRef, KeyValuePair<TableRef, string>> refSpecs)
         {
@@ -788,6 +792,11 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
 
         /// <summary>Not supported.</summary>
         void ISchemaProvider.RenameTable(TableRef oldTblName, TableRef newTblName)
+        {
+            throw new NotSupportedException();
+        }
+
+        void ISchemaProvider.RenameDiscriminatorValue(TableRef tblName, string oldValue, string newValue)
         {
             throw new NotSupportedException();
         }
@@ -943,6 +952,12 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
 
         /// <summary>Not supported.</summary>
         void ISchemaProvider.MapColumnData(TableRef srcTblName, string[] srcColNames, TableRef tblName, string[] colNames, Dictionary<object, object>[] mappings)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>Not supported.</summary>
+        IEnumerable<TriggerRef> ISchemaProvider.GetTriggerNames()
         {
             throw new NotSupportedException();
         }

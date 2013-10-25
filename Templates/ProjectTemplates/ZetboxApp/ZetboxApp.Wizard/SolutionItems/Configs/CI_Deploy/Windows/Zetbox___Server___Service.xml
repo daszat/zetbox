@@ -10,17 +10,8 @@
     <Modules>
       <Module>Zetbox.Server.ServerModule, Zetbox.Server</Module>
       <Module>Zetbox.DalProvider.Ef.EfProvider, Zetbox.DalProvider.Ef</Module>
-      <Module NotOnFallback="true">$safesolutionname$.Server.ServerModule, $safesolutionname$.Server</Module>
+      <Module>$safesolutionname$.Server.ServerModule, $safesolutionname$.Server</Module>
     </Modules>
     <ClientFilesLocations />
   </Server>
-  <AssemblySearchPaths EnableShadowCopy="true">
-    <string>Common\Core</string>
-    <string>Server\Core</string>
-    <string>Server\EF</string>
-    <string>Common\App.Zetbox</string>
-    <string>Server\App.Zetbox</string>
-    <string>Server\App.$safesolutionname$</string>
-    <string>Common\App.$safesolutionname$</string>
-  </AssemblySearchPaths>
 </ZetboxConfig>

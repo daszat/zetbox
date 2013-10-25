@@ -49,6 +49,9 @@
     <Targets Include="clientwpf.targets">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Targets>
+    <Targets Include="clientaspnet.targets">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Targets>
     <Targets Include="wpf.targets">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Targets>
@@ -72,6 +75,10 @@
       <DependentUpon>zetboxBasic-ClientWpf.nuspec.in</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </NuSpec>
+    <NuSpec Include="zetboxBasic-ClientASPNET.nuspec">
+      <DependentUpon>zetboxBasic-ClientASPNET.nuspec.in</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </NuSpec>
     <NuSpec Include="zetboxBasic-WpfExe.nuspec">
       <DependentUpon>zetboxBasic-WpfExe.nuspec.in</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -82,14 +89,23 @@
     <None Include="packages.config" />
     <None Include="zetboxBasic-WpfExe.nuspec.in" />
     <None Include="zetboxBasic-ClientWpf.nuspec.in" />
-    <None Include="zetboxBasic-Server.nuspec.in" />
-    <None Include="zetboxBasic-Common.nuspec.in" />
+    <None Include="zetboxBasic-ClientASPNET.nuspec.in">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="zetboxBasic-Server.nuspec.in">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="zetboxBasic-Common.nuspec.in">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="zetboxBasic-Client.nuspec.in" />
     <None Include="zetboxBasic-Tests.nuspec.in">
       <SubType>Designer</SubType>
     </None>
     <None Include="zetboxBasic.nuspec.in" />
-    <None Include="zetboxBasic-All.nuspec.in" />
+    <None Include="zetboxBasic-All.nuspec.in">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="zetboxBasic-EF.nuspec.in">
       <SubType>Designer</SubType>
     </None>

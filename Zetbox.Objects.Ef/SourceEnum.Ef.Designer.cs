@@ -53,7 +53,7 @@ namespace Zetbox.App.SchemaMigration
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.SchemaMigration;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable
 
@@ -133,6 +133,11 @@ namespace Zetbox.App.SchemaMigration
                 NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
@@ -239,7 +244,7 @@ namespace Zetbox.App.SchemaMigration
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.SchemaMigration;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable
 
@@ -319,6 +324,11 @@ namespace Zetbox.App.SchemaMigration
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
@@ -425,7 +435,7 @@ namespace Zetbox.App.SchemaMigration
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DestinationValue
         // fkBackingName=_fk_DestinationValue; fkGuidBackingName=_fk_guid_DestinationValue;
         // referencedInterface=Zetbox.App.Base.EnumerationEntry; moduleNamespace=Zetbox.App.SchemaMigration;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable
 
@@ -506,6 +516,11 @@ namespace Zetbox.App.SchemaMigration
                 NotifyPropertyChanged("DestinationValue", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchDestinationValueAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.EnumerationEntry>(this.DestinationValue);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DestinationValue
@@ -705,6 +720,11 @@ namespace Zetbox.App.SchemaMigration
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchSourceColumnAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.SchemaMigration.SourceColumn>(this.SourceColumn);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for SourceColumn
 		public static event PropertyGetterHandler<Zetbox.App.SchemaMigration.SourceEnum, Zetbox.App.SchemaMigration.SourceColumn> OnSourceColumn_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.SchemaMigration.SourceEnum, Zetbox.App.SchemaMigration.SourceColumn> OnSourceColumn_PreSetter;
@@ -829,6 +849,23 @@ namespace Zetbox.App.SchemaMigration
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            case "DestinationValue":
+                return TriggerFetchDestinationValueAsync();
+            case "SourceColumn":
+                return TriggerFetchSourceColumnAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
@@ -863,6 +900,7 @@ namespace Zetbox.App.SchemaMigration
                 SourceColumnImpl = (Zetbox.App.SchemaMigration.SourceColumnEfImpl)Context.Find<Zetbox.App.SchemaMigration.SourceColumn>(_fk_SourceColumn.Value);
             else
                 SourceColumnImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

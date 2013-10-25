@@ -51,7 +51,7 @@ namespace Zetbox.App.GUI
     */
         // object list property
         // object list property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -64,7 +64,7 @@ namespace Zetbox.App.GUI
                     _ChildControlKinds = new EntityCollectionWrapper<Zetbox.App.GUI.ControlKind, Zetbox.App.GUI.ControlKindEfImpl>(
                             this.Context, ChildControlKindsImpl,
                             () => this.NotifyPropertyChanging("ChildControlKinds", null, null),
-                            () => { this.NotifyPropertyChanged("ChildControlKinds", null, null); if(OnChildControlKinds_PostSetter != null && IsAttached) OnChildControlKinds_PostSetter(this); },
+                            null, // see GetChildControlKindsImplCollection()
                             (item) => item.NotifyPropertyChanging("Parent", null, null),
                             (item) => item.NotifyPropertyChanged("Parent", null, null));
                 }
@@ -77,21 +77,39 @@ namespace Zetbox.App.GUI
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.GUI.ControlKindEfImpl>(
-                        "Model.FK_ChildControlKinds_have_a_Parent",
-                        "ChildControlKinds");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetChildControlKindsImplCollection();
             }
         }
         private EntityCollectionWrapper<Zetbox.App.GUI.ControlKind, Zetbox.App.GUI.ControlKindEfImpl> _ChildControlKinds;
 
+        private EntityCollection<Zetbox.App.GUI.ControlKindEfImpl> _ChildControlKindsImplEntityCollection;
+        internal EntityCollection<Zetbox.App.GUI.ControlKindEfImpl> GetChildControlKindsImplCollection()
+        {
+            if (_ChildControlKindsImplEntityCollection == null)
+            {
+                _ChildControlKindsImplEntityCollection = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Zetbox.App.GUI.ControlKindEfImpl>(
+                        "Model.FK_ChildControlKinds_have_a_Parent",
+                        "ChildControlKinds");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_ChildControlKindsImplEntityCollection.IsLoaded)
+                {
+                    _ChildControlKindsImplEntityCollection.Load();
+                }
+                _ChildControlKindsImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("ChildControlKinds", null, null); if (OnChildControlKinds_PostSetter != null && IsAttached) OnChildControlKinds_PostSetter(this); };
+            }
+            return _ChildControlKindsImplEntityCollection;
+        }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchChildControlKindsAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.GUI.ControlKind>>(this.ChildControlKinds);
+        }
+
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
 public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChildControlKinds_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.ControlKind> OnChildControlKinds_IsValid;
@@ -191,7 +209,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
         // fkBackingName=_fk_Module; fkGuidBackingName=_fk_guid_Module;
         // referencedInterface=Zetbox.App.Base.Module; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable
 
@@ -272,6 +290,11 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
                 NotifyPropertyChanged("Module", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchModuleAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(this.Module);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
@@ -458,6 +481,11 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchParentAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(this.Parent);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
 		public static event PropertyGetterHandler<Zetbox.App.GUI.ControlKind, Zetbox.App.GUI.ControlKind> OnParent_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.ControlKind, Zetbox.App.GUI.ControlKind> OnParent_PreSetter;
@@ -580,6 +608,21 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "ChildControlKinds":
+                return TriggerFetchChildControlKindsAsync();
+            case "Module":
+                return TriggerFetchModuleAsync();
+            case "Parent":
+                return TriggerFetchParentAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
@@ -604,6 +647,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
                 ParentImpl = (Zetbox.App.GUI.ControlKindEfImpl)Context.Find<Zetbox.App.GUI.ControlKind>(_fk_Parent.Value);
             else
                 ParentImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

@@ -20,15 +20,16 @@ namespace Zetbox.Client.Presentables.ValueViewModels
     using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Linq;
+    using System.Net.Mail;
     using System.Text;
     using System.Text.RegularExpressions;
     using Zetbox.API;
+    using Zetbox.API.Async;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
     using Zetbox.App.GUI;
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables.GUI;
-    using Zetbox.API.Async;
 
     public enum ValueViewModelState
     {
@@ -59,7 +60,6 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         /// </summary>
         public TValue NewValue { get; private set; }
     }
-
 
     public abstract class BaseValueViewModel : ViewModel, IValueViewModel, IFormattedValueViewModel, IDataErrorInfo, ILabeledViewModel
     {
@@ -247,8 +247,11 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             {
                 return ValueModel.GetUntypedValue();
             }
+            set
+            {
+                ValueModel.SetUntypedValue(value);
+            }
         }
-
         #endregion
 
         #region IFormattedValueViewModel Members
@@ -364,7 +367,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         #region IValueViewModel<TValue> Members
 
-        protected abstract ZbTask<TValue> GetValueFromModel();
+        protected abstract ZbTask<TValue> GetValueFromModelAsync();
 
         /// <summary>
         /// Writes the specified value to the model, circumventing the state machine.
@@ -375,7 +378,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                return GetValueFromModel().Result;
+                return GetValueFromModelAsync().Result;
             }
             set
             {
@@ -389,7 +392,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
-        public abstract TValue ValueAsync { get; }
+        public abstract TValue ValueAsync { get; set; }
 
         #endregion
 
@@ -441,7 +444,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 {
                     case ValueViewModelState.Blurred_UnmodifiedValue:
                     case ValueViewModelState.ImplicitFocus_WritingModel:
-                        return FormatValue(this.GetValueFromModel().Result);
+                        return FormatValue(this.GetValueFromModelAsync().Result);
                     case ValueViewModelState.Blurred_PartialUserInput:
                     case ValueViewModelState.ImplicitFocus_PartialUserInput:
                     case ValueViewModelState.Focused_PartialUserInput:
@@ -486,7 +489,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                GetValueFromModel()
+                GetValueFromModelAsync()
                     .OnResult(t =>
                     {
                         var tmp = FormattedValue;
@@ -689,7 +692,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 case ValueViewModelState.Blurred_UnmodifiedValue:
                     try
                     {
-                        _partialUserInput = FormatValue(this.GetValueFromModel().Result);
+                        _partialUserInput = FormatValue(this.GetValueFromModelAsync().Result);
                     }
                     finally
                     {
@@ -797,7 +800,11 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                return Value;
+                return this.Value;
+            }
+            set
+            {
+                this.Value = value;
             }
         }
 
@@ -827,7 +834,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
-        protected override ZbTask<TValue?> GetValueFromModel()
+        protected override ZbTask<TValue?> GetValueFromModelAsync()
         {
             return new ZbTask<TValue?>(ZbTask.Synchron, () => ValueModel.Value);
         }
@@ -852,7 +859,11 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                return Value;
+                return this.Value;
+            }
+            set
+            {
+                this.Value = value;
             }
         }
 
@@ -874,7 +885,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
-        protected override ZbTask<TValue> GetValueFromModel()
+        protected override ZbTask<TValue> GetValueFromModelAsync()
         {
             return new ZbTask<TValue>(ZbTask.Synchron, () => ValueModel.Value);
         }
@@ -885,6 +896,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         }
     }
 
+    [ViewModelDescriptor]
     public class EnumerationValueViewModel : NullableStructValueViewModel<int>
     {
         public new delegate EnumerationValueViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
@@ -985,8 +997,19 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         }
     }
 
+    [ViewModelDescriptor]
+    public class StringValueViewModel : ClassValueViewModel<string>
+    {
+        public new delegate StringValueViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
+        public StringValueViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, IValueModel mdl)
+            : base(dependencies, dataCtx, parent, mdl)
+        {
+        }
+    }
+
+    [ViewModelDescriptor]
     public class MultiLineStringValueViewModel
-        : ClassValueViewModel<string>
+        : StringValueViewModel
     {
         public new delegate MultiLineStringValueViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
 
@@ -1026,14 +1049,11 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                if (!string.IsNullOrEmpty(Value) && Value.Length > ShortTextLength)
-                {
-                    return Value.Replace("\r", "").Replace('\n', ' ').Substring(0, ShortTextLength) + "...";
-                }
-                else
-                {
-                    return Value;
-                }
+                if (string.IsNullOrEmpty(Value)) return string.Empty;
+                return Value
+                        .MaxLength(ShortTextLength, "...")
+                        .Replace("\r", "")
+                        .Replace('\n', ' ');
             }
         }
 
@@ -1069,6 +1089,83 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         }
     }
 
+    [ViewModelDescriptor]
+    public class EmailStringValueViewModel
+        : StringValueViewModel
+    {
+        public new delegate EmailStringValueViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
+
+        private readonly IInteractiveMailSender _mailSender;
+
+        public EmailStringValueViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, IValueModel mdl, IInteractiveMailSender mailSender = null)
+            : base(dependencies, dataCtx, parent, mdl)
+        {
+            _mailSender = mailSender;
+        }
+
+        private ICommandViewModel _SendMailCommand = null;
+        public ICommandViewModel SendMailCommand
+        {
+            get
+            {
+                if (_SendMailCommand == null)
+                {
+                    _SendMailCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                        DataContext,
+                        this,
+                        ValueViewModelResources.SendMailCommand_Name,
+                        ValueViewModelResources.SendMailCommand_Tooltip,
+                        () => SendMail(),
+                        () => _mailSender != null && !string.IsNullOrWhiteSpace(Value) && IsMailaddress(Value),
+                        SendMailReason);
+                    _SendMailCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.pen_png.Find(FrozenContext));
+                }
+                return _SendMailCommand;
+            }
+        }
+
+        private static bool IsMailaddress(string addr)
+        {
+            try
+            {
+                // see http://stackoverflow.com/q/528090/4918
+                var parsed = new MailAddress(addr);
+                GC.KeepAlive(parsed);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public void SendMail()
+        {
+            if (_mailSender != null && IsMailaddress(Value))
+            {
+                try
+                {
+                    var msg = new System.Net.Mail.MailMessage();
+                    msg.To.Add(Value);
+                    _mailSender.Send(msg);
+                }
+                catch
+                {
+                    // Do nothing.
+                }
+            };
+        }
+
+        public string SendMailReason()
+        {
+            if (_mailSender == null) return ValueViewModelResources.NoMailSender;
+            if (string.IsNullOrWhiteSpace(Value)) return ValueViewModelResources.NoMailAddress;
+            if (!IsMailaddress(Value)) return ValueViewModelResources.InvalidMailFormat;
+            return string.Empty;
+        }
+    }
+
+    [ViewModelDescriptor]
     public class NullableGuidPropertyViewModel : NullableStructValueViewModel<Guid>
     {
         public new delegate NullableGuidPropertyViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
@@ -1100,6 +1197,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         }
     }
 
+    [ViewModelDescriptor]
     public class NullableDecimalPropertyViewModel : NullableStructValueViewModel<decimal>
     {
         public new delegate NullableDecimalPropertyViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
@@ -1138,6 +1236,29 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         }
     }
 
+    [ViewModelDescriptor]
+    public class NullableIntPropertyViewModel : NullableStructValueViewModel<int>
+    {
+        public new delegate NullableIntPropertyViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
+
+        public NullableIntPropertyViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, IValueModel mdl)
+            : base(dependencies, dataCtx, parent, mdl)
+        {
+        }
+    }
+
+    [ViewModelDescriptor]
+    public class NullableDoublePropertyViewModel : NullableStructValueViewModel<double>
+    {
+        public new delegate NullableDoublePropertyViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
+
+        public NullableDoublePropertyViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, IValueModel mdl)
+            : base(dependencies, dataCtx, parent, mdl)
+        {
+        }
+    }
+
+    [ViewModelDescriptor]
     public class NullableDateTimePropertyViewModel
         : NullableStructValueViewModel<DateTime>
     {
@@ -1198,11 +1319,11 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 return result;
             }
 
-            protected override ZbTask<TimeSpan?> GetValueFromModel()
+            protected override ZbTask<TimeSpan?> GetValueFromModelAsync()
             {
                 return new ZbTask<TimeSpan?>(ZbTask.Synchron, () =>
                 {
-                    var val = Parent.GetValueFromModel().Result;
+                    var val = Parent.GetValueFromModelAsync().Result;
                     if (val == null) return null;
                     return val.Value.TimeOfDay;
                 });
@@ -1210,7 +1331,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
             protected override void SetValueToModel(TimeSpan? value)
             {
-                if (Parent.GetValueFromModel().Result == null && value == null)
+                if (Parent.GetValueFromModelAsync().Result == null && value == null)
                 {
                     Parent.SetValueToModel(null);
                 }
@@ -1225,7 +1346,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             private DateTime? GetNewValue(TimeSpan? value)
             {
                 DateTime? result;
-                var date = (Parent.GetValueFromModel().Result ?? DateTime.MinValue).Date;
+                var date = (Parent.GetValueFromModelAsync().Result ?? DateTime.MinValue).Date;
                 if (date == DateTime.MinValue.Date)
                 {
                     if (value == null || value == TimeSpan.Zero)
@@ -1292,12 +1413,11 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 return value == null ? String.Empty : value.Value.ToShortDateString();
             }
 
-            protected override ZbTask<DateTime?> GetValueFromModel()
+            protected override ZbTask<DateTime?> GetValueFromModelAsync()
             {
                 return new ZbTask<DateTime?>(ZbTask.Synchron, () =>
                 {
-                    var t = Parent.GetValueFromModel();
-                    t.Wait();
+                    var t = Parent.GetValueFromModelAsync();
                     var modelValue = t.Result;
                     if (modelValue.HasValue)
                     {
@@ -1320,7 +1440,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
             protected override void SetValueToModel(DateTime? value)
             {
-                if (Parent.GetValueFromModel() == null && value == null)
+                if (Parent.GetValueFromModelAsync() == null && value == null)
                 {
                     Parent.SetValueToModel(null);
                 }
@@ -1335,7 +1455,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             private DateTime? GetNewValue(DateTime? value)
             {
                 DateTime? result;
-                var time = (Parent.GetValueFromModel().Result ?? DateTime.MinValue).TimeOfDay;
+                var time = (Parent.GetValueFromModelAsync().Result ?? DateTime.MinValue).TimeOfDay;
                 if (time == DateTime.MinValue.TimeOfDay)
                 {
                     if (value == DateTime.MinValue)
@@ -1415,7 +1535,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         public IDateTimeValueModel DateTimeModel { get; private set; }
         private readonly NullableTimePartPropertyViewModel _timePartViewModel;
         private readonly NullableDatePartPropertyViewModel _datePartViewModel;
-                
+
         protected override string FormatValue(DateTime? value)
         {
             if (value == null) return string.Empty;
@@ -1577,6 +1697,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         }
     }
 
+    [ViewModelDescriptor]
     public class NullableBoolPropertyViewModel : NullableStructValueViewModel<bool>
     {
         public new delegate NullableBoolPropertyViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
@@ -1703,6 +1824,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         }
     }
 
+    [ViewModelDescriptor]
     public class NullableMonthPropertyViewModel
         : NullableDateTimePropertyViewModel
     {
@@ -1719,7 +1841,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                UpdateValueCache(GetValueFromModel().Result);
+                UpdateValueCache(GetValueFromModelAsync().Result);
                 return _year;
             }
             set
@@ -1738,7 +1860,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                UpdateValueCache(GetValueFromModel().Result);
+                UpdateValueCache(GetValueFromModelAsync().Result);
                 return _month;
             }
             set
@@ -1776,7 +1898,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         private DateTime? GetValueFromComponents()
         {
-            var oldDate = GetValueFromModel().Result;
+            var oldDate = GetValueFromModelAsync().Result;
             var localDateValid = Year != null && Month != null && Year > 0 && Month >= 1 && Month <= 12;
 
             if (localDateValid)

@@ -114,7 +114,7 @@ namespace Zetbox.Server
             using (Log.InfoTraceMethodCallFormat("Publish", "file=[{0}],namespaces=[{1}]", file, String.Join(";", namespaces ?? new string[] { })))
             using (var subContainer = container.BeginLifetimeScope())
             {
-                Exporter.PublishFromContext(subContainer.Resolve<IZetboxServerContext>(), file, namespaces);
+                Exporter.PublishFromContext(subContainer.Resolve<IZetboxServerContext>(), file, Exporter.Filter.Meta, namespaces);
             }
         }
 
@@ -197,7 +197,7 @@ namespace Zetbox.Server
                 // the schema
                 using (MemoryStream ms = new MemoryStream())
                 {
-                    Exporter.PublishFromContext(dbctx, ms, new string[] { "*" }, "in-memory buffer");
+                    Exporter.PublishFromContext(dbctx, ms, Exporter.Filter.Schema, new string[] { "*" }, "in-memory buffer");
                     ms.Seek(0, SeekOrigin.Begin);
                     Importer.LoadFromXml(ctx, ms, "in-memory buffer");
                 }
@@ -251,7 +251,12 @@ namespace Zetbox.Server
         public void RunFixes()
         {
             using (Log.InfoTraceMethodCall("RunFixes"))
+            //using (var subContainer = container.BeginLifetimeScope())
             {
+                //var ctx = subContainer.Resolve<IZetboxServerContext>();
+                //var entries = ctx.Internals().GetPersistenceObjectQuery(ctx.GetInterfaceType(typeof(Assembly))).Cast<Type>().Where(o => ((IExportable)o).ExportGuid == Guid.Empty).ToList();
+
+
                 //var connectionString = cfg.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey);
 
                 //using (var db = subContainer.ResolveNamed<ISchemaProvider>(connectionString.SchemaProvider))
@@ -304,12 +309,6 @@ namespace Zetbox.Server
                 //foreach (var prj in ctx.GetQuery<Zetbox.App.SchemaMigration.MigrationProject>())
                 //{
                 //    prj.UpdateFromSourceSchema();
-                //}
-
-
-                //foreach (var tr in ctx.GetQuery<TypeRef>())
-                //{
-                //    tr.UpdateToStringCache();
                 //}
 
                 //foreach (var ck in ctx.GetQuery<ControlKind>())
@@ -398,7 +397,7 @@ namespace Zetbox.Server
 
         private List<IDataObject> GetParcel(Type t, IZetboxServerContext ctx, int lastID, int count)
         {
-            var mi = this.GetType().FindGenericMethod(true, "GetParcelHack", new[] { t }, new Type[] { typeof(IZetboxServerContext), typeof(int), typeof(int) });
+            var mi = this.GetType().FindGenericMethod("GetParcelHack", new[] { t }, new Type[] { typeof(IZetboxServerContext), typeof(int), typeof(int) }, isPrivate: true);
             return (List<IDataObject>)mi.Invoke(this, new object[] { ctx, lastID, count });
         }
 

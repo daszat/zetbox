@@ -40,10 +40,10 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for EnumValue
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for EnumValue
         // fkBackingName=_fk_EnumValue; fkGuidBackingName=_fk_guid_EnumValue;
         // referencedInterface=Zetbox.App.Base.EnumerationEntry; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -296,6 +296,7 @@ namespace Zetbox.App.Base
                 EnumValueImpl = (Zetbox.App.Base.EnumerationEntryMemoryImpl)Context.Find<Zetbox.App.Base.EnumerationEntry>(_fk_EnumValue.Value);
             else
                 EnumValueImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

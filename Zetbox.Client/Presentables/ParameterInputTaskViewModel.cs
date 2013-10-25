@@ -37,7 +37,7 @@ namespace Zetbox.Client.Presentables
 
         public ParameterInputTaskViewModel(
             IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, Method method, Action<object[]> callback)
-            : base(appCtx, dataCtx,  parent)
+            : base(appCtx, dataCtx, parent)
         {
             if (callback == null) throw new ArgumentNullException("callback");
 
@@ -119,9 +119,9 @@ namespace Zetbox.Client.Presentables
                         DataContext,
                         this,
                         ParameterInputTaskViewModelResources.InvokeCommand_Name,
-                        ParameterInputTaskViewModelResources.InvokeCommand_Tooltip, 
+                        ParameterInputTaskViewModelResources.InvokeCommand_Tooltip,
                         Invoke,
-                        null, 
+                        null,
                         null);
                 }
                 return _InvokeCommand;
@@ -146,9 +146,9 @@ namespace Zetbox.Client.Presentables
                         DataContext,
                         null,
                         ParameterInputTaskViewModelResources.CancelCommand_Name,
-                        ParameterInputTaskViewModelResources.CancelCommand_Tooltip, 
+                        ParameterInputTaskViewModelResources.CancelCommand_Tooltip,
                         Cancel,
-                        null, 
+                        null,
                         null);
                 }
                 return _CancelCommand;

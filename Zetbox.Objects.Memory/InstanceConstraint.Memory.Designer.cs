@@ -21,7 +21,7 @@ namespace Zetbox.App.Base
     /// 
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("InstanceConstraint")]
-    public class InstanceConstraintMemoryImpl : Zetbox.DalProvider.Memory.DataObjectMemoryImpl, InstanceConstraint, Zetbox.API.IExportableInternal
+    public abstract class InstanceConstraintMemoryImpl : Zetbox.DalProvider.Memory.DataObjectMemoryImpl, InstanceConstraint, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("25a83f49-3cff-4baf-850d-8d185bb329ec");
         public override Guid ObjectClassID { get { return _objectClassID; } }
@@ -40,7 +40,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Constrained
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Constrained
         // fkBackingName=_fk_Constrained; fkGuidBackingName=_fk_guid_Constrained;
         // referencedInterface=Zetbox.App.Base.DataType; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=Constraints; is list;
@@ -510,6 +510,7 @@ namespace Zetbox.App.Base
                 ConstrainedImpl = (Zetbox.App.Base.DataTypeMemoryImpl)Context.Find<Zetbox.App.Base.DataType>(_fk_Constrained.Value);
             else
                 ConstrainedImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

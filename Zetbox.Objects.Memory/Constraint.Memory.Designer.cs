@@ -21,7 +21,7 @@ namespace Zetbox.App.Base
     /// 
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("Constraint")]
-    public class ConstraintMemoryImpl : Zetbox.DalProvider.Memory.DataObjectMemoryImpl, Constraint, Zetbox.API.IExportableInternal
+    public abstract class ConstraintMemoryImpl : Zetbox.DalProvider.Memory.DataObjectMemoryImpl, Constraint, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("ac1d5ac9-d909-438f-a4f5-f64ea6904944");
         public override Guid ObjectClassID { get { return _objectClassID; } }
@@ -40,10 +40,10 @@ namespace Zetbox.App.Base
         /// <summary>
         /// Identity which changed this object
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -228,7 +228,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// The property to be constrained
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ConstrainedProperty
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ConstrainedProperty
         // fkBackingName=_fk_ConstrainedProperty; fkGuidBackingName=_fk_guid_ConstrainedProperty;
         // referencedInterface=Zetbox.App.Base.Property; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=Constraints; is list;
@@ -360,10 +360,10 @@ namespace Zetbox.App.Base
         /// <summary>
         /// Identity which created this object
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -926,6 +926,7 @@ namespace Zetbox.App.Base
                 CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
             else
                 CreatedByImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

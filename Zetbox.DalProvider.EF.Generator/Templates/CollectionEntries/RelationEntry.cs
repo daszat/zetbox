@@ -66,8 +66,11 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries
                 ? propertyName + Zetbox.API.Helper.PositionSuffix
                 : null;
 
-            string inverseNavigatorName = null;
+            string inverseNavigatorName = relEnd.Navigator != null
+                ? relEnd.Navigator.Name + Zetbox.API.Helper.ImplementationSuffix
+                : null;
             bool inverseNavigatorIsList = false;
+            bool notifyInverseCollection = true;
 
             bool eagerLoading = relEnd.Navigator != null && relEnd.Navigator.EagerLoading;
             bool relDataTypeExportable = rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable();
@@ -90,6 +93,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries
                 positionPropertyName,
                 inverseNavigatorName,
                 inverseNavigatorIsList,
+                notifyInverseCollection,
                 eagerLoading,
                 relDataTypeExportable,
                 callGetterSetterEvents,

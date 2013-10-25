@@ -153,4 +153,7 @@
   <data name="ItemsLabel" xml:space="preserve">
     <value>Datensätze:</value>
   </data>
+  <data name="SaveChangesHint" xml:space="preserve">
+    <value>Um die Änderungen zu übernehmen drücken Sie bitte Speichern</value>
+  </data>
 </root>

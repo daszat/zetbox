@@ -16,6 +16,7 @@ namespace Zetbox.Client
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Linq;
     using System.Net;
     using System.Security.Authentication;
@@ -26,6 +27,7 @@ namespace Zetbox.Client
     using Zetbox.API;
     using Zetbox.API.Client;
     using Zetbox.API.Common;
+    using Zetbox.API.Configuration;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
     using Zetbox.App.GUI;
@@ -33,8 +35,6 @@ namespace Zetbox.Client
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables;
     using Zetbox.Client.Presentables.ValueViewModels;
-    using Zetbox.API.Configuration;
-    using System.ComponentModel;
 
     public class DefaultCredentialsResolver : ICredentialsResolver
     {
@@ -73,7 +73,7 @@ namespace Zetbox.Client
         public void InvalidCredentials()
         {
             throw new AuthenticationException(string.Format("You are not authorized to access this application. (username={0})",
-                Thread.CurrentPrincipal.Identity != null ? Thread.CurrentPrincipal.Identity.Name : "<empty>"));
+                Thread.CurrentPrincipal.Identity != null && !string.IsNullOrWhiteSpace(Thread.CurrentPrincipal.Identity.Name) ? Thread.CurrentPrincipal.Identity.Name : "<empty>"));
         }
 
         public void Freeze()
@@ -82,7 +82,15 @@ namespace Zetbox.Client
         }
     }
 
-    public class BasicAuthCredentialsResolver : ICredentialsResolver
+    public interface IPasswordDialog
+    {
+        string Username { get; }
+        string Password { get; }
+
+        bool QueryUser();
+    }
+
+    public sealed class BasicAuthCredentialsResolver : ICredentialsResolver
     {
         [Feature]
         [Description("Credential resolver for basic authentication")]
@@ -93,7 +101,7 @@ namespace Zetbox.Client
                 base.Load(builder);
 
                 builder
-                    .Register<BasicAuthCredentialsResolver>(c => new BasicAuthCredentialsResolver(c.Resolve<IViewModelFactory>(), c.Resolve<Func<BaseMemoryContext>>()))
+                    .Register<BasicAuthCredentialsResolver>(c => new BasicAuthCredentialsResolver(c.Resolve<IPasswordDialog>()))
                     .As<BasicAuthCredentialsResolver>() // for local use
                     .As<ICredentialsResolver>() // for publication
                     .SingleInstance();
@@ -107,61 +115,49 @@ namespace Zetbox.Client
         }
 
         private static object _lock = new object();
-
-        private IViewModelFactory _vmf;
-        private Func<BaseMemoryContext> _ctxFactory;
         private string UserName = null;
         private string Password = null;
+        private IPasswordDialog _pwDlg;
 
-        public BasicAuthCredentialsResolver(IViewModelFactory vmf, Func<BaseMemoryContext> ctxFactory)
+        internal BasicAuthCredentialsResolver(IPasswordDialog pwDlg)
         {
-            if (vmf == null) throw new ArgumentNullException("vmf");
-            if (ctxFactory == null) throw new ArgumentNullException("ctxFactory");
+            if (pwDlg == null) throw new ArgumentNullException("pwDlg");
 
-            _vmf = vmf;
-            _ctxFactory = ctxFactory;
+            _pwDlg = pwDlg;
         }
 
         private bool _isEnsuringCredentials = false;
         public void EnsureCredentials()
         {
-            lock (_lock) // singleton, once is enough
+            lock (_lock)
             {
                 if (_isEnsuringCredentials)
                 {
                     Logging.Client.Warn("Nested credentials resolving detected");
+                    // singleton, once is enough
                     return;
                 }
                 _isEnsuringCredentials = true;
-                try
+            }
+            try
+            {
+                if (string.IsNullOrEmpty(UserName))
                 {
-                    if (string.IsNullOrEmpty(UserName))
+                    if (_pwDlg.QueryUser())
                     {
-                        using (var ctx = _ctxFactory())
-                        {
-                            var dlgOK = false;
-                            _vmf.CreateDialog(ctx, CredentialsResolverResources.DialogTitle)
-                                .AddString(CredentialsResolverResources.UserNameLabel)
-                                .AddPassword(CredentialsResolverResources.PasswordLabel)
-                                .Show(p =>
-                                {
-                                    this.UserName = (string)p[0];
-                                    this.Password = (string)p[1];
-                                    dlgOK = true;
-                                });
-
-                            if (!dlgOK)
-                            {
-                                // No credentials? User pressed cancel? exit application
-                                Environment.Exit(1);
-                            }
-                        }
+                        this.UserName = _pwDlg.Username;
+                        this.Password = _pwDlg.Password;
+                    }
+                    else
+                    {
+                        // No credentials? User pressed cancel? exit application
+                        Environment.Exit(1);
                     }
                 }
-                finally
-                {
-                    _isEnsuringCredentials = false;
-                }
+            }
+            finally
+            {
+                lock (_lock) _isEnsuringCredentials = false;
             }
         }
 

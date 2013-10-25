@@ -47,6 +47,11 @@ namespace Zetbox.App.Base
         Zetbox.API.IDataObject GetObject(Zetbox.API.IZetboxContext ctx);
 
         /// <summary>
+        /// Returns true if the any reference is set to an instance of an object. It&apos;s not guaranteed that the object still exists
+        /// </summary>
+        bool HasObject();
+
+        /// <summary>
         /// 
         /// </summary>
         void SetObject(Zetbox.API.IDataObject newObj);

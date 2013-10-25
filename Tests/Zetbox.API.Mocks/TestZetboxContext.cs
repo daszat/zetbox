@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml.Serialization;
 using Zetbox.API.Async;
 
 namespace Zetbox.API.Mocks
@@ -29,7 +30,7 @@ namespace Zetbox.API.Mocks
         }
     }
 
-    public class MockImplementationType 
+    public class MockImplementationType
         : ImplementationType
     {
         public MockImplementationType(Type t, InterfaceType.Factory iftFactory)
@@ -79,6 +80,10 @@ namespace Zetbox.API.Mocks
             throw new NotImplementedException();
         }
 
+        public IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType)
+        {
+            throw new NotImplementedException();
+        }
 
         public List<T> GetListOf<T>(IDataObject obj, string propertyName) where T : class, IDataObject
         {
@@ -281,7 +286,6 @@ namespace Zetbox.API.Mocks
 
         #region IReadOnlyZetboxContext Members
 
-
         public System.IO.Stream GetStream(int ID)
         {
             throw new NotImplementedException();
@@ -344,19 +348,25 @@ namespace Zetbox.API.Mocks
         {
             return GetImplementationType(Type.GetType(t.Type.FullName + Zetbox.API.Helper.ImplementationSuffix + "," + typeof(TestZetboxContext).Assembly.FullName, true));
         }
-        private IDictionary<object, object> _TransientState = null;
+
+        [NonSerialized]
+        private Dictionary<object, object> _transientState;
         /// <inheritdoc />
+        [XmlIgnore]
         public IDictionary<object, object> TransientState
         {
             get
             {
-                if (_TransientState == null)
+                if (_transientState == null)
                 {
-                    _TransientState = new Dictionary<object, object>();
+                    _transientState = new Dictionary<object, object>();
                 }
-                return _TransientState;
+                return _transientState;
             }
         }
+
+        public ContextIsolationLevel IsolationLevel { get { return ContextIsolationLevel.PreferContextCache; } }
+
         #endregion
 
         /// <summary>

@@ -99,32 +99,40 @@ namespace Zetbox.API
         private static void InitialiseSearchPath(HostType type, bool loadGeneratedAssemblies)
         {
             string hostTypePrefix = string.Empty;
-            string hostTypePath = string.Empty;
+            List<string> hostTypePaths = new List<string>() { "Common" };
+            
             switch (type)
             {
                 case HostType.Client:
-                    hostTypePath = "Client";
+                    hostTypePaths.Add("Client");
                     break;
                 case HostType.Server:
-                    hostTypePath = "Server";
+                    hostTypePaths.Add("Server");
                     break;
-                case HostType.AspNet:
+                case HostType.AspNetService:
                     hostTypePrefix = "bin";
-                    hostTypePath = "Server";
+                    hostTypePaths.Add("Server");
+                    break;
+                case HostType.AspNetClient:
+                    hostTypePrefix = "bin";
+                    hostTypePaths.Add("Client");
+                    hostTypePaths.Add("Server");
+                    break;
+                case HostType.All:
+                    hostTypePaths.Add("Client");
+                    hostTypePaths.Add("Server");
                     break;
                 case HostType.None:
                 default:
                     break;
             }
-            var common = string.IsNullOrWhiteSpace(hostTypePrefix)
-                ? "Common"
-                : Path.Combine(hostTypePrefix, "Common");
-            hostTypePath = string.IsNullOrWhiteSpace(hostTypePrefix)
-                ? hostTypePath
-                : Path.Combine(hostTypePrefix, hostTypePath);
-            foreach (var path in new string[] { common, hostTypePath })
+        
+            foreach (var path in hostTypePaths)
             {
-                var rootedPath = QualifySearchPath(path);
+                var pathWithPrefix = string.IsNullOrWhiteSpace(hostTypePrefix)
+                    ? path
+                    : Path.Combine(hostTypePrefix, path);
+                var rootedPath = QualifySearchPath(pathWithPrefix);
 
                 Log.DebugFormat("Added searchpath [{0}]", rootedPath);
                 AssemblyLoader.SearchPath.Add(Path.Combine(rootedPath, loadGeneratedAssemblies ? "Generated" : "Fallback"));

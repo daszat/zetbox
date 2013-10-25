@@ -86,6 +86,7 @@ namespace ZetboxApp.Wizard
             AddImportTargets();
             SetupConfigurationManager();
             SetProjectReferences();
+            SetStartupProject();
         }
 
         private void SetupConfigurationManager()
@@ -103,7 +104,6 @@ namespace ZetboxApp.Wizard
                 ctx.ShouldBuild = ctx.ProjectName.EndsWith(".Migrations.csproj");
             }
         }
-
 
         private void AddImportTargets()
         {
@@ -127,27 +127,27 @@ namespace ZetboxApp.Wizard
                 msBuildProj.Load(fileName);
 
                 msBuildProj.Imports.AddNewImport(@"$(SolutionDir)\.nuget\nuget.targets", null);
-                if (prjName.EndsWith(".Common"))
+                if (prjName == ToProjectName("Common"))
                 {
                     msBuildProj.Imports.AddNewImport(@"$(SolutionDir)\.zetbox\common.targets", null);
                 }
-                else if (prjName.EndsWith(".Client") || prjName.EndsWith(".Client.Tests"))
+                else if (prjName == ToProjectName("Client") || prjName == ToProjectName("Client.Tests"))
                 {
                     msBuildProj.Imports.AddNewImport(@"$(SolutionDir)\.zetbox\client.targets", null);
                 }
-                else if (prjName.EndsWith(".Client.WPF"))
+                else if (prjName == ToProjectName("Client.WPF"))
                 {
                     msBuildProj.Imports.AddNewImport(@"$(SolutionDir)\.zetbox\clientwpf.targets", null);
                 }
-                else if (prjName.EndsWith(".WPF"))
+                else if (prjName == ToProjectName("WPF"))
                 {
                     msBuildProj.Imports.AddNewImport(@"$(SolutionDir)\.zetbox\wpf.targets", null);
                 }
-                else if (prjName.EndsWith(".Server") || prjName.EndsWith(".Server.Tests"))
+                else if (prjName == ToProjectName("Server") || prjName == ToProjectName("Server.Tests"))
                 {
                     msBuildProj.Imports.AddNewImport(@"$(SolutionDir)\.zetbox\server.targets", null);
                 }
-                else if (prjName.EndsWith(".Server.Migrations"))
+                else if (prjName == ToProjectName("Server.Migrations"))
                 {
                     msBuildProj.Imports.AddNewImport(@"$(SolutionDir)\.zetbox\fallback.targets", null);
                 }
@@ -170,19 +170,19 @@ namespace ZetboxApp.Wizard
             var allProjects = new Dictionary<string, Project>();
             foreach (Project prj in _solution.Projects)
             {
-                if (prj.Name.EndsWith(".Client"))
+                if (prj.Name == ToProjectName("Client"))
                 {
                     allProjects["client"] = prj;
                 }
-                else if (prj.Name.EndsWith(".Client.WPF"))
+                else if (prj.Name == ToProjectName("Client.WPF"))
                 {
                     allProjects["wpf"] = prj;
                 }
-                else if (prj.Name.EndsWith(".Common"))
+                else if (prj.Name == ToProjectName("Common"))
                 {
                     allProjects["common"] = prj;
                 }
-                else if (prj.Name.EndsWith(".Server"))
+                else if (prj.Name == ToProjectName("Server"))
                 {
                     allProjects["server"] = prj;
                 }
@@ -191,23 +191,28 @@ namespace ZetboxApp.Wizard
             foreach (Project prj in _solution.Projects)
             {
                 VSLangProj.VSProject vsProj = (VSLangProj.VSProject)prj.Object;
-                if (prj.Name.EndsWith(".Common"))
+                if (prj.Name == ToProjectName("Common"))
                 {
                 }
-                else if (prj.Name.EndsWith(".Client"))
+                else if (prj.Name == ToProjectName("Client"))
                 {
                     vsProj.References.AddProject(allProjects["common"]).CopyLocal = false;
                 }
-                else if (prj.Name.EndsWith(".Client.WPF"))
+                else if (prj.Name == ToProjectName("Client.WPF"))
                 {
                     vsProj.References.AddProject(allProjects["common"]).CopyLocal = false;
                     vsProj.References.AddProject(allProjects["client"]).CopyLocal = false;
                 }
-                else if (prj.Name.EndsWith(".Server"))
+                else if (prj.Name == ToProjectName("Server"))
                 {
                     vsProj.References.AddProject(allProjects["common"]).CopyLocal = false;
                 }
             }
+        }
+
+        private void SetStartupProject()
+        {
+            _dte.Solution.Properties.Item("StartupProject").Value = ToProjectName("WPF");
         }
 
         private void MoveProjects()
@@ -336,6 +341,11 @@ namespace ZetboxApp.Wizard
             {
                 MessageBox.Show("Error executing " + file, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private static string ToProjectName(string suffix)
+        {
+            return _solutionName + "." + suffix;
         }
     }
 }

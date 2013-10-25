@@ -49,6 +49,68 @@ namespace at.dasz.DocumentManagement
         internal new readonly ImportedFileProxy Proxy;
 
         /// <summary>
+        /// Creates an excerpt from the current file
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnExtractText_ImportedFile")]
+        public override void ExtractText()
+        {
+            // base.ExtractText();
+            if (OnExtractText_ImportedFile != null)
+            {
+                OnExtractText_ImportedFile(this);
+            }
+            else
+            {
+                base.ExtractText();
+            }
+        }
+        public static event ExtractText_Handler<ImportedFile> OnExtractText_ImportedFile;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<ImportedFile> OnExtractText_ImportedFile_CanExec;
+
+        [EventBasedMethod("OnExtractText_ImportedFile_CanExec")]
+        public override bool ExtractTextCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnExtractText_ImportedFile_CanExec != null)
+				{
+					OnExtractText_ImportedFile_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.ExtractTextCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<ImportedFile> OnExtractText_ImportedFile_CanExecReason;
+
+        [EventBasedMethod("OnExtractText_ImportedFile_CanExecReason")]
+        public override string ExtractTextCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnExtractText_ImportedFile_CanExecReason != null)
+				{
+					OnExtractText_ImportedFile_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.ExtractTextCanExecReason;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
+        /// <summary>
         /// Handles the change of the current blob
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
@@ -448,6 +510,15 @@ namespace at.dasz.DocumentManagement
         #region Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

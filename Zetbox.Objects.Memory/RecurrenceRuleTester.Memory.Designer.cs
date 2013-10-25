@@ -86,10 +86,6 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanged("Rule", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
                 }
-                else
-                {
-                    SetInitializedProperty("Rule");
-                }
             }
         }
         // END Zetbox.Generator.Templates.Properties.CompoundObjectPropertyTemplate
@@ -281,6 +277,7 @@ namespace Zetbox.App.Test
             base.ReloadReferences();
 
             // fix direct object references
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();
@@ -367,7 +364,6 @@ namespace Zetbox.App.Test
         [EventBasedMethod("OnNotifyCreated_RecurrenceRuleTester")]
         public override void NotifyCreated()
         {
-            SetNotInitializedProperty("Rule");
             base.NotifyCreated();
             if (OnNotifyCreated_RecurrenceRuleTester != null) OnNotifyCreated_RecurrenceRuleTester(this);
         }

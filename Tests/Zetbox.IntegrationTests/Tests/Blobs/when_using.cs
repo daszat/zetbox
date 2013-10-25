@@ -17,14 +17,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NUnit.Framework;
-using Zetbox.API.Client;
 using Zetbox.API;
+using Zetbox.API.Client;
 
 namespace Zetbox.IntegrationTests.Blobs
 {
     [TestFixture]
-    public class when_using
-            : Zetbox.API.AbstractConsumerTests.Blobs.when_using
+    public class when_using : Zetbox.API.AbstractConsumerTests.Blobs.when_using
     {
+        protected override NUnit.Framework.Constraints.IResolveConstraint CreateBlobIdConstraint()
+        {
+            return Is.GreaterThan(0);
+        }
     }
 }

@@ -41,6 +41,7 @@
 <%@ Parameter Name="positionPropertyName" Type="string" %>
 <%@ Parameter Name="inverseNavigatorName" Type="string" %>
 <%@ Parameter Name="inverseNavigatorIsList" Type="bool" %>
+<%@ Parameter Name="notifyInverseCollection" Type="bool" %>
 <%@ Parameter Name="eagerLoading" Type="bool" %>
 <%@ Parameter Name="relDataTypeExportable" Type="bool" %>
 <%@ Parameter Name="callGetterSetterEvents" Type="bool" %>
@@ -49,7 +50,13 @@
         // BEGIN <%= this.GetType() %> for <%= name %>
         // fkBackingName=this.Proxy.<%= name %>; fkGuidBackingName=<%= fkGuidBackingName %>;
         // referencedInterface=<%= referencedInterface %>; moduleNamespace=<%= moduleNamespace %>;
+<% if (notifyInverseCollection && !String.IsNullOrEmpty(inverseNavigatorName)) { %>
+        // will get inverse collection for notifications for <%= inverseNavigatorName %>
+<% } else if (!notifyInverseCollection && !String.IsNullOrEmpty(inverseNavigatorName)) { %>
         // inverse Navigator=<%= String.IsNullOrEmpty(inverseNavigatorName) ? "none" : inverseNavigatorName %>; <%= inverseNavigatorIsList ? "is list" : "is reference" %>;
+<% } else { %>
+        // no inverse navigator handling
+<% } %>
         // PositionStorage=<%= String.IsNullOrEmpty(positionPropertyName) ? "none" : positionPropertyName %>;
         // Target <%= relDataTypeExportable ? String.Empty : "not " %>exportable; does <%= callGetterSetterEvents ? String.Empty : "not " %>call events
 
@@ -177,6 +184,11 @@
         /// <summary>Backing store for <%= UglyXmlEncode(name) %>'s guid, used on import only</summary>
         private Guid? <%= fkGuidBackingName %> = null;
 <% } %>
+
+    public Zetbox.API.Async.ZbTask TriggerFetch<%= name %>Async()
+    {
+        return new Zetbox.API.Async.ZbTask<<%= referencedInterface %>>(this.<%= name %>);
+    }
 
 <%
     AddSerialization(serializationList, name, fkBackingName, fkGuidBackingName);

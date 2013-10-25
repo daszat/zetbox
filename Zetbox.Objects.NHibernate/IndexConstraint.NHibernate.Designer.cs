@@ -144,8 +144,8 @@ namespace Zetbox.App.Base
 							new ProjectedCollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl.IndexConstraint_ensures_unique_on_Property_RelationEntryProxy, Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.Properties,
                                 p => (Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl.IndexConstraint_ensures_unique_on_Property_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl>)null);
+                                ce => (Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl.IndexConstraint_ensures_unique_on_Property_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
+                    _Properties.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Properties", null, null); if(OnProperties_PostSetter != null && IsAttached) OnProperties_PostSetter(this); };
                     if (Properties_was_eagerLoaded) { Properties_was_eagerLoaded = false; }
 				}
 				return (ICollection<Zetbox.App.Base.Property>)_Properties;
@@ -155,6 +155,13 @@ namespace Zetbox.App.Base
 		private NHibernateBSideCollectionWrapper<Zetbox.App.Base.IndexConstraint, Zetbox.App.Base.Property, Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl> _Properties;
 		// ignored, but required for Serialization
         private bool Properties_was_eagerLoaded = false;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchPropertiesAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.Property>>(this.Properties);
+        }
+
+public static event PropertyListChangedHandler<Zetbox.App.Base.IndexConstraint> OnProperties_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.IndexConstraint> OnProperties_IsValid;
 
@@ -329,6 +336,17 @@ namespace Zetbox.App.Base
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Properties":
+                return TriggerFetchPropertiesAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

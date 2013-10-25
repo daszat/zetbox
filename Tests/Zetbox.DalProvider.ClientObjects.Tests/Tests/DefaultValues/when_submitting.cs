@@ -19,17 +19,16 @@ namespace Zetbox.DalProvider.Client.Tests.DefaultValues
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-
-    using Zetbox.App.Base;
     using NUnit.Framework;
+    using Zetbox.App.Base;
 
-    public class when_submitting_without_read
-        : Zetbox.API.AbstractConsumerTests.DefaultValues.when_submitting_without_read
+    public class when_persisting_enums
+        : Zetbox.API.AbstractConsumerTests.DefaultValues.when_persisting_enums
     {
     }
-    
-    public class when_submitting_with_read
-        : Zetbox.API.AbstractConsumerTests.DefaultValues.when_submitting_with_read
+
+    public class when_persisting_guids
+        : Zetbox.API.AbstractConsumerTests.DefaultValues.when_persisting_guids
     {
     }
 }

@@ -92,7 +92,7 @@ namespace Zetbox.API
         private XmlReader _reader = null;
         public virtual XmlReader Reader
         {
-            get 
+            get
             {
                 if (_reader == null)
                 {
@@ -160,7 +160,11 @@ namespace Zetbox.API
                     _data = File.OpenRead(_fileName);
                     break;
                 case Modes.Write:
-                    Directory.CreateDirectory(Path.GetDirectoryName(_fileName));
+                    var basedir = Path.GetDirectoryName(_fileName);
+                    if (!string.IsNullOrWhiteSpace(basedir) && !Directory.Exists(basedir))
+                    {
+                        Directory.CreateDirectory(basedir);
+                    }
                     Directory.CreateDirectory(_blobDir);
                     _data = File.OpenWrite(_fileName);
                     _data.SetLength(0);
@@ -191,7 +195,7 @@ namespace Zetbox.API
             if (blob == null) throw new ArgumentNullException("blob");
 
             string destName;
-            if(!string.IsNullOrEmpty(filename))
+            if (!string.IsNullOrEmpty(filename))
             {
                 destName = Path.Combine(_blobDir, string.Format("{0} - {1}", guid, filename));
             }

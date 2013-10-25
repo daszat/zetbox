@@ -54,7 +54,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Group
         // fkBackingName=this.Proxy.Group; fkGuidBackingName=_fk_guid_Group;
         // referencedInterface=Zetbox.App.Base.Group; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -136,6 +136,11 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for Group's guid, used on import only</summary>
         private Guid? _fk_guid_Group = null;
 
+    public Zetbox.API.Async.ZbTask TriggerFetchGroupAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Group>(this.Group);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Group
 		public static event PropertyGetterHandler<Zetbox.App.Base.GroupMembership, Zetbox.App.Base.Group> OnGroup_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.GroupMembership, Zetbox.App.Base.Group> OnGroup_PreSetter;
@@ -195,6 +200,17 @@ namespace Zetbox.App.Base
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Group":
+                return TriggerFetchGroupAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

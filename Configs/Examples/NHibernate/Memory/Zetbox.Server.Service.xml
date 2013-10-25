@@ -11,6 +11,7 @@
       <Module>Zetbox.DalProvider.Memory.MemoryDatabaseProvider, Zetbox.DalProvider.Memory</Module>
       <Module>Zetbox.API.Server.PerfCounter.PerfMonAppender+Module, Zetbox.API.Server</Module>
 	  <Module>Zetbox.Server.Wcf.WcfModule, Zetbox.Server.Wcf</Module>
+	  <Module>Zetbox.API.Server.Fulltext.Module, Zetbox.API.Server</Module>
     </Modules>
   </Server>
 </ZetboxConfig>

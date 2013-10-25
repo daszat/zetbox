@@ -123,6 +123,19 @@ this.WriteObjects("            this._fk_",  prop.Name , " = otherImpl._fk_",  pr
 #line 82 "P:\zetbox\Zetbox.DalProvider.Client.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 } 
 #line 83 "P:\zetbox\Zetbox.DalProvider.Client.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+this.WriteObjects("\r\n");
+this.WriteObjects("\r\n");
+#line 85 "P:\zetbox\Zetbox.DalProvider.Client.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+// reset backing store and fetch task to reload lists 
+#line 86 "P:\zetbox\Zetbox.DalProvider.Client.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+// foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>().Where(p => p.IsList()).OrderBy(p => p.Name)) { 
+#line 87 "P:\zetbox\Zetbox.DalProvider.Client.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+//            this._triggerFetch<%= prop.Name %>Task = null; 
+#line 88 "P:\zetbox\Zetbox.DalProvider.Client.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+//            this._<%= prop.Name %> = null;                 
+#line 89 "P:\zetbox\Zetbox.DalProvider.Client.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+// } 
+#line 90 "P:\zetbox\Zetbox.DalProvider.Client.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 this.WriteObjects("        }\r\n");
 
         }

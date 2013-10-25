@@ -98,7 +98,7 @@ namespace Zetbox.App.Test
         /// <summary>
         /// Workaround for Case 1376
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Fragebogen
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Fragebogen
         // fkBackingName=_fk_Fragebogen; fkGuidBackingName=_fk_guid_Fragebogen;
         // referencedInterface=Zetbox.App.Test.Fragebogen; moduleNamespace=Zetbox.App.Test;
         // inverse Navigator=Antworten; is list;
@@ -457,6 +457,7 @@ namespace Zetbox.App.Test
                 FragebogenImpl = (Zetbox.App.Test.FragebogenMemoryImpl)Context.Find<Zetbox.App.Test.Fragebogen>(_fk_Fragebogen.Value);
             else
                 FragebogenImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

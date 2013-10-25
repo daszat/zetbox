@@ -53,7 +53,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ControlKind
         // fkBackingName=_fk_ControlKind; fkGuidBackingName=_fk_guid_ControlKind;
         // referencedInterface=Zetbox.App.GUI.ControlKind; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable
 
@@ -136,6 +136,11 @@ namespace Zetbox.App.GUI
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchControlKindAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(this.ControlKind);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ControlKind
 		public static event PropertyGetterHandler<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.GUI.ControlKind> OnControlKind_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.GUI.ControlKind> OnControlKind_PreSetter;
@@ -144,107 +149,155 @@ namespace Zetbox.App.GUI
         public static event PropertyIsValidHandler<Zetbox.App.GUI.ViewDescriptor> OnControlKind_IsValid;
 
         /// <summary>
-        /// The control implementing this View
+        /// The control implementing this View.
         /// </summary>
-    /*
-    Relation: FK_View_has_ControlRef
-    A: ZeroOrMore ViewDescriptor as View
-    B: One TypeRef as ControlRef
-    Preferred Storage: MergeIntoA
-    */
-        // object reference property
-        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ControlRef
-        // fkBackingName=_fk_ControlRef; fkGuidBackingName=_fk_guid_ControlRef;
-        // referencedInterface=Zetbox.App.Base.TypeRef; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
-        // PositionStorage=none;
-        // Target exportable
-
-        // implement the user-visible interface
+        // value type property
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public Zetbox.App.Base.TypeRef ControlRef
-        {
-            get { return ControlRefImpl; }
-            set { ControlRefImpl = (Zetbox.App.Base.TypeRefEfImpl)value; }
-        }
-
-        private int? _fk_ControlRef;
-
-        private Guid? _fk_guid_ControlRef = null;
-
-        // internal implementation, EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_View_has_ControlRef", "ControlRef")]
-        public Zetbox.App.Base.TypeRefEfImpl ControlRefImpl
+        [EdmScalarProperty()]
+        public string ControlTypeRef
         {
             get
             {
-                Zetbox.App.Base.TypeRefEfImpl __value;
-                EntityReference<Zetbox.App.Base.TypeRefEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.TypeRefEfImpl>(
-                        "Model.FK_View_has_ControlRef",
-                        "ControlRef");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ControlTypeRef;
+                if (OnControlTypeRef_Getter != null)
                 {
-                    r.Load();
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnControlTypeRef_Getter(this, __e);
+                    __result = _ControlTypeRef = __e.Result;
                 }
-                __value = r.Value;
-                if (OnControlRef_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<Zetbox.App.Base.TypeRef>(__value);
-                    OnControlRef_Getter(this, e);
-                    __value = (Zetbox.App.Base.TypeRefEfImpl)e.Result;
-                }
-                return __value;
+                return __result;
             }
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
-
-                EntityReference<Zetbox.App.Base.TypeRefEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.TypeRefEfImpl>(
-                        "Model.FK_View_has_ControlRef",
-                        "ControlRef");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
+                if (_ControlTypeRef != value)
                 {
-                    r.Load();
+                    var __oldValue = _ControlTypeRef;
+                    var __newValue = value;
+                    if (OnControlTypeRef_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnControlTypeRef_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("ControlTypeRef", __oldValue, __newValue);
+                    _ControlTypeRef = __newValue;
+                    NotifyPropertyChanged("ControlTypeRef", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnControlTypeRef_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnControlTypeRef_PostSetter(this, __e);
+                    }
                 }
-                Zetbox.App.Base.TypeRefEfImpl __oldValue = (Zetbox.App.Base.TypeRefEfImpl)r.Value;
-                Zetbox.App.Base.TypeRefEfImpl __newValue = (Zetbox.App.Base.TypeRefEfImpl)value;
-
-                // Changing Event fires before anything is touched
-                NotifyPropertyChanging("ControlRef", __oldValue, __newValue);
-
-                if (OnControlRef_PreSetter != null)
+                else
                 {
-                    var e = new PropertyPreSetterEventArgs<Zetbox.App.Base.TypeRef>(__oldValue, __newValue);
-                    OnControlRef_PreSetter(this, e);
-                    __newValue = (Zetbox.App.Base.TypeRefEfImpl)e.Result;
+                    SetInitializedProperty("ControlTypeRef");
                 }
-
-                r.Value = (Zetbox.App.Base.TypeRefEfImpl)__newValue;
-
-                if (OnControlRef_PostSetter != null)
-                {
-                    var e = new PropertyPostSetterEventArgs<Zetbox.App.Base.TypeRef>(__oldValue, __newValue);
-                    OnControlRef_PostSetter(this, e);
-                }
-
-                // everything is done. fire the Changed event
-                NotifyPropertyChanged("ControlRef", __oldValue, __newValue);
-                if(IsAttached) UpdateChangedInfo = true;
             }
         }
+        private string _ControlTypeRef_store;
+        private string _ControlTypeRef {
+            get { return _ControlTypeRef_store; }
+            set {
+                ReportEfPropertyChanging("ControlTypeRef");
+                _ControlTypeRef_store = value;
+                ReportEfPropertyChanged("ControlTypeRef");
+            }
+        }
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Zetbox.App.GUI.ViewDescriptor, string> OnControlTypeRef_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.GUI.ViewDescriptor, string> OnControlTypeRef_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.GUI.ViewDescriptor, string> OnControlTypeRef_PostSetter;
 
-        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ControlRef
-		public static event PropertyGetterHandler<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.Base.TypeRef> OnControlRef_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.Base.TypeRef> OnControlRef_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.Base.TypeRef> OnControlRef_PostSetter;
+        public static event PropertyIsValidHandler<Zetbox.App.GUI.ViewDescriptor> OnControlTypeRef_IsValid;
 
-        public static event PropertyIsValidHandler<Zetbox.App.GUI.ViewDescriptor> OnControlRef_IsValid;
+        /// <summary>
+        /// Indicates that the referenced control type is deleted. Descriptors with this flag set require action to finally delete them and handle their users.
+        /// </summary>
+        // value type property
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public bool Deleted
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _Deleted;
+                if (!_isDeletedSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("4b256764-6a40-47cb-a222-242a36e06457"));
+                    if (__p != null) {
+                        _isDeletedSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this._Deleted = (bool)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'ViewDescriptor.Deleted'");
+                    }
+                }
+                if (OnDeleted_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<bool>(__result);
+                    OnDeleted_Getter(this, __e);
+                    __result = _Deleted = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isDeletedSet = true;
+                if (_Deleted != value)
+                {
+                    var __oldValue = _Deleted;
+                    var __newValue = value;
+                    if (OnDeleted_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnDeleted_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("Deleted", __oldValue, __newValue);
+                    _Deleted = __newValue;
+                    NotifyPropertyChanged("Deleted", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnDeleted_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnDeleted_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("Deleted");
+                }
+            }
+        }
+        private bool _Deleted_store;
+        private bool _Deleted {
+            get { return _Deleted_store; }
+            set {
+                ReportEfPropertyChanging("Deleted");
+                _Deleted_store = value;
+                ReportEfPropertyChanged("Deleted");
+            }
+        }
+        private bool _isDeletedSet = false;
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Zetbox.App.GUI.ViewDescriptor, bool> OnDeleted_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.GUI.ViewDescriptor, bool> OnDeleted_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.GUI.ViewDescriptor, bool> OnDeleted_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.GUI.ViewDescriptor> OnDeleted_IsValid;
 
         /// <summary>
         /// Export Guid
@@ -341,7 +394,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
         // fkBackingName=_fk_Module; fkGuidBackingName=_fk_guid_Module;
         // referencedInterface=Zetbox.App.Base.Module; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable
 
@@ -424,62 +477,17 @@ namespace Zetbox.App.GUI
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchModuleAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(this.Module);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
 		public static event PropertyGetterHandler<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.Base.Module> OnModule_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.Base.Module> OnModule_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.Base.Module> OnModule_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.ViewDescriptor> OnModule_IsValid;
-
-        /// <summary>
-        /// A View supports one or more ViewModels
-        /// </summary>
-    /*
-    Relation: FK_ViewDescriptor_supports_ViewModelTypeRefs
-    A: ZeroOrMore ViewDescriptor as ViewDescriptor
-    B: ZeroOrMore TypeRef as ViewModelTypeRefs
-    Preferred Storage: Separate
-    */
-        // collection reference property
-        // Zetbox.DalProvider.Ef.Generator.Templates.Properties.CollectionEntryListProperty
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public ICollection<Zetbox.App.Base.TypeRef> SupportedViewModels
-        {
-            get
-            {
-                if (_SupportedViewModels == null)
-                {
-                    _SupportedViewModels = new BSideCollectionWrapper<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.Base.TypeRef, Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryEfImpl>>(
-                            this,
-                            SupportedViewModelsImpl);
-                }
-                return _SupportedViewModels;
-            }
-        }
-        
-        [EdmRelationshipNavigationProperty("Model", "FK_ViewDescriptor_supports_ViewModelTypeRefs_A", "CollectionEntry")]
-        public EntityCollection<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryEfImpl> SupportedViewModelsImpl
-        {
-            get
-            {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryEfImpl>(
-                        "Model.FK_ViewDescriptor_supports_ViewModelTypeRefs_A",
-                        "CollectionEntry");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
-            }
-        }
-        private BSideCollectionWrapper<Zetbox.App.GUI.ViewDescriptor, Zetbox.App.Base.TypeRef, Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryEfImpl>> _SupportedViewModels;
-        private bool SupportedViewModels_was_eagerLoaded = false;
-
-        public static event PropertyIsValidHandler<Zetbox.App.GUI.ViewDescriptor> OnSupportedViewModels_IsValid;
 
         /// <summary>
         /// Which toolkit provides this View
@@ -574,10 +582,11 @@ namespace Zetbox.App.GUI
             var otherImpl = (ViewDescriptorEfImpl)obj;
             var me = (ViewDescriptor)this;
 
+            me.ControlTypeRef = other.ControlTypeRef;
+            me.Deleted = other.Deleted;
             me.ExportGuid = other.ExportGuid;
             me.Toolkit = other.Toolkit;
             this._fk_ControlKind = otherImpl._fk_ControlKind;
-            this._fk_ControlRef = otherImpl._fk_ControlRef;
             this._fk_Module = otherImpl._fk_Module;
         }
         public override void SetNew()
@@ -594,7 +603,8 @@ namespace Zetbox.App.GUI
             switch (property)
             {
                 case "ControlKind":
-                case "ControlRef":
+                case "ControlTypeRef":
+                case "Deleted":
                 case "ExportGuid":
                 case "Module":
                 case "Toolkit":
@@ -602,18 +612,20 @@ namespace Zetbox.App.GUI
                     break;
             }
         }
+        #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
-        protected override bool ShouldSetModified(string property)
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
         {
-            switch (property)
+            switch(propName)
             {
-                case "SupportedViewModels":
-                    return false;
-                default:
-                    return base.ShouldSetModified(property);
+            case "ControlKind":
+                return TriggerFetchControlKindAsync();
+            case "Module":
+                return TriggerFetchModuleAsync();
+            default:
+                return base.TriggerFetch(propName);
             }
         }
-        #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override void ReloadReferences()
         {
@@ -632,14 +644,6 @@ namespace Zetbox.App.GUI
             else
                 ControlKindImpl = null;
 
-            if (_fk_guid_ControlRef.HasValue)
-                ControlRefImpl = (Zetbox.App.Base.TypeRefEfImpl)Context.FindPersistenceObject<Zetbox.App.Base.TypeRef>(_fk_guid_ControlRef.Value);
-            else
-            if (_fk_ControlRef.HasValue)
-                ControlRefImpl = (Zetbox.App.Base.TypeRefEfImpl)Context.Find<Zetbox.App.Base.TypeRef>(_fk_ControlRef.Value);
-            else
-                ControlRefImpl = null;
-
             if (_fk_guid_Module.HasValue)
                 ModuleImpl = (Zetbox.App.Base.ModuleEfImpl)Context.FindPersistenceObject<Zetbox.App.Base.Module>(_fk_guid_Module.Value);
             else
@@ -647,6 +651,7 @@ namespace Zetbox.App.GUI
                 ModuleImpl = (Zetbox.App.Base.ModuleEfImpl)Context.Find<Zetbox.App.Base.Module>(_fk_Module.Value);
             else
                 ModuleImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();
@@ -671,14 +676,23 @@ namespace Zetbox.App.GUI
                         (obj, val) => obj.ControlKind = val,
 						obj => OnControlKind_IsValid), 
                     // else
-                    new PropertyDescriptorEfImpl<ViewDescriptor, Zetbox.App.Base.TypeRef>(
+                    new PropertyDescriptorEfImpl<ViewDescriptor, string>(
                         lazyCtx,
-                        new Guid("eff6276d-975b-4a0d-bd3c-ad76af2189c3"),
-                        "ControlRef",
+                        new Guid("180968cf-8705-433f-9346-e726c8552737"),
+                        "ControlTypeRef",
                         null,
-                        obj => obj.ControlRef,
-                        (obj, val) => obj.ControlRef = val,
-						obj => OnControlRef_IsValid), 
+                        obj => obj.ControlTypeRef,
+                        (obj, val) => obj.ControlTypeRef = val,
+						obj => OnControlTypeRef_IsValid), 
+                    // else
+                    new PropertyDescriptorEfImpl<ViewDescriptor, bool>(
+                        lazyCtx,
+                        new Guid("4b256764-6a40-47cb-a222-242a36e06457"),
+                        "Deleted",
+                        null,
+                        obj => obj.Deleted,
+                        (obj, val) => obj.Deleted = val,
+						obj => OnDeleted_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<ViewDescriptor, Guid>(
                         lazyCtx,
@@ -697,15 +711,6 @@ namespace Zetbox.App.GUI
                         obj => obj.Module,
                         (obj, val) => obj.Module = val,
 						obj => OnModule_IsValid), 
-                    // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorEfImpl<ViewDescriptor, ICollection<Zetbox.App.Base.TypeRef>>(
-                        lazyCtx,
-                        new Guid("4698cfda-6b1d-4cd7-8350-630a1adab1a8"),
-                        "SupportedViewModels",
-                        null,
-                        obj => obj.SupportedViewModels,
-                        null, // lists are read-only properties
-                        obj => OnSupportedViewModels_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<ViewDescriptor, Zetbox.App.GUI.Toolkit>(
                         lazyCtx,
@@ -779,7 +784,7 @@ namespace Zetbox.App.GUI
         public override void NotifyCreated()
         {
             SetNotInitializedProperty("ControlKind");
-            SetNotInitializedProperty("ControlRef");
+            SetNotInitializedProperty("ControlTypeRef");
             SetNotInitializedProperty("Module");
             SetNotInitializedProperty("Toolkit");
             base.NotifyCreated();
@@ -792,9 +797,7 @@ namespace Zetbox.App.GUI
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_ViewDescriptor != null) OnNotifyDeleting_ViewDescriptor(this);
-            SupportedViewModels.Clear();
             ControlKind = null;
-            ControlRef = null;
             Module = null;
         }
         public static event ObjectEventHandler<ViewDescriptor> OnNotifyDeleting_ViewDescriptor;
@@ -846,13 +849,10 @@ namespace Zetbox.App.GUI
                 var key = r.EntityKey;
                 binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
-            {
-                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.TypeRefEfImpl>("Model.FK_View_has_ControlRef", "ControlRef");
-                var key = r.EntityKey;
-                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
-            }
-            if (auxObjects != null) {
-                auxObjects.Add(ControlRef);
+            binStream.Write(this._ControlTypeRef);
+            binStream.Write(this._isDeletedSet);
+            if (this._isDeletedSet) {
+                binStream.Write(this._Deleted);
             }
             binStream.Write(this._isExportGuidSet);
             if (this._isExportGuidSet) {
@@ -862,19 +862,6 @@ namespace Zetbox.App.GUI
                 var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ModuleEfImpl>("Model.FK_ViewDescriptor_has_Module", "Module");
                 var key = r.EntityKey;
                 binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
-            }
-
-            binStream.Write(eagerLoadLists);
-            if (eagerLoadLists && auxObjects != null)
-            {
-                foreach(var obj in SupportedViewModels)
-                {
-                    auxObjects.Add(obj);
-                }
-				foreach(var relEntry in SupportedViewModelsImpl)
-				{
-					auxObjects.Add(relEntry);
-				}
             }
             binStream.Write((int?)_Toolkit);
         }
@@ -886,14 +873,16 @@ namespace Zetbox.App.GUI
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             binStream.Read(out this._fk_ControlKind);
-            binStream.Read(out this._fk_ControlRef);
+            this._ControlTypeRef = binStream.ReadString();
+            this._isDeletedSet = binStream.ReadBoolean();
+            if (this._isDeletedSet) {
+                this._Deleted = binStream.ReadBoolean();
+            }
             this._isExportGuidSet = binStream.ReadBoolean();
             if (this._isExportGuidSet) {
                 this._ExportGuid = binStream.ReadGuid();
             }
             binStream.Read(out this._fk_Module);
-
-            SupportedViewModels_was_eagerLoaded = binStream.ReadBoolean();
             _Toolkit = (Zetbox.App.GUI.Toolkit)binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
@@ -909,7 +898,9 @@ namespace Zetbox.App.GUI
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(ControlKind != null ? ControlKind.ExportGuid : (Guid?)null, xml, "ControlKind", "Zetbox.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(ControlRef != null ? ControlRef.ExportGuid : (Guid?)null, xml, "ControlRef", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._ControlTypeRef, xml, "ControlTypeRef", "Zetbox.App.GUI");
+            System.Diagnostics.Debug.Assert(this._isDeletedSet, "Exported objects need to have all default values evaluated");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._Deleted, xml, "Deleted", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream((int?)_Toolkit, xml, "Toolkit", "Zetbox.App.GUI");
         }
@@ -922,8 +913,13 @@ namespace Zetbox.App.GUI
             case "Zetbox.App.GUI|ControlKind":
                 this._fk_guid_ControlKind = XmlStreamer.ReadNullableGuid(xml);
                 break;
-            case "Zetbox.App.GUI|ControlRef":
-                this._fk_guid_ControlRef = XmlStreamer.ReadNullableGuid(xml);
+            case "Zetbox.App.GUI|ControlTypeRef":
+                this._ControlTypeRef = XmlStreamer.ReadString(xml);
+                break;
+            case "Zetbox.App.GUI|Deleted":
+                // Import must have default value set
+                this._Deleted = XmlStreamer.ReadBoolean(xml);
+                this._isDeletedSet = true;
                 break;
             case "Zetbox.App.GUI|ExportGuid":
                 // Import must have default value set

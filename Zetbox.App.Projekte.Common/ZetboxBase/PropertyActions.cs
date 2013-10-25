@@ -19,11 +19,18 @@ namespace Zetbox.App.Base
     using System.Linq;
     using System.Text;
     using Zetbox.API;
+    using Zetbox.API.Common;
     using Zetbox.App.Extensions;
 
     [Implementor]
-    public static class PropertyActions
+    public class PropertyActions
     {
+        private static IAssetsManager _assets;
+        public PropertyActions(IAssetsManager assets)
+        {
+            _assets = assets;
+        }
+
         internal static void DecorateElementType(Property obj, MethodReturnEventArgs<string> e, bool isStruct)
         {
             if (obj == null) throw new ArgumentNullException("obj");
@@ -69,6 +76,22 @@ namespace Zetbox.App.Base
         public static void GetLabel(Zetbox.App.Base.Property obj, MethodReturnEventArgs<System.String> e)
         {
             e.Result = !string.IsNullOrEmpty(obj.Label) ? obj.Label : obj.Name;
+
+            if (obj.Module == null || obj.ObjectClass == null)
+                return;
+
+            e.Result = _assets.GetString(obj.Module, ZetboxAssetKeys.ConstructBaseName(obj), ZetboxAssetKeys.ConstructLabelKey(obj), e.Result);
+        }
+
+        [Invocation]
+        public static void GetDescription(Property obj, MethodReturnEventArgs<string> e)
+        {
+            e.Result = obj.Description;
+
+            if (obj.Module == null || obj.ObjectClass == null)
+                return;
+
+            e.Result = _assets.GetString(obj.Module, ZetboxAssetKeys.ConstructBaseName(obj), ZetboxAssetKeys.ConstructDescriptionKey(obj), e.Result);
         }
 
         [Invocation]
@@ -121,9 +144,12 @@ namespace Zetbox.App.Base
             string propType = obj.GetPropertyTypeString();
 
             sb.AppendFormat("[Invocation]\npublic static void {0}_{1}({2} obj, {3}<{4}> e)\n{{\n}}\n\n", "get", obj.Name, type, "PropertyGetterEventArgs", propType);
-            sb.AppendFormat("[Invocation]\npublic static void {0}_{1}({2} obj, {3}<{4}> e)\n{{\n}}\n\n", "preSet", obj.Name, type, "PropertyPreSetterEventArgs", propType);
-            sb.AppendFormat("[Invocation]\npublic static void {0}_{1}({2} obj, {3}<{4}> e)\n{{\n}}\n\n", "postSet", obj.Name, type, "PropertyPostSetterEventArgs", propType);
-            sb.AppendFormat("[Invocation]\npublic static void {0}_{1}({2} obj, {3} e)\n{{\n\te.IsValid = obj.{1} == ...;\n\te.Error = e.IsValid ? string.Empty : \"<Error>\";\n}}\n\n", "isValid", obj.Name, type, "PropertyIsValidEventArgs");
+            if (!obj.IsCalculated())
+            {
+                sb.AppendFormat("[Invocation]\npublic static void {0}_{1}({2} obj, {3}<{4}> e)\n{{\n}}\n\n", "preSet", obj.Name, type, "PropertyPreSetterEventArgs", propType);
+                sb.AppendFormat("[Invocation]\npublic static void {0}_{1}({2} obj, {3}<{4}> e)\n{{\n}}\n\n", "postSet", obj.Name, type, "PropertyPostSetterEventArgs", propType);
+                sb.AppendFormat("[Invocation]\npublic static void {0}_{1}({2} obj, {3} e)\n{{\n\te.IsValid = obj.{1} == ...;\n\te.Error = e.IsValid ? string.Empty : \"<Error>\";\n}}\n\n", "isValid", obj.Name, type, "PropertyIsValidEventArgs");
+            }
 
             e.Result = sb.ToString();
         }

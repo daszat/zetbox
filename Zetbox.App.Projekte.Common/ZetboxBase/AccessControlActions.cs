@@ -20,6 +20,7 @@ namespace Zetbox.App.Base
     using System.Text;
     using Zetbox.App.Extensions;
     using Zetbox.API;
+    using Zetbox.API.Utils;
 
     [Implementor]
     public static class AccessControlActions
@@ -52,15 +53,24 @@ namespace Zetbox.App.Base
                 ObjectClass nextType = obj.ObjectClass;
                 foreach (var rel in role.Relations)
                 {
-                    if (rel.A.Type == nextType)
+                    if (rel == null)
+                    {
+                        // Only during dehydration - fix this call!
+                        continue;
+                    }
+                    if (rel.A != null && rel.A.Type == nextType)
                     {
                         navigators.Add(rel.A.Navigator != null ? rel.A.Navigator.Name : "<?>");
                         nextType = rel.B.Type;
                     }
-                    else if (rel.B.Type == nextType)
+                    else if (rel.B != null && rel.B.Type == nextType)
                     {
                         navigators.Add(rel.B.Navigator != null ? rel.B.Navigator.Name : "<?>");
                         nextType = rel.A.Type;
+                    }
+                    else
+                    {
+                        navigators.Add("<?>");
                     }
                 }
                 e.Result = string.Format("{0} has {1} rights", string.Join(".", navigators), obj.Rights);

@@ -142,7 +142,39 @@ namespace Zetbox.DalProvider.Client
                     switch (e.NodeType)
                     {
                         case ExpressionType.Convert:
-                            return EvaluateToValue(e.Operand);
+                            var result = EvaluateToValue(e.Operand);
+                            // sometimes we manually need to convert, as boxed value types don't convert voluntarily
+                            // when the underlying type is an enum, we have to take care not trying to cast the boxed value directly to Nullable<T>
+                            var t = e.Type;
+                            if (t == typeof(bool)) return (bool)result;
+                            else if (t == typeof(bool?)) return (bool?)result;
+                            else if (t == typeof(byte)) return (byte)result;
+                            else if (t == typeof(byte?)) return result == null ? null : (byte?)(byte)result;
+                            else if (t == typeof(char)) return (char)result;
+                            else if (t == typeof(char?)) return (char?)result;
+                            else if (t == typeof(decimal)) return (decimal)result;
+                            else if (t == typeof(decimal?)) return (decimal?)result;
+                            else if (t == typeof(double)) return (double)result;
+                            else if (t == typeof(double?)) return (double?)result;
+                            // enum  t
+                            else if (t == typeof(float)) return (float)result;
+                            else if (t == typeof(float?)) return (float?)result;
+                            else if (t == typeof(int)) return (int)result;
+                            else if (t == typeof(int?)) return result == null ? null : (int?)(int)result;
+                            else if (t == typeof(long)) return (long)result;
+                            else if (t == typeof(long?)) return result == null ? null : (long?)(long)result;
+                            else if (t == typeof(sbyte)) return (sbyte)result;
+                            else if (t == typeof(sbyte?)) return result == null ? null : (sbyte?)(sbyte)result;
+                            else if (t == typeof(short)) return (short)result;
+                            else if (t == typeof(short?)) return result == null ? null : (short?)(short)result;
+                            // structt
+                            else if (t == typeof(uint)) return (uint)result;
+                            else if (t == typeof(uint?)) return result == null ? null : (uint?)(uint)result;
+                            else if (t == typeof(ulong)) return (ulong)result;
+                            else if (t == typeof(ulong?)) return result == null ? null : (ulong?)(ulong)result;
+                            else if (t == typeof(ushort)) return (ushort)result;
+                            else if (t == typeof(ushort?)) return result == null ? null : (ushort?)(ushort)result;
+                            else return result;
                         case ExpressionType.Decrement:
                             return ((dynamic)(EvaluateToValue(e.Operand))) - 1;
                         case ExpressionType.Increment:
@@ -254,7 +286,9 @@ namespace Zetbox.DalProvider.Client
 
             private object EvaluateMemberAccess(MemberExpression me)
             {
-                var obj = EvaluateToValue(me.Expression);
+                var obj = me.Expression == null
+                    ? null
+                    : EvaluateToValue(me.Expression);
                 var propertyInfo = me.Member as PropertyInfo;
                 if (propertyInfo != null)
                 {

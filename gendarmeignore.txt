@@ -23,11 +23,12 @@ M: System.Linq.Expressions.Expression System.Linq.Dynamic.ExpressionParser::Pars
 M: System.Void Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.AssociationSetAttributes::Generate()
 M: System.Void Zetbox.Client.Presentables.GUI.NavigationSearchScreenViewModel::InitializeListViewModel(Zetbox.Client.Presentables.ZetboxBase.InstanceListViewModel)
 M: Zetbox.Client.Presentables.DtoViewModels.DtoTableViewModel Zetbox.Client.Presentables.DtoViewModels.DtoBuilder::BuildTableFrom(System.Object,System.Reflection.PropertyInfo,System.Object,Zetbox.Client.Presentables.IViewModelDependencies,Zetbox.API.IZetboxContext,Zetbox.Client.Presentables.ViewModel)
-# False positive: calls happen in loops, depending on the loop var
+# False positive: calls happen in loops, depending on the loop var or other aliasing artifacts
 M: System.Void Zetbox.DalProvider.Ef.Generator.Templates.EfModel.ModelCsdl::Generate()
 M: System.Void Zetbox.DalProvider.Ef.Generator.Templates.EfModel.ModelSsdl::Generate()
 M: System.Void Zetbox.Server.SchemaManagement.Cases::DoChangeRelationEndTypes(Zetbox.App.Base.Relation)
 M: System.Void Zetbox.Server.SchemaManagement.Cases::DoChangeTptToTph(Zetbox.App.Base.ObjectClass)
+M: System.Linq.Expressions.Expression Zetbox.API.Server.QueryTranslatorProvider`1::VisitMethodCall(System.Linq.Expressions.MethodCallExpression)
 
 R: Gendarme.Rules.Maintainability.AvoidUnnecessarySpecializationRule
 # This method has a parameter whose type is more specialized than necessary. This can make it difficult to reuse the method in other contexts.
@@ -90,8 +91,16 @@ M: System.Collections.Generic.List`1<Zetbox.API.IDataObject> Zetbox.API.BaseMemo
 M: System.Collections.Generic.List`1<Zetbox.API.IDataObject> Zetbox.API.Server.BaseZetboxDataContext::GetAllHack()
 # Helper method which is only called by reflection from GetParcel
 M: System.Collections.Generic.List`1<Zetbox.API.IDataObject> Zetbox.Server.Server::GetParcelHack(Zetbox.API.Server.IZetboxServerContext,System.Int32,System.Int32)
+M: System.Collections.Generic.List`1<Zetbox.API.IDataObject> Zetbox.API.Server.Fulltext.Rebuilder::GetParcelHack(Zetbox.API.Server.IZetboxServerContext,System.Int32,System.Int32)
 # Helper method which is only called by reflection
 M: Zetbox.API.Async.ZbTask`1<Zetbox.API.IDataObject> Zetbox.DalProvider.Client.ZetboxContextImpl::FindAsyncGenericHelper(System.Int32)
+M: System.Linq.IQueryable`1<T> Zetbox.App.Packaging.Exporter::FetchRelationEntriesA(Zetbox.API.IReadOnlyZetboxContext,System.Int32)
+M: System.Linq.IQueryable`1<T> Zetbox.App.Packaging.Exporter::FetchRelationEntriesB(Zetbox.API.IReadOnlyZetboxContext,System.Int32)
+M: System.Linq.IQueryable`1<T> Zetbox.App.Packaging.Exporter::FetchRelationEntriesAB(Zetbox.API.IReadOnlyZetboxContext,System.Int32)
+M: System.Collections.Generic.List`1<T> Zetbox.DalProvider.Client.ZetboxContextProvider::QueryFromLocalObjects(System.Linq.Expressions.Expression)
+M: System.Linq.IQueryable Zetbox.App.GUI.TagCacheActions::GetUntypedQueryHack(Zetbox.API.IZetboxContext)
+# false positive
+M: System.Linq.Expressions.ParameterExpression Zetbox.API.Server.QueryTranslatorProvider`1::VisitParameter(System.Linq.Expressions.ParameterExpression,System.Type)
 
 # generated code (wpf)
 M: System.Delegate Zetbox.Client.WPF.View.CacheDebuggerDisplay::_CreateDelegate(System.Type,System.String)
@@ -157,7 +166,7 @@ M: System.Boolean Zetbox.DalProvider.Ef.EntityCollectionWrapper`2::Contains(TInt
 M: System.Boolean Zetbox.DalProvider.Ef.EntityCollectionWrapper`2::Remove(TInterface)
 M: System.Void Zetbox.DalProvider.Ef.EntityCollectionWrapper`2::CopyTo(System.Array,System.Int32)
 M: System.Void Zetbox.DalProvider.Ef.EntityListWrapper`2::Insert(System.Int32,TInterface)
-M: System.Void Zetbox.Client.Presentables.ModuleEditor.WorkspaceViewModel::.ctor(Zetbox.Client.Presentables.IViewModelDependencies,Zetbox.API.IZetboxContext,Zetbox.Client.Presentables.ViewModel,System.Func`2<Zetbox.API.Client.ClientIsolationLevel,Zetbox.API.IZetboxContext>)
+M: System.Void Zetbox.Client.Presentables.ModuleEditor.WorkspaceViewModel::.ctor(Zetbox.Client.Presentables.IViewModelDependencies,Zetbox.API.IZetboxContext,Zetbox.Client.Presentables.ViewModel,System.Func`2<Zetbox.API.ContextIsolationLevel,Zetbox.API.IZetboxContext>)
 
 R: Gendarme.Rules.Portability.DoNotHardcodePathsRule
 # Package URIs are FS-independent

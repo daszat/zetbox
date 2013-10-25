@@ -56,7 +56,7 @@ namespace Zetbox.App.Test
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=this.Proxy.ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Test;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -135,6 +135,11 @@ namespace Zetbox.App.Test
         /// <summary>Backing store for ChangedBy's id, used on dehydration only</summary>
         private int? _fk_ChangedBy = null;
 
+
+    public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
 		public static event PropertyGetterHandler<Zetbox.App.Test.SecurityTestChild, Zetbox.App.Base.Identity> OnChangedBy_Getter;
@@ -227,7 +232,7 @@ namespace Zetbox.App.Test
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=this.Proxy.CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Test;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -306,6 +311,11 @@ namespace Zetbox.App.Test
         /// <summary>Backing store for CreatedBy's id, used on dehydration only</summary>
         private int? _fk_CreatedBy = null;
 
+
+    public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
 		public static event PropertyGetterHandler<Zetbox.App.Test.SecurityTestChild, Zetbox.App.Base.Identity> OnCreatedBy_Getter;
@@ -398,7 +408,7 @@ namespace Zetbox.App.Test
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Identity
         // fkBackingName=this.Proxy.Identity; fkGuidBackingName=_fk_guid_Identity;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Test;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -477,6 +487,11 @@ namespace Zetbox.App.Test
         /// <summary>Backing store for Identity's id, used on dehydration only</summary>
         private int? _fk_Identity = null;
 
+
+    public Zetbox.API.Async.ZbTask TriggerFetchIdentityAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.Identity);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Identity
 		public static event PropertyGetterHandler<Zetbox.App.Test.SecurityTestChild, Zetbox.App.Base.Identity> OnIdentity_Getter;
@@ -652,6 +667,11 @@ namespace Zetbox.App.Test
         private int? _fk_Parent = null;
 
 
+    public Zetbox.API.Async.ZbTask TriggerFetchParentAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Test.SecurityTestParent>(this.Parent);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
 		public static event PropertyGetterHandler<Zetbox.App.Test.SecurityTestChild, Zetbox.App.Test.SecurityTestParent> OnParent_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Test.SecurityTestChild, Zetbox.App.Test.SecurityTestParent> OnParent_PreSetter;
@@ -818,6 +838,23 @@ namespace Zetbox.App.Test
             base.Recalculate(property);
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            case "Identity":
+                return TriggerFetchIdentityAsync();
+            case "Parent":
+                return TriggerFetchParentAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {
@@ -1091,6 +1128,12 @@ namespace Zetbox.App.Test
                  __currentAccessRights |= secRight != null ? (Zetbox.API.AccessRights)secRight.Right : Zetbox.API.AccessRights.None; 
              } 
              return __currentAccessRights.Value; }
+        }
+
+        protected override void ResetCurrentAccessRights()
+        {
+                base.ResetCurrentAccessRights();
+                __currentAccessRights = null;
         }
 
 

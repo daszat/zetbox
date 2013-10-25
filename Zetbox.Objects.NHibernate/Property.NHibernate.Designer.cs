@@ -115,7 +115,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=this.Proxy.ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -194,6 +194,11 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for ChangedBy's id, used on dehydration only</summary>
         private int? _fk_ChangedBy = null;
 
+
+    public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
 		public static event PropertyGetterHandler<Zetbox.App.Base.Property, Zetbox.App.Base.Identity> OnChangedBy_Getter;
@@ -366,6 +371,12 @@ namespace Zetbox.App.Base
         private OneNRelationList<Zetbox.App.Base.Constraint> _Constraints;
         private List<int> ConstraintsIds;
         private bool Constraints_was_eagerLoaded = false;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchConstraintsAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.Constraint>>(this.Constraints);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConstraints_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.Property> OnConstraints_IsValid;
@@ -376,7 +387,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=this.Proxy.CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -455,6 +466,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         /// <summary>Backing store for CreatedBy's id, used on dehydration only</summary>
         private int? _fk_CreatedBy = null;
 
+
+    public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
 		public static event PropertyGetterHandler<Zetbox.App.Base.Property, Zetbox.App.Base.Identity> OnCreatedBy_Getter;
@@ -540,6 +556,64 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
 		public static event PropertyPostSetterHandler<Zetbox.App.Base.Property, DateTime> OnCreatedOn_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.Property> OnCreatedOn_IsValid;
+
+        /// <summary>
+        /// Properties that have a priority set are used to order instance lists. Smaller values are sorted first.
+        /// </summary>
+
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        public int? DefaultSortPriority
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = Proxy.DefaultSortPriority;
+                if (OnDefaultSortPriority_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<int?>(__result);
+                    OnDefaultSortPriority_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (Proxy.DefaultSortPriority != value)
+                {
+                    var __oldValue = Proxy.DefaultSortPriority;
+                    var __newValue = value;
+                    if (OnDefaultSortPriority_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<int?>(__oldValue, __newValue);
+                        OnDefaultSortPriority_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("DefaultSortPriority", __oldValue, __newValue);
+                    Proxy.DefaultSortPriority = __newValue;
+                    NotifyPropertyChanged("DefaultSortPriority", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnDefaultSortPriority_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<int?>(__oldValue, __newValue);
+                        OnDefaultSortPriority_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("DefaultSortPriority");
+                }
+            }
+        }
+
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<Zetbox.App.Base.Property, int?> OnDefaultSortPriority_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.Property, int?> OnDefaultSortPriority_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.Property, int?> OnDefaultSortPriority_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Base.Property> OnDefaultSortPriority_IsValid;
 
         /// <summary>
         /// Property can have a default value
@@ -644,6 +718,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
 
         /// <summary>Backing store for DefaultValue's guid, used on import only</summary>
         private Guid? _fk_guid_DefaultValue = null;
+
+    public Zetbox.API.Async.ZbTask TriggerFetchDefaultValueAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.DefaultPropertyValue>(this.DefaultValue);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultValue
 		public static event PropertyGetterHandler<Zetbox.App.Base.Property, Zetbox.App.Base.DefaultPropertyValue> OnDefaultValue_Getter;
@@ -950,6 +1029,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         /// <summary>Backing store for FilterConfiguration's guid, used on import only</summary>
         private Guid? _fk_guid_FilterConfiguration = null;
 
+    public Zetbox.API.Async.ZbTask TriggerFetchFilterConfigurationAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.PropertyFilterConfiguration>(this.FilterConfiguration);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for FilterConfiguration
 		public static event PropertyGetterHandler<Zetbox.App.Base.Property, Zetbox.App.GUI.PropertyFilterConfiguration> OnFilterConfiguration_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.Property, Zetbox.App.GUI.PropertyFilterConfiguration> OnFilterConfiguration_PreSetter;
@@ -1021,7 +1105,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
         // fkBackingName=this.Proxy.Module; fkGuidBackingName=_fk_guid_Module;
         // referencedInterface=Zetbox.App.Base.Module; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -1102,6 +1186,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
 
         /// <summary>Backing store for Module's guid, used on import only</summary>
         private Guid? _fk_guid_Module = null;
+
+    public Zetbox.API.Async.ZbTask TriggerFetchModuleAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(this.Module);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
 		public static event PropertyGetterHandler<Zetbox.App.Base.Property, Zetbox.App.Base.Module> OnModule_Getter;
@@ -1279,6 +1368,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         /// <summary>Backing store for ObjectClass's guid, used on import only</summary>
         private Guid? _fk_guid_ObjectClass = null;
 
+    public Zetbox.API.Async.ZbTask TriggerFetchObjectClassAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.DataType>(this.ObjectClass);
+    }
+
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
         public virtual int? Properties_pos
         {
@@ -1322,7 +1416,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedKind
         // fkBackingName=this.Proxy.RequestedKind; fkGuidBackingName=_fk_guid_RequestedKind;
         // referencedInterface=Zetbox.App.GUI.ControlKind; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -1404,6 +1498,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         /// <summary>Backing store for RequestedKind's guid, used on import only</summary>
         private Guid? _fk_guid_RequestedKind = null;
 
+    public Zetbox.API.Async.ZbTask TriggerFetchRequestedKindAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(this.RequestedKind);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedKind
 		public static event PropertyGetterHandler<Zetbox.App.Base.Property, Zetbox.App.GUI.ControlKind> OnRequestedKind_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.Property, Zetbox.App.GUI.ControlKind> OnRequestedKind_PreSetter;
@@ -1475,7 +1574,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ValueModelDescriptor
         // fkBackingName=this.Proxy.ValueModelDescriptor; fkGuidBackingName=_fk_guid_ValueModelDescriptor;
         // referencedInterface=Zetbox.App.GUI.ViewModelDescriptor; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -1557,12 +1656,81 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         /// <summary>Backing store for ValueModelDescriptor's guid, used on import only</summary>
         private Guid? _fk_guid_ValueModelDescriptor = null;
 
+    public Zetbox.API.Async.ZbTask TriggerFetchValueModelDescriptorAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor>(this.ValueModelDescriptor);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ValueModelDescriptor
 		public static event PropertyGetterHandler<Zetbox.App.Base.Property, Zetbox.App.GUI.ViewModelDescriptor> OnValueModelDescriptor_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.Property, Zetbox.App.GUI.ViewModelDescriptor> OnValueModelDescriptor_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.Base.Property, Zetbox.App.GUI.ViewModelDescriptor> OnValueModelDescriptor_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.Property> OnValueModelDescriptor_IsValid;
+
+        /// <summary>
+        /// Returns the translated description
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetDescription_Property")]
+        public virtual string GetDescription()
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetDescription_Property != null)
+            {
+                OnGetDescription_Property(this, e);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on Property.GetDescription");
+            }
+            return e.Result;
+        }
+        public delegate void GetDescription_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+        public static event GetDescription_Handler<Property> OnGetDescription_Property;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<Property> OnGetDescription_Property_CanExec;
+
+        [EventBasedMethod("OnGetDescription_Property_CanExec")]
+        public virtual bool GetDescriptionCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetDescription_Property_CanExec != null)
+				{
+					OnGetDescription_Property_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Property> OnGetDescription_Property_CanExecReason;
+
+        [EventBasedMethod("OnGetDescription_Property_CanExecReason")]
+        public virtual string GetDescriptionCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetDescription_Property_CanExecReason != null)
+				{
+					OnGetDescription_Property_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// The element type for multi-valued properties. The property type string in all other cases.
@@ -1899,6 +2067,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             me.CategoryTags = other.CategoryTags;
             me.ChangedOn = other.ChangedOn;
             me.CreatedOn = other.CreatedOn;
+            me.DefaultSortPriority = other.DefaultSortPriority;
             me.Description = other.Description;
             me.DisableExport = other.DisableExport;
             me.ExportGuid = other.ExportGuid;
@@ -1998,6 +2167,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 case "ChangedOn":
                 case "CreatedBy":
                 case "CreatedOn":
+                case "DefaultSortPriority":
                 case "DefaultValue":
                 case "Description":
                 case "DisableExport":
@@ -2042,6 +2212,33 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "Constraints":
+                return TriggerFetchConstraintsAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            case "DefaultValue":
+                return TriggerFetchDefaultValueAsync();
+            case "FilterConfiguration":
+                return TriggerFetchFilterConfigurationAsync();
+            case "Module":
+                return TriggerFetchModuleAsync();
+            case "ObjectClass":
+                return TriggerFetchObjectClassAsync();
+            case "RequestedKind":
+                return TriggerFetchRequestedKindAsync();
+            case "ValueModelDescriptor":
+                return TriggerFetchValueModelDescriptorAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {
@@ -2186,6 +2383,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                         obj => obj.CreatedOn,
                         (obj, val) => obj.CreatedOn = val,
 						obj => OnCreatedOn_IsValid), 
+                    // else
+                    new PropertyDescriptorNHibernateImpl<Property, int?>(
+                        lazyCtx,
+                        new Guid("38d94cbf-17d3-407e-8738-1c97892204b1"),
+                        "DefaultSortPriority",
+                        null,
+                        obj => obj.DefaultSortPriority,
+                        (obj, val) => obj.DefaultSortPriority = val,
+						obj => OnDefaultSortPriority_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<Property, Zetbox.App.Base.DefaultPropertyValue>(
                         lazyCtx,
@@ -2374,6 +2580,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             SetNotInitializedProperty("CategoryTags");
             SetNotInitializedProperty("ChangedBy");
             SetNotInitializedProperty("CreatedBy");
+            SetNotInitializedProperty("DefaultSortPriority");
             SetNotInitializedProperty("DefaultValue");
             SetNotInitializedProperty("Description");
             SetNotInitializedProperty("DisableExport");
@@ -2414,13 +2621,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             }
             // FK_Property_has_DefaultValue
             if (DefaultValue != null) {
-                ((NHibernatePersistenceObject)DefaultValue).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)DefaultValue);
+                ((NHibernatePersistenceObject)DefaultValue).ParentsToDelete.Add(this);
+                ChildrenToDelete.Add((NHibernatePersistenceObject)DefaultValue);
             }
             // FK_Property_Has_PropertyFilterConfiguration
             if (FilterConfiguration != null) {
-                ((NHibernatePersistenceObject)FilterConfiguration).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)FilterConfiguration);
+                ((NHibernatePersistenceObject)FilterConfiguration).ParentsToDelete.Add(this);
+                ChildrenToDelete.Add((NHibernatePersistenceObject)FilterConfiguration);
             }
             // FK_Property_has_ValueModelDescriptor
             if (ValueModelDescriptor != null) {
@@ -2484,6 +2691,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             public virtual Zetbox.App.Base.IdentityNHibernateImpl.IdentityProxy CreatedBy { get; set; }
 
             public virtual DateTime CreatedOn { get; set; }
+
+            public virtual int? DefaultSortPriority { get; set; }
 
             public virtual Zetbox.App.Base.DefaultPropertyValueNHibernateImpl.DefaultPropertyValueProxy DefaultValue { get; set; }
 
@@ -2553,6 +2762,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             if (this._isCreatedOnSet) {
                 binStream.Write(this.Proxy.CreatedOn);
             }
+            binStream.Write(this.Proxy.DefaultSortPriority);
             binStream.Write(this.Proxy.DefaultValue != null ? OurContext.GetIdFromProxy(this.Proxy.DefaultValue) : (int?)null);
             binStream.Write(this.Proxy.Description);
             binStream.Write(this.Proxy.DisableExport);
@@ -2604,6 +2814,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             if (this._isCreatedOnSet) {
                 this.Proxy.CreatedOn = binStream.ReadDateTime();
             }
+            this.Proxy.DefaultSortPriority = binStream.ReadNullableInt32();
             binStream.Read(out this._fk_DefaultValue);
             this.Proxy.Description = binStream.ReadString();
             this.Proxy.DisableExport = binStream.ReadNullableBoolean();
@@ -2639,6 +2850,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.CodeTemplate, xml, "CodeTemplate", "Zetbox.App.Base");
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.DefaultSortPriority, xml, "DefaultSortPriority", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.DefaultValue != null ? this.Proxy.DefaultValue.ExportGuid : (Guid?)null, xml, "DefaultValue", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.Description, xml, "Description", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.DisableExport, xml, "DisableExport", "Zetbox.App.Base");
@@ -2673,6 +2885,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 // Import must have default value set
                 this.Proxy.CreatedOn = XmlStreamer.ReadDateTime(xml);
                 this._isCreatedOnSet = true;
+                break;
+            case "Zetbox.App.Base|DefaultSortPriority":
+                this.Proxy.DefaultSortPriority = XmlStreamer.ReadNullableInt32(xml);
                 break;
             case "Zetbox.App.Base|DefaultValue":
                 this._fk_guid_DefaultValue = XmlStreamer.ReadNullableGuid(xml);

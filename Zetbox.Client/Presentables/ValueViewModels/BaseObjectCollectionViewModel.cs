@@ -561,13 +561,13 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         protected void EnsureValueCache()
         {
-            GetValueFromModel().Wait();
+            GetValueFromModelAsync().Wait();
         }
 
         ReadOnlyObservableProjectedList<IDataObject, DataObjectViewModel> _valueCache;
-        SortedWrapper _wrapper;
+        SortedWrapper<IDataObject> _wrapper;
         private ZbTask<IReadOnlyObservableList<DataObjectViewModel>> _fetchValueTask;
-        protected override ZbTask<IReadOnlyObservableList<DataObjectViewModel>> GetValueFromModel()
+        protected override ZbTask<IReadOnlyObservableList<DataObjectViewModel>> GetValueFromModelAsync()
         {
             if (_fetchValueTask == null)
             {
@@ -575,7 +575,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 _fetchValueTask = new ZbTask<IReadOnlyObservableList<DataObjectViewModel>>(ObjectCollectionModel.GetValueAsync())
                     .OnResult(t =>
                     {
-                        _wrapper = new SortedWrapper(ObjectCollectionModel.Value, ReferencedClass.GetDescribedInterfaceType(), ObjectCollectionModel, InitialSortProperty);
+                        _wrapper = new SortedWrapper<IDataObject>(ObjectCollectionModel.Value, ReferencedClass.GetDescribedInterfaceType(), ObjectCollectionModel, InitialSortProperty);
                         _valueCache = new ReadOnlyObservableProjectedList<IDataObject, DataObjectViewModel>(
                             _wrapper,
                             obj => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj),
@@ -603,7 +603,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                GetValueFromModel().Wait();
+                GetValueFromModelAsync().Wait();
                 return _valueCache;
             }
             set
@@ -616,8 +616,12 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                GetValueFromModel();
+                GetValueFromModelAsync();
                 return _valueCache;
+            }
+            set
+            {
+                throw new NotSupportedException();
             }
         }
 
@@ -725,7 +729,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 if (!_proxyInstancesLoading)
                 {
                     _proxyInstancesLoading = true;
-                    GetValueFromModel()
+                    GetValueFromModelAsync()
                         .OnResult(t =>
                         {
                             _proxyInstances = new BaseObjectCollectionViewModelProxyList(

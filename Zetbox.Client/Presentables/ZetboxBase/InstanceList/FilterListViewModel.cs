@@ -16,18 +16,19 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Collections.Specialized;
     using System.Linq;
     using System.Text;
-    using Zetbox.Client.Presentables;
     using Zetbox.API;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
-    using Zetbox.Client.Presentables.FilterViewModels;
-    using Zetbox.Client.Models;
-    using System.Collections.Specialized;
-    using System.Collections.ObjectModel;
     using Zetbox.App.GUI;
+    using Zetbox.Client.Models;
+    using Zetbox.Client.Presentables;
+    using Zetbox.Client.Presentables.FilterViewModels;
+    using Zetbox.API.Client;
 
     [ViewModelDescriptor]
     public class FilterListViewModel : ViewModel
@@ -35,16 +36,33 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         public new delegate FilterListViewModel Factory(IZetboxContext dataCtx, ViewModel parent, ObjectClass type);
 
         private ObjectClass _type;
+        private IFulltextSupport _fulltextSupport;
 
-        public FilterListViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, ObjectClass type)
+        public FilterListViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, ObjectClass type, IFulltextSupport fulltextSupport = null)
             : base(appCtx, dataCtx, parent)
         {
+            if (type == null) throw new ArgumentNullException("type");
+
             _type = type;
+            _fulltextSupport = fulltextSupport;
         }
 
         public override string Name
         {
             get { return FilterListViewModelResources.Name; }
+        }
+
+        private bool? _hasFulltextSupportCache;
+        public bool HasFulltextSupport
+        {
+            get
+            {
+                if (_hasFulltextSupportCache == null)
+                {
+                    _hasFulltextSupportCache = _fulltextSupport != null && _fulltextSupport.HasIndexedFields(_type);
+                }
+                return _hasFulltextSupportCache.Value;
+            }
         }
 
         private bool _enableAutoFilter = true;
@@ -150,6 +168,27 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
+        private void UpdateExclusiveFilter()
+        {
+            if (_FilterViewModels != null)
+            {
+                var isExclusiveFilterActive = IsExclusiveFilterActive;
+                foreach (var vm in _FilterViewModels)
+                {
+                    vm.IsEnabled = isExclusiveFilterActive == false // no exclusive Filter set, enable all other
+                               || (vm.Filter.IsExclusiveFilter && vm.Filter.Enabled && vm.IsEnabled);
+                }
+            }
+        }
+
+        public bool IsExclusiveFilterActive
+        {
+            get
+            {
+                return _FilterViewModels != null && _FilterViewModels.Any(f => f.Filter.IsExclusiveFilter && f.Filter.Enabled);
+            }
+        }
+
         public bool HasUserFilter
         {
             get
@@ -163,7 +202,16 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             get
             {
-                return RespectRequiredFilter && Filter.Count(f => !f.Enabled && f.Required) > 0;
+                return RespectRequiredFilter && Filter.Any(f => !f.Enabled && f.Required);
+            }
+        }
+
+        public bool IsFilterValid
+        {
+            get
+            {
+                return IsExclusiveFilterActive
+                    || !RequiredFilterMissing;
             }
         }
 
@@ -210,9 +258,13 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         }
                     }
 
-                    if (_filter.Count == 0)
+                    if (HasFulltextSupport)
                     {
-                        // Add default ToString Filter only if there is no filter configuration
+                        AddFilter(new FulltextFilterModel(FrozenContext));
+                    }
+                    else if (_filter.Count == 0)
+                    {
+                        // Add default ToString Filter only if there is no filter configuration & no fulltext filter can be applied
                         AddFilter(new ToStringFilterModel(FrozenContext));
                     }
 
@@ -266,36 +318,25 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             if (mdl is IUIFilterModel)
             {
                 var uimdl = (IUIFilterModel)mdl;
-                
+
                 var vmdl = FilterViewModel.Fetch(ViewModelFactory, DataContext, this, uimdl);
                 vmdl.RequestedKind = uimdl.RequestedKind;
                 vmdl.RespectRequiredFilter = RespectRequiredFilter;
-                
+
                 var levmdl = FilterListEntryViewModel.Fetch(ViewModelFactory, DataContext, this, vmdl);
                 levmdl.IsUserFilter = allowRemove;
                 levmdl.SourceProperties = sourceProperties;
 
                 // attach change events
-                uimdl.FilterChanged += new EventHandler(delegate(object s, EventArgs a)
-                {
-                    var f = s as FilterModel;
-                    if (f == null || !f.RefreshOnFilterChanged) return;
-
-                    if (f.IsServerSideFilter)
-                    {
-                        OnExecuteFilter();
-                    }
-                    else
-                    {
-                        OnExecutePostFilter();
-                    }
-                });
+                uimdl.FilterChanged += OnUIFilterChanged;
 
                 _FilterViewModels.Add(vmdl);
                 _FilterListEntryViewModels.Add(levmdl);
             }
-            if(allowRemove) UpdateRespectRequieredFilter();
+            if (allowRemove) UpdateRespectRequieredFilter();
+            UpdateExclusiveFilter();
 
+            OnPropertyChanged("IsExclusiveFilterActive");
             OnPropertyChanged("RespectRequiredFilter");
             OnPropertyChanged("HasUserFilter");
             OnPropertyChanged("Filter");
@@ -317,7 +358,9 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 _FilterListEntryViewModels.Remove(levmdl);
             }
             UpdateRespectRequieredFilter();
+            UpdateExclusiveFilter();
 
+            OnPropertyChanged("IsExclusiveFilterActive");
             OnPropertyChanged("RespectRequiredFilter");
             OnPropertyChanged("HasUserFilter");
             OnPropertyChanged("ShowFilter");
@@ -325,6 +368,27 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             OnPropertyChanged("FilterViewModels");
             OnPropertyChanged("FilterListEntryViewModels");
             return true;
+        }
+
+        private void OnUIFilterChanged(object sender, EventArgs e)
+        {
+            var filter = sender as FilterModel;
+            if (filter == null) return;
+
+            UpdateExclusiveFilter();
+            OnPropertyChanged("IsExclusiveFilterActive");
+
+            if (filter.RefreshOnFilterChanged)
+            {
+                if (filter.IsServerSideFilter)
+                {
+                    OnExecuteFilter();
+                }
+                else
+                {
+                    OnExecutePostFilter();
+                }
+            }
         }
 
         public event EventHandler ExecutePostFilter;
@@ -359,7 +423,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         InstanceListViewModelResources.AddFilterCommand,
                         InstanceListViewModelResources.AddFilterCommand_Tooltip,
                         AddFilter,
-                        () => AllowFilter && AllowUserFilter, 
+                        () => AllowFilter && AllowUserFilter,
                         null);
                     _AddFilterCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext));
                 }

@@ -25,7 +25,7 @@ namespace Zetbox.Client.Presentables.Calendar
     using Zetbox.Client.Presentables;
 
     [ViewModelDescriptor]
-    public class WorkScheduleRuleInstanceViewModel : ViewModel, IAppointmentViewModel
+    public class WorkScheduleRuleInstanceViewModel : ViewModel
     {
         public new delegate WorkScheduleRuleInstanceViewModel Factory(IZetboxContext dataCtx, ViewModel parent, WorkScheduleRule rule, DateTime dt);
 
@@ -42,54 +42,6 @@ namespace Zetbox.Client.Presentables.Calendar
         public override string Name
         {
             get { return Rule.Name; }
-        }
-
-        string IAppointmentViewModel.Subject
-        {
-            get { return Rule.Name; }
-        }
-
-        string IAppointmentViewModel.SubjectAsync
-        {
-            get { return Rule.Name; }
-        }
-
-        DateTime IAppointmentViewModel.From
-        {
-            get { return Date; }
-        }
-
-        DateTime IAppointmentViewModel.Until
-        {
-            get { return Date.AddDays(1); }
-        }
-
-        string IAppointmentViewModel.Location
-        {
-            get { return string.Empty; }
-        }
-
-        string IAppointmentViewModel.Body
-        {
-            get { return string.Empty; }
-        }
-
-        private string _color;
-        string IAppointmentViewModel.Color
-        {
-            get { return !string.IsNullOrEmpty(_color) ? _color : "#00FF00"; }
-            set { _color = value; OnPropertyChanged("Color"); }
-        }
-
-        event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
-        {
-            add { } // does not change
-            remove { } // does not change
-        }
-
-        public ControlKind RequestedCalendarKind
-        {
-            get { return null; } // default
         }
     }
 }

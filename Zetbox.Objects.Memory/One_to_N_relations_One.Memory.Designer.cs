@@ -136,21 +136,27 @@ namespace Zetbox.App.Test
                     serverList = new List<Zetbox.App.Test.One_to_N_relations_N>();
                 });
             }
-    
+
             _triggerFetchNSideTask.OnResult(t =>
             {
                 _NSide = new OneNRelationList<Zetbox.App.Test.One_to_N_relations_N>(
                     "OneSide",
                     null,
                     this,
-                    () => { this.NotifyPropertyChanged("NSide", null, null); if(OnNSide_PostSetter != null && IsAttached) OnNSide_PostSetter(this); },
-                    serverList);    
+                    OnNSideCollectionChanged,
+                    serverList);
             });
-            return _triggerFetchNSideTask;    
+            return _triggerFetchNSideTask;
         }
-    
-        private OneNRelationList<Zetbox.App.Test.One_to_N_relations_N> _NSide;
 
+        internal void OnNSideCollectionChanged()
+        {
+            NotifyPropertyChanged("NSide", null, null);
+            if (OnNSide_PostSetter != null && IsAttached)
+                OnNSide_PostSetter(this);
+        }
+
+        private OneNRelationList<Zetbox.App.Test.One_to_N_relations_N> _NSide;
 public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relations_One> OnNSide_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.One_to_N_relations_One> OnNSide_IsValid;
@@ -220,6 +226,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relation
             base.ReloadReferences();
 
             // fix direct object references
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

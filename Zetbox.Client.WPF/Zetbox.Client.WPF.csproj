@@ -166,27 +166,47 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Calendar\CalendarAllDay.xaml">
+    <Page Include="View\Calendar\EventEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Calendar\CalendarDay.xaml">
+    <Page Include="View\Calendar\NewEventDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Calendar\EventInputEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Calendar\NextEventsSummaryDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Calendar\WeekCalendar\CalendarAllDay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Calendar\WeekCalendar\CalendarDay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Calendar\CalendarWorkspaceDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Calendar\WorkScheduleRuleInstanceDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Calendar\WeekCalendar.xaml">
+    <Page Include="View\Calendar\WeekCalendar\WeekCalendar.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Calendar\CalendarDayHeader.xaml">
+    <Page Include="View\Calendar\WeekCalendar\CalendarDayHeader.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Calendar\CalendarLedger.xaml">
+    <Page Include="View\Calendar\WeekCalendar\CalendarLedger.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -238,9 +258,41 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\PasswordDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TestModule\EventTestInputEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\TestModule\InstanceListTestDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ZetboxBase\CompoundCollectionEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ZetboxBase\CompoundCollectionGridEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ZetboxBase\CompoundListEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TestModule\NextEventsTestNavScreenDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ZetboxBase\TagPropertyEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ZetboxBase\RecurrenceRulePropertyEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\ZetboxBase\InstanceList\InstanceListToolBar.xaml">
       <SubType>Designer</SubType>
@@ -541,7 +593,9 @@
     <Compile Include="App.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App.Fixes.cs" />
+    <Compile Include="App.Fixes.cs">
+      <DependentUpon>App.cs</DependentUpon>
+    </Compile>
     <Compile Include="DebugConsole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -564,8 +618,23 @@
     <Compile Include="StartupScreen.xaml.cs">
       <DependentUpon>StartupScreen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Calendar\CalendarAllDay.xaml.cs">
+    <Compile Include="View\Calendar\EventEditor.xaml.cs">
+      <DependentUpon>EventEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Calendar\NewEventDialog.xaml.cs">
+      <DependentUpon>NewEventDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Calendar\EventInputEditor.xaml.cs">
+      <DependentUpon>EventInputEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Calendar\NextEventsSummaryDisplay.xaml.cs">
+      <DependentUpon>NextEventsSummaryDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Calendar\WeekCalendar\CalendarAllDay.xaml.cs">
       <DependentUpon>CalendarAllDay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Calendar\CalendarWorkspaceDisplay.xaml.cs">
+      <DependentUpon>CalendarWorkspaceDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Calendar\WorkScheduleRuleInstanceDisplay.xaml.cs">
       <DependentUpon>WorkScheduleRuleInstanceDisplay.xaml</DependentUpon>
@@ -611,11 +680,41 @@
     <Compile Include="View\ModuleEditor\DiagramDisplay.xaml.cs">
       <DependentUpon>DiagramDisplay.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\PasswordDialog.xaml.cs">
+      <DependentUpon>PasswordDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PasswordDialogResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PasswordDialogResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="View\TestModule\EventTestInputEditor.xaml.cs">
+      <DependentUpon>EventTestInputEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\TestModule\InstanceListTestDisplay.xaml.cs">
       <DependentUpon>InstanceListTestDisplay.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\TestModule\NextEventsTestNavScreenDisplay.xaml.cs">
+      <DependentUpon>NextEventsTestNavScreenDisplay.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ZetboxBase\ActionDisplay.cs" />
     <Compile Include="View\ZetboxBase\CommandDisplay.cs" />
+    <Compile Include="View\ZetboxBase\CompoundCollectionEditor.xaml.cs">
+      <DependentUpon>CompoundCollectionEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ZetboxBase\CompoundCollectionGridEditor.xaml.cs">
+      <DependentUpon>CompoundCollectionGridEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ZetboxBase\CompoundListEditor.xaml.cs">
+      <DependentUpon>CompoundListEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ZetboxBase\TagPropertyEditor.xaml.cs">
+      <DependentUpon>TagPropertyEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ZetboxBase\NullableEMailTextBoxEditor.cs" />
+    <Compile Include="View\ZetboxBase\RecurrenceRulePropertyEditor.xaml.cs">
+      <DependentUpon>RecurrenceRulePropertyEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ZetboxBase\DataObjectLineDisplay.cs" />
     <Compile Include="View\ZetboxBase\EnumSelectionView.cs" />
     <Compile Include="View\ZetboxBase\InstanceList\InstanceListToolBar.xaml.cs">
@@ -660,16 +759,16 @@
     <Compile Include="View\CacheDebuggerDisplay.xaml.cs">
       <DependentUpon>CacheDebuggerDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Calendar\CalendarDay.xaml.cs">
+    <Compile Include="View\Calendar\WeekCalendar\CalendarDay.xaml.cs">
       <DependentUpon>CalendarDay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Calendar\CalendarDayHeader.xaml.cs">
+    <Compile Include="View\Calendar\WeekCalendar\CalendarDayHeader.xaml.cs">
       <DependentUpon>CalendarDayHeader.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Calendar\CalendarLedger.xaml.cs">
+    <Compile Include="View\Calendar\WeekCalendar\CalendarLedger.xaml.cs">
       <DependentUpon>CalendarLedger.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Calendar\WeekCalendar.xaml.cs">
+    <Compile Include="View\Calendar\WeekCalendar\WeekCalendar.xaml.cs">
       <DependentUpon>WeekCalendar.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SimpleDataObjectEditorDialog.xaml.cs">
@@ -827,6 +926,11 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\PasswordDialogResources.de.resx" />
+    <EmbeddedResource Include="View\PasswordDialogResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>PasswordDialogResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="WpfToolkitResources.de.resx" />
     <EmbeddedResource Include="WpfToolkitResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -929,6 +1033,13 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\printer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Users.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Favorites.png" />
+    <Resource Include="Images\FavoritesDisabled.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

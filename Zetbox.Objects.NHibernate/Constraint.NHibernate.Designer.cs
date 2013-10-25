@@ -22,7 +22,7 @@ namespace Zetbox.App.Base
     /// 
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("Constraint")]
-    public class ConstraintNHibernateImpl : Zetbox.DalProvider.NHibernate.DataObjectNHibernateImpl, Constraint, Zetbox.API.IExportableInternal
+    public abstract class ConstraintNHibernateImpl : Zetbox.DalProvider.NHibernate.DataObjectNHibernateImpl, Constraint, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("ac1d5ac9-d909-438f-a4f5-f64ea6904944");
         public override Guid ObjectClassID { get { return _objectClassID; } }
@@ -57,7 +57,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=this.Proxy.ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -136,6 +136,11 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for ChangedBy's id, used on dehydration only</summary>
         private int? _fk_ChangedBy = null;
 
+
+    public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
 		public static event PropertyGetterHandler<Zetbox.App.Base.Constraint, Zetbox.App.Base.Identity> OnChangedBy_Getter;
@@ -333,6 +338,11 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for ConstrainedProperty's guid, used on import only</summary>
         private Guid? _fk_guid_ConstrainedProperty = null;
 
+    public Zetbox.API.Async.ZbTask TriggerFetchConstrainedPropertyAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Property>(this.ConstrainedProperty);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ConstrainedProperty
 		public static event PropertyGetterHandler<Zetbox.App.Base.Constraint, Zetbox.App.Base.Property> OnConstrainedProperty_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.Constraint, Zetbox.App.Base.Property> OnConstrainedProperty_PreSetter;
@@ -346,7 +356,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=this.Proxy.CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -425,6 +435,11 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for CreatedBy's id, used on dehydration only</summary>
         private int? _fk_CreatedBy = null;
 
+
+    public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
 		public static event PropertyGetterHandler<Zetbox.App.Base.Constraint, Zetbox.App.Base.Identity> OnCreatedBy_Getter;
@@ -857,6 +872,21 @@ namespace Zetbox.App.Base
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "ConstrainedProperty":
+                return TriggerFetchConstrainedPropertyAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

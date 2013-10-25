@@ -59,12 +59,19 @@ namespace Zetbox.Generator.InterfaceTemplates.CollectionEntries
             return rel.GetRelationClassName();
         }
 
+        protected virtual bool IsExportable()
+        {
+            return rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable();
+        }
+
         protected override string GetCeInterface()
         {
-            return String.Format("{0}<{1}, {2}>",
+            var ceInterface = String.Format("{0}<{1}, {2}>",
                 IsOrdered() ? "IRelationListEntry" : "IRelationEntry",
                 rel.A.Type.Name,
                 rel.B.Type.Name);
+
+            return ceInterface + (IsExportable() ? ", Zetbox.App.Base.IExportable" : String.Empty);
         }
 
         protected override bool IsOrdered()

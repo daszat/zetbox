@@ -11,19 +11,9 @@
       <Module>Zetbox.Microsoft.Module, Zetbox.Microsoft</Module>
       <Module>Zetbox.Microsoft.OutlookMailSender+Module, Zetbox.Microsoft</Module>
       <Module>Zetbox.API.MailProblemReporter+Module, Zetbox.API</Module>
-      <Module NotOnFallback="true">Zetbox.App.Projekte.DocumentManagement.FileImportService+Module, Zetbox.App.Projekte.Common</Module>
-      <Module NotOnFallback="true">$safesolutionname$.Client.ClientModule, $safesolutionname$.Client</Module>
-      <Module NotOnFallback="true">$safesolutionname$.Client.WPF.ClientWPFModule, $safesolutionname$.Client.WPF</Module>
+      <Module>Zetbox.App.Projekte.DocumentManagement.FileImportService+Module, Zetbox.App.Projekte.Common</Module>
+      <Module>$safesolutionname$.Client.ClientModule, $safesolutionname$.Client</Module>
+      <Module>$safesolutionname$.Client.WPF.ClientWPFModule, $safesolutionname$.Client.WPF</Module>
     </Modules>
   </Client>
-  <AssemblySearchPaths EnableShadowCopy="true">
-    <string>Common\Core</string>
-    <string>Client\Core</string>
-    <string>Client\WPF</string>
-    <string>Common\App.Zetbox</string>
-    <string>Client\App.Zetbox</string>
-    <string>Common\App.$safesolutionname$</string>
-    <string>Client\App.$safesolutionname$</string>
-    <string>Common\Microsoft</string>
-  </AssemblySearchPaths>
 </ZetboxConfig>

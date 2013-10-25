@@ -12,15 +12,25 @@
 //
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Zetbox.API.Client
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Drawing;
+    using System.Linq;
+    using System.Text;
+
     public interface IScreenshotTool
     {
         System.Drawing.Bitmap GetScreenshot();
+    }
+
+    internal sealed class TestScreenshotTool : IScreenshotTool
+    {
+        public Bitmap GetScreenshot()
+        {
+            return Properties.Resources.test;
+        }
     }
 }

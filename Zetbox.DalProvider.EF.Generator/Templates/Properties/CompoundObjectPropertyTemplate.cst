@@ -77,10 +77,6 @@
                     NotifyPropertyChanged("<%= propName %>", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
                 }
-                else
-                {
-                    SetInitializedProperty("<%= propName %>");
-                }
             }
         }
 <%

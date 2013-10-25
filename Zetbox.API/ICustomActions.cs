@@ -51,4 +51,15 @@ namespace Zetbox.API
     public sealed class Invocation : Attribute
     {
     }
+
+    [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
+    public sealed class AssetsFor : Attribute
+    {
+        public AssetsFor(string module)
+        {
+            this.Module = module;
+        }
+
+        public string Module { get; set; }
+    }
 }

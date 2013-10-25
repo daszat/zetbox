@@ -142,7 +142,8 @@ namespace Zetbox.Server.SchemaManagement
                         }
                     }
 
-                    cmd.ExecuteNonQuery();
+                    int rows = cmd.ExecuteNonQuery();
+                    QueryLog.DebugFormat("{0} rows affected", rows);
                 }
             }
             catch
@@ -437,6 +438,15 @@ namespace Zetbox.Server.SchemaManagement
 
         public abstract void RenameTable(TableRef oldTblName, TableRef newTblName);
 
+        public virtual void RenameDiscriminatorValue(TableRef tblName, string oldValue, string newValue)
+        {
+            ExecuteNonQuery(string.Format("UPDATE {0} SET {1} = '{2}' WHERE {1} = '{3}'",
+                FormatSchemaName(tblName),
+                QuoteIdentifier(TableMapper.DiscriminatorColumnName),
+                newValue,
+                oldValue));
+        }
+
         public virtual void DropTable(TableRef tblName)
         {
             ExecuteNonQuery(String.Format("DROP TABLE {0}", FormatSchemaName(tblName)));
@@ -489,6 +499,8 @@ namespace Zetbox.Server.SchemaManagement
 
         public abstract bool CheckColumnContainsValues(TableRef tblName, string colName);
 
+        protected abstract bool CheckColumnsNullEquality(TableRef tblName, string aColName, string bColName);
+
         public abstract long CountRows(TableRef tblName);
 
         public virtual void TruncateTable(TableRef tblName)
@@ -517,7 +529,7 @@ namespace Zetbox.Server.SchemaManagement
 
         public abstract void CreateIndex(TableRef tblName, string idxName, bool unique, bool clustered, params string[] columns);
         public abstract void DropIndex(TableRef tblName, string idxName);
-
+        public abstract void RenameIndex(TableRef tblName, string oldIdxName, string newIdxName);
 
         private static CheckExpressionVisitor _checkExpressionVisitor = new CheckExpressionVisitor();
         protected string FormatCheckExpression(string colName, Dictionary<List<string>, Expression<Func<string, bool>>> checkExpressions)
@@ -564,8 +576,9 @@ namespace Zetbox.Server.SchemaManagement
                 FormatSchemaName(viewName)));
         }
 
-        public abstract bool CheckTriggerExists(TableRef objName, string triggerName);
-        public abstract void DropTrigger(TableRef objName, string triggerName);
+        public abstract IEnumerable<TriggerRef> GetTriggerNames();
+        public abstract bool CheckTriggerExists(TriggerRef triggerName);
+        public abstract void DropTrigger(TriggerRef triggerName);
 
         public ProcRef GetProcedureName(string schemaName, string procName)
         {
@@ -654,9 +667,9 @@ namespace Zetbox.Server.SchemaManagement
 
         #region zetbox Accelerators
 
-        public virtual bool CheckPositionColumnValidity(TableRef tblName, string posName)
+        public virtual bool CheckPositionColumnValidity(TableRef tblName, string fkName, string posName)
         {
-            var failed = CheckColumnContainsNulls(tblName, posName);
+            var failed = CheckColumnsNullEquality(tblName, fkName, posName);
             if (failed)
             {
                 Log.WarnFormat("Order Column [{0}].[{1}] contains NULLs.", tblName, posName);
@@ -738,7 +751,7 @@ namespace Zetbox.Server.SchemaManagement
         public abstract void InsertFKs(TableRef srcTblName, string srcColName, TableRef tblName, string colName, string fkColName);
         public abstract void CopyFKs(TableRef srcTblName, string srcColName, TableRef destTblName, string destColName, string srcFKColName);
 
-        public abstract void CreateUpdateRightsTrigger(string triggerName, TableRef tblName, List<RightsTrigger> tblList, List<string> dependingCols);
+        public abstract void CreateUpdateRightsTrigger(TriggerRef triggerName, TableRef tblName, List<RightsTrigger> tblList, List<string> dependingCols);
         public abstract void CreateRightsViewUnmaterialized(TableRef viewName, TableRef tblName, TableRef tblNameRights, IList<ACL> acls);
         public abstract void CreateEmptyRightsViewUnmaterialized(TableRef viewName);
         public abstract void CreateRefreshRightsOnProcedure(ProcRef procName, TableRef viewUnmaterializedName, TableRef tblName, TableRef tblNameRights);

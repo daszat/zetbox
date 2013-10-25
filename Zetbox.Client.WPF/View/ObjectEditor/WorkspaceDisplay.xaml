@@ -82,7 +82,7 @@
                 <ctrls:CommandButton DockPanel.Dock="Right"
                                      CommandViewModel="{Binding AbortCommand}"
                                      styles:Controls.IsSecondary="true"
-                                     Style="{StaticResource ImageButton}"
+                                     Style="{StaticResource LinkButton}"
                                      Margin="0"
                                      styles:Margin.Left="{StaticResource ItemMargin}"
                                      styles:Margin.Right="{StaticResource ItemMargin}" />
@@ -110,7 +110,7 @@
                         </StackPanel>
                     </Border>
                 </ToggleButton>
-                <TextBlock Text="Um die Änderungen zu übernehmen drücken Sie bitte Speichern"
+                <TextBlock Text="{Binding SaveChangesHintText}"
                            Visibility="{Binding IsContextModified, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}"
                            VerticalAlignment="Bottom"
                            Margin="0"

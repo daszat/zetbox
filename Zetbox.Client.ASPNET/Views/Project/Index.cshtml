@@ -1,0 +1,36 @@
+﻿@model Zetbox.Client.ASPNET.Models.ProjectSearchViewModel
+@using Zetbox.Client.ASPNET
+@{
+    ViewBag.Title = "Project search";
+}
+<h2>
+    Search for a project</h2>
+@using (Html.BeginForm())
+{
+    <p>
+        @Html.ZbLabelFor(m => m.ProjectName)<br />
+        @Html.ZbEditorFor(m => m.ProjectName)
+    </p>
+    <p>
+        <input type="submit" /></p>
+}
+<table class="strech">
+    <tr>
+        <th>
+        </th>
+        <th style="width:100%;">
+            Name
+        </th>
+    </tr>
+    @foreach (var prj in Model.Result)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink("Details", "Details", new { ID = prj.ID })
+            </td>
+            <td>
+                @prj.Name
+            </td>
+        </tr>
+    }
+</table>

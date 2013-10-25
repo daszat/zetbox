@@ -109,8 +109,10 @@ namespace Zetbox.App.Packaging
                     {
                         if (reader.NodeType != XmlNodeType.Element) continue;
                         var obj = ImportElement(ctx, currentObjects, p);
-                        if (obj == null) throw new InvalidOperationException("Invalid import format: ImportElement returned NULL");
-                        importedObjects[((IExportableInternal)obj).ExportGuid] = obj;
+                        if (obj != null)
+                        {
+                            importedObjects[((IExportableInternal)obj).ExportGuid] = obj;
+                        }
                     }
                 }
 
@@ -124,8 +126,20 @@ namespace Zetbox.App.Packaging
                 Log.InfoFormat("Deleting {0} objects marked for deletion", objectsToDelete.Count());
                 foreach (var pairToDelete in objectsToDelete)
                 {
+                    // Don't delete blobs, the blob garbage collector should delete them.
+                    if (pairToDelete.Value is Blob) continue; 
+
                     ctx.Delete(pairToDelete.Value);
                 }
+
+                using (Log.InfoTraceMethodCall("Playback Notifications"))
+                {
+                    foreach (var obj in importedObjects.Values)
+                    {
+                        ((BaseNotifyingObject)obj).PlaybackNotifications();
+                    }
+                }
+
                 Log.Info("Deployment finished");
             }
         }
@@ -191,10 +205,10 @@ namespace Zetbox.App.Packaging
                     Log.Warn("Error while initialising, trying to proceed anyways", ex);
                 }
 
-                Dictionary<Guid, IPersistenceObject> objects = new Dictionary<Guid, IPersistenceObject>();
+                Dictionary<Guid, IPersistenceObject> importedObjects = new Dictionary<Guid, IPersistenceObject>();
                 Dictionary<Type, List<Guid>> guids = LoadGuids(ctx, providers);
 
-                PreFetchObjects(ctx, objects, guids);
+                PreFetchObjects(ctx, importedObjects, guids);
 
                 using (Log.InfoTraceMethodCall("Loading"))
                 {
@@ -211,16 +225,24 @@ namespace Zetbox.App.Packaging
                         while (reader.Read())
                         {
                             if (reader.NodeType != XmlNodeType.Element) continue;
-                            ImportElement(ctx, objects, p);
+                            ImportElement(ctx, importedObjects, p);
                         }
                     }
                 }
 
                 using (Log.InfoTraceMethodCall("Reloading References"))
                 {
-                    foreach (var obj in objects.Values)
+                    foreach (var obj in importedObjects.Values)
                     {
                         obj.ReloadReferences();
+                    }
+                }
+
+                using (Log.InfoTraceMethodCall("Playback Notifications"))
+                {
+                    foreach (var obj in importedObjects.Values)
+                    {
+                        ((BaseNotifyingObject)obj).PlaybackNotifications();
                     }
                 }
                 Log.Info("Import finished");
@@ -270,6 +292,10 @@ namespace Zetbox.App.Packaging
                         {
                             string ifTypeName = string.Format("{0}.{1}", ns, tn);
                             ifTypeName = MigrateTypeNameMapping(ifTypeName);
+                            if (string.IsNullOrWhiteSpace(ifTypeName))
+                            {
+                                continue;
+                            }
                             Type t = ctx.GetInterfaceType(ifTypeName).Type;
                             if (t != null)
                             {
@@ -311,6 +337,10 @@ namespace Zetbox.App.Packaging
             {
                 string ifTypeName = string.Format("{0}.{1}", s.Reader.NamespaceURI, s.Reader.LocalName);
                 ifTypeName = MigrateTypeNameMapping(ifTypeName);
+                if (string.IsNullOrWhiteSpace(ifTypeName))
+                {
+                    return null;
+                }
                 InterfaceType ifType = ctx.GetInterfaceType(ifTypeName);
                 if (ifType.Type == null)
                 {
@@ -319,6 +349,7 @@ namespace Zetbox.App.Packaging
                 }
 
                 IPersistenceObject obj = FindObject(ctx, objects, exportGuid, ifType);
+                ((BaseNotifyingObject)obj).RecordNotifications();
 
                 using (var children = s.Reader.ReadSubtree())
                 {
@@ -336,7 +367,9 @@ namespace Zetbox.App.Packaging
                     var blob = (Blob)obj;
                     using (var stream = s.GetBlob(blob.ExportGuid))
                     {
-                        blob.StoragePath = ctx.Internals().StoreBlobStream(stream, blob.ExportGuid, blob.CreatedOn, blob.OriginalName);
+                        blob.StoragePath = ctx.Internals()
+                            .StoreBlobStream(stream, blob.ExportGuid, blob.CreatedOn, blob.OriginalName)
+                            .ToUniversalPath();
                     }
                 }
 
@@ -358,7 +391,13 @@ namespace Zetbox.App.Packaging
         /// <returns></returns>
         private static string MigrateTypeNameMapping(string ifTypeName)
         {
-            switch(ifTypeName) {
+            switch (ifTypeName)
+            {
+                case "Zetbox.App.Base.ServiceDescriptor":
+                case "Zetbox.App.Base.TypeRef":
+                case "Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntry":
+                case "Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntry":
+                    return string.Empty;
                 case "Zetbox.App.Base.ObjectClass_implements_Interface_RelationEntry":
                     return "Zetbox.App.Base.DataType_implements_Interface_RelationEntry";
                 default:

@@ -1,0 +1,47 @@
+﻿<ctrls:PropertyEditor x:Class="Zetbox.Client.WPF.View.ZetboxBase.RecurrenceRulePropertyEditor"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
+                      xmlns:styles="clr-namespace:Zetbox.Client.WPF.Styles;assembly=Zetbox.Client.WPF.Toolkit"
+                      xmlns:view="clr-namespace:Zetbox.Client.WPF.View.ZetboxBase"
+                      ToolTip="{Binding ToolTip, Mode=OneWay}"
+                      VerticalAlignment="Top">
+    <!--
+    This file is part of zetbox.
+
+    Zetbox is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation, either version 3 of
+    the License, or (at your option) any later version.
+
+    Zetbox is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public
+    License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
+    -->
+    <StackPanel Grid.IsSharedSizeScope="True">
+        <StackPanel.Resources>
+            <Style TargetType="{x:Type ctrls:LabeledView}"
+                   BasedOn="{StaticResource LabeledViewStyle}">
+                <Setter Property="LabelSharedSizeGroup"
+                        Value="CompoundObjectLabeledView" />
+                <Setter Property="LabelMinWidth"
+                        Value="10" />
+            </Style>
+        </StackPanel.Resources>
+        <DockPanel>
+            <ctrls:LabeledView DockPanel.Dock="Right"
+                               DataContext="{Binding Value.PropertyModelsByName[Interval]}"
+                               TabIndex="1"
+                               MaxWidth="200" />
+            <ctrls:LabeledView DataContext="{Binding Value.PropertyModelsByName[Frequency]}"
+                               TabIndex="0" />
+        </DockPanel>
+        <ctrls:LabeledView DataContext="{Binding Value.PropertyModelsByName[Until]}" />
+    </StackPanel>
+</ctrls:PropertyEditor>

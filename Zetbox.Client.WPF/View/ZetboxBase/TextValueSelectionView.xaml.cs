@@ -26,15 +26,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Zetbox.Client.GUI;
+using Zetbox.Client.Presentables;
 using Zetbox.Client.WPF.CustomControls;
 using Zetbox.Client.WPF.View.ZetboxBase;
-using Zetbox.Client.Presentables;
 
 namespace Zetbox.Client.WPF.View
 {
     /// <summary>
     /// Interaction logic for TextValueSelectionView.xaml
     /// </summary>
+    [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
     public partial class TextValueSelectionView : PropertyEditor
     {
         public TextValueSelectionView()

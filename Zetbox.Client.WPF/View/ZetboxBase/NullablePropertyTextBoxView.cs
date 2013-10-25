@@ -11,14 +11,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Zetbox.Client.WPF.CustomControls;
 using Zetbox.Client.GUI;
 using Zetbox.Client.Presentables.ValueViewModels;
+using Zetbox.Client.WPF.CustomControls;
 using Zetbox.Client.WPF.Toolkit;
 
 namespace Zetbox.Client.WPF.View
 {
-
+    [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
     public class NullablePropertyTextBoxView : PropertyEditor, IHasViewModel<BaseValueViewModel>, IHasViewModel<IFormattedValueViewModel>
     {
         static NullablePropertyTextBoxView()
@@ -27,7 +27,7 @@ namespace Zetbox.Client.WPF.View
         }
 
         public NullablePropertyTextBoxView()
-        {            
+        {
         }
 
         public override void OnApplyTemplate()

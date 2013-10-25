@@ -53,18 +53,18 @@ namespace Zetbox.API.Client
             _implementor = implementor;
         }
 
-        public IEnumerable<IDataObject> GetList(InterfaceType ifType, int maxListCount, bool eagerLoadLists, IEnumerable<Expression> filter, IEnumerable<OrderBy> orderBy, out List<IStreamable> auxObjects)
+        public IEnumerable<IDataObject> GetObjects(IReadOnlyZetboxContext requestingCtx, InterfaceType ifType, Expression query, out List<IStreamable> auxObjects)
         {
-            using (Logging.Facade.InfoTraceMethodCallFormat("GetList", "Type=[{0}]", ifType.ToString()))
+            using (Logging.Facade.InfoTraceMethodCallFormat("GetObjects", "Type=[{0}]", ifType.ToString()))
             {
                 CheckUiThread();
                 try
                 {
-                    return _implementor.GetList(ifType, maxListCount, eagerLoadLists, filter, orderBy, out auxObjects);
+                    return _implementor.GetObjects(requestingCtx, ifType, query, out auxObjects);
                 }
                 catch (Exception ex)
                 {
-                    Logging.Facade.Error("GetList", ex);
+                    Logging.Facade.Error("GetObjects", ex);
                     throw;
                 }
             }
@@ -77,7 +77,7 @@ namespace Zetbox.API.Client
                 CheckUiThread();
                 try
                 {
-                    return _implementor.GetListOf( ifType, ID, property, out  auxObjects);
+                    return _implementor.GetListOf(ifType, ID, property, out  auxObjects);
                 }
                 catch (Exception ex)
                 {
@@ -94,7 +94,7 @@ namespace Zetbox.API.Client
                 CheckUiThread();
                 try
                 {
-                    return _implementor.SetObjects( objects, notificationRequests);
+                    return _implementor.SetObjects(objects, notificationRequests);
                 }
                 catch (Exception ex)
                 {
@@ -111,7 +111,7 @@ namespace Zetbox.API.Client
                 CheckUiThread();
                 try
                 {
-                    return _implementor.InvokeServerMethod( ifType, ID, method, retValType, parameterTypes, parameter, objects, notificationRequests, out changedObjects, out auxObjects);
+                    return _implementor.InvokeServerMethod(ifType, ID, method, retValType, parameterTypes, parameter, objects, notificationRequests, out changedObjects, out auxObjects);
                 }
                 catch (Exception ex)
                 {

@@ -26,6 +26,7 @@ namespace Zetbox.App.Extensions
     using Autofac;
     using Autofac.Core.Registration;
     using Zetbox.API;
+    using Zetbox.API.Common;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
@@ -37,8 +38,6 @@ namespace Zetbox.App.Extensions
         : ICustomActionsManager
     {
         protected readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Common.BaseCustomActionsManager");
-        private readonly static object _initLock = new object();
-        private readonly static Dictionary<Type, Type> _initImpls = new Dictionary<Type, Type>();
 
         private readonly IDeploymentRestrictor _restrictor;
         private readonly ILifetimeScope _container;
@@ -71,9 +70,18 @@ namespace Zetbox.App.Extensions
             }
         }
 
-        Dictionary<MethodKey, List<MethodInfo>> _reflectedMethods = new Dictionary<MethodKey, List<MethodInfo>>();
-        Dictionary<MethodKey, bool> _attachedMethods = new Dictionary<MethodKey, bool>();
+        private readonly Dictionary<MethodKey, List<MethodInfo>> _reflectedMethods = new Dictionary<MethodKey, List<MethodInfo>>();
+        private readonly Dictionary<MethodKey, bool> _attachedMethods = new Dictionary<MethodKey, bool>();
+        private readonly IAssetsManager _assetsMgr;
 
+        /// <summary>
+        /// This provides a per-dalProvider synchronisation root to protect the initialisation
+        /// </summary>
+        protected abstract object SyncRoot { get; }
+        /// <summary>
+        /// This returns per DalProvider whether the custom actions are already initialised. It is set by the Init() function. Only access it while holding the SyncRoot lock.
+        /// </summary>
+        protected abstract bool IsInitialised { get; set; }
 
         /// <summary>
         /// Gets or sets the extra suffix which is used to create the implementation class' name.
@@ -95,6 +103,8 @@ namespace Zetbox.App.Extensions
             _container = container;
             ExtraSuffix = extraSuffix;
             ImplementationAssemblyName = this.GetType().Assembly.FullName;
+
+            container.TryResolve<IAssetsManager>(out _assetsMgr);
         }
 
         /// <summary>
@@ -103,17 +113,17 @@ namespace Zetbox.App.Extensions
         /// </summary>
         public virtual void Init(IReadOnlyZetboxContext ctx)
         {
-            lock (_initLock)
+            lock (SyncRoot)
             {
                 var implType = this.GetType();
-                if (_initImpls.ContainsKey(implType)) return;
+                if (IsInitialised) return;
                 try
                 {
                     using (Log.InfoTraceMethodCallFormat("Init", "Initializing Actions for [{0}] by [{1}]", ExtraSuffix, implType.Name))
                     {
                         Log.TraceTotalMemory("Before BaseCustomActionsManager.Init()");
 
-                        ReflectMethods(ctx);
+                        ReflectMethodsAndAssets(ctx);
                         CreateInvokeInfosForDataTypes(ctx);
 
                         foreach (var key in _reflectedMethods.Where(i => !_attachedMethods.ContainsKey(i.Key)).Select(i => i.Key))
@@ -126,12 +136,12 @@ namespace Zetbox.App.Extensions
                 }
                 finally
                 {
-                    _initImpls[implType] = implType;
+                    IsInitialised = true;
                 }
             }
         }
 
-        private void ReflectMethods(IReadOnlyZetboxContext metaCtx)
+        private void ReflectMethodsAndAssets(IReadOnlyZetboxContext metaCtx)
         {
             if (metaCtx == null) { throw new ArgumentNullException("metaCtx"); }
 
@@ -146,9 +156,9 @@ namespace Zetbox.App.Extensions
                         continue;
                     }
 
-                    System.Reflection.Assembly a;
-                    a = System.Reflection.Assembly.Load(assembly.Name);
+                    var a = System.Reflection.Assembly.Load(assembly.Name);
 
+                    // Methods
                     foreach (var t in a.GetTypes())
                     {
                         if (t.GetCustomAttributes(typeof(Implementor), false).Length != 0)
@@ -179,6 +189,15 @@ namespace Zetbox.App.Extensions
                                     Log.Warn(string.Format("Found public method {0}.{1} which has no Invocation attribute. Ignoring this method", t.FullName, m.Name));
                                 }
                             }
+                        }
+                    }
+
+                    // Assets
+                    if (_assetsMgr != null)
+                    {
+                        foreach (AssetsFor assetAttribute in a.GetCustomAttributes(typeof(AssetsFor), false))
+                        {
+                            _assetsMgr.AddAssembly(assetAttribute.Module, a);
                         }
                     }
                 }

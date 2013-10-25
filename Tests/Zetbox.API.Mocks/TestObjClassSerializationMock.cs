@@ -74,7 +74,7 @@ namespace Zetbox.API.Mocks
             sw.Write(GetSerializableType<LOCALINTERFACE, ENUMTYPE>(iftFactory));
             sw.Write(TestObjClassId);
             sw.Write((int)TestObjectState);
-            sw.Write((int)AccessRights.Full);
+            sw.Write((int)AccessRights.FullInstance);
 
 
             // TestObjClass
@@ -105,7 +105,7 @@ namespace Zetbox.API.Mocks
                 sw.Write(ceType);
                 sw.Write(TestTestNamesIds[i]);
                 sw.Write((int)TestCollectionEntryState);
-                sw.Write((int)AccessRights.Full);
+                sw.Write((int)AccessRights.FullInstance);
 
                 sw.Write(TestTestNamesValues[i]);
             }

@@ -60,7 +60,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=this.Proxy.ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -139,6 +139,11 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for ChangedBy's id, used on dehydration only</summary>
         private int? _fk_ChangedBy = null;
 
+
+    public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
 		public static event PropertyGetterHandler<Zetbox.App.Base.DataType, Zetbox.App.Base.Identity> OnChangedBy_Getter;
@@ -258,6 +263,12 @@ namespace Zetbox.App.Base
         private OneNRelationList<Zetbox.App.Base.InstanceConstraint> _Constraints;
         private List<int> ConstraintsIds;
         private bool Constraints_was_eagerLoaded = false;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchConstraintsAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.InstanceConstraint>>(this.Constraints);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConstraints_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.DataType> OnConstraints_IsValid;
@@ -268,7 +279,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=this.Proxy.CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -347,6 +358,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
         /// <summary>Backing store for CreatedBy's id, used on dehydration only</summary>
         private int? _fk_CreatedBy = null;
 
+
+    public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
 		public static event PropertyGetterHandler<Zetbox.App.Base.DataType, Zetbox.App.Base.Identity> OnCreatedBy_Getter;
@@ -439,7 +455,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultIcon
         // fkBackingName=this.Proxy.DefaultIcon; fkGuidBackingName=_fk_guid_DefaultIcon;
         // referencedInterface=Zetbox.App.GUI.Icon; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -520,6 +536,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
 
         /// <summary>Backing store for DefaultIcon's guid, used on import only</summary>
         private Guid? _fk_guid_DefaultIcon = null;
+
+    public Zetbox.API.Async.ZbTask TriggerFetchDefaultIconAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon>(this.DefaultIcon);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DefaultIcon
 		public static event PropertyGetterHandler<Zetbox.App.Base.DataType, Zetbox.App.GUI.Icon> OnDefaultIcon_Getter;
@@ -681,8 +702,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
 							new ProjectedCollection<Zetbox.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl.DataType_implements_Interface_RelationEntryProxy, Zetbox.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.ImplementsInterfaces,
                                 p => (Zetbox.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl.DataType_implements_Interface_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Zetbox.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl>)null);
+                                ce => (Zetbox.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl.DataType_implements_Interface_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
+                    _ImplementsInterfaces.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("ImplementsInterfaces", null, null); if(OnImplementsInterfaces_PostSetter != null && IsAttached) OnImplementsInterfaces_PostSetter(this); };
                     if (ImplementsInterfaces_was_eagerLoaded) { ImplementsInterfaces_was_eagerLoaded = false; }
 				}
 				return (ICollection<Zetbox.App.Base.Interface>)_ImplementsInterfaces;
@@ -692,6 +713,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
 		private NHibernateBSideCollectionWrapper<Zetbox.App.Base.DataType, Zetbox.App.Base.Interface, Zetbox.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl> _ImplementsInterfaces;
 		// ignored, but required for Serialization
         private bool ImplementsInterfaces_was_eagerLoaded = false;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchImplementsInterfacesAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.Interface>>(this.ImplementsInterfaces);
+        }
+
+public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnImplementsInterfaces_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.DataType> OnImplementsInterfaces_IsValid;
 
@@ -728,6 +756,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
         private OneNRelationList<Zetbox.App.Base.Method> _Methods;
         private List<int> MethodsIds;
         private bool Methods_was_eagerLoaded = false;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchMethodsAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.Method>>(this.Methods);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMethods_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.DataType> OnMethods_IsValid;
@@ -738,7 +772,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMetho
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
         // fkBackingName=this.Proxy.Module; fkGuidBackingName=_fk_guid_Module;
         // referencedInterface=Zetbox.App.Base.Module; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -819,6 +853,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMetho
 
         /// <summary>Backing store for Module's guid, used on import only</summary>
         private Guid? _fk_guid_Module = null;
+
+    public Zetbox.API.Async.ZbTask TriggerFetchModuleAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(this.Module);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
 		public static event PropertyGetterHandler<Zetbox.App.Base.DataType, Zetbox.App.Base.Module> OnModule_Getter;
@@ -918,6 +957,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnMetho
         private OneNRelationList<Zetbox.App.Base.Property> _Properties;
         private List<int> PropertiesIds;
         private bool Properties_was_eagerLoaded = false;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchPropertiesAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<IList<Zetbox.App.Base.Property>>(this.Properties);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnProperties_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.DataType> OnProperties_IsValid;
@@ -928,7 +973,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedKind
         // fkBackingName=this.Proxy.RequestedKind; fkGuidBackingName=_fk_guid_RequestedKind;
         // referencedInterface=Zetbox.App.GUI.ControlKind; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -1009,6 +1054,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
 
         /// <summary>Backing store for RequestedKind's guid, used on import only</summary>
         private Guid? _fk_guid_RequestedKind = null;
+
+    public Zetbox.API.Async.ZbTask TriggerFetchRequestedKindAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(this.RequestedKind);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RequestedKind
 		public static event PropertyGetterHandler<Zetbox.App.Base.DataType, Zetbox.App.GUI.ControlKind> OnRequestedKind_Getter;
@@ -1568,6 +1618,33 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "Constraints":
+                return TriggerFetchConstraintsAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            case "DefaultIcon":
+                return TriggerFetchDefaultIconAsync();
+            case "ImplementsInterfaces":
+                return TriggerFetchImplementsInterfacesAsync();
+            case "Methods":
+                return TriggerFetchMethodsAsync();
+            case "Module":
+                return TriggerFetchModuleAsync();
+            case "Properties":
+                return TriggerFetchPropertiesAsync();
+            case "RequestedKind":
+                return TriggerFetchRequestedKindAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

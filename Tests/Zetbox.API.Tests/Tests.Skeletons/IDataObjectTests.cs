@@ -22,7 +22,7 @@ using NUnit.Framework;
 
 namespace Zetbox.API.Tests.Skeletons
 {
-    public class IDataObjectTests<T> 
+    public abstract class IDataObjectTests<T>
         : IPersistenceObjectTests<T>
         where T : IDataObject, new()
     {

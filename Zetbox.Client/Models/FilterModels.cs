@@ -24,13 +24,13 @@ namespace Zetbox.Client.Models
     using System.Linq.Dynamic;
     using System.Linq.Expressions;
     using System.Text;
+    using System.Text.RegularExpressions;
     using Zetbox.API;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
     using Zetbox.App.GUI;
     using Zetbox.Client.Presentables.ValueViewModels;
     using ViewModelDescriptors = Zetbox.NamedObjects.Gui.ViewModelDescriptors;
-    using System.Text.RegularExpressions;
 
     public class FilterEvaluator
     {
@@ -78,10 +78,14 @@ namespace Zetbox.Client.Models
         ControlKind RequestedKind { get; set; }
 
         string Label { get; }
+        string HelpText { get; }
+
         ObservableCollection<FilterArgumentConfig> FilterArguments { get; }
         FilterArgumentConfig FilterArgument { get; }
 
         event EventHandler FilterChanged;
+
+        bool IsExclusiveFilter { get; }
     }
 
     public abstract class FilterModel
@@ -223,6 +227,12 @@ namespace Zetbox.Client.Models
             set;
         }
 
+        public string HelpText
+        {
+            get;
+            set;
+        }
+
         public virtual bool Enabled
         {
             get
@@ -246,6 +256,14 @@ namespace Zetbox.Client.Models
         }
 
         #endregion
+
+        #region IUIFilterModel Members
+        public bool IsExclusiveFilter
+        {
+            get;
+            protected set;
+        }
+        #endregion
     }
 
 
@@ -260,7 +278,7 @@ namespace Zetbox.Client.Models
             base.ViewModelType = ViewModelDescriptors.Zetbox_Client_Presentables_FilterViewModels_SingleValueFilterViewModel.Find(frozenCtx);
             base.FilterArguments.Add(new FilterArgumentConfig(
                 new ClassValueModel<string>(base.Label, FilterModelsResources.ToStringFilterModel_Description, true, false),
-                ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_ClassValueViewModel_1_System_String_.Find(frozenCtx)
+                ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_StringValueViewModel.Find(frozenCtx)
             ));
 
             base.RefreshOnFilterChanged = false;
@@ -296,6 +314,34 @@ namespace Zetbox.Client.Models
         {
             if ((bool)FilterArgument.Value.GetUntypedValue() == true)
                 return src.WithDeactivated();
+            else
+                return src;
+        }
+    }
+
+    public class FulltextFilterModel : FilterModel
+    {
+        public FulltextFilterModel(IReadOnlyZetboxContext frozenCtx)
+            : base()
+        {
+            if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
+            base.IsServerSideFilter = true;
+            base.IsExclusiveFilter = true;
+            base.Label = FilterModelsResources.FulltextFilterModel_Label;
+            base.HelpText = FilterModelsResources.FulltextFilterModel_HelpText;
+            base.ViewModelType = ViewModelDescriptors.Zetbox_Client_Presentables_FilterViewModels_SingleValueFilterViewModel.Find(frozenCtx);
+            base.FilterArguments.Add(new FilterArgumentConfig(
+                new ClassValueModel<string>(base.Label, FilterModelsResources.FulltextFilterModel_Description, true, false),
+                ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_StringValueViewModel.Find(frozenCtx)
+            ));
+
+            base.RefreshOnFilterChanged = false;
+        }
+
+        public override IQueryable GetQuery(IQueryable src)
+        {
+            if (FilterArgument.Value != null)
+                return src.FulltextMatch(FilterArgument.Value.GetUntypedValue().ToString());
             else
                 return src;
         }
@@ -379,7 +425,7 @@ namespace Zetbox.Client.Models
             fmdl.FilterArguments.Add(new FilterArgumentConfig(
                 new CompoundObjectValueModel(ctx, label, "", true, false, requestedArgumentKind, cpObj),
                 cpObj.DefaultPropertyViewModelDescriptor ?? ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_CompoundObjectPropertyViewModel.Find(frozenCtx)));
-            return fmdl;            
+            return fmdl;
         }
 
         public static SingleValueFilterModel Create<T>(IFrozenContext frozenCtx, string label, string predicate)
@@ -416,12 +462,12 @@ namespace Zetbox.Client.Models
             }
             else if (propType == typeof(int))
             {
-                vDesc = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableStructValueViewModel_1_System_Int32_.Find(frozenCtx);
+                vDesc = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableIntPropertyViewModel.Find(frozenCtx);
                 mdl = new NullableStructValueModel<int>(label, "", true, false, requestedArgumentKind);
             }
             else if (propType == typeof(double))
             {
-                vDesc = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableStructValueViewModel_1_System_Double_.Find(frozenCtx);
+                vDesc = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableDoublePropertyViewModel.Find(frozenCtx);
                 mdl = new NullableStructValueModel<double>(label, "", true, false, requestedArgumentKind);
             }
             else if (propType == typeof(bool))
@@ -436,7 +482,7 @@ namespace Zetbox.Client.Models
             }
             else if (propType == typeof(string))
             {
-                vDesc = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_ClassValueViewModel_1_System_String_.Find(frozenCtx);
+                vDesc = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_StringValueViewModel.Find(frozenCtx);
                 mdl = new ClassValueModel<string>(label, "", true, false, requestedArgumentKind);
                 fmdl.Operator = FilterOperators.Contains;
             }
@@ -557,7 +603,7 @@ namespace Zetbox.Client.Models
         protected string[] GetStringParts()
         {
             var str = (string)FilterArgument.Value.GetUntypedValue();
-            string pattern = @"(?<match>[^\s,;""]+)|\""(?<match>[^""]*)"""; 
+            string pattern = @"(?<match>[^\s,;""]+)|\""(?<match>[^""]*)""";
             return Regex.Matches(str, pattern).Cast<Match>().Select(m => m.Groups["match"].Value).ToArray();
         }
     }
@@ -591,7 +637,7 @@ namespace Zetbox.Client.Models
                 counter++;
             }
             sb.Remove(sb.Length - 3, 3);
-            return sb.ToString(); 
+            return sb.ToString();
         }
 
         private string[] _propNames;
@@ -687,7 +733,7 @@ namespace Zetbox.Client.Models
             mdl.RequestedKind = requestedKind;
             mdl.FilterArguments.Add(new FilterArgumentConfig(
                 valMdl,
-                /*cfg.ArgumentViewModel ?? */ ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableStructValueViewModel_1_System_Int32_.Find(frozenCtx)));
+                /*cfg.ArgumentViewModel ?? */ ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableIntPropertyViewModel.Find(frozenCtx)));
 
             if (setDefault)
             {
@@ -715,6 +761,14 @@ namespace Zetbox.Client.Models
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
 
             var mdl = new DateRangeFilterModel();
+
+            Setup(mdl, frozenCtx, label, valueSource, requestedKind, setYearDefault, setQuaterDefault, setMonthDefault);
+
+            return mdl;
+        }
+
+        protected static void Setup(DateRangeFilterModel mdl, IFrozenContext frozenCtx, string label, IFilterValueSource valueSource, ControlKind requestedKind, bool setYearDefault, bool setQuaterDefault, bool setMonthDefault)
+        {
             mdl.Label = label;
             mdl.ValueSource = valueSource;
             mdl.ViewModelType = ViewModelDescriptors.Zetbox_Client_Presentables_FilterViewModels_DateRangeFilterViewModel.Find(frozenCtx);
@@ -748,8 +802,6 @@ namespace Zetbox.Client.Models
                 fromMdl.Value = DateTime.Today.FirstMonthDay();
                 toMdl.Value = DateTime.Today.LastMonthDay();
             }
-
-            return mdl;
         }
 
         protected DateRangeFilterModel()
@@ -776,6 +828,30 @@ namespace Zetbox.Client.Models
             {
                 return (DateTimeValueModel)FilterArguments[1].Value;
             }
+        }
+    }
+
+    public class DateRangeIntersectFilterModel : DateRangeFilterModel
+    {
+        public static DateRangeIntersectFilterModel Create(IFrozenContext frozenCtx, string label, IFilterValueSource fromValueSource, IFilterValueSource toValueSource, ControlKind requestedKind, bool setYearDefault, bool setQuaterDefault, bool setMonthDefault)
+        {
+            if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
+
+            var mdl = new DateRangeIntersectFilterModel();
+            DateRangeFilterModel.Setup(mdl, frozenCtx, label, fromValueSource, requestedKind, setYearDefault, setQuaterDefault, setMonthDefault);
+            mdl.ToValueSource = toValueSource;
+            return mdl;
+        }
+
+        protected override string GetPredicate()
+        {
+            return string.Format("({0} >= @0 AND {0} < @1) OR ({1} >= @0 AND {1} < @1) OR ({0} < @0 AND {1} >= @1)", ValueSource.Expression, ToValueSource.Expression);
+        }
+
+        public IFilterValueSource ToValueSource
+        {
+            get;
+            set;
         }
     }
 
@@ -816,13 +892,13 @@ namespace Zetbox.Client.Models
             }
             else if (type == typeof(int))
             {
-                vDesc = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableStructValueViewModel_1_System_Int32_.Find(frozenCtx);
+                vDesc = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableIntPropertyViewModel.Find(frozenCtx);
                 mdl1 = new NullableStructValueModel<int>("", "", true, false, requestedArgumentKind);
                 mdl2 = new NullableStructValueModel<int>("", "", true, false, requestedArgumentKind);
             }
             else if (type == typeof(double))
             {
-                vDesc = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableStructValueViewModel_1_System_Double_.Find(frozenCtx);
+                vDesc = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableDoublePropertyViewModel.Find(frozenCtx);
                 mdl1 = new NullableStructValueModel<double>("", "", true, false, requestedArgumentKind);
                 mdl2 = new NullableStructValueModel<double>("", "", true, false, requestedArgumentKind);
             }

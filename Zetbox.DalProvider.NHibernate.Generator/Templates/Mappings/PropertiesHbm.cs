@@ -49,6 +49,12 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
                     {
                         string columnAttr = String.Format("column=\"`{0}`\"", Construct.ForeignKeyColumnName(otherEnd, prefix));
                         this.WriteObjects("        <many-to-one ", nameAttr, " ", columnAttr, " ", classAttr, " unique=\"true\" ");
+                        // do not cascade if the other end is optional
+                        // this let's NHibernate choose a sensible order for persisting entities
+                        if (otherEnd.Multiplicity.LowerBound() == 0)
+                        {
+                            this.WriteObjects("cascade=\"none\" ");
+                        }
                         if (prop.EagerLoading)
                         {
                             // TODO: re-think and re-test eagerloading
@@ -134,7 +140,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
             //string fkOtherColumnAttr = String.Format("column=\"`{0}`\"", Construct.ForeignKeyColumnName(otherEnd));
 
             // always map as set, the wrapper has to translate/order the elements
-            this.WriteObjects("        <set ", nameAttr, " ", tableAttr, " inverse=\"true\" cascade=\"all-delete-orphan\" batch-size=\"100\" ");
+            this.WriteObjects("        <set ", nameAttr, " ", tableAttr, " inverse=\"true\" cascade=\"none\" batch-size=\"100\" ");
             if (prop.EagerLoading)
             {
                 // TODO: re-think and re-test eagerloading

@@ -16,16 +16,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
-
 using Zetbox.API;
 using Zetbox.API.Client;
-using System.Reflection;
 using Zetbox.App.Test;
 
 namespace Zetbox.Client.Mocks
 {
-    public class TestProxy 
+    public class TestProxy
         : IProxy
     {
         private int newID = 10;
@@ -35,32 +34,11 @@ namespace Zetbox.Client.Mocks
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IDataObject> GetList( InterfaceType ifType, int maxListCount, bool withEagerLoading, IEnumerable<Expression> filter, IEnumerable<OrderBy> orderBy, out List<IStreamable> auxObjects)
+        public IEnumerable<IDataObject> GetObjects(IReadOnlyZetboxContext requestingCtx, InterfaceType ifType, Expression query, out List<IStreamable> auxObjects)
         {
-            if (orderBy != null) throw new ArgumentException("OrderBy is not supported yet");
-
             auxObjects = new List<IStreamable>();
-            IEnumerable<IDataObject> query;
-
-            if (ifType == typeof(TestObjClass))
-            {
-                query = GetList_TestObjClass();
-            }
-            else
-            {
-                throw new ArgumentOutOfRangeException("ifType", "Only TestObjClasses are allowed");
-            }
-
-            if (filter != null)
-            {
-                var result = query.AsQueryable().AddCast(ifType.Type);
-                filter.ForEach(f => result = result.AddFilter(f.StripQuotes()));
-                return result.Cast<IDataObject>().ToList();
-            }
-            else
-            {
-                return query.Cast<IDataObject>();
-            }
+            // good enough for testing
+            return (IEnumerable<IDataObject>)Expression.Lambda(query).Compile().DynamicInvoke();
         }
 
         private static IEnumerable<IDataObject> GetList_TestObjClass()

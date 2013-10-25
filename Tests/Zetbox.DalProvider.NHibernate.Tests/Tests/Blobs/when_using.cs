@@ -21,10 +21,11 @@ using Zetbox.API;
 
 namespace Zetbox.DalProvider.NHibernate.Tests.Blobs
 {
-    [TestFixture]
-    [Ignore("This test suite does not support custom actions")]
-    public class when_using
-            : Zetbox.API.AbstractConsumerTests.Blobs.when_using
+    public class when_using : Zetbox.API.AbstractConsumerTests.Blobs.when_using
     {
+        protected override NUnit.Framework.Constraints.IResolveConstraint CreateBlobIdConstraint()
+        {
+            return Is.LessThan(0);
+        }
     }
 }

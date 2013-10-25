@@ -8,14 +8,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ZetboxContextExceptionSerializationHelper" nillable="true" type="tns:ZetboxContextExceptionSerializationHelper" />
-  <xs:complexType name="UniqueConstraintViolationExceptionMessage">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:ZetboxContextExceptionSerializationHelper">
-        <xs:sequence />
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="UniqueConstraintViolationExceptionMessage" nillable="true" type="tns:UniqueConstraintViolationExceptionMessage" />
   <xs:complexType name="ConcurrencyExceptionMessage">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:ZetboxContextExceptionSerializationHelper">
@@ -45,30 +37,49 @@
   <xs:complexType name="FKViolationExceptionMessage">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:ZetboxContextExceptionSerializationHelper">
-        <xs:sequence />
+        <xs:sequence>
+          <xs:element name="_x003C_Details_x003E_k__BackingField" nillable="true" type="tns:ArrayOfFKViolationExceptionDetail" />
+        </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="FKViolationExceptionMessage" nillable="true" type="tns:FKViolationExceptionMessage" />
-  <xs:simpleType name="OrderByType">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="ASC">
-        <xs:annotation>
-          <xs:appinfo>
-            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
-          </xs:appinfo>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="DESC">
-        <xs:annotation>
-          <xs:appinfo>
-            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
-          </xs:appinfo>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="OrderByType" nillable="true" type="tns:OrderByType" />
+  <xs:complexType name="ArrayOfFKViolationExceptionDetail">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="FKViolationExceptionDetail" nillable="true" type="tns:FKViolationExceptionDetail" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFKViolationExceptionDetail" nillable="true" type="tns:ArrayOfFKViolationExceptionDetail" />
+  <xs:complexType name="FKViolationExceptionDetail">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DatabaseError" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RelGuid" type="ser:guid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="FKViolationExceptionDetail" nillable="true" type="tns:FKViolationExceptionDetail" />
+  <xs:complexType name="UniqueConstraintViolationExceptionMessage">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ZetboxContextExceptionSerializationHelper">
+        <xs:sequence>
+          <xs:element name="_x003C_Details_x003E_k__BackingField" nillable="true" type="tns:ArrayOfUniqueConstraintViolationExceptionDetail" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="UniqueConstraintViolationExceptionMessage" nillable="true" type="tns:UniqueConstraintViolationExceptionMessage" />
+  <xs:complexType name="ArrayOfUniqueConstraintViolationExceptionDetail">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UniqueConstraintViolationExceptionDetail" nillable="true" type="tns:UniqueConstraintViolationExceptionDetail" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUniqueConstraintViolationExceptionDetail" nillable="true" type="tns:ArrayOfUniqueConstraintViolationExceptionDetail" />
+  <xs:complexType name="UniqueConstraintViolationExceptionDetail">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DatabaseError" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IdxGuid" type="ser:guid" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UniqueConstraintViolationExceptionDetail" nillable="true" type="tns:UniqueConstraintViolationExceptionDetail" />
   <xs:complexType name="InvalidZetboxGeneratedVersionException">
     <xs:complexContent mixed="false">
       <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/System" base="q1:Exception" />

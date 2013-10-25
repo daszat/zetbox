@@ -144,8 +144,8 @@ namespace Zetbox.App.Base
 							new ProjectedCollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl.Identity_memberOf_Group_RelationEntryProxy, Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.Member,
                                 p => (Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl.Identity_memberOf_Group_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl>)entry.A.Groups);
+                                ce => (Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl.Identity_memberOf_Group_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
+                    _Member.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Member", null, null); if(OnMember_PostSetter != null && IsAttached) OnMember_PostSetter(this); };
                     if (Member_was_eagerLoaded) { Member_was_eagerLoaded = false; }
 				}
 				return (ICollection<Zetbox.App.Base.Identity>)_Member;
@@ -156,6 +156,13 @@ namespace Zetbox.App.Base
 		// ignored, but required for Serialization
         private bool Member_was_eagerLoaded = false;
 
+        public Zetbox.API.Async.ZbTask TriggerFetchMemberAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.Identity>>(this.Member);
+        }
+
+public static event PropertyListChangedHandler<Zetbox.App.Base.Group> OnMember_PostSetter;
+
         public static event PropertyIsValidHandler<Zetbox.App.Base.Group> OnMember_IsValid;
 
         /// <summary>
@@ -164,7 +171,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
         // fkBackingName=this.Proxy.Module; fkGuidBackingName=_fk_guid_Module;
         // referencedInterface=Zetbox.App.Base.Module; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -245,6 +252,11 @@ namespace Zetbox.App.Base
 
         /// <summary>Backing store for Module's guid, used on import only</summary>
         private Guid? _fk_guid_Module = null;
+
+    public Zetbox.API.Async.ZbTask TriggerFetchModuleAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(this.Module);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
 		public static event PropertyGetterHandler<Zetbox.App.Base.Group, Zetbox.App.Base.Module> OnModule_Getter;
@@ -442,6 +454,19 @@ namespace Zetbox.App.Base
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Member":
+                return TriggerFetchMemberAsync();
+            case "Module":
+                return TriggerFetchModuleAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

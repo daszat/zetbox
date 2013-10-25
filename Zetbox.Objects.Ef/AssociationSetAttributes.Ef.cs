@@ -100,7 +100,7 @@ using Zetbox.DalProvider.Ef;
 	/*
     Relation: FK_Application_has_Module
     A: ZeroOrMore Application as Application
-    B: ZeroOrOne Module as Module
+    B: One Module as Module
     Preferred Storage: MergeIntoA
 	*/
 
@@ -434,6 +434,123 @@ using Zetbox.DalProvider.Ef;
 
 
 	/*
+    Relation: FK_Calendar_has_Owner
+    A: ZeroOrMore CalendarBook as Calendar
+    B: One Identity as Owner
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Calendar_has_Owner",
+    "Calendar", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.CalendarBookEfImpl),
+    "Owner", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_Calendar_shared_r_GroupReaders
+    A: ZeroOrMore CalendarBook as Calendar
+    B: ZeroOrMore Group as GroupReaders
+    Preferred Storage: Separate
+	*/
+
+// The association from A to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_Calendar_shared_r_GroupReaders_A",
+    "Calendar", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Calendar.CalendarBookEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.CalendarBook_shared_r_Group_RelationEntryEfImpl)
+    )]
+// The association from B to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_Calendar_shared_r_GroupReaders_B",
+    "GroupReaders", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.GroupEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.CalendarBook_shared_r_Group_RelationEntryEfImpl)
+    )]
+
+	/*
+    Relation: FK_Calendar_shared_r_Readers
+    A: ZeroOrMore CalendarBook as Calendar
+    B: ZeroOrMore Identity as Readers
+    Preferred Storage: Separate
+	*/
+
+// The association from A to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_Calendar_shared_r_Readers_A",
+    "Calendar", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Calendar.CalendarBookEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.CalendarBook_shared_r_Identity_RelationEntryEfImpl)
+    )]
+// The association from B to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_Calendar_shared_r_Readers_B",
+    "Readers", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.CalendarBook_shared_r_Identity_RelationEntryEfImpl)
+    )]
+
+	/*
+    Relation: FK_Calendar_shared_w_GroupWriters
+    A: ZeroOrMore CalendarBook as Calendar
+    B: ZeroOrMore Group as GroupWriters
+    Preferred Storage: Separate
+	*/
+
+// The association from A to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_Calendar_shared_w_GroupWriters_A",
+    "Calendar", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Calendar.CalendarBookEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.CalendarBook_shared_w_Group_RelationEntryEfImpl)
+    )]
+// The association from B to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_Calendar_shared_w_GroupWriters_B",
+    "GroupWriters", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.GroupEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.CalendarBook_shared_w_Group_RelationEntryEfImpl)
+    )]
+
+	/*
+    Relation: FK_Calendar_shared_w_Writers
+    A: ZeroOrMore CalendarBook as Calendar
+    B: ZeroOrMore Identity as Writers
+    Preferred Storage: Separate
+	*/
+
+// The association from A to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_Calendar_shared_w_Writers_A",
+    "Calendar", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Calendar.CalendarBookEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.CalendarBook_shared_w_Identity_RelationEntryEfImpl)
+    )]
+// The association from B to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_Calendar_shared_w_Writers_B",
+    "Writers", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.CalendarBook_shared_w_Identity_RelationEntryEfImpl)
+    )]
+
+	/*
+    Relation: FK_Calendar_was_ChangedBy
+    A: ZeroOrMore CalendarBook as Calendar
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Calendar_was_ChangedBy",
+    "Calendar", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.CalendarBookEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_Calendar_was_CreatedBy
+    A: ZeroOrMore CalendarBook as Calendar
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Calendar_was_CreatedBy",
+    "Calendar", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.CalendarBookEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
+    )]
+
+
+	/*
     Relation: FK_Child_allow_Identity
     A: ZeroOrMore SecurityTestChild as Child
     B: One Identity as Identity
@@ -449,21 +566,6 @@ using Zetbox.DalProvider.Ef;
 
 
 	/*
-    Relation: FK_Child_has_Parent
-    A: ZeroOrMore TypeRef as Child
-    B: ZeroOrOne TypeRef as Parent
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_Child_has_Parent",
-    "Child", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.TypeRefEfImpl),
-    "Parent", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.TypeRefEfImpl)
-    )]
-
-
-	/*
     Relation: FK_ChildControlKinds_have_a_Parent
     A: ZeroOrMore ControlKind as ChildControlKinds
     B: ZeroOrOne ControlKind as Parent
@@ -475,21 +577,6 @@ using Zetbox.DalProvider.Ef;
     "Model", "FK_ChildControlKinds_have_a_Parent",
     "ChildControlKinds", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ControlKindEfImpl),
     "Parent", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.ControlKindEfImpl)
-    )]
-
-
-	/*
-    Relation: FK_ClrObjectParameter_isOf_Type
-    A: ZeroOrMore CLRObjectParameter as ClrObjectParameter
-    B: One TypeRef as Type
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_ClrObjectParameter_isOf_Type",
-    "ClrObjectParameter", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.CLRObjectParameterEfImpl),
-    "Type", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.TypeRefEfImpl)
     )]
 
 
@@ -539,36 +626,6 @@ using Zetbox.DalProvider.Ef;
 
 
 	/*
-    Relation: FK_Constraint_invokes_GetErrorTextInvocation
-    A: One InvokingConstraint as Constraint
-    B: One ConstraintInvocation as GetErrorTextInvocation
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_Constraint_invokes_GetErrorTextInvocation",
-    "Constraint", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.InvokingConstraintEfImpl),
-    "GetErrorTextInvocation", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ConstraintInvocationEfImpl)
-    )]
-
-
-	/*
-    Relation: FK_Constraint_invokes_IsValidInvocation
-    A: One InvokingConstraint as Constraint
-    B: One ConstraintInvocation as IsValidInvocation
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_Constraint_invokes_IsValidInvocation",
-    "Constraint", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.InvokingConstraintEfImpl),
-    "IsValidInvocation", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ConstraintInvocationEfImpl)
-    )]
-
-
-	/*
     Relation: FK_Constraint_on_Constrained
     A: ZeroOrMore InstanceConstraint as Constraint
     B: ZeroOrOne DataType as Constrained
@@ -614,21 +671,6 @@ using Zetbox.DalProvider.Ef;
 
 
 	/*
-    Relation: FK_ConstraintInvocation_has_TypeRef
-    A: ZeroOrMore ConstraintInvocation as ConstraintInvocation
-    B: ZeroOrOne TypeRef as TypeRef
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_ConstraintInvocation_has_TypeRef",
-    "ConstraintInvocation", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.ConstraintInvocationEfImpl),
-    "TypeRef", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.TypeRefEfImpl)
-    )]
-
-
-	/*
     Relation: FK_ControlKind_has_Module
     A: ZeroOrMore ControlKind as ControlKind
     B: One Module as Module
@@ -640,6 +682,21 @@ using Zetbox.DalProvider.Ef;
     "Model", "FK_ControlKind_has_Module",
     "ControlKind", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ControlKindEfImpl),
     "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ModuleEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_CPObj_has_DefaultViewModelDescriptor
+    A: ZeroOrMore CompoundObject as CPObj
+    B: ZeroOrOne ViewModelDescriptor as DefaultViewModelDescriptor
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_CPObj_has_DefaultViewModelDescriptor",
+    "CPObj", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.CompoundObjectEfImpl),
+    "DefaultViewModelDescriptor", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.ViewModelDescriptorEfImpl)
     )]
 
 
@@ -763,21 +820,6 @@ using Zetbox.DalProvider.Ef;
     "Model", "FK_DefaultPropertyValue_was_CreatedBy",
     "DefaultPropertyValue", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.DefaultPropertyValueEfImpl),
     "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
-    )]
-
-
-	/*
-    Relation: FK_Descriptor_has_ViewModelRef
-    A: ZeroOrMore ViewModelDescriptor as Descriptor
-    B: One TypeRef as ViewModelRef
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_Descriptor_has_ViewModelRef",
-    "Descriptor", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ViewModelDescriptorEfImpl),
-    "ViewModelRef", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.TypeRefEfImpl)
     )]
 
 
@@ -935,6 +977,51 @@ using Zetbox.DalProvider.Ef;
 
 
 	/*
+    Relation: FK_Event_of_Calendar
+    A: ZeroOrMore Event as Event
+    B: One CalendarBook as Calendar
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Event_of_Calendar",
+    "Event", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.EventEfImpl),
+    "Calendar", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Calendar.CalendarBookEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_Event_was_ChangedBy
+    A: ZeroOrMore Event as Event
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Event_was_ChangedBy",
+    "Event", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.EventEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_Event_was_CreatedBy
+    A: ZeroOrMore Event as Event
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Event_was_CreatedBy",
+    "Event", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.EventEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
+    )]
+
+
+	/*
     Relation: FK_File_has_Blob
     A: ZeroOrMore File as File
     B: One Blob as Blob
@@ -946,6 +1033,21 @@ using Zetbox.DalProvider.Ef;
     "Model", "FK_File_has_Blob",
     "File", RelationshipMultiplicity.Many, typeof(at.dasz.DocumentManagement.FileEfImpl),
     "Blob", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.BlobEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_File_has_Excerpt
+    A: One File as File
+    B: ZeroOrOne Excerpt as Excerpt
+    Preferred Storage: MergeIntoB
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_File_has_Excerpt",
+    "File", RelationshipMultiplicity.ZeroOrOne, typeof(at.dasz.DocumentManagement.FileEfImpl),
+    "Excerpt", RelationshipMultiplicity.ZeroOrOne, typeof(at.dasz.DocumentManagement.ExcerptEfImpl)
     )]
 
 
@@ -2351,21 +2453,6 @@ using Zetbox.DalProvider.Ef;
 
 
 	/*
-    Relation: FK_ServiceDescriptor_describes_a_TypeRef
-    A: ZeroOrMore ServiceDescriptor as ServiceDescriptor
-    B: One TypeRef as TypeRef
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_ServiceDescriptor_describes_a_TypeRef",
-    "ServiceDescriptor", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.ServiceDescriptorEfImpl),
-    "TypeRef", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.TypeRefEfImpl)
-    )]
-
-
-	/*
     Relation: FK_ServiceDescriptor_has_Module
     A: ZeroOrMore ServiceDescriptor as ServiceDescriptor
     B: One Module as Module
@@ -2642,6 +2729,66 @@ using Zetbox.DalProvider.Ef;
     )]
 
 	/*
+    Relation: FK_SyncAccount_for_Calendar
+    A: ZeroOrMore WorkScheduleSyncProvider as SyncAccount
+    B: One CalendarBook as Calendar
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_SyncAccount_for_Calendar",
+    "SyncAccount", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.WorkScheduleSyncProviderEfImpl),
+    "Calendar", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Calendar.CalendarBookEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_SyncAccount_of_WorkSchedule
+    A: ZeroOrMore WorkScheduleSyncProvider as SyncAccount
+    B: One WorkSchedule as WorkSchedule
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_SyncAccount_of_WorkSchedule",
+    "SyncAccount", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.WorkScheduleSyncProviderEfImpl),
+    "WorkSchedule", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Calendar.WorkScheduleEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_SyncAccount_was_ChangedBy
+    A: ZeroOrMore SyncProvider as SyncAccount
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_SyncAccount_was_ChangedBy",
+    "SyncAccount", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.SyncProviderEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_SyncAccount_was_CreatedBy
+    A: ZeroOrMore SyncProvider as SyncAccount
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_SyncAccount_was_CreatedBy",
+    "SyncAccount", RelationshipMultiplicity.Many, typeof(Zetbox.App.Calendar.SyncProviderEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
+    )]
+
+
+	/*
     Relation: FK_Task_was_ChangedBy
     A: ZeroOrMore Task as Task
     B: ZeroOrOne Identity as ChangedBy
@@ -2720,6 +2867,21 @@ using Zetbox.DalProvider.Ef;
     )]
 
 	/*
+    Relation: FK_Test_of_Event
+    A: ZeroOrMore EventTestObject as Test
+    B: One Event as Event
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_Test_of_Event",
+    "Test", RelationshipMultiplicity.Many, typeof(Zetbox.App.Test.EventTestObjectEfImpl),
+    "Event", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Calendar.EventEfImpl)
+    )]
+
+
+	/*
     Relation: FK_TestObjClass_has_ObjectProp
     A: ZeroOrMore TestObjClass as TestObjClass
     B: ZeroOrOne Kunde as ObjectProp
@@ -2765,69 +2927,6 @@ using Zetbox.DalProvider.Ef;
 
 
 	/*
-    Relation: FK_TypeRef_has_Assembly
-    A: ZeroOrMore TypeRef as TypeRef
-    B: One Assembly as Assembly
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_TypeRef_has_Assembly",
-    "TypeRef", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.TypeRefEfImpl),
-    "Assembly", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.AssemblyEfImpl)
-    )]
-
-
-	/*
-    Relation: FK_TypeRef_hasGenericArguments_GenericArguments
-    A: ZeroOrMore TypeRef as TypeRef
-    B: ZeroOrMore TypeRef as GenericArguments
-    Preferred Storage: Separate
-	*/
-
-// The association from A to the CollectionEntry
-[assembly: EdmRelationship("Model", "FK_TypeRef_hasGenericArguments_GenericArguments_A",
-    "TypeRef", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.TypeRefEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl)
-    )]
-// The association from B to the CollectionEntry
-[assembly: EdmRelationship("Model", "FK_TypeRef_hasGenericArguments_GenericArguments_B",
-    "GenericArguments", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.TypeRefEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryEfImpl)
-    )]
-
-	/*
-    Relation: FK_TypeRef_was_ChangedBy
-    A: ZeroOrMore TypeRef as TypeRef
-    B: ZeroOrOne Identity as ChangedBy
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_TypeRef_was_ChangedBy",
-    "TypeRef", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.TypeRefEfImpl),
-    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
-    )]
-
-
-	/*
-    Relation: FK_TypeRef_was_CreatedBy
-    A: ZeroOrMore TypeRef as TypeRef
-    B: ZeroOrOne Identity as CreatedBy
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_TypeRef_was_CreatedBy",
-    "TypeRef", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.TypeRefEfImpl),
-    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
-    )]
-
-
-	/*
     Relation: FK_UniqueContraints_ensures_unique_on_Properties
     A: ZeroOrMore IndexConstraint as UniqueContraints
     B: ZeroOrMore Property as Properties
@@ -2844,21 +2943,6 @@ using Zetbox.DalProvider.Ef;
     "Properties", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.PropertyEfImpl),
     "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl)
     )]
-
-	/*
-    Relation: FK_View_has_ControlRef
-    A: ZeroOrMore ViewDescriptor as View
-    B: One TypeRef as ControlRef
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_View_has_ControlRef",
-    "View", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ViewDescriptorEfImpl),
-    "ControlRef", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.TypeRefEfImpl)
-    )]
-
 
 	/*
     Relation: FK_ViewDescriptor_has_Module
@@ -2889,24 +2973,6 @@ using Zetbox.DalProvider.Ef;
     "ControlKind", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.ControlKindEfImpl)
     )]
 
-
-	/*
-    Relation: FK_ViewDescriptor_supports_ViewModelTypeRefs
-    A: ZeroOrMore ViewDescriptor as ViewDescriptor
-    B: ZeroOrMore TypeRef as ViewModelTypeRefs
-    Preferred Storage: Separate
-	*/
-
-// The association from A to the CollectionEntry
-[assembly: EdmRelationship("Model", "FK_ViewDescriptor_supports_ViewModelTypeRefs_A",
-    "ViewDescriptor", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.ViewDescriptorEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryEfImpl)
-    )]
-// The association from B to the CollectionEntry
-[assembly: EdmRelationship("Model", "FK_ViewDescriptor_supports_ViewModelTypeRefs_B",
-    "ViewModelTypeRefs", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.TypeRefEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryEfImpl)
-    )]
 
 	/*
     Relation: FK_ViewModel_displayed_by_DefaultDisplayKind
@@ -3195,6 +3261,20 @@ using Zetbox.DalProvider.Ef;
 	"Auftrag_Rights", 
 	global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, 
 	typeof(Zetbox.App.Projekte.Auftrag_RightsEfImpl))]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_CalendarBooks_Rights", 
+	"CalendarBook", 
+	global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, 
+	typeof(Zetbox.App.Calendar.CalendarBookEfImpl), 
+	"CalendarBook_Rights", 
+	global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, 
+	typeof(Zetbox.App.Calendar.CalendarBook_RightsEfImpl))]
+[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Events_Rights", 
+	"Event", 
+	global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, 
+	typeof(Zetbox.App.Calendar.EventEfImpl), 
+	"Event_Rights", 
+	global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, 
+	typeof(Zetbox.App.Calendar.Event_RightsEfImpl))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Projekte_Rights", 
 	"Projekt", 
 	global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, 

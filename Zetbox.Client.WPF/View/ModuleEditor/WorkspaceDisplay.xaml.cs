@@ -35,6 +35,7 @@ namespace Zetbox.Client.WPF.View.ModuleEditor
     /// <summary>
     /// Interaction logic for Workspace.xaml
     /// </summary>
+    [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
     public partial class WorkspaceDisplay : WindowView, IHasViewModel<WorkspaceViewModel>
     {
         public WorkspaceDisplay()

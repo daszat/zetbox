@@ -17,9 +17,9 @@ namespace Zetbox.Client.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Text;
-
     using Zetbox.API;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
@@ -28,7 +28,7 @@ namespace Zetbox.Client.Models
     using Zetbox.Client;
     using Zetbox.Client.Presentables;
     using Zetbox.Client.Presentables.ValueViewModels;
-    using System.Collections.ObjectModel;
+    using System.Globalization;
 
     public class ColumnDisplayModel
     {
@@ -166,6 +166,7 @@ namespace Zetbox.Client.Models
             {
                 Header = string.Join(", ", p.Select(i => i.GetLabel()).ToArray()),
                 Path = string.Join(".", p.Select(i => i.Name).ToArray()),
+                DynamicOrderByExpression = FormatDynamicOrderByExpression(p),
                 Property = last,
                 Properties = p,
                 RequestedWidth = p.Last().GetDisplayWidth(),
@@ -183,6 +184,98 @@ namespace Zetbox.Client.Models
                     break;
             }
             return colMdl;
+        }
+
+        public static string FormatDynamicOrderByExpression(params Property[] properties)
+        {
+            if (properties == null) return string.Empty;
+            if (properties.Length == 0) return string.Empty;
+
+            var props = properties.ToList();
+            while (props.Last() is ObjectReferenceProperty)
+            {
+                var refProp = (ObjectReferenceProperty)props.Last();
+                var sortProp = refProp.GetReferencedObjectClass()
+                                      .AndParents(c => c.BaseObjectClass)
+                                      .SelectMany(c => c.Properties)
+                                      .Where(p => p.DefaultSortPriority != null)
+                                      .OrderBy(p => p.DefaultSortPriority)
+                                      .FirstOrDefault();
+                if (sortProp == null) break;
+                if (props.Contains(sortProp)) break;
+                props.Add(sortProp);
+            }
+
+            var result = new StringBuilder();
+            var propsPath = new StringBuilder("it");
+            var lastProp = props.Last();
+            var standInValue = GetStandInValue(lastProp);
+            foreach (var p in props.Take(props.Count - 1))
+            {
+                propsPath.Append('.').Append(p.Name);
+                result.Append(propsPath).Append("==null?").Append(standInValue).Append(":");
+            }
+            propsPath.Append('.').Append(lastProp.Name);
+            result.Append(propsPath);
+
+            if (lastProp is ObjectReferenceProperty)
+            {
+                result.Append("!=null?").Append(propsPath).Append(".ID:-1");
+            }
+
+            return result.ToString();
+        }
+
+        private static string GetStandInValue(Property p)
+        {
+            if (p is DecimalProperty)
+            {
+                return decimal.MinValue.ToString(CultureInfo.InvariantCulture);
+            }
+            else if (p is IntProperty)
+            {
+                return int.MinValue.ToString(CultureInfo.InvariantCulture);
+            }
+            else if (p is DoubleProperty)
+            {
+                return double.MinValue.ToString(CultureInfo.InvariantCulture);
+            }
+            else if (p is StringProperty)
+            {
+                return "null";
+            }
+            else if (p is DateTimeProperty)
+            {
+                return "null";
+            }
+            else if (p is GuidProperty)
+            {
+                return Guid.Empty.ToString();
+            }
+            else if (p is BoolProperty)
+            {
+                return "false";
+            }
+            else if (p is EnumerationProperty)
+            {
+                return "-1";
+            }
+            else if (p is ObjectReferenceProperty)
+            {
+                return "-1";
+            }
+            else if (p is CalculatedObjectReferenceProperty)
+            {
+                return "-1";
+            }
+            else if (p is CompoundObjectProperty)
+            {
+                return "null";
+            }
+            else
+            {
+                throw new NotSupportedException(string.Format("DynamicOrderByExpression for Property Type {0} are not supported yet", p.GetType().Name));
+            }
         }
         #endregion
 
@@ -274,7 +367,7 @@ namespace Zetbox.Client.Models
             };
         }
         #endregion
-        
+
         #region Create ViewModelProperties
         /// <summary>
         /// Creates a ColumnDisplayModel for a view model property or path to a property
@@ -351,6 +444,7 @@ namespace Zetbox.Client.Models
         public App.Base.Property[] Properties { get; private set; }
         public Method Method { get; private set; }
         public string Path { get; private set; }
+        public string DynamicOrderByExpression { get; private set; }
         #endregion
 
         public override string ToString()

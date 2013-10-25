@@ -54,7 +54,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CompoundObject
         // fkBackingName=this.Proxy.CompoundObject; fkGuidBackingName=_fk_guid_CompoundObject;
         // referencedInterface=Zetbox.App.Base.CompoundObject; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -135,6 +135,11 @@ namespace Zetbox.App.Base
 
         /// <summary>Backing store for CompoundObject's guid, used on import only</summary>
         private Guid? _fk_guid_CompoundObject = null;
+
+    public Zetbox.API.Async.ZbTask TriggerFetchCompoundObjectAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.CompoundObject>(this.CompoundObject);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CompoundObject
 		public static event PropertyGetterHandler<Zetbox.App.Base.CompoundObjectParameter, Zetbox.App.Base.CompoundObject> OnCompoundObject_Getter;
@@ -384,6 +389,17 @@ namespace Zetbox.App.Base
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "CompoundObject":
+                return TriggerFetchCompoundObjectAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

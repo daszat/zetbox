@@ -17,21 +17,27 @@
   <files>
     <!-- Executables and scripts -->
     <file src="Zetbox.Cli.exe" target="zetbox" />
+    <file src="Zetbox.Cli.pdb" target="zetbox" />
     <file src="Zetbox.Cli.exe.config" target="zetbox" />
 
     <file src="Zetbox.ConfigEditor.exe" target="zetbox" />
+    <file src="Zetbox.ConfigEditor.pdb" target="zetbox" />
     <file src="Zetbox.ConfigEditor.exe.config" target="zetbox" />
 
     <file src="Zetbox.Server.Service.exe" target="zetbox" />
+    <file src="Zetbox.Server.Service.pdb" target="zetbox" />
     <file src="Zetbox.Server.Service.exe.config" target="zetbox" />
 
     <file src="Zetbox.Server.Service32.exe" target="zetbox" />
+    <file src="Zetbox.Server.Service32.pdb" target="zetbox" />
     <file src="Zetbox.Server.Service32.exe.config" target="zetbox" />
 
     <file src="Zetbox.WPF.exe" target="zetbox" />
+    <file src="Zetbox.WPF.pdb" target="zetbox" />
     <file src="Zetbox.WPF.exe.config" target="zetbox" />
 
     <file src="PrepareEnv.exe" target="zetbox" />
+    <file src="PrepareEnv.pdb" target="zetbox" />
     <file src="PrepareEnv.exe.config" target="zetbox" />
 
     <file src="ZbDeploy.cmd" target="zetbox" />
@@ -41,17 +47,25 @@
 
     <!-- Bootstrapper -->
     <file src="Bootstrapper\Zetbox.Client.Bootstrapper.exe" target="zetbox/Bootstrapper" />
+    <file src="Bootstrapper\Zetbox.Client.Bootstrapper.pdb" target="zetbox/Bootstrapper" />
     <file src="Bootstrapper\Zetbox.Client.Bootstrapper.exe.config" target="zetbox/Bootstrapper" />
 
     <!-- Common Components -->
     <file src="Common\Zetbox.API.Common.dll" target="zetbox\Common" />
+    <file src="Common\Zetbox.API.Common.pdb" target="zetbox\Common" />
     <file src="Common\Zetbox.API.dll" target="zetbox\Common" />
+    <file src="Common\Zetbox.API.pdb" target="zetbox\Common" />
     <file src="Common\Zetbox.App.Projekte.Common.dll" target="zetbox\Common" />
+    <file src="Common\Zetbox.App.Projekte.Common.pdb" target="zetbox\Common" />
     <file src="Common\Zetbox.Dalprovider.Base.dll" target="zetbox\Common" />
+    <file src="Common\Zetbox.Dalprovider.Base.pdb" target="zetbox\Common" />
     <file src="Common\Zetbox.Dalprovider.Memory.dll" target="zetbox\Common" />
+    <file src="Common\Zetbox.Dalprovider.Memory.pdb" target="zetbox\Common" />
 
     <file src="Common\Fallback\Zetbox.Objects.dll" target="zetbox\Common\Fallback" />
+    <file src="Common\Fallback\Zetbox.Objects.pdb" target="zetbox\Common\Fallback" />
     <file src="Common\Fallback\Zetbox.Objects.MemoryImpl.dll" target="zetbox\Common\Fallback" />
+    <file src="Common\Fallback\Zetbox.Objects.MemoryImpl.pdb" target="zetbox\Common\Fallback" />
 
     <!-- Common Dependencies -->
     <file src="Common\Arebis.CodeGeneration.dll" target="zetbox\Common" />
@@ -71,15 +85,23 @@
 
     <!-- Client-side Components -->
     <file src="Client\Zetbox.API.Client.dll" target="zetbox\Client" />
+    <file src="Client\Zetbox.API.Client.pdb" target="zetbox\Client" />
     <file src="Client\Zetbox.API.Client.dll.config" target="zetbox\Client" />
     <file src="Client\Zetbox.App.Projekte.Client.dll" target="zetbox\Client" />
+    <file src="Client\Zetbox.App.Projekte.Client.pdb" target="zetbox\Client" />
     <file src="Client\Zetbox.Client.dll" target="zetbox\Client" />
+    <file src="Client\Zetbox.Client.pdb" target="zetbox\Client" />
     <file src="Client\Zetbox.Client.WPF.dll" target="zetbox\Client" />
+    <file src="Client\Zetbox.Client.WPF.pdb" target="zetbox\Client" />
     <file src="Client\Zetbox.Client.WPF.dll.config" target="zetbox\Client" />
     <file src="Client\Zetbox.Client.WPF.Toolkit.dll" target="zetbox\Client" />
+    <file src="Client\Zetbox.Client.WPF.Toolkit.pdb" target="zetbox\Client" />
     <file src="Client\Zetbox.DalProvider.ClientObjects.dll" target="zetbox\Client" />
+    <file src="Client\Zetbox.DalProvider.ClientObjects.pdb" target="zetbox\Client" />
     <file src="Client\Zetbox.Microsoft.dll" target="zetbox\Client" />
+    <file src="Client\Zetbox.Microsoft.pdb" target="zetbox\Client" />
     <file src="Client\WPFSamplesLib.dll" target="zetbox\Client" />
+    <file src="Client\WPFSamplesLib.pdb" target="zetbox\Client" />
 
     <!-- Client-side Dependencies -->
     <file src="Client\GraphSharp.Controls.dll" target="zetbox\Client" />
@@ -91,14 +113,24 @@
     <file src="Client\WPFExtensions.dll" target="zetbox\Client" />
 
     <!-- Server-side Components -->
+    <file src="Server\Lucene.Net.dll" target="zetbox\Server" />
+    <file src="Server\Lucene.Net.Contrib.*.dll" target="zetbox\Server" />
     <file src="Server\Zetbox.API.Server.dll" target="zetbox\Server" />
+    <file src="Server\Zetbox.API.Server.pdb" target="zetbox\Server" />
     <file src="Server\Zetbox.App.Projekte.Server.dll" target="zetbox\Server" />
+    <file src="Server\Zetbox.App.Projekte.Server.pdb" target="zetbox\Server" />
     <file src="Server\Zetbox.DalProvider.Client.Generator.dll" target="zetbox\Server" />
+    <file src="Server\Zetbox.DalProvider.Client.Generator.pdb" target="zetbox\Server" />
     <file src="Server\Zetbox.DalProvider.Memory.Generator.dll" target="zetbox\Server" />
+    <file src="Server\Zetbox.DalProvider.Memory.Generator.pdb" target="zetbox\Server" />
     <file src="Server\Zetbox.Generator.dll" target="zetbox\Server" />
+    <file src="Server\Zetbox.Generator.pdb" target="zetbox\Server" />
     <file src="Server\Zetbox.Server.dll" target="zetbox\Server" />
+    <file src="Server\Zetbox.Server.pdb" target="zetbox\Server" />
     <file src="Server\Zetbox.Server.Wcf.dll" target="zetbox\Server" />
+    <file src="Server\Zetbox.Server.Wcf.pdb" target="zetbox\Server" />
     <file src="Server\Zetbox.Unix.dll" target="zetbox\Server" />
+    <file src="Server\Zetbox.Unix.pdb" target="zetbox\Server" />
 
     <!-- Server-side Dependencies -->
     <file src="Server\Autofac.Integration.Wcf.dll" target="zetbox\Server" />
@@ -117,9 +149,9 @@
 
     <!-- HttpService Component -->
     <file src="HttpService\bin\Zetbox.Server.HttpService.dll" target="zetbox/HttpService/bin" />
+    <file src="HttpService\bin\Zetbox.Server.HttpService.pdb" target="zetbox/HttpService/bin" />
 
     <!-- HttpService Dependencies -->
-    <file src="HttpService\bin\Zetbox.Server.HttpService.dll" target="zetbox/HttpService/bin" />
     <file src="HttpService\bin\Autofac.dll" target="zetbox/HttpService/bin" />
     <file src="HttpService\bin\Autofac.Configuration.dll" target="zetbox/HttpService/bin" />
     <file src="HttpService\bin\Autofac.Integration.Web.dll" target="zetbox/HttpService/bin" />

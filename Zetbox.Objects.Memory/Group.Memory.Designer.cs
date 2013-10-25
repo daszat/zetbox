@@ -112,45 +112,55 @@ namespace Zetbox.App.Base
         /// Identities are member of this group
         /// </summary>
         // collection entry list property
-   		// Zetbox.Generator.Templates.Properties.CollectionEntryListProperty
-		public ICollection<Zetbox.App.Base.Identity> Member
-		{
-			get
-			{
-				if (_Member == null)
-				{
+        // BEGIN Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for Member
+        public ICollection<Zetbox.App.Base.Identity> Member
+        {
+            get
+            {
+                if (_Member == null)
+                {
                     TriggerFetchMemberAsync().Wait();
-				}
-				return (ICollection<Zetbox.App.Base.Identity>)_Member;
-			}
-		}
-        
+                }
+                return (ICollection<Zetbox.App.Base.Identity>)_Member;
+            }
+        }
+
         Zetbox.API.Async.ZbTask _triggerFetchMemberTask;
         public Zetbox.API.Async.ZbTask TriggerFetchMemberAsync()
         {
             if (_triggerFetchMemberTask != null) return _triggerFetchMemberTask;
-			_triggerFetchMemberTask = Context.FetchRelationAsync<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>(new Guid("3efb7ae8-ba6b-40e3-9482-b45d1c101743"), RelationEndRole.B, this);
-			_triggerFetchMemberTask.OnResult(r => 
+            _triggerFetchMemberTask = Context.FetchRelationAsync<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>(new Guid("3efb7ae8-ba6b-40e3-9482-b45d1c101743"), RelationEndRole.B, this);
+            _triggerFetchMemberTask.OnResult(r =>
             {
-                _Member 
-				= new ObservableASideCollectionWrapper<Zetbox.App.Base.Identity, Zetbox.App.Base.Group, Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>>(
-					this, 
-					new RelationshipFilterBSideCollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>(this.Context, this));
+                _Member
+                    = new ObservableASideCollectionWrapper<Zetbox.App.Base.Identity, Zetbox.App.Base.Group, Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>>(
+                        this,
+                        new RelationshipFilterBSideCollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>(this.Context, this));
+                        // _Member.CollectionChanged is managed by OnMemberCollectionChanged() and called from the RelationEntry
             });
             return _triggerFetchMemberTask;
         }
 
-		private ObservableASideCollectionWrapper<Zetbox.App.Base.Identity, Zetbox.App.Base.Group, Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>> _Member;
+        internal void OnMemberCollectionChanged()
+        {
+            NotifyPropertyChanged("Member", null, null);
+            if (OnMember_PostSetter != null && IsAttached)
+                OnMember_PostSetter(this);
+        }
+
+        private ObservableASideCollectionWrapper<Zetbox.App.Base.Identity, Zetbox.App.Base.Group, Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryMemoryImpl>> _Member;
+        // END Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for Member
+public static event PropertyListChangedHandler<Zetbox.App.Base.Group> OnMember_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.Group> OnMember_IsValid;
 
         /// <summary>
         /// Module is optional. Use it only when you need a Group to be exportable
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
         // fkBackingName=_fk_Module; fkGuidBackingName=_fk_guid_Module;
         // referencedInterface=Zetbox.App.Base.Module; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -479,6 +489,7 @@ namespace Zetbox.App.Base
                 ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)Context.Find<Zetbox.App.Base.Module>(_fk_Module.Value);
             else
                 ModuleImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

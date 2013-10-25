@@ -1,6 +1,336 @@
 <?xml version="1.0"?>
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
                    default-cascade="save-update">
+    <class name="Zetbox.App.Calendar.CalendarBookNHibernateImpl+CalendarBookProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.Calendar.CalendarBookNHibernateImpl+CalendarBookProxy, Zetbox.Objects.NHibernateImpl"
+           schema="`calendar`"
+           table="`CalendarBooks`"
+           abstract="false"
+           dynamic-update="true"
+           optimistic-lock="dirty"
+           batch-size="100">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`calendar`</param>
+                <param name="sequence">`CalendarBooks_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="ChangedOn" type="Timestamp"
+                  column="`ChangedOn`" 
+                  optimistic-lock="true"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="CreatedOn" type="Timestamp"
+                  column="`CreatedOn`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ExportGuid" 
+                  column="`ExportGuid`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <!-- NMProperty -->
+        <!-- rel=CalendarBook_shared_r_Group_RelationEntry -->
+        <!-- relEnd=Calendar otherEnd=GroupReaders -->
+        <set name="GroupReaders" table="`Calendar_shared_r_GroupReaders`" inverse="true" cascade="none" batch-size="100" >
+            <key column="`fk_Calendar`" />
+            <one-to-many class="Zetbox.App.Calendar.CalendarBook_shared_r_Group_RelationEntryNHibernateImpl+CalendarBook_shared_r_Group_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
+        </set>
+
+<!-- ObjectReferenceProperty -->
+        <!-- NMProperty -->
+        <!-- rel=CalendarBook_shared_w_Group_RelationEntry -->
+        <!-- relEnd=Calendar otherEnd=GroupWriters -->
+        <set name="GroupWriters" table="`Calendar_shared_w_GroupWriters`" inverse="true" cascade="none" batch-size="100" >
+            <key column="`fk_Calendar`" />
+            <one-to-many class="Zetbox.App.Calendar.CalendarBook_shared_w_Group_RelationEntryNHibernateImpl+CalendarBook_shared_w_Group_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
+        </set>
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="IsDeactivated" 
+                  column="`IsDeactivated`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Name" 
+                  column="`Name`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="Owner" column="`fk_Owner`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
+
+<!-- ObjectReferenceProperty -->
+        <!-- NMProperty -->
+        <!-- rel=CalendarBook_shared_r_Identity_RelationEntry -->
+        <!-- relEnd=Calendar otherEnd=Readers -->
+        <set name="Readers" table="`Calendar_shared_r_Readers`" inverse="true" cascade="none" batch-size="100" >
+            <key column="`fk_Calendar`" />
+            <one-to-many class="Zetbox.App.Calendar.CalendarBook_shared_r_Identity_RelationEntryNHibernateImpl+CalendarBook_shared_r_Identity_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
+        </set>
+
+<!-- ObjectReferenceProperty -->
+        <!-- NMProperty -->
+        <!-- rel=CalendarBook_shared_w_Identity_RelationEntry -->
+        <!-- relEnd=Calendar otherEnd=Writers -->
+        <set name="Writers" table="`Calendar_shared_w_Writers`" inverse="true" cascade="none" batch-size="100" >
+            <key column="`fk_Calendar`" />
+            <one-to-many class="Zetbox.App.Calendar.CalendarBook_shared_w_Identity_RelationEntryNHibernateImpl+CalendarBook_shared_w_Identity_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
+        </set>
+
+
+        <!-- map rights -->
+        <set name="SecurityRightsCollectionImpl"
+             schema="`calendar`"
+             table="`CalendarBooks_Rights`"
+             lazy="true"
+             fetch="select" 
+             batch-size="100" >
+            <key column="`ID`" />
+            <composite-element class="Zetbox.App.Calendar.CalendarBook_RightsNHibernateImpl, Zetbox.Objects.NHibernateImpl">
+                <property name="Identity" column="`Identity`" />
+                <property name="Right" column="`Right`" />
+            </composite-element>
+        </set>
+
+        <!-- define the subclasses -->
+
+    </class>
+    <class name="Zetbox.App.Calendar.EventNHibernateImpl+EventProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.Calendar.EventNHibernateImpl+EventProxy, Zetbox.Objects.NHibernateImpl"
+           discriminator-value="calendar.Events"
+           schema="`calendar`"
+           table="`Events`"
+           abstract="false"
+           dynamic-update="true"
+           optimistic-lock="dirty"
+           batch-size="100">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`calendar`</param>
+                <param name="sequence">`Events_ID_seq`</param>
+            </generator>
+        </id>
+        <discriminator column="`__Discriminator`"
+                       type="String" />
+
+
+        <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="Body" 
+                  column="`Body`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="Calendar" column="`fk_Calendar`" class="Zetbox.App.Calendar.CalendarBookNHibernateImpl+CalendarBookProxy, Zetbox.Objects.NHibernateImpl" />
+
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="ChangedOn" type="Timestamp"
+                  column="`ChangedOn`" 
+                  optimistic-lock="true"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="CreatedOn" type="Timestamp"
+                  column="`CreatedOn`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="EndDate" type="Timestamp"
+                  column="`EndDate`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ExportGuid" 
+                  column="`ExportGuid`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="IsAllDay" 
+                  column="`IsAllDay`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="IsViewReadOnly" 
+                  column="`IsViewReadOnly`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Location" 
+                  column="`Location`" 
+                  optimistic-lock="false"/>
+        <!-- CompoundObjectProperty isValue -->
+        <component name="Recurrence" class="Zetbox.App.Base.RecurrenceRuleNHibernateImpl,Zetbox.Objects.NHibernateImpl">
+        <!-- ValueTypeProperty isValue -->
+        <property name="ByDay" 
+                  column="`Recurrence_ByDay`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ByHour" 
+                  column="`Recurrence_ByHour`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ByMinute" 
+                  column="`Recurrence_ByMinute`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ByMonth" 
+                  column="`Recurrence_ByMonth`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ByMonthDay" 
+                  column="`Recurrence_ByMonthDay`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="BySecond" 
+                  column="`Recurrence_BySecond`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="BySetPos" 
+                  column="`Recurrence_BySetPos`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ByWeekNumber" 
+                  column="`Recurrence_ByWeekNumber`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ByYearDay" 
+                  column="`Recurrence_ByYearDay`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Count" 
+                  column="`Recurrence_Count`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Frequency" 
+                  column="`Recurrence_Frequency`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Interval" 
+                  column="`Recurrence_Interval`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Until" type="Timestamp"
+                  column="`Recurrence_Until`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="WeekStart" 
+                  column="`Recurrence_WeekStart`" 
+                  optimistic-lock="false"/>
+        </component>
+        <!-- CompoundObjectProperty isValue -->
+        <component name="Source" class="Zetbox.App.Base.AnyReferenceNHibernateImpl,Zetbox.Objects.NHibernateImpl">
+        <!-- ValueTypeProperty isValue -->
+        <property name="ObjClass" 
+                  column="`Source_ObjClass`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ObjGuid" 
+                  column="`Source_ObjGuid`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ObjID" 
+                  column="`Source_ObjID`" 
+                  optimistic-lock="false"/>
+        </component>
+        <!-- ValueTypeProperty isValue -->
+        <property name="StartDate" type="Timestamp"
+                  column="`StartDate`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Summary" 
+                  column="`Summary`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="SyncHash" 
+                  column="`SyncHash`" 
+                  optimistic-lock="false"/>
+
+        <!-- map rights -->
+        <set name="SecurityRightsCollectionImpl"
+             schema="`calendar`"
+             table="`Events_Rights`"
+             lazy="true"
+             fetch="select" 
+             batch-size="100" >
+            <key column="`ID`" />
+            <composite-element class="Zetbox.App.Calendar.Event_RightsNHibernateImpl, Zetbox.Objects.NHibernateImpl">
+                <property name="Identity" column="`Identity`" />
+                <property name="Right" column="`Right`" />
+            </composite-element>
+        </set>
+
+        <!-- define the subclasses -->
+
+    </class>
+    <class name="Zetbox.App.Calendar.SyncProviderNHibernateImpl+SyncProviderProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.Calendar.SyncProviderNHibernateImpl+SyncProviderProxy, Zetbox.Objects.NHibernateImpl"
+           schema="`calendar`"
+           table="`SyncProviders`"
+           abstract="true"
+           dynamic-update="true"
+           optimistic-lock="dirty"
+           batch-size="100">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`calendar`</param>
+                <param name="sequence">`SyncProviders_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="ChangedOn" type="Timestamp"
+                  column="`ChangedOn`" 
+                  optimistic-lock="true"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="CreatedOn" type="Timestamp"
+                  column="`CreatedOn`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Name" 
+                  column="`Name`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="NextSync" type="Timestamp"
+                  column="`NextSync`" 
+                  optimistic-lock="false"/>
+
+        <!-- define the subclasses -->
+        <joined-subclass
+                name="Zetbox.App.Calendar.WorkScheduleSyncProviderNHibernateImpl+WorkScheduleSyncProviderProxy, Zetbox.Objects.NHibernateImpl"
+                proxy="Zetbox.App.Calendar.WorkScheduleSyncProviderNHibernateImpl+WorkScheduleSyncProviderProxy, Zetbox.Objects.NHibernateImpl"
+                schema="`calendar`"
+                table="`WorkScheduleSyncProvider`"
+                dynamic-update="true">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="Calendar" column="`fk_Calendar`" class="Zetbox.App.Calendar.CalendarBookNHibernateImpl+CalendarBookProxy, Zetbox.Objects.NHibernateImpl" />
+
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="WorkSchedule" column="`fk_WorkSchedule`" class="Zetbox.App.Calendar.WorkScheduleNHibernateImpl+WorkScheduleProxy, Zetbox.Objects.NHibernateImpl" />
+
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
+
+    </class>
     <class name="Zetbox.App.Calendar.WorkScheduleNHibernateImpl+WorkScheduleProxy, Zetbox.Objects.NHibernateImpl"
            proxy="Zetbox.App.Calendar.WorkScheduleNHibernateImpl+WorkScheduleProxy, Zetbox.Objects.NHibernateImpl"
            schema="`calendar`"
@@ -207,6 +537,34 @@
         </subclass>
 
     </class>
+    <class name="at.dasz.DocumentManagement.ExcerptNHibernateImpl+ExcerptProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="at.dasz.DocumentManagement.ExcerptNHibernateImpl+ExcerptProxy, Zetbox.Objects.NHibernateImpl"
+           schema="`doc`"
+           table="`Excerpts`"
+           abstract="false"
+           dynamic-update="false"
+           optimistic-lock="none"
+           batch-size="100">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`doc`</param>
+                <param name="sequence">`Excerpts_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="File" column="`fk_File`" class="at.dasz.DocumentManagement.FileNHibernateImpl+FileProxy, Zetbox.Objects.NHibernateImpl" unique="true" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="Text" 
+                  column="`Text`" 
+                  optimistic-lock="false"/>
+
+        <!-- define the subclasses -->
+
+    </class>
     <class name="at.dasz.DocumentManagement.FileNHibernateImpl+FileProxy, Zetbox.Objects.NHibernateImpl"
            proxy="at.dasz.DocumentManagement.FileNHibernateImpl+FileProxy, Zetbox.Objects.NHibernateImpl"
            schema="`doc`"
@@ -224,6 +582,21 @@
         </id>
 
         <!-- define the properties -->
+        <!-- CompoundObjectProperty isValue -->
+        <component name="AttachedTo" class="Zetbox.App.Base.AnyReferenceNHibernateImpl,Zetbox.Objects.NHibernateImpl">
+        <!-- ValueTypeProperty isValue -->
+        <property name="ObjClass" 
+                  column="`AttachedTo_ObjClass`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ObjGuid" 
+                  column="`AttachedTo_ObjGuid`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ObjID" 
+                  column="`AttachedTo_ObjID`" 
+                  optimistic-lock="false"/>
+        </component>
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Blob" column="`fk_Blob`" class="Zetbox.App.Base.BlobNHibernateImpl+BlobProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -241,6 +614,8 @@
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
                   optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <one-to-one name="Excerpt" class="at.dasz.DocumentManagement.ExcerptNHibernateImpl+ExcerptProxy, Zetbox.Objects.NHibernateImpl" constrained="false" property-ref="File" />
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
@@ -248,6 +623,10 @@
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Tags" 
+                  column="`Tags`" 
                   optimistic-lock="false"/>
 
         <!-- define the subclasses -->
@@ -266,7 +645,7 @@
         <!-- NMProperty -->
         <!-- rel=Document_has_Blob_RelationEntry -->
         <!-- relEnd=Document otherEnd=Revisions -->
-        <set name="Revisions" table="`Document_has_Revisions`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
+        <set name="Revisions" table="`Document_has_Revisions`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_Document`" />
             <one-to-many class="at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl+Document_has_Blob_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
@@ -743,7 +1122,7 @@
         <!-- NMProperty -->
         <!-- rel=NavigationEntry_accessed_by_Group_RelationEntry -->
         <!-- relEnd=NavigationScreen otherEnd=Groups -->
-        <set name="Groups" table="`NavigationScreen_accessed_by_Groups`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
+        <set name="Groups" table="`NavigationScreen_accessed_by_Groups`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_NavigationScreen`" />
             <one-to-many class="Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl+NavigationEntry_accessed_by_Group_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
@@ -922,6 +1301,31 @@
         <!-- define the subclasses -->
 
     </class>
+    <class name="Zetbox.App.GUI.TagCacheNHibernateImpl+TagCacheProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.GUI.TagCacheNHibernateImpl+TagCacheProxy, Zetbox.Objects.NHibernateImpl"
+           schema="`gui`"
+           table="`TagCaches`"
+           abstract="false"
+           dynamic-update="false"
+           optimistic-lock="none"
+           batch-size="100">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`gui`</param>
+                <param name="sequence">`TagCaches_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="Name" 
+                  column="`Name`" 
+                  optimistic-lock="false"/>
+
+        <!-- define the subclasses -->
+
+    </class>
     <class name="Zetbox.App.GUI.TemplateNHibernateImpl+TemplateProxy, Zetbox.Objects.NHibernateImpl"
            proxy="Zetbox.App.GUI.TemplateNHibernateImpl+TemplateProxy, Zetbox.Objects.NHibernateImpl"
            schema="`gui`"
@@ -954,7 +1358,7 @@
         <!-- NMProperty -->
         <!-- rel=Template_hasMenu_Visual_RelationEntry -->
         <!-- relEnd=Template otherEnd=Menu -->
-        <set name="Menu" table="`Template_hasMenu_Menu`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
+        <set name="Menu" table="`Template_hasMenu_Menu`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_Template`" />
             <one-to-many class="Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl+Template_hasMenu_Visual_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
@@ -986,24 +1390,20 @@
 <!-- ObjectReferenceProperty -->
         <many-to-one name="ControlKind" column="`fk_ControlKind`" class="Zetbox.App.GUI.ControlKindNHibernateImpl+ControlKindProxy, Zetbox.Objects.NHibernateImpl" />
 
-<!-- ObjectReferenceProperty -->
-        <many-to-one name="ControlRef" column="`fk_ControlRef`" class="Zetbox.App.Base.TypeRefNHibernateImpl+TypeRefProxy, Zetbox.Objects.NHibernateImpl" />
-
+        <!-- ValueTypeProperty isValue -->
+        <property name="ControlTypeRef" 
+                  column="`ControlTypeRef`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Deleted" 
+                  column="`Deleted`" 
+                  optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
-
-<!-- ObjectReferenceProperty -->
-        <!-- NMProperty -->
-        <!-- rel=ViewDescriptor_supports_TypeRef_RelationEntry -->
-        <!-- relEnd=ViewDescriptor otherEnd=ViewModelTypeRefs -->
-        <set name="SupportedViewModels" table="`ViewDescriptor_supports_ViewModelTypeRefs`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
-            <key column="`fk_ViewDescriptor`" />
-            <one-to-many class="Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntryNHibernateImpl+ViewDescriptor_supports_TypeRef_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
-        </set>
 
         <!-- ValueTypeProperty isValue -->
         <property name="Toolkit" 
@@ -1046,6 +1446,10 @@
         <many-to-one name="DefaultGridCellPreEditorKind" column="`fk_DefaultGridCellKind`" class="Zetbox.App.GUI.ControlKindNHibernateImpl+ControlKindProxy, Zetbox.Objects.NHibernateImpl" />
 
         <!-- ValueTypeProperty isValue -->
+        <property name="Deleted" 
+                  column="`Deleted`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
         <property name="Description" 
                   column="`Description`" 
                   optimistic-lock="false"/>
@@ -1060,14 +1464,15 @@
         <!-- NMProperty -->
         <!-- rel=ViewModelDescriptor_displayedBy_ControlKind_RelationEntry -->
         <!-- relEnd=Presentable otherEnd=SecondaryControlKinds -->
-        <set name="SecondaryControlKinds" table="`Presentable_displayedBy_SecondaryControlKinds`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
+        <set name="SecondaryControlKinds" table="`Presentable_displayedBy_SecondaryControlKinds`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_Presentable`" />
             <one-to-many class="Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl+ViewModelDescriptor_displayedBy_ControlKind_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
-<!-- ObjectReferenceProperty -->
-        <many-to-one name="ViewModelRef" column="`fk_ViewModelRef`" class="Zetbox.App.Base.TypeRefNHibernateImpl+TypeRefProxy, Zetbox.Objects.NHibernateImpl" />
-
+        <!-- ValueTypeProperty isValue -->
+        <property name="ViewModelTypeRef" 
+                  column="`ViewModelTypeRef`" 
+                  optimistic-lock="false"/>
 
         <!-- define the subclasses -->
 
@@ -1093,7 +1498,7 @@
         <!-- NMProperty -->
         <!-- rel=Visual_contains_Visual_RelationEntry -->
         <!-- relEnd=Visual otherEnd=Children -->
-        <set name="Children" table="`Visual_contains_Children`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
+        <set name="Children" table="`Visual_contains_Children`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_Visual`" />
             <one-to-many class="Zetbox.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl+Visual_contains_Visual_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
@@ -1102,7 +1507,7 @@
         <!-- NMProperty -->
         <!-- rel=Visual_hasContextMenu_Visual_RelationEntry -->
         <!-- relEnd=Visual otherEnd=ContextMenu -->
-        <set name="ContextMenu" table="`Visual_hasContextMenu_ContextMenu`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
+        <set name="ContextMenu" table="`Visual_hasContextMenu_ContextMenu`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_Visual`" />
             <one-to-many class="Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl+Visual_hasContextMenu_Visual_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
@@ -1287,6 +1692,10 @@
                   column="`CreatedOn`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
+        <property name="EMail" 
+                  column="`EMail`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
                   optimistic-lock="false"/>
@@ -1295,7 +1704,7 @@
                   column="`Geburtstag`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="Identity" column="`fk_Identity`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" unique="true" />
+        <many-to-one name="Identity" column="`fk_Identity`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" unique="true" cascade="none" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="Name" 
@@ -1305,7 +1714,7 @@
         <!-- NMProperty -->
         <!-- rel=Projekt_haben_Mitarbeiter_RelationEntry -->
         <!-- relEnd=Mitarbeiter otherEnd=Projekte -->
-        <set name="Projekte" table="`Projekte_haben_Mitarbeiter`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
+        <set name="Projekte" table="`Projekte_haben_Mitarbeiter`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_Mitarbeiter`" />
             <one-to-many class="Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl+Projekt_haben_Mitarbeiter_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
@@ -1393,7 +1802,7 @@
         <!-- NMProperty -->
         <!-- rel=Projekt_haben_Mitarbeiter_RelationEntry -->
         <!-- relEnd=Projekte otherEnd=Mitarbeiter -->
-        <set name="Mitarbeiter" table="`Projekte_haben_Mitarbeiter`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
+        <set name="Mitarbeiter" table="`Projekte_haben_Mitarbeiter`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_Projekte`" />
             <one-to-many class="Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl+Projekt_haben_Mitarbeiter_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
@@ -1646,7 +2055,7 @@
         <!-- NMProperty -->
         <!-- rel=SourceColumn_created_Property_RelationEntry -->
         <!-- relEnd=SourceColumn otherEnd=Property -->
-        <set name="DestinationProperty" table="`SourceColumn_created_Property`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
+        <set name="DestinationProperty" table="`SourceColumn_created_Property`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_SourceColumn`" />
             <one-to-many class="Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl+SourceColumn_created_Property_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
@@ -1782,7 +2191,7 @@
                   column="`Description`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="DestinationObjectClass" column="`fk_ObjectClass`" class="Zetbox.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Zetbox.Objects.NHibernateImpl" unique="true" />
+        <many-to-one name="DestinationObjectClass" column="`fk_ObjectClass`" class="Zetbox.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Zetbox.Objects.NHibernateImpl" unique="true" cascade="none" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
@@ -2054,6 +2463,34 @@
         <!-- define the subclasses -->
 
     </class>
+    <class name="Zetbox.App.Test.EventTestObjectNHibernateImpl+EventTestObjectProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.Test.EventTestObjectNHibernateImpl+EventTestObjectProxy, Zetbox.Objects.NHibernateImpl"
+           schema="`test`"
+           table="`EventTestObjects`"
+           abstract="false"
+           dynamic-update="false"
+           optimistic-lock="none"
+           batch-size="100">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`test`</param>
+                <param name="sequence">`EventTestObjects_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="Event" column="`fk_Event`" class="Zetbox.App.Calendar.EventNHibernateImpl+EventProxy, Zetbox.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="Name" 
+                  column="`Name`" 
+                  optimistic-lock="false"/>
+
+        <!-- define the subclasses -->
+
+    </class>
     <class name="Zetbox.App.Test.FragebogenNHibernateImpl+FragebogenProxy, Zetbox.Objects.NHibernateImpl"
            proxy="Zetbox.App.Test.FragebogenNHibernateImpl+FragebogenProxy, Zetbox.Objects.NHibernateImpl"
            schema="`test`"
@@ -2085,7 +2522,7 @@
         <!-- NMProperty -->
         <!-- rel=TestStudent_füllt_aus_Fragebogen_RelationEntry -->
         <!-- relEnd=Testbogen otherEnd=Student -->
-        <set name="Student" table="`Student_füllt_aus_Testbogen`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
+        <set name="Student" table="`Student_füllt_aus_Testbogen`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_Testbogen`" />
             <one-to-many class="Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl+TestStudent_füllt_aus_Fragebogen_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
@@ -2164,7 +2601,7 @@
         <!-- NMProperty -->
         <!-- rel=Muhblah_has_TestCustomObject_RelationEntry -->
         <!-- relEnd=MB_Many_Role otherEnd=TCO_ManyList_Role -->
-        <set name="TestCustomObjects_ManyList_Nav" table="`MB_Many_Role_has_TCO_ManyList_Role`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
+        <set name="TestCustomObjects_ManyList_Nav" table="`MB_Many_Role_has_TCO_ManyList_Role`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_MB_Many_Role`" />
             <one-to-many class="Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl+Muhblah_has_TestCustomObject_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
@@ -2173,7 +2610,7 @@
         <many-to-one name="TestCustomObjects_Nav" column="`fk_TCO_Role`" class="Zetbox.App.Test.TestCustomObjectNHibernateImpl+TestCustomObjectProxy, Zetbox.Objects.NHibernateImpl" />
 
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="TestCustomObjects_One_Nav" column="`fk_TCO_One_Role`" class="Zetbox.App.Test.TestCustomObjectNHibernateImpl+TestCustomObjectProxy, Zetbox.Objects.NHibernateImpl" unique="true" />
+        <many-to-one name="TestCustomObjects_One_Nav" column="`fk_TCO_One_Role`" class="Zetbox.App.Test.TestCustomObjectNHibernateImpl+TestCustomObjectProxy, Zetbox.Objects.NHibernateImpl" unique="true" cascade="none" />
 
         <!-- ValueTypeProperty isValue -->
         <property name="TestDateTime" type="Timestamp"
@@ -2212,7 +2649,7 @@
         <!-- NMProperty -->
         <!-- rel=N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntry -->
         <!-- relEnd=ASide otherEnd=BSide -->
-        <set name="BSide" table="`ASide_connectsTo_BSide`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
+        <set name="BSide" table="`ASide_connectsTo_BSide`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_ASide`" />
             <one-to-many class="Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryNHibernateImpl+N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
@@ -2246,7 +2683,7 @@
         <!-- NMProperty -->
         <!-- rel=N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntry -->
         <!-- relEnd=BSide otherEnd=ASide -->
-        <set name="ASide" table="`ASide_connectsTo_BSide`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
+        <set name="ASide" table="`ASide_connectsTo_BSide`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_BSide`" />
             <one-to-many class="Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryNHibernateImpl+N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
@@ -2647,40 +3084,60 @@
         <!-- CompoundObjectProperty isValue -->
         <component name="Rule" class="Zetbox.App.Base.RecurrenceRuleNHibernateImpl,Zetbox.Objects.NHibernateImpl">
         <!-- ValueTypeProperty isValue -->
-        <property name="DaysOffset" 
-                  column="`Rule_DaysOffset`" 
+        <property name="ByDay" 
+                  column="`Rule_ByDay`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
-        <property name="EveryDay" 
-                  column="`Rule_EveryDay`" 
+        <property name="ByHour" 
+                  column="`Rule_ByHour`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
-        <property name="EveryDayOfWeek" 
-                  column="`Rule_EveryDayOfWeek`" 
+        <property name="ByMinute" 
+                  column="`Rule_ByMinute`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
-        <property name="EveryMonth" 
-                  column="`Rule_EveryMonth`" 
+        <property name="ByMonth" 
+                  column="`Rule_ByMonth`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
-        <property name="EveryQuater" 
-                  column="`Rule_EveryQuater`" 
+        <property name="ByMonthDay" 
+                  column="`Rule_ByMonthDay`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
-        <property name="EveryYear" 
-                  column="`Rule_EveryYear`" 
+        <property name="BySecond" 
+                  column="`Rule_BySecond`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
-        <property name="HoursOffset" 
-                  column="`Rule_HoursOffset`" 
+        <property name="BySetPos" 
+                  column="`Rule_BySetPos`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
-        <property name="MinutesOffset" 
-                  column="`Rule_MinutesOffset`" 
+        <property name="ByWeekNumber" 
+                  column="`Rule_ByWeekNumber`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
-        <property name="MonthsOffset" 
-                  column="`Rule_MonthsOffset`" 
+        <property name="ByYearDay" 
+                  column="`Rule_ByYearDay`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Count" 
+                  column="`Rule_Count`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Frequency" 
+                  column="`Rule_Frequency`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Interval" 
+                  column="`Rule_Interval`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Until" type="Timestamp"
+                  column="`Rule_Until`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="WeekStart" 
+                  column="`Rule_WeekStart`" 
                   optimistic-lock="false"/>
         </component>
 
@@ -2742,6 +3199,31 @@
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Parent" column="`fk_Parent`" class="Zetbox.App.Test.RequiredParentNHibernateImpl+RequiredParentProxy, Zetbox.Objects.NHibernateImpl" />
 
+
+        <!-- define the subclasses -->
+
+    </class>
+    <class name="Zetbox.App.Test.SecurityChangeRightNHibernateImpl+SecurityChangeRightProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.Test.SecurityChangeRightNHibernateImpl+SecurityChangeRightProxy, Zetbox.Objects.NHibernateImpl"
+           schema="`test`"
+           table="`SecurityChangeRights`"
+           abstract="false"
+           dynamic-update="false"
+           optimistic-lock="none"
+           batch-size="100">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`test`</param>
+                <param name="sequence">`SecurityChangeRights_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="Name" 
+                  column="`Name`" 
+                  optimistic-lock="false"/>
 
         <!-- define the subclasses -->
 
@@ -2875,7 +3357,7 @@
         <!-- NMProperty -->
         <!-- rel=Muhblah_has_TestCustomObject_RelationEntry -->
         <!-- relEnd=TCO_ManyList_Role otherEnd=MB_Many_Role -->
-        <set name="MuhBlah_ManyList_Nav" table="`MB_Many_Role_has_TCO_ManyList_Role`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
+        <set name="MuhBlah_ManyList_Nav" table="`MB_Many_Role_has_TCO_ManyList_Role`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_TCO_ManyList_Role`" />
             <one-to-many class="Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl+Muhblah_has_TestCustomObject_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
@@ -3020,7 +3502,7 @@
         <!-- NMProperty -->
         <!-- rel=TestStudent_füllt_aus_Fragebogen_RelationEntry -->
         <!-- relEnd=Student otherEnd=Testbogen -->
-        <set name="Testbogen" table="`Student_füllt_aus_Testbogen`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
+        <set name="Testbogen" table="`Student_füllt_aus_Testbogen`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_Student`" />
             <one-to-many class="Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl+TestStudent_füllt_aus_Fragebogen_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
@@ -3243,7 +3725,7 @@
         <!-- NMProperty -->
         <!-- rel=RoleMembership_resolves_Relation_RelationEntry -->
         <!-- relEnd=RoleMembership otherEnd=Relations -->
-        <set name="Relations" table="`RoleMembership_resolves_Relations`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
+        <set name="Relations" table="`RoleMembership_resolves_Relations`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_RoleMembership`" />
             <one-to-many class="Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl+RoleMembership_resolves_Relation_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
@@ -3393,9 +3875,10 @@
             
 
             <!-- define the properties -->
-<!-- ObjectReferenceProperty -->
-        <many-to-one name="Type" column="`CLRObjectParameters_fk_Type`" class="Zetbox.App.Base.TypeRefNHibernateImpl+TypeRefProxy, Zetbox.Objects.NHibernateImpl" />
-
+        <!-- ValueTypeProperty isValue -->
+        <property name="TypeRef" 
+                  column="`CLRObjectParameters_TypeRef`" 
+                  optimistic-lock="false"/>
 
             <!-- define the subclasses -->
 
@@ -3567,7 +4050,7 @@
            discriminator-value="base.Constraints"
            schema="`base`"
            table="`Constraints`"
-           abstract="false"
+           abstract="true"
            dynamic-update="true"
            optimistic-lock="dirty"
            batch-size="100">
@@ -3638,12 +4121,6 @@
             
 
             <!-- define the properties -->
-<!-- ObjectReferenceProperty -->
-        <many-to-one name="GetErrorTextInvocation" column="`InvokingConstraints_fk_GetErrorTextInvocation`" class="Zetbox.App.Base.ConstraintInvocationNHibernateImpl+ConstraintInvocationProxy, Zetbox.Objects.NHibernateImpl" unique="true" />
-
-<!-- ObjectReferenceProperty -->
-        <many-to-one name="IsValidInvocation" column="`InvokingConstraints_fk_IsValidInvocation`" class="Zetbox.App.Base.ConstraintInvocationNHibernateImpl+ConstraintInvocationProxy, Zetbox.Objects.NHibernateImpl" unique="true" />
-
 
             <!-- define the subclasses -->
 
@@ -3766,38 +4243,6 @@
         </subclass>
 
     </class>
-    <class name="Zetbox.App.Base.ConstraintInvocationNHibernateImpl+ConstraintInvocationProxy, Zetbox.Objects.NHibernateImpl"
-           proxy="Zetbox.App.Base.ConstraintInvocationNHibernateImpl+ConstraintInvocationProxy, Zetbox.Objects.NHibernateImpl"
-           schema="`base`"
-           table="`ConstraintInvocations`"
-           abstract="false"
-           dynamic-update="false"
-           optimistic-lock="none"
-           batch-size="100">
-
-        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
-            <generator class="native">
-                <param name="schema">`base`</param>
-                <param name="sequence">`ConstraintInvocations_ID_seq`</param>
-            </generator>
-        </id>
-
-        <!-- define the properties -->
-        <!-- ValueTypeProperty isValue -->
-        <property name="ExportGuid" 
-                  column="`ExportGuid`" 
-                  optimistic-lock="false"/>
-<!-- ObjectReferenceProperty -->
-        <many-to-one name="Implementor" column="`fk_TypeRef`" class="Zetbox.App.Base.TypeRefNHibernateImpl+TypeRefProxy, Zetbox.Objects.NHibernateImpl" />
-
-        <!-- ValueTypeProperty isValue -->
-        <property name="MemberName" 
-                  column="`MemberName`" 
-                  optimistic-lock="false"/>
-
-        <!-- define the subclasses -->
-
-    </class>
     <class name="Zetbox.App.Base.CurrentSchemaNHibernateImpl+CurrentSchemaProxy, Zetbox.Objects.NHibernateImpl"
            proxy="Zetbox.App.Base.CurrentSchemaNHibernateImpl+CurrentSchemaProxy, Zetbox.Objects.NHibernateImpl"
            schema="`base`"
@@ -3879,7 +4324,7 @@
         <!-- NMProperty -->
         <!-- rel=DataType_implements_Interface_RelationEntry -->
         <!-- relEnd=DataType otherEnd=ImplementedInterfaces -->
-        <set name="ImplementsInterfaces" table="`DataType_implements_ImplementedInterfaces`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
+        <set name="ImplementsInterfaces" table="`DataType_implements_ImplementedInterfaces`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_DataType`" />
             <one-to-many class="Zetbox.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl+DataType_implements_Interface_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
@@ -3933,6 +4378,9 @@
             <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
         <many-to-one name="DefaultPropertyViewModelDescriptor" column="`fk_DefaultPropViewModelDescriptor`" class="Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl+ViewModelDescriptorProxy, Zetbox.Objects.NHibernateImpl" />
+
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="DefaultViewModelDescriptor" column="`fk_DefaultViewModelDescriptor`" class="Zetbox.App.GUI.ViewModelDescriptorNHibernateImpl+ViewModelDescriptorProxy, Zetbox.Objects.NHibernateImpl" />
 
 
             <!-- define the subclasses -->
@@ -4338,7 +4786,7 @@
         <!-- NMProperty -->
         <!-- rel=Identity_memberOf_Group_RelationEntry -->
         <!-- relEnd=Groups otherEnd=Identities -->
-        <set name="Member" table="`Identities_memberOf_Groups`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
+        <set name="Member" table="`Identities_memberOf_Groups`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_Groups`" />
             <one-to-many class="Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl+Identity_memberOf_Group_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
@@ -4372,6 +4820,10 @@
 
         <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
+        <property name="CalendarConfiguration" 
+                  column="`CalendarConfiguration`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
         <property name="DisplayName" 
                   column="`DisplayName`" 
                   optimistic-lock="false"/>
@@ -4379,7 +4831,7 @@
         <!-- NMProperty -->
         <!-- rel=Identity_memberOf_Group_RelationEntry -->
         <!-- relEnd=Identities otherEnd=Groups -->
-        <set name="Groups" table="`Identities_memberOf_Groups`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
+        <set name="Groups" table="`Identities_memberOf_Groups`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_Identities`" />
             <one-to-many class="Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl+Identity_memberOf_Group_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
@@ -4400,7 +4852,7 @@
            proxy="Zetbox.App.Base.InstanceConstraintNHibernateImpl+InstanceConstraintProxy, Zetbox.Objects.NHibernateImpl"
            schema="`base`"
            table="`InstanceConstraint`"
-           abstract="false"
+           abstract="true"
            dynamic-update="false"
            optimistic-lock="none"
            batch-size="100">
@@ -4445,13 +4897,28 @@
         <!-- NMProperty -->
         <!-- rel=IndexConstraint_ensures_unique_on_Property_RelationEntry -->
         <!-- relEnd=UniqueContraints otherEnd=Properties -->
-        <set name="Properties" table="`UniqueContraints_ensures_unique_on_Properties`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
+        <set name="Properties" table="`UniqueContraints_ensures_unique_on_Properties`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_UniqueContraints`" />
             <one-to-many class="Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl+IndexConstraint_ensures_unique_on_Property_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
 
             <!-- define the subclasses -->
+        <joined-subclass
+                name="Zetbox.App.Base.FullTextIndexConstraintNHibernateImpl+FullTextIndexConstraintProxy, Zetbox.Objects.NHibernateImpl"
+                proxy="Zetbox.App.Base.FullTextIndexConstraintNHibernateImpl+FullTextIndexConstraintProxy, Zetbox.Objects.NHibernateImpl"
+                schema="`base`"
+                table="`FullTextIndexConstraints`"
+                dynamic-update="false">
+            
+            <!-- base class reference -->
+            <key column="`ID`" />
+
+            <!-- define the properties -->
+
+            <!-- define the subclasses -->
+
+        </joined-subclass>
 
         </joined-subclass>
 
@@ -4539,7 +5006,7 @@
         <!-- NMProperty -->
         <!-- rel=ObjectReferenceProperty_shows_Method_RelationEntry -->
         <!-- relEnd=Methods otherEnd=ObjRefProp -->
-        <set name="ShowByProperties" table="`ObjRefProp_shows_Methods`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
+        <set name="ShowByProperties" table="`ObjRefProp_shows_Methods`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_Methods`" />
             <one-to-many class="Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl+ObjectReferenceProperty_shows_Method_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
@@ -4653,6 +5120,10 @@
         <property name="CreatedOn" type="Timestamp"
                   column="`CreatedOn`" 
                   optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="DefaultSortPriority" 
+                  column="`DefaultSortPriority`" 
+                  optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
         <one-to-one name="DefaultValue" class="Zetbox.App.Base.DefaultPropertyValueNHibernateImpl+DefaultPropertyValueProxy, Zetbox.Objects.NHibernateImpl" constrained="false" property-ref="Property" />
         <!-- ValueTypeProperty isValue -->
@@ -4708,7 +5179,7 @@
         <!-- NMProperty -->
         <!-- rel=CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry -->
         <!-- relEnd=CalculatedReference otherEnd=InputProperties -->
-        <set name="Inputs" table="`CalculatedReference_dependsOn_InputProperties`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
+        <set name="Inputs" table="`CalculatedReference_dependsOn_InputProperties`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_CalculatedReference`" />
             <one-to-many class="Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl+CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
@@ -4798,13 +5269,13 @@
         <!-- NMProperty -->
         <!-- rel=ObjectReferenceProperty_shows_Method_RelationEntry -->
         <!-- relEnd=ObjRefProp otherEnd=Methods -->
-        <set name="Methods" table="`ObjRefProp_shows_Methods`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
+        <set name="Methods" table="`ObjRefProp_shows_Methods`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_ObjRefProp`" />
             <one-to-many class="Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl+ObjectReferenceProperty_shows_Method_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
 <!-- ObjectReferenceProperty -->
-        <many-to-one name="RelationEnd" column="`ObjectReferenceProperties_fk_RelationEnd`" class="Zetbox.App.Base.RelationEndNHibernateImpl+RelationEndProxy, Zetbox.Objects.NHibernateImpl" unique="true" />
+        <many-to-one name="RelationEnd" column="`ObjectReferenceProperties_fk_RelationEnd`" class="Zetbox.App.Base.RelationEndNHibernateImpl+RelationEndProxy, Zetbox.Objects.NHibernateImpl" unique="true" cascade="none" />
 
 
             <!-- define the subclasses -->
@@ -5222,75 +5693,6 @@
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Module" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
 
-<!-- ObjectReferenceProperty -->
-        <many-to-one name="TypeRef" column="`fk_TypeRef`" class="Zetbox.App.Base.TypeRefNHibernateImpl+TypeRefProxy, Zetbox.Objects.NHibernateImpl" />
-
-
-        <!-- define the subclasses -->
-
-    </class>
-    <class name="Zetbox.App.Base.TypeRefNHibernateImpl+TypeRefProxy, Zetbox.Objects.NHibernateImpl"
-           proxy="Zetbox.App.Base.TypeRefNHibernateImpl+TypeRefProxy, Zetbox.Objects.NHibernateImpl"
-           schema="`base`"
-           table="`TypeRefs`"
-           abstract="false"
-           dynamic-update="true"
-           optimistic-lock="dirty"
-           batch-size="100">
-
-        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
-            <generator class="native">
-                <param name="schema">`base`</param>
-                <param name="sequence">`TypeRefs_ID_seq`</param>
-            </generator>
-        </id>
-
-        <!-- define the properties -->
-<!-- ObjectReferenceProperty -->
-        <many-to-one name="Assembly" column="`fk_Assembly`" class="Zetbox.App.Base.AssemblyNHibernateImpl+AssemblyProxy, Zetbox.Objects.NHibernateImpl" />
-
-<!-- ObjectReferenceProperty -->
-        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
-
-        <!-- ValueTypeProperty isValue -->
-        <property name="ChangedOn" type="Timestamp"
-                  column="`ChangedOn`" 
-                  optimistic-lock="true"/>
-<!-- ObjectReferenceProperty -->
-        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
-
-        <!-- ValueTypeProperty isValue -->
-        <property name="CreatedOn" type="Timestamp"
-                  column="`CreatedOn`" 
-                  optimistic-lock="false"/>
-        <!-- ValueTypeProperty isValue -->
-        <property name="Deleted" 
-                  column="`Deleted`" 
-                  optimistic-lock="false"/>
-        <!-- ValueTypeProperty isValue -->
-        <property name="ExportGuid" 
-                  column="`ExportGuid`" 
-                  optimistic-lock="false"/>
-        <!-- ValueTypeProperty isValue -->
-        <property name="FullName" 
-                  column="`FullName`" 
-                  optimistic-lock="false"/>
-<!-- ObjectReferenceProperty -->
-        <!-- NMProperty -->
-        <!-- rel=TypeRef_hasGenericArguments_TypeRef_RelationEntry -->
-        <!-- relEnd=TypeRef otherEnd=GenericArguments -->
-        <set name="GenericArguments" table="`TypeRef_hasGenericArguments_GenericArguments`" inverse="true" cascade="all-delete-orphan" batch-size="100" >
-            <key column="`fk_TypeRef`" />
-            <one-to-many class="Zetbox.App.Base.TypeRef_hasGenericArguments_TypeRef_RelationEntryNHibernateImpl+TypeRef_hasGenericArguments_TypeRef_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
-        </set>
-
-<!-- ObjectReferenceProperty -->
-        <many-to-one name="Parent" column="`fk_Parent`" class="Zetbox.App.Base.TypeRefNHibernateImpl+TypeRefProxy, Zetbox.Objects.NHibernateImpl" />
-
-        <!-- ValueTypeProperty isValue -->
-        <property name="ToStringCache" 
-                  column="`ToStringCache`" 
-                  optimistic-lock="false"/>
 
         <!-- define the subclasses -->
 

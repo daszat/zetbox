@@ -43,10 +43,9 @@ namespace Zetbox.API
         {
             get
             {
-                if (_implTypeCheckers == null)
-                    lock (_lock)
-                        if (_implTypeCheckers == null)
-                            _implTypeCheckers = new ReadOnlyCollection<IImplementationTypeChecker>(_implTypeCheckersFactory().ToList());
+                lock (_lock)
+                    if (_implTypeCheckers == null)
+                        _implTypeCheckers = _implTypeCheckersFactory().ToList().AsReadOnly();
 
                 return _implTypeCheckers;
             }
@@ -118,17 +117,17 @@ namespace Zetbox.API
         {
             if (type == null) { throw new ArgumentNullException("type"); }
 
-            // Allow all non-interface types from this Assembly
-            if (!type.IsInterface && type.Assembly == GetAssembly())
+            // Allow all top-level non-interface types from this Assembly
+            if (!type.IsInterface && type.Assembly == GetAssembly() && type.DeclaringType == null)
                 return true;
 
             // Allow all generic types which have only implementation types as arguments
             if (type.IsGenericType)
                 return type.GetGenericArguments().All(t => IsImplementationType(t));
 
-            // Allow all value types from mscorlib
-            if (type.IsValueType && type.Assembly == typeof(int).Assembly)
-                return true;
+            //// Allow all value types from mscorlib
+            //if (type.IsValueType && type.Assembly == typeof(int).Assembly)
+            //    return true;
 
             //// Hack: Allow all types that are not generated at all
             //if (type.Assembly != GetAssembly()
@@ -146,14 +145,36 @@ namespace Zetbox.API
     {
         public delegate InterfaceType Factory(Type type);
 
-        private static readonly object _lockCache = new object();
+        /// <summary>
+        /// Small helper to avoid autofac accesses.
+        /// </summary>
+        /// <remarks>This is used by the proxy, where off-thread accesses may deadlock on
+        /// autofac when a query is run from within an autofac resolution on the main thread.
+        /// Also, this is a basic operation that does not profit from the Autofac lifecycle
+        /// management. Removing this from Autofac should help in reducing the overhead.</remarks>
+        public sealed class FactoryImpl
+        {
+            private readonly IInterfaceTypeChecker _typeChecker;
+            public FactoryImpl(IInterfaceTypeChecker typeChecker)
+            {
+                if (typeChecker == null) throw new ArgumentNullException("typeChecker");
+                _typeChecker = typeChecker;
+            }
+
+            public InterfaceType Invoke(Type type)
+            {
+                return Create(type, _typeChecker);
+            }
+        }
+
+        private static readonly object _cacheLock = new object();
         private static Dictionary<Type, InterfaceType> _cache = new Dictionary<Type, InterfaceType>();
         private static Dictionary<InterfaceType, InterfaceType> _rootTypeCache = new Dictionary<InterfaceType, InterfaceType>();
 
         // TODO: Mit david nochmals besprechen
         internal static InterfaceType Create(Type type, IInterfaceTypeChecker typeChecker)
         {
-            lock (_lockCache)
+            lock (_cacheLock)
             {
                 if (type == null) return new InterfaceType(); // Possible, because a Type could be loaded from an XML File which does not exists in this Zetbox instance
                 if (_cache.ContainsKey(type)) return _cache[type];
@@ -207,7 +228,7 @@ namespace Zetbox.API
         /// <returns>the root InterfaceType of this InterfaceType's data model</returns>
         public InterfaceType GetRootType()
         {
-            lock (_lockCache)
+            lock (_cacheLock)
             {
                 if (_rootTypeCache.ContainsKey(this)) return _rootTypeCache[this];
 

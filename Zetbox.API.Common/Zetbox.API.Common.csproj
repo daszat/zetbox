@@ -102,9 +102,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiCommonModule.cs" />
+    <Compile Include="AssetsManager.cs" />
     <Compile Include="BaseCustomActionsManager.cs" />
     <Compile Include="CompoundObjectExtensions.cs" />
-    <Compile Include="GuiExtensions.cs" />
+    <Compile Include="Fulltext\DataObjectFormatter.cs" />
     <Compile Include="GUI\IconConverter.cs" />
     <Compile Include="GUI\SavedListConfig.cs" />
     <Compile Include="IdentityExtensions.cs" />
@@ -112,7 +113,10 @@
     <Compile Include="InvocationExecutor.cs" />
     <Compile Include="IMetaDataResolver.cs" />
     <Compile Include="IRelationListSync.cs" />
+    <Compile Include="LinqExtensions.cs" />
     <Compile Include="Reporting\ReportingErrorReporter.cs" />
+    <Compile Include="TextExtractor.cs" />
+    <Compile Include="ZetboxAssetKeys.cs" />
     <Compile Include="ZetboxContextExtensions.cs" />
     <Compile Include="MethodExtensions.cs" />
     <Compile Include="MultiplicityExtensions.cs" />
@@ -133,7 +137,6 @@
     <Compile Include="Reporting\ReportTemplate.cs" />
     <Compile Include="StreamExtensions.cs" />
     <Compile Include="ThreadPrincipalResolver.cs" />
-    <Compile Include="TypeRefExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj">

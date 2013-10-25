@@ -51,6 +51,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries
                 null,
                 prop.Name,
                 true,
+                false,
                 false, 
                 false, // value collection entries are always streamed/exported in-place
                 false,

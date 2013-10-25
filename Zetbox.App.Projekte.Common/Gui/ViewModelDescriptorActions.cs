@@ -20,6 +20,7 @@ namespace Zetbox.App.GUI
     using System.Text;
     using System.Text.RegularExpressions;
     using Zetbox.API;
+    using Zetbox.API.Utils;
 
     [Implementor]
     public static class ViewModelDescriptorActions
@@ -30,15 +31,17 @@ namespace Zetbox.App.GUI
             e.Result = string.Format("{0} (default: {1}) [{2}]",
                 obj.Description,
                 obj.DefaultEditorKind,
-                obj.ViewModelRef == null ? "(no type)" : obj.ViewModelRef.ToString());
+                string.IsNullOrWhiteSpace(obj.ViewModelTypeRef) ? "(no type)" : obj.ViewModelTypeRef);
         }
 
         [Invocation]
         public static void GetName(ViewModelDescriptor obj, MethodReturnEventArgs<string> e)
         {
-            if (obj.ViewModelRef != null)
+            if (!string.IsNullOrWhiteSpace(obj.ViewModelTypeRef) && obj.ViewModelTypeRef != "ERROR")
             {
-                e.Result = string.Format("Gui.ViewModelDescriptors.{0}", Regex.Replace(obj.ViewModelRef.ToTypeName(), @"\W", "_"));
+                var spec = TypeSpec.Parse(obj.ViewModelTypeRef);
+
+                e.Result = string.Format("Gui.ViewModelDescriptors.{0}", Regex.Replace(spec.GetSimpleName(addAssemblyNames: false), @"\W+", "_"));
             }
         }
     }

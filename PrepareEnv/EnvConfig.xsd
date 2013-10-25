@@ -8,6 +8,24 @@
         <xs:element name="GeneratedSource" type="xs:string" minOccurs="0" maxOccurs="1" />
         <xs:element name="BinaryTarget" type="xs:string" minOccurs="0" maxOccurs="1" />
         <xs:element name="TestsTarget" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="ClickOnce">
+          <xs:complexType>
+            <xs:simpleContent>
+              <xs:extension base="xs:string">
+                <xs:attribute name="Publisher" type="xs:string" use="required" />
+                <xs:attribute name="SuiteName" type="xs:string" use="optional" />
+                <xs:attribute name="Product" type="xs:string" use="optional" />
+                <xs:attribute name="SupportUrl" type="xs:string" use="optional" />
+                <xs:attribute name="ErrorReportUrl" type="xs:string" use="optional" />
+                <xs:attribute name="UpdateUrl" type="xs:string" use="optional" />
+                <xs:attribute name="KeyFile" type="xs:string" use="required" />
+                <xs:attribute name="DeploymentVersion" type="xs:string" use="required" />
+              </xs:extension>
+            </xs:simpleContent>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ClientExe" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="ClientParameters" type="xs:string" minOccurs="0" maxOccurs="1" />
         <xs:element name="DatabaseSource">
           <xs:complexType>
             <xs:simpleContent>

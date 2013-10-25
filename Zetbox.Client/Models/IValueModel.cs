@@ -128,7 +128,7 @@ namespace Zetbox.Client.Models
         CompoundObject CompoundObjectDefinition { get; }
     }
 
-    public interface ICompoundCollectionValueModel : IValueModel<IList<ICompoundObject>>, INotifyCollectionChanged
+    public interface ICompoundCollectionValueModel<TCollection> : IValueModel<TCollection>, INotifyCollectionChanged
     {
         CompoundObject CompoundObjectDefinition { get; }
     }

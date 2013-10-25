@@ -21,11 +21,23 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using Zetbox.API;
+using Zetbox.Client.WPF.Toolkit;
+using System.Windows.Input;
 
 namespace Zetbox.Client.WPF.CustomControls
 {
     public class ZetboxListView : ListView
     {
+        static ZetboxListView()
+        {
+            EventManager.RegisterClassHandler(typeof(ListViewItem), MouseLeftButtonDownEvent, new MouseButtonEventHandler(ListViewItem_HandleMouseLeftButtonDownEvent));
+        }
+
+        public ZetboxListView()
+        {
+            this.AddHandler(UIElement.MouseLeftButtonDownEvent, new MouseButtonEventHandler(HandledMouseLeftButtonDownEvent), true);
+        }
+
         #region SelectionChanged
         public object SelectedZetboxItems
         {
@@ -136,5 +148,109 @@ namespace Zetbox.Client.WPF.CustomControls
             }
         }
         #endregion
+
+        public bool DisableSelectionOnPreview
+        {
+            get { return (bool)GetValue(DisableSelectionOnPreviewProperty); }
+            set { SetValue(DisableSelectionOnPreviewProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for DisableSelectionOnPreview.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DisableSelectionOnPreviewProperty =
+            DependencyProperty.Register("DisableSelectionOnPreview", typeof(bool), typeof(ZetboxListView), new UIPropertyMetadata(false));
+
+
+        private class SelectionState
+        {
+            public MouseButtonEventArgs PreviewedEvent;
+            public MouseButtonEventArgs ListViewItemEvent;
+            public MouseButtonEventArgs HandledEvent;
+        }
+
+        private SelectionState _currentSelectionState;
+
+        /// <summary>
+        /// make use of event tunneling for selecting items when a click event occurred in a child element
+        /// </summary>
+        /// <remarks>http://joshsmithonwpf.wordpress.com/2007/06/22/overview-of-routed-events-in-wpf/</remarks>
+        /// <param name="e"></param>
+        protected override void OnPreviewMouseLeftButtonDown(System.Windows.Input.MouseButtonEventArgs e)
+        {
+            base.OnPreviewMouseLeftButtonDown(e);
+
+            _currentSelectionState = new SelectionState();
+            _currentSelectionState.PreviewedEvent = e;
+        }
+
+        private static void ListViewItem_HandleMouseLeftButtonDownEvent(object sender, MouseButtonEventArgs e)
+        {
+            var lvi = sender as ListViewItem;
+            if (lvi == null) return;
+
+            var listView = lvi.FindVisualParent<ZetboxListView>();
+            if (listView == null) return;
+
+            if (listView._currentSelectionState == null) listView._currentSelectionState = new SelectionState();
+            listView._currentSelectionState.ListViewItemEvent = e;
+        }
+
+        private void HandledMouseLeftButtonDownEvent(object sender, MouseButtonEventArgs e)
+        {
+            if (_currentSelectionState == null) _currentSelectionState = new SelectionState();
+            _currentSelectionState.HandledEvent = e;
+
+            if (_currentSelectionState.ListViewItemEvent == null
+             && _currentSelectionState.HandledEvent != null
+             && _currentSelectionState.PreviewedEvent != null
+             && _currentSelectionState.HandledEvent.Timestamp == _currentSelectionState.PreviewedEvent.Timestamp)
+            {
+                SelectListViewItems(_currentSelectionState.HandledEvent);
+            }
+        }
+
+        private void SelectListViewItems(MouseButtonEventArgs e)
+        {
+            if (!DisableSelectionOnPreview)
+            {
+                var src = e.OriginalSource as DependencyObject;
+                if (src != null)
+                {
+                    var lvi = src.FindVisualParent<ListViewItem>();
+                    if (lvi != null)
+                    {
+                        switch (SelectionMode)
+                        {
+                            case SelectionMode.Single:
+                                this.SelectedItem = lvi.DataContext;
+                                break;
+                            case SelectionMode.Multiple:
+                                if (Keyboard.Modifiers.HasFlag(ModifierKeys.Control))
+                                {
+                                    lvi.IsSelected = true;
+                                }
+                                else
+                                {
+                                    this.SelectedItem = lvi.DataContext;
+                                }
+                                break;
+                            case SelectionMode.Extended:
+                                if (Keyboard.Modifiers.HasFlag(ModifierKeys.Control))
+                                {
+                                    lvi.IsSelected = true;
+                                }
+                                else if (Keyboard.Modifiers.HasFlag(ModifierKeys.Shift))
+                                {
+                                    // Do nothing, not supported yet
+                                }
+                                else
+                                {
+                                    this.SelectedItem = lvi.DataContext;
+                                }
+                                break;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

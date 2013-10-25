@@ -33,7 +33,7 @@ namespace Zetbox.API.Client
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.API.Client.HttpServiceClient");
 
         private readonly Uri SetObjectsUri;
-        private readonly Uri GetListUri;
+        private readonly Uri GetObjectsUri;
         private readonly Uri GetListOfUri;
         private readonly Uri FetchRelationUri;
         private readonly Uri GetBlobStreamUri;
@@ -50,7 +50,7 @@ namespace Zetbox.API.Client
             if (writerFactory == null) throw new ArgumentNullException("writerFactory");
 
             SetObjectsUri = new Uri(ConfigurationManager.AppSettings["serviceUri"] + "/SetObjects");
-            GetListUri = new Uri(ConfigurationManager.AppSettings["serviceUri"] + "/GetList");
+            GetObjectsUri = new Uri(ConfigurationManager.AppSettings["serviceUri"] + "/GetObjects");
             GetListOfUri = new Uri(ConfigurationManager.AppSettings["serviceUri"] + "/GetListOf");
             FetchRelationUri = new Uri(ConfigurationManager.AppSettings["serviceUri"] + "/FetchRelation");
             GetBlobStreamUri = new Uri(ConfigurationManager.AppSettings["serviceUri"] + "/GetBlobStream");
@@ -67,14 +67,14 @@ namespace Zetbox.API.Client
             var req = InitializeRequest(destination);
 
             using (var reqStream = req.GetRequestStream())
-            using (var reqWriter = _writerFactory(new BinaryWriter(reqStream)))
+            using (var reqWriter = _writerFactory.Invoke(new BinaryWriter(reqStream)))
             {
                 sendRequest(reqWriter);
             }
             try
             {
                 using (var response = req.GetResponse())
-                using (var input = _readerFactory(new BinaryReader(response.GetResponseStream())))
+                using (var input = _readerFactory.Invoke(new BinaryReader(response.GetResponseStream())))
                 {
                     return input.ReadByteArray();
                 }
@@ -152,21 +152,15 @@ namespace Zetbox.API.Client
                 });
         }
 
-        public byte[] GetList(Guid version, SerializableType type, int maxListCount, bool eagerLoadLists, SerializableExpression[] filter, OrderByContract[] orderBy)
+        public byte[] GetObjects(Guid version, SerializableExpression query)
         {
-            if (type == null) throw new ArgumentNullException("type");
-
-            return MakeRequest(GetListUri,
-                reqStream =>
-                {
-                    reqStream.Write(version);
-                    reqStream.Write(type);
-                    reqStream.Write(maxListCount);
-                    reqStream.Write(eagerLoadLists);
-                    reqStream.Write(filter);
-                    reqStream.Write(orderBy);
-                    reqStream.WriteRaw(Encoding.ASCII.GetBytes("\n"));// required for basic.authenticated POST to apache
-                });
+            return MakeRequest(GetObjectsUri,
+              reqStream =>
+              {
+                  reqStream.Write(version);
+                  reqStream.Write(query);
+                  reqStream.WriteRaw(Encoding.ASCII.GetBytes("\n"));// required for basic.authenticated POST to apache
+              });
         }
 
         public byte[] GetListOf(Guid version, SerializableType type, int ID, string property)
@@ -204,7 +198,7 @@ namespace Zetbox.API.Client
             try
             {
                 using (var reqStream = req.GetRequestStream())
-                using (var reqWriter = _writerFactory(new BinaryWriter(reqStream)))
+                using (var reqWriter = _writerFactory.Invoke(new BinaryWriter(reqStream)))
                 {
                     reqWriter.Write(version);
                 }
@@ -230,7 +224,7 @@ namespace Zetbox.API.Client
 
             var req = InitializeRequest(SetBlobStreamUri);
             using (var reqStream = req.GetRequestStream())
-            using (var reqWriter = _writerFactory(new BinaryWriter(reqStream)))
+            using (var reqWriter = _writerFactory.Invoke(new BinaryWriter(reqStream)))
             using (var upload = new MemoryStream())
             {
                 reqWriter.Write(request.Version);
@@ -244,7 +238,7 @@ namespace Zetbox.API.Client
             {
                 using (var response = req.GetResponse())
                 using (var input = response.GetResponseStream())
-                using (var reader = _readerFactory(new BinaryReader(input)))
+                using (var reader = _readerFactory.Invoke(new BinaryReader(input)))
                 {
                     int id;
                     reader.Read(out id);
@@ -273,7 +267,7 @@ namespace Zetbox.API.Client
 
             var req = InitializeRequest(InvokeServerMethodUri);
             using (var reqStream = req.GetRequestStream())
-            using (var reqWriter = _writerFactory(new BinaryWriter(reqStream)))
+            using (var reqWriter = _writerFactory.Invoke(new BinaryWriter(reqStream)))
             {
                 reqWriter.Write(version);
                 reqWriter.Write(type);
@@ -288,7 +282,7 @@ namespace Zetbox.API.Client
             {
                 using (var response = req.GetResponse())
                 using (var input = response.GetResponseStream())
-                using (var reader = _readerFactory(new BinaryReader(input)))
+                using (var reader = _readerFactory.Invoke(new BinaryReader(input)))
                 {
                     reader.Read(out retChangedObjects);
                     return reader.ReadByteArray();

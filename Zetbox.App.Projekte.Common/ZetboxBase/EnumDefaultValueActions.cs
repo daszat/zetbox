@@ -36,8 +36,8 @@ namespace Zetbox.App.Base
             {
                 e.Result = string.Format("{0} will be initialized with '{1}.{2}'",
                     obj.Property.Name,
-                    obj.EnumValue != null && obj.EnumValue.Enumeration != null ? obj.EnumValue.Enumeration.Name : "<unknown>",
-                    obj.EnumValue != null ? obj.EnumValue.Name : "<unknown>");
+                    obj.EnumValue.IfNotNull(i => i.Enumeration).IfNotNull(i => i.Name).IfNullOrWhiteSpace("<unknown>"),
+                    obj.EnumValue.IfNotNull(i => i.Name).IfNullOrWhiteSpace("<unknown>"));
             }
             else
             {

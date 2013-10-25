@@ -20,6 +20,7 @@ using Zetbox.API;
 using Zetbox.API.Client;
 using Zetbox.App.GUI;
 using Zetbox.Client.Presentables.GUI;
+using Zetbox.API.Common;
 
 namespace Zetbox.Client.Presentables.ZetboxBase
 {
@@ -27,22 +28,21 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     {
         public new delegate ApplicationViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Application app);
 
-        protected readonly Func<ClientIsolationLevel, IZetboxContext> ctxFactory;
+        protected readonly Func<ContextIsolationLevel, IZetboxContext> ctxFactory;
 
         protected readonly Application app;
 
         public ApplicationViewModel(
             IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
             Application app,
-            Func<ClientIsolationLevel, IZetboxContext> ctxFactory)
+            Func<ContextIsolationLevel, IZetboxContext> ctxFactory)
             : base(appCtx, dataCtx, parent)
         {
             if (app == null) throw new ArgumentNullException("app");
             this.ctxFactory = ctxFactory;
             this.app = app;
-            _name = app.Name;
             _wndMdlType = app.WorkspaceViewModel != null
-                ? app.WorkspaceViewModel.ViewModelRef.AsType(true)
+                ? Type.GetType(app.WorkspaceViewModel.ViewModelTypeRef, true)
                 : null;
         }
 
@@ -63,10 +63,15 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        private string _name;
         public override string Name
         {
-            get { return _name; }
+            get
+            {
+                if (app.Module != null)
+                    return Assets.GetString(app.Module, ZetboxAssetKeys.Applications, ZetboxAssetKeys.ConstructNameKey(app), app.Name);
+                else
+                    return app.Name;
+            }
         }
 
         #region Open Application
@@ -96,7 +101,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             {
                 // responsibility to externalCtx's disposal passes to newWorkspace
                 var newWorkspace = ViewModelFactory.CreateViewModel<WindowViewModel.Factory>(appMdl.WindowModelType).Invoke(
-                    ctxFactory(ClientIsolationLevel.MergeServerData) // no data changes in applications! Open a workspace
+                    ctxFactory(ContextIsolationLevel.MergeQueryData) // no data changes in applications! Open a workspace
                     , null
                 );
                 ViewModelFactory.ShowModel(newWorkspace, true);
@@ -104,7 +109,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             else if (appMdl.RootScreen != null)
             {
                 var newWorkspace = ViewModelFactory.CreateViewModel<NavigatorViewModel.Factory>().Invoke(
-                    ctxFactory(ClientIsolationLevel.MergeServerData), // no data changes on navigation screens! Open a workspace
+                    ctxFactory(ContextIsolationLevel.MergeQueryData), // no data changes on navigation screens! Open a workspace
                     null,
                     appMdl.RootScreen
                 );

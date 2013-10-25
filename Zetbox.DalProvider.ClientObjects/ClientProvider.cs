@@ -23,10 +23,10 @@ namespace Zetbox.DalProvider.Client
     using Autofac;
     using Zetbox.API;
     using Zetbox.API.Client;
-    using Zetbox.API.Configuration;
-    using Zetbox.API.Utils;
     using Zetbox.API.Client.PerfCounter;
     using Zetbox.API.Common;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Utils;
 
     public interface IClientActionsManager : ICustomActionsManager { }
 
@@ -42,7 +42,7 @@ namespace Zetbox.DalProvider.Client
             moduleBuilder.Register((c, p) =>
                 {
                     var ilp = p.FirstOrDefault() as TypedParameter;
-                    var il = ilp != null ? (ClientIsolationLevel)ilp.Value : ClientIsolationLevel.PrefereClientData;
+                    var il = ilp != null ? (ContextIsolationLevel)ilp.Value : ContextIsolationLevel.PreferContextCache;
 
                     return new ZetboxContextImpl(
                         il,
@@ -54,7 +54,8 @@ namespace Zetbox.DalProvider.Client
                         c.Resolve<ClientImplementationType.ClientFactory>(),
                         c.Resolve<UnattachedObjectFactory>(),
                         c.Resolve<IPerfCounter>(),
-                        c.Resolve<IIdentityResolver>());
+                        c.Resolve<IIdentityResolver>(),
+                        c.Resolve<IEnumerable<IZetboxContextEventListener>>());
                 })
                 .AsSelf()
                 .As<IZetboxContext>()
@@ -71,6 +72,13 @@ namespace Zetbox.DalProvider.Client
                 .As<ClientImplementationType>()
                 .As<ImplementationType>()
                 .InstancePerDependency();
+
+            moduleBuilder
+                .Register<SerializingTypeMap>(c => new SerializingTypeMap()
+                {
+                    { typeof(ZetboxContextQuery<>), typeof(IQueryable<>) },
+                })
+                .SingleInstance();
 
             // the following function has to be thread-independent of any context to allow the proxy to be async
             moduleBuilder.Register<UnattachedObjectFactory>(c =>

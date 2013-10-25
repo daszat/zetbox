@@ -98,7 +98,7 @@ namespace Zetbox.App.Test
         /// <summary>
         /// 
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for OneSide
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for OneSide
         // fkBackingName=_fk_OneSide; fkGuidBackingName=_fk_guid_OneSide;
         // referencedInterface=Zetbox.App.Test.One_to_N_relations_One; moduleNamespace=Zetbox.App.Test;
         // inverse Navigator=NSide; is list;
@@ -305,6 +305,7 @@ namespace Zetbox.App.Test
                 OneSideImpl = (Zetbox.App.Test.One_to_N_relations_OneMemoryImpl)Context.Find<Zetbox.App.Test.One_to_N_relations_One>(_fk_OneSide.Value);
             else
                 OneSideImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

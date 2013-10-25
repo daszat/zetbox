@@ -155,19 +155,40 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl>(
-                        "Model.FK_UniqueContraints_ensures_unique_on_Properties_A",
-                        "CollectionEntry");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetPropertiesImplCollection();
             }
         }
+
+        private EntityCollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl> _PropertiesImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl> GetPropertiesImplCollection()
+        {
+            if (_PropertiesImplEntityCollection == null)
+            {
+                _PropertiesImplEntityCollection
+                    = ((IEntityWithRelationships)(this)).RelationshipManager
+                        .GetRelatedCollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl>(
+                            "Model.FK_UniqueContraints_ensures_unique_on_Properties_A",
+                            "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_PropertiesImplEntityCollection.IsLoaded)
+                {
+                    _PropertiesImplEntityCollection.Load();
+                }
+                _PropertiesImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Properties", null, null); if(OnProperties_PostSetter != null && IsAttached) OnProperties_PostSetter(this); };
+            }
+            return _PropertiesImplEntityCollection;
+        }
         private BSideCollectionWrapper<Zetbox.App.Base.IndexConstraint, Zetbox.App.Base.Property, Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl, EntityCollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl>> _Properties;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchPropertiesAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.Property>>(this.Properties);
+        }
+
+public static event PropertyListChangedHandler<Zetbox.App.Base.IndexConstraint> OnProperties_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.IndexConstraint> OnProperties_IsValid;
 
@@ -342,6 +363,17 @@ namespace Zetbox.App.Base
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Properties":
+                return TriggerFetchPropertiesAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
@@ -350,6 +382,7 @@ namespace Zetbox.App.Base
             base.ReloadReferences();
 
             // fix direct object references
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

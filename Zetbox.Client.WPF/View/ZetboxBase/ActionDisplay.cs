@@ -36,6 +36,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
     /// <summary>
     /// Interaction logic for ActionView.xaml
     /// </summary>
+    [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
     public partial class ActionDisplay : CommandButton, IHasViewModel<ActionViewModel>
     {
         public ActionDisplay()
@@ -47,7 +48,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            BindingOperations.SetBinding(this, CommandButton.CommandViewModelProperty, new Binding() {  });
+            BindingOperations.SetBinding(this, CommandButton.CommandViewModelProperty, new Binding() { });
         }
 
         // unset IsTabStop on the GridCell containing us.

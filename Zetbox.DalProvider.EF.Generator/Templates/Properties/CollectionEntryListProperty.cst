@@ -92,6 +92,7 @@
     // whether or not the collection will be eagerly loaded
     bool eagerLoading = relEnd.Navigator != null && relEnd.Navigator.EagerLoading;
 
+   	string eventName = "On" + name + "_PostSetter";
 %>
         // <%= this.GetType() %>
         // implement the user-visible interface
@@ -116,20 +117,40 @@
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<<%= ceName %>>(
-                        "Model.<%= assocName %>",
-                        "<%= targetRoleName %>");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return Get<%= efName %>Collection();
             }
+        }
+
+        private EntityCollection<<%= ceName %>> _<%= efName %>EntityCollection;
+        internal EntityCollection<<%= ceName %>> Get<%= efName %>Collection()
+        {
+            if (_<%= efName %>EntityCollection == null)
+            {
+                _<%= efName %>EntityCollection
+                    = ((IEntityWithRelationships)(this)).RelationshipManager
+                        .GetRelatedCollection<<%= ceName %>>(
+                            "Model.<%= assocName %>",
+                            "<%= targetRoleName %>");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_<%= efName %>EntityCollection.IsLoaded)
+                {
+                    _<%= efName %>EntityCollection.Load();
+                }
+                _<%= efName %>EntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("<%= name %>", null, null); if(<%= eventName %> != null && IsAttached) <%= eventName%>(this); };
+            }
+            return _<%= efName %>EntityCollection;
         }
         private <%= wrapperClass %><<%= rel.A.Type.GetDataTypeString() %>, <%= rel.B.Type.GetDataTypeString() %>, <%= ceName %>, EntityCollection<<%= ceName %>>> <%= wrapperName %>;
 <% if (eagerLoading) { %>
         private bool <%= name %>_was_eagerLoaded = false;
 <% } %>
+
+        public Zetbox.API.Async.ZbTask TriggerFetch<%= name %>Async()
+        {
+            return new Zetbox.API.Async.ZbTask<<%= exposedListType %><<%= referencedInterface %>>>(this.<%= name %>);
+        }
+
 <% AddSerialization(serializationList, name, eagerLoading); %>

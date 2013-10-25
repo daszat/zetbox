@@ -33,6 +33,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
     /// <summary>
     /// </summary>
+    [ViewModelDescriptor]
     public class ObjectListViewModel
         : BaseObjectCollectionViewModel<IList<IDataObject>>, IValueListViewModel<DataObjectViewModel, IReadOnlyObservableList<DataObjectViewModel>>, ISortableViewModel
     {
@@ -79,7 +80,9 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             {
                 if (_MoveItemUpCommand == null)
                 {
-                    _MoveItemUpCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Up", "Moves the item up",
+                    _MoveItemUpCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
+                        BaseObjectCollectionViewModelResources.MoveItemUpCommand_Name,
+                        BaseObjectCollectionViewModelResources.MoveItemUpCommand_Tooltip,
                         MoveItemUp,
                         CanMove,
                         null);
@@ -116,7 +119,9 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             {
                 if (_MoveItemDownCommand == null)
                 {
-                    _MoveItemDownCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Down", "Moves the item down",
+                    _MoveItemDownCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
+                        BaseObjectCollectionViewModelResources.MoveItemDownCommand_Name,
+                        BaseObjectCollectionViewModelResources.MoveItemDownCommand_Tooltip,
                         MoveItemDown,
                         CanMove,
                         null);

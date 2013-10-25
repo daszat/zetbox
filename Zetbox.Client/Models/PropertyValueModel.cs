@@ -120,7 +120,7 @@ namespace Zetbox.Client.Models
                 throw new ArgumentNullException("prop");
 
             var lb = prop.GetLabel();
-            var description = prop.Description;
+            var description = prop.GetDescription();
             var rk = prop.RequestedKind;
 
             if (prop is IntProperty)
@@ -255,7 +255,7 @@ namespace Zetbox.Client.Models
 
         public string Description
         {
-            get { return Property.Description; }
+            get { return Property.GetDescription(); }
         }
 
         private bool? _IsReadOnly = null;
@@ -684,34 +684,16 @@ namespace Zetbox.Client.Models
         #endregion
     }
 
-    public class CompoundCollectionPropertyValueModel
-        : ClassPropertyValueModel<IList<ICompoundObject>>, ICompoundCollectionValueModel
+    public abstract class BaseCompoundCollectionPropertyValueModel<TCollection>
+        : ClassPropertyValueModel<TCollection>, ICompoundCollectionValueModel<TCollection>
+        where TCollection : class
     {
         private readonly CompoundObjectProperty _property;
 
-        public CompoundCollectionPropertyValueModel(INotifyingObject obj, CompoundObjectProperty prop)
+        public BaseCompoundCollectionPropertyValueModel(INotifyingObject obj, CompoundObjectProperty prop)
             : base(obj, prop)
         {
             _property = prop;
-        }
-
-        #region IValueModel<TValue> Members
-
-        protected IList<ICompoundObject> valueCache;
-
-        /// <summary>
-        /// Gets or sets the value of the property presented by this model
-        /// </summary>
-        public override IList<ICompoundObject> Value
-        {
-            get
-            {
-                return base.Value;
-            }
-            set
-            {
-                throw new NotSupportedException();
-            }
         }
 
         protected void ValueCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -722,8 +704,6 @@ namespace Zetbox.Client.Models
                 temp(sender, e);
             }
         }
-
-        #endregion
 
         #region INotifyCollectionChanged Members
 
@@ -741,19 +721,28 @@ namespace Zetbox.Client.Models
         }
 
         #endregion
+        public CompoundObject CompoundObjectDefinition
+        {
+            get { return _property.CompoundObjectDefinition; }
+        }
+    }
 
-        private ZbTask<IList<ICompoundObject>> _getValueTask;
-        public override ZbTask<IList<ICompoundObject>> GetValueAsync()
+    public class CompoundCollectionPropertyValueModel
+        : BaseCompoundCollectionPropertyValueModel<ICollection<ICompoundObject>>
+    {
+        public CompoundCollectionPropertyValueModel(INotifyingObject obj, CompoundObjectProperty prop)
+            : base(obj, prop)
+        {
+        }
+
+        private ZbTask<ICollection<ICompoundObject>> _getValueTask;
+        public override ZbTask<ICollection<ICompoundObject>> GetValueAsync()
         {
             if (_getValueTask == null)
             {
-                _getValueTask = new ZbTask<IList<ICompoundObject>>(new ZbTask<INotifyCollectionChanged>(Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name)))
-                    .OnResult(t =>
-                    {
-                        var notifier = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
-                        notifier.CollectionChanged += ValueCollectionChanged;
-                        t.Result = MagicCollectionFactory.WrapAsList<ICompoundObject>(notifier);
-                    });
+                var notifier = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
+                notifier.CollectionChanged += ValueCollectionChanged;
+                _getValueTask = new ZbTask<ICollection<ICompoundObject>>(MagicCollectionFactory.WrapAsCollection<ICompoundObject>(notifier));
             }
             return _getValueTask;
         }
@@ -762,13 +751,35 @@ namespace Zetbox.Client.Models
         {
             // Do not delete trigger fetch task as the underlying collection is const
         }
+    }
 
-        public CompoundObject CompoundObjectDefinition
+    public class CompoundListPropertyValueModel
+        : BaseCompoundCollectionPropertyValueModel<IList<ICompoundObject>>
+    {
+        public CompoundListPropertyValueModel(INotifyingObject obj, CompoundObjectProperty prop)
+            : base(obj, prop)
         {
-            get { return _property.CompoundObjectDefinition; }
+        }
+
+        private ZbTask<IList<ICompoundObject>> _getValueTask;
+        public override ZbTask<IList<ICompoundObject>> GetValueAsync()
+        {
+            if (_getValueTask == null)
+            {
+                var notifier = Object.GetPropertyValue<INotifyCollectionChanged>(Property.Name);
+                notifier.CollectionChanged += ValueCollectionChanged;
+                _getValueTask = new ZbTask<IList<ICompoundObject>>(MagicCollectionFactory.WrapAsList<ICompoundObject>(notifier));
+            }
+            return _getValueTask;
+        }
+
+        protected override void InvalidateValueCache()
+        {
+            // Do not delete trigger fetch task as the underlying collection is const
         }
     }
 
+    #region Object collections
     public abstract class BaseObjectCollectionPropertyValueModel<TCollection>
         : ClassPropertyValueModel<TCollection>, IObjectCollectionValueModel<TCollection>
         where TCollection : class
@@ -902,6 +913,7 @@ namespace Zetbox.Client.Models
             // Do not delete trigger fetch task as the underlying collection is const
         }
     }
+    #endregion
 
     public class EnumerationPropertyValueModel : NullableStructPropertyValueModel<int>, IEnumerationValueModel
     {

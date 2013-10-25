@@ -61,7 +61,7 @@ namespace Zetbox.Server.SchemaManagement
                     CheckInheritance();
                     Log.Debug(String.Empty);
 
-                    if(withRepair)
+                    if (withRepair)
                         Workaround_UpdateTPHNotNullCheckConstraint();
 
                     CheckExtraRelations();
@@ -141,13 +141,13 @@ namespace Zetbox.Server.SchemaManagement
                 Log.DebugFormat("Table: {0}", objClass.TableName);
                 if (repair)
                 {
-                    Case.DoCreateUpdateRightsTrigger(objClass);
+                    Case.DoCreateOrReplaceUpdateRightsTrigger(objClass);
                 }
                 else
                 {
-                    var updateRightsTriggerName = Construct.SecurityRulesUpdateRightsTriggerName(objClass);
                     var tblName = objClass.GetTableRef(db);
-                    if (!db.CheckTriggerExists(tblName, updateRightsTriggerName))
+                    var updateRightsTriggerName = new TriggerRef(tblName, Construct.SecurityRulesUpdateRightsTriggerName(objClass));
+                    if (!db.CheckTriggerExists(updateRightsTriggerName))
                     {
                         Log.WarnFormat("Security Rules Trigger '{0}' is missing", updateRightsTriggerName);
                     }
@@ -156,7 +156,7 @@ namespace Zetbox.Server.SchemaManagement
 
             // Select all n:m Relations that are in a ACL selector
             foreach (Relation rel in schema.GetQuery<Relation>().ToList()
-                .Where(r => r.GetRelationType() == RelationType.n_m && schema.GetQuery<RoleMembership>().Where(rm => rm.Relations.Contains(r)).Count() > 0))
+                .Where(r => r.GetRelationType() == RelationType.n_m && schema.GetQuery<RoleMembership>().ToList().Where(rm => rm.Relations.Contains(r)).Count() > 0))
             {
                 Log.DebugFormat("Relation: {0}, {1} <-> {2}", rel.Description, rel.A.Type.TableName, rel.B.Type.TableName);
 
@@ -166,9 +166,9 @@ namespace Zetbox.Server.SchemaManagement
                 }
                 else
                 {
-                    var updateRightsTriggerName = Construct.SecurityRulesUpdateRightsTriggerName(rel);
                     var tblName = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
-                    if (!db.CheckTriggerExists(tblName, updateRightsTriggerName))
+                    var updateRightsTriggerName = new TriggerRef(tblName, Construct.SecurityRulesUpdateRightsTriggerName(rel));
+                    if (!db.CheckTriggerExists(updateRightsTriggerName))
                     {
                         Log.WarnFormat("Security Rules Trigger '{0}' is missing", updateRightsTriggerName);
                     }
@@ -297,7 +297,10 @@ namespace Zetbox.Server.SchemaManagement
                     continue;
                 if (!columns.Contains(propName))
                 {
-                    Log.WarnFormat("Column '[{0}].[{1}]' found in database but no Property was defined", objClass.TableName, propName);
+                    Log.WarnFormat("Column '[{0}].[{1}].[{2}]' found in database but no Property was defined", 
+                        objClass.Module.IfNotNull(o => o.SchemaName),
+                        objClass.TableName, 
+                        propName);
                 }
             }
         }
@@ -472,7 +475,7 @@ namespace Zetbox.Server.SchemaManagement
 
             if (isIndexed)
             {
-                CheckOrderColumn(tblName, indexName);
+                CheckOrderColumn(tblName, colName, indexName);
             }
             if (!isIndexed && db.CheckColumnExists(tblName, indexName))
             {
@@ -618,6 +621,9 @@ namespace Zetbox.Server.SchemaManagement
         {
             foreach (var uc in objClass.Constraints.OfType<IndexConstraint>())
             {
+                var isFulltextConstraint = uc is FullTextIndexConstraint;
+                if (isFulltextConstraint) continue;
+
                 var tblName = objClass.GetTableRef(db);
                 var columns = Construct.GetUCColNames(uc);
                 var idxName = Construct.IndexName(tblName.Name, columns);
@@ -848,7 +854,7 @@ namespace Zetbox.Server.SchemaManagement
             }
         }
 
-        private void CheckOrderColumn(TableRef tblName, string indexName)
+        private void CheckOrderColumn(TableRef tblName, string fkName, string indexName)
         {
             CheckColumn(tblName, indexName, System.Data.DbType.Int32, 0, 0, true, null);
             if (repair)
@@ -862,7 +868,7 @@ namespace Zetbox.Server.SchemaManagement
                     db.RepairPositionColumn(tblName, indexName);
                 }
             }
-            else if (!db.CheckPositionColumnValidity(tblName, indexName))
+            else if (!db.CheckPositionColumnValidity(tblName, fkName, indexName))
             {
                 Log.WarnFormat(
                     "Column [{0}][{1}] contains invalid position column entries",

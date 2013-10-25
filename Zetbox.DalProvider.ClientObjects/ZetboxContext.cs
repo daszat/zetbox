@@ -23,6 +23,7 @@ namespace Zetbox.DalProvider.Client
     using System.IO;
     using System.Linq;
     using System.Text;
+    using System.Xml.Serialization;
     using Zetbox.API;
     using Zetbox.API.Async;
     using Zetbox.API.Client;
@@ -36,8 +37,6 @@ namespace Zetbox.DalProvider.Client
     public interface IZetboxClientContextInternals
     {
         object InvokeServerMethod<T>(T obj, string name, Type retValType, IEnumerable<Type> parameterTypes, params object[] parameter) where T : class, IDataObject;
-
-        ClientIsolationLevel IsolationLevel { get; }
     }
 
     /// <summary>
@@ -65,9 +64,10 @@ namespace Zetbox.DalProvider.Client
         private readonly InterfaceType.Factory _iftFactory;
         private readonly ClientImplementationType.ClientFactory _implTypeFactory;
         private readonly UnattachedObjectFactory _unattachedObjectFactory;
-        private readonly ClientIsolationLevel _clientIsolationLevel;
+        private readonly ContextIsolationLevel _clientIsolationLevel;
         private readonly IPerfCounter _perfCounter;
         private readonly IIdentityResolver _identityResolver;
+        private readonly IEnumerable<IZetboxContextEventListener> _eventListeners;
 
         /// <summary>
         /// List of Objects (IDataObject and ICollectionEntry) in this Context.
@@ -80,7 +80,7 @@ namespace Zetbox.DalProvider.Client
         [SuppressMessage("Microsoft.Performance", "CA1805:DoNotInitializeUnnecessarily", Justification = "Uses global constant")]
         private int _newIDCounter = Helper.INVALIDID;
 
-        public ZetboxContextImpl(ClientIsolationLevel il, ZetboxConfig config, IProxy proxy, string clientImplementationAssembly, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, ClientImplementationType.ClientFactory implTypeFactory, UnattachedObjectFactory unattachedObjectFactory, IPerfCounter perfCounter, IIdentityResolver identityResolver)
+        public ZetboxContextImpl(ContextIsolationLevel il, ZetboxConfig config, IProxy proxy, string clientImplementationAssembly, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, ClientImplementationType.ClientFactory implTypeFactory, UnattachedObjectFactory unattachedObjectFactory, IPerfCounter perfCounter, IIdentityResolver identityResolver, IEnumerable<IZetboxContextEventListener> eventListeners)
         {
             if (perfCounter == null) throw new ArgumentNullException("perfCounter");
             this._clientIsolationLevel = il;
@@ -94,6 +94,7 @@ namespace Zetbox.DalProvider.Client
             this._unattachedObjectFactory = unattachedObjectFactory;
             this._perfCounter = perfCounter;
             this._identityResolver = identityResolver;
+            this._eventListeners = eventListeners;
 
             CreatedAt = new StackTrace(true);
             ZetboxContextDebuggerSingleton.Created(this);
@@ -125,6 +126,8 @@ namespace Zetbox.DalProvider.Client
             }
             // TODO: use correct Dispose implementation pattern
             GC.SuppressFinalize(this);
+
+            ZetboxContextEventListenerHelper.OnDisposed(_eventListeners, this);
         }
 
         public bool IsDisposed
@@ -139,7 +142,7 @@ namespace Zetbox.DalProvider.Client
         {
             get
             {
-                return _clientIsolationLevel != ClientIsolationLevel.PrefereClientData;
+                return _clientIsolationLevel != ContextIsolationLevel.PreferContextCache;
             }
         }
 
@@ -260,7 +263,6 @@ namespace Zetbox.DalProvider.Client
         public List<T> GetListOf<T>(IDataObject obj, string propertyName) where T : class, IDataObject
         {
             var t = GetListOfAsync<T>(obj, propertyName);
-            t.Wait();
             return t.Result;
         }
 
@@ -278,25 +280,31 @@ namespace Zetbox.DalProvider.Client
             return new ZbTask<IList<T>>(fetchTask)
                 .OnResult(t =>
                 {
-                    foreach (IPersistenceObject obj in fetchTask.Result.Item2)
+                    RecordNotifications();
+                    try
                     {
-                        this.AttachRespectingIsolationLevel(obj);
-                    }
+                        foreach (IPersistenceObject obj in fetchTask.Result.Item2)
+                        {
+                            this.AttachRespectingIsolationLevel(obj);
+                        }
 
-                    t.Result = new List<T>();
-                    foreach (IPersistenceObject obj in fetchTask.Result.Item1)
-                    {
-                        var localobj = this.AttachRespectingIsolationLevel(obj);
-                        t.Result.Add((T)localobj);
+                        t.Result = new List<T>();
+                        foreach (IPersistenceObject obj in fetchTask.Result.Item1)
+                        {
+                            var localobj = this.AttachRespectingIsolationLevel(obj);
+                            t.Result.Add((T)localobj);
+                        }
                     }
-                    PlaybackNotifications();
+                    finally
+                    {
+                        PlaybackNotifications();
+                    }
                 });
         }
 
         public IList<T> FetchRelation<T>(Guid relationId, RelationEndRole role, IDataObject container) where T : class, IRelationEntry
         {
             var t = FetchRelationAsync<T>(relationId, role, container);
-            t.Wait();
             return t.Result;
         }
 
@@ -386,10 +394,7 @@ namespace Zetbox.DalProvider.Client
             IsModified = true;
 
             OnObjectCreated(obj);
-            if (obj is IDataObject)
-            {
-                ((IDataObject)obj).NotifyCreated();
-            }
+            obj.NotifyCreated();
             return obj;
         }
 
@@ -418,9 +423,9 @@ namespace Zetbox.DalProvider.Client
         {
             var localobj = this.Attach(obj);
 
-            if (_clientIsolationLevel == ClientIsolationLevel.MergeServerData && obj != localobj)
+            if (_clientIsolationLevel == ContextIsolationLevel.MergeQueryData && obj != localobj)
             {
-                RecordNotifications(localobj);
+                ((BasePersistenceObject)localobj).RecordNotifications();
                 localobj.ApplyChangesFrom(obj);
                 // reset ObjectState to new truth
                 ((IClientObject)localobj).SetUnmodified();
@@ -429,25 +434,19 @@ namespace Zetbox.DalProvider.Client
             return localobj;
         }
 
-        private List<BasePersistenceObject> _objectsToPlayBackNotifications = null;
-
-        internal void RecordNotifications(IPersistenceObject obj)
+        private int _notificationsCounter = 0;
+        internal void RecordNotifications()
         {
-            if (_objectsToPlayBackNotifications == null)
-            {
-                _objectsToPlayBackNotifications = new List<BasePersistenceObject>();
-            }
-            var bpo = (BasePersistenceObject)obj;
-            bpo.RecordNotifications();
-            _objectsToPlayBackNotifications.Add(bpo);
+            AttachedObjects.ForEach(obj => ((BasePersistenceObject)obj).RecordNotifications());
+            _notificationsCounter += 1;
         }
 
         internal void PlaybackNotifications()
         {
-            if (_objectsToPlayBackNotifications == null)
-                return;
-            _objectsToPlayBackNotifications.ForEach(obj => obj.PlaybackNotifications());
-            _objectsToPlayBackNotifications = null;
+            _notificationsCounter -= 1;
+
+            if (_notificationsCounter == 0)
+                AttachedObjects.ForEach(obj => ((BasePersistenceObject)obj).PlaybackNotifications());
         }
 
         /// <summary>
@@ -561,18 +560,15 @@ namespace Zetbox.DalProvider.Client
             ((IClientObject)obj).SetDeleted();
 
             IsModified = true;
+            obj.NotifyDeleting();
             OnObjectDeleted(obj);
-
-            if (obj is IDataObject)
-            {
-                ((IDataObject)obj).NotifyDeleting();
-            }
         }
 
         private abstract class ExchangeObjectsHandler
         {
             public int ExchangeObjects(ZetboxContextImpl ctx)
             {
+                // TODO: ExchangeObjectsHandler is also used for method calls 
                 NotifyPreSave(ctx);
 
                 var objectsToSubmit = new List<IPersistenceObject>();
@@ -613,67 +609,72 @@ namespace Zetbox.DalProvider.Client
                 // Submit to server
                 var objectsFromServer = this.ExecuteServerCall(ctx, objectsToSubmit, notificationRequests);
 
-                // Apply Changes
-                int counter = 0;
-                var changedObjects = new List<IPersistenceObject>();
-                foreach (var objFromServer in objectsFromServer)
+                ctx.RecordNotifications();
+                try
                 {
-                    IClientObject obj;
-                    IPersistenceObject underlyingObject;
-
-                    if (counter < objectsToAdd.Count)
+                    // Apply Changes
+                    int counter = 0;
+                    var changedObjects = new List<IPersistenceObject>();
+                    foreach (var objFromServer in objectsFromServer)
                     {
-                        obj = (IClientObject)objectsToAdd[counter++];
-                        underlyingObject = obj.UnderlyingObject;
+                        IClientObject obj;
+                        IPersistenceObject underlyingObject;
 
-                        // remove object from cache, since index by ID may change.
-                        // will be re-inserted on attach later
-                        ctx._objects.Remove(underlyingObject);
-                    }
-                    else
-                    {
-                        underlyingObject = ctx.ContainsObject(ctx.GetInterfaceType(objFromServer), objFromServer.ID) ?? objFromServer;
-                        obj = (IClientObject)underlyingObject;
+                        if (counter < objectsToAdd.Count)
+                        {
+                            obj = (IClientObject)objectsToAdd[counter++];
+                            underlyingObject = obj.UnderlyingObject;
+
+                            // remove object from cache, since index by ID may change.
+                            // will be re-inserted on attach later
+                            ctx._objects.Remove(underlyingObject);
+                        }
+                        else
+                        {
+                            underlyingObject = ctx.ContainsObject(ctx.GetInterfaceType(objFromServer), objFromServer.ID) ?? objFromServer;
+                            obj = (IClientObject)underlyingObject;
+                        }
+
+                        ((BasePersistenceObject)underlyingObject).RecordNotifications();
+                        if (obj != objFromServer)
+                        {
+                            underlyingObject.ApplyChangesFrom(objFromServer);
+                        }
+
+                        // reset ObjectState to new truth
+                        switch (objFromServer.ObjectState)
+                        {
+                            case DataObjectState.Deleted:
+                                obj.SetDeleted();
+                                break;
+                            case DataObjectState.Unmodified:
+                                obj.SetUnmodified();
+                                break;
+                            case DataObjectState.New:
+                                FixObjStateNew(obj);
+                                break;
+                            case DataObjectState.Modified:
+                                FixObjStateModified(obj);
+                                break;
+                            case DataObjectState.NotDeserialized:
+                            case DataObjectState.Detached:
+                                throw new InvalidOperationException(string.Format("Invalid state received from server: {0}", objFromServer.ObjectState));
+                            default:
+                                throw new InvalidOperationException(string.Format("Unknown state received from server: {0}", objFromServer.ObjectState));
+                        }
+
+                        changedObjects.Add(underlyingObject);
                     }
 
-                    ctx.RecordNotifications(underlyingObject);
-                    if (obj != objFromServer)
-                    {
-                        underlyingObject.ApplyChangesFrom(objFromServer);
-                    }
+                    objectsToDetach.Except(changedObjects).ForEach(obj => ctx.Detach(obj));
+                    changedObjects.ForEach(obj => ctx.Attach(obj));
 
-                    // reset ObjectState to new truth
-                    switch (objFromServer.ObjectState)
-                    {
-                        case DataObjectState.Deleted:
-                            obj.SetDeleted();
-                            break;
-                        case DataObjectState.Unmodified:
-                            obj.SetUnmodified();
-                            break;
-                        case DataObjectState.New:
-                            FixObjStateNew(obj);
-                            break;
-                        case DataObjectState.Modified:
-                            FixObjStateModified(obj);
-                            break;
-                        case DataObjectState.NotDeserialized:
-                        case DataObjectState.Detached:
-                            throw new InvalidOperationException(string.Format("Invalid state received from server: {0}", objFromServer.ObjectState));
-                        default:
-                            throw new InvalidOperationException(string.Format("Unknown state received from server: {0}", objFromServer.ObjectState));
-                    }
-
-                    changedObjects.Add(underlyingObject);
+                    this.UpdateModifiedState(ctx);
                 }
-
-                objectsToDetach.Except(changedObjects).ForEach(obj => ctx.Detach(obj));
-                changedObjects.ForEach(obj => ctx.Attach(obj));
-
-                this.UpdateModifiedState(ctx);
-
-                ctx.PlaybackNotifications();
-
+                finally
+                {
+                    ctx.PlaybackNotifications();
+                }
                 NotifyPostSave();
 
                 return objectsToSubmit.Count;
@@ -786,8 +787,29 @@ namespace Zetbox.DalProvider.Client
                 // TODO: Add a better Cache Refresh Strategie
                 // CacheController<IDataObject>.Current.Clear();
 
+                var added = new List<IDataObject>();
+                var modified = new List<IDataObject>();
+                var deleted = new List<IDataObject>();
+                foreach (var ido in AttachedObjects.OfType<IDataObject>())
+                {
+                    switch (ido.ObjectState)
+                    {
+                        case DataObjectState.New:
+                            added.Add(ido);
+                            break;
+                        case DataObjectState.Modified:
+                            modified.Add(ido);
+                            break;
+                        case DataObjectState.Deleted:
+                            deleted.Add(ido);
+                            break;
+                    }
+                }
+
                 if (_submitChangesHandler == null) _submitChangesHandler = new SubmitChangesHandler();
                 result = _submitChangesHandler.ExchangeObjects(this);
+
+                ZetboxContextEventListenerHelper.OnSubmitted(_eventListeners, this, added, modified, deleted);
             }
             finally
             {
@@ -812,9 +834,10 @@ namespace Zetbox.DalProvider.Client
             // See Case 552
             // return GetQuery(type).Single(o => o.ID == ID);
 
-            return (ZbTask<IDataObject>)this.GetType().FindGenericMethod(true, "FindAsyncGenericHelper",
+            return (ZbTask<IDataObject>)this.GetType().FindGenericMethod("FindAsyncGenericHelper",
                 new Type[] { ifType.Type },
-                new Type[] { typeof(int) })
+                new Type[] { typeof(int) },
+                isPrivate: true)
                 .Invoke(this, new object[] { ID });
         }
 
@@ -837,7 +860,6 @@ namespace Zetbox.DalProvider.Client
         public IDataObject Find(InterfaceType ifType, int ID)
         {
             var t = FindAsync(ifType, ID);
-            t.Wait();
             return t.Result;
         }
 
@@ -846,6 +868,21 @@ namespace Zetbox.DalProvider.Client
         {
             var result = CreateUnattached<T>();
             (result as BasePersistenceObject).ID = id;
+            Attach(result);
+            ((IClientObject)result).MakeAccessDeniedProxy();
+            return result;
+        }
+
+        private T MakeAccessDeniedProxy<T>(Guid exportGuid)
+            where T : class, IPersistenceObject
+        {
+            var result = CreateUnattached<T>();
+            checked
+            {
+                // Fake a ID, when a guid is given, the ID is unknown
+                (result as BasePersistenceObject).ID = --_newIDCounter;
+            }
+            ((Zetbox.App.Base.IExportable)result).ExportGuid = exportGuid;
             Attach(result);
             ((IClientObject)result).MakeAccessDeniedProxy();
             return result;
@@ -868,11 +905,12 @@ namespace Zetbox.DalProvider.Client
                 return new ZbTask<T>(ZbTask.Synchron, () => (T)cacheHit);
 
             return GetQuery<T>()
-                    .SingleOrDefaultAsync(o => o.ID == ID)
-                    .OnResult(t =>
-                    {
-                        if (t.Result == null) t.Result = MakeAccessDeniedProxy<T>(ID);
-                    });
+                .WithDeactivated()
+                .SingleOrDefaultAsync(o => o.ID == ID)
+                .OnResult(t =>
+                {
+                    if (t.Result == null) t.Result = MakeAccessDeniedProxy<T>(ID);
+                });
         }
 
         /// <summary>
@@ -887,7 +925,6 @@ namespace Zetbox.DalProvider.Client
             where T : class, IDataObject
         {
             var t = FindAsync<T>(ID);
-            t.Wait();
             return t.Result;
         }
 
@@ -930,7 +967,10 @@ namespace Zetbox.DalProvider.Client
             }
             else
             {
-                return GetPersistenceObjectQuery<T>().SingleOrDefault(o => o.ID == ID) ?? MakeAccessDeniedProxy<T>(ID);
+                return GetPersistenceObjectQuery<T>()
+                    .WithDeactivated()
+                    .SingleOrDefault(o => o.ID == ID)
+                    ?? MakeAccessDeniedProxy<T>(ID);
             }
         }
 
@@ -963,7 +1003,10 @@ namespace Zetbox.DalProvider.Client
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public T FindPersistenceObject<T>(Guid exportGuid) where T : class, IPersistenceObject
         {
-            return GetPersistenceObjectQuery<T>().Single(o => ((Zetbox.App.Base.IExportable)o).ExportGuid == exportGuid);
+            return GetPersistenceObjectQuery<T>()
+                .WithDeactivated()
+                .SingleOrDefault(o => ((Zetbox.App.Base.IExportable)o).ExportGuid == exportGuid)
+                ?? MakeAccessDeniedProxy<T>(exportGuid);
         }
 
         /// <summary>
@@ -993,7 +1036,9 @@ namespace Zetbox.DalProvider.Client
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         public IEnumerable<T> FindPersistenceObjects<T>(IEnumerable<Guid> exportGuids) where T : class, IPersistenceObject
         {
-            return GetPersistenceObjectQuery<T>().Where(o => exportGuids.Contains(((Zetbox.App.Base.IExportable)o).ExportGuid));
+            return GetPersistenceObjectQuery<T>()
+                .WithDeactivated()
+                .Where(o => exportGuids.Contains(((Zetbox.App.Base.IExportable)o).ExportGuid));
         }
 
         /// <inheritdoc />
@@ -1027,6 +1072,11 @@ namespace Zetbox.DalProvider.Client
             }
         }
 
+        /// <summary>
+        /// Create and store a Blob.
+        /// </summary>
+        /// <remarks>In contrast to the servers's implementation, this does submit the blob immediately. This may cause orphaned blobs in the database.</remarks>        
+        /// <returns>the ID of the created Blob</returns>
         public int CreateBlob(Stream s, string filename, string mimetype)
         {
             var blob = proxy.SetBlobStream(s, filename, mimetype);
@@ -1073,7 +1123,7 @@ namespace Zetbox.DalProvider.Client
             return new ZbTask<FileInfo>(blobTask)
                 .ContinueWith(t =>
                 {
-                    string path = Path.Combine(DocumentCache, blobTask.Result.StoragePath);
+                    string path = Path.Combine(DocumentCache, blobTask.Result.StoragePath.ToLocalPath());
                     if (path.Length >= 256)
                     {
                         var dir = Path.GetDirectoryName(path);
@@ -1146,18 +1196,20 @@ namespace Zetbox.DalProvider.Client
             return _implTypeFactory(t);
         }
 
-        private IDictionary<object, object> _TransientState = null;
+        [NonSerialized]
+        private Dictionary<object, object> _transientState;
         /// <inheritdoc />
+        [XmlIgnore]
         public IDictionary<object, object> TransientState
         {
             get
             {
                 CheckDisposed();
-                if (_TransientState == null)
+                if (_transientState == null)
                 {
-                    _TransientState = new Dictionary<object, object>();
+                    _transientState = new Dictionary<object, object>();
                 }
-                return _TransientState;
+                return _transientState;
             }
         }
         #endregion
@@ -1282,7 +1334,7 @@ namespace Zetbox.DalProvider.Client
             return handler.Result;
         }
 
-        public ClientIsolationLevel IsolationLevel { get { return _clientIsolationLevel; } }
+        public ContextIsolationLevel IsolationLevel { get { return _clientIsolationLevel; } }
 
         #endregion
 

@@ -87,16 +87,12 @@ this.WriteObjects("\r\n");
 this.WriteObjects("                    NotifyPropertyChanged(\"",  propName , "\", __oldValue, __newValue);\r\n");
 this.WriteObjects("                    if(IsAttached) UpdateChangedInfo = true;\r\n");
 this.WriteObjects("                }\r\n");
-this.WriteObjects("                else\r\n");
-this.WriteObjects("                {\r\n");
-this.WriteObjects("                    SetInitializedProperty(\"",  propName , "\");\r\n");
-this.WriteObjects("                }\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
-#line 81 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 77 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 AddSerialization(serializationList, coType, propName, coImplementationType, backingPropertyName);
 
-#line 83 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 79 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("        // END ",  this.GetType() , "");
 
         }

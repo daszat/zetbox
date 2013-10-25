@@ -97,10 +97,6 @@ namespace Zetbox.App.Test
                     NotifyPropertyChanged("Any", __oldValue, __newValue);
                     if(IsAttached) UpdateChangedInfo = true;
                 }
-                else
-                {
-                    SetInitializedProperty("Any");
-                }
             }
         }
            // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.CompoundObjectPropertyTemplate
@@ -301,6 +297,15 @@ namespace Zetbox.App.Test
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
@@ -309,6 +314,7 @@ namespace Zetbox.App.Test
             base.ReloadReferences();
 
             // fix direct object references
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();
@@ -413,7 +419,6 @@ namespace Zetbox.App.Test
         [EventBasedMethod("OnNotifyCreated_AnyReferenceTestObject")]
         public override void NotifyCreated()
         {
-            SetNotInitializedProperty("Any");
             SetNotInitializedProperty("DisplayName");
             base.NotifyCreated();
             if (OnNotifyCreated_AnyReferenceTestObject != null) OnNotifyCreated_AnyReferenceTestObject(this);

@@ -29,14 +29,15 @@ namespace Zetbox.Client.Presentables.ObjectEditor
     using Zetbox.App.GUI;
     using Zetbox.Client.Presentables.ZetboxBase;
 
+    [ViewModelDescriptor]
     public class WorkspaceViewModel
         : WindowViewModel, IMultipleInstancesManager, IContextViewModel, IDeleteCommandParameter, IDisposable
     {
         public new delegate WorkspaceViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
         private readonly IZetboxContextExceptionHandler _exceptionHandler;
 
-        public WorkspaceViewModel(IViewModelDependencies appCtx, 
-            IZetboxContext dataCtx, ViewModel parent, 
+        public WorkspaceViewModel(IViewModelDependencies appCtx,
+            IZetboxContext dataCtx, ViewModel parent,
             IZetboxContextExceptionHandler exceptionHandler)
             : base(appCtx, dataCtx, parent)
         {
@@ -123,6 +124,14 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             get
             {
                 return DataContext.IsModified;
+            }
+        }
+
+        public string SaveChangesHintText
+        {
+            get
+            {
+                return WorkspaceViewModelResources.SaveChangesHint;
             }
         }
 
@@ -515,7 +524,14 @@ namespace Zetbox.Client.Presentables.ObjectEditor
         #endregion
 
         #region IDeleteCommandParameter members
-        bool IDeleteCommandParameter.IsReadOnly { get { return false; } }
+        bool IDeleteCommandParameter.IsReadOnly
+        {
+            get
+            {
+                var dovm = SelectedItem as DataObjectViewModel;
+                return dovm != null ? dovm.IsReadOnly : true;
+            }
+        }
         bool IDeleteCommandParameter.AllowDelete { get { return true; } }
         IEnumerable<ViewModel> ICommandParameter.SelectedItems { get { return SelectedItem == null ? null : new[] { SelectedItem }; } }
         #endregion

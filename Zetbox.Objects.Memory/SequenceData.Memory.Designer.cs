@@ -98,7 +98,7 @@ namespace Zetbox.App.Base
         /// <summary>
         /// 
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Sequence
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Sequence
         // fkBackingName=_fk_Sequence; fkGuidBackingName=_fk_guid_Sequence;
         // referencedInterface=Zetbox.App.Base.Sequence; moduleNamespace=Zetbox.App.Base;
         // inverse Navigator=Data; is reference;
@@ -305,6 +305,7 @@ namespace Zetbox.App.Base
                 SequenceImpl = (Zetbox.App.Base.SequenceMemoryImpl)Context.Find<Zetbox.App.Base.Sequence>(_fk_Sequence.Value);
             else
                 SequenceImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

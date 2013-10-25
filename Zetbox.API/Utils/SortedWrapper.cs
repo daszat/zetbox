@@ -24,9 +24,9 @@ namespace Zetbox.API.Utils
     using System.Linq.Dynamic;
     using System.Text;
 
-    public sealed class SortedWrapper : INotifyCollectionChanged, IList<IDataObject>
+    public sealed class SortedWrapper<T> : INotifyCollectionChanged, IList<T>
     {
-        private List<IDataObject> _sortedList;
+        private List<T> _sortedList;
         private IEnumerable _collection;
         private InterfaceType _elementType;
         private INotifyCollectionChanged _notifier;
@@ -54,7 +54,7 @@ namespace Zetbox.API.Utils
             _direction = direction;
             if (string.IsNullOrEmpty(_sortProp))
             {
-                _sortedList = _collection.Cast<IDataObject>().ToList();
+                _sortedList = _collection.Cast<T>().ToList();
             }
             else
             {
@@ -62,7 +62,7 @@ namespace Zetbox.API.Utils
                     .AsQueryable()
                     .AddCast(_elementType.Type)
                     .OrderBy(string.Format("{0} {1}", _sortProp, _direction == ListSortDirection.Descending ? "desc" : string.Empty))
-                    .Cast<IDataObject>()
+                    .Cast<T>()
                     .ToList();
             }
             if (eventArgs != null)
@@ -116,14 +116,14 @@ namespace Zetbox.API.Utils
 
         #endregion
 
-        #region IList<IDataObject> Members
+        #region IList<T> Members
 
-        public int IndexOf(IDataObject item)
+        public int IndexOf(T item)
         {
             return _sortedList.IndexOf(item);
         }
 
-        public void Insert(int index, IDataObject item)
+        public void Insert(int index, T item)
         {
             
         }
@@ -133,7 +133,7 @@ namespace Zetbox.API.Utils
             throw new NotImplementedException();
         }
 
-        public IDataObject this[int index]
+        public T this[int index]
         {
             get
             {
@@ -149,7 +149,7 @@ namespace Zetbox.API.Utils
 
         #region ICollection<DataObjectViewModel> Members
 
-        public void Add(IDataObject item)
+        public void Add(T item)
         {
             throw new NotImplementedException();
         }
@@ -159,12 +159,12 @@ namespace Zetbox.API.Utils
             throw new NotImplementedException();
         }
 
-        public bool Contains(IDataObject item)
+        public bool Contains(T item)
         {
             return _sortedList.Contains(item);
         }
 
-        public void CopyTo(IDataObject[] array, int arrayIndex)
+        public void CopyTo(T[] array, int arrayIndex)
         {
             throw new NotImplementedException();
         }
@@ -179,16 +179,16 @@ namespace Zetbox.API.Utils
             get { return true; }
         }
 
-        public bool Remove(IDataObject item)
+        public bool Remove(T item)
         {
             throw new NotImplementedException();
         }
 
         #endregion
 
-        #region IEnumerable<IDataObject> Members
+        #region IEnumerable<T> Members
 
-        public IEnumerator<IDataObject> GetEnumerator()
+        public IEnumerator<T> GetEnumerator()
         {
             return _sortedList.GetEnumerator();
         }

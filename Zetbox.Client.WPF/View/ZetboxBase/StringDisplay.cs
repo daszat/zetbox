@@ -30,10 +30,13 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
     using System.Windows.Navigation;
     using System.Windows.Shapes;
     using Zetbox.Client.GUI;
-    using Zetbox.Client.WPF.CustomControls;
+    using Zetbox.Client.Presentables.ValueViewModels;
     using Zetbox.Client.WPF.Converter;
+    using Zetbox.Client.WPF.CustomControls;
+    using Zetbox.Client.WPF.Toolkit;
 
-    public class StringDisplay : TextBlock // Simplify, often used Control
+    [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
+    public class StringDisplay : TextBlock, IHasViewModel<IFormattedValueViewModel> // Simplify, often used Control
     {
         //    <TextBlock x:Name="txtStringDisplay"
         //               Text="{Binding FormattedValue, Mode=OneWay}"
@@ -51,6 +54,11 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
             BindingOperations.SetBinding(this, TextBlock.TextProperty, new Binding("FormattedValueAsync") { Mode = BindingMode.OneWay });
             BindingOperations.SetBinding(this, TextBlock.ToolTipProperty, new Binding("ToolTip") { Mode = BindingMode.OneWay });
             BindingOperations.SetBinding(this, Zetbox.Client.WPF.Styles.Controls.HighlightProperty, new Binding("HighlightAsync") { Mode = BindingMode.OneWay });
+        }
+
+        public IFormattedValueViewModel ViewModel
+        {
+            get { return (IFormattedValueViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
     }
 }

@@ -73,6 +73,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Calendar\CalendarBookActions.cs" />
+    <Compile Include="Calendar\SyncProviderActions.cs" />
+    <Compile Include="Calendar\EventActions.cs" />
     <Compile Include="Calendar\WorkScheduleActions.cs" />
     <Compile Include="Calendar\WorkScheduleRuleActions.cs" />
     <Compile Include="Calendar\CommonWorkScheduleRuleActions.cs" />
@@ -80,13 +83,16 @@
     <Compile Include="Calendar\EasterWorkScheduleRuleActions.cs" />
     <Compile Include="Calendar\FixedYearlyWorkScheduleRuleActions.cs" />
     <Compile Include="Calendar\YearlyWorkScheduleRuleActions.cs" />
+    <Compile Include="DocumentManagement\ExcerptActions.cs" />
     <Compile Include="DocumentManagement\FileImportService.cs" />
     <Compile Include="DocumentManagement\ImportedFileActions.cs" />
+    <Compile Include="Gui\TagCacheActions.cs" />
     <Compile Include="Gui\FilterConfigurationActions.cs" />
     <Compile Include="Gui\PropertyFilterConfigurationActions.cs" />
     <Compile Include="Gui\NavigationEntryActions.cs" />
     <Compile Include="Gui\ViewDescriptorActions.cs" />
     <Compile Include="Gui\ViewModelDescriptorActions.cs" />
+    <Compile Include="TestModule\TestStudentActions.cs" />
     <Compile Include="TestModule\MethodTestActions.cs" />
     <Compile Include="TestModule\RecurrenceRuleTesterActions.cs" />
     <Compile Include="TestModule\SecurityTestParentActions.cs" />
@@ -100,6 +106,7 @@
     <Compile Include="ZetboxBase\BoolDefaultValueActions.cs" />
     <Compile Include="ZetboxBase\CompoundObjectParameterActions.cs" />
     <Compile Include="ZetboxBase\AnyReferenceActions.cs" />
+    <Compile Include="ZetboxBase\DateTimeOffsetActions.cs" />
     <Compile Include="ZetboxBase\DoubleDefaultValueActions.cs" />
     <Compile Include="ZetboxBase\GroupMembershipActions.cs" />
     <Compile Include="ZetboxBase\RoleMembershipActions.cs" />
@@ -127,7 +134,6 @@
     <Compile Include="ZetboxBase\CalculatedObjectReferencePropertyActions.cs" />
     <Compile Include="ZetboxBase\DoublePropertyActions.cs" />
     <Compile Include="ZetboxBase\StringPropertyActions.cs" />
-    <Compile Include="ZetboxBase\ServiceDescriptorActions.cs" />
     <Compile Include="ZetboxBase\IdentityActions.cs" />
     <Compile Include="ZetboxBase\GroupActions.cs" />
     <Compile Include="ZetboxBase\AccessControlActions.cs" />
@@ -150,7 +156,6 @@
     <Compile Include="ZetboxBase\PropertyActions.cs" />
     <Compile Include="ZetboxBase\EnumerationActions.cs" />
     <Compile Include="ZetboxBase\EnumerationEntryActions.cs" />
-    <Compile Include="ZetboxBase\TypeRefActions.cs" />
     <Compile Include="ZetboxBase\ObjectReferencePlaceholderPropertyActions.cs" />
     <Compile Include="ZetboxBase\MethodActions.cs" />
     <Compile Include="ZetboxBase\ObjectClassActions.cs" />

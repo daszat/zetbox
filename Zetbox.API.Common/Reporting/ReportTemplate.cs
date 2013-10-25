@@ -96,17 +96,20 @@ namespace Zetbox.API.Common.Reporting
 
         protected virtual string FormatTextfield(string text)
         {
-            if (text == null) return "";
+            if (string.IsNullOrWhiteSpace(text)) return "";
             else
             {
-                string[] lines = Regex.Split(text, "\r\n");
-                string formattedText = "";
+                string[] lines = text.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None);
+                var formattedText = new StringBuilder();
                 foreach (string line in lines)
                 {
-                    formattedText += " \\linebreak " + line.Replace("\\", "\\\\");
+                    // No leading linebreak
+                    if (formattedText.Length > 0)
+                        formattedText.Append("\\linebreak ");
+                    formattedText.AppendLine(line.Replace("\\", "\\\\"));
                 }
 
-                return formattedText;
+                return formattedText.ToString();
             }
         }
 
@@ -118,6 +121,16 @@ namespace Zetbox.API.Common.Reporting
         protected virtual string FormatDate(DateTime dt)
         {
             return dt.ToShortDateString();
+        }
+
+        protected virtual string FormatLongDate(DateTime? dt)
+        {
+            return dt != null ? FormatLongDate(dt.Value) : string.Empty;
+        }
+
+        protected virtual string FormatLongDate(DateTime dt)
+        {
+            return dt.ToLongDateString();
         }
 
         protected virtual string Today()

@@ -318,8 +318,9 @@
     <Style TargetType="ctrls:CommandButton"
            BasedOn="{StaticResource zbButtonTemplate}" />
 
-    <Style TargetType="ctrls:DropDownButton"
-           BasedOn="{StaticResource zbButtonTemplate}">
+    <Style x:Key="zbDropDownButtonStyle"
+           BasedOn="{StaticResource zbButtonTemplate}"
+           TargetType="ButtonBase">
         <Setter Property="Padding"
                 Value="0" />
         <Setter Property="Margin"
@@ -336,6 +337,10 @@
                 </DataTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <Style TargetType="ctrls:DropDownButton"
+           BasedOn="{StaticResource zbDropDownButtonStyle}">
     </Style>
 
     <Style x:Key="ImageButton"
@@ -2369,6 +2374,7 @@
             </Menu.Resources>
             <MenuItem ItemsSource="{Binding Commands}"
                       Header="{Binding Name}"
+                      Icon="{Binding Icon, Converter={StaticResource ImageCtrlConverter}, ConverterParameter='16,16'}"
                       ItemContainerStyle="{StaticResource CommandMenuItem}">
             </MenuItem>
         </Menu>
@@ -2493,7 +2499,7 @@
            BasedOn="{StaticResource LabeledViewStyle}">
     </Style>
 
-    <DataTemplate x:Key="FakeProgressOverlay">
+    <DataTemplate x:Key="FakeProgressOverlay" DataType="FrameworkElement">
         <Grid Background="#88888888">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -2508,11 +2514,12 @@
             </Grid.ColumnDefinitions>
             <Border Grid.Row="1"
                     Grid.Column="1"
-                    Background="#AAAAAAAA"
+                    Background="White"
                     Padding="5"
                     CornerRadius="10"
                     Height="30">
-                <TextBlock HorizontalAlignment="Center">Bitte warten...</TextBlock>
+                <TextBlock HorizontalAlignment="Center"
+                           Text="{Binding Path=AdornedElement.DataContext.CurrentBusyMessage, RelativeSource={RelativeSource AncestorType={x:Type ctrls:ContentAdorner}}}" />
             </Border>
             <ProgressBar Grid.Row="2"
                          Grid.Column="1"
@@ -2520,4 +2527,75 @@
                          Height="30" />
         </Grid>
     </DataTemplate>
+
+    <Style TargetType="{x:Type ctrls:ObjectHeader}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ctrls:ObjectHeader}">
+                    <DockPanel Margin="{StaticResource AreaGroup1Margin}">
+                        <Image DockPanel.Dock="Left"
+                               Source="{Binding Icon, Converter={StaticResource ImageConverter}}"
+                               Width="{StaticResource BigControlHeight}"
+                               Height="{StaticResource BigControlHeight}" />
+                        <ctrls:HelpButton DockPanel.Dock="Right"
+                                          Margin="0,0,5,0" />
+                        <TextBlock Text="{Binding Name}"
+                                   Margin="10 0 0 0"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}"
+                                       BasedOn="{StaticResource zbTitle}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ObjectState}"
+                                                     Value="Deleted">
+                                            <Setter Property="TextBlock.TextDecorations"
+                                                    Value="Strikethrough" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </DockPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type ctrls:DataObjectActionsTray}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ctrls:DataObjectActionsTray}">
+                    <ToolBarTray DockPanel.Dock="Top">
+                        <ctrls:WorkaroundToolBar ItemsSource="{Binding Actions}">
+                            <ctrls:WorkaroundToolBar.Resources>
+                                <DataTemplate DataType="{x:Type client:ActionViewModel}">
+                                    <ctrls:CommandButton CommandViewModel="{Binding}"
+                                                         Style="{StaticResource ImageToolbarButton}" />
+                                </DataTemplate>
+                            </ctrls:WorkaroundToolBar.Resources>
+                        </ctrls:WorkaroundToolBar>
+                    </ToolBarTray>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="PopupWindow"
+           TargetType="Window">
+        <Setter Property="ResizeMode"
+                Value="CanResize" />
+        <Setter Property="ShowInTaskbar"
+                Value="True" />
+        <Setter Property="Topmost"
+                Value="True" />
+        <Setter Property="Width"
+                Value="480" />
+        <Setter Property="Height"
+                Value="200" />
+        <Setter Property="WindowStyle"
+                Value="ToolWindow" />
+        <Setter Property="Background"
+                Value="#FFFFFFE0" />
+    </Style>
 </ResourceDictionary>

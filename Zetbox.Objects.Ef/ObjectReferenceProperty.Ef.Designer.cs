@@ -224,19 +224,40 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl>(
-                        "Model.FK_ObjRefProp_shows_Methods_A",
-                        "CollectionEntry");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetMethodsImplCollection();
             }
         }
+
+        private EntityCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl> _MethodsImplEntityCollection;
+        internal EntityCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl> GetMethodsImplCollection()
+        {
+            if (_MethodsImplEntityCollection == null)
+            {
+                _MethodsImplEntityCollection
+                    = ((IEntityWithRelationships)(this)).RelationshipManager
+                        .GetRelatedCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl>(
+                            "Model.FK_ObjRefProp_shows_Methods_A",
+                            "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_MethodsImplEntityCollection.IsLoaded)
+                {
+                    _MethodsImplEntityCollection.Load();
+                }
+                _MethodsImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Methods", null, null); if(OnMethods_PostSetter != null && IsAttached) OnMethods_PostSetter(this); };
+            }
+            return _MethodsImplEntityCollection;
+        }
         private BSideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl>> _Methods;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchMethodsAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.Method>>(this.Methods);
+        }
+
+public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferenceProperty> OnMethods_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.ObjectReferenceProperty> OnMethods_IsValid;
 
@@ -348,12 +369,80 @@ namespace Zetbox.App.Base
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchRelationEndAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.RelationEnd>(this.RelationEnd);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for RelationEnd
 		public static event PropertyGetterHandler<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.RelationEnd> OnRelationEnd_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.RelationEnd> OnRelationEnd_PreSetter;
 		public static event PropertyPostSetterHandler<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.RelationEnd> OnRelationEnd_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.ObjectReferenceProperty> OnRelationEnd_IsValid;
+
+        /// <summary>
+        /// Returns the translated description
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetDescription_ObjectReferenceProperty")]
+        public override string GetDescription()
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetDescription_ObjectReferenceProperty != null)
+            {
+                OnGetDescription_ObjectReferenceProperty(this, e);
+            }
+            else
+            {
+                e.Result = base.GetDescription();
+            }
+            return e.Result;
+        }
+        public static event GetDescription_Handler<ObjectReferenceProperty> OnGetDescription_ObjectReferenceProperty;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<ObjectReferenceProperty> OnGetDescription_ObjectReferenceProperty_CanExec;
+
+        [EventBasedMethod("OnGetDescription_ObjectReferenceProperty_CanExec")]
+        public override bool GetDescriptionCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetDescription_ObjectReferenceProperty_CanExec != null)
+				{
+					OnGetDescription_ObjectReferenceProperty_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDescriptionCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<ObjectReferenceProperty> OnGetDescription_ObjectReferenceProperty_CanExecReason;
+
+        [EventBasedMethod("OnGetDescription_ObjectReferenceProperty_CanExecReason")]
+        public override string GetDescriptionCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetDescription_ObjectReferenceProperty_CanExecReason != null)
+				{
+					OnGetDescription_ObjectReferenceProperty_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.GetDescriptionCanExecReason;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// The element type for multi-valued properties. The property type string in all other cases.
@@ -783,6 +872,19 @@ namespace Zetbox.App.Base
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Methods":
+                return TriggerFetchMethodsAsync();
+            case "RelationEnd":
+                return TriggerFetchRelationEndAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
@@ -799,6 +901,7 @@ namespace Zetbox.App.Base
                 RelationEndImpl = (Zetbox.App.Base.RelationEndEfImpl)Context.Find<Zetbox.App.Base.RelationEnd>(_fk_RelationEnd.Value);
             else
                 RelationEndImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

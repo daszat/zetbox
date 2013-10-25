@@ -37,7 +37,7 @@ namespace Zetbox.DalProvider.Client.Tests.ZetboxContextTests
 
             Logging.Log.Info("ZetboxContextTests.SetUp() is called");
 
-            ctx = scope.Resolve<Func<ClientIsolationLevel, IZetboxContext>>().Invoke(ClientIsolationLevel.MergeServerData);
+            ctx = scope.Resolve<Func<ContextIsolationLevel, IZetboxContext>>().Invoke(ContextIsolationLevel.MergeQueryData);
         }
 
         [Test]
@@ -65,7 +65,7 @@ namespace Zetbox.DalProvider.Client.Tests.ZetboxContextTests
         }
 
         [Test]
-        public void should_change_on_GetList()
+        public void should_change_on_GetObjects()
         {
             TestObjClass obj = ctx.GetQuery<TestObjClass>().First(i => i.ID == 1);
             Assert.That(obj.StringProp, Is.EqualTo("String 1"));

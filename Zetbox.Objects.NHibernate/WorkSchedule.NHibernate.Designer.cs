@@ -162,6 +162,11 @@ namespace Zetbox.App.Calendar
         /// <summary>Backing store for BaseWorkSchedule's guid, used on import only</summary>
         private Guid? _fk_guid_BaseWorkSchedule = null;
 
+    public Zetbox.API.Async.ZbTask TriggerFetchBaseWorkScheduleAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.WorkSchedule>(this.BaseWorkSchedule);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for BaseWorkSchedule
 		public static event PropertyGetterHandler<Zetbox.App.Calendar.WorkSchedule, Zetbox.App.Calendar.WorkSchedule> OnBaseWorkSchedule_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Calendar.WorkSchedule, Zetbox.App.Calendar.WorkSchedule> OnBaseWorkSchedule_PreSetter;
@@ -175,7 +180,7 @@ namespace Zetbox.App.Calendar
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=this.Proxy.ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Calendar;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -254,6 +259,11 @@ namespace Zetbox.App.Calendar
         /// <summary>Backing store for ChangedBy's id, used on dehydration only</summary>
         private int? _fk_ChangedBy = null;
 
+
+    public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
 		public static event PropertyGetterHandler<Zetbox.App.Calendar.WorkSchedule, Zetbox.App.Base.Identity> OnChangedBy_Getter;
@@ -371,6 +381,12 @@ namespace Zetbox.App.Calendar
         }
     
         private OneNRelationList<Zetbox.App.Calendar.WorkSchedule> _ChildWorkSchedule;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchChildWorkScheduleAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Calendar.WorkSchedule>>(this.ChildWorkSchedule);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule> OnChildWorkSchedule_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Calendar.WorkSchedule> OnChildWorkSchedule_IsValid;
@@ -381,7 +397,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=this.Proxy.CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Calendar;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -460,6 +476,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
         /// <summary>Backing store for CreatedBy's id, used on dehydration only</summary>
         private int? _fk_CreatedBy = null;
 
+
+    public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
 		public static event PropertyGetterHandler<Zetbox.App.Calendar.WorkSchedule, Zetbox.App.Base.Identity> OnCreatedBy_Getter;
@@ -630,7 +651,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
         // fkBackingName=this.Proxy.Module; fkGuidBackingName=_fk_guid_Module;
         // referencedInterface=Zetbox.App.Base.Module; moduleNamespace=Zetbox.App.Calendar;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -711,6 +732,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
 
         /// <summary>Backing store for Module's guid, used on import only</summary>
         private Guid? _fk_guid_Module = null;
+
+    public Zetbox.API.Async.ZbTask TriggerFetchModuleAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(this.Module);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
 		public static event PropertyGetterHandler<Zetbox.App.Calendar.WorkSchedule, Zetbox.App.Base.Module> OnModule_Getter;
@@ -808,6 +834,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
         }
     
         private OneNRelationList<Zetbox.App.Calendar.WorkScheduleRule> _WorkScheduleRules;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchWorkScheduleRulesAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Calendar.WorkScheduleRule>>(this.WorkScheduleRules);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule> OnWorkScheduleRules_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Calendar.WorkSchedule> OnWorkScheduleRules_IsValid;
@@ -1110,6 +1142,27 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "BaseWorkSchedule":
+                return TriggerFetchBaseWorkScheduleAsync();
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "ChildWorkSchedule":
+                return TriggerFetchChildWorkScheduleAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            case "Module":
+                return TriggerFetchModuleAsync();
+            case "WorkScheduleRules":
+                return TriggerFetchWorkScheduleRulesAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
@@ -1335,6 +1388,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
                 x.ParentsToDelete.Add(this);
                 ChildrenToDelete.Add(x);
             }
+            // should fetch && remember parent for WorkScheduleSyncProvider_of_WorkSchedule_RelationEntry
             // FK_WorkSchedule_has_Module
             if (Module != null) {
                 ((NHibernatePersistenceObject)Module).ChildrenToDelete.Add(this);

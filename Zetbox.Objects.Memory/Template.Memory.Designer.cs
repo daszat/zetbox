@@ -40,10 +40,10 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// Assembly of the Type that is displayed with this Template
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DisplayedTypeAssembly
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for DisplayedTypeAssembly
         // fkBackingName=_fk_DisplayedTypeAssembly; fkGuidBackingName=_fk_guid_DisplayedTypeAssembly;
         // referencedInterface=Zetbox.App.Base.Assembly; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -272,45 +272,55 @@ namespace Zetbox.App.GUI
         /// The main menu for this Template
         /// </summary>
         // collection entry list property
-   		// Zetbox.Generator.Templates.Properties.CollectionEntryListProperty
-		public ICollection<Zetbox.App.GUI.Visual> Menu
-		{
-			get
-			{
-				if (_Menu == null)
-				{
+        // BEGIN Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for Menu
+        public ICollection<Zetbox.App.GUI.Visual> Menu
+        {
+            get
+            {
+                if (_Menu == null)
+                {
                     TriggerFetchMenuAsync().Wait();
-				}
-				return (ICollection<Zetbox.App.GUI.Visual>)_Menu;
-			}
-		}
-        
+                }
+                return (ICollection<Zetbox.App.GUI.Visual>)_Menu;
+            }
+        }
+
         Zetbox.API.Async.ZbTask _triggerFetchMenuTask;
         public Zetbox.API.Async.ZbTask TriggerFetchMenuAsync()
         {
             if (_triggerFetchMenuTask != null) return _triggerFetchMenuTask;
-			_triggerFetchMenuTask = Context.FetchRelationAsync<Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryMemoryImpl>(new Guid("81ff3089-57da-478c-8be5-fd23abc222a2"), RelationEndRole.A, this);
-			_triggerFetchMenuTask.OnResult(r => 
+            _triggerFetchMenuTask = Context.FetchRelationAsync<Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryMemoryImpl>(new Guid("81ff3089-57da-478c-8be5-fd23abc222a2"), RelationEndRole.A, this);
+            _triggerFetchMenuTask.OnResult(r =>
             {
-                _Menu 
-				= new ObservableBSideCollectionWrapper<Zetbox.App.GUI.Template, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryMemoryImpl>>(
-					this, 
-					new RelationshipFilterASideCollection<Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryMemoryImpl>(this.Context, this));
+                _Menu
+                    = new ObservableBSideCollectionWrapper<Zetbox.App.GUI.Template, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryMemoryImpl>>(
+                        this,
+                        new RelationshipFilterASideCollection<Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryMemoryImpl>(this.Context, this));
+                        // _Menu.CollectionChanged is managed by OnMenuCollectionChanged() and called from the RelationEntry
             });
             return _triggerFetchMenuTask;
         }
 
-		private ObservableBSideCollectionWrapper<Zetbox.App.GUI.Template, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryMemoryImpl>> _Menu;
+        internal void OnMenuCollectionChanged()
+        {
+            NotifyPropertyChanged("Menu", null, null);
+            if (OnMenu_PostSetter != null && IsAttached)
+                OnMenu_PostSetter(this);
+        }
+
+        private ObservableBSideCollectionWrapper<Zetbox.App.GUI.Template, Zetbox.App.GUI.Visual, Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryMemoryImpl>> _Menu;
+        // END Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for Menu
+public static event PropertyListChangedHandler<Zetbox.App.GUI.Template> OnMenu_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.Template> OnMenu_IsValid;
 
         /// <summary>
         /// The visual representation of this Template
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for VisualTree
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for VisualTree
         // fkBackingName=_fk_VisualTree; fkGuidBackingName=_fk_guid_VisualTree;
         // referencedInterface=Zetbox.App.GUI.Visual; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -594,6 +604,7 @@ namespace Zetbox.App.GUI
                 VisualTreeImpl = (Zetbox.App.GUI.VisualMemoryImpl)Context.Find<Zetbox.App.GUI.Visual>(_fk_VisualTree.Value);
             else
                 VisualTreeImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

@@ -40,7 +40,7 @@ namespace Zetbox.App.Calendar
         /// <summary>
         /// 
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for BaseWorkSchedule
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for BaseWorkSchedule
         // fkBackingName=_fk_BaseWorkSchedule; fkGuidBackingName=_fk_guid_BaseWorkSchedule;
         // referencedInterface=Zetbox.App.Calendar.WorkSchedule; moduleNamespace=Zetbox.App.Calendar;
         // inverse Navigator=ChildWorkSchedule; is list;
@@ -172,10 +172,10 @@ namespace Zetbox.App.Calendar
         /// <summary>
         /// Identity which changed this object
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Calendar;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -398,21 +398,27 @@ namespace Zetbox.App.Calendar
                     serverList = new List<Zetbox.App.Calendar.WorkSchedule>();
                 });
             }
-    
+
             _triggerFetchChildWorkScheduleTask.OnResult(t =>
             {
                 _ChildWorkSchedule = new OneNRelationList<Zetbox.App.Calendar.WorkSchedule>(
                     "BaseWorkSchedule",
                     null,
                     this,
-                    () => { this.NotifyPropertyChanged("ChildWorkSchedule", null, null); if(OnChildWorkSchedule_PostSetter != null && IsAttached) OnChildWorkSchedule_PostSetter(this); },
-                    serverList);    
+                    OnChildWorkScheduleCollectionChanged,
+                    serverList);
             });
-            return _triggerFetchChildWorkScheduleTask;    
+            return _triggerFetchChildWorkScheduleTask;
         }
-    
-        private OneNRelationList<Zetbox.App.Calendar.WorkSchedule> _ChildWorkSchedule;
 
+        internal void OnChildWorkScheduleCollectionChanged()
+        {
+            NotifyPropertyChanged("ChildWorkSchedule", null, null);
+            if (OnChildWorkSchedule_PostSetter != null && IsAttached)
+                OnChildWorkSchedule_PostSetter(this);
+        }
+
+        private OneNRelationList<Zetbox.App.Calendar.WorkSchedule> _ChildWorkSchedule;
 public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule> OnChildWorkSchedule_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Calendar.WorkSchedule> OnChildWorkSchedule_IsValid;
@@ -420,10 +426,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
         /// <summary>
         /// Identity which created this object
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Calendar;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -679,10 +685,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
         /// <summary>
         /// Optional member of a module
         /// </summary>
-            // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
         // fkBackingName=_fk_Module; fkGuidBackingName=_fk_guid_Module;
         // referencedInterface=Zetbox.App.Base.Module; moduleNamespace=Zetbox.App.Calendar;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -891,21 +897,27 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
                     serverList = new List<Zetbox.App.Calendar.WorkScheduleRule>();
                 });
             }
-    
+
             _triggerFetchWorkScheduleRulesTask.OnResult(t =>
             {
                 _WorkScheduleRules = new OneNRelationList<Zetbox.App.Calendar.WorkScheduleRule>(
                     "WorkSchedule",
                     null,
                     this,
-                    () => { this.NotifyPropertyChanged("WorkScheduleRules", null, null); if(OnWorkScheduleRules_PostSetter != null && IsAttached) OnWorkScheduleRules_PostSetter(this); },
-                    serverList);    
+                    OnWorkScheduleRulesCollectionChanged,
+                    serverList);
             });
-            return _triggerFetchWorkScheduleRulesTask;    
+            return _triggerFetchWorkScheduleRulesTask;
         }
-    
-        private OneNRelationList<Zetbox.App.Calendar.WorkScheduleRule> _WorkScheduleRules;
 
+        internal void OnWorkScheduleRulesCollectionChanged()
+        {
+            NotifyPropertyChanged("WorkScheduleRules", null, null);
+            if (OnWorkScheduleRules_PostSetter != null && IsAttached)
+                OnWorkScheduleRules_PostSetter(this);
+        }
+
+        private OneNRelationList<Zetbox.App.Calendar.WorkScheduleRule> _WorkScheduleRules;
 public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule> OnWorkScheduleRules_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Calendar.WorkSchedule> OnWorkScheduleRules_IsValid;
@@ -1263,6 +1275,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
                 ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)Context.Find<Zetbox.App.Base.Module>(_fk_Module.Value);
             else
                 ModuleImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

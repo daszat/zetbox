@@ -53,7 +53,7 @@ namespace Zetbox.App.SchemaMigration
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.SchemaMigration;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable
 
@@ -133,6 +133,11 @@ namespace Zetbox.App.SchemaMigration
                 NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
@@ -390,7 +395,7 @@ namespace Zetbox.App.SchemaMigration
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.SchemaMigration;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable
 
@@ -470,6 +475,11 @@ namespace Zetbox.App.SchemaMigration
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
@@ -746,20 +756,41 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryEfImpl>(
-                        "Model.FK_SourceColumn_created_Property_A",
-                        "CollectionEntry");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetDestinationPropertyImplCollection();
             }
+        }
+
+        private EntityCollection<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryEfImpl> _DestinationPropertyImplEntityCollection;
+        internal EntityCollection<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryEfImpl> GetDestinationPropertyImplCollection()
+        {
+            if (_DestinationPropertyImplEntityCollection == null)
+            {
+                _DestinationPropertyImplEntityCollection
+                    = ((IEntityWithRelationships)(this)).RelationshipManager
+                        .GetRelatedCollection<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryEfImpl>(
+                            "Model.FK_SourceColumn_created_Property_A",
+                            "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_DestinationPropertyImplEntityCollection.IsLoaded)
+                {
+                    _DestinationPropertyImplEntityCollection.Load();
+                }
+                _DestinationPropertyImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("DestinationProperty", null, null); if(OnDestinationProperty_PostSetter != null && IsAttached) OnDestinationProperty_PostSetter(this); };
+            }
+            return _DestinationPropertyImplEntityCollection;
         }
         private BSideListWrapper<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.Base.Property, Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryEfImpl, EntityCollection<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryEfImpl>> _DestinationProperty;
         private bool DestinationProperty_was_eagerLoaded = false;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchDestinationPropertyAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<IList<Zetbox.App.Base.Property>>(this.DestinationProperty);
+        }
+
+public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.SourceColumn> OnDestinationProperty_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.SchemaMigration.SourceColumn> OnDestinationProperty_IsValid;
 
@@ -774,7 +805,7 @@ namespace Zetbox.App.SchemaMigration
     */
         // object list property
         // object list property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -787,7 +818,7 @@ namespace Zetbox.App.SchemaMigration
                     _EnumEntries = new EntityCollectionWrapper<Zetbox.App.SchemaMigration.SourceEnum, Zetbox.App.SchemaMigration.SourceEnumEfImpl>(
                             this.Context, EnumEntriesImpl,
                             () => this.NotifyPropertyChanging("EnumEntries", null, null),
-                            () => { this.NotifyPropertyChanged("EnumEntries", null, null); if(OnEnumEntries_PostSetter != null && IsAttached) OnEnumEntries_PostSetter(this); },
+                            null, // see GetEnumEntriesImplCollection()
                             (item) => item.NotifyPropertyChanging("SourceColumn", null, null),
                             (item) => item.NotifyPropertyChanged("SourceColumn", null, null));
                 }
@@ -800,21 +831,39 @@ namespace Zetbox.App.SchemaMigration
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.SchemaMigration.SourceEnumEfImpl>(
-                        "Model.FK_SourceColumn_may_have_EnumEntries",
-                        "EnumEntries");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetEnumEntriesImplCollection();
             }
         }
         private EntityCollectionWrapper<Zetbox.App.SchemaMigration.SourceEnum, Zetbox.App.SchemaMigration.SourceEnumEfImpl> _EnumEntries;
 
+        private EntityCollection<Zetbox.App.SchemaMigration.SourceEnumEfImpl> _EnumEntriesImplEntityCollection;
+        internal EntityCollection<Zetbox.App.SchemaMigration.SourceEnumEfImpl> GetEnumEntriesImplCollection()
+        {
+            if (_EnumEntriesImplEntityCollection == null)
+            {
+                _EnumEntriesImplEntityCollection = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Zetbox.App.SchemaMigration.SourceEnumEfImpl>(
+                        "Model.FK_SourceColumn_may_have_EnumEntries",
+                        "EnumEntries");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_EnumEntriesImplEntityCollection.IsLoaded)
+                {
+                    _EnumEntriesImplEntityCollection.Load();
+                }
+                _EnumEntriesImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("EnumEntries", null, null); if (OnEnumEntries_PostSetter != null && IsAttached) OnEnumEntries_PostSetter(this); };
+            }
+            return _EnumEntriesImplEntityCollection;
+        }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchEnumEntriesAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.SchemaMigration.SourceEnum>>(this.EnumEntries);
+        }
+
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
 public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.SourceColumn> OnEnumEntries_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.SchemaMigration.SourceColumn> OnEnumEntries_IsValid;
@@ -1147,6 +1196,11 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchReferencesAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.SchemaMigration.SourceColumn>(this.References);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for References
 		public static event PropertyGetterHandler<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.SchemaMigration.SourceColumn> OnReferences_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.SchemaMigration.SourceColumn> OnReferences_PreSetter;
@@ -1165,7 +1219,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
     */
         // object list property
         // object list property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -1178,7 +1232,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                     _Referers = new EntityCollectionWrapper<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.SchemaMigration.SourceColumnEfImpl>(
                             this.Context, ReferersImpl,
                             () => this.NotifyPropertyChanging("Referers", null, null),
-                            () => { this.NotifyPropertyChanged("Referers", null, null); if(OnReferers_PostSetter != null && IsAttached) OnReferers_PostSetter(this); },
+                            null, // see GetReferersImplCollection()
                             (item) => item.NotifyPropertyChanging("References", null, null),
                             (item) => item.NotifyPropertyChanged("References", null, null));
                 }
@@ -1191,21 +1245,39 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.SchemaMigration.SourceColumnEfImpl>(
-                        "Model.FK_FK_Column_references_PK_Column",
-                        "FK_Column");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetReferersImplCollection();
             }
         }
         private EntityCollectionWrapper<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.SchemaMigration.SourceColumnEfImpl> _Referers;
 
+        private EntityCollection<Zetbox.App.SchemaMigration.SourceColumnEfImpl> _ReferersImplEntityCollection;
+        internal EntityCollection<Zetbox.App.SchemaMigration.SourceColumnEfImpl> GetReferersImplCollection()
+        {
+            if (_ReferersImplEntityCollection == null)
+            {
+                _ReferersImplEntityCollection = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Zetbox.App.SchemaMigration.SourceColumnEfImpl>(
+                        "Model.FK_FK_Column_references_PK_Column",
+                        "FK_Column");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_ReferersImplEntityCollection.IsLoaded)
+                {
+                    _ReferersImplEntityCollection.Load();
+                }
+                _ReferersImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Referers", null, null); if (OnReferers_PostSetter != null && IsAttached) OnReferers_PostSetter(this); };
+            }
+            return _ReferersImplEntityCollection;
+        }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchReferersAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.SchemaMigration.SourceColumn>>(this.Referers);
+        }
+
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
 public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.SourceColumn> OnReferers_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.SchemaMigration.SourceColumn> OnReferers_IsValid;
@@ -1385,6 +1457,11 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                 }
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchSourceTableAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.SchemaMigration.SourceTable>(this.SourceTable);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for SourceTable
@@ -1613,6 +1690,29 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            case "DestinationProperty":
+                return TriggerFetchDestinationPropertyAsync();
+            case "EnumEntries":
+                return TriggerFetchEnumEntriesAsync();
+            case "References":
+                return TriggerFetchReferencesAsync();
+            case "Referers":
+                return TriggerFetchReferersAsync();
+            case "SourceTable":
+                return TriggerFetchSourceTableAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
@@ -1647,6 +1747,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                 SourceTableImpl = (Zetbox.App.SchemaMigration.SourceTableEfImpl)Context.Find<Zetbox.App.SchemaMigration.SourceTable>(_fk_SourceTable.Value);
             else
                 SourceTableImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

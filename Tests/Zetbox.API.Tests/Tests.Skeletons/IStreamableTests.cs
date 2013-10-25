@@ -21,11 +21,11 @@ namespace Zetbox.API.Tests.Skeletons
     using System.Linq;
     using System.Text;
     using Autofac;
+    using NUnit.Framework;
     using Zetbox.API.AbstractConsumerTests;
     using Zetbox.API.Utils;
-    using NUnit.Framework;
 
-    public class IStreamableTests<T> : SerializerTestFixture
+    public abstract class IStreamableTests<T> : SerializerTestFixture
         where T : IStreamable, new()
     {
         protected T obj;

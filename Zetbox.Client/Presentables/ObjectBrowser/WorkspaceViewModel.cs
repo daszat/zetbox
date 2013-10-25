@@ -26,6 +26,7 @@ using Zetbox.Client.Presentables.ZetboxBase;
 
 namespace Zetbox.Client.Presentables.ObjectBrowser
 {
+    [ViewModelDescriptor]
     public class WorkspaceViewModel
         : WindowViewModel
     {
@@ -116,6 +117,22 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
                 ViewModelFactory.CreateViewModel<ExceptionReporterViewModel.Factory>()
                     .Invoke(DataContext, null, ex, null)
                     .ShowDialog();
+            }
+        }
+
+        public string AppsMenuItemString
+        {
+            get
+            {
+                return WorkspaceViewModelResources.Apps;
+            }
+        }
+
+        public string RootNodeNameAsString
+        {
+            get
+            {
+                return WorkspaceViewModelResources.Browse;
             }
         }
 

@@ -60,6 +60,15 @@ namespace Zetbox.App.GUI
         }
 
         /// <summary>
+        /// Indicates that the referenced viewmodel type is deleted. Descriptors with this flag set require action to finally delete them and handle their users.
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("9c3935a1-2d3f-4d43-b8af-638e323b64c6")]
+        bool Deleted {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// describe this ViewModel
         /// </summary>
         [Zetbox.API.DefinitionGuid("93e25648-50f9-40d8-8753-e5dadab68e1d")]
@@ -76,10 +85,10 @@ namespace Zetbox.App.GUI
         ICollection<Zetbox.App.GUI.ControlKind> SecondaryControlKinds { get; }
 
         /// <summary>
-        /// The described CLR class&amp;apos; reference
+        /// The described CLR class&apos; Type
         /// </summary>
-        [Zetbox.API.DefinitionGuid("554288d1-f5f4-4b22-908b-01525a1d0f9b")]
-        Zetbox.App.Base.TypeRef ViewModelRef {
+        [Zetbox.API.DefinitionGuid("b3cae453-e222-4d24-b6f5-47f47550ad7a")]
+        string ViewModelTypeRef {
             get;
             set;
         }

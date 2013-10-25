@@ -216,6 +216,11 @@ namespace Zetbox.App.Test
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchParentAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Test.RequiredParent>(this.Parent);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
 		public static event PropertyGetterHandler<Zetbox.App.Test.RequiredParentChild, Zetbox.App.Test.RequiredParent> OnParent_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Test.RequiredParentChild, Zetbox.App.Test.RequiredParent> OnParent_PreSetter;
@@ -259,6 +264,17 @@ namespace Zetbox.App.Test
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Parent":
+                return TriggerFetchParentAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
@@ -272,6 +288,7 @@ namespace Zetbox.App.Test
                 ParentImpl = (Zetbox.App.Test.RequiredParentEfImpl)Context.Find<Zetbox.App.Test.RequiredParent>(_fk_Parent.Value);
             else
                 ParentImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

@@ -21,7 +21,12 @@ namespace Zetbox.API.Server
     using System.IO;
     using System.Linq;
     using System.Linq.Expressions;
+    using Lucene.Net.Index;
+    using Lucene.Net.QueryParsers;
+    using Lucene.Net.Search;
     using Zetbox.API;
+    using Zetbox.API.Common;
+    using Zetbox.API.Server.Fulltext;
     using Zetbox.API.Utils;
     using Zetbox.App.Extensions;
 
@@ -32,15 +37,13 @@ namespace Zetbox.API.Server
     public interface IServerObjectHandler
     {
         /// <summary>
-        /// Return a list of objects matching the specified parameters.
+        /// Return a list of objects matching the specified query.
         /// </summary>
         /// <param name="version">Current version of generated Zetbox.Objects assembly</param>
-        /// <param name="ctx">the server context to use for loading the objects</param>
-        /// <param name="maxListCount">how many objects to load at most</param>
-        /// <param name="filter">a Linq filter to apply</param>
-        /// <param name="orderBy">a number of linq expressions to order by</param>
-        /// <returns>the filtered and ordered list of objects, containing at most <paramref name="maxListCount"/> objects</returns>
-        IEnumerable<IStreamable> GetList(Guid version, IZetboxContext ctx, int maxListCount, List<Expression> filter, List<OrderBy> orderBy);
+        /// <param name="ctx">The context to query.</param>
+        /// <param name="query">a Linq query to execute</param>
+        /// <returns>the filtered and ordered list of objects</returns>
+        IEnumerable<IStreamable> GetObjects(Guid version, IReadOnlyZetboxContext ctx, Expression query);
 
         /// <summary>
         /// Return the list of objects referenced by the specified property.
@@ -50,7 +53,7 @@ namespace Zetbox.API.Server
         /// <param name="ID">the ID of the referencing object</param>
         /// <param name="property">the name of the referencing property</param>
         /// <returns>the list of objects</returns>
-        IEnumerable<IStreamable> GetListOf(Guid version, IZetboxContext ctx, int ID, string property);
+        IEnumerable<IStreamable> GetListOf(Guid version, IReadOnlyZetboxContext ctx, int ID, string property);
 
         object InvokeServerMethod(Guid version, IZetboxContext ctx, int ID, string method, IEnumerable<Type> parameterTypes, IEnumerable<object> parameter, IEnumerable<IPersistenceObject> objects, IEnumerable<ObjectNotificationRequest> notificationRequests, out IEnumerable<IPersistenceObject> changedObjects);
     }
@@ -65,13 +68,38 @@ namespace Zetbox.API.Server
 
     public interface IServerCollectionHandler
     {
-        IEnumerable<IRelationEntry> GetCollectionEntries(Guid version, IZetboxContext ctx, Guid relId, RelationEndRole endRole, int parentId);
+        IEnumerable<IRelationEntry> GetCollectionEntries(Guid version, IReadOnlyZetboxContext ctx, Guid relId, RelationEndRole endRole, int parentId);
     }
 
     public interface IServerDocumentHandler
     {
-        Stream GetBlobStream(Guid version, IZetboxContext ctx, int ID);
+        Stream GetBlobStream(Guid version, IReadOnlyZetboxContext ctx, int ID);
         Zetbox.App.Base.Blob SetBlobStream(Guid version, IZetboxContext ctx, Stream blob, string filename, string mimetype);
+    }
+
+    internal sealed class FulltextDetector : ExpressionTreeVisitor
+    {
+        public FulltextDetector()
+        {
+            IsFulltext = false;
+        }
+
+        public bool IsFulltext { get; private set; }
+
+        public string Filter { get; private set; }
+
+        protected override void VisitMethodCall(MethodCallExpression m)
+        {
+            base.VisitMethodCall(m);
+
+            if (m.IsMethodCallExpression("FulltextMatch", typeof(ZetboxContextQueryableExtensions)))
+            {
+                if (IsFulltext) throw new InvalidOperationException("Found two fulltext specs in a single query");
+
+                IsFulltext = true;
+                Filter = (string)(m.Arguments[1] as ConstantExpression).Value;
+            }
+        }
     }
 
     /// <summary>
@@ -84,64 +112,153 @@ namespace Zetbox.API.Server
         : IServerObjectHandler
         where T : class, IDataObject
     {
+        private readonly LuceneSearchDeps _searchDependencies;
+
         /// <summary>
         /// Events registrieren
         /// </summary>
-        public ServerObjectHandler()
+        public ServerObjectHandler(LuceneSearchDeps searchDependencies = null)
         {
+            _searchDependencies = searchDependencies;
         }
 
-        public IEnumerable<IStreamable> GetList(Guid version, IZetboxContext ctx, int maxListCount, List<Expression> filter, List<OrderBy> orderBy)
+        public IEnumerable<IStreamable> GetObjects(Guid version, IReadOnlyZetboxContext ctx, Expression query)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
+            if (query == null) { throw new ArgumentNullException("query"); }
             ZetboxGeneratedVersionAttribute.Check(version);
 
-            if (maxListCount > Zetbox.API.Helper.MAXLISTCOUNT)
+            var isExecute = query.IsMethodCallExpression("First") || query.IsMethodCallExpression("FirstOrDefault") || query.IsMethodCallExpression("Single") || query.IsMethodCallExpression("SingleOrDefault");
+
+            var ftDetector = new FulltextDetector();
+            ftDetector.Visit(query);
+
+            if (ftDetector.IsFulltext)
             {
-                maxListCount = Zetbox.API.Helper.MAXLISTCOUNT;
+                return FulltextSearch(ctx, ftDetector.Filter);
             }
-
-            var result = ctx.GetQuery<T>();
-
-            if (filter != null)
+            else if (isExecute)
             {
-                foreach (var f in filter)
+                return Execute(ctx, query);
+            }
+            else
+            {
+                return Query(ctx, query);
+            }
+        }
+
+        private static IEnumerable<IStreamable> Query(IReadOnlyZetboxContext ctx, Expression query)
+        {
+            if (!query.IsMethodCallExpression("Take"))
+            {
+                return ctx.GetQuery<T>().Provider.CreateQuery<T>(query).Take(Helper.MAXLISTCOUNT).ToList().Cast<IStreamable>();
+            }
+            else
+            {
+                var takeQ = query as MethodCallExpression;
+                var countExp = takeQ.Arguments[1] as ConstantExpression;
+                if ((int)countExp.Value > Helper.MAXLISTCOUNT)
                 {
-                    if (f.IsMethodCallExpression("WithDeactivated", typeof(ZetboxContextQueryableExtensions)))
-                    {
-                        result = result.WithDeactivated<T>();
-                    }
-                    else
-                    {
-                        result = (IQueryable<T>)result.AddFilter(f);
-                    }
+                    return ctx.GetQuery<T>().Provider.CreateQuery<T>(query).Take(Helper.MAXLISTCOUNT).ToList().Cast<IStreamable>();
+                }
+                else
+                {
+                    return ctx.GetQuery<T>().Provider.CreateQuery<T>(query).ToList().Cast<IStreamable>();
                 }
             }
+        }
 
-            if (orderBy != null)
+        private static IEnumerable<IStreamable> Execute(IReadOnlyZetboxContext ctx, Expression query)
+        {
+            var result = (IStreamable)ctx.GetQuery<T>().Provider.Execute<T>(query);
+            if (result == null)
             {
-                bool first = true;
-                foreach (var o in orderBy)
-                {
-                    if (first)
-                    {
-                        if (o.Type == OrderByType.ASC)
-                            result = result.AddOrderBy<T>(o.Expression);
-                        else
-                            result = result.AddOrderByDescending<T>(o.Expression);
-                    }
-                    else
-                    {
-                        if (o.Type == OrderByType.ASC)
-                            result = result.AddThenBy<T>(o.Expression);
-                        else
-                            result = result.AddThenByDescending<T>(o.Expression);
-                    }
-                    first = false;
-                }
+                return Enumerable.Empty<IStreamable>();
             }
+            else
+            {
+                return new IStreamable[] { result };
+            }
+        }
 
-            return result.Take(maxListCount).ToList().Cast<IStreamable>();
+        private IEnumerable<IStreamable> FulltextSearch(IReadOnlyZetboxContext ctx, string query)
+        {
+            if (_searchDependencies == null) throw new InvalidOperationException("No Fulltext Support registered");
+
+            var qry = _searchDependencies.Parser.Parse(query);
+            qry = new ServerQueryTranslator().VisitQuery(qry);
+
+            var searcher = _searchDependencies.SearcherManager.Aquire();
+            try
+            {
+                var finalQuery = new BooleanQuery();
+                finalQuery.Add(new BooleanClause(qry, Occur.MUST));
+
+                if (typeof(T) != typeof(IDataObject))
+                {
+                    var classQuery = new BooleanQuery();
+                    foreach (var cls in _searchDependencies.Resolver.GetObjectClass(ctx.GetInterfaceType(typeof(T))).AndChildren(cls => cls.SubClasses).Where(cls => !cls.IsAbstract))
+                    {
+                        classQuery.Add(new BooleanClause(new TermQuery(new Term(Module.FIELD_CLASS, string.Format("{0}.{1}", cls.Module.Namespace, cls.Name))), Occur.SHOULD));
+                    }
+                    finalQuery.Add(new BooleanClause(classQuery, Occur.MUST));
+                }
+
+                Logging.Server.Debug("Starting fulltext search: " + finalQuery.ToString());
+                var hits = searcher.Search(finalQuery, int.MaxValue);
+                var anyRefs = hits.ScoreDocs.Select(doc => searcher.Doc(doc.Doc)).ToLookup(doc => doc.Get(Fulltext.Module.FIELD_CLASS), doc => doc.Get(Fulltext.Module.FIELD_ID));
+
+                Logging.Server.Debug("Fetching fulltext results");
+                var result = new List<IStreamable>();
+                // TODO: do batching here
+                foreach (var ids in anyRefs)
+                {
+                    var ifType = ctx.GetInterfaceType(ids.Key);
+                    foreach (var idStr in ids)
+                    {
+                        int id;
+                        if (int.TryParse(idStr, out id))
+                        {
+                            try
+                            {
+                                var obj = ctx.Find(ifType, id);
+                                if (obj.CurrentAccessRights.HasReadRights())
+                                {
+                                    result.Add(obj);
+                                    if (result.Count >= Helper.MAXLISTCOUNT)
+                                        return result;
+                                }
+                            }
+                            catch (ZetboxObjectNotFoundException)
+                            {
+                                _searchDependencies.Queue.Enqueue(new IndexUpdate()
+                                {
+                                    deleted = new List<Tuple<InterfaceType, int>>() { new Tuple<InterfaceType, int>(ifType, id) }.AsReadOnly()
+                                });
+                            }
+                        }
+                        else
+                        {
+                            Logging.Server.WarnOnce(string.Format("Found a not parsable object ID '{0}' in fulltext catalog", idStr));
+                        }
+                    }
+                }
+                return result;
+            }
+            finally
+            {
+                _searchDependencies.SearcherManager.Release(searcher);
+            }
+        }
+
+        private sealed class ServerQueryTranslator : QueryTranslator
+        {
+            protected override string VisitField(string f)
+            {
+                return !string.IsNullOrWhiteSpace(f)
+                            ? f.ToLower()
+                            : f;
+            }
         }
 
         /// <summary>
@@ -150,7 +267,7 @@ namespace Zetbox.API.Server
         /// <code>property</code> of the object with the <code>ID</code>
         /// </summary>
         /// <returns>the list of values in the property</returns>
-        public IEnumerable<IStreamable> GetListOf(Guid version, IZetboxContext ctx, int ID, string property)
+        public IEnumerable<IStreamable> GetListOf(Guid version, IReadOnlyZetboxContext ctx, int ID, string property)
         {
             if (ctx == null) throw new ArgumentNullException("ctx");
             if (ID <= API.Helper.INVALIDID) throw new ArgumentException("ID must not be invalid");
@@ -312,7 +429,7 @@ namespace Zetbox.API.Server
 
     public class ServerDocumentHandler : IServerDocumentHandler
     {
-        public Stream GetBlobStream(Guid version, IZetboxContext ctx, int ID)
+        public Stream GetBlobStream(Guid version, IReadOnlyZetboxContext ctx, int ID)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
             ZetboxGeneratedVersionAttribute.Check(version);

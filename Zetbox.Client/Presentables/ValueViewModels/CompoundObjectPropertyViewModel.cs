@@ -22,11 +22,11 @@ namespace Zetbox.Client.Presentables.ValueViewModels
     using System.Linq;
     using System.Text;
     using Zetbox.API;
+    using Zetbox.API.Async;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables.ValueViewModels;
-    using Zetbox.API.Async;
 
     [ViewModelDescriptor]
     public class CompoundObjectPropertyViewModel : ValueViewModel<CompoundObjectViewModel, ICompoundObject>, IValueViewModel<CompoundObjectViewModel>
@@ -59,13 +59,21 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         public override CompoundObjectViewModel ValueAsync
         {
-            get { return Value; }
+            get
+            {
+                return Value;
+            }
+            set
+            {
+                throw new NotSupportedException();
+            }
+
         }
 
         private bool _valueCacheInititalized = false;
         private CompoundObjectViewModel _valueCache;
 
-        protected override ZbTask<CompoundObjectViewModel> GetValueFromModel()
+        protected override ZbTask<CompoundObjectViewModel> GetValueFromModelAsync()
         {
             return new ZbTask<CompoundObjectViewModel>(ZbTask.Synchron, () =>
             {
@@ -101,10 +109,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             set
             {
                 base.IsReadOnly = value;
-                foreach (var propMdl in Value.PropertyModels)
-                {
-                    propMdl.IsReadOnly = value;
-                }
+                Value.IsReadOnly = value;
             }
         }
 

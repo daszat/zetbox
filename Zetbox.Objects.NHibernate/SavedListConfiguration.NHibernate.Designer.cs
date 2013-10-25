@@ -191,7 +191,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Owner
         // fkBackingName=this.Proxy.Owner; fkGuidBackingName=_fk_guid_Owner;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -271,6 +271,11 @@ namespace Zetbox.App.GUI
         private int? _fk_Owner = null;
 
 
+    public Zetbox.API.Async.ZbTask TriggerFetchOwnerAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.Owner);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Owner
 		public static event PropertyGetterHandler<Zetbox.App.GUI.SavedListConfiguration, Zetbox.App.Base.Identity> OnOwner_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.SavedListConfiguration, Zetbox.App.Base.Identity> OnOwner_PreSetter;
@@ -284,7 +289,7 @@ namespace Zetbox.App.GUI
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Type
         // fkBackingName=this.Proxy.Type; fkGuidBackingName=_fk_guid_Type;
         // referencedInterface=Zetbox.App.Base.ObjectClass; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does call events
 
@@ -366,6 +371,11 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for Type's guid, used on import only</summary>
         private Guid? _fk_guid_Type = null;
 
+    public Zetbox.API.Async.ZbTask TriggerFetchTypeAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass>(this.Type);
+    }
+
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Type
 		public static event PropertyGetterHandler<Zetbox.App.GUI.SavedListConfiguration, Zetbox.App.Base.ObjectClass> OnType_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.SavedListConfiguration, Zetbox.App.Base.ObjectClass> OnType_PreSetter;
@@ -440,6 +450,19 @@ namespace Zetbox.App.GUI
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Owner":
+                return TriggerFetchOwnerAsync();
+            case "Type":
+                return TriggerFetchTypeAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {

@@ -64,12 +64,13 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries
                 string.Empty /*targetRoleNameUnused*/,
                 positionPropertyName,
                 inverseNavigatorName,
-                true /*inverseNavigatorIsList*/,
-                false /*eagerLoading*/,
-                false /*relDataTypeExportable*/,
-                false /*callGetterSetterEvents*/,
-                prop.IsCalculated(),
-                prop.DisableExport == true);
+                inverseNavigatorIsList: true,
+                notifyInverseCollection: false,
+                eagerLoading: false,
+                relDataTypeExportable: false,
+                callGetterSetterEvents: false,
+                isCalculated: prop.IsCalculated(),
+                disableExport: prop.DisableExport == true);
 
             Templates.Properties.DelegatingProperty.Call(
                 Host, ctx,
@@ -144,7 +145,10 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries
             this.WriteLine("        }");
             this.WriteLine("");
 
-            GetDeletedRelatives.Call(Host, "Parent", null);
+            RememberToDeleteTemplate.Call(Host,
+                false,
+                true, "Parent", prop.Name,
+                false, "Value", null);
 
             ObjectClasses.ProxyClass.Call(Host, ctx, interfaceName, new KeyValuePair<string, string>[0], typeAndNameList);
         }

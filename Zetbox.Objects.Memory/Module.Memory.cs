@@ -56,6 +56,16 @@ namespace Zetbox.Objects
     internal sealed class MemoryActionsManager
         : BaseCustomActionsManager, IMemoryActionsManager
     {
+        private static object _syncRoot = new object();
+        private static bool _isInitialised = false;
+
+        protected override object SyncRoot { get { return _syncRoot; } }
+        protected override bool IsInitialised
+        {
+            get { return _isInitialised; }
+            set { _isInitialised = value; }
+        }
+
         public MemoryActionsManager(ILifetimeScope container, IDeploymentRestrictor restrictor)
             : base(container, restrictor, "MemoryImpl")
         {

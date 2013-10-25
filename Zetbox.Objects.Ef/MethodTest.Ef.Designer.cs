@@ -51,7 +51,7 @@ namespace Zetbox.App.Test
     */
         // object list property
         // object list property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -64,7 +64,7 @@ namespace Zetbox.App.Test
                     _Children = new EntityCollectionWrapper<Zetbox.App.Test.MethodTest, Zetbox.App.Test.MethodTestEfImpl>(
                             this.Context, ChildrenImpl,
                             () => this.NotifyPropertyChanging("Children", null, null),
-                            () => { this.NotifyPropertyChanged("Children", null, null); if(OnChildren_PostSetter != null && IsAttached) OnChildren_PostSetter(this); },
+                            null, // see GetChildrenImplCollection()
                             (item) => item.NotifyPropertyChanging("Parent", null, null),
                             (item) => item.NotifyPropertyChanged("Parent", null, null));
                 }
@@ -77,21 +77,39 @@ namespace Zetbox.App.Test
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.Test.MethodTestEfImpl>(
-                        "Model.FK_Parent_has_Children",
-                        "Children");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetChildrenImplCollection();
             }
         }
         private EntityCollectionWrapper<Zetbox.App.Test.MethodTest, Zetbox.App.Test.MethodTestEfImpl> _Children;
 
+        private EntityCollection<Zetbox.App.Test.MethodTestEfImpl> _ChildrenImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Test.MethodTestEfImpl> GetChildrenImplCollection()
+        {
+            if (_ChildrenImplEntityCollection == null)
+            {
+                _ChildrenImplEntityCollection = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Zetbox.App.Test.MethodTestEfImpl>(
+                        "Model.FK_Parent_has_Children",
+                        "Children");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_ChildrenImplEntityCollection.IsLoaded)
+                {
+                    _ChildrenImplEntityCollection.Load();
+                }
+                _ChildrenImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Children", null, null); if (OnChildren_PostSetter != null && IsAttached) OnChildren_PostSetter(this); };
+            }
+            return _ChildrenImplEntityCollection;
+        }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchChildrenAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Test.MethodTest>>(this.Children);
+        }
+
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
 public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChildren_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.MethodTest> OnChildren_IsValid;
@@ -201,6 +219,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
                 }
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchParentAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Test.MethodTest>(this.Parent);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Parent
@@ -958,6 +981,19 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Children":
+                return TriggerFetchChildrenAsync();
+            case "Parent":
+                return TriggerFetchParentAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
@@ -971,6 +1007,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
                 ParentImpl = (Zetbox.App.Test.MethodTestEfImpl)Context.Find<Zetbox.App.Test.MethodTest>(_fk_Parent.Value);
             else
                 ParentImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

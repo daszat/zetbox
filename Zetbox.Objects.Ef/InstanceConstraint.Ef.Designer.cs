@@ -24,7 +24,7 @@ namespace Zetbox.App.Base
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="InstanceConstraintEfImpl")]
     [System.Diagnostics.DebuggerDisplay("InstanceConstraint")]
-    public class InstanceConstraintEfImpl : BaseServerDataObject_EntityFramework, InstanceConstraint, Zetbox.API.IExportableInternal
+    public abstract class InstanceConstraintEfImpl : BaseServerDataObject_EntityFramework, InstanceConstraint, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("25a83f49-3cff-4baf-850d-8d185bb329ec");
         public override Guid ObjectClassID { get { return _objectClassID; } }
@@ -146,6 +146,11 @@ namespace Zetbox.App.Base
                 }
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchConstrainedAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.DataType>(this.Constrained);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Constrained
@@ -472,6 +477,17 @@ namespace Zetbox.App.Base
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Constrained":
+                return TriggerFetchConstrainedAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
@@ -488,6 +504,7 @@ namespace Zetbox.App.Base
                 ConstrainedImpl = (Zetbox.App.Base.DataTypeEfImpl)Context.Find<Zetbox.App.Base.DataType>(_fk_Constrained.Value);
             else
                 ConstrainedImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

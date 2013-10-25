@@ -122,7 +122,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable
 
@@ -202,6 +202,11 @@ namespace Zetbox.App.Base
                 NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
@@ -364,7 +369,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable
 
@@ -444,6 +449,11 @@ namespace Zetbox.App.Base
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
@@ -701,7 +711,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Icon
         // fkBackingName=_fk_Icon; fkGuidBackingName=_fk_guid_Icon;
         // referencedInterface=Zetbox.App.GUI.Icon; moduleNamespace=Zetbox.App.GUI;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable
 
@@ -782,6 +792,11 @@ namespace Zetbox.App.Base
                 NotifyPropertyChanged("Icon", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchIconAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon>(this.Icon);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Icon
@@ -1011,7 +1026,7 @@ namespace Zetbox.App.Base
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
         // fkBackingName=_fk_Module; fkGuidBackingName=_fk_guid_Module;
         // referencedInterface=Zetbox.App.Base.Module; moduleNamespace=Zetbox.App.Base;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable
 
@@ -1092,6 +1107,11 @@ namespace Zetbox.App.Base
                 NotifyPropertyChanged("Module", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchModuleAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module>(this.Module);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
@@ -1278,6 +1298,11 @@ namespace Zetbox.App.Base
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchObjectClassAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.DataType>(this.ObjectClass);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ObjectClass
 		public static event PropertyGetterHandler<Zetbox.App.Base.Method, Zetbox.App.Base.DataType> OnObjectClass_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Base.Method, Zetbox.App.Base.DataType> OnObjectClass_PreSetter;
@@ -1296,7 +1321,7 @@ namespace Zetbox.App.Base
     */
         // object list property
         // object list property
-           // Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
@@ -1309,7 +1334,7 @@ namespace Zetbox.App.Base
                     _Parameter = new EntityListWrapper<Zetbox.App.Base.BaseParameter, Zetbox.App.Base.BaseParameterEfImpl>(
                             this.Context, ParameterImpl,
                             () => this.NotifyPropertyChanging("Parameter", null, null),
-                            () => { this.NotifyPropertyChanged("Parameter", null, null); if(OnParameter_PostSetter != null && IsAttached) OnParameter_PostSetter(this); },
+                            null, // see GetParameterImplCollection()
                             (item) => item.NotifyPropertyChanging("Method", null, null),
                             (item) => item.NotifyPropertyChanged("Method", null, null), "Method", "Parameter_pos");
                 }
@@ -1322,21 +1347,39 @@ namespace Zetbox.App.Base
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.Base.BaseParameterEfImpl>(
-                        "Model.FK_Method_has_Parameter",
-                        "Parameter");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetParameterImplCollection();
             }
         }
         private EntityListWrapper<Zetbox.App.Base.BaseParameter, Zetbox.App.Base.BaseParameterEfImpl> _Parameter;
 
+        private EntityCollection<Zetbox.App.Base.BaseParameterEfImpl> _ParameterImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Base.BaseParameterEfImpl> GetParameterImplCollection()
+        {
+            if (_ParameterImplEntityCollection == null)
+            {
+                _ParameterImplEntityCollection = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Zetbox.App.Base.BaseParameterEfImpl>(
+                        "Model.FK_Method_has_Parameter",
+                        "Parameter");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_ParameterImplEntityCollection.IsLoaded)
+                {
+                    _ParameterImplEntityCollection.Load();
+                }
+                _ParameterImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Parameter", null, null); if (OnParameter_PostSetter != null && IsAttached) OnParameter_PostSetter(this); };
+            }
+            return _ParameterImplEntityCollection;
+        }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchParameterAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<IList<Zetbox.App.Base.BaseParameter>>(this.Parameter);
+        }
+
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
 public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnParameter_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.Method> OnParameter_IsValid;
@@ -1374,19 +1417,40 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnParamet
         {
             get
             {
-                var c = ((IEntityWithRelationships)(this)).RelationshipManager
-                    .GetRelatedCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl>(
-                        "Model.FK_ObjRefProp_shows_Methods_B",
-                        "CollectionEntry");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !c.IsLoaded)
-                {
-                    c.Load();
-                }
-                return c;
+                return GetShowByPropertiesImplCollection();
             }
         }
+
+        private EntityCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl> _ShowByPropertiesImplEntityCollection;
+        internal EntityCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl> GetShowByPropertiesImplCollection()
+        {
+            if (_ShowByPropertiesImplEntityCollection == null)
+            {
+                _ShowByPropertiesImplEntityCollection
+                    = ((IEntityWithRelationships)(this)).RelationshipManager
+                        .GetRelatedCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl>(
+                            "Model.FK_ObjRefProp_shows_Methods_B",
+                            "CollectionEntry");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_ShowByPropertiesImplEntityCollection.IsLoaded)
+                {
+                    _ShowByPropertiesImplEntityCollection.Load();
+                }
+                _ShowByPropertiesImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("ShowByProperties", null, null); if(OnShowByProperties_PostSetter != null && IsAttached) OnShowByProperties_PostSetter(this); };
+            }
+            return _ShowByPropertiesImplEntityCollection;
+        }
         private ASideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl>> _ShowByProperties;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchShowByPropertiesAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Base.ObjectReferenceProperty>>(this.ShowByProperties);
+        }
+
+public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnShowByProperties_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.Method> OnShowByProperties_IsValid;
 
@@ -1671,6 +1735,29 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnParamet
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            case "Icon":
+                return TriggerFetchIconAsync();
+            case "Module":
+                return TriggerFetchModuleAsync();
+            case "ObjectClass":
+                return TriggerFetchObjectClassAsync();
+            case "Parameter":
+                return TriggerFetchParameterAsync();
+            case "ShowByProperties":
+                return TriggerFetchShowByPropertiesAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
@@ -1713,6 +1800,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnParamet
                 ObjectClassImpl = (Zetbox.App.Base.DataTypeEfImpl)Context.Find<Zetbox.App.Base.DataType>(_fk_ObjectClass.Value);
             else
                 ObjectClassImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

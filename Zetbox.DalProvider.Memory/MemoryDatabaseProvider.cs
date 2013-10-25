@@ -50,7 +50,8 @@ namespace Zetbox.DalProvider.Memory
                         var result = new MemoryContext(
                             c.Resolve<InterfaceType.Factory>(),
                             c.Resolve<Func<IFrozenContext>>(),
-                            c.Resolve<MemoryImplementationType.MemoryFactory>()
+                            c.Resolve<MemoryImplementationType.MemoryFactory>(),
+                            c.Resolve<IEnumerable<IZetboxContextEventListener>>()
                             );
 
                         return result;

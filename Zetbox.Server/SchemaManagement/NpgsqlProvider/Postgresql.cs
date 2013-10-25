@@ -375,6 +375,8 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
 
         public override void RenameTable(TableRef oldTblName, TableRef newTblName)
         {
+            if (oldTblName == newTblName) return; // noop
+
             if (oldTblName == null)
                 throw new ArgumentNullException("oldTblName");
             if (newTblName == null)
@@ -551,6 +553,8 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
 
         public override void RenameColumn(TableRef tblName, string oldColName, string newColName)
         {
+            if (oldColName == newColName) return; // noop
+
             ExecuteNonQuery(String.Format(
                 "ALTER TABLE {0} RENAME COLUMN {1} TO {2}",
                 FormatSchemaName(tblName),
@@ -585,9 +589,9 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
             return (bool)ExecuteScalar(@"
                 SELECT (d.adbin IS NOT NULL AND d.adbin <> '') as has_default
                 FROM pg_class c
-	                LEFT JOIN pg_namespace n ON n.oid = c.relnamespace
-	                LEFT JOIN pg_attribute a ON c.oid = a.attrelid
-	                LEFT JOIN pg_attrdef d ON c.oid = d.adrelid AND a.attnum = d.adnum
+                    LEFT JOIN pg_namespace n ON n.oid = c.relnamespace
+                    LEFT JOIN pg_attribute a ON c.oid = a.attrelid
+                    LEFT JOIN pg_attrdef d ON c.oid = d.adrelid AND a.attnum = d.adnum
                 WHERE n.nspname = @schema AND c.relname = @table AND a.attname = @column",
                 new Dictionary<string, object>() { 
                     { "@schema", tblName.Schema },
@@ -604,8 +608,8 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
             return (int)ExecuteScalar(@"
                 SELECT a.atttypmod - 4 -- adjust for varchar implementation, which is storing the length too
                 FROM pg_class c
-	                LEFT JOIN pg_namespace n ON n.oid = c.relnamespace
-	                LEFT JOIN pg_attribute a ON c.oid = a.attrelid
+                    LEFT JOIN pg_namespace n ON n.oid = c.relnamespace
+                    LEFT JOIN pg_attribute a ON c.oid = a.attrelid
                 WHERE n.nspname = @schema AND c.relname = @table AND a.attname = @column",
                 new Dictionary<string, object>() { 
                     { "@schema", tblName.Schema },
@@ -671,6 +675,16 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
                 QuoteIdentifier(colName)));
         }
 
+        protected override bool CheckColumnsNullEquality(TableRef tblName, string aColName, string bColName)
+        {
+            return (bool)ExecuteScalar(
+                string.Format("select count(*) > 0 from (select * from {0} where ({1} is null and {2} is not null) or ({1} is not null and {2} is null) limit 1) as data",
+                    FormatSchemaName(tblName),
+                    QuoteIdentifier(aColName),
+                    QuoteIdentifier(bColName))
+                );
+        }
+
         public override long CountRows(TableRef tblName)
         {
             return (long)ExecuteScalar(String.Format(
@@ -727,6 +741,8 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
 
         public override void RenameFKConstraint(TableRef tblName, string oldConstraintName, TableRef refTblName, string colName, string newConstraintName, bool onDeleteCascade)
         {
+            if (oldConstraintName == newConstraintName) return; // noop
+
             if (tblName == null) throw new ArgumentNullException("tblName");
             if (string.IsNullOrEmpty(oldConstraintName)) throw new ArgumentNullException("oldConstraintName");
             if (string.IsNullOrEmpty(newConstraintName)) throw new ArgumentNullException("newConstraintName");
@@ -762,10 +778,9 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
                         JOIN pg_class idx ON (indexrelid = idx.oid)
                         JOIN pg_class tbl ON (indrelid = tbl.oid)
                         JOIN pg_namespace ON (tbl.relnamespace = pg_namespace.oid)
-                    WHERE nspname = @schema AND tbl.relname = @table AND idx.relname = @index",
+                    WHERE nspname = @schema AND idx.relname = @index",
                 new Dictionary<string, object>(){
                     { "@schema", tblName.Schema },
-                    { "@table", tblName.Name },
                     { "@index", idxName.MaxLength(PG_MAX_IDENTIFIER_LENGTH) },
                 });
         }
@@ -798,6 +813,18 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
                 "DROP INDEX {0}.{1}",
                 QuoteIdentifier(tblName.Schema),
                 QuoteIdentifier(idxName)));
+        }
+
+        public override void RenameIndex(TableRef tblName, string oldIdxName, string newIdxName)
+        {
+            if (oldIdxName == newIdxName) return; // noop
+            if (tblName == null) throw new ArgumentNullException("tblName");
+
+            ExecuteNonQuery(String.Format(
+                "ALTER INDEX {0}.{1} RENAME TO {2}",
+                QuoteIdentifier(tblName.Schema),
+                QuoteIdentifier(oldIdxName),
+                QuoteIdentifier(newIdxName)));
         }
 
         public override bool CheckCheckConstraintPossible(TableRef tblName, string colName, string newConstraintName, Dictionary<List<string>, Expression<Func<string, bool>>> checkExpressions)
@@ -839,10 +866,21 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
                 });
         }
 
-        public override bool CheckTriggerExists(TableRef objName, string triggerName)
+        public override IEnumerable<TriggerRef> GetTriggerNames()
         {
-            if (objName == null)
-                throw new ArgumentNullException("objName");
+            return ExecuteReader(@"SELECT n.nspname, p.proname
+                FROM pg_proc p
+                    JOIN pg_namespace n ON p.pronamespace = n.oid
+                    JOIN pg_type t ON p.prorettype = t.oid
+                WHERE t.typname = 'trigger' AND n.nspname NOT IN ('pg_catalog', 'pg_toast', 'information_schema', 'public')")
+                .Select(rd => new TriggerRef(CurrentConnection.Database, rd.GetString(0), rd.GetString(1)));
+        }
+
+        public override bool CheckTriggerExists(TriggerRef triggerName)
+        {
+            if (triggerName == null)
+                throw new ArgumentNullException("triggerName");
+
             return (bool)ExecuteScalar(@"
                 SELECT count(*) > 0
                 FROM pg_proc p
@@ -850,18 +888,17 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
                     JOIN pg_type t ON p.prorettype = t.oid
                 WHERE t.typname = 'trigger' AND n.nspname = @schema AND p.proname = @trigger",
                 new Dictionary<string, object>(){
-                    { "@schema", objName.Schema },
-                    { "@trigger", triggerName.MaxLength(PG_MAX_IDENTIFIER_LENGTH) },
+                    { "@schema", triggerName.Schema },
+                    { "@trigger", triggerName.Name.MaxLength(PG_MAX_IDENTIFIER_LENGTH) },
                 });
         }
 
-        public override void DropTrigger(TableRef objName, string triggerName)
+        public override void DropTrigger(TriggerRef triggerName)
         {
-            if (objName == null) throw new ArgumentNullException("objName");
+            if (triggerName == null) throw new ArgumentNullException("triggerName");
 
-            ExecuteNonQuery(String.Format("DROP FUNCTION {0}.{1}() CASCADE",
-                QuoteIdentifier(objName.Schema),
-                QuoteIdentifier(triggerName)));
+            ExecuteNonQuery(String.Format("DROP FUNCTION {0}() CASCADE",
+                FormatSchemaName(triggerName)));
         }
 
         public override bool CheckProcedureExists(ProcRef procName)
@@ -1144,27 +1181,23 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
                 QuoteIdentifier("ID")));     // 5
         }
 
-        public override void CreateUpdateRightsTrigger(string triggerName, TableRef tblName, List<RightsTrigger> tblList, List<string> dependingCols)
+        public override void CreateUpdateRightsTrigger(TriggerRef triggerName, TableRef tblName, List<RightsTrigger> tblList, List<string> dependingCols)
         {
-            if (String.IsNullOrEmpty(triggerName))
-                throw new ArgumentNullException("triggerName");
-            if (tblName == null)
-                throw new ArgumentNullException("tblName");
-            if (tblList == null)
-                throw new ArgumentNullException("tblList");
+            if (triggerName == null) throw new ArgumentNullException("triggerName");
+            if (tblName == null) throw new ArgumentNullException("tblName");
+            if (tblList == null) throw new ArgumentNullException("tblList");
+            if (triggerName.Database != tblName.Database || triggerName.Schema != tblName.Schema) throw new ArgumentOutOfRangeException("tblName", string.Format("tblName and triggerName must reference the same database and schema, but don't: tbl:{0}.{1} != trg:{2}.{3}", tblName.Database, tblName.Schema, triggerName.Database, triggerName.Schema));
 
             StringBuilder sb = new StringBuilder();
             sb.Append("CREATE OR REPLACE FUNCTION ");
-            sb.Append(QuoteIdentifier(tblName.Schema));
-            sb.Append(".");
-            sb.Append(QuoteIdentifier(triggerName));
+            sb.Append(FormatSchemaName(triggerName));
             sb.Append("()");
             sb.AppendLine();
             sb.Append(@"  RETURNS trigger AS
 $BODY$BEGIN
 ");
 
-            // optimaziation
+            // optimization
             if (dependingCols != null && dependingCols.Count > 0)
             {
                 sb.AppendLine("  IF TG_OP = 'UPDATE' THEN");
@@ -1178,72 +1211,51 @@ $BODY$BEGIN
 
             foreach (var tbl in tblList)
             {
-                if (tbl.Relations.Count == 0)
+                // directly at the object, we can simplify
+                if (tbl.ObjectRelations.Count == 0)
                 {
                     sb.AppendFormat(@"
-	IF TG_OP = 'DELETE' OR TG_OP = 'UPDATE' THEN
-		DELETE FROM {0} WHERE {2} = OLD.{2};
-	END IF;
-	IF TG_OP = 'INSERT' OR TG_OP = 'UPDATE' THEN
-		DELETE FROM {0} WHERE {2} = NEW.{2};
-		INSERT INTO {0} ({2}, ""Identity"", ""Right"")
-			SELECT {2}, ""Identity"", ""Right"" FROM {1}
-			WHERE {2} = NEW.{2};
-	END IF;
+    IF TG_OP = 'DELETE' OR TG_OP = 'UPDATE' THEN
+        DELETE FROM {0} WHERE {2} = OLD.{2};
+    END IF;
+    IF TG_OP = 'INSERT' OR TG_OP = 'UPDATE' THEN
+        DELETE FROM {0} WHERE {2} = NEW.{2};
+        INSERT INTO {0} ({2}, ""Identity"", ""Right"")
+            SELECT {2}, ""Identity"", ""Right"" FROM {1}
+            WHERE {2} = NEW.{2};
+    END IF;
 ", FormatSchemaName(tbl.TblNameRights), FormatSchemaName(tbl.ViewUnmaterializedName), QuoteIdentifier("ID"));
                 }
                 else
                 {
-                    StringBuilder select = new StringBuilder();
-                    select.AppendFormat("SELECT t1.\"ID\" FROM {0} t1", FormatSchemaName(tbl.TblName));
-                    int idx = 2;
-                    var lastRel = tbl.Relations.Last();
-                    foreach (var rel in tbl.Relations)
-                    {
-                        select.AppendLine();
-                        if (rel == lastRel)
-                        {
-                            select.AppendFormat(@"      WHERE ({0}.{1} = t{2}.{3})",
-                                "{0}",
-                                QuoteIdentifier(rel.JoinColumnName.Single().ColumnName),
-                                idx - 1,
-                                QuoteIdentifier(rel.FKColumnName.Single().ColumnName));
-                        }
-                        else
-                        {
-                            select.AppendFormat(@"      INNER JOIN {0} t{1} ON (t{1}.{2} = t{3}.{4})",
-                                FormatSchemaName(rel.JoinTableName),
-                                idx,
-                                QuoteIdentifier(rel.JoinColumnName.Single().ColumnName),
-                                idx - 1,
-                                QuoteIdentifier(rel.FKColumnName.Single().ColumnName));
-                        }
-                        idx++;
-                    }
-                    string selectFormat = select.ToString();
+                    string selectObjectFormat = FormatSelectJoin(tbl.TblName, tbl.ObjectRelations);
+                    string selectIdentityFormat = tbl.IdentityRelations.Count == 0 ? string.Empty : FormatSelectJoin(GetTableName("base", "Identities"), tbl.IdentityRelations);
 
                     sb.AppendFormat(@"
-	IF TG_OP = 'DELETE' OR TG_OP = 'UPDATE' THEN
-		DELETE FROM {0} WHERE ""ID"" IN ({1});
-	END IF;
-	IF TG_OP = 'INSERT' OR TG_OP = 'UPDATE' THEN
-		DELETE FROM {0} WHERE ""ID"" IN ({2});
-		INSERT INTO {0} (""ID"", ""Identity"", ""Right"")
-			SELECT rights.""ID"", rights.""Identity"", rights.""Right"" FROM {3} as rights
-                INNER JOIN ({2}) as acl ON (acl.""ID"" = rights.""ID"");
-	END IF;
+    IF TG_OP = 'DELETE' OR TG_OP = 'UPDATE' THEN
+        DELETE FROM {0} WHERE ""ID"" IN ({1}) AND {2};
+    END IF;
+    IF TG_OP = 'INSERT' OR TG_OP = 'UPDATE' THEN
+        DELETE FROM {0} rights WHERE ""ID"" IN ({3}) AND {4};
+        INSERT INTO {0} (""ID"", ""Identity"", ""Right"")
+            SELECT rights.""ID"", rights.""Identity"", rights.""Right"" FROM {5} as rights
+                INNER JOIN ({3}) as acl ON (acl.""ID"" = rights.""ID"")
+            WHERE {4};
+    END IF;
 ",
-                        FormatSchemaName(tbl.TblNameRights),
-                        String.Format(selectFormat, "OLD"),
-                        String.Format(selectFormat, "NEW"),
-                        FormatSchemaName(tbl.ViewUnmaterializedName));
+                        FormatSchemaName(tbl.TblNameRights),            // 0
+                        String.Format(selectObjectFormat, "OLD"),       // 1
+                        string.IsNullOrWhiteSpace(selectIdentityFormat) ? "1=1" : String.Format(@"""Identity"" IN ({0})", string.Format(selectIdentityFormat, "OLD")),     // 2
+                        String.Format(selectObjectFormat, "NEW"),       // 3
+                        string.IsNullOrWhiteSpace(selectIdentityFormat) ? "1=1" : String.Format(@"rights.""Identity"" IN ({0})", string.Format(selectIdentityFormat, "NEW")),     // 4
+                        FormatSchemaName(tbl.ViewUnmaterializedName));  // 5
 
                 }
                 sb.AppendLine();
                 sb.AppendLine();
             }
 
-            sb.Append(@"	RETURN NULL;
+            sb.Append(@"    RETURN NULL;
 END$BODY$
   LANGUAGE 'plpgsql' VOLATILE
 ");
@@ -1252,15 +1264,45 @@ END$BODY$
                 CREATE TRIGGER {0} AFTER INSERT OR UPDATE OR DELETE
                     ON {1} FOR EACH ROW
                     EXECUTE PROCEDURE {2}.{0}()",
-                QuoteIdentifier(triggerName),
+                QuoteIdentifier(triggerName.Name),
                 FormatSchemaName(tblName),
-                QuoteIdentifier(tblName.Schema)
+                QuoteIdentifier(triggerName.Schema)
                 ));
+        }
+
+        private string FormatSelectJoin(TableRef tbl, List<Join> joins)
+        {
+            StringBuilder select = new StringBuilder();
+            select.AppendFormat("SELECT t1.\"ID\" FROM {0} t1", FormatSchemaName(tbl));
+            int idx = 2;
+            var lastRel = joins.Last();
+            foreach (var rel in joins)
+            {
+                select.AppendLine();
+                if (rel == lastRel)
+                {
+                    select.AppendFormat(@"      WHERE ({0}.{1} = t{2}.{3})",
+                        "{0}",
+                        QuoteIdentifier(rel.JoinColumnName.Single().ColumnName),
+                        idx - 1,
+                        QuoteIdentifier(rel.FKColumnName.Single().ColumnName));
+                }
+                else
+                {
+                    select.AppendFormat(@"      INNER JOIN {0} t{1} ON (t{1}.{2} = t{3}.{4})",
+                        FormatSchemaName(rel.JoinTableName),
+                        idx,
+                        QuoteIdentifier(rel.JoinColumnName.Single().ColumnName),
+                        idx - 1,
+                        QuoteIdentifier(rel.FKColumnName.Single().ColumnName));
+                }
+                idx++;
+            }
+            return select.ToString();
         }
 
         public override void CreateEmptyRightsViewUnmaterialized(TableRef viewName)
         {
-            Log.DebugFormat("Creating *empty* unmaterialized rights view \"{0}\"", viewName);
             ExecuteNonQuery(String.Format(@"CREATE VIEW {0} AS SELECT 0 AS ""ID"", 0 AS ""Identity"", 0 AS ""Right"" WHERE 0 = 1", FormatSchemaName(viewName)));
         }
 
@@ -1268,15 +1310,14 @@ END$BODY$
         {
             if (acls == null)
                 throw new ArgumentNullException("acls");
-            Log.DebugFormat("Creating unmaterialized rights view for \"{0}\"", tblName);
 
             StringBuilder view = new StringBuilder();
             view.AppendFormat(@"CREATE VIEW {0} AS
 SELECT  ""ID"", ""Identity"", 
-		(case SUM(""Right"" & 1) when 0 then 0 else 1 end) +
-		(case SUM(""Right"" & 2) when 0 then 0 else 2 end) +
-		(case SUM(""Right"" & 4) when 0 then 0 else 4 end) +
-		(case SUM(""Right"" & 8) when 0 then 0 else 8 end) AS ""Right"" 
+        (case SUM(""Right"" & 1) when 0 then 0 else 1 end) +
+        (case SUM(""Right"" & 2) when 0 then 0 else 2 end) +
+        (case SUM(""Right"" & 4) when 0 then 0 else 4 end) +
+        (case SUM(""Right"" & 8) when 0 then 0 else 8 end) AS ""Right""
 FROM (", FormatSchemaName(viewName));
             view.AppendLine();
 
@@ -1321,10 +1362,9 @@ FROM (", FormatSchemaName(viewName));
             TableRef tblName,
             TableRef tblNameRights)
         {
-            Log.DebugFormat("Creating refresh rights procedure for \"{0}\"", tblName);
             ExecuteNonQuery(String.Format(
                 @"
-CREATE OR REPLACE FUNCTION {0}(IN refreshID integer) RETURNS void AS
+CREATE FUNCTION {0}(IN refreshID integer) RETURNS void AS
 $BODY$BEGIN
     IF (refreshID IS NULL) THEN
             -- Admin Only: ALTER TABLE {1} DISABLE TRIGGER ALL;
@@ -1344,13 +1384,11 @@ LANGUAGE 'plpgsql' VOLATILE",
 
         public override void ExecRefreshRightsOnProcedure(ProcRef procName)
         {
-            Log.DebugFormat("Refreshing rights for [{0}]", procName);
             ExecuteNonQuery(String.Format(@"SELECT {0}(NULL)", FormatSchemaName(procName)));
         }
 
         public override void ExecRefreshAllRightsProcedure()
         {
-            Log.DebugFormat("Refreshing all rights");
             ExecuteNonQuery(string.Format(@"SELECT {0}(NULL)", FormatSchemaName(GetProcedureName("dbo", Construct.SecurityRulesRefreshAllRightsProcedureName()))));
         }
 
@@ -1444,8 +1482,8 @@ UPDATE ""base"".""SequenceData"" sd SET ""CurrentNumber"" = ""CurrentNumber"" + 
 SELECT ""CurrentNumber"" INTO result FROM ""base"".""SequenceData"" sd JOIN ""base"".""Sequences"" s ON (s.""ID"" = sd.""fk_Sequence"") WHERE s.""ExportGuid"" = ""seqNumber"";
 
 IF result IS NULL THEN
-	result := 1;
-	INSERT INTO ""base"".""SequenceData"" (""fk_Sequence"", ""CurrentNumber"")
+    result := 1;
+    INSERT INTO ""base"".""SequenceData"" (""fk_Sequence"", ""CurrentNumber"")
         SELECT s.""ID"", 1 FROM ""base"".""Sequences"" s WHERE s.""ExportGuid"" = ""seqNumber"";
 END IF;
 
@@ -1822,7 +1860,6 @@ END$BODY$
 
         public override void RefreshDbStats()
         {
-            Log.Info("Vacuuming database");
             ExecuteNonQuery("VACUUM ANALYZE");
         }
 

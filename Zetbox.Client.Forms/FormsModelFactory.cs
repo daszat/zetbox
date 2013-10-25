@@ -60,7 +60,7 @@ namespace Zetbox.Client.Forms
                 Application.Exit();
         }
 
-        protected override void ShowInView(ViewModel mdl, object view, bool activate, bool asDialog)
+        protected override void ShowInView(ViewModel mdl, object view, bool activate, bool asDialog, ViewModel ownerMdl)
         {
             var control = (IFormsView)view;
             control.SetDataContext(mdl);

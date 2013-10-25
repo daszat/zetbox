@@ -32,13 +32,13 @@ namespace Zetbox.Client
 
     public class Launcher
     {
-        private readonly Func<ClientIsolationLevel, IZetboxContext> ctxFactory;
+        private readonly Func<ContextIsolationLevel, IZetboxContext> ctxFactory;
         private readonly IViewModelFactory mdlFactory;
         private readonly IFrozenContext frozenCtx;
         private readonly ZetboxConfig cfg;
         private readonly IPerfCounter perfCounter;
 
-        public Launcher(Func<ClientIsolationLevel, IZetboxContext> ctxFactory, IViewModelFactory mdlFactory, IFrozenContext frozenCtx, ZetboxConfig cfg, IPerfCounter perfCounter)
+        public Launcher(Func<ContextIsolationLevel, IZetboxContext> ctxFactory, IViewModelFactory mdlFactory, IFrozenContext frozenCtx, ZetboxConfig cfg, IPerfCounter perfCounter)
         {
             this.frozenCtx = frozenCtx;
             this.ctxFactory = ctxFactory;
@@ -70,7 +70,7 @@ namespace Zetbox.Client
             }
             else
             {
-                var ws = mdlFactory.CreateViewModel<WorkspaceViewModel.Factory>().Invoke(ctxFactory(ClientIsolationLevel.MergeServerData), null);
+                var ws = mdlFactory.CreateViewModel<WorkspaceViewModel.Factory>().Invoke(ctxFactory(ContextIsolationLevel.MergeQueryData), null);
                 ControlKind launcher = Zetbox.NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_LauncherKind.Find(frozenCtx);
                 mdlFactory.ShowModel(ws, launcher, true);
             }
@@ -86,7 +86,7 @@ namespace Zetbox.Client
         private void LaunchApplication(Guid appGuid)
         {
             var app = frozenCtx.FindPersistenceObject<Zetbox.App.GUI.Application>(appGuid);
-            var appMdl = mdlFactory.CreateViewModel<ApplicationViewModel.Factory>().Invoke(ctxFactory(ClientIsolationLevel.MergeServerData), null, app);
+            var appMdl = mdlFactory.CreateViewModel<ApplicationViewModel.Factory>().Invoke(ctxFactory(ContextIsolationLevel.MergeQueryData), null, app);
             appMdl.OpenApplication(appMdl);
         }
     }

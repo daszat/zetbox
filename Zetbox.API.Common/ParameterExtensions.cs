@@ -45,7 +45,7 @@ namespace Zetbox.App.Extensions
             else if (param is CLRObjectParameter)
             {
                 var p = param as CLRObjectParameter;
-                Type t = Type.GetType(p.Type.FullName + (p.Type.Assembly != null ? ", " + p.Type.Assembly.Name : String.Empty), true);
+                Type t = Type.GetType(p.TypeRef, true);
                 if (isList)
                     t = typeof(IEnumerable<>).MakeGenericType(t);
 

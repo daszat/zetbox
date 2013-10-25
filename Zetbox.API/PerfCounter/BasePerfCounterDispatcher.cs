@@ -50,21 +50,21 @@ namespace Zetbox.API.PerfCounter
             }
         }
 
-        public long IncrementGetList(InterfaceType ifType)
+        public long IncrementGetObjects(InterfaceType ifType)
         {
             foreach (var a in _appender)
             {
-                a.IncrementGetList(ifType);
+                a.IncrementGetObjects(ifType);
             }
             return Stopwatch.GetTimestamp();
         }
 
-        public void DecrementGetList(InterfaceType ifType, int resultSize, long startTicks)
+        public void DecrementGetObjects(InterfaceType ifType, int resultSize, long startTicks)
         {
             var endTicks = Stopwatch.GetTimestamp();
             foreach (var a in _appender)
             {
-                a.DecrementGetList(ifType, resultSize, startTicks, endTicks);
+                a.DecrementGetObjects(ifType, resultSize, startTicks, endTicks);
             }
         }
 

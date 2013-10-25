@@ -51,6 +51,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         protected readonly IFileOpener fileOpener;
         protected readonly ITempFileService tmpService;
+        protected readonly Lazy<IScreenshotTool> screenshotTool;
 
         /// <summary>
         /// Initializes a new instance of the DataTypeViewModel class.
@@ -59,6 +60,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         /// <param name="config"></param>
         /// <param name="fileOpener"></param>
         /// <param name="tmpService"></param>
+        /// <param name="screenshotTool"></param>
         /// <param name="dataCtx">the data context to use</param>
         /// <param name="parent">Parent ViewModel</param>
         /// <param name="type">the data type to model. If null, qry must be a Query of a valid DataType</param>
@@ -68,6 +70,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             ZetboxConfig config,
             IFileOpener fileOpener,
             ITempFileService tmpService,
+            Lazy<IScreenshotTool> screenshotTool,
             IZetboxContext dataCtx, ViewModel parent,
             ObjectClass type,
             Func<IQueryable> qry)
@@ -77,8 +80,10 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             if (type == null) throw new ArgumentNullException("type");
             if (fileOpener == null) throw new ArgumentNullException("fileOpener");
             if (tmpService == null) throw new ArgumentNullException("tmpService");
+            if (screenshotTool == null) throw new ArgumentNullException("screenshotTool");
             this.fileOpener = fileOpener;
             this.tmpService = tmpService;
+            this.screenshotTool = screenshotTool;
 
             _type = type;
             if (qry == null)
@@ -92,6 +97,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 _query = qry;
             }
 
+            ResetSort(refresh: false);
             dataCtx.IsElevatedModeChanged += new EventHandler(dataCtx_IsElevatedModeChanged);
         }
 
@@ -263,26 +269,26 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             get
             {
-                if (!string.IsNullOrEmpty(InstancesCountAsTextFormatString))
-                    return string.Format(InstancesCountAsTextFormatString, InstancesCount);
+                string countStr = string.Empty;
+
+                if (InstancesCount >= Helper.MAXLISTCOUNT || CurrentPage != 1)
+                {
+                    var from = (CurrentPage - 1) * Helper.MAXLISTCOUNT;
+                    countStr = string.Format("{0} - {1}", from + 1, from + InstancesCount);
+                }
                 else
-                    return string.Format("{0} {1}", InstancesCount, InstanceListViewModelResources.InstancesCountAsText);
-            }
-        }
+                {
+                    countStr = InstancesCount.ToString();
+                }
 
-        public bool InstancesCountWarning
-        {
-            get
-            {
-                return InstancesCount >= Helper.MAXLISTCOUNT;
-            }
-        }
-
-        public string InstancesCountWarningText
-        {
-            get
-            {
-                return InstancesCount >= Helper.MAXLISTCOUNT ? InstanceListViewModelResources.InstancesCountWarning : string.Empty;
+                if (!string.IsNullOrEmpty(InstancesCountAsTextFormatString))
+                {
+                    return string.Format(InstancesCountAsTextFormatString, countStr);
+                }
+                else
+                {
+                    return string.Format("{0} {1}", countStr, InstanceListViewModelResources.InstancesCountAsText);
+                }
             }
         }
 
@@ -518,7 +524,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             get
             {
-                return _name ?? string.Format(InstanceListViewModelResources.Name, _type.Name);
+                return _name ?? string.Format(InstanceListViewModelResources.Name, DataTypeViewModel.Name);
             }
         }
 
@@ -567,6 +573,17 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 }
                 return _displayedColumns;
             }
+        }
+
+        public void AddDisplayColumn(Property[] propPath)
+        {
+            DisplayedColumns.Columns.Add(ColumnDisplayModel.Create(GridDisplayConfiguration.Mode.ReadOnly, propPath));
+        }
+
+        public void RemoveDisplayColumn(Property property)
+        {
+            var col = DisplayedColumns.Columns.FirstOrDefault(c => c.Property == property);
+            if (col != null) DisplayedColumns.Columns.Remove(col);
         }
 
         /// <summary>
@@ -718,20 +735,35 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         private Func<IQueryable> _query;
         protected virtual IQueryable GetQuery()
         {
-            var result = FilterList.AppendFilter(_query());
+            var result = GetUnpagedQuery();
 
-            if (!string.IsNullOrEmpty(_sortProperty))
-            {
-                result = result.OrderBy(string.Format("it.{0} {1}",                // Sorting CompundObjects does not work
-                                _sortProperty,                         // Maybe we should implement a custom comparer
-                                _sortDirection == System.ComponentModel.ListSortDirection.Descending ? "desc" : string.Empty));
-            }
+            var skip = (CurrentPage - 1) * Zetbox.API.Helper.MAXLISTCOUNT;
 
             // Limit to maxlistcount
             // Due to the fact, that the client provider is appending 
-            // local objects to the query we have to ad an additional limit
-            result = result.Take(Zetbox.API.Helper.MAXLISTCOUNT);
+            // local objects to the query we have to add an additional limit
+            result = result.Skip(skip).Take(Zetbox.API.Helper.MAXLISTCOUNT);
 
+            return result;
+        }
+
+        private IQueryable GetUnpagedQuery()
+        {
+            var result = FilterList.AppendFilter(_query());
+
+            if (!string.IsNullOrEmpty(_orderByExpression))
+            {
+                result = result.OrderBy(string.Format("{0} {1}",            // Sorting CompoundObject does not work
+                                _orderByExpression,                         // Maybe we should implement a custom comparer
+                                _sortDirection == System.ComponentModel.ListSortDirection.Descending ? "desc" : string.Empty));
+            }
+            else
+            {
+                // default sort.
+                // 1. It's a good idea to have a predictable result 
+                // 2. EF needs that: case 10019: The method 'Skip' is only supported for sorted input in LINQ to Entities. The method 'OrderBy' must be called before the method
+                result = result.OrderBy("ID"); 
+            }
             return result;
         }
 
@@ -745,29 +777,48 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         /// </summary>
         public void Refresh()
         {
-            if (FilterList.RequiredFilterMissing)
+            Refresh(true);
+        }
+
+        private void Refresh(bool resetCurrentPage)
+        {
+            if (!FilterList.IsFilterValid)
                 return;
 
-            try
+            if (resetCurrentPage)
             {
-                if (_loadInstancesCoreTask != null)
-                    _loadInstancesCoreTask.Wait();
+                CurrentPage = 1;
             }
-            finally
+
+            if (_loadInstancesCoreTask != null)
             {
-                _loadInstancesCoreTask = null;
+                ClearBusy(); // TODO: Workaround! Cancel should call Finally?
+                _loadInstancesCoreTask.Cancel();
             }
+            _loadInstancesCoreTask = null;
+
             LoadInstancesCore();
         }
 
         ZbTask _loadInstancesCoreTask;
         private ZbTask LoadInstancesCore()
         {
-            if (_loadInstancesCoreTask != null || FilterList.RequiredFilterMissing || IsInInit) return _loadInstancesCoreTask;
+            if (_loadInstancesCoreTask != null || FilterList.IsFilterValid == false || IsInInit) return _loadInstancesCoreTask;
 
             SetBusy();
             var execQueryTask = GetQuery().ToListAsync(); // No order by - may be set from outside in LinqQuery! .Cast<IDataObject>().ToList().OrderBy(obj => obj.ToString()))
             _loadInstancesCoreTask = new ZbTask(execQueryTask);
+            _loadInstancesCoreTask
+                .Finally(ClearBusy)
+                .OnError(ex =>
+                {
+                    var errorVmdl = ViewModelFactory.CreateViewModel<ExceptionReporterViewModel.Factory>().Invoke(
+                        DataContext,
+                        this,
+                        ex,
+                        screenshotTool.Value.GetScreenshot());
+                    ViewModelFactory.ShowDialog(errorVmdl);
+                });
             _loadInstancesCoreTask.OnResult(t =>
                 {
                     _instancesFromServer = execQueryTask.Result.Cast<IDataObject>()
@@ -776,7 +827,6 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         .ToList();
 
                     UpdateFilteredInstances();
-                    ClearBusy();
                 });
             return _loadInstancesCoreTask;
         }
@@ -789,14 +839,14 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             var tmp = FilterList.AppendPostFilter(new List<DataObjectViewModel>(_instancesFromServer));
 
             // Sort
-            if (!string.IsNullOrEmpty(_sortProperty))
+            if (!string.IsNullOrEmpty(_orderByExpression))
             {
                 _filteredInstances =
                     new List<DataObjectViewModel>(
                         tmp.Select(vm => vm.Object)                            // Back to a plain list of IDataObjects
                            .AsQueryable(this.InterfaceType.Type)               // To a typed List
-                           .OrderBy(string.Format("it.{0} {1}",                // Sorting CompundObjects does not work
-                                        _sortProperty,                         // Maybe we should implement a custom comparer
+                           .OrderBy(string.Format("{0} {1}",                // Sorting CompoundObject does not work
+                                        _orderByExpression,                         // Maybe we should implement a custom comparer
                                         _sortDirection == System.ComponentModel.ListSortDirection.Descending ? "desc" : string.Empty))
                            .Cast<IDataObject>()
                            .Select(obj => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj))
@@ -871,19 +921,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 if (_savedListConfigurations == null)
                 {
                     _savedListConfigurations = ViewModelFactory.CreateViewModel<SavedListConfiguratorViewModel.Factory>().Invoke(DataContext, this);
-                    _savedListConfigurations.PropertyChanged += _savedListConfigurations_PropertyChanged;
                 }
                 return _savedListConfigurations;
-            }
-        }
-
-        void _savedListConfigurations_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case "SelectedItem":
-                    Refresh();
-                    break;
             }
         }
         #endregion

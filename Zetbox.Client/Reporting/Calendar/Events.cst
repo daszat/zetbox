@@ -1,0 +1,88 @@
+﻿<%@ CodeTemplate Language="C#" 
+    Name="Calendar.Events"
+    ClassName="Zetbox.Client.Reporting.Calendar.Events"
+    Inherits="Zetbox.API.Common.Reporting.ReportTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Linq" %>
+<%@ Import Namespace="Zetbox.Client.Presentables.Calendar" %>
+<%@ Parameter Name="events" Type="IEnumerable<CalendarItemViewModel>" %>
+<%@ Parameter Name="start" Type="DateTime" %>
+<%@ Parameter Name="end" Type="DateTime" %>
+
+
+\document  {
+    \section [
+        PageSetup
+        {
+            Orientation = Portrait
+            PageFormat = A4
+            TopMargin = 40
+            StartingNumber = 1
+        }
+    ] {
+        \primaryfooter {
+            \table {
+                \columns {
+                    \column [ Width = "8cm" ]
+                    \column [ Width = "8cm" Format { Alignment = Right }
+                    ]
+                }
+                \rows {
+                    \row {
+                        \cell { <%= FormatDate(DateTime.Today) %> }
+                        \cell { <%= EventsResources.Page %> \field(Page)/\field(SectionPages) }
+                    }
+                }
+            }
+        }
+
+        \paragraph [ Format { Font { Size = 30  Bold = True } } ] { <%= EventsResources.Heading %> }
+    
+        \paragraph [ 
+            Style = "Heading2"
+            Format { 
+                Borders { Bottom { Width = 1 } } 
+            }
+        ] { <%= string.Format(EventsResources.HeadingSublineFormat, FormatDate(start),FormatDate(end)) %> }
+
+<% foreach (var grp in events.GroupBy(k => k.From.Date).OrderBy(g => g.Key)) { %>
+        \paragraph { }
+        \table [ 
+            Borders { Width = 0.25 Color = 0xFFAAAAAA } 
+        ] {
+            \columns {
+                \column [ Width = "3cm" ]
+                \column [ Width = "3cm" ]
+                \column [ Width = "10cm" ]
+            }
+            \rows {
+                \row [ 
+                    HeadingFormat = True
+                    Style = "Heading2"
+                    Format { Font { Bold = True Size = 14 } } 
+                    Shading { Color = RGB(235,235,235) }
+                ] {
+                    \cell [ MergeRight = 2 ] { <%= FormatLongDate(grp.Key) %> }
+                }
+<% foreach (var e in grp.OrderByDescending(g => g.IsAllDay).ThenBy(g => g.From)) { %>
+                \row {
+                    \cell { 
+                        <% if(!e.IsAllDay) { %>
+                            \bold{ <%= FormatTime(e.From) %> - <%= FormatTime(e.Until) %> }
+                        <% } %> 
+                    }
+                    \cell { <%= Format(e.Event.Calendar.Name) %> }
+                    \cell { 
+                        \bold{ <%= Format(e.Event.Summary) %> }
+                        <% if(!string.IsNullOrWhiteSpace(e.Event.Location)) { %> \linebreak (<%= Format(e.Event.Location) %>) <% } %>
+                        <% if(!string.IsNullOrWhiteSpace(e.Event.Body)) { %> \linebreak <%= FormatTextfield(e.Event.Body) %> <% } %>
+                    }    
+                }
+<% } %>
+            }
+        }
+<% } %>
+
+    } <%/* section */%>
+}

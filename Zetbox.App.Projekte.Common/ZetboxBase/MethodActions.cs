@@ -23,14 +23,26 @@ namespace Zetbox.App.Base
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
+    using Zetbox.API.Common;
 
     [Implementor]
-    public static class MethodActions
+    public class MethodActions
     {
+        private static IAssetsManager _assets;
+        public MethodActions(IAssetsManager assets)
+        {
+            _assets = assets;
+        }
+
         [Invocation]
         public static void GetLabel(Zetbox.App.Base.Method obj, MethodReturnEventArgs<System.String> e)
         {
             e.Result = !string.IsNullOrEmpty(obj.Label) ? obj.Label : obj.Name;
+
+            if (obj.Module == null || obj.ObjectClass == null)
+                return;
+
+            e.Result = _assets.GetString(obj.Module, ZetboxAssetKeys.ConstructBaseName(obj), ZetboxAssetKeys.ConstructLabelKey(obj), e.Result);
         }
 
         [Invocation]

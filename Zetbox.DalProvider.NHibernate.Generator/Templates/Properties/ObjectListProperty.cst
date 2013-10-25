@@ -70,4 +70,10 @@
         private List<int> <%= name %>Ids;
         private bool <%= name %>_was_eagerLoaded = false;
 <% } %>
+
+        public Zetbox.API.Async.ZbTask TriggerFetch<%= name %>Async()
+        {
+            return new Zetbox.API.Async.ZbTask<<%= exposedListType %><<%= referencedInterface %>>>(this.<%= name %>);
+        }
+
 <% AddSerialization(serializationList, name, eagerLoading); %>

@@ -57,11 +57,11 @@ RelationEnd relEnd = rel.GetEndFromRole(endRole);
 
     string idsListName = name + "Ids";
     string taskName = "_triggerFetch" + name + "Task";
-    
+
     // whether or not the collection will be eagerly loaded
     bool eagerLoading = relEnd.Navigator != null && relEnd.Navigator.EagerLoading;
 
-   	var eventName = "On" + name + "_PostSetter";
+    var eventName = "On" + name + "_PostSetter";
 
 #line 52 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
 this.WriteObjects("        // ",  this.GetType() , "\r\n");
@@ -126,7 +126,7 @@ this.WriteObjects("                {\r\n");
 this.WriteObjects("                    serverList = new List<",  referencedInterface , ">();\r\n");
 this.WriteObjects("                });\r\n");
 this.WriteObjects("            }\r\n");
-this.WriteObjects("    \r\n");
+this.WriteObjects("\r\n");
 this.WriteObjects("            ",  taskName , ".OnResult(t =>\r\n");
 this.WriteObjects("            {\r\n");
 this.WriteObjects("                ",  wrapperName , " = new ",  wrapperClass , "<",  referencedInterface , ">(\r\n");
@@ -145,22 +145,28 @@ this.WriteObjects("null");
 #line 113 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
 this.WriteObjects(",\r\n");
 this.WriteObjects("                    this,\r\n");
-this.WriteObjects("                    () => { this.NotifyPropertyChanged(\"",  name , "\", null, null); if(",  eventName , " != null && IsAttached) ",  eventName, "(this); },\r\n");
-this.WriteObjects("                    serverList);    \r\n");
+this.WriteObjects("                    On",  name , "CollectionChanged,\r\n");
+this.WriteObjects("                    serverList);\r\n");
 this.WriteObjects("            });\r\n");
-this.WriteObjects("            return ",  taskName , ";    \r\n");
+this.WriteObjects("            return ",  taskName , ";\r\n");
 this.WriteObjects("        }\r\n");
-this.WriteObjects("    \r\n");
-this.WriteObjects("        private ",  wrapperClass , "<",  referencedInterface , "> ",  wrapperName , ";\r\n");
 this.WriteObjects("\r\n");
-#line 124 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
+this.WriteObjects("        internal void On",  name , "CollectionChanged()\r\n");
+this.WriteObjects("        {\r\n");
+this.WriteObjects("            NotifyPropertyChanged(\"",  name , "\", null, null);\r\n");
+this.WriteObjects("            if (",  eventName , " != null && IsAttached)\r\n");
+this.WriteObjects("                ",  eventName , "(this);\r\n");
+this.WriteObjects("        }\r\n");
+this.WriteObjects("\r\n");
+this.WriteObjects("        private ",  wrapperClass , "<",  referencedInterface , "> ",  wrapperName , ";\r\n");
+#line 130 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
 if (eagerLoading)
     {
 
-#line 127 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 133 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
 this.WriteObjects("        private List<int> ",  name , "Ids;\r\n");
 this.WriteObjects("        private bool ",  name , "_was_eagerLoaded = false;\r\n");
-#line 130 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
+#line 136 "P:\zetbox\Zetbox.Generator\Templates\Properties\ObjectListProperty.cst"
 }
 
     AddSerialization(serializationList, name, eagerLoading);

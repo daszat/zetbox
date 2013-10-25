@@ -122,7 +122,7 @@ namespace Zetbox.App.Projekte
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=_fk_ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Projekte;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable
 
@@ -202,6 +202,11 @@ namespace Zetbox.App.Projekte
                 NotifyPropertyChanged("ChangedBy", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
@@ -308,7 +313,7 @@ namespace Zetbox.App.Projekte
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=_fk_CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Projekte;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable
 
@@ -388,6 +393,11 @@ namespace Zetbox.App.Projekte
                 NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
@@ -882,6 +892,11 @@ namespace Zetbox.App.Projekte
             }
         }
 
+        public Zetbox.API.Async.ZbTask TriggerFetchProjektAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Projekte.Projekt>(this.Projekt);
+        }
+
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Projekt
 		public static event PropertyGetterHandler<Zetbox.App.Projekte.Task, Zetbox.App.Projekte.Projekt> OnProjekt_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.Projekte.Task, Zetbox.App.Projekte.Projekt> OnProjekt_PreSetter;
@@ -941,6 +956,21 @@ namespace Zetbox.App.Projekte
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            case "Projekt":
+                return TriggerFetchProjektAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
@@ -967,6 +997,7 @@ namespace Zetbox.App.Projekte
                 ProjektImpl = (Zetbox.App.Projekte.ProjektEfImpl)Context.Find<Zetbox.App.Projekte.Projekt>(_fk_Projekt.Value);
             else
                 ProjektImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();
@@ -1196,15 +1227,21 @@ namespace Zetbox.App.Projekte
         {
             get
             {
-				if(Context == null) return Zetbox.API.AccessRights.Full;
+                if(Context == null) return Zetbox.API.AccessRights.Full;
                 if (__currentAccessRights == null)
                 {
-					__currentAccessRights = base.CurrentAccessRights;
-					var secRight = SecurityRightsCollectionImpl.FirstOrDefault(i => i.Identity == Context.Internals().IdentityID); // TODO: should be SingleOrDefault() instead of FirstOrDefault()
+                    __currentAccessRights = base.CurrentAccessRights;
+                    var secRight = SecurityRightsCollectionImpl.FirstOrDefault(i => i.Identity == Context.Internals().IdentityID); // TODO: should be SingleOrDefault() instead of FirstOrDefault()
                     __currentAccessRights |= secRight != null ? (Zetbox.API.AccessRights)secRight.Right : Zetbox.API.AccessRights.None;
                 }
                 return __currentAccessRights.Value;
             }
+        }
+
+        protected override void ResetCurrentAccessRights()
+        {
+            base.ResetCurrentAccessRights();
+            __currentAccessRights = null;
         }
 
         [EdmRelationshipNavigationProperty("Model", "FK_Tasks_Rights", "Task_Rights")]

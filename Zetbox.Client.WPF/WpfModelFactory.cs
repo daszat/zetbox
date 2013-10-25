@@ -50,16 +50,16 @@ namespace Zetbox.Client.WPF
         /// </summary>
         private int windowCounter = 0;
 
-        private List<Window> _windowList = new List<Window>();
+        private Dictionary<ViewModel, Window> _windowList = new Dictionary<ViewModel, Window>();
 
         /// <inheritdoc/>
-        protected override void ShowInView(ViewModel mdl, object view, bool activate, bool asDialog)
+        protected override void ShowInView(ViewModel mdl, object view, bool activate, bool asDialog, ViewModel ownerMdl)
         {
             var window = view as Window;
 
             if (window != null)
             {
-                if (_windowList.Contains(window))
+                if (_windowList.ContainsValue(window))
                 {
                     window.Activate();
                 }
@@ -69,12 +69,30 @@ namespace Zetbox.Client.WPF
                     window.ShowActivated = activate;
                     if (asDialog)
                     {
-                        window.ShowDialog();
+                        if (ownerMdl != null && _windowList.ContainsKey(ownerMdl))
+                        {
+                            var owner = _windowList[ownerMdl];
+                            if (owner != window)
+                            {
+                                window.Owner = owner;
+                            }
+                        }
+                        try
+                        {
+                            _windowToActivate.Push(window);
+                            window.Activated += new EventHandler(window_Activated);
+                            window.ShowDialog();
+                        }
+                        finally
+                        {
+                            _windowToActivate.Pop();
+                        }
                     }
                     else
                     {
-                        _windowList.Add(window);
+                        _windowList.Add(mdl, window);
                         window.Closed += new EventHandler(window_Closed);
+                        window.Activated += new EventHandler(window_Activated);
 
                         window.Show();
                         windowCounter++;
@@ -85,6 +103,18 @@ namespace Zetbox.Client.WPF
             {
                 // TODO: what should be done here, really?
                 throw new NotImplementedException(String.Format("Cannot show view of type {0}, it's not a Window", view == null ? "(null)" : view.GetType().ToString()));
+            }
+        }
+
+        Stack<Window> _windowToActivate = new Stack<Window>();
+        void window_Activated(object sender, EventArgs e)
+        {
+            if (_windowToActivate.Count > 0 && _windowToActivate.Peek() != sender)
+            {
+                var wnd = _windowToActivate.Peek();
+                if (wnd.WindowState == WindowState.Minimized)
+                    wnd.WindowState = WindowState.Normal; // WTF??? http://stackoverflow.com/a/6837421/178517
+                wnd.Activate();
             }
         }
 
@@ -100,7 +130,8 @@ namespace Zetbox.Client.WPF
         /// <param name="e"></param>
         void window_Closed(object sender, EventArgs e)
         {
-            _windowList.Remove(sender);
+            var wnd = (Window)sender;
+            _windowList.Remove(_windowList.Single(kv => kv.Value == wnd).Key);
             if (--windowCounter == 0)
             {
                 Application.Current.Shutdown();

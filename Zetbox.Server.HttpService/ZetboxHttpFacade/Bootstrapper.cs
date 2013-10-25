@@ -68,8 +68,18 @@ namespace Zetbox.Server.HttpService
                         var probe = _service.GetFilePath(context.Request["path"]);
                         if (File.Exists(probe))
                         {
+                            context.Response.ContentType = "application/octet-stream";
                             Log.DebugFormat("Sending file [{0}]", probe);
-                            context.Response.TransmitFile(probe);
+                            using (var fs = File.OpenRead(probe))
+                            {
+                                var buf = new byte[1024];
+                                int read = 0, offset = 0;
+                                while (0 < (read = fs.Read(buf, 0, buf.Length)))
+                                {
+                                    context.Response.OutputStream.Write(buf, 0, read);
+                                    offset += buf.Length;
+                                }
+                            }
                         }
                         else
                         {

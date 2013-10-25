@@ -190,7 +190,7 @@ namespace Zetbox.App.Test
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ObjectProp
         // fkBackingName=_fk_ObjectProp; fkGuidBackingName=_fk_guid_ObjectProp;
         // referencedInterface=Zetbox.App.Projekte.Kunde; moduleNamespace=Zetbox.App.Test;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable
 
@@ -270,6 +270,11 @@ namespace Zetbox.App.Test
                 NotifyPropertyChanged("ObjectProp", __oldValue, __newValue);
                 if(IsAttached) UpdateChangedInfo = true;
             }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchObjectPropAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Projekte.Kunde>(this.ObjectProp);
         }
 
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ObjectProp
@@ -645,6 +650,17 @@ namespace Zetbox.App.Test
         }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "ObjectProp":
+                return TriggerFetchObjectPropAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
@@ -658,6 +674,7 @@ namespace Zetbox.App.Test
                 ObjectPropImpl = (Zetbox.App.Projekte.KundeEfImpl)Context.Find<Zetbox.App.Projekte.Kunde>(_fk_ObjectProp.Value);
             else
                 ObjectPropImpl = null;
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();

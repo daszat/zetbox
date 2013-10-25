@@ -44,7 +44,7 @@ namespace Zetbox.Client.Presentables.GUI
                 {
                     try
                     {
-                        var t = screen.ViewModelDescriptor.ViewModelRef.AsType(true);
+                        var t = Type.GetType(screen.ViewModelDescriptor.ViewModelTypeRef, true);
                         return ModelFactory.CreateViewModel<NavigationEntryViewModel.Factory>(t).Invoke(dataCtx, parent, screen);
                     }
                     catch (Exception ex)
@@ -208,9 +208,14 @@ namespace Zetbox.Client.Presentables.GUI
                         _children.Add(NavigationEntryViewModel.Fetch(ViewModelFactory, DataContext, this, s));
                     }
                     _childrenRO = new ReadOnlyObservableCollection<NavigationEntryViewModel>(_children);
+                    OnChildrenLoaded();
                 }
                 return _childrenRO;
             }
+        }
+
+        protected virtual void OnChildrenLoaded()
+        {
         }
 
         private ObservableCollection<CommandViewModel> _additionalCommandsRW;

@@ -25,6 +25,7 @@
 
     <ItemsControl ItemsSource="{Binding Value.PropertyModels, ValidatesOnDataErrors=true}"
                   BorderThickness="0"
+                  Grid.IsSharedSizeScope="True"
                   HorizontalContentAlignment="Stretch"
                   VerticalContentAlignment="Stretch">
 

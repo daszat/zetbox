@@ -16,17 +16,93 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
-using Zetbox.API.Async;
 using System.Xml.Serialization;
+using Zetbox.API.Async;
+using Zetbox.API.Utils;
 
 namespace Zetbox.API
 {
     public interface IZetboxContextDebugger
     {
         void Created(IZetboxContext ctx);
+    }
+
+    public interface IZetboxContextEventListener
+    {
+        void Created(IReadOnlyZetboxContext ctx);
+        void Submitted(IReadOnlyZetboxContext ctx, IEnumerable<IDataObject> added, IEnumerable<IDataObject> modified, IEnumerable<Tuple<InterfaceType, int>> deleted);
+        void Disposed(IReadOnlyZetboxContext ctx);
+    }
+
+    public static class ZetboxContextEventListenerHelper
+    {
+        public static void OnCreated(IEnumerable<IZetboxContextEventListener> eventListener, IReadOnlyZetboxContext ctx)
+        {
+            if (eventListener == null) return;
+            foreach (var evl in eventListener)
+            {
+                try
+                {
+                    evl.Created(ctx);
+                }
+                catch (Exception ex)
+                {
+                    Logging.Log.WarnOnce(string.Format("Error when notifying ZetboxContextEventListener.OnCreated: {0}: {1}", ex.GetType().Name, ex.Message));
+                    Logging.Log.Debug("Error when notifying ZetboxContextEventListener.OnCreated", ex);
+                }
+            }
+        }
+        public static void OnSubmitted(IEnumerable<IZetboxContextEventListener> eventListener, IReadOnlyZetboxContext ctx, IEnumerable<IDataObject> added, IEnumerable<IDataObject> modified, IEnumerable<IDataObject> deleted)
+        {
+            if (eventListener == null) return;
+            foreach (var evl in eventListener)
+            {
+                try
+                {
+                    evl.Submitted(ctx, added, modified, deleted.Select(obj =>
+                        new Tuple<InterfaceType, int>(
+                            ctx.GetInterfaceType(obj),
+                            obj.ID)));
+                }
+                catch (Exception ex)
+                {
+                    Logging.Log.WarnOnce(string.Format("Error when notifying ZetboxContextEventListener.OnSubmitted: {0}: {1}", ex.GetType().Name, ex.Message));
+                    Logging.Log.Debug("Error when notifying ZetboxContextEventListener.OnSubmitted", ex);
+                }
+            }
+        }
+        public static void OnDisposed(IEnumerable<IZetboxContextEventListener> eventListener, IReadOnlyZetboxContext ctx)
+        {
+            if (eventListener == null) return;
+            foreach (var evl in eventListener)
+            {
+                try
+                {
+                    evl.Disposed(ctx);
+                }
+                catch (Exception ex)
+                {
+                    Logging.Log.WarnOnce(string.Format("Error when notifying ZetboxContextEventListener.OnDisposed: {0}: {1}", ex.GetType().Name, ex.Message));
+                    Logging.Log.Debug("Error when notifying ZetboxContextEventListener.OnDisposed", ex);
+                }
+            }
+        }
+    }
+
+    public enum ContextIsolationLevel
+    {
+        /// <summary>
+        /// Uses received data after each query
+        /// </summary>
+        MergeQueryData = 1,
+        /// <summary>
+        /// Uses cached data from the context after each query
+        /// </summary>
+        PreferContextCache = 2
     }
 
     public interface IReadOnlyZetboxContext
@@ -227,6 +303,11 @@ namespace Zetbox.API
         /// </summary>
         /// <remarks>The caller is responsible for disposing stored objects. See <see cref="Disposing"/> Event.</remarks>
         IDictionary<object, object> TransientState { get; }
+
+        /// <summary>
+        /// Indicates the isolation level of this context.
+        /// </summary>
+        ContextIsolationLevel IsolationLevel { get; }
     }
 
     /// <summary>
@@ -486,6 +567,7 @@ namespace Zetbox.API
         /// <returns>A new IValueCollectionEntry</returns>
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         T CreateValueCollectionEntry<T>() where T : IValueCollectionEntry;
+
         /// <summary>
         /// Returns a PersistenceObject Query by T
         /// </summary>
@@ -493,6 +575,13 @@ namespace Zetbox.API
         /// <returns>IQueryable</returns>
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         IQueryable<T> GetPersistenceObjectQuery<T>() where T : class, IPersistenceObject;
+
+        /// <summary>
+        /// Returns a PersistenceObject Query by InterfaceType
+        /// </summary>
+        /// <returns>IQueryable</returns>
+        [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
+        IQueryable<IPersistenceObject> GetPersistenceObjectQuery(InterfaceType ifType);
 
         /// <summary>
         /// Returns a list of all objects of the specified type. This method is marked as internal, because it is used only for very specific use-cases in the guts of the product.
@@ -525,20 +614,33 @@ namespace Zetbox.API
         }
     }
 
+    /// <summary>
+    /// Methods that are allowed over the facade.
+    /// </summary>
     public static class ZetboxContextQueryableExtensions
     {
+        #region Eagerloading
+
         public static IQueryable<T> WithEagerLoading<T>(this IQueryable<T> query)
         {
             if (query == null) throw new ArgumentNullException("query");
             if (query.Provider is IZetboxQueryProvider)
             {
+                var mi = typeof(ZetboxContextQueryableExtensions).FindGenericMethod("WithEagerLoading", new Type[] { typeof(T) }, new Type[] { typeof(IQueryable<T>) });
+
                 return query.Provider.CreateQuery<T>(
-                    System.Linq.Expressions.Expression.Call(typeof(ZetboxContextQueryableExtensions), "WithEagerLoading", new Type[] { typeof(T) }, query.Expression));
+                    System.Linq.Expressions.Expression.Call(mi, query.Expression));
             }
             else
             {
                 return query;
             }
+        }
+
+        public static IEnumerable<T> WithEagerLoading<T>(this IEnumerable<T> query)
+        {
+            if (query == null) throw new ArgumentNullException("query");
+            return query;
         }
 
         public static IQueryable WithEagerLoading(this IQueryable query)
@@ -546,8 +648,10 @@ namespace Zetbox.API
             if (query == null) throw new ArgumentNullException("query");
             if (query.Provider is IZetboxQueryProvider)
             {
+                var mi = typeof(ZetboxContextQueryableExtensions).FindGenericMethod("WithEagerLoading", new Type[] { query.ElementType }, new Type[] { typeof(IQueryable<>).MakeGenericType(query.ElementType) });
+
                 return query.Provider.CreateQuery(
-                    System.Linq.Expressions.Expression.Call(typeof(ZetboxContextQueryableExtensions), "WithEagerLoading", new Type[] { query.ElementType }, query.Expression));
+                    System.Linq.Expressions.Expression.Call(mi, query.Expression));
             }
             else
             {
@@ -555,18 +659,36 @@ namespace Zetbox.API
             }
         }
 
+        public static System.Collections.IEnumerable WithEagerLoading(this System.Collections.IEnumerable query)
+        {
+            if (query == null) throw new ArgumentNullException("query");
+            return query;
+        }
+
+        #endregion
+
+        #region WithDeactivated
+
         public static IQueryable<T> WithDeactivated<T>(this IQueryable<T> query)
         {
             if (query == null) throw new ArgumentNullException("query");
             if (query.Provider is IZetboxQueryProvider)
             {
+                var mi = typeof(ZetboxContextQueryableExtensions).FindGenericMethod("WithDeactivated", new Type[] { typeof(T) }, new Type[] { typeof(IQueryable<T>) });
+
                 return query.Provider.CreateQuery<T>(
-                    System.Linq.Expressions.Expression.Call(typeof(ZetboxContextQueryableExtensions), "WithDeactivated", new Type[] { typeof(T) }, query.Expression));
+                    System.Linq.Expressions.Expression.Call(mi, query.Expression));
             }
             else
             {
                 return query;
             }
+        }
+
+        public static IEnumerable<T> WithDeactivated<T>(this IEnumerable<T> query)
+        {
+            if (query == null) throw new ArgumentNullException("query");
+            return query;
         }
 
         public static IQueryable WithDeactivated(this IQueryable query)
@@ -574,14 +696,65 @@ namespace Zetbox.API
             if (query == null) throw new ArgumentNullException("query");
             if (query.Provider is IZetboxQueryProvider)
             {
+                var mi = typeof(ZetboxContextQueryableExtensions).FindGenericMethod("WithDeactivated", new Type[] { query.ElementType }, new Type[] { typeof(IQueryable<>).MakeGenericType(query.ElementType) });
+
                 return query.Provider.CreateQuery(
-                    System.Linq.Expressions.Expression.Call(typeof(ZetboxContextQueryableExtensions), "WithDeactivated", new Type[] { query.ElementType }, query.Expression));
+                    System.Linq.Expressions.Expression.Call(mi, query.Expression));
             }
             else
             {
                 return query;
             }
         }
+
+        public static System.Collections.IEnumerable WithDeactivated(this System.Collections.IEnumerable query)
+        {
+            if (query == null) throw new ArgumentNullException("query");
+            return query;
+        }
+
+        #endregion
+
+        #region Fulltext
+
+        public static IQueryable<T> FulltextMatch<T>(this IQueryable<T> query, string filter)
+        {
+            if (query == null) throw new ArgumentNullException("query");
+            if (query.Provider is IZetboxQueryProvider)
+            {
+                var mi = typeof(ZetboxContextQueryableExtensions).FindGenericMethod(
+                    "FulltextMatch",
+                    new Type[] { typeof(T) },
+                    new Type[] { typeof(IQueryable<T>), typeof(string) });
+
+                return query.Provider.CreateQuery<T>(
+                    System.Linq.Expressions.Expression.Call(mi, query.Expression, Expression.Constant(filter)));
+            }
+            else
+            {
+                return query;
+            }
+        }
+
+        public static IQueryable FulltextMatch(this IQueryable query, string filter)
+        {
+            if (query == null) throw new ArgumentNullException("query");
+            if (query.Provider is IZetboxQueryProvider)
+            {
+                var mi = typeof(ZetboxContextQueryableExtensions).FindGenericMethod(
+                    "FulltextMatch",
+                    new Type[] { query.ElementType },
+                    new Type[] { typeof(IQueryable<>).MakeGenericType(query.ElementType), typeof(string) });
+
+                return query.Provider.CreateQuery(
+                    System.Linq.Expressions.Expression.Call(mi, query.Expression, Expression.Constant(filter)));
+            }
+            else
+            {
+                return query;
+            }
+        }
+        #endregion
     }
 
     public static class ContextTransientStateExtensions

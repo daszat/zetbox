@@ -41,6 +41,68 @@ namespace at.dasz.DocumentManagement
         }
 
         /// <summary>
+        /// Creates an excerpt from the current file
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnExtractText_DynamicFile")]
+        public override void ExtractText()
+        {
+            // base.ExtractText();
+            if (OnExtractText_DynamicFile != null)
+            {
+                OnExtractText_DynamicFile(this);
+            }
+            else
+            {
+                base.ExtractText();
+            }
+        }
+        public static event ExtractText_Handler<DynamicFile> OnExtractText_DynamicFile;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<DynamicFile> OnExtractText_DynamicFile_CanExec;
+
+        [EventBasedMethod("OnExtractText_DynamicFile_CanExec")]
+        public override bool ExtractTextCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnExtractText_DynamicFile_CanExec != null)
+				{
+					OnExtractText_DynamicFile_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.ExtractTextCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<DynamicFile> OnExtractText_DynamicFile_CanExecReason;
+
+        [EventBasedMethod("OnExtractText_DynamicFile_CanExecReason")]
+        public override string ExtractTextCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnExtractText_DynamicFile_CanExecReason != null)
+				{
+					OnExtractText_DynamicFile_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.ExtractTextCanExecReason;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
+        /// <summary>
         /// Handles the change of the current blob
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
@@ -248,6 +310,15 @@ namespace at.dasz.DocumentManagement
 
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
+
         public override void ReloadReferences()
         {
             // Do not reload references if the current object has been deleted.
@@ -256,6 +327,7 @@ namespace at.dasz.DocumentManagement
             base.ReloadReferences();
 
             // fix direct object references
+            // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         #endregion // Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor

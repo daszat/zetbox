@@ -12,7 +12,7 @@
 //
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
-#define INI50
+// #define INI50
 
 namespace Zetbox.Client.Bootstrapper
 {
@@ -118,9 +118,7 @@ namespace Zetbox.Client.Bootstrapper
                 }
 
                 // Retry
-                var dlg = new AddressDialog();
-                dlg.ShowDialog();
-                address = Properties.Settings.Default.Address;
+                ShowAddressDialog();
             }
         }
 
@@ -285,9 +283,11 @@ namespace Zetbox.Client.Bootstrapper
 
             if (string.IsNullOrEmpty(address))
             {
-                var dlg = new AddressDialog();
-                dlg.ShowDialog();
-                address = Properties.Settings.Default.Address;
+                ShowAddressDialog();
+            }
+            else
+            {
+                SetAddress();
             }
 
             thread.Start();
@@ -346,6 +346,27 @@ namespace Zetbox.Client.Bootstrapper
             else
             {
                 lbStatus.Text = txt;
+            }
+        }
+
+        private void ShowAddressDialog()
+        {
+            var dlg = new AddressDialog();
+            dlg.ShowDialog();
+            address = Properties.Settings.Default.Address;
+            SetAddress();
+        }
+
+        private void SetAddress()
+        {
+            var title = string.Format(Properties.Resources.MainWindowTitle, address);
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action(() => this.Text = title));
+            }
+            else
+            {
+                this.Text = title;
             }
         }
         #endregion

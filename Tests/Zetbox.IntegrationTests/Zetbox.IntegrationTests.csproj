@@ -89,15 +89,22 @@
     </Compile>
     <Compile Include="Tests\BinarySerializers\should_work_with_ICompoundObjects.cs" />
     <Compile Include="Tests\Blobs\when_using.cs" />
+    <Compile Include="Tests\Client\GuiExtensionTests.cs" />
+    <Compile Include="Tests\Client\InstanceListTests.cs" />
+    <Compile Include="Tests\Client\ViewModelFactoryTests.cs" />
     <Compile Include="Tests\CompoundObjects\when_changing_a_CompoundObject_list.cs" />
     <Compile Include="Tests\CompoundObjects\when_changing.cs" />
     <Compile Include="Tests\CompoundObjects\when_roundtrip.cs" />
+    <Compile Include="Tests\ContextTests.cs" />
     <Compile Include="Tests\DefaultValues\when_submitting.cs" />
-    <Compile Include="Tests\GetListTests.cs" />
+    <Compile Include="Tests\Enums\when_querying.cs" />
+    <Compile Include="Tests\GetObjectsTests.cs" />
     <Compile Include="Tests\InheritanceTests.cs" />
     <Compile Include="Tests\ListPropertiesTests.cs" />
     <Compile Include="Tests\Methods\when_invoking_on_server.cs" />
     <Compile Include="Tests\N_to_M_relations\should_synchronize.cs" />
+    <Compile Include="Tests\N_to_M_relations\when_adding.cs" />
+    <Compile Include="Tests\N_to_M_relations\when_deleting.cs" />
     <Compile Include="Tests\ObjectListModels\when_moving_items.cs" />
     <Compile Include="Tests\ObjectTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -122,10 +129,10 @@
     <Compile Include="Tests\CompoundObjects\when_changing_a_CompoundObject_member.cs" />
     <Compile Include="Tests\CompoundObjects\when_initialized.cs" />
     <Compile Include="Tests\Security\AbstractSecurityTest.cs" />
+    <Compile Include="Tests\Security\when_no_delete_rights.cs" />
     <Compile Include="Tests\Security\when_cheating.cs" />
     <Compile Include="Tests\Security\when_updating_calcprop.cs" />
     <Compile Include="Tests\Simple.cs" />
-    <Compile Include="Tests\TypeRefs\should_convert_types_correctly.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

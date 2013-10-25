@@ -19,9 +19,9 @@ namespace Zetbox.API.AbstractConsumerTests.N_to_M_relations
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using NUnit.Framework;
     using Zetbox.API;
     using Zetbox.App.Test;
-    using NUnit.Framework;
 
     public abstract class should_synchronize
         : AbstractTestFixture
@@ -270,13 +270,71 @@ namespace Zetbox.API.AbstractConsumerTests.N_to_M_relations
             aSide1.BSide.Add(bSide1);
             SubmitAndReload();
 
-            // TODO: remove this after case 2115 is fixed
-            aSide1.BSide.Clear();
-
             ctx.Delete(aSide1);
             ctx.Delete(bSide1);
 
             ctx.SubmitChanges();
+        }
+
+        [Test]
+        public void when_removing_from_aSide()
+        {
+            aSide1.BSide.Add(bSide1);
+            SubmitAndReload();
+
+            aSide1.BSide.Remove(bSide1);
+            Assert.That(bSide1.ASide, Has.No.Contains(aSide1));
+            ctx.SubmitChanges();
+        }
+
+        [Test]
+        public void when_removing_from_bSide()
+        {
+            bSide1.ASide.Add(aSide1);
+            SubmitAndReload();
+
+            bSide1.ASide.Remove(aSide1);
+
+            Assert.That(aSide1.BSide, Has.No.Contains(bSide1));
+            ctx.SubmitChanges();
+        }
+
+        [Test]
+        public void when_deleting_RelationEntry()
+        {
+            aSide1.BSide.Add(bSide1);
+            var relEntry = ctx.AttachedObjects.OfType<N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntry>().Single();
+            SubmitAndReload();
+
+            // doesn't work on the client, because the RelationEntry cannot pass the GetList facade
+            // relEntry = ctx.FindPersistenceObject<N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntry>(relEntry.ID);
+
+            // trigger loading the relation entry
+            Assert.That(aSide1.BSide.ToList(), Has.Member(bSide1));
+            relEntry = ctx.AttachedObjects.OfType<N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntry>().Single();
+            ctx.Delete(relEntry);
+
+            Assert.That(aSide1.BSide, Is.Empty);
+            Assert.That(bSide1.ASide, Is.Empty);
+
+            SubmitAndReload();
+
+            Assert.That(aSide1.BSide, Is.Empty);
+            Assert.That(bSide1.ASide, Is.Empty);
+        }
+
+        /// <summary>
+        /// This is what happens when SetObjects is posted with a new RelationEntry.
+        /// </summary>
+        [Test]
+        public void when_creating_RelationEntry()
+        {
+            var relEntry = ctx.Internals().CreateRelationCollectionEntry<N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntry>();
+            relEntry.A = aSide1;
+            relEntry.B = bSide1;
+
+            Assert.That(aSide1.BSide, Is.EquivalentTo(new[] { bSide1 }));
+            Assert.That(bSide1.ASide, Is.EquivalentTo(new[] { aSide1 }));
         }
     }
 }

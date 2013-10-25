@@ -125,6 +125,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         }
     
         private OneNRelationList<Zetbox.App.Projekte.Auftrag> _Auftraege;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchAuftraegeAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Projekte.Auftrag>>(this.Auftraege);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAuftraege_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Projekte.Projekt> OnAuftraege_IsValid;
@@ -246,7 +252,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
         // fkBackingName=this.Proxy.ChangedBy; fkGuidBackingName=_fk_guid_ChangedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Projekte;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -325,6 +331,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         /// <summary>Backing store for ChangedBy's id, used on dehydration only</summary>
         private int? _fk_ChangedBy = null;
 
+
+    public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.ChangedBy);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for ChangedBy
 		public static event PropertyGetterHandler<Zetbox.App.Projekte.Projekt, Zetbox.App.Base.Identity> OnChangedBy_Getter;
@@ -417,7 +428,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
         // fkBackingName=this.Proxy.CreatedBy; fkGuidBackingName=_fk_guid_CreatedBy;
         // referencedInterface=Zetbox.App.Base.Identity; moduleNamespace=Zetbox.App.Projekte;
-        // inverse Navigator=none; is reference;
+        // no inverse navigator handling
         // PositionStorage=none;
         // Target not exportable; does call events
 
@@ -496,6 +507,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         /// <summary>Backing store for CreatedBy's id, used on dehydration only</summary>
         private int? _fk_CreatedBy = null;
 
+
+    public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity>(this.CreatedBy);
+    }
 
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for CreatedBy
 		public static event PropertyGetterHandler<Zetbox.App.Projekte.Projekt, Zetbox.App.Base.Identity> OnCreatedBy_Getter;
@@ -851,8 +867,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
 							new ProjectedCollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl.Projekt_haben_Mitarbeiter_RelationEntryProxy, Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.Mitarbeiter,
                                 p => (Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl.Projekt_haben_Mitarbeiter_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy),
-                            entry => (IRelationListSync<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl>)entry.B.Projekte);
+                                ce => (Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl.Projekt_haben_Mitarbeiter_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
+                    _Mitarbeiter.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Mitarbeiter", null, null); if(OnMitarbeiter_PostSetter != null && IsAttached) OnMitarbeiter_PostSetter(this); };
                     if (Mitarbeiter_was_eagerLoaded) { Mitarbeiter_was_eagerLoaded = false; }
 				}
 				return (IList<Zetbox.App.Projekte.Mitarbeiter>)_Mitarbeiter;
@@ -862,6 +878,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
 		private NHibernateBSideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl> _Mitarbeiter;
 		// ignored, but required for Serialization
         private bool Mitarbeiter_was_eagerLoaded = false;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchMitarbeiterAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<IList<Zetbox.App.Projekte.Mitarbeiter>>(this.Mitarbeiter);
+        }
+
+public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnMitarbeiter_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Projekte.Projekt> OnMitarbeiter_IsValid;
 
@@ -954,6 +977,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         }
     
         private OneNRelationList<Zetbox.App.Projekte.Task> _Tasks;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchTasksAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<ICollection<Zetbox.App.Projekte.Task>>(this.Tasks);
+        }
+
 public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTasks_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Projekte.Projekt> OnTasks_IsValid;
@@ -1015,6 +1044,70 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
 		public static event PropertyPostSetterHandler<Zetbox.App.Projekte.Projekt, DateTime> OnVon_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.Projekte.Projekt> OnVon_IsValid;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetFulltextIndexBody_Projekt")]
+        public virtual string GetFulltextIndexBody()
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetFulltextIndexBody_Projekt != null)
+            {
+                OnGetFulltextIndexBody_Projekt(this, e);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on Projekt.GetFulltextIndexBody");
+            }
+            return e.Result;
+        }
+        public delegate void GetFulltextIndexBody_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+        public static event GetFulltextIndexBody_Handler<Projekt> OnGetFulltextIndexBody_Projekt;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<Projekt> OnGetFulltextIndexBody_Projekt_CanExec;
+
+        [EventBasedMethod("OnGetFulltextIndexBody_Projekt_CanExec")]
+        public virtual bool GetFulltextIndexBodyCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetFulltextIndexBody_Projekt_CanExec != null)
+				{
+					OnGetFulltextIndexBody_Projekt_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Projekt> OnGetFulltextIndexBody_Projekt_CanExecReason;
+
+        [EventBasedMethod("OnGetFulltextIndexBody_Projekt_CanExecReason")]
+        public virtual string GetFulltextIndexBodyCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetFulltextIndexBody_Projekt_CanExecReason != null)
+				{
+					OnGetFulltextIndexBody_Projekt_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
         /// 
@@ -1189,6 +1282,25 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
             }
         }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
+
+        public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
+        {
+            switch(propName)
+            {
+            case "Auftraege":
+                return TriggerFetchAuftraegeAsync();
+            case "ChangedBy":
+                return TriggerFetchChangedByAsync();
+            case "CreatedBy":
+                return TriggerFetchCreatedByAsync();
+            case "Mitarbeiter":
+                return TriggerFetchMitarbeiterAsync();
+            case "Tasks":
+                return TriggerFetchTasksAsync();
+            default:
+                return base.TriggerFetch(propName);
+            }
+        }
 
         public override void ReloadReferences()
         {
@@ -1558,6 +1670,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
                  __currentAccessRights |= secRight != null ? (Zetbox.API.AccessRights)secRight.Right : Zetbox.API.AccessRights.None; 
              } 
              return __currentAccessRights.Value; }
+        }
+
+        protected override void ResetCurrentAccessRights()
+        {
+                base.ResetCurrentAccessRights();
+                __currentAccessRights = null;
         }
 
 

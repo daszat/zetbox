@@ -88,6 +88,8 @@ namespace PrepareEnv
                 EnforceConnectionString(envConfig);
                 EnforceAppServer(envConfig);
 
+                ClickOnceGenerator.BuildClickOnce(envConfig);
+
                 DeployDatabaseTemplate(envConfig);
 
                 return 0;
@@ -162,6 +164,23 @@ namespace PrepareEnv
             envConfig.GeneratedSource = PrepareConfigPath(envConfig.GeneratedSource);
             envConfig.BinaryTarget = PrepareConfigPath(envConfig.BinaryTarget);
             envConfig.TestsTarget = PrepareConfigPath(envConfig.TestsTarget);
+
+            envConfig.ClientExe = ExpandEnvVars(envConfig.ClientExe ?? "Zetbox.WPF.exe");
+            envConfig.ClientParameters = PrepareConfigPath(envConfig.ClientParameters);
+
+            if (envConfig.ClickOnce != null)
+            {
+                envConfig.ClickOnce.Publisher = ExpandEnvVars(envConfig.ClickOnce.Publisher);
+                envConfig.ClickOnce.SuiteName = ExpandEnvVars(envConfig.ClickOnce.SuiteName);
+                // provide a sensible default
+                envConfig.ClickOnce.Product = ExpandEnvVars(envConfig.ClickOnce.Product) ?? string.Format("{0}'s zetbox client", envConfig.ClickOnce.Publisher);
+                envConfig.ClickOnce.SupportUrl = ExpandEnvVars(envConfig.ClickOnce.SupportUrl);
+                envConfig.ClickOnce.ErrorReportUrl = ExpandEnvVars(envConfig.ClickOnce.ErrorReportUrl);
+                // if no URL is specified, the ClickOnce installer will use the .application location automatically
+                envConfig.ClickOnce.UpdateUrl = ExpandEnvVars(envConfig.ClickOnce.UpdateUrl);
+                envConfig.ClickOnce.KeyFile = PrepareConfigPath(envConfig.ClickOnce.KeyFile);
+                envConfig.ClickOnce.DeploymentVersion = ExpandEnvVars(envConfig.ClickOnce.DeploymentVersion);
+            }
 
             if (string.IsNullOrEmpty(envConfig.ConfigSource))
             {
@@ -804,7 +823,8 @@ namespace PrepareEnv
             // canonicalize slashiness in paths from the configuration
             if (!string.IsNullOrWhiteSpace(input) && !string.IsNullOrWhiteSpace(Path.GetPathRoot(input)))
             {
-                input = Path.GetPathRoot(input) + Path.Combine(input.Replace(Path.GetPathRoot(input), "").Split('\\', '/'));
+                // Path.GetPathRoot returns "/" on linux
+                input = Path.Combine(Path.GetPathRoot(input), Path.Combine(input.Replace(Path.GetPathRoot(input), "/").Split("\\/".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)));
             }
 
             return input;
@@ -831,18 +851,18 @@ namespace PrepareEnv
             return input;
         }
 
-        private static void LogTitle(string msg, params object[] args)
+        internal static void LogTitle(string msg, params object[] args)
         {
             Console.WriteLine(msg, args);
         }
 
-        private static void LogAction(string msg, params object[] args)
+        internal static void LogAction(string msg, params object[] args)
         {
             Console.Write("        ");
             Console.WriteLine(msg, args);
         }
 
-        private static void LogDetail(string msg, params object[] args)
+        internal static void LogDetail(string msg, params object[] args)
         {
             if (debug)
             {
