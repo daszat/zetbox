@@ -34,6 +34,30 @@ namespace Zetbox.Client.Presentables.TestModule
                     null, 
                     null));
 
+            result.Add(ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
+                .Invoke(
+                    DataContext,
+                    this,
+                    "Test ProblemReporter continuously",
+                    "Throws every couple of seconds an exception so that the Problem Reporter will be shown",
+                    () => 
+                    {
+
+                        var syncContext = System.Threading.SynchronizationContext.Current;
+                        System.Threading.ThreadPool.QueueUserWorkItem((x) =>
+                        {
+                            while (true)
+                            {
+                                syncContext.Post((y) =>
+                                {
+                                    throw new Exception("This is a test exception");
+                                }, null);
+                                System.Threading.Thread.Sleep(2000);
+                            }
+                        }); 
+                    },
+                    null,
+                    null));
 
             return result;
         }
