@@ -29,52 +29,34 @@ using Zetbox.API.Common;
 namespace Zetbox.Client.Presentables.ObjectBrowser
 {
     [ViewModelDescriptor]
-    public class ModuleViewModel : DataObjectViewModel
+    public class ObjectClassViewModel : DataObjectViewModel
     {
-        public class TreeNodeSimpleObjects : ViewModel
+        public new delegate ObjectClassViewModel Factory(IZetboxContext dataCtx, ViewModel parent, ObjectClass cls);
+
+        public ObjectClassViewModel(IViewModelDependencies appCtx,
+            IZetboxContext dataCtx, ViewModel parent, ObjectClass cls)
+            : base(appCtx, dataCtx, parent, cls)
         {
-            public new delegate TreeNodeSimpleObjects Factory(IZetboxContext dataCtx, ViewModel parent);
-
-            public TreeNodeSimpleObjects(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent)
-                : base(dependencies, dataCtx, parent)
-            {
-
-            }
-
-            public override string Name
-            {
-                get
-                {
-                    return WorkspaceViewModelResources.SimpleObjects;
-                }
-            }
-            public IEnumerable Children { get; set; }
-
-            public ViewModel DashboardViewModel
-            {
-                get
-                {
-                    return this;
-                }
-            }
+            _cls = cls;
+            cls.PropertyChanged += ModulePropertyChanged;
         }
 
-        public new delegate ModuleViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Module mdl);
-
-        public ModuleViewModel(IViewModelDependencies appCtx,
-            IZetboxContext dataCtx, ViewModel parent, Module mdl)
-            : base(appCtx, dataCtx, parent, mdl)
-        {
-            _module = mdl;
-            _module.PropertyChanged += ModulePropertyChanged;
-        }
+        private ObjectClass _cls;
 
         public override string Name
         {
             get
             {
-                return Assets.GetString(_module, ZetboxAssetKeys.Modules, ZetboxAssetKeys.ConstructNameKey(_module), _module.Name);
+                if (_cls.Module != null)
+                    return Assets.GetString(_cls.Module, ZetboxAssetKeys.DataTypes, ZetboxAssetKeys.ConstructNameKey(_cls), _cls.Name);
+                else
+                    return _cls.Name;
             }
+        }
+
+        public override System.Drawing.Image Icon
+        {
+            get { return IconConverter.ToImage(_cls.DefaultIcon); }
         }
 
         #region public interface
@@ -86,11 +68,8 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
             {
                 if (_children == null)
                 {
-                    var simple = ViewModelFactory.CreateViewModel<TreeNodeSimpleObjects.Factory>().Invoke(DataContext, this);
-                    simple.Children = this.SimpleObjectClasses;
                     _children = ObjectClasses
                         .Cast<object>()
-                        .Concat(new[] {  simple })
                         .ToList();
                 }
                 return _children;
@@ -104,22 +83,27 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
             {
                 if (_objectClassesCache == null)
                 {
-                    _objectClassesCache = LoadObjectClasses(false);
+                    _objectClassesCache = LoadObjectClasses();
                 }
                 return _objectClassesCache;
             }
         }
 
-        private List<ObjectClassViewModel> _simpleObjectClassesCache = null;
-        public IEnumerable<ObjectClassViewModel> SimpleObjectClasses
+        private InstanceListViewModel _dashboardViewModel;
+        public ViewModel DashboardViewModel
         {
             get
             {
-                if (_simpleObjectClassesCache == null)
+                if (_dashboardViewModel == null)
                 {
-                    _simpleObjectClassesCache = LoadObjectClasses(true);
+                    _dashboardViewModel = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, this, _cls, null);
+                    _dashboardViewModel.AllowAddNew = true;
+                    _dashboardViewModel.AllowDelete = true;
+                    _dashboardViewModel.ViewMethod = Zetbox.App.GUI.InstanceListViewMethod.Details;
+                    _dashboardViewModel.Commands.Add(ViewModelFactory.CreateViewModel<EditDataObjectClassCommand.Factory>().Invoke(DataContext, this, _cls));
+
                 }
-                return _simpleObjectClassesCache;
+                return _dashboardViewModel;
             }
         }
 
@@ -127,22 +111,14 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
 
         #region Utilities and UI callbacks
 
-        private List<ObjectClassViewModel> LoadObjectClasses(bool simpleObjects)
+        private List<ObjectClassViewModel> LoadObjectClasses()
         {
             return FrozenContext.GetQuery<ObjectClass>()
-                .Where(c => c.Module.ExportGuid == _module.ExportGuid && c.BaseObjectClass == null && c.IsSimpleObject == simpleObjects)
+                .Where(c => c.BaseObjectClass != null && c.BaseObjectClass.ExportGuid == _cls.ExportGuid)
                 .OrderBy(c => c.Name)
                 .ToList()
                 .Select(c => ViewModelFactory.CreateViewModel<ObjectClassViewModel.Factory>().Invoke(DataContext, this, c))
                 .ToList();
-        }
-
-        public ViewModel DashboardViewModel
-        {
-            get 
-            {
-                return this;
-            }
         }
 
         #endregion
@@ -158,7 +134,5 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
         }
 
         #endregion
-
-        private Module _module;
     }
 }
