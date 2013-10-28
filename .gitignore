@@ -1,6 +1,6 @@
 /Backup
 /bin
-/Configs/Local
+/Configs/Local*
 /DocumentStore/Server
 /Zetbox.Server.HttpService/Server
 /Zetbox.Server.HttpService/Bootstrapper
