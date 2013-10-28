@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>zetboxBasic-EF</id>
-    <version>1.0.$REVNUM$.$DIRTY$</version>
+    <version>$version$</version>
     <title>zetbox Basic Entity Framework components</title>
     <authors>dasz.at OG</authors>
     <owners>dasz.at OG</owners>
@@ -14,7 +14,7 @@
     <copyright>Copyright © 2012 dasz.at OG</copyright>
     <tags>Platform Database ORM Applications</tags>
     <dependencies>
-      <dependency id="zetboxBasic" version="[1.0.$REVNUM$.$DIRTY$]" />
+      <dependency id="zetboxBasic" version="[$version$]" />
     </dependencies>
   </metadata>
   <files>

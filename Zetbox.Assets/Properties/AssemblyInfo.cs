@@ -1,5 +1,19 @@
-﻿using System.Reflection;
-using System.Runtime.CompilerServices;
+﻿// This file is part of zetbox.
+//
+// Zetbox is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as
+// published by the Free Software Foundation, either version 3 of
+// the License, or (at your option) any later version.
+//
+// Zetbox is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public
+// License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
+using System;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using Zetbox.API;
 
@@ -10,8 +24,8 @@ using Zetbox.API;
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("dasz.at OG")]
-[assembly: AssemblyProduct("Zetbox.Assets")]
-[assembly: AssemblyCopyright("Copyright © dasz.at OG 2007-2009")]
+[assembly: AssemblyProduct("zetbox")]
+[assembly: AssemblyCopyright("Copyright © 2007-2013 dasz.at OG")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,21 +34,15 @@ using Zetbox.API;
 // COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
 
-// The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("1f01a2ed-ee54-4e67-bfdf-592772f0118a")]
-
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Build and Revision Numbers 
-// by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
+// The following tags will be replaced by the -checkout job on jenkins to current values
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyInformationalVersion("1.0.0-dev")]
+
+// The Common Language Specification (CLS) defines naming restrictions, data types,
+// and rules to which assemblies must conform if they are to be used across programming
+// languages. This assembly should be compatible even if it is probably not useful.
+[assembly: CLSCompliant(true)]
 
 [assembly: AssetsFor("ZetboxBase")]
 [assembly: AssetsFor("GUI")]

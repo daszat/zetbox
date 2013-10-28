@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>zetboxBasic-Tests</id>
-    <version>1.0.$REVNUM$.$DIRTY$</version>
+    <version>$version$</version>
     <title>zetbox Basic Test assemblies</title>
     <authors>dasz.at OG</authors>
     <owners>dasz.at OG</owners>
@@ -15,7 +15,7 @@
     <dependencies>
       <dependency id="NUnit" version="[2.6.0.12054]" />
       <dependency id="NUnit.Runners" version="[2.6.0.12051]" />
-      <dependency id="zetboxBasic-Common" version="[1.0.$REVNUM$.$DIRTY$]" />
+      <dependency id="zetboxBasic-Common" version="[$version$]" />
       <!-- "everything" -->
     </dependencies>
   </metadata>

@@ -25,7 +25,6 @@ VersionInfo.Designer.cs
 /packages/*
 
 /PrepareEnv/Examples/env.xml
-/NuGetPackages/*.nuspec
 /Templates/ProjectTemplates/ZetboxApp/packages/Mono.Security.*
 /Templates/ProjectTemplates/ZetboxApp/packages/Npgsql.*
 

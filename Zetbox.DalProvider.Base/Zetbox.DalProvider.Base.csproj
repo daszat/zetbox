@@ -83,10 +83,6 @@
     <Compile Include="PersistenceObjectBaseImpl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="packages.config" />
-    <None Include="Properties\VersionInfo.cs" />
-    <Compile Include="Properties\VersionInfo.Designer.cs">
-      <DependentUpon>VersionInfo.cs</DependentUpon>
-    </Compile>
     <Compile Include="PropertyDescriptorBaseImpl.cs" />
     <Compile Include="RelationEntryBaseImpl.cs" />
     <Compile Include="RelationWrappers\CollectionWrapper.cs" />
@@ -121,9 +117,5 @@
 
   </Target>
   -->
-  <Import Project="..\packages\MSBuildVersioning.1.0.37.0\lib\net40\MsBuildVersioning.targets" />
-  <Target Name="BeforeBuild">
-    <GitVersionFile TemplateFile="Properties\VersionInfo.cs" DestinationFile="Properties\VersionInfo.Designer.cs" />
-  </Target>
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
 </Project>
