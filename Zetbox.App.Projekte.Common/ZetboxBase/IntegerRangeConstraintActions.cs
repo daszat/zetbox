@@ -43,8 +43,8 @@ namespace Zetbox.App.Base
             }
             else
             {
-                // only accept null values if no lower bound is set
-                e.Result = obj.Min == 0;
+                // Accept null values -> other constraint will check for nulls
+                e.Result = true;
             }
         }
 
@@ -55,6 +55,12 @@ namespace Zetbox.App.Base
             object constrainedObjectParam,
             object constrainedValueParam)
         {
+            if (constrainedValueParam == null)
+            {
+                e.Result = null;
+                return;
+            }
+
             int v = (int)constrainedValueParam;
             if (obj.IsValid(constrainedObjectParam, constrainedValueParam))
             {
