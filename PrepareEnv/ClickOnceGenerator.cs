@@ -68,7 +68,7 @@ namespace PrepareEnv
                 var appId = new AppId()
                 {
                     name = envConfig.ClickOnce.Product + ".exe",
-                    version = "1.0.0.0",
+                    version = envConfig.ClickOnce.DeploymentVersion,
                     publicKeyToken = FormatKey(PublicKeyTokenFromPfx(envConfig.ClickOnce.KeyFile)),
                     language = "neutral",
                     processorArchitecture = "bar",
@@ -158,6 +158,7 @@ namespace PrepareEnv
             // asmv1 wants a filename, not an assembly name
             SetOrReplaceAttribute(assemblyIdentity, "name", null, Path.GetFileName(envConfig.ClientExe));
 
+            SetOrReplaceAttribute(assemblyIdentity, "version", null, appId.version);
             SetOrReplaceAttribute(assemblyIdentity, "publicKeyToken", null, appId.publicKeyToken);
             return client;
         }
