@@ -42,34 +42,34 @@ namespace Zetbox.Generator
 
         protected override string Generate_ObjectClass(IZetboxContext ctx, ObjectClass objClass)
         {
-            return RunTemplateWithExtension(ctx, "Interfaces.Template", objClass.Name, "Designer.cs", objClass);
+            return RunTemplateWithExtension(ctx, "Interfaces.Template", objClass.Module.Name, objClass.Name, "Designer.cs", objClass);
         }
 
         protected override string Generate_CollectionEntries(IZetboxContext ctx)
         {
-            return RunTemplateWithExtension(ctx, "CollectionEntries.CollectionEntries", "CollectionEntries", "Designer.cs");
+            return RunTemplateWithExtension(ctx, "CollectionEntries.CollectionEntries", null, "CollectionEntries", "Designer.cs");
         }
 
         protected override string Generate_Enumeration(IZetboxContext ctx, Enumeration e)
         {
-            return RunTemplateWithExtension(ctx, "Enumerations.Template", e.Name, "Designer.cs", e);
+            return RunTemplateWithExtension(ctx, "Enumerations.Template", e.Module.Name, e.Name, "Designer.cs", e);
         }
 
         protected override string Generate_CompoundObject(IZetboxContext ctx, CompoundObject s)
         {
-            return RunTemplateWithExtension(ctx, "Interfaces.Template", s.Name, "Designer.cs", s);
+            return RunTemplateWithExtension(ctx, "Interfaces.Template", s.Module.Name, s.Name, "Designer.cs", s);
         }
 
         protected override string Generate_Interface(IZetboxContext ctx, Zetbox.App.Base.Interface i)
         {
-            return RunTemplateWithExtension(ctx, "Interfaces.Template", i.Name, "Designer.cs", i);
+            return RunTemplateWithExtension(ctx, "Interfaces.Template", i.Module.Name, i.Name, "Designer.cs", i);
         }
 
         protected override IEnumerable<string> Generate_Other(IZetboxContext ctx)
         {
             var otherFileNames = new List<string>();
 
-            otherFileNames.Add(RunTemplateWithExtension(ctx, "NamedObjects", "NamedObjects", "Designer.cs"));
+            otherFileNames.Add(RunTemplateWithExtension(ctx, "NamedObjects", null, "NamedObjects", "Designer.cs"));
 
             return base.Generate_Other(ctx).Concat(otherFileNames);
         }

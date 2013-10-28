@@ -64,7 +64,7 @@ namespace Zetbox.DalProvider.Ef.Generator
                 {
                     this.RunTemplate(ctx, "EfModel.ModelSsdl", String.Format("Model.{0}.ssdl", schemaProvider.ConfigName), schemaProvider);
                 }
-                otherFileNames.Add(this.RunTemplateWithExtension(ctx, "ObjectClasses.AssociationSetAttributes", "AssociationSetAttributes", "cs"));
+                otherFileNames.Add(this.RunTemplateWithExtension(ctx, "ObjectClasses.AssociationSetAttributes", null, "AssociationSetAttributes", "cs"));
 
                 return base.Generate_Other(ctx).Concat(otherFileNames);
             }

@@ -157,9 +157,13 @@ namespace Zetbox.Generator
         /// </summary>
         public abstract IEnumerable<string> RequiredNamespaces { get; }
 
-        protected virtual string RunTemplateWithExtension(IZetboxContext ctx, string templateName, string baseFilename, string extension, params object[] args)
+        protected virtual string RunTemplateWithExtension(IZetboxContext ctx, string templateName, string targetFolder, string baseFilename, string extension, params object[] args)
         {
             string filename = String.Join(".", new string[] { baseFilename, BaseName, extension });
+            if (!string.IsNullOrWhiteSpace(targetFolder))
+            {
+                filename = Path.Combine(targetFolder, filename);
+            }
             return RunTemplate(ctx, templateName, filename, args);
         }
 
@@ -225,17 +229,17 @@ namespace Zetbox.Generator
 
         protected virtual string Generate_AssemblyInfo(IZetboxContext ctx)
         {
-            return RunTemplateWithExtension(ctx, "AssemblyInfoTemplate", "AssemblyInfo", "cs");
+            return RunTemplateWithExtension(ctx, "AssemblyInfoTemplate", null, "AssemblyInfo", "cs");
         }
 
         protected virtual string Generate_ObjectClass(IZetboxContext ctx, ObjectClass objClass)
         {
-            return RunTemplateWithExtension(ctx, "ObjectClasses.Template", objClass.Name, "Designer.cs", objClass);
+            return RunTemplateWithExtension(ctx, "ObjectClasses.Template", objClass.Module.Name, objClass.Name, "Designer.cs", objClass);
         }
 
         protected virtual string Generate_CollectionEntries(IZetboxContext ctx)
         {
-            return RunTemplateWithExtension(ctx, "ObjectClasses.CollectionEntries", "CollectionEntries", "Designer.cs");
+            return RunTemplateWithExtension(ctx, "ObjectClasses.CollectionEntries", null, "CollectionEntries", "Designer.cs");
         }
 
         protected virtual string Generate_Enumeration(IZetboxContext ctx, Enumeration e)
@@ -246,7 +250,7 @@ namespace Zetbox.Generator
 
         protected virtual string Generate_CompoundObject(IZetboxContext ctx, CompoundObject s)
         {
-            return RunTemplateWithExtension(ctx, "CompoundObjects.Template", s.Name, "Designer.cs", s);
+            return RunTemplateWithExtension(ctx, "CompoundObjects.Template", s.Module.Name, s.Name, "Designer.cs", s);
         }
 
         protected virtual string Generate_Interface(IZetboxContext ctx, Interface i)
@@ -259,7 +263,7 @@ namespace Zetbox.Generator
         {
             return new List<string>()
             {
-                RunTemplateWithExtension(ctx, "Module", "Module", "cs", Description)
+                RunTemplateWithExtension(ctx, "Module", null, "Module", "cs", Description)
             };
         }
 
