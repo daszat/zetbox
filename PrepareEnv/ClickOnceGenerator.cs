@@ -123,7 +123,7 @@ namespace PrepareEnv
             // Add Client EXE and config
             InsertClickOnceDependency(envConfig, dependencyList, lastPrerequisite, envConfig.ClientExe, nsmgr);
             InsertClickOnceDependency(envConfig, dependencyList, lastPrerequisite, envConfig.ClientExe + ".config", nsmgr);
-            InsertClickOnceDependency(envConfig, dependencyList, lastPrerequisite, Path.Combine(envConfig.BinaryTarget, "Configs", Path.GetFileNameWithoutExtension(envConfig.ClientExe) + ".xml"), nsmgr);
+            InsertClickOnceDependency(envConfig, dependencyList, lastPrerequisite, Path.Combine("Configs", Path.GetFileNameWithoutExtension(envConfig.ClientExe) + ".xml"), nsmgr);
 
             // save to template
             doc.Save(GetManifestTemplateName(envConfig));
@@ -181,7 +181,7 @@ namespace PrepareEnv
 
                 var assemblyIdentity = doc.CreateNode(XmlNodeType.Element, "assemblyIdentity", ASMv2_NS);
 
-                FillClickOnceAssemblyId(AssemblyDefinition.ReadAssembly(Path.Combine(envConfig.BinaryTarget, file)), assemblyIdentity);
+                FillClickOnceAssemblyId(AssemblyDefinition.ReadAssembly(file), assemblyIdentity);
                 dependentAssembly.AppendChild(assemblyIdentity);
 
                 var hash = CreateHashNode(file, nsmgr, doc);
