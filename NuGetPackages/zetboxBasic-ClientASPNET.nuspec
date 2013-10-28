@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>zetboxBasic-ClientASPNET</id>
-    <version>1.0.$REVNUM$.$DIRTY$</version>
+    <version>$version$</version>
     <title>zetbox Basic - client ASP.NET MVC components</title>
     <authors>dasz.at OG</authors>
     <owners>dasz.at OG</owners>
@@ -15,7 +15,7 @@
     <tags>Platform Database ORM Applications</tags>
     <dependencies>
       <dependency id="Autofac.Mvc3" version="[2.6.3.862]" />
-      <dependency id="zetboxBasic-Client" version="[1.0.$REVNUM$.$DIRTY$]" />
+      <dependency id="zetboxBasic-Client" version="[$version$]" />
     </dependencies>
   </metadata>
   <files>

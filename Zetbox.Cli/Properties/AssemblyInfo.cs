@@ -12,10 +12,8 @@
 //
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
-
 using System;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
@@ -24,33 +22,21 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Zetbox.Cli")]
 [assembly: AssemblyDescription("Contains the command line interface of the zetbox")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Zetbox.Cli")]
-[assembly: AssemblyCopyright("Copyright © dasz.at OG 2012")]
-//[assembly: AssemblyTrademark("")]
-//[assembly: AssemblyCulture("")]
+[assembly: AssemblyCompany("dasz.at OG")]
+[assembly: AssemblyProduct("zetbox")]
+[assembly: AssemblyCopyright("Copyright © 2007-2013 dasz.at OG")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
 // COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
 
-// The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("505c8ff1-e43f-4d30-a92f-0e8bf446b0c1")]
-
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Build and Revision Numbers 
-// by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
+// The following tags will be replaced by the -checkout job on jenkins to current values
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
-
+[assembly: AssemblyInformationalVersion("1.0.0-dev")]
 
 // The Common Language Specification (CLS) defines naming restrictions, data types,
 // and rules to which assemblies must conform if they are to be used across programming

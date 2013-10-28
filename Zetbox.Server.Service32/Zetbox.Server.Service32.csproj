@@ -59,10 +59,6 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <None Include="Properties\VersionInfo.cs" />
-    <Compile Include="Properties\VersionInfo.Designer.cs">
-      <DependentUpon>VersionInfo.cs</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zetbox.API\Zetbox.API.csproj">
@@ -93,9 +89,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Import Project="..\packages\MSBuildVersioning.1.0.37.0\lib\net40\MsBuildVersioning.targets" />
-  <Target Name="BeforeBuild">
-    <GitVersionFile TemplateFile="Properties\VersionInfo.cs" DestinationFile="Properties\VersionInfo.Designer.cs" />
-  </Target>
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
 </Project>

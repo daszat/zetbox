@@ -68,7 +68,7 @@ namespace PrepareEnv
                 var appId = new AppId()
                 {
                     name = envConfig.ClickOnce.Product + ".exe",
-                    version = "1.0.0.0",
+                    version = envConfig.ClickOnce.DeploymentVersion,
                     publicKeyToken = FormatKey(PublicKeyTokenFromPfx(envConfig.ClickOnce.KeyFile)),
                     language = "neutral",
                     processorArchitecture = "bar",
@@ -123,7 +123,7 @@ namespace PrepareEnv
             // Add Client EXE and config
             InsertClickOnceDependency(envConfig, dependencyList, lastPrerequisite, envConfig.ClientExe, nsmgr);
             InsertClickOnceDependency(envConfig, dependencyList, lastPrerequisite, envConfig.ClientExe + ".config", nsmgr);
-            InsertClickOnceDependency(envConfig, dependencyList, lastPrerequisite, Path.Combine(envConfig.BinaryTarget, "Configs", Path.GetFileNameWithoutExtension(envConfig.ClientExe) + ".xml"), nsmgr);
+            InsertClickOnceDependency(envConfig, dependencyList, lastPrerequisite, Path.Combine("Configs", Path.GetFileNameWithoutExtension(envConfig.ClientExe) + ".xml"), nsmgr);
 
             // save to template
             doc.Save(GetManifestTemplateName(envConfig));
@@ -158,6 +158,7 @@ namespace PrepareEnv
             // asmv1 wants a filename, not an assembly name
             SetOrReplaceAttribute(assemblyIdentity, "name", null, Path.GetFileName(envConfig.ClientExe));
 
+            SetOrReplaceAttribute(assemblyIdentity, "version", null, appId.version);
             SetOrReplaceAttribute(assemblyIdentity, "publicKeyToken", null, appId.publicKeyToken);
             return client;
         }
@@ -181,7 +182,7 @@ namespace PrepareEnv
 
                 var assemblyIdentity = doc.CreateNode(XmlNodeType.Element, "assemblyIdentity", ASMv2_NS);
 
-                FillClickOnceAssemblyId(AssemblyDefinition.ReadAssembly(Path.Combine(envConfig.BinaryTarget, file)), assemblyIdentity);
+                FillClickOnceAssemblyId(AssemblyDefinition.ReadAssembly(file), assemblyIdentity);
                 dependentAssembly.AppendChild(assemblyIdentity);
 
                 var hash = CreateHashNode(file, nsmgr, doc);

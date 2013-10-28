@@ -17,22 +17,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="README.zetbox.txt" />
-    <NuSpec Include="zetboxBasic.nuspec">
-      <DependentUpon>zetboxBasic.nuspec.in</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </NuSpec>
-    <NuSpec Include="zetboxBasic-All.nuspec">
-      <DependentUpon>zetboxBasic-All.nuspec.in</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </NuSpec>
-    <NuSpec Include="zetboxBasic-EF.nuspec">
-      <DependentUpon>zetboxBasic-EF.nuspec.in</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </NuSpec>
-    <NuSpec Include="zetboxBasic-NH.nuspec">
-      <DependentUpon>zetboxBasic-NH.nuspec.in</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </NuSpec>
+    <Content Include="zetboxBasic.nuspec" />
+    <Content Include="zetboxBasic-All.nuspec" />
+    <Content Include="zetboxBasic-EF.nuspec" />
+    <Content Include="zetboxBasic-NH.nuspec" />
+    <Content Include="zetboxBasic-Tests.nuspec" />
+    <Content Include="zetboxBasic-Client.nuspec" />
+    <Content Include="zetboxBasic-Common.nuspec" />
+    <Content Include="zetboxBasic-Server.nuspec" />
+    <Content Include="zetboxBasic-ClientWpf.nuspec" />
+    <Content Include="zetboxBasic-ClientASPNET.nuspec" />
+    <Content Include="zetboxBasic-WpfExe.nuspec" />
     <Content Include="env.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -55,80 +50,22 @@
     <Targets Include="wpf.targets">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Targets>
-    <NuSpec Include="zetboxBasic-Tests.nuspec">
-      <DependentUpon>zetboxBasic-Tests.nuspec.in</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </NuSpec>
-    <NuSpec Include="zetboxBasic-Client.nuspec">
-      <DependentUpon>zetboxBasic-Client.nuspec.in</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </NuSpec>
-    <NuSpec Include="zetboxBasic-Common.nuspec">
-      <DependentUpon>zetboxBasic-Common.nuspec.in</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </NuSpec>
-    <NuSpec Include="zetboxBasic-Server.nuspec">
-      <DependentUpon>zetboxBasic-Server.nuspec.in</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </NuSpec>
-    <NuSpec Include="zetboxBasic-ClientWpf.nuspec">
-      <DependentUpon>zetboxBasic-ClientWpf.nuspec.in</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </NuSpec>
-    <NuSpec Include="zetboxBasic-ClientASPNET.nuspec">
-      <DependentUpon>zetboxBasic-ClientASPNET.nuspec.in</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </NuSpec>
-    <NuSpec Include="zetboxBasic-WpfExe.nuspec">
-      <DependentUpon>zetboxBasic-WpfExe.nuspec.in</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </NuSpec>
     <Targets Include="fallback.targets">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Targets>
-    <None Include="packages.config" />
-    <None Include="zetboxBasic-WpfExe.nuspec.in" />
-    <None Include="zetboxBasic-ClientWpf.nuspec.in" />
-    <None Include="zetboxBasic-ClientASPNET.nuspec.in">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="zetboxBasic-Server.nuspec.in">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="zetboxBasic-Common.nuspec.in">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="zetboxBasic-Client.nuspec.in" />
-    <None Include="zetboxBasic-Tests.nuspec.in">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="zetboxBasic.nuspec.in" />
-    <None Include="zetboxBasic-All.nuspec.in">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="zetboxBasic-EF.nuspec.in">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="zetboxBasic-NH.nuspec.in">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="install-references.ps1" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\VersionInfo.cs" />
+    <Folder Include="Properties\" />
   </ItemGroup>
-  <Import Project="..\packages\MSBuildVersioning.1.0.37.0\lib\net40\MsBuildVersioning.targets" />
-  <Target Name="GitVersionNuSpec" Inputs="@(NuSpec)" Outputs="%(Identity).Dummy">
-    <GitVersionFile TemplateFile="@(NuSpec).in" DestinationFile="@(NuSpec)" />
-  </Target>
   <Target Name="ContentCopy">
     <Copy SourceFiles="@(Content)" DestinationFolder="$(OutputPath)" />
     <Copy SourceFiles="@(NuSpec)" DestinationFolder="$(OutputPath)" />
     <Copy SourceFiles="@(Targets)" DestinationFolder="$(OutputPath)" />
   </Target>
-  <Target Name="Build" DependsOnTargets="GitVersionNuSpec;ContentCopy">
+  <Target Name="Build" DependsOnTargets="ContentCopy">
   </Target>
   <Target Name="Package" Inputs="@(NuSpec)" Outputs="%(Identity).Dummy" DependsOnTargets="Build">
     <Exec WorkingDirectory="$(OutputPath)" Command="..\$(NuGetCommand) pack @(NuSpec) -prop Configuration=$(Configuration)" />

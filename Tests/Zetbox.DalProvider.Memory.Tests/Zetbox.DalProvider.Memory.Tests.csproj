@@ -75,10 +75,6 @@
     <Compile Include="FrozenContext\when_using.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="packages.config" />
-    <None Include="Properties\VersionInfo.cs" />
-    <Compile Include="Properties\VersionInfo.Designer.cs">
-      <DependentUpon>VersionInfo.cs</DependentUpon>
-    </Compile>
     <Compile Include="SetUpFixture.cs" />
     <Compile Include="TestDeploymentRestrictor.cs" />
   </ItemGroup>
@@ -124,9 +120,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Import Project="..\..\packages\MSBuildVersioning.1.0.37.0\lib\net40\MsBuildVersioning.targets" />
-  <Target Name="BeforeBuild">
-    <GitVersionFile TemplateFile="Properties\VersionInfo.cs" DestinationFile="Properties\VersionInfo.Designer.cs" />
-  </Target>
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
 </Project>
