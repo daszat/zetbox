@@ -29,8 +29,8 @@ namespace Zetbox.Client.Presentables.TestModule
                     DataContext, 
                     this, 
                     "Test ProblemReporter", 
-                    "Throws an exception so that the Problem Reporter will be shown", 
-                    () => { throw new Exception("This is a test exception"); },
+                    "Throws an exception so that the Problem Reporter will be shown",
+                    () => { throw new NotImplementedException("This is a test exception"); },
                     null, 
                     null));
 
@@ -50,7 +50,7 @@ namespace Zetbox.Client.Presentables.TestModule
                             {
                                 syncContext.Post((y) =>
                                 {
-                                    throw new Exception("This is a test exception");
+                                    throw new NotImplementedException("This is a test exception");
                                 }, null);
                                 System.Threading.Thread.Sleep(2000);
                             }

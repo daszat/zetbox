@@ -133,7 +133,7 @@ namespace Zetbox.Client.Presentables {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Problem in Application.
+        ///   Looks up a localized string similar to {0} problem(s) in Application.
         /// </summary>
         internal static string Name {
             get {

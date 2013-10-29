@@ -142,7 +142,7 @@
     <value>Invalid Version</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>Problem in Application</value>
+    <value>{0} problem(s) in Application</value>
   </data>
   <data name="Report" xml:space="preserve">
     <value>Report</value>

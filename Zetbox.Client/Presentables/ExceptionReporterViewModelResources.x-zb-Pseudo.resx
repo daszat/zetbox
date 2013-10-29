@@ -136,7 +136,7 @@
     <value>[Pľęäşę ĥęľp ūş þy şęŉđįŉģ ŧĥįş přőþľęm řępőřŧ !!! !!!]</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>[Přőþľęm įŉ Åppľįčäŧįőŉ !!! !!!]</value>
+    <value>{0} [Přőþľęm įŉ Åppľįčäŧįőŉ !!! !!!]</value>
   </data>
   <data name="Report" xml:space="preserve">
     <value>[Ŗępőřŧ !!! !!! !!! !!! !!!]</value>
