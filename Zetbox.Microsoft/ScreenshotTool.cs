@@ -48,6 +48,8 @@ namespace Zetbox.Microsoft
 
         private Bitmap CreateScreenshot(int left, int top, int width, int height)
         {
+            if (height == 0 || width == 0) return null;
+
             Bitmap bmp = new Bitmap(width, height);
             Graphics g = Graphics.FromImage(bmp);
             g.CopyFromScreen(left, top, 0, 0, new Size(width, height));
