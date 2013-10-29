@@ -135,6 +135,12 @@
   <data name="HelpUsText" xml:space="preserve">
     <value>Bitte helfen Sie uns indem Sie diesen Problembericht senden</value>
   </data>
+  <data name="InvalidZetboxGeneratedVersionException_Message" xml:space="preserve">
+    <value>Ihre Version der Applikation stimmt mit der Version am Server nicht mehr überein. Bitte schließen Sie die Applikation und starten Sie die Applikation neu.</value>
+  </data>
+  <data name="InvalidZetboxGeneratedVersionException_Title" xml:space="preserve">
+    <value>Ungültige Version</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>Problem in der Applikation</value>
   </data>

@@ -34,11 +34,11 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             ZetboxConfig config,
             IFileOpener fileOpener,
             ITempFileService tmpService,
-            Lazy<IScreenshotTool> screenshotTool,
+            Lazy<IUIExceptionReporter> errorReporter,
             IZetboxContext dataCtx, ViewModel parent,
             ObjectClass type,
             Func<IQueryable> qry)
-            : base(appCtx, config, fileOpener, tmpService, screenshotTool, dataCtx, parent, type, qry)
+            : base(appCtx, config, fileOpener, tmpService, errorReporter, dataCtx, parent, type, qry)
         {
         }
 

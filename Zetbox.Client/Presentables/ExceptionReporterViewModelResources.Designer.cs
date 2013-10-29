@@ -115,6 +115,24 @@ namespace Zetbox.Client.Presentables {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your Client Version is different from the Server version. No further request will be accepted. Please close your client and start again..
+        /// </summary>
+        internal static string InvalidZetboxGeneratedVersionException_Message {
+            get {
+                return ResourceManager.GetString("InvalidZetboxGeneratedVersionException_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid Version.
+        /// </summary>
+        internal static string InvalidZetboxGeneratedVersionException_Title {
+            get {
+                return ResourceManager.GetString("InvalidZetboxGeneratedVersionException_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Problem in Application.
         /// </summary>
         internal static string Name {

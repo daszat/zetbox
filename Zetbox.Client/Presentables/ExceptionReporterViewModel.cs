@@ -23,6 +23,77 @@ namespace Zetbox.Client.Presentables
     using Zetbox.API;
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables.ValueViewModels;
+    using Zetbox.API.Utils;
+    using Autofac;
+    using Zetbox.API.Client;
+
+    public interface IUIExceptionReporter
+    {
+        void BeginInit();
+        void EndInit();
+        void Show(Exception ex);
+    }
+
+    public class UIExceptionReporter : IUIExceptionReporter
+    {
+        private static readonly object _lock = new object();
+
+        private readonly IViewModelFactory _vmf;
+        private readonly ILifetimeScope _scope;
+        private bool _uiIsInitialized = true;
+
+        public UIExceptionReporter(ILifetimeScope scope, IViewModelFactory vmf)
+        {
+            if (scope == null) throw new ArgumentNullException("scope");
+            if (vmf == null) throw new ArgumentNullException("vmf");
+
+            _vmf = vmf;
+            _scope = scope;
+        }
+
+        public void Show(Exception ex)
+        {
+            lock (_lock)
+            {
+                try
+                {
+                    var inner = ex.GetInnerException();
+                    Logging.Client.Error("Unhandled Exception", inner);
+                    if (inner is InvalidZetboxGeneratedVersionException)
+                    {
+                        _vmf.ShowMessage(
+                            ExceptionReporterViewModelResources.InvalidZetboxGeneratedVersionException_Message,
+                            ExceptionReporterViewModelResources.InvalidZetboxGeneratedVersionException_Title
+                        );
+                    }
+                    else if (_uiIsInitialized)
+                    {
+                        var mdl = _vmf.CreateViewModel<ExceptionReporterViewModel.Factory>().Invoke(_scope.Resolve<IZetboxContext>(), null, ex, _scope.Resolve<IScreenshotTool>().GetScreenshot());
+                        _vmf.ShowDialog(mdl);
+                    }
+                    else
+                    {
+                        _vmf.ShowMessage(ex.ToString(), "Unexpected Error");
+                    }
+                }
+                catch (Exception ex2)
+                {
+                    // uh oh!
+                    Logging.Client.Error("Error while handling unhandled Exception", ex2);
+                    _vmf.ShowMessage(ex.ToString(), "Unexpected Error");
+                }
+            }
+        }
+
+        public void BeginInit()
+        {
+            lock (_lock) _uiIsInitialized = false;
+        }
+        public void EndInit()
+        {
+            lock (_lock) _uiIsInitialized = true;
+        }
+    }
 
     [ViewModelDescriptor]
     public class ExceptionReporterViewModel
