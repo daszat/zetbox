@@ -74,6 +74,11 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
+        public override System.Drawing.Image Icon
+        {
+            get { return IconConverter.ToImage(app.Icon); }
+        }
+
         #region Open Application
 
         private static ICommandViewModel _openApplicationCommand = null;
