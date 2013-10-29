@@ -26,6 +26,15 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// 
         /// </summary>
+        [Zetbox.API.DefinitionGuid("0943ff5e-cc21-4f3b-b3ed-a2a13beb0c97")]
+        Zetbox.App.GUI.Icon Icon {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         [Zetbox.API.DefinitionGuid("70bec122-0345-457c-9426-52168e033df1")]
         string Name {
             get;

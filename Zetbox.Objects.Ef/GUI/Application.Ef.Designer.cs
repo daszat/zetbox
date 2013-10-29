@@ -577,6 +577,114 @@ namespace Zetbox.App.GUI
         /// 
         /// </summary>
     /*
+    Relation: FK_App_has_Icon
+    A: ZeroOrMore Application as App
+    B: ZeroOrOne Icon as Icon
+    Preferred Storage: MergeIntoA
+    */
+        // object reference property
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Icon
+        // fkBackingName=_fk_Icon; fkGuidBackingName=_fk_guid_Icon;
+        // referencedInterface=Zetbox.App.GUI.Icon; moduleNamespace=Zetbox.App.GUI;
+        // no inverse navigator handling
+        // PositionStorage=none;
+        // Target exportable
+
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Zetbox.App.GUI.Icon Icon
+        {
+            get { return IconImpl; }
+            set { IconImpl = (Zetbox.App.GUI.IconEfImpl)value; }
+        }
+
+        private int? _fk_Icon;
+
+        private Guid? _fk_guid_Icon = null;
+
+        // internal implementation, EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_App_has_Icon", "Icon")]
+        public Zetbox.App.GUI.IconEfImpl IconImpl
+        {
+            get
+            {
+                Zetbox.App.GUI.IconEfImpl __value;
+                EntityReference<Zetbox.App.GUI.IconEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.GUI.IconEfImpl>(
+                        "Model.FK_App_has_Icon",
+                        "Icon");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load();
+                }
+                __value = r.Value;
+                if (OnIcon_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.Icon>(__value);
+                    OnIcon_Getter(this, e);
+                    __value = (Zetbox.App.GUI.IconEfImpl)e.Result;
+                }
+                return __value;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
+
+                EntityReference<Zetbox.App.GUI.IconEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.GUI.IconEfImpl>(
+                        "Model.FK_App_has_Icon",
+                        "Icon");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load();
+                }
+                Zetbox.App.GUI.IconEfImpl __oldValue = (Zetbox.App.GUI.IconEfImpl)r.Value;
+                Zetbox.App.GUI.IconEfImpl __newValue = (Zetbox.App.GUI.IconEfImpl)value;
+
+                // Changing Event fires before anything is touched
+                NotifyPropertyChanging("Icon", __oldValue, __newValue);
+
+                if (OnIcon_PreSetter != null)
+                {
+                    var e = new PropertyPreSetterEventArgs<Zetbox.App.GUI.Icon>(__oldValue, __newValue);
+                    OnIcon_PreSetter(this, e);
+                    __newValue = (Zetbox.App.GUI.IconEfImpl)e.Result;
+                }
+
+                r.Value = (Zetbox.App.GUI.IconEfImpl)__newValue;
+
+                if (OnIcon_PostSetter != null)
+                {
+                    var e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.Icon>(__oldValue, __newValue);
+                    OnIcon_PostSetter(this, e);
+                }
+
+                // everything is done. fire the Changed event
+                NotifyPropertyChanged("Icon", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
+            }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchIconAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon>(this.Icon);
+        }
+
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Icon
+		public static event PropertyGetterHandler<Zetbox.App.GUI.Application, Zetbox.App.GUI.Icon> OnIcon_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.GUI.Application, Zetbox.App.GUI.Icon> OnIcon_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.GUI.Application, Zetbox.App.GUI.Icon> OnIcon_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.GUI.Application> OnIcon_IsValid;
+
+        /// <summary>
+        /// 
+        /// </summary>
+    /*
     Relation: FK_Application_has_Module
     A: ZeroOrMore Application as Application
     B: One Module as Module
@@ -985,6 +1093,7 @@ namespace Zetbox.App.GUI
             me.Name = other.Name;
             this._fk_ChangedBy = otherImpl._fk_ChangedBy;
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
+            this._fk_Icon = otherImpl._fk_Icon;
             this._fk_Module = otherImpl._fk_Module;
             this._fk_RootScreen = otherImpl._fk_RootScreen;
             this._fk_WorkspaceViewModel = otherImpl._fk_WorkspaceViewModel;
@@ -1008,6 +1117,7 @@ namespace Zetbox.App.GUI
                 case "CreatedOn":
                 case "Description":
                 case "ExportGuid":
+                case "Icon":
                 case "Module":
                 case "Name":
                 case "RootScreen":
@@ -1026,6 +1136,8 @@ namespace Zetbox.App.GUI
                 return TriggerFetchChangedByAsync();
             case "CreatedBy":
                 return TriggerFetchCreatedByAsync();
+            case "Icon":
+                return TriggerFetchIconAsync();
             case "Module":
                 return TriggerFetchModuleAsync();
             case "RootScreen":
@@ -1055,6 +1167,14 @@ namespace Zetbox.App.GUI
                 CreatedByImpl = (Zetbox.App.Base.IdentityEfImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
             else
                 CreatedByImpl = null;
+
+            if (_fk_guid_Icon.HasValue)
+                IconImpl = (Zetbox.App.GUI.IconEfImpl)Context.FindPersistenceObject<Zetbox.App.GUI.Icon>(_fk_guid_Icon.Value);
+            else
+            if (_fk_Icon.HasValue)
+                IconImpl = (Zetbox.App.GUI.IconEfImpl)Context.Find<Zetbox.App.GUI.Icon>(_fk_Icon.Value);
+            else
+                IconImpl = null;
 
             if (_fk_guid_Module.HasValue)
                 ModuleImpl = (Zetbox.App.Base.ModuleEfImpl)Context.FindPersistenceObject<Zetbox.App.Base.Module>(_fk_guid_Module.Value);
@@ -1148,6 +1268,15 @@ namespace Zetbox.App.GUI
                         obj => obj.ExportGuid,
                         (obj, val) => obj.ExportGuid = val,
 						obj => OnExportGuid_IsValid), 
+                    // else
+                    new PropertyDescriptorEfImpl<Application, Zetbox.App.GUI.Icon>(
+                        lazyCtx,
+                        new Guid("0943ff5e-cc21-4f3b-b3ed-a2a13beb0c97"),
+                        "Icon",
+                        null,
+                        obj => obj.Icon,
+                        (obj, val) => obj.Icon = val,
+						obj => OnIcon_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<Application, Zetbox.App.Base.Module>(
                         lazyCtx,
@@ -1250,6 +1379,7 @@ namespace Zetbox.App.GUI
             SetNotInitializedProperty("ChangedBy");
             SetNotInitializedProperty("CreatedBy");
             SetNotInitializedProperty("Description");
+            SetNotInitializedProperty("Icon");
             SetNotInitializedProperty("Module");
             SetNotInitializedProperty("Name");
             SetNotInitializedProperty("RootScreen");
@@ -1266,6 +1396,7 @@ namespace Zetbox.App.GUI
             if (OnNotifyDeleting_Application != null) OnNotifyDeleting_Application(this);
             ChangedBy = null;
             CreatedBy = null;
+            Icon = null;
             Module = null;
             RootScreen = null;
             WorkspaceViewModel = null;
@@ -1338,6 +1469,11 @@ namespace Zetbox.App.GUI
                 binStream.Write(this._ExportGuid);
             }
             {
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.IconEfImpl>("Model.FK_App_has_Icon", "Icon");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
+            }
+            {
                 var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.ModuleEfImpl>("Model.FK_Application_has_Module", "Module");
                 var key = r.EntityKey;
                 binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
@@ -1376,6 +1512,7 @@ namespace Zetbox.App.GUI
             if (this._isExportGuidSet) {
                 this._ExportGuid = binStream.ReadGuid();
             }
+            binStream.Read(out this._fk_Icon);
             binStream.Read(out this._fk_Module);
             this._Name = binStream.ReadString();
             binStream.Read(out this._fk_RootScreen);
@@ -1398,6 +1535,7 @@ namespace Zetbox.App.GUI
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._Description, xml, "Description", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(Icon != null ? Icon.ExportGuid : (Guid?)null, xml, "Icon", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._Name, xml, "Name", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(RootScreen != null ? RootScreen.ExportGuid : (Guid?)null, xml, "RootScreen", "Zetbox.App.GUI");
@@ -1426,6 +1564,9 @@ namespace Zetbox.App.GUI
                 // Import must have default value set
                 this._ExportGuid = XmlStreamer.ReadGuid(xml);
                 this._isExportGuidSet = true;
+                break;
+            case "Zetbox.App.GUI|Icon":
+                this._fk_guid_Icon = XmlStreamer.ReadNullableGuid(xml);
                 break;
             case "Zetbox.App.GUI|Module":
                 this._fk_guid_Module = XmlStreamer.ReadNullableGuid(xml);

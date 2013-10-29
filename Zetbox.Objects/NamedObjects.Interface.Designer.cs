@@ -2358,6 +2358,10 @@ namespace Zetbox {
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("533c27c0-9fac-44e9-a7a1-60c10cf35bdc"); }
                                 }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Icon
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("0943ff5e-cc21-4f3b-b3ed-a2a13beb0c97"); }
+                                }
                                 public static TypedGuid<global::Zetbox.App.Base.Property> Module
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("7bff4a39-c54c-43be-b276-6ab1ff5026db"); }

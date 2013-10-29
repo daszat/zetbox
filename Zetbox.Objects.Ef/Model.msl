@@ -2844,6 +2844,23 @@
       <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
     </AssociationSetMapping>
     <!--
+    Relation: FK_App_has_Icon
+    A: ZeroOrMore Application as App
+    B: ZeroOrOne Icon as Icon
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_App_has_Icon"
+                           TypeName="Model.FK_App_has_Icon"
+                           StoreEntitySet="Application" >
+      <EndProperty Name="Icon">
+        <ScalarProperty Name="ID" ColumnName="fk_Icon"/>
+      </EndProperty>
+      <EndProperty Name="App">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_Icon" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
     Relation: FK_Application_has_Module
     A: ZeroOrMore Application as Application
     B: One Module as Module

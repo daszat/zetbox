@@ -808,6 +808,7 @@ namespace Zetbox.App.GUI
             base.NotifyDeleting();
             if (OnNotifyDeleting_Icon != null) OnNotifyDeleting_Icon(this);
 
+            // should fetch && remember parent for Application_has_Icon_RelationEntry
             // should fetch && remember parent for BoolProperty_has_Icon_RelationEntry
             // should fetch && remember parent for BoolProperty_has_Icon_RelationEntry
             // should fetch && remember parent for BoolProperty_has_Icon_RelationEntry

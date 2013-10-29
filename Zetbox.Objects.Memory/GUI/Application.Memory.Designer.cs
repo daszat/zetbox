@@ -545,6 +545,122 @@ namespace Zetbox.App.GUI
         /// <summary>
         /// 
         /// </summary>
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Icon
+        // fkBackingName=_fk_Icon; fkGuidBackingName=_fk_guid_Icon;
+        // referencedInterface=Zetbox.App.GUI.Icon; moduleNamespace=Zetbox.App.GUI;
+        // no inverse navigator handling
+        // PositionStorage=none;
+        // Target exportable; does call events
+
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
+        public Zetbox.App.GUI.Icon Icon
+        {
+            get { return IconImpl; }
+            set { IconImpl = (Zetbox.App.GUI.IconMemoryImpl)value; }
+        }
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        private int? __fk_IconCache;
+
+        private int? _fk_Icon {
+            get
+            {
+                return __fk_IconCache;
+            }
+            set
+            {
+                __fk_IconCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchIconTask = null;
+            }
+        }
+
+        private Guid? _fk_guid_Icon = null;
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon> _triggerFetchIconTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon> TriggerFetchIconAsync()
+        {
+            if (_triggerFetchIconTask != null) return _triggerFetchIconTask;
+
+            if (_fk_Icon.HasValue)
+                _triggerFetchIconTask = Context.FindAsync<Zetbox.App.GUI.Icon>(_fk_Icon.Value);
+            else
+                _triggerFetchIconTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.Icon>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchIconTask.OnResult(t =>
+            {
+                if (OnIcon_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<Zetbox.App.GUI.Icon>(t.Result);
+                    OnIcon_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchIconTask;
+        }
+
+        // internal implementation
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        internal Zetbox.App.GUI.IconMemoryImpl IconImpl
+        {
+            get
+            {
+                return (Zetbox.App.GUI.IconMemoryImpl)TriggerFetchIconAsync().Result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
+
+                // shortcut noops
+                if ((value == null && _fk_Icon == null) || (value != null && value.ID == _fk_Icon))
+                {
+                    SetInitializedProperty("Icon");
+                    return;
+                }
+
+                // cache old value to remove inverse references later
+                var __oldValue = IconImpl;
+                var __newValue = value;
+
+                // Changing Event fires before anything is touched
+                NotifyPropertyChanging("Icon", __oldValue, __newValue);
+
+                if (OnIcon_PreSetter != null && IsAttached)
+                {
+                    var e = new PropertyPreSetterEventArgs<Zetbox.App.GUI.Icon>(__oldValue, __newValue);
+                    OnIcon_PreSetter(this, e);
+                    __newValue = (Zetbox.App.GUI.IconMemoryImpl)e.Result;
+                }
+
+                // next, set the local reference
+                _fk_Icon = __newValue == null ? (int?)null : __newValue.ID;
+
+                // everything is done. fire the Changed event
+                NotifyPropertyChanged("Icon", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
+
+                if (OnIcon_PostSetter != null && IsAttached)
+                {
+                    var e = new PropertyPostSetterEventArgs<Zetbox.App.GUI.Icon>(__oldValue, __newValue);
+                    OnIcon_PostSetter(this, e);
+                }
+            }
+        }
+        // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Icon
+		public static event PropertyGetterHandler<Zetbox.App.GUI.Application, Zetbox.App.GUI.Icon> OnIcon_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.GUI.Application, Zetbox.App.GUI.Icon> OnIcon_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.GUI.Application, Zetbox.App.GUI.Icon> OnIcon_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.GUI.Application> OnIcon_IsValid;
+
+        /// <summary>
+        /// 
+        /// </summary>
         // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
         // fkBackingName=_fk_Module; fkGuidBackingName=_fk_guid_Module;
         // referencedInterface=Zetbox.App.Base.Module; moduleNamespace=Zetbox.App.GUI;
@@ -967,6 +1083,7 @@ namespace Zetbox.App.GUI
             me.Name = other.Name;
             this._fk_ChangedBy = otherImpl._fk_ChangedBy;
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
+            this._fk_Icon = otherImpl._fk_Icon;
             this._fk_Module = otherImpl._fk_Module;
             this._fk_RootScreen = otherImpl._fk_RootScreen;
             this._fk_WorkspaceViewModel = otherImpl._fk_WorkspaceViewModel;
@@ -996,6 +1113,15 @@ namespace Zetbox.App.GUI
                         NotifyPropertyChanging("CreatedBy", __oldValue, __newValue);
                         _fk_CreatedBy = __newValue;
                         NotifyPropertyChanged("CreatedBy", __oldValue, __newValue);
+                    }
+                    break;
+                case "Icon":
+                    {
+                        var __oldValue = _fk_Icon;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("Icon", __oldValue, __newValue);
+                        _fk_Icon = __newValue;
+                        NotifyPropertyChanged("Icon", __oldValue, __newValue);
                     }
                     break;
                 case "Module":
@@ -1045,6 +1171,7 @@ namespace Zetbox.App.GUI
                 case "CreatedOn":
                 case "Description":
                 case "ExportGuid":
+                case "Icon":
                 case "Module":
                 case "Name":
                 case "RootScreen":
@@ -1063,6 +1190,8 @@ namespace Zetbox.App.GUI
                 return TriggerFetchChangedByAsync();
             case "CreatedBy":
                 return TriggerFetchCreatedByAsync();
+            case "Icon":
+                return TriggerFetchIconAsync();
             case "Module":
                 return TriggerFetchModuleAsync();
             case "RootScreen":
@@ -1092,6 +1221,14 @@ namespace Zetbox.App.GUI
                 CreatedByImpl = (Zetbox.App.Base.IdentityMemoryImpl)Context.Find<Zetbox.App.Base.Identity>(_fk_CreatedBy.Value);
             else
                 CreatedByImpl = null;
+
+            if (_fk_guid_Icon.HasValue)
+                IconImpl = (Zetbox.App.GUI.IconMemoryImpl)Context.FindPersistenceObject<Zetbox.App.GUI.Icon>(_fk_guid_Icon.Value);
+            else
+            if (_fk_Icon.HasValue)
+                IconImpl = (Zetbox.App.GUI.IconMemoryImpl)Context.Find<Zetbox.App.GUI.Icon>(_fk_Icon.Value);
+            else
+                IconImpl = null;
 
             if (_fk_guid_Module.HasValue)
                 ModuleImpl = (Zetbox.App.Base.ModuleMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.Module>(_fk_guid_Module.Value);
@@ -1185,6 +1322,15 @@ namespace Zetbox.App.GUI
                         obj => obj.ExportGuid,
                         (obj, val) => obj.ExportGuid = val,
 						obj => OnExportGuid_IsValid), 
+                    // else
+                    new PropertyDescriptorMemoryImpl<Application, Zetbox.App.GUI.Icon>(
+                        lazyCtx,
+                        new Guid("0943ff5e-cc21-4f3b-b3ed-a2a13beb0c97"),
+                        "Icon",
+                        null,
+                        obj => obj.Icon,
+                        (obj, val) => obj.Icon = val,
+						obj => OnIcon_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Application, Zetbox.App.Base.Module>(
                         lazyCtx,
@@ -1287,6 +1433,7 @@ namespace Zetbox.App.GUI
             SetNotInitializedProperty("ChangedBy");
             SetNotInitializedProperty("CreatedBy");
             SetNotInitializedProperty("Description");
+            SetNotInitializedProperty("Icon");
             SetNotInitializedProperty("Module");
             SetNotInitializedProperty("Name");
             SetNotInitializedProperty("RootScreen");
@@ -1303,6 +1450,7 @@ namespace Zetbox.App.GUI
             if (OnNotifyDeleting_Application != null) OnNotifyDeleting_Application(this);
             ChangedBy = null;
             CreatedBy = null;
+            Icon = null;
             Module = null;
             RootScreen = null;
             WorkspaceViewModel = null;
@@ -1334,6 +1482,7 @@ namespace Zetbox.App.GUI
             if (this._isExportGuidSet) {
                 binStream.Write(this._ExportGuid);
             }
+            binStream.Write(Icon != null ? Icon.ID : (int?)null);
             binStream.Write(Module != null ? Module.ID : (int?)null);
             binStream.Write(this._Name);
             binStream.Write(RootScreen != null ? RootScreen.ID : (int?)null);
@@ -1361,6 +1510,7 @@ namespace Zetbox.App.GUI
             if (this._isExportGuidSet) {
                 this._ExportGuid = binStream.ReadGuid();
             }
+            this._fk_Icon = binStream.ReadNullableInt32();
             this._fk_Module = binStream.ReadNullableInt32();
             this._Name = binStream.ReadString();
             this._fk_RootScreen = binStream.ReadNullableInt32();
@@ -1383,6 +1533,7 @@ namespace Zetbox.App.GUI
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._Description, xml, "Description", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(Icon != null ? Icon.ExportGuid : (Guid?)null, xml, "Icon", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._Name, xml, "Name", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(RootScreen != null ? RootScreen.ExportGuid : (Guid?)null, xml, "RootScreen", "Zetbox.App.GUI");
@@ -1411,6 +1562,9 @@ namespace Zetbox.App.GUI
                 // Import must have default value set
                 this._ExportGuid = XmlStreamer.ReadGuid(xml);
                 this._isExportGuidSet = true;
+                break;
+            case "Zetbox.App.GUI|Icon":
+                this._fk_guid_Icon = XmlStreamer.ReadNullableGuid(xml);
                 break;
             case "Zetbox.App.GUI|Module":
                 this._fk_guid_Module = XmlStreamer.ReadNullableGuid(xml);

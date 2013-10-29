@@ -98,6 +98,21 @@ using Zetbox.DalProvider.Ef;
 
 
 	/*
+    Relation: FK_App_has_Icon
+    A: ZeroOrMore Application as App
+    B: ZeroOrOne Icon as Icon
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_App_has_Icon",
+    "App", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ApplicationEfImpl),
+    "Icon", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.IconEfImpl)
+    )]
+
+
+	/*
     Relation: FK_Application_has_Module
     A: ZeroOrMore Application as Application
     B: One Module as Module

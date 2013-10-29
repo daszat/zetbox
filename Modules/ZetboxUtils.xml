@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-10-15T09:14:57Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-10-29T14:35:31Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -4418,7 +4418,7 @@ public static void GetWorkingHoursCanExecReason(WorkSchedule obj, MethodReturnEv
   </ZetboxBase:Method>
   <ZetboxBase:Method ExportGuid="3f50df16-1d0c-4820-aaae-ce022f73c435">
     <ZetboxBase:CategoryTags>Hidden</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-10-15T13:29:46.209089Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void AppliesTo(WorkScheduleRule obj, MethodReturnEventArgs&lt;bool&gt; e, DateTime date)
 {
@@ -4436,6 +4436,7 @@ public static void AppliesToCanExecReason(WorkScheduleRule obj, MethodReturnEven
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2011-06-15T09:29:25Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>Checks if the Rule applies to the given date</ZetboxBase:Description>
+    <ZetboxBase:InvokeOnServer>false</ZetboxBase:InvokeOnServer>
     <GUI:IsDisplayable>true</GUI:IsDisplayable>
     <ZetboxBase:Label>Applies to Range</ZetboxBase:Label>
     <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>

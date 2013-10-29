@@ -580,6 +580,10 @@
       <End Role="AccessControl" EntitySet="AccessControl" />
       <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
+    <AssociationSet Name="FK_App_has_Icon" Association="Model.Store.FK_App_has_Icon" >
+      <End Role="App" EntitySet="Application" />
+      <End Role="Icon" EntitySet="Icon" />
+    </AssociationSet>
     <AssociationSet Name="FK_Application_has_Module" Association="Model.Store.FK_Application_has_Module" >
       <End Role="Application" EntitySet="Application" />
       <End Role="Module" EntitySet="Module" />
@@ -1420,6 +1424,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Icon" Type="int4" />
     <Property Name="fk_Module" Type="int4" />
     <Property Name="fk_RootScreen" Type="int4" />
     <Property Name="fk_WorkspaceViewModel" Type="int4" />
@@ -3719,6 +3724,20 @@
       </Principal>
       <Dependent Role="AccessControl">
         <PropertyRef Name="fk_CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_App_has_Icon">
+    <End Role="Icon" Type="Model.Store.Icon" Multiplicity="0..1" />
+    <End Role="App" Type="Model.Store.Application" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Icon">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="App">
+        <PropertyRef Name="fk_Icon" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -353,6 +353,10 @@
       <End Role="AccessControl" EntitySet="AccessControlEfImpl" />
       <End Role="CreatedBy" EntitySet="IdentityEfImpl" />
     </AssociationSet>
+    <AssociationSet Name="FK_App_has_Icon" Association="Model.FK_App_has_Icon" >
+      <End Role="App" EntitySet="ApplicationEfImpl" />
+      <End Role="Icon" EntitySet="IconEfImpl" />
+    </AssociationSet>
     <AssociationSet Name="FK_Application_has_Module" Association="Model.FK_Application_has_Module" >
       <End Role="Application" EntitySet="ApplicationEfImpl" />
       <End Role="Module" EntitySet="ModuleEfImpl" />
@@ -1201,6 +1205,10 @@
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
     <Property Name="Description" Type="String" Nullable="true" MaxLength="200"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
+    <NavigationProperty Name="IconImpl"
+                        Relationship="Model.FK_App_has_Icon"
+                        FromRole="App"
+                        ToRole="Icon" />
     <NavigationProperty Name="ModuleImpl"
                         Relationship="Model.FK_Application_has_Module"
                         FromRole="Application"
@@ -4405,6 +4413,14 @@
          Multiplicity="*" />
     <End Role="CreatedBy"
          Type="Model.IdentityEfImpl" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_App_has_Icon" >
+    <End Role="App"
+         Type="Model.ApplicationEfImpl" 
+         Multiplicity="*" />
+    <End Role="Icon"
+         Type="Model.IconEfImpl" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_Application_has_Module" >
