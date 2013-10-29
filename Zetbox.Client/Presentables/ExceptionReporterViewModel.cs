@@ -248,9 +248,20 @@ namespace Zetbox.Client.Presentables
         #endregion
 
         #region MultipleException
-        private class MultipleException : Exception
+
+        [Serializable]
+        public class MultipleException : Exception
         {
             IEnumerable<Exception> _exceptions;
+
+            public MultipleException() { }
+            public MultipleException(string message) : base(message) { }
+            public MultipleException(string message, Exception inner) : base(message, inner) { }
+            protected MultipleException(
+              System.Runtime.Serialization.SerializationInfo info,
+              System.Runtime.Serialization.StreamingContext context)
+                : base(info, context) { }
+
             public MultipleException(IEnumerable<Exception> exceptions)
             {
                 _exceptions = exceptions;
