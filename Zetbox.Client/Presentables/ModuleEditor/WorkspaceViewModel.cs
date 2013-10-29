@@ -219,6 +219,13 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                     SetupViewModel(lstMdl);
                     lst.Add(lstMdl);
 
+                    // Groups
+                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
+                        typeof(Group).GetObjectClass(FrozenContext),
+                        () => DataContext.GetQuery<Group>().Where(i => i.Module == CurrentModule).OrderBy(i => i.Name));
+                    SetupViewModel(lstMdl);
+                    lst.Add(lstMdl);
+
                     // Diagram
                     var diagMdl = ViewModelFactory.CreateViewModel<DiagramViewModel.Factory>().Invoke(DataContext, this, CurrentModule);
                     lst.Add(diagMdl);
