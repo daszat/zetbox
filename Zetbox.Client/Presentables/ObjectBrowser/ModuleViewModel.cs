@@ -67,7 +67,14 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
         {
             _module = mdl;
             _module.PropertyChanged += ModulePropertyChanged;
-            this.IsReadOnly = true;
+        }
+
+        public override bool IsReadOnly
+        {
+            get
+            {
+                return true;
+            }
         }
 
         public override string Name

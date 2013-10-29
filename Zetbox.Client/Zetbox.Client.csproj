@@ -216,6 +216,7 @@
     <Compile Include="Presentables\ISortableViewModel.cs" />
     <Compile Include="Presentables\ModuleEditor\DataTypeViewModels.cs" />
     <Compile Include="Presentables\ModuleEditor\DiagramViewModel.cs" />
+    <Compile Include="Presentables\ModuleEditor\GroupingTreeItemViewModel.cs" />
     <Compile Include="Presentables\ObjectBrowser\ObjectClassViewModel.cs" />
     <Compile Include="Presentables\PropertiesPrewiewViewModel.cs" />
     <Compile Include="Presentables\TestModule\InstanceListTestViewModel.cs" />

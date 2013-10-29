@@ -52,6 +52,11 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             return Name;
         }
 
+        public override System.Drawing.Image Icon
+        {
+            get { return IconConverter.ToImage(NamedObjects.Base.Classes.Zetbox.App.GUI.ControlKind.Find(FrozenContext).DefaultIcon); }
+        }
+
         private ViewModel _selectedItem;
         public ViewModel SelectedItem
         {

@@ -87,6 +87,11 @@ namespace Zetbox.Client.Presentables.ModuleEditor
         {
             return Name;
         }
+
+        public override System.Drawing.Image Icon
+        {
+            get { return IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.pen_png.Find(FrozenContext)); }
+        }
         #endregion
 
         #region DataTypes
