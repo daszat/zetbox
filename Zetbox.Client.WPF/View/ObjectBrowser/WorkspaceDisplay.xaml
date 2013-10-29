@@ -98,7 +98,7 @@
                               Grid.IsSharedSizeScope="True"
                               Margin="5"
                               Content="{Binding SelectedItem.DashboardViewModel}"
-                              ContentTemplateSelector="{StaticResource dashBoardTemplateSelector}" />
+                              ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
         </Grid>
     </DockPanel>
 </ctrls:WindowView>

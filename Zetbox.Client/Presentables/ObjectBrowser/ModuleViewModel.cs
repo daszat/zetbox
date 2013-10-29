@@ -25,6 +25,7 @@ using Zetbox.App.Base;
 using Zetbox.App.Extensions;
 using Zetbox.Client.Presentables.ZetboxBase;
 using Zetbox.API.Common;
+using Zetbox.Client.Presentables.ValueViewModels;
 
 namespace Zetbox.Client.Presentables.ObjectBrowser
 {
@@ -38,7 +39,6 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
             public TreeNodeSimpleObjects(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent)
                 : base(dependencies, dataCtx, parent)
             {
-
             }
 
             public override string Name
@@ -54,7 +54,7 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
             {
                 get
                 {
-                    return this;
+                    return null;
                 }
             }
         }
@@ -67,6 +67,7 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
         {
             _module = mdl;
             _module.PropertyChanged += ModulePropertyChanged;
+            this.IsReadOnly = true;
         }
 
         public override string Name

@@ -39,6 +39,7 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
         {
             _cls = cls;
             cls.PropertyChanged += ModulePropertyChanged;
+            this.IsReadOnly = true;
         }
 
         private ObjectClass _cls;
