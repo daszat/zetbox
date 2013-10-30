@@ -32,8 +32,20 @@ namespace Zetbox.App.Base
     /// Client implementation
     /// </summary>
     [Implementor]
-    public static class DataTypeActions
+    public class DataTypeActions
     {
+        private static IViewModelFactory _vmf;
+        private static IFrozenContext _frozenCtx;
+
+        public DataTypeActions(IViewModelFactory vmf, IFrozenContext frozenCtx)
+        {
+            if (vmf == null) throw new ArgumentNullException("vmf");
+            if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
+
+            _vmf = vmf;
+            _frozenCtx = frozenCtx;
+        }
+
         [Invocation]
         public static void NotifyDeleting(DataType obj)
         {
@@ -52,6 +64,51 @@ namespace Zetbox.App.Base
             {
                 ctx.Delete(c);
             }
+        }
+
+        [Invocation]
+        public static void AddProperty(DataType obj, MethodReturnEventArgs<Zetbox.App.Base.Property> e)
+        {
+            var candidates = new List<ObjectClass>()
+            {
+                // Common first
+                typeof(StringProperty).GetObjectClass(_frozenCtx),
+                typeof(BoolProperty).GetObjectClass(_frozenCtx),
+                typeof(ObjectReferenceProperty).GetObjectClass(_frozenCtx),
+                typeof(DateTimeProperty).GetObjectClass(_frozenCtx),
+                typeof(DecimalProperty).GetObjectClass(_frozenCtx),
+                typeof(EnumerationProperty).GetObjectClass(_frozenCtx),
+                typeof(CompoundObjectProperty).GetObjectClass(_frozenCtx),
+
+                // all other
+                typeof(IntProperty).GetObjectClass(_frozenCtx),
+                typeof(DoubleProperty).GetObjectClass(_frozenCtx),
+                typeof(GuidProperty).GetObjectClass(_frozenCtx),
+                typeof(CalculatedObjectReferenceProperty).GetObjectClass(_frozenCtx),
+            };
+
+            var ctx = obj.Context;
+            var selectClass = _vmf
+                .CreateViewModel<DataObjectSelectionTaskViewModel.Factory>()
+                .Invoke(
+                    ctx,
+                    null,
+                    typeof(ObjectClass).GetObjectClass(_frozenCtx),
+                    () => candidates.AsQueryable(),
+                    (chosenClass) =>
+                    {
+                        if (chosenClass != null)
+                        {
+
+                        }
+                    },
+                    null);
+            selectClass.ListViewModel.ViewMethod = InstanceListViewMethod.List;
+            selectClass.ListViewModel.AllowDelete = false;
+            selectClass.ListViewModel.AllowOpen = false;
+            selectClass.ListViewModel.AllowAddNew = false;
+            selectClass.ListViewModel.UseNaturalSortOrder = true;
+            _vmf.ShowDialog(selectClass);
         }
     }
 }
