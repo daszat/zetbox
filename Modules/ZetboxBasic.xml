@@ -28473,6 +28473,33 @@ public static void IsValidCanExecReason(Constraint obj, MethodReturnEventArgs&lt
     <ZetboxBase:Name>IsValid</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>ac1d5ac9-d909-438f-a4f5-f64ea6904944</ZetboxBase:ObjectClass>
   </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="40eb476a-7bd3-4eca-b4b3-d2304acc3dfe">
+    <ZetboxBase:ChangedOn>2013-10-30T08:28:08.99624Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void AddProperty(DataType obj, MethodReturnEventArgs&lt;Zetbox.App.Base.Property&gt; e)
+{
+}
+
+[Invocation]
+public static void AddPropertyCanExec(DataType obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void AddPropertyCanExecReason(DataType obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-10-30T08:28:08.99624Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Property wizard</ZetboxBase:Description>
+    <GUI:Icon>82552e60-5677-439e-af81-5eafb194f784</GUI:Icon>
+    <ZetboxBase:InvokeOnServer>false</ZetboxBase:InvokeOnServer>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <ZetboxBase:Label>Add property</ZetboxBase:Label>
+    <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
+    <ZetboxBase:Name>AddProperty</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>6f005f31-c09c-45f9-9bcb-44090ebf0d1f</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
   <ZetboxBase:Method ExportGuid="826c3b7c-c266-48cf-a715-5e39d675642c">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
@@ -28522,7 +28549,7 @@ public static void GetDataTypeStringCanExecReason(DataType obj, MethodReturnEven
     <ZetboxBase:ObjectClass>6f005f31-c09c-45f9-9bcb-44090ebf0d1f</ZetboxBase:ObjectClass>
   </ZetboxBase:Method>
   <ZetboxBase:Method ExportGuid="7742e3af-1038-4dd1-91b2-164a2cecb330">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-10-30T08:29:35.578192Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void ImplementInterfaces(DataType obj)
 {
@@ -28540,6 +28567,7 @@ public static void ImplementInterfacesCanExecReason(DataType obj, MethodReturnEv
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>Implements all available interfaces as Properties and Methods</ZetboxBase:Description>
+    <GUI:Icon>965f1565-ab16-480f-9bcc-178b0a0d6fec</GUI:Icon>
     <GUI:IsDisplayable>true</GUI:IsDisplayable>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>ImplementInterfaces</ZetboxBase:Name>
@@ -28943,7 +28971,7 @@ public static void GetNameCanExecReason(Module obj, MethodReturnEventArgs&lt;str
     <ZetboxBase:ObjectClass>8a1ace7c-77f2-4b48-9b0b-bcb68c660d11</ZetboxBase:ObjectClass>
   </ZetboxBase:Method>
   <ZetboxBase:Method ExportGuid="babe68fe-d991-4fb8-8c75-fded8973484c">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-10-30T08:28:47.881464Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void CreateMethod(ObjectClass obj, MethodReturnEventArgs&lt;Zetbox.App.Base.Method&gt; e)
 {
@@ -28961,13 +28989,14 @@ public static void CreateMethodCanExecReason(ObjectClass obj, MethodReturnEventA
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>Creates a new Method for this class</ZetboxBase:Description>
+    <GUI:Icon>ab326b2e-6cbb-421e-ba3a-0b40ae09c002</GUI:Icon>
     <GUI:IsDisplayable>true</GUI:IsDisplayable>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>CreateMethod</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>20888dfc-1fbc-47c8-9f3c-c6a30a5c0048</ZetboxBase:ObjectClass>
   </ZetboxBase:Method>
   <ZetboxBase:Method ExportGuid="25b5656a-2b52-4c51-a635-7f49ca478552">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-10-30T08:29:11.466813Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void CreateRelation(ObjectClass obj, MethodReturnEventArgs&lt;Zetbox.App.Base.Relation&gt; e)
 {
@@ -28985,13 +29014,14 @@ public static void CreateRelationCanExecReason(ObjectClass obj, MethodReturnEven
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>Implements the "Create new Relation" use case</ZetboxBase:Description>
+    <GUI:Icon>965f1565-ab16-480f-9bcc-178b0a0d6fec</GUI:Icon>
     <GUI:IsDisplayable>true</GUI:IsDisplayable>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>CreateRelation</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>20888dfc-1fbc-47c8-9f3c-c6a30a5c0048</ZetboxBase:ObjectClass>
   </ZetboxBase:Method>
   <ZetboxBase:Method ExportGuid="9bf53e7a-3546-4a30-9446-ededdde3dbde">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-10-30T08:30:06.219945Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void GetInheritedMethods(ObjectClass obj, MethodReturnEventArgs&lt;IEnumerable&lt;Zetbox.App.Base.Method&gt;&gt; e)
 {
@@ -29009,7 +29039,7 @@ public static void GetInheritedMethodsCanExecReason(ObjectClass obj, MethodRetur
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description />
-    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <GUI:IsDisplayable>false</GUI:IsDisplayable>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>GetInheritedMethods</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>20888dfc-1fbc-47c8-9f3c-c6a30a5c0048</ZetboxBase:ObjectClass>
@@ -29740,6 +29770,18 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
     <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
     <ZetboxBase:Name>return</ZetboxBase:Name>
   </ZetboxBase:BoolParameter>
+  <ZetboxBase:ObjectReferenceParameter ExportGuid="e6c20910-6376-4318-a039-87746599a82f">
+    <ZetboxBase:ChangedOn>2013-10-30T08:28:08.99624Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-10-30T08:28:08.99624Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Optional return value to open the proeprty if the user wants to</ZetboxBase:Description>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>true</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>40eb476a-7bd3-4eca-b4b3-d2304acc3dfe</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>retVal</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>e5f93f63-9cb8-40a5-8118-d1d9e479370c</ZetboxBase:ObjectClass>
+  </ZetboxBase:ObjectReferenceParameter>
   <ZetboxBase:CLRObjectParameter ExportGuid="2a95f5c5-bae6-48e6-a4b9-15381fffd615">
     <ZetboxBase:ChangedOn>2013-03-22T13:49:09.665737Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>

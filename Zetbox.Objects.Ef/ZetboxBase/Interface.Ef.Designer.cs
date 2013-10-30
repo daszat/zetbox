@@ -41,6 +41,69 @@ namespace Zetbox.App.Base
         }
 
         /// <summary>
+        /// Property wizard
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnAddProperty_Interface")]
+        public override Zetbox.App.Base.Property AddProperty()
+        {
+            var e = new MethodReturnEventArgs<Zetbox.App.Base.Property>();
+            if (OnAddProperty_Interface != null)
+            {
+                OnAddProperty_Interface(this, e);
+            }
+            else
+            {
+                e.Result = base.AddProperty();
+            }
+            return e.Result;
+        }
+        public static event AddProperty_Handler<Interface> OnAddProperty_Interface;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<Interface> OnAddProperty_Interface_CanExec;
+
+        [EventBasedMethod("OnAddProperty_Interface_CanExec")]
+        public override bool AddPropertyCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnAddProperty_Interface_CanExec != null)
+				{
+					OnAddProperty_Interface_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.AddPropertyCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Interface> OnAddProperty_Interface_CanExecReason;
+
+        [EventBasedMethod("OnAddProperty_Interface_CanExecReason")]
+        public override string AddPropertyCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnAddProperty_Interface_CanExecReason != null)
+				{
+					OnAddProperty_Interface_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.AddPropertyCanExecReason;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
+        /// <summary>
         /// Returns the resulting Type of this Datatype Meta Object.
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method

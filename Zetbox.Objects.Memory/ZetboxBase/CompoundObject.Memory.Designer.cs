@@ -270,6 +270,69 @@ namespace Zetbox.App.Base
         public static event PropertyIsValidHandler<Zetbox.App.Base.CompoundObject> OnDefaultViewModelDescriptor_IsValid;
 
         /// <summary>
+        /// Property wizard
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnAddProperty_CompoundObject")]
+        public override Zetbox.App.Base.Property AddProperty()
+        {
+            var e = new MethodReturnEventArgs<Zetbox.App.Base.Property>();
+            if (OnAddProperty_CompoundObject != null)
+            {
+                OnAddProperty_CompoundObject(this, e);
+            }
+            else
+            {
+                e.Result = base.AddProperty();
+            }
+            return e.Result;
+        }
+        public static event AddProperty_Handler<CompoundObject> OnAddProperty_CompoundObject;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<CompoundObject> OnAddProperty_CompoundObject_CanExec;
+
+        [EventBasedMethod("OnAddProperty_CompoundObject_CanExec")]
+        public override bool AddPropertyCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnAddProperty_CompoundObject_CanExec != null)
+				{
+					OnAddProperty_CompoundObject_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.AddPropertyCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<CompoundObject> OnAddProperty_CompoundObject_CanExecReason;
+
+        [EventBasedMethod("OnAddProperty_CompoundObject_CanExecReason")]
+        public override string AddPropertyCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnAddProperty_CompoundObject_CanExecReason != null)
+				{
+					OnAddProperty_CompoundObject_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.AddPropertyCanExecReason;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
+        /// <summary>
         /// Returns the resulting Type of this Datatype Meta Object.
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method

@@ -175,6 +175,10 @@ namespace Zetbox.API.Server.Mocks
             throw new NotImplementedException();
         }
 
+        public Zetbox.App.Base.Property AddProperty()
+        {
+            throw new NotImplementedException();
+        }
         #endregion
 
         #region IDataObject Members

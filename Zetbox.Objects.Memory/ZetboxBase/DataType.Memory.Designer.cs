@@ -1445,6 +1445,70 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
         public static event PropertyIsValidHandler<Zetbox.App.Base.DataType> OnShowNameInLists_IsValid;
 
         /// <summary>
+        /// Property wizard
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnAddProperty_DataType")]
+        public virtual Zetbox.App.Base.Property AddProperty()
+        {
+            var e = new MethodReturnEventArgs<Zetbox.App.Base.Property>();
+            if (OnAddProperty_DataType != null)
+            {
+                OnAddProperty_DataType(this, e);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on DataType.AddProperty");
+            }
+            return e.Result;
+        }
+        public delegate void AddProperty_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.App.Base.Property> ret);
+        public static event AddProperty_Handler<DataType> OnAddProperty_DataType;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<DataType> OnAddProperty_DataType_CanExec;
+
+        [EventBasedMethod("OnAddProperty_DataType_CanExec")]
+        public virtual bool AddPropertyCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnAddProperty_DataType_CanExec != null)
+				{
+					OnAddProperty_DataType_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<DataType> OnAddProperty_DataType_CanExecReason;
+
+        [EventBasedMethod("OnAddProperty_DataType_CanExecReason")]
+        public virtual string AddPropertyCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnAddProperty_DataType_CanExecReason != null)
+				{
+					OnAddProperty_DataType_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
+        /// <summary>
         /// Returns the resulting Type of this Datatype Meta Object.
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method

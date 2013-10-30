@@ -106,6 +106,11 @@ namespace Zetbox.App.Base
         }
 
         /// <summary>
+        /// Property wizard
+        /// </summary>
+        Zetbox.App.Base.Property AddProperty();
+
+        /// <summary>
         /// Returns the resulting Type of this Datatype Meta Object.
         /// </summary>
         System.Type GetDataType();

@@ -835,6 +835,10 @@ namespace Zetbox {
                             }
                             public static class DataType_Methods
                             {
+                                public static TypedGuid<global::Zetbox.App.Base.Method> AddProperty
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Method>("40eb476a-7bd3-4eca-b4b3-d2304acc3dfe"); }
+                                }
                                 public static TypedGuid<global::Zetbox.App.Base.Method> GetDataType
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Method>("826c3b7c-c266-48cf-a715-5e39d675642c"); }

@@ -943,6 +943,69 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
         public static event PropertyIsValidHandler<Zetbox.App.Base.ObjectClass> OnTableName_IsValid;
 
         /// <summary>
+        /// Property wizard
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnAddProperty_ObjectClass")]
+        public override Zetbox.App.Base.Property AddProperty()
+        {
+            var e = new MethodReturnEventArgs<Zetbox.App.Base.Property>();
+            if (OnAddProperty_ObjectClass != null)
+            {
+                OnAddProperty_ObjectClass(this, e);
+            }
+            else
+            {
+                e.Result = base.AddProperty();
+            }
+            return e.Result;
+        }
+        public static event AddProperty_Handler<ObjectClass> OnAddProperty_ObjectClass;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<ObjectClass> OnAddProperty_ObjectClass_CanExec;
+
+        [EventBasedMethod("OnAddProperty_ObjectClass_CanExec")]
+        public override bool AddPropertyCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnAddProperty_ObjectClass_CanExec != null)
+				{
+					OnAddProperty_ObjectClass_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = base.AddPropertyCanExec;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<ObjectClass> OnAddProperty_ObjectClass_CanExecReason;
+
+        [EventBasedMethod("OnAddProperty_ObjectClass_CanExecReason")]
+        public override string AddPropertyCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnAddProperty_ObjectClass_CanExecReason != null)
+				{
+					OnAddProperty_ObjectClass_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = base.AddPropertyCanExecReason;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
+        /// <summary>
         /// Creates a new Method for this class
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
