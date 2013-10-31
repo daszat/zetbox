@@ -78,7 +78,6 @@ namespace Zetbox.App.Base
                 // Common first
                 typeof(StringProperty).GetObjectClass(_frozenCtx),
                 typeof(BoolProperty).GetObjectClass(_frozenCtx),
-                typeof(ObjectReferenceProperty).GetObjectClass(_frozenCtx),
                 typeof(DateTimeProperty).GetObjectClass(_frozenCtx),
                 typeof(DecimalProperty).GetObjectClass(_frozenCtx),
                 typeof(EnumerationProperty).GetObjectClass(_frozenCtx),
@@ -89,6 +88,10 @@ namespace Zetbox.App.Base
                 typeof(DoubleProperty).GetObjectClass(_frozenCtx),
                 typeof(GuidProperty).GetObjectClass(_frozenCtx),
                 typeof(CalculatedObjectReferenceProperty).GetObjectClass(_frozenCtx),
+
+                // No ObjectReferance -> create a relation
+                // can be added to this wizard -> future task
+                // typeof(ObjectReferenceProperty).GetObjectClass(_frozenCtx),
             };
 
             var ctx = obj.Context;
@@ -135,8 +138,37 @@ namespace Zetbox.App.Base
                 .AddString("description", NamedObjects.Base.Classes.Zetbox.App.Base.Property_Properties.Description.Find(_frozenCtx).GetLabel(), allowNullInput: true)
                 .AddString("categorytags", NamedObjects.Base.Classes.Zetbox.App.Base.Property_Properties.CategoryTags.Find(_frozenCtx).GetLabel(), allowNullInput: true, vmdesc: NamedObjects.Gui.ViewModelDescriptors.Zetbox_Client_Presentables_ZetboxBase_TagPropertyEditorViewModel.Find(_frozenCtx))
                 .AddObjectReference("module", NamedObjects.Base.Classes.Zetbox.App.Base.Property_Properties.Module.Find(_frozenCtx).GetLabel(), typeof(Module).GetObjectClass(_frozenCtx), value: targetModule)
-                .AddBool("isNullable", Zetbox.App.Projekte.Client.ZetboxBase.Strings.IsNullable, value: true)
-                .AddBool("show", Zetbox.App.Projekte.Client.ZetboxBase.Strings.ShowPropertyWhenFinished, value: false);
+                .AddBool("isNullable", Zetbox.App.Projekte.Client.ZetboxBase.Strings.IsNullable, value: true);
+
+            if(typeof(StringProperty).IsAssignableFrom(ifType.Type))
+            {
+                var p = NamedObjects.Base.Classes.Zetbox.App.Base.StringRangeConstraint_Properties.MaxLength.Find(_frozenCtx);
+                dlg.AddInt("str_maxlengt", p.GetLabel(), allowNullInput: true, description: p.GetDescription());
+            }
+            if (typeof(DateTimeProperty).IsAssignableFrom(ifType.Type))
+            {
+                var p = NamedObjects.Base.Classes.Zetbox.App.Base.DateTimeProperty_Properties.DateTimeStyle.Find(_frozenCtx);
+                dlg.AddEnumeration("dt_style", p.GetLabel(), _frozenCtx.FindPersistenceObject<Enumeration>(new Guid("1385e46d-3e5b-4d91-bf9a-94a740f08ba1")), description: p.GetDescription(), value: (int)DateTimeStyles.Date);
+            }
+            if (typeof(DecimalProperty).IsAssignableFrom(ifType.Type))
+            {
+                var p = NamedObjects.Base.Classes.Zetbox.App.Base.DecimalProperty_Properties.Precision.Find(_frozenCtx);
+                var s = NamedObjects.Base.Classes.Zetbox.App.Base.DecimalProperty_Properties.Scale.Find(_frozenCtx);
+                dlg.AddInt("decimal_precision", p.GetLabel(), description: p.GetDescription(), value: 10);
+                dlg.AddInt("decimal_scale", s.GetLabel(), description: s.GetDescription(), value: 2);
+            }
+            if (typeof(EnumerationProperty).IsAssignableFrom(ifType.Type))
+            {
+                var p = NamedObjects.Base.Classes.Zetbox.App.Base.EnumerationProperty_Properties.Enumeration.Find(_frozenCtx);
+                dlg.AddObjectReference("enum", p.GetLabel(), typeof(Enumeration).GetObjectClass(_frozenCtx), description: p.GetDescription());
+            }
+            if (typeof(CompoundObjectProperty).IsAssignableFrom(ifType.Type))
+            {
+                var p = NamedObjects.Base.Classes.Zetbox.App.Base.CompoundObjectProperty_Properties.CompoundObjectDefinition.Find(_frozenCtx);
+                dlg.AddObjectReference("cp_def", p.GetLabel(), typeof(CompoundObject).GetObjectClass(_frozenCtx), description: p.GetDescription());
+            }
+
+            dlg.AddBool("show", Zetbox.App.Projekte.Client.ZetboxBase.Strings.ShowPropertyWhenFinished, value: false, description: Zetbox.App.Projekte.Client.ZetboxBase.Strings.ShowPropertyWhenFinishedDescription);
 
             Property newProp = null;
             bool localShow = false;
@@ -148,10 +180,42 @@ namespace Zetbox.App.Base
                 newProp.Description = (string)values["description"];
                 newProp.CategoryTags = (string)values["categorytags"];
                 newProp.Module = (Module)values["module"];
-                var isNullable = (bool)values["isNullable"];
-                if (!isNullable)
+                if (!(bool)values["isNullable"])
                 {
                     newProp.Constraints.Add(ctx.Create<NotNullableConstraint>());
+                }
+
+                if(values.ContainsKey("str_maxlengt"))
+                {
+                    var c = ctx.Create<StringRangeConstraint>();
+                    c.MaxLength = (int?)values["str_maxlengt"];
+                    newProp.Constraints.Add(c);
+                }
+                if (values.ContainsKey("dt_style"))
+                {
+                    ((DateTimeProperty)newProp).DateTimeStyle = (DateTimeStyles)values["dt_style"];
+                }
+                if (values.ContainsKey("decimal_precision"))
+                {
+                    ((DecimalProperty)newProp).Precision = (int)values["decimal_precision"];
+                }
+                if (values.ContainsKey("decimal_scale"))
+                {
+                    ((DecimalProperty)newProp).Scale = (int)values["decimal_scale"];
+                }
+                if (values.ContainsKey("enum"))
+                {
+                    ((EnumerationProperty)newProp).Enumeration = (Enumeration)values["enum"];
+                }
+                if (values.ContainsKey("cp_def"))
+                {
+                    ((CompoundObjectProperty)newProp).CompoundObjectDefinition = (CompoundObject)values["cp_def"];
+                }
+
+                if (newProp is CompoundObjectProperty)
+                {
+                    ((CompoundObjectProperty)newProp).IsList = false;
+                    ((CompoundObjectProperty)newProp).HasPersistentOrder = false;
                 }
 
                 localShow = (bool)values["show"];

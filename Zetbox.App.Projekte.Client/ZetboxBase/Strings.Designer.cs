@@ -86,5 +86,14 @@ namespace Zetbox.App.Projekte.Client.ZetboxBase {
                 return ResourceManager.GetString("ShowPropertyWhenFinished", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open the property to add additional meta information when the wizard is finished.
+        /// </summary>
+        internal static string ShowPropertyWhenFinishedDescription {
+            get {
+                return ResourceManager.GetString("ShowPropertyWhenFinishedDescription", resourceCulture);
+            }
+        }
     }
 }

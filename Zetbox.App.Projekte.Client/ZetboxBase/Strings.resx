@@ -126,4 +126,7 @@
   <data name="ShowPropertyWhenFinished" xml:space="preserve">
     <value>Show prop.</value>
   </data>
+  <data name="ShowPropertyWhenFinishedDescription" xml:space="preserve">
+    <value>Open the property to add additional meta information when the wizard is finished</value>
+  </data>
 </root>
