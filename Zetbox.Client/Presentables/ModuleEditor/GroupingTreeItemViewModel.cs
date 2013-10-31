@@ -32,5 +32,13 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                 return _children;
             }
         }
+
+        public ViewModel DashboardViewModel
+        {
+            get
+            {
+                return null;
+            }
+        }
     }
 }

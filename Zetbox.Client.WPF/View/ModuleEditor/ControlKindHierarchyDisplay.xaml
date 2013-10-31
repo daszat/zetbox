@@ -41,6 +41,12 @@
                   ItemsSource="{Binding Path=RootControlKinds}"
                   MouseDoubleClick="NavTree_MouseDoubleClick"
                   SelectedItemChanged="NavTree_SelectedItemChanged">
+            <TreeView.ItemContainerStyle>
+                <Style TargetType="TreeViewItem">
+                    <Setter Property="TreeViewItem.IsExpanded"
+                            Value="True" />
+                </Style>
+            </TreeView.ItemContainerStyle>
             <TreeView.Resources>
                 <HierarchicalDataTemplate DataType="{x:Type viewModels:ControlKindViewModel}"
                                           ItemsSource="{Binding ChildControlKinds}">

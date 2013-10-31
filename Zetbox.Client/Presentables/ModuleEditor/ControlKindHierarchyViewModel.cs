@@ -57,6 +57,14 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             get { return IconConverter.ToImage(NamedObjects.Base.Classes.Zetbox.App.GUI.ControlKind.Find(FrozenContext).DefaultIcon); }
         }
 
+        public ViewModel DashboardViewModel
+        {
+            get
+            {
+                return this;
+            }
+        }
+
         private ViewModel _selectedItem;
         public ViewModel SelectedItem
         {

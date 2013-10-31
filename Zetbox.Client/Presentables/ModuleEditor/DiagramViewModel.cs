@@ -42,6 +42,14 @@ namespace Zetbox.Client.Presentables.ModuleEditor
         protected readonly Func<IZetboxContext> ctxFactory;
         public Module Module { get; private set; }
 
+        public ViewModel DashboardViewModel
+        {
+            get
+            {
+                return this;
+            }
+        }
+
         #region GraphSettings
         public enum GraphTypeEnum
         {
