@@ -31726,4 +31726,8 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
     <GUI:ViewModelDescriptor>4ff2b6ec-a47f-431b-aa6d-d10b39f8d628</GUI:ViewModelDescriptor>
     <GUI:Property>4e1fb30b-e528-4968-95b0-f3a38eafe643</GUI:Property>
   </GUI:SinglePropertyFilterConfiguration>
+  <GUI:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="6dfb7de5-b13e-4833-b77d-ed74f8cdc0c9">
+    <GUI:A>e7d91162-0aa8-4fe3-9e29-d0519781ceb7</GUI:A>
+    <GUI:B>40eb476a-7bd3-4eca-b4b3-d2304acc3dfe</GUI:B>
+  </GUI:ObjectReferenceProperty_shows_Method_RelationEntry>
 </ZetboxPackaging>
