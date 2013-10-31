@@ -62,8 +62,8 @@ this.WriteObjects("    <WarningLevel>4</WarningLevel>\r\n");
 this.WriteObjects("    <NoWarn>1591,0168,0414,0219</NoWarn>\r\n");
 this.WriteObjects("    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>\r\n");
 this.WriteObjects("    <!-- hardcode output path for external builds; the generator replaces this value from configuration -->\r\n");
-this.WriteObjects("    <OutputPath Condition=\" '$(OutputPathOverride)' == '' \">..\\bin\\Debug\\",  GetRelativeOutputPath() , "\\Fallback\\</OutputPath>\r\n");
-this.WriteObjects("    <OutputPath Condition=\" '$(OutputPathOverride)' != '' \">$(OutputPathOverride)\\",  GetRelativeOutputPath() , "\\Generated\\</OutputPath>\r\n");
+this.WriteObjects("    <OutputPath Condition=\" '$(OutputPathOverride)' == '' \">..\\bin\\Debug\\",  GetRelativeOutputPath().Replace('/', '\\') , "\\Fallback\\</OutputPath>\r\n");
+this.WriteObjects("    <OutputPath Condition=\" '$(OutputPathOverride)' != '' \">$(OutputPathOverride)\\",  GetRelativeOutputPath().Replace('/', '\\') , "\\Generated\\</OutputPath>\r\n");
 this.WriteObjects("    <ZetboxAPIPath Condition=\" '$(ZetboxAPIPathOverride)' == '' \">..\\bin\\Debug\\</ZetboxAPIPath>\r\n");
 this.WriteObjects("    <ZetboxAPIPath Condition=\" '$(ZetboxAPIPathOverride)' != '' \">$(ZetboxAPIPathOverride)</ZetboxAPIPath>\r\n");
 this.WriteObjects("  </PropertyGroup>\r\n");
@@ -76,8 +76,8 @@ this.WriteObjects("    <WarningLevel>4</WarningLevel>\r\n");
 this.WriteObjects("    <NoWarn>1591,0168,0414,0219</NoWarn>\r\n");
 this.WriteObjects("    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>\r\n");
 this.WriteObjects("    <!-- hardcode output path for external builds; the generator replaces this value from configuration -->\r\n");
-this.WriteObjects("    <OutputPath Condition=\" '$(OutputPathOverride)' == '' \">..\\bin\\Release\\",  GetRelativeOutputPath() , "\\Fallback\\</OutputPath>\r\n");
-this.WriteObjects("    <OutputPath Condition=\" '$(OutputPathOverride)' != '' \">$(OutputPathOverride)\\",  GetRelativeOutputPath() , "\\Generated\\</OutputPath>\r\n");
+this.WriteObjects("    <OutputPath Condition=\" '$(OutputPathOverride)' == '' \">..\\bin\\Release\\",  GetRelativeOutputPath().Replace('/', '\\') , "\\Fallback\\</OutputPath>\r\n");
+this.WriteObjects("    <OutputPath Condition=\" '$(OutputPathOverride)' != '' \">$(OutputPathOverride)\\",  GetRelativeOutputPath().Replace('/', '\\') , "\\Generated\\</OutputPath>\r\n");
 this.WriteObjects("    <ZetboxAPIPath Condition=\" '$(ZetboxAPIPathOverride)' == '' \">..\\bin\\Release\\</ZetboxAPIPath>\r\n");
 this.WriteObjects("    <ZetboxAPIPath Condition=\" '$(ZetboxAPIPathOverride)' != '' \">$(ZetboxAPIPathOverride)</ZetboxAPIPath>\r\n");
 this.WriteObjects("  </PropertyGroup>\r\n");
@@ -92,8 +92,8 @@ this.WriteObjects("    <!-- mono is quite more pedantic; ignore superfluous loca
 this.WriteObjects("    <NoWarn>1591,0168,0414,0219</NoWarn>\r\n");
 this.WriteObjects("    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>\r\n");
 this.WriteObjects("    <!-- hardcode output path for external builds; the generator replaces this value from configuration -->\r\n");
-this.WriteObjects("    <OutputPath Condition=\" '$(OutputPathOverride)' == '' \">..\\bin\\Debug\\",  GetRelativeOutputPath() , "\\Fallback\\</OutputPath>\r\n");
-this.WriteObjects("    <OutputPath Condition=\" '$(OutputPathOverride)' != '' \">$(OutputPathOverride)\\",  GetRelativeOutputPath() , "\\Generated\\</OutputPath>\r\n");
+this.WriteObjects("    <OutputPath Condition=\" '$(OutputPathOverride)' == '' \">..\\bin\\Debug\\",  GetRelativeOutputPath().Replace('/', '\\') , "\\Fallback\\</OutputPath>\r\n");
+this.WriteObjects("    <OutputPath Condition=\" '$(OutputPathOverride)' != '' \">$(OutputPathOverride)\\",  GetRelativeOutputPath().Replace('/', '\\') , "\\Generated\\</OutputPath>\r\n");
 this.WriteObjects("    <ZetboxAPIPath Condition=\" '$(ZetboxAPIPathOverride)' == '' \">..\\bin\\Debug\\</ZetboxAPIPath>\r\n");
 this.WriteObjects("    <ZetboxAPIPath Condition=\" '$(ZetboxAPIPathOverride)' != '' \">$(ZetboxAPIPathOverride)</ZetboxAPIPath>\r\n");
 this.WriteObjects("  </PropertyGroup>\r\n");
@@ -136,7 +136,7 @@ this.WriteObjects("  <ItemGroup>\r\n");
 #line 123 "P:\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
 foreach (var name in fileNames) { 
 #line 124 "P:\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
-this.WriteObjects("    <Compile Include=\"",  name , "\" />\r\n");
+this.WriteObjects("    <Compile Include=\"",  name.Replace('/', '\\') , "\" />\r\n");
 #line 125 "P:\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
 } 
 #line 126 "P:\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
