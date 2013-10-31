@@ -29,13 +29,13 @@ using Zetbox.Client.Presentables.ValueViewModels;
 namespace Zetbox.Client.Presentables
 {
     [ViewModelDescriptor]
-    public class ValueInputTaskViewModel
+    internal class ValueInputTaskViewModel
         : WindowViewModel, Zetbox.Client.Presentables.IValueInputTaskViewModel
     {
-        public new delegate ValueInputTaskViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string name, IList<BaseValueViewModel> valueModels, Action<object[]> callback);
+        public new delegate ValueInputTaskViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string name, IEnumerable<Tuple<object, BaseValueViewModel>> valueModels, Action<Dictionary<object, object>> callback);
 
         public ValueInputTaskViewModel(
-            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, string name, IList<BaseValueViewModel> valueModels, Action<object[]> callback)
+            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, string name, IEnumerable<Tuple<object, BaseValueViewModel>> valueModels, Action<Dictionary<object, object>> callback)
             : base(appCtx, dataCtx, parent)
         {
             if (callback == null) throw new ArgumentNullException("callback");
@@ -45,27 +45,27 @@ namespace Zetbox.Client.Presentables
             _name = name;
         }
 
-        private Action<object[]> _callback;
+        private Action<Dictionary<object, object>> _callback;
 
         #region Parameter
 
-        private IList<BaseValueViewModel> _valueModels;
+        private IEnumerable<Tuple<object, BaseValueViewModel>> _valueModels;
         public IEnumerable<BaseValueViewModel> ValueViewModels
         {
             get
             {
-                return _valueModels;
+                return _valueModels.Select(t => t.Item2);
             }
         }
 
-        private ILookup<string, BaseValueViewModel> _valueModelsByName;
-        public ILookup<string, BaseValueViewModel> ValueViewModelsByName
+        private ILookup<object, BaseValueViewModel> _valueModelsByName;
+        public ILookup<object, BaseValueViewModel> ValueViewModelsByName
         {
             get
             {
                 if (_valueModelsByName == null)
                 {
-                    _valueModelsByName = _valueModels.ToLookup(k => k.Name);
+                    _valueModelsByName = _valueModels.ToLookup(k => k.Item1, v => v.Item2);
                 }
                 return _valueModelsByName;
             }
@@ -100,7 +100,7 @@ namespace Zetbox.Client.Presentables
 
         public void Invoke()
         {
-            var parameter = _valueModels.Select(i => i.ValueModel.GetUntypedValue()).ToArray();
+            var parameter = _valueModels.ToDictionary(k => k.Item1, i => i.Item2.ValueModel.GetUntypedValue());
             _callback(parameter);
             Show = false;
         }

@@ -18,7 +18,7 @@ namespace Zetbox.Client.GUI
 
         public DialogCreator(IZetboxContext ctx, IViewModelFactory mdlFactory, IFrozenContext frozenCtx)
         {
-            ValueModels = new List<BaseValueViewModel>();
+            ValueModels = new List<Tuple<object, BaseValueViewModel>>();
             DataContext = ctx;
             ViewModelFactory = mdlFactory;
             FrozenCtx = frozenCtx;
@@ -29,16 +29,16 @@ namespace Zetbox.Client.GUI
         public IFrozenContext FrozenCtx { get; private set; }
 
         public string Title { get; set; }
-        public List<BaseValueViewModel> ValueModels { get; private set; }
+        public List<Tuple<object, BaseValueViewModel>> ValueModels { get; private set; }
 
-        private static readonly Action<object[]> _doNothing = p => { };
+        private static readonly Action<Dictionary<object, object>> _doNothing = p => { };
 
         public void Show()
         {
             Show(_doNothing);
         }
 
-        public void Show(Action<object[]> ok, ViewModel ownerMdl = null)
+        public void Show(Action<Dictionary<object, object>> ok, ViewModel ownerMdl = null)
         {
             var dlg = ViewModelFactory.CreateViewModel<ValueInputTaskViewModel.Factory>().Invoke(DataContext, null, Title, ValueModels, ok);
             ViewModelFactory.ShowDialog(dlg, ownerMdl ?? ViewModelFactory.GetWorkspace(DataContext));
@@ -47,9 +47,10 @@ namespace Zetbox.Client.GUI
 
     public static class DialogCreatorExtensions
     {
-        public static DialogCreator AddString(this DialogCreator c, string label, string value = null, bool allowNullInput = false, bool isReadOnly = false, ControlKind requestedKind = null)
+        public static DialogCreator AddString(this DialogCreator c, object key, string label, string value = null, bool allowNullInput = false, bool isReadOnly = false, ControlKind requestedKind = null)
         {
             if (c == null) throw new ArgumentNullException("c");
+            if (key == null) throw new ArgumentNullException("key");
 
             var mdl = new ClassValueModel<string>(label, "", allowNullInput, isReadOnly);
 
@@ -61,30 +62,31 @@ namespace Zetbox.Client.GUI
             if (requestedKind != null)
                 vmdl.RequestedKind = requestedKind;
 
-            c.ValueModels.Add(vmdl);
+            c.ValueModels.Add(new Tuple<object,BaseValueViewModel>(key, vmdl));
             return c;
         }
-        public static DialogCreator AddMultiLineString(this DialogCreator c, string label, string value = null, bool allowNullInput = false, bool isReadOnly = false)
+        public static DialogCreator AddMultiLineString(this DialogCreator c, object key, string label, string value = null, bool allowNullInput = false, bool isReadOnly = false)
         {
             if (c == null) throw new ArgumentNullException("c");
-            return AddString(c, label, value, allowNullInput, isReadOnly, Zetbox.NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_MultiLineTextboxKind.Find(c.FrozenCtx));
+            return AddString(c, key, label, value, allowNullInput, isReadOnly, Zetbox.NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_MultiLineTextboxKind.Find(c.FrozenCtx));
         }
 
-        public static DialogCreator AddPassword(this DialogCreator c, string label)
+        public static DialogCreator AddPassword(this DialogCreator c, object key, string label)
         {
             if (c == null) throw new ArgumentNullException("c");
-            return AddString(c, label, requestedKind: Zetbox.NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_PasswordKind.Find(c.FrozenCtx));
+            return AddString(c, key, label, requestedKind: Zetbox.NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_PasswordKind.Find(c.FrozenCtx));
         }
 
-        public static DialogCreator AddTextBlock(this DialogCreator c, string label, string value)
+        public static DialogCreator AddTextBlock(this DialogCreator c, object key, string label, string value)
         {
             if (c == null) throw new ArgumentNullException("c");
             return AddString(c, label, value, allowNullInput: true, requestedKind: Zetbox.NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_TextKind.Find(c.FrozenCtx));
         }
 
-        public static DialogCreator AddDateTime(this DialogCreator c, string label, DateTime? value = null, App.Base.DateTimeStyles style = App.Base.DateTimeStyles.Date, bool allowNullInput = false, bool isReadOnly = false, ControlKind requestedKind = null)
+        public static DialogCreator AddDateTime(this DialogCreator c, object key, string label, DateTime? value = null, App.Base.DateTimeStyles style = App.Base.DateTimeStyles.Date, bool allowNullInput = false, bool isReadOnly = false, ControlKind requestedKind = null)
         {
             if (c == null) throw new ArgumentNullException("c");
+            if (key == null) throw new ArgumentNullException("key");
 
             var mdl = new DateTimeValueModel(label, "", allowNullInput, isReadOnly, style);
             mdl.Value = value;
@@ -94,7 +96,24 @@ namespace Zetbox.Client.GUI
             if (requestedKind != null)
                 vmdl.RequestedKind = requestedKind;
 
-            c.ValueModels.Add(vmdl);
+            c.ValueModels.Add(new Tuple<object, BaseValueViewModel>(key, vmdl));
+            return c;
+        }
+
+        public static DialogCreator AddBool(this DialogCreator c, object key, string label, bool? value = null, bool allowNullInput = false, bool isReadOnly = false, ControlKind requestedKind = null)
+        {
+            if (c == null) throw new ArgumentNullException("c");
+            if (key == null) throw new ArgumentNullException("key");
+
+            var mdl = new BoolValueModel(label, "", allowNullInput, isReadOnly);
+            mdl.Value = value;
+
+            var vmdl = c.ViewModelFactory.CreateViewModel<NullableBoolPropertyViewModel.Factory>().Invoke(c.DataContext, null, mdl);
+
+            if (requestedKind != null)
+                vmdl.RequestedKind = requestedKind;
+
+            c.ValueModels.Add(new Tuple<object, BaseValueViewModel>(key, vmdl));
             return c;
         }
     }

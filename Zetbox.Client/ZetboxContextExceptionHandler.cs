@@ -51,8 +51,8 @@ namespace Zetbox.Client
             {
                 var error = (ConcurrencyException)inner;
                 vmf.CreateDialog(ctx, ZetboxContextExceptionHandlerResources.ConcurrencyException_Caption)
-                    .AddTextBlock(string.Empty, ZetboxContextExceptionHandlerResources.ConcurrencyException_Message)
-                    .AddMultiLineString(ZetboxContextExceptionHandlerResources.DetailsLabel, string.Join("\n", error.Details.Select(e => string.Format(ZetboxContextExceptionHandlerResources.ConcurrencyException_DetailFormatString, e.ObjectAsString, e.ChangedBy, e.ChangedOn))), true, true)
+                    .AddTextBlock("empty", string.Empty, ZetboxContextExceptionHandlerResources.ConcurrencyException_Message)
+                    .AddMultiLineString("details", ZetboxContextExceptionHandlerResources.DetailsLabel, string.Join("\n", error.Details.Select(e => string.Format(ZetboxContextExceptionHandlerResources.ConcurrencyException_DetailFormatString, e.ObjectAsString, e.ChangedBy, e.ChangedOn))), true, true)
                     .Show();
                 return true;
             }
@@ -73,8 +73,8 @@ namespace Zetbox.Client
                         e.DatabaseError);
                 }));
                 vmf.CreateDialog(ctx, ZetboxContextExceptionHandlerResources.FKViolationException_Caption)
-                    .AddTextBlock(string.Empty, ZetboxContextExceptionHandlerResources.FKViolationException_Message)
-                    .AddMultiLineString(ZetboxContextExceptionHandlerResources.DetailsLabel, details, true, true)
+                    .AddTextBlock("error", string.Empty, ZetboxContextExceptionHandlerResources.FKViolationException_Message)
+                    .AddMultiLineString("details", ZetboxContextExceptionHandlerResources.DetailsLabel, details, true, true)
                     .Show();
                 return true;
             }
@@ -93,8 +93,8 @@ namespace Zetbox.Client
                         e.DatabaseError);
                 }));
                 vmf.CreateDialog(ctx, ZetboxContextExceptionHandlerResources.UniqueConstraintViolationException_Caption)
-                    .AddTextBlock(string.Empty, ZetboxContextExceptionHandlerResources.UniqueConstraintViolationException_Message)
-                    .AddMultiLineString(ZetboxContextExceptionHandlerResources.DetailsLabel, details, true, true)
+                    .AddTextBlock("error", string.Empty, ZetboxContextExceptionHandlerResources.UniqueConstraintViolationException_Message)
+                    .AddMultiLineString("details", ZetboxContextExceptionHandlerResources.DetailsLabel, details, true, true)
                     .Show();
                 return true;
             }

@@ -87,15 +87,15 @@ namespace Zetbox.Client.Presentables
             }
         }
 
-        private ILookup<string, BaseValueViewModel> _parameterModelsByName;
-        public ILookup<string, BaseValueViewModel> ValueViewModelsByName
+        private ILookup<object, BaseValueViewModel> _parameterModelsByName;
+        public ILookup<object, BaseValueViewModel> ValueViewModelsByName
         {
             get
             {
                 if (_parameterModelsByName == null)
                 {
                     FetchParameterModels();
-                    _parameterModelsByName = _parameterModels.ToLookup(k => k.Key.Name, v => v.Value);
+                    _parameterModelsByName = _parameterModels.ToLookup(k => (object)k.Key.Name, v => v.Value);
                 }
                 return _parameterModelsByName;
             }
