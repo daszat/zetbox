@@ -47,7 +47,7 @@ namespace Zetbox.Client.GUI
 
     public static class DialogCreatorExtensions
     {
-        public static DialogCreator AddString(this DialogCreator c, object key, string label, string value = null, bool allowNullInput = false, bool isReadOnly = false, ControlKind requestedKind = null)
+        public static DialogCreator AddString(this DialogCreator c, object key, string label, string value = null, bool allowNullInput = false, bool isReadOnly = false, ControlKind requestedKind = null, ViewModelDescriptor vmdesc = null)
         {
             if (c == null) throw new ArgumentNullException("c");
             if (key == null) throw new ArgumentNullException("key");
@@ -57,7 +57,11 @@ namespace Zetbox.Client.GUI
             if (value != null)
                 mdl.Value = value;
 
-            var vmdl = c.ViewModelFactory.CreateViewModel<StringValueViewModel.Factory>().Invoke(c.DataContext, null, mdl);
+            BaseValueViewModel vmdl;
+            if(vmdesc != null)
+                vmdl = c.ViewModelFactory.CreateViewModel<StringValueViewModel.Factory>(vmdesc).Invoke(c.DataContext, null, mdl);
+            else
+                vmdl = c.ViewModelFactory.CreateViewModel<StringValueViewModel.Factory>().Invoke(c.DataContext, null, mdl);
 
             if (requestedKind != null)
                 vmdl.RequestedKind = requestedKind;
@@ -65,10 +69,10 @@ namespace Zetbox.Client.GUI
             c.ValueModels.Add(new Tuple<object,BaseValueViewModel>(key, vmdl));
             return c;
         }
-        public static DialogCreator AddMultiLineString(this DialogCreator c, object key, string label, string value = null, bool allowNullInput = false, bool isReadOnly = false)
+        public static DialogCreator AddMultiLineString(this DialogCreator c, object key, string label, string value = null, bool allowNullInput = false, bool isReadOnly = false, ViewModelDescriptor vmdesc = null)
         {
             if (c == null) throw new ArgumentNullException("c");
-            return AddString(c, key, label, value, allowNullInput, isReadOnly, Zetbox.NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_MultiLineTextboxKind.Find(c.FrozenCtx));
+            return AddString(c, key, label, value, allowNullInput, isReadOnly, Zetbox.NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_MultiLineTextboxKind.Find(c.FrozenCtx), vmdesc);
         }
 
         public static DialogCreator AddPassword(this DialogCreator c, object key, string label)
@@ -83,7 +87,7 @@ namespace Zetbox.Client.GUI
             return AddString(c, label, value, allowNullInput: true, requestedKind: Zetbox.NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_TextKind.Find(c.FrozenCtx));
         }
 
-        public static DialogCreator AddDateTime(this DialogCreator c, object key, string label, DateTime? value = null, App.Base.DateTimeStyles style = App.Base.DateTimeStyles.Date, bool allowNullInput = false, bool isReadOnly = false, ControlKind requestedKind = null)
+        public static DialogCreator AddDateTime(this DialogCreator c, object key, string label, DateTime? value = null, App.Base.DateTimeStyles style = App.Base.DateTimeStyles.Date, bool allowNullInput = false, bool isReadOnly = false, ControlKind requestedKind = null, ViewModelDescriptor vmdesc = null)
         {
             if (c == null) throw new ArgumentNullException("c");
             if (key == null) throw new ArgumentNullException("key");
@@ -91,7 +95,11 @@ namespace Zetbox.Client.GUI
             var mdl = new DateTimeValueModel(label, "", allowNullInput, isReadOnly, style);
             mdl.Value = value;
 
-            var vmdl = c.ViewModelFactory.CreateViewModel<NullableDateTimePropertyViewModel.Factory>().Invoke(c.DataContext, null, mdl);
+            BaseValueViewModel vmdl;
+            if (vmdesc != null)
+                vmdl = c.ViewModelFactory.CreateViewModel<NullableDateTimePropertyViewModel.Factory>(vmdesc).Invoke(c.DataContext, null, mdl);
+            else
+                vmdl = c.ViewModelFactory.CreateViewModel<NullableDateTimePropertyViewModel.Factory>().Invoke(c.DataContext, null, mdl);
 
             if (requestedKind != null)
                 vmdl.RequestedKind = requestedKind;
@@ -100,7 +108,7 @@ namespace Zetbox.Client.GUI
             return c;
         }
 
-        public static DialogCreator AddBool(this DialogCreator c, object key, string label, bool? value = null, bool allowNullInput = false, bool isReadOnly = false, ControlKind requestedKind = null)
+        public static DialogCreator AddBool(this DialogCreator c, object key, string label, bool? value = null, bool allowNullInput = false, bool isReadOnly = false, ControlKind requestedKind = null, ViewModelDescriptor vmdesc = null)
         {
             if (c == null) throw new ArgumentNullException("c");
             if (key == null) throw new ArgumentNullException("key");
@@ -108,7 +116,32 @@ namespace Zetbox.Client.GUI
             var mdl = new BoolValueModel(label, "", allowNullInput, isReadOnly);
             mdl.Value = value;
 
-            var vmdl = c.ViewModelFactory.CreateViewModel<NullableBoolPropertyViewModel.Factory>().Invoke(c.DataContext, null, mdl);
+            BaseValueViewModel vmdl;
+            if (vmdesc != null)
+                vmdl = c.ViewModelFactory.CreateViewModel<NullableBoolPropertyViewModel.Factory>(vmdesc).Invoke(c.DataContext, null, mdl);
+            else
+                vmdl = c.ViewModelFactory.CreateViewModel<NullableBoolPropertyViewModel.Factory>().Invoke(c.DataContext, null, mdl);
+
+            if (requestedKind != null)
+                vmdl.RequestedKind = requestedKind;
+
+            c.ValueModels.Add(new Tuple<object, BaseValueViewModel>(key, vmdl));
+            return c;
+        }
+
+        public static DialogCreator AddObjectReference(this DialogCreator c, object key, string label, Zetbox.App.Base.ObjectClass cls, IDataObject value = null, bool allowNullInput = false, bool isReadOnly = false, ControlKind requestedKind = null, ViewModelDescriptor vmdesc = null)
+        {
+            if (c == null) throw new ArgumentNullException("c");
+            if (key == null) throw new ArgumentNullException("key");
+
+            var mdl = new ObjectReferenceValueModel(label, "", allowNullInput, isReadOnly, cls);
+            mdl.Value = value;
+
+            BaseValueViewModel vmdl;
+            if (vmdesc != null)
+                vmdl = c.ViewModelFactory.CreateViewModel<ObjectReferenceViewModel.Factory>(vmdesc).Invoke(c.DataContext, null, mdl);
+            else
+                vmdl = c.ViewModelFactory.CreateViewModel<ObjectReferenceViewModel.Factory>().Invoke(c.DataContext, null, mdl);
 
             if (requestedKind != null)
                 vmdl.RequestedKind = requestedKind;
