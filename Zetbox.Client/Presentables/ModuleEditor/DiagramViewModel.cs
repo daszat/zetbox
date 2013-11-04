@@ -14,6 +14,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
     using Zetbox.Client.Presentables.ValueViewModels;
     using Zetbox.Client.Presentables.ZetboxBase;
     using ObjectEditorWorkspace = Zetbox.Client.Presentables.ObjectEditor.WorkspaceViewModel;
+    using System.Collections.ObjectModel;
 
     [CLSCompliant(false)]
     public class DataTypeGraph : BidirectionalGraph<DataTypeGraphModel, IEdge<DataTypeGraphModel>>
@@ -103,18 +104,18 @@ namespace Zetbox.Client.Presentables.ModuleEditor
         #endregion
 
         #region Modules
-        private IEnumerable<ModuleGraphViewModel> _moduleViewModels;
-        public IEnumerable<ModuleGraphViewModel> ModuleViewModels
+        private ObservableCollection<ModuleGraphViewModel> _moduleViewModels;
+        public ObservableCollection<ModuleGraphViewModel> ModuleViewModels
         {
             get
             {
                 if (_moduleViewModels == null)
                 {
-                    _moduleViewModels = DataContext.GetQuery<Module>()
+                    _moduleViewModels = new ObservableCollection<ModuleGraphViewModel>(DataContext.GetQuery<Module>()
                                     .OrderBy(m => m.Name)
                                     .ToList()
                                     .Select(m => ViewModelFactory.CreateViewModel<ModuleGraphViewModel.Factory>().Invoke(DataContext, this, m))
-                                    .ToList();
+                                    );
                 }
                 return _moduleViewModels;
             }
@@ -134,7 +135,14 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                         "Filter",
                         "",
                         true, false);
-                    _filterMdl.PropertyChanged += (s, e) => { if (e.PropertyName == "Value") { OnPropertyChanged("DataTypeViewModels"); OnPropertyChanged("FilterValue"); } };
+                    _filterMdl.PropertyChanged += (s, e) =>
+                    {
+                        if (e.PropertyName == "Value")
+                        {
+                            OnPropertyChanged("DataTypeViewModels"); 
+                            OnPropertyChanged("FilterValue");
+                        }
+                    };
                     _filter = ViewModelFactory.CreateViewModel<StringValueViewModel.Factory>().Invoke(DataContext, this, _filterMdl);
                 }
                 return _filter;
@@ -146,23 +154,6 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             get
             {
                 return _filterMdl != null ? _filterMdl.Value : null;
-            }
-        }
-
-        private List<DataType> _dataTypes = null;
-        private IList<DataType> DataTypes
-        {
-            get
-            {
-                if (_dataTypes == null)
-                {
-                    // Get all DataTypes
-                    _dataTypes = DataContext.GetQuery<DataType>().ToList()
-                        .OrderBy(i => i.Module.Name)
-                        .ThenBy(i => i.Name)
-                        .ToList();
-                }
-                return _dataTypes;
             }
         }
 
@@ -182,16 +173,18 @@ namespace Zetbox.Client.Presentables.ModuleEditor
         public void Refresh()
         {
             _relations = null;
-            if (_dataTypes != null)
+            if (_moduleViewModels != null)
             {
-                var newDataTypes = DataContext.GetQuery<DataType>().ToList();
-                // Add new ones, keep old ones
-                _dataTypes.AddRange(newDataTypes.Except(_dataTypes));
-                _dataTypes.RemoveAll(dt => !newDataTypes.Contains(dt));
-                _dataTypes.Sort((a, b) => a.Name.CompareTo(b.Name));
+                var newModules = DataContext.GetQuery<Module>().ToList();
+                // Add new ones, keep existing ones
+                foreach (var newModule in newModules.Except(_moduleViewModels.Select(mv => mv.Module)))
+                {
+                    _moduleViewModels.Add(ViewModelFactory.CreateViewModel<ModuleGraphViewModel.Factory>().Invoke(DataContext, this, newModule));
+                }
+
+                _moduleViewModels.ForEach(m => m.Refresh());
             }
             OnPropertyChanged("Relations");
-            OnPropertyChanged("DataTypes");
             OnPropertyChanged("DataTypeViewModels");
             RecreateGraph();
         }

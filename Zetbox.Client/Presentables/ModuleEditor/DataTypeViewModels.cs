@@ -26,28 +26,41 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             this._diagMdl = parent;
             this.ctxFactory = ctxFactory;
             this.Module = obj;
+            this._diagMdl.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(_diagMdl_PropertyChanged);
+        }
+
+        void _diagMdl_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            switch(e.PropertyName)
+            {
+                case "FilterValue":
+                    OnPropertyChanged("DataTypes");
+                    break;
+            }
         }
 
         public override string Name
         {
             get
             {
-                return string.Format("{0}", Module);
+                return Module.Name;
             }
         }
 
         public Module Module { get; private set; }
 
-        private ReadOnlyProjectedList<DataType, DataTypeGraphModel> _dataTypeViewModels = null;
+        private List<DataTypeGraphModel> _dataTypeViewModels = null;
         public IEnumerable<DataTypeGraphModel> DataTypes
         {
             get
             {
                 if (_dataTypeViewModels == null)
                 {
-                    _dataTypeViewModels = new ReadOnlyProjectedList<DataType, DataTypeGraphModel>(DataContext.GetQuery<DataType>().Where(dt => dt.Module.ExportGuid == Module.ExportGuid).ToList(),
-                        i => ViewModelFactory.CreateViewModel<DataTypeGraphModel.Factory>().Invoke(DataContext, _diagMdl, i),
-                        i => i.DataType);
+                    _dataTypeViewModels = DataContext.GetQuery<DataType>()
+                                            .Where(dt => dt.Module.ExportGuid == Module.ExportGuid)
+                                            .ToList()
+                                            .Select(i => ViewModelFactory.CreateViewModel<DataTypeGraphModel.Factory>().Invoke(DataContext, _diagMdl, i))
+                                            .ToList();
                 }
                 if (!string.IsNullOrEmpty(_diagMdl.FilterValue))
                 {
@@ -58,6 +71,22 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                 {
                     return _dataTypeViewModels;
                 }
+            }
+        }
+
+        public void Refresh()
+        {
+            if (_dataTypeViewModels != null)
+            {
+                var newDataTypes = DataContext.GetQuery<DataType>().Where(dt => dt.Module.ExportGuid == Module.ExportGuid).ToList();
+                // Add new ones, keep existing ones
+                _dataTypeViewModels.AddRange(newDataTypes.Except(_dataTypeViewModels.Select(i => i.DataType)).Select(i => ViewModelFactory.CreateViewModel<DataTypeGraphModel.Factory>().Invoke(DataContext, _diagMdl, i)));
+                _dataTypeViewModels.RemoveAll(dt => !newDataTypes.Contains(dt.DataType));
+                _dataTypeViewModels.Sort((a, b) => a.Name.CompareTo(b.Name));
+
+                // create a new instance so that WPF will realy refresh the list
+                _dataTypeViewModels = new List<DataTypeGraphModel>(_dataTypeViewModels);
+                OnPropertyChanged("DataTypes");
             }
         }
     }
