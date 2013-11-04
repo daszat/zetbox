@@ -140,7 +140,7 @@ namespace Zetbox.App.Base
                 .AddObjectReference("module", NamedObjects.Base.Classes.Zetbox.App.Base.Property_Properties.Module.Find(_frozenCtx).GetLabel(), typeof(Module).GetObjectClass(_frozenCtx), value: targetModule)
                 .AddBool("isNullable", Zetbox.App.Projekte.Client.ZetboxBase.Strings.IsNullable, value: true);
 
-            if(typeof(StringProperty).IsAssignableFrom(ifType.Type))
+            if (typeof(StringProperty).IsAssignableFrom(ifType.Type))
             {
                 var p = NamedObjects.Base.Classes.Zetbox.App.Base.StringRangeConstraint_Properties.MaxLength.Find(_frozenCtx);
                 dlg.AddInt("str_maxlengt", p.GetLabel(), allowNullInput: true, description: p.GetDescription());
@@ -167,6 +167,13 @@ namespace Zetbox.App.Base
                 var p = NamedObjects.Base.Classes.Zetbox.App.Base.CompoundObjectProperty_Properties.CompoundObjectDefinition.Find(_frozenCtx);
                 dlg.AddObjectReference("cp_def", p.GetLabel(), typeof(CompoundObject).GetObjectClass(_frozenCtx), description: p.GetDescription());
             }
+            if (typeof(IntProperty).IsAssignableFrom(ifType.Type))
+            {
+                var min = NamedObjects.Base.Classes.Zetbox.App.Base.IntegerRangeConstraint_Properties.Min.Find(_frozenCtx);
+                var max = NamedObjects.Base.Classes.Zetbox.App.Base.IntegerRangeConstraint_Properties.Max.Find(_frozenCtx);
+                dlg.AddInt("int_min", min.GetLabel(), description: min.GetDescription(), allowNullInput: true);
+                dlg.AddInt("int_max", max.GetLabel(), description: max.GetDescription(), allowNullInput: true);
+            }
 
             dlg.AddBool("show", Zetbox.App.Projekte.Client.ZetboxBase.Strings.ShowPropertyWhenFinished, value: false, description: Zetbox.App.Projekte.Client.ZetboxBase.Strings.ShowPropertyWhenFinishedDescription);
 
@@ -185,10 +192,17 @@ namespace Zetbox.App.Base
                     newProp.Constraints.Add(ctx.Create<NotNullableConstraint>());
                 }
 
-                if(values.ContainsKey("str_maxlengt"))
+                if (values.ContainsKey("str_maxlengt"))
                 {
                     var c = ctx.Create<StringRangeConstraint>();
                     c.MaxLength = (int?)values["str_maxlengt"];
+                    newProp.Constraints.Add(c);
+                }
+                if (values.ContainsKey("int_min") && values.ContainsKey("int_max") && values["int_min"] != null && values["int_max"] != null)
+                {
+                    var c = ctx.Create<IntegerRangeConstraint>();
+                    c.Min = (int)values["int_min"];
+                    c.Max = (int)values["int_max"];
                     newProp.Constraints.Add(c);
                 }
                 if (values.ContainsKey("dt_style"))
