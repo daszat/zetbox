@@ -89,6 +89,27 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                 OnPropertyChanged("DataTypes");
             }
         }
+
+        private bool? _isExpanded = null;
+        public bool IsExpanded
+        {
+            get
+            {
+                if (_isExpanded == null)
+                {
+                    _isExpanded = _diagMdl.Module.ExportGuid == this.Module.ExportGuid;
+                }
+                return _isExpanded.Value;
+            }
+            set
+            {
+                if (_isExpanded != value)
+                {
+                    _isExpanded = value;
+                    OnPropertyChanged("IsExpanded");
+                }
+            }
+        }
     }
 
     public class DataTypeGraphModel : Presentables.DataTypeViewModel, IOpenCommandParameter
@@ -111,7 +132,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
         {
             get
             {
-                return string.Format("{0}.{1}", DataType.Module.Name, DataType.Name);
+                return DataType.Name;
             }
         }
 
