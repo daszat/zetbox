@@ -42,8 +42,17 @@
                                              Style="{StaticResource ImageToolbarButton}" />
                         <ctrls:CommandButton CommandViewModel="{Binding NewRelationCommand}"
                                              Style="{StaticResource ImageToolbarButton}" />
-                        <Button Click="PrintButton_Click"
-                                Content="Print" />
+                        <Button Click="PrintButton_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Image 
+                                       MaxHeight="16"
+                                       MaxWidth="16"
+                                       Source="/Zetbox.Client.WPF;component/Images/printer.png" />
+                                <TextBlock Text="Print"
+                                         Margin="5 0 0 0"
+                                         VerticalAlignment="Center" />
+                            </StackPanel>
+                        </Button>
                         <ctrls:CommandButton CommandViewModel="{Binding RefreshCommand}"
                                              Style="{StaticResource ImageToolbarButton}" />
                     </ctrls:WorkaroundToolBar>

@@ -418,6 +418,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                         newWorkspace.ShowModel(DataObjectViewModel.Fetch(ViewModelFactory, newCtx, newWorkspace, newCls));
                         ViewModelFactory.ShowModel(newWorkspace, true);
                     }, null, null);
+                    _NewObjectClassCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext));
                 }
                 return _NewObjectClassCommand;
             }
@@ -446,6 +447,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                     },
                     () => (SelectedGraphDataTypeViewModels.Count() == 1 || SelectedGraphDataTypeViewModels.Count() == 2) && SelectedGraphDataTypeViewModels.Any(dt => dt.DataType is ObjectClass),
                     null);
+                    _NewRelationCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext));
                 }
                 return _NewRelationCommand;
             }
