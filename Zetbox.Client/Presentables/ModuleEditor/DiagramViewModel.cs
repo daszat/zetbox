@@ -465,7 +465,9 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                                 {
                                     newCtx.SubmitChanges();
                                     Refresh();
-                                    DataTypeViewModels.Single(vm => vm.DataType.ExportGuid == newCls.ExportGuid).IsChecked = true;
+                                    DataTypeViewModels
+                                        .Single(vm => vm.DataType.ExportGuid == newCls.ExportGuid)
+                                        .SetChecked(true, true);
                                 }
                             });
                     }, null, null);
