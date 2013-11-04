@@ -12,6 +12,56 @@ namespace Zetbox.Client.Presentables.ModuleEditor
     using Zetbox.Client.Presentables.ZetboxBase;
     using ObjectEditorWorkspace = Zetbox.Client.Presentables.ObjectEditor.WorkspaceViewModel;
 
+    public class ModuleGraphViewModel : Presentables.DataObjectViewModel
+    { 
+        public new delegate ModuleGraphViewModel Factory(IZetboxContext dataCtx, DiagramViewModel parent, Module obj);
+
+        private DiagramViewModel _diagMdl;
+        protected readonly Func<IZetboxContext> ctxFactory;
+
+        public ModuleGraphViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, DiagramViewModel parent,
+            Module obj, Func<IZetboxContext> ctxFactory)
+            : base(appCtx, dataCtx, parent, obj)
+        {
+            this._diagMdl = parent;
+            this.ctxFactory = ctxFactory;
+            this.Module = obj;
+        }
+
+        public override string Name
+        {
+            get
+            {
+                return string.Format("{0}", Module);
+            }
+        }
+
+        public Module Module { get; private set; }
+
+        private ReadOnlyProjectedList<DataType, DataTypeGraphModel> _dataTypeViewModels = null;
+        public IEnumerable<DataTypeGraphModel> DataTypes
+        {
+            get
+            {
+                if (_dataTypeViewModels == null)
+                {
+                    _dataTypeViewModels = new ReadOnlyProjectedList<DataType, DataTypeGraphModel>(DataContext.GetQuery<DataType>().Where(dt => dt.Module.ExportGuid == Module.ExportGuid).ToList(),
+                        i => ViewModelFactory.CreateViewModel<DataTypeGraphModel.Factory>().Invoke(DataContext, _diagMdl, i),
+                        i => i.DataType);
+                }
+                if (!string.IsNullOrEmpty(_diagMdl.FilterValue))
+                {
+                    var str = _diagMdl.FilterValue.ToLowerInvariant();
+                    return _dataTypeViewModels.Where(i => i.Name.ToLowerInvariant().Contains(str));
+                }
+                else
+                {
+                    return _dataTypeViewModels;
+                }
+            }
+        }
+    }
+
     public class DataTypeGraphModel : Presentables.DataTypeViewModel, IOpenCommandParameter
     {
         public new delegate DataTypeGraphModel Factory(IZetboxContext dataCtx, DiagramViewModel parent, DataType obj);
@@ -33,6 +83,14 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             get
             {
                 return string.Format("{0}.{1}", DataType.Module.Name, DataType.Name);
+            }
+        }
+
+        public override System.Drawing.Image Icon
+        {
+            get
+            {
+                return base.Icon;
             }
         }
 

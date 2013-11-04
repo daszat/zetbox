@@ -102,6 +102,25 @@ namespace Zetbox.Client.Presentables.ModuleEditor
         }
         #endregion
 
+        #region Modules
+        private IEnumerable<ModuleGraphViewModel> _moduleViewModels;
+        public IEnumerable<ModuleGraphViewModel> ModuleViewModels
+        {
+            get
+            {
+                if (_moduleViewModels == null)
+                {
+                    _moduleViewModels = DataContext.GetQuery<Module>()
+                                    .OrderBy(m => m.Name)
+                                    .ToList()
+                                    .Select(m => ViewModelFactory.CreateViewModel<ModuleGraphViewModel.Factory>().Invoke(DataContext, this, m))
+                                    .ToList();
+                }
+                return _moduleViewModels;
+            }
+        }
+        #endregion
+
         #region DataTypes
         private ClassValueModel<string> _filterMdl;
         private ViewModel _filter;
@@ -115,33 +134,18 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                         "Filter",
                         "",
                         true, false);
-                    _filterMdl.PropertyChanged += (s, e) => { if (e.PropertyName == "Value") OnPropertyChanged("DataTypeViewModels"); };
+                    _filterMdl.PropertyChanged += (s, e) => { if (e.PropertyName == "Value") { OnPropertyChanged("DataTypeViewModels"); OnPropertyChanged("FilterValue"); } };
                     _filter = ViewModelFactory.CreateViewModel<StringValueViewModel.Factory>().Invoke(DataContext, this, _filterMdl);
                 }
                 return _filter;
             }
         }
 
-        private ReadOnlyProjectedList<DataType, DataTypeGraphModel> _DataTypeViewModels = null;
-        public IEnumerable<DataTypeGraphModel> DataTypeViewModels
+        public string FilterValue
         {
             get
             {
-                if (_DataTypeViewModels == null)
-                {
-                    _DataTypeViewModels = new ReadOnlyProjectedList<DataType, DataTypeGraphModel>(DataTypes,
-                        i => ViewModelFactory.CreateViewModel<DataTypeGraphModel.Factory>().Invoke(DataContext, this, i),
-                        i => i.DataType);
-                }
-                if (_filterMdl != null && !string.IsNullOrEmpty(_filterMdl.Value))
-                {
-                    var str = _filterMdl.Value.ToLowerInvariant();
-                    return _DataTypeViewModels.Where(i => i.Name.ToLowerInvariant().Contains(str));
-                }
-                else
-                {
-                    return _DataTypeViewModels;
-                }
+                return _filterMdl != null ? _filterMdl.Value : null;
             }
         }
 
@@ -192,6 +196,19 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             RecreateGraph();
         }
 
+        List<DataTypeGraphModel> _dataTypeViewModels;
+        public IEnumerable<DataTypeGraphModel> DataTypeViewModels
+        {
+            get
+            {
+                if (_dataTypeViewModels == null)
+                {
+                    _dataTypeViewModels = ModuleViewModels.SelectMany(m => m.DataTypes).ToList();
+                }
+                return _dataTypeViewModels;
+            }
+        }
+
         public IEnumerable<DataTypeGraphModel> SelectedDataTypeViewModels
         {
             get
@@ -222,7 +239,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
 
         private void AddRelatedDataTypes()
         {
-            foreach (var dtm in DataTypeViewModels.Where(i => i.IsChecked).ToList())
+            foreach (var dtm in SelectedDataTypeViewModels.ToList())
             {
                 var add = new List<DataTypeGraphModel>();
                 if (GraphType == GraphTypeEnum.Inheritance)
