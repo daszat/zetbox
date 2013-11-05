@@ -8951,7 +8951,7 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
   <GUI:ViewDescriptor ExportGuid="a4547d50-ce0a-4908-b2ba-e55e87763200">
     <GUI:ControlKind>729939d2-b67e-4576-a22f-181879e57d0d</GUI:ControlKind>
     <GUI:ControlTypeRef>Zetbox.Client.WPF.View.NullableEMailTextBoxEditor, Zetbox.Client.WPF</GUI:ControlTypeRef>
-    <GUI:Deleted>true</GUI:Deleted>
+    <GUI:Deleted>false</GUI:Deleted>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
@@ -9221,6 +9221,11 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <GUI:Name>Zetbox.App.GUI.NavigationTreeScreen</GUI:Name>
     <GUI:Parent>b2be0e95-d69e-44ff-8d19-2ccd70da2512</GUI:Parent>
   </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="5e78c9c4-68df-48ef-8321-2b36f71fc5f1">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>Zetbox.App.GUI.DataObjectSelectionTaskGridKind</GUI:Name>
+    <GUI:Parent>18c0afa2-61bc-4ecb-b1e9-47b33b294573</GUI:Parent>
+  </GUI:ControlKind>
   <GUI:ControlKind ExportGuid="601d4613-016a-4b8b-97fb-53f0f0feb51a">
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Name>Zetbox.App.GUI.InstanceGridHorizontalKind</GUI:Name>
@@ -9299,6 +9304,11 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
   <GUI:ControlKind ExportGuid="a09a78f4-a583-4fef-8ae7-cf7acd95e8b8">
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Name>Zetbox.App.GUI.MonthEditorKind</GUI:Name>
+  </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="a3bb6782-8964-4b6d-8357-ee0246848ebe">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>Zetbox.App.GUI.DataObjectSelectionTaskSimpleKind</GUI:Name>
+    <GUI:Parent>18c0afa2-61bc-4ecb-b1e9-47b33b294573</GUI:Parent>
   </GUI:ControlKind>
   <GUI:ControlKind ExportGuid="a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70">
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
@@ -31509,6 +31519,20 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
   <GUI:ViewDescriptor ExportGuid="4b8a4590-690c-4e85-b10a-d0bf8f475c46">
     <GUI:ControlKind>18c0afa2-61bc-4ecb-b1e9-47b33b294573</GUI:ControlKind>
     <GUI:ControlTypeRef>Zetbox.Client.WPF.View.SelectionDialog, Zetbox.Client.WPF</GUI:ControlTypeRef>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:Toolkit>0</GUI:Toolkit>
+  </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="1449b474-9a54-4982-8abf-5f5354d8bbfe">
+    <GUI:ControlKind>5e78c9c4-68df-48ef-8321-2b36f71fc5f1</GUI:ControlKind>
+    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.SelectionDialogGrid, Zetbox.Client.WPF</GUI:ControlTypeRef>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:Toolkit>0</GUI:Toolkit>
+  </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="f6db269b-1bc3-4106-8155-f266d2207547">
+    <GUI:ControlKind>a3bb6782-8964-4b6d-8357-ee0246848ebe</GUI:ControlKind>
+    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.SelectionDialogSimple, Zetbox.Client.WPF</GUI:ControlTypeRef>
     <GUI:Deleted>false</GUI:Deleted>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>

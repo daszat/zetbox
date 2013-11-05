@@ -4402,9 +4402,17 @@ namespace Zetbox {
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("06bf9adc-c5bc-4552-abdc-18a96c527962"); }
                 }
+                public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_DataObjectSelectionTaskGridKind
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("5e78c9c4-68df-48ef-8321-2b36f71fc5f1"); }
+                }
                 public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_DataObjectSelectionTaskKind
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("18c0afa2-61bc-4ecb-b1e9-47b33b294573"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_DataObjectSelectionTaskSimpleKind
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("a3bb6782-8964-4b6d-8357-ee0246848ebe"); }
                 }
                 public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_DataObjectSummaryKind
                 {

@@ -120,10 +120,7 @@ namespace Zetbox.App.Base
                         }
                     },
                     null);
-            selectClass.ListViewModel.ViewMethod = InstanceListViewMethod.List;
-            selectClass.ListViewModel.AllowDelete = false;
-            selectClass.ListViewModel.AllowOpen = false;
-            selectClass.ListViewModel.AllowAddNew = false;
+            selectClass.RequestedKind = NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_DataObjectSelectionTaskSimpleKind.Find(_frozenCtx);
             selectClass.ListViewModel.UseNaturalSortOrder = true;
             _vmf.ShowDialog(selectClass);
         }
