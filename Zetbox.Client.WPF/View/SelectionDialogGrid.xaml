@@ -5,8 +5,8 @@
                   xmlns:client="clr-namespace:Zetbox.Client.Presentables;assembly=Zetbox.Client"
                   Title="{Binding Name}"
                   ResizeMode="CanResize"
-                  MinWidth="300"
-                  MinHeight="300"
+                  Width="500"
+                  Height="400"
                   xmlns:commands="clr-namespace:Zetbox.Client.WPF.Commands;assembly=Zetbox.Client.WPF.Toolkit"
                   commands:SmartRoutedUICommand.IsCommandSink="True">
     <!--
@@ -35,18 +35,37 @@
     <DockPanel Style="{StaticResource addedMargins}"
                LastChildFill="True">
 
-        <UniformGrid DockPanel.Dock="Bottom"
-                     Style="{StaticResource addedMargins}"
-                     Rows="1">
-            <ctrls:CommandButton CommandViewModel="{Binding ChooseCommand}"
-                                 Margin="5"
-                                 IsDefault="True"/>
-            <ctrls:CommandButton CommandViewModel="{Binding CancelCommand}"
-                                 Margin="5"
-                                 IsCancel="True" />
-        </UniformGrid>
+        <ctrls:CommandButton CommandViewModel="{Binding CancelCommand}"
+                             DockPanel.Dock="Bottom"
+                             HorizontalAlignment="Right"
+                             Margin="5"
+                             IsCancel="True" />
 
-        <ContentPresenter ContentTemplateSelector="{StaticResource defaultTemplateSelector}"
-                          Content="{Binding ListViewModel}" />
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="lst"
+                      ItemsSource="{Binding ListViewModel.InstancesAsync}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel IsItemsHost="True" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Command="{Binding DataContext.SelectAndChooseCommand, Converter={StaticResource CommandConverter}, ElementName=lst}"
+                            CommandParameter="{Binding}"
+                            Width="140"
+                            Height="90"
+                            Margin="5">
+                            <Button.Content>
+                                <TextBlock TextWrapping="WrapWithOverflow"
+                                               Text="{Binding Name}" />
+                            </Button.Content>
+                        </Button>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
     </DockPanel>
 </ctrls:WindowView>

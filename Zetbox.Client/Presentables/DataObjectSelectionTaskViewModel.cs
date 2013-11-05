@@ -156,6 +156,25 @@ namespace Zetbox.Client.Presentables
             Show = false;
         }
 
+        private ICommandViewModel _SelectAndChooseCommand = null;
+        public ICommandViewModel SelectAndChooseCommand
+        {
+            get
+            {
+                if (_SelectAndChooseCommand == null)
+                {
+                    _SelectAndChooseCommand = ViewModelFactory.CreateViewModel<SimpleItemCommandViewModel<DataObjectViewModel>.Factory>().Invoke(
+                        DataContext,
+                        this,
+                        DataObjectSelectionTaskViewModelResources.Choose,
+                        DataObjectSelectionTaskViewModelResources.Choose_Tooltip,
+                        (items) => Choose(items)
+                    );
+                }
+                return _SelectAndChooseCommand;
+            }
+        }
+
         public void Refresh()
         {
             ListViewModel.Refresh();

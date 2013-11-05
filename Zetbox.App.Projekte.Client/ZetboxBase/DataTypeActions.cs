@@ -120,7 +120,7 @@ namespace Zetbox.App.Base
                         }
                     },
                     null);
-            selectClass.RequestedKind = NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_DataObjectSelectionTaskSimpleKind.Find(_frozenCtx);
+            selectClass.RequestedKind = NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_DataObjectSelectionTaskGridKind.Find(_frozenCtx);
             selectClass.ListViewModel.UseNaturalSortOrder = true;
             _vmf.ShowDialog(selectClass);
         }
