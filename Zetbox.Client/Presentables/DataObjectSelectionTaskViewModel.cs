@@ -178,5 +178,13 @@ namespace Zetbox.Client.Presentables
         {
             get { return string.Format(DataObjectSelectionTaskViewModelResources.Name, ListViewModel.DataTypeViewModel.DescribedType); }
         }
+
+        public string TypeName
+        {
+            get
+            {
+                return ListViewModel.DataTypeViewModel.DescribedType;
+            }
+        }
     }
 }

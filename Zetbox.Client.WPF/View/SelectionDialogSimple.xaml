@@ -47,7 +47,8 @@
                                  IsCancel="True" />
         </UniformGrid>
 
-        <ctrls:ZetboxListView x:Name="lst"
+        <GroupBox Header="{Binding TypeName}">
+            <ctrls:ZetboxListView x:Name="lst"
                               BorderThickness="0"
                               ItemsSource="{Binding ListViewModel.InstancesAsync}"
                               ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
@@ -56,5 +57,6 @@
                               SelectionMode="{Binding ListViewModel.IsMultiselect, Converter={StaticResource BooleanMultiselectToSelectionModeConverter}}"
                               KeyboardNavigation.TabNavigation="Continue"
                               MouseDoubleClick="ItemActivatedHandler" />
+        </GroupBox>
     </DockPanel>
 </ctrls:WindowView>
