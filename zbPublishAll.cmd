@@ -23,6 +23,9 @@ rem refresh local code
 call GetCodeGen.cmd
 IF ERRORLEVEL 1 GOTO FAIL
 
+MSBuild.exe .\Zetbox.Objects\Zetbox.Objects.csproj
+IF ERRORLEVEL 1 GOTO FAIL
+
 rem need to export both modules to receive all necessary meta-data
 bin\debug\Zetbox.Cli.exe %config% -publish Modules\ZetboxBasic.xml -ownermodules ZetboxBase;GUI
 IF ERRORLEVEL 1 GOTO FAIL
