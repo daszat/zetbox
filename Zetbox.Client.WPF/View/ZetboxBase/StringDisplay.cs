@@ -34,15 +34,43 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
     using Zetbox.Client.WPF.Converter;
     using Zetbox.Client.WPF.CustomControls;
     using Zetbox.Client.WPF.Toolkit;
+    using Zetbox.Client.Presentables;
 
     [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
-    public class StringDisplay : TextBlock, IHasViewModel<IFormattedValueViewModel> // Simplify, often used Control
+    public class StringDisplay : TextBlock, IHasViewModel<ViewModel> // Simplify, often used Control
+    {
+        //    <TextBlock x:Name="txtStringDisplay"
+        //               Text="{Binding Name, Mode=OneWay}"
+        //               ToolTip="{Binding ToolTip}" />
+
+        public StringDisplay()
+        {
+            if (DesignerProperties.GetIsInDesignMode(this)) return;
+
+            // InitializeComponent
+            this.VerticalAlignment = System.Windows.VerticalAlignment.Top;
+            // Don't wrap - use a property in viewmodel instead
+            // this.TextWrapping = System.Windows.TextWrapping.Wrap;
+
+            BindingOperations.SetBinding(this, TextBlock.TextProperty, new Binding("Name") { Mode = BindingMode.OneWay });
+            BindingOperations.SetBinding(this, TextBlock.ToolTipProperty, new Binding("ToolTip") { Mode = BindingMode.OneWay });
+            BindingOperations.SetBinding(this, Zetbox.Client.WPF.Styles.Controls.HighlightProperty, new Binding("HighlightAsync") { Mode = BindingMode.OneWay });
+        }
+
+        public ViewModel ViewModel
+        {
+            get { return (ViewModel)WPFHelper.SanitizeDataContext(DataContext); }
+        }
+    }
+
+    [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
+    public class StringValueDisplay : TextBlock, IHasViewModel<IFormattedValueViewModel> // Simplify, often used Control
     {
         //    <TextBlock x:Name="txtStringDisplay"
         //               Text="{Binding FormattedValue, Mode=OneWay}"
         //               ToolTip="{Binding ToolTip}" />
 
-        public StringDisplay()
+        public StringValueDisplay()
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
 

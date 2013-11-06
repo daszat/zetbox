@@ -31375,6 +31375,13 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.ValueViewModels.StringValueViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="e0925914-0e15-4c91-91fb-e0f6a44cb553">
+    <GUI:DefaultEditorKind>a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70</GUI:DefaultEditorKind>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Description>Abstract base class for all view models</GUI:Description>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.ViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="afc4b471-3aea-44cb-a1df-859594a3c1cf">
     <GUI:DefaultEditorKind>b056e51c-efcf-4ba5-bb34-3b1204254ef9</GUI:DefaultEditorKind>
     <GUI:Deleted>false</GUI:Deleted>
@@ -31672,6 +31679,13 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
   <GUI:ViewDescriptor ExportGuid="94917bbc-d32a-4c53-a4f6-904567576732">
     <GUI:ControlKind>a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70</GUI:ControlKind>
     <GUI:ControlTypeRef>Zetbox.Client.WPF.View.ZetboxBase.StringDisplay, Zetbox.Client.WPF</GUI:ControlTypeRef>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:Toolkit>0</GUI:Toolkit>
+  </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="0c051dcc-61eb-4206-872d-b7000b9b9fdc">
+    <GUI:ControlKind>a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70</GUI:ControlKind>
+    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.ZetboxBase.StringValueDisplay, Zetbox.Client.WPF</GUI:ControlTypeRef>
     <GUI:Deleted>false</GUI:Deleted>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
