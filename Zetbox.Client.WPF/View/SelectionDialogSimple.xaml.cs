@@ -36,7 +36,7 @@ namespace Zetbox.Client.WPF.View
     /// Interaction logic for SelectionDialog.xaml
     /// </summary>
     [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
-    public partial class SelectionDialogSimple : WindowView, IHasViewModel<DataObjectSelectionTaskViewModel>
+    public partial class SelectionDialogSimple : WindowView, IHasViewModel<ISelectionTaskViewModel>
     {
         public SelectionDialogSimple()
         {
@@ -46,9 +46,9 @@ namespace Zetbox.Client.WPF.View
 
         protected void ItemActivatedHandler(object sender, RoutedEventArgs e)
         {
-            if (ViewModel != null && ViewModel.ListViewModel.SelectedItem != null)
+            if (ViewModel != null)
             {
-                ViewModel.ListViewModel.Default();
+                ViewModel.ChooseCommand.Execute(null);
             }
 
             e.Handled = true;
@@ -56,9 +56,9 @@ namespace Zetbox.Client.WPF.View
 
         #region IHasViewModel<DataObjectSelectionTaskViewModel> Members
 
-        public DataObjectSelectionTaskViewModel ViewModel
+        public ISelectionTaskViewModel ViewModel
         {
-            get { return (DataObjectSelectionTaskViewModel)WPFHelper.SanitizeDataContext(DataContext); }
+            get { return (ISelectionTaskViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
 
         #endregion

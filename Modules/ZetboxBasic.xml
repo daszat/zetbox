@@ -8747,6 +8747,12 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.GUI.SavedListConfigViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="d364380b-1802-47e4-885d-a98ca117e5a1">
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Description>A specialized viewmodel of an object class only for the object browser</GUI:Description>
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.ObjectBrowser.ObjectClassViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="bbaeb043-89c8-492e-a586-a822dbe38e3a">
     <GUI:DefaultEditorKind>dc5982a3-8b8f-44e1-b860-1400a41c4275</GUI:DefaultEditorKind>
     <GUI:Deleted>false</GUI:Deleted>
@@ -31247,6 +31253,13 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.Relations.RelationViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="ed91e0a8-e313-46cd-ae6d-a07066afc846">
+    <GUI:DefaultEditorKind>a3bb6782-8964-4b6d-8357-ee0246848ebe</GUI:DefaultEditorKind>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Description>A task for the user: select an ViewModel from a list</GUI:Description>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.SimpleSelectionTaskViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="3c1858e5-da99-4328-9308-f95cb9e9cb02">
     <GUI:DefaultEditorKind>20488fcd-595b-49f6-89f9-e84221586f54</GUI:DefaultEditorKind>
     <GUI:Deleted>false</GUI:Deleted>
@@ -31415,7 +31428,7 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
     <GUI:DefaultGridCellDisplayKind>a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70</GUI:DefaultGridCellDisplayKind>
     <GUI:DefaultGridCellEditorKind>d55c9558-4ced-47b0-8eda-81553340fb5b</GUI:DefaultGridCellEditorKind>
     <GUI:DefaultGridCellPreEditorKind>d55c9558-4ced-47b0-8eda-81553340fb5b</GUI:DefaultGridCellPreEditorKind>
-    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Deleted>true</GUI:Deleted>
     <GUI:Description>A model for easier working with TypeRef valued Properties</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.ZetboxBase.TypeRefPropertyViewModel, Zetbox.Client</GUI:ViewModelTypeRef>

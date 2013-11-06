@@ -70,43 +70,71 @@ namespace Zetbox.App.Base
             }
         }
 
+        public class PropertyTypeSelectionViewModel : ViewModel
+        {
+            public new delegate PropertyTypeSelectionViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string name, ObjectClass targetPropClass);
+
+            public PropertyTypeSelectionViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, string name, ObjectClass targetPropClass)
+                : base(dependencies, dataCtx, parent)
+            {
+                _name = name;
+                TargetPropClass = targetPropClass;
+            }
+
+            public override ControlKind RequestedKind
+            {
+                get
+                {
+                    return NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_TextKind.Find(FrozenContext);
+                }
+            }
+
+            private string _name;
+            public override string Name
+            {
+                get { return _name; }
+            }
+
+            public ObjectClass TargetPropClass { get; private set; }
+        }
+
         [Invocation]
         public static void AddProperty(DataType obj, MethodReturnEventArgs<Zetbox.App.Base.Property> e)
         {
-            var candidates = new List<ObjectClass>()
+            var ctx = obj.Context;
+            var candidates = new List<PropertyTypeSelectionViewModel>()
             {
                 // Common first
-                typeof(StringProperty).GetObjectClass(_frozenCtx),
-                typeof(BoolProperty).GetObjectClass(_frozenCtx),
-                typeof(DateTimeProperty).GetObjectClass(_frozenCtx),
-                typeof(DecimalProperty).GetObjectClass(_frozenCtx),
-                typeof(EnumerationProperty).GetObjectClass(_frozenCtx),
-                typeof(CompoundObjectProperty).GetObjectClass(_frozenCtx),
+                _vmf.CreateViewModel<PropertyTypeSelectionViewModel.Factory>().Invoke(ctx, null, "string", typeof(StringProperty).GetObjectClass(_frozenCtx)),
+                _vmf.CreateViewModel<PropertyTypeSelectionViewModel.Factory>().Invoke(ctx, null, "bool", typeof(BoolProperty).GetObjectClass(_frozenCtx)),
+                _vmf.CreateViewModel<PropertyTypeSelectionViewModel.Factory>().Invoke(ctx, null, "DateTime", typeof(DateTimeProperty).GetObjectClass(_frozenCtx)),
+                _vmf.CreateViewModel<PropertyTypeSelectionViewModel.Factory>().Invoke(ctx, null, "decimal", typeof(DecimalProperty).GetObjectClass(_frozenCtx)),
+                _vmf.CreateViewModel<PropertyTypeSelectionViewModel.Factory>().Invoke(ctx, null, "enum", typeof(EnumerationProperty).GetObjectClass(_frozenCtx)),
+                _vmf.CreateViewModel<PropertyTypeSelectionViewModel.Factory>().Invoke(ctx, null, "Compound object", typeof(CompoundObjectProperty).GetObjectClass(_frozenCtx)),
 
                 // all other
-                typeof(IntProperty).GetObjectClass(_frozenCtx),
-                typeof(DoubleProperty).GetObjectClass(_frozenCtx),
-                typeof(GuidProperty).GetObjectClass(_frozenCtx),
-                typeof(CalculatedObjectReferenceProperty).GetObjectClass(_frozenCtx),
+                _vmf.CreateViewModel<PropertyTypeSelectionViewModel.Factory>().Invoke(ctx, null, "int", typeof(IntProperty).GetObjectClass(_frozenCtx)),
+                _vmf.CreateViewModel<PropertyTypeSelectionViewModel.Factory>().Invoke(ctx, null, "double", typeof(DoubleProperty).GetObjectClass(_frozenCtx)),
+                _vmf.CreateViewModel<PropertyTypeSelectionViewModel.Factory>().Invoke(ctx, null, "Guid", typeof(GuidProperty).GetObjectClass(_frozenCtx)),
+                
 
                 // No ObjectReferance -> create a relation
                 // can be added to this wizard -> future task
                 // typeof(ObjectReferenceProperty).GetObjectClass(_frozenCtx),
+                // typeof(CalculatedObjectReferenceProperty).GetObjectClass(_frozenCtx),
             };
 
-            var ctx = obj.Context;
             var selectClass = _vmf
-                .CreateViewModel<DataObjectSelectionTaskViewModel.Factory>()
+                .CreateViewModel<SimpleSelectionTaskViewModel.Factory>()
                 .Invoke(
                     ctx,
                     null,
-                    typeof(ObjectClass).GetObjectClass(_frozenCtx),
-                    () => candidates.AsQueryable(),
+                    candidates,
                     (chosenClass) =>
                     {
                         if (chosenClass != null && chosenClass.Count() == 1)
                         {
-                            var propCls = (ObjectClass)chosenClass.Single().Object;
+                            var propCls = ((PropertyTypeSelectionViewModel)chosenClass.Single()).TargetPropClass;
                             bool show;
                             var newProp = ShowCreatePropertyDialog(ctx, propCls, obj.Module, out show);
                             if (newProp != null)
@@ -121,7 +149,6 @@ namespace Zetbox.App.Base
                     },
                     null);
             selectClass.RequestedKind = NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_DataObjectSelectionTaskGridKind.Find(_frozenCtx);
-            selectClass.ListViewModel.UseNaturalSortOrder = true;
             _vmf.ShowDialog(selectClass);
         }
 

@@ -6701,6 +6701,12 @@ public static void MakeStaticFileCanExecReason(ImportedFile obj, MethodReturnEve
     <GUI:Module>0fe1ab38-860a-414f-a599-b0b86a22ce1a</GUI:Module>
     <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.ModuleEditor.DiagramViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="41c43678-1e2f-4b9e-9f02-bd1d957b1e63">
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Description>A specialized tree view item of an viewmodel only for the ModuleEditor</GUI:Description>
+    <GUI:Module>0fe1ab38-860a-414f-a599-b0b86a22ce1a</GUI:Module>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.ModuleEditor.GroupingTreeItemViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="94ec32fc-1914-4937-a8ab-4753335cb502">
     <GUI:DefaultEditorKind>f236ecd4-d9dc-4fc3-a4a9-6da8ef1a228e</GUI:DefaultEditorKind>
     <GUI:Deleted>false</GUI:Deleted>

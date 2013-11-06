@@ -36,7 +36,7 @@ namespace Zetbox.Client.WPF.View
     /// Interaction logic for SelectionDialog.xaml
     /// </summary>
     [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
-    public partial class SelectionDialogGrid : WindowView, IHasViewModel<DataObjectSelectionTaskViewModel>
+    public partial class SelectionDialogGrid : WindowView, IHasViewModel<ISelectionTaskViewModel>
     {
         public SelectionDialogGrid()
         {
@@ -46,9 +46,9 @@ namespace Zetbox.Client.WPF.View
 
         #region IHasViewModel<DataObjectSelectionTaskViewModel> Members
 
-        public DataObjectSelectionTaskViewModel ViewModel
+        public ISelectionTaskViewModel ViewModel
         {
-            get { return (DataObjectSelectionTaskViewModel)WPFHelper.SanitizeDataContext(DataContext); }
+            get { return (ISelectionTaskViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
 
         #endregion

@@ -50,10 +50,10 @@
         <GroupBox Header="{Binding TypeName}">
             <ctrls:ZetboxListView x:Name="lst"
                               BorderThickness="0"
-                              ItemsSource="{Binding ListViewModel.InstancesAsync}"
+                              ItemsSource="{Binding Items}"
                               ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
                               ItemContainerStyle="{StaticResource ListViewItemContainerStyle}"
-                              SelectedZetboxItems="{Binding ListViewModel.SelectedItems}"
+                              SelectedZetboxItems="{Binding SelectedItems}"
                               SelectionMode="{Binding ListViewModel.IsMultiselect, Converter={StaticResource BooleanMultiselectToSelectionModeConverter}}"
                               KeyboardNavigation.TabNavigation="Continue"
                               MouseDoubleClick="ItemActivatedHandler" />
