@@ -31260,6 +31260,13 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.SimpleSelectionTaskViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="46b983f4-41c5-40ec-81e3-e3dfb46b4263">
+    <GUI:DefaultEditorKind>a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70</GUI:DefaultEditorKind>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Description>A basic view model for displaying a text (string) with some formating options</GUI:Description>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.TextViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="3c1858e5-da99-4328-9308-f95cb9e9cb02">
     <GUI:DefaultEditorKind>20488fcd-595b-49f6-89f9-e84221586f54</GUI:DefaultEditorKind>
     <GUI:Deleted>false</GUI:Deleted>
@@ -31377,7 +31384,7 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="e0925914-0e15-4c91-91fb-e0f6a44cb553">
     <GUI:DefaultEditorKind>a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70</GUI:DefaultEditorKind>
-    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Deleted>true</GUI:Deleted>
     <GUI:Description>Abstract base class for all view models</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.ViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
@@ -31686,6 +31693,13 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
   <GUI:ViewDescriptor ExportGuid="0c051dcc-61eb-4206-872d-b7000b9b9fdc">
     <GUI:ControlKind>a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70</GUI:ControlKind>
     <GUI:ControlTypeRef>Zetbox.Client.WPF.View.ZetboxBase.StringValueDisplay, Zetbox.Client.WPF</GUI:ControlTypeRef>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:Toolkit>0</GUI:Toolkit>
+  </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="7c8ec397-b0b9-4238-944b-67cd24f98fde">
+    <GUI:ControlKind>a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70</GUI:ControlKind>
+    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.ZetboxBase.TextDisplay, Zetbox.Client.WPF</GUI:ControlTypeRef>
     <GUI:Deleted>false</GUI:Deleted>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>

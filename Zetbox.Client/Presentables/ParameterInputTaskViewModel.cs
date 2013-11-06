@@ -59,27 +59,27 @@ namespace Zetbox.Client.Presentables
 
         }
 
-        private ReadOnlyProjectedList<BaseParameter, BaseValueViewModel> _parameterModelList;
-        public IEnumerable<BaseValueViewModel> ValueViewModels
+        private ReadOnlyProjectedList<BaseParameter, ViewModel> _parameterModelList;
+        public IEnumerable<ViewModel> ValueViewModels
         {
             get
             {
                 if (_parameterModelList == null)
                 {
                     FetchParameterModels();
-                    _parameterModelList = new ReadOnlyProjectedList<BaseParameter, BaseValueViewModel>(_parameterList, p => _parameterModels[p], m => null); //m.Property);
+                    _parameterModelList = new ReadOnlyProjectedList<BaseParameter, ViewModel>(_parameterList, p => _parameterModels[p], m => null); //m.Property);
                 }
                 return _parameterModelList;
             }
         }
 
-        private LookupDictionary<BaseParameter, BaseParameter, BaseValueViewModel> _parameterModels;
+        private LookupDictionary<BaseParameter, BaseParameter, ViewModel> _parameterModels;
         private void FetchParameterModels()
         {
             if (_parameterModels == null)
             {
                 FetchParameterList();
-                _parameterModels = new LookupDictionary<BaseParameter, BaseParameter, BaseValueViewModel>(_parameterList, k => k, v =>
+                _parameterModels = new LookupDictionary<BaseParameter, BaseParameter, ViewModel>(_parameterList, k => k, v =>
                 {
                     var result = BaseValueViewModel.Fetch(ViewModelFactory, DataContext, this, v, v.GetValueModel(DataContext, v.IsNullable));
                     return result;
@@ -87,8 +87,8 @@ namespace Zetbox.Client.Presentables
             }
         }
 
-        private ILookup<object, BaseValueViewModel> _parameterModelsByName;
-        public ILookup<object, BaseValueViewModel> ValueViewModelsByName
+        private ILookup<object, ViewModel> _parameterModelsByName;
+        public ILookup<object, ViewModel> ValueViewModelsByName
         {
             get
             {
@@ -130,7 +130,7 @@ namespace Zetbox.Client.Presentables
 
         public void Invoke()
         {
-            var parameter = ValueViewModels.Select(i => i.ValueModel.GetUntypedValue()).ToArray();
+            var parameter = ValueViewModels.OfType<BaseValueViewModel>().Select(i => ((BaseValueViewModel)i).ValueModel.GetUntypedValue()).ToArray();
             _callback(parameter);
             Show = false;
         }

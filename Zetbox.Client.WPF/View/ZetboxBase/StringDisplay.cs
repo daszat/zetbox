@@ -64,6 +64,34 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
     }
 
     [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
+    public class TextDisplay : TextBlock, IHasViewModel<TextViewModel> // Simplify, often used Control
+    {
+        //    <TextBlock x:Name="txtStringDisplay"
+        //               Text="{Binding Name, Mode=OneWay}"
+        //               ToolTip="{Binding ToolTip}" />
+
+        public TextDisplay()
+        {
+            if (DesignerProperties.GetIsInDesignMode(this)) return;
+
+            // InitializeComponent
+            this.VerticalAlignment = System.Windows.VerticalAlignment.Top;
+            // Don't wrap - use a property in viewmodel instead
+            // this.TextWrapping = System.Windows.TextWrapping.Wrap;
+
+            BindingOperations.SetBinding(this, TextBlock.TextProperty, new Binding("Text") { Mode = BindingMode.OneWay });
+            BindingOperations.SetBinding(this, FontWeightProperty, new Binding("Bold") { Mode = BindingMode.OneWay, Converter = (IValueConverter)FindResource("FormattingToFontWeightConverter") });
+            BindingOperations.SetBinding(this, TextBlock.ToolTipProperty, new Binding("ToolTip") { Mode = BindingMode.OneWay });
+            BindingOperations.SetBinding(this, Zetbox.Client.WPF.Styles.Controls.HighlightProperty, new Binding("HighlightAsync") { Mode = BindingMode.OneWay });
+        }
+
+        public TextViewModel ViewModel
+        {
+            get { return (TextViewModel)WPFHelper.SanitizeDataContext(DataContext); }
+        }
+    }
+
+    [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
     public class StringValueDisplay : TextBlock, IHasViewModel<IFormattedValueViewModel> // Simplify, often used Control
     {
         //    <TextBlock x:Name="txtStringDisplay"

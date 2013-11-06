@@ -1,4 +1,17 @@
-﻿
+﻿// This file is part of zetbox.
+//
+// Zetbox is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as
+// published by the Free Software Foundation, either version 3 of
+// the License, or (at your option) any later version.
+//
+// Zetbox is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public
+// License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace Zetbox.Client.GUI
 {
@@ -18,7 +31,7 @@ namespace Zetbox.Client.GUI
 
         public DialogCreator(IZetboxContext ctx, IViewModelFactory mdlFactory, IFrozenContext frozenCtx)
         {
-            ValueModels = new List<Tuple<object, BaseValueViewModel>>();
+            ValueModels = new List<Tuple<object, ViewModel>>();
             DataContext = ctx;
             ViewModelFactory = mdlFactory;
             FrozenCtx = frozenCtx;
@@ -29,7 +42,7 @@ namespace Zetbox.Client.GUI
         public IFrozenContext FrozenCtx { get; private set; }
 
         public string Title { get; set; }
-        public List<Tuple<object, BaseValueViewModel>> ValueModels { get; private set; }
+        public List<Tuple<object, ViewModel>> ValueModels { get; private set; }
 
         private static readonly Action<Dictionary<object, object>> _doNothing = p => { };
 
@@ -40,6 +53,12 @@ namespace Zetbox.Client.GUI
 
         public void Show(Action<Dictionary<object, object>> ok, ViewModel ownerMdl = null)
         {
+            var duplicateKeys = ValueModels.GroupBy(t => t.Item1).Where(grp => grp.Count() > 1).ToList();
+            if (duplicateKeys.Count > 0)
+            {
+                throw new InvalidOperationException(string.Format("One ore more key occures more than once: {0}", string.Join(", ", duplicateKeys.Select(grp => grp.Key))));
+            }
+
             var dlg = ViewModelFactory.CreateViewModel<ValueInputTaskViewModel.Factory>().Invoke(DataContext, null, Title, ValueModels, ok);
             ViewModelFactory.ShowDialog(dlg, ownerMdl ?? ViewModelFactory.GetWorkspace(DataContext));
         }
@@ -64,7 +83,7 @@ namespace Zetbox.Client.GUI
             if (requestedKind != null)
                 vmdl.RequestedKind = requestedKind;
 
-            c.ValueModels.Add(new Tuple<object, BaseValueViewModel>(key, vmdl));
+            c.ValueModels.Add(new Tuple<object, ViewModel>(key, vmdl));
             return c;
         }
         public static DialogCreator AddMultiLineString(this DialogCreator c, object key, string label, string value = null, bool allowNullInput = false, bool isReadOnly = false, ViewModelDescriptor vmdesc = null, string description = null)
@@ -79,10 +98,19 @@ namespace Zetbox.Client.GUI
             return AddString(c, key, label, requestedKind: Zetbox.NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_PasswordKind.Find(c.FrozenCtx), description: description);
         }
 
-        public static DialogCreator AddTextBlock(this DialogCreator c, object key, string label, string value, string description = null)
+        public static DialogCreator AddTextBlock(this DialogCreator c, object key, string labelOrText, string value = null, string description = null)
         {
             if (c == null) throw new ArgumentNullException("c");
-            return AddString(c, label, value, allowNullInput: true, requestedKind: Zetbox.NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_TextKind.Find(c.FrozenCtx), description: description);
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                var vmdl = c.ViewModelFactory.CreateViewModel<TextViewModel.Factory>().Invoke(c.DataContext, null, labelOrText);
+                c.ValueModels.Add(new Tuple<object, ViewModel>(key, vmdl));
+                return c;
+            }
+            else
+            {
+                return AddString(c, key, labelOrText, value, allowNullInput: true, requestedKind: Zetbox.NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_TextKind.Find(c.FrozenCtx), description: description);
+            }
         }
 
         public static DialogCreator AddDateTime(this DialogCreator c, object key, string label, DateTime? value = null, App.Base.DateTimeStyles style = App.Base.DateTimeStyles.Date, bool allowNullInput = false, bool isReadOnly = false, ControlKind requestedKind = null, ViewModelDescriptor vmdesc = null, string description = null)
@@ -102,7 +130,7 @@ namespace Zetbox.Client.GUI
             if (requestedKind != null)
                 vmdl.RequestedKind = requestedKind;
 
-            c.ValueModels.Add(new Tuple<object, BaseValueViewModel>(key, vmdl));
+            c.ValueModels.Add(new Tuple<object, ViewModel>(key, vmdl));
             return c;
         }
 
@@ -123,7 +151,7 @@ namespace Zetbox.Client.GUI
             if (requestedKind != null)
                 vmdl.RequestedKind = requestedKind;
 
-            c.ValueModels.Add(new Tuple<object, BaseValueViewModel>(key, vmdl));
+            c.ValueModels.Add(new Tuple<object, ViewModel>(key, vmdl));
             return c;
         }
 
@@ -144,7 +172,7 @@ namespace Zetbox.Client.GUI
             if (requestedKind != null)
                 vmdl.RequestedKind = requestedKind;
 
-            c.ValueModels.Add(new Tuple<object, BaseValueViewModel>(key, vmdl));
+            c.ValueModels.Add(new Tuple<object, ViewModel>(key, vmdl));
             return c;
         }
 
@@ -165,7 +193,7 @@ namespace Zetbox.Client.GUI
             if (requestedKind != null)
                 vmdl.RequestedKind = requestedKind;
 
-            c.ValueModels.Add(new Tuple<object, BaseValueViewModel>(key, vmdl));
+            c.ValueModels.Add(new Tuple<object, ViewModel>(key, vmdl));
             return c;
         }
 
@@ -186,7 +214,7 @@ namespace Zetbox.Client.GUI
             if (requestedKind != null)
                 vmdl.RequestedKind = requestedKind;
 
-            c.ValueModels.Add(new Tuple<object, BaseValueViewModel>(key, vmdl));
+            c.ValueModels.Add(new Tuple<object, ViewModel>(key, vmdl));
             return c;
         }
     }

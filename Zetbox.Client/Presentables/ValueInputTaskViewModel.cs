@@ -32,10 +32,10 @@ namespace Zetbox.Client.Presentables
     internal class ValueInputTaskViewModel
         : WindowViewModel, Zetbox.Client.Presentables.IValueInputTaskViewModel
     {
-        public new delegate ValueInputTaskViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string name, IEnumerable<Tuple<object, BaseValueViewModel>> valueModels, Action<Dictionary<object, object>> callback);
+        public new delegate ValueInputTaskViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string name, IEnumerable<Tuple<object, ViewModel>> valueModels, Action<Dictionary<object, object>> callback);
 
         public ValueInputTaskViewModel(
-            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, string name, IEnumerable<Tuple<object, BaseValueViewModel>> valueModels, Action<Dictionary<object, object>> callback)
+            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, string name, IEnumerable<Tuple<object, ViewModel>> valueModels, Action<Dictionary<object, object>> callback)
             : base(appCtx, dataCtx, parent)
         {
             if (callback == null) throw new ArgumentNullException("callback");
@@ -49,8 +49,8 @@ namespace Zetbox.Client.Presentables
 
         #region Parameter
 
-        private IEnumerable<Tuple<object, BaseValueViewModel>> _valueModels;
-        public IEnumerable<BaseValueViewModel> ValueViewModels
+        private IEnumerable<Tuple<object, ViewModel>> _valueModels;
+        public IEnumerable<ViewModel> ValueViewModels
         {
             get
             {
@@ -58,8 +58,8 @@ namespace Zetbox.Client.Presentables
             }
         }
 
-        private ILookup<object, BaseValueViewModel> _valueModelsByName;
-        public ILookup<object, BaseValueViewModel> ValueViewModelsByName
+        private ILookup<object, ViewModel> _valueModelsByName;
+        public ILookup<object, ViewModel> ValueViewModelsByName
         {
             get
             {
@@ -100,7 +100,7 @@ namespace Zetbox.Client.Presentables
 
         public void Invoke()
         {
-            var parameter = _valueModels.ToDictionary(k => k.Item1, i => i.Item2.ValueModel.GetUntypedValue());
+            var parameter = _valueModels.Where(i => i.Item2 is BaseValueViewModel).ToDictionary(k => k.Item1, i => ((BaseValueViewModel)i.Item2).ValueModel.GetUntypedValue());
             _callback(parameter);
             Show = false;
         }
