@@ -54,15 +54,12 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Button Command="{Binding DataContext.SelectAndChooseCommand, Converter={StaticResource CommandConverter}, ElementName=lst}"
-                            CommandParameter="{Binding}"
-                            Width="140"
-                            Height="90"
-                            Margin="5">
-                            <Button.Content>
-                                <TextBlock TextWrapping="WrapWithOverflow"
-                                               Text="{Binding Name}" />
-                            </Button.Content>
-                        </Button>
+                                CommandParameter="{Binding}"
+                                Content="{Binding}"
+                                ContentTemplateSelector="{StaticResource defaultTemplateSelector}"
+                                Width="140"
+                                Height="90"
+                                Margin="5" />
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
