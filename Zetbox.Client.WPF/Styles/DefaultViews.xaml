@@ -2474,6 +2474,10 @@
         <TextBlock Text="{Binding Name}" />
     </DataTemplate>
 
+    <DataTemplate x:Key="labeledViewTemplate">
+        <ctrls:LabeledView />
+    </DataTemplate>
+
     <Style x:Key="LabeledViewStyle"
            TargetType="Control">
         <Setter Property="Margin"

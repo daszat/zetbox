@@ -117,6 +117,12 @@ namespace Zetbox.Client.WPF.Toolkit
             }
 
             var rk = _requestedKind ?? GetRequestedKind(container);
+            var useLabeledView = GetUseLabeledView(container);
+
+            if (useLabeledView && item is ILabeledViewModel)
+            {
+                return GetLabeledViewTemplate(container);
+            }
 
             var model = item as ViewModel;
             DataTemplate result = null;
@@ -160,6 +166,11 @@ namespace Zetbox.Client.WPF.Toolkit
             }
         }
 
+        private static DataTemplate GetLabeledViewTemplate(DependencyObject container)
+        {
+            return (DataTemplate)((FrameworkElement)container).FindResource("labeledViewTemplate");
+        }
+
         private static DataTemplate GetEmptyTemplate(DependencyObject container)
         {
             return (DataTemplate)((FrameworkElement)container).FindResource("emptyTemplate");
@@ -187,5 +198,22 @@ namespace Zetbox.Client.WPF.Toolkit
         // default DependencyProperty template
         public static readonly DependencyProperty RequestedKindProperty =
             DependencyProperty.RegisterAttached("RequestedKind", typeof(object), typeof(VisualTypeTemplateSelector), new UIPropertyMetadata());
+
+
+
+
+        public static bool GetUseLabeledView(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(UseLabeledViewProperty);
+        }
+
+        public static void SetUseLabeledView(DependencyObject obj, bool value)
+        {
+            obj.SetValue(UseLabeledViewProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for UserLabeledView.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty UseLabeledViewProperty =
+            DependencyProperty.RegisterAttached("UseLabeledView", typeof(bool), typeof(VisualTypeTemplateSelector), new UIPropertyMetadata(false));
     }
 }
