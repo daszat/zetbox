@@ -20,11 +20,11 @@ namespace Zetbox.Client.GUI
     using System.Linq;
     using System.Text;
     using Zetbox.API;
-    using Zetbox.Client.Presentables;
-    using Zetbox.Client.Presentables.ValueViewModels;
-    using Zetbox.Client.Models;
     using Zetbox.App.GUI;
+    using Zetbox.Client.Models;
+    using Zetbox.Client.Presentables;
     using Zetbox.Client.Presentables.GUI;
+    using Zetbox.Client.Presentables.ValueViewModels;
 
     public class DialogCreator
     {
@@ -281,6 +281,8 @@ namespace Zetbox.Client.GUI
         #region Panels
         public static DialogCreator AddGroupBox(this DialogCreator c, object key, string header, Action<DialogCreator> children)
         {
+            if (c == null) throw new ArgumentNullException("c");
+            if (children == null) throw new ArgumentNullException("children");
             var sub = new DialogCreator(c);
             children(sub);
             var vmdl = c.ViewModelFactory.CreateViewModel<GroupBoxViewModel.Factory>().Invoke(c.DataContext, null, header, sub.Items);
@@ -290,6 +292,8 @@ namespace Zetbox.Client.GUI
 
         public static DialogCreator AddTabControl(this DialogCreator c, object key, string header, Action<DialogCreator> children)
         {
+            if (c == null) throw new ArgumentNullException("c");
+            if (children == null) throw new ArgumentNullException("children");
             var sub = new DialogCreator(c);
             children(sub);
             var vmdl = c.ViewModelFactory.CreateViewModel<TabControlViewModel.Factory>().Invoke(c.DataContext, null, header, sub.Items);
@@ -299,6 +303,8 @@ namespace Zetbox.Client.GUI
 
         public static DialogCreator AddTabItem(this DialogCreator c, object key, string header, Action<DialogCreator> children)
         {
+            if (c == null) throw new ArgumentNullException("c");
+            if (children == null) throw new ArgumentNullException("children");
             var sub = new DialogCreator(c);
             children(sub);
             var vmdl = c.ViewModelFactory.CreateViewModel<TabItemViewModel.Factory>().Invoke(c.DataContext, null, header, sub.Items);
@@ -310,6 +316,7 @@ namespace Zetbox.Client.GUI
         #region Buttons
         public static DialogCreator YesNo(this DialogCreator c)
         {
+            if (c == null) throw new ArgumentNullException("c");
             c.AcceptLabel = DialogCreatorResources.Yes;
             c.CancelLabel = DialogCreatorResources.No;
 
@@ -318,6 +325,7 @@ namespace Zetbox.Client.GUI
 
         public static DialogCreator DefaultButtons(this DialogCreator c, string acceptLabel, string cancelLabel)
         {
+            if (c == null) throw new ArgumentNullException("c");
             c.AcceptLabel = acceptLabel;
             c.CancelLabel = cancelLabel;
 
@@ -326,18 +334,21 @@ namespace Zetbox.Client.GUI
 
         public static DialogCreator AddButton(this DialogCreator c, string label, Action<Dictionary<object, object>> action, string tooltip = null)
         {
+            if (c == null) throw new ArgumentNullException("c");
             c.AdditionalButtons.Add(new Tuple<string, string, Action<Dictionary<object, object>>>(label, tooltip, action));
             return c;
         }
 
         public static DialogCreator OnAccept(this DialogCreator c, Action<Dictionary<object, object>> action)
         {
+            if (c == null) throw new ArgumentNullException("c");
             c.OnAcceptAction = action;
             return c;
         }
 
         public static DialogCreator OnCancel(this DialogCreator c, Action action)
         {
+            if (c == null) throw new ArgumentNullException("c");
             c.OnCancelAction = action;
             return c;
         }
