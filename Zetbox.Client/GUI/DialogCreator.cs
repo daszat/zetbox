@@ -24,6 +24,7 @@ namespace Zetbox.Client.GUI
     using Zetbox.Client.Presentables.ValueViewModels;
     using Zetbox.Client.Models;
     using Zetbox.App.GUI;
+    using Zetbox.Client.Presentables.GUI;
 
     public class DialogCreator
     {
@@ -31,15 +32,32 @@ namespace Zetbox.Client.GUI
 
         public DialogCreator(IZetboxContext ctx, IViewModelFactory mdlFactory, IFrozenContext frozenCtx)
         {
+            if (ctx == null) throw new ArgumentNullException("ctx");
+            if (mdlFactory == null) throw new ArgumentNullException("mdlFactory");
+            if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
+
             ValueModels = new List<Tuple<object, ViewModel>>();
             DataContext = ctx;
             ViewModelFactory = mdlFactory;
             FrozenCtx = frozenCtx;
         }
 
+        public DialogCreator(DialogCreator parent)
+        {
+            if (parent == null) throw new ArgumentNullException("parent");
+
+            ValueModels = new List<Tuple<object, ViewModel>>();
+            Parent = parent;
+
+            DataContext = parent.DataContext;
+            ViewModelFactory = parent.ViewModelFactory;
+            FrozenCtx = parent.FrozenCtx;
+        }
+
         public IZetboxContext DataContext { get; private set; }
         public IViewModelFactory ViewModelFactory { get; private set; }
         public IFrozenContext FrozenCtx { get; private set; }
+        public DialogCreator Parent { get; private set; }
 
         public string Title { get; set; }
         public List<Tuple<object, ViewModel>> ValueModels { get; private set; }
@@ -86,6 +104,7 @@ namespace Zetbox.Client.GUI
             c.ValueModels.Add(new Tuple<object, ViewModel>(key, vmdl));
             return c;
         }
+        
         public static DialogCreator AddMultiLineString(this DialogCreator c, object key, string label, string value = null, bool allowNullInput = false, bool isReadOnly = false, ViewModelDescriptor vmdesc = null, string description = null)
         {
             if (c == null) throw new ArgumentNullException("c");
@@ -214,6 +233,15 @@ namespace Zetbox.Client.GUI
             if (requestedKind != null)
                 vmdl.RequestedKind = requestedKind;
 
+            c.ValueModels.Add(new Tuple<object, ViewModel>(key, vmdl));
+            return c;
+        }
+
+        public static DialogCreator AddGroupBox(this DialogCreator c, object key, string header, Action<DialogCreator> children)
+        {
+            var sub = new DialogCreator(c);
+            children(sub);
+            var vmdl = c.ViewModelFactory.CreateViewModel<GroupBoxViewModel.Factory>().Invoke(c.DataContext, null, header, sub.ValueModels.Select(t => t.Item2));
             c.ValueModels.Add(new Tuple<object, ViewModel>(key, vmdl));
             return c;
         }

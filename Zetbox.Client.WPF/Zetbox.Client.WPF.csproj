@@ -643,6 +643,7 @@
     <Compile Include="View\Calendar\WorkScheduleRuleInstanceDisplay.xaml.cs">
       <DependentUpon>WorkScheduleRuleInstanceDisplay.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\GUI\Panels.cs" />
     <Compile Include="View\SelectionDialogGrid.xaml.cs">
       <DependentUpon>SelectionDialogGrid.xaml</DependentUpon>
     </Compile>

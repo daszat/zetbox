@@ -41,10 +41,10 @@
                      Style="{StaticResource addedMargins}"
                      Rows="1">
             <ctrls:CommandButton IsDefault="True"
-                                 Style="{StaticResource addedMargins}"
+                                 Margin="5"
                                  CommandViewModel="{Binding InvokeCommand}"/>
             <ctrls:CommandButton IsCancel="True"
-                                 Style="{StaticResource addedMargins}"
+                                 Margin="5"
                                  CommandViewModel="{Binding CancelCommand}"/>
         </UniformGrid>
 

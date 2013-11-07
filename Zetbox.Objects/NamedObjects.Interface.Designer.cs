@@ -4462,6 +4462,10 @@ namespace Zetbox {
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("b056e51c-efcf-4ba5-bb34-3b1204254ef9"); }
                 }
+                public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_GroupBox
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("17160e02-e53e-4e4e-ad4b-6544cc436ea1"); }
+                }
                 public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_InstanceGridHorizontalKind
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("601d4613-016a-4b8b-97fb-53f0f0feb51a"); }
@@ -4557,6 +4561,10 @@ namespace Zetbox {
                 public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_OptionalPredicateFilterKind
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("ace074dc-845d-4796-841e-973939a1e98f"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_Panels
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("933e0b1f-ea8c-4de1-8a86-a925aad86343"); }
                 }
                 public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_ParameterInputTaskDialog
                 {
@@ -4966,6 +4974,10 @@ namespace Zetbox {
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_GUI_ControlKindViewModel
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("a6327c38-655d-4188-9601-07f2e71756bc"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_GUI_GroupBoxViewModel
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("06d2e926-a15b-43e7-a74d-4df36c50c571"); }
                 }
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_GUI_MultiLineEditorDialogViewModel
                 {

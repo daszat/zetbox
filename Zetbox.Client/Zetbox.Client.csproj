@@ -205,6 +205,7 @@
     <Compile Include="Presentables\GUI\NavigationReportScreenViewModel.cs" />
     <Compile Include="Presentables\GUI\NavigationScreenViewModel.cs" />
     <Compile Include="Presentables\GUI\NavigationSearchScreenViewModel.cs" />
+    <Compile Include="Presentables\GUI\Panels.cs" />
     <Compile Include="Presentables\GUI\SavedListConfiguratorViewModel.cs" />
     <Compile Include="Presentables\GUI\SavedListConfiguratorViewModel.Model.cs" />
     <Compile Include="Presentables\GUI\SavedListConfiguratorViewModelResources.Designer.cs">

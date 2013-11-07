@@ -3,7 +3,9 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     xmlns:styles="clr-namespace:Zetbox.Client.WPF.Styles;assembly=Zetbox.Client.WPF.Toolkit"
                     xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
+                    xmlns:tk="clr-namespace:Zetbox.Client.WPF.Toolkit;assembly=Zetbox.Client.WPF.Toolkit"
                     xmlns:view="clr-namespace:Zetbox.Client.WPF.View.ZetboxBase"
+                    xmlns:gui="clr-namespace:Zetbox.Client.WPF.View.GUI"
                     xmlns:kevinTxt="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
                     xmlns:client="clr-namespace:Zetbox.Client.Presentables;assembly=Zetbox.Client"
                     xmlns:swcp="clr-namespace:System.Windows.Controls.Primitives;assembly=PresentationFramework">
@@ -2079,6 +2081,10 @@
            BasedOn="{StaticResource zbGroupBoxTemplate}">
     </Style>
 
+    <Style TargetType="gui:GroupBoxView"
+           BasedOn="{StaticResource zbGroupBoxTemplate}">
+    </Style>
+
     <Style x:Key="zbToolBarTrayTemplate"
            TargetType="ToolBarTray">
         <Setter Property="Background"
@@ -2476,6 +2482,11 @@
 
     <DataTemplate x:Key="labeledViewTemplate">
         <ctrls:LabeledView />
+    </DataTemplate>
+
+    <DataTemplate x:Key="labeledViewContentPresenterTemplate">
+        <ContentPresenter ContentTemplateSelector="{StaticResource defaultTemplateSelector}"
+                          tk:VisualTypeTemplateSelector.UseLabeledView="true" />
     </DataTemplate>
 
     <Style x:Key="LabeledViewStyle"

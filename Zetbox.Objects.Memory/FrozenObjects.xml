@@ -15360,6 +15360,13 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.GUI.ControlKindViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="06d2e926-a15b-43e7-a74d-4df36c50c571">
+    <GUI:DefaultEditorKind>17160e02-e53e-4e4e-ad4b-6544cc436ea1</GUI:DefaultEditorKind>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Description>A GroupBox ViewModel</GUI:Description>
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.GUI.GroupBoxViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="fbf7ee47-b967-4e63-8db9-e7827f5ffe05">
     <GUI:DefaultEditorKind>ac155a59-74bd-46c1-b63a-120f68118af2</GUI:DefaultEditorKind>
     <GUI:Deleted>false</GUI:Deleted>
@@ -15560,6 +15567,13 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
   <GUI:ViewDescriptor ExportGuid="93c2965e-598a-4bbd-8c37-3f520699ff68">
     <GUI:ControlKind>8cf4c4e6-8c6f-48ac-a879-f09679141298</GUI:ControlKind>
     <GUI:ControlTypeRef>Zetbox.Client.WPF.View.GridCells.MultilineStringValue, Zetbox.Client.WPF</GUI:ControlTypeRef>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Toolkit>0</GUI:Toolkit>
+  </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="2546b054-10de-4a1e-b0f7-dcf5ef6e7cdf">
+    <GUI:ControlKind>17160e02-e53e-4e4e-ad4b-6544cc436ea1</GUI:ControlKind>
+    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.GUI.GroupBoxView, Zetbox.Client.WPF</GUI:ControlTypeRef>
     <GUI:Deleted>false</GUI:Deleted>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
@@ -15809,6 +15823,11 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <GUI:Name>Zetbox.App.GUI.InstanceGridKind</GUI:Name>
     <GUI:Parent>4e7a8b0b-0c8e-49e1-aa35-d3a9ec7b8e4c</GUI:Parent>
   </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="17160e02-e53e-4e4e-ad4b-6544cc436ea1">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>Zetbox.App.GUI.GroupBox</GUI:Name>
+    <GUI:Parent>933e0b1f-ea8c-4de1-8a86-a925aad86343</GUI:Parent>
+  </GUI:ControlKind>
   <GUI:ControlKind ExportGuid="18c0afa2-61bc-4ecb-b1e9-47b33b294573">
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Name>Zetbox.App.GUI.DataObjectSelectionTaskKind</GUI:Name>
@@ -15969,6 +15988,10 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
   <GUI:ControlKind ExportGuid="90fe1019-7eea-4a90-8c3b-28fa317c9b65">
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Name>Zetbox.App.GUI.Navigator</GUI:Name>
+  </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="933e0b1f-ea8c-4de1-8a86-a925aad86343">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>Zetbox.App.GUI.Panels</GUI:Name>
   </GUI:ControlKind>
   <GUI:ControlKind ExportGuid="9731f312-8ce4-4c2d-8d95-1923256dc9b8">
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
