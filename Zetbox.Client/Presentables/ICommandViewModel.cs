@@ -265,7 +265,7 @@ namespace Zetbox.Client.Presentables
             {
                 return _labelCache;
             }
-            protected set
+            set
             {
                 if (_labelCache != value)
                 {
@@ -288,7 +288,7 @@ namespace Zetbox.Client.Presentables
             {
                 return string.IsNullOrEmpty(_reason) ? _toolTipCache : _reason;
             }
-            protected set
+            set
             {
                 if (_toolTipCache != value)
                 {
@@ -311,7 +311,7 @@ namespace Zetbox.Client.Presentables
             {
                 return _reason;
             }
-            protected set
+            set
             {
                 if (_reason != value)
                 {
