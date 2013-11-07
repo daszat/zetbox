@@ -424,6 +424,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                             .AddBool("simple", "Is simple", value: false, description: "Is simple object")
                             .AddBool("abstract", "Is abstract", value: false, description: "Is abstract object")
                             .AddBool("show", "Show", value: false, description: "Show class when finished")
+                            .DefaultButtons("Create", "Cancel")
                             .Show(values =>
                             {
                                 var newCtx = ctxFactory();

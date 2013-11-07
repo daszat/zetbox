@@ -187,7 +187,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
         }
 
         private OpenDataObjectCommand _open = null;
-        public ICommandViewModel Open
+        public ICommandViewModel OpenCommand
         {
             get
             {
@@ -199,6 +199,32 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                 return _open;
             }
         }
+
+        #region AddProperty command
+        private ICommandViewModel _AddPropertyCommand = null;
+        public ICommandViewModel AddPropertyCommand
+        {
+            get
+            {
+                if (_AddPropertyCommand == null)
+                {
+                    _AddPropertyCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Add", "Adds a new property", AddProperty, null, null);
+                }
+                return _AddPropertyCommand;
+            }
+        }
+
+        public void AddProperty()
+        {
+            using (var ctx = ctxFactory())
+            {
+                var dt = ctx.FindPersistenceObject<DataType>(DataType.ExportGuid);
+                dt.AddProperty();
+                ctx.SubmitChanges();
+            }
+        }
+
+        #endregion
 
         private ReadOnlyProjectedList<Property, DescribedPropertyViewModel> _propertyModels;
         public IReadOnlyList<DescribedPropertyViewModel> DescribedPropertyModels
