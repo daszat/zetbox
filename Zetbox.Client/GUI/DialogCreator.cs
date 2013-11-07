@@ -36,7 +36,8 @@ namespace Zetbox.Client.GUI
             if (mdlFactory == null) throw new ArgumentNullException("mdlFactory");
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
 
-            ValueModels = new List<Tuple<object, ViewModel>>();
+            Items = new List<ViewModel>();
+            ValueModels = new List<Tuple<object, BaseValueViewModel>>();
             DataContext = ctx;
             ViewModelFactory = mdlFactory;
             FrozenCtx = frozenCtx;
@@ -46,9 +47,9 @@ namespace Zetbox.Client.GUI
         {
             if (parent == null) throw new ArgumentNullException("parent");
 
-            ValueModels = new List<Tuple<object, ViewModel>>();
             Parent = parent;
 
+            Items = new List<ViewModel>();
             DataContext = parent.DataContext;
             ViewModelFactory = parent.ViewModelFactory;
             FrozenCtx = parent.FrozenCtx;
@@ -60,9 +61,31 @@ namespace Zetbox.Client.GUI
         public DialogCreator Parent { get; private set; }
 
         public string Title { get; set; }
-        public List<Tuple<object, ViewModel>> ValueModels { get; private set; }
+        public List<ViewModel> Items { get; private set; }
+        public List<Tuple<object, BaseValueViewModel>> ValueModels { get; private set; }
 
         private static readonly Action<Dictionary<object, object>> _doNothing = p => { };
+
+        public void Add(object key, ViewModel vmdl)
+        {
+            Items.Add(vmdl);
+            AddValueModel(key, vmdl);
+        }
+
+        private void AddValueModel(object key, ViewModel vmdl)
+        {
+            if (vmdl is BaseValueViewModel)
+            {
+                if (Parent != null)
+                {
+                    Parent.AddValueModel(key, vmdl);
+                }
+                else
+                {
+                    ValueModels.Add(new Tuple<object,BaseValueViewModel>(key, (BaseValueViewModel)vmdl));
+                }
+            }
+        }
 
         public void Show()
         {
@@ -77,7 +100,7 @@ namespace Zetbox.Client.GUI
                 throw new InvalidOperationException(string.Format("One ore more key occures more than once: {0}", string.Join(", ", duplicateKeys.Select(grp => grp.Key))));
             }
 
-            var dlg = ViewModelFactory.CreateViewModel<ValueInputTaskViewModel.Factory>().Invoke(DataContext, null, Title, ValueModels, ok);
+            var dlg = ViewModelFactory.CreateViewModel<ValueInputTaskViewModel.Factory>().Invoke(DataContext, null, Title, Items, ValueModels, ok);
             ViewModelFactory.ShowDialog(dlg, ownerMdl ?? ViewModelFactory.GetWorkspace(DataContext));
         }
     }
@@ -101,7 +124,7 @@ namespace Zetbox.Client.GUI
             if (requestedKind != null)
                 vmdl.RequestedKind = requestedKind;
 
-            c.ValueModels.Add(new Tuple<object, ViewModel>(key, vmdl));
+            c.Add(key, vmdl);
             return c;
         }
         
@@ -123,7 +146,7 @@ namespace Zetbox.Client.GUI
             if (string.IsNullOrWhiteSpace(value))
             {
                 var vmdl = c.ViewModelFactory.CreateViewModel<TextViewModel.Factory>().Invoke(c.DataContext, null, labelOrText);
-                c.ValueModels.Add(new Tuple<object, ViewModel>(key, vmdl));
+                c.Add(key, vmdl);
                 return c;
             }
             else
@@ -149,7 +172,7 @@ namespace Zetbox.Client.GUI
             if (requestedKind != null)
                 vmdl.RequestedKind = requestedKind;
 
-            c.ValueModels.Add(new Tuple<object, ViewModel>(key, vmdl));
+            c.Add(key, vmdl);
             return c;
         }
 
@@ -170,7 +193,7 @@ namespace Zetbox.Client.GUI
             if (requestedKind != null)
                 vmdl.RequestedKind = requestedKind;
 
-            c.ValueModels.Add(new Tuple<object, ViewModel>(key, vmdl));
+            c.Add(key, vmdl);
             return c;
         }
 
@@ -191,7 +214,7 @@ namespace Zetbox.Client.GUI
             if (requestedKind != null)
                 vmdl.RequestedKind = requestedKind;
 
-            c.ValueModels.Add(new Tuple<object, ViewModel>(key, vmdl));
+            c.Add(key, vmdl);
             return c;
         }
 
@@ -212,7 +235,7 @@ namespace Zetbox.Client.GUI
             if (requestedKind != null)
                 vmdl.RequestedKind = requestedKind;
 
-            c.ValueModels.Add(new Tuple<object, ViewModel>(key, vmdl));
+            c.Add(key, vmdl);
             return c;
         }
 
@@ -233,7 +256,7 @@ namespace Zetbox.Client.GUI
             if (requestedKind != null)
                 vmdl.RequestedKind = requestedKind;
 
-            c.ValueModels.Add(new Tuple<object, ViewModel>(key, vmdl));
+            c.Add(key, vmdl);
             return c;
         }
 
@@ -241,8 +264,8 @@ namespace Zetbox.Client.GUI
         {
             var sub = new DialogCreator(c);
             children(sub);
-            var vmdl = c.ViewModelFactory.CreateViewModel<GroupBoxViewModel.Factory>().Invoke(c.DataContext, null, header, sub.ValueModels.Select(t => t.Item2));
-            c.ValueModels.Add(new Tuple<object, ViewModel>(key, vmdl));
+            var vmdl = c.ViewModelFactory.CreateViewModel<GroupBoxViewModel.Factory>().Invoke(c.DataContext, null, header, sub.Items);
+            c.Add(key, vmdl);
             return c;
         }
     }

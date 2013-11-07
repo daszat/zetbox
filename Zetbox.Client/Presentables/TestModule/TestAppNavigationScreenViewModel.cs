@@ -84,14 +84,19 @@ namespace Zetbox.Client.Presentables.TestModule
                     () => 
                     {
                         ViewModelFactory.CreateDialog(DataContext, "Test dialog")
-                            .AddGroupBox("grp1", "Group 1", 
+                            .AddGroupBox("grp1", "Group 1",
                                 c => c.AddTextBlock("txt1", "txt label", "Textblock 1")
                                       .AddTextBlock("txt2", "", "Textblock 2")
                                       .AddTextBlock("txt3", "txt label"))
-                            .AddGroupBox("grp2", "Group 2", 
+                            .AddGroupBox("grp2", "Group 2",
                                 c => c.AddString("txt4", "string", "", description: "enter something")
                                       .AddMultiLineString("txt5", "string", "", description: "enter something"))
-                            .Show();
+                            .Show(values =>
+                            {
+                                ViewModelFactory.ShowMessage(
+                                    string.Join("\n", values.Select(i => string.Format("{0}: \"{1}\"", i.Key, i.Value))), 
+                                    "received parameter");
+                            });
                     },
                     null,
                     null));

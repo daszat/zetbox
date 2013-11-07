@@ -43,7 +43,7 @@
         </UniformGrid>
 
         <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <ItemsControl ItemsSource="{Binding ValueViewModels, ValidatesOnDataErrors=true}"
+            <ItemsControl ItemsSource="{Binding Items, ValidatesOnDataErrors=true}"
                           BorderThickness="0"
                           HorizontalContentAlignment="Stretch"
                           VerticalContentAlignment="Stretch">
