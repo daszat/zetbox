@@ -74,4 +74,26 @@ namespace Zetbox.Client.Presentables.GUI
         {
         }
     }
+
+    [ViewModelDescriptor]
+    public class TabControlViewModel : PanelViewModel
+    {
+        public new delegate TabControlViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string name, IEnumerable<ViewModel> children);
+
+        public TabControlViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, string name, IEnumerable<ViewModel> children)
+            : base(dependencies, dataCtx, parent, name, children)
+        {
+        }
+    }
+
+    [ViewModelDescriptor]
+    public class TabItemViewModel : PanelViewModel
+    {
+        public new delegate TabItemViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string name, IEnumerable<ViewModel> children);
+
+        public TabItemViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, string name, IEnumerable<ViewModel> children)
+            : base(dependencies, dataCtx, parent, name, children)
+        {
+        }
+    }
 }

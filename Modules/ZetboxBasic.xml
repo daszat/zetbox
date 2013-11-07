@@ -8754,6 +8754,20 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.GUI.SavedListConfigViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="68092215-bbc1-47c6-8ed6-b7be621563a2">
+    <GUI:DefaultEditorKind>e64321e9-b655-4cff-bee8-0b2f27ae191a</GUI:DefaultEditorKind>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Description>A TabControl ViewModel</GUI:Description>
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.GUI.TabControlViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="5d371f5e-7dce-4ae1-b9c5-039f7399af23">
+    <GUI:DefaultEditorKind>0b3ac429-a94f-4a49-9c1d-b8c002ade6a2</GUI:DefaultEditorKind>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Description>A TabItem ViewModel</GUI:Description>
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.GUI.TabItemViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="d364380b-1802-47e4-885d-a98ca117e5a1">
     <GUI:Deleted>false</GUI:Deleted>
     <GUI:Description>A specialized viewmodel of an object class only for the object browser</GUI:Description>
@@ -8954,6 +8968,20 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="d574efd0-478d-4cdc-8bc9-582bfa5bca57">
+    <GUI:ControlKind>e64321e9-b655-4cff-bee8-0b2f27ae191a</GUI:ControlKind>
+    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.GUI.TabControlView, Zetbox.Client.WPF</GUI:ControlTypeRef>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Toolkit>0</GUI:Toolkit>
+  </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="0434a000-d956-4939-9e4b-552d9be278e5">
+    <GUI:ControlKind>0b3ac429-a94f-4a49-9c1d-b8c002ade6a2</GUI:ControlKind>
+    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.GUI.TabItemView, Zetbox.Client.WPF</GUI:ControlTypeRef>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Toolkit>0</GUI:Toolkit>
+  </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="ce2a7b84-7fc0-4d2a-985f-47231592252c">
     <GUI:ControlKind>974fae02-0f72-4631-bcf3-edbebbafea4f</GUI:ControlKind>
     <GUI:ControlTypeRef>Zetbox.Client.WPF.View.NullableBoolValueDropdownView, Zetbox.Client.WPF</GUI:ControlTypeRef>
@@ -9119,6 +9147,11 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
   <GUI:ControlKind ExportGuid="06bf9adc-c5bc-4552-abdc-18a96c527962">
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Name>Zetbox.App.GUI.DataObjectKind</GUI:Name>
+  </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="0b3ac429-a94f-4a49-9c1d-b8c002ade6a2">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>Zetbox.App.GUI.TabItem</GUI:Name>
+    <GUI:Parent>933e0b1f-ea8c-4de1-8a86-a925aad86343</GUI:Parent>
   </GUI:ControlKind>
   <GUI:ControlKind ExportGuid="0bb7189a-aadb-4c56-94be-0492808d923c">
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
@@ -9428,6 +9461,11 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
   <GUI:ControlKind ExportGuid="dc5982a3-8b8f-44e1-b860-1400a41c4275">
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Name>Zetbox.App.GUI.PropertiesPreview</GUI:Name>
+  </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="e64321e9-b655-4cff-bee8-0b2f27ae191a">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>Zetbox.App.GUI.TabControl</GUI:Name>
+    <GUI:Parent>933e0b1f-ea8c-4de1-8a86-a925aad86343</GUI:Parent>
   </GUI:ControlKind>
   <GUI:ControlKind ExportGuid="f3ef02a1-2f89-4edf-91c8-0d79b4e6f0c4">
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>

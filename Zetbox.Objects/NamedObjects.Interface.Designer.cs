@@ -4634,6 +4634,14 @@ namespace Zetbox {
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("ab09eaba-507b-4dce-9fbd-589adbc9580b"); }
                 }
+                public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_TabControl
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("e64321e9-b655-4cff-bee8-0b2f27ae191a"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_TabItem
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("0b3ac429-a94f-4a49-9c1d-b8c002ade6a2"); }
+                }
                 public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_TagEditorKind
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("11bb1ff6-0484-4552-b250-b0ab16654533"); }
@@ -5018,6 +5026,14 @@ namespace Zetbox {
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_GUI_SavedListConfigViewModel
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("0dbfab52-64c2-404d-a612-6df0696131b7"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_GUI_TabControlViewModel
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("68092215-bbc1-47c6-8ed6-b7be621563a2"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_GUI_TabItemViewModel
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("5d371f5e-7dce-4ae1-b9c5-039f7399af23"); }
                 }
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ModuleEditor_ControlKindHierarchyViewModel
                 {

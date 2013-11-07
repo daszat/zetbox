@@ -91,6 +91,13 @@ namespace Zetbox.Client.Presentables.TestModule
                             .AddGroupBox("grp2", "Group 2",
                                 c => c.AddString("txt4", "string", "", description: "enter something")
                                       .AddMultiLineString("txt5", "string", "", description: "enter something"))
+                            .AddTabControl("tabCtrl", "",
+                                c => c.AddTabItem("ti1", "Tab 1",
+                                        i => i.AddString("txt6", "string 6")
+                                              .AddString("txt7", "string 7"))
+                                      .AddTabItem("ti2", "Tab 3",
+                                        i => i.AddString("txt8", "string 8")
+                                              .AddString("txt9", "string 9")))
                             .Show(values =>
                             {
                                 ViewModelFactory.ShowMessage(

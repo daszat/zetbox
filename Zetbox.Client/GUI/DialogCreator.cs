@@ -268,5 +268,23 @@ namespace Zetbox.Client.GUI
             c.Add(key, vmdl);
             return c;
         }
+
+        public static DialogCreator AddTabControl(this DialogCreator c, object key, string header, Action<DialogCreator> children)
+        {
+            var sub = new DialogCreator(c);
+            children(sub);
+            var vmdl = c.ViewModelFactory.CreateViewModel<TabControlViewModel.Factory>().Invoke(c.DataContext, null, header, sub.Items);
+            c.Add(key, vmdl);
+            return c;
+        }
+        
+        public static DialogCreator AddTabItem(this DialogCreator c, object key, string header, Action<DialogCreator> children)
+        {
+            var sub = new DialogCreator(c);
+            children(sub);
+            var vmdl = c.ViewModelFactory.CreateViewModel<TabItemViewModel.Factory>().Invoke(c.DataContext, null, header, sub.Items);
+            c.Add(key, vmdl);
+            return c;
+        }
     }
 }

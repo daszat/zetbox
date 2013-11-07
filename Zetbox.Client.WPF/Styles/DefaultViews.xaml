@@ -8,6 +8,7 @@
                     xmlns:gui="clr-namespace:Zetbox.Client.WPF.View.GUI"
                     xmlns:kevinTxt="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
                     xmlns:client="clr-namespace:Zetbox.Client.Presentables;assembly=Zetbox.Client"
+                    xmlns:clientgui="clr-namespace:Zetbox.Client.Presentables.GUI;assembly=Zetbox.Client"
                     xmlns:swcp="clr-namespace:System.Windows.Controls.Primitives;assembly=PresentationFramework">
     <!--
     This file is part of zetbox.
@@ -2479,6 +2480,10 @@
     <DataTemplate x:Key="nameCellTemplate">
         <TextBlock Text="{Binding Name}" />
     </DataTemplate>
+    
+    <DataTemplate x:Key="titleCellTemplate">
+        <TextBlock Text="{Binding Title}" />
+    </DataTemplate>
 
     <DataTemplate x:Key="labeledViewTemplate">
         <ctrls:LabeledView />
@@ -2613,4 +2618,11 @@
         <Setter Property="Background"
                 Value="#FFFFFFE0" />
     </Style>
+
+    <DataTemplate DataType="{x:Type clientgui:TabItemViewModel}">
+        <ContentPresenter Content="{Binding}"
+                          tk:VisualTypeTemplateSelector.RequestedKind="{Binding RequestedKind, Mode=OneWay}"
+                          ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+    </DataTemplate>
+
 </ResourceDictionary>

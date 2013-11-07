@@ -34,6 +34,7 @@ namespace Zetbox.Client.WPF.View.GUI
             if (DesignerProperties.GetIsInDesignMode(this)) return;
 
             BindingOperations.SetBinding(this, HeaderProperty, new Binding("Title") { Mode = BindingMode.OneWay });
+
             var items = new ItemsControl();
             BindingOperations.SetBinding(items, ItemsControl.ItemsSourceProperty, new Binding("Children") { Mode = BindingMode.OneWay });
             items.ItemTemplate = (DataTemplate)FindResource("labeledViewContentPresenterTemplate");
@@ -43,6 +44,40 @@ namespace Zetbox.Client.WPF.View.GUI
         public GroupBoxViewModel ViewModel
         {
             get { return (GroupBoxViewModel)DataContext; }
+        }
+    }
+
+    [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
+    public class TabControlView : TabControl, IHasViewModel<TabControlViewModel>
+    {
+        public TabControlView()
+        {
+            if (DesignerProperties.GetIsInDesignMode(this)) return;
+            BindingOperations.SetBinding(this, TabControl.ItemsSourceProperty, new Binding("Children") { Mode = BindingMode.OneWay });
+            this.ItemTemplate = (DataTemplate)FindResource("titleCellTemplate");
+            this.SelectedIndex = 0;
+        }
+
+        public TabControlViewModel ViewModel
+        {
+            get { return (TabControlViewModel)DataContext; }
+        }
+    }
+
+    [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
+    public class TabItemView : ItemsControl, IHasViewModel<TabItemViewModel>
+    {
+        public TabItemView()
+        {
+            if (DesignerProperties.GetIsInDesignMode(this)) return;
+
+            BindingOperations.SetBinding(this, ItemsControl.ItemsSourceProperty, new Binding("Children") { Mode = BindingMode.OneWay });
+            this.ItemTemplate = (DataTemplate)FindResource("labeledViewContentPresenterTemplate");
+        }
+
+        public TabItemViewModel ViewModel
+        {
+            get { return (TabItemViewModel)DataContext; }
         }
     }
 }
