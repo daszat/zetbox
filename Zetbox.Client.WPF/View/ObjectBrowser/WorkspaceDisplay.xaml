@@ -57,7 +57,7 @@
             <TreeView x:Name="ObjectTree"
                       Grid.Column="0"
                       BorderThickness="0"
-                      Margin="5"
+                      Margin="{StaticResource DialogMargin}"
                       SelectedItemChanged="ModuleTreeSelectedItemChangedHandler">
                 <TreeView.Resources>
                     <HierarchicalDataTemplate DataType="{x:Type objBrowser:ModuleViewModel}"
@@ -98,7 +98,7 @@
 
             <ContentPresenter Grid.Column="2"
                               Grid.IsSharedSizeScope="True"
-                              Margin="5"
+                              Margin="{StaticResource DialogMargin}"
                               Content="{Binding SelectedItem.DashboardViewModel}"
                               ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
         </Grid>

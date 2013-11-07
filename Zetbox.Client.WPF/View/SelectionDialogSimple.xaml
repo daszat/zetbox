@@ -27,23 +27,17 @@
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
     -->
 
-    <ctrls:WindowView.Resources>
-        <Style x:Key="addedMargins">
-            <Setter Property="FrameworkElement.Margin"
-                    Value="5" />
-        </Style>
-    </ctrls:WindowView.Resources>
-    <DockPanel Style="{StaticResource addedMargins}"
+    <DockPanel Margin="{StaticResource DialogMargin}"
                LastChildFill="True">
 
         <UniformGrid DockPanel.Dock="Bottom"
-                     Style="{StaticResource addedMargins}"
+                     Margin="{StaticResource DialogMargin}"
                      Rows="1">
             <ctrls:CommandButton CommandViewModel="{Binding ChooseCommand}"
-                                 Margin="5"
+                                 Margin="{StaticResource DialogMargin}"
                                  IsDefault="True"/>
             <ctrls:CommandButton CommandViewModel="{Binding CancelCommand}"
-                                 Margin="5"
+                                 Margin="{StaticResource DialogMargin}"
                                  IsCancel="True" />
         </UniformGrid>
 

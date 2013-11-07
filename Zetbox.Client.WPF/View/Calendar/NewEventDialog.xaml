@@ -11,20 +11,14 @@
                   Width="800"
                   IsTabStop="False"
                   commands:SmartRoutedUICommand.IsCommandSink="True">
-    <ctrls:WindowView.Resources>
-        <Style x:Key="addedMargins">
-            <Setter Property="FrameworkElement.Margin"
-                    Value="5" />
-        </Style>
-    </ctrls:WindowView.Resources>
     <DockPanel>
         <UniformGrid DockPanel.Dock="Bottom"
-                     Style="{StaticResource addedMargins}"
+                     Margin="{StaticResource DialogMargin}"
                      Rows="1">
             <ctrls:CommandButton CommandViewModel="{Binding NewCommand}"
-                                 Style="{StaticResource addedMargins}" />
+                                 Margin="{StaticResource DialogMargin}" />
             <ctrls:CommandButton CommandViewModel="{Binding CancelCommand}"
-                                 Style="{StaticResource addedMargins}" />
+                                 Margin="{StaticResource DialogMargin}" />
 
         </UniformGrid>
         <DockPanel DockPanel.Dock="Top"

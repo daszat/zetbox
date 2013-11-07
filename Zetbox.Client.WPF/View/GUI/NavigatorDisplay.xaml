@@ -38,7 +38,7 @@
         <!-- location breadcrumbs -->
         <ItemsControl DockPanel.Dock="Top"
                       ItemsSource="{Binding Location}"
-                      Margin="5">
+                      Margin="{StaticResource DialogMargin}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal"
@@ -71,13 +71,13 @@
                                  CommandViewModel="{Binding ReportProblemCommand}"
                                  Style="{StaticResource ImageButton}"
                                  Image="/Zetbox.Client.WPF;component/Images/info.png"
-                                 Margin="5"
+                                 Margin="{StaticResource DialogMargin}"
                                  Height="30" />
             <ctrls:CommandButton DockPanel.Dock="Right"
                                  CommandViewModel="{Binding BackCommand}"
                                  Style="{StaticResource ImageButton}"
                                  Image="/Zetbox.Client.WPF;component/Images/back.png"
-                                 Margin="5"
+                                 Margin="{StaticResource DialogMargin}"
                                  Height="30" />
             <TextBlock   TextAlignment="Center"
                          VerticalAlignment="Bottom"
