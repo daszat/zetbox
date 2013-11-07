@@ -120,6 +120,11 @@
       <DependentUpon>CredentialsResolverResources.resx</DependentUpon>
     </Compile>
     <Compile Include="GUI\DialogCreator.cs" />
+    <Compile Include="GUI\DialogCreatorResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DialogCreatorResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="GUI\IHasViewModel.cs" />
     <Compile Include="GUI\IRenderer.cs" />
     <Compile Include="GUI\ViewDescriptorAttribute.cs" />
@@ -440,6 +445,11 @@
       <DependentUpon>ZetboxContextExceptionHandlerResources.resx</DependentUpon>
     </Compile>
     <EmbeddedResource Include="CredentialsResolverResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="GUI\DialogCreatorResources.de.resx" />
+    <EmbeddedResource Include="GUI\DialogCreatorResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>DialogCreatorResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Models\FilterModelsResources.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="Presentables\ActionViewModelResources.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="Presentables\CacheDebuggerViewModelResources.x-zb-Pseudo.resx" />

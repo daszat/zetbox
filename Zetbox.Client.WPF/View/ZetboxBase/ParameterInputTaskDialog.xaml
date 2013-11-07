@@ -1,5 +1,5 @@
 ﻿<ctrls:WindowView x:Class="Zetbox.Client.WPF.View.ZetboxBase.ParameterInputTaskDialog"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                   xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
                   xmlns:client="clr-namespace:Zetbox.Client.Presentables;assembly=Zetbox.Client"
@@ -31,16 +31,22 @@
     <DockPanel Margin="{StaticResource DialogMargin}"
                LastChildFill="True">
 
-        <UniformGrid DockPanel.Dock="Bottom"
-                     Margin="{StaticResource DialogMargin}"
-                     Rows="1">
-            <ctrls:CommandButton IsDefault="True"
-                                 Margin="{StaticResource DialogMargin}"
-                                 CommandViewModel="{Binding InvokeCommand}"/>
-            <ctrls:CommandButton IsCancel="True"
-                                 Margin="{StaticResource DialogMargin}"
-                                 CommandViewModel="{Binding CancelCommand}"/>
-        </UniformGrid>
+        <ItemsControl DockPanel.Dock="Bottom"
+                      ItemsSource="{Binding Commands}">
+            <ItemsControl.Resources>
+                <DataTemplate DataType="{x:Type client:CommandViewModel}">
+                    <ctrls:CommandButton CommandViewModel="{Binding}"
+                                         Margin="{StaticResource DialogMargin}" />
+                </DataTemplate>
+            </ItemsControl.Resources>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Margin="{StaticResource DialogMargin}"
+                                 Rows="1"
+                                 IsItemsHost="True" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
 
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <ItemsControl ItemsSource="{Binding Items, ValidatesOnDataErrors=true}"
@@ -65,8 +71,8 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate DataType="{x:Type client:ViewModel}">
                         <ContentPresenter Content="{Binding}"
-                                          ContentTemplateSelector="{StaticResource defaultTemplateSelector}" 
-                                          tk:VisualTypeTemplateSelector.UseLabeledView="true" /> 
+                                          ContentTemplateSelector="{StaticResource defaultTemplateSelector}"
+                                          tk:VisualTypeTemplateSelector.UseLabeledView="true" />
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

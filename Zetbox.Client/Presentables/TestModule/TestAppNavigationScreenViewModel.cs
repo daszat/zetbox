@@ -42,12 +42,12 @@ namespace Zetbox.Client.Presentables.TestModule
 
             result.Add(ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
                 .Invoke(
-                    DataContext, 
-                    this, 
-                    "Test ProblemReporter", 
+                    DataContext,
+                    this,
+                    "Test ProblemReporter",
                     "Throws an exception so that the Problem Reporter will be shown",
                     () => { throw new NotImplementedException("This is a test exception"); },
-                    null, 
+                    null,
                     null));
 
             result.Add(ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
@@ -56,7 +56,7 @@ namespace Zetbox.Client.Presentables.TestModule
                     this,
                     "Test ProblemReporter continuously",
                     "Throws every couple of seconds an exception so that the Problem Reporter will be shown",
-                    () => 
+                    () =>
                     {
 
                         var syncContext = System.Threading.SynchronizationContext.Current;
@@ -70,7 +70,7 @@ namespace Zetbox.Client.Presentables.TestModule
                                 }, null);
                                 System.Threading.Thread.Sleep(2000);
                             }
-                        }); 
+                        });
                     },
                     null,
                     null));
@@ -81,7 +81,7 @@ namespace Zetbox.Client.Presentables.TestModule
                     this,
                     "Test DialogCreator",
                     "Opens a complex dialog",
-                    () => 
+                    () =>
                     {
                         ViewModelFactory.CreateDialog(DataContext, "Test dialog")
                             .AddGroupBox("grp1", "Group 1",
@@ -98,10 +98,23 @@ namespace Zetbox.Client.Presentables.TestModule
                                       .AddTabItem("ti2", "Tab 3",
                                         i => i.AddString("txt8", "string 8")
                                               .AddString("txt9", "string 9")))
+                            .YesNo()
+                            .DefaultButtons("Execute", "Cancel")
+                            .AddButton("Execute and Continue", values =>
+                            {
+                                ViewModelFactory.ShowMessage(
+                                    "Execute and Continue: \n\n" + string.Join("\n", values.Select(i => string.Format("{0}: \"{1}\"", i.Key, i.Value))),
+                                    "Execute and Continue");
+                            })
+                            .OnAccept(values => { })
+                            .OnCancel(() => 
+                            {
+                                ViewModelFactory.ShowMessage("Cancel!!", "Cancel");
+                            })
                             .Show(values =>
                             {
                                 ViewModelFactory.ShowMessage(
-                                    string.Join("\n", values.Select(i => string.Format("{0}: \"{1}\"", i.Key, i.Value))), 
+                                    string.Join("\n", values.Select(i => string.Format("{0}: \"{1}\"", i.Key, i.Value))),
                                     "received parameter");
                             });
                     },

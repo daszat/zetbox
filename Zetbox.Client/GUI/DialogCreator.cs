@@ -38,6 +38,7 @@ namespace Zetbox.Client.GUI
 
             Items = new List<ViewModel>();
             ValueModels = new List<Tuple<object, BaseValueViewModel>>();
+            AdditionalButtons = new List<Tuple<string, string, Action<Dictionary<object, object>>>>();
             DataContext = ctx;
             ViewModelFactory = mdlFactory;
             FrozenCtx = frozenCtx;
@@ -50,6 +51,7 @@ namespace Zetbox.Client.GUI
             Parent = parent;
 
             Items = new List<ViewModel>();
+            AdditionalButtons = new List<Tuple<string, string, Action<Dictionary<object, object>>>>();
             DataContext = parent.DataContext;
             ViewModelFactory = parent.ViewModelFactory;
             FrozenCtx = parent.FrozenCtx;
@@ -61,10 +63,17 @@ namespace Zetbox.Client.GUI
         public DialogCreator Parent { get; private set; }
 
         public string Title { get; set; }
+        public string AcceptLabel { get; set; }
+        public string CancelLabel { get; set; }
+
         public List<ViewModel> Items { get; private set; }
         public List<Tuple<object, BaseValueViewModel>> ValueModels { get; private set; }
 
         private static readonly Action<Dictionary<object, object>> _doNothing = p => { };
+
+        public Action<Dictionary<object, object>> OnAcceptAction { get; set; }
+        public Action OnCancelAction { get; set; }
+        public List<Tuple<string, string, Action<Dictionary<object, object>>>> AdditionalButtons { get; private set; }
 
         public void Add(object key, ViewModel vmdl)
         {
@@ -82,14 +91,14 @@ namespace Zetbox.Client.GUI
                 }
                 else
                 {
-                    ValueModels.Add(new Tuple<object,BaseValueViewModel>(key, (BaseValueViewModel)vmdl));
+                    ValueModels.Add(new Tuple<object, BaseValueViewModel>(key, (BaseValueViewModel)vmdl));
                 }
             }
         }
 
         public void Show()
         {
-            Show(_doNothing);
+            Show(OnAcceptAction ?? _doNothing);
         }
 
         public void Show(Action<Dictionary<object, object>> ok, ViewModel ownerMdl = null)
@@ -101,12 +110,20 @@ namespace Zetbox.Client.GUI
             }
 
             var dlg = ViewModelFactory.CreateViewModel<ValueInputTaskViewModel.Factory>().Invoke(DataContext, null, Title, Items, ValueModels, ok);
+            dlg.SetInvokeCommandLabel(AcceptLabel.IfNullOrWhiteSpace(DialogCreatorResources.Accept));
+            dlg.SetCancelCommandLabel(CancelLabel.IfNullOrWhiteSpace(DialogCreatorResources.Cancel));
+            dlg.CancelCallback = OnCancelAction;
+            foreach (var btn in AdditionalButtons)
+            {
+                dlg.AddButton(btn.Item1, btn.Item2, btn.Item3);
+            }
             ViewModelFactory.ShowDialog(dlg, ownerMdl ?? ViewModelFactory.GetWorkspace(DataContext));
         }
     }
 
     public static class DialogCreatorExtensions
     {
+        #region Value input
         public static DialogCreator AddString(this DialogCreator c, object key, string label, string value = null, bool allowNullInput = false, bool isReadOnly = false, ControlKind requestedKind = null, ViewModelDescriptor vmdesc = null, string description = null)
         {
             if (c == null) throw new ArgumentNullException("c");
@@ -127,7 +144,7 @@ namespace Zetbox.Client.GUI
             c.Add(key, vmdl);
             return c;
         }
-        
+
         public static DialogCreator AddMultiLineString(this DialogCreator c, object key, string label, string value = null, bool allowNullInput = false, bool isReadOnly = false, ViewModelDescriptor vmdesc = null, string description = null)
         {
             if (c == null) throw new ArgumentNullException("c");
@@ -259,7 +276,9 @@ namespace Zetbox.Client.GUI
             c.Add(key, vmdl);
             return c;
         }
+        #endregion
 
+        #region Panels
         public static DialogCreator AddGroupBox(this DialogCreator c, object key, string header, Action<DialogCreator> children)
         {
             var sub = new DialogCreator(c);
@@ -277,7 +296,7 @@ namespace Zetbox.Client.GUI
             c.Add(key, vmdl);
             return c;
         }
-        
+
         public static DialogCreator AddTabItem(this DialogCreator c, object key, string header, Action<DialogCreator> children)
         {
             var sub = new DialogCreator(c);
@@ -286,5 +305,42 @@ namespace Zetbox.Client.GUI
             c.Add(key, vmdl);
             return c;
         }
+        #endregion
+
+        #region Buttons
+        public static DialogCreator YesNo(this DialogCreator c)
+        {
+            c.AcceptLabel = DialogCreatorResources.Yes;
+            c.CancelLabel = DialogCreatorResources.No;
+
+            return c;
+        }
+
+        public static DialogCreator DefaultButtons(this DialogCreator c, string acceptLabel, string cancelLabel)
+        {
+            c.AcceptLabel = acceptLabel;
+            c.CancelLabel = cancelLabel;
+
+            return c;
+        }
+
+        public static DialogCreator AddButton(this DialogCreator c, string label, Action<Dictionary<object, object>> action, string tooltip = null)
+        {
+            c.AdditionalButtons.Add(new Tuple<string, string, Action<Dictionary<object, object>>>(label, tooltip, action));
+            return c;
+        }
+
+        public static DialogCreator OnAccept(this DialogCreator c, Action<Dictionary<object, object>> action)
+        {
+            c.OnAcceptAction = action;
+            return c;
+        }
+
+        public static DialogCreator OnCancel(this DialogCreator c, Action action)
+        {
+            c.OnCancelAction = action;
+            return c;
+        }
+        #endregion
     }
 }

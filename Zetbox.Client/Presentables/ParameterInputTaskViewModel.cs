@@ -28,6 +28,7 @@ namespace Zetbox.Client.Presentables
     using Zetbox.App.Extensions;
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables.ValueViewModels;
+    using System.Collections.ObjectModel;
 
     [ViewModelDescriptor]
     public class ParameterInputTaskViewModel
@@ -166,6 +167,14 @@ namespace Zetbox.Client.Presentables
         public void Cancel()
         {
             Show = false;
+        }
+
+        protected override ObservableCollection<ICommandViewModel> CreateCommands()
+        {
+            var result = base.CreateCommands();
+            result.Add(InvokeCommand);
+            result.Add(CancelCommand);
+            return result;
         }
         #endregion
     }
