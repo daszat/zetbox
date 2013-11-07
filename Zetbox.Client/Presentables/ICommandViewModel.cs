@@ -74,6 +74,9 @@ namespace Zetbox.Client.Presentables
         /// Gets an optional Icon for the Command
         /// </summary>
         System.Drawing.Image Icon { get; set; }
+
+        bool IsDefault { get; }
+        bool IsCancel { get; }
     }
 
     /// <summary>
@@ -327,6 +330,39 @@ namespace Zetbox.Client.Presentables
             get { return Label; }
         }
 
+        private bool _isDefault = false;
+        public bool IsDefault
+        {
+            get
+            {
+                return _isDefault;
+            }
+            set
+            {
+                if (_isDefault != value)
+                {
+                    _isDefault = value;
+                    OnPropertyChanged("IsDefault");
+                }
+            }
+        }
+        
+        private bool _isCancel = false;
+        public bool IsCancel
+        {
+            get
+            {
+                return _isCancel;
+            }
+            set
+            {
+                if (_isCancel != value)
+                {
+                    _isCancel = value;
+                    OnPropertyChanged("IsCancel");
+                }
+            }
+        }
         #endregion
     }
 

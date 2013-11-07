@@ -33,23 +33,12 @@ namespace Zetbox.Client.WPF.CustomControls
     {
         public CommandButton()
         {
-            var bCmd = new Binding("CommandViewModel");
-            bCmd.RelativeSource = RelativeSource.Self;
-            bCmd.Converter = new Commands.Converter();
-            this.SetBinding(CommandProperty, bCmd);
-
-            var bLabel = new Binding("CommandViewModel.Label");
-            bLabel.RelativeSource = RelativeSource.Self;
-            this.SetBinding(ContentProperty, bLabel);
-
-            var bTooltip = new Binding("CommandViewModel.ToolTip");
-            bTooltip.RelativeSource = RelativeSource.Self;
-            this.SetBinding(ToolTipProperty, bTooltip);
-
-            var bImage = new Binding("CommandViewModel.Icon");
-            bImage.RelativeSource = RelativeSource.Self;
-            bImage.Converter = (IValueConverter)Application.Current.Resources["ImageConverter"];
-            this.SetBinding(ImageProperty, bImage);
+            this.SetBinding(CommandProperty, new Binding("CommandViewModel") { RelativeSource = RelativeSource.Self, Converter = new Commands.Converter() });
+            this.SetBinding(ContentProperty, new Binding("CommandViewModel.Label") { RelativeSource = RelativeSource.Self });
+            this.SetBinding(ToolTipProperty, new Binding("CommandViewModel.ToolTip") { RelativeSource = RelativeSource.Self });
+            this.SetBinding(ImageProperty, new Binding("CommandViewModel.Icon") { RelativeSource = RelativeSource.Self, Converter = (IValueConverter)Application.Current.Resources["ImageConverter"] });
+            this.SetBinding(IsDefaultProperty, new Binding("CommandViewModel.IsDefault") { RelativeSource = RelativeSource.Self });
+            this.SetBinding(IsCancelProperty, new Binding("CommandViewModel.IsCancel") { RelativeSource = RelativeSource.Self });
 
             this.SetValue(ToolTipService.ShowOnDisabledProperty, true);
 
