@@ -11,7 +11,11 @@
 <%@ Parameter Name="end" Type="DateTime" %>
 
 \document  {
-<% foreach (var grp in events.Where(e => e.From.Date >= start && e.From.Date <= end).GroupBy(k => k.From.Date).OrderBy(g => g.Key)) { %>
+<% 
+    var current = start;
+    while(current <= end) {
+        var lst = events.Where(e => e.From.Date == current);
+%>
     \section [
         PageSetup
         {
@@ -37,12 +41,12 @@
                     \cell [ 
                         MergeRight = 1 
                         Format { Font { Bold = True Size = 20 } }                         
-                    ] { <%= grp.Key.ToString("dddd, dd MMMM yyyy") %> }
+                    ] { <%= current.ToString("dddd, dd MMMM yyyy") %> }
                 }
                 \row [ Height = "3cm" ] {
                     \cell { }
                     \cell [ Borders { Right { Width = 0 } } ] { }
-                    \cell [ Borders { Left  { Width = 0 } } ] { <%= string.Join(" \\linebreak ", grp.Where(e => e.IsAllDay).Select(e => Format(e.Summary))) %> }
+                    \cell [ Borders { Left  { Width = 0 } } ] { <%= string.Join(" \\linebreak ", lst.Where(e => e.IsAllDay).Select(e => Format(e.Summary))) %> }
                 }
 <% for(int hour = 0; hour < 24; hour++) { %>
                 \row [ 
@@ -51,11 +55,13 @@
                 ] {
                     \cell { }
                     \cell [ Borders { Right { Width = 0 } } ] { <%= string.Format("{0:00}:00", hour) %> }
-                    \cell [ Borders { Left  { Width = 0 } } ] { <%= string.Join(", ", grp.Where(e => !e.IsAllDay && e.From.Hour == hour).Select(e => Format(e.Summary))) %> }
+                    \cell [ Borders { Left  { Width = 0 } } ] { <%= string.Join(", ", lst.Where(e => !e.IsAllDay && e.From.Hour == hour).Select(e => Format(e.Summary))) %> }
                 }
 <% } %>
             }
         }
     }
-<% } %>
+<% 
+        current = current.AddDays(1);
+    } %>
 }
