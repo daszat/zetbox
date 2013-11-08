@@ -537,6 +537,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                                 CreateItem((ObjectClass)chosen.First().Object);
                             }
                         }, null);
+                lstMdl.SelectionType = Type.Name;
                 lstMdl.RequestedKind = NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_DataObjectSelectionTaskSimpleKind.Find(FrozenContext);
 
                 ViewModelFactory.ShowModel(lstMdl, true);

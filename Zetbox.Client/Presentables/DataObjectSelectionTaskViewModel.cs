@@ -29,7 +29,10 @@ namespace Zetbox.Client.Presentables
     public interface ISelectionTaskViewModel
     {
         string Name { get; }
-        string TypeName { get; }
+
+        string Title { get; }
+        string Tooltip { get; }
+        string SelectionType { get; }
 
         ReadOnlyCollection<CommandViewModel> AdditionalActions { get; }
 
@@ -142,8 +145,52 @@ namespace Zetbox.Client.Presentables
 
         public abstract IEnumerable Items { get; }
         public abstract IList SelectedItems { get; }
-        public abstract string TypeName { get; }
         public abstract void Refresh();
+
+        private string _title;
+        public string Title
+        {
+            get
+            {
+                if (_title == null)
+                {
+                    _title = DataObjectSelectionTaskViewModelResources.SimpleName;
+                }
+                return _title;
+            }
+            set
+            {
+                if (_title != value)
+                {
+                    _title = value;
+                    OnPropertyChanged("Title");
+                }
+            }
+        }
+
+        private string _tooltip;
+        public string Tooltip
+        {
+            get
+            {
+                if (_tooltip == null)
+                {
+                    _tooltip = Name;
+                }
+                return _tooltip;
+            }
+            set
+            {
+                if (_tooltip != value)
+                {
+                    _tooltip = value;
+                    OnPropertyChanged("Tooltip");
+                }
+            }
+        }
+
+        public abstract string SelectionType { get; set; }
+
         #endregion
     }
 
@@ -221,12 +268,24 @@ namespace Zetbox.Client.Presentables
             get { return string.Format(DataObjectSelectionTaskViewModelResources.Name, ListViewModel.DataTypeViewModel.DescribedType); }
         }
 
-
-        public override string TypeName
+        private string _selectionType;
+        public override string SelectionType
         {
             get
             {
-                return ListViewModel.DataTypeViewModel.DescribedType;
+                if (_selectionType == null)
+                {
+                    _selectionType = ListViewModel.DataTypeViewModel.DescribedType;
+                }
+                return _selectionType;
+            }
+            set
+            {
+                if (_selectionType != value)
+                {
+                    _selectionType = value;
+                    OnPropertyChanged("SelectionType");
+                }
             }
         }
     }
@@ -264,14 +323,23 @@ namespace Zetbox.Client.Presentables
 
         public override string Name
         {
-            get { return "Simple"; }
+            get { return DataObjectSelectionTaskViewModelResources.SimpleName; }
         }
 
-        public override string TypeName
+        private string _selectionType;
+        public override string SelectionType
         {
             get
             {
-                return "Simple typename";
+                return _selectionType;
+            }
+            set
+            {
+                if (_selectionType != value)
+                {
+                    _selectionType = value;
+                    OnPropertyChanged("SelectionType");
+                }
             }
         }
     }
