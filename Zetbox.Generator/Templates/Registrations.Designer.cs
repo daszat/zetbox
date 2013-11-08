@@ -43,7 +43,7 @@ this.WriteObjects("            builder\r\n");
 this.WriteObjects("                .Register<",  shortName , "ActionsManager>(\r\n");
 this.WriteObjects("                    c => new ",  shortName , "ActionsManager(\r\n");
 this.WriteObjects("                        c.Resolve<ILifetimeScope>(),\r\n");
-this.WriteObjects("                        c.Resolve<IDeploymentRestrictor>()))\r\n");
+this.WriteObjects("                        c.Resolve<IEnumerable<ImplementorAssembly>>()))\r\n");
 this.WriteObjects("                .As<I",  shortName , "ActionsManager>()\r\n");
 this.WriteObjects("                .InstancePerLifetimeScope();\r\n");
 

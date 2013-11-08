@@ -36,7 +36,7 @@ namespace Zetbox.Objects
                 .Register<NHibernateActionsManager>(
                     c => new NHibernateActionsManager(
                         c.Resolve<ILifetimeScope>(),
-                        c.Resolve<IDeploymentRestrictor>()))
+                        c.Resolve<IEnumerable<ImplementorAssembly>>()))
                 .As<INHibernateActionsManager>()
                 .InstancePerLifetimeScope();
 
@@ -90,8 +90,8 @@ namespace Zetbox.Objects
             set { _isInitialised = value; }
         }
 
-        public NHibernateActionsManager(ILifetimeScope container, IDeploymentRestrictor restrictor)
-            : base(container, restrictor, "NHibernateImpl")
+        public NHibernateActionsManager(ILifetimeScope container, IEnumerable<ImplementorAssembly> assemblies)
+            : base(container, "NHibernateImpl", assemblies)
         {
         }
     }

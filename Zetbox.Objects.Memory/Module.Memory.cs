@@ -31,7 +31,7 @@ namespace Zetbox.Objects
                 .Register<MemoryActionsManager>(
                     c => new MemoryActionsManager(
                         c.Resolve<ILifetimeScope>(),
-                        c.Resolve<IDeploymentRestrictor>()))
+                        c.Resolve<IEnumerable<ImplementorAssembly>>()))
                 .As<IMemoryActionsManager>()
                 .InstancePerLifetimeScope();
         }
@@ -66,8 +66,8 @@ namespace Zetbox.Objects
             set { _isInitialised = value; }
         }
 
-        public MemoryActionsManager(ILifetimeScope container, IDeploymentRestrictor restrictor)
-            : base(container, restrictor, "MemoryImpl")
+        public MemoryActionsManager(ILifetimeScope container, IEnumerable<ImplementorAssembly> assemblies)
+            : base(container, "MemoryImpl", assemblies)
         {
         }
     }
