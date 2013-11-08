@@ -262,7 +262,6 @@
     <Compile Include="Calendar\SyncProvider.Memory.Designer.cs" />
     <Compile Include="GUI\TagCache.Memory.Designer.cs" />
     <Compile Include="Projekte\Task.Memory.Designer.cs" />
-    <Compile Include="GUI\Template.Memory.Designer.cs" />
     <Compile Include="TestModule\TestCustomObject.Memory.Designer.cs" />
     <Compile Include="TestModule\TestDecimal.Memory.Designer.cs" />
     <Compile Include="TestModule\TestObjClass.Memory.Designer.cs" />
@@ -274,7 +273,6 @@
     <Compile Include="GUI\ViewDescriptor.Memory.Designer.cs" />
     <Compile Include="GUI\ViewModelDescriptor.Memory.Designer.cs" />
     <Compile Include="ZetboxBase\ViewReadOnlyConstraint.Memory.Designer.cs" />
-    <Compile Include="GUI\Visual.Memory.Designer.cs" />
     <Compile Include="Calendar\WorkSchedule.Memory.Designer.cs" />
     <Compile Include="Calendar\WorkScheduleRule.Memory.Designer.cs" />
     <Compile Include="Calendar\WorkScheduleSyncProvider.Memory.Designer.cs" />

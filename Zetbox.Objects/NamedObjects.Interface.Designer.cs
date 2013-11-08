@@ -2316,10 +2316,6 @@ namespace Zetbox {
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("891c1e32-7545-49d5-9c14-da0e7e061e8f"); }
                             }
-                            public static TypedGuid<global::Zetbox.App.Base.DataType> Template
-                            {
-                                get { return new TypedGuid<global::Zetbox.App.Base.DataType>("c677d3fe-7dfe-4ea5-91e0-d1b0df9118be"); }
-                            }
                             public static TypedGuid<global::Zetbox.App.Base.DataType> ViewDescriptor
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("ffda4604-1536-43b6-b951-f8753d5092ca"); }
@@ -2327,10 +2323,6 @@ namespace Zetbox {
                             public static TypedGuid<global::Zetbox.App.Base.DataType> ViewModelDescriptor
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("5d152c6f-6c1e-48b7-b03e-669e30468808"); }
-                            }
-                            public static TypedGuid<global::Zetbox.App.Base.DataType> Visual
-                            {
-                                get { return new TypedGuid<global::Zetbox.App.Base.DataType>("98790e5d-808f-4e0b-8a1a-b304839f07ab"); }
                             }
                             public static TypedGuid<global::Zetbox.App.Base.DataType> YearFilterConfiguration
                             {
@@ -2722,36 +2714,6 @@ namespace Zetbox {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("3fe05228-66d6-42dd-8a0f-526ba4ac4503"); }
                                 }
                             }
-                            public static class Template_Methods
-                            {
-                                public static TypedGuid<global::Zetbox.App.Base.Method> PrepareDefault
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Method>("80e69c37-0297-4d0c-be08-158ab7a919ff"); }
-                                }
-                            }
-                            public static class Template_Properties
-                            {
-                                public static TypedGuid<global::Zetbox.App.Base.Property> DisplayedTypeAssembly
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("c81105da-97e4-4685-af88-792c68e55a17"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> DisplayedTypeFullName
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("4b683aa1-45a9-4c5e-80e7-0ff30f5b798c"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> DisplayName
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("4fc51781-b0fe-495c-91a1-90e484345515"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> Menu
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("5e9612d5-019a-416b-a2e2-dfc9674a50f6"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> VisualTree
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("5d2880a4-716a-4bdc-aaa9-379c006e7ed4"); }
-                                }
-                            }
                             public static class ViewDescriptor_Properties
                             {
                                 public static TypedGuid<global::Zetbox.App.Base.Property> ControlKind
@@ -2831,29 +2793,6 @@ namespace Zetbox {
                                 public static TypedGuid<global::Zetbox.App.Base.Property> ViewModelTypeRef
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("b3cae453-e222-4d24-b6f5-47f47550ad7a"); }
-                                }
-                            }
-                            public static class Visual_Properties
-                            {
-                                public static TypedGuid<global::Zetbox.App.Base.Property> Children
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("9f69c3bd-e274-4639-b30c-8d2a9599917b"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> ContextMenu
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("7b18f26e-0f3f-4554-b469-1029bd4ca10b"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> Description
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("8d3b7c91-2bbf-4dcf-bc37-318dc0fda92d"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> Method
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("0b55b2ba-3ac0-4631-8a73-1e8846c8e9b1"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> Property
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("a432e3ff-61ed-4726-8559-f34516181065"); }
                                 }
                             }
                             public static class YearFilterConfiguration_Properties

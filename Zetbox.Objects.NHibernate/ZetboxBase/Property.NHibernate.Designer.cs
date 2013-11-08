@@ -2649,7 +2649,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
             }
-            // should fetch && remember parent for Visual_has_Property_RelationEntry
 
             Constraints.Clear();
             ChangedBy = null;

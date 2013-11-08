@@ -236,7 +236,6 @@
     <Compile Include="Calendar\SyncProvider.Interface.Designer.cs" />
     <Compile Include="GUI\TagCache.Interface.Designer.cs" />
     <Compile Include="Projekte\Task.Interface.Designer.cs" />
-    <Compile Include="GUI\Template.Interface.Designer.cs" />
     <Compile Include="TestModule\TestCustomObject.Interface.Designer.cs" />
     <Compile Include="TestModule\TestDecimal.Interface.Designer.cs" />
     <Compile Include="TestModule\TestObjClass.Interface.Designer.cs" />
@@ -248,7 +247,6 @@
     <Compile Include="GUI\ViewDescriptor.Interface.Designer.cs" />
     <Compile Include="GUI\ViewModelDescriptor.Interface.Designer.cs" />
     <Compile Include="ZetboxBase\ViewReadOnlyConstraint.Interface.Designer.cs" />
-    <Compile Include="GUI\Visual.Interface.Designer.cs" />
     <Compile Include="Calendar\WorkSchedule.Interface.Designer.cs" />
     <Compile Include="Calendar\WorkScheduleRule.Interface.Designer.cs" />
     <Compile Include="Calendar\WorkScheduleSyncProvider.Interface.Designer.cs" />

@@ -102,7 +102,6 @@
       <End Role="Task" EntitySet="TaskEfImpl" />
       <End Role="Task_Rights" EntitySet="Task_Rights" />
     </AssociationSet>
-    <EntitySet Name="TemplateEfImpl" EntityType="Model.TemplateEfImpl" />
     <EntitySet Name="TestCustomObjectEfImpl" EntityType="Model.TestCustomObjectEfImpl" />
     <EntitySet Name="TestDecimalEfImpl" EntityType="Model.TestDecimalEfImpl" />
     <EntitySet Name="TestObjClassEfImpl" EntityType="Model.TestObjClassEfImpl" />
@@ -110,7 +109,6 @@
     <EntitySet Name="TPHBaseObjEfImpl" EntityType="Model.TPHBaseObjEfImpl" />
     <EntitySet Name="ViewDescriptorEfImpl" EntityType="Model.ViewDescriptorEfImpl" />
     <EntitySet Name="ViewModelDescriptorEfImpl" EntityType="Model.ViewModelDescriptorEfImpl" />
-    <EntitySet Name="VisualEfImpl" EntityType="Model.VisualEfImpl" />
     <EntitySet Name="WorkScheduleEfImpl" EntityType="Model.WorkScheduleEfImpl" />
     <EntitySet Name="WorkScheduleRuleEfImpl" EntityType="Model.WorkScheduleRuleEfImpl" />
     <!-- EntitySets and AssociationSets for all object-object CollectionEntrys -->
@@ -267,15 +265,6 @@
       <End Role="Testbogen" EntitySet="FragebogenEfImpl" />
       <End Role="CollectionEntry" EntitySet="TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl" />
     </AssociationSet>
-    <EntitySet Name="Template_hasMenu_Visual_RelationEntryEfImpl" EntityType="Model.Template_hasMenu_Visual_RelationEntryEfImpl" />
-    <AssociationSet Name="FK_Template_hasMenu_Menu_A" Association="Model.FK_Template_hasMenu_Menu_A" >
-      <End Role="Template" EntitySet="TemplateEfImpl" />
-      <End Role="CollectionEntry" EntitySet="Template_hasMenu_Visual_RelationEntryEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Template_hasMenu_Menu_B" Association="Model.FK_Template_hasMenu_Menu_B" >
-      <End Role="Menu" EntitySet="VisualEfImpl" />
-      <End Role="CollectionEntry" EntitySet="Template_hasMenu_Visual_RelationEntryEfImpl" />
-    </AssociationSet>
     <EntitySet Name="IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl" EntityType="Model.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl" />
     <AssociationSet Name="FK_UniqueContraints_ensures_unique_on_Properties_A" Association="Model.FK_UniqueContraints_ensures_unique_on_Properties_A" >
       <End Role="UniqueContraints" EntitySet="InstanceConstraintEfImpl" />
@@ -284,24 +273,6 @@
     <AssociationSet Name="FK_UniqueContraints_ensures_unique_on_Properties_B" Association="Model.FK_UniqueContraints_ensures_unique_on_Properties_B" >
       <End Role="Properties" EntitySet="PropertyEfImpl" />
       <End Role="CollectionEntry" EntitySet="IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl" />
-    </AssociationSet>
-    <EntitySet Name="Visual_contains_Visual_RelationEntryEfImpl" EntityType="Model.Visual_contains_Visual_RelationEntryEfImpl" />
-    <AssociationSet Name="FK_Visual_contains_Children_A" Association="Model.FK_Visual_contains_Children_A" >
-      <End Role="Visual" EntitySet="VisualEfImpl" />
-      <End Role="CollectionEntry" EntitySet="Visual_contains_Visual_RelationEntryEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Visual_contains_Children_B" Association="Model.FK_Visual_contains_Children_B" >
-      <End Role="Children" EntitySet="VisualEfImpl" />
-      <End Role="CollectionEntry" EntitySet="Visual_contains_Visual_RelationEntryEfImpl" />
-    </AssociationSet>
-    <EntitySet Name="Visual_hasContextMenu_Visual_RelationEntryEfImpl" EntityType="Model.Visual_hasContextMenu_Visual_RelationEntryEfImpl" />
-    <AssociationSet Name="FK_Visual_hasContextMenu_ContextMenu_A" Association="Model.FK_Visual_hasContextMenu_ContextMenu_A" >
-      <End Role="Visual" EntitySet="VisualEfImpl" />
-      <End Role="CollectionEntry" EntitySet="Visual_hasContextMenu_Visual_RelationEntryEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Visual_hasContextMenu_ContextMenu_B" Association="Model.FK_Visual_hasContextMenu_ContextMenu_B" >
-      <End Role="ContextMenu" EntitySet="VisualEfImpl" />
-      <End Role="CollectionEntry" EntitySet="Visual_hasContextMenu_Visual_RelationEntryEfImpl" />
     </AssociationSet>
 
     <!-- EntitySets and AssociationSets for all object-value CollectionEntrys -->
@@ -1001,14 +972,6 @@
       <End Role="Task" EntitySet="TaskEfImpl" />
       <End Role="CreatedBy" EntitySet="IdentityEfImpl" />
     </AssociationSet>
-    <AssociationSet Name="FK_Template_has_DisplayedTypeAssembly" Association="Model.FK_Template_has_DisplayedTypeAssembly" >
-      <End Role="Template" EntitySet="TemplateEfImpl" />
-      <End Role="DisplayedTypeAssembly" EntitySet="AssemblyEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Template_has_VisualTree" Association="Model.FK_Template_has_VisualTree" >
-      <End Role="Template" EntitySet="TemplateEfImpl" />
-      <End Role="VisualTree" EntitySet="VisualEfImpl" />
-    </AssociationSet>
     <AssociationSet Name="FK_Test_of_Event" Association="Model.FK_Test_of_Event" >
       <End Role="Test" EntitySet="EventTestObjectEfImpl" />
       <End Role="Event" EntitySet="EventEfImpl" />
@@ -1052,14 +1015,6 @@
     <AssociationSet Name="FK_ViewModelDescriptor_has_Module" Association="Model.FK_ViewModelDescriptor_has_Module" >
       <End Role="ViewModelDescriptor" EntitySet="ViewModelDescriptorEfImpl" />
       <End Role="Module" EntitySet="ModuleEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Visual_has_Method" Association="Model.FK_Visual_has_Method" >
-      <End Role="Visual" EntitySet="VisualEfImpl" />
-      <End Role="Method" EntitySet="MethodEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Visual_has_Property" Association="Model.FK_Visual_has_Property" >
-      <End Role="Visual" EntitySet="VisualEfImpl" />
-      <End Role="Property" EntitySet="PropertyEfImpl" />
     </AssociationSet>
     <AssociationSet Name="FK_WorkSchedule_has_Module" Association="Model.FK_WorkSchedule_has_Module" >
       <End Role="WorkSchedule" EntitySet="WorkScheduleEfImpl" />
@@ -2716,26 +2671,6 @@
 	  </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="TemplateEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="DisplayedTypeAssemblyImpl"
-                        Relationship="Model.FK_Template_has_DisplayedTypeAssembly"
-                        FromRole="Template"
-                        ToRole="DisplayedTypeAssembly" />
-    <Property Name="DisplayedTypeFullName" Type="String" Nullable="false" MaxLength="200"  />
-    <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="200"  />
-    <NavigationProperty Name="MenuImpl"
-                        Relationship="Model.FK_Template_hasMenu_Menu_A"
-                        FromRole="Template"
-                        ToRole="CollectionEntry" />
-    <NavigationProperty Name="VisualTreeImpl"
-                        Relationship="Model.FK_Template_has_VisualTree"
-                        FromRole="Template"
-                        ToRole="VisualTree" />
-  </EntityType>
   <EntityType Name="TestCustomObjectEfImpl">
     <Key>
       <PropertyRef Name="ID" />
@@ -2878,29 +2813,6 @@
                         FromRole="Presentable"
                         ToRole="CollectionEntry" />
     <Property Name="ViewModelTypeRef" Type="String" Nullable="true" MaxLength="2000"  />
-  </EntityType>
-  <EntityType Name="VisualEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="ChildrenImpl"
-                        Relationship="Model.FK_Visual_contains_Children_A"
-                        FromRole="Visual"
-                        ToRole="CollectionEntry" />
-    <NavigationProperty Name="ContextMenuImpl"
-                        Relationship="Model.FK_Visual_hasContextMenu_ContextMenu_A"
-                        FromRole="Visual"
-                        ToRole="CollectionEntry" />
-    <Property Name="Description" Type="String" Nullable="false" MaxLength="200"  />
-    <NavigationProperty Name="MethodImpl"
-                        Relationship="Model.FK_Visual_has_Method"
-                        FromRole="Visual"
-                        ToRole="Method" />
-    <NavigationProperty Name="PropertyImpl"
-                        Relationship="Model.FK_Visual_has_Property"
-                        FromRole="Visual"
-                        ToRole="Property" />
   </EntityType>
   <EntityType Name="WorkScheduleEfImpl">
     <Key>
@@ -4096,48 +4008,6 @@
   </Association>
   
   <!--
-    Relation: FK_Template_hasMenu_Menu
-    A: ZeroOrMore Template as Template
-    B: ZeroOrMore Visual as Menu
-    Preferred Storage: Separate
-  -->
-  <EntityType Name="Template_hasMenu_Visual_RelationEntryEfImpl" >
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-	
-    
-    <!-- A -->
-    <NavigationProperty Name="AImpl"
-                        Relationship="Model.FK_Template_hasMenu_Menu_A"
-                        FromRole="CollectionEntry"
-                        ToRole="Template" />
-
-    <!-- B -->
-    <NavigationProperty Name="BImpl"
-                        Relationship="Model.FK_Template_hasMenu_Menu_B"
-                        FromRole="CollectionEntry"
-                        ToRole="Menu" />
-  </EntityType>
-  <Association Name="FK_Template_hasMenu_Menu_A" >
-    <End Role="Template"
-         Type="Model.TemplateEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="CollectionEntry"
-         Type="Model.Template_hasMenu_Visual_RelationEntryEfImpl"
-         Multiplicity="*" />
-  </Association>
-  <Association Name="FK_Template_hasMenu_Menu_B" >
-    <End Role="Menu"
-         Type="Model.VisualEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="CollectionEntry"
-         Type="Model.Template_hasMenu_Visual_RelationEntryEfImpl"
-         Multiplicity="*" />
-  </Association>
-  
-  <!--
     Relation: FK_UniqueContraints_ensures_unique_on_Properties
     A: ZeroOrMore IndexConstraint as UniqueContraints
     B: ZeroOrMore Property as Properties
@@ -4177,90 +4047,6 @@
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
          Type="Model.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl"
-         Multiplicity="*" />
-  </Association>
-  
-  <!--
-    Relation: FK_Visual_contains_Children
-    A: ZeroOrMore Visual as Visual
-    B: ZeroOrMore Visual as Children
-    Preferred Storage: Separate
-  -->
-  <EntityType Name="Visual_contains_Visual_RelationEntryEfImpl" >
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-	
-    
-    <!-- A -->
-    <NavigationProperty Name="AImpl"
-                        Relationship="Model.FK_Visual_contains_Children_A"
-                        FromRole="CollectionEntry"
-                        ToRole="Visual" />
-
-    <!-- B -->
-    <NavigationProperty Name="BImpl"
-                        Relationship="Model.FK_Visual_contains_Children_B"
-                        FromRole="CollectionEntry"
-                        ToRole="Children" />
-  </EntityType>
-  <Association Name="FK_Visual_contains_Children_A" >
-    <End Role="Visual"
-         Type="Model.VisualEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="CollectionEntry"
-         Type="Model.Visual_contains_Visual_RelationEntryEfImpl"
-         Multiplicity="*" />
-  </Association>
-  <Association Name="FK_Visual_contains_Children_B" >
-    <End Role="Children"
-         Type="Model.VisualEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="CollectionEntry"
-         Type="Model.Visual_contains_Visual_RelationEntryEfImpl"
-         Multiplicity="*" />
-  </Association>
-  
-  <!--
-    Relation: FK_Visual_hasContextMenu_ContextMenu
-    A: ZeroOrMore Visual as Visual
-    B: ZeroOrMore Visual as ContextMenu
-    Preferred Storage: Separate
-  -->
-  <EntityType Name="Visual_hasContextMenu_Visual_RelationEntryEfImpl" >
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-	
-    
-    <!-- A -->
-    <NavigationProperty Name="AImpl"
-                        Relationship="Model.FK_Visual_hasContextMenu_ContextMenu_A"
-                        FromRole="CollectionEntry"
-                        ToRole="Visual" />
-
-    <!-- B -->
-    <NavigationProperty Name="BImpl"
-                        Relationship="Model.FK_Visual_hasContextMenu_ContextMenu_B"
-                        FromRole="CollectionEntry"
-                        ToRole="ContextMenu" />
-  </EntityType>
-  <Association Name="FK_Visual_hasContextMenu_ContextMenu_A" >
-    <End Role="Visual"
-         Type="Model.VisualEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="CollectionEntry"
-         Type="Model.Visual_hasContextMenu_Visual_RelationEntryEfImpl"
-         Multiplicity="*" />
-  </Association>
-  <Association Name="FK_Visual_hasContextMenu_ContextMenu_B" >
-    <End Role="ContextMenu"
-         Type="Model.VisualEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="CollectionEntry"
-         Type="Model.Visual_hasContextMenu_Visual_RelationEntryEfImpl"
          Multiplicity="*" />
   </Association>
   
@@ -5711,22 +5497,6 @@
          Type="Model.IdentityEfImpl" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_Template_has_DisplayedTypeAssembly" >
-    <End Role="Template"
-         Type="Model.TemplateEfImpl" 
-         Multiplicity="*" />
-    <End Role="DisplayedTypeAssembly"
-         Type="Model.AssemblyEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_Template_has_VisualTree" >
-    <End Role="Template"
-         Type="Model.TemplateEfImpl" 
-         Multiplicity="*" />
-    <End Role="VisualTree"
-         Type="Model.VisualEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
   <Association Name="FK_Test_of_Event" >
     <End Role="Test"
          Type="Model.EventTestObjectEfImpl" 
@@ -5813,22 +5583,6 @@
          Multiplicity="*" />
     <End Role="Module"
          Type="Model.ModuleEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_Visual_has_Method" >
-    <End Role="Visual"
-         Type="Model.VisualEfImpl" 
-         Multiplicity="*" />
-    <End Role="Method"
-         Type="Model.MethodEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_Visual_has_Property" >
-    <End Role="Visual"
-         Type="Model.VisualEfImpl" 
-         Multiplicity="*" />
-    <End Role="Property"
-         Type="Model.PropertyEfImpl" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_WorkSchedule_has_Module" >

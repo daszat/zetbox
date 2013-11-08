@@ -2834,54 +2834,6 @@ using Zetbox.DalProvider.Ef;
 
 
 	/*
-    Relation: FK_Template_has_DisplayedTypeAssembly
-    A: ZeroOrMore Template as Template
-    B: ZeroOrOne Assembly as DisplayedTypeAssembly
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_Template_has_DisplayedTypeAssembly",
-    "Template", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.TemplateEfImpl),
-    "DisplayedTypeAssembly", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.AssemblyEfImpl)
-    )]
-
-
-	/*
-    Relation: FK_Template_has_VisualTree
-    A: ZeroOrMore Template as Template
-    B: ZeroOrOne Visual as VisualTree
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_Template_has_VisualTree",
-    "Template", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.TemplateEfImpl),
-    "VisualTree", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.VisualEfImpl)
-    )]
-
-
-	/*
-    Relation: FK_Template_hasMenu_Menu
-    A: ZeroOrMore Template as Template
-    B: ZeroOrMore Visual as Menu
-    Preferred Storage: Separate
-	*/
-
-// The association from A to the CollectionEntry
-[assembly: EdmRelationship("Model", "FK_Template_hasMenu_Menu_A",
-    "Template", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.TemplateEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryEfImpl)
-    )]
-// The association from B to the CollectionEntry
-[assembly: EdmRelationship("Model", "FK_Template_hasMenu_Menu_B",
-    "Menu", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.VisualEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryEfImpl)
-    )]
-
-	/*
     Relation: FK_Test_of_Event
     A: ZeroOrMore EventTestObject as Test
     B: One Event as Event
@@ -3063,72 +3015,6 @@ using Zetbox.DalProvider.Ef;
     "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ModuleEfImpl)
     )]
 
-
-	/*
-    Relation: FK_Visual_contains_Children
-    A: ZeroOrMore Visual as Visual
-    B: ZeroOrMore Visual as Children
-    Preferred Storage: Separate
-	*/
-
-// The association from A to the CollectionEntry
-[assembly: EdmRelationship("Model", "FK_Visual_contains_Children_A",
-    "Visual", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.VisualEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.Visual_contains_Visual_RelationEntryEfImpl)
-    )]
-// The association from B to the CollectionEntry
-[assembly: EdmRelationship("Model", "FK_Visual_contains_Children_B",
-    "Children", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.VisualEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.Visual_contains_Visual_RelationEntryEfImpl)
-    )]
-
-	/*
-    Relation: FK_Visual_has_Method
-    A: ZeroOrMore Visual as Visual
-    B: ZeroOrOne Method as Method
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_Visual_has_Method",
-    "Visual", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.VisualEfImpl),
-    "Method", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.MethodEfImpl)
-    )]
-
-
-	/*
-    Relation: FK_Visual_has_Property
-    A: ZeroOrMore Visual as Visual
-    B: ZeroOrOne Property as Property
-    Preferred Storage: MergeIntoA
-	*/
-
-// basic association
-[assembly: EdmRelationship(
-    "Model", "FK_Visual_has_Property",
-    "Visual", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.VisualEfImpl),
-    "Property", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.PropertyEfImpl)
-    )]
-
-
-	/*
-    Relation: FK_Visual_hasContextMenu_ContextMenu
-    A: ZeroOrMore Visual as Visual
-    B: ZeroOrMore Visual as ContextMenu
-    Preferred Storage: Separate
-	*/
-
-// The association from A to the CollectionEntry
-[assembly: EdmRelationship("Model", "FK_Visual_hasContextMenu_ContextMenu_A",
-    "Visual", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.VisualEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryEfImpl)
-    )]
-// The association from B to the CollectionEntry
-[assembly: EdmRelationship("Model", "FK_Visual_hasContextMenu_ContextMenu_B",
-    "ContextMenu", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.VisualEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryEfImpl)
-    )]
 
 	/*
     Relation: FK_WorkSchedule_has_Module

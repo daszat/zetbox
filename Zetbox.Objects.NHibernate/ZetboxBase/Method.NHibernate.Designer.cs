@@ -1970,7 +1970,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnShowByP
                 ((NHibernatePersistenceObject)ObjectClass).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)ObjectClass);
             }
-            // should fetch && remember parent for Visual_has_Method_RelationEntry
 
             Parameter.Clear();
             ShowByProperties.Clear();

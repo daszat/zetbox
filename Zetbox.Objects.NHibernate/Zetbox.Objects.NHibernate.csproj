@@ -277,7 +277,6 @@
     <Compile Include="Calendar\SyncProvider.NHibernate.Designer.cs" />
     <Compile Include="GUI\TagCache.NHibernate.Designer.cs" />
     <Compile Include="Projekte\Task.NHibernate.Designer.cs" />
-    <Compile Include="GUI\Template.NHibernate.Designer.cs" />
     <Compile Include="TestModule\TestCustomObject.NHibernate.Designer.cs" />
     <Compile Include="TestModule\TestDecimal.NHibernate.Designer.cs" />
     <Compile Include="TestModule\TestObjClass.NHibernate.Designer.cs" />
@@ -289,7 +288,6 @@
     <Compile Include="GUI\ViewDescriptor.NHibernate.Designer.cs" />
     <Compile Include="GUI\ViewModelDescriptor.NHibernate.Designer.cs" />
     <Compile Include="ZetboxBase\ViewReadOnlyConstraint.NHibernate.Designer.cs" />
-    <Compile Include="GUI\Visual.NHibernate.Designer.cs" />
     <Compile Include="Calendar\WorkSchedule.NHibernate.Designer.cs" />
     <Compile Include="Calendar\WorkScheduleRule.NHibernate.Designer.cs" />
     <Compile Include="Calendar\WorkScheduleSyncProvider.NHibernate.Designer.cs" />

@@ -265,7 +265,6 @@
     <Compile Include="Calendar\SyncProvider.Ef.Designer.cs" />
     <Compile Include="GUI\TagCache.Ef.Designer.cs" />
     <Compile Include="Projekte\Task.Ef.Designer.cs" />
-    <Compile Include="GUI\Template.Ef.Designer.cs" />
     <Compile Include="TestModule\TestCustomObject.Ef.Designer.cs" />
     <Compile Include="TestModule\TestDecimal.Ef.Designer.cs" />
     <Compile Include="TestModule\TestObjClass.Ef.Designer.cs" />
@@ -277,7 +276,6 @@
     <Compile Include="GUI\ViewDescriptor.Ef.Designer.cs" />
     <Compile Include="GUI\ViewModelDescriptor.Ef.Designer.cs" />
     <Compile Include="ZetboxBase\ViewReadOnlyConstraint.Ef.Designer.cs" />
-    <Compile Include="GUI\Visual.Ef.Designer.cs" />
     <Compile Include="Calendar\WorkSchedule.Ef.Designer.cs" />
     <Compile Include="Calendar\WorkScheduleRule.Ef.Designer.cs" />
     <Compile Include="Calendar\WorkScheduleSyncProvider.Ef.Designer.cs" />

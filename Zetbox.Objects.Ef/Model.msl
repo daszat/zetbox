@@ -1723,15 +1723,6 @@
         <ScalarProperty Name="Identity" ColumnName="Identity" />
       </EndProperty>
     </AssociationSetMapping>
-    <EntitySetMapping Name="TemplateEfImpl">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.TemplateEfImpl)">
-	    <MappingFragment StoreEntitySet="Template">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="DisplayedTypeFullName" ColumnName="DisplayedTypeFullName" />
-          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="TestCustomObjectEfImpl">
       <EntityTypeMapping TypeName="IsTypeOf(Model.TestCustomObjectEfImpl)">
 	    <MappingFragment StoreEntitySet="TestCustomObject">
@@ -1833,14 +1824,6 @@
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
           <ScalarProperty Name="ViewModelTypeRef" ColumnName="ViewModelTypeRef" />
-	    </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="VisualEfImpl">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.VisualEfImpl)">
-	    <MappingFragment StoreEntitySet="Visual">
-	      <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -2586,44 +2569,6 @@
     </AssociationSetMapping>
 
     <!--
-    Relation: FK_Template_hasMenu_Menu
-    A: ZeroOrMore Template as Template
-    B: ZeroOrMore Visual as Menu
-    Preferred Storage: Separate
-    -->
-    <EntitySetMapping Name="Template_hasMenu_Visual_RelationEntryEfImpl">
-      <EntityTypeMapping TypeName="Model.Template_hasMenu_Visual_RelationEntryEfImpl">
-        <MappingFragment StoreEntitySet="Template_hasMenu_Visual_RelationEntry">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <!-- A to CollectionEntry -->
-    <AssociationSetMapping Name="FK_Template_hasMenu_Menu_A"
-                           TypeName="Model.FK_Template_hasMenu_Menu_A"
-                           StoreEntitySet="Template_hasMenu_Visual_RelationEntry" >
-      <EndProperty Name="Template">
-        <ScalarProperty Name="ID" ColumnName="fk_Template"/>
-      </EndProperty>
-      <EndProperty Name="CollectionEntry">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_Template" IsNull="false"/>
-    </AssociationSetMapping>
-    <!-- B to CollectionEntry -->
-    <AssociationSetMapping Name="FK_Template_hasMenu_Menu_B"
-                           TypeName="Model.FK_Template_hasMenu_Menu_B"
-                           StoreEntitySet="Template_hasMenu_Visual_RelationEntry" >
-      <EndProperty Name="Menu">
-        <ScalarProperty Name="ID" ColumnName="fk_Menu"/>
-      </EndProperty>
-      <EndProperty Name="CollectionEntry">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_Menu" IsNull="false"/>
-    </AssociationSetMapping>
-
-    <!--
     Relation: FK_UniqueContraints_ensures_unique_on_Properties
     A: ZeroOrMore IndexConstraint as UniqueContraints
     B: ZeroOrMore Property as Properties
@@ -2660,82 +2605,6 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Properties" IsNull="false"/>
-    </AssociationSetMapping>
-
-    <!--
-    Relation: FK_Visual_contains_Children
-    A: ZeroOrMore Visual as Visual
-    B: ZeroOrMore Visual as Children
-    Preferred Storage: Separate
-    -->
-    <EntitySetMapping Name="Visual_contains_Visual_RelationEntryEfImpl">
-      <EntityTypeMapping TypeName="Model.Visual_contains_Visual_RelationEntryEfImpl">
-        <MappingFragment StoreEntitySet="Visual_contains_Visual_RelationEntry">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <!-- A to CollectionEntry -->
-    <AssociationSetMapping Name="FK_Visual_contains_Children_A"
-                           TypeName="Model.FK_Visual_contains_Children_A"
-                           StoreEntitySet="Visual_contains_Visual_RelationEntry" >
-      <EndProperty Name="Visual">
-        <ScalarProperty Name="ID" ColumnName="fk_Visual"/>
-      </EndProperty>
-      <EndProperty Name="CollectionEntry">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_Visual" IsNull="false"/>
-    </AssociationSetMapping>
-    <!-- B to CollectionEntry -->
-    <AssociationSetMapping Name="FK_Visual_contains_Children_B"
-                           TypeName="Model.FK_Visual_contains_Children_B"
-                           StoreEntitySet="Visual_contains_Visual_RelationEntry" >
-      <EndProperty Name="Children">
-        <ScalarProperty Name="ID" ColumnName="fk_Children"/>
-      </EndProperty>
-      <EndProperty Name="CollectionEntry">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_Children" IsNull="false"/>
-    </AssociationSetMapping>
-
-    <!--
-    Relation: FK_Visual_hasContextMenu_ContextMenu
-    A: ZeroOrMore Visual as Visual
-    B: ZeroOrMore Visual as ContextMenu
-    Preferred Storage: Separate
-    -->
-    <EntitySetMapping Name="Visual_hasContextMenu_Visual_RelationEntryEfImpl">
-      <EntityTypeMapping TypeName="Model.Visual_hasContextMenu_Visual_RelationEntryEfImpl">
-        <MappingFragment StoreEntitySet="Visual_hasContextMenu_Visual_RelationEntry">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <!-- A to CollectionEntry -->
-    <AssociationSetMapping Name="FK_Visual_hasContextMenu_ContextMenu_A"
-                           TypeName="Model.FK_Visual_hasContextMenu_ContextMenu_A"
-                           StoreEntitySet="Visual_hasContextMenu_Visual_RelationEntry" >
-      <EndProperty Name="Visual">
-        <ScalarProperty Name="ID" ColumnName="fk_Visual"/>
-      </EndProperty>
-      <EndProperty Name="CollectionEntry">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_Visual" IsNull="false"/>
-    </AssociationSetMapping>
-    <!-- B to CollectionEntry -->
-    <AssociationSetMapping Name="FK_Visual_hasContextMenu_ContextMenu_B"
-                           TypeName="Model.FK_Visual_hasContextMenu_ContextMenu_B"
-                           StoreEntitySet="Visual_hasContextMenu_Visual_RelationEntry" >
-      <EndProperty Name="ContextMenu">
-        <ScalarProperty Name="ID" ColumnName="fk_ContextMenu"/>
-      </EndProperty>
-      <EndProperty Name="CollectionEntry">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_ContextMenu" IsNull="false"/>
     </AssociationSetMapping>
 
 
@@ -5598,40 +5467,6 @@
       <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
     </AssociationSetMapping>
     <!--
-    Relation: FK_Template_has_DisplayedTypeAssembly
-    A: ZeroOrMore Template as Template
-    B: ZeroOrOne Assembly as DisplayedTypeAssembly
-    Preferred Storage: MergeIntoA
-    -->
-    <AssociationSetMapping Name="FK_Template_has_DisplayedTypeAssembly"
-                           TypeName="Model.FK_Template_has_DisplayedTypeAssembly"
-                           StoreEntitySet="Template" >
-      <EndProperty Name="DisplayedTypeAssembly">
-        <ScalarProperty Name="ID" ColumnName="fk_DisplayedTypeAssembly"/>
-      </EndProperty>
-      <EndProperty Name="Template">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_DisplayedTypeAssembly" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_Template_has_VisualTree
-    A: ZeroOrMore Template as Template
-    B: ZeroOrOne Visual as VisualTree
-    Preferred Storage: MergeIntoA
-    -->
-    <AssociationSetMapping Name="FK_Template_has_VisualTree"
-                           TypeName="Model.FK_Template_has_VisualTree"
-                           StoreEntitySet="Template" >
-      <EndProperty Name="VisualTree">
-        <ScalarProperty Name="ID" ColumnName="fk_VisualTree"/>
-      </EndProperty>
-      <EndProperty Name="Template">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_VisualTree" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
     Relation: FK_Test_of_Event
     A: ZeroOrMore EventTestObject as Test
     B: One Event as Event
@@ -5817,40 +5652,6 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Module" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_Visual_has_Method
-    A: ZeroOrMore Visual as Visual
-    B: ZeroOrOne Method as Method
-    Preferred Storage: MergeIntoA
-    -->
-    <AssociationSetMapping Name="FK_Visual_has_Method"
-                           TypeName="Model.FK_Visual_has_Method"
-                           StoreEntitySet="Visual" >
-      <EndProperty Name="Method">
-        <ScalarProperty Name="ID" ColumnName="fk_Method"/>
-      </EndProperty>
-      <EndProperty Name="Visual">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_Method" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_Visual_has_Property
-    A: ZeroOrMore Visual as Visual
-    B: ZeroOrOne Property as Property
-    Preferred Storage: MergeIntoA
-    -->
-    <AssociationSetMapping Name="FK_Visual_has_Property"
-                           TypeName="Model.FK_Visual_has_Property"
-                           StoreEntitySet="Visual" >
-      <EndProperty Name="Property">
-        <ScalarProperty Name="ID" ColumnName="fk_Property"/>
-      </EndProperty>
-      <EndProperty Name="Visual">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_Property" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_WorkSchedule_has_Module

@@ -1070,7 +1070,6 @@ namespace Zetbox.App.Base
                 ((NHibernatePersistenceObject)Module).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)Module);
             }
-            // should fetch && remember parent for Template_has_Assembly_RelationEntry
 
             ChangedBy = null;
             CreatedBy = null;
