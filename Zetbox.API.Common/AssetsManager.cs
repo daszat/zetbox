@@ -34,6 +34,8 @@ namespace Zetbox.API.Common
             if (string.IsNullOrWhiteSpace(baseName)) throw new ArgumentNullException("baseName");
             if (module == null) throw new ArgumentNullException("module");
 
+            if (string.IsNullOrWhiteSpace(module.Name)) return null; // the module been currently edited
+
             ResourceManager rm = null;
             var key = ToKey(module, baseName);
             lock (_lock)
