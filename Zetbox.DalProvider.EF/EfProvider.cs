@@ -37,7 +37,7 @@ namespace Zetbox.DalProvider.Ef
     public class EfProvider
         : Autofac.Module
     {
-        internal static readonly string ServerAssembly = "Zetbox.Objects.EfImpl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf";
+        internal static readonly string ServerAssembly = "Zetbox.Objects.EfImpl";
 
         private static readonly object _lock = new object();
 

@@ -8623,35 +8623,35 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:DeploymentRestrictions>1</ZetboxBase:DeploymentRestrictions>
     <ZetboxBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</ZetboxBase:Module>
-    <ZetboxBase:Name>Zetbox.API.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78</ZetboxBase:Name>
+    <ZetboxBase:Name>Zetbox.API.Client</ZetboxBase:Name>
   </ZetboxBase:Assembly>
   <ZetboxBase:Assembly ExportGuid="ccb4bfc9-d76a-43be-963e-bc3712e6b405">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.712238Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:DeploymentRestrictions>1</ZetboxBase:DeploymentRestrictions>
     <ZetboxBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</ZetboxBase:Module>
-    <ZetboxBase:Name>Zetbox.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78</ZetboxBase:Name>
+    <ZetboxBase:Name>Zetbox.Client</ZetboxBase:Name>
   </ZetboxBase:Assembly>
   <ZetboxBase:Assembly ExportGuid="62afd077-5c95-46ce-8daa-ffda715ad3f5">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:08.948048Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:DeploymentRestrictions>1</ZetboxBase:DeploymentRestrictions>
     <ZetboxBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</ZetboxBase:Module>
-    <ZetboxBase:Name>Zetbox.Client.Forms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78</ZetboxBase:Name>
+    <ZetboxBase:Name>Zetbox.Client.Forms</ZetboxBase:Name>
   </ZetboxBase:Assembly>
   <ZetboxBase:Assembly ExportGuid="157c1754-6eed-49f7-883b-ae2543bafd7e">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:07.854985Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:DeploymentRestrictions>1</ZetboxBase:DeploymentRestrictions>
     <ZetboxBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</ZetboxBase:Module>
-    <ZetboxBase:Name>Zetbox.Client.WPF, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78</ZetboxBase:Name>
+    <ZetboxBase:Name>Zetbox.Client.WPF</ZetboxBase:Name>
   </ZetboxBase:Assembly>
   <ZetboxBase:Assembly ExportGuid="6d952d0f-6165-447d-b797-1feabd7fba8e">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:07.952991Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-08-26T05:13:20Z</ZetboxBase:CreatedOn>
     <ZetboxBase:DeploymentRestrictions>1</ZetboxBase:DeploymentRestrictions>
     <ZetboxBase:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</ZetboxBase:Module>
-    <ZetboxBase:Name>Zetbox.Client.WPF.Toolkit, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78</ZetboxBase:Name>
+    <ZetboxBase:Name>Zetbox.Client.WPF.Toolkit</ZetboxBase:Name>
   </ZetboxBase:Assembly>
   <GUI:ViewModelDescriptor ExportGuid="88ce02bf-fc40-4227-a7b5-28f6385efa1b">
     <GUI:DefaultEditorKind>f9092349-b263-4887-b605-cccac6a361bd</GUI:DefaultEditorKind>
@@ -30666,49 +30666,49 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:DeploymentRestrictions>0</ZetboxBase:DeploymentRestrictions>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
-    <ZetboxBase:Name>Zetbox.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78</ZetboxBase:Name>
+    <ZetboxBase:Name>Zetbox.API</ZetboxBase:Name>
   </ZetboxBase:Assembly>
   <ZetboxBase:Assembly ExportGuid="d723e434-d71b-461a-ad08-e6f3c2839bfa">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:08.959049Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T20:30:29Z</ZetboxBase:CreatedOn>
     <ZetboxBase:DeploymentRestrictions>1</ZetboxBase:DeploymentRestrictions>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
-    <ZetboxBase:Name>Zetbox.API.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78</ZetboxBase:Name>
+    <ZetboxBase:Name>Zetbox.API.Common</ZetboxBase:Name>
   </ZetboxBase:Assembly>
   <ZetboxBase:Assembly ExportGuid="8937dfc1-288e-49ca-a6c6-701e9c230b07">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:08.961049Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:DeploymentRestrictions>1</ZetboxBase:DeploymentRestrictions>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
-    <ZetboxBase:Name>Zetbox.App.Projekte.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78</ZetboxBase:Name>
+    <ZetboxBase:Name>Zetbox.App.Projekte.Client</ZetboxBase:Name>
   </ZetboxBase:Assembly>
   <ZetboxBase:Assembly ExportGuid="ac417690-2bab-4e7f-ab1b-b8afefe6aebf">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:05.825072Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:DeploymentRestrictions>0</ZetboxBase:DeploymentRestrictions>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
-    <ZetboxBase:Name>Zetbox.App.Projekte.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78</ZetboxBase:Name>
+    <ZetboxBase:Name>Zetbox.App.Projekte.Common</ZetboxBase:Name>
   </ZetboxBase:Assembly>
   <ZetboxBase:Assembly ExportGuid="9acf0b2c-a4a1-4418-99b8-3ec69157c3f0">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:08.963049Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:DeploymentRestrictions>2</ZetboxBase:DeploymentRestrictions>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
-    <ZetboxBase:Name>Zetbox.App.Projekte.Server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78</ZetboxBase:Name>
+    <ZetboxBase:Name>Zetbox.App.Projekte.Server</ZetboxBase:Name>
   </ZetboxBase:Assembly>
   <ZetboxBase:Assembly ExportGuid="a6a50ba6-1801-42f6-8a48-893bac2595bc">
     <ZetboxBase:ChangedOn>2013-08-07T08:15:19.828553Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2013-08-07T08:15:19.828553Z</ZetboxBase:CreatedOn>
     <ZetboxBase:DeploymentRestrictions>0</ZetboxBase:DeploymentRestrictions>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
-    <ZetboxBase:Name>Zetbox.Assets, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ccdf16e4dd7b6d78</ZetboxBase:Name>
+    <ZetboxBase:Name>Zetbox.Assets</ZetboxBase:Name>
   </ZetboxBase:Assembly>
   <ZetboxBase:Assembly ExportGuid="242a1ea6-e8e1-420c-824d-0d2707ece25d">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:08.964049Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:DeploymentRestrictions>0</ZetboxBase:DeploymentRestrictions>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
-    <ZetboxBase:Name>Zetbox.Objects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf</ZetboxBase:Name>
+    <ZetboxBase:Name>Zetbox.Objects</ZetboxBase:Name>
   </ZetboxBase:Assembly>
   <GUI:Icon ExportGuid="41aa8db8-5a1e-41a0-85b1-229029d7794d">
     <GUI:Blob>6cf45df2-a24c-4c47-ad43-7f2585aa2b02</GUI:Blob>

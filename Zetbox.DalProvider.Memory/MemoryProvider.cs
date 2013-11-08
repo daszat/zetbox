@@ -37,7 +37,7 @@ namespace Zetbox.DalProvider.Memory
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.DalProvider.Memory");
 
         public static readonly string ContextClassName = "Zetbox.Objects.Memory.MemoryContext";
-        public static readonly string GeneratedAssemblyName = "Zetbox.Objects.MemoryImpl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf";
+        public static readonly string GeneratedAssemblyName = "Zetbox.Objects.MemoryImpl";
 
         protected override void Load(ContainerBuilder moduleBuilder)
         {

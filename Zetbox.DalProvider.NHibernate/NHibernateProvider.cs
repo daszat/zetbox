@@ -35,7 +35,7 @@ namespace Zetbox.DalProvider.NHibernate
     public class NHibernateProvider
         : Autofac.Module
     {
-        public static readonly string ServerAssembly = "Zetbox.Objects.NHibernateImpl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf";
+        public static readonly string ServerAssembly = "Zetbox.Objects.NHibernateImpl";
         private static readonly object _initLock = new object();
         private static bool _initQueryDone = false;
 

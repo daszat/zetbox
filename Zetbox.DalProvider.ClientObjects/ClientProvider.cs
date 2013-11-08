@@ -33,7 +33,7 @@ namespace Zetbox.DalProvider.Client
     public sealed class ClientProvider
         : Autofac.Module
     {
-        private const string CLIENT_ASSEMBLY_NAME = "Zetbox.Objects.ClientImpl, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf";
+        private const string CLIENT_ASSEMBLY_NAME = "Zetbox.Objects.ClientImpl";
 
         protected override void Load(ContainerBuilder moduleBuilder)
         {
