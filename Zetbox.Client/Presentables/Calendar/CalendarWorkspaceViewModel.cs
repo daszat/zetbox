@@ -715,12 +715,12 @@ namespace Zetbox.Client.Presentables.Calendar
         public void PrintSheet()
         {
             var dlg = ViewModelFactory.CreateDialog(DataContext, CalendarResources.DlgDateRangeTitle)
-                .AddDateTime(CalendarResources.FromLabel, DateTime.Today)
-                .AddDateTime(CalendarResources.UntilLabel, DateTime.Today);
+                .AddDateTime("from", CalendarResources.FromLabel, DateTime.Today)
+                .AddDateTime("to", CalendarResources.UntilLabel, DateTime.Today);
             dlg.Show((values) =>
             {
-                var from = ((DateTime)values[0]).Date;
-                var to = ((DateTime)values[1]).Date.AddDays(1);
+                var from = ((DateTime)values["from"]).Date;
+                var to = ((DateTime)values["to"]).Date.AddDays(1);
                 var events = _fetchCache.FetchEventsAsync(from, to).Result;
                 using (var rpt = _rptFactory())
                 {

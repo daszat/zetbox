@@ -39,7 +39,7 @@ namespace Zetbox.App.Extensions
     {
         protected readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Common.BaseCustomActionsManager");
 
-        private readonly IDeploymentRestrictor _restrictor;
+        private readonly IEnumerable<ImplementorAssembly> _assemblies;
         private readonly ILifetimeScope _container;
 
         private struct MethodKey
@@ -94,13 +94,14 @@ namespace Zetbox.App.Extensions
         /// Initialises a new instance of the BaseCustomActionsManager class 
         /// using the specified extra suffix and the assembly of the actual type of this class.
         /// </summary>
-        protected BaseCustomActionsManager(ILifetimeScope container, IDeploymentRestrictor restrictor, string extraSuffix)
+        protected BaseCustomActionsManager(ILifetimeScope container, string extraSuffix, IEnumerable<ImplementorAssembly> assemblies)
         {
-            if (restrictor == null) { throw new ArgumentNullException("restrictor"); }
             if (container == null) { throw new ArgumentNullException("container"); }
+            if (assemblies == null) { throw new ArgumentNullException("assemblies"); }
 
-            _restrictor = restrictor;
             _container = container;
+            _assemblies = assemblies;
+
             ExtraSuffix = extraSuffix;
             ImplementationAssemblyName = this.GetType().Assembly.FullName;
 
@@ -146,20 +147,12 @@ namespace Zetbox.App.Extensions
             if (metaCtx == null) { throw new ArgumentNullException("metaCtx"); }
 
             // Load all Implementor Types and Invocations
-            foreach (var assembly in metaCtx.GetQuery<Zetbox.App.Base.Assembly>())
+            foreach (var assembly in _assemblies.Select(a => a.Assembly))
             {
                 try
                 {
-                    var restr = assembly.DeploymentRestrictions;
-                    if (!_restrictor.IsAcceptableDeploymentRestriction((int)restr))
-                    {
-                        continue;
-                    }
-
-                    var a = System.Reflection.Assembly.Load(assembly.Name);
-
                     // Methods
-                    foreach (var t in a.GetTypes())
+                    foreach (var t in assembly.GetTypes())
                     {
                         if (t.GetCustomAttributes(typeof(Implementor), false).Length != 0)
                         {
@@ -195,9 +188,9 @@ namespace Zetbox.App.Extensions
                     // Assets
                     if (_assetsMgr != null)
                     {
-                        foreach (AssetsFor assetAttribute in a.GetCustomAttributes(typeof(AssetsFor), false))
+                        foreach (AssetsFor assetAttribute in assembly.GetCustomAttributes(typeof(AssetsFor), false))
                         {
-                            _assetsMgr.AddAssembly(assetAttribute.Module, a);
+                            _assetsMgr.AddAssembly(assetAttribute.Module, assembly);
                         }
                     }
                 }
@@ -205,23 +198,19 @@ namespace Zetbox.App.Extensions
                 {
                     if (ex.LoaderExceptions.Count() == 1)
                     {
-                        Log.Warn(String.Format("Failed to reflect over Assembly [{0}]. Ignoring and continuing.", assembly.Name), ex.LoaderExceptions.Single());
+                        Log.Warn(String.Format("Failed to reflect over Assembly [{0}]. Ignoring and continuing.", assembly.FullName), ex.LoaderExceptions.Single());
                     }
                     else
                     {
                         foreach (var lex in ex.LoaderExceptions)
                         {
-                            Log.Warn(String.Format("Failed to reflect over Assembly [{0}]. Ignoring and continuing. Multiple Errors:", assembly.Name), lex);
+                            Log.Warn(String.Format("Failed to reflect over Assembly [{0}]. Ignoring and continuing. Multiple Errors:", assembly.FullName), lex);
                         }
                     }
                 }
-                catch (FileNotFoundException ex)
-                {
-                    Log.Warn(String.Format("Error while processing Assembly [{0}]. FileNotFound: {1}. Ignoring and continuing.", assembly.Name, ex.FileName));
-                }
                 catch (Exception ex)
                 {
-                    Log.Warn(String.Format("Error while processing Assembly [{0}]. Ignoring and continuing.", assembly.Name), ex);
+                    Log.Warn(String.Format("Error while processing Assembly [{0}]. Ignoring and continuing.", assembly.FullName), ex);
                 }
             }
         }

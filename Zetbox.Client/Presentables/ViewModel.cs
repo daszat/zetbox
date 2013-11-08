@@ -421,7 +421,7 @@ namespace Zetbox.Client.Presentables
 
             // The basic implementation - a toolkit might implement it better
             var dlg = ViewModelFactory.CreateDialog(DataContext, ViewModelResources.HelpCommand)
-                .AddTextBlock(ViewModelResources.HelpCommand, HelpText);
+                .AddTextBlock("help", ViewModelResources.HelpCommand, HelpText);
             dlg.Show();
         }
 

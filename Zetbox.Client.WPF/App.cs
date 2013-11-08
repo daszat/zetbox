@@ -68,7 +68,6 @@ namespace Zetbox.Client.WPF
 
         private static ServerDomainManager serverDomain;
         private static IContainer container;
-        private static bool wpfResourcesInitialized = false;
 
         private string[] HandleCommandline(string[] args, out string configFilePath)
         {
@@ -154,6 +153,7 @@ namespace Zetbox.Client.WPF
             var builder = Zetbox.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Client.Modules);
             ConfigureContainerBuilder(config, builder);
             container = builder.Build();
+            container.Resolve<IUIExceptionReporter>().BeginInit();
             API.AppDomainInitializer.InitializeFrom(container);
 
             StartupScreen.SetInfo(Zetbox.Client.Properties.Resources.Startup_Launcher);
@@ -193,7 +193,7 @@ namespace Zetbox.Client.WPF
 
             StartupScreen.SetInfo(Zetbox.Client.Properties.Resources.Startup_Launcher);
 
-            wpfResourcesInitialized = true;
+            container.Resolve<IUIExceptionReporter>().EndInit();
 
             FixupDatabase(container.Resolve<Func<IZetboxContext>>());
 
@@ -342,21 +342,9 @@ namespace Zetbox.Client.WPF
         {
             try
             {
-                var inner = ex.GetInnerException();
-                Logging.Client.Error("Unhandled Exception", inner);
-                if (inner is InvalidZetboxGeneratedVersionException)
+                if (container != null)
                 {
-                    MessageBox.Show(
-                        WpfToolkitResources.InvalidZetboxGeneratedVersionException_Message,
-                        WpfToolkitResources.InvalidZetboxGeneratedVersionException_Title,
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Stop);
-                }
-                else if (wpfResourcesInitialized && container != null)
-                {
-                    var vmf = container.Resolve<IViewModelFactory>();
-                    var mdl = vmf.CreateViewModel<ExceptionReporterViewModel.Factory>().Invoke(container.Resolve<IZetboxContext>(), null, ex, container.Resolve<IScreenshotTool>().GetScreenshot());
-                    vmf.ShowDialog(mdl);
+                    container.Resolve<IUIExceptionReporter>().Show(ex);
                 }
                 else
                 {
@@ -370,27 +358,5 @@ namespace Zetbox.Client.WPF
                 MessageBox.Show(ex.ToString(), "Unexpected Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
-#if DONOTUSE
-        private static Assembly FetchOrCreateAssembly(
-            IZetboxContext ctx,
-            Module guiModule,
-            string aName)
-        {
-            Assembly result = ctx.GetQuery<Assembly>()
-                .Where(a => a.Name == aName)
-                .ToList()
-                .SingleOrDefault();
-
-            if (result == null)
-            {
-                result = ctx.Create<Assembly>();
-                result.Name = aName;
-                result.Module = guiModule;
-            }
-
-            return result;
-        }
-#endif
     }
 }

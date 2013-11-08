@@ -50,7 +50,7 @@ namespace Zetbox.Client.Reporting
 
             if (ex != null)
             {
-                dlg.AddMultiLineString("Exception", ex.ToString(), true, true);
+                dlg.AddMultiLineString("ex", "Exception", ex.ToString(), true, true);
             }
 
             if (errors != null && errors.ErrorCount > 0)
@@ -74,7 +74,7 @@ namespace Zetbox.Client.Reporting
                     sb.AppendLine(e.ToString());
                 }
 
-                dlg.AddMultiLineString("Errors", sb.ToString(), true, true);
+                dlg.AddMultiLineString("errors", "Errors", sb.ToString(), true, true);
             }
 
             if (mddl != null)
@@ -89,7 +89,7 @@ namespace Zetbox.Client.Reporting
                     sb.AppendLine(string.Format("{0:000}: {1}", ++counter, line));
                 }
 
-                dlg.AddMultiLineString("MDDL", sb.ToString(), true, true);
+                dlg.AddMultiLineString("mddl", "MDDL", sb.ToString(), true, true);
             }
 
             dlg.Show();

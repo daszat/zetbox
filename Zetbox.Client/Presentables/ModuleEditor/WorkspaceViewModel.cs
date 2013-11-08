@@ -101,34 +101,39 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                     var lst = new ObservableCollection<ViewModel>();
 
                     InstanceListViewModel lstMdl;
+                    GroupingTreeItemViewModel grpMdl;
+
+                    grpMdl = ViewModelFactory.CreateViewModel<GroupingTreeItemViewModel.Factory>().Invoke(DataContext, this, "Data model");
+                    grpMdl.Icon = IconConverter.ToImage(NamedObjects.Base.Classes.Zetbox.App.Base.DataType.Find(FrozenContext).DefaultIcon);
+                    lst.Add(grpMdl);
 
                     // Object Classes
                     lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
                         typeof(ObjectClass).GetObjectClass(FrozenContext),
                         () => DataContext.GetQuery<ObjectClass>().Where(i => i.Module == CurrentModule).OrderBy(i => i.Name));
                     SetupViewModel(lstMdl);
-                    lst.Add(lstMdl);
+                    grpMdl.Children.Add(lstMdl);
 
                     // Interface
                     lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
                         typeof(Interface).GetObjectClass(FrozenContext),
                         () => DataContext.GetQuery<Interface>().Where(i => i.Module == CurrentModule).OrderBy(i => i.Name));
                     SetupViewModel(lstMdl);
-                    lst.Add(lstMdl);
+                    grpMdl.Children.Add(lstMdl);
 
                     // Enums
                     lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
                         typeof(Enumeration).GetObjectClass(FrozenContext),
                         () => DataContext.GetQuery<Enumeration>().Where(i => i.Module == CurrentModule).OrderBy(i => i.Name));
                     SetupViewModel(lstMdl);
-                    lst.Add(lstMdl);
+                    grpMdl.Children.Add(lstMdl);
 
                     // CompoundObject
                     lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
                         typeof(CompoundObject).GetObjectClass(FrozenContext),
                         () => DataContext.GetQuery<CompoundObject>().Where(i => i.Module == CurrentModule).OrderBy(i => i.Name));
                     SetupViewModel(lstMdl);
-                    lst.Add(lstMdl);
+                    grpMdl.Children.Add(lstMdl);
 
                     // Properties
                     lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
@@ -136,7 +141,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                         () => DataContext.GetQuery<Property>().Where(i => i.Module == CurrentModule));
                     lstMdl.SetInitialSort("Name");
                     SetupViewModel(lstMdl);
-                    lst.Add(lstMdl);
+                    grpMdl.Children.Add(lstMdl);
 
                     // Assembly
                     var assemblyLstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
@@ -168,41 +173,49 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                         () => "Nothing selected"));
                     lst.Add(assemblyLstMdl);
 
+                    grpMdl = ViewModelFactory.CreateViewModel<GroupingTreeItemViewModel.Factory>().Invoke(DataContext, this, "Application & UI");
+                    grpMdl.Icon = IconConverter.ToImage(NamedObjects.Base.Classes.Zetbox.App.GUI.Application.Find(FrozenContext).DefaultIcon);
+                    lst.Add(grpMdl);
+
                     // Application
                     lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
                         typeof(Application).GetObjectClass(FrozenContext),
                         () => DataContext.GetQuery<Application>().Where(i => i.Module == CurrentModule).OrderBy(i => i.Name));
                     SetupViewModel(lstMdl);
-                    lst.Add(lstMdl);
+                    grpMdl.Children.Add(lstMdl);
 
                     // NavigationScreens
                     var navScreenMdl = ViewModelFactory.CreateViewModel<NavigationScreenHierarchyViewModel.Factory>().Invoke(DataContext, this, CurrentModule);
-                    lst.Add(navScreenMdl);
+                    grpMdl.Children.Add(navScreenMdl);
 
                     // ViewDescriptor
                     lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
                         typeof(ViewDescriptor).GetObjectClass(FrozenContext),
                         () => DataContext.GetQuery<ViewDescriptor>().Where(i => i.Module == CurrentModule).OrderBy(i => i.ControlKind.Name));
                     SetupViewModel(lstMdl);
-                    lst.Add(lstMdl);
+                    grpMdl.Children.Add(lstMdl);
 
                     // ViewModelDescriptor
                     lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
                         typeof(ViewModelDescriptor).GetObjectClass(FrozenContext),
                         () => DataContext.GetQuery<ViewModelDescriptor>().Where(i => i.Module == CurrentModule).OrderBy(i => i.Description));
                     SetupViewModel(lstMdl);
-                    lst.Add(lstMdl);
+                    grpMdl.Children.Add(lstMdl);
 
                     // ControlKinds
                     var ctrlKindMdl = ViewModelFactory.CreateViewModel<ControlKindHierarchyViewModel.Factory>().Invoke(DataContext, this, CurrentModule);
-                    lst.Add(ctrlKindMdl);
+                    grpMdl.Children.Add(ctrlKindMdl);
 
                     // Icons
                     lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
                         typeof(Icon).GetObjectClass(FrozenContext),
                         () => DataContext.GetQuery<Icon>().Where(i => i.Module == CurrentModule).OrderBy(i => i.IconFile));
                     SetupViewModel(lstMdl);
-                    lst.Add(lstMdl);
+                    grpMdl.Children.Add(lstMdl);
+                    
+                    grpMdl = ViewModelFactory.CreateViewModel<GroupingTreeItemViewModel.Factory>().Invoke(DataContext, this, "Other meta data");
+                    grpMdl.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.propertiesORoptions_ico.Find(FrozenContext));
+                    lst.Add(grpMdl);
 
                     // Relation
                     lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
@@ -210,14 +223,21 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                         () => DataContext.GetQuery<Relation>().Where(i => i.Module == CurrentModule).OrderBy(i => i.Description));
                     SetupViewModel(lstMdl);
                     lstMdl.AddFilter(new ToStringFilterModel(FrozenContext));
-                    lst.Add(lstMdl);
+                    grpMdl.Children.Add(lstMdl);
 
                     // Sequences
                     lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
                         typeof(Sequence).GetObjectClass(FrozenContext),
                         () => DataContext.GetQuery<Sequence>().Where(i => i.Module == CurrentModule).OrderBy(i => i.Description));
                     SetupViewModel(lstMdl);
-                    lst.Add(lstMdl);
+                    grpMdl.Children.Add(lstMdl);
+
+                    // Groups
+                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
+                        typeof(Group).GetObjectClass(FrozenContext),
+                        () => DataContext.GetQuery<Group>().Where(i => i.Module == CurrentModule).OrderBy(i => i.Name));
+                    SetupViewModel(lstMdl);
+                    grpMdl.Children.Add(lstMdl);
 
                     // Diagram
                     var diagMdl = ViewModelFactory.CreateViewModel<DiagramViewModel.Factory>().Invoke(DataContext, this, CurrentModule);

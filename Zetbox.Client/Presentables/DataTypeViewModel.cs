@@ -64,6 +64,11 @@ namespace Zetbox.Client.Presentables
             }
         }
 
+        public override System.Drawing.Image Icon
+        {
+            get { return IconConverter.ToImage(_dataType.DefaultIcon); }
+        }
+
         protected override List<PropertyGroupViewModel> CreatePropertyGroups()
         {
             var result = base.CreatePropertyGroups();

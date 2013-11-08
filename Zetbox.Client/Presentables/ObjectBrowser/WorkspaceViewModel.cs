@@ -104,19 +104,10 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
 
         private void LoadModules()
         {
-            try
+            var modules = DataContext.GetQuery<Module>().ToList();
+            foreach (var m in modules.OrderBy(i => i.Name))
             {
-                var modules = DataContext.GetQuery<Module>().ToList();
-                foreach (var m in modules.OrderBy(i => i.Name))
-                {
-                    Modules.Add(ViewModelFactory.CreateViewModel<ModuleViewModel.Factory>(m).Invoke(DataContext, this, m));
-                }
-            }
-            catch (Exception ex)
-            {
-                ViewModelFactory.CreateViewModel<ExceptionReporterViewModel.Factory>()
-                    .Invoke(DataContext, null, ex, null)
-                    .ShowDialog();
+                Modules.Add(ViewModelFactory.CreateViewModel<ModuleViewModel.Factory>(m).Invoke(DataContext, this, m));
             }
         }
 

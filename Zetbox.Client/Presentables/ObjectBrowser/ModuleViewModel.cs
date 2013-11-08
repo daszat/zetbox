@@ -25,15 +25,23 @@ using Zetbox.App.Base;
 using Zetbox.App.Extensions;
 using Zetbox.Client.Presentables.ZetboxBase;
 using Zetbox.API.Common;
+using Zetbox.Client.Presentables.ValueViewModels;
 
 namespace Zetbox.Client.Presentables.ObjectBrowser
 {
     [ViewModelDescriptor]
     public class ModuleViewModel : DataObjectViewModel
     {
-        public class TreeNodeSimpleObjects
+        public class TreeNodeSimpleObjects : ViewModel
         {
-            public string Name
+            public new delegate TreeNodeSimpleObjects Factory(IZetboxContext dataCtx, ViewModel parent);
+
+            public TreeNodeSimpleObjects(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent)
+                : base(dependencies, dataCtx, parent)
+            {
+            }
+
+            public override string Name
             {
                 get
                 {
@@ -41,6 +49,14 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
                 }
             }
             public IEnumerable Children { get; set; }
+
+            public ViewModel DashboardViewModel
+            {
+                get
+                {
+                    return null;
+                }
+            }
         }
 
         public new delegate ModuleViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Module mdl);
@@ -63,18 +79,26 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
 
         #region public interface
 
+        private List<object> _children;
         public IEnumerable Children
         {
             get
             {
-                return ObjectClasses
-                    .Cast<object>()
-                    .Concat(new[] { new TreeNodeSimpleObjects() { Children = this.SimpleObjectClasses } });
+                if (_children == null)
+                {
+                    var simple = ViewModelFactory.CreateViewModel<TreeNodeSimpleObjects.Factory>().Invoke(DataContext, this);
+                    simple.Children = this.SimpleObjectClasses;
+                    _children = ObjectClasses
+                        .Cast<object>()
+                        .Concat(new[] {  simple })
+                        .ToList();
+                }
+                return _children;
             }
         }
 
-        private List<InstanceListViewModel> _objectClassesCache = null;
-        public IEnumerable<InstanceListViewModel> ObjectClasses
+        private List<ObjectClassViewModel> _objectClassesCache = null;
+        public IEnumerable<ObjectClassViewModel> ObjectClasses
         {
             get
             {
@@ -86,8 +110,8 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
             }
         }
 
-        private List<InstanceListViewModel> _simpleObjectClassesCache = null;
-        public IEnumerable<InstanceListViewModel> SimpleObjectClasses
+        private List<ObjectClassViewModel> _simpleObjectClassesCache = null;
+        public IEnumerable<ObjectClassViewModel> SimpleObjectClasses
         {
             get
             {
@@ -103,24 +127,22 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
 
         #region Utilities and UI callbacks
 
-        private List<InstanceListViewModel> LoadObjectClasses(bool simpleObjects)
+        private List<ObjectClassViewModel> LoadObjectClasses(bool simpleObjects)
         {
-            var result = new List<InstanceListViewModel>();
-            var datatypes = FrozenContext.GetQuery<ObjectClass>()
-                .Where(dt => dt.Module.ExportGuid == _module.ExportGuid && dt.IsSimpleObject == simpleObjects)
-                .OrderBy(dt => dt.Name)
+            return FrozenContext.GetQuery<ObjectClass>()
+                .Where(c => c.Module.ExportGuid == _module.ExportGuid && c.BaseObjectClass == null && c.IsSimpleObject == simpleObjects)
+                .OrderBy(c => c.Name)
+                .ToList()
+                .Select(c => ViewModelFactory.CreateViewModel<ObjectClassViewModel.Factory>().Invoke(DataContext, this, c))
                 .ToList();
-            foreach (var cls in datatypes)
-            {
-                var mdl = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(DataContext, this, cls, null);
-                mdl.AllowAddNew = true;
-                mdl.AllowDelete = true;
-                mdl.ViewMethod = Zetbox.App.GUI.InstanceListViewMethod.Details;
-                mdl.Commands.Add(ViewModelFactory.CreateViewModel<EditDataObjectClassCommand.Factory>().Invoke(DataContext, this, cls));
-                result.Add(mdl);
-            }
+        }
 
-            return result;
+        public ViewModel DashboardViewModel
+        {
+            get 
+            {
+                return this;
+            }
         }
 
         #endregion

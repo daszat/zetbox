@@ -32,7 +32,7 @@
 
                 <GroupBox DockPanel.Dock="Top"
                           Header="Relation"
-                          Margin="5">
+                          Margin="{StaticResource DialogMargin}">
                     <DockPanel>
                         <ctrls:LabeledView DockPanel.Dock="Top"
                                            Margin="5,0,5,0"
@@ -98,7 +98,7 @@
 
                 <GroupBox DockPanel.Dock="Top"
                           Header="Summary"
-                          Margin="5">
+                          Margin="{StaticResource DialogMargin}">
                     <Grid DockPanel.Dock="Top"
                           Margin="5,0,5,0">
                         <Grid.RowDefinitions>

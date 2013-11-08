@@ -14,6 +14,9 @@ namespace Zetbox.Client.Presentables.ModuleEditor
     using Zetbox.Client.Presentables.ValueViewModels;
     using Zetbox.Client.Presentables.ZetboxBase;
     using ObjectEditorWorkspace = Zetbox.Client.Presentables.ObjectEditor.WorkspaceViewModel;
+    using System.Collections.ObjectModel;
+    using Zetbox.Client.GUI;
+    using Zetbox.App.Extensions;
 
     [CLSCompliant(false)]
     public class DataTypeGraph : BidirectionalGraph<DataTypeGraphModel, IEdge<DataTypeGraphModel>>
@@ -41,6 +44,14 @@ namespace Zetbox.Client.Presentables.ModuleEditor
 
         protected readonly Func<IZetboxContext> ctxFactory;
         public Module Module { get; private set; }
+
+        public ViewModel DashboardViewModel
+        {
+            get
+            {
+                return this;
+            }
+        }
 
         #region GraphSettings
         public enum GraphTypeEnum
@@ -87,6 +98,30 @@ namespace Zetbox.Client.Presentables.ModuleEditor
         {
             return Name;
         }
+
+        public override System.Drawing.Image Icon
+        {
+            get { return IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.pen_png.Find(FrozenContext)); }
+        }
+        #endregion
+
+        #region Modules
+        private ObservableCollection<ModuleGraphViewModel> _moduleViewModels;
+        public ObservableCollection<ModuleGraphViewModel> ModuleViewModels
+        {
+            get
+            {
+                if (_moduleViewModels == null)
+                {
+                    _moduleViewModels = new ObservableCollection<ModuleGraphViewModel>(DataContext.GetQuery<Module>()
+                                    .OrderBy(m => m.Name)
+                                    .ToList()
+                                    .Select(m => ViewModelFactory.CreateViewModel<ModuleGraphViewModel.Factory>().Invoke(DataContext, this, m))
+                                    );
+                }
+                return _moduleViewModels;
+            }
+        }
         #endregion
 
         #region DataTypes
@@ -102,50 +137,25 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                         "Filter",
                         "",
                         true, false);
-                    _filterMdl.PropertyChanged += (s, e) => { if (e.PropertyName == "Value") OnPropertyChanged("DataTypeViewModels"); };
+                    _filterMdl.PropertyChanged += (s, e) =>
+                    {
+                        if (e.PropertyName == "Value")
+                        {
+                            OnPropertyChanged("DataTypeViewModels");
+                            OnPropertyChanged("FilterValue");
+                        }
+                    };
                     _filter = ViewModelFactory.CreateViewModel<StringValueViewModel.Factory>().Invoke(DataContext, this, _filterMdl);
                 }
                 return _filter;
             }
         }
 
-        private ReadOnlyProjectedList<DataType, DataTypeGraphModel> _DataTypeViewModels = null;
-        public IEnumerable<DataTypeGraphModel> DataTypeViewModels
+        public string FilterValue
         {
             get
             {
-                if (_DataTypeViewModels == null)
-                {
-                    _DataTypeViewModels = new ReadOnlyProjectedList<DataType, DataTypeGraphModel>(DataTypes,
-                        i => ViewModelFactory.CreateViewModel<DataTypeGraphModel.Factory>().Invoke(DataContext, this, i),
-                        i => i.DataType);
-                }
-                if (_filterMdl != null && !string.IsNullOrEmpty(_filterMdl.Value))
-                {
-                    var str = _filterMdl.Value.ToLowerInvariant();
-                    return _DataTypeViewModels.Where(i => i.Name.ToLowerInvariant().Contains(str));
-                }
-                else
-                {
-                    return _DataTypeViewModels;
-                }
-            }
-        }
-
-        private List<DataType> _dataTypes = null;
-        private IList<DataType> DataTypes
-        {
-            get
-            {
-                if (_dataTypes == null)
-                {
-                    // Get all DataTypes
-                    _dataTypes = DataContext.GetQuery<DataType>().ToList()
-                        .OrderBy(i => i.Module.Name)
-                        .ThenBy(i => i.Name)
-                        .ToList();
-                }
-                return _dataTypes;
+                return _filterMdl != null ? _filterMdl.Value : null;
             }
         }
 
@@ -165,18 +175,35 @@ namespace Zetbox.Client.Presentables.ModuleEditor
         public void Refresh()
         {
             _relations = null;
-            if (_dataTypes != null)
+            _dataTypeViewModels = null;
+            if (_moduleViewModels != null)
             {
-                var newDataTypes = DataContext.GetQuery<DataType>().ToList();
-                // Add new ones, keep old ones
-                _dataTypes.AddRange(newDataTypes.Except(_dataTypes));
-                _dataTypes.RemoveAll(dt => !newDataTypes.Contains(dt));
-                _dataTypes.Sort((a, b) => a.Name.CompareTo(b.Name));
+                var newModules = DataContext.GetQuery<Module>().ToList();
+                // Add new ones, keep existing ones
+                foreach (var newModule in newModules.Except(_moduleViewModels.Select(mv => mv.Module)))
+                {
+                    _moduleViewModels.Add(ViewModelFactory.CreateViewModel<ModuleGraphViewModel.Factory>().Invoke(DataContext, this, newModule));
+                }
+
+                _moduleViewModels.ForEach(m => m.Refresh());
             }
-            OnPropertyChanged("Relations");
-            OnPropertyChanged("DataTypes");
+
             OnPropertyChanged("DataTypeViewModels");
+            OnPropertyChanged("Relations");
             RecreateGraph();
+        }
+
+        List<DataTypeGraphModel> _dataTypeViewModels;
+        public IEnumerable<DataTypeGraphModel> DataTypeViewModels
+        {
+            get
+            {
+                if (_dataTypeViewModels == null)
+                {
+                    _dataTypeViewModels = ModuleViewModels.SelectMany(m => m.DataTypes).ToList();
+                }
+                return _dataTypeViewModels;
+            }
         }
 
         public IEnumerable<DataTypeGraphModel> SelectedDataTypeViewModels
@@ -209,7 +236,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
 
         private void AddRelatedDataTypes()
         {
-            foreach (var dtm in DataTypeViewModels.Where(i => i.IsChecked).ToList())
+            foreach (var dtm in SelectedDataTypeViewModels.ToList())
             {
                 var add = new List<DataTypeGraphModel>();
                 if (GraphType == GraphTypeEnum.Inheritance)
@@ -386,15 +413,66 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                 {
                     _NewObjectClassCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "New Class", "Creates a new Class", () =>
                     {
-                        var newCtx = ctxFactory();
-                        var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx, null);
-                        var newCls = newCtx.Create<ObjectClass>();
+                        ViewModelFactory.CreateDialog(DataContext, "New class")
+                            .AddString("name", NamedObjects.Base.Classes.Zetbox.App.Base.DataType_Properties.Name.Find(FrozenContext).GetLabel())
+                            .AddString("table", NamedObjects.Base.Classes.Zetbox.App.Base.ObjectClass_Properties.TableName.Find(FrozenContext).GetLabel())
+                            .AddString("description", NamedObjects.Base.Classes.Zetbox.App.Base.DataType_Properties.Description.Find(FrozenContext).GetLabel())
+                            .AddBool("IChangedBy", "IChangedBy", value: false, description: "Implement IChangedBy")
+                            .AddBool("IExportable", "IExportable", value: false, description: "Implement IExportable")
+                            .AddBool("IAuditable", "IAuditable", value: false, description: "Implement IAuditable")
+                            .AddBool("IDeactivatable", "IDeactivatable", value: false, description: "Implement IDeactivatable")
+                            .AddBool("simple", "Is simple", value: false, description: "Is simple object")
+                            .AddBool("abstract", "Is abstract", value: false, description: "Is abstract object")
+                            .AddBool("show", "Show", value: false, description: "Show class when finished")
+                            .DefaultButtons("Create", "Cancel")
+                            .Show(values =>
+                            {
+                                var newCtx = ctxFactory();
+                                var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx, null);
+                                var newCls = newCtx.Create<ObjectClass>();
 
-                        newCls.Module = newCtx.Find<Module>(Module.ID);
+                                newCls.Module = newCtx.Find<Module>(Module.ID);
+                                newCls.Name = (string)values["name"];
+                                newCls.TableName = (string)values["table"];
+                                newCls.Description = (string)values["description"];
+                                newCls.IsSimpleObject = (bool)values["simple"];
+                                newCls.IsAbstract = (bool)values["abstract"];
 
-                        newWorkspace.ShowModel(DataObjectViewModel.Fetch(ViewModelFactory, newCtx, newWorkspace, newCls));
-                        ViewModelFactory.ShowModel(newWorkspace, true);
+                                if ((bool)values["IChangedBy"])
+                                {
+                                    newCls.ImplementsInterfaces.Add(newCtx.GetQuery<Interface>().First(i => i.Name == "IChangedBy" && i.Module.Name == "ZetboxBase"));
+                                }
+                                if ((bool)values["IExportable"])
+                                {
+                                    newCls.ImplementsInterfaces.Add(newCtx.GetQuery<Interface>().First(i => i.Name == "IExportable" && i.Module.Name == "ZetboxBase"));
+                                }
+                                if ((bool)values["IAuditable"])
+                                {
+                                    newCls.ImplementsInterfaces.Add(newCtx.GetQuery<Interface>().First(i => i.Name == "IAuditable" && i.Module.Name == "ZetboxBase"));
+                                }
+                                if ((bool)values["IDeactivatable"])
+                                {
+                                    newCls.ImplementsInterfaces.Add(newCtx.GetQuery<Interface>().First(i => i.Name == "IDeactivatable" && i.Module.Name == "ZetboxBase"));
+                                }
+
+                                newCls.ImplementInterfaces();
+
+                                if ((bool)values["show"])
+                                {
+                                    newWorkspace.ShowModel(DataObjectViewModel.Fetch(ViewModelFactory, newCtx, newWorkspace, newCls));
+                                    ViewModelFactory.ShowModel(newWorkspace, true);
+                                }
+                                else
+                                {
+                                    newCtx.SubmitChanges();
+                                    Refresh();
+                                    DataTypeViewModels
+                                        .Single(vm => vm.DataType.ExportGuid == newCls.ExportGuid)
+                                        .SetChecked(true, true);
+                                }
+                            });
                     }, null, null);
+                    _NewObjectClassCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext));
                 }
                 return _NewObjectClassCommand;
             }
@@ -423,6 +501,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                     },
                     () => (SelectedGraphDataTypeViewModels.Count() == 1 || SelectedGraphDataTypeViewModels.Count() == 2) && SelectedGraphDataTypeViewModels.Any(dt => dt.DataType is ObjectClass),
                     null);
+                    _NewRelationCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext));
                 }
                 return _NewRelationCommand;
             }

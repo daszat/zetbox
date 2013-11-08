@@ -34,6 +34,8 @@
                       ItemsSource="{Binding Applications}">
                 <MenuItem.ItemContainerStyle>
                     <Style TargetType="{x:Type MenuItem}">
+                        <Setter Property="Icon"
+                                Value="{Binding Icon, Converter={StaticResource ImageCtrlConverter}, ConverterParameter='16,16'}" />
                         <Setter Property="Header"
                                 Value="{Binding Name}" />
                         <Setter Property="Command"
@@ -55,12 +57,11 @@
             <TreeView x:Name="ObjectTree"
                       Grid.Column="0"
                       BorderThickness="0"
-                      Margin="5"
+                      Margin="{StaticResource DialogMargin}"
                       SelectedItemChanged="ModuleTreeSelectedItemChangedHandler">
                 <TreeView.Resources>
                     <HierarchicalDataTemplate DataType="{x:Type objBrowser:ModuleViewModel}"
                                               ItemsSource="{Binding Children}">
-                        <!--<view:DataObjectLineDisplay />-->
                         <StackPanel Orientation="Horizontal">
                             <Image Source="{Binding Icon, Converter={StaticResource ImageConverter}}"
                                    Width="14"
@@ -69,19 +70,18 @@
                                        Margin="3,0,0,0" />
                         </StackPanel>
                     </HierarchicalDataTemplate>
-                    <DataTemplate DataType="{x:Type clientZetboxBase:InstanceListViewModel}">
-                        <!-- <view:DataObjectLineDisplay DataContext="{Binding DataTypeViewModel}" />-->
+                    <HierarchicalDataTemplate DataType="{x:Type objBrowser:ObjectClassViewModel}"
+                                              ItemsSource="{Binding Children}">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="{Binding Icon, Converter={StaticResource ImageConverter}}"
                                    Width="14"
                                    Height="14" />
-                            <TextBlock Text="{Binding DataTypeViewModel.Name}"
+                            <TextBlock Text="{Binding Name}"
                                        Margin="3,0,0,0" />
                         </StackPanel>
-                    </DataTemplate>
+                    </HierarchicalDataTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type objBrowser:ModuleViewModel+TreeNodeSimpleObjects}"
                                               ItemsSource="{Binding Children}">
-                        <!--<view:DataObjectLineDisplay />-->
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="{Binding Name}"
                                        Margin="3,0,0,0" />
@@ -98,9 +98,9 @@
 
             <ContentPresenter Grid.Column="2"
                               Grid.IsSharedSizeScope="True"
-                              Margin="5"
-                              Content="{Binding SelectedItem}"
-                              ContentTemplateSelector="{StaticResource dashBoardTemplateSelector}" />
+                              Margin="{StaticResource DialogMargin}"
+                              Content="{Binding SelectedItem.DashboardViewModel}"
+                              ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
         </Grid>
     </DockPanel>
 </ctrls:WindowView>

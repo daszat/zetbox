@@ -53,6 +53,19 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             return Name;
         }
 
+        public override System.Drawing.Image Icon
+        {
+            get { return IconConverter.ToImage(NamedObjects.Base.Classes.Zetbox.App.GUI.NavigationEntry.Find(FrozenContext).DefaultIcon); }
+        }
+
+        public ViewModel DashboardViewModel
+        {
+            get
+            {
+                return this;
+            }
+        }
+
         private NavigationEntryEditorViewModel _selectedItem;
         public NavigationEntryEditorViewModel SelectedItem
         {

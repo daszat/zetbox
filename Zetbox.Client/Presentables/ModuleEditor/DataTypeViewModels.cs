@@ -12,6 +12,106 @@ namespace Zetbox.Client.Presentables.ModuleEditor
     using Zetbox.Client.Presentables.ZetboxBase;
     using ObjectEditorWorkspace = Zetbox.Client.Presentables.ObjectEditor.WorkspaceViewModel;
 
+    public class ModuleGraphViewModel : Presentables.DataObjectViewModel
+    { 
+        public new delegate ModuleGraphViewModel Factory(IZetboxContext dataCtx, DiagramViewModel parent, Module obj);
+
+        private DiagramViewModel _diagMdl;
+        protected readonly Func<IZetboxContext> ctxFactory;
+
+        public ModuleGraphViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, DiagramViewModel parent,
+            Module obj, Func<IZetboxContext> ctxFactory)
+            : base(appCtx, dataCtx, parent, obj)
+        {
+            this._diagMdl = parent;
+            this.ctxFactory = ctxFactory;
+            this.Module = obj;
+            this._diagMdl.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(_diagMdl_PropertyChanged);
+        }
+
+        void _diagMdl_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            switch(e.PropertyName)
+            {
+                case "FilterValue":
+                    OnPropertyChanged("DataTypes");
+                    break;
+            }
+        }
+
+        public override string Name
+        {
+            get
+            {
+                return Module.Name;
+            }
+        }
+
+        public Module Module { get; private set; }
+
+        private List<DataTypeGraphModel> _dataTypeViewModels = null;
+        public IEnumerable<DataTypeGraphModel> DataTypes
+        {
+            get
+            {
+                if (_dataTypeViewModels == null)
+                {
+                    _dataTypeViewModels = DataContext.GetQuery<DataType>()
+                                            .Where(dt => dt.Module.ExportGuid == Module.ExportGuid)
+                                            .ToList()
+                                            .Select(i => ViewModelFactory.CreateViewModel<DataTypeGraphModel.Factory>().Invoke(DataContext, _diagMdl, i))
+                                            .ToList();
+                }
+                if (!string.IsNullOrEmpty(_diagMdl.FilterValue))
+                {
+                    var str = _diagMdl.FilterValue.ToLowerInvariant();
+                    return _dataTypeViewModels.Where(i => i.Name.ToLowerInvariant().Contains(str));
+                }
+                else
+                {
+                    return _dataTypeViewModels;
+                }
+            }
+        }
+
+        public void Refresh()
+        {
+            if (_dataTypeViewModels != null)
+            {
+                var newDataTypes = DataContext.GetQuery<DataType>().Where(dt => dt.Module.ExportGuid == Module.ExportGuid).ToList();
+                // Add new ones, keep existing ones
+                _dataTypeViewModels.AddRange(newDataTypes.Except(_dataTypeViewModels.Select(i => i.DataType)).Select(i => ViewModelFactory.CreateViewModel<DataTypeGraphModel.Factory>().Invoke(DataContext, _diagMdl, i)));
+                _dataTypeViewModels.RemoveAll(dt => !newDataTypes.Contains(dt.DataType));
+                _dataTypeViewModels.Sort((a, b) => a.Name.CompareTo(b.Name));
+
+                // create a new instance so that WPF will realy refresh the list
+                _dataTypeViewModels = new List<DataTypeGraphModel>(_dataTypeViewModels);
+                OnPropertyChanged("DataTypes");
+            }
+        }
+
+        private bool? _isExpanded = null;
+        public bool IsExpanded
+        {
+            get
+            {
+                if (_isExpanded == null)
+                {
+                    _isExpanded = _diagMdl.Module.ExportGuid == this.Module.ExportGuid;
+                }
+                return _isExpanded.Value;
+            }
+            set
+            {
+                if (_isExpanded != value)
+                {
+                    _isExpanded = value;
+                    OnPropertyChanged("IsExpanded");
+                }
+            }
+        }
+    }
+
     public class DataTypeGraphModel : Presentables.DataTypeViewModel, IOpenCommandParameter
     {
         public new delegate DataTypeGraphModel Factory(IZetboxContext dataCtx, DiagramViewModel parent, DataType obj);
@@ -32,7 +132,15 @@ namespace Zetbox.Client.Presentables.ModuleEditor
         {
             get
             {
-                return string.Format("{0}.{1}", DataType.Module.Name, DataType.Name);
+                return DataType.Name;
+            }
+        }
+
+        public override System.Drawing.Image Icon
+        {
+            get
+            {
+                return base.Icon;
             }
         }
 
@@ -79,7 +187,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
         }
 
         private OpenDataObjectCommand _open = null;
-        public ICommandViewModel Open
+        public ICommandViewModel OpenCommand
         {
             get
             {
@@ -91,6 +199,32 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                 return _open;
             }
         }
+
+        #region AddProperty command
+        private ICommandViewModel _AddPropertyCommand = null;
+        public ICommandViewModel AddPropertyCommand
+        {
+            get
+            {
+                if (_AddPropertyCommand == null)
+                {
+                    _AddPropertyCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Add", "Adds a new property", AddProperty, null, null);
+                }
+                return _AddPropertyCommand;
+            }
+        }
+
+        public void AddProperty()
+        {
+            using (var ctx = ctxFactory())
+            {
+                var dt = ctx.FindPersistenceObject<DataType>(DataType.ExportGuid);
+                dt.AddProperty();
+                ctx.SubmitChanges();
+            }
+        }
+
+        #endregion
 
         private ReadOnlyProjectedList<Property, DescribedPropertyViewModel> _propertyModels;
         public IReadOnlyList<DescribedPropertyViewModel> DescribedPropertyModels

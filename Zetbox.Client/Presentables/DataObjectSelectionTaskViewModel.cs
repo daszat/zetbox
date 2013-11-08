@@ -24,75 +24,40 @@ namespace Zetbox.Client.Presentables
     using Zetbox.App.Base;
     using Zetbox.App.GUI;
     using Zetbox.Client.Presentables.ZetboxBase;
+    using System.Collections;
 
-    public class DataObjectSelectionTaskEventArgs : EventArgs
+    public interface ISelectionTaskViewModel
     {
-        public DataObjectSelectionTaskEventArgs(DataObjectSelectionTaskViewModel vmdl)
-        {
-            TaskViewModel = vmdl;
-        }
+        string Name { get; }
 
-        public DataObjectSelectionTaskViewModel TaskViewModel { get; private set; }
+        string Title { get; }
+        string Tooltip { get; }
+        string SelectionType { get; }
+
+        ReadOnlyCollection<CommandViewModel> AdditionalActions { get; }
+
+        IEnumerable Items { get; }
+        IList SelectedItems { get; }
+
+        ICommandViewModel ChooseCommand { get; }
+        ICommandViewModel CancelCommand { get; }
+        ICommandViewModel SelectAndChooseCommand { get; }
     }
 
-    public delegate void DataObjectSelectionTaskCreatedEventHandler(object sender, DataObjectSelectionTaskEventArgs e);
-
-    [ViewModelDescriptor]
-    public class DataObjectSelectionTaskViewModel
-        : WindowViewModel, IRefreshCommandListener
+    public abstract class AbstractSelectionTaskViewModel<TViewModel>
+       : WindowViewModel, IRefreshCommandListener
+        where TViewModel : ViewModel
     {
-        public new delegate DataObjectSelectionTaskViewModel Factory(IZetboxContext dataCtx, ViewModel parent,
-            ObjectClass type,
-            Func<IQueryable> qry,
-            Action<IEnumerable<DataObjectViewModel>> callback,
-            IList<CommandViewModel> additionalActions);
+        private Action<IEnumerable<TViewModel>> _callback;
+        private ReadOnlyCollection<CommandViewModel> _additionalActions;
 
-        /// <summary>
-        /// Initializes a new instance of the SelectionTaskModel class. This is protected since there 
-        /// is no ViewModelDescriptor for this class. Instead, either use the
-        /// <see cref="DataObjectSelectionTaskViewModel"/> or inherit this for a specific type yourself and 
-        /// add your own ViewModelDescriptor and View.
-        /// </summary>
-        /// <param name="appCtx"></param>
-        /// <param name="dataCtx"></param>
-        /// <param name="parent">Parent ViewModel</param>
-        /// <param name="type"></param>
-        /// <param name="qry"></param>
-        /// <param name="callback"></param>
-        /// <param name="additionalActions"></param>
-        public DataObjectSelectionTaskViewModel(
-            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
-            ObjectClass type,
-            Func<IQueryable> qry,
-            Action<IEnumerable<DataObjectViewModel>> callback,
-            IList<CommandViewModel> additionalActions)
+        public AbstractSelectionTaskViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
+            Action<IEnumerable<TViewModel>> callback, IList<CommandViewModel> additionalActions)
             : base(appCtx, dataCtx, parent)
         {
             _callback = callback;
             _additionalActions = new ReadOnlyCollection<CommandViewModel>(additionalActions ?? new CommandViewModel[] { });
-            ListViewModel = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(dataCtx, this, type, qry);
-            ListViewModel.AllowAddNew = true;
-            ListViewModel.ObjectCreated += ListViewModel_ObjectCreated;
-            ListViewModel.ViewMethod = InstanceListViewMethod.Details;
-
-            ListViewModel.DefaultCommand = this.ChooseCommand;
-
-            foreach (var cmd in _additionalActions)
-            {
-                ListViewModel.Commands.Add(cmd);
-            }
         }
-
-        void ListViewModel_ObjectCreated(IDataObject obj)
-        {
-            if (obj == null) throw new ArgumentNullException("obj");
-
-            // Same like choose
-            var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj);
-            Choose(new[] { mdl });
-        }
-
-        public InstanceListViewModel ListViewModel { get; private set; }
 
         #region Public interface
 
@@ -116,18 +81,21 @@ namespace Zetbox.Client.Presentables
                         this,
                         DataObjectSelectionTaskViewModelResources.Choose,
                         DataObjectSelectionTaskViewModelResources.Choose_Tooltip,
-                        () => Choose(SelectedItems),
-                        () => SelectedItems != null && SelectedItems.Count() > 0,
+                        () => Choose(SelectedItems.Cast<TViewModel>()),
+                        () => SelectedItems != null && SelectedItems.Cast<TViewModel>().Count() > 0,
                         null);
                 }
                 return _ChooseCommand;
             }
         }
 
-        public void Choose(IEnumerable<DataObjectViewModel> obj)
+        public void Choose(IEnumerable<TViewModel> items)
         {
-            _callback(obj);
-            Show = false;
+            if (items != null && items.Count() > 0)
+            {
+                _callback(items);
+                Show = false;
+            }
         }
 
         private ICommandViewModel _CancelCommand = null;
@@ -156,27 +124,223 @@ namespace Zetbox.Client.Presentables
             Show = false;
         }
 
-        public void Refresh()
+        private ICommandViewModel _SelectAndChooseCommand = null;
+        public ICommandViewModel SelectAndChooseCommand
+        {
+            get
+            {
+                if (_SelectAndChooseCommand == null)
+                {
+                    _SelectAndChooseCommand = ViewModelFactory.CreateViewModel<SimpleItemCommandViewModel<TViewModel>.Factory>().Invoke(
+                        DataContext,
+                        this,
+                        DataObjectSelectionTaskViewModelResources.Choose,
+                        DataObjectSelectionTaskViewModelResources.Choose_Tooltip,
+                        (items) => Choose(items)
+                    );
+                }
+                return _SelectAndChooseCommand;
+            }
+        }
+
+        public abstract IEnumerable Items { get; }
+        public abstract IList SelectedItems { get; }
+        public abstract void Refresh();
+
+        private string _title;
+        public string Title
+        {
+            get
+            {
+                if (_title == null)
+                {
+                    _title = DataObjectSelectionTaskViewModelResources.SimpleName;
+                }
+                return _title;
+            }
+            set
+            {
+                if (_title != value)
+                {
+                    _title = value;
+                    OnPropertyChanged("Title");
+                }
+            }
+        }
+
+        private string _tooltip;
+        public string Tooltip
+        {
+            get
+            {
+                if (_tooltip == null)
+                {
+                    _tooltip = Name;
+                }
+                return _tooltip;
+            }
+            set
+            {
+                if (_tooltip != value)
+                {
+                    _tooltip = value;
+                    OnPropertyChanged("Tooltip");
+                }
+            }
+        }
+
+        public abstract string SelectionType { get; set; }
+
+        #endregion
+    }
+
+    public class DataObjectSelectionTaskEventArgs : EventArgs
+    {
+        public DataObjectSelectionTaskEventArgs(DataObjectSelectionTaskViewModel vmdl)
+        {
+            TaskViewModel = vmdl;
+        }
+
+        public DataObjectSelectionTaskViewModel TaskViewModel { get; private set; }
+    }
+
+    public delegate void DataObjectSelectionTaskCreatedEventHandler(object sender, DataObjectSelectionTaskEventArgs e);
+
+    [ViewModelDescriptor]
+    public class DataObjectSelectionTaskViewModel
+        : AbstractSelectionTaskViewModel<DataObjectViewModel>, ISelectionTaskViewModel
+    {
+        public new delegate DataObjectSelectionTaskViewModel Factory(IZetboxContext dataCtx, ViewModel parent,
+            ObjectClass type,
+            Func<IQueryable> qry,
+            Action<IEnumerable<DataObjectViewModel>> callback,
+            IList<CommandViewModel> additionalActions);
+
+        public DataObjectSelectionTaskViewModel(
+            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
+            ObjectClass type,
+            Func<IQueryable> qry,
+            Action<IEnumerable<DataObjectViewModel>> callback,
+            IList<CommandViewModel> additionalActions)
+            : base(appCtx, dataCtx, parent, callback, additionalActions)
+        {
+            ListViewModel = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(dataCtx, this, type, qry);
+            ListViewModel.AllowAddNew = true;
+            ListViewModel.ObjectCreated += ListViewModel_ObjectCreated;
+            ListViewModel.ViewMethod = InstanceListViewMethod.Details;
+
+            ListViewModel.DefaultCommand = this.ChooseCommand;
+
+            foreach (var cmd in AdditionalActions)
+            {
+                ListViewModel.Commands.Add(cmd);
+            }
+        }
+
+        void ListViewModel_ObjectCreated(IDataObject obj)
+        {
+            if (obj == null) throw new ArgumentNullException("obj");
+
+            // Same like choose
+            var mdl = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj);
+            Choose(new[] { mdl });
+        }
+
+        public InstanceListViewModel ListViewModel { get; private set; }
+
+        public override void Refresh()
         {
             ListViewModel.Refresh();
         }
 
-        public IEnumerable<DataObjectViewModel> SelectedItems
+        public override IEnumerable Items
         {
-            get
-            {
-                return ListViewModel.SelectedItems;
-            }
+            get { return ListViewModel.Instances; }
         }
 
-        #endregion
-
-        private Action<IEnumerable<DataObjectViewModel>> _callback;
-        private ReadOnlyCollection<CommandViewModel> _additionalActions;
+        public override IList SelectedItems
+        {
+            get { return ListViewModel.SelectedItems; }
+        }
 
         public override string Name
         {
             get { return string.Format(DataObjectSelectionTaskViewModelResources.Name, ListViewModel.DataTypeViewModel.DescribedType); }
+        }
+
+        private string _selectionType;
+        public override string SelectionType
+        {
+            get
+            {
+                if (_selectionType == null)
+                {
+                    _selectionType = ListViewModel.DataTypeViewModel.DescribedType;
+                }
+                return _selectionType;
+            }
+            set
+            {
+                if (_selectionType != value)
+                {
+                    _selectionType = value;
+                    OnPropertyChanged("SelectionType");
+                }
+            }
+        }
+    }
+
+    [ViewModelDescriptor]
+    public class SimpleSelectionTaskViewModel
+        : AbstractSelectionTaskViewModel<ViewModel>, ISelectionTaskViewModel
+    {
+        public new delegate SimpleSelectionTaskViewModel Factory(IZetboxContext dataCtx, ViewModel parent,
+            IEnumerable<ViewModel> items,
+            Action<IEnumerable<ViewModel>> callback,
+            IList<CommandViewModel> additionalActions);
+
+        public SimpleSelectionTaskViewModel(
+            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
+            IEnumerable<ViewModel> items,
+            Action<IEnumerable<ViewModel>> callback,
+            IList<CommandViewModel> additionalActions)
+            : base(appCtx, dataCtx, parent, callback, additionalActions)
+        {
+            if (items == null) throw new ArgumentNullException("items");
+            _items = items;
+        }
+
+        public override void Refresh()
+        {
+            // nothing to refresh
+        }
+
+        private IEnumerable<ViewModel> _items;
+        public override IEnumerable Items { get { return _items; } }
+
+        private List<ViewModel> _selectedItems = new List<ViewModel>();
+        public override IList SelectedItems { get { return _selectedItems; } }
+
+        public override string Name
+        {
+            get { return DataObjectSelectionTaskViewModelResources.SimpleName; }
+        }
+
+        private string _selectionType;
+        public override string SelectionType
+        {
+            get
+            {
+                return _selectionType;
+            }
+            set
+            {
+                if (_selectionType != value)
+                {
+                    _selectionType = value;
+                    OnPropertyChanged("SelectionType");
+                }
+            }
         }
     }
 }

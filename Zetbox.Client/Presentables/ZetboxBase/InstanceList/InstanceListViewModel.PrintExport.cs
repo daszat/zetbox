@@ -183,14 +183,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             sw.Dispose();
             ClearBusy();
-
-            var errorVmdl = ViewModelFactory.CreateViewModel<ExceptionReporterViewModel.Factory>().Invoke(
-                DataContext,
-                this,
-                ex,
-                screenshotTool.Value.GetScreenshot());
-
-            ViewModelFactory.ShowDialog(errorVmdl);
+            errorReporter.Value.Show(ex);
         }
 
         private int ExportPage(StreamWriter sw, List<ColumnDisplayModel> cols, IEnumerable<IDataObject> instances)

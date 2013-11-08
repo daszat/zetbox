@@ -68,4 +68,6 @@
     <Thickness x:Key="ItemGroup1Padding">2</Thickness>
     <Thickness x:Key="ItemMargin">2</Thickness>
 
+    <Thickness x:Key="DialogMargin">5</Thickness>
+
 </ResourceDictionary>

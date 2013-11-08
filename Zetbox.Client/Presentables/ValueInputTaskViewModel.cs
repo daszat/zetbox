@@ -25,47 +25,65 @@ using Zetbox.App.Base;
 using Zetbox.App.Extensions;
 using Zetbox.Client.Models;
 using Zetbox.Client.Presentables.ValueViewModels;
+using System.Collections.ObjectModel;
 
 namespace Zetbox.Client.Presentables
 {
     [ViewModelDescriptor]
-    public class ValueInputTaskViewModel
+    internal class ValueInputTaskViewModel
         : WindowViewModel, Zetbox.Client.Presentables.IValueInputTaskViewModel
     {
-        public new delegate ValueInputTaskViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string name, IList<BaseValueViewModel> valueModels, Action<object[]> callback);
+        public new delegate ValueInputTaskViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string name,
+            IEnumerable<ViewModel> items,
+            IEnumerable<Tuple<object, BaseValueViewModel>> valueModels,
+            Action<Dictionary<object, object>> callback);
 
         public ValueInputTaskViewModel(
-            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, string name, IList<BaseValueViewModel> valueModels, Action<object[]> callback)
+            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, string name,
+                IEnumerable<ViewModel> items,
+                IEnumerable<Tuple<object, BaseValueViewModel>> valueModels,
+                Action<Dictionary<object, object>> callback)
             : base(appCtx, dataCtx, parent)
         {
             if (callback == null) throw new ArgumentNullException("callback");
 
+            _items = items;
             _valueModels = valueModels;
             _callback = callback;
             _name = name;
         }
 
-        private Action<object[]> _callback;
+        private Action<Dictionary<object, object>> _callback;
+        public Action CancelCallback { get; set; }
 
         #region Parameter
+        private IEnumerable<ViewModel> _items;
+        public IEnumerable<ViewModel> Items
+        {
+            get
+            {
+                return _items;
+            }
+        }
 
-        private IList<BaseValueViewModel> _valueModels;
+
+        private IEnumerable<Tuple<object, BaseValueViewModel>> _valueModels;
         public IEnumerable<BaseValueViewModel> ValueViewModels
         {
             get
             {
-                return _valueModels;
+                return _valueModels.Select(t => t.Item2);
             }
         }
 
-        private ILookup<string, BaseValueViewModel> _valueModelsByName;
-        public ILookup<string, BaseValueViewModel> ValueViewModelsByName
+        private ILookup<object, BaseValueViewModel> _valueModelsByName;
+        public ILookup<object, BaseValueViewModel> ValueViewModelsByName
         {
             get
             {
                 if (_valueModelsByName == null)
                 {
-                    _valueModelsByName = _valueModels.ToLookup(k => k.Name);
+                    _valueModelsByName = _valueModels.ToLookup(k => k.Item1, v => v.Item2);
                 }
                 return _valueModelsByName;
             }
@@ -79,54 +97,111 @@ namespace Zetbox.Client.Presentables
         }
 
         #region Commands
-        private ICommandViewModel _InvokeCommand = null;
+        private SimpleCommandViewModel _InvokeCommand = null;
+        private void EnsureInvokeCommand()
+        {
+            if (_InvokeCommand == null)
+            {
+                _InvokeCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                    DataContext,
+                    this,
+                    ValueInputTaskViewModelResources.InvokeCommand_Name,
+                    ValueInputTaskViewModelResources.InvokeCommand_Tooltip,
+                    Invoke,
+                    null, null);
+                _InvokeCommand.IsDefault = true;
+            }
+        }
+
         public ICommandViewModel InvokeCommand
         {
             get
             {
-                if (_InvokeCommand == null)
-                {
-                    _InvokeCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
-                        DataContext,
-                        this,
-                        ValueInputTaskViewModelResources.InvokeCommand_Name,
-                        ValueInputTaskViewModelResources.InvokeCommand_Tooltip,
-                        Invoke,
-                        null, null);
-                }
+                EnsureInvokeCommand();
                 return _InvokeCommand;
             }
         }
 
+        public void SetInvokeCommandLabel(string acceptLabel)
+        {
+            EnsureInvokeCommand();
+            _InvokeCommand.Label = acceptLabel;
+        }
+
         public void Invoke()
         {
-            var parameter = _valueModels.Select(i => i.ValueModel.GetUntypedValue()).ToArray();
-            _callback(parameter);
+            _callback(ExtractValues());
             Show = false;
         }
 
-        private ICommandViewModel _CancelCommand = null;
+        private Dictionary<object, object> ExtractValues()
+        {
+            var parameter = _valueModels.ToDictionary(k => k.Item1, i => i.Item2.ValueModel.GetUntypedValue());
+            return parameter;
+        }
+
+        private SimpleCommandViewModel _CancelCommand = null;
+        private void EnsureCancelCommand()
+        {
+            if (_CancelCommand == null)
+            {
+                _CancelCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                    DataContext,
+                    this,
+                    ValueInputTaskViewModelResources.CancelCommand_Name,
+                    ValueInputTaskViewModelResources.CancelCommand_Tooltip,
+                    Cancel,
+                    null, null);
+                _CancelCommand.IsCancel = true;
+            }
+        }
+
         public ICommandViewModel CancelCommand
         {
             get
             {
-                if (_CancelCommand == null)
-                {
-                    _CancelCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
-                        DataContext,
-                        this,
-                        ValueInputTaskViewModelResources.CancelCommand_Name,
-                        ValueInputTaskViewModelResources.CancelCommand_Tooltip,
-                        Cancel,
-                        null, null);
-                }
+                EnsureCancelCommand();
                 return _CancelCommand;
             }
         }
 
+        public void SetCancelCommandLabel(string cancelLabel)
+        {
+            EnsureCancelCommand();
+            _CancelCommand.Label = cancelLabel;
+        }
+
         public void Cancel()
         {
+            if (CancelCallback != null) CancelCallback();
             Show = false;
+        }
+
+        protected override ObservableCollection<ICommandViewModel> CreateCommands()
+        {
+            var result = base.CreateCommands();
+            result.Add(InvokeCommand);
+            result.Add(CancelCommand);
+            return result;
+        }
+
+        public void AddButton(string label, string tooltip, Action<Dictionary<object, object>> callback)
+        {
+            var cmd = ViewModelFactory
+                        .CreateViewModel<SimpleCommandViewModel.Factory>()
+                        .Invoke(
+                            DataContext,
+                            this,
+                            label,
+                            tooltip,
+                            () =>
+                            {
+                                callback(ExtractValues());
+                                Show = false;
+                            }, 
+                            null,
+                            null);
+            Commands.Insert(0, cmd);
         }
         #endregion
     }

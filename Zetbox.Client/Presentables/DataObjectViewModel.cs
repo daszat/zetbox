@@ -317,6 +317,7 @@ namespace Zetbox.Client.Presentables
             get
             {
                 if (DataContext.IsElevatedMode) return false;
+                if (DataContext.IsReadonly) return true;
                 return isReadOnlyStore;
             }
             set

@@ -23,36 +23,149 @@ namespace Zetbox.Client.Presentables
     using Zetbox.API;
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables.ValueViewModels;
+    using Zetbox.API.Utils;
+    using Autofac;
+    using Zetbox.API.Client;
+
+    public interface IUIExceptionReporter
+    {
+        void BeginInit();
+        void EndInit();
+        void Show(Exception ex);
+    }
+
+    public class UIExceptionReporter : IUIExceptionReporter
+    {
+        public static readonly object SyncRoot = new object();
+
+        private bool _uiIsInitialized = true;
+        private readonly ILifetimeScope _scope;
+        private IZetboxContext _ctx;
+        private IViewModelFactory _vmf;
+        private IScreenshotTool _screenshot;
+        private ExceptionReporterViewModel _mdl;
+
+        public UIExceptionReporter(ILifetimeScope scope)
+        {
+            if (scope == null) throw new ArgumentNullException("scope");
+
+            _scope = scope;
+        }
+
+        public void Show(Exception ex)
+        {
+            lock (SyncRoot)
+            {
+                try
+                {
+                    Setup();
+
+                    var inner = ex.GetInnerException();
+                    Logging.Client.Error("Unhandled Exception", inner);
+                    if (inner is InvalidZetboxGeneratedVersionException)
+                    {
+                        _vmf.ShowMessage(
+                            ExceptionReporterViewModelResources.InvalidZetboxGeneratedVersionException_Message,
+                            ExceptionReporterViewModelResources.InvalidZetboxGeneratedVersionException_Title
+                        );
+                    }
+                    else if (_uiIsInitialized)
+                    {
+                        var screenShot = _screenshot.GetScreenshot();
+                        if (_mdl == null)
+                        {
+                            _mdl = _vmf.CreateViewModel<ExceptionReporterViewModel.Factory>().Invoke(_ctx, null);
+                            _mdl.AddException(ex, screenShot);
+                            _vmf.ShowDialog(_mdl);
+                        }
+                        else if (_mdl.Show == false)
+                        {
+                            _mdl.AddException(ex, screenShot);
+                            _vmf.ShowDialog(_mdl);
+                        }
+                        else
+                        {
+                            _mdl.AddException(ex, screenShot);
+                        }
+                    }
+                    else
+                    {
+                        _vmf.ShowMessage(ex.ToString(), "Unexpected Error");
+                    }
+                }
+                catch (Exception ex2)
+                {
+                    // uh oh!
+                    Logging.Client.Error("Error while handling unhandled Exception", ex2);
+                    _vmf.ShowMessage(ex.ToString(), "Unexpected Error");
+                }
+            }
+        }
+
+        private void Setup()
+        {
+            if (_ctx == null)
+            {
+                _ctx = _scope.Resolve<IZetboxContext>();
+            }
+            if (_vmf == null)
+            {
+                _vmf = _scope.Resolve<IViewModelFactory>();
+            }
+            if (_screenshot == null)
+            {
+                _screenshot = _scope.Resolve<IScreenshotTool>();
+            }
+        }
+
+        public void BeginInit()
+        {
+            lock (SyncRoot) _uiIsInitialized = false;
+        }
+        public void EndInit()
+        {
+            lock (SyncRoot) _uiIsInitialized = true;
+        }
+    }
 
     [ViewModelDescriptor]
     public class ExceptionReporterViewModel
         : WindowViewModel
     {
-        public new delegate ExceptionReporterViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Exception ex, Bitmap screenShot);
+        public new delegate ExceptionReporterViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
 
-        private readonly Exception exception;
-        private readonly Bitmap screenShot;
+        private List<Tuple<Exception, Bitmap>> _exceptions;
+
         private readonly IProblemReporter problemReporter;
 
         public ExceptionReporterViewModel(
-            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, Exception ex, Bitmap screenShot, IProblemReporter problemReporter)
+            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, IProblemReporter problemReporter)
             : base(appCtx, dataCtx, parent)
         {
             if (problemReporter == null) throw new ArgumentNullException("problemReporter");
 
-            this.exception = ex;
-            this.screenShot = screenShot;
             this.problemReporter = problemReporter;
+            this._exceptions = new List<Tuple<Exception, Bitmap>>();
         }
 
+        #region Properties
         public override string Name
         {
-            get { return ExceptionReporterViewModelResources.Name; }
+            get
+            {
+                lock (UIExceptionReporter.SyncRoot)
+                {
+                    return string.Format(ExceptionReporterViewModelResources.Name, _exceptions.Count);
+                }
+            }
         }
 
         public string Title
         {
-            get { return ExceptionReporterViewModelResources.Name; }
+            get
+            {
+                return this.Name;
+            }
         }
 
         public string HelpUsText
@@ -69,13 +182,16 @@ namespace Zetbox.Client.Presentables
         {
             get
             {
-                if (exception != null)
+                lock (UIExceptionReporter.SyncRoot)
                 {
-                    return exception.ToString();
-                }
-                else
-                {
-                    return string.Empty;
+                    if (_exceptions.Count > 0)
+                    {
+                        return string.Join("\n\n", _exceptions.Select(e => e.ToString()));
+                    }
+                    else
+                    {
+                        return string.Empty;
+                    }
                 }
             }
         }
@@ -84,13 +200,9 @@ namespace Zetbox.Client.Presentables
         {
             get
             {
-                if (exception != null)
+                lock (UIExceptionReporter.SyncRoot)
                 {
-                    return exception.GetInnerMessage();
-                }
-                else
-                {
-                    return string.Empty;
+                    return _exceptions.Count > 0 ? _exceptions.First().Item1.GetInnerMessage() : string.Empty;
                 }
             }
         }
@@ -99,7 +211,10 @@ namespace Zetbox.Client.Presentables
         {
             get
             {
-                return screenShot;
+                lock (UIExceptionReporter.SyncRoot)
+                {
+                    return _exceptions.Count > 0 ? _exceptions.First().Item2 : null;
+                }
             }
         }
 
@@ -112,7 +227,6 @@ namespace Zetbox.Client.Presentables
                 if (_subjectTextViewModel == null)
                 {
                     _subjectTextViewModel = ViewModelFactory.CreateViewModel<StringValueViewModel.Factory>().Invoke(DataContext, this, _subjectTextModel);
-                    _subjectTextModel.Value = exception != null ? exception.GetInnerMessage() : String.Empty;
                 }
                 return _subjectTextViewModel;
             }
@@ -131,6 +245,57 @@ namespace Zetbox.Client.Presentables
                 return _AdditionalTextViewModel;
             }
         }
+        #endregion
+
+        #region MultipleException
+
+        [Serializable]
+        public class MultipleException : Exception
+        {
+            IEnumerable<Exception> _exceptions;
+
+            public MultipleException() { }
+            public MultipleException(string message) : base(message) { }
+            public MultipleException(string message, Exception inner) : base(message, inner) { }
+            protected MultipleException(
+              System.Runtime.Serialization.SerializationInfo info,
+              System.Runtime.Serialization.StreamingContext context)
+                : base(info, context) { }
+
+            public MultipleException(IEnumerable<Exception> exceptions)
+            {
+                _exceptions = exceptions;
+                if (_exceptions == null)
+                {
+                    _exceptions = new List<Exception>();
+                }
+            }
+
+            public IEnumerable<Exception> Exceptions
+            {
+                get
+                {
+                    return _exceptions;
+                }
+            }
+
+            public override string Message
+            {
+                get
+                {
+                    return "Multiple exceptions has occured";
+                }
+            }
+
+            public override string ToString()
+            {
+                var sb = new StringBuilder();
+                sb.AppendLine(Message + ":");
+                sb.Append(string.Join("\n------------- Next -------------\n", _exceptions.Select(e => e.ToString())));
+                return sb.ToString();
+            }
+        }
+        #endregion
 
         #region Commands
         private ICommandViewModel _ReportCommand = null;
@@ -154,11 +319,27 @@ namespace Zetbox.Client.Presentables
 
         public void Report()
         {
-            problemReporter.Report(
-                string.IsNullOrEmpty(this.SubjectText.Value) ? this.Title : this.SubjectText.Value,
-                this.AdditionalText.Value,
-                screenShot,
-                exception);
+            lock (UIExceptionReporter.SyncRoot)
+            {
+                if (_exceptions.Count > 0)
+                {
+                    Exception finalException;
+                    if (_exceptions.Count == 1)
+                    {
+                        finalException = _exceptions.First().Item1;
+                    }
+                    else
+                    {
+                        finalException = new MultipleException(_exceptions.Select(e => e.Item1));
+                    }
+                    problemReporter.Report(
+                        string.IsNullOrEmpty(this.SubjectText.Value) ? this.Title : this.SubjectText.Value,
+                        this.AdditionalText.Value,
+                        _exceptions.First().Item2,
+                        finalException);
+                    Clear();
+                }
+            }
             this.Show = false;
         }
 
@@ -184,12 +365,40 @@ namespace Zetbox.Client.Presentables
         public void Cancel()
         {
             this.Show = false;
+            Clear();
         }
         #endregion
 
-        public void ShowDialog()
+        #region Management
+        public void AddException(Exception ex, Bitmap bitmap)
         {
-            ViewModelFactory.ShowDialog(this);
+            lock (UIExceptionReporter.SyncRoot)
+            {
+                _exceptions.Add(new Tuple<Exception, Bitmap>(ex, bitmap));
+            }
+            OnPropertyChanged("Title");
+            OnPropertyChanged("Name");
+            OnPropertyChanged("ExceptionText");
+            OnPropertyChanged("ExceptionMessage");
         }
+
+        private void Clear()
+        {
+            lock (UIExceptionReporter.SyncRoot)
+            {
+                foreach (var ex in _exceptions.Where(e => e.Item2 != null))
+                {
+                    ex.Item2.Dispose();
+                }
+                _exceptions.Clear();
+            }
+        }
+
+        protected override void OnClose()
+        {
+            base.OnClose();
+            Clear();
+        }
+        #endregion
     }
 }

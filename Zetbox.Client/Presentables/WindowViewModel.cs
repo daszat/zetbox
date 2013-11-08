@@ -50,7 +50,15 @@ namespace Zetbox.Client.Presentables
                 if (!value && !CanClose()) return;
                 _show = value;
                 OnPropertyChanged("Show");
+                if (_show == false)
+                {
+                    OnClose();
+                }
             }
+        }
+
+        protected virtual void OnClose()
+        {
         }
 
         /// <summary>

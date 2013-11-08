@@ -36,6 +36,6 @@
                 .Register<<%= shortName %>ActionsManager>(
                     c => new <%= shortName %>ActionsManager(
                         c.Resolve<ILifetimeScope>(),
-                        c.Resolve<IDeploymentRestrictor>()))
+                        c.Resolve<IEnumerable<ImplementorAssembly>>()))
                 .As<I<%= shortName %>ActionsManager>()
                 .InstancePerLifetimeScope();

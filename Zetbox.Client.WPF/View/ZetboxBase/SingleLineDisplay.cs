@@ -27,11 +27,6 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
             Children.Add(img);
 
             var txt = new TextBlock() { Margin = new Thickness(3, 0, 0, 0) };
-            BindingOperations.SetBinding(txt, TextBlock.TextProperty, new Binding("ObjectState") { Converter = (IValueConverter)FindResource("ObjectStateToTextConverter") });
-            BindingOperations.SetBinding(txt, TextBlock.VisibilityProperty, new Binding("ObjectState") { Converter = (IValueConverter)FindResource("ObjectStateToTextVisibilityConverter") });
-            Children.Add(txt);
-
-            txt = new TextBlock() { Margin = new Thickness(3, 0, 0, 0) };
             BindingOperations.SetBinding(txt, TextBlock.TextProperty, new Binding("Name"));
             Children.Add(txt);
         }

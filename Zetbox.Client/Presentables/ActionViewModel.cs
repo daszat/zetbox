@@ -52,10 +52,6 @@ namespace Zetbox.Client.Presentables
             {
                 return Method.GetLabel();
             }
-            protected set
-            {
-                base.Label = value;
-            }
         }
 
         public string Description
@@ -74,10 +70,6 @@ namespace Zetbox.Client.Presentables
             get
             {
                 return string.IsNullOrEmpty(Reason) ? this.Description : Reason;
-            }
-            protected set
-            {
-                base.ToolTip = value;
             }
         }
 

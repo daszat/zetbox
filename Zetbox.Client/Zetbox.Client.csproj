@@ -120,6 +120,11 @@
       <DependentUpon>CredentialsResolverResources.resx</DependentUpon>
     </Compile>
     <Compile Include="GUI\DialogCreator.cs" />
+    <Compile Include="GUI\DialogCreatorResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DialogCreatorResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="GUI\IHasViewModel.cs" />
     <Compile Include="GUI\IRenderer.cs" />
     <Compile Include="GUI\ViewDescriptorAttribute.cs" />
@@ -205,6 +210,7 @@
     <Compile Include="Presentables\GUI\NavigationReportScreenViewModel.cs" />
     <Compile Include="Presentables\GUI\NavigationScreenViewModel.cs" />
     <Compile Include="Presentables\GUI\NavigationSearchScreenViewModel.cs" />
+    <Compile Include="Presentables\GUI\Panels.cs" />
     <Compile Include="Presentables\GUI\SavedListConfiguratorViewModel.cs" />
     <Compile Include="Presentables\GUI\SavedListConfiguratorViewModel.Model.cs" />
     <Compile Include="Presentables\GUI\SavedListConfiguratorViewModelResources.Designer.cs">
@@ -216,10 +222,13 @@
     <Compile Include="Presentables\ISortableViewModel.cs" />
     <Compile Include="Presentables\ModuleEditor\DataTypeViewModels.cs" />
     <Compile Include="Presentables\ModuleEditor\DiagramViewModel.cs" />
+    <Compile Include="Presentables\ModuleEditor\GroupingTreeItemViewModel.cs" />
+    <Compile Include="Presentables\ObjectBrowser\ObjectClassViewModel.cs" />
     <Compile Include="Presentables\PropertiesPrewiewViewModel.cs" />
     <Compile Include="Presentables\TestModule\InstanceListTestViewModel.cs" />
     <Compile Include="Presentables\TestModule\NextEventsTestNavScreenViewModel.cs" />
     <Compile Include="Presentables\TestModule\TestAppNavigationScreenViewModel.cs" />
+    <Compile Include="Presentables\TextViewModel.cs" />
     <Compile Include="Presentables\ValueViewModels\CompoundCollectionViewModel.cs" />
     <Compile Include="Presentables\ValueViewModels\CompoundListViewModel.cs" />
     <Compile Include="Presentables\ViewModelResources.Designer.cs">
@@ -371,9 +380,6 @@
     <Compile Include="Presentables\IViewModelFactory.cs" />
     <Compile Include="Presentables\IMultipleInstancesManager.cs" />
     <Compile Include="Presentables\ZetboxBase\ApplicationViewModel.cs" />
-    <Compile Include="Presentables\ZetboxBase\AssemblyViewModel.cs" />
-    <Compile Include="Presentables\ZetboxBase\AssemblyReferenceViewModel.cs" />
-    <Compile Include="Presentables\ZetboxBase\SystemTypeViewModel.cs" />
     <Compile Include="Presentables\ZetboxBase\TagPropertyEditorViewModel.cs" />
     <Compile Include="Presentables\ZetboxDebuggerAsViewModel.cs" />
     <Compile Include="Presentables\ValueViewModels\DataObjectViewModelProxy.cs" />
@@ -436,6 +442,11 @@
       <DependentUpon>ZetboxContextExceptionHandlerResources.resx</DependentUpon>
     </Compile>
     <EmbeddedResource Include="CredentialsResolverResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="GUI\DialogCreatorResources.de.resx" />
+    <EmbeddedResource Include="GUI\DialogCreatorResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>DialogCreatorResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Models\FilterModelsResources.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="Presentables\ActionViewModelResources.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="Presentables\CacheDebuggerViewModelResources.x-zb-Pseudo.resx" />

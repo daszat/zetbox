@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-10-15T09:14:57Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-10-29T14:35:31Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="a56d9701-d98e-49ab-bd49-a491d09e2d46">
     <ZetboxBase:ChangedOn>2011-08-06T08:30:47.664236Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
@@ -3828,8 +3828,9 @@ public static void GetSummaryReportCanExecReason(Projekt obj, MethodReturnEventA
     <GUI:Property>b5482479-fd14-4990-86f4-49872e2eeeb8</GUI:Property>
   </GUI:SinglePropertyFilterConfiguration>
   <GUI:Application ExportGuid="cd5d6afa-b674-4d21-8eff-f4adaa1fcfa1">
-    <GUI:ChangedOn>2011-10-19T09:07:41.227326Z</GUI:ChangedOn>
+    <GUI:ChangedOn>2013-10-29T14:03:57.477425Z</GUI:ChangedOn>
     <GUI:CreatedOn>2011-10-19T09:07:41.227326Z</GUI:CreatedOn>
+    <GUI:Icon>32dc1dd9-6f33-486a-a504-133f93ae02b9</GUI:Icon>
     <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
     <GUI:Name>Projekte</GUI:Name>
     <GUI:RootScreen>8bc286d2-899a-4348-9c5a-3d4e90f3ff6d</GUI:RootScreen>
@@ -11840,9 +11841,10 @@ public static void TestMethodCanExecReason(TestObjClass obj, MethodReturnEventAr
     <GUI:Name>Zetbox.App.Test.NewEventTestDialog</GUI:Name>
   </GUI:ControlKind>
   <GUI:Application ExportGuid="cc212e26-f676-4dd0-885a-ae23c5f8faa4">
-    <GUI:ChangedOn>2012-08-02T18:02:21.424417Z</GUI:ChangedOn>
+    <GUI:ChangedOn>2013-10-29T14:04:08.94008Z</GUI:ChangedOn>
     <GUI:CreatedOn>2012-08-02T18:01:23.976673Z</GUI:CreatedOn>
     <GUI:Description>A test application for various test widgets.</GUI:Description>
+    <GUI:Icon>0f4acffa-6dc8-4d87-89ee-2d21cfa3d088</GUI:Icon>
     <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
     <GUI:Name>Test Application</GUI:Name>
     <GUI:RootScreen>c727bd24-60b2-4ea9-901f-4d65672563a1</GUI:RootScreen>

@@ -23,7 +23,6 @@ namespace Zetbox.App.Base
     using Zetbox.App.Extensions;
     using Zetbox.App.GUI;
     using Zetbox.Client;
-    using ViewModelDescriptors = Zetbox.NamedObjects.Gui.ViewModelDescriptors;
 
     /// <summary>
     /// Client implementation

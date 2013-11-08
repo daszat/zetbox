@@ -117,6 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddProperty_label" xml:space="preserve">
+    <value>Add property</value>
+  </data>
+  <data name="AddProperty_description" xml:space="preserve">
+    <value>Property wizard</value>
+  </data>
+  <data name="AddProperty(retVal)_label" xml:space="preserve">
+    <value>retVal</value>
+  </data>
+  <data name="AddProperty(retVal)_description" xml:space="preserve">
+    <value>Optional return value to open the proeprty if the user wants to</value>
+  </data>
   <data name="GetDataType_label" xml:space="preserve">
     <value>GetDataType</value>
   </data>

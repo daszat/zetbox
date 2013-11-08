@@ -3,7 +3,8 @@
                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                   xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
                   xmlns:client="clr-namespace:Zetbox.Client.Presentables;assembly=Zetbox.Client"
-                  Title="{Binding Name}"
+                  Title="{Binding Title}"
+                  ToolTip="{Binding Tooltip}"
                   ResizeMode="CanResize"
                   MinWidth="300"
                   MinHeight="300"
@@ -26,23 +27,17 @@
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
     -->
 
-    <ctrls:WindowView.Resources>
-        <Style x:Key="addedMargins">
-            <Setter Property="FrameworkElement.Margin"
-                    Value="5" />
-        </Style>
-    </ctrls:WindowView.Resources>
-    <DockPanel Style="{StaticResource addedMargins}"
+    <DockPanel Margin="{StaticResource DialogMargin}"
                LastChildFill="True">
 
         <UniformGrid DockPanel.Dock="Bottom"
-                     Style="{StaticResource addedMargins}"
+                     Margin="{StaticResource DialogMargin}"
                      Rows="1">
             <ctrls:CommandButton CommandViewModel="{Binding ChooseCommand}"
-                                 Style="{StaticResource addedMargins}"
+                                 Margin="{StaticResource DialogMargin}"
                                  IsDefault="True"/>
             <ctrls:CommandButton CommandViewModel="{Binding CancelCommand}"
-                                 Style="{StaticResource addedMargins}"
+                                 Margin="{StaticResource DialogMargin}"
                                  IsCancel="True" />
         </UniformGrid>
 

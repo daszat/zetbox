@@ -30,6 +30,30 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         public string SortProperty { get { return _orderByExpression; } }
         public System.ComponentModel.ListSortDirection SortDirection { get { return _sortDirection; } }
 
+        private bool _useNaturalSortOrder = false;
+        /// <summary>
+        /// If true, the natural order of the query is used. The list will not evaluate DefaultSortPriority
+        /// </summary>
+        /// <remarks>
+        /// This is usefull when a custom query, which is already sorted, is passed
+        /// </remarks>
+        public bool UseNaturalSortOrder
+        {
+            get
+            {
+                return _useNaturalSortOrder;
+            }
+            set
+            {
+                if (_useNaturalSortOrder != value)
+                {
+                    _useNaturalSortOrder = value;
+                    OnPropertyChanged("UseNaturalSortOrder");
+                    ResetSort(refresh: false);
+                }
+            }
+        }
+
         public void ResetSort(bool refresh = true)
         {
             if (_initialOrderByExpression != null)
@@ -37,12 +61,22 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 _orderByExpression = _initialOrderByExpression;
                 _sortDirection = _initialSortDirection;
             }
+            else if (UseNaturalSortOrder)
+            {
+                _orderByExpression = null;
+                _sortDirection = System.ComponentModel.ListSortDirection.Ascending;
+            }
             else
             {
                 var sortProp = _type.AndParents(c => c.BaseObjectClass).SelectMany(c => c.Properties).Where(p => p.DefaultSortPriority != null).OrderBy(p => p.DefaultSortPriority).FirstOrDefault();
                 if (sortProp != null)
                 {
                     _orderByExpression = ColumnDisplayModel.FormatDynamicOrderByExpression(sortProp);
+                    _sortDirection = System.ComponentModel.ListSortDirection.Ascending;
+                }
+                else
+                {
+                    _orderByExpression = null;
                     _sortDirection = System.ComponentModel.ListSortDirection.Ascending;
                 }
             }

@@ -188,5 +188,25 @@ namespace Zetbox.App.Base
             }
             e.Error = e.IsValid ? string.Empty : "Propertyname is not unique";
         }
+
+        [Invocation]
+        public static void isValid_DefaultSortPriority(Property obj, PropertyIsValidEventArgs e)
+        {
+            var cls = obj.ObjectClass;
+            if (cls == null || obj.DefaultSortPriority == null)
+            {
+                e.IsValid = true;
+                return;
+            }
+
+            var other = cls.Properties
+                                .Except(new[] { obj })
+                                .Where(p => p.DefaultSortPriority == obj.DefaultSortPriority)
+                                .ToList();
+            e.IsValid = other.Count == 0;
+            e.Error = e.IsValid 
+                ? string.Empty 
+                : string.Format("{0} other property/ies have the same default sort priority: {1}", other.Count, string.Join(", ", other.Select(p => p.Name)));
+        }
     }
 }

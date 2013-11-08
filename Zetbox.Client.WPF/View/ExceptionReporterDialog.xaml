@@ -28,37 +28,37 @@
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
     -->
 
-  <DockPanel Margin="5">
-    <TextBlock DockPanel.Dock="Top"
-               Text="{Binding Title}"/>
-    <TextBlock DockPanel.Dock="Top"
-               Text="{Binding HelpUsText}" />
-    <ctrls:LabeledView DockPanel.Dock="Top"
-                       Margin="0 10 0 0"
-                       DataContext="{Binding SubjectText}" />
+    <DockPanel Margin="{StaticResource DialogMargin}">
+        <TextBlock DockPanel.Dock="Top"
+                   Text="{Binding Title}" />
+        <TextBlock DockPanel.Dock="Top"
+                   Text="{Binding HelpUsText}" />
+        <ctrls:LabeledView DockPanel.Dock="Top"
+                           Margin="0 10 0 0"
+                           DataContext="{Binding SubjectText}" />
 
-    <UniformGrid DockPanel.Dock="Bottom"
-                 Columns="2"
-                 Height="60">
-      <ctrls:CommandButton CommandViewModel="{Binding ReportCommand}"
-                           Style="{StaticResource ImageButton}"
-                           Margin="5"
-                           IsDefault="True" />
-      <ctrls:CommandButton CommandViewModel="{Binding CancelCommand}"
-                           Style="{StaticResource ImageButton}"
-                           Margin="5"
-                           IsCancel="True" />
-    </UniformGrid>
+        <UniformGrid DockPanel.Dock="Bottom"
+                     Columns="2"
+                     Height="60">
+            <ctrls:CommandButton CommandViewModel="{Binding ReportCommand}"
+                                 Style="{StaticResource ImageButton}"
+                                 Margin="{StaticResource DialogMargin}"
+                                 IsDefault="True" />
+            <ctrls:CommandButton CommandViewModel="{Binding CancelCommand}"
+                                 Style="{StaticResource ImageButton}"
+                                 Margin="{StaticResource DialogMargin}"
+                                 IsCancel="True" />
+        </UniformGrid>
 
-    <Expander DockPanel.Dock="Bottom"
-              Header="{Binding ExceptionDetailsLabel}">
-      <TextBox Text="{Binding ExceptionText, Mode=OneWay}"
-               MaxHeight="200"
-               VerticalScrollBarVisibility="Auto"
-               HorizontalScrollBarVisibility="Auto"
-               IsReadOnly="True" />
-    </Expander>
+        <Expander DockPanel.Dock="Bottom"
+                  Header="{Binding ExceptionDetailsLabel}">
+            <TextBox Text="{Binding ExceptionText, Mode=OneWay}"
+                     MaxHeight="200"
+                     VerticalScrollBarVisibility="Auto"
+                     HorizontalScrollBarVisibility="Auto"
+                     IsReadOnly="True" />
+        </Expander>
 
-    <ctrls:LabeledViewHorizontal DataContext="{Binding AdditionalText}" />
-  </DockPanel>
+        <ctrls:LabeledViewHorizontal DataContext="{Binding AdditionalText}" />
+    </DockPanel>
 </ctrls:WindowView>

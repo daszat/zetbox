@@ -65,8 +65,8 @@ namespace Zetbox.Objects
             set { _isInitialised = value; }
         }
 
-        public <%= shortName %>ActionsManager(ILifetimeScope container, IDeploymentRestrictor restrictor)
-            : base(container, restrictor, "<%= ImplementationSuffix %>")
+        public <%= shortName %>ActionsManager(ILifetimeScope container, IEnumerable<ImplementorAssembly> assemblies)
+            : base(container, "<%= ImplementationSuffix %>", assemblies)
         {
         }
     }

@@ -27,6 +27,8 @@ namespace Zetbox.Client.Presentables
         ICommandViewModel InvokeCommand { get; }
         string Name { get; }
         IEnumerable<BaseValueViewModel> ValueViewModels { get; }
-        ILookup<string, BaseValueViewModel> ValueViewModelsByName { get; }
+        ILookup<object, BaseValueViewModel> ValueViewModelsByName { get; }
+
+        IEnumerable<ViewModel> Items { get; }
     }
 }

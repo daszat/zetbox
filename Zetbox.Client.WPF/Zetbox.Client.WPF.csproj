@@ -210,6 +210,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\SelectionDialogGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\SelectionDialogSimple.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\DocumentManagement\ImportedFileWithPreviewEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -634,6 +642,13 @@
     </Compile>
     <Compile Include="View\Calendar\WorkScheduleRuleInstanceDisplay.xaml.cs">
       <DependentUpon>WorkScheduleRuleInstanceDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\GUI\Panels.cs" />
+    <Compile Include="View\SelectionDialogGrid.xaml.cs">
+      <DependentUpon>SelectionDialogGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SelectionDialogSimple.xaml.cs">
+      <DependentUpon>SelectionDialogSimple.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DocumentManagement\ImportedFileWithPreviewEditor.xaml.cs">
       <DependentUpon>ImportedFileWithPreviewEditor.xaml</DependentUpon>

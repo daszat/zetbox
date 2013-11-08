@@ -28,6 +28,7 @@ namespace Zetbox.Client.Presentables
     using Zetbox.App.Extensions;
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables.ValueViewModels;
+    using System.Collections.ObjectModel;
 
     [ViewModelDescriptor]
     public class ParameterInputTaskViewModel
@@ -49,6 +50,14 @@ namespace Zetbox.Client.Presentables
         private Action<object[]> _callback;
 
         #region Parameter
+        public IEnumerable<ViewModel> Items
+        {
+            get
+            {
+                return ValueViewModels;
+            }
+        }
+
         private List<BaseParameter> _parameterList = null;
         private void FetchParameterList()
         {
@@ -87,15 +96,15 @@ namespace Zetbox.Client.Presentables
             }
         }
 
-        private ILookup<string, BaseValueViewModel> _parameterModelsByName;
-        public ILookup<string, BaseValueViewModel> ValueViewModelsByName
+        private ILookup<object, BaseValueViewModel> _parameterModelsByName;
+        public ILookup<object, BaseValueViewModel> ValueViewModelsByName
         {
             get
             {
                 if (_parameterModelsByName == null)
                 {
                     FetchParameterModels();
-                    _parameterModelsByName = _parameterModels.ToLookup(k => k.Key.Name, v => v.Value);
+                    _parameterModelsByName = _parameterModels.ToLookup(k => (object)k.Key.Name, v => v.Value);
                 }
                 return _parameterModelsByName;
             }
@@ -158,6 +167,14 @@ namespace Zetbox.Client.Presentables
         public void Cancel()
         {
             Show = false;
+        }
+
+        protected override ObservableCollection<ICommandViewModel> CreateCommands()
+        {
+            var result = base.CreateCommands();
+            result.Add(InvokeCommand);
+            result.Add(CancelCommand);
+            return result;
         }
         #endregion
     }

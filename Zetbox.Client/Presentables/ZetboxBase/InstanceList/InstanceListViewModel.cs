@@ -51,7 +51,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         protected readonly IFileOpener fileOpener;
         protected readonly ITempFileService tmpService;
-        protected readonly Lazy<IScreenshotTool> screenshotTool;
+        protected readonly Lazy<IUIExceptionReporter> errorReporter;
 
         /// <summary>
         /// Initializes a new instance of the DataTypeViewModel class.
@@ -60,7 +60,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         /// <param name="config"></param>
         /// <param name="fileOpener"></param>
         /// <param name="tmpService"></param>
-        /// <param name="screenshotTool"></param>
+        /// <param name="errorReporter"></param>
         /// <param name="dataCtx">the data context to use</param>
         /// <param name="parent">Parent ViewModel</param>
         /// <param name="type">the data type to model. If null, qry must be a Query of a valid DataType</param>
@@ -70,8 +70,9 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             ZetboxConfig config,
             IFileOpener fileOpener,
             ITempFileService tmpService,
-            Lazy<IScreenshotTool> screenshotTool,
-            IZetboxContext dataCtx, ViewModel parent,
+            Lazy<IUIExceptionReporter> errorReporter,
+            IZetboxContext dataCtx, 
+            ViewModel parent,
             ObjectClass type,
             Func<IQueryable> qry)
             : base(appCtx, dataCtx, parent)
@@ -80,10 +81,10 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             if (type == null) throw new ArgumentNullException("type");
             if (fileOpener == null) throw new ArgumentNullException("fileOpener");
             if (tmpService == null) throw new ArgumentNullException("tmpService");
-            if (screenshotTool == null) throw new ArgumentNullException("screenshotTool");
+            if (errorReporter == null) throw new ArgumentNullException("errorReporter");
             this.fileOpener = fileOpener;
             this.tmpService = tmpService;
-            this.screenshotTool = screenshotTool;
+            this.errorReporter = errorReporter;
 
             _type = type;
             if (qry == null)
@@ -757,12 +758,18 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                                 _orderByExpression,                         // Maybe we should implement a custom comparer
                                 _sortDirection == System.ComponentModel.ListSortDirection.Descending ? "desc" : string.Empty));
             }
+            else if (UseNaturalSortOrder)
+            {
+                // do nothing
+                // EF will break
+                // this should be only used when custom queries are passed to the constructor
+            }
             else
             {
                 // default sort.
                 // 1. It's a good idea to have a predictable result 
                 // 2. EF needs that: case 10019: The method 'Skip' is only supported for sorted input in LINQ to Entities. The method 'OrderBy' must be called before the method
-                result = result.OrderBy("ID"); 
+                result = result.OrderBy("ID");
             }
             return result;
         }
@@ -812,12 +819,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 .Finally(ClearBusy)
                 .OnError(ex =>
                 {
-                    var errorVmdl = ViewModelFactory.CreateViewModel<ExceptionReporterViewModel.Factory>().Invoke(
-                        DataContext,
-                        this,
-                        ex,
-                        screenshotTool.Value.GetScreenshot());
-                    ViewModelFactory.ShowDialog(errorVmdl);
+                    errorReporter.Value.Show(ex);
                 });
             _loadInstancesCoreTask.OnResult(t =>
                 {

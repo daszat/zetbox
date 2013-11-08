@@ -55,7 +55,7 @@ namespace Zetbox.API
         /// <summary>
         /// Interface Assembly
         /// </summary>
-        public static readonly string InterfaceAssembly = "Zetbox.Objects, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7b69192d05046fdf";
+        public static readonly string InterfaceAssembly = "Zetbox.Objects";
 
         /// <summary>
         /// Default length if StringRangeConstraint is missing

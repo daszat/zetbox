@@ -106,7 +106,6 @@
       <End Role="Task" EntitySet="Task" />
       <End Role="Task_Rights" EntitySet="Task_Rights" />
     </AssociationSet>
-    <EntitySet Name="Template" EntityType="Model.Store.Template" Schema="gui" Table="Templates"/>
     <EntitySet Name="TestCustomObject" EntityType="Model.Store.TestCustomObject" Schema="test" Table="TestCustomObjects"/>
     <EntitySet Name="TestDecimal" EntityType="Model.Store.TestDecimal" Schema="test" Table="TestDecimals"/>
     <EntitySet Name="TestObjClass" EntityType="Model.Store.TestObjClass" Schema="test" Table="TestObjClasses"/>
@@ -114,7 +113,6 @@
     <EntitySet Name="TPHBaseObj" EntityType="Model.Store.TPHBaseObj" Schema="test" Table="TPHBaseObjs"/>
     <EntitySet Name="ViewDescriptor" EntityType="Model.Store.ViewDescriptor" Schema="gui" Table="ViewDescriptors"/>
     <EntitySet Name="ViewModelDescriptor" EntityType="Model.Store.ViewModelDescriptor" Schema="gui" Table="ViewModelDescriptors"/>
-    <EntitySet Name="Visual" EntityType="Model.Store.Visual" Schema="gui" Table="Visuals"/>
     <EntitySet Name="WorkSchedule" EntityType="Model.Store.WorkSchedule" Schema="calendar" Table="WorkSchedules"/>
     <EntitySet Name="WorkScheduleRule" EntityType="Model.Store.WorkScheduleRule" Schema="calendar" Table="WorkScheduleRules"/>
 
@@ -490,22 +488,6 @@
     </AssociationSet>
     
     <!-- 
-    Relation: FK_Template_hasMenu_Menu
-    A: ZeroOrMore Template as Template
-    B: ZeroOrMore Visual as Menu
-    Preferred Storage: Separate
-    -->
-    <EntitySet Name="Template_hasMenu_Visual_RelationEntry" EntityType="Model.Store.Template_hasMenu_Visual_RelationEntry" Schema="gui" Table="Template_hasMenu_Menu" />
-    <AssociationSet Name="FK_Template_hasMenu_Menu_A" Association="Model.Store.FK_Template_hasMenu_Menu_A" >
-      <End Role="Template" EntitySet="Template" />
-      <End Role="CollectionEntry" EntitySet="Template_hasMenu_Visual_RelationEntry" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Template_hasMenu_Menu_B" Association="Model.Store.FK_Template_hasMenu_Menu_B" >
-      <End Role="CollectionEntry" EntitySet="Template_hasMenu_Visual_RelationEntry" />
-      <End Role="Menu" EntitySet="Visual" />
-    </AssociationSet>
-    
-    <!-- 
     Relation: FK_UniqueContraints_ensures_unique_on_Properties
     A: ZeroOrMore IndexConstraint as UniqueContraints
     B: ZeroOrMore Property as Properties
@@ -519,38 +501,6 @@
     <AssociationSet Name="FK_UniqueContraints_ensures_unique_on_Properties_B" Association="Model.Store.FK_UniqueContraints_ensures_unique_on_Properties_B" >
       <End Role="CollectionEntry" EntitySet="IndexConstraint_ensures_unique_on_Property_RelationEntry" />
       <End Role="Properties" EntitySet="Property" />
-    </AssociationSet>
-    
-    <!-- 
-    Relation: FK_Visual_contains_Children
-    A: ZeroOrMore Visual as Visual
-    B: ZeroOrMore Visual as Children
-    Preferred Storage: Separate
-    -->
-    <EntitySet Name="Visual_contains_Visual_RelationEntry" EntityType="Model.Store.Visual_contains_Visual_RelationEntry" Schema="gui" Table="Visual_contains_Children" />
-    <AssociationSet Name="FK_Visual_contains_Children_A" Association="Model.Store.FK_Visual_contains_Children_A" >
-      <End Role="Visual" EntitySet="Visual" />
-      <End Role="CollectionEntry" EntitySet="Visual_contains_Visual_RelationEntry" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Visual_contains_Children_B" Association="Model.Store.FK_Visual_contains_Children_B" >
-      <End Role="CollectionEntry" EntitySet="Visual_contains_Visual_RelationEntry" />
-      <End Role="Children" EntitySet="Visual" />
-    </AssociationSet>
-    
-    <!-- 
-    Relation: FK_Visual_hasContextMenu_ContextMenu
-    A: ZeroOrMore Visual as Visual
-    B: ZeroOrMore Visual as ContextMenu
-    Preferred Storage: Separate
-    -->
-    <EntitySet Name="Visual_hasContextMenu_Visual_RelationEntry" EntityType="Model.Store.Visual_hasContextMenu_Visual_RelationEntry" Schema="gui" Table="Visual_hasContextMenu_ContextMenu" />
-    <AssociationSet Name="FK_Visual_hasContextMenu_ContextMenu_A" Association="Model.Store.FK_Visual_hasContextMenu_ContextMenu_A" >
-      <End Role="Visual" EntitySet="Visual" />
-      <End Role="CollectionEntry" EntitySet="Visual_hasContextMenu_Visual_RelationEntry" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Visual_hasContextMenu_ContextMenu_B" Association="Model.Store.FK_Visual_hasContextMenu_ContextMenu_B" >
-      <End Role="CollectionEntry" EntitySet="Visual_hasContextMenu_Visual_RelationEntry" />
-      <End Role="ContextMenu" EntitySet="Visual" />
     </AssociationSet>
     
 
@@ -579,6 +529,10 @@
     <AssociationSet Name="FK_AccessControl_was_CreatedBy" Association="Model.Store.FK_AccessControl_was_CreatedBy" >
       <End Role="AccessControl" EntitySet="AccessControl" />
       <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_App_has_Icon" Association="Model.Store.FK_App_has_Icon" >
+      <End Role="App" EntitySet="Application" />
+      <End Role="Icon" EntitySet="Icon" />
     </AssociationSet>
     <AssociationSet Name="FK_Application_has_Module" Association="Model.Store.FK_Application_has_Module" >
       <End Role="Application" EntitySet="Application" />
@@ -1224,14 +1178,6 @@
       <End Role="Task" EntitySet="Task" />
       <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
-    <AssociationSet Name="FK_Template_has_DisplayedTypeAssembly" Association="Model.Store.FK_Template_has_DisplayedTypeAssembly" >
-      <End Role="Template" EntitySet="Template" />
-      <End Role="DisplayedTypeAssembly" EntitySet="Assembly" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Template_has_VisualTree" Association="Model.Store.FK_Template_has_VisualTree" >
-      <End Role="Template" EntitySet="Template" />
-      <End Role="VisualTree" EntitySet="Visual" />
-    </AssociationSet>
     <AssociationSet Name="FK_Test_of_Event" Association="Model.Store.FK_Test_of_Event" >
       <End Role="Test" EntitySet="EventTestObject" />
       <End Role="Event" EntitySet="Event" />
@@ -1275,14 +1221,6 @@
     <AssociationSet Name="FK_ViewModelDescriptor_has_Module" Association="Model.Store.FK_ViewModelDescriptor_has_Module" >
       <End Role="ViewModelDescriptor" EntitySet="ViewModelDescriptor" />
       <End Role="Module" EntitySet="Module" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Visual_has_Method" Association="Model.Store.FK_Visual_has_Method" >
-      <End Role="Visual" EntitySet="Visual" />
-      <End Role="Method" EntitySet="Method" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Visual_has_Property" Association="Model.Store.FK_Visual_has_Property" >
-      <End Role="Visual" EntitySet="Visual" />
-      <End Role="Property" EntitySet="Property" />
     </AssociationSet>
     <AssociationSet Name="FK_WorkSchedule_has_Module" Association="Model.Store.FK_WorkSchedule_has_Module" >
       <End Role="WorkSchedule" EntitySet="WorkSchedule" />
@@ -1420,6 +1358,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_Icon" Type="int" />
     <Property Name="fk_Module" Type="int" />
     <Property Name="fk_RootScreen" Type="int" />
     <Property Name="fk_WorkspaceViewModel" Type="int" />
@@ -2656,17 +2595,6 @@
       </ReferentialConstraint>
     </Association>
 	
-  <EntityType Name="Template">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_DisplayedTypeAssembly" Type="int" />
-    <Property Name="fk_VisualTree" Type="int" />
-    <Property Name="DisplayedTypeFullName" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="DisplayName" Type="nvarchar" MaxLength="200" Nullable="false" />
-  </EntityType>
-	
   <EntityType Name="TestCustomObject">
     <Key>
       <PropertyRef Name="ID" />
@@ -2757,16 +2685,6 @@
     <Property Name="Description" Type="nvarchar" MaxLength="4000" Nullable="false" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="ViewModelTypeRef" Type="nvarchar" MaxLength="2000" Nullable="true" />
-  </EntityType>
-	
-  <EntityType Name="Visual">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_Method" Type="int" />
-    <Property Name="fk_Property" Type="int" />
-    <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="WorkSchedule">
@@ -3484,44 +3402,6 @@
   </Association>
 
 	
-  <EntityType Name="Template_hasMenu_Visual_RelationEntry">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_Template" Type="int" Nullable="true" />
-    <Property Name="fk_Menu" Type="int" Nullable="true" />
-  </EntityType>
-
-  <!-- A to CollectionEntry -->
-  <Association Name="FK_Template_hasMenu_Menu_A">
-    <End Role="Template" Type="Model.Store.Template" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.Template_hasMenu_Visual_RelationEntry" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Template">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_Template" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-  <!-- B to CollectionEntry -->
-  <Association Name="FK_Template_hasMenu_Menu_B">
-    <End Role="Menu" Type="Model.Store.Visual" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.Template_hasMenu_Visual_RelationEntry" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Menu">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_Menu" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-	
   <EntityType Name="IndexConstraint_ensures_unique_on_Property_RelationEntry">
     <Key>
       <PropertyRef Name="ID" />
@@ -3556,82 +3436,6 @@
       </Principal>
       <Dependent Role="CollectionEntry">
         <PropertyRef Name="fk_Properties" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-	
-  <EntityType Name="Visual_contains_Visual_RelationEntry">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_Visual" Type="int" Nullable="true" />
-    <Property Name="fk_Children" Type="int" Nullable="true" />
-  </EntityType>
-
-  <!-- A to CollectionEntry -->
-  <Association Name="FK_Visual_contains_Children_A">
-    <End Role="Visual" Type="Model.Store.Visual" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.Visual_contains_Visual_RelationEntry" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Visual">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_Visual" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-  <!-- B to CollectionEntry -->
-  <Association Name="FK_Visual_contains_Children_B">
-    <End Role="Children" Type="Model.Store.Visual" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.Visual_contains_Visual_RelationEntry" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Children">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_Children" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-	
-  <EntityType Name="Visual_hasContextMenu_Visual_RelationEntry">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="fk_Visual" Type="int" Nullable="true" />
-    <Property Name="fk_ContextMenu" Type="int" Nullable="true" />
-  </EntityType>
-
-  <!-- A to CollectionEntry -->
-  <Association Name="FK_Visual_hasContextMenu_ContextMenu_A">
-    <End Role="Visual" Type="Model.Store.Visual" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.Visual_hasContextMenu_Visual_RelationEntry" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Visual">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_Visual" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-  <!-- B to CollectionEntry -->
-  <Association Name="FK_Visual_hasContextMenu_ContextMenu_B">
-    <End Role="ContextMenu" Type="Model.Store.Visual" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.Visual_hasContextMenu_Visual_RelationEntry" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ContextMenu">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="CollectionEntry">
-        <PropertyRef Name="fk_ContextMenu" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -3719,6 +3523,20 @@
       </Principal>
       <Dependent Role="AccessControl">
         <PropertyRef Name="fk_CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_App_has_Icon">
+    <End Role="Icon" Type="Model.Store.Icon" Multiplicity="0..1" />
+    <End Role="App" Type="Model.Store.Application" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Icon">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="App">
+        <PropertyRef Name="fk_Icon" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -5978,34 +5796,6 @@
   </Association>
 
 
-  <Association Name="FK_Template_has_DisplayedTypeAssembly">
-    <End Role="DisplayedTypeAssembly" Type="Model.Store.Assembly" Multiplicity="0..1" />
-    <End Role="Template" Type="Model.Store.Template" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="DisplayedTypeAssembly">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Template">
-        <PropertyRef Name="fk_DisplayedTypeAssembly" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_Template_has_VisualTree">
-    <End Role="VisualTree" Type="Model.Store.Visual" Multiplicity="0..1" />
-    <End Role="Template" Type="Model.Store.Template" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="VisualTree">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Template">
-        <PropertyRef Name="fk_VisualTree" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
   <Association Name="FK_Test_of_Event">
     <End Role="Event" Type="Model.Store.Event" Multiplicity="0..1" />
     <End Role="Test" Type="Model.Store.EventTestObject" Multiplicity="*" />
@@ -6155,34 +5945,6 @@
       </Principal>
       <Dependent Role="ViewModelDescriptor">
         <PropertyRef Name="fk_Module" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_Visual_has_Method">
-    <End Role="Method" Type="Model.Store.Method" Multiplicity="0..1" />
-    <End Role="Visual" Type="Model.Store.Visual" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Method">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Visual">
-        <PropertyRef Name="fk_Method" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_Visual_has_Property">
-    <End Role="Property" Type="Model.Store.Property" Multiplicity="0..1" />
-    <End Role="Visual" Type="Model.Store.Visual" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Property">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Visual">
-        <PropertyRef Name="fk_Property" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

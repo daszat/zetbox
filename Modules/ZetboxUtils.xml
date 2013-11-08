@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-10-15T09:14:57Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-10-29T14:35:31Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -4418,7 +4418,7 @@ public static void GetWorkingHoursCanExecReason(WorkSchedule obj, MethodReturnEv
   </ZetboxBase:Method>
   <ZetboxBase:Method ExportGuid="3f50df16-1d0c-4820-aaae-ce022f73c435">
     <ZetboxBase:CategoryTags>Hidden</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-10-15T13:29:46.209089Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void AppliesTo(WorkScheduleRule obj, MethodReturnEventArgs&lt;bool&gt; e, DateTime date)
 {
@@ -4436,6 +4436,7 @@ public static void AppliesToCanExecReason(WorkScheduleRule obj, MethodReturnEven
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2011-06-15T09:29:25Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>Checks if the Rule applies to the given date</ZetboxBase:Description>
+    <ZetboxBase:InvokeOnServer>false</ZetboxBase:InvokeOnServer>
     <GUI:IsDisplayable>true</GUI:IsDisplayable>
     <ZetboxBase:Label>Applies to Range</ZetboxBase:Label>
     <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
@@ -4745,9 +4746,10 @@ public static void AppliesToCanExecReason(WorkScheduleRule obj, MethodReturnEven
     <GUI:Name>Zetbox.App.Calendar.WorkScheduleRuleInstanceDisplay</GUI:Name>
   </GUI:ControlKind>
   <GUI:Application ExportGuid="85675ee6-917a-4bd6-8c76-95a08726310f">
-    <GUI:ChangedOn>2013-02-19T09:18:15.322162Z</GUI:ChangedOn>
+    <GUI:ChangedOn>2013-10-29T14:03:32.663005Z</GUI:ChangedOn>
     <GUI:CreatedOn>2013-02-19T09:18:15.322162Z</GUI:CreatedOn>
     <GUI:Description>A calendar application</GUI:Description>
+    <GUI:Icon>bc63e83e-d074-45fe-81eb-0b6d331fb0db</GUI:Icon>
     <GUI:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</GUI:Module>
     <GUI:Name>Calendar</GUI:Name>
     <GUI:WorkspaceViewModel>a78c6c62-e8ae-4625-852e-53f6a55b5d9e</GUI:WorkspaceViewModel>
@@ -6671,8 +6673,9 @@ public static void MakeStaticFileCanExecReason(ImportedFile obj, MethodReturnEve
     <GUI:Property>b4f41179-44f8-4235-b272-48f3f1452da7</GUI:Property>
   </GUI:SinglePropertyFilterConfiguration>
   <GUI:Application ExportGuid="e4f4697a-241d-407a-a8bb-34f7ac8c28c1">
-    <GUI:ChangedOn>2011-11-04T20:18:55.730047Z</GUI:ChangedOn>
+    <GUI:ChangedOn>2013-10-29T14:03:47.393848Z</GUI:ChangedOn>
     <GUI:CreatedOn>2011-11-04T20:18:55.730047Z</GUI:CreatedOn>
+    <GUI:Icon>267ce6ec-7982-46d3-b1bc-2e1ea6adf815</GUI:Icon>
     <GUI:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</GUI:Module>
     <GUI:Name>Document Management</GUI:Name>
     <GUI:RootScreen>6c3f5c91-7245-479d-aeb3-64ebcdcfc4e0</GUI:RootScreen>
@@ -6697,6 +6700,12 @@ public static void MakeStaticFileCanExecReason(ImportedFile obj, MethodReturnEve
     <GUI:Description>ViewModel for the UML Diagram</GUI:Description>
     <GUI:Module>0fe1ab38-860a-414f-a599-b0b86a22ce1a</GUI:Module>
     <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.ModuleEditor.DiagramViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="41c43678-1e2f-4b9e-9f02-bd1d957b1e63">
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Description>A specialized tree view item of an viewmodel only for the ModuleEditor</GUI:Description>
+    <GUI:Module>0fe1ab38-860a-414f-a599-b0b86a22ce1a</GUI:Module>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.ModuleEditor.GroupingTreeItemViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="94ec32fc-1914-4937-a8ab-4753335cb502">
     <GUI:DefaultEditorKind>f236ecd4-d9dc-4fc3-a4a9-6da8ef1a228e</GUI:DefaultEditorKind>
@@ -6756,8 +6765,9 @@ public static void MakeStaticFileCanExecReason(ImportedFile obj, MethodReturnEve
     <GUI:Parent>545aac34-3b0e-441d-87db-386dd711970d</GUI:Parent>
   </GUI:ControlKind>
   <GUI:Application ExportGuid="df230ac1-a2fe-4b65-878c-a842e251bd89">
-    <GUI:ChangedOn>2011-08-06T04:31:12.732264Z</GUI:ChangedOn>
+    <GUI:ChangedOn>2013-10-29T14:01:39.62754Z</GUI:ChangedOn>
     <GUI:CreatedOn>2010-07-20T07:54:39Z</GUI:CreatedOn>
+    <GUI:Icon>82552e60-5677-439e-af81-5eafb194f784</GUI:Icon>
     <GUI:Module>0fe1ab38-860a-414f-a599-b0b86a22ce1a</GUI:Module>
     <GUI:Name>Module Editor</GUI:Name>
     <GUI:WorkspaceViewModel>c92286af-1bb6-4e0d-ac58-d77179e626a1</GUI:WorkspaceViewModel>

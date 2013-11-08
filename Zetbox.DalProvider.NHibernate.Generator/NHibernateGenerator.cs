@@ -64,8 +64,8 @@ namespace Zetbox.DalProvider.NHibernate.Generator
 
         private List<string> CreateMappings(Zetbox.API.IZetboxContext ctx)
         {
-            this.RunTemplateWithExtension(ctx, "Mappings.CollectionEntriesHbm", "CollectionEntries", "hbm.xml");
-            this.RunTemplateWithExtension(ctx, "Mappings.ClassesHbm", "Classes", "hbm.xml", ExtraSuffix);
+            this.RunTemplateWithExtension(ctx, "Mappings.CollectionEntriesHbm", null, "CollectionEntries", "hbm.xml");
+            this.RunTemplateWithExtension(ctx, "Mappings.ClassesHbm", null, "Classes", "hbm.xml", ExtraSuffix);
 
             // Mapping files are picked up automatically by the ProjectFile as EmbeddedResources
             // so we must not need to keep track of them as Compiles

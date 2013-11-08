@@ -25,6 +25,15 @@ namespace Zetbox.API
     using Zetbox.API.Configuration;
     using Zetbox.API.Utils;
 
+    public class ImplementorAssembly
+    {
+        public Assembly Assembly { get; private set; }
+        public ImplementorAssembly(Assembly assembly)
+        {
+            this.Assembly = assembly;
+        }
+    }
+
     public static class AutofacExtensions
     {
         public static void RegisterZetboxImplementors(this ContainerBuilder builder, Assembly source)
@@ -41,6 +50,10 @@ namespace Zetbox.API
                     .RegisterType(t)
                     .SingleInstance();
             }
+
+            builder
+                .Register<ImplementorAssembly>(c => new ImplementorAssembly(source))
+                .AsSelf();
         }
 
         public static void RegisterCmdLineDataOption(this ContainerBuilder builder, string prototype, string description, object dataKey)

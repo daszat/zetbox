@@ -74,6 +74,9 @@ namespace Zetbox.Client.Presentables
         /// Gets an optional Icon for the Command
         /// </summary>
         System.Drawing.Image Icon { get; set; }
+
+        bool IsDefault { get; }
+        bool IsCancel { get; }
     }
 
     /// <summary>
@@ -265,7 +268,7 @@ namespace Zetbox.Client.Presentables
             {
                 return _labelCache;
             }
-            protected set
+            set
             {
                 if (_labelCache != value)
                 {
@@ -288,7 +291,7 @@ namespace Zetbox.Client.Presentables
             {
                 return string.IsNullOrEmpty(_reason) ? _toolTipCache : _reason;
             }
-            protected set
+            set
             {
                 if (_toolTipCache != value)
                 {
@@ -311,7 +314,7 @@ namespace Zetbox.Client.Presentables
             {
                 return _reason;
             }
-            protected set
+            set
             {
                 if (_reason != value)
                 {
@@ -327,6 +330,39 @@ namespace Zetbox.Client.Presentables
             get { return Label; }
         }
 
+        private bool _isDefault = false;
+        public bool IsDefault
+        {
+            get
+            {
+                return _isDefault;
+            }
+            set
+            {
+                if (_isDefault != value)
+                {
+                    _isDefault = value;
+                    OnPropertyChanged("IsDefault");
+                }
+            }
+        }
+        
+        private bool _isCancel = false;
+        public bool IsCancel
+        {
+            get
+            {
+                return _isCancel;
+            }
+            set
+            {
+                if (_isCancel != value)
+                {
+                    _isCancel = value;
+                    OnPropertyChanged("IsCancel");
+                }
+            }
+        }
         #endregion
     }
 

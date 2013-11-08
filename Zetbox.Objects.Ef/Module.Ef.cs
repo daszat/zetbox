@@ -33,7 +33,7 @@ namespace Zetbox.Objects
                 .Register<EfActionsManager>(
                     c => new EfActionsManager(
                         c.Resolve<ILifetimeScope>(),
-                        c.Resolve<IDeploymentRestrictor>()))
+                        c.Resolve<IEnumerable<ImplementorAssembly>>()))
                 .As<IEfActionsManager>()
                 .InstancePerLifetimeScope();
         }
@@ -68,8 +68,8 @@ namespace Zetbox.Objects
             set { _isInitialised = value; }
         }
 
-        public EfActionsManager(ILifetimeScope container, IDeploymentRestrictor restrictor)
-            : base(container, restrictor, "EfImpl")
+        public EfActionsManager(ILifetimeScope container, IEnumerable<ImplementorAssembly> assemblies)
+            : base(container, "EfImpl", assemblies)
         {
         }
     }

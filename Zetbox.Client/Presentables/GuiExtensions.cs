@@ -25,6 +25,7 @@ namespace Zetbox.App.Extensions
     using Zetbox.App.Base;
     using Zetbox.App.GUI;
     using Zetbox.Client.GUI;
+    using Zetbox.Client.Presentables;
 
     /// <summary>
     /// A set of extension methods for the GUI module.
@@ -139,8 +140,7 @@ namespace Zetbox.App.Extensions
                         .Where(ifType => ifType.IsGenericType && ifType.GetGenericTypeDefinition() == typeof(IHasViewModel<>))
                         .Select(ifType => ifType.GetGenericArguments().Single());
 
-                    // walk the inheritance chain and check whether the view supports one of our parents
-                    return vmType.AndParents(t => t.BaseType).Any(t => supportedViewModels.Contains(t));
+                    return supportedViewModels.Contains(vmType);
                 })).FirstOrDefault();
 
                 // Log a warning if nothing found
@@ -155,19 +155,28 @@ namespace Zetbox.App.Extensions
             return result;
         }
 
-        private static IList<Type> GetAllTypes(ViewModelDescriptor self)
+        private static List<Type> GetAllTypes(ViewModelDescriptor self)
         {
-            var allTypes = new List<Type>();
+            var result = new List<Type>();
             var type = Type.GetType(self.ViewModelTypeRef);
-            while (type != null)
-            {
-                allTypes.Add(type);
-                type = type.BaseType;
-            }
 
-            // append ALL interfaces after the inheritance list
-            allTypes.AddRange(Type.GetType(self.ViewModelTypeRef).GetInterfaces().OrderBy(i => i.FullName));
-            return allTypes;
+            GetAllTypes(type, result);
+            result.Reverse();
+
+            return result;
+        }
+
+        // Inverse recursion
+        // This goes from the most general type to the derived types
+        // so that the interfaces are sorted in the place where they are
+        // actually implemented.
+        private static void GetAllTypes(Type type, List<Type> result)
+        {
+            if (type != typeof(ViewModel))
+                GetAllTypes(type.BaseType, result);
+
+            result.AddRange(type.GetInterfaces().Except(result).OrderBy(i => i.FullName));
+            result.Add(type);
         }
 
 

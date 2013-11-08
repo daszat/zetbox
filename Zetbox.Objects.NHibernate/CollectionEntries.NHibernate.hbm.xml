@@ -303,23 +303,6 @@
                   column="`fk_SourceColumn_pos`" />
         <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
     </class>
-    <class name="Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl+Template_hasMenu_Visual_RelationEntryProxy"
-           proxy="Zetbox.App.GUI.Template_hasMenu_Visual_RelationEntryNHibernateImpl+Template_hasMenu_Visual_RelationEntryProxy"
-           table="`Template_hasMenu_Menu`"
-           schema="`gui`" >
-
-        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
-            <generator class="native">
-                <param name="schema">`gui`</param>
-                <param name="sequence">`Template_hasMenu_Menu_ID_seq`</param>
-            </generator>
-        </id>
-
-        <many-to-one name="A"
-                     column="`fk_Template`" />
-        <many-to-one name="B"
-                     column="`fk_Menu`" />
-    </class>
     <class name="Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl+TestStudent_füllt_aus_Fragebogen_RelationEntryProxy"
            proxy="Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl+TestStudent_füllt_aus_Fragebogen_RelationEntryProxy"
            table="`Student_füllt_aus_Testbogen`"
@@ -354,40 +337,6 @@
         <many-to-one name="B"
                      column="`fk_SecondaryControlKinds`" />
         <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
-    </class>
-    <class name="Zetbox.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl+Visual_contains_Visual_RelationEntryProxy"
-           proxy="Zetbox.App.GUI.Visual_contains_Visual_RelationEntryNHibernateImpl+Visual_contains_Visual_RelationEntryProxy"
-           table="`Visual_contains_Children`"
-           schema="`gui`" >
-
-        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
-            <generator class="native">
-                <param name="schema">`gui`</param>
-                <param name="sequence">`Visual_contains_Children_ID_seq`</param>
-            </generator>
-        </id>
-
-        <many-to-one name="A"
-                     column="`fk_Visual`" />
-        <many-to-one name="B"
-                     column="`fk_Children`" />
-    </class>
-    <class name="Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl+Visual_hasContextMenu_Visual_RelationEntryProxy"
-           proxy="Zetbox.App.GUI.Visual_hasContextMenu_Visual_RelationEntryNHibernateImpl+Visual_hasContextMenu_Visual_RelationEntryProxy"
-           table="`Visual_hasContextMenu_ContextMenu`"
-           schema="`gui`" >
-
-        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
-            <generator class="native">
-                <param name="schema">`gui`</param>
-                <param name="sequence">`Visual_hasContextMenu_ContextMenu_ID_seq`</param>
-            </generator>
-        </id>
-
-        <many-to-one name="A"
-                     column="`fk_Visual`" />
-        <many-to-one name="B"
-                     column="`fk_ContextMenu`" />
     </class>
 
     <!-- ValueCollectionEntries are defined directly on use -->

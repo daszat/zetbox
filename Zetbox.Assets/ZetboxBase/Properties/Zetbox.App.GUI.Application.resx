@@ -153,6 +153,12 @@
   <data name="ExportGuid_description" xml:space="preserve">
     <value>Export Guid</value>
   </data>
+  <data name="Icon_label" xml:space="preserve">
+    <value>Icon</value>
+  </data>
+  <data name="Icon_description" xml:space="preserve">
+    <value />
+  </data>
   <data name="Module_label" xml:space="preserve">
     <value>Module</value>
   </data>
