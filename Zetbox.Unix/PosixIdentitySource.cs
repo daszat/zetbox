@@ -23,7 +23,7 @@ namespace Zetbox.Unix
     {
         public IEnumerable<IdentitySourceItem> GetAllIdentities(string source)
         {
-            if (string.IsNullOrWhiteSpace(source)) throw new NotSupportedException("Cannot specify source for PosixIdentitySource");
+            if (!string.IsNullOrWhiteSpace(source)) throw new NotSupportedException("Cannot specify source for PosixIdentitySource");
 
             foreach (var unixUser in UnixUserInfo.GetLocalUsers())
             {
