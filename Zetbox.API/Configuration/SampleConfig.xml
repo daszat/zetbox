@@ -25,7 +25,6 @@
     <Application>6be0ba52-4589-48f1-832f-6cd463ba319a</Application>
     <Culture></Culture>
     <UICulture></UICulture>
-    <DevelopmentEnvironment>false</DevelopmentEnvironment>
     <Modules>
       <Module>Zetbox.API.ApiModule, Zetbox.API</Module>
       <Module>Zetbox.API.Client.ClientApiModule, Zetbox.API.Client</Module>
