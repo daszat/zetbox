@@ -31,7 +31,7 @@ namespace Zetbox.API.Server
         void Publish(string file, string[] ownerModules);
         void RunBenchmarks();
         void RunFixes();
-        void SyncIdentities();
+        void SyncIdentities(string source);
         void UpdateSchema();
         void UpdateSchema(params string[] files);
         /// <param name="properties">Pass null to recalculate all properties. Or, pass the list properties you want to have recalculated. An empty list, of course, will not process anything.</param>

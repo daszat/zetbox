@@ -26,7 +26,11 @@ namespace Zetbox.API
 
 	public interface IIdentitySource
     {
-        IEnumerable<IdentitySourceItem> GetAllIdentities();
+        /// <summary>
+        /// Retrieve all identities from the source.
+        /// </summary>
+        /// <param name="source">Optional parameter to specify the source.</param>
+        IEnumerable<IdentitySourceItem> GetAllIdentities(string source);
     }
 }
 
