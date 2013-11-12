@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CategoryTags_label" xml:space="preserve">
-    <value>CategoryTags</value>
+    <value>Category tags</value>
   </data>
   <data name="CategoryTags_description" xml:space="preserve">
     <value>A space separated list of category names containing this Property</value>

@@ -1549,7 +1549,7 @@
     <Property Name="fk_Parent" Type="int" />
     <Property Name="fk_Module" Type="int" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="1000" Nullable="true" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="CurrentSchema">

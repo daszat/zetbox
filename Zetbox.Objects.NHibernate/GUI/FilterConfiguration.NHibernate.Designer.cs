@@ -46,6 +46,7 @@ namespace Zetbox.App.GUI
             _isChangedOnSet = Proxy.ID > 0;
             _isCreatedOnSet = Proxy.ID > 0;
             _isExportGuidSet = Proxy.ID > 0;
+            _isRefreshOnFilterChangedSet = Proxy.ID > 0;
         }
 
         /// <summary>the NHibernate proxy of the represented entity</summary>
@@ -650,7 +651,7 @@ namespace Zetbox.App.GUI
             {
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
-                var __result = Proxy.RefreshOnFilterChanged;
+                var __result = FetchRefreshOnFilterChangedOrDefault();
                 if (OnRefreshOnFilterChanged_Getter != null)
                 {
                     var __e = new PropertyGetterEventArgs<bool?>(__result);
@@ -662,6 +663,7 @@ namespace Zetbox.App.GUI
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isRefreshOnFilterChangedSet = true;
                 if (Proxy.RefreshOnFilterChanged != value)
                 {
                     var __oldValue = Proxy.RefreshOnFilterChanged;
@@ -690,6 +692,28 @@ namespace Zetbox.App.GUI
             }
         }
 
+
+        private bool? FetchRefreshOnFilterChangedOrDefault()
+        {
+            var __result = Proxy.RefreshOnFilterChanged;
+                if (!_isRefreshOnFilterChangedSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("ede29e7c-6aa4-48d4-9737-811fae5d26d4"));
+                    if (__p != null) {
+                        _isRefreshOnFilterChangedSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                            if (__tmp_value == null)
+                                __result = this.Proxy.RefreshOnFilterChanged = null;
+                            else
+                            __result = this.Proxy.RefreshOnFilterChanged = (bool)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'Zetbox.App.GUI.FilterConfiguration.RefreshOnFilterChanged'");
+                    }
+                }
+            return __result;
+        }
+
+        private bool _isRefreshOnFilterChangedSet = false;
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
 		public static event PropertyGetterHandler<Zetbox.App.GUI.FilterConfiguration, bool?> OnRefreshOnFilterChanged_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.FilterConfiguration, bool?> OnRefreshOnFilterChanged_PreSetter;
@@ -1416,6 +1440,7 @@ namespace Zetbox.App.GUI
             FetchChangedOnOrDefault();
             FetchCreatedOnOrDefault();
             FetchExportGuidOrDefault();
+            FetchRefreshOnFilterChangedOrDefault();
             base.NotifyPreSave();
             if (OnNotifyPreSave_FilterConfiguration != null) OnNotifyPreSave_FilterConfiguration(this);
         }
@@ -1436,7 +1461,6 @@ namespace Zetbox.App.GUI
             SetNotInitializedProperty("CreatedBy");
             SetNotInitializedProperty("Label");
             SetNotInitializedProperty("Module");
-            SetNotInitializedProperty("RefreshOnFilterChanged");
             SetNotInitializedProperty("RequestedKind");
             SetNotInitializedProperty("Required");
             SetNotInitializedProperty("ViewModelDescriptor");
@@ -1549,7 +1573,10 @@ namespace Zetbox.App.GUI
             }
             binStream.Write(this.Proxy.Label);
             binStream.Write(this.Proxy.Module != null ? OurContext.GetIdFromProxy(this.Proxy.Module) : (int?)null);
-            binStream.Write(this.Proxy.RefreshOnFilterChanged);
+            binStream.Write(this._isRefreshOnFilterChangedSet);
+            if (this._isRefreshOnFilterChangedSet) {
+                binStream.Write(this.Proxy.RefreshOnFilterChanged);
+            }
             binStream.Write(this.Proxy.RequestedKind != null ? OurContext.GetIdFromProxy(this.Proxy.RequestedKind) : (int?)null);
             binStream.Write(this.Proxy.Required);
             binStream.Write(this.Proxy.ViewModelDescriptor != null ? OurContext.GetIdFromProxy(this.Proxy.ViewModelDescriptor) : (int?)null);
@@ -1577,7 +1604,10 @@ namespace Zetbox.App.GUI
             }
             this.Proxy.Label = binStream.ReadString();
             binStream.Read(out this._fk_Module);
-            this.Proxy.RefreshOnFilterChanged = binStream.ReadNullableBoolean();
+            this._isRefreshOnFilterChangedSet = binStream.ReadBoolean();
+            if (this._isRefreshOnFilterChangedSet) {
+                this.Proxy.RefreshOnFilterChanged = binStream.ReadNullableBoolean();
+            }
             binStream.Read(out this._fk_RequestedKind);
             this.Proxy.Required = binStream.ReadBoolean();
             binStream.Read(out this._fk_ViewModelDescriptor);
@@ -1600,6 +1630,7 @@ namespace Zetbox.App.GUI
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.Label, xml, "Label", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.Module != null ? this.Proxy.Module.ExportGuid : (Guid?)null, xml, "Module", "Zetbox.App.GUI");
+            System.Diagnostics.Debug.Assert(this._isRefreshOnFilterChangedSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.RefreshOnFilterChanged, xml, "RefreshOnFilterChanged", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.RequestedKind != null ? this.Proxy.RequestedKind.ExportGuid : (Guid?)null, xml, "RequestedKind", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.Required, xml, "Required", "Zetbox.App.GUI");
@@ -1633,7 +1664,9 @@ namespace Zetbox.App.GUI
                 this._fk_guid_Module = XmlStreamer.ReadNullableGuid(xml);
                 break;
             case "Zetbox.App.GUI|RefreshOnFilterChanged":
+                // Import must have default value set
                 this.Proxy.RefreshOnFilterChanged = XmlStreamer.ReadNullableBoolean(xml);
+                this._isRefreshOnFilterChangedSet = true;
                 break;
             case "Zetbox.App.GUI|RequestedKind":
                 this._fk_guid_RequestedKind = XmlStreamer.ReadNullableGuid(xml);

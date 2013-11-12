@@ -696,6 +696,20 @@ namespace Zetbox.App.GUI
                 // create local variable to create single point of return
                 // for the benefit of down-stream templates
                 var __result = _RefreshOnFilterChanged;
+                if (!_isRefreshOnFilterChangedSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("ede29e7c-6aa4-48d4-9737-811fae5d26d4"));
+                    if (__p != null) {
+                        _isRefreshOnFilterChangedSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                            if (__tmp_value == null)
+                                __result = this._RefreshOnFilterChanged = null;
+                            else
+                            __result = this._RefreshOnFilterChanged = (bool)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'FilterConfiguration.RefreshOnFilterChanged'");
+                    }
+                }
                 if (OnRefreshOnFilterChanged_Getter != null)
                 {
                     var __e = new PropertyGetterEventArgs<bool?>(__result);
@@ -707,6 +721,7 @@ namespace Zetbox.App.GUI
             set
             {
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isRefreshOnFilterChangedSet = true;
                 if (_RefreshOnFilterChanged != value)
                 {
                     var __oldValue = _RefreshOnFilterChanged;
@@ -743,6 +758,7 @@ namespace Zetbox.App.GUI
                 ReportEfPropertyChanged("RefreshOnFilterChanged");
             }
         }
+        private bool _isRefreshOnFilterChangedSet = false;
         // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
 		public static event PropertyGetterHandler<Zetbox.App.GUI.FilterConfiguration, bool?> OnRefreshOnFilterChanged_Getter;
 		public static event PropertyPreSetterHandler<Zetbox.App.GUI.FilterConfiguration, bool?> OnRefreshOnFilterChanged_PreSetter;
@@ -1459,7 +1475,6 @@ namespace Zetbox.App.GUI
             SetNotInitializedProperty("CreatedBy");
             SetNotInitializedProperty("Label");
             SetNotInitializedProperty("Module");
-            SetNotInitializedProperty("RefreshOnFilterChanged");
             SetNotInitializedProperty("RequestedKind");
             SetNotInitializedProperty("Required");
             SetNotInitializedProperty("ViewModelDescriptor");
@@ -1551,7 +1566,10 @@ namespace Zetbox.App.GUI
                 var key = r.EntityKey;
                 binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
-            binStream.Write(this._RefreshOnFilterChanged);
+            binStream.Write(this._isRefreshOnFilterChangedSet);
+            if (this._isRefreshOnFilterChangedSet) {
+                binStream.Write(this._RefreshOnFilterChanged);
+            }
             {
                 var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.GUI.ControlKindEfImpl>("Model.FK_FilterConfiguration_has_RequestedKind", "RequestedKind");
                 var key = r.EntityKey;
@@ -1587,7 +1605,10 @@ namespace Zetbox.App.GUI
             }
             this._Label = binStream.ReadString();
             binStream.Read(out this._fk_Module);
-            this._RefreshOnFilterChanged = binStream.ReadNullableBoolean();
+            this._isRefreshOnFilterChangedSet = binStream.ReadBoolean();
+            if (this._isRefreshOnFilterChangedSet) {
+                this._RefreshOnFilterChanged = binStream.ReadNullableBoolean();
+            }
             binStream.Read(out this._fk_RequestedKind);
             this._Required = binStream.ReadBoolean();
             binStream.Read(out this._fk_ViewModelDescriptor);
@@ -1610,6 +1631,7 @@ namespace Zetbox.App.GUI
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._Label, xml, "Label", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Zetbox.App.GUI");
+            System.Diagnostics.Debug.Assert(this._isRefreshOnFilterChangedSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._RefreshOnFilterChanged, xml, "RefreshOnFilterChanged", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(RequestedKind != null ? RequestedKind.ExportGuid : (Guid?)null, xml, "RequestedKind", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this._Required, xml, "Required", "Zetbox.App.GUI");
@@ -1643,7 +1665,9 @@ namespace Zetbox.App.GUI
                 this._fk_guid_Module = XmlStreamer.ReadNullableGuid(xml);
                 break;
             case "Zetbox.App.GUI|RefreshOnFilterChanged":
+                // Import must have default value set
                 this._RefreshOnFilterChanged = XmlStreamer.ReadNullableBoolean(xml);
+                this._isRefreshOnFilterChangedSet = true;
                 break;
             case "Zetbox.App.GUI|RequestedKind":
                 this._fk_guid_RequestedKind = XmlStreamer.ReadNullableGuid(xml);
