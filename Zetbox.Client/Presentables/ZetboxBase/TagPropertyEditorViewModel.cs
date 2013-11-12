@@ -165,14 +165,14 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 {
                     var lowerItem = item.ToLower().Trim();
                     var tagItem = _possibleValues.FirstOrDefault(i => i.Text.ToLower() == lowerItem);
-                    if (tagItem == null)
+                    if (tagItem == null && !DataContext.IsReadonly)
                     {
                         // Add if not found
                         var newTag = DataContext.Create<TagCache>();
                         newTag.Name = item;
                         _possibleValues.Add(new TagEntryViewModel(newTag, this, true));
                     }
-                    else
+                    else if(tagItem != null)
                     {
                         tagItem.IsChecked = true;
                     }
@@ -182,7 +182,10 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
                 foreach (var toDelete in _possibleValues.Where(i => i.CurrentlyAdded == true && !allItems.Contains(i.Text.ToLower())).ToList())
                 {
-                    DataContext.Delete(toDelete.Tag);
+                    if (!DataContext.IsReadonly)
+                    {
+                        DataContext.Delete(toDelete.Tag);
+                    }
                     _possibleValues.Remove(toDelete);
                 }
 
