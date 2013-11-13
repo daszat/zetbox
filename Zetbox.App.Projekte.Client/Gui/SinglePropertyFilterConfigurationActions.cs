@@ -39,6 +39,7 @@ namespace Zetbox.App.GUI
 
             mdl.Label = obj.GetLabel();
             mdl.Required = obj.Required;
+            mdl.RefreshOnFilterChanged = obj.RefreshOnFilterChanged;
             mdl.ValueSource = FilterValueSource.FromProperty(prop);
 
             mdl.ViewModelType = obj.ViewModelDescriptor;

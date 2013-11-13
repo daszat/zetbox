@@ -44,6 +44,7 @@ namespace Zetbox.App.GUI
             var mdl = new OptionalPredicateFilterModel();
             mdl.Label = obj.Label;
             mdl.Required = obj.Required;
+            mdl.RefreshOnFilterChanged = obj.RefreshOnFilterChanged;
             mdl.ValueSource = FilterValueSource.FromExpression(obj.Predicate);
 
             mdl.ViewModelType = obj.ViewModelDescriptor;

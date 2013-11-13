@@ -37,6 +37,7 @@ namespace Zetbox.App.GUI
             var mdl = new RangeFilterModel();
             mdl.Label = obj.GetLabel();
             mdl.Required = obj.Required;
+            mdl.RefreshOnFilterChanged = obj.RefreshOnFilterChanged;
             mdl.ValueSource = FilterValueSource.FromProperty(obj.Property);
 
             mdl.ViewModelType = obj.ViewModelDescriptor;
