@@ -27,7 +27,7 @@ namespace Zetbox.App.GUI
         /// Overrides the default behaviour. If true the filter will be immediately applied
         /// </summary>
         [Zetbox.API.DefinitionGuid("ede29e7c-6aa4-48d4-9737-811fae5d26d4")]
-        bool? RefreshOnFilterChanged {
+        bool RefreshOnFilterChanged {
             get;
             set;
         }

@@ -1696,7 +1696,7 @@
                         Relationship="Model.FK_FilterConfiguration_has_Module"
                         FromRole="FilterConfiguration"
                         ToRole="Module" />
-    <Property Name="RefreshOnFilterChanged" Type="Boolean" Nullable="true"  />
+    <Property Name="RefreshOnFilterChanged" Type="Boolean" Nullable="false"  />
     <NavigationProperty Name="RequestedKindImpl"
                         Relationship="Model.FK_FilterConfiguration_has_RequestedKind"
                         FromRole="FilterConfiguration"

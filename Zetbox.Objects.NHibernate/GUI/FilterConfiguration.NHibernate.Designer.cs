@@ -645,7 +645,7 @@ namespace Zetbox.App.GUI
         /// </summary>
 
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
-        public bool? RefreshOnFilterChanged
+        public bool RefreshOnFilterChanged
         {
             get
             {
@@ -654,7 +654,7 @@ namespace Zetbox.App.GUI
                 var __result = FetchRefreshOnFilterChangedOrDefault();
                 if (OnRefreshOnFilterChanged_Getter != null)
                 {
-                    var __e = new PropertyGetterEventArgs<bool?>(__result);
+                    var __e = new PropertyGetterEventArgs<bool>(__result);
                     OnRefreshOnFilterChanged_Getter(this, __e);
                     __result = __e.Result;
                 }
@@ -670,7 +670,7 @@ namespace Zetbox.App.GUI
                     var __newValue = value;
                     if (OnRefreshOnFilterChanged_PreSetter != null && IsAttached)
                     {
-                        var __e = new PropertyPreSetterEventArgs<bool?>(__oldValue, __newValue);
+                        var __e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
                         OnRefreshOnFilterChanged_PreSetter(this, __e);
                         __newValue = __e.Result;
                     }
@@ -681,7 +681,7 @@ namespace Zetbox.App.GUI
 
                     if (OnRefreshOnFilterChanged_PostSetter != null && IsAttached)
                     {
-                        var __e = new PropertyPostSetterEventArgs<bool?>(__oldValue, __newValue);
+                        var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
                         OnRefreshOnFilterChanged_PostSetter(this, __e);
                     }
                 }
@@ -693,7 +693,7 @@ namespace Zetbox.App.GUI
         }
 
 
-        private bool? FetchRefreshOnFilterChangedOrDefault()
+        private bool FetchRefreshOnFilterChangedOrDefault()
         {
             var __result = Proxy.RefreshOnFilterChanged;
                 if (!_isRefreshOnFilterChangedSet && ObjectState == DataObjectState.New) {
@@ -702,10 +702,7 @@ namespace Zetbox.App.GUI
                         _isRefreshOnFilterChangedSet = true;
                         // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
                         object __tmp_value = __p.DefaultValue.GetDefaultValue();
-                            if (__tmp_value == null)
-                                __result = this.Proxy.RefreshOnFilterChanged = null;
-                            else
-                            __result = this.Proxy.RefreshOnFilterChanged = (bool)__tmp_value;
+                        __result = this.Proxy.RefreshOnFilterChanged = (bool)__tmp_value;
                     } else {
                         Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'Zetbox.App.GUI.FilterConfiguration.RefreshOnFilterChanged'");
                     }
@@ -715,9 +712,9 @@ namespace Zetbox.App.GUI
 
         private bool _isRefreshOnFilterChangedSet = false;
         // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
-		public static event PropertyGetterHandler<Zetbox.App.GUI.FilterConfiguration, bool?> OnRefreshOnFilterChanged_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.GUI.FilterConfiguration, bool?> OnRefreshOnFilterChanged_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.GUI.FilterConfiguration, bool?> OnRefreshOnFilterChanged_PostSetter;
+		public static event PropertyGetterHandler<Zetbox.App.GUI.FilterConfiguration, bool> OnRefreshOnFilterChanged_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.GUI.FilterConfiguration, bool> OnRefreshOnFilterChanged_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.GUI.FilterConfiguration, bool> OnRefreshOnFilterChanged_PostSetter;
 
         public static event PropertyIsValidHandler<Zetbox.App.GUI.FilterConfiguration> OnRefreshOnFilterChanged_IsValid;
 
@@ -1355,7 +1352,7 @@ namespace Zetbox.App.GUI
                         (obj, val) => obj.Module = val,
 						obj => OnModule_IsValid), 
                     // else
-                    new PropertyDescriptorNHibernateImpl<FilterConfiguration, bool?>(
+                    new PropertyDescriptorNHibernateImpl<FilterConfiguration, bool>(
                         lazyCtx,
                         new Guid("ede29e7c-6aa4-48d4-9737-811fae5d26d4"),
                         "RefreshOnFilterChanged",
@@ -1537,7 +1534,7 @@ namespace Zetbox.App.GUI
 
             public virtual Zetbox.App.Base.ModuleNHibernateImpl.ModuleProxy Module { get; set; }
 
-            public virtual bool? RefreshOnFilterChanged { get; set; }
+            public virtual bool RefreshOnFilterChanged { get; set; }
 
             public virtual Zetbox.App.GUI.ControlKindNHibernateImpl.ControlKindProxy RequestedKind { get; set; }
 
@@ -1606,7 +1603,7 @@ namespace Zetbox.App.GUI
             binStream.Read(out this._fk_Module);
             this._isRefreshOnFilterChangedSet = binStream.ReadBoolean();
             if (this._isRefreshOnFilterChangedSet) {
-                this.Proxy.RefreshOnFilterChanged = binStream.ReadNullableBoolean();
+                this.Proxy.RefreshOnFilterChanged = binStream.ReadBoolean();
             }
             binStream.Read(out this._fk_RequestedKind);
             this.Proxy.Required = binStream.ReadBoolean();
@@ -1665,7 +1662,7 @@ namespace Zetbox.App.GUI
                 break;
             case "Zetbox.App.GUI|RefreshOnFilterChanged":
                 // Import must have default value set
-                this.Proxy.RefreshOnFilterChanged = XmlStreamer.ReadNullableBoolean(xml);
+                this.Proxy.RefreshOnFilterChanged = XmlStreamer.ReadBoolean(xml);
                 this._isRefreshOnFilterChangedSet = true;
                 break;
             case "Zetbox.App.GUI|RequestedKind":

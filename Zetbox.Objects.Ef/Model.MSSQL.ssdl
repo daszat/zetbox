@@ -1791,7 +1791,7 @@
     <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Label" Type="nvarchar" MaxLength="200" Nullable="true" />
-    <Property Name="RefreshOnFilterChanged" Type="bit" Nullable="true" />
+    <Property Name="RefreshOnFilterChanged" Type="bit" Nullable="false" />
     <Property Name="Required" Type="bit" Nullable="false" />
     <Property Name="ObjectClassFilterConfigurations_fk_ObjectClass" Type="int" />
     <Property Name="OptionalPredicateFilterConfigurations_Predicate" Type="nvarchar" MaxLength="1000" Nullable="true" />

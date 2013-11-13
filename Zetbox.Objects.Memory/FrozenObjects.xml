@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-11-12T10:22:54Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-11-13T10:05:17Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -13738,6 +13738,11 @@ public static void isValid_IsCurrentYearDefault(YearFilterConfiguration obj, Pro
     <ZetboxBase:ConstrainedProperty>7635940d-d16c-4795-b5a0-1f445a3c5d6c</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2010-05-27T05:21:03Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Reason>This object must belong to a Module</ZetboxBase:Reason>
+  </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="64a960ca-5dd6-43b5-af71-15d3f98a9e4d">
+    <ZetboxBase:ChangedOn>2013-11-13T09:05:17.534637Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>ede29e7c-6aa4-48d4-9737-811fae5d26d4</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-11-13T09:05:17.534637Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="edd1af67-2570-42c9-bcb8-5675613c5669">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:01.729838Z</ZetboxBase:ChangedOn>

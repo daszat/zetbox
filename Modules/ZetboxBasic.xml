@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-11-12T10:22:54Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-11-13T10:05:17Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="84f486f7-19fe-49ad-8e4a-6c05089e7684">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.650235Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
@@ -7059,6 +7059,11 @@ public static void isValid_IsCurrentYearDefault(YearFilterConfiguration obj, Pro
     <ZetboxBase:CreatedOn>2010-05-27T05:21:03Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Reason>This object must belong to a Module</ZetboxBase:Reason>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="64a960ca-5dd6-43b5-af71-15d3f98a9e4d">
+    <ZetboxBase:ChangedOn>2013-11-13T09:05:17.534637Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>ede29e7c-6aa4-48d4-9737-811fae5d26d4</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-11-13T09:05:17.534637Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="edd1af67-2570-42c9-bcb8-5675613c5669">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:01.729838Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>9e23e6a1-8e4f-48c5-ae83-9dae82c6b796</ZetboxBase:ConstrainedProperty>
@@ -8783,6 +8788,7 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <GUI:CreatedOn>2010-10-20T07:26:03Z</GUI:CreatedOn>
     <GUI:Label>Only Baseclasses</GUI:Label>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:RefreshOnFilterChanged>false</GUI:RefreshOnFilterChanged>
     <GUI:Required>false</GUI:Required>
     <GUI:ViewModelDescriptor>29550c38-e240-46e4-b856-c7066d8395eb</GUI:ViewModelDescriptor>
     <GUI:ObjectClass>20888dfc-1fbc-47c8-9f3c-c6a30a5c0048</GUI:ObjectClass>
@@ -8792,6 +8798,7 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <GUI:ChangedOn>2011-08-06T04:30:50.592201Z</GUI:ChangedOn>
     <GUI:CreatedOn>2010-11-08T22:29:14Z</GUI:CreatedOn>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:RefreshOnFilterChanged>false</GUI:RefreshOnFilterChanged>
     <GUI:Required>true</GUI:Required>
     <GUI:ViewModelDescriptor>4ff2b6ec-a47f-431b-aa6d-d10b39f8d628</GUI:ViewModelDescriptor>
     <GUI:Property>0b7135d3-dedc-4091-a0c4-690c1b4a2b6d</GUI:Property>
@@ -8800,6 +8807,7 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <GUI:ChangedOn>2011-12-16T23:30:34.235388Z</GUI:ChangedOn>
     <GUI:CreatedOn>2011-12-16T23:30:34.235388Z</GUI:CreatedOn>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:RefreshOnFilterChanged>false</GUI:RefreshOnFilterChanged>
     <GUI:Required>false</GUI:Required>
     <GUI:ViewModelDescriptor>4ff2b6ec-a47f-431b-aa6d-d10b39f8d628</GUI:ViewModelDescriptor>
     <GUI:Property>e4cf2c2d-be50-4954-a43c-b8df2dedecec</GUI:Property>
@@ -8808,6 +8816,7 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <GUI:ChangedOn>2011-12-16T23:30:34.235388Z</GUI:ChangedOn>
     <GUI:CreatedOn>2011-12-16T23:30:34.235388Z</GUI:CreatedOn>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:RefreshOnFilterChanged>false</GUI:RefreshOnFilterChanged>
     <GUI:Required>false</GUI:Required>
     <GUI:ViewModelDescriptor>4ff2b6ec-a47f-431b-aa6d-d10b39f8d628</GUI:ViewModelDescriptor>
     <GUI:Property>438ab847-c5d1-4072-9449-96e3d4e92b1f</GUI:Property>
@@ -8816,6 +8825,7 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <GUI:ChangedOn>2011-08-06T04:30:50.338186Z</GUI:ChangedOn>
     <GUI:CreatedOn>2010-07-24T10:24:37Z</GUI:CreatedOn>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:RefreshOnFilterChanged>false</GUI:RefreshOnFilterChanged>
     <GUI:Required>true</GUI:Required>
     <GUI:ViewModelDescriptor>4ff2b6ec-a47f-431b-aa6d-d10b39f8d628</GUI:ViewModelDescriptor>
     <GUI:Property>e45868e3-9638-4259-a908-16cb3f1d515d</GUI:Property>
@@ -8824,6 +8834,7 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <GUI:ChangedOn>2011-08-06T04:30:50.570199Z</GUI:ChangedOn>
     <GUI:CreatedOn>2008-01-01T09:00:00Z</GUI:CreatedOn>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:RefreshOnFilterChanged>false</GUI:RefreshOnFilterChanged>
     <GUI:Required>false</GUI:Required>
     <GUI:ViewModelDescriptor>4ff2b6ec-a47f-431b-aa6d-d10b39f8d628</GUI:ViewModelDescriptor>
     <GUI:Property>93e25648-50f9-40d8-8753-e5dadab68e1d</GUI:Property>
@@ -30942,6 +30953,7 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
     <GUI:ChangedOn>2011-08-06T04:30:56.024511Z</GUI:ChangedOn>
     <GUI:CreatedOn>2011-06-11T05:59:04Z</GUI:CreatedOn>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:RefreshOnFilterChanged>false</GUI:RefreshOnFilterChanged>
     <GUI:Required>false</GUI:Required>
     <GUI:ViewModelDescriptor>4ff2b6ec-a47f-431b-aa6d-d10b39f8d628</GUI:ViewModelDescriptor>
     <GUI:Property>083bbf12-aac6-4f5f-802a-d3701550bc84</GUI:Property>
@@ -30950,6 +30962,7 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
     <GUI:ChangedOn>2011-08-06T04:30:57.136575Z</GUI:ChangedOn>
     <GUI:CreatedOn>2010-09-08T08:42:17Z</GUI:CreatedOn>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:RefreshOnFilterChanged>false</GUI:RefreshOnFilterChanged>
     <GUI:Required>true</GUI:Required>
     <GUI:ViewModelDescriptor>4ff2b6ec-a47f-431b-aa6d-d10b39f8d628</GUI:ViewModelDescriptor>
     <GUI:Property>2a1a99a4-7dd5-4244-913f-06315f3de831</GUI:Property>
@@ -30958,6 +30971,7 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
     <GUI:ChangedOn>2011-08-06T04:30:56.060513Z</GUI:ChangedOn>
     <GUI:CreatedOn>2010-06-08T10:25:23Z</GUI:CreatedOn>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:RefreshOnFilterChanged>false</GUI:RefreshOnFilterChanged>
     <GUI:Required>true</GUI:Required>
     <GUI:ViewModelDescriptor>4ff2b6ec-a47f-431b-aa6d-d10b39f8d628</GUI:ViewModelDescriptor>
     <GUI:Property>bdaacacd-c8cb-45cf-a329-28f942337273</GUI:Property>
@@ -30966,6 +30980,7 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
     <GUI:ChangedOn>2011-08-06T04:30:55.984509Z</GUI:ChangedOn>
     <GUI:CreatedOn>2010-08-31T04:43:53Z</GUI:CreatedOn>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:RefreshOnFilterChanged>false</GUI:RefreshOnFilterChanged>
     <GUI:Required>true</GUI:Required>
     <GUI:ViewModelDescriptor>4ff2b6ec-a47f-431b-aa6d-d10b39f8d628</GUI:ViewModelDescriptor>
     <GUI:Property>9afc74a4-4eeb-4c39-879c-eacc8f369fa7</GUI:Property>
@@ -30974,6 +30989,7 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
     <GUI:ChangedOn>2011-08-06T04:30:56.00251Z</GUI:ChangedOn>
     <GUI:CreatedOn>2011-06-11T05:59:54Z</GUI:CreatedOn>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:RefreshOnFilterChanged>false</GUI:RefreshOnFilterChanged>
     <GUI:Required>false</GUI:Required>
     <GUI:ViewModelDescriptor>4ff2b6ec-a47f-431b-aa6d-d10b39f8d628</GUI:ViewModelDescriptor>
     <GUI:Property>4e1fb30b-e528-4968-95b0-f3a38eafe643</GUI:Property>

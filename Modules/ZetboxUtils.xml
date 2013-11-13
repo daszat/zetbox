@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-11-12T10:22:54Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-11-13T10:05:17Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -6660,6 +6660,7 @@ public static void MakeStaticFileCanExecReason(ImportedFile obj, MethodReturnEve
     <GUI:ChangedOn>2013-07-24T10:58:19.595663Z</GUI:ChangedOn>
     <GUI:CreatedOn>2013-07-24T10:58:19.595663Z</GUI:CreatedOn>
     <GUI:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</GUI:Module>
+    <GUI:RefreshOnFilterChanged>false</GUI:RefreshOnFilterChanged>
     <GUI:Required>false</GUI:Required>
     <GUI:ViewModelDescriptor>4ff2b6ec-a47f-431b-aa6d-d10b39f8d628</GUI:ViewModelDescriptor>
     <GUI:Property>1c5f2bea-9915-4634-8ff9-5fd6f0871704</GUI:Property>
@@ -6668,6 +6669,7 @@ public static void MakeStaticFileCanExecReason(ImportedFile obj, MethodReturnEve
     <GUI:ChangedOn>2013-07-24T10:58:19.595663Z</GUI:ChangedOn>
     <GUI:CreatedOn>2013-07-24T10:58:19.595663Z</GUI:CreatedOn>
     <GUI:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</GUI:Module>
+    <GUI:RefreshOnFilterChanged>false</GUI:RefreshOnFilterChanged>
     <GUI:Required>false</GUI:Required>
     <GUI:ViewModelDescriptor>4ff2b6ec-a47f-431b-aa6d-d10b39f8d628</GUI:ViewModelDescriptor>
     <GUI:Property>b4f41179-44f8-4235-b272-48f3f1452da7</GUI:Property>
@@ -10902,6 +10904,7 @@ public static void CreateObjectClassCanExecReason(SourceTable obj, MethodReturnE
     <GUI:ChangedOn>2011-08-06T04:30:58.500653Z</GUI:ChangedOn>
     <GUI:CreatedOn>2010-07-15T05:18:27Z</GUI:CreatedOn>
     <GUI:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</GUI:Module>
+    <GUI:RefreshOnFilterChanged>false</GUI:RefreshOnFilterChanged>
     <GUI:Required>false</GUI:Required>
     <GUI:ViewModelDescriptor>4ff2b6ec-a47f-431b-aa6d-d10b39f8d628</GUI:ViewModelDescriptor>
     <GUI:Property>a27f7d36-fd56-4271-bac0-88e22bc65027</GUI:Property>
@@ -10910,6 +10913,7 @@ public static void CreateObjectClassCanExecReason(SourceTable obj, MethodReturnE
     <GUI:ChangedOn>2011-08-06T04:30:58.536655Z</GUI:ChangedOn>
     <GUI:CreatedOn>2010-07-15T05:18:27Z</GUI:CreatedOn>
     <GUI:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</GUI:Module>
+    <GUI:RefreshOnFilterChanged>false</GUI:RefreshOnFilterChanged>
     <GUI:Required>true</GUI:Required>
     <GUI:ViewModelDescriptor>4ff2b6ec-a47f-431b-aa6d-d10b39f8d628</GUI:ViewModelDescriptor>
     <GUI:Property>d1dca069-f6b5-4da1-beee-a51853c109ba</GUI:Property>
@@ -10918,6 +10922,7 @@ public static void CreateObjectClassCanExecReason(SourceTable obj, MethodReturnE
     <GUI:ChangedOn>2011-08-06T04:30:58.692664Z</GUI:ChangedOn>
     <GUI:CreatedOn>2010-09-08T11:52:46Z</GUI:CreatedOn>
     <GUI:Module>c5b6426c-a21c-4c21-8bce-b2d25733832a</GUI:Module>
+    <GUI:RefreshOnFilterChanged>false</GUI:RefreshOnFilterChanged>
     <GUI:Required>true</GUI:Required>
     <GUI:ViewModelDescriptor>4ff2b6ec-a47f-431b-aa6d-d10b39f8d628</GUI:ViewModelDescriptor>
     <GUI:Property>d57c1138-b611-44b6-bd30-9b6d6a91cbed</GUI:Property>

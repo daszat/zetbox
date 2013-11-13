@@ -516,14 +516,22 @@ namespace Zetbox.Server.SchemaManagement
 
             var tblName = objClass.GetTableRef(db);
             var colName = Construct.ColumnName(prop, prefix);
+            var def = SchemaManager.GetDefaultConstraint(prop);
 
-            if (db.CheckColumnContainsNulls(tblName, colName))
+            if (def == null && db.CheckColumnContainsNulls(tblName, colName))
             {
-                Log.ErrorFormat("column '{0}.{1}' contains NULL values, cannot set NOT NULLABLE", tblName, colName);
+                Log.ErrorFormat("column '{0}.{1}' contains NULL values and has no default contraint, cannot set NOT NULLABLE", tblName, colName);
             }
             else
             {
-                db.AlterColumn(tblName, colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), prop.IsNullable(), null);
+                if (def != null)
+                {
+                    var isSimplyCheckable = objClass.GetTableMapping() == TableMapping.TPT || objClass.BaseObjectClass == null;
+                    var classes = objClass.AndChildren(c => c.SubClasses).Select(cls => Construct.DiscriminatorValue(cls)).ToList();
+
+                    WriteDefaultValue(tblName, colName, def, isSimplyCheckable ? null : classes);
+                }
+                db.AlterColumn(tblName, colName, prop.GetDbType(), prop.GetSize(), prop.GetScale(), prop.IsNullable(), null /* don't change contraints */);
             }
 
             PostMigration(PropertyMigrationEventType.ChangeToNotNullable, savedProp, prop);
