@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using EnvDTE;
 using EnvDTE80;
 using Microsoft.VisualStudio.TemplateWizard;
+using System.Text;
 
 
 namespace ZetboxApp.Wizard
@@ -78,15 +79,28 @@ namespace ZetboxApp.Wizard
 
         public void RunFinished()
         {
-            _solution = _dte.Solution;
-            _solution.SaveAs((string)_solution.Properties.Item("Path").Value);
+            try
+            {
+                _solution = _dte.Solution;
+                _solution.SaveAs((string)_solution.Properties.Item("Path").Value);
 
-            ExtractSolutionItems();
-            MoveProjects();
-            AddImportTargets();
-            SetupConfigurationManager();
-            SetProjectReferences();
-            SetStartupProject();
+                ExtractSolutionItems();
+                MoveProjects();
+                AddImportTargets();
+                SetupConfigurationManager();
+                SetProjectReferences();
+                SetStartupProject();
+            }
+            catch (Exception ex)
+            {
+                var sb = new StringBuilder();
+
+                sb.AppendLine("A error occured during creation of the solution. It is STRONGLY recomended to delete the solution and re-create it!");
+                sb.AppendLine();
+                sb.Append(ex.ToString());
+
+                MessageBox.Show(sb.ToString(), "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void SetupConfigurationManager()
