@@ -2620,17 +2620,17 @@ public static void isValid_Module(FilterConfiguration obj, PropertyIsValidEventA
     <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-11-12T08:57:20.335278Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_RefreshOnFilterChanged(FilterConfiguration obj, PropertyGetterEventArgs&lt;bool?&gt; e)
+public static void get_RefreshOnFilterChanged(FilterConfiguration obj, PropertyGetterEventArgs&lt;bool&gt; e)
 {
 }
 
 [Invocation]
-public static void preSet_RefreshOnFilterChanged(FilterConfiguration obj, PropertyPreSetterEventArgs&lt;bool?&gt; e)
+public static void preSet_RefreshOnFilterChanged(FilterConfiguration obj, PropertyPreSetterEventArgs&lt;bool&gt; e)
 {
 }
 
 [Invocation]
-public static void postSet_RefreshOnFilterChanged(FilterConfiguration obj, PropertyPostSetterEventArgs&lt;bool?&gt; e)
+public static void postSet_RefreshOnFilterChanged(FilterConfiguration obj, PropertyPostSetterEventArgs&lt;bool&gt; e)
 {
 }
 
