@@ -251,12 +251,12 @@ namespace Zetbox.Server.SchemaManagement
             var dbType = prop.GetDbType();
             var size = prop.GetSize();
             var scale = prop.GetScale();
-            var defConstr = SchemaManager.GetDefaultConstraint(prop);
+            var def = SchemaManager.GetDefaultConstraint(prop);
 
             if (movedUp)
             {
                 Log.InfoFormat("Moving property '{0}' from '{1}' up to '{2}'", prop.Name, savedProp.ObjectClass.Name, objClass.Name);
-                db.CreateColumn(tblName, colName, dbType, size, scale, true, defConstr);
+                db.CreateColumn(tblName, colName, dbType, size, scale, true, def);
 
                 db.CopyColumnData(srcTblName, srcColName, tblName, colName);
 
@@ -268,7 +268,7 @@ namespace Zetbox.Server.SchemaManagement
                     }
                     else
                     {
-                        db.AlterColumn(tblName, colName, dbType, size, scale, prop.IsNullable(), defConstr);
+                        db.AlterColumn(tblName, colName, dbType, size, scale, prop.IsNullable(), def);
                     }
                 }
 
@@ -278,13 +278,13 @@ namespace Zetbox.Server.SchemaManagement
             else if (movedDown)
             {
                 Log.InfoFormat("Moving property '{0}' from '{1}' down to '{2}' (dataloss possible)", prop.Name, savedProp.ObjectClass.Name, objClass.Name);
-                db.CreateColumn(tblName, colName, dbType, size, scale, true, defConstr);
+                db.CreateColumn(tblName, colName, dbType, size, scale, true, def);
 
                 db.CopyColumnData(srcTblName, srcColName, tblName, colName);
 
                 if (!prop.IsNullable())
                 {
-                    db.AlterColumn(tblName, colName, dbType, size, scale, prop.IsNullable(), defConstr);
+                    db.AlterColumn(tblName, colName, dbType, size, scale, prop.IsNullable(), def);
                 }
 
                 if (db.CheckColumnExists(srcTblName, srcColName))
@@ -293,7 +293,7 @@ namespace Zetbox.Server.SchemaManagement
             else
             {
                 Log.ErrorFormat("Moving property '{2}' from '{0}' to '{1}' is not supported. ObjectClasses are not in the same hierarchy. Will only create destination column.", savedProp.ObjectClass.Name, prop.ObjectClass.Name, prop.Name);
-                db.CreateColumn(tblName, colName, dbType, size, scale, true, defConstr);
+                db.CreateColumn(tblName, colName, dbType, size, scale, true, def);
             }
 
             PostMigration(PropertyMigrationEventType.Move, savedProp, prop);
