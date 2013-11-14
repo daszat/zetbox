@@ -108,6 +108,8 @@ namespace ZetboxApp.Wizard
                 }
                 _solution.SaveAs(solutionFile);
 
+                _shell.Execute(".nuget\\nuget.exe", "sources add -name dasz -source https://office.dasz.at/ngf/api/v2/");
+
                 if (MessageBox.Show("Template created successfully. To finish project setup, zbResetAll.cmd must be executed.\n\nExecute now?", "Templated created", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     _shell.ExecuteAsync("ZbResetAll.cmd");

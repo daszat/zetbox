@@ -5,6 +5,7 @@ using System.Text;
 using System.IO;
 using System.Windows.Forms;
 using System.Threading;
+using System.Diagnostics;
 
 namespace ZetboxApp.Wizard
 {
@@ -21,12 +22,11 @@ namespace ZetboxApp.Wizard
             _syncCtx = SynchronizationContext.Current;
         }
 
-        public void ExecuteAsync(string file)
+        private Process ExecuteCore(string file, string arguments)
         {
             if (string.IsNullOrEmpty(file)) throw new ArgumentNullException("file");
 
-            _messages.Write(string.Format("Starting {0}\n", file));
-            _messages.Write("========================================\n\n");
+            _messages.Write(string.Format("Starting {0} {1}\n", file, arguments));
 
             System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo()
             {
@@ -35,30 +35,45 @@ namespace ZetboxApp.Wizard
                 CreateNoWindow = true,
                 WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden,
                 FileName = Path.Combine(_basePath, file),
+                Arguments = arguments,
                 RedirectStandardError = true,
                 RedirectStandardOutput = true,
                 RedirectStandardInput = true,
             };
 
-            using (var process = new System.Diagnostics.Process())
-            {
-                process.StartInfo = psi;
-                process.OutputDataReceived += (s, e) => _syncCtx.Post(state => { _messages.WriteLine(e.Data); }, null);
-                process.ErrorDataReceived += (s, e) => _syncCtx.Post(state => { _messages.WriteLine(e.Data); }, null);
+            var process = new System.Diagnostics.Process();
+            process.StartInfo = psi;
+            process.OutputDataReceived += (s, e) => _syncCtx.Post(state => { _messages.WriteLine(e.Data); }, null);
+            process.ErrorDataReceived += (s, e) => _syncCtx.Post(state => { _messages.WriteLine(e.Data); }, null);
 
-                process.Start();
-                process.BeginErrorReadLine();
-                process.BeginOutputReadLine();
-                process.Exited += (s, e) => _syncCtx.Post(state =>
-                {
-                    _messages.Write("========================================\n\n");
-                    if (process.ExitCode > 0)
-                    {
-                        _messages.WriteLine("Process exited with error code {0}", process.ExitCode);
-                        MessageBox.Show("Error executing " + file, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }, null);
+            process.Start();
+            process.BeginErrorReadLine();
+            process.BeginOutputReadLine();
+            return process;
+        }
+
+
+        public int Execute(string file, string arguments = null)
+        {
+            using (var process = ExecuteCore(file, arguments))
+            {
+                process.WaitForExit();
+                return process.ExitCode;
             }
+        }
+
+        public void ExecuteAsync(string file, string arguments = null)
+        {
+            var process = ExecuteCore(file, arguments);
+            process.Exited += (s, e) => _syncCtx.Post(state =>
+            {
+                if (process.ExitCode > 0)
+                {
+                    _messages.WriteLine("Process exited with error code {0}", process.ExitCode);
+                    MessageBox.Show("Error executing " + file, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                process.Dispose();
+            }, null);
         }
     }
 }
