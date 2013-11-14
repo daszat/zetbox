@@ -15,11 +15,16 @@ namespace ZetboxApp.Wizard
 {
     public class SolutionWizard : IWizard
     {
+        private DTE _dte;
+        private Solution _solution;
+
         private static string _wrongProjectFolder;
         private static string _solutionFolder;
         private static string _templatePath;
         private static string _solutionName;
         private Dictionary<string, string> _replacementsDictionary;
+        private Messages _messages;
+        private Shell _shell;
 
         public static string SolutionName
         {
@@ -29,8 +34,6 @@ namespace ZetboxApp.Wizard
             }
         }
 
-        private DTE _dte;
-        private Solution _solution;
 
         public void BeforeOpeningFile(ProjectItem projectItem)
         {
@@ -52,11 +55,16 @@ namespace ZetboxApp.Wizard
         public void RunStarted(object automationObject, Dictionary<string, string> replacementsDictionary, WizardRunKind runKind, object[] customParams)
         {
             _dte = (DTE)automationObject;
+            _messages = new Messages(_dte);
+            _messages.WriteLine("Creating zetbox project");
+
             _wrongProjectFolder = replacementsDictionary["$destinationdirectory$"];
             _solutionFolder = Path.GetDirectoryName(_wrongProjectFolder);
             _templatePath = Path.GetFullPath(Path.Combine(Path.GetDirectoryName((string)customParams[0]), ".."));
             _solutionName = replacementsDictionary["$safeprojectname$"];
             replacementsDictionary.Add("$safesolutionname$", _solutionName);
+
+            _shell = new Shell(_messages, _solutionFolder);
 
             var dlg = new WizardForm(_solutionName);
             if (dlg.ShowDialog() == DialogResult.OK)
@@ -71,6 +79,7 @@ namespace ZetboxApp.Wizard
             }
             else
             {
+                _messages.WriteLine("Aborted by user");
                 throw new WizardCancelledException("Aborted by user");
             }
 
@@ -82,7 +91,9 @@ namespace ZetboxApp.Wizard
             try
             {
                 _solution = _dte.Solution;
-                _solution.SaveAs((string)_solution.Properties.Item("Path").Value);
+
+                var solutionFile = (string)_solution.Properties.Item("Path").Value;
+                _solution.SaveAs(solutionFile);
 
                 ExtractSolutionItems();
                 MoveProjects();
@@ -90,6 +101,17 @@ namespace ZetboxApp.Wizard
                 SetupConfigurationManager();
                 SetProjectReferences();
                 SetStartupProject();
+
+                foreach (Project prj in _solution.Projects)
+                {
+                    prj.Save();
+                }
+                _solution.SaveAs(solutionFile);
+
+                if (MessageBox.Show("Template created successfully. To finish project setup, zbResetAll.cmd must be executed.\n\nExecute now?", "Templated created", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    _shell.ExecuteAsync("ZbResetAll.cmd");
+                }
             }
             catch (Exception ex)
             {
@@ -99,12 +121,15 @@ namespace ZetboxApp.Wizard
                 sb.AppendLine();
                 sb.Append(ex.ToString());
 
+                _messages.WriteLine(sb.ToString());
                 MessageBox.Show(sb.ToString(), "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void SetupConfigurationManager()
         {
+            _messages.WriteLine("Setting up configuration");
+
             var config = _solution.SolutionBuild.SolutionConfigurations.Item("Linux.Debug");
             foreach (SolutionContext ctx in config.SolutionContexts)
             {
@@ -121,6 +146,8 @@ namespace ZetboxApp.Wizard
 
         private void AddImportTargets()
         {
+            _messages.WriteLine("Adding import targets");
+
             var msBuildEngine = new Microsoft.Build.BuildEngine.Engine();
 
             foreach (Project prj in _solution.Projects)
@@ -181,6 +208,8 @@ namespace ZetboxApp.Wizard
 
         private void SetProjectReferences()
         {
+            _messages.WriteLine("Setting up project references");
+
             var allProjects = new Dictionary<string, Project>();
             foreach (Project prj in _solution.Projects)
             {
@@ -226,11 +255,15 @@ namespace ZetboxApp.Wizard
 
         private void SetStartupProject()
         {
+            _messages.WriteLine("Setting startup project");
+
             _dte.Solution.Properties.Item("StartupProject").Value = ToProjectName("WPF");
         }
 
         private void MoveProjects()
         {
+            _messages.WriteLine("Moving projects");
+
             var projects = new List<Project>();
             foreach (Project project in _solution.Projects)
             {
@@ -254,6 +287,8 @@ namespace ZetboxApp.Wizard
 
         private void ExtractSolutionItems()
         {
+            _messages.WriteLine("Extracting solution items");
+
             var assembly = typeof(SolutionWizard).Assembly;
             foreach (var res in assembly.GetManifestResourceNames())
             {
@@ -338,24 +373,17 @@ namespace ZetboxApp.Wizard
                 newProject = _solution.AddFromFile(newProjectFilename, false);
             }
 
-            Directory.Delete(projectDir, true);
-        }
-
-        private void ShellExecute(string file)
-        {
-            if (string.IsNullOrEmpty(file)) throw new ArgumentNullException("file");
-
-            System.Diagnostics.ProcessStartInfo si = new System.Diagnostics.ProcessStartInfo();
-            si.UseShellExecute = true;
-            si.WorkingDirectory = _solutionFolder;
-            si.FileName = file;
-            var process = System.Diagnostics.Process.Start(si);
-            process.WaitForExit();
-            if (process.ExitCode > 0)
+            try
             {
-                MessageBox.Show("Error executing " + file, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Directory.Delete(projectDir, true);
+            }
+            catch
+            {
+                // Windows & Delete: I don't f**king care
             }
         }
+
+        
 
         private static string ToProjectName(string suffix)
         {
