@@ -170,10 +170,10 @@ namespace Zetbox.API.Server
                });
 
             builder
-                .RegisterCmdLineAction("syncidentities", "synchronices local and domain users with Zetbox Identities",
-                scope =>
+                .RegisterCmdLineAction("syncidentities:", "synchronices local and domain users with Zetbox Identities. Optionally a implementation-defined source can be specified",
+                (scope, args) =>
                 {
-                    scope.Resolve<IServer>().SyncIdentities();
+                    scope.Resolve<IServer>().SyncIdentities(args);
                 });
 
             builder

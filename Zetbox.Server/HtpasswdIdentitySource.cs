@@ -30,11 +30,13 @@ namespace Zetbox.Server
     {
         public static readonly string Path = ".htpasswd";
 
-        public IEnumerable<IdentitySourceItem> GetAllIdentities()
+        public IEnumerable<IdentitySourceItem> GetAllIdentities(string source)
         {
-            if (File.Exists(Path))
+            var realpath = source.IfNullOrWhiteSpace(Path);
+
+            if (File.Exists(realpath))
             {
-                using (var sr = new StreamReader(Path))
+                using (var sr = new StreamReader(realpath))
                 {
                     while (!sr.EndOfStream)
                     {

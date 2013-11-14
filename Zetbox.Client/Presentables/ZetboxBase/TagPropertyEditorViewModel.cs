@@ -50,6 +50,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             if (propertyName == "Value")
             {
                 EnsureValuePossible(Value);
+                _filter = SplitValueItems(Value);
+                OnPropertyChanged("FilteredPossibleValuesAsync");
             }
         }
 
@@ -75,6 +77,27 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
+        private string[] _filter = null;
+        public IEnumerable<TagEntryViewModel> FilteredPossibleValuesAsync
+        {
+            get
+            {
+                TriggerPossibleValuesROAsync();
+                if (_possibleValuesRO == null) return null;
+                if (_filter != null)
+                {
+                    var predicate = LinqExtensions.False<TagEntryViewModel>();
+                    foreach (var str in _filter)
+                    {
+                        var localStr = str.ToLower();
+                        predicate = predicate.OrElse<TagEntryViewModel>(i => i.Text.ToLower().Contains(localStr));
+                    }
+                    return _possibleValuesRO.AsQueryable().Where(predicate);
+                }
+                return _possibleValuesRO;
+            }
+        }
+
         private void TriggerPossibleValuesROAsync()
         {
             if (_getPossibleValuesROTask == null)
@@ -87,6 +110,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                     _possibleValuesRO = new ReadOnlyObservableCollection<TagEntryViewModel>(_possibleValues);
                     EnsureValuePossible(Value);
                     OnPropertyChanged("PossibleValuesAsync");
+                    OnPropertyChanged("FilteredPossibleValuesAsync");
                 });
             }
         }
@@ -141,14 +165,14 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 {
                     var lowerItem = item.ToLower().Trim();
                     var tagItem = _possibleValues.FirstOrDefault(i => i.Text.ToLower() == lowerItem);
-                    if (tagItem == null)
+                    if (tagItem == null && !DataContext.IsReadonly)
                     {
                         // Add if not found
                         var newTag = DataContext.Create<TagCache>();
                         newTag.Name = item;
                         _possibleValues.Add(new TagEntryViewModel(newTag, this, true));
                     }
-                    else
+                    else if(tagItem != null)
                     {
                         tagItem.IsChecked = true;
                     }
@@ -158,7 +182,10 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
                 foreach (var toDelete in _possibleValues.Where(i => i.CurrentlyAdded == true && !allItems.Contains(i.Text.ToLower())).ToList())
                 {
-                    DataContext.Delete(toDelete.Tag);
+                    if (!DataContext.IsReadonly)
+                    {
+                        DataContext.Delete(toDelete.Tag);
+                    }
                     _possibleValues.Remove(toDelete);
                 }
 

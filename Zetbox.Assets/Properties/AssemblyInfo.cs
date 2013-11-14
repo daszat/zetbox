@@ -35,9 +35,9 @@ using Zetbox.API;
 [assembly: ComVisible(false)]
 
 // The following tags will be replaced by the -checkout job on jenkins to current values
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.5802.0")]
-[assembly: AssemblyInformationalVersion("1.0.5802-zdev")]
+[assembly: AssemblyVersion("1.1.0.0")]
+[assembly: AssemblyFileVersion("1.1.1.0")]
+[assembly: AssemblyInformationalVersion("1.1.1-zdev")]
 
 // The Common Language Specification (CLS) defines naming restrictions, data types,
 // and rules to which assemblies must conform if they are to be used across programming

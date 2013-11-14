@@ -5,7 +5,6 @@
     <Culture>de-AT</Culture>
     <UICulture>de-AT</UICulture>
     <DocumentStore>P:\Zetbox\DocumentStore\Client\</DocumentStore>
-    <DevelopmentEnvironment>false</DevelopmentEnvironment>
     <Modules>
       <Module>Zetbox.Client.ClientModule, Zetbox.Client</Module>
       <Module>Zetbox.Client.WPF.WPFModule, Zetbox.Client.WPF</Module>

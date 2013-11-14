@@ -136,6 +136,12 @@ namespace Zetbox.App.Base
         }
 
         [Invocation]
+        public static void postSet_Constraints(Property obj)
+        {
+            obj.Recalculate("CodeTemplate");
+        }
+
+        [Invocation]
         public static void get_CodeTemplate(Property obj, PropertyGetterEventArgs<string> e)
         {
             StringBuilder sb = new StringBuilder();

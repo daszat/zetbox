@@ -220,13 +220,13 @@ namespace Zetbox.Server
             }
         }
 
-        public void SyncIdentities()
+        public void SyncIdentities(string source)
         {
-            using (Log.InfoTraceMethodCall("SyncIdentities"))
+            using (Log.InfoTraceMethodCall("SyncIdentities", "source=" + source))
             using (var subContainer = container.BeginLifetimeScope())
             {
                 IZetboxContext ctx = subContainer.Resolve<IZetboxServerContext>();
-                var userList = subContainer.Resolve<IIdentitySource>().GetAllIdentities();
+                var userList = subContainer.Resolve<IIdentitySource>().GetAllIdentities(source);
 
                 var identities = ctx.GetQuery<Zetbox.App.Base.Identity>().ToLookup(k => k.UserName.ToUpper());
                 var everyone = Zetbox.NamedObjects.Base.Groups.Everyone.Find(ctx);

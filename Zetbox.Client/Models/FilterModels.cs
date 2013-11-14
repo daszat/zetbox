@@ -100,26 +100,39 @@ namespace Zetbox.Client.Models
         {
             var last = props.Last();
             var label = string.Join(", ", props.Select(i => i.GetLabel()).ToArray());
+            var cfg = last.FilterConfiguration;
+            var kind = cfg.IfNotNull(c => c.RequestedKind);
+            ViewModelDescriptor argVMDL = null /* cfg.ArgumentViewModel*/ ?? last.ValueModelDescriptor;
+            var argKind = argVMDL.IfNotNull(a => a.DefaultEditorKind);
+
+            FilterModel mdl;
             if (last is DateTimeProperty)
             {
-                return RangeFilterModel.Create(frozenCtx, label, FilterValueSource.FromProperty(props), typeof(DateTime), null, null);
+                mdl = RangeFilterModel.Create(frozenCtx, label, FilterValueSource.FromProperty(props), typeof(DateTime), kind, argKind, argumentViewModelDescriptor: argVMDL);
             }
             else if (last is IntProperty)
             {
-                return RangeFilterModel.Create(frozenCtx, label, FilterValueSource.FromProperty(props), typeof(int), null, null);
+                mdl = RangeFilterModel.Create(frozenCtx, label, FilterValueSource.FromProperty(props), typeof(int), kind, argKind, argumentViewModelDescriptor: argVMDL);
             }
             else if (last is DecimalProperty)
             {
-                return RangeFilterModel.Create(frozenCtx, label, FilterValueSource.FromProperty(props), typeof(decimal), null, null);
+                mdl = RangeFilterModel.Create(frozenCtx, label, FilterValueSource.FromProperty(props), typeof(decimal), kind, argKind, argumentViewModelDescriptor: argVMDL);
             }
             else if (last is DoubleProperty)
             {
-                return RangeFilterModel.Create(frozenCtx, label, FilterValueSource.FromProperty(props), typeof(double), null, null);
+                mdl = RangeFilterModel.Create(frozenCtx, label, FilterValueSource.FromProperty(props), typeof(double), kind, argKind, argumentViewModelDescriptor: argVMDL);
             }
             else
             {
-                return SingleValueFilterModel.Create(ctx, frozenCtx, label, props);
+                mdl = SingleValueFilterModel.Create(ctx, frozenCtx, label, props, kind, argKind, argumentViewModelDescriptor: argVMDL);
             }
+
+            // Don't set requiered here - this method is used for custom filter. Caller can set it self.
+            if (cfg != null)
+            {
+                mdl.RefreshOnFilterChanged = cfg.RefreshOnFilterChanged;
+            }
+            return mdl;
         }
 
         public FilterModel()
@@ -359,7 +372,7 @@ namespace Zetbox.Client.Models
             return Create(frozenCtx, label, FilterValueSource.FromExpression(predicate), enumDef, requestedKind, requestedArgumentKind);
         }
 
-        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, IFilterValueSource predicate, Guid enumDef, ControlKind requestedKind, ControlKind requestedArgumentKind)
+        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, IFilterValueSource predicate, Guid enumDef, ControlKind requestedKind, ControlKind requestedArgumentKind, ViewModelDescriptor argumentViewModelDescriptor = null)
         {
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
 
@@ -374,7 +387,7 @@ namespace Zetbox.Client.Models
             };
             fmdl.FilterArguments.Add(new FilterArgumentConfig(
                 new EnumerationValueModel(label, "", true, false, requestedArgumentKind, frozenCtx.FindPersistenceObject<Enumeration>(enumDef)),
-                ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_EnumerationValueViewModel.Find(frozenCtx)));
+                argumentViewModelDescriptor ?? ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_EnumerationValueViewModel.Find(frozenCtx)));
             return fmdl;
         }
 
@@ -389,7 +402,7 @@ namespace Zetbox.Client.Models
             return Create(frozenCtx, label, FilterValueSource.FromExpression(predicate), referencedClass, requestedKind, requestedArgumentKind);
         }
 
-        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, IFilterValueSource predicate, ObjectClass referencedClass, ControlKind requestedKind, ControlKind requestedArgumentKind)
+        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, IFilterValueSource predicate, ObjectClass referencedClass, ControlKind requestedKind, ControlKind requestedArgumentKind, ViewModelDescriptor argumentViewModelDescriptor = null)
         {
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
 
@@ -404,11 +417,11 @@ namespace Zetbox.Client.Models
             };
             fmdl.FilterArguments.Add(new FilterArgumentConfig(
                 new ObjectReferenceValueModel(label, "", true, false, requestedArgumentKind, referencedClass),
-                ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_ObjectReferenceViewModel.Find(frozenCtx)));
+                argumentViewModelDescriptor ?? ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_ObjectReferenceViewModel.Find(frozenCtx)));
             return fmdl;
         }
 
-        public static SingleValueFilterModel Create(IZetboxContext ctx, IFrozenContext frozenCtx, string label, IFilterValueSource predicate, CompoundObject cpObj, ControlKind requestedKind, ControlKind requestedArgumentKind)
+        public static SingleValueFilterModel Create(IZetboxContext ctx, IFrozenContext frozenCtx, string label, IFilterValueSource predicate, CompoundObject cpObj, ControlKind requestedKind, ControlKind requestedArgumentKind, ViewModelDescriptor argumentViewModelDescriptor = null)
         {
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
 
@@ -424,7 +437,7 @@ namespace Zetbox.Client.Models
             };
             fmdl.FilterArguments.Add(new FilterArgumentConfig(
                 new CompoundObjectValueModel(ctx, label, "", true, false, requestedArgumentKind, cpObj),
-                cpObj.DefaultPropertyViewModelDescriptor ?? ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_CompoundObjectPropertyViewModel.Find(frozenCtx)));
+                argumentViewModelDescriptor ?? cpObj.DefaultPropertyViewModelDescriptor ?? ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_CompoundObjectPropertyViewModel.Find(frozenCtx)));
             return fmdl;
         }
 
@@ -438,7 +451,7 @@ namespace Zetbox.Client.Models
             return Create(frozenCtx, label, FilterValueSource.FromExpression(predicate), typeof(T), requestedKind, requestedArgumentKind);
         }
 
-        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, IFilterValueSource predicate, Type propType, ControlKind requestedKind, ControlKind requestedArgumentKind)
+        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, IFilterValueSource predicate, Type propType, ControlKind requestedKind, ControlKind requestedArgumentKind, ViewModelDescriptor argumentViewModelDescriptor = null)
         {
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
             if (propType == null) throw new ArgumentNullException("propType");
@@ -457,22 +470,22 @@ namespace Zetbox.Client.Models
             BaseValueModel mdl = null;
             if (propType == typeof(decimal))
             {
-                vDesc = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableDecimalPropertyViewModel.Find(frozenCtx);
+                vDesc = argumentViewModelDescriptor ?? ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableDecimalPropertyViewModel.Find(frozenCtx);
                 mdl = new DecimalValueModel(label, "", true, false, requestedArgumentKind);
             }
             else if (propType == typeof(int))
             {
-                vDesc = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableIntPropertyViewModel.Find(frozenCtx);
+                vDesc = argumentViewModelDescriptor ?? ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableIntPropertyViewModel.Find(frozenCtx);
                 mdl = new NullableStructValueModel<int>(label, "", true, false, requestedArgumentKind);
             }
             else if (propType == typeof(double))
             {
-                vDesc = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableDoublePropertyViewModel.Find(frozenCtx);
+                vDesc = argumentViewModelDescriptor ?? ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableDoublePropertyViewModel.Find(frozenCtx);
                 mdl = new NullableStructValueModel<double>(label, "", true, false, requestedArgumentKind);
             }
             else if (propType == typeof(bool))
             {
-                vDesc = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableBoolPropertyViewModel.Find(frozenCtx);
+                vDesc = argumentViewModelDescriptor ?? ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableBoolPropertyViewModel.Find(frozenCtx);
                 fmdl.RefreshOnFilterChanged = true;
                 if (requestedArgumentKind == null)
                 {
@@ -482,7 +495,7 @@ namespace Zetbox.Client.Models
             }
             else if (propType == typeof(string))
             {
-                vDesc = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_StringValueViewModel.Find(frozenCtx);
+                vDesc = argumentViewModelDescriptor ?? ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_StringValueViewModel.Find(frozenCtx);
                 mdl = new ClassValueModel<string>(label, "", true, false, requestedArgumentKind);
                 fmdl.Operator = FilterOperators.Contains;
             }
@@ -510,41 +523,41 @@ namespace Zetbox.Client.Models
             return Create(ctx, frozenCtx, label, new[] { prop }, requestedKind, requestedArgumentKind);
         }
 
-        public static SingleValueFilterModel Create(IZetboxContext ctx, IFrozenContext frozenCtx, string label, IEnumerable<Property> props, ControlKind requestedKind, ControlKind requestedArgumentKind)
+        public static SingleValueFilterModel Create(IZetboxContext ctx, IFrozenContext frozenCtx, string label, IEnumerable<Property> props, ControlKind requestedKind, ControlKind requestedArgumentKind, ViewModelDescriptor argumentViewModelDescriptor = null)
         {
             var predicate = FilterValueSource.FromProperty(props);
             var last = props.Last();
             if (last is DecimalProperty)
             {
-                return Create(frozenCtx, label, predicate, typeof(decimal), requestedKind, requestedArgumentKind);
+                return Create(frozenCtx, label, predicate, typeof(decimal), requestedKind, requestedArgumentKind, argumentViewModelDescriptor: argumentViewModelDescriptor);
             }
             else if (last is IntProperty)
             {
-                return Create(frozenCtx, label, predicate, typeof(int), requestedKind, requestedArgumentKind);
+                return Create(frozenCtx, label, predicate, typeof(int), requestedKind, requestedArgumentKind, argumentViewModelDescriptor: argumentViewModelDescriptor);
             }
             else if (last is DoubleProperty)
             {
-                return Create(frozenCtx, label, predicate, typeof(double), requestedKind, requestedArgumentKind);
+                return Create(frozenCtx, label, predicate, typeof(double), requestedKind, requestedArgumentKind, argumentViewModelDescriptor: argumentViewModelDescriptor);
             }
             else if (last is StringProperty)
             {
-                return Create(frozenCtx, label, predicate, typeof(string), requestedKind, requestedArgumentKind);
+                return Create(frozenCtx, label, predicate, typeof(string), requestedKind, requestedArgumentKind, argumentViewModelDescriptor: argumentViewModelDescriptor);
             }
             else if (last is BoolProperty)
             {
-                return Create(frozenCtx, label, predicate, typeof(bool), requestedKind, requestedArgumentKind);
+                return Create(frozenCtx, label, predicate, typeof(bool), requestedKind, requestedArgumentKind, argumentViewModelDescriptor: argumentViewModelDescriptor);
             }
             else if (last is EnumerationProperty)
             {
-                return Create(frozenCtx, label, predicate, ((EnumerationProperty)last).Enumeration.ExportGuid, requestedKind, requestedArgumentKind);
+                return Create(frozenCtx, label, predicate, ((EnumerationProperty)last).Enumeration.ExportGuid, requestedKind, requestedArgumentKind, argumentViewModelDescriptor: argumentViewModelDescriptor);
             }
             else if (last is ObjectReferenceProperty)
             {
-                return Create(frozenCtx, label, predicate, ((ObjectReferenceProperty)last).GetReferencedObjectClass(), requestedKind, requestedArgumentKind);
+                return Create(frozenCtx, label, predicate, ((ObjectReferenceProperty)last).GetReferencedObjectClass(), requestedKind, requestedArgumentKind, argumentViewModelDescriptor: argumentViewModelDescriptor);
             }
             else if (last is CompoundObjectProperty)
             {
-                return Create(ctx, frozenCtx, label, predicate, ((CompoundObjectProperty)last).CompoundObjectDefinition, requestedKind, requestedArgumentKind);
+                return Create(ctx, frozenCtx, label, predicate, ((CompoundObjectProperty)last).CompoundObjectDefinition, requestedKind, requestedArgumentKind, argumentViewModelDescriptor: argumentViewModelDescriptor);
             }
             else
             {
@@ -868,7 +881,7 @@ namespace Zetbox.Client.Models
             return Create(frozenCtx, label, FilterValueSource.FromExpression(predicate), type, requestedKind, requestedArgumentKind);
         }
 
-        public static RangeFilterModel Create(IFrozenContext frozenCtx, string label, IFilterValueSource predicate, Type type, ControlKind requestedKind, ControlKind requestedArgumentKind)
+        public static RangeFilterModel Create(IFrozenContext frozenCtx, string label, IFilterValueSource predicate, Type type, ControlKind requestedKind, ControlKind requestedArgumentKind, ViewModelDescriptor argumentViewModelDescriptor = null)
         {
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
             if (type == null) throw new ArgumentNullException("type");
@@ -886,25 +899,25 @@ namespace Zetbox.Client.Models
             BaseValueModel mdl2 = null;
             if (type == typeof(decimal))
             {
-                vDesc = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableDecimalPropertyViewModel.Find(frozenCtx);
+                vDesc = argumentViewModelDescriptor ?? ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableDecimalPropertyViewModel.Find(frozenCtx);
                 mdl1 = new DecimalValueModel("", "", true, false, requestedArgumentKind);
                 mdl2 = new DecimalValueModel("", "", true, false, requestedArgumentKind);
             }
             else if (type == typeof(int))
             {
-                vDesc = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableIntPropertyViewModel.Find(frozenCtx);
+                vDesc = argumentViewModelDescriptor ?? ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableIntPropertyViewModel.Find(frozenCtx);
                 mdl1 = new NullableStructValueModel<int>("", "", true, false, requestedArgumentKind);
                 mdl2 = new NullableStructValueModel<int>("", "", true, false, requestedArgumentKind);
             }
             else if (type == typeof(double))
             {
-                vDesc = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableDoublePropertyViewModel.Find(frozenCtx);
+                vDesc = argumentViewModelDescriptor ?? ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableDoublePropertyViewModel.Find(frozenCtx);
                 mdl1 = new NullableStructValueModel<double>("", "", true, false, requestedArgumentKind);
                 mdl2 = new NullableStructValueModel<double>("", "", true, false, requestedArgumentKind);
             }
             else if (type == typeof(DateTime))
             {
-                vDesc = ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableDateTimePropertyViewModel.Find(frozenCtx);
+                vDesc = argumentViewModelDescriptor ?? ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableDateTimePropertyViewModel.Find(frozenCtx);
                 mdl1 = new DateTimeValueModel("", "", true, false, DateTimeStyles.Date, requestedArgumentKind);
                 mdl2 = new DateTimeValueModel("", "", true, false, DateTimeStyles.Date, requestedArgumentKind);
             }

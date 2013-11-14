@@ -22,13 +22,14 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
     public partial class InstanceListViewModel
     {
-        private string _orderByExpression = null;
-        private System.ComponentModel.ListSortDirection _sortDirection = System.ComponentModel.ListSortDirection.Ascending;
+        private string __orderByExpression = null;
+        private System.ComponentModel.ListSortDirection __sortDirection = System.ComponentModel.ListSortDirection.Ascending;
+
         private string _initialOrderByExpression = null;
         private System.ComponentModel.ListSortDirection _initialSortDirection = System.ComponentModel.ListSortDirection.Ascending;
 
-        public string SortProperty { get { return _orderByExpression; } }
-        public System.ComponentModel.ListSortDirection SortDirection { get { return _sortDirection; } }
+        public string SortProperty { get { return orderByExpression; } }
+        public System.ComponentModel.ListSortDirection SortDirection { get { return sortDirection; } }
 
         private bool _useNaturalSortOrder = false;
         /// <summary>
@@ -54,32 +55,28 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
+        private bool __orderByExpressionInitialized = false;
+        private string orderByExpression
+        {
+            get
+            {
+                EnsureOrderByExpression();
+                return __orderByExpression;
+            }
+
+        }
+        private System.ComponentModel.ListSortDirection sortDirection
+        {
+            get
+            {
+                return __sortDirection;
+            }
+        }
+
+
         public void ResetSort(bool refresh = true)
         {
-            if (_initialOrderByExpression != null)
-            {
-                _orderByExpression = _initialOrderByExpression;
-                _sortDirection = _initialSortDirection;
-            }
-            else if (UseNaturalSortOrder)
-            {
-                _orderByExpression = null;
-                _sortDirection = System.ComponentModel.ListSortDirection.Ascending;
-            }
-            else
-            {
-                var sortProp = _type.AndParents(c => c.BaseObjectClass).SelectMany(c => c.Properties).Where(p => p.DefaultSortPriority != null).OrderBy(p => p.DefaultSortPriority).FirstOrDefault();
-                if (sortProp != null)
-                {
-                    _orderByExpression = ColumnDisplayModel.FormatDynamicOrderByExpression(sortProp);
-                    _sortDirection = System.ComponentModel.ListSortDirection.Ascending;
-                }
-                else
-                {
-                    _orderByExpression = null;
-                    _sortDirection = System.ComponentModel.ListSortDirection.Ascending;
-                }
-            }
+            __orderByExpressionInitialized = false;
 
             if (refresh)
             {
@@ -94,11 +91,43 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
+        private void EnsureOrderByExpression()
+        {
+            if (__orderByExpressionInitialized) return;
+            __orderByExpressionInitialized = true;
+
+            if (_initialOrderByExpression != null)
+            {
+                __orderByExpression = _initialOrderByExpression;
+                __sortDirection = _initialSortDirection;
+            }
+            else if (UseNaturalSortOrder)
+            {
+                __orderByExpression = null;
+                __sortDirection = System.ComponentModel.ListSortDirection.Ascending;
+            }
+            else
+            {
+                var sortProp = _type.AndParents(c => c.BaseObjectClass).SelectMany(c => c.Properties).Where(p => p.DefaultSortPriority != null).OrderBy(p => p.DefaultSortPriority).FirstOrDefault();
+                if (sortProp != null)
+                {
+                    __orderByExpression = ColumnDisplayModel.FormatDynamicOrderByExpression(sortProp);
+                    __sortDirection = System.ComponentModel.ListSortDirection.Ascending;
+                }
+                else
+                {
+                    __orderByExpression = null;
+                    __sortDirection = System.ComponentModel.ListSortDirection.Ascending;
+                }
+            }
+        }
+
         public void Sort(string orderByExpression, System.ComponentModel.ListSortDirection direction)
         {
             if (string.IsNullOrEmpty(orderByExpression)) throw new ArgumentNullException("orderByExpression");
-            _orderByExpression = orderByExpression;
-            _sortDirection = direction;
+            __orderByExpressionInitialized = true;
+            __orderByExpression = orderByExpression;
+            __sortDirection = direction;
             if (_instancesFromServer.Count < Helper.MAXLISTCOUNT)
             {
                 UpdateFilteredInstances();
@@ -117,9 +146,9 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         public void SetInitialSort(string orderByExpression, System.ComponentModel.ListSortDirection direction)
         {
             if (string.IsNullOrEmpty(orderByExpression)) throw new ArgumentNullException("orderByExpression");
+            __orderByExpressionInitialized = false;
             _initialOrderByExpression = orderByExpression;
             _initialSortDirection = direction;
-            ResetSort(refresh: false);
         }
     }
 }

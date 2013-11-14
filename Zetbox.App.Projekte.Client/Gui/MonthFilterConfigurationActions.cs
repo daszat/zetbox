@@ -41,7 +41,10 @@ namespace Zetbox.App.GUI
         [Invocation]
         public static void CreateFilterModel(Zetbox.App.GUI.MonthFilterConfiguration obj, MethodReturnEventArgs<IFilterModel> e, Zetbox.API.IZetboxContext ctx)
         {
-            e.Result = MonthValueFilterModel.Create(FrozenContext, obj.GetLabel(), FilterValueSource.FromProperty(obj.Property), obj.IsCurrentMonthDefault ?? false);
+            var mdl = MonthValueFilterModel.Create(FrozenContext, obj.GetLabel(), FilterValueSource.FromProperty(obj.Property), obj.IsCurrentMonthDefault ?? false);
+            mdl.Required = obj.Required;
+            mdl.RefreshOnFilterChanged = obj.RefreshOnFilterChanged;
+            e.Result = mdl;
         }
 
         [Invocation]

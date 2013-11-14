@@ -41,7 +41,7 @@ namespace Zetbox.App.GUI
         [Invocation]
         public static void CreateFilterModel(Zetbox.App.GUI.DateRangeFilterConfiguration obj, MethodReturnEventArgs<IFilterModel> e, Zetbox.API.IZetboxContext ctx)
         {
-            e.Result = DateRangeFilterModel.Create(
+            var mdl = DateRangeFilterModel.Create(
                 FrozenContext,
                 obj.GetLabel(),
                 FilterValueSource.FromProperty(obj.Property),
@@ -49,6 +49,9 @@ namespace Zetbox.App.GUI
                 obj.IsCurrentYearDefault ?? false,
                 obj.IsCurrentQuaterDefault ?? false,
                 obj.IsCurrentMonthDefault ?? false);
+            mdl.Required = obj.Required;
+            mdl.RefreshOnFilterChanged = obj.RefreshOnFilterChanged;
+            e.Result = mdl;
         }
 
         [Invocation]

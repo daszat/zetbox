@@ -1410,7 +1410,7 @@
                         Relationship="Model.FK_ControlKind_has_Module"
                         FromRole="ControlKind"
                         ToRole="Module" />
-    <Property Name="Name" Type="String" Nullable="true" MaxLength="1000"  />
+    <Property Name="Name" Type="String" Nullable="true" MaxLength="200"  />
     <NavigationProperty Name="ParentImpl"
                         Relationship="Model.FK_ChildControlKinds_have_a_Parent"
                         FromRole="ChildControlKinds"
@@ -1696,7 +1696,7 @@
                         Relationship="Model.FK_FilterConfiguration_has_Module"
                         FromRole="FilterConfiguration"
                         ToRole="Module" />
-    <Property Name="RefreshOnFilterChanged" Type="Boolean" Nullable="true"  />
+    <Property Name="RefreshOnFilterChanged" Type="Boolean" Nullable="false"  />
     <NavigationProperty Name="RequestedKindImpl"
                         Relationship="Model.FK_FilterConfiguration_has_RequestedKind"
                         FromRole="FilterConfiguration"

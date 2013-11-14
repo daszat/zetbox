@@ -63,7 +63,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         /// <param name="errorReporter"></param>
         /// <param name="dataCtx">the data context to use</param>
         /// <param name="parent">Parent ViewModel</param>
-        /// <param name="type">the data type to model. If null, qry must be a Query of a valid DataType</param>
+        /// <param name="type">the data type to model. Must not be null.</param>
         /// <param name="qry">optional: the query to display. If null, Query will be constructed from type</param>
         public InstanceListViewModel(
             IViewModelDependencies appCtx,
@@ -98,7 +98,6 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 _query = qry;
             }
 
-            ResetSort(refresh: false);
             dataCtx.IsElevatedModeChanged += new EventHandler(dataCtx_IsElevatedModeChanged);
         }
 
@@ -752,11 +751,11 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             var result = FilterList.AppendFilter(_query());
 
-            if (!string.IsNullOrEmpty(_orderByExpression))
+            if (!string.IsNullOrEmpty(orderByExpression))
             {
                 result = result.OrderBy(string.Format("{0} {1}",            // Sorting CompoundObject does not work
-                                _orderByExpression,                         // Maybe we should implement a custom comparer
-                                _sortDirection == System.ComponentModel.ListSortDirection.Descending ? "desc" : string.Empty));
+                                orderByExpression,                         // Maybe we should implement a custom comparer
+                                sortDirection == System.ComponentModel.ListSortDirection.Descending ? "desc" : string.Empty));
             }
             else if (UseNaturalSortOrder)
             {
@@ -841,15 +840,15 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             var tmp = FilterList.AppendPostFilter(new List<DataObjectViewModel>(_instancesFromServer));
 
             // Sort
-            if (!string.IsNullOrEmpty(_orderByExpression))
+            if (!string.IsNullOrEmpty(orderByExpression))
             {
                 _filteredInstances =
                     new List<DataObjectViewModel>(
                         tmp.Select(vm => vm.Object)                            // Back to a plain list of IDataObjects
                            .AsQueryable(this.InterfaceType.Type)               // To a typed List
                            .OrderBy(string.Format("{0} {1}",                // Sorting CompoundObject does not work
-                                        _orderByExpression,                         // Maybe we should implement a custom comparer
-                                        _sortDirection == System.ComponentModel.ListSortDirection.Descending ? "desc" : string.Empty))
+                                        orderByExpression,                         // Maybe we should implement a custom comparer
+                                        sortDirection == System.ComponentModel.ListSortDirection.Descending ? "desc" : string.Empty))
                            .Cast<IDataObject>()
                            .Select(obj => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj))
                     );

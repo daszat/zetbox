@@ -74,7 +74,7 @@
                             x:Name="btnClose"
                             Click="btnClose_Click"
                             HorizontalAlignment="Left">Close</Button>
-                    <ListView ItemsSource="{Binding PossibleValuesAsync}"
+                    <ListView ItemsSource="{Binding FilteredPossibleValuesAsync}"
                               VerticalContentAlignment="Center">
                         <ListView.ItemTemplate>
                             <DataTemplate>

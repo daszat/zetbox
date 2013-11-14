@@ -25,12 +25,19 @@ namespace Zetbox.Server
     {
         private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Server");
 
-        public IEnumerable<IdentitySourceItem> GetAllIdentities()
+        public IEnumerable<IdentitySourceItem> GetAllIdentities(string source)
         {
             var userList = new Dictionary<string, IdentitySourceItem>();
 
-            ReadUsers(Environment.UserDomainName, userList);
-            ReadUsers(Environment.MachineName, userList);
+            if (string.IsNullOrWhiteSpace(source))
+            {
+                ReadUsers(Environment.UserDomainName, userList);
+                ReadUsers(Environment.MachineName, userList);
+            }
+            else
+            {
+                ReadUsers(source, userList);
+            }
 
             return userList.Values;
         }

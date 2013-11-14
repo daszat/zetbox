@@ -21,8 +21,10 @@ namespace Zetbox.Unix
 
     public class PosixIdentitySource : IIdentitySource
     {
-        public IEnumerable<IdentitySourceItem> GetAllIdentities()
+        public IEnumerable<IdentitySourceItem> GetAllIdentities(string source)
         {
+            if (!string.IsNullOrWhiteSpace(source)) throw new NotSupportedException("Cannot specify source for PosixIdentitySource");
+
             foreach (var unixUser in UnixUserInfo.GetLocalUsers())
             {
                 yield return new IdentitySourceItem() { DisplayName = unixUser.RealName, UserName = unixUser.UserName };
