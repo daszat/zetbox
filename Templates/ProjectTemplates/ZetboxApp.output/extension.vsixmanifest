@@ -3,10 +3,12 @@
   <Identifier Id="ZetboxApp..b4cb098d-8c91-4360-ae28-bfe70f0ec6ed">
     <Name>ZetboxApp</Name>
     <Author>dasz.at OG</Author>
-    <Version>1.0</Version>
+    <Version>1.1</Version>
     <Description xml:space="preserve">Project and solution templates for zetbox applications.</Description>
     <Locale>1033</Locale>
-    <MoreInfoUrl>http://dasz.at</MoreInfoUrl>
+    <MoreInfoUrl>http://zetbox.at</MoreInfoUrl>
+    <GettingStartedGuide>http://zetbox.at/HowTos/ExampleWorkflow/index.en.html</GettingStartedGuide>
+    <Icon>ZetboxApp.Solution.ico</Icon>
     <SupportedProducts>
       <VisualStudio Version="10.0">
         <Edition>Ultimate</Edition>
@@ -14,7 +16,7 @@
         <Edition>Pro</Edition>
       </VisualStudio>
     </SupportedProducts>
-    <SupportedFrameworkRuntimeEdition MinVersion="3.5" MaxVersion="4.0" />
+    <SupportedFrameworkRuntimeEdition MinVersion="4.0" MaxVersion="4.0" />
   </Identifier>
   <References />
   <Content>
