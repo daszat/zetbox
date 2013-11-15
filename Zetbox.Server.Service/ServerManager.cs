@@ -31,30 +31,36 @@ namespace Zetbox.Server.Service
         : MarshalByRefObject, IZetboxAppDomain, IDisposable
     {
         private IContainer container;
-        private IZetboxAppDomain wcfServer;
 
         public void Start(ZetboxConfig config)
         {
+            if (config == null) { throw new ArgumentNullException("config"); }
             if (container != null) { throw new InvalidOperationException("already started"); }
-            
+
             Logging.Configure();
             AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
 
             container = Program.CreateMasterContainer(config);
 
-            wcfServer = container.Resolve<IZetboxAppDomain>();
-            wcfServer.Start(config);
+            IServiceControlManager scm = null;
+            if (container.TryResolve<IServiceControlManager>(out scm))
+            {
+                Logging.Log.Info("Starting Zetbox Services");
+                scm.Start();
+            }
+            else
+            {
+                Logging.Log.Info("Service control manager not registered");
+            }
         }
 
         public void Stop()
         {
-            if (wcfServer == null) { throw new InvalidOperationException("not yet started"); }
             Dispose();
         }
 
         public void Dispose()
         {
-            if (wcfServer != null) { wcfServer.Stop(); }
             if (container != null) { container.Dispose(); }
         }
     }

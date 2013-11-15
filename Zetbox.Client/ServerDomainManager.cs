@@ -40,18 +40,30 @@ namespace Zetbox.Client
 
         public void Start(ZetboxConfig config)
         {
+            if (config == null) { throw new ArgumentNullException("config"); }
+
             using (Logging.Log.DebugTraceMethodCall("Start", "Starting AppDomain for Server"))
             {
+                var serverConfig = new ZetboxConfig()
+                {
+                    ConfigFilePath = config.ConfigFilePath,
+                    ConfigName = config.ConfigName,
+                    EnableShadowCopy = config.EnableShadowCopy,
+                    HostType = HostType.Server,
+                    IsFallback = false,
+                    Server = config.Server,
+                };
+
                 serverDomain = AppDomain.CreateDomain("ServerAppDomain",
                     AppDomain.CurrentDomain.Evidence,
                     AppDomain.CurrentDomain.SetupInformation);
 
-                AssemblyLoader.Bootstrap(serverDomain, config);
+                AssemblyLoader.Bootstrap(serverDomain, serverConfig);
 
                 serverManager = (IZetboxAppDomain)serverDomain.CreateInstanceAndUnwrap(
                     "Zetbox.Server.Service",
                     "Zetbox.Server.Service.ServerManager");
-                serverManager.Start(config);
+                serverManager.Start(serverConfig);
 
                 if (clientSponsor == null)
                 {
