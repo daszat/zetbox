@@ -25,6 +25,7 @@ namespace Zetbox.Cli
     using Zetbox.API;
     using Zetbox.API.Configuration;
     using Zetbox.API.Utils;
+    using System.Configuration;
 
     /// <summary>
     /// Mainprogram
@@ -105,7 +106,10 @@ namespace Zetbox.Cli
             var builder = Zetbox.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, modules);
 
             // register deployment-specific components
-            builder.RegisterModule(new ConfigurationSettingsReader("clicomponents"));
+            if (ConfigurationManager.GetSection("clicomponents") != null)
+            {
+                builder.RegisterModule(new ConfigurationSettingsReader("clicomponents"));
+            }
 
             var container = builder.Build();
             API.AppDomainInitializer.InitializeFrom(container);
