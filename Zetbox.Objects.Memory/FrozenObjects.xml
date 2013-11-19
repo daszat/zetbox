@@ -17941,6 +17941,7 @@ public static void isValid_DatumVon(Task obj, PropertyIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>Start Datum</ZetboxBase:Description>
+    <GUI:FilterConfiguration>1d5e809e-a657-491a-b70f-f36ffba73281</GUI:FilterConfiguration>
     <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
     <ZetboxBase:Name>DatumVon</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>3fbb42ca-a084-491d-9135-85ed24f1ef78</ZetboxBase:ObjectClass>
@@ -19424,6 +19425,15 @@ public static void GetSummaryReportCanExecReason(Projekt obj, MethodReturnEventA
     <ZetboxBase:Rights>8</ZetboxBase:Rights>
     <ZetboxBase:Group>76d43cf2-4ddf-4a3a-9ad6-28cabfdddff1</ZetboxBase:Group>
   </ZetboxBase:GroupMembership>
+  <GUI:DateRangeFilterConfiguration ExportGuid="1d5e809e-a657-491a-b70f-f36ffba73281">
+    <GUI:ChangedOn>2013-11-19T08:54:40.830241Z</GUI:ChangedOn>
+    <GUI:CreatedOn>2013-11-19T08:54:40.830241Z</GUI:CreatedOn>
+    <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
+    <GUI:RefreshOnFilterChanged>true</GUI:RefreshOnFilterChanged>
+    <GUI:Required>false</GUI:Required>
+    <GUI:ViewModelDescriptor>e77b05ac-9908-4152-afed-f722410cde98</GUI:ViewModelDescriptor>
+    <GUI:Property>1485a7b7-c4d5-456a-a18a-0c409c3eca8e</GUI:Property>
+  </GUI:DateRangeFilterConfiguration>
   <GUI:SinglePropertyFilterConfiguration ExportGuid="2bd32d6c-76c8-442b-aa31-49ce2273e96f">
     <GUI:ChangedOn>2011-12-17T04:26:27.608699Z</GUI:ChangedOn>
     <GUI:CreatedOn>2011-12-17T04:26:27.608699Z</GUI:CreatedOn>
