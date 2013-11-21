@@ -7,6 +7,10 @@
     <CodeGenWorkingPath>../CodeGenNext</CodeGenWorkingPath>
     <CodeGenOutputPath>../CodeGen</CodeGenOutputPath>
     <CodeGenArchivePath>../../Backup</CodeGenArchivePath>
+    <CodeGenBinaryOutputPath>
+      <string>./</string>
+      <string>./HttpService/bin</string>
+    </CodeGenBinaryOutputPath>
     <Modules>
       <Module>Zetbox.Server.ServerModule, Zetbox.Server</Module>
       <Module>Zetbox.DalProvider.NHibernate.NHibernateProvider, Zetbox.DalProvider.NHibernate</Module>
