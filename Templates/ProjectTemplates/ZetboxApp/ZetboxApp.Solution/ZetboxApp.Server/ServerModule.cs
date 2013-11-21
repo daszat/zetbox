@@ -21,6 +21,10 @@ namespace $safeprojectname$
 
             moduleBuilder.RegisterModule<Common.CommonModule>();
 
+            // Register additional module dependencies, for example workflow and parties
+            // moduleBuilder.RegisterModule<Zetbox.Workflow.Server.ServerModule>();
+            // moduleBuilder.RegisterModule<Zetbox.Parties.Server.ServerModule>();
+
             moduleBuilder.RegisterZetboxImplementors(typeof(ServerModule).Assembly);
 
             // Register explicit overrides here
