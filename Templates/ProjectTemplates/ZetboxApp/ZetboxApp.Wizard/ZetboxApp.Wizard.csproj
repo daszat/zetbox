@@ -124,8 +124,12 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="SolutionItems\___gitattributes" />
-    <EmbeddedResource Include="SolutionItems\Configs\CI\Linux\Zetbox___Cli___exe.config" />
-    <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Linux\Zetbox___Cli___exe.config" />
+    <EmbeddedResource Include="SolutionItems\Configs\CI\Linux\Zetbox___Cli___exe.config">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SolutionItems\Configs\CI_Deploy\Linux\Zetbox___Cli___exe.config">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="SolutionItems\___zetbox\fallback.targets">
       <SubType>Designer</SubType>
     </EmbeddedResource>
