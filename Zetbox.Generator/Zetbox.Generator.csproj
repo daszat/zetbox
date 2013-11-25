@@ -138,6 +138,7 @@
     <Compile Include="MsBuildCompiler.cs" />
     <Compile Include="ResourceGenerator\CategoryTagTask.cs" />
     <Compile Include="ResourceGenerator\ApplicationTask.cs" />
+    <Compile Include="ResourceGenerator\NavigationEntriesTask.cs" />
     <Compile Include="ResourceGenerator\ModuleTask.cs" />
     <Compile Include="ResourceGenerator\DataTypeTask.cs" />
     <Compile Include="ResourceGenerator\ResourceGenerator.cs" />

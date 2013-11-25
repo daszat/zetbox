@@ -117,16 +117,160 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DefaultPropertyViewModelDescriptor_description" xml:space="preserve">
-    <value>[Åŉ őpŧįőŉäľ đęƒäūľŧ VįęŵMőđęľĐęşčřįpŧőř ƒőř Přőpęřŧįęş őƒ ŧĥįş ŧypę !!! !!! !!! !!!]</value>
+  <data name="Zetbox.App.Test.DataTypes" xml:space="preserve">
+    <value>DataTypes</value>
   </data>
-  <data name="DefaultPropertyViewModelDescriptor_label" xml:space="preserve">
-    <value>[Đęƒäūľŧ Přőpęřŧy VįęŵMőđęľĐęşčřįpŧőř !!! !!!]</value>
+  <data name="Zetbox.App.Test.DataTypes_color" xml:space="preserve">
+    <value />
   </data>
-  <data name="DefaultViewModelDescriptor_description" xml:space="preserve">
-    <value>[Ŧĥę đęƒäūľŧ VįęŵMőđęľ ŧő ūşę ƒőř ŧĥįş Cőmpőūŉđ Øþĵęčŧ !!! !!! !!!]</value>
+  <data name="at.dasz.DocumentManagement.Document Management" xml:space="preserve">
+    <value>Document Management</value>
   </data>
-  <data name="DefaultViewModelDescriptor_label" xml:space="preserve">
-    <value>[ĐęƒäūľŧVįęŵMőđęľĐęşčřįpŧőř !!! !!!]</value>
+  <data name="at.dasz.DocumentManagement.Document Management_color" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Zetbox.App.Test.Entry 1" xml:space="preserve">
+    <value>Entry 1</value>
+  </data>
+  <data name="Zetbox.App.Test.Entry 1_color" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Zetbox.App.Test.Entry 1" xml:space="preserve">
+    <value>Entry 1</value>
+  </data>
+  <data name="Zetbox.App.Test.Entry 1_color" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Zetbox.App.Test.Entry 2" xml:space="preserve">
+    <value>Entry 2</value>
+  </data>
+  <data name="Zetbox.App.Test.Entry 2_color" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Zetbox.App.Test.Entry 2" xml:space="preserve">
+    <value>Entry 2</value>
+  </data>
+  <data name="Zetbox.App.Test.Entry 2_color" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Zetbox.App.Test.Expenses" xml:space="preserve">
+    <value>Expenses</value>
+  </data>
+  <data name="Zetbox.App.Test.Expenses_color" xml:space="preserve">
+    <value />
+  </data>
+  <data name="at.dasz.DocumentManagement.Imported files" xml:space="preserve">
+    <value>Imported files</value>
+  </data>
+  <data name="at.dasz.DocumentManagement.Imported files_color" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Zetbox.App.Test.InstanceList Test" xml:space="preserve">
+    <value>InstanceList Test</value>
+  </data>
+  <data name="Zetbox.App.Test.InstanceList Test_color" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Zetbox.App.Test.Invoices" xml:space="preserve">
+    <value>Invoices</value>
+  </data>
+  <data name="Zetbox.App.Test.Invoices_color" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Zetbox.App.Projekte.Kalender" xml:space="preserve">
+    <value>Kalender</value>
+  </data>
+  <data name="Zetbox.App.Projekte.Kalender_color" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Zetbox.App.Test.Next Events" xml:space="preserve">
+    <value>Next Events</value>
+  </data>
+  <data name="Zetbox.App.Test.Next Events_color" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Zetbox.App.Test.Objects" xml:space="preserve">
+    <value>Objects</value>
+  </data>
+  <data name="Zetbox.App.Test.Objects_color" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Zetbox.App.Projekte.Projekt Suche" xml:space="preserve">
+    <value>Projekt Suche</value>
+  </data>
+  <data name="Zetbox.App.Projekte.Projekt Suche_color" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Zetbox.App.Test.Report 1" xml:space="preserve">
+    <value>Report 1</value>
+  </data>
+  <data name="Zetbox.App.Test.Report 1_color" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Zetbox.App.Test.Report 2" xml:space="preserve">
+    <value>Report 2</value>
+  </data>
+  <data name="Zetbox.App.Test.Report 2_color" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Zetbox.App.Test.Reports" xml:space="preserve">
+    <value>Reports</value>
+  </data>
+  <data name="Zetbox.App.Test.Reports_color" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Zetbox.App.Projekte.Root" xml:space="preserve">
+    <value>Root</value>
+  </data>
+  <data name="Zetbox.App.Projekte.Root_color" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Zetbox.App.Test.Search 1" xml:space="preserve">
+    <value>Search 1</value>
+  </data>
+  <data name="Zetbox.App.Test.Search 1_color" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Zetbox.App.Test.Search 1" xml:space="preserve">
+    <value>Search 1</value>
+  </data>
+  <data name="Zetbox.App.Test.Search 1_color" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Zetbox.App.Test.Search 2" xml:space="preserve">
+    <value>Search 2</value>
+  </data>
+  <data name="Zetbox.App.Test.Search 2_color" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Zetbox.App.Projekte.Statistik" xml:space="preserve">
+    <value>Statistik</value>
+  </data>
+  <data name="Zetbox.App.Projekte.Statistik_color" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Zetbox.App.Test.Tabbed Left Root" xml:space="preserve">
+    <value>Tabbed Left Root</value>
+  </data>
+  <data name="Zetbox.App.Test.Tabbed Left Root_color" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Zetbox.App.Test.Tabbed Root" xml:space="preserve">
+    <value>Tabbed Root</value>
+  </data>
+  <data name="Zetbox.App.Test.Tabbed Root_color" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Zetbox.App.Test.Tests" xml:space="preserve">
+    <value>Tests</value>
+  </data>
+  <data name="Zetbox.App.Test.Tests_color" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Zetbox.App.Test.Tree Root" xml:space="preserve">
+    <value>Tree Root</value>
+  </data>
+  <data name="Zetbox.App.Test.Tree Root_color" xml:space="preserve">
+    <value />
   </data>
 </root>

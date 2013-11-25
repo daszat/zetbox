@@ -639,12 +639,6 @@
   <data name="Zetbox.App.Base.TableMapping_description" xml:space="preserve">
     <value>[Ķįŉđ őƒ ŧäþľę mäppįŉģ !!! !!!]</value>
   </data>
-  <data name="Zetbox.App.Base.TypeRef" xml:space="preserve">
-    <value>[ŦypęŖęƒ !!! !!! !!! !!! !!! !!!]</value>
-  </data>
-  <data name="Zetbox.App.Base.TypeRef_description" xml:space="preserve">
-    <value>[Ŧĥįş čľäşş mőđęľş ä řęƒęřęŉčę ŧő ä şpęčįƒįč, čőŉčřęŧę Ŧypę. Ğęŉęřįč Ŧypęş ĥävę äľľ päřämęŧęřş ƒįľľęđ. !!! !!! !!! !!! !!! !!! !!!]</value>
-  </data>
   <data name="Zetbox.App.Base.ValueTypeProperty" xml:space="preserve">
     <value>[VäľūęŦypęPřőpęřŧy !!! !!!]</value>
   </data>
@@ -825,9 +819,6 @@
   <data name="Zetbox.App.GUI.TagCache_description" xml:space="preserve">
     <value>[Cäčĥę ęŉŧįŧy ƒőř přőpęřŧy ŧäģş !!! !!!]</value>
   </data>
-  <data name="Zetbox.App.GUI.Template" xml:space="preserve">
-    <value>[Ŧęmpľäŧę !!! !!! !!! !!! !!! !!! !!!]</value>
-  </data>
   <data name="Zetbox.App.GUI.Toolkit" xml:space="preserve">
     <value>[Ŧőőľĸįŧ !!! !!! !!! !!! !!! !!!]</value>
   </data>
@@ -836,9 +827,6 @@
   </data>
   <data name="Zetbox.App.GUI.ViewModelDescriptor" xml:space="preserve">
     <value>[VįęŵMőđęľĐęşčřįpŧőř !!! !!!]</value>
-  </data>
-  <data name="Zetbox.App.GUI.Visual" xml:space="preserve">
-    <value>[Vįşūäľ !!! !!! !!! !!! !!!]</value>
   </data>
   <data name="Zetbox.App.GUI.WidthHint" xml:space="preserve">
     <value>[ŴįđŧĥĦįŉŧ !!! !!! !!! !!! !!! !!! !!! !!!]</value>

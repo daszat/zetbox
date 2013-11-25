@@ -120,12 +120,6 @@
   <data name="ControlKind_label" xml:space="preserve">
     <value>[CőŉŧřőľĶįŉđ !!! !!!]</value>
   </data>
-  <data name="ControlRef_description" xml:space="preserve">
-    <value>[Ŧĥę čőŉŧřőľ įmpľęmęŉŧįŉģ ŧĥįş Vįęŵ !!! !!!]</value>
-  </data>
-  <data name="ControlRef_label" xml:space="preserve">
-    <value>[Đępřįčäŧęđ CőŉŧřőľŖęƒ !!! !!!]</value>
-  </data>
   <data name="ControlTypeRef_description" xml:space="preserve">
     <value>[Ŧĥę čőŉŧřőľ įmpľęmęŉŧįŉģ ŧĥįş Vįęŵ. !!! !!!]</value>
   </data>
@@ -146,12 +140,6 @@
   </data>
   <data name="Module_label" xml:space="preserve">
     <value>[Mőđūľę !!! !!! !!! !!! !!!]</value>
-  </data>
-  <data name="SupportedViewModels_description" xml:space="preserve">
-    <value>[Å Vįęŵ şūppőřŧş őŉę őř mőřę VįęŵMőđęľş !!! !!!]</value>
-  </data>
-  <data name="SupportedViewModels_label" xml:space="preserve">
-    <value>[Đępřįčäŧęđ ŜūppőřŧęđVįęŵMőđęľş !!! !!!]</value>
   </data>
   <data name="Toolkit_description" xml:space="preserve">
     <value>[Ŵĥįčĥ ŧőőľĸįŧ přővįđęş ŧĥįş Vįęŵ !!! !!!]</value>

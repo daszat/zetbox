@@ -121,7 +121,7 @@
     <value>[Å şpäčę şępäřäŧęđ ľįşŧ őƒ čäŧęģőřy ŉämęş čőŉŧäįŉįŉģ ŧĥįş Přőpęřŧy !!! !!! !!! !!!]</value>
   </data>
   <data name="CategoryTags_label" xml:space="preserve">
-    <value>[CäŧęģőřyŦäģş !!! !!!]</value>
+    <value>[Cäŧęģőřy ŧäģş !!! !!!]</value>
   </data>
   <data name="ChangedBy_description" xml:space="preserve">
     <value>[Ĩđęŉŧįŧy ŵĥįčĥ čĥäŉģęđ ŧĥįş őþĵęčŧ !!! !!!]</value>
@@ -158,6 +158,12 @@
   </data>
   <data name="CreatedOn_label" xml:space="preserve">
     <value>[CřęäŧęđØŉ !!! !!! !!! !!! !!! !!! !!! !!!]</value>
+  </data>
+  <data name="DefaultSortPriority_description" xml:space="preserve">
+    <value>[Přőpęřŧįęş ŧĥäŧ ĥävę ä přįőřįŧy şęŧ äřę ūşęđ ŧő őřđęř įŉşŧäŉčę ľįşŧş. Ŝmäľľęř väľūęş äřę şőřŧęđ ƒįřşŧ. !!! !!! !!! !!! !!! !!! !!!]</value>
+  </data>
+  <data name="DefaultSortPriority_label" xml:space="preserve">
+    <value>[Đęƒäūľŧ Ŝőřŧ Přįőřįŧy !!! !!!]</value>
   </data>
   <data name="DefaultValue_description" xml:space="preserve">
     <value>[Přőpęřŧy čäŉ ĥävę ä đęƒäūľŧ väľūę !!! !!!]</value>

@@ -24,21 +24,21 @@ namespace Zetbox.Generator.ResourceGenerator
     using Zetbox.App.Base;
     using Zetbox.App.GUI;
 
-    internal class ApplicationTask : IResourceGeneratorTask
+    internal class NavigationEntriesTask : IResourceGeneratorTask
     {
         public void Generate(IResourceGenerator generator, IZetboxServerContext ctx, IEnumerable<Zetbox.App.Base.Module> modules)
         {
             var moduleNames = modules.Select(m => m.Name).ToArray();
 
-            using (var writer = generator.AddFile("GUI\\Applications")) // See ZetboxAssetKeys.Applications
+            using (var writer = generator.AddFile("GUI\\NavigationEntries")) // See ZetboxAssetKeys.NavigationEntries
             {
-                foreach (var app in ctx.GetQuery<Application>()
+                foreach (var nav in ctx.GetQuery<NavigationEntry>()
                                         .ToList()
-                                        .Where(a => moduleNames.Contains(a.Module.Name))
-                                        .OrderBy(a => a.Name))
+                                        .Where(e => moduleNames.Contains(e.Module.Name))
+                                        .OrderBy(e => e.Title))
                 {
-                    writer.AddResource(ZetboxAssetKeys.ConstructNameKey(app), app.Name);
-                    writer.AddResource(ZetboxAssetKeys.ConstructDescriptionKey(app), app.Description);
+                    writer.AddResource(ZetboxAssetKeys.ConstructTitleKey(nav), nav.Title);
+                    writer.AddResource(ZetboxAssetKeys.ConstructColorKey(nav), nav.Color);
                 }
             }
         }
