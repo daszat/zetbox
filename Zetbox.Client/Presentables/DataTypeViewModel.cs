@@ -69,23 +69,26 @@ namespace Zetbox.Client.Presentables
             get { return IconConverter.ToImage(_dataType.DefaultIcon); }
         }
 
-        protected override List<PropertyGroupViewModel> CreatePropertyGroups()
+
+        protected override PropertyGroupViewModel CreatePropertyGroup(string tag, string translatedTag, List<ViewModel> lst)
         {
-            var result = base.CreatePropertyGroups();
-
-            if (_dataType is ObjectClass || _dataType is CompoundObject)
+            if (tag == "Properties" && (_dataType is ObjectClass || _dataType is CompoundObject))
             {
-                var singleMdl = result.Single(n => n.Name == "Properties");
-                var preview = ViewModelFactory.CreateViewModel<PropertiesPrewiewViewModel.Factory>().Invoke(DataContext, this, _dataType);
-                var lblMdl = ViewModelFactory.CreateViewModel<LabeledViewContainerViewModel.Factory>().Invoke(DataContext, this, "Preview", "", preview);
-                var grpMdl = ViewModelFactory.CreateViewModel<MultiplePropertyGroupViewModel.Factory>().Invoke(DataContext, this, "Properties", singleMdl.PropertyModels.Concat(new[] { lblMdl }).ToArray());
-
-                var idx = result.IndexOf(singleMdl);
-                result.Remove(singleMdl);
-                result.Insert(idx, grpMdl);
+                return ViewModelFactory.CreateViewModel<MultiplePropertyGroupViewModel.Factory>()
+                    .Invoke(
+                        DataContext,
+                        this,
+                        tag,
+                        translatedTag,
+                        lst.Concat(new[] { 
+                               ViewModelFactory.CreateViewModel<LabeledViewContainerViewModel.Factory>().Invoke(DataContext, this, "Preview", "", ViewModelFactory.CreateViewModel<PropertiesPrewiewViewModel.Factory>().Invoke(DataContext, this, _dataType)) 
+                           })
+                           .ToArray());
             }
-
-            return result;
+            else
+            {
+                return base.CreatePropertyGroup(tag, translatedTag, lst);
+            }
         }
 
         public string DescribedType

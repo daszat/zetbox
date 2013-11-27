@@ -212,12 +212,12 @@ namespace Zetbox.Client.Presentables
                             if (lst.Count == 1)
                             {
                                 return (PropertyGroupViewModel)ViewModelFactory.CreateViewModel<SinglePropertyGroupViewModel.Factory>().Invoke(
-                                    DataContext, this, translatedTag, lst);
+                                    DataContext, this, tag, translatedTag, lst);
                             }
                             else
                             {
                                 return (PropertyGroupViewModel)ViewModelFactory.CreateViewModel<MultiplePropertyGroupViewModel.Factory>().Invoke(
-                                    DataContext, this, translatedTag, lst);
+                                    DataContext, this, tag, translatedTag, lst);
                             }
                         })
                         .ToList();
