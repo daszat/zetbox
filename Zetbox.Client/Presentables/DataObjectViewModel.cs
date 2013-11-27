@@ -209,7 +209,8 @@ namespace Zetbox.Client.Presentables
                         {
                             var firstProp = group.First();
                             var tag = firstProp.Category;
-                            var lst = group.Select(p => _propertyModels[p.Property]).Cast<ViewModel>().ToList();
+                            var lst = new SortedDictionary<string, ViewModel>();
+                            group.ForEach(p => { lst.Add(p.Property.Name, _propertyModels[p.Property]); });
                             var propModule = firstProp.Property.Module;
                             var translatedTag = TranslatePropertyGroupTag(tag, propModule, zbBaseModule);
                             return CreatePropertyGroup(tag, translatedTag, lst);
@@ -228,17 +229,17 @@ namespace Zetbox.Client.Presentables
             return translatedTag;
         }
 
-        protected virtual PropertyGroupViewModel CreatePropertyGroup(string tag, string translatedTag, List<ViewModel> lst)
+        protected virtual PropertyGroupViewModel CreatePropertyGroup(string tag, string translatedTag, SortedDictionary<string, ViewModel> lst)
         {
             if (lst.Count == 1)
             {
                 return (PropertyGroupViewModel)ViewModelFactory.CreateViewModel<SinglePropertyGroupViewModel.Factory>().Invoke(
-                    DataContext, this, tag, translatedTag, lst);
+                    DataContext, this, tag, translatedTag, lst.Values);
             }
             else
             {
                 return (PropertyGroupViewModel)ViewModelFactory.CreateViewModel<MultiplePropertyGroupViewModel.Factory>().Invoke(
-                    DataContext, this, tag, translatedTag, lst);
+                    DataContext, this, tag, translatedTag, lst.Values);
             }
         }
 

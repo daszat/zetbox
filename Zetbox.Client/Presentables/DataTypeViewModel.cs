@@ -25,6 +25,8 @@ namespace Zetbox.Client.Presentables
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
+    using Zetbox.Client.Presentables.GUI;
+    using Zetbox.Client.Presentables.ValueViewModels;
 
     [ViewModelDescriptor]
     public class DataTypeViewModel
@@ -70,7 +72,7 @@ namespace Zetbox.Client.Presentables
         }
 
 
-        protected override PropertyGroupViewModel CreatePropertyGroup(string tag, string translatedTag, List<ViewModel> lst)
+        protected override PropertyGroupViewModel CreatePropertyGroup(string tag, string translatedTag, SortedDictionary<string, ViewModel> lst)
         {
             if (tag == "Properties" && (_dataType is ObjectClass || _dataType is CompoundObject))
             {
@@ -80,10 +82,23 @@ namespace Zetbox.Client.Presentables
                         this,
                         tag,
                         translatedTag,
-                        lst.Concat(new[] { 
+                        lst.Values.Concat(new[] { 
                                ViewModelFactory.CreateViewModel<LabeledViewContainerViewModel.Factory>().Invoke(DataContext, this, "Preview", "", ViewModelFactory.CreateViewModel<PropertiesPrewiewViewModel.Factory>().Invoke(DataContext, this, _dataType)) 
                            })
                            .ToArray());
+            }
+            else if (tag == "GUI")
+            {
+                return ViewModelFactory.CreateViewModel<CustomPropertyListGroupViewModel.Factory>()
+                    .Invoke(
+                        DataContext,
+                        this,
+                        tag,
+                        translatedTag,
+                        new[] {
+                            ViewModelFactory.CreateViewModel<GroupBoxViewModel.Factory>().Invoke(DataContext, this, "Settings", lst.Where(kv => !kv.Key.StartsWith("Show")).Select(kv => kv.Value)),
+                            ViewModelFactory.CreateViewModel<GroupBoxViewModel.Factory>().Invoke(DataContext, this, "Display", lst.Where(kv => kv.Key.StartsWith("Show")).Select(kv => kv.Value)),
+                        });
             }
             else
             {
