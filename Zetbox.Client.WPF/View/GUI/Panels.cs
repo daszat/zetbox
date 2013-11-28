@@ -27,6 +27,60 @@ namespace Zetbox.Client.WPF.View.GUI
     using System.Windows;
 
     [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
+    public class StackPanelView : ItemsControl, IHasViewModel<StackPanelViewModel>
+    {
+        public StackPanelView()
+        {
+            if (DesignerProperties.GetIsInDesignMode(this)) return;
+
+            BindingOperations.SetBinding(this, ItemsControl.ItemsSourceProperty, new Binding("Children") { Mode = BindingMode.OneWay });
+            this.ItemTemplate = (DataTemplate)FindResource("labeledViewContentPresenterTemplate");
+            this.ItemsPanel = (ItemsPanelTemplate)FindResource("itemsPanelStackPanelTemplate");
+        }
+
+        public StackPanelViewModel ViewModel
+        {
+            get { return (StackPanelViewModel)DataContext; }
+        }
+    }
+
+    [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
+    public class DockPanelView : ItemsControl, IHasViewModel<DockPanelViewModel>
+    {
+        public DockPanelView()
+        {
+            if (DesignerProperties.GetIsInDesignMode(this)) return;
+
+            BindingOperations.SetBinding(this, ItemsControl.ItemsSourceProperty, new Binding("Children") { Mode = BindingMode.OneWay });
+            this.ItemTemplate = (DataTemplate)FindResource("labeledViewContentPresenterTemplate");
+            this.ItemsPanel = (ItemsPanelTemplate)FindResource("itemsPanelDockPanelTemplate");
+        }
+
+        public DockPanelViewModel ViewModel
+        {
+            get { return (DockPanelViewModel)DataContext; }
+        }
+    }
+
+    [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
+    public class GridPanelView : ItemsControl, IHasViewModel<GridPanelViewModel>
+    {
+        public GridPanelView()
+        {
+            if (DesignerProperties.GetIsInDesignMode(this)) return;
+
+            BindingOperations.SetBinding(this, ItemsControl.ItemsSourceProperty, new Binding("Children") { Mode = BindingMode.OneWay });
+            this.ItemTemplate = (DataTemplate)FindResource("labeledViewContentPresenterTemplate");
+            this.ItemsPanel = (ItemsPanelTemplate)FindResource("itemsPanelGridTemplate");
+        }
+
+        public GridPanelViewModel ViewModel
+        {
+            get { return (GridPanelViewModel)DataContext; }
+        }
+    }
+
+    [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
     public class GroupBoxView : GroupBox, IHasViewModel<GroupBoxViewModel>
     {
         public GroupBoxView()

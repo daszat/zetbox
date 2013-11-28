@@ -64,6 +64,40 @@ namespace Zetbox.Client.Presentables.GUI
         }
     }
 
+
+    [ViewModelDescriptor]
+    public class StackPanelViewModel : PanelViewModel
+    {
+        public new delegate StackPanelViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string name, IEnumerable<ViewModel> children);
+
+        public StackPanelViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, string name, IEnumerable<ViewModel> children)
+            : base(dependencies, dataCtx, parent, name, children)
+        {
+        }
+    }
+
+    [ViewModelDescriptor]
+    public class DockPanelViewModel : PanelViewModel
+    {
+        public new delegate DockPanelViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string name, IEnumerable<ViewModel> children);
+
+        public DockPanelViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, string name, IEnumerable<ViewModel> children)
+            : base(dependencies, dataCtx, parent, name, children)
+        {
+        }
+    }
+
+    [ViewModelDescriptor]
+    public class GridPanelViewModel : PanelViewModel
+    {
+        public new delegate GridPanelViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string name, IEnumerable<ViewModel> children);
+
+        public GridPanelViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, string name, IEnumerable<ViewModel> children)
+            : base(dependencies, dataCtx, parent, name, children)
+        {
+        }
+    }
+
     [ViewModelDescriptor]
     public class GroupBoxViewModel : PanelViewModel
     {

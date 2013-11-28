@@ -2494,6 +2494,18 @@
                           tk:VisualTypeTemplateSelector.UseLabeledView="true" />
     </DataTemplate>
 
+    <ItemsPanelTemplate x:Key="itemsPanelStackPanelTemplate">
+        <StackPanel IsItemsHost="True" />
+    </ItemsPanelTemplate>
+    
+    <ItemsPanelTemplate x:Key="itemsPanelDockPanelTemplate">
+        <DockPanel IsItemsHost="True" />
+    </ItemsPanelTemplate>
+
+    <ItemsPanelTemplate x:Key="itemsPanelGridTemplate">
+        <Grid IsItemsHost="True" />
+    </ItemsPanelTemplate>
+
     <Style x:Key="LabeledViewStyle"
            TargetType="Control">
         <Setter Property="Margin"
