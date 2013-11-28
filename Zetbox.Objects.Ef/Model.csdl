@@ -32,6 +32,7 @@
     <EntitySet Name="DataTypeEfImpl" EntityType="Model.DataTypeEfImpl" />
     <EntitySet Name="DeactivatableTestObjectEfImpl" EntityType="Model.DeactivatableTestObjectEfImpl" />
     <EntitySet Name="DefaultPropertyValueEfImpl" EntityType="Model.DefaultPropertyValueEfImpl" />
+    <EntitySet Name="DocumentTestObjectEfImpl" EntityType="Model.DocumentTestObjectEfImpl" />
     <EntitySet Name="EnumerationEntryEfImpl" EntityType="Model.EnumerationEntryEfImpl" />
     <EntitySet Name="EventEfImpl" EntityType="Model.EventEfImpl" />
     <EntitySet Name="Event_Rights" EntityType="Model.Event_Rights" />
@@ -976,6 +977,14 @@
       <End Role="Test" EntitySet="EventTestObjectEfImpl" />
       <End Role="Event" EntitySet="EventEfImpl" />
     </AssociationSet>
+    <AssociationSet Name="FK_TestObj_has_AnyFile" Association="Model.FK_TestObj_has_AnyFile" >
+      <End Role="TestObj" EntitySet="DocumentTestObjectEfImpl" />
+      <End Role="AnyFile" EntitySet="FileEfImpl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TestObj_has_StaticFile" Association="Model.FK_TestObj_has_StaticFile" >
+      <End Role="TestObj" EntitySet="DocumentTestObjectEfImpl" />
+      <End Role="StaticFile" EntitySet="FileEfImpl" />
+    </AssociationSet>
     <AssociationSet Name="FK_TestObjClass_has_ObjectProp" Association="Model.FK_TestObjClass_has_ObjectProp" >
       <End Role="TestObjClass" EntitySet="TestObjClassEfImpl" />
       <End Role="ObjectProp" EntitySet="KundeEfImpl" />
@@ -1502,6 +1511,21 @@
                         Relationship="Model.FK_Property_has_DefaultValue"
                         FromRole="DefaultValue"
                         ToRole="Property" />
+  </EntityType>
+  <EntityType Name="DocumentTestObjectEfImpl">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AnyFileImpl"
+                        Relationship="Model.FK_TestObj_has_AnyFile"
+                        FromRole="TestObj"
+                        ToRole="AnyFile" />
+    <Property Name="Name" Type="String" Nullable="true" MaxLength="200"  />
+    <NavigationProperty Name="StaticFileImpl"
+                        Relationship="Model.FK_TestObj_has_StaticFile"
+                        FromRole="TestObj"
+                        ToRole="StaticFile" />
   </EntityType>
   <EntityType Name="EnumerationEntryEfImpl">
     <Key>
@@ -5503,6 +5527,22 @@
          Multiplicity="*" />
     <End Role="Event"
          Type="Model.EventEfImpl" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_TestObj_has_AnyFile" >
+    <End Role="TestObj"
+         Type="Model.DocumentTestObjectEfImpl" 
+         Multiplicity="*" />
+    <End Role="AnyFile"
+         Type="Model.FileEfImpl" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_TestObj_has_StaticFile" >
+    <End Role="TestObj"
+         Type="Model.DocumentTestObjectEfImpl" 
+         Multiplicity="*" />
+    <End Role="StaticFile"
+         Type="Model.StaticFileEfImpl" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_TestObjClass_has_ObjectProp" >

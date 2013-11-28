@@ -2373,6 +2373,37 @@
         <!-- define the subclasses -->
 
     </class>
+    <class name="Zetbox.App.Test.DocumentTestObjectNHibernateImpl+DocumentTestObjectProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.Test.DocumentTestObjectNHibernateImpl+DocumentTestObjectProxy, Zetbox.Objects.NHibernateImpl"
+           schema="`test`"
+           table="`DocumentTestObjects`"
+           abstract="false"
+           dynamic-update="false"
+           optimistic-lock="none"
+           batch-size="100">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`test`</param>
+                <param name="sequence">`DocumentTestObjects_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="AnyFile" column="`fk_AnyFile`" class="at.dasz.DocumentManagement.FileNHibernateImpl+FileProxy, Zetbox.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="Name" 
+                  column="`Name`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="StaticFile" column="`fk_StaticFile`" class="at.dasz.DocumentManagement.StaticFileNHibernateImpl+StaticFileProxy, Zetbox.Objects.NHibernateImpl" />
+
+
+        <!-- define the subclasses -->
+
+    </class>
     <class name="Zetbox.App.Test.EventTestObjectNHibernateImpl+EventTestObjectProxy, Zetbox.Objects.NHibernateImpl"
            proxy="Zetbox.App.Test.EventTestObjectNHibernateImpl+EventTestObjectProxy, Zetbox.Objects.NHibernateImpl"
            schema="`test`"

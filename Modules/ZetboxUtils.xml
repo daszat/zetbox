@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-11-28T11:14:46Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-11-28T18:17:38Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -6585,6 +6585,12 @@ public static void MakeStaticFileCanExecReason(ImportedFile obj, MethodReturnEve
     <GUI:Description>ViewModel for imported files</GUI:Description>
     <GUI:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</GUI:Module>
     <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.DocumentManagement.ImportedFileViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="db5736ea-91ba-4d59-9b06-5cc86f7e0614">
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Description>A Property ViewModel for references that are pointing to a StaticFile</GUI:Description>
+    <GUI:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</GUI:Module>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.DocumentManagement.StaticFilePropertyViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="c6753751-760d-498d-9e0a-f7f85f44e985">
     <GUI:DefaultEditorKind>b22d6746-5704-4ea7-934a-c3648081bd0a</GUI:DefaultEditorKind>

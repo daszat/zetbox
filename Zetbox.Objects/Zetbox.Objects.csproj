@@ -131,6 +131,7 @@
     <Compile Include="ZetboxBase\DecimalProperty.Interface.Designer.cs" />
     <Compile Include="ZetboxBase\DefaultPropertyValue.Interface.Designer.cs" />
     <Compile Include="DocumentManagement\Document.Interface.Designer.cs" />
+    <Compile Include="TestModule\DocumentTestObject.Interface.Designer.cs" />
     <Compile Include="ZetboxBase\DoubleDefaultValue.Interface.Designer.cs" />
     <Compile Include="ZetboxBase\DoubleParameter.Interface.Designer.cs" />
     <Compile Include="ZetboxBase\DoubleProperty.Interface.Designer.cs" />

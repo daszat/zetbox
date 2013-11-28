@@ -157,6 +157,7 @@
     <Compile Include="ZetboxBase\DecimalProperty.Memory.Designer.cs" />
     <Compile Include="ZetboxBase\DefaultPropertyValue.Memory.Designer.cs" />
     <Compile Include="DocumentManagement\Document.Memory.Designer.cs" />
+    <Compile Include="TestModule\DocumentTestObject.Memory.Designer.cs" />
     <Compile Include="ZetboxBase\DoubleDefaultValue.Memory.Designer.cs" />
     <Compile Include="ZetboxBase\DoubleParameter.Memory.Designer.cs" />
     <Compile Include="ZetboxBase\DoubleProperty.Memory.Designer.cs" />

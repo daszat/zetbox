@@ -192,6 +192,7 @@
     </Compile>
     <Compile Include="Presentables\DocumentManagement\ImportedFileViewModel.cs" />
     <Compile Include="Presentables\DocumentManagement\DynamicFileViewModel.cs" />
+    <Compile Include="Presentables\DocumentManagement\StaticFilePropertyViewModel.cs" />
     <Compile Include="Presentables\DocumentManagement\StaticFileViewModel.cs" />
     <Compile Include="Presentables\DocumentManagement\DocumentViewModel.cs" />
     <Compile Include="Presentables\DtoViewModels\DtoExporter.cs" />
