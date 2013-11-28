@@ -1670,8 +1670,8 @@ Global
 		{CEB915D7-8E82-40F7-A100-0CBB1F9717E5}.Minimal|.NET.ActiveCfg = Release|Any CPU
 		{CEB915D7-8E82-40F7-A100-0CBB1F9717E5}.Minimal|Any CPU.ActiveCfg = Release|Any CPU
 		{CEB915D7-8E82-40F7-A100-0CBB1F9717E5}.Minimal|Any CPU.Build.0 = Release|Any CPU
-		{CEB915D7-8E82-40F7-A100-0CBB1F9717E5}.Minimal|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{CEB915D7-8E82-40F7-A100-0CBB1F9717E5}.Minimal|Mixed Platforms.Build.0 = Release|Any CPU
+		{CEB915D7-8E82-40F7-A100-0CBB1F9717E5}.Minimal|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{CEB915D7-8E82-40F7-A100-0CBB1F9717E5}.Minimal|Mixed Platforms.Build.0 = Debug|Any CPU
 		{CEB915D7-8E82-40F7-A100-0CBB1F9717E5}.Minimal|x86.ActiveCfg = Release|Any CPU
 		{CEB915D7-8E82-40F7-A100-0CBB1F9717E5}.Release|.NET.ActiveCfg = Release|Any CPU
 		{CEB915D7-8E82-40F7-A100-0CBB1F9717E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
