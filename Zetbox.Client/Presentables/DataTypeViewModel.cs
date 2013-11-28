@@ -89,15 +89,22 @@ namespace Zetbox.Client.Presentables
             }
             else if (tag == "GUI")
             {
-                return ViewModelFactory.CreateViewModel<CustomPropertyListGroupViewModel.Factory>()
+                return ViewModelFactory.CreateViewModel<CustomPropertyGroupViewModel.Factory>()
                     .Invoke(
                         DataContext,
                         this,
                         tag,
                         translatedTag,
-                        new[] {
-                            ViewModelFactory.CreateViewModel<GroupBoxViewModel.Factory>().Invoke(DataContext, this, "Settings", lst.Where(kv => !kv.Key.StartsWith("Show")).Select(kv => kv.Value)),
-                            ViewModelFactory.CreateViewModel<GroupBoxViewModel.Factory>().Invoke(DataContext, this, "Display", lst.Where(kv => kv.Key.StartsWith("Show")).Select(kv => kv.Value)),
+                        new[] { 
+                            ViewModelFactory.CreateViewModel<StackPanelViewModel.Factory>()
+                                .Invoke(
+                                    DataContext,
+                                    this,
+                                    tag,
+                                    new[] {
+                                        ViewModelFactory.CreateViewModel<GroupBoxViewModel.Factory>().Invoke(DataContext, this, "Settings", lst.Where(kv => !kv.Key.StartsWith("Show")).Select(kv => kv.Value)),
+                                        ViewModelFactory.CreateViewModel<GroupBoxViewModel.Factory>().Invoke(DataContext, this, "Display", lst.Where(kv => kv.Key.StartsWith("Show")).Select(kv => kv.Value)),
+                                    })
                         });
             }
             else

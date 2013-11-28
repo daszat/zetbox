@@ -18,7 +18,7 @@ namespace Zetbox.App.Test
     using Zetbox.DalProvider.Memory;
 
     /// <summary>
-    /// 
+    /// A TestClass with many properties
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("TestObjClass")]
     public class TestObjClassMemoryImpl : Zetbox.DalProvider.Memory.DataObjectMemoryImpl, TestObjClass

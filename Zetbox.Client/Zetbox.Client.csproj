@@ -225,6 +225,8 @@
     <Compile Include="Presentables\ModuleEditor\GroupingTreeItemViewModel.cs" />
     <Compile Include="Presentables\ObjectBrowser\ObjectClassViewModel.cs" />
     <Compile Include="Presentables\PropertiesPrewiewViewModel.cs" />
+    <Compile Include="Presentables\TestModule\TestObjClassViewModel.cs" />
+    <Compile Include="Presentables\TestModule\TestCustomObjectViewModel.cs" />
     <Compile Include="Presentables\TestModule\InstanceListTestViewModel.cs" />
     <Compile Include="Presentables\TestModule\NextEventsTestNavScreenViewModel.cs" />
     <Compile Include="Presentables\TestModule\TestAppNavigationScreenViewModel.cs" />

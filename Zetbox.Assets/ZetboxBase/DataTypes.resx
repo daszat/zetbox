@@ -1177,7 +1177,7 @@
     <value>TestObjClass</value>
   </data>
   <data name="Zetbox.App.Test.TestObjClass_description" xml:space="preserve">
-    <value />
+    <value>A TestClass with many properties</value>
   </data>
   <data name="Zetbox.App.Test.TestPhoneCompoundObject" xml:space="preserve">
     <value>TestPhoneCompoundObject</value>

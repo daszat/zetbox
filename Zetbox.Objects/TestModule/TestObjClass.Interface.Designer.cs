@@ -8,7 +8,7 @@ namespace Zetbox.App.Test
     using Zetbox.API;
 
     /// <summary>
-    /// 
+    /// A TestClass with many properties
     /// </summary>
     [Zetbox.API.DefinitionGuid("19f38f05-e88e-44c6-bfdf-d502b3632028")]
     public interface TestObjClass : IDataObject, Zetbox.App.Test.ITestInterface 
