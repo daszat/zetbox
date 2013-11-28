@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-11-13T10:05:17Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-11-28T10:02:16Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="84f486f7-19fe-49ad-8e4a-6c05089e7684">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.650235Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
@@ -27672,7 +27672,7 @@ public static void SetObjectCanExecReason(AnyReference obj, MethodReturnEventArg
     <ZetboxBase:ObjectClass>fa366f50-f384-4a18-abcd-8b9fef3b41fa</ZetboxBase:ObjectClass>
   </ZetboxBase:Method>
   <ZetboxBase:Method ExportGuid="818507bf-73f7-4e57-9730-ba3c42ddc418">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2013-11-28T09:00:59.151262Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void RegenerateTypeRefs(Assembly obj, MethodReturnEventArgs&lt;bool&gt; e)
 {
@@ -27691,6 +27691,7 @@ public static void RegenerateTypeRefsCanExecReason(Assembly obj, MethodReturnEve
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>Regenerates the stored list of TypeRefs from the loaded assembly</ZetboxBase:Description>
     <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <ZetboxBase:Label>Refresh descriptors</ZetboxBase:Label>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>RegenerateTypeRefs</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>a590a975-66e5-421c-aa97-7ab3169e0e9b</ZetboxBase:ObjectClass>
