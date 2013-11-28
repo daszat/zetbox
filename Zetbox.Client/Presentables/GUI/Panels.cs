@@ -90,11 +90,83 @@ namespace Zetbox.Client.Presentables.GUI
     [ViewModelDescriptor]
     public class GridPanelViewModel : PanelViewModel
     {
-        public new delegate GridPanelViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string name, IEnumerable<ViewModel> children);
+        public new delegate GridPanelViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string name, IEnumerable<Cell> children);
 
-        public GridPanelViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, string name, IEnumerable<ViewModel> children)
-            : base(dependencies, dataCtx, parent, name, children)
+        public class Cell
         {
+            public Cell()
+            {
+                RowSpan = 1;
+                ColumnSpan = 1;
+            }
+
+            public Cell(int row, int col, ViewModel vmdl)
+                : this()
+            {
+                this.Row = row;
+                this.Column = col;
+                this.ViewModel = vmdl;
+            }
+
+            public int Row { get; set; }
+            public int Column { get; set; }
+            public int RowSpan { get; set; }
+            public int ColumnSpan { get; set; }
+            public ViewModel ViewModel { get; set; }
+        }
+
+        public class Row
+        {
+            public int Index { get; set; }
+        }
+
+        public class Column
+        {
+            public int Index { get; set; }
+        }
+
+        private readonly ObservableCollection<Cell> _cells;
+
+        public GridPanelViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, string name, IEnumerable<Cell> children)
+            : base(dependencies, dataCtx, parent, name, children == null ? null : children.Select(c => c.ViewModel))
+        {
+            _cells = new ObservableCollection<Cell>(children);
+        }
+
+        public ObservableCollection<Cell> Cells
+        {
+            get
+            {
+                return _cells;
+            }
+        }
+
+        public IEnumerable<Row> Rows
+        {
+            get
+            {
+                List<Row> result = new List<Row>();
+                var max = _cells.Max(c => c.Row);
+                for (int i = 0; i <= max; i++)
+                {
+                    result.Add(new Row() { Index = i });
+                }
+                return result;
+            }
+        }
+
+        public IEnumerable<Column> Columns
+        {
+            get
+            {
+                List<Column> result = new List<Column>();
+                var max = _cells.Max(c => c.Column);
+                for (int i = 0; i <= max; i++)
+                {
+                    result.Add(new Column() { Index = i });
+                }
+                return result;
+            }
         }
     }
 

@@ -45,6 +45,55 @@ namespace Zetbox.Client.Presentables
             _obj = obj;
         }
 
+        protected override List<PropertyGroupViewModel> CreatePropertyGroups()
+        {
+            var result = base.CreatePropertyGroups();
+
+            result.Add(ViewModelFactory.CreateViewModel<CustomPropertyGroupViewModel.Factory>()
+                .Invoke(DataContext, this, "Stack 1", "Stack 1", new[] 
+                {
+                    ViewModelFactory.CreateViewModel<StackPanelViewModel.Factory>().Invoke(DataContext, this, "Stack", new [] 
+                    {
+                        ViewModelFactory.CreateViewModel<GroupBoxViewModel.Factory>().Invoke(DataContext, this, "Grp 1", new []
+                        {
+                            PropertyModelsByName["StringProp"],
+                            PropertyModelsByName["MyIntProperty"],
+                            PropertyModelsByName["ObjectProp"],
+                        }),
+                        ViewModelFactory.CreateViewModel<GroupBoxViewModel.Factory>().Invoke(DataContext, this, "Grp 2", new []
+                        {
+                            PropertyModelsByName["StringProp"],
+                            PropertyModelsByName["TestEnumProp"],
+                            PropertyModelsByName["TestEnumWithDefault"],
+                        }),
+                    }),
+                })
+            );
+
+            result.Add(ViewModelFactory.CreateViewModel<CustomPropertyGroupViewModel.Factory>()
+               .Invoke(DataContext, this, "Grid 1", "Grid 1", new[] 
+                {
+                    ViewModelFactory.CreateViewModel<GridPanelViewModel.Factory>().Invoke(DataContext, this, "Grid", new [] 
+                    {
+                        new GridPanelViewModel.Cell(0, 0, ViewModelFactory.CreateViewModel<GroupBoxViewModel.Factory>().Invoke(DataContext, this, "Grp 1", new []
+                        {
+                            PropertyModelsByName["StringProp"],
+                            PropertyModelsByName["MyIntProperty"],
+                            PropertyModelsByName["ObjectProp"],
+                        })),
+                        new GridPanelViewModel.Cell(0, 1, ViewModelFactory.CreateViewModel<GroupBoxViewModel.Factory>().Invoke(DataContext, this, "Grp 2", new []
+                        {
+                            PropertyModelsByName["StringProp"],
+                            PropertyModelsByName["TestEnumProp"],
+                            PropertyModelsByName["TestEnumWithDefault"],
+                        })),
+                    }),
+                })
+           );
+
+            return result;
+        }
+
         protected override PropertyGroupViewModel CreatePropertyGroup(string tag, string translatedTag, SortedDictionary<string, ViewModel> lst)
         {
             return base.CreatePropertyGroup(tag, translatedTag, lst);
