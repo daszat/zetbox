@@ -79,11 +79,48 @@ namespace Zetbox.Client.Presentables.GUI
     [ViewModelDescriptor]
     public class DockPanelViewModel : PanelViewModel
     {
-        public new delegate DockPanelViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string name, IEnumerable<ViewModel> children);
+        public new delegate DockPanelViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string name, IEnumerable<Element> children);
 
-        public DockPanelViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, string name, IEnumerable<ViewModel> children)
-            : base(dependencies, dataCtx, parent, name, children)
+        public enum Dock
         {
+            Left = 0,
+            Top = 1,
+            Right = 2,
+            Bottom = 3,
+            Fill = 4,
+        }
+
+        public class Element
+        {
+            public Element()
+            {
+            }
+
+            public Element(Dock dock, ViewModel vmdl)
+                : this()
+            {
+                this.Dock = dock;
+                this.ViewModel = vmdl;
+            }
+
+            public Dock Dock { get; set; }
+            public ViewModel ViewModel { get; set; }
+        }
+
+        private readonly ObservableCollection<Element> _elements;
+
+        public DockPanelViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, string name, IEnumerable<Element> children)
+            : base(dependencies, dataCtx, parent, name, children == null ? null : children.Select(c => c.ViewModel))
+        {
+            _elements = new ObservableCollection<Element>(children);
+        }
+
+        public ObservableCollection<Element> Elements
+        {
+            get
+            {
+                return _elements;
+            }
         }
     }
 

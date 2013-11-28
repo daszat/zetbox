@@ -2657,12 +2657,21 @@
     </Style>
 
     <Style x:Key="dockPanelViewItemContainerStyle">
+        <Setter Property="DockPanel.Dock"
+                Value="{Binding Dock, Converter={StaticResource DockConverter}}" />
         <Setter Property="FrameworkElement.Margin"
                 Value="{StaticResource ItemMargin}" />
     </Style>
 
     <DataTemplate x:Key="gridPanelViewItemTemplate">
         <ContentPresenter x:Name="gridCell"
+                          Content="{Binding ViewModel}"
+                          tk:VisualTypeTemplateSelector.RequestedKind="{Binding ViewModel.RequestedKind, Mode=OneWay}"
+                          ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="dockPanelViewItemTemplate">
+        <ContentPresenter x:Name="dockElement"
                           Content="{Binding ViewModel}"
                           tk:VisualTypeTemplateSelector.RequestedKind="{Binding ViewModel.RequestedKind, Mode=OneWay}"
                           ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />

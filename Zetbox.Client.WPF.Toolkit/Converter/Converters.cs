@@ -476,6 +476,42 @@ namespace Zetbox.Client.WPF.Converter
     /// <summary>
     /// Convert a WidthHint into a DIP count
     /// </summary>
+    [ValueConversion(typeof(object), typeof(System.Windows.Controls.Dock))]
+    public class DockConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType,
+                            object parameter, CultureInfo culture)
+        {
+            if (value is Zetbox.Client.Presentables.GUI.DockPanelViewModel.Dock)
+            {
+                switch((Zetbox.Client.Presentables.GUI.DockPanelViewModel.Dock)value)
+                {
+                    case Presentables.GUI.DockPanelViewModel.Dock.Left:
+                        return System.Windows.Controls.Dock.Left;
+                    case Presentables.GUI.DockPanelViewModel.Dock.Right:
+                        return System.Windows.Controls.Dock.Right;
+                    case Presentables.GUI.DockPanelViewModel.Dock.Top:
+                        return System.Windows.Controls.Dock.Top;
+                    case Presentables.GUI.DockPanelViewModel.Dock.Bottom:
+                        return System.Windows.Controls.Dock.Bottom;
+                    case Presentables.GUI.DockPanelViewModel.Dock.Fill:
+                        return null;
+                }
+            }
+            return Binding.DoNothing;
+        }
+
+        public object ConvertBack(object value, Type targetType,
+                            object parameter, System.Globalization.CultureInfo culture)
+        {
+            // Readonly
+            return Binding.DoNothing;
+        }
+    }
+
+    /// <summary>
+    /// Convert a WidthHint into a DIP count
+    /// </summary>
     [ValueConversion(typeof(WidthHint), typeof(double))]
     public class PercentToGridLengthConverter : IValueConverter
     {

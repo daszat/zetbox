@@ -53,10 +53,11 @@ namespace Zetbox.Client.WPF.View.GUI
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
 
-            BindingOperations.SetBinding(this, ItemsControl.ItemsSourceProperty, new Binding("Children") { Mode = BindingMode.OneWay });
+            BindingOperations.SetBinding(this, ItemsControl.ItemsSourceProperty, new Binding("Elements") { Mode = BindingMode.OneWay });
             this.ItemsPanel = (ItemsPanelTemplate)FindResource("itemsPanelDockPanelTemplate");
             this.ItemContainerStyle = (Style)FindResource("dockPanelViewItemContainerStyle");
-            this.ItemTemplate = (DataTemplate)FindResource("labeledViewContentPresenterTemplate");
+            this.ItemTemplate = (DataTemplate)FindResource("dockPanelViewItemTemplate");
+
         }
 
         public DockPanelViewModel ViewModel

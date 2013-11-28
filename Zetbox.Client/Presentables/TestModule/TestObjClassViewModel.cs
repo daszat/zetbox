@@ -89,6 +89,33 @@ namespace Zetbox.Client.Presentables
                         })),
                     }),
                 })
+            );
+
+            result.Add(ViewModelFactory.CreateViewModel<CustomPropertyGroupViewModel.Factory>()
+               .Invoke(DataContext, this, "Dock 1", "Dock 1", new[] 
+                {
+                    ViewModelFactory.CreateViewModel<DockPanelViewModel.Factory>().Invoke(DataContext, this, "Dock", new [] 
+                    {
+                        new DockPanelViewModel.Element(DockPanelViewModel.Dock.Left, ViewModelFactory.CreateViewModel<GroupBoxViewModel.Factory>().Invoke(DataContext, this, "Left 1", new []
+                        {
+                            PropertyModelsByName["StringProp"],
+                            PropertyModelsByName["MyIntProperty"],
+                            PropertyModelsByName["ObjectProp"],
+                        })),
+                        new DockPanelViewModel.Element(DockPanelViewModel.Dock.Top, ViewModelFactory.CreateViewModel<GroupBoxViewModel.Factory>().Invoke(DataContext, this, "Top 2", new []
+                        {
+                            PropertyModelsByName["StringProp"],
+                            PropertyModelsByName["TestEnumProp"],
+                            PropertyModelsByName["TestEnumWithDefault"],
+                        })),
+                        new DockPanelViewModel.Element(DockPanelViewModel.Dock.Fill, ViewModelFactory.CreateViewModel<GroupBoxViewModel.Factory>().Invoke(DataContext, this, "Fill 3", new []
+                        {
+                            PropertyModelsByName["StringProp"],
+                            PropertyModelsByName["TestEnumProp"],
+                            PropertyModelsByName["TestEnumWithDefault"],
+                        })),
+                    }),
+                })
            );
 
             return result;
