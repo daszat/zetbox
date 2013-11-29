@@ -56,7 +56,7 @@ namespace Zetbox.API.Common
 
         #region Applications
 
-        public static readonly string Applications = "ZetboxBase.Applications";
+        public static readonly string Applications = "GUI.Applications";
 
         public static string ConstructNameKey(Application app)
         {
@@ -137,6 +137,19 @@ namespace Zetbox.API.Common
 
         #region CategoryTags
         public static readonly string CategoryTags = "ZetboxBase.CategoryTags";
+        #endregion
+
+        #region NavigationEntry
+        public static readonly string NavigationEntries = "GUI.NavigationEntries";
+        public static string ConstructTitleKey(NavigationEntry nav)
+        {
+            return nav.Module.Namespace + "." + nav.Title;
+        }
+
+        public static string ConstructColorKey(NavigationEntry nav)
+        {
+            return nav.Module.Namespace + "." + nav.Title + "_color";
+        }
         #endregion
     }
 }

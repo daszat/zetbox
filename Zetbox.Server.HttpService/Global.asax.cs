@@ -29,6 +29,7 @@ namespace Zetbox.Server.HttpService
     using Zetbox.API;
     using Zetbox.API.Configuration;
     using Zetbox.API.Utils;
+    using System.Configuration;
 
     public class Global : System.Web.HttpApplication, IContainerProviderAccessor
     {
@@ -49,7 +50,10 @@ namespace Zetbox.Server.HttpService
             var builder = Zetbox.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Server.Modules);
 
             // register deployment-specific components
-            builder.RegisterModule(new ConfigurationSettingsReader("servercomponents"));
+            if (ConfigurationManager.GetSection("servercomponents") != null)
+            {
+                builder.RegisterModule(new ConfigurationSettingsReader("servercomponents"));
+            }
 
             // Store root container for WCF & ASP.NET
             var container = builder.Build();

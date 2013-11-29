@@ -128,12 +128,18 @@ namespace Zetbox.Client.Presentables.GUI
 
         public override string Name
         {
-            get { return _screen.Title; }
+            get { return this.Title; }
         }
 
         public string Title
         {
-            get { return _screen.Title; }
+            get 
+            {
+                if (_screen.Module != null)
+                    return Assets.GetString(_screen.Module, ZetboxAssetKeys.NavigationEntries, ZetboxAssetKeys.ConstructTitleKey(_screen), _screen.Title);
+                else
+                    return _screen.Title; 
+            }
         }
 
         public override Highlight Highlight
@@ -256,7 +262,13 @@ namespace Zetbox.Client.Presentables.GUI
                 var tmp = _screen;
                 while (tmp != null)
                 {
-                    if (!string.IsNullOrEmpty(tmp.Color)) return tmp.Color;
+                    if (!string.IsNullOrEmpty(tmp.Color))
+                    {
+                        if (tmp.Module != null)
+                            return Assets.GetString(tmp.Module, ZetboxAssetKeys.NavigationEntries, ZetboxAssetKeys.ConstructColorKey(tmp), tmp.Color);
+                        else
+                            return tmp.Color;
+                    }
                     tmp = tmp.Parent;
                 }
                 return null;

@@ -123,4 +123,10 @@
   <data name="DefaultPropertyViewModelDescriptor_label" xml:space="preserve">
     <value>[Đęƒäūľŧ Přőpęřŧy VįęŵMőđęľĐęşčřįpŧőř !!! !!!]</value>
   </data>
+  <data name="DefaultViewModelDescriptor_description" xml:space="preserve">
+    <value>[Ŧĥę đęƒäūľŧ VįęŵMőđęľ ŧő ūşę ƒőř ŧĥįş Cőmpőūŉđ Øþĵęčŧ !!! !!! !!!]</value>
+  </data>
+  <data name="DefaultViewModelDescriptor_label" xml:space="preserve">
+    <value>[ĐęƒäūľŧVįęŵMőđęľĐęşčřįpŧőř !!! !!!]</value>
+  </data>
 </root>

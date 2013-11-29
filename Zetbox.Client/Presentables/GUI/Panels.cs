@@ -64,6 +64,149 @@ namespace Zetbox.Client.Presentables.GUI
         }
     }
 
+
+    [ViewModelDescriptor]
+    public class StackPanelViewModel : PanelViewModel
+    {
+        public new delegate StackPanelViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string name, IEnumerable<ViewModel> children);
+
+        public StackPanelViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, string name, IEnumerable<ViewModel> children)
+            : base(dependencies, dataCtx, parent, name, children)
+        {
+        }
+    }
+
+    [ViewModelDescriptor]
+    public class DockPanelViewModel : PanelViewModel
+    {
+        public new delegate DockPanelViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string name, IEnumerable<Element> children);
+
+        public enum Dock
+        {
+            Left = 0,
+            Top = 1,
+            Right = 2,
+            Bottom = 3,
+            Fill = 4,
+        }
+
+        public class Element
+        {
+            public Element()
+            {
+            }
+
+            public Element(Dock dock, ViewModel vmdl)
+                : this()
+            {
+                this.Dock = dock;
+                this.ViewModel = vmdl;
+            }
+
+            public Dock Dock { get; set; }
+            public ViewModel ViewModel { get; set; }
+        }
+
+        private readonly ObservableCollection<Element> _elements;
+
+        public DockPanelViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, string name, IEnumerable<Element> children)
+            : base(dependencies, dataCtx, parent, name, children == null ? null : children.Select(c => c.ViewModel))
+        {
+            _elements = new ObservableCollection<Element>(children);
+        }
+
+        public ObservableCollection<Element> Elements
+        {
+            get
+            {
+                return _elements;
+            }
+        }
+    }
+
+    [ViewModelDescriptor]
+    public class GridPanelViewModel : PanelViewModel
+    {
+        public new delegate GridPanelViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string name, IEnumerable<Cell> children);
+
+        public class Cell
+        {
+            public Cell()
+            {
+                RowSpan = 1;
+                ColumnSpan = 1;
+            }
+
+            public Cell(int row, int col, ViewModel vmdl)
+                : this()
+            {
+                this.Row = row;
+                this.Column = col;
+                this.ViewModel = vmdl;
+            }
+
+            public int Row { get; set; }
+            public int Column { get; set; }
+            public int RowSpan { get; set; }
+            public int ColumnSpan { get; set; }
+            public ViewModel ViewModel { get; set; }
+        }
+
+        public class Row
+        {
+            public int Index { get; set; }
+        }
+
+        public class Column
+        {
+            public int Index { get; set; }
+        }
+
+        private readonly ObservableCollection<Cell> _cells;
+
+        public GridPanelViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, string name, IEnumerable<Cell> children)
+            : base(dependencies, dataCtx, parent, name, children == null ? null : children.Select(c => c.ViewModel))
+        {
+            _cells = new ObservableCollection<Cell>(children);
+        }
+
+        public ObservableCollection<Cell> Cells
+        {
+            get
+            {
+                return _cells;
+            }
+        }
+
+        public IEnumerable<Row> Rows
+        {
+            get
+            {
+                List<Row> result = new List<Row>();
+                var max = _cells.Max(c => c.Row);
+                for (int i = 0; i <= max; i++)
+                {
+                    result.Add(new Row() { Index = i });
+                }
+                return result;
+            }
+        }
+
+        public IEnumerable<Column> Columns
+        {
+            get
+            {
+                List<Column> result = new List<Column>();
+                var max = _cells.Max(c => c.Column);
+                for (int i = 0; i <= max; i++)
+                {
+                    result.Add(new Column() { Index = i });
+                }
+                return result;
+            }
+        }
+    }
+
     [ViewModelDescriptor]
     public class GroupBoxViewModel : PanelViewModel
     {

@@ -73,6 +73,7 @@
   <ItemGroup>
     <Compile Include="Integration\BasicTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SetUpFixture.cs" />
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>

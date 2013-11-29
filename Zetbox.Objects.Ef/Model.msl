@@ -599,6 +599,14 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="DocumentTestObjectEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.DocumentTestObjectEfImpl)">
+	    <MappingFragment StoreEntitySet="DocumentTestObject">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="EnumerationEntryEfImpl">
       <EntityTypeMapping TypeName="IsTypeOf(Model.EnumerationEntryEfImpl)">
 	    <MappingFragment StoreEntitySet="EnumerationEntry">
@@ -5482,6 +5490,40 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_Event" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_TestObj_has_AnyFile
+    A: ZeroOrMore DocumentTestObject as TestObj
+    B: ZeroOrOne File as AnyFile
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_TestObj_has_AnyFile"
+                           TypeName="Model.FK_TestObj_has_AnyFile"
+                           StoreEntitySet="DocumentTestObject" >
+      <EndProperty Name="AnyFile">
+        <ScalarProperty Name="ID" ColumnName="fk_AnyFile"/>
+      </EndProperty>
+      <EndProperty Name="TestObj">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_AnyFile" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_TestObj_has_StaticFile
+    A: ZeroOrMore DocumentTestObject as TestObj
+    B: ZeroOrOne StaticFile as StaticFile
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_TestObj_has_StaticFile"
+                           TypeName="Model.FK_TestObj_has_StaticFile"
+                           StoreEntitySet="DocumentTestObject" >
+      <EndProperty Name="StaticFile">
+        <ScalarProperty Name="ID" ColumnName="fk_StaticFile"/>
+      </EndProperty>
+      <EndProperty Name="TestObj">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_StaticFile" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_TestObjClass_has_ObjectProp

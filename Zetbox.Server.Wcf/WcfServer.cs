@@ -38,11 +38,6 @@ namespace Zetbox.Server.Wcf
         /// </summary>
         private readonly ServiceHostBase _mainHost = null;
 
-        /// <summary>
-        /// Bootstrapper WCF Service Host
-        /// </summary>
-        private readonly ServiceHostBase _bootstrapperHost = null;
-
         private readonly ZetboxConfig _defaultConfig = null;
 
         /// <summary>
@@ -68,8 +63,6 @@ namespace Zetbox.Server.Wcf
             _mainHost.Faulted += host_Faulted;
             _mainHost.Closed += host_Closed;
             _mainHost.Opened += host_Opened;
-
-            _bootstrapperHost = webFactory.CreateServiceHost(typeof(BootstrapperService).AssemblyQualifiedName, new Uri[] { });
         }
 
         void host_Opened(object sender, EventArgs e)
@@ -125,8 +118,6 @@ namespace Zetbox.Server.Wcf
 
             if (_mainHost != null)
                 _mainHost.Close();
-            if (_bootstrapperHost != null)
-                _bootstrapperHost.Close();
 
             if (serviceThread != null && !serviceThread.Join(5000))
             {
@@ -158,7 +149,6 @@ namespace Zetbox.Server.Wcf
                 using (Log.DebugTraceMethodCall("Starting WCF Server"))
                 {
                     _mainHost.Open();
-                    _bootstrapperHost.Open();
                     serverStarted.Set();
                 }
 
@@ -200,12 +190,6 @@ namespace Zetbox.Server.Wcf
             {
                 _mainHost.Close();
                 ((IDisposable)_mainHost).Dispose();
-            }
-
-            if (_bootstrapperHost != null && _bootstrapperHost.State != CommunicationState.Closed)
-            {
-                _bootstrapperHost.Close();
-                ((IDisposable)_bootstrapperHost).Dispose();
             }
 
             if (serverStarted != null)

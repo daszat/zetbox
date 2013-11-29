@@ -153,6 +153,25 @@ namespace Zetbox.Client.Presentables.FilterViewModels
             }
         }
 
+        private int _yearsFutureCount = 5;
+        public int YearsFutureCount
+        {
+            get
+            {
+                return _yearsFutureCount;
+            }
+            set
+            {
+                if (_yearsFutureCount != value)
+                {
+                    _yearsFutureCount = value;
+                    _years = null;
+                    OnPropertyChanged("YearsFutureCount");
+                    OnPropertyChanged("Years");
+                }
+            }
+        }
+
         private IList<ItemViewModel> _years = null;
         public IEnumerable<ItemViewModel> Years
         {
@@ -161,7 +180,7 @@ namespace Zetbox.Client.Presentables.FilterViewModels
                 if (_years == null)
                 {
                     _years = new List<ItemViewModel>();
-                    int current = DateTime.Today.Year;
+                    int current = DateTime.Today.Year + _yearsFutureCount;
                     for (int i = current; i >= current - 100; i--)
                     {
                         _years.Add(new ItemViewModel(i, i.ToString("0000")));
@@ -195,7 +214,7 @@ namespace Zetbox.Client.Presentables.FilterViewModels
         {
             get
             {
-                return Years.Take(YearsShortCount);
+                return Years.Skip(_yearsFutureCount).Take(YearsShortCount);
             }
         }
 

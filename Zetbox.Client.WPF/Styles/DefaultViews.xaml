@@ -2480,7 +2480,7 @@
     <DataTemplate x:Key="nameCellTemplate">
         <TextBlock Text="{Binding Name}" />
     </DataTemplate>
-    
+
     <DataTemplate x:Key="titleCellTemplate">
         <TextBlock Text="{Binding Title}" />
     </DataTemplate>
@@ -2493,6 +2493,18 @@
         <ContentPresenter ContentTemplateSelector="{StaticResource defaultTemplateSelector}"
                           tk:VisualTypeTemplateSelector.UseLabeledView="true" />
     </DataTemplate>
+
+    <ItemsPanelTemplate x:Key="itemsPanelStackPanelTemplate">
+        <StackPanel IsItemsHost="True" />
+    </ItemsPanelTemplate>
+
+    <ItemsPanelTemplate x:Key="itemsPanelDockPanelTemplate">
+        <DockPanel IsItemsHost="True" />
+    </ItemsPanelTemplate>
+
+    <ItemsPanelTemplate x:Key="itemsPanelGridTemplate">
+        <Grid IsItemsHost="True" />
+    </ItemsPanelTemplate>
 
     <Style x:Key="LabeledViewStyle"
            TargetType="Control">
@@ -2625,4 +2637,43 @@
                           ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
     </DataTemplate>
 
+    <!-- this has to be a style because there's a content presenter between the items panel item and the grid cell (and then another one....) -->
+    <Style x:Key="gridPanelViewItemContainerStyle">
+        <Setter Property="Grid.Row"
+                Value="{Binding Row}" />
+        <Setter Property="Grid.Column"
+                Value="{Binding Column}" />
+        <Setter Property="Grid.RowSpan"
+                Value="{Binding RowSpan}" />
+        <Setter Property="Grid.ColumnSpan"
+                Value="{Binding ColumnSpan}" />
+        <Setter Property="FrameworkElement.Margin"
+                Value="{StaticResource ItemMargin}" />
+    </Style>
+
+    <Style x:Key="stackPanelViewItemContainerStyle">
+        <Setter Property="FrameworkElement.Margin"
+                Value="{StaticResource ItemMargin}" />
+    </Style>
+
+    <Style x:Key="dockPanelViewItemContainerStyle">
+        <Setter Property="DockPanel.Dock"
+                Value="{Binding Dock, Converter={StaticResource DockConverter}}" />
+        <Setter Property="FrameworkElement.Margin"
+                Value="{StaticResource ItemMargin}" />
+    </Style>
+
+    <DataTemplate x:Key="gridPanelViewItemTemplate">
+        <ContentPresenter x:Name="gridCell"
+                          Content="{Binding ViewModel}"
+                          tk:VisualTypeTemplateSelector.RequestedKind="{Binding ViewModel.RequestedKind, Mode=OneWay}"
+                          ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+    </DataTemplate>
+
+    <DataTemplate x:Key="dockPanelViewItemTemplate">
+        <ContentPresenter x:Name="dockElement"
+                          Content="{Binding ViewModel}"
+                          tk:VisualTypeTemplateSelector.RequestedKind="{Binding ViewModel.RequestedKind, Mode=OneWay}"
+                          ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+    </DataTemplate>
 </ResourceDictionary>

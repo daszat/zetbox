@@ -2849,6 +2849,36 @@ using Zetbox.DalProvider.Ef;
 
 
 	/*
+    Relation: FK_TestObj_has_AnyFile
+    A: ZeroOrMore DocumentTestObject as TestObj
+    B: ZeroOrOne File as AnyFile
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_TestObj_has_AnyFile",
+    "TestObj", RelationshipMultiplicity.Many, typeof(Zetbox.App.Test.DocumentTestObjectEfImpl),
+    "AnyFile", RelationshipMultiplicity.ZeroOrOne, typeof(at.dasz.DocumentManagement.FileEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_TestObj_has_StaticFile
+    A: ZeroOrMore DocumentTestObject as TestObj
+    B: ZeroOrOne StaticFile as StaticFile
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_TestObj_has_StaticFile",
+    "TestObj", RelationshipMultiplicity.Many, typeof(Zetbox.App.Test.DocumentTestObjectEfImpl),
+    "StaticFile", RelationshipMultiplicity.ZeroOrOne, typeof(at.dasz.DocumentManagement.StaticFileEfImpl)
+    )]
+
+
+	/*
     Relation: FK_TestObjClass_has_ObjectProp
     A: ZeroOrMore TestObjClass as TestObjClass
     B: ZeroOrOne Kunde as ObjectProp

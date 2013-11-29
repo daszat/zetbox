@@ -405,6 +405,12 @@
   <data name="at.dasz.DocumentManagement.Document_description" xml:space="preserve">
     <value>Document with revisions</value>
   </data>
+  <data name="Zetbox.App.Test.DocumentTestObject" xml:space="preserve">
+    <value>DocumentTestObject</value>
+  </data>
+  <data name="Zetbox.App.Test.DocumentTestObject_description" xml:space="preserve">
+    <value>DocumentTestObject</value>
+  </data>
   <data name="Zetbox.App.Base.DoubleDefaultValue" xml:space="preserve">
     <value>DoubleDefaultValue</value>
   </data>
@@ -1177,7 +1183,7 @@
     <value>TestObjClass</value>
   </data>
   <data name="Zetbox.App.Test.TestObjClass_description" xml:space="preserve">
-    <value />
+    <value>A TestClass with many properties</value>
   </data>
   <data name="Zetbox.App.Test.TestPhoneCompoundObject" xml:space="preserve">
     <value>TestPhoneCompoundObject</value>

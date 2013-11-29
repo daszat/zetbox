@@ -19,7 +19,7 @@ namespace Zetbox.App.Test
     using Zetbox.DalProvider.NHibernate;
 
     /// <summary>
-    /// 
+    /// A TestClass with many properties
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("TestObjClass")]
     public class TestObjClassNHibernateImpl : Zetbox.DalProvider.NHibernate.DataObjectNHibernateImpl, TestObjClass

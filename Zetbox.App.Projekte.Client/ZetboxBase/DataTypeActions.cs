@@ -219,6 +219,7 @@ namespace Zetbox.App.Base
                 if (values.ContainsKey("str_maxlengt"))
                 {
                     var c = ctx.Create<StringRangeConstraint>();
+                    c.MinLength = 0;
                     c.MaxLength = (int?)values["str_maxlengt"];
                     newProp.Constraints.Add(c);
                 }

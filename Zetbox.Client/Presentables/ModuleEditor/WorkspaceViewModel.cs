@@ -150,7 +150,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                     SetupViewModel(assemblyLstMdl);
                     assemblyLstMdl.Commands.Add(ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext,
                         this,
-                        "Refresh TypeRefs", "Refreshes the TypeRefs, ViewDescriptors and ViewModelDescriptors",
+                        "Refresh descriptors", "Refreshes the ViewDescriptors and ViewModelDescriptors",
                         () =>
                         {
                             foreach (var mdl in assemblyLstMdl.SelectedItems)

@@ -33,19 +33,23 @@ namespace Zetbox.Client.Presentables
     public abstract class PropertyGroupViewModel
         : ViewModel, IDataErrorInfo
     {
-        public new delegate PropertyGroupViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string title, IEnumerable<ViewModel> obj);
+        public new delegate PropertyGroupViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string tagName, string title, IEnumerable<ViewModel> lst);
 
         private readonly string _title;
         protected readonly ObservableCollection<ViewModel> properties;
 
         public PropertyGroupViewModel(
             IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
+            string tagName,
             string title,
-            IEnumerable<ViewModel> obj)
+            IEnumerable<ViewModel> lst)
             : base(appCtx, dataCtx, parent)
         {
+            if (string.IsNullOrWhiteSpace(tagName)) throw new ArgumentNullException("tagName");
+
+            _tagName = tagName;
             _title = title ?? string.Empty;
-            properties = new ObservableCollection<ViewModel>(obj);
+            properties = new ObservableCollection<ViewModel>(lst);
             properties.CollectionChanged += PropertyListChanged;
             foreach (var prop in properties)
             {
@@ -72,6 +76,12 @@ namespace Zetbox.Client.Presentables
         public override string Name
         {
             get { return Title; }
+        }
+
+        private string _tagName;
+        public string TagName
+        {
+            get { return _tagName; }
         }
 
         private ReadOnlyObservableCollection<ViewModel> _propertyModelsCache;
@@ -146,13 +156,14 @@ namespace Zetbox.Client.Presentables
 
     public class SinglePropertyGroupViewModel : PropertyGroupViewModel
     {
-        public new delegate SinglePropertyGroupViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string title, IEnumerable<ViewModel> obj);
+        public new delegate SinglePropertyGroupViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string tagName, string title, IEnumerable<ViewModel> lst);
 
         public SinglePropertyGroupViewModel(
             IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
+            string tagName, 
             string title,
-            IEnumerable<ViewModel> obj)
-            : base(appCtx, dataCtx, parent, title, obj)
+            IEnumerable<ViewModel> lst)
+            : base(appCtx, dataCtx, parent, tagName, title, lst)
         {
         }
 
@@ -168,27 +179,31 @@ namespace Zetbox.Client.Presentables
 
     public class MultiplePropertyGroupViewModel : PropertyGroupViewModel
     {
-        public new delegate MultiplePropertyGroupViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string title, IEnumerable<ViewModel> obj);
+        public new delegate MultiplePropertyGroupViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string tagName, string title, IEnumerable<ViewModel> lst);
 
         public MultiplePropertyGroupViewModel(
             IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
+            string tagName, 
             string title,
-            IEnumerable<ViewModel> obj)
-            : base(appCtx, dataCtx, parent, title, obj)
+            IEnumerable<ViewModel> lst)
+            : base(appCtx, dataCtx, parent, tagName, title, lst)
         {
         }
     }
 
     public class CustomPropertyGroupViewModel : PropertyGroupViewModel
     {
-        public new delegate CustomPropertyGroupViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string title, IEnumerable<ViewModel> obj);
+        public new delegate CustomPropertyGroupViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string tagName, string title, IEnumerable<ViewModel> lst);
 
         public CustomPropertyGroupViewModel(
             IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
+            string tagName, 
             string title,
-            IEnumerable<ViewModel> obj)
-            : base(appCtx, dataCtx, parent, title, obj)
+            IEnumerable<ViewModel> lst)
+            : base(appCtx, dataCtx, parent, tagName, title, lst)
         {
+            // die fast
+            if (lst.Count() != 1) throw new ArgumentException("lst may only contain exact one element", "lst");
         }
 
         public ViewModel CustomModel
@@ -199,5 +214,19 @@ namespace Zetbox.Client.Presentables
             }
         }
 
+    }
+
+    public class CustomPropertyListGroupViewModel : PropertyGroupViewModel
+    {
+        public new delegate CustomPropertyListGroupViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string tagName, string title, IEnumerable<ViewModel> lst);
+
+        public CustomPropertyListGroupViewModel(
+            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
+            string tagName,
+            string title,
+            IEnumerable<ViewModel> lst)
+            : base(appCtx, dataCtx, parent, tagName, title, lst)
+        {
+        }
     }
 }

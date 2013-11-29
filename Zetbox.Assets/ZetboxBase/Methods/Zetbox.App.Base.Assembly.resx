@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="RegenerateTypeRefs_label" xml:space="preserve">
-    <value>RegenerateTypeRefs</value>
+    <value>Refresh descriptors</value>
   </data>
   <data name="RegenerateTypeRefs_description" xml:space="preserve">
     <value>Regenerates the stored list of TypeRefs from the loaded assembly</value>

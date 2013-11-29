@@ -1481,6 +1481,7 @@ namespace at.dasz.DocumentManagement
                 ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
             }
+            // should fetch && remember parent for DocumentTestObject_has_File_RelationEntry
 
             Blob = null;
             ChangedBy = null;

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ZetboxConfig xmlns="http://dasz.at/Zetbox/">
+  <ConfigName>Default Client with Server Configuration</ConfigName>
+  <Client StartClient="false" ThrowErrors="false">
+    <!--<Culture>x-zb-Pseudo</Culture>
+    <UICulture>x-zb-Pseudo</UICulture>-->
+    <Culture>de-AT</Culture>
+    <UICulture>de-AT</UICulture>
+    <DocumentStore>P:\Zetbox\DocumentStore\Client\</DocumentStore>
+    <DevelopmentEnvironment>false</DevelopmentEnvironment>
+    <Modules>
+      <Module>Zetbox.Client.ClientModule, Zetbox.Client</Module>
+      <Module>Zetbox.Client.WPF.WPFModule, Zetbox.Client.WPF</Module>
+      <Module>Zetbox.API.Client.WcfClientModule, Zetbox.API.Client</Module>
+	  <Module>Zetbox.Microsoft.Module, Zetbox.Microsoft</Module>
+	  <Module>Zetbox.Microsoft.OutlookMailSender+Module, Zetbox.Microsoft</Module>
+      <Module>Zetbox.API.MailProblemReporter+Module, Zetbox.API</Module>
+      <Module>Zetbox.App.Projekte.DocumentManagement.FileImportService+Module, Zetbox.App.Projekte.Common</Module>
+	  <Module>Zetbox.Client.DefaultFulltextSupport+Module, Zetbox.Client</Module>
+    </Modules>
+  </Client>
+  <Server StartServer="true">
+    <ConnectionStrings>
+      <Database Name="Zetbox" Schema="POSTGRESQL" Provider="NHibernate.Dialect.PostgreSQL82Dialect">Server=localhost;Port=5432;Database=zetbox;User Id=zetbox;Password=b-cXqMyXEYea2kkjUhkS</Database>
+    </ConnectionStrings>
+    <DocumentStore>DocumentStore\Server\</DocumentStore>
+    <Modules>
+      <Module>Zetbox.Server.ServerModule, Zetbox.Server</Module>
+      <Module>Zetbox.DalProvider.NHibernate.NHibernateProvider, Zetbox.DalProvider.NHibernate</Module>
+      <Module>Zetbox.API.Server.PerfCounter.PerfMonAppender+Module, Zetbox.API.Server</Module>
+	  <Module>Zetbox.Server.Wcf.WcfModule, Zetbox.Server.Wcf</Module>
+	  <Module>Zetbox.API.Server.Fulltext.Module, Zetbox.API.Server</Module>
+    </Modules>
+  </Server>
+</ZetboxConfig>

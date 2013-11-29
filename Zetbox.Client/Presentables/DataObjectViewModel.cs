@@ -207,27 +207,40 @@ namespace Zetbox.Client.Presentables
                         .OrderBy(group => group.Key)
                         .Select(group =>
                         {
-                            var tag = group.First().Category;
-                            var lst = group.Select(p => _propertyModels[p.Property]).Cast<ViewModel>().ToList();
-
-                            var translatedTag = Assets.GetString(zbBaseModule, ZetboxAssetKeys.CategoryTags, tag);
-                            if (string.IsNullOrWhiteSpace(translatedTag))
-                            {
-                                translatedTag = Assets.GetString(group.First().Property.Module, ZetboxAssetKeys.CategoryTags, tag, tag);
-                            }
-
-                            if (lst.Count == 1)
-                            {
-                                return (PropertyGroupViewModel)ViewModelFactory.CreateViewModel<SinglePropertyGroupViewModel.Factory>().Invoke(
-                                    DataContext, this, translatedTag, lst);
-                            }
-                            else
-                            {
-                                return (PropertyGroupViewModel)ViewModelFactory.CreateViewModel<MultiplePropertyGroupViewModel.Factory>().Invoke(
-                                    DataContext, this, translatedTag, lst);
-                            }
+                            var firstProp = group.First();
+                            var tag = firstProp.Category;
+                            var lst = new SortedDictionary<string, ViewModel>();
+                            group.ForEach(p => { lst.Add(p.Property.Name, _propertyModels[p.Property]); });
+                            var propModule = firstProp.Property.Module;
+                            var translatedTag = TranslatePropertyGroupTag(tag, propModule, zbBaseModule);
+                            return CreatePropertyGroup(tag, translatedTag, lst);
                         })
                         .ToList();
+        }
+
+        protected virtual string TranslatePropertyGroupTag(string tag, Module propModule, Module zbBaseModule)
+        {
+            var translatedTag = Assets.GetString(zbBaseModule, ZetboxAssetKeys.CategoryTags, tag);
+            if (string.IsNullOrWhiteSpace(translatedTag))
+            {
+                translatedTag = Assets.GetString(propModule, ZetboxAssetKeys.CategoryTags, tag, tag);
+            }
+
+            return translatedTag;
+        }
+
+        protected virtual PropertyGroupViewModel CreatePropertyGroup(string tag, string translatedTag, SortedDictionary<string, ViewModel> lst)
+        {
+            if (lst.Count == 1)
+            {
+                return (PropertyGroupViewModel)ViewModelFactory.CreateViewModel<SinglePropertyGroupViewModel.Factory>().Invoke(
+                    DataContext, this, tag, translatedTag, lst.Values);
+            }
+            else
+            {
+                return (PropertyGroupViewModel)ViewModelFactory.CreateViewModel<MultiplePropertyGroupViewModel.Factory>().Invoke(
+                    DataContext, this, tag, translatedTag, lst.Values);
+            }
         }
 
         private string GetCategorySortKey(string cat)
@@ -245,7 +258,7 @@ namespace Zetbox.Client.Presentables
         {
             get
             {
-                return new LookupDictionary<string, PropertyGroupViewModel, PropertyGroupViewModel>(PropertyGroups, mdl => mdl.Title, mdl => mdl);
+                return new LookupDictionary<string, PropertyGroupViewModel, PropertyGroupViewModel>(PropertyGroups, mdl => mdl.TagName, mdl => mdl);
             }
         }
 

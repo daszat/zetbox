@@ -264,6 +264,17 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         public void SelectValue()
         {
+            var selectionTask = CreateDataObjectSelectionTask();
+            OnDataObjectSelectionTaskCreated(selectionTask);
+            ViewModelFactory.ShowDialog(selectionTask);
+        }
+
+        /// <summary>
+        /// Creates a data object selection task for the referenced class. The choose action should set this.Value with the first selected item.
+        /// </summary>
+        /// <returns></returns>
+        protected virtual DataObjectSelectionTaskViewModel CreateDataObjectSelectionTask()
+        {
             var selectionTask = ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
                 DataContext,
                 this,
@@ -280,9 +291,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             selectionTask.ListViewModel.AllowDelete = false;
             selectionTask.ListViewModel.AllowOpen = false;
             selectionTask.ListViewModel.AllowAddNew = AllowCreateNewItemOnSelect;
-            OnDataObjectSelectionTaskCreated(selectionTask);
-
-            ViewModelFactory.ShowDialog(selectionTask);
+            return selectionTask;
         }
 
         public event DataObjectSelectionTaskCreatedEventHandler DataObjectSelectionTaskCreated;
@@ -531,7 +540,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             return DataContext.GetQuery<T>();
         }
 
-        public IQueryable GetUntypedQuery(ObjectClass cls)
+        protected virtual IQueryable GetUntypedQuery(ObjectClass cls)
         {
             var mi = this.GetType().FindGenericMethod("GetUntypedQueryHack", new[] { cls.GetDescribedInterfaceType().Type }, new Type[0], isPrivate: true);
             return (IQueryable)mi.Invoke(this, new object[0]);

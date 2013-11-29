@@ -26,6 +26,7 @@ namespace Zetbox.API.Migration
     using Zetbox.API.Server;
     using Zetbox.API.Utils;
     using Zetbox.App.SchemaMigration;
+    using System.Configuration;
 
     public abstract class MigrationProgram
     {
@@ -156,7 +157,10 @@ namespace Zetbox.API.Migration
             ConfigureBuilder(builder);
 
             // register deployment-specific components
-            builder.RegisterModule(new ConfigurationSettingsReader("migrationcomponents"));
+            if (ConfigurationManager.GetSection("migrationcomponents") != null)
+            {
+                builder.RegisterModule(new ConfigurationSettingsReader("migrationcomponents"));
+            }
 
             return builder.Build();
         }

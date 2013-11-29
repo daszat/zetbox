@@ -20,7 +20,7 @@ namespace Zetbox.App.Test
     using Zetbox.DalProvider.Ef;
 
     /// <summary>
-    /// 
+    /// A TestClass with many properties
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="TestObjClassEfImpl")]
     [System.Diagnostics.DebuggerDisplay("TestObjClass")]

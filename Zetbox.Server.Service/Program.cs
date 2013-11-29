@@ -31,6 +31,7 @@ namespace Zetbox.Server.Service
     using Zetbox.API.Utils;
     using Zetbox.App.Extensions;
     using Zetbox.App.Packaging;
+    using System.Configuration;
 
     /// <summary>
     /// Mainprogramm
@@ -122,7 +123,10 @@ namespace Zetbox.Server.Service
             builder.RegisterType<WindowsService>().SingleInstance();
 
             // register deployment-specific components
-            builder.RegisterModule(new ConfigurationSettingsReader("servercomponents"));
+            if (ConfigurationManager.GetSection("servercomponents") != null)
+            {
+                builder.RegisterModule(new ConfigurationSettingsReader("servercomponents"));
+            }
 
             var container = builder.Build();
             API.AppDomainInitializer.InitializeFrom(container);

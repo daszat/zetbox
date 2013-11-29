@@ -25,6 +25,8 @@ namespace Zetbox.Client.Presentables
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
+    using Zetbox.Client.Presentables.GUI;
+    using Zetbox.Client.Presentables.ValueViewModels;
 
     [ViewModelDescriptor]
     public class DataTypeViewModel
@@ -69,23 +71,46 @@ namespace Zetbox.Client.Presentables
             get { return IconConverter.ToImage(_dataType.DefaultIcon); }
         }
 
-        protected override List<PropertyGroupViewModel> CreatePropertyGroups()
+
+        protected override PropertyGroupViewModel CreatePropertyGroup(string tag, string translatedTag, SortedDictionary<string, ViewModel> lst)
         {
-            var result = base.CreatePropertyGroups();
-
-            if (_dataType is ObjectClass || _dataType is CompoundObject)
+            if (tag == "Properties" && (_dataType is ObjectClass || _dataType is CompoundObject))
             {
-                var singleMdl = result.Single(n => n.Name == "Properties");
-                var preview = ViewModelFactory.CreateViewModel<PropertiesPrewiewViewModel.Factory>().Invoke(DataContext, this, _dataType);
-                var lblMdl = ViewModelFactory.CreateViewModel<LabeledViewContainerViewModel.Factory>().Invoke(DataContext, this, "Preview", "", preview);
-                var grpMdl = ViewModelFactory.CreateViewModel<MultiplePropertyGroupViewModel.Factory>().Invoke(DataContext, this, "Properties", singleMdl.PropertyModels.Concat(new[] { lblMdl }).ToArray());
-
-                var idx = result.IndexOf(singleMdl);
-                result.Remove(singleMdl);
-                result.Insert(idx, grpMdl);
+                return ViewModelFactory.CreateViewModel<MultiplePropertyGroupViewModel.Factory>()
+                    .Invoke(
+                        DataContext,
+                        this,
+                        tag,
+                        translatedTag,
+                        lst.Values.Concat(new[] { 
+                               ViewModelFactory.CreateViewModel<LabeledViewContainerViewModel.Factory>().Invoke(DataContext, this, "Preview", "", ViewModelFactory.CreateViewModel<PropertiesPrewiewViewModel.Factory>().Invoke(DataContext, this, _dataType)) 
+                           })
+                           .ToArray());
             }
-
-            return result;
+            else if (tag == "GUI")
+            {
+                return ViewModelFactory.CreateViewModel<CustomPropertyGroupViewModel.Factory>()
+                    .Invoke(
+                        DataContext,
+                        this,
+                        tag,
+                        translatedTag,
+                        new[] { 
+                            ViewModelFactory.CreateViewModel<StackPanelViewModel.Factory>()
+                                .Invoke(
+                                    DataContext,
+                                    this,
+                                    tag,
+                                    new[] {
+                                        ViewModelFactory.CreateViewModel<GroupBoxViewModel.Factory>().Invoke(DataContext, this, "Settings", lst.Where(kv => !kv.Key.StartsWith("Show")).Select(kv => kv.Value)),
+                                        ViewModelFactory.CreateViewModel<GroupBoxViewModel.Factory>().Invoke(DataContext, this, "Display", lst.Where(kv => kv.Key.StartsWith("Show")).Select(kv => kv.Value)),
+                                    })
+                        });
+            }
+            else
+            {
+                return base.CreatePropertyGroup(tag, translatedTag, lst);
+            }
         }
 
         public string DescribedType

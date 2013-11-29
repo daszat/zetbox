@@ -23,6 +23,7 @@ M: System.Linq.Expressions.Expression System.Linq.Dynamic.ExpressionParser::Pars
 M: System.Void Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.AssociationSetAttributes::Generate()
 M: System.Void Zetbox.Client.Presentables.GUI.NavigationSearchScreenViewModel::InitializeListViewModel(Zetbox.Client.Presentables.ZetboxBase.InstanceListViewModel)
 M: Zetbox.Client.Presentables.DtoViewModels.DtoTableViewModel Zetbox.Client.Presentables.DtoViewModels.DtoBuilder::BuildTableFrom(System.Object,System.Reflection.PropertyInfo,System.Object,Zetbox.Client.Presentables.IViewModelDependencies,Zetbox.API.IZetboxContext,Zetbox.Client.Presentables.ViewModel)
+M: System.Collections.Generic.List`1<Zetbox.Client.Presentables.PropertyGroupViewModel> Zetbox.Client.Presentables.TestObjClassViewModel::CreatePropertyGroups()
 # False positive: calls happen in loops, depending on the loop var or other aliasing artifacts
 M: System.Void Zetbox.DalProvider.Ef.Generator.Templates.EfModel.ModelCsdl::Generate()
 M: System.Void Zetbox.DalProvider.Ef.Generator.Templates.EfModel.ModelSsdl::Generate()

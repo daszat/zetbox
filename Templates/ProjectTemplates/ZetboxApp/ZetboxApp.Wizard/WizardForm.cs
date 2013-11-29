@@ -15,7 +15,7 @@ namespace ZetboxApp.Wizard
     public partial class WizardForm : Form
     {
         public static readonly string SQLConnectionStringTemplate = @"Data Source=.\SQLEXPRESS;Initial Catalog={0};Integrated Security=True;MultipleActiveResultSets=true;";
-        public static readonly string PGConnectionStringTemplate = @"Server=localhost;Port=5432;Database={0};User Id=postgres;Password=";
+        public static readonly string PGConnectionStringTemplate = @"Server=localhost;Port=5432;Database={0};User Id=zetbox;Password=";
 
         public WizardForm(string solutionname)
         {

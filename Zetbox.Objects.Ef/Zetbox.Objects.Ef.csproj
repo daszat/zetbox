@@ -160,6 +160,7 @@
     <Compile Include="ZetboxBase\DecimalProperty.Ef.Designer.cs" />
     <Compile Include="ZetboxBase\DefaultPropertyValue.Ef.Designer.cs" />
     <Compile Include="DocumentManagement\Document.Ef.Designer.cs" />
+    <Compile Include="TestModule\DocumentTestObject.Ef.Designer.cs" />
     <Compile Include="ZetboxBase\DoubleDefaultValue.Ef.Designer.cs" />
     <Compile Include="ZetboxBase\DoubleParameter.Ef.Designer.cs" />
     <Compile Include="ZetboxBase\DoubleProperty.Ef.Designer.cs" />

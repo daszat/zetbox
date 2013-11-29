@@ -30,12 +30,12 @@ namespace Zetbox.Generator.ResourceGenerator
         {
             var moduleNames = modules.Select(m => m.Name).ToArray();
 
-            using (var writer = generator.AddFile("ZetboxBase\\Applications")) // See ZetboxAssetKeys.Applications
+            using (var writer = generator.AddFile("GUI\\Applications")) // See ZetboxAssetKeys.Applications
             {
                 foreach (var app in ctx.GetQuery<Application>()
                                         .ToList()
-                                        .Where(dt => moduleNames.Contains(dt.Module.Name))
-                                        .OrderBy(dt => dt.Name))
+                                        .Where(a => moduleNames.Contains(a.Module.Name))
+                                        .OrderBy(a => a.Name))
                 {
                     writer.AddResource(ZetboxAssetKeys.ConstructNameKey(app), app.Name);
                     writer.AddResource(ZetboxAssetKeys.ConstructDescriptionKey(app), app.Description);

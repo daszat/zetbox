@@ -36,6 +36,7 @@
     <EntitySet Name="DataType" EntityType="Model.Store.DataType" Schema="base" Table="DataTypes"/>
     <EntitySet Name="DeactivatableTestObject" EntityType="Model.Store.DeactivatableTestObject" Schema="test" Table="DeactivatableTestObjects"/>
     <EntitySet Name="DefaultPropertyValue" EntityType="Model.Store.DefaultPropertyValue" Schema="base" Table="DefaultPropertyValues"/>
+    <EntitySet Name="DocumentTestObject" EntityType="Model.Store.DocumentTestObject" Schema="test" Table="DocumentTestObjects"/>
     <EntitySet Name="EnumerationEntry" EntityType="Model.Store.EnumerationEntry" Schema="base" Table="EnumerationEntries"/>
     <EntitySet Name="Event" EntityType="Model.Store.Event" Schema="calendar" Table="Events"/>
     <EntitySet Name="Event_Rights" EntityType="Model.Store.Event_Rights" Schema="calendar" Table="Events_Rights"/>
@@ -1182,6 +1183,14 @@
       <End Role="Test" EntitySet="EventTestObject" />
       <End Role="Event" EntitySet="Event" />
     </AssociationSet>
+    <AssociationSet Name="FK_TestObj_has_AnyFile" Association="Model.Store.FK_TestObj_has_AnyFile" >
+      <End Role="TestObj" EntitySet="DocumentTestObject" />
+      <End Role="AnyFile" EntitySet="File" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TestObj_has_StaticFile" Association="Model.Store.FK_TestObj_has_StaticFile" >
+      <End Role="TestObj" EntitySet="DocumentTestObject" />
+      <End Role="StaticFile" EntitySet="StaticFile" />
+    </AssociationSet>
     <AssociationSet Name="FK_TestObjClass_has_ObjectProp" Association="Model.Store.FK_TestObjClass_has_ObjectProp" >
       <End Role="TestObjClass" EntitySet="TestObjClass" />
       <End Role="ObjectProp" EntitySet="Kunde" />
@@ -1615,6 +1624,16 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int4" Nullable="false" />
+  </EntityType>
+	
+  <EntityType Name="DocumentTestObject">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_AnyFile" Type="int4" />
+    <Property Name="fk_StaticFile" Type="int4" />
+    <Property Name="Name" Type="varchar" MaxLength="200" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="DynamicFile">
@@ -5805,6 +5824,34 @@
       </Principal>
       <Dependent Role="Test">
         <PropertyRef Name="fk_Event" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_TestObj_has_AnyFile">
+    <End Role="AnyFile" Type="Model.Store.File" Multiplicity="0..1" />
+    <End Role="TestObj" Type="Model.Store.DocumentTestObject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AnyFile">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TestObj">
+        <PropertyRef Name="fk_AnyFile" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_TestObj_has_StaticFile">
+    <End Role="StaticFile" Type="Model.Store.StaticFile" Multiplicity="0..1" />
+    <End Role="TestObj" Type="Model.Store.DocumentTestObject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaticFile">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TestObj">
+        <PropertyRef Name="fk_StaticFile" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

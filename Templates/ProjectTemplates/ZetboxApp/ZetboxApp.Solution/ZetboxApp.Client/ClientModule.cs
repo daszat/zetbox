@@ -22,6 +22,10 @@ namespace $safeprojectname$
 
             moduleBuilder.RegisterModule<Common.CommonModule>();
 
+            // Register additional module dependencies, for example workflow and parties
+            // moduleBuilder.RegisterModule<Zetbox.Workflow.Client.ClientModule>();
+            // moduleBuilder.RegisterModule<Zetbox.Parties.Client.ClientModule>();
+
             moduleBuilder.RegisterZetboxImplementors(typeof(ClientModule).Assembly);
             moduleBuilder.RegisterViewModels(typeof(ClientModule).Assembly);
 

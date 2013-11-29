@@ -41,6 +41,7 @@
     <commands:Converter x:Key="CommandConverter" />
     <converter:ObjectStateToTextConverter x:Key="ObjectStateToTextConverter" />
     <converter:ObjectStateToTextVisibilityConverter x:Key="ObjectStateToTextVisibilityConverter" />
+    <converter:DockConverter x:Key="DockConverter" />
 
     <converter:LighterShadeConverter x:Key="LighterShadeConverter" />
     <converter:DarkerShadeConverter x:Key="DarkerShadeConverter" />

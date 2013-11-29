@@ -192,6 +192,7 @@
     </Compile>
     <Compile Include="Presentables\DocumentManagement\ImportedFileViewModel.cs" />
     <Compile Include="Presentables\DocumentManagement\DynamicFileViewModel.cs" />
+    <Compile Include="Presentables\DocumentManagement\StaticFilePropertyViewModel.cs" />
     <Compile Include="Presentables\DocumentManagement\StaticFileViewModel.cs" />
     <Compile Include="Presentables\DocumentManagement\DocumentViewModel.cs" />
     <Compile Include="Presentables\DtoViewModels\DtoExporter.cs" />
@@ -225,6 +226,8 @@
     <Compile Include="Presentables\ModuleEditor\GroupingTreeItemViewModel.cs" />
     <Compile Include="Presentables\ObjectBrowser\ObjectClassViewModel.cs" />
     <Compile Include="Presentables\PropertiesPrewiewViewModel.cs" />
+    <Compile Include="Presentables\TestModule\TestObjClassViewModel.cs" />
+    <Compile Include="Presentables\TestModule\TestCustomObjectViewModel.cs" />
     <Compile Include="Presentables\TestModule\InstanceListTestViewModel.cs" />
     <Compile Include="Presentables\TestModule\NextEventsTestNavScreenViewModel.cs" />
     <Compile Include="Presentables\TestModule\TestAppNavigationScreenViewModel.cs" />

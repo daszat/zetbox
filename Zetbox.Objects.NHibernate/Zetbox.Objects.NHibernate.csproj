@@ -172,6 +172,7 @@
     <Compile Include="ZetboxBase\DecimalProperty.NHibernate.Designer.cs" />
     <Compile Include="ZetboxBase\DefaultPropertyValue.NHibernate.Designer.cs" />
     <Compile Include="DocumentManagement\Document.NHibernate.Designer.cs" />
+    <Compile Include="TestModule\DocumentTestObject.NHibernate.Designer.cs" />
     <Compile Include="ZetboxBase\DoubleDefaultValue.NHibernate.Designer.cs" />
     <Compile Include="ZetboxBase\DoubleParameter.NHibernate.Designer.cs" />
     <Compile Include="ZetboxBase\DoubleProperty.NHibernate.Designer.cs" />
