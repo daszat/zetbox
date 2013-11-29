@@ -55,6 +55,8 @@
     <file src="Common\Zetbox.API.Common.pdb" target="zetbox\Common" />
     <file src="Common\Zetbox.API.dll" target="zetbox\Common" />
     <file src="Common\Zetbox.API.pdb" target="zetbox\Common" />
+    <file src="Common\Zetbox.Assets.dll" target="zetbox\Common" />
+    <file src="Common\Zetbox.Assets.pdb" target="zetbox\Common" />
     <file src="Common\Zetbox.App.Projekte.Common.dll" target="zetbox\Common" />
     <file src="Common\Zetbox.App.Projekte.Common.pdb" target="zetbox\Common" />
     <file src="Common\Zetbox.Dalprovider.Base.dll" target="zetbox\Common" />
