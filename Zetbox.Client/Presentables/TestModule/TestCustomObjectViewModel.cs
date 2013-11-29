@@ -35,19 +35,11 @@ namespace Zetbox.Client.Presentables
     {
         public new delegate TestCustomObjectViewModel Factory(IZetboxContext dataCtx, ViewModel parent, TestCustomObject obj);
 
-        private readonly TestCustomObject _obj;
-
         public TestCustomObjectViewModel(
             IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
             TestCustomObject obj)
             : base(appCtx, dataCtx, parent, obj)
         {
-            _obj = obj;
-        }
-
-        protected override PropertyGroupViewModel CreatePropertyGroup(string tag, string translatedTag, SortedDictionary<string, ViewModel> lst)
-        {
-            return base.CreatePropertyGroup(tag, translatedTag, lst);
         }
     }
 }
