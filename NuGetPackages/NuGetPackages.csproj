@@ -17,7 +17,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="README.zetbox.txt" />
-    <Content Include="zetboxBasic.nuspec" />
+    <Content Include="zetboxBasic.nuspec">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="zetboxBasic-All.nuspec" />
     <Content Include="zetboxBasic-EF.nuspec" />
     <Content Include="zetboxBasic-NH.nuspec" />

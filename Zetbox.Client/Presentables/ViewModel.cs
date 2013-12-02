@@ -103,6 +103,23 @@ namespace Zetbox.Client.Presentables
         /// </summary>
         public IViewModelFactory ViewModelFactory { get { return _dependencies.Factory; } }
 
+        private UICreator _uiCreator;
+        /// <summary>
+        /// A helper for easier working with the ViewModelFactory
+        /// </summary>
+        public UICreator UICreator
+        {
+            get
+            {
+                if (_uiCreator == null)
+                {
+                    _uiCreator = new UICreator(ViewModelFactory, DataContext, this);
+                }
+                return _uiCreator;
+            }
+        }
+
+
         /// <summary>
         /// The IconConverter instance
         /// </summary>

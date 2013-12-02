@@ -33,6 +33,7 @@ namespace Zetbox.Client.Presentables
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables.ValueViewModels;
     using Zetbox.API.Common;
+    using Zetbox.Client.GUI;
 
     /// <summary>
     /// Proxies a whole IDataObject
