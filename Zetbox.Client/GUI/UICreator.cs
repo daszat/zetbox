@@ -31,6 +31,9 @@ namespace Zetbox.Client.GUI
 
         public UICreator(IViewModelFactory vmf, IZetboxContext ctx, ViewModel parent)
         {
+            if (vmf == null) throw new ArgumentNullException("vmf");
+            if (ctx == null) throw new ArgumentNullException("ctx");
+
             ViewModelFactory = vmf;
             DataContext = ctx;
             Parent = parent;
@@ -43,30 +46,40 @@ namespace Zetbox.Client.GUI
         /// </summary>
         public static CustomPropertyGroupViewModel CustomPropertyGroup(this UICreator uiCreator, string key, string title, IEnumerable<ViewModel> children)
         {
+            if (uiCreator == null) throw new ArgumentNullException("uiCreator");
+
             return uiCreator.ViewModelFactory.CreateViewModel<CustomPropertyGroupViewModel.Factory>()
                        .Invoke(uiCreator.DataContext, uiCreator.Parent, key, title, children);
         }
 
         public static StackPanelViewModel StackPanel(this UICreator uiCreator, IEnumerable<ViewModel> children)
         {
+            if (uiCreator == null) throw new ArgumentNullException("uiCreator");
+
             return uiCreator.ViewModelFactory.CreateViewModel<StackPanelViewModel.Factory>()
                        .Invoke(uiCreator.DataContext, uiCreator.Parent, "__stack", children);
         }
 
         public static GroupBoxViewModel GroupBox(this UICreator uiCreator, string title, IEnumerable<ViewModel> children)
         {
+            if (uiCreator == null) throw new ArgumentNullException("uiCreator");
+
             return uiCreator.ViewModelFactory.CreateViewModel<GroupBoxViewModel.Factory>()
                        .Invoke(uiCreator.DataContext, uiCreator.Parent, title, children);
         }
 
         public static GridPanelViewModel Grid(this UICreator uiCreator, IEnumerable<GridPanelViewModel.Cell> children)
         {
+            if (uiCreator == null) throw new ArgumentNullException("uiCreator");
+
             return uiCreator.ViewModelFactory.CreateViewModel<GridPanelViewModel.Factory>()
                        .Invoke(uiCreator.DataContext, uiCreator.Parent, "__grid", children);
         }
 
         public static DockPanelViewModel DockPanel(this UICreator uiCreator, IEnumerable<DockPanelViewModel.Cell> children)
         {
+            if (uiCreator == null) throw new ArgumentNullException("uiCreator");
+
             return uiCreator.ViewModelFactory.CreateViewModel<DockPanelViewModel.Factory>()
                        .Invoke(uiCreator.DataContext, uiCreator.Parent, "__dock", children);
         }
