@@ -65,7 +65,7 @@ namespace Zetbox.API.Common
 
             builder.RegisterModule<Zetbox.Objects.InterfaceModule>();
             builder.RegisterModule((Module)Activator.CreateInstance(Type.GetType("Zetbox.DalProvider.Memory.MemoryProvider, Zetbox.DalProvider.Memory", true)));
-            builder.RegisterModule((Module)Activator.CreateInstance(Type.GetType("Zetbox.Assets.AssetsModule, Zetbox.Assets", true)));
+            builder.RegisterModule<Zetbox.Assets.AssetsModule>();
         }
     }
 }
