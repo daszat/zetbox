@@ -39,7 +39,7 @@ namespace Zetbox.App.Extensions
     {
         protected readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Common.BaseCustomActionsManager");
 
-        private readonly IEnumerable<ImplementorAssembly> _assemblies;
+        private readonly List<ImplementorAssembly> _assemblies;
         private readonly ILifetimeScope _container;
 
         private struct MethodKey
@@ -100,7 +100,8 @@ namespace Zetbox.App.Extensions
             if (assemblies == null) { throw new ArgumentNullException("assemblies"); }
 
             _container = container;
-            _assemblies = assemblies;
+            // Each assembly only once. Thus assemblies will be registered by modules throug Autofac it cannot be guaranteed that this will happen only once per assembly.
+            _assemblies = assemblies.Distinct().ToList();
 
             ExtraSuffix = extraSuffix;
             ImplementationAssemblyName = this.GetType().Assembly.FullName;
