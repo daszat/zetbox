@@ -204,7 +204,7 @@ namespace Zetbox.API.Tests
 
         [Test]
         public void copyto_should_check_index_not_greater_than_or_equal_array_length(
-            [Range(-10, 10)] int offset)
+            [Range(-5, 5)] int offset)
         {
             var destination = new TItem[initialItems.Count + 5];
             var destinationIndex = destination.Length - offset;
@@ -226,7 +226,7 @@ namespace Zetbox.API.Tests
 
         [Test]
         public void copyto_should_check_enough_available_space(
-            [Range(-10, 10)] int offset)
+            [Range(-5, 5)] int offset)
         {
             var destination = new TItem[initialItems.Count + 5];
             var destinationIndex = destination.Length - initialItems.Count - offset + 1;
@@ -266,7 +266,7 @@ namespace Zetbox.API.Tests
 
         [Test]
         public void copyto_should_copy_items(
-            [Range(0, 10)] int offset)
+            [Range(0, 5)] int offset)
         {
             // create big enough array
             var destination = new TItem[initialItems.Count + 20];

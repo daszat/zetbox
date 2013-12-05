@@ -27,11 +27,9 @@ namespace Zetbox.IntegrationTests
     using Zetbox.DalProvider.Base.RelationWrappers;
     using NUnit.Framework;
 
-    [Ignore("takes way too long")]
     [TestFixture(0)]
     [TestFixture(1)]
-    [TestFixture(10)]
-    [TestFixture(50)]
+    [TestFixture(5)]
     public sealed class BasicOneNRelationTests
         : BasicListTests<OneNRelationList<Property>, Property>
     {
@@ -136,7 +134,7 @@ namespace Zetbox.IntegrationTests
             Assert.That(_hasParentChanged, "Parent was not notified");
             _hasParentChanged = false;
 
-            Assert.That(_parent.ObjectState, Is.EqualTo(DataObjectState.Modified).Or.EqualTo(DataObjectState.New));
+            Assert.That(_parent.ObjectState, Is.EqualTo(DataObjectState.Unmodified).Or.EqualTo(DataObjectState.New));
             Assert.That(ctx.AttachedObjects.OfType<Property>().Select(p => p.ObjectState).Distinct().ToArray(), Is.Empty.Or.Member(DataObjectState.Modified).Or.Member(DataObjectState.New));
         }
 
@@ -160,7 +158,7 @@ namespace Zetbox.IntegrationTests
             foreach (var expected in expectedItems)
             {
                 //Assert.That(expected.OneSide, Is.SameAs(obj));
-                Assert.That(expected.GetPrivateFieldValue<int?>("_fk_ObjectClass"), Is.EqualTo(_parent.ID));
+                Assert.That(expected.GetPrivateFieldValue<int?>("__fk_ObjectClassCache"), Is.EqualTo(_parent.ID));
                 Assert.That(expected.GetPrivateFieldValue<int?>("_Properties_pos"), Is.Not.Null);
             }
 
@@ -188,11 +186,9 @@ namespace Zetbox.IntegrationTests
         }
     }
 
-    [Ignore("takes way too long")]
     [TestFixture(0)]
     [TestFixture(1)]
-    [TestFixture(10)]
-    [TestFixture(50)]
+    [TestFixture(5)]
     public sealed class GenericOneNRelationTests
         : GenericListTests<OneNRelationList<Property>, Property>
     {
@@ -228,7 +224,9 @@ namespace Zetbox.IntegrationTests
 
                 while (fixtureOC.Properties.Count > items)
                 {
-                    fixtureOC.Properties.RemoveAt(fixtureOC.Properties.Count - 1);
+                    var propToDelete = fixtureOC.Properties[fixtureOC.Properties.Count - 1];
+                    fixtureOC.Properties.Remove(propToDelete);
+                    initCtx.Delete(propToDelete);
                 }
 
                 Assert.That(fixtureOC.Properties.Count, Is.EqualTo(items));
@@ -298,7 +296,7 @@ namespace Zetbox.IntegrationTests
             Assert.That(_hasParentChanged, "Parent was not notified");
             _hasParentChanged = false;
 
-            Assert.That(_parent.ObjectState, Is.EqualTo(DataObjectState.Modified).Or.EqualTo(DataObjectState.New));
+            Assert.That(_parent.ObjectState, Is.EqualTo(DataObjectState.Unmodified).Or.EqualTo(DataObjectState.New));
             Assert.That(ctx.AttachedObjects.OfType<Property>().Select(p => p.ObjectState).Distinct().ToArray(), Is.Empty.Or.Member(DataObjectState.Modified).Or.Member(DataObjectState.New));
         }
 
@@ -322,7 +320,7 @@ namespace Zetbox.IntegrationTests
             foreach (var expected in expectedItems)
             {
                 //Assert.That(expected.OneSide, Is.SameAs(obj));
-                Assert.That(expected.GetPrivateFieldValue<int?>("_fk_ObjectClass"), Is.EqualTo(_parent.ID));
+                Assert.That(expected.GetPrivateFieldValue<int?>("__fk_ObjectClassCache"), Is.EqualTo(_parent.ID));
                 Assert.That(expected.GetPrivateFieldValue<int?>("_Properties_pos"), Is.Not.Null);
             }
 

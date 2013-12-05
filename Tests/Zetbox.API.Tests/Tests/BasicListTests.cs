@@ -142,7 +142,7 @@ namespace Zetbox.API.Tests
         }
 
         [Test]
-        public void add_should_insert_items_at_the_end([Range(1, 100, 10)]int numItems)
+        public void add_should_insert_items_at_the_end([Range(1, 5)]int numItems)
         {
             var expectedItems = new List<TItem>(initialItems);
             for (int i = 0; i < numItems; i++)
