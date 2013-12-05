@@ -124,10 +124,19 @@ this.WriteObjects("            this.",  positionPropertyName , " = otherImpl.", 
 #line 83 "P:\zetbox\Zetbox.DalProvider.Client.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 } 
 #line 84 "P:\zetbox\Zetbox.DalProvider.Client.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
-this.WriteObjects("            this._fk_",  propName , " = otherImpl._fk_",  propName , ";\r\n");
-#line 85 "P:\zetbox\Zetbox.DalProvider.Client.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+this.WriteObjects("            if(this._fk_",  propName , " != otherImpl._fk_",  propName , ")\r\n");
+this.WriteObjects("            {\r\n");
+this.WriteObjects("                // On the client side it is important to notify changes as _fk_",  propName , " is also the backingstore\r\n");
+this.WriteObjects("                // so, there is no need for a ReloadReferences call\r\n");
+this.WriteObjects("                var oldVal = this._fk_",  propName , ";\r\n");
+this.WriteObjects("                var newVal = otherImpl._fk_",  propName , ";\r\n");
+this.WriteObjects("                NotifyPropertyChanging(\"",  propName , "\", oldVal, newVal);\r\n");
+this.WriteObjects("                this._fk_",  propName , " = otherImpl._fk_",  propName , ";\r\n");
+this.WriteObjects("                NotifyPropertyChanged(\"",  propName , "\", oldVal, newVal);\r\n");
+this.WriteObjects("            }\r\n");
+#line 94 "P:\zetbox\Zetbox.DalProvider.Client.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 } 
-#line 86 "P:\zetbox\Zetbox.DalProvider.Client.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
+#line 95 "P:\zetbox\Zetbox.DalProvider.Client.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 this.WriteObjects("        }\r\n");
 
         }

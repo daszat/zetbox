@@ -81,6 +81,15 @@
 %>
             this.<%= positionPropertyName %> = otherImpl.<%= positionPropertyName %>;
 <%      } %>
-            this._fk_<%= propName %> = otherImpl._fk_<%= propName %>;
+            if(this._fk_<%= propName %> != otherImpl._fk_<%= propName %>)
+            {
+                // On the client side it is important to notify changes as _fk_<%= propName %> is also the backingstore
+                // so, there is no need for a ReloadReferences call
+                var oldVal = this._fk_<%= propName %>;
+                var newVal = otherImpl._fk_<%= propName %>;
+                NotifyPropertyChanging("<%= propName %>", oldVal, newVal);
+                this._fk_<%= propName %> = otherImpl._fk_<%= propName %>;
+                NotifyPropertyChanged("<%= propName %>", oldVal, newVal);
+            }
 <% } %>
         }

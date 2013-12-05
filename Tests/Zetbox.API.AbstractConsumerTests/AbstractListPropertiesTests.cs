@@ -93,7 +93,6 @@ namespace Zetbox.API.AbstractConsumerTests
         }
 
         [Test]
-        //[Ignore("EF/NpgSql produces an invalid SQL Statement")]
         public void list_and_query_should_yield_consistent_results()
         {
             var ctx = GetContext();

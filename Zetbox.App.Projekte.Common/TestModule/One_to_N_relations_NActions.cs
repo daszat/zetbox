@@ -1,4 +1,4 @@
-// This file is part of zetbox.
+﻿// This file is part of zetbox.
 //
 // Zetbox is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Lesser General Public License as
@@ -13,20 +13,21 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace Zetbox.Server.Tests.ContextTests
+namespace Zetbox.App.Test
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-
     using Zetbox.API;
-    using Zetbox.App.Test;
 
-    using NUnit.Framework;
-
-    public class when_searching
-        : Zetbox.API.AbstractConsumerTests.ContextTests.when_searching
+    [Implementor]
+    public static class One_to_N_relations_NActions
     {
+        [Invocation]
+        public static void ToString(One_to_N_relations_N obj, MethodReturnEventArgs<string> e)
+        {
+            e.Result = obj.Name;
+        }
     }
 }

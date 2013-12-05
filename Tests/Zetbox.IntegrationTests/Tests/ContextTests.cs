@@ -21,6 +21,11 @@ namespace Zetbox.IntegrationTests.ContextTests
     using System.Text;
     using NUnit.Framework;
 
+    public class when_changing_one_to_n
+        : Zetbox.API.AbstractConsumerTests.ContextTests.when_changing_one_to_n
+    {
+    }
+
     public class when_concurrency
         : Zetbox.API.AbstractConsumerTests.ContextTests.when_concurrency
     {
