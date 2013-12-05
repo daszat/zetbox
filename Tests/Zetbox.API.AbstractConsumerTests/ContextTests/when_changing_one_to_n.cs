@@ -126,8 +126,9 @@ namespace Zetbox.API.AbstractConsumerTests.ContextTests
                 if (e.PropertyName == "OneSide")
                     oneSideChanged = true;
             };
+            Assert.That(localN1.OneSide.ID, Is.EqualTo(one1.ID)); // Touch navigator
 
-            Assert.That(localN1.OneSide.ID, Is.EqualTo(one1.ID));
+            // Make changes in other context
             n1.OneSide = one2;
             ctx.SubmitChanges();
 
@@ -137,6 +138,25 @@ namespace Zetbox.API.AbstractConsumerTests.ContextTests
             Assert.That(refresh, Has.Member(localN1));
             Assert.That(refresh.Count, Is.GreaterThanOrEqualTo(2));
             Assert.That(localN1.OneSide.ID, Is.EqualTo(one2.ID));
+        }
+
+        [Test]
+        [Ignore("A ApplyChanges should clear the list cache?")]
+        public void should_change_list_and_roundtrip_with_merge_context_and_search()
+        {
+            var localCtx = scope.Resolve<Func<ContextIsolationLevel, IZetboxContext>>().Invoke(ContextIsolationLevel.MergeQueryData);
+            var localOne2 = localCtx.Find<One_to_N_relations_One>(one2.ID);
+            Assert.That(localOne2.NSide, Is.Empty); // Touch navigator
+
+            // Make changes in other context
+            n1.OneSide = one2;
+            ctx.SubmitChanges();
+
+            var refresh = localCtx.GetQuery<One_to_N_relations_One>().ToList();
+
+            Assert.That(refresh, Has.Member(localOne2));
+            Assert.That(refresh.Count, Is.GreaterThanOrEqualTo(2));
+            Assert.That(localOne2.NSide, Is.EquivalentTo(new[] { localCtx.Find<One_to_N_relations_N>(n1.ID) }));
         }
     }
 }
