@@ -79,20 +79,11 @@ namespace Zetbox.DalProvider.Client
             return new ZbTask<List<IDataObject>>(serviceTask)
                 .OnResult(t =>
                 {
-                    t.Result = new List<IDataObject>();
-
                     _context.RecordNotifications();
                     try
                     {
-                        foreach (IDataObject obj in serviceTask.Result.Item1)
-                        {
-                            t.Result.Add((IDataObject)_context.AttachRespectingIsolationLevel(obj));
-                        }
-
-                        foreach (IPersistenceObject obj in serviceTask.Result.Item2)
-                        {
-                            _context.AttachRespectingIsolationLevel(obj);
-                        }
+                        var attachedAuxObjects = serviceTask.Result.Item2.Cast<IPersistenceObject>().Select(obj => _context.AttachRespectingIsolationLevel(obj)).ToList();
+                        t.Result = serviceTask.Result.Item1.Select(obj => (IDataObject)_context.AttachRespectingIsolationLevel(obj)).ToList();
                     }
                     finally
                     {
@@ -137,14 +128,9 @@ namespace Zetbox.DalProvider.Client
                     try
                     {
                         // prepare caches
-                        foreach (IPersistenceObject obj in getListTask.Result.Item2)
-                        {
-                            _context.AttachRespectingIsolationLevel(obj);
-                        }
-
+                        var attachedAuxObjects = getListTask.Result.Item2.Cast<IPersistenceObject>().Select(obj => _context.AttachRespectingIsolationLevel(obj)).ToList();
                         var serviceResult = getListTask.Result.Item1.Select(obj => (IDataObject)_context.AttachRespectingIsolationLevel(obj)).ToList();
                         objectCount = serviceResult.Count;
-
                         // in the face of local changes, we have to re-query against local objects, to provide a consistent view of the objects
                         var result = _context.IsModified ? QueryFromLocalObjectsHack(_type, query).Cast<IDataObject>().ToList() : serviceResult;
 
@@ -198,16 +184,9 @@ namespace Zetbox.DalProvider.Client
                     _context.RecordNotifications();
                     try
                     {
-                        // prepare caches
-                        foreach (IPersistenceObject obj in t.Result.Item2)
-                        {
-                            _context.AttachRespectingIsolationLevel(obj);
-                        }
-
-                        foreach (IDataObject obj in t.Result.Item1)
-                        {
-                            result = (T)_context.AttachRespectingIsolationLevel(obj);
-                        }
+                        var attachedAuxObjects = t.Result.Item2.Cast<IPersistenceObject>().Select(obj => _context.AttachRespectingIsolationLevel(obj)).ToList();
+                        var serviceResult = t.Result.Item1.Select(obj => (IDataObject)_context.AttachRespectingIsolationLevel(obj)).ToList();
+                        result = (T)serviceResult.FirstOrDefault();
                     }
                     finally
                     {
