@@ -92,6 +92,8 @@
     <Compile Include="Gui\NavigationEntryActions.cs" />
     <Compile Include="Gui\ViewDescriptorActions.cs" />
     <Compile Include="Gui\ViewModelDescriptorActions.cs" />
+    <Compile Include="Projekte\MitarbeiterActions.cs" />
+    <Compile Include="Projekte\KundeActions.cs" />
     <Compile Include="TestModule\One_to_N_relations_NActions.cs" />
     <Compile Include="TestModule\One_to_N_relations_OneActions.cs" />
     <Compile Include="TestModule\TestStudentActions.cs" />
