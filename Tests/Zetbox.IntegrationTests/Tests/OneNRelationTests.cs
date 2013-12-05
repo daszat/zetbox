@@ -158,11 +158,11 @@ namespace Zetbox.IntegrationTests
             foreach (var expected in expectedItems)
             {
                 //Assert.That(expected.OneSide, Is.SameAs(obj));
-                Assert.That(expected.GetPrivateFieldValue<int?>("__fk_ObjectClassCache"), Is.EqualTo(_parent.ID));
-                Assert.That(expected.GetPrivateFieldValue<int?>("_Properties_pos"), Is.Not.Null);
+                Assert.That(expected.GetPrivateFieldValue<int?>("__fk_ObjectClassCache"), Is.EqualTo(_parent.ID), "__fk_ObjectClassCache");
+                Assert.That(expected.GetPrivateFieldValue<int?>("_Properties_pos"), Is.Not.Null, "_Properties_pos");
             }
 
-            Assert.That(collection.Select(p => p.GetPrivateFieldValue<int?>("_Properties_pos")).ToArray(), Is.Ordered);
+            Assert.That(collection.Select(p => p.GetPrivateFieldValue<int?>("_Properties_pos")).ToArray(), Is.Ordered, "_Properties_pos Is.Ordered");
 
             ////////////////////// test roundtripping //////////////////////////////////
 
@@ -320,11 +320,11 @@ namespace Zetbox.IntegrationTests
             foreach (var expected in expectedItems)
             {
                 //Assert.That(expected.OneSide, Is.SameAs(obj));
-                Assert.That(expected.GetPrivateFieldValue<int?>("__fk_ObjectClassCache"), Is.EqualTo(_parent.ID));
-                Assert.That(expected.GetPrivateFieldValue<int?>("_Properties_pos"), Is.Not.Null);
+                Assert.That(expected.GetPrivateFieldValue<int?>("__fk_ObjectClassCache"), Is.EqualTo(_parent.ID), "__fk_ObjectClassCache");
+                Assert.That(expected.GetPrivateFieldValue<int?>("_Properties_pos"), Is.Not.Null, "_Properties_pos");
             }
 
-            Assert.That(collection.Select(p => p.GetPrivateFieldValue<int?>("_Properties_pos")).ToArray(), Is.Ordered);
+            Assert.That(collection.Select(p => p.GetPrivateFieldValue<int?>("_Properties_pos")).ToArray(), Is.Ordered, "_Properties_pos Is.Ordered");
 
             ////////////////////// test roundtripping //////////////////////////////////
 
