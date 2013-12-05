@@ -283,7 +283,7 @@ namespace Zetbox.DalProvider.Client
                     RecordNotifications();
                     try
                     {
-                        var attachedAuxObjects = fetchTask.Result.Item2.Cast<IPersistenceObject>().Select(obj => this.AttachRespectingIsolationLevel(obj)).ToList();
+                        fetchTask.Result.Item2.Cast<IPersistenceObject>().ForEach(obj => this.AttachRespectingIsolationLevel(obj));
                         t.Result = fetchTask.Result.Item1.Select(obj => (T)this.AttachRespectingIsolationLevel(obj)).ToList();
                     }
                     finally

@@ -82,7 +82,7 @@ namespace Zetbox.DalProvider.Client
                     _context.RecordNotifications();
                     try
                     {
-                        var attachedAuxObjects = serviceTask.Result.Item2.Cast<IPersistenceObject>().Select(obj => _context.AttachRespectingIsolationLevel(obj)).ToList();
+                        serviceTask.Result.Item2.Cast<IPersistenceObject>().ForEach(obj => _context.AttachRespectingIsolationLevel(obj));
                         t.Result = serviceTask.Result.Item1.Select(obj => (IDataObject)_context.AttachRespectingIsolationLevel(obj)).ToList();
                     }
                     finally
@@ -128,7 +128,7 @@ namespace Zetbox.DalProvider.Client
                     try
                     {
                         // prepare caches
-                        var attachedAuxObjects = getListTask.Result.Item2.Cast<IPersistenceObject>().Select(obj => _context.AttachRespectingIsolationLevel(obj)).ToList();
+                        getListTask.Result.Item2.Cast<IPersistenceObject>().ForEach(obj => _context.AttachRespectingIsolationLevel(obj));
                         var serviceResult = getListTask.Result.Item1.Select(obj => (IDataObject)_context.AttachRespectingIsolationLevel(obj)).ToList();
                         objectCount = serviceResult.Count;
                         // in the face of local changes, we have to re-query against local objects, to provide a consistent view of the objects
@@ -184,7 +184,7 @@ namespace Zetbox.DalProvider.Client
                     _context.RecordNotifications();
                     try
                     {
-                        var attachedAuxObjects = t.Result.Item2.Cast<IPersistenceObject>().Select(obj => _context.AttachRespectingIsolationLevel(obj)).ToList();
+                        t.Result.Item2.Cast<IPersistenceObject>().ForEach(obj => _context.AttachRespectingIsolationLevel(obj));
                         var serviceResult = t.Result.Item1.Select(obj => (IDataObject)_context.AttachRespectingIsolationLevel(obj)).ToList();
                         result = (T)serviceResult.FirstOrDefault();
                     }
