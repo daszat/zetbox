@@ -71,7 +71,7 @@ namespace Zetbox.IntegrationTests
         {
             if (_parent != null)
             {
-                foreach (var n in _parent.OrderedNSide)
+                foreach (var n in _parent.OrderedNSide.ToList())
                 {
                     ctx.Delete(n);
                 }
@@ -212,7 +212,7 @@ namespace Zetbox.IntegrationTests
         {
             if (_parent != null)
             {
-                foreach (var n in _parent.OrderedNSide)
+                foreach (var n in _parent.OrderedNSide.ToList())
                 {
                     ctx.Delete(n);
                 }
