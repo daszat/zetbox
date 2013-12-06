@@ -7237,7 +7237,7 @@ public static void isValid_Name(One_to_N_relations_One obj, PropertyIsValidEvent
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
     <ZetboxBase:Name>Name</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>e98ca434-19be-4daa-8920-d979a1d98522</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>1</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>300</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -7273,7 +7273,7 @@ public static void isValid_NSide(One_to_N_relations_One obj, PropertyIsValidEven
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
     <ZetboxBase:Name>NSide</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>e98ca434-19be-4daa-8920-d979a1d98522</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>0</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>200</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>67a49c49-b890-4d35-a8db-1f8e43bfc7df</GUI:ValueModelDescriptor>
     <ZetboxBase:EagerLoading>false</ZetboxBase:EagerLoading>
     <ZetboxBase:RelationEnd>5ad84510-25bb-4c7c-b727-979adb908d27</ZetboxBase:RelationEnd>
@@ -7308,7 +7308,7 @@ public static void isValid_OrderedNSide(One_to_N_relations_One obj, PropertyIsVa
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
     <ZetboxBase:Name>OrderedNSide</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>e98ca434-19be-4daa-8920-d979a1d98522</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>0</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>100</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>9fce01fe-fd6d-4e21-8b55-08d5e38aea36</GUI:ValueModelDescriptor>
     <ZetboxBase:EagerLoading>false</ZetboxBase:EagerLoading>
     <ZetboxBase:RelationEnd>a8fc79fa-09be-4928-90af-846674490388</ZetboxBase:RelationEnd>
@@ -7344,7 +7344,7 @@ public static void isValid_Name(One_to_N_relations_OrderedN obj, PropertyIsValid
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
     <ZetboxBase:Name>Name</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>c887def0-a835-497d-992e-ff0bb7463280</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>0</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>200</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -7380,7 +7380,7 @@ public static void isValid_OneSide(One_to_N_relations_OrderedN obj, PropertyIsVa
     <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
     <ZetboxBase:Name>OneSide</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>c887def0-a835-497d-992e-ff0bb7463280</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>0</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>100</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <ZetboxBase:EagerLoading>false</ZetboxBase:EagerLoading>
     <ZetboxBase:RelationEnd>72acfbfe-d5f9-4fdc-851c-19f98cdbc51a</ZetboxBase:RelationEnd>
