@@ -15,11 +15,11 @@
 
 namespace Zetbox.API.AbstractConsumerTests.ContextTests
 {
-    using Autofac;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using Autofac;
     using NUnit.Framework;
     using Zetbox.API;
     using Zetbox.App.Base;
@@ -28,11 +28,11 @@ namespace Zetbox.API.AbstractConsumerTests.ContextTests
     public abstract class when_changing_one_to_n
         : AbstractTestFixture
     {
-        IZetboxContext ctx;
-        One_to_N_relations_One one1;
-        One_to_N_relations_One one2;
-        One_to_N_relations_N n1;
-        One_to_N_relations_N n2;
+        protected IZetboxContext ctx;
+        protected One_to_N_relations_One one1;
+        protected One_to_N_relations_One one2;
+        protected One_to_N_relations_N n1;
+        protected One_to_N_relations_N n2;
 
         public override void SetUp()
         {
@@ -101,43 +101,48 @@ namespace Zetbox.API.AbstractConsumerTests.ContextTests
             Assert.That(n1.OneSide, Is.EqualTo(one2), "reloaded");
         }
 
-        [Test]
-        public void should_change_parent_and_roundtrip_with_merge_context()
+        public abstract class on_client
+            : when_changing_one_to_n
         {
-            var localCtx = scope.Resolve<Func<ContextIsolationLevel, IZetboxContext>>().Invoke(ContextIsolationLevel.MergeQueryData);
-            var localN1 = localCtx.Find<One_to_N_relations_N>(n1.ID);
-
-            Assert.That(localN1.OneSide.ID, Is.EqualTo(one1.ID));
-            n1.OneSide = one2;
-            ctx.SubmitChanges();
-
-            localN1 = localCtx.Find<One_to_N_relations_N>(n1.ID);
-            Assert.That(localN1.OneSide.ID, Is.EqualTo(one1.ID), "No changes, as Find will look up the cached version from the context");
-        }
-
-        [Test]
-        public void should_change_parent_and_roundtrip_with_merge_context_and_search()
-        {
-            var oneSideChanged = false;
-            var localCtx = scope.Resolve<Func<ContextIsolationLevel, IZetboxContext>>().Invoke(ContextIsolationLevel.MergeQueryData);
-            var localN1 = localCtx.Find<One_to_N_relations_N>(n1.ID);
-            localN1.PropertyChanged += (s, e) =>
+            [Test]
+            public void should_change_parent_and_roundtrip_with_merge_context()
             {
-                if (e.PropertyName == "OneSide")
-                    oneSideChanged = true;
-            };
-            Assert.That(localN1.OneSide.ID, Is.EqualTo(one1.ID)); // Touch navigator
+                var localCtx = scope.Resolve<Func<ContextIsolationLevel, IZetboxContext>>().Invoke(ContextIsolationLevel.MergeQueryData);
+                var localN1 = localCtx.Find<One_to_N_relations_N>(n1.ID);
 
-            // Make changes in other context
-            n1.OneSide = one2;
-            ctx.SubmitChanges();
+                Assert.That(localN1.OneSide.ID, Is.EqualTo(one1.ID));
+                n1.OneSide = one2;
+                ctx.SubmitChanges();
 
-            var refresh = localCtx.GetQuery<One_to_N_relations_N>().ToList();
+                localN1 = localCtx.Find<One_to_N_relations_N>(n1.ID);
+                Assert.That(localN1.OneSide.ID, Is.EqualTo(one1.ID), "No changes, as Find will look up the cached version from the context");
+            }
 
-            Assert.That(oneSideChanged, Is.True);
-            Assert.That(refresh, Has.Member(localN1));
-            Assert.That(refresh.Count, Is.GreaterThanOrEqualTo(2));
-            Assert.That(localN1.OneSide.ID, Is.EqualTo(one2.ID));
+            [Test]
+            public void should_change_parent_and_roundtrip_with_merge_context_and_search()
+            {
+                var oneSideChanged = false;
+                var localCtx = scope.Resolve<Func<ContextIsolationLevel, IZetboxContext>>().Invoke(ContextIsolationLevel.MergeQueryData);
+                var localN1 = localCtx.Find<One_to_N_relations_N>(n1.ID);
+                localN1.PropertyChanged += (s, e) =>
+                {
+                    if (e.PropertyName == "OneSide")
+                        oneSideChanged = true;
+                };
+
+                Assert.That(localN1.OneSide.ID, Is.EqualTo(one1.ID)); // Touch navigator
+
+                // Make changes in other context
+                n1.OneSide = one2;
+                ctx.SubmitChanges();
+
+                var refresh = localCtx.GetQuery<One_to_N_relations_N>().ToList();
+
+                Assert.That(oneSideChanged, Is.True);
+                Assert.That(refresh, Has.Member(localN1));
+                Assert.That(refresh.Count, Is.GreaterThanOrEqualTo(2));
+                Assert.That(localN1.OneSide.ID, Is.EqualTo(one2.ID));
+            }
         }
 
         [Test]
