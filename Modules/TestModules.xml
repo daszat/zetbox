@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-11-28T18:17:38Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-12-06T11:58:03Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="a56d9701-d98e-49ab-bd49-a491d09e2d46">
     <ZetboxBase:ChangedOn>2011-08-06T08:30:47.664236Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
@@ -4552,6 +4552,52 @@ public static void ObjectIsValid(One_to_N_relations_One obj, ObjectIsValidEventA
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>One_to_N_relations_Ones</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
+  <ZetboxBase:ObjectClass ExportGuid="c887def0-a835-497d-992e-ff0bb7463280">
+    <ZetboxBase:ChangedOn>2013-12-06T10:55:07.227213Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-12-06T10:55:07.227213Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>a test class for ordered lists</ZetboxBase:Description>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>One_to_N_relations_OrderedN</ZetboxBase:Name>
+    <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
+    <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
+    <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void ToString(One_to_N_relations_OrderedN obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void NotifyPreSave(One_to_N_relations_OrderedN obj)
+{
+}
+
+[Invocation]
+public static void NotifyPostSave(One_to_N_relations_OrderedN obj)
+{
+}
+
+[Invocation]
+public static void NotifyCreated(One_to_N_relations_OrderedN obj)
+{
+}
+
+[Invocation]
+public static void NotifyDeleting(One_to_N_relations_OrderedN obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(One_to_N_relations_OrderedN obj, ObjectIsValidEventArgs e)
+{
+}
+
+</ZetboxBase:CodeTemplate>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
+    <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
+    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <ZetboxBase:TableName>One_to_N_relations_OrderedNs</ZetboxBase:TableName>
+  </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="e39c9cbb-3181-49e1-93ab-aed0d0e11728">
     <ZetboxBase:ChangedOn>2012-04-05T09:26:08.070755Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2008-01-01T11:00:00Z</ZetboxBase:CreatedOn>
@@ -7126,8 +7172,8 @@ public static void isValid_Name(One_to_N_relations_N obj, PropertyIsValidEventAr
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="598a1fc0-442e-436f-8dab-c04112c1709e">
-    <ZetboxBase:CategoryTags />
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:18.498541Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2013-12-06T10:54:31.759621Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_OneSide(One_to_N_relations_N obj, PropertyGetterEventArgs&lt;Zetbox.App.Test.One_to_N_relations_One&gt; e)
 {
@@ -7198,7 +7244,8 @@ public static void isValid_Name(One_to_N_relations_One obj, PropertyIsValidEvent
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="00c825ba-6df2-4739-8074-2a85aae274a4">
-    <ZetboxBase:ChangedOn>2012-04-05T09:26:18.498541Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2013-12-06T10:56:25.62589Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_NSide(One_to_N_relations_One obj, PropertyGetterEventArgs&lt;ICollection&lt;Zetbox.App.Test.One_to_N_relations_N&gt;&gt; e)
 {
@@ -7230,6 +7277,113 @@ public static void isValid_NSide(One_to_N_relations_One obj, PropertyIsValidEven
     <GUI:ValueModelDescriptor>67a49c49-b890-4d35-a8db-1f8e43bfc7df</GUI:ValueModelDescriptor>
     <ZetboxBase:EagerLoading>false</ZetboxBase:EagerLoading>
     <ZetboxBase:RelationEnd>5ad84510-25bb-4c7c-b727-979adb908d27</ZetboxBase:RelationEnd>
+  </ZetboxBase:ObjectReferenceProperty>
+  <ZetboxBase:ObjectReferenceProperty ExportGuid="084f914f-a4e6-4703-a01a-7fdda5f720d0">
+    <ZetboxBase:CategoryTags />
+    <ZetboxBase:ChangedOn>2013-12-06T10:58:03.236408Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_OrderedNSide(One_to_N_relations_One obj, PropertyGetterEventArgs&lt;IList&lt;Zetbox.App.Test.One_to_N_relations_OrderedN&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_OrderedNSide(One_to_N_relations_One obj, PropertyPreSetterEventArgs&lt;IList&lt;Zetbox.App.Test.One_to_N_relations_OrderedN&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_OrderedNSide(One_to_N_relations_One obj, PropertyPostSetterEventArgs&lt;IList&lt;Zetbox.App.Test.One_to_N_relations_OrderedN&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_OrderedNSide(One_to_N_relations_One obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.OrderedNSide == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-12-06T10:58:03.236408Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>OrderedNSide</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>e98ca434-19be-4daa-8920-d979a1d98522</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>0</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>9fce01fe-fd6d-4e21-8b55-08d5e38aea36</GUI:ValueModelDescriptor>
+    <ZetboxBase:EagerLoading>false</ZetboxBase:EagerLoading>
+    <ZetboxBase:RelationEnd>a8fc79fa-09be-4928-90af-846674490388</ZetboxBase:RelationEnd>
+  </ZetboxBase:ObjectReferenceProperty>
+  <ZetboxBase:StringProperty ExportGuid="3ed99412-d4c8-44af-8ed6-dfcd28532a93">
+    <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2013-12-06T10:55:07.227213Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_Name(One_to_N_relations_OrderedN obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Name(One_to_N_relations_OrderedN obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Name(One_to_N_relations_OrderedN obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Name(One_to_N_relations_OrderedN obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Name == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-12-06T10:55:07.227213Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>A property to test queries across the Relation</ZetboxBase:Description>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>Name</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>c887def0-a835-497d-992e-ff0bb7463280</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>0</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:StringProperty>
+  <ZetboxBase:ObjectReferenceProperty ExportGuid="8073d6a1-4c8b-4789-82f4-f983ec706397">
+    <ZetboxBase:CategoryTags />
+    <ZetboxBase:ChangedOn>2013-12-06T10:58:03.236408Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_OneSide(One_to_N_relations_OrderedN obj, PropertyGetterEventArgs&lt;Zetbox.App.Test.One_to_N_relations_One&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_OneSide(One_to_N_relations_OrderedN obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Test.One_to_N_relations_One&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_OneSide(One_to_N_relations_OrderedN obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Test.One_to_N_relations_One&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_OneSide(One_to_N_relations_OrderedN obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.OneSide == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2013-12-06T10:58:03.236408Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>OneSide</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>c887def0-a835-497d-992e-ff0bb7463280</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>0</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
+    <ZetboxBase:EagerLoading>false</ZetboxBase:EagerLoading>
+    <ZetboxBase:RelationEnd>72acfbfe-d5f9-4fdc-851c-19f98cdbc51a</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="40b1123f-b73d-4b33-ae0c-c65fe2c2c19c">
     <ZetboxBase:CategoryTags />
@@ -10309,6 +10463,16 @@ public static void isValid_BString(TPHDerivedBObj obj, PropertyIsValidEventArgs 
     <ZetboxBase:Storage>2</ZetboxBase:Storage>
     <ZetboxBase:Verb>connectsTo</ZetboxBase:Verb>
   </ZetboxBase:Relation>
+  <ZetboxBase:Relation ExportGuid="f225bde0-acc2-4dad-bdbc-a14d4f8ff987">
+    <ZetboxBase:A>a8fc79fa-09be-4928-90af-846674490388</ZetboxBase:A>
+    <ZetboxBase:B>72acfbfe-d5f9-4fdc-851c-19f98cdbc51a</ZetboxBase:B>
+    <ZetboxBase:ChangedOn>2013-12-06T10:58:03.236408Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:Containment>0</ZetboxBase:Containment>
+    <ZetboxBase:CreatedOn>2013-12-06T10:58:03.236408Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Storage>2</ZetboxBase:Storage>
+    <ZetboxBase:Verb>connectsTo</ZetboxBase:Verb>
+  </ZetboxBase:Relation>
   <ZetboxBase:Relation ExportGuid="d3b1b2d8-7ef6-4693-bbc1-b60a8352beee">
     <ZetboxBase:A>1a7f0603-9267-46c1-8531-9c9626c5b33c</ZetboxBase:A>
     <ZetboxBase:B>1900f88e-1708-430d-8162-8dab6bc7c17e</ZetboxBase:B>
@@ -10642,6 +10806,26 @@ public static void isValid_BString(TPHDerivedBObj obj, PropertyIsValidEventArgs 
     <ZetboxBase:RoleName>OneSide</ZetboxBase:RoleName>
     <ZetboxBase:Type>e98ca434-19be-4daa-8920-d979a1d98522</ZetboxBase:Type>
   </ZetboxBase:RelationEnd>
+  <ZetboxBase:RelationEnd ExportGuid="a8fc79fa-09be-4928-90af-846674490388">
+    <ZetboxBase:AParent>f225bde0-acc2-4dad-bdbc-a14d4f8ff987</ZetboxBase:AParent>
+    <ZetboxBase:ChangedOn>2013-12-06T10:58:03.236408Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-12-06T10:58:03.236408Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:Multiplicity>1</ZetboxBase:Multiplicity>
+    <ZetboxBase:Navigator>084f914f-a4e6-4703-a01a-7fdda5f720d0</ZetboxBase:Navigator>
+    <ZetboxBase:RoleName>OneSide</ZetboxBase:RoleName>
+    <ZetboxBase:Type>e98ca434-19be-4daa-8920-d979a1d98522</ZetboxBase:Type>
+  </ZetboxBase:RelationEnd>
+  <ZetboxBase:RelationEnd ExportGuid="72acfbfe-d5f9-4fdc-851c-19f98cdbc51a">
+    <ZetboxBase:BParent>f225bde0-acc2-4dad-bdbc-a14d4f8ff987</ZetboxBase:BParent>
+    <ZetboxBase:ChangedOn>2013-12-06T10:58:03.236408Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2013-12-06T10:58:03.236408Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:HasPersistentOrder>true</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:Multiplicity>3</ZetboxBase:Multiplicity>
+    <ZetboxBase:Navigator>8073d6a1-4c8b-4789-82f4-f983ec706397</ZetboxBase:Navigator>
+    <ZetboxBase:RoleName>OrderedNSide</ZetboxBase:RoleName>
+    <ZetboxBase:Type>c887def0-a835-497d-992e-ff0bb7463280</ZetboxBase:Type>
+  </ZetboxBase:RelationEnd>
   <ZetboxBase:RelationEnd ExportGuid="1900f88e-1708-430d-8162-8dab6bc7c17e">
     <ZetboxBase:BParent>d3b1b2d8-7ef6-4693-bbc1-b60a8352beee</ZetboxBase:BParent>
     <ZetboxBase:ChangedOn>2011-08-06T08:30:58.97268Z</ZetboxBase:ChangedOn>
@@ -10939,6 +11123,27 @@ public static void isValid_BString(TPHDerivedBObj obj, PropertyIsValidEventArgs 
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Reason>TestEnum cannot be null</ZetboxBase:Reason>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="0ec25d31-1d33-4c61-ad1f-3257c7884e19">
+    <ZetboxBase:ChangedOn>2013-12-06T10:55:53.741014Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>1b96dcd0-bf73-4855-84e5-7f8b1621672a</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-12-06T10:55:03.80903Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MaxLength>100</ZetboxBase:MaxLength>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="5b1ccdff-9272-445d-94e1-7b0ae36ec5ed">
+    <ZetboxBase:ChangedOn>2013-12-06T10:56:25.62589Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>eea22954-2845-4b34-a721-358469fd0740</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-12-06T10:56:25.62589Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MaxLength>100</ZetboxBase:MaxLength>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="4d1a8d7a-9fde-4013-9b6e-a9e1ade9cd92">
+    <ZetboxBase:ChangedOn>2013-12-06T10:55:07.227213Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>3ed99412-d4c8-44af-8ed6-dfcd28532a93</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2013-12-06T10:55:07.227213Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MaxLength>100</ZetboxBase:MaxLength>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="9da39bd4-6243-4b33-b38a-ac2e22e2fa89">
     <ZetboxBase:ChangedOn>2013-02-15T09:33:55.504047Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>bd0d8945-cf0e-4425-9e6d-e721b95d7254</ZetboxBase:ConstrainedProperty>

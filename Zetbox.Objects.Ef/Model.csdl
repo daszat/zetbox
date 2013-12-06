@@ -64,6 +64,7 @@
     <EntitySet Name="NavigationEntryEfImpl" EntityType="Model.NavigationEntryEfImpl" />
     <EntitySet Name="One_to_N_relations_NEfImpl" EntityType="Model.One_to_N_relations_NEfImpl" />
     <EntitySet Name="One_to_N_relations_OneEfImpl" EntityType="Model.One_to_N_relations_OneEfImpl" />
+    <EntitySet Name="One_to_N_relations_OrderedNEfImpl" EntityType="Model.One_to_N_relations_OrderedNEfImpl" />
     <EntitySet Name="OrderedNEndEfImpl" EntityType="Model.OrderedNEndEfImpl" />
     <EntitySet Name="OrderedOneEndEfImpl" EntityType="Model.OrderedOneEndEfImpl" />
     <EntitySet Name="ProjektEfImpl" EntityType="Model.ProjektEfImpl" />
@@ -744,6 +745,10 @@
     <AssociationSet Name="FK_OneSide_connectsTo_NSide" Association="Model.FK_OneSide_connectsTo_NSide" >
       <End Role="OneSide" EntitySet="One_to_N_relations_OneEfImpl" />
       <End Role="NSide" EntitySet="One_to_N_relations_NEfImpl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OneSide_connectsTo_OrderedNSide" Association="Model.FK_OneSide_connectsTo_OrderedNSide" >
+      <End Role="OneSide" EntitySet="One_to_N_relations_OneEfImpl" />
+      <End Role="OrderedNSide" EntitySet="One_to_N_relations_OrderedNEfImpl" />
     </AssociationSet>
     <AssociationSet Name="FK_Parent_has_Children" Association="Model.FK_Parent_has_Children" >
       <End Role="Parent" EntitySet="MethodTestEfImpl" />
@@ -2078,7 +2083,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" Nullable="true" MaxLength="1000"  />
+    <Property Name="Name" Type="String" Nullable="true" MaxLength="100"  />
     <NavigationProperty Name="OneSideImpl"
                         Relationship="Model.FK_OneSide_connectsTo_NSide"
                         FromRole="NSide"
@@ -2089,11 +2094,27 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" Nullable="true" MaxLength="1000"  />
+    <Property Name="Name" Type="String" Nullable="true" MaxLength="100"  />
     <NavigationProperty Name="NSideImpl"
                         Relationship="Model.FK_OneSide_connectsTo_NSide"
                         FromRole="OneSide"
                         ToRole="NSide" />
+    <NavigationProperty Name="OrderedNSideImpl"
+                        Relationship="Model.FK_OneSide_connectsTo_OrderedNSide"
+                        FromRole="OneSide"
+                        ToRole="OrderedNSide" />
+  </EntityType>
+  <EntityType Name="One_to_N_relations_OrderedNEfImpl">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="true" MaxLength="100"  />
+    <NavigationProperty Name="OneSideImpl"
+                        Relationship="Model.FK_OneSide_connectsTo_OrderedNSide"
+                        FromRole="OrderedNSide"
+                        ToRole="OneSide" />
+    <Property Name="OrderedNSide_pos" Type="Int32" Nullable="true" />
   </EntityType>
   <EntityType Name="OrderedNEndEfImpl">
     <Key>
@@ -5063,6 +5084,14 @@
          Multiplicity="0..1" />
     <End Role="NSide"
          Type="Model.One_to_N_relations_NEfImpl" 
+         Multiplicity="*" />
+  </Association>
+  <Association Name="FK_OneSide_connectsTo_OrderedNSide" >
+    <End Role="OneSide"
+         Type="Model.One_to_N_relations_OneEfImpl" 
+         Multiplicity="0..1" />
+    <End Role="OrderedNSide"
+         Type="Model.One_to_N_relations_OrderedNEfImpl" 
          Multiplicity="*" />
   </Association>
   <Association Name="FK_Parent_has_Children" >

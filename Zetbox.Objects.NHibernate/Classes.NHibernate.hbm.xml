@@ -2692,6 +2692,41 @@
             <one-to-many class="Zetbox.App.Test.One_to_N_relations_NNHibernateImpl+One_to_N_relations_NProxy, Zetbox.Objects.NHibernateImpl" />
         </set>
 
+<!-- ObjectReferenceProperty -->
+        <set name="OrderedNSide" batch-size="100" cascade="none" inverse="true" >
+            <key column="`fk_OneSide`" />
+            <one-to-many class="Zetbox.App.Test.One_to_N_relations_OrderedNNHibernateImpl+One_to_N_relations_OrderedNProxy, Zetbox.Objects.NHibernateImpl" />
+        </set>
+
+
+        <!-- define the subclasses -->
+
+    </class>
+    <class name="Zetbox.App.Test.One_to_N_relations_OrderedNNHibernateImpl+One_to_N_relations_OrderedNProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.Test.One_to_N_relations_OrderedNNHibernateImpl+One_to_N_relations_OrderedNProxy, Zetbox.Objects.NHibernateImpl"
+           schema="`test`"
+           table="`One_to_N_relations_OrderedNs`"
+           abstract="false"
+           dynamic-update="false"
+           optimistic-lock="none"
+           batch-size="100">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`test`</param>
+                <param name="sequence">`One_to_N_relations_OrderedNs_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="Name" 
+                  column="`Name`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="OneSide" column="`fk_OneSide`" class="Zetbox.App.Test.One_to_N_relations_OneNHibernateImpl+One_to_N_relations_OneProxy, Zetbox.Objects.NHibernateImpl" />
+        <property name="OrderedNSide_pos" column="`fk_OneSide_pos`" />
+
 
         <!-- define the subclasses -->
 

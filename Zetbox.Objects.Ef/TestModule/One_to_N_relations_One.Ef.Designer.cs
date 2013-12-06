@@ -183,6 +183,80 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relation
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.One_to_N_relations_One> OnNSide_IsValid;
 
+        /// <summary>
+        /// 
+        /// </summary>
+    /*
+    Relation: FK_OneSide_connectsTo_OrderedNSide
+    A: ZeroOrOne One_to_N_relations_One as OneSide
+    B: ZeroOrMore One_to_N_relations_OrderedN as OrderedNSide
+    Preferred Storage: MergeIntoB
+    */
+        // object list property
+        // object list property
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public IList<Zetbox.App.Test.One_to_N_relations_OrderedN> OrderedNSide
+        {
+            get
+            {
+                if (_OrderedNSide == null)
+                {
+                    _OrderedNSide = new EntityListWrapper<Zetbox.App.Test.One_to_N_relations_OrderedN, Zetbox.App.Test.One_to_N_relations_OrderedNEfImpl>(
+                            this.Context, OrderedNSideImpl,
+                            () => this.NotifyPropertyChanging("OrderedNSide", null, null),
+                            null, // see GetOrderedNSideImplCollection()
+                            (item) => item.NotifyPropertyChanging("OneSide", null, null),
+                            (item) => item.NotifyPropertyChanged("OneSide", null, null), "OneSide", "OrderedNSide_pos");
+                }
+                return _OrderedNSide;
+            }
+        }
+    
+        [EdmRelationshipNavigationProperty("Model", "FK_OneSide_connectsTo_OrderedNSide", "OrderedNSide")]
+        public EntityCollection<Zetbox.App.Test.One_to_N_relations_OrderedNEfImpl> OrderedNSideImpl
+        {
+            get
+            {
+                return GetOrderedNSideImplCollection();
+            }
+        }
+        private EntityListWrapper<Zetbox.App.Test.One_to_N_relations_OrderedN, Zetbox.App.Test.One_to_N_relations_OrderedNEfImpl> _OrderedNSide;
+
+        private EntityCollection<Zetbox.App.Test.One_to_N_relations_OrderedNEfImpl> _OrderedNSideImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Test.One_to_N_relations_OrderedNEfImpl> GetOrderedNSideImplCollection()
+        {
+            if (_OrderedNSideImplEntityCollection == null)
+            {
+                _OrderedNSideImplEntityCollection = ((IEntityWithRelationships)(this)).RelationshipManager
+                    .GetRelatedCollection<Zetbox.App.Test.One_to_N_relations_OrderedNEfImpl>(
+                        "Model.FK_OneSide_connectsTo_OrderedNSide",
+                        "OrderedNSide");
+                // the EntityCollection has to be loaded before attaching the AssociationChanged event
+                // because the event is triggered while relation entries are loaded from the database
+                // although that does not require notification of the business logic.
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !_OrderedNSideImplEntityCollection.IsLoaded)
+                {
+                    _OrderedNSideImplEntityCollection.Load();
+                }
+                _OrderedNSideImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("OrderedNSide", null, null); if (OnOrderedNSide_PostSetter != null && IsAttached) OnOrderedNSide_PostSetter(this); };
+            }
+            return _OrderedNSideImplEntityCollection;
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchOrderedNSideAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<IList<Zetbox.App.Test.One_to_N_relations_OrderedN>>(this.OrderedNSide);
+        }
+
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectListProperty
+public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relations_One> OnOrderedNSide_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Test.One_to_N_relations_One> OnOrderedNSide_IsValid;
+
         public override Type GetImplementedInterface()
         {
             return typeof(One_to_N_relations_One);
@@ -221,6 +295,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relation
             switch (property)
             {
                 case "NSide":
+                case "OrderedNSide":
                     return false;
                 default:
                     return base.ShouldSetModified(property);
@@ -234,6 +309,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relation
             {
             case "NSide":
                 return TriggerFetchNSideAsync();
+            case "OrderedNSide":
+                return TriggerFetchOrderedNSideAsync();
             default:
                 return base.TriggerFetch(propName);
             }
@@ -280,6 +357,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relation
                         obj => obj.NSide,
                         null, // lists are read-only properties
                         obj => OnNSide_IsValid), 
+                    // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+                    new PropertyDescriptorEfImpl<One_to_N_relations_One, IList<Zetbox.App.Test.One_to_N_relations_OrderedN>>(
+                        lazyCtx,
+                        new Guid("084f914f-a4e6-4703-a01a-7fdda5f720d0"),
+                        "OrderedNSide",
+                        null,
+                        obj => obj.OrderedNSide,
+                        null, // lists are read-only properties
+                        obj => OnOrderedNSide_IsValid), 
                     // position columns
                 };
             }
@@ -355,6 +441,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relation
             base.NotifyDeleting();
             if (OnNotifyDeleting_One_to_N_relations_One != null) OnNotifyDeleting_One_to_N_relations_One(this);
             NSide.Clear();
+            OrderedNSide.Clear();
         }
         public static event ObjectEventHandler<One_to_N_relations_One> OnNotifyDeleting_One_to_N_relations_One;
 

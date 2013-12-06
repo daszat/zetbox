@@ -29,5 +29,12 @@ namespace Zetbox.App.Test
 
         [Zetbox.API.DefinitionGuid("00c825ba-6df2-4739-8074-2a85aae274a4")]
         ICollection<Zetbox.App.Test.One_to_N_relations_N> NSide { get; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+
+        [Zetbox.API.DefinitionGuid("084f914f-a4e6-4703-a01a-7fdda5f720d0")]
+        IList<Zetbox.App.Test.One_to_N_relations_OrderedN> OrderedNSide { get; }
     }
 }

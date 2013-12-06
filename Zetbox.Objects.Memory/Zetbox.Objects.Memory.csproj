@@ -220,6 +220,7 @@
     <Compile Include="ZetboxBase\ObjectReferenceProperty.Memory.Designer.cs" />
     <Compile Include="TestModule\One_to_N_relations_N.Memory.Designer.cs" />
     <Compile Include="TestModule\One_to_N_relations_One.Memory.Designer.cs" />
+    <Compile Include="TestModule\One_to_N_relations_OrderedN.Memory.Designer.cs" />
     <Compile Include="GUI\OptionalPredicateFilterConfiguration.Memory.Designer.cs" />
     <Compile Include="TestModule\OrderedNEnd.Memory.Designer.cs" />
     <Compile Include="TestModule\OrderedOneEnd.Memory.Designer.cs" />

@@ -235,6 +235,7 @@
     <Compile Include="ZetboxBase\ObjectReferenceProperty.NHibernate.Designer.cs" />
     <Compile Include="TestModule\One_to_N_relations_N.NHibernate.Designer.cs" />
     <Compile Include="TestModule\One_to_N_relations_One.NHibernate.Designer.cs" />
+    <Compile Include="TestModule\One_to_N_relations_OrderedN.NHibernate.Designer.cs" />
     <Compile Include="GUI\OptionalPredicateFilterConfiguration.NHibernate.Designer.cs" />
     <Compile Include="TestModule\OrderedNEnd.NHibernate.Designer.cs" />
     <Compile Include="TestModule\OrderedOneEnd.NHibernate.Designer.cs" />

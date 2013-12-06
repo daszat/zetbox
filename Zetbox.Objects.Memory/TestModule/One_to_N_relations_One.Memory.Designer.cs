@@ -161,6 +161,72 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relation
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.One_to_N_relations_One> OnNSide_IsValid;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        // object list property
+        // Zetbox.Generator.Templates.Properties.ObjectListProperty
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public IList<Zetbox.App.Test.One_to_N_relations_OrderedN> OrderedNSide
+        {
+            get
+            {
+                if (_OrderedNSide == null)
+                {
+                    TriggerFetchOrderedNSideAsync().Wait();
+                }
+                return _OrderedNSide;
+            }
+        }
+
+        Zetbox.API.Async.ZbTask _triggerFetchOrderedNSideTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchOrderedNSideAsync()
+        {
+            if (_triggerFetchOrderedNSideTask != null) return _triggerFetchOrderedNSideTask;
+
+            List<Zetbox.App.Test.One_to_N_relations_OrderedN> serverList = null;
+            if (Helper.IsPersistedObject(this))
+            {
+                _triggerFetchOrderedNSideTask = Context.GetListOfAsync<Zetbox.App.Test.One_to_N_relations_OrderedN>(this, "OrderedNSide")
+                    .OnResult(t =>
+                    {
+                        serverList = t.Result;
+                    });
+            }
+            else
+            {
+                _triggerFetchOrderedNSideTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, () =>
+                {
+                    serverList = new List<Zetbox.App.Test.One_to_N_relations_OrderedN>();
+                });
+            }
+
+            _triggerFetchOrderedNSideTask.OnResult(t =>
+            {
+                _OrderedNSide = new OneNRelationList<Zetbox.App.Test.One_to_N_relations_OrderedN>(
+                    "OneSide",
+                    "OrderedNSide_pos",
+                    this,
+                    OnOrderedNSideCollectionChanged,
+                    serverList);
+            });
+            return _triggerFetchOrderedNSideTask;
+        }
+
+        internal void OnOrderedNSideCollectionChanged()
+        {
+            NotifyPropertyChanged("OrderedNSide", null, null);
+            if (OnOrderedNSide_PostSetter != null && IsAttached)
+                OnOrderedNSide_PostSetter(this);
+        }
+
+        private OneNRelationList<Zetbox.App.Test.One_to_N_relations_OrderedN> _OrderedNSide;
+public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relations_One> OnOrderedNSide_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Test.One_to_N_relations_One> OnOrderedNSide_IsValid;
+
         public override Type GetImplementedInterface()
         {
             return typeof(One_to_N_relations_One);
@@ -200,6 +266,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relation
             switch (property)
             {
                 case "NSide":
+                case "OrderedNSide":
                     return false;
                 default:
                     return base.ShouldSetModified(property);
@@ -213,6 +280,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relation
             {
             case "NSide":
                 return TriggerFetchNSideAsync();
+            case "OrderedNSide":
+                return TriggerFetchOrderedNSideAsync();
             default:
                 return base.TriggerFetch(propName);
             }
@@ -259,6 +328,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relation
                         obj => obj.NSide,
                         null, // lists are read-only properties
                         obj => OnNSide_IsValid), 
+                    // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+                    new PropertyDescriptorMemoryImpl<One_to_N_relations_One, IList<Zetbox.App.Test.One_to_N_relations_OrderedN>>(
+                        lazyCtx,
+                        new Guid("084f914f-a4e6-4703-a01a-7fdda5f720d0"),
+                        "OrderedNSide",
+                        null,
+                        obj => obj.OrderedNSide,
+                        null, // lists are read-only properties
+                        obj => OnOrderedNSide_IsValid), 
                     // position columns
                 };
             }
@@ -334,6 +412,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.One_to_N_relation
             base.NotifyDeleting();
             if (OnNotifyDeleting_One_to_N_relations_One != null) OnNotifyDeleting_One_to_N_relations_One(this);
             NSide.Clear();
+            OrderedNSide.Clear();
         }
         public static event ObjectEventHandler<One_to_N_relations_One> OnNotifyDeleting_One_to_N_relations_One;
 

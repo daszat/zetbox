@@ -885,6 +885,12 @@
   <data name="Zetbox.App.Test.One_to_N_relations_One_description" xml:space="preserve">
     <value>The One-Side of the classes for the One_to_N_relations Tests</value>
   </data>
+  <data name="Zetbox.App.Test.One_to_N_relations_OrderedN" xml:space="preserve">
+    <value>One_to_N_relations_OrderedN</value>
+  </data>
+  <data name="Zetbox.App.Test.One_to_N_relations_OrderedN_description" xml:space="preserve">
+    <value>a test class for ordered lists</value>
+  </data>
   <data name="Zetbox.App.GUI.OptionalPredicateFilterConfiguration" xml:space="preserve">
     <value>OptionalPredicateFilterConfiguration</value>
   </data>
