@@ -19,26 +19,21 @@ namespace Zetbox.IntegrationTests
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using NUnit.Framework;
     using Zetbox.API;
     using Zetbox.API.Client;
     using Zetbox.API.Tests;
-    using Zetbox.App.Base;
-    using Zetbox.App.GUI;
+    using Zetbox.App.Test;
     using Zetbox.DalProvider.Base.RelationWrappers;
-    using NUnit.Framework;
 
     [TestFixture(0)]
     [TestFixture(1)]
     [TestFixture(5)]
     public sealed class BasicOneNRelationTests
-        : BasicListTests<OneNRelationList<Property>, Property>
+        : BasicListTests<OneNRelationList<One_to_N_relations_OrderedN>, One_to_N_relations_OrderedN>
     {
-        private Guid _fixtureGuid;
-        private Guid _moduleGuid;
-        private Guid _valueDescGuid;
-        private Guid _otherClassGuid;
-
-        private ObjectClass _parent;
+        private int _parentId;
+        private One_to_N_relations_One _parent;
         private bool _hasCollectionChanged;
         private bool _hasParentChanged;
 
@@ -49,29 +44,16 @@ namespace Zetbox.IntegrationTests
         {
             using (var initCtx = GetContext())
             {
-                _moduleGuid = initCtx.GetQuery<Module>().Single(m => m.Name == "ZetboxBase").ExportGuid;
-                _valueDescGuid = initCtx.GetQuery<ViewModelDescriptor>().First().ExportGuid;
-
-                var fixtureOC = initCtx.GetQuery<ObjectClass>().FirstOrDefault(oc => oc.Properties.Count == items)
-                    ?? initCtx.GetQuery<ObjectClass>().FirstOrDefault(oc => oc.Properties.Count > items)
-                    ?? (ObjectClass)Zetbox.NamedObjects.Base.Classes.Zetbox.App.Test.TestObjClass.Find(initCtx);
-
-                _fixtureGuid = fixtureOC.ExportGuid;
-                var otherClass = initCtx.GetQuery<ObjectClass>().First(oc => oc.ExportGuid != _fixtureGuid);
-                _otherClassGuid = otherClass.ExportGuid;
-
-                while (fixtureOC.Properties.Count < items)
+                var fixtureOC = initCtx.Create<One_to_N_relations_One>();
+                for (int i = 0; i < items; i++)
                 {
-                    fixtureOC.Properties.Add(CreateProperty(initCtx, NewItemNumber()));
+                    fixtureOC.OrderedNSide.Add(CreateNSide(initCtx, NewItemNumber()));
                 }
 
-                while (fixtureOC.Properties.Count > items)
-                {
-                    fixtureOC.Properties[fixtureOC.Properties.Count - 1].ObjectClass = otherClass;
-                }
-
-                Assert.That(fixtureOC.Properties.Count, Is.EqualTo(items));
+                Assert.That(fixtureOC.OrderedNSide.Count, Is.EqualTo(items));
                 initCtx.SubmitChanges();
+
+                _parentId = fixtureOC.ID;
             }
         }
 
@@ -79,40 +61,46 @@ namespace Zetbox.IntegrationTests
         {
             SetupFixtureObject();
 
-            _parent = ctx.FindPersistenceObject<ObjectClass>(_fixtureGuid);
-            Assert.That(_parent.Properties.Count, Is.EqualTo(items));
+            _parent = ctx.Find<One_to_N_relations_One>(_parentId);
+            Assert.That(_parent.OrderedNSide.Count, Is.EqualTo(items));
 
             base.PreSetup();
         }
 
         protected override void PostTeardown()
         {
+            if (_parent != null)
+            {
+                foreach (var n in _parent.OrderedNSide)
+                {
+                    ctx.Delete(n);
+                }
+                ctx.Delete(_parent);
+            }
             base.PostTeardown();
         }
 
-        protected override Property NewItem()
+        protected override One_to_N_relations_OrderedN NewItem()
         {
-            return CreateProperty(ctx, NewItemNumber());
+            return CreateNSide(ctx, NewItemNumber());
         }
 
-        private Property CreateProperty(IZetboxContext ctx, int unique)
+        private One_to_N_relations_OrderedN CreateNSide(IZetboxContext ctx, int unique)
         {
-            var result = ctx.Create<IntProperty>();
-            result.Module = ctx.FindPersistenceObject<Module>(_moduleGuid);
-            result.Name = "property" + unique;
-            result.ValueModelDescriptor = ctx.FindPersistenceObject<ViewModelDescriptor>(_valueDescGuid);
+            var result = ctx.Create<One_to_N_relations_OrderedN>();
+            result.Name = "ONRT" + unique;
             return result;
         }
 
-        protected override OneNRelationList<Property> CreateCollection(List<Property> items)
+        protected override OneNRelationList<One_to_N_relations_OrderedN> CreateCollection(List<One_to_N_relations_OrderedN> items)
         {
-            var result = (OneNRelationList<Property>)_parent.Properties;
+            var result = (OneNRelationList<One_to_N_relations_OrderedN>)_parent.OrderedNSide;
 
             _hasCollectionChanged = false;
             result.CollectionChanged += (sender, args) => { _hasCollectionChanged = true; };
 
             _hasParentChanged = false;
-            _parent.PropertyChanged += (sender, args) => { if (args.PropertyName == "Properties") { _hasParentChanged = true; } };
+            _parent.PropertyChanged += (sender, args) => { if (args.PropertyName == "OrderedNSide") { _hasParentChanged = true; } };
 
             // nothing should have changed yet!
             Assert.That(ctx.AttachedObjects.Select(p => p.ObjectState).Distinct().ToArray(), Is.All.EqualTo(DataObjectState.Unmodified));
@@ -120,9 +108,9 @@ namespace Zetbox.IntegrationTests
             return result;
         }
 
-        protected override List<Property> InitialItems()
+        protected override List<One_to_N_relations_OrderedN> InitialItems()
         {
-            return _parent.Properties.ToList();
+            return _parent.OrderedNSide.ToList();
         }
 
         protected override void AssertCollectionIsChanged()
@@ -135,7 +123,7 @@ namespace Zetbox.IntegrationTests
             _hasParentChanged = false;
 
             Assert.That(_parent.ObjectState, Is.EqualTo(DataObjectState.Unmodified).Or.EqualTo(DataObjectState.New));
-            Assert.That(ctx.AttachedObjects.OfType<Property>().Select(p => p.ObjectState).Distinct().ToArray(), Is.Empty.Or.Member(DataObjectState.Modified).Or.Member(DataObjectState.New));
+            Assert.That(ctx.AttachedObjects.OfType<One_to_N_relations_OrderedN>().Select(p => p.ObjectState).Distinct().ToArray(), Is.Empty.Or.Member(DataObjectState.Modified).Or.Member(DataObjectState.New));
         }
 
         protected override void AssertCollectionIsUnchanged()
@@ -148,7 +136,7 @@ namespace Zetbox.IntegrationTests
             _hasParentChanged = false;
         }
 
-        protected override void AssertInvariants(List<Property> expectedItems)
+        protected override void AssertInvariants(List<One_to_N_relations_OrderedN> expectedItems)
         {
             base.AssertInvariants(expectedItems);
 
@@ -158,30 +146,23 @@ namespace Zetbox.IntegrationTests
             foreach (var expected in expectedItems)
             {
                 //Assert.That(expected.OneSide, Is.SameAs(obj));
-                Assert.That(expected.GetPrivateFieldValue<int?>("__fk_ObjectClassCache"), Is.EqualTo(_parent.ID), "__fk_ObjectClassCache");
-                Assert.That(expected.GetPrivateFieldValue<int?>("_Properties_pos"), Is.Not.Null, "_Properties_pos");
+                Assert.That(expected.GetPrivateFieldValue<int?>("__fk_OneSideCache"), Is.EqualTo(_parent.ID), "__fk_OneSideCache");
+                Assert.That(expected.GetPrivateFieldValue<int?>("_OrderedNSide_pos"), Is.Not.Null, "_OrderedNSide_pos");
             }
 
-            Assert.That(collection.Select(p => p.GetPrivateFieldValue<int?>("_Properties_pos")).ToArray(), Is.Ordered, "_Properties_pos Is.Ordered");
+            Assert.That(collection.Select(p => p.GetPrivateFieldValue<int?>("_OrderedNSide_pos")).ToArray(), Is.Ordered, "_OrderedNSide_pos Is.Ordered");
 
             ////////////////////// test roundtripping //////////////////////////////////
 
-            var otherClass = ctx.FindPersistenceObject<ObjectClass>(_otherClassGuid);
-            // first shunt unattached properties to another object class to get a valid data model
-            foreach (var prop in ctx.AttachedObjects.OfType<Property>().Where(p => p.ObjectClass == null))
-            {
-                prop.ObjectClass = otherClass;
-            }
-
-            // then, save the stuff to the database
+            // save the stuff to the database
             ctx.SubmitChanges();
 
             // finally, check remaining properties for them being properly roundtripped
-            var propertyNames = collection.Select(p => p.Name).ToArray();
+            var nsideNames = collection.Select(p => p.Name).ToArray();
             using (var checkCtx = GetContext())
             {
-                var checkParent = checkCtx.FindPersistenceObject<ObjectClass>(_fixtureGuid);
-                Assert.That(checkParent.Properties.Select(p => p.Name).ToArray(), Is.EquivalentTo(propertyNames));
+                var checkParent = checkCtx.FindPersistenceObject<One_to_N_relations_One>(_parentId);
+                Assert.That(checkParent.OrderedNSide.Select(p => p.Name).ToArray(), Is.EquivalentTo(nsideNames));
             }
         }
     }
@@ -190,14 +171,10 @@ namespace Zetbox.IntegrationTests
     [TestFixture(1)]
     [TestFixture(5)]
     public sealed class GenericOneNRelationTests
-        : GenericListTests<OneNRelationList<Property>, Property>
+        : GenericListTests<OneNRelationList<One_to_N_relations_OrderedN>, One_to_N_relations_OrderedN>
     {
-        private Guid _fixtureGuid;
-        private Guid _moduleGuid;
-        private Guid _valueDescGuid;
-        private Guid _otherClassGuid;
-
-        private ObjectClass _parent;
+        private int _parentId;
+        private One_to_N_relations_One _parent;
         private bool _hasCollectionChanged;
         private bool _hasParentChanged;
 
@@ -208,32 +185,16 @@ namespace Zetbox.IntegrationTests
         {
             using (var initCtx = GetContext())
             {
-                _moduleGuid = initCtx.GetQuery<Module>().Single(m => m.Name == "ZetboxBase").ExportGuid;
-                _valueDescGuid = initCtx.GetQuery<ViewModelDescriptor>().First().ExportGuid;
-
-                var fixtureOC = initCtx.GetQuery<ObjectClass>().FirstOrDefault(oc => oc.Properties.Count == items);
-                if (fixtureOC == null)
+                var fixtureOC = initCtx.Create<One_to_N_relations_One>();
+                for (int i = 0; i < items; i++)
                 {
-                    fixtureOC = (ObjectClass)Zetbox.NamedObjects.Base.Classes.Zetbox.App.Test.TestObjClass.Find(initCtx);
+                    fixtureOC.OrderedNSide.Add(CreateNSide(initCtx, NewItemNumber()));
                 }
 
-                while (fixtureOC.Properties.Count < items)
-                {
-                    fixtureOC.Properties.Add(CreateProperty(initCtx, NewItemNumber()));
-                }
-
-                while (fixtureOC.Properties.Count > items)
-                {
-                    var propToDelete = fixtureOC.Properties[fixtureOC.Properties.Count - 1];
-                    fixtureOC.Properties.Remove(propToDelete);
-                    initCtx.Delete(propToDelete);
-                }
-
-                Assert.That(fixtureOC.Properties.Count, Is.EqualTo(items));
+                Assert.That(fixtureOC.OrderedNSide.Count, Is.EqualTo(items));
                 initCtx.SubmitChanges();
 
-                _fixtureGuid = fixtureOC.ExportGuid;
-                _otherClassGuid = initCtx.GetQuery<ObjectClass>().First(oc => oc.ExportGuid != _fixtureGuid).ExportGuid;
+                _parentId = fixtureOC.ID;
             }
         }
 
@@ -241,40 +202,46 @@ namespace Zetbox.IntegrationTests
         {
             SetupFixtureObject();
 
-            _parent = ctx.FindPersistenceObject<ObjectClass>(_fixtureGuid);
-            Assert.That(_parent.Properties.Count, Is.EqualTo(items));
+            _parent = ctx.Find<One_to_N_relations_One>(_parentId);
+            Assert.That(_parent.OrderedNSide.Count, Is.EqualTo(items));
 
             base.PreSetup();
         }
 
         protected override void PostTeardown()
         {
+            if (_parent != null)
+            {
+                foreach (var n in _parent.OrderedNSide)
+                {
+                    ctx.Delete(n);
+                }
+                ctx.Delete(_parent);
+            }
             base.PostTeardown();
         }
 
-        protected override Property NewItem()
+        protected override One_to_N_relations_OrderedN NewItem()
         {
-            return CreateProperty(ctx, NewItemNumber());
+            return CreateNSide(ctx, NewItemNumber());
         }
 
-        private Property CreateProperty(IZetboxContext ctx, int unique)
+        private One_to_N_relations_OrderedN CreateNSide(IZetboxContext ctx, int unique)
         {
-            var result = ctx.Create<IntProperty>();
-            result.Module = ctx.FindPersistenceObject<Module>(_moduleGuid);
-            result.Name = "property" + unique;
-            result.ValueModelDescriptor = ctx.FindPersistenceObject<ViewModelDescriptor>(_valueDescGuid);
+            var result = ctx.Create<One_to_N_relations_OrderedN>();
+            result.Name = "GONRT" + unique;
             return result;
         }
 
-        protected override OneNRelationList<Property> CreateCollection(List<Property> items)
+        protected override OneNRelationList<One_to_N_relations_OrderedN> CreateCollection(List<One_to_N_relations_OrderedN> items)
         {
-            var result = (OneNRelationList<Property>)_parent.Properties;
+            var result = (OneNRelationList<One_to_N_relations_OrderedN>)_parent.OrderedNSide;
 
             _hasCollectionChanged = false;
             result.CollectionChanged += (sender, args) => { _hasCollectionChanged = true; };
 
             _hasParentChanged = false;
-            _parent.PropertyChanged += (sender, args) => { if (args.PropertyName == "Properties") { _hasParentChanged = true; } };
+            _parent.PropertyChanged += (sender, args) => { if (args.PropertyName == "OrderedNSide") { _hasParentChanged = true; } };
 
             // nothing should have changed yet!
             Assert.That(ctx.AttachedObjects.Select(p => p.ObjectState).Distinct().ToArray(), Is.All.EqualTo(DataObjectState.Unmodified));
@@ -282,9 +249,9 @@ namespace Zetbox.IntegrationTests
             return result;
         }
 
-        protected override List<Property> InitialItems()
+        protected override List<One_to_N_relations_OrderedN> InitialItems()
         {
-            return _parent.Properties.ToList();
+            return _parent.OrderedNSide.ToList();
         }
 
         protected override void AssertCollectionIsChanged()
@@ -297,7 +264,7 @@ namespace Zetbox.IntegrationTests
             _hasParentChanged = false;
 
             Assert.That(_parent.ObjectState, Is.EqualTo(DataObjectState.Unmodified).Or.EqualTo(DataObjectState.New));
-            Assert.That(ctx.AttachedObjects.OfType<Property>().Select(p => p.ObjectState).Distinct().ToArray(), Is.Empty.Or.Member(DataObjectState.Modified).Or.Member(DataObjectState.New));
+            Assert.That(ctx.AttachedObjects.OfType<One_to_N_relations_OrderedN>().Select(p => p.ObjectState).Distinct().ToArray(), Is.Empty.Or.Member(DataObjectState.Modified).Or.Member(DataObjectState.New));
         }
 
         protected override void AssertCollectionIsUnchanged()
@@ -310,7 +277,7 @@ namespace Zetbox.IntegrationTests
             _hasParentChanged = false;
         }
 
-        protected override void AssertInvariants(List<Property> expectedItems)
+        protected override void AssertInvariants(List<One_to_N_relations_OrderedN> expectedItems)
         {
             base.AssertInvariants(expectedItems);
 
@@ -320,30 +287,23 @@ namespace Zetbox.IntegrationTests
             foreach (var expected in expectedItems)
             {
                 //Assert.That(expected.OneSide, Is.SameAs(obj));
-                Assert.That(expected.GetPrivateFieldValue<int?>("__fk_ObjectClassCache"), Is.EqualTo(_parent.ID), "__fk_ObjectClassCache");
-                Assert.That(expected.GetPrivateFieldValue<int?>("_Properties_pos"), Is.Not.Null, "_Properties_pos");
+                Assert.That(expected.GetPrivateFieldValue<int?>("__fk_OneSideCache"), Is.EqualTo(_parent.ID), "__fk_OneSideCache");
+                Assert.That(expected.GetPrivateFieldValue<int?>("_OrderedNSide_pos"), Is.Not.Null, "_OrderedNSide_pos");
             }
 
-            Assert.That(collection.Select(p => p.GetPrivateFieldValue<int?>("_Properties_pos")).ToArray(), Is.Ordered, "_Properties_pos Is.Ordered");
+            Assert.That(collection.Select(p => p.GetPrivateFieldValue<int?>("_OrderedNSide_pos")).ToArray(), Is.Ordered, "_OrderedNSide_pos Is.Ordered");
 
             ////////////////////// test roundtripping //////////////////////////////////
 
-            var otherClass = ctx.FindPersistenceObject<ObjectClass>(_otherClassGuid);
-            // first shunt unattached properties to another object class to get a valid data model
-            foreach (var prop in ctx.AttachedObjects.OfType<Property>().Where(p => p.ObjectClass == null))
-            {
-                prop.ObjectClass = otherClass;
-            }
-
-            // then, save the stuff to the database
+            // save the stuff to the database
             ctx.SubmitChanges();
 
             // finally, check remaining properties for them being properly roundtripped
-            var propertyNames = collection.Select(p => p.Name).ToArray();
+            var nsideNames = collection.Select(p => p.Name).ToArray();
             using (var checkCtx = GetContext())
             {
-                var checkParent = checkCtx.FindPersistenceObject<ObjectClass>(_fixtureGuid);
-                Assert.That(checkParent.Properties.Select(p => p.Name).ToArray(), Is.EquivalentTo(propertyNames));
+                var checkParent = checkCtx.FindPersistenceObject<One_to_N_relations_One>(_parentId);
+                Assert.That(checkParent.OrderedNSide.Select(p => p.Name).ToArray(), Is.EquivalentTo(nsideNames));
             }
         }
     }
