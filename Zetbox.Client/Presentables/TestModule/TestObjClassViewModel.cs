@@ -119,7 +119,7 @@ namespace Zetbox.Client.Presentables
             return result;
         }
 
-        protected override PropertyGroupViewModel CreatePropertyGroup(string tag, string translatedTag, SortedDictionary<string, ViewModel> lst)
+        protected override PropertyGroupViewModel CreatePropertyGroup(string tag, string translatedTag, PropertyGroupCollection lst)
         {
             return base.CreatePropertyGroup(tag, translatedTag, lst);
         }

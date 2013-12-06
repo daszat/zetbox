@@ -181,6 +181,37 @@ namespace Zetbox.Client.Presentables
             }
         }
 
+        public sealed class PropertyGroupCollection : List<ViewModel>
+        {
+            public PropertyGroupCollection()
+            {
+
+            }
+
+            public PropertyGroupCollection(IEnumerable<ViewModel> lst)
+                : base(lst)
+            {
+
+            }
+
+            public ViewModel this[string propName]
+            {
+                get
+                {
+                    return this
+                        .OfType<BaseValueViewModel>()
+                        .Single(vm => ((BasePropertyValueModel)vm.ValueModel).Property.Name == propName);
+                }
+            }
+
+            public IEnumerable<KeyValuePair<string, ViewModel>> GetWithKeys()
+            {
+                return this
+                    .OfType<BaseValueViewModel>()
+                    .Select(vm => new KeyValuePair<string, ViewModel>(((BasePropertyValueModel)vm.ValueModel).Property.Name, vm));
+            }
+        }
+
         /// <summary>
         /// Creates the property groups list.
         /// </summary>
@@ -210,8 +241,7 @@ namespace Zetbox.Client.Presentables
                         {
                             var firstProp = group.First();
                             var tag = firstProp.Category;
-                            var lst = new SortedDictionary<string, ViewModel>();
-                            group.ForEach(p => { lst.Add(p.Property.Name, _propertyModels[p.Property]); });
+                            var lst = new PropertyGroupCollection(group.Select(p => _propertyModels[p.Property]));
                             var propModule = firstProp.Property.Module;
                             var translatedTag = TranslatePropertyGroupTag(tag, propModule, zbBaseModule);
                             return CreatePropertyGroup(tag, translatedTag, lst);
@@ -230,17 +260,17 @@ namespace Zetbox.Client.Presentables
             return translatedTag;
         }
 
-        protected virtual PropertyGroupViewModel CreatePropertyGroup(string tag, string translatedTag, SortedDictionary<string, ViewModel> lst)
+        protected virtual PropertyGroupViewModel CreatePropertyGroup(string tag, string translatedTag, PropertyGroupCollection lst)
         {
             if (lst.Count == 1)
             {
                 return (PropertyGroupViewModel)ViewModelFactory.CreateViewModel<SinglePropertyGroupViewModel.Factory>().Invoke(
-                    DataContext, this, tag, translatedTag, lst.Values);
+                    DataContext, this, tag, translatedTag, lst);
             }
             else
             {
                 return (PropertyGroupViewModel)ViewModelFactory.CreateViewModel<MultiplePropertyGroupViewModel.Factory>().Invoke(
-                    DataContext, this, tag, translatedTag, lst.Values);
+                    DataContext, this, tag, translatedTag, lst);
             }
         }
 
