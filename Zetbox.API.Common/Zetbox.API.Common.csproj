@@ -139,6 +139,10 @@
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
       <Name>Zetbox.API</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Zetbox.Assets\Zetbox.Assets.csproj">
+      <Project>{CEB915D7-8E82-40F7-A100-0CBB1F9717E5}</Project>
+      <Name>Zetbox.Assets</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj">
       <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
       <Name>Zetbox.Objects</Name>

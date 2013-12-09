@@ -3486,6 +3486,10 @@ namespace Zetbox {
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("e98ca434-19be-4daa-8920-d979a1d98522"); }
                             }
+                            public static TypedGuid<global::Zetbox.App.Base.DataType> One_to_N_relations_OrderedN
+                            {
+                                get { return new TypedGuid<global::Zetbox.App.Base.DataType>("c887def0-a835-497d-992e-ff0bb7463280"); }
+                            }
                             public static TypedGuid<global::Zetbox.App.Base.DataType> OrderedNEnd
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("e39c9cbb-3181-49e1-93ab-aed0d0e11728"); }
@@ -3821,6 +3825,21 @@ namespace Zetbox {
                                 public static TypedGuid<global::Zetbox.App.Base.Property> NSide
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("00c825ba-6df2-4739-8074-2a85aae274a4"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> OrderedNSide
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("084f914f-a4e6-4703-a01a-7fdda5f720d0"); }
+                                }
+                            }
+                            public static class One_to_N_relations_OrderedN_Properties
+                            {
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Name
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("3ed99412-d4c8-44af-8ed6-dfcd28532a93"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> OneSide
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("8073d6a1-4c8b-4789-82f4-f983ec706397"); }
                                 }
                             }
                             public static class OrderedNEnd_Properties

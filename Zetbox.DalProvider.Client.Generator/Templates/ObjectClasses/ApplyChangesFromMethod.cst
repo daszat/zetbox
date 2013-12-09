@@ -41,50 +41,55 @@
 
 <% // Only Client and Menory objects are applying calculated properties. NH + EF are re-calculating those properties when a depended object has changed. %>
 <% foreach(var prop in cls.Properties.OfType<ValueTypeProperty>().OrderBy(p => p.Name)) { %>
+<%      var propName = prop.Name;                                                     %>
 <%      if (prop.IsList) { %>
 <%          if (prop.HasPersistentOrder) { %>
-            SynchronizeLists(this._<%= prop.Name %>Collection, otherImpl._<%= prop.Name %>Collection);
+            SynchronizeLists(this._<%= propName %>Collection, otherImpl._<%= propName %>Collection);
 <%          } else { %>
-            SynchronizeCollections(this._<%= prop.Name %>Collection, otherImpl._<%= prop.Name %>Collection);
+            SynchronizeCollections(this._<%= propName %>Collection, otherImpl._<%= propName %>Collection);
 <%          } %>
 <%      } else { %>
 <%			if(prop.IsCalculated) { %>
-            this.<%= prop.Name %> = otherImpl.<%= prop.Name %>;
+            this.<%= propName %> = otherImpl.<%= propName %>;
 <%			} else { %>
-            me.<%= prop.Name %> = other.<%= prop.Name %>;
+            me.<%= propName %> = other.<%= propName %>;
 <%			} %>
 <%      } %>
 <% } %>
 <% foreach(var prop in cls.Properties.OfType<CompoundObjectProperty>()/*.Where(p => !p.IsCalculated)*/.OrderBy(p => p.Name)) { %>
+<%      var propName = prop.Name;                                                     %>
 <%      if (prop.IsList) { %>
 <%          if (prop.HasPersistentOrder) { %>
-            SynchronizeLists(this._<%= prop.Name %>Collection, otherImpl._<%= prop.Name %>Collection);
+            SynchronizeLists(this._<%= propName %>Collection, otherImpl._<%= propName %>Collection);
 <%          } else { %>
-            SynchronizeCollections(this._<%= prop.Name %>Collection, otherImpl._<%= prop.Name %>Collection);
+            SynchronizeCollections(this._<%= propName %>Collection, otherImpl._<%= propName %>Collection);
 <%          } %>
 <%      } else { %>
-            if (me.<%= prop.Name %> == null && other.<%= prop.Name %> != null) {
-                me.<%= prop.Name %> = (<%= prop.GetElementTypeString() %>)other.<%= prop.Name %>.Clone();
-            } else if (me.<%= prop.Name %> != null && other.<%= prop.Name %> == null) {
-                me.<%= prop.Name %> = null;
-            } else if (me.<%= prop.Name %> != null && other.<%= prop.Name %> != null) {
-                me.<%= prop.Name %>.ApplyChangesFrom(other.<%= prop.Name %>);
+            if (me.<%= propName %> == null && other.<%= propName %> != null) {
+                me.<%= propName %> = (<%= prop.GetElementTypeString() %>)other.<%= propName %>.Clone();
+            } else if (me.<%= propName %> != null && other.<%= propName %> == null) {
+                me.<%= propName %> = null;
+            } else if (me.<%= propName %> != null && other.<%= propName %> != null) {
+                me.<%= propName %>.ApplyChangesFrom(other.<%= propName %>);
             }
 <%      } %>
 <% } %>
 <% foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>().Where(p => !p.IsList()).OrderBy(p => p.Name)) {
+        var propName = prop.Name;                                                     
         if (prop.RelationEnd.HasPersistentOrder) {
             var positionPropertyName = Construct.ListPositionPropertyName(prop.RelationEnd);
 %>
             this.<%= positionPropertyName %> = otherImpl.<%= positionPropertyName %>;
 <%      } %>
-            this._fk_<%= prop.Name %> = otherImpl._fk_<%= prop.Name %>;
+            if(this._fk_<%= propName %> != otherImpl._fk_<%= propName %>)
+            {
+                // On the client side it is important to notify changes as _fk_<%= propName %> is also the backingstore
+                // so, there is no need for a ReloadReferences call
+                var oldVal = this._fk_<%= propName %>;
+                var newVal = otherImpl._fk_<%= propName %>;
+                NotifyPropertyChanging("<%= propName %>", oldVal, newVal);
+                this._fk_<%= propName %> = otherImpl._fk_<%= propName %>;
+                NotifyPropertyChanged("<%= propName %>", oldVal, newVal);
+            }
 <% } %>
-
-
-<% // reset backing store and fetch task to reload lists %>
-<% // foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>().Where(p => p.IsList()).OrderBy(p => p.Name)) { %>
-<% //            this._triggerFetch<%= prop.Name %>Task = null; %>
-<% //            this._<%= prop.Name %> = null;                 %>
-<% // } %>
         }

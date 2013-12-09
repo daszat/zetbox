@@ -1074,6 +1074,15 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="One_to_N_relations_OrderedNEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.One_to_N_relations_OrderedNEfImpl)">
+	    <MappingFragment StoreEntitySet="One_to_N_relations_OrderedN">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="OrderedNSide_pos" ColumnName="fk_OneSide_pos" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="OrderedNEndEfImpl">
       <EntityTypeMapping TypeName="IsTypeOf(Model.OrderedNEndEfImpl)">
 	    <MappingFragment StoreEntitySet="OrderedNEnd">
@@ -4501,6 +4510,23 @@
         <ScalarProperty Name="ID" ColumnName="fk_OneSide"/>
       </EndProperty>
       <EndProperty Name="NSide">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_OneSide" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_OneSide_connectsTo_OrderedNSide
+    A: ZeroOrOne One_to_N_relations_One as OneSide
+    B: ZeroOrMore One_to_N_relations_OrderedN as OrderedNSide
+    Preferred Storage: MergeIntoB
+    -->
+    <AssociationSetMapping Name="FK_OneSide_connectsTo_OrderedNSide"
+                           TypeName="Model.FK_OneSide_connectsTo_OrderedNSide"
+                           StoreEntitySet="One_to_N_relations_OrderedN" >
+      <EndProperty Name="OneSide">
+        <ScalarProperty Name="ID" ColumnName="fk_OneSide"/>
+      </EndProperty>
+      <EndProperty Name="OrderedNSide">
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_OneSide" IsNull="false"/>

@@ -68,6 +68,7 @@
     <EntitySet Name="NavigationEntry" EntityType="Model.Store.NavigationEntry" Schema="gui" Table="NavigationEntries"/>
     <EntitySet Name="One_to_N_relations_N" EntityType="Model.Store.One_to_N_relations_N" Schema="test" Table="One_to_N_relations_Ns"/>
     <EntitySet Name="One_to_N_relations_One" EntityType="Model.Store.One_to_N_relations_One" Schema="test" Table="One_to_N_relations_Ones"/>
+    <EntitySet Name="One_to_N_relations_OrderedN" EntityType="Model.Store.One_to_N_relations_OrderedN" Schema="test" Table="One_to_N_relations_OrderedNs"/>
     <EntitySet Name="OrderedNEnd" EntityType="Model.Store.OrderedNEnd" Schema="test" Table="OrderedNEnds"/>
     <EntitySet Name="OrderedOneEnd" EntityType="Model.Store.OrderedOneEnd" Schema="test" Table="OrderedOneEnds"/>
     <EntitySet Name="Projekt" EntityType="Model.Store.Projekt" Schema="projekte" Table="Projekte"/>
@@ -950,6 +951,10 @@
     <AssociationSet Name="FK_OneSide_connectsTo_NSide" Association="Model.Store.FK_OneSide_connectsTo_NSide" >
       <End Role="OneSide" EntitySet="One_to_N_relations_One" />
       <End Role="NSide" EntitySet="One_to_N_relations_N" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OneSide_connectsTo_OrderedNSide" Association="Model.Store.FK_OneSide_connectsTo_OrderedNSide" >
+      <End Role="OneSide" EntitySet="One_to_N_relations_One" />
+      <End Role="OrderedNSide" EntitySet="One_to_N_relations_OrderedN" />
     </AssociationSet>
     <AssociationSet Name="FK_Parent_has_Children" Association="Model.Store.FK_Parent_has_Children" >
       <End Role="Parent" EntitySet="MethodTest" />
@@ -2126,7 +2131,7 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_OneSide" Type="int" />
-    <Property Name="Name" Type="nvarchar" MaxLength="1000" Nullable="true" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="One_to_N_relations_One">
@@ -2134,7 +2139,17 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="nvarchar" MaxLength="1000" Nullable="true" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="true" />
+  </EntityType>
+	
+  <EntityType Name="One_to_N_relations_OrderedN">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_OneSide" Type="int" />
+    <Property Name="fk_OneSide_pos" Type="int" Nullable="true" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="OrderedNEnd">
@@ -5011,6 +5026,20 @@
         <PropertyRef Name="ID" />
       </Principal>
       <Dependent Role="NSide">
+        <PropertyRef Name="fk_OneSide" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_OneSide_connectsTo_OrderedNSide">
+    <End Role="OneSide" Type="Model.Store.One_to_N_relations_One" Multiplicity="0..1" />
+    <End Role="OrderedNSide" Type="Model.Store.One_to_N_relations_OrderedN" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OneSide">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="OrderedNSide">
         <PropertyRef Name="fk_OneSide" />
       </Dependent>
     </ReferentialConstraint>

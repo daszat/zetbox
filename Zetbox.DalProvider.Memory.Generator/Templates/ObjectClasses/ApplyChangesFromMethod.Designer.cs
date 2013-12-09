@@ -115,7 +115,7 @@ this.WriteObjects("            }\r\n");
 } 
 #line 77 "P:\zetbox\Zetbox.DalProvider.Memory.Generator\Templates\ObjectClasses\ApplyChangesFromMethod.cst"
 foreach(var prop in cls.Properties.OfType<ObjectReferenceProperty>().Where(p => !p.IsList()).OrderBy(p => p.Name)) {
-            var propName = prop.Name;                                                     
+        var propName = prop.Name;                                                     
         if (prop.RelationEnd.HasPersistentOrder) {
             var positionPropertyName = Construct.ListPositionPropertyName(prop.RelationEnd);
 

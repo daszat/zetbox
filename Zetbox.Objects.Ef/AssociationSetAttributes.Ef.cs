@@ -1889,6 +1889,21 @@ using Zetbox.DalProvider.Ef;
 
 
 	/*
+    Relation: FK_OneSide_connectsTo_OrderedNSide
+    A: ZeroOrOne One_to_N_relations_One as OneSide
+    B: ZeroOrMore One_to_N_relations_OrderedN as OrderedNSide
+    Preferred Storage: MergeIntoB
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_OneSide_connectsTo_OrderedNSide",
+    "OneSide", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Test.One_to_N_relations_OneEfImpl),
+    "OrderedNSide", RelationshipMultiplicity.Many, typeof(Zetbox.App.Test.One_to_N_relations_OrderedNEfImpl)
+    )]
+
+
+	/*
     Relation: FK_Parent_has_Children
     A: ZeroOrOne MethodTest as Parent
     B: ZeroOrMore MethodTest as Children

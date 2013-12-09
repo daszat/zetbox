@@ -35,7 +35,7 @@ using System.Runtime.InteropServices;
 
 // The following tags will be replaced by the -checkout job on jenkins to current values
 [assembly: AssemblyVersion("1.1.0.0")]
-[assembly: AssemblyFileVersion("1.1.3.0")]
-[assembly: AssemblyInformationalVersion("1.1.3-zdev")]
+[assembly: AssemblyFileVersion("1.1.4.0")]
+[assembly: AssemblyInformationalVersion("1.1.4-zdev")]
 
 [assembly: System.Data.Objects.DataClasses.EdmSchemaAttribute()]

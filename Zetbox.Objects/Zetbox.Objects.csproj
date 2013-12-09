@@ -194,6 +194,7 @@
     <Compile Include="ZetboxBase\ObjectReferenceProperty.Interface.Designer.cs" />
     <Compile Include="TestModule\One_to_N_relations_N.Interface.Designer.cs" />
     <Compile Include="TestModule\One_to_N_relations_One.Interface.Designer.cs" />
+    <Compile Include="TestModule\One_to_N_relations_OrderedN.Interface.Designer.cs" />
     <Compile Include="GUI\OptionalPredicateFilterConfiguration.Interface.Designer.cs" />
     <Compile Include="TestModule\OrderedNEnd.Interface.Designer.cs" />
     <Compile Include="TestModule\OrderedOneEnd.Interface.Designer.cs" />

@@ -223,6 +223,7 @@
     <Compile Include="ZetboxBase\ObjectReferenceProperty.Ef.Designer.cs" />
     <Compile Include="TestModule\One_to_N_relations_N.Ef.Designer.cs" />
     <Compile Include="TestModule\One_to_N_relations_One.Ef.Designer.cs" />
+    <Compile Include="TestModule\One_to_N_relations_OrderedN.Ef.Designer.cs" />
     <Compile Include="GUI\OptionalPredicateFilterConfiguration.Ef.Designer.cs" />
     <Compile Include="TestModule\OrderedNEnd.Ef.Designer.cs" />
     <Compile Include="TestModule\OrderedOneEnd.Ef.Designer.cs" />

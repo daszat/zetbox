@@ -21,6 +21,15 @@ namespace Zetbox.DalProvider.Client.Tests.ContextTests
     using System.Text;
     using NUnit.Framework;
 
+    public class when_changing_one_to_n
+        : Zetbox.API.AbstractConsumerTests.ContextTests.when_changing_one_to_n
+    {
+        new public class on_client
+            : Zetbox.API.AbstractConsumerTests.ContextTests.when_changing_one_to_n.on_client
+        {
+        }
+    }
+
     public class when_concurrency
         : Zetbox.API.AbstractConsumerTests.ContextTests.when_concurrency
     {

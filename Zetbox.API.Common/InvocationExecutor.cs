@@ -37,11 +37,18 @@ namespace Zetbox.API.Common
         /// <returns></returns>
         public bool HasValidInvocation(IInvocation obj)
         {
-            return obj != null
+            if (obj != null
                 && !string.IsNullOrWhiteSpace(obj.MemberName)
-                && !string.IsNullOrWhiteSpace(obj.ImplementorName)
-                && Type.GetType(obj.ImplementorName, throwOnError: false) != null;
-            //  && _restrictor.IsAcceptableDeploymentRestriction((int)obj.Implementor.Assembly.DeploymentRestrictions);
+                && !string.IsNullOrWhiteSpace(obj.ImplementorName))
+            {
+                var t = Type.GetType(obj.ImplementorName, throwOnError: false);
+                if (t != null && t.FindMethod(obj.MemberName, new Type[] { }) != null)
+                {
+                    return true;
+                }
+                Logging.Log.WarnOnce(string.Format("Invocation is invalid, implementor '{0}.{1}' could not be loaded", obj.ImplementorName, obj.MemberName));
+            }
+            return false;
         }
 
         /// <summary>

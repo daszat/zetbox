@@ -25,12 +25,47 @@ namespace Zetbox.API
     using Zetbox.API.Configuration;
     using Zetbox.API.Utils;
 
-    public class ImplementorAssembly
+    public sealed class ImplementorAssembly
     {
         public Assembly Assembly { get; private set; }
         public ImplementorAssembly(Assembly assembly)
         {
+            if (assembly == null) throw new ArgumentNullException("assembly");
             this.Assembly = assembly;
+        }
+
+        public override bool Equals(object obj)
+        {
+            var other = obj as ImplementorAssembly;
+            if (other == null) return false;
+            return other.Assembly == this.Assembly;
+        }
+
+        public override int GetHashCode()
+        {
+            return this.Assembly.GetHashCode();
+        }
+
+        public static bool operator ==(ImplementorAssembly a, ImplementorAssembly b)
+        {
+            // If both are null, or both are same instance, return true.
+            if (System.Object.ReferenceEquals(a, b))
+            {
+                return true;
+            }
+
+            // If one is null, but not both, return false.
+            if (((object)a == null) || ((object)b == null))
+            {
+                return false;
+            }
+
+            return a.Assembly == b.Assembly;
+        }
+
+        public static bool operator !=(ImplementorAssembly a, ImplementorAssembly b)
+        {
+            return !(a == b);
         }
     }
 

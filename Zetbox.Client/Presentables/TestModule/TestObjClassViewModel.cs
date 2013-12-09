@@ -28,6 +28,7 @@ namespace Zetbox.Client.Presentables
     using Zetbox.Client.Presentables.GUI;
     using Zetbox.Client.Presentables.ValueViewModels;
     using Zetbox.App.Test;
+    using Zetbox.Client.GUI;
 
     [ViewModelDescriptor]
     public class TestObjClassViewModel
@@ -46,18 +47,18 @@ namespace Zetbox.Client.Presentables
         {
             var result = base.CreatePropertyGroups();
 
-            result.Add(ViewModelFactory.CreateViewModel<CustomPropertyGroupViewModel.Factory>()
-                .Invoke(DataContext, this, "Stack 1", "Stack 1", new[] 
+            result.Add(
+                UICreator.CustomPropertyGroup("Stack 1", "Stack 1", new[]
                 {
-                    ViewModelFactory.CreateViewModel<StackPanelViewModel.Factory>().Invoke(DataContext, this, "Stack", new [] 
+                    UICreator.StackPanel(new []
                     {
-                        ViewModelFactory.CreateViewModel<GroupBoxViewModel.Factory>().Invoke(DataContext, this, "Grp 1", new []
+                        UICreator.GroupBox("Grp 1", new []
                         {
                             PropertyModelsByName["StringProp"],
                             PropertyModelsByName["MyIntProperty"],
                             PropertyModelsByName["ObjectProp"],
                         }),
-                        ViewModelFactory.CreateViewModel<GroupBoxViewModel.Factory>().Invoke(DataContext, this, "Grp 2", new []
+                        UICreator.GroupBox("Grp 2", new []
                         {
                             PropertyModelsByName["StringProp"],
                             PropertyModelsByName["TestEnumProp"],
@@ -67,18 +68,18 @@ namespace Zetbox.Client.Presentables
                 })
             );
 
-            result.Add(ViewModelFactory.CreateViewModel<CustomPropertyGroupViewModel.Factory>()
-               .Invoke(DataContext, this, "Grid 1", "Grid 1", new[] 
+            result.Add(
+                UICreator.CustomPropertyGroup("Grid 1", "Grid 1", new[]
                 {
-                    ViewModelFactory.CreateViewModel<GridPanelViewModel.Factory>().Invoke(DataContext, this, "Grid", new [] 
+                    UICreator.Grid(new []
                     {
-                        new GridPanelViewModel.Cell(0, 0, ViewModelFactory.CreateViewModel<GroupBoxViewModel.Factory>().Invoke(DataContext, this, "Grp 1", new []
+                        new GridPanelViewModel.Cell(0, 0, UICreator.GroupBox("Grp 1", new []
                         {
                             PropertyModelsByName["StringProp"],
                             PropertyModelsByName["MyIntProperty"],
                             PropertyModelsByName["ObjectProp"],
                         })),
-                        new GridPanelViewModel.Cell(0, 1, ViewModelFactory.CreateViewModel<GroupBoxViewModel.Factory>().Invoke(DataContext, this, "Grp 2", new []
+                        new GridPanelViewModel.Cell(0, 1, UICreator.GroupBox("Grp 2", new []
                         {
                             PropertyModelsByName["StringProp"],
                             PropertyModelsByName["TestEnumProp"],
@@ -88,24 +89,24 @@ namespace Zetbox.Client.Presentables
                 })
             );
 
-            result.Add(ViewModelFactory.CreateViewModel<CustomPropertyGroupViewModel.Factory>()
-               .Invoke(DataContext, this, "Dock 1", "Dock 1", new[] 
+            result.Add(
+                UICreator.CustomPropertyGroup("Dock 1", "Dock 1", new[] 
                 {
-                    ViewModelFactory.CreateViewModel<DockPanelViewModel.Factory>().Invoke(DataContext, this, "Dock", new [] 
+                    UICreator.DockPanel(new []
                     {
-                        new DockPanelViewModel.Element(DockPanelViewModel.Dock.Left, ViewModelFactory.CreateViewModel<GroupBoxViewModel.Factory>().Invoke(DataContext, this, "Left 1", new []
+                        new DockPanelViewModel.Cell(DockPanelViewModel.Dock.Left, UICreator.GroupBox("Left 1", new []
                         {
                             PropertyModelsByName["StringProp"],
                             PropertyModelsByName["MyIntProperty"],
                             PropertyModelsByName["ObjectProp"],
                         })),
-                        new DockPanelViewModel.Element(DockPanelViewModel.Dock.Top, ViewModelFactory.CreateViewModel<GroupBoxViewModel.Factory>().Invoke(DataContext, this, "Top 2", new []
+                        new DockPanelViewModel.Cell(DockPanelViewModel.Dock.Top, UICreator.GroupBox("Top 2", new []
                         {
                             PropertyModelsByName["StringProp"],
                             PropertyModelsByName["TestEnumProp"],
                             PropertyModelsByName["TestEnumWithDefault"],
                         })),
-                        new DockPanelViewModel.Element(DockPanelViewModel.Dock.Fill, ViewModelFactory.CreateViewModel<GroupBoxViewModel.Factory>().Invoke(DataContext, this, "Fill 3", new []
+                        new DockPanelViewModel.Cell(DockPanelViewModel.Dock.Fill, UICreator.GroupBox("Fill 3", new []
                         {
                             PropertyModelsByName["StringProp"],
                             PropertyModelsByName["TestEnumProp"],
@@ -118,7 +119,7 @@ namespace Zetbox.Client.Presentables
             return result;
         }
 
-        protected override PropertyGroupViewModel CreatePropertyGroup(string tag, string translatedTag, SortedDictionary<string, ViewModel> lst)
+        protected override PropertyGroupViewModel CreatePropertyGroup(string tag, string translatedTag, PropertyGroupCollection lst)
         {
             return base.CreatePropertyGroup(tag, translatedTag, lst);
         }

@@ -54,7 +54,7 @@ namespace Zetbox.App.Base
             object constrainedObjectParam,
             object constrainedValueParam)
         {
-            int length = (constrainedValueParam ?? String.Empty).ToString().Length;
+            int length = (constrainedValueParam as string ?? String.Empty).Length;
             e.Result = length == 0 || ((obj.MinLength <= length) && (length <= (obj.MaxLength ?? int.MaxValue)));
         }
 
@@ -72,8 +72,7 @@ namespace Zetbox.App.Base
             }
             else
             {
-                constrainedValueParam = (constrainedValueParam ?? String.Empty);
-                int length = constrainedValueParam.ToString().Length;
+                int length = (constrainedValueParam as string ?? String.Empty).Length;
                 StringBuilder result = new StringBuilder();
                 if (length < obj.MinLength)
                     result.AppendFormat("{0} should be at least {1} characters long", obj.ConstrainedProperty.Name, obj.MinLength);

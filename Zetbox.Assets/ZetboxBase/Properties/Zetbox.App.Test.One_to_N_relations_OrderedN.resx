@@ -123,16 +123,10 @@
   <data name="Name_description" xml:space="preserve">
     <value>A property to test queries across the Relation</value>
   </data>
-  <data name="NSide_label" xml:space="preserve">
-    <value>NSide</value>
+  <data name="OneSide_label" xml:space="preserve">
+    <value>OneSide</value>
   </data>
-  <data name="NSide_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="OrderedNSide_label" xml:space="preserve">
-    <value>OrderedNSide</value>
-  </data>
-  <data name="OrderedNSide_description" xml:space="preserve">
+  <data name="OneSide_description" xml:space="preserve">
     <value />
   </data>
 </root>

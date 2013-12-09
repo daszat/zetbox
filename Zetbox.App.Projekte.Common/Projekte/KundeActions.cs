@@ -12,21 +12,24 @@
 //
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Zetbox.API;
 
-namespace Zetbox.Server.Tests.ContextTests
+namespace Zetbox.App.Projekte
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-
-    using Zetbox.API;
-    using Zetbox.App.Test;
-
-    using NUnit.Framework;
-
-    public class when_searching
-        : Zetbox.API.AbstractConsumerTests.ContextTests.when_searching
+    /// <summary>
+    /// Server implementation
+    /// </summary>
+    [Implementor]
+    public static class KundeActions
     {
+        [Invocation]
+        public static void ToString(Kunde obj, MethodReturnEventArgs<string> e)
+        {
+            e.Result = obj.Kundenname;
+        }
     }
 }

@@ -35,14 +35,20 @@ namespace Zetbox.App.Test
         public static void ServerObjParameter(MethodTest obj, MethodReturnEventArgs<TestObjClass> e, TestObjClass input)
         {
             var ctx = obj.Context;
+
             var newA = ctx.Create<TestObjClass>();
             newA.StringProp = "A";
+            var kundeA = ctx.Create<Kunde>();
+            kundeA.Kundenname = "Kunde A";
+            kundeA.PLZ = "1210";
+            newA.ObjectProp = kundeA;
 
             var newB = ctx.Create<TestObjClass>();
             newB.StringProp = "B";
-            var kunde = ctx.Create<Kunde>();
-            kunde.Kundenname = "Kunde";
-            newB.ObjectProp = kunde;
+            var kundeB = ctx.Create<Kunde>();
+            kundeB.Kundenname = "Kunde";
+            kundeB.PLZ = "1210";
+            newB.ObjectProp = kundeB;
 
             e.Result = input ?? newA;
         }

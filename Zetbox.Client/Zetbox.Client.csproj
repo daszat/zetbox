@@ -127,6 +127,7 @@
     </Compile>
     <Compile Include="GUI\IHasViewModel.cs" />
     <Compile Include="GUI\IRenderer.cs" />
+    <Compile Include="GUI\UICreator.cs" />
     <Compile Include="GUI\ViewDescriptorAttribute.cs" />
     <Compile Include="DefaultFulltextSupport.cs" />
     <Compile Include="Launcher.cs" />

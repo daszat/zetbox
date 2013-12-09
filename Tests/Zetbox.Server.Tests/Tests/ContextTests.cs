@@ -13,7 +13,7 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace Zetbox.DalProvider.Ef.Tests.ContextTests
+namespace Zetbox.Server.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -25,7 +25,7 @@ namespace Zetbox.DalProvider.Ef.Tests.ContextTests
         : Zetbox.API.AbstractConsumerTests.ContextTests.when_changing_one_to_n
     {
     }
-
+    
     public class when_concurrency
         : Zetbox.API.AbstractConsumerTests.ContextTests.when_concurrency
     {
