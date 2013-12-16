@@ -4,7 +4,7 @@
   <Server StartServer="false">
     <ConnectionStrings>
       <Database Name="Zetbox" Schema="$schema$" Provider="$provider$">$connectionstring$</Database>
-      <Database Provider="" Schema="POSTGRESQL" Name="$safesolutionname$_dest">Server=localhost;Port=5432;Database=J$safesolutionname$_staging;User Id=zetbox</Database>
+      <Database Provider="" Schema="POSTGRESQL" Name="$safesolutionname$_dest">Server=localhost;Port=5432;Database=$safesolutionname$_staging;User Id=zetbox</Database>
       <Database Provider="" Schema="OLEDB" Name="$safesolutionname$_source">Provider=Microsoft.Jet.OLEDB.4.0;Data Source=..\..\$safesolutionname$.mdb</Database>
     </ConnectionStrings>
     <DocumentStore>DocumentStore\Server\</DocumentStore>
