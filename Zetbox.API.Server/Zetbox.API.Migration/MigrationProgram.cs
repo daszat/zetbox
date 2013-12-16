@@ -137,7 +137,7 @@ namespace Zetbox.API.Migration
 
             try
             {
-                return ZetboxConfig.FromFile(HostType.Server, configFilePath, "");
+                return ZetboxConfig.FromFile(HostType.Server, configFilePath, GetConfigFileName());
             }
             catch (Exception ex)
             {
@@ -146,6 +146,11 @@ namespace Zetbox.API.Migration
             }
             // never reached
             return null;
+        }
+
+        protected virtual string GetConfigFileName()
+        {
+            return System.IO.Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetEntryAssembly().Location) + ".xml";
         }
 
         protected virtual void ValidateConfig() { }
