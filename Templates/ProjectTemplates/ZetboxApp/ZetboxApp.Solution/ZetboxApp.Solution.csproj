@@ -47,6 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ZetboxApp.Migrate\Program.cs" />
+    <None Include="ZetboxApp.Migrate\AssemblyInfo.cs" />
+    <None Include="ZetboxApp.Migrate\packages.config" />
     <None Include="ZetboxApp.Server.Migrations\DemoMigrationFragments.cs" />
     <None Include="ZetboxApp.Server.Migrations\MigrationsModule.cs" />
     <None Include="ZetboxApp.Server.Migrations\AssemblyInfo.cs" />
@@ -129,6 +132,13 @@
     <VSTemplate Include="ZetboxApp.Client\ZetboxApp.Client.vstemplate" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ZetboxApp.Migrate\CreateStagingAggregationDatabase.sql" />
+    <Content Include="ZetboxApp.Migrate\CreateReportViews.sql" />
+    <VSTemplate Include="ZetboxApp.Migrate\ZetboxApp.Migrate.vstemplate" />
+    <None Include="ZetboxApp.Migrate\ZetboxApp.Migrate.ico" />
+    <None Include="ZetboxApp.Migrate\ProjectTemplate.csproj">
+      <SubType>Designer</SubType>
+    </None>
     <VSTemplate Include="ZetboxApp.Server.Migrations\ZetboxApp.Server.Migrations.vstemplate" />
     <None Include="ZetboxApp.Server.Migrations\ZetboxApp.Server.Migrations.ico" />
     <None Include="ZetboxApp.Server.Migrations\ProjectTemplate.csproj">
