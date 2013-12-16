@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<ZetboxConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://dasz.at/Zetbox/">
+  <ConfigName>$safesolutionname$ Migration Configuration</ConfigName>
+  <Server StartServer="false">
+    <ConnectionStrings>
+      <Database Name="Zetbox" Schema="$schema$" Provider="$provider$">$connectionstring$</Database>
+      <Database Provider="" Schema="POSTGRESQL" Name="$safesolutionname$_dest">Server=localhost;Port=5432;Database=J$safesolutionname$_staging;User Id=zetbox</Database>
+      <Database Provider="" Schema="OLEDB" Name="$safesolutionname$_source">Provider=Microsoft.Jet.OLEDB.4.0;Data Source=..\..\$safesolutionname$.mdb</Database>
+    </ConnectionStrings>
+    <DocumentStore>DocumentStore\Server\</DocumentStore>
+    <Modules>
+      <Module>Zetbox.Server.ServerModule, Zetbox.Server</Module>
+      <Module>Zetbox.DalProvider.$ormapperclassname$.$ormapperclassname$Provider, Zetbox.DalProvider.$ormapperclassname$</Module>
+      <Module>$safesolutionname$.Server.ServerModule, $safesolutionname$.Server</Module>
+    </Modules>
+  </Server>
+</ZetboxConfig>

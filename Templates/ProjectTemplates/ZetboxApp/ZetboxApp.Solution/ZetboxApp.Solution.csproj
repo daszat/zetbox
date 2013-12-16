@@ -47,6 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ZetboxApp.Migrate\app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="ZetboxApp.Migrate\Program.cs" />
     <None Include="ZetboxApp.Migrate\AssemblyInfo.cs" />
     <None Include="ZetboxApp.Migrate\packages.config" />
