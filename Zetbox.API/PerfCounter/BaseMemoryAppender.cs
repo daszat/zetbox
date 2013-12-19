@@ -68,7 +68,7 @@ namespace Zetbox.API.PerfCounter
         {
             values[Name + "Calls"] = Calls.ToString();
             values[Name + "Objects"] = Objects.ToString();
-            values[Name + "Duration"] = Duration.ToString();
+            values[Name + "Duration"] = BaseMemoryAppender.TicksToMillis(Duration).ToString();
             values[Name + "AvgDuration"] = BaseMemoryAppender.Avg(Duration, Calls).ToString();
             if (MinDuration != long.MinValue)
                 values[Name + "MinDuration"] = MinDuration.ToString();
@@ -79,19 +79,18 @@ namespace Zetbox.API.PerfCounter
 
     public abstract class BaseMemoryAppender : IBasePerfCounterAppender
     {
-        private const long TICKS_TO_MILLIS = 10000;
         protected static readonly object counterLock = new object();
 
         #region static utilities
 
         public static long Avg(long duration, long count)
         {
-            return count != 0 ? duration / count / TICKS_TO_MILLIS : 0;
+            return count != 0 ? duration * 1000 / count / System.Diagnostics.Stopwatch.Frequency : 0;
         }
 
         public static long TicksToMillis(long p)
         {
-            return p / TICKS_TO_MILLIS;
+            return p * 1000 / System.Diagnostics.Stopwatch.Frequency;
         }
 
         #endregion
