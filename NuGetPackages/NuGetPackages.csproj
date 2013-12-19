@@ -23,7 +23,9 @@
     <Content Include="zetboxBasic-All.nuspec" />
     <Content Include="zetboxBasic-EF.nuspec" />
     <Content Include="zetboxBasic-NH.nuspec" />
-    <Content Include="zetboxBasic-Tests.nuspec" />
+    <Content Include="zetboxBasic-Tests.nuspec">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="zetboxBasic-Client.nuspec" />
     <Content Include="zetboxBasic-Common.nuspec" />
     <Content Include="zetboxBasic-Server.nuspec" />
