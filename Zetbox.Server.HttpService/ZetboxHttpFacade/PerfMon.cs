@@ -46,9 +46,8 @@ namespace Zetbox.Server.HttpService
             context.Response.StatusCode = 200;
             context.Response.ContentType = "text/plain";
             context.Response.Charset = "utf-8";
-            using (var writer = new StreamWriter(context.Response.OutputStream, Encoding.UTF8))
+            using (var writer = new StreamWriter(context.Response.OutputStream, new UTF8Encoding(false)))
             {
-
                 foreach (var kvp in data.Totals)
                 {
                     writer.WriteLine("{0}: {1}", kvp.Key, kvp.Value);
