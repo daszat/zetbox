@@ -25,12 +25,60 @@ namespace Zetbox.API.Server.PerfCounter
     using Zetbox.API.PerfCounter;
     using Zetbox.API.Utils;
     using log4net;
+    using System.ComponentModel;
 
-    public class MemoryAppender : BaseMemoryAppender, IPerfCounterAppender
+    public interface IMemoryAppender : IPerfCounterAppender
     {
+        MemoryAppender.Data Read();
+    }
+
+    public class MemoryAppender : BaseMemoryAppender, IMemoryAppender
+    {
+        #region Autofac Module
+        [Feature]
+        [Description("PerfCounter: read & save data internal")]
+        public class Module : Autofac.Module
+        {
+            protected override void Load(ContainerBuilder moduleBuilder)
+            {
+                base.Load(moduleBuilder);
+
+                moduleBuilder
+                    .RegisterType<MemoryAppender>()
+                    .AsSelf()
+                    .As<IPerfCounterAppender>()
+                    .As<IMemoryAppender>()
+                    .SingleInstance();
+            }
+        }
+        #endregion
+
         /// <summary>
         /// Default implementation does nothing. You need to read the values directly.
         /// </summary>
         public override void Dump(bool force) { }
+
+        public sealed class Data
+        {
+            internal Data() { }
+            public Dictionary<string, string> Totals = new Dictionary<string, string>();
+            public Dictionary<string, ObjectMemoryCounters> Objects;
+        }
+
+        public Data Read()
+        {
+            var data = new Data();
+
+            lock (counterLock)
+            {
+                this.FormatTo(data.Totals);
+                data.Objects = new Dictionary<string, ObjectMemoryCounters>(this.Objects);
+                OnDataRead();
+            }
+
+            return data;
+        }
+
+        protected virtual void OnDataRead() { }
     }
 }

@@ -30,7 +30,7 @@ namespace Zetbox.API.Server.PerfCounter
         #region Autofac Module
         [Feature]
         [Description("PerfCounter: read & save data internal, but reset global data.")]
-        public class Module : Autofac.Module
+        public new class Module : Autofac.Module
         {
             protected override void Load(ContainerBuilder moduleBuilder)
             {
@@ -40,32 +40,18 @@ namespace Zetbox.API.Server.PerfCounter
                     .RegisterType<ResetOnReadAppender>()
                     .AsSelf()
                     .As<IPerfCounterAppender>()
+                    .As<IMemoryAppender>()
                     .SingleInstance();
             }
         }
         #endregion
 
-        public sealed class Data
-        {
-            internal Data() { }
-            public Dictionary<string, string> Totals = new Dictionary<string, string>();
-            public Dictionary<string, ObjectMemoryCounters> Objects;
-        }
-
         public ResetOnReadAppender() { }
 
-        public Data ReadAndResetValues()
+        protected override void OnDataRead()
         {
-            var data = new Data();
-
-            lock (counterLock)
-            {
-                this.FormatTo(data.Totals);
-                data.Objects = new Dictionary<string, ObjectMemoryCounters>(this.Objects);
-                this.ResetValues();
-            }
-
-            return data;
+            base.ResetValues();
+            base.OnDataRead();
         }
     }
 }

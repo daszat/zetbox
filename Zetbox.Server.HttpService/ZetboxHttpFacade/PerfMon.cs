@@ -24,6 +24,7 @@ namespace Zetbox.Server.HttpService
     using Autofac;
     using Autofac.Integration.Web;
     using Zetbox.API.Server.PerfCounter;
+    using Zetbox.API.Utils;
 
     public class PerfMonFacade : IHttpHandler
     {
@@ -34,15 +35,24 @@ namespace Zetbox.Server.HttpService
             get { return true; }
         }
 
-        private ResetOnReadAppender _appender = null;
+        private IMemoryAppender _appender = null;
 
         public void ProcessRequest(HttpContext context)
         {
             Log.DebugFormat("Processing request for [{0}]", context.Request.Url);
 
             FetchAppender();
+            if (_appender == null)
+            {
+                Log.WarnOnce("No IPerfCounterAppender of type MemoryAppender has been registrated.");
+                context.Response.StatusCode = 501; // Not Implemented
+                context.Response.ContentType = "text/plain";
+                context.Response.Charset = "utf-8";
+                context.Response.Output.WriteLine("No IPerfCounterAppender of type MemoryAppender has been registrated.");
+                return;
+            }
 
-            var data = _appender.ReadAndResetValues();
+            var data = _appender.Read();
             context.Response.StatusCode = 200;
             context.Response.ContentType = "text/plain";
             context.Response.Charset = "utf-8";
@@ -66,14 +76,15 @@ namespace Zetbox.Server.HttpService
             }
         }
 
+        private bool _feched = false;
         private void FetchAppender()
         {
-
-            if (_appender == null)
+            if (!_feched)
             {
+                _feched = true;
                 var cpa = (IContainerProviderAccessor)HttpContext.Current.ApplicationInstance;
                 var cp = cpa.ContainerProvider;
-                _appender = cp.RequestLifetime.Resolve<ResetOnReadAppender>();
+                cp.RequestLifetime.TryResolve<IMemoryAppender>(out _appender);
             }
         }
     }
