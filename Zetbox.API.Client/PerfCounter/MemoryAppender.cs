@@ -44,6 +44,7 @@ namespace Zetbox.API.Client.PerfCounter
                     .AsSelf()
                     .As<IPerfCounterAppender>()
                     .As<IMemoryAppender>()
+                    .OnActivated(args => args.Instance.Initialize(args.Context.Resolve<IFrozenContext>()))
                     .SingleInstance();
             }
         }

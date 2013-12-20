@@ -107,7 +107,6 @@ namespace Zetbox.API.AbstractConsumerTests
             builder
                 .RegisterType<PerfCounterDispatcher>()
                 .As<IPerfCounter>()
-                .OnActivated(args => args.Instance.Initialize(args.Context.Resolve<IFrozenContext>()))
                 .OnRelease(obj => obj.Dump())
                 .SingleInstance();
 
