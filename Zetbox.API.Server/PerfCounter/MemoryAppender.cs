@@ -54,6 +54,15 @@ namespace Zetbox.API.Server.PerfCounter
         }
         #endregion
 
+        protected override List<string> GetAllClassNames(IFrozenContext frozenCtx)
+        {
+            return frozenCtx
+                .GetQuery<Zetbox.App.Base.ObjectClass>()
+                .ToList()
+                .Select(c => string.Format("{0}.{1}", c.Module.Namespace, c.Name))
+                .ToList();
+        }
+
         /// <summary>
         /// Default implementation does nothing. You need to read the values directly.
         /// </summary>

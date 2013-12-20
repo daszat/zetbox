@@ -118,8 +118,18 @@ namespace Zetbox.API.PerfCounter
         {
         }
 
+        protected List<string> allClasses;
         public void Initialize(IFrozenContext frozenCtx)
         {
+            try
+            {
+                allClasses = GetAllClassNames(frozenCtx);
+                ApplyObjectsTemplate();
+            }
+            catch (Exception ex)
+            {
+                Logging.Log.Error("Error initializing PerfMon Memory Appender", ex);
+            }
         }
 
         public abstract void Dump(bool force);
@@ -133,8 +143,22 @@ namespace Zetbox.API.PerfCounter
                 this.SubmitChanges.Reset();
                 this.ServerMethodInvocation = 0;
                 this.Objects.Clear();
+                ApplyObjectsTemplate();
             }
         }
+
+        private void ApplyObjectsTemplate()
+        {
+            if (allClasses != null)
+            {
+                foreach (var name in allClasses)
+                {
+                    this.Objects[name] = new ObjectMemoryCounters(name);
+                }
+            }
+        }
+
+        protected abstract List<string> GetAllClassNames(IFrozenContext frozenCtx);
 
         protected Dictionary<string, ObjectMemoryCounters> Objects { get; private set; }
 

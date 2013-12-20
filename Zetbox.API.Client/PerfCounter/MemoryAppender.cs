@@ -57,6 +57,15 @@ namespace Zetbox.API.Client.PerfCounter
             public Dictionary<string, ObjectMemoryCounters> Objects;
         }
 
+        protected override List<string> GetAllClassNames(IFrozenContext frozenCtx)
+        {
+            return frozenCtx
+                .GetQuery<Zetbox.App.Base.ObjectClass>()
+                .ToList()
+                .Select(c => string.Format("{0}.{1}", c.Module.Namespace, c.Name))
+                .ToList();
+        }
+
         public Data Read()
         {
             var data = new Data();
