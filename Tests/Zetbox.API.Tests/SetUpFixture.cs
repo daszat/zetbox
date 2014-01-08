@@ -21,6 +21,7 @@ namespace Zetbox.API
     using System.Text;
     using Autofac;
     using NUnit.Framework;
+    using Zetbox.API.Common;
 
     [SetUpFixture]
     public class SetUpFixture : AbstractConsumerTests.AbstractSetUpFixture
@@ -30,12 +31,17 @@ namespace Zetbox.API
             base.SetupBuilder(builder);
 
             // Register missing Modules. HostType is None!
-            builder.RegisterModule(new ApiModule());
+            builder.RegisterModule(new ApiCommonModule());
 
             builder
                 .RegisterType<Mocks.TestZetboxContext>()
                 .As<IZetboxContext>()
                 .As<IFrozenContext>()
+                .InstancePerDependency();
+
+            builder
+                .RegisterType<Zetbox.API.Tests.InvocationExecutorTests.InvocationExecutorTestsMockImplementor>()
+                .AsSelf()
                 .InstancePerDependency();
         }
 

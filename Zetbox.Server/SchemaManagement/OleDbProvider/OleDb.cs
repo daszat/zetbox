@@ -137,12 +137,7 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
             if (tblName == null)
                 throw new ArgumentNullException("tblName");
 
-            using (var cmd = new OleDbCommand("SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@table) AND type IN (N'U')", db, tx))
-            {
-                cmd.Parameters.AddWithValue("@table", tblName.Name);
-                QueryLog.Debug(cmd.CommandText);
-                return (int)cmd.ExecuteScalar() > 0;
-            }
+            return GetTableNames().Any(t => t == tblName);
         }
 
         public bool CheckColumnExists(TableRef tblName, string colName)
@@ -150,44 +145,30 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
             if (tblName == null)
                 throw new ArgumentNullException("tblName");
 
-            using (var cmd = new OleDbCommand(@"SELECT COUNT(*) FROM sys.objects o INNER JOIN sys.columns c ON c.object_id=o.object_id
-	                                            WHERE o.object_id = OBJECT_ID(@table) 
-		                                            AND o.type IN (N'U')
-		                                            AND c.Name = @column", db, tx))
-            {
-                cmd.Parameters.AddWithValue("@table", tblName.Name);
-                cmd.Parameters.AddWithValue("@column", colName);
-                QueryLog.Debug(cmd.CommandText);
-                return (int)cmd.ExecuteScalar() > 0;
-            }
+            return GetTableColumnNames(tblName).Any(c => c == colName);
         }
 
         public bool GetIsColumnNullable(TableRef tblName, string colName)
         {
-            using (var cmd = new OleDbCommand(@"SELECT c.is_nullable FROM sys.objects o INNER JOIN sys.columns c ON c.object_id=o.object_id
-	                                            WHERE o.object_id = OBJECT_ID(@table) 
-		                                            AND o.type IN (N'U')
-		                                            AND c.Name = @column", db, tx))
-            {
-                cmd.Parameters.AddWithValue("@table", tblName);
-                cmd.Parameters.AddWithValue("@column", colName);
-                QueryLog.Debug(cmd.CommandText);
-                return (bool)cmd.ExecuteScalar();
-            }
+            if (tblName == null)
+                throw new ArgumentNullException("tblName");
+
+            return GetTableColumns(tblName).Single(c => c.Name == colName).IsNullable;
         }
 
         public bool CheckViewExists(TableRef viewName)
         {
-            using (var cmd = new OleDbCommand("SELECT COUNT(*) FROM sys.objects WHERE object_id = OBJECT_ID(@view) AND type IN (N'V')", db, tx))
-            {
-                cmd.Parameters.AddWithValue("@view", viewName);
-                QueryLog.Debug(cmd.CommandText);
-                return (int)cmd.ExecuteScalar() > 0;
-            }
+            if (viewName == null)
+                throw new ArgumentNullException("viewName");
+
+            return GetViewNames().Any(v => v == viewName);
         }
 
         public bool CheckTableContainsData(TableRef tblName)
         {
+            if (tblName == null)
+                throw new ArgumentNullException("tblName");
+
             using (var cmd = new OleDbCommand(string.Format("SELECT COUNT(*) FROM {0}", FormatSchemaName(tblName), db, tx)))
             {
                 QueryLog.Debug(cmd.CommandText);
@@ -197,7 +178,10 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
 
         public bool CheckColumnContainsNulls(TableRef tblName, string colName)
         {
-            using (var cmd = new OleDbCommand(string.Format("SELECT COUNT(*) FROM (SELECT TOP 1 [{1}] FROM [{0}] WHERE [{1}] IS NULL) AS nulls", tblName, colName), db, tx))
+            if (tblName == null)
+                throw new ArgumentNullException("tblName");
+
+            using (var cmd = new OleDbCommand(string.Format("SELECT COUNT(*) FROM (SELECT TOP 1 {1} FROM {0} WHERE {1} IS NULL) AS nulls", FormatSchemaName(tblName), QuoteIdentifier(colName)), db, tx))
             {
                 QueryLog.Debug(cmd.CommandText);
                 return (int)cmd.ExecuteScalar() > 0;
@@ -206,7 +190,7 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
 
         public bool CheckFKColumnContainsUniqueValues(TableRef tblName, string colName)
         {
-            using (var cmd = new OleDbCommand(string.Format("SELECT COUNT(*) FROM (SELECT TOP 1 [{1}] FROM [{0}] WHERE [{1}] IS NOT NULL GROUP BY [{1}] HAVING COUNT([{1}]) > 1) AS tbl", tblName, colName), db, tx))
+            using (var cmd = new OleDbCommand(string.Format("SELECT COUNT(*) FROM (SELECT TOP 1 {1} FROM {0} WHERE {1} IS NOT NULL GROUP BY {1} HAVING COUNT({1}) > 1) AS tbl", FormatSchemaName(tblName), QuoteIdentifier(colName)), db, tx))
             {
                 QueryLog.Debug(cmd.CommandText);
                 return (int)cmd.ExecuteScalar() == 0;
@@ -215,7 +199,7 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
 
         public bool CheckColumnContainsValues(TableRef tblName, string colName)
         {
-            using (var cmd = new OleDbCommand(string.Format("SELECT COUNT(*) FROM (SELECT TOP 1 [{1}] FROM [{0}] WHERE [{1}] IS NOT NULL) AS nulls", tblName, colName), db, tx))
+            using (var cmd = new OleDbCommand(string.Format("SELECT COUNT(*) FROM (SELECT TOP 1 {1} FROM {0} WHERE {1} IS NOT NULL) AS nulls", FormatSchemaName(tblName), QuoteIdentifier(colName)), db, tx))
             {
                 QueryLog.Debug(cmd.CommandText);
                 return (int)cmd.ExecuteScalar() > 0;

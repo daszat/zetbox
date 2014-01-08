@@ -12,6 +12,7 @@ if .%1. == .. GOTO GOON
 set config=%1
 
 :GOON
+pushd
 
 cd bin\Debug
 
@@ -30,10 +31,13 @@ rem export $safesolutionname$.Data data
 rem Zetbox.Cli.exe %config% -export ..\..\Data\$safesolutionname$.Data.xml -schemamodules $safesolutionname$ -ownermodules $safesolutionname$
 rem IF ERRORLEVEL 1 GOTO FAIL
 
+rem optinal export SchemaMigration projects
+rem Zetbox.Cli.exe %config% -export ..\..\Data\SchemaMigrationProject.xml -schemamodules SchemaMigration
+rem IF ERRORLEVEL 1 GOTO FAIL
+
 echo ********************************************************************************
 echo ************************************ Success ***********************************
 echo ********************************************************************************
-cd ..\..
 GOTO EOF
 
 :FAIL
@@ -41,9 +45,9 @@ echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX FAIL XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 echo                                Aborting Publish
-cd ..\..
 rem return error without closing parent shell
 echo A | choice /c:A /n
 
 :EOF
+popd
 pause

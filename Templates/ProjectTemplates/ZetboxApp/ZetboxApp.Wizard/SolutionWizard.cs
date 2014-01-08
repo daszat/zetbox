@@ -186,7 +186,7 @@ namespace ZetboxApp.Wizard
                 {
                     msBuildProj.Imports.AddNewImport(@"$(SolutionDir)\.zetbox\wpf.targets", null);
                 }
-                else if (prjName == ToProjectName("Server") || prjName == ToProjectName("Server.Tests"))
+                else if (prjName == ToProjectName("Server") || prjName == ToProjectName("Server.Tests") || prjName == ToProjectName("Migrate"))
                 {
                     msBuildProj.Imports.AddNewImport(@"$(SolutionDir)\.zetbox\server.targets", null);
                 }

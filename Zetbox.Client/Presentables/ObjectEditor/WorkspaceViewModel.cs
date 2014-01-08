@@ -277,6 +277,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
         public void UpdateErrors()
         {
             _currentErrors = DataContext.AttachedObjects
+                .Where(o => o.CurrentAccessRights.HasReadRights())
                 .Where(o => o.ObjectState == DataObjectState.Modified || o.ObjectState == DataObjectState.New)
                 .OfType<IDataErrorInfo>()
                 .Where(s => !String.IsNullOrEmpty(s.Error))

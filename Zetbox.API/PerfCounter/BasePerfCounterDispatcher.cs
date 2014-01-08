@@ -148,14 +148,6 @@ namespace Zetbox.API.PerfCounter
             }
         }
 
-        public void Initialize(IFrozenContext frozenCtx)
-        {
-            foreach (var a in _appender)
-            {
-                a.Initialize(frozenCtx);
-            }
-        }
-
         public void Install()
         {
             foreach (var a in _appender)

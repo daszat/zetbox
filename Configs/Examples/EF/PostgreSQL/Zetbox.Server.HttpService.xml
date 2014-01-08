@@ -12,6 +12,7 @@
     <Modules>
       <Module>Zetbox.Server.ServerModule, Zetbox.Server</Module>
       <Module>Zetbox.DalProvider.Ef.EfProvider, Zetbox.DalProvider.Ef</Module>
+      <Module>Zetbox.API.Server.PerfCounter.MemoryAppender+Module, Zetbox.API.Server</Module>
     </Modules>
     <ClientFilesLocations>
       <Location Name="Exe" Start="true">P:\Zetbox\bin\Debug\Zetbox.WPF.exe</Location>

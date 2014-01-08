@@ -42,11 +42,17 @@ namespace Zetbox.API.Common
                 && !string.IsNullOrWhiteSpace(obj.ImplementorName))
             {
                 var t = Type.GetType(obj.ImplementorName, throwOnError: false);
-                if (t != null && t.FindMethod(obj.MemberName, new Type[] { }) != null)
+                if (t == null)
                 {
-                    return true;
+                    Logging.Log.Warn(string.Format("Invocation is invalid, implementor '{0}' could not be loaded", obj.ImplementorName));
+                    return false;
                 }
-                Logging.Log.WarnOnce(string.Format("Invocation is invalid, implementor '{0}.{1}' could not be loaded", obj.ImplementorName, obj.MemberName));
+                if (t.FindMethod(obj.MemberName, parameterTypes: null) == null)
+                {
+                    Logging.Log.Warn(string.Format("Invocation is invalid, implementor '{0}'; member '{1}' could not be found", obj.ImplementorName, obj.MemberName));
+                    return false;
+                }
+                return true;
             }
             return false;
         }

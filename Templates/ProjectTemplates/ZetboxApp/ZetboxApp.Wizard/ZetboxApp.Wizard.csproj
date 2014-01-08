@@ -167,6 +167,11 @@
   <ItemGroup>
     <EmbeddedResource Include="SolutionItems\Configs\Examples\Zetbox___Cli.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SolutionItems\Configs\Examples\%24safesolutionname%24___Migrate.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

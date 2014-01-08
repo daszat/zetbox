@@ -38,7 +38,6 @@ namespace Zetbox.API.PerfCounter
 
         void IncrementServerMethodInvocation();
         
-        void Initialize(Zetbox.API.IFrozenContext frozenCtx);
         void Install();
         void Uninstall();
         void Dump();
@@ -66,7 +65,6 @@ namespace Zetbox.API.PerfCounter
 
         void IncrementServerMethodInvocation();
         
-        void Initialize(Zetbox.API.IFrozenContext frozenCtx);
         void Install();
         void Uninstall();
         void Dump(bool force);

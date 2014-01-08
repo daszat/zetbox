@@ -79,7 +79,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IPerCounter.cs" />
     <Compile Include="IProxyObject.cs" />
     <Compile Include="NHInterceptor.cs" />
     <Compile Include="NHibernateQueryTranslatorProvider.cs" />

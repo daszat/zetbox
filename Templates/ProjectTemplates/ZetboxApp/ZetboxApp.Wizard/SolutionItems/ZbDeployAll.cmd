@@ -16,7 +16,7 @@ call "ZbInstall.cmd" %config%
 
 pushd
 
-%windir%\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe /v:m /p:Configuration=Fallback $safesolutionname$.sln
+%windir%\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe /v:m /p:Configuration=Fallback /p:Platform="Any CPU" $safesolutionname$.sln
 IF ERRORLEVEL 1 GOTO FAIL
 
 cd bin\Debug
@@ -28,6 +28,14 @@ cd ..\..
 
 %windir%\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe /v:m $safesolutionname$.sln
 IF ERRORLEVEL 1 GOTO FAIL
+
+cd bin\Debug
+
+rem Optional, if the migration project is used
+rem Zetbox.Cli.exe %config% -import ..\..\Data\SchemaMigrationProject.xml
+rem IF ERRORLEVEL 1 GOTO FAIL
+
+cd ..\..
 
 echo ********************************************************************************
 echo ************************************ Success ***********************************
