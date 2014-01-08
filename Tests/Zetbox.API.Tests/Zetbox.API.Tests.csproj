@@ -99,6 +99,7 @@
     <Compile Include="Tests.Skeletons\IPersistenceObjectTests.cs" />
     <Compile Include="Tests.Skeletons\IStreamableTests.cs" />
     <Compile Include="AbstractApiTestFixture.cs" />
+    <Compile Include="Tests\ApiCommon\InvocationExecutorTests.cs" />
     <Compile Include="Tests\AssemblyLoaderTests.cs" />
     <Compile Include="Tests\BaseCompoundObjects\should_serialize.cs" />
     <Compile Include="Tests\BinarySerializers\when_cross_platform_serializing.cs" />
@@ -136,6 +137,10 @@
     <None Include="Zetbox.API.Tests.PartCoverSettings.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Zetbox.API.Common\Zetbox.API.Common.csproj">
+      <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>
+      <Name>Zetbox.API.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Zetbox.API\Zetbox.API.csproj">
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
       <Name>Zetbox.API</Name>
@@ -164,6 +169,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
