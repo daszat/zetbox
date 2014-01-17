@@ -38,7 +38,7 @@ namespace Zetbox.Client.Presentables.GUI
         {
         }
 
-        public new NavigationScreen Screen { get { return (NavigationSearchScreen)base.Screen; } }
+        public new NavigationScreen Screen { get { return (NavigationScreen)base.Screen; } }
 
         public override bool IsScreen
         {
