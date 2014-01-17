@@ -116,6 +116,33 @@
     <SolidColorBrush x:Key="NoBackground">#00000000</SolidColorBrush>
     <!-- end todo colors -->
 
+    <VisualBrush x:Key="SecondaryBackgroundHatch"
+                 TileMode="Tile"
+                 Viewport="0,0,10,10"
+                 ViewportUnits="Absolute"
+                 Viewbox="0,0,10,10"
+                 ViewboxUnits="Absolute">
+        <VisualBrush.Visual>
+            <Canvas>
+                <Rectangle Fill="{StaticResource ControlBackground}"
+                           Width="10"
+                           Height="10" />
+                <Path Data="M 5 11 l 12 -12"
+                      StrokeThickness="3">
+                    <Path.Stroke>
+                        <SolidColorBrush Color="{StaticResource {x:Static styles:Defaults.SecondaryBackgroundKey}}" />
+                    </Path.Stroke>
+                </Path>
+                <Path Data="M -5 11 l 12 -12"
+                      StrokeThickness="3">
+                    <Path.Stroke>
+                        <SolidColorBrush Color="{StaticResource {x:Static styles:Defaults.SecondaryBackgroundKey}}" />
+                    </Path.Stroke>
+                </Path>
+            </Canvas>
+        </VisualBrush.Visual>
+    </VisualBrush>
+
     <!-- Define Default Controls Styles-->
 
     <Style x:Key="zbWindow"
@@ -2415,6 +2442,23 @@
                 Value="{Binding HighlightAsync}" />
     </Style>
 
+    <Style TargetType="{x:Type DataGridCell}">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Path=DataContext, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}"
+                         Value="{x:Static CollectionView.NewItemPlaceholder}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Border Background="{StaticResource SecondaryBackgroundHatch}">
+                                <TextBlock Visibility="Hidden" />
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
     <!-- NavigationBreadCrumb -->
     <Style x:Key="NavigationBreadCrumb">
         <Setter Property="Control.FontWeight"
@@ -2531,7 +2575,8 @@
            BasedOn="{StaticResource LabeledViewStyle}">
     </Style>
 
-    <DataTemplate x:Key="FakeProgressOverlay" DataType="FrameworkElement">
+    <DataTemplate x:Key="FakeProgressOverlay"
+                  DataType="FrameworkElement">
         <Grid Background="#88888888">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
