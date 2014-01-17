@@ -53,6 +53,9 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
         /// <param name="e">the arguments of this event</param>
         protected void ItemActivatedHandler(object sender, RoutedEventArgs e)
         {
+            // If IsInlineEditable is set, let the double click bubble through to the edit controls
+            if (ViewModel == null || ViewModel.IsInlineEditable) return;
+
             if (ViewModel != null && ViewModel.SelectedItem != null)
             {
                 ViewModel.Default();
