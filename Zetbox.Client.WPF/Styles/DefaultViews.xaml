@@ -2456,6 +2456,11 @@
                     </Setter.Value>
                 </Setter>
             </DataTrigger>
+            <DataTrigger Binding="{Binding IsReadOnly, RelativeSource={RelativeSource Self}}"
+                         Value="True">
+                <Setter Property="IsTabStop"
+                        Value="False" />
+            </DataTrigger>
         </Style.Triggers>
     </Style>
 
