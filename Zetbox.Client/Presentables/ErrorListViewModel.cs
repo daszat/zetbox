@@ -53,20 +53,26 @@ namespace Zetbox.Client.Presentables
                         null,
                         ErrorListViewModelResources.GotoObjectCommand_Name,
                         ErrorListViewModelResources.GotoObjectCommand_Tooltip,
-                        GotoObject, null, null);
+                        GotoObject, CanExecGotoObject, null);
                 }
                 return _GotoObjectCommand;
             }
         }
 
+        public bool CanExecGotoObject()
+        {
+            return Item != null;
+        }
+
         public void GotoObject()
         {
-            ViewModelFactory.ShowModel(Item, true);
+            if (CanExecGotoObject())
+                ViewModelFactory.ShowModel(Item, true);
         }
 
         public override string Name
         {
-            get { return Item.Name; }
+            get { return Item.IfNotNull(i => i.Name); }
         }
     }
 
@@ -164,9 +170,14 @@ namespace Zetbox.Client.Presentables
                 if (obj == null && error is ViewModel)
                 {
                     var vmdl = (ViewModel)error;
-                    if (vmdl.Parent is DataObjectViewModel)
+                    while (vmdl.Parent != null)
                     {
-                        obj = ((DataObjectViewModel)vmdl.Parent).Object;
+                        if (vmdl.Parent is DataObjectViewModel)
+                        {
+                            obj = ((DataObjectViewModel)vmdl.Parent).Object;
+                            break;
+                        }
+                        vmdl = vmdl.Parent;
                     }
                 }
 
