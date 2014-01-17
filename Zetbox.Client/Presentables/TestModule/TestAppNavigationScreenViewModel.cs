@@ -20,20 +20,23 @@ namespace Zetbox.Client.Presentables.TestModule
     using System.Linq;
     using System.Text;
     using Zetbox.API;
-    using Zetbox.Client.Presentables;
-    using Zetbox.Client.Presentables.GUI;
     using Zetbox.App.GUI;
     using Zetbox.Client.GUI;
+    using Zetbox.Client.Presentables;
+    using Zetbox.Client.Presentables.GUI;
 
     [ViewModelDescriptor]
     public class TestAppNavigationScreenViewModel : NavigationScreenViewModel
     {
         public new delegate TestAppNavigationScreenViewModel Factory(IZetboxContext dataCtx, ViewModel parent, NavigationScreen screen);
 
-        public TestAppNavigationScreenViewModel(IViewModelDependencies appCtx,
+        private readonly Func<IZetboxContext> _ctxFactory;
+
+        public TestAppNavigationScreenViewModel(IViewModelDependencies appCtx, Func<IZetboxContext> ctxFactory,
             IZetboxContext dataCtx, ViewModel parent, NavigationScreen screen)
             : base(appCtx, dataCtx, parent, screen)
         {
+            _ctxFactory = ctxFactory;
         }
 
         protected override List<CommandViewModel> CreateAdditionalCommands()
@@ -107,7 +110,7 @@ namespace Zetbox.Client.Presentables.TestModule
                                     "Execute and Continue");
                             })
                             .OnAccept(values => { })
-                            .OnCancel(() => 
+                            .OnCancel(() =>
                             {
                                 ViewModelFactory.ShowMessage("Cancel!!", "Cancel");
                             })
@@ -117,6 +120,23 @@ namespace Zetbox.Client.Presentables.TestModule
                                     string.Join("\n", values.Select(i => string.Format("{0}: \"{1}\"", i.Key, i.Value))),
                                     "received parameter");
                             });
+                    },
+                    null,
+                    null));
+
+            result.Add(ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
+                .Invoke(
+                    DataContext,
+                    this,
+                    "Open InstanceListTester",
+                    "Open the tester in a real workspace",
+                    () =>
+                    {
+                        var ctx = _ctxFactory();
+                        var ws = ViewModelFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(ctx, null);
+                        ViewModelFactory.ShowModel(ws, activate: true);
+
+                        ws.ShowModel(ViewModelFactory.CreateViewModel<InstanceListTestViewModel.Factory>().Invoke(ctx, ws, this.Screen));
                     },
                     null,
                     null));

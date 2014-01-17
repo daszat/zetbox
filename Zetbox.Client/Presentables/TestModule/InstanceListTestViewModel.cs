@@ -20,9 +20,10 @@ using Zetbox.API;
 using Zetbox.App.Base;
 using Zetbox.App.Extensions;
 using Zetbox.App.GUI;
+using Zetbox.App.Test;
+using Zetbox.Client.Models;
 using Zetbox.Client.Presentables.GUI;
 using Zetbox.Client.Presentables.ZetboxBase;
-using Zetbox.Client.Models;
 
 namespace Zetbox.Client.Presentables.TestModule
 {
@@ -53,7 +54,7 @@ namespace Zetbox.Client.Presentables.TestModule
             }
         }
 
-        private ListKinds _listKind;
+        private ListKinds _listKind = ListKinds.Grid;
         public ListKinds ListKind
         {
             get
@@ -80,16 +81,19 @@ namespace Zetbox.Client.Presentables.TestModule
                 if (_TestList == null)
                 {
                     var qry = DataContext
-                        .GetQuery<ObjectClass>()
-                        .OrderBy(cls => cls.Name);
+                        .GetQuery<TestCustomObject>()
+                        .OrderBy(cls => cls.Birthday);
 
                     _TestList = ViewModelFactory.CreateViewModel<InstanceListViewModel.Factory>().Invoke(
                         DataContext,
                         this,
-                        typeof(ObjectClass).GetObjectClass(FrozenContext),
+                        typeof(TestCustomObject).GetObjectClass(FrozenContext),
                         () => qry);
                     _TestList.ViewMethod = InstanceListViewMethod.Details;
                     _TestList.DisplayedColumnsCreated += new InstanceListViewModel.DisplayedColumnsCreatedHandler(_TestList_DisplayedColumnsCreated);
+                    _TestList.IsInlineEditable = true;
+                    _TestList.AllowAddNew = true;
+                    _TestList.AllowDelete = true;
 
                     switch (ListKind)
                     {
@@ -115,9 +119,9 @@ namespace Zetbox.Client.Presentables.TestModule
 
         void _TestList_DisplayedColumnsCreated(Models.GridDisplayConfiguration cols)
         {
-            cols.Columns.Add(ColumnDisplayModel.Create(NamedObjects.Base.Classes.Zetbox.App.Base.ObjectClass_Methods.GetInheritedMethods.Find(FrozenContext)));
-            cols.Columns.Add(ColumnDisplayModel.Create(GridDisplayConfiguration.Mode.ReadOnly, NamedObjects.Base.Classes.Zetbox.App.Base.ObjectClass_Properties.IsAbstract.Find(FrozenContext)));
-            cols.Columns.Add(ColumnDisplayModel.Create("IsFrozenObject ViewModel", NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_TextKind.Find(FrozenContext), "PropertyModelsByName[IsFrozenObject]"));
+            //    cols.Columns.Add(ColumnDisplayModel.Create(NamedObjects.Base.Classes.Zetbox.App.Base.ObjectClass_Methods.GetInheritedMethods.Find(FrozenContext)));
+            //    cols.Columns.Add(ColumnDisplayModel.Create(GridDisplayConfiguration.Mode.ReadOnly, NamedObjects.Base.Classes.Zetbox.App.Base.ObjectClass_Properties.IsAbstract.Find(FrozenContext)));
+            //    cols.Columns.Add(ColumnDisplayModel.Create("IsFrozenObject ViewModel", NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_TextKind.Find(FrozenContext), "PropertyModelsByName[IsFrozenObject]"));
         }
     }
 }
