@@ -10,16 +10,13 @@ namespace $rootnamespace$
     using Zetbox.App.GUI;
 
     [ViewModelDescriptor]
-    public class $safeitemname$ : NavigationScreenViewModel
+    public class $safeitemname$ : NavigationReportScreenViewModel
     {
         public new delegate $safeitemname$ Factory(IZetboxContext dataCtx, ViewModel parent, NavigationScreen screen);
 
-        private readonly Func<IZetboxContext> _ctxFactory;
-
-        public $safeitemname$(IViewModelDependencies appCtx, Func<IZetboxContext> ctxFactory, IZetboxContext dataCtx, ViewModel parent, NavigationScreen screen)
-            : base(appCtx, dataCtx, parent, screen)
+        public $safeitemname$(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, NavigationScreen screen, IFileOpener fileOpener, ITempFileService tmpService)
+            : base(appCtx, dataCtx, parent, screen, fileOpener, tmpService)
         {
-            _ctxFactory = ctxFactory;
         }
     }
 }
