@@ -79,6 +79,24 @@ namespace Zetbox.Client.WPF {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your client is out of date. Please restart the client to install the new version..
+        /// </summary>
+        internal static string App_InvalidZetboxGeneratedVersion {
+            get {
+                return ResourceManager.GetString("App_InvalidZetboxGeneratedVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid Version.
+        /// </summary>
+        internal static string App_InvalidZetboxGeneratedVersion_Caption {
+            get {
+                return ResourceManager.GetString("App_InvalidZetboxGeneratedVersion_Caption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The SelectedDates collection can be changed only in a multiple selection mode. Use the SelectedDate in a single selection mode..
         /// </summary>
         internal static string Calendar_CheckSelectionMode_InvalidOperation {

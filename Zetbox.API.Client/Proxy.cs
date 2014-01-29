@@ -103,6 +103,10 @@ namespace Zetbox.API.Client
                 {
                     throw ex.Detail.Exception.ToException();
                 }
+                catch (FaultException<InvalidZetboxGeneratedVersionExceptionMessage> ex)
+                {
+                    throw ex.Detail.ToException();
+                }
                 catch (ConcurrencyException)
                 {
                     throw;

@@ -169,25 +169,20 @@ namespace Zetbox.Client.WPF
             StartupScreen.SetInfo(Zetbox.Client.Properties.Resources.Startup_EnsuringCredentials);
             var idResolver = container.Resolve<IIdentityResolver>();
             var credResolver = container.Resolve<ICredentialsResolver>();
-            while (idResolver.GetCurrent() == null)
+            try
             {
-                try
+                while (idResolver.GetCurrent() == null)
                 {
                     credResolver.InvalidCredentials();
                 }
-                catch (AuthenticationException)
-                {
-                    // http://stackoverflow.com/questions/576503/how-to-set-wpf-messagebox-owner-to-desktop-window-because-splashscreen-closes-me
-                    // wtf! make messagebox modal
-                    Window temp = new Window() 
-                    { 
-                        Visibility = Visibility.Hidden, 
-                        Topmost = true 
-                    };
-                    temp.Show();
-                    MessageBox.Show(temp, WpfToolkitResources.App_InvalidCredentials, WpfToolkitResources.App_InvalidCredentials_Caption, MessageBoxButton.OK, MessageBoxImage.Stop);
-                    Environment.Exit(1);
-                }
+            }
+            catch (AuthenticationException)
+            {
+                ReportExceptionAndExit(WpfToolkitResources.App_InvalidCredentials_Caption, WpfToolkitResources.App_InvalidCredentials);
+            }
+            catch (InvalidZetboxGeneratedVersionException)
+            {
+                ReportExceptionAndExit(WpfToolkitResources.App_InvalidZetboxGeneratedVersion_Caption, WpfToolkitResources.App_InvalidZetboxGeneratedVersion);
             }
             credResolver.Freeze();
 
@@ -214,6 +209,20 @@ namespace Zetbox.Client.WPF
             // they are needed.
             var launcher = container.Resolve<Launcher>();
             launcher.Show(args);
+        }
+
+        private static void ReportExceptionAndExit(string caption, string message)
+        {
+            // http://stackoverflow.com/questions/576503/how-to-set-wpf-messagebox-owner-to-desktop-window-because-splashscreen-closes-me
+            // wtf! make messagebox modal
+            Window temp = new Window()
+            {
+                Visibility = Visibility.Hidden,
+                Topmost = true
+            };
+            temp.Show();
+            MessageBox.Show(temp, message, caption, MessageBoxButton.OK, MessageBoxImage.Stop);
+            Environment.Exit(1);
         }
 
         private void LoadStyles(ResourceDictionary targetResources)

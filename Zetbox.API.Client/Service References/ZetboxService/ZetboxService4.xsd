@@ -8,32 +8,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ZetboxContextExceptionSerializationHelper" nillable="true" type="tns:ZetboxContextExceptionSerializationHelper" />
-  <xs:complexType name="ConcurrencyExceptionMessage">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:ZetboxContextExceptionSerializationHelper">
-        <xs:sequence>
-          <xs:element name="_x003C_Details_x003E_k__BackingField" nillable="true" type="tns:ArrayOfConcurrencyExceptionDetail" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="ConcurrencyExceptionMessage" nillable="true" type="tns:ConcurrencyExceptionMessage" />
-  <xs:complexType name="ArrayOfConcurrencyExceptionDetail">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="ConcurrencyExceptionDetail" nillable="true" type="tns:ConcurrencyExceptionDetail" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfConcurrencyExceptionDetail" nillable="true" type="tns:ArrayOfConcurrencyExceptionDetail" />
-  <xs:complexType name="ConcurrencyExceptionDetail">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="ChangedBy" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ChangedOn" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="ClsGuid" type="ser:guid" />
-      <xs:element minOccurs="0" name="ID" type="xs:int" />
-      <xs:element minOccurs="0" name="ObjectAsString" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ConcurrencyExceptionDetail" nillable="true" type="tns:ConcurrencyExceptionDetail" />
   <xs:complexType name="FKViolationExceptionMessage">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:ZetboxContextExceptionSerializationHelper">
@@ -80,6 +54,32 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="UniqueConstraintViolationExceptionDetail" nillable="true" type="tns:UniqueConstraintViolationExceptionDetail" />
+  <xs:complexType name="ConcurrencyExceptionMessage">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:ZetboxContextExceptionSerializationHelper">
+        <xs:sequence>
+          <xs:element name="_x003C_Details_x003E_k__BackingField" nillable="true" type="tns:ArrayOfConcurrencyExceptionDetail" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ConcurrencyExceptionMessage" nillable="true" type="tns:ConcurrencyExceptionMessage" />
+  <xs:complexType name="ArrayOfConcurrencyExceptionDetail">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ConcurrencyExceptionDetail" nillable="true" type="tns:ConcurrencyExceptionDetail" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfConcurrencyExceptionDetail" nillable="true" type="tns:ArrayOfConcurrencyExceptionDetail" />
+  <xs:complexType name="ConcurrencyExceptionDetail">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ChangedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ChangedOn" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ClsGuid" type="ser:guid" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="ObjectAsString" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ConcurrencyExceptionDetail" nillable="true" type="tns:ConcurrencyExceptionDetail" />
   <xs:complexType name="InvalidZetboxGeneratedVersionException">
     <xs:complexContent mixed="false">
       <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/System" base="q1:Exception" />

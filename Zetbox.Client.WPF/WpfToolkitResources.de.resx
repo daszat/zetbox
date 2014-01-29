@@ -123,6 +123,12 @@
   <data name="App_InvalidCredentials_Caption" xml:space="preserve">
     <value>Berechtigungsfehler</value>
   </data>
+  <data name="App_InvalidZetboxGeneratedVersion" xml:space="preserve">
+    <value>Die Version der Anwendung ist ungültig. Bitte starten Sie die Anwendung neu um die neue Version zu installieren.</value>
+  </data>
+  <data name="App_InvalidZetboxGeneratedVersion_Caption" xml:space="preserve">
+    <value>Ungültige Version</value>
+  </data>
   <data name="CalendarAutomationPeer_BlackoutDayHelpText" xml:space="preserve">
     <value>Blackout Day - {0}</value>
   </data>
