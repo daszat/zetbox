@@ -87,10 +87,11 @@ namespace Zetbox.API.Client
             _typeMaps = typeMaps;
         }
 
-        private void MakeRequest(Action request)
+        private void MakeRequest(Action request, bool retry = true)
         {
             Exception fault = null;
-            for (int i = 0; i < MAX_RETRY_COUNT; i++)
+            int retryCount = retry ? MAX_RETRY_COUNT : 1;
+            for (int i = 0; i < retryCount; i++)
             {
                 fault = null;
                 try
@@ -222,7 +223,7 @@ namespace Zetbox.API.Client
                     MakeRequest(() =>
                     {
                         bytes = _service.SetObjects(ZetboxGeneratedVersionAttribute.Current, _ms, _nReq);
-                    });
+                    }, retry: false);
 
                     using (var sr = _readerFactory.Invoke(new BinaryReader(new MemoryStream(bytes))))
                     {
@@ -345,7 +346,7 @@ namespace Zetbox.API.Client
                 if (msg.Stream.Position != 0)
                     msg.Stream.Seek(0, SeekOrigin.Begin);
                 response = _service.SetBlobStream(msg);
-            });
+            }, retry: false);
 
             using (var sr = _readerFactory.Invoke(new BinaryReader(response.BlobInstance)))
             {
@@ -396,7 +397,7 @@ namespace Zetbox.API.Client
                              _parameterStream,
                              _changedObjStream,
                              _nReq);
-                    });
+                    }, retry: false);
                 }
             }
 
