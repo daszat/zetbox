@@ -85,7 +85,7 @@ namespace Zetbox.API.PerfCounter
 
         public static long Avg(long duration, long count)
         {
-            return count != 0 ? duration * 1000 / count / System.Diagnostics.Stopwatch.Frequency : 0;
+            return count != 0 ? TicksToMillis(duration) / count : 0;
         }
 
         public static long TicksToMillis(long p)
