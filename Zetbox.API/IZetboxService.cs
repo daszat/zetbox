@@ -47,6 +47,7 @@ namespace Zetbox.API
         [OperationContract]
         [FaultContract(typeof(Exception))]
         [FaultContract(typeof(ZetboxContextExceptionMessage))]
+        [FaultContract(typeof(InvalidZetboxGeneratedVersionExceptionMessage))]
         byte[] SetObjects(Guid version, byte[] msg, ObjectNotificationRequest[] notificationRequests);
 
         /// <summary>
@@ -58,6 +59,7 @@ namespace Zetbox.API
         [OperationContract]
         [FaultContract(typeof(Exception))]
         [FaultContract(typeof(InvalidZetboxGeneratedVersionException))]
+        [FaultContract(typeof(InvalidZetboxGeneratedVersionExceptionMessage))]
         byte[] GetObjects(Guid version, SerializableExpression query);
 
         /// <summary>
@@ -72,6 +74,7 @@ namespace Zetbox.API
         [OperationContract]
         [FaultContract(typeof(Exception))]
         [FaultContract(typeof(InvalidZetboxGeneratedVersionException))]
+        [FaultContract(typeof(InvalidZetboxGeneratedVersionExceptionMessage))]
         byte[] GetListOf(Guid version, SerializableType type, int ID, string property);
 
         /// <summary>
@@ -87,6 +90,7 @@ namespace Zetbox.API
         [OperationContract]
         [FaultContract(typeof(Exception))]
         [FaultContract(typeof(InvalidZetboxGeneratedVersionException))]
+        [FaultContract(typeof(InvalidZetboxGeneratedVersionExceptionMessage))]
         byte[] FetchRelation(Guid version, Guid relId, int role, int ID);
 
         /// <summary>
@@ -98,6 +102,7 @@ namespace Zetbox.API
         [OperationContract]
         [FaultContract(typeof(Exception))]
         [FaultContract(typeof(InvalidZetboxGeneratedVersionException))]
+        [FaultContract(typeof(InvalidZetboxGeneratedVersionExceptionMessage))]
         Stream GetBlobStream(Guid version, int ID);
 
         /// <summary>
@@ -108,6 +113,7 @@ namespace Zetbox.API
         [OperationContract]
         [FaultContract(typeof(Exception))]
         [FaultContract(typeof(InvalidZetboxGeneratedVersionException))]
+        [FaultContract(typeof(InvalidZetboxGeneratedVersionExceptionMessage))]
         BlobResponse SetBlobStream(BlobMessage blob);
 
 
@@ -127,6 +133,7 @@ namespace Zetbox.API
         [OperationContract]
         [FaultContract(typeof(Exception))]
         [FaultContract(typeof(InvalidZetboxGeneratedVersionException))]
+        [FaultContract(typeof(InvalidZetboxGeneratedVersionExceptionMessage))]
         byte[] InvokeServerMethod(Guid version, SerializableType type, int ID, string method, SerializableType[] parameterTypes, byte[] parameter, byte[] changedObjects, ObjectNotificationRequest[] notificationRequests, out byte[] retChangedObjects);
     }
 
@@ -288,6 +295,20 @@ namespace Zetbox.API
 
         [DataMember]
         public List<UniqueConstraintViolationExceptionDetail> Details { get; set; }
+    }
+
+    [Serializable]
+    [XmlRoot(Namespace = "http://dasz.at/zetbox/ZetboxContextExceptionMessage")]
+    [DataContract(Namespace = "http://dasz.at/Zetbox/")]
+    public class InvalidZetboxGeneratedVersionExceptionMessage
+    {
+        [DataMember]
+        public string Message { get; set; }
+
+        public InvalidZetboxGeneratedVersionException ToException()
+        {
+            return new InvalidZetboxGeneratedVersionException(Message);
+        }
     }
 
     #endregion

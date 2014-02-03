@@ -985,6 +985,28 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
 
         public override void EnsureInfrastructure()
         {
+            StringBuilder errors = new StringBuilder();
+
+            if (ExecuteScalar("SELECT EXISTS (SELECT 1 FROM pg_language WHERE lanname = 'plpgsql');") as bool? == false)
+            {
+                errors.AppendLine(@"CREATE PROCEDURAL LANGUAGE plpgsql;
+ALTER PROCEDURAL LANGUAGE plpgsql OWNER TO postgres;");
+            }
+
+            if (!CheckFunctionExists(new ProcRef(null, "public", "uuid_generate_v4")))
+            {
+                errors.AppendLine(@"CREATE OR REPLACE FUNCTION public.uuid_generate_v4()
+    RETURNS uuid
+    AS '$libdir/uuid-ossp', 'uuid_generate_v4'
+    VOLATILE STRICT LANGUAGE C;");
+            }
+
+            if (errors.Length > 0)
+            {
+                errors.Insert(0, "Postgresql setup is not complete yet. Execute the statements below:\n------------ snip ------------\n");
+                errors.AppendLine("------------ snip ------------");
+                throw new InvalidOperationException(errors.ToString());
+            }
         }
 
         public override void DropAllObjects()
@@ -1870,7 +1892,17 @@ END$BODY$
 
         public override bool CheckFunctionExists(ProcRef funcName)
         {
-            throw new NotImplementedException();
+            if (funcName == null)
+                throw new ArgumentNullException("funcName");
+            return (bool)ExecuteScalar(@"
+                SELECT count(*) > 0
+                FROM pg_proc p
+                    LEFT JOIN pg_namespace n ON p.pronamespace = n.oid
+                WHERE n.nspname = @schema AND p.proname = @proc",
+                new Dictionary<string, object>() {
+                    { "@schema", funcName.Schema },
+                    { "@proc", funcName.Name.MaxLength(PG_MAX_IDENTIFIER_LENGTH) },
+                });
         }
 
         public override void DropFunction(ProcRef funcName)

@@ -44,6 +44,11 @@ namespace Zetbox.Server
                 var error = (ZetboxContextErrorException)ex;
                 throw new FaultException<ZetboxContextExceptionMessage>(error.ToExceptionMessage(), msg);
             }
+            else if (ex is InvalidZetboxGeneratedVersionException)
+            {
+                var error = (InvalidZetboxGeneratedVersionException)ex;
+                throw new FaultException<InvalidZetboxGeneratedVersionExceptionMessage>(error.ToExceptionMessage(), msg);
+            }
             else
             {
 #if DEBUG

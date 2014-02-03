@@ -33,12 +33,12 @@ namespace Zetbox.Client.Presentables.GUI
     {
         public new delegate NavigationScreenViewModel Factory(IZetboxContext dataCtx, ViewModel parent, NavigationScreen screen);
 
-        public NavigationScreenViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, NavigationEntry screen)
+        public NavigationScreenViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, NavigationScreen screen)
             : base(dependencies, dataCtx, parent, screen)
         {
         }
 
-        public new NavigationScreen Screen { get { return (NavigationSearchScreen)base.Screen; } }
+        public new NavigationScreen Screen { get { return (NavigationScreen)base.Screen; } }
 
         public override bool IsScreen
         {

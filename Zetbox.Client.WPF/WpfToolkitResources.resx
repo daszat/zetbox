@@ -249,4 +249,10 @@
   <data name="App_InvalidCredentials_Caption" xml:space="preserve">
     <value>Authorization Error</value>
   </data>
+  <data name="App_InvalidZetboxGeneratedVersion" xml:space="preserve">
+    <value>Your client is out of date. Please restart the client to install the new version.</value>
+  </data>
+  <data name="App_InvalidZetboxGeneratedVersion_Caption" xml:space="preserve">
+    <value>Invalid Version</value>
+  </data>
 </root>

@@ -28,12 +28,12 @@ namespace Zetbox.Client.Presentables.DocumentManagement
     [ViewModelDescriptor]
     public class ImportedFileNavigationSearchScreenViewModel : NavigationSearchScreenViewModel
     {
-        public new delegate ImportedFileNavigationSearchScreenViewModel Factory(IZetboxContext dataCtx, ViewModel parent, NavigationScreen screen);
+        public new delegate ImportedFileNavigationSearchScreenViewModel Factory(IZetboxContext dataCtx, ViewModel parent, NavigationSearchScreen screen);
 
         private readonly Func<IZetboxContext> _ctxFactory;
 
         public ImportedFileNavigationSearchScreenViewModel(IViewModelDependencies appCtx, Func<IZetboxContext> ctxFactory,
-            IZetboxContext dataCtx, ViewModel parent, NavigationScreen screen)
+            IZetboxContext dataCtx, ViewModel parent, NavigationSearchScreen screen)
             : base(appCtx, dataCtx, parent, screen)
         {
             _ctxFactory = ctxFactory;

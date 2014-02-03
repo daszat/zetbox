@@ -1,0 +1,14 @@
+<VSTemplate Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Item">
+  <TemplateData>
+    <DefaultName>NavigationActionViewModel.cs</DefaultName>
+    <Name>NavigationActionViewModel</Name>
+    <Description>Zetbox NavigationAction ViewModel</Description>
+    <ProjectType>CSharp</ProjectType>
+    <SortOrder>10</SortOrder>
+    <Icon>__TemplateIcon.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <References />
+    <ProjectItem SubType="Code" TargetFileName="$fileinputname$.cs" ReplaceParameters="true">NavigationActionViewModel.cs</ProjectItem>
+  </TemplateContent>
+</VSTemplate>

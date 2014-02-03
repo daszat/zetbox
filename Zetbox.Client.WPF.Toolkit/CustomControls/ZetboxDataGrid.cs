@@ -30,6 +30,8 @@ namespace Zetbox.Client.WPF.CustomControls
 
     public class ZetboxDataGrid : DataGrid
     {
+        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Client.WPF.Grid");
+
         public ZetboxDataGrid()
         {
             this.ItemContainerStyle = Application.Current.Resources["DataGridItemContainerStyle"] as Style;
@@ -43,30 +45,30 @@ namespace Zetbox.Client.WPF.CustomControls
         protected override void OnCellEditEnding(DataGridCellEditEndingEventArgs e)
         {
             continueEdit = e.EditAction == DataGridEditAction.Commit;
-            Logging.Client.DebugFormat("OnCellEditEnding(EditAction = {0})", e.EditAction);
-            Logging.Client.DebugFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
+            Log.DebugFormat("OnCellEditEnding(EditAction = {0})", e.EditAction);
+            Log.DebugFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
             base.OnCellEditEnding(e);
         }
 
         protected override void OnBeginningEdit(DataGridBeginningEditEventArgs e)
         {
-            Logging.Client.DebugFormat("OnBeginningEdit(Row.Item.Type = {0})", e.Row.Item.GetType().Name);
-            Logging.Client.DebugFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
+            Log.DebugFormat("OnBeginningEdit(Row.Item.Type = {0})", e.Row.Item.GetType().Name);
+            Log.DebugFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
             base.OnBeginningEdit(e);
         }
 
         protected override void OnInitializingNewItem(InitializingNewItemEventArgs e)
         {
-            Logging.Client.DebugFormat("OnInitializingNewItem(NewItem.Type = {0})", e.NewItem.GetType().Name);
-            Logging.Client.DebugFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
+            Log.DebugFormat("OnInitializingNewItem(NewItem.Type = {0})", e.NewItem.GetType().Name);
+            Log.DebugFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
             isNewItemInitialized = true;
             base.OnInitializingNewItem(e);
         }
 
         protected override void OnPreparingCellForEdit(DataGridPreparingCellForEditEventArgs e)
         {
-            Logging.Client.DebugFormat("OnPreparingCellForEdit(Row.Item.Type = {0})", e.Row.Item.GetType().Name);
-            Logging.Client.DebugFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
+            Log.DebugFormat("OnPreparingCellForEdit(Row.Item.Type = {0})", e.Row.Item.GetType().Name);
+            Log.DebugFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
             base.OnPreparingCellForEdit(e);
             var editor = e.EditingElement.FindVisualChild<PropertyEditor>();
             if (editor != null)
@@ -77,31 +79,31 @@ namespace Zetbox.Client.WPF.CustomControls
 
         protected override void OnRowEditEnding(DataGridRowEditEndingEventArgs e)
         {
-            Logging.Client.DebugFormat("OnRowEditEnding(Row.Item.Type = {0})", e.Row.Item.GetType().Name);
-            Logging.Client.DebugFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
+            Log.DebugFormat("OnRowEditEnding(Row.Item.Type = {0})", e.Row.Item.GetType().Name);
+            Log.DebugFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
             base.OnRowEditEnding(e);
         }
 
         protected override void OnCurrentCellChanged(EventArgs e)
         {
             base.OnCurrentCellChanged(e);
-            Logging.Client.DebugFormat("OnCurrentCellChanged(CurrentCell.Item.Type={0})", CurrentCell.Item.GetType().Name);
-            Logging.Client.DebugFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
+            Log.DebugFormat("OnCurrentCellChanged(CurrentCell.Item.Type={0})", CurrentCell.Item.GetType().Name);
+            Log.DebugFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
             if (continueEdit)
             {
                 isNewItemForContinueEdit = CurrentCell.Item == CollectionView.NewItemPlaceholder;
                 if (!isNewItemForContinueEdit)
                 {
                     continueEdit = false;
-                    Logging.Client.Debug("    OnCurrentCellChanged begins editing of existing item");
-                    Logging.Client.DebugFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
+                    Log.Debug("    OnCurrentCellChanged begins editing of existing item");
+                    Log.DebugFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
                     BeginEdit();
                 }
                 else
                 {
                     // delay until selectionChange
-                    Logging.Client.Debug("    OnCurrentCellChanged delays edit of new item until selection changed");
-                    Logging.Client.DebugFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
+                    Log.Debug("    OnCurrentCellChanged delays edit of new item until selection changed");
+                    Log.DebugFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
                 }
             }
         }
@@ -149,7 +151,7 @@ namespace Zetbox.Client.WPF.CustomControls
 
         protected override void OnItemsSourceChanged(IEnumerable oldValue, IEnumerable newValue)
         {
-            if(this.ItemsSource != newValue) // JFC, WTF!
+            if (this.ItemsSource != newValue) // JFC, WTF!
             {
                 base.OnItemsSourceChanged(oldValue, newValue);
             }
@@ -180,26 +182,26 @@ namespace Zetbox.Client.WPF.CustomControls
 
         protected override void OnSelectionChanged(System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            Logging.Client.Debug("OnSelectionChanged()");
-            Logging.Client.DebugFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
+            Log.Debug("OnSelectionChanged()");
+            Log.DebugFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
             base.OnSelectionChanged(e);
 
             if (isNewItemForContinueEdit)
             {
                 isNewItemForContinueEdit = false;
-                Logging.Client.Debug("    OnSelectionChanged begins edit for creating new item");
-                Logging.Client.DebugFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
+                Log.Debug("    OnSelectionChanged begins edit for creating new item");
+                Log.DebugFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
                 BeginEdit(); // to create a new item
             }
 
             if (isNewItemInitialized)
             {
                 isNewItemInitialized = false;
-                Logging.Client.Debug("    OnSelectionChanged commits edit to trigger new row");
-                Logging.Client.DebugFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
+                Log.Debug("    OnSelectionChanged commits edit to trigger new row");
+                Log.DebugFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
                 CommitEdit(DataGridEditingUnit.Row, false);
-                Logging.Client.Debug("    OnSelectionChanged begins edit for real");
-                Logging.Client.DebugFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
+                Log.Debug("    OnSelectionChanged begins edit for real");
+                Log.DebugFormat("    continueEdit={0}, isNewItem={1}", continueEdit, isNewItemForContinueEdit);
                 BeginEdit(); // to continue editing                            ^^^^^ didn't help
             }
 

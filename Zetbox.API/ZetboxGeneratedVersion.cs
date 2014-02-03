@@ -80,5 +80,13 @@ namespace Zetbox.API
           System.Runtime.Serialization.SerializationInfo info,
           System.Runtime.Serialization.StreamingContext context)
             : base(info, context) { }
+
+        public InvalidZetboxGeneratedVersionExceptionMessage ToExceptionMessage()
+        {
+            return new InvalidZetboxGeneratedVersionExceptionMessage()
+            {
+                Message = this.Message
+            };
+        }
     }
 }

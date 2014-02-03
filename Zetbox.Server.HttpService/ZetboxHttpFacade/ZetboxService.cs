@@ -254,6 +254,12 @@ namespace Zetbox.Server.HttpService
                 SerializeException(context, ex.Detail);
                 Log.Info("Concurrency error while processing request", ex);
             }
+            catch (FaultException<InvalidZetboxGeneratedVersionExceptionMessage> ex)
+            {
+                context.Response.StatusCode = (int)HttpStatusCode.PreconditionFailed;
+                // Already logged in ThrowFaultException, only push to Debug here
+                Log.Debug("Error while processing request", ex);
+            }
             catch (FaultException ex)
             {
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;

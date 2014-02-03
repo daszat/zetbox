@@ -118,6 +118,11 @@ namespace Zetbox.API.Common
                 }
                 catch (Exception ex)
                 {
+                    var inner = ex.GetInnerException();
+                    if (inner is InvalidZetboxGeneratedVersionException)
+                    {
+                        throw inner;
+                    }
                     Logging.Log.Warn("Exception while resolving Identity", ex);
                 }
                 if (result == null)

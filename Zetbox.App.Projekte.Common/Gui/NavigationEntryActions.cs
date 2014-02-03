@@ -30,4 +30,37 @@ namespace Zetbox.App.GUI
                   obj.Title);
         }
     }
+
+    [Implementor]
+    public static class NavigationScreenActions
+    {
+        [Invocation]
+        public static void ToString(Zetbox.App.GUI.NavigationScreen obj, MethodReturnEventArgs<System.String> e)
+        {
+            e.Result = String.Format("NavigationScreen: {0}",
+                  obj.Title);
+        }
+    }
+
+    [Implementor]
+    public static class NavigationSearchScreenActions
+    {
+        [Invocation]
+        public static void ToString(Zetbox.App.GUI.NavigationSearchScreen obj, MethodReturnEventArgs<System.String> e)
+        {
+            e.Result = String.Format("NavigationSearchScreen ({1}): {0}",
+                  obj.Title, obj.Type);
+        }
+    }
+
+    [Implementor]
+    public static class NavigationActionActions
+    {
+        [Invocation]
+        public static void ToString(Zetbox.App.GUI.NavigationAction obj, MethodReturnEventArgs<System.String> e)
+        {
+            e.Result = String.Format("NavigationAction: {0}",
+                  obj.Title);
+        }
+    }
 }

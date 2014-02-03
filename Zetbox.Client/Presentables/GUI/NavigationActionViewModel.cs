@@ -33,7 +33,7 @@ namespace Zetbox.Client.Presentables.GUI
     {
         public new delegate NavigationActionViewModel Factory(IZetboxContext dataCtx, ViewModel parent, NavigationAction screen);
 
-        public NavigationActionViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, NavigationEntry screen)
+        public NavigationActionViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent, NavigationAction screen)
             : base(dependencies, dataCtx, parent, screen)
         {
         }

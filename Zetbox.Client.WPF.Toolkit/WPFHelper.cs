@@ -152,19 +152,19 @@ namespace Zetbox.Client.WPF.Toolkit
             lst.Columns.Clear();
             if (cfg.ShowIcon)
             {
-                lst.Columns.Add(new DataGridTemplateColumn() { CellTemplate = (DataTemplate)lst.FindResource("iconCellTemplate") });
+                lst.Columns.Add(new DataGridTemplateColumn() { CellTemplate = (DataTemplate)lst.FindResource("iconCellTemplate"), IsReadOnly = true });
             }
 
             if (cfg.ShowId)
             {
-                var col = new DataGridTemplateColumn() { CellTemplate = (DataTemplate)lst.FindResource("idCellTemplate"), Header = WPFToolkitResources.ID };
+                var col = new DataGridTemplateColumn() { CellTemplate = (DataTemplate)lst.FindResource("idCellTemplate"), IsReadOnly = true, Header = WPFToolkitResources.ID };
                 lst.Columns.Add(col);
                 // SetSortPropertyName(col, "ID");
             }
 
             if (cfg.ShowName)
             {
-                var col = new DataGridTemplateColumn() { CellTemplate = (DataTemplate)lst.FindResource("nameCellTemplate"), Header = WPFToolkitResources.Name };
+                var col = new DataGridTemplateColumn() { CellTemplate = (DataTemplate)lst.FindResource("nameCellTemplate"), IsReadOnly = true, Header = WPFToolkitResources.Name };
                 lst.Columns.Add(col);
                 // Not possible
                 // SetSortPropertyName(col, "Name");               
@@ -222,6 +222,10 @@ namespace Zetbox.Client.WPF.Toolkit
                 if (needEditor)
                 {
                     col.CellEditingTemplate = new DataTemplate() { VisualTree = editorFactory };
+                }
+                else
+                {
+                    col.IsReadOnly = true;
                 }
                 lst.Columns.Add(col);
             }

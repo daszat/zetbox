@@ -73,6 +73,13 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 {
                     OnPropertyChanged("ProxyInstances");
                     OnPropertyChanged("ProxyInstancesAsync");
+
+                    // Since the DataGrid "forgets" the "CanUserAddRows" setting when the ItemsSource is replaced,
+                    // we have to reset AllowAddNew here, which is the binding source for CanUserAddRows
+                    // With this, the grid properly recognizes the CanUserAddRows value.
+                    // damn you, DataGrid!
+                    AllowAddNew = !AllowAddNew;
+                    AllowAddNew = !AllowAddNew;
                 },
                 createTask: () =>
                 {
@@ -84,7 +91,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                                 (vm) => GetProxy(vm),
                                 (p) => GetObjectFromProxy(p));
                         });
-                        
+
                 },
                 set: null);
         }
