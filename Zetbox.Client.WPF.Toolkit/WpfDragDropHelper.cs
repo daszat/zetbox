@@ -49,10 +49,10 @@ namespace Zetbox.Client.WPF.Toolkit
             if (_target != null)
             {
                 _parent.AllowDrop = true;
-                _parent.DragEnter += OnDragEnter;
-                _parent.DragLeave += OnDragLeave;
-                _parent.DragOver += OnDragOver;
-                _parent.Drop += OnDrop;
+                _parent.PreviewDragEnter += OnDragEnter;
+                _parent.PreviewDragLeave += OnDragLeave;
+                _parent.PreviewDragOver += OnDragOver;
+                _parent.PreviewDrop += OnDrop;
             }
             if (_source != null)
             {
