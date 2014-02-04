@@ -29,15 +29,13 @@ using System.Windows.Media;
 
 namespace Zetbox.Client.WPF.View.DocumentManagement
 {
-    public abstract class PreviewEditor : UserControl, IHasViewModel<FileViewModel>
+    public abstract class PreviewEditor : UserControl, IHasViewModel<FileViewModel>, IDragDropTarget
     {
+        private WpfDragDropHelper _dragDrop;
+
         public PreviewEditor()
         {
-            this.AllowDrop = true;
-            DragEnter += OnDragEnter;
-            DragLeave += OnDragLeave;
-            DragOver += OnDragOver;
-            Drop += OnDrop;
+            _dragDrop = new WpfDragDropHelper(this);
         }
 
         public FileViewModel ViewModel
@@ -157,88 +155,30 @@ namespace Zetbox.Client.WPF.View.DocumentManagement
         #endregion
 
         #region DragDrop
-        private void OnDrop(object sender, DragEventArgs e)
+        string[] IDragDropTarget.AcceptableDataFormats
         {
-            ResetBackground(sender);
+            get { return new[] { "FileDrop" }; }
+        }
 
-            var editor = sender as PreviewEditor;
-            if (editor != null && IsAcceptableDataFormat(e))
+        bool IDragDropTarget.CanDrop
+        {
+            get
             {
-                if (e.Data.GetDataPresent(DataFormats.FileDrop))
-                {
-                    var files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                return ViewModel != null && ViewModel.CanUpload;
+            }
+        }
+
+        bool IDragDropTarget.OnDrop(string format, object data)
+        {
+            if (ViewModel == null) return false;
+            switch (format)
+            {
+                case "FileDrop":
+                    var files = (string[])data;
                     ViewModel.Upload(files.First());
-                }
-                else if (e.Data.GetDataPresent("FileNameW"))
-                {
-                    var file = (string)e.Data.GetData("FileNameW");
-                    ViewModel.Upload(file);
-                }
-                else if (e.Data.GetDataPresent("FileName"))
-                {
-                    var file = (string)e.Data.GetData("FileName");
-                    ViewModel.Upload(file);
-                }
+                    return true;
             }
-
-            // the default implementation should be called
-        }
-
-        private bool IsAcceptableDataFormat(DragEventArgs e)
-        {
-            if (ViewModel == null || !ViewModel.CanUpload()) return false;
-            return e.Data.GetDataPresent(DataFormats.FileDrop)
-                || e.Data.GetDataPresent("FileName")
-                || e.Data.GetDataPresent("FileNameW");
-        }
-
-        private void OnDragOver(object sender, DragEventArgs e)
-        {
-            var editor = sender as PreviewEditor;
-            if (editor != null && IsAcceptableDataFormat(e))
-            {
-                e.Effects = DragDropEffects.Copy;
-            }
-            else
-            {
-                e.Effects = DragDropEffects.None;
-            }
-            
-            e.Handled = true; // Tell WPF that I've handled the effect
-        }
-
-        private Brush _previousFill = null;
-        private static Brush _dragEnderFill = null;
-        private void OnDragEnter(object sender, DragEventArgs e)
-        {
-            var editor = sender as PreviewEditor;
-            if (editor != null && IsAcceptableDataFormat(e))
-            {
-                if (_dragEnderFill == null)
-                {
-                    _dragEnderFill = new SolidColorBrush() { Color = (Color)FindResource(Zetbox.Client.WPF.Styles.Defaults.SecondaryBackgroundKey) };
-                }
-                _previousFill = editor.Background;
-                editor.Background = _dragEnderFill;
-            }
-
-            // the default implementation should be called
-        }
-
-        private void OnDragLeave(object sender, DragEventArgs e)
-        {
-            ResetBackground(sender);
-
-            // the default implementation should be called
-        }
-
-        private void ResetBackground(object sender)
-        {
-            var editor = sender as PreviewEditor;
-            if (editor != null)
-            {
-                editor.Background = _previousFill;
-            }
+            return false;
         }
         #endregion
     }

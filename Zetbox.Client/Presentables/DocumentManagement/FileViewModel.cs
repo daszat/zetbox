@@ -42,14 +42,17 @@ namespace Zetbox.Client.Presentables.DocumentManagement
 
         public File File { get; private set; }
 
-        public bool CanUpload()
+        public bool CanUpload
         {
-            return ActionViewModelsByName["Upload"].CanExecute(null);
+            get
+            {
+                return ActionViewModelsByName["Upload"].CanExecute(null);
+            }
         }
 
         public void Upload(string path)
         {
-            if (!string.IsNullOrEmpty(path) && CanUpload())
+            if (!string.IsNullOrEmpty(path) && CanUpload)
             {
                 var fi = new System.IO.FileInfo(path);
                 int id = DataContext.CreateBlob(fi, fi.GetMimeType());
