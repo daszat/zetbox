@@ -787,7 +787,6 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
             return null;
         }
-        #endregion  
-    
+        #endregion    
     }
 }

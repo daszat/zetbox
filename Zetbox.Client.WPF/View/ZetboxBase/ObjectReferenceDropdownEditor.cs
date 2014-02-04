@@ -121,6 +121,5 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
             return ViewModel.DoDragDrop();
         }
         #endregion
-
     }
 }
