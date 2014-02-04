@@ -69,5 +69,37 @@ namespace Zetbox.Client.Presentables.DocumentManagement
             selectionTask.ListViewModel.AllowAddNew = AllowCreateNewItemOnSelect;
             return selectionTask;
         }
+
+        #region DragDrop
+        public override bool OnDrop(object data)
+        {
+            if (data is string)
+            {
+                var str = (string)data;
+                if (System.IO.File.Exists(str))
+                {
+                    UploadFile(str);
+                    return true;
+                }
+            }
+            else if (data is string[])
+            {
+                var str = ((string[])data).FirstOrDefault();
+                if (str != null && System.IO.File.Exists(str))
+                {
+                    UploadFile(str);
+                    return true;
+                }
+            }
+            return base.OnDrop(data);
+        }
+
+        public void UploadFile(string path)
+        {
+            var vmdl = (FileViewModel)DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this.GetWorkspace(), DataContext.Create<StaticFile>());
+            vmdl.Upload(path);
+            Value = vmdl;
+        }
+        #endregion
     }
 }

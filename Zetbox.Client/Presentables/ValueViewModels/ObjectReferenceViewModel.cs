@@ -753,5 +753,20 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         }
 
         #endregion
+
+        #region DragDrop
+        public virtual bool CanDrop
+        {
+            get
+            {
+                return !IsReadOnly;
+            }
+        }
+
+        public virtual bool OnDrop(object data)
+        {
+            return false;
+        }
+        #endregion  
     }
 }

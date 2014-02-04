@@ -38,12 +38,19 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
     /// Interaction logic for ObjectReferenceEditor.xaml
     /// </summary>
     [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
-    public partial class ObjectReferenceEditor : PropertyEditor, IHasViewModel<ObjectReferenceViewModel>
+    public partial class ObjectReferenceEditor : PropertyEditor, IHasViewModel<ObjectReferenceViewModel>, IDragDropTarget
     {
         static ObjectReferenceEditor()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ObjectReferenceEditor), new FrameworkPropertyMetadata(typeof(ObjectReferenceEditor)));
         }
+
+        public ObjectReferenceEditor()
+        {
+            _dragDrop = new WpfDragDropHelper(this);
+        }
+
+        private WpfDragDropHelper _dragDrop;
 
         #region IHasViewModel<ObjectReferenceModel> Members
 
@@ -58,5 +65,28 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
         {
             get { return null; }
         }
+
+        #region IDragDropTarget
+        bool IDragDropTarget.CanDrop
+        {
+            get { return ViewModel != null && ViewModel.CanDrop; }
+        }
+
+        string[] IDragDropTarget.AcceptableDataFormats
+        {
+            get
+            {
+                // Support as may known things as possible
+                // A speciallized ViewModel may handle the data
+                return WpfDragDropHelper.AllAcceptableDataFormats;
+            }
+        }
+
+        bool IDragDropTarget.OnDrop(string format, object data)
+        {
+            if (ViewModel == null) return false;
+            return ViewModel.OnDrop(data);
+        }
+        #endregion
     }
 }
