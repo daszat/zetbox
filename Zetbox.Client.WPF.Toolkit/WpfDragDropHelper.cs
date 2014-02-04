@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Input;
+using System.Runtime.InteropServices;
 
 namespace Zetbox.Client.WPF.Toolkit
 {
@@ -73,7 +74,14 @@ namespace Zetbox.Client.WPF.Toolkit
                 {
                     _parent.Dispatcher.BeginInvoke(new Action(() =>
                     {
-                        DragDrop.DoDragDrop(editor, data, DragDropEffects.Copy | DragDropEffects.Link);
+                        try
+                        {
+                            DragDrop.DoDragDrop(editor, data, DragDropEffects.Copy | DragDropEffects.Link);
+                        }
+                        catch (COMException)
+                        {
+                            // LA LA LA LA LA LA, I can't here you....
+                        }
                     }));
                 }
             }
