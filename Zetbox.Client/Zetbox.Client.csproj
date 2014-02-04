@@ -119,6 +119,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CredentialsResolverResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="DragDropSupport.cs" />
     <Compile Include="GUI\DialogCreator.cs" />
     <Compile Include="GUI\DialogCreatorResources.Designer.cs">
       <AutoGen>True</AutoGen>

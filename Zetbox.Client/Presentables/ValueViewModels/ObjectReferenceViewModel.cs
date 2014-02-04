@@ -765,8 +765,29 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         public virtual bool OnDrop(object data)
         {
+            if (data is IDataObject[])
+            {
+                var lst = (IDataObject[])data;
+                var obj = lst.First();
+                if (obj.Context != DataContext)
+                {
+                    if (obj.ObjectState == DataObjectState.New) return false;
+                    obj = DataContext.Find(DataContext.GetInterfaceType(obj), obj.ID);
+                }
+                Value = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this.GetWorkspace(), obj);
+            }
             return false;
         }
+
+        public virtual object DoDragDrop()
+        {
+            if (!IsNull && Value.ObjectState.In(DataObjectState.Unmodified, DataObjectState.Modified, DataObjectState.New))
+            {
+                return new IDataObject[] { Value.Object };
+            }
+            return null;
+        }
         #endregion  
+    
     }
 }

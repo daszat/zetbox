@@ -5,6 +5,7 @@ using System.Text;
 using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Input;
 
 namespace Zetbox.Client.WPF.Toolkit
 {
@@ -17,11 +18,13 @@ namespace Zetbox.Client.WPF.Toolkit
 
     public interface IDragDropSource
     {
+        object GetData();
     }
 
     public class WpfDragDropHelper
     {
-        public const string ZetboxObjectDataFormat = "zetbox.Object";
+        public const string ZetboxObjectDataFormat = "Zetbox.API.IDataObject[]";
+
         public static readonly string[] AllAcceptableDataFormats = new[] 
         {
             WpfDragDropHelper.ZetboxObjectDataFormat, 
@@ -62,6 +65,18 @@ namespace Zetbox.Client.WPF.Toolkit
 
         void OnMouseMove(object sender, System.Windows.Input.MouseEventArgs e)
         {
+            var editor = sender as Control;
+            if (editor != null && e.LeftButton == MouseButtonState.Pressed)
+            {
+                var data = _source.GetData();
+                if (data != null)
+                {
+                    _parent.Dispatcher.BeginInvoke(new Action(() =>
+                    {
+                        DragDrop.DoDragDrop(editor, data, DragDropEffects.Copy | DragDropEffects.Link);
+                    }));
+                }
+            }
         }
 
         private void OnDrop(object sender, DragEventArgs e)

@@ -38,7 +38,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
     /// Interaction logic for ObjectReferenceEditor.xaml
     /// </summary>
     [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
-    public partial class ObjectReferenceEditor : PropertyEditor, IHasViewModel<ObjectReferenceViewModel>, IDragDropTarget
+    public partial class ObjectReferenceEditor : PropertyEditor, IHasViewModel<ObjectReferenceViewModel>, IDragDropTarget, IDragDropSource
     {
         static ObjectReferenceEditor()
         {
@@ -66,7 +66,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
             get { return null; }
         }
 
-        #region IDragDropTarget
+        #region IDragDrop*
         bool IDragDropTarget.CanDrop
         {
             get { return ViewModel != null && ViewModel.CanDrop; }
@@ -86,6 +86,10 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
         {
             if (ViewModel == null) return false;
             return ViewModel.OnDrop(data);
+        }
+        object IDragDropSource.GetData()
+        {
+            return ViewModel.DoDragDrop();
         }
         #endregion
     }
