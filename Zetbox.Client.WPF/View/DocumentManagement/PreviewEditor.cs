@@ -23,7 +23,9 @@ using System.Windows.Media.Imaging;
 using Zetbox.Client.WPF.CustomControls;
 using Zetbox.App.Base;
 using System.IO;
+using System.Linq;
 using System.Text;
+using System.Windows.Media;
 
 namespace Zetbox.Client.WPF.View.DocumentManagement
 {
@@ -31,6 +33,11 @@ namespace Zetbox.Client.WPF.View.DocumentManagement
     {
         public PreviewEditor()
         {
+            this.AllowDrop = true;
+            DragEnter += OnDragEnter;
+            DragLeave += OnDragLeave;
+            DragOver += OnDragOver;
+            Drop += OnDrop;
         }
 
         public FileViewModel ViewModel
@@ -127,7 +134,7 @@ namespace Zetbox.Client.WPF.View.DocumentManagement
                     var isUtf8 = Utf8Checker.IsUtf8(s);
                     s.Seek(0, SeekOrigin.Begin);
                     var sr = new StreamReader(s, isUtf8 ? Encoding.UTF8 : Encoding.Default);
-                    
+
                     PreviewControl.Content = new TextBox()
                     {
                         Text = sr.ReadToEnd(),
@@ -145,6 +152,92 @@ namespace Zetbox.Client.WPF.View.DocumentManagement
             else
             {
                 return false;
+            }
+        }
+        #endregion
+
+        #region DragDrop
+        private void OnDrop(object sender, DragEventArgs e)
+        {
+            ResetBackground(sender);
+
+            var editor = sender as PreviewEditor;
+            if (editor != null && IsAcceptableDataFormat(e))
+            {
+                if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                {
+                    var files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                    ViewModel.Upload(files.First());
+                }
+                else if (e.Data.GetDataPresent("FileNameW"))
+                {
+                    var file = (string)e.Data.GetData("FileNameW");
+                    ViewModel.Upload(file);
+                }
+                else if (e.Data.GetDataPresent("FileName"))
+                {
+                    var file = (string)e.Data.GetData("FileName");
+                    ViewModel.Upload(file);
+                }
+            }
+
+            // the default implementation should be called
+        }
+
+        private bool IsAcceptableDataFormat(DragEventArgs e)
+        {
+            if (ViewModel == null || !ViewModel.CanUpload()) return false;
+            return e.Data.GetDataPresent(DataFormats.FileDrop)
+                || e.Data.GetDataPresent("FileName")
+                || e.Data.GetDataPresent("FileNameW");
+        }
+
+        private void OnDragOver(object sender, DragEventArgs e)
+        {
+            var editor = sender as PreviewEditor;
+            if (editor != null && IsAcceptableDataFormat(e))
+            {
+                e.Effects = DragDropEffects.Copy;
+            }
+            else
+            {
+                e.Effects = DragDropEffects.None;
+            }
+            
+            e.Handled = true; // Tell WPF that I've handled the effect
+        }
+
+        private Brush _previousFill = null;
+        private static Brush _dragEnderFill = null;
+        private void OnDragEnter(object sender, DragEventArgs e)
+        {
+            var editor = sender as PreviewEditor;
+            if (editor != null && IsAcceptableDataFormat(e))
+            {
+                if (_dragEnderFill == null)
+                {
+                    _dragEnderFill = new SolidColorBrush() { Color = (Color)FindResource(Zetbox.Client.WPF.Styles.Defaults.SecondaryBackgroundKey) };
+                }
+                _previousFill = editor.Background;
+                editor.Background = _dragEnderFill;
+            }
+
+            // the default implementation should be called
+        }
+
+        private void OnDragLeave(object sender, DragEventArgs e)
+        {
+            ResetBackground(sender);
+
+            // the default implementation should be called
+        }
+
+        private void ResetBackground(object sender)
+        {
+            var editor = sender as PreviewEditor;
+            if (editor != null)
+            {
+                editor.Background = _previousFill;
             }
         }
         #endregion
