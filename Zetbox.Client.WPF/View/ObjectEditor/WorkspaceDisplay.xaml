@@ -139,7 +139,8 @@
                     <TextBlock DockPanel.Dock="Top"
                                HorizontalAlignment="Center"
                                Text="{Binding ItemsLabel}" />
-                    <ListBox ItemsSource="{Binding Items}"
+                    <ListBox x:Name="lstItems"
+                             ItemsSource="{Binding Items}"
                              SelectedItem="{Binding SelectedItem}"
                              ItemContainerStyle="{StaticResource ListBoxItemContainerStyle}"
                              ItemTemplateSelector="{StaticResource listItemTemplateSelector}"

@@ -47,11 +47,11 @@ namespace Zetbox.Client.WPF.Toolkit
         private IDragDropTarget _target;
         private IDragDropSource _source;
 
-        public WpfDragDropHelper(Control parent)
+        public WpfDragDropHelper(Control parent, object callback = null)
         {
             _parent = parent;
-            _target = parent as IDragDropTarget;
-            _source = parent as IDragDropSource;
+            _target = (callback ?? parent) as IDragDropTarget;
+            _source = (callback ?? parent) as IDragDropSource;
 
             if (_target != null)
             {
