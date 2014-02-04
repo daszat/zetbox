@@ -199,5 +199,42 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         bool IOpenCommandParameter.AllowOpen { get { return true; } }
         IEnumerable<ViewModel> ICommandParameter.SelectedItems { get { return ReferencedObject == null ? null : new[] { ReferencedObject }; } }
         #endregion
+
+        #region DragDrop
+        public virtual bool CanDrop
+        {
+            get
+            {
+                return !IsReadOnly;
+            }
+        }
+
+        public virtual bool OnDrop(object data)
+        {
+            if (data is IDataObject[])
+            {
+                var lst = (IDataObject[])data;
+                var obj = lst.First();
+                if (obj.Context != DataContext)
+                {
+                    if (obj.ObjectState == DataObjectState.New) return false;
+                    obj = DataContext.Find(DataContext.GetInterfaceType(obj), obj.ID);
+                }
+                Object.SetObject(obj);
+                NotifyValueChanged();
+            }
+            return false;
+        }
+
+        public virtual object DoDragDrop()
+        {
+            var obj = Object.GetObject(DataContext);
+            if (obj != null && obj.ObjectState.In(DataObjectState.Unmodified, DataObjectState.Modified, DataObjectState.New))
+            {
+                return new IDataObject[] { obj };
+            }
+            return null;
+        }
+        #endregion
     }
 }
