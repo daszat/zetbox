@@ -25,7 +25,10 @@ namespace Zetbox.Client.WPF.Toolkit
     public class WpfDragDropHelper
     {
         public const string ZetboxObjectDataFormat = "Zetbox.API.IDataObject[]";
-
+        public static readonly string[] ZetboxObjectDataFormats = new[] 
+        { 
+            ZetboxObjectDataFormat,
+        };
         public static readonly string[] AllAcceptableDataFormats = new[] 
         {
             WpfDragDropHelper.ZetboxObjectDataFormat, 
