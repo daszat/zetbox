@@ -131,18 +131,23 @@ namespace Zetbox.Client.WPF.Toolkit
             e.Handled = true; // Tell WPF that I've handled the effect
         }
 
-        private Brush _previousFill = null;
+        private class PreviousFill
+        {
+            public Brush Brush = null;
+        }
+
+        private PreviousFill _previousFill = null;
         private static Brush _dragEnderFill = null;
         private void OnDragEnter(object sender, DragEventArgs e)
         {
             var editor = sender as Control;
-            if (editor != null && CanDrop(e))
+            if (editor != null && _previousFill == null && CanDrop(e))
             {
                 if (_dragEnderFill == null)
                 {
                     _dragEnderFill = new SolidColorBrush() { Color = (Color)_parent.FindResource(Zetbox.Client.WPF.Styles.Defaults.SecondaryBackgroundKey) };
                 }
-                _previousFill = editor.Background;
+                _previousFill = new PreviousFill() { Brush = editor.Background };
                 editor.Background = _dragEnderFill;
             }
 
@@ -159,9 +164,10 @@ namespace Zetbox.Client.WPF.Toolkit
         private void ResetBackground(object sender)
         {
             var editor = sender as Control;
-            if (editor != null)
+            if (editor != null && _previousFill != null)
             {
-                editor.Background = _previousFill;
+                editor.Background = _previousFill.Brush;
+                _previousFill = null;
             }
         }
     }
