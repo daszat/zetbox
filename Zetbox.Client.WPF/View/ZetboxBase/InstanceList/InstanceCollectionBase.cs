@@ -39,11 +39,21 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
     using Zetbox.Client.WPF.Toolkit;
     using Zetbox.Client.WPF.CustomControls;
 
-    public abstract class InstanceCollectionBase : UserControl, IHasViewModel<InstanceListViewModel>
+    public abstract class InstanceCollectionBase : UserControl, IHasViewModel<InstanceListViewModel>, IDragDropSource, IDragDropTarget
     {
         public InstanceCollectionBase()
         {
-        }        
+        }
+
+        protected override void OnInitialized(EventArgs e)
+        {
+            base.OnInitialized(e);
+            _dragDrop = new WpfDragDropHelper(ListControl, this);
+        }
+
+        private WpfDragDropHelper _dragDrop;
+
+        protected abstract Control ListControl { get; }
 
         #region ItemActivatedHandler
         /// <summary>
@@ -66,7 +76,6 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
         #endregion
 
         #region Sorting management
-
         protected abstract void SetHeaderTemplate(DependencyObject header, DataTemplate template);
         private WpfSortHelper _sortHelper;
         protected WpfSortHelper SortHelper
@@ -83,10 +92,12 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
         
         #endregion
 
+        #region RefreshCommand_Executed
         protected void RefreshCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             ViewModel.Refresh();
         }
+        #endregion
 
         #region IHasViewModel<InstanceListViewModel> Members
 
@@ -95,6 +106,32 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
             get { return (InstanceListViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
 
+        #endregion
+
+        #region IDragDrop*
+        bool IDragDropTarget.CanDrop
+        {
+            get { return ViewModel != null && ViewModel.CanDrop; }
+        }
+
+        string[] IDragDropTarget.AcceptableDataFormats
+        {
+            get
+            {
+                return WpfDragDropHelper.ZetboxObjectDataFormats;
+            }
+        }
+
+        bool IDragDropTarget.OnDrop(string format, object data)
+        {
+            if (ViewModel == null) return false;
+            return ViewModel.OnDrop(data);
+        }
+
+        object IDragDropSource.GetData()
+        {
+            return ViewModel.DoDragDrop();
+        }
         #endregion
     }
 }
