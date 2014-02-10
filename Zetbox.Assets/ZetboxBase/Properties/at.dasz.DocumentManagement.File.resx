@@ -165,11 +165,29 @@
   <data name="ExportGuid_description" xml:space="preserve">
     <value>Export Guid</value>
   </data>
+  <data name="IsFileReadonly_label" xml:space="preserve">
+    <value>Is readonly</value>
+  </data>
+  <data name="IsFileReadonly_description" xml:space="preserve">
+    <value>This file cannot be changed when the flas is set.</value>
+  </data>
+  <data name="KeepRevisions_label" xml:space="preserve">
+    <value>Keep revisions</value>
+  </data>
+  <data name="KeepRevisions_description" xml:space="preserve">
+    <value>Keeps revisions of this file.</value>
+  </data>
   <data name="Name_label" xml:space="preserve">
     <value>Name</value>
   </data>
   <data name="Name_description" xml:space="preserve">
     <value>Filename</value>
+  </data>
+  <data name="Revisions_label" xml:space="preserve">
+    <value>Revisions</value>
+  </data>
+  <data name="Revisions_description" xml:space="preserve">
+    <value />
   </data>
   <data name="Tags_label" xml:space="preserve">
     <value>Tags</value>

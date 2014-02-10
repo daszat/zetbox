@@ -569,7 +569,7 @@
            proxy="at.dasz.DocumentManagement.FileNHibernateImpl+FileProxy, Zetbox.Objects.NHibernateImpl"
            schema="`doc`"
            table="`Files`"
-           abstract="true"
+           abstract="false"
            dynamic-update="true"
            optimistic-lock="dirty"
            batch-size="100">
@@ -621,9 +621,26 @@
                   column="`ExportGuid`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
+        <property name="IsFileReadonly" 
+                  column="`IsFileReadonly`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="KeepRevisions" 
+                  column="`KeepRevisions`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
                   optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <!-- NMProperty -->
+        <!-- rel=File_has_Blob_RelationEntry -->
+        <!-- relEnd=Document otherEnd=Revisions -->
+        <set name="Revisions" table="`Document_has_Revisions`" inverse="true" cascade="none" batch-size="100" >
+            <key column="`fk_Document`" />
+            <one-to-many class="at.dasz.DocumentManagement.File_has_Blob_RelationEntryNHibernateImpl+File_has_Blob_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
+        </set>
+
         <!-- ValueTypeProperty isValue -->
         <property name="Tags" 
                   column="`Tags`" 
@@ -641,15 +658,6 @@
             <key column="`ID`" />
 
             <!-- define the properties -->
-<!-- ObjectReferenceProperty -->
-        <!-- NMProperty -->
-        <!-- rel=Document_has_Blob_RelationEntry -->
-        <!-- relEnd=Document otherEnd=Revisions -->
-        <set name="Revisions" table="`Document_has_Revisions`" inverse="true" cascade="none" batch-size="100" >
-            <key column="`fk_Document`" />
-            <one-to-many class="at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl+Document_has_Blob_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
-        </set>
-
 
             <!-- define the subclasses -->
 

@@ -1,0 +1,1 @@
+﻿update doc."Files" f set "KeepRevisions" = 't' where exists (select * from doc."Documents" s where s."ID" = f."ID")

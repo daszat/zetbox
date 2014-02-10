@@ -177,14 +177,14 @@
       <End Role="ImplementedInterfaces" EntitySet="DataTypeEfImpl" />
       <End Role="CollectionEntry" EntitySet="DataType_implements_Interface_RelationEntryEfImpl" />
     </AssociationSet>
-    <EntitySet Name="Document_has_Blob_RelationEntryEfImpl" EntityType="Model.Document_has_Blob_RelationEntryEfImpl" />
+    <EntitySet Name="File_has_Blob_RelationEntryEfImpl" EntityType="Model.File_has_Blob_RelationEntryEfImpl" />
     <AssociationSet Name="FK_Document_has_Revisions_A" Association="Model.FK_Document_has_Revisions_A" >
       <End Role="Document" EntitySet="FileEfImpl" />
-      <End Role="CollectionEntry" EntitySet="Document_has_Blob_RelationEntryEfImpl" />
+      <End Role="CollectionEntry" EntitySet="File_has_Blob_RelationEntryEfImpl" />
     </AssociationSet>
     <AssociationSet Name="FK_Document_has_Revisions_B" Association="Model.FK_Document_has_Revisions_B" >
       <End Role="Revisions" EntitySet="BlobEfImpl" />
-      <End Role="CollectionEntry" EntitySet="Document_has_Blob_RelationEntryEfImpl" />
+      <End Role="CollectionEntry" EntitySet="File_has_Blob_RelationEntryEfImpl" />
     </AssociationSet>
     <EntitySet Name="Identity_memberOf_Group_RelationEntryEfImpl" EntityType="Model.Identity_memberOf_Group_RelationEntryEfImpl" />
     <AssociationSet Name="FK_Identities_memberOf_Groups_A" Association="Model.FK_Identities_memberOf_Groups_A" >
@@ -1651,7 +1651,7 @@
                         ToRole="File" />
     <Property Name="Text" Type="String" Nullable="false" MaxLength="2147483647"  />
   </EntityType>
-  <EntityType Name="FileEfImpl" Abstract="true">
+  <EntityType Name="FileEfImpl">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -1678,7 +1678,13 @@
                         FromRole="File"
                         ToRole="Excerpt" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
+    <Property Name="IsFileReadonly" Type="Boolean" Nullable="false"  />
+    <Property Name="KeepRevisions" Type="Boolean" Nullable="false"  />
     <Property Name="Name" Type="String" Nullable="true" MaxLength="1024"  />
+    <NavigationProperty Name="RevisionsImpl"
+                        Relationship="Model.FK_Document_has_Revisions_A"
+                        FromRole="Document"
+                        ToRole="CollectionEntry" />
     <Property Name="Tags" Type="String" Nullable="true" MaxLength="2000"  />
   </EntityType>
   <EntityType Name="FileImportConfigurationEfImpl">
@@ -3014,10 +3020,6 @@
     <Property Name="Scale" Type="Int32" Nullable="false"  />
   </EntityType>
   <EntityType Name="DocumentEfImpl" BaseType="Model.FileEfImpl">
-    <NavigationProperty Name="RevisionsImpl"
-                        Relationship="Model.FK_Document_has_Revisions_A"
-                        FromRole="Document"
-                        ToRole="CollectionEntry" />
   </EntityType>
   <EntityType Name="DoubleDefaultValueEfImpl" BaseType="Model.DefaultPropertyValueEfImpl">
     <Property Name="DoubleValue" Type="Double" Nullable="false"  />
@@ -3619,11 +3621,11 @@
   
   <!--
     Relation: FK_Document_has_Revisions
-    A: ZeroOrMore Document as Document
+    A: ZeroOrMore File as Document
     B: ZeroOrMore Blob as Revisions
     Preferred Storage: Separate
   -->
-  <EntityType Name="Document_has_Blob_RelationEntryEfImpl" >
+  <EntityType Name="File_has_Blob_RelationEntryEfImpl" >
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -3647,10 +3649,10 @@
   </EntityType>
   <Association Name="FK_Document_has_Revisions_A" >
     <End Role="Document"
-         Type="Model.DocumentEfImpl" 
+         Type="Model.FileEfImpl" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.Document_has_Blob_RelationEntryEfImpl"
+         Type="Model.File_has_Blob_RelationEntryEfImpl"
          Multiplicity="*" />
   </Association>
   <Association Name="FK_Document_has_Revisions_B" >
@@ -3658,7 +3660,7 @@
          Type="Model.BlobEfImpl" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.Document_has_Blob_RelationEntryEfImpl"
+         Type="Model.File_has_Blob_RelationEntryEfImpl"
          Multiplicity="*" />
   </Association>
   

@@ -716,6 +716,8 @@
           <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="IsFileReadonly" ColumnName="IsFileReadonly" />
+          <ScalarProperty Name="KeepRevisions" ColumnName="KeepRevisions" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Tags" ColumnName="Tags" />
           <ComplexProperty Name="AttachedToImpl" TypeName="Model.AnyReferenceEfImpl">
@@ -2192,13 +2194,13 @@
 
     <!--
     Relation: FK_Document_has_Revisions
-    A: ZeroOrMore Document as Document
+    A: ZeroOrMore File as Document
     B: ZeroOrMore Blob as Revisions
     Preferred Storage: Separate
     -->
-    <EntitySetMapping Name="Document_has_Blob_RelationEntryEfImpl">
-      <EntityTypeMapping TypeName="Model.Document_has_Blob_RelationEntryEfImpl">
-        <MappingFragment StoreEntitySet="Document_has_Blob_RelationEntry">
+    <EntitySetMapping Name="File_has_Blob_RelationEntryEfImpl">
+      <EntityTypeMapping TypeName="Model.File_has_Blob_RelationEntryEfImpl">
+        <MappingFragment StoreEntitySet="File_has_Blob_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
 		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
           <ScalarProperty Name="A_pos" ColumnName="fk_Document_pos" />
@@ -2209,7 +2211,7 @@
     <!-- A to CollectionEntry -->
     <AssociationSetMapping Name="FK_Document_has_Revisions_A"
                            TypeName="Model.FK_Document_has_Revisions_A"
-                           StoreEntitySet="Document_has_Blob_RelationEntry" >
+                           StoreEntitySet="File_has_Blob_RelationEntry" >
       <EndProperty Name="Document">
         <ScalarProperty Name="ID" ColumnName="fk_Document"/>
       </EndProperty>
@@ -2221,7 +2223,7 @@
     <!-- B to CollectionEntry -->
     <AssociationSetMapping Name="FK_Document_has_Revisions_B"
                            TypeName="Model.FK_Document_has_Revisions_B"
-                           StoreEntitySet="Document_has_Blob_RelationEntry" >
+                           StoreEntitySet="File_has_Blob_RelationEntry" >
       <EndProperty Name="Revisions">
         <ScalarProperty Name="ID" ColumnName="fk_Revisions"/>
       </EndProperty>

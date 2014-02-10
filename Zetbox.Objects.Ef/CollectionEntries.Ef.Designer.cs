@@ -2439,17 +2439,17 @@ namespace Zetbox.App.Base
 namespace at.dasz.DocumentManagement
 {
     // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
-    [EdmEntityType(NamespaceName="Model", Name="Document_has_Blob_RelationEntryEfImpl")]
-    [System.Diagnostics.DebuggerDisplay("Document_has_Blob_RelationEntryEfImpl")]
-    public class Document_has_Blob_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<at.dasz.DocumentManagement.Document, at.dasz.DocumentManagement.DocumentEfImpl, Zetbox.App.Base.Blob, Zetbox.App.Base.BlobEfImpl>, Document_has_Blob_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
+    [EdmEntityType(NamespaceName="Model", Name="File_has_Blob_RelationEntryEfImpl")]
+    [System.Diagnostics.DebuggerDisplay("File_has_Blob_RelationEntryEfImpl")]
+    public class File_has_Blob_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<at.dasz.DocumentManagement.File, at.dasz.DocumentManagement.FileEfImpl, Zetbox.App.Base.Blob, Zetbox.App.Base.BlobEfImpl>, File_has_Blob_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
         [Obsolete]
-        public Document_has_Blob_RelationEntryEfImpl()
+        public File_has_Blob_RelationEntryEfImpl()
             : base(null)
         {
         }
 
-        public Document_has_Blob_RelationEntryEfImpl(Func<IFrozenContext> lazyCtx)
+        public File_has_Blob_RelationEntryEfImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }
@@ -2544,7 +2544,7 @@ namespace at.dasz.DocumentManagement
             set
             {
                 // settor will do checking for us
-                A = (at.dasz.DocumentManagement.Document)value;
+                A = (at.dasz.DocumentManagement.File)value;
             }
         }
 
@@ -2569,7 +2569,7 @@ namespace at.dasz.DocumentManagement
         /// </summary>
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=at.dasz.DocumentManagement.Document; moduleNamespace=at.dasz.DocumentManagement;
+        // referencedInterface=at.dasz.DocumentManagement.File; moduleNamespace=at.dasz.DocumentManagement;
         // will get inverse collection for notifications for RevisionsImpl
         // PositionStorage=A_pos;
         // Target exportable
@@ -2577,10 +2577,10 @@ namespace at.dasz.DocumentManagement
         // implement the user-visible interface
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public at.dasz.DocumentManagement.Document A
+        public at.dasz.DocumentManagement.File A
         {
             get { return AImpl; }
-            set { AImpl = (at.dasz.DocumentManagement.DocumentEfImpl)value; }
+            set { AImpl = (at.dasz.DocumentManagement.FileEfImpl)value; }
         }
 
         private int? _fk_A;
@@ -2589,13 +2589,13 @@ namespace at.dasz.DocumentManagement
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Document_has_Revisions_A", "Document")]
-        public at.dasz.DocumentManagement.DocumentEfImpl AImpl
+        public at.dasz.DocumentManagement.FileEfImpl AImpl
         {
             get
             {
-                at.dasz.DocumentManagement.DocumentEfImpl __value;
-                EntityReference<at.dasz.DocumentManagement.DocumentEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<at.dasz.DocumentManagement.DocumentEfImpl>(
+                at.dasz.DocumentManagement.FileEfImpl __value;
+                EntityReference<at.dasz.DocumentManagement.FileEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<at.dasz.DocumentManagement.FileEfImpl>(
                         "Model.FK_Document_has_Revisions_A",
                         "Document");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -2611,8 +2611,8 @@ namespace at.dasz.DocumentManagement
                 if (this.IsReadonly) throw new ReadOnlyObjectException();
                 if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
 
-                EntityReference<at.dasz.DocumentManagement.DocumentEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<at.dasz.DocumentManagement.DocumentEfImpl>(
+                EntityReference<at.dasz.DocumentManagement.FileEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<at.dasz.DocumentManagement.FileEfImpl>(
                         "Model.FK_Document_has_Revisions_A",
                         "Document");
                 if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
@@ -2620,8 +2620,8 @@ namespace at.dasz.DocumentManagement
                 {
                     r.Load();
                 }
-                at.dasz.DocumentManagement.DocumentEfImpl __oldValue = (at.dasz.DocumentManagement.DocumentEfImpl)r.Value;
-                at.dasz.DocumentManagement.DocumentEfImpl __newValue = (at.dasz.DocumentManagement.DocumentEfImpl)value;
+                at.dasz.DocumentManagement.FileEfImpl __oldValue = (at.dasz.DocumentManagement.FileEfImpl)r.Value;
+                at.dasz.DocumentManagement.FileEfImpl __newValue = (at.dasz.DocumentManagement.FileEfImpl)value;
 
                 // fetch collection proxy and attach change notifications
                 if (__oldValue != null) __oldValue.GetRevisionsImplCollection();
@@ -2630,7 +2630,7 @@ namespace at.dasz.DocumentManagement
                 // Changing Event fires before anything is touched
                 NotifyPropertyChanging("A", __oldValue, __newValue);
 
-                r.Value = (at.dasz.DocumentManagement.DocumentEfImpl)__newValue;
+                r.Value = (at.dasz.DocumentManagement.FileEfImpl)__newValue;
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
@@ -2640,7 +2640,7 @@ namespace at.dasz.DocumentManagement
 
         public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
         {
-            return new Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.Document>(this.A);
+            return new Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.File>(this.A);
         }
 
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
@@ -2826,7 +2826,7 @@ namespace at.dasz.DocumentManagement
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._ExportGuid);
             {
-                var r = this.RelationshipManager.GetRelatedReference<at.dasz.DocumentManagement.DocumentEfImpl>("Model.FK_Document_has_Revisions_A", "Document");
+                var r = this.RelationshipManager.GetRelatedReference<at.dasz.DocumentManagement.FileEfImpl>("Model.FK_Document_has_Revisions_A", "Document");
                 var key = r.EntityKey;
                 binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
@@ -2896,14 +2896,14 @@ namespace at.dasz.DocumentManagement
 
         public override Type GetImplementedInterface()
         {
-            return typeof(Document_has_Blob_RelationEntry);
+            return typeof(File_has_Blob_RelationEntry);
         }
 
         public override void ApplyChangesFrom(IPersistenceObject obj)
         {
             base.ApplyChangesFrom(obj);
-            var other = (Document_has_Blob_RelationEntryEfImpl)obj;
-            var me = (Document_has_Blob_RelationEntryEfImpl)this;
+            var other = (File_has_Blob_RelationEntryEfImpl)obj;
+            var me = (File_has_Blob_RelationEntryEfImpl)this;
 
             me._fk_A = other._fk_A;
             me.AIndex = other.AIndex;
@@ -2919,10 +2919,10 @@ namespace at.dasz.DocumentManagement
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                AImpl = (at.dasz.DocumentManagement.DocumentEfImpl)Context.FindPersistenceObject<at.dasz.DocumentManagement.Document>(_fk_guid_A.Value);
+                AImpl = (at.dasz.DocumentManagement.FileEfImpl)Context.FindPersistenceObject<at.dasz.DocumentManagement.File>(_fk_guid_A.Value);
             else
             if (_fk_A.HasValue)
-                AImpl = (at.dasz.DocumentManagement.DocumentEfImpl)Context.Find<at.dasz.DocumentManagement.Document>(_fk_A.Value);
+                AImpl = (at.dasz.DocumentManagement.FileEfImpl)Context.Find<at.dasz.DocumentManagement.File>(_fk_A.Value);
             else
                 AImpl = null;
 

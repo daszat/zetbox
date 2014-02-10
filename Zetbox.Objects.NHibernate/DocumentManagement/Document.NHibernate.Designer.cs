@@ -49,44 +49,6 @@ namespace at.dasz.DocumentManagement
         internal new readonly DocumentProxy Proxy;
 
         /// <summary>
-        /// 
-        /// </summary>
-        // collection entry list property
-   		// Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.CollectionEntryListProperty
-		public IList<Zetbox.App.Base.Blob> Revisions
-		{
-			get
-			{
-				if (_Revisions == null)
-				{
-					_Revisions 
-						= new NHibernateBSideListWrapper<at.dasz.DocumentManagement.Document, Zetbox.App.Base.Blob, at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl>(
-							this, 
-							new ProjectedCollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl.Document_has_Blob_RelationEntryProxy, at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl>(
-                                () => this.Proxy.Revisions,
-                                p => (at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl.Document_has_Blob_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
-                    _Revisions.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Revisions", null, null); if(OnRevisions_PostSetter != null && IsAttached) OnRevisions_PostSetter(this); };
-                    if (Revisions_was_eagerLoaded) { Revisions_was_eagerLoaded = false; }
-				}
-				return (IList<Zetbox.App.Base.Blob>)_Revisions;
-			}
-		}
-
-		private NHibernateBSideListWrapper<at.dasz.DocumentManagement.Document, Zetbox.App.Base.Blob, at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl> _Revisions;
-		// ignored, but required for Serialization
-        private bool Revisions_was_eagerLoaded = false;
-
-        public Zetbox.API.Async.ZbTask TriggerFetchRevisionsAsync()
-        {
-            return new Zetbox.API.Async.ZbTask<IList<Zetbox.App.Base.Blob>>(this.Revisions);
-        }
-
-public static event PropertyListChangedHandler<at.dasz.DocumentManagement.Document> OnRevisions_PostSetter;
-
-        public static event PropertyIsValidHandler<at.dasz.DocumentManagement.Document> OnRevisions_IsValid;
-
-        /// <summary>
         /// Creates an excerpt from the current file
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
@@ -355,25 +317,12 @@ public static event PropertyListChangedHandler<at.dasz.DocumentManagement.Docume
 
         #region Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-
-        protected override bool ShouldSetModified(string property)
-        {
-            switch (property)
-            {
-                case "Revisions":
-                    return false;
-                default:
-                    return base.ShouldSetModified(property);
-            }
-        }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
         {
             switch(propName)
             {
-            case "Revisions":
-                return TriggerFetchRevisionsAsync();
             default:
                 return base.TriggerFetch(propName);
             }
@@ -389,38 +338,6 @@ public static event PropertyListChangedHandler<at.dasz.DocumentManagement.Docume
             // fix direct object references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
-        private static readonly object _propertiesLock = new object();
-        private static System.ComponentModel.PropertyDescriptor[] _properties;
-
-        private void _InitializePropertyDescriptors(Func<IFrozenContext> lazyCtx)
-        {
-            if (_properties != null) return;
-            lock (_propertiesLock)
-            {
-                // recheck for a lost race after aquiring the lock
-                if (_properties != null) return;
-
-                _properties = new System.ComponentModel.PropertyDescriptor[] {
-                    // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorNHibernateImpl<Document, IList<Zetbox.App.Base.Blob>>(
-                        lazyCtx,
-                        new Guid("ec544fe0-8189-4bb2-a3d1-3cb61d815aa5"),
-                        "Revisions",
-                        null,
-                        obj => obj.Revisions,
-                        null, // lists are read-only properties
-                        obj => OnRevisions_IsValid), 
-                    // position columns
-                };
-            }
-        }
-
-        protected override void CollectProperties(Func<IFrozenContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
-        {
-            base.CollectProperties(lazyCtx, props);
-            _InitializePropertyDescriptors(lazyCtx);
-            props.AddRange(_properties);
-        }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         #region Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
 
@@ -485,7 +402,6 @@ public static event PropertyListChangedHandler<at.dasz.DocumentManagement.Docume
             if (OnNotifyDeleting_Document != null) OnNotifyDeleting_Document(this);
 
 
-            Revisions.Clear();
         }
         public static event ObjectEventHandler<Document> OnNotifyDeleting_Document;
 
@@ -496,16 +412,11 @@ public static event PropertyListChangedHandler<at.dasz.DocumentManagement.Docume
         {
             public DocumentProxy()
             {
-                Revisions = new Collection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl.Document_has_Blob_RelationEntryProxy>();
             }
 
             public override Type ZetboxWrapper { get { return typeof(DocumentNHibernateImpl); } }
 
             public override Type ZetboxProxy { get { return typeof(DocumentProxy); } }
-
-            public virtual int? Document_pos { get; set; }
-
-            public virtual ICollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl.Document_has_Blob_RelationEntryProxy> Revisions { get; set; }
 
         }
 

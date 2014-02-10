@@ -499,7 +499,7 @@
     <value>File</value>
   </data>
   <data name="at.dasz.DocumentManagement.File_description" xml:space="preserve">
-    <value>Abstract Baseclass for File Types</value>
+    <value>A file. Can be readonly, can have revisions.</value>
   </data>
   <data name="at.dasz.DocumentManagement.FileImportConfiguration" xml:space="preserve">
     <value>FileImportConfiguration</value>

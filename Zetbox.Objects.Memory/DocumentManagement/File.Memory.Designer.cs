@@ -18,10 +18,10 @@ namespace at.dasz.DocumentManagement
     using Zetbox.DalProvider.Memory;
 
     /// <summary>
-    /// Abstract Baseclass for File Types
+    /// A file. Can be readonly, can have revisions.
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("File")]
-    public abstract class FileMemoryImpl : Zetbox.DalProvider.Memory.DataObjectMemoryImpl, File, Zetbox.API.IExportableInternal
+    public class FileMemoryImpl : Zetbox.DalProvider.Memory.DataObjectMemoryImpl, File, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6");
         public override Guid ObjectClassID { get { return _objectClassID; } }
@@ -786,6 +786,148 @@ namespace at.dasz.DocumentManagement
         public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnExportGuid_IsValid;
 
         /// <summary>
+        /// This file cannot be changed when the flas is set.
+        /// </summary>
+        // value type property
+        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+        public bool IsFileReadonly
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _IsFileReadonly;
+                if (!_isIsFileReadonlySet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("6942c3e7-ba7b-4e9c-b7fb-644c5aa1c73f"));
+                    if (__p != null) {
+                        _isIsFileReadonlySet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this._IsFileReadonly = (bool)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'File.IsFileReadonly'");
+                    }
+                }
+                if (OnIsFileReadonly_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<bool>(__result);
+                    OnIsFileReadonly_Getter(this, __e);
+                    __result = _IsFileReadonly = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isIsFileReadonlySet = true;
+                if (_IsFileReadonly != value)
+                {
+                    var __oldValue = _IsFileReadonly;
+                    var __newValue = value;
+                    if (OnIsFileReadonly_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnIsFileReadonly_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("IsFileReadonly", __oldValue, __newValue);
+                    _IsFileReadonly = __newValue;
+                    NotifyPropertyChanged("IsFileReadonly", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnIsFileReadonly_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnIsFileReadonly_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("IsFileReadonly");
+                }
+            }
+        }
+        private bool _IsFileReadonly;
+        private bool _isIsFileReadonlySet = false;
+        // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<at.dasz.DocumentManagement.File, bool> OnIsFileReadonly_Getter;
+		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, bool> OnIsFileReadonly_PreSetter;
+		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, bool> OnIsFileReadonly_PostSetter;
+
+        public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnIsFileReadonly_IsValid;
+
+        /// <summary>
+        /// Keeps revisions of this file.
+        /// </summary>
+        // value type property
+        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+        public bool KeepRevisions
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _KeepRevisions;
+                if (!_isKeepRevisionsSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("0b0775d4-9ded-472d-aac5-d1cd63b97237"));
+                    if (__p != null) {
+                        _isKeepRevisionsSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this._KeepRevisions = (bool)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'File.KeepRevisions'");
+                    }
+                }
+                if (OnKeepRevisions_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<bool>(__result);
+                    OnKeepRevisions_Getter(this, __e);
+                    __result = _KeepRevisions = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isKeepRevisionsSet = true;
+                if (_KeepRevisions != value)
+                {
+                    var __oldValue = _KeepRevisions;
+                    var __newValue = value;
+                    if (OnKeepRevisions_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnKeepRevisions_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("KeepRevisions", __oldValue, __newValue);
+                    _KeepRevisions = __newValue;
+                    NotifyPropertyChanged("KeepRevisions", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnKeepRevisions_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnKeepRevisions_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("KeepRevisions");
+                }
+            }
+        }
+        private bool _KeepRevisions;
+        private bool _isKeepRevisionsSet = false;
+        // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<at.dasz.DocumentManagement.File, bool> OnKeepRevisions_Getter;
+		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, bool> OnKeepRevisions_PreSetter;
+		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, bool> OnKeepRevisions_PostSetter;
+
+        public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnKeepRevisions_IsValid;
+
+        /// <summary>
         /// Filename
         /// </summary>
         // value type property
@@ -842,6 +984,52 @@ namespace at.dasz.DocumentManagement
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, string> OnName_PostSetter;
 
         public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnName_IsValid;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        // collection entry list property
+        // BEGIN Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for Revisions
+        public IList<Zetbox.App.Base.Blob> Revisions
+        {
+            get
+            {
+                if (_Revisions == null)
+                {
+                    TriggerFetchRevisionsAsync().Wait();
+                }
+                return (IList<Zetbox.App.Base.Blob>)_Revisions;
+            }
+        }
+
+        Zetbox.API.Async.ZbTask _triggerFetchRevisionsTask;
+        public Zetbox.API.Async.ZbTask TriggerFetchRevisionsAsync()
+        {
+            if (_triggerFetchRevisionsTask != null) return _triggerFetchRevisionsTask;
+            _triggerFetchRevisionsTask = Context.FetchRelationAsync<at.dasz.DocumentManagement.File_has_Blob_RelationEntryMemoryImpl>(new Guid("69d27812-e981-443b-a94b-dfe1a95f3aad"), RelationEndRole.A, this);
+            _triggerFetchRevisionsTask.OnResult(r =>
+            {
+                _Revisions
+                    = new ObservableBSideListWrapper<at.dasz.DocumentManagement.File, Zetbox.App.Base.Blob, at.dasz.DocumentManagement.File_has_Blob_RelationEntryMemoryImpl, ICollection<at.dasz.DocumentManagement.File_has_Blob_RelationEntryMemoryImpl>>(
+                        this,
+                        new RelationshipFilterASideCollection<at.dasz.DocumentManagement.File_has_Blob_RelationEntryMemoryImpl>(this.Context, this));
+                        // _Revisions.CollectionChanged is managed by OnRevisionsCollectionChanged() and called from the RelationEntry
+            });
+            return _triggerFetchRevisionsTask;
+        }
+
+        internal void OnRevisionsCollectionChanged()
+        {
+            NotifyPropertyChanged("Revisions", null, null);
+            if (OnRevisions_PostSetter != null && IsAttached)
+                OnRevisions_PostSetter(this);
+        }
+
+        private ObservableBSideListWrapper<at.dasz.DocumentManagement.File, Zetbox.App.Base.Blob, at.dasz.DocumentManagement.File_has_Blob_RelationEntryMemoryImpl, ICollection<at.dasz.DocumentManagement.File_has_Blob_RelationEntryMemoryImpl>> _Revisions;
+        // END Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for Revisions
+public static event PropertyListChangedHandler<at.dasz.DocumentManagement.File> OnRevisions_PostSetter;
+
+        public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnRevisions_IsValid;
 
         /// <summary>
         /// 
@@ -1169,6 +1357,8 @@ namespace at.dasz.DocumentManagement
             me.ChangedOn = other.ChangedOn;
             me.CreatedOn = other.CreatedOn;
             me.ExportGuid = other.ExportGuid;
+            me.IsFileReadonly = other.IsFileReadonly;
+            me.KeepRevisions = other.KeepRevisions;
             me.Name = other.Name;
             me.Tags = other.Tags;
             if (me.AttachedTo == null && other.AttachedTo != null) {
@@ -1241,6 +1431,8 @@ namespace at.dasz.DocumentManagement
                 case "CreatedOn":
                 case "Excerpt":
                 case "ExportGuid":
+                case "IsFileReadonly":
+                case "KeepRevisions":
                 case "Name":
                 case "Tags":
                     AuditPropertyChange(property, oldValue, newValue);
@@ -1253,6 +1445,7 @@ namespace at.dasz.DocumentManagement
             switch (property)
             {
                 case "Excerpt":
+                case "Revisions":
                     return false;
                 default:
                     return base.ShouldSetModified(property);
@@ -1272,6 +1465,8 @@ namespace at.dasz.DocumentManagement
                 return TriggerFetchCreatedByAsync();
             case "Excerpt":
                 return TriggerFetchExcerptAsync();
+            case "Revisions":
+                return TriggerFetchRevisionsAsync();
             default:
                 return base.TriggerFetch(propName);
             }
@@ -1396,6 +1591,24 @@ namespace at.dasz.DocumentManagement
                         (obj, val) => obj.ExportGuid = val,
 						obj => OnExportGuid_IsValid), 
                     // else
+                    new PropertyDescriptorMemoryImpl<File, bool>(
+                        lazyCtx,
+                        new Guid("6942c3e7-ba7b-4e9c-b7fb-644c5aa1c73f"),
+                        "IsFileReadonly",
+                        null,
+                        obj => obj.IsFileReadonly,
+                        (obj, val) => obj.IsFileReadonly = val,
+						obj => OnIsFileReadonly_IsValid), 
+                    // else
+                    new PropertyDescriptorMemoryImpl<File, bool>(
+                        lazyCtx,
+                        new Guid("0b0775d4-9ded-472d-aac5-d1cd63b97237"),
+                        "KeepRevisions",
+                        null,
+                        obj => obj.KeepRevisions,
+                        (obj, val) => obj.KeepRevisions = val,
+						obj => OnKeepRevisions_IsValid), 
+                    // else
                     new PropertyDescriptorMemoryImpl<File, string>(
                         lazyCtx,
                         new Guid("1c5f2bea-9915-4634-8ff9-5fd6f0871704"),
@@ -1404,6 +1617,15 @@ namespace at.dasz.DocumentManagement
                         obj => obj.Name,
                         (obj, val) => obj.Name = val,
 						obj => OnName_IsValid), 
+                    // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+                    new PropertyDescriptorMemoryImpl<File, IList<Zetbox.App.Base.Blob>>(
+                        lazyCtx,
+                        new Guid("ec544fe0-8189-4bb2-a3d1-3cb61d815aa5"),
+                        "Revisions",
+                        null,
+                        obj => obj.Revisions,
+                        null, // lists are read-only properties
+                        obj => OnRevisions_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<File, string>(
                         lazyCtx,
@@ -1492,6 +1714,7 @@ namespace at.dasz.DocumentManagement
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_File != null) OnNotifyDeleting_File(this);
+            Revisions.Clear();
             Blob = null;
             ChangedBy = null;
             CreatedBy = null;
@@ -1526,6 +1749,14 @@ namespace at.dasz.DocumentManagement
             if (this._isExportGuidSet) {
                 binStream.Write(this._ExportGuid);
             }
+            binStream.Write(this._isIsFileReadonlySet);
+            if (this._isIsFileReadonlySet) {
+                binStream.Write(this._IsFileReadonly);
+            }
+            binStream.Write(this._isKeepRevisionsSet);
+            if (this._isKeepRevisionsSet) {
+                binStream.Write(this._KeepRevisions);
+            }
             binStream.Write(this._Name);
             binStream.Write(this._Tags);
         }
@@ -1557,6 +1788,14 @@ namespace at.dasz.DocumentManagement
             if (this._isExportGuidSet) {
                 this._ExportGuid = binStream.ReadGuid();
             }
+            this._isIsFileReadonlySet = binStream.ReadBoolean();
+            if (this._isIsFileReadonlySet) {
+                this._IsFileReadonly = binStream.ReadBoolean();
+            }
+            this._isKeepRevisionsSet = binStream.ReadBoolean();
+            if (this._isKeepRevisionsSet) {
+                this._KeepRevisions = binStream.ReadBoolean();
+            }
             this._Name = binStream.ReadString();
             this._Tags = binStream.ReadString();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
@@ -1578,6 +1817,10 @@ namespace at.dasz.DocumentManagement
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "at.dasz.DocumentManagement");
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "at.dasz.DocumentManagement");
+            System.Diagnostics.Debug.Assert(this._isIsFileReadonlySet, "Exported objects need to have all default values evaluated");
+            if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this._IsFileReadonly, xml, "IsFileReadonly", "at.dasz.DocumentManagement");
+            System.Diagnostics.Debug.Assert(this._isKeepRevisionsSet, "Exported objects need to have all default values evaluated");
+            if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this._KeepRevisions, xml, "KeepRevisions", "at.dasz.DocumentManagement");
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this._Name, xml, "Name", "at.dasz.DocumentManagement");
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this._Tags, xml, "Tags", "at.dasz.DocumentManagement");
         }
@@ -1607,6 +1850,16 @@ namespace at.dasz.DocumentManagement
                 // Import must have default value set
                 this._ExportGuid = XmlStreamer.ReadGuid(xml);
                 this._isExportGuidSet = true;
+                break;
+            case "at.dasz.DocumentManagement|IsFileReadonly":
+                // Import must have default value set
+                this._IsFileReadonly = XmlStreamer.ReadBoolean(xml);
+                this._isIsFileReadonlySet = true;
+                break;
+            case "at.dasz.DocumentManagement|KeepRevisions":
+                // Import must have default value set
+                this._KeepRevisions = XmlStreamer.ReadBoolean(xml);
+                this._isKeepRevisionsSet = true;
                 break;
             case "at.dasz.DocumentManagement|Name":
                 this._Name = XmlStreamer.ReadString(xml);

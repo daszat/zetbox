@@ -8,7 +8,7 @@ namespace at.dasz.DocumentManagement
     using Zetbox.API;
 
     /// <summary>
-    /// Abstract Baseclass for File Types
+    /// A file. Can be readonly, can have revisions.
     /// </summary>
     [Zetbox.API.DefinitionGuid("8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6")]
     public interface File : IDataObject, Zetbox.App.Base.IChangedBy, Zetbox.App.Base.IExportable 
@@ -42,6 +42,24 @@ namespace at.dasz.DocumentManagement
         }
 
         /// <summary>
+        /// This file cannot be changed when the flas is set.
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("6942c3e7-ba7b-4e9c-b7fb-644c5aa1c73f")]
+        bool IsFileReadonly {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Keeps revisions of this file.
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("0b0775d4-9ded-472d-aac5-d1cd63b97237")]
+        bool KeepRevisions {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Filename
         /// </summary>
         [Zetbox.API.DefinitionGuid("1c5f2bea-9915-4634-8ff9-5fd6f0871704")]
@@ -49,6 +67,13 @@ namespace at.dasz.DocumentManagement
             get;
             set;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+
+        [Zetbox.API.DefinitionGuid("ec544fe0-8189-4bb2-a3d1-3cb61d815aa5")]
+        IList<Zetbox.App.Base.Blob> Revisions { get; }
 
         /// <summary>
         /// 

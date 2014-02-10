@@ -19,10 +19,10 @@ namespace at.dasz.DocumentManagement
     using Zetbox.DalProvider.NHibernate;
 
     /// <summary>
-    /// Abstract Baseclass for File Types
+    /// A file. Can be readonly, can have revisions.
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("File")]
-    public abstract class FileNHibernateImpl : Zetbox.DalProvider.NHibernate.DataObjectNHibernateImpl, File, Zetbox.API.IExportableInternal
+    public class FileNHibernateImpl : Zetbox.DalProvider.NHibernate.DataObjectNHibernateImpl, File, Zetbox.API.IExportableInternal
     {
         private static readonly Guid _objectClassID = new Guid("8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6");
         public override Guid ObjectClassID { get { return _objectClassID; } }
@@ -55,6 +55,8 @@ namespace at.dasz.DocumentManagement
             _isChangedOnSet = Proxy.ID > 0;
             _isCreatedOnSet = Proxy.ID > 0;
             _isExportGuidSet = Proxy.ID > 0;
+            _isIsFileReadonlySet = Proxy.ID > 0;
+            _isKeepRevisionsSet = Proxy.ID > 0;
         }
 
         /// <summary>the NHibernate proxy of the represented entity</summary>
@@ -752,6 +754,162 @@ namespace at.dasz.DocumentManagement
         public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnExportGuid_IsValid;
 
         /// <summary>
+        /// This file cannot be changed when the flas is set.
+        /// </summary>
+
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        public bool IsFileReadonly
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = FetchIsFileReadonlyOrDefault();
+                if (OnIsFileReadonly_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<bool>(__result);
+                    OnIsFileReadonly_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isIsFileReadonlySet = true;
+                if (Proxy.IsFileReadonly != value)
+                {
+                    var __oldValue = Proxy.IsFileReadonly;
+                    var __newValue = value;
+                    if (OnIsFileReadonly_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnIsFileReadonly_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("IsFileReadonly", __oldValue, __newValue);
+                    Proxy.IsFileReadonly = __newValue;
+                    NotifyPropertyChanged("IsFileReadonly", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnIsFileReadonly_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnIsFileReadonly_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("IsFileReadonly");
+                }
+            }
+        }
+
+
+        private bool FetchIsFileReadonlyOrDefault()
+        {
+            var __result = Proxy.IsFileReadonly;
+                if (!_isIsFileReadonlySet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("6942c3e7-ba7b-4e9c-b7fb-644c5aa1c73f"));
+                    if (__p != null) {
+                        _isIsFileReadonlySet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this.Proxy.IsFileReadonly = (bool)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'at.dasz.DocumentManagement.File.IsFileReadonly'");
+                    }
+                }
+            return __result;
+        }
+
+        private bool _isIsFileReadonlySet = false;
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<at.dasz.DocumentManagement.File, bool> OnIsFileReadonly_Getter;
+		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, bool> OnIsFileReadonly_PreSetter;
+		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, bool> OnIsFileReadonly_PostSetter;
+
+        public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnIsFileReadonly_IsValid;
+
+        /// <summary>
+        /// Keeps revisions of this file.
+        /// </summary>
+
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        public bool KeepRevisions
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = FetchKeepRevisionsOrDefault();
+                if (OnKeepRevisions_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<bool>(__result);
+                    OnKeepRevisions_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isKeepRevisionsSet = true;
+                if (Proxy.KeepRevisions != value)
+                {
+                    var __oldValue = Proxy.KeepRevisions;
+                    var __newValue = value;
+                    if (OnKeepRevisions_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnKeepRevisions_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("KeepRevisions", __oldValue, __newValue);
+                    Proxy.KeepRevisions = __newValue;
+                    NotifyPropertyChanged("KeepRevisions", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnKeepRevisions_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnKeepRevisions_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("KeepRevisions");
+                }
+            }
+        }
+
+
+        private bool FetchKeepRevisionsOrDefault()
+        {
+            var __result = Proxy.KeepRevisions;
+                if (!_isKeepRevisionsSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("0b0775d4-9ded-472d-aac5-d1cd63b97237"));
+                    if (__p != null) {
+                        _isKeepRevisionsSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this.Proxy.KeepRevisions = (bool)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'at.dasz.DocumentManagement.File.KeepRevisions'");
+                    }
+                }
+            return __result;
+        }
+
+        private bool _isKeepRevisionsSet = false;
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<at.dasz.DocumentManagement.File, bool> OnKeepRevisions_Getter;
+		public static event PropertyPreSetterHandler<at.dasz.DocumentManagement.File, bool> OnKeepRevisions_PreSetter;
+		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, bool> OnKeepRevisions_PostSetter;
+
+        public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnKeepRevisions_IsValid;
+
+        /// <summary>
         /// Filename
         /// </summary>
 
@@ -808,6 +966,44 @@ namespace at.dasz.DocumentManagement
 		public static event PropertyPostSetterHandler<at.dasz.DocumentManagement.File, string> OnName_PostSetter;
 
         public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnName_IsValid;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        // collection entry list property
+   		// Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.CollectionEntryListProperty
+		public IList<Zetbox.App.Base.Blob> Revisions
+		{
+			get
+			{
+				if (_Revisions == null)
+				{
+					_Revisions 
+						= new NHibernateBSideListWrapper<at.dasz.DocumentManagement.File, Zetbox.App.Base.Blob, at.dasz.DocumentManagement.File_has_Blob_RelationEntryNHibernateImpl>(
+							this, 
+							new ProjectedCollection<at.dasz.DocumentManagement.File_has_Blob_RelationEntryNHibernateImpl.File_has_Blob_RelationEntryProxy, at.dasz.DocumentManagement.File_has_Blob_RelationEntryNHibernateImpl>(
+                                () => this.Proxy.Revisions,
+                                p => (at.dasz.DocumentManagement.File_has_Blob_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (at.dasz.DocumentManagement.File_has_Blob_RelationEntryNHibernateImpl.File_has_Blob_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
+                    _Revisions.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Revisions", null, null); if(OnRevisions_PostSetter != null && IsAttached) OnRevisions_PostSetter(this); };
+                    if (Revisions_was_eagerLoaded) { Revisions_was_eagerLoaded = false; }
+				}
+				return (IList<Zetbox.App.Base.Blob>)_Revisions;
+			}
+		}
+
+		private NHibernateBSideListWrapper<at.dasz.DocumentManagement.File, Zetbox.App.Base.Blob, at.dasz.DocumentManagement.File_has_Blob_RelationEntryNHibernateImpl> _Revisions;
+		// ignored, but required for Serialization
+        private bool Revisions_was_eagerLoaded = false;
+
+        public Zetbox.API.Async.ZbTask TriggerFetchRevisionsAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<IList<Zetbox.App.Base.Blob>>(this.Revisions);
+        }
+
+public static event PropertyListChangedHandler<at.dasz.DocumentManagement.File> OnRevisions_PostSetter;
+
+        public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnRevisions_IsValid;
 
         /// <summary>
         /// 
@@ -1135,6 +1331,8 @@ namespace at.dasz.DocumentManagement
             me.ChangedOn = other.ChangedOn;
             me.CreatedOn = other.CreatedOn;
             me.ExportGuid = other.ExportGuid;
+            me.IsFileReadonly = other.IsFileReadonly;
+            me.KeepRevisions = other.KeepRevisions;
             me.Name = other.Name;
             me.Tags = other.Tags;
             if (me.AttachedTo == null && other.AttachedTo != null) {
@@ -1207,6 +1405,8 @@ namespace at.dasz.DocumentManagement
                 case "CreatedOn":
                 case "Excerpt":
                 case "ExportGuid":
+                case "IsFileReadonly":
+                case "KeepRevisions":
                 case "Name":
                 case "Tags":
                     AuditPropertyChange(property, oldValue, newValue);
@@ -1219,6 +1419,7 @@ namespace at.dasz.DocumentManagement
             switch (property)
             {
                 case "Excerpt":
+                case "Revisions":
                     return false;
                 default:
                     return base.ShouldSetModified(property);
@@ -1238,6 +1439,8 @@ namespace at.dasz.DocumentManagement
                 return TriggerFetchCreatedByAsync();
             case "Excerpt":
                 return TriggerFetchExcerptAsync();
+            case "Revisions":
+                return TriggerFetchRevisionsAsync();
             default:
                 return base.TriggerFetch(propName);
             }
@@ -1361,6 +1564,24 @@ namespace at.dasz.DocumentManagement
                         (obj, val) => obj.ExportGuid = val,
 						obj => OnExportGuid_IsValid), 
                     // else
+                    new PropertyDescriptorNHibernateImpl<File, bool>(
+                        lazyCtx,
+                        new Guid("6942c3e7-ba7b-4e9c-b7fb-644c5aa1c73f"),
+                        "IsFileReadonly",
+                        null,
+                        obj => obj.IsFileReadonly,
+                        (obj, val) => obj.IsFileReadonly = val,
+						obj => OnIsFileReadonly_IsValid), 
+                    // else
+                    new PropertyDescriptorNHibernateImpl<File, bool>(
+                        lazyCtx,
+                        new Guid("0b0775d4-9ded-472d-aac5-d1cd63b97237"),
+                        "KeepRevisions",
+                        null,
+                        obj => obj.KeepRevisions,
+                        (obj, val) => obj.KeepRevisions = val,
+						obj => OnKeepRevisions_IsValid), 
+                    // else
                     new PropertyDescriptorNHibernateImpl<File, string>(
                         lazyCtx,
                         new Guid("1c5f2bea-9915-4634-8ff9-5fd6f0871704"),
@@ -1369,6 +1590,15 @@ namespace at.dasz.DocumentManagement
                         obj => obj.Name,
                         (obj, val) => obj.Name = val,
 						obj => OnName_IsValid), 
+                    // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
+                    new PropertyDescriptorNHibernateImpl<File, IList<Zetbox.App.Base.Blob>>(
+                        lazyCtx,
+                        new Guid("ec544fe0-8189-4bb2-a3d1-3cb61d815aa5"),
+                        "Revisions",
+                        null,
+                        obj => obj.Revisions,
+                        null, // lists are read-only properties
+                        obj => OnRevisions_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<File, string>(
                         lazyCtx,
@@ -1428,6 +1658,8 @@ namespace at.dasz.DocumentManagement
             FetchChangedOnOrDefault();
             FetchCreatedOnOrDefault();
             FetchExportGuidOrDefault();
+            FetchIsFileReadonlyOrDefault();
+            FetchKeepRevisionsOrDefault();
             base.NotifyPreSave();
             if (OnNotifyPreSave_File != null) OnNotifyPreSave_File(this);
         }
@@ -1483,6 +1715,7 @@ namespace at.dasz.DocumentManagement
             }
             // should fetch && remember parent for DocumentTestObject_has_File_RelationEntry
 
+            Revisions.Clear();
             Blob = null;
             ChangedBy = null;
             CreatedBy = null;
@@ -1497,6 +1730,7 @@ namespace at.dasz.DocumentManagement
         {
             public FileProxy()
             {
+                Revisions = new Collection<at.dasz.DocumentManagement.File_has_Blob_RelationEntryNHibernateImpl.File_has_Blob_RelationEntryProxy>();
             }
 
             public virtual int ID { get; set; }
@@ -1516,11 +1750,19 @@ namespace at.dasz.DocumentManagement
 
             public virtual DateTime CreatedOn { get; set; }
 
+            public virtual int? Document_pos { get; set; }
+
             public virtual at.dasz.DocumentManagement.ExcerptNHibernateImpl.ExcerptProxy Excerpt { get; set; }
 
             public virtual Guid ExportGuid { get; set; }
 
+            public virtual bool IsFileReadonly { get; set; }
+
+            public virtual bool KeepRevisions { get; set; }
+
             public virtual string Name { get; set; }
+
+            public virtual ICollection<at.dasz.DocumentManagement.File_has_Blob_RelationEntryNHibernateImpl.File_has_Blob_RelationEntryProxy> Revisions { get; set; }
 
             public virtual string Tags { get; set; }
 
@@ -1553,6 +1795,14 @@ namespace at.dasz.DocumentManagement
             if (this._isExportGuidSet) {
                 binStream.Write(this.Proxy.ExportGuid);
             }
+            binStream.Write(this._isIsFileReadonlySet);
+            if (this._isIsFileReadonlySet) {
+                binStream.Write(this.Proxy.IsFileReadonly);
+            }
+            binStream.Write(this._isKeepRevisionsSet);
+            if (this._isKeepRevisionsSet) {
+                binStream.Write(this.Proxy.KeepRevisions);
+            }
             binStream.Write(this.Proxy.Name);
             binStream.Write(this.Proxy.Tags);
         }
@@ -1584,6 +1834,14 @@ namespace at.dasz.DocumentManagement
             if (this._isExportGuidSet) {
                 this.Proxy.ExportGuid = binStream.ReadGuid();
             }
+            this._isIsFileReadonlySet = binStream.ReadBoolean();
+            if (this._isIsFileReadonlySet) {
+                this.Proxy.IsFileReadonly = binStream.ReadBoolean();
+            }
+            this._isKeepRevisionsSet = binStream.ReadBoolean();
+            if (this._isKeepRevisionsSet) {
+                this.Proxy.KeepRevisions = binStream.ReadBoolean();
+            }
             this.Proxy.Name = binStream.ReadString();
             this.Proxy.Tags = binStream.ReadString();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
@@ -1605,6 +1863,10 @@ namespace at.dasz.DocumentManagement
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this.Proxy.ChangedOn, xml, "ChangedOn", "at.dasz.DocumentManagement");
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "at.dasz.DocumentManagement");
+            System.Diagnostics.Debug.Assert(this._isIsFileReadonlySet, "Exported objects need to have all default values evaluated");
+            if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this.Proxy.IsFileReadonly, xml, "IsFileReadonly", "at.dasz.DocumentManagement");
+            System.Diagnostics.Debug.Assert(this._isKeepRevisionsSet, "Exported objects need to have all default values evaluated");
+            if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this.Proxy.KeepRevisions, xml, "KeepRevisions", "at.dasz.DocumentManagement");
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this.Proxy.Name, xml, "Name", "at.dasz.DocumentManagement");
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this.Proxy.Tags, xml, "Tags", "at.dasz.DocumentManagement");
         }
@@ -1634,6 +1896,16 @@ namespace at.dasz.DocumentManagement
                 // Import must have default value set
                 this.Proxy.ExportGuid = XmlStreamer.ReadGuid(xml);
                 this._isExportGuidSet = true;
+                break;
+            case "at.dasz.DocumentManagement|IsFileReadonly":
+                // Import must have default value set
+                this.Proxy.IsFileReadonly = XmlStreamer.ReadBoolean(xml);
+                this._isIsFileReadonlySet = true;
+                break;
+            case "at.dasz.DocumentManagement|KeepRevisions":
+                // Import must have default value set
+                this.Proxy.KeepRevisions = XmlStreamer.ReadBoolean(xml);
+                this._isKeepRevisionsSet = true;
                 break;
             case "at.dasz.DocumentManagement|Name":
                 this.Proxy.Name = XmlStreamer.ReadString(xml);

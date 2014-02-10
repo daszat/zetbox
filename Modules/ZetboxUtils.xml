@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-12-06T11:58:03Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2014-02-10T15:54:11Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -4905,10 +4905,10 @@ public static void ObjectIsValid(Excerpt obj, ObjectIsValidEventArgs e)
     <ZetboxBase:TableName>Excerpts</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6">
-    <ZetboxBase:ChangedOn>2013-10-11T11:10:49.923482Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2014-02-10T14:44:36.135911Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-03-10T22:14:04Z</ZetboxBase:CreatedOn>
     <GUI:DefaultIcon>267ce6ec-7982-46d3-b1bc-2e1ea6adf815</GUI:DefaultIcon>
-    <ZetboxBase:Description>Abstract Baseclass for File Types</ZetboxBase:Description>
+    <ZetboxBase:Description>A file. Can be readonly, can have revisions.</ZetboxBase:Description>
     <ZetboxBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</ZetboxBase:Module>
     <ZetboxBase:Name>File</ZetboxBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
@@ -4946,7 +4946,7 @@ public static void ObjectIsValid(File obj, ObjectIsValidEventArgs e)
 
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>f580a1b4-26c0-46e8-a268-3b3d4b4f15a7</GUI:DefaultViewModelDescriptor>
-    <ZetboxBase:IsAbstract>true</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>Files</ZetboxBase:TableName>
@@ -5109,41 +5109,6 @@ public static void ObjectIsValid(StaticFile obj, ObjectIsValidEventArgs e)
     <ZetboxBase:A>740f4a8b-32fa-48ba-84d9-6792a755d5c9</ZetboxBase:A>
     <ZetboxBase:B>4ae6616a-eca3-47a5-b502-8e3c3913c2f0</ZetboxBase:B>
   </ZetboxBase:DataType_implements_Interface_RelationEntry>
-  <ZetboxBase:ObjectReferenceProperty ExportGuid="ec544fe0-8189-4bb2-a3d1-3cb61d815aa5">
-    <ZetboxBase:CategoryTags>Revisions</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CodeTemplate>[Invocation]
-public static void get_Revisions(Document obj, PropertyGetterEventArgs&lt;IList&lt;Zetbox.App.Base.Blob&gt;&gt; e)
-{
-}
-
-[Invocation]
-public static void preSet_Revisions(Document obj, PropertyPreSetterEventArgs&lt;IList&lt;Zetbox.App.Base.Blob&gt;&gt; e)
-{
-}
-
-[Invocation]
-public static void postSet_Revisions(Document obj, PropertyPostSetterEventArgs&lt;IList&lt;Zetbox.App.Base.Blob&gt;&gt; e)
-{
-}
-
-[Invocation]
-public static void isValid_Revisions(Document obj, PropertyIsValidEventArgs e)
-{
-	e.IsValid = obj.Revisions == ...;
-	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
-}
-
-</ZetboxBase:CodeTemplate>
-    <ZetboxBase:CreatedOn>2010-03-12T23:22:54Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</ZetboxBase:Module>
-    <ZetboxBase:Name>Revisions</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>3f496de2-bef4-4059-8c3e-c25db38bd3c2</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>0</ZetboxBase:Properties_pos>
-    <GUI:ValueModelDescriptor>9fce01fe-fd6d-4e21-8b55-08d5e38aea36</GUI:ValueModelDescriptor>
-    <ZetboxBase:EagerLoading>false</ZetboxBase:EagerLoading>
-    <ZetboxBase:RelationEnd>ee45c25a-b5ec-4dde-bfe3-74f95bfad70c</ZetboxBase:RelationEnd>
-  </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="f36d87fe-bd2f-472c-a716-46667ab1e0bd">
     <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-05-07T14:22:09.921855Z</ZetboxBase:ChangedOn>
@@ -5219,7 +5184,7 @@ public static void isValid_Text(Excerpt obj, PropertyIsValidEventArgs e)
   </ZetboxBase:StringProperty>
   <ZetboxBase:CompoundObjectProperty ExportGuid="98c240a8-e01c-4567-865d-3d83848c8eb1">
     <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2013-07-24T10:58:19.595663Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2014-02-10T14:48:41.122911Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_AttachedTo(File obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.AnyReference&gt; e)
 {
@@ -5249,7 +5214,7 @@ public static void isValid_AttachedTo(File obj, PropertyIsValidEventArgs e)
     <ZetboxBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</ZetboxBase:Module>
     <ZetboxBase:Name>AttachedTo</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>2</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>4</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>1484d360-90b0-443d-8134-53fa0db8fa18</GUI:ValueModelDescriptor>
     <ZetboxBase:CompoundObjectDefinition>fa366f50-f384-4a18-abcd-8b9fef3b41fa</ZetboxBase:CompoundObjectDefinition>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
@@ -5257,7 +5222,7 @@ public static void isValid_AttachedTo(File obj, PropertyIsValidEventArgs e)
   </ZetboxBase:CompoundObjectProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="ef5addda-340f-4a87-83c9-3ee419519343">
     <ZetboxBase:CategoryTags>Main</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2013-07-24T10:58:19.595663Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2014-02-10T14:48:41.122911Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_Blob(File obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Blob&gt; e)
 {
@@ -5286,14 +5251,14 @@ public static void isValid_Blob(File obj, PropertyIsValidEventArgs e)
     <ZetboxBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</ZetboxBase:Module>
     <ZetboxBase:Name>Blob</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>4</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>10</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <ZetboxBase:EagerLoading>true</ZetboxBase:EagerLoading>
     <ZetboxBase:RelationEnd>803db64f-de2c-4a61-8667-d90a37a25f51</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="c22516f3-b897-4827-a025-27d1515aadcd">
     <ZetboxBase:CategoryTags>Summary, Main, Meta</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2013-07-24T10:58:19.595663Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2014-02-10T14:48:41.122911Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(File obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -5322,14 +5287,14 @@ public static void isValid_ChangedBy(File obj, PropertyIsValidEventArgs e)
     <ZetboxBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</ZetboxBase:Module>
     <ZetboxBase:Name>ChangedBy</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>6</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>17</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <ZetboxBase:EagerLoading>false</ZetboxBase:EagerLoading>
     <ZetboxBase:RelationEnd>39b7e8da-46a9-4f37-b5a4-112f5d52bc06</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="c144678d-632d-4a83-8041-280d674f4453">
     <ZetboxBase:CategoryTags>Summary, Main, Meta</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2013-07-24T10:58:19.595663Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2014-02-10T14:48:41.122911Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(File obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -5359,7 +5324,7 @@ public static void isValid_ChangedOn(File obj, PropertyIsValidEventArgs e)
     <ZetboxBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</ZetboxBase:Module>
     <ZetboxBase:Name>ChangedOn</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>5</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>14</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>fc74b434-3801-4e4a-ab67-e65a9e014005</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -5367,7 +5332,7 @@ public static void isValid_ChangedOn(File obj, PropertyIsValidEventArgs e)
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="dc8da15a-a432-43fd-b93f-9b3530ce3144">
     <ZetboxBase:CategoryTags>Summary, Main, Meta</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2013-07-24T10:58:19.595663Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2014-02-10T14:48:41.122911Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(File obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -5396,14 +5361,14 @@ public static void isValid_CreatedBy(File obj, PropertyIsValidEventArgs e)
     <ZetboxBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</ZetboxBase:Module>
     <ZetboxBase:Name>CreatedBy</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>8</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>23</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <ZetboxBase:EagerLoading>false</ZetboxBase:EagerLoading>
     <ZetboxBase:RelationEnd>560e61b8-2ad6-453d-8ca9-464c489062da</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="e1892507-375b-4b52-ab20-16095dfc3514">
     <ZetboxBase:CategoryTags>Summary, Main, Meta</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2013-07-24T10:58:19.595663Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2014-02-10T14:48:41.122911Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(File obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -5433,7 +5398,7 @@ public static void isValid_CreatedOn(File obj, PropertyIsValidEventArgs e)
     <ZetboxBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</ZetboxBase:Module>
     <ZetboxBase:Name>CreatedOn</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>7</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>20</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>fc74b434-3801-4e4a-ab67-e65a9e014005</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -5441,7 +5406,7 @@ public static void isValid_CreatedOn(File obj, PropertyIsValidEventArgs e)
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="76e29530-9252-4c2a-bae4-503f3b6dcd29">
     <ZetboxBase:CategoryTags>Main</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2013-07-24T10:58:19.595663Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2014-02-10T14:48:41.122911Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_Excerpt(File obj, PropertyGetterEventArgs&lt;at.dasz.DocumentManagement.Excerpt&gt; e)
 {
@@ -5469,14 +5434,14 @@ public static void isValid_Excerpt(File obj, PropertyIsValidEventArgs e)
     <ZetboxBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</ZetboxBase:Module>
     <ZetboxBase:Name>Excerpt</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>3</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>8</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <ZetboxBase:EagerLoading>false</ZetboxBase:EagerLoading>
     <ZetboxBase:RelationEnd>e864f999-ea11-484a-9fea-d71f1b73802c</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:GuidProperty ExportGuid="91566b41-879d-4e72-b48b-9677cc156649">
     <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2013-07-24T10:58:19.595663Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2014-02-10T14:48:41.122911Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(File obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -5506,12 +5471,90 @@ public static void isValid_ExportGuid(File obj, PropertyIsValidEventArgs e)
     <ZetboxBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</ZetboxBase:Module>
     <ZetboxBase:Name>ExportGuid</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>9</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>26</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>2b6fb70f-a382-4057-a139-cc33333d619d</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:GuidProperty>
+  <ZetboxBase:BoolProperty ExportGuid="6942c3e7-ba7b-4e9c-b7fb-644c5aa1c73f">
+    <ZetboxBase:CategoryTags>Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2014-02-10T14:54:11.557911Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_IsFileReadonly(File obj, PropertyGetterEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_IsFileReadonly(File obj, PropertyPreSetterEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_IsFileReadonly(File obj, PropertyPostSetterEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_IsFileReadonly(File obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.IsFileReadonly == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2014-02-10T14:44:36.135911Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultValue>a96ff875-e9a9-4b3b-a50b-b29487665303</ZetboxBase:DefaultValue>
+    <ZetboxBase:Description>This file cannot be changed when the flas is set.</ZetboxBase:Description>
+    <ZetboxBase:Label>Is readonly</ZetboxBase:Label>
+    <ZetboxBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</ZetboxBase:Module>
+    <ZetboxBase:Name>IsFileReadonly</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>6</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>09d1f453-d0d9-429e-88e7-e84b33de7c2e</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:BoolProperty>
+  <ZetboxBase:BoolProperty ExportGuid="0b0775d4-9ded-472d-aac5-d1cd63b97237">
+    <ZetboxBase:CategoryTags>Revisions</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2014-02-10T14:48:41.122911Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_KeepRevisions(File obj, PropertyGetterEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_KeepRevisions(File obj, PropertyPreSetterEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_KeepRevisions(File obj, PropertyPostSetterEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_KeepRevisions(File obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.KeepRevisions == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2014-02-10T14:46:00.991911Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultValue>62ffdd2f-1c34-40cd-a211-1378b28cd027</ZetboxBase:DefaultValue>
+    <ZetboxBase:Description>Keeps revisions of this file.</ZetboxBase:Description>
+    <ZetboxBase:Label>Keep revisions</ZetboxBase:Label>
+    <ZetboxBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</ZetboxBase:Module>
+    <ZetboxBase:Name>KeepRevisions</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>24</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>09d1f453-d0d9-429e-88e7-e84b33de7c2e</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:BoolProperty>
   <ZetboxBase:StringProperty ExportGuid="1c5f2bea-9915-4634-8ff9-5fd6f0871704">
     <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-05-07T14:21:30.975627Z</ZetboxBase:ChangedOn>
@@ -5551,9 +5594,44 @@ public static void isValid_Name(File obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
+  <ZetboxBase:ObjectReferenceProperty ExportGuid="ec544fe0-8189-4bb2-a3d1-3cb61d815aa5">
+    <ZetboxBase:CategoryTags>Revisions</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2014-02-10T14:48:41.122911Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_Revisions(File obj, PropertyGetterEventArgs&lt;IList&lt;Zetbox.App.Base.Blob&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Revisions(File obj, PropertyPreSetterEventArgs&lt;IList&lt;Zetbox.App.Base.Blob&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Revisions(File obj, PropertyPostSetterEventArgs&lt;IList&lt;Zetbox.App.Base.Blob&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Revisions(File obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Revisions == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2010-03-12T23:22:54Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</ZetboxBase:Module>
+    <ZetboxBase:Name>Revisions</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>25</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>9fce01fe-fd6d-4e21-8b55-08d5e38aea36</GUI:ValueModelDescriptor>
+    <ZetboxBase:EagerLoading>false</ZetboxBase:EagerLoading>
+    <ZetboxBase:RelationEnd>ee45c25a-b5ec-4dde-bfe3-74f95bfad70c</ZetboxBase:RelationEnd>
+  </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:StringProperty ExportGuid="b4f41179-44f8-4235-b272-48f3f1452da7">
     <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2013-07-23T07:13:49.461954Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2014-02-10T14:48:41.122911Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_Tags(File obj, PropertyGetterEventArgs&lt;string&gt; e)
 {
@@ -5582,7 +5660,7 @@ public static void isValid_Tags(File obj, PropertyIsValidEventArgs e)
     <ZetboxBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</ZetboxBase:Module>
     <ZetboxBase:Name>Tags</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>1</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>2</ZetboxBase:Properties_pos>
     <GUI:RequestedWidth>50</GUI:RequestedWidth>
     <GUI:ValueModelDescriptor>e54ea765-7720-4633-aa17-f67f9cfafa9f</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
@@ -5987,16 +6065,6 @@ public static void isValid_PickupDirectory(FileImportConfiguration obj, Property
     <ZetboxBase:RoleName>Revisions</ZetboxBase:RoleName>
     <ZetboxBase:Type>afd99ba6-f150-4ed4-ad1f-4ef57b14728b</ZetboxBase:Type>
   </ZetboxBase:RelationEnd>
-  <ZetboxBase:RelationEnd ExportGuid="ee45c25a-b5ec-4dde-bfe3-74f95bfad70c">
-    <ZetboxBase:AParent>69d27812-e981-443b-a94b-dfe1a95f3aad</ZetboxBase:AParent>
-    <ZetboxBase:ChangedOn>2011-08-06T04:30:49.847158Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2010-03-12T23:22:54Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
-    <ZetboxBase:Multiplicity>3</ZetboxBase:Multiplicity>
-    <ZetboxBase:Navigator>ec544fe0-8189-4bb2-a3d1-3cb61d815aa5</ZetboxBase:Navigator>
-    <ZetboxBase:RoleName>Document</ZetboxBase:RoleName>
-    <ZetboxBase:Type>3f496de2-bef4-4059-8c3e-c25db38bd3c2</ZetboxBase:Type>
-  </ZetboxBase:RelationEnd>
   <ZetboxBase:RelationEnd ExportGuid="e89c67ad-475e-4d7e-8d72-8a4938951596">
     <ZetboxBase:BParent>a9c9f3bf-d8c4-48ea-9244-b5bccbb10f56</ZetboxBase:BParent>
     <ZetboxBase:ChangedOn>2013-05-07T14:20:16.674378Z</ZetboxBase:ChangedOn>
@@ -6006,6 +6074,16 @@ public static void isValid_PickupDirectory(FileImportConfiguration obj, Property
     <ZetboxBase:Navigator>f36d87fe-bd2f-472c-a716-46667ab1e0bd</ZetboxBase:Navigator>
     <ZetboxBase:RoleName>Excerpt</ZetboxBase:RoleName>
     <ZetboxBase:Type>51516bc2-b1b3-41cd-a84a-b04877ee6c14</ZetboxBase:Type>
+  </ZetboxBase:RelationEnd>
+  <ZetboxBase:RelationEnd ExportGuid="ee45c25a-b5ec-4dde-bfe3-74f95bfad70c">
+    <ZetboxBase:AParent>69d27812-e981-443b-a94b-dfe1a95f3aad</ZetboxBase:AParent>
+    <ZetboxBase:ChangedOn>2014-02-10T14:47:07.111911Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2010-03-12T23:22:54Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:Multiplicity>3</ZetboxBase:Multiplicity>
+    <ZetboxBase:Navigator>ec544fe0-8189-4bb2-a3d1-3cb61d815aa5</ZetboxBase:Navigator>
+    <ZetboxBase:RoleName>Document</ZetboxBase:RoleName>
+    <ZetboxBase:Type>8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6</ZetboxBase:Type>
   </ZetboxBase:RelationEnd>
   <ZetboxBase:RelationEnd ExportGuid="39b7e8da-46a9-4f37-b5a4-112f5d52bc06">
     <ZetboxBase:AParent>2ff68641-0051-4f2e-a8ee-5f50b9d507f3</ZetboxBase:AParent>
@@ -6178,6 +6256,16 @@ public static void isValid_PickupDirectory(FileImportConfiguration obj, Property
     <ZetboxBase:ConstrainedProperty>91566b41-879d-4e72-b48b-9677cc156649</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2010-03-10T22:14:05Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="90c3c954-862f-43da-9a1d-b05a52a8fdda">
+    <ZetboxBase:ChangedOn>2014-02-10T14:44:36.135911Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>6942c3e7-ba7b-4e9c-b7fb-644c5aa1c73f</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2014-02-10T14:44:36.135911Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="bea66107-0979-4ba9-a478-c8a5d3faf82f">
+    <ZetboxBase:ChangedOn>2014-02-10T14:46:00.991911Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>0b0775d4-9ded-472d-aac5-d1cd63b97237</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2014-02-10T14:46:00.991911Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
   <ZetboxBase:StringRangeConstraint ExportGuid="2fc7ccd7-7ac8-43e6-8f24-cd386955af41">
     <ZetboxBase:ChangedOn>2013-05-07T14:21:30.975627Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>1c5f2bea-9915-4634-8ff9-5fd6f0871704</ZetboxBase:ConstrainedProperty>
@@ -6287,6 +6375,18 @@ public static void isValid_PickupDirectory(FileImportConfiguration obj, Property
     <ZetboxBase:CreatedOn>2010-03-10T22:14:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Property>91566b41-879d-4e72-b48b-9677cc156649</ZetboxBase:Property>
   </ZetboxBase:NewGuidDefaultValue>
+  <ZetboxBase:BoolDefaultValue ExportGuid="a96ff875-e9a9-4b3b-a50b-b29487665303">
+    <ZetboxBase:ChangedOn>2014-02-10T14:44:36.135911Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2014-02-10T14:44:36.135911Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Property>6942c3e7-ba7b-4e9c-b7fb-644c5aa1c73f</ZetboxBase:Property>
+    <ZetboxBase:BoolValue>false</ZetboxBase:BoolValue>
+  </ZetboxBase:BoolDefaultValue>
+  <ZetboxBase:BoolDefaultValue ExportGuid="62ffdd2f-1c34-40cd-a211-1378b28cd027">
+    <ZetboxBase:ChangedOn>2014-02-10T14:46:00.991911Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2014-02-10T14:46:00.991911Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Property>0b0775d4-9ded-472d-aac5-d1cd63b97237</ZetboxBase:Property>
+    <ZetboxBase:BoolValue>false</ZetboxBase:BoolValue>
+  </ZetboxBase:BoolDefaultValue>
   <ZetboxBase:CurrentDateTimeDefaultValue ExportGuid="c53655e0-0413-473f-9d13-a94a93b14e6b">
     <ZetboxBase:ChangedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-10-29T10:17:08.288704Z</ZetboxBase:CreatedOn>

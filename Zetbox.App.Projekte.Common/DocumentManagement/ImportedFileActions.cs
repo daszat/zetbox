@@ -26,6 +26,12 @@ namespace at.dasz.DocumentManagement
     public static class ImportedFileActions
     {
         [Invocation]
+        public static void NotifyCreated(at.dasz.DocumentManagement.ImportedFile obj)
+        {
+            obj.IsFileReadonly = true;
+        }
+
+        [Invocation]
         public static void HandleBlobChange(ImportedFile obj, MethodReturnEventArgs<Zetbox.App.Base.Blob> e, Zetbox.App.Base.Blob oldBlob, Zetbox.App.Base.Blob newBlob)
         {
             if (!obj.TransientState.ContainsKey(FileActions.DELETE_KEY) && oldBlob != null && newBlob != oldBlob)

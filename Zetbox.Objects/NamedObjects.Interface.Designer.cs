@@ -44,13 +44,6 @@ namespace Zetbox {
                             {
                                 get { return new TypedGuid<global::Zetbox.App.Base.DataType>("5aaabfe9-081d-445d-a543-53e0253feeb8"); }
                             }
-                            public static class Document_Properties
-                            {
-                                public static TypedGuid<global::Zetbox.App.Base.Property> Revisions
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("ec544fe0-8189-4bb2-a3d1-3cb61d815aa5"); }
-                                }
-                            }
                             public static class Excerpt_Properties
                             {
                                 public static TypedGuid<global::Zetbox.App.Base.Property> File
@@ -115,9 +108,21 @@ namespace Zetbox {
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("91566b41-879d-4e72-b48b-9677cc156649"); }
                                 }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> IsFileReadonly
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("6942c3e7-ba7b-4e9c-b7fb-644c5aa1c73f"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> KeepRevisions
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("0b0775d4-9ded-472d-aac5-d1cd63b97237"); }
+                                }
                                 public static TypedGuid<global::Zetbox.App.Base.Property> Name
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("1c5f2bea-9915-4634-8ff9-5fd6f0871704"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> Revisions
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("ec544fe0-8189-4bb2-a3d1-3cb61d815aa5"); }
                                 }
                                 public static TypedGuid<global::Zetbox.App.Base.Property> Tags
                                 {

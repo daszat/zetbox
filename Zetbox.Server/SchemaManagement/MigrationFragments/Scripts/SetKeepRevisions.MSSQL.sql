@@ -1,0 +1,1 @@
+﻿update doc.[Files] set [KeepRevisions] = 1 where exists (select * from doc.[Documents] s where s.[ID] = doc.[Files].[ID])

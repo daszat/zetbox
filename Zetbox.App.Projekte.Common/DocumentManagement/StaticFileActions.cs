@@ -25,6 +25,12 @@ namespace at.dasz.DocumentManagement
     public static class StaticFileActions
     {
         [Invocation]
+        public static void NotifyCreated(at.dasz.DocumentManagement.StaticFile obj)
+        {
+            obj.IsFileReadonly = true;
+        }
+
+        [Invocation]
         public static void HandleBlobChange(StaticFile obj, MethodReturnEventArgs<Blob> e, Blob oldBlob, Blob newBlob)
         {
             if (!obj.TransientState.ContainsKey(FileActions.DELETE_KEY) && oldBlob != null && newBlob != oldBlob)

@@ -41,76 +41,6 @@ namespace at.dasz.DocumentManagement
         }
 
         /// <summary>
-        /// 
-        /// </summary>
-    /*
-    Relation: FK_Document_has_Revisions
-    A: ZeroOrMore Document as Document
-    B: ZeroOrMore Blob as Revisions
-    Preferred Storage: Separate
-    */
-        // collection reference property
-        // Zetbox.DalProvider.Ef.Generator.Templates.Properties.CollectionEntryListProperty
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public IList<Zetbox.App.Base.Blob> Revisions
-        {
-            get
-            {
-                if (_Revisions == null)
-                {
-                    _Revisions = new BSideListWrapper<at.dasz.DocumentManagement.Document, Zetbox.App.Base.Blob, at.dasz.DocumentManagement.Document_has_Blob_RelationEntryEfImpl, EntityCollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryEfImpl>>(
-                            this,
-                            RevisionsImpl);
-                }
-                return _Revisions;
-            }
-        }
-        
-        [EdmRelationshipNavigationProperty("Model", "FK_Document_has_Revisions_A", "CollectionEntry")]
-        public EntityCollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryEfImpl> RevisionsImpl
-        {
-            get
-            {
-                return GetRevisionsImplCollection();
-            }
-        }
-
-        private EntityCollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryEfImpl> _RevisionsImplEntityCollection;
-        internal EntityCollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryEfImpl> GetRevisionsImplCollection()
-        {
-            if (_RevisionsImplEntityCollection == null)
-            {
-                _RevisionsImplEntityCollection
-                    = ((IEntityWithRelationships)(this)).RelationshipManager
-                        .GetRelatedCollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryEfImpl>(
-                            "Model.FK_Document_has_Revisions_A",
-                            "CollectionEntry");
-                // the EntityCollection has to be loaded before attaching the AssociationChanged event
-                // because the event is triggered while relation entries are loaded from the database
-                // although that does not require notification of the business logic.
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !_RevisionsImplEntityCollection.IsLoaded)
-                {
-                    _RevisionsImplEntityCollection.Load();
-                }
-                _RevisionsImplEntityCollection.AssociationChanged += (s, e) => { this.NotifyPropertyChanged("Revisions", null, null); if(OnRevisions_PostSetter != null && IsAttached) OnRevisions_PostSetter(this); };
-            }
-            return _RevisionsImplEntityCollection;
-        }
-        private BSideListWrapper<at.dasz.DocumentManagement.Document, Zetbox.App.Base.Blob, at.dasz.DocumentManagement.Document_has_Blob_RelationEntryEfImpl, EntityCollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryEfImpl>> _Revisions;
-
-        public Zetbox.API.Async.ZbTask TriggerFetchRevisionsAsync()
-        {
-            return new Zetbox.API.Async.ZbTask<IList<Zetbox.App.Base.Blob>>(this.Revisions);
-        }
-
-public static event PropertyListChangedHandler<at.dasz.DocumentManagement.Document> OnRevisions_PostSetter;
-
-        public static event PropertyIsValidHandler<at.dasz.DocumentManagement.Document> OnRevisions_IsValid;
-
-        /// <summary>
         /// Creates an excerpt from the current file
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
@@ -378,25 +308,12 @@ public static event PropertyListChangedHandler<at.dasz.DocumentManagement.Docume
         }
         #region Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
-
-        protected override bool ShouldSetModified(string property)
-        {
-            switch (property)
-            {
-                case "Revisions":
-                    return false;
-                default:
-                    return base.ShouldSetModified(property);
-            }
-        }
         #endregion // Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
         {
             switch(propName)
             {
-            case "Revisions":
-                return TriggerFetchRevisionsAsync();
             default:
                 return base.TriggerFetch(propName);
             }
@@ -413,38 +330,6 @@ public static event PropertyListChangedHandler<at.dasz.DocumentManagement.Docume
             // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
-        private static readonly object _propertiesLock = new object();
-        private static System.ComponentModel.PropertyDescriptor[] _properties;
-
-        private void _InitializePropertyDescriptors(Func<IFrozenContext> lazyCtx)
-        {
-            if (_properties != null) return;
-            lock (_propertiesLock)
-            {
-                // recheck for a lost race after aquiring the lock
-                if (_properties != null) return;
-
-                _properties = new System.ComponentModel.PropertyDescriptor[] {
-                    // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorEfImpl<Document, IList<Zetbox.App.Base.Blob>>(
-                        lazyCtx,
-                        new Guid("ec544fe0-8189-4bb2-a3d1-3cb61d815aa5"),
-                        "Revisions",
-                        null,
-                        obj => obj.Revisions,
-                        null, // lists are read-only properties
-                        obj => OnRevisions_IsValid), 
-                    // position columns
-                };
-            }
-        }
-
-        protected override void CollectProperties(Func<IFrozenContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
-        {
-            base.CollectProperties(lazyCtx, props);
-            _InitializePropertyDescriptors(lazyCtx);
-            props.AddRange(_properties);
-        }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         #region Zetbox.Generator.Templates.ObjectClasses.DefaultMethods
 
@@ -507,7 +392,6 @@ public static event PropertyListChangedHandler<at.dasz.DocumentManagement.Docume
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Document != null) OnNotifyDeleting_Document(this);
-            Revisions.Clear();
         }
         public static event ObjectEventHandler<Document> OnNotifyDeleting_Document;
 

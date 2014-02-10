@@ -2609,29 +2609,29 @@ namespace Zetbox.App.Base
 namespace at.dasz.DocumentManagement
 {
     // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
-    [System.Diagnostics.DebuggerDisplay("Document_has_Blob_RelationEntryNHibernateImpl")]
-    public class Document_has_Blob_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<at.dasz.DocumentManagement.Document, at.dasz.DocumentManagement.DocumentNHibernateImpl, Zetbox.App.Base.Blob, Zetbox.App.Base.BlobNHibernateImpl>, Document_has_Blob_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
+    [System.Diagnostics.DebuggerDisplay("File_has_Blob_RelationEntryNHibernateImpl")]
+    public class File_has_Blob_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<at.dasz.DocumentManagement.File, at.dasz.DocumentManagement.FileNHibernateImpl, Zetbox.App.Base.Blob, Zetbox.App.Base.BlobNHibernateImpl>, File_has_Blob_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
-        public Document_has_Blob_RelationEntryNHibernateImpl()
+        public File_has_Blob_RelationEntryNHibernateImpl()
             : this(null)
         {
         }
 
         /// <summary>Create a new unattached instance</summary>
-        public Document_has_Blob_RelationEntryNHibernateImpl(Func<IFrozenContext> lazyCtx)
-            : this(lazyCtx, new Document_has_Blob_RelationEntryProxy())
+        public File_has_Blob_RelationEntryNHibernateImpl(Func<IFrozenContext> lazyCtx)
+            : this(lazyCtx, new File_has_Blob_RelationEntryProxy())
         {
         }
 
         /// <summary>Create a instance, wrapping the specified proxy</summary>
-        public Document_has_Blob_RelationEntryNHibernateImpl(Func<IFrozenContext> lazyCtx, Document_has_Blob_RelationEntryProxy proxy)
+        public File_has_Blob_RelationEntryNHibernateImpl(Func<IFrozenContext> lazyCtx, File_has_Blob_RelationEntryProxy proxy)
             : base(lazyCtx) // do not pass proxy to base data object
         {
             this.Proxy = proxy;
         }
 
         /// <summary>the NHibernate proxy of the represented entity</summary>
-        internal readonly Document_has_Blob_RelationEntryProxy Proxy;
+        internal readonly File_has_Blob_RelationEntryProxy Proxy;
 
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
         public Guid ExportGuid
@@ -2681,7 +2681,7 @@ namespace at.dasz.DocumentManagement
             set
             {
                 // settor will do checking for us
-                A = (at.dasz.DocumentManagement.Document)value;
+                A = (at.dasz.DocumentManagement.File)value;
             }
         }
 
@@ -2706,17 +2706,17 @@ namespace at.dasz.DocumentManagement
         /// </summary>
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=at.dasz.DocumentManagement.Document; moduleNamespace=at.dasz.DocumentManagement;
+        // referencedInterface=at.dasz.DocumentManagement.File; moduleNamespace=at.dasz.DocumentManagement;
         // will get inverse collection for notifications for Revisions
         // PositionStorage=A_pos;
         // Target exportable; does not call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public at.dasz.DocumentManagement.Document A
+        public at.dasz.DocumentManagement.File A
         {
             get
             {
-                at.dasz.DocumentManagement.DocumentNHibernateImpl __value = (at.dasz.DocumentManagement.DocumentNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                at.dasz.DocumentManagement.FileNHibernateImpl __value = (at.dasz.DocumentManagement.FileNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
 
 
                 return __value;
@@ -2734,8 +2734,8 @@ namespace at.dasz.DocumentManagement
                 }
 
                 // cache old value to remove inverse references later
-                var __oldValue = (at.dasz.DocumentManagement.DocumentNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
-                var __newValue = (at.dasz.DocumentManagement.DocumentNHibernateImpl)value;
+                var __oldValue = (at.dasz.DocumentManagement.FileNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                var __newValue = (at.dasz.DocumentManagement.FileNHibernateImpl)value;
 
                 // shortcut noop on objects
                 // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
@@ -2773,13 +2773,13 @@ namespace at.dasz.DocumentManagement
                 if (__oldValue != null)
                 {
                     // remove from old list
-                    (__oldValue.Revisions as IRelationListSync<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
+                    (__oldValue.Revisions as IRelationListSync<at.dasz.DocumentManagement.File_has_Blob_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
                 }
 
                 if (__newValue != null)
                 {
                     // add to new list
-                    (__newValue.Revisions as IRelationListSync<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
+                    (__newValue.Revisions as IRelationListSync<at.dasz.DocumentManagement.File_has_Blob_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
                 }
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
@@ -2796,7 +2796,7 @@ namespace at.dasz.DocumentManagement
 
     public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
     {
-        return new Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.Document>(this.A);
+        return new Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.File>(this.A);
     }
 
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
@@ -3032,14 +3032,14 @@ namespace at.dasz.DocumentManagement
 
         public override Type GetImplementedInterface()
         {
-            return typeof(Document_has_Blob_RelationEntry);
+            return typeof(File_has_Blob_RelationEntry);
         }
 
         public override void ApplyChangesFrom(IPersistenceObject obj)
         {
             base.ApplyChangesFrom(obj);
-            var other = (Document_has_Blob_RelationEntryNHibernateImpl)obj;
-            var me = (Document_has_Blob_RelationEntryNHibernateImpl)this;
+            var other = (File_has_Blob_RelationEntryNHibernateImpl)obj;
+            var me = (File_has_Blob_RelationEntryNHibernateImpl)this;
 
             me._fk_A = other._fk_A;
             me.AIndex = other.AIndex;
@@ -3055,10 +3055,10 @@ namespace at.dasz.DocumentManagement
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                this.A = ((at.dasz.DocumentManagement.DocumentNHibernateImpl)OurContext.FindPersistenceObject<at.dasz.DocumentManagement.Document>(_fk_guid_A.Value));
+                this.A = ((at.dasz.DocumentManagement.FileNHibernateImpl)OurContext.FindPersistenceObject<at.dasz.DocumentManagement.File>(_fk_guid_A.Value));
             else
             if (_fk_A.HasValue)
-                this.A = ((at.dasz.DocumentManagement.DocumentNHibernateImpl)OurContext.FindPersistenceObject<at.dasz.DocumentManagement.Document>(_fk_A.Value));
+                this.A = ((at.dasz.DocumentManagement.FileNHibernateImpl)OurContext.FindPersistenceObject<at.dasz.DocumentManagement.File>(_fk_A.Value));
             else
                 this.A = null;
 
@@ -3134,19 +3134,19 @@ namespace at.dasz.DocumentManagement
             this.B = null;
         }
 
-        public class Document_has_Blob_RelationEntryProxy
+        public class File_has_Blob_RelationEntryProxy
             : IProxyObject, ISortKey<int>
         {
-            public Document_has_Blob_RelationEntryProxy()
+            public File_has_Blob_RelationEntryProxy()
             {
             }
 
             public virtual int ID { get; set; }
 
-            public virtual Type ZetboxWrapper { get { return typeof(Document_has_Blob_RelationEntryNHibernateImpl); } }
-            public virtual Type ZetboxProxy { get { return typeof(Document_has_Blob_RelationEntryProxy); } }
+            public virtual Type ZetboxWrapper { get { return typeof(File_has_Blob_RelationEntryNHibernateImpl); } }
+            public virtual Type ZetboxProxy { get { return typeof(File_has_Blob_RelationEntryProxy); } }
 
-            public virtual at.dasz.DocumentManagement.DocumentNHibernateImpl.DocumentProxy A { get; set; }
+            public virtual at.dasz.DocumentManagement.FileNHibernateImpl.FileProxy A { get; set; }
 
             public virtual Zetbox.App.Base.BlobNHibernateImpl.BlobProxy B { get; set; }
 
