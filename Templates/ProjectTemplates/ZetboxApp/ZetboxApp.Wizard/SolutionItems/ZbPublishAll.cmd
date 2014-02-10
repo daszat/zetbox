@@ -19,6 +19,12 @@ cd bin\Debug
 Zetbox.Cli.exe %config% -fallback -generate -updatedeployedschema -repairschema
 IF ERRORLEVEL 1 GOTO FAIL
 
+Zetbox.Cli.exe %configs% -generate-resources=$safesolutionname$
+IF ERRORLEVEL 1 GOTO FAIL
+
+rem *********** Assets ***********
+xcopy /s /y ..\CodeGen\Assets\*.* ..\..\$safesolutionname$.Assets
+
 rem publish schema data for $safesolutionname$ project
 Zetbox.Cli.exe %config% -publish ..\..\Modules\$safesolutionname$.xml -ownermodules $safesolutionname$;$safesolutionname$.Config
 IF ERRORLEVEL 1 GOTO FAIL

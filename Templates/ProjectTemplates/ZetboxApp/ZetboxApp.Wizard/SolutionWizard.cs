@@ -231,6 +231,10 @@ namespace ZetboxApp.Wizard
                 {
                     allProjects["server"] = prj;
                 }
+                else if (prj.Name == ToProjectName("Assets"))
+                {
+                    allProjects["assets"] = prj;
+                }
             }
 
             foreach (Project prj in _solution.Projects)
@@ -238,6 +242,7 @@ namespace ZetboxApp.Wizard
                 VSLangProj.VSProject vsProj = (VSLangProj.VSProject)prj.Object;
                 if (prj.Name == ToProjectName("Common"))
                 {
+                    vsProj.References.AddProject(allProjects["assets"]).CopyLocal = false;
                 }
                 else if (prj.Name == ToProjectName("Client"))
                 {
