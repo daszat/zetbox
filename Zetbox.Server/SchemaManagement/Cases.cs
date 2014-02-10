@@ -2282,18 +2282,20 @@ namespace Zetbox.Server.SchemaManagement
             if (!PreMigration(ClassMigrationEventType.ChangeBase, savedObjClass, objClass))
                 return;
 
-            var assocName = Construct.InheritanceAssociationName(objClass.BaseObjectClass, objClass);
+            var newBaseClass = objClass.BaseObjectClass;
+            var assocName = Construct.InheritanceAssociationName(newBaseClass, objClass);
             var tblName = objClass.GetTableRef(db);
 
-            Log.InfoFormat("New ObjectClass Inheritance: {0} -> {1}: {2}", objClass.Name, objClass.BaseObjectClass.Name, assocName);
+            Log.InfoFormat("New ObjectClass Inheritance: {0} -> {1}: {2}", objClass.Name, newBaseClass.Name, assocName);
 
-            if (db.CheckTableContainsData(tblName))
+            var movedUp = IsParentOf(newBaseClass, savedObjClass);
+            if (!movedUp && db.CheckTableContainsData(tblName))
             {
-                Log.ErrorFormat("Table '{0}' contains data. Unable to add inheritence.", tblName);
+                Log.ErrorFormat("Table '{0}' contains data. Unable to add inheritance when the new basetable does not contain instances of the child class.", tblName);
                 return;
             }
 
-            db.CreateFKConstraint(tblName, objClass.BaseObjectClass.GetTableRef(db), "ID", assocName, false);
+            db.CreateFKConstraint(tblName, newBaseClass.GetTableRef(db), "ID", assocName, false);
 
             PostMigration(ClassMigrationEventType.ChangeBase, savedObjClass, objClass);
         }
