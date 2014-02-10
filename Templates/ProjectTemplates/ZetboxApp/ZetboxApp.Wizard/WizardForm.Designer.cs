@@ -41,15 +41,25 @@ namespace ZetboxApp.Wizard
             this.rbNH = new System.Windows.Forms.RadioButton();
             this.rbEF = new System.Windows.Forms.RadioButton();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtModuleName = new System.Windows.Forms.TextBox();
+            this.txtDescription = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtNamespace = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtSchemaName = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnNext
             // 
             this.btnNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNext.Location = new System.Drawing.Point(553, 343);
+            this.btnNext.Location = new System.Drawing.Point(553, 529);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(75, 23);
             this.btnNext.TabIndex = 0;
@@ -60,7 +70,7 @@ namespace ZetboxApp.Wizard
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Location = new System.Drawing.Point(472, 343);
+            this.btnCancel.Location = new System.Drawing.Point(472, 529);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 1;
@@ -78,7 +88,7 @@ namespace ZetboxApp.Wizard
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.rbPGSQL);
             this.groupBox1.Controls.Add(this.rbSQLServer);
-            this.groupBox1.Location = new System.Drawing.Point(12, 110);
+            this.groupBox1.Location = new System.Drawing.Point(12, 296);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(616, 147);
             this.groupBox1.TabIndex = 2;
@@ -126,7 +136,7 @@ namespace ZetboxApp.Wizard
             // rbPGSQL
             // 
             this.rbPGSQL.AutoSize = true;
-            this.rbPGSQL.Location = new System.Drawing.Point(6, 42);
+            this.rbPGSQL.Location = new System.Drawing.Point(9, 42);
             this.rbPGSQL.Name = "rbPGSQL";
             this.rbPGSQL.Size = new System.Drawing.Size(82, 17);
             this.rbPGSQL.TabIndex = 1;
@@ -138,7 +148,7 @@ namespace ZetboxApp.Wizard
             // 
             this.rbSQLServer.AutoSize = true;
             this.rbSQLServer.Checked = true;
-            this.rbSQLServer.Location = new System.Drawing.Point(6, 19);
+            this.rbSQLServer.Location = new System.Drawing.Point(9, 19);
             this.rbSQLServer.Name = "rbSQLServer";
             this.rbSQLServer.Size = new System.Drawing.Size(99, 17);
             this.rbSQLServer.TabIndex = 0;
@@ -154,7 +164,7 @@ namespace ZetboxApp.Wizard
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.rbNH);
             this.groupBox2.Controls.Add(this.rbEF);
-            this.groupBox2.Location = new System.Drawing.Point(12, 263);
+            this.groupBox2.Location = new System.Drawing.Point(12, 449);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(616, 74);
             this.groupBox2.TabIndex = 3;
@@ -193,12 +203,102 @@ namespace ZetboxApp.Wizard
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.txtSchemaName);
+            this.groupBox3.Controls.Add(this.label5);
+            this.groupBox3.Controls.Add(this.txtNamespace);
+            this.groupBox3.Controls.Add(this.label4);
+            this.groupBox3.Controls.Add(this.txtDescription);
+            this.groupBox3.Controls.Add(this.label3);
+            this.groupBox3.Controls.Add(this.txtModuleName);
+            this.groupBox3.Controls.Add(this.label2);
+            this.groupBox3.Location = new System.Drawing.Point(12, 110);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(616, 180);
+            this.groupBox3.TabIndex = 5;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Module";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 16);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(71, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Module name";
+            // 
+            // txtModuleName
+            // 
+            this.txtModuleName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtModuleName.Location = new System.Drawing.Point(9, 32);
+            this.txtModuleName.Name = "txtModuleName";
+            this.txtModuleName.Size = new System.Drawing.Size(601, 20);
+            this.txtModuleName.TabIndex = 1;
+            // 
+            // txtDescription
+            // 
+            this.txtDescription.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtDescription.Location = new System.Drawing.Point(9, 71);
+            this.txtDescription.Name = "txtDescription";
+            this.txtDescription.Size = new System.Drawing.Size(601, 20);
+            this.txtDescription.TabIndex = 3;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 55);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(60, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Description";
+            // 
+            // txtNamespace
+            // 
+            this.txtNamespace.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtNamespace.Location = new System.Drawing.Point(9, 110);
+            this.txtNamespace.Name = "txtNamespace";
+            this.txtNamespace.Size = new System.Drawing.Size(601, 20);
+            this.txtNamespace.TabIndex = 5;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 94);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(64, 13);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Namespace";
+            // 
+            // txtSchemaName
+            // 
+            this.txtSchemaName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSchemaName.Location = new System.Drawing.Point(9, 149);
+            this.txtSchemaName.Name = "txtSchemaName";
+            this.txtSchemaName.Size = new System.Drawing.Size(601, 20);
+            this.txtSchemaName.TabIndex = 7;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 133);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(122, 13);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "Database schema name";
+            // 
             // WizardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(640, 378);
+            this.ClientSize = new System.Drawing.Size(640, 564);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -212,6 +312,8 @@ namespace ZetboxApp.Wizard
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -231,5 +333,14 @@ namespace ZetboxApp.Wizard
         private System.Windows.Forms.RadioButton rbNH;
         private System.Windows.Forms.RadioButton rbEF;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.TextBox txtSchemaName;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtNamespace;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtDescription;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtModuleName;
+        private System.Windows.Forms.Label label2;
     }
 }

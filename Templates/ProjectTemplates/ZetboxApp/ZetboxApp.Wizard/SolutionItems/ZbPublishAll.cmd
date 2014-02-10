@@ -26,15 +26,15 @@ rem *********** Assets ***********
 xcopy /s /y ..\CodeGen\Assets\*.* ..\..\$safesolutionname$.Assets
 
 rem publish schema data for $safesolutionname$ project
-Zetbox.Cli.exe %config% -publish ..\..\Modules\$safesolutionname$.xml -ownermodules $safesolutionname$;$safesolutionname$.Config
+Zetbox.Cli.exe %config% -publish ..\..\Modules\$modulename$.xml -ownermodules $modulename$;$modulename$.Config
 IF ERRORLEVEL 1 GOTO FAIL
 
 rem export $safesolutionname$.Config data
-rem Zetbox.Cli.exe %config% -export ..\..\Data\$safesolutionname$.Config.xml -schemamodules $safesolutionname$.Config
+rem Zetbox.Cli.exe %config% -export ..\..\Data\$modulename$.Config.xml -schemamodules $modulename$.Config
 rem IF ERRORLEVEL 1 GOTO FAIL
 
 rem export $safesolutionname$.Data data
-rem Zetbox.Cli.exe %config% -export ..\..\Data\$safesolutionname$.Data.xml -schemamodules $safesolutionname$ -ownermodules $safesolutionname$
+rem Zetbox.Cli.exe %config% -export ..\..\Data\$modulename$.Data.xml -schemamodules $modulename$ -ownermodules $modulename$
 rem IF ERRORLEVEL 1 GOTO FAIL
 
 rem optinal export SchemaMigration projects

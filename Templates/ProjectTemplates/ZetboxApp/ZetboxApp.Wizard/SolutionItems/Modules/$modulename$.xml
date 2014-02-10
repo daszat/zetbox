@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="$modulexmldatetime$" xmlns="http://dasz.at/Zetbox">
+  <ZetboxBase:Module ExportGuid="$moduleguid$">
+    <ZetboxBase:ChangedOn>$modulexmldatetime$</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>$modulexmldatetime$</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>$description$</ZetboxBase:Description>
+    <ZetboxBase:Name>$modulename$</ZetboxBase:Name>
+    <ZetboxBase:Namespace>$namespace$</ZetboxBase:Namespace>
+    <ZetboxBase:SchemaName>$schemaName$</ZetboxBase:SchemaName>
+  </ZetboxBase:Module>
+</ZetboxPackaging>

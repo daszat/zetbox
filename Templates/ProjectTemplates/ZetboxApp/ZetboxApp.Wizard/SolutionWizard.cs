@@ -76,6 +76,14 @@ namespace ZetboxApp.Wizard
                 replacementsDictionary.Add("$ormappermodule$", dlg.ORMapperModule);
                 replacementsDictionary.Add("$schema$", dlg.Schema);
                 replacementsDictionary.Add("$provider$", dlg.Provider);
+
+                replacementsDictionary.Add("$modulename$", dlg.ModuleName);
+                replacementsDictionary.Add("$description$", dlg.Description);
+                replacementsDictionary.Add("$namespace$", dlg.Namespace);
+                replacementsDictionary.Add("$schemaName$", dlg.SchemaName);
+
+                replacementsDictionary.Add("$moduleguid$", System.Xml.XmlConvert.ToString(Guid.NewGuid()));
+                replacementsDictionary.Add("$modulexmldatetime$", System.Xml.XmlConvert.ToString(DateTime.Now, System.Xml.XmlDateTimeSerializationMode.Utc));
             }
             else
             {
