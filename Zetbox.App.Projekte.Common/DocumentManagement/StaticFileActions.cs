@@ -29,27 +29,5 @@ namespace at.dasz.DocumentManagement
         {
             obj.IsFileReadonly = true;
         }
-
-        [Invocation]
-        public static void HandleBlobChange(StaticFile obj, MethodReturnEventArgs<Blob> e, Blob oldBlob, Blob newBlob)
-        {
-            if (!obj.TransientState.ContainsKey(FileActions.DELETE_KEY) && oldBlob != null && newBlob != oldBlob)
-            {
-                throw new InvalidOperationException("Changing blob on static files is not allowed");
-            }
-            e.Result = newBlob;
-        }
-
-        [Invocation]
-        public static void UploadCanExec(StaticFile obj, MethodReturnEventArgs<bool> e)
-        {
-            e.Result = obj.Blob == null;
-        }
-
-        [Invocation]
-        public static void UploadCanExecReason(StaticFile obj, MethodReturnEventArgs<string> e)
-        {
-            e.Result = "Changing blob on static files is not allowed";
-        }
     }
 }

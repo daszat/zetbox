@@ -28,11 +28,5 @@ namespace at.dasz.DocumentManagement
         {
             // OK
         }
-
-        [Invocation]
-        public static void HandleBlobChange(at.dasz.DocumentManagement.DynamicFile obj, MethodReturnEventArgs<Zetbox.App.Base.Blob> e, Zetbox.App.Base.Blob oldBlob, Zetbox.App.Base.Blob newBlob)
-        {
-            e.Result = newBlob;
-        }
     }
 }

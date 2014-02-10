@@ -38,6 +38,41 @@ namespace at.dasz.DocumentManagement
             e.Result = obj.Name;
         }
 
+        // required for HandleBlobChange
+        [Invocation]
+        public static void NotifyDeleting(File obj)
+        {
+            obj.TransientState[DELETE_KEY] = true;
+        }
+
+        [Invocation]
+        public static void HandleBlobChange(File obj, MethodReturnEventArgs<Zetbox.App.Base.Blob> e, Zetbox.App.Base.Blob oldBlob, Zetbox.App.Base.Blob newBlob)
+        {
+            if (obj.IsFileReadonly && !obj.TransientState.ContainsKey(FileActions.DELETE_KEY) && oldBlob != null && newBlob != oldBlob)
+            {
+                throw new InvalidOperationException("Changing blob on read only files is not allowed");
+            }
+
+            if (obj.KeepRevisions && oldBlob != null && !obj.Revisions.Contains(oldBlob))
+            {
+                obj.Revisions.Add(oldBlob);
+            }
+
+            e.Result = newBlob;
+        }
+
+        [Invocation]
+        public static void UploadCanExec(StaticFile obj, MethodReturnEventArgs<bool> e)
+        {
+            e.Result = !(obj.IsFileReadonly && obj.Blob != null); // Readonly with a blob is not changeable
+        }
+
+        [Invocation]
+        public static void UploadCanExecReason(StaticFile obj, MethodReturnEventArgs<string> e)
+        {
+            e.Result = "Changing blob on read only files is not allowed";
+        }
+
         [Invocation]
         public static void preSet_Blob(File obj, PropertyPreSetterEventArgs<Zetbox.App.Base.Blob> e)
         {
@@ -51,13 +86,6 @@ namespace at.dasz.DocumentManagement
             {
                 obj.ExtractText();
             }
-        }
-
-        // required for StaticFile.HandleBlobChange
-        [Invocation]
-        public static void NotifyDeleting(File obj)
-        {
-            obj.TransientState[DELETE_KEY] = true;
         }
 
         [Invocation]

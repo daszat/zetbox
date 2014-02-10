@@ -31,28 +31,6 @@ namespace at.dasz.DocumentManagement
             obj.IsFileReadonly = true;
         }
 
-        [Invocation]
-        public static void HandleBlobChange(ImportedFile obj, MethodReturnEventArgs<Zetbox.App.Base.Blob> e, Zetbox.App.Base.Blob oldBlob, Zetbox.App.Base.Blob newBlob)
-        {
-            if (!obj.TransientState.ContainsKey(FileActions.DELETE_KEY) && oldBlob != null && newBlob != oldBlob)
-            {
-                throw new InvalidOperationException("Changing blob on imported files is not allowed");
-            }
-            e.Result = newBlob;
-        }
-
-        [Invocation]
-        public static void UploadCanExec(ImportedFile obj, MethodReturnEventArgs<bool> e)
-        {
-            e.Result = obj.Blob == null;
-        }
-
-        [Invocation]
-        public static void UploadCanExecReason(ImportedFile obj, MethodReturnEventArgs<string> e)
-        {
-            e.Result = "Changing blob on imported files is not allowed";
-        }
-
         private static void MakeInternal(IZetboxContext ctx, ImportedFile obj, File doc)
         {
             // Clone blob, so it could be deleted
