@@ -26,48 +26,15 @@ namespace Zetbox.Client.Presentables.DocumentManagement
     using Zetbox.App.Extensions;
 
     [ViewModelDescriptor]
-    public class StaticFilePropertyViewModel : ObjectReferenceViewModel
+    public class FilePropertyViewModel : ObjectReferenceViewModel
     {
-        public new delegate StaticFilePropertyViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
+        public new delegate FilePropertyViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IValueModel mdl);
 
-        public StaticFilePropertyViewModel(
+        public FilePropertyViewModel(
            IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
            IValueModel mdl)
             : base(appCtx, dataCtx, parent, mdl)
         {
-        }
-
-        protected override DataObjectSelectionTaskViewModel CreateDataObjectSelectionTask()
-        {
-            var selectionTask = ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
-                DataContext,
-                this,
-                typeof(File).GetObjectClass(FrozenContext),
-                null,
-                (chosen) =>
-                {
-                    if (chosen != null)
-                    {
-                        var fileVmdl = chosen.First();
-                        if (typeof(StaticFile).IsAssignableFrom(fileVmdl.Object.GetType()))
-                        {
-                            Value = fileVmdl;
-                        }
-                        else
-                        {
-                            var otherFile = (File)fileVmdl.Object;
-                            var staticFile = DataContext.Create<StaticFile>();
-                            staticFile.Name = otherFile.Name;
-                            staticFile.Blob = otherFile.Blob;
-                            Value = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this.GetWorkspace(), staticFile);
-                        }
-                    }
-                },
-                null);
-            selectionTask.ListViewModel.AllowDelete = false;
-            selectionTask.ListViewModel.AllowOpen = false;
-            selectionTask.ListViewModel.AllowAddNew = AllowCreateNewItemOnSelect;
-            return selectionTask;
         }
 
         #region DragDrop
@@ -96,7 +63,7 @@ namespace Zetbox.Client.Presentables.DocumentManagement
 
         public void UploadFile(string path)
         {
-            var vmdl = (FileViewModel)DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this.GetWorkspace(), DataContext.Create<StaticFile>());
+            var vmdl = (FileViewModel)DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this.GetWorkspace(), DataContext.Create<File>());
             vmdl.Upload(path);
             Value = vmdl;
         }

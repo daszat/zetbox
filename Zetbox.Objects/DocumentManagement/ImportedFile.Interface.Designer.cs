@@ -17,15 +17,15 @@ namespace at.dasz.DocumentManagement
         /// <summary>
         /// Converts the imported file to a document
         /// </summary>
-        at.dasz.DocumentManagement.Document MakeDocument();
+        at.dasz.DocumentManagement.File MakeFile();
 
         /// <summary>
-        /// 
+        /// Converts the imported file to a readonly file
         /// </summary>
-        at.dasz.DocumentManagement.DynamicFile MakeDynamicFile();
+        at.dasz.DocumentManagement.File MakeReadonlyFile();
 
         /// <summary>
-        /// 
+        /// Deprecated, use MakeReadonlyFile instead
         /// </summary>
         at.dasz.DocumentManagement.StaticFile MakeStaticFile();
     }

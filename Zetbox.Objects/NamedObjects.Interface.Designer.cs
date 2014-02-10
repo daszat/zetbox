@@ -166,13 +166,13 @@ namespace Zetbox {
                             }
                             public static class ImportedFile_Methods
                             {
-                                public static TypedGuid<global::Zetbox.App.Base.Method> MakeDocument
+                                public static TypedGuid<global::Zetbox.App.Base.Method> MakeFile
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Method>("3b2c80a9-d4d9-4de8-9413-74fe77dfb935"); }
                                 }
-                                public static TypedGuid<global::Zetbox.App.Base.Method> MakeDynamicFile
+                                public static TypedGuid<global::Zetbox.App.Base.Method> MakeReadonlyFile
                                 {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Method>("72f086d7-fd3f-4bcf-a952-068bdfc85c7d"); }
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Method>("ac062a5f-008b-44b9-a400-66c63690fa62"); }
                                 }
                                 public static TypedGuid<global::Zetbox.App.Base.Method> MakeStaticFile
                                 {
@@ -4921,13 +4921,9 @@ namespace Zetbox {
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("8c72dff9-c3b8-417b-a2ef-5f22ffe9dd54"); }
                 }
-                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_DocumentManagement_DocumentViewModel
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_DocumentManagement_FilePropertyViewModel
                 {
-                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("377176c3-4ff9-4a6f-bfc0-de893bce1c12"); }
-                }
-                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_DocumentManagement_DynamicFileViewModel
-                {
-                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("62f82ae5-b646-4ce3-a66a-da3fe3f49e9f"); }
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("db5736ea-91ba-4d59-9b06-5cc86f7e0614"); }
                 }
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_DocumentManagement_FileViewModel
                 {
@@ -4944,14 +4940,6 @@ namespace Zetbox {
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_DocumentManagement_ImportedFileViewModel
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("3aeddad1-a2cf-46b0-af26-6bf6e5f8f6e2"); }
-                }
-                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_DocumentManagement_StaticFilePropertyViewModel
-                {
-                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("db5736ea-91ba-4d59-9b06-5cc86f7e0614"); }
-                }
-                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_DocumentManagement_StaticFileViewModel
-                {
-                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("c6753751-760d-498d-9e0a-f7f85f44e985"); }
                 }
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ErrorListViewModel
                 {

@@ -62,13 +62,13 @@ namespace at.dasz.DocumentManagement
         }
 
         [Invocation]
-        public static void UploadCanExec(StaticFile obj, MethodReturnEventArgs<bool> e)
+        public static void UploadCanExec(File obj, MethodReturnEventArgs<bool> e)
         {
             e.Result = !(obj.IsFileReadonly && obj.Blob != null); // Readonly with a blob is not changeable
         }
 
         [Invocation]
-        public static void UploadCanExecReason(StaticFile obj, MethodReturnEventArgs<string> e)
+        public static void UploadCanExecReason(File obj, MethodReturnEventArgs<string> e)
         {
             e.Result = "Changing blob on read only files is not allowed";
         }

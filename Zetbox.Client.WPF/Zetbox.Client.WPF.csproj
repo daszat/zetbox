@@ -222,10 +222,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\DocumentManagement\DocumentWithPreviewEditor.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="View\DocumentManagement\FileWithPreviewEditor.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -652,9 +648,6 @@
     </Compile>
     <Compile Include="View\DocumentManagement\ImportedFileWithPreviewEditor.xaml.cs">
       <DependentUpon>ImportedFileWithPreviewEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\DocumentManagement\DocumentWithPreviewEditor.xaml.cs">
-      <DependentUpon>DocumentWithPreviewEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DocumentManagement\FileWithPreviewEditor.xaml.cs">
       <DependentUpon>FileWithPreviewEditor.xaml</DependentUpon>

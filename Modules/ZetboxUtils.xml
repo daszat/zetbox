@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2014-02-10T15:54:11Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2014-02-10T16:55:25Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -4763,7 +4763,7 @@ public static void AppliesToCanExecReason(WorkScheduleRule obj, MethodReturnEven
     <ZetboxBase:SchemaName>doc</ZetboxBase:SchemaName>
   </ZetboxBase:Module>
   <ZetboxBase:ObjectClass ExportGuid="3f496de2-bef4-4059-8c3e-c25db38bd3c2">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.927747Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2014-02-10T15:55:25.761636Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-03-12T22:35:18Z</ZetboxBase:CreatedOn>
     <GUI:DefaultIcon>267ce6ec-7982-46d3-b1bc-2e1ea6adf815</GUI:DefaultIcon>
     <ZetboxBase:Description>Document with revisions</ZetboxBase:Description>
@@ -4804,14 +4804,14 @@ public static void ObjectIsValid(Document obj, ObjectIsValidEventArgs e)
 }
 
 </ZetboxBase:CodeTemplate>
-    <GUI:DefaultViewModelDescriptor>377176c3-4ff9-4a6f-bfc0-de893bce1c12</GUI:DefaultViewModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>f580a1b4-26c0-46e8-a268-3b3d4b4f15a7</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>Documents</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="e1556c0b-cdb9-4174-a9e5-07efba58ef05">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:08.070755Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2014-02-10T15:55:25.761636Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-03-10T22:38:16Z</ZetboxBase:CreatedOn>
     <GUI:DefaultIcon>267ce6ec-7982-46d3-b1bc-2e1ea6adf815</GUI:DefaultIcon>
     <ZetboxBase:Description>File with changeable content</ZetboxBase:Description>
@@ -4852,7 +4852,7 @@ public static void ObjectIsValid(DynamicFile obj, ObjectIsValidEventArgs e)
 }
 
 </ZetboxBase:CodeTemplate>
-    <GUI:DefaultViewModelDescriptor>62f82ae5-b646-4ce3-a66a-da3fe3f49e9f</GUI:DefaultViewModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>f580a1b4-26c0-46e8-a268-3b3d4b4f15a7</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -5046,7 +5046,7 @@ public static void ObjectIsValid(ImportedFile obj, ObjectIsValidEventArgs e)
     <ZetboxBase:TableName>ImportedFiles</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="5aaabfe9-081d-445d-a543-53e0253feeb8">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:08.070755Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2014-02-10T15:55:25.761636Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-03-12T22:33:23Z</ZetboxBase:CreatedOn>
     <GUI:DefaultIcon>267ce6ec-7982-46d3-b1bc-2e1ea6adf815</GUI:DefaultIcon>
     <ZetboxBase:Description>Static file. Content cannot be changed</ZetboxBase:Description>
@@ -5087,7 +5087,7 @@ public static void ObjectIsValid(StaticFile obj, ObjectIsValidEventArgs e)
 }
 
 </ZetboxBase:CodeTemplate>
-    <GUI:DefaultViewModelDescriptor>c6753751-760d-498d-9e0a-f7f85f44e985</GUI:DefaultViewModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>f580a1b4-26c0-46e8-a268-3b3d4b4f15a7</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
@@ -6507,57 +6507,56 @@ public static void UploadCanExecReason(File obj, MethodReturnEventArgs&lt;string
   </ZetboxBase:Method>
   <ZetboxBase:Method ExportGuid="3b2c80a9-d4d9-4de8-9413-74fe77dfb935">
     <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2014-02-10T16:02:46.998755Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void MakeDocument(ImportedFile obj, MethodReturnEventArgs&lt;at.dasz.DocumentManagement.Document&gt; e)
+public static void MakeFile(ImportedFile obj, MethodReturnEventArgs&lt;at.dasz.DocumentManagement.File&gt; e)
 {
 }
 
 [Invocation]
-public static void MakeDocumentCanExec(ImportedFile obj, MethodReturnEventArgs&lt;bool&gt; e)
+public static void MakeFileCanExec(ImportedFile obj, MethodReturnEventArgs&lt;bool&gt; e)
 {
 }
 
 [Invocation]
-public static void MakeDocumentCanExecReason(ImportedFile obj, MethodReturnEventArgs&lt;string&gt; e)
+public static void MakeFileCanExecReason(ImportedFile obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2011-10-29T10:11:26.056129Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>Converts the imported file to a document</ZetboxBase:Description>
     <GUI:IsDisplayable>true</GUI:IsDisplayable>
-    <ZetboxBase:Label>Make document</ZetboxBase:Label>
+    <ZetboxBase:Label>Make file</ZetboxBase:Label>
     <ZetboxBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</ZetboxBase:Module>
-    <ZetboxBase:Name>MakeDocument</ZetboxBase:Name>
+    <ZetboxBase:Name>MakeFile</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>523a75bb-29c4-421c-9343-93d8658bb5f8</ZetboxBase:ObjectClass>
   </ZetboxBase:Method>
-  <ZetboxBase:Method ExportGuid="72f086d7-fd3f-4bcf-a952-068bdfc85c7d">
-    <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
+  <ZetboxBase:Method ExportGuid="ac062a5f-008b-44b9-a400-66c63690fa62">
+    <ZetboxBase:ChangedOn>2014-02-10T16:04:46.783732Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
-public static void MakeDynamicFile(ImportedFile obj, MethodReturnEventArgs&lt;at.dasz.DocumentManagement.DynamicFile&gt; e)
+public static void MakeReadonlyFile(ImportedFile obj, MethodReturnEventArgs&lt;at.dasz.DocumentManagement.File&gt; e)
 {
 }
 
 [Invocation]
-public static void MakeDynamicFileCanExec(ImportedFile obj, MethodReturnEventArgs&lt;bool&gt; e)
+public static void MakeReadonlyFileCanExec(ImportedFile obj, MethodReturnEventArgs&lt;bool&gt; e)
 {
 }
 
 [Invocation]
-public static void MakeDynamicFileCanExecReason(ImportedFile obj, MethodReturnEventArgs&lt;string&gt; e)
+public static void MakeReadonlyFileCanExecReason(ImportedFile obj, MethodReturnEventArgs&lt;string&gt; e)
 {
 }
 </ZetboxBase:CodeTemplate>
-    <ZetboxBase:CreatedOn>2011-11-01T01:04:41.929022Z</ZetboxBase:CreatedOn>
-    <GUI:IsDisplayable>true</GUI:IsDisplayable>
-    <ZetboxBase:Label>Make file</ZetboxBase:Label>
+    <ZetboxBase:CreatedOn>2014-02-10T16:04:46.783732Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Converts the imported file to a readonly file</ZetboxBase:Description>
+    <GUI:IsDisplayable>false</GUI:IsDisplayable>
     <ZetboxBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</ZetboxBase:Module>
-    <ZetboxBase:Name>MakeDynamicFile</ZetboxBase:Name>
+    <ZetboxBase:Name>MakeReadonlyFile</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>523a75bb-29c4-421c-9343-93d8658bb5f8</ZetboxBase:ObjectClass>
   </ZetboxBase:Method>
   <ZetboxBase:Method ExportGuid="e7bc5afb-bc19-4e9f-ad0b-e1e454414392">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2014-02-10T16:05:05.231577Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void MakeStaticFile(ImportedFile obj, MethodReturnEventArgs&lt;at.dasz.DocumentManagement.StaticFile&gt; e)
 {
@@ -6574,7 +6573,9 @@ public static void MakeStaticFileCanExecReason(ImportedFile obj, MethodReturnEve
 }
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2011-11-01T01:04:41.929022Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Deprecated, use MakeReadonlyFile instead</ZetboxBase:Description>
     <GUI:IsDisplayable>false</GUI:IsDisplayable>
+    <ZetboxBase:Label>Deprecated</ZetboxBase:Label>
     <ZetboxBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</ZetboxBase:Module>
     <ZetboxBase:Name>MakeStaticFile</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>523a75bb-29c4-421c-9343-93d8658bb5f8</ZetboxBase:ObjectClass>
@@ -6613,7 +6614,7 @@ public static void MakeStaticFileCanExecReason(ImportedFile obj, MethodReturnEve
     <ZetboxBase:ObjectClass>afd99ba6-f150-4ed4-ad1f-4ef57b14728b</ZetboxBase:ObjectClass>
   </ZetboxBase:ObjectReferenceParameter>
   <ZetboxBase:ObjectReferenceParameter ExportGuid="81fd6102-d4c5-4d0e-a60b-32dc3e465d5d">
-    <ZetboxBase:ChangedOn>2011-10-29T10:12:58.709428Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2014-02-10T16:02:46.998755Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-10-29T10:12:58.709428Z</ZetboxBase:CreatedOn>
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
     <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
@@ -6621,18 +6622,18 @@ public static void MakeStaticFileCanExecReason(ImportedFile obj, MethodReturnEve
     <ZetboxBase:Method>3b2c80a9-d4d9-4de8-9413-74fe77dfb935</ZetboxBase:Method>
     <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
     <ZetboxBase:Name>retVal</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>3f496de2-bef4-4059-8c3e-c25db38bd3c2</ZetboxBase:ObjectClass>
+    <ZetboxBase:ObjectClass>8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6</ZetboxBase:ObjectClass>
   </ZetboxBase:ObjectReferenceParameter>
-  <ZetboxBase:ObjectReferenceParameter ExportGuid="3959abf1-f3dd-4cc2-9c27-a354844dcbf0">
-    <ZetboxBase:ChangedOn>2011-11-01T01:10:25.905022Z</ZetboxBase:ChangedOn>
-    <ZetboxBase:CreatedOn>2011-11-01T01:09:58.321022Z</ZetboxBase:CreatedOn>
+  <ZetboxBase:ObjectReferenceParameter ExportGuid="5ab982f3-6304-4cd9-a25a-c61a8733f003">
+    <ZetboxBase:ChangedOn>2014-02-10T16:04:46.783732Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2014-02-10T16:04:46.783732Z</ZetboxBase:CreatedOn>
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
     <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
     <ZetboxBase:IsReturnParameter>true</ZetboxBase:IsReturnParameter>
-    <ZetboxBase:Method>72f086d7-fd3f-4bcf-a952-068bdfc85c7d</ZetboxBase:Method>
+    <ZetboxBase:Method>ac062a5f-008b-44b9-a400-66c63690fa62</ZetboxBase:Method>
     <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
     <ZetboxBase:Name>retVal</ZetboxBase:Name>
-    <ZetboxBase:ObjectClass>e1556c0b-cdb9-4174-a9e5-07efba58ef05</ZetboxBase:ObjectClass>
+    <ZetboxBase:ObjectClass>8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6</ZetboxBase:ObjectClass>
   </ZetboxBase:ObjectReferenceParameter>
   <ZetboxBase:ObjectReferenceParameter ExportGuid="07bb69fc-d7eb-400c-a188-79f026201af7">
     <ZetboxBase:ChangedOn>2011-11-01T01:10:25.905022Z</ZetboxBase:ChangedOn>
@@ -6645,19 +6646,11 @@ public static void MakeStaticFileCanExecReason(ImportedFile obj, MethodReturnEve
     <ZetboxBase:Name>retVal</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>5aaabfe9-081d-445d-a543-53e0253feeb8</ZetboxBase:ObjectClass>
   </ZetboxBase:ObjectReferenceParameter>
-  <GUI:ViewModelDescriptor ExportGuid="377176c3-4ff9-4a6f-bfc0-de893bce1c12">
-    <GUI:DefaultEditorKind>24338f74-ec90-48a5-90ff-b9830082cb12</GUI:DefaultEditorKind>
+  <GUI:ViewModelDescriptor ExportGuid="db5736ea-91ba-4d59-9b06-5cc86f7e0614">
     <GUI:Deleted>false</GUI:Deleted>
-    <GUI:Description>ViewModel for documents</GUI:Description>
+    <GUI:Description>A Property ViewModel for references that are pointing to a File</GUI:Description>
     <GUI:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</GUI:Module>
-    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.DocumentManagement.DocumentViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
-  </GUI:ViewModelDescriptor>
-  <GUI:ViewModelDescriptor ExportGuid="62f82ae5-b646-4ce3-a66a-da3fe3f49e9f">
-    <GUI:DefaultEditorKind>b22d6746-5704-4ea7-934a-c3648081bd0a</GUI:DefaultEditorKind>
-    <GUI:Deleted>false</GUI:Deleted>
-    <GUI:Description>ViewModel for dynamic files</GUI:Description>
-    <GUI:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</GUI:Module>
-    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.DocumentManagement.DynamicFileViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.DocumentManagement.FilePropertyViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="f580a1b4-26c0-46e8-a268-3b3d4b4f15a7">
     <GUI:DefaultEditorKind>b22d6746-5704-4ea7-934a-c3648081bd0a</GUI:DefaultEditorKind>
@@ -6686,26 +6679,6 @@ public static void MakeStaticFileCanExecReason(ImportedFile obj, MethodReturnEve
     <GUI:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</GUI:Module>
     <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.DocumentManagement.ImportedFileViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
-  <GUI:ViewModelDescriptor ExportGuid="db5736ea-91ba-4d59-9b06-5cc86f7e0614">
-    <GUI:Deleted>false</GUI:Deleted>
-    <GUI:Description>A Property ViewModel for references that are pointing to a StaticFile</GUI:Description>
-    <GUI:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</GUI:Module>
-    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.DocumentManagement.StaticFilePropertyViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
-  </GUI:ViewModelDescriptor>
-  <GUI:ViewModelDescriptor ExportGuid="c6753751-760d-498d-9e0a-f7f85f44e985">
-    <GUI:DefaultEditorKind>b22d6746-5704-4ea7-934a-c3648081bd0a</GUI:DefaultEditorKind>
-    <GUI:Deleted>false</GUI:Deleted>
-    <GUI:Description>ViewModel for static files</GUI:Description>
-    <GUI:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</GUI:Module>
-    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.DocumentManagement.StaticFileViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
-  </GUI:ViewModelDescriptor>
-  <GUI:ViewDescriptor ExportGuid="a9d450c0-1882-476a-b0b8-270df5c00623">
-    <GUI:ControlKind>24338f74-ec90-48a5-90ff-b9830082cb12</GUI:ControlKind>
-    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.DocumentManagement.DocumentWithPreviewEditor, Zetbox.Client.WPF</GUI:ControlTypeRef>
-    <GUI:Deleted>false</GUI:Deleted>
-    <GUI:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</GUI:Module>
-    <GUI:Toolkit>0</GUI:Toolkit>
-  </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="34bc1764-65bd-4ed9-b382-2f80c36f0e83">
     <GUI:ControlKind>b22d6746-5704-4ea7-934a-c3648081bd0a</GUI:ControlKind>
     <GUI:ControlTypeRef>Zetbox.Client.WPF.View.DocumentManagement.FileWithPreviewEditor, Zetbox.Client.WPF</GUI:ControlTypeRef>

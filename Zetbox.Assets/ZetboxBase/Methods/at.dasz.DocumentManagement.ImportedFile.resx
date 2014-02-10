@@ -117,35 +117,35 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="MakeDocument_label" xml:space="preserve">
-    <value>Make document</value>
-  </data>
-  <data name="MakeDocument_description" xml:space="preserve">
-    <value>Converts the imported file to a document</value>
-  </data>
-  <data name="MakeDocument(retVal)_label" xml:space="preserve">
-    <value>retVal</value>
-  </data>
-  <data name="MakeDocument(retVal)_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="MakeDynamicFile_label" xml:space="preserve">
+  <data name="MakeFile_label" xml:space="preserve">
     <value>Make file</value>
   </data>
-  <data name="MakeDynamicFile_description" xml:space="preserve">
-    <value />
+  <data name="MakeFile_description" xml:space="preserve">
+    <value>Converts the imported file to a document</value>
   </data>
-  <data name="MakeDynamicFile(retVal)_label" xml:space="preserve">
+  <data name="MakeFile(retVal)_label" xml:space="preserve">
     <value>retVal</value>
   </data>
-  <data name="MakeDynamicFile(retVal)_description" xml:space="preserve">
+  <data name="MakeFile(retVal)_description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="MakeReadonlyFile_label" xml:space="preserve">
+    <value>MakeReadonlyFile</value>
+  </data>
+  <data name="MakeReadonlyFile_description" xml:space="preserve">
+    <value>Converts the imported file to a readonly file</value>
+  </data>
+  <data name="MakeReadonlyFile(retVal)_label" xml:space="preserve">
+    <value>retVal</value>
+  </data>
+  <data name="MakeReadonlyFile(retVal)_description" xml:space="preserve">
     <value />
   </data>
   <data name="MakeStaticFile_label" xml:space="preserve">
-    <value>MakeStaticFile</value>
+    <value>Deprecated</value>
   </data>
   <data name="MakeStaticFile_description" xml:space="preserve">
-    <value />
+    <value>Deprecated, use MakeReadonlyFile instead</value>
   </data>
   <data name="MakeStaticFile(retVal)_label" xml:space="preserve">
     <value>retVal</value>

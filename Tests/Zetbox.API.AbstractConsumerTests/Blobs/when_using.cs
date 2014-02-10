@@ -17,10 +17,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using at.dasz.DocumentManagement;
+using doc = at.dasz.DocumentManagement;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 using Zetbox.App.Base;
+
 
 namespace Zetbox.API.AbstractConsumerTests.Blobs
 {
@@ -93,14 +94,14 @@ namespace Zetbox.API.AbstractConsumerTests.Blobs
         }
 
         [Test]
-        public void should_be_usable_as_StaticFile()
+        public void should_be_usable_as_File()
         {
-            var staticFile = ctx.Create<StaticFile>();
+            var staticFile = ctx.Create<doc.File>();
             staticFile.Blob = ctx.Find<Blob>(blob_id);
             ctx.SubmitChanges();
 
             var checkCtx = GetContext();
-            var checkStaticFile = checkCtx.Find<StaticFile>(staticFile.ID);
+            var checkStaticFile = checkCtx.Find<doc.File>(staticFile.ID);
             Assert.That(checkStaticFile.Blob.ID, Is.EqualTo(blob_id));
 
             checkCtx.Delete(checkStaticFile);
@@ -108,9 +109,9 @@ namespace Zetbox.API.AbstractConsumerTests.Blobs
         }
 
         [Test]
-        public void should_be_usable_as_new_StaticFile()
+        public void should_be_usable_as_new_File()
         {
-            var staticFile = ctx.Create<StaticFile>();
+            var staticFile = ctx.Create<doc.File>();
             staticFile.Blob = ctx.Find<Blob>(blob_id);
 
             ctx.Delete(staticFile);

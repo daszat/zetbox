@@ -169,35 +169,35 @@ namespace at.dasz.DocumentManagement
         /// Converts the imported file to a document
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
-        [EventBasedMethod("OnMakeDocument_ImportedFile")]
-        public virtual at.dasz.DocumentManagement.Document MakeDocument()
+        [EventBasedMethod("OnMakeFile_ImportedFile")]
+        public virtual at.dasz.DocumentManagement.File MakeFile()
         {
-            var e = new MethodReturnEventArgs<at.dasz.DocumentManagement.Document>();
-            if (OnMakeDocument_ImportedFile != null)
+            var e = new MethodReturnEventArgs<at.dasz.DocumentManagement.File>();
+            if (OnMakeFile_ImportedFile != null)
             {
-                OnMakeDocument_ImportedFile(this, e);
+                OnMakeFile_ImportedFile(this, e);
             }
             else
             {
-                throw new NotImplementedException("No handler registered on ImportedFile.MakeDocument");
+                throw new NotImplementedException("No handler registered on ImportedFile.MakeFile");
             }
             return e.Result;
         }
-        public delegate void MakeDocument_Handler<T>(T obj, MethodReturnEventArgs<at.dasz.DocumentManagement.Document> ret);
-        public static event MakeDocument_Handler<ImportedFile> OnMakeDocument_ImportedFile;
+        public delegate void MakeFile_Handler<T>(T obj, MethodReturnEventArgs<at.dasz.DocumentManagement.File> ret);
+        public static event MakeFile_Handler<ImportedFile> OnMakeFile_ImportedFile;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
-		public static event CanExecMethodEventHandler<ImportedFile> OnMakeDocument_ImportedFile_CanExec;
+		public static event CanExecMethodEventHandler<ImportedFile> OnMakeFile_ImportedFile_CanExec;
 
-        [EventBasedMethod("OnMakeDocument_ImportedFile_CanExec")]
-        public virtual bool MakeDocumentCanExec
+        [EventBasedMethod("OnMakeFile_ImportedFile_CanExec")]
+        public virtual bool MakeFileCanExec
         {
 			get 
 			{
 				var e = new MethodReturnEventArgs<bool>();
-				if (OnMakeDocument_ImportedFile_CanExec != null)
+				if (OnMakeFile_ImportedFile_CanExec != null)
 				{
-					OnMakeDocument_ImportedFile_CanExec(this, e);
+					OnMakeFile_ImportedFile_CanExec(this, e);
 				}
 				else
 				{
@@ -208,17 +208,17 @@ namespace at.dasz.DocumentManagement
         }
 
 		// CanExecReason
-		public static event CanExecReasonMethodEventHandler<ImportedFile> OnMakeDocument_ImportedFile_CanExecReason;
+		public static event CanExecReasonMethodEventHandler<ImportedFile> OnMakeFile_ImportedFile_CanExecReason;
 
-        [EventBasedMethod("OnMakeDocument_ImportedFile_CanExecReason")]
-        public virtual string MakeDocumentCanExecReason
+        [EventBasedMethod("OnMakeFile_ImportedFile_CanExecReason")]
+        public virtual string MakeFileCanExecReason
         {
 			get 
 			{
 				var e = new MethodReturnEventArgs<string>();
-				if (OnMakeDocument_ImportedFile_CanExecReason != null)
+				if (OnMakeFile_ImportedFile_CanExecReason != null)
 				{
-					OnMakeDocument_ImportedFile_CanExecReason(this, e);
+					OnMakeFile_ImportedFile_CanExecReason(this, e);
 				}
 				else
 				{
@@ -230,38 +230,38 @@ namespace at.dasz.DocumentManagement
         // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
-        /// 
+        /// Converts the imported file to a readonly file
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
-        [EventBasedMethod("OnMakeDynamicFile_ImportedFile")]
-        public virtual at.dasz.DocumentManagement.DynamicFile MakeDynamicFile()
+        [EventBasedMethod("OnMakeReadonlyFile_ImportedFile")]
+        public virtual at.dasz.DocumentManagement.File MakeReadonlyFile()
         {
-            var e = new MethodReturnEventArgs<at.dasz.DocumentManagement.DynamicFile>();
-            if (OnMakeDynamicFile_ImportedFile != null)
+            var e = new MethodReturnEventArgs<at.dasz.DocumentManagement.File>();
+            if (OnMakeReadonlyFile_ImportedFile != null)
             {
-                OnMakeDynamicFile_ImportedFile(this, e);
+                OnMakeReadonlyFile_ImportedFile(this, e);
             }
             else
             {
-                throw new NotImplementedException("No handler registered on ImportedFile.MakeDynamicFile");
+                throw new NotImplementedException("No handler registered on ImportedFile.MakeReadonlyFile");
             }
             return e.Result;
         }
-        public delegate void MakeDynamicFile_Handler<T>(T obj, MethodReturnEventArgs<at.dasz.DocumentManagement.DynamicFile> ret);
-        public static event MakeDynamicFile_Handler<ImportedFile> OnMakeDynamicFile_ImportedFile;
+        public delegate void MakeReadonlyFile_Handler<T>(T obj, MethodReturnEventArgs<at.dasz.DocumentManagement.File> ret);
+        public static event MakeReadonlyFile_Handler<ImportedFile> OnMakeReadonlyFile_ImportedFile;
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 		// CanExec
-		public static event CanExecMethodEventHandler<ImportedFile> OnMakeDynamicFile_ImportedFile_CanExec;
+		public static event CanExecMethodEventHandler<ImportedFile> OnMakeReadonlyFile_ImportedFile_CanExec;
 
-        [EventBasedMethod("OnMakeDynamicFile_ImportedFile_CanExec")]
-        public virtual bool MakeDynamicFileCanExec
+        [EventBasedMethod("OnMakeReadonlyFile_ImportedFile_CanExec")]
+        public virtual bool MakeReadonlyFileCanExec
         {
 			get 
 			{
 				var e = new MethodReturnEventArgs<bool>();
-				if (OnMakeDynamicFile_ImportedFile_CanExec != null)
+				if (OnMakeReadonlyFile_ImportedFile_CanExec != null)
 				{
-					OnMakeDynamicFile_ImportedFile_CanExec(this, e);
+					OnMakeReadonlyFile_ImportedFile_CanExec(this, e);
 				}
 				else
 				{
@@ -272,17 +272,17 @@ namespace at.dasz.DocumentManagement
         }
 
 		// CanExecReason
-		public static event CanExecReasonMethodEventHandler<ImportedFile> OnMakeDynamicFile_ImportedFile_CanExecReason;
+		public static event CanExecReasonMethodEventHandler<ImportedFile> OnMakeReadonlyFile_ImportedFile_CanExecReason;
 
-        [EventBasedMethod("OnMakeDynamicFile_ImportedFile_CanExecReason")]
-        public virtual string MakeDynamicFileCanExecReason
+        [EventBasedMethod("OnMakeReadonlyFile_ImportedFile_CanExecReason")]
+        public virtual string MakeReadonlyFileCanExecReason
         {
 			get 
 			{
 				var e = new MethodReturnEventArgs<string>();
-				if (OnMakeDynamicFile_ImportedFile_CanExecReason != null)
+				if (OnMakeReadonlyFile_ImportedFile_CanExecReason != null)
 				{
-					OnMakeDynamicFile_ImportedFile_CanExecReason(this, e);
+					OnMakeReadonlyFile_ImportedFile_CanExecReason(this, e);
 				}
 				else
 				{
@@ -294,7 +294,7 @@ namespace at.dasz.DocumentManagement
         // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
-        /// 
+        /// Deprecated, use MakeReadonlyFile instead
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnMakeStaticFile_ImportedFile")]
