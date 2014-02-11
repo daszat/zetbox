@@ -1586,7 +1586,10 @@ namespace Zetbox.Server.SchemaManagement
                 var tblName = relEnd.Type.GetTableRef(db);
                 var colName = Construct.ForeignKeyColumnName(otherEnd);
 
-                if (db.CheckColumnContainsValues(tblName, colName))
+                var moveUp = savedRel.A.Type.AndParents(cls => cls.BaseObjectClass).Select(cls => cls.ExportGuid).Contains(rel.A.Type.ExportGuid)
+                          && savedRel.B.Type.AndParents(cls => cls.BaseObjectClass).Select(cls => cls.ExportGuid).Contains(rel.B.Type.ExportGuid);
+
+                if (!moveUp && db.CheckColumnContainsValues(tblName, colName))
                 {
                     Log.WarnFormat("Unable to drop old relation. Relation has some instances. Table: " + tblName);
                 }
@@ -1619,7 +1622,10 @@ namespace Zetbox.Server.SchemaManagement
                 var tblName = relEnd.Type.GetTableRef(db);
                 var colName = Construct.ForeignKeyColumnName(otherEnd);
 
-                if (db.CheckColumnContainsValues(tblName, colName))
+                var moveUp = savedRel.A.Type.AndParents(cls => cls.BaseObjectClass).Select(cls => cls.ExportGuid).Contains(rel.A.Type.ExportGuid)
+                          && savedRel.B.Type.AndParents(cls => cls.BaseObjectClass).Select(cls => cls.ExportGuid).Contains(rel.B.Type.ExportGuid);
+
+                if (!moveUp && db.CheckColumnContainsValues(tblName, colName))
                 {
                     Log.WarnFormat("Unable to drop old relation. Relation has some instances. Table: " + tblName);
                 }
