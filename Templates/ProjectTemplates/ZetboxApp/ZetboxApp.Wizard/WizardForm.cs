@@ -23,6 +23,11 @@ namespace ZetboxApp.Wizard
 
             this.SolutionName = solutionname;
             this.txtConnectionString.Text = string.Format(SQLConnectionStringTemplate, SolutionName);
+
+            this.txtModuleName.Text = solutionname.FirstCharToUpper();
+            this.txtDescription.Text = "A description for " + solutionname.FirstCharToUpper();
+            this.txtNamespace.Text = solutionname.FirstCharToUpper();
+            this.txtSchemaName.Text = solutionname.ToLower();
         }
 
         public string SolutionName { get; set; }
@@ -33,6 +38,12 @@ namespace ZetboxApp.Wizard
         public string Provider { get; set; }
         public string ORMapperClassName { get; set; }
         public string ORMapperModule { get; set; }
+
+        public string ModuleName { get; set; }
+        public string Description { get; set; }
+        public string Namespace { get; set; }
+        public string SchemaName { get; set; }
+
 
         private void btnNext_Click(object sender, EventArgs e)
         {
@@ -61,6 +72,11 @@ namespace ZetboxApp.Wizard
                 DatabaseName = cb.Database;
                 DatabaseUser = string.IsNullOrEmpty(cb.UserName) ? "zetbox" : cb.UserName;
             }
+
+            ModuleName = txtModuleName.Text;
+            Description = txtDescription.Text;
+            Namespace = txtNamespace.Text;
+            SchemaName = txtSchemaName.Text;
 
             this.DialogResult = DialogResult.OK;
             this.Close();

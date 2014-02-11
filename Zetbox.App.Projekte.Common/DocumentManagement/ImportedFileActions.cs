@@ -26,25 +26,9 @@ namespace at.dasz.DocumentManagement
     public static class ImportedFileActions
     {
         [Invocation]
-        public static void HandleBlobChange(ImportedFile obj, MethodReturnEventArgs<Zetbox.App.Base.Blob> e, Zetbox.App.Base.Blob oldBlob, Zetbox.App.Base.Blob newBlob)
+        public static void NotifyCreated(at.dasz.DocumentManagement.ImportedFile obj)
         {
-            if (!obj.TransientState.ContainsKey(FileActions.DELETE_KEY) && oldBlob != null && newBlob != oldBlob)
-            {
-                throw new InvalidOperationException("Changing blob on imported files is not allowed");
-            }
-            e.Result = newBlob;
-        }
-
-        [Invocation]
-        public static void UploadCanExec(ImportedFile obj, MethodReturnEventArgs<bool> e)
-        {
-            e.Result = obj.Blob == null;
-        }
-
-        [Invocation]
-        public static void UploadCanExecReason(ImportedFile obj, MethodReturnEventArgs<string> e)
-        {
-            e.Result = "Changing blob on imported files is not allowed";
+            obj.IsFileReadonly = true;
         }
 
         private static void MakeInternal(IZetboxContext ctx, ImportedFile obj, File doc)
@@ -56,21 +40,25 @@ namespace at.dasz.DocumentManagement
         }
 
         [Invocation]
-        public static void MakeDocument(ImportedFile obj, MethodReturnEventArgs<Document> e)
+        public static void MakeFile(ImportedFile obj, MethodReturnEventArgs<File> e)
         {
             var ctx = obj.Context;
-            var doc = ctx.Create<Document>();
+            var doc = ctx.Create<File>();
             MakeInternal(ctx, obj, doc);
             e.Result = doc;
         }
+
         [Invocation]
-        public static void MakeDynamicFile(ImportedFile obj, MethodReturnEventArgs<DynamicFile> e)
+        public static void MakeReadonlyFile(ImportedFile obj, MethodReturnEventArgs<File> e)
         {
             var ctx = obj.Context;
-            var doc = ctx.Create<DynamicFile>();
+            var doc = ctx.Create<File>();
             MakeInternal(ctx, obj, doc);
+            doc.IsFileReadonly = true;
             e.Result = doc;
         }
+
+        // Deprecated
         [Invocation]
         public static void MakeStaticFile(ImportedFile obj, MethodReturnEventArgs<StaticFile> e)
         {

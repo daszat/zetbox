@@ -129,7 +129,14 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
 
         private string FormatSchemaName(DboRef dbo)
         {
-            return String.Format("{0}.{1}", QuoteIdentifier(dbo.Schema), QuoteIdentifier(dbo.Name));
+            if (string.IsNullOrWhiteSpace(dbo.Schema))
+            {
+                return QuoteIdentifier(dbo.Name);
+            }
+            else
+            {
+                return String.Format("{0}.{1}", QuoteIdentifier(dbo.Schema), QuoteIdentifier(dbo.Name));
+            }
         }
 
         public bool CheckTableExists(TableRef tblName)
@@ -445,7 +452,7 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
             sb.AppendLine("SELECT ");
             colNames.ForEach(i => sb.Append(QuoteIdentifier(i) + ","));
             sb.Remove(sb.Length - 1, 1);
-            sb.AppendLine(" FROM " + tbl.Name);
+            sb.AppendLine(" FROM " + FormatSchemaName(tbl));
 
             var cmd = new OleDbCommand(sb.ToString(), db, tx);
             return cmd.ExecuteReader();
@@ -488,7 +495,7 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
                 throw new ArgumentNullException("values");
 
             var sb = new StringBuilder();
-            sb.AppendLine(string.Format("INSERT INTO {0} (", QuoteIdentifier(tbl.Name)));
+            sb.AppendLine(string.Format("INSERT INTO {0} (", FormatSchemaName(tbl)));
 
             colNames.ForEach(i => sb.Append(QuoteIdentifier(i) + ","));
             sb.Remove(sb.Length - 1, 1);

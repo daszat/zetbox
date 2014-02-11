@@ -20,7 +20,7 @@ namespace at.dasz.DocumentManagement
     using Zetbox.DalProvider.Ef;
 
     /// <summary>
-    /// File with changeable content
+    /// Depricated
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="DynamicFileEfImpl")]
     [System.Diagnostics.DebuggerDisplay("DynamicFile")]

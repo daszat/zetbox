@@ -20,7 +20,7 @@ namespace at.dasz.DocumentManagement
     using Zetbox.DalProvider.Ef;
 
     /// <summary>
-    /// Static file. Content cannot be changed
+    /// Depricated
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="StaticFileEfImpl")]
     [System.Diagnostics.DebuggerDisplay("StaticFile")]

@@ -24,13 +24,9 @@ namespace at.dasz.DocumentManagement
     public static class DocumentActions
     {
         [Invocation]
-        public static void HandleBlobChange(at.dasz.DocumentManagement.Document obj, MethodReturnEventArgs<Zetbox.App.Base.Blob> e, Zetbox.App.Base.Blob oldBlob, Zetbox.App.Base.Blob newBlob)
+        public static void NotifyCreated(at.dasz.DocumentManagement.Document obj)
         {
-            if (oldBlob != null && !obj.Revisions.Contains(oldBlob))
-            {
-                obj.Revisions.Add(oldBlob);
-            }
-            e.Result = newBlob;
+            obj.KeepRevisions = true;
         }
     }
 }

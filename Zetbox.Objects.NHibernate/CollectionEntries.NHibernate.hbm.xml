@@ -110,8 +110,8 @@
                      column="`fk_ImplementedInterfaces`" />
         <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
     </class>
-    <class name="at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl+Document_has_Blob_RelationEntryProxy"
-           proxy="at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl+Document_has_Blob_RelationEntryProxy"
+    <class name="at.dasz.DocumentManagement.File_has_Blob_RelationEntryNHibernateImpl+File_has_Blob_RelationEntryProxy"
+           proxy="at.dasz.DocumentManagement.File_has_Blob_RelationEntryNHibernateImpl+File_has_Blob_RelationEntryProxy"
            table="`Document_has_Revisions`"
            schema="`doc`" >
 

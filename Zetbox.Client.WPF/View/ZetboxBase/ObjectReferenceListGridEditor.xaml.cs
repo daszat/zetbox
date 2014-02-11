@@ -44,13 +44,15 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
     /// </summary>
     [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
     public partial class ObjectReferenceListGridEditor
-        : PropertyEditor, IHasViewModel<ObjectListViewModel>
+        : PropertyEditor, IHasViewModel<ObjectListViewModel>, IDragDropTarget, IDragDropSource
     {
         public ObjectReferenceListGridEditor()
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             InitializeComponent();
+            _dragDrop = new WpfDragDropHelper(lst, this);
         }
+        private WpfDragDropHelper _dragDrop;
 
         private void ItemActivatedHandler(object sender, RoutedEventArgs e)
         {
@@ -118,6 +120,33 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
                 }
                 return _sortHelper;
             }
+        }
+        #endregion
+
+        #region IDragDrop*
+        bool IDragDropTarget.CanDrop
+        {
+            get { return ViewModel != null && ViewModel.CanDrop; }
+        }
+
+        string[] IDragDropTarget.AcceptableDataFormats
+        {
+            get
+            {
+                // Support as may known things as possible
+                // A speciallized ViewModel may handle the data
+                return WpfDragDropHelper.AllAcceptableDataFormats;
+            }
+        }
+
+        bool IDragDropTarget.OnDrop(string format, object data)
+        {
+            if (ViewModel == null) return false;
+            return ViewModel.OnDrop(data);
+        }
+        object IDragDropSource.GetData()
+        {
+            return ViewModel.DoDragDrop();
         }
         #endregion
     }

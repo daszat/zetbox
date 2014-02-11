@@ -569,7 +569,7 @@
            proxy="at.dasz.DocumentManagement.FileNHibernateImpl+FileProxy, Zetbox.Objects.NHibernateImpl"
            schema="`doc`"
            table="`Files`"
-           abstract="true"
+           abstract="false"
            dynamic-update="true"
            optimistic-lock="dirty"
            batch-size="100">
@@ -621,9 +621,26 @@
                   column="`ExportGuid`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
+        <property name="IsFileReadonly" 
+                  column="`IsFileReadonly`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="KeepRevisions" 
+                  column="`KeepRevisions`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
         <property name="Name" 
                   column="`Name`" 
                   optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <!-- NMProperty -->
+        <!-- rel=File_has_Blob_RelationEntry -->
+        <!-- relEnd=Document otherEnd=Revisions -->
+        <set name="Revisions" table="`Document_has_Revisions`" inverse="true" cascade="none" batch-size="100" >
+            <key column="`fk_Document`" />
+            <one-to-many class="at.dasz.DocumentManagement.File_has_Blob_RelationEntryNHibernateImpl+File_has_Blob_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
+        </set>
+
         <!-- ValueTypeProperty isValue -->
         <property name="Tags" 
                   column="`Tags`" 
@@ -641,15 +658,6 @@
             <key column="`ID`" />
 
             <!-- define the properties -->
-<!-- ObjectReferenceProperty -->
-        <!-- NMProperty -->
-        <!-- rel=Document_has_Blob_RelationEntry -->
-        <!-- relEnd=Document otherEnd=Revisions -->
-        <set name="Revisions" table="`Document_has_Revisions`" inverse="true" cascade="none" batch-size="100" >
-            <key column="`fk_Document`" />
-            <one-to-many class="at.dasz.DocumentManagement.Document_has_Blob_RelationEntryNHibernateImpl+Document_has_Blob_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
-        </set>
-
 
             <!-- define the subclasses -->
 
@@ -3806,6 +3814,10 @@
                   column="`ExportGuid`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
+        <property name="HelpText" 
+                  column="`HelpText`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
         <property name="IsList" 
                   column="`IsList`" 
                   optimistic-lock="false"/>
@@ -4296,6 +4308,10 @@
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
                   optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="HelpText" 
+                  column="`HelpText`" 
+                  optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
         <!-- rel=DataType_implements_Interface_RelationEntry -->
@@ -4439,6 +4455,10 @@
         <!-- ValueTypeProperty isValue -->
         <property name="IsAbstract" 
                   column="`IsAbstract`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="IsCreatedProgrammatically" 
+                  column="`IsCreatedProgrammatically`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
         <property name="IsFrozenObject" 
@@ -4947,6 +4967,10 @@
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
                   optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="HelpText" 
+                  column="`HelpText`" 
+                  optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Icon" column="`fk_Icon`" class="Zetbox.App.GUI.IconNHibernateImpl+IconProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -5116,6 +5140,10 @@
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
         <one-to-one name="FilterConfiguration" class="Zetbox.App.GUI.PropertyFilterConfigurationNHibernateImpl+PropertyFilterConfigurationProxy, Zetbox.Objects.NHibernateImpl" constrained="false" property-ref="Property" />
+        <!-- ValueTypeProperty isValue -->
+        <property name="HelpText" 
+                  column="`HelpText`" 
+                  optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
         <property name="Label" 
                   column="`Label`" 

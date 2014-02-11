@@ -23,14 +23,19 @@ using System.Windows.Media.Imaging;
 using Zetbox.Client.WPF.CustomControls;
 using Zetbox.App.Base;
 using System.IO;
+using System.Linq;
 using System.Text;
+using System.Windows.Media;
 
 namespace Zetbox.Client.WPF.View.DocumentManagement
 {
-    public abstract class PreviewEditor : UserControl, IHasViewModel<FileViewModel>
+    public abstract class PreviewEditor : UserControl, IHasViewModel<FileViewModel>, IDragDropTarget
     {
+        private WpfDragDropHelper _dragDrop;
+
         public PreviewEditor()
         {
+            _dragDrop = new WpfDragDropHelper(this);
         }
 
         public FileViewModel ViewModel
@@ -127,7 +132,7 @@ namespace Zetbox.Client.WPF.View.DocumentManagement
                     var isUtf8 = Utf8Checker.IsUtf8(s);
                     s.Seek(0, SeekOrigin.Begin);
                     var sr = new StreamReader(s, isUtf8 ? Encoding.UTF8 : Encoding.Default);
-                    
+
                     PreviewControl.Content = new TextBox()
                     {
                         Text = sr.ReadToEnd(),
@@ -146,6 +151,34 @@ namespace Zetbox.Client.WPF.View.DocumentManagement
             {
                 return false;
             }
+        }
+        #endregion
+
+        #region DragDrop
+        string[] IDragDropTarget.AcceptableDataFormats
+        {
+            get { return new[] { "FileDrop" }; }
+        }
+
+        bool IDragDropTarget.CanDrop
+        {
+            get
+            {
+                return ViewModel != null && ViewModel.CanUpload;
+            }
+        }
+
+        bool IDragDropTarget.OnDrop(string format, object data)
+        {
+            if (ViewModel == null) return false;
+            switch (format)
+            {
+                case "FileDrop":
+                    var files = (string[])data;
+                    ViewModel.Upload(files.First());
+                    return true;
+            }
+            return false;
         }
         #endregion
     }

@@ -22,12 +22,15 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
     /// Interaction logic for AnyReferencePropertyEditor.xaml
     /// </summary>
     [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
-    public partial class AnyReferencePropertyEditor : PropertyEditor, IHasViewModel<AnyReferencePropertyViewModel>
+    public partial class AnyReferencePropertyEditor : PropertyEditor, IHasViewModel<AnyReferencePropertyViewModel>, IDragDropTarget, IDragDropSource
     {
         public AnyReferencePropertyEditor()
         {
             InitializeComponent();
+            _dragDrop = new WpfDragDropHelper(this);
         }
+
+        private WpfDragDropHelper _dragDrop;
 
         public AnyReferencePropertyViewModel ViewModel
         {
@@ -38,5 +41,31 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
         {
             get { return null; }
         }
+
+        #region IDragDrop*
+        bool IDragDropTarget.CanDrop
+        {
+            get { return ViewModel != null && ViewModel.CanDrop; }
+        }
+
+        string[] IDragDropTarget.AcceptableDataFormats
+        {
+            get
+            {
+                return WpfDragDropHelper.ZetboxObjectDataFormats;
+            }
+        }
+
+        bool IDragDropTarget.OnDrop(string format, object data)
+        {
+            if (ViewModel == null) return false;
+            return ViewModel.OnDrop(data);
+        }
+
+        object IDragDropSource.GetData()
+        {
+            return ViewModel.DoDragDrop();
+        }
+        #endregion
     }
 }

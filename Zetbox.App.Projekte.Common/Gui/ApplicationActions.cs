@@ -12,26 +12,29 @@
 //
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
-namespace Zetbox.Client.Presentables.DocumentManagement
+
+namespace Zetbox.App.GUI
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using at.dasz.DocumentManagement;
+    using System.Text.RegularExpressions;
     using Zetbox.API;
-    using Zetbox.API.Configuration;
 
-    [ViewModelDescriptor]
-    public class StaticFileViewModel : FileViewModel
+    /// <summary>
+    /// The collected default actions for Applications
+    /// </summary>
+    [Implementor]
+    public static class ApplicationActions
     {
-        public new delegate StaticFileViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IDataObject obj);
-
-        public StaticFileViewModel(
-            IViewModelDependencies appCtx, ZetboxConfig config, IZetboxContext dataCtx, ViewModel parent,
-            File obj)
-            : base(appCtx, config, dataCtx, parent, obj)
+        /// <summary>
+        /// Creates the ToString() result for a specified Application.
+        /// </summary>
+        [Invocation]
+        public static void ToString(Application obj, MethodReturnEventArgs<string> e)
         {
+            e.Result = obj.Name.IfNullOrWhiteSpace("<empty application name>");
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2013-12-06T11:58:03Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2014-02-11T09:31:14Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="84f486f7-19fe-49ad-8e4a-6c05089e7684">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.650235Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
@@ -51,6 +51,7 @@ public static void ObjectIsValid(Application obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>true</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>Applications</ZetboxBase:TableName>
@@ -98,6 +99,7 @@ public static void ObjectIsValid(ControlKind obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>true</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>ControlKinds</ZetboxBase:TableName>
@@ -145,6 +147,7 @@ public static void ObjectIsValid(DateRangeFilterConfiguration obj, ObjectIsValid
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>DateRangeFilterConfigurations</ZetboxBase:TableName>
@@ -191,6 +194,7 @@ public static void ObjectIsValid(FilterConfiguration obj, ObjectIsValidEventArgs
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>true</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>true</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableMapping>2</ZetboxBase:TableMapping>
@@ -249,6 +253,7 @@ public static void ObjectIsValid(Icon obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>true</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>Icons</ZetboxBase:TableName>
@@ -328,6 +333,7 @@ public static void ObjectIsValid(MonthFilterConfiguration obj, ObjectIsValidEven
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>MonthFilterConfigurations</ZetboxBase:TableName>
@@ -375,6 +381,7 @@ public static void ObjectIsValid(NavigationAction obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>NavigationActions</ZetboxBase:TableName>
@@ -422,6 +429,7 @@ public static void ObjectIsValid(NavigationEntry obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>true</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>true</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>NavigationEntries</ZetboxBase:TableName>
@@ -469,6 +477,7 @@ public static void ObjectIsValid(NavigationScreen obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>true</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>NavigationScreens</ZetboxBase:TableName>
@@ -517,6 +526,7 @@ public static void ObjectIsValid(NavigationSearchScreen obj, ObjectIsValidEventA
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>NavigationSearchScreens</ZetboxBase:TableName>
@@ -565,6 +575,7 @@ public static void ObjectIsValid(ObjectClassFilterConfiguration obj, ObjectIsVal
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>true</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>ObjectClassFilterConfigurations</ZetboxBase:TableName>
@@ -613,6 +624,7 @@ public static void ObjectIsValid(OptionalPredicateFilterConfiguration obj, Objec
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>OptionalPredicateFilterConfigurations</ZetboxBase:TableName>
@@ -661,6 +673,7 @@ public static void ObjectIsValid(PropertyFilterConfiguration obj, ObjectIsValidE
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>true</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>PropertyFilterConfigurations</ZetboxBase:TableName>
@@ -709,6 +722,7 @@ public static void ObjectIsValid(RangeFilterConfiguration obj, ObjectIsValidEven
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>RangeFilterConfigurations</ZetboxBase:TableName>
@@ -756,6 +770,7 @@ public static void ObjectIsValid(SavedListConfiguration obj, ObjectIsValidEventA
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>SavedListConfigurations</ZetboxBase:TableName>
@@ -804,6 +819,7 @@ public static void ObjectIsValid(SinglePropertyFilterConfiguration obj, ObjectIs
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>SinglePropertyFilterConfigurations</ZetboxBase:TableName>
@@ -851,6 +867,7 @@ public static void ObjectIsValid(TagCache obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>TagCaches</ZetboxBase:TableName>
@@ -909,6 +926,7 @@ public static void ObjectIsValid(ViewDescriptor obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>true</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>ViewDescriptors</ZetboxBase:TableName>
@@ -955,6 +973,7 @@ public static void ObjectIsValid(ViewModelDescriptor obj, ObjectIsValidEventArgs
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>true</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>ViewModelDescriptors</ZetboxBase:TableName>
@@ -1013,6 +1032,7 @@ public static void ObjectIsValid(YearFilterConfiguration obj, ObjectIsValidEvent
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>YearFilterConfigurations</ZetboxBase:TableName>
@@ -8952,6 +8972,7 @@ public static void ObjectIsValid(AbstractModuleMember obj, ObjectIsValidEventArg
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>AbstractModuleMembers</ZetboxBase:TableName>
@@ -8997,6 +9018,7 @@ public static void ObjectIsValid(AccessControl obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>true</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>true</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>AccessControls</ZetboxBase:TableName>
@@ -9064,6 +9086,7 @@ public static void ObjectIsValid(Assembly obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>true</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>Assemblies</ZetboxBase:TableName>
@@ -9121,6 +9144,7 @@ public static void ObjectIsValid(BaseParameter obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>true</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>true</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableMapping>2</ZetboxBase:TableMapping>
@@ -9169,6 +9193,7 @@ public static void ObjectIsValid(Blob obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>Blobs</ZetboxBase:TableName>
@@ -9216,6 +9241,7 @@ public static void ObjectIsValid(BoolDefaultValue obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>BoolDefaultValues</ZetboxBase:TableName>
@@ -9264,6 +9290,7 @@ public static void ObjectIsValid(BoolParameter obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>BoolParameters</ZetboxBase:TableName>
@@ -9312,6 +9339,7 @@ public static void ObjectIsValid(BoolProperty obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>BoolProperties</ZetboxBase:TableName>
@@ -9359,6 +9387,7 @@ public static void ObjectIsValid(CalculatedObjectReferenceProperty obj, ObjectIs
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>CalculatedObjectReferenceProperties</ZetboxBase:TableName>
@@ -9406,6 +9435,7 @@ public static void ObjectIsValid(ClientReadOnlyConstraint obj, ObjectIsValidEven
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>ClientReadOnlyConstraints</ZetboxBase:TableName>
@@ -9454,6 +9484,7 @@ public static void ObjectIsValid(CLRObjectParameter obj, ObjectIsValidEventArgs 
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>CLRObjectParameters</ZetboxBase:TableName>
@@ -9502,6 +9533,7 @@ public static void ObjectIsValid(CompoundObject obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>8c72dff9-c3b8-417b-a2ef-5f22ffe9dd54</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>CompoundObjects</ZetboxBase:TableName>
@@ -9549,6 +9581,7 @@ public static void ObjectIsValid(CompoundObjectParameter obj, ObjectIsValidEvent
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>CompoundObjectParameters</ZetboxBase:TableName>
@@ -9597,6 +9630,7 @@ public static void ObjectIsValid(CompoundObjectProperty obj, ObjectIsValidEventA
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>CompoundObjectProperties</ZetboxBase:TableName>
@@ -9643,6 +9677,7 @@ public static void ObjectIsValid(Constraint obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>true</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>true</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableMapping>2</ZetboxBase:TableMapping>
@@ -9702,6 +9737,7 @@ public static void ObjectIsValid(CurrentDateTimeDefaultValue obj, ObjectIsValidE
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>CurrentDateTimeDefaultValues</ZetboxBase:TableName>
@@ -9749,6 +9785,7 @@ public static void ObjectIsValid(CurrentSchema obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>CurrentSchema</ZetboxBase:TableName>
@@ -9796,6 +9833,7 @@ public static void ObjectIsValid(DataType obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>8c72dff9-c3b8-417b-a2ef-5f22ffe9dd54</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>true</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>true</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>DataTypes</ZetboxBase:TableName>
@@ -9854,6 +9892,7 @@ public static void ObjectIsValid(DateTimeParameter obj, ObjectIsValidEventArgs e
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>DateTimeParameters</ZetboxBase:TableName>
@@ -9902,6 +9941,7 @@ public static void ObjectIsValid(DateTimeProperty obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>DateTimeProperties</ZetboxBase:TableName>
@@ -9980,6 +10020,7 @@ public static void ObjectIsValid(DecimalDefaultValue obj, ObjectIsValidEventArgs
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>DecimalDefaultValues</ZetboxBase:TableName>
@@ -10027,6 +10068,7 @@ public static void ObjectIsValid(DecimalParameter obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>DecimalParameters</ZetboxBase:TableName>
@@ -10075,6 +10117,7 @@ public static void ObjectIsValid(DecimalProperty obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>DecimalProperties</ZetboxBase:TableName>
@@ -10120,6 +10163,7 @@ public static void ObjectIsValid(DefaultPropertyValue obj, ObjectIsValidEventArg
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>true</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>true</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableMapping>2</ZetboxBase:TableMapping>
@@ -10180,6 +10224,7 @@ public static void ObjectIsValid(DoubleDefaultValue obj, ObjectIsValidEventArgs 
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>DoubleDefaultValues</ZetboxBase:TableName>
@@ -10228,6 +10273,7 @@ public static void ObjectIsValid(DoubleParameter obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>DoubleParameters</ZetboxBase:TableName>
@@ -10276,6 +10322,7 @@ public static void ObjectIsValid(DoubleProperty obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>DoubleProperties</ZetboxBase:TableName>
@@ -10323,6 +10370,7 @@ public static void ObjectIsValid(EnumDefaultValue obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>EnumDefaultValues</ZetboxBase:TableName>
@@ -10371,6 +10419,7 @@ public static void ObjectIsValid(Enumeration obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>8c72dff9-c3b8-417b-a2ef-5f22ffe9dd54</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>Enumerations</ZetboxBase:TableName>
@@ -10418,6 +10467,7 @@ public static void ObjectIsValid(EnumerationEntry obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>true</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>EnumerationEntries</ZetboxBase:TableName>
@@ -10466,6 +10516,7 @@ public static void ObjectIsValid(EnumerationProperty obj, ObjectIsValidEventArgs
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>EnumerationProperties</ZetboxBase:TableName>
@@ -10513,6 +10564,7 @@ public static void ObjectIsValid(EnumParameter obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>EnumParameters</ZetboxBase:TableName>
@@ -10559,6 +10611,7 @@ public static void ObjectIsValid(ExceptionLogEntry obj, ObjectIsValidEventArgs e
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>ExceptionLog</ZetboxBase:TableName>
@@ -10615,6 +10668,7 @@ public static void ObjectIsValid(FullTextIndexConstraint obj, ObjectIsValidEvent
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>FullTextIndexConstraints</ZetboxBase:TableName>
@@ -10661,6 +10715,7 @@ public static void ObjectIsValid(Group obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>true</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>Groups</ZetboxBase:TableName>
@@ -10707,6 +10762,7 @@ public static void ObjectIsValid(GroupMembership obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>27fe63e2-755c-4f8e-9831-d8d235da487d</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>GroupMemberships</ZetboxBase:TableName>
@@ -10755,6 +10811,7 @@ public static void ObjectIsValid(GuidProperty obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>true</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>GuidProperties</ZetboxBase:TableName>
@@ -10843,6 +10900,7 @@ public static void ObjectIsValid(Identity obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>Identities</ZetboxBase:TableName>
@@ -10929,6 +10987,7 @@ public static void ObjectIsValid(IndexConstraint obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>IndexConstraints</ZetboxBase:TableName>
@@ -10976,6 +11035,7 @@ public static void ObjectIsValid(InitOnlyConstraint obj, ObjectIsValidEventArgs 
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>InitOnlyConstraints</ZetboxBase:TableName>
@@ -11021,6 +11081,7 @@ public static void ObjectIsValid(InstanceConstraint obj, ObjectIsValidEventArgs 
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>6b368136-addd-4e86-ad29-3d2158a00de5</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>true</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>true</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>InstanceConstraint</ZetboxBase:TableName>
@@ -11068,6 +11129,7 @@ public static void ObjectIsValid(IntDefaultValue obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>IntDefaultValues</ZetboxBase:TableName>
@@ -11115,6 +11177,7 @@ public static void ObjectIsValid(IntegerRangeConstraint obj, ObjectIsValidEventA
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>IntegerRangeConstraints</ZetboxBase:TableName>
@@ -11163,6 +11226,7 @@ public static void ObjectIsValid(Interface obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>Interfaces</ZetboxBase:TableName>
@@ -11211,6 +11275,7 @@ public static void ObjectIsValid(IntParameter obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>IntParameters</ZetboxBase:TableName>
@@ -11259,6 +11324,7 @@ public static void ObjectIsValid(IntProperty obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>IntProperties</ZetboxBase:TableName>
@@ -11306,6 +11372,7 @@ public static void ObjectIsValid(InvokingConstraint obj, ObjectIsValidEventArgs 
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>InvokingConstraints</ZetboxBase:TableName>
@@ -11353,6 +11420,7 @@ public static void ObjectIsValid(IsValidIdentifierConstraint obj, ObjectIsValidE
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>IsValidIdentifierConstraints</ZetboxBase:TableName>
@@ -11400,6 +11468,7 @@ public static void ObjectIsValid(IsValidNamespaceConstraint obj, ObjectIsValidEv
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>IsValidNamespaceConstraints</ZetboxBase:TableName>
@@ -11447,6 +11516,7 @@ public static void ObjectIsValid(Method obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>true</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>Methods</ZetboxBase:TableName>
@@ -11494,6 +11564,7 @@ public static void ObjectIsValid(MethodInvocationConstraint obj, ObjectIsValidEv
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>MethodInvocationConstraints</ZetboxBase:TableName>
@@ -11541,6 +11612,7 @@ public static void ObjectIsValid(Module obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>84828181-4048-47a7-b526-01508b7a0fd0</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>true</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>Modules</ZetboxBase:TableName>
@@ -11600,6 +11672,7 @@ public static void ObjectIsValid(NewGuidDefaultValue obj, ObjectIsValidEventArgs
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>NewGuidDefaultValues</ZetboxBase:TableName>
@@ -11647,6 +11720,7 @@ public static void ObjectIsValid(NotNullableConstraint obj, ObjectIsValidEventAr
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>NotNullableConstraints</ZetboxBase:TableName>
@@ -11695,6 +11769,7 @@ public static void ObjectIsValid(ObjectClass obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>6b368136-addd-4e86-ad29-3d2158a00de5</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>ObjectClasses</ZetboxBase:TableName>
@@ -11743,6 +11818,7 @@ public static void ObjectIsValid(ObjectReferenceParameter obj, ObjectIsValidEven
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>ObjectParameters</ZetboxBase:TableName>
@@ -11791,6 +11867,7 @@ public static void ObjectIsValid(ObjectReferencePlaceholderProperty obj, ObjectI
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>true</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>ObjectReferencePlaceholderProperties</ZetboxBase:TableName>
@@ -11839,6 +11916,7 @@ public static void ObjectIsValid(ObjectReferenceProperty obj, ObjectIsValidEvent
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>ObjectReferenceProperties</ZetboxBase:TableName>
@@ -11886,6 +11964,7 @@ public static void ObjectIsValid(Property obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>true</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>true</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableMapping>2</ZetboxBase:TableMapping>
@@ -11934,6 +12013,7 @@ public static void ObjectIsValid(ReadOnlyConstraint obj, ObjectIsValidEventArgs 
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>true</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>ReadOnlyConstraints</ZetboxBase:TableName>
@@ -11992,6 +12072,7 @@ public static void ObjectIsValid(Relation obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>225bfb18-82fc-429d-81ff-e1ba738fdbc7</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>true</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>Relations</ZetboxBase:TableName>
@@ -12038,6 +12119,7 @@ public static void ObjectIsValid(RelationEnd obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d4d5ae35-104d-4445-b0a9-2d49ae5f7716</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>true</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>RelationEnds</ZetboxBase:TableName>
@@ -12084,6 +12166,7 @@ public static void ObjectIsValid(RoleMembership obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>882ba118-6545-4ba8-83de-0e973a38fc3e</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>RoleMemberships</ZetboxBase:TableName>
@@ -12131,6 +12214,7 @@ public static void ObjectIsValid(Sequence obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>true</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>Sequences</ZetboxBase:TableName>
@@ -12176,6 +12260,7 @@ public static void ObjectIsValid(SequenceData obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>SequenceData</ZetboxBase:TableName>
@@ -12222,6 +12307,7 @@ public static void ObjectIsValid(ServiceDescriptor obj, ObjectIsValidEventArgs e
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>ServiceDescriptors</ZetboxBase:TableName>
@@ -12281,6 +12367,7 @@ public static void ObjectIsValid(StringDefaultValue obj, ObjectIsValidEventArgs 
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>StringDefaultValues</ZetboxBase:TableName>
@@ -12329,6 +12416,7 @@ public static void ObjectIsValid(StringParameter obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>StringParameters</ZetboxBase:TableName>
@@ -12377,6 +12465,7 @@ public static void ObjectIsValid(StringProperty obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>StringProperties</ZetboxBase:TableName>
@@ -12424,6 +12513,7 @@ public static void ObjectIsValid(StringRangeConstraint obj, ObjectIsValidEventAr
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>StringRangeConstraints</ZetboxBase:TableName>
@@ -12483,6 +12573,7 @@ public static void ObjectIsValid(ValueTypeProperty obj, ObjectIsValidEventArgs e
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>true</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>ValueTypeProperties</ZetboxBase:TableName>
@@ -12530,6 +12621,7 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>true</GUI:IsSimpleObject>
     <ZetboxBase:TableName>ViewReadOnlyConstraints</ZetboxBase:TableName>
@@ -14474,6 +14566,44 @@ public static void isValid_ExportGuid(BaseParameter obj, PropertyIsValidEventArg
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:GuidProperty>
+  <ZetboxBase:StringProperty ExportGuid="10e35458-34d5-4e16-ba7b-9729d9e5d1e9">
+    <ZetboxBase:CategoryTags>GUI</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2014-02-11T07:37:09.985051Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_HelpText(BaseParameter obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_HelpText(BaseParameter obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_HelpText(BaseParameter obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_HelpText(BaseParameter obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.HelpText == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2014-02-11T07:37:09.985051Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>A HTML string with a help text</ZetboxBase:Description>
+    <ZetboxBase:Label>Help text</ZetboxBase:Label>
+    <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
+    <ZetboxBase:Name>HelpText</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>63b8e3f7-e663-4fde-a09a-64ca876586bd</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>1003</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>a5e18586-d80f-49cf-8aa1-41d305eee289</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:StringProperty>
   <ZetboxBase:BoolProperty ExportGuid="ec4d5dbc-f738-4eb3-a663-2328d0baa79c">
     <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
@@ -16062,9 +16192,47 @@ public static void isValid_ExportGuid(DataType obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:GuidProperty>
+  <ZetboxBase:StringProperty ExportGuid="35f1afb3-eb6f-455d-9794-4f1f2825cbb1">
+    <ZetboxBase:CategoryTags>GUI</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2014-02-11T07:35:04.85654Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_HelpText(DataType obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_HelpText(DataType obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_HelpText(DataType obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_HelpText(DataType obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.HelpText == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2014-02-11T07:35:04.85654Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>A HTML string with a help text</ZetboxBase:Description>
+    <ZetboxBase:Label>Help text</ZetboxBase:Label>
+    <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
+    <ZetboxBase:Name>HelpText</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>6f005f31-c09c-45f9-9bcb-44090ebf0d1f</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>801</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>a5e18586-d80f-49cf-8aa1-41d305eee289</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:StringProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="a9ec04c2-0807-4d6c-a96a-824d13e5c571">
     <ZetboxBase:CategoryTags>DataModel</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-07-13T18:53:07.176233Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2014-02-11T07:35:04.85654Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ImplementsInterfaces(DataType obj, PropertyGetterEventArgs&lt;ICollection&lt;Zetbox.App.Base.Interface&gt;&gt; e)
 {
@@ -16093,7 +16261,7 @@ public static void isValid_ImplementsInterfaces(DataType obj, PropertyIsValidEve
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>ImplementsInterfaces</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>6f005f31-c09c-45f9-9bcb-44090ebf0d1f</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>801</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>802</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>67a49c49-b890-4d35-a8db-1f8e43bfc7df</GUI:ValueModelDescriptor>
     <ZetboxBase:EagerLoading>false</ZetboxBase:EagerLoading>
     <ZetboxBase:RelationEnd>febffc17-2bef-4c1a-9771-0c51c729d248</ZetboxBase:RelationEnd>
@@ -19100,6 +19268,44 @@ public static void isValid_ExportGuid(Method obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:GuidProperty>
+  <ZetboxBase:StringProperty ExportGuid="98b79420-cba4-4ac0-8475-25ac8386350d">
+    <ZetboxBase:CategoryTags>GUI</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2014-02-11T07:37:09.985051Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_HelpText(Method obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_HelpText(Method obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_HelpText(Method obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_HelpText(Method obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.HelpText == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2014-02-11T07:36:08.274881Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>A HTML string with a help text</ZetboxBase:Description>
+    <ZetboxBase:Label>Help text</ZetboxBase:Label>
+    <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
+    <ZetboxBase:Name>HelpText</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>ef79c0b9-55e0-45ad-8233-1ff8f852661f</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>1105</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>a5e18586-d80f-49cf-8aa1-41d305eee289</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:StringProperty>
   <ZetboxBase:BoolProperty ExportGuid="1bd6290d-2f38-4cc0-96b9-83a0b00c951b">
     <ZetboxBase:CategoryTags>Main, Summary</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2012-04-05T05:26:13.120035Z</ZetboxBase:ChangedOn>
@@ -19753,7 +19959,7 @@ public static void get_CodeTemplate(ObjectClass obj, PropertyGetterEventArgs&lt;
   </ZetboxBase:StringProperty>
   <ZetboxBase:BoolProperty ExportGuid="e9d1402e-3580-4084-8836-c44844683191">
     <ZetboxBase:CategoryTags>DataModel</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2013-01-02T11:46:35.066339Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2014-02-11T08:11:49.413302Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_IsAbstract(ObjectClass obj, PropertyGetterEventArgs&lt;bool&gt; e)
 {
@@ -19783,6 +19989,54 @@ public static void isValid_IsAbstract(ObjectClass obj, PropertyIsValidEventArgs 
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>IsAbstract</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>20888dfc-1fbc-47c8-9f3c-c6a30a5c0048</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>502</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>09d1f453-d0d9-429e-88e7-e84b33de7c2e</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:BoolProperty>
+  <ZetboxBase:BoolProperty ExportGuid="176073eb-d188-40ee-9ae6-860c532da0bd">
+    <ZetboxBase:CategoryTags>DataModel</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2014-02-11T08:11:49.413302Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_IsCreatedProgrammatically(ObjectClass obj, PropertyGetterEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_IsCreatedProgrammatically(ObjectClass obj, PropertyPreSetterEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_IsCreatedProgrammatically(ObjectClass obj, PropertyPostSetterEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_IsCreatedProgrammatically(ObjectClass obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.IsCreatedProgrammatically == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2014-02-11T08:11:49.413302Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultValue>e5f67b35-fd52-44f4-ade6-f4b9d2a17416</ZetboxBase:DefaultValue>
+    <ZetboxBase:Description>Indicated that the type will be created programmatically</ZetboxBase:Description>
+    <ZetboxBase:HelpText>&lt;p&gt;Indicated that the type will be created programmatically.&lt;/p&gt;
+&lt;p&gt;This will prevent the UI to propose this class in a data type selection dialog while creating a new instance.&lt;/p&gt;
+&lt;p&gt;This does not influence any search. The ObjectBrowser will show this class like any other class.&lt;/p&gt;
+&lt;p&gt;
+&lt;strong&gt;Examples:&lt;/strong&gt; 
+&lt;ul&gt;
+&lt;li&gt;Imported documents are created by the file importer service.&lt;/li&gt;
+&lt;li&gt;Periodically invoices created by a service (in contrast to invoices created by hand)&lt;/li&gt;
+&lt;/p&gt;</ZetboxBase:HelpText>
+    <ZetboxBase:Label>Is created programmatically</ZetboxBase:Label>
+    <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
+    <ZetboxBase:Name>IsCreatedProgrammatically</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>20888dfc-1fbc-47c8-9f3c-c6a30a5c0048</ZetboxBase:ObjectClass>
     <ZetboxBase:Properties_pos>501</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>09d1f453-d0d9-429e-88e7-e84b33de7c2e</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
@@ -19791,7 +20045,7 @@ public static void isValid_IsAbstract(ObjectClass obj, PropertyIsValidEventArgs 
   </ZetboxBase:BoolProperty>
   <ZetboxBase:BoolProperty ExportGuid="13c33710-ea02-4621-ad50-294a1f36b07d">
     <ZetboxBase:CategoryTags>Physical</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2013-01-02T11:47:43.583258Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2014-02-11T08:11:49.413302Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_IsFrozenObject(ObjectClass obj, PropertyGetterEventArgs&lt;bool&gt; e)
 {
@@ -19821,7 +20075,7 @@ public static void isValid_IsFrozenObject(ObjectClass obj, PropertyIsValidEventA
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>IsFrozenObject</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>20888dfc-1fbc-47c8-9f3c-c6a30a5c0048</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>803</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>804</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>09d1f453-d0d9-429e-88e7-e84b33de7c2e</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -20707,6 +20961,44 @@ public static void isValid_ExportGuid(Property obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:GuidProperty>
+  <ZetboxBase:StringProperty ExportGuid="dc09afbf-9cb8-45ef-b7c5-b1c3b948c7e5">
+    <ZetboxBase:CategoryTags>GUI</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2014-02-11T07:35:04.85654Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_HelpText(Property obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_HelpText(Property obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_HelpText(Property obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_HelpText(Property obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.HelpText == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2014-02-11T07:35:04.85654Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>A HTML string with a help text</ZetboxBase:Description>
+    <ZetboxBase:Label>Help text</ZetboxBase:Label>
+    <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
+    <ZetboxBase:Name>HelpText</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>e5f93f63-9cb8-40a5-8118-d1d9e479370c</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>1502</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>a5e18586-d80f-49cf-8aa1-41d305eee289</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:StringProperty>
   <ZetboxBase:StringProperty ExportGuid="34fc8b17-e9c2-43c5-a6d6-908551a8818b">
     <ZetboxBase:CategoryTags>Main,Summary</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2012-08-03T11:58:33.975812Z</ZetboxBase:ChangedOn>
@@ -25614,6 +25906,12 @@ public static void isValid_IsList(ValueTypeProperty obj, PropertyIsValidEventArg
     <ZetboxBase:ConstrainedProperty>74265fbf-2340-4828-82fa-cff4a0d18ffa</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="a52747a7-f5e8-4822-a06b-e3eaf3c36852">
+    <ZetboxBase:ChangedOn>2014-02-11T07:37:09.985051Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>10e35458-34d5-4e16-ba7b-9729d9e5d1e9</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2014-02-11T07:37:09.985051Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="f141dbc7-c0ba-4da9-ad3e-2b27e9ee56a5">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:05.040027Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>ec4d5dbc-f738-4eb3-a663-2328d0baa79c</ZetboxBase:ConstrainedProperty>
@@ -25902,6 +26200,12 @@ public static void isValid_IsList(ValueTypeProperty obj, PropertyIsValidEventArg
     <ZetboxBase:ConstrainedProperty>1fdb011e-2098-4077-b5e9-dd2eeafa727c</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="79c14a10-53cb-44bc-b8c1-27b0aba23a94">
+    <ZetboxBase:ChangedOn>2014-02-11T07:35:04.85654Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>35f1afb3-eb6f-455d-9794-4f1f2825cbb1</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2014-02-11T07:35:04.85654Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="e3ed0fe1-d595-4b70-b605-af5fc4d3d86a">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:05.26804Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>4e1fb30b-e528-4968-95b0-f3a38eafe643</ZetboxBase:ConstrainedProperty>
@@ -26378,6 +26682,12 @@ public static void isValid_IsList(ValueTypeProperty obj, PropertyIsValidEventArg
     <ZetboxBase:ConstrainedProperty>842eb3fc-3c8f-47d6-a59f-225c75ec2439</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="0379ceec-8e8c-49ab-9df5-f407bd1e5824">
+    <ZetboxBase:ChangedOn>2014-02-11T07:36:08.274881Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>98b79420-cba4-4ac0-8475-25ac8386350d</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2014-02-11T07:36:08.274881Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:StringRangeConstraint ExportGuid="66ebf0ee-c350-451e-912f-ed7e34f1f986">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:05.605059Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>4ce1447d-5ba3-40a9-b665-a435c7a028aa</ZetboxBase:ConstrainedProperty>
@@ -26506,6 +26816,11 @@ public static void isValid_IsList(ValueTypeProperty obj, PropertyIsValidEventArg
     <ZetboxBase:ConstrainedProperty>e9d1402e-3580-4084-8836-c44844683191</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2010-03-10T22:32:30Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="73be035b-4a25-420b-ba7a-78603c8d733e">
+    <ZetboxBase:ChangedOn>2014-02-11T08:11:49.413302Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>176073eb-d188-40ee-9ae6-860c532da0bd</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2014-02-11T08:11:49.413302Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="2cf03dce-7f66-4f85-968f-708ebd1819f4">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:05.702065Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>13c33710-ea02-4621-ad50-294a1f36b07d</ZetboxBase:ConstrainedProperty>
@@ -26627,6 +26942,12 @@ public static void isValid_IsList(ValueTypeProperty obj, PropertyIsValidEventArg
     <ZetboxBase:ConstrainedProperty>ca0a099d-3f4c-4604-8303-d751e57041bb</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="554aca4c-a376-41af-902c-e82a890e7717">
+    <ZetboxBase:ChangedOn>2014-02-11T07:35:04.85654Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>dc09afbf-9cb8-45ef-b7c5-b1c3b948c7e5</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2014-02-11T07:35:04.85654Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:StringRangeConstraint ExportGuid="c5832436-8f9c-44b9-b08f-67b807cd3d92">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:05.782069Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>34fc8b17-e9c2-43c5-a6d6-908551a8818b</ZetboxBase:ConstrainedProperty>
@@ -27480,6 +27801,12 @@ public static void isValid_IsList(ValueTypeProperty obj, PropertyIsValidEventArg
     <ZetboxBase:ChangedOn>2012-07-13T18:51:10.984588Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2012-07-13T18:51:10.984588Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Property>e9d1402e-3580-4084-8836-c44844683191</ZetboxBase:Property>
+    <ZetboxBase:BoolValue>false</ZetboxBase:BoolValue>
+  </ZetboxBase:BoolDefaultValue>
+  <ZetboxBase:BoolDefaultValue ExportGuid="e5f67b35-fd52-44f4-ade6-f4b9d2a17416">
+    <ZetboxBase:ChangedOn>2014-02-11T08:11:49.413302Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2014-02-11T08:11:49.413302Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Property>176073eb-d188-40ee-9ae6-860c532da0bd</ZetboxBase:Property>
     <ZetboxBase:BoolValue>false</ZetboxBase:BoolValue>
   </ZetboxBase:BoolDefaultValue>
   <ZetboxBase:BoolDefaultValue ExportGuid="ed9adba6-9e57-47a3-8cb4-fb957b83c650">
@@ -30066,6 +30393,11 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
     <GUI:IconFile>stop.png</GUI:IconFile>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
   </GUI:Icon>
+  <GUI:Icon ExportGuid="d1d1394e-7fb6-4130-9cf7-04d6551055c4">
+    <GUI:Blob>d14e368a-7da0-4eef-8b92-e460fe41d3a0</GUI:Blob>
+    <GUI:IconFile>tip.png</GUI:IconFile>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+  </GUI:Icon>
   <GUI:Icon ExportGuid="32dc1dd9-6f33-486a-a504-133f93ae02b9">
     <GUI:Blob>22641100-ee14-42cb-929b-bab472686e0f</GUI:Blob>
     <GUI:IconFile>todo.png</GUI:IconFile>
@@ -30317,6 +30649,13 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
     <ZetboxBase:MimeType>image/png</ZetboxBase:MimeType>
     <ZetboxBase:OriginalName>stop.png</ZetboxBase:OriginalName>
     <ZetboxBase:StoragePath>2011\05\04\(6a91dc8a-4814-4c99-ae52-dff610c2cf78) - stop.png</ZetboxBase:StoragePath>
+  </ZetboxBase:Blob>
+  <ZetboxBase:Blob ExportGuid="d14e368a-7da0-4eef-8b92-e460fe41d3a0">
+    <ZetboxBase:ChangedOn>2014-02-11T08:38:08.719728Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2014-02-11T08:38:08.719728Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MimeType>image/png</ZetboxBase:MimeType>
+    <ZetboxBase:OriginalName>tip.png</ZetboxBase:OriginalName>
+    <ZetboxBase:StoragePath>2014\02\11\(d14e368a-7da0-4eef-8b92-e460fe41d3a0) - tip.png</ZetboxBase:StoragePath>
   </ZetboxBase:Blob>
   <ZetboxBase:Blob ExportGuid="22641100-ee14-42cb-929b-bab472686e0f">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:12.260237Z</ZetboxBase:ChangedOn>

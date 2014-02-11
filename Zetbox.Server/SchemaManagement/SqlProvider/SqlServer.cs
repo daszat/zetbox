@@ -428,6 +428,19 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
                     QuoteIdentifier(newTblName.Schema),
                     FormatSchemaName(intermediateName)));
             }
+
+            
+            foreach (var r in ExecuteReader(@"SELECT dc.name, c.name FROM 
+	sys.default_constraints dc
+	inner join sys.syscolumns c on c.colid = dc.parent_column_id and c.id = OBJECT_ID(@tbl)
+WHERE parent_object_id = OBJECT_ID(@tbl)", new Dictionary<string, object>(){
+                    { "@tbl", FormatSchemaName(newTblName) } }))
+            {
+                var oldDCName = new ConstraintRef(newTblName.Database, newTblName.Schema, r.GetString(0));
+                var colName = r.GetString(1);
+                var newDCName = ConstructDefaultConstraintName(newTblName, colName);
+                ExecuteNonQuery(string.Format("EXEC sp_rename '{0}', '{1}'", FormatSchemaName(oldDCName), newDCName));
+            }
         }
 
         public override bool CheckColumnExists(TableRef tblName, string colName)

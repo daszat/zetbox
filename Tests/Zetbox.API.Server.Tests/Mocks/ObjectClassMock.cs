@@ -131,6 +131,12 @@ namespace Zetbox.API.Server.Mocks
             set;
         }
 
+        public string HelpText
+        {
+            get;
+            set;
+        }
+
         public ICollection<Zetbox.App.Base.Method> Methods
         {
             get { throw new NotImplementedException(); }
@@ -160,6 +166,12 @@ namespace Zetbox.API.Server.Mocks
         }
 
         public bool ShowNameInLists
+        {
+            get;
+            set;
+        }
+
+        public bool IsCreatedProgrammatically
         {
             get;
             set;

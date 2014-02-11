@@ -192,10 +192,7 @@
       <DependentUpon>ImportedFileNavigationSearchScreenViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Presentables\DocumentManagement\ImportedFileViewModel.cs" />
-    <Compile Include="Presentables\DocumentManagement\DynamicFileViewModel.cs" />
-    <Compile Include="Presentables\DocumentManagement\StaticFilePropertyViewModel.cs" />
-    <Compile Include="Presentables\DocumentManagement\StaticFileViewModel.cs" />
-    <Compile Include="Presentables\DocumentManagement\DocumentViewModel.cs" />
+    <Compile Include="Presentables\DocumentManagement\FilePropertyViewModel.cs" />
     <Compile Include="Presentables\DtoViewModels\DtoExporter.cs" />
     <Compile Include="Presentables\DtoViewModels\DtoBuilder.cs" />
     <Compile Include="Presentables\DtoViewModels\DtoBaseViewModel.cs" />
@@ -242,6 +239,7 @@
     </Compile>
     <Compile Include="Presentables\ZetboxBase\GroupMembershipViewModel.cs" />
     <Compile Include="Presentables\ZetboxBase\AnyReferencePropertyViewModel.cs" />
+    <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModel.DragDrop.cs" />
     <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModel.Paging.cs" />
     <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModel.Commands.cs" />
     <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModel.PrintExport.cs" />

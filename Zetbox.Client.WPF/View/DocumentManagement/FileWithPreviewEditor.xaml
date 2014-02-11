@@ -38,6 +38,13 @@
                     <ctrls:LabeledView DataContext="{Binding PropertyModelsByName[Name]}" />
                     <ctrls:LabeledView DataContext="{Binding PropertyModelsByName[Tags]}" />
                     <ctrls:LabeledView DataContext="{Binding PropertyModelsByName[AttachedTo]}" />
+                    <ctrls:LabeledView DataContext="{Binding PropertyModelsByName[IsFileReadonly]}" />
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Revisions">
+                <StackPanel>
+                    <ctrls:LabeledView DataContext="{Binding PropertyModelsByName[KeepRevisions]}" />
+                    <ctrls:LabeledView DataContext="{Binding PropertyModelsByName[Revisions]}" />
                 </StackPanel>
             </TabItem>
             <TabItem Header="Metadata">

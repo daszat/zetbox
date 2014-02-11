@@ -42,6 +42,10 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
     public abstract class InstanceListBaseDisplay : InstanceCollectionBase
     {
         public abstract ListView ListView { get; }
+        protected override Control ListControl
+        {
+            get { return ListView; }
+        }
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {

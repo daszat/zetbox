@@ -114,7 +114,7 @@ namespace at.dasz.DocumentManagement
     /// ObjectCollectionEntry for Document has Revisions
     /// </summary>
     [Zetbox.API.DefinitionGuid("69d27812-e981-443b-a94b-dfe1a95f3aad")]
-    public interface Document_has_Blob_RelationEntry : IRelationListEntry<Document, Blob>, Zetbox.App.Base.IExportable 
+    public interface File_has_Blob_RelationEntry : IRelationListEntry<File, Blob>, Zetbox.App.Base.IExportable 
     {
 
     }

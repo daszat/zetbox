@@ -38,13 +38,15 @@ namespace Zetbox.Client.WPF.View.ObjectEditor
     /// Interaction logic for DesktopView.xaml
     /// </summary>
     [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
-    public partial class WorkspaceDisplay : WindowView, IHasViewModel<WorkspaceViewModel>
+    public partial class WorkspaceDisplay : WindowView, IHasViewModel<WorkspaceViewModel>, IDragDropTarget, IDragDropSource
     {
         public WorkspaceDisplay()
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             InitializeComponent();
+            _dragDrop = new WpfDragDropHelper(this.lstItems, this);
         }
+        private WpfDragDropHelper _dragDrop;
 
         public WorkspaceViewModel ViewModel
         {
@@ -64,6 +66,32 @@ namespace Zetbox.Client.WPF.View.ObjectEditor
             _columnWidth = column0.Width;
             column0.Width = GridLength.Auto;
             gridSplitter.IsEnabled = false;
+        }
+        #endregion
+
+        #region IDragDrop*
+        bool IDragDropTarget.CanDrop
+        {
+            get { return ViewModel != null && ViewModel.CanDrop; }
+        }
+
+        string[] IDragDropTarget.AcceptableDataFormats
+        {
+            get
+            {
+                return WpfDragDropHelper.ZetboxObjectDataFormats;
+            }
+        }
+
+        bool IDragDropTarget.OnDrop(string format, object data)
+        {
+            if (ViewModel == null) return false;
+            return ViewModel.OnDrop(data);
+        }
+
+        object IDragDropSource.GetData()
+        {
+            return ViewModel.DoDragDrop();
         }
         #endregion
     }

@@ -130,10 +130,10 @@
     <None Include="Resources\dasz_LogoM_RGB_72dpi.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="SolutionItems\Data\%24safesolutionname%24.xml">
+    <EmbeddedResource Include="SolutionItems\Data\%24modulename%24.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="SolutionItems\Modules\%24safesolutionname%24.xml">
+    <EmbeddedResource Include="SolutionItems\Modules\%24modulename%24.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

@@ -76,6 +76,14 @@ namespace ZetboxApp.Wizard
                 replacementsDictionary.Add("$ormappermodule$", dlg.ORMapperModule);
                 replacementsDictionary.Add("$schema$", dlg.Schema);
                 replacementsDictionary.Add("$provider$", dlg.Provider);
+
+                replacementsDictionary.Add("$modulename$", dlg.ModuleName);
+                replacementsDictionary.Add("$description$", dlg.Description);
+                replacementsDictionary.Add("$namespace$", dlg.Namespace);
+                replacementsDictionary.Add("$schemaName$", dlg.SchemaName);
+
+                replacementsDictionary.Add("$moduleguid$", System.Xml.XmlConvert.ToString(Guid.NewGuid()));
+                replacementsDictionary.Add("$modulexmldatetime$", System.Xml.XmlConvert.ToString(DateTime.Now, System.Xml.XmlDateTimeSerializationMode.Utc));
             }
             else
             {
@@ -231,6 +239,10 @@ namespace ZetboxApp.Wizard
                 {
                     allProjects["server"] = prj;
                 }
+                else if (prj.Name == ToProjectName("Assets"))
+                {
+                    allProjects["assets"] = prj;
+                }
             }
 
             foreach (Project prj in _solution.Projects)
@@ -238,6 +250,7 @@ namespace ZetboxApp.Wizard
                 VSLangProj.VSProject vsProj = (VSLangProj.VSProject)prj.Object;
                 if (prj.Name == ToProjectName("Common"))
                 {
+                    vsProj.References.AddProject(allProjects["assets"]).CopyLocal = false;
                 }
                 else if (prj.Name == ToProjectName("Client"))
                 {

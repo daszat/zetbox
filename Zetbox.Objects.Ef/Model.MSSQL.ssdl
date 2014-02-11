@@ -331,17 +331,17 @@
     
     <!-- 
     Relation: FK_Document_has_Revisions
-    A: ZeroOrMore Document as Document
+    A: ZeroOrMore File as Document
     B: ZeroOrMore Blob as Revisions
     Preferred Storage: Separate
     -->
-    <EntitySet Name="Document_has_Blob_RelationEntry" EntityType="Model.Store.Document_has_Blob_RelationEntry" Schema="doc" Table="Document_has_Revisions" />
+    <EntitySet Name="File_has_Blob_RelationEntry" EntityType="Model.Store.File_has_Blob_RelationEntry" Schema="doc" Table="Document_has_Revisions" />
     <AssociationSet Name="FK_Document_has_Revisions_A" Association="Model.Store.FK_Document_has_Revisions_A" >
-      <End Role="Document" EntitySet="Document" />
-      <End Role="CollectionEntry" EntitySet="Document_has_Blob_RelationEntry" />
+      <End Role="Document" EntitySet="File" />
+      <End Role="CollectionEntry" EntitySet="File_has_Blob_RelationEntry" />
     </AssociationSet>
     <AssociationSet Name="FK_Document_has_Revisions_B" Association="Model.Store.FK_Document_has_Revisions_B" >
-      <End Role="CollectionEntry" EntitySet="Document_has_Blob_RelationEntry" />
+      <End Role="CollectionEntry" EntitySet="File_has_Blob_RelationEntry" />
       <End Role="Revisions" EntitySet="Blob" />
     </AssociationSet>
     
@@ -1454,6 +1454,7 @@
     <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="HelpText" Type="nvarchar" Nullable="true" />
     <Property Name="IsList" Type="bit" Nullable="false" />
     <Property Name="IsNullable" Type="bit" Nullable="false" />
     <Property Name="IsReturnParameter" Type="bit" Nullable="false" />
@@ -1589,6 +1590,7 @@
     <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="HelpText" Type="nvarchar" Nullable="true" />
     <Property Name="Name" Type="nvarchar" MaxLength="51" Nullable="false" />
     <Property Name="ShowIconInLists" Type="bit" Nullable="false" />
     <Property Name="ShowIdInLists" Type="bit" Nullable="false" />
@@ -1778,6 +1780,8 @@
     <Property Name="ChangedOn" Type="datetime2" Nullable="false" />
     <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="IsFileReadonly" Type="bit" Nullable="false" />
+    <Property Name="KeepRevisions" Type="bit" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="1024" Nullable="true" />
     <Property Name="Tags" Type="nvarchar" MaxLength="2000" Nullable="true" />
     <Property Name="AttachedTo_ObjClass" Type="uniqueidentifier" Nullable="true" />
@@ -1947,6 +1951,7 @@
     <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="HelpText" Type="nvarchar" Nullable="true" />
     <Property Name="InvokeOnServer" Type="bit" Nullable="true" />
     <Property Name="IsDisplayable" Type="bit" Nullable="false" />
     <Property Name="Label" Type="nvarchar" MaxLength="200" Nullable="true" />
@@ -2119,6 +2124,7 @@
     <Property Name="fk_DefaultViewModelDescriptor" Type="int" />
     <Property Name="CodeTemplate" Type="nvarchar" MaxLength="1000" Nullable="true" />
     <Property Name="IsAbstract" Type="bit" Nullable="false" />
+    <Property Name="IsCreatedProgrammatically" Type="bit" Nullable="false" />
     <Property Name="IsFrozenObject" Type="bit" Nullable="false" />
     <Property Name="IsSimpleObject" Type="bit" Nullable="false" />
     <Property Name="TableMapping" Type="int" Nullable="true" />
@@ -2233,6 +2239,7 @@
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="DisableExport" Type="bit" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="HelpText" Type="nvarchar" Nullable="true" />
     <Property Name="Label" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="RequestedWidth" Type="int" Nullable="true" />
@@ -3041,7 +3048,7 @@
   </Association>
 
 	
-  <EntityType Name="Document_has_Blob_RelationEntry">
+  <EntityType Name="File_has_Blob_RelationEntry">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -3055,8 +3062,8 @@
 
   <!-- A to CollectionEntry -->
   <Association Name="FK_Document_has_Revisions_A">
-    <End Role="Document" Type="Model.Store.Document" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.Document_has_Blob_RelationEntry" Multiplicity="*" />
+    <End Role="Document" Type="Model.Store.File" Multiplicity="0..1" />
+    <End Role="CollectionEntry" Type="Model.Store.File_has_Blob_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Document">
         <PropertyRef Name="ID" />
@@ -3070,7 +3077,7 @@
   <!-- B to CollectionEntry -->
   <Association Name="FK_Document_has_Revisions_B">
     <End Role="Revisions" Type="Model.Store.Blob" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.Document_has_Blob_RelationEntry" Multiplicity="*" />
+    <End Role="CollectionEntry" Type="Model.Store.File_has_Blob_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Revisions">
         <PropertyRef Name="ID" />

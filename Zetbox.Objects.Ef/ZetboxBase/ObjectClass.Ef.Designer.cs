@@ -555,6 +555,88 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnFi
         public static event PropertyIsValidHandler<Zetbox.App.Base.ObjectClass> OnIsAbstract_IsValid;
 
         /// <summary>
+        /// Indicated that the type will be created programmatically
+        /// </summary>
+        // value type property
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public bool IsCreatedProgrammatically
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _IsCreatedProgrammatically;
+                if (!_isIsCreatedProgrammaticallySet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("176073eb-d188-40ee-9ae6-860c532da0bd"));
+                    if (__p != null) {
+                        _isIsCreatedProgrammaticallySet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this._IsCreatedProgrammatically = (bool)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'ObjectClass.IsCreatedProgrammatically'");
+                    }
+                }
+                if (OnIsCreatedProgrammatically_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<bool>(__result);
+                    OnIsCreatedProgrammatically_Getter(this, __e);
+                    __result = _IsCreatedProgrammatically = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isIsCreatedProgrammaticallySet = true;
+                if (_IsCreatedProgrammatically != value)
+                {
+                    var __oldValue = _IsCreatedProgrammatically;
+                    var __newValue = value;
+                    if (OnIsCreatedProgrammatically_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnIsCreatedProgrammatically_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("IsCreatedProgrammatically", __oldValue, __newValue);
+                    _IsCreatedProgrammatically = __newValue;
+                    NotifyPropertyChanged("IsCreatedProgrammatically", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnIsCreatedProgrammatically_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnIsCreatedProgrammatically_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("IsCreatedProgrammatically");
+                }
+            }
+        }
+        private bool _IsCreatedProgrammatically_store;
+        private bool _IsCreatedProgrammatically {
+            get { return _IsCreatedProgrammatically_store; }
+            set {
+                ReportEfPropertyChanging("IsCreatedProgrammatically");
+                _IsCreatedProgrammatically_store = value;
+                ReportEfPropertyChanged("IsCreatedProgrammatically");
+            }
+        }
+        private bool _isIsCreatedProgrammaticallySet = false;
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Zetbox.App.Base.ObjectClass, bool> OnIsCreatedProgrammatically_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.ObjectClass, bool> OnIsCreatedProgrammatically_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.ObjectClass, bool> OnIsCreatedProgrammatically_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Base.ObjectClass> OnIsCreatedProgrammatically_IsValid;
+
+        /// <summary>
         /// if true then all Instances appear in FozenContext.
         /// </summary>
         // value type property
@@ -1462,6 +1544,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             var me = (ObjectClass)this;
 
             me.IsAbstract = other.IsAbstract;
+            me.IsCreatedProgrammatically = other.IsCreatedProgrammatically;
             me.IsFrozenObject = other.IsFrozenObject;
             me.IsSimpleObject = other.IsSimpleObject;
             me.TableMapping = other.TableMapping;
@@ -1486,6 +1569,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
                 case "BaseObjectClass":
                 case "DefaultViewModelDescriptor":
                 case "IsAbstract":
+                case "IsCreatedProgrammatically":
                 case "IsFrozenObject":
                 case "IsSimpleObject":
                 case "TableMapping":
@@ -1637,6 +1721,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
                         obj => obj.IsAbstract,
                         (obj, val) => obj.IsAbstract = val,
 						obj => OnIsAbstract_IsValid), 
+                    // else
+                    new PropertyDescriptorEfImpl<ObjectClass, bool>(
+                        lazyCtx,
+                        new Guid("176073eb-d188-40ee-9ae6-860c532da0bd"),
+                        "IsCreatedProgrammatically",
+                        null,
+                        obj => obj.IsCreatedProgrammatically,
+                        (obj, val) => obj.IsCreatedProgrammatically = val,
+						obj => OnIsCreatedProgrammatically_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<ObjectClass, bool>(
                         lazyCtx,
@@ -1793,6 +1886,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             if (this._isIsAbstractSet) {
                 binStream.Write(this._IsAbstract);
             }
+            binStream.Write(this._isIsCreatedProgrammaticallySet);
+            if (this._isIsCreatedProgrammaticallySet) {
+                binStream.Write(this._IsCreatedProgrammatically);
+            }
             binStream.Write(this._isIsFrozenObjectSet);
             if (this._isIsFrozenObjectSet) {
                 binStream.Write(this._IsFrozenObject);
@@ -1817,6 +1914,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             this._isIsAbstractSet = binStream.ReadBoolean();
             if (this._isIsAbstractSet) {
                 this._IsAbstract = binStream.ReadBoolean();
+            }
+            this._isIsCreatedProgrammaticallySet = binStream.ReadBoolean();
+            if (this._isIsCreatedProgrammaticallySet) {
+                this._IsCreatedProgrammatically = binStream.ReadBoolean();
             }
             this._isIsFrozenObjectSet = binStream.ReadBoolean();
             if (this._isIsFrozenObjectSet) {
@@ -1846,6 +1947,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(DefaultViewModelDescriptor != null ? DefaultViewModelDescriptor.ExportGuid : (Guid?)null, xml, "DefaultViewModelDescriptor", "Zetbox.App.GUI");
             System.Diagnostics.Debug.Assert(this._isIsAbstractSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._IsAbstract, xml, "IsAbstract", "Zetbox.App.Base");
+            System.Diagnostics.Debug.Assert(this._isIsCreatedProgrammaticallySet, "Exported objects need to have all default values evaluated");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._IsCreatedProgrammatically, xml, "IsCreatedProgrammatically", "Zetbox.App.Base");
             System.Diagnostics.Debug.Assert(this._isIsFrozenObjectSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._IsFrozenObject, xml, "IsFrozenObject", "Zetbox.App.Base");
             System.Diagnostics.Debug.Assert(this._isIsSimpleObjectSet, "Exported objects need to have all default values evaluated");
@@ -1873,6 +1976,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
                 // Import must have default value set
                 this._IsAbstract = XmlStreamer.ReadBoolean(xml);
                 this._isIsAbstractSet = true;
+                break;
+            case "Zetbox.App.Base|IsCreatedProgrammatically":
+                // Import must have default value set
+                this._IsCreatedProgrammatically = XmlStreamer.ReadBoolean(xml);
+                this._isIsCreatedProgrammaticallySet = true;
                 break;
             case "Zetbox.App.Base|IsFrozenObject":
                 // Import must have default value set

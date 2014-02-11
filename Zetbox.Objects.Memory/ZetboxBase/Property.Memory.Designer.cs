@@ -1105,6 +1105,64 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         public static event PropertyIsValidHandler<Zetbox.App.Base.Property> OnFilterConfiguration_IsValid;
 
         /// <summary>
+        /// A HTML string with a help text
+        /// </summary>
+        // value type property
+        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+        public string HelpText
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _HelpText;
+                if (OnHelpText_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnHelpText_Getter(this, __e);
+                    __result = _HelpText = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_HelpText != value)
+                {
+                    var __oldValue = _HelpText;
+                    var __newValue = value;
+                    if (OnHelpText_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnHelpText_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("HelpText", __oldValue, __newValue);
+                    _HelpText = __newValue;
+                    NotifyPropertyChanged("HelpText", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnHelpText_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnHelpText_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("HelpText");
+                }
+            }
+        }
+        private string _HelpText;
+        // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Zetbox.App.Base.Property, string> OnHelpText_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.Property, string> OnHelpText_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.Property, string> OnHelpText_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Base.Property> OnHelpText_IsValid;
+
+        /// <summary>
         /// Label is displayed to User in UI
         /// </summary>
         // value type property
@@ -2193,6 +2251,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             me.Description = other.Description;
             me.DisableExport = other.DisableExport;
             me.ExportGuid = other.ExportGuid;
+            me.HelpText = other.HelpText;
             me.Label = other.Label;
             me.Name = other.Name;
             me.RequestedWidth = other.RequestedWidth;
@@ -2295,6 +2354,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 case "DisableExport":
                 case "ExportGuid":
                 case "FilterConfiguration":
+                case "HelpText":
                 case "Label":
                 case "Module":
                 case "Name":
@@ -2563,6 +2623,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                     // else
                     new PropertyDescriptorMemoryImpl<Property, string>(
                         lazyCtx,
+                        new Guid("dc09afbf-9cb8-45ef-b7c5-b1c3b948c7e5"),
+                        "HelpText",
+                        null,
+                        obj => obj.HelpText,
+                        (obj, val) => obj.HelpText = val,
+						obj => OnHelpText_IsValid), 
+                    // else
+                    new PropertyDescriptorMemoryImpl<Property, string>(
+                        lazyCtx,
                         new Guid("34fc8b17-e9c2-43c5-a6d6-908551a8818b"),
                         "Label",
                         null,
@@ -2704,6 +2773,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             SetNotInitializedProperty("Description");
             SetNotInitializedProperty("DisableExport");
             SetNotInitializedProperty("FilterConfiguration");
+            SetNotInitializedProperty("HelpText");
             SetNotInitializedProperty("Label");
             SetNotInitializedProperty("Module");
             SetNotInitializedProperty("Name");
@@ -2781,6 +2851,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 binStream.Write(this._ExportGuid);
             }
             binStream.Write(FilterConfiguration != null ? FilterConfiguration.ID : (int?)null);
+            binStream.Write(this._HelpText);
             binStream.Write(this._Label);
             binStream.Write(Module != null ? Module.ID : (int?)null);
             binStream.Write(this._Name);
@@ -2833,6 +2904,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 this._ExportGuid = binStream.ReadGuid();
             }
             this._fk_FilterConfiguration = binStream.ReadNullableInt32();
+            this._HelpText = binStream.ReadString();
             this._Label = binStream.ReadString();
             this._fk_Module = binStream.ReadNullableInt32();
             this._Name = binStream.ReadString();
@@ -2865,6 +2937,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._Description, xml, "Description", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._DisableExport, xml, "DisableExport", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(FilterConfiguration != null ? FilterConfiguration.ExportGuid : (Guid?)null, xml, "FilterConfiguration", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._HelpText, xml, "HelpText", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._Label, xml, "Label", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._Name, xml, "Name", "Zetbox.App.Base");
@@ -2915,6 +2988,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 break;
             case "Zetbox.App.GUI|FilterConfiguration":
                 this._fk_guid_FilterConfiguration = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Zetbox.App.Base|HelpText":
+                this._HelpText = XmlStreamer.ReadString(xml);
                 break;
             case "Zetbox.App.Base|Label":
                 this._Label = XmlStreamer.ReadString(xml);

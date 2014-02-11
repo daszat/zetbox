@@ -536,5 +536,38 @@ namespace Zetbox.Client.Presentables.ObjectEditor
         bool IDeleteCommandParameter.AllowDelete { get { return true; } }
         IEnumerable<ViewModel> ICommandParameter.SelectedItems { get { return SelectedItem == null ? null : new[] { SelectedItem }; } }
         #endregion
+
+        #region DragDrop
+        public virtual bool CanDrop
+        {
+            get
+            {
+                return true;
+            }
+        }
+
+        public virtual bool OnDrop(object data)
+        {
+            if (data is IDataObject[])
+            {
+                var lst = (IDataObject[])data;
+                foreach(var obj in lst)
+                {
+                    ShowObject(obj);
+                }
+            }
+            return false;
+        }
+
+        public virtual object DoDragDrop()
+        {
+            var obj = (SelectedItem as DataObjectViewModel).IfNotNull(dvm => dvm.Object);
+            if (obj != null && obj.ObjectState.In(DataObjectState.Unmodified, DataObjectState.Modified, DataObjectState.New))
+            {
+                return new IDataObject[] { obj };
+            }
+            return null;
+        }
+        #endregion
     }
 }

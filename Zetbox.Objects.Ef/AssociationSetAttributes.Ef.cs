@@ -840,20 +840,20 @@ using Zetbox.DalProvider.Ef;
 
 	/*
     Relation: FK_Document_has_Revisions
-    A: ZeroOrMore Document as Document
+    A: ZeroOrMore File as Document
     B: ZeroOrMore Blob as Revisions
     Preferred Storage: Separate
 	*/
 
 // The association from A to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_Document_has_Revisions_A",
-    "Document", RelationshipMultiplicity.ZeroOrOne, typeof(at.dasz.DocumentManagement.DocumentEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(at.dasz.DocumentManagement.Document_has_Blob_RelationEntryEfImpl)
+    "Document", RelationshipMultiplicity.ZeroOrOne, typeof(at.dasz.DocumentManagement.FileEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(at.dasz.DocumentManagement.File_has_Blob_RelationEntryEfImpl)
     )]
 // The association from B to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_Document_has_Revisions_B",
     "Revisions", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.BlobEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(at.dasz.DocumentManagement.Document_has_Blob_RelationEntryEfImpl)
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(at.dasz.DocumentManagement.File_has_Blob_RelationEntryEfImpl)
     )]
 
 	/*

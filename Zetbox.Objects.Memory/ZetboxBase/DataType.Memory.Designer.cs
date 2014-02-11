@@ -738,6 +738,64 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
         public static event PropertyIsValidHandler<Zetbox.App.Base.DataType> OnExportGuid_IsValid;
 
         /// <summary>
+        /// A HTML string with a help text
+        /// </summary>
+        // value type property
+        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+        public string HelpText
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _HelpText;
+                if (OnHelpText_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnHelpText_Getter(this, __e);
+                    __result = _HelpText = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_HelpText != value)
+                {
+                    var __oldValue = _HelpText;
+                    var __newValue = value;
+                    if (OnHelpText_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnHelpText_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("HelpText", __oldValue, __newValue);
+                    _HelpText = __newValue;
+                    NotifyPropertyChanged("HelpText", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnHelpText_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnHelpText_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("HelpText");
+                }
+            }
+        }
+        private string _HelpText;
+        // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Zetbox.App.Base.DataType, string> OnHelpText_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.DataType, string> OnHelpText_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.DataType, string> OnHelpText_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Base.DataType> OnHelpText_IsValid;
+
+        /// <summary>
         /// Interfaces der Objektklasse
         /// </summary>
         // collection entry list property
@@ -1715,6 +1773,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             me.CreatedOn = other.CreatedOn;
             me.Description = other.Description;
             me.ExportGuid = other.ExportGuid;
+            me.HelpText = other.HelpText;
             me.Name = other.Name;
             me.ShowIconInLists = other.ShowIconInLists;
             me.ShowIdInLists = other.ShowIdInLists;
@@ -1800,6 +1859,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
                 case "DefaultIcon":
                 case "Description":
                 case "ExportGuid":
+                case "HelpText":
                 case "Module":
                 case "Name":
                 case "RequestedKind":
@@ -1982,6 +2042,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
                         obj => obj.ExportGuid,
                         (obj, val) => obj.ExportGuid = val,
 						obj => OnExportGuid_IsValid), 
+                    // else
+                    new PropertyDescriptorMemoryImpl<DataType, string>(
+                        lazyCtx,
+                        new Guid("35f1afb3-eb6f-455d-9794-4f1f2825cbb1"),
+                        "HelpText",
+                        null,
+                        obj => obj.HelpText,
+                        (obj, val) => obj.HelpText = val,
+						obj => OnHelpText_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorMemoryImpl<DataType, ICollection<Zetbox.App.Base.Interface>>(
                         lazyCtx,
@@ -2130,6 +2199,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             SetNotInitializedProperty("CreatedBy");
             SetNotInitializedProperty("DefaultIcon");
             SetNotInitializedProperty("Description");
+            SetNotInitializedProperty("HelpText");
             SetNotInitializedProperty("Module");
             SetNotInitializedProperty("Name");
             SetNotInitializedProperty("RequestedKind");
@@ -2197,6 +2267,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             if (this._isExportGuidSet) {
                 binStream.Write(this._ExportGuid);
             }
+            binStream.Write(this._HelpText);
 
             binStream.Write(eagerLoadLists);
             if (eagerLoadLists && auxObjects != null)
@@ -2283,6 +2354,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             if (this._isExportGuidSet) {
                 this._ExportGuid = binStream.ReadGuid();
             }
+            this._HelpText = binStream.ReadString();
 
             Methods_was_eagerLoaded = binStream.ReadBoolean();
             {
@@ -2347,6 +2419,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(DefaultIcon != null ? DefaultIcon.ExportGuid : (Guid?)null, xml, "DefaultIcon", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._Description, xml, "Description", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._HelpText, xml, "HelpText", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(Module != null ? Module.ExportGuid : (Guid?)null, xml, "Module", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._Name, xml, "Name", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(RequestedKind != null ? RequestedKind.ExportGuid : (Guid?)null, xml, "RequestedKind", "Zetbox.App.GUI");
@@ -2383,6 +2456,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
                 // Import must have default value set
                 this._ExportGuid = XmlStreamer.ReadGuid(xml);
                 this._isExportGuidSet = true;
+                break;
+            case "Zetbox.App.Base|HelpText":
+                this._HelpText = XmlStreamer.ReadString(xml);
                 break;
             case "Zetbox.App.Base|Module":
                 this._fk_guid_Module = XmlStreamer.ReadNullableGuid(xml);

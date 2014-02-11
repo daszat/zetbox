@@ -403,7 +403,7 @@
     <value>Document</value>
   </data>
   <data name="at.dasz.DocumentManagement.Document_description" xml:space="preserve">
-    <value>Document with revisions</value>
+    <value>Depricated</value>
   </data>
   <data name="Zetbox.App.Test.DocumentTestObject" xml:space="preserve">
     <value>DocumentTestObject</value>
@@ -433,7 +433,7 @@
     <value>DynamicFile</value>
   </data>
   <data name="at.dasz.DocumentManagement.DynamicFile_description" xml:space="preserve">
-    <value>File with changeable content</value>
+    <value>Depricated</value>
   </data>
   <data name="Zetbox.App.Calendar.EasterWorkScheduleRule" xml:space="preserve">
     <value>EasterWorkScheduleRule</value>
@@ -499,7 +499,7 @@
     <value>File</value>
   </data>
   <data name="at.dasz.DocumentManagement.File_description" xml:space="preserve">
-    <value>Abstract Baseclass for File Types</value>
+    <value>A file. Can be readonly, can have revisions.</value>
   </data>
   <data name="at.dasz.DocumentManagement.FileImportConfiguration" xml:space="preserve">
     <value>FileImportConfiguration</value>
@@ -1111,7 +1111,7 @@
     <value>StaticFile</value>
   </data>
   <data name="at.dasz.DocumentManagement.StaticFile_description" xml:space="preserve">
-    <value>Static file. Content cannot be changed</value>
+    <value>Depricated</value>
   </data>
   <data name="Zetbox.App.Base.StorageType" xml:space="preserve">
     <value>StorageType</value>

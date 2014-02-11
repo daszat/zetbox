@@ -47,6 +47,11 @@ namespace Zetbox.Client.Models
         string Description { get; }
 
         /// <summary>
+        /// Gets the help text.
+        /// </summary>
+        string HelpText { get; }
+
+        /// <summary>
         /// Gets a value indicating whether or not the property may be edited
         /// </summary>
         bool IsReadOnly { get; }

@@ -797,6 +797,45 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         #region IDeleteCommandParameter Members
         IEnumerable<ViewModel> ICommandParameter.SelectedItems { get { return SelectedItems; } }
         #endregion
+
+        #region DragDrop
+        public virtual bool CanDrop
+        {
+            get
+            {
+                return !IsReadOnly && AllowAddExisting;
+            }
+        }
+
+        public virtual bool OnDrop(object data)
+        {
+            if (data is IDataObject[])
+            {
+                var lst = (IDataObject[])data;
+                foreach (var obj in lst)
+                {
+                    var realObj = obj.Context == DataContext
+                                ? obj
+                                : DataContext.Find(obj.Context.GetInterfaceType(obj), obj.ID);
+                    if (ReferencedClass.GetDescribedInterfaceType().Type.IsAssignableFrom(DataContext.GetInterfaceType(realObj).Type))
+                    {
+                        Add(DataObjectViewModel.Fetch(ViewModelFactory, DataContext, GetWorkspace(), realObj));
+                    }
+                }
+            }
+            return false;
+        }
+
+        public virtual object DoDragDrop()
+        {
+            var lst = SelectedItems
+                .Where(i => i.ObjectState.In(DataObjectState.Unmodified, DataObjectState.Modified, DataObjectState.New))
+                .Select(i => i.Object)
+                .Cast<IDataObject>()
+                .ToArray();
+            return lst.Length > 0 ? lst : null;
+        }
+        #endregion
     }
 
     /// <summary>

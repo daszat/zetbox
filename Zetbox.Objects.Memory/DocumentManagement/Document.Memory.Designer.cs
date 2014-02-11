@@ -18,7 +18,7 @@ namespace at.dasz.DocumentManagement
     using Zetbox.DalProvider.Memory;
 
     /// <summary>
-    /// Document with revisions
+    /// Depricated
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("Document")]
     public class DocumentMemoryImpl : at.dasz.DocumentManagement.FileMemoryImpl, Document
@@ -36,52 +36,6 @@ namespace at.dasz.DocumentManagement
             : base(lazyCtx)
         {
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        // collection entry list property
-        // BEGIN Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for Revisions
-        public IList<Zetbox.App.Base.Blob> Revisions
-        {
-            get
-            {
-                if (_Revisions == null)
-                {
-                    TriggerFetchRevisionsAsync().Wait();
-                }
-                return (IList<Zetbox.App.Base.Blob>)_Revisions;
-            }
-        }
-
-        Zetbox.API.Async.ZbTask _triggerFetchRevisionsTask;
-        public Zetbox.API.Async.ZbTask TriggerFetchRevisionsAsync()
-        {
-            if (_triggerFetchRevisionsTask != null) return _triggerFetchRevisionsTask;
-            _triggerFetchRevisionsTask = Context.FetchRelationAsync<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryMemoryImpl>(new Guid("69d27812-e981-443b-a94b-dfe1a95f3aad"), RelationEndRole.A, this);
-            _triggerFetchRevisionsTask.OnResult(r =>
-            {
-                _Revisions
-                    = new ObservableBSideListWrapper<at.dasz.DocumentManagement.Document, Zetbox.App.Base.Blob, at.dasz.DocumentManagement.Document_has_Blob_RelationEntryMemoryImpl, ICollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryMemoryImpl>>(
-                        this,
-                        new RelationshipFilterASideCollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryMemoryImpl>(this.Context, this));
-                        // _Revisions.CollectionChanged is managed by OnRevisionsCollectionChanged() and called from the RelationEntry
-            });
-            return _triggerFetchRevisionsTask;
-        }
-
-        internal void OnRevisionsCollectionChanged()
-        {
-            NotifyPropertyChanged("Revisions", null, null);
-            if (OnRevisions_PostSetter != null && IsAttached)
-                OnRevisions_PostSetter(this);
-        }
-
-        private ObservableBSideListWrapper<at.dasz.DocumentManagement.Document, Zetbox.App.Base.Blob, at.dasz.DocumentManagement.Document_has_Blob_RelationEntryMemoryImpl, ICollection<at.dasz.DocumentManagement.Document_has_Blob_RelationEntryMemoryImpl>> _Revisions;
-        // END Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for Revisions
-public static event PropertyListChangedHandler<at.dasz.DocumentManagement.Document> OnRevisions_PostSetter;
-
-        public static event PropertyIsValidHandler<at.dasz.DocumentManagement.Document> OnRevisions_IsValid;
 
         /// <summary>
         /// Creates an excerpt from the current file
@@ -352,25 +306,12 @@ public static event PropertyListChangedHandler<at.dasz.DocumentManagement.Docume
 
         #region Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
-
-        protected override bool ShouldSetModified(string property)
-        {
-            switch (property)
-            {
-                case "Revisions":
-                    return false;
-                default:
-                    return base.ShouldSetModified(property);
-            }
-        }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.OnPropertyChange
 
         public override Zetbox.API.Async.ZbTask TriggerFetch(string propName)
         {
             switch(propName)
             {
-            case "Revisions":
-                return TriggerFetchRevisionsAsync();
             default:
                 return base.TriggerFetch(propName);
             }
@@ -387,38 +328,6 @@ public static event PropertyListChangedHandler<at.dasz.DocumentManagement.Docume
             // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
-        private static readonly object _propertiesLock = new object();
-        private static System.ComponentModel.PropertyDescriptor[] _properties;
-
-        private void _InitializePropertyDescriptors(Func<IFrozenContext> lazyCtx)
-        {
-            if (_properties != null) return;
-            lock (_propertiesLock)
-            {
-                // recheck for a lost race after aquiring the lock
-                if (_properties != null) return;
-
-                _properties = new System.ComponentModel.PropertyDescriptor[] {
-                    // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
-                    new PropertyDescriptorMemoryImpl<Document, IList<Zetbox.App.Base.Blob>>(
-                        lazyCtx,
-                        new Guid("ec544fe0-8189-4bb2-a3d1-3cb61d815aa5"),
-                        "Revisions",
-                        null,
-                        obj => obj.Revisions,
-                        null, // lists are read-only properties
-                        obj => OnRevisions_IsValid), 
-                    // position columns
-                };
-            }
-        }
-
-        protected override void CollectProperties(Func<IFrozenContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
-        {
-            base.CollectProperties(lazyCtx, props);
-            _InitializePropertyDescriptors(lazyCtx);
-            props.AddRange(_properties);
-        }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         #region Zetbox.Generator.Templates.ObjectClasses.DefaultMethods
 
@@ -481,7 +390,6 @@ public static event PropertyListChangedHandler<at.dasz.DocumentManagement.Docume
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_Document != null) OnNotifyDeleting_Document(this);
-            Revisions.Clear();
         }
         public static event ObjectEventHandler<Document> OnNotifyDeleting_Document;
 

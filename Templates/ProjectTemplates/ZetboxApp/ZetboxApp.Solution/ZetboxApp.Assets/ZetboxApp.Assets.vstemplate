@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Project" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005">
+  <TemplateData>
+    <Name>ZetboxApp.Common</Name>
+    <Description>This assembly contains your zetbox project assets.</Description>
+    <Icon>ZetboxApp.Assets.ico</Icon>
+    <ProjectType>CSharp</ProjectType>
+    <RequiredFrameworkVersion>4.0</RequiredFrameworkVersion>
+    <SortOrder>1000</SortOrder>
+    <TemplateID>e22105d3-c469-4e53-ae50-1e0e5497c6eb</TemplateID>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>ZetboxApp.Assets</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+  </TemplateData>
+  <TemplateContent>
+    <Project File="ProjectTemplate.csproj" ReplaceParameters="true">
+      <ProjectItem ReplaceParameters="true" TargetFileName="Properties\AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Properties\Resources.resx">Resources.resx</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Properties\Resources.de.resx">Resources.de.resx</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Properties\Resources.Designer.cs">Resources.Designer.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" OpenInEditor="true">AssetsModule.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true">packages.config</ProjectItem>
+    </Project>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>ZetboxApp.Wizard, Version=1.0.0.0, Culture=neutral, PublicKeyToken=3aabe705c401cdaa</Assembly>
+    <FullClassName>ZetboxApp.Wizard.ProjectWizard</FullClassName>
+  </WizardExtension>
+</VSTemplate>

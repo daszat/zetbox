@@ -8,7 +8,7 @@ namespace at.dasz.DocumentManagement
     using Zetbox.API;
 
     /// <summary>
-    /// File with changeable content
+    /// Depricated
     /// </summary>
     [Zetbox.API.DefinitionGuid("e1556c0b-cdb9-4174-a9e5-07efba58ef05")]
     public interface DynamicFile : at.dasz.DocumentManagement.File 

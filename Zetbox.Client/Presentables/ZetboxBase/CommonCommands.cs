@@ -511,14 +511,15 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         protected override void DoExecute(object data)
         {
-            ObjectClass baseclass = Type;
-
-            var candidates = new List<ObjectClass>();
-            if (baseclass.IsAbstract == false)
+            var allCandidates = new List<ObjectClass>();
+            allCandidates.Add(Type);
+            Type.CollectChildClasses(allCandidates, false);
+            var candidates = allCandidates.Where(i => i.IsAbstract == false && i.IsCreatedProgrammatically == false).ToList();
+            if (candidates.Count == 0)
             {
-                candidates.Add(baseclass);
+                // Fallback
+                candidates = allCandidates.Where(i => i.IsAbstract == false).ToList();
             }
-            baseclass.CollectChildClasses(candidates, false);
 
             if (candidates.Count == 1)
             {

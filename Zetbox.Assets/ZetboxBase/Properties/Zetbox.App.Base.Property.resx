@@ -195,6 +195,12 @@
   <data name="FilterConfiguration_description" xml:space="preserve">
     <value />
   </data>
+  <data name="HelpText_label" xml:space="preserve">
+    <value>Help text</value>
+  </data>
+  <data name="HelpText_description" xml:space="preserve">
+    <value>A HTML string with a help text</value>
+  </data>
   <data name="Label_label" xml:space="preserve">
     <value>Label</value>
   </data>

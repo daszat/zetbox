@@ -64,6 +64,15 @@ namespace Zetbox.App.Base
         }
 
         /// <summary>
+        /// Indicated that the type will be created programmatically
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("176073eb-d188-40ee-9ae6-860c532da0bd")]
+        bool IsCreatedProgrammatically {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// if true then all Instances appear in FozenContext.
         /// </summary>
         [Zetbox.API.DefinitionGuid("13c33710-ea02-4621-ad50-294a1f36b07d")]

@@ -258,6 +258,11 @@ namespace Zetbox.Client.Models
             get { return Property.GetDescription(); }
         }
 
+        public string HelpText
+        {
+            get { return Property.HelpText; }
+        }
+
         private bool? _IsReadOnly = null;
         public bool IsReadOnly
         {

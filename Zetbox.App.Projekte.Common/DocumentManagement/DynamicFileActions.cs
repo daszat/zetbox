@@ -24,9 +24,9 @@ namespace at.dasz.DocumentManagement
     public static class DynamicFileActions
     {
         [Invocation]
-        public static void HandleBlobChange(at.dasz.DocumentManagement.DynamicFile obj, MethodReturnEventArgs<Zetbox.App.Base.Blob> e, Zetbox.App.Base.Blob oldBlob, Zetbox.App.Base.Blob newBlob)
+        public static void NotifyCreated(at.dasz.DocumentManagement.DynamicFile obj)
         {
-            e.Result = newBlob;
+            // OK
         }
     }
 }

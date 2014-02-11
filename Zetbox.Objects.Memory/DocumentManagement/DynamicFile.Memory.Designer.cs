@@ -18,7 +18,7 @@ namespace at.dasz.DocumentManagement
     using Zetbox.DalProvider.Memory;
 
     /// <summary>
-    /// File with changeable content
+    /// Depricated
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("DynamicFile")]
     public class DynamicFileMemoryImpl : at.dasz.DocumentManagement.FileMemoryImpl, DynamicFile

@@ -84,6 +84,15 @@ namespace Zetbox.App.Base
         }
 
         /// <summary>
+        /// A HTML string with a help text
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("dc09afbf-9cb8-45ef-b7c5-b1c3b948c7e5")]
+        string HelpText {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Label is displayed to User in UI
         /// </summary>
         [Zetbox.API.DefinitionGuid("34fc8b17-e9c2-43c5-a6d6-908551a8818b")]

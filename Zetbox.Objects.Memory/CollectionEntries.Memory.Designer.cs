@@ -2534,16 +2534,16 @@ namespace Zetbox.App.Base
 namespace at.dasz.DocumentManagement
 {
     // BEGIN Zetbox.Generator.Templates.CollectionEntries.RelationEntry
-    [System.Diagnostics.DebuggerDisplay("Document_has_Blob_RelationEntryMemoryImpl")]
-    public class Document_has_Blob_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<at.dasz.DocumentManagement.Document, at.dasz.DocumentManagement.DocumentMemoryImpl, Zetbox.App.Base.Blob, Zetbox.App.Base.BlobMemoryImpl>, Document_has_Blob_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
+    [System.Diagnostics.DebuggerDisplay("File_has_Blob_RelationEntryMemoryImpl")]
+    public class File_has_Blob_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<at.dasz.DocumentManagement.File, at.dasz.DocumentManagement.FileMemoryImpl, Zetbox.App.Base.Blob, Zetbox.App.Base.BlobMemoryImpl>, File_has_Blob_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
         [Obsolete]
-        public Document_has_Blob_RelationEntryMemoryImpl()
+        public File_has_Blob_RelationEntryMemoryImpl()
             : base(null)
         {
         }
 
-        public Document_has_Blob_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
+        public File_has_Blob_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }
@@ -2626,7 +2626,7 @@ namespace at.dasz.DocumentManagement
             set
             {
                 // settor will do checking for us
-                A = (at.dasz.DocumentManagement.Document)value;
+                A = (at.dasz.DocumentManagement.File)value;
             }
         }
 
@@ -2651,7 +2651,7 @@ namespace at.dasz.DocumentManagement
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=at.dasz.DocumentManagement.Document; moduleNamespace=at.dasz.DocumentManagement;
+        // referencedInterface=at.dasz.DocumentManagement.File; moduleNamespace=at.dasz.DocumentManagement;
         // will get inverse collection for notifications for Revisions
         // PositionStorage=A_pos;
         // Target exportable; does not call events
@@ -2660,10 +2660,10 @@ namespace at.dasz.DocumentManagement
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
-        public at.dasz.DocumentManagement.Document A
+        public at.dasz.DocumentManagement.File A
         {
             get { return AImpl; }
-            set { AImpl = (at.dasz.DocumentManagement.DocumentMemoryImpl)value; }
+            set { AImpl = (at.dasz.DocumentManagement.FileMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
@@ -2684,26 +2684,26 @@ namespace at.dasz.DocumentManagement
 
         private Guid? _fk_guid_A = null;
 
-        Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.Document> _triggerFetchATask;
-        public Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.Document> TriggerFetchAAsync()
+        Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.File> _triggerFetchATask;
+        public Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.File> TriggerFetchAAsync()
         {
             if (_triggerFetchATask != null) return _triggerFetchATask;
 
             if (_fk_A.HasValue)
-                _triggerFetchATask = Context.FindAsync<at.dasz.DocumentManagement.Document>(_fk_A.Value);
+                _triggerFetchATask = Context.FindAsync<at.dasz.DocumentManagement.File>(_fk_A.Value);
             else
-                _triggerFetchATask = new Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.Document>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchATask = new Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.File>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             return _triggerFetchATask;
         }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        internal at.dasz.DocumentManagement.DocumentMemoryImpl AImpl
+        internal at.dasz.DocumentManagement.FileMemoryImpl AImpl
         {
             get
             {
-                return (at.dasz.DocumentManagement.DocumentMemoryImpl)TriggerFetchAAsync().Result;
+                return (at.dasz.DocumentManagement.FileMemoryImpl)TriggerFetchAAsync().Result;
             }
             set
             {
@@ -2982,14 +2982,14 @@ namespace at.dasz.DocumentManagement
 
         public override Type GetImplementedInterface()
         {
-            return typeof(Document_has_Blob_RelationEntry);
+            return typeof(File_has_Blob_RelationEntry);
         }
 
         public override void ApplyChangesFrom(IPersistenceObject obj)
         {
             base.ApplyChangesFrom(obj);
-            var other = (Document_has_Blob_RelationEntryMemoryImpl)obj;
-            var me = (Document_has_Blob_RelationEntryMemoryImpl)this;
+            var other = (File_has_Blob_RelationEntryMemoryImpl)obj;
+            var me = (File_has_Blob_RelationEntryMemoryImpl)this;
 
             me._fk_A = other._fk_A;
             me.AIndex = other.AIndex;
@@ -3005,10 +3005,10 @@ namespace at.dasz.DocumentManagement
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                AImpl = (at.dasz.DocumentManagement.DocumentMemoryImpl)Context.FindPersistenceObject<at.dasz.DocumentManagement.Document>(_fk_guid_A.Value);
+                AImpl = (at.dasz.DocumentManagement.FileMemoryImpl)Context.FindPersistenceObject<at.dasz.DocumentManagement.File>(_fk_guid_A.Value);
             else
             if (_fk_A.HasValue)
-                AImpl = (at.dasz.DocumentManagement.DocumentMemoryImpl)Context.Find<at.dasz.DocumentManagement.Document>(_fk_A.Value);
+                AImpl = (at.dasz.DocumentManagement.FileMemoryImpl)Context.Find<at.dasz.DocumentManagement.File>(_fk_A.Value);
             else
                 AImpl = null;
 

@@ -44,6 +44,10 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
     public abstract class InstanceGridBaseDisplay : InstanceCollectionBase
     {
         public abstract ZetboxDataGrid DataGrid { get; }
+        protected override Control ListControl
+        {
+            get { return DataGrid; }
+        }
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
