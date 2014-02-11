@@ -3168,6 +3168,7 @@
                         FromRole="ObjectClass"
                         ToRole="FilterConfigurations" />
     <Property Name="IsAbstract" Type="Boolean" Nullable="false"  />
+    <Property Name="IsCreatedProgrammatically" Type="Boolean" Nullable="false"  />
     <Property Name="IsFrozenObject" Type="Boolean" Nullable="false"  />
     <Property Name="IsSimpleObject" Type="Boolean" Nullable="false"  />
     <NavigationProperty Name="SubClassesImpl"

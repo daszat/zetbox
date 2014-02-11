@@ -515,6 +515,7 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="CodeTemplate" ColumnName="CodeTemplate" />
           <ScalarProperty Name="IsAbstract" ColumnName="IsAbstract" />
+          <ScalarProperty Name="IsCreatedProgrammatically" ColumnName="IsCreatedProgrammatically" />
           <ScalarProperty Name="IsFrozenObject" ColumnName="IsFrozenObject" />
           <ScalarProperty Name="IsSimpleObject" ColumnName="IsSimpleObject" />
           <ScalarProperty Name="TableMappingImpl" ColumnName="TableMapping" />

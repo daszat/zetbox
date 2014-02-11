@@ -171,6 +171,12 @@ namespace Zetbox.API.Server.Mocks
             set;
         }
 
+        public bool IsCreatedProgrammatically
+        {
+            get;
+            set;
+        }
+
         public Type GetDataType()
         {
             throw new NotImplementedException();

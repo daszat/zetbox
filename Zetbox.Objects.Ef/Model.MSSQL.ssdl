@@ -2124,6 +2124,7 @@
     <Property Name="fk_DefaultViewModelDescriptor" Type="int" />
     <Property Name="CodeTemplate" Type="nvarchar" MaxLength="1000" Nullable="true" />
     <Property Name="IsAbstract" Type="bit" Nullable="false" />
+    <Property Name="IsCreatedProgrammatically" Type="bit" Nullable="false" />
     <Property Name="IsFrozenObject" Type="bit" Nullable="false" />
     <Property Name="IsSimpleObject" Type="bit" Nullable="false" />
     <Property Name="TableMapping" Type="int" Nullable="true" />

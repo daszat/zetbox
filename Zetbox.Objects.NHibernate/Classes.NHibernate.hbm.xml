@@ -4457,6 +4457,10 @@
                   column="`IsAbstract`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
+        <property name="IsCreatedProgrammatically" 
+                  column="`IsCreatedProgrammatically`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
         <property name="IsFrozenObject" 
                   column="`IsFrozenObject`" 
                   optimistic-lock="false"/>

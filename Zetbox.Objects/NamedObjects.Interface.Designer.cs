@@ -1429,6 +1429,10 @@ namespace Zetbox {
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("e9d1402e-3580-4084-8836-c44844683191"); }
                                 }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> IsCreatedProgrammatically
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("176073eb-d188-40ee-9ae6-860c532da0bd"); }
+                                }
                                 public static TypedGuid<global::Zetbox.App.Base.Property> IsFrozenObject
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("13c33710-ea02-4621-ad50-294a1f36b07d"); }

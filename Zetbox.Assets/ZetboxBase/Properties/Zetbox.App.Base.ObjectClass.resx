@@ -153,6 +153,12 @@
   <data name="IsAbstract_description" xml:space="preserve">
     <value>Class is abstract</value>
   </data>
+  <data name="IsCreatedProgrammatically_label" xml:space="preserve">
+    <value>Is created programmatically</value>
+  </data>
+  <data name="IsCreatedProgrammatically_description" xml:space="preserve">
+    <value>Indicated that the type will be created programmatically</value>
+  </data>
   <data name="IsFrozenObject_label" xml:space="preserve">
     <value>IsFrozenObject</value>
   </data>
