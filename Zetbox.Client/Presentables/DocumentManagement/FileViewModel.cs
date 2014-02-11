@@ -33,6 +33,25 @@ namespace Zetbox.Client.Presentables.DocumentManagement
             : base(appCtx, dataCtx, parent, obj)
         {
             this.File = obj;
+            
+            // Changes should be possible when the object was not saved yet.
+            UpdateIsReadonly();
+            // When the context was saved, no more changes are allowed.
+            this.DataContext.IsModifiedChanged += new EventHandler(DataContext_IsModifiedChanged);
+        }
+
+        void DataContext_IsModifiedChanged(object sender, EventArgs e)
+        {
+            if (DataContext.IsModified == false)
+            {
+                UpdateIsReadonly();
+            }
+        }
+
+        protected void UpdateIsReadonly()
+        {
+            // Lock bool property
+            base.PropertyModelsByName["IsFileReadonly"].IsReadOnly = File.IsFileReadonly;
         }
 
         protected override System.Collections.ObjectModel.ObservableCollection<ICommandViewModel> CreateCommands()
