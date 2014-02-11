@@ -3814,6 +3814,10 @@
                   column="`ExportGuid`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
+        <property name="HelpText" 
+                  column="`HelpText`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
         <property name="IsList" 
                   column="`IsList`" 
                   optimistic-lock="false"/>
@@ -4303,6 +4307,10 @@
         <!-- ValueTypeProperty isValue -->
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="HelpText" 
+                  column="`HelpText`" 
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
@@ -4955,6 +4963,10 @@
         <property name="ExportGuid" 
                   column="`ExportGuid`" 
                   optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="HelpText" 
+                  column="`HelpText`" 
+                  optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
         <many-to-one name="Icon" column="`fk_Icon`" class="Zetbox.App.GUI.IconNHibernateImpl+IconProxy, Zetbox.Objects.NHibernateImpl" />
 
@@ -5124,6 +5136,10 @@
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
         <one-to-one name="FilterConfiguration" class="Zetbox.App.GUI.PropertyFilterConfigurationNHibernateImpl+PropertyFilterConfigurationProxy, Zetbox.Objects.NHibernateImpl" constrained="false" property-ref="Property" />
+        <!-- ValueTypeProperty isValue -->
+        <property name="HelpText" 
+                  column="`HelpText`" 
+                  optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
         <property name="Label" 
                   column="`Label`" 

@@ -153,6 +153,12 @@
   <data name="ExportGuid_description" xml:space="preserve">
     <value>Export Guid</value>
   </data>
+  <data name="HelpText_label" xml:space="preserve">
+    <value>Help text</value>
+  </data>
+  <data name="HelpText_description" xml:space="preserve">
+    <value>A HTML string with a help text</value>
+  </data>
   <data name="IsList_label" xml:space="preserve">
     <value>IsList</value>
   </data>

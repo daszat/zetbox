@@ -541,6 +541,64 @@ namespace Zetbox.App.Base
         public static event PropertyIsValidHandler<Zetbox.App.Base.BaseParameter> OnExportGuid_IsValid;
 
         /// <summary>
+        /// A HTML string with a help text
+        /// </summary>
+
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        public string HelpText
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = Proxy.HelpText;
+                if (OnHelpText_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnHelpText_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (Proxy.HelpText != value)
+                {
+                    var __oldValue = Proxy.HelpText;
+                    var __newValue = value;
+                    if (OnHelpText_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnHelpText_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("HelpText", __oldValue, __newValue);
+                    Proxy.HelpText = __newValue;
+                    NotifyPropertyChanged("HelpText", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnHelpText_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnHelpText_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("HelpText");
+                }
+            }
+        }
+
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<Zetbox.App.Base.BaseParameter, string> OnHelpText_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.BaseParameter, string> OnHelpText_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.BaseParameter, string> OnHelpText_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Base.BaseParameter> OnHelpText_IsValid;
+
+        /// <summary>
         /// Parameter wird als List&amp;lt;&amp;gt; generiert
         /// </summary>
 
@@ -1211,6 +1269,7 @@ namespace Zetbox.App.Base
             me.CreatedOn = other.CreatedOn;
             me.Description = other.Description;
             me.ExportGuid = other.ExportGuid;
+            me.HelpText = other.HelpText;
             me.IsList = other.IsList;
             me.IsNullable = other.IsNullable;
             me.IsReturnParameter = other.IsReturnParameter;
@@ -1277,6 +1336,7 @@ namespace Zetbox.App.Base
                 case "CreatedOn":
                 case "Description":
                 case "ExportGuid":
+                case "HelpText":
                 case "IsList":
                 case "IsNullable":
                 case "IsReturnParameter":
@@ -1398,6 +1458,15 @@ namespace Zetbox.App.Base
                         obj => obj.ExportGuid,
                         (obj, val) => obj.ExportGuid = val,
 						obj => OnExportGuid_IsValid), 
+                    // else
+                    new PropertyDescriptorNHibernateImpl<BaseParameter, string>(
+                        lazyCtx,
+                        new Guid("10e35458-34d5-4e16-ba7b-9729d9e5d1e9"),
+                        "HelpText",
+                        null,
+                        obj => obj.HelpText,
+                        (obj, val) => obj.HelpText = val,
+						obj => OnHelpText_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<BaseParameter, bool>(
                         lazyCtx,
@@ -1532,6 +1601,7 @@ namespace Zetbox.App.Base
             SetNotInitializedProperty("ChangedBy");
             SetNotInitializedProperty("CreatedBy");
             SetNotInitializedProperty("Description");
+            SetNotInitializedProperty("HelpText");
             SetNotInitializedProperty("IsList");
             SetNotInitializedProperty("IsReturnParameter");
             SetNotInitializedProperty("Label");
@@ -1596,6 +1666,8 @@ namespace Zetbox.App.Base
 
             public virtual Guid ExportGuid { get; set; }
 
+            public virtual string HelpText { get; set; }
+
             public virtual bool IsList { get; set; }
 
             public virtual bool IsNullable { get; set; }
@@ -1637,6 +1709,7 @@ namespace Zetbox.App.Base
             if (this._isExportGuidSet) {
                 binStream.Write(this.Proxy.ExportGuid);
             }
+            binStream.Write(this.Proxy.HelpText);
             binStream.Write(this.Proxy.IsList);
             binStream.Write(this._isIsNullableSet);
             if (this._isIsNullableSet) {
@@ -1670,6 +1743,7 @@ namespace Zetbox.App.Base
             if (this._isExportGuidSet) {
                 this.Proxy.ExportGuid = binStream.ReadGuid();
             }
+            this.Proxy.HelpText = binStream.ReadString();
             this.Proxy.IsList = binStream.ReadBoolean();
             this._isIsNullableSet = binStream.ReadBoolean();
             if (this._isIsNullableSet) {
@@ -1698,6 +1772,7 @@ namespace Zetbox.App.Base
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.Description, xml, "Description", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.HelpText, xml, "HelpText", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.IsList, xml, "IsList", "Zetbox.App.Base");
             System.Diagnostics.Debug.Assert(this._isIsNullableSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.IsNullable, xml, "IsNullable", "Zetbox.App.Base");
@@ -1730,6 +1805,9 @@ namespace Zetbox.App.Base
                 // Import must have default value set
                 this.Proxy.ExportGuid = XmlStreamer.ReadGuid(xml);
                 this._isExportGuidSet = true;
+                break;
+            case "Zetbox.App.Base|HelpText":
+                this.Proxy.HelpText = XmlStreamer.ReadString(xml);
                 break;
             case "Zetbox.App.Base|IsList":
                 this.Proxy.IsList = XmlStreamer.ReadBoolean(xml);

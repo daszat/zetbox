@@ -170,6 +170,11 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 }
             }
         }
+
+        protected override string GetHelpText()
+        {
+            return ValueModel.HelpText;
+        }
         #endregion
 
         #region IValueViewModel Members

@@ -41,6 +41,15 @@ namespace Zetbox.App.Base
         }
 
         /// <summary>
+        /// A HTML string with a help text
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("98b79420-cba4-4ac0-8475-25ac8386350d")]
+        string HelpText {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("82a3f85f-aa39-4309-a83c-aa5b073a6887")]

@@ -686,6 +686,64 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
         public static event PropertyIsValidHandler<Zetbox.App.Base.DataType> OnExportGuid_IsValid;
 
         /// <summary>
+        /// A HTML string with a help text
+        /// </summary>
+
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        public string HelpText
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = Proxy.HelpText;
+                if (OnHelpText_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnHelpText_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (Proxy.HelpText != value)
+                {
+                    var __oldValue = Proxy.HelpText;
+                    var __newValue = value;
+                    if (OnHelpText_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnHelpText_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("HelpText", __oldValue, __newValue);
+                    Proxy.HelpText = __newValue;
+                    NotifyPropertyChanged("HelpText", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnHelpText_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnHelpText_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("HelpText");
+                }
+            }
+        }
+
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<Zetbox.App.Base.DataType, string> OnHelpText_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.DataType, string> OnHelpText_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.DataType, string> OnHelpText_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Base.DataType> OnHelpText_IsValid;
+
+        /// <summary>
         /// Interfaces der Objektklasse
         /// </summary>
         // collection entry list property
@@ -1572,6 +1630,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             me.CreatedOn = other.CreatedOn;
             me.Description = other.Description;
             me.ExportGuid = other.ExportGuid;
+            me.HelpText = other.HelpText;
             me.Name = other.Name;
             me.ShowIconInLists = other.ShowIconInLists;
             me.ShowIdInLists = other.ShowIdInLists;
@@ -1657,6 +1716,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
                 case "DefaultIcon":
                 case "Description":
                 case "ExportGuid":
+                case "HelpText":
                 case "Module":
                 case "Name":
                 case "RequestedKind":
@@ -1838,6 +1898,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
                         obj => obj.ExportGuid,
                         (obj, val) => obj.ExportGuid = val,
 						obj => OnExportGuid_IsValid), 
+                    // else
+                    new PropertyDescriptorNHibernateImpl<DataType, string>(
+                        lazyCtx,
+                        new Guid("35f1afb3-eb6f-455d-9794-4f1f2825cbb1"),
+                        "HelpText",
+                        null,
+                        obj => obj.HelpText,
+                        (obj, val) => obj.HelpText = val,
+						obj => OnHelpText_IsValid), 
                     // property.IsAssociation() && !property.IsObjectReferencePropertySingle()
                     new PropertyDescriptorNHibernateImpl<DataType, ICollection<Zetbox.App.Base.Interface>>(
                         lazyCtx,
@@ -1992,6 +2061,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             SetNotInitializedProperty("CreatedBy");
             SetNotInitializedProperty("DefaultIcon");
             SetNotInitializedProperty("Description");
+            SetNotInitializedProperty("HelpText");
             SetNotInitializedProperty("Module");
             SetNotInitializedProperty("Name");
             SetNotInitializedProperty("RequestedKind");
@@ -2093,6 +2163,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
 
             public virtual Guid ExportGuid { get; set; }
 
+            public virtual string HelpText { get; set; }
+
             public virtual ICollection<Zetbox.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl.DataType_implements_Interface_RelationEntryProxy> ImplementsInterfaces { get; set; }
 
             public virtual ICollection<Zetbox.App.Base.MethodNHibernateImpl.MethodProxy> Methods { get; set; }
@@ -2155,6 +2227,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             if (this._isExportGuidSet) {
                 binStream.Write(this.Proxy.ExportGuid);
             }
+            binStream.Write(this.Proxy.HelpText);
 
             binStream.Write(eagerLoadLists);
             if (eagerLoadLists && auxObjects != null)
@@ -2241,6 +2314,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             if (this._isExportGuidSet) {
                 this.Proxy.ExportGuid = binStream.ReadGuid();
             }
+            this.Proxy.HelpText = binStream.ReadString();
 
             Methods_was_eagerLoaded = binStream.ReadBoolean();
             {
@@ -2305,6 +2379,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.DefaultIcon != null ? this.Proxy.DefaultIcon.ExportGuid : (Guid?)null, xml, "DefaultIcon", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.Description, xml, "Description", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.HelpText, xml, "HelpText", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.Module != null ? this.Proxy.Module.ExportGuid : (Guid?)null, xml, "Module", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.Name, xml, "Name", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.RequestedKind != null ? this.Proxy.RequestedKind.ExportGuid : (Guid?)null, xml, "RequestedKind", "Zetbox.App.GUI");
@@ -2341,6 +2416,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
                 // Import must have default value set
                 this.Proxy.ExportGuid = XmlStreamer.ReadGuid(xml);
                 this._isExportGuidSet = true;
+                break;
+            case "Zetbox.App.Base|HelpText":
+                this.Proxy.HelpText = XmlStreamer.ReadString(xml);
                 break;
             case "Zetbox.App.Base|Module":
                 this._fk_guid_Module = XmlStreamer.ReadNullableGuid(xml);

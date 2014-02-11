@@ -139,6 +139,7 @@
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="HelpText" ColumnName="HelpText" />
           <ScalarProperty Name="IsList" ColumnName="IsList" />
           <ScalarProperty Name="IsNullable" ColumnName="IsNullable" />
           <ScalarProperty Name="IsReturnParameter" ColumnName="IsReturnParameter" />
@@ -155,6 +156,7 @@
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="HelpText" ColumnName="HelpText" />
           <ScalarProperty Name="IsList" ColumnName="IsList" />
           <ScalarProperty Name="IsNullable" ColumnName="IsNullable" />
           <ScalarProperty Name="IsReturnParameter" ColumnName="IsReturnParameter" />
@@ -172,6 +174,7 @@
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="HelpText" ColumnName="HelpText" />
           <ScalarProperty Name="IsList" ColumnName="IsList" />
           <ScalarProperty Name="IsNullable" ColumnName="IsNullable" />
           <ScalarProperty Name="IsReturnParameter" ColumnName="IsReturnParameter" />
@@ -188,6 +191,7 @@
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="HelpText" ColumnName="HelpText" />
           <ScalarProperty Name="IsList" ColumnName="IsList" />
           <ScalarProperty Name="IsNullable" ColumnName="IsNullable" />
           <ScalarProperty Name="IsReturnParameter" ColumnName="IsReturnParameter" />
@@ -205,6 +209,7 @@
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="HelpText" ColumnName="HelpText" />
           <ScalarProperty Name="IsList" ColumnName="IsList" />
           <ScalarProperty Name="IsNullable" ColumnName="IsNullable" />
           <ScalarProperty Name="IsReturnParameter" ColumnName="IsReturnParameter" />
@@ -221,6 +226,7 @@
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="HelpText" ColumnName="HelpText" />
           <ScalarProperty Name="IsList" ColumnName="IsList" />
           <ScalarProperty Name="IsNullable" ColumnName="IsNullable" />
           <ScalarProperty Name="IsReturnParameter" ColumnName="IsReturnParameter" />
@@ -237,6 +243,7 @@
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="HelpText" ColumnName="HelpText" />
           <ScalarProperty Name="IsList" ColumnName="IsList" />
           <ScalarProperty Name="IsNullable" ColumnName="IsNullable" />
           <ScalarProperty Name="IsReturnParameter" ColumnName="IsReturnParameter" />
@@ -253,6 +260,7 @@
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="HelpText" ColumnName="HelpText" />
           <ScalarProperty Name="IsList" ColumnName="IsList" />
           <ScalarProperty Name="IsNullable" ColumnName="IsNullable" />
           <ScalarProperty Name="IsReturnParameter" ColumnName="IsReturnParameter" />
@@ -269,6 +277,7 @@
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="HelpText" ColumnName="HelpText" />
           <ScalarProperty Name="IsList" ColumnName="IsList" />
           <ScalarProperty Name="IsNullable" ColumnName="IsNullable" />
           <ScalarProperty Name="IsReturnParameter" ColumnName="IsReturnParameter" />
@@ -285,6 +294,7 @@
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="HelpText" ColumnName="HelpText" />
           <ScalarProperty Name="IsList" ColumnName="IsList" />
           <ScalarProperty Name="IsNullable" ColumnName="IsNullable" />
           <ScalarProperty Name="IsReturnParameter" ColumnName="IsReturnParameter" />
@@ -477,6 +487,7 @@
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="HelpText" ColumnName="HelpText" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="ShowIconInLists" ColumnName="ShowIconInLists" />
           <ScalarProperty Name="ShowIdInLists" ColumnName="ShowIdInLists" />
@@ -922,6 +933,7 @@
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="HelpText" ColumnName="HelpText" />
           <ScalarProperty Name="InvokeOnServer" ColumnName="InvokeOnServer" />
           <ScalarProperty Name="IsDisplayable" ColumnName="IsDisplayable" />
           <ScalarProperty Name="Label" ColumnName="Label" />
@@ -1150,6 +1162,7 @@
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="DisableExport" ColumnName="DisableExport" />
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="HelpText" ColumnName="HelpText" />
           <ScalarProperty Name="Label" ColumnName="Label" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="RequestedWidthImpl" ColumnName="RequestedWidth" />
@@ -1168,6 +1181,7 @@
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="DisableExport" ColumnName="DisableExport" />
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="HelpText" ColumnName="HelpText" />
           <ScalarProperty Name="Label" ColumnName="Label" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="RequestedWidthImpl" ColumnName="RequestedWidth" />
@@ -1188,6 +1202,7 @@
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="DisableExport" ColumnName="DisableExport" />
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="HelpText" ColumnName="HelpText" />
           <ScalarProperty Name="Label" ColumnName="Label" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="RequestedWidthImpl" ColumnName="RequestedWidth" />
@@ -1211,6 +1226,7 @@
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="DisableExport" ColumnName="DisableExport" />
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="HelpText" ColumnName="HelpText" />
           <ScalarProperty Name="Label" ColumnName="Label" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="RequestedWidthImpl" ColumnName="RequestedWidth" />
@@ -1231,6 +1247,7 @@
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="DisableExport" ColumnName="DisableExport" />
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="HelpText" ColumnName="HelpText" />
           <ScalarProperty Name="Label" ColumnName="Label" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="RequestedWidthImpl" ColumnName="RequestedWidth" />
@@ -1255,6 +1272,7 @@
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="DisableExport" ColumnName="DisableExport" />
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="HelpText" ColumnName="HelpText" />
           <ScalarProperty Name="Label" ColumnName="Label" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="RequestedWidthImpl" ColumnName="RequestedWidth" />
@@ -1277,6 +1295,7 @@
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="DisableExport" ColumnName="DisableExport" />
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="HelpText" ColumnName="HelpText" />
           <ScalarProperty Name="Label" ColumnName="Label" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="RequestedWidthImpl" ColumnName="RequestedWidth" />
@@ -1300,6 +1319,7 @@
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="DisableExport" ColumnName="DisableExport" />
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="HelpText" ColumnName="HelpText" />
           <ScalarProperty Name="Label" ColumnName="Label" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="RequestedWidthImpl" ColumnName="RequestedWidth" />
@@ -1321,6 +1341,7 @@
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="DisableExport" ColumnName="DisableExport" />
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="HelpText" ColumnName="HelpText" />
           <ScalarProperty Name="Label" ColumnName="Label" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="RequestedWidthImpl" ColumnName="RequestedWidth" />
@@ -1342,6 +1363,7 @@
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="DisableExport" ColumnName="DisableExport" />
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="HelpText" ColumnName="HelpText" />
           <ScalarProperty Name="Label" ColumnName="Label" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="RequestedWidthImpl" ColumnName="RequestedWidth" />
@@ -1363,6 +1385,7 @@
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="DisableExport" ColumnName="DisableExport" />
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="HelpText" ColumnName="HelpText" />
           <ScalarProperty Name="Label" ColumnName="Label" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="RequestedWidthImpl" ColumnName="RequestedWidth" />
@@ -1384,6 +1407,7 @@
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="DisableExport" ColumnName="DisableExport" />
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="HelpText" ColumnName="HelpText" />
           <ScalarProperty Name="Label" ColumnName="Label" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="RequestedWidthImpl" ColumnName="RequestedWidth" />

@@ -1454,6 +1454,7 @@
     <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="HelpText" Type="nvarchar" Nullable="true" />
     <Property Name="IsList" Type="bit" Nullable="false" />
     <Property Name="IsNullable" Type="bit" Nullable="false" />
     <Property Name="IsReturnParameter" Type="bit" Nullable="false" />
@@ -1589,6 +1590,7 @@
     <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="HelpText" Type="nvarchar" Nullable="true" />
     <Property Name="Name" Type="nvarchar" MaxLength="51" Nullable="false" />
     <Property Name="ShowIconInLists" Type="bit" Nullable="false" />
     <Property Name="ShowIdInLists" Type="bit" Nullable="false" />
@@ -1949,6 +1951,7 @@
     <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="HelpText" Type="nvarchar" Nullable="true" />
     <Property Name="InvokeOnServer" Type="bit" Nullable="true" />
     <Property Name="IsDisplayable" Type="bit" Nullable="false" />
     <Property Name="Label" Type="nvarchar" MaxLength="200" Nullable="true" />
@@ -2235,6 +2238,7 @@
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="DisableExport" Type="bit" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="HelpText" Type="nvarchar" Nullable="true" />
     <Property Name="Label" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="RequestedWidth" Type="int" Nullable="true" />

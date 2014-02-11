@@ -40,6 +40,15 @@ namespace Zetbox.App.Base
         }
 
         /// <summary>
+        /// A HTML string with a help text
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("35f1afb3-eb6f-455d-9794-4f1f2825cbb1")]
+        string HelpText {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Interfaces der Objektklasse
         /// </summary>
 

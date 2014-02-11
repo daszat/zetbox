@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2014-02-10T16:55:25Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2014-02-11T08:37:09Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -37838,6 +37838,44 @@ public static void isValid_ExportGuid(BaseParameter obj, PropertyIsValidEventArg
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:GuidProperty>
+  <ZetboxBase:StringProperty ExportGuid="10e35458-34d5-4e16-ba7b-9729d9e5d1e9">
+    <ZetboxBase:CategoryTags>GUI</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2014-02-11T07:37:09.985051Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_HelpText(BaseParameter obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_HelpText(BaseParameter obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_HelpText(BaseParameter obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_HelpText(BaseParameter obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.HelpText == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2014-02-11T07:37:09.985051Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>A HTML string with a help text</ZetboxBase:Description>
+    <ZetboxBase:Label>Help text</ZetboxBase:Label>
+    <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
+    <ZetboxBase:Name>HelpText</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>63b8e3f7-e663-4fde-a09a-64ca876586bd</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>1003</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>a5e18586-d80f-49cf-8aa1-41d305eee289</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:StringProperty>
   <ZetboxBase:BoolProperty ExportGuid="ec4d5dbc-f738-4eb3-a663-2328d0baa79c">
     <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
@@ -39426,9 +39464,47 @@ public static void isValid_ExportGuid(DataType obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:GuidProperty>
+  <ZetboxBase:StringProperty ExportGuid="35f1afb3-eb6f-455d-9794-4f1f2825cbb1">
+    <ZetboxBase:CategoryTags>GUI</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2014-02-11T07:35:04.85654Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_HelpText(DataType obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_HelpText(DataType obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_HelpText(DataType obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_HelpText(DataType obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.HelpText == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2014-02-11T07:35:04.85654Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>A HTML string with a help text</ZetboxBase:Description>
+    <ZetboxBase:Label>Help text</ZetboxBase:Label>
+    <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
+    <ZetboxBase:Name>HelpText</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>6f005f31-c09c-45f9-9bcb-44090ebf0d1f</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>801</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>a5e18586-d80f-49cf-8aa1-41d305eee289</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:StringProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="a9ec04c2-0807-4d6c-a96a-824d13e5c571">
     <ZetboxBase:CategoryTags>DataModel</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-07-13T18:53:07.176233Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2014-02-11T07:35:04.85654Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ImplementsInterfaces(DataType obj, PropertyGetterEventArgs&lt;ICollection&lt;Zetbox.App.Base.Interface&gt;&gt; e)
 {
@@ -39457,7 +39533,7 @@ public static void isValid_ImplementsInterfaces(DataType obj, PropertyIsValidEve
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>ImplementsInterfaces</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>6f005f31-c09c-45f9-9bcb-44090ebf0d1f</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>801</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>802</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>67a49c49-b890-4d35-a8db-1f8e43bfc7df</GUI:ValueModelDescriptor>
     <ZetboxBase:EagerLoading>false</ZetboxBase:EagerLoading>
     <ZetboxBase:RelationEnd>febffc17-2bef-4c1a-9771-0c51c729d248</ZetboxBase:RelationEnd>
@@ -42464,6 +42540,44 @@ public static void isValid_ExportGuid(Method obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:GuidProperty>
+  <ZetboxBase:StringProperty ExportGuid="98b79420-cba4-4ac0-8475-25ac8386350d">
+    <ZetboxBase:CategoryTags>GUI</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2014-02-11T07:37:09.985051Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_HelpText(Method obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_HelpText(Method obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_HelpText(Method obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_HelpText(Method obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.HelpText == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2014-02-11T07:36:08.274881Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>A HTML string with a help text</ZetboxBase:Description>
+    <ZetboxBase:Label>Help text</ZetboxBase:Label>
+    <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
+    <ZetboxBase:Name>HelpText</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>ef79c0b9-55e0-45ad-8233-1ff8f852661f</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>1105</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>a5e18586-d80f-49cf-8aa1-41d305eee289</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:StringProperty>
   <ZetboxBase:BoolProperty ExportGuid="1bd6290d-2f38-4cc0-96b9-83a0b00c951b">
     <ZetboxBase:CategoryTags>Main, Summary</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2012-04-05T05:26:13.120035Z</ZetboxBase:ChangedOn>
@@ -44071,6 +44185,44 @@ public static void isValid_ExportGuid(Property obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:GuidProperty>
+  <ZetboxBase:StringProperty ExportGuid="dc09afbf-9cb8-45ef-b7c5-b1c3b948c7e5">
+    <ZetboxBase:CategoryTags>GUI</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2014-02-11T07:35:04.85654Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_HelpText(Property obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_HelpText(Property obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_HelpText(Property obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_HelpText(Property obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.HelpText == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2014-02-11T07:35:04.85654Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>A HTML string with a help text</ZetboxBase:Description>
+    <ZetboxBase:Label>Help text</ZetboxBase:Label>
+    <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
+    <ZetboxBase:Name>HelpText</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>e5f93f63-9cb8-40a5-8118-d1d9e479370c</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>1502</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>a5e18586-d80f-49cf-8aa1-41d305eee289</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:StringProperty>
   <ZetboxBase:StringProperty ExportGuid="34fc8b17-e9c2-43c5-a6d6-908551a8818b">
     <ZetboxBase:CategoryTags>Main,Summary</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2012-08-03T11:58:33.975812Z</ZetboxBase:ChangedOn>
@@ -48978,6 +49130,12 @@ public static void isValid_IsList(ValueTypeProperty obj, PropertyIsValidEventArg
     <ZetboxBase:ConstrainedProperty>74265fbf-2340-4828-82fa-cff4a0d18ffa</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="a52747a7-f5e8-4822-a06b-e3eaf3c36852">
+    <ZetboxBase:ChangedOn>2014-02-11T07:37:09.985051Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>10e35458-34d5-4e16-ba7b-9729d9e5d1e9</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2014-02-11T07:37:09.985051Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="f141dbc7-c0ba-4da9-ad3e-2b27e9ee56a5">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:05.040027Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>ec4d5dbc-f738-4eb3-a663-2328d0baa79c</ZetboxBase:ConstrainedProperty>
@@ -49266,6 +49424,12 @@ public static void isValid_IsList(ValueTypeProperty obj, PropertyIsValidEventArg
     <ZetboxBase:ConstrainedProperty>1fdb011e-2098-4077-b5e9-dd2eeafa727c</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="79c14a10-53cb-44bc-b8c1-27b0aba23a94">
+    <ZetboxBase:ChangedOn>2014-02-11T07:35:04.85654Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>35f1afb3-eb6f-455d-9794-4f1f2825cbb1</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2014-02-11T07:35:04.85654Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="e3ed0fe1-d595-4b70-b605-af5fc4d3d86a">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:05.26804Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>4e1fb30b-e528-4968-95b0-f3a38eafe643</ZetboxBase:ConstrainedProperty>
@@ -49742,6 +49906,12 @@ public static void isValid_IsList(ValueTypeProperty obj, PropertyIsValidEventArg
     <ZetboxBase:ConstrainedProperty>842eb3fc-3c8f-47d6-a59f-225c75ec2439</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="0379ceec-8e8c-49ab-9df5-f407bd1e5824">
+    <ZetboxBase:ChangedOn>2014-02-11T07:36:08.274881Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>98b79420-cba4-4ac0-8475-25ac8386350d</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2014-02-11T07:36:08.274881Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:StringRangeConstraint ExportGuid="66ebf0ee-c350-451e-912f-ed7e34f1f986">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:05.605059Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>4ce1447d-5ba3-40a9-b665-a435c7a028aa</ZetboxBase:ConstrainedProperty>
@@ -49991,6 +50161,12 @@ public static void isValid_IsList(ValueTypeProperty obj, PropertyIsValidEventArg
     <ZetboxBase:ConstrainedProperty>ca0a099d-3f4c-4604-8303-d751e57041bb</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="554aca4c-a376-41af-902c-e82a890e7717">
+    <ZetboxBase:ChangedOn>2014-02-11T07:35:04.85654Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>dc09afbf-9cb8-45ef-b7c5-b1c3b948c7e5</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2014-02-11T07:35:04.85654Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:StringRangeConstraint ExportGuid="c5832436-8f9c-44b9-b08f-67b807cd3d92">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:05.782069Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>34fc8b17-e9c2-43c5-a6d6-908551a8818b</ZetboxBase:ConstrainedProperty>

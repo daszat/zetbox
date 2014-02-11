@@ -24,6 +24,15 @@ namespace Zetbox.App.Base
         }
 
         /// <summary>
+        /// A HTML string with a help text
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("10e35458-34d5-4e16-ba7b-9729d9e5d1e9")]
+        string HelpText {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Parameter wird als List&amp;lt;&amp;gt; generiert
         /// </summary>
         [Zetbox.API.DefinitionGuid("ec4d5dbc-f738-4eb3-a663-2328d0baa79c")]

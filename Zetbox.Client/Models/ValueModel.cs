@@ -109,6 +109,20 @@ namespace Zetbox.Client.Models
 
         public string Description { get; private set; }
 
+        private string _helpText;
+        public string HelpText
+        {
+            get { return _helpText; }
+            set
+            {
+                if (_helpText != value)
+                {
+                    _helpText = value;
+                    OnPropertyChanged("HelpText");
+                }
+            }
+        }
+
         public bool IsReadOnly { get; private set; }
 
         public abstract void ClearValue();

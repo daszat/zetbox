@@ -651,6 +651,64 @@ namespace Zetbox.App.Base
         public static event PropertyIsValidHandler<Zetbox.App.Base.Method> OnExportGuid_IsValid;
 
         /// <summary>
+        /// A HTML string with a help text
+        /// </summary>
+
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        public string HelpText
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = Proxy.HelpText;
+                if (OnHelpText_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnHelpText_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (Proxy.HelpText != value)
+                {
+                    var __oldValue = Proxy.HelpText;
+                    var __newValue = value;
+                    if (OnHelpText_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnHelpText_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("HelpText", __oldValue, __newValue);
+                    Proxy.HelpText = __newValue;
+                    NotifyPropertyChanged("HelpText", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnHelpText_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnHelpText_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("HelpText");
+                }
+            }
+        }
+
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<Zetbox.App.Base.Method, string> OnHelpText_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.Method, string> OnHelpText_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.Method, string> OnHelpText_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Base.Method> OnHelpText_IsValid;
+
+        /// <summary>
         /// 
         /// </summary>
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Icon
@@ -1493,6 +1551,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnShowByP
             me.CreatedOn = other.CreatedOn;
             me.Description = other.Description;
             me.ExportGuid = other.ExportGuid;
+            me.HelpText = other.HelpText;
             me.InvokeOnServer = other.InvokeOnServer;
             me.IsDisplayable = other.IsDisplayable;
             me.Label = other.Label;
@@ -1579,6 +1638,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnShowByP
                 case "CreatedOn":
                 case "Description":
                 case "ExportGuid":
+                case "HelpText":
                 case "Icon":
                 case "InvokeOnServer":
                 case "IsDisplayable":
@@ -1770,6 +1830,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnShowByP
                         (obj, val) => obj.ExportGuid = val,
 						obj => OnExportGuid_IsValid), 
                     // else
+                    new PropertyDescriptorNHibernateImpl<Method, string>(
+                        lazyCtx,
+                        new Guid("98b79420-cba4-4ac0-8475-25ac8386350d"),
+                        "HelpText",
+                        null,
+                        obj => obj.HelpText,
+                        (obj, val) => obj.HelpText = val,
+						obj => OnHelpText_IsValid), 
+                    // else
                     new PropertyDescriptorNHibernateImpl<Method, Zetbox.App.GUI.Icon>(
                         lazyCtx,
                         new Guid("82a3f85f-aa39-4309-a83c-aa5b073a6887"),
@@ -1921,6 +1990,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnShowByP
             SetNotInitializedProperty("ChangedBy");
             SetNotInitializedProperty("CreatedBy");
             SetNotInitializedProperty("Description");
+            SetNotInitializedProperty("HelpText");
             SetNotInitializedProperty("Icon");
             SetNotInitializedProperty("InvokeOnServer");
             SetNotInitializedProperty("IsDisplayable");
@@ -2013,6 +2083,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnShowByP
 
             public virtual Guid ExportGuid { get; set; }
 
+            public virtual string HelpText { get; set; }
+
             public virtual Zetbox.App.GUI.IconNHibernateImpl.IconProxy Icon { get; set; }
 
             public virtual bool? InvokeOnServer { get; set; }
@@ -2060,6 +2132,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnShowByP
             if (this._isExportGuidSet) {
                 binStream.Write(this.Proxy.ExportGuid);
             }
+            binStream.Write(this.Proxy.HelpText);
             binStream.Write(this.Proxy.Icon != null ? OurContext.GetIdFromProxy(this.Proxy.Icon) : (int?)null);
             binStream.Write(this.Proxy.InvokeOnServer);
             binStream.Write(this.Proxy.IsDisplayable);
@@ -2092,6 +2165,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnShowByP
             if (this._isExportGuidSet) {
                 this.Proxy.ExportGuid = binStream.ReadGuid();
             }
+            this.Proxy.HelpText = binStream.ReadString();
             binStream.Read(out this._fk_Icon);
             this.Proxy.InvokeOnServer = binStream.ReadNullableBoolean();
             this.Proxy.IsDisplayable = binStream.ReadBoolean();
@@ -2119,6 +2193,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnShowByP
             System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.Description, xml, "Description", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.HelpText, xml, "HelpText", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.Icon != null ? this.Proxy.Icon.ExportGuid : (Guid?)null, xml, "Icon", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.InvokeOnServer, xml, "InvokeOnServer", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.IsDisplayable, xml, "IsDisplayable", "Zetbox.App.GUI");
@@ -2156,6 +2231,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnShowByP
                 // Import must have default value set
                 this.Proxy.ExportGuid = XmlStreamer.ReadGuid(xml);
                 this._isExportGuidSet = true;
+                break;
+            case "Zetbox.App.Base|HelpText":
+                this.Proxy.HelpText = XmlStreamer.ReadString(xml);
                 break;
             case "Zetbox.App.GUI|Icon":
                 this._fk_guid_Icon = XmlStreamer.ReadNullableGuid(xml);
