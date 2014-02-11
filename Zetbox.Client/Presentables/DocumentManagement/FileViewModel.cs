@@ -34,10 +34,15 @@ namespace Zetbox.Client.Presentables.DocumentManagement
         {
             this.File = obj;
             
-            // Changes should be possible when the object was not saved yet.
-            UpdateIsReadonly();
             // When the context was saved, no more changes are allowed.
             this.DataContext.IsModifiedChanged += new EventHandler(DataContext_IsModifiedChanged);
+        }
+
+        protected override void OnPropertyModelsByNameCreated()
+        {
+            base.OnPropertyModelsByNameCreated();
+            // Changes should be possible when the object was not saved yet.
+            UpdateIsReadonly();
         }
 
         void DataContext_IsModifiedChanged(object sender, EventArgs e)
