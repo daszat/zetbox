@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2014-02-11T09:11:49Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2014-02-11T09:31:14Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -4774,10 +4774,10 @@ public static void AppliesToCanExecReason(WorkScheduleRule obj, MethodReturnEven
     <ZetboxBase:SchemaName>doc</ZetboxBase:SchemaName>
   </ZetboxBase:Module>
   <ZetboxBase:ObjectClass ExportGuid="3f496de2-bef4-4059-8c3e-c25db38bd3c2">
-    <ZetboxBase:ChangedOn>2014-02-10T15:55:25.761636Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2014-02-11T08:31:14.980431Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-03-12T22:35:18Z</ZetboxBase:CreatedOn>
     <GUI:DefaultIcon>267ce6ec-7982-46d3-b1bc-2e1ea6adf815</GUI:DefaultIcon>
-    <ZetboxBase:Description>Document with revisions</ZetboxBase:Description>
+    <ZetboxBase:Description>Depricated</ZetboxBase:Description>
     <ZetboxBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</ZetboxBase:Module>
     <ZetboxBase:Name>Document</ZetboxBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
@@ -4817,16 +4817,16 @@ public static void ObjectIsValid(Document obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>f580a1b4-26c0-46e8-a268-3b3d4b4f15a7</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
-    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
+    <ZetboxBase:IsCreatedProgrammatically>true</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>Documents</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="e1556c0b-cdb9-4174-a9e5-07efba58ef05">
-    <ZetboxBase:ChangedOn>2014-02-10T15:55:25.761636Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2014-02-11T08:31:14.980431Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-03-10T22:38:16Z</ZetboxBase:CreatedOn>
     <GUI:DefaultIcon>267ce6ec-7982-46d3-b1bc-2e1ea6adf815</GUI:DefaultIcon>
-    <ZetboxBase:Description>File with changeable content</ZetboxBase:Description>
+    <ZetboxBase:Description>Depricated</ZetboxBase:Description>
     <ZetboxBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</ZetboxBase:Module>
     <ZetboxBase:Name>DynamicFile</ZetboxBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
@@ -4866,7 +4866,7 @@ public static void ObjectIsValid(DynamicFile obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>f580a1b4-26c0-46e8-a268-3b3d4b4f15a7</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
-    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
+    <ZetboxBase:IsCreatedProgrammatically>true</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>DynamicFiles</ZetboxBase:TableName>
@@ -5014,7 +5014,7 @@ public static void ObjectIsValid(FileImportConfiguration obj, ObjectIsValidEvent
     <ZetboxBase:TableName>FileImportConfigurations</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="523a75bb-29c4-421c-9343-93d8658bb5f8">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:08.070755Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2014-02-11T08:31:14.980431Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-10-29T10:08:59.39074Z</ZetboxBase:CreatedOn>
     <GUI:DefaultIcon>267ce6ec-7982-46d3-b1bc-2e1ea6adf815</GUI:DefaultIcon>
     <ZetboxBase:Description>Files beeing imported by the import service.</ZetboxBase:Description>
@@ -5057,16 +5057,16 @@ public static void ObjectIsValid(ImportedFile obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>3aeddad1-a2cf-46b0-af26-6bf6e5f8f6e2</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
-    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
+    <ZetboxBase:IsCreatedProgrammatically>true</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>ImportedFiles</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="5aaabfe9-081d-445d-a543-53e0253feeb8">
-    <ZetboxBase:ChangedOn>2014-02-10T15:55:25.761636Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2014-02-11T08:31:14.980431Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-03-12T22:33:23Z</ZetboxBase:CreatedOn>
     <GUI:DefaultIcon>267ce6ec-7982-46d3-b1bc-2e1ea6adf815</GUI:DefaultIcon>
-    <ZetboxBase:Description>Static file. Content cannot be changed</ZetboxBase:Description>
+    <ZetboxBase:Description>Depricated</ZetboxBase:Description>
     <ZetboxBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</ZetboxBase:Module>
     <ZetboxBase:Name>StaticFile</ZetboxBase:Name>
     <GUI:ShowIconInLists>true</GUI:ShowIconInLists>
@@ -5106,7 +5106,7 @@ public static void ObjectIsValid(StaticFile obj, ObjectIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <GUI:DefaultViewModelDescriptor>f580a1b4-26c0-46e8-a268-3b3d4b4f15a7</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
-    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
+    <ZetboxBase:IsCreatedProgrammatically>true</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>StaticFiles</ZetboxBase:TableName>

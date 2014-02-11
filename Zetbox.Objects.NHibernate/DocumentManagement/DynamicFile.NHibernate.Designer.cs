@@ -19,7 +19,7 @@ namespace at.dasz.DocumentManagement
     using Zetbox.DalProvider.NHibernate;
 
     /// <summary>
-    /// File with changeable content
+    /// Depricated
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("DynamicFile")]
     public class DynamicFileNHibernateImpl : at.dasz.DocumentManagement.FileNHibernateImpl, DynamicFile

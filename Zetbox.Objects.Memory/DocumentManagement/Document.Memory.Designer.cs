@@ -18,7 +18,7 @@ namespace at.dasz.DocumentManagement
     using Zetbox.DalProvider.Memory;
 
     /// <summary>
-    /// Document with revisions
+    /// Depricated
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("Document")]
     public class DocumentMemoryImpl : at.dasz.DocumentManagement.FileMemoryImpl, Document

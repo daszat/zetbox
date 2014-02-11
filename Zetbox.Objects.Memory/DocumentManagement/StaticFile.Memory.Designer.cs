@@ -18,7 +18,7 @@ namespace at.dasz.DocumentManagement
     using Zetbox.DalProvider.Memory;
 
     /// <summary>
-    /// Static file. Content cannot be changed
+    /// Depricated
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("StaticFile")]
     public class StaticFileMemoryImpl : at.dasz.DocumentManagement.FileMemoryImpl, StaticFile

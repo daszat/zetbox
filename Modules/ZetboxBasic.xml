@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2014-02-11T09:11:49Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2014-02-11T09:31:14Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="84f486f7-19fe-49ad-8e4a-6c05089e7684">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.650235Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
@@ -30393,6 +30393,11 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
     <GUI:IconFile>stop.png</GUI:IconFile>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
   </GUI:Icon>
+  <GUI:Icon ExportGuid="d1d1394e-7fb6-4130-9cf7-04d6551055c4">
+    <GUI:Blob>d14e368a-7da0-4eef-8b92-e460fe41d3a0</GUI:Blob>
+    <GUI:IconFile>tip.png</GUI:IconFile>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+  </GUI:Icon>
   <GUI:Icon ExportGuid="32dc1dd9-6f33-486a-a504-133f93ae02b9">
     <GUI:Blob>22641100-ee14-42cb-929b-bab472686e0f</GUI:Blob>
     <GUI:IconFile>todo.png</GUI:IconFile>
@@ -30644,6 +30649,13 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
     <ZetboxBase:MimeType>image/png</ZetboxBase:MimeType>
     <ZetboxBase:OriginalName>stop.png</ZetboxBase:OriginalName>
     <ZetboxBase:StoragePath>2011\05\04\(6a91dc8a-4814-4c99-ae52-dff610c2cf78) - stop.png</ZetboxBase:StoragePath>
+  </ZetboxBase:Blob>
+  <ZetboxBase:Blob ExportGuid="d14e368a-7da0-4eef-8b92-e460fe41d3a0">
+    <ZetboxBase:ChangedOn>2014-02-11T08:38:08.719728Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2014-02-11T08:38:08.719728Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MimeType>image/png</ZetboxBase:MimeType>
+    <ZetboxBase:OriginalName>tip.png</ZetboxBase:OriginalName>
+    <ZetboxBase:StoragePath>2014\02\11\(d14e368a-7da0-4eef-8b92-e460fe41d3a0) - tip.png</ZetboxBase:StoragePath>
   </ZetboxBase:Blob>
   <ZetboxBase:Blob ExportGuid="22641100-ee14-42cb-929b-bab472686e0f">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:12.260237Z</ZetboxBase:ChangedOn>

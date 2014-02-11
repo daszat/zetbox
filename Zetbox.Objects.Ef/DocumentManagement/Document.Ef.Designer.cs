@@ -20,7 +20,7 @@ namespace at.dasz.DocumentManagement
     using Zetbox.DalProvider.Ef;
 
     /// <summary>
-    /// Document with revisions
+    /// Depricated
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="DocumentEfImpl")]
     [System.Diagnostics.DebuggerDisplay("Document")]

@@ -19,7 +19,7 @@ namespace at.dasz.DocumentManagement
     using Zetbox.DalProvider.NHibernate;
 
     /// <summary>
-    /// Static file. Content cannot be changed
+    /// Depricated
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("StaticFile")]
     public class StaticFileNHibernateImpl : at.dasz.DocumentManagement.FileNHibernateImpl, StaticFile

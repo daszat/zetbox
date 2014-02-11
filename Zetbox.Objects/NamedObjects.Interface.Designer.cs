@@ -4841,6 +4841,10 @@ namespace Zetbox {
                     {
                         get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("da02708c-58e1-4219-8a55-06202c724171"); }
                     }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> tip_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("d1d1394e-7fb6-4130-9cf7-04d6551055c4"); }
+                    }
                     public static TypedGuid<global::Zetbox.App.GUI.Icon> todo_png
                     {
                         get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("32dc1dd9-6f33-486a-a504-133f93ae02b9"); }

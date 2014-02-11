@@ -8,7 +8,7 @@ namespace at.dasz.DocumentManagement
     using Zetbox.API;
 
     /// <summary>
-    /// Document with revisions
+    /// Depricated
     /// </summary>
     [Zetbox.API.DefinitionGuid("3f496de2-bef4-4059-8c3e-c25db38bd3c2")]
     public interface Document : at.dasz.DocumentManagement.File 

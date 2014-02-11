@@ -19,7 +19,7 @@ namespace at.dasz.DocumentManagement
     using Zetbox.DalProvider.NHibernate;
 
     /// <summary>
-    /// Document with revisions
+    /// Depricated
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("Document")]
     public class DocumentNHibernateImpl : at.dasz.DocumentManagement.FileNHibernateImpl, Document
