@@ -5545,6 +5545,23 @@
       <Condition ColumnName="fk_Event" IsNull="false"/>
     </AssociationSetMapping>
     <!--
+    Relation: FK_TestObj_has_AnotherFile
+    A: ZeroOrMore DocumentTestObject as TestObj
+    B: ZeroOrOne File as AnotherFile
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_TestObj_has_AnotherFile"
+                           TypeName="Model.FK_TestObj_has_AnotherFile"
+                           StoreEntitySet="DocumentTestObject" >
+      <EndProperty Name="AnotherFile">
+        <ScalarProperty Name="ID" ColumnName="fk_AnotherFile"/>
+      </EndProperty>
+      <EndProperty Name="TestObj">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_AnotherFile" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
     Relation: FK_TestObj_has_AnyFile
     A: ZeroOrMore DocumentTestObject as TestObj
     B: ZeroOrOne File as AnyFile
@@ -5560,23 +5577,6 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_AnyFile" IsNull="false"/>
-    </AssociationSetMapping>
-    <!--
-    Relation: FK_TestObj_has_StaticFile
-    A: ZeroOrMore DocumentTestObject as TestObj
-    B: ZeroOrOne StaticFile as StaticFile
-    Preferred Storage: MergeIntoA
-    -->
-    <AssociationSetMapping Name="FK_TestObj_has_StaticFile"
-                           TypeName="Model.FK_TestObj_has_StaticFile"
-                           StoreEntitySet="DocumentTestObject" >
-      <EndProperty Name="StaticFile">
-        <ScalarProperty Name="ID" ColumnName="fk_StaticFile"/>
-      </EndProperty>
-      <EndProperty Name="TestObj">
-        <ScalarProperty Name="ID" ColumnName="ID"/>
-      </EndProperty>
-      <Condition ColumnName="fk_StaticFile" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_TestObjClass_has_ObjectProp

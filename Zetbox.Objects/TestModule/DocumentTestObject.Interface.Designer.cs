@@ -17,6 +17,15 @@ namespace Zetbox.App.Test
         /// <summary>
         /// 
         /// </summary>
+        [Zetbox.API.DefinitionGuid("6f8a1d45-5064-4c7e-bd01-bcf892a536cd")]
+        at.dasz.DocumentManagement.File AnotherFile {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         [Zetbox.API.DefinitionGuid("427d1022-4953-4fc1-90aa-867fe3898688")]
         at.dasz.DocumentManagement.File AnyFile {
             get;
@@ -28,15 +37,6 @@ namespace Zetbox.App.Test
         /// </summary>
         [Zetbox.API.DefinitionGuid("d666f08f-498a-44cf-82e9-9b4f7bfa1c74")]
         string Name {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        [Zetbox.API.DefinitionGuid("6f8a1d45-5064-4c7e-bd01-bcf892a536cd")]
-        at.dasz.DocumentManagement.StaticFile StaticFile {
             get;
             set;
         }

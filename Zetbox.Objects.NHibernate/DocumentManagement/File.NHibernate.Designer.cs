@@ -1714,6 +1714,7 @@ public static event PropertyListChangedHandler<at.dasz.DocumentManagement.File> 
                 ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
             }
             // should fetch && remember parent for DocumentTestObject_has_File_RelationEntry
+            // should fetch && remember parent for DocumentTestObject_has_File_RelationEntry
 
             Revisions.Clear();
             Blob = null;

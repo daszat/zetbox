@@ -3672,6 +3672,10 @@ namespace Zetbox {
                             }
                             public static class DocumentTestObject_Properties
                             {
+                                public static TypedGuid<global::Zetbox.App.Base.Property> AnotherFile
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("6f8a1d45-5064-4c7e-bd01-bcf892a536cd"); }
+                                }
                                 public static TypedGuid<global::Zetbox.App.Base.Property> AnyFile
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("427d1022-4953-4fc1-90aa-867fe3898688"); }
@@ -3679,10 +3683,6 @@ namespace Zetbox {
                                 public static TypedGuid<global::Zetbox.App.Base.Property> Name
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("d666f08f-498a-44cf-82e9-9b4f7bfa1c74"); }
-                                }
-                                public static TypedGuid<global::Zetbox.App.Base.Property> StaticFile
-                                {
-                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("6f8a1d45-5064-4c7e-bd01-bcf892a536cd"); }
                                 }
                             }
                             public static class EventTestObject_Properties

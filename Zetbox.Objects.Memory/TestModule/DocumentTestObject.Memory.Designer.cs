@@ -40,6 +40,121 @@ namespace Zetbox.App.Test
         /// <summary>
         /// 
         /// </summary>
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for AnotherFile
+        // fkBackingName=_fk_AnotherFile; fkGuidBackingName=_fk_guid_AnotherFile;
+        // referencedInterface=at.dasz.DocumentManagement.File; moduleNamespace=Zetbox.App.Test;
+        // no inverse navigator handling
+        // PositionStorage=none;
+        // Target not exportable; does call events
+
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
+        public at.dasz.DocumentManagement.File AnotherFile
+        {
+            get { return AnotherFileImpl; }
+            set { AnotherFileImpl = (at.dasz.DocumentManagement.FileMemoryImpl)value; }
+        }
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        private int? __fk_AnotherFileCache;
+
+        private int? _fk_AnotherFile {
+            get
+            {
+                return __fk_AnotherFileCache;
+            }
+            set
+            {
+                __fk_AnotherFileCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchAnotherFileTask = null;
+            }
+        }
+
+
+        Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.File> _triggerFetchAnotherFileTask;
+        public Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.File> TriggerFetchAnotherFileAsync()
+        {
+            if (_triggerFetchAnotherFileTask != null) return _triggerFetchAnotherFileTask;
+
+            if (_fk_AnotherFile.HasValue)
+                _triggerFetchAnotherFileTask = Context.FindAsync<at.dasz.DocumentManagement.File>(_fk_AnotherFile.Value);
+            else
+                _triggerFetchAnotherFileTask = new Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.File>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            _triggerFetchAnotherFileTask.OnResult(t =>
+            {
+                if (OnAnotherFile_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<at.dasz.DocumentManagement.File>(t.Result);
+                    OnAnotherFile_Getter(this, e);
+                    t.Result = e.Result;
+                }
+            });
+
+            return _triggerFetchAnotherFileTask;
+        }
+
+        // internal implementation
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        internal at.dasz.DocumentManagement.FileMemoryImpl AnotherFileImpl
+        {
+            get
+            {
+                return (at.dasz.DocumentManagement.FileMemoryImpl)TriggerFetchAnotherFileAsync().Result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
+
+                // shortcut noops
+                if ((value == null && _fk_AnotherFile == null) || (value != null && value.ID == _fk_AnotherFile))
+                {
+                    SetInitializedProperty("AnotherFile");
+                    return;
+                }
+
+                // cache old value to remove inverse references later
+                var __oldValue = AnotherFileImpl;
+                var __newValue = value;
+
+                // Changing Event fires before anything is touched
+                NotifyPropertyChanging("AnotherFile", __oldValue, __newValue);
+
+                if (OnAnotherFile_PreSetter != null && IsAttached)
+                {
+                    var e = new PropertyPreSetterEventArgs<at.dasz.DocumentManagement.File>(__oldValue, __newValue);
+                    OnAnotherFile_PreSetter(this, e);
+                    __newValue = (at.dasz.DocumentManagement.FileMemoryImpl)e.Result;
+                }
+
+                // next, set the local reference
+                _fk_AnotherFile = __newValue == null ? (int?)null : __newValue.ID;
+
+                // everything is done. fire the Changed event
+                NotifyPropertyChanged("AnotherFile", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
+
+                if (OnAnotherFile_PostSetter != null && IsAttached)
+                {
+                    var e = new PropertyPostSetterEventArgs<at.dasz.DocumentManagement.File>(__oldValue, __newValue);
+                    OnAnotherFile_PostSetter(this, e);
+                }
+            }
+        }
+        // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for AnotherFile
+		public static event PropertyGetterHandler<Zetbox.App.Test.DocumentTestObject, at.dasz.DocumentManagement.File> OnAnotherFile_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Test.DocumentTestObject, at.dasz.DocumentManagement.File> OnAnotherFile_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Test.DocumentTestObject, at.dasz.DocumentManagement.File> OnAnotherFile_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Test.DocumentTestObject> OnAnotherFile_IsValid;
+
+        /// <summary>
+        /// 
+        /// </summary>
         // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for AnyFile
         // fkBackingName=_fk_AnyFile; fkGuidBackingName=_fk_guid_AnyFile;
         // referencedInterface=at.dasz.DocumentManagement.File; moduleNamespace=Zetbox.App.Test;
@@ -210,121 +325,6 @@ namespace Zetbox.App.Test
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.DocumentTestObject> OnName_IsValid;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for StaticFile
-        // fkBackingName=_fk_StaticFile; fkGuidBackingName=_fk_guid_StaticFile;
-        // referencedInterface=at.dasz.DocumentManagement.StaticFile; moduleNamespace=Zetbox.App.Test;
-        // no inverse navigator handling
-        // PositionStorage=none;
-        // Target not exportable; does call events
-
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
-        public at.dasz.DocumentManagement.StaticFile StaticFile
-        {
-            get { return StaticFileImpl; }
-            set { StaticFileImpl = (at.dasz.DocumentManagement.StaticFileMemoryImpl)value; }
-        }
-        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
-
-        private int? __fk_StaticFileCache;
-
-        private int? _fk_StaticFile {
-            get
-            {
-                return __fk_StaticFileCache;
-            }
-            set
-            {
-                __fk_StaticFileCache = value;
-                // Recreate task to clear it's cache
-                _triggerFetchStaticFileTask = null;
-            }
-        }
-
-
-        Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.StaticFile> _triggerFetchStaticFileTask;
-        public Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.StaticFile> TriggerFetchStaticFileAsync()
-        {
-            if (_triggerFetchStaticFileTask != null) return _triggerFetchStaticFileTask;
-
-            if (_fk_StaticFile.HasValue)
-                _triggerFetchStaticFileTask = Context.FindAsync<at.dasz.DocumentManagement.StaticFile>(_fk_StaticFile.Value);
-            else
-                _triggerFetchStaticFileTask = new Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.StaticFile>(Zetbox.API.Async.ZbTask.Synchron, () => null);
-
-            _triggerFetchStaticFileTask.OnResult(t =>
-            {
-                if (OnStaticFile_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<at.dasz.DocumentManagement.StaticFile>(t.Result);
-                    OnStaticFile_Getter(this, e);
-                    t.Result = e.Result;
-                }
-            });
-
-            return _triggerFetchStaticFileTask;
-        }
-
-        // internal implementation
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        internal at.dasz.DocumentManagement.StaticFileMemoryImpl StaticFileImpl
-        {
-            get
-            {
-                return (at.dasz.DocumentManagement.StaticFileMemoryImpl)TriggerFetchStaticFileAsync().Result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
-
-                // shortcut noops
-                if ((value == null && _fk_StaticFile == null) || (value != null && value.ID == _fk_StaticFile))
-                {
-                    SetInitializedProperty("StaticFile");
-                    return;
-                }
-
-                // cache old value to remove inverse references later
-                var __oldValue = StaticFileImpl;
-                var __newValue = value;
-
-                // Changing Event fires before anything is touched
-                NotifyPropertyChanging("StaticFile", __oldValue, __newValue);
-
-                if (OnStaticFile_PreSetter != null && IsAttached)
-                {
-                    var e = new PropertyPreSetterEventArgs<at.dasz.DocumentManagement.StaticFile>(__oldValue, __newValue);
-                    OnStaticFile_PreSetter(this, e);
-                    __newValue = (at.dasz.DocumentManagement.StaticFileMemoryImpl)e.Result;
-                }
-
-                // next, set the local reference
-                _fk_StaticFile = __newValue == null ? (int?)null : __newValue.ID;
-
-                // everything is done. fire the Changed event
-                NotifyPropertyChanged("StaticFile", __oldValue, __newValue);
-                if(IsAttached) UpdateChangedInfo = true;
-
-                if (OnStaticFile_PostSetter != null && IsAttached)
-                {
-                    var e = new PropertyPostSetterEventArgs<at.dasz.DocumentManagement.StaticFile>(__oldValue, __newValue);
-                    OnStaticFile_PostSetter(this, e);
-                }
-            }
-        }
-        // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for StaticFile
-		public static event PropertyGetterHandler<Zetbox.App.Test.DocumentTestObject, at.dasz.DocumentManagement.StaticFile> OnStaticFile_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Test.DocumentTestObject, at.dasz.DocumentManagement.StaticFile> OnStaticFile_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Test.DocumentTestObject, at.dasz.DocumentManagement.StaticFile> OnStaticFile_PostSetter;
-
-        public static event PropertyIsValidHandler<Zetbox.App.Test.DocumentTestObject> OnStaticFile_IsValid;
-
         public override Type GetImplementedInterface()
         {
             return typeof(DocumentTestObject);
@@ -338,8 +338,8 @@ namespace Zetbox.App.Test
             var me = (DocumentTestObject)this;
 
             me.Name = other.Name;
+            this._fk_AnotherFile = otherImpl._fk_AnotherFile;
             this._fk_AnyFile = otherImpl._fk_AnyFile;
-            this._fk_StaticFile = otherImpl._fk_StaticFile;
         }
         public override void SetNew()
         {
@@ -350,6 +350,15 @@ namespace Zetbox.App.Test
         {
             switch(propertyName)
             {
+                case "AnotherFile":
+                    {
+                        var __oldValue = _fk_AnotherFile;
+                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
+                        NotifyPropertyChanging("AnotherFile", __oldValue, __newValue);
+                        _fk_AnotherFile = __newValue;
+                        NotifyPropertyChanged("AnotherFile", __oldValue, __newValue);
+                    }
+                    break;
                 case "AnyFile":
                     {
                         var __oldValue = _fk_AnyFile;
@@ -357,15 +366,6 @@ namespace Zetbox.App.Test
                         NotifyPropertyChanging("AnyFile", __oldValue, __newValue);
                         _fk_AnyFile = __newValue;
                         NotifyPropertyChanged("AnyFile", __oldValue, __newValue);
-                    }
-                    break;
-                case "StaticFile":
-                    {
-                        var __oldValue = _fk_StaticFile;
-                        var __newValue = parentObj == null ? (int?)null : parentObj.ID;
-                        NotifyPropertyChanging("StaticFile", __oldValue, __newValue);
-                        _fk_StaticFile = __newValue;
-                        NotifyPropertyChanged("StaticFile", __oldValue, __newValue);
                     }
                     break;
                 default:
@@ -382,9 +382,9 @@ namespace Zetbox.App.Test
             // Do not audit calculated properties
             switch (property)
             {
+                case "AnotherFile":
                 case "AnyFile":
                 case "Name":
-                case "StaticFile":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }
@@ -395,10 +395,10 @@ namespace Zetbox.App.Test
         {
             switch(propName)
             {
+            case "AnotherFile":
+                return TriggerFetchAnotherFileAsync();
             case "AnyFile":
                 return TriggerFetchAnyFileAsync();
-            case "StaticFile":
-                return TriggerFetchStaticFileAsync();
             default:
                 return base.TriggerFetch(propName);
             }
@@ -413,15 +413,15 @@ namespace Zetbox.App.Test
 
             // fix direct object references
 
+            if (_fk_AnotherFile.HasValue)
+                AnotherFileImpl = (at.dasz.DocumentManagement.FileMemoryImpl)Context.Find<at.dasz.DocumentManagement.File>(_fk_AnotherFile.Value);
+            else
+                AnotherFileImpl = null;
+
             if (_fk_AnyFile.HasValue)
                 AnyFileImpl = (at.dasz.DocumentManagement.FileMemoryImpl)Context.Find<at.dasz.DocumentManagement.File>(_fk_AnyFile.Value);
             else
                 AnyFileImpl = null;
-
-            if (_fk_StaticFile.HasValue)
-                StaticFileImpl = (at.dasz.DocumentManagement.StaticFileMemoryImpl)Context.Find<at.dasz.DocumentManagement.StaticFile>(_fk_StaticFile.Value);
-            else
-                StaticFileImpl = null;
             // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
@@ -440,6 +440,15 @@ namespace Zetbox.App.Test
                     // else
                     new PropertyDescriptorMemoryImpl<DocumentTestObject, at.dasz.DocumentManagement.File>(
                         lazyCtx,
+                        new Guid("6f8a1d45-5064-4c7e-bd01-bcf892a536cd"),
+                        "AnotherFile",
+                        null,
+                        obj => obj.AnotherFile,
+                        (obj, val) => obj.AnotherFile = val,
+						obj => OnAnotherFile_IsValid), 
+                    // else
+                    new PropertyDescriptorMemoryImpl<DocumentTestObject, at.dasz.DocumentManagement.File>(
+                        lazyCtx,
                         new Guid("427d1022-4953-4fc1-90aa-867fe3898688"),
                         "AnyFile",
                         null,
@@ -455,15 +464,6 @@ namespace Zetbox.App.Test
                         obj => obj.Name,
                         (obj, val) => obj.Name = val,
 						obj => OnName_IsValid), 
-                    // else
-                    new PropertyDescriptorMemoryImpl<DocumentTestObject, at.dasz.DocumentManagement.StaticFile>(
-                        lazyCtx,
-                        new Guid("6f8a1d45-5064-4c7e-bd01-bcf892a536cd"),
-                        "StaticFile",
-                        null,
-                        obj => obj.StaticFile,
-                        (obj, val) => obj.StaticFile = val,
-						obj => OnStaticFile_IsValid), 
                     // position columns
                 };
             }
@@ -527,9 +527,9 @@ namespace Zetbox.App.Test
         [EventBasedMethod("OnNotifyCreated_DocumentTestObject")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("AnotherFile");
             SetNotInitializedProperty("AnyFile");
             SetNotInitializedProperty("Name");
-            SetNotInitializedProperty("StaticFile");
             base.NotifyCreated();
             if (OnNotifyCreated_DocumentTestObject != null) OnNotifyCreated_DocumentTestObject(this);
         }
@@ -540,8 +540,8 @@ namespace Zetbox.App.Test
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_DocumentTestObject != null) OnNotifyDeleting_DocumentTestObject(this);
+            AnotherFile = null;
             AnyFile = null;
-            StaticFile = null;
         }
         public static event ObjectEventHandler<DocumentTestObject> OnNotifyDeleting_DocumentTestObject;
 
@@ -555,9 +555,9 @@ namespace Zetbox.App.Test
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
+            binStream.Write(AnotherFile != null ? AnotherFile.ID : (int?)null);
             binStream.Write(AnyFile != null ? AnyFile.ID : (int?)null);
             binStream.Write(this._Name);
-            binStream.Write(StaticFile != null ? StaticFile.ID : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -566,9 +566,9 @@ namespace Zetbox.App.Test
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
+            this._fk_AnotherFile = binStream.ReadNullableInt32();
             this._fk_AnyFile = binStream.ReadNullableInt32();
             this._Name = binStream.ReadString();
-            this._fk_StaticFile = binStream.ReadNullableInt32();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0

@@ -51,6 +51,104 @@ namespace Zetbox.App.Test
         /// <summary>
         /// 
         /// </summary>
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for AnotherFile
+        // fkBackingName=this.Proxy.AnotherFile; fkGuidBackingName=_fk_guid_AnotherFile;
+        // referencedInterface=at.dasz.DocumentManagement.File; moduleNamespace=Zetbox.App.Test;
+        // no inverse navigator handling
+        // PositionStorage=none;
+        // Target not exportable; does call events
+
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public at.dasz.DocumentManagement.File AnotherFile
+        {
+            get
+            {
+                at.dasz.DocumentManagement.FileNHibernateImpl __value = (at.dasz.DocumentManagement.FileNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.AnotherFile);
+
+                if (OnAnotherFile_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<at.dasz.DocumentManagement.File>(__value);
+                    OnAnotherFile_Getter(this, e);
+                    __value = (at.dasz.DocumentManagement.FileNHibernateImpl)e.Result;
+                }
+
+                return __value;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
+
+                // shortcut noop with nulls
+                if (value == null && this.Proxy.AnotherFile == null)
+                {
+                    SetInitializedProperty("AnotherFile");
+                    return;
+                }
+
+                // cache old value to remove inverse references later
+                var __oldValue = (at.dasz.DocumentManagement.FileNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.AnotherFile);
+                var __newValue = (at.dasz.DocumentManagement.FileNHibernateImpl)value;
+
+                // shortcut noop on objects
+                // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
+                if (__oldValue == __newValue)
+                {
+                    SetInitializedProperty("AnotherFile");
+                    return;
+                }
+
+                // Changing Event fires before anything is touched
+                NotifyPropertyChanging("AnotherFile", __oldValue, __newValue);
+
+                if (OnAnotherFile_PreSetter != null && IsAttached)
+                {
+                    var e = new PropertyPreSetterEventArgs<at.dasz.DocumentManagement.File>(__oldValue, __newValue);
+                    OnAnotherFile_PreSetter(this, e);
+                    __newValue = (at.dasz.DocumentManagement.FileNHibernateImpl)e.Result;
+                }
+
+                // next, set the local reference
+                if (__newValue == null)
+                {
+                    this.Proxy.AnotherFile = null;
+                }
+                else
+                {
+                    this.Proxy.AnotherFile = __newValue.Proxy;
+                }
+
+                // everything is done. fire the Changed event
+                NotifyPropertyChanged("AnotherFile", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
+
+                if (OnAnotherFile_PostSetter != null && IsAttached)
+                {
+                    var e = new PropertyPostSetterEventArgs<at.dasz.DocumentManagement.File>(__oldValue, __newValue);
+                    OnAnotherFile_PostSetter(this, e);
+                }
+            }
+        }
+
+        /// <summary>Backing store for AnotherFile's id, used on dehydration only</summary>
+        private int? _fk_AnotherFile = null;
+
+
+    public Zetbox.API.Async.ZbTask TriggerFetchAnotherFileAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.File>(this.AnotherFile);
+    }
+
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for AnotherFile
+		public static event PropertyGetterHandler<Zetbox.App.Test.DocumentTestObject, at.dasz.DocumentManagement.File> OnAnotherFile_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Test.DocumentTestObject, at.dasz.DocumentManagement.File> OnAnotherFile_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Test.DocumentTestObject, at.dasz.DocumentManagement.File> OnAnotherFile_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Test.DocumentTestObject> OnAnotherFile_IsValid;
+
+        /// <summary>
+        /// 
+        /// </summary>
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for AnyFile
         // fkBackingName=this.Proxy.AnyFile; fkGuidBackingName=_fk_guid_AnyFile;
         // referencedInterface=at.dasz.DocumentManagement.File; moduleNamespace=Zetbox.App.Test;
@@ -204,104 +302,6 @@ namespace Zetbox.App.Test
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.DocumentTestObject> OnName_IsValid;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for StaticFile
-        // fkBackingName=this.Proxy.StaticFile; fkGuidBackingName=_fk_guid_StaticFile;
-        // referencedInterface=at.dasz.DocumentManagement.StaticFile; moduleNamespace=Zetbox.App.Test;
-        // no inverse navigator handling
-        // PositionStorage=none;
-        // Target not exportable; does call events
-
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public at.dasz.DocumentManagement.StaticFile StaticFile
-        {
-            get
-            {
-                at.dasz.DocumentManagement.StaticFileNHibernateImpl __value = (at.dasz.DocumentManagement.StaticFileNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.StaticFile);
-
-                if (OnStaticFile_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<at.dasz.DocumentManagement.StaticFile>(__value);
-                    OnStaticFile_Getter(this, e);
-                    __value = (at.dasz.DocumentManagement.StaticFileNHibernateImpl)e.Result;
-                }
-
-                return __value;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
-
-                // shortcut noop with nulls
-                if (value == null && this.Proxy.StaticFile == null)
-                {
-                    SetInitializedProperty("StaticFile");
-                    return;
-                }
-
-                // cache old value to remove inverse references later
-                var __oldValue = (at.dasz.DocumentManagement.StaticFileNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.StaticFile);
-                var __newValue = (at.dasz.DocumentManagement.StaticFileNHibernateImpl)value;
-
-                // shortcut noop on objects
-                // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
-                if (__oldValue == __newValue)
-                {
-                    SetInitializedProperty("StaticFile");
-                    return;
-                }
-
-                // Changing Event fires before anything is touched
-                NotifyPropertyChanging("StaticFile", __oldValue, __newValue);
-
-                if (OnStaticFile_PreSetter != null && IsAttached)
-                {
-                    var e = new PropertyPreSetterEventArgs<at.dasz.DocumentManagement.StaticFile>(__oldValue, __newValue);
-                    OnStaticFile_PreSetter(this, e);
-                    __newValue = (at.dasz.DocumentManagement.StaticFileNHibernateImpl)e.Result;
-                }
-
-                // next, set the local reference
-                if (__newValue == null)
-                {
-                    this.Proxy.StaticFile = null;
-                }
-                else
-                {
-                    this.Proxy.StaticFile = __newValue.Proxy;
-                }
-
-                // everything is done. fire the Changed event
-                NotifyPropertyChanged("StaticFile", __oldValue, __newValue);
-                if(IsAttached) UpdateChangedInfo = true;
-
-                if (OnStaticFile_PostSetter != null && IsAttached)
-                {
-                    var e = new PropertyPostSetterEventArgs<at.dasz.DocumentManagement.StaticFile>(__oldValue, __newValue);
-                    OnStaticFile_PostSetter(this, e);
-                }
-            }
-        }
-
-        /// <summary>Backing store for StaticFile's id, used on dehydration only</summary>
-        private int? _fk_StaticFile = null;
-
-
-    public Zetbox.API.Async.ZbTask TriggerFetchStaticFileAsync()
-    {
-        return new Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.StaticFile>(this.StaticFile);
-    }
-
-        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for StaticFile
-		public static event PropertyGetterHandler<Zetbox.App.Test.DocumentTestObject, at.dasz.DocumentManagement.StaticFile> OnStaticFile_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Test.DocumentTestObject, at.dasz.DocumentManagement.StaticFile> OnStaticFile_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Test.DocumentTestObject, at.dasz.DocumentManagement.StaticFile> OnStaticFile_PostSetter;
-
-        public static event PropertyIsValidHandler<Zetbox.App.Test.DocumentTestObject> OnStaticFile_IsValid;
-
         public override Type GetImplementedInterface()
         {
             return typeof(DocumentTestObject);
@@ -315,8 +315,8 @@ namespace Zetbox.App.Test
             var me = (DocumentTestObject)this;
 
             me.Name = other.Name;
+            this._fk_AnotherFile = otherImpl._fk_AnotherFile;
             this._fk_AnyFile = otherImpl._fk_AnyFile;
-            this._fk_StaticFile = otherImpl._fk_StaticFile;
         }
         public override void SetNew()
         {
@@ -327,6 +327,15 @@ namespace Zetbox.App.Test
         {
             switch(propertyName)
             {
+                case "AnotherFile":
+                    {
+                        var __oldValue = (at.dasz.DocumentManagement.FileNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.AnotherFile);
+                        var __newValue = (at.dasz.DocumentManagement.FileNHibernateImpl)parentObj;
+                        NotifyPropertyChanging("AnotherFile", __oldValue, __newValue);
+                        this.Proxy.AnotherFile = __newValue == null ? null : __newValue.Proxy;
+                        NotifyPropertyChanged("AnotherFile", __oldValue, __newValue);
+                    }
+                    break;
                 case "AnyFile":
                     {
                         var __oldValue = (at.dasz.DocumentManagement.FileNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.AnyFile);
@@ -334,15 +343,6 @@ namespace Zetbox.App.Test
                         NotifyPropertyChanging("AnyFile", __oldValue, __newValue);
                         this.Proxy.AnyFile = __newValue == null ? null : __newValue.Proxy;
                         NotifyPropertyChanged("AnyFile", __oldValue, __newValue);
-                    }
-                    break;
-                case "StaticFile":
-                    {
-                        var __oldValue = (at.dasz.DocumentManagement.StaticFileNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.StaticFile);
-                        var __newValue = (at.dasz.DocumentManagement.StaticFileNHibernateImpl)parentObj;
-                        NotifyPropertyChanging("StaticFile", __oldValue, __newValue);
-                        this.Proxy.StaticFile = __newValue == null ? null : __newValue.Proxy;
-                        NotifyPropertyChanged("StaticFile", __oldValue, __newValue);
                     }
                     break;
                 default:
@@ -359,9 +359,9 @@ namespace Zetbox.App.Test
             // Do not audit calculated properties
             switch (property)
             {
+                case "AnotherFile":
                 case "AnyFile":
                 case "Name":
-                case "StaticFile":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }
@@ -372,10 +372,10 @@ namespace Zetbox.App.Test
         {
             switch(propName)
             {
+            case "AnotherFile":
+                return TriggerFetchAnotherFileAsync();
             case "AnyFile":
                 return TriggerFetchAnyFileAsync();
-            case "StaticFile":
-                return TriggerFetchStaticFileAsync();
             default:
                 return base.TriggerFetch(propName);
             }
@@ -390,15 +390,15 @@ namespace Zetbox.App.Test
 
             // fix direct object references
 
+            if (_fk_AnotherFile.HasValue)
+                this.AnotherFile = ((at.dasz.DocumentManagement.FileNHibernateImpl)OurContext.FindPersistenceObject<at.dasz.DocumentManagement.File>(_fk_AnotherFile.Value));
+            else
+                this.AnotherFile = null;
+
             if (_fk_AnyFile.HasValue)
                 this.AnyFile = ((at.dasz.DocumentManagement.FileNHibernateImpl)OurContext.FindPersistenceObject<at.dasz.DocumentManagement.File>(_fk_AnyFile.Value));
             else
                 this.AnyFile = null;
-
-            if (_fk_StaticFile.HasValue)
-                this.StaticFile = ((at.dasz.DocumentManagement.StaticFileNHibernateImpl)OurContext.FindPersistenceObject<at.dasz.DocumentManagement.StaticFile>(_fk_StaticFile.Value));
-            else
-                this.StaticFile = null;
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         private static readonly object _propertiesLock = new object();
@@ -413,6 +413,15 @@ namespace Zetbox.App.Test
                 if (_properties != null) return;
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
+                    // else
+                    new PropertyDescriptorNHibernateImpl<DocumentTestObject, at.dasz.DocumentManagement.File>(
+                        lazyCtx,
+                        new Guid("6f8a1d45-5064-4c7e-bd01-bcf892a536cd"),
+                        "AnotherFile",
+                        null,
+                        obj => obj.AnotherFile,
+                        (obj, val) => obj.AnotherFile = val,
+						obj => OnAnotherFile_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<DocumentTestObject, at.dasz.DocumentManagement.File>(
                         lazyCtx,
@@ -431,15 +440,6 @@ namespace Zetbox.App.Test
                         obj => obj.Name,
                         (obj, val) => obj.Name = val,
 						obj => OnName_IsValid), 
-                    // else
-                    new PropertyDescriptorNHibernateImpl<DocumentTestObject, at.dasz.DocumentManagement.StaticFile>(
-                        lazyCtx,
-                        new Guid("6f8a1d45-5064-4c7e-bd01-bcf892a536cd"),
-                        "StaticFile",
-                        null,
-                        obj => obj.StaticFile,
-                        (obj, val) => obj.StaticFile = val,
-						obj => OnStaticFile_IsValid), 
                     // position columns
                 };
             }
@@ -503,9 +503,9 @@ namespace Zetbox.App.Test
         [EventBasedMethod("OnNotifyCreated_DocumentTestObject")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("AnotherFile");
             SetNotInitializedProperty("AnyFile");
             SetNotInitializedProperty("Name");
-            SetNotInitializedProperty("StaticFile");
             base.NotifyCreated();
             if (OnNotifyCreated_DocumentTestObject != null) OnNotifyCreated_DocumentTestObject(this);
         }
@@ -517,19 +517,19 @@ namespace Zetbox.App.Test
             base.NotifyDeleting();
             if (OnNotifyDeleting_DocumentTestObject != null) OnNotifyDeleting_DocumentTestObject(this);
 
+            // FK_TestObj_has_AnotherFile
+            if (AnotherFile != null) {
+                ((NHibernatePersistenceObject)AnotherFile).ChildrenToDelete.Add(this);
+                ParentsToDelete.Add((NHibernatePersistenceObject)AnotherFile);
+            }
             // FK_TestObj_has_AnyFile
             if (AnyFile != null) {
                 ((NHibernatePersistenceObject)AnyFile).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)AnyFile);
             }
-            // FK_TestObj_has_StaticFile
-            if (StaticFile != null) {
-                ((NHibernatePersistenceObject)StaticFile).ChildrenToDelete.Add(this);
-                ParentsToDelete.Add((NHibernatePersistenceObject)StaticFile);
-            }
 
+            AnotherFile = null;
             AnyFile = null;
-            StaticFile = null;
         }
         public static event ObjectEventHandler<DocumentTestObject> OnNotifyDeleting_DocumentTestObject;
 
@@ -547,11 +547,11 @@ namespace Zetbox.App.Test
             public virtual Type ZetboxWrapper { get { return typeof(DocumentTestObjectNHibernateImpl); } }
             public virtual Type ZetboxProxy { get { return typeof(DocumentTestObjectProxy); } }
 
+            public virtual at.dasz.DocumentManagement.FileNHibernateImpl.FileProxy AnotherFile { get; set; }
+
             public virtual at.dasz.DocumentManagement.FileNHibernateImpl.FileProxy AnyFile { get; set; }
 
             public virtual string Name { get; set; }
-
-            public virtual at.dasz.DocumentManagement.StaticFileNHibernateImpl.StaticFileProxy StaticFile { get; set; }
 
         }
 
@@ -565,9 +565,9 @@ namespace Zetbox.App.Test
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
+            binStream.Write(this.Proxy.AnotherFile != null ? OurContext.GetIdFromProxy(this.Proxy.AnotherFile) : (int?)null);
             binStream.Write(this.Proxy.AnyFile != null ? OurContext.GetIdFromProxy(this.Proxy.AnyFile) : (int?)null);
             binStream.Write(this.Proxy.Name);
-            binStream.Write(this.Proxy.StaticFile != null ? OurContext.GetIdFromProxy(this.Proxy.StaticFile) : (int?)null);
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -576,9 +576,9 @@ namespace Zetbox.App.Test
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
+            binStream.Read(out this._fk_AnotherFile);
             binStream.Read(out this._fk_AnyFile);
             this.Proxy.Name = binStream.ReadString();
-            binStream.Read(out this._fk_StaticFile);
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0

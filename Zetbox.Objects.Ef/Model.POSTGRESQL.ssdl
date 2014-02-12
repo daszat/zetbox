@@ -1188,13 +1188,13 @@
       <End Role="Test" EntitySet="EventTestObject" />
       <End Role="Event" EntitySet="Event" />
     </AssociationSet>
+    <AssociationSet Name="FK_TestObj_has_AnotherFile" Association="Model.Store.FK_TestObj_has_AnotherFile" >
+      <End Role="TestObj" EntitySet="DocumentTestObject" />
+      <End Role="AnotherFile" EntitySet="File" />
+    </AssociationSet>
     <AssociationSet Name="FK_TestObj_has_AnyFile" Association="Model.Store.FK_TestObj_has_AnyFile" >
       <End Role="TestObj" EntitySet="DocumentTestObject" />
       <End Role="AnyFile" EntitySet="File" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TestObj_has_StaticFile" Association="Model.Store.FK_TestObj_has_StaticFile" >
-      <End Role="TestObj" EntitySet="DocumentTestObject" />
-      <End Role="StaticFile" EntitySet="StaticFile" />
     </AssociationSet>
     <AssociationSet Name="FK_TestObjClass_has_ObjectProp" Association="Model.Store.FK_TestObjClass_has_ObjectProp" >
       <End Role="TestObjClass" EntitySet="TestObjClass" />
@@ -1638,8 +1638,8 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_AnotherFile" Type="int4" />
     <Property Name="fk_AnyFile" Type="int4" />
-    <Property Name="fk_StaticFile" Type="int4" />
     <Property Name="Name" Type="varchar" MaxLength="200" Nullable="true" />
   </EntityType>
 	
@@ -5865,6 +5865,20 @@
   </Association>
 
 
+  <Association Name="FK_TestObj_has_AnotherFile">
+    <End Role="AnotherFile" Type="Model.Store.File" Multiplicity="0..1" />
+    <End Role="TestObj" Type="Model.Store.DocumentTestObject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AnotherFile">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TestObj">
+        <PropertyRef Name="fk_AnotherFile" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
   <Association Name="FK_TestObj_has_AnyFile">
     <End Role="AnyFile" Type="Model.Store.File" Multiplicity="0..1" />
     <End Role="TestObj" Type="Model.Store.DocumentTestObject" Multiplicity="*" />
@@ -5874,20 +5888,6 @@
       </Principal>
       <Dependent Role="TestObj">
         <PropertyRef Name="fk_AnyFile" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-
-
-  <Association Name="FK_TestObj_has_StaticFile">
-    <End Role="StaticFile" Type="Model.Store.StaticFile" Multiplicity="0..1" />
-    <End Role="TestObj" Type="Model.Store.DocumentTestObject" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="StaticFile">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="TestObj">
-        <PropertyRef Name="fk_StaticFile" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

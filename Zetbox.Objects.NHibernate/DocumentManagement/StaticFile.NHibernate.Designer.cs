@@ -338,29 +338,6 @@ namespace at.dasz.DocumentManagement
             // fix direct object references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
-        private static readonly object _propertiesLock = new object();
-        private static System.ComponentModel.PropertyDescriptor[] _properties;
-
-        private void _InitializePropertyDescriptors(Func<IFrozenContext> lazyCtx)
-        {
-            if (_properties != null) return;
-            lock (_propertiesLock)
-            {
-                // recheck for a lost race after aquiring the lock
-                if (_properties != null) return;
-
-                _properties = new System.ComponentModel.PropertyDescriptor[] {
-                    // position columns
-                };
-            }
-        }
-
-        protected override void CollectProperties(Func<IFrozenContext> lazyCtx, List<System.ComponentModel.PropertyDescriptor> props)
-        {
-            base.CollectProperties(lazyCtx, props);
-            _InitializePropertyDescriptors(lazyCtx);
-            props.AddRange(_properties);
-        }
         #endregion // Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
         #region Zetbox.DalProvider.NHibernate.Generator.Templates.ObjectClasses.DefaultMethods
 
@@ -424,7 +401,6 @@ namespace at.dasz.DocumentManagement
             base.NotifyDeleting();
             if (OnNotifyDeleting_StaticFile != null) OnNotifyDeleting_StaticFile(this);
 
-            // should fetch && remember parent for DocumentTestObject_has_StaticFile_RelationEntry
 
         }
         public static event ObjectEventHandler<StaticFile> OnNotifyDeleting_StaticFile;

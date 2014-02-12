@@ -1529,13 +1529,15 @@ namespace Zetbox.Server.SchemaManagement
             if (!PreMigration(RelationMigrationEventType.ChangeEndType, savedRel, rel))
                 return;
 
+            var moveUp = savedRel.A.Type.AndParents(cls => cls.BaseObjectClass).Select(cls => cls.ExportGuid).Contains(rel.A.Type.ExportGuid)
+                      && savedRel.B.Type.AndParents(cls => cls.BaseObjectClass).Select(cls => cls.ExportGuid).Contains(rel.B.Type.ExportGuid);
+
             if (rel.GetRelationType() == RelationType.n_m)
             {
                 var oldTblName = db.GetTableName(savedRel.Module.SchemaName, savedRel.GetRelationTableName());
                 if (db.CheckTableContainsData(oldTblName))
                 {
-                    if (savedRel.A.Type.AndParents(cls => cls.BaseObjectClass).Select(cls => cls.ExportGuid).Contains(rel.A.Type.ExportGuid)
-                        && savedRel.B.Type.AndParents(cls => cls.BaseObjectClass).Select(cls => cls.ExportGuid).Contains(rel.B.Type.ExportGuid))
+                    if (moveUp)
                     {
                         string assocName = rel.GetAssociationName();
                         Log.InfoFormat("Rewiring N:M Relation: {0}", assocName);
@@ -1571,12 +1573,12 @@ namespace Zetbox.Server.SchemaManagement
                 switch (rel.Storage)
                 {
                     case StorageType.MergeIntoA:
-                        relEnd = savedRel.A;
-                        otherEnd = savedRel.B;
+                        relEnd = rel.A;
+                        otherEnd = rel.B;
                         break;
                     case StorageType.MergeIntoB:
-                        otherEnd = savedRel.A;
-                        relEnd = savedRel.B;
+                        otherEnd = rel.A;
+                        relEnd = rel.B;
                         break;
                     default:
                         Log.ErrorFormat("Relation '{0}' has unsupported Storage set: {1}, skipped", rel.GetAssociationName(), rel.Storage);
@@ -1584,11 +1586,26 @@ namespace Zetbox.Server.SchemaManagement
                 }
 
                 var tblName = relEnd.Type.GetTableRef(db);
+                var refTblName = otherEnd.Type.GetTableRef(db);
                 var colName = Construct.ForeignKeyColumnName(otherEnd);
 
                 if (db.CheckColumnContainsValues(tblName, colName))
                 {
-                    Log.WarnFormat("Unable to drop old relation. Relation has some instances. Table: " + tblName);
+                    if (moveUp)
+                    {
+                        // was renamed by DoChangeRelationName
+                        var assocName = rel.GetAssociationName();
+                        Log.InfoFormat("Rewiring 1:n Relation: {0}", assocName);
+
+                        if (db.CheckFKConstraintExists(tblName, assocName))
+                            db.DropFKConstraint(tblName, assocName);
+
+                        db.CreateFKConstraint(tblName, refTblName, colName, assocName, false);
+                    }
+                    else
+                    {
+                        Log.WarnFormat("Unable to drop old relation. Relation has some instances. Table: " + tblName);
+                    }
                 }
                 else
                 {
@@ -1604,12 +1621,12 @@ namespace Zetbox.Server.SchemaManagement
                 {
                     case StorageType.MergeIntoA:
                     case StorageType.Replicate:
-                        relEnd = savedRel.A;
-                        otherEnd = savedRel.B;
+                        relEnd = rel.A;
+                        otherEnd = rel.B;
                         break;
                     case StorageType.MergeIntoB:
-                        otherEnd = savedRel.A;
-                        relEnd = savedRel.B;
+                        otherEnd = rel.A;
+                        relEnd = rel.B;
                         break;
                     default:
                         Log.ErrorFormat("Relation '{0}' has unsupported Storage set: {1}, skipped", rel.GetAssociationName(), rel.Storage);
@@ -1617,11 +1634,26 @@ namespace Zetbox.Server.SchemaManagement
                 }
 
                 var tblName = relEnd.Type.GetTableRef(db);
+                var refTblName = otherEnd.Type.GetTableRef(db);
                 var colName = Construct.ForeignKeyColumnName(otherEnd);
 
                 if (db.CheckColumnContainsValues(tblName, colName))
                 {
-                    Log.WarnFormat("Unable to drop old relation. Relation has some instances. Table: " + tblName);
+                    if (moveUp)
+                    {
+                        // was renamed by DoChangeRelationName
+                        var assocName = rel.GetAssociationName();
+                        Log.InfoFormat("Rewiring 1:1 Relation: {0}", assocName);
+
+                        if (db.CheckFKConstraintExists(tblName, assocName))
+                            db.DropFKConstraint(tblName, assocName);
+
+                        db.CreateFKConstraint(tblName, refTblName, colName, assocName, false);
+                    }
+                    else
+                    {
+                        Log.WarnFormat("Unable to drop old relation. Relation has some instances. Table: " + tblName);
+                    }
                 }
                 else
                 {

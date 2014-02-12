@@ -25,6 +25,7 @@ namespace at.dasz.DocumentManagement
     public class FileActions
     {
         public static readonly string DELETE_KEY = "Deleting";
+        public static readonly string SET_ISFILEREADONLY_KEY = "IsFileReadonly";
 
         private static ITextExtractor _textExtractor;
         public FileActions(ITextExtractor textExtractor)
@@ -43,6 +44,12 @@ namespace at.dasz.DocumentManagement
         public static void NotifyDeleting(File obj)
         {
             obj.TransientState[DELETE_KEY] = true;
+        }
+
+        [Invocation]
+        public static void NotifyPostSave(File obj)
+        {
+            obj.TransientState.Remove(DELETE_KEY);
         }
 
         [Invocation]
@@ -71,6 +78,20 @@ namespace at.dasz.DocumentManagement
         public static void UploadCanExecReason(File obj, MethodReturnEventArgs<string> e)
         {
             e.Result = "Changing blob on read only files is not allowed";
+        }
+
+        [Invocation]
+        public static void preSet_IsFileReadonly(File obj, PropertyPreSetterEventArgs<bool> e)
+        {
+            if (obj.Context == null || obj.Context.IsReadonly) return;
+            if (e.NewValue == true && e.OldValue == false)
+            {
+                obj.TransientState[SET_ISFILEREADONLY_KEY] = true;
+            }
+            else if (e.OldValue == true && e.NewValue == false && !obj.TransientState.ContainsKey(SET_ISFILEREADONLY_KEY))
+            {
+                throw new InvalidOperationException("Changing IsFileReadonly back to false is not allowed");
+            }
         }
 
         [Invocation]

@@ -44,6 +44,113 @@ namespace Zetbox.App.Test
         /// 
         /// </summary>
     /*
+    Relation: FK_TestObj_has_AnotherFile
+    A: ZeroOrMore DocumentTestObject as TestObj
+    B: ZeroOrOne File as AnotherFile
+    Preferred Storage: MergeIntoA
+    */
+        // object reference property
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for AnotherFile
+        // fkBackingName=_fk_AnotherFile; fkGuidBackingName=_fk_guid_AnotherFile;
+        // referencedInterface=at.dasz.DocumentManagement.File; moduleNamespace=Zetbox.App.Test;
+        // no inverse navigator handling
+        // PositionStorage=none;
+        // Target not exportable
+
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public at.dasz.DocumentManagement.File AnotherFile
+        {
+            get { return AnotherFileImpl; }
+            set { AnotherFileImpl = (at.dasz.DocumentManagement.FileEfImpl)value; }
+        }
+
+        private int? _fk_AnotherFile;
+
+
+        // internal implementation, EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_TestObj_has_AnotherFile", "AnotherFile")]
+        public at.dasz.DocumentManagement.FileEfImpl AnotherFileImpl
+        {
+            get
+            {
+                at.dasz.DocumentManagement.FileEfImpl __value;
+                EntityReference<at.dasz.DocumentManagement.FileEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<at.dasz.DocumentManagement.FileEfImpl>(
+                        "Model.FK_TestObj_has_AnotherFile",
+                        "AnotherFile");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load();
+                }
+                __value = r.Value;
+                if (OnAnotherFile_Getter != null)
+                {
+                    var e = new PropertyGetterEventArgs<at.dasz.DocumentManagement.File>(__value);
+                    OnAnotherFile_Getter(this, e);
+                    __value = (at.dasz.DocumentManagement.FileEfImpl)e.Result;
+                }
+                return __value;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
+
+                EntityReference<at.dasz.DocumentManagement.FileEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<at.dasz.DocumentManagement.FileEfImpl>(
+                        "Model.FK_TestObj_has_AnotherFile",
+                        "AnotherFile");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load();
+                }
+                at.dasz.DocumentManagement.FileEfImpl __oldValue = (at.dasz.DocumentManagement.FileEfImpl)r.Value;
+                at.dasz.DocumentManagement.FileEfImpl __newValue = (at.dasz.DocumentManagement.FileEfImpl)value;
+
+                // Changing Event fires before anything is touched
+                NotifyPropertyChanging("AnotherFile", __oldValue, __newValue);
+
+                if (OnAnotherFile_PreSetter != null)
+                {
+                    var e = new PropertyPreSetterEventArgs<at.dasz.DocumentManagement.File>(__oldValue, __newValue);
+                    OnAnotherFile_PreSetter(this, e);
+                    __newValue = (at.dasz.DocumentManagement.FileEfImpl)e.Result;
+                }
+
+                r.Value = (at.dasz.DocumentManagement.FileEfImpl)__newValue;
+
+                if (OnAnotherFile_PostSetter != null)
+                {
+                    var e = new PropertyPostSetterEventArgs<at.dasz.DocumentManagement.File>(__oldValue, __newValue);
+                    OnAnotherFile_PostSetter(this, e);
+                }
+
+                // everything is done. fire the Changed event
+                NotifyPropertyChanged("AnotherFile", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
+            }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchAnotherFileAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.File>(this.AnotherFile);
+        }
+
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for AnotherFile
+		public static event PropertyGetterHandler<Zetbox.App.Test.DocumentTestObject, at.dasz.DocumentManagement.File> OnAnotherFile_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Test.DocumentTestObject, at.dasz.DocumentManagement.File> OnAnotherFile_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Test.DocumentTestObject, at.dasz.DocumentManagement.File> OnAnotherFile_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Test.DocumentTestObject> OnAnotherFile_IsValid;
+
+        /// <summary>
+        /// 
+        /// </summary>
+    /*
     Relation: FK_TestObj_has_AnyFile
     A: ZeroOrMore DocumentTestObject as TestObj
     B: ZeroOrOne File as AnyFile
@@ -216,113 +323,6 @@ namespace Zetbox.App.Test
 
         public static event PropertyIsValidHandler<Zetbox.App.Test.DocumentTestObject> OnName_IsValid;
 
-        /// <summary>
-        /// 
-        /// </summary>
-    /*
-    Relation: FK_TestObj_has_StaticFile
-    A: ZeroOrMore DocumentTestObject as TestObj
-    B: ZeroOrOne StaticFile as StaticFile
-    Preferred Storage: MergeIntoA
-    */
-        // object reference property
-        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for StaticFile
-        // fkBackingName=_fk_StaticFile; fkGuidBackingName=_fk_guid_StaticFile;
-        // referencedInterface=at.dasz.DocumentManagement.StaticFile; moduleNamespace=Zetbox.App.Test;
-        // no inverse navigator handling
-        // PositionStorage=none;
-        // Target not exportable
-
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        public at.dasz.DocumentManagement.StaticFile StaticFile
-        {
-            get { return StaticFileImpl; }
-            set { StaticFileImpl = (at.dasz.DocumentManagement.StaticFileEfImpl)value; }
-        }
-
-        private int? _fk_StaticFile;
-
-
-        // internal implementation, EF sees only this property
-        [EdmRelationshipNavigationProperty("Model", "FK_TestObj_has_StaticFile", "StaticFile")]
-        public at.dasz.DocumentManagement.StaticFileEfImpl StaticFileImpl
-        {
-            get
-            {
-                at.dasz.DocumentManagement.StaticFileEfImpl __value;
-                EntityReference<at.dasz.DocumentManagement.StaticFileEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<at.dasz.DocumentManagement.StaticFileEfImpl>(
-                        "Model.FK_TestObj_has_StaticFile",
-                        "StaticFile");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load();
-                }
-                __value = r.Value;
-                if (OnStaticFile_Getter != null)
-                {
-                    var e = new PropertyGetterEventArgs<at.dasz.DocumentManagement.StaticFile>(__value);
-                    OnStaticFile_Getter(this, e);
-                    __value = (at.dasz.DocumentManagement.StaticFileEfImpl)e.Result;
-                }
-                return __value;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
-
-                EntityReference<at.dasz.DocumentManagement.StaticFileEfImpl> r
-                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<at.dasz.DocumentManagement.StaticFileEfImpl>(
-                        "Model.FK_TestObj_has_StaticFile",
-                        "StaticFile");
-                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
-                    && !r.IsLoaded)
-                {
-                    r.Load();
-                }
-                at.dasz.DocumentManagement.StaticFileEfImpl __oldValue = (at.dasz.DocumentManagement.StaticFileEfImpl)r.Value;
-                at.dasz.DocumentManagement.StaticFileEfImpl __newValue = (at.dasz.DocumentManagement.StaticFileEfImpl)value;
-
-                // Changing Event fires before anything is touched
-                NotifyPropertyChanging("StaticFile", __oldValue, __newValue);
-
-                if (OnStaticFile_PreSetter != null)
-                {
-                    var e = new PropertyPreSetterEventArgs<at.dasz.DocumentManagement.StaticFile>(__oldValue, __newValue);
-                    OnStaticFile_PreSetter(this, e);
-                    __newValue = (at.dasz.DocumentManagement.StaticFileEfImpl)e.Result;
-                }
-
-                r.Value = (at.dasz.DocumentManagement.StaticFileEfImpl)__newValue;
-
-                if (OnStaticFile_PostSetter != null)
-                {
-                    var e = new PropertyPostSetterEventArgs<at.dasz.DocumentManagement.StaticFile>(__oldValue, __newValue);
-                    OnStaticFile_PostSetter(this, e);
-                }
-
-                // everything is done. fire the Changed event
-                NotifyPropertyChanged("StaticFile", __oldValue, __newValue);
-                if(IsAttached) UpdateChangedInfo = true;
-            }
-        }
-
-        public Zetbox.API.Async.ZbTask TriggerFetchStaticFileAsync()
-        {
-            return new Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.StaticFile>(this.StaticFile);
-        }
-
-        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for StaticFile
-		public static event PropertyGetterHandler<Zetbox.App.Test.DocumentTestObject, at.dasz.DocumentManagement.StaticFile> OnStaticFile_Getter;
-		public static event PropertyPreSetterHandler<Zetbox.App.Test.DocumentTestObject, at.dasz.DocumentManagement.StaticFile> OnStaticFile_PreSetter;
-		public static event PropertyPostSetterHandler<Zetbox.App.Test.DocumentTestObject, at.dasz.DocumentManagement.StaticFile> OnStaticFile_PostSetter;
-
-        public static event PropertyIsValidHandler<Zetbox.App.Test.DocumentTestObject> OnStaticFile_IsValid;
-
         public override Type GetImplementedInterface()
         {
             return typeof(DocumentTestObject);
@@ -336,8 +336,8 @@ namespace Zetbox.App.Test
             var me = (DocumentTestObject)this;
 
             me.Name = other.Name;
+            this._fk_AnotherFile = otherImpl._fk_AnotherFile;
             this._fk_AnyFile = otherImpl._fk_AnyFile;
-            this._fk_StaticFile = otherImpl._fk_StaticFile;
         }
         public override void SetNew()
         {
@@ -352,9 +352,9 @@ namespace Zetbox.App.Test
             // Do not audit calculated properties
             switch (property)
             {
+                case "AnotherFile":
                 case "AnyFile":
                 case "Name":
-                case "StaticFile":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
             }
@@ -365,10 +365,10 @@ namespace Zetbox.App.Test
         {
             switch(propName)
             {
+            case "AnotherFile":
+                return TriggerFetchAnotherFileAsync();
             case "AnyFile":
                 return TriggerFetchAnyFileAsync();
-            case "StaticFile":
-                return TriggerFetchStaticFileAsync();
             default:
                 return base.TriggerFetch(propName);
             }
@@ -383,15 +383,15 @@ namespace Zetbox.App.Test
 
             // fix direct object references
 
+            if (_fk_AnotherFile.HasValue)
+                AnotherFileImpl = (at.dasz.DocumentManagement.FileEfImpl)Context.Find<at.dasz.DocumentManagement.File>(_fk_AnotherFile.Value);
+            else
+                AnotherFileImpl = null;
+
             if (_fk_AnyFile.HasValue)
                 AnyFileImpl = (at.dasz.DocumentManagement.FileEfImpl)Context.Find<at.dasz.DocumentManagement.File>(_fk_AnyFile.Value);
             else
                 AnyFileImpl = null;
-
-            if (_fk_StaticFile.HasValue)
-                StaticFileImpl = (at.dasz.DocumentManagement.StaticFileEfImpl)Context.Find<at.dasz.DocumentManagement.StaticFile>(_fk_StaticFile.Value);
-            else
-                StaticFileImpl = null;
             // fix cached lists references
         }
         #region Zetbox.Generator.Templates.ObjectClasses.CustomTypeDescriptor
@@ -410,6 +410,15 @@ namespace Zetbox.App.Test
                     // else
                     new PropertyDescriptorEfImpl<DocumentTestObject, at.dasz.DocumentManagement.File>(
                         lazyCtx,
+                        new Guid("6f8a1d45-5064-4c7e-bd01-bcf892a536cd"),
+                        "AnotherFile",
+                        null,
+                        obj => obj.AnotherFile,
+                        (obj, val) => obj.AnotherFile = val,
+						obj => OnAnotherFile_IsValid), 
+                    // else
+                    new PropertyDescriptorEfImpl<DocumentTestObject, at.dasz.DocumentManagement.File>(
+                        lazyCtx,
                         new Guid("427d1022-4953-4fc1-90aa-867fe3898688"),
                         "AnyFile",
                         null,
@@ -425,15 +434,6 @@ namespace Zetbox.App.Test
                         obj => obj.Name,
                         (obj, val) => obj.Name = val,
 						obj => OnName_IsValid), 
-                    // else
-                    new PropertyDescriptorEfImpl<DocumentTestObject, at.dasz.DocumentManagement.StaticFile>(
-                        lazyCtx,
-                        new Guid("6f8a1d45-5064-4c7e-bd01-bcf892a536cd"),
-                        "StaticFile",
-                        null,
-                        obj => obj.StaticFile,
-                        (obj, val) => obj.StaticFile = val,
-						obj => OnStaticFile_IsValid), 
                     // position columns
                 };
             }
@@ -497,9 +497,9 @@ namespace Zetbox.App.Test
         [EventBasedMethod("OnNotifyCreated_DocumentTestObject")]
         public override void NotifyCreated()
         {
+            SetNotInitializedProperty("AnotherFile");
             SetNotInitializedProperty("AnyFile");
             SetNotInitializedProperty("Name");
-            SetNotInitializedProperty("StaticFile");
             base.NotifyCreated();
             if (OnNotifyCreated_DocumentTestObject != null) OnNotifyCreated_DocumentTestObject(this);
         }
@@ -510,8 +510,8 @@ namespace Zetbox.App.Test
         {
             base.NotifyDeleting();
             if (OnNotifyDeleting_DocumentTestObject != null) OnNotifyDeleting_DocumentTestObject(this);
+            AnotherFile = null;
             AnyFile = null;
-            StaticFile = null;
         }
         public static event ObjectEventHandler<DocumentTestObject> OnNotifyDeleting_DocumentTestObject;
 
@@ -558,16 +558,16 @@ namespace Zetbox.App.Test
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             {
+                var r = this.RelationshipManager.GetRelatedReference<at.dasz.DocumentManagement.FileEfImpl>("Model.FK_TestObj_has_AnotherFile", "AnotherFile");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
+            }
+            {
                 var r = this.RelationshipManager.GetRelatedReference<at.dasz.DocumentManagement.FileEfImpl>("Model.FK_TestObj_has_AnyFile", "AnyFile");
                 var key = r.EntityKey;
                 binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
             }
             binStream.Write(this._Name);
-            {
-                var r = this.RelationshipManager.GetRelatedReference<at.dasz.DocumentManagement.StaticFileEfImpl>("Model.FK_TestObj_has_StaticFile", "StaticFile");
-                var key = r.EntityKey;
-                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
-            }
         }
 
         public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
@@ -576,9 +576,9 @@ namespace Zetbox.App.Test
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
+            binStream.Read(out this._fk_AnotherFile);
             binStream.Read(out this._fk_AnyFile);
             this._Name = binStream.ReadString();
-            binStream.Read(out this._fk_StaticFile);
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
                 ? result.Count == 0
