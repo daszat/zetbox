@@ -101,6 +101,10 @@ namespace PrepareEnv
             var entryPointId = doc.SelectSingleNode("/asmv1:assembly/asmv2:entryPoint/asmv2:assemblyIdentity", nsmgr);
             FillClickOnceAssemblyId(clientName, entryPointId);
 
+            // fixup Icon
+            var description = doc.SelectSingleNode("/asmv1:assembly/asmv1:description", nsmgr);
+            description.Attributes["asmv2:iconFile"].Value = Path.GetFileName(envConfig.ClientExe);
+
             // set the startup paramters
             var entryPointCli = doc.SelectSingleNode("/asmv1:assembly/asmv2:entryPoint/asmv2:commandLine", nsmgr);
             entryPointCli.Attributes["file"].Value = Path.GetFileName(envConfig.ClientExe);
