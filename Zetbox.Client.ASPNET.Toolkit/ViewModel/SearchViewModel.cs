@@ -16,6 +16,10 @@ namespace Zetbox.Client.ASPNET
     /// The only purpose for this kind of ViewModel is to support ASP.NET MVC to recreated it's state while searching for objects.
     /// As a result the well known DataObjectViewModel are passed back.
     /// </summary>
+    /// <remarks>
+    /// Currently each derived class has to implement it's own search fields and override ApplyFilter()
+    /// TODO: Paging is not supported yet by the SearchViewModel itself.
+    /// </remarks>
     /// <typeparam name="TModel"></typeparam>
     public class SearchViewModel<TModel> : ViewModel
         where TModel : class, IDataObject
