@@ -8,7 +8,12 @@ namespace Zetbox.Client.ASPNET
     using Zetbox.API;
     using Zetbox.Client.Presentables.ValueViewModels;
 
-    // No descriptor
+    /// <summary>
+    /// The only purpose for this kind of ViewModel is to support ASP.NET MVC to recreated it's state.
+    /// Internal you should continue using the aleady defined ViewModels for each object.
+    /// </summary>
+    /// <remarks>No descriptor, as it's a ASP.NET MCV only view model</remarks>
+    /// <typeparam name="TModel"></typeparam>
     public class DataObjectEditViewModel<TModel> : ViewModel
         where TModel : class, IDataObject
     {
