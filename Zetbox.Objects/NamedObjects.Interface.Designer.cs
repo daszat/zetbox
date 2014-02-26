@@ -1184,6 +1184,10 @@ namespace Zetbox {
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("5f534204-f0d5-4d6f-8efa-7ff248580ba3"); }
                                 }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> OpenID
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("9e5b1327-cb22-4442-a4b4-6cf6083e88a2"); }
+                                }
                                 public static TypedGuid<global::Zetbox.App.Base.Property> Password
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("0d499610-99e3-42cc-b71b-49ed1a356355"); }

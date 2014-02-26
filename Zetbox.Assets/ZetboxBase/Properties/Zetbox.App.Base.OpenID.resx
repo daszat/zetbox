@@ -117,40 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CalendarConfiguration_label" xml:space="preserve">
-    <value>CalendarConfiguration</value>
+  <data name="Provider_label" xml:space="preserve">
+    <value>Provider</value>
   </data>
-  <data name="CalendarConfiguration_description" xml:space="preserve">
-    <value>Storage for the users calendar configuration</value>
+  <data name="Provider_description" xml:space="preserve">
+    <value>OpenID Provider</value>
   </data>
-  <data name="DisplayName_label" xml:space="preserve">
-    <value>DisplayName</value>
+  <data name="UserID_label" xml:space="preserve">
+    <value>User Id</value>
   </data>
-  <data name="DisplayName_description" xml:space="preserve">
-    <value>Displayname of this identity</value>
-  </data>
-  <data name="Groups_label" xml:space="preserve">
-    <value>Groups</value>
-  </data>
-  <data name="Groups_description" xml:space="preserve">
-    <value>Identites are member of groups</value>
-  </data>
-  <data name="OpenID_label" xml:space="preserve">
-    <value>Open Id</value>
-  </data>
-  <data name="OpenID_description" xml:space="preserve">
-    <value>Optional Open Id</value>
-  </data>
-  <data name="Password_label" xml:space="preserve">
-    <value>Password</value>
-  </data>
-  <data name="Password_description" xml:space="preserve">
-    <value>Password of a generic identity</value>
-  </data>
-  <data name="UserName_label" xml:space="preserve">
-    <value>UserName</value>
-  </data>
-  <data name="UserName_description" xml:space="preserve">
-    <value>Username of a generic identity</value>
+  <data name="UserID_description" xml:space="preserve">
+    <value>The User ID part of the OpenID</value>
   </data>
 </root>

@@ -103,6 +103,7 @@
     <Compile Include="TestModule\SecurityTestParentActions.cs" />
     <Compile Include="TestModule\SecurityTestChildActions.cs" />
     <Compile Include="TestModule\TestObjClassActions.cs" />
+    <Compile Include="ZetboxBase\OpenIDActions.cs" />
     <Compile Include="ZetboxBase\BaseParameterActions.cs" />
     <Compile Include="ZetboxBase\AssemblyActions.cs" />
     <Compile Include="ZetboxBase\BoolPropertyActions.cs" />

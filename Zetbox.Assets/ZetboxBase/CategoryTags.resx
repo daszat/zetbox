@@ -144,9 +144,6 @@
   <data name="DataModel" xml:space="preserve">
     <value>DataModel</value>
   </data>
-  <data name="Details" xml:space="preserve">
-    <value>Details</value>
-  </data>
   <data name="Enumeration" xml:space="preserve">
     <value>Enumeration</value>
   </data>

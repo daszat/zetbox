@@ -4832,6 +4832,17 @@
             <one-to-many class="Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl+Identity_memberOf_Group_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
+        <!-- CompoundObjectProperty isValue -->
+        <component name="OpenID" class="Zetbox.App.Base.OpenIDNHibernateImpl,Zetbox.Objects.NHibernateImpl">
+        <!-- ValueTypeProperty isValue -->
+        <property name="Provider" 
+                  column="`OpenID_Provider`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="UserID" 
+                  column="`OpenID_UserID`" 
+                  optimistic-lock="false"/>
+        </component>
         <!-- ValueTypeProperty isValue -->
         <property name="Password" 
                   column="`Password`" 

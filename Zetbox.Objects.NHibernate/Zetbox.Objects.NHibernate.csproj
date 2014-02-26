@@ -300,6 +300,7 @@
     <Compile Include="ZetboxBase\AuditEntry.NHibernate.Designer.cs" />
     <Compile Include="ZetboxBase\DateTimeOffset.NHibernate.Designer.cs" />
     <Compile Include="ZetboxBase\DateTimeRange.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\OpenID.NHibernate.Designer.cs" />
     <Compile Include="ZetboxBase\RecurrenceRule.NHibernate.Designer.cs" />
     <Compile Include="TestModule\TestPhoneCompoundObject.NHibernate.Designer.cs" />
     <Compile Include="AssemblyInfo.NHibernate.cs" />
