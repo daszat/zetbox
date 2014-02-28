@@ -179,19 +179,17 @@ namespace Zetbox.DalProvider.NHibernate
                 }
                 else
                 {
-                    IList<T> result = null;
+                    Func<T, bool> aFilter = i => i.AObject == parent;
+                    Func<T, bool> bFilter = i => i.BObject == parent;
                     switch (role)
                     {
                         case RelationEndRole.A:
-                            result = GetPersistenceObjectQuery<T>().Where(i => i.AObject == parent).ToList();
-                            break;
+                            return GetPersistenceObjectQuery<T>().Where(aFilter).ToList();
                         case RelationEndRole.B:
-                            result = GetPersistenceObjectQuery<T>().Where(i => i.BObject == parent).ToList();
-                            break;
+                            return GetPersistenceObjectQuery<T>().Where(bFilter).ToList();
                         default:
                             throw new NotImplementedException(String.Format("Unknown RelationEndRole [{0}]", role));
                     }
-                    return result;
                 }
             });
         }
