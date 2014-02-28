@@ -165,10 +165,5 @@
   <Target Name="BeforeBuild">
   </Target>
   -->
-  <ItemGroup>
-    <Configs Include="$(SolutionDir)\Configs\**\*.*">
-      <Visible>false</Visible>
-    </Configs>
-  </ItemGroup>
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
 </Project>
