@@ -3,6 +3,7 @@
   <ItemGroup>
     <Reference Include="Zetbox.Objects">
       <HintPath>..\bin\CodeGen\bin\Debug\Common\Generated\Zetbox.Objects.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
 </Project>
