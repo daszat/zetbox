@@ -118,150 +118,6 @@
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
 	<assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-	<data name="Zetbox.App.Base.AccessControl_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.Base.AccessRights_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.Test.ANewObjectClass_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.Test.Antwort_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.Test.AnyReferenceTestObject_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.Base.Assembly_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.Base.ContainmentSpecification_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.GUI.DateRangeFilterConfiguration_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.Base.DayOfWeek_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.Test.DeactivatableTestObject_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.Base.DefaultPropertyValue_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.Test.EventTestObject_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="at.dasz.DocumentManagement.FileImportConfiguration_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.GUI.FilterConfiguration_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.Test.Fragebogen_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.Base.Frequency_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.Base.FullTextIndexConstraint_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.Base.Group_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.Base.GroupMembership_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.GUI.Icon_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.Base.IInvocation_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.Base.IndexConstraint_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.Base.InstanceConstraint_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.GUI.InstanceListViewMethod_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.Base.InvokingConstraint_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.GUI.MonthFilterConfiguration_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.GUI.NavigationAction_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.GUI.NavigationScreen_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.Test.PropertyBoolTest_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.Test.PropertyDateTimeTest_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.Test.PropertyDecimalTest_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.Test.PropertyDoubleTest_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.Test.PropertyEnumTest_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.Test.PropertyGuidTest_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.Test.PropertyIntTest_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.Test.PropertyStringTest_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.Test.PropertyTestBase_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.Base.RoleMembership_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.Test.SecurityTestChild_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.Test.SecurityTestParent_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.Base.SequenceData_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.SchemaMigration.SourceColumn_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.SchemaMigration.SourceTable_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.SchemaMigration.StagingDatabase_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.Test.TestStudent_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.GUI.ViewDescriptor_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.GUI.ViewModelDescriptor_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
-	<data name="Zetbox.App.GUI.YearFilterConfiguration_description" type="System.Resources.ResXNullRef, System.Windows.Forms">
-		<value />
-	</data>
 	<data name="at.dasz.DocumentManagement.Document" xml:space="preserve">
 		<value>Dokument</value>
 	</data>
@@ -279,5 +135,11 @@
 	</data>
 	<data name="at.dasz.DocumentManagement.File_description" xml:space="preserve">
 		<value>Abstrakte Basisklasse für Dateien</value>
+	</data>
+	<data name="at.dasz.DocumentManagement.Excerpt" xml:space="preserve">
+		<value>Auszug</value>
+	</data>
+	<data name="at.dasz.DocumentManagement.Excerpt_description" xml:space="preserve">
+		<value>Auszug aus der Datei</value>
 	</data>
 </root>

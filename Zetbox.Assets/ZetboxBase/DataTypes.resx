@@ -1,6 +1,6 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
+	<!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,1238 +59,1040 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
-  <resheader name="resmimetype">
-    <value>text/microsoft-resx</value>
-  </resheader>
-  <resheader name="version">
-    <value>2.0</value>
-  </resheader>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <data name="Zetbox.App.Base.AbstractModuleMember" xml:space="preserve">
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="metadata">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" />
+							</xsd:sequence>
+							<xsd:attribute name="name" use="required" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="assembly">
+						<xsd:complexType>
+							<xsd:attribute name="alias" type="xsd:string" />
+							<xsd:attribute name="name" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="Zetbox.App.Base.AbstractModuleMember" xml:space="preserve">
     <value>AbstractModuleMember</value>
   </data>
-  <data name="Zetbox.App.Base.AbstractModuleMember_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.AbstractModuleMember_description" xml:space="preserve">
     <value>Abstract base class for classes (and their instances) belonging to a Module</value>
   </data>
-  <data name="Zetbox.App.Base.AccessControl" xml:space="preserve">
+	<data name="Zetbox.App.Base.AccessControl" xml:space="preserve">
     <value>AccessControl</value>
   </data>
-  <data name="Zetbox.App.Base.AccessControl_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Base.AccessRights" xml:space="preserve">
+	<data name="Zetbox.App.Base.AccessRights" xml:space="preserve">
     <value>AccessRights</value>
   </data>
-  <data name="Zetbox.App.Base.AccessRights_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Test.ANewObjectClass" xml:space="preserve">
+	<data name="Zetbox.App.Test.ANewObjectClass" xml:space="preserve">
     <value>ANewObjectClass</value>
   </data>
-  <data name="Zetbox.App.Test.ANewObjectClass_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Test.AnotherTest" xml:space="preserve">
+	<data name="Zetbox.App.Test.AnotherTest" xml:space="preserve">
     <value>AnotherTest</value>
   </data>
-  <data name="Zetbox.App.Test.AnotherTest_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Test.Antwort" xml:space="preserve">
+	<data name="Zetbox.App.Test.Antwort" xml:space="preserve">
     <value>Antwort</value>
   </data>
-  <data name="Zetbox.App.Test.Antwort_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Base.AnyReference" xml:space="preserve">
+	<data name="Zetbox.App.Base.AnyReference" xml:space="preserve">
     <value>AnyReference</value>
   </data>
-  <data name="Zetbox.App.Base.AnyReference_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.AnyReference_description" xml:space="preserve">
     <value>A reference to any Object Class</value>
   </data>
-  <data name="Zetbox.App.Test.AnyReferenceTestObject" xml:space="preserve">
+	<data name="Zetbox.App.Test.AnyReferenceTestObject" xml:space="preserve">
     <value>AnyReferenceTestObject</value>
   </data>
-  <data name="Zetbox.App.Test.AnyReferenceTestObject_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.GUI.Application" xml:space="preserve">
+	<data name="Zetbox.App.GUI.Application" xml:space="preserve">
     <value>Application</value>
   </data>
-  <data name="Zetbox.App.GUI.Application_description" xml:space="preserve">
+	<data name="Zetbox.App.GUI.Application_description" xml:space="preserve">
     <value>Represents a Zetbox Application</value>
   </data>
-  <data name="Zetbox.App.Base.Assembly" xml:space="preserve">
+	<data name="Zetbox.App.Base.Assembly" xml:space="preserve">
     <value>Assembly</value>
   </data>
-  <data name="Zetbox.App.Base.Assembly_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Base.AuditEntry" xml:space="preserve">
+	<data name="Zetbox.App.Base.AuditEntry" xml:space="preserve">
     <value>AuditEntry</value>
   </data>
-  <data name="Zetbox.App.Base.AuditEntry_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.AuditEntry_description" xml:space="preserve">
     <value>A single entry in the auditing table of a class</value>
   </data>
-  <data name="Zetbox.App.Projekte.Auftrag" xml:space="preserve">
+	<data name="Zetbox.App.Projekte.Auftrag" xml:space="preserve">
     <value>Auftrag</value>
   </data>
-  <data name="Zetbox.App.Projekte.Auftrag_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Base.BaseParameter" xml:space="preserve">
+	<data name="Zetbox.App.Base.BaseParameter" xml:space="preserve">
     <value>BaseParameter</value>
   </data>
-  <data name="Zetbox.App.Base.BaseParameter_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.BaseParameter_description" xml:space="preserve">
     <value>Metadefinition Object for Parameter. This class is abstract.</value>
   </data>
-  <data name="Zetbox.App.Base.Blob" xml:space="preserve">
+	<data name="Zetbox.App.Base.Blob" xml:space="preserve">
     <value>Blob</value>
   </data>
-  <data name="Zetbox.App.Base.Blob_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.Blob_description" xml:space="preserve">
     <value>Represents a Document</value>
   </data>
-  <data name="Zetbox.App.Base.BoolDefaultValue" xml:space="preserve">
+	<data name="Zetbox.App.Base.BoolDefaultValue" xml:space="preserve">
     <value>BoolDefaultValue</value>
   </data>
-  <data name="Zetbox.App.Base.BoolDefaultValue_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.BoolDefaultValue_description" xml:space="preserve">
     <value>Sets an boolean property with an configured default value</value>
   </data>
-  <data name="Zetbox.App.Base.BoolParameter" xml:space="preserve">
+	<data name="Zetbox.App.Base.BoolParameter" xml:space="preserve">
     <value>BoolParameter</value>
   </data>
-  <data name="Zetbox.App.Base.BoolParameter_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.BoolParameter_description" xml:space="preserve">
     <value>Metadefinition Object for Bool Parameter.</value>
   </data>
-  <data name="Zetbox.App.Base.BoolProperty" xml:space="preserve">
+	<data name="Zetbox.App.Base.BoolProperty" xml:space="preserve">
     <value>BoolProperty</value>
   </data>
-  <data name="Zetbox.App.Base.BoolProperty_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.BoolProperty_description" xml:space="preserve">
     <value>Metadefinition Object for Bool Properties.</value>
   </data>
-  <data name="Zetbox.App.Base.CalculatedObjectReferenceProperty" xml:space="preserve">
+	<data name="Zetbox.App.Base.CalculatedObjectReferenceProperty" xml:space="preserve">
     <value>CalculatedObjectReferenceProperty</value>
   </data>
-  <data name="Zetbox.App.Base.CalculatedObjectReferenceProperty_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.CalculatedObjectReferenceProperty_description" xml:space="preserve">
     <value>a object reference that is calculated from the contents of the containing class</value>
   </data>
-  <data name="Zetbox.App.Calendar.CalendarBook" xml:space="preserve">
+	<data name="Zetbox.App.Calendar.CalendarBook" xml:space="preserve">
     <value>CalendarBook</value>
   </data>
-  <data name="Zetbox.App.Calendar.CalendarBook_description" xml:space="preserve">
+	<data name="Zetbox.App.Calendar.CalendarBook_description" xml:space="preserve">
     <value>A container (book) for events</value>
   </data>
-  <data name="Zetbox.App.Base.ClientReadOnlyConstraint" xml:space="preserve">
+	<data name="Zetbox.App.Base.ClientReadOnlyConstraint" xml:space="preserve">
     <value>ClientReadOnlyConstraint</value>
   </data>
-  <data name="Zetbox.App.Base.ClientReadOnlyConstraint_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.ClientReadOnlyConstraint_description" xml:space="preserve">
     <value>Item is readonly on client but changable on the server</value>
   </data>
-  <data name="Zetbox.App.Base.CLRObjectParameter" xml:space="preserve">
+	<data name="Zetbox.App.Base.CLRObjectParameter" xml:space="preserve">
     <value>CLRObjectParameter</value>
   </data>
-  <data name="Zetbox.App.Base.CLRObjectParameter_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.CLRObjectParameter_description" xml:space="preserve">
     <value>Metadefinition Object for CLR Object Parameter.</value>
   </data>
-  <data name="Zetbox.App.SchemaMigration.ColumnType" xml:space="preserve">
+	<data name="Zetbox.App.SchemaMigration.ColumnType" xml:space="preserve">
     <value>ColumnType</value>
   </data>
-  <data name="Zetbox.App.SchemaMigration.ColumnType_description" xml:space="preserve">
+	<data name="Zetbox.App.SchemaMigration.ColumnType_description" xml:space="preserve">
     <value>Reflects System.Data.DbType</value>
   </data>
-  <data name="Zetbox.App.Calendar.CommonWorkScheduleRule" xml:space="preserve">
+	<data name="Zetbox.App.Calendar.CommonWorkScheduleRule" xml:space="preserve">
     <value>CommonWorkScheduleRule</value>
   </data>
-  <data name="Zetbox.App.Calendar.CommonWorkScheduleRule_description" xml:space="preserve">
+	<data name="Zetbox.App.Calendar.CommonWorkScheduleRule_description" xml:space="preserve">
     <value>This rule applies every day</value>
   </data>
-  <data name="Zetbox.App.Test.Company" xml:space="preserve">
+	<data name="Zetbox.App.Test.Company" xml:space="preserve">
     <value>Company</value>
   </data>
-  <data name="Zetbox.App.Test.Company_description" xml:space="preserve">
+	<data name="Zetbox.App.Test.Company_description" xml:space="preserve">
     <value>Describes a Company</value>
   </data>
-  <data name="Zetbox.App.Base.CompoundObject" xml:space="preserve">
+	<data name="Zetbox.App.Base.CompoundObject" xml:space="preserve">
     <value>CompoundObject</value>
   </data>
-  <data name="Zetbox.App.Base.CompoundObject_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.CompoundObject_description" xml:space="preserve">
     <value>Metadefinition Object for Compound Objects.</value>
   </data>
-  <data name="Zetbox.App.Base.CompoundObjectParameter" xml:space="preserve">
+	<data name="Zetbox.App.Base.CompoundObjectParameter" xml:space="preserve">
     <value>CompoundObjectParameter</value>
   </data>
-  <data name="Zetbox.App.Base.CompoundObjectParameter_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.CompoundObjectParameter_description" xml:space="preserve">
     <value>Metadefinition Object for a CompoundObject Parameter.</value>
   </data>
-  <data name="Zetbox.App.Base.CompoundObjectProperty" xml:space="preserve">
+	<data name="Zetbox.App.Base.CompoundObjectProperty" xml:space="preserve">
     <value>CompoundObjectProperty</value>
   </data>
-  <data name="Zetbox.App.Base.CompoundObjectProperty_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.CompoundObjectProperty_description" xml:space="preserve">
     <value>Metadefinition Object for Compound Object Properties.</value>
   </data>
-  <data name="Zetbox.App.Base.Constraint" xml:space="preserve">
+	<data name="Zetbox.App.Base.Constraint" xml:space="preserve">
     <value>Constraint</value>
   </data>
-  <data name="Zetbox.App.Base.Constraint_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Base.ContainmentSpecification" xml:space="preserve">
+	<data name="Zetbox.App.Base.ContainmentSpecification" xml:space="preserve">
     <value>ContainmentSpecification</value>
   </data>
-  <data name="Zetbox.App.Base.ContainmentSpecification_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.GUI.ControlKind" xml:space="preserve">
+	<data name="Zetbox.App.GUI.ControlKind" xml:space="preserve">
     <value>ControlKind</value>
   </data>
-  <data name="Zetbox.App.GUI.ControlKind_description" xml:space="preserve">
+	<data name="Zetbox.App.GUI.ControlKind_description" xml:space="preserve">
     <value>The ControlKind specifies the toolkit-independent kind or type of control that should display a given Presentable.</value>
   </data>
-  <data name="Zetbox.App.Base.CurrentDateTimeDefaultValue" xml:space="preserve">
+	<data name="Zetbox.App.Base.CurrentDateTimeDefaultValue" xml:space="preserve">
     <value>CurrentDateTimeDefaultValue</value>
   </data>
-  <data name="Zetbox.App.Base.CurrentDateTimeDefaultValue_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.CurrentDateTimeDefaultValue_description" xml:space="preserve">
     <value>Sets the newly created DatetTme Property to DateTime.Now</value>
   </data>
-  <data name="Zetbox.App.Base.CurrentSchema" xml:space="preserve">
+	<data name="Zetbox.App.Base.CurrentSchema" xml:space="preserve">
     <value>CurrentSchema</value>
   </data>
-  <data name="Zetbox.App.Base.CurrentSchema_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.CurrentSchema_description" xml:space="preserve">
     <value>Describes the currently loaded physical database schema</value>
   </data>
-  <data name="Zetbox.App.Base.DataType" xml:space="preserve">
+	<data name="Zetbox.App.Base.DataType" xml:space="preserve">
     <value>DataType</value>
   </data>
-  <data name="Zetbox.App.Base.DataType_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.DataType_description" xml:space="preserve">
     <value>Base Metadefinition Object for Objectclasses, Interfaces, CompoundObjects and Enumerations.</value>
   </data>
-  <data name="Zetbox.App.GUI.DateRangeFilterConfiguration" xml:space="preserve">
+	<data name="Zetbox.App.GUI.DateRangeFilterConfiguration" xml:space="preserve">
     <value>DateRangeFilterConfiguration</value>
   </data>
-  <data name="Zetbox.App.GUI.DateRangeFilterConfiguration_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Base.DateTimeOffset" xml:space="preserve">
+	<data name="Zetbox.App.Base.DateTimeOffset" xml:space="preserve">
     <value>DateTimeOffset</value>
   </data>
-  <data name="Zetbox.App.Base.DateTimeOffset_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.DateTimeOffset_description" xml:space="preserve">
     <value>Offset from a DateTime expressed in years, months, days, etc.</value>
   </data>
-  <data name="Zetbox.App.Base.DateTimeParameter" xml:space="preserve">
+	<data name="Zetbox.App.Base.DateTimeParameter" xml:space="preserve">
     <value>DateTimeParameter</value>
   </data>
-  <data name="Zetbox.App.Base.DateTimeParameter_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.DateTimeParameter_description" xml:space="preserve">
     <value>Metadefinition Object for DateTime Parameter.</value>
   </data>
-  <data name="Zetbox.App.Base.DateTimeProperty" xml:space="preserve">
+	<data name="Zetbox.App.Base.DateTimeProperty" xml:space="preserve">
     <value>DateTimeProperty</value>
   </data>
-  <data name="Zetbox.App.Base.DateTimeProperty_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.DateTimeProperty_description" xml:space="preserve">
     <value>Metadefinition Object for DateTime Properties.</value>
   </data>
-  <data name="Zetbox.App.Base.DateTimeRange" xml:space="preserve">
+	<data name="Zetbox.App.Base.DateTimeRange" xml:space="preserve">
     <value>DateTimeRange</value>
   </data>
-  <data name="Zetbox.App.Base.DateTimeRange_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.DateTimeRange_description" xml:space="preserve">
     <value>A from and until DateTime Value</value>
   </data>
-  <data name="Zetbox.App.Base.DateTimeStyles" xml:space="preserve">
+	<data name="Zetbox.App.Base.DateTimeStyles" xml:space="preserve">
     <value>DateTimeStyles</value>
   </data>
-  <data name="Zetbox.App.Base.DateTimeStyles_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.DateTimeStyles_description" xml:space="preserve">
     <value>Style of Datetime. Can be Date, Date and Time or Time</value>
   </data>
-  <data name="Zetbox.App.Base.DayOfWeek" xml:space="preserve">
+	<data name="Zetbox.App.Base.DayOfWeek" xml:space="preserve">
     <value>DayOfWeek</value>
   </data>
-  <data name="Zetbox.App.Base.DayOfWeek_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Calendar.DayOfWeekWorkScheduleRule" xml:space="preserve">
+	<data name="Zetbox.App.Calendar.DayOfWeekWorkScheduleRule" xml:space="preserve">
     <value>DayOfWeekWorkScheduleRule</value>
   </data>
-  <data name="Zetbox.App.Calendar.DayOfWeekWorkScheduleRule_description" xml:space="preserve">
+	<data name="Zetbox.App.Calendar.DayOfWeekWorkScheduleRule_description" xml:space="preserve">
     <value>This rule applies every day of week</value>
   </data>
-  <data name="Zetbox.App.Test.DeactivatableTestObject" xml:space="preserve">
+	<data name="Zetbox.App.Test.DeactivatableTestObject" xml:space="preserve">
     <value>DeactivatableTestObject</value>
   </data>
-  <data name="Zetbox.App.Test.DeactivatableTestObject_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Base.DecimalDefaultValue" xml:space="preserve">
+	<data name="Zetbox.App.Base.DecimalDefaultValue" xml:space="preserve">
     <value>DecimalDefaultValue</value>
   </data>
-  <data name="Zetbox.App.Base.DecimalDefaultValue_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.DecimalDefaultValue_description" xml:space="preserve">
     <value>Sets an decimal property with the configured default value</value>
   </data>
-  <data name="Zetbox.App.Base.DecimalParameter" xml:space="preserve">
+	<data name="Zetbox.App.Base.DecimalParameter" xml:space="preserve">
     <value>DecimalParameter</value>
   </data>
-  <data name="Zetbox.App.Base.DecimalParameter_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.DecimalParameter_description" xml:space="preserve">
     <value>Metadefinition Object for Decimal Parameter.</value>
   </data>
-  <data name="Zetbox.App.Base.DecimalProperty" xml:space="preserve">
+	<data name="Zetbox.App.Base.DecimalProperty" xml:space="preserve">
     <value>DecimalProperty</value>
   </data>
-  <data name="Zetbox.App.Base.DecimalProperty_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.DecimalProperty_description" xml:space="preserve">
     <value>Metadefinition Object for Decimal Properties.</value>
   </data>
-  <data name="Zetbox.App.Base.DefaultPropertyValue" xml:space="preserve">
+	<data name="Zetbox.App.Base.DefaultPropertyValue" xml:space="preserve">
     <value>DefaultPropertyValue</value>
   </data>
-  <data name="Zetbox.App.Base.DefaultPropertyValue_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Base.DeploymentRestriction" xml:space="preserve">
+	<data name="Zetbox.App.Base.DeploymentRestriction" xml:space="preserve">
     <value>DeploymentRestriction</value>
   </data>
-  <data name="Zetbox.App.Base.DeploymentRestriction_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.DeploymentRestriction_description" xml:space="preserve">
     <value>Deployment restriction for items</value>
   </data>
-  <data name="at.dasz.DocumentManagement.Document" xml:space="preserve">
+	<data name="at.dasz.DocumentManagement.Document" xml:space="preserve">
     <value>Document</value>
   </data>
-  <data name="at.dasz.DocumentManagement.Document_description" xml:space="preserve">
+	<data name="at.dasz.DocumentManagement.Document_description" xml:space="preserve">
     <value>Depricated</value>
   </data>
-  <data name="Zetbox.App.Test.DocumentTestObject" xml:space="preserve">
+	<data name="Zetbox.App.Test.DocumentTestObject" xml:space="preserve">
     <value>DocumentTestObject</value>
   </data>
-  <data name="Zetbox.App.Test.DocumentTestObject_description" xml:space="preserve">
+	<data name="Zetbox.App.Test.DocumentTestObject_description" xml:space="preserve">
     <value>DocumentTestObject</value>
   </data>
-  <data name="Zetbox.App.Base.DoubleDefaultValue" xml:space="preserve">
+	<data name="Zetbox.App.Base.DoubleDefaultValue" xml:space="preserve">
     <value>DoubleDefaultValue</value>
   </data>
-  <data name="Zetbox.App.Base.DoubleDefaultValue_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.DoubleDefaultValue_description" xml:space="preserve">
     <value>Sets a double property with the configured default value</value>
   </data>
-  <data name="Zetbox.App.Base.DoubleParameter" xml:space="preserve">
+	<data name="Zetbox.App.Base.DoubleParameter" xml:space="preserve">
     <value>DoubleParameter</value>
   </data>
-  <data name="Zetbox.App.Base.DoubleParameter_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.DoubleParameter_description" xml:space="preserve">
     <value>Metadefinition Object for Double Parameter.</value>
   </data>
-  <data name="Zetbox.App.Base.DoubleProperty" xml:space="preserve">
+	<data name="Zetbox.App.Base.DoubleProperty" xml:space="preserve">
     <value>DoubleProperty</value>
   </data>
-  <data name="Zetbox.App.Base.DoubleProperty_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.DoubleProperty_description" xml:space="preserve">
     <value>Metadefinition Object for Double Properties.</value>
   </data>
-  <data name="at.dasz.DocumentManagement.DynamicFile" xml:space="preserve">
+	<data name="at.dasz.DocumentManagement.DynamicFile" xml:space="preserve">
     <value>DynamicFile</value>
   </data>
-  <data name="at.dasz.DocumentManagement.DynamicFile_description" xml:space="preserve">
+	<data name="at.dasz.DocumentManagement.DynamicFile_description" xml:space="preserve">
     <value>Depricated</value>
   </data>
-  <data name="Zetbox.App.Calendar.EasterWorkScheduleRule" xml:space="preserve">
+	<data name="Zetbox.App.Calendar.EasterWorkScheduleRule" xml:space="preserve">
     <value>EasterWorkScheduleRule</value>
   </data>
-  <data name="Zetbox.App.Calendar.EasterWorkScheduleRule_description" xml:space="preserve">
+	<data name="Zetbox.App.Calendar.EasterWorkScheduleRule_description" xml:space="preserve">
     <value>This rule applies every year, n days relative to easter.</value>
   </data>
-  <data name="Zetbox.App.Base.EnumDefaultValue" xml:space="preserve">
+	<data name="Zetbox.App.Base.EnumDefaultValue" xml:space="preserve">
     <value>EnumDefaultValue</value>
   </data>
-  <data name="Zetbox.App.Base.EnumDefaultValue_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.EnumDefaultValue_description" xml:space="preserve">
     <value>Sets an enumeration property with an configured default value</value>
   </data>
-  <data name="Zetbox.App.Base.Enumeration" xml:space="preserve">
+	<data name="Zetbox.App.Base.Enumeration" xml:space="preserve">
     <value>Enumeration</value>
   </data>
-  <data name="Zetbox.App.Base.Enumeration_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.Enumeration_description" xml:space="preserve">
     <value>Metadefinition Object for Enumerations.</value>
   </data>
-  <data name="Zetbox.App.Base.EnumerationEntry" xml:space="preserve">
+	<data name="Zetbox.App.Base.EnumerationEntry" xml:space="preserve">
     <value>EnumerationEntry</value>
   </data>
-  <data name="Zetbox.App.Base.EnumerationEntry_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.EnumerationEntry_description" xml:space="preserve">
     <value>Metadefinition Object for an Enumeration Entry.</value>
   </data>
-  <data name="Zetbox.App.Base.EnumerationProperty" xml:space="preserve">
+	<data name="Zetbox.App.Base.EnumerationProperty" xml:space="preserve">
     <value>EnumerationProperty</value>
   </data>
-  <data name="Zetbox.App.Base.EnumerationProperty_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.EnumerationProperty_description" xml:space="preserve">
     <value>Metadefinition Object for Enumeration Properties.</value>
   </data>
-  <data name="Zetbox.App.Base.EnumParameter" xml:space="preserve">
+	<data name="Zetbox.App.Base.EnumParameter" xml:space="preserve">
     <value>EnumParameter</value>
   </data>
-  <data name="Zetbox.App.Base.EnumParameter_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.EnumParameter_description" xml:space="preserve">
     <value>Metadefinition Object for Enum Parameter.</value>
   </data>
-  <data name="Zetbox.App.Calendar.Event" xml:space="preserve">
+	<data name="Zetbox.App.Calendar.Event" xml:space="preserve">
     <value>Event</value>
   </data>
-  <data name="Zetbox.App.Calendar.Event_description" xml:space="preserve">
+	<data name="Zetbox.App.Calendar.Event_description" xml:space="preserve">
     <value>A calendar event</value>
   </data>
-  <data name="Zetbox.App.Test.EventTestObject" xml:space="preserve">
+	<data name="Zetbox.App.Test.EventTestObject" xml:space="preserve">
     <value>EventTestObject</value>
   </data>
-  <data name="Zetbox.App.Test.EventTestObject_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Base.ExceptionLogEntry" xml:space="preserve">
+	<data name="Zetbox.App.Base.ExceptionLogEntry" xml:space="preserve">
     <value>ExceptionLogEntry</value>
   </data>
-  <data name="Zetbox.App.Base.ExceptionLogEntry_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.ExceptionLogEntry_description" xml:space="preserve">
     <value>Logentry for exceptions</value>
   </data>
-  <data name="at.dasz.DocumentManagement.Excerpt" xml:space="preserve">
+	<data name="at.dasz.DocumentManagement.Excerpt" xml:space="preserve">
     <value>Excerpt</value>
   </data>
-  <data name="at.dasz.DocumentManagement.Excerpt_description" xml:space="preserve">
+	<data name="at.dasz.DocumentManagement.Excerpt_description" xml:space="preserve">
     <value>Excerpt from a file</value>
   </data>
-  <data name="at.dasz.DocumentManagement.File" xml:space="preserve">
+	<data name="at.dasz.DocumentManagement.File" xml:space="preserve">
     <value>File</value>
   </data>
-  <data name="at.dasz.DocumentManagement.File_description" xml:space="preserve">
+	<data name="at.dasz.DocumentManagement.File_description" xml:space="preserve">
     <value>A file. Can be readonly, can have revisions.</value>
   </data>
-  <data name="at.dasz.DocumentManagement.FileImportConfiguration" xml:space="preserve">
+	<data name="at.dasz.DocumentManagement.FileImportConfiguration" xml:space="preserve">
     <value>FileImportConfiguration</value>
   </data>
-  <data name="at.dasz.DocumentManagement.FileImportConfiguration_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.GUI.FilterConfiguration" xml:space="preserve">
+	<data name="Zetbox.App.GUI.FilterConfiguration" xml:space="preserve">
     <value>FilterConfiguration</value>
   </data>
-  <data name="Zetbox.App.GUI.FilterConfiguration_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Calendar.FixedYearlyWorkScheduleRule" xml:space="preserve">
+	<data name="Zetbox.App.Calendar.FixedYearlyWorkScheduleRule" xml:space="preserve">
     <value>FixedYearlyWorkScheduleRule</value>
   </data>
-  <data name="Zetbox.App.Calendar.FixedYearlyWorkScheduleRule_description" xml:space="preserve">
+	<data name="Zetbox.App.Calendar.FixedYearlyWorkScheduleRule_description" xml:space="preserve">
     <value>This rule applies every year on the same date</value>
   </data>
-  <data name="Zetbox.App.Test.Fragebogen" xml:space="preserve">
+	<data name="Zetbox.App.Test.Fragebogen" xml:space="preserve">
     <value>Fragebogen</value>
   </data>
-  <data name="Zetbox.App.Test.Fragebogen_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Base.Frequency" xml:space="preserve">
+	<data name="Zetbox.App.Base.Frequency" xml:space="preserve">
     <value>Frequency</value>
   </data>
-  <data name="Zetbox.App.Base.Frequency_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Base.FullTextIndexConstraint" xml:space="preserve">
+	<data name="Zetbox.App.Base.FullTextIndexConstraint" xml:space="preserve">
     <value>FullTextIndexConstraint</value>
   </data>
-  <data name="Zetbox.App.Base.FullTextIndexConstraint_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Base.Group" xml:space="preserve">
+	<data name="Zetbox.App.Base.Group" xml:space="preserve">
     <value>Group</value>
   </data>
-  <data name="Zetbox.App.Base.Group_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Base.GroupMembership" xml:space="preserve">
+	<data name="Zetbox.App.Base.GroupMembership" xml:space="preserve">
     <value>GroupMembership</value>
   </data>
-  <data name="Zetbox.App.Base.GroupMembership_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Base.GuidProperty" xml:space="preserve">
+	<data name="Zetbox.App.Base.GuidProperty" xml:space="preserve">
     <value>GuidProperty</value>
   </data>
-  <data name="Zetbox.App.Base.GuidProperty_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.GuidProperty_description" xml:space="preserve">
     <value>Guid Property</value>
   </data>
-  <data name="Zetbox.App.GUI.HighlightState" xml:space="preserve">
+	<data name="Zetbox.App.GUI.HighlightState" xml:space="preserve">
     <value>HighlightState</value>
   </data>
-  <data name="Zetbox.App.GUI.HighlightState_description" xml:space="preserve">
+	<data name="Zetbox.App.GUI.HighlightState_description" xml:space="preserve">
     <value>Enumeration of all possible highlight states</value>
   </data>
-  <data name="Zetbox.App.Base.IAuditable" xml:space="preserve">
+	<data name="Zetbox.App.Base.IAuditable" xml:space="preserve">
     <value>IAuditable</value>
   </data>
-  <data name="Zetbox.App.Base.IAuditable_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.IAuditable_description" xml:space="preserve">
     <value>Marks an object class as auditable and provides the basic audit trail table.</value>
   </data>
-  <data name="Zetbox.App.Base.IChangedBy" xml:space="preserve">
+	<data name="Zetbox.App.Base.IChangedBy" xml:space="preserve">
     <value>IChangedBy</value>
   </data>
-  <data name="Zetbox.App.Base.IChangedBy_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.IChangedBy_description" xml:space="preserve">
     <value>IChangedBy</value>
   </data>
-  <data name="Zetbox.App.GUI.Icon" xml:space="preserve">
+	<data name="Zetbox.App.GUI.Icon" xml:space="preserve">
     <value>Icon</value>
   </data>
-  <data name="Zetbox.App.GUI.Icon_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Base.ICustomFulltextFormat" xml:space="preserve">
+	<data name="Zetbox.App.Base.ICustomFulltextFormat" xml:space="preserve">
     <value>ICustomFulltextFormat</value>
   </data>
-  <data name="Zetbox.App.Base.ICustomFulltextFormat_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.ICustomFulltextFormat_description" xml:space="preserve">
     <value>Provides a custom implementation to get the DataObject's string representation for full text indexing.</value>
   </data>
-  <data name="Zetbox.App.Base.IDeactivatable" xml:space="preserve">
+	<data name="Zetbox.App.Base.IDeactivatable" xml:space="preserve">
     <value>IDeactivatable</value>
   </data>
-  <data name="Zetbox.App.Base.IDeactivatable_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.IDeactivatable_description" xml:space="preserve">
     <value>A marker interface for items that can be deactivated</value>
   </data>
-  <data name="Zetbox.App.Base.Identity" xml:space="preserve">
+	<data name="Zetbox.App.Base.Identity" xml:space="preserve">
     <value>Identity</value>
   </data>
-  <data name="Zetbox.App.Base.Identity_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.Identity_description" xml:space="preserve">
     <value>Represents an Identity</value>
   </data>
-  <data name="Zetbox.App.Base.IExportable" xml:space="preserve">
+	<data name="Zetbox.App.Base.IExportable" xml:space="preserve">
     <value>IExportable</value>
   </data>
-  <data name="Zetbox.App.Base.IExportable_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.IExportable_description" xml:space="preserve">
     <value>Marks a DataType as exportable</value>
   </data>
-  <data name="Zetbox.App.Base.IInvocation" xml:space="preserve">
+	<data name="Zetbox.App.Base.IInvocation" xml:space="preserve">
     <value>IInvocation</value>
   </data>
-  <data name="Zetbox.App.Base.IInvocation_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.SchemaMigration.IMigrationInfo" xml:space="preserve">
+	<data name="Zetbox.App.SchemaMigration.IMigrationInfo" xml:space="preserve">
     <value>IMigrationInfo</value>
   </data>
-  <data name="Zetbox.App.SchemaMigration.IMigrationInfo_description" xml:space="preserve">
+	<data name="Zetbox.App.SchemaMigration.IMigrationInfo_description" xml:space="preserve">
     <value>Provides informations about a migrated ObjectClass</value>
   </data>
-  <data name="Zetbox.App.Base.IModuleMember" xml:space="preserve">
+	<data name="Zetbox.App.Base.IModuleMember" xml:space="preserve">
     <value>IModuleMember</value>
   </data>
-  <data name="Zetbox.App.Base.IModuleMember_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.IModuleMember_description" xml:space="preserve">
     <value>Marks that an ObjectClass as a member of a Module</value>
   </data>
-  <data name="at.dasz.DocumentManagement.ImportedFile" xml:space="preserve">
+	<data name="at.dasz.DocumentManagement.ImportedFile" xml:space="preserve">
     <value>ImportedFile</value>
   </data>
-  <data name="at.dasz.DocumentManagement.ImportedFile_description" xml:space="preserve">
+	<data name="at.dasz.DocumentManagement.ImportedFile_description" xml:space="preserve">
     <value>Files beeing imported by the import service.</value>
   </data>
-  <data name="Zetbox.App.Base.INamedObject" xml:space="preserve">
+	<data name="Zetbox.App.Base.INamedObject" xml:space="preserve">
     <value>INamedObject</value>
   </data>
-  <data name="Zetbox.App.Base.INamedObject_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.INamedObject_description" xml:space="preserve">
     <value>Objects implementing this interface can be accessed as named objects.</value>
   </data>
-  <data name="Zetbox.App.Base.IndexConstraint" xml:space="preserve">
+	<data name="Zetbox.App.Base.IndexConstraint" xml:space="preserve">
     <value>IndexConstraint</value>
   </data>
-  <data name="Zetbox.App.Base.IndexConstraint_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Base.InitOnlyConstraint" xml:space="preserve">
+	<data name="Zetbox.App.Base.InitOnlyConstraint" xml:space="preserve">
     <value>InitOnlyConstraint</value>
   </data>
-  <data name="Zetbox.App.Base.InitOnlyConstraint_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.InitOnlyConstraint_description" xml:space="preserve">
     <value>The item can only be set during initialization</value>
   </data>
-  <data name="Zetbox.App.Base.InstanceConstraint" xml:space="preserve">
+	<data name="Zetbox.App.Base.InstanceConstraint" xml:space="preserve">
     <value>InstanceConstraint</value>
   </data>
-  <data name="Zetbox.App.Base.InstanceConstraint_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.GUI.InstanceListViewMethod" xml:space="preserve">
+	<data name="Zetbox.App.GUI.InstanceListViewMethod" xml:space="preserve">
     <value>InstanceListViewMethod</value>
   </data>
-  <data name="Zetbox.App.GUI.InstanceListViewMethod_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Base.IntDefaultValue" xml:space="preserve">
+	<data name="Zetbox.App.Base.IntDefaultValue" xml:space="preserve">
     <value>IntDefaultValue</value>
   </data>
-  <data name="Zetbox.App.Base.IntDefaultValue_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.IntDefaultValue_description" xml:space="preserve">
     <value>Sets an integer property with the configured default value</value>
   </data>
-  <data name="Zetbox.App.Base.IntegerRangeConstraint" xml:space="preserve">
+	<data name="Zetbox.App.Base.IntegerRangeConstraint" xml:space="preserve">
     <value>IntegerRangeConstraint</value>
   </data>
-  <data name="Zetbox.App.Base.IntegerRangeConstraint_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Base.Interface" xml:space="preserve">
+	<data name="Zetbox.App.Base.Interface" xml:space="preserve">
     <value>Interface</value>
   </data>
-  <data name="Zetbox.App.Base.Interface_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.Interface_description" xml:space="preserve">
     <value>Metadefinition Object for Interfaces.</value>
   </data>
-  <data name="Zetbox.App.Base.IntParameter" xml:space="preserve">
+	<data name="Zetbox.App.Base.IntParameter" xml:space="preserve">
     <value>IntParameter</value>
   </data>
-  <data name="Zetbox.App.Base.IntParameter_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.IntParameter_description" xml:space="preserve">
     <value>Metadefinition Object for Int Parameter.</value>
   </data>
-  <data name="Zetbox.App.Base.IntProperty" xml:space="preserve">
+	<data name="Zetbox.App.Base.IntProperty" xml:space="preserve">
     <value>IntProperty</value>
   </data>
-  <data name="Zetbox.App.Base.IntProperty_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.IntProperty_description" xml:space="preserve">
     <value>Metadefinition Object for Int Properties.</value>
   </data>
-  <data name="Zetbox.App.Base.InvokingConstraint" xml:space="preserve">
+	<data name="Zetbox.App.Base.InvokingConstraint" xml:space="preserve">
     <value>InvokingConstraint</value>
   </data>
-  <data name="Zetbox.App.Base.InvokingConstraint_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.GUI.IRenderer" xml:space="preserve">
+	<data name="Zetbox.App.GUI.IRenderer" xml:space="preserve">
     <value>IRenderer</value>
   </data>
-  <data name="Zetbox.App.GUI.IRenderer_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Base.IsValidIdentifierConstraint" xml:space="preserve">
+	<data name="Zetbox.App.Base.IsValidIdentifierConstraint" xml:space="preserve">
     <value>IsValidIdentifierConstraint</value>
   </data>
-  <data name="Zetbox.App.Base.IsValidIdentifierConstraint_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Base.IsValidNamespaceConstraint" xml:space="preserve">
+	<data name="Zetbox.App.Base.IsValidNamespaceConstraint" xml:space="preserve">
     <value>IsValidNamespaceConstraint</value>
   </data>
-  <data name="Zetbox.App.Base.IsValidNamespaceConstraint_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Test.ITestInterface" xml:space="preserve">
+	<data name="Zetbox.App.Test.ITestInterface" xml:space="preserve">
     <value>ITestInterface</value>
   </data>
-  <data name="Zetbox.App.Test.ITestInterface_description" xml:space="preserve">
+	<data name="Zetbox.App.Test.ITestInterface_description" xml:space="preserve">
     <value>A Test Interface</value>
   </data>
-  <data name="Zetbox.App.Projekte.Kunde" xml:space="preserve">
+	<data name="Zetbox.App.Projekte.Kunde" xml:space="preserve">
     <value>Kunde</value>
   </data>
-  <data name="Zetbox.App.Projekte.Kunde_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.GUI.ListSortDirection" xml:space="preserve">
+	<data name="Zetbox.App.GUI.ListSortDirection" xml:space="preserve">
     <value>ListSortDirection</value>
   </data>
-  <data name="Zetbox.App.GUI.ListSortDirection_description" xml:space="preserve">
+	<data name="Zetbox.App.GUI.ListSortDirection_description" xml:space="preserve">
     <value>Reflects System.ComponentModel.ListSortDirection</value>
   </data>
-  <data name="Zetbox.App.SchemaMigration.MappingStatus" xml:space="preserve">
+	<data name="Zetbox.App.SchemaMigration.MappingStatus" xml:space="preserve">
     <value>MappingStatus</value>
   </data>
-  <data name="Zetbox.App.SchemaMigration.MappingStatus_description" xml:space="preserve">
+	<data name="Zetbox.App.SchemaMigration.MappingStatus_description" xml:space="preserve">
     <value>Status of the current mapping</value>
   </data>
-  <data name="Zetbox.App.Base.Method" xml:space="preserve">
+	<data name="Zetbox.App.Base.Method" xml:space="preserve">
     <value>Method</value>
   </data>
-  <data name="Zetbox.App.Base.Method_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.Method_description" xml:space="preserve">
     <value>Metadefinition Object for Methods.</value>
   </data>
-  <data name="Zetbox.App.Base.MethodInvocationConstraint" xml:space="preserve">
+	<data name="Zetbox.App.Base.MethodInvocationConstraint" xml:space="preserve">
     <value>MethodInvocationConstraint</value>
   </data>
-  <data name="Zetbox.App.Base.MethodInvocationConstraint_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Test.MethodTest" xml:space="preserve">
+	<data name="Zetbox.App.Test.MethodTest" xml:space="preserve">
     <value>MethodTest</value>
   </data>
-  <data name="Zetbox.App.Test.MethodTest_description" xml:space="preserve">
+	<data name="Zetbox.App.Test.MethodTest_description" xml:space="preserve">
     <value>Test class for methods</value>
   </data>
-  <data name="Zetbox.App.SchemaMigration.MigrationLog" xml:space="preserve">
+	<data name="Zetbox.App.SchemaMigration.MigrationLog" xml:space="preserve">
     <value>MigrationLog</value>
   </data>
-  <data name="Zetbox.App.SchemaMigration.MigrationLog_description" xml:space="preserve">
+	<data name="Zetbox.App.SchemaMigration.MigrationLog_description" xml:space="preserve">
     <value>A log of all migration operations</value>
   </data>
-  <data name="Zetbox.App.SchemaMigration.MigrationProject" xml:space="preserve">
+	<data name="Zetbox.App.SchemaMigration.MigrationProject" xml:space="preserve">
     <value>MigrationProject</value>
   </data>
-  <data name="Zetbox.App.SchemaMigration.MigrationProject_description" xml:space="preserve">
+	<data name="Zetbox.App.SchemaMigration.MigrationProject_description" xml:space="preserve">
     <value>Defines a Schema Migration Project</value>
   </data>
-  <data name="Zetbox.App.Projekte.Mitarbeiter" xml:space="preserve">
+	<data name="Zetbox.App.Projekte.Mitarbeiter" xml:space="preserve">
     <value>Mitarbeiter</value>
   </data>
-  <data name="Zetbox.App.Projekte.Mitarbeiter_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Base.Module" xml:space="preserve">
+	<data name="Zetbox.App.Base.Module" xml:space="preserve">
     <value>Module</value>
   </data>
-  <data name="Zetbox.App.Base.Module_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.Module_description" xml:space="preserve">
     <value>Metadefinition Object for Modules.</value>
   </data>
-  <data name="Zetbox.App.GUI.MonthFilterConfiguration" xml:space="preserve">
+	<data name="Zetbox.App.GUI.MonthFilterConfiguration" xml:space="preserve">
     <value>MonthFilterConfiguration</value>
   </data>
-  <data name="Zetbox.App.GUI.MonthFilterConfiguration_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Test.Muhblah" xml:space="preserve">
+	<data name="Zetbox.App.Test.Muhblah" xml:space="preserve">
     <value>Muhblah</value>
   </data>
-  <data name="Zetbox.App.Test.Muhblah_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Base.Multiplicity" xml:space="preserve">
+	<data name="Zetbox.App.Base.Multiplicity" xml:space="preserve">
     <value>Multiplicity</value>
   </data>
-  <data name="Zetbox.App.Base.Multiplicity_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.Multiplicity_description" xml:space="preserve">
     <value>Describes the multiplicities of objects on RelationEnds</value>
   </data>
-  <data name="Zetbox.App.Test.N_to_M_relations_A" xml:space="preserve">
+	<data name="Zetbox.App.Test.N_to_M_relations_A" xml:space="preserve">
     <value>N_to_M_relations_A</value>
   </data>
-  <data name="Zetbox.App.Test.N_to_M_relations_A_description" xml:space="preserve">
+	<data name="Zetbox.App.Test.N_to_M_relations_A_description" xml:space="preserve">
     <value>The A-Side of the classes for the N_to_M_relations Tests</value>
   </data>
-  <data name="Zetbox.App.Test.N_to_M_relations_B" xml:space="preserve">
+	<data name="Zetbox.App.Test.N_to_M_relations_B" xml:space="preserve">
     <value>N_to_M_relations_B</value>
   </data>
-  <data name="Zetbox.App.Test.N_to_M_relations_B_description" xml:space="preserve">
+	<data name="Zetbox.App.Test.N_to_M_relations_B_description" xml:space="preserve">
     <value>The B-Side class for the N_to_M_relations Tests</value>
   </data>
-  <data name="Zetbox.App.GUI.NavigationAction" xml:space="preserve">
+	<data name="Zetbox.App.GUI.NavigationAction" xml:space="preserve">
     <value>NavigationAction</value>
   </data>
-  <data name="Zetbox.App.GUI.NavigationAction_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.GUI.NavigationEntry" xml:space="preserve">
+	<data name="Zetbox.App.GUI.NavigationEntry" xml:space="preserve">
     <value>NavigationEntry</value>
   </data>
-  <data name="Zetbox.App.GUI.NavigationEntry_description" xml:space="preserve">
+	<data name="Zetbox.App.GUI.NavigationEntry_description" xml:space="preserve">
     <value>Abstract base class for Navigation Entries</value>
   </data>
-  <data name="Zetbox.App.GUI.NavigationScreen" xml:space="preserve">
+	<data name="Zetbox.App.GUI.NavigationScreen" xml:space="preserve">
     <value>NavigationScreen</value>
   </data>
-  <data name="Zetbox.App.GUI.NavigationScreen_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.GUI.NavigationSearchScreen" xml:space="preserve">
+	<data name="Zetbox.App.GUI.NavigationSearchScreen" xml:space="preserve">
     <value>NavigationSearchScreen</value>
   </data>
-  <data name="Zetbox.App.GUI.NavigationSearchScreen_description" xml:space="preserve">
+	<data name="Zetbox.App.GUI.NavigationSearchScreen_description" xml:space="preserve">
     <value>Navigation screen for searching objects</value>
   </data>
-  <data name="Zetbox.App.Base.NewGuidDefaultValue" xml:space="preserve">
+	<data name="Zetbox.App.Base.NewGuidDefaultValue" xml:space="preserve">
     <value>NewGuidDefaultValue</value>
   </data>
-  <data name="Zetbox.App.Base.NewGuidDefaultValue_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.NewGuidDefaultValue_description" xml:space="preserve">
     <value>Creates a new Guid</value>
   </data>
-  <data name="Zetbox.App.Base.NotNullableConstraint" xml:space="preserve">
+	<data name="Zetbox.App.Base.NotNullableConstraint" xml:space="preserve">
     <value>NotNullableConstraint</value>
   </data>
-  <data name="Zetbox.App.Base.NotNullableConstraint_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Base.ObjectClass" xml:space="preserve">
+	<data name="Zetbox.App.Base.ObjectClass" xml:space="preserve">
     <value>ObjectClass</value>
   </data>
-  <data name="Zetbox.App.Base.ObjectClass_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.ObjectClass_description" xml:space="preserve">
     <value>Metadefinition Object for ObjectClasses.</value>
   </data>
-  <data name="Zetbox.App.GUI.ObjectClassFilterConfiguration" xml:space="preserve">
+	<data name="Zetbox.App.GUI.ObjectClassFilterConfiguration" xml:space="preserve">
     <value>ObjectClassFilterConfiguration</value>
   </data>
-  <data name="Zetbox.App.GUI.ObjectClassFilterConfiguration_description" xml:space="preserve">
+	<data name="Zetbox.App.GUI.ObjectClassFilterConfiguration_description" xml:space="preserve">
     <value>Abstract base class for ObjectClass Filter</value>
   </data>
-  <data name="Zetbox.App.Base.ObjectReferenceParameter" xml:space="preserve">
+	<data name="Zetbox.App.Base.ObjectReferenceParameter" xml:space="preserve">
     <value>ObjectReferenceParameter</value>
   </data>
-  <data name="Zetbox.App.Base.ObjectReferenceParameter_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.ObjectReferenceParameter_description" xml:space="preserve">
     <value>Metadefinition Object for Object Parameter.</value>
   </data>
-  <data name="Zetbox.App.Base.ObjectReferencePlaceholderProperty" xml:space="preserve">
+	<data name="Zetbox.App.Base.ObjectReferencePlaceholderProperty" xml:space="preserve">
     <value>ObjectReferencePlaceholderProperty</value>
   </data>
-  <data name="Zetbox.App.Base.ObjectReferencePlaceholderProperty_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.ObjectReferencePlaceholderProperty_description" xml:space="preserve">
     <value>A placeholder for data object references in interfaces</value>
   </data>
-  <data name="Zetbox.App.Base.ObjectReferenceProperty" xml:space="preserve">
+	<data name="Zetbox.App.Base.ObjectReferenceProperty" xml:space="preserve">
     <value>ObjectReferenceProperty</value>
   </data>
-  <data name="Zetbox.App.Base.ObjectReferenceProperty_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.ObjectReferenceProperty_description" xml:space="preserve">
     <value>Metadefinition Object for ObjectReference Properties.</value>
   </data>
-  <data name="Zetbox.App.Test.One_to_N_relations_N" xml:space="preserve">
+	<data name="Zetbox.App.Test.One_to_N_relations_N" xml:space="preserve">
     <value>One_to_N_relations_N</value>
   </data>
-  <data name="Zetbox.App.Test.One_to_N_relations_N_description" xml:space="preserve">
+	<data name="Zetbox.App.Test.One_to_N_relations_N_description" xml:space="preserve">
     <value>The N-Side of the classes for the One_to_N_relations Tests</value>
   </data>
-  <data name="Zetbox.App.Test.One_to_N_relations_One" xml:space="preserve">
+	<data name="Zetbox.App.Test.One_to_N_relations_One" xml:space="preserve">
     <value>One_to_N_relations_One</value>
   </data>
-  <data name="Zetbox.App.Test.One_to_N_relations_One_description" xml:space="preserve">
+	<data name="Zetbox.App.Test.One_to_N_relations_One_description" xml:space="preserve">
     <value>The One-Side of the classes for the One_to_N_relations Tests</value>
   </data>
-  <data name="Zetbox.App.Test.One_to_N_relations_OrderedN" xml:space="preserve">
+	<data name="Zetbox.App.Test.One_to_N_relations_OrderedN" xml:space="preserve">
     <value>One_to_N_relations_OrderedN</value>
   </data>
-  <data name="Zetbox.App.Test.One_to_N_relations_OrderedN_description" xml:space="preserve">
+	<data name="Zetbox.App.Test.One_to_N_relations_OrderedN_description" xml:space="preserve">
     <value>a test class for ordered lists</value>
   </data>
-  <data name="Zetbox.App.Base.OpenID" xml:space="preserve">
+	<data name="Zetbox.App.Base.OpenID" xml:space="preserve">
     <value>OpenID</value>
   </data>
-  <data name="Zetbox.App.Base.OpenID_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.OpenID_description" xml:space="preserve">
     <value>A struct holding a OpenID</value>
   </data>
-  <data name="Zetbox.App.GUI.OptionalPredicateFilterConfiguration" xml:space="preserve">
+	<data name="Zetbox.App.GUI.OptionalPredicateFilterConfiguration" xml:space="preserve">
     <value>OptionalPredicateFilterConfiguration</value>
   </data>
-  <data name="Zetbox.App.GUI.OptionalPredicateFilterConfiguration_description" xml:space="preserve">
+	<data name="Zetbox.App.GUI.OptionalPredicateFilterConfiguration_description" xml:space="preserve">
     <value>Filter configuration for filtering on an instance with an user selectable, optional and constant predicate</value>
   </data>
-  <data name="Zetbox.App.Test.OrderedNEnd" xml:space="preserve">
+	<data name="Zetbox.App.Test.OrderedNEnd" xml:space="preserve">
     <value>OrderedNEnd</value>
   </data>
-  <data name="Zetbox.App.Test.OrderedNEnd_description" xml:space="preserve">
+	<data name="Zetbox.App.Test.OrderedNEnd_description" xml:space="preserve">
     <value>A test class for persistently ordered 1:N relations</value>
   </data>
-  <data name="Zetbox.App.Test.OrderedOneEnd" xml:space="preserve">
+	<data name="Zetbox.App.Test.OrderedOneEnd" xml:space="preserve">
     <value>OrderedOneEnd</value>
   </data>
-  <data name="Zetbox.App.Test.OrderedOneEnd_description" xml:space="preserve">
+	<data name="Zetbox.App.Test.OrderedOneEnd_description" xml:space="preserve">
     <value>A test class for persistently ordered 1:N relations</value>
   </data>
-  <data name="Zetbox.App.Projekte.Projekt" xml:space="preserve">
+	<data name="Zetbox.App.Projekte.Projekt" xml:space="preserve">
     <value>Projekt</value>
   </data>
-  <data name="Zetbox.App.Projekte.Projekt_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Base.Property" xml:space="preserve">
+	<data name="Zetbox.App.Base.Property" xml:space="preserve">
     <value>Property</value>
   </data>
-  <data name="Zetbox.App.Base.Property_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.Property_description" xml:space="preserve">
     <value>Metadefinition Object for Properties. This class is abstract.</value>
   </data>
-  <data name="Zetbox.App.Test.PropertyBoolTest" xml:space="preserve">
+	<data name="Zetbox.App.Test.PropertyBoolTest" xml:space="preserve">
     <value>PropertyBoolTest</value>
   </data>
-  <data name="Zetbox.App.Test.PropertyBoolTest_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Test.PropertyDateTimeTest" xml:space="preserve">
+	<data name="Zetbox.App.Test.PropertyDateTimeTest" xml:space="preserve">
     <value>PropertyDateTimeTest</value>
   </data>
-  <data name="Zetbox.App.Test.PropertyDateTimeTest_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Test.PropertyDecimalTest" xml:space="preserve">
+	<data name="Zetbox.App.Test.PropertyDecimalTest" xml:space="preserve">
     <value>PropertyDecimalTest</value>
   </data>
-  <data name="Zetbox.App.Test.PropertyDecimalTest_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Test.PropertyDoubleTest" xml:space="preserve">
+	<data name="Zetbox.App.Test.PropertyDoubleTest" xml:space="preserve">
     <value>PropertyDoubleTest</value>
   </data>
-  <data name="Zetbox.App.Test.PropertyDoubleTest_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Test.PropertyEnumTest" xml:space="preserve">
+	<data name="Zetbox.App.Test.PropertyEnumTest" xml:space="preserve">
     <value>PropertyEnumTest</value>
   </data>
-  <data name="Zetbox.App.Test.PropertyEnumTest_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.GUI.PropertyFilterConfiguration" xml:space="preserve">
+	<data name="Zetbox.App.GUI.PropertyFilterConfiguration" xml:space="preserve">
     <value>PropertyFilterConfiguration</value>
   </data>
-  <data name="Zetbox.App.GUI.PropertyFilterConfiguration_description" xml:space="preserve">
+	<data name="Zetbox.App.GUI.PropertyFilterConfiguration_description" xml:space="preserve">
     <value>Abstract base class for Property Filter</value>
   </data>
-  <data name="Zetbox.App.Test.PropertyGuidTest" xml:space="preserve">
+	<data name="Zetbox.App.Test.PropertyGuidTest" xml:space="preserve">
     <value>PropertyGuidTest</value>
   </data>
-  <data name="Zetbox.App.Test.PropertyGuidTest_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Test.PropertyIntTest" xml:space="preserve">
+	<data name="Zetbox.App.Test.PropertyIntTest" xml:space="preserve">
     <value>PropertyIntTest</value>
   </data>
-  <data name="Zetbox.App.Test.PropertyIntTest_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Test.PropertyStringTest" xml:space="preserve">
+	<data name="Zetbox.App.Test.PropertyStringTest" xml:space="preserve">
     <value>PropertyStringTest</value>
   </data>
-  <data name="Zetbox.App.Test.PropertyStringTest_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Test.PropertyTestBase" xml:space="preserve">
+	<data name="Zetbox.App.Test.PropertyTestBase" xml:space="preserve">
     <value>PropertyTestBase</value>
   </data>
-  <data name="Zetbox.App.Test.PropertyTestBase_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.GUI.RangeFilterConfiguration" xml:space="preserve">
+	<data name="Zetbox.App.GUI.RangeFilterConfiguration" xml:space="preserve">
     <value>RangeFilterConfiguration</value>
   </data>
-  <data name="Zetbox.App.GUI.RangeFilterConfiguration_description" xml:space="preserve">
+	<data name="Zetbox.App.GUI.RangeFilterConfiguration_description" xml:space="preserve">
     <value>Filter configuration for filtering on a range of a Property </value>
   </data>
-  <data name="Zetbox.App.Base.ReadOnlyConstraint" xml:space="preserve">
+	<data name="Zetbox.App.Base.ReadOnlyConstraint" xml:space="preserve">
     <value>ReadOnlyConstraint</value>
   </data>
-  <data name="Zetbox.App.Base.ReadOnlyConstraint_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.ReadOnlyConstraint_description" xml:space="preserve">
     <value>Abstract base class for read only constraints</value>
   </data>
-  <data name="Zetbox.App.Base.RecurrenceRule" xml:space="preserve">
+	<data name="Zetbox.App.Base.RecurrenceRule" xml:space="preserve">
     <value>RecurrenceRule</value>
   </data>
-  <data name="Zetbox.App.Base.RecurrenceRule_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.RecurrenceRule_description" xml:space="preserve">
     <value>A recurrence rule</value>
   </data>
-  <data name="Zetbox.App.Test.RecurrenceRuleTester" xml:space="preserve">
+	<data name="Zetbox.App.Test.RecurrenceRuleTester" xml:space="preserve">
     <value>RecurrenceRuleTester</value>
   </data>
-  <data name="Zetbox.App.Test.RecurrenceRuleTester_description" xml:space="preserve">
+	<data name="Zetbox.App.Test.RecurrenceRuleTester_description" xml:space="preserve">
     <value>Tests the RecurrenceRule</value>
   </data>
-  <data name="Zetbox.App.Base.Relation" xml:space="preserve">
+	<data name="Zetbox.App.Base.Relation" xml:space="preserve">
     <value>Relation</value>
   </data>
-  <data name="Zetbox.App.Base.Relation_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.Relation_description" xml:space="preserve">
     <value>Describes a Relation between two Object Classes</value>
   </data>
-  <data name="Zetbox.App.Base.RelationEnd" xml:space="preserve">
+	<data name="Zetbox.App.Base.RelationEnd" xml:space="preserve">
     <value>RelationEnd</value>
   </data>
-  <data name="Zetbox.App.Base.RelationEnd_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.RelationEnd_description" xml:space="preserve">
     <value>Describes one end of a relation between two object classes</value>
   </data>
-  <data name="Zetbox.App.Test.RequiredParent" xml:space="preserve">
+	<data name="Zetbox.App.Test.RequiredParent" xml:space="preserve">
     <value>RequiredParent</value>
   </data>
-  <data name="Zetbox.App.Test.RequiredParent_description" xml:space="preserve">
+	<data name="Zetbox.App.Test.RequiredParent_description" xml:space="preserve">
     <value>Testclass for the required_parent tests: parent</value>
   </data>
-  <data name="Zetbox.App.Test.RequiredParentChild" xml:space="preserve">
+	<data name="Zetbox.App.Test.RequiredParentChild" xml:space="preserve">
     <value>RequiredParentChild</value>
   </data>
-  <data name="Zetbox.App.Test.RequiredParentChild_description" xml:space="preserve">
+	<data name="Zetbox.App.Test.RequiredParentChild_description" xml:space="preserve">
     <value>Testclass for the required_parent tests: child</value>
   </data>
-  <data name="Zetbox.App.Base.RoleMembership" xml:space="preserve">
+	<data name="Zetbox.App.Base.RoleMembership" xml:space="preserve">
     <value>RoleMembership</value>
   </data>
-  <data name="Zetbox.App.Base.RoleMembership_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.GUI.SavedListConfiguration" xml:space="preserve">
+	<data name="Zetbox.App.GUI.SavedListConfiguration" xml:space="preserve">
     <value>SavedListConfiguration</value>
   </data>
-  <data name="Zetbox.App.GUI.SavedListConfiguration_description" xml:space="preserve">
+	<data name="Zetbox.App.GUI.SavedListConfiguration_description" xml:space="preserve">
     <value>A configuration object for instance lists</value>
   </data>
-  <data name="Zetbox.App.Test.SecurityChangeRight" xml:space="preserve">
+	<data name="Zetbox.App.Test.SecurityChangeRight" xml:space="preserve">
     <value>SecurityChangeRight</value>
   </data>
-  <data name="Zetbox.App.Test.SecurityChangeRight_description" xml:space="preserve">
+	<data name="Zetbox.App.Test.SecurityChangeRight_description" xml:space="preserve">
     <value>Test if a user has only change rights</value>
   </data>
-  <data name="Zetbox.App.Test.SecurityTestChild" xml:space="preserve">
+	<data name="Zetbox.App.Test.SecurityTestChild" xml:space="preserve">
     <value>SecurityTestChild</value>
   </data>
-  <data name="Zetbox.App.Test.SecurityTestChild_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Test.SecurityTestParent" xml:space="preserve">
+	<data name="Zetbox.App.Test.SecurityTestParent" xml:space="preserve">
     <value>SecurityTestParent</value>
   </data>
-  <data name="Zetbox.App.Test.SecurityTestParent_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Base.Sequence" xml:space="preserve">
+	<data name="Zetbox.App.Base.Sequence" xml:space="preserve">
     <value>Sequence</value>
   </data>
-  <data name="Zetbox.App.Base.Sequence_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.Sequence_description" xml:space="preserve">
     <value>Provides the definition of a database sequence</value>
   </data>
-  <data name="Zetbox.App.Base.SequenceData" xml:space="preserve">
+	<data name="Zetbox.App.Base.SequenceData" xml:space="preserve">
     <value>SequenceData</value>
   </data>
-  <data name="Zetbox.App.Base.SequenceData_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Base.ServiceDescriptor" xml:space="preserve">
+	<data name="Zetbox.App.Base.ServiceDescriptor" xml:space="preserve">
     <value>ServiceDescriptor</value>
   </data>
-  <data name="Zetbox.App.Base.ServiceDescriptor_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.ServiceDescriptor_description" xml:space="preserve">
     <value>Descriptor Object for Zetbox Services</value>
   </data>
-  <data name="Zetbox.App.GUI.SinglePropertyFilterConfiguration" xml:space="preserve">
+	<data name="Zetbox.App.GUI.SinglePropertyFilterConfiguration" xml:space="preserve">
     <value>SinglePropertyFilterConfiguration</value>
   </data>
-  <data name="Zetbox.App.GUI.SinglePropertyFilterConfiguration_description" xml:space="preserve">
+	<data name="Zetbox.App.GUI.SinglePropertyFilterConfiguration_description" xml:space="preserve">
     <value>Filter configuration for filtering on a single value of a Property </value>
   </data>
-  <data name="Zetbox.App.SchemaMigration.SourceColumn" xml:space="preserve">
+	<data name="Zetbox.App.SchemaMigration.SourceColumn" xml:space="preserve">
     <value>SourceColumn</value>
   </data>
-  <data name="Zetbox.App.SchemaMigration.SourceColumn_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.SchemaMigration.SourceEnum" xml:space="preserve">
+	<data name="Zetbox.App.SchemaMigration.SourceEnum" xml:space="preserve">
     <value>SourceEnum</value>
   </data>
-  <data name="Zetbox.App.SchemaMigration.SourceEnum_description" xml:space="preserve">
+	<data name="Zetbox.App.SchemaMigration.SourceEnum_description" xml:space="preserve">
     <value>Mapps an Enum</value>
   </data>
-  <data name="Zetbox.App.SchemaMigration.SourceTable" xml:space="preserve">
+	<data name="Zetbox.App.SchemaMigration.SourceTable" xml:space="preserve">
     <value>SourceTable</value>
   </data>
-  <data name="Zetbox.App.SchemaMigration.SourceTable_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.SchemaMigration.StagingDatabase" xml:space="preserve">
+	<data name="Zetbox.App.SchemaMigration.StagingDatabase" xml:space="preserve">
     <value>StagingDatabase</value>
   </data>
-  <data name="Zetbox.App.SchemaMigration.StagingDatabase_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="at.dasz.DocumentManagement.StaticFile" xml:space="preserve">
+	<data name="at.dasz.DocumentManagement.StaticFile" xml:space="preserve">
     <value>StaticFile</value>
   </data>
-  <data name="at.dasz.DocumentManagement.StaticFile_description" xml:space="preserve">
+	<data name="at.dasz.DocumentManagement.StaticFile_description" xml:space="preserve">
     <value>Depricated</value>
   </data>
-  <data name="Zetbox.App.Base.StorageType" xml:space="preserve">
+	<data name="Zetbox.App.Base.StorageType" xml:space="preserve">
     <value>StorageType</value>
   </data>
-  <data name="Zetbox.App.Base.StorageType_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.StorageType_description" xml:space="preserve">
     <value>Storage Type of a 1:1 Releation.</value>
   </data>
-  <data name="Zetbox.App.Base.StringDefaultValue" xml:space="preserve">
+	<data name="Zetbox.App.Base.StringDefaultValue" xml:space="preserve">
     <value>StringDefaultValue</value>
   </data>
-  <data name="Zetbox.App.Base.StringDefaultValue_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.StringDefaultValue_description" xml:space="preserve">
     <value>Sets an string property with the configured default value</value>
   </data>
-  <data name="Zetbox.App.Base.StringParameter" xml:space="preserve">
+	<data name="Zetbox.App.Base.StringParameter" xml:space="preserve">
     <value>StringParameter</value>
   </data>
-  <data name="Zetbox.App.Base.StringParameter_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.StringParameter_description" xml:space="preserve">
     <value>Metadefinition Object for String Parameter.</value>
   </data>
-  <data name="Zetbox.App.Base.StringProperty" xml:space="preserve">
+	<data name="Zetbox.App.Base.StringProperty" xml:space="preserve">
     <value>StringProperty</value>
   </data>
-  <data name="Zetbox.App.Base.StringProperty_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.StringProperty_description" xml:space="preserve">
     <value>Metadefinition Object for String Properties.</value>
   </data>
-  <data name="Zetbox.App.Base.StringRangeConstraint" xml:space="preserve">
+	<data name="Zetbox.App.Base.StringRangeConstraint" xml:space="preserve">
     <value>StringRangeConstraint</value>
   </data>
-  <data name="Zetbox.App.Base.StringRangeConstraint_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Calendar.SyncProvider" xml:space="preserve">
+	<data name="Zetbox.App.Calendar.SyncProvider" xml:space="preserve">
     <value>SyncProvider</value>
   </data>
-  <data name="Zetbox.App.Calendar.SyncProvider_description" xml:space="preserve">
+	<data name="Zetbox.App.Calendar.SyncProvider_description" xml:space="preserve">
     <value>An abstract base class for sync providers</value>
   </data>
-  <data name="Zetbox.App.Base.TableMapping" xml:space="preserve">
+	<data name="Zetbox.App.Base.TableMapping" xml:space="preserve">
     <value>TableMapping</value>
   </data>
-  <data name="Zetbox.App.Base.TableMapping_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.TableMapping_description" xml:space="preserve">
     <value>Kind of table mapping</value>
   </data>
-  <data name="Zetbox.App.GUI.TagCache" xml:space="preserve">
+	<data name="Zetbox.App.GUI.TagCache" xml:space="preserve">
     <value>TagCache</value>
   </data>
-  <data name="Zetbox.App.GUI.TagCache_description" xml:space="preserve">
+	<data name="Zetbox.App.GUI.TagCache_description" xml:space="preserve">
     <value>Cache entity for property tags</value>
   </data>
-  <data name="Zetbox.App.Projekte.Task" xml:space="preserve">
+	<data name="Zetbox.App.Projekte.Task" xml:space="preserve">
     <value>Task</value>
   </data>
-  <data name="Zetbox.App.Projekte.Task_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Test.TestCustomObject" xml:space="preserve">
+	<data name="Zetbox.App.Test.TestCustomObject" xml:space="preserve">
     <value>TestCustomObject</value>
   </data>
-  <data name="Zetbox.App.Test.TestCustomObject_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Test.TestDecimal" xml:space="preserve">
+	<data name="Zetbox.App.Test.TestDecimal" xml:space="preserve">
     <value>TestDecimal</value>
   </data>
-  <data name="Zetbox.App.Test.TestDecimal_description" xml:space="preserve">
+	<data name="Zetbox.App.Test.TestDecimal_description" xml:space="preserve">
     <value>Testclass for Decimal DataType</value>
   </data>
-  <data name="Zetbox.App.Test.TestEnum" xml:space="preserve">
+	<data name="Zetbox.App.Test.TestEnum" xml:space="preserve">
     <value>TestEnum</value>
   </data>
-  <data name="Zetbox.App.Test.TestEnum_description" xml:space="preserve">
+	<data name="Zetbox.App.Test.TestEnum_description" xml:space="preserve">
     <value>A TestEnum</value>
   </data>
-  <data name="Zetbox.App.Test.TestObjClass" xml:space="preserve">
+	<data name="Zetbox.App.Test.TestObjClass" xml:space="preserve">
     <value>TestObjClass</value>
   </data>
-  <data name="Zetbox.App.Test.TestObjClass_description" xml:space="preserve">
+	<data name="Zetbox.App.Test.TestObjClass_description" xml:space="preserve">
     <value>A TestClass with many properties</value>
   </data>
-  <data name="Zetbox.App.Test.TestPhoneCompoundObject" xml:space="preserve">
+	<data name="Zetbox.App.Test.TestPhoneCompoundObject" xml:space="preserve">
     <value>TestPhoneCompoundObject</value>
   </data>
-  <data name="Zetbox.App.Test.TestPhoneCompoundObject_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Test.TestStudent" xml:space="preserve">
+	<data name="Zetbox.App.Test.TestStudent" xml:space="preserve">
     <value>TestStudent</value>
   </data>
-  <data name="Zetbox.App.Test.TestStudent_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.GUI.Toolkit" xml:space="preserve">
+	<data name="Zetbox.App.GUI.Toolkit" xml:space="preserve">
     <value>Toolkit</value>
   </data>
-  <data name="Zetbox.App.GUI.Toolkit_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Test.TPHBaseObj" xml:space="preserve">
+	<data name="Zetbox.App.Test.TPHBaseObj" xml:space="preserve">
     <value>TPHBaseObj</value>
   </data>
-  <data name="Zetbox.App.Test.TPHBaseObj_description" xml:space="preserve">
+	<data name="Zetbox.App.Test.TPHBaseObj_description" xml:space="preserve">
     <value>Base object for testing TPH</value>
   </data>
-  <data name="Zetbox.App.Test.TPHDerivedAObj" xml:space="preserve">
+	<data name="Zetbox.App.Test.TPHDerivedAObj" xml:space="preserve">
     <value>TPHDerivedAObj</value>
   </data>
-  <data name="Zetbox.App.Test.TPHDerivedAObj_description" xml:space="preserve">
+	<data name="Zetbox.App.Test.TPHDerivedAObj_description" xml:space="preserve">
     <value>TPH derived object named "A"</value>
   </data>
-  <data name="Zetbox.App.Test.TPHDerivedBObj" xml:space="preserve">
+	<data name="Zetbox.App.Test.TPHDerivedBObj" xml:space="preserve">
     <value>TPHDerivedBObj</value>
   </data>
-  <data name="Zetbox.App.Test.TPHDerivedBObj_description" xml:space="preserve">
+	<data name="Zetbox.App.Test.TPHDerivedBObj_description" xml:space="preserve">
     <value>TPH derived object named "B"</value>
   </data>
-  <data name="Zetbox.App.Base.ValueTypeProperty" xml:space="preserve">
+	<data name="Zetbox.App.Base.ValueTypeProperty" xml:space="preserve">
     <value>ValueTypeProperty</value>
   </data>
-  <data name="Zetbox.App.Base.ValueTypeProperty_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.ValueTypeProperty_description" xml:space="preserve">
     <value>Metadefinition Object for ValueType Properties. This class is abstract.</value>
   </data>
-  <data name="Zetbox.App.GUI.ViewDescriptor" xml:space="preserve">
+	<data name="Zetbox.App.GUI.ViewDescriptor" xml:space="preserve">
     <value>ViewDescriptor</value>
   </data>
-  <data name="Zetbox.App.GUI.ViewDescriptor_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.GUI.ViewModelDescriptor" xml:space="preserve">
+	<data name="Zetbox.App.GUI.ViewModelDescriptor" xml:space="preserve">
     <value>ViewModelDescriptor</value>
   </data>
-  <data name="Zetbox.App.GUI.ViewModelDescriptor_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Base.ViewReadOnlyConstraint" xml:space="preserve">
+	<data name="Zetbox.App.Base.ViewReadOnlyConstraint" xml:space="preserve">
     <value>ViewReadOnlyConstraint</value>
   </data>
-  <data name="Zetbox.App.Base.ViewReadOnlyConstraint_description" xml:space="preserve">
+	<data name="Zetbox.App.Base.ViewReadOnlyConstraint_description" xml:space="preserve">
     <value>Item is readonly in view but changable on the server/client</value>
   </data>
-  <data name="Zetbox.App.GUI.WidthHint" xml:space="preserve">
+	<data name="Zetbox.App.GUI.WidthHint" xml:space="preserve">
     <value>WidthHint</value>
   </data>
-  <data name="Zetbox.App.GUI.WidthHint_description" xml:space="preserve">
+	<data name="Zetbox.App.GUI.WidthHint_description" xml:space="preserve">
     <value>A hint fo a requested width</value>
   </data>
-  <data name="Zetbox.App.Calendar.WorkSchedule" xml:space="preserve">
+	<data name="Zetbox.App.Calendar.WorkSchedule" xml:space="preserve">
     <value>WorkSchedule</value>
   </data>
-  <data name="Zetbox.App.Calendar.WorkSchedule_description" xml:space="preserve">
+	<data name="Zetbox.App.Calendar.WorkSchedule_description" xml:space="preserve">
     <value>A WorkSchedule describing recurrent working hours</value>
   </data>
-  <data name="Zetbox.App.Calendar.WorkScheduleRule" xml:space="preserve">
+	<data name="Zetbox.App.Calendar.WorkScheduleRule" xml:space="preserve">
     <value>WorkScheduleRule</value>
   </data>
-  <data name="Zetbox.App.Calendar.WorkScheduleRule_description" xml:space="preserve">
+	<data name="Zetbox.App.Calendar.WorkScheduleRule_description" xml:space="preserve">
     <value>Abstract base class for WorkSchedule Rules describing recurrent working hours</value>
   </data>
-  <data name="Zetbox.App.Calendar.WorkScheduleSyncProvider" xml:space="preserve">
+	<data name="Zetbox.App.Calendar.WorkScheduleSyncProvider" xml:space="preserve">
     <value>WorkScheduleSyncProvider</value>
   </data>
-  <data name="Zetbox.App.Calendar.WorkScheduleSyncProvider_description" xml:space="preserve">
+	<data name="Zetbox.App.Calendar.WorkScheduleSyncProvider_description" xml:space="preserve">
     <value>Sync provider for work schedules</value>
   </data>
-  <data name="Zetbox.App.GUI.YearFilterConfiguration" xml:space="preserve">
+	<data name="Zetbox.App.GUI.YearFilterConfiguration" xml:space="preserve">
     <value>YearFilterConfiguration</value>
   </data>
-  <data name="Zetbox.App.GUI.YearFilterConfiguration_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Zetbox.App.Calendar.YearlyWorkScheduleRule" xml:space="preserve">
+	<data name="Zetbox.App.Calendar.YearlyWorkScheduleRule" xml:space="preserve">
     <value>YearlyWorkScheduleRule</value>
   </data>
-  <data name="Zetbox.App.Calendar.YearlyWorkScheduleRule_description" xml:space="preserve">
+	<data name="Zetbox.App.Calendar.YearlyWorkScheduleRule_description" xml:space="preserve">
     <value>This rule applies every year. This class is abstract.</value>
   </data>
 </root>

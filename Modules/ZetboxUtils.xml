@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2014-02-26T10:41:47Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2014-03-05T20:06:40Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -5424,7 +5424,7 @@ public static void isValid_CreatedOn(File obj, PropertyIsValidEventArgs e)
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="76e29530-9252-4c2a-bae4-503f3b6dcd29">
     <ZetboxBase:CategoryTags>Main</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2014-02-10T14:48:41.122911Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2014-03-05T19:06:40.727982Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_Excerpt(File obj, PropertyGetterEventArgs&lt;at.dasz.DocumentManagement.Excerpt&gt; e)
 {
@@ -5449,6 +5449,7 @@ public static void isValid_Excerpt(File obj, PropertyIsValidEventArgs e)
 
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2013-05-07T14:21:30.975627Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>A searchable excerpt</ZetboxBase:Description>
     <ZetboxBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</ZetboxBase:Module>
     <ZetboxBase:Name>Excerpt</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6</ZetboxBase:ObjectClass>
@@ -5497,7 +5498,7 @@ public static void isValid_ExportGuid(File obj, PropertyIsValidEventArgs e)
   </ZetboxBase:GuidProperty>
   <ZetboxBase:BoolProperty ExportGuid="6942c3e7-ba7b-4e9c-b7fb-644c5aa1c73f">
     <ZetboxBase:CategoryTags>Main</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2014-02-10T14:54:11.557911Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2014-03-05T19:06:40.727982Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_IsFileReadonly(File obj, PropertyGetterEventArgs&lt;bool&gt; e)
 {
@@ -5523,7 +5524,7 @@ public static void isValid_IsFileReadonly(File obj, PropertyIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2014-02-10T14:44:36.135911Z</ZetboxBase:CreatedOn>
     <ZetboxBase:DefaultValue>a96ff875-e9a9-4b3b-a50b-b29487665303</ZetboxBase:DefaultValue>
-    <ZetboxBase:Description>This file cannot be changed when the flas is set.</ZetboxBase:Description>
+    <ZetboxBase:Description>This file cannot be changed when the flas is set</ZetboxBase:Description>
     <ZetboxBase:Label>Is readonly</ZetboxBase:Label>
     <ZetboxBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</ZetboxBase:Module>
     <ZetboxBase:Name>IsFileReadonly</ZetboxBase:Name>
@@ -5536,7 +5537,7 @@ public static void isValid_IsFileReadonly(File obj, PropertyIsValidEventArgs e)
   </ZetboxBase:BoolProperty>
   <ZetboxBase:BoolProperty ExportGuid="0b0775d4-9ded-472d-aac5-d1cd63b97237">
     <ZetboxBase:CategoryTags>Revisions</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2014-02-10T14:48:41.122911Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2014-03-05T19:06:40.727982Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_KeepRevisions(File obj, PropertyGetterEventArgs&lt;bool&gt; e)
 {
@@ -5562,7 +5563,7 @@ public static void isValid_KeepRevisions(File obj, PropertyIsValidEventArgs e)
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2014-02-10T14:46:00.991911Z</ZetboxBase:CreatedOn>
     <ZetboxBase:DefaultValue>62ffdd2f-1c34-40cd-a211-1378b28cd027</ZetboxBase:DefaultValue>
-    <ZetboxBase:Description>Keeps revisions of this file.</ZetboxBase:Description>
+    <ZetboxBase:Description>Keeps revisions of this file</ZetboxBase:Description>
     <ZetboxBase:Label>Keep revisions</ZetboxBase:Label>
     <ZetboxBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</ZetboxBase:Module>
     <ZetboxBase:Name>KeepRevisions</ZetboxBase:Name>
@@ -5614,7 +5615,7 @@ public static void isValid_Name(File obj, PropertyIsValidEventArgs e)
   </ZetboxBase:StringProperty>
   <ZetboxBase:ObjectReferenceProperty ExportGuid="ec544fe0-8189-4bb2-a3d1-3cb61d815aa5">
     <ZetboxBase:CategoryTags>Revisions</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2014-02-10T14:48:41.122911Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2014-03-05T19:06:40.727982Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_Revisions(File obj, PropertyGetterEventArgs&lt;IList&lt;Zetbox.App.Base.Blob&gt;&gt; e)
 {
@@ -5639,6 +5640,7 @@ public static void isValid_Revisions(File obj, PropertyIsValidEventArgs e)
 
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2010-03-12T23:22:54Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Revisions of this file</ZetboxBase:Description>
     <ZetboxBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</ZetboxBase:Module>
     <ZetboxBase:Name>Revisions</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>8043ccd8-6ff1-4b45-b04b-e0a0f19ce1b6</ZetboxBase:ObjectClass>
@@ -5649,7 +5651,7 @@ public static void isValid_Revisions(File obj, PropertyIsValidEventArgs e)
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:StringProperty ExportGuid="b4f41179-44f8-4235-b272-48f3f1452da7">
     <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2014-02-10T14:48:41.122911Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2014-03-05T19:06:40.727982Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_Tags(File obj, PropertyGetterEventArgs&lt;string&gt; e)
 {
@@ -5674,6 +5676,7 @@ public static void isValid_Tags(File obj, PropertyIsValidEventArgs e)
 
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2013-07-23T07:10:24.284219Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Tags describing this file</ZetboxBase:Description>
     <GUI:FilterConfiguration>e13e6cd9-2b89-4b1e-b91e-c6451b1f791b</GUI:FilterConfiguration>
     <ZetboxBase:Module>21dcfc7c-ab5c-4d04-8a41-9759b23907f9</ZetboxBase:Module>
     <ZetboxBase:Name>Tags</ZetboxBase:Name>

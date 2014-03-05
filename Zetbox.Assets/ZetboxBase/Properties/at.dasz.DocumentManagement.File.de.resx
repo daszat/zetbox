@@ -118,46 +118,46 @@
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
 	<data name="AttachedTo_label" xml:space="preserve">
-    <value>Attached to</value>
+    <value>Angehängt zu</value>
   </data>
 	<data name="AttachedTo_description" xml:space="preserve">
-    <value>Primary attached to</value>
+    <value>Anhang zu</value>
   </data>
 	<data name="Blob_label" xml:space="preserve">
-    <value>Blob</value>
+    <value>Inhalt</value>
   </data>
 	<data name="Blob_description" xml:space="preserve">
-    <value>Current File Content</value>
+    <value>Aktueller Datei-Inhalt</value>
   </data>
 	<data name="ChangedBy_label" xml:space="preserve">
     <value>ChangedBy</value>
   </data>
 	<data name="ChangedBy_description" xml:space="preserve">
-    <value>Identity which changed this object</value>
+    <value>Benutzer, der dieses Objekt geändert hat</value>
   </data>
 	<data name="ChangedOn_label" xml:space="preserve">
     <value>ChangedOn</value>
   </data>
 	<data name="ChangedOn_description" xml:space="preserve">
-    <value>Date and time where this object was changed</value>
+    <value>Datum und Zeit, in der dieses Objekt wurde geändert</value>
   </data>
 	<data name="CreatedBy_label" xml:space="preserve">
     <value>CreatedBy</value>
   </data>
 	<data name="CreatedBy_description" xml:space="preserve">
-    <value>Identity which created this object</value>
+    <value>Benutzer,der dieses Objekt erstellt hat</value>
   </data>
 	<data name="CreatedOn_label" xml:space="preserve">
     <value>CreatedOn</value>
   </data>
 	<data name="CreatedOn_description" xml:space="preserve">
-    <value>Date and time where this object was created</value>
+    <value>Datum und Zeit, in der dieses Objekt erstellt wurde</value>
   </data>
 	<data name="Excerpt_label" xml:space="preserve">
-    <value>Excerpt</value>
+    <value>Inhalt</value>
   </data>
 	<data name="Excerpt_description" xml:space="preserve">
-    <value>A searchable excerpt</value>
+    <value>Ein durchsuchbarer Inhalt</value>
   </data>
 	<data name="ExportGuid_label" xml:space="preserve">
     <value>ExportGuid</value>
@@ -166,33 +166,33 @@
     <value>Export Guid</value>
   </data>
 	<data name="IsFileReadonly_label" xml:space="preserve">
-    <value>Is readonly</value>
+    <value>Nur lesen</value>
   </data>
 	<data name="IsFileReadonly_description" xml:space="preserve">
-    <value>This file cannot be changed when the flas is set</value>
+    <value>Diese Datei kann nicht geändert werden</value>
   </data>
 	<data name="KeepRevisions_label" xml:space="preserve">
-    <value>Keep revisions</value>
+    <value>Revisionen speichern</value>
   </data>
 	<data name="KeepRevisions_description" xml:space="preserve">
-    <value>Keeps revisions of this file</value>
+    <value>Speichert Revisionen dieser Datei</value>
   </data>
 	<data name="Name_label" xml:space="preserve">
     <value>Name</value>
   </data>
 	<data name="Name_description" xml:space="preserve">
-    <value>Filename</value>
+    <value>Dateiname</value>
   </data>
 	<data name="Revisions_label" xml:space="preserve">
-    <value>Revisions</value>
+    <value>Revisionen</value>
   </data>
 	<data name="Revisions_description" xml:space="preserve">
-    <value>Revisions of this file</value>
+    <value>Revisionen dieser Datei</value>
   </data>
 	<data name="Tags_label" xml:space="preserve">
-    <value>Tags</value>
+    <value>Schlagworte</value>
   </data>
 	<data name="Tags_description" xml:space="preserve">
-    <value>Tags describing this file</value>
+    <value>Schlagwörter, die diese Datei beschreiben</value>
   </data>
 </root>

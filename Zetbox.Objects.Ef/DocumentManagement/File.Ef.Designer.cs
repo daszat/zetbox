@@ -593,7 +593,7 @@ namespace at.dasz.DocumentManagement
         public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnCreatedOn_IsValid;
 
         /// <summary>
-        /// 
+        /// A searchable excerpt
         /// </summary>
     /*
     Relation: FK_File_has_Excerpt
@@ -794,7 +794,7 @@ namespace at.dasz.DocumentManagement
         public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnExportGuid_IsValid;
 
         /// <summary>
-        /// This file cannot be changed when the flas is set.
+        /// This file cannot be changed when the flas is set
         /// </summary>
         // value type property
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -876,7 +876,7 @@ namespace at.dasz.DocumentManagement
         public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnIsFileReadonly_IsValid;
 
         /// <summary>
-        /// Keeps revisions of this file.
+        /// Keeps revisions of this file
         /// </summary>
         // value type property
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
@@ -1027,7 +1027,7 @@ namespace at.dasz.DocumentManagement
         public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnName_IsValid;
 
         /// <summary>
-        /// 
+        /// Revisions of this file
         /// </summary>
     /*
     Relation: FK_Document_has_Revisions
@@ -1097,7 +1097,7 @@ public static event PropertyListChangedHandler<at.dasz.DocumentManagement.File> 
         public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnRevisions_IsValid;
 
         /// <summary>
-        /// 
+        /// Tags describing this file
         /// </summary>
         // value type property
         // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty

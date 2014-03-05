@@ -214,6 +214,7 @@
     <EmbeddedResource Include="ZetboxBase\Properties\at.dasz.DocumentManagement.Document.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="ZetboxBase\Properties\at.dasz.DocumentManagement.Excerpt.resx" />
     <EmbeddedResource Include="ZetboxBase\Properties\at.dasz.DocumentManagement.Excerpt.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="ZetboxBase\Properties\at.dasz.DocumentManagement.File.de.resx" />
     <EmbeddedResource Include="ZetboxBase\Properties\at.dasz.DocumentManagement.File.resx" />
     <EmbeddedResource Include="ZetboxBase\Properties\at.dasz.DocumentManagement.File.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="ZetboxBase\Properties\at.dasz.DocumentManagement.FileImportConfiguration.resx" />
@@ -318,6 +319,7 @@
     <EmbeddedResource Include="ZetboxBase\Properties\Zetbox.App.Base.ObjectReferencePlaceholderProperty.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="ZetboxBase\Properties\Zetbox.App.Base.ObjectReferenceProperty.resx" />
     <EmbeddedResource Include="ZetboxBase\Properties\Zetbox.App.Base.ObjectReferenceProperty.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="ZetboxBase\Properties\Zetbox.App.Base.OpenID.resx" />
     <EmbeddedResource Include="ZetboxBase\Properties\Zetbox.App.Base.Property.resx" />
     <EmbeddedResource Include="ZetboxBase\Properties\Zetbox.App.Base.Property.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="ZetboxBase\Properties\Zetbox.App.Base.RecurrenceRule.resx" />
@@ -432,6 +434,7 @@
     <EmbeddedResource Include="ZetboxBase\Properties\Zetbox.App.Test.Company.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="ZetboxBase\Properties\Zetbox.App.Test.DeactivatableTestObject.resx" />
     <EmbeddedResource Include="ZetboxBase\Properties\Zetbox.App.Test.DeactivatableTestObject.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="ZetboxBase\Properties\Zetbox.App.Test.DocumentTestObject.resx" />
     <EmbeddedResource Include="ZetboxBase\Properties\Zetbox.App.Test.EventTestObject.resx" />
     <EmbeddedResource Include="ZetboxBase\Properties\Zetbox.App.Test.EventTestObject.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="ZetboxBase\Properties\Zetbox.App.Test.Fragebogen.resx" />
@@ -450,6 +453,7 @@
     <EmbeddedResource Include="ZetboxBase\Properties\Zetbox.App.Test.One_to_N_relations_N.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="ZetboxBase\Properties\Zetbox.App.Test.One_to_N_relations_One.resx" />
     <EmbeddedResource Include="ZetboxBase\Properties\Zetbox.App.Test.One_to_N_relations_One.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="ZetboxBase\Properties\Zetbox.App.Test.One_to_N_relations_OrderedN.resx" />
     <EmbeddedResource Include="ZetboxBase\Properties\Zetbox.App.Test.OrderedNEnd.resx" />
     <EmbeddedResource Include="ZetboxBase\Properties\Zetbox.App.Test.OrderedNEnd.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="ZetboxBase\Properties\Zetbox.App.Test.OrderedOneEnd.resx" />
