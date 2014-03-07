@@ -65,6 +65,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AspNetClientModule.cs" />
+    <Compile Include="ASPNETToolkitResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ASPNETToolkitResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="AspNetViewModelFactory.cs" />
     <Compile Include="HtmlHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -100,6 +105,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ASPNETToolkitResources.de.resx" />
+    <EmbeddedResource Include="ASPNETToolkitResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ASPNETToolkitResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />

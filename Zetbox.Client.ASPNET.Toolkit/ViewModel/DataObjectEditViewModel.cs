@@ -60,11 +60,11 @@ namespace Zetbox.Client.ASPNET
                 {
                     if (ID != default(int))
                     {
-                        _object = DataContext.Find<TModel>(ID);
+                        _object = FindObject();
                     }
                     else
                     {
-                        _object = DataContext.Create<TModel>();
+                        _object = CreateNewInstance();
                     }
                 }
                 return _object;
@@ -78,10 +78,25 @@ namespace Zetbox.Client.ASPNET
             {
                 if (_viewModel == null)
                 {
-                    _viewModel = (TViewModel)DataObjectViewModel.Fetch(ViewModelFactory, DataContext, null, Object);
+                    _viewModel = FetchViewModel();
                 }
                 return _viewModel;
             }
+        }
+
+        protected virtual TModel CreateNewInstance()
+        {
+            return DataContext.Create<TModel>();
+        }
+
+        protected virtual TModel FindObject()
+        {
+            return DataContext.Find<TModel>(ID);
+        }
+
+        protected virtual TViewModel FetchViewModel()
+        {
+            return (TViewModel)DataObjectViewModel.Fetch(ViewModelFactory, DataContext, null, Object);
         }
     }
 }
