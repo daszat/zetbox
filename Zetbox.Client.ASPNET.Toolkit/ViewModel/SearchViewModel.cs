@@ -12,6 +12,20 @@ namespace Zetbox.Client.ASPNET
     using System.Web.Mvc;
     using System.ComponentModel;
 
+    public interface ISearchViewModel
+    {
+        string Name { get; }
+
+        int PageSize { get; }
+        int Page { get; }
+        int Count { get; }
+        bool ShowNextPage { get; }
+        int NextPage { get; }
+        bool ShowPrevPage { get; }
+        int PrevPage { get; }
+        string CountAsText { get; }
+    }
+
     /// <summary>
     /// The only purpose for this kind of ViewModel is to support ASP.NET MVC to recreated it's state while searching for objects.
     /// As a result the well known DataObjectViewModel are passed back.
@@ -174,7 +188,7 @@ namespace Zetbox.Client.ASPNET
 
                 if (ShowNextPage || Page != 1)
                 {
-                    var from = (Page - 1) * PageSize;
+                    var from = Page * PageSize;
                     countStr = string.Format("{0} - {1}", from + 1, from + Count);
                 }
                 else
