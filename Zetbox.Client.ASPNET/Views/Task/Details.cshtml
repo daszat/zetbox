@@ -9,19 +9,19 @@
         @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "button" })
     </div>
     <div class="editor-label">
-        @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["Aufwand"])
+        @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["Aufwand"], asReadOnly: true)
     </div>
     <div class="editor-field">
         @Html.ZbDisplayFor(model => model.ViewModel.PropertyModelsByName["Aufwand"])
     </div>
     <div class="editor-label">
-        @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["DatumVon"])
+        @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["DatumVon"], asReadOnly: true)
     </div>
     <div class="editor-field">
         @Html.ZbDisplayFor(model => model.ViewModel.PropertyModelsByName["DatumVon"])
     </div>
     <div class="editor-label">
-        @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["DatumBis"])
+        @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["DatumBis"], asReadOnly: true)
     </div>
     <div class="editor-field">
         @Html.ZbDisplayFor(model => model.ViewModel.PropertyModelsByName["DatumBis"])

@@ -11,7 +11,7 @@
     @Html.ValidationSummary(false)
     <div class="AreaGroup1">
         <div class="editor-label">
-            @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["Name"])
+            @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["Name"], new { @class = "big-label" })
         </div>
         <div class="editor-field">
             @Html.EditorFor(model => model.ViewModel.PropertyModelsByName["Name"])

@@ -10,25 +10,25 @@
         @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "button" })
     </div>
     <div class="editor-label">
-        @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["Nullable"])
+        @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["Nullable"], asReadOnly: true)
     </div>
     <div class="editor-field">
         @Html.ZbDisplayFor(model => model.ViewModel.PropertyModelsByName["Nullable"])
     </div>
     <div class="editor-label">
-        @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["NullableWithDefault"])
+        @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["NullableWithDefault"], asReadOnly: true)
     </div>
     <div class="editor-field">
         @Html.ZbDisplayFor(model => model.ViewModel.PropertyModelsByName["NullableWithDefault"])
     </div>
     <div class="editor-label">
-        @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["Standard"])
+        @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["Standard"], asReadOnly: true)
     </div>
     <div class="editor-field">
         @Html.ZbDisplayFor(model => model.ViewModel.PropertyModelsByName["Standard"])
     </div>
     <div class="editor-label">
-        @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["StandardWithDefault"])
+        @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["StandardWithDefault"], asReadOnly: true)
     </div>
     <div class="editor-field">
         @Html.ZbDisplayFor(model => model.ViewModel.PropertyModelsByName["StandardWithDefault"])
