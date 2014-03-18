@@ -257,7 +257,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\jquery-1.9.1.min.map" />
-    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
     <Content Include="Views\Project\Index.cshtml" />
     <Content Include="Views\Project\Details.cshtml" />
     <Content Include="Views\Task\Details.cshtml" />
@@ -267,6 +266,22 @@
     <Content Include="Views\EnumTest\Create.cshtml" />
     <Content Include="Views\EnumTest\Edit.cshtml" />
     <Content Include="Views\EnumTest\Details.cshtml" />
+    <Content Include="Views\Shared\_Paging.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\EnumerationValueViewModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\StringValueViewModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\NullableBoolPropertyViewModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\EnumerationValueViewModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\NullableDateTimePropertyViewModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\StringValueViewModel.cshtml" />
+    <Content Include="Views\Project\Create.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\NullableIntPropertyViewModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\NullableDoublePropertyViewModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\NullableDecimalPropertyViewModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\NullableBoolPropertyViewModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\NullableDateTimePropertyViewModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\NullableDecimalPropertyViewModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\NullableDoublePropertyViewModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\NullableIntPropertyViewModel.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

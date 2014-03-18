@@ -51,7 +51,7 @@ namespace Zetbox.Client.ASPNET
     /// <remarks>
     /// Currently each derived class has to implement it's own search fields and override ApplyFilter()
     /// </remarks>
-    public class GenericSearchViewModel<TModel, TViewModel> : ViewModel
+    public class GenericSearchViewModel<TModel, TViewModel> : ViewModel, ISearchViewModel
         where TModel : class, IDataObject
         where TViewModel : DataObjectViewModel
     {
@@ -79,7 +79,7 @@ namespace Zetbox.Client.ASPNET
 
         protected virtual IQueryable<TModel> ApplyPaging(IQueryable<TModel> qry)
         {
-            return qry.Skip(Page * PageSize).Take(PageSize);
+            return qry.Skip((Page - 1) * PageSize).Take(PageSize);
         }
 
         protected virtual TViewModel FetchResultViewModel(TModel obj)
@@ -133,7 +133,39 @@ namespace Zetbox.Client.ASPNET
             return 25;
         }
 
-        public int Page { get; set; }
+        private int _page = 1;
+        /// <summary>
+        /// Current Page
+        /// </summary>
+        public int Page
+        {
+            get
+            {
+                if (IsNavigating && _page != NavigateTo)
+                {
+                    // Respect users wish
+                    _page = NavigateTo;
+                }
+                return _page;
+            }
+            set
+            {
+                _page = value;
+            }
+        }
+
+        /// <summary>
+        /// Page to navigate to, used in post-back scenario
+        /// </summary>
+        public int NavigateTo { get; set; }
+        public bool IsNavigating
+        {
+            get
+            {
+                return NavigateTo != default(int);
+            }
+        }
+
         public int Count
         {
             get
@@ -161,7 +193,7 @@ namespace Zetbox.Client.ASPNET
         {
             get
             {
-                return Page > 0;
+                return Page > 1;
             }
         }
         public int PrevPage
@@ -186,9 +218,9 @@ namespace Zetbox.Client.ASPNET
             {
                 string countStr = string.Empty;
 
-                if (ShowNextPage || Page != 1)
+                if (Count > 0 && (ShowNextPage || Page != 1))
                 {
-                    var from = Page * PageSize;
+                    var from = (Page - 1) * PageSize;
                     countStr = string.Format("{0} - {1}", from + 1, from + Count);
                 }
                 else
