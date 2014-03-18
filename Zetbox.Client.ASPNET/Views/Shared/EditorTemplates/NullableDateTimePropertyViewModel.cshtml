@@ -1,0 +1,13 @@
+﻿@model NullableDateTimePropertyViewModel
+
+@using Zetbox.API
+@using Zetbox.Client.Presentables.ValueViewModels
+
+@if (Model.IsReadOnly)
+{
+    @Html.DisplayFor(m => m.FormattedValue, new { @class = ViewData["class"] })
+}
+else
+{
+    @Html.TextBoxFor(m => m.FormattedValue, new { @class = "datePicker" + ViewData["class"], placeholder = Model.ToolTip })
+}

@@ -1,0 +1,6 @@
+﻿@model StringValueViewModel
+
+@using Zetbox.API
+@using Zetbox.Client.Presentables.ValueViewModels
+
+@Html.DisplayFor(m => m.FormattedValue, new { @class = ViewData["class"] })

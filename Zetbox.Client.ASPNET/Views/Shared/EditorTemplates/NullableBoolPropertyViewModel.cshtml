@@ -1,0 +1,13 @@
+﻿@model NullableBoolPropertyViewModel
+
+@using Zetbox.API
+@using Zetbox.Client.Presentables.ValueViewModels
+
+@if (Model.IsReadOnly)
+{
+    @Html.DisplayFor(m => m.FormattedValue, new { @class = ViewData["class"] })
+}
+else
+{
+    @Html.CheckBoxFor(m => m.Value, new { @class = ViewData["class"], placeholder = Model.ToolTip })
+}

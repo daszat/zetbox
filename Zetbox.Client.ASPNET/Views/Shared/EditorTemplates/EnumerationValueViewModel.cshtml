@@ -1,0 +1,16 @@
+﻿@model EnumerationValueViewModel
+
+@using Zetbox.Client.ASPNET
+@using Zetbox.Client.Presentables.ValueViewModels
+
+@Html.DropDownListFor(
+    m => m.Value,
+    Model.PossibleValues
+         .Select(i => new SelectListItem()
+         {
+             Text = i.Value,
+             Value = i.Key != null ? i.Key.Value.ToString() : string.Empty,
+             Selected = i.Key == Model.Value
+         }),
+    new { @class = "form-control " + ViewData["class"], placeholder = Model.ToolTip }
+)
