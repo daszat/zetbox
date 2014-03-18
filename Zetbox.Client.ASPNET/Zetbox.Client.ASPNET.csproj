@@ -282,6 +282,8 @@
     <Content Include="Views\Shared\DisplayTemplates\NullableDecimalPropertyViewModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\NullableDoublePropertyViewModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\NullableIntPropertyViewModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ObjectReferenceViewModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\ObjectReferenceViewModel.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
