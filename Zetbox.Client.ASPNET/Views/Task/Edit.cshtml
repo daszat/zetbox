@@ -14,38 +14,31 @@
             @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["Name"])
         </div>
         <div class="editor-field">
-            @Html.ZbEditorFor(model => model.ViewModel.PropertyModelsByName["Name"])
+            @Html.EditorFor(model => model.ViewModel.PropertyModelsByName["Name"])
         </div>
         <div class="editor-label">
             @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["Aufwand"])
         </div>
         <div class="editor-field">
-            @Html.ZbEditorFor(model => model.ViewModel.PropertyModelsByName["Aufwand"])
+            @Html.EditorFor(model => model.ViewModel.PropertyModelsByName["Aufwand"])
         </div>
         <div class="editor-label">
             @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["DatumVon"])
         </div>
         <div class="editor-field">
-            @Html.ZbEditorFor(model => model.ViewModel.PropertyModelsByName["DatumVon"])
+            @Html.EditorFor(model => model.ViewModel.PropertyModelsByName["DatumVon"])
         </div>
         <div class="editor-label">
             @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["DatumBis"])
         </div>
         <div class="editor-field">
-            @Html.ZbEditorFor(model => model.ViewModel.PropertyModelsByName["DatumBis"])
+            @Html.EditorFor(model => model.ViewModel.PropertyModelsByName["DatumBis"])
         </div>
         <div class="editor-label">
             @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["Projekt"])
         </div>
         <div class="editor-field">
-            @Html.DropDownListFor(model => model.ViewModel.PropertyModelsByName["Projekt"], 
-                ((Zetbox.Client.Presentables.ValueViewModels.ObjectReferenceViewModel)Model.ViewModel.PropertyModelsByName["Projekt"])
-                    .PossibleValues
-                    .Select(i => new SelectListItem() 
-                    { 
-                        Value = ((Zetbox.Client.Presentables.DataObjectViewModel)i).ID.ToString(), 
-                        Text = i.Name 
-                    }))
+            @Html.EditorFor(model => model.ViewModel.PropertyModelsByName["Projekt"])
         </div>
     </div>
     <p>

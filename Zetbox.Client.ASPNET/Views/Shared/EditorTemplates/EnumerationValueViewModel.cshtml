@@ -14,3 +14,4 @@
          }),
     new { @class = "form-control " + ViewData["class"], placeholder = Model.ToolTip }
 )
+@Html.ValidationMessageFor(model => model.Value)

@@ -10,4 +10,5 @@
 else
 {
     @Html.TextBoxFor(m => m.FormattedValue, new { @class = "datePicker" + ViewData["class"], placeholder = Model.ToolTip })
+    @Html.ValidationMessageFor(model => model.FormattedValue)
 }

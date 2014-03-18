@@ -87,6 +87,7 @@ namespace Zetbox.Client.ASPNET
         /// <param name="htmlFieldName"></param>
         /// <param name="additionalViewData"></param>
         /// <returns></returns>
+        [Obsolete("Use MVC Editor Templates instead!")]
         public static MvcHtmlString ZbEditorFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, string templateName = null, string htmlFieldName = null, object additionalViewData = null)
             where TValue : BaseValueViewModel
         {
@@ -122,6 +123,7 @@ namespace Zetbox.Client.ASPNET
         #endregion
 
         #region ValidationMessageFor
+        [Obsolete("Add them in MVC Editor Templates instead!")]
         public static MvcHtmlString ZbValidationMessageFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, string validationMessage = null, object htmlAttributes = null)
              where TValue : BaseValueViewModel
         {
