@@ -139,13 +139,15 @@ namespace Zetbox.DalProvider.Memory
                 }
                 else
                 {
+                    Func<T, bool> aFilter = i => i.AObject == parent;
+                    Func<T, bool> bFilter = i => i.BObject == parent;
                     // TODO: #1571 This method expects IF Types, but Impl types are passed
                     switch (endRole)
                     {
                         case RelationEndRole.A:
-                            return GetPersistenceObjectQuery(GetImplementationType(typeof(T)).ToInterfaceType()).Cast<T>().Where(i => i.AObject == parent).ToList();
+                            return GetPersistenceObjectQuery(GetImplementationType(typeof(T)).ToInterfaceType()).Cast<T>().Where(aFilter).ToList();
                         case RelationEndRole.B:
-                            return GetPersistenceObjectQuery(GetImplementationType(typeof(T)).ToInterfaceType()).Cast<T>().Where(i => i.BObject == parent).ToList();
+                            return GetPersistenceObjectQuery(GetImplementationType(typeof(T)).ToInterfaceType()).Cast<T>().Where(bFilter).ToList();
                         default:
                             throw new NotImplementedException(String.Format("Unknown RelationEndRole [{0}]", endRole));
                     }

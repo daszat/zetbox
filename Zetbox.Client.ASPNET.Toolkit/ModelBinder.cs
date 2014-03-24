@@ -39,6 +39,19 @@ namespace Zetbox.Client.ASPNET
             _vmf = vmf;
         }
 
+        protected override PropertyDescriptorCollection GetModelProperties(ControllerContext controllerContext, ModelBindingContext bindingContext)
+        {
+            // Promote ID up
+            // It must be the first property to bind
+            var lst = base.GetModelProperties(controllerContext, bindingContext)
+                .Cast<PropertyDescriptor>()
+                .ToList();
+            return new PropertyDescriptorCollection(
+                lst.Where(p => p.Name == "ID")
+                   .Concat(lst.Where(p => p.Name != "ID"))
+                   .ToArray(), true);
+        }
+
         protected override object CreateModel(ControllerContext controllerContext, ModelBindingContext bindingContext, Type modelType)
         {
             var scope = DependencyResolver.Current.GetService<ZetboxContextHttpScope>();

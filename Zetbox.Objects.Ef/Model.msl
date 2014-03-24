@@ -886,6 +886,10 @@
           <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ComplexProperty Name="OpenIDImpl" TypeName="Model.OpenIDEfImpl">
+          <ScalarProperty Name="Provider" ColumnName="OpenID_Provider" />
+          <ScalarProperty Name="UserID" ColumnName="OpenID_UserID" />
+          </ComplexProperty>
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

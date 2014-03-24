@@ -5,7 +5,7 @@
   <deployment install="true" mapFileExtensions="true" co.v1:createDesktopShortcut="true">
     <subscription>
       <update>
-        <expiration maximumAge="0" unit="days" />
+        <beforeApplicationStartup />
       </update>
     </subscription>
     <deploymentProvider codebase="%auto%" />

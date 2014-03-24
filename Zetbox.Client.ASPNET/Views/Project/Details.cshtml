@@ -9,25 +9,25 @@
         @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "button" })
     </div>
     <div class="editor-label">
-        @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["Kundenname"])
+        @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["Kundenname"], asReadOnly: true)
     </div>
     <div class="editor-field">
         @Html.ZbDisplayFor(model => model.ViewModel.PropertyModelsByName["Kundenname"])
     </div>
     <div class="editor-label">
-        @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["Von"])
+        @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["Von"], asReadOnly: true)
     </div>
     <div class="editor-field">
         @Html.ZbDisplayFor(model => model.ViewModel.PropertyModelsByName["Von"])
     </div>
     <div class="editor-label">
-        @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["Bis"])
+        @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["Bis"], asReadOnly: true)
     </div>
     <div class="editor-field">
         @Html.ZbDisplayFor(model => model.ViewModel.PropertyModelsByName["Bis"])
     </div>
     <div class="editor-label">
-        @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["AufwandGes"])
+        @Html.ZbLabelFor(model => model.ViewModel.PropertyModelsByName["AufwandGes"], asReadOnly: true)
     </div>
     <div class="editor-field">
         @Html.ZbDisplayFor(model => model.ViewModel.PropertyModelsByName["AufwandGes"])

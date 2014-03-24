@@ -33,7 +33,7 @@ namespace at.dasz.DocumentManagement
         }
 
         /// <summary>
-        /// 
+        /// A searchable excerpt
         /// </summary>
         [Zetbox.API.DefinitionGuid("76e29530-9252-4c2a-bae4-503f3b6dcd29")]
         at.dasz.DocumentManagement.Excerpt Excerpt {
@@ -42,7 +42,7 @@ namespace at.dasz.DocumentManagement
         }
 
         /// <summary>
-        /// This file cannot be changed when the flas is set.
+        /// This file cannot be changed when the flas is set
         /// </summary>
         [Zetbox.API.DefinitionGuid("6942c3e7-ba7b-4e9c-b7fb-644c5aa1c73f")]
         bool IsFileReadonly {
@@ -51,7 +51,7 @@ namespace at.dasz.DocumentManagement
         }
 
         /// <summary>
-        /// Keeps revisions of this file.
+        /// Keeps revisions of this file
         /// </summary>
         [Zetbox.API.DefinitionGuid("0b0775d4-9ded-472d-aac5-d1cd63b97237")]
         bool KeepRevisions {
@@ -69,14 +69,14 @@ namespace at.dasz.DocumentManagement
         }
 
         /// <summary>
-        /// 
+        /// Revisions of this file
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("ec544fe0-8189-4bb2-a3d1-3cb61d815aa5")]
         IList<Zetbox.App.Base.Blob> Revisions { get; }
 
         /// <summary>
-        /// 
+        /// Tags describing this file
         /// </summary>
         [Zetbox.API.DefinitionGuid("b4f41179-44f8-4235-b272-48f3f1452da7")]
         string Tags {

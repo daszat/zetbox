@@ -459,3 +459,9 @@ th, td
 {
     color: Red;
 }
+
+.big-label
+{
+    font: 14px/1.6 Arial;
+    font-weight: bold;
+}

@@ -40,6 +40,15 @@ namespace Zetbox.App.Base
         ICollection<Zetbox.App.Base.Group> Groups { get; }
 
         /// <summary>
+        /// Optional Open Id
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("9e5b1327-cb22-4442-a4b4-6cf6083e88a2")]
+        Zetbox.App.Base.OpenID OpenID {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Password of a generic identity
         /// </summary>
         [Zetbox.API.DefinitionGuid("0d499610-99e3-42cc-b71b-49ed1a356355")]

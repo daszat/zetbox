@@ -30,11 +30,13 @@ namespace Zetbox.App.Base
         public IdentityMemoryImpl()
             : base(null)
         {
+            OpenIDImpl = new Zetbox.App.Base.OpenIDMemoryImpl(null, this, "OpenID");
         }
 
         public IdentityMemoryImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
+            OpenIDImpl = new Zetbox.App.Base.OpenIDMemoryImpl(lazyCtx, this, "OpenID");
         }
 
         /// <summary>
@@ -200,6 +202,58 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
         public static event PropertyIsValidHandler<Zetbox.App.Base.Identity> OnGroups_IsValid;
 
         /// <summary>
+        /// Optional Open Id
+        /// </summary>
+        // CompoundObject property
+        // BEGIN Zetbox.Generator.Templates.Properties.CompoundObjectPropertyTemplate
+        // implement the user-visible interface
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
+        public Zetbox.App.Base.OpenID OpenID
+        {
+            get { return OpenIDImpl; }
+            set { OpenIDImpl = (Zetbox.App.Base.OpenIDMemoryImpl)value; }
+        }
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        /// <summary>backing store for OpenID</summary>
+        private Zetbox.App.Base.OpenIDMemoryImpl _OpenID;
+
+        /// <summary>backing property for OpenID, takes care of attaching/detaching the values</summary>
+        public Zetbox.App.Base.OpenIDMemoryImpl OpenIDImpl
+        {
+            get
+            {
+                return _OpenID;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (value == null)
+                    throw new ArgumentNullException("value");
+                if (!object.Equals(_OpenID, value))
+                {
+                    var __oldValue = _OpenID;
+                    var __newValue = value;
+
+                    NotifyPropertyChanging("OpenID", __oldValue, __newValue);
+
+                    if (_OpenID != null)
+                    {
+                        _OpenID.DetachFromObject(this, "OpenID");
+                    }
+                    __newValue = (Zetbox.App.Base.OpenIDMemoryImpl)__newValue.Clone();
+                    _OpenID = __newValue;
+                    _OpenID.AttachToObject(this, "OpenID");
+
+                    NotifyPropertyChanged("OpenID", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+                }
+            }
+        }
+        // END Zetbox.Generator.Templates.Properties.CompoundObjectPropertyTemplate
+        public static event PropertyIsValidHandler<Zetbox.App.Base.Identity> OnOpenID_IsValid;
+
+        /// <summary>
         /// Password of a generic identity
         /// </summary>
         // value type property
@@ -331,6 +385,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
             me.DisplayName = other.DisplayName;
             me.Password = other.Password;
             me.UserName = other.UserName;
+            if (me.OpenID == null && other.OpenID != null) {
+                me.OpenID = (Zetbox.App.Base.OpenID)other.OpenID.Clone();
+            } else if (me.OpenID != null && other.OpenID == null) {
+                me.OpenID = null;
+            } else if (me.OpenID != null && other.OpenID != null) {
+                me.OpenID.ApplyChangesFrom(other.OpenID);
+            }
         }
         public override void SetNew()
         {
@@ -348,6 +409,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
             {
                 case "CalendarConfiguration":
                 case "DisplayName":
+                case "OpenID":
                 case "Password":
                 case "UserName":
                     AuditPropertyChange(property, oldValue, newValue);
@@ -428,6 +490,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
                         obj => obj.Groups,
                         null, // lists are read-only properties
                         obj => OnGroups_IsValid), 
+                    // else
+                    new PropertyDescriptorMemoryImpl<Identity, Zetbox.App.Base.OpenID>(
+                        lazyCtx,
+                        new Guid("9e5b1327-cb22-4442-a4b4-6cf6083e88a2"),
+                        "OpenID",
+                        null,
+                        obj => obj.OpenID,
+                        (obj, val) => obj.OpenID = val,
+						obj => OnOpenID_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Identity, string>(
                         lazyCtx,
@@ -539,6 +610,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._CalendarConfiguration);
             binStream.Write(this._DisplayName);
+            binStream.Write(this.OpenID);
             binStream.Write(this._Password);
             binStream.Write(this._UserName);
         }
@@ -551,6 +623,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             this._CalendarConfiguration = binStream.ReadString();
             this._DisplayName = binStream.ReadString();
+            {
+                // use backing store to avoid notifications
+                this.OpenIDImpl = binStream.ReadCompoundObject<Zetbox.App.Base.OpenIDMemoryImpl>();
+                this.OpenIDImpl.AttachToObject(this, "OpenID");
+            }
             this._Password = binStream.ReadString();
             this._UserName = binStream.ReadString();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)

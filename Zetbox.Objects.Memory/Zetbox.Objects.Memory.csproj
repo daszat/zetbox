@@ -285,6 +285,7 @@
     <Compile Include="ZetboxBase\AuditEntry.Memory.Designer.cs" />
     <Compile Include="ZetboxBase\DateTimeOffset.Memory.Designer.cs" />
     <Compile Include="ZetboxBase\DateTimeRange.Memory.Designer.cs" />
+    <Compile Include="ZetboxBase\OpenID.Memory.Designer.cs" />
     <Compile Include="ZetboxBase\RecurrenceRule.Memory.Designer.cs" />
     <Compile Include="TestModule\TestPhoneCompoundObject.Memory.Designer.cs" />
     <Compile Include="AssemblyInfo.Memory.cs" />

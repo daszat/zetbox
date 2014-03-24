@@ -25,6 +25,7 @@ namespace Zetbox.Client.ASPNET
     using System.Linq.Expressions;
     using Zetbox.Client.Presentables;
     using System.Reflection;
+    using Zetbox.API;
     using Zetbox.Client.Presentables.ValueViewModels;
 
     public static class HtmlHelpers
@@ -58,10 +59,43 @@ namespace Zetbox.Client.ASPNET
         #endregion
 
         #region Label
-        public static MvcHtmlString ZbLabelFor<TModel>(this HtmlHelper<TModel> html, Expression<Func<TModel, ILabeledViewModel>> expression)
+        /// <summary>
+        /// Renders a label based on a given ILabeledViewModel
+        /// </summary>
+        /// <typeparam name="TModel"></typeparam>
+        /// <param name="html"></param>
+        /// <param name="expression">Expression to use for determinating the target control name</param>
+        /// <param name="htmlAttributes"></param>
+        /// <param name="name">overrides expression</param>
+        /// <param name="asReadOnly">Renders the for attribute always with FormattedValue</param>
+        /// <returns></returns>
+        public static MvcHtmlString ZbLabelFor<TModel>(this HtmlHelper<TModel> html, Expression<Func<TModel, ILabeledViewModel>> expression, object htmlAttributes = null, string name = null, bool asReadOnly = false)
         {
-            var vmdl = (ILabeledViewModel)System.Web.Mvc.ModelMetadata.FromLambdaExpression<TModel, ILabeledViewModel>(expression, html.ViewData).Model;
-            return LabelExtensions.Label(html, vmdl.Label);
+            var exprStr = name ?? ExpressionHelper.GetExpressionText(expression);
+            var mdl = System.Web.Mvc.ModelMetadata.FromLambdaExpression<TModel, ILabeledViewModel>(expression, html.ViewData).IfNotNull(meta => meta.Model);
+            var lbmdl = mdl as ILabeledViewModel;
+            var basemdl = mdl as BaseValueViewModel;
+
+            if (asReadOnly || basemdl.IfNotNull(b => b.IsReadOnly))
+            {
+                // Readonly should be rendered with FormattedValue
+                exprStr = exprStr + ".FormattedValue";
+            }
+            else if (lbmdl is EnumerationValueViewModel || lbmdl is NullableBoolPropertyViewModel || lbmdl is ObjectReferenceViewModel)
+            {
+                // The exceptions, rendered by Value
+                exprStr = exprStr + ".Value";
+            }
+            else
+            {
+                exprStr = exprStr + ".FormattedValue";
+            }
+
+            var labelStr = string.Format("<label for=\"{0}\"{1}>{2}</label>",
+                                                exprStr,
+                                                string.Join("", HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes).Select(kv => string.Format(" {0}=\"{1}\"", kv.Key, kv.Value))),
+                                                lbmdl.IfNotNull(v => v.Label).IfNullOrEmpty(exprStr));
+            return MvcHtmlString.Create(labelStr);
         }
         #endregion
 
@@ -87,6 +121,7 @@ namespace Zetbox.Client.ASPNET
         /// <param name="htmlFieldName"></param>
         /// <param name="additionalViewData"></param>
         /// <returns></returns>
+        [Obsolete("Use MVC Editor Templates instead!")]
         public static MvcHtmlString ZbEditorFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, string templateName = null, string htmlFieldName = null, object additionalViewData = null)
             where TValue : BaseValueViewModel
         {
@@ -122,6 +157,7 @@ namespace Zetbox.Client.ASPNET
         #endregion
 
         #region ValidationMessageFor
+        [Obsolete("Add them in MVC Editor Templates instead!")]
         public static MvcHtmlString ZbValidationMessageFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, string validationMessage = null, object htmlAttributes = null)
              where TValue : BaseValueViewModel
         {

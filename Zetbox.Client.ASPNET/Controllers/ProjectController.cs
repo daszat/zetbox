@@ -15,15 +15,42 @@ namespace Zetbox.Client.ASPNET.Controllers
         {
         }
 
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            return View(ViewModelFactory.CreateViewModel<ProjectSearchViewModel.Factory>().Invoke(DataContext, null));
+            var vmdl = ViewModelFactory.CreateViewModel<ProjectSearchViewModel.Factory>().Invoke(DataContext, null);
+            vmdl.Page = page ?? vmdl.Page;
+            return View(vmdl);
         }
 
         [HttpPost]
         public ActionResult Index(ProjectSearchViewModel mdl)
         {
             return View(mdl);
+        }
+
+        //
+        // GET: /Project/
+        public ActionResult Create()
+        {
+            var vmdl = ViewModelFactory.CreateViewModel<DataObjectEditViewModel<Zetbox.App.Projekte.Projekt>.Factory>().Invoke(DataContext, null);
+            return View(vmdl);
+        }
+
+        //
+        // GET: /Project/
+        [HttpPost]
+        public ActionResult Create(DataObjectEditViewModel<Zetbox.App.Projekte.Projekt> vmdl)
+        {
+            TryValidateModel(vmdl);
+            if (ModelState.IsValid)
+            {
+                DataContext.SubmitChanges();
+                return RedirectToAction("Details", new { id = vmdl.Object.ID });
+            }
+            else
+            {
+                return View(vmdl);
+            }
         }
 
         //
@@ -37,10 +64,18 @@ namespace Zetbox.Client.ASPNET.Controllers
         //
         // GET: /Project/
         [HttpPost]
-        public ActionResult Edit(DataObjectEditViewModel<Zetbox.App.Projekte.Projekt> mdl)
+        public ActionResult Edit(DataObjectEditViewModel<Zetbox.App.Projekte.Projekt> vmdl)
         {
-            DataContext.SubmitChanges();
-            return RedirectToAction("Details", new { id = mdl.ID });
+            TryValidateModel(vmdl);
+            if (ModelState.IsValid)
+            {
+                DataContext.SubmitChanges();
+                return RedirectToAction("Details", new { id = vmdl.ID });
+            }
+            else
+            {
+                return View(vmdl);
+            }
         }
 
         public ActionResult Details(int id)

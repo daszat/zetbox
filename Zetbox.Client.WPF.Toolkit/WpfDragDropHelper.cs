@@ -25,6 +25,8 @@ namespace Zetbox.Client.WPF.Toolkit
     public class WpfDragDropHelper
     {
         public const string ZetboxObjectDataFormat = "Zetbox.API.IDataObject[]";
+        public const string ZetboxDragSourceDataFormat = "ZetboxDragSource";
+
         public static readonly string[] ZetboxObjectDataFormats = new[] 
         { 
             ZetboxObjectDataFormat,
@@ -79,7 +81,9 @@ namespace Zetbox.Client.WPF.Toolkit
                     {
                         try
                         {
-                            DragDrop.DoDragDrop(editor, data, DragDropEffects.Copy | DragDropEffects.Link);
+                            var dragData = new DataObject(data);
+                            dragData.SetData(ZetboxDragSourceDataFormat, editor);
+                            DragDrop.DoDragDrop(editor, dragData, DragDropEffects.Copy | DragDropEffects.Link);
                         }
                         catch (COMException)
                         {
@@ -112,6 +116,16 @@ namespace Zetbox.Client.WPF.Toolkit
 
         private bool CanDrop(DragEventArgs e)
         {
+            if (e.Data.GetDataPresent(ZetboxDragSourceDataFormat))
+            {
+                var src = e.Data.GetData(ZetboxDragSourceDataFormat) as FrameworkElement;
+                if (src != null && src.IsDescendantOf(_target as FrameworkElement))
+                {
+                    // Prevent drag'n'drop to self
+                    return false;
+                }
+            }
+
             var accetableFomats = _target.AcceptableDataFormats;
             return _target.CanDrop && e.Data.GetFormats().Any(f => accetableFomats.Contains(f));
         }

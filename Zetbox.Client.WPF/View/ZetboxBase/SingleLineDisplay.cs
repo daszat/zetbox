@@ -29,6 +29,8 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
             var txt = new TextBlock() { Margin = new Thickness(3, 0, 0, 0) };
             BindingOperations.SetBinding(txt, TextBlock.TextProperty, new Binding("Name"));
             Children.Add(txt);
+
+            BindingOperations.SetBinding(this, Zetbox.Client.WPF.Styles.Controls.HighlightProperty, new Binding("HighlightAsync"));
         }
 
         public ViewModel ViewModel

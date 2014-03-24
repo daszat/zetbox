@@ -31,6 +31,7 @@ namespace Zetbox.Client.ASPNET.Controllers
         {
             var vmdl = ViewModelFactory.CreateViewModel<TaskEditViewModel.Factory>().Invoke(DataContext, null);
             vmdl.ProjectID = project;
+            vmdl.Object.Projekt = DataContext.Find<Zetbox.App.Projekte.Projekt>(project);
             return View(vmdl);
         }
 
@@ -42,8 +43,9 @@ namespace Zetbox.Client.ASPNET.Controllers
         {
             vmdl.ProjectID = project;
             vmdl.Object.Projekt = DataContext.Find<Zetbox.App.Projekte.Projekt>(project);
+
+            ModelState.Clear();
             TryValidateModel(vmdl);
-            ModelState.AddModelError("ViewModel.PropertyModelsByName[Name]", "Hello error from Controller");
             if (ModelState.IsValid)
             {
                 DataContext.SubmitChanges();

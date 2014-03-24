@@ -562,7 +562,7 @@ namespace at.dasz.DocumentManagement
         public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnCreatedOn_IsValid;
 
         /// <summary>
-        /// 
+        /// A searchable excerpt
         /// </summary>
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Excerpt
         // fkBackingName=this.Proxy.Excerpt; fkGuidBackingName=_fk_guid_Excerpt;
@@ -754,7 +754,7 @@ namespace at.dasz.DocumentManagement
         public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnExportGuid_IsValid;
 
         /// <summary>
-        /// This file cannot be changed when the flas is set.
+        /// This file cannot be changed when the flas is set
         /// </summary>
 
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -832,7 +832,7 @@ namespace at.dasz.DocumentManagement
         public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnIsFileReadonly_IsValid;
 
         /// <summary>
-        /// Keeps revisions of this file.
+        /// Keeps revisions of this file
         /// </summary>
 
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
@@ -968,7 +968,7 @@ namespace at.dasz.DocumentManagement
         public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnName_IsValid;
 
         /// <summary>
-        /// 
+        /// Revisions of this file
         /// </summary>
         // collection entry list property
    		// Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.CollectionEntryListProperty
@@ -1006,7 +1006,7 @@ public static event PropertyListChangedHandler<at.dasz.DocumentManagement.File> 
         public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnRevisions_IsValid;
 
         /// <summary>
-        /// 
+        /// Tags describing this file
         /// </summary>
 
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty

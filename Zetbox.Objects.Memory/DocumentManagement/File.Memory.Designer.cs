@@ -584,7 +584,7 @@ namespace at.dasz.DocumentManagement
         public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnCreatedOn_IsValid;
 
         /// <summary>
-        /// 
+        /// A searchable excerpt
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Excerpt
         // fkBackingName=_fk_Excerpt; fkGuidBackingName=_fk_guid_Excerpt;
@@ -786,7 +786,7 @@ namespace at.dasz.DocumentManagement
         public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnExportGuid_IsValid;
 
         /// <summary>
-        /// This file cannot be changed when the flas is set.
+        /// This file cannot be changed when the flas is set
         /// </summary>
         // value type property
         // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
@@ -857,7 +857,7 @@ namespace at.dasz.DocumentManagement
         public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnIsFileReadonly_IsValid;
 
         /// <summary>
-        /// Keeps revisions of this file.
+        /// Keeps revisions of this file
         /// </summary>
         // value type property
         // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
@@ -986,7 +986,7 @@ namespace at.dasz.DocumentManagement
         public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnName_IsValid;
 
         /// <summary>
-        /// 
+        /// Revisions of this file
         /// </summary>
         // collection entry list property
         // BEGIN Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for Revisions
@@ -1032,7 +1032,7 @@ public static event PropertyListChangedHandler<at.dasz.DocumentManagement.File> 
         public static event PropertyIsValidHandler<at.dasz.DocumentManagement.File> OnRevisions_IsValid;
 
         /// <summary>
-        /// 
+        /// Tags describing this file
         /// </summary>
         // value type property
         // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty

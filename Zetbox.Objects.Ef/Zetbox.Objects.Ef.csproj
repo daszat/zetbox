@@ -288,6 +288,7 @@
     <Compile Include="ZetboxBase\AuditEntry.Ef.Designer.cs" />
     <Compile Include="ZetboxBase\DateTimeOffset.Ef.Designer.cs" />
     <Compile Include="ZetboxBase\DateTimeRange.Ef.Designer.cs" />
+    <Compile Include="ZetboxBase\OpenID.Ef.Designer.cs" />
     <Compile Include="ZetboxBase\RecurrenceRule.Ef.Designer.cs" />
     <Compile Include="TestModule\TestPhoneCompoundObject.Ef.Designer.cs" />
     <Compile Include="AssemblyInfo.Ef.cs" />

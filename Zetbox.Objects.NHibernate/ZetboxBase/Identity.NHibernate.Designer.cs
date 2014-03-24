@@ -43,6 +43,15 @@ namespace Zetbox.App.Base
             : base(lazyCtx) // do not pass proxy to base data object
         {
             this.Proxy = proxy;
+            if (this.Proxy.OpenID == null)
+            {
+                this.Proxy.OpenID = new Zetbox.App.Base.OpenIDNHibernateImpl(this, "OpenID", lazyCtx, null);
+            }
+            else
+            {
+                this.Proxy.OpenID.AttachToObject(this, "OpenID");
+            }
+
         }
 
         /// <summary>the NHibernate proxy of the represented entity</summary>
@@ -203,6 +212,53 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
         public static event PropertyIsValidHandler<Zetbox.App.Base.Identity> OnGroups_IsValid;
 
         /// <summary>
+        /// Optional Open Id
+        /// </summary>
+        // CompoundObject property
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.CompoundObjectPropertyTemplate
+        // implement the user-visible interface
+        public Zetbox.App.Base.OpenID OpenID
+        {
+            get { return OpenIDImpl; }
+            set { OpenIDImpl = (Zetbox.App.Base.OpenIDNHibernateImpl)value; }
+        }
+
+        /// <summary>backing property for OpenID, takes care of attaching/detaching the values</summary>
+        public Zetbox.App.Base.OpenIDNHibernateImpl OpenIDImpl
+        {
+            get
+            {
+                return this.Proxy.OpenID;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (value == null)
+                    throw new ArgumentNullException("value");
+                if (!object.Equals(this.Proxy.OpenID, value))
+                {
+                    var __oldValue = this.Proxy.OpenID;
+                    var __newValue = value;
+
+                    NotifyPropertyChanging("OpenID", __oldValue, __newValue);
+
+                    if (this.Proxy.OpenID != null)
+                    {
+                        this.Proxy.OpenID.DetachFromObject(this, "OpenID");
+                    }
+                    __newValue = (Zetbox.App.Base.OpenIDNHibernateImpl)__newValue.Clone();
+                    this.Proxy.OpenID = __newValue;
+                    this.Proxy.OpenID.AttachToObject(this, "OpenID");
+
+                    NotifyPropertyChanged("OpenID", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+                }
+            }
+        }
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.CompoundObjectPropertyTemplate
+        public static event PropertyIsValidHandler<Zetbox.App.Base.Identity> OnOpenID_IsValid;
+
+        /// <summary>
         /// Password of a generic identity
         /// </summary>
 
@@ -334,6 +390,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
             me.DisplayName = other.DisplayName;
             me.Password = other.Password;
             me.UserName = other.UserName;
+            if (me.OpenID == null && other.OpenID != null) {
+                me.OpenID = (Zetbox.App.Base.OpenID)other.OpenID.Clone();
+            } else if (me.OpenID != null && other.OpenID == null) {
+                me.OpenID = null;
+            } else if (me.OpenID != null && other.OpenID != null) {
+                me.OpenID.ApplyChangesFrom(other.OpenID);
+            }
         }
         public override void SetNew()
         {
@@ -351,6 +414,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
             {
                 case "CalendarConfiguration":
                 case "DisplayName":
+                case "OpenID":
                 case "Password":
                 case "UserName":
                     AuditPropertyChange(property, oldValue, newValue);
@@ -430,6 +494,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
                         obj => obj.Groups,
                         null, // lists are read-only properties
                         obj => OnGroups_IsValid), 
+                    // else
+                    new PropertyDescriptorNHibernateImpl<Identity, Zetbox.App.Base.OpenID>(
+                        lazyCtx,
+                        new Guid("9e5b1327-cb22-4442-a4b4-6cf6083e88a2"),
+                        "OpenID",
+                        null,
+                        obj => obj.OpenID,
+                        (obj, val) => obj.OpenID = val,
+						obj => OnOpenID_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<Identity, string>(
                         lazyCtx,
@@ -633,6 +706,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
 
             public virtual ICollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl.Identity_memberOf_Group_RelationEntryProxy> Groups { get; set; }
 
+            public virtual Zetbox.App.Base.OpenIDNHibernateImpl OpenID { get; set; }
+
             public virtual string Password { get; set; }
 
             public virtual string UserName { get; set; }
@@ -651,6 +726,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this.Proxy.CalendarConfiguration);
             binStream.Write(this.Proxy.DisplayName);
+            binStream.Write(this.OpenID);
             binStream.Write(this.Proxy.Password);
             binStream.Write(this.Proxy.UserName);
         }
@@ -663,6 +739,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             this.Proxy.CalendarConfiguration = binStream.ReadString();
             this.Proxy.DisplayName = binStream.ReadString();
+            {
+                // use backing store to avoid notifications
+                this.OpenIDImpl = binStream.ReadCompoundObject<Zetbox.App.Base.OpenIDNHibernateImpl>();
+                this.OpenIDImpl.AttachToObject(this, "OpenID");
+            }
             this.Proxy.Password = binStream.ReadString();
             this.Proxy.UserName = binStream.ReadString();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)

@@ -135,6 +135,12 @@
   <data name="Groups_description" xml:space="preserve">
     <value>Identites are member of groups</value>
   </data>
+  <data name="OpenID_label" xml:space="preserve">
+    <value>Open Id</value>
+  </data>
+  <data name="OpenID_description" xml:space="preserve">
+    <value>Optional Open Id</value>
+  </data>
   <data name="Password_label" xml:space="preserve">
     <value>Password</value>
   </data>

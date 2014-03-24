@@ -1,0 +1,14 @@
+﻿@model NullableDoublePropertyViewModel
+
+@using Zetbox.API
+@using Zetbox.Client.Presentables.ValueViewModels
+
+@if (Model.IsReadOnly)
+{
+    @Html.DisplayFor(m => m.FormattedValue, new { @class = ViewData["class"] })
+}
+else
+{
+    @Html.TextBoxFor(m => m.FormattedValue, new { @class = ViewData["class"], placeholder = Model.ToolTip })
+    @Html.ValidationMessageFor(model => model.FormattedValue)
+}

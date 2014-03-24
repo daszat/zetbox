@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<EnvConfig Version="1.0">
+  <BinarySource>p:\zetbox\bin\Debug</BinarySource>
+  <BinaryTarget>c:\temp\clickoncetest</BinaryTarget>
+
+  <ClientExe>Zetbox.WPF.exe</ClientExe>
+  <ClickOnce DeploymentVersion="1.0.0.9999" KeyFile="\\Srv2008\Data\Keys\TestKey.pfx" Product="zetbox testing clickonce" Publisher="dasz.at OG" UpdateUrl="c:\temp\clickoncetest\ClickOnceClient\Zetbox.WPF.application" />
+</EnvConfig>

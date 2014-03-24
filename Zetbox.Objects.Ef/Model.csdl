@@ -1802,6 +1802,9 @@
                         Relationship="Model.FK_Identities_memberOf_Groups_A"
                         FromRole="Identities"
                         ToRole="CollectionEntry" />
+    <Property Name="OpenIDImpl"
+              Type="Model.OpenIDEfImpl"
+              Nullable="false" />
     <Property Name="Password" Type="String" Nullable="true" MaxLength="100"  />
     <Property Name="UserName" Type="String" Nullable="true" MaxLength="100"  />
   </EntityType>
@@ -5745,6 +5748,10 @@
     <Property Name="From" Type="DateTime" Nullable="true"  />
     <Property Name="Thru" Type="DateTime" Nullable="true"  />
     <Property Name="TotalDays" Type="Int32" Nullable="true"  />
+  </ComplexType>
+  <ComplexType Name="OpenIDEfImpl" >
+    <Property Name="Provider" Type="String" Nullable="true" MaxLength="50"  />
+    <Property Name="UserID" Type="String" Nullable="true" MaxLength="255"  />
   </ComplexType>
   <ComplexType Name="RecurrenceRuleEfImpl" >
     <Property Name="ByDay" Type="String" Nullable="true" MaxLength="100"  />

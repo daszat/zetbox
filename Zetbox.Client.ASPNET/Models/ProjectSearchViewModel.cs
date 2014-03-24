@@ -12,6 +12,10 @@ namespace Zetbox.Client.ASPNET.Models
     using System.Web.Mvc;
     using System.ComponentModel;
 
+    /// <summary>
+    /// The only purpose for this kind of ViewModel is to support ASP.NET MVC to recreated it's state while searching for objects.
+    /// As a result the well known DataObjectViewModel are passed back.
+    /// </summary>
     public class ProjectSearchViewModel : SearchViewModel<Zetbox.App.Projekte.Projekt>
     {
         public new delegate ProjectSearchViewModel Factory(IZetboxContext dataCtx, ViewModel parent);

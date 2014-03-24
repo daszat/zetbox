@@ -1884,6 +1884,8 @@
     <Property Name="DisplayName" Type="varchar" MaxLength="200" Nullable="true" />
     <Property Name="Password" Type="varchar" MaxLength="100" Nullable="true" />
     <Property Name="UserName" Type="varchar" MaxLength="100" Nullable="true" />
+    <Property Name="OpenID_Provider" Type="varchar" MaxLength="50" Nullable="true" />
+    <Property Name="OpenID_UserID" Type="varchar" MaxLength="255" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="ImportedFile">

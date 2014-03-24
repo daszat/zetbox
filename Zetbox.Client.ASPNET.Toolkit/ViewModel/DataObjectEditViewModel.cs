@@ -8,13 +8,38 @@ namespace Zetbox.Client.ASPNET
     using Zetbox.API;
     using Zetbox.Client.Presentables.ValueViewModels;
 
-    // No descriptor
-    public class DataObjectEditViewModel<TModel> : ViewModel
+    /// <summary>
+    /// The only purpose for this kind of ViewModel is to support ASP.NET MVC to recreated it's state.
+    /// Internal you should continue using the aleady defined ViewModels for each object.
+    /// This class uses a DataObjectViewModel as the objects ViewModel type.
+    /// </summary>
+    /// <remarks>No descriptor, as it's a ASP.NET MCV only view model</remarks>
+    /// <typeparam name="TModel"></typeparam>
+    public class DataObjectEditViewModel<TModel> : GenericDataObjectEditViewModel<TModel, DataObjectViewModel>
         where TModel : class, IDataObject
     {
         public new delegate DataObjectEditViewModel<TModel> Factory(IZetboxContext dataCtx, ViewModel parent);
 
         public DataObjectEditViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent)
+            : base(appCtx, dataCtx, parent)
+        {
+        }
+    }
+
+    /// <summary>
+    /// The only purpose for this kind of ViewModel is to support ASP.NET MVC to recreated it's state.
+    /// Internal you should continue using the aleady defined ViewModels for each object.
+    /// </summary>
+    /// <remarks>No descriptor, as it's a ASP.NET MCV only view model</remarks>
+    /// <typeparam name="TModel"></typeparam>
+    /// <typeparam name="TViewModel"></typeparam>
+    public class GenericDataObjectEditViewModel<TModel, TViewModel> : ViewModel
+        where TModel : class, IDataObject
+        where TViewModel : DataObjectViewModel
+    {
+        public new delegate GenericDataObjectEditViewModel<TModel, TViewModel> Factory(IZetboxContext dataCtx, ViewModel parent);
+
+        public GenericDataObjectEditViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent)
             : base(appCtx, dataCtx, parent)
         {
         }
@@ -35,28 +60,43 @@ namespace Zetbox.Client.ASPNET
                 {
                     if (ID != default(int))
                     {
-                        _object = DataContext.Find<TModel>(ID);
+                        _object = FindObject();
                     }
                     else
                     {
-                        _object = DataContext.Create<TModel>();
+                        _object = CreateNewInstance();
                     }
                 }
                 return _object;
             }
         }
 
-        private DataObjectViewModel _viewModel;
-        public DataObjectViewModel ViewModel
+        private TViewModel _viewModel;
+        public TViewModel ViewModel
         {
             get
             {
                 if (_viewModel == null)
                 {
-                    _viewModel = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, Object);
+                    _viewModel = FetchViewModel();
                 }
                 return _viewModel;
             }
+        }
+
+        protected virtual TModel CreateNewInstance()
+        {
+            return DataContext.Create<TModel>();
+        }
+
+        protected virtual TModel FindObject()
+        {
+            return DataContext.Find<TModel>(ID);
+        }
+
+        protected virtual TViewModel FetchViewModel()
+        {
+            return (TViewModel)DataObjectViewModel.Fetch(ViewModelFactory, DataContext, null, Object);
         }
     }
 }

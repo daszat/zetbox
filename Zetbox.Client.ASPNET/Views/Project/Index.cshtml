@@ -4,16 +4,22 @@
     ViewBag.Title = "Project search";
 }
 <h2>
-    Search for a project</h2>
+    Search for a project
+</h2>
 @using (Html.BeginForm())
 {
     <p>
         @Html.ZbLabelFor(m => m.ProjectName)<br />
-        @Html.ZbEditorFor(m => m.ProjectName)
+        @Html.EditorFor(m => m.ProjectName)
     </p>
     <p>
-        <input type="submit" /></p>
+        <input type="submit" value="Search" />
+    </p>
+    @Html.Partial("_Paging")
 }
+<div class="Toolbar ui-widget-header ui-corner-all">
+    @Html.ActionLink("New", "Create", null, new { @class = "button" })
+</div>
 <table class="strech">
     <tr>
         <th>
