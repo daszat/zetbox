@@ -1535,35 +1535,29 @@ namespace Zetbox.Server.SchemaManagement
             if (rel.GetRelationType() == RelationType.n_m)
             {
                 var oldTblName = db.GetTableName(savedRel.Module.SchemaName, savedRel.GetRelationTableName());
-                if (db.CheckTableContainsData(oldTblName))
+                var containsData = db.CheckTableContainsData(oldTblName);
+
+                if (!containsData || moveUp)
                 {
-                    if (moveUp)
-                    {
-                        string assocName = rel.GetAssociationName();
-                        Log.InfoFormat("Rewiring N:M Relation: {0}", assocName);
+                    string assocName = rel.GetAssociationName();
+                    Log.InfoFormat("Rewiring N:M Relation: {0}", assocName);
 
-                        if (db.CheckFKConstraintExists(oldTblName, savedRel.GetRelationAssociationName(RelationEndRole.A)))
-                            db.DropFKConstraint(oldTblName, savedRel.GetRelationAssociationName(RelationEndRole.A));
-                        if (db.CheckFKConstraintExists(oldTblName, savedRel.GetRelationAssociationName(RelationEndRole.B)))
-                            db.DropFKConstraint(oldTblName, savedRel.GetRelationAssociationName(RelationEndRole.B));
+                    if (db.CheckFKConstraintExists(oldTblName, savedRel.GetRelationAssociationName(RelationEndRole.A)))
+                        db.DropFKConstraint(oldTblName, savedRel.GetRelationAssociationName(RelationEndRole.A));
+                    if (db.CheckFKConstraintExists(oldTblName, savedRel.GetRelationAssociationName(RelationEndRole.B)))
+                        db.DropFKConstraint(oldTblName, savedRel.GetRelationAssociationName(RelationEndRole.B));
 
-                        // renaming is handled by DoChangeRelationName
-                        //db.RenameTable(oldTblName, newTblName);
+                    // renaming is handled by DoChangeRelationName
+                    //db.RenameTable(oldTblName, newTblName);
 
-                        var fkAName = Construct.ForeignKeyColumnName(savedRel.A);
-                        var fkBName = Construct.ForeignKeyColumnName(savedRel.B);
-                        db.CreateFKConstraint(oldTblName, rel.A.Type.GetTableRef(db), fkAName, savedRel.GetRelationAssociationName(RelationEndRole.A), false);
-                        db.CreateFKConstraint(oldTblName, rel.B.Type.GetTableRef(db), fkBName, savedRel.GetRelationAssociationName(RelationEndRole.B), false);
-                    }
-                    else
-                    {
-                        Log.WarnFormat("Unable to drop old relation. Relation has some instances. Table: " + oldTblName);
-                    }
+                    var fkAName = Construct.ForeignKeyColumnName(savedRel.A);
+                    var fkBName = Construct.ForeignKeyColumnName(savedRel.B);
+                    db.CreateFKConstraint(oldTblName, rel.A.Type.GetTableRef(db), fkAName, savedRel.GetRelationAssociationName(RelationEndRole.A), false);
+                    db.CreateFKConstraint(oldTblName, rel.B.Type.GetTableRef(db), fkBName, savedRel.GetRelationAssociationName(RelationEndRole.B), false);
                 }
                 else
                 {
-                    DoDelete_N_M_Relation(savedRel);
-                    DoNew_N_M_Relation(rel);
+                    Log.WarnFormat("Unable to drop old relation. Relation has some instances. Table: " + oldTblName);
                 }
             }
             else if (rel.GetRelationType() == RelationType.one_n)
@@ -1588,29 +1582,22 @@ namespace Zetbox.Server.SchemaManagement
                 var tblName = relEnd.Type.GetTableRef(db);
                 var refTblName = otherEnd.Type.GetTableRef(db);
                 var colName = Construct.ForeignKeyColumnName(otherEnd);
+                var containsData = db.CheckColumnContainsValues(tblName, colName);
 
-                if (db.CheckColumnContainsValues(tblName, colName))
+                if (!containsData || moveUp)
                 {
-                    if (moveUp)
-                    {
-                        // was renamed by DoChangeRelationName
-                        var assocName = rel.GetAssociationName();
-                        Log.InfoFormat("Rewiring 1:n Relation: {0}", assocName);
+                    // was renamed by DoChangeRelationName
+                    var assocName = rel.GetAssociationName();
+                    Log.InfoFormat("Rewiring 1:n Relation: {0}", assocName);
 
-                        if (db.CheckFKConstraintExists(tblName, assocName))
-                            db.DropFKConstraint(tblName, assocName);
+                    if (db.CheckFKConstraintExists(tblName, assocName))
+                        db.DropFKConstraint(tblName, assocName);
 
-                        db.CreateFKConstraint(tblName, refTblName, colName, assocName, false);
-                    }
-                    else
-                    {
-                        Log.WarnFormat("Unable to drop old relation. Relation has some instances. Table: " + tblName);
-                    }
+                    db.CreateFKConstraint(tblName, refTblName, colName, assocName, false);
                 }
                 else
                 {
-                    DoDelete_1_N_Relation(savedRel);
-                    DoNew_1_N_Relation(rel);
+                    Log.WarnFormat("Unable to drop old relation. Relation has some instances. Table: " + tblName);
                 }
             }
             else if (rel.GetRelationType() == RelationType.one_one)
@@ -1636,29 +1623,22 @@ namespace Zetbox.Server.SchemaManagement
                 var tblName = relEnd.Type.GetTableRef(db);
                 var refTblName = otherEnd.Type.GetTableRef(db);
                 var colName = Construct.ForeignKeyColumnName(otherEnd);
+                var containsData = db.CheckColumnContainsValues(tblName, colName);
 
-                if (db.CheckColumnContainsValues(tblName, colName))
+                if (!containsData || moveUp)
                 {
-                    if (moveUp)
-                    {
-                        // was renamed by DoChangeRelationName
-                        var assocName = rel.GetAssociationName();
-                        Log.InfoFormat("Rewiring 1:1 Relation: {0}", assocName);
+                    // was renamed by DoChangeRelationName
+                    var assocName = rel.GetAssociationName();
+                    Log.InfoFormat("Rewiring 1:1 Relation: {0}", assocName);
 
-                        if (db.CheckFKConstraintExists(tblName, assocName))
-                            db.DropFKConstraint(tblName, assocName);
+                    if (db.CheckFKConstraintExists(tblName, assocName))
+                        db.DropFKConstraint(tblName, assocName);
 
-                        db.CreateFKConstraint(tblName, refTblName, colName, assocName, false);
-                    }
-                    else
-                    {
-                        Log.WarnFormat("Unable to drop old relation. Relation has some instances. Table: " + tblName);
-                    }
+                    db.CreateFKConstraint(tblName, refTblName, colName, assocName, false);
                 }
                 else
                 {
-                    DoDelete_1_1_Relation(savedRel);
-                    DoNew_1_1_Relation(rel);
+                    Log.WarnFormat("Unable to drop old relation. Relation has some instances. Table: " + tblName);
                 }
             }
 
