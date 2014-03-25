@@ -319,6 +319,12 @@ namespace PrepareEnv
                         CopyFolder(Path.Combine(source, "ASPNET"), Path.Combine(envConfig.BinaryTarget, "ASPNET"));
                     }
                 }
+                LogDetail("copying from deployed Common");
+                CopyFolder(Path.Combine(envConfig.BinaryTarget, "Common"), Path.Combine(envConfig.BinaryTarget, "ASPNET", "bin", "Common"));
+                LogDetail("copying from deployed Server");
+                CopyFolder(Path.Combine(envConfig.BinaryTarget, "Server"), Path.Combine(envConfig.BinaryTarget, "ASPNET", "bin", "Server"));
+                LogDetail("copying from deployed Client");
+                CopyFolder(Path.Combine(envConfig.BinaryTarget, "Client"), Path.Combine(envConfig.BinaryTarget, "ASPNET", "bin", "Client"));
 
                 foreach (var source in sourcePaths)
                 {
