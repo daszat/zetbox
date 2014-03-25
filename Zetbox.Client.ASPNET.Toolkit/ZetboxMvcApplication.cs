@@ -51,7 +51,7 @@ namespace Zetbox.Client.ASPNET
 
             var config = ZetboxConfig.FromFile(
                 HostType.AspNetClient,
-                string.IsNullOrEmpty(cfgFile) ? string.Empty : Server.MapPath(cfgFile),
+                string.IsNullOrEmpty(cfgFile) ? string.Empty : cfgFile,
                 ZetboxConfig.GetDefaultConfigName("Zetbox.Client.AspNet.xml", configsPath));
 
             // Make DocumentStore relative to HttpService
