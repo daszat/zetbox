@@ -308,6 +308,18 @@ namespace PrepareEnv
                 LogDetail("copying from deployed Server");
                 CopyFolder(Path.Combine(envConfig.BinaryTarget, "Server"), Path.Combine(envConfig.BinaryTarget, "HttpService", "bin", "Server"));
 
+                LogAction("copying ASPNET and associated binaries");
+                foreach (var source in sourcePaths)
+                {
+                    if (isWildcard && !Directory.Exists(source)) continue;
+
+                    if (Directory.Exists(Path.Combine(source, "ASPNET")))
+                    {
+                        LogDetail("copying from " + source);
+                        CopyFolder(Path.Combine(source, "ASPNET"), Path.Combine(envConfig.BinaryTarget, "ASPNET"));
+                    }
+                }
+
                 foreach (var source in sourcePaths)
                 {
                     LogAction("copying executables from " + source);
