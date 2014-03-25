@@ -407,9 +407,9 @@ namespace PrepareEnv
 
         private static void ReplaceNpgsql(string sourcePath, string targetPath)
         {
-            var httpServiceExists = Directory.Exists(Path.Combine(targetPath, "HttpService", "bin"));
+            if (!Directory.Exists(targetPath)) return;
 
-            LogAction("deploying Npgsql");
+            LogAction("deploying Npgsql to " + targetPath);
             switch (Environment.OSVersion.Platform)
             {
                 case PlatformID.Unix:
@@ -419,16 +419,6 @@ namespace PrepareEnv
                         true);
                     // installed in mono's GAC
                     Delete(Path.Combine(targetPath, "Mono.Security.dll"));
-
-                    if (httpServiceExists)
-                    {
-                        Copy(
-                            GetAssemblyResourceStream("Npgsql"),
-                            Path.Combine(targetPath, "HttpService", "bin", "Npgsql.dll"),
-                            true);
-                        // installed in mono's GAC
-                        Delete(Path.Combine(targetPath, "HttpService", "bin", "Mono.Security.dll"));
-                    }
                     break;
                 case PlatformID.Win32NT:
                     Copy(
@@ -439,22 +429,13 @@ namespace PrepareEnv
                         GetAssemblyResourceStream("Mono.Security"),
                         Path.Combine(targetPath, "Mono.Security.dll"),
                         true);
-                    if (httpServiceExists)
-                    {
-                        Copy(
-                            GetAssemblyResourceStream("Npgsql"),
-                            Path.Combine(targetPath, "HttpService", "bin", "Npgsql.dll"),
-                            true);
-                        Copy(
-                            GetAssemblyResourceStream("Mono.Security"),
-                            Path.Combine(targetPath, "HttpService", "bin", "Mono.Security.dll"),
-                            true);
-                    }
                     break;
                 default:
                     LogAction("Unknown platform '{0}'", Environment.OSVersion.Platform);
                     return;
             }
+            ReplaceNpgsql(sourcePath, Path.Combine(targetPath, "HttpService", "bin"));
+            ReplaceNpgsql(sourcePath, Path.Combine(targetPath, "ASPNET", "bin"));
         }
 
         private static void InstallGeneratedBinaries(EnvConfig envConfig)
