@@ -1529,8 +1529,12 @@ namespace Zetbox.Server.SchemaManagement
             if (!PreMigration(RelationMigrationEventType.ChangeEndType, savedRel, rel))
                 return;
 
+            string assocName = rel.GetAssociationName();
+            Log.InfoFormat("Changing relation end types from old rel '{0}' to '{1}'", savedRel.GetAssociationName(), assocName);
+
             var moveUp = savedRel.A.Type.AndParents(cls => cls.BaseObjectClass).Select(cls => cls.ExportGuid).Contains(rel.A.Type.ExportGuid)
                       && savedRel.B.Type.AndParents(cls => cls.BaseObjectClass).Select(cls => cls.ExportGuid).Contains(rel.B.Type.ExportGuid);
+            Log.DebugFormat("moveUp = {0}", moveUp);
 
             if (rel.GetRelationType() == RelationType.n_m)
             {
@@ -1539,8 +1543,7 @@ namespace Zetbox.Server.SchemaManagement
 
                 if (!containsData || moveUp)
                 {
-                    string assocName = rel.GetAssociationName();
-                    Log.InfoFormat("Rewiring N:M Relation: {0}", assocName);
+                    Log.DebugFormat("Rewiring N:M Relation: {0}", assocName);
 
                     if (db.CheckFKConstraintExists(oldTblName, savedRel.GetRelationAssociationName(RelationEndRole.A)))
                         db.DropFKConstraint(oldTblName, savedRel.GetRelationAssociationName(RelationEndRole.A));
@@ -1557,7 +1560,7 @@ namespace Zetbox.Server.SchemaManagement
                 }
                 else
                 {
-                    Log.WarnFormat("Unable to drop old relation. Relation has some instances. Table: " + oldTblName);
+                    Log.WarnFormat("Unable to rewire relation. Relation has some instances. Table: " + oldTblName);
                 }
             }
             else if (rel.GetRelationType() == RelationType.one_n)
@@ -1575,7 +1578,7 @@ namespace Zetbox.Server.SchemaManagement
                         relEnd = rel.B;
                         break;
                     default:
-                        Log.ErrorFormat("Relation '{0}' has unsupported Storage set: {1}, skipped", rel.GetAssociationName(), rel.Storage);
+                        Log.ErrorFormat("Relation '{0}' has unsupported Storage set: {1}, skipped", assocName, rel.Storage);
                         return;
                 }
 
@@ -1587,8 +1590,7 @@ namespace Zetbox.Server.SchemaManagement
                 if (!containsData || moveUp)
                 {
                     // was renamed by DoChangeRelationName
-                    var assocName = rel.GetAssociationName();
-                    Log.InfoFormat("Rewiring 1:n Relation: {0}", assocName);
+                    Log.DebugFormat("Rewiring 1:n Relation: {0}", assocName);
 
                     if (db.CheckFKConstraintExists(tblName, assocName))
                         db.DropFKConstraint(tblName, assocName);
@@ -1597,7 +1599,7 @@ namespace Zetbox.Server.SchemaManagement
                 }
                 else
                 {
-                    Log.WarnFormat("Unable to drop old relation. Relation has some instances. Table: " + tblName);
+                    Log.WarnFormat("Unable to rewire relation. Relation has some instances. Table: " + tblName);
                 }
             }
             else if (rel.GetRelationType() == RelationType.one_one)
@@ -1616,7 +1618,7 @@ namespace Zetbox.Server.SchemaManagement
                         relEnd = rel.B;
                         break;
                     default:
-                        Log.ErrorFormat("Relation '{0}' has unsupported Storage set: {1}, skipped", rel.GetAssociationName(), rel.Storage);
+                        Log.ErrorFormat("Relation '{0}' has unsupported Storage set: {1}, skipped", assocName, rel.Storage);
                         return;
                 }
 
@@ -1628,8 +1630,7 @@ namespace Zetbox.Server.SchemaManagement
                 if (!containsData || moveUp)
                 {
                     // was renamed by DoChangeRelationName
-                    var assocName = rel.GetAssociationName();
-                    Log.InfoFormat("Rewiring 1:1 Relation: {0}", assocName);
+                    Log.DebugFormat("Rewiring 1:1 Relation: {0}", assocName);
 
                     if (db.CheckFKConstraintExists(tblName, assocName))
                         db.DropFKConstraint(tblName, assocName);
@@ -1638,7 +1639,7 @@ namespace Zetbox.Server.SchemaManagement
                 }
                 else
                 {
-                    Log.WarnFormat("Unable to drop old relation. Relation has some instances. Table: " + tblName);
+                    Log.WarnFormat("Unable to rewire relation. Relation has some instances. Table: " + tblName);
                 }
             }
 
