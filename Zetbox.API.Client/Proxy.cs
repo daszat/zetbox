@@ -135,6 +135,10 @@ namespace Zetbox.API.Client
                 {
                     throw;
                 }
+                catch (EndpointNotFoundException ex)
+                {
+                    throw new IOException("Error when accessing server: " + ex.GetInnerException().Message, ex);
+                }
                 catch (Exception ex)
                 {
                     // Retry
@@ -142,7 +146,7 @@ namespace Zetbox.API.Client
                 }
             }
 
-            if (fault != null) throw new IOException("Error when accessing server", fault);
+            if (fault != null) throw new IOException("Error when accessing server: " + fault.Message, fault);
         }
 
         public IEnumerable<IDataObject> GetObjects(IReadOnlyZetboxContext requestingCtx, InterfaceType ifType, Expression query, out List<IStreamable> auxObjects)
