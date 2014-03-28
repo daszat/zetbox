@@ -129,6 +129,12 @@
   <data name="Cancel_Tooltip" xml:space="preserve">
     <value>Cancel this error report</value>
   </data>
+  <data name="CommunicationError_MessageFormat" xml:space="preserve">
+    <value>There was an error communicating with the server. Please tell you network administrator the following error code: {0}</value>
+  </data>
+  <data name="CommunicationError_Title" xml:space="preserve">
+    <value>Network Error</value>
+  </data>
   <data name="ExceptionDetailsLabel" xml:space="preserve">
     <value>Details</value>
   </data>
