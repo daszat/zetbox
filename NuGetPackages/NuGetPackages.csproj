@@ -64,6 +64,9 @@
   <ItemGroup>
     <Folder Include="Properties\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="build_local.ps1" />
+  </ItemGroup>
   <Target Name="ContentCopy">
     <Copy SourceFiles="@(Content)" DestinationFolder="$(OutputPath)" />
     <Copy SourceFiles="@(NuSpec)" DestinationFolder="$(OutputPath)" />
