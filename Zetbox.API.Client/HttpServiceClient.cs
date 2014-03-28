@@ -23,6 +23,7 @@ namespace Zetbox.API.Client
     using System.Linq;
     using System.Net;
     using System.Security.Authentication;
+    using System.ServiceModel;
     using System.Text;
 
     public sealed class HttpServiceClient
@@ -86,31 +87,30 @@ namespace Zetbox.API.Client
                 var httpResponse = ex.Response as HttpWebResponse;
                 if (httpResponse != null)
                 {
-                    if (httpResponse.StatusCode == HttpStatusCode.Unauthorized)
-                    {
-                        _credentialsResolver.InvalidCredentials();
-                        throw new AuthenticationException("Authentication failed", ex);
-                    }
-                    else if (httpResponse.StatusCode == HttpStatusCode.Conflict)
-                    {
-                        var exToThrow = httpResponse
-                            .GetResponseStream()
-                            .FromXmlStream<ZetboxContextExceptionMessage>()
-                            .Exception
-                            .ToException();
-                        Log.Debug("Received an exception", exToThrow);
-                        throw exToThrow;
-                    }
-                    else if (httpResponse.StatusCode == HttpStatusCode.PreconditionFailed)
-                    {
-                        throw new InvalidZetboxGeneratedVersionException();
-                    }
-
                     Log.ErrorFormat("HTTP Error: {0}: {1}", httpResponse.StatusCode, httpResponse.StatusDescription);
                     foreach (var header in ex.Response.Headers)
                     {
                         var headerString = header.ToString();
                         Log.ErrorFormat("{0}: {1}", headerString, ex.Response.Headers[headerString]);
+                    }
+
+                    switch (httpResponse.StatusCode)
+                    {
+                        case HttpStatusCode.Unauthorized:
+                            _credentialsResolver.InvalidCredentials();
+                            throw new AuthenticationException("Authentication failed", ex);
+                        case HttpStatusCode.Conflict:
+                            var exToThrow = httpResponse
+                                .GetResponseStream()
+                                .FromXmlStream<ZetboxContextExceptionMessage>()
+                                .Exception
+                                .ToException();
+                            Log.Debug("Received an exception", exToThrow);
+                            throw exToThrow;
+                        case HttpStatusCode.PreconditionFailed:
+                            throw new InvalidZetboxGeneratedVersionException();
+                        case HttpStatusCode.InternalServerError:
+                            throw new FaultException<WebException>(ex);
                     }
                 }
                 else
