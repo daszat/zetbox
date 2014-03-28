@@ -172,6 +172,15 @@ namespace PrepareEnv
             var deployTarget = Path.Combine(GetClickOnceOutputPath(envConfig), file);
             var doc = dependencyList.OwnerDocument;
 
+            // avoid the pseudo/testing resource assemblies, as clickonce client dies on unknown cultures
+            if (file.ToLowerInvariant().EndsWith(".resource.dll") || file.ToLowerInvariant().EndsWith(".resource.dll.deploy") || file.ToLowerInvariant().EndsWith(".resource.exe") || file.ToLowerInvariant().EndsWith(".resource.exe.deploy"))
+            {
+                if (file.Contains("x-zb-"))
+                {
+                    return;
+                }
+            }
+
             if (file.EndsWith(".dll") || file.EndsWith(".dll.deploy") || file.EndsWith(".exe") || file.EndsWith(".exe.deploy"))
             {
                 // TODO: do not deploy fallback to client and remove this.
