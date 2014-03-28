@@ -1320,6 +1320,13 @@ namespace Zetbox.API
             return ex;
         }
 
+        public static Exception StripTargetInvocationExceptions(this Exception ex)
+        {
+            if (ex == null) throw new ArgumentNullException("ex");
+            while (ex.InnerException != null && ex is TargetInvocationException) ex = ex.InnerException;
+            return ex;
+        }
+
         public static List<TITEM> AndParents<T, TITEM>(this T obj, Func<T, IEnumerable<TITEM>> lstSelector, Func<T, T> parentSelector)
         {
             if (obj == null) throw new ArgumentNullException("obj");
