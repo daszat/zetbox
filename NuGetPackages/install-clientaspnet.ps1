@@ -25,3 +25,13 @@ foreach ($reference in $project.Object.References)
         $reference.CopyLocal = $isMVC;
     }
 }
+
+# add the clientaspnet.targets relative to project dir
+$relativeSolutionPath = [NuGet.PathUtility]::GetRelativePath($project.FullName, $dte.Solution.Properties.Item("Path").Value)
+$relativeSolutionPath = [IO.Path]::GetDirectoryName($relativeSolutionPath)
+$relativeSolutionPath = [NuGet.PathUtility]::EnsureTrailingSlash($relativeSolutionPath)
+
+$importPath = ($relativeSolutionPath + ".zetbox\clientaspnet.targets")
+if (! (((Get-MSBuildProject).Imports | %{ $_.ImportingElement.Project }) -contains $importPath)) {
+	Add-Import $importPath
+}

@@ -129,7 +129,12 @@ namespace Zetbox.Client.ASPNET
 
             builder.RegisterModule<AspNetClientModule>();
 
+            // Register zetbox specific ViewModels
             builder.RegisterViewModels(typeof(ZetboxMvcApplication).Assembly);
+
+            // Register target applications specific Controller and ViewModels
+            builder.RegisterControllers(this.GetType().Assembly);
+            builder.RegisterViewModels(this.GetType().Assembly);
         }
     }
 }
