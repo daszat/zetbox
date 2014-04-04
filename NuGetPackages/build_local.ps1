@@ -5,7 +5,7 @@ $git_output = & git log --decorate=full --simplify-by-decoration --pretty=onelin
 
 foreach ($line in $git_output) {
 	if ($line -Match "tag: jenkins/([^-)]*)") {
-		$version = $Matches[1] + "-zdev"
+		$version = $Matches[1] + "-zdev" + (Get-Date -format yyyyMMddHHmmss)
 		break
 	}
 }
