@@ -33,5 +33,5 @@ $relativeSolutionPath = [NuGet.PathUtility]::EnsureTrailingSlash($relativeSoluti
 
 $importPath = ($relativeSolutionPath + ".zetbox\clientaspnet.targets")
 if (! (((Get-MSBuildProject).Imports | %{ $_.ImportingElement.Project }) -contains $importPath)) {
-	Add-Import $importPath
+	Add-Import $importPath $project.ProjectName
 }
