@@ -117,7 +117,7 @@ namespace Zetbox.API.Client
                 {
                     Log.Error("No headers");
                 }
-                throw new IOException(errorMsg, ex);
+                throw new ZetboxServerIOException(errorMsg, ex);
             }
         }
 

@@ -54,6 +54,25 @@ namespace Zetbox.API.Client
         Zetbox.App.Base.Blob SetBlobStream(Stream stream, string filename, string mimetype);
     }
 
+    #region ZetboxServerIOException
+    /// <summary>
+    /// This exception is thrown when communication with the zetbox server has failed. This is usefull to distinguish it from the cases where the server throwed an internal error from IO errors.
+    /// </summary>
+    [Serializable]
+    public class ZetboxServerIOException : IOException
+    {
+        public ZetboxServerIOException() : this("Error when accessing server.") { }
+        public ZetboxServerIOException(string message) : base(message) { }
+        public ZetboxServerIOException(string message, Exception inner) : base(message, inner) { }
+        protected ZetboxServerIOException(
+          System.Runtime.Serialization.SerializationInfo info,
+          System.Runtime.Serialization.StreamingContext context)
+            : base(info, context) { }
+
+    }
+    #endregion
+
+
     /// <summary>
     /// Proxy Implementation
     /// </summary>
@@ -137,7 +156,7 @@ namespace Zetbox.API.Client
                 }
                 catch (EndpointNotFoundException ex)
                 {
-                    throw new IOException("Error when accessing server: " + ex.GetInnerException().Message, ex);
+                    throw new ZetboxServerIOException("Error when accessing server: " + ex.GetInnerException().Message, ex);
                 }
                 catch (Exception ex)
                 {
@@ -146,7 +165,7 @@ namespace Zetbox.API.Client
                 }
             }
 
-            if (fault != null) throw new IOException("Error when accessing server: " + fault.Message, fault);
+            if (fault != null) throw new ZetboxServerIOException("Error when accessing server: " + fault.Message, fault);
         }
 
         public IEnumerable<IDataObject> GetObjects(IReadOnlyZetboxContext requestingCtx, InterfaceType ifType, Expression query, out List<IStreamable> auxObjects)

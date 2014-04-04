@@ -69,7 +69,7 @@ namespace Zetbox.Client.Presentables
                             ExceptionReporterViewModelResources.InvalidZetboxGeneratedVersionException_Title
                         );
                     }
-                    else if (inner is System.IO.IOException)
+                    else if (inner is ZetboxServerIOException)
                     {
                         _vmf.ShowMessage(
                             string.Format(ExceptionReporterViewModelResources.CommunicationError_MessageFormat, inner.Message),
