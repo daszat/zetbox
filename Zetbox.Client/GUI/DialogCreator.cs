@@ -106,7 +106,7 @@ namespace Zetbox.Client.GUI
             var duplicateKeys = ValueModels.GroupBy(t => t.Item1).Where(grp => grp.Count() > 1).ToList();
             if (duplicateKeys.Count > 0)
             {
-                throw new InvalidOperationException(string.Format("One ore more key occures more than once: {0}", string.Join(", ", duplicateKeys.Select(grp => grp.Key))));
+                throw new InvalidOperationException(string.Format("One ore more key occurs more than once: {0}", string.Join(", ", duplicateKeys.Select(grp => grp.Key))));
             }
 
             var dlg = ViewModelFactory.CreateViewModel<ValueInputTaskViewModel.Factory>().Invoke(DataContext, null, Title, Items, ValueModels, ok);
