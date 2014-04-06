@@ -42,7 +42,7 @@ namespace Zetbox.App.Projekte.Client.ViewModel.Projekte
 
         public override void Execute()
         {
-            ViewModelFactory.ShowMessage("Syncronisation of milestones is not implemented yet", "Not implemented yet");
+            ViewModelFactory.ShowMessage("Synchronisation of milestones is not implemented yet", "Not implemented yet");
         }
     }
 }
