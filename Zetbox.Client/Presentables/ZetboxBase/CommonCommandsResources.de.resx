@@ -140,7 +140,6 @@
   </data>
   <data name="DeleteDataObjectCommand_ElevatedDeleteDeactivated_Title" xml:space="preserve">
     <value>Komplett löschen?</value>
-    <comment> </comment>
   </data>
   <data name="DeleteDataObjectCommand_Name" xml:space="preserve">
     <value>Löschen</value>
@@ -171,6 +170,15 @@
   </data>
   <data name="NewDataObjectCommand_Tooltip" xml:space="preserve">
     <value>Erstellt ein neuen Datensatz</value>
+  </data>
+  <data name="ObjectBrowserCommand_Error" xml:space="preserve">
+    <value>Sie haben keine Rechte um den Object Browser zu starten</value>
+  </data>
+  <data name="ObjectBrowserCommand_Name" xml:space="preserve">
+    <value>Object Browser</value>
+  </data>
+  <data name="ObjectBrowserCommand_Tooltip" xml:space="preserve">
+    <value>Mit dem Object Browser können administrative Aufgaben erledigt werden</value>
   </data>
   <data name="OpenDataObjectCommand_Name" xml:space="preserve">
     <value>Öffnen</value>

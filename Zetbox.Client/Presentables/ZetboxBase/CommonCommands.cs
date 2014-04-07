@@ -802,7 +802,6 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             if (CurrentIdentity == null || !CurrentIdentity.IsAdmininistrator())
             {
-
                 this.Reason = CommonCommandsResources.ElevatedModeCommand_Error;
                 return false;
             }
@@ -817,6 +816,62 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             {
                 DataContext.SetElevatedMode(!DataContext.IsElevatedMode);
                 OnPropertyChanged("IsElevated");
+            }
+        }
+    }
+
+    public class ObjectBrowserCommand : CommandViewModel
+    {
+        public new delegate ObjectBrowserCommand Factory(IZetboxContext dataCtx, ViewModel parent);
+
+        private Func<IZetboxContext> _ctxFactory;
+
+        public ObjectBrowserCommand(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, Func<IZetboxContext> ctxFactory)
+            : base(appCtx, dataCtx, parent, CommonCommandsResources.ObjectBrowserCommand_Name, CommonCommandsResources.ObjectBrowserCommand_Tooltip)
+        {
+            if (ctxFactory == null) throw new ArgumentNullException("ctxFactory");
+            _ctxFactory = ctxFactory;
+        }
+
+        public override System.Drawing.Image Icon
+        {
+            get
+            {
+                return base.Icon ?? (base.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.propertiesORoptions_ico.Find(FrozenContext)));
+            }
+            set
+            {
+                base.Icon = value;
+            }
+        }
+
+        public bool Show
+        {
+            get
+            {
+                return CanExecute(null);
+            }
+        }
+
+        public override bool CanExecute(object data)
+        {
+            if (CurrentIdentity == null || !CurrentIdentity.IsAdmininistrator())
+            {
+                this.Reason = CommonCommandsResources.ElevatedModeCommand_Error;
+                return false;
+            }
+
+            Reason = string.Empty;
+            return true;
+        }
+
+        protected override void DoExecute(object data)
+        {
+            if (CanExecute(data))
+            {
+                var ws = ViewModelFactory.CreateViewModel<Zetbox.Client.Presentables.ObjectBrowser.WorkspaceViewModel.Factory>().Invoke(_ctxFactory(), null);
+                ControlKind launcher = Zetbox.NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_LauncherKind.Find(FrozenContext);
+                ViewModelFactory.ShowModel(ws, launcher, true);
             }
         }
     }

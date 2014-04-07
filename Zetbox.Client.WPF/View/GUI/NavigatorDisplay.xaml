@@ -73,6 +73,12 @@
                                  Image="/Zetbox.Client.WPF;component/Images/info.png"
                                  Margin="{StaticResource DialogMargin}"
                                  Height="30" />
+            <ctrls:CommandButton DockPanel.Dock="Left"
+                                 CommandViewModel="{Binding ObjectBrowserCommand}"
+                                 Visibility="{Binding ObjectBrowserCommand.Show, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                 Style="{StaticResource ImageButton}"
+                                 Margin="{StaticResource DialogMargin}"
+                                 Height="30" />
             <ctrls:CommandButton DockPanel.Dock="Right"
                                  CommandViewModel="{Binding BackCommand}"
                                  Style="{StaticResource ImageButton}"

@@ -21,6 +21,7 @@ namespace Zetbox.Client.Presentables.GUI
     using System.Linq;
     using System.Text;
     using Zetbox.API;
+    using Zetbox.App.Extensions;
     using Zetbox.App.GUI;
     using Zetbox.Client.Presentables.ZetboxBase;
 
@@ -314,7 +315,6 @@ namespace Zetbox.Client.Presentables.GUI
                 }
             }
         }
-
         #endregion
 
         #region ReportProblemCommand
@@ -328,6 +328,21 @@ namespace Zetbox.Client.Presentables.GUI
                     _ReportProblemCommand = ViewModelFactory.CreateViewModel<ReportProblemCommand.Factory>().Invoke(DataContext, this);
                 }
                 return _ReportProblemCommand;
+            }
+        }
+        #endregion
+
+        #region ObjectBrowser command
+        private ICommandViewModel _ObjectBrowserCommand = null;
+        public ICommandViewModel ObjectBrowserCommand
+        {
+            get
+            {
+                if (_ObjectBrowserCommand == null)
+                {
+                    _ObjectBrowserCommand = ViewModelFactory.CreateViewModel<ObjectBrowserCommand.Factory>().Invoke(DataContext, this);
+                }
+                return _ObjectBrowserCommand;
             }
         }
         #endregion
