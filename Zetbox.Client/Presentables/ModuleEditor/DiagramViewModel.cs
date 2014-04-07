@@ -404,75 +404,20 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             }
         }
 
-        private ICommandViewModel _NewObjectClassCommand = null;
+        private NewObjectClassCommand _NewObjectClassCommand = null;
         public ICommandViewModel NewObjectClassCommand
         {
             get
             {
                 if (_NewObjectClassCommand == null)
                 {
-                    _NewObjectClassCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "New Class", "Creates a new Class", () =>
+                    _NewObjectClassCommand = ViewModelFactory.CreateViewModel<NewObjectClassCommand.Factory>().Invoke(DataContext, this, Module);
+                    _NewObjectClassCommand.Created += (newCls) =>
                     {
-                        ViewModelFactory.CreateDialog(DataContext, "New class")
-                            .AddString("name", NamedObjects.Base.Classes.Zetbox.App.Base.DataType_Properties.Name.Find(FrozenContext).GetLabel())
-                            .AddString("table", NamedObjects.Base.Classes.Zetbox.App.Base.ObjectClass_Properties.TableName.Find(FrozenContext).GetLabel())
-                            .AddString("description", NamedObjects.Base.Classes.Zetbox.App.Base.DataType_Properties.Description.Find(FrozenContext).GetLabel())
-                            .AddBool("IChangedBy", "IChangedBy", value: false, description: "Implement IChangedBy")
-                            .AddBool("IExportable", "IExportable", value: false, description: "Implement IExportable")
-                            .AddBool("IAuditable", "IAuditable", value: false, description: "Implement IAuditable")
-                            .AddBool("IDeactivatable", "IDeactivatable", value: false, description: "Implement IDeactivatable")
-                            .AddBool("simple", "Is simple", value: false, description: "Is simple object")
-                            .AddBool("abstract", "Is abstract", value: false, description: "Is abstract object")
-                            .AddBool("show", "Show", value: false, description: "Show class when finished")
-                            .DefaultButtons("Create", "Cancel")
-                            .Show(values =>
-                            {
-                                var newCtx = ctxFactory();
-                                var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx, null);
-                                var newCls = newCtx.Create<ObjectClass>();
-
-                                newCls.Module = newCtx.Find<Module>(Module.ID);
-                                newCls.Name = (string)values["name"];
-                                newCls.TableName = (string)values["table"];
-                                newCls.Description = (string)values["description"];
-                                newCls.IsSimpleObject = (bool)values["simple"];
-                                newCls.IsAbstract = (bool)values["abstract"];
-
-                                if ((bool)values["IChangedBy"])
-                                {
-                                    newCls.ImplementsInterfaces.Add(newCtx.GetQuery<Interface>().First(i => i.Name == "IChangedBy" && i.Module.Name == "ZetboxBase"));
-                                }
-                                if ((bool)values["IExportable"])
-                                {
-                                    newCls.ImplementsInterfaces.Add(newCtx.GetQuery<Interface>().First(i => i.Name == "IExportable" && i.Module.Name == "ZetboxBase"));
-                                }
-                                if ((bool)values["IAuditable"])
-                                {
-                                    newCls.ImplementsInterfaces.Add(newCtx.GetQuery<Interface>().First(i => i.Name == "IAuditable" && i.Module.Name == "ZetboxBase"));
-                                }
-                                if ((bool)values["IDeactivatable"])
-                                {
-                                    newCls.ImplementsInterfaces.Add(newCtx.GetQuery<Interface>().First(i => i.Name == "IDeactivatable" && i.Module.Name == "ZetboxBase"));
-                                }
-
-                                newCls.ImplementInterfaces();
-
-                                if ((bool)values["show"])
-                                {
-                                    newWorkspace.ShowModel(DataObjectViewModel.Fetch(ViewModelFactory, newCtx, newWorkspace, newCls));
-                                    ViewModelFactory.ShowModel(newWorkspace, true);
-                                }
-                                else
-                                {
-                                    newCtx.SubmitChanges();
-                                    Refresh();
-                                    DataTypeViewModels
-                                        .Single(vm => vm.DataType.ExportGuid == newCls.ExportGuid)
-                                        .SetChecked(true, true);
-                                }
-                            });
-                    }, null, null);
-                    _NewObjectClassCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.new_png.Find(FrozenContext));
+                        DataTypeViewModels
+                            .Single(vm => vm.DataType.ExportGuid == newCls.ExportGuid)
+                            .SetChecked(true, true);
+                    };
                 }
                 return _NewObjectClassCommand;
             }

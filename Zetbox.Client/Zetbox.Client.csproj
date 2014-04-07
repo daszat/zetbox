@@ -219,6 +219,7 @@
     </Compile>
     <Compile Include="Presentables\IContextViewModel.cs" />
     <Compile Include="Presentables\ISortableViewModel.cs" />
+    <Compile Include="Presentables\ModuleEditor\CommonCommands.cs" />
     <Compile Include="Presentables\ModuleEditor\DataTypeViewModels.cs" />
     <Compile Include="Presentables\ModuleEditor\DiagramViewModel.cs" />
     <Compile Include="Presentables\ModuleEditor\GroupingTreeItemViewModel.cs" />

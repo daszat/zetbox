@@ -723,6 +723,18 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             this._screenShot = screenShot;
         }
 
+        public override System.Drawing.Image Icon
+        {
+            get
+            {
+                return base.Icon ?? (base.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.info_png.Find(FrozenContext)));
+            }
+            set
+            {
+                base.Icon = value;
+            }
+        }
+
         public override bool UseDelayedTask
         {
             get

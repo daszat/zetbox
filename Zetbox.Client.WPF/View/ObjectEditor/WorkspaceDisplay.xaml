@@ -89,7 +89,6 @@
                 <ctrls:CommandButton DockPanel.Dock="Left"
                                      CommandViewModel="{Binding ReportProblemCommand}"
                                      Style="{StaticResource ImageButton}"
-                                     Image="/Zetbox.Client.WPF;component/Images/info.png"
                                      Margin="0"
                                      styles:Margin.Right="{StaticResource ItemMargin}" />
                 <ToggleButton DockPanel.Dock="Left"
