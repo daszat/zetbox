@@ -380,8 +380,16 @@ namespace Zetbox.API
         /// <inheritdoc />
         public IDataObject Find(InterfaceType ifType, int ID)
         {
-            var t = FindAsync(ifType, ID);
-            return t.Result;
+            try
+            {
+                var t = FindAsync(ifType, ID);
+                return t.Result;
+            }
+            catch (System.Reflection.TargetInvocationException ex)
+            {
+                // unwrap "business" exception
+                throw ex.StripTargetInvocationExceptions();
+            }
         }
 
         /// <inheritdoc />
@@ -399,8 +407,16 @@ namespace Zetbox.API
         public T Find<T>(int ID)
             where T : class, IDataObject
         {
-            var t = FindAsync<T>(ID);
-            return t.Result;
+            try
+            {
+                var t = FindAsync<T>(ID);
+                return t.Result;
+            }
+            catch (System.Reflection.TargetInvocationException ex)
+            {
+                // unwrap "business" exception
+                throw ex.StripTargetInvocationExceptions();
+            }
         }
 
         public ZbTask<T> FindAsync<T>(int ID)

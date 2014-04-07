@@ -850,8 +850,16 @@ namespace Zetbox.DalProvider.Client
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
         public IDataObject Find(InterfaceType ifType, int ID)
         {
-            var t = FindAsync(ifType, ID);
-            return t.Result;
+            try
+            {
+                var t = FindAsync(ifType, ID);
+                return t.Result;
+            }
+            catch (System.Reflection.TargetInvocationException ex)
+            {
+                // unwrap "business" exception
+                throw ex.StripTargetInvocationExceptions();
+            }
         }
 
         private T MakeAccessDeniedProxy<T>(int id)
@@ -915,8 +923,16 @@ namespace Zetbox.DalProvider.Client
         public T Find<T>(int ID)
             where T : class, IDataObject
         {
-            var t = FindAsync<T>(ID);
-            return t.Result;
+            try
+            {
+                var t = FindAsync<T>(ID);
+                return t.Result;
+            }
+            catch (System.Reflection.TargetInvocationException ex)
+            {
+                // unwrap "business" exception
+                throw ex.StripTargetInvocationExceptions();
+            }
         }
 
         /// <summary>
