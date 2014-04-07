@@ -27,6 +27,24 @@ namespace Zetbox.Client.WPF.Toolkit
         public const string ZetboxObjectDataFormat = "Zetbox.API.IDataObject[]";
         public const string ZetboxDragSourceDataFormat = "ZetboxDragSource";
 
+        #region NoDragSource
+        public static bool GetNoDragSource(DependencyObject obj)
+        {
+            if (obj == null) throw new ArgumentNullException("obj");
+            return (bool)obj.GetValue(NoDragSourceProperty);
+        }
+
+        public static void SetNoDragSource(DependencyObject obj, bool value)
+        {
+            if (obj == null) throw new ArgumentNullException("obj");
+            obj.SetValue(NoDragSourceProperty, value);
+        }
+
+        // Using a DependencyProperty as the backing store for NoDrag.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty NoDragSourceProperty =
+            DependencyProperty.RegisterAttached("NoDragSource", typeof(bool), typeof(WpfDragDropHelper), new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.Inherits));
+        #endregion
+
         public static readonly string[] ZetboxObjectDataFormats = new[] 
         { 
             ZetboxObjectDataFormat,
@@ -74,6 +92,8 @@ namespace Zetbox.Client.WPF.Toolkit
             var editor = sender as Control;
             if (editor != null && e.LeftButton == MouseButtonState.Pressed)
             {
+                if (e.OriginalSource is DependencyObject && GetNoDragSource((DependencyObject)e.OriginalSource) == true) return;
+
                 var data = _source.GetData();
                 if (data != null)
                 {
