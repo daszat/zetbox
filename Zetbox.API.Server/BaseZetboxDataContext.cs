@@ -287,7 +287,7 @@ namespace Zetbox.API.Server
             catch (System.Reflection.TargetInvocationException tiex)
             {
                 // unwrap "business" exception
-                throw tiex.InnerException;
+                throw tiex.StripTargetInvocationExceptions();
             }
         }
 

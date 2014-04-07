@@ -483,7 +483,7 @@ namespace Zetbox.DalProvider.NHibernate
                 catch (System.Reflection.TargetInvocationException ex)
                 {
                     // unwrap "business" exception
-                    throw ex.InnerException;
+                    throw ex.StripTargetInvocationExceptions();
                 }
             });
         }
@@ -514,7 +514,7 @@ namespace Zetbox.DalProvider.NHibernate
             catch (System.Reflection.TargetInvocationException ex)
             {
                 // unwrap "business" exception
-                throw ex.InnerException;
+                throw ex.StripTargetInvocationExceptions();
             }
         }
 

@@ -571,7 +571,7 @@ namespace Zetbox.DalProvider.Ef
                 catch (TargetInvocationException tiex)
                 {
                     // unwrap "business" exception
-                    throw tiex.InnerException;
+                    throw tiex.StripTargetInvocationExceptions();
                 }
             });
         }
@@ -617,7 +617,7 @@ namespace Zetbox.DalProvider.Ef
             catch (TargetInvocationException tiex)
             {
                 // unwrap "business" exception
-                throw tiex.InnerException;
+                throw tiex.StripTargetInvocationExceptions();
             }
         }
 
@@ -670,7 +670,7 @@ namespace Zetbox.DalProvider.Ef
             catch (TargetInvocationException tiex)
             {
                 // unwrap "business" exception
-                throw tiex.InnerException;
+                throw tiex.StripTargetInvocationExceptions();
             }
         }
 
@@ -712,7 +712,7 @@ namespace Zetbox.DalProvider.Ef
             catch (TargetInvocationException tiex)
             {
                 // unwrap "business" exception
-                throw tiex.InnerException;
+                throw tiex.StripTargetInvocationExceptions();
             }
         }
 
