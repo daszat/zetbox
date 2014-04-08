@@ -100,8 +100,10 @@ namespace Zetbox.API.Server
             Type elementType = expression.Type.FindElementTypes().Single(t => t != typeof(object));
             MethodInfo getSubProvider = typeof(QueryTranslatorProvider<T>).GetMethod("GetSubProvider", BindingFlags.NonPublic | BindingFlags.Instance).MakeGenericMethod(elementType);
             // new' up a generic class with the result of a generic method call, yay!
+
+            var theSubProvider = getSubProvider.Invoke(this, new object[] { });
             IQueryable result = (IQueryable)Activator.CreateInstance(typeof(QueryTranslator<>).MakeGenericType(elementType),
-                new object[] { getSubProvider.Invoke(this, new object[] { }) });
+                new object[] { theSubProvider, expression });
             return result;
         }
 
