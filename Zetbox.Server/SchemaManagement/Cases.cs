@@ -2973,7 +2973,7 @@ namespace Zetbox.Server.SchemaManagement
             ObjectClass savedObjClass = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
             if (savedObjClass == null || !savedObjClass.NeedsRightsTable()) return false;
 
-            return objClass.TableName != savedObjClass.TableName;
+            return objClass.TableName != savedObjClass.TableName || objClass.Module.SchemaName != savedObjClass.Module.SchemaName;
         }
         public void DoRenameObjectClassACL(ObjectClass objClass)
         {
