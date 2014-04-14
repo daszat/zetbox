@@ -100,5 +100,22 @@ namespace Zetbox.Server.Tests.SchemaTests.SchemaProviders.TableStructure
             Assert.That(Provider.GetTableColumnNames(tblName), Has.Member("other_column"));
             Assert.That(Provider.GetTableColumnNames(tblName), Has.No.Member("ID"));
         }
+
+        [Test]
+        public void move_table_to_other_schema()
+        {
+            var tblName = Provider.GetTableName("schema1", "ISP_TestMoveSchema");
+            var newTblName = Provider.GetTableName("schema2", "ISP_TestMoveSchema");
+            if (!Provider.CheckSchemaExists("schema1")) Provider.CreateSchema("schema1");
+            if (!Provider.CheckSchemaExists("schema2")) Provider.CreateSchema("schema2");
+
+            if (!Provider.CheckTableExists(tblName)) Provider.CreateTable(tblName, true);
+            if (Provider.CheckTableExists(newTblName)) Provider.DropTable(newTblName);
+
+            Provider.RenameTable(tblName, newTblName);
+
+            Assert.That(Provider.CheckTableExists(tblName), Is.False);
+            Assert.That(Provider.CheckTableExists(newTblName), Is.True);
+        }
     }
 }

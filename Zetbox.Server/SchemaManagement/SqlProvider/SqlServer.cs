@@ -419,7 +419,7 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
             // Do not qualify new name as it will be part of the old schema
             ExecuteNonQuery(string.Format("EXEC sp_rename '{0}', '{1}'", FormatSchemaName(oldTblName), newTblName.Name));
 
-            if (!oldTblName.Schema.Equals(newTblName.Schema))
+            if (oldTblName.Schema != newTblName.Schema)
             {
                 var intermediateName = new TableRef(oldTblName.Database, oldTblName.Schema, newTblName.Name);
 
