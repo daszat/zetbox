@@ -63,7 +63,7 @@ namespace Zetbox.Generator.InterfaceTemplates.CollectionEntries
         {
             return String.Format("{0}<{1}, {2}>",
                 IsOrdered() ? "IValueListEntry" : "IValueCollectionEntry",
-                this.prop.ObjectClass.Name,
+                this.prop.ObjectClass.GetDescribedInterfaceTypeName(),
                 this.prop.GetElementTypeString());
         }
 
