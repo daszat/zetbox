@@ -160,7 +160,7 @@ namespace Zetbox.Server.SchemaManagement
         {
             var saved = savedSchema.FindPersistenceObject<ObjectClass>(objClass.ExportGuid);
             if (saved == null) return false;
-            return saved.TableName != objClass.TableName;
+            return saved.TableName != objClass.TableName || saved.Module.SchemaName != objClass.Module.SchemaName;
         }
         public void DoRenameObjectClassTable(ObjectClass objClass)
         {
@@ -169,13 +169,14 @@ namespace Zetbox.Server.SchemaManagement
             if (!PreMigration(ClassMigrationEventType.RenameTable, savedObjClass, objClass))
                 return;
 
-            Log.InfoFormat("Renaming table from '{0}' to '{1}'", savedObjClass.TableName, objClass.TableName);
-
             var tbl = objClass.GetTableRef(db);
+            var saveTbl = savedObjClass.GetTableRef(db);
+            Log.InfoFormat("Renaming table from '{0}' to '{1}'", saveTbl, tbl);
+
             var mapping = objClass.GetTableMapping();
             if (mapping == TableMapping.TPT || (mapping == TableMapping.TPH && objClass.BaseObjectClass == null))
             {
-                db.RenameTable(savedObjClass.GetTableRef(db), tbl);
+                db.RenameTable(saveTbl, tbl);
             }
             else if (mapping == TableMapping.TPH && objClass.BaseObjectClass != null)
             {
