@@ -171,30 +171,17 @@ namespace Zetbox.App.Extensions
             return root.TableMapping.HasValue ? root.TableMapping.Value : TableMapping.TPT;
         }
 
-        public static InterfaceType GetDescribedInterfaceType(this ObjectClass cls)
+        public static InterfaceType GetDescribedInterfaceType(this DataType dt)
         {
-            if (cls == null) { throw new ArgumentNullException("cls"); }
-            return cls.ReadOnlyContext.GetInterfaceType(GetDescribedInterfaceTypeName(cls));
+            if (dt == null) { throw new ArgumentNullException("dt"); }
+            return dt.ReadOnlyContext.GetInterfaceType(GetDescribedInterfaceTypeName(dt));
         }
 
-        public static string GetDescribedInterfaceTypeName(this ObjectClass cls)
+        public static string GetDescribedInterfaceTypeName(this DataType dt)
         {
-            if (cls == null) { throw new ArgumentNullException("cls"); }
-            return cls.Module.Namespace + "." + cls.Name;
+            if (dt == null) { throw new ArgumentNullException("dt"); }
+            return dt.Module.Namespace + "." + dt.Name;
         }
-
-        public static InterfaceType GetDescribedInterfaceType(this CompoundObject cls)
-        {
-            if (cls == null) { throw new ArgumentNullException("cls"); }
-            return cls.ReadOnlyContext.GetInterfaceType(GetDescribedInterfaceTypeName(cls));
-        }
-
-        public static string GetDescribedInterfaceTypeName(this CompoundObject cls)
-        {
-            if (cls == null) { throw new ArgumentNullException("cls"); }
-            return cls.Module.Namespace + "." + cls.Name;
-        }
-
 
         public static bool ImplementsIExportable(this ObjectClass cls)
         {
