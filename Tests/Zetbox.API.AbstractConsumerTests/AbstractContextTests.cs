@@ -306,7 +306,7 @@ namespace Zetbox.API.AbstractConsumerTests
                 foreach (var obj in objects)
                 {
                     Assert.That(obj.ID, Is.GreaterThan(Helper.INVALIDID));
-                    NUnitExtensions.ThrowsTargetInvocationException<ZetboxObjectNotFoundException>(
+                    Assert.Throws<ZetboxObjectNotFoundException>(
                         () => testCtx.Find<TestObjClass>(obj.ID)
                     );
                 }
@@ -406,7 +406,8 @@ namespace Zetbox.API.AbstractConsumerTests
         {
             using (IZetboxContext ctx = GetContext())
             {
-                NUnitExtensions.ThrowsTargetInvocationException<ArgumentOutOfRangeException>(
+
+                Assert.Throws<ArgumentOutOfRangeException>(
                     () => ctx.Find<TestObjClass>(Zetbox.API.Helper.INVALIDID)
                 );
             }
@@ -417,7 +418,7 @@ namespace Zetbox.API.AbstractConsumerTests
         {
             using (IZetboxContext ctx = GetContext())
             {
-                NUnitExtensions.ThrowsTargetInvocationException<ZetboxObjectNotFoundException>(
+                Assert.Throws<ZetboxObjectNotFoundException>(
                     () => ctx.Find<TestObjClass>(12345)
                 );
             }
@@ -440,7 +441,7 @@ namespace Zetbox.API.AbstractConsumerTests
         {
             using (IZetboxContext ctx = GetContext())
             {
-                NUnitExtensions.ThrowsTargetInvocationException<ArgumentOutOfRangeException>(
+                Assert.Throws<ArgumentOutOfRangeException>(
                     () => ctx.Find(iftFactory(typeof(TestObjClass)), Zetbox.API.Helper.INVALIDID)
                 );
             }
@@ -451,7 +452,7 @@ namespace Zetbox.API.AbstractConsumerTests
         {
             using (IZetboxContext ctx = GetContext())
             {
-                NUnitExtensions.ThrowsTargetInvocationException<ZetboxObjectNotFoundException>(
+                Assert.Throws<ZetboxObjectNotFoundException>(
                     () => ctx.Find(iftFactory(typeof(TestObjClass)), 12345)
                 );
             }
