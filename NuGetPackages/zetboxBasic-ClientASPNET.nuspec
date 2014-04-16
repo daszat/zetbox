@@ -14,9 +14,10 @@
     <copyright>Copyright © 2012 dasz.at OG</copyright>
     <tags>Platform Database ORM Applications</tags>
     <dependencies>
-      <dependency id="Autofac.Mvc3" version="[2.6.3.862]" />
+      <dependency id="zetboxBasic" version="[$version$]" />
       <dependency id="zetboxBasic-Client" version="[$version$]" />
-      <dependency id="NuGetPowerTools" version="0.29" />
+
+      <dependency id="Autofac.Mvc3" version="[2.6.3.862]" />
     </dependencies>
   </metadata>
   <files>
