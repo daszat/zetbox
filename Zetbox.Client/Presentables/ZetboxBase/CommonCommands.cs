@@ -812,7 +812,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public override bool CanExecute(object data)
         {
-            if (CurrentIdentity == null || !CurrentIdentity.IsAdmininistrator())
+            if (CurrentIdentity == null || !CurrentIdentity.IsAdministrator())
             {
                 this.Reason = CommonCommandsResources.ElevatedModeCommand_Error;
                 return false;
@@ -867,7 +867,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public override bool CanExecute(object data)
         {
-            if (CurrentIdentity == null || !CurrentIdentity.IsAdmininistrator())
+            if (CurrentIdentity == null || !CurrentIdentity.IsAdministrator())
             {
                 this.Reason = CommonCommandsResources.ElevatedModeCommand_Error;
                 return false;

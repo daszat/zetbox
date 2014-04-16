@@ -1378,7 +1378,7 @@ namespace Zetbox.DalProvider.Client
         private bool _elevatedMode = false;
         public void SetElevatedMode(bool elevatedMode)
         {
-            if (!_identityResolver.GetCurrent().IsAdmininistrator()) throw new System.Security.SecurityException("You have no rights to enter elevated mode");
+            if (!_identityResolver.GetCurrent().IsAdministrator()) throw new System.Security.SecurityException("You have no rights to enter elevated mode");
             if (_elevatedMode != elevatedMode)
             {
                 _elevatedMode = elevatedMode;

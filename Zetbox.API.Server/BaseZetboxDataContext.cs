@@ -109,7 +109,7 @@ namespace Zetbox.API.Server
             if (Identity == null || !ifType.Type.IsIDataObject()) return Zetbox.API.AccessRights.Full;
 
             // Identity is a Administrator - is allowed to do everything
-            if (Identity.IsAdmininistrator()) return Zetbox.API.AccessRights.Full;
+            if (Identity.IsAdministrator()) return Zetbox.API.AccessRights.Full;
 
             // Case #1363: May return NULL during initialization
             var objClass = metaDataResolver.GetObjectClass(ifType);

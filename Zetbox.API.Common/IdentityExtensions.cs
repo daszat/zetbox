@@ -23,7 +23,15 @@ namespace Zetbox.App.Extensions
 {
     public static class IdentityExtensions
     {
+        // deprecated typo
+        // [Obsolete]
         public static bool IsAdmininistrator(this Identity id)
+        {
+            if (id == null) throw new ArgumentNullException("id");
+            return id.Groups.Any(g => g.ExportGuid == Zetbox.NamedObjects.Base.Groups.Administrator.Guid);
+        }
+
+        public static bool IsAdministrator(this Identity id)
         {
             if (id == null) throw new ArgumentNullException("id");
             return id.Groups.Any(g => g.ExportGuid == Zetbox.NamedObjects.Base.Groups.Administrator.Guid);

@@ -81,7 +81,7 @@ namespace Zetbox.Client.Presentables.GUI
                     {
                         _hasAccess = false;
                     }
-                    else if (_screen.Groups.Count != 0 && !CurrentIdentity.IsAdmininistrator() && !_screen.Groups.Any(g => CurrentIdentity.Groups.Any(grp => grp.ExportGuid == g.ExportGuid)))
+                    else if (_screen.Groups.Count != 0 && !CurrentIdentity.IsAdministrator() && !_screen.Groups.Any(g => CurrentIdentity.Groups.Any(grp => grp.ExportGuid == g.ExportGuid)))
                     {
                         _hasAccess = false;
                     }
@@ -209,7 +209,7 @@ namespace Zetbox.Client.Presentables.GUI
                 if (HasAccess && _childrenRO == null)
                 {
                     _children = new ObservableCollection<NavigationEntryViewModel>();
-                    foreach (var s in _screen.Children.Where(c => c.Groups.Count == 0 || CurrentIdentity.IsAdmininistrator() || c.Groups.Any(g => CurrentIdentity.Groups.Select(grp => grp.ExportGuid).Contains(g.ExportGuid))))
+                    foreach (var s in _screen.Children.Where(c => c.Groups.Count == 0 || CurrentIdentity.IsAdministrator() || c.Groups.Any(g => CurrentIdentity.Groups.Select(grp => grp.ExportGuid).Contains(g.ExportGuid))))
                     {
                         _children.Add(NavigationEntryViewModel.Fetch(ViewModelFactory, DataContext, this, s));
                     }
