@@ -23,6 +23,7 @@ using System.Windows.Controls;
 using Zetbox.API;
 using Zetbox.Client.WPF.Toolkit;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Zetbox.Client.WPF.CustomControls
 {
@@ -31,6 +32,9 @@ namespace Zetbox.Client.WPF.CustomControls
         static ZetboxListView()
         {
             EventManager.RegisterClassHandler(typeof(ListViewItem), MouseLeftButtonDownEvent, new MouseButtonEventHandler(ListViewItem_HandleMouseLeftButtonDownEvent));
+            EventManager.RegisterClassHandler(typeof(ListViewItem), PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(ListViewItem_PreviewHandleMouseLeftButtonDownEvent));
+            EventManager.RegisterClassHandler(typeof(ListViewItem), PreviewMouseLeftButtonUpEvent, new MouseButtonEventHandler(ListViewItem_PreviewHandleMouseLeftButtonUpEvent));
+            EventManager.RegisterClassHandler(typeof(ListViewItem), MouseLeaveEvent, new MouseEventHandler(ListViewItem_HandleMouseLeaveEvent));
         }
 
         public ZetboxListView()
@@ -182,6 +186,53 @@ namespace Zetbox.Client.WPF.CustomControls
             _currentSelectionState.PreviewedEvent = e;
         }
 
+        ListViewItem _handledMouseDownLVI;
+
+        private static void ListViewItem_PreviewHandleMouseLeftButtonDownEvent(object sender, MouseButtonEventArgs e)
+        {
+            var lvi = sender as ListViewItem;
+            if (lvi == null) return;
+
+            var listView = lvi.FindVisualParent<ZetboxListView>();
+            if (listView == null) return;
+
+            if (listView.SelectedItems.Contains(lvi.DataContext))
+            {
+                // the user may start a drag by clicking into selected items
+                // delay destroying the selection to the Up event
+                e.Handled = true;
+                listView._handledMouseDownLVI = lvi;
+            }
+        }
+
+        private static void ListViewItem_HandleMouseLeaveEvent(object sender, MouseEventArgs e)
+        {
+            var lvi = sender as ListViewItem;
+            if (lvi == null) return;
+
+            var listView = lvi.FindVisualParent<ZetboxListView>();
+            if (listView == null) return;
+
+            // reset currently clicked item when leaving it.
+            listView._handledMouseDownLVI = null;
+        }
+
+        private static void ListViewItem_PreviewHandleMouseLeftButtonUpEvent(object sender, MouseButtonEventArgs e)
+        {
+            var lvi = sender as ListViewItem;
+            if (lvi == null) return;
+
+            var listView = lvi.FindVisualParent<ZetboxListView>();
+            if (listView == null) return;
+
+            // on letting the Button go, select/deselect the item(s) as usual
+            if (listView._handledMouseDownLVI == lvi)
+            {
+                listView.SelectListViewItems(e);
+                listView._handledMouseDownLVI = null;
+            }
+        }
+
         private static void ListViewItem_HandleMouseLeftButtonDownEvent(object sender, MouseButtonEventArgs e)
         {
             var lvi = sender as ListViewItem;
@@ -226,7 +277,7 @@ namespace Zetbox.Client.WPF.CustomControls
                             case SelectionMode.Multiple:
                                 if (Keyboard.Modifiers.HasFlag(ModifierKeys.Control))
                                 {
-                                    lvi.IsSelected = true;
+                                    lvi.IsSelected = !lvi.IsSelected;
                                 }
                                 else
                                 {
@@ -236,7 +287,7 @@ namespace Zetbox.Client.WPF.CustomControls
                             case SelectionMode.Extended:
                                 if (Keyboard.Modifiers.HasFlag(ModifierKeys.Control))
                                 {
-                                    lvi.IsSelected = true;
+                                    lvi.IsSelected = !lvi.IsSelected;
                                 }
                                 else if (Keyboard.Modifiers.HasFlag(ModifierKeys.Shift))
                                 {
