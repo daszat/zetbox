@@ -12,28 +12,30 @@
 //
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Zetbox.App.GUI;
-using Zetbox.Client.GUI;
-using Zetbox.Client.Presentables;
-using Zetbox.Client.Presentables.ObjectEditor;
-using Zetbox.Client.WPF.CustomControls;
-using Zetbox.Client.WPF.Toolkit;
 
 namespace Zetbox.Client.WPF.View.ObjectEditor
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Linq;
+    using System.Text;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Data;
+    using System.Windows.Documents;
+    using System.Windows.Input;
+    using System.Windows.Media;
+    using System.Windows.Media.Imaging;
+    using System.Windows.Shapes;
+    using Zetbox.API;
+    using Zetbox.App.GUI;
+    using Zetbox.Client.GUI;
+    using Zetbox.Client.Presentables;
+    using Zetbox.Client.Presentables.ObjectEditor;
+    using Zetbox.Client.WPF.CustomControls;
+    using Zetbox.Client.WPF.Toolkit;
+
     /// <summary>
     /// Interaction logic for DesktopView.xaml
     /// </summary>
@@ -44,9 +46,14 @@ namespace Zetbox.Client.WPF.View.ObjectEditor
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             InitializeComponent();
-            _dragDrop = new WpfDragDropHelper(this.lstItems, this);
         }
         private WpfDragDropHelper _dragDrop;
+
+        protected override void OnInitialized(EventArgs e)
+        {
+            base.OnInitialized(e);
+            this.lstItems.Loaded += (s, e2) => { _dragDrop = new WpfDragDropHelper(lstItems.FindScrollContentPresenter() ?? this.lstItems, this); };
+        }
 
         public WorkspaceViewModel ViewModel
         {

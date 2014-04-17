@@ -25,6 +25,7 @@ namespace Zetbox.Client.WPF.Toolkit
     using System.Windows.Data;
     using System.Windows.Input;
     using System.Windows.Media;
+    using Zetbox.API;
     using Zetbox.App.GUI;
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables;
@@ -88,6 +89,32 @@ namespace Zetbox.Client.WPF.Toolkit
                 depObj = VisualTreeHelper.GetParent(depObj);
             }
             return null;
+        }
+
+        /// <summary>
+        /// Returns the primary ScrollContentPresenter of a ListBox. This is very useful for finding the DragParent for WpfDragDropHelper.
+        /// </summary>
+        /// <param name="box"></param>
+        /// <returns>null if not found</returns>
+        public static FrameworkElement FindScrollContentPresenter(this ListBox box)
+        {
+            if (box == null) return null;
+            var scrollViewer = box.FindVisualChild<ScrollViewer>();
+            return scrollViewer.IfNotNull(s => s.FindVisualChild<ScrollContentPresenter>());
+        }
+
+        public static FrameworkElement FindScrollContentPresenter(this DataGrid box)
+        {
+            if (box == null) return null;
+            var scrollViewer = box.FindVisualChild<ScrollViewer>();
+            return scrollViewer.IfNotNull(s => s.FindVisualChild<ScrollContentPresenter>());
+        }
+
+        public static FrameworkElement FindScrollContentPresenter(this ListView box)
+        {
+            if (box == null) return null;
+            var scrollViewer = box.FindVisualChild<ScrollViewer>();
+            return scrollViewer.IfNotNull(s => s.Template.FindName("PART_ScrollContentPresenter", s) as FrameworkElement);
         }
 
         public static double TranslateWidth(WidthHint? w)

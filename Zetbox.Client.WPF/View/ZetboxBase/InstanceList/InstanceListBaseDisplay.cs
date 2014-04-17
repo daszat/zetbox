@@ -34,17 +34,23 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
     using Zetbox.Client.GUI;
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables;
-    using Zetbox.Client.Presentables.ZetboxBase;
-    using Zetbox.Client.WPF.Toolkit;
-    using Zetbox.Client.WPF.CustomControls;
     using Zetbox.Client.Presentables.GUI;
+    using Zetbox.Client.Presentables.ZetboxBase;
+    using Zetbox.Client.WPF.CustomControls;
+    using Zetbox.Client.WPF.Toolkit;
 
     public abstract class InstanceListBaseDisplay : InstanceCollectionBase
     {
         public abstract ListView ListView { get; }
+
         protected override Control ListControl
         {
             get { return ListView; }
+        }
+
+        protected override FrameworkElement DragParent
+        {
+            get { return ListView.FindScrollContentPresenter(); }
         }
 
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
@@ -52,7 +58,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
             base.OnPropertyChanged(e);
             if (ViewModel != null && e.Property == FrameworkElement.DataContextProperty)
             {
-                ViewModel.PropertyChanged += (s, pce) => 
+                ViewModel.PropertyChanged += (s, pce) =>
                 {
                     if (pce.PropertyName == "ViewMethod") ApplyViewMethod();
                     if (pce.PropertyName == "DisplayedColumns")
@@ -84,10 +90,10 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
                 return null;
             }
         }
-        
+
         private void ApplyColumns()
         {
-            if(ViewModel != null && ListView != null)
+            if (ViewModel != null && ListView != null)
                 WPFHelper.RefreshGridView(ListView, ViewModel.DisplayedColumns, WpfSortHelper.SortPropertyNameProperty);
         }
 

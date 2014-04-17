@@ -49,6 +49,11 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
             get { return DataGrid; }
         }
 
+        protected override FrameworkElement DragParent
+        {
+            get { return DataGrid.FindScrollContentPresenter() ?? DataGrid; }
+        }
+
         protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
             base.OnPropertyChanged(e);

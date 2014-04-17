@@ -2311,6 +2311,10 @@
     <Style TargetType="ctrls:ZetboxDataGrid"
            BasedOn="{StaticResource dataGridTemplate}" />
 
+    <Style TargetType="DataGridRowHeader">
+        <Setter Property="tk:WpfDragDropHelper.NoDragSource" Value="True"/>
+    </Style>
+
     <!-- thanks for the tip: http://www.steelyeyedview.com/2010/03/contentpresenter-gridviewrowpresenter.html -->
     <Style x:Key="zbListViewItemTemplate"
            TargetType="ListViewItem">

@@ -48,20 +48,14 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
-            ListControl.Loaded += ListControl_Loaded;
-        }
-
-        void ListControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            var scrollViewer = ListControl.FindVisualChild<ScrollViewer>();
-            var dragParent = scrollViewer.IfNotNull(s => s.Template.FindName("PART_ScrollContentPresenter", s) as FrameworkElement)
-                ?? ListControl;
-            _dragDrop = new WpfDragDropHelper(dragParent, this);
+            ListControl.Loaded += (s, e2) => { _dragDrop = new WpfDragDropHelper(DragParent, this); };
         }
 
         private WpfDragDropHelper _dragDrop;
 
         protected abstract Control ListControl { get; }
+
+        protected abstract FrameworkElement DragParent { get; }
 
         #region ItemActivatedHandler
         /// <summary>
