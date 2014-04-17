@@ -6,6 +6,7 @@
                       xmlns:kevin="clr-namespace:Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;assembly=WPFSamplesLib"
                       xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
                       xmlns:styles="clr-namespace:Zetbox.Client.WPF.Styles;assembly=Zetbox.Client.WPF.Toolkit"
+                      xmlns:tk="clr-namespace:Zetbox.Client.WPF.Toolkit;assembly=Zetbox.Client.WPF.Toolkit"
                       xmlns:view="clr-namespace:Zetbox.Client.WPF.View.ZetboxBase"
                       ToolTip="{Binding ToolTip, Mode=OneWay}"
                       VerticalAlignment="Top">
@@ -60,7 +61,8 @@
                PlacementTarget="{Binding ElementName=btnDropDown}"
                Width="{Binding ActualWidth, ElementName=panel}"
                StaysOpen="True"
-               AllowsTransparency="True">
+               AllowsTransparency="True"
+               tk:WpfDragDropHelper.NoDragSource="True">
             <Border Background="White"
                     Margin="0 0 2 2"
                     Padding="2">
