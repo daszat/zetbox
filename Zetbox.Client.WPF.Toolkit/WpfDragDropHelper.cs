@@ -123,8 +123,7 @@ namespace Zetbox.Client.WPF.Toolkit
 
         void OnMouseMove(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            var editor = sender as FrameworkElement;
-            if (editor != null && e.LeftButton == MouseButtonState.Pressed && _ourMousePress)
+            if (e.LeftButton == MouseButtonState.Pressed && _ourMousePress)
             {
                 if (e.OriginalSource is DependencyObject && GetNoDragSource((DependencyObject)e.OriginalSource) == true) return;
 
@@ -136,8 +135,8 @@ namespace Zetbox.Client.WPF.Toolkit
                         try
                         {
                             var dragData = new DataObject(data);
-                            dragData.SetData(ZetboxDragSourceDataFormat, editor);
-                            DragDrop.DoDragDrop(editor, dragData, DragDropEffects.Copy | DragDropEffects.Link);
+                            dragData.SetData(ZetboxDragSourceDataFormat, this);
+                            DragDrop.DoDragDrop(_uiSourceElement, dragData, DragDropEffects.Copy | DragDropEffects.Link);
                         }
                         catch (COMException)
                         {
@@ -175,8 +174,8 @@ namespace Zetbox.Client.WPF.Toolkit
         {
             if (e.Data.GetDataPresent(ZetboxDragSourceDataFormat))
             {
-                var src = e.Data.GetData(ZetboxDragSourceDataFormat) as FrameworkElement;
-                if (src != null && src.IsDescendantOf(_target as DependencyObject))
+                var src = e.Data.GetData(ZetboxDragSourceDataFormat);
+                if (src == this)
                 {
                     // Prevent drag'n'drop to self
                     return false;
