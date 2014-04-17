@@ -78,29 +78,32 @@ namespace Zetbox.Client.WPF.Toolkit
             DataFormats.Text, 
         };
 
-        private FrameworkElement _parent;
+        private FrameworkElement _uiSourceElement;
+        private FrameworkElement _uiTargetElement;
+
         private IDragDropTarget _target;
         private IDragDropSource _source;
 
-        public WpfDragDropHelper(FrameworkElement parent, object callback = null)
+        public WpfDragDropHelper(FrameworkElement uiElement, object callback = null)
         {
-            if (parent == null) throw new ArgumentNullException("parent");
+            if (uiElement == null) throw new ArgumentNullException("uiElement");
 
-            _parent = parent;
-            _target = (callback ?? parent) as IDragDropTarget;
-            _source = (callback ?? parent) as IDragDropSource;
+            _target = (callback ?? uiElement) as IDragDropTarget;
+            _source = (callback ?? uiElement) as IDragDropSource;
 
             if (_target != null)
             {
-                _parent.AllowDrop = true;
-                _parent.PreviewDragEnter += OnDragEnter;
-                _parent.PreviewDragLeave += OnDragLeave;
-                _parent.PreviewDragOver += OnDragOver;
-                _parent.PreviewDrop += OnDrop;
+                _uiTargetElement = uiElement as Control ?? uiElement.FindVisualParent<Control>();
+                _uiTargetElement.AllowDrop = true;
+                _uiTargetElement.PreviewDragEnter += OnDragEnter;
+                _uiTargetElement.PreviewDragLeave += OnDragLeave;
+                _uiTargetElement.PreviewDragOver += OnDragOver;
+                _uiTargetElement.PreviewDrop += OnDrop;
             }
             if (_source != null)
             {
-                _parent.MouseMove += new System.Windows.Input.MouseEventHandler(OnMouseMove);
+                _uiSourceElement = uiElement;
+                _uiSourceElement.MouseMove += new System.Windows.Input.MouseEventHandler(OnMouseMove);
             }
         }
 
@@ -114,7 +117,7 @@ namespace Zetbox.Client.WPF.Toolkit
                 var data = _source.GetData();
                 if (data != null)
                 {
-                    _parent.Dispatcher.BeginInvoke(new Action(() =>
+                    _uiSourceElement.Dispatcher.BeginInvoke(new Action(() =>
                     {
                         try
                         {
@@ -186,7 +189,7 @@ namespace Zetbox.Client.WPF.Toolkit
         }
 
         private PreviousFill _previousFill = null;
-        private static Brush _dragEnderFill = null;
+        private static Brush _dragEnterFill = null;
         private void OnDragEnter(object sender, DragEventArgs e)
         {
             var element = sender as FrameworkElement;
@@ -196,12 +199,12 @@ namespace Zetbox.Client.WPF.Toolkit
 
             if (editor != null && _previousFill == null && CanDrop(e))
             {
-                if (_dragEnderFill == null)
+                if (_dragEnterFill == null)
                 {
-                    _dragEnderFill = new SolidColorBrush() { Color = (Color)_parent.FindResource(Zetbox.Client.WPF.Styles.Defaults.SecondaryBackgroundKey) };
+                    _dragEnterFill = new SolidColorBrush() { Color = (Color)_uiTargetElement.FindResource(Zetbox.Client.WPF.Styles.Defaults.SecondaryBackgroundKey) };
                 }
                 _previousFill = new PreviousFill() { Brush = editor.Background };
-                editor.Background = _dragEnderFill;
+                editor.Background = _dragEnterFill;
             }
 
             // the default implementation should be called
