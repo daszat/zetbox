@@ -73,6 +73,14 @@ namespace Zetbox.Client.Presentables.TestModule
             }
         }
 
+        public InstanceListViewMethod[] ViewMethodsSource
+        {
+            get
+            {
+                return new[] { InstanceListViewMethod.Details, InstanceListViewMethod.List };
+            }
+        }
+
         private InstanceListViewModel _TestList = null;
         public InstanceListViewModel TestList
         {

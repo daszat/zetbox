@@ -135,6 +135,10 @@
                     <CheckBox IsEnabled="False"
                               IsChecked="{Binding TestList.ShowUtilities, Mode=OneWay}" />
                 </ctrls:LabeledContainer>
+                <ctrls:LabeledContainer Label="View Method">
+                    <ComboBox ItemsSource="{Binding ViewMethodsSource}"
+                              SelectedItem="{Binding TestList.ViewMethod}" />
+                </ctrls:LabeledContainer>
                 <TextBlock FontSize="20"
                            FontWeight="Bold">ILabeledViewModel:</TextBlock>
                 <ctrls:LabeledContainer Label="Label">
