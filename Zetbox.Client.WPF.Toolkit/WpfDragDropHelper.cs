@@ -103,14 +103,28 @@ namespace Zetbox.Client.WPF.Toolkit
             if (_source != null)
             {
                 _uiSourceElement = uiElement;
+                _uiSourceElement.PreviewMouseLeftButtonDown += _uiSourceElement_PreviewMouseLeftButtonDown;
+                _uiSourceElement.PreviewMouseLeftButtonUp += _uiSourceElement_PreviewMouseLeftButtonUp;
                 _uiSourceElement.MouseMove += new System.Windows.Input.MouseEventHandler(OnMouseMove);
             }
+        }
+
+        private bool _ourMousePress = false;
+
+        void _uiSourceElement_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            _ourMousePress = true;
+        }
+
+        void _uiSourceElement_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            _ourMousePress = false;
         }
 
         void OnMouseMove(object sender, System.Windows.Input.MouseEventArgs e)
         {
             var editor = sender as FrameworkElement;
-            if (editor != null && e.LeftButton == MouseButtonState.Pressed)
+            if (editor != null && e.LeftButton == MouseButtonState.Pressed && _ourMousePress)
             {
                 if (e.OriginalSource is DependencyObject && GetNoDragSource((DependencyObject)e.OriginalSource) == true) return;
 
@@ -128,6 +142,10 @@ namespace Zetbox.Client.WPF.Toolkit
                         catch (COMException)
                         {
                             // LA LA LA LA LA LA, I can't here you....
+                        }
+                        finally
+                        {
+                            _ourMousePress = false;
                         }
                     }));
                 }
