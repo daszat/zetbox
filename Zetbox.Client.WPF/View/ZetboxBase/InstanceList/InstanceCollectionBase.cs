@@ -36,8 +36,8 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables;
     using Zetbox.Client.Presentables.ZetboxBase;
-    using Zetbox.Client.WPF.Toolkit;
     using Zetbox.Client.WPF.CustomControls;
+    using Zetbox.Client.WPF.Toolkit;
 
     public abstract class InstanceCollectionBase : UserControl, IHasViewModel<InstanceListViewModel>, IDragDropSource, IDragDropTarget
     {
@@ -48,7 +48,15 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
-            _dragDrop = new WpfDragDropHelper(ListControl, this);
+            ListControl.Loaded += ListControl_Loaded;
+        }
+
+        void ListControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            var scrollViewer = ListControl.FindVisualChild<ScrollViewer>();
+            var dragParent = scrollViewer.IfNotNull(s => s.Template.FindName("PART_ScrollContentPresenter", s) as FrameworkElement)
+                ?? ListControl;
+            _dragDrop = new WpfDragDropHelper(dragParent, this);
         }
 
         private WpfDragDropHelper _dragDrop;
@@ -89,7 +97,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
                 return _sortHelper;
             }
         }
-        
+
         #endregion
 
         #region RefreshCommand_Executed

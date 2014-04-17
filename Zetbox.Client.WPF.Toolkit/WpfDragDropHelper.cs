@@ -1,15 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Controls;
-using System.Windows;
-using System.Windows.Media;
-using System.Windows.Input;
-using System.Runtime.InteropServices;
+﻿// This file is part of zetbox.
+//
+// Zetbox is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as
+// published by the Free Software Foundation, either version 3 of
+// the License, or (at your option) any later version.
+//
+// Zetbox is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU Lesser General Public
+// License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 
 namespace Zetbox.Client.WPF.Toolkit
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Runtime.InteropServices;
+    using System.Text;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Input;
+    using System.Windows.Media;
+
     public interface IDragDropTarget
     {
         bool CanDrop { get; }
@@ -63,12 +78,14 @@ namespace Zetbox.Client.WPF.Toolkit
             DataFormats.Text, 
         };
 
-        private Control _parent;
+        private FrameworkElement _parent;
         private IDragDropTarget _target;
         private IDragDropSource _source;
 
-        public WpfDragDropHelper(Control parent, object callback = null)
+        public WpfDragDropHelper(FrameworkElement parent, object callback = null)
         {
+            if (parent == null) throw new ArgumentNullException("parent");
+
             _parent = parent;
             _target = (callback ?? parent) as IDragDropTarget;
             _source = (callback ?? parent) as IDragDropSource;
@@ -89,7 +106,7 @@ namespace Zetbox.Client.WPF.Toolkit
 
         void OnMouseMove(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            var editor = sender as Control;
+            var editor = sender as FrameworkElement;
             if (editor != null && e.LeftButton == MouseButtonState.Pressed)
             {
                 if (e.OriginalSource is DependencyObject && GetNoDragSource((DependencyObject)e.OriginalSource) == true) return;
@@ -118,8 +135,7 @@ namespace Zetbox.Client.WPF.Toolkit
         {
             ResetBackground(sender);
 
-            var editor = sender as Control;
-            if (editor != null && CanDrop(e))
+            if (CanDrop(e))
             {
                 foreach (var format in _target.AcceptableDataFormats)
                 {
@@ -139,7 +155,7 @@ namespace Zetbox.Client.WPF.Toolkit
             if (e.Data.GetDataPresent(ZetboxDragSourceDataFormat))
             {
                 var src = e.Data.GetData(ZetboxDragSourceDataFormat) as FrameworkElement;
-                if (src != null && src.IsDescendantOf(_target as FrameworkElement))
+                if (src != null && src.IsDescendantOf(_target as DependencyObject))
                 {
                     // Prevent drag'n'drop to self
                     return false;
@@ -152,8 +168,7 @@ namespace Zetbox.Client.WPF.Toolkit
 
         private void OnDragOver(object sender, DragEventArgs e)
         {
-            var editor = sender as Control;
-            if (editor != null && CanDrop(e))
+            if (CanDrop(e))
             {
                 e.Effects = DragDropEffects.Copy;
             }
@@ -174,7 +189,11 @@ namespace Zetbox.Client.WPF.Toolkit
         private static Brush _dragEnderFill = null;
         private void OnDragEnter(object sender, DragEventArgs e)
         {
-            var editor = sender as Control;
+            var element = sender as FrameworkElement;
+            if (element == null) return;
+
+            var editor = element as Control ?? element.FindVisualParent<Control>();
+
             if (editor != null && _previousFill == null && CanDrop(e))
             {
                 if (_dragEnderFill == null)
@@ -197,7 +216,10 @@ namespace Zetbox.Client.WPF.Toolkit
 
         private void ResetBackground(object sender)
         {
-            var editor = sender as Control;
+            var element = sender as FrameworkElement;
+            if (element == null) return;
+
+            var editor = element as Control ?? element.FindVisualParent<Control>();
             if (editor != null && _previousFill != null)
             {
                 editor.Background = _previousFill.Brush;
