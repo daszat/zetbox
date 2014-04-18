@@ -225,7 +225,7 @@ namespace Zetbox.Client.WPF.CustomControls
             var listView = lvi.FindVisualParent<ZetboxListView>();
             if (listView == null) return;
 
-            if (listView.SelectedItems.Contains(lvi.DataContext))
+            if (e.ClickCount == 1 && listView.SelectedItems.Contains(lvi.DataContext))
             {
                 // the user may start a drag by clicking into selected items
                 // delay destroying the selection to the Up event
