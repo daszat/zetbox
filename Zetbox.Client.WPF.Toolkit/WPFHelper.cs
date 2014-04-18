@@ -238,6 +238,8 @@ namespace Zetbox.Client.WPF.Toolkit
                     editorFactory.SetValue(VisualTypeTemplateSelector.RequestedKindProperty, desc.ControlKind);
                     editorFactory.SetValue(ContentPresenter.ContentTemplateSelectorProperty, lst.FindResource("defaultTemplateSelector"));
                     editorFactory.SetValue(FrameworkElement.HorizontalAlignmentProperty, HorizontalAlignment.Stretch);
+                    // disable drag-start behaviour on enclosed editors. This allows them to drag themselves (e.g. for text selection)
+                    editorFactory.SetValue(WpfDragDropHelper.NoDragSourceProperty, true);
                 }
 
                 labelFactory.SetValue(VisualTypeTemplateSelector.RequestedKindProperty, desc.GridPreEditKind);
@@ -291,6 +293,8 @@ namespace Zetbox.Client.WPF.Toolkit
 
                 SetGridColMemberSourcePath(col, desc.Path);
 
+                var displaysEditor = desc.ControlKind != desc.GridPreEditKind;
+
                 DataTemplate result = new DataTemplate();
                 var cpFef = new FrameworkElementFactory(typeof(ContentPresenter));
                 switch (desc.Type)
@@ -314,6 +318,12 @@ namespace Zetbox.Client.WPF.Toolkit
                 cpFef.SetValue(VisualTypeTemplateSelector.RequestedKindProperty, desc.ControlKind);
                 cpFef.SetValue(ContentPresenter.ContentTemplateSelectorProperty, lst.FindResource("defaultTemplateSelector"));
                 cpFef.SetValue(FrameworkElement.HorizontalAlignmentProperty, HorizontalAlignment.Stretch);
+                if (displaysEditor)
+                {
+                    // disable drag-start behaviour on enclosed editors. This allows them to drag themselves (e.g. for text selection)
+                    cpFef.SetValue(WpfDragDropHelper.NoDragSourceProperty, true);
+                }
+
                 result.VisualTree = cpFef;
                 col.CellTemplate = result;
                 view.Columns.Add(col);
