@@ -20,9 +20,10 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
 using Zetbox.API;
 using Zetbox.Client.WPF.Toolkit;
-using System.Windows.Input;
 
 namespace Zetbox.Client.WPF.CustomControls
 {
@@ -30,12 +31,13 @@ namespace Zetbox.Client.WPF.CustomControls
     {
         static ZetboxListView()
         {
-            EventManager.RegisterClassHandler(typeof(ListViewItem), MouseLeftButtonDownEvent, new MouseButtonEventHandler(ListViewItem_HandleMouseLeftButtonDownEvent));
+            EventManager.RegisterClassHandler(typeof(ListViewItem), MouseLeftButtonDownEvent, new MouseButtonEventHandler(Item_ButtonDownEvent));
         }
 
         public ZetboxListView()
         {
-            this.AddHandler(UIElement.MouseLeftButtonDownEvent, new MouseButtonEventHandler(HandledMouseLeftButtonDownEvent), true);
+            this.AddHandler(UIElement.PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(List_PreviewButtonDownEvent), true);
+            this.AddHandler(UIElement.MouseLeftButtonDownEvent, new MouseButtonEventHandler(List_ButtonDownEvent), true);
         }
 
         #region SelectionChanged
@@ -149,17 +151,7 @@ namespace Zetbox.Client.WPF.CustomControls
         }
         #endregion
 
-        public bool DisableSelectionOnPreview
-        {
-            get { return (bool)GetValue(DisableSelectionOnPreviewProperty); }
-            set { SetValue(DisableSelectionOnPreviewProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for DisableSelectionOnPreview.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty DisableSelectionOnPreviewProperty =
-            DependencyProperty.Register("DisableSelectionOnPreview", typeof(bool), typeof(ZetboxListView), new UIPropertyMetadata(false));
-
-
+        #region select through inner controls
         private class SelectionState
         {
             public MouseButtonEventArgs PreviewedEvent;
@@ -173,16 +165,19 @@ namespace Zetbox.Client.WPF.CustomControls
         /// make use of event tunneling for selecting items when a click event occurred in a child element
         /// </summary>
         /// <remarks>http://joshsmithonwpf.wordpress.com/2007/06/22/overview-of-routed-events-in-wpf/</remarks>
-        /// <param name="e"></param>
-        protected override void OnPreviewMouseLeftButtonDown(System.Windows.Input.MouseButtonEventArgs e)
-        {
-            base.OnPreviewMouseLeftButtonDown(e);
 
+        //   1   //
+        private void List_PreviewButtonDownEvent(object sender, MouseButtonEventArgs e)
+        {
             _currentSelectionState = new SelectionState();
             _currentSelectionState.PreviewedEvent = e;
         }
 
-        private static void ListViewItem_HandleMouseLeftButtonDownEvent(object sender, MouseButtonEventArgs e)
+        //   5   //
+        /// <summary>
+        /// Not called when a child element of the Item handles the Down event.
+        /// </summary>
+        private static void Item_ButtonDownEvent(object sender, MouseButtonEventArgs e)
         {
             var lvi = sender as ListViewItem;
             if (lvi == null) return;
@@ -194,7 +189,11 @@ namespace Zetbox.Client.WPF.CustomControls
             listView._currentSelectionState.ListViewItemEvent = e;
         }
 
-        private void HandledMouseLeftButtonDownEvent(object sender, MouseButtonEventArgs e)
+        /// <summary>
+        /// Not called when the Item handles the Down event.
+        /// </summary>
+        //   6   //
+        private void List_ButtonDownEvent(object sender, MouseButtonEventArgs e)
         {
             if (_currentSelectionState == null) _currentSelectionState = new SelectionState();
             _currentSelectionState.HandledEvent = e;
@@ -207,47 +206,92 @@ namespace Zetbox.Client.WPF.CustomControls
                 SelectListViewItems(_currentSelectionState.HandledEvent);
             }
         }
+        #endregion
+
+        protected override DependencyObject GetContainerForItemOverride()
+        {
+            return new ZetboxListViewItem();
+        }
+
+        class ZetboxListViewItem : ListViewItem
+        {
+            private bool _deferSelection = false;
+
+            protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+            {
+                if (e.ClickCount == 1 && IsSelected)
+                {
+                    // the user may start a drag by clicking into selected items
+                    // delay destroying the selection to the Up event
+                    _deferSelection = true;
+                }
+                else
+                {
+                    base.OnMouseLeftButtonDown(e);
+                }
+            }
+
+            protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)
+            {
+                if (_deferSelection)
+                {
+                    try
+                    {
+                        base.OnMouseLeftButtonDown(e);
+                    }
+                    finally
+                    {
+                        _deferSelection = false;
+                    }
+                }
+                base.OnMouseLeftButtonUp(e);
+            }
+
+            protected override void OnMouseLeave(MouseEventArgs e)
+            {
+                // abort deferred Down
+                _deferSelection = false;
+                base.OnMouseLeave(e);
+            }
+        }
 
         private void SelectListViewItems(MouseButtonEventArgs e)
         {
-            if (!DisableSelectionOnPreview)
+            var src = e.OriginalSource as DependencyObject;
+            if (src != null)
             {
-                var src = e.OriginalSource as DependencyObject;
-                if (src != null)
+                var lvi = src.FindVisualParent<ListViewItem>();
+                if (lvi != null)
                 {
-                    var lvi = src.FindVisualParent<ListViewItem>();
-                    if (lvi != null)
+                    switch (SelectionMode)
                     {
-                        switch (SelectionMode)
-                        {
-                            case SelectionMode.Single:
+                        case SelectionMode.Single:
+                            this.SelectedItem = lvi.DataContext;
+                            break;
+                        case SelectionMode.Multiple:
+                            if (Keyboard.Modifiers.HasFlag(ModifierKeys.Control))
+                            {
+                                lvi.IsSelected = !lvi.IsSelected;
+                            }
+                            else
+                            {
                                 this.SelectedItem = lvi.DataContext;
-                                break;
-                            case SelectionMode.Multiple:
-                                if (Keyboard.Modifiers.HasFlag(ModifierKeys.Control))
-                                {
-                                    lvi.IsSelected = true;
-                                }
-                                else
-                                {
-                                    this.SelectedItem = lvi.DataContext;
-                                }
-                                break;
-                            case SelectionMode.Extended:
-                                if (Keyboard.Modifiers.HasFlag(ModifierKeys.Control))
-                                {
-                                    lvi.IsSelected = true;
-                                }
-                                else if (Keyboard.Modifiers.HasFlag(ModifierKeys.Shift))
-                                {
-                                    // Do nothing, not supported yet
-                                }
-                                else
-                                {
-                                    this.SelectedItem = lvi.DataContext;
-                                }
-                                break;
-                        }
+                            }
+                            break;
+                        case SelectionMode.Extended:
+                            if (Keyboard.Modifiers.HasFlag(ModifierKeys.Control))
+                            {
+                                lvi.IsSelected = !lvi.IsSelected;
+                            }
+                            else if (Keyboard.Modifiers.HasFlag(ModifierKeys.Shift))
+                            {
+                                // Do nothing, not supported yet
+                            }
+                            else
+                            {
+                                this.SelectedItem = lvi.DataContext;
+                            }
+                            break;
                     }
                 }
             }

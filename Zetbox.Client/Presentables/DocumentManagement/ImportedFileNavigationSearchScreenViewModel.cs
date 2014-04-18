@@ -42,11 +42,16 @@ namespace Zetbox.Client.Presentables.DocumentManagement
 
         protected override void InitializeListViewModel(ZetboxBase.InstanceListViewModel mdl)
         {
-            base.InitializeListViewModel(mdl);
-
+            // setup default behavior
             base.ListViewModel.ViewMethod = InstanceListViewMethod.Details;
             base.ListViewModel.AllowAddNew = false;
-            base.ListViewModel.Commands.Add(OpenAllCommand);
+            base.ListViewModel.AllowDelete = true;
+            
+            // call base later as a nav-screen may override default behavior
+            base.InitializeListViewModel(mdl);
+
+            // add custom command
+            base.ListViewModel.Commands.Insert(1, OpenAllCommand);
         }
 
         private ICommandViewModel _OpenAllCommand = null;
@@ -59,7 +64,9 @@ namespace Zetbox.Client.Presentables.DocumentManagement
                     _OpenAllCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
                         ImportedFileNavigationSearchScreenViewModelResources.OpenAllCommand_Label,
                         ImportedFileNavigationSearchScreenViewModelResources.OpenAllCommand_Tooltip,
-                        OpenAll, null, null);
+                        OpenAll,
+                        () => ListViewModel.Instances.Count > 0, 
+                        () => ImportedFileNavigationSearchScreenViewModelResources.OpenAllCommand_Reason);
                     _OpenAllCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.fileopen_png.Find(FrozenContext));
                 }
                 return _OpenAllCommand;

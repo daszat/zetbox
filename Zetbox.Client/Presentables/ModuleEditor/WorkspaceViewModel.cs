@@ -112,7 +112,13 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                         typeof(ObjectClass).GetObjectClass(FrozenContext),
                         () => DataContext.GetQuery<ObjectClass>().Where(i => i.Module == CurrentModule).OrderBy(i => i.Name));
                     SetupViewModel(lstMdl);
+                    lstMdl.AllowAddNew = false; // Remove default add new button
+                    lstMdl.Commands.Insert(0, NewObjectClassCommand);
                     grpMdl.Children.Add(lstMdl);
+
+                    // Diagram
+                    var diagMdl = ViewModelFactory.CreateViewModel<DiagramViewModel.Factory>().Invoke(DataContext, this, CurrentModule);
+                    grpMdl.Children.Add(diagMdl);
 
                     // Interface
                     lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
@@ -239,10 +245,6 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                     SetupViewModel(lstMdl);
                     grpMdl.Children.Add(lstMdl);
 
-                    // Diagram
-                    var diagMdl = ViewModelFactory.CreateViewModel<DiagramViewModel.Factory>().Invoke(DataContext, this, CurrentModule);
-                    lst.Add(diagMdl);
-
                     _TreeItems = new ReadOnlyObservableCollection<ViewModel>(lst);
                 }
                 return _TreeItems;
@@ -349,9 +351,22 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                 if (_ReportProblemCommand == null)
                 {
                     _ReportProblemCommand = ViewModelFactory.CreateViewModel<ReportProblemCommand.Factory>().Invoke(DataContext, this);
-                    _ReportProblemCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.info_png.Find(FrozenContext));
                 }
                 return _ReportProblemCommand;
+            }
+        }
+
+        private NewObjectClassCommand _NewObjectClassCommand = null;
+        public ICommandViewModel NewObjectClassCommand
+        {
+            get
+            {
+                if (_NewObjectClassCommand == null)
+                {
+                    _NewObjectClassCommand = ViewModelFactory.CreateViewModel<NewObjectClassCommand.Factory>().Invoke(DataContext, this, null);
+                    _NewObjectClassCommand.GetCurrentModule = () => this.CurrentModule;
+                }
+                return _NewObjectClassCommand;
             }
         }
 

@@ -20,12 +20,12 @@ namespace Zetbox.Client.Presentables
     using System.Drawing;
     using System.Linq;
     using System.Text;
+    using Autofac;
     using Zetbox.API;
+    using Zetbox.API.Client;
+    using Zetbox.API.Utils;
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables.ValueViewModels;
-    using Zetbox.API.Utils;
-    using Autofac;
-    using Zetbox.API.Client;
 
     public interface IUIExceptionReporter
     {
@@ -60,13 +60,20 @@ namespace Zetbox.Client.Presentables
                 {
                     Setup();
 
-                    var inner = ex.GetInnerException();
+                    var inner = ex.StripTargetInvocationExceptions();
                     Logging.Client.Error("Unhandled Exception", inner);
                     if (inner is InvalidZetboxGeneratedVersionException)
                     {
                         _vmf.ShowMessage(
                             ExceptionReporterViewModelResources.InvalidZetboxGeneratedVersionException_Message,
                             ExceptionReporterViewModelResources.InvalidZetboxGeneratedVersionException_Title
+                        );
+                    }
+                    else if (inner is ZetboxServerIOException)
+                    {
+                        _vmf.ShowMessage(
+                            string.Format(ExceptionReporterViewModelResources.CommunicationError_MessageFormat, inner.Message),
+                            ExceptionReporterViewModelResources.CommunicationError_Title
                         );
                     }
                     else if (_uiIsInitialized)

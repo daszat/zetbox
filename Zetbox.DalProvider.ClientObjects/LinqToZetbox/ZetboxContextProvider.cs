@@ -113,6 +113,9 @@ namespace Zetbox.DalProvider.Client
 
             ValidateServerExpression.CheckValid(query);
 
+            var ftDetector = new FulltextDetector();
+            ftDetector.Visit(query);
+
             var getListTask = new ZbTask<Tuple<List<IDataObject>, List<IStreamable>>>(() =>
                 {
                     List<IStreamable> auxObjectsObjects;
@@ -131,8 +134,11 @@ namespace Zetbox.DalProvider.Client
                         getListTask.Result.Item2.Cast<IPersistenceObject>().ForEach(obj => _context.AttachRespectingIsolationLevel(obj));
                         var serviceResult = getListTask.Result.Item1.Select(obj => (IDataObject)_context.AttachRespectingIsolationLevel(obj)).ToList();
                         objectCount = serviceResult.Count;
+
                         // in the face of local changes, we have to re-query against local objects, to provide a consistent view of the objects
-                        var result = _context.IsModified ? QueryFromLocalObjectsHack(_type, query).Cast<IDataObject>().ToList() : serviceResult;
+                        var result = _context.IsModified && !ftDetector.IsFulltext
+                                   ? QueryFromLocalObjectsHack(_type, query).Cast<IDataObject>().ToList()
+                                   : serviceResult;
 
                         t.Result = result.Cast<T>().ToList();
                     }

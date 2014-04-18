@@ -5,7 +5,7 @@
 # $project is a reference to the EnvDTE project object and represents the project the package is installed into.
 
 $pname=$project.ProjectName
-"Hello from install-references.ps1 in $pname" | Out-Host
+"Hello from install-clientaspnet.ps1 in $pname" | Out-Host
 
 # this is the project type gouid of an ASP.NET MVC 4 Application type
 $isMVC = (Get-MSBuildProperty "ProjectTypeGuids" -ProjectName $pname).EvaluatedValue -match "{E3E379DF-F4C6-4180-9B81-6769533ABE47}"
@@ -31,4 +31,14 @@ foreach ($reference in $project.Object.References)
         "Matched $refname" | Out-Host
         $reference.CopyLocal = $isMVC;
     }
+}
+
+# add the clientaspnet.targets relative to project dir
+$relativeSolutionPath = [NuGet.PathUtility]::GetRelativePath($project.FullName, $dte.Solution.Properties.Item("Path").Value)
+$relativeSolutionPath = [IO.Path]::GetDirectoryName($relativeSolutionPath)
+$relativeSolutionPath = [NuGet.PathUtility]::EnsureTrailingSlash($relativeSolutionPath)
+
+$importPath = ($relativeSolutionPath + ".zetbox\clientaspnet.targets")
+if (! (((Get-MSBuildProject).Imports | %{ $_.ImportingElement.Project }) -contains $importPath)) {
+	Add-Import $importPath $project.ProjectName
 }

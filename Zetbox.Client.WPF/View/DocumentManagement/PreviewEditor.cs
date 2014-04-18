@@ -12,23 +12,24 @@
 //
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
-using System;
-using System.Windows;
-using System.Windows.Controls;
-using Zetbox.API.Utils;
-using Zetbox.Client.GUI;
-using Zetbox.Client.Presentables.DocumentManagement;
-using Zetbox.Client.WPF.Toolkit;
-using System.Windows.Media.Imaging;
-using Zetbox.Client.WPF.CustomControls;
-using Zetbox.App.Base;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Windows.Media;
 
 namespace Zetbox.Client.WPF.View.DocumentManagement
 {
+    using System;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Media;
+    using System.Windows.Media.Imaging;
+    using Zetbox.API.Utils;
+    using Zetbox.App.Base;
+    using Zetbox.Client.GUI;
+    using Zetbox.Client.Presentables.DocumentManagement;
+    using Zetbox.Client.WPF.CustomControls;
+    using Zetbox.Client.WPF.Toolkit;
+
     public abstract class PreviewEditor : UserControl, IHasViewModel<FileViewModel>, IDragDropTarget
     {
         private WpfDragDropHelper _dragDrop;

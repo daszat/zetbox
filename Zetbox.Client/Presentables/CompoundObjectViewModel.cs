@@ -188,7 +188,7 @@ namespace Zetbox.Client.Presentables
         protected virtual List<PropertyGroupViewModel> CreatePropertyGroups()
         {
             FetchPropertyModels();
-            var isAdmin = CurrentIdentity != null ? CurrentIdentity.IsAdmininistrator() : false;
+            var isAdmin = CurrentIdentity != null ? CurrentIdentity.IsAdministrator() : false;
             var zbBaseModule = FrozenContext.GetQuery<Module>().Single(m => m.Name == "ZetboxBase");
 
             return _propertyList

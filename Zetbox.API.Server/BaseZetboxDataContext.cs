@@ -109,7 +109,7 @@ namespace Zetbox.API.Server
             if (Identity == null || !ifType.Type.IsIDataObject()) return Zetbox.API.AccessRights.Full;
 
             // Identity is a Administrator - is allowed to do everything
-            if (Identity.IsAdmininistrator()) return Zetbox.API.AccessRights.Full;
+            if (Identity.IsAdministrator()) return Zetbox.API.AccessRights.Full;
 
             // Case #1363: May return NULL during initialization
             var objClass = metaDataResolver.GetObjectClass(ifType);
@@ -287,7 +287,7 @@ namespace Zetbox.API.Server
             catch (System.Reflection.TargetInvocationException tiex)
             {
                 // unwrap "business" exception
-                throw tiex.InnerException;
+                throw tiex.StripTargetInvocationExceptions();
             }
         }
 
@@ -608,8 +608,16 @@ namespace Zetbox.API.Server
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
         public IDataObject Find(InterfaceType ifType, int ID)
         {
-            var t = FindAsync(ifType, ID);
-            return t.Result;
+            try
+            {
+                var t = FindAsync(ifType, ID);
+                return t.Result;
+            }
+            catch (System.Reflection.TargetInvocationException ex)
+            {
+                // unwrap "business" exception
+                throw ex.StripTargetInvocationExceptions();
+            }
         }
 
         /// <summary>
@@ -622,8 +630,16 @@ namespace Zetbox.API.Server
         /// <returns>IDataObject. If the Object is not found, a Exception is thrown.</returns>
         public T Find<T>(int ID) where T : class, IDataObject
         {
-            var t = FindAsync<T>(ID);
-            return t.Result;
+            try
+            {
+                var t = FindAsync<T>(ID);
+                return t.Result;
+            }
+            catch (System.Reflection.TargetInvocationException ex)
+            {
+                // unwrap "business" exception
+                throw ex.StripTargetInvocationExceptions();
+            }
         }
 
         /// <summary>

@@ -228,7 +228,11 @@ namespace Zetbox.Server
                 IZetboxContext ctx = subContainer.Resolve<IZetboxServerContext>();
                 var userList = subContainer.Resolve<IIdentitySource>().GetAllIdentities(source);
 
-                var identities = ctx.GetQuery<Zetbox.App.Base.Identity>().ToLookup(k => k.UserName.ToUpper());
+                var identities = ctx.GetQuery<Zetbox.App.Base.Identity>()
+                    .ToList()
+                    .Where(k => !string.IsNullOrWhiteSpace(k.UserName)) // NULL Usernames are valid
+                    .ToLookup(k => k.UserName.ToUpper());
+
                 var everyone = Zetbox.NamedObjects.Base.Groups.Everyone.Find(ctx);
                 if (everyone == null) throw new InvalidOperationException("The group 'Everyone' was not found in the database! Abording");
 

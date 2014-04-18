@@ -77,31 +77,6 @@ namespace Zetbox.API.Server
         Zetbox.App.Base.Blob SetBlobStream(Guid version, IZetboxContext ctx, Stream blob, string filename, string mimetype);
     }
 
-    internal sealed class FulltextDetector : ExpressionTreeVisitor
-    {
-        public FulltextDetector()
-        {
-            IsFulltext = false;
-        }
-
-        public bool IsFulltext { get; private set; }
-
-        public string Filter { get; private set; }
-
-        protected override void VisitMethodCall(MethodCallExpression m)
-        {
-            base.VisitMethodCall(m);
-
-            if (m.IsMethodCallExpression("FulltextMatch", typeof(ZetboxContextQueryableExtensions)))
-            {
-                if (IsFulltext) throw new InvalidOperationException("Found two fulltext specs in a single query");
-
-                IsFulltext = true;
-                Filter = (string)(m.Arguments[1] as ConstantExpression).Value;
-            }
-        }
-    }
-
     /// <summary>
     /// Basic server "business" logic. This handles mapping from the service to the actual provider.
     /// </summary>

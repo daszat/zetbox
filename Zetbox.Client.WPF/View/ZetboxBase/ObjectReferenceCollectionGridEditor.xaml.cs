@@ -50,7 +50,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             InitializeComponent();
-            _dragDrop = new WpfDragDropHelper(lst, this);
+            lst.Loaded += (s, e) => { _dragDrop = new WpfDragDropHelper(lst.FindScrollContentPresenter() ?? lst, this); };
         }
         private WpfDragDropHelper _dragDrop;
 

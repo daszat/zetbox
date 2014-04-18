@@ -383,12 +383,15 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
                 throw new ArgumentNullException("newTblName");
             if (!oldTblName.Database.Equals(newTblName.Database)) { throw new ArgumentOutOfRangeException("newTblName", "cannot rename table to different database"); }
 
-            ExecuteNonQuery(String.Format(
-                "ALTER TABLE {0} RENAME TO {1}",
-                FormatSchemaName(oldTblName),
-                QuoteIdentifier(newTblName.Name)));
+            if (oldTblName.Name != newTblName.Name)
+            {
+                ExecuteNonQuery(String.Format(
+                    "ALTER TABLE {0} RENAME TO {1}",
+                    FormatSchemaName(oldTblName),
+                    QuoteIdentifier(newTblName.Name)));
+            }
 
-            if (!oldTblName.Schema.Equals(newTblName.Schema))
+            if (oldTblName.Schema != newTblName.Schema)
             {
                 var intermediateName = new TableRef(oldTblName.Database, oldTblName.Schema, newTblName.Name);
 

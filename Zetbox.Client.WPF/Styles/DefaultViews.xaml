@@ -357,6 +357,8 @@
                 Value="0" />
         <Setter Property="BorderThickness"
                 Value="1,1,0,1" />
+        <Setter Property="tk:WpfDragDropHelper.NoDragSource"
+                Value="true" />
         <Setter Property="ContentTemplate">
             <Setter.Value>
                 <DataTemplate>
@@ -1033,11 +1035,13 @@
                     <ContentPresenter Content="{TemplateBinding Content}" />
                     <Border x:Name="Border"
                             Grid.Column="1"
+                            tk:WpfDragDropHelper.NoDragSource="true"
                             MinWidth="{StaticResource NormalControlHeight}"
                             Background="{StaticResource ControlBackground}"
                             BorderBrush="{StaticResource ControlBorder}"
                             BorderThickness="0,1,1,1" />
                     <Path x:Name="Arrow"
+                          tk:WpfDragDropHelper.NoDragSource="true"
                           Grid.Column="1"
                           Fill="{StaticResource ControlForeground}"
                           HorizontalAlignment="Center"
@@ -2306,6 +2310,10 @@
 
     <Style TargetType="ctrls:ZetboxDataGrid"
            BasedOn="{StaticResource dataGridTemplate}" />
+
+    <Style TargetType="DataGridRowHeader">
+        <Setter Property="tk:WpfDragDropHelper.NoDragSource" Value="True"/>
+    </Style>
 
     <!-- thanks for the tip: http://www.steelyeyedview.com/2010/03/contentpresenter-gridviewrowpresenter.html -->
     <Style x:Key="zbListViewItemTemplate"

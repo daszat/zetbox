@@ -67,7 +67,7 @@
                                    BasedOn="{StaticResource ImageToolbarButton}" />
                         </ctrls:WorkaroundToolBar.Resources>
                         <ctrls:CommandButton CommandViewModel="{Binding SelectAllCommand}"
-                                             Image="/Zetbox.Client.WPF;component/Images/preferences.png" />
+                                             Image="/Zetbox.Client.WPF;component/Images/ok.png" />
                         <ctrls:CommandButton CommandViewModel="{Binding ClearAllCommand}"
                                              Image="/Zetbox.Client.WPF;component/Images/Users.png" />
                     </ctrls:WorkaroundToolBar>

@@ -15,13 +15,13 @@
 
 namespace Zetbox.API.Common
 {
-    using System.Security.Principal;
-    using Zetbox.App.Base;
     using System;
-    using System.Linq;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Runtime.Serialization;
+    using System.Security.Principal;
     using Zetbox.API.Utils;
+    using Zetbox.App.Base;
 
     /// <summary>
     /// Resolve the client's identity.
@@ -118,8 +118,8 @@ namespace Zetbox.API.Common
                 }
                 catch (Exception ex)
                 {
-                    var inner = ex.GetInnerException();
-                    if (inner is InvalidZetboxGeneratedVersionException)
+                    var inner = ex.StripTargetInvocationExceptions();
+                    if (inner is InvalidZetboxGeneratedVersionException || inner is System.IO.IOException)
                     {
                         throw inner;
                     }

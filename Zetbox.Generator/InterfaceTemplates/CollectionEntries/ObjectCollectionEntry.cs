@@ -68,8 +68,8 @@ namespace Zetbox.Generator.InterfaceTemplates.CollectionEntries
         {
             var ceInterface = String.Format("{0}<{1}, {2}>",
                 IsOrdered() ? "IRelationListEntry" : "IRelationEntry",
-                rel.A.Type.Name,
-                rel.B.Type.Name);
+                rel.A.Type.GetDescribedInterfaceTypeName(),
+                rel.B.Type.GetDescribedInterfaceTypeName());
 
             return ceInterface + (IsExportable() ? ", Zetbox.App.Base.IExportable" : String.Empty);
         }

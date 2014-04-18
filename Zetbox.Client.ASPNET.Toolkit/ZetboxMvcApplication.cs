@@ -51,7 +51,7 @@ namespace Zetbox.Client.ASPNET
 
             var config = ZetboxConfig.FromFile(
                 HostType.AspNetClient,
-                string.IsNullOrEmpty(cfgFile) ? string.Empty : Server.MapPath(cfgFile),
+                string.IsNullOrEmpty(cfgFile) ? string.Empty : cfgFile,
                 ZetboxConfig.GetDefaultConfigName("Zetbox.Client.AspNet.xml", configsPath));
 
             // Make DocumentStore relative to HttpService
@@ -129,7 +129,12 @@ namespace Zetbox.Client.ASPNET
 
             builder.RegisterModule<AspNetClientModule>();
 
+            // Register zetbox specific ViewModels
             builder.RegisterViewModels(typeof(ZetboxMvcApplication).Assembly);
+
+            // Register target applications specific Controller and ViewModels
+            builder.RegisterControllers(this.GetType().Assembly);
+            builder.RegisterViewModels(this.GetType().Assembly);
         }
     }
 }

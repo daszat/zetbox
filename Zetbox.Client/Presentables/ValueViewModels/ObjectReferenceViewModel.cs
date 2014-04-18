@@ -768,7 +768,13 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             if (data is IDataObject[])
             {
                 var lst = (IDataObject[])data;
-                var obj = lst.First();
+                if (lst.Length != 1)
+                    return false;
+
+                var obj = lst.Single();
+                if (!ReferencedClass.GetDescribedInterfaceType().Type.IsAssignableFrom(obj.Context.GetInterfaceType(obj).Type))
+                    return false;
+
                 if (obj.Context != DataContext)
                 {
                     if (obj.ObjectState == DataObjectState.New) return false;
@@ -787,6 +793,6 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
             return null;
         }
-        #endregion    
+        #endregion
     }
 }

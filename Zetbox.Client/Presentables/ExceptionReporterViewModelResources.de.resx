@@ -129,6 +129,12 @@
   <data name="Cancel_Tooltip" xml:space="preserve">
     <value>Fehlerbericht nicht senden</value>
   </data>
+  <data name="CommunicationError_MessageFormat" xml:space="preserve">
+    <value>Es ist ein Fehler in der Kommunikation mit dem Server aufgetreten. Bitte teilen Sie den folgenden Fehlercode Ihrem Netzwerkadministrator/Ihrer Netzwerkadministratorin mit: {0}</value>
+  </data>
+  <data name="CommunicationError_Title" xml:space="preserve">
+    <value>Netzwerkfehler</value>
+  </data>
   <data name="ExceptionDetailsLabel" xml:space="preserve">
     <value>Details</value>
   </data>
