@@ -20,10 +20,10 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using Zetbox.API;
-using Zetbox.Client.WPF.Toolkit;
 using System.Windows.Input;
 using System.Windows.Media;
+using Zetbox.API;
+using Zetbox.Client.WPF.Toolkit;
 
 namespace Zetbox.Client.WPF.CustomControls
 {
@@ -152,17 +152,6 @@ namespace Zetbox.Client.WPF.CustomControls
         #endregion
 
         #region select through inner controls
-        public bool DisableSelectionOnPreview
-        {
-            get { return (bool)GetValue(DisableSelectionOnPreviewProperty); }
-            set { SetValue(DisableSelectionOnPreviewProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for DisableSelectionOnPreview.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty DisableSelectionOnPreviewProperty =
-            DependencyProperty.Register("DisableSelectionOnPreview", typeof(bool), typeof(ZetboxListView), new UIPropertyMetadata(false));
-
-
         private class SelectionState
         {
             public MouseButtonEventArgs PreviewedEvent;
@@ -268,44 +257,41 @@ namespace Zetbox.Client.WPF.CustomControls
 
         private void SelectListViewItems(MouseButtonEventArgs e)
         {
-            if (!DisableSelectionOnPreview)
+            var src = e.OriginalSource as DependencyObject;
+            if (src != null)
             {
-                var src = e.OriginalSource as DependencyObject;
-                if (src != null)
+                var lvi = src.FindVisualParent<ListViewItem>();
+                if (lvi != null)
                 {
-                    var lvi = src.FindVisualParent<ListViewItem>();
-                    if (lvi != null)
+                    switch (SelectionMode)
                     {
-                        switch (SelectionMode)
-                        {
-                            case SelectionMode.Single:
+                        case SelectionMode.Single:
+                            this.SelectedItem = lvi.DataContext;
+                            break;
+                        case SelectionMode.Multiple:
+                            if (Keyboard.Modifiers.HasFlag(ModifierKeys.Control))
+                            {
+                                lvi.IsSelected = !lvi.IsSelected;
+                            }
+                            else
+                            {
                                 this.SelectedItem = lvi.DataContext;
-                                break;
-                            case SelectionMode.Multiple:
-                                if (Keyboard.Modifiers.HasFlag(ModifierKeys.Control))
-                                {
-                                    lvi.IsSelected = !lvi.IsSelected;
-                                }
-                                else
-                                {
-                                    this.SelectedItem = lvi.DataContext;
-                                }
-                                break;
-                            case SelectionMode.Extended:
-                                if (Keyboard.Modifiers.HasFlag(ModifierKeys.Control))
-                                {
-                                    lvi.IsSelected = !lvi.IsSelected;
-                                }
-                                else if (Keyboard.Modifiers.HasFlag(ModifierKeys.Shift))
-                                {
-                                    // Do nothing, not supported yet
-                                }
-                                else
-                                {
-                                    this.SelectedItem = lvi.DataContext;
-                                }
-                                break;
-                        }
+                            }
+                            break;
+                        case SelectionMode.Extended:
+                            if (Keyboard.Modifiers.HasFlag(ModifierKeys.Control))
+                            {
+                                lvi.IsSelected = !lvi.IsSelected;
+                            }
+                            else if (Keyboard.Modifiers.HasFlag(ModifierKeys.Shift))
+                            {
+                                // Do nothing, not supported yet
+                            }
+                            else
+                            {
+                                this.SelectedItem = lvi.DataContext;
+                            }
+                            break;
                     }
                 }
             }
