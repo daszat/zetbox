@@ -31,15 +31,13 @@ namespace Zetbox.Client.WPF.CustomControls
     {
         static ZetboxListView()
         {
-            EventManager.RegisterClassHandler(typeof(ListViewItem), MouseLeftButtonDownEvent, new MouseButtonEventHandler(ListViewItem_HandleMouseLeftButtonDownEvent));
-            EventManager.RegisterClassHandler(typeof(ListViewItem), PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(ListViewItem_PreviewHandleMouseLeftButtonDownEvent));
-            EventManager.RegisterClassHandler(typeof(ListViewItem), PreviewMouseLeftButtonUpEvent, new MouseButtonEventHandler(ListViewItem_PreviewHandleMouseLeftButtonUpEvent));
-            EventManager.RegisterClassHandler(typeof(ListViewItem), MouseLeaveEvent, new MouseEventHandler(ListViewItem_HandleMouseLeaveEvent));
+            EventManager.RegisterClassHandler(typeof(ListViewItem), MouseLeftButtonDownEvent, new MouseButtonEventHandler(Item_ButtonDownEvent));
         }
 
         public ZetboxListView()
         {
-            this.AddHandler(UIElement.MouseLeftButtonDownEvent, new MouseButtonEventHandler(HandledMouseLeftButtonDownEvent), true);
+            this.AddHandler(UIElement.PreviewMouseLeftButtonDownEvent, new MouseButtonEventHandler(List_PreviewButtonDownEvent), true);
+            this.AddHandler(UIElement.MouseLeftButtonDownEvent, new MouseButtonEventHandler(List_ButtonDownEvent), true);
         }
 
         #region SelectionChanged
@@ -178,16 +176,19 @@ namespace Zetbox.Client.WPF.CustomControls
         /// make use of event tunneling for selecting items when a click event occurred in a child element
         /// </summary>
         /// <remarks>http://joshsmithonwpf.wordpress.com/2007/06/22/overview-of-routed-events-in-wpf/</remarks>
-        /// <param name="e"></param>
-        protected override void OnPreviewMouseLeftButtonDown(System.Windows.Input.MouseButtonEventArgs e)
-        {
-            base.OnPreviewMouseLeftButtonDown(e);
 
+        //   1   //
+        private void List_PreviewButtonDownEvent(object sender, MouseButtonEventArgs e)
+        {
             _currentSelectionState = new SelectionState();
             _currentSelectionState.PreviewedEvent = e;
         }
 
-        private static void ListViewItem_HandleMouseLeftButtonDownEvent(object sender, MouseButtonEventArgs e)
+        //   5   //
+        /// <summary>
+        /// Not called when a child element of the Item handles the Down event.
+        /// </summary>
+        private static void Item_ButtonDownEvent(object sender, MouseButtonEventArgs e)
         {
             var lvi = sender as ListViewItem;
             if (lvi == null) return;
@@ -199,7 +200,11 @@ namespace Zetbox.Client.WPF.CustomControls
             listView._currentSelectionState.ListViewItemEvent = e;
         }
 
-        private void HandledMouseLeftButtonDownEvent(object sender, MouseButtonEventArgs e)
+        /// <summary>
+        /// Not called when the Item handles the Down event.
+        /// </summary>
+        //   6   //
+        private void List_ButtonDownEvent(object sender, MouseButtonEventArgs e)
         {
             if (_currentSelectionState == null) _currentSelectionState = new SelectionState();
             _currentSelectionState.HandledEvent = e;
@@ -214,54 +219,52 @@ namespace Zetbox.Client.WPF.CustomControls
         }
         #endregion
 
-        #region Improve Selection
-        ListViewItem _handledMouseDownLVI;
-
-        private static void ListViewItem_PreviewHandleMouseLeftButtonDownEvent(object sender, MouseButtonEventArgs e)
+        protected override DependencyObject GetContainerForItemOverride()
         {
-            var lvi = sender as ListViewItem;
-            if (lvi == null) return;
+            return new ZetboxListViewItem();
+        }
 
-            var listView = lvi.FindVisualParent<ZetboxListView>();
-            if (listView == null) return;
+        class ZetboxListViewItem : ListViewItem
+        {
+            private bool _deferSelection = false;
 
-            if (e.ClickCount == 1 && listView.SelectedItems.Contains(lvi.DataContext))
+            protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
             {
-                // the user may start a drag by clicking into selected items
-                // delay destroying the selection to the Up event
-                e.Handled = true;
-                listView._handledMouseDownLVI = lvi;
+                if (e.ClickCount == 1 && IsSelected)
+                {
+                    // the user may start a drag by clicking into selected items
+                    // delay destroying the selection to the Up event
+                    _deferSelection = true;
+                }
+                else
+                {
+                    base.OnMouseLeftButtonDown(e);
+                }
+            }
+
+            protected override void OnMouseLeftButtonUp(MouseButtonEventArgs e)
+            {
+                if (_deferSelection)
+                {
+                    try
+                    {
+                        base.OnMouseLeftButtonDown(e);
+                    }
+                    finally
+                    {
+                        _deferSelection = false;
+                    }
+                }
+                base.OnMouseLeftButtonUp(e);
+            }
+
+            protected override void OnMouseLeave(MouseEventArgs e)
+            {
+                // abort deferred Down
+                _deferSelection = false;
+                base.OnMouseLeave(e);
             }
         }
-
-        private static void ListViewItem_HandleMouseLeaveEvent(object sender, MouseEventArgs e)
-        {
-            var lvi = sender as ListViewItem;
-            if (lvi == null) return;
-
-            var listView = lvi.FindVisualParent<ZetboxListView>();
-            if (listView == null) return;
-
-            // reset currently clicked item when leaving it.
-            listView._handledMouseDownLVI = null;
-        }
-
-        private static void ListViewItem_PreviewHandleMouseLeftButtonUpEvent(object sender, MouseButtonEventArgs e)
-        {
-            var lvi = sender as ListViewItem;
-            if (lvi == null) return;
-
-            var listView = lvi.FindVisualParent<ZetboxListView>();
-            if (listView == null) return;
-
-            // on letting the Button go, select/deselect the item(s) as usual
-            if (listView._handledMouseDownLVI == lvi)
-            {
-                listView.SelectListViewItems(e);
-                listView._handledMouseDownLVI = null;
-            }
-        }
-        #endregion
 
         private void SelectListViewItems(MouseButtonEventArgs e)
         {
