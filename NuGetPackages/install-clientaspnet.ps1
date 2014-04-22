@@ -39,6 +39,6 @@ $relativeSolutionPath = [IO.Path]::GetDirectoryName($relativeSolutionPath)
 $relativeSolutionPath = [NuGet.PathUtility]::EnsureTrailingSlash($relativeSolutionPath)
 
 $importPath = ($relativeSolutionPath + ".zetbox\clientaspnet.targets")
-if (! (((Get-MSBuildProject).Imports | %{ $_.ImportingElement.Project }) -contains ".zetbox\clientaspnet.targets")) {
+if (! (((Get-MSBuildProject).Imports | %{ $_.ImportingElement.Project.contains(".zetbox\clientaspnet.targets")}) -contains $true)) {
 	Add-Import $importPath $project.ProjectName
 }
