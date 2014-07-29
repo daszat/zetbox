@@ -459,7 +459,7 @@ namespace Zetbox.Client.Presentables
             }
             set
             {
-                if (_helpText != null)
+                if (_helpText != value)
                 {
                     _helpText = value;
                     OnPropertyChanged("HelpText");
