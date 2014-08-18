@@ -340,6 +340,10 @@ namespace Zetbox.Client.Presentables
             }
         }
 
+        /// <summary>
+        /// Override this to create commands associated with this view model. The view is responsible to display them.
+        /// </summary>
+        /// <returns></returns>
         protected virtual ObservableCollection<ICommandViewModel> CreateCommands()
         {
             return new ObservableCollection<ICommandViewModel>();

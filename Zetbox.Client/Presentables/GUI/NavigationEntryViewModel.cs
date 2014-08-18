@@ -250,6 +250,10 @@ namespace Zetbox.Client.Presentables.GUI
             }
         }
 
+        /// <summary>
+        /// Override this to create additional navigation commands that where shown in the navigation screen.
+        /// </summary>
+        /// <returns></returns>
         protected virtual List<CommandViewModel> CreateAdditionalCommands()
         {
             return new List<CommandViewModel>();
