@@ -61,7 +61,7 @@ namespace PrepareEnv.SchemaProvider
             }
         }
 
-        private const int RESET_TIMEOUT = 4 * 60;
+        private const int RESET_TIMEOUT = 10 * 60;
         private static int RunPgUtil(string util, string args)
         {
             var binPath = Path.Combine(GetPgSqlBinPath(), util);
