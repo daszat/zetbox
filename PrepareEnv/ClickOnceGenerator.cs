@@ -63,6 +63,7 @@ namespace PrepareEnv
             var origCurrDir = Environment.CurrentDirectory;
             try
             {
+                Program.LogTitle("Creating ClickOnce manifest");
                 Environment.CurrentDirectory = envConfig.BinaryTarget;
                 Program.LogDetail("Changed CWD to BinaryTarget: [{0}]", Environment.CurrentDirectory);
                 var appId = new AppId()
@@ -173,10 +174,11 @@ namespace PrepareEnv
             var doc = dependencyList.OwnerDocument;
 
             // avoid the pseudo/testing resource assemblies, as clickonce client dies on unknown cultures
-            if (file.ToLowerInvariant().EndsWith(".resource.dll") || file.ToLowerInvariant().EndsWith(".resource.dll.deploy") || file.ToLowerInvariant().EndsWith(".resource.exe") || file.ToLowerInvariant().EndsWith(".resource.exe.deploy"))
+            if (file.ToLowerInvariant().EndsWith(".resources.dll") || file.ToLowerInvariant().EndsWith(".resources.dll.deploy") || file.ToLowerInvariant().EndsWith(".resources.exe") || file.ToLowerInvariant().EndsWith(".resources.exe.deploy"))
             {
-                if (file.Contains("x-zb-"))
+                if (file.ToLowerInvariant().Contains("x-zb-"))
                 {
+                    Program.LogDetail("Skipping pseudo culture file: [{0}]", file);
                     return;
                 }
             }

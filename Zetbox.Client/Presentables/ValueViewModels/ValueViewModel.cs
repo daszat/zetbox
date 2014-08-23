@@ -462,31 +462,51 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
             set
             {
-                if (_partialUserInput != value)
+                switch (State)
                 {
-                    var oldPartialUserInputError = _partialUserInputError;
-                    var parseResult = ParseValue(value);
-                    if (parseResult.HasErrors)
-                    {
-                        OnPartialInput(value, parseResult.Error);
-                    }
-                    else if (!AllowNullInput && parseResult.Value == null)
-                    {
-                        OnPartialInput(value, "Wert muss gesetzt sein");
-                    }
-                    else
-                    {
-                        OnValidInput(value, parseResult.Value);
-                    }
-
-                    if (_partialUserInputError != oldPartialUserInputError)
-                    {
-                        OnErrorChanged();
-                    }
-                    // implicit via state machine
-                    //OnFormattedValueChanged("FormattedValue");
+                    case ValueViewModelState.Blurred_UnmodifiedValue:
+                    case ValueViewModelState.ImplicitFocus_WritingModel:
+                        TryParseValue(value);
+                        break;
+                    case ValueViewModelState.Blurred_PartialUserInput:
+                    case ValueViewModelState.ImplicitFocus_PartialUserInput:
+                    case ValueViewModelState.Focused_PartialUserInput:
+                    case ValueViewModelState.Focused_UnmodifiedValue:
+                    case ValueViewModelState.Focused_WritingModel:
+                        if (_partialUserInput != value)
+                        {
+                            TryParseValue(value);
+                        }
+                        break;
+                    default:
+                        throw new InvalidOperationException(string.Format("Unexpected State {0}", State));
                 }
             }
+        }
+
+        private void TryParseValue(string value)
+        {
+            var oldPartialUserInputError = _partialUserInputError;
+            var parseResult = ParseValue(value);
+            if (parseResult.HasErrors)
+            {
+                OnPartialInput(value, parseResult.Error);
+            }
+            else if (!AllowNullInput && parseResult.Value == null)
+            {
+                OnPartialInput(value, "Wert muss gesetzt sein");
+            }
+            else
+            {
+                OnValidInput(value, parseResult.Value);
+            }
+
+            if (_partialUserInputError != oldPartialUserInputError)
+            {
+                OnErrorChanged();
+            }
+            // implicit via state machine
+            //OnFormattedValueChanged("FormattedValue");
         }
 
         private string _formattedValueAsyncCache;
