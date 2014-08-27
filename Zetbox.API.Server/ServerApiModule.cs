@@ -46,9 +46,6 @@ namespace Zetbox.API.Server
                 .InstancePerDependency();
 
             builder
-                .RegisterModule<Log4NetAppender.Module>();
-
-            builder
                 .RegisterType<PerfCounterDispatcher>()
                 .As<IPerfCounter>()
                 .OnRelease(obj => obj.Dump())
