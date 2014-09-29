@@ -483,6 +483,11 @@ namespace Zetbox.Client.Models
                 vDesc = argumentViewModelDescriptor ?? ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableDoublePropertyViewModel.Find(frozenCtx);
                 mdl = new NullableStructValueModel<double>(label, "", true, false, requestedArgumentKind);
             }
+            else if (propType == typeof(DateTime))
+            {
+                vDesc = argumentViewModelDescriptor ?? ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableDateTimePropertyViewModel.Find(frozenCtx);
+                mdl = new DateTimeValueModel(label, "", true, false, DateTimeStyles.Date, requestedArgumentKind);
+            }
             else if (propType == typeof(bool))
             {
                 vDesc = argumentViewModelDescriptor ?? ViewModelDescriptors.Zetbox_Client_Presentables_ValueViewModels_NullableBoolPropertyViewModel.Find(frozenCtx);
@@ -539,6 +544,10 @@ namespace Zetbox.Client.Models
             {
                 return Create(frozenCtx, label, predicate, typeof(double), requestedKind, requestedArgumentKind, argumentViewModelDescriptor: argumentViewModelDescriptor);
             }
+            else if (last is DateTimeProperty)
+            {
+                return Create(frozenCtx, label, predicate, typeof(DateTime), requestedKind, requestedArgumentKind, argumentViewModelDescriptor: argumentViewModelDescriptor);
+            }
             else if (last is StringProperty)
             {
                 return Create(frozenCtx, label, predicate, typeof(string), requestedKind, requestedArgumentKind, argumentViewModelDescriptor: argumentViewModelDescriptor);
@@ -590,10 +599,25 @@ namespace Zetbox.Client.Models
 
         protected override string GetPredicate()
         {
+            var expr = ValueSource.Expression;
             switch (Operator)
             {
                 case FilterOperators.Equals:
-                    return string.Format("{0} = @0", ValueSource.Expression);
+                    return string.Format("{0} = @0", expr);
+                case FilterOperators.Less:
+                    return string.Format("{0} < @0", expr);
+                case FilterOperators.LessOrEqual:
+                    return string.Format("{0} <= @0", expr);
+                case FilterOperators.Greater:
+                    return string.Format("{0} > @0", expr);
+                case FilterOperators.GreaterOrEqual:
+                    return string.Format("{0} >= @0", expr);
+                case FilterOperators.Not:
+                    return string.Format("{0} != @0", expr);
+                case FilterOperators.IsNotNull:
+                    return string.Format("{0} != null", expr);
+                case FilterOperators.IsNull:
+                    return string.Format("{0} == null", expr);
                 case FilterOperators.Contains:
                     {
                         // Only for strings
@@ -603,7 +627,7 @@ namespace Zetbox.Client.Models
                         int counter = 0;
                         foreach (var p in parts)
                         {
-                            sb.AppendFormat(" || ({0} != null && {0}.ToLower().Contains(@{1}.ToLower()) )", ValueSource.Expression, counter++);
+                            sb.AppendFormat(" || ({0} != null && {0}.ToLower().Contains(@{1}.ToLower()) )", expr, counter++);
                         }
                         sb.Append(")");
                         return sb.ToString();
