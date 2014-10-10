@@ -107,6 +107,7 @@ namespace Zetbox.DalProvider.Client
         /// <summary>
         /// Dispose this Context.
         /// </summary>
+        // TODO: use correct Dispose implementation pattern
         public void Dispose()
         {
             GenericEventHandler<IReadOnlyZetboxContext> temp = Disposing;
@@ -124,8 +125,6 @@ namespace Zetbox.DalProvider.Client
                 }
                 disposed = true;
             }
-            // TODO: use correct Dispose implementation pattern
-            GC.SuppressFinalize(this);
 
             ZetboxContextEventListenerHelper.OnDisposed(_eventListeners, this);
         }

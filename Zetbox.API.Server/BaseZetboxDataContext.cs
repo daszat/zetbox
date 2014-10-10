@@ -81,7 +81,6 @@ namespace Zetbox.API.Server
             {
                 temp(this, new GenericEventArgs<IReadOnlyZetboxContext>() { Data = this });
             }
-            GC.SuppressFinalize(this);
             IsDisposed = true;
 
             ZetboxContextEventListenerHelper.OnDisposed(eventListeners, this);
