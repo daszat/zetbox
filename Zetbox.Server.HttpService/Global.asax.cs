@@ -17,6 +17,7 @@ namespace Zetbox.Server.HttpService
 {
     using System;
     using System.Collections.Generic;
+    using System.Configuration;
     using System.IO;
     using System.Linq;
     using System.Text.RegularExpressions;
@@ -28,8 +29,8 @@ namespace Zetbox.Server.HttpService
     using Autofac.Integration.Web;
     using Zetbox.API;
     using Zetbox.API.Configuration;
+    using Zetbox.API.Server.PerfCounter;
     using Zetbox.API.Utils;
-    using System.Configuration;
 
     public class Global : System.Web.HttpApplication, IContainerProviderAccessor
     {
@@ -57,6 +58,7 @@ namespace Zetbox.Server.HttpService
 
             // Store root container for WCF & ASP.NET
             var container = builder.Build();
+            container.ApplyPerfCounterTracker();
 
             API.AppDomainInitializer.InitializeFrom(container);
 

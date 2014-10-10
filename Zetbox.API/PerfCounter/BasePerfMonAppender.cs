@@ -17,10 +17,10 @@ namespace Zetbox.API.PerfCounter
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using System.Text;
     using Zetbox.API.Utils;
-    using System.Diagnostics;
 
     public abstract class BasePerfMonAppender : IBasePerfCounterAppender
     {
@@ -34,6 +34,10 @@ namespace Zetbox.API.PerfCounter
         private readonly MethodPerformanceCounter _Queries = new MethodPerformanceCounter();
         private readonly MethodPerformanceCounter _SetObjects = new MethodPerformanceCounter();
         private readonly MethodPerformanceCounter _SubmitChanges = new MethodPerformanceCounter();
+
+        private readonly InstancePerformanceCounter _ZetboxContext = new InstancePerformanceCounter();
+        private readonly InstancePerformanceCounter _ObjectInstance = new InstancePerformanceCounter();
+        private readonly InstancePerformanceCounter _LifetimeScope = new InstancePerformanceCounter();
 
         PerformanceCounter _ServerMethodInvocationPerSec;
         PerformanceCounter _ServerMethodInvocationTotal;
@@ -80,6 +84,58 @@ namespace Zetbox.API.PerfCounter
             }
         }
 
+        protected sealed class InstancePerformanceCounter
+        {
+            PerformanceCounter AvgDuration;
+            PerformanceCounter AvgDurationBase;
+            PerformanceCounter Current;
+            PerformanceCounter CreatedPerSec;
+            PerformanceCounter DestroyedPerSec;
+            PerformanceCounter Total;
+
+            public class Desc
+            {
+                public Desc(string name, Func<BasePerfMonAppender, InstancePerformanceCounter> accessor)
+                {
+                    this.Name = name;
+                    this.Accessor = accessor;
+                }
+
+                public readonly string Name;
+                public readonly Func<BasePerfMonAppender, InstancePerformanceCounter> Accessor;
+
+                public CounterDesc[] CreateDescriptors()
+                {
+                    return new[] {
+                        new CounterDesc(Name + "AvgDuration", string.Format("Avg. lifetime of {0} instance", Name), PerformanceCounterType.AverageTimer32, (pma, desc) => Accessor(pma).AvgDuration = desc.Get(pma)),
+                        new CounterDesc(Name + "AvgDurationBase", string.Format("Base for avg. lifetime of {0} instance", Name), PerformanceCounterType.AverageBase, (pma, desc) => Accessor(pma).AvgDurationBase = desc.Get(pma)),
+                        new CounterDesc(Name + "Current", string.Format("Current # of {0} instances.", Name), PerformanceCounterType.NumberOfItems64, (pma, desc) => Accessor(pma).Current = desc.Get(pma)),
+                        new CounterDesc(Name + "Total",   string.Format("# of {0} instances created.", Name), PerformanceCounterType.NumberOfItems64, (pma, desc) => Accessor(pma).Total = desc.Get(pma)),
+                        new CounterDesc(Name + "CreatedPerSec", string.Format("# of {0} instances created / sec.", Name), PerformanceCounterType.RateOfCountsPerSecond32, (pma, desc) => Accessor(pma).CreatedPerSec = desc.Get(pma)),
+                        new CounterDesc(Name + "DestroyedPerSec", string.Format("# of {0} instances destroyed / sec.", Name), PerformanceCounterType.RateOfCountsPerSecond32, (pma, desc) => Accessor(pma).DestroyedPerSec = desc.Get(pma)),
+                    };
+                }
+            }
+
+            public void Increment()
+            {
+                CreatedPerSec.Increment();
+
+                Current.Increment();
+                Total.Increment();
+            }
+
+            public void Decrement(long startTicks, long endTicks)
+            {
+                DestroyedPerSec.Increment();
+
+                Current.Decrement();
+
+                AvgDuration.IncrementBy(endTicks - startTicks);
+                AvgDurationBase.Increment();
+            }
+        }
+
         protected sealed class MethodPerformanceCounter
         {
             PerformanceCounter AvgDuration;
@@ -109,10 +165,10 @@ namespace Zetbox.API.PerfCounter
                         new CounterDesc(Name + "AvgDuration", string.Format("Avg. duration of {0} calls", Name), PerformanceCounterType.AverageTimer32, (pma, desc) => Accessor(pma).AvgDuration = desc.Get(pma)),
                         new CounterDesc(Name + "AvgDurationBase", string.Format("Base for avg. duration of {0} calls", Name), PerformanceCounterType.AverageBase, (pma, desc) => Accessor(pma).AvgDurationBase = desc.Get(pma)),
                         new CounterDesc(Name + "Current", string.Format("Current # of {0} calls.", Name), PerformanceCounterType.NumberOfItems64, (pma, desc) => Accessor(pma).Current = desc.Get(pma)),
+                        new CounterDesc(Name + "Total",   string.Format("# of {0} calls.",         Name), PerformanceCounterType.NumberOfItems64, (pma, desc) => Accessor(pma).Total = desc.Get(pma)),
                         new CounterDesc(Name + "ObjectsPerSec", string.Format("# Objects {1} by {0} / sec.", Name, Verb), PerformanceCounterType.RateOfCountsPerSecond32, (pma, desc) => Accessor(pma).ObjectsPerSec = desc.Get(pma)),
                         new CounterDesc(Name + "ObjectsTotal", string.Format("# Objects {1} by {0}.", Name, Verb), PerformanceCounterType.NumberOfItems64, (pma, desc) => Accessor(pma).ObjectsTotal = desc.Get(pma)),
                         new CounterDesc(Name + "PerSec", string.Format("# of {0} calls / sec.", Name), PerformanceCounterType.RateOfCountsPerSecond32, (pma, desc) => Accessor(pma).PerSec = desc.Get(pma)),
-                        new CounterDesc(Name + "Total", string.Format("# of {0} calls.", Name), PerformanceCounterType.NumberOfItems64, (pma, desc) => Accessor(pma).Total = desc.Get(pma)),
                     };
                 }
             }
@@ -137,6 +193,7 @@ namespace Zetbox.API.PerfCounter
 
         protected abstract CounterDesc[] CounterDesciptors { get; }
         protected abstract MethodPerformanceCounter.Desc[] MethodCounterDesciptors { get; }
+        protected abstract InstancePerformanceCounter.Desc[] InstanceCounterDesciptors { get; }
 
         public void Install()
         {
@@ -145,7 +202,7 @@ namespace Zetbox.API.PerfCounter
             Logging.Log.Info("Installing performance counter");
             CounterCreationDataCollection counters = new CounterCreationDataCollection();
 
-            foreach (var desc in _counterDescs.Concat(CounterDesciptors).Concat(_methodDescs.Concat(MethodCounterDesciptors).SelectMany(desc => desc.CreateDescriptors())))
+            foreach (var desc in GetAllDescs())
             {
                 counters.Add(desc.Create());
             }
@@ -153,6 +210,14 @@ namespace Zetbox.API.PerfCounter
             PerformanceCounterCategory.Create(Category, "A custom counter category that tracks Zetbox executions",
                 PerformanceCounterCategoryType.MultiInstance, counters);
             Logging.Log.Info("Performance counter sucessfully installed");
+        }
+
+        private IEnumerable<CounterDesc> GetAllDescs()
+        {
+            return _counterDescs
+                            .Concat(CounterDesciptors)
+                            .Concat(_methodDescs.Concat(MethodCounterDesciptors).SelectMany(desc => desc.CreateDescriptors()))
+                            .Concat(_instanceDescs.Concat(InstanceCounterDesciptors).SelectMany(desc => desc.CreateDescriptors()));
         }
 
         public void Uninstall()
@@ -177,7 +242,7 @@ namespace Zetbox.API.PerfCounter
 
             try
             {
-                foreach (var desc in _counterDescs.Concat(CounterDesciptors).Concat(_methodDescs.Concat(MethodCounterDesciptors).SelectMany(desc => desc.CreateDescriptors())))
+                foreach (var desc in GetAllDescs())
                 {
                     desc.Set(this);
                 }
@@ -205,6 +270,13 @@ namespace Zetbox.API.PerfCounter
             new MethodPerformanceCounter.Desc("Queries", "returned", pma => pma._Queries),
             new MethodPerformanceCounter.Desc("SetObjects", "returned", pma => pma._SetObjects),
             new MethodPerformanceCounter.Desc("SubmitChanges", "submitted", pma => pma._SubmitChanges),
+        };
+
+        private static readonly InstancePerformanceCounter.Desc[] _instanceDescs = new[] 
+        {
+            new InstancePerformanceCounter.Desc("ZetboxContext", pma => pma._ZetboxContext),
+            new InstancePerformanceCounter.Desc("ObjectInstance", pma => pma._ObjectInstance),
+            new InstancePerformanceCounter.Desc("LivetimeScope", pma => pma._LifetimeScope),
         };
 
         private static readonly CounterDesc[] _counterDescs = new[] 
@@ -281,11 +353,44 @@ namespace Zetbox.API.PerfCounter
             if (!initialized) return;
             _SubmitChanges.Increment();
         }
-
         public void DecrementSubmitChanges(int objectCount, long startTicks, long endTicks)
         {
             if (!initialized) return;
             _SubmitChanges.Decrement(objectCount, startTicks, endTicks);
+        }
+
+        public void IncrementZetboxContext()
+        {
+            if (!initialized) return;
+            _ZetboxContext.Increment();
+        }
+        public void DecrementZetboxContext(long startTicks, long endTicks)
+        {
+            if (!initialized) return;
+            _ZetboxContext.Decrement(startTicks, endTicks);
+        }
+
+        public void IncrementObjectInstance()
+        {
+            if (!initialized) return;
+            _ObjectInstance.Increment();
+        }
+        public void DecrementObjectInstance()
+        {
+            if (!initialized) return;
+            // storing startTicks for each object instance is deemed too expensive
+            _ObjectInstance.Decrement(0, 0);
+        }
+
+        public void IncrementLifetimeScope()
+        {
+            if (!initialized) return;
+            _LifetimeScope.Increment();
+        }
+        public void DecrementLifetimeScope(long startTicks, long endTicks)
+        {
+            if (!initialized) return;
+            _LifetimeScope.Decrement(startTicks, endTicks);
         }
 
         public void IncrementServerMethodInvocation()

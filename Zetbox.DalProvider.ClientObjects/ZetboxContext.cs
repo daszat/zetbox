@@ -66,6 +66,7 @@ namespace Zetbox.DalProvider.Client
         private readonly UnattachedObjectFactory _unattachedObjectFactory;
         private readonly ContextIsolationLevel _clientIsolationLevel;
         private readonly IPerfCounter _perfCounter;
+        private readonly long _startTime;
         private readonly IIdentityResolver _identityResolver;
         private readonly IEnumerable<IZetboxContextEventListener> _eventListeners;
 
@@ -83,6 +84,9 @@ namespace Zetbox.DalProvider.Client
         public ZetboxContextImpl(ContextIsolationLevel il, ZetboxConfig config, IProxy proxy, string clientImplementationAssembly, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, ClientImplementationType.ClientFactory implTypeFactory, UnattachedObjectFactory unattachedObjectFactory, IPerfCounter perfCounter, IIdentityResolver identityResolver, IEnumerable<IZetboxContextEventListener> eventListeners)
         {
             if (perfCounter == null) throw new ArgumentNullException("perfCounter");
+            this._perfCounter = perfCounter;
+            _startTime = _perfCounter.IncrementZetboxContext();
+
             this._clientIsolationLevel = il;
             this.config = config;
             this.proxy = proxy;
@@ -92,7 +96,6 @@ namespace Zetbox.DalProvider.Client
             this._iftFactory = iftFactory;
             this._implTypeFactory = implTypeFactory;
             this._unattachedObjectFactory = unattachedObjectFactory;
-            this._perfCounter = perfCounter;
             this._identityResolver = identityResolver;
             this._eventListeners = eventListeners;
 
@@ -106,6 +109,7 @@ namespace Zetbox.DalProvider.Client
         private bool disposed = false;
         /// <summary>
         /// Dispose this Context.
+        /// TODO: use correct Dispose implementation pattern
         /// </summary>
         public void Dispose()
         {
@@ -121,11 +125,10 @@ namespace Zetbox.DalProvider.Client
                 {
                     proxy.Dispose();
                     DisposedAt = new StackTrace(true);
+                    _perfCounter.DecrementZetboxContext(_startTime);
                 }
                 disposed = true;
             }
-            // TODO: use correct Dispose implementation pattern
-            GC.SuppressFinalize(this);
 
             ZetboxContextEventListenerHelper.OnDisposed(_eventListeners, this);
         }

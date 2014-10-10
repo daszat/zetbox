@@ -48,7 +48,7 @@ namespace Zetbox.Server
             builder
                 .RegisterType<ThreadPrincipalResolver>()
                 .As<IIdentityResolver>()
-                .InstancePerLifetimeScope();
+                .SingleInstance();
 
             builder
                 .RegisterType<ZetboxService>()

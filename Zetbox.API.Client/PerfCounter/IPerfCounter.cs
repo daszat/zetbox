@@ -15,6 +15,7 @@
 namespace Zetbox.API.Client.PerfCounter
 {
     using System;
+    using Autofac;
     using Zetbox.API.PerfCounter;
 
     public interface IPerfCounter : IBasePerfCounter
@@ -27,5 +28,16 @@ namespace Zetbox.API.Client.PerfCounter
     {
         void IncrementViewModelFetch();
         void IncrementViewModelCreate();
+    }
+
+    public static class LifetimeScopeExtensions
+    {
+        public static void ApplyPerfCounterTracker(this ILifetimeScope scope)
+        {
+            scope.ChildLifetimeScopeBeginning += (s, a) => a.LifetimeScope.ApplyPerfCounterTracker();
+            var perfCtr = scope.Resolve<IPerfCounter>();
+            var startTicks = perfCtr.IncrementLifetimeScope();
+            scope.CurrentScopeEnding += (s, a) => perfCtr.DecrementLifetimeScope(startTicks);
+        }
     }
 }

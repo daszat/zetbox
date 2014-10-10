@@ -148,6 +148,58 @@ namespace Zetbox.API.PerfCounter
             }
         }
 
+        public long IncrementZetboxContext()
+        {
+            foreach (var a in _appender)
+            {
+                a.IncrementZetboxContext();
+            }
+            return Stopwatch.GetTimestamp();
+        }
+
+        public void DecrementZetboxContext(long startTicks)
+        {
+            var endTicks = Stopwatch.GetTimestamp();
+            foreach (var a in _appender)
+            {
+                a.DecrementZetboxContext(startTicks, endTicks);
+            }
+        }
+
+        public void IncrementObjectInstance()
+        {
+            foreach (var a in _appender)
+            {
+                a.IncrementObjectInstance();
+            }
+        }
+
+        public void DecrementObjectInstance()
+        {
+            foreach (var a in _appender)
+            {
+                a.DecrementObjectInstance();
+            }
+        }
+
+        public long IncrementLifetimeScope()
+        {
+            foreach (var a in _appender)
+            {
+                a.IncrementLifetimeScope();
+            }
+            return Stopwatch.GetTimestamp();
+        }
+
+        public void DecrementLifetimeScope(long startTicks)
+        {
+            var endTicks = Stopwatch.GetTimestamp();
+            foreach (var a in _appender)
+            {
+                a.DecrementLifetimeScope(startTicks, endTicks);
+            }
+        }
+
         public void Install()
         {
             foreach (var a in _appender)

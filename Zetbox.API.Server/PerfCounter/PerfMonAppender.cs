@@ -39,7 +39,7 @@ namespace Zetbox.API.Server.PerfCounter
                 moduleBuilder
                     .RegisterType<PerfMonAppender>()
                     .As<IPerfCounterAppender>()
-                    .OnActivated(args => args.Instance.Initialize(args.Context.Resolve<IFrozenContext>()))
+                    .OnActivating(args => args.Instance.Initialize(args.Context.Resolve<IFrozenContext>()))
                     .SingleInstance();
             }
         }
@@ -52,7 +52,7 @@ namespace Zetbox.API.Server.PerfCounter
         }
 
         #region Counter Descriptors
-        
+
         protected override CounterDesc[] CounterDesciptors
         {
             get { return _counterDescs; }
@@ -68,6 +68,15 @@ namespace Zetbox.API.Server.PerfCounter
         }
 
         private MethodPerformanceCounter.Desc[] _methodDescs = new MethodPerformanceCounter.Desc[] 
+        {
+        };
+
+        protected override InstancePerformanceCounter.Desc[] InstanceCounterDesciptors
+        {
+            get { return _instanceDescs; }
+        }
+
+        private InstancePerformanceCounter.Desc[] _instanceDescs = new InstancePerformanceCounter.Desc[] 
         {
         };
 

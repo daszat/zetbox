@@ -19,10 +19,10 @@ namespace Zetbox.API.PerfCounter
     using System.Linq;
     using System.Text;
     using Autofac;
+    using log4net;
     using Zetbox.API;
     using Zetbox.API.Configuration;
     using Zetbox.API.Utils;
-    using log4net;
 
     public sealed class MethodMemoryCounters
     {
@@ -77,6 +77,55 @@ namespace Zetbox.API.PerfCounter
         }
     }
 
+    public sealed class InstanceMemoryCounters
+    {
+        public readonly string Name;
+        public InstanceMemoryCounters(string name)
+        {
+            this.Name = name;
+            Reset();
+        }
+
+        public long Duration { get; private set; }
+        public long Instances { get; private set; }
+        public long MinDuration { get; private set; }
+        public long MaxDuration { get; private set; }
+
+        internal void Reset()
+        {
+            this.Duration =
+                this.Instances = 0;
+            this.MinDuration = long.MinValue;
+            this.MaxDuration = long.MaxValue;
+        }
+
+        internal void Count(long startTicks, long endTicks)
+        {
+            Instances += 1;
+            var thisDuration = endTicks - startTicks;
+            Duration += thisDuration;
+            if (thisDuration < MinDuration)
+            {
+                MinDuration = thisDuration;
+            }
+            else if (thisDuration > MaxDuration)
+            {
+                MaxDuration = thisDuration;
+            }
+        }
+
+        internal void FormatTo(Dictionary<string, string> values)
+        {
+            values[Name + "Instances"] = Instances.ToString();
+            values[Name + "Duration"] = BaseMemoryAppender.TicksToMillis(Duration).ToString();
+            values[Name + "AvgDuration"] = BaseMemoryAppender.Avg(Duration, Instances).ToString();
+            if (MinDuration != long.MinValue)
+                values[Name + "MinDuration"] = MinDuration.ToString();
+            if (MaxDuration != long.MaxValue)
+                values[Name + "MaxDuration"] = MaxDuration.ToString();
+        }
+    }
+
     public abstract class BaseMemoryAppender : IBasePerfCounterAppender
     {
         protected static readonly object counterLock = new object();
@@ -100,6 +149,10 @@ namespace Zetbox.API.PerfCounter
         protected readonly ObjectMemoryCounters ObjectTotals = new ObjectMemoryCounters("Totals");
         protected readonly MethodMemoryCounters SetObjects = new MethodMemoryCounters("SetObjects");
         protected readonly MethodMemoryCounters SubmitChanges = new MethodMemoryCounters("SubmitChanges");
+
+        protected readonly InstanceMemoryCounters ZetboxContext = new InstanceMemoryCounters("ZetboxContext");
+        protected readonly InstanceMemoryCounters ObjectInstance = new InstanceMemoryCounters("ObjectInstance");
+        protected readonly InstanceMemoryCounters LifetimeScope = new InstanceMemoryCounters("LifetimeScope");
 
         protected long ServerMethodInvocation { get; private set; }
 
@@ -251,6 +304,41 @@ namespace Zetbox.API.PerfCounter
             }
         }
 
+        public void IncrementZetboxContext()
+        {
+        }
+        public void DecrementZetboxContext(long startTicks, long endTicks)
+        {
+            lock (counterLock)
+            {
+                this.ZetboxContext.Count(startTicks, endTicks);
+                Dump(false);
+            }
+        }
+        public void IncrementObjectInstance()
+        {
+        }
+        public void DecrementObjectInstance()
+        {
+            lock (counterLock)
+            {
+                // storing startTicks for each object instance is deemed too expensive
+                this.ObjectInstance.Count(0, 0);
+                Dump(false);
+            }
+        }
+        public void IncrementLifetimeScope()
+        {
+        }
+        public void DecrementLifetimeScope(long startTicks, long endTicks)
+        {
+            lock (counterLock)
+            {
+                this.LifetimeScope.Count(startTicks, endTicks);
+                Dump(false);
+            }
+        }
+
         public void IncrementServerMethodInvocation()
         {
             lock (counterLock)
@@ -266,6 +354,11 @@ namespace Zetbox.API.PerfCounter
             this.ObjectTotals.FormatTo(values);
             this.SubmitChanges.FormatTo(values);
             this.SetObjects.FormatTo(values);
+
+            this.ZetboxContext.FormatTo(values);
+            this.ObjectInstance.FormatTo(values);
+            this.LifetimeScope.FormatTo(values);
+
             values["ServerMethodInvocations"] = ServerMethodInvocation.ToString();
 
             // does not format per-Object counts

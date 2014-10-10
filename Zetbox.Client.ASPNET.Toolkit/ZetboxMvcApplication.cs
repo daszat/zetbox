@@ -17,19 +17,20 @@ namespace Zetbox.Client.ASPNET
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Text;
     using System.Web.Mvc;
     using System.Web.Routing;
     using Autofac;
     using Autofac.Configuration;
-    using Autofac.Integration.Mvc;
     using Autofac.Core;
-    using Zetbox.Client.Presentables;
-    using Zetbox.API.Configuration;
-    using Zetbox.API.Utils;
-    using System.IO;
+    using Autofac.Integration.Mvc;
     using Zetbox.API;
+    using Zetbox.API.Configuration;
+    using Zetbox.API.Client.PerfCounter;
+    using Zetbox.API.Utils;
+    using Zetbox.Client.Presentables;
 
     public abstract class ZetboxMvcApplication : System.Web.HttpApplication
     {
@@ -76,6 +77,7 @@ namespace Zetbox.Client.ASPNET
             ConfigureContainerBuilder(builder);
 
             var container = builder.Build();
+            container.ApplyPerfCounterTracker();
 
             SetupModelBinder(container);
             SetupValidatorProvider(container);

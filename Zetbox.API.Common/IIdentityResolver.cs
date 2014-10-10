@@ -20,6 +20,7 @@ namespace Zetbox.API.Common
     using System.Linq;
     using System.Runtime.Serialization;
     using System.Security.Principal;
+    using Autofac;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
 
@@ -68,69 +69,78 @@ namespace Zetbox.API.Common
 
     public abstract class BaseIdentityResolver : IIdentityResolver
     {
-        private readonly Func<IReadOnlyZetboxContext> resolverCtxFactory;
-        private IReadOnlyZetboxContext _resolverCtx;
-        protected readonly Dictionary<string, Identity> cache;
+        private readonly object _lock = new object();
 
-        protected BaseIdentityResolver(Func<IReadOnlyZetboxContext> resolverCtxFactory)
+        private readonly ILifetimeScope _parentScope;
+        private readonly Dictionary<string, Identity> _cache;
+
+        private ILifetimeScope _currentScope;
+        private IReadOnlyZetboxContext _resolverCtx;
+
+        protected BaseIdentityResolver(ILifetimeScope parentScope)
         {
-            if (resolverCtxFactory == null) throw new ArgumentNullException("resolverCtxFactory");
-            this.resolverCtxFactory = resolverCtxFactory;
-            cache = new Dictionary<string, Identity>();
+            if (parentScope == null) throw new ArgumentNullException("parentScope");
+            _parentScope = parentScope;
+            _cache = new Dictionary<string, Identity>();
         }
 
-        protected IReadOnlyZetboxContext ResolverCtx
+        private void CheckScope()
         {
-            get
+            // for now, just cache indefinitely. the service will have to be recycled regularily
+            if (_currentScope == null)
             {
-                if (_resolverCtx == null)
-                {
-                    _resolverCtx = resolverCtxFactory();
-                }
-                return _resolverCtx;
+                Logging.Log.Info("(Re-)Initialising BaseIdentityResolver's cache");
+                _cache.Clear();
+                if (_currentScope != null) _currentScope.Dispose();
+                _currentScope = _parentScope.BeginLifetimeScope();
+                _resolverCtx = _currentScope.Resolve<IReadOnlyZetboxContext>();
             }
         }
 
         public abstract Identity GetCurrent();
 
-        public virtual Identity Resolve(IIdentity identity)
+        public Identity Resolve(IIdentity identity)
         {
             if (identity == null) throw new ArgumentNullException("identity");
             return Resolve(identity.Name);
         }
 
-        protected virtual Identity Resolve(string name)
+        protected Identity Resolve(string name)
         {
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
             string id = name.ToLower();
 
             Identity result = null;
 
-            if (cache.ContainsKey(id))
+            lock (_lock)
             {
-                result = cache[id];
-            }
-            else
-            {
-                try
-                {
-                    result = cache[id] = ResolverCtx.GetQuery<Identity>().Where(i => i.UserName.ToLower() == id).FirstOrDefault();
-                }
-                catch (Exception ex)
-                {
-                    var inner = ex.StripTargetInvocationExceptions();
-                    if (inner is InvalidZetboxGeneratedVersionException || inner is System.IO.IOException)
-                    {
-                        throw inner;
-                    }
-                    Logging.Log.Warn("Exception while resolving Identity", ex);
-                }
-                if (result == null)
-                {
-                    Logging.Log.WarnFormat("Unable to resolve Identity {0}", name);
-                }
-            }
+                CheckScope();
 
+                if (_cache.ContainsKey(id))
+                {
+                    result = _cache[id];
+                }
+                else
+                {
+                    try
+                    {
+                        result = _cache[id] = _resolverCtx.GetQuery<Identity>().Where(i => i.UserName.ToLower() == id).FirstOrDefault();
+                    }
+                    catch (Exception ex)
+                    {
+                        var inner = ex.StripTargetInvocationExceptions();
+                        if (inner is InvalidZetboxGeneratedVersionException || inner is System.IO.IOException)
+                        {
+                            throw inner;
+                        }
+                        Logging.Log.Warn("Exception while resolving Identity", ex);
+                    }
+                    if (result == null)
+                    {
+                        Logging.Log.WarnFormat("Unable to resolve Identity {0}", name);
+                    }
+                }
+            }
 
             return result;
         }
