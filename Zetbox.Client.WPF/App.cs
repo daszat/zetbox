@@ -35,6 +35,7 @@ namespace Zetbox.Client.WPF
     using Microsoft.Samples.KMoore.WPFSamples.InfoTextBox;
     using Zetbox.API;
     using Zetbox.API.Client;
+    using Zetbox.API.Client.PerfCounter;
     using Zetbox.API.Common;
     using Zetbox.API.Configuration;
     using Zetbox.API.Utils;
@@ -153,6 +154,7 @@ namespace Zetbox.Client.WPF
             var builder = Zetbox.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, config.Client.Modules);
             ConfigureContainerBuilder(config, builder);
             container = builder.Build();
+            container.ApplyPerfCounterTracker();
             container.Resolve<IUIExceptionReporter>().BeginInit();
             API.AppDomainInitializer.InitializeFrom(container);
 

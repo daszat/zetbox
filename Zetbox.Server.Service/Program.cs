@@ -129,10 +129,11 @@ namespace Zetbox.Server.Service
             }
 
             var container = builder.Build();
+            container.ApplyPerfCounterTracker();
+
             API.AppDomainInitializer.InitializeFrom(container);
             return container;
         }
-
         private static ZetboxConfig ExtractConfig(ref string[] args)
         {
             string configFilePath;

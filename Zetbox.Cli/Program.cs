@@ -17,6 +17,7 @@ namespace Zetbox.Cli
 {
     using System;
     using System.Collections.Generic;
+    using System.Configuration;
     using System.IO;
     using System.Linq;
     using System.Text;
@@ -25,7 +26,6 @@ namespace Zetbox.Cli
     using Zetbox.API;
     using Zetbox.API.Configuration;
     using Zetbox.API.Utils;
-    using System.Configuration;
 
     /// <summary>
     /// Mainprogram
