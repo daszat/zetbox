@@ -73,6 +73,15 @@ namespace Zetbox.API.Client.PerfCounter
         {
         };
 
+        protected override InstancePerformanceCounter.Desc[] InstanceCounterDesciptors
+        {
+            get { return _instanceDescs; }
+        }
+
+        private InstancePerformanceCounter.Desc[] _instanceDescs = new InstancePerformanceCounter.Desc[] 
+        {
+        };
+
         PerformanceCounter _ViewModelFetchPerSec;
         PerformanceCounter _ViewModelFetchTotal;
         public void IncrementViewModelFetch()

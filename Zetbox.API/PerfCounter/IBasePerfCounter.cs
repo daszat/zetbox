@@ -36,8 +36,17 @@ namespace Zetbox.API.PerfCounter
         long IncrementSetObjects();
         void DecrementSetObjects(int objectCount, long startTicks);
 
+        long IncrementZetboxContext();
+        void DecrementZetboxContext(long startTicks);
+
+        void IncrementObjectInstance();
+        void DecrementObjectInstance();
+
+        long IncrementLifetimeScope();
+        void DecrementLifetimeScope(long startTicks);
+
         void IncrementServerMethodInvocation();
-        
+
         void Install();
         void Uninstall();
         void Dump();
@@ -63,8 +72,17 @@ namespace Zetbox.API.PerfCounter
         void IncrementSubmitChanges();
         void DecrementSubmitChanges(int objectCount, long startTicks, long endTicks);
 
+        void IncrementZetboxContext();
+        void DecrementZetboxContext(long startTicks, long endTicks);
+
+        void IncrementObjectInstance();
+        void DecrementObjectInstance();
+
+        void IncrementLifetimeScope();
+        void DecrementLifetimeScope(long startTicks, long endTicks);
+
         void IncrementServerMethodInvocation();
-        
+
         void Install();
         void Uninstall();
         void Dump(bool force);

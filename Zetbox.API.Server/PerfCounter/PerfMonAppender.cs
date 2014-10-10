@@ -52,7 +52,7 @@ namespace Zetbox.API.Server.PerfCounter
         }
 
         #region Counter Descriptors
-        
+
         protected override CounterDesc[] CounterDesciptors
         {
             get { return _counterDescs; }
@@ -68,6 +68,15 @@ namespace Zetbox.API.Server.PerfCounter
         }
 
         private MethodPerformanceCounter.Desc[] _methodDescs = new MethodPerformanceCounter.Desc[] 
+        {
+        };
+
+        protected override InstancePerformanceCounter.Desc[] InstanceCounterDesciptors
+        {
+            get { return _instanceDescs; }
+        }
+
+        private InstancePerformanceCounter.Desc[] _instanceDescs = new InstancePerformanceCounter.Desc[] 
         {
         };
 
