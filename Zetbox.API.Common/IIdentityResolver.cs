@@ -75,7 +75,6 @@ namespace Zetbox.API.Common
         private readonly Dictionary<string, Identity> _cache;
 
         private ILifetimeScope _currentScope;
-        private DateTime _scopeCreated;
         private IReadOnlyZetboxContext _resolverCtx;
 
         protected BaseIdentityResolver(ILifetimeScope parentScope)
