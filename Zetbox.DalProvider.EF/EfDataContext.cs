@@ -43,6 +43,10 @@ namespace Zetbox.DalProvider.Ef
     {
         private static readonly object _lock = new object();
 
+        private readonly IPerfCounter _perfCounter;
+        private readonly long _startTime;
+        private readonly ISqlErrorTranslator _sqlErrorTranslator;
+
         private readonly EfObjectContext _ctx;
         private bool _connectionManuallyOpened = false;
 
@@ -53,31 +57,28 @@ namespace Zetbox.DalProvider.Ef
         /// </summary>
         public override void Dispose()
         {
-            try
+            if (_transaction != null)
             {
-                base.Dispose();
+                _transaction.Rollback();
+                _transaction.Dispose();
+                _transaction = null;
             }
-            finally
+            if (_ctx != null)
             {
-                if (_transaction != null)
+                if (_connectionManuallyOpened)
                 {
-                    _transaction.Rollback();
-                    _transaction.Dispose();
-                    _transaction = null;
+                    // Close manually, Connection is exposed.
+                    // EF wont close it if connection was manually opened
+                    _ctx.Connection.Close();
+                    // Once is enough
+                    _connectionManuallyOpened = false;
                 }
-                if (_ctx != null)
-                {
-                    if (_connectionManuallyOpened)
-                    {
-                        // Close manually, Connection is exposed.
-                        // EF wont close it if connection was manually opened
-                        _ctx.Connection.Close();
-                        // Once is enough
-                        _connectionManuallyOpened = false;
-                    }
-                    _ctx.Dispose();
-                }
+                _ctx.Dispose();
             }
+
+            base.Dispose();
+
+            _perfCounter.DecrementZetboxContext(_startTime);
         }
 
         /// <summary>
@@ -89,9 +90,11 @@ namespace Zetbox.DalProvider.Ef
             if (perfCounter == null) throw new ArgumentNullException("perfCounter");
             if (sqlErrorTranslator == null) throw new ArgumentNullException("sqlErrorTranslator");
 
+            _perfCounter = perfCounter;
+            _startTime = _perfCounter.IncrementZetboxContext();
+
             _ctx = new EfObjectContext(config);
             _implTypeFactory = implTypeFactory;
-            _perfCounter = perfCounter;
             _sqlErrorTranslator = sqlErrorTranslator;
 
             _ctx.ObjectMaterialized += new ObjectMaterializedEventHandler(_ctx_ObjectMaterialized);
@@ -109,9 +112,6 @@ namespace Zetbox.DalProvider.Ef
                 ((IPersistenceObject)e.Entity).AttachToContext(this, lazyCtx);
             }
         }
-
-        private readonly IPerfCounter _perfCounter;
-        private readonly ISqlErrorTranslator _sqlErrorTranslator;
 
         private class QueryCacheEntry
         {

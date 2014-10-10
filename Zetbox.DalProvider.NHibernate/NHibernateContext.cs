@@ -43,6 +43,7 @@ namespace Zetbox.DalProvider.NHibernate
         private readonly ContextCache<IProxyObject> _attachedObjectsByProxy;
 
         private readonly IPerfCounter _perfCounter;
+        private readonly long _startTime;
         private readonly ISqlErrorTranslator _sqlErrorTranslator;
 
         /// <summary>
@@ -67,16 +68,29 @@ namespace Zetbox.DalProvider.NHibernate
         {
             if (perfCounter == null) throw new ArgumentNullException("perfCounter");
             if (sqlErrorTranslator == null) throw new ArgumentNullException("sqlErrorTranslator");
+
+            _perfCounter = perfCounter;
+            _startTime = _perfCounter.IncrementZetboxContext();
+
             _implTypeFactory = implTypeFactory;
             _implChecker = implChecker;
 
             _attachedObjects = new ContextCache<int>(this, item => item.ID);
             _attachedObjectsByProxy = new ContextCache<IProxyObject>(this, item => ((NHibernatePersistenceObject)item).NHibernateProxy);
 
-            _perfCounter = perfCounter;
             _sqlErrorTranslator = sqlErrorTranslator;
 
             _nhSession = nhSessionFactory.OpenSession(new NHInterceptor(this, lazyCtx));
+        }
+
+        public override void Dispose()
+        {
+            if (_nhSession != null)
+                _nhSession.Dispose();
+
+            base.Dispose();
+
+            _perfCounter.DecrementZetboxContext(_startTime);
         }
 
         public IQueryable<IPersistenceObject> PrepareQueryableGeneric<Tinterface, Tproxy>()
