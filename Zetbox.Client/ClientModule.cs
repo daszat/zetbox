@@ -97,9 +97,9 @@ namespace Zetbox.Client
                 .As<IViewModelDependencies>();
 
             moduleBuilder
-                .Register<ThreadPrincipalResolver>(c => new ThreadPrincipalResolver(c.Resolve<Func<IReadOnlyZetboxContext>>()))
+                .Register<ThreadPrincipalResolver>(c => new ThreadPrincipalResolver(c.Resolve<ILifetimeScope>()))
                 .As<IIdentityResolver>()
-                .InstancePerLifetimeScope();
+                .SingleInstance();
 
             moduleBuilder
                 .Register<LoggingProblemReporter>(c => new LoggingProblemReporter())

@@ -21,15 +21,15 @@ namespace Zetbox.API.Common
     using System.Security.Principal;
     using System.Text;
     using System.Threading;
-
+    using Autofac;
     using Zetbox.API;
     using Zetbox.App.Base;
 
     public sealed class ThreadPrincipalResolver
         : BaseIdentityResolver
     {
-        public ThreadPrincipalResolver(Func<IReadOnlyZetboxContext> resolverCtxFactory)
-            : base(resolverCtxFactory)
+        public ThreadPrincipalResolver(ILifetimeScope parentScope)
+            : base(parentScope)
         {
         }
 

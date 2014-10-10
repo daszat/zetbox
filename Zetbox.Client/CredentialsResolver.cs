@@ -110,7 +110,7 @@ namespace Zetbox.Client
                 builder
                     .RegisterType<BasicAuthIdentityResolver>()
                     .As<IIdentityResolver>()
-                    .InstancePerLifetimeScope();
+                    .SingleInstance();
             }
         }
 
@@ -209,8 +209,8 @@ namespace Zetbox.Client
     {
         private readonly BasicAuthCredentialsResolver _credentialResolver;
 
-        public BasicAuthIdentityResolver(Func<IReadOnlyZetboxContext> resolverCtxFactory, BasicAuthCredentialsResolver credentialResolver)
-            : base(resolverCtxFactory)
+        public BasicAuthIdentityResolver(ILifetimeScope parentScope, BasicAuthCredentialsResolver credentialResolver)
+            : base(parentScope)
         {
             if (credentialResolver == null) throw new ArgumentNullException("credentialResolver");
 
