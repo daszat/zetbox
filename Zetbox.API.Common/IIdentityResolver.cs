@@ -94,7 +94,6 @@ namespace Zetbox.API.Common
                 if (_currentScope != null) _currentScope.Dispose();
                 _currentScope = _parentScope.BeginLifetimeScope();
                 _resolverCtx = _currentScope.Resolve<IReadOnlyZetboxContext>();
-                _scopeCreated = DateTime.Now;
             }
         }
 
