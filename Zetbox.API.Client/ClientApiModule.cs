@@ -89,7 +89,7 @@ namespace Zetbox.API.Client
 
             moduleBuilder.RegisterType<ZetboxService.ZetboxServiceClient>()
                 .AsImplementedInterfaces()
-                .OnActivated(args =>
+                .OnActivating(args =>
                 {
                     args.Context.Resolve<ICredentialsResolver>().SetCredentialsTo(args.Instance.ClientCredentials);
                 })
