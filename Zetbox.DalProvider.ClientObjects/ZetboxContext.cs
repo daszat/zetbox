@@ -125,13 +125,12 @@ namespace Zetbox.DalProvider.Client
                 {
                     proxy.Dispose();
                     DisposedAt = new StackTrace(true);
+                    _perfCounter.DecrementZetboxContext(_startTime);
                 }
                 disposed = true;
             }
 
             ZetboxContextEventListenerHelper.OnDisposed(_eventListeners, this);
-
-            _perfCounter.DecrementZetboxContext(_startTime);
         }
 
         public bool IsDisposed

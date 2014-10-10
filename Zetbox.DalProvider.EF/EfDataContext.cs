@@ -76,9 +76,12 @@ namespace Zetbox.DalProvider.Ef
                 _ctx.Dispose();
             }
 
-            base.Dispose();
+            if (!IsDisposed)
+            {
+                _perfCounter.DecrementZetboxContext(_startTime);
+            }
 
-            _perfCounter.DecrementZetboxContext(_startTime);
+            base.Dispose();
         }
 
         /// <summary>

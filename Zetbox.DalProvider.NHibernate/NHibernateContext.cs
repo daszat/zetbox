@@ -85,12 +85,18 @@ namespace Zetbox.DalProvider.NHibernate
 
         public override void Dispose()
         {
+            if (_transaction != null)
+                _transaction.Dispose();
+
             if (_nhSession != null)
                 _nhSession.Dispose();
 
-            base.Dispose();
+            if (!IsDisposed)
+            {
+                _perfCounter.DecrementZetboxContext(_startTime);
+            }
 
-            _perfCounter.DecrementZetboxContext(_startTime);
+            base.Dispose();
         }
 
         public IQueryable<IPersistenceObject> PrepareQueryableGeneric<Tinterface, Tproxy>()
