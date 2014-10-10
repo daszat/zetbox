@@ -110,25 +110,27 @@ namespace Zetbox.API.PerfCounter
                         new CounterDesc(Name + "AvgDuration", string.Format("Avg. lifetime of {0} instance", Name), PerformanceCounterType.AverageTimer32, (pma, desc) => Accessor(pma).AvgDuration = desc.Get(pma)),
                         new CounterDesc(Name + "AvgDurationBase", string.Format("Base for avg. lifetime of {0} instance", Name), PerformanceCounterType.AverageBase, (pma, desc) => Accessor(pma).AvgDurationBase = desc.Get(pma)),
                         new CounterDesc(Name + "Current", string.Format("Current # of {0} instances.", Name), PerformanceCounterType.NumberOfItems64, (pma, desc) => Accessor(pma).Current = desc.Get(pma)),
+                        new CounterDesc(Name + "Total",   string.Format("# of {0} instances created.", Name), PerformanceCounterType.NumberOfItems64, (pma, desc) => Accessor(pma).Total = desc.Get(pma)),
                         new CounterDesc(Name + "CreatedPerSec", string.Format("# of {0} instances created / sec.", Name), PerformanceCounterType.RateOfCountsPerSecond32, (pma, desc) => Accessor(pma).CreatedPerSec = desc.Get(pma)),
                         new CounterDesc(Name + "DestroyedPerSec", string.Format("# of {0} instances destroyed / sec.", Name), PerformanceCounterType.RateOfCountsPerSecond32, (pma, desc) => Accessor(pma).DestroyedPerSec = desc.Get(pma)),
-                        new CounterDesc(Name + "Total", string.Format("# of {0} instances created.", Name), PerformanceCounterType.NumberOfItems64, (pma, desc) => Accessor(pma).Total = desc.Get(pma)),
                     };
                 }
             }
 
             public void Increment()
             {
-                Current.Increment();
                 CreatedPerSec.Increment();
+
+                Current.Increment();
+                Total.Increment();
             }
 
             public void Decrement(long startTicks, long endTicks)
             {
                 DestroyedPerSec.Increment();
-                Total.Increment();
 
                 Current.Decrement();
+
                 AvgDuration.IncrementBy(endTicks - startTicks);
                 AvgDurationBase.Increment();
             }
@@ -163,10 +165,10 @@ namespace Zetbox.API.PerfCounter
                         new CounterDesc(Name + "AvgDuration", string.Format("Avg. duration of {0} calls", Name), PerformanceCounterType.AverageTimer32, (pma, desc) => Accessor(pma).AvgDuration = desc.Get(pma)),
                         new CounterDesc(Name + "AvgDurationBase", string.Format("Base for avg. duration of {0} calls", Name), PerformanceCounterType.AverageBase, (pma, desc) => Accessor(pma).AvgDurationBase = desc.Get(pma)),
                         new CounterDesc(Name + "Current", string.Format("Current # of {0} calls.", Name), PerformanceCounterType.NumberOfItems64, (pma, desc) => Accessor(pma).Current = desc.Get(pma)),
+                        new CounterDesc(Name + "Total",   string.Format("# of {0} calls.",         Name), PerformanceCounterType.NumberOfItems64, (pma, desc) => Accessor(pma).Total = desc.Get(pma)),
                         new CounterDesc(Name + "ObjectsPerSec", string.Format("# Objects {1} by {0} / sec.", Name, Verb), PerformanceCounterType.RateOfCountsPerSecond32, (pma, desc) => Accessor(pma).ObjectsPerSec = desc.Get(pma)),
                         new CounterDesc(Name + "ObjectsTotal", string.Format("# Objects {1} by {0}.", Name, Verb), PerformanceCounterType.NumberOfItems64, (pma, desc) => Accessor(pma).ObjectsTotal = desc.Get(pma)),
                         new CounterDesc(Name + "PerSec", string.Format("# of {0} calls / sec.", Name), PerformanceCounterType.RateOfCountsPerSecond32, (pma, desc) => Accessor(pma).PerSec = desc.Get(pma)),
-                        new CounterDesc(Name + "Total", string.Format("# of {0} calls.", Name), PerformanceCounterType.NumberOfItems64, (pma, desc) => Accessor(pma).Total = desc.Get(pma)),
                     };
                 }
             }
