@@ -87,21 +87,30 @@ namespace Zetbox.API.PerfCounter
         }
 
         public long Duration { get; private set; }
-        public long Instances { get; private set; }
+        public long CurrentInstances { get; private set; }
+        public long TotalInstances { get; private set; }
         public long MinDuration { get; private set; }
         public long MaxDuration { get; private set; }
 
         internal void Reset()
         {
-            this.Duration =
-                this.Instances = 0;
+            this.Duration
+                = this.CurrentInstances
+                = this.TotalInstances
+                = 0;
             this.MinDuration = long.MinValue;
             this.MaxDuration = long.MaxValue;
         }
 
-        internal void Count(long startTicks, long endTicks)
+        internal void Up()
         {
-            Instances += 1;
+            TotalInstances += 1;
+            CurrentInstances += 1;
+        }
+
+        internal void Down(long startTicks, long endTicks)
+        {
+            CurrentInstances -= 1;
             var thisDuration = endTicks - startTicks;
             Duration += thisDuration;
             if (thisDuration < MinDuration)
@@ -116,9 +125,10 @@ namespace Zetbox.API.PerfCounter
 
         internal void FormatTo(Dictionary<string, string> values)
         {
-            values[Name + "Instances"] = Instances.ToString();
+            values[Name + "CurrentInstances"] = CurrentInstances.ToString();
+            values[Name + "TotalInstances"] = TotalInstances.ToString();
             values[Name + "Duration"] = BaseMemoryAppender.TicksToMillis(Duration).ToString();
-            values[Name + "AvgDuration"] = BaseMemoryAppender.Avg(Duration, Instances).ToString();
+            values[Name + "AvgDuration"] = BaseMemoryAppender.Avg(Duration, TotalInstances).ToString();
             if (MinDuration != long.MinValue)
                 values[Name + "MinDuration"] = MinDuration.ToString();
             if (MaxDuration != long.MaxValue)
@@ -306,35 +316,47 @@ namespace Zetbox.API.PerfCounter
 
         public void IncrementZetboxContext()
         {
+            lock (counterLock)
+            {
+                this.ZetboxContext.Up();
+            }
         }
         public void DecrementZetboxContext(long startTicks, long endTicks)
         {
             lock (counterLock)
             {
-                this.ZetboxContext.Count(startTicks, endTicks);
+                this.ZetboxContext.Down(startTicks, endTicks);
                 Dump(false);
             }
         }
         public void IncrementObjectInstance()
         {
+            lock (counterLock)
+            {
+                this.ObjectInstance.Up();
+            }
         }
         public void DecrementObjectInstance()
         {
             lock (counterLock)
             {
                 // storing startTicks for each object instance is deemed too expensive
-                this.ObjectInstance.Count(0, 0);
+                this.ObjectInstance.Down(0, 0);
                 Dump(false);
             }
         }
         public void IncrementLifetimeScope()
         {
+            lock (counterLock)
+            {
+                this.LifetimeScope.Up();
+            }
         }
         public void DecrementLifetimeScope(long startTicks, long endTicks)
         {
             lock (counterLock)
             {
-                this.LifetimeScope.Count(startTicks, endTicks);
+                this.LifetimeScope.Down(startTicks, endTicks);
                 Dump(false);
             }
         }
