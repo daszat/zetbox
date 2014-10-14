@@ -125,7 +125,8 @@ namespace Zetbox.API.PerfCounter
 
         internal void FormatTo(Dictionary<string, string> values)
         {
-            values[Name + "Instances"] = TotalInstances.ToString();
+            values[Name + "CurrentInstances"] = CurrentInstances.ToString();
+            values[Name + "TotalInstances"] = TotalInstances.ToString();
             values[Name + "Duration"] = BaseMemoryAppender.TicksToMillis(Duration).ToString();
             values[Name + "AvgDuration"] = BaseMemoryAppender.Avg(Duration, TotalInstances).ToString();
             if (MinDuration != long.MinValue)
