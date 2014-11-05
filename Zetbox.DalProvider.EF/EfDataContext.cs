@@ -87,8 +87,8 @@ namespace Zetbox.DalProvider.Ef
         /// <summary>
         /// Internal Constructor
         /// </summary>
-        public EfDataContext(IMetaDataResolver metaDataResolver, Identity identity, ZetboxConfig config, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, EfImplementationType.EfFactory implTypeFactory, IPerfCounter perfCounter, ISqlErrorTranslator sqlErrorTranslator, IEnumerable<IZetboxContextEventListener> eventListeners)
-            : base(metaDataResolver, identity, config, lazyCtx, iftFactory, eventListeners)
+        public EfDataContext(IMetaDataResolver metaDataResolver, ZetboxPrincipal principal, ZetboxConfig config, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, EfImplementationType.EfFactory implTypeFactory, IPerfCounter perfCounter, ISqlErrorTranslator sqlErrorTranslator, IEnumerable<IZetboxContextEventListener> eventListeners)
+            : base(metaDataResolver, principal, config, lazyCtx, iftFactory, eventListeners)
         {
             if (perfCounter == null) throw new ArgumentNullException("perfCounter");
             if (sqlErrorTranslator == null) throw new ArgumentNullException("sqlErrorTranslator");
@@ -242,7 +242,7 @@ namespace Zetbox.DalProvider.Ef
 
                 _table[interfaceType] = new QueryCacheEntry(new QueryTranslator<T>(
                     new EfQueryTranslatorProvider<T>(
-                        metaDataResolver, this.identityStore,
+                        metaDataResolver, this.principalStore,
                         query, this, iftFactory, _perfCounter)));
             }
         }

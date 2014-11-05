@@ -31,8 +31,8 @@ using Zetbox.API.Server.PerfCounter;
         private readonly NHibernateContext _ctx;
         private readonly INHibernateImplementationTypeChecker _implChecker;
 
-        internal NHibernateQueryTranslatorProvider(IMetaDataResolver metaDataResolver, Identity identity, IQueryable source, NHibernateContext ctx, InterfaceType.Factory iftFactory, INHibernateImplementationTypeChecker implChecker, IPerfCounter perfCounter)
-            : base(metaDataResolver, identity, source, ctx, iftFactory, perfCounter)
+        internal NHibernateQueryTranslatorProvider(IMetaDataResolver metaDataResolver, ZetboxPrincipal principal, IQueryable source, NHibernateContext ctx, InterfaceType.Factory iftFactory, INHibernateImplementationTypeChecker implChecker, IPerfCounter perfCounter)
+            : base(metaDataResolver, principal, source, ctx, iftFactory, perfCounter)
         {
             _ctx = ctx;
             _implChecker = implChecker;
@@ -40,7 +40,7 @@ using Zetbox.API.Server.PerfCounter;
 
         protected override QueryTranslatorProvider<TElement> GetSubProvider<TElement>()
         {
-            return new NHibernateQueryTranslatorProvider<TElement>(MetaDataResolver, Identity, Source, _ctx, IftFactory, _implChecker, perfCounter);
+            return new NHibernateQueryTranslatorProvider<TElement>(MetaDataResolver, Principal, Source, _ctx, IftFactory, _implChecker, perfCounter);
         }
 
         protected override object WrapResult(object item)

@@ -27,19 +27,19 @@ namespace Zetbox.App.Calendar
     [Implementor]
     public class CalendarBookActions
     {
-        private static IIdentityResolver _idResolver = null;
-        public CalendarBookActions(IIdentityResolver idResolver)
+        private static IPrincipalResolver _principalResolver = null;
+        public CalendarBookActions(IPrincipalResolver principalResolver)
         {
-            _idResolver = idResolver;
+            _principalResolver = principalResolver;
         }
 
         [Invocation]
         public static void NotifyCreated(CalendarBook obj)
         {
             var ctx = obj.Context;
-            // sets the current identity as the default owner
-            var identity = _idResolver.GetCurrent();
-            obj.Owner = identity != null ? ctx.Find<Identity>(identity.ID) : null;
+            // sets the current principal as the default owner
+            var principal = _principalResolver.GetCurrent();
+            obj.Owner = principal != null ? ctx.Find<Identity>(principal.ID) : null;
         }
 
         [Invocation]

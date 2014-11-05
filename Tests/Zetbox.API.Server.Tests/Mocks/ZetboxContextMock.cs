@@ -27,8 +27,8 @@ namespace Zetbox.API.Server.Mocks
     public class ZetboxContextMock : BaseZetboxDataContext, IFrozenContext
     {
         public Dictionary<int, TestObjClassImpl> TestObjClasses = new Dictionary<int, TestObjClassImpl>();
-        public ZetboxContextMock(IMetaDataResolver metaDataResolver, Identity identity, ZetboxConfig config, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, IEnumerable<IZetboxContextEventListener> eventListeners)
-            : base(metaDataResolver, identity, config, lazyCtx, iftFactory, eventListeners)
+        public ZetboxContextMock(IMetaDataResolver metaDataResolver, ZetboxPrincipal principal, ZetboxConfig config, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, IEnumerable<IZetboxContextEventListener> eventListeners)
+            : base(metaDataResolver, principal, config, lazyCtx, iftFactory, eventListeners)
         {
             TestObjClasses[1] = new TestObjClassImpl() { ID = 1 };
             TestObjClasses[3] = new TestObjClassImpl() { ID = 3 };

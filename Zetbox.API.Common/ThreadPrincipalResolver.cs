@@ -26,14 +26,14 @@ namespace Zetbox.API.Common
     using Zetbox.App.Base;
 
     public sealed class ThreadPrincipalResolver
-        : BaseIdentityResolver
+        : BasePrincipalResolver
     {
         public ThreadPrincipalResolver(ILifetimeScope parentScope)
             : base(parentScope)
         {
         }
 
-        public override Identity GetCurrent()
+        public override ZetboxPrincipal GetCurrent()
         {
             if (!string.IsNullOrEmpty(Thread.CurrentPrincipal.Identity.Name))
                 return Resolve(Thread.CurrentPrincipal.Identity);

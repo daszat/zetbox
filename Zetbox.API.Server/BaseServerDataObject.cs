@@ -218,10 +218,10 @@ namespace Zetbox.API.Server
 
         private static string GetIdentity(IZetboxServerContext serverCtx)
         {
-            return serverCtx != null && serverCtx.Identity != null
-                ? string.IsNullOrEmpty(serverCtx.Identity.DisplayName)
-                    ? serverCtx.Identity.UserName
-                    : serverCtx.Identity.DisplayName
+            return serverCtx != null && serverCtx.Pricipal != null
+                ? string.IsNullOrEmpty(serverCtx.Pricipal.DisplayName)
+                    ? serverCtx.Pricipal.UserName
+                    : serverCtx.Pricipal.DisplayName
                 : "System";
         }
 

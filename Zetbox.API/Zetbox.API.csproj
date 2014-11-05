@@ -94,6 +94,7 @@
     <Compile Include="CmdLineAction.cs" />
     <Compile Include="CollectionEntries.cs" />
     <Compile Include="Configuration\ZetboxConfig.cs" />
+    <Compile Include="ZetboxPrincipal.cs" />
     <Compile Include="DefinitionGuidAttribute.cs" />
     <Compile Include="Dtos\DtoTransformationAttributes.cs" />
     <Compile Include="ExpressionFilter.cs" />

@@ -47,7 +47,7 @@ namespace Zetbox.Server
 
             builder
                 .RegisterType<ThreadPrincipalResolver>()
-                .As<IIdentityResolver>()
+                .As<IPrincipalResolver>()
                 .SingleInstance();
 
             builder

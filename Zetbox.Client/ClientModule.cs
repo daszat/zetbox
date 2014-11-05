@@ -36,11 +36,11 @@ namespace Zetbox.Client
     {
         private class ViewModelDependencies : IViewModelDependencies
         {
-            public ViewModelDependencies(IViewModelFactory f, IFrozenContext frozenCtx, IIdentityResolver idResolver, IIconConverter iconConverter, IAssetsManager assetMgr)
+            public ViewModelDependencies(IViewModelFactory f, IFrozenContext frozenCtx, IPrincipalResolver principalResolver, IIconConverter iconConverter, IAssetsManager assetMgr)
             {
                 Factory = f;
                 FrozenContext = frozenCtx;
-                IdentityResolver = idResolver;
+                PrincipalResolver = principalResolver;
                 IconConverter = iconConverter;
                 Assets = assetMgr;
             }
@@ -59,7 +59,7 @@ namespace Zetbox.Client
                 private set;
             }
 
-            public IIdentityResolver IdentityResolver
+            public IPrincipalResolver PrincipalResolver
             {
                 get;
                 private set;
@@ -91,14 +91,14 @@ namespace Zetbox.Client
                 .Register<ViewModelDependencies>(c => new ViewModelDependencies(
                     c.Resolve<IViewModelFactory>(),
                     c.Resolve<IFrozenContext>(),
-                    c.Resolve<IIdentityResolver>(),
+                    c.Resolve<IPrincipalResolver>(),
                     c.Resolve<IIconConverter>(),
                     c.Resolve<IAssetsManager>()))
                 .As<IViewModelDependencies>();
 
             moduleBuilder
                 .Register<ThreadPrincipalResolver>(c => new ThreadPrincipalResolver(c.Resolve<ILifetimeScope>()))
-                .As<IIdentityResolver>()
+                .As<IPrincipalResolver>()
                 .SingleInstance();
 
             moduleBuilder

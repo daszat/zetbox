@@ -499,7 +499,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 Reason = CommonCommandsResources.DataObjectCommand_IsReadOnly;
                 return false;
             }
-            else if (Type.HasAccessControlList() && !Type.GetGroupAccessRights(CurrentIdentity).HasCreateRights())
+            else if (Type.HasAccessControlList() && !Type.GetGroupAccessRights(CurrentPrincipal).HasCreateRights())
             {
                 Reason = CommonCommandsResources.DataObjectCommand_NotAllowed;
                 return false;
@@ -812,7 +812,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public override bool CanExecute(object data)
         {
-            if (CurrentIdentity == null || !CurrentIdentity.IsAdministrator())
+            if (CurrentPrincipal == null || !CurrentPrincipal.IsAdministrator())
             {
                 this.Reason = CommonCommandsResources.ElevatedModeCommand_Error;
                 return false;
@@ -867,7 +867,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public override bool CanExecute(object data)
         {
-            if (CurrentIdentity == null || !CurrentIdentity.IsAdministrator())
+            if (CurrentPrincipal == null || !CurrentPrincipal.IsAdministrator())
             {
                 this.Reason = CommonCommandsResources.ElevatedModeCommand_Error;
                 return false;

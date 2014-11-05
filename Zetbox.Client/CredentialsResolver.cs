@@ -108,8 +108,8 @@ namespace Zetbox.Client
 
                 // since the user has entered credentials, now we also have a different Identity
                 builder
-                    .RegisterType<BasicAuthIdentityResolver>()
-                    .As<IIdentityResolver>()
+                    .RegisterType<BasicAuthPrincipalResolver>()
+                    .As<IPrincipalResolver>()
                     .SingleInstance();
             }
         }
@@ -204,12 +204,12 @@ namespace Zetbox.Client
         }
     }
 
-    public class BasicAuthIdentityResolver
-        : BaseIdentityResolver
+    public class BasicAuthPrincipalResolver
+        : BasePrincipalResolver
     {
         private readonly BasicAuthCredentialsResolver _credentialResolver;
 
-        public BasicAuthIdentityResolver(ILifetimeScope parentScope, BasicAuthCredentialsResolver credentialResolver)
+        public BasicAuthPrincipalResolver(ILifetimeScope parentScope, BasicAuthCredentialsResolver credentialResolver)
             : base(parentScope)
         {
             if (credentialResolver == null) throw new ArgumentNullException("credentialResolver");
@@ -217,9 +217,9 @@ namespace Zetbox.Client
             _credentialResolver = credentialResolver;
         }
 
-        public override Identity GetCurrent()
+        public override ZetboxPrincipal GetCurrent()
         {
-            Identity result = null;
+            ZetboxPrincipal result = null;
             while (result == null)
             {
                 var userName = _credentialResolver.GetUsername();

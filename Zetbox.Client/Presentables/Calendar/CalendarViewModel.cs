@@ -70,8 +70,8 @@ namespace Zetbox.Client.Presentables.Calendar
             {
                 if (_canWrite == null)
                 {
-                    var myID = CurrentIdentity != null ? CurrentIdentity.ID : 0;
-                    _canWrite = (Calendar.Owner != null && Calendar.Owner.ID == CurrentIdentity.ID)
+                    var myID = CurrentPrincipal != null ? CurrentPrincipal.ID : 0;
+                    _canWrite = (Calendar.Owner != null && Calendar.Owner.ID == CurrentPrincipal.ID)
                              || (Calendar.Writers.Any(w => w.ID == myID))
                              || (Calendar.GroupWriters.Any(grp => grp.Member.Any(w => w.ID == myID)));
                 }

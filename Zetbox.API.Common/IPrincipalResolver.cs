@@ -27,61 +27,61 @@ namespace Zetbox.API.Common
     /// <summary>
     /// Resolve the client's identity.
     /// </summary>
-    public interface IIdentityResolver
+    public interface IPrincipalResolver
     {
         /// <summary>
         /// Retrieves the zetbox identity of the current user. The Identity is member of it's own resolver data context
         /// </summary>
         /// <returns>a Identity or null if none was found.</returns>
-        Identity GetCurrent();
+        ZetboxPrincipal GetCurrent();
 
         /// <summary>
         /// Retrieves the zetbox identity of the specified security principal.The Identity is member of it's own resolver data context
         /// </summary>
         /// <param name="identity">a security principal</param>
         /// <returns>a Identity or null if none was found.</returns>
-        Identity Resolve(IIdentity identity);
+        ZetboxPrincipal Resolve(IIdentity identity);
     }
 
     [Serializable]
-    public class UnresolvableIdentityException : Exception
+    public class UnresolvablePrincipalException : Exception
     {
-        public UnresolvableIdentityException()
+        public UnresolvablePrincipalException()
             : this(string.Empty)
         {
         }
 
-        public UnresolvableIdentityException(string userName)
+        public UnresolvablePrincipalException(string userName)
             : base(string.Format("Unable to resolve identity '{0}'", userName))
         {
         }
 
-        public UnresolvableIdentityException(string userName, Exception inner)
+        public UnresolvablePrincipalException(string userName, Exception inner)
             : base(string.Format("Unable to resolve identity '{0}'", userName), inner)
         {
         }
 
-        protected UnresolvableIdentityException(SerializationInfo info, StreamingContext context)
+        protected UnresolvablePrincipalException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }
     }
 
-    public abstract class BaseIdentityResolver : IIdentityResolver
+    public abstract class BasePrincipalResolver : IPrincipalResolver
     {
         private readonly object _lock = new object();
 
         private readonly ILifetimeScope _parentScope;
-        private readonly Dictionary<string, Identity> _cache;
+        private readonly Dictionary<string, ZetboxPrincipal> _cache;
 
         private ILifetimeScope _currentScope;
         private IReadOnlyZetboxContext _resolverCtx;
 
-        protected BaseIdentityResolver(ILifetimeScope parentScope)
+        protected BasePrincipalResolver(ILifetimeScope parentScope)
         {
             if (parentScope == null) throw new ArgumentNullException("parentScope");
             _parentScope = parentScope;
-            _cache = new Dictionary<string, Identity>();
+            _cache = new Dictionary<string, ZetboxPrincipal>();
         }
 
         private void CheckScope()
@@ -97,20 +97,20 @@ namespace Zetbox.API.Common
             }
         }
 
-        public abstract Identity GetCurrent();
+        public abstract ZetboxPrincipal GetCurrent();
 
-        public Identity Resolve(IIdentity identity)
+        public ZetboxPrincipal Resolve(IIdentity identity)
         {
             if (identity == null) throw new ArgumentNullException("identity");
             return Resolve(identity.Name);
         }
 
-        protected Identity Resolve(string name)
+        protected ZetboxPrincipal Resolve(string name)
         {
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
             string id = name.ToLower();
 
-            Identity result = null;
+            ZetboxPrincipal result = null;
 
             lock (_lock)
             {
@@ -124,7 +124,8 @@ namespace Zetbox.API.Common
                 {
                     try
                     {
-                        result = _cache[id] = _resolverCtx.GetQuery<Identity>().Where(i => i.UserName.ToLower() == id).FirstOrDefault();
+                        var identity = _resolverCtx.GetQuery<Identity>().Where(i => i.UserName.ToLower() == id).FirstOrDefault();
+                        result = _cache[id] = new ZetboxPrincipal(id: identity.ID, userName: identity.UserName, displayName: identity.DisplayName, groups: identity.Groups.Select(g => new ZetboxPrincipalGroup(id: g.ID, name: g.Name, exportGuid: g.ExportGuid)));
                     }
                     catch (Exception ex)
                     {

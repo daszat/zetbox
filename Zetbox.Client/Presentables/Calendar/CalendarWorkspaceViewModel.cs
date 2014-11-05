@@ -194,7 +194,7 @@ namespace Zetbox.Client.Presentables.Calendar
                 {
                     var config = GetSavedConfig();
 
-                    var myID = CurrentIdentity != null ? CurrentIdentity.ID : 0;
+                    var myID = CurrentPrincipal != null ? CurrentPrincipal.ID : 0;
                     _Items = DataContext.GetQuery<cal.CalendarBook>()
                         .ToList()
                         .OrderBy(i => i.Owner != null && i.Owner.ID == myID ? 1 : 2)
@@ -270,10 +270,10 @@ namespace Zetbox.Client.Presentables.Calendar
         #region Configuration
         protected CalendarConfigurationList GetSavedConfig()
         {
-            if (CurrentIdentity == null) return new CalendarConfigurationList();
+            if (CurrentPrincipal == null) return new CalendarConfigurationList();
             using (var ctx = _ctxFactory())
             {
-                var idenity = ctx.Find<Identity>(CurrentIdentity.ID);
+                var idenity = ctx.Find<Identity>(CurrentPrincipal.ID);
                 CalendarConfigurationList obj;
                 try
                 {
@@ -293,7 +293,7 @@ namespace Zetbox.Client.Presentables.Calendar
             if (config == null) throw new ArgumentNullException("config");
             using (var ctx = _ctxFactory())
             {
-                var idenity = ctx.Find<Identity>(CurrentIdentity.ID);
+                var idenity = ctx.Find<Identity>(CurrentPrincipal.ID);
                 idenity.CalendarConfiguration = config.ToXmlString();
                 ctx.SubmitChanges();
             }

@@ -109,7 +109,7 @@
     <Compile Include="GUI\IconConverter.cs" />
     <Compile Include="GUI\SavedListConfig.cs" />
     <Compile Include="IdentityExtensions.cs" />
-    <Compile Include="IIdentityResolver.cs" />
+    <Compile Include="IPrincipalResolver.cs" />
     <Compile Include="InvocationExecutor.cs" />
     <Compile Include="IMetaDataResolver.cs" />
     <Compile Include="IRelationListSync.cs" />
