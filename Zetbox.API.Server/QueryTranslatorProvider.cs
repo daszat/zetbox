@@ -41,7 +41,7 @@ namespace Zetbox.API.Server
         : ExpressionTreeTranslator, IZetboxQueryProvider
     {
         protected readonly IMetaDataResolver MetaDataResolver;
-        protected readonly Identity Identity;
+        protected readonly ZetboxPrincipal Principal;
         protected readonly IQueryable Source;
         protected readonly IZetboxContext Ctx;
         protected readonly InterfaceType.Factory IftFactory;
@@ -60,12 +60,12 @@ namespace Zetbox.API.Server
         /// unrestricted queries are executed.
         /// </summary>
         /// <param name="metaDataResolver"></param>
-        /// <param name="identity">the user who is making the query; if null, a unrestricted query is executed.</param>
+        /// <param name="principal">the user who is making the query; if null, a unrestricted query is executed.</param>
         /// <param name="source"></param>
         /// <param name="ctx"></param>
         /// <param name="iftFactory"></param>
         /// <param name="perfCounter"></param>
-        protected QueryTranslatorProvider(IMetaDataResolver metaDataResolver, Identity identity, IQueryable source, IZetboxContext ctx, InterfaceType.Factory iftFactory, IPerfCounter perfCounter)
+        protected QueryTranslatorProvider(IMetaDataResolver metaDataResolver, ZetboxPrincipal principal, IQueryable source, IZetboxContext ctx, InterfaceType.Factory iftFactory, IPerfCounter perfCounter)
         {
             if (metaDataResolver == null) { throw new ArgumentNullException("metaDataResolver"); }
             if (source == null) { throw new ArgumentNullException("source"); }
@@ -73,7 +73,7 @@ namespace Zetbox.API.Server
             if (perfCounter == null) throw new ArgumentNullException("perfCounter");
 
             this.MetaDataResolver = metaDataResolver;
-            this.Identity = identity;
+            this.Principal = principal;
             this.Source = source;
             this.Ctx = ctx;
             this.IftFactory = iftFactory;
@@ -609,7 +609,7 @@ namespace Zetbox.API.Server
 
         private Expression AddSecurityFilter(Expression e, InterfaceType ifType)
         {
-            if (Identity == null || !ifType.Type.IsIDataObject()) return e;
+            if (Principal == null || !ifType.Type.IsIDataObject()) return e;
 
             // Case #1363: May return NULL during initialization
             var objClass = MetaDataResolver.GetObjectClass(ifType);
@@ -637,7 +637,7 @@ namespace Zetbox.API.Server
                 // r.Identity == 12
                 var eq_identity = Expression.Equal(
                                 Expression.PropertyOrField(pe_r, "Identity"),
-                                Expression.Constant(Identity.ID),
+                                Expression.Constant(Principal.ID),
                                 false,
                                 typeof(int).GetMethod("op_Equality"));
 

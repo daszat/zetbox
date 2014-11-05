@@ -169,11 +169,11 @@ namespace Zetbox.Client.WPF
 
             // Init credentials explicit
             StartupScreen.SetInfo(Zetbox.Client.Properties.Resources.Startup_EnsuringCredentials);
-            var idResolver = container.Resolve<IIdentityResolver>();
+            var principalResolver = container.Resolve<IPrincipalResolver>();
             var credResolver = container.Resolve<ICredentialsResolver>();
             try
             {
-                while (idResolver.GetCurrent() == null)
+                while (principalResolver.GetCurrent() == null)
                 {
                     credResolver.InvalidCredentials();
                 }
@@ -338,7 +338,7 @@ namespace Zetbox.Client.WPF
         private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
             var inner = e.Exception.GetInnerException();
-            if (inner is Zetbox.API.Common.UnresolvableIdentityException)
+            if (inner is Zetbox.API.Common.UnresolvablePrincipalException)
             {
                 Environment.Exit(1);
             }

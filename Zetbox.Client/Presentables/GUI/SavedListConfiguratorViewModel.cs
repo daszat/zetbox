@@ -84,7 +84,7 @@ namespace Zetbox.Client.Presentables.GUI
                     var ctx = ctxFactory();
                     var qryTask = ctx.GetQuery<SavedListConfiguration>()
                             .Where(i => i.Type.ExportGuid == Parent.DataType.ExportGuid) // Parent.DataType might be from FrozenContext
-                            .Where(i => i.Owner == null || i.Owner == this.CurrentIdentity)
+                            .Where(i => i.Owner == null || i.Owner.ID == this.CurrentPrincipal.ID)
                             .ToListAsync();
 
                     var result = new ZbTask<ReadOnlyCollectionShortcut<SavedListConfigViewModel>>(qryTask);
@@ -464,12 +464,12 @@ namespace Zetbox.Client.Presentables.GUI
         {
             var config = ctx.GetQuery<SavedListConfiguration>()
                 .Where(i => i.Type.ExportGuid == Parent.DataType.ExportGuid) // Parent.DataType might be from FrozenContext
-                .Where(i => i.Owner == this.CurrentIdentity)
+                .Where(i => i.Owner.ID == this.CurrentPrincipal.ID)
                 .FirstOrDefault();
             if (config == null)
             {
                 config = ctx.Create<SavedListConfiguration>();
-                config.Owner = ctx.Find<Identity>(CurrentIdentity.ID);
+                config.Owner = ctx.Find<Identity>(CurrentPrincipal.ID);
                 config.Type = ctx.FindPersistenceObject<ObjectClass>(Parent.DataType.ExportGuid);  // Parent.DataType might be from FrozenContext
             }
             return config;

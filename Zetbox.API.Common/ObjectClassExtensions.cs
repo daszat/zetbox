@@ -142,14 +142,14 @@ namespace Zetbox.App.Extensions
         /// 
         /// </summary>
         /// <param name="cls"></param>
-        /// <param name="id"></param>
+        /// <param name="principal"></param>
         /// <returns>Returns null if not mentioned in any group membership</returns>
-        public static Zetbox.API.AccessRights? GetGroupAccessRights(this ObjectClass cls, Identity id)
+        public static Zetbox.API.AccessRights? GetGroupAccessRights(this ObjectClass cls, ZetboxPrincipal principal)
         {
             if (cls == null) throw new ArgumentNullException("cls");
-            if (id == null) throw new ArgumentNullException("id");
+            if (principal == null) throw new ArgumentNullException("principal");
             cls = cls.GetRootClass();
-            var groups = id.Groups.ToLookup(i => i.ExportGuid);
+            var groups = principal.Groups.ToLookup(i => i.ExportGuid);
 
             Zetbox.App.Base.AccessRights? result = null;
 

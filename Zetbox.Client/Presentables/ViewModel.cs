@@ -42,9 +42,9 @@ namespace Zetbox.Client.Presentables
         IFrozenContext FrozenContext { get; }
 
         /// <summary>
-        /// The current Identity Resolver
+        /// The current Principal Resolver
         /// </summary>
-        IIdentityResolver IdentityResolver { get; }
+        IPrincipalResolver PrincipalResolver { get; }
 
         /// <summary>
         /// IIconConverter instance
@@ -137,19 +137,16 @@ namespace Zetbox.Client.Presentables
             return ViewModelFactory.GetWorkspace(DataContext);
         }
 
-        private Identity _CurrentIdentity = null;
-        /// <summary>
-        /// Returns the current identity using the IIdentityResolver. Thus, the Identity object does not belong to the current context!
-        /// </summary>
-        public Identity CurrentIdentity
+        private ZetboxPrincipal _CurrentPrincipal = null;
+        public ZetboxPrincipal CurrentPrincipal
         {
             get
             {
-                if (_CurrentIdentity == null)
+                if (_CurrentPrincipal == null)
                 {
-                    _CurrentIdentity = _dependencies.IdentityResolver.GetCurrent();
+                    _CurrentPrincipal = _dependencies.PrincipalResolver.GetCurrent();
                 }
-                return _CurrentIdentity;
+                return _CurrentPrincipal;
             }
         }
 
@@ -596,7 +593,7 @@ namespace Zetbox.Client.Presentables
             get { throw new NotImplementedException(); }
         }
 
-        public IIdentityResolver IdentityResolver
+        public IPrincipalResolver PrincipalResolver
         {
             get { throw new NotImplementedException(); }
         }

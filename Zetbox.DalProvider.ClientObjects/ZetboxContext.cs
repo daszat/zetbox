@@ -67,7 +67,7 @@ namespace Zetbox.DalProvider.Client
         private readonly ContextIsolationLevel _clientIsolationLevel;
         private readonly IPerfCounter _perfCounter;
         private readonly long _startTime;
-        private readonly IIdentityResolver _identityResolver;
+        private readonly IPrincipalResolver _identityResolver;
         private readonly IEnumerable<IZetboxContextEventListener> _eventListeners;
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Zetbox.DalProvider.Client
         [SuppressMessage("Microsoft.Performance", "CA1805:DoNotInitializeUnnecessarily", Justification = "Uses global constant")]
         private int _newIDCounter = Helper.INVALIDID;
 
-        public ZetboxContextImpl(ContextIsolationLevel il, ZetboxConfig config, IProxy proxy, string clientImplementationAssembly, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, ClientImplementationType.ClientFactory implTypeFactory, UnattachedObjectFactory unattachedObjectFactory, IPerfCounter perfCounter, IIdentityResolver identityResolver, IEnumerable<IZetboxContextEventListener> eventListeners)
+        public ZetboxContextImpl(ContextIsolationLevel il, ZetboxConfig config, IProxy proxy, string clientImplementationAssembly, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, ClientImplementationType.ClientFactory implTypeFactory, UnattachedObjectFactory unattachedObjectFactory, IPerfCounter perfCounter, IPrincipalResolver identityResolver, IEnumerable<IZetboxContextEventListener> eventListeners)
         {
             if (perfCounter == null) throw new ArgumentNullException("perfCounter");
             this._perfCounter = perfCounter;

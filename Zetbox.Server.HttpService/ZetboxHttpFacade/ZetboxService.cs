@@ -93,7 +93,7 @@ namespace Zetbox.Server.HttpService
                 string username;
                 try
                 {
-                    var id = scope.Resolve<IIdentityResolver>().GetCurrent();
+                    var id = scope.Resolve<IPrincipalResolver>().GetCurrent();
                     if (id != null)
                     {
                         username = id.DisplayName;

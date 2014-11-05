@@ -29,14 +29,14 @@ namespace Zetbox.DalProvider.Ef
     internal sealed class EfQueryTranslatorProvider<T>
         : QueryTranslatorProvider<T>
     {
-        internal EfQueryTranslatorProvider(IMetaDataResolver metaDataResolver, Identity identity, IQueryable source, IZetboxContext ctx, InterfaceType.Factory iftFactory, IPerfCounter perfCounter)
-            : base(metaDataResolver, identity, source, ctx, iftFactory, perfCounter)
+        internal EfQueryTranslatorProvider(IMetaDataResolver metaDataResolver, ZetboxPrincipal principal, IQueryable source, IZetboxContext ctx, InterfaceType.Factory iftFactory, IPerfCounter perfCounter)
+            : base(metaDataResolver, principal, source, ctx, iftFactory, perfCounter)
         {
         }
 
         protected override QueryTranslatorProvider<TElement> GetSubProvider<TElement>()
         {
-            return new EfQueryTranslatorProvider<TElement>(MetaDataResolver, Identity, Source, Ctx, IftFactory, perfCounter);
+            return new EfQueryTranslatorProvider<TElement>(MetaDataResolver, Principal, Source, Ctx, IftFactory, perfCounter);
         }
 
         protected override string ImplementationSuffix

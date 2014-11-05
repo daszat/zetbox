@@ -411,7 +411,9 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                 UpdateErrors();
                 if (_currentErrors.Count > 0)
                 {
-                    ViewModelFactory.ShowModel(ViewModelFactory.CreateViewModel<ErrorListViewModel.Factory>().Invoke(DataContext, this), true);
+                    var errorList = ViewModelFactory.CreateViewModel<ErrorListViewModel.Factory>().Invoke(DataContext, this);
+                    errorList.RefreshErrors();
+                    ViewModelFactory.ShowModel(errorList, true);
                 }
             });
             loader.Trigger();
@@ -551,7 +553,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             if (data is IDataObject[])
             {
                 var lst = (IDataObject[])data;
-                foreach(var obj in lst)
+                foreach (var obj in lst)
                 {
                     ShowObject(obj);
                 }

@@ -54,7 +54,7 @@ namespace Zetbox.DalProvider.NHibernate
 
         internal NHibernateContext(
             IMetaDataResolver metaDataResolver,
-            Identity identity,
+            ZetboxPrincipal principal,
             ZetboxConfig config,
             Func<IFrozenContext> lazyCtx,
             InterfaceType.Factory iftFactory,
@@ -64,7 +64,7 @@ namespace Zetbox.DalProvider.NHibernate
             IPerfCounter perfCounter,
             ISqlErrorTranslator sqlErrorTranslator,
             IEnumerable<IZetboxContextEventListener> eventListeners)
-            : base(metaDataResolver, identity, config, lazyCtx, iftFactory, eventListeners)
+            : base(metaDataResolver, principal, config, lazyCtx, iftFactory, eventListeners)
         {
             if (perfCounter == null) throw new ArgumentNullException("perfCounter");
             if (sqlErrorTranslator == null) throw new ArgumentNullException("sqlErrorTranslator");
@@ -104,7 +104,7 @@ namespace Zetbox.DalProvider.NHibernate
             var query = _nhSession.Query<Tproxy>();
             return new QueryTranslator<Tinterface>(
                 new NHibernateQueryTranslatorProvider<Tinterface>(
-                    metaDataResolver, this.identityStore,
+                    metaDataResolver, this.principalStore,
                     query, this, iftFactory, _implChecker, _perfCounter))
                 .Cast<IPersistenceObject>();
         }

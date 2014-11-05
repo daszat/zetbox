@@ -136,7 +136,7 @@ namespace Zetbox.Client.Presentables.Calendar
         private ZbTask<List<int>> FetchCalendar()
         {
             var myCalendarsTask = DataContext
-                .GetQuery<CalendarBook>().Where(i => i.Owner == CurrentIdentity)
+                .GetQuery<CalendarBook>().Where(i => i.Owner.ID == CurrentPrincipal.ID)
                 .ToListAsync();
             var configTask = GetSavedConfigAsync();
             return new ZbTask<List<int>>(new ZbTask[] { myCalendarsTask, configTask })
@@ -153,9 +153,9 @@ namespace Zetbox.Client.Presentables.Calendar
 
         protected ZbTask<CalendarConfigurationList> GetSavedConfigAsync()
         {
-            if (CurrentIdentity == null) return new ZbTask<CalendarConfigurationList>(new CalendarConfigurationList());
+            if (CurrentPrincipal == null) return new ZbTask<CalendarConfigurationList>(new CalendarConfigurationList());
             var ctx = _ctxFactory();
-            var idenityTask = ctx.FindAsync<Identity>(CurrentIdentity.ID);
+            var idenityTask = ctx.FindAsync<Identity>(CurrentPrincipal.ID);
             return new ZbTask<CalendarConfigurationList>(idenityTask)
                 .OnResult(t =>
                 {

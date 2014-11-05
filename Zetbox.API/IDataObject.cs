@@ -470,11 +470,11 @@ namespace Zetbox.API
         }
 
         /// <summary>
-        /// 
+        /// Whether or not the inspected object is valid. Defaults to "true".
         /// </summary>
         public bool IsValid { get; set; }
         /// <summary>
-        /// 
+        /// A list of errors detected on the object.
         /// </summary>
         public List<string> Errors { get; private set; }
     }

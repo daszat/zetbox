@@ -15,22 +15,22 @@
 
 namespace Zetbox.API.Server
 {
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Zetbox.App.Base;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using Zetbox.App.Base;
 
     /// <summary>
     /// A data context without identity, which is useful for various administrative tasks.
     /// </summary>
-    public interface IZetboxServerContext 
+    public interface IZetboxServerContext
         : IZetboxContext
     {
         /// <summary>
-        /// The Identity of this context. May be null for administrative/system-level work.
+        /// The Pricipal of this context. May be null for administrative/system-level work.
         /// </summary>
-        Identity Identity { get; }
+        ZetboxPrincipal Pricipal { get; }
 
         /// <summary>
         /// Submits the changes and returns the number of affected Objects.

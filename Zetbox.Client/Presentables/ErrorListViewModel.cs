@@ -90,7 +90,6 @@ namespace Zetbox.Client.Presentables
         {
             _errors = new ObservableCollection<ErrorDescriptor>();
             _roErrors = new ReadOnlyObservableCollection<ErrorDescriptor>(_errors);
-            DisplayErrors();
         }
 
         public new WorkspaceViewModel Parent

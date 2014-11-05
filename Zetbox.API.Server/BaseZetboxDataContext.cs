@@ -31,12 +31,12 @@ namespace Zetbox.API.Server
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
 
-    public delegate IZetboxContext ServerZetboxContextFactory(Identity identity);
+    public delegate IZetboxContext ServerZetboxContextFactory(ZetboxPrincipal principal);
 
     public abstract class BaseZetboxDataContext
         : IZetboxServerContext, IZetboxContextInternals, IDisposable
     {
-        protected readonly Identity identityStore;
+        protected readonly ZetboxPrincipal principalStore;
         protected readonly IMetaDataResolver metaDataResolver;
         protected readonly FuncCache<Type, InterfaceType> iftFactoryCache;
         protected readonly InterfaceType.Factory iftFactory;
@@ -45,22 +45,22 @@ namespace Zetbox.API.Server
         protected readonly IEnumerable<IZetboxContextEventListener> eventListeners;
 
         /// <summary>
-        /// Initializes a new instance of the BaseZetboxDataContext class using the specified <see cref="Identity"/>.
+        /// Initializes a new instance of the BaseZetboxDataContext class using the specified Principal.
         /// </summary>
         /// <param name="metaDataResolver">the IMetaDataResolver for this context.</param>
-        /// <param name="identity">the identity of this context. if this is null, the context does no security checks</param>
+        /// <param name="principal">the identity of this context. if this is null, the context does no security checks</param>
         /// <param name="config"></param>
         /// <param name="lazyCtx"></param>
         /// <param name="iftFactory"></param>
         /// <param name="eventListeners"></param>
-        protected BaseZetboxDataContext(IMetaDataResolver metaDataResolver, Identity identity, ZetboxConfig config, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, IEnumerable<IZetboxContextEventListener> eventListeners)
+        protected BaseZetboxDataContext(IMetaDataResolver metaDataResolver, ZetboxPrincipal principal, ZetboxConfig config, Func<IFrozenContext> lazyCtx, InterfaceType.Factory iftFactory, IEnumerable<IZetboxContextEventListener> eventListeners)
         {
             if (metaDataResolver == null) { throw new ArgumentNullException("metaDataResolver"); }
             if (config == null) { throw new ArgumentNullException("config"); }
             if (iftFactory == null) { throw new ArgumentNullException("iftFactory"); }
 
             this.metaDataResolver = metaDataResolver;
-            this.identityStore = identity;
+            this.principalStore = principal;
             this.config = config;
             this.iftFactoryCache = new FuncCache<Type, InterfaceType>(r => iftFactory(r));
             this.iftFactory = t => iftFactoryCache.Invoke(t);
@@ -101,14 +101,14 @@ namespace Zetbox.API.Server
 
         public bool IsReadonly { get { return false; } }
 
-        int IZetboxContextInternals.IdentityID { get { return Identity != null ? Identity.ID : Helper.INVALIDID; } }
+        int IZetboxContextInternals.IdentityID { get { return Pricipal != null ? Pricipal.ID : Helper.INVALIDID; } }
 
         public Zetbox.API.AccessRights GetGroupAccessRights(InterfaceType ifType)
         {
-            if (Identity == null || !ifType.Type.IsIDataObject()) return Zetbox.API.AccessRights.Full;
+            if (Pricipal == null || !ifType.Type.IsIDataObject()) return Zetbox.API.AccessRights.Full;
 
             // Identity is a Administrator - is allowed to do everything
-            if (Identity.IsAdministrator()) return Zetbox.API.AccessRights.Full;
+            if (Pricipal.IsAdministrator()) return Zetbox.API.AccessRights.Full;
 
             // Case #1363: May return NULL during initialization
             var objClass = metaDataResolver.GetObjectClass(ifType);
@@ -121,7 +121,7 @@ namespace Zetbox.API.Server
             if (!rootClass.HasAccessControlList()) return Zetbox.API.AccessRights.Full;
 
             // return the rights given by group membership. if none is found, deny access
-            return rootClass.GetGroupAccessRights(Identity) ?? Zetbox.API.AccessRights.None;
+            return rootClass.GetGroupAccessRights(Pricipal) ?? Zetbox.API.AccessRights.None;
         }
 
         /// <summary>
@@ -421,11 +421,11 @@ namespace Zetbox.API.Server
                     if (updateChangedInfo)
                         cb.ChangedOn = now;
 
-                    if (this.identityStore != null)
+                    if (this.principalStore != null)
                     {
                         if (localIdentity == null)
                         {
-                            localIdentity = this.identityStore.Context == this ? this.identityStore : this.GetQuery<Identity>().First(id => id.ID == this.identityStore.ID);
+                            localIdentity = this.GetQuery<Identity>().First(id => id.ID == this.principalStore.ID);
                         }
 
                         if (obj.ObjectState == DataObjectState.New)
@@ -947,9 +947,9 @@ namespace Zetbox.API.Server
         public abstract void RollbackTransaction();
         #endregion
 
-        public Identity Identity
+        public ZetboxPrincipal Pricipal
         {
-            get { return this.identityStore; }
+            get { return this.principalStore; }
         }
 
         public void SetElevatedMode(bool elevatedMode)

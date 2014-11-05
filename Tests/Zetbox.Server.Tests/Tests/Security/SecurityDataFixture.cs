@@ -62,6 +62,8 @@ namespace Zetbox.Server.Tests.Security
 
         private void CreateTestData()
         {
+            ZetboxPrincipal principal1, principal2, principal3;
+
             {
                 srvCtx = scope.Resolve<IZetboxServerContext>();
 
@@ -104,10 +106,13 @@ namespace Zetbox.Server.Tests.Security
                 srvCtx.SubmitChanges();
             }
 
+            principal1 = new ZetboxPrincipal(identity1.ID, identity1.UserName, identity1.DisplayName, identity1.Groups.Select(g => new ZetboxPrincipalGroup(g.ID, g.Name, g.ExportGuid)));
+            principal2 = new ZetboxPrincipal(identity2.ID, identity2.UserName, identity2.DisplayName, identity2.Groups.Select(g => new ZetboxPrincipalGroup(g.ID, g.Name, g.ExportGuid)));
+            principal3 = new ZetboxPrincipal(identity3_low.ID, identity3_low.UserName, identity3_low.DisplayName, identity3_low.Groups.Select(g => new ZetboxPrincipalGroup(g.ID, g.Name, g.ExportGuid)));
 
             {
                 // Create 3 identity context
-                var ctx = scope.Resolve<ServerZetboxContextFactory>().Invoke(identity1);
+                var ctx = scope.Resolve<ServerZetboxContextFactory>().Invoke(principal1);
 
                 // Create TestData with Identity 1
                 prj1 = ctx.Create<Projekt>();
@@ -129,7 +134,7 @@ namespace Zetbox.Server.Tests.Security
             }
 
             {
-                var ctx = scope.Resolve<ServerZetboxContextFactory>().Invoke(identity2);
+                var ctx = scope.Resolve<ServerZetboxContextFactory>().Invoke(principal2);
 
                 // Create TestData with Identity 2
                 prj2 = ctx.Create<Projekt>();
@@ -141,9 +146,9 @@ namespace Zetbox.Server.Tests.Security
                 prj2ID = prj2.ID;
             }
 
-            id1Ctx = scope.Resolve<ServerZetboxContextFactory>().Invoke(identity1);
-            id2Ctx = scope.Resolve<ServerZetboxContextFactory>().Invoke(identity2);
-            id3Ctx_low = scope.Resolve<ServerZetboxContextFactory>().Invoke(identity3_low);
+            id1Ctx = scope.Resolve<ServerZetboxContextFactory>().Invoke(principal1);
+            id2Ctx = scope.Resolve<ServerZetboxContextFactory>().Invoke(principal2);
+            id3Ctx_low = scope.Resolve<ServerZetboxContextFactory>().Invoke(principal3);
 
             prj1 = id1Ctx.Find<Projekt>(prj1ID);
             prjCommon = id1Ctx.Find<Projekt>(prjCommonID);

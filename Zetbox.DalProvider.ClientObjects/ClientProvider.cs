@@ -54,7 +54,7 @@ namespace Zetbox.DalProvider.Client
                         c.Resolve<ClientImplementationType.ClientFactory>(),
                         c.Resolve<UnattachedObjectFactory>(),
                         c.Resolve<IPerfCounter>(),
-                        c.Resolve<IIdentityResolver>(),
+                        c.Resolve<IPrincipalResolver>(),
                         c.Resolve<IEnumerable<IZetboxContextEventListener>>());
                 })
                 .AsSelf()

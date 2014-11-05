@@ -20,17 +20,18 @@ namespace Zetbox.Client.Mocks
     using System.Linq;
     using System.Security.Principal;
     using System.Text;
+    using Zetbox.API;
     using Zetbox.API.Common;
     using Zetbox.App.Base;
 
-    public sealed class NullIdentityResolver : IIdentityResolver
+    public sealed class NullIdentityResolver : IPrincipalResolver
     {
-        public Identity GetCurrent()
+        public ZetboxPrincipal GetCurrent()
         {
             return null;
         }
 
-        public Identity Resolve(IIdentity identity)
+        public ZetboxPrincipal Resolve(IIdentity identity)
         {
             return null;
         }

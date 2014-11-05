@@ -43,13 +43,13 @@ namespace Zetbox.IntegrationTests.Security
             base.SetUp();
 
             ctx = GetContext();
-            var idResolver = scope.Resolve<IIdentityResolver>();
+            var principalResolver = scope.Resolve<IPrincipalResolver>();
 
-            var currentIdentity = idResolver.GetCurrent();
+            var currentPrincipal = principalResolver.GetCurrent();
 
-            Assert.That(currentIdentity, Is.Not.Null, "No current identity found - try syncidentities or setup the current identity correctly");
+            Assert.That(currentPrincipal, Is.Not.Null, "No current identity found - try syncidentities or setup the current identity correctly");
 
-            identity1 = ctx.Find<Identity>(currentIdentity.ID);
+            identity1 = ctx.Find<Identity>(currentPrincipal.ID);
             identity2 = ctx.GetQuery<Identity>().Where(i => i.ID != identity1.ID).First();
 
             parent = ctx.Create<SecurityTestParent>();

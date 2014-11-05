@@ -32,15 +32,15 @@ namespace Zetbox.API.Server.Tests
     {
         private readonly InterfaceType.Factory _iftFactory;
 
-        internal TestQueryTranslatorProvider(IMetaDataResolver metaDataResolver, Identity identity, IQueryable source, IZetboxContext ctx, InterfaceType.Factory iftFactory, IPerfCounter perfCounter)
-            : base(metaDataResolver, identity, source, ctx, iftFactory, perfCounter)
+        internal TestQueryTranslatorProvider(IMetaDataResolver metaDataResolver, ZetboxPrincipal principal, IQueryable source, IZetboxContext ctx, InterfaceType.Factory iftFactory, IPerfCounter perfCounter)
+            : base(metaDataResolver, principal, source, ctx, iftFactory, perfCounter)
         {
             _iftFactory = iftFactory;
         }
 
         protected override QueryTranslatorProvider<TElement> GetSubProvider<TElement>()
         {
-            return new TestQueryTranslatorProvider<TElement>(MetaDataResolver, Identity, Source, Ctx, _iftFactory, perfCounter);
+            return new TestQueryTranslatorProvider<TElement>(MetaDataResolver, Principal, Source, Ctx, _iftFactory, perfCounter);
         }
 
         protected override string ImplementationSuffix
