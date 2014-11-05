@@ -37,10 +37,10 @@ namespace Zetbox.App.Extensions
             return id.Groups.Any(g => g.ExportGuid == Zetbox.NamedObjects.Base.Groups.Administrator.Guid);
         }
 
-        public static bool IsAdministrator(this ZetboxPrincipal id)
+        public static bool IsAdministrator(this ZetboxPrincipal principal)
         {
-            if (id == null) throw new ArgumentNullException("id");
-            return id.Groups.Any(g => g.ExportGuid == Zetbox.NamedObjects.Base.Groups.Administrator.Guid);
+            if (principal == null) throw new ArgumentNullException("principal");
+            return principal.Groups.Any(g => g.ExportGuid == Zetbox.NamedObjects.Base.Groups.Administrator.Guid);
         }
 
         public static bool IsInGroup(this Identity id, Group grp)
@@ -48,6 +48,13 @@ namespace Zetbox.App.Extensions
             if (id == null) throw new ArgumentNullException("id");
             if (grp == null) throw new ArgumentNullException("grp");
             return id.Groups.Any(g => g.ExportGuid == grp.ExportGuid);
+        }
+
+        public static bool IsInGroup(this ZetboxPrincipal principal, Group grp)
+        {
+            if (principal == null) throw new ArgumentNullException("principal");
+            if (grp == null) throw new ArgumentNullException("grp");
+            return principal.Groups.Any(g => g.ExportGuid == grp.ExportGuid);
         }
     }
 }
