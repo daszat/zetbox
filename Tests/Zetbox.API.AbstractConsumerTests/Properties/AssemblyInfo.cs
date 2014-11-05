@@ -35,5 +35,5 @@ using System.Runtime.InteropServices;
 
 // The following tags will be replaced by the -checkout job on jenkins to current values
 [assembly: AssemblyVersion("1.1.0.0")]
-[assembly: AssemblyFileVersion("1.1.14.0")]
-[assembly: AssemblyInformationalVersion("1.1.14-zdev")]
+[assembly: AssemblyFileVersion("1.1.15.0")]
+[assembly: AssemblyInformationalVersion("1.1.15-zdev")]
