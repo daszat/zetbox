@@ -27,14 +27,11 @@ namespace Zetbox.App.Projekte
     [Implementor]
     public static class TaskActions
     {
-        /// <summary>
-        /// Überprüfung eines Tasks - sinnlos, aber ganz lustig.
-        /// </summary>
         [Invocation]
-        public static void NotifyPreSave(Task obj)
+        public static void ObjectIsValid(Task obj, ObjectIsValidEventArgs e)
         {
-            if (obj.Aufwand < 0) throw new ArgumentOutOfRangeException("obj", "Ungültiger Aufwand");
-            if (obj.DatumBis < obj.DatumVon) throw new ArgumentOutOfRangeException("obj", "Falsches Zeitalter");
+            if (obj.Aufwand < 0) e.Errors.Add("Ungültiger Aufwand");
+            if (obj.DatumBis < obj.DatumVon) e.Errors.Add("Falscher Zeitraum");
         }
     }
 }
