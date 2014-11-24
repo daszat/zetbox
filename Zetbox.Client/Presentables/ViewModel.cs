@@ -188,7 +188,7 @@ namespace Zetbox.Client.Presentables
         public virtual ControlKind RequestedKind
         {
             get { return _RequestedKind; }
-            set { _RequestedKind = value; OnPropertyChanged("ControlKind"); }
+            set { _RequestedKind = value; OnPropertyChanged("RequestedKind"); }
         }
 
         private int _isBusy = 0;
