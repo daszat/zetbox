@@ -37,6 +37,8 @@ T: Zetbox.Server.WcfServer
 # Inner classes designed to work only with their parent
 M: System.Void Zetbox.Client.Presentables.ValueViewModels.NullableDateTimePropertyViewModel/NullableTimePartPropertyViewModel::.ctor(Zetbox.Client.Presentables.IViewModelDependencies,Zetbox.API.IZetboxContext,Zetbox.Client.Presentables.ValueViewModels.NullableDateTimePropertyViewModel,Zetbox.Client.Models.IValueModel)
 M: System.Void Zetbox.Client.Presentables.ValueViewModels.NullableDateTimePropertyViewModel/NullableDatePartPropertyViewModel::.ctor(Zetbox.Client.Presentables.IViewModelDependencies,Zetbox.API.IZetboxContext,Zetbox.Client.Presentables.ValueViewModels.NullableDateTimePropertyViewModel,Zetbox.Client.Models.IValueModel)
+# serialisation helper only makes sense with specified exception type
+M: System.Void Zetbox.API.ValidationExceptionMessage::.ctor(Zetbox.API.ZetboxValidationException)
 
 R: Gendarme.Rules.Correctness.DisposableFieldsShouldBeDisposedRule
 # these classes have special disposal strategies since they need to hold disposable parts with lifecycles beyond themselves
