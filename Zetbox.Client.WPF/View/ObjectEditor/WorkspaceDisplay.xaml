@@ -44,25 +44,17 @@
                         <Style>
                             <Setter Property="DockPanel.Dock" Value="Right"/>
                             <Setter Property="ContentPresenter.ContentTemplateSelector" Value="{StaticResource defaultTemplateSelector}"/>
-                            <Setter Property="FrameworkElement.Margin" Value="0"/>
-                            <Setter Property="styles:Margin.Left" Value="{StaticResource ItemMargin}"/>
-                            <Setter Property="styles:Margin.Right" Value="{StaticResource ItemMargin}"/>
                             <Setter Property="tk:VisualTypeTemplateSelector.RequestedKind" Value="{Binding RequestedKind, Mode=OneWay}" />
                         </Style>
                     </ItemsControl.ItemContainerStyle>
                 </ItemsControl>
                 <ctrls:CommandButton DockPanel.Dock="Left"
                                      CommandViewModel="{Binding ReportProblemCommand}"
-                                     Style="{StaticResource ImageButton}"
-                                     Margin="0"
-                                     styles:Margin.Right="{StaticResource ItemMargin}" />
+                                     Style="{StaticResource ImageButton}" />
                 <ToggleButton DockPanel.Dock="Left"
                               Command="{Binding ElevatedModeCommand, Converter={StaticResource CommandConverter}}"
                               Visibility="{Binding ElevatedModeCommand.Show, Converter={StaticResource BooleanToVisibilityConverter}}"
-                              IsChecked="{Binding ElevatedModeCommand.IsElevated, Mode=OneWay}"
-                              Margin="0"
-                              styles:Margin.Left="{StaticResource ItemMargin}"
-                              styles:Margin.Right="{StaticResource ItemMargin}">
+                              IsChecked="{Binding ElevatedModeCommand.IsElevated, Mode=OneWay}">
                     <Border Padding="5">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="{Binding Path=ElevatedModeCommand.Icon, Converter={StaticResource ImageConverter}}"
