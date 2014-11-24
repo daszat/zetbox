@@ -551,7 +551,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
             var b = base.ObjectIsValid();
-            e.IsValid = b.IsValid;
             e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_Identity != null)
             {

@@ -1063,7 +1063,6 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Migrat
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
             var b = base.ObjectIsValid();
-            e.IsValid = b.IsValid;
             e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_MigrationProject != null)
             {

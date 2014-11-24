@@ -59,7 +59,6 @@ this.WriteObjects("        protected override ObjectIsValidResult ObjectIsValid(
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();\r\n");
 this.WriteObjects("            var b = base.ObjectIsValid();\r\n");
-this.WriteObjects("            e.IsValid = b.IsValid;\r\n");
 this.WriteObjects("            e.Errors.AddRange(b.Errors);\r\n");
 this.WriteObjects("            if (OnObjectIsValid_",  dt.Name , " != null)\r\n");
 this.WriteObjects("            {\r\n");
@@ -72,56 +71,56 @@ this.WriteObjects("\r\n");
 this.WriteObjects("        [EventBasedMethod(\"OnNotifyPreSave_",  dt.Name , "\")]\r\n");
 this.WriteObjects("        public override void NotifyPreSave()\r\n");
 this.WriteObjects("        {\r\n");
-#line 66 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
+#line 65 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 ApplyPrePreSaveTemplate(); 
-#line 67 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
+#line 66 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 this.WriteObjects("            base.NotifyPreSave();\r\n");
 this.WriteObjects("            if (OnNotifyPreSave_",  dt.Name , " != null) OnNotifyPreSave_",  dt.Name , "(this);\r\n");
-#line 69 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
+#line 68 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 ApplyPostPreSaveTemplate(); 
-#line 70 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
+#line 69 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        public static event ObjectEventHandler<",  dt.Name , "> OnNotifyPreSave_",  dt.Name , ";\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        [EventBasedMethod(\"OnNotifyPostSave_",  dt.Name , "\")]\r\n");
 this.WriteObjects("        public override void NotifyPostSave()\r\n");
 this.WriteObjects("        {\r\n");
-#line 76 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
+#line 75 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 ApplyPrePostSaveTemplate(); 
-#line 77 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
+#line 76 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 this.WriteObjects("            base.NotifyPostSave();\r\n");
 this.WriteObjects("            if (OnNotifyPostSave_",  dt.Name , " != null) OnNotifyPostSave_",  dt.Name , "(this);\r\n");
-#line 79 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
+#line 78 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 ApplyPostPostSaveTemplate(); 
-#line 80 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
+#line 79 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        public static event ObjectEventHandler<",  dt.Name , "> OnNotifyPostSave_",  dt.Name , ";\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        [EventBasedMethod(\"OnNotifyCreated_",  dt.Name , "\")]\r\n");
 this.WriteObjects("        public override void NotifyCreated()\r\n");
 this.WriteObjects("        {\r\n");
-#line 86 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
+#line 85 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 ApplyPreCreatedTemplate(); 
-#line 87 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
+#line 86 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 this.WriteObjects("            base.NotifyCreated();\r\n");
 this.WriteObjects("            if (OnNotifyCreated_",  dt.Name , " != null) OnNotifyCreated_",  dt.Name , "(this);\r\n");
-#line 89 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
+#line 88 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 ApplyPostCreatedTemplate(); 
-#line 90 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
+#line 89 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        public static event ObjectEventHandler<",  dt.Name , "> OnNotifyCreated_",  dt.Name , ";\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        [EventBasedMethod(\"OnNotifyDeleting_",  dt.Name , "\")]\r\n");
 this.WriteObjects("        public override void NotifyDeleting()\r\n");
 this.WriteObjects("        {\r\n");
-#line 96 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
+#line 95 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 ApplyPreDeletingTemplate(); 
-#line 97 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
+#line 96 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 this.WriteObjects("            base.NotifyDeleting();\r\n");
 this.WriteObjects("            if (OnNotifyDeleting_",  dt.Name , " != null) OnNotifyDeleting_",  dt.Name , "(this);\r\n");
-#line 99 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
+#line 98 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 ApplyPostDeletingTemplate(); 
-#line 100 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
+#line 99 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\DefaultMethods.cst"
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        public static event ObjectEventHandler<",  dt.Name , "> OnNotifyDeleting_",  dt.Name , ";\r\n");
 this.WriteObjects("\r\n");

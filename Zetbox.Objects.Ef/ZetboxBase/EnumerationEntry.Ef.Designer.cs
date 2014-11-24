@@ -1249,7 +1249,6 @@ namespace Zetbox.App.Base
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
             var b = base.ObjectIsValid();
-            e.IsValid = b.IsValid;
             e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_EnumerationEntry != null)
             {

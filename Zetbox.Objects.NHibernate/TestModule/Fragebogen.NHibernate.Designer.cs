@@ -330,7 +330,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnStu
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
             var b = base.ObjectIsValid();
-            e.IsValid = b.IsValid;
             e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_Fragebogen != null)
             {

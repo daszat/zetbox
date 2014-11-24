@@ -275,7 +275,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.N_to_M_relations_
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
             var b = base.ObjectIsValid();
-            e.IsValid = b.IsValid;
             e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_N_to_M_relations_A != null)
             {
