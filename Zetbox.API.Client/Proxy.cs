@@ -130,6 +130,10 @@ namespace Zetbox.API.Client
                 {
                     throw;
                 }
+                catch (ZetboxValidationException)
+                {
+                    throw;
+                }
                 catch (FKViolationException)
                 {
                     throw;

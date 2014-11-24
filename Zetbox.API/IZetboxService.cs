@@ -30,7 +30,7 @@ namespace Zetbox.API
     using System.Xml.Serialization;
 
     /// <summary>
-    /// Kist Stream Service Contract
+    /// Zetbox Stream Service Contract
     /// TODO: Add FaultContracts
     /// TODO: Remove GetListOf
     /// </summary>
@@ -200,11 +200,13 @@ namespace Zetbox.API
     [XmlRoot(Namespace = "http://dasz.at/zetbox/ZetboxContextExceptionMessage")]
     [DataContract(Namespace = "http://dasz.at/Zetbox/")]
     [KnownType(typeof(ConcurrencyExceptionMessage))]
+    [KnownType(typeof(ValidationExceptionMessage))]
     [KnownType(typeof(FKViolationExceptionMessage))]
     [KnownType(typeof(UniqueConstraintViolationExceptionMessage))]
     public class ZetboxContextExceptionMessage
     {
         [XmlElement(typeof(ConcurrencyExceptionMessage), ElementName = "ConcurrencyException")]
+        [XmlElement(typeof(ValidationExceptionMessage), ElementName = "ValidationException")]
         [XmlElement(typeof(FKViolationExceptionMessage), ElementName = "FKViolationException")]
         [XmlElement(typeof(UniqueConstraintViolationExceptionMessage), ElementName = "UniqueConstraintViolationException")]
         [DataMember]
@@ -249,6 +251,24 @@ namespace Zetbox.API
 
         [DataMember]
         public List<ConcurrencyExceptionDetail> Details { get; set; }
+    }
+
+    [Serializable]
+    public class ValidationExceptionMessage : ZetboxContextExceptionSerializationHelper
+    {
+        public ValidationExceptionMessage()
+        {
+        }
+
+        public ValidationExceptionMessage(ZetboxValidationException ex)
+            : base(ex)
+        {
+        }
+
+        public override ZetboxContextErrorException ToException()
+        {
+            return new ZetboxValidationException(Message);
+        }
     }
 
     [Serializable]

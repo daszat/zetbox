@@ -56,6 +56,15 @@ namespace Zetbox.Client
                     .Show();
                 return true;
             }
+            else if (inner is ZetboxValidationException)
+            {
+                var error = (ZetboxValidationException)inner;
+                vmf.CreateDialog(ctx, ZetboxContextExceptionHandlerResources.ZetboxValidationException_Caption)
+                    .AddTextBlock("empty", string.Empty, ZetboxContextExceptionHandlerResources.ZetboxValidationException_Message)
+                    .AddMultiLineString("details", ZetboxContextExceptionHandlerResources.ZetboxValidationException_ValueLabel, string.Format(ZetboxContextExceptionHandlerResources.ZetboxValidationException_ValueFormat, error.Message))
+                    .Show();
+                return true;
+            }
             else if (inner is FKViolationException)
             {
                 var error = (FKViolationException)inner;
@@ -86,7 +95,7 @@ namespace Zetbox.Client
                     if (e.IdxGuid == default(Guid) || e.IdxGuid == Guid.Empty) return e.DatabaseError;
                     var idx = frozenCtx.FindPersistenceObject<IndexConstraint>(e.IdxGuid);
                     return string.Format(
-                        ZetboxContextExceptionHandlerResources.UniqueConstraintViolationException_DetailFormatString, 
+                        ZetboxContextExceptionHandlerResources.UniqueConstraintViolationException_DetailFormatString,
                         idx.Constrained.Name,
                         string.Join(", ", idx.Properties.Select(p => p.GetLabel())),
                         idx.Reason,

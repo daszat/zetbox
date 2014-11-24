@@ -158,7 +158,7 @@ namespace Zetbox.API
 
     [Serializable]
     public class ZetboxValidationException
-        : ZetboxContextException
+        : ZetboxContextErrorException
     {
         public ZetboxValidationException()
             : base("Validation Error")
@@ -178,6 +178,14 @@ namespace Zetbox.API
         protected ZetboxValidationException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
+        }
+
+        public override ZetboxContextExceptionMessage ToExceptionMessage()
+        {
+            return new ZetboxContextExceptionMessage()
+            {
+                Exception = new ValidationExceptionMessage(this)
+            };
         }
     }
 
