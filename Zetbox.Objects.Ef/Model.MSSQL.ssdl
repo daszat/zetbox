@@ -1853,7 +1853,7 @@
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_Module" Type="int" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="1000" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="GroupMembership">
@@ -2562,7 +2562,7 @@
     <Property Name="fk_ChangedBy" Type="int" />
     <Property Name="fk_CreatedBy" Type="int" />
     <Property Name="ChangedOn" Type="datetime2" Nullable="false" />
-    <Property Name="ConnectionStringKey" Type="nvarchar" MaxLength="1000" Nullable="false" />
+    <Property Name="ConnectionStringKey" Type="nvarchar" Nullable="false" />
     <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
     <Property Name="Description" Type="nvarchar" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />

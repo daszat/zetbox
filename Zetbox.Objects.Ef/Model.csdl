@@ -1773,7 +1773,7 @@
                         Relationship="Model.FK_Group_has_Module"
                         FromRole="Group"
                         ToRole="Module" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="1000"  />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="2147483647"  />
   </EntityType>
   <EntityType Name="IconEfImpl">
     <Key>
@@ -2636,7 +2636,7 @@
                         FromRole="StagingDatabase"
                         ToRole="ChangedBy" />
     <Property Name="ChangedOn" Type="DateTime" Nullable="false"  ConcurrencyMode="Fixed"/>
-    <Property Name="ConnectionStringKey" Type="String" Nullable="false" MaxLength="1000"  />
+    <Property Name="ConnectionStringKey" Type="String" Nullable="false" MaxLength="2147483647"  />
     <NavigationProperty Name="CreatedByImpl"
                         Relationship="Model.FK_StagingDatabase_was_CreatedBy"
                         FromRole="StagingDatabase"
