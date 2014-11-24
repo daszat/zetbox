@@ -18,6 +18,7 @@ namespace Zetbox.API.Server
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Data;
     using System.Data.Common;
     using System.IO;
@@ -445,10 +446,31 @@ namespace Zetbox.API.Server
             }
         }
 
+        protected virtual void ValidateModifiedObjects(IEnumerable<IDataObject> notifySaveList)
+        {
+            var allErrors = string.Join("\n", notifySaveList.Where(obj => obj.ObjectState != DataObjectState.Deleted).Select(obj =>
+            {
+                var ide = obj as IDataErrorInfo;
+                string error;
+                if (ide != null && !string.IsNullOrEmpty(error = ide.Error))
+                {
+                    return String.Format("{0}#{1}: {2}", obj.GetType().FullName, obj.ID, error);
+                }
+                else
+                {
+                    return null;
+                }
+            }).Where(s => s != null));
+
+            if (!string.IsNullOrEmpty(allErrors))
+            {
+                throw new ZetboxValidationException(allErrors);
+            }
+        }
+
         protected virtual void NotifyChanged(IEnumerable<IDataObject> modifiedObjects)
         {
             modifiedObjects.Where(obj => obj.ObjectState != DataObjectState.Deleted).ForEach(obj => obj.NotifyPostSave());
-
         }
 
         protected void OnSubmitted()

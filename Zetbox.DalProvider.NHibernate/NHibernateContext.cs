@@ -263,6 +263,8 @@ namespace Zetbox.DalProvider.NHibernate
 
             NotifyChanging(notifyList);
 
+            ValidateModifiedObjects(notifyList);
+
             FlushSession(objects);
 
             NotifyChanged(notifyList);

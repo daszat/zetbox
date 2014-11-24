@@ -326,6 +326,8 @@ namespace Zetbox.DalProvider.Ef
 
                 NotifyChanging(notifySaveList);
 
+                ValidateModifiedObjects(notifySaveList);
+
                 // Detach all rights entities as they are managed by the triggers in the database
                 foreach (var right in _ctx.ObjectStateManager
                     .GetObjectStateEntries(EntityState.Added | EntityState.Modified | EntityState.Deleted)
