@@ -2792,7 +2792,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="1000"  />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="2147483647"  />
     <NavigationProperty Name="TestbogenImpl"
                         Relationship="Model.FK_Student_füllt_aus_Testbogen_A"
                         FromRole="Student"
@@ -2814,7 +2814,7 @@
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="1000"  />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="2147483647"  />
   </EntityType>
   <EntityType Name="ViewDescriptorEfImpl">
     <Key>

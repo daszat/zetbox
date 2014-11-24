@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2014-11-24T16:49:41Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2014-11-24T20:54:34Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="a56d9701-d98e-49ab-bd49-a491d09e2d46">
     <ZetboxBase:ChangedOn>2011-08-06T08:30:47.664236Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
@@ -11479,6 +11479,12 @@ public static void isValid_BString(TPHDerivedBObj obj, PropertyIsValidEventArgs 
     <ZetboxBase:ConstrainedProperty>190b4492-c1cb-40a2-8941-84b8ff3ac141</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2010-03-16T22:19:10Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="46ab9be2-2b20-4518-8bdd-04ac8d3c7394">
+    <ZetboxBase:ChangedOn>2014-11-24T19:53:54.43447Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>190b4492-c1cb-40a2-8941-84b8ff3ac141</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2014-11-24T19:53:54.43447Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:ClientReadOnlyConstraint ExportGuid="663acba2-4818-4fe7-9ed7-c663f8843521">
     <ZetboxBase:ChangedOn>2013-01-02T14:02:40.368367Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>a8c0f966-ae75-4634-9958-612b4f8d8de0</ZetboxBase:ConstrainedProperty>
@@ -11524,6 +11530,12 @@ public static void isValid_BString(TPHDerivedBObj obj, PropertyIsValidEventArgs 
     <ZetboxBase:ConstrainedProperty>ad7feae4-cbeb-4bb5-a87c-5eb24c130e6d</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2013-01-02T14:02:02.761216Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="2f2e9b84-24a8-4cfa-9460-23fb6e07428c">
+    <ZetboxBase:ChangedOn>2014-11-24T19:54:34.249926Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>ad7feae4-cbeb-4bb5-a87c-5eb24c130e6d</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2014-11-24T19:54:34.249926Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="d2f26cfe-8ef9-4e43-ab66-a88037147cbd">
     <ZetboxBase:ChangedOn>2013-01-02T14:05:03.709566Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>1d532ccc-af58-4ae6-8819-bfe55527b0c9</ZetboxBase:ConstrainedProperty>

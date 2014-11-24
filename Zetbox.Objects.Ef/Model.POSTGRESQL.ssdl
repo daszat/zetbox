@@ -2680,7 +2680,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="varchar" MaxLength="1000" Nullable="false" />
+    <Property Name="Name" Type="varchar" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="TPHBaseObj">
@@ -2694,7 +2694,7 @@
     <Property Name="ChangedOn" Type="timestamp" Nullable="false" />
     <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
     <Property Name="ExportGuid" Type="uuid" Nullable="false" />
-    <Property Name="Name" Type="varchar" MaxLength="1000" Nullable="false" />
+    <Property Name="Name" Type="varchar" Nullable="false" />
     <Property Name="TPHDerivedAObjs_AInt" Type="int4" Nullable="true" />
     <Property Name="TPHDerivedAObjs_AString" Type="varchar" MaxLength="200" Nullable="true" />
     <Property Name="TPHDerivedBObjs_BString" Type="varchar" MaxLength="100" Nullable="true" />
