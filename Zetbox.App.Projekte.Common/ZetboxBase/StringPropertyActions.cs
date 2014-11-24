@@ -29,7 +29,6 @@ namespace Zetbox.App.Base
         {
             if (obj.GetLengthConstraint() == null)
             {
-                e.IsValid = false;
                 e.Errors.Add("String property must have a string range constraint");
             }
         }
