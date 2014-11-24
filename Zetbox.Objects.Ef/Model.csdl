@@ -1124,7 +1124,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="TestString" Type="String" Nullable="true" MaxLength="1000"  />
+    <Property Name="TestString" Type="String" Nullable="true" MaxLength="2147483647"  />
   </EntityType>
   <EntityType Name="AnotherTestEfImpl">
     <Key>
@@ -1137,7 +1137,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Frage" Type="String" Nullable="false" MaxLength="1000"  />
+    <Property Name="Frage" Type="String" Nullable="false" MaxLength="2147483647"  />
     <NavigationProperty Name="FragebogenImpl"
                         Relationship="Model.FK_Ein_Fragebogen_enthaelt_gute_Antworten"
                         FromRole="gute_Antworten"
@@ -1387,7 +1387,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="1000"  />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="2147483647"  />
   </EntityType>
   <EntityType Name="ConstraintEfImpl" Abstract="true">
     <Key>
@@ -1818,7 +1818,7 @@
                         FromRole="Constraint"
                         ToRole="Constrained" />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-    <Property Name="Reason" Type="String" Nullable="true" MaxLength="1000"  />
+    <Property Name="Reason" Type="String" Nullable="true" MaxLength="2147483647"  />
   </EntityType>
   <EntityType Name="KundeEfImpl">
     <Key>
@@ -1857,7 +1857,7 @@
                         FromRole="Method"
                         ToRole="ChangedBy" />
     <Property Name="ChangedOn" Type="DateTime" Nullable="false"  ConcurrencyMode="Fixed"/>
-    <Property Name="CodeTemplate" Type="String" Nullable="true" MaxLength="1000"  />
+    <Property Name="CodeTemplate" Type="String" Nullable="true" MaxLength="2147483647"  />
     <NavigationProperty Name="CreatedByImpl"
                         Relationship="Model.FK_Method_was_CreatedBy"
                         FromRole="Method"
@@ -2022,7 +2022,7 @@
                         ToRole="TCO_One_Role" />
     <Property Name="TestDateTime" Type="DateTime" Nullable="true"  />
     <Property Name="TestEnumImpl" Type="Int32" Nullable="false"  />
-    <Property Name="TestString" Type="String" Nullable="true" MaxLength="1000"  />
+    <Property Name="TestString" Type="String" Nullable="true" MaxLength="2147483647"  />
   </EntityType>
   <EntityType Name="N_to_M_relations_AEfImpl">
     <Key>
@@ -2033,7 +2033,7 @@
                         Relationship="Model.FK_ASide_connectsTo_BSide_A"
                         FromRole="ASide"
                         ToRole="CollectionEntry" />
-    <Property Name="Name" Type="String" Nullable="true" MaxLength="1000"  />
+    <Property Name="Name" Type="String" Nullable="true" MaxLength="2147483647"  />
   </EntityType>
   <EntityType Name="N_to_M_relations_BEfImpl">
     <Key>
@@ -2044,7 +2044,7 @@
                         Relationship="Model.FK_ASide_connectsTo_BSide_B"
                         FromRole="BSide"
                         ToRole="CollectionEntry" />
-    <Property Name="Name" Type="String" Nullable="true" MaxLength="1000"  />
+    <Property Name="Name" Type="String" Nullable="true" MaxLength="2147483647"  />
   </EntityType>
   <EntityType Name="NavigationEntryEfImpl" Abstract="true">
     <Key>
@@ -2226,7 +2226,7 @@
                         FromRole="Property"
                         ToRole="ChangedBy" />
     <Property Name="ChangedOn" Type="DateTime" Nullable="false"  ConcurrencyMode="Fixed"/>
-    <Property Name="CodeTemplate" Type="String" Nullable="true" MaxLength="1000"  />
+    <Property Name="CodeTemplate" Type="String" Nullable="true" MaxLength="2147483647"  />
     <NavigationProperty Name="ConstraintsImpl"
                         Relationship="Model.FK_ConstrainedProperty_has_Constraints"
                         FromRole="ConstrainedProperty"
@@ -2363,14 +2363,14 @@
                         Relationship="Model.FK_Parent_of_Children"
                         FromRole="Parent"
                         ToRole="Children" />
-    <Property Name="Name" Type="String" Nullable="true" MaxLength="1000"  />
+    <Property Name="Name" Type="String" Nullable="true" MaxLength="2147483647"  />
   </EntityType>
   <EntityType Name="RequiredParentChildEfImpl">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" Nullable="true" MaxLength="1000"  />
+    <Property Name="Name" Type="String" Nullable="true" MaxLength="2147483647"  />
     <NavigationProperty Name="ParentImpl"
                         Relationship="Model.FK_Parent_of_Children"
                         FromRole="Children"
@@ -2479,7 +2479,7 @@
                         Relationship="Model.FK_Sequence_has_Data"
                         FromRole="Sequence"
                         ToRole="Data" />
-    <Property Name="Description" Type="String" Nullable="false" MaxLength="1000"  />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="2147483647"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
     <Property Name="IsContinuous" Type="Boolean" Nullable="false"  />
     <NavigationProperty Name="ModuleImpl"
@@ -2515,7 +2515,7 @@
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
     <Property Name="DeploymentRestrictionImpl" Type="Int32" Nullable="true"  />
-    <Property Name="Description" Type="String" Nullable="false" MaxLength="1000"  />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="2147483647"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
     <NavigationProperty Name="ModuleImpl"
                         Relationship="Model.FK_ServiceDescriptor_has_Module"
@@ -2591,7 +2591,7 @@
                         Relationship="Model.FK_SourceColumn_may_have_EnumEntries"
                         FromRole="EnumEntries"
                         ToRole="SourceColumn" />
-    <Property Name="SourceValue" Type="String" Nullable="false" MaxLength="1000"  />
+    <Property Name="SourceValue" Type="String" Nullable="false" MaxLength="2147483647"  />
   </EntityType>
   <EntityType Name="SourceTableEfImpl">
     <Key>
@@ -2642,13 +2642,13 @@
                         FromRole="StagingDatabase"
                         ToRole="CreatedBy" />
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
-    <Property Name="Description" Type="String" Nullable="true" MaxLength="1000"  />
+    <Property Name="Description" Type="String" Nullable="true" MaxLength="2147483647"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
     <NavigationProperty Name="MigrationProjectImpl"
                         Relationship="Model.FK_MigrationProject_reads_from_StagingDatabases"
                         FromRole="StagingDatabases"
                         ToRole="MigrationProject" />
-    <Property Name="OriginConnectionStringKey" Type="String" Nullable="true" MaxLength="1000"  />
+    <Property Name="OriginConnectionStringKey" Type="String" Nullable="true" MaxLength="2147483647"  />
     <Property Name="Schema" Type="String" Nullable="false" MaxLength="63"  />
     <NavigationProperty Name="SourceTablesImpl"
                         Relationship="Model.FK_SourceTables_are_contained_in_StagingDatabase"
@@ -2948,17 +2948,17 @@
                         Relationship="Model.FK_BoolProperty_has_FalseIcon"
                         FromRole="BoolProperty"
                         ToRole="FalseIcon" />
-    <Property Name="FalseLabel" Type="String" Nullable="true" MaxLength="1000"  />
+    <Property Name="FalseLabel" Type="String" Nullable="true" MaxLength="2147483647"  />
     <NavigationProperty Name="NullIconImpl"
                         Relationship="Model.FK_BoolProperty_has_NullIcon"
                         FromRole="BoolProperty"
                         ToRole="NullIcon" />
-    <Property Name="NullLabel" Type="String" Nullable="true" MaxLength="1000"  />
+    <Property Name="NullLabel" Type="String" Nullable="true" MaxLength="2147483647"  />
     <NavigationProperty Name="TrueIconImpl"
                         Relationship="Model.FK_BoolProperty_has_TrueIcon"
                         FromRole="BoolProperty"
                         ToRole="TrueIcon" />
-    <Property Name="TrueLabel" Type="String" Nullable="true" MaxLength="1000"  />
+    <Property Name="TrueLabel" Type="String" Nullable="true" MaxLength="2147483647"  />
   </EntityType>
   <EntityType Name="CalculatedObjectReferencePropertyEfImpl" BaseType="Model.PropertyEfImpl">
     <NavigationProperty Name="InputsImpl"
@@ -3126,7 +3126,7 @@
     <Property Name="AllowSelectColumns" Type="Boolean" Nullable="true"  />
     <Property Name="AllowUserFilter" Type="Boolean" Nullable="true"  />
     <Property Name="EnableAutoFilter" Type="Boolean" Nullable="true"  />
-    <Property Name="InitialSort" Type="String" Nullable="true" MaxLength="1000"  />
+    <Property Name="InitialSort" Type="String" Nullable="true" MaxLength="2147483647"  />
     <Property Name="InitialSortDirectionImpl" Type="Int32" Nullable="true"  />
     <Property Name="IsEditable" Type="Boolean" Nullable="true"  />
     <Property Name="IsMultiselect" Type="Boolean" Nullable="true"  />
@@ -3161,7 +3161,7 @@
                         Relationship="Model.FK_BaseObjectClass_has_SubClasses"
                         FromRole="SubClasses"
                         ToRole="BaseObjectClass" />
-    <Property Name="CodeTemplate" Type="String" Nullable="true" MaxLength="1000"  />
+    <Property Name="CodeTemplate" Type="String" Nullable="true" MaxLength="2147483647"  />
     <NavigationProperty Name="DefaultViewModelDescriptorImpl"
                         Relationship="Model.FK_Presentable_has_DefaultViewModelDescriptor"
                         FromRole="Presentable"
@@ -3195,14 +3195,14 @@
   </EntityType>
   <EntityType Name="ObjectReferencePlaceholderPropertyEfImpl" BaseType="Model.PropertyEfImpl">
     <Property Name="HasPersistentOrder" Type="Boolean" Nullable="false"  />
-    <Property Name="ImplementorRoleName" Type="String" Nullable="true" MaxLength="1000"  />
+    <Property Name="ImplementorRoleName" Type="String" Nullable="true" MaxLength="2147483647"  />
     <Property Name="IsList" Type="Boolean" Nullable="false"  />
-    <Property Name="ItemRoleName" Type="String" Nullable="true" MaxLength="1000"  />
+    <Property Name="ItemRoleName" Type="String" Nullable="true" MaxLength="2147483647"  />
     <NavigationProperty Name="ReferencedObjectClassImpl"
                         Relationship="Model.FK_ObjRefPlaceholderProp_ofType_ReferencedClass"
                         FromRole="ObjRefPlaceholderProp"
                         ToRole="ReferencedClass" />
-    <Property Name="Verb" Type="String" Nullable="true" MaxLength="1000"  />
+    <Property Name="Verb" Type="String" Nullable="true" MaxLength="2147483647"  />
   </EntityType>
   <EntityType Name="ObjectReferencePropertyEfImpl" BaseType="Model.PropertyEfImpl">
     <Property Name="EagerLoading" Type="Boolean" Nullable="false"  />
@@ -3217,7 +3217,7 @@
                         ToRole="RelationEnd" />
   </EntityType>
   <EntityType Name="OptionalPredicateFilterConfigurationEfImpl" BaseType="Model.ObjectClassFilterConfigurationEfImpl">
-    <Property Name="Predicate" Type="String" Nullable="true" MaxLength="1000"  />
+    <Property Name="Predicate" Type="String" Nullable="true" MaxLength="2147483647"  />
   </EntityType>
   <EntityType Name="PropertyBoolTestEfImpl" BaseType="Model.PropertyTestBaseEfImpl">
     <Property Name="Nullable" Type="Boolean" Nullable="true"  />
@@ -3268,10 +3268,10 @@
     <Property Name="StandardWithDefault" Type="Int32" Nullable="false"  />
   </EntityType>
   <EntityType Name="PropertyStringTestEfImpl" BaseType="Model.PropertyTestBaseEfImpl">
-    <Property Name="Nullable" Type="String" Nullable="true" MaxLength="1000"  />
-    <Property Name="NullableWithDefault" Type="String" Nullable="true" MaxLength="1000"  />
-    <Property Name="Standard" Type="String" Nullable="false" MaxLength="1000"  />
-    <Property Name="StandardWithDefault" Type="String" Nullable="false" MaxLength="1000"  />
+    <Property Name="Nullable" Type="String" Nullable="true" MaxLength="2147483647"  />
+    <Property Name="NullableWithDefault" Type="String" Nullable="true" MaxLength="2147483647"  />
+    <Property Name="Standard" Type="String" Nullable="false" MaxLength="2147483647"  />
+    <Property Name="StandardWithDefault" Type="String" Nullable="false" MaxLength="2147483647"  />
   </EntityType>
   <EntityType Name="RangeFilterConfigurationEfImpl" BaseType="Model.PropertyFilterConfigurationEfImpl">
   </EntityType>
@@ -3288,7 +3288,7 @@
   <EntityType Name="StaticFileEfImpl" BaseType="Model.FileEfImpl">
   </EntityType>
   <EntityType Name="StringDefaultValueEfImpl" BaseType="Model.DefaultPropertyValueEfImpl">
-    <Property Name="DefaultValue" Type="String" Nullable="true" MaxLength="1000"  />
+    <Property Name="DefaultValue" Type="String" Nullable="true" MaxLength="2147483647"  />
   </EntityType>
   <EntityType Name="StringParameterEfImpl" BaseType="Model.BaseParameterEfImpl">
   </EntityType>
@@ -4144,7 +4144,7 @@
                         FromRole="CollectionEntry"
                         ToRole="Muhblah" />
     <!-- B -->
-    <Property Name="Value" Type="String" Nullable="true" MaxLength="1000"  />
+    <Property Name="Value" Type="String" Nullable="true" MaxLength="2147483647"  />
   </EntityType>
   <Association Name="FK_Muhblah_value_StringCollection" >
     <End Role="Muhblah"
@@ -5729,11 +5729,11 @@
     <Property Name="ObjID" Type="Int32" Nullable="true"  />
   </ComplexType>
   <ComplexType Name="AuditEntryEfImpl" >
-    <Property Name="Identity" Type="String" Nullable="true" MaxLength="1000"  />
-    <Property Name="MessageFormat" Type="String" Nullable="true" MaxLength="1000"  />
-    <Property Name="NewValue" Type="String" Nullable="true" MaxLength="1000"  />
-    <Property Name="OldValue" Type="String" Nullable="true" MaxLength="1000"  />
-    <Property Name="PropertyName" Type="String" Nullable="true" MaxLength="1000"  />
+    <Property Name="Identity" Type="String" Nullable="true" MaxLength="2147483647"  />
+    <Property Name="MessageFormat" Type="String" Nullable="true" MaxLength="2147483647"  />
+    <Property Name="NewValue" Type="String" Nullable="true" MaxLength="2147483647"  />
+    <Property Name="OldValue" Type="String" Nullable="true" MaxLength="2147483647"  />
+    <Property Name="PropertyName" Type="String" Nullable="true" MaxLength="2147483647"  />
     <Property Name="Timestamp" Type="DateTime" Nullable="true"  />
   </ComplexType>
   <ComplexType Name="DateTimeOffsetEfImpl" >

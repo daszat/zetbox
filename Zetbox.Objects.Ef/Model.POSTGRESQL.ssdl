@@ -1333,7 +1333,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="TestString" Type="varchar" MaxLength="1000" Nullable="true" />
+    <Property Name="TestString" Type="varchar" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="AnotherTest">
@@ -1350,7 +1350,7 @@
     <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_Ein_Fragebogen" Type="int4" />
     <Property Name="fk_Ein_Fragebogen_pos" Type="int4" Nullable="true" />
-    <Property Name="Frage" Type="varchar" MaxLength="1000" Nullable="false" />
+    <Property Name="Frage" Type="varchar" Nullable="false" />
     <Property Name="FragenNummer" Type="int4" Nullable="false" />
     <Property Name="GegebeneAntwort" Type="int4" Nullable="true" />
   </EntityType>
@@ -1525,7 +1525,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="varchar" MaxLength="1000" Nullable="false" />
+    <Property Name="Name" Type="varchar" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="CompoundObject">
@@ -1623,7 +1623,7 @@
     <Property Name="DoubleDefaultValues_DoubleValue" Type="float8" Nullable="true" />
     <Property Name="EnumDefaultValues_fk_EnumValue" Type="int4" />
     <Property Name="IntDefaultValues_IntValue" Type="int4" Nullable="true" />
-    <Property Name="StringDefaultValues_DefaultValue" Type="varchar" MaxLength="1000" Nullable="true" />
+    <Property Name="StringDefaultValues_DefaultValue" Type="varchar" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="Document">
@@ -1822,7 +1822,7 @@
     <Property Name="RefreshOnFilterChanged" Type="bool" Nullable="false" />
     <Property Name="Required" Type="bool" Nullable="false" />
     <Property Name="ObjectClassFilterConfigurations_fk_ObjectClass" Type="int4" />
-    <Property Name="OptionalPredicateFilterConfigurations_Predicate" Type="varchar" MaxLength="1000" Nullable="true" />
+    <Property Name="OptionalPredicateFilterConfigurations_Predicate" Type="varchar" Nullable="true" />
     <Property Name="PropertyFilterConfigurations_fk_Property" Type="int4" />
     <Property Name="DateRangeFilterConfigurations_IsCurrentMonthDefault" Type="bool" Nullable="true" />
     <Property Name="DateRangeFilterConfigurations_IsCurrentQuaterDefault" Type="bool" Nullable="true" />
@@ -1910,7 +1910,7 @@
     <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_Constrained" Type="int4" />
     <Property Name="ExportGuid" Type="uuid" Nullable="false" />
-    <Property Name="Reason" Type="varchar" MaxLength="1000" Nullable="true" />
+    <Property Name="Reason" Type="varchar" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="Interface">
@@ -1949,7 +1949,7 @@
     <Property Name="fk_ObjectClass" Type="int4" />
     <Property Name="CategoryTags" Type="varchar" MaxLength="4000" Nullable="true" />
     <Property Name="ChangedOn" Type="timestamp" Nullable="false" />
-    <Property Name="CodeTemplate" Type="varchar" MaxLength="1000" Nullable="true" />
+    <Property Name="CodeTemplate" Type="varchar" Nullable="true" />
     <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
     <Property Name="Description" Type="varchar" MaxLength="200" Nullable="true" />
     <Property Name="ExportGuid" Type="uuid" Nullable="false" />
@@ -2039,7 +2039,7 @@
     <Property Name="TestBool" Type="bool" Nullable="true" />
     <Property Name="TestDateTime" Type="timestamp" Nullable="true" />
     <Property Name="TestEnum" Type="int4" Nullable="false" />
-    <Property Name="TestString" Type="varchar" MaxLength="1000" Nullable="true" />
+    <Property Name="TestString" Type="varchar" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="N_to_M_relations_A">
@@ -2047,7 +2047,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="varchar" MaxLength="1000" Nullable="true" />
+    <Property Name="Name" Type="varchar" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="N_to_M_relations_B">
@@ -2055,7 +2055,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="varchar" MaxLength="1000" Nullable="true" />
+    <Property Name="Name" Type="varchar" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="NavigationAction">
@@ -2106,7 +2106,7 @@
     <Property Name="AllowSelectColumns" Type="bool" Nullable="true" />
     <Property Name="AllowUserFilter" Type="bool" Nullable="true" />
     <Property Name="EnableAutoFilter" Type="bool" Nullable="true" />
-    <Property Name="InitialSort" Type="varchar" MaxLength="1000" Nullable="true" />
+    <Property Name="InitialSort" Type="varchar" Nullable="true" />
     <Property Name="InitialSortDirection" Type="int4" Nullable="true" />
     <Property Name="IsEditable" Type="bool" Nullable="true" />
     <Property Name="IsMultiselect" Type="bool" Nullable="true" />
@@ -2124,7 +2124,7 @@
     <Property Name="ID" Type="int4" Nullable="false" />
     <Property Name="fk_BaseObjectClass" Type="int4" />
     <Property Name="fk_DefaultViewModelDescriptor" Type="int4" />
-    <Property Name="CodeTemplate" Type="varchar" MaxLength="1000" Nullable="true" />
+    <Property Name="CodeTemplate" Type="varchar" Nullable="true" />
     <Property Name="IsAbstract" Type="bool" Nullable="false" />
     <Property Name="IsCreatedProgrammatically" Type="bool" Nullable="false" />
     <Property Name="IsFrozenObject" Type="bool" Nullable="false" />
@@ -2235,7 +2235,7 @@
     <Property Name="fk_CreatedBy" Type="int4" />
     <Property Name="CategoryTags" Type="varchar" MaxLength="4000" Nullable="true" />
     <Property Name="ChangedOn" Type="timestamp" Nullable="false" />
-    <Property Name="CodeTemplate" Type="varchar" MaxLength="1000" Nullable="true" />
+    <Property Name="CodeTemplate" Type="varchar" Nullable="true" />
     <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
     <Property Name="DefaultSortPriority" Type="int4" Nullable="true" />
     <Property Name="Description" Type="varchar" MaxLength="200" Nullable="true" />
@@ -2251,10 +2251,10 @@
     <Property Name="CompoundObjectProperties_IsList" Type="bool" Nullable="true" />
     <Property Name="ObjectReferencePlaceholderProperties_fk_ReferencedClass" Type="int4" />
     <Property Name="ObjectReferencePlaceholderProperties_HasPersistentOrder" Type="bool" Nullable="true" />
-    <Property Name="ObjectReferencePlaceholderProperties_ImplementorRoleName" Type="varchar" MaxLength="1000" Nullable="true" />
+    <Property Name="ObjectReferencePlaceholderProperties_ImplementorRoleName" Type="varchar" Nullable="true" />
     <Property Name="ObjectReferencePlaceholderProperties_IsList" Type="bool" Nullable="true" />
-    <Property Name="ObjectReferencePlaceholderProperties_ItemRoleName" Type="varchar" MaxLength="1000" Nullable="true" />
-    <Property Name="ObjectReferencePlaceholderProperties_Verb" Type="varchar" MaxLength="1000" Nullable="true" />
+    <Property Name="ObjectReferencePlaceholderProperties_ItemRoleName" Type="varchar" Nullable="true" />
+    <Property Name="ObjectReferencePlaceholderProperties_Verb" Type="varchar" Nullable="true" />
     <Property Name="ObjectReferenceProperties_fk_RelationEnd" Type="int4" />
     <Property Name="ObjectReferenceProperties_EagerLoading" Type="bool" Nullable="true" />
     <Property Name="ObjectReferenceProperties_IsInlineEditable" Type="bool" Nullable="true" />
@@ -2264,9 +2264,9 @@
     <Property Name="BoolProperties_fk_FalseIcon" Type="int4" />
     <Property Name="BoolProperties_fk_NullIcon" Type="int4" />
     <Property Name="BoolProperties_fk_TrueIcon" Type="int4" />
-    <Property Name="BoolProperties_FalseLabel" Type="varchar" MaxLength="1000" Nullable="true" />
-    <Property Name="BoolProperties_NullLabel" Type="varchar" MaxLength="1000" Nullable="true" />
-    <Property Name="BoolProperties_TrueLabel" Type="varchar" MaxLength="1000" Nullable="true" />
+    <Property Name="BoolProperties_FalseLabel" Type="varchar" Nullable="true" />
+    <Property Name="BoolProperties_NullLabel" Type="varchar" Nullable="true" />
+    <Property Name="BoolProperties_TrueLabel" Type="varchar" Nullable="true" />
     <Property Name="DateTimeProperties_DateTimeStyle" Type="int4" Nullable="true" />
     <Property Name="DecimalProperties_Precision" Type="int4" Nullable="true" />
     <Property Name="DecimalProperties_Scale" Type="int4" Nullable="true" />
@@ -2307,10 +2307,10 @@
     <Property Name="PropertyIntTests_NullableWithDefault" Type="int4" Nullable="true" />
     <Property Name="PropertyIntTests_Standard" Type="int4" Nullable="true" />
     <Property Name="PropertyIntTests_StandardWithDefault" Type="int4" Nullable="true" />
-    <Property Name="PropertyStringTests_Nullable" Type="varchar" MaxLength="1000" Nullable="true" />
-    <Property Name="PropertyStringTests_NullableWithDefault" Type="varchar" MaxLength="1000" Nullable="true" />
-    <Property Name="PropertyStringTests_Standard" Type="varchar" MaxLength="1000" Nullable="true" />
-    <Property Name="PropertyStringTests_StandardWithDefault" Type="varchar" MaxLength="1000" Nullable="true" />
+    <Property Name="PropertyStringTests_Nullable" Type="varchar" Nullable="true" />
+    <Property Name="PropertyStringTests_NullableWithDefault" Type="varchar" Nullable="true" />
+    <Property Name="PropertyStringTests_Standard" Type="varchar" Nullable="true" />
+    <Property Name="PropertyStringTests_StandardWithDefault" Type="varchar" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="RecurrenceRuleTester">
@@ -2374,7 +2374,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="varchar" MaxLength="1000" Nullable="true" />
+    <Property Name="Name" Type="varchar" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="RequiredParentChild">
@@ -2383,7 +2383,7 @@
     </Key>
     <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_Parent" Type="int4" />
-    <Property Name="Name" Type="varchar" MaxLength="1000" Nullable="true" />
+    <Property Name="Name" Type="varchar" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="RoleMembership">
@@ -2468,7 +2468,7 @@
     <Property Name="fk_CreatedBy" Type="int4" />
     <Property Name="ChangedOn" Type="timestamp" Nullable="false" />
     <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
-    <Property Name="Description" Type="varchar" MaxLength="1000" Nullable="false" />
+    <Property Name="Description" Type="varchar" Nullable="false" />
     <Property Name="ExportGuid" Type="uuid" Nullable="false" />
     <Property Name="IsContinuous" Type="bool" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
@@ -2494,7 +2494,7 @@
     <Property Name="ChangedOn" Type="timestamp" Nullable="false" />
     <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
     <Property Name="DeploymentRestriction" Type="int4" Nullable="true" />
-    <Property Name="Description" Type="varchar" MaxLength="1000" Nullable="false" />
+    <Property Name="Description" Type="varchar" Nullable="false" />
     <Property Name="ExportGuid" Type="uuid" Nullable="false" />
   </EntityType>
 	
@@ -2532,7 +2532,7 @@
     <Property Name="ChangedOn" Type="timestamp" Nullable="false" />
     <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
     <Property Name="ExportGuid" Type="uuid" Nullable="false" />
-    <Property Name="SourceValue" Type="varchar" MaxLength="1000" Nullable="false" />
+    <Property Name="SourceValue" Type="varchar" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="SourceTable">
@@ -2564,9 +2564,9 @@
     <Property Name="ChangedOn" Type="timestamp" Nullable="false" />
     <Property Name="ConnectionStringKey" Type="varchar" MaxLength="1000" Nullable="false" />
     <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
-    <Property Name="Description" Type="varchar" MaxLength="1000" Nullable="true" />
+    <Property Name="Description" Type="varchar" Nullable="true" />
     <Property Name="ExportGuid" Type="uuid" Nullable="false" />
-    <Property Name="OriginConnectionStringKey" Type="varchar" MaxLength="1000" Nullable="true" />
+    <Property Name="OriginConnectionStringKey" Type="varchar" Nullable="true" />
     <Property Name="Schema" Type="varchar" MaxLength="63" Nullable="false" />
   </EntityType>
 	
@@ -6360,7 +6360,7 @@
       </Key>
       <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
       <Property Name="fk_Muhblah" Type="int4" Nullable="true" />
-      <Property Name="StringCollection" Type="varchar" MaxLength="1000" />
+      <Property Name="StringCollection" Type="varchar" MaxLength="2147483647" />
     </EntityType>
 
     <Association Name="FK_Muhblah_value_StringCollection">
@@ -6386,11 +6386,11 @@
       </Key>
       <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
       <Property Name="fk_Projekt" Type="int4" Nullable="true" />
-    <Property Name="AuditJournal_Identity" Type="varchar" MaxLength="1000" Nullable="true" />
-    <Property Name="AuditJournal_MessageFormat" Type="varchar" MaxLength="1000" Nullable="true" />
-    <Property Name="AuditJournal_NewValue" Type="varchar" MaxLength="1000" Nullable="true" />
-    <Property Name="AuditJournal_OldValue" Type="varchar" MaxLength="1000" Nullable="true" />
-    <Property Name="AuditJournal_PropertyName" Type="varchar" MaxLength="1000" Nullable="true" />
+    <Property Name="AuditJournal_Identity" Type="varchar" Nullable="true" />
+    <Property Name="AuditJournal_MessageFormat" Type="varchar" Nullable="true" />
+    <Property Name="AuditJournal_NewValue" Type="varchar" Nullable="true" />
+    <Property Name="AuditJournal_OldValue" Type="varchar" Nullable="true" />
+    <Property Name="AuditJournal_PropertyName" Type="varchar" Nullable="true" />
     <Property Name="AuditJournal_Timestamp" Type="timestamp" Nullable="true" />
     </EntityType>
 

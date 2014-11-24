@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2014-03-05T20:06:40Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2014-11-24T16:49:41Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="84f486f7-19fe-49ad-8e4a-6c05089e7684">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.650235Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
@@ -7194,6 +7194,12 @@ public static void isValid_IsCurrentYearDefault(YearFilterConfiguration obj, Pro
     <ZetboxBase:MaxLength>500</ZetboxBase:MaxLength>
     <ZetboxBase:MinLength>1</ZetboxBase:MinLength>
   </ZetboxBase:StringRangeConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="e38cfd1f-306e-41ae-900c-e68ce1c08a25">
+    <ZetboxBase:ChangedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>632994f1-9e97-4045-b2e8-92aa12ac80be</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="63cadc77-394a-44e5-ae89-b3f510e7ba82">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:01.807842Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>11adedb9-d32a-4da9-b986-0534e65df760</ZetboxBase:ConstrainedProperty>
@@ -7209,6 +7215,12 @@ public static void isValid_IsCurrentYearDefault(YearFilterConfiguration obj, Pro
     <ZetboxBase:ConstrainedProperty>c7da5741-f172-4e04-b7fa-94bb1eaf2471</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2010-10-20T03:55:15Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="892feffe-213f-4006-a9b2-a5ef0ef98a67">
+    <ZetboxBase:ChangedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>bcc5a62f-9401-4b88-9cd9-2b33be6fa81a</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="c05fca0d-3b4c-451e-a080-b9d9af14340d">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:01.817843Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>84e0996a-081f-4a17-a34d-54cf23991301</ZetboxBase:ConstrainedProperty>
@@ -14141,7 +14153,7 @@ public static void isValid_Name(Assembly obj, PropertyIsValidEventArgs e)
   </ZetboxBase:StringProperty>
   <ZetboxBase:StringProperty ExportGuid="7d954dd7-200c-4465-9316-c84ab920c30c">
     <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:11.211935Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_Identity(AuditEntry obj, PropertyGetterEventArgs&lt;string&gt; e)
 {
@@ -14166,7 +14178,7 @@ public static void isValid_Identity(AuditEntry obj, PropertyIsValidEventArgs e)
 
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2011-04-06T10:32:15Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:Description>The identity that caued this audit</ZetboxBase:Description>
+    <ZetboxBase:Description>The identity that caused this audit</ZetboxBase:Description>
     <ZetboxBase:Label>Identity</ZetboxBase:Label>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>Identity</ZetboxBase:Name>
@@ -25991,6 +26003,36 @@ public static void isValid_IsList(ValueTypeProperty obj, PropertyIsValidEventArg
     <ZetboxBase:MaxLength>200</ZetboxBase:MaxLength>
     <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
   </ZetboxBase:StringRangeConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="142c1e87-ad8a-4bbd-9092-998a4f95426b">
+    <ZetboxBase:ChangedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>7d954dd7-200c-4465-9316-c84ab920c30c</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="f220fac0-5071-4831-bbbf-f1e96e9f85ea">
+    <ZetboxBase:ChangedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>0b4cba95-3c68-4370-8ba5-59b2b110c569</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="b705cc00-326e-4d6d-aa41-fb0ff9e7b613">
+    <ZetboxBase:ChangedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>1bd6c210-e746-4ed8-a786-fc3911624ee7</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="7cf6b2a3-404b-4084-b1aa-c37bffdeff2c">
+    <ZetboxBase:ChangedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>10227950-4897-48fa-8a25-53db7cac9aab</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="d90568c3-7d08-49d3-8e43-eefac7bc1690">
+    <ZetboxBase:ChangedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>0b9d7bd4-ff9e-4662-913d-6eb3e9d05971</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:ClientReadOnlyConstraint ExportGuid="0d76135b-7cd7-4006-ab4b-108dae816d38">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:05.001025Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>61674c10-27f2-4e65-9907-708236b7b749</ZetboxBase:ConstrainedProperty>
@@ -26185,6 +26227,24 @@ public static void isValid_IsList(ValueTypeProperty obj, PropertyIsValidEventArg
     <ZetboxBase:ConstrainedProperty>635818b4-065f-456c-b57e-4a7cdc8b3378</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2011-04-20T05:31:40Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="da5ff77b-8f98-47dd-924c-d536b8ee9c6a">
+    <ZetboxBase:ChangedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>09381f52-98e2-4dea-9855-7358e5f9cdae</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="b6917ed5-96a7-4c51-8e86-a33d4cdb8db4">
+    <ZetboxBase:ChangedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>55fae41e-499d-40e3-b386-9839ec8b1d0a</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="9e52535e-9a07-47b4-a127-d04dfcd22993">
+    <ZetboxBase:ChangedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>f7da0495-3d3f-48c5-8fba-95a317ca7949</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="3be9fe06-16ef-4bd9-8355-4a842d4fed9d">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:05.122032Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>cd62d769-0752-4a72-832f-5935ece1198b</ZetboxBase:ConstrainedProperty>
@@ -26745,6 +26805,12 @@ public static void isValid_IsList(ValueTypeProperty obj, PropertyIsValidEventArg
     <ZetboxBase:ConstrainedProperty>8ef28076-900c-4294-920c-5d0d91e925bb</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2010-06-02T05:02:55Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="75e5d784-a4ec-4a1d-a848-300c65efcbd5">
+    <ZetboxBase:ChangedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>83be7495-e0e0-48fc-872a-70de9c0f7a88</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="17e31345-1e3a-4b95-ba30-6f947868672e">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:05.544056Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>c876dece-3b67-4302-88ef-313ba9ce62ae</ZetboxBase:ConstrainedProperty>
@@ -26782,6 +26848,12 @@ public static void isValid_IsList(ValueTypeProperty obj, PropertyIsValidEventArg
     <ZetboxBase:ConstrainedProperty>3df96dd2-8cfa-4b37-bf19-792d8c3fc90d</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2011-07-21T08:16:49Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="45763669-3d08-43f0-9023-b1e2e345f6fb">
+    <ZetboxBase:ChangedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>8ecc7baa-79b3-4dee-bd5b-2136b27f162e</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:ClientReadOnlyConstraint ExportGuid="e1a8a2fe-bf1f-4753-91ed-a5db3b72a4af">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:05.579058Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>b1c88012-ceb1-48b2-812b-454a1d5205cb</ZetboxBase:ConstrainedProperty>
@@ -26943,6 +27015,12 @@ public static void isValid_IsList(ValueTypeProperty obj, PropertyIsValidEventArg
     <ZetboxBase:MaxLength>60</ZetboxBase:MaxLength>
     <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
   </ZetboxBase:StringRangeConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="82ee1165-c9bd-4267-9d56-a962efe27e9b">
+    <ZetboxBase:ChangedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>7afdb672-f364-4b05-ad5d-ea6d59dc3553</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="ea59c388-5711-4fd0-8d8b-78abbf281515">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:05.698065Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>e9d1402e-3580-4084-8836-c44844683191</ZetboxBase:ConstrainedProperty>
@@ -26985,17 +27063,35 @@ public static void isValid_IsList(ValueTypeProperty obj, PropertyIsValidEventArg
     <ZetboxBase:ConstrainedProperty>7e52aa2a-aa3a-4f5b-8171-c6c2f364108b</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="998db5fa-f0e0-48ef-bcbc-93b9062f8913">
+    <ZetboxBase:ChangedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>b5fa31d8-ad30-4aeb-b5a0-8b4b117b1d29</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="14022cc3-338a-4b17-bd6b-4518a618a137">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:05.723066Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>52692870-0bd4-47b6-99dc-eb8bf4238f24</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="56ad9284-0051-4a32-97fa-e353d94d0436">
+    <ZetboxBase:ChangedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>06d56d44-bc5f-428b-a6b5-4348573425f9</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="4250b509-b00d-4a61-92ab-6077ee33877c">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:05.727066Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>41da7ae6-aff7-44cf-83be-6150bf7578fd</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Reason>The placeholder needs a referenced ObjectClass</ZetboxBase:Reason>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="5868d8cb-f943-4e2d-8f22-eca54d11f996">
+    <ZetboxBase:ChangedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>dd98c4f1-bf83-4d9a-8885-546457fc6591</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="872a7571-7317-4ccc-8015-6755deca35b1">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:05.730066Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>373f0036-42d6-41e2-a2a4-74462537f426</ZetboxBase:ConstrainedProperty>
@@ -27048,6 +27144,12 @@ public static void isValid_IsList(ValueTypeProperty obj, PropertyIsValidEventArg
     <ZetboxBase:ConstrainedProperty>d828264c-7c90-4050-a03d-3ea1829ce9d9</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2011-07-21T08:16:49Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="564902cf-dda2-47d7-b76b-9ab7944da93a">
+    <ZetboxBase:ChangedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>7b528b52-52bd-4af0-bcd1-d63cd73a65bd</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:ClientReadOnlyConstraint ExportGuid="9b2fd52c-0b43-46fe-ad97-2f6beea6e774">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:05.756068Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>6b965c5e-31b9-4fa9-a5f0-7ea6c8b8e976</ZetboxBase:ConstrainedProperty>
@@ -27396,6 +27498,12 @@ public static void isValid_IsList(ValueTypeProperty obj, PropertyIsValidEventArg
     <ZetboxBase:ConstrainedProperty>1ddfb0a8-182c-417a-aa58-88a0d6ba091c</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2010-11-24T20:53:16Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="e1767225-8fdd-42f1-bf8c-ef1e2b8c9f98">
+    <ZetboxBase:ChangedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>1ddfb0a8-182c-417a-aa58-88a0d6ba091c</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:InitOnlyConstraint ExportGuid="0f764de9-1b8b-44a5-9d44-7e52b74a2c8b">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:05.982081Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>97795b28-a750-456b-880c-210b0564462e</ZetboxBase:ConstrainedProperty>
@@ -27473,6 +27581,12 @@ public static void isValid_IsList(ValueTypeProperty obj, PropertyIsValidEventArg
     <ZetboxBase:ConstrainedProperty>10e8c65c-ca0f-4ed6-b830-457117c30c42</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2010-12-22T21:05:41Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="428b2b34-64f4-4f65-bfed-3c23490daad1">
+    <ZetboxBase:ChangedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>10e8c65c-ca0f-4ed6-b830-457117c30c42</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:InitOnlyConstraint ExportGuid="3323731f-2151-4f36-adc0-be97432b816d">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:06.032084Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>93a1fd7b-b7ba-475a-a9bd-7ddaeb1ccc14</ZetboxBase:ConstrainedProperty>
@@ -27488,6 +27602,12 @@ public static void isValid_IsList(ValueTypeProperty obj, PropertyIsValidEventArg
     <ZetboxBase:ConstrainedProperty>db221b79-f50b-4243-8591-e03d31b3a24f</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2010-12-22T20:54:17Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="28f62a63-9793-4e6a-bd48-6a258afc7a0a">
+    <ZetboxBase:ChangedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>88d7ba7d-6a5e-48b9-8464-c0308f6dabb6</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:IntegerRangeConstraint ExportGuid="04372ada-88c7-4ff8-8f28-ce76c3f736a3">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:06.058085Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>17aa679d-72d0-480e-9bd9-b37f4eba1d68</ZetboxBase:ConstrainedProperty>

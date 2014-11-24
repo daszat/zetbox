@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2014-03-05T20:06:40Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2014-11-24T16:49:41Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -10585,6 +10585,12 @@ public static void isValid_SourceTables(StagingDatabase obj, PropertyIsValidEven
     <ZetboxBase:ConstrainedProperty>885a90e0-62e0-426a-a3b5-64dca3a38d18</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2010-07-13T08:16:38Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="75ce5989-f161-4ef9-bc01-72d78788e9f6">
+    <ZetboxBase:ChangedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>885a90e0-62e0-426a-a3b5-64dca3a38d18</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:ClientReadOnlyConstraint ExportGuid="e3dad1bd-fe21-4a66-8fa8-971d20fc5213">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:06.768923Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>1156b3eb-af9b-4a44-8ed3-e64fa3fbb251</ZetboxBase:ConstrainedProperty>
@@ -10690,6 +10696,12 @@ public static void isValid_SourceTables(StagingDatabase obj, PropertyIsValidEven
     <ZetboxBase:ConstrainedProperty>d402f8a4-dc92-4041-a295-50257057e656</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2011-07-21T08:16:49Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="9953b93d-a520-4280-b8e6-1678a79b3cc7">
+    <ZetboxBase:ChangedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>157ecaf4-3ee5-4d78-8148-ab936de50523</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:InitOnlyConstraint ExportGuid="c3217b98-1bb3-40f8-bb01-431e0894a23c">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:06.856928Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>6bc56e55-16c4-4c94-8c20-12861844e053</ZetboxBase:ConstrainedProperty>
@@ -10705,6 +10717,12 @@ public static void isValid_SourceTables(StagingDatabase obj, PropertyIsValidEven
     <ZetboxBase:ConstrainedProperty>8edc845c-6d39-45f7-ae28-434f0a1ef503</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2010-07-13T10:35:35Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="d12c11ee-53a0-4aab-8722-4c98a0b76b99">
+    <ZetboxBase:ChangedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>f82f3e1f-3275-4fcf-a362-71f7175f40f1</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2014-11-24T15:49:41.015496Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="c7658310-0911-4523-b98e-4e3708fbdbc9">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:06.868929Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>601a0dc6-ec58-4092-a53c-c902fcc85379</ZetboxBase:ConstrainedProperty>

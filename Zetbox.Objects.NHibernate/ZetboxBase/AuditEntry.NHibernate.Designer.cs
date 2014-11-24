@@ -51,7 +51,7 @@ namespace Zetbox.App.Base
         internal readonly AuditEntryProxy Proxy;
 
         /// <summary>
-        /// The identity that caued this audit
+        /// The identity that caused this audit
         /// </summary>
         // value type property
         // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
