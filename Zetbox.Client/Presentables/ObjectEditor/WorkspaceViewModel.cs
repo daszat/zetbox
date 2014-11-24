@@ -155,41 +155,18 @@ namespace Zetbox.Client.Presentables.ObjectEditor
 
         #region Commands
 
-        #region AdditionalCommands
-        private ObservableCollection<ICommandViewModel> _AdditionalCommands = null;
-        public ObservableCollection<ICommandViewModel> AdditionalCommands
+        #region CommandCollection management
+        protected override ObservableCollection<ICommandViewModel> CreateCommands()
         {
-            get
-            {
-                if (_AdditionalCommands == null)
-                {
-                    _AdditionalCommands = new ObservableCollection<ICommandViewModel>();
-                    _AdditionalCommands.CollectionChanged += _AdditionalCommands_CollectionChanged;
-                }
-                return _AdditionalCommands;
-            }
-        }
+            var result = base.CreateCommands();
 
-        void _AdditionalCommands_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            OnPropertyChanged("ShowAdditionalCommands");
-        }
+            result.Add(SaveAndCloseCommand);
+            result.Add(SaveCommand);
+            result.Add(VerifyCommand);
+            result.Add(DeleteCommand);
+            result.Add(AbortCommand);
 
-        private bool? _ShowAdditionalCommands = null;
-        public bool ShowAdditionalCommands
-        {
-            get
-            {
-                return _ShowAdditionalCommands ?? (_AdditionalCommands != null && _AdditionalCommands.Count > 0);
-            }
-            set
-            {
-                if (_ShowAdditionalCommands != value)
-                {
-                    _ShowAdditionalCommands = value;
-                    OnPropertyChanged("ShowAdditionalCommands");
-                }
-            }
+            return result;
         }
         #endregion
 
@@ -228,13 +205,15 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             get
             {
                 if (_saveCommand == null)
+                {
                     _saveCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                             DataContext,
                             this,
                             WorkspaceViewModelResources.SaveCommand_Name,
                             WorkspaceViewModelResources.SaveCommand_Tooltip,
                             () => { Save(); }, CanSave, null);
-
+                    _saveCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.save_png.Find(FrozenContext));
+                }
                 return _saveCommand;
             }
         }
@@ -249,10 +228,12 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             get
             {
                 if (_saveAndCloseCommand == null)
+                {
                     _saveAndCloseCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
                         .Invoke(DataContext, this, WorkspaceViewModelResources.SaveAndCloseCommand_Name, WorkspaceViewModelResources.SaveAndCloseCommand_Tooltip,
                         () => { SaveAndClose(); }, CanSave, null);
-
+                    _saveAndCloseCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.save_png.Find(FrozenContext));
+                }
                 return _saveAndCloseCommand;
             }
         }
@@ -361,9 +342,12 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             {
                 if (_AbortCommand == null)
                 {
-                    _AbortCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
+                    var tmp = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
                         .Invoke(DataContext, this, WorkspaceViewModelResources.AbortCommand_Name, WorkspaceViewModelResources.AbortCommand_Tooltip,
                         Close, null, null);
+                    tmp.RequestedKind = NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_CommandLinkKind.Find(FrozenContext);
+
+                    _AbortCommand = tmp;
                 }
                 return _AbortCommand;
             }
@@ -381,6 +365,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             get
             {
                 if (_verifyCommand == null)
+                {
                     _verifyCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
                             DataContext,
                             this,
@@ -388,7 +373,8 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                             WorkspaceViewModelResources.VerifyContextCommand_Tootlip,
                             ShowVerificationResults,
                             null, null);
-
+                    _verifyCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.ok_png.Find(FrozenContext));
+                }
                 return _verifyCommand;
             }
         }
