@@ -233,7 +233,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                             this,
                             WorkspaceViewModelResources.SaveCommand_Name,
                             WorkspaceViewModelResources.SaveCommand_Tooltip,
-                            Save, CanSave, null);
+                            () => { Save(); }, CanSave, null);
 
                 return _saveCommand;
             }
@@ -306,26 +306,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             return _currentErrors.Count == 0;
         }
 
-        public void Save()
-        {
-            ViewModelFactory.TriggerDelayedTask(this, () =>
-            {
-                SaveDelayed();
-            });
-        }
-
-        public void SaveAndClose()
-        {
-            ViewModelFactory.TriggerDelayedTask(this, () =>
-            {
-                if (SaveDelayed())
-                {
-                    Close();
-                }
-            });
-        }
-
-        private bool SaveDelayed()
+        public bool Save()
         {
             UpdateErrors();
             if (_currentErrors.Count == 0)
@@ -360,6 +341,14 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             }
 
             return false;
+        }
+
+        public void SaveAndClose()
+        {
+            if (Save())
+            {
+                Close();
+            }
         }
 
         #endregion
@@ -406,18 +395,15 @@ namespace Zetbox.Client.Presentables.ObjectEditor
 
         public void ShowVerificationResults()
         {
-            var loader = ViewModelFactory.CreateDelayedTask(this, () =>
+            UpdateErrors();
+            if (_currentErrors.Count > 0)
             {
-                UpdateErrors();
-                if (_currentErrors.Count > 0)
-                {
-                    var errorList = ViewModelFactory.CreateViewModel<ErrorListViewModel.Factory>().Invoke(DataContext, this);
-                    errorList.RefreshErrors();
-                    ViewModelFactory.ShowModel(errorList, true);
-                }
-            });
-            loader.Trigger();
+                var errorList = ViewModelFactory.CreateViewModel<ErrorListViewModel.Factory>().Invoke(DataContext, this);
+                errorList.RefreshErrors();
+                ViewModelFactory.ShowModel(errorList, true);
+            }
         }
+
         void IContextViewModel.Verify()
         {
             ShowVerificationResults();

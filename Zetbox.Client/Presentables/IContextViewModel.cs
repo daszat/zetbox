@@ -26,19 +26,25 @@ namespace Zetbox.Client.Presentables
     /// </summary>
     public interface IContextViewModel
     {
-        ICommandViewModel AbortCommand { get; }
-        ICommandViewModel DeleteCommand { get; }
+        bool CanSave();
+        /// <summary>
+        /// Tries to save the current changes.
+        /// </summary>
+        /// <returns>false if saving failed due to communication or validation errors</returns>
+        bool Save();
         ICommandViewModel SaveCommand { get; }
+
+        void Abort();
+        ICommandViewModel AbortCommand { get; }
+
+        void Verify();
         ICommandViewModel VerifyCommand { get; }
 
-        bool CanSave();
-        void Save();
-        void Abort();
-        void Verify();
         /// <summary>
         /// Deletes the current selected data object
         /// </summary>
         void Delete();
+        ICommandViewModel DeleteCommand { get; }
 
         bool IsContextModified { get; }
 
