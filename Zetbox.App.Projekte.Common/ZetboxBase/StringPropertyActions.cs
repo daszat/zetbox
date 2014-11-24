@@ -29,7 +29,7 @@ namespace Zetbox.App.Base
         {
             if (obj.GetLengthConstraint() == null)
             {
-                e.Errors.Add(string.Format("String property {0}.{1} must have a string range constraint", obj.ObjectClass.Name, obj.Name);
+                e.Errors.Add(string.Format("String property {0}.{1} must have a string range constraint", obj.ObjectClass.Name, obj.Name));
             }
         }
 
