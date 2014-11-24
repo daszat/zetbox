@@ -67,7 +67,7 @@
       <HintPath>..\..\packages\log4net.2.0.0\lib\net35-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Security">
-      <HintPath>..\..\packages\Mono.Security.2.0.0.0\lib\net35\Mono.Security.dll</HintPath>
+      <HintPath>..\..\packages\Npgsql.2.2.2\lib\net40\Mono.Security.dll</HintPath>
     </Reference>
     <Reference Include="Npgsql">
       <SpecificVersion>False</SpecificVersion>
