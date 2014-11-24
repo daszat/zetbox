@@ -454,7 +454,15 @@ namespace Zetbox.API.Server
                 string error;
                 if (ide != null && !string.IsNullOrEmpty(error = ide.Error))
                 {
-                    return String.Format("{0}#{1}: {2}", obj.GetType().FullName, obj.ID, error);
+                    var exportable = obj as IExportable;
+                    if (exportable == null)
+                    {
+                        return String.Format("{0}#{1}: {2}", obj.GetType().FullName, obj.ID, error);
+                    }
+                    else
+                    {
+                        return String.Format("{0}#{1}: {2}", obj.GetType().FullName, exportable.ExportGuid, error);
+                    }
                 }
                 else
                 {
