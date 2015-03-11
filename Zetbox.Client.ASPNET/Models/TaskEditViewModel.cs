@@ -31,7 +31,7 @@ namespace Zetbox.Client.ASPNET.Models
         {
             get
             {
-                if (ProjectID > Helper.INVALIDID)
+                if (ProjectID != default(int))
                     return DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, DataContext.Find<Zetbox.App.Projekte.Projekt>(ProjectID));
                 else 
                     return null;

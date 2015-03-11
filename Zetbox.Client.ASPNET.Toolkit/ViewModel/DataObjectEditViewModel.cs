@@ -58,7 +58,7 @@ namespace Zetbox.Client.ASPNET
             {
                 if (_object == null)
                 {
-                    if (ID > Helper.INVALIDID)
+                    if (ID != default(int))
                     {
                         _object = FindObject();
                     }
