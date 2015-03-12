@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.Client", "Zetbox.Client\Zetbox.Client.csproj", "{A736E13F-D349-4CE5-A397-8438F58D0B9D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.Client.WPF", "Zetbox.Client.WPF\Zetbox.Client.WPF.csproj", "{2C899579-BF78-442B-8810-8C7E7A2CA212}"
