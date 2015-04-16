@@ -24,13 +24,17 @@ namespace Zetbox.Server.HttpService
     using System.Text.RegularExpressions;
     using System.Web;
     using CryptSharp;
+    using log4net;
 
     public class HtPasswdBasicAuthenticationModule : IHttpModule
     {
+        private static readonly ILog _log = LogManager.GetLogger(typeof(HtPasswdBasicAuthenticationModule));
+
         #region Read HtPasswd
         private static readonly Regex regEx = new Regex("(?<user>.*?):(?<password>.*)", RegexOptions.Singleline);
         private static object _lock = new object();
-        ILookup<string, Entry> _cache = null;
+        private static ILookup<string, Entry> _cache = null;
+        private static FileSystemWatcher _fso = null;
 
         private class Entry
         {
@@ -47,7 +51,7 @@ namespace Zetbox.Server.HttpService
                     if (_cache != null) return _cache;
 
                     var fileName = System.Configuration.ConfigurationManager.AppSettings["htpasswdpath"];
-                    if(string.IsNullOrWhiteSpace(fileName))
+                    if (string.IsNullOrWhiteSpace(fileName))
                     {
                         // Try the default place
                         var baseSearchPath = Path.GetFullPath(Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~"), "..", "Configs"));
@@ -62,6 +66,19 @@ namespace Zetbox.Server.HttpService
                     {
                         throw new InvalidOperationException("Could not find a htpasswd file, neither defined found you config, nor found on the configurated path, nor found in ../Configs/.htpasswd or ../Configs/_htpasswd");
                     }
+
+                    _log.InfoFormat("Using htpasswd '{0}'", fileName);
+
+                    _fso = new FileSystemWatcher(Path.GetDirectoryName(fileName), Path.GetFileName(fileName));
+                    _fso.Changed += (s, e) =>
+                    {
+                        lock (_lock)
+                        {
+                            _cache = null;
+                            _log.Info("htpasswd file changed, cache cleard");
+                        }
+                    };
+                    _fso.EnableRaisingEvents = true;
 
                     var result = new List<Entry>();
                     using (var sr = new StreamReader(fileName))
@@ -154,6 +171,7 @@ namespace Zetbox.Server.HttpService
 
         public void Init(HttpApplication context)
         {
+            _log.Info("Initializing HtPasswdBasicAuthenticationModule");
             context.AuthenticateRequest += this.AuthenticateUser;
             context.EndRequest += this.IssueAuthenticationChallenge;
         }
