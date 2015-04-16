@@ -57,6 +57,9 @@
     <Reference Include="Autofac.Integration.Web">
       <HintPath>..\packages\Autofac.Web.2.6.3.862\lib\NET40\Autofac.Integration.Web.dll</HintPath>
     </Reference>
+    <Reference Include="CryptSharp">
+      <HintPath>..\packages\CryptSharpOfficial.2.1.0.0\lib\CryptSharp.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.0\lib\net35-full\log4net.dll</HintPath>
     </Reference>
@@ -129,6 +132,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HtPasswdBasicAuthenticationModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="packages.config" />
     <Compile Include="Site.Master.cs">
