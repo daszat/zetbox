@@ -30,7 +30,7 @@ namespace Zetbox.App.Packaging
 
     public class Importer
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Server.Importer");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger(typeof(Importer));
 
         #region Public Methods
         public static void Deploy(IZetboxContext ctx, params string[] filenames)
@@ -116,14 +116,14 @@ namespace Zetbox.App.Packaging
                     }
                 }
 
-                Log.Info("Reloading References");
+                Log.Debug("Reloading References");
                 foreach (var obj in importedObjects.Values)
                 {
                     obj.ReloadReferences();
                 }
 
                 var objectsToDelete = currentObjects.Where(p => !importedObjects.ContainsKey(p.Key));
-                Log.InfoFormat("Deleting {0} objects marked for deletion", objectsToDelete.Count());
+                Log.DebugFormat("Deleting {0} objects marked for deletion", objectsToDelete.Count());
                 foreach (var pairToDelete in objectsToDelete)
                 {
                     // Don't delete blobs, the blob garbage collector should delete them.
@@ -132,7 +132,7 @@ namespace Zetbox.App.Packaging
                     ctx.Delete(pairToDelete.Value);
                 }
 
-                using (Log.InfoTraceMethodCall("Playback Notifications"))
+                using (Log.DebugTraceMethodCall("Playback Notifications"))
                 {
                     foreach (var obj in importedObjects.Values)
                     {
@@ -140,7 +140,7 @@ namespace Zetbox.App.Packaging
                     }
                 }
 
-                Log.Info("Deployment finished");
+                Log.Debug("Deployment finished");
             }
         }
 
@@ -189,7 +189,7 @@ namespace Zetbox.App.Packaging
 
             using (Log.InfoTraceMethodCall("LoadFromXml"))
             {
-                Log.InfoFormat("Starting Import from {0}", string.Join(", ", providers.Select(p => p.ToString()).ToArray()));
+                Log.DebugFormat("Starting Import from {0}", string.Join(", ", providers.Select(p => p.ToString()).ToArray()));
                 try
                 {
                     using (Log.DebugTraceMethodCall("initialisation query"))
@@ -210,10 +210,10 @@ namespace Zetbox.App.Packaging
 
                 PreFetchObjects(ctx, importedObjects, guids);
 
-                using (Log.InfoTraceMethodCall("Loading"))
+                using (Log.DebugTraceMethodCall("Loading"))
                 {
                     providers.ForEach(p => p.RewindData());
-                    Log.Info("Loading");
+                    Log.Debug("Loading");
                     foreach (var p in providers)
                     {
                         var reader = p.Reader;
@@ -230,7 +230,7 @@ namespace Zetbox.App.Packaging
                     }
                 }
 
-                using (Log.InfoTraceMethodCall("Reloading References"))
+                using (Log.DebugTraceMethodCall("Reloading References"))
                 {
                     foreach (var obj in importedObjects.Values)
                     {
@@ -238,14 +238,14 @@ namespace Zetbox.App.Packaging
                     }
                 }
 
-                using (Log.InfoTraceMethodCall("Playback Notifications"))
+                using (Log.DebugTraceMethodCall("Playback Notifications"))
                 {
                     foreach (var obj in importedObjects.Values)
                     {
                         ((BaseNotifyingObject)obj).PlaybackNotifications();
                     }
                 }
-                Log.Info("Import finished");
+                Log.Debug("Import finished");
             }
         }
         #endregion
@@ -253,7 +253,7 @@ namespace Zetbox.App.Packaging
         #region Implementation
         private static void PreFetchObjects(IZetboxContext ctx, Dictionary<Guid, IPersistenceObject> objects, Dictionary<Type, List<Guid>> guids)
         {
-            Log.Info("Prefetching Objects");
+            Log.Debug("Prefetching Objects");
             foreach (Type t in guids.Keys)
             {
                 IEnumerable<IPersistenceObject> result = ctx.FindPersistenceObjects(ctx.GetInterfaceType(t), guids[t]);
@@ -272,7 +272,7 @@ namespace Zetbox.App.Packaging
 
         private static Dictionary<Type, List<Guid>> LoadGuids(IZetboxContext ctx, IPackageProvider[] providers)
         {
-            Log.Info("Loading Export Guids");
+            Log.Debug("Loading Export Guids");
 
             Dictionary<Type, List<Guid>> guids = new Dictionary<Type, List<Guid>>();
             foreach (var reader in providers.Select(p => p.Reader))
