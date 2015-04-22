@@ -75,7 +75,7 @@ namespace Zetbox.Server.HttpService
                         lock (_lock)
                         {
                             _cache = null;
-                            _log.Info("htpasswd file changed, cache cleard");
+                            _log.Info("htpasswd file changed, cache cleared");
                         }
                     };
                     _fso.EnableRaisingEvents = true;
@@ -171,7 +171,6 @@ namespace Zetbox.Server.HttpService
 
         public void Init(HttpApplication context)
         {
-            _log.Info("Initializing HtPasswdBasicAuthenticationModule");
             context.AuthenticateRequest += this.AuthenticateUser;
             context.EndRequest += this.IssueAuthenticationChallenge;
         }
