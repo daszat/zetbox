@@ -1,0 +1,57 @@
+#!/bin/bash
+#
+#%# family=auto
+
+cd /
+
+. $MUNIN_LIBDIR/plugins/plugin.sh
+
+db=$(basename $0)
+db=${db##zetbox_exceptions_}
+
+if [ "$1" = "config" ]; then
+        SQL="SELECT substring(regexp_replace(\"Message\", E'[^[:alnum:]]', '_', 'g') for 200) FROM base.\"ExceptionLog\" WHERE \"Date\" > (now() - '1 week'::interval) GROUP BY \"Message\" ORDER BY COUNT(*) DESC LIMIT 10"
+        echo "graph_title ZB exceptions for '$db'"
+        echo 'graph_args --base 1000 -r --lower-limit 0'
+        echo 'graph_vlabel throws/minute'
+        echo "graph_info This graph shows which exceptions are thrown in the '$db' instance"
+        echo 'graph_category zetbox'
+        echo 'graph_period minute'
+        echo 'graph_order total' $(psql "$db" --tuples-only --no-align -wc "$SQL")
+        [ -n "$FAKE_HOST" ] && echo "host_name $FAKE_HOST"
+        echo 'total.label total'
+        echo 'total.draw LINE'
+        echo 'total.type DERIVE'
+        echo 'total.min 0'
+        echo 'total.info Total # of exceptions per minute'
+        i=1
+        # id | logger -t "$db"
+        # env | sort | logger -t "$db"
+        psql "$db" --tuples-only --no-align -wc "$SQL" \
+        | while read message
+        do
+                echo "$message.label top$i"
+                if [ i = 1 ]
+                then
+                        echo "$message.draw AREA"
+                else
+                        echo "$message.draw STACK"
+                fi
+                echo "$message.type DERIVE"
+                echo "$message.min 0"
+                echo "$message.info Exceptions for '${message//_/ }'"
+
+                i=$(( i + 1 ))
+        done
+
+        exit 0
+fi
+
+psql "$db" --tuples-only --no-align -wc "SELECT 'total.value ' || COUNT(*) FROM base.\"ExceptionLog\""
+psql "$db" --tuples-only --no-align -wc "SELECT substring(regexp_replace(\"Message\", E'[^[:alnum:]]', '_', 'g') for 200) || '.value ' || count(*)
+        FROM base.\"ExceptionLog\"
+        GROUP BY \"Message\"
+        HAVING \"Message\" IN (SELECT \"Message\" FROM base.\"ExceptionLog\" WHERE \"Date\" > (now() - '1 week'::interval) GROUP BY \"Message\" ORDER BY COUNT(*) DESC LIMIT 10)
+        ORDER BY COUNT(*) DESC LIMIT 10"
+
+
