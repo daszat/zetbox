@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>zetboxBasic-EF</id>
+    <version>##version##</version>
+    <title>zetbox Basic Entity Framework components</title>
+    <authors>dasz.at OG</authors>
+    <owners>dasz.at OG</owners>
+    <licenseUrl>http://www.gnu.org/licenses/lgpl.html</licenseUrl>
+    <projectUrl>http://zetbox.at/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Entity Framework components for the zetbox.</description>
+    <releaseNotes>First package.</releaseNotes>
+    <copyright>Copyright © 2012 dasz.at OG</copyright>
+    <tags>Platform Database ORM Applications</tags>
+    <dependencies>
+      <dependency id="zetboxBasic" version="[##version##]" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="Server\Zetbox.DalProvider.Ef.dll" target="zetbox/Server" />
+    <file src="Server\Zetbox.DalProvider.Ef.pdb" target="zetbox/Server" />
+    <file src="Server\Zetbox.DalProvider.Ef.xml" target="zetbox/Server" />
+    <file src="Server\Zetbox.DalProvider.EF.Generator.dll" target="zetbox/Server" />
+    <file src="Server\Zetbox.DalProvider.EF.Generator.pdb" target="zetbox/Server" />
+    <file src="Server\Zetbox.DalProvider.EF.Generator.xml" target="zetbox/Server" />
+
+    <file src="Server\Fallback\Zetbox.Objects.EfImpl.dll" target="zetbox/Server/Fallback" />
+    <file src="Server\Fallback\Zetbox.Objects.EfImpl.pdb" target="zetbox/Server/Fallback" />
+
+    <!-- this is required to avoid being seen as empty package by nuget -->
+    <!-- see #595 and #2590 on the nuget issue tracker                  -->
+    <file src="README.zetbox.txt" target="content" />
+  </files>
+</package>

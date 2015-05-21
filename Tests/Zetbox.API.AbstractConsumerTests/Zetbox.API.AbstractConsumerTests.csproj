@@ -18,7 +18,7 @@
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <TargetFrameworkProfile />
-    <NuGetPackageImportStamp>703fb90c</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>0c10cb29</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -167,11 +167,11 @@
   </Target>
   -->
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
-  <Import Project="..\..\packages\GitVersionTask.2.0.1\Build\GitVersionTask.targets" Condition="Exists('..\..\packages\GitVersionTask.2.0.1\Build\GitVersionTask.targets')" />
+  <Import Project="..\..\packages\GitVersionTask.3.0.0-beta0002\Build\GitVersionTask.targets" Condition="Exists('..\..\packages\GitVersionTask.3.0.0-beta0002\Build\GitVersionTask.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\GitVersionTask.2.0.1\Build\GitVersionTask.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\GitVersionTask.2.0.1\Build\GitVersionTask.targets'))" />
+    <Error Condition="!Exists('..\..\packages\GitVersionTask.3.0.0-beta0002\Build\GitVersionTask.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\GitVersionTask.3.0.0-beta0002\Build\GitVersionTask.targets'))" />
   </Target>
 </Project>

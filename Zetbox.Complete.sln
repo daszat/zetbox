@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{ACC74A05-6833-4897-B739-8D5E82E846C2}"
 	ProjectSection(SolutionItems) = preProject
 		Tests\DisposableMockTemplate.cs = Tests\DisposableMockTemplate.cs
@@ -232,11 +234,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.WPF", "Zetbox.WPF\Ze
 	ProjectSection(ProjectDependencies) = postProject
 		{A736E13F-D349-4CE5-A397-8438F58D0B9D} = {A736E13F-D349-4CE5-A397-8438F58D0B9D}
 		{D5ADAF5E-024D-46B1-B75D-0F93A3E4A50B} = {D5ADAF5E-024D-46B1-B75D-0F93A3E4A50B}
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuGetPackages", "NuGetPackages\NuGetPackages.csproj", "{D3F1D77D-D57E-4A21-A6D6-A42DDC14FB82}"
-	ProjectSection(ProjectDependencies) = postProject
-		{39C24036-DD89-40C7-8196-1E7D3A817D5E} = {39C24036-DD89-40C7-8196-1E7D3A817D5E}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.Server.Wcf", "Zetbox.Server.Wcf\Zetbox.Server.Wcf.csproj", "{32EF1131-9613-4DEF-836F-FA2D0A3DA4FC}"
@@ -1519,29 +1516,6 @@ Global
 		{B548883F-2042-4ECD-B5DD-6493B30C458B}.Release|Mixed Platforms.Build.0 = Release|x86
 		{B548883F-2042-4ECD-B5DD-6493B30C458B}.Release|x86.ActiveCfg = Release|x86
 		{B548883F-2042-4ECD-B5DD-6493B30C458B}.Release|x86.Build.0 = Release|x86
-		{D3F1D77D-D57E-4A21-A6D6-A42DDC14FB82}.Debug|.NET.ActiveCfg = Debug|Any CPU
-		{D3F1D77D-D57E-4A21-A6D6-A42DDC14FB82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D3F1D77D-D57E-4A21-A6D6-A42DDC14FB82}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D3F1D77D-D57E-4A21-A6D6-A42DDC14FB82}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{D3F1D77D-D57E-4A21-A6D6-A42DDC14FB82}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{D3F1D77D-D57E-4A21-A6D6-A42DDC14FB82}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{D3F1D77D-D57E-4A21-A6D6-A42DDC14FB82}.Linux.Debug|.NET.ActiveCfg = Debug|Any CPU
-		{D3F1D77D-D57E-4A21-A6D6-A42DDC14FB82}.Linux.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D3F1D77D-D57E-4A21-A6D6-A42DDC14FB82}.Linux.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D3F1D77D-D57E-4A21-A6D6-A42DDC14FB82}.Linux.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{D3F1D77D-D57E-4A21-A6D6-A42DDC14FB82}.Linux.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{D3F1D77D-D57E-4A21-A6D6-A42DDC14FB82}.Linux.Debug|x86.ActiveCfg = Debug|Any CPU
-		{D3F1D77D-D57E-4A21-A6D6-A42DDC14FB82}.Minimal|.NET.ActiveCfg = Debug|Any CPU
-		{D3F1D77D-D57E-4A21-A6D6-A42DDC14FB82}.Minimal|Any CPU.ActiveCfg = Debug|Any CPU
-		{D3F1D77D-D57E-4A21-A6D6-A42DDC14FB82}.Minimal|Any CPU.Build.0 = Debug|Any CPU
-		{D3F1D77D-D57E-4A21-A6D6-A42DDC14FB82}.Minimal|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{D3F1D77D-D57E-4A21-A6D6-A42DDC14FB82}.Minimal|x86.ActiveCfg = Debug|Any CPU
-		{D3F1D77D-D57E-4A21-A6D6-A42DDC14FB82}.Release|.NET.ActiveCfg = Release|Any CPU
-		{D3F1D77D-D57E-4A21-A6D6-A42DDC14FB82}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D3F1D77D-D57E-4A21-A6D6-A42DDC14FB82}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D3F1D77D-D57E-4A21-A6D6-A42DDC14FB82}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{D3F1D77D-D57E-4A21-A6D6-A42DDC14FB82}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{D3F1D77D-D57E-4A21-A6D6-A42DDC14FB82}.Release|x86.ActiveCfg = Release|Any CPU
 		{32EF1131-9613-4DEF-836F-FA2D0A3DA4FC}.Debug|.NET.ActiveCfg = Debug|Any CPU
 		{32EF1131-9613-4DEF-836F-FA2D0A3DA4FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{32EF1131-9613-4DEF-836F-FA2D0A3DA4FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
