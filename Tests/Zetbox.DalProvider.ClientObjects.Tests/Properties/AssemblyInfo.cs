@@ -33,7 +33,3 @@ using System.Runtime.InteropServices;
 // COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
 
-// The following tags will be replaced by the -checkout job on jenkins to current values
-[assembly: AssemblyVersion("1.1.0.0")]
-[assembly: AssemblyFileVersion("1.1.15.0")]
-[assembly: AssemblyInformationalVersion("1.1.15-zdev")]

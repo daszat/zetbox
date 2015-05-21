@@ -273,3 +273,7 @@ T: Zetbox.API.Server.BaseServerDataObject
 T: Zetbox.DalProvider.Memory.DataObjectMemoryImpl
 T: Zetbox.DalProvider.NHibernate.DataObjectNHibernateImpl
 T: Zetbox.API.BaseCompoundObject
+
+R: Gendarme.Rules.Design.MissingAttributeUsageOnCustomAttributeRule
+# This attribute does not specify the items it can be used upon.
+T: ReleaseDateAttribute
