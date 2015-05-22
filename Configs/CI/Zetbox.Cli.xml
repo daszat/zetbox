@@ -3,7 +3,7 @@
   <ConfigName>Default Server Configuration</ConfigName>
   <Server StartServer="true">
     <ConnectionStrings>
-      <Database Name="Zetbox" Schema="MSSQL" Provider="System.Data.SqlClient">Data Source=.\SQLEXPRESS;Initial Catalog=_develop;Integrated Security=True;MultipleActiveResultSets=true;</Database>
+      <Database Name="Zetbox" Schema="MSSQL" Provider="System.Data.SqlClient">Data Source=.\SQLEXPRESS;Initial Catalog=zetbox_develop;Integrated Security=True;MultipleActiveResultSets=true;</Database>
     </ConnectionStrings>
     <DocumentStore>DocumentStore\Server\</DocumentStore>
     <CodeGenWorkingPath>bin\CodeGenNext</CodeGenWorkingPath>
