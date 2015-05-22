@@ -14,7 +14,7 @@ rd /s /q ".\Zetbox.Server.HttpService\Client\"
 rd /s /q ".\Zetbox.Server.HttpService\Server\"
 rd /s /q "%LOCALAPPDATA%\AppData\Temp\zetbox"
 
-%windir%\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe /v:m Zetbox.Complete.sln /t:Rebuild /p:Configuration=Minimal
+MSBuild.exe /v:m Zetbox.Complete.sln /t:Rebuild /p:Configuration=Minimal
 IF ERRORLEVEL 1 GOTO FAIL
 
 call "zbResetDatabase.cmd"
@@ -23,7 +23,7 @@ IF ERRORLEVEL 1 GOTO FAIL
 call "zbGenerate.cmd"
 IF ERRORLEVEL 1 GOTO FAIL
 
-%windir%\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe /v:m Zetbox.Complete.sln
+MSBuild.exe /v:m Zetbox.Complete.sln
 IF ERRORLEVEL 1 GOTO FAIL
 
 GOTO EOF
