@@ -1,2 +1,0 @@
-# the next major.minor version to release
-next=1.1
