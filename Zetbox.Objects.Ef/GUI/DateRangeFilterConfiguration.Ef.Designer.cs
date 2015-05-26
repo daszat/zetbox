@@ -504,7 +504,6 @@ namespace Zetbox.App.GUI
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
             var b = base.ObjectIsValid();
-            e.IsValid = b.IsValid;
             e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_DateRangeFilterConfiguration != null)
             {

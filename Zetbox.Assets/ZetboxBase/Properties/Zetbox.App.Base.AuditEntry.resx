@@ -121,7 +121,7 @@
     <value>Identity</value>
   </data>
   <data name="Identity_description" xml:space="preserve">
-    <value>The identity that caued this audit</value>
+    <value>The identity that caused this audit</value>
   </data>
   <data name="MessageFormat_label" xml:space="preserve">
     <value>MessageFormat</value>

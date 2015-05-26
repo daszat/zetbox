@@ -149,4 +149,16 @@
   <data name="UniqueConstraintViolationException_Message" xml:space="preserve">
     <value>Mindestens ein Wert ist nicht eindeutig</value>
   </data>
+  <data name="ZetboxValidationException_Caption" xml:space="preserve">
+    <value>Datenfehler</value>
+  </data>
+  <data name="ZetboxValidationException_Message" xml:space="preserve">
+    <value>Dieser Datenfehler wurden bei der Überprüfung am Server gefunden. Bitte korrigieren Sie das, um speichern zu können.</value>
+  </data>
+  <data name="ZetboxValidationException_ValueFormat" xml:space="preserve">
+    <value>{0}</value>
+  </data>
+  <data name="ZetboxValidationException_ValueLabel" xml:space="preserve">
+    <value>Fehlerbeschreibung</value>
+  </data>
 </root>

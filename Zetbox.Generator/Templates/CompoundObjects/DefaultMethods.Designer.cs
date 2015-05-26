@@ -56,7 +56,6 @@ this.WriteObjects("        protected override ObjectIsValidResult ObjectIsValid(
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();\r\n");
 this.WriteObjects("			var b = base.ObjectIsValid();\r\n");
-this.WriteObjects("            e.IsValid = b.IsValid;\r\n");
 this.WriteObjects("			e.Errors.AddRange(b.Errors);\r\n");
 this.WriteObjects("            if (OnObjectIsValid_",  dt.Name , " != null)\r\n");
 this.WriteObjects("            {\r\n");

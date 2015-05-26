@@ -1,0 +1,114 @@
+#!/usr/bin/perl -w
+# -*- perl -*-
+
+=head1 NAME
+
+zetbox_facade_duration_ - Munin plugin to monitor the duration of facade calls on a zetbox instance
+
+=head1 CONFIGURATION
+
+Link the plugin as zetbox_facade_duration_INSTANCENAME and set PERFMON_URL in the environment via plugins-conf.d
+
+=head1 VERSION
+
+  1.0.0
+
+=head1 AUTHOR
+
+Copyright (C) 2013 David Schmitt <david@dasz.at>
+
+Based on the users plugin by Michael Kaiser tools (at) micha (dot) de and Nicolai Langfeldt.
+
+=head1 LICENSE
+
+GPLv2
+
+=cut
+
+use File::Basename;
+use LWP::Simple;
+use Munin::Plugin;
+
+basename($0) =~ /^zetbox_facade_duration_(.*)$/;
+my $instance = $1;
+
+my %graphs = (
+    # ORM calls
+    'Queries' => {
+        'colour' => 'FF0000',
+        'draw'   => 'LINE2',
+    },
+    'SubmitChanges' => {
+        'colour' => '00FF00',
+        'draw'   => 'LINE2',
+    },
+    # API calls
+    'FetchRelation' => {
+        'colour' => '0000FF',
+        'draw'   => 'AREA',
+    },
+    'GetList' => {
+        'colour' => 'FFFF00',
+        'draw'   => 'STACK',
+    },
+    'GetListOf' => {
+        'colour' => '00FFFF',
+        'draw'   => 'STACK',
+    },
+    'SetObjects' => {
+        'colour' => 'FF00FF',
+        'draw'   => 'STACK',
+    },
+);
+
+my $fake_host = $ENV{'FAKE_HOST'};
+
+if ( defined($ARGV[0]) ) {
+    if ( $ARGV[0] eq "config" ) {
+        print "graph_title zetbox total facade call duration: $instance\n";
+        print "graph_args --base 1000 -l 0\n";
+        print "graph_vlabel s\n";
+        print "graph_category zetbox\n";
+        if ($fake_host) {
+			print "host_name ${fake_host}\n"
+        }
+
+        for my $graph (qw(FetchRelation GetList GetListOf SetObjects Queries SubmitChanges)) {
+            print "${graph}Duration.label $graph duration\n";
+            print "${graph}Duration.info cumulative duration of $graph calls\n";
+            print "${graph}Duration.draw LINE1\n";
+            print "${graph}Duration.type DERIVE\n";
+            print "${graph}Duration.min 0\n";
+            print "${graph}Duration.colour $graphs{$graph}->{colour}\n";
+        }
+        print "ServerMethodInvocations.label method invocation duration\n";
+        print "ServerMethodInvocations.info duration of server method invocations\n";
+        print "ServerMethodInvocations.draw LINE1\n";
+        print "ServerMethodInvocations.type DERIVE\n";
+        print "ServerMethodInvocations.min 0\n";
+        print "ServerMethodInvocations.colour AAAAAA\n";
+        exit 0;
+    }
+}
+
+my $url = $ENV{'PERFMON_URL'};
+my $counters = get($url) or die "Failure when retrieving data from $url: $!";
+my %data = (
+    'QueriesDuration' => 0,
+    'SubmitChangesDuration' => 0,
+    'FetchRelationDuration' => 0,
+    'GetListDuration' => 0,
+    'GetListOfDuration' => 0,
+    'SetObjectsDuration' => 0,
+    'ServerMethodInvocationsDuration' => 0,
+);
+
+for (split /\r?\n/, $counters) {
+    next if /\/|AvgDuration/;
+    next unless /Duration/;
+    /^(.*): (\d*)$/;
+    $data{$1} = int($2) / 1000;
+}
+for my $key (keys %data) {
+    print "$key.value $data{$key}\n";
+}

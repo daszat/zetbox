@@ -1335,7 +1335,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
             var b = base.ObjectIsValid();
-            e.IsValid = b.IsValid;
             e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_WorkSchedule != null)
             {

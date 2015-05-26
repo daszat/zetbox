@@ -82,6 +82,7 @@ namespace Zetbox.Client.Presentables
     /// <summary>
     /// A little ViewModel to capture a simple command and provide infrastructure to give feedbck on the state of this command.
     /// </summary>
+    [ViewModelDescriptor]
     public abstract class CommandViewModel
         : ViewModel, ICommandViewModel
     {

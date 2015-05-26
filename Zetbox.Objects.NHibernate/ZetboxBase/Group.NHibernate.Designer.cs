@@ -568,7 +568,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Group> OnMember_P
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
             var b = base.ObjectIsValid();
-            e.IsValid = b.IsValid;
             e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_Group != null)
             {

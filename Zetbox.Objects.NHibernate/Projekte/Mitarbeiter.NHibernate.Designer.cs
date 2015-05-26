@@ -1269,7 +1269,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Mitarbeiter> 
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
             var b = base.ObjectIsValid();
-            e.IsValid = b.IsValid;
             e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_Mitarbeiter != null)
             {

@@ -33,12 +33,14 @@ using Zetbox.Client.WPF.Toolkit;
 
 namespace Zetbox.Client.WPF.View.ZetboxBase
 {
-    /// <summary>
-    /// Interaction logic for ActionView.xaml
-    /// </summary>
     [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
-    public partial class CommandDisplay : PropertyEditor, IHasViewModel<CommandViewModel>
+    public class CommandDisplay : PropertyEditor, IHasViewModel<CommandViewModel>
     {
+        static CommandDisplay()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(CommandDisplay), new FrameworkPropertyMetadata(typeof(CommandDisplay)));
+        }
+
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();

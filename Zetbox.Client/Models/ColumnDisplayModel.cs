@@ -230,15 +230,15 @@ namespace Zetbox.Client.Models
         {
             if (p is DecimalProperty)
             {
-                return decimal.MinValue.ToString(CultureInfo.InvariantCulture);
+                return "Decimal.MinValue";
             }
             else if (p is IntProperty)
             {
-                return int.MinValue.ToString(CultureInfo.InvariantCulture);
+                return "Int32.MinValue";
             }
             else if (p is DoubleProperty)
             {
-                return double.MinValue.ToString(CultureInfo.InvariantCulture);
+                return "Double.MinValue";
             }
             else if (p is StringProperty)
             {
@@ -246,11 +246,11 @@ namespace Zetbox.Client.Models
             }
             else if (p is DateTimeProperty)
             {
-                return "null";
+                return "DateTime.MinValue";
             }
             else if (p is GuidProperty)
             {
-                return Guid.Empty.ToString();
+                return "Guid.Empty";
             }
             else if (p is BoolProperty)
             {

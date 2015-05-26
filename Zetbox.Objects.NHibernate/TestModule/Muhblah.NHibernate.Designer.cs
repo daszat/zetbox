@@ -885,7 +885,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
             var b = base.ObjectIsValid();
-            e.IsValid = b.IsValid;
             e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_Muhblah != null)
             {

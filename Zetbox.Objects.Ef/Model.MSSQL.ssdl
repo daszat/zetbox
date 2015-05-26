@@ -1333,7 +1333,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="TestString" Type="nvarchar" MaxLength="1000" Nullable="true" />
+    <Property Name="TestString" Type="nvarchar" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="AnotherTest">
@@ -1350,7 +1350,7 @@
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_Ein_Fragebogen" Type="int" />
     <Property Name="fk_Ein_Fragebogen_pos" Type="int" Nullable="true" />
-    <Property Name="Frage" Type="nvarchar" MaxLength="1000" Nullable="false" />
+    <Property Name="Frage" Type="nvarchar" Nullable="false" />
     <Property Name="FragenNummer" Type="int" Nullable="false" />
     <Property Name="GegebeneAntwort" Type="int" Nullable="true" />
   </EntityType>
@@ -1525,7 +1525,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="nvarchar" MaxLength="1000" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="CompoundObject">
@@ -1623,7 +1623,7 @@
     <Property Name="DoubleDefaultValues_DoubleValue" Type="float" Nullable="true" />
     <Property Name="EnumDefaultValues_fk_EnumValue" Type="int" />
     <Property Name="IntDefaultValues_IntValue" Type="int" Nullable="true" />
-    <Property Name="StringDefaultValues_DefaultValue" Type="nvarchar" MaxLength="1000" Nullable="true" />
+    <Property Name="StringDefaultValues_DefaultValue" Type="nvarchar" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="Document">
@@ -1822,7 +1822,7 @@
     <Property Name="RefreshOnFilterChanged" Type="bit" Nullable="false" />
     <Property Name="Required" Type="bit" Nullable="false" />
     <Property Name="ObjectClassFilterConfigurations_fk_ObjectClass" Type="int" />
-    <Property Name="OptionalPredicateFilterConfigurations_Predicate" Type="nvarchar" MaxLength="1000" Nullable="true" />
+    <Property Name="OptionalPredicateFilterConfigurations_Predicate" Type="nvarchar" Nullable="true" />
     <Property Name="PropertyFilterConfigurations_fk_Property" Type="int" />
     <Property Name="DateRangeFilterConfigurations_IsCurrentMonthDefault" Type="bit" Nullable="true" />
     <Property Name="DateRangeFilterConfigurations_IsCurrentQuaterDefault" Type="bit" Nullable="true" />
@@ -1853,7 +1853,7 @@
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_Module" Type="int" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="1000" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="GroupMembership">
@@ -1910,7 +1910,7 @@
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_Constrained" Type="int" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Reason" Type="nvarchar" MaxLength="1000" Nullable="true" />
+    <Property Name="Reason" Type="nvarchar" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="Interface">
@@ -1949,7 +1949,7 @@
     <Property Name="fk_ObjectClass" Type="int" />
     <Property Name="CategoryTags" Type="nvarchar" MaxLength="4000" Nullable="true" />
     <Property Name="ChangedOn" Type="datetime2" Nullable="false" />
-    <Property Name="CodeTemplate" Type="nvarchar" MaxLength="1000" Nullable="true" />
+    <Property Name="CodeTemplate" Type="nvarchar" Nullable="true" />
     <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
@@ -2039,7 +2039,7 @@
     <Property Name="TestBool" Type="bit" Nullable="true" />
     <Property Name="TestDateTime" Type="datetime2" Nullable="true" />
     <Property Name="TestEnum" Type="int" Nullable="false" />
-    <Property Name="TestString" Type="nvarchar" MaxLength="1000" Nullable="true" />
+    <Property Name="TestString" Type="nvarchar" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="N_to_M_relations_A">
@@ -2047,7 +2047,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="nvarchar" MaxLength="1000" Nullable="true" />
+    <Property Name="Name" Type="nvarchar" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="N_to_M_relations_B">
@@ -2055,7 +2055,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="nvarchar" MaxLength="1000" Nullable="true" />
+    <Property Name="Name" Type="nvarchar" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="NavigationAction">
@@ -2106,7 +2106,7 @@
     <Property Name="AllowSelectColumns" Type="bit" Nullable="true" />
     <Property Name="AllowUserFilter" Type="bit" Nullable="true" />
     <Property Name="EnableAutoFilter" Type="bit" Nullable="true" />
-    <Property Name="InitialSort" Type="nvarchar" MaxLength="1000" Nullable="true" />
+    <Property Name="InitialSort" Type="nvarchar" Nullable="true" />
     <Property Name="InitialSortDirection" Type="int" Nullable="true" />
     <Property Name="IsEditable" Type="bit" Nullable="true" />
     <Property Name="IsMultiselect" Type="bit" Nullable="true" />
@@ -2124,7 +2124,7 @@
     <Property Name="ID" Type="int" Nullable="false" />
     <Property Name="fk_BaseObjectClass" Type="int" />
     <Property Name="fk_DefaultViewModelDescriptor" Type="int" />
-    <Property Name="CodeTemplate" Type="nvarchar" MaxLength="1000" Nullable="true" />
+    <Property Name="CodeTemplate" Type="nvarchar" Nullable="true" />
     <Property Name="IsAbstract" Type="bit" Nullable="false" />
     <Property Name="IsCreatedProgrammatically" Type="bit" Nullable="false" />
     <Property Name="IsFrozenObject" Type="bit" Nullable="false" />
@@ -2235,7 +2235,7 @@
     <Property Name="fk_CreatedBy" Type="int" />
     <Property Name="CategoryTags" Type="nvarchar" MaxLength="4000" Nullable="true" />
     <Property Name="ChangedOn" Type="datetime2" Nullable="false" />
-    <Property Name="CodeTemplate" Type="nvarchar" MaxLength="1000" Nullable="true" />
+    <Property Name="CodeTemplate" Type="nvarchar" Nullable="true" />
     <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
     <Property Name="DefaultSortPriority" Type="int" Nullable="true" />
     <Property Name="Description" Type="nvarchar" MaxLength="200" Nullable="true" />
@@ -2251,10 +2251,10 @@
     <Property Name="CompoundObjectProperties_IsList" Type="bit" Nullable="true" />
     <Property Name="ObjectReferencePlaceholderProperties_fk_ReferencedClass" Type="int" />
     <Property Name="ObjectReferencePlaceholderProperties_HasPersistentOrder" Type="bit" Nullable="true" />
-    <Property Name="ObjectReferencePlaceholderProperties_ImplementorRoleName" Type="nvarchar" MaxLength="1000" Nullable="true" />
+    <Property Name="ObjectReferencePlaceholderProperties_ImplementorRoleName" Type="nvarchar" Nullable="true" />
     <Property Name="ObjectReferencePlaceholderProperties_IsList" Type="bit" Nullable="true" />
-    <Property Name="ObjectReferencePlaceholderProperties_ItemRoleName" Type="nvarchar" MaxLength="1000" Nullable="true" />
-    <Property Name="ObjectReferencePlaceholderProperties_Verb" Type="nvarchar" MaxLength="1000" Nullable="true" />
+    <Property Name="ObjectReferencePlaceholderProperties_ItemRoleName" Type="nvarchar" Nullable="true" />
+    <Property Name="ObjectReferencePlaceholderProperties_Verb" Type="nvarchar" Nullable="true" />
     <Property Name="ObjectReferenceProperties_fk_RelationEnd" Type="int" />
     <Property Name="ObjectReferenceProperties_EagerLoading" Type="bit" Nullable="true" />
     <Property Name="ObjectReferenceProperties_IsInlineEditable" Type="bit" Nullable="true" />
@@ -2264,9 +2264,9 @@
     <Property Name="BoolProperties_fk_FalseIcon" Type="int" />
     <Property Name="BoolProperties_fk_NullIcon" Type="int" />
     <Property Name="BoolProperties_fk_TrueIcon" Type="int" />
-    <Property Name="BoolProperties_FalseLabel" Type="nvarchar" MaxLength="1000" Nullable="true" />
-    <Property Name="BoolProperties_NullLabel" Type="nvarchar" MaxLength="1000" Nullable="true" />
-    <Property Name="BoolProperties_TrueLabel" Type="nvarchar" MaxLength="1000" Nullable="true" />
+    <Property Name="BoolProperties_FalseLabel" Type="nvarchar" Nullable="true" />
+    <Property Name="BoolProperties_NullLabel" Type="nvarchar" Nullable="true" />
+    <Property Name="BoolProperties_TrueLabel" Type="nvarchar" Nullable="true" />
     <Property Name="DateTimeProperties_DateTimeStyle" Type="int" Nullable="true" />
     <Property Name="DecimalProperties_Precision" Type="int" Nullable="true" />
     <Property Name="DecimalProperties_Scale" Type="int" Nullable="true" />
@@ -2307,10 +2307,10 @@
     <Property Name="PropertyIntTests_NullableWithDefault" Type="int" Nullable="true" />
     <Property Name="PropertyIntTests_Standard" Type="int" Nullable="true" />
     <Property Name="PropertyIntTests_StandardWithDefault" Type="int" Nullable="true" />
-    <Property Name="PropertyStringTests_Nullable" Type="nvarchar" MaxLength="1000" Nullable="true" />
-    <Property Name="PropertyStringTests_NullableWithDefault" Type="nvarchar" MaxLength="1000" Nullable="true" />
-    <Property Name="PropertyStringTests_Standard" Type="nvarchar" MaxLength="1000" Nullable="true" />
-    <Property Name="PropertyStringTests_StandardWithDefault" Type="nvarchar" MaxLength="1000" Nullable="true" />
+    <Property Name="PropertyStringTests_Nullable" Type="nvarchar" Nullable="true" />
+    <Property Name="PropertyStringTests_NullableWithDefault" Type="nvarchar" Nullable="true" />
+    <Property Name="PropertyStringTests_Standard" Type="nvarchar" Nullable="true" />
+    <Property Name="PropertyStringTests_StandardWithDefault" Type="nvarchar" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="RecurrenceRuleTester">
@@ -2374,7 +2374,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="nvarchar" MaxLength="1000" Nullable="true" />
+    <Property Name="Name" Type="nvarchar" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="RequiredParentChild">
@@ -2383,7 +2383,7 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="fk_Parent" Type="int" />
-    <Property Name="Name" Type="nvarchar" MaxLength="1000" Nullable="true" />
+    <Property Name="Name" Type="nvarchar" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="RoleMembership">
@@ -2468,7 +2468,7 @@
     <Property Name="fk_CreatedBy" Type="int" />
     <Property Name="ChangedOn" Type="datetime2" Nullable="false" />
     <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
-    <Property Name="Description" Type="nvarchar" MaxLength="1000" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" Nullable="false" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="IsContinuous" Type="bit" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
@@ -2494,7 +2494,7 @@
     <Property Name="ChangedOn" Type="datetime2" Nullable="false" />
     <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
     <Property Name="DeploymentRestriction" Type="int" Nullable="true" />
-    <Property Name="Description" Type="nvarchar" MaxLength="1000" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" Nullable="false" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
   </EntityType>
 	
@@ -2532,7 +2532,7 @@
     <Property Name="ChangedOn" Type="datetime2" Nullable="false" />
     <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="SourceValue" Type="nvarchar" MaxLength="1000" Nullable="false" />
+    <Property Name="SourceValue" Type="nvarchar" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="SourceTable">
@@ -2562,11 +2562,11 @@
     <Property Name="fk_ChangedBy" Type="int" />
     <Property Name="fk_CreatedBy" Type="int" />
     <Property Name="ChangedOn" Type="datetime2" Nullable="false" />
-    <Property Name="ConnectionStringKey" Type="nvarchar" MaxLength="1000" Nullable="false" />
+    <Property Name="ConnectionStringKey" Type="nvarchar" Nullable="false" />
     <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
-    <Property Name="Description" Type="nvarchar" MaxLength="1000" Nullable="true" />
+    <Property Name="Description" Type="nvarchar" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="OriginConnectionStringKey" Type="nvarchar" MaxLength="1000" Nullable="true" />
+    <Property Name="OriginConnectionStringKey" Type="nvarchar" Nullable="true" />
     <Property Name="Schema" Type="nvarchar" MaxLength="63" Nullable="false" />
   </EntityType>
 	
@@ -2680,7 +2680,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="nvarchar" MaxLength="1000" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" />
   </EntityType>
 	
   <EntityType Name="TPHBaseObj">
@@ -2694,7 +2694,7 @@
     <Property Name="ChangedOn" Type="datetime2" Nullable="false" />
     <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="1000" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" />
     <Property Name="TPHDerivedAObjs_AInt" Type="int" Nullable="true" />
     <Property Name="TPHDerivedAObjs_AString" Type="nvarchar" MaxLength="200" Nullable="true" />
     <Property Name="TPHDerivedBObjs_BString" Type="nvarchar" MaxLength="100" Nullable="true" />
@@ -6360,7 +6360,7 @@
       </Key>
       <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
       <Property Name="fk_Muhblah" Type="int" Nullable="true" />
-      <Property Name="StringCollection" Type="nvarchar" MaxLength="1000" />
+      <Property Name="StringCollection" Type="nvarchar" />
     </EntityType>
 
     <Association Name="FK_Muhblah_value_StringCollection">
@@ -6386,11 +6386,11 @@
       </Key>
       <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
       <Property Name="fk_Projekt" Type="int" Nullable="true" />
-    <Property Name="AuditJournal_Identity" Type="nvarchar" MaxLength="1000" Nullable="true" />
-    <Property Name="AuditJournal_MessageFormat" Type="nvarchar" MaxLength="1000" Nullable="true" />
-    <Property Name="AuditJournal_NewValue" Type="nvarchar" MaxLength="1000" Nullable="true" />
-    <Property Name="AuditJournal_OldValue" Type="nvarchar" MaxLength="1000" Nullable="true" />
-    <Property Name="AuditJournal_PropertyName" Type="nvarchar" MaxLength="1000" Nullable="true" />
+    <Property Name="AuditJournal_Identity" Type="nvarchar" Nullable="true" />
+    <Property Name="AuditJournal_MessageFormat" Type="nvarchar" Nullable="true" />
+    <Property Name="AuditJournal_NewValue" Type="nvarchar" Nullable="true" />
+    <Property Name="AuditJournal_OldValue" Type="nvarchar" Nullable="true" />
+    <Property Name="AuditJournal_PropertyName" Type="nvarchar" Nullable="true" />
     <Property Name="AuditJournal_Timestamp" Type="datetime2" Nullable="true" />
     </EntityType>
 

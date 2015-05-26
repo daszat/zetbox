@@ -1062,7 +1062,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Kunde> OnEMai
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
             var b = base.ObjectIsValid();
-            e.IsValid = b.IsValid;
             e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_Kunde != null)
             {

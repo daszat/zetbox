@@ -465,14 +465,14 @@ namespace Zetbox.API
     {
         public ObjectIsValidEventArgs()
         {
-            IsValid = true;
             Errors = new List<string>();
         }
 
         /// <summary>
-        /// Whether or not the inspected object is valid. Defaults to "true".
+        /// Whether or not the inspected object has any Errors.
         /// </summary>
-        public bool IsValid { get; set; }
+        public bool IsValid { get { return Errors.Count == 0; } }
+
         /// <summary>
         /// A list of errors detected on the object.
         /// </summary>

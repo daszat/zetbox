@@ -5,6 +5,7 @@
                   xmlns:styles="clr-namespace:Zetbox.Client.WPF.Styles;assembly=Zetbox.Client.WPF.Toolkit"
                   xmlns:client="clr-namespace:Zetbox.Client.Presentables;assembly=Zetbox.Client"
                   xmlns:commands="clr-namespace:Zetbox.Client.WPF.Commands;assembly=Zetbox.Client.WPF.Toolkit"
+                  xmlns:tk="clr-namespace:Zetbox.Client.WPF.Toolkit;assembly=Zetbox.Client.WPF.Toolkit"
                   Title="{Binding Name}"
                   Height="600"
                   Width="800"
@@ -32,72 +33,28 @@
                 Style="{StaticResource AreaGroup1BorderStyle}"
                 Margin="{StaticResource AreaGroup1Margin}">
             <DockPanel>
-                <ctrls:CommandButton DockPanel.Dock="Right"
-                                     CommandViewModel="{Binding SaveAndCloseCommand}"
-                                     Style="{StaticResource ImageButton}"
-                                     Image="/Zetbox.Client.WPF;component/Images/FloppyDisk.png"
-                                     Margin="0"
-                                     styles:Margin.Left="{StaticResource ItemMargin}" />
-                <ctrls:CommandButton DockPanel.Dock="Right"
-                                     CommandViewModel="{Binding SaveCommand}"
-                                     Style="{StaticResource ImageButton}"
-                                     Image="/Zetbox.Client.WPF;component/Images/FloppyDisk.png"
-                                     Margin="0"
-                                     styles:Margin.Left="{StaticResource ItemMargin}"
-                                     styles:Margin.Right="{StaticResource ItemMargin}" />
-                <ctrls:CommandButton DockPanel.Dock="Right"
-                                     CommandViewModel="{Binding VerifyCommand}"
-                                     styles:Controls.IsSecondary="true"
-                                     Style="{StaticResource ImageButton}"
-                                     Image="/Zetbox.Client.WPF;component/Images/ok.png"
-                                     Margin="0"
-                                     styles:Margin.Left="{StaticResource ItemMargin}"
-                                     styles:Margin.Right="{StaticResource ItemMargin}" />
-                <ctrls:CommandButton DockPanel.Dock="Right"
-                                     CommandViewModel="{Binding DeleteCommand}"
-                                     Visibility="{Binding IsEnabled, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource Self}}"
-                                     styles:Controls.IsSecondary="true"
-                                     Style="{StaticResource ImageButton}"
-                                     Margin="0"
-                                     styles:Margin.Left="{StaticResource ItemMargin}"
-                                     styles:Margin.Right="{StaticResource ItemMargin}" />
                 <ItemsControl DockPanel.Dock="Right"
-                              ItemsSource="{Binding AdditionalCommands}">
+                              ItemsSource="{Binding Commands}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <DockPanel IsItemsHost="True" />
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <ctrls:CommandButton DockPanel.Dock="Right"
-                                                 CommandViewModel="{Binding}"
-                                                 Style="{StaticResource ImageButton}"
-                                                 Margin="0"
-                                                 styles:Margin.Left="{StaticResource ItemMargin}"
-                                                 styles:Margin.Right="{StaticResource ItemMargin}" />
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
+                    <ItemsControl.ItemContainerStyle>
+                        <Style>
+                            <Setter Property="DockPanel.Dock" Value="Right"/>
+                            <Setter Property="ContentPresenter.ContentTemplateSelector" Value="{StaticResource defaultTemplateSelector}"/>
+                            <Setter Property="tk:VisualTypeTemplateSelector.RequestedKind" Value="{Binding RequestedKind, Mode=OneWay}" />
+                        </Style>
+                    </ItemsControl.ItemContainerStyle>
                 </ItemsControl>
-                <ctrls:CommandButton DockPanel.Dock="Right"
-                                     CommandViewModel="{Binding AbortCommand}"
-                                     styles:Controls.IsSecondary="true"
-                                     Style="{StaticResource LinkButton}"
-                                     Margin="0"
-                                     styles:Margin.Left="{StaticResource ItemMargin}"
-                                     styles:Margin.Right="{StaticResource ItemMargin}" />
                 <ctrls:CommandButton DockPanel.Dock="Left"
                                      CommandViewModel="{Binding ReportProblemCommand}"
-                                     Style="{StaticResource ImageButton}"
-                                     Margin="0"
-                                     styles:Margin.Right="{StaticResource ItemMargin}" />
+                                     Style="{StaticResource ImageButton}" />
                 <ToggleButton DockPanel.Dock="Left"
                               Command="{Binding ElevatedModeCommand, Converter={StaticResource CommandConverter}}"
                               Visibility="{Binding ElevatedModeCommand.Show, Converter={StaticResource BooleanToVisibilityConverter}}"
-                              IsChecked="{Binding ElevatedModeCommand.IsElevated, Mode=OneWay}"
-                              Margin="0"
-                              styles:Margin.Left="{StaticResource ItemMargin}"
-                              styles:Margin.Right="{StaticResource ItemMargin}">
+                              IsChecked="{Binding ElevatedModeCommand.IsElevated, Mode=OneWay}">
                     <Border Padding="5">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="{Binding Path=ElevatedModeCommand.Icon, Converter={StaticResource ImageConverter}}"

@@ -22,6 +22,11 @@
     </FileUpgradeFlags>
     <OldToolsVersion>4.0</OldToolsVersion>
     <UpgradeBackupLocation />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <NuGetPackageImportStamp>2b71b24e</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -51,6 +56,9 @@
     </Reference>
     <Reference Include="Autofac.Integration.Web">
       <HintPath>..\packages\Autofac.Web.2.6.3.862\lib\NET40\Autofac.Integration.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="CryptSharp">
+      <HintPath>..\packages\CryptSharpOfficial.2.1.0.0\lib\CryptSharp.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.0\lib\net35-full\log4net.dll</HintPath>
@@ -88,6 +96,7 @@
     <Content Include="App_Themes\BasicTheme\logo.png" />
     <Content Include="App_Themes\BasicTheme\StyleSheet.css" />
     <Content Include="Bootstrapper.svc" />
+    <Content Include="Check.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="ZetboxService.svc" />
@@ -111,11 +120,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Check.aspx.cs">
+      <DependentUpon>Check.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Check.aspx.designer.cs">
+      <DependentUpon>Check.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ClickOnceApplicationLink.cs" />
     <Compile Include="Controls\Widget.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HtPasswdBasicAuthenticationModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="packages.config" />
     <Compile Include="Site.Master.cs">
@@ -235,4 +252,11 @@ bash -c 'cp -r "$(SolutionDir)/bin/$(Configuration)"/{Client,Bootstrapper} "$(Pr
 bash -c 'rm -f "$(ProjectDir)"/bin/Zetbox.Objects.*'
      </PostBuildEvent>
   </PropertyGroup>
+  <Import Project="..\packages\GitVersionTask.3.0.0-beta0002\Build\GitVersionTask.targets" Condition="Exists('..\packages\GitVersionTask.3.0.0-beta0002\Build\GitVersionTask.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\GitVersionTask.3.0.0-beta0002\Build\GitVersionTask.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\GitVersionTask.3.0.0-beta0002\Build\GitVersionTask.targets'))" />
+  </Target>
 </Project>

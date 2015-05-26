@@ -149,4 +149,16 @@
   <data name="UniqueConstraintViolationException_Message" xml:space="preserve">
     <value>At least one value is not unique.</value>
   </data>
+  <data name="ZetboxValidationException_Caption" xml:space="preserve">
+    <value>Validation Error</value>
+  </data>
+  <data name="ZetboxValidationException_Message" xml:space="preserve">
+    <value>These validation errors were found when checking the data. Please fix this to be able to save this.</value>
+  </data>
+  <data name="ZetboxValidationException_ValueFormat" xml:space="preserve">
+    <value>{0}</value>
+  </data>
+  <data name="ZetboxValidationException_ValueLabel" xml:space="preserve">
+    <value>Error description</value>
+  </data>
 </root>

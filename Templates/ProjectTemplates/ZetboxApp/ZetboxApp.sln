@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZetboxApp", "ZetboxApp\ZetboxApp.csproj", "{ABC19424-E9EB-4D9A-8C3A-10064A0317E6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZetboxApp.Solution", "ZetboxApp.Solution\ZetboxApp.Solution.csproj", "{21AE7B50-2093-4437-BD14-648BEED8A54C}"

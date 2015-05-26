@@ -66,7 +66,7 @@ namespace Zetbox.Server
     public class BootstrapperService
         : IBootstrapperService
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Server.BootstrapperService");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger(typeof(BootstrapperService));
 
         private readonly ZetboxConfig config;
 
@@ -74,7 +74,7 @@ namespace Zetbox.Server
         {
             if (config == null) throw new ArgumentNullException("config");
 
-            Log.InfoFormat("Starting BootstrapperService from {0}", config.ConfigFilePath);
+            Log.DebugFormat("Starting BootstrapperService from {0}", config.ConfigFilePath);
             this.config = config;
         }
 
@@ -84,7 +84,7 @@ namespace Zetbox.Server
 
             foreach (var location in config.Server.ClientFilesLocations)
             {
-                Log.InfoFormat("Processing client file location [{0}] ({0})", location.Name, location.Value);
+                Log.DebugFormat("Processing client file location [{0}] ({0})", location.Name, location.Value);
 
                 var value = ResolveConfigPath(location.Value);
 

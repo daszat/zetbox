@@ -15,7 +15,7 @@ namespace Zetbox.App.Base
     {
 
         /// <summary>
-        /// The identity that caued this audit
+        /// The identity that caused this audit
         /// </summary>
         [Zetbox.API.DefinitionGuid("7d954dd7-200c-4465-9316-c84ab920c30c")]
         string Identity {

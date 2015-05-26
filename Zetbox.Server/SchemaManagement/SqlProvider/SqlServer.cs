@@ -175,8 +175,8 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
             // hardcoded special cases
             if (col.Type == DbType.String && col.Size == int.MaxValue)
             {
-                // Create ntext columns for unlimited string length
-                sb.AppendFormat("{0} ntext {1}", QuoteIdentifier(col.Name), nullable);
+                // Create nvarchar(max) columns for unlimited string length
+                sb.AppendFormat("{0} nvarchar(max) {1}", QuoteIdentifier(col.Name), nullable);
             }
             else if (col.Type == DbType.Binary && col.Size == int.MaxValue)
             {
@@ -671,7 +671,7 @@ WHERE tbl.id = OBJECT_ID(@table) and col.name = @column AND obj.xtype = 'D'",
         public override int GetColumnMaxLength(TableRef tblName, string colName)
         {
             // divide by 2 to account for _n_varchar!
-            return (int)ExecuteScalar(@"
+            var result = (int)ExecuteScalar(@"
                 SELECT c.max_length / 2
                 FROM sys.objects o
                     INNER JOIN sys.columns c ON c.object_id=o.object_id
@@ -682,6 +682,11 @@ WHERE tbl.id = OBJECT_ID(@table) and col.name = @column AND obj.xtype = 'D'",
                     { "@table", FormatSchemaName(tblName) },
                     { "@column", colName },
                 });
+
+            if (result == 0)
+                result = int.MaxValue; // nvarchar(max) max_length == -1, / 2 = 0.
+
+            return result;
         }
 
         #endregion

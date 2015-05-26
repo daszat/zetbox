@@ -69,9 +69,6 @@ namespace PrepareEnv
                     return 1;
                 }
 
-                AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
-
-
                 var envConfig = (EnvConfig)new XmlSerializer(typeof(EnvConfig)).Deserialize(File.OpenRead(Path.Combine(envConfigDir, "env.xml")));
 
                 PrepareEnvConfig(envConfig, envConfigDir);
@@ -104,52 +101,6 @@ namespace PrepareEnv
         private static void PrintUsage()
         {
             LogTitle("Usage: PrepareEnv [--debug] Path\\To\\Config\\Folder");
-        }
-
-        /// <summary>
-        /// Load the proper Npgsql library for the current Platform.
-        /// </summary>
-        /// <remarks>
-        /// Npgsql is platform-dependent due to EF-Provider, which is not supported on mono.
-        /// To keep PrepareEnv a single .exe, we embed the both dlls and load them conditionally.
-        /// </remarks>
-        private static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
-        {
-            using (var stream = GetAssemblyResourceStream(args.Name))
-            {
-                if (stream == null)
-                    return null;
-
-                checked
-                {
-                    var buf = new byte[stream.Length];
-                    stream.Read(buf, 0, (int)stream.Length);
-                    LogAction("Loaded {0} from resource", args.Name);
-                    return Assembly.Load(buf);
-                }
-            }
-        }
-
-        private static Stream GetAssemblyResourceStream(string assemblyNameString)
-        {
-            var assemblyName = new AssemblyName(assemblyNameString);
-
-            string resourceName;
-            switch (Environment.OSVersion.Platform)
-            {
-                case PlatformID.Unix:
-                    LogAction("using mono2.0");
-                    resourceName = string.Format("PrepareEnv.EmbeddedLibs.Npgsql201193binmono20.{0}.dll", assemblyName.Name);
-                    break;
-                case PlatformID.Win32NT:
-                    LogAction("using ms.net3.5sp1");
-                    resourceName = string.Format("PrepareEnv.EmbeddedLibs.Npgsql201193binmsnet35sp1.{0}.dll", assemblyName.Name);
-                    break;
-                default:
-                    return null;
-            }
-
-            return typeof(Program).Assembly.GetManifestResourceStream(resourceName);
         }
 
         private static void PrepareEnvConfig(EnvConfig envConfig, string envConfigDir)
@@ -354,8 +305,6 @@ namespace PrepareEnv
                     LogAction("copying local Data");
                     CopyFolder("Data", Path.Combine(envConfig.BinaryTarget, "Data"));
                 }
-
-                ReplaceNpgsql(envConfig.BinarySource, envConfig.BinaryTarget);
             }
         }
 
@@ -407,41 +356,7 @@ namespace PrepareEnv
                         }
                     }
                 }
-                ReplaceNpgsql(envConfig.BinarySource, envConfig.TestsTarget);
             }
-        }
-
-        private static void ReplaceNpgsql(string sourcePath, string targetPath)
-        {
-            if (!Directory.Exists(targetPath)) return;
-
-            LogAction("deploying Npgsql to " + targetPath);
-            switch (Environment.OSVersion.Platform)
-            {
-                case PlatformID.Unix:
-                    Copy(
-                        GetAssemblyResourceStream("Npgsql"),
-                        Path.Combine(targetPath, "Npgsql.dll"),
-                        true);
-                    // installed in mono's GAC
-                    Delete(Path.Combine(targetPath, "Mono.Security.dll"));
-                    break;
-                case PlatformID.Win32NT:
-                    Copy(
-                        GetAssemblyResourceStream("Npgsql"),
-                        Path.Combine(targetPath, "Npgsql.dll"),
-                        true);
-                    Copy(
-                        GetAssemblyResourceStream("Mono.Security"),
-                        Path.Combine(targetPath, "Mono.Security.dll"),
-                        true);
-                    break;
-                default:
-                    LogAction("Unknown platform '{0}'", Environment.OSVersion.Platform);
-                    return;
-            }
-            ReplaceNpgsql(sourcePath, Path.Combine(targetPath, "HttpService", "bin"));
-            ReplaceNpgsql(sourcePath, Path.Combine(targetPath, "ASPNET", "bin"));
         }
 
         private static void InstallGeneratedBinaries(EnvConfig envConfig)

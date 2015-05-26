@@ -15,6 +15,7 @@
     <TargetFrameworkProfile />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <NuGetPackageImportStamp>8c507f70</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -61,12 +62,13 @@
     <Reference Include="Mono.Cecil.Rocks, Version=0.9.5.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>..\packages\Mono.Cecil.0.9.5.4\lib\net40\Mono.Cecil.Rocks.dll</HintPath>
     </Reference>
-    <Reference Include="Mono.Security, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+    <Reference Include="Mono.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Mono.Security.2.0.0.0\lib\net35\Mono.Security.dll</HintPath>
+      <HintPath>..\packages\Npgsql.2.2.2\lib\net40\Mono.Security.dll</HintPath>
     </Reference>
-    <Reference Include="Npgsql">
-      <HintPath>..\packages\Npgsql.2.0.11.92\lib\net35\Npgsql.dll</HintPath>
+    <Reference Include="Npgsql, Version=2.2.2.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Npgsql.2.2.2\lib\net40\Npgsql.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -101,20 +103,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="EmbeddedLibs\Npgsql201193binmono20\Mono.Security.dll" />
-    <EmbeddedResource Include="EmbeddedLibs\Npgsql201193binmono20\Npgsql.dll" />
-    <EmbeddedResource Include="EmbeddedLibs\Npgsql201193binmsnet35sp1\Mono.Security.dll" />
-    <EmbeddedResource Include="EmbeddedLibs\Npgsql201193binmsnet35sp1\Npgsql.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <NpgsqlMono Include="EmbeddedLibs\Npgsql201193binmono20\*.*">
-      <Visible>false</Visible>
-    </NpgsqlMono>
-    <NpgsqlMs Include="EmbeddedLibs\Npgsql201193binmsnet35sp1\*.*">
-      <Visible>false</Visible>
-    </NpgsqlMs>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Examples\04 CopyDirsConfig.xml">
       <SubType>Designer</SubType>
     </None>
@@ -133,6 +121,13 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <Import Project="..\packages\GitVersionTask.3.0.0-beta0002\Build\GitVersionTask.targets" Condition="Exists('..\packages\GitVersionTask.3.0.0-beta0002\Build\GitVersionTask.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\GitVersionTask.3.0.0-beta0002\Build\GitVersionTask.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\GitVersionTask.3.0.0-beta0002\Build\GitVersionTask.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
@@ -140,8 +135,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Target Name="BeforeBuild">
-    <Copy SourceFiles="@(NpgsqlMono)" DestinationFolder="$(OutputPath)\Server\Npgsql.Mono" />
-    <Copy SourceFiles="@(NpgsqlMs)" DestinationFolder="$(OutputPath)\Server\Npgsql.Microsoft" />
-  </Target>
 </Project>

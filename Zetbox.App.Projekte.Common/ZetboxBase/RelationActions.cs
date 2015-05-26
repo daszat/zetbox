@@ -82,7 +82,6 @@ namespace Zetbox.App.Base
         {
             if (obj.A != null && obj.B != null && obj.GetAssociationName().Length > 60)
             {
-                e.IsValid = false;
                 e.Errors.Add(string.Format("The relation name '{0}' (FK_<a>_<verb>_<b>) exceed 60 chars. This could violate a database (Postgres) max identifier length.", obj.GetAssociationName()));
             }
         }

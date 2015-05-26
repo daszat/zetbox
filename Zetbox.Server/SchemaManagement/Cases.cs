@@ -431,7 +431,17 @@ namespace Zetbox.Server.SchemaManagement
 
             var checkConstraintName = Construct.CheckConstraintName(tblName.Name, colName);
             if (db.CheckCheckConstraintPossible(tblName, colName, checkConstraintName, checkExpressions))
-                db.CreateCheckConstraint(tblName, colName, checkConstraintName, checkExpressions);
+            {
+                try
+                {
+                    db.CreateCheckConstraint(tblName, colName, checkConstraintName, checkExpressions);
+                }
+                catch (Exception ex)
+                {
+                    // Don't abort on such a error
+                    Log.ErrorFormat("unable to create CHECK constraint for ValueType Property '{0}' in '{1}': {2}", colName, tblName, ex.Message);
+                }
+            }
             else
                 Log.ErrorFormat("unable to create CHECK constraint for ValueType Property '{0}' in '{1}': column contains invalid NULLs or superfluous values", colName, tblName);
         }

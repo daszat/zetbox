@@ -157,6 +157,39 @@ namespace Zetbox.API
     }
 
     [Serializable]
+    public class ZetboxValidationException
+        : ZetboxContextErrorException
+    {
+        public ZetboxValidationException()
+            : base("Validation Error")
+        {
+        }
+
+        public ZetboxValidationException(string message)
+            : base(message)
+        {
+        }
+
+        public ZetboxValidationException(string message, Exception inner)
+            : base(message, inner)
+        {
+        }
+
+        protected ZetboxValidationException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+        }
+
+        public override ZetboxContextExceptionMessage ToExceptionMessage()
+        {
+            return new ZetboxContextExceptionMessage()
+            {
+                Exception = new ValidationExceptionMessage(this)
+            };
+        }
+    }
+
+    [Serializable]
     [DataContract]
     public class ConcurrencyExceptionDetail
     {

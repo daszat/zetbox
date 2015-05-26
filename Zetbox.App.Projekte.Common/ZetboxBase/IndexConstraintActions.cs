@@ -40,7 +40,6 @@ namespace Zetbox.App.Base
         {
             if (obj.Properties.Count == 0)
             {
-                e.IsValid = false;
                 e.Errors.Add("Cannot have index without Properties.");
             }
         }

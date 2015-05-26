@@ -310,7 +310,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestStudent> OnTe
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
             var b = base.ObjectIsValid();
-            e.IsValid = b.IsValid;
             e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_TestStudent != null)
             {

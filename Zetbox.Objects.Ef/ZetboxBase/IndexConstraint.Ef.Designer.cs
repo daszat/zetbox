@@ -449,7 +449,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.IndexConstraint> 
         {
             ObjectIsValidEventArgs e = new ObjectIsValidEventArgs();
             var b = base.ObjectIsValid();
-            e.IsValid = b.IsValid;
             e.Errors.AddRange(b.Errors);
             if (OnObjectIsValid_IndexConstraint != null)
             {

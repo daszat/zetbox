@@ -35,7 +35,6 @@ namespace Zetbox.App.Projekte
         [Invocation]
         public static void ObjectIsValid(Task obj, ObjectIsValidEventArgs e)
         {
-            e.IsValid = true;
         }
 
         [Invocation]
