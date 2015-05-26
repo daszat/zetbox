@@ -812,7 +812,7 @@ namespace Zetbox.Server.SchemaManagement
                     // TODO: Introduce TextProperty
                     if (size == int.MaxValue)
                     {
-                        // TODO: Check if ntext
+                        // TODO: Check if nvarchar(max) or text
                     }
                     else if (colSize != size)
                     {

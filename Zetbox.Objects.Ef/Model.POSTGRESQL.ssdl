@@ -6360,7 +6360,7 @@
       </Key>
       <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
       <Property Name="fk_Muhblah" Type="int4" Nullable="true" />
-      <Property Name="StringCollection" Type="varchar" MaxLength="2147483647" />
+      <Property Name="StringCollection" Type="varchar" />
     </EntityType>
 
     <Association Name="FK_Muhblah_value_StringCollection">

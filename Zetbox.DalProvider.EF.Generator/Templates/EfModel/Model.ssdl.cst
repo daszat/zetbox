@@ -388,7 +388,11 @@
 		string constraint = String.Empty;
 		if (prop is StringProperty) {
 			var sProp = (StringProperty)prop;
-			constraint += String.Format("MaxLength=\"{0}\" ", sProp.GetMaxLength());
+			var maxLength = sProp.GetMaxLength();
+			if (maxLength != int.MaxValue)
+			{
+				constraint += String.Format("MaxLength=\"{0}\" ", maxLength);
+			}
 		}
 		if (prop is DecimalProperty) {
 			var dProp = (DecimalProperty)prop;
