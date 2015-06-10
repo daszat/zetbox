@@ -5,6 +5,7 @@
 # if creating the package locally
 
 rm *.nupkg
+cp README.zetbox.txt ..\bin\Debug
 cp *.* ..\bin\Debug
 
 $str = (..\packages\GitVersion.CommandLine.3.0.0-beta0002\Tools\GitVersion.exe) | out-string
