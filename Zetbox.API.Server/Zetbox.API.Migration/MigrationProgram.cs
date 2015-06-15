@@ -21,12 +21,12 @@ namespace Zetbox.API.Migration
     using System.Linq;
     using System.Text;
     using Autofac;
-    using Autofac.Configuration;
     using Zetbox.API.Configuration;
     using Zetbox.API.Server;
     using Zetbox.API.Utils;
     using Zetbox.App.SchemaMigration;
     using System.Configuration;
+    using Autofac.Configuration;
 
     public abstract class MigrationProgram
     {
