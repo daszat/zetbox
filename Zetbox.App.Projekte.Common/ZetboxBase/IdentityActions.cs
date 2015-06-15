@@ -24,12 +24,23 @@ namespace Zetbox.App.Base
     public static class IdentityActions
     {
         [Invocation]
-        public static void ToString(Zetbox.App.Base.Identity obj, MethodReturnEventArgs<string> e)
+        public static void ToString(Identity obj, MethodReturnEventArgs<string> e)
         {
             e.Result = (obj.DisplayName ?? string.Empty) + " (" + (obj.UserName ?? string.Empty) + ")";
 
             ToStringHelper.FixupFloatingObjectsToString(obj, e);
         }
 
+        [Invocation]
+        public static void CreateLoginToken(Identity obj)
+        {
+            obj.LoginToken = Guid.NewGuid();
+        }
+
+        [Invocation]
+        public static void ClearLoginToken(Identity obj)
+        {
+            obj.LoginToken = null;
+        }
     }
 }

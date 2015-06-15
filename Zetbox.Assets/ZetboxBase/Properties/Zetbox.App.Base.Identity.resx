@@ -135,6 +135,12 @@
   <data name="Groups_description" xml:space="preserve">
     <value>Identites are member of groups</value>
   </data>
+  <data name="LoginToken_label" xml:space="preserve">
+    <value>Login token</value>
+  </data>
+  <data name="LoginToken_description" xml:space="preserve">
+    <value>A token for simple login with a URL</value>
+  </data>
   <data name="OpenID_label" xml:space="preserve">
     <value>Open Id</value>
   </data>

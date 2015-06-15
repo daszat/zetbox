@@ -117,136 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="GetCurrent_label" xml:space="preserve">
-    <value>GetCurrent</value>
+  <data name="ClearLoginToken_label" xml:space="preserve">
+    <value>Clear login token</value>
   </data>
-  <data name="GetCurrent_description" xml:space="preserve">
-    <value />
+  <data name="ClearLoginToken_description" xml:space="preserve">
+    <value>Clears the login token</value>
   </data>
-  <data name="GetCurrent(retval)_label" xml:space="preserve">
-    <value>retval</value>
+  <data name="CreateLoginToken_label" xml:space="preserve">
+    <value>Create login token</value>
   </data>
-  <data name="GetCurrent(retval)_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="GetCurrent(start)_label" xml:space="preserve">
-    <value>start</value>
-  </data>
-  <data name="GetCurrent(start)_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="GetCurrent_label" xml:space="preserve">
-    <value>GetCurrent</value>
-  </data>
-  <data name="GetCurrent_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="GetCurrent(retval)_label" xml:space="preserve">
-    <value>retval</value>
-  </data>
-  <data name="GetCurrent(retval)_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="GetCurrent(start)_label" xml:space="preserve">
-    <value>start</value>
-  </data>
-  <data name="GetCurrent(start)_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="GetCurrent(dt)_label" xml:space="preserve">
-    <value>dt</value>
-  </data>
-  <data name="GetCurrent(dt)_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="GetNext_label" xml:space="preserve">
-    <value>GetNext</value>
-  </data>
-  <data name="GetNext_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="GetNext(retval)_label" xml:space="preserve">
-    <value>retval</value>
-  </data>
-  <data name="GetNext(retval)_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="GetNext(start)_label" xml:space="preserve">
-    <value>start</value>
-  </data>
-  <data name="GetNext(start)_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="GetNext(dt)_label" xml:space="preserve">
-    <value>dt</value>
-  </data>
-  <data name="GetNext(dt)_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="GetNext_label" xml:space="preserve">
-    <value>GetNext</value>
-  </data>
-  <data name="GetNext_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="GetNext(retval)_label" xml:space="preserve">
-    <value>retval</value>
-  </data>
-  <data name="GetNext(retval)_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="GetNext(start)_label" xml:space="preserve">
-    <value>start</value>
-  </data>
-  <data name="GetNext(start)_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="GetRelative_label" xml:space="preserve">
-    <value>GetRelative</value>
-  </data>
-  <data name="GetRelative_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="GetRelative(retVal)_label" xml:space="preserve">
-    <value>retVal</value>
-  </data>
-  <data name="GetRelative(retVal)_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="GetRelative(dt)_label" xml:space="preserve">
-    <value>dt</value>
-  </data>
-  <data name="GetRelative(dt)_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="GetWithinInterval_label" xml:space="preserve">
-    <value>GetWithinInterval</value>
-  </data>
-  <data name="GetWithinInterval_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="GetWithinInterval(retVal)_label" xml:space="preserve">
-    <value>retVal</value>
-  </data>
-  <data name="GetWithinInterval(retVal)_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="GetWithinInterval(start)_label" xml:space="preserve">
-    <value>start</value>
-  </data>
-  <data name="GetWithinInterval(start)_description" xml:space="preserve">
-    <value>Start of the recurrence</value>
-  </data>
-  <data name="GetWithinInterval(from)_label" xml:space="preserve">
-    <value>from</value>
-  </data>
-  <data name="GetWithinInterval(from)_description" xml:space="preserve">
-    <value>Start of the interval</value>
-  </data>
-  <data name="GetWithinInterval(until)_label" xml:space="preserve">
-    <value>until</value>
-  </data>
-  <data name="GetWithinInterval(until)_description" xml:space="preserve">
-    <value>End of the interval</value>
+  <data name="CreateLoginToken_description" xml:space="preserve">
+    <value>Creates or re-creates the login token</value>
   </data>
 </root>

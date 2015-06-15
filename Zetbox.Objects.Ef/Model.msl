@@ -884,6 +884,7 @@
 	      <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="CalendarConfiguration" ColumnName="CalendarConfiguration" />
           <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+          <ScalarProperty Name="LoginToken" ColumnName="LoginToken" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ComplexProperty Name="OpenIDImpl" TypeName="Model.OpenIDEfImpl">
