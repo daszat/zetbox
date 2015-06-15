@@ -120,4 +120,7 @@
   <data name="CountAsTextFormatString" xml:space="preserve">
     <value>{0} Items</value>
   </data>
+  <data name="EnforceTrueAttributeErrorMessage" xml:space="preserve">
+    <value>The Field {0} has to be set.</value>
+  </data>
 </root>

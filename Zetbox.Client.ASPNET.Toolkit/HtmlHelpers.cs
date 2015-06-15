@@ -27,6 +27,7 @@ namespace Zetbox.Client.ASPNET
     using System.Reflection;
     using Zetbox.API;
     using Zetbox.Client.Presentables.ValueViewModels;
+    using System.Web;
 
     public static class HtmlHelpers
     {
@@ -55,6 +56,13 @@ namespace Zetbox.Client.ASPNET
         public static IDisposable Widget(this HtmlHelper html, string title)
         {
             return new WidgetContainer(html.ViewContext.Writer, title);
+        }
+        #endregion
+
+        #region ZbHiddenID
+        public static MvcHtmlString ZbHiddenID(this HtmlHelper helper, int ID)
+        {
+            return InputExtensions.Hidden(helper, "ID", ID > Helper.INVALIDID ? ID : Helper.INVALIDID);
         }
         #endregion
 
@@ -156,7 +164,7 @@ namespace Zetbox.Client.ASPNET
         }
         #endregion
 
-        #region ValidationMessageFor
+        #region ValidationMessages
         [Obsolete("Add them in MVC Editor Templates instead!")]
         public static MvcHtmlString ZbValidationMessageFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, string validationMessage = null, object htmlAttributes = null)
              where TValue : BaseValueViewModel
@@ -172,7 +180,34 @@ namespace Zetbox.Client.ASPNET
                 return ValidationExtensions.ValidationMessageFor<TModel, string>(html, AppendMember<TModel, TValue, string>(expression, "FormattedValue"), validationMessage, htmlAttributes);
             }
         }
+
+        public static MvcHtmlString StatusMessage(this HtmlHelper helper, string msg)
+        {
+            if (string.IsNullOrWhiteSpace(msg))
+            {
+                return MvcHtmlString.Empty;
+            }
+
+            return new MvcHtmlString(string.Format("<div class=\"alert alert-success\">{0}</div>", HttpUtility.HtmlEncode(msg)));
+        }
+
+        public static MvcHtmlString BootstrapValidationSummary(this HtmlHelper htmlHelper, bool excludePropertyErrors = false)
+        {
+            if (htmlHelper == null)
+            {
+                throw new ArgumentNullException("htmlHelper");
+            }
+
+            if (htmlHelper.ViewData.ModelState.IsValid || (excludePropertyErrors && (htmlHelper.ViewData.ModelState[""] == null || htmlHelper.ViewData.ModelState[""].Errors.Count() == 0)))
+            {
+                return MvcHtmlString.Empty;
+            }
+
+            return new MvcHtmlString(string.Format("<div class=\"alert alert-danger\">{0}</div>",
+                htmlHelper.ValidationSummary(excludePropertyErrors).ToHtmlString()));
+        }
         #endregion
+
 
         #region TextBox
         public static MvcHtmlString ZbTextBoxFor<TModel, TValue>(this HtmlHelper<TModel> html, Expression<Func<TModel, TValue>> expression, object htmlAttributes = null)
