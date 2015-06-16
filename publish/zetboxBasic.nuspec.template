@@ -120,6 +120,8 @@
     <!-- Server-side Components -->
     <file src="Server\Lucene.Net.dll" target="zetbox\Server" />
     <file src="Server\Lucene.Net.Contrib.*.dll" target="zetbox\Server" />
+    <file src="Server\Npgsql.dll" target="zetbox\Server" />
+    <file src="Server\Npgsql.EntityFrameworkLegacy.dll" target="zetbox\Server" />
     <file src="Server\Zetbox.API.Server.dll" target="zetbox\Server" />
     <file src="Server\Zetbox.API.Server.pdb" target="zetbox\Server" />
     <file src="Server\Zetbox.App.Projekte.Server.dll" target="zetbox\Server" />
