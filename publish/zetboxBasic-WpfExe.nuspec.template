@@ -17,7 +17,7 @@
       <dependency id="zetboxBasic" version="[##version##]" />
       <dependency id="zetboxBasic-ClientWpf" version="[##version##]" />
 
-      <dependency id="WPFExtensions" version="[1.0.0]" />
+      <dependency id="WPFExtensions" version="[1.0,2)" />
     </dependencies>
   </metadata>
   <files>

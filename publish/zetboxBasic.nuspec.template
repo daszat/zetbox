@@ -14,7 +14,7 @@
     <copyright>Copyright © 2012 dasz.at OG</copyright>
     <tags>Platform Database ORM Applications</tags>
     <dependencies>
-      <dependency id="NuGetPowerTools" version="0.29" />
+      <dependency id="NuGetPowerTools" version="[0.29,1)" />
     </dependencies>
   </metadata>
   <files>

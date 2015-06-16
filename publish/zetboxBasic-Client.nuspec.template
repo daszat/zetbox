@@ -17,7 +17,7 @@
       <dependency id="zetboxBasic" version="[##version##]" />
       <dependency id="zetboxBasic-Common" version="[##version##]" />
 
-      <dependency id="QuickGraph" version="[3.6.61119.7]" />
+      <dependency id="QuickGraph" version="[3.6,4)" />
     </dependencies>
   </metadata>
   <files>
