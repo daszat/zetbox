@@ -14,7 +14,7 @@
     <copyright>Copyright © 2012 dasz.at OG</copyright>
     <tags>Platform Database ORM Applications</tags>
     <dependencies>
-      <dependency id="NuGetPowerTools" version="0.29" />
+      <dependency id="NuGetPowerTools" version="[0.29,1)" />
     </dependencies>
   </metadata>
   <files>
@@ -120,6 +120,8 @@
     <!-- Server-side Components -->
     <file src="Server\Lucene.Net.dll" target="zetbox\Server" />
     <file src="Server\Lucene.Net.Contrib.*.dll" target="zetbox\Server" />
+    <file src="Server\Npgsql.dll" target="zetbox\Server" />
+    <file src="Server\Npgsql.EntityFrameworkLegacy.dll" target="zetbox\Server" />
     <file src="Server\Zetbox.API.Server.dll" target="zetbox\Server" />
     <file src="Server\Zetbox.API.Server.pdb" target="zetbox\Server" />
     <file src="Server\Zetbox.App.Projekte.Server.dll" target="zetbox\Server" />

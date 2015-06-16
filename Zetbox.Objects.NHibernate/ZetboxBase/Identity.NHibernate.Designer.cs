@@ -212,6 +212,64 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
         public static event PropertyIsValidHandler<Zetbox.App.Base.Identity> OnGroups_IsValid;
 
         /// <summary>
+        /// A token for simple login with a URL
+        /// </summary>
+
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        public Guid? LoginToken
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = Proxy.LoginToken;
+                if (OnLoginToken_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<Guid?>(__result);
+                    OnLoginToken_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (Proxy.LoginToken != value)
+                {
+                    var __oldValue = Proxy.LoginToken;
+                    var __newValue = value;
+                    if (OnLoginToken_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<Guid?>(__oldValue, __newValue);
+                        OnLoginToken_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("LoginToken", __oldValue, __newValue);
+                    Proxy.LoginToken = __newValue;
+                    NotifyPropertyChanged("LoginToken", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnLoginToken_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<Guid?>(__oldValue, __newValue);
+                        OnLoginToken_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("LoginToken");
+                }
+            }
+        }
+
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<Zetbox.App.Base.Identity, Guid?> OnLoginToken_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.Identity, Guid?> OnLoginToken_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.Identity, Guid?> OnLoginToken_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Base.Identity> OnLoginToken_IsValid;
+
+        /// <summary>
         /// Optional Open Id
         /// </summary>
         // CompoundObject property
@@ -374,6 +432,132 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
 
         public static event PropertyIsValidHandler<Zetbox.App.Base.Identity> OnUserName_IsValid;
 
+        /// <summary>
+        /// Clears the login token
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnClearLoginToken_Identity")]
+        public virtual void ClearLoginToken()
+        {
+            // base.ClearLoginToken();
+            if (OnClearLoginToken_Identity != null)
+            {
+                OnClearLoginToken_Identity(this);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on method Identity.ClearLoginToken");
+            }
+        }
+        public delegate void ClearLoginToken_Handler<T>(T obj);
+        public static event ClearLoginToken_Handler<Identity> OnClearLoginToken_Identity;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<Identity> OnClearLoginToken_Identity_CanExec;
+
+        [EventBasedMethod("OnClearLoginToken_Identity_CanExec")]
+        public virtual bool ClearLoginTokenCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnClearLoginToken_Identity_CanExec != null)
+				{
+					OnClearLoginToken_Identity_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Identity> OnClearLoginToken_Identity_CanExecReason;
+
+        [EventBasedMethod("OnClearLoginToken_Identity_CanExecReason")]
+        public virtual string ClearLoginTokenCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnClearLoginToken_Identity_CanExecReason != null)
+				{
+					OnClearLoginToken_Identity_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
+        /// <summary>
+        /// Creates or re-creates the login token
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnCreateLoginToken_Identity")]
+        public virtual void CreateLoginToken()
+        {
+            // base.CreateLoginToken();
+            if (OnCreateLoginToken_Identity != null)
+            {
+                OnCreateLoginToken_Identity(this);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on method Identity.CreateLoginToken");
+            }
+        }
+        public delegate void CreateLoginToken_Handler<T>(T obj);
+        public static event CreateLoginToken_Handler<Identity> OnCreateLoginToken_Identity;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<Identity> OnCreateLoginToken_Identity_CanExec;
+
+        [EventBasedMethod("OnCreateLoginToken_Identity_CanExec")]
+        public virtual bool CreateLoginTokenCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnCreateLoginToken_Identity_CanExec != null)
+				{
+					OnCreateLoginToken_Identity_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Identity> OnCreateLoginToken_Identity_CanExecReason;
+
+        [EventBasedMethod("OnCreateLoginToken_Identity_CanExecReason")]
+        public virtual string CreateLoginTokenCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnCreateLoginToken_Identity_CanExecReason != null)
+				{
+					OnCreateLoginToken_Identity_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
         public override Type GetImplementedInterface()
         {
             return typeof(Identity);
@@ -388,6 +572,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
 
             me.CalendarConfiguration = other.CalendarConfiguration;
             me.DisplayName = other.DisplayName;
+            me.LoginToken = other.LoginToken;
             me.Password = other.Password;
             me.UserName = other.UserName;
             if (me.OpenID == null && other.OpenID != null) {
@@ -414,6 +599,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
             {
                 case "CalendarConfiguration":
                 case "DisplayName":
+                case "LoginToken":
                 case "OpenID":
                 case "Password":
                 case "UserName":
@@ -494,6 +680,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
                         obj => obj.Groups,
                         null, // lists are read-only properties
                         obj => OnGroups_IsValid), 
+                    // else
+                    new PropertyDescriptorNHibernateImpl<Identity, Guid?>(
+                        lazyCtx,
+                        new Guid("267074ae-3a16-41bd-b9af-f09fa27e8d5a"),
+                        "LoginToken",
+                        null,
+                        obj => obj.LoginToken,
+                        (obj, val) => obj.LoginToken = val,
+						obj => OnLoginToken_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<Identity, Zetbox.App.Base.OpenID>(
                         lazyCtx,
@@ -585,6 +780,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
         {
             SetNotInitializedProperty("CalendarConfiguration");
             SetNotInitializedProperty("DisplayName");
+            SetNotInitializedProperty("LoginToken");
             SetNotInitializedProperty("Password");
             SetNotInitializedProperty("UserName");
             base.NotifyCreated();
@@ -705,6 +901,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
 
             public virtual ICollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl.Identity_memberOf_Group_RelationEntryProxy> Groups { get; set; }
 
+            public virtual Guid? LoginToken { get; set; }
+
             public virtual Zetbox.App.Base.OpenIDNHibernateImpl OpenID { get; set; }
 
             public virtual string Password { get; set; }
@@ -725,6 +923,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this.Proxy.CalendarConfiguration);
             binStream.Write(this.Proxy.DisplayName);
+            binStream.Write(this.Proxy.LoginToken);
             binStream.Write(this.OpenID);
             binStream.Write(this.Proxy.Password);
             binStream.Write(this.Proxy.UserName);
@@ -738,6 +937,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             this.Proxy.CalendarConfiguration = binStream.ReadString();
             this.Proxy.DisplayName = binStream.ReadString();
+            this.Proxy.LoginToken = binStream.ReadNullableGuid();
             {
                 // use backing store to avoid notifications
                 this.OpenIDImpl = binStream.ReadCompoundObject<Zetbox.App.Base.OpenIDNHibernateImpl>();

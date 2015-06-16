@@ -40,6 +40,15 @@ namespace Zetbox.App.Base
         ICollection<Zetbox.App.Base.Group> Groups { get; }
 
         /// <summary>
+        /// A token for simple login with a URL
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("267074ae-3a16-41bd-b9af-f09fa27e8d5a")]
+        Guid? LoginToken {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Optional Open Id
         /// </summary>
         [Zetbox.API.DefinitionGuid("9e5b1327-cb22-4442-a4b4-6cf6083e88a2")]
@@ -65,5 +74,15 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
+        /// <summary>
+        /// Clears the login token
+        /// </summary>
+        void ClearLoginToken();
+
+        /// <summary>
+        /// Creates or re-creates the login token
+        /// </summary>
+        void CreateLoginToken();
     }
 }

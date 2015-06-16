@@ -1170,6 +1170,17 @@ namespace Zetbox {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("da080b07-15d2-4cdf-bc1c-df776e094a75"); }
                                 }
                             }
+                            public static class Identity_Methods
+                            {
+                                public static TypedGuid<global::Zetbox.App.Base.Method> ClearLoginToken
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Method>("fd5f9934-0a81-45a0-b261-ee55e7b58776"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Method> CreateLoginToken
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Method>("e615f9bd-e868-44f8-968a-c1f93847dd2b"); }
+                                }
+                            }
                             public static class Identity_Properties
                             {
                                 public static TypedGuid<global::Zetbox.App.Base.Property> CalendarConfiguration
@@ -1183,6 +1194,10 @@ namespace Zetbox {
                                 public static TypedGuid<global::Zetbox.App.Base.Property> Groups
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("5f534204-f0d5-4d6f-8efa-7ff248580ba3"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> LoginToken
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("267074ae-3a16-41bd-b9af-f09fa27e8d5a"); }
                                 }
                                 public static TypedGuid<global::Zetbox.App.Base.Property> OpenID
                                 {

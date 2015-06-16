@@ -135,12 +135,6 @@
   <data name="GetCurrent(start)_description" xml:space="preserve">
     <value />
   </data>
-  <data name="GetCurrent(dt)_label" xml:space="preserve">
-    <value>dt</value>
-  </data>
-  <data name="GetCurrent(dt)_description" xml:space="preserve">
-    <value />
-  </data>
   <data name="GetCurrent_label" xml:space="preserve">
     <value>GetCurrent</value>
   </data>
@@ -159,22 +153,10 @@
   <data name="GetCurrent(start)_description" xml:space="preserve">
     <value />
   </data>
-  <data name="GetNext_label" xml:space="preserve">
-    <value>GetNext</value>
+  <data name="GetCurrent(dt)_label" xml:space="preserve">
+    <value>dt</value>
   </data>
-  <data name="GetNext_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="GetNext(retval)_label" xml:space="preserve">
-    <value>retval</value>
-  </data>
-  <data name="GetNext(retval)_description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="GetNext(start)_label" xml:space="preserve">
-    <value>start</value>
-  </data>
-  <data name="GetNext(start)_description" xml:space="preserve">
+  <data name="GetCurrent(dt)_description" xml:space="preserve">
     <value />
   </data>
   <data name="GetNext_label" xml:space="preserve">
@@ -199,6 +181,24 @@
     <value>dt</value>
   </data>
   <data name="GetNext(dt)_description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="GetNext_label" xml:space="preserve">
+    <value>GetNext</value>
+  </data>
+  <data name="GetNext_description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="GetNext(retval)_label" xml:space="preserve">
+    <value>retval</value>
+  </data>
+  <data name="GetNext(retval)_description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="GetNext(start)_label" xml:space="preserve">
+    <value>start</value>
+  </data>
+  <data name="GetNext(start)_description" xml:space="preserve">
     <value />
   </data>
   <data name="GetRelative_label" xml:space="preserve">

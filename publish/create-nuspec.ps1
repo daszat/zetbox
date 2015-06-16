@@ -17,7 +17,7 @@ $version = $json.NuGetVersionV2
 "" | out-host
 "Converting files" | out-host
 ls *.nuspec.template | % {
-	$file = $_.Name.Split('.')[0]
+	$file = $_.Name.Replace(".nuspec.template", "")
 	$file | out-host
 	Get-Content "$file.nuspec.template" | Foreach-object { 
 		$_ -replace '##version##', $version 

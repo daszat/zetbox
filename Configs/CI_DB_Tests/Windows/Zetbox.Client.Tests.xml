@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ZetboxConfig xmlns="http://dasz.at/Zetbox/">
-  <ConfigName>Zetbox.Client's Test Configuration</ConfigName>
-  <Client StartClient="false" ThrowErrors="true">
-    <Modules>
-      <Module>Zetbox.Client.ClientModule, Zetbox.Client</Module>
-    </Modules>
-  </Client>
-</ZetboxConfig>

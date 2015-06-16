@@ -16,6 +16,7 @@
     <dependencies>
       <dependency id="zetboxBasic" version="[##version##]" />
       <dependency id="zetboxBasic-Common" version="[##version##]" />
+      <dependency id="Npgsql" version="[2.2.2,3)" />
     </dependencies>
   </metadata>
   <files>

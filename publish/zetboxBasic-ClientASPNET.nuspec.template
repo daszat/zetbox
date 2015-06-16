@@ -17,7 +17,7 @@
       <dependency id="zetboxBasic" version="[##version##]" />
       <dependency id="zetboxBasic-Client" version="[##version##]" />
 
-      <dependency id="Autofac.Mvc3" version="[2.6.3.862]" />
+      <dependency id="Autofac.Mvc4" version="[3.1,4)" />
     </dependencies>
   </metadata>
   <files>

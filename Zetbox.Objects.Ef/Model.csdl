@@ -1802,6 +1802,7 @@
                         Relationship="Model.FK_Identities_memberOf_Groups_A"
                         FromRole="Identities"
                         ToRole="CollectionEntry" />
+    <Property Name="LoginToken" Type="Guid" Nullable="true"  />
     <Property Name="OpenIDImpl"
               Type="Model.OpenIDEfImpl"
               Nullable="false" />

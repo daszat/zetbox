@@ -219,7 +219,7 @@ namespace Zetbox.API.Tests
                 destinationIndex);
 
             // index is equal to or greater than the length of array
-            Assert.That(() => { collection.CopyTo(destination, destinationIndex); return null; }, Throws.ArgumentException, msg);
+            Assert.That(() => { collection.CopyTo(destination, destinationIndex); return true; }, Throws.ArgumentException, msg);
             AssertCollectionIsUnchanged();
             AssertInvariants(initialItems);
         }
