@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2015-06-15T12:33:18Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2015-06-16T08:44:59Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="84f486f7-19fe-49ad-8e4a-6c05089e7684">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.650235Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
@@ -26785,6 +26785,11 @@ public static void isValid_IsList(ValueTypeProperty obj, PropertyIsValidEventArg
     <ZetboxBase:MaxLength>200</ZetboxBase:MaxLength>
     <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
   </ZetboxBase:StringRangeConstraint>
+  <ZetboxBase:ViewReadOnlyConstraint ExportGuid="96bb5c1e-3ad9-4308-a420-1a2d03f8dc1f">
+    <ZetboxBase:ChangedOn>2015-06-16T06:44:59.984624Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>267074ae-3a16-41bd-b9af-f09fa27e8d5a</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2015-06-16T06:44:59.984624Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:ViewReadOnlyConstraint>
   <ZetboxBase:StringRangeConstraint ExportGuid="85381ee8-57d2-4df2-bf10-5ba8707ba63a">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:05.502053Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>0d499610-99e3-42cc-b71b-49ed1a356355</ZetboxBase:ConstrainedProperty>
