@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>zetboxBasic-TestsModules</id>
+    <version>##version##</version>
+    <title>zetbox Basic</title>
+    <authors>dasz.at OG</authors>
+    <owners>dasz.at OG</owners>
+    <licenseUrl>http://www.gnu.org/licenses/lgpl.html</licenseUrl>
+    <projectUrl>http://zetbox.at/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Content package for zetbox Test Modules. This package is only interesting for those who want to extend zetbox with EXTERNAL features and want to use zetbox test modules.</description>
+    <releaseNotes>First package.</releaseNotes>
+    <copyright>Copyright © 2015 dasz.at e.U.</copyright>
+    <tags>Platform Database ORM Applications</tags>
+    <dependencies>
+		<!-- Content only package -->
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\..\Modules\TestModules\**" target="zetbox/Modules/TestModules" />
+    <file src="..\..\Modules\TestModules.xml" target="zetbox/Modules" />
+    <file src="..\..\Data\TestModule.Data\**" target="zetbox/Data/TestModule.Data" />
+
+    <!-- this is required to avoid being seen as empty package by nuget -->
+    <!-- see #595 and #2590 on the nuget issue tracker                  -->
+    <file src="README.zetbox-TestsModules.txt" target="content" />
+  </files>
+</package>

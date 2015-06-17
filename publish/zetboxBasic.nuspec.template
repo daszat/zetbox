@@ -149,8 +149,11 @@
     <!-- DISCUSS: satellite assemblies should go to separate nupkg -->
     <file src="**\*.resources.dll" target="zetbox" exclude="Tests\**" />
 
-    <file src="..\..\Modules\**" target="zetbox/Modules" />
-    <file src="..\..\Data\**" target="zetbox/Data" />
+	<!-- Explicit add only ZetboxBasic and ZetboxUtil modules  -->
+    <file src="..\..\Modules\ZetboxBasic\**" target="zetbox/Modules/ZetboxBasic" />
+    <file src="..\..\Modules\ZetboxBasic.xml" target="zetbox/Modules" />
+    <file src="..\..\Modules\ZetboxUtils\**" target="zetbox/Modules/ZetboxUtils" />
+    <file src="..\..\Modules\ZetboxUtils.xml" target="zetbox/Modules" />
 
     <!-- HttpService loose files -->
     <file src="HttpService\**" target="zetbox/HttpService" exclude="HttpService\bin\**" />
