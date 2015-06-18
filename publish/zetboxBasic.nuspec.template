@@ -85,8 +85,9 @@
     <file src="Common\Mono.Cecil.Mdb.dll" target="zetbox\Common" />
     <file src="Common\Mono.Cecil.Pdb.dll" target="zetbox\Common" />
     <file src="Common\Mono.Cecil.Rocks.dll" target="zetbox\Common" />
-    <file src="Common\PdfSharp.Charting.dll" target="zetbox\Common" />
     <file src="Common\PdfSharp.dll" target="zetbox\Common" />
+    <file src="Common\PdfSharp.Charting.dll" target="zetbox\Common" />
+    <file src="Common\CryptSharp.dll" target="zetbox\Common" />
 
     <!-- Client-side Components -->
     <file src="Client\Zetbox.API.Client.dll" target="zetbox\Client" />

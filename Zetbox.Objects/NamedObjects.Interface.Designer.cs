@@ -1180,6 +1180,14 @@ namespace Zetbox {
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Method>("e615f9bd-e868-44f8-968a-c1f93847dd2b"); }
                                 }
+                                public static TypedGuid<global::Zetbox.App.Base.Method> SetPassword
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Method>("4d7683d1-b794-4242-aad8-868c4ebe7af8"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Method> SetPasswordUI
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Method>("c1756e35-0a40-4f1d-bd38-0cf2a3d7323d"); }
+                                }
                             }
                             public static class Identity_Properties
                             {

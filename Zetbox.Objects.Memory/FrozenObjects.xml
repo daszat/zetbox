@@ -52422,6 +52422,60 @@ public static void CreateLoginTokenCanExecReason(Identity obj, MethodReturnEvent
     <ZetboxBase:Name>CreateLoginToken</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>31d8890a-67fc-4a78-9d35-9ff0b9e09b4c</ZetboxBase:ObjectClass>
   </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="4d7683d1-b794-4242-aad8-868c4ebe7af8">
+    <ZetboxBase:CategoryTags>Login</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2015-06-18T07:16:12.810739Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void SetPassword(Identity obj, string plainTextPassword)
+{
+}
+
+[Invocation]
+public static void SetPasswordCanExec(Identity obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void SetPasswordCanExecReason(Identity obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2015-06-18T07:16:12.810739Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Sets a password hash from the given plain text password</ZetboxBase:Description>
+    <ZetboxBase:InvokeOnServer>false</ZetboxBase:InvokeOnServer>
+    <GUI:IsDisplayable>false</GUI:IsDisplayable>
+    <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
+    <ZetboxBase:Name>SetPassword</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>31d8890a-67fc-4a78-9d35-9ff0b9e09b4c</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="c1756e35-0a40-4f1d-bd38-0cf2a3d7323d">
+    <ZetboxBase:CategoryTags>Login</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2015-06-18T07:14:37.692239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void SetPasswordUI(Identity obj)
+{
+}
+
+[Invocation]
+public static void SetPasswordUICanExec(Identity obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void SetPasswordUICanExecReason(Identity obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2015-06-18T07:14:37.692239Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Sets a new password by opening a dialog</ZetboxBase:Description>
+    <GUI:Icon>d7d4767f-0b2d-468a-8931-866ce07828cb</GUI:Icon>
+    <ZetboxBase:InvokeOnServer>false</ZetboxBase:InvokeOnServer>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <ZetboxBase:Label>Set password</ZetboxBase:Label>
+    <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
+    <ZetboxBase:Name>SetPasswordUI</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>31d8890a-67fc-4a78-9d35-9ff0b9e09b4c</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
   <ZetboxBase:Method ExportGuid="5305b463-31bd-4ee4-af9a-c93d2cd7af31">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
@@ -53587,6 +53641,18 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
     <ZetboxBase:Method>bcdf14fa-0981-43e8-9e03-35b96173565f</ZetboxBase:Method>
     <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
     <ZetboxBase:Name>retVal</ZetboxBase:Name>
+  </ZetboxBase:StringParameter>
+  <ZetboxBase:StringParameter ExportGuid="7ed6293e-eaf3-45be-a7a2-6b7947067ca5">
+    <ZetboxBase:ChangedOn>2015-06-18T07:16:12.810739Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2015-06-18T07:16:12.810739Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>The password as plain text</ZetboxBase:Description>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Label>Password</ZetboxBase:Label>
+    <ZetboxBase:Method>4d7683d1-b794-4242-aad8-868c4ebe7af8</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>plainTextPassword</ZetboxBase:Name>
   </ZetboxBase:StringParameter>
   <ZetboxBase:StringParameter ExportGuid="3b9969db-2565-4e93-b615-1eef1f8b4d42">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:01.139804Z</ZetboxBase:ChangedOn>

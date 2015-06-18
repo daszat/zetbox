@@ -84,5 +84,15 @@ namespace Zetbox.App.Base
         /// Creates or re-creates the login token
         /// </summary>
         void CreateLoginToken();
+
+        /// <summary>
+        /// Sets a password hash from the given plain text password
+        /// </summary>
+        void SetPassword(string plainTextPassword);
+
+        /// <summary>
+        /// Sets a new password by opening a dialog
+        /// </summary>
+        void SetPasswordUI();
     }
 }

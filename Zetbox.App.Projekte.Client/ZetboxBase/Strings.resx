@@ -123,6 +123,21 @@
   <data name="IsNullable" xml:space="preserve">
     <value>Is nullable</value>
   </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="PasswordDoesNotMatch" xml:space="preserve">
+    <value>Passwords does not match, nothing done</value>
+  </data>
+  <data name="PasswordEmpty" xml:space="preserve">
+    <value>Empty password, noting done</value>
+  </data>
+  <data name="RepeatPassword" xml:space="preserve">
+    <value>Repeat password</value>
+  </data>
+  <data name="SetPasswordDlgTitle" xml:space="preserve">
+    <value>Set password</value>
+  </data>
   <data name="ShowPropertyWhenFinished" xml:space="preserve">
     <value>Show prop.</value>
   </data>

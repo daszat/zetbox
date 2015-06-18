@@ -643,6 +643,132 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
         }
         // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
+        /// <summary>
+        /// Sets a password hash from the given plain text password
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnSetPassword_Identity")]
+        public virtual void SetPassword(string plainTextPassword)
+        {
+            // base.SetPassword();
+            if (OnSetPassword_Identity != null)
+            {
+                OnSetPassword_Identity(this, plainTextPassword);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on method Identity.SetPassword");
+            }
+        }
+        public delegate void SetPassword_Handler<T>(T obj, string plainTextPassword);
+        public static event SetPassword_Handler<Identity> OnSetPassword_Identity;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<Identity> OnSetPassword_Identity_CanExec;
+
+        [EventBasedMethod("OnSetPassword_Identity_CanExec")]
+        public virtual bool SetPasswordCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnSetPassword_Identity_CanExec != null)
+				{
+					OnSetPassword_Identity_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Identity> OnSetPassword_Identity_CanExecReason;
+
+        [EventBasedMethod("OnSetPassword_Identity_CanExecReason")]
+        public virtual string SetPasswordCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnSetPassword_Identity_CanExecReason != null)
+				{
+					OnSetPassword_Identity_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
+        /// <summary>
+        /// Sets a new password by opening a dialog
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnSetPasswordUI_Identity")]
+        public virtual void SetPasswordUI()
+        {
+            // base.SetPasswordUI();
+            if (OnSetPasswordUI_Identity != null)
+            {
+                OnSetPasswordUI_Identity(this);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on method Identity.SetPasswordUI");
+            }
+        }
+        public delegate void SetPasswordUI_Handler<T>(T obj);
+        public static event SetPasswordUI_Handler<Identity> OnSetPasswordUI_Identity;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<Identity> OnSetPasswordUI_Identity_CanExec;
+
+        [EventBasedMethod("OnSetPasswordUI_Identity_CanExec")]
+        public virtual bool SetPasswordUICanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnSetPasswordUI_Identity_CanExec != null)
+				{
+					OnSetPasswordUI_Identity_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Identity> OnSetPasswordUI_Identity_CanExecReason;
+
+        [EventBasedMethod("OnSetPasswordUI_Identity_CanExecReason")]
+        public virtual string SetPasswordUICanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnSetPasswordUI_Identity_CanExecReason != null)
+				{
+					OnSetPasswordUI_Identity_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
         public override Type GetImplementedInterface()
         {
             return typeof(Identity);

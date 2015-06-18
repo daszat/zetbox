@@ -24,17 +24,6 @@ namespace Zetbox.Client.ASPNET
             return scope.Context;
         }
 
-        /// <summary>
-        /// Hashed a password. null is a valid argument as this means, that there is no local account (local password) and it is a pure OpenID account
-        /// </summary>
-        /// <param name="password">a password to has or null/empty</param>
-        /// <returns>a passwordhash or null</returns>
-        public static string GetPasswordHash(string password)
-        {
-            if (string.IsNullOrEmpty(password)) return null;
-            return Crypter.Blowfish.Crypt(password);
-        }
-
         private Identity GetUser(IZetboxContext ctx, string username)
         {
             return ctx.GetQuery<Identity>().FirstOrDefault(i => i.UserName.ToLower() == username.ToLower());
@@ -114,7 +103,7 @@ namespace Zetbox.Client.ASPNET
             {
                 var ctx = GetContext();
                 var usr = GetUser(ctx, username);
-                usr.Password = GetPasswordHash(newPassword);
+                usr.SetPassword(newPassword);
                 ctx.SubmitChanges();
                 return true;
             }
@@ -126,7 +115,7 @@ namespace Zetbox.Client.ASPNET
             var password = Membership.GeneratePassword(9, 1);
             var ctx = GetContext();
             var usr = GetUser(ctx, username);
-            usr.Password = GetPasswordHash(password);
+            usr.SetPassword(password);
             ctx.SubmitChanges();
             return password;
         }
@@ -157,7 +146,7 @@ namespace Zetbox.Client.ASPNET
 
             var usr = ctx.Create<Identity>();
             usr.UserName = username;
-            usr.Password = GetPasswordHash(password);
+            usr.SetPassword(password);
             usr.DisplayName = username;
             usr.Groups.Add(NamedObjects.Base.Groups.Everyone.Find(ctx));
             ctx.SubmitChanges();
@@ -179,7 +168,7 @@ namespace Zetbox.Client.ASPNET
 
             var usr = ctx.Create<Identity>();
             usr.UserName = userName;
-            usr.Password = GetPasswordHash(password);
+            usr.SetPassword(password);
             usr.DisplayName = userName;
             usr.Groups.Add(NamedObjects.Base.Groups.Everyone.Find(ctx));
             ctx.SubmitChanges();
@@ -221,7 +210,7 @@ namespace Zetbox.Client.ASPNET
             {
                 throw new InvalidOperationException("user does not exist");
             }
-            usr.Password = GetPasswordHash(password);
+            usr.SetPassword(password);
             ctx.SubmitChanges();
 
             return userName;
