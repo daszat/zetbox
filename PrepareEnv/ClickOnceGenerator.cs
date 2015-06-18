@@ -22,7 +22,6 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Xml;
-using Mono.Cecil;
 using Mono.Security;
 using Mono.Security.X509;
 
@@ -134,17 +133,19 @@ namespace PrepareEnv
             doc.Save(GetManifestTemplateName(envConfig));
         }
 
-        private static void FillClickOnceAssemblyId(AssemblyDefinition assemblyDef, XmlNode assemblyIdentity)
+        private static void FillClickOnceAssemblyId(System.Reflection.Assembly assemblyDef, XmlNode assemblyIdentity)
         {
-            var isX86 = (assemblyDef.MainModule.Attributes & ModuleAttributes.Required32Bit) == ModuleAttributes.Required32Bit;
+            var assemblyName = assemblyDef.GetName();
+            var isX86 = assemblyName.ProcessorArchitecture == System.Reflection.ProcessorArchitecture.X86;
 
-            SetOrReplaceAttribute(assemblyIdentity, "name", null, assemblyDef.Name.Name);
-            SetOrReplaceAttribute(assemblyIdentity, "version", null, assemblyDef.Name.Version.ToString());
-            SetOrReplaceAttribute(assemblyIdentity, "language", null, string.IsNullOrEmpty(assemblyDef.Name.Culture) ? "neutral" : assemblyDef.Name.Culture);
+            SetOrReplaceAttribute(assemblyIdentity, "name", null, assemblyName.Name);
+            SetOrReplaceAttribute(assemblyIdentity, "version", null, assemblyName.Version.ToString());
+            SetOrReplaceAttribute(assemblyIdentity, "language", null, string.IsNullOrEmpty(assemblyName.CultureInfo.Name) ? "neutral" : assemblyName.CultureInfo.Name);
             SetOrReplaceAttribute(assemblyIdentity, "processorArchitecture", null, isX86 ? "x86" : "msil");
-            if (assemblyDef.Name.PublicKeyToken != null && assemblyDef.Name.PublicKeyToken.Length > 0)
+            var puplicKeyToken = assemblyName.GetPublicKeyToken();
+            if (puplicKeyToken != null && puplicKeyToken.Length > 0)
             {
-                SetOrReplaceAttribute(assemblyIdentity, "publicKeyToken", null, FormatKey(assemblyDef.Name.PublicKeyToken));
+                SetOrReplaceAttribute(assemblyIdentity, "publicKeyToken", null, FormatKey(puplicKeyToken));
             }
             else
             {
@@ -152,9 +153,9 @@ namespace PrepareEnv
             }
         }
 
-        private static AssemblyDefinition FillAppId(EnvConfig envConfig, XmlNode assemblyIdentity, AppId appId)
+        private static System.Reflection.Assembly FillAppId(EnvConfig envConfig, XmlNode assemblyIdentity, AppId appId)
         {
-            var client = AssemblyDefinition.ReadAssembly(envConfig.ClientExe);
+            var client = System.Reflection.Assembly.ReflectionOnlyLoadFrom(envConfig.ClientExe);
 
             FillClickOnceAssemblyId(client, assemblyIdentity);
             // this seems to be a constant
@@ -197,7 +198,7 @@ namespace PrepareEnv
 
                 var assemblyIdentity = doc.CreateNode(XmlNodeType.Element, "assemblyIdentity", ASMv2_NS);
 
-                FillClickOnceAssemblyId(AssemblyDefinition.ReadAssembly(file), assemblyIdentity);
+                FillClickOnceAssemblyId(System.Reflection.Assembly.ReflectionOnlyLoadFrom(file), assemblyIdentity);
                 dependentAssembly.AppendChild(assemblyIdentity);
 
                 var hash = CreateHashNode(file, nsmgr, doc);
@@ -402,9 +403,21 @@ namespace PrepareEnv
             {
                 var result = new[] {
                     Environment.GetEnvironmentVariable("WindowsSdkDir"),
+                    @"C:\Program Files\Microsoft SDKs\Windows\v8.1",
+                    @"C:\Program Files\Microsoft SDKs\Windows\v8.1A",
+                    @"C:\Program Files\Microsoft SDKs\Windows\v8.0",
+                    @"C:\Program Files\Microsoft SDKs\Windows\v8.0A",
                     @"C:\Program Files\Microsoft SDKs\Windows\v7.1",
-                    @"C:\Program Files\Microsoft SDKs\Windows\v6.0"
-                }.FirstOrDefault(p => p != null && Directory.Exists(p));
+                    @"C:\Program Files\Microsoft SDKs\Windows\v7.1A",
+                    @"C:\Program Files\Microsoft SDKs\Windows\v6.0",
+                    @"C:\Program Files (x86)\Microsoft SDKs\Windows\v8.1",
+                    @"C:\Program Files (x86)\Microsoft SDKs\Windows\v8.1A",
+                    @"C:\Program Files (x86)\Microsoft SDKs\Windows\v8.0",
+                    @"C:\Program Files (x86)\Microsoft SDKs\Windows\v8.0A",
+                    @"C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1",
+                    @"C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A",
+                    @"C:\Program Files (x86)\Microsoft SDKs\Windows\v6.0",
+                }.FirstOrDefault(p => p != null && Directory.Exists(p) && File.Exists(Path.Combine(p, "Bin", "NETFX 4.0 Tools", "mage.exe")));
                 if (result == null)
                     throw new InvalidOperationException("%WindowsSdkDir% is empty or doesn't exist");
                 return result;
