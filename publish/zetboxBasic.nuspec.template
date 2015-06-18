@@ -151,10 +151,10 @@
     <file src="**\*.resources.dll" target="zetbox" exclude="Tests\**" />
 
 	<!-- Explicit add only ZetboxBasic and ZetboxUtil modules  -->
-    <file src="..\..\Modules\ZetboxBasic\**" target="zetbox/Modules/ZetboxBasic" />
     <file src="..\..\Modules\ZetboxBasic.xml" target="zetbox/Modules" />
-    <file src="..\..\Modules\ZetboxUtils\**" target="zetbox/Modules/ZetboxUtils" />
+    <file src="..\..\Modules\ZetboxBasic\**" target="zetbox/Modules/ZetboxBasic" />
     <file src="..\..\Modules\ZetboxUtils.xml" target="zetbox/Modules" />
+    <!-- Empty folder <file src="..\..\Modules\ZetboxUtils\**" target="zetbox/Modules/ZetboxUtils" />-->
 
     <!-- HttpService loose files -->
     <file src="HttpService\**" target="zetbox/HttpService" exclude="HttpService\bin\**" />

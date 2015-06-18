@@ -18,8 +18,8 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="..\..\Modules\TestModules\**" target="zetbox/Modules/TestModules" />
     <file src="..\..\Modules\TestModules.xml" target="zetbox/Modules" />
+    <!-- Empty folder <file src="..\..\Modules\TestModules\**" target="zetbox/Modules/TestModules" />-->
     <file src="..\..\Data\TestModule.Data\**" target="zetbox/Data/TestModule.Data" />
 
     <!-- this is required to avoid being seen as empty package by nuget -->
