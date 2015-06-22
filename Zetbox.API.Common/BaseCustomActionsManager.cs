@@ -27,6 +27,7 @@ namespace Zetbox.App.Extensions
     using Autofac.Core.Registration;
     using Zetbox.API;
     using Zetbox.API.Common;
+    using Zetbox.API.Configuration;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
@@ -90,6 +91,8 @@ namespace Zetbox.App.Extensions
 
         protected string ImplementationAssemblyName { get; private set; }
 
+        protected ZetboxConfig cfg;
+
         /// <summary>
         /// Initialises a new instance of the BaseCustomActionsManager class 
         /// using the specified extra suffix and the assembly of the actual type of this class.
@@ -107,6 +110,7 @@ namespace Zetbox.App.Extensions
             ImplementationAssemblyName = this.GetType().Assembly.FullName;
 
             container.TryResolve<IAssetsManager>(out _assetsMgr);
+            cfg = container.Resolve<ZetboxConfig>();
         }
 
         /// <summary>
@@ -187,7 +191,10 @@ namespace Zetbox.App.Extensions
                                 }
                                 catch (TypeLoadException tlex)
                                 {
-                                    Log.WarnFormat("Failed to reflect over Method [{0}].{1}. Unable to load type [{2}]. Ignoring and continuing", assembly.FullName, m.Name, tlex.TypeName);
+                                    if (!cfg.IsFallback)
+                                    {
+                                        Log.WarnFormat("Failed to reflect over Method [{0}].{1}. Unable to load type [{2}]. Ignoring and continuing", assembly.FullName, m.Name, tlex.TypeName);
+                                    }
                                 }
                             }
                         }
@@ -204,15 +211,18 @@ namespace Zetbox.App.Extensions
                 }
                 catch (ReflectionTypeLoadException ex)
                 {
-                    if (ex.LoaderExceptions.Count() == 1)
+                    if (!cfg.IsFallback)
                     {
-                        Log.Warn(String.Format("Failed to reflect over Assembly [{0}]. Ignoring and continuing.", assembly.FullName), ex.LoaderExceptions.Single());
-                    }
-                    else
-                    {
-                        foreach (var lex in ex.LoaderExceptions)
+                        if (ex.LoaderExceptions.Count() == 1)
                         {
-                            Log.Warn(String.Format("Failed to reflect over Assembly [{0}]. Ignoring and continuing. Multiple Errors:", assembly.FullName), lex);
+                            Log.Warn(String.Format("Failed to reflect over Assembly [{0}]. Ignoring and continuing.", assembly.FullName), ex.LoaderExceptions.Single());
+                        }
+                        else
+                        {
+                            foreach (var lex in ex.LoaderExceptions)
+                            {
+                                Log.Warn(String.Format("Failed to reflect over Assembly [{0}]. Ignoring and continuing. Multiple Errors:", assembly.FullName), lex);
+                            }
                         }
                     }
                 }
@@ -290,7 +300,10 @@ namespace Zetbox.App.Extensions
             }
             else
             {
-                Log.WarnFormat("Cannot find Type {0}\n", implTypeName);
+                if (!cfg.IsFallback)
+                {
+                    Log.WarnFormat("Cannot find Type {0}\n", implTypeName);
+                }
             }
         }
 
@@ -303,11 +316,14 @@ namespace Zetbox.App.Extensions
             MethodInfo methodInfo = implType.FindMethod(method.Name, paramTypes);
             if (methodInfo == null)
             {
-                Log.WarnFormat(
-                    "Couldn't find method '{0}.{1}' with parameters: {2}\n",
-                    method.ObjectClass.Name,
-                    method.Name,
-                    String.Join(", ", paramTypes.Select(t => t == null ? "null" : t.FullName).ToArray()));
+                if (!cfg.IsFallback)
+                {
+                    Log.WarnFormat(
+                        "Couldn't find method '{0}.{1}' with parameters: {2}\n",
+                        method.ObjectClass.Name,
+                        method.Name,
+                        String.Join(", ", paramTypes.Select(t => t == null ? "null" : t.FullName).ToArray()));
+                }
                 return null;
             }
             else
@@ -322,10 +338,13 @@ namespace Zetbox.App.Extensions
             var pi = implType.FindProperty(method.Name + execSuffix).SingleOrDefault();
             if (pi == null)
             {
-                Log.WarnFormat(
-                    "Couldn't find method '{0}.{1}'\n",
-                    method.ObjectClass.Name,
-                    method.Name + execSuffix);
+                if (!cfg.IsFallback)
+                {
+                    Log.WarnFormat(
+                        "Couldn't find method '{0}.{1}'\n",
+                        method.ObjectClass.Name,
+                        method.Name + execSuffix);
+                }
                 return null;
             }
             else
