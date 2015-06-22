@@ -5,90 +5,31 @@
     <!-- EntitySets for all classes -->
     <EntitySet Name="AbstractModuleMemberEfImpl" EntityType="Model.AbstractModuleMemberEfImpl" />
     <EntitySet Name="AccessControlEfImpl" EntityType="Model.AccessControlEfImpl" />
-    <EntitySet Name="ANewObjectClassEfImpl" EntityType="Model.ANewObjectClassEfImpl" />
-    <EntitySet Name="AnotherTestEfImpl" EntityType="Model.AnotherTestEfImpl" />
-    <EntitySet Name="AntwortEfImpl" EntityType="Model.AntwortEfImpl" />
-    <EntitySet Name="AnyReferenceTestObjectEfImpl" EntityType="Model.AnyReferenceTestObjectEfImpl" />
     <EntitySet Name="ApplicationEfImpl" EntityType="Model.ApplicationEfImpl" />
     <EntitySet Name="AssemblyEfImpl" EntityType="Model.AssemblyEfImpl" />
-    <EntitySet Name="AuftragEfImpl" EntityType="Model.AuftragEfImpl" />
-    <EntitySet Name="Auftrag_Rights" EntityType="Model.Auftrag_Rights" />
-    <AssociationSet Name="FK_Auftraege_Rights" Association="Model.FK_Auftraege_Rights">
-      <End Role="Auftrag" EntitySet="AuftragEfImpl" />
-      <End Role="Auftrag_Rights" EntitySet="Auftrag_Rights" />
-    </AssociationSet>
     <EntitySet Name="BaseParameterEfImpl" EntityType="Model.BaseParameterEfImpl" />
     <EntitySet Name="BlobEfImpl" EntityType="Model.BlobEfImpl" />
-    <EntitySet Name="CalendarBookEfImpl" EntityType="Model.CalendarBookEfImpl" />
-    <EntitySet Name="CalendarBook_Rights" EntityType="Model.CalendarBook_Rights" />
-    <AssociationSet Name="FK_CalendarBooks_Rights" Association="Model.FK_CalendarBooks_Rights">
-      <End Role="CalendarBook" EntitySet="CalendarBookEfImpl" />
-      <End Role="CalendarBook_Rights" EntitySet="CalendarBook_Rights" />
-    </AssociationSet>
-    <EntitySet Name="CompanyEfImpl" EntityType="Model.CompanyEfImpl" />
     <EntitySet Name="ConstraintEfImpl" EntityType="Model.ConstraintEfImpl" />
     <EntitySet Name="ControlKindEfImpl" EntityType="Model.ControlKindEfImpl" />
     <EntitySet Name="CurrentSchemaEfImpl" EntityType="Model.CurrentSchemaEfImpl" />
     <EntitySet Name="DataTypeEfImpl" EntityType="Model.DataTypeEfImpl" />
-    <EntitySet Name="DeactivatableTestObjectEfImpl" EntityType="Model.DeactivatableTestObjectEfImpl" />
     <EntitySet Name="DefaultPropertyValueEfImpl" EntityType="Model.DefaultPropertyValueEfImpl" />
-    <EntitySet Name="DocumentTestObjectEfImpl" EntityType="Model.DocumentTestObjectEfImpl" />
     <EntitySet Name="EnumerationEntryEfImpl" EntityType="Model.EnumerationEntryEfImpl" />
-    <EntitySet Name="EventEfImpl" EntityType="Model.EventEfImpl" />
-    <EntitySet Name="Event_Rights" EntityType="Model.Event_Rights" />
-    <AssociationSet Name="FK_Events_Rights" Association="Model.FK_Events_Rights">
-      <End Role="Event" EntitySet="EventEfImpl" />
-      <End Role="Event_Rights" EntitySet="Event_Rights" />
-    </AssociationSet>
-    <EntitySet Name="EventTestObjectEfImpl" EntityType="Model.EventTestObjectEfImpl" />
     <EntitySet Name="ExceptionLogEntryEfImpl" EntityType="Model.ExceptionLogEntryEfImpl" />
-    <EntitySet Name="ExcerptEfImpl" EntityType="Model.ExcerptEfImpl" />
-    <EntitySet Name="FileEfImpl" EntityType="Model.FileEfImpl" />
-    <EntitySet Name="FileImportConfigurationEfImpl" EntityType="Model.FileImportConfigurationEfImpl" />
     <EntitySet Name="FilterConfigurationEfImpl" EntityType="Model.FilterConfigurationEfImpl" />
-    <EntitySet Name="FragebogenEfImpl" EntityType="Model.FragebogenEfImpl" />
     <EntitySet Name="GroupEfImpl" EntityType="Model.GroupEfImpl" />
     <EntitySet Name="IconEfImpl" EntityType="Model.IconEfImpl" />
     <EntitySet Name="IdentityEfImpl" EntityType="Model.IdentityEfImpl" />
     <EntitySet Name="InstanceConstraintEfImpl" EntityType="Model.InstanceConstraintEfImpl" />
-    <EntitySet Name="KundeEfImpl" EntityType="Model.KundeEfImpl" />
     <EntitySet Name="MethodEfImpl" EntityType="Model.MethodEfImpl" />
-    <EntitySet Name="MethodTestEfImpl" EntityType="Model.MethodTestEfImpl" />
     <EntitySet Name="MigrationLogEfImpl" EntityType="Model.MigrationLogEfImpl" />
     <EntitySet Name="MigrationProjectEfImpl" EntityType="Model.MigrationProjectEfImpl" />
-    <EntitySet Name="MitarbeiterEfImpl" EntityType="Model.MitarbeiterEfImpl" />
     <EntitySet Name="ModuleEfImpl" EntityType="Model.ModuleEfImpl" />
-    <EntitySet Name="MuhblahEfImpl" EntityType="Model.MuhblahEfImpl" />
-    <EntitySet Name="N_to_M_relations_AEfImpl" EntityType="Model.N_to_M_relations_AEfImpl" />
-    <EntitySet Name="N_to_M_relations_BEfImpl" EntityType="Model.N_to_M_relations_BEfImpl" />
     <EntitySet Name="NavigationEntryEfImpl" EntityType="Model.NavigationEntryEfImpl" />
-    <EntitySet Name="One_to_N_relations_NEfImpl" EntityType="Model.One_to_N_relations_NEfImpl" />
-    <EntitySet Name="One_to_N_relations_OneEfImpl" EntityType="Model.One_to_N_relations_OneEfImpl" />
-    <EntitySet Name="One_to_N_relations_OrderedNEfImpl" EntityType="Model.One_to_N_relations_OrderedNEfImpl" />
-    <EntitySet Name="OrderedNEndEfImpl" EntityType="Model.OrderedNEndEfImpl" />
-    <EntitySet Name="OrderedOneEndEfImpl" EntityType="Model.OrderedOneEndEfImpl" />
-    <EntitySet Name="ProjektEfImpl" EntityType="Model.ProjektEfImpl" />
-    <EntitySet Name="Projekt_Rights" EntityType="Model.Projekt_Rights" />
-    <AssociationSet Name="FK_Projekte_Rights" Association="Model.FK_Projekte_Rights">
-      <End Role="Projekt" EntitySet="ProjektEfImpl" />
-      <End Role="Projekt_Rights" EntitySet="Projekt_Rights" />
-    </AssociationSet>
     <EntitySet Name="PropertyEfImpl" EntityType="Model.PropertyEfImpl" />
-    <EntitySet Name="PropertyTestBaseEfImpl" EntityType="Model.PropertyTestBaseEfImpl" />
-    <EntitySet Name="RecurrenceRuleTesterEfImpl" EntityType="Model.RecurrenceRuleTesterEfImpl" />
     <EntitySet Name="RelationEfImpl" EntityType="Model.RelationEfImpl" />
     <EntitySet Name="RelationEndEfImpl" EntityType="Model.RelationEndEfImpl" />
-    <EntitySet Name="RequiredParentEfImpl" EntityType="Model.RequiredParentEfImpl" />
-    <EntitySet Name="RequiredParentChildEfImpl" EntityType="Model.RequiredParentChildEfImpl" />
     <EntitySet Name="SavedListConfigurationEfImpl" EntityType="Model.SavedListConfigurationEfImpl" />
-    <EntitySet Name="SecurityChangeRightEfImpl" EntityType="Model.SecurityChangeRightEfImpl" />
-    <EntitySet Name="SecurityTestChildEfImpl" EntityType="Model.SecurityTestChildEfImpl" />
-    <EntitySet Name="SecurityTestChild_Rights" EntityType="Model.SecurityTestChild_Rights" />
-    <AssociationSet Name="FK_SecurityTestChildren_Rights" Association="Model.FK_SecurityTestChildren_Rights">
-      <End Role="SecurityTestChild" EntitySet="SecurityTestChildEfImpl" />
-      <End Role="SecurityTestChild_Rights" EntitySet="SecurityTestChild_Rights" />
-    </AssociationSet>
-    <EntitySet Name="SecurityTestParentEfImpl" EntityType="Model.SecurityTestParentEfImpl" />
     <EntitySet Name="SequenceEfImpl" EntityType="Model.SequenceEfImpl" />
     <EntitySet Name="SequenceDataEfImpl" EntityType="Model.SequenceDataEfImpl" />
     <EntitySet Name="ServiceDescriptorEfImpl" EntityType="Model.ServiceDescriptorEfImpl" />
@@ -96,33 +37,10 @@
     <EntitySet Name="SourceEnumEfImpl" EntityType="Model.SourceEnumEfImpl" />
     <EntitySet Name="SourceTableEfImpl" EntityType="Model.SourceTableEfImpl" />
     <EntitySet Name="StagingDatabaseEfImpl" EntityType="Model.StagingDatabaseEfImpl" />
-    <EntitySet Name="SyncProviderEfImpl" EntityType="Model.SyncProviderEfImpl" />
     <EntitySet Name="TagCacheEfImpl" EntityType="Model.TagCacheEfImpl" />
-    <EntitySet Name="TaskEfImpl" EntityType="Model.TaskEfImpl" />
-    <EntitySet Name="Task_Rights" EntityType="Model.Task_Rights" />
-    <AssociationSet Name="FK_Tasks_Rights" Association="Model.FK_Tasks_Rights">
-      <End Role="Task" EntitySet="TaskEfImpl" />
-      <End Role="Task_Rights" EntitySet="Task_Rights" />
-    </AssociationSet>
-    <EntitySet Name="TestCustomObjectEfImpl" EntityType="Model.TestCustomObjectEfImpl" />
-    <EntitySet Name="TestDecimalEfImpl" EntityType="Model.TestDecimalEfImpl" />
-    <EntitySet Name="TestObjClassEfImpl" EntityType="Model.TestObjClassEfImpl" />
-    <EntitySet Name="TestStudentEfImpl" EntityType="Model.TestStudentEfImpl" />
-    <EntitySet Name="TPHBaseObjEfImpl" EntityType="Model.TPHBaseObjEfImpl" />
     <EntitySet Name="ViewDescriptorEfImpl" EntityType="Model.ViewDescriptorEfImpl" />
     <EntitySet Name="ViewModelDescriptorEfImpl" EntityType="Model.ViewModelDescriptorEfImpl" />
-    <EntitySet Name="WorkScheduleEfImpl" EntityType="Model.WorkScheduleEfImpl" />
-    <EntitySet Name="WorkScheduleRuleEfImpl" EntityType="Model.WorkScheduleRuleEfImpl" />
     <!-- EntitySets and AssociationSets for all object-object CollectionEntrys -->
-    <EntitySet Name="N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl" EntityType="Model.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl" />
-    <AssociationSet Name="FK_ASide_connectsTo_BSide_A" Association="Model.FK_ASide_connectsTo_BSide_A" >
-      <End Role="ASide" EntitySet="N_to_M_relations_AEfImpl" />
-      <End Role="CollectionEntry" EntitySet="N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ASide_connectsTo_BSide_B" Association="Model.FK_ASide_connectsTo_BSide_B" >
-      <End Role="BSide" EntitySet="N_to_M_relations_BEfImpl" />
-      <End Role="CollectionEntry" EntitySet="N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl" />
-    </AssociationSet>
     <EntitySet Name="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl" EntityType="Model.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl" />
     <AssociationSet Name="FK_CalculatedReference_dependsOn_InputProperties_A" Association="Model.FK_CalculatedReference_dependsOn_InputProperties_A" >
       <End Role="CalculatedReference" EntitySet="PropertyEfImpl" />
@@ -131,42 +49,6 @@
     <AssociationSet Name="FK_CalculatedReference_dependsOn_InputProperties_B" Association="Model.FK_CalculatedReference_dependsOn_InputProperties_B" >
       <End Role="InputProperties" EntitySet="PropertyEfImpl" />
       <End Role="CollectionEntry" EntitySet="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl" />
-    </AssociationSet>
-    <EntitySet Name="CalendarBook_shared_r_Group_RelationEntryEfImpl" EntityType="Model.CalendarBook_shared_r_Group_RelationEntryEfImpl" />
-    <AssociationSet Name="FK_Calendar_shared_r_GroupReaders_A" Association="Model.FK_Calendar_shared_r_GroupReaders_A" >
-      <End Role="Calendar" EntitySet="CalendarBookEfImpl" />
-      <End Role="CollectionEntry" EntitySet="CalendarBook_shared_r_Group_RelationEntryEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Calendar_shared_r_GroupReaders_B" Association="Model.FK_Calendar_shared_r_GroupReaders_B" >
-      <End Role="GroupReaders" EntitySet="GroupEfImpl" />
-      <End Role="CollectionEntry" EntitySet="CalendarBook_shared_r_Group_RelationEntryEfImpl" />
-    </AssociationSet>
-    <EntitySet Name="CalendarBook_shared_r_Identity_RelationEntryEfImpl" EntityType="Model.CalendarBook_shared_r_Identity_RelationEntryEfImpl" />
-    <AssociationSet Name="FK_Calendar_shared_r_Readers_A" Association="Model.FK_Calendar_shared_r_Readers_A" >
-      <End Role="Calendar" EntitySet="CalendarBookEfImpl" />
-      <End Role="CollectionEntry" EntitySet="CalendarBook_shared_r_Identity_RelationEntryEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Calendar_shared_r_Readers_B" Association="Model.FK_Calendar_shared_r_Readers_B" >
-      <End Role="Readers" EntitySet="IdentityEfImpl" />
-      <End Role="CollectionEntry" EntitySet="CalendarBook_shared_r_Identity_RelationEntryEfImpl" />
-    </AssociationSet>
-    <EntitySet Name="CalendarBook_shared_w_Group_RelationEntryEfImpl" EntityType="Model.CalendarBook_shared_w_Group_RelationEntryEfImpl" />
-    <AssociationSet Name="FK_Calendar_shared_w_GroupWriters_A" Association="Model.FK_Calendar_shared_w_GroupWriters_A" >
-      <End Role="Calendar" EntitySet="CalendarBookEfImpl" />
-      <End Role="CollectionEntry" EntitySet="CalendarBook_shared_w_Group_RelationEntryEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Calendar_shared_w_GroupWriters_B" Association="Model.FK_Calendar_shared_w_GroupWriters_B" >
-      <End Role="GroupWriters" EntitySet="GroupEfImpl" />
-      <End Role="CollectionEntry" EntitySet="CalendarBook_shared_w_Group_RelationEntryEfImpl" />
-    </AssociationSet>
-    <EntitySet Name="CalendarBook_shared_w_Identity_RelationEntryEfImpl" EntityType="Model.CalendarBook_shared_w_Identity_RelationEntryEfImpl" />
-    <AssociationSet Name="FK_Calendar_shared_w_Writers_A" Association="Model.FK_Calendar_shared_w_Writers_A" >
-      <End Role="Calendar" EntitySet="CalendarBookEfImpl" />
-      <End Role="CollectionEntry" EntitySet="CalendarBook_shared_w_Identity_RelationEntryEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Calendar_shared_w_Writers_B" Association="Model.FK_Calendar_shared_w_Writers_B" >
-      <End Role="Writers" EntitySet="IdentityEfImpl" />
-      <End Role="CollectionEntry" EntitySet="CalendarBook_shared_w_Identity_RelationEntryEfImpl" />
     </AssociationSet>
     <EntitySet Name="DataType_implements_Interface_RelationEntryEfImpl" EntityType="Model.DataType_implements_Interface_RelationEntryEfImpl" />
     <AssociationSet Name="FK_DataType_implements_ImplementedInterfaces_A" Association="Model.FK_DataType_implements_ImplementedInterfaces_A" >
@@ -177,15 +59,6 @@
       <End Role="ImplementedInterfaces" EntitySet="DataTypeEfImpl" />
       <End Role="CollectionEntry" EntitySet="DataType_implements_Interface_RelationEntryEfImpl" />
     </AssociationSet>
-    <EntitySet Name="File_has_Blob_RelationEntryEfImpl" EntityType="Model.File_has_Blob_RelationEntryEfImpl" />
-    <AssociationSet Name="FK_Document_has_Revisions_A" Association="Model.FK_Document_has_Revisions_A" >
-      <End Role="Document" EntitySet="FileEfImpl" />
-      <End Role="CollectionEntry" EntitySet="File_has_Blob_RelationEntryEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Document_has_Revisions_B" Association="Model.FK_Document_has_Revisions_B" >
-      <End Role="Revisions" EntitySet="BlobEfImpl" />
-      <End Role="CollectionEntry" EntitySet="File_has_Blob_RelationEntryEfImpl" />
-    </AssociationSet>
     <EntitySet Name="Identity_memberOf_Group_RelationEntryEfImpl" EntityType="Model.Identity_memberOf_Group_RelationEntryEfImpl" />
     <AssociationSet Name="FK_Identities_memberOf_Groups_A" Association="Model.FK_Identities_memberOf_Groups_A" >
       <End Role="Identities" EntitySet="IdentityEfImpl" />
@@ -194,15 +67,6 @@
     <AssociationSet Name="FK_Identities_memberOf_Groups_B" Association="Model.FK_Identities_memberOf_Groups_B" >
       <End Role="Groups" EntitySet="GroupEfImpl" />
       <End Role="CollectionEntry" EntitySet="Identity_memberOf_Group_RelationEntryEfImpl" />
-    </AssociationSet>
-    <EntitySet Name="Muhblah_has_TestCustomObject_RelationEntryEfImpl" EntityType="Model.Muhblah_has_TestCustomObject_RelationEntryEfImpl" />
-    <AssociationSet Name="FK_MB_Many_Role_has_TCO_ManyList_Role_A" Association="Model.FK_MB_Many_Role_has_TCO_ManyList_Role_A" >
-      <End Role="MB_Many_Role" EntitySet="MuhblahEfImpl" />
-      <End Role="CollectionEntry" EntitySet="Muhblah_has_TestCustomObject_RelationEntryEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_MB_Many_Role_has_TCO_ManyList_Role_B" Association="Model.FK_MB_Many_Role_has_TCO_ManyList_Role_B" >
-      <End Role="TCO_ManyList_Role" EntitySet="TestCustomObjectEfImpl" />
-      <End Role="CollectionEntry" EntitySet="Muhblah_has_TestCustomObject_RelationEntryEfImpl" />
     </AssociationSet>
     <EntitySet Name="NavigationEntry_accessed_by_Group_RelationEntryEfImpl" EntityType="Model.NavigationEntry_accessed_by_Group_RelationEntryEfImpl" />
     <AssociationSet Name="FK_NavigationScreen_accessed_by_Groups_A" Association="Model.FK_NavigationScreen_accessed_by_Groups_A" >
@@ -231,15 +95,6 @@
       <End Role="SecondaryControlKinds" EntitySet="ControlKindEfImpl" />
       <End Role="CollectionEntry" EntitySet="ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl" />
     </AssociationSet>
-    <EntitySet Name="Projekt_haben_Mitarbeiter_RelationEntryEfImpl" EntityType="Model.Projekt_haben_Mitarbeiter_RelationEntryEfImpl" />
-    <AssociationSet Name="FK_Projekte_haben_Mitarbeiter_A" Association="Model.FK_Projekte_haben_Mitarbeiter_A" >
-      <End Role="Projekte" EntitySet="ProjektEfImpl" />
-      <End Role="CollectionEntry" EntitySet="Projekt_haben_Mitarbeiter_RelationEntryEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Projekte_haben_Mitarbeiter_B" Association="Model.FK_Projekte_haben_Mitarbeiter_B" >
-      <End Role="Mitarbeiter" EntitySet="MitarbeiterEfImpl" />
-      <End Role="CollectionEntry" EntitySet="Projekt_haben_Mitarbeiter_RelationEntryEfImpl" />
-    </AssociationSet>
     <EntitySet Name="RoleMembership_resolves_Relation_RelationEntryEfImpl" EntityType="Model.RoleMembership_resolves_Relation_RelationEntryEfImpl" />
     <AssociationSet Name="FK_RoleMembership_resolves_Relations_A" Association="Model.FK_RoleMembership_resolves_Relations_A" >
       <End Role="RoleMembership" EntitySet="AccessControlEfImpl" />
@@ -257,15 +112,6 @@
     <AssociationSet Name="FK_SourceColumn_created_Property_B" Association="Model.FK_SourceColumn_created_Property_B" >
       <End Role="Property" EntitySet="PropertyEfImpl" />
       <End Role="CollectionEntry" EntitySet="SourceColumn_created_Property_RelationEntryEfImpl" />
-    </AssociationSet>
-    <EntitySet Name="TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl" EntityType="Model.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl" />
-    <AssociationSet Name="FK_Student_füllt_aus_Testbogen_A" Association="Model.FK_Student_füllt_aus_Testbogen_A" >
-      <End Role="Student" EntitySet="TestStudentEfImpl" />
-      <End Role="CollectionEntry" EntitySet="TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Student_füllt_aus_Testbogen_B" Association="Model.FK_Student_füllt_aus_Testbogen_B" >
-      <End Role="Testbogen" EntitySet="FragebogenEfImpl" />
-      <End Role="CollectionEntry" EntitySet="TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl" />
     </AssociationSet>
     <EntitySet Name="IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl" EntityType="Model.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl" />
     <AssociationSet Name="FK_UniqueContraints_ensures_unique_on_Properties_A" Association="Model.FK_UniqueContraints_ensures_unique_on_Properties_A" >
@@ -338,22 +184,6 @@
       <End Role="Assembly" EntitySet="AssemblyEfImpl" />
       <End Role="CreatedBy" EntitySet="IdentityEfImpl" />
     </AssociationSet>
-    <AssociationSet Name="FK_Auftrag_ChangedBy_ChangedBy" Association="Model.FK_Auftrag_ChangedBy_ChangedBy" >
-      <End Role="Auftrag" EntitySet="AuftragEfImpl" />
-      <End Role="ChangedBy" EntitySet="IdentityEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Auftrag_CreatedBy_CreatedBy" Association="Model.FK_Auftrag_CreatedBy_CreatedBy" >
-      <End Role="Auftrag" EntitySet="AuftragEfImpl" />
-      <End Role="CreatedBy" EntitySet="IdentityEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Auftrag_has_Kunde" Association="Model.FK_Auftrag_has_Kunde" >
-      <End Role="Auftrag" EntitySet="AuftragEfImpl" />
-      <End Role="Kunde" EntitySet="KundeEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Auftrag_has_Mitarbeiter" Association="Model.FK_Auftrag_has_Mitarbeiter" >
-      <End Role="Auftrag" EntitySet="AuftragEfImpl" />
-      <End Role="Mitarbeiter" EntitySet="MitarbeiterEfImpl" />
-    </AssociationSet>
     <AssociationSet Name="FK_BaseObjectClass_has_SubClasses" Association="Model.FK_BaseObjectClass_has_SubClasses" >
       <End Role="BaseObjectClass" EntitySet="DataTypeEfImpl" />
       <End Role="SubClasses" EntitySet="DataTypeEfImpl" />
@@ -369,10 +199,6 @@
     <AssociationSet Name="FK_BaseProperty_has_Module" Association="Model.FK_BaseProperty_has_Module" >
       <End Role="BaseProperty" EntitySet="PropertyEfImpl" />
       <End Role="Module" EntitySet="ModuleEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_BaseWorkSchedule_has_ChildWorkSchedules" Association="Model.FK_BaseWorkSchedule_has_ChildWorkSchedules" >
-      <End Role="BaseWorkSchedule" EntitySet="WorkScheduleEfImpl" />
-      <End Role="ChildWorkSchedules" EntitySet="WorkScheduleEfImpl" />
     </AssociationSet>
     <AssociationSet Name="FK_BoolProperty_has_FalseIcon" Association="Model.FK_BoolProperty_has_FalseIcon" >
       <End Role="BoolProperty" EntitySet="PropertyEfImpl" />
@@ -390,22 +216,6 @@
       <End Role="CalculatedReference" EntitySet="PropertyEfImpl" />
       <End Role="ReferencedClass" EntitySet="DataTypeEfImpl" />
     </AssociationSet>
-    <AssociationSet Name="FK_Calendar_has_Owner" Association="Model.FK_Calendar_has_Owner" >
-      <End Role="Calendar" EntitySet="CalendarBookEfImpl" />
-      <End Role="Owner" EntitySet="IdentityEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Calendar_was_ChangedBy" Association="Model.FK_Calendar_was_ChangedBy" >
-      <End Role="Calendar" EntitySet="CalendarBookEfImpl" />
-      <End Role="ChangedBy" EntitySet="IdentityEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Calendar_was_CreatedBy" Association="Model.FK_Calendar_was_CreatedBy" >
-      <End Role="Calendar" EntitySet="CalendarBookEfImpl" />
-      <End Role="CreatedBy" EntitySet="IdentityEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Child_allow_Identity" Association="Model.FK_Child_allow_Identity" >
-      <End Role="Child" EntitySet="SecurityTestChildEfImpl" />
-      <End Role="Identity" EntitySet="IdentityEfImpl" />
-    </AssociationSet>
     <AssociationSet Name="FK_ChildControlKinds_have_a_Parent" Association="Model.FK_ChildControlKinds_have_a_Parent" >
       <End Role="ChildControlKinds" EntitySet="ControlKindEfImpl" />
       <End Role="Parent" EntitySet="ControlKindEfImpl" />
@@ -413,10 +223,6 @@
     <AssociationSet Name="FK_CompoundObjectProperty_has_CompoundObjectDefinition" Association="Model.FK_CompoundObjectProperty_has_CompoundObjectDefinition" >
       <End Role="CompoundObjectProperty" EntitySet="PropertyEfImpl" />
       <End Role="CompoundObjectDefinition" EntitySet="DataTypeEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Configuration_of_Identity" Association="Model.FK_Configuration_of_Identity" >
-      <End Role="Configuration" EntitySet="FileImportConfigurationEfImpl" />
-      <End Role="Identity" EntitySet="IdentityEfImpl" />
     </AssociationSet>
     <AssociationSet Name="FK_ConstrainedProperty_has_Constraints" Association="Model.FK_ConstrainedProperty_has_Constraints" >
       <End Role="ConstrainedProperty" EntitySet="PropertyEfImpl" />
@@ -478,10 +284,6 @@
       <End Role="Document" EntitySet="BlobEfImpl" />
       <End Role="CreatedBy" EntitySet="IdentityEfImpl" />
     </AssociationSet>
-    <AssociationSet Name="FK_Ein_Fragebogen_enthaelt_gute_Antworten" Association="Model.FK_Ein_Fragebogen_enthaelt_gute_Antworten" >
-      <End Role="Ein_Fragebogen" EntitySet="FragebogenEfImpl" />
-      <End Role="gute_Antworten" EntitySet="AntwortEfImpl" />
-    </AssociationSet>
     <AssociationSet Name="FK_EnumDefaultValue_defaults_to_EnumValue" Association="Model.FK_EnumDefaultValue_defaults_to_EnumValue" >
       <End Role="EnumDefaultValue" EntitySet="DefaultPropertyValueEfImpl" />
       <End Role="EnumValue" EntitySet="EnumerationEntryEfImpl" />
@@ -505,42 +307,6 @@
     <AssociationSet Name="FK_EnumParameter_has_Enumeration" Association="Model.FK_EnumParameter_has_Enumeration" >
       <End Role="EnumParameter" EntitySet="BaseParameterEfImpl" />
       <End Role="Enumeration" EntitySet="DataTypeEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Event_of_Calendar" Association="Model.FK_Event_of_Calendar" >
-      <End Role="Event" EntitySet="EventEfImpl" />
-      <End Role="Calendar" EntitySet="CalendarBookEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Event_was_ChangedBy" Association="Model.FK_Event_was_ChangedBy" >
-      <End Role="Event" EntitySet="EventEfImpl" />
-      <End Role="ChangedBy" EntitySet="IdentityEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Event_was_CreatedBy" Association="Model.FK_Event_was_CreatedBy" >
-      <End Role="Event" EntitySet="EventEfImpl" />
-      <End Role="CreatedBy" EntitySet="IdentityEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_File_has_Blob" Association="Model.FK_File_has_Blob" >
-      <End Role="File" EntitySet="FileEfImpl" />
-      <End Role="Blob" EntitySet="BlobEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_File_has_Excerpt" Association="Model.FK_File_has_Excerpt" >
-      <End Role="File" EntitySet="FileEfImpl" />
-      <End Role="Excerpt" EntitySet="ExcerptEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_File_was_ChangedBy" Association="Model.FK_File_was_ChangedBy" >
-      <End Role="File" EntitySet="FileEfImpl" />
-      <End Role="ChangedBy" EntitySet="IdentityEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_File_was_CreatedBy" Association="Model.FK_File_was_CreatedBy" >
-      <End Role="File" EntitySet="FileEfImpl" />
-      <End Role="CreatedBy" EntitySet="IdentityEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_FileImportConfiguration_was_ChangedBy" Association="Model.FK_FileImportConfiguration_was_ChangedBy" >
-      <End Role="FileImportConfiguration" EntitySet="FileImportConfigurationEfImpl" />
-      <End Role="ChangedBy" EntitySet="IdentityEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_FileImportConfiguration_was_CreatedBy" Association="Model.FK_FileImportConfiguration_was_CreatedBy" >
-      <End Role="FileImportConfiguration" EntitySet="FileImportConfigurationEfImpl" />
-      <End Role="CreatedBy" EntitySet="IdentityEfImpl" />
     </AssociationSet>
     <AssociationSet Name="FK_FilterConfiguration_has_Module" Association="Model.FK_FilterConfiguration_has_Module" >
       <End Role="FilterConfiguration" EntitySet="FilterConfigurationEfImpl" />
@@ -582,14 +348,6 @@
       <End Role="Icon" EntitySet="IconEfImpl" />
       <End Role="Module" EntitySet="ModuleEfImpl" />
     </AssociationSet>
-    <AssociationSet Name="FK_Kunde_was_ChangedBy" Association="Model.FK_Kunde_was_ChangedBy" >
-      <End Role="Kunde" EntitySet="KundeEfImpl" />
-      <End Role="ChangedBy" EntitySet="IdentityEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Kunde_was_CreatedBy" Association="Model.FK_Kunde_was_CreatedBy" >
-      <End Role="Kunde" EntitySet="KundeEfImpl" />
-      <End Role="CreatedBy" EntitySet="IdentityEfImpl" />
-    </AssociationSet>
     <AssociationSet Name="FK_LstCfg_has_Type" Association="Model.FK_LstCfg_has_Type" >
       <End Role="LstCfg" EntitySet="SavedListConfigurationEfImpl" />
       <End Role="Type" EntitySet="DataTypeEfImpl" />
@@ -597,18 +355,6 @@
     <AssociationSet Name="FK_LstCfg_of_Owner" Association="Model.FK_LstCfg_of_Owner" >
       <End Role="LstCfg" EntitySet="SavedListConfigurationEfImpl" />
       <End Role="Owner" EntitySet="IdentityEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_MB_Lst_Role_hasOther_TCO_Role" Association="Model.FK_MB_Lst_Role_hasOther_TCO_Role" >
-      <End Role="MB_Lst_Role" EntitySet="MuhblahEfImpl" />
-      <End Role="TCO_Role" EntitySet="TestCustomObjectEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_MB_One_Role_loves_TCO_One_Role" Association="Model.FK_MB_One_Role_loves_TCO_One_Role" >
-      <End Role="MB_One_Role" EntitySet="MuhblahEfImpl" />
-      <End Role="TCO_One_Role" EntitySet="TestCustomObjectEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_MB_Role_has_TCO_Lst_Role" Association="Model.FK_MB_Role_has_TCO_Lst_Role" >
-      <End Role="MB_Role" EntitySet="MuhblahEfImpl" />
-      <End Role="TCO_Lst_Role" EntitySet="TestCustomObjectEfImpl" />
     </AssociationSet>
     <AssociationSet Name="FK_Method_has_Icon" Association="Model.FK_Method_has_Icon" >
       <End Role="Method" EntitySet="MethodEfImpl" />
@@ -644,18 +390,6 @@
     </AssociationSet>
     <AssociationSet Name="FK_MigrationProject_was_CreatedBy" Association="Model.FK_MigrationProject_was_CreatedBy" >
       <End Role="MigrationProject" EntitySet="MigrationProjectEfImpl" />
-      <End Role="CreatedBy" EntitySet="IdentityEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Mitarbeiter_is_a_Identity" Association="Model.FK_Mitarbeiter_is_a_Identity" >
-      <End Role="Mitarbeiter" EntitySet="MitarbeiterEfImpl" />
-      <End Role="Identity" EntitySet="IdentityEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Mitarbeiter_was_ChangedBy" Association="Model.FK_Mitarbeiter_was_ChangedBy" >
-      <End Role="Mitarbeiter" EntitySet="MitarbeiterEfImpl" />
-      <End Role="ChangedBy" EntitySet="IdentityEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Mitarbeiter_was_CreatedBy" Association="Model.FK_Mitarbeiter_was_CreatedBy" >
-      <End Role="Mitarbeiter" EntitySet="MitarbeiterEfImpl" />
       <End Role="CreatedBy" EntitySet="IdentityEfImpl" />
     </AssociationSet>
     <AssociationSet Name="FK_Module_contains_Assemblies" Association="Model.FK_Module_contains_Assemblies" >
@@ -718,33 +452,9 @@
       <End Role="ObjRefPlaceholderProp" EntitySet="PropertyEfImpl" />
       <End Role="ReferencedClass" EntitySet="DataTypeEfImpl" />
     </AssociationSet>
-    <AssociationSet Name="FK_OneEnd_hasMany_NEnds" Association="Model.FK_OneEnd_hasMany_NEnds" >
-      <End Role="OneEnd" EntitySet="OrderedOneEndEfImpl" />
-      <End Role="NEnds" EntitySet="OrderedNEndEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_OneSide_connectsTo_NSide" Association="Model.FK_OneSide_connectsTo_NSide" >
-      <End Role="OneSide" EntitySet="One_to_N_relations_OneEfImpl" />
-      <End Role="NSide" EntitySet="One_to_N_relations_NEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_OneSide_connectsTo_OrderedNSide" Association="Model.FK_OneSide_connectsTo_OrderedNSide" >
-      <End Role="OneSide" EntitySet="One_to_N_relations_OneEfImpl" />
-      <End Role="OrderedNSide" EntitySet="One_to_N_relations_OrderedNEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Parent_has_Children" Association="Model.FK_Parent_has_Children" >
-      <End Role="Parent" EntitySet="MethodTestEfImpl" />
-      <End Role="Children" EntitySet="MethodTestEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Parent_has_Children2" Association="Model.FK_Parent_has_Children2" >
-      <End Role="Parent" EntitySet="SecurityTestParentEfImpl" />
-      <End Role="Children2" EntitySet="SecurityTestChildEfImpl" />
-    </AssociationSet>
     <AssociationSet Name="FK_Parent_navigates_to_Children" Association="Model.FK_Parent_navigates_to_Children" >
       <End Role="Parent" EntitySet="NavigationEntryEfImpl" />
       <End Role="Children" EntitySet="NavigationEntryEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Parent_of_Children" Association="Model.FK_Parent_of_Children" >
-      <End Role="Parent" EntitySet="RequiredParentEfImpl" />
-      <End Role="Children" EntitySet="RequiredParentChildEfImpl" />
     </AssociationSet>
     <AssociationSet Name="FK_Presentable_has_DefaultKind" Association="Model.FK_Presentable_has_DefaultKind" >
       <End Role="Presentable" EntitySet="ViewModelDescriptorEfImpl" />
@@ -757,22 +467,6 @@
     <AssociationSet Name="FK_Presentable_may_has_DefaultPropViewModelDescriptor" Association="Model.FK_Presentable_may_has_DefaultPropViewModelDescriptor" >
       <End Role="Presentable" EntitySet="DataTypeEfImpl" />
       <End Role="DefaultPropViewModelDescriptor" EntitySet="ViewModelDescriptorEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Projekt_has_Auftraege" Association="Model.FK_Projekt_has_Auftraege" >
-      <End Role="Projekt" EntitySet="ProjektEfImpl" />
-      <End Role="Auftraege" EntitySet="AuftragEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Projekt_has_Tasks" Association="Model.FK_Projekt_has_Tasks" >
-      <End Role="Projekt" EntitySet="ProjektEfImpl" />
-      <End Role="Tasks" EntitySet="TaskEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Projekt_was_ChangedBy" Association="Model.FK_Projekt_was_ChangedBy" >
-      <End Role="Projekt" EntitySet="ProjektEfImpl" />
-      <End Role="ChangedBy" EntitySet="IdentityEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Projekt_was_CreatedBy" Association="Model.FK_Projekt_was_CreatedBy" >
-      <End Role="Projekt" EntitySet="ProjektEfImpl" />
-      <End Role="CreatedBy" EntitySet="IdentityEfImpl" />
     </AssociationSet>
     <AssociationSet Name="FK_Property_has_DefaultValue" Association="Model.FK_Property_has_DefaultValue" >
       <End Role="Property" EntitySet="PropertyEfImpl" />
@@ -845,14 +539,6 @@
     <AssociationSet Name="FK_SearchScreen_of_Type" Association="Model.FK_SearchScreen_of_Type" >
       <End Role="SearchScreen" EntitySet="NavigationEntryEfImpl" />
       <End Role="Type" EntitySet="DataTypeEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SecurityTestChild_was_ChangedBy" Association="Model.FK_SecurityTestChild_was_ChangedBy" >
-      <End Role="SecurityTestChild" EntitySet="SecurityTestChildEfImpl" />
-      <End Role="ChangedBy" EntitySet="IdentityEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SecurityTestChild_was_CreatedBy" Association="Model.FK_SecurityTestChild_was_CreatedBy" >
-      <End Role="SecurityTestChild" EntitySet="SecurityTestChildEfImpl" />
-      <End Role="CreatedBy" EntitySet="IdentityEfImpl" />
     </AssociationSet>
     <AssociationSet Name="FK_Sequence_has_Data" Association="Model.FK_Sequence_has_Data" >
       <End Role="Sequence" EntitySet="SequenceEfImpl" />
@@ -934,54 +620,6 @@
       <End Role="StagingDatabase" EntitySet="StagingDatabaseEfImpl" />
       <End Role="CreatedBy" EntitySet="IdentityEfImpl" />
     </AssociationSet>
-    <AssociationSet Name="FK_SyncAccount_for_Calendar" Association="Model.FK_SyncAccount_for_Calendar" >
-      <End Role="SyncAccount" EntitySet="SyncProviderEfImpl" />
-      <End Role="Calendar" EntitySet="CalendarBookEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SyncAccount_of_WorkSchedule" Association="Model.FK_SyncAccount_of_WorkSchedule" >
-      <End Role="SyncAccount" EntitySet="SyncProviderEfImpl" />
-      <End Role="WorkSchedule" EntitySet="WorkScheduleEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SyncAccount_was_ChangedBy" Association="Model.FK_SyncAccount_was_ChangedBy" >
-      <End Role="SyncAccount" EntitySet="SyncProviderEfImpl" />
-      <End Role="ChangedBy" EntitySet="IdentityEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SyncAccount_was_CreatedBy" Association="Model.FK_SyncAccount_was_CreatedBy" >
-      <End Role="SyncAccount" EntitySet="SyncProviderEfImpl" />
-      <End Role="CreatedBy" EntitySet="IdentityEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Task_was_ChangedBy" Association="Model.FK_Task_was_ChangedBy" >
-      <End Role="Task" EntitySet="TaskEfImpl" />
-      <End Role="ChangedBy" EntitySet="IdentityEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Task_was_CreatedBy" Association="Model.FK_Task_was_CreatedBy" >
-      <End Role="Task" EntitySet="TaskEfImpl" />
-      <End Role="CreatedBy" EntitySet="IdentityEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Test_of_Event" Association="Model.FK_Test_of_Event" >
-      <End Role="Test" EntitySet="EventTestObjectEfImpl" />
-      <End Role="Event" EntitySet="EventEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TestObj_has_AnotherFile" Association="Model.FK_TestObj_has_AnotherFile" >
-      <End Role="TestObj" EntitySet="DocumentTestObjectEfImpl" />
-      <End Role="AnotherFile" EntitySet="FileEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TestObj_has_AnyFile" Association="Model.FK_TestObj_has_AnyFile" >
-      <End Role="TestObj" EntitySet="DocumentTestObjectEfImpl" />
-      <End Role="AnyFile" EntitySet="FileEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TestObjClass_has_ObjectProp" Association="Model.FK_TestObjClass_has_ObjectProp" >
-      <End Role="TestObjClass" EntitySet="TestObjClassEfImpl" />
-      <End Role="ObjectProp" EntitySet="KundeEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TPHBaseObj_was_ChangedBy" Association="Model.FK_TPHBaseObj_was_ChangedBy" >
-      <End Role="TPHBaseObj" EntitySet="TPHBaseObjEfImpl" />
-      <End Role="ChangedBy" EntitySet="IdentityEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TPHBaseObj_was_CreatedBy" Association="Model.FK_TPHBaseObj_was_CreatedBy" >
-      <End Role="TPHBaseObj" EntitySet="TPHBaseObjEfImpl" />
-      <End Role="CreatedBy" EntitySet="IdentityEfImpl" />
-    </AssociationSet>
     <AssociationSet Name="FK_ViewDescriptor_has_Module" Association="Model.FK_ViewDescriptor_has_Module" >
       <End Role="ViewDescriptor" EntitySet="ViewDescriptorEfImpl" />
       <End Role="Module" EntitySet="ModuleEfImpl" />
@@ -1009,34 +647,6 @@
     <AssociationSet Name="FK_ViewModelDescriptor_has_Module" Association="Model.FK_ViewModelDescriptor_has_Module" >
       <End Role="ViewModelDescriptor" EntitySet="ViewModelDescriptorEfImpl" />
       <End Role="Module" EntitySet="ModuleEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_WorkSchedule_has_Module" Association="Model.FK_WorkSchedule_has_Module" >
-      <End Role="WorkSchedule" EntitySet="WorkScheduleEfImpl" />
-      <End Role="Module" EntitySet="ModuleEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_WorkSchedule_has_WorkScheduleRules" Association="Model.FK_WorkSchedule_has_WorkScheduleRules" >
-      <End Role="WorkSchedule" EntitySet="WorkScheduleEfImpl" />
-      <End Role="WorkScheduleRules" EntitySet="WorkScheduleRuleEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_WorkSchedule_was_ChangedBy" Association="Model.FK_WorkSchedule_was_ChangedBy" >
-      <End Role="WorkSchedule" EntitySet="WorkScheduleEfImpl" />
-      <End Role="ChangedBy" EntitySet="IdentityEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_WorkSchedule_was_CreatedBy" Association="Model.FK_WorkSchedule_was_CreatedBy" >
-      <End Role="WorkSchedule" EntitySet="WorkScheduleEfImpl" />
-      <End Role="CreatedBy" EntitySet="IdentityEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_WorkScheduleRule_has_Module" Association="Model.FK_WorkScheduleRule_has_Module" >
-      <End Role="WorkScheduleRule" EntitySet="WorkScheduleRuleEfImpl" />
-      <End Role="Module" EntitySet="ModuleEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_WorkScheduleRule_was_ChangedBy" Association="Model.FK_WorkScheduleRule_was_ChangedBy" >
-      <End Role="WorkScheduleRule" EntitySet="WorkScheduleRuleEfImpl" />
-      <End Role="ChangedBy" EntitySet="IdentityEfImpl" />
-    </AssociationSet>
-    <AssociationSet Name="FK_WorkScheduleRule_was_CreatedBy" Association="Model.FK_WorkScheduleRule_was_CreatedBy" >
-      <End Role="WorkScheduleRule" EntitySet="WorkScheduleRuleEfImpl" />
-      <End Role="CreatedBy" EntitySet="IdentityEfImpl" />
     </AssociationSet>
 
     <FunctionImport Name="GetContinuousSequenceNumber" ReturnType="Collection(Int32)">
@@ -1099,44 +709,6 @@
                         ToRole="ObjectClass" />
     <Property Name="RightsImpl" Type="Int32" Nullable="true"  />
   </EntityType>
-  <EntityType Name="ANewObjectClassEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="TestString" Type="String" Nullable="true" MaxLength="2147483647"  />
-  </EntityType>
-  <EntityType Name="AnotherTestEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-  </EntityType>
-  <EntityType Name="AntwortEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Frage" Type="String" Nullable="false" MaxLength="2147483647"  />
-    <NavigationProperty Name="FragebogenImpl"
-                        Relationship="Model.FK_Ein_Fragebogen_enthaelt_gute_Antworten"
-                        FromRole="gute_Antworten"
-                        ToRole="Ein_Fragebogen" />
-    <Property Name="gute_Antworten_pos" Type="Int32" Nullable="true" />
-    <Property Name="FragenNummer" Type="Int32" Nullable="false"  />
-    <Property Name="GegebeneAntwort" Type="Int32" Nullable="true"  />
-  </EntityType>
-  <EntityType Name="AnyReferenceTestObjectEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="AnyImpl"
-              Type="Model.AnyReferenceEfImpl"
-              Nullable="false" />
-    <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="200"  />
-    <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-  </EntityType>
   <EntityType Name="ApplicationEfImpl">
     <Key>
       <PropertyRef Name="ID" />
@@ -1195,61 +767,6 @@
                         ToRole="Module" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="200"  />
   </EntityType>
-  <EntityType Name="AuftragEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Auftragsname" Type="String" Nullable="true" MaxLength="200"  />
-    <Property Name="Auftragswert" Type="Double" Nullable="true"  />
-    <NavigationProperty Name="ChangedByImpl"
-                        Relationship="Model.FK_Auftrag_ChangedBy_ChangedBy"
-                        FromRole="Auftrag"
-                        ToRole="ChangedBy" />
-    <Property Name="ChangedOn" Type="DateTime" Nullable="false"  ConcurrencyMode="Fixed"/>
-    <NavigationProperty Name="CreatedByImpl"
-                        Relationship="Model.FK_Auftrag_CreatedBy_CreatedBy"
-                        FromRole="Auftrag"
-                        ToRole="CreatedBy" />
-    <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
-    <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-    <NavigationProperty Name="KundeImpl"
-                        Relationship="Model.FK_Auftrag_has_Kunde"
-                        FromRole="Auftrag"
-                        ToRole="Kunde" />
-    <NavigationProperty Name="MitarbeiterImpl"
-                        Relationship="Model.FK_Auftrag_has_Mitarbeiter"
-                        FromRole="Auftrag"
-                        ToRole="Mitarbeiter" />
-    <NavigationProperty Name="ProjektImpl"
-                        Relationship="Model.FK_Projekt_has_Auftraege"
-                        FromRole="Auftraege"
-                        ToRole="Projekt" />
-    <NavigationProperty Name="SecurityRightsCollectionImpl" Relationship="Model.FK_Auftraege_Rights" FromRole="Auftrag" ToRole="Auftrag_Rights" />
-  </EntityType>
-  <EntityType Name="Auftrag_Rights">
-    <Key>
-	  <PropertyRef Name="ID" />
-	  <PropertyRef Name="Identity" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Identity" Type="Int32" Nullable="false" />
-    <Property Name="Right" Type="Int32" Nullable="false" />
-  </EntityType>
-  <Association Name="FK_Auftraege_Rights">
-    <End Role="Auftrag" Type="Model.AuftragEfImpl" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="Auftrag_Rights" Type="Model.Auftrag_Rights" Multiplicity="*" />
-    <ReferentialConstraint>
-	  <Principal Role="Auftrag">
-	    <PropertyRef Name="ID" />
-	  </Principal>
-	  <Dependent Role="Auftrag_Rights">
-	    <PropertyRef Name="ID" />
-	  </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="BaseParameterEfImpl" Abstract="true">
     <Key>
       <PropertyRef Name="ID" />
@@ -1298,76 +815,6 @@
     <Property Name="MimeType" Type="String" Nullable="false" MaxLength="100"  />
     <Property Name="OriginalName" Type="String" Nullable="false" MaxLength="500"  />
     <Property Name="StoragePath" Type="String" Nullable="false" MaxLength="500"  />
-  </EntityType>
-  <EntityType Name="CalendarBookEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="ChangedByImpl"
-                        Relationship="Model.FK_Calendar_was_ChangedBy"
-                        FromRole="Calendar"
-                        ToRole="ChangedBy" />
-    <Property Name="ChangedOn" Type="DateTime" Nullable="false"  ConcurrencyMode="Fixed"/>
-    <NavigationProperty Name="CreatedByImpl"
-                        Relationship="Model.FK_Calendar_was_CreatedBy"
-                        FromRole="Calendar"
-                        ToRole="CreatedBy" />
-    <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
-    <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-    <NavigationProperty Name="GroupReadersImpl"
-                        Relationship="Model.FK_Calendar_shared_r_GroupReaders_A"
-                        FromRole="Calendar"
-                        ToRole="CollectionEntry" />
-    <NavigationProperty Name="GroupWritersImpl"
-                        Relationship="Model.FK_Calendar_shared_w_GroupWriters_A"
-                        FromRole="Calendar"
-                        ToRole="CollectionEntry" />
-    <Property Name="IsDeactivated" Type="Boolean" Nullable="false"  />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="200"  />
-    <NavigationProperty Name="OwnerImpl"
-                        Relationship="Model.FK_Calendar_has_Owner"
-                        FromRole="Calendar"
-                        ToRole="Owner" />
-    <NavigationProperty Name="ReadersImpl"
-                        Relationship="Model.FK_Calendar_shared_r_Readers_A"
-                        FromRole="Calendar"
-                        ToRole="CollectionEntry" />
-    <NavigationProperty Name="WritersImpl"
-                        Relationship="Model.FK_Calendar_shared_w_Writers_A"
-                        FromRole="Calendar"
-                        ToRole="CollectionEntry" />
-    <NavigationProperty Name="SecurityRightsCollectionImpl" Relationship="Model.FK_CalendarBooks_Rights" FromRole="CalendarBook" ToRole="CalendarBook_Rights" />
-  </EntityType>
-  <EntityType Name="CalendarBook_Rights">
-    <Key>
-	  <PropertyRef Name="ID" />
-	  <PropertyRef Name="Identity" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Identity" Type="Int32" Nullable="false" />
-    <Property Name="Right" Type="Int32" Nullable="false" />
-  </EntityType>
-  <Association Name="FK_CalendarBooks_Rights">
-    <End Role="CalendarBook" Type="Model.CalendarBookEfImpl" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="CalendarBook_Rights" Type="Model.CalendarBook_Rights" Multiplicity="*" />
-    <ReferentialConstraint>
-	  <Principal Role="CalendarBook">
-	    <PropertyRef Name="ID" />
-	  </Principal>
-	  <Dependent Role="CalendarBook_Rights">
-	    <PropertyRef Name="ID" />
-	  </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="CompanyEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="2147483647"  />
   </EntityType>
   <EntityType Name="ConstraintEfImpl" Abstract="true">
     <Key>
@@ -1470,14 +917,6 @@
     <Property Name="ShowIdInLists" Type="Boolean" Nullable="false"  />
     <Property Name="ShowNameInLists" Type="Boolean" Nullable="false"  />
   </EntityType>
-  <EntityType Name="DeactivatableTestObjectEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="IsDeactivated" Type="Boolean" Nullable="false"  />
-    <Property Name="Name" Type="String" Nullable="true" MaxLength="200"  />
-  </EntityType>
   <EntityType Name="DefaultPropertyValueEfImpl" Abstract="true">
     <Key>
       <PropertyRef Name="ID" />
@@ -1498,21 +937,6 @@
                         Relationship="Model.FK_Property_has_DefaultValue"
                         FromRole="DefaultValue"
                         ToRole="Property" />
-  </EntityType>
-  <EntityType Name="DocumentTestObjectEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="AnotherFileImpl"
-                        Relationship="Model.FK_TestObj_has_AnotherFile"
-                        FromRole="TestObj"
-                        ToRole="AnotherFile" />
-    <NavigationProperty Name="AnyFileImpl"
-                        Relationship="Model.FK_TestObj_has_AnyFile"
-                        FromRole="TestObj"
-                        ToRole="AnyFile" />
-    <Property Name="Name" Type="String" Nullable="true" MaxLength="200"  />
   </EntityType>
   <EntityType Name="EnumerationEntryEfImpl">
     <Key>
@@ -1540,76 +964,6 @@
     <Property Name="Name" Type="String" Nullable="false" MaxLength="200"  />
     <Property Name="Value" Type="Int32" Nullable="false"  />
   </EntityType>
-  <EntityType Name="EventEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Body" Type="String" Nullable="true" MaxLength="2147483647"  />
-    <NavigationProperty Name="CalendarImpl"
-                        Relationship="Model.FK_Event_of_Calendar"
-                        FromRole="Event"
-                        ToRole="Calendar" />
-    <NavigationProperty Name="ChangedByImpl"
-                        Relationship="Model.FK_Event_was_ChangedBy"
-                        FromRole="Event"
-                        ToRole="ChangedBy" />
-    <Property Name="ChangedOn" Type="DateTime" Nullable="false"  ConcurrencyMode="Fixed"/>
-    <NavigationProperty Name="CreatedByImpl"
-                        Relationship="Model.FK_Event_was_CreatedBy"
-                        FromRole="Event"
-                        ToRole="CreatedBy" />
-    <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
-    <Property Name="EndDate" Type="DateTime" Nullable="false"  />
-    <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-    <Property Name="IsAllDay" Type="Boolean" Nullable="false"  />
-    <Property Name="IsViewReadOnly" Type="Boolean" Nullable="false"  />
-    <Property Name="Location" Type="String" Nullable="true" MaxLength="200"  />
-    <Property Name="RecurrenceImpl"
-              Type="Model.RecurrenceRuleEfImpl"
-              Nullable="false" />
-    <Property Name="SourceImpl"
-              Type="Model.AnyReferenceEfImpl"
-              Nullable="false" />
-    <Property Name="StartDate" Type="DateTime" Nullable="false"  />
-    <Property Name="Summary" Type="String" Nullable="false" MaxLength="200"  />
-    <Property Name="SyncHash" Type="String" Nullable="true" MaxLength="500"  />
-    <NavigationProperty Name="SecurityRightsCollectionImpl" Relationship="Model.FK_Events_Rights" FromRole="Event" ToRole="Event_Rights" />
-  </EntityType>
-  <EntityType Name="Event_Rights">
-    <Key>
-	  <PropertyRef Name="ID" />
-	  <PropertyRef Name="Identity" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Identity" Type="Int32" Nullable="false" />
-    <Property Name="Right" Type="Int32" Nullable="false" />
-  </EntityType>
-  <Association Name="FK_Events_Rights">
-    <End Role="Event" Type="Model.EventEfImpl" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="Event_Rights" Type="Model.Event_Rights" Multiplicity="*" />
-    <ReferentialConstraint>
-	  <Principal Role="Event">
-	    <PropertyRef Name="ID" />
-	  </Principal>
-	  <Dependent Role="Event_Rights">
-	    <PropertyRef Name="ID" />
-	  </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="EventTestObjectEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="EventImpl"
-                        Relationship="Model.FK_Test_of_Event"
-                        FromRole="Test"
-                        ToRole="Event" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="200"  />
-  </EntityType>
   <EntityType Name="ExceptionLogEntryEfImpl">
     <Key>
       <PropertyRef Name="ID" />
@@ -1621,76 +975,6 @@
     <Property Name="Logger" Type="String" Nullable="false" MaxLength="255"  />
     <Property Name="Message" Type="String" Nullable="false" MaxLength="4000"  />
     <Property Name="Thread" Type="String" Nullable="false" MaxLength="255"  />
-  </EntityType>
-  <EntityType Name="ExcerptEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="FileImpl"
-                        Relationship="Model.FK_File_has_Excerpt"
-                        FromRole="Excerpt"
-                        ToRole="File" />
-    <Property Name="Text" Type="String" Nullable="false" MaxLength="2147483647"  />
-  </EntityType>
-  <EntityType Name="FileEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="AttachedToImpl"
-              Type="Model.AnyReferenceEfImpl"
-              Nullable="false" />
-    <NavigationProperty Name="BlobImpl"
-                        Relationship="Model.FK_File_has_Blob"
-                        FromRole="File"
-                        ToRole="Blob" />
-    <NavigationProperty Name="ChangedByImpl"
-                        Relationship="Model.FK_File_was_ChangedBy"
-                        FromRole="File"
-                        ToRole="ChangedBy" />
-    <Property Name="ChangedOn" Type="DateTime" Nullable="false"  ConcurrencyMode="Fixed"/>
-    <NavigationProperty Name="CreatedByImpl"
-                        Relationship="Model.FK_File_was_CreatedBy"
-                        FromRole="File"
-                        ToRole="CreatedBy" />
-    <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
-    <NavigationProperty Name="ExcerptImpl"
-                        Relationship="Model.FK_File_has_Excerpt"
-                        FromRole="File"
-                        ToRole="Excerpt" />
-    <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-    <Property Name="IsFileReadonly" Type="Boolean" Nullable="false"  />
-    <Property Name="KeepRevisions" Type="Boolean" Nullable="false"  />
-    <Property Name="Name" Type="String" Nullable="true" MaxLength="1024"  />
-    <NavigationProperty Name="RevisionsImpl"
-                        Relationship="Model.FK_Document_has_Revisions_A"
-                        FromRole="Document"
-                        ToRole="CollectionEntry" />
-    <Property Name="Tags" Type="String" Nullable="true" MaxLength="2000"  />
-  </EntityType>
-  <EntityType Name="FileImportConfigurationEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="ChangedByImpl"
-                        Relationship="Model.FK_FileImportConfiguration_was_ChangedBy"
-                        FromRole="FileImportConfiguration"
-                        ToRole="ChangedBy" />
-    <Property Name="ChangedOn" Type="DateTime" Nullable="false"  ConcurrencyMode="Fixed"/>
-    <NavigationProperty Name="CreatedByImpl"
-                        Relationship="Model.FK_FileImportConfiguration_was_CreatedBy"
-                        FromRole="FileImportConfiguration"
-                        ToRole="CreatedBy" />
-    <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
-    <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-    <NavigationProperty Name="IdentityImpl"
-                        Relationship="Model.FK_Configuration_of_Identity"
-                        FromRole="Configuration"
-                        ToRole="Identity" />
-    <Property Name="MachineName" Type="String" Nullable="true" MaxLength="200"  />
-    <Property Name="PickupDirectory" Type="String" Nullable="true" MaxLength="2147483647"  />
   </EntityType>
   <EntityType Name="FilterConfigurationEfImpl" Abstract="true">
     <Key>
@@ -1723,21 +1007,6 @@
                         Relationship="Model.FK_FilterConfiguration_has_ViewModelDescriptor"
                         FromRole="FilterConfiguration"
                         ToRole="ViewModelDescriptor" />
-  </EntityType>
-  <EntityType Name="FragebogenEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="AntwortenImpl"
-                        Relationship="Model.FK_Ein_Fragebogen_enthaelt_gute_Antworten"
-                        FromRole="Ein_Fragebogen"
-                        ToRole="gute_Antworten" />
-    <Property Name="BogenNummer" Type="Int32" Nullable="true"  />
-    <NavigationProperty Name="StudentImpl"
-                        Relationship="Model.FK_Student_füllt_aus_Testbogen_B"
-                        FromRole="Testbogen"
-                        ToRole="CollectionEntry" />
   </EntityType>
   <EntityType Name="GroupEfImpl">
     <Key>
@@ -1801,32 +1070,6 @@
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
     <Property Name="Reason" Type="String" Nullable="true" MaxLength="2147483647"  />
   </EntityType>
-  <EntityType Name="KundeEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Adresse" Type="String" Nullable="true" MaxLength="200"  />
-    <NavigationProperty Name="ChangedByImpl"
-                        Relationship="Model.FK_Kunde_was_ChangedBy"
-                        FromRole="Kunde"
-                        ToRole="ChangedBy" />
-    <Property Name="ChangedOn" Type="DateTime" Nullable="false"  ConcurrencyMode="Fixed"/>
-    <NavigationProperty Name="CreatedByImpl"
-                        Relationship="Model.FK_Kunde_was_CreatedBy"
-                        FromRole="Kunde"
-                        ToRole="CreatedBy" />
-    <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
-    <NavigationProperty Name="EMailsImpl"
-                        Relationship="Model.FK_Kunde_value_EMails"
-                        FromRole="Kunde"
-                        ToRole="CollectionEntry" />
-    <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-    <Property Name="Kundenname" Type="String" Nullable="false" MaxLength="200"  />
-    <Property Name="Land" Type="String" Nullable="true" MaxLength="50"  />
-    <Property Name="Ort" Type="String" Nullable="true" MaxLength="100"  />
-    <Property Name="PLZ" Type="String" Nullable="false" MaxLength="10"  />
-  </EntityType>
   <EntityType Name="MethodEfImpl">
     <Key>
       <PropertyRef Name="ID" />
@@ -1872,21 +1115,6 @@
                         FromRole="Methods"
                         ToRole="CollectionEntry" />
   </EntityType>
-  <EntityType Name="MethodTestEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="ChildrenImpl"
-                        Relationship="Model.FK_Parent_has_Children"
-                        FromRole="Parent"
-                        ToRole="Children" />
-    <NavigationProperty Name="ParentImpl"
-                        Relationship="Model.FK_Parent_has_Children"
-                        FromRole="Children"
-                        ToRole="Parent" />
-    <Property Name="StringProp" Type="String" Nullable="true" MaxLength="200"  />
-  </EntityType>
   <EntityType Name="MigrationLogEfImpl">
     <Key>
       <PropertyRef Name="ID" />
@@ -1924,36 +1152,6 @@
                         FromRole="MigrationProject"
                         ToRole="StagingDatabases" />
   </EntityType>
-  <EntityType Name="MitarbeiterEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="ChangedByImpl"
-                        Relationship="Model.FK_Mitarbeiter_was_ChangedBy"
-                        FromRole="Mitarbeiter"
-                        ToRole="ChangedBy" />
-    <Property Name="ChangedOn" Type="DateTime" Nullable="false"  ConcurrencyMode="Fixed"/>
-    <NavigationProperty Name="CreatedByImpl"
-                        Relationship="Model.FK_Mitarbeiter_was_CreatedBy"
-                        FromRole="Mitarbeiter"
-                        ToRole="CreatedBy" />
-    <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
-    <Property Name="EMail" Type="String" Nullable="true" MaxLength="100"  />
-    <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-    <Property Name="Geburtstag" Type="DateTime" Nullable="true"  />
-    <NavigationProperty Name="IdentityImpl"
-                        Relationship="Model.FK_Mitarbeiter_is_a_Identity"
-                        FromRole="Mitarbeiter"
-                        ToRole="Identity" />
-    <Property Name="Name" Type="String" Nullable="true" MaxLength="100"  />
-    <NavigationProperty Name="ProjekteImpl"
-                        Relationship="Model.FK_Projekte_haben_Mitarbeiter_B"
-                        FromRole="Mitarbeiter"
-                        ToRole="CollectionEntry" />
-    <Property Name="SVNr" Type="String" Nullable="true" MaxLength="20"  />
-    <Property Name="TelefonNummer" Type="String" Nullable="true" MaxLength="50"  />
-  </EntityType>
   <EntityType Name="ModuleEfImpl">
     <Key>
       <PropertyRef Name="ID" />
@@ -1974,58 +1172,6 @@
     <Property Name="Name" Type="String" Nullable="false" MaxLength="200"  />
     <Property Name="Namespace" Type="String" Nullable="false" MaxLength="200"  />
     <Property Name="SchemaName" Type="String" Nullable="false" MaxLength="60"  />
-  </EntityType>
-  <EntityType Name="MuhblahEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="StringCollectionImpl"
-                        Relationship="Model.FK_Muhblah_value_StringCollection"
-                        FromRole="Muhblah"
-                        ToRole="CollectionEntry" />
-    <Property Name="TestBool" Type="Boolean" Nullable="true"  />
-    <NavigationProperty Name="TestCustomObjects_List_NavImpl"
-                        Relationship="Model.FK_MB_Role_has_TCO_Lst_Role"
-                        FromRole="MB_Role"
-                        ToRole="TCO_Lst_Role" />
-    <NavigationProperty Name="TestCustomObjects_ManyList_NavImpl"
-                        Relationship="Model.FK_MB_Many_Role_has_TCO_ManyList_Role_A"
-                        FromRole="MB_Many_Role"
-                        ToRole="CollectionEntry" />
-    <NavigationProperty Name="TestCustomObjects_NavImpl"
-                        Relationship="Model.FK_MB_Lst_Role_hasOther_TCO_Role"
-                        FromRole="MB_Lst_Role"
-                        ToRole="TCO_Role" />
-    <NavigationProperty Name="TestCustomObjects_One_NavImpl"
-                        Relationship="Model.FK_MB_One_Role_loves_TCO_One_Role"
-                        FromRole="MB_One_Role"
-                        ToRole="TCO_One_Role" />
-    <Property Name="TestDateTime" Type="DateTime" Nullable="true"  />
-    <Property Name="TestEnumImpl" Type="Int32" Nullable="false"  />
-    <Property Name="TestString" Type="String" Nullable="true" MaxLength="2147483647"  />
-  </EntityType>
-  <EntityType Name="N_to_M_relations_AEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="BSideImpl"
-                        Relationship="Model.FK_ASide_connectsTo_BSide_A"
-                        FromRole="ASide"
-                        ToRole="CollectionEntry" />
-    <Property Name="Name" Type="String" Nullable="true" MaxLength="2147483647"  />
-  </EntityType>
-  <EntityType Name="N_to_M_relations_BEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="ASideImpl"
-                        Relationship="Model.FK_ASide_connectsTo_BSide_B"
-                        FromRole="BSide"
-                        ToRole="CollectionEntry" />
-    <Property Name="Name" Type="String" Nullable="true" MaxLength="2147483647"  />
   </EntityType>
   <EntityType Name="NavigationEntryEfImpl" Abstract="true">
     <Key>
@@ -2071,131 +1217,6 @@
                         FromRole="Screen"
                         ToRole="ViewModelDescriptor" />
   </EntityType>
-  <EntityType Name="One_to_N_relations_NEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" Nullable="true" MaxLength="100"  />
-    <NavigationProperty Name="OneSideImpl"
-                        Relationship="Model.FK_OneSide_connectsTo_NSide"
-                        FromRole="NSide"
-                        ToRole="OneSide" />
-  </EntityType>
-  <EntityType Name="One_to_N_relations_OneEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" Nullable="true" MaxLength="100"  />
-    <NavigationProperty Name="NSideImpl"
-                        Relationship="Model.FK_OneSide_connectsTo_NSide"
-                        FromRole="OneSide"
-                        ToRole="NSide" />
-    <NavigationProperty Name="OrderedNSideImpl"
-                        Relationship="Model.FK_OneSide_connectsTo_OrderedNSide"
-                        FromRole="OneSide"
-                        ToRole="OrderedNSide" />
-  </EntityType>
-  <EntityType Name="One_to_N_relations_OrderedNEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" Nullable="true" MaxLength="100"  />
-    <NavigationProperty Name="OneSideImpl"
-                        Relationship="Model.FK_OneSide_connectsTo_OrderedNSide"
-                        FromRole="OrderedNSide"
-                        ToRole="OneSide" />
-    <Property Name="OrderedNSide_pos" Type="Int32" Nullable="true" />
-  </EntityType>
-  <EntityType Name="OrderedNEndEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="OneEndImpl"
-                        Relationship="Model.FK_OneEnd_hasMany_NEnds"
-                        FromRole="NEnds"
-                        ToRole="OneEnd" />
-    <Property Name="NEnds_pos" Type="Int32" Nullable="true" />
-    <Property Name="OtherInt" Type="Int32" Nullable="true"  />
-  </EntityType>
-  <EntityType Name="OrderedOneEndEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="NEndsImpl"
-                        Relationship="Model.FK_OneEnd_hasMany_NEnds"
-                        FromRole="OneEnd"
-                        ToRole="NEnds" />
-    <Property Name="SomeInt" Type="Int32" Nullable="true"  />
-  </EntityType>
-  <EntityType Name="ProjektEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="AuditJournalImpl"
-                        Relationship="Model.FK_Projekt_value_AuditJournal"
-                        FromRole="Projekt"
-                        ToRole="CollectionEntry" />
-    <NavigationProperty Name="AuftraegeImpl"
-                        Relationship="Model.FK_Projekt_has_Auftraege"
-                        FromRole="Projekt"
-                        ToRole="Auftraege" />
-    <Property Name="AufwandGes" Type="Double" Nullable="true"  />
-    <Property Name="Bis" Type="DateTime" Nullable="true"  />
-    <NavigationProperty Name="ChangedByImpl"
-                        Relationship="Model.FK_Projekt_was_ChangedBy"
-                        FromRole="Projekt"
-                        ToRole="ChangedBy" />
-    <Property Name="ChangedOn" Type="DateTime" Nullable="false"  ConcurrencyMode="Fixed"/>
-    <NavigationProperty Name="CreatedByImpl"
-                        Relationship="Model.FK_Projekt_was_CreatedBy"
-                        FromRole="Projekt"
-                        ToRole="CreatedBy" />
-    <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
-    <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-    <Property Name="KickOffAm" Type="DateTime" Nullable="false"  />
-    <Property Name="KickOffBis" Type="DateTime" Nullable="true"  />
-    <Property Name="Kundenname" Type="String" Nullable="true" MaxLength="100"  />
-    <NavigationProperty Name="MitarbeiterImpl"
-                        Relationship="Model.FK_Projekte_haben_Mitarbeiter_A"
-                        FromRole="Projekte"
-                        ToRole="CollectionEntry" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="100"  />
-    <NavigationProperty Name="TasksImpl"
-                        Relationship="Model.FK_Projekt_has_Tasks"
-                        FromRole="Projekt"
-                        ToRole="Tasks" />
-    <Property Name="Von" Type="DateTime" Nullable="false"  />
-    <NavigationProperty Name="SecurityRightsCollectionImpl" Relationship="Model.FK_Projekte_Rights" FromRole="Projekt" ToRole="Projekt_Rights" />
-  </EntityType>
-  <EntityType Name="Projekt_Rights">
-    <Key>
-	  <PropertyRef Name="ID" />
-	  <PropertyRef Name="Identity" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Identity" Type="Int32" Nullable="false" />
-    <Property Name="Right" Type="Int32" Nullable="false" />
-  </EntityType>
-  <Association Name="FK_Projekte_Rights">
-    <End Role="Projekt" Type="Model.ProjektEfImpl" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="Projekt_Rights" Type="Model.Projekt_Rights" Multiplicity="*" />
-    <ReferentialConstraint>
-	  <Principal Role="Projekt">
-	    <PropertyRef Name="ID" />
-	  </Principal>
-	  <Dependent Role="Projekt_Rights">
-	    <PropertyRef Name="ID" />
-	  </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="PropertyEfImpl" Abstract="true">
     <Key>
       <PropertyRef Name="ID" />
@@ -2250,21 +1271,6 @@
                         Relationship="Model.FK_Property_has_ValueModelDescriptor"
                         FromRole="Property"
                         ToRole="ValueModelDescriptor" />
-  </EntityType>
-  <EntityType Name="PropertyTestBaseEfImpl" Abstract="true">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-  </EntityType>
-  <EntityType Name="RecurrenceRuleTesterEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="RuleImpl"
-              Type="Model.RecurrenceRuleEfImpl"
-              Nullable="false" />
   </EntityType>
   <EntityType Name="RelationEfImpl">
     <Key>
@@ -2335,28 +1341,6 @@
                         FromRole="RelationEnd"
                         ToRole="Type" />
   </EntityType>
-  <EntityType Name="RequiredParentEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="ChildrenImpl"
-                        Relationship="Model.FK_Parent_of_Children"
-                        FromRole="Parent"
-                        ToRole="Children" />
-    <Property Name="Name" Type="String" Nullable="true" MaxLength="2147483647"  />
-  </EntityType>
-  <EntityType Name="RequiredParentChildEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" Nullable="true" MaxLength="2147483647"  />
-    <NavigationProperty Name="ParentImpl"
-                        Relationship="Model.FK_Parent_of_Children"
-                        FromRole="Children"
-                        ToRole="Parent" />
-  </EntityType>
   <EntityType Name="SavedListConfigurationEfImpl">
     <Key>
       <PropertyRef Name="ID" />
@@ -2372,74 +1356,6 @@
                         Relationship="Model.FK_LstCfg_has_Type"
                         FromRole="LstCfg"
                         ToRole="Type" />
-  </EntityType>
-  <EntityType Name="SecurityChangeRightEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" Nullable="true" MaxLength="200"  />
-  </EntityType>
-  <EntityType Name="SecurityTestChildEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="ChangedByImpl"
-                        Relationship="Model.FK_SecurityTestChild_was_ChangedBy"
-                        FromRole="SecurityTestChild"
-                        ToRole="ChangedBy" />
-    <Property Name="ChangedOn" Type="DateTime" Nullable="false"  ConcurrencyMode="Fixed"/>
-    <NavigationProperty Name="CreatedByImpl"
-                        Relationship="Model.FK_SecurityTestChild_was_CreatedBy"
-                        FromRole="SecurityTestChild"
-                        ToRole="CreatedBy" />
-    <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
-    <NavigationProperty Name="IdentityImpl"
-                        Relationship="Model.FK_Child_allow_Identity"
-                        FromRole="Child"
-                        ToRole="Identity" />
-    <Property Name="Name" Type="String" Nullable="true" MaxLength="200"  />
-    <NavigationProperty Name="ParentImpl"
-                        Relationship="Model.FK_Parent_has_Children2"
-                        FromRole="Children2"
-                        ToRole="Parent" />
-    <Property Name="ParentName" Type="String" Nullable="true" MaxLength="200"  />
-    <NavigationProperty Name="SecurityRightsCollectionImpl" Relationship="Model.FK_SecurityTestChildren_Rights" FromRole="SecurityTestChild" ToRole="SecurityTestChild_Rights" />
-  </EntityType>
-  <EntityType Name="SecurityTestChild_Rights">
-    <Key>
-	  <PropertyRef Name="ID" />
-	  <PropertyRef Name="Identity" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Identity" Type="Int32" Nullable="false" />
-    <Property Name="Right" Type="Int32" Nullable="false" />
-  </EntityType>
-  <Association Name="FK_SecurityTestChildren_Rights">
-    <End Role="SecurityTestChild" Type="Model.SecurityTestChildEfImpl" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="SecurityTestChild_Rights" Type="Model.SecurityTestChild_Rights" Multiplicity="*" />
-    <ReferentialConstraint>
-	  <Principal Role="SecurityTestChild">
-	    <PropertyRef Name="ID" />
-	  </Principal>
-	  <Dependent Role="SecurityTestChild_Rights">
-	    <PropertyRef Name="ID" />
-	  </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="SecurityTestParentEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="ChildrenImpl"
-                        Relationship="Model.FK_Parent_has_Children2"
-                        FromRole="Parent"
-                        ToRole="Children2" />
-    <Property Name="Name" Type="String" Nullable="true" MaxLength="200"  />
   </EntityType>
   <EntityType Name="SequenceEfImpl">
     <Key>
@@ -2636,166 +1552,12 @@
                         FromRole="StagingDatabase"
                         ToRole="SourceTables" />
   </EntityType>
-  <EntityType Name="SyncProviderEfImpl" Abstract="true">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="ChangedByImpl"
-                        Relationship="Model.FK_SyncAccount_was_ChangedBy"
-                        FromRole="SyncAccount"
-                        ToRole="ChangedBy" />
-    <Property Name="ChangedOn" Type="DateTime" Nullable="false"  ConcurrencyMode="Fixed"/>
-    <NavigationProperty Name="CreatedByImpl"
-                        Relationship="Model.FK_SyncAccount_was_CreatedBy"
-                        FromRole="SyncAccount"
-                        ToRole="CreatedBy" />
-    <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="100"  />
-    <Property Name="NextSync" Type="DateTime" Nullable="false"  />
-  </EntityType>
   <EntityType Name="TagCacheEfImpl">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="100"  />
-  </EntityType>
-  <EntityType Name="TaskEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Aufwand" Type="Double" Nullable="true"  />
-    <NavigationProperty Name="ChangedByImpl"
-                        Relationship="Model.FK_Task_was_ChangedBy"
-                        FromRole="Task"
-                        ToRole="ChangedBy" />
-    <Property Name="ChangedOn" Type="DateTime" Nullable="false"  ConcurrencyMode="Fixed"/>
-    <NavigationProperty Name="CreatedByImpl"
-                        Relationship="Model.FK_Task_was_CreatedBy"
-                        FromRole="Task"
-                        ToRole="CreatedBy" />
-    <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
-    <Property Name="DatumBis" Type="DateTime" Nullable="true"  />
-    <Property Name="DatumVon" Type="DateTime" Nullable="false"  />
-    <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="100"  />
-    <NavigationProperty Name="ProjektImpl"
-                        Relationship="Model.FK_Projekt_has_Tasks"
-                        FromRole="Tasks"
-                        ToRole="Projekt" />
-    <NavigationProperty Name="SecurityRightsCollectionImpl" Relationship="Model.FK_Tasks_Rights" FromRole="Task" ToRole="Task_Rights" />
-  </EntityType>
-  <EntityType Name="Task_Rights">
-    <Key>
-	  <PropertyRef Name="ID" />
-	  <PropertyRef Name="Identity" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Identity" Type="Int32" Nullable="false" />
-    <Property Name="Right" Type="Int32" Nullable="false" />
-  </EntityType>
-  <Association Name="FK_Tasks_Rights">
-    <End Role="Task" Type="Model.TaskEfImpl" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="Task_Rights" Type="Model.Task_Rights" Multiplicity="*" />
-    <ReferentialConstraint>
-	  <Principal Role="Task">
-	    <PropertyRef Name="ID" />
-	  </Principal>
-	  <Dependent Role="Task_Rights">
-	    <PropertyRef Name="ID" />
-	  </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="TestCustomObjectEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Birthday" Type="DateTime" Nullable="true"  />
-    <NavigationProperty Name="MubBlah_List_NavImpl"
-                        Relationship="Model.FK_MB_Lst_Role_hasOther_TCO_Role"
-                        FromRole="TCO_Role"
-                        ToRole="MB_Lst_Role" />
-    <NavigationProperty Name="MubBlah_NavImpl"
-                        Relationship="Model.FK_MB_Role_has_TCO_Lst_Role"
-                        FromRole="TCO_Lst_Role"
-                        ToRole="MB_Role" />
-    <NavigationProperty Name="MuhBlah_ManyList_NavImpl"
-                        Relationship="Model.FK_MB_Many_Role_has_TCO_ManyList_Role_B"
-                        FromRole="TCO_ManyList_Role"
-                        ToRole="CollectionEntry" />
-    <NavigationProperty Name="MuhBlah_One_NavImpl"
-                        Relationship="Model.FK_MB_One_Role_loves_TCO_One_Role"
-                        FromRole="TCO_One_Role"
-                        ToRole="MB_One_Role" />
-    <Property Name="PersonName" Type="String" Nullable="false" MaxLength="200"  />
-    <Property Name="PhoneNumberMobileImpl"
-              Type="Model.TestPhoneCompoundObjectEfImpl"
-              Nullable="false" />
-    <Property Name="PhoneNumberOfficeImpl"
-              Type="Model.TestPhoneCompoundObjectEfImpl"
-              Nullable="false" />
-    <NavigationProperty Name="PhoneNumbersOtherImpl"
-                        Relationship="Model.FK_TestCustomObject_value_PhoneNumbersOther"
-                        FromRole="TestCustomObject"
-                        ToRole="CollectionEntry" />
-  </EntityType>
-  <EntityType Name="TestDecimalEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Large" Type="Decimal" Nullable="true" Precision="20" Scale="2"  />
-    <Property Name="NoScale" Type="Decimal" Nullable="true" Precision="6" Scale="0"  />
-    <Property Name="SmallDecimal" Type="Decimal" Nullable="true" Precision="4" Scale="2"  />
-  </EntityType>
-  <EntityType Name="TestObjClassEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="CalculatedEnumerationImpl" Type="Int32" Nullable="false"  />
-    <Property Name="MyIntProperty" Type="Int32" Nullable="true"  />
-    <NavigationProperty Name="ObjectPropImpl"
-                        Relationship="Model.FK_TestObjClass_has_ObjectProp"
-                        FromRole="TestObjClass"
-                        ToRole="ObjectProp" />
-    <Property Name="StringProp" Type="String" Nullable="false" MaxLength="200"  />
-    <Property Name="TestEnumPropImpl" Type="Int32" Nullable="false"  />
-    <Property Name="TestEnumWithDefaultImpl" Type="Int32" Nullable="false"  />
-  </EntityType>
-  <EntityType Name="TestStudentEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="2147483647"  />
-    <NavigationProperty Name="TestbogenImpl"
-                        Relationship="Model.FK_Student_füllt_aus_Testbogen_A"
-                        FromRole="Student"
-                        ToRole="CollectionEntry" />
-  </EntityType>
-  <EntityType Name="TPHBaseObjEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="ChangedByImpl"
-                        Relationship="Model.FK_TPHBaseObj_was_ChangedBy"
-                        FromRole="TPHBaseObj"
-                        ToRole="ChangedBy" />
-    <Property Name="ChangedOn" Type="DateTime" Nullable="false"  ConcurrencyMode="Fixed"/>
-    <NavigationProperty Name="CreatedByImpl"
-                        Relationship="Model.FK_TPHBaseObj_was_CreatedBy"
-                        FromRole="TPHBaseObj"
-                        ToRole="CreatedBy" />
-    <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
-    <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="2147483647"  />
   </EntityType>
   <EntityType Name="ViewDescriptorEfImpl">
     <Key>
@@ -2853,70 +1615,6 @@
                         ToRole="CollectionEntry" />
     <Property Name="ViewModelTypeRef" Type="String" Nullable="true" MaxLength="2000"  />
   </EntityType>
-  <EntityType Name="WorkScheduleEfImpl">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="BaseWorkScheduleImpl"
-                        Relationship="Model.FK_BaseWorkSchedule_has_ChildWorkSchedules"
-                        FromRole="ChildWorkSchedules"
-                        ToRole="BaseWorkSchedule" />
-    <NavigationProperty Name="ChangedByImpl"
-                        Relationship="Model.FK_WorkSchedule_was_ChangedBy"
-                        FromRole="WorkSchedule"
-                        ToRole="ChangedBy" />
-    <Property Name="ChangedOn" Type="DateTime" Nullable="false"  ConcurrencyMode="Fixed"/>
-    <NavigationProperty Name="ChildWorkScheduleImpl"
-                        Relationship="Model.FK_BaseWorkSchedule_has_ChildWorkSchedules"
-                        FromRole="BaseWorkSchedule"
-                        ToRole="ChildWorkSchedules" />
-    <NavigationProperty Name="CreatedByImpl"
-                        Relationship="Model.FK_WorkSchedule_was_CreatedBy"
-                        FromRole="WorkSchedule"
-                        ToRole="CreatedBy" />
-    <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
-    <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-    <NavigationProperty Name="ModuleImpl"
-                        Relationship="Model.FK_WorkSchedule_has_Module"
-                        FromRole="WorkSchedule"
-                        ToRole="Module" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="200"  />
-    <NavigationProperty Name="WorkScheduleRulesImpl"
-                        Relationship="Model.FK_WorkSchedule_has_WorkScheduleRules"
-                        FromRole="WorkSchedule"
-                        ToRole="WorkScheduleRules" />
-  </EntityType>
-  <EntityType Name="WorkScheduleRuleEfImpl" Abstract="true">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="ChangedByImpl"
-                        Relationship="Model.FK_WorkScheduleRule_was_ChangedBy"
-                        FromRole="WorkScheduleRule"
-                        ToRole="ChangedBy" />
-    <Property Name="ChangedOn" Type="DateTime" Nullable="false"  ConcurrencyMode="Fixed"/>
-    <NavigationProperty Name="CreatedByImpl"
-                        Relationship="Model.FK_WorkScheduleRule_was_CreatedBy"
-                        FromRole="WorkScheduleRule"
-                        ToRole="CreatedBy" />
-    <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
-    <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
-    <Property Name="IsWorkingDay" Type="Boolean" Nullable="false"  />
-    <NavigationProperty Name="ModuleImpl"
-                        Relationship="Model.FK_WorkScheduleRule_has_Module"
-                        FromRole="WorkScheduleRule"
-                        ToRole="Module" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="200"  />
-    <Property Name="ValidFrom" Type="DateTime" Nullable="true"  />
-    <Property Name="ValidUntil" Type="DateTime" Nullable="true"  />
-    <Property Name="WorkingHours" Type="Decimal" Nullable="false" Precision="10" Scale="2"  />
-    <NavigationProperty Name="WorkScheduleImpl"
-                        Relationship="Model.FK_WorkSchedule_has_WorkScheduleRules"
-                        FromRole="WorkScheduleRules"
-                        ToRole="WorkSchedule" />
-  </EntityType>
 
   <!-- EntityTypes for all other classes -->
   <EntityType Name="BoolDefaultValueEfImpl" BaseType="Model.DefaultPropertyValueEfImpl">
@@ -2956,8 +1654,6 @@
   <EntityType Name="CLRObjectParameterEfImpl" BaseType="Model.BaseParameterEfImpl">
     <Property Name="TypeRef" Type="String" Nullable="true" MaxLength="2000"  />
   </EntityType>
-  <EntityType Name="CommonWorkScheduleRuleEfImpl" BaseType="Model.WorkScheduleRuleEfImpl">
-  </EntityType>
   <EntityType Name="CompoundObjectEfImpl" BaseType="Model.DataTypeEfImpl">
     <NavigationProperty Name="DefaultPropertyViewModelDescriptorImpl"
                         Relationship="Model.FK_Presentable_may_has_DefaultPropViewModelDescriptor"
@@ -2995,9 +1691,6 @@
   <EntityType Name="DateTimePropertyEfImpl" BaseType="Model.ValueTypePropertyEfImpl">
     <Property Name="DateTimeStyleImpl" Type="Int32" Nullable="true"  />
   </EntityType>
-  <EntityType Name="DayOfWeekWorkScheduleRuleEfImpl" BaseType="Model.WorkScheduleRuleEfImpl">
-    <Property Name="DayOfWeekImpl" Type="Int32" Nullable="false"  />
-  </EntityType>
   <EntityType Name="DecimalDefaultValueEfImpl" BaseType="Model.DefaultPropertyValueEfImpl">
     <Property Name="DecimalValue" Type="Decimal" Nullable="false" Precision="19" Scale="5"  />
   </EntityType>
@@ -3007,19 +1700,12 @@
     <Property Name="Precision" Type="Int32" Nullable="false"  />
     <Property Name="Scale" Type="Int32" Nullable="false"  />
   </EntityType>
-  <EntityType Name="DocumentEfImpl" BaseType="Model.FileEfImpl">
-  </EntityType>
   <EntityType Name="DoubleDefaultValueEfImpl" BaseType="Model.DefaultPropertyValueEfImpl">
     <Property Name="DoubleValue" Type="Double" Nullable="false"  />
   </EntityType>
   <EntityType Name="DoubleParameterEfImpl" BaseType="Model.BaseParameterEfImpl">
   </EntityType>
   <EntityType Name="DoublePropertyEfImpl" BaseType="Model.ValueTypePropertyEfImpl">
-  </EntityType>
-  <EntityType Name="DynamicFileEfImpl" BaseType="Model.FileEfImpl">
-  </EntityType>
-  <EntityType Name="EasterWorkScheduleRuleEfImpl" BaseType="Model.YearlyWorkScheduleRuleEfImpl">
-    <Property Name="Offset" Type="Int32" Nullable="true"  />
   </EntityType>
   <EntityType Name="EnumDefaultValueEfImpl" BaseType="Model.DefaultPropertyValueEfImpl">
     <NavigationProperty Name="EnumValueImpl"
@@ -3046,10 +1732,6 @@
                         FromRole="EnumParameter"
                         ToRole="Enumeration" />
   </EntityType>
-  <EntityType Name="FixedYearlyWorkScheduleRuleEfImpl" BaseType="Model.YearlyWorkScheduleRuleEfImpl">
-    <Property Name="Day" Type="Int32" Nullable="false"  />
-    <Property Name="Month" Type="Int32" Nullable="false"  />
-  </EntityType>
   <EntityType Name="FullTextIndexConstraintEfImpl" BaseType="Model.IndexConstraintEfImpl">
   </EntityType>
   <EntityType Name="GroupMembershipEfImpl" BaseType="Model.AccessControlEfImpl">
@@ -3059,8 +1741,6 @@
                         ToRole="Group" />
   </EntityType>
   <EntityType Name="GuidPropertyEfImpl" BaseType="Model.ValueTypePropertyEfImpl">
-  </EntityType>
-  <EntityType Name="ImportedFileEfImpl" BaseType="Model.FileEfImpl">
   </EntityType>
   <EntityType Name="IndexConstraintEfImpl" BaseType="Model.InstanceConstraintEfImpl">
     <Property Name="IsUnique" Type="Boolean" Nullable="false"  />
@@ -3200,59 +1880,11 @@
   <EntityType Name="OptionalPredicateFilterConfigurationEfImpl" BaseType="Model.ObjectClassFilterConfigurationEfImpl">
     <Property Name="Predicate" Type="String" Nullable="true" MaxLength="2147483647"  />
   </EntityType>
-  <EntityType Name="PropertyBoolTestEfImpl" BaseType="Model.PropertyTestBaseEfImpl">
-    <Property Name="Nullable" Type="Boolean" Nullable="true"  />
-    <Property Name="NullableWithDefault" Type="Boolean" Nullable="true"  />
-    <Property Name="Standard" Type="Boolean" Nullable="false"  />
-    <Property Name="StandardWithDefault" Type="Boolean" Nullable="false"  />
-  </EntityType>
-  <EntityType Name="PropertyDateTimeTestEfImpl" BaseType="Model.PropertyTestBaseEfImpl">
-    <Property Name="Nullable" Type="DateTime" Nullable="true"  />
-    <Property Name="NullableWithDefault" Type="DateTime" Nullable="true"  />
-    <Property Name="Standard" Type="DateTime" Nullable="false"  />
-    <Property Name="StandardWithDefault" Type="DateTime" Nullable="false"  />
-  </EntityType>
-  <EntityType Name="PropertyDecimalTestEfImpl" BaseType="Model.PropertyTestBaseEfImpl">
-    <Property Name="Nullable" Type="Decimal" Nullable="true" Precision="19" Scale="5"  />
-    <Property Name="NullableWithDefault" Type="Decimal" Nullable="true" Precision="19" Scale="5"  />
-    <Property Name="Standard" Type="Decimal" Nullable="false" Precision="19" Scale="5"  />
-    <Property Name="StandardWithDefault" Type="Decimal" Nullable="false" Precision="19" Scale="5"  />
-  </EntityType>
-  <EntityType Name="PropertyDoubleTestEfImpl" BaseType="Model.PropertyTestBaseEfImpl">
-    <Property Name="Nullable" Type="Double" Nullable="true"  />
-    <Property Name="NullableWithDefault" Type="Double" Nullable="true"  />
-    <Property Name="Standard" Type="Double" Nullable="false"  />
-    <Property Name="StandardWithDefault" Type="Double" Nullable="false"  />
-  </EntityType>
-  <EntityType Name="PropertyEnumTestEfImpl" BaseType="Model.PropertyTestBaseEfImpl">
-    <Property Name="NullableImpl" Type="Int32" Nullable="true"  />
-    <Property Name="NullableWithDefaultImpl" Type="Int32" Nullable="true"  />
-    <Property Name="StandardImpl" Type="Int32" Nullable="false"  />
-    <Property Name="StandardWithDefaultImpl" Type="Int32" Nullable="false"  />
-  </EntityType>
   <EntityType Name="PropertyFilterConfigurationEfImpl" BaseType="Model.FilterConfigurationEfImpl" Abstract="true">
     <NavigationProperty Name="PropertyImpl"
                         Relationship="Model.FK_Property_Has_PropertyFilterConfiguration"
                         FromRole="PropertyFilterConfiguration"
                         ToRole="Property" />
-  </EntityType>
-  <EntityType Name="PropertyGuidTestEfImpl" BaseType="Model.PropertyTestBaseEfImpl">
-    <Property Name="Nullable" Type="Guid" Nullable="true"  />
-    <Property Name="NullableWithDefault" Type="Guid" Nullable="true"  />
-    <Property Name="Standard" Type="Guid" Nullable="false"  />
-    <Property Name="StandardWithDefault" Type="Guid" Nullable="false"  />
-  </EntityType>
-  <EntityType Name="PropertyIntTestEfImpl" BaseType="Model.PropertyTestBaseEfImpl">
-    <Property Name="Nullable" Type="Int32" Nullable="true"  />
-    <Property Name="NullableWithDefault" Type="Int32" Nullable="true"  />
-    <Property Name="Standard" Type="Int32" Nullable="false"  />
-    <Property Name="StandardWithDefault" Type="Int32" Nullable="false"  />
-  </EntityType>
-  <EntityType Name="PropertyStringTestEfImpl" BaseType="Model.PropertyTestBaseEfImpl">
-    <Property Name="Nullable" Type="String" Nullable="true" MaxLength="2147483647"  />
-    <Property Name="NullableWithDefault" Type="String" Nullable="true" MaxLength="2147483647"  />
-    <Property Name="Standard" Type="String" Nullable="false" MaxLength="2147483647"  />
-    <Property Name="StandardWithDefault" Type="String" Nullable="false" MaxLength="2147483647"  />
   </EntityType>
   <EntityType Name="RangeFilterConfigurationEfImpl" BaseType="Model.PropertyFilterConfigurationEfImpl">
   </EntityType>
@@ -3266,8 +1898,6 @@
   </EntityType>
   <EntityType Name="SinglePropertyFilterConfigurationEfImpl" BaseType="Model.PropertyFilterConfigurationEfImpl">
   </EntityType>
-  <EntityType Name="StaticFileEfImpl" BaseType="Model.FileEfImpl">
-  </EntityType>
   <EntityType Name="StringDefaultValueEfImpl" BaseType="Model.DefaultPropertyValueEfImpl">
     <Property Name="DefaultValue" Type="String" Nullable="true" MaxLength="2147483647"  />
   </EntityType>
@@ -3279,13 +1909,6 @@
     <Property Name="MaxLength" Type="Int32" Nullable="true"  />
     <Property Name="MinLength" Type="Int32" Nullable="false"  />
   </EntityType>
-  <EntityType Name="TPHDerivedAObjEfImpl" BaseType="Model.TPHBaseObjEfImpl">
-    <Property Name="AInt" Type="Int32" Nullable="false"  />
-    <Property Name="AString" Type="String" Nullable="true" MaxLength="200"  />
-  </EntityType>
-  <EntityType Name="TPHDerivedBObjEfImpl" BaseType="Model.TPHBaseObjEfImpl">
-    <Property Name="BString" Type="String" Nullable="false" MaxLength="100"  />
-  </EntityType>
   <EntityType Name="ValueTypePropertyEfImpl" BaseType="Model.PropertyEfImpl" Abstract="true">
     <Property Name="HasPersistentOrder" Type="Boolean" Nullable="false"  />
     <Property Name="IsCalculated" Type="Boolean" Nullable="false"  />
@@ -3293,65 +1916,11 @@
   </EntityType>
   <EntityType Name="ViewReadOnlyConstraintEfImpl" BaseType="Model.ReadOnlyConstraintEfImpl">
   </EntityType>
-  <EntityType Name="WorkScheduleSyncProviderEfImpl" BaseType="Model.SyncProviderEfImpl">
-    <NavigationProperty Name="CalendarImpl"
-                        Relationship="Model.FK_SyncAccount_for_Calendar"
-                        FromRole="SyncAccount"
-                        ToRole="Calendar" />
-    <NavigationProperty Name="WorkScheduleImpl"
-                        Relationship="Model.FK_SyncAccount_of_WorkSchedule"
-                        FromRole="SyncAccount"
-                        ToRole="WorkSchedule" />
-  </EntityType>
   <EntityType Name="YearFilterConfigurationEfImpl" BaseType="Model.PropertyFilterConfigurationEfImpl">
     <Property Name="IsCurrentYearDefault" Type="Boolean" Nullable="true"  />
   </EntityType>
-  <EntityType Name="YearlyWorkScheduleRuleEfImpl" BaseType="Model.WorkScheduleRuleEfImpl" Abstract="true">
-  </EntityType>
 
   <!-- EntityTypes and Associations for all object-object CollectionEntrys -->
-  <!--
-    Relation: FK_ASide_connectsTo_BSide
-    A: ZeroOrMore N_to_M_relations_A as ASide
-    B: ZeroOrMore N_to_M_relations_B as BSide
-    Preferred Storage: Separate
-  -->
-  <EntityType Name="N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl" >
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-	
-    
-    <!-- A -->
-    <NavigationProperty Name="AImpl"
-                        Relationship="Model.FK_ASide_connectsTo_BSide_A"
-                        FromRole="CollectionEntry"
-                        ToRole="ASide" />
-
-    <!-- B -->
-    <NavigationProperty Name="BImpl"
-                        Relationship="Model.FK_ASide_connectsTo_BSide_B"
-                        FromRole="CollectionEntry"
-                        ToRole="BSide" />
-  </EntityType>
-  <Association Name="FK_ASide_connectsTo_BSide_A" >
-    <End Role="ASide"
-         Type="Model.N_to_M_relations_AEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="CollectionEntry"
-         Type="Model.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl"
-         Multiplicity="*" />
-  </Association>
-  <Association Name="FK_ASide_connectsTo_BSide_B" >
-    <End Role="BSide"
-         Type="Model.N_to_M_relations_BEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="CollectionEntry"
-         Type="Model.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl"
-         Multiplicity="*" />
-  </Association>
-  
   <!--
     Relation: FK_CalculatedReference_dependsOn_InputProperties
     A: ZeroOrMore CalculatedObjectReferenceProperty as CalculatedReference
@@ -3392,176 +1961,6 @@
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
          Type="Model.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl"
-         Multiplicity="*" />
-  </Association>
-  
-  <!--
-    Relation: FK_Calendar_shared_r_GroupReaders
-    A: ZeroOrMore CalendarBook as Calendar
-    B: ZeroOrMore Group as GroupReaders
-    Preferred Storage: Separate
-  -->
-  <EntityType Name="CalendarBook_shared_r_Group_RelationEntryEfImpl" >
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-	<Property Name="ExportGuid" Type="Guid" Nullable="false" />
-	
-    
-    <!-- A -->
-    <NavigationProperty Name="AImpl"
-                        Relationship="Model.FK_Calendar_shared_r_GroupReaders_A"
-                        FromRole="CollectionEntry"
-                        ToRole="Calendar" />
-
-    <!-- B -->
-    <NavigationProperty Name="BImpl"
-                        Relationship="Model.FK_Calendar_shared_r_GroupReaders_B"
-                        FromRole="CollectionEntry"
-                        ToRole="GroupReaders" />
-  </EntityType>
-  <Association Name="FK_Calendar_shared_r_GroupReaders_A" >
-    <End Role="Calendar"
-         Type="Model.CalendarBookEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="CollectionEntry"
-         Type="Model.CalendarBook_shared_r_Group_RelationEntryEfImpl"
-         Multiplicity="*" />
-  </Association>
-  <Association Name="FK_Calendar_shared_r_GroupReaders_B" >
-    <End Role="GroupReaders"
-         Type="Model.GroupEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="CollectionEntry"
-         Type="Model.CalendarBook_shared_r_Group_RelationEntryEfImpl"
-         Multiplicity="*" />
-  </Association>
-  
-  <!--
-    Relation: FK_Calendar_shared_r_Readers
-    A: ZeroOrMore CalendarBook as Calendar
-    B: ZeroOrMore Identity as Readers
-    Preferred Storage: Separate
-  -->
-  <EntityType Name="CalendarBook_shared_r_Identity_RelationEntryEfImpl" >
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-	
-    
-    <!-- A -->
-    <NavigationProperty Name="AImpl"
-                        Relationship="Model.FK_Calendar_shared_r_Readers_A"
-                        FromRole="CollectionEntry"
-                        ToRole="Calendar" />
-
-    <!-- B -->
-    <NavigationProperty Name="BImpl"
-                        Relationship="Model.FK_Calendar_shared_r_Readers_B"
-                        FromRole="CollectionEntry"
-                        ToRole="Readers" />
-  </EntityType>
-  <Association Name="FK_Calendar_shared_r_Readers_A" >
-    <End Role="Calendar"
-         Type="Model.CalendarBookEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="CollectionEntry"
-         Type="Model.CalendarBook_shared_r_Identity_RelationEntryEfImpl"
-         Multiplicity="*" />
-  </Association>
-  <Association Name="FK_Calendar_shared_r_Readers_B" >
-    <End Role="Readers"
-         Type="Model.IdentityEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="CollectionEntry"
-         Type="Model.CalendarBook_shared_r_Identity_RelationEntryEfImpl"
-         Multiplicity="*" />
-  </Association>
-  
-  <!--
-    Relation: FK_Calendar_shared_w_GroupWriters
-    A: ZeroOrMore CalendarBook as Calendar
-    B: ZeroOrMore Group as GroupWriters
-    Preferred Storage: Separate
-  -->
-  <EntityType Name="CalendarBook_shared_w_Group_RelationEntryEfImpl" >
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-	<Property Name="ExportGuid" Type="Guid" Nullable="false" />
-	
-    
-    <!-- A -->
-    <NavigationProperty Name="AImpl"
-                        Relationship="Model.FK_Calendar_shared_w_GroupWriters_A"
-                        FromRole="CollectionEntry"
-                        ToRole="Calendar" />
-
-    <!-- B -->
-    <NavigationProperty Name="BImpl"
-                        Relationship="Model.FK_Calendar_shared_w_GroupWriters_B"
-                        FromRole="CollectionEntry"
-                        ToRole="GroupWriters" />
-  </EntityType>
-  <Association Name="FK_Calendar_shared_w_GroupWriters_A" >
-    <End Role="Calendar"
-         Type="Model.CalendarBookEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="CollectionEntry"
-         Type="Model.CalendarBook_shared_w_Group_RelationEntryEfImpl"
-         Multiplicity="*" />
-  </Association>
-  <Association Name="FK_Calendar_shared_w_GroupWriters_B" >
-    <End Role="GroupWriters"
-         Type="Model.GroupEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="CollectionEntry"
-         Type="Model.CalendarBook_shared_w_Group_RelationEntryEfImpl"
-         Multiplicity="*" />
-  </Association>
-  
-  <!--
-    Relation: FK_Calendar_shared_w_Writers
-    A: ZeroOrMore CalendarBook as Calendar
-    B: ZeroOrMore Identity as Writers
-    Preferred Storage: Separate
-  -->
-  <EntityType Name="CalendarBook_shared_w_Identity_RelationEntryEfImpl" >
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-	
-    
-    <!-- A -->
-    <NavigationProperty Name="AImpl"
-                        Relationship="Model.FK_Calendar_shared_w_Writers_A"
-                        FromRole="CollectionEntry"
-                        ToRole="Calendar" />
-
-    <!-- B -->
-    <NavigationProperty Name="BImpl"
-                        Relationship="Model.FK_Calendar_shared_w_Writers_B"
-                        FromRole="CollectionEntry"
-                        ToRole="Writers" />
-  </EntityType>
-  <Association Name="FK_Calendar_shared_w_Writers_A" >
-    <End Role="Calendar"
-         Type="Model.CalendarBookEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="CollectionEntry"
-         Type="Model.CalendarBook_shared_w_Identity_RelationEntryEfImpl"
-         Multiplicity="*" />
-  </Association>
-  <Association Name="FK_Calendar_shared_w_Writers_B" >
-    <End Role="Writers"
-         Type="Model.IdentityEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="CollectionEntry"
-         Type="Model.CalendarBook_shared_w_Identity_RelationEntryEfImpl"
          Multiplicity="*" />
   </Association>
   
@@ -3609,51 +2008,6 @@
   </Association>
   
   <!--
-    Relation: FK_Document_has_Revisions
-    A: ZeroOrMore File as Document
-    B: ZeroOrMore Blob as Revisions
-    Preferred Storage: Separate
-  -->
-  <EntityType Name="File_has_Blob_RelationEntryEfImpl" >
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-	<Property Name="ExportGuid" Type="Guid" Nullable="false" />
-	
-    
-    <!-- A -->
-    <NavigationProperty Name="AImpl"
-                        Relationship="Model.FK_Document_has_Revisions_A"
-                        FromRole="CollectionEntry"
-                        ToRole="Document" />
-    <Property Name="A_pos" Type="Int32" Nullable="false" />
-
-    <!-- B -->
-    <NavigationProperty Name="BImpl"
-                        Relationship="Model.FK_Document_has_Revisions_B"
-                        FromRole="CollectionEntry"
-                        ToRole="Revisions" />
-    <Property Name="B_pos" Type="Int32" Nullable="false" />
-  </EntityType>
-  <Association Name="FK_Document_has_Revisions_A" >
-    <End Role="Document"
-         Type="Model.FileEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="CollectionEntry"
-         Type="Model.File_has_Blob_RelationEntryEfImpl"
-         Multiplicity="*" />
-  </Association>
-  <Association Name="FK_Document_has_Revisions_B" >
-    <End Role="Revisions"
-         Type="Model.BlobEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="CollectionEntry"
-         Type="Model.File_has_Blob_RelationEntryEfImpl"
-         Multiplicity="*" />
-  </Association>
-  
-  <!--
     Relation: FK_Identities_memberOf_Groups
     A: ZeroOrMore Identity as Identities
     B: ZeroOrMore Group as Groups
@@ -3692,48 +2046,6 @@
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
          Type="Model.Identity_memberOf_Group_RelationEntryEfImpl"
-         Multiplicity="*" />
-  </Association>
-  
-  <!--
-    Relation: FK_MB_Many_Role_has_TCO_ManyList_Role
-    A: ZeroOrMore Muhblah as MB_Many_Role
-    B: ZeroOrMore TestCustomObject as TCO_ManyList_Role
-    Preferred Storage: Separate
-  -->
-  <EntityType Name="Muhblah_has_TestCustomObject_RelationEntryEfImpl" >
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-	
-    
-    <!-- A -->
-    <NavigationProperty Name="AImpl"
-                        Relationship="Model.FK_MB_Many_Role_has_TCO_ManyList_Role_A"
-                        FromRole="CollectionEntry"
-                        ToRole="MB_Many_Role" />
-
-    <!-- B -->
-    <NavigationProperty Name="BImpl"
-                        Relationship="Model.FK_MB_Many_Role_has_TCO_ManyList_Role_B"
-                        FromRole="CollectionEntry"
-                        ToRole="TCO_ManyList_Role" />
-  </EntityType>
-  <Association Name="FK_MB_Many_Role_has_TCO_ManyList_Role_A" >
-    <End Role="MB_Many_Role"
-         Type="Model.MuhblahEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="CollectionEntry"
-         Type="Model.Muhblah_has_TestCustomObject_RelationEntryEfImpl"
-         Multiplicity="*" />
-  </Association>
-  <Association Name="FK_MB_Many_Role_has_TCO_ManyList_Role_B" >
-    <End Role="TCO_ManyList_Role"
-         Type="Model.TestCustomObjectEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="CollectionEntry"
-         Type="Model.Muhblah_has_TestCustomObject_RelationEntryEfImpl"
          Multiplicity="*" />
   </Association>
   
@@ -3867,51 +2179,6 @@
   </Association>
   
   <!--
-    Relation: FK_Projekte_haben_Mitarbeiter
-    A: ZeroOrMore Projekt as Projekte
-    B: ZeroOrMore Mitarbeiter as Mitarbeiter
-    Preferred Storage: Separate
-  -->
-  <EntityType Name="Projekt_haben_Mitarbeiter_RelationEntryEfImpl" >
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-	<Property Name="ExportGuid" Type="Guid" Nullable="false" />
-	
-    
-    <!-- A -->
-    <NavigationProperty Name="AImpl"
-                        Relationship="Model.FK_Projekte_haben_Mitarbeiter_A"
-                        FromRole="CollectionEntry"
-                        ToRole="Projekte" />
-    <Property Name="A_pos" Type="Int32" Nullable="false" />
-
-    <!-- B -->
-    <NavigationProperty Name="BImpl"
-                        Relationship="Model.FK_Projekte_haben_Mitarbeiter_B"
-                        FromRole="CollectionEntry"
-                        ToRole="Mitarbeiter" />
-    <Property Name="B_pos" Type="Int32" Nullable="false" />
-  </EntityType>
-  <Association Name="FK_Projekte_haben_Mitarbeiter_A" >
-    <End Role="Projekte"
-         Type="Model.ProjektEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="CollectionEntry"
-         Type="Model.Projekt_haben_Mitarbeiter_RelationEntryEfImpl"
-         Multiplicity="*" />
-  </Association>
-  <Association Name="FK_Projekte_haben_Mitarbeiter_B" >
-    <End Role="Mitarbeiter"
-         Type="Model.MitarbeiterEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="CollectionEntry"
-         Type="Model.Projekt_haben_Mitarbeiter_RelationEntryEfImpl"
-         Multiplicity="*" />
-  </Association>
-  
-  <!--
     Relation: FK_RoleMembership_resolves_Relations
     A: ZeroOrMore RoleMembership as RoleMembership
     B: ZeroOrMore Relation as Relations
@@ -3998,48 +2265,6 @@
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
          Type="Model.SourceColumn_created_Property_RelationEntryEfImpl"
-         Multiplicity="*" />
-  </Association>
-  
-  <!--
-    Relation: FK_Student_füllt_aus_Testbogen
-    A: ZeroOrMore TestStudent as Student
-    B: ZeroOrMore Fragebogen as Testbogen
-    Preferred Storage: Separate
-  -->
-  <EntityType Name="TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl" >
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="Int32" Nullable="false" />
-	
-    
-    <!-- A -->
-    <NavigationProperty Name="AImpl"
-                        Relationship="Model.FK_Student_füllt_aus_Testbogen_A"
-                        FromRole="CollectionEntry"
-                        ToRole="Student" />
-
-    <!-- B -->
-    <NavigationProperty Name="BImpl"
-                        Relationship="Model.FK_Student_füllt_aus_Testbogen_B"
-                        FromRole="CollectionEntry"
-                        ToRole="Testbogen" />
-  </EntityType>
-  <Association Name="FK_Student_füllt_aus_Testbogen_A" >
-    <End Role="Student"
-         Type="Model.TestStudentEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="CollectionEntry"
-         Type="Model.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl"
-         Multiplicity="*" />
-  </Association>
-  <Association Name="FK_Student_füllt_aus_Testbogen_B" >
-    <End Role="Testbogen"
-         Type="Model.FragebogenEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="CollectionEntry"
-         Type="Model.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl"
          Multiplicity="*" />
   </Association>
   
@@ -4205,38 +2430,6 @@
          Type="Model.IdentityEfImpl" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_Auftrag_ChangedBy_ChangedBy" >
-    <End Role="Auftrag"
-         Type="Model.AuftragEfImpl" 
-         Multiplicity="*" />
-    <End Role="ChangedBy"
-         Type="Model.IdentityEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_Auftrag_CreatedBy_CreatedBy" >
-    <End Role="Auftrag"
-         Type="Model.AuftragEfImpl" 
-         Multiplicity="*" />
-    <End Role="CreatedBy"
-         Type="Model.IdentityEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_Auftrag_has_Kunde" >
-    <End Role="Auftrag"
-         Type="Model.AuftragEfImpl" 
-         Multiplicity="*" />
-    <End Role="Kunde"
-         Type="Model.KundeEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_Auftrag_has_Mitarbeiter" >
-    <End Role="Auftrag"
-         Type="Model.AuftragEfImpl" 
-         Multiplicity="*" />
-    <End Role="Mitarbeiter"
-         Type="Model.MitarbeiterEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
   <Association Name="FK_BaseObjectClass_has_SubClasses" >
     <End Role="BaseObjectClass"
          Type="Model.ObjectClassEfImpl" 
@@ -4268,14 +2461,6 @@
     <End Role="Module"
          Type="Model.ModuleEfImpl" 
          Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_BaseWorkSchedule_has_ChildWorkSchedules" >
-    <End Role="BaseWorkSchedule"
-         Type="Model.WorkScheduleEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="ChildWorkSchedules"
-         Type="Model.WorkScheduleEfImpl" 
-         Multiplicity="*" />
   </Association>
   <Association Name="FK_BoolProperty_has_FalseIcon" >
     <End Role="BoolProperty"
@@ -4309,38 +2494,6 @@
          Type="Model.ObjectClassEfImpl" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_Calendar_has_Owner" >
-    <End Role="Calendar"
-         Type="Model.CalendarBookEfImpl" 
-         Multiplicity="*" />
-    <End Role="Owner"
-         Type="Model.IdentityEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_Calendar_was_ChangedBy" >
-    <End Role="Calendar"
-         Type="Model.CalendarBookEfImpl" 
-         Multiplicity="*" />
-    <End Role="ChangedBy"
-         Type="Model.IdentityEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_Calendar_was_CreatedBy" >
-    <End Role="Calendar"
-         Type="Model.CalendarBookEfImpl" 
-         Multiplicity="*" />
-    <End Role="CreatedBy"
-         Type="Model.IdentityEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_Child_allow_Identity" >
-    <End Role="Child"
-         Type="Model.SecurityTestChildEfImpl" 
-         Multiplicity="*" />
-    <End Role="Identity"
-         Type="Model.IdentityEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
   <Association Name="FK_ChildControlKinds_have_a_Parent" >
     <End Role="ChildControlKinds"
          Type="Model.ControlKindEfImpl" 
@@ -4355,14 +2508,6 @@
          Multiplicity="*" />
     <End Role="CompoundObjectDefinition"
          Type="Model.CompoundObjectEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_Configuration_of_Identity" >
-    <End Role="Configuration"
-         Type="Model.FileImportConfigurationEfImpl" 
-         Multiplicity="*" />
-    <End Role="Identity"
-         Type="Model.IdentityEfImpl" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_ConstrainedProperty_has_Constraints" >
@@ -4485,14 +2630,6 @@
          Type="Model.IdentityEfImpl" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_Ein_Fragebogen_enthaelt_gute_Antworten" >
-    <End Role="Ein_Fragebogen"
-         Type="Model.FragebogenEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="gute_Antworten"
-         Type="Model.AntwortEfImpl" 
-         Multiplicity="*" />
-  </Association>
   <Association Name="FK_EnumDefaultValue_defaults_to_EnumValue" >
     <End Role="EnumDefaultValue"
          Type="Model.EnumDefaultValueEfImpl" 
@@ -4539,78 +2676,6 @@
          Multiplicity="*" />
     <End Role="Enumeration"
          Type="Model.EnumerationEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_Event_of_Calendar" >
-    <End Role="Event"
-         Type="Model.EventEfImpl" 
-         Multiplicity="*" />
-    <End Role="Calendar"
-         Type="Model.CalendarBookEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_Event_was_ChangedBy" >
-    <End Role="Event"
-         Type="Model.EventEfImpl" 
-         Multiplicity="*" />
-    <End Role="ChangedBy"
-         Type="Model.IdentityEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_Event_was_CreatedBy" >
-    <End Role="Event"
-         Type="Model.EventEfImpl" 
-         Multiplicity="*" />
-    <End Role="CreatedBy"
-         Type="Model.IdentityEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_File_has_Blob" >
-    <End Role="File"
-         Type="Model.FileEfImpl" 
-         Multiplicity="*" />
-    <End Role="Blob"
-         Type="Model.BlobEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_File_has_Excerpt" >
-    <End Role="File"
-         Type="Model.FileEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="Excerpt"
-         Type="Model.ExcerptEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_File_was_ChangedBy" >
-    <End Role="File"
-         Type="Model.FileEfImpl" 
-         Multiplicity="*" />
-    <End Role="ChangedBy"
-         Type="Model.IdentityEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_File_was_CreatedBy" >
-    <End Role="File"
-         Type="Model.FileEfImpl" 
-         Multiplicity="*" />
-    <End Role="CreatedBy"
-         Type="Model.IdentityEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_FileImportConfiguration_was_ChangedBy" >
-    <End Role="FileImportConfiguration"
-         Type="Model.FileImportConfigurationEfImpl" 
-         Multiplicity="*" />
-    <End Role="ChangedBy"
-         Type="Model.IdentityEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_FileImportConfiguration_was_CreatedBy" >
-    <End Role="FileImportConfiguration"
-         Type="Model.FileImportConfigurationEfImpl" 
-         Multiplicity="*" />
-    <End Role="CreatedBy"
-         Type="Model.IdentityEfImpl" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_FilterConfiguration_has_Module" >
@@ -4693,22 +2758,6 @@
          Type="Model.ModuleEfImpl" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_Kunde_was_ChangedBy" >
-    <End Role="Kunde"
-         Type="Model.KundeEfImpl" 
-         Multiplicity="*" />
-    <End Role="ChangedBy"
-         Type="Model.IdentityEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_Kunde_was_CreatedBy" >
-    <End Role="Kunde"
-         Type="Model.KundeEfImpl" 
-         Multiplicity="*" />
-    <End Role="CreatedBy"
-         Type="Model.IdentityEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
   <Association Name="FK_LstCfg_has_Type" >
     <End Role="LstCfg"
          Type="Model.SavedListConfigurationEfImpl" 
@@ -4724,30 +2773,6 @@
     <End Role="Owner"
          Type="Model.IdentityEfImpl" 
          Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_MB_Lst_Role_hasOther_TCO_Role" >
-    <End Role="MB_Lst_Role"
-         Type="Model.MuhblahEfImpl" 
-         Multiplicity="*" />
-    <End Role="TCO_Role"
-         Type="Model.TestCustomObjectEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_MB_One_Role_loves_TCO_One_Role" >
-    <End Role="MB_One_Role"
-         Type="Model.MuhblahEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="TCO_One_Role"
-         Type="Model.TestCustomObjectEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_MB_Role_has_TCO_Lst_Role" >
-    <End Role="MB_Role"
-         Type="Model.MuhblahEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="TCO_Lst_Role"
-         Type="Model.TestCustomObjectEfImpl" 
-         Multiplicity="*" />
   </Association>
   <Association Name="FK_Method_has_Icon" >
     <End Role="Method"
@@ -4816,30 +2841,6 @@
   <Association Name="FK_MigrationProject_was_CreatedBy" >
     <End Role="MigrationProject"
          Type="Model.MigrationProjectEfImpl" 
-         Multiplicity="*" />
-    <End Role="CreatedBy"
-         Type="Model.IdentityEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_Mitarbeiter_is_a_Identity" >
-    <End Role="Mitarbeiter"
-         Type="Model.MitarbeiterEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="Identity"
-         Type="Model.IdentityEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_Mitarbeiter_was_ChangedBy" >
-    <End Role="Mitarbeiter"
-         Type="Model.MitarbeiterEfImpl" 
-         Multiplicity="*" />
-    <End Role="ChangedBy"
-         Type="Model.IdentityEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_Mitarbeiter_was_CreatedBy" >
-    <End Role="Mitarbeiter"
-         Type="Model.MitarbeiterEfImpl" 
          Multiplicity="*" />
     <End Role="CreatedBy"
          Type="Model.IdentityEfImpl" 
@@ -4965,60 +2966,12 @@
          Type="Model.ObjectClassEfImpl" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_OneEnd_hasMany_NEnds" >
-    <End Role="OneEnd"
-         Type="Model.OrderedOneEndEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="NEnds"
-         Type="Model.OrderedNEndEfImpl" 
-         Multiplicity="*" />
-  </Association>
-  <Association Name="FK_OneSide_connectsTo_NSide" >
-    <End Role="OneSide"
-         Type="Model.One_to_N_relations_OneEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="NSide"
-         Type="Model.One_to_N_relations_NEfImpl" 
-         Multiplicity="*" />
-  </Association>
-  <Association Name="FK_OneSide_connectsTo_OrderedNSide" >
-    <End Role="OneSide"
-         Type="Model.One_to_N_relations_OneEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="OrderedNSide"
-         Type="Model.One_to_N_relations_OrderedNEfImpl" 
-         Multiplicity="*" />
-  </Association>
-  <Association Name="FK_Parent_has_Children" >
-    <End Role="Parent"
-         Type="Model.MethodTestEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="Children"
-         Type="Model.MethodTestEfImpl" 
-         Multiplicity="*" />
-  </Association>
-  <Association Name="FK_Parent_has_Children2" >
-    <End Role="Parent"
-         Type="Model.SecurityTestParentEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="Children2"
-         Type="Model.SecurityTestChildEfImpl" 
-         Multiplicity="*" />
-  </Association>
   <Association Name="FK_Parent_navigates_to_Children" >
     <End Role="Parent"
          Type="Model.NavigationEntryEfImpl" 
          Multiplicity="0..1" />
     <End Role="Children"
          Type="Model.NavigationEntryEfImpl" 
-         Multiplicity="*" />
-  </Association>
-  <Association Name="FK_Parent_of_Children" >
-    <End Role="Parent"
-         Type="Model.RequiredParentEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="Children"
-         Type="Model.RequiredParentChildEfImpl" 
          Multiplicity="*" />
   </Association>
   <Association Name="FK_Presentable_has_DefaultKind" >
@@ -5043,38 +2996,6 @@
          Multiplicity="*" />
     <End Role="DefaultPropViewModelDescriptor"
          Type="Model.ViewModelDescriptorEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_Projekt_has_Auftraege" >
-    <End Role="Projekt"
-         Type="Model.ProjektEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="Auftraege"
-         Type="Model.AuftragEfImpl" 
-         Multiplicity="*" />
-  </Association>
-  <Association Name="FK_Projekt_has_Tasks" >
-    <End Role="Projekt"
-         Type="Model.ProjektEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="Tasks"
-         Type="Model.TaskEfImpl" 
-         Multiplicity="*" />
-  </Association>
-  <Association Name="FK_Projekt_was_ChangedBy" >
-    <End Role="Projekt"
-         Type="Model.ProjektEfImpl" 
-         Multiplicity="*" />
-    <End Role="ChangedBy"
-         Type="Model.IdentityEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_Projekt_was_CreatedBy" >
-    <End Role="Projekt"
-         Type="Model.ProjektEfImpl" 
-         Multiplicity="*" />
-    <End Role="CreatedBy"
-         Type="Model.IdentityEfImpl" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_Property_has_DefaultValue" >
@@ -5219,22 +3140,6 @@
          Multiplicity="*" />
     <End Role="Type"
          Type="Model.ObjectClassEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_SecurityTestChild_was_ChangedBy" >
-    <End Role="SecurityTestChild"
-         Type="Model.SecurityTestChildEfImpl" 
-         Multiplicity="*" />
-    <End Role="ChangedBy"
-         Type="Model.IdentityEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_SecurityTestChild_was_CreatedBy" >
-    <End Role="SecurityTestChild"
-         Type="Model.SecurityTestChildEfImpl" 
-         Multiplicity="*" />
-    <End Role="CreatedBy"
-         Type="Model.IdentityEfImpl" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_Sequence_has_Data" >
@@ -5397,102 +3302,6 @@
          Type="Model.IdentityEfImpl" 
          Multiplicity="0..1" />
   </Association>
-  <Association Name="FK_SyncAccount_for_Calendar" >
-    <End Role="SyncAccount"
-         Type="Model.WorkScheduleSyncProviderEfImpl" 
-         Multiplicity="*" />
-    <End Role="Calendar"
-         Type="Model.CalendarBookEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_SyncAccount_of_WorkSchedule" >
-    <End Role="SyncAccount"
-         Type="Model.WorkScheduleSyncProviderEfImpl" 
-         Multiplicity="*" />
-    <End Role="WorkSchedule"
-         Type="Model.WorkScheduleEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_SyncAccount_was_ChangedBy" >
-    <End Role="SyncAccount"
-         Type="Model.SyncProviderEfImpl" 
-         Multiplicity="*" />
-    <End Role="ChangedBy"
-         Type="Model.IdentityEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_SyncAccount_was_CreatedBy" >
-    <End Role="SyncAccount"
-         Type="Model.SyncProviderEfImpl" 
-         Multiplicity="*" />
-    <End Role="CreatedBy"
-         Type="Model.IdentityEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_Task_was_ChangedBy" >
-    <End Role="Task"
-         Type="Model.TaskEfImpl" 
-         Multiplicity="*" />
-    <End Role="ChangedBy"
-         Type="Model.IdentityEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_Task_was_CreatedBy" >
-    <End Role="Task"
-         Type="Model.TaskEfImpl" 
-         Multiplicity="*" />
-    <End Role="CreatedBy"
-         Type="Model.IdentityEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_Test_of_Event" >
-    <End Role="Test"
-         Type="Model.EventTestObjectEfImpl" 
-         Multiplicity="*" />
-    <End Role="Event"
-         Type="Model.EventEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_TestObj_has_AnotherFile" >
-    <End Role="TestObj"
-         Type="Model.DocumentTestObjectEfImpl" 
-         Multiplicity="*" />
-    <End Role="AnotherFile"
-         Type="Model.FileEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_TestObj_has_AnyFile" >
-    <End Role="TestObj"
-         Type="Model.DocumentTestObjectEfImpl" 
-         Multiplicity="*" />
-    <End Role="AnyFile"
-         Type="Model.FileEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_TestObjClass_has_ObjectProp" >
-    <End Role="TestObjClass"
-         Type="Model.TestObjClassEfImpl" 
-         Multiplicity="*" />
-    <End Role="ObjectProp"
-         Type="Model.KundeEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_TPHBaseObj_was_ChangedBy" >
-    <End Role="TPHBaseObj"
-         Type="Model.TPHBaseObjEfImpl" 
-         Multiplicity="*" />
-    <End Role="ChangedBy"
-         Type="Model.IdentityEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_TPHBaseObj_was_CreatedBy" >
-    <End Role="TPHBaseObj"
-         Type="Model.TPHBaseObjEfImpl" 
-         Multiplicity="*" />
-    <End Role="CreatedBy"
-         Type="Model.IdentityEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
   <Association Name="FK_ViewDescriptor_has_Module" >
     <End Role="ViewDescriptor"
          Type="Model.ViewDescriptorEfImpl" 
@@ -5547,62 +3356,6 @@
          Multiplicity="*" />
     <End Role="Module"
          Type="Model.ModuleEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_WorkSchedule_has_Module" >
-    <End Role="WorkSchedule"
-         Type="Model.WorkScheduleEfImpl" 
-         Multiplicity="*" />
-    <End Role="Module"
-         Type="Model.ModuleEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_WorkSchedule_has_WorkScheduleRules" >
-    <End Role="WorkSchedule"
-         Type="Model.WorkScheduleEfImpl" 
-         Multiplicity="0..1" />
-    <End Role="WorkScheduleRules"
-         Type="Model.WorkScheduleRuleEfImpl" 
-         Multiplicity="*" />
-  </Association>
-  <Association Name="FK_WorkSchedule_was_ChangedBy" >
-    <End Role="WorkSchedule"
-         Type="Model.WorkScheduleEfImpl" 
-         Multiplicity="*" />
-    <End Role="ChangedBy"
-         Type="Model.IdentityEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_WorkSchedule_was_CreatedBy" >
-    <End Role="WorkSchedule"
-         Type="Model.WorkScheduleEfImpl" 
-         Multiplicity="*" />
-    <End Role="CreatedBy"
-         Type="Model.IdentityEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_WorkScheduleRule_has_Module" >
-    <End Role="WorkScheduleRule"
-         Type="Model.WorkScheduleRuleEfImpl" 
-         Multiplicity="*" />
-    <End Role="Module"
-         Type="Model.ModuleEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_WorkScheduleRule_was_ChangedBy" >
-    <End Role="WorkScheduleRule"
-         Type="Model.WorkScheduleRuleEfImpl" 
-         Multiplicity="*" />
-    <End Role="ChangedBy"
-         Type="Model.IdentityEfImpl" 
-         Multiplicity="0..1" />
-  </Association>
-  <Association Name="FK_WorkScheduleRule_was_CreatedBy" >
-    <End Role="WorkScheduleRule"
-         Type="Model.WorkScheduleRuleEfImpl" 
-         Multiplicity="*" />
-    <End Role="CreatedBy"
-         Type="Model.IdentityEfImpl" 
          Multiplicity="0..1" />
   </Association>
 

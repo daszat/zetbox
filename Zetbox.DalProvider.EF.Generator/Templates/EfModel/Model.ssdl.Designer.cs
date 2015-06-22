@@ -48,7 +48,7 @@ this.WriteObjects("  <EntityContainer Name=\"dbo\">\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    <!-- EntitySets for all Base Classes -->\r\n");
 #line 44 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.Name))
+foreach(var cls in GetBaseClasses(ctx).OrderBy(c => c.Name))
 	{
         var clsName = cls.Name;
 
@@ -72,7 +72,7 @@ this.WriteObjects("    </AssociationSet>\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    <!-- EntitySets for all derived classes and their inheritance AssociationSets -->\r\n");
 #line 65 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-foreach(var cls in ctx.GetDerivedTPTClasses().OrderBy(c => c.Name))
+foreach(var cls in GetDerivedTPTClasses(ctx).OrderBy(c => c.Name))
 	{
 		var info = new InheritanceStorageAssociationInfo(cls);
         var clsName = cls.Name;
@@ -91,7 +91,7 @@ this.WriteObjects("    </AssociationSet>\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    <!-- EntitySets and AssociationSet for all object-object CollectionEntrys -->\r\n");
 #line 82 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-foreach(var rel in ctx.GetRelationsWithSeparateStorage())
+foreach(var rel in GetRelationsWithSeparateStorage(ctx))
 	{
 		string assocNameA = rel.GetRelationAssociationName(RelationEndRole.A);
 		string assocNameB = rel.GetRelationAssociationName(RelationEndRole.B);
@@ -127,7 +127,7 @@ this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    <!-- AssociationSets for all object-object relations which do not need CollectionEntrys -->\r\n");
 #line 115 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-foreach (var rel in ctx.GetRelationsWithoutSeparateStorage())
+foreach (var rel in GetRelationsWithoutSeparateStorage(ctx))
 	{
 		string assocName = rel.GetAssociationName();
 		var a = rel.A;
@@ -257,7 +257,7 @@ this.WriteObjects("    </Association>\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("  <!-- EntityTypes for all object-object CollectionEntrys with their associations -->\r\n");
 #line 231 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-foreach(var rel in ctx.GetRelationsWithSeparateStorage())
+foreach(var rel in GetRelationsWithSeparateStorage(ctx))
 	{
 		string ceName = rel.GetRelationClassName();
 		string fkAName = Construct.ForeignKeyColumnName(rel.A);
@@ -342,7 +342,7 @@ this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("  <!-- Associations for all object-object relations without CollectionEntry (1:1, 1:N) -->\r\n");
 #line 307 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-foreach(var rel in ctx.GetRelationsWithoutSeparateStorage())
+foreach(var rel in GetRelationsWithoutSeparateStorage(ctx))
 	{
 		RelationEnd principal, dependent;
 	
@@ -383,7 +383,7 @@ this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("  <!-- derived->base ObjectClass references -->\r\n");
 #line 346 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-foreach(var cls in ctx.GetDerivedTPTClasses().OrderBy(c => c.Name))
+foreach(var cls in GetDerivedTPTClasses(ctx).OrderBy(c => c.Name))
 	{
 		var parentType = cls.BaseObjectClass;
 		var childType = cls;

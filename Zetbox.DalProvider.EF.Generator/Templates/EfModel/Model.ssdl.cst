@@ -41,7 +41,7 @@
 
     <!-- EntitySets for all Base Classes -->
 <%	
-	foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.Name))
+	foreach(var cls in GetBaseClasses(ctx).OrderBy(c => c.Name))
 	{
         var clsName = cls.Name;
 %>
@@ -62,7 +62,7 @@
 
     <!-- EntitySets for all derived classes and their inheritance AssociationSets -->
 <%	
-	foreach(var cls in ctx.GetDerivedTPTClasses().OrderBy(c => c.Name))
+	foreach(var cls in GetDerivedTPTClasses(ctx).OrderBy(c => c.Name))
 	{
 		var info = new InheritanceStorageAssociationInfo(cls);
         var clsName = cls.Name;
@@ -79,7 +79,7 @@
 
     <!-- EntitySets and AssociationSet for all object-object CollectionEntrys -->
 <%
-	foreach(var rel in ctx.GetRelationsWithSeparateStorage())
+	foreach(var rel in GetRelationsWithSeparateStorage(ctx))
 	{
 		string assocNameA = rel.GetRelationAssociationName(RelationEndRole.A);
 		string assocNameB = rel.GetRelationAssociationName(RelationEndRole.B);
@@ -112,7 +112,7 @@
 
     <!-- AssociationSets for all object-object relations which do not need CollectionEntrys -->
 <%
-	foreach (var rel in ctx.GetRelationsWithoutSeparateStorage())
+	foreach (var rel in GetRelationsWithoutSeparateStorage(ctx))
 	{
 		string assocName = rel.GetAssociationName();
 		var a = rel.A;
@@ -228,7 +228,7 @@
 
   <!-- EntityTypes for all object-object CollectionEntrys with their associations -->
 <%
-	foreach(var rel in ctx.GetRelationsWithSeparateStorage())
+	foreach(var rel in GetRelationsWithSeparateStorage(ctx))
 	{
 		string ceName = rel.GetRelationClassName();
 		string fkAName = Construct.ForeignKeyColumnName(rel.A);
@@ -304,7 +304,7 @@
 
   <!-- Associations for all object-object relations without CollectionEntry (1:1, 1:N) -->
 <%
-	foreach(var rel in ctx.GetRelationsWithoutSeparateStorage())
+	foreach(var rel in GetRelationsWithoutSeparateStorage(ctx))
 	{
 		RelationEnd principal, dependent;
 	
@@ -343,7 +343,7 @@
 
   <!-- derived->base ObjectClass references -->
 <%
-	foreach(var cls in ctx.GetDerivedTPTClasses().OrderBy(c => c.Name))
+	foreach(var cls in GetDerivedTPTClasses(ctx).OrderBy(c => c.Name))
 	{
 		var parentType = cls.BaseObjectClass;
 		var childType = cls;
