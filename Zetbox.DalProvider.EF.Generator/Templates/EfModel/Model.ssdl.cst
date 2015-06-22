@@ -128,7 +128,7 @@
 
     <!-- EntitySets and AssociationSet for all object-value CollectionEntrys -->
 <%
-	foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
+	foreach(var prop in GetValueTypeProperties(ctx)
         .Where(p => p.IsList && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
 		.OrderBy(p => p.ObjectClass.Name)
@@ -151,7 +151,7 @@
 
     <!-- EntitySets and AssociationSet for all object-struct CollectionEntrys -->
 <%
-	foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
+	foreach(var prop in GetCompoundObjectProperties(ctx)
         .Where(p => p.IsList) // && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
 		.OrderBy(p => p.ObjectClass.Name)
@@ -369,7 +369,7 @@
 
     <!-- EntityTypes and Associations for all object-value CollectionEntrys -->
 <%
-	foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
+	foreach(var prop in GetValueTypeProperties(ctx)
 		.Where(p => p.IsList && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
 		.OrderBy(p => p.ObjectClass.Name)
@@ -438,7 +438,7 @@
 
     <!-- EntityTypes and Associations for all object-struct CollectionEntrys -->
 <%
-	foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
+	foreach(var prop in GetCompoundObjectProperties(ctx)
 		.Where(p => p.IsList) // && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
 		.OrderBy(p => p.ObjectClass.Name)

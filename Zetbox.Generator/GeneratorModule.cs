@@ -41,6 +41,13 @@ namespace Zetbox.Generator
                 });
 
             builder
+                .RegisterCmdLineAction("generate-fallback", "generates and compiles fallback classes",
+                scope =>
+                {
+                    scope.Resolve<Compiler>().GenerateFallback();
+                });
+
+            builder
                 .RegisterCmdLineAction("compile", "[DEVEL] compiles new data classes from already generated code; used mostly for testing",
                 scope =>
                 {

@@ -44,7 +44,7 @@ this.WriteObjects("\r\n");
 this.WriteObjects("using Zetbox.API;\r\n");
 this.WriteObjects("\r\n");
 #line 41 "P:\zetbox\Zetbox.Generator\InterfaceTemplates\CollectionEntries\CollectionEntries.cst"
-foreach (var rel in ctx.GetQuery<Relation>()
+foreach (var rel in GetRelations(ctx)
         .Where(r => r.Storage == StorageType.Separate)
         .ToList() // GetRelationClassName is not mapped
         .OrderBy(r => r.GetRelationClassName()))
@@ -53,7 +53,7 @@ foreach (var rel in ctx.GetQuery<Relation>()
     }
 
 
-    foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
+    foreach (var prop in GetValueTypeProperties(ctx)
         .Where(p => p.IsList && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
         .ToList() // NHibernate-on-linux workaround
@@ -63,7 +63,7 @@ foreach (var rel in ctx.GetQuery<Relation>()
         ValueCollectionEntry.Call(Host, ctx, prop);
     }
     
-    foreach (var prop in ctx.GetQuery<CompoundObjectProperty>()
+    foreach (var prop in GetCompoundObjectProperties(ctx)
         .Where(p => p.IsList) // && !p.IsCalculated
         .Where(p => p.ObjectClass is ObjectClass)
         .ToList() // NHibernate-on-linux workaround

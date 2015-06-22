@@ -45,7 +45,7 @@ this.WriteObjects("using Zetbox.API;\r\n");
 this.WriteObjects("using Zetbox.DalProvider.Ef;\r\n");
 this.WriteObjects("\r\n");
 #line 42 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
-foreach (var rel in ctx.GetQuery<Relation>().ToList().OrderBy(r => r.GetAssociationName()))
+foreach (var rel in GetRelations(ctx).ToList().OrderBy(r => r.GetAssociationName()))
 	{
 
 #line 45 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
@@ -99,7 +99,7 @@ break;
 #line 89 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
 this.WriteObjects("\r\n");
 #line 91 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
-foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
+foreach (var prop in GetValueTypeProperties(ctx)
 		.Where(p => p.IsList && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
 		.OrderBy(p => p.ObjectClass.Name)
@@ -121,7 +121,7 @@ this.WriteObjects("\r\n");
 #line 109 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
 this.WriteObjects("\r\n");
 #line 111 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
-foreach (var prop in ctx.GetQuery<CompoundObjectProperty>()
+foreach (var prop in GetCompoundObjectProperties(ctx)
 		.Where(p => p.IsList) // && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
 		.OrderBy(p => p.ObjectClass.Name)
@@ -143,7 +143,7 @@ this.WriteObjects("\r\n");
 #line 129 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
 this.WriteObjects("\r\n");
 #line 131 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
-foreach (var cls in ctx.GetQuery<ObjectClass>().Where(c => c.BaseObjectClass == null)
+foreach (var cls in GetObjectClasses(ctx).Where(c => c.BaseObjectClass == null)
 		.OrderBy(c => c.Name))
 	{
 		if (cls.NeedsRightsTable())

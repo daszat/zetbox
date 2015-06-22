@@ -20,6 +20,8 @@ namespace Zetbox.Generator
     using System.Linq;
     using System.Text;
     using Arebis.CodeGeneration;
+    using Zetbox.API;
+    using Zetbox.App.Base;
 
     public class ResourceTemplate
         : CodeTemplate
@@ -84,6 +86,62 @@ namespace Zetbox.Generator
         {
             if (text == null) return null;
             return text.Replace("&", "&amp;").Replace("<", "&lt;").Replace(">", "&gt;").Replace("\"", "&quot;").Replace("'", "&apos;");
+        }
+
+        public bool IsFallback
+        {
+            get
+            {
+                return "true".Equals(Settings["isfallback"], StringComparison.CurrentCultureIgnoreCase);
+            }
+        }
+
+        protected virtual IQueryable<DataType> GetDataTypes(IZetboxContext ctx)
+        {
+            if (!IsFallback)
+                return ctx.GetQuery<DataType>();
+            else
+                return ctx.GetQuery<DataType>().Where(i => Compiler.FallbackModules.Contains(i.Module.Name));
+        }
+
+        protected virtual IQueryable<ObjectClass> GetObjectClasses(IZetboxContext ctx)
+        {
+            if (!IsFallback)
+                return ctx.GetQuery<ObjectClass>();
+            else
+                return ctx.GetQuery<ObjectClass>().Where(i => Compiler.FallbackModules.Contains(i.Module.Name));
+        }
+
+        protected virtual IQueryable<CompoundObject> GetCompoundObjects(IZetboxContext ctx)
+        {
+            if (!IsFallback)
+                return ctx.GetQuery<CompoundObject>();
+            else
+                return ctx.GetQuery<CompoundObject>().Where(i => Compiler.FallbackModules.Contains(i.Module.Name));
+        }
+
+        protected virtual IQueryable<Relation> GetRelations(IZetboxContext ctx)
+        {
+            if (!IsFallback)
+                return ctx.GetQuery<Relation>();
+            else
+                return ctx.GetQuery<Relation>().Where(i => Compiler.FallbackModules.Contains(i.Module.Name));
+        }
+
+        protected virtual IQueryable<ValueTypeProperty> GetValueTypeProperties(IZetboxContext ctx)
+        {
+            if (!IsFallback)
+                return ctx.GetQuery<ValueTypeProperty>();
+            else
+                return ctx.GetQuery<ValueTypeProperty>().Where(i => Compiler.FallbackModules.Contains(i.Module.Name));
+        }
+
+        protected virtual IQueryable<CompoundObjectProperty> GetCompoundObjectProperties(IZetboxContext ctx)
+        {
+            if (!IsFallback)
+                return ctx.GetQuery<CompoundObjectProperty>();
+            else
+                return ctx.GetQuery<CompoundObjectProperty>().Where(i => Compiler.FallbackModules.Contains(i.Module.Name));
         }
     }
 }

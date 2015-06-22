@@ -49,7 +49,7 @@ using <%= ns %>;
 <%
     }
 
-	foreach (var rel in ctx.GetQuery<Relation>()
+	foreach (var rel in GetRelations(ctx)
 	    .Where(r => r.Storage == StorageType.Separate)
 	    .ToList()
 	    .OrderBy(r => r.GetRelationClassName()))
@@ -67,7 +67,7 @@ namespace <%= rel.Module.Namespace %>
 	}
 %>
 <%
-	foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
+	foreach (var prop in GetValueTypeProperties(ctx)
         .Where(p => p.IsList && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
         .ToList() // NHibernate-on-linux workaround
@@ -87,7 +87,7 @@ namespace <%= prop.GetCollectionEntryNamespace() %>
 	}
 %>
 <%
-	foreach (var prop in ctx.GetQuery<CompoundObjectProperty>()
+	foreach (var prop in GetCompoundObjectProperties(ctx)
         .Where(p => p.IsList) // && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
         .ToList() // NHibernate-on-linux workaround

@@ -78,7 +78,7 @@
 
     <!-- EntitySets and AssociationSets for all object-value CollectionEntrys -->
 <%
-    foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
+    foreach (var prop in GetValueTypeProperties(ctx)
         .Where(p => p.IsList && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
         .OrderBy(p => p.ObjectClass.Name)
@@ -99,7 +99,7 @@
 
     <!-- EntitySets and AssociationSets for all object-struct CollectionEntrys -->
 <%
-    foreach (var prop in ctx.GetQuery<CompoundObjectProperty>()
+    foreach (var prop in GetCompoundObjectProperties(ctx)
         .Where(p => p.IsList) // && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
         .OrderBy(p => p.ObjectClass.Name)
@@ -287,7 +287,7 @@
 
   <!-- EntityTypes and Associations for all object-value CollectionEntrys -->
 <%
-    foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
+    foreach (var prop in GetValueTypeProperties(ctx)
         .Where(p => p.IsList && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
         .OrderBy(p => p.ObjectClass.Name)
@@ -332,7 +332,7 @@
 
 <!-- EntityTypes and Associations for all object-CompoundObject CollectionEntrys -->
 <%
-    foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
+    foreach(var prop in GetCompoundObjectProperties(ctx)
         .Where(p => p.IsList) // && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
         .OrderBy(p => p.ObjectClass.Name)
@@ -400,7 +400,7 @@
 
   <!-- ComplexTypes for all CompoundObjects -->
 <%
-    foreach (var cls in ctx.GetQuery<CompoundObject>().OrderBy(s => s.Name))
+    foreach (var cls in GetCompoundObjects(ctx).OrderBy(s => s.Name))
     {
 %>
   <ComplexType Name="<%= cls.Name %>EfImpl" >

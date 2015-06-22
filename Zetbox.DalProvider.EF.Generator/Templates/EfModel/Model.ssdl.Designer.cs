@@ -145,7 +145,7 @@ this.WriteObjects("    </AssociationSet>\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    <!-- EntitySets and AssociationSet for all object-value CollectionEntrys -->\r\n");
 #line 131 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
+foreach(var prop in GetValueTypeProperties(ctx)
         .Where(p => p.IsList && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
 		.OrderBy(p => p.ObjectClass.Name)
@@ -170,7 +170,7 @@ this.WriteObjects("    \r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    <!-- EntitySets and AssociationSet for all object-struct CollectionEntrys -->\r\n");
 #line 154 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
+foreach(var prop in GetCompoundObjectProperties(ctx)
         .Where(p => p.IsList) // && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
 		.OrderBy(p => p.ObjectClass.Name)
@@ -412,7 +412,7 @@ this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    <!-- EntityTypes and Associations for all object-value CollectionEntrys -->\r\n");
 #line 372 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
+foreach(var prop in GetValueTypeProperties(ctx)
 		.Where(p => p.IsList && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
 		.OrderBy(p => p.ObjectClass.Name)
@@ -485,7 +485,7 @@ this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    <!-- EntityTypes and Associations for all object-struct CollectionEntrys -->\r\n");
 #line 441 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.ssdl.cst"
-foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
+foreach(var prop in GetCompoundObjectProperties(ctx)
 		.Where(p => p.IsList) // && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
 		.OrderBy(p => p.ObjectClass.Name)

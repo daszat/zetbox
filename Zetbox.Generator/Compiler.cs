@@ -32,7 +32,7 @@ namespace Zetbox.Generator
 
     public abstract class Compiler
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.Generator.Compiler");
+        private readonly static log4net.ILog _log = log4net.LogManager.GetLogger("Zetbox.Generator.Compiler");
 
         private readonly ILifetimeScope _container;
         private readonly IEnumerable<AbstractBaseGenerator> _generatorProviders;
@@ -47,15 +47,16 @@ namespace Zetbox.Generator
 
         protected abstract bool CompileSingle(AbstractBaseGenerator gen, Dictionary<string, string> buildProps, string workingPath, string target);
 
+        public bool IsFallback { get; private set; }
         public void GenerateCode()
         {
             if (_generatorProviders.Count() == 0)
             {
-                Log.Warn("No BaseDataObjectGenerators found. Exiting the Generator.");
+                _log.Warn("No BaseDataObjectGenerators found. Exiting the Generator.");
                 return;
             }
 
-            using (Log.InfoTraceMethodCall("GenerateCode", "Generating DAL-classes"))
+            using (_log.InfoTraceMethodCall("GenerateCode", "Generating DAL-classes"))
             {
                 var workingPath = _config.Server.CodeGenWorkingPath;
                 if (String.IsNullOrEmpty(workingPath))
@@ -65,20 +66,27 @@ namespace Zetbox.Generator
 
                 if (!Directory.Exists(workingPath))
                 {
-                    Log.InfoFormat("Creating destination directory: [{0}]", workingPath);
+                    _log.InfoFormat("Creating destination directory: [{0}]", workingPath);
                     Directory.CreateDirectory(workingPath);
                 }
 
                 GenerateTo(workingPath);
                 CompileCodeOnStaThread(workingPath);
                 PublishOutput();
-                Log.Info("Finished generating Code");
+                _log.Info("Finished generating Code");
             }
+        }
+
+        public void GenerateFallback()
+        {
+            _log.Info("Preparing env. to generate fallback");
+            IsFallback = true;
+            GenerateCode();
         }
 
         public void CompileCode()
         {
-            using (Log.InfoTraceMethodCall("CompileCode", "Compiling the code"))
+            using (_log.InfoTraceMethodCall("CompileCode", "Compiling the code"))
             {
                 CompileCodeOnStaThread(_config.Server.CodeGenWorkingPath);
                 PublishOutput();
@@ -92,11 +100,11 @@ namespace Zetbox.Generator
             var staThread = new Thread(() => { try { success = CompileCode(workingPath); } catch (Exception ex) { failed = ex; } });
             if (staThread.TrySetApartmentState(ApartmentState.STA))
             {
-                Log.Info("Successfully set STA on compile thread");
+                _log.Info("Successfully set STA on compile thread");
             }
             else
             {
-                Log.Warn("STA not set on compile thread");
+                _log.Warn("STA not set on compile thread");
             }
             staThread.Name = "Compile";
             staThread.Start();
@@ -115,17 +123,17 @@ namespace Zetbox.Generator
 
         private void GenerateTo(string workingPath)
         {
-            Log.InfoFormat("Generating Code to [{0}]", workingPath);
+            _log.InfoFormat("Generating Code to [{0}]", workingPath);
             // TODO: use TaskExecutor to optimally use multicores
             // nhibernate on mono triggers a runtime fault with 2.10.x
             //if (Environment.GetEnvironmentVariable("ZETBOX_SERIALIZE_COMPILATION") == "yes")
             //{
-            Log.Warn("Serializing generation threads.");
+            _log.Warn("Serializing generation threads.");
 
             var ctx = _container.Resolve<IZetboxServerContext>();
             foreach (var gen in _generatorProviders)
             {
-                gen.Generate(ctx, workingPath);
+                gen.Generate(ctx, workingPath, this);
             }
 
             //}
@@ -149,12 +157,12 @@ namespace Zetbox.Generator
                     {
                         using (var innerContainer = _container.BeginLifetimeScope())
                         {
-                            generator.Generate(innerContainer.Resolve<IZetboxServerContext>(), workingPath);
+                            generator.Generate(innerContainer.Resolve<IZetboxServerContext>(), workingPath, this);
                         }
                     }
                     catch (Exception ex)
                     {
-                        Log.Error(String.Format("Error generating [{0}]:", generator.Description), ex);
+                        _log.Error(String.Format("Error generating [{0}]:", generator.Description), ex);
                         lock (failed)
                         {
                             failed.Add(ex);
@@ -189,11 +197,11 @@ namespace Zetbox.Generator
 
         private bool CompileCode(string workingPath)
         {
-            using (Log.InfoTraceMethodCall("CompileCode", "Compile Code on STA thread to " + workingPath))
+            using (_log.InfoTraceMethodCall("CompileCode", "Compile Code on STA thread to " + workingPath))
             {
                 var zetboxApiPath = GetApiPath();
 
-                Log.DebugFormat("zetboxApiPath = [{0}]", zetboxApiPath);
+                _log.DebugFormat("zetboxApiPath = [{0}]", zetboxApiPath);
 
                 // TODO: move MsBuild logging to log4net
                 if (File.Exists("TemplateCodegenLog.txt"))
@@ -201,7 +209,7 @@ namespace Zetbox.Generator
 
                 string binPath = GetBinaryBasePath(workingPath);
 
-                Log.DebugFormat("binPath = [{0}]", binPath);
+                _log.DebugFormat("binPath = [{0}]", binPath);
 
                 Directory.CreateDirectory(binPath);
 
@@ -265,7 +273,7 @@ namespace Zetbox.Generator
             var outputPath = _config.Server.CodeGenOutputPath;
             if (!String.IsNullOrEmpty(outputPath))
             {
-                Log.InfoFormat("Publishing results to [{0}]", outputPath);
+                _log.InfoFormat("Publishing results to [{0}]", outputPath);
                 try
                 {
                     PreparePublishOutput(outputPath);
@@ -284,7 +292,7 @@ namespace Zetbox.Generator
                     // target
                     foreach (var binaryOutputPath in _config.Server.CodeGenBinaryOutputPath.Select(p => Path.GetFullPath(p)))
                     {
-                        Log.InfoFormat("Deploying binaries from [{0}] to CodeGenBinaryOutputPath [{1}]", binaryBasePath, binaryOutputPath);
+                        _log.InfoFormat("Deploying binaries from [{0}] to CodeGenBinaryOutputPath [{1}]", binaryBasePath, binaryOutputPath);
                         DirectoryCopy(binaryBasePath, binaryOutputPath);
 
                         // Case #1382: Recompile to regenerate PDB's
@@ -328,7 +336,7 @@ namespace Zetbox.Generator
             foreach (FileInfo file in files)
             {
                 string temppath = Path.Combine(destDirName, file.Name);
-                Log.InfoFormat("copying [{0}] => [{1}]", file, temppath);
+                _log.InfoFormat("copying [{0}] => [{1}]", file, temppath);
                 file.CopyTo(temppath, true);
             }
 
@@ -342,35 +350,62 @@ namespace Zetbox.Generator
 
         #region GetLists
 
-        public static IQueryable<ObjectClass> GetObjectClassList(IZetboxContext ctx)
+        public static readonly string[] FallbackModules = new[] { "ZetboxBase", "GUI" };
+
+        public IQueryable<ObjectClass> GetObjectClassList(IZetboxContext ctx)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
 
-            return ctx.GetQuery<ObjectClass>();
+            if (!IsFallback)
+            {
+                return ctx.GetQuery<ObjectClass>();
+            }
+            else
+            {
+                return ctx.GetQuery<ObjectClass>().Where(i => FallbackModules.Contains(i.Module.Name));
+            }
         }
 
-        public static IQueryable<Interface> GetInterfaceList(IZetboxContext ctx)
+        public IQueryable<Interface> GetInterfaceList(IZetboxContext ctx)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
 
-            return from i in ctx.GetQuery<Interface>()
-                   select i;
+            if (!IsFallback)
+            {
+                return ctx.GetQuery<Interface>();
+            }
+            else
+            {
+                return ctx.GetQuery<Interface>().Where(i => FallbackModules.Contains(i.Module.Name));
+            }
         }
 
-        public static IQueryable<Enumeration> GetEnumList(IZetboxContext ctx)
+        public IQueryable<Enumeration> GetEnumList(IZetboxContext ctx)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
 
-            return from e in ctx.GetQuery<Enumeration>()
-                   select e;
+            if (!IsFallback)
+            {
+                return ctx.GetQuery<Enumeration>();
+            }
+            else
+            {
+                return ctx.GetQuery<Enumeration>().Where(i => FallbackModules.Contains(i.Module.Name));
+            }
         }
 
-        public static IQueryable<CompoundObject> GetCompoundObjectList(IZetboxContext ctx)
+        public IQueryable<CompoundObject> GetCompoundObjectList(IZetboxContext ctx)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
 
-            return from s in ctx.GetQuery<CompoundObject>()
-                   select s;
+            if (!IsFallback)
+            {
+                return ctx.GetQuery<CompoundObject>();
+            }
+            else
+            {
+                return ctx.GetQuery<CompoundObject>().Where(i => FallbackModules.Contains(i.Module.Name));
+            }
         }
 
         #endregion

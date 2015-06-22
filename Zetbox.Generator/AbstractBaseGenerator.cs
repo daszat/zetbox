@@ -42,10 +42,12 @@ namespace Zetbox.Generator
         // Case #1382?
         protected string CodeBasePath { get; private set; }
 
-        public virtual void Generate(Zetbox.API.IZetboxContext ctx, string basePath)
+        private Compiler _compiler;
+        public virtual void Generate(Zetbox.API.IZetboxContext ctx, string basePath, Compiler compiler)
         {
             using (Log.InfoTraceMethodCall("Generate", "Generating " + this.BaseName))
             {
+                _compiler = compiler;
                 InitCodeBasePath(basePath);
                 Directory.CreateDirectory(CodeBasePath);
                 DeleteOldFiles();
@@ -190,6 +192,8 @@ namespace Zetbox.Generator
 
                 gen.Settings.Add("propertydescriptorname", CustomPropertyDescriptorName);
 
+                gen.Settings.Add("isfallback", _compiler.IsFallback.ToString());
+
                 gen.TemplateParameters = new object[] { ctx }.Concat(args).ToArray();
 
                 gen.ExecuteTemplate();
@@ -281,7 +285,7 @@ namespace Zetbox.Generator
             var generatedFileNames = new List<string>();
 
             Log.Info("  Object Classes");
-            foreach (ObjectClass objClass in Compiler.GetObjectClassList(ctx).ToList().OrderBy(x => x.Name).ToList())
+            foreach (ObjectClass objClass in _compiler.GetObjectClassList(ctx).OrderBy(x => x.Name).ToList())
             {
                 generatedFileNames.Add(Generate_ObjectClass(ctx, objClass));
                 Log.Debug("    " + objClass.Name);
@@ -291,21 +295,21 @@ namespace Zetbox.Generator
             generatedFileNames.Add(Generate_CollectionEntries(ctx));
 
             Log.Info("  Interfaces");
-            foreach (Interface i in Compiler.GetInterfaceList(ctx).OrderBy(x => x.Name))
+            foreach (Interface i in _compiler.GetInterfaceList(ctx).OrderBy(x => x.Name))
             {
                 generatedFileNames.Add(Generate_Interface(ctx, i));
                 Log.Debug("    " + i.Name);
             }
 
             Log.Info("  Enums");
-            foreach (Enumeration e in Compiler.GetEnumList(ctx).OrderBy(x => x.Name))
+            foreach (Enumeration e in _compiler.GetEnumList(ctx).OrderBy(x => x.Name))
             {
                 generatedFileNames.Add(Generate_Enumeration(ctx, e));
                 Log.Debug("    " + e.Name);
             }
 
             Log.Info("  CompoundObjects");
-            foreach (CompoundObject s in Compiler.GetCompoundObjectList(ctx).OrderBy(x => x.Name))
+            foreach (CompoundObject s in _compiler.GetCompoundObjectList(ctx).OrderBy(x => x.Name))
             {
                 generatedFileNames.Add(Generate_CompoundObject(ctx, s));
                 Log.Debug("    " + s.Name);

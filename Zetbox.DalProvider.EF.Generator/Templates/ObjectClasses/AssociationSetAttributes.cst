@@ -39,7 +39,7 @@ using Zetbox.API;
 using Zetbox.DalProvider.Ef;
 
 <%
-	foreach (var rel in ctx.GetQuery<Relation>().ToList().OrderBy(r => r.GetAssociationName()))
+	foreach (var rel in GetRelations(ctx).ToList().OrderBy(r => r.GetAssociationName()))
 	{
 %>
 
@@ -88,7 +88,7 @@ using Zetbox.DalProvider.Ef;
 %>
 
 <%
-	foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
+	foreach (var prop in GetValueTypeProperties(ctx)
 		.Where(p => p.IsList && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
 		.OrderBy(p => p.ObjectClass.Name)
@@ -108,7 +108,7 @@ using Zetbox.DalProvider.Ef;
 %>
 
 <%
-	foreach (var prop in ctx.GetQuery<CompoundObjectProperty>()
+	foreach (var prop in GetCompoundObjectProperties(ctx)
 		.Where(p => p.IsList) // && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
 		.OrderBy(p => p.ObjectClass.Name)
@@ -128,7 +128,7 @@ using Zetbox.DalProvider.Ef;
 %>
 
 <%
-	foreach (var cls in ctx.GetQuery<ObjectClass>().Where(c => c.BaseObjectClass == null)
+	foreach (var cls in GetObjectClasses(ctx).Where(c => c.BaseObjectClass == null)
 		.OrderBy(c => c.Name))
 	{
 		if (cls.NeedsRightsTable())
