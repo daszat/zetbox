@@ -3066,6 +3066,547 @@ namespace Zetbox.App.Base
     // END Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
 }
 
+namespace Zetbox.App.SchemaMigration
+{
+    // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+    [EdmEntityType(NamespaceName="Model", Name="SourceColumn_created_Property_RelationEntryEfImpl")]
+    [System.Diagnostics.DebuggerDisplay("SourceColumn_created_Property_RelationEntryEfImpl")]
+    public class SourceColumn_created_Property_RelationEntryEfImpl : Zetbox.DalProvider.Ef.RelationEntryEfImpl<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.SchemaMigration.SourceColumnEfImpl, Zetbox.App.Base.Property, Zetbox.App.Base.PropertyEfImpl>, SourceColumn_created_Property_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
+    {
+        [Obsolete]
+        public SourceColumn_created_Property_RelationEntryEfImpl()
+            : base(null)
+        {
+        }
+
+        public SourceColumn_created_Property_RelationEntryEfImpl(Func<IFrozenContext> lazyCtx)
+            : base(lazyCtx)
+        {
+        }
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        [EdmScalarProperty(EntityKeyProperty=true, IsNullable=false)]
+        public override int ID
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ID;
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_ID != value)
+                {
+                    var __oldValue = _ID;
+                    var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                }
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
+            }
+        }
+        private int _ID;
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.IdProperty
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public Guid ExportGuid
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ExportGuid;
+                if (_ExportGuid_store == Guid.Empty) {
+                    __result = _ExportGuid_store = Guid.NewGuid();
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_ExportGuid != value)
+                {
+                    var __oldValue = _ExportGuid;
+                    var __newValue = value;
+                    NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
+                    _ExportGuid = __newValue;
+                    NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                }
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
+            }
+        }
+        private Guid _ExportGuid_store;
+        private Guid _ExportGuid {
+            get { return _ExportGuid_store; }
+            set {
+                ReportEfPropertyChanging("ExportGuid");
+                _ExportGuid_store = value;
+                ReportEfPropertyChanged("ExportGuid");
+            }
+        }
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ExportGuidProperty
+        #region RelationEntry.ApplyClassHeadTemplate
+
+        private static readonly Guid _relationID = new Guid("fb27e3f8-3615-4f3b-ae2a-2b89b8782e27");
+        public override Guid RelationID { get { return _relationID; } }
+
+        IDataObject IRelationEntry.AObject
+        {
+            get
+            {
+                return A;
+            }
+            set
+            {
+                // settor will do checking for us
+                A = (Zetbox.App.SchemaMigration.SourceColumn)value;
+            }
+        }
+
+        IDataObject IRelationEntry.BObject
+        {
+            get
+            {
+                return B;
+            }
+            set
+            {
+                // settor will do checking for us
+                B = (Zetbox.App.Base.Property)value;
+            }
+        }
+
+        #endregion // RelationEntry.ApplyClassHeadTemplate
+
+
+        /// <summary>
+        /// the A-side value of this CollectionEntry
+        /// </summary>
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
+        // referencedInterface=Zetbox.App.SchemaMigration.SourceColumn; moduleNamespace=Zetbox.App.SchemaMigration;
+        // will get inverse collection for notifications for DestinationPropertyImpl
+        // PositionStorage=A_pos;
+        // Target exportable
+
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Zetbox.App.SchemaMigration.SourceColumn A
+        {
+            get { return AImpl; }
+            set { AImpl = (Zetbox.App.SchemaMigration.SourceColumnEfImpl)value; }
+        }
+
+        private int? _fk_A;
+
+        private Guid? _fk_guid_A = null;
+
+        // internal implementation, EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_SourceColumn_created_Property_A", "SourceColumn")]
+        public Zetbox.App.SchemaMigration.SourceColumnEfImpl AImpl
+        {
+            get
+            {
+                Zetbox.App.SchemaMigration.SourceColumnEfImpl __value;
+                EntityReference<Zetbox.App.SchemaMigration.SourceColumnEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.SchemaMigration.SourceColumnEfImpl>(
+                        "Model.FK_SourceColumn_created_Property_A",
+                        "SourceColumn");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load();
+                }
+                __value = r.Value;
+                return __value;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
+
+                EntityReference<Zetbox.App.SchemaMigration.SourceColumnEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.SchemaMigration.SourceColumnEfImpl>(
+                        "Model.FK_SourceColumn_created_Property_A",
+                        "SourceColumn");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load();
+                }
+                Zetbox.App.SchemaMigration.SourceColumnEfImpl __oldValue = (Zetbox.App.SchemaMigration.SourceColumnEfImpl)r.Value;
+                Zetbox.App.SchemaMigration.SourceColumnEfImpl __newValue = (Zetbox.App.SchemaMigration.SourceColumnEfImpl)value;
+
+                // fetch collection proxy and attach change notifications
+                if (__oldValue != null) __oldValue.GetDestinationPropertyImplCollection();
+                if (__newValue != null) __newValue.GetDestinationPropertyImplCollection();
+
+                // Changing Event fires before anything is touched
+                NotifyPropertyChanging("A", __oldValue, __newValue);
+
+                r.Value = (Zetbox.App.SchemaMigration.SourceColumnEfImpl)__newValue;
+
+                // everything is done. fire the Changed event
+                NotifyPropertyChanged("A", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
+            }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.SchemaMigration.SourceColumn>(this.A);
+        }
+
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public int? A_pos
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _A_pos;
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_A_pos != value)
+                {
+                    var __oldValue = _A_pos;
+                    var __newValue = value;
+                    NotifyPropertyChanging("A_pos", __oldValue, __newValue);
+                    _A_pos = __newValue;
+                    NotifyPropertyChanged("A_pos", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                }
+                else
+                {
+                    SetInitializedProperty("A_pos");
+                }
+            }
+        }
+        private int? _A_pos_store;
+        private int? _A_pos {
+            get { return _A_pos_store; }
+            set {
+                ReportEfPropertyChanging("A_pos");
+                _A_pos_store = value;
+                ReportEfPropertyChanged("A_pos");
+            }
+        }
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+
+        /// <summary>
+        /// the B-side value of this CollectionEntry
+        /// </summary>
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
+        // referencedInterface=Zetbox.App.Base.Property; moduleNamespace=Zetbox.App.SchemaMigration;
+        // no inverse navigator handling
+        // PositionStorage=B_pos;
+        // Target exportable
+
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Zetbox.App.Base.Property B
+        {
+            get { return BImpl; }
+            set { BImpl = (Zetbox.App.Base.PropertyEfImpl)value; }
+        }
+
+        private int? _fk_B;
+
+        private Guid? _fk_guid_B = null;
+
+        // internal implementation, EF sees only this property
+        [EdmRelationshipNavigationProperty("Model", "FK_SourceColumn_created_Property_B", "Property")]
+        public Zetbox.App.Base.PropertyEfImpl BImpl
+        {
+            get
+            {
+                Zetbox.App.Base.PropertyEfImpl __value;
+                EntityReference<Zetbox.App.Base.PropertyEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.PropertyEfImpl>(
+                        "Model.FK_SourceColumn_created_Property_B",
+                        "Property");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load();
+                }
+                __value = r.Value;
+                return __value;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
+
+                EntityReference<Zetbox.App.Base.PropertyEfImpl> r
+                    = ((IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Zetbox.App.Base.PropertyEfImpl>(
+                        "Model.FK_SourceColumn_created_Property_B",
+                        "Property");
+                if (this.EntityState.In(System.Data.EntityState.Modified, System.Data.EntityState.Unchanged)
+                    && !r.IsLoaded)
+                {
+                    r.Load();
+                }
+                Zetbox.App.Base.PropertyEfImpl __oldValue = (Zetbox.App.Base.PropertyEfImpl)r.Value;
+                Zetbox.App.Base.PropertyEfImpl __newValue = (Zetbox.App.Base.PropertyEfImpl)value;
+
+                // Changing Event fires before anything is touched
+                NotifyPropertyChanging("B", __oldValue, __newValue);
+
+                r.Value = (Zetbox.App.Base.PropertyEfImpl)__newValue;
+
+                // everything is done. fire the Changed event
+                NotifyPropertyChanged("B", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
+            }
+        }
+
+        public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+        {
+            return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Property>(this.B);
+        }
+
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public int? B_pos
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _B_pos;
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_B_pos != value)
+                {
+                    var __oldValue = _B_pos;
+                    var __newValue = value;
+                    NotifyPropertyChanging("B_pos", __oldValue, __newValue);
+                    _B_pos = __newValue;
+                    NotifyPropertyChanged("B_pos", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                }
+                else
+                {
+                    SetInitializedProperty("B_pos");
+                }
+            }
+        }
+        private int? _B_pos_store;
+        private int? _B_pos {
+            get { return _B_pos_store; }
+            set {
+                ReportEfPropertyChanging("B_pos");
+                _B_pos_store = value;
+                ReportEfPropertyChanged("B_pos");
+            }
+        }
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingValueProperty
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+
+        /// <summary>
+        /// Index into the A-side list of this relation
+        /// </summary>
+        public int? AIndex { get { return _A_pos; } set { _A_pos = value; } }
+
+        /// <summary>
+        /// Index into the B-side list of this relation
+        /// </summary>
+        public int? BIndex { get { return _B_pos; } set { _B_pos = value; } }
+
+        #region Serializer
+
+
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        {
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
+            // it may be only an empty shell to stand-in for unreadable data
+            if (!CurrentAccessRights.HasReadRights()) return;
+            binStream.Write(this._ExportGuid);
+            {
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.SchemaMigration.SourceColumnEfImpl>("Model.FK_SourceColumn_created_Property_A", "SourceColumn");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
+            }
+            if (auxObjects != null) {
+                auxObjects.Add(A);
+            }
+            binStream.Write(this._A_pos);
+            {
+                var r = this.RelationshipManager.GetRelatedReference<Zetbox.App.Base.PropertyEfImpl>("Model.FK_SourceColumn_created_Property_B", "Property");
+                var key = r.EntityKey;
+                binStream.Write(r.Value != null ? r.Value.ID : (key != null ? (int?)key.EntityKeyValues.Single().Value : (int?)null));
+            }
+            binStream.Write(this._B_pos);
+        }
+
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
+        {
+            var baseResult = base.FromStream(binStream);
+            var result = new List<IPersistenceObject>();
+            // it may be only an empty shell to stand-in for unreadable data
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
+            this._ExportGuid = binStream.ReadGuid();
+            binStream.Read(out this._fk_A);
+            this._A_pos = binStream.ReadNullableInt32();
+            binStream.Read(out this._fk_B);
+            this._B_pos = binStream.ReadNullableInt32();
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
+            return baseResult == null
+                ? result.Count == 0
+                    ? null
+                    : result
+                : baseResult.Concat(result);
+        }
+
+        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            xml.WriteAttributeString("ExportGuid", _ExportGuid.ToString());
+            // it may be only an empty shell to stand-in for unreadable data
+            if (!CurrentAccessRights.HasReadRights()) return;
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Zetbox.App.SchemaMigration");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream(this._A_pos, xml, "A_pos", "Zetbox.App.SchemaMigration");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Zetbox.App.SchemaMigration");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream(this._B_pos, xml, "B_pos", "Zetbox.App.SchemaMigration");
+        }
+
+        public virtual void MergeImport(System.Xml.XmlReader xml)
+        {
+            // it may be only an empty shell to stand-in for unreadable data
+            if (!CurrentAccessRights.HasReadRights()) return;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "|ExportGuid":
+                this._ExportGuid = XmlStreamer.ReadGuid(xml);
+                break;
+            case "Zetbox.App.SchemaMigration|A":
+                this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Zetbox.App.SchemaMigration|A_pos":
+                this._A_pos = XmlStreamer.ReadNullableInt32(xml);
+                break;
+            case "Zetbox.App.SchemaMigration|B":
+                this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Zetbox.App.SchemaMigration|B_pos":
+                this._B_pos = XmlStreamer.ReadNullableInt32(xml);
+                break;
+            }
+        }
+
+        #endregion
+
+        public override Type GetImplementedInterface()
+        {
+            return typeof(SourceColumn_created_Property_RelationEntry);
+        }
+
+        public override void ApplyChangesFrom(IPersistenceObject obj)
+        {
+            base.ApplyChangesFrom(obj);
+            var other = (SourceColumn_created_Property_RelationEntryEfImpl)obj;
+            var me = (SourceColumn_created_Property_RelationEntryEfImpl)this;
+
+            me._fk_A = other._fk_A;
+            me.AIndex = other.AIndex;
+            me._fk_B = other._fk_B;
+            me.BIndex = other.BIndex;
+        }
+
+
+        public override void ReloadReferences()
+        {
+            // Do not reload references if the current object has been deleted.
+            // TODO: enable when MemoryContext uses MemoryDataObjects
+            //if (this.ObjectState == DataObjectState.Deleted) return;
+
+            if (_fk_guid_A.HasValue)
+                AImpl = (Zetbox.App.SchemaMigration.SourceColumnEfImpl)Context.FindPersistenceObject<Zetbox.App.SchemaMigration.SourceColumn>(_fk_guid_A.Value);
+            else
+            if (_fk_A.HasValue)
+                AImpl = (Zetbox.App.SchemaMigration.SourceColumnEfImpl)Context.Find<Zetbox.App.SchemaMigration.SourceColumn>(_fk_A.Value);
+            else
+                AImpl = null;
+
+            if (_fk_guid_B.HasValue)
+                BImpl = (Zetbox.App.Base.PropertyEfImpl)Context.FindPersistenceObject<Zetbox.App.Base.Property>(_fk_guid_B.Value);
+            else
+            if (_fk_B.HasValue)
+                BImpl = (Zetbox.App.Base.PropertyEfImpl)Context.Find<Zetbox.App.Base.Property>(_fk_B.Value);
+            else
+                BImpl = null;
+
+        }
+
+
+        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
+        {
+            base.OnPropertyChanged(property, oldValue, newValue);
+
+            if (property == "A" || property == "B")
+            {
+                var oldNotifier = (INotifyPropertyChanged)oldValue;
+                var newNotifier = (INotifyPropertyChanged)newValue;
+
+                if (oldNotifier != null) oldNotifier.PropertyChanged -= new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
+                if (newNotifier != null) newNotifier.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
+                ManageMyObjectState();
+            }
+        }
+
+        void AB_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "ObjectState")
+            {
+                ManageMyObjectState();
+            }
+        }
+
+        private void ManageMyObjectState()
+        {
+            if (A != null && A.ObjectState == DataObjectState.Deleted && this.Context != null)
+                this.Context.Delete(this);
+            if (B != null && B.ObjectState == DataObjectState.Deleted && this.Context != null)
+                this.Context.Delete(this);
+
+            if (this.ObjectState == DataObjectState.Deleted && A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
+                this.SetUnDeleted();
+        }
+    }
+    // END Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry
+}
+
 namespace Zetbox.App.GUI
 {
     // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.CollectionEntries.RelationEntry

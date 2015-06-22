@@ -175,6 +175,8 @@
     <Compile Include="ZetboxBase\IsValidNamespaceConstraint.Memory.Designer.cs" />
     <Compile Include="ZetboxBase\Method.Memory.Designer.cs" />
     <Compile Include="ZetboxBase\MethodInvocationConstraint.Memory.Designer.cs" />
+    <Compile Include="SchemaMigration\MigrationLog.Memory.Designer.cs" />
+    <Compile Include="SchemaMigration\MigrationProject.Memory.Designer.cs" />
     <Compile Include="ZetboxBase\Module.Memory.Designer.cs" />
     <Compile Include="GUI\MonthFilterConfiguration.Memory.Designer.cs" />
     <Compile Include="GUI\NavigationAction.Memory.Designer.cs" />
@@ -201,6 +203,10 @@
     <Compile Include="ZetboxBase\SequenceData.Memory.Designer.cs" />
     <Compile Include="ZetboxBase\ServiceDescriptor.Memory.Designer.cs" />
     <Compile Include="GUI\SinglePropertyFilterConfiguration.Memory.Designer.cs" />
+    <Compile Include="SchemaMigration\SourceColumn.Memory.Designer.cs" />
+    <Compile Include="SchemaMigration\SourceEnum.Memory.Designer.cs" />
+    <Compile Include="SchemaMigration\SourceTable.Memory.Designer.cs" />
+    <Compile Include="SchemaMigration\StagingDatabase.Memory.Designer.cs" />
     <Compile Include="ZetboxBase\StringDefaultValue.Memory.Designer.cs" />
     <Compile Include="ZetboxBase\StringParameter.Memory.Designer.cs" />
     <Compile Include="ZetboxBase\StringProperty.Memory.Designer.cs" />

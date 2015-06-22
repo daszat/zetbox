@@ -3290,6 +3290,563 @@ namespace Zetbox.App.Base
     // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
 }
 
+namespace Zetbox.App.SchemaMigration
+{
+    // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+    [System.Diagnostics.DebuggerDisplay("SourceColumn_created_Property_RelationEntryNHibernateImpl")]
+    public class SourceColumn_created_Property_RelationEntryNHibernateImpl : Zetbox.DalProvider.NHibernate.RelationEntryNHibernateImpl<Zetbox.App.SchemaMigration.SourceColumn, Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl, Zetbox.App.Base.Property, Zetbox.App.Base.PropertyNHibernateImpl>, SourceColumn_created_Property_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
+    {
+        public SourceColumn_created_Property_RelationEntryNHibernateImpl()
+            : this(null)
+        {
+        }
+
+        /// <summary>Create a new unattached instance</summary>
+        public SourceColumn_created_Property_RelationEntryNHibernateImpl(Func<IFrozenContext> lazyCtx)
+            : this(lazyCtx, new SourceColumn_created_Property_RelationEntryProxy())
+        {
+        }
+
+        /// <summary>Create a instance, wrapping the specified proxy</summary>
+        public SourceColumn_created_Property_RelationEntryNHibernateImpl(Func<IFrozenContext> lazyCtx, SourceColumn_created_Property_RelationEntryProxy proxy)
+            : base(lazyCtx) // do not pass proxy to base data object
+        {
+            this.Proxy = proxy;
+        }
+
+        /// <summary>the NHibernate proxy of the represented entity</summary>
+        internal readonly SourceColumn_created_Property_RelationEntryProxy Proxy;
+
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
+        public Guid ExportGuid
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = Proxy.ExportGuid;
+                if (this.Proxy.ExportGuid == Guid.Empty) {
+                    __result = this.Proxy.ExportGuid = Guid.NewGuid();
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (Proxy.ExportGuid != value)
+                {
+                    var __oldValue = Proxy.ExportGuid;
+                    var __newValue = value;
+                    NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
+                    Proxy.ExportGuid = __newValue;
+                    NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                }
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
+            }
+        }
+
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ExportGuidProperty
+        #region RelationEntry.ApplyClassHeadTemplate
+
+        private static readonly Guid _relationID = new Guid("fb27e3f8-3615-4f3b-ae2a-2b89b8782e27");
+        public override Guid RelationID { get { return _relationID; } }
+
+        IDataObject IRelationEntry.AObject
+        {
+            get
+            {
+                return A;
+            }
+            set
+            {
+                // settor will do checking for us
+                A = (Zetbox.App.SchemaMigration.SourceColumn)value;
+            }
+        }
+
+        IDataObject IRelationEntry.BObject
+        {
+            get
+            {
+                return B;
+            }
+            set
+            {
+                // settor will do checking for us
+                B = (Zetbox.App.Base.Property)value;
+            }
+        }
+
+        #endregion // RelationEntry.ApplyClassHeadTemplate
+
+
+        /// <summary>
+        /// the A-side value of this CollectionEntry
+        /// </summary>
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // fkBackingName=this.Proxy.A; fkGuidBackingName=_fk_guid_A;
+        // referencedInterface=Zetbox.App.SchemaMigration.SourceColumn; moduleNamespace=Zetbox.App.SchemaMigration;
+        // will get inverse collection for notifications for DestinationProperty
+        // PositionStorage=A_pos;
+        // Target exportable; does not call events
+
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Zetbox.App.SchemaMigration.SourceColumn A
+        {
+            get
+            {
+                Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl __value = (Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+
+
+                return __value;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
+
+                // shortcut noop with nulls
+                if (value == null && this.Proxy.A == null)
+                {
+                    SetInitializedProperty("A");
+                    return;
+                }
+
+                // cache old value to remove inverse references later
+                var __oldValue = (Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.A);
+                var __newValue = (Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl)value;
+
+                // shortcut noop on objects
+                // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
+                if (__oldValue == __newValue)
+                {
+                    SetInitializedProperty("A");
+                    return;
+                }
+
+                // Changing Event fires before anything is touched
+                NotifyPropertyChanging("A", __oldValue, __newValue);
+
+                if (__oldValue != null) {
+                    __oldValue.NotifyPropertyChanging("DestinationProperty", null, null);
+                }
+                if (__newValue != null) {
+                    __newValue.NotifyPropertyChanging("DestinationProperty", null, null);
+                }
+
+                // next, set the local reference
+                if (__newValue == null)
+                {
+                    this.Proxy.A = null;
+                }
+                else
+                {
+                    this.Proxy.A = __newValue.Proxy;
+                }
+
+                // now fixup redundant, inverse references
+                // The inverse navigator will also fire events when changed, so should
+                // only be touched after setting the local value above.
+                // TODO: for complete correctness, the "other" Changing event should also fire
+                //       before the local value is changed
+                if (__oldValue != null)
+                {
+                    // remove from old list
+                    (__oldValue.DestinationProperty as IRelationListSync<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl>).RemoveWithoutClearParent(this);
+                }
+
+                if (__newValue != null)
+                {
+                    // add to new list
+                    (__newValue.DestinationProperty as IRelationListSync<Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl>).AddWithoutSetParent(this);
+                }
+                // everything is done. fire the Changed event
+                NotifyPropertyChanged("A", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
+
+            }
+        }
+
+        /// <summary>Backing store for A's id, used on dehydration only</summary>
+        private int? _fk_A = null;
+
+        /// <summary>Backing store for A's guid, used on import only</summary>
+        private Guid? _fk_guid_A = null;
+
+    public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.SchemaMigration.SourceColumn>(this.A);
+    }
+
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
+        public virtual int? A_pos
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = Proxy.A_pos;
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (Proxy.A_pos != value)
+                {
+                    var __oldValue = Proxy.A_pos;
+                    var __newValue = value;
+                    NotifyPropertyChanging("A_pos", __oldValue, __newValue);
+                    Proxy.A_pos = __newValue;
+                    NotifyPropertyChanged("A_pos", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                }
+                else
+                {
+                    SetInitializedProperty("A_pos");
+                }
+            }
+        }
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+
+        /// <summary>
+        /// the B-side value of this CollectionEntry
+        /// </summary>
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // fkBackingName=this.Proxy.B; fkGuidBackingName=_fk_guid_B;
+        // referencedInterface=Zetbox.App.Base.Property; moduleNamespace=Zetbox.App.SchemaMigration;
+        // no inverse navigator handling
+        // PositionStorage=B_pos;
+        // Target exportable; does not call events
+
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        public Zetbox.App.Base.Property B
+        {
+            get
+            {
+                Zetbox.App.Base.PropertyNHibernateImpl __value = (Zetbox.App.Base.PropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+
+
+                return __value;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
+
+                // shortcut noop with nulls
+                if (value == null && this.Proxy.B == null)
+                {
+                    SetInitializedProperty("B");
+                    return;
+                }
+
+                // cache old value to remove inverse references later
+                var __oldValue = (Zetbox.App.Base.PropertyNHibernateImpl)OurContext.AttachAndWrap(this.Proxy.B);
+                var __newValue = (Zetbox.App.Base.PropertyNHibernateImpl)value;
+
+                // shortcut noop on objects
+                // can't use proxy's ID here, since that might be INVALIDID before persisting the first time.
+                if (__oldValue == __newValue)
+                {
+                    SetInitializedProperty("B");
+                    return;
+                }
+
+                // Changing Event fires before anything is touched
+                NotifyPropertyChanging("B", __oldValue, __newValue);
+
+                // next, set the local reference
+                if (__newValue == null)
+                {
+                    this.Proxy.B = null;
+                }
+                else
+                {
+                    this.Proxy.B = __newValue.Proxy;
+                }
+
+                // everything is done. fire the Changed event
+                NotifyPropertyChanged("B", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
+
+            }
+        }
+
+        /// <summary>Backing store for B's id, used on dehydration only</summary>
+        private int? _fk_B = null;
+
+        /// <summary>Backing store for B's guid, used on import only</summary>
+        private Guid? _fk_guid_B = null;
+
+    public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
+    {
+        return new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Property>(this.B);
+    }
+
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
+        public virtual int? B_pos
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = Proxy.B_pos;
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (Proxy.B_pos != value)
+                {
+                    var __oldValue = Proxy.B_pos;
+                    var __newValue = value;
+                    NotifyPropertyChanging("B_pos", __oldValue, __newValue);
+                    Proxy.B_pos = __newValue;
+                    NotifyPropertyChanged("B_pos", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                }
+                else
+                {
+                    SetInitializedProperty("B_pos");
+                }
+            }
+        }
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.NotifyingValueProperty
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+
+        /// <summary>
+        /// Index into the A-side list of this relation
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
+        public int? AIndex
+        {
+            get { return this.A_pos; }
+            set { this.A_pos = (int?)value; }
+        }
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        /// <summary>
+        /// Index into the B-side list of this relation
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
+        public int? BIndex
+        {
+            get { return this.B_pos; }
+            set { this.B_pos = (int?)value; }
+        }
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        #region Serializer
+
+
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        {
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
+            // it may be only an empty shell to stand-in for unreadable data
+            if (!CurrentAccessRights.HasReadRights()) return;
+            binStream.Write(this.Proxy.ExportGuid);
+            binStream.Write(this.Proxy.A != null ? OurContext.GetIdFromProxy(this.Proxy.A) : (int?)null);
+            binStream.Write(this.Proxy.A_pos);
+            binStream.Write(this.Proxy.B != null ? OurContext.GetIdFromProxy(this.Proxy.B) : (int?)null);
+            binStream.Write(this.Proxy.B_pos);
+        }
+
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
+        {
+            var baseResult = base.FromStream(binStream);
+            var result = new List<IPersistenceObject>();
+            // it may be only an empty shell to stand-in for unreadable data
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
+            this.Proxy.ExportGuid = binStream.ReadGuid();
+            binStream.Read(out this._fk_A);
+            this.Proxy.A_pos = binStream.ReadNullableInt32();
+            binStream.Read(out this._fk_B);
+            this.Proxy.B_pos = binStream.ReadNullableInt32();
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
+            return baseResult == null
+                ? result.Count == 0
+                    ? null
+                    : result
+                : baseResult.Concat(result);
+        }
+
+        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
+            // it may be only an empty shell to stand-in for unreadable data
+            if (!CurrentAccessRights.HasReadRights()) return;
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream(this.Proxy.A != null ? this.Proxy.A.ExportGuid : (Guid?)null, xml, "A", "Zetbox.App.SchemaMigration");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream(this.Proxy.A_pos, xml, "A_pos", "Zetbox.App.SchemaMigration");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream(this.Proxy.B != null ? this.Proxy.B.ExportGuid : (Guid?)null, xml, "B", "Zetbox.App.SchemaMigration");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.SchemaMigration")) XmlStreamer.ToStream(this.Proxy.B_pos, xml, "B_pos", "Zetbox.App.SchemaMigration");
+        }
+
+        public virtual void MergeImport(System.Xml.XmlReader xml)
+        {
+            // it may be only an empty shell to stand-in for unreadable data
+            if (!CurrentAccessRights.HasReadRights()) return;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Zetbox.App.SchemaMigration|ExportGuid":
+                this.Proxy.ExportGuid = XmlStreamer.ReadGuid(xml);
+                break;
+            case "Zetbox.App.SchemaMigration|A":
+                this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Zetbox.App.SchemaMigration|A_pos":
+                this.Proxy.A_pos = XmlStreamer.ReadNullableInt32(xml);
+                break;
+            case "Zetbox.App.SchemaMigration|B":
+                this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Zetbox.App.SchemaMigration|B_pos":
+                this.Proxy.B_pos = XmlStreamer.ReadNullableInt32(xml);
+                break;
+            }
+        }
+
+        #endregion
+
+        public override Type GetImplementedInterface()
+        {
+            return typeof(SourceColumn_created_Property_RelationEntry);
+        }
+
+        public override void ApplyChangesFrom(IPersistenceObject obj)
+        {
+            base.ApplyChangesFrom(obj);
+            var other = (SourceColumn_created_Property_RelationEntryNHibernateImpl)obj;
+            var me = (SourceColumn_created_Property_RelationEntryNHibernateImpl)this;
+
+            me._fk_A = other._fk_A;
+            me.AIndex = other.AIndex;
+            me._fk_B = other._fk_B;
+            me.BIndex = other.BIndex;
+        }
+
+
+        public override void ReloadReferences()
+        {
+            // Do not reload references if the current object has been deleted.
+            // TODO: enable when MemoryContext uses MemoryDataObjects
+            //if (this.ObjectState == DataObjectState.Deleted) return;
+
+            if (_fk_guid_A.HasValue)
+                this.A = ((Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.SchemaMigration.SourceColumn>(_fk_guid_A.Value));
+            else
+            if (_fk_A.HasValue)
+                this.A = ((Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.SchemaMigration.SourceColumn>(_fk_A.Value));
+            else
+                this.A = null;
+
+            if (_fk_guid_B.HasValue)
+                this.B = ((Zetbox.App.Base.PropertyNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Property>(_fk_guid_B.Value));
+            else
+            if (_fk_B.HasValue)
+                this.B = ((Zetbox.App.Base.PropertyNHibernateImpl)OurContext.FindPersistenceObject<Zetbox.App.Base.Property>(_fk_B.Value));
+            else
+                this.B = null;
+
+        }
+
+
+        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
+        {
+            base.OnPropertyChanged(property, oldValue, newValue);
+
+            if (property == "A" || property == "B")
+            {
+                var oldNotifier = (INotifyPropertyChanged)oldValue;
+                var newNotifier = (INotifyPropertyChanged)newValue;
+
+                if (oldNotifier != null) oldNotifier.PropertyChanged -= new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
+                if (newNotifier != null) newNotifier.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
+                ManageMyObjectState();
+            }
+        }
+
+        void AB_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "ObjectState")
+            {
+                ManageMyObjectState();
+            }
+        }
+
+        private void ManageMyObjectState()
+        {
+            if (A != null && A.ObjectState == DataObjectState.Deleted && this.Context != null)
+                this.Context.Delete(this);
+            if (B != null && B.ObjectState == DataObjectState.Deleted && this.Context != null)
+                this.Context.Delete(this);
+
+            if (this.ObjectState == DataObjectState.Deleted && A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
+                this.SetUnDeleted();
+        }
+
+        public override void NotifyDeleting()
+        {
+            base.NotifyDeleting();
+
+            // Follow A
+            if (this.A != null && this.A.ObjectState == DataObjectState.Deleted)
+            {
+                ParentsToDelete.Add((NHibernatePersistenceObject)this.A);
+                ((NHibernatePersistenceObject)this.A).ChildrenToDelete.Add(this);
+            }
+
+            // Follow B
+            if (this.B != null && this.B.ObjectState == DataObjectState.Deleted)
+            {
+                ParentsToDelete.Add((NHibernatePersistenceObject)this.B);
+                ((NHibernatePersistenceObject)this.B).ChildrenToDelete.Add(this);
+            }
+
+            // remove from collections manually to notify NHibernate if necessary
+            if (this.A != null && this.A.DestinationProperty.Contains(this.B)) this.A.DestinationProperty.Remove(this.B);
+
+            // reset pointers on being deleted
+            // this must happen after registering them above in ParentsToDelete/ChildrenToDelete to avoid interference from a second notification round
+            this.A = null;
+            this.B = null;
+        }
+
+        public class SourceColumn_created_Property_RelationEntryProxy
+            : IProxyObject, ISortKey<int>
+        {
+            public SourceColumn_created_Property_RelationEntryProxy()
+            {
+            }
+
+            public virtual int ID { get; set; }
+
+            public virtual Type ZetboxWrapper { get { return typeof(SourceColumn_created_Property_RelationEntryNHibernateImpl); } }
+            public virtual Type ZetboxProxy { get { return typeof(SourceColumn_created_Property_RelationEntryProxy); } }
+
+            public virtual Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl.SourceColumnProxy A { get; set; }
+
+            public virtual Zetbox.App.Base.PropertyNHibernateImpl.PropertyProxy B { get; set; }
+
+            public virtual int? A_pos { get; set; }
+
+            public virtual int? B_pos { get; set; }
+
+            public virtual Guid ExportGuid { get; set; }
+
+        }
+
+        // make proxy available for the provider
+        public override IProxyObject NHibernateProxy { get { return Proxy; } }    }
+    // END Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry
+}
+
 namespace Zetbox.App.GUI
 {
     // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries.RelationEntry

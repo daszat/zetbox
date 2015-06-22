@@ -27,10 +27,10 @@ MSBuild.exe .\Zetbox.Objects\Zetbox.Objects.csproj
 IF ERRORLEVEL 1 GOTO FAIL
 
 rem need to export both modules to receive all necessary meta-data
-bin\debug\Zetbox.Cli.exe %config% -publish Modules\ZetboxBasic.xml -ownermodules ZetboxBase;GUI
+bin\debug\Zetbox.Cli.exe %config% -publish Modules\ZetboxBasic.xml -ownermodules ZetboxBase;GUI;SchemaMigration
 IF ERRORLEVEL 1 GOTO FAIL
 
-bin\debug\Zetbox.Cli.exe %config% -publish Modules\ZetboxUtils.xml -ownermodules DocumentManagement;ModuleEditor;SchemaMigration;Calendar
+bin\debug\Zetbox.Cli.exe %config% -publish Modules\ZetboxUtils.xml -ownermodules DocumentManagement;ModuleEditor;Calendar
 IF ERRORLEVEL 1 GOTO FAIL
 
 bin\debug\Zetbox.Cli.exe %config% -publish Modules\TestModules.xml -ownermodules Projekte;TestModule

@@ -794,6 +794,21 @@ using Zetbox.DalProvider.Ef;
 
 
 	/*
+    Relation: FK_FK_Column_references_PK_Column
+    A: ZeroOrMore SourceColumn as FK_Column
+    B: ZeroOrOne SourceColumn as PK_Column
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_FK_Column_references_PK_Column",
+    "FK_Column", RelationshipMultiplicity.Many, typeof(Zetbox.App.SchemaMigration.SourceColumnEfImpl),
+    "PK_Column", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.SchemaMigration.SourceColumnEfImpl)
+    )]
+
+
+	/*
     Relation: FK_Group_has_Module
     A: ZeroOrMore Group as Group
     B: One Module as Module
@@ -972,6 +987,66 @@ using Zetbox.DalProvider.Ef;
 [assembly: EdmRelationship(
     "Model", "FK_Method_was_CreatedBy",
     "Method", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.MethodEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_MigrationProject_migrates_to_Module
+    A: ZeroOrMore MigrationProject as MigrationProject
+    B: ZeroOrOne Module as Module
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_MigrationProject_migrates_to_Module",
+    "MigrationProject", RelationshipMultiplicity.Many, typeof(Zetbox.App.SchemaMigration.MigrationProjectEfImpl),
+    "Module", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ModuleEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_MigrationProject_reads_from_StagingDatabases
+    A: One MigrationProject as MigrationProject
+    B: ZeroOrMore StagingDatabase as StagingDatabases
+    Preferred Storage: MergeIntoB
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_MigrationProject_reads_from_StagingDatabases",
+    "MigrationProject", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.SchemaMigration.MigrationProjectEfImpl),
+    "StagingDatabases", RelationshipMultiplicity.Many, typeof(Zetbox.App.SchemaMigration.StagingDatabaseEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_MigrationProject_was_ChangedBy
+    A: ZeroOrMore MigrationProject as MigrationProject
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_MigrationProject_was_ChangedBy",
+    "MigrationProject", RelationshipMultiplicity.Many, typeof(Zetbox.App.SchemaMigration.MigrationProjectEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_MigrationProject_was_CreatedBy
+    A: ZeroOrMore MigrationProject as MigrationProject
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_MigrationProject_was_CreatedBy",
+    "MigrationProject", RelationshipMultiplicity.Many, typeof(Zetbox.App.SchemaMigration.MigrationProjectEfImpl),
     "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
@@ -1704,6 +1779,219 @@ using Zetbox.DalProvider.Ef;
 [assembly: EdmRelationship(
     "Model", "FK_ServiceDescriptor_was_CreatedBy",
     "ServiceDescriptor", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.ServiceDescriptorEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_SourceColumn_belongs_to_SourceTable
+    A: ZeroOrMore SourceColumn as SourceColumn
+    B: One SourceTable as SourceTable
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_SourceColumn_belongs_to_SourceTable",
+    "SourceColumn", RelationshipMultiplicity.Many, typeof(Zetbox.App.SchemaMigration.SourceColumnEfImpl),
+    "SourceTable", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.SchemaMigration.SourceTableEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_SourceColumn_created_Property
+    A: ZeroOrMore SourceColumn as SourceColumn
+    B: ZeroOrMore Property as Property
+    Preferred Storage: Separate
+	*/
+
+// The association from A to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_SourceColumn_created_Property_A",
+    "SourceColumn", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.SchemaMigration.SourceColumnEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryEfImpl)
+    )]
+// The association from B to the CollectionEntry
+[assembly: EdmRelationship("Model", "FK_SourceColumn_created_Property_B",
+    "Property", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.PropertyEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryEfImpl)
+    )]
+
+	/*
+    Relation: FK_SourceColumn_may_have_EnumEntries
+    A: One SourceColumn as SourceColumn
+    B: ZeroOrMore SourceEnum as EnumEntries
+    Preferred Storage: MergeIntoB
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_SourceColumn_may_have_EnumEntries",
+    "SourceColumn", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.SchemaMigration.SourceColumnEfImpl),
+    "EnumEntries", RelationshipMultiplicity.Many, typeof(Zetbox.App.SchemaMigration.SourceEnumEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_SourceColumn_was_ChangedBy
+    A: ZeroOrMore SourceColumn as SourceColumn
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_SourceColumn_was_ChangedBy",
+    "SourceColumn", RelationshipMultiplicity.Many, typeof(Zetbox.App.SchemaMigration.SourceColumnEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_SourceColumn_was_CreatedBy
+    A: ZeroOrMore SourceColumn as SourceColumn
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_SourceColumn_was_CreatedBy",
+    "SourceColumn", RelationshipMultiplicity.Many, typeof(Zetbox.App.SchemaMigration.SourceColumnEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_SourceEnum_mapps_to_DestinationValue
+    A: ZeroOrMore SourceEnum as SourceEnum
+    B: One EnumerationEntry as DestinationValue
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_SourceEnum_mapps_to_DestinationValue",
+    "SourceEnum", RelationshipMultiplicity.Many, typeof(Zetbox.App.SchemaMigration.SourceEnumEfImpl),
+    "DestinationValue", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.EnumerationEntryEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_SourceEnum_was_ChangedBy
+    A: ZeroOrMore SourceEnum as SourceEnum
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_SourceEnum_was_ChangedBy",
+    "SourceEnum", RelationshipMultiplicity.Many, typeof(Zetbox.App.SchemaMigration.SourceEnumEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_SourceEnum_was_CreatedBy
+    A: ZeroOrMore SourceEnum as SourceEnum
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_SourceEnum_was_CreatedBy",
+    "SourceEnum", RelationshipMultiplicity.Many, typeof(Zetbox.App.SchemaMigration.SourceEnumEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_SourceTable_created_ObjectClass
+    A: ZeroOrOne SourceTable as SourceTable
+    B: ZeroOrOne ObjectClass as ObjectClass
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_SourceTable_created_ObjectClass",
+    "SourceTable", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.SchemaMigration.SourceTableEfImpl),
+    "ObjectClass", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ObjectClassEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_SourceTable_was_ChangedBy
+    A: ZeroOrMore SourceTable as SourceTable
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_SourceTable_was_ChangedBy",
+    "SourceTable", RelationshipMultiplicity.Many, typeof(Zetbox.App.SchemaMigration.SourceTableEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_SourceTable_was_CreatedBy
+    A: ZeroOrMore SourceTable as SourceTable
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_SourceTable_was_CreatedBy",
+    "SourceTable", RelationshipMultiplicity.Many, typeof(Zetbox.App.SchemaMigration.SourceTableEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_SourceTables_are_contained_in_StagingDatabase
+    A: ZeroOrMore SourceTable as SourceTables
+    B: One StagingDatabase as StagingDatabase
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_SourceTables_are_contained_in_StagingDatabase",
+    "SourceTables", RelationshipMultiplicity.Many, typeof(Zetbox.App.SchemaMigration.SourceTableEfImpl),
+    "StagingDatabase", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.SchemaMigration.StagingDatabaseEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_StagingDatabase_was_ChangedBy
+    A: ZeroOrMore StagingDatabase as StagingDatabase
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_StagingDatabase_was_ChangedBy",
+    "StagingDatabase", RelationshipMultiplicity.Many, typeof(Zetbox.App.SchemaMigration.StagingDatabaseEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_StagingDatabase_was_CreatedBy
+    A: ZeroOrMore StagingDatabase as StagingDatabase
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_StagingDatabase_was_CreatedBy",
+    "StagingDatabase", RelationshipMultiplicity.Many, typeof(Zetbox.App.SchemaMigration.StagingDatabaseEfImpl),
     "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 

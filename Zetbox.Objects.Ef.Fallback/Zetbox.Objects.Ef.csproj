@@ -178,6 +178,8 @@
     <Compile Include="ZetboxBase\IsValidNamespaceConstraint.Ef.Designer.cs" />
     <Compile Include="ZetboxBase\Method.Ef.Designer.cs" />
     <Compile Include="ZetboxBase\MethodInvocationConstraint.Ef.Designer.cs" />
+    <Compile Include="SchemaMigration\MigrationLog.Ef.Designer.cs" />
+    <Compile Include="SchemaMigration\MigrationProject.Ef.Designer.cs" />
     <Compile Include="ZetboxBase\Module.Ef.Designer.cs" />
     <Compile Include="GUI\MonthFilterConfiguration.Ef.Designer.cs" />
     <Compile Include="GUI\NavigationAction.Ef.Designer.cs" />
@@ -204,6 +206,10 @@
     <Compile Include="ZetboxBase\SequenceData.Ef.Designer.cs" />
     <Compile Include="ZetboxBase\ServiceDescriptor.Ef.Designer.cs" />
     <Compile Include="GUI\SinglePropertyFilterConfiguration.Ef.Designer.cs" />
+    <Compile Include="SchemaMigration\SourceColumn.Ef.Designer.cs" />
+    <Compile Include="SchemaMigration\SourceEnum.Ef.Designer.cs" />
+    <Compile Include="SchemaMigration\SourceTable.Ef.Designer.cs" />
+    <Compile Include="SchemaMigration\StagingDatabase.Ef.Designer.cs" />
     <Compile Include="ZetboxBase\StringDefaultValue.Ef.Designer.cs" />
     <Compile Include="ZetboxBase\StringParameter.Ef.Designer.cs" />
     <Compile Include="ZetboxBase\StringProperty.Ef.Designer.cs" />

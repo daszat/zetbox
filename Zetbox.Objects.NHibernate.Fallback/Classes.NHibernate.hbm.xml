@@ -686,6 +686,377 @@
         <!-- define the subclasses -->
 
     </class>
+    <class name="Zetbox.App.SchemaMigration.MigrationLogNHibernateImpl+MigrationLogProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.SchemaMigration.MigrationLogNHibernateImpl+MigrationLogProxy, Zetbox.Objects.NHibernateImpl"
+           schema="`migration`"
+           table="`MigrationLogs`"
+           abstract="false"
+           dynamic-update="false"
+           optimistic-lock="none"
+           batch-size="100">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`migration`</param>
+                <param name="sequence">`MigrationLogs_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+        <!-- ValueTypeProperty isValue -->
+        <property name="Destination" 
+                  column="`Destination`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="DestinationRows" 
+                  column="`DestinationRows`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Source" 
+                  column="`Source`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="SourceRows" 
+                  column="`SourceRows`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Timestamp" type="Timestamp"
+                  column="`Timestamp`" 
+                  optimistic-lock="false"/>
+
+        <!-- define the subclasses -->
+
+    </class>
+    <class name="Zetbox.App.SchemaMigration.MigrationProjectNHibernateImpl+MigrationProjectProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.SchemaMigration.MigrationProjectNHibernateImpl+MigrationProjectProxy, Zetbox.Objects.NHibernateImpl"
+           schema="`migration`"
+           table="`MigrationProjects`"
+           abstract="false"
+           dynamic-update="true"
+           optimistic-lock="dirty"
+           batch-size="100">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`migration`</param>
+                <param name="sequence">`MigrationProjects_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="ChangedOn" type="Timestamp"
+                  column="`ChangedOn`" 
+                  optimistic-lock="true"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="CreatedOn" type="Timestamp"
+                  column="`CreatedOn`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Description" 
+                  column="`Description`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="DestinationModule" column="`fk_Module`" class="Zetbox.App.Base.ModuleNHibernateImpl+ModuleProxy, Zetbox.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="ExportGuid" 
+                  column="`ExportGuid`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <set name="StagingDatabases" batch-size="100" cascade="none" inverse="true" >
+            <key column="`fk_MigrationProject`" />
+            <one-to-many class="Zetbox.App.SchemaMigration.StagingDatabaseNHibernateImpl+StagingDatabaseProxy, Zetbox.Objects.NHibernateImpl" />
+        </set>
+
+
+        <!-- define the subclasses -->
+
+    </class>
+    <class name="Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl+SourceColumnProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl+SourceColumnProxy, Zetbox.Objects.NHibernateImpl"
+           schema="`migration`"
+           table="`SourceColumns`"
+           abstract="false"
+           dynamic-update="true"
+           optimistic-lock="dirty"
+           batch-size="100">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`migration`</param>
+                <param name="sequence">`SourceColumns_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="ChangedOn" type="Timestamp"
+                  column="`ChangedOn`" 
+                  optimistic-lock="true"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Comment" 
+                  column="`Comment`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="CompareNulls" 
+                  column="`CompareNulls`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="CreatedOn" type="Timestamp"
+                  column="`CreatedOn`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="DbType" 
+                  column="`DbType`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Description" 
+                  column="`Description`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <!-- NMProperty -->
+        <!-- rel=SourceColumn_created_Property_RelationEntry -->
+        <!-- relEnd=SourceColumn otherEnd=Property -->
+        <set name="DestinationProperty" table="`SourceColumn_created_Property`" inverse="true" cascade="none" batch-size="100" >
+            <key column="`fk_SourceColumn`" />
+            <one-to-many class="Zetbox.App.SchemaMigration.SourceColumn_created_Property_RelationEntryNHibernateImpl+SourceColumn_created_Property_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
+        </set>
+
+<!-- ObjectReferenceProperty -->
+        <set name="EnumEntries" batch-size="100" cascade="none" inverse="true" >
+            <key column="`fk_SourceColumn`" />
+            <one-to-many class="Zetbox.App.SchemaMigration.SourceEnumNHibernateImpl+SourceEnumProxy, Zetbox.Objects.NHibernateImpl" />
+        </set>
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="ExportGuid" 
+                  column="`ExportGuid`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="IsNullable" 
+                  column="`IsNullable`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Name" 
+                  column="`Name`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="References" column="`fk_PK_Column`" class="Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl+SourceColumnProxy, Zetbox.Objects.NHibernateImpl" />
+
+<!-- ObjectReferenceProperty -->
+        <set name="Referers" batch-size="100" cascade="none" inverse="true" >
+            <key column="`fk_PK_Column`" />
+            <one-to-many class="Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl+SourceColumnProxy, Zetbox.Objects.NHibernateImpl" />
+        </set>
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="Size" 
+                  column="`Size`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="SourceTable" column="`fk_SourceTable`" class="Zetbox.App.SchemaMigration.SourceTableNHibernateImpl+SourceTableProxy, Zetbox.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="Status" 
+                  column="`Status`" 
+                  optimistic-lock="false"/>
+
+        <!-- define the subclasses -->
+
+    </class>
+    <class name="Zetbox.App.SchemaMigration.SourceEnumNHibernateImpl+SourceEnumProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.SchemaMigration.SourceEnumNHibernateImpl+SourceEnumProxy, Zetbox.Objects.NHibernateImpl"
+           schema="`migration`"
+           table="`SourceEnums`"
+           abstract="false"
+           dynamic-update="true"
+           optimistic-lock="dirty"
+           batch-size="100">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`migration`</param>
+                <param name="sequence">`SourceEnums_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="ChangedOn" type="Timestamp"
+                  column="`ChangedOn`" 
+                  optimistic-lock="true"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="CreatedOn" type="Timestamp"
+                  column="`CreatedOn`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="DestinationValue" column="`fk_DestinationValue`" class="Zetbox.App.Base.EnumerationEntryNHibernateImpl+EnumerationEntryProxy, Zetbox.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="ExportGuid" 
+                  column="`ExportGuid`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="SourceColumn" column="`fk_SourceColumn`" class="Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl+SourceColumnProxy, Zetbox.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="SourceValue" 
+                  column="`SourceValue`" 
+                  optimistic-lock="false"/>
+
+        <!-- define the subclasses -->
+
+    </class>
+    <class name="Zetbox.App.SchemaMigration.SourceTableNHibernateImpl+SourceTableProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.SchemaMigration.SourceTableNHibernateImpl+SourceTableProxy, Zetbox.Objects.NHibernateImpl"
+           schema="`migration`"
+           table="`SourceTables`"
+           abstract="false"
+           dynamic-update="true"
+           optimistic-lock="dirty"
+           batch-size="100">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`migration`</param>
+                <param name="sequence">`SourceTables_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="ChangedOn" type="Timestamp"
+                  column="`ChangedOn`" 
+                  optimistic-lock="true"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Comment" 
+                  column="`Comment`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="CreatedOn" type="Timestamp"
+                  column="`CreatedOn`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Description" 
+                  column="`Description`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="DestinationObjectClass" column="`fk_ObjectClass`" class="Zetbox.App.Base.ObjectClassNHibernateImpl+ObjectClassProxy, Zetbox.Objects.NHibernateImpl" unique="true" cascade="none" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="ExportGuid" 
+                  column="`ExportGuid`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Name" 
+                  column="`Name`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <set name="SourceColumn" batch-size="100" cascade="none" inverse="true" >
+            <key column="`fk_SourceTable`" />
+            <one-to-many class="Zetbox.App.SchemaMigration.SourceColumnNHibernateImpl+SourceColumnProxy, Zetbox.Objects.NHibernateImpl" />
+        </set>
+
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="StagingDatabase" column="`fk_StagingDatabase`" class="Zetbox.App.SchemaMigration.StagingDatabaseNHibernateImpl+StagingDatabaseProxy, Zetbox.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="Status" 
+                  column="`Status`" 
+                  optimistic-lock="false"/>
+
+        <!-- define the subclasses -->
+
+    </class>
+    <class name="Zetbox.App.SchemaMigration.StagingDatabaseNHibernateImpl+StagingDatabaseProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.SchemaMigration.StagingDatabaseNHibernateImpl+StagingDatabaseProxy, Zetbox.Objects.NHibernateImpl"
+           schema="`migration`"
+           table="`StagingDatabases`"
+           abstract="false"
+           dynamic-update="true"
+           optimistic-lock="dirty"
+           batch-size="100">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`migration`</param>
+                <param name="sequence">`StagingDatabases_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="ChangedOn" type="Timestamp"
+                  column="`ChangedOn`" 
+                  optimistic-lock="true"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ConnectionStringKey" 
+                  column="`ConnectionStringKey`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="CreatedOn" type="Timestamp"
+                  column="`CreatedOn`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Description" 
+                  column="`Description`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ExportGuid" 
+                  column="`ExportGuid`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="MigrationProject" column="`fk_MigrationProject`" class="Zetbox.App.SchemaMigration.MigrationProjectNHibernateImpl+MigrationProjectProxy, Zetbox.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="OriginConnectionStringKey" 
+                  column="`OriginConnectionStringKey`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Schema" 
+                  column="`Schema`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <set name="SourceTables" batch-size="100" cascade="none" inverse="true" >
+            <key column="`fk_StagingDatabase`" />
+            <one-to-many class="Zetbox.App.SchemaMigration.SourceTableNHibernateImpl+SourceTableProxy, Zetbox.Objects.NHibernateImpl" />
+        </set>
+
+
+        <!-- define the subclasses -->
+
+    </class>
     <class name="Zetbox.App.Base.AbstractModuleMemberNHibernateImpl+AbstractModuleMemberProxy, Zetbox.Objects.NHibernateImpl"
            proxy="Zetbox.App.Base.AbstractModuleMemberNHibernateImpl+AbstractModuleMemberProxy, Zetbox.Objects.NHibernateImpl"
            schema="`base`"

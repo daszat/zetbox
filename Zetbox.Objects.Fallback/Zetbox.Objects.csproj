@@ -149,6 +149,8 @@
     <Compile Include="ZetboxBase\IsValidNamespaceConstraint.Interface.Designer.cs" />
     <Compile Include="ZetboxBase\Method.Interface.Designer.cs" />
     <Compile Include="ZetboxBase\MethodInvocationConstraint.Interface.Designer.cs" />
+    <Compile Include="SchemaMigration\MigrationLog.Interface.Designer.cs" />
+    <Compile Include="SchemaMigration\MigrationProject.Interface.Designer.cs" />
     <Compile Include="ZetboxBase\Module.Interface.Designer.cs" />
     <Compile Include="GUI\MonthFilterConfiguration.Interface.Designer.cs" />
     <Compile Include="GUI\NavigationAction.Interface.Designer.cs" />
@@ -175,6 +177,10 @@
     <Compile Include="ZetboxBase\SequenceData.Interface.Designer.cs" />
     <Compile Include="ZetboxBase\ServiceDescriptor.Interface.Designer.cs" />
     <Compile Include="GUI\SinglePropertyFilterConfiguration.Interface.Designer.cs" />
+    <Compile Include="SchemaMigration\SourceColumn.Interface.Designer.cs" />
+    <Compile Include="SchemaMigration\SourceEnum.Interface.Designer.cs" />
+    <Compile Include="SchemaMigration\SourceTable.Interface.Designer.cs" />
+    <Compile Include="SchemaMigration\StagingDatabase.Interface.Designer.cs" />
     <Compile Include="ZetboxBase\StringDefaultValue.Interface.Designer.cs" />
     <Compile Include="ZetboxBase\StringParameter.Interface.Designer.cs" />
     <Compile Include="ZetboxBase\StringProperty.Interface.Designer.cs" />
@@ -192,10 +198,12 @@
     <Compile Include="ZetboxBase\IDeactivatable.Interface.Designer.cs" />
     <Compile Include="ZetboxBase\IExportable.Interface.Designer.cs" />
     <Compile Include="ZetboxBase\IInvocation.Interface.Designer.cs" />
+    <Compile Include="SchemaMigration\IMigrationInfo.Interface.Designer.cs" />
     <Compile Include="ZetboxBase\IModuleMember.Interface.Designer.cs" />
     <Compile Include="ZetboxBase\INamedObject.Interface.Designer.cs" />
     <Compile Include="GUI\IRenderer.Interface.Designer.cs" />
     <Compile Include="ZetboxBase\AccessRights.Interface.Designer.cs" />
+    <Compile Include="SchemaMigration\ColumnType.Interface.Designer.cs" />
     <Compile Include="ZetboxBase\ContainmentSpecification.Interface.Designer.cs" />
     <Compile Include="ZetboxBase\DateTimeStyles.Interface.Designer.cs" />
     <Compile Include="ZetboxBase\DayOfWeek.Interface.Designer.cs" />
@@ -204,6 +212,7 @@
     <Compile Include="GUI\HighlightState.Interface.Designer.cs" />
     <Compile Include="GUI\InstanceListViewMethod.Interface.Designer.cs" />
     <Compile Include="GUI\ListSortDirection.Interface.Designer.cs" />
+    <Compile Include="SchemaMigration\MappingStatus.Interface.Designer.cs" />
     <Compile Include="ZetboxBase\Multiplicity.Interface.Designer.cs" />
     <Compile Include="ZetboxBase\StorageType.Interface.Designer.cs" />
     <Compile Include="ZetboxBase\TableMapping.Interface.Designer.cs" />

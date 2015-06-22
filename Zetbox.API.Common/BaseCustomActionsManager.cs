@@ -166,21 +166,28 @@ namespace Zetbox.App.Extensions
                             // Found Implementor Type
                             foreach (var m in t.GetMethods(BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance | BindingFlags.DeclaredOnly))
                             {
-                                if (m.GetCustomAttributes(typeof(Invocation), false).Length != 0)
+                                try
                                 {
-                                    var key = new MethodKey(t.Namespace, t.Name.Substring(0, t.Name.Length - "Actions".Length), m.Name, m.GetParameters().Select(p => p.ParameterType).ToArray());
-                                    if (_reflectedMethods.ContainsKey(key))
+                                    if (m.GetCustomAttributes(typeof(Invocation), false).Length != 0)
                                     {
-                                        _reflectedMethods[key].Add(m);
+                                        var key = new MethodKey(t.Namespace, t.Name.Substring(0, t.Name.Length - "Actions".Length), m.Name, m.GetParameters().Select(p => p.ParameterType).ToArray());
+                                        if (_reflectedMethods.ContainsKey(key))
+                                        {
+                                            _reflectedMethods[key].Add(m);
+                                        }
+                                        else
+                                        {
+                                            _reflectedMethods[key] = new List<MethodInfo>() { m };
+                                        }
                                     }
                                     else
                                     {
-                                        _reflectedMethods[key] = new List<MethodInfo>() { m };
+                                        Log.Warn(string.Format("Found public method {0}.{1} which has no Invocation attribute. Ignoring this method", t.FullName, m.Name));
                                     }
                                 }
-                                else
+                                catch (TypeLoadException tlex)
                                 {
-                                    Log.Warn(string.Format("Found public method {0}.{1} which has no Invocation attribute. Ignoring this method", t.FullName, m.Name));
+                                    Log.WarnFormat("Failed to reflect over Method [{0}].{1}. Unable to load type [{2}]. Ignoring and continuing", assembly.FullName, m.Name, tlex.TypeName);
                                 }
                             }
                         }

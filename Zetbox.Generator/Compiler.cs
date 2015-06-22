@@ -350,7 +350,7 @@ namespace Zetbox.Generator
 
         #region GetLists
 
-        public static readonly string[] FallbackModules = new[] { "ZetboxBase", "GUI" };
+        public static readonly string[] FallbackModules = new[] { "ZetboxBase", "GUI", "SchemaMigration" };
 
         public IQueryable<ObjectClass> GetObjectClassList(IZetboxContext ctx)
         {

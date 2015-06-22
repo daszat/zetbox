@@ -190,6 +190,8 @@
     <Compile Include="ZetboxBase\IsValidNamespaceConstraint.NHibernate.Designer.cs" />
     <Compile Include="ZetboxBase\Method.NHibernate.Designer.cs" />
     <Compile Include="ZetboxBase\MethodInvocationConstraint.NHibernate.Designer.cs" />
+    <Compile Include="SchemaMigration\MigrationLog.NHibernate.Designer.cs" />
+    <Compile Include="SchemaMigration\MigrationProject.NHibernate.Designer.cs" />
     <Compile Include="ZetboxBase\Module.NHibernate.Designer.cs" />
     <Compile Include="GUI\MonthFilterConfiguration.NHibernate.Designer.cs" />
     <Compile Include="GUI\NavigationAction.NHibernate.Designer.cs" />
@@ -216,6 +218,10 @@
     <Compile Include="ZetboxBase\SequenceData.NHibernate.Designer.cs" />
     <Compile Include="ZetboxBase\ServiceDescriptor.NHibernate.Designer.cs" />
     <Compile Include="GUI\SinglePropertyFilterConfiguration.NHibernate.Designer.cs" />
+    <Compile Include="SchemaMigration\SourceColumn.NHibernate.Designer.cs" />
+    <Compile Include="SchemaMigration\SourceEnum.NHibernate.Designer.cs" />
+    <Compile Include="SchemaMigration\SourceTable.NHibernate.Designer.cs" />
+    <Compile Include="SchemaMigration\StagingDatabase.NHibernate.Designer.cs" />
     <Compile Include="ZetboxBase\StringDefaultValue.NHibernate.Designer.cs" />
     <Compile Include="ZetboxBase\StringParameter.NHibernate.Designer.cs" />
     <Compile Include="ZetboxBase\StringProperty.NHibernate.Designer.cs" />
