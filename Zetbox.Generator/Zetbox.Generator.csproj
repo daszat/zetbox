@@ -742,14 +742,14 @@
       <Project>{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}</Project>
       <Name>Zetbox.API</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj">
-      <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
-      <Name>Zetbox.Objects</Name>
-      <Private>false</Private>
-    </ProjectReference>
     <ProjectReference Include="..\Zetbox.API.Common\Zetbox.API.Common.csproj">
       <Project>{9677AE11-CB92-4F0A-A248-87A21586F0DA}</Project>
       <Name>Zetbox.API.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zetbox.Objects.Fallback\Zetbox.Objects.csproj">
+      <Project>{218d5db5-5cc2-400d-9566-fc69c324ebc3}</Project>
+      <Name>Zetbox.Objects</Name>
+      <Private>false</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
