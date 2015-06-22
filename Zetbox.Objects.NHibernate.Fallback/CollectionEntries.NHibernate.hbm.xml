@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" 
+                   default-cascade="save-update"
+                   assembly="Zetbox.Objects.NHibernateImpl">
+
+    <!-- RelationCollectionEntries -->
+    <class name="Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl+CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryProxy"
+           proxy="Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl+CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryProxy"
+           table="`CalculatedReference_dependsOn_InputProperties`"
+           schema="`base`" >
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`base`</param>
+                <param name="sequence">`CalculatedReference_dependsOn_InputProperties_ID_seq`</param>
+            </generator>
+        </id>
+
+        <many-to-one name="A"
+                     column="`fk_CalculatedReference`" />
+        <many-to-one name="B"
+                     column="`fk_InputProperties`" />
+        <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
+    </class>
+    <class name="Zetbox.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl+DataType_implements_Interface_RelationEntryProxy"
+           proxy="Zetbox.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl+DataType_implements_Interface_RelationEntryProxy"
+           table="`DataType_implements_ImplementedInterfaces`"
+           schema="`base`" >
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`base`</param>
+                <param name="sequence">`DataType_implements_ImplementedInterfaces_ID_seq`</param>
+            </generator>
+        </id>
+
+        <many-to-one name="A"
+                     column="`fk_DataType`" />
+        <many-to-one name="B"
+                     column="`fk_ImplementedInterfaces`" />
+        <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
+    </class>
+    <class name="Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl+Identity_memberOf_Group_RelationEntryProxy"
+           proxy="Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl+Identity_memberOf_Group_RelationEntryProxy"
+           table="`Identities_memberOf_Groups`"
+           schema="`base`" >
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`base`</param>
+                <param name="sequence">`Identities_memberOf_Groups_ID_seq`</param>
+            </generator>
+        </id>
+
+        <many-to-one name="A"
+                     column="`fk_Identities`" />
+        <many-to-one name="B"
+                     column="`fk_Groups`" />
+    </class>
+    <class name="Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl+IndexConstraint_ensures_unique_on_Property_RelationEntryProxy"
+           proxy="Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl+IndexConstraint_ensures_unique_on_Property_RelationEntryProxy"
+           table="`UniqueContraints_ensures_unique_on_Properties`"
+           schema="`base`" >
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`base`</param>
+                <param name="sequence">`UniqueContraints_ensures_unique_on_Properties_ID_seq`</param>
+            </generator>
+        </id>
+
+        <many-to-one name="A"
+                     column="`fk_UniqueContraints`" />
+        <many-to-one name="B"
+                     column="`fk_Properties`" />
+        <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
+    </class>
+    <class name="Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl+NavigationEntry_accessed_by_Group_RelationEntryProxy"
+           proxy="Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl+NavigationEntry_accessed_by_Group_RelationEntryProxy"
+           table="`NavigationScreen_accessed_by_Groups`"
+           schema="`gui`" >
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`gui`</param>
+                <param name="sequence">`NavigationScreen_accessed_by_Groups_ID_seq`</param>
+            </generator>
+        </id>
+
+        <many-to-one name="A"
+                     column="`fk_NavigationScreen`" />
+        <many-to-one name="B"
+                     column="`fk_Groups`" />
+        <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
+    </class>
+    <class name="Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl+ObjectReferenceProperty_shows_Method_RelationEntryProxy"
+           proxy="Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl+ObjectReferenceProperty_shows_Method_RelationEntryProxy"
+           table="`ObjRefProp_shows_Methods`"
+           schema="`gui`" >
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`gui`</param>
+                <param name="sequence">`ObjRefProp_shows_Methods_ID_seq`</param>
+            </generator>
+        </id>
+
+        <many-to-one name="A"
+                     column="`fk_ObjRefProp`" />
+        <many-to-one name="B"
+                     column="`fk_Methods`" />
+        <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
+    </class>
+    <class name="Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl+RoleMembership_resolves_Relation_RelationEntryProxy"
+           proxy="Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl+RoleMembership_resolves_Relation_RelationEntryProxy"
+           table="`RoleMembership_resolves_Relations`"
+           schema="`base`" >
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`base`</param>
+                <param name="sequence">`RoleMembership_resolves_Relations_ID_seq`</param>
+            </generator>
+        </id>
+
+        <many-to-one name="A"
+                     column="`fk_RoleMembership`" />
+        <many-to-one name="B"
+                     column="`fk_Relations`" />
+        <property name="A_pos"
+                    column="`fk_Relations_pos`" />
+        <property name="B_pos"
+                  column="`fk_RoleMembership_pos`" />
+        <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
+    </class>
+    <class name="Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl+ViewModelDescriptor_displayedBy_ControlKind_RelationEntryProxy"
+           proxy="Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl+ViewModelDescriptor_displayedBy_ControlKind_RelationEntryProxy"
+           table="`Presentable_displayedBy_SecondaryControlKinds`"
+           schema="`gui`" >
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`gui`</param>
+                <param name="sequence">`Presentable_displayedBy_SecondaryControlKinds_ID_seq`</param>
+            </generator>
+        </id>
+
+        <many-to-one name="A"
+                     column="`fk_Presentable`" />
+        <many-to-one name="B"
+                     column="`fk_SecondaryControlKinds`" />
+        <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
+    </class>
+
+    <!-- ValueCollectionEntries are defined directly on use -->
+    <!-- CompoundObjectCollectionEntries -->
+</hibernate-mapping>

@@ -1,0 +1,254 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F8C0A4FF-1D89-4593-8644-E1489823BF34}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Zetbox.Objects.NHibernateImpl</RootNamespace>
+    <AssemblyName>Zetbox.Objects.NHibernateImpl</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Zetbox.Objects.snk</AssemblyOriginatorKeyFile>
+    <!-- this is referenced by the generator to put the results in their right place -->
+    <RelativeOutputPath>Server</RelativeOutputPath>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>1591,0168,0414,0219</NoWarn>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
+    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Debug\Server\Fallback\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Server\Generated\</OutputPath>
+    <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\Debug\</ZetboxAPIPath>
+    <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>1591,0168,0414,0219</NoWarn>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
+    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Release\Server\Fallback\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Server\Generated\</OutputPath>
+    <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\Release\</ZetboxAPIPath>
+    <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineConstants>DEBUG;TRACE;MONO</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <!-- mono is quite more pedantic; ignore superfluous local vars and fields for now -->
+    <NoWarn>1591,0168,0414,0219</NoWarn>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
+    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Debug\Server\Fallback\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Server\Generated\</OutputPath>
+    <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\Debug\</ZetboxAPIPath>
+    <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
+  </PropertyGroup>
+  <!-- additional properties have to come in a separate group to receive correct $(OutputPath) -->
+  <PropertyGroup>
+  </PropertyGroup>
+  <ItemGroup>
+    <AdditionalReferencePath Include="$(OutputPath)" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="log4net">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ZetboxAPIPath)\Common\log4net.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Zetbox.API">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ZetboxAPIPath)\Common\Zetbox.API.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Autofac">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ZetboxAPIPath)\Common\Autofac.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <!-- local reference to newly generated code -->
+    <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj">
+      <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
+      <Name>Zetbox.Objects</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <Reference Include="Zetbox.DalProvider.Base">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ZetboxAPIPath)\Common\Zetbox.DalProvider.Base.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Zetbox.API.Common">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ZetboxAPIPath)\Common\Zetbox.API.Common.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Data.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="Zetbox.API.Server">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ZetboxAPIPath)\Server\Zetbox.API.Server.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Zetbox.DalProvider.NHibernate">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ZetboxAPIPath)\Server\Zetbox.DalProvider.NHibernate.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="NHibernate">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ZetboxAPIPath)\Server\NHibernate.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Zetbox.DalProvider.Base">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>$(ZetboxAPIPath)\Common\Zetbox.DalProvider.Base.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ZetboxBase\AbstractModuleMember.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\AccessControl.NHibernate.Designer.cs" />
+    <Compile Include="GUI\Application.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\Assembly.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\BaseParameter.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\Blob.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\BoolDefaultValue.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\BoolParameter.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\BoolProperty.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\CalculatedObjectReferenceProperty.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\ClientReadOnlyConstraint.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\CLRObjectParameter.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\CompoundObject.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\CompoundObjectParameter.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\CompoundObjectProperty.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\Constraint.NHibernate.Designer.cs" />
+    <Compile Include="GUI\ControlKind.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\CurrentDateTimeDefaultValue.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\CurrentSchema.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\DataType.NHibernate.Designer.cs" />
+    <Compile Include="GUI\DateRangeFilterConfiguration.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\DateTimeParameter.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\DateTimeProperty.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\DecimalDefaultValue.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\DecimalParameter.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\DecimalProperty.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\DefaultPropertyValue.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\DoubleDefaultValue.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\DoubleParameter.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\DoubleProperty.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\EnumDefaultValue.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\Enumeration.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\EnumerationEntry.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\EnumerationProperty.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\EnumParameter.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\ExceptionLogEntry.NHibernate.Designer.cs" />
+    <Compile Include="GUI\FilterConfiguration.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\FullTextIndexConstraint.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\Group.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\GroupMembership.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\GuidProperty.NHibernate.Designer.cs" />
+    <Compile Include="GUI\Icon.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\Identity.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\IndexConstraint.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\InitOnlyConstraint.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\InstanceConstraint.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\IntDefaultValue.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\IntegerRangeConstraint.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\Interface.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\IntParameter.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\IntProperty.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\InvokingConstraint.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\IsValidIdentifierConstraint.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\IsValidNamespaceConstraint.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\Method.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\MethodInvocationConstraint.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\Module.NHibernate.Designer.cs" />
+    <Compile Include="GUI\MonthFilterConfiguration.NHibernate.Designer.cs" />
+    <Compile Include="GUI\NavigationAction.NHibernate.Designer.cs" />
+    <Compile Include="GUI\NavigationEntry.NHibernate.Designer.cs" />
+    <Compile Include="GUI\NavigationScreen.NHibernate.Designer.cs" />
+    <Compile Include="GUI\NavigationSearchScreen.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\NewGuidDefaultValue.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\NotNullableConstraint.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\ObjectClass.NHibernate.Designer.cs" />
+    <Compile Include="GUI\ObjectClassFilterConfiguration.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\ObjectReferenceParameter.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\ObjectReferencePlaceholderProperty.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\ObjectReferenceProperty.NHibernate.Designer.cs" />
+    <Compile Include="GUI\OptionalPredicateFilterConfiguration.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\Property.NHibernate.Designer.cs" />
+    <Compile Include="GUI\PropertyFilterConfiguration.NHibernate.Designer.cs" />
+    <Compile Include="GUI\RangeFilterConfiguration.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\ReadOnlyConstraint.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\Relation.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\RelationEnd.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\RoleMembership.NHibernate.Designer.cs" />
+    <Compile Include="GUI\SavedListConfiguration.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\Sequence.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\SequenceData.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\ServiceDescriptor.NHibernate.Designer.cs" />
+    <Compile Include="GUI\SinglePropertyFilterConfiguration.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\StringDefaultValue.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\StringParameter.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\StringProperty.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\StringRangeConstraint.NHibernate.Designer.cs" />
+    <Compile Include="GUI\TagCache.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\ValueTypeProperty.NHibernate.Designer.cs" />
+    <Compile Include="GUI\ViewDescriptor.NHibernate.Designer.cs" />
+    <Compile Include="GUI\ViewModelDescriptor.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\ViewReadOnlyConstraint.NHibernate.Designer.cs" />
+    <Compile Include="GUI\YearFilterConfiguration.NHibernate.Designer.cs" />
+    <Compile Include="CollectionEntries.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\AnyReference.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\AuditEntry.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\DateTimeOffset.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\DateTimeRange.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\OpenID.NHibernate.Designer.cs" />
+    <Compile Include="ZetboxBase\RecurrenceRule.NHibernate.Designer.cs" />
+    <Compile Include="AssemblyInfo.NHibernate.cs" />
+    <Compile Include="Module.NHibernate.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Zetbox.Objects.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="*.hbm.xml" />
+    <EmbeddedResource Include="*/*.hbm.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  -->
+  <Target Name="AfterBuild">
+  </Target>
+</Project>
