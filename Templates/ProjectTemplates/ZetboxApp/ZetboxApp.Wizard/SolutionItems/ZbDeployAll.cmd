@@ -35,8 +35,7 @@ rem Optional, if the migration project is used
 rem Zetbox.Cli.exe %config% -import ..\..\Data\SchemaMigrationProject.xml
 rem IF ERRORLEVEL 1 GOTO FAIL
 
-cd ..\..
-
+popd
 echo ********************************************************************************
 echo ************************************ Success ***********************************
 echo ********************************************************************************

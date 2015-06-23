@@ -12,27 +12,28 @@ if .%1. == .. GOTO GOON
 set config=%1
 
 :GOON
+pushd
 
 call "ZbInstall" %config%
 
 cd bin\Debug
 
 Zetbox.Cli.exe %config% -fallback -wipe
-IF ERRORLEVEL 1 GOTO FAIL1
+IF ERRORLEVEL 1 GOTO FAIL
 
 cd ..\..
 
 call "ZbDeployAll" %config%
-IF ERRORLEVEL 1 GOTO FAIL2
+IF ERRORLEVEL 1 GOTO FAIL
 
+popd
 echo ********************************************************************************
 echo ************************************ Success ***********************************
 echo ********************************************************************************
 GOTO EOF
 
-:FAIL1
-cd ..\..
-:FAIL2
+:FAIL
+popd
 echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX FAIL XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
