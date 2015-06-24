@@ -27,7 +27,7 @@ namespace Zetbox.DalProvider.Base
     using Zetbox.DalProvider.Base.RelationWrappers;
 
     public class ClientValueCollectionWrapper<TParent, TValue, TEntry, TEntryImpl, TEntryCollection>
-        : ValueCollectionWrapper<TParent, TValue, TEntryImpl, TEntryCollection>, IRelationListSync<TEntry>, INotifyCollectionChanged
+        : ValueCollectionWrapper<TParent, TValue, TEntryImpl, TEntryCollection>, IRelationListSync<TEntry>
         where TParent : IDataObject
         where TEntry : IValueCollectionEntry<TParent, TValue>
         where TEntryImpl : class, TEntry
@@ -47,29 +47,6 @@ namespace Zetbox.DalProvider.Base
             : this(ctx, parent, null, collection)
         {
         }
-
-        #region INotifyCollectionChanged Members
-
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
-
-        protected override void OnEntryAdded(TEntryImpl entry)
-        {
-            base.OnEntryAdded(entry);
-            if (CollectionChanged != null)
-            {
-                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, entry.Value));
-            }
-        }
-
-        protected override void OnEntryRemoved(TEntryImpl entry)
-        {
-            base.OnEntryRemoved(entry);
-            if (CollectionChanged != null)
-            {
-                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, entry.Value));
-            }
-        }
-        #endregion
 
         #region IRelationListSync<TEntry> Members
 
@@ -99,7 +76,7 @@ namespace Zetbox.DalProvider.Base
     }
 
     public class ClientValueCollectionAsListWrapper<TParent, TValue, TEntry, TEntryImpl, TEntryCollection>
-        : ValueCollectionWrapper<TParent, TValue, TEntryImpl, TEntryCollection>, IRelationListSync<TEntry>, IList<TValue>, System.Collections.IList, INotifyCollectionChanged
+        : ValueCollectionWrapper<TParent, TValue, TEntryImpl, TEntryCollection>, IRelationListSync<TEntry>, IList<TValue>, System.Collections.IList
         where TParent : IDataObject
         where TValue : class
         where TEntry : IValueCollectionEntry<TParent, TValue>
@@ -120,29 +97,6 @@ namespace Zetbox.DalProvider.Base
             : this(ctx, parent, null, collection)
         {
         }
-
-        #region INotifyCollectionChanged Members
-
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
-
-        protected override void OnEntryAdded(TEntryImpl entry)
-        {
-            base.OnEntryAdded(entry);
-            if (CollectionChanged != null)
-            {
-                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, entry.Value));
-            }
-        }
-
-        protected override void OnEntryRemoved(TEntryImpl entry)
-        {
-            base.OnEntryRemoved(entry);
-            if (CollectionChanged != null)
-            {
-                CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, entry.Value));
-            }
-        }
-        #endregion
 
         #region IRelationListSync<TEntry> Members
 
