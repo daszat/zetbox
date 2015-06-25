@@ -36,13 +36,19 @@ namespace Zetbox.App.Extensions
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="ctx"></param>
-        /// <returns></returns>
-        public static T Singleton<T>(this IReadOnlyZetboxContext ctx)
+        /// <param name="throwIfNotFound"></param>
+        /// /// <returns></returns>
+        public static T Singleton<T>(this IReadOnlyZetboxContext ctx, bool throwIfNotFound = true)
             where T : class, IDataObject
         {
             if (ctx == null) throw new ArgumentNullException("ctx");
-            
-            return ctx.GetQuery<T>().SingleOrDefault();
+
+            var obj = ctx.GetQuery<T>().SingleOrDefault();
+            if (throwIfNotFound && obj == null)
+            {
+                throw new InvalidOperationException(string.Format("The requested object of type {0} was not created yet.", typeof(T).FullName));
+            }
+            return obj;
         }
 
         /// <summary>
