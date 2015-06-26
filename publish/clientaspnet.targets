@@ -7,11 +7,17 @@
     </Reference>
   </ItemGroup>
   <PropertyGroup>
-    <!-- deploys the compiled binaries into the local inetpub for debugging -->
+    <!-- deploys the compiled binaries into the local inetpub for debugging
+		 TODO: Need to flatten the hierarchie to enable language resources,
+		 but on the other hand the assembly loader is searching for 
+         client/generated, server/generated and common/generated -->
     <PostBuildEvent Condition=" '$(OS)' == 'Windows_NT' ">
       xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Common" "$(ProjectDir)\bin\Common"
       xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Server" "$(ProjectDir)\bin\Server"
       xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Client" "$(ProjectDir)\bin\Client"
+      xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Common" "$(ProjectDir)\bin"
+      xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Server" "$(ProjectDir)\bin"
+      xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Client" "$(ProjectDir)\bin"
       xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Npgsql.*" "$(ProjectDir)\bin"
       xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Mono.Security.*" "$(ProjectDir)\bin"
     </PostBuildEvent>
