@@ -138,6 +138,7 @@ namespace Zetbox.API
                 AssemblyLoader.SearchPath.Add(Path.Combine(rootedPath, loadGeneratedAssemblies ? "Generated" : "Fallback"));
                 AssemblyLoader.SearchPath.Add(rootedPath);
             }
+            AssemblyLoader.SearchPath.Add(Path.Combine(QualifySearchPath(hostTypePrefix), loadGeneratedAssemblies ? "Generated" : "Fallback"));
         }
 
         public static string QualifySearchPath(string path)
