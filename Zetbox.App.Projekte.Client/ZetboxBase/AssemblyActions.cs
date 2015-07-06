@@ -18,6 +18,7 @@ namespace Zetbox.App.Base
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Reflection;
     using System.Text;
     using Zetbox.API;
     using Zetbox.API.Utils;
@@ -89,37 +90,34 @@ namespace Zetbox.App.Base
             {
                 var liveDescriptors = new HashSet<ViewModelDescriptor>();
 
-                foreach (var type in srAssembly.GetTypes())
+                foreach (var type in GetTypes(srAssembly))
                 {
-                    if (type != null)
+                    object attr;
+                    // http://blogs.msdn.com/b/kaevans/archive/2005/10/24/484186.aspx
+                    if (type.Assembly.ReflectionOnly)
                     {
-                        object attr;
-                        // http://blogs.msdn.com/b/kaevans/archive/2005/10/24/484186.aspx
-                        if (type.Assembly.ReflectionOnly)
+                        attr = SR.CustomAttributeData.GetCustomAttributes(type).FirstOrDefault(i => i.Constructor.DeclaringType.FullName == typeof(ViewModelDescriptorAttribute).FullName);
+                    }
+                    else
+                    {
+                        attr = type.GetCustomAttributes(typeof(ViewModelDescriptorAttribute), false).FirstOrDefault() as ViewModelDescriptorAttribute;
+                    }
+                    if (attr != null)
+                    {
+                        var typeName = type.GetSimpleName();
+                        var descr = ctx.GetQuery<ViewModelDescriptor>().FirstOrDefault(i => i.ViewModelTypeRef == typeName);
+                        if (descr == null)
                         {
-                            attr = SR.CustomAttributeData.GetCustomAttributes(type).FirstOrDefault(i => i.Constructor.DeclaringType.FullName == typeof(ViewModelDescriptorAttribute).FullName);
+                            descr = ctx.Create<ViewModelDescriptor>();
+                            descr.ViewModelTypeRef = typeName;
+                            descr.Description = "TODO: Add description";
                         }
                         else
                         {
-                            attr = type.GetCustomAttributes(typeof(ViewModelDescriptorAttribute), false).FirstOrDefault() as ViewModelDescriptorAttribute;
+                            descr.Deleted = false;
                         }
-                        if (attr != null)
-                        {
-                            var typeName = type.GetSimpleName();
-                            var descr = ctx.GetQuery<ViewModelDescriptor>().FirstOrDefault(i => i.ViewModelTypeRef == typeName);
-                            if (descr == null)
-                            {
-                                descr = ctx.Create<ViewModelDescriptor>();
-                                descr.ViewModelTypeRef = typeName;
-                                descr.Description = "TODO: Add description";
-                            }
-                            else
-                            {
-                                descr.Deleted = false;
-                            }
 
-                            liveDescriptors.Add(descr);
-                        }
+                        liveDescriptors.Add(descr);
                     }
                 }
 
@@ -143,43 +141,40 @@ namespace Zetbox.App.Base
             {
                 var liveDescriptors = new HashSet<ViewDescriptor>();
 
-                foreach (var type in srAssembly.GetTypes())
+                foreach (var type in GetTypes(srAssembly))
                 {
-                    if (type != null)
+                    object attr;
+                    Toolkit? tk = null;
+                    // http://blogs.msdn.com/b/kaevans/archive/2005/10/24/484186.aspx
+                    if (type.Assembly.ReflectionOnly)
                     {
-                        object attr;
-                        Toolkit? tk = null;
-                        // http://blogs.msdn.com/b/kaevans/archive/2005/10/24/484186.aspx
-                        if (type.Assembly.ReflectionOnly)
+                        attr = SR.CustomAttributeData.GetCustomAttributes(type).FirstOrDefault(i => i.Constructor.DeclaringType.FullName == typeof(ViewDescriptorAttribute).FullName);
+                        if (attr != null) tk = (Toolkit)((SR.CustomAttributeData)attr).ConstructorArguments.Single().Value;
+                    }
+                    else
+                    {
+                        attr = type.GetCustomAttributes(typeof(ViewDescriptorAttribute), false).FirstOrDefault() as ViewDescriptorAttribute;
+                        if (attr != null) tk = ((ViewDescriptorAttribute)attr).Toolkit;
+                    }
+                    if (attr != null)
+                    {
+                        var typeName = type.GetSimpleName();
+
+                        // if a view can be used under multiple ControlKinds, it needs to have multiple ViewDescriptors
+                        var descrList = ctx.GetQuery<ViewDescriptor>().Where(i => i.ControlTypeRef == typeName).ToList();
+                        if (descrList.Count == 0)
                         {
-                            attr = SR.CustomAttributeData.GetCustomAttributes(type).FirstOrDefault(i => i.Constructor.DeclaringType.FullName == typeof(ViewDescriptorAttribute).FullName);
-                            if (attr != null) tk = (Toolkit)((SR.CustomAttributeData)attr).ConstructorArguments.Single().Value;
+                            var descr = ctx.Create<ViewDescriptor>();
+                            descr.ControlTypeRef = typeName;
+                            if (tk != null) descr.Toolkit = tk.Value;
+                            liveDescriptors.Add(descr);
                         }
                         else
                         {
-                            attr = type.GetCustomAttributes(typeof(ViewDescriptorAttribute), false).FirstOrDefault() as ViewDescriptorAttribute;
-                            if (attr != null) tk = ((ViewDescriptorAttribute)attr).Toolkit;
-                        }
-                        if (attr != null)
-                        {
-                            var typeName = type.GetSimpleName();
-
-                            // if a view can be used under multiple ControlKinds, it needs to have multiple ViewDescriptors
-                            var descrList = ctx.GetQuery<ViewDescriptor>().Where(i => i.ControlTypeRef == typeName).ToList();
-                            if (descrList.Count == 0)
+                            foreach (var descr in descrList)
                             {
-                                var descr = ctx.Create<ViewDescriptor>();
-                                descr.ControlTypeRef = typeName;
-                                if (tk != null) descr.Toolkit = tk.Value;
+                                descr.Deleted = false;
                                 liveDescriptors.Add(descr);
-                            }
-                            else
-                            {
-                                foreach (var descr in descrList)
-                                {
-                                    descr.Deleted = false;
-                                    liveDescriptors.Add(descr);
-                                }
                             }
                         }
                     }
@@ -233,6 +228,20 @@ namespace Zetbox.App.Base
                 throw new InvalidOperationException("Unable to load assembly: " + assembly.Name);
             }
             return a;
+        }
+
+        private static Type[] GetTypes(SR.Assembly assembly)
+        {
+            IEnumerable<Type> types;
+            try
+            {
+                types = assembly.GetTypes();
+            }
+            catch (ReflectionTypeLoadException e)
+            {
+                types = e.Types;
+            }
+            return types.Where(t => t != null).ToArray();
         }
     }
 }
