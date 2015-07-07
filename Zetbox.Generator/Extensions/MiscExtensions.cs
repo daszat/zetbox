@@ -53,7 +53,7 @@ namespace Zetbox.Generator.Extensions
         public static string GetRelationClassName(this Relation rel)
         {
             if (rel == null) { throw new ArgumentNullException("rel"); }
-            return String.Format("{0}_{1}_{2}_RelationEntry", rel.A.Type.Name, rel.Verb, rel.B.Type.Name);
+            return String.Format("{0}_{1}_{2}_RelationEntry", rel.A.RoleName, rel.Verb, rel.B.RoleName);
         }
 
         public static string GetRelationTableName(this Relation rel)
