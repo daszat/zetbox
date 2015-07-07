@@ -846,7 +846,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
             {
                 if (_ImplementsInterfaces == null)
                 {
-                    _ImplementsInterfaces = new BSideCollectionWrapper<Zetbox.App.Base.DataType, Zetbox.App.Base.Interface, Zetbox.App.Base.DataType_implements_Interface_RelationEntryEfImpl, EntityCollection<Zetbox.App.Base.DataType_implements_Interface_RelationEntryEfImpl>>(
+                    _ImplementsInterfaces = new BSideCollectionWrapper<Zetbox.App.Base.DataType, Zetbox.App.Base.Interface, Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntryEfImpl, EntityCollection<Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntryEfImpl>>(
                             this,
                             ImplementsInterfacesImpl);
                 }
@@ -855,7 +855,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
         }
         
         [EdmRelationshipNavigationProperty("Model", "FK_DataType_implements_ImplementedInterfaces_A", "CollectionEntry")]
-        public EntityCollection<Zetbox.App.Base.DataType_implements_Interface_RelationEntryEfImpl> ImplementsInterfacesImpl
+        public EntityCollection<Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntryEfImpl> ImplementsInterfacesImpl
         {
             get
             {
@@ -863,14 +863,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
             }
         }
 
-        private EntityCollection<Zetbox.App.Base.DataType_implements_Interface_RelationEntryEfImpl> _ImplementsInterfacesImplEntityCollection;
-        internal EntityCollection<Zetbox.App.Base.DataType_implements_Interface_RelationEntryEfImpl> GetImplementsInterfacesImplCollection()
+        private EntityCollection<Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntryEfImpl> _ImplementsInterfacesImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntryEfImpl> GetImplementsInterfacesImplCollection()
         {
             if (_ImplementsInterfacesImplEntityCollection == null)
             {
                 _ImplementsInterfacesImplEntityCollection
                     = ((IEntityWithRelationships)(this)).RelationshipManager
-                        .GetRelatedCollection<Zetbox.App.Base.DataType_implements_Interface_RelationEntryEfImpl>(
+                        .GetRelatedCollection<Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntryEfImpl>(
                             "Model.FK_DataType_implements_ImplementedInterfaces_A",
                             "CollectionEntry");
                 // the EntityCollection has to be loaded before attaching the AssociationChanged event
@@ -885,7 +885,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
             }
             return _ImplementsInterfacesImplEntityCollection;
         }
-        private BSideCollectionWrapper<Zetbox.App.Base.DataType, Zetbox.App.Base.Interface, Zetbox.App.Base.DataType_implements_Interface_RelationEntryEfImpl, EntityCollection<Zetbox.App.Base.DataType_implements_Interface_RelationEntryEfImpl>> _ImplementsInterfaces;
+        private BSideCollectionWrapper<Zetbox.App.Base.DataType, Zetbox.App.Base.Interface, Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntryEfImpl, EntityCollection<Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntryEfImpl>> _ImplementsInterfaces;
 
         public Zetbox.API.Async.ZbTask TriggerFetchImplementsInterfacesAsync()
         {

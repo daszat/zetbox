@@ -778,17 +778,17 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ControlKind> OnChi
                 ParentsToDelete.Add((NHibernatePersistenceObject)Module);
             }
             // should fetch && remember parent for DataType_may_request_ControlKind_RelationEntry
-            // should fetch && remember parent for FilterConfiguration_has_ControlKind_RelationEntry
-            // should fetch && remember parent for NavigationEntry_have_ControlKind_RelationEntry
-            // should fetch && remember parent for ViewModelDescriptor_has_ControlKind_RelationEntry
+            // should fetch && remember parent for FilterConfiguration_has_RequestedKind_RelationEntry
+            // should fetch && remember parent for NavEntry_have_RequestedKind_RelationEntry
+            // should fetch && remember parent for Presentable_has_DefaultKind_RelationEntry
             // should fetch && remember parent for Property_may_request_ControlKind_RelationEntry
-            // should fetch && remember parent for NavigationSearchScreen_has_ControlKind_RelationEntry
-            // should fetch && remember parent for NavigationSearchScreen_has_ControlKind_RelationEntry
+            // should fetch && remember parent for Search_has_RequestedEditorKind_RelationEntry
+            // should fetch && remember parent for Search_has_RequestedWorkspaceKind_RelationEntry
             // should fetch && remember parent for ViewDescriptor_is_a_ControlKind_RelationEntry
-            // should fetch && remember parent for ViewModelDescriptor_displayed_by_ControlKind_RelationEntry
-            // should fetch && remember parent for ViewModelDescriptor_displayed_by_ControlKind_RelationEntry
-            // should fetch && remember parent for ViewModelDescriptor_displayed_by_ControlKind_RelationEntry
-            // should fetch && remember parent for ViewModelDescriptor_displayedInGridBy_ControlKind_RelationEntry
+            // should fetch && remember parent for ViewModel_displayed_by_DefaultDisplayKind_RelationEntry
+            // should fetch && remember parent for ViewModel_displayed_by_DefaultGridCellEditorKind_RelationEntry
+            // should fetch && remember parent for ViewModel_displayed_by_DefaultGridDisplayKind_RelationEntry
+            // should fetch && remember parent for ViewModelDescriptor_displayedInGridBy_DefaultGridCellKind_RelationEntry
 
             ChildControlKinds.Clear();
             Module = null;

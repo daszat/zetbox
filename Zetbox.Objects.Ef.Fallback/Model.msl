@@ -1189,9 +1189,9 @@
     B: ZeroOrMore Property as InputProperties
     Preferred Storage: Separate
     -->
-    <EntitySetMapping Name="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl">
-      <EntityTypeMapping TypeName="Model.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl">
-        <MappingFragment StoreEntitySet="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry">
+    <EntitySetMapping Name="CalculatedReference_dependsOn_InputProperties_RelationEntryEfImpl">
+      <EntityTypeMapping TypeName="Model.CalculatedReference_dependsOn_InputProperties_RelationEntryEfImpl">
+        <MappingFragment StoreEntitySet="CalculatedReference_dependsOn_InputProperties_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
 		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
         </MappingFragment>
@@ -1200,7 +1200,7 @@
     <!-- A to CollectionEntry -->
     <AssociationSetMapping Name="FK_CalculatedReference_dependsOn_InputProperties_A"
                            TypeName="Model.FK_CalculatedReference_dependsOn_InputProperties_A"
-                           StoreEntitySet="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" >
+                           StoreEntitySet="CalculatedReference_dependsOn_InputProperties_RelationEntry" >
       <EndProperty Name="CalculatedReference">
         <ScalarProperty Name="ID" ColumnName="fk_CalculatedReference"/>
       </EndProperty>
@@ -1212,7 +1212,7 @@
     <!-- B to CollectionEntry -->
     <AssociationSetMapping Name="FK_CalculatedReference_dependsOn_InputProperties_B"
                            TypeName="Model.FK_CalculatedReference_dependsOn_InputProperties_B"
-                           StoreEntitySet="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" >
+                           StoreEntitySet="CalculatedReference_dependsOn_InputProperties_RelationEntry" >
       <EndProperty Name="InputProperties">
         <ScalarProperty Name="ID" ColumnName="fk_InputProperties"/>
       </EndProperty>
@@ -1228,9 +1228,9 @@
     B: ZeroOrMore Interface as ImplementedInterfaces
     Preferred Storage: Separate
     -->
-    <EntitySetMapping Name="DataType_implements_Interface_RelationEntryEfImpl">
-      <EntityTypeMapping TypeName="Model.DataType_implements_Interface_RelationEntryEfImpl">
-        <MappingFragment StoreEntitySet="DataType_implements_Interface_RelationEntry">
+    <EntitySetMapping Name="DataType_implements_ImplementedInterfaces_RelationEntryEfImpl">
+      <EntityTypeMapping TypeName="Model.DataType_implements_ImplementedInterfaces_RelationEntryEfImpl">
+        <MappingFragment StoreEntitySet="DataType_implements_ImplementedInterfaces_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
 		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
         </MappingFragment>
@@ -1239,7 +1239,7 @@
     <!-- A to CollectionEntry -->
     <AssociationSetMapping Name="FK_DataType_implements_ImplementedInterfaces_A"
                            TypeName="Model.FK_DataType_implements_ImplementedInterfaces_A"
-                           StoreEntitySet="DataType_implements_Interface_RelationEntry" >
+                           StoreEntitySet="DataType_implements_ImplementedInterfaces_RelationEntry" >
       <EndProperty Name="DataType">
         <ScalarProperty Name="ID" ColumnName="fk_DataType"/>
       </EndProperty>
@@ -1251,7 +1251,7 @@
     <!-- B to CollectionEntry -->
     <AssociationSetMapping Name="FK_DataType_implements_ImplementedInterfaces_B"
                            TypeName="Model.FK_DataType_implements_ImplementedInterfaces_B"
-                           StoreEntitySet="DataType_implements_Interface_RelationEntry" >
+                           StoreEntitySet="DataType_implements_ImplementedInterfaces_RelationEntry" >
       <EndProperty Name="ImplementedInterfaces">
         <ScalarProperty Name="ID" ColumnName="fk_ImplementedInterfaces"/>
       </EndProperty>
@@ -1267,9 +1267,9 @@
     B: ZeroOrMore Group as Groups
     Preferred Storage: Separate
     -->
-    <EntitySetMapping Name="Identity_memberOf_Group_RelationEntryEfImpl">
-      <EntityTypeMapping TypeName="Model.Identity_memberOf_Group_RelationEntryEfImpl">
-        <MappingFragment StoreEntitySet="Identity_memberOf_Group_RelationEntry">
+    <EntitySetMapping Name="Identities_memberOf_Groups_RelationEntryEfImpl">
+      <EntityTypeMapping TypeName="Model.Identities_memberOf_Groups_RelationEntryEfImpl">
+        <MappingFragment StoreEntitySet="Identities_memberOf_Groups_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -1277,7 +1277,7 @@
     <!-- A to CollectionEntry -->
     <AssociationSetMapping Name="FK_Identities_memberOf_Groups_A"
                            TypeName="Model.FK_Identities_memberOf_Groups_A"
-                           StoreEntitySet="Identity_memberOf_Group_RelationEntry" >
+                           StoreEntitySet="Identities_memberOf_Groups_RelationEntry" >
       <EndProperty Name="Identities">
         <ScalarProperty Name="ID" ColumnName="fk_Identities"/>
       </EndProperty>
@@ -1289,7 +1289,7 @@
     <!-- B to CollectionEntry -->
     <AssociationSetMapping Name="FK_Identities_memberOf_Groups_B"
                            TypeName="Model.FK_Identities_memberOf_Groups_B"
-                           StoreEntitySet="Identity_memberOf_Group_RelationEntry" >
+                           StoreEntitySet="Identities_memberOf_Groups_RelationEntry" >
       <EndProperty Name="Groups">
         <ScalarProperty Name="ID" ColumnName="fk_Groups"/>
       </EndProperty>
@@ -1305,9 +1305,9 @@
     B: ZeroOrMore Group as Groups
     Preferred Storage: Separate
     -->
-    <EntitySetMapping Name="NavigationEntry_accessed_by_Group_RelationEntryEfImpl">
-      <EntityTypeMapping TypeName="Model.NavigationEntry_accessed_by_Group_RelationEntryEfImpl">
-        <MappingFragment StoreEntitySet="NavigationEntry_accessed_by_Group_RelationEntry">
+    <EntitySetMapping Name="NavigationScreen_accessed_by_Groups_RelationEntryEfImpl">
+      <EntityTypeMapping TypeName="Model.NavigationScreen_accessed_by_Groups_RelationEntryEfImpl">
+        <MappingFragment StoreEntitySet="NavigationScreen_accessed_by_Groups_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
 		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
         </MappingFragment>
@@ -1316,7 +1316,7 @@
     <!-- A to CollectionEntry -->
     <AssociationSetMapping Name="FK_NavigationScreen_accessed_by_Groups_A"
                            TypeName="Model.FK_NavigationScreen_accessed_by_Groups_A"
-                           StoreEntitySet="NavigationEntry_accessed_by_Group_RelationEntry" >
+                           StoreEntitySet="NavigationScreen_accessed_by_Groups_RelationEntry" >
       <EndProperty Name="NavigationScreen">
         <ScalarProperty Name="ID" ColumnName="fk_NavigationScreen"/>
       </EndProperty>
@@ -1328,7 +1328,7 @@
     <!-- B to CollectionEntry -->
     <AssociationSetMapping Name="FK_NavigationScreen_accessed_by_Groups_B"
                            TypeName="Model.FK_NavigationScreen_accessed_by_Groups_B"
-                           StoreEntitySet="NavigationEntry_accessed_by_Group_RelationEntry" >
+                           StoreEntitySet="NavigationScreen_accessed_by_Groups_RelationEntry" >
       <EndProperty Name="Groups">
         <ScalarProperty Name="ID" ColumnName="fk_Groups"/>
       </EndProperty>
@@ -1344,9 +1344,9 @@
     B: ZeroOrMore Method as Methods
     Preferred Storage: Separate
     -->
-    <EntitySetMapping Name="ObjectReferenceProperty_shows_Method_RelationEntryEfImpl">
-      <EntityTypeMapping TypeName="Model.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl">
-        <MappingFragment StoreEntitySet="ObjectReferenceProperty_shows_Method_RelationEntry">
+    <EntitySetMapping Name="ObjRefProp_shows_Methods_RelationEntryEfImpl">
+      <EntityTypeMapping TypeName="Model.ObjRefProp_shows_Methods_RelationEntryEfImpl">
+        <MappingFragment StoreEntitySet="ObjRefProp_shows_Methods_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
 		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
         </MappingFragment>
@@ -1355,7 +1355,7 @@
     <!-- A to CollectionEntry -->
     <AssociationSetMapping Name="FK_ObjRefProp_shows_Methods_A"
                            TypeName="Model.FK_ObjRefProp_shows_Methods_A"
-                           StoreEntitySet="ObjectReferenceProperty_shows_Method_RelationEntry" >
+                           StoreEntitySet="ObjRefProp_shows_Methods_RelationEntry" >
       <EndProperty Name="ObjRefProp">
         <ScalarProperty Name="ID" ColumnName="fk_ObjRefProp"/>
       </EndProperty>
@@ -1367,7 +1367,7 @@
     <!-- B to CollectionEntry -->
     <AssociationSetMapping Name="FK_ObjRefProp_shows_Methods_B"
                            TypeName="Model.FK_ObjRefProp_shows_Methods_B"
-                           StoreEntitySet="ObjectReferenceProperty_shows_Method_RelationEntry" >
+                           StoreEntitySet="ObjRefProp_shows_Methods_RelationEntry" >
       <EndProperty Name="Methods">
         <ScalarProperty Name="ID" ColumnName="fk_Methods"/>
       </EndProperty>
@@ -1383,9 +1383,9 @@
     B: ZeroOrMore ControlKind as SecondaryControlKinds
     Preferred Storage: Separate
     -->
-    <EntitySetMapping Name="ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl">
-      <EntityTypeMapping TypeName="Model.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl">
-        <MappingFragment StoreEntitySet="ViewModelDescriptor_displayedBy_ControlKind_RelationEntry">
+    <EntitySetMapping Name="Presentable_displayedBy_SecondaryControlKinds_RelationEntryEfImpl">
+      <EntityTypeMapping TypeName="Model.Presentable_displayedBy_SecondaryControlKinds_RelationEntryEfImpl">
+        <MappingFragment StoreEntitySet="Presentable_displayedBy_SecondaryControlKinds_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
 		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
         </MappingFragment>
@@ -1394,7 +1394,7 @@
     <!-- A to CollectionEntry -->
     <AssociationSetMapping Name="FK_Presentable_displayedBy_SecondaryControlKinds_A"
                            TypeName="Model.FK_Presentable_displayedBy_SecondaryControlKinds_A"
-                           StoreEntitySet="ViewModelDescriptor_displayedBy_ControlKind_RelationEntry" >
+                           StoreEntitySet="Presentable_displayedBy_SecondaryControlKinds_RelationEntry" >
       <EndProperty Name="Presentable">
         <ScalarProperty Name="ID" ColumnName="fk_Presentable"/>
       </EndProperty>
@@ -1406,7 +1406,7 @@
     <!-- B to CollectionEntry -->
     <AssociationSetMapping Name="FK_Presentable_displayedBy_SecondaryControlKinds_B"
                            TypeName="Model.FK_Presentable_displayedBy_SecondaryControlKinds_B"
-                           StoreEntitySet="ViewModelDescriptor_displayedBy_ControlKind_RelationEntry" >
+                           StoreEntitySet="Presentable_displayedBy_SecondaryControlKinds_RelationEntry" >
       <EndProperty Name="SecondaryControlKinds">
         <ScalarProperty Name="ID" ColumnName="fk_SecondaryControlKinds"/>
       </EndProperty>
@@ -1422,9 +1422,9 @@
     B: ZeroOrMore Relation as Relations
     Preferred Storage: Separate
     -->
-    <EntitySetMapping Name="RoleMembership_resolves_Relation_RelationEntryEfImpl">
-      <EntityTypeMapping TypeName="Model.RoleMembership_resolves_Relation_RelationEntryEfImpl">
-        <MappingFragment StoreEntitySet="RoleMembership_resolves_Relation_RelationEntry">
+    <EntitySetMapping Name="RoleMembership_resolves_Relations_RelationEntryEfImpl">
+      <EntityTypeMapping TypeName="Model.RoleMembership_resolves_Relations_RelationEntryEfImpl">
+        <MappingFragment StoreEntitySet="RoleMembership_resolves_Relations_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
 		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
           <ScalarProperty Name="A_pos" ColumnName="fk_RoleMembership_pos" />
@@ -1435,7 +1435,7 @@
     <!-- A to CollectionEntry -->
     <AssociationSetMapping Name="FK_RoleMembership_resolves_Relations_A"
                            TypeName="Model.FK_RoleMembership_resolves_Relations_A"
-                           StoreEntitySet="RoleMembership_resolves_Relation_RelationEntry" >
+                           StoreEntitySet="RoleMembership_resolves_Relations_RelationEntry" >
       <EndProperty Name="RoleMembership">
         <ScalarProperty Name="ID" ColumnName="fk_RoleMembership"/>
       </EndProperty>
@@ -1447,7 +1447,7 @@
     <!-- B to CollectionEntry -->
     <AssociationSetMapping Name="FK_RoleMembership_resolves_Relations_B"
                            TypeName="Model.FK_RoleMembership_resolves_Relations_B"
-                           StoreEntitySet="RoleMembership_resolves_Relation_RelationEntry" >
+                           StoreEntitySet="RoleMembership_resolves_Relations_RelationEntry" >
       <EndProperty Name="Relations">
         <ScalarProperty Name="ID" ColumnName="fk_Relations"/>
       </EndProperty>
@@ -1504,9 +1504,9 @@
     B: ZeroOrMore Property as Properties
     Preferred Storage: Separate
     -->
-    <EntitySetMapping Name="IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl">
-      <EntityTypeMapping TypeName="Model.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl">
-        <MappingFragment StoreEntitySet="IndexConstraint_ensures_unique_on_Property_RelationEntry">
+    <EntitySetMapping Name="UniqueContraints_ensures_unique_on_Properties_RelationEntryEfImpl">
+      <EntityTypeMapping TypeName="Model.UniqueContraints_ensures_unique_on_Properties_RelationEntryEfImpl">
+        <MappingFragment StoreEntitySet="UniqueContraints_ensures_unique_on_Properties_RelationEntry">
           <ScalarProperty Name="ID" ColumnName="ID" />
 		  <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
         </MappingFragment>
@@ -1515,7 +1515,7 @@
     <!-- A to CollectionEntry -->
     <AssociationSetMapping Name="FK_UniqueContraints_ensures_unique_on_Properties_A"
                            TypeName="Model.FK_UniqueContraints_ensures_unique_on_Properties_A"
-                           StoreEntitySet="IndexConstraint_ensures_unique_on_Property_RelationEntry" >
+                           StoreEntitySet="UniqueContraints_ensures_unique_on_Properties_RelationEntry" >
       <EndProperty Name="UniqueContraints">
         <ScalarProperty Name="ID" ColumnName="fk_UniqueContraints"/>
       </EndProperty>
@@ -1527,7 +1527,7 @@
     <!-- B to CollectionEntry -->
     <AssociationSetMapping Name="FK_UniqueContraints_ensures_unique_on_Properties_B"
                            TypeName="Model.FK_UniqueContraints_ensures_unique_on_Properties_B"
-                           StoreEntitySet="IndexConstraint_ensures_unique_on_Property_RelationEntry" >
+                           StoreEntitySet="UniqueContraints_ensures_unique_on_Properties_RelationEntry" >
       <EndProperty Name="Properties">
         <ScalarProperty Name="ID" ColumnName="fk_Properties"/>
       </EndProperty>

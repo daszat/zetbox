@@ -237,7 +237,7 @@ namespace Zetbox.App.GUI
             base.NotifyDeleting();
             if (OnNotifyDeleting_NavigationScreen != null) OnNotifyDeleting_NavigationScreen(this);
 
-            // should fetch && remember parent for Application_has_NavigationScreen_RelationEntry
+            // should fetch && remember parent for Application_has_RootScreen_RelationEntry
 
         }
         public static event ObjectEventHandler<NavigationScreen> OnNotifyDeleting_NavigationScreen;

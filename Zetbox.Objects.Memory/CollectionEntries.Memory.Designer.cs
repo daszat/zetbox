@@ -13,19 +13,408 @@ using Zetbox.DalProvider.Base.RelationWrappers;
 using Zetbox.DalProvider.Base;
 using Zetbox.DalProvider.Memory;
 
-namespace Zetbox.App.Base
+namespace Zetbox.App.Test
 {
     // BEGIN Zetbox.Generator.Templates.CollectionEntries.RelationEntry
-    [System.Diagnostics.DebuggerDisplay("CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl")]
-    public class CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Base.CalculatedObjectReferenceProperty, Zetbox.App.Base.CalculatedObjectReferencePropertyMemoryImpl, Zetbox.App.Base.Property, Zetbox.App.Base.PropertyMemoryImpl>, CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
+    [System.Diagnostics.DebuggerDisplay("ASide_connectsTo_BSide_RelationEntryMemoryImpl")]
+    public class ASide_connectsTo_BSide_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Test.N_to_M_relations_A, Zetbox.App.Test.N_to_M_relations_AMemoryImpl, Zetbox.App.Test.N_to_M_relations_B, Zetbox.App.Test.N_to_M_relations_BMemoryImpl>, ASide_connectsTo_BSide_RelationEntry
     {
         [Obsolete]
-        public CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl()
+        public ASide_connectsTo_BSide_RelationEntryMemoryImpl()
             : base(null)
         {
         }
 
-        public CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
+        public ASide_connectsTo_BSide_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
+            : base(lazyCtx)
+        {
+        }
+        // BEGIN Zetbox.Generator.Templates.Properties.IdProperty
+        public override int ID
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ID;
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_ID != value)
+                {
+                    var __oldValue = _ID;
+                    var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                }
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
+            }
+        }
+        private int _ID;
+        // END Zetbox.Generator.Templates.Properties.IdProperty
+        #region RelationEntry.ApplyClassHeadTemplate
+
+        private static readonly Guid _relationID = new Guid("3555da6e-0e9b-4f7c-903e-a51f3cce7cd9");
+        public override Guid RelationID { get { return _relationID; } }
+
+        IDataObject IRelationEntry.AObject
+        {
+            get
+            {
+                return A;
+            }
+            set
+            {
+                // settor will do checking for us
+                A = (Zetbox.App.Test.N_to_M_relations_A)value;
+            }
+        }
+
+        IDataObject IRelationEntry.BObject
+        {
+            get
+            {
+                return B;
+            }
+            set
+            {
+                // settor will do checking for us
+                B = (Zetbox.App.Test.N_to_M_relations_B)value;
+            }
+        }
+
+        #endregion // RelationEntry.ApplyClassHeadTemplate
+
+
+        /// <summary>
+        /// the A-side value of this CollectionEntry
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
+        // referencedInterface=Zetbox.App.Test.N_to_M_relations_A; moduleNamespace=Zetbox.App.Test;
+        // will get inverse collection for notifications for BSide
+        // PositionStorage=none;
+        // Target not exportable; does not call events
+
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
+        public Zetbox.App.Test.N_to_M_relations_A A
+        {
+            get { return AImpl; }
+            set { AImpl = (Zetbox.App.Test.N_to_M_relations_AMemoryImpl)value; }
+        }
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        private int? __fk_ACache;
+
+        private int? _fk_A {
+            get
+            {
+                return __fk_ACache;
+            }
+            set
+            {
+                __fk_ACache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchATask = null;
+            }
+        }
+
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Test.N_to_M_relations_A> _triggerFetchATask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Test.N_to_M_relations_A> TriggerFetchAAsync()
+        {
+            if (_triggerFetchATask != null) return _triggerFetchATask;
+
+            if (_fk_A.HasValue)
+                _triggerFetchATask = Context.FindAsync<Zetbox.App.Test.N_to_M_relations_A>(_fk_A.Value);
+            else
+                _triggerFetchATask = new Zetbox.API.Async.ZbTask<Zetbox.App.Test.N_to_M_relations_A>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            return _triggerFetchATask;
+        }
+
+        // internal implementation
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        internal Zetbox.App.Test.N_to_M_relations_AMemoryImpl AImpl
+        {
+            get
+            {
+                return (Zetbox.App.Test.N_to_M_relations_AMemoryImpl)TriggerFetchAAsync().Result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
+
+                // shortcut noops
+                if ((value == null && _fk_A == null) || (value != null && value.ID == _fk_A))
+                {
+                    SetInitializedProperty("A");
+                    return;
+                }
+
+                // cache old value to remove inverse references later
+                var __oldValue = AImpl;
+                var __newValue = value;
+
+                // Changing Event fires before anything is touched
+                NotifyPropertyChanging("A", __oldValue, __newValue);
+
+                if (__oldValue != null)
+                {
+                    __oldValue.NotifyPropertyChanging("BSide", null, null);
+                }
+
+                if (__newValue != null)
+                {
+                    __newValue.NotifyPropertyChanging("BSide", null, null);
+                }
+
+                // next, set the local reference
+                _fk_A = __newValue == null ? (int?)null : __newValue.ID;
+
+                if (__oldValue != null)
+                    __oldValue.OnBSideCollectionChanged();
+
+                if (__newValue != null)
+                    __newValue.OnBSideCollectionChanged();
+
+                // everything is done. fire the Changed event
+                NotifyPropertyChanged("A", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
+            }
+        }
+        // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+
+        /// <summary>
+        /// the B-side value of this CollectionEntry
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
+        // referencedInterface=Zetbox.App.Test.N_to_M_relations_B; moduleNamespace=Zetbox.App.Test;
+        // will get inverse collection for notifications for ASide
+        // PositionStorage=none;
+        // Target not exportable; does not call events
+
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
+        public Zetbox.App.Test.N_to_M_relations_B B
+        {
+            get { return BImpl; }
+            set { BImpl = (Zetbox.App.Test.N_to_M_relations_BMemoryImpl)value; }
+        }
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        private int? __fk_BCache;
+
+        private int? _fk_B {
+            get
+            {
+                return __fk_BCache;
+            }
+            set
+            {
+                __fk_BCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchBTask = null;
+            }
+        }
+
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.Test.N_to_M_relations_B> _triggerFetchBTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Test.N_to_M_relations_B> TriggerFetchBAsync()
+        {
+            if (_triggerFetchBTask != null) return _triggerFetchBTask;
+
+            if (_fk_B.HasValue)
+                _triggerFetchBTask = Context.FindAsync<Zetbox.App.Test.N_to_M_relations_B>(_fk_B.Value);
+            else
+                _triggerFetchBTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Test.N_to_M_relations_B>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            return _triggerFetchBTask;
+        }
+
+        // internal implementation
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        internal Zetbox.App.Test.N_to_M_relations_BMemoryImpl BImpl
+        {
+            get
+            {
+                return (Zetbox.App.Test.N_to_M_relations_BMemoryImpl)TriggerFetchBAsync().Result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
+
+                // shortcut noops
+                if ((value == null && _fk_B == null) || (value != null && value.ID == _fk_B))
+                {
+                    SetInitializedProperty("B");
+                    return;
+                }
+
+                // cache old value to remove inverse references later
+                var __oldValue = BImpl;
+                var __newValue = value;
+
+                // Changing Event fires before anything is touched
+                NotifyPropertyChanging("B", __oldValue, __newValue);
+
+                if (__oldValue != null)
+                {
+                    __oldValue.NotifyPropertyChanging("ASide", null, null);
+                }
+
+                if (__newValue != null)
+                {
+                    __newValue.NotifyPropertyChanging("ASide", null, null);
+                }
+
+                // next, set the local reference
+                _fk_B = __newValue == null ? (int?)null : __newValue.ID;
+
+                if (__oldValue != null)
+                    __oldValue.OnASideCollectionChanged();
+
+                if (__newValue != null)
+                    __newValue.OnASideCollectionChanged();
+
+                // everything is done. fire the Changed event
+                NotifyPropertyChanged("B", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
+            }
+        }
+        // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+
+        #region Serializer
+
+
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        {
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
+            // it may be only an empty shell to stand-in for unreadable data
+            if (!CurrentAccessRights.HasReadRights()) return;
+            binStream.Write(A != null ? A.ID : (int?)null);
+            binStream.Write(B != null ? B.ID : (int?)null);
+        }
+
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
+        {
+            var baseResult = base.FromStream(binStream);
+            var result = new List<IPersistenceObject>();
+            // it may be only an empty shell to stand-in for unreadable data
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
+            this._fk_A = binStream.ReadNullableInt32();
+            this._fk_B = binStream.ReadNullableInt32();
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
+            return baseResult == null
+                ? result.Count == 0
+                    ? null
+                    : result
+                : baseResult.Concat(result);
+        }
+
+        #endregion
+
+        public override Type GetImplementedInterface()
+        {
+            return typeof(ASide_connectsTo_BSide_RelationEntry);
+        }
+
+        public override void ApplyChangesFrom(IPersistenceObject obj)
+        {
+            base.ApplyChangesFrom(obj);
+            var other = (ASide_connectsTo_BSide_RelationEntryMemoryImpl)obj;
+            var me = (ASide_connectsTo_BSide_RelationEntryMemoryImpl)this;
+
+            me._fk_A = other._fk_A;
+            me._fk_B = other._fk_B;
+        }
+
+
+        public override void ReloadReferences()
+        {
+            // Do not reload references if the current object has been deleted.
+            // TODO: enable when MemoryContext uses MemoryDataObjects
+            //if (this.ObjectState == DataObjectState.Deleted) return;
+
+            if (_fk_A.HasValue)
+                AImpl = (Zetbox.App.Test.N_to_M_relations_AMemoryImpl)Context.Find<Zetbox.App.Test.N_to_M_relations_A>(_fk_A.Value);
+            else
+                AImpl = null;
+
+            if (_fk_B.HasValue)
+                BImpl = (Zetbox.App.Test.N_to_M_relations_BMemoryImpl)Context.Find<Zetbox.App.Test.N_to_M_relations_B>(_fk_B.Value);
+            else
+                BImpl = null;
+
+        }
+
+
+        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
+        {
+            base.OnPropertyChanged(property, oldValue, newValue);
+
+            if (property == "A" || property == "B")
+            {
+                var oldNotifier = (INotifyPropertyChanged)oldValue;
+                var newNotifier = (INotifyPropertyChanged)newValue;
+
+                if (oldNotifier != null) oldNotifier.PropertyChanged -= new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
+                if (newNotifier != null) newNotifier.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
+                ManageMyObjectState();
+            }
+        }
+
+        void AB_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "ObjectState")
+            {
+                ManageMyObjectState();
+            }
+        }
+
+        private void ManageMyObjectState()
+        {
+            if (A != null && A.ObjectState == DataObjectState.Deleted && this.Context != null)
+                this.Context.Delete(this);
+            if (B != null && B.ObjectState == DataObjectState.Deleted && this.Context != null)
+                this.Context.Delete(this);
+
+            if (this.ObjectState == DataObjectState.Deleted && A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
+                this.SetUnDeleted();
+        }
+    }
+    // END Zetbox.Generator.Templates.CollectionEntries.RelationEntry
+}
+
+namespace Zetbox.App.Base
+{
+    // BEGIN Zetbox.Generator.Templates.CollectionEntries.RelationEntry
+    [System.Diagnostics.DebuggerDisplay("CalculatedReference_dependsOn_InputProperties_RelationEntryMemoryImpl")]
+    public class CalculatedReference_dependsOn_InputProperties_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Base.CalculatedObjectReferenceProperty, Zetbox.App.Base.CalculatedObjectReferencePropertyMemoryImpl, Zetbox.App.Base.Property, Zetbox.App.Base.PropertyMemoryImpl>, CalculatedReference_dependsOn_InputProperties_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
+    {
+        [Obsolete]
+        public CalculatedReference_dependsOn_InputProperties_RelationEntryMemoryImpl()
+            : base(null)
+        {
+        }
+
+        public CalculatedReference_dependsOn_InputProperties_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }
@@ -380,14 +769,14 @@ namespace Zetbox.App.Base
 
         public override Type GetImplementedInterface()
         {
-            return typeof(CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry);
+            return typeof(CalculatedReference_dependsOn_InputProperties_RelationEntry);
         }
 
         public override void ApplyChangesFrom(IPersistenceObject obj)
         {
             base.ApplyChangesFrom(obj);
-            var other = (CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl)obj;
-            var me = (CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryMemoryImpl)this;
+            var other = (CalculatedReference_dependsOn_InputProperties_RelationEntryMemoryImpl)obj;
+            var me = (CalculatedReference_dependsOn_InputProperties_RelationEntryMemoryImpl)this;
 
             me._fk_A = other._fk_A;
             me._fk_B = other._fk_B;
@@ -459,16 +848,16 @@ namespace Zetbox.App.Base
 namespace Zetbox.App.Calendar
 {
     // BEGIN Zetbox.Generator.Templates.CollectionEntries.RelationEntry
-    [System.Diagnostics.DebuggerDisplay("CalendarBook_shared_r_Group_RelationEntryMemoryImpl")]
-    public class CalendarBook_shared_r_Group_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Calendar.CalendarBookMemoryImpl, Zetbox.App.Base.Group, Zetbox.App.Base.GroupMemoryImpl>, CalendarBook_shared_r_Group_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
+    [System.Diagnostics.DebuggerDisplay("Calendar_shared_r_GroupReaders_RelationEntryMemoryImpl")]
+    public class Calendar_shared_r_GroupReaders_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Calendar.CalendarBookMemoryImpl, Zetbox.App.Base.Group, Zetbox.App.Base.GroupMemoryImpl>, Calendar_shared_r_GroupReaders_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
         [Obsolete]
-        public CalendarBook_shared_r_Group_RelationEntryMemoryImpl()
+        public Calendar_shared_r_GroupReaders_RelationEntryMemoryImpl()
             : base(null)
         {
         }
 
-        public CalendarBook_shared_r_Group_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
+        public Calendar_shared_r_GroupReaders_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }
@@ -823,14 +1212,14 @@ namespace Zetbox.App.Calendar
 
         public override Type GetImplementedInterface()
         {
-            return typeof(CalendarBook_shared_r_Group_RelationEntry);
+            return typeof(Calendar_shared_r_GroupReaders_RelationEntry);
         }
 
         public override void ApplyChangesFrom(IPersistenceObject obj)
         {
             base.ApplyChangesFrom(obj);
-            var other = (CalendarBook_shared_r_Group_RelationEntryMemoryImpl)obj;
-            var me = (CalendarBook_shared_r_Group_RelationEntryMemoryImpl)this;
+            var other = (Calendar_shared_r_GroupReaders_RelationEntryMemoryImpl)obj;
+            var me = (Calendar_shared_r_GroupReaders_RelationEntryMemoryImpl)this;
 
             me._fk_A = other._fk_A;
             me._fk_B = other._fk_B;
@@ -902,16 +1291,16 @@ namespace Zetbox.App.Calendar
 namespace Zetbox.App.Calendar
 {
     // BEGIN Zetbox.Generator.Templates.CollectionEntries.RelationEntry
-    [System.Diagnostics.DebuggerDisplay("CalendarBook_shared_r_Identity_RelationEntryMemoryImpl")]
-    public class CalendarBook_shared_r_Identity_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Calendar.CalendarBookMemoryImpl, Zetbox.App.Base.Identity, Zetbox.App.Base.IdentityMemoryImpl>, CalendarBook_shared_r_Identity_RelationEntry
+    [System.Diagnostics.DebuggerDisplay("Calendar_shared_r_Readers_RelationEntryMemoryImpl")]
+    public class Calendar_shared_r_Readers_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Calendar.CalendarBookMemoryImpl, Zetbox.App.Base.Identity, Zetbox.App.Base.IdentityMemoryImpl>, Calendar_shared_r_Readers_RelationEntry
     {
         [Obsolete]
-        public CalendarBook_shared_r_Identity_RelationEntryMemoryImpl()
+        public Calendar_shared_r_Readers_RelationEntryMemoryImpl()
             : base(null)
         {
         }
 
-        public CalendarBook_shared_r_Identity_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
+        public Calendar_shared_r_Readers_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }
@@ -1202,14 +1591,14 @@ namespace Zetbox.App.Calendar
 
         public override Type GetImplementedInterface()
         {
-            return typeof(CalendarBook_shared_r_Identity_RelationEntry);
+            return typeof(Calendar_shared_r_Readers_RelationEntry);
         }
 
         public override void ApplyChangesFrom(IPersistenceObject obj)
         {
             base.ApplyChangesFrom(obj);
-            var other = (CalendarBook_shared_r_Identity_RelationEntryMemoryImpl)obj;
-            var me = (CalendarBook_shared_r_Identity_RelationEntryMemoryImpl)this;
+            var other = (Calendar_shared_r_Readers_RelationEntryMemoryImpl)obj;
+            var me = (Calendar_shared_r_Readers_RelationEntryMemoryImpl)this;
 
             me._fk_A = other._fk_A;
             me._fk_B = other._fk_B;
@@ -1275,16 +1664,16 @@ namespace Zetbox.App.Calendar
 namespace Zetbox.App.Calendar
 {
     // BEGIN Zetbox.Generator.Templates.CollectionEntries.RelationEntry
-    [System.Diagnostics.DebuggerDisplay("CalendarBook_shared_w_Group_RelationEntryMemoryImpl")]
-    public class CalendarBook_shared_w_Group_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Calendar.CalendarBookMemoryImpl, Zetbox.App.Base.Group, Zetbox.App.Base.GroupMemoryImpl>, CalendarBook_shared_w_Group_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
+    [System.Diagnostics.DebuggerDisplay("Calendar_shared_w_GroupWriters_RelationEntryMemoryImpl")]
+    public class Calendar_shared_w_GroupWriters_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Calendar.CalendarBookMemoryImpl, Zetbox.App.Base.Group, Zetbox.App.Base.GroupMemoryImpl>, Calendar_shared_w_GroupWriters_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
         [Obsolete]
-        public CalendarBook_shared_w_Group_RelationEntryMemoryImpl()
+        public Calendar_shared_w_GroupWriters_RelationEntryMemoryImpl()
             : base(null)
         {
         }
 
-        public CalendarBook_shared_w_Group_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
+        public Calendar_shared_w_GroupWriters_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }
@@ -1639,14 +2028,14 @@ namespace Zetbox.App.Calendar
 
         public override Type GetImplementedInterface()
         {
-            return typeof(CalendarBook_shared_w_Group_RelationEntry);
+            return typeof(Calendar_shared_w_GroupWriters_RelationEntry);
         }
 
         public override void ApplyChangesFrom(IPersistenceObject obj)
         {
             base.ApplyChangesFrom(obj);
-            var other = (CalendarBook_shared_w_Group_RelationEntryMemoryImpl)obj;
-            var me = (CalendarBook_shared_w_Group_RelationEntryMemoryImpl)this;
+            var other = (Calendar_shared_w_GroupWriters_RelationEntryMemoryImpl)obj;
+            var me = (Calendar_shared_w_GroupWriters_RelationEntryMemoryImpl)this;
 
             me._fk_A = other._fk_A;
             me._fk_B = other._fk_B;
@@ -1718,16 +2107,16 @@ namespace Zetbox.App.Calendar
 namespace Zetbox.App.Calendar
 {
     // BEGIN Zetbox.Generator.Templates.CollectionEntries.RelationEntry
-    [System.Diagnostics.DebuggerDisplay("CalendarBook_shared_w_Identity_RelationEntryMemoryImpl")]
-    public class CalendarBook_shared_w_Identity_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Calendar.CalendarBookMemoryImpl, Zetbox.App.Base.Identity, Zetbox.App.Base.IdentityMemoryImpl>, CalendarBook_shared_w_Identity_RelationEntry
+    [System.Diagnostics.DebuggerDisplay("Calendar_shared_w_Writers_RelationEntryMemoryImpl")]
+    public class Calendar_shared_w_Writers_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Calendar.CalendarBookMemoryImpl, Zetbox.App.Base.Identity, Zetbox.App.Base.IdentityMemoryImpl>, Calendar_shared_w_Writers_RelationEntry
     {
         [Obsolete]
-        public CalendarBook_shared_w_Identity_RelationEntryMemoryImpl()
+        public Calendar_shared_w_Writers_RelationEntryMemoryImpl()
             : base(null)
         {
         }
 
-        public CalendarBook_shared_w_Identity_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
+        public Calendar_shared_w_Writers_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }
@@ -2018,14 +2407,14 @@ namespace Zetbox.App.Calendar
 
         public override Type GetImplementedInterface()
         {
-            return typeof(CalendarBook_shared_w_Identity_RelationEntry);
+            return typeof(Calendar_shared_w_Writers_RelationEntry);
         }
 
         public override void ApplyChangesFrom(IPersistenceObject obj)
         {
             base.ApplyChangesFrom(obj);
-            var other = (CalendarBook_shared_w_Identity_RelationEntryMemoryImpl)obj;
-            var me = (CalendarBook_shared_w_Identity_RelationEntryMemoryImpl)this;
+            var other = (Calendar_shared_w_Writers_RelationEntryMemoryImpl)obj;
+            var me = (Calendar_shared_w_Writers_RelationEntryMemoryImpl)this;
 
             me._fk_A = other._fk_A;
             me._fk_B = other._fk_B;
@@ -2091,16 +2480,16 @@ namespace Zetbox.App.Calendar
 namespace Zetbox.App.Base
 {
     // BEGIN Zetbox.Generator.Templates.CollectionEntries.RelationEntry
-    [System.Diagnostics.DebuggerDisplay("DataType_implements_Interface_RelationEntryMemoryImpl")]
-    public class DataType_implements_Interface_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Base.DataType, Zetbox.App.Base.DataTypeMemoryImpl, Zetbox.App.Base.Interface, Zetbox.App.Base.InterfaceMemoryImpl>, DataType_implements_Interface_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
+    [System.Diagnostics.DebuggerDisplay("DataType_implements_ImplementedInterfaces_RelationEntryMemoryImpl")]
+    public class DataType_implements_ImplementedInterfaces_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Base.DataType, Zetbox.App.Base.DataTypeMemoryImpl, Zetbox.App.Base.Interface, Zetbox.App.Base.InterfaceMemoryImpl>, DataType_implements_ImplementedInterfaces_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
         [Obsolete]
-        public DataType_implements_Interface_RelationEntryMemoryImpl()
+        public DataType_implements_ImplementedInterfaces_RelationEntryMemoryImpl()
             : base(null)
         {
         }
 
-        public DataType_implements_Interface_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
+        public DataType_implements_ImplementedInterfaces_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }
@@ -2455,14 +2844,14 @@ namespace Zetbox.App.Base
 
         public override Type GetImplementedInterface()
         {
-            return typeof(DataType_implements_Interface_RelationEntry);
+            return typeof(DataType_implements_ImplementedInterfaces_RelationEntry);
         }
 
         public override void ApplyChangesFrom(IPersistenceObject obj)
         {
             base.ApplyChangesFrom(obj);
-            var other = (DataType_implements_Interface_RelationEntryMemoryImpl)obj;
-            var me = (DataType_implements_Interface_RelationEntryMemoryImpl)this;
+            var other = (DataType_implements_ImplementedInterfaces_RelationEntryMemoryImpl)obj;
+            var me = (DataType_implements_ImplementedInterfaces_RelationEntryMemoryImpl)this;
 
             me._fk_A = other._fk_A;
             me._fk_B = other._fk_B;
@@ -2534,16 +2923,16 @@ namespace Zetbox.App.Base
 namespace at.dasz.DocumentManagement
 {
     // BEGIN Zetbox.Generator.Templates.CollectionEntries.RelationEntry
-    [System.Diagnostics.DebuggerDisplay("File_has_Blob_RelationEntryMemoryImpl")]
-    public class File_has_Blob_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<at.dasz.DocumentManagement.File, at.dasz.DocumentManagement.FileMemoryImpl, Zetbox.App.Base.Blob, Zetbox.App.Base.BlobMemoryImpl>, File_has_Blob_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
+    [System.Diagnostics.DebuggerDisplay("Document_has_Revisions_RelationEntryMemoryImpl")]
+    public class Document_has_Revisions_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<at.dasz.DocumentManagement.File, at.dasz.DocumentManagement.FileMemoryImpl, Zetbox.App.Base.Blob, Zetbox.App.Base.BlobMemoryImpl>, Document_has_Revisions_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
         [Obsolete]
-        public File_has_Blob_RelationEntryMemoryImpl()
+        public Document_has_Revisions_RelationEntryMemoryImpl()
             : base(null)
         {
         }
 
-        public File_has_Blob_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
+        public Document_has_Revisions_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }
@@ -2982,14 +3371,14 @@ namespace at.dasz.DocumentManagement
 
         public override Type GetImplementedInterface()
         {
-            return typeof(File_has_Blob_RelationEntry);
+            return typeof(Document_has_Revisions_RelationEntry);
         }
 
         public override void ApplyChangesFrom(IPersistenceObject obj)
         {
             base.ApplyChangesFrom(obj);
-            var other = (File_has_Blob_RelationEntryMemoryImpl)obj;
-            var me = (File_has_Blob_RelationEntryMemoryImpl)this;
+            var other = (Document_has_Revisions_RelationEntryMemoryImpl)obj;
+            var me = (Document_has_Revisions_RelationEntryMemoryImpl)this;
 
             me._fk_A = other._fk_A;
             me.AIndex = other.AIndex;
@@ -3063,16 +3452,16 @@ namespace at.dasz.DocumentManagement
 namespace Zetbox.App.Base
 {
     // BEGIN Zetbox.Generator.Templates.CollectionEntries.RelationEntry
-    [System.Diagnostics.DebuggerDisplay("Identity_memberOf_Group_RelationEntryMemoryImpl")]
-    public class Identity_memberOf_Group_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Base.Identity, Zetbox.App.Base.IdentityMemoryImpl, Zetbox.App.Base.Group, Zetbox.App.Base.GroupMemoryImpl>, Identity_memberOf_Group_RelationEntry
+    [System.Diagnostics.DebuggerDisplay("Identities_memberOf_Groups_RelationEntryMemoryImpl")]
+    public class Identities_memberOf_Groups_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Base.Identity, Zetbox.App.Base.IdentityMemoryImpl, Zetbox.App.Base.Group, Zetbox.App.Base.GroupMemoryImpl>, Identities_memberOf_Groups_RelationEntry
     {
         [Obsolete]
-        public Identity_memberOf_Group_RelationEntryMemoryImpl()
+        public Identities_memberOf_Groups_RelationEntryMemoryImpl()
             : base(null)
         {
         }
 
-        public Identity_memberOf_Group_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
+        public Identities_memberOf_Groups_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }
@@ -3379,14 +3768,14 @@ namespace Zetbox.App.Base
 
         public override Type GetImplementedInterface()
         {
-            return typeof(Identity_memberOf_Group_RelationEntry);
+            return typeof(Identities_memberOf_Groups_RelationEntry);
         }
 
         public override void ApplyChangesFrom(IPersistenceObject obj)
         {
             base.ApplyChangesFrom(obj);
-            var other = (Identity_memberOf_Group_RelationEntryMemoryImpl)obj;
-            var me = (Identity_memberOf_Group_RelationEntryMemoryImpl)this;
+            var other = (Identities_memberOf_Groups_RelationEntryMemoryImpl)obj;
+            var me = (Identities_memberOf_Groups_RelationEntryMemoryImpl)this;
 
             me._fk_A = other._fk_A;
             me._fk_B = other._fk_B;
@@ -3449,462 +3838,19 @@ namespace Zetbox.App.Base
     // END Zetbox.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Zetbox.App.Base
-{
-    // BEGIN Zetbox.Generator.Templates.CollectionEntries.RelationEntry
-    [System.Diagnostics.DebuggerDisplay("IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl")]
-    public class IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Base.IndexConstraint, Zetbox.App.Base.IndexConstraintMemoryImpl, Zetbox.App.Base.Property, Zetbox.App.Base.PropertyMemoryImpl>, IndexConstraint_ensures_unique_on_Property_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
-    {
-        [Obsolete]
-        public IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl()
-            : base(null)
-        {
-        }
-
-        public IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
-            : base(lazyCtx)
-        {
-        }
-        // BEGIN Zetbox.Generator.Templates.Properties.IdProperty
-        public override int ID
-        {
-            get
-            {
-                // create local variable to create single point of return
-                // for the benefit of down-stream templates
-                var __result = _ID;
-                return __result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_ID != value)
-                {
-                    var __oldValue = _ID;
-                    var __newValue = value;
-                    NotifyPropertyChanging("ID", __oldValue, __newValue);
-                    _ID = __newValue;
-                    NotifyPropertyChanged("ID", __oldValue, __newValue);
-                    if(IsAttached) UpdateChangedInfo = true;
-
-                }
-                else
-                {
-                    SetInitializedProperty("ID");
-                }
-            }
-        }
-        private int _ID;
-        // END Zetbox.Generator.Templates.Properties.IdProperty
-        // BEGIN Zetbox.Generator.Templates.Properties.ExportGuidProperty
-        public Guid ExportGuid
-        {
-            get
-            {
-                // create local variable to create single point of return
-                // for the benefit of down-stream templates
-                var __result = _ExportGuid;
-                if (_ExportGuid == Guid.Empty) {
-                    __result = _ExportGuid = Guid.NewGuid();
-                }
-                return __result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_ExportGuid != value)
-                {
-                    var __oldValue = _ExportGuid;
-                    var __newValue = value;
-                    NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
-                    _ExportGuid = __newValue;
-                    NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
-                    if(IsAttached) UpdateChangedInfo = true;
-
-                }
-                else
-                {
-                    SetInitializedProperty("ExportGuid");
-                }
-            }
-        }
-        private Guid _ExportGuid;
-        // END Zetbox.Generator.Templates.Properties.ExportGuidProperty
-        #region RelationEntry.ApplyClassHeadTemplate
-
-        private static readonly Guid _relationID = new Guid("29235ba6-5979-4ed8-8e75-6bd0837c7f28");
-        public override Guid RelationID { get { return _relationID; } }
-
-        IDataObject IRelationEntry.AObject
-        {
-            get
-            {
-                return A;
-            }
-            set
-            {
-                // settor will do checking for us
-                A = (Zetbox.App.Base.IndexConstraint)value;
-            }
-        }
-
-        IDataObject IRelationEntry.BObject
-        {
-            get
-            {
-                return B;
-            }
-            set
-            {
-                // settor will do checking for us
-                B = (Zetbox.App.Base.Property)value;
-            }
-        }
-
-        #endregion // RelationEntry.ApplyClassHeadTemplate
-
-
-        /// <summary>
-        /// the A-side value of this CollectionEntry
-        /// </summary>
-        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
-        // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Zetbox.App.Base.IndexConstraint; moduleNamespace=Zetbox.App.Base;
-        // will get inverse collection for notifications for Properties
-        // PositionStorage=none;
-        // Target exportable; does not call events
-
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
-        public Zetbox.App.Base.IndexConstraint A
-        {
-            get { return AImpl; }
-            set { AImpl = (Zetbox.App.Base.IndexConstraintMemoryImpl)value; }
-        }
-        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
-
-        private int? __fk_ACache;
-
-        private int? _fk_A {
-            get
-            {
-                return __fk_ACache;
-            }
-            set
-            {
-                __fk_ACache = value;
-                // Recreate task to clear it's cache
-                _triggerFetchATask = null;
-            }
-        }
-
-        private Guid? _fk_guid_A = null;
-
-        Zetbox.API.Async.ZbTask<Zetbox.App.Base.IndexConstraint> _triggerFetchATask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.IndexConstraint> TriggerFetchAAsync()
-        {
-            if (_triggerFetchATask != null) return _triggerFetchATask;
-
-            if (_fk_A.HasValue)
-                _triggerFetchATask = Context.FindAsync<Zetbox.App.Base.IndexConstraint>(_fk_A.Value);
-            else
-                _triggerFetchATask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.IndexConstraint>(Zetbox.API.Async.ZbTask.Synchron, () => null);
-
-            return _triggerFetchATask;
-        }
-
-        // internal implementation
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        internal Zetbox.App.Base.IndexConstraintMemoryImpl AImpl
-        {
-            get
-            {
-                return (Zetbox.App.Base.IndexConstraintMemoryImpl)TriggerFetchAAsync().Result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
-
-                // shortcut noops
-                if ((value == null && _fk_A == null) || (value != null && value.ID == _fk_A))
-                {
-                    SetInitializedProperty("A");
-                    return;
-                }
-
-                // cache old value to remove inverse references later
-                var __oldValue = AImpl;
-                var __newValue = value;
-
-                // Changing Event fires before anything is touched
-                NotifyPropertyChanging("A", __oldValue, __newValue);
-
-                if (__oldValue != null)
-                {
-                    __oldValue.NotifyPropertyChanging("Properties", null, null);
-                }
-
-                if (__newValue != null)
-                {
-                    __newValue.NotifyPropertyChanging("Properties", null, null);
-                }
-
-                // next, set the local reference
-                _fk_A = __newValue == null ? (int?)null : __newValue.ID;
-
-                if (__oldValue != null)
-                    __oldValue.OnPropertiesCollectionChanged();
-
-                if (__newValue != null)
-                    __newValue.OnPropertiesCollectionChanged();
-
-                // everything is done. fire the Changed event
-                NotifyPropertyChanged("A", __oldValue, __newValue);
-                if(IsAttached) UpdateChangedInfo = true;
-            }
-        }
-        // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
-
-        /// <summary>
-        /// the B-side value of this CollectionEntry
-        /// </summary>
-        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
-        // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Zetbox.App.Base.Property; moduleNamespace=Zetbox.App.Base;
-        // no inverse navigator handling
-        // PositionStorage=none;
-        // Target exportable; does not call events
-
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
-        public Zetbox.App.Base.Property B
-        {
-            get { return BImpl; }
-            set { BImpl = (Zetbox.App.Base.PropertyMemoryImpl)value; }
-        }
-        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
-
-        private int? __fk_BCache;
-
-        private int? _fk_B {
-            get
-            {
-                return __fk_BCache;
-            }
-            set
-            {
-                __fk_BCache = value;
-                // Recreate task to clear it's cache
-                _triggerFetchBTask = null;
-            }
-        }
-
-        private Guid? _fk_guid_B = null;
-
-        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Property> _triggerFetchBTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Property> TriggerFetchBAsync()
-        {
-            if (_triggerFetchBTask != null) return _triggerFetchBTask;
-
-            if (_fk_B.HasValue)
-                _triggerFetchBTask = Context.FindAsync<Zetbox.App.Base.Property>(_fk_B.Value);
-            else
-                _triggerFetchBTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Property>(Zetbox.API.Async.ZbTask.Synchron, () => null);
-
-            return _triggerFetchBTask;
-        }
-
-        // internal implementation
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        internal Zetbox.App.Base.PropertyMemoryImpl BImpl
-        {
-            get
-            {
-                return (Zetbox.App.Base.PropertyMemoryImpl)TriggerFetchBAsync().Result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
-
-                // shortcut noops
-                if ((value == null && _fk_B == null) || (value != null && value.ID == _fk_B))
-                {
-                    SetInitializedProperty("B");
-                    return;
-                }
-
-                // cache old value to remove inverse references later
-                var __oldValue = BImpl;
-                var __newValue = value;
-
-                // Changing Event fires before anything is touched
-                NotifyPropertyChanging("B", __oldValue, __newValue);
-
-                // next, set the local reference
-                _fk_B = __newValue == null ? (int?)null : __newValue.ID;
-
-                // everything is done. fire the Changed event
-                NotifyPropertyChanged("B", __oldValue, __newValue);
-                if(IsAttached) UpdateChangedInfo = true;
-            }
-        }
-        // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
-
-        #region Serializer
-
-
-        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
-        {
-            base.ToStream(binStream, auxObjects, eagerLoadLists);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(this._ExportGuid);
-            binStream.Write(A != null ? A.ID : (int?)null);
-            binStream.Write(B != null ? B.ID : (int?)null);
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
-        {
-            var baseResult = base.FromStream(binStream);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
-            this._ExportGuid = binStream.ReadGuid();
-            this._fk_A = binStream.ReadNullableInt32();
-            this._fk_B = binStream.ReadNullableInt32();
-            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
-            return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
-        {
-            xml.WriteAttributeString("ExportGuid", _ExportGuid.ToString());
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Zetbox.App.Base");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Zetbox.App.Base");
-        }
-
-        public virtual void MergeImport(System.Xml.XmlReader xml)
-        {
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            switch (xml.NamespaceURI + "|" + xml.LocalName) {
-            case "|ExportGuid":
-                this._ExportGuid = XmlStreamer.ReadGuid(xml);
-                break;
-            case "Zetbox.App.Base|A":
-                this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
-                break;
-            case "Zetbox.App.Base|B":
-                this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
-                break;
-            }
-        }
-
-        #endregion
-
-        public override Type GetImplementedInterface()
-        {
-            return typeof(IndexConstraint_ensures_unique_on_Property_RelationEntry);
-        }
-
-        public override void ApplyChangesFrom(IPersistenceObject obj)
-        {
-            base.ApplyChangesFrom(obj);
-            var other = (IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl)obj;
-            var me = (IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl)this;
-
-            me._fk_A = other._fk_A;
-            me._fk_B = other._fk_B;
-        }
-
-
-        public override void ReloadReferences()
-        {
-            // Do not reload references if the current object has been deleted.
-            // TODO: enable when MemoryContext uses MemoryDataObjects
-            //if (this.ObjectState == DataObjectState.Deleted) return;
-
-            if (_fk_guid_A.HasValue)
-                AImpl = (Zetbox.App.Base.IndexConstraintMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.IndexConstraint>(_fk_guid_A.Value);
-            else
-            if (_fk_A.HasValue)
-                AImpl = (Zetbox.App.Base.IndexConstraintMemoryImpl)Context.Find<Zetbox.App.Base.IndexConstraint>(_fk_A.Value);
-            else
-                AImpl = null;
-
-            if (_fk_guid_B.HasValue)
-                BImpl = (Zetbox.App.Base.PropertyMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.Property>(_fk_guid_B.Value);
-            else
-            if (_fk_B.HasValue)
-                BImpl = (Zetbox.App.Base.PropertyMemoryImpl)Context.Find<Zetbox.App.Base.Property>(_fk_B.Value);
-            else
-                BImpl = null;
-
-        }
-
-
-        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
-        {
-            base.OnPropertyChanged(property, oldValue, newValue);
-
-            if (property == "A" || property == "B")
-            {
-                var oldNotifier = (INotifyPropertyChanged)oldValue;
-                var newNotifier = (INotifyPropertyChanged)newValue;
-
-                if (oldNotifier != null) oldNotifier.PropertyChanged -= new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
-                if (newNotifier != null) newNotifier.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
-                ManageMyObjectState();
-            }
-        }
-
-        void AB_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == "ObjectState")
-            {
-                ManageMyObjectState();
-            }
-        }
-
-        private void ManageMyObjectState()
-        {
-            if (A != null && A.ObjectState == DataObjectState.Deleted && this.Context != null)
-                this.Context.Delete(this);
-            if (B != null && B.ObjectState == DataObjectState.Deleted && this.Context != null)
-                this.Context.Delete(this);
-
-            if (this.ObjectState == DataObjectState.Deleted && A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
-                this.SetUnDeleted();
-        }
-    }
-    // END Zetbox.Generator.Templates.CollectionEntries.RelationEntry
-}
-
 namespace Zetbox.App.Test
 {
     // BEGIN Zetbox.Generator.Templates.CollectionEntries.RelationEntry
-    [System.Diagnostics.DebuggerDisplay("Muhblah_has_TestCustomObject_RelationEntryMemoryImpl")]
-    public class Muhblah_has_TestCustomObject_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Test.Muhblah, Zetbox.App.Test.MuhblahMemoryImpl, Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.TestCustomObjectMemoryImpl>, Muhblah_has_TestCustomObject_RelationEntry
+    [System.Diagnostics.DebuggerDisplay("MB_Many_Role_has_TCO_ManyList_Role_RelationEntryMemoryImpl")]
+    public class MB_Many_Role_has_TCO_ManyList_Role_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Test.Muhblah, Zetbox.App.Test.MuhblahMemoryImpl, Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.TestCustomObjectMemoryImpl>, MB_Many_Role_has_TCO_ManyList_Role_RelationEntry
     {
         [Obsolete]
-        public Muhblah_has_TestCustomObject_RelationEntryMemoryImpl()
+        public MB_Many_Role_has_TCO_ManyList_Role_RelationEntryMemoryImpl()
             : base(null)
         {
         }
 
-        public Muhblah_has_TestCustomObject_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
+        public MB_Many_Role_has_TCO_ManyList_Role_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }
@@ -4211,14 +4157,14 @@ namespace Zetbox.App.Test
 
         public override Type GetImplementedInterface()
         {
-            return typeof(Muhblah_has_TestCustomObject_RelationEntry);
+            return typeof(MB_Many_Role_has_TCO_ManyList_Role_RelationEntry);
         }
 
         public override void ApplyChangesFrom(IPersistenceObject obj)
         {
             base.ApplyChangesFrom(obj);
-            var other = (Muhblah_has_TestCustomObject_RelationEntryMemoryImpl)obj;
-            var me = (Muhblah_has_TestCustomObject_RelationEntryMemoryImpl)this;
+            var other = (MB_Many_Role_has_TCO_ManyList_Role_RelationEntryMemoryImpl)obj;
+            var me = (MB_Many_Role_has_TCO_ManyList_Role_RelationEntryMemoryImpl)this;
 
             me._fk_A = other._fk_A;
             me._fk_B = other._fk_B;
@@ -4281,408 +4227,19 @@ namespace Zetbox.App.Test
     // END Zetbox.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Zetbox.App.Test
-{
-    // BEGIN Zetbox.Generator.Templates.CollectionEntries.RelationEntry
-    [System.Diagnostics.DebuggerDisplay("N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryMemoryImpl")]
-    public class N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Test.N_to_M_relations_A, Zetbox.App.Test.N_to_M_relations_AMemoryImpl, Zetbox.App.Test.N_to_M_relations_B, Zetbox.App.Test.N_to_M_relations_BMemoryImpl>, N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntry
-    {
-        [Obsolete]
-        public N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryMemoryImpl()
-            : base(null)
-        {
-        }
-
-        public N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
-            : base(lazyCtx)
-        {
-        }
-        // BEGIN Zetbox.Generator.Templates.Properties.IdProperty
-        public override int ID
-        {
-            get
-            {
-                // create local variable to create single point of return
-                // for the benefit of down-stream templates
-                var __result = _ID;
-                return __result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (_ID != value)
-                {
-                    var __oldValue = _ID;
-                    var __newValue = value;
-                    NotifyPropertyChanging("ID", __oldValue, __newValue);
-                    _ID = __newValue;
-                    NotifyPropertyChanged("ID", __oldValue, __newValue);
-                    if(IsAttached) UpdateChangedInfo = true;
-
-                }
-                else
-                {
-                    SetInitializedProperty("ID");
-                }
-            }
-        }
-        private int _ID;
-        // END Zetbox.Generator.Templates.Properties.IdProperty
-        #region RelationEntry.ApplyClassHeadTemplate
-
-        private static readonly Guid _relationID = new Guid("3555da6e-0e9b-4f7c-903e-a51f3cce7cd9");
-        public override Guid RelationID { get { return _relationID; } }
-
-        IDataObject IRelationEntry.AObject
-        {
-            get
-            {
-                return A;
-            }
-            set
-            {
-                // settor will do checking for us
-                A = (Zetbox.App.Test.N_to_M_relations_A)value;
-            }
-        }
-
-        IDataObject IRelationEntry.BObject
-        {
-            get
-            {
-                return B;
-            }
-            set
-            {
-                // settor will do checking for us
-                B = (Zetbox.App.Test.N_to_M_relations_B)value;
-            }
-        }
-
-        #endregion // RelationEntry.ApplyClassHeadTemplate
-
-
-        /// <summary>
-        /// the A-side value of this CollectionEntry
-        /// </summary>
-        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
-        // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Zetbox.App.Test.N_to_M_relations_A; moduleNamespace=Zetbox.App.Test;
-        // will get inverse collection for notifications for BSide
-        // PositionStorage=none;
-        // Target not exportable; does not call events
-
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
-        public Zetbox.App.Test.N_to_M_relations_A A
-        {
-            get { return AImpl; }
-            set { AImpl = (Zetbox.App.Test.N_to_M_relations_AMemoryImpl)value; }
-        }
-        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
-
-        private int? __fk_ACache;
-
-        private int? _fk_A {
-            get
-            {
-                return __fk_ACache;
-            }
-            set
-            {
-                __fk_ACache = value;
-                // Recreate task to clear it's cache
-                _triggerFetchATask = null;
-            }
-        }
-
-
-        Zetbox.API.Async.ZbTask<Zetbox.App.Test.N_to_M_relations_A> _triggerFetchATask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Test.N_to_M_relations_A> TriggerFetchAAsync()
-        {
-            if (_triggerFetchATask != null) return _triggerFetchATask;
-
-            if (_fk_A.HasValue)
-                _triggerFetchATask = Context.FindAsync<Zetbox.App.Test.N_to_M_relations_A>(_fk_A.Value);
-            else
-                _triggerFetchATask = new Zetbox.API.Async.ZbTask<Zetbox.App.Test.N_to_M_relations_A>(Zetbox.API.Async.ZbTask.Synchron, () => null);
-
-            return _triggerFetchATask;
-        }
-
-        // internal implementation
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        internal Zetbox.App.Test.N_to_M_relations_AMemoryImpl AImpl
-        {
-            get
-            {
-                return (Zetbox.App.Test.N_to_M_relations_AMemoryImpl)TriggerFetchAAsync().Result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
-
-                // shortcut noops
-                if ((value == null && _fk_A == null) || (value != null && value.ID == _fk_A))
-                {
-                    SetInitializedProperty("A");
-                    return;
-                }
-
-                // cache old value to remove inverse references later
-                var __oldValue = AImpl;
-                var __newValue = value;
-
-                // Changing Event fires before anything is touched
-                NotifyPropertyChanging("A", __oldValue, __newValue);
-
-                if (__oldValue != null)
-                {
-                    __oldValue.NotifyPropertyChanging("BSide", null, null);
-                }
-
-                if (__newValue != null)
-                {
-                    __newValue.NotifyPropertyChanging("BSide", null, null);
-                }
-
-                // next, set the local reference
-                _fk_A = __newValue == null ? (int?)null : __newValue.ID;
-
-                if (__oldValue != null)
-                    __oldValue.OnBSideCollectionChanged();
-
-                if (__newValue != null)
-                    __newValue.OnBSideCollectionChanged();
-
-                // everything is done. fire the Changed event
-                NotifyPropertyChanged("A", __oldValue, __newValue);
-                if(IsAttached) UpdateChangedInfo = true;
-            }
-        }
-        // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
-
-        /// <summary>
-        /// the B-side value of this CollectionEntry
-        /// </summary>
-        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
-        // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Zetbox.App.Test.N_to_M_relations_B; moduleNamespace=Zetbox.App.Test;
-        // will get inverse collection for notifications for ASide
-        // PositionStorage=none;
-        // Target not exportable; does not call events
-
-        // implement the user-visible interface
-        [XmlIgnore()]
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
-        public Zetbox.App.Test.N_to_M_relations_B B
-        {
-            get { return BImpl; }
-            set { BImpl = (Zetbox.App.Test.N_to_M_relations_BMemoryImpl)value; }
-        }
-        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
-
-        private int? __fk_BCache;
-
-        private int? _fk_B {
-            get
-            {
-                return __fk_BCache;
-            }
-            set
-            {
-                __fk_BCache = value;
-                // Recreate task to clear it's cache
-                _triggerFetchBTask = null;
-            }
-        }
-
-
-        Zetbox.API.Async.ZbTask<Zetbox.App.Test.N_to_M_relations_B> _triggerFetchBTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.Test.N_to_M_relations_B> TriggerFetchBAsync()
-        {
-            if (_triggerFetchBTask != null) return _triggerFetchBTask;
-
-            if (_fk_B.HasValue)
-                _triggerFetchBTask = Context.FindAsync<Zetbox.App.Test.N_to_M_relations_B>(_fk_B.Value);
-            else
-                _triggerFetchBTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Test.N_to_M_relations_B>(Zetbox.API.Async.ZbTask.Synchron, () => null);
-
-            return _triggerFetchBTask;
-        }
-
-        // internal implementation
-        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        internal Zetbox.App.Test.N_to_M_relations_BMemoryImpl BImpl
-        {
-            get
-            {
-                return (Zetbox.App.Test.N_to_M_relations_BMemoryImpl)TriggerFetchBAsync().Result;
-            }
-            set
-            {
-                if (this.IsReadonly) throw new ReadOnlyObjectException();
-                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
-
-                // shortcut noops
-                if ((value == null && _fk_B == null) || (value != null && value.ID == _fk_B))
-                {
-                    SetInitializedProperty("B");
-                    return;
-                }
-
-                // cache old value to remove inverse references later
-                var __oldValue = BImpl;
-                var __newValue = value;
-
-                // Changing Event fires before anything is touched
-                NotifyPropertyChanging("B", __oldValue, __newValue);
-
-                if (__oldValue != null)
-                {
-                    __oldValue.NotifyPropertyChanging("ASide", null, null);
-                }
-
-                if (__newValue != null)
-                {
-                    __newValue.NotifyPropertyChanging("ASide", null, null);
-                }
-
-                // next, set the local reference
-                _fk_B = __newValue == null ? (int?)null : __newValue.ID;
-
-                if (__oldValue != null)
-                    __oldValue.OnASideCollectionChanged();
-
-                if (__newValue != null)
-                    __newValue.OnASideCollectionChanged();
-
-                // everything is done. fire the Changed event
-                NotifyPropertyChanged("B", __oldValue, __newValue);
-                if(IsAttached) UpdateChangedInfo = true;
-            }
-        }
-        // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
-
-        #region Serializer
-
-
-        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
-        {
-            base.ToStream(binStream, auxObjects, eagerLoadLists);
-            // it may be only an empty shell to stand-in for unreadable data
-            if (!CurrentAccessRights.HasReadRights()) return;
-            binStream.Write(A != null ? A.ID : (int?)null);
-            binStream.Write(B != null ? B.ID : (int?)null);
-        }
-
-        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
-        {
-            var baseResult = base.FromStream(binStream);
-            var result = new List<IPersistenceObject>();
-            // it may be only an empty shell to stand-in for unreadable data
-            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
-            this._fk_A = binStream.ReadNullableInt32();
-            this._fk_B = binStream.ReadNullableInt32();
-            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
-            return baseResult == null
-                ? result.Count == 0
-                    ? null
-                    : result
-                : baseResult.Concat(result);
-        }
-
-        #endregion
-
-        public override Type GetImplementedInterface()
-        {
-            return typeof(N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntry);
-        }
-
-        public override void ApplyChangesFrom(IPersistenceObject obj)
-        {
-            base.ApplyChangesFrom(obj);
-            var other = (N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryMemoryImpl)obj;
-            var me = (N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryMemoryImpl)this;
-
-            me._fk_A = other._fk_A;
-            me._fk_B = other._fk_B;
-        }
-
-
-        public override void ReloadReferences()
-        {
-            // Do not reload references if the current object has been deleted.
-            // TODO: enable when MemoryContext uses MemoryDataObjects
-            //if (this.ObjectState == DataObjectState.Deleted) return;
-
-            if (_fk_A.HasValue)
-                AImpl = (Zetbox.App.Test.N_to_M_relations_AMemoryImpl)Context.Find<Zetbox.App.Test.N_to_M_relations_A>(_fk_A.Value);
-            else
-                AImpl = null;
-
-            if (_fk_B.HasValue)
-                BImpl = (Zetbox.App.Test.N_to_M_relations_BMemoryImpl)Context.Find<Zetbox.App.Test.N_to_M_relations_B>(_fk_B.Value);
-            else
-                BImpl = null;
-
-        }
-
-
-        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
-        {
-            base.OnPropertyChanged(property, oldValue, newValue);
-
-            if (property == "A" || property == "B")
-            {
-                var oldNotifier = (INotifyPropertyChanged)oldValue;
-                var newNotifier = (INotifyPropertyChanged)newValue;
-
-                if (oldNotifier != null) oldNotifier.PropertyChanged -= new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
-                if (newNotifier != null) newNotifier.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
-                ManageMyObjectState();
-            }
-        }
-
-        void AB_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == "ObjectState")
-            {
-                ManageMyObjectState();
-            }
-        }
-
-        private void ManageMyObjectState()
-        {
-            if (A != null && A.ObjectState == DataObjectState.Deleted && this.Context != null)
-                this.Context.Delete(this);
-            if (B != null && B.ObjectState == DataObjectState.Deleted && this.Context != null)
-                this.Context.Delete(this);
-
-            if (this.ObjectState == DataObjectState.Deleted && A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
-                this.SetUnDeleted();
-        }
-    }
-    // END Zetbox.Generator.Templates.CollectionEntries.RelationEntry
-}
-
 namespace Zetbox.App.GUI
 {
     // BEGIN Zetbox.Generator.Templates.CollectionEntries.RelationEntry
-    [System.Diagnostics.DebuggerDisplay("NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl")]
-    public class NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.GUI.NavigationEntry, Zetbox.App.GUI.NavigationEntryMemoryImpl, Zetbox.App.Base.Group, Zetbox.App.Base.GroupMemoryImpl>, NavigationEntry_accessed_by_Group_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
+    [System.Diagnostics.DebuggerDisplay("NavigationScreen_accessed_by_Groups_RelationEntryMemoryImpl")]
+    public class NavigationScreen_accessed_by_Groups_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.GUI.NavigationEntry, Zetbox.App.GUI.NavigationEntryMemoryImpl, Zetbox.App.Base.Group, Zetbox.App.Base.GroupMemoryImpl>, NavigationScreen_accessed_by_Groups_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
         [Obsolete]
-        public NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl()
+        public NavigationScreen_accessed_by_Groups_RelationEntryMemoryImpl()
             : base(null)
         {
         }
 
-        public NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
+        public NavigationScreen_accessed_by_Groups_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }
@@ -5037,14 +4594,14 @@ namespace Zetbox.App.GUI
 
         public override Type GetImplementedInterface()
         {
-            return typeof(NavigationEntry_accessed_by_Group_RelationEntry);
+            return typeof(NavigationScreen_accessed_by_Groups_RelationEntry);
         }
 
         public override void ApplyChangesFrom(IPersistenceObject obj)
         {
             base.ApplyChangesFrom(obj);
-            var other = (NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl)obj;
-            var me = (NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl)this;
+            var other = (NavigationScreen_accessed_by_Groups_RelationEntryMemoryImpl)obj;
+            var me = (NavigationScreen_accessed_by_Groups_RelationEntryMemoryImpl)this;
 
             me._fk_A = other._fk_A;
             me._fk_B = other._fk_B;
@@ -5116,16 +4673,16 @@ namespace Zetbox.App.GUI
 namespace Zetbox.App.GUI
 {
     // BEGIN Zetbox.Generator.Templates.CollectionEntries.RelationEntry
-    [System.Diagnostics.DebuggerDisplay("ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl")]
-    public class ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.ObjectReferencePropertyMemoryImpl, Zetbox.App.Base.Method, Zetbox.App.Base.MethodMemoryImpl>, ObjectReferenceProperty_shows_Method_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
+    [System.Diagnostics.DebuggerDisplay("ObjRefProp_shows_Methods_RelationEntryMemoryImpl")]
+    public class ObjRefProp_shows_Methods_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.ObjectReferencePropertyMemoryImpl, Zetbox.App.Base.Method, Zetbox.App.Base.MethodMemoryImpl>, ObjRefProp_shows_Methods_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
         [Obsolete]
-        public ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl()
+        public ObjRefProp_shows_Methods_RelationEntryMemoryImpl()
             : base(null)
         {
         }
 
-        public ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
+        public ObjRefProp_shows_Methods_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }
@@ -5496,14 +5053,14 @@ namespace Zetbox.App.GUI
 
         public override Type GetImplementedInterface()
         {
-            return typeof(ObjectReferenceProperty_shows_Method_RelationEntry);
+            return typeof(ObjRefProp_shows_Methods_RelationEntry);
         }
 
         public override void ApplyChangesFrom(IPersistenceObject obj)
         {
             base.ApplyChangesFrom(obj);
-            var other = (ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl)obj;
-            var me = (ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl)this;
+            var other = (ObjRefProp_shows_Methods_RelationEntryMemoryImpl)obj;
+            var me = (ObjRefProp_shows_Methods_RelationEntryMemoryImpl)this;
 
             me._fk_A = other._fk_A;
             me._fk_B = other._fk_B;
@@ -5572,19 +5129,462 @@ namespace Zetbox.App.GUI
     // END Zetbox.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Zetbox.App.Projekte
+namespace Zetbox.App.GUI
 {
     // BEGIN Zetbox.Generator.Templates.CollectionEntries.RelationEntry
-    [System.Diagnostics.DebuggerDisplay("Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl")]
-    public class Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.ProjektMemoryImpl, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.MitarbeiterMemoryImpl>, Projekt_haben_Mitarbeiter_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
+    [System.Diagnostics.DebuggerDisplay("Presentable_displayedBy_SecondaryControlKinds_RelationEntryMemoryImpl")]
+    public class Presentable_displayedBy_SecondaryControlKinds_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ViewModelDescriptorMemoryImpl, Zetbox.App.GUI.ControlKind, Zetbox.App.GUI.ControlKindMemoryImpl>, Presentable_displayedBy_SecondaryControlKinds_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
         [Obsolete]
-        public Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl()
+        public Presentable_displayedBy_SecondaryControlKinds_RelationEntryMemoryImpl()
             : base(null)
         {
         }
 
-        public Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
+        public Presentable_displayedBy_SecondaryControlKinds_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
+            : base(lazyCtx)
+        {
+        }
+        // BEGIN Zetbox.Generator.Templates.Properties.IdProperty
+        public override int ID
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ID;
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_ID != value)
+                {
+                    var __oldValue = _ID;
+                    var __newValue = value;
+                    NotifyPropertyChanging("ID", __oldValue, __newValue);
+                    _ID = __newValue;
+                    NotifyPropertyChanged("ID", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                }
+                else
+                {
+                    SetInitializedProperty("ID");
+                }
+            }
+        }
+        private int _ID;
+        // END Zetbox.Generator.Templates.Properties.IdProperty
+        // BEGIN Zetbox.Generator.Templates.Properties.ExportGuidProperty
+        public Guid ExportGuid
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _ExportGuid;
+                if (_ExportGuid == Guid.Empty) {
+                    __result = _ExportGuid = Guid.NewGuid();
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_ExportGuid != value)
+                {
+                    var __oldValue = _ExportGuid;
+                    var __newValue = value;
+                    NotifyPropertyChanging("ExportGuid", __oldValue, __newValue);
+                    _ExportGuid = __newValue;
+                    NotifyPropertyChanged("ExportGuid", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                }
+                else
+                {
+                    SetInitializedProperty("ExportGuid");
+                }
+            }
+        }
+        private Guid _ExportGuid;
+        // END Zetbox.Generator.Templates.Properties.ExportGuidProperty
+        #region RelationEntry.ApplyClassHeadTemplate
+
+        private static readonly Guid _relationID = new Guid("5404456a-4527-4e40-a660-b4a5e96e4a47");
+        public override Guid RelationID { get { return _relationID; } }
+
+        IDataObject IRelationEntry.AObject
+        {
+            get
+            {
+                return A;
+            }
+            set
+            {
+                // settor will do checking for us
+                A = (Zetbox.App.GUI.ViewModelDescriptor)value;
+            }
+        }
+
+        IDataObject IRelationEntry.BObject
+        {
+            get
+            {
+                return B;
+            }
+            set
+            {
+                // settor will do checking for us
+                B = (Zetbox.App.GUI.ControlKind)value;
+            }
+        }
+
+        #endregion // RelationEntry.ApplyClassHeadTemplate
+
+
+        /// <summary>
+        /// the A-side value of this CollectionEntry
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+        // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
+        // referencedInterface=Zetbox.App.GUI.ViewModelDescriptor; moduleNamespace=Zetbox.App.GUI;
+        // will get inverse collection for notifications for SecondaryControlKinds
+        // PositionStorage=none;
+        // Target exportable; does not call events
+
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
+        public Zetbox.App.GUI.ViewModelDescriptor A
+        {
+            get { return AImpl; }
+            set { AImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)value; }
+        }
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        private int? __fk_ACache;
+
+        private int? _fk_A {
+            get
+            {
+                return __fk_ACache;
+            }
+            set
+            {
+                __fk_ACache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchATask = null;
+            }
+        }
+
+        private Guid? _fk_guid_A = null;
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor> _triggerFetchATask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor> TriggerFetchAAsync()
+        {
+            if (_triggerFetchATask != null) return _triggerFetchATask;
+
+            if (_fk_A.HasValue)
+                _triggerFetchATask = Context.FindAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_A.Value);
+            else
+                _triggerFetchATask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            return _triggerFetchATask;
+        }
+
+        // internal implementation
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        internal Zetbox.App.GUI.ViewModelDescriptorMemoryImpl AImpl
+        {
+            get
+            {
+                return (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)TriggerFetchAAsync().Result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
+
+                // shortcut noops
+                if ((value == null && _fk_A == null) || (value != null && value.ID == _fk_A))
+                {
+                    SetInitializedProperty("A");
+                    return;
+                }
+
+                // cache old value to remove inverse references later
+                var __oldValue = AImpl;
+                var __newValue = value;
+
+                // Changing Event fires before anything is touched
+                NotifyPropertyChanging("A", __oldValue, __newValue);
+
+                if (__oldValue != null)
+                {
+                    __oldValue.NotifyPropertyChanging("SecondaryControlKinds", null, null);
+                }
+
+                if (__newValue != null)
+                {
+                    __newValue.NotifyPropertyChanging("SecondaryControlKinds", null, null);
+                }
+
+                // next, set the local reference
+                _fk_A = __newValue == null ? (int?)null : __newValue.ID;
+
+                if (__oldValue != null)
+                    __oldValue.OnSecondaryControlKindsCollectionChanged();
+
+                if (__newValue != null)
+                    __newValue.OnSecondaryControlKindsCollectionChanged();
+
+                // everything is done. fire the Changed event
+                NotifyPropertyChanged("A", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
+            }
+        }
+        // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
+
+        /// <summary>
+        /// the B-side value of this CollectionEntry
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+        // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
+        // referencedInterface=Zetbox.App.GUI.ControlKind; moduleNamespace=Zetbox.App.GUI;
+        // no inverse navigator handling
+        // PositionStorage=none;
+        // Target exportable; does not call events
+
+        // implement the user-visible interface
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
+        public Zetbox.App.GUI.ControlKind B
+        {
+            get { return BImpl; }
+            set { BImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)value; }
+        }
+        // END Zetbox.Generator.Templates.Properties.DelegatingProperty
+
+        private int? __fk_BCache;
+
+        private int? _fk_B {
+            get
+            {
+                return __fk_BCache;
+            }
+            set
+            {
+                __fk_BCache = value;
+                // Recreate task to clear it's cache
+                _triggerFetchBTask = null;
+            }
+        }
+
+        private Guid? _fk_guid_B = null;
+
+        Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> _triggerFetchBTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> TriggerFetchBAsync()
+        {
+            if (_triggerFetchBTask != null) return _triggerFetchBTask;
+
+            if (_fk_B.HasValue)
+                _triggerFetchBTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_B.Value);
+            else
+                _triggerFetchBTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+
+            return _triggerFetchBTask;
+        }
+
+        // internal implementation
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        internal Zetbox.App.GUI.ControlKindMemoryImpl BImpl
+        {
+            get
+            {
+                return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchBAsync().Result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (value != null && value.Context != this.Context) throw new WrongZetboxContextException();
+
+                // shortcut noops
+                if ((value == null && _fk_B == null) || (value != null && value.ID == _fk_B))
+                {
+                    SetInitializedProperty("B");
+                    return;
+                }
+
+                // cache old value to remove inverse references later
+                var __oldValue = BImpl;
+                var __newValue = value;
+
+                // Changing Event fires before anything is touched
+                NotifyPropertyChanging("B", __oldValue, __newValue);
+
+                // next, set the local reference
+                _fk_B = __newValue == null ? (int?)null : __newValue.ID;
+
+                // everything is done. fire the Changed event
+                NotifyPropertyChanged("B", __oldValue, __newValue);
+                if(IsAttached) UpdateChangedInfo = true;
+            }
+        }
+        // END Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
+
+        #region Serializer
+
+
+        public override void ToStream(Zetbox.API.ZetboxStreamWriter binStream, HashSet<IStreamable> auxObjects, bool eagerLoadLists)
+        {
+            base.ToStream(binStream, auxObjects, eagerLoadLists);
+            // it may be only an empty shell to stand-in for unreadable data
+            if (!CurrentAccessRights.HasReadRights()) return;
+            binStream.Write(this._ExportGuid);
+            binStream.Write(A != null ? A.ID : (int?)null);
+            binStream.Write(B != null ? B.ID : (int?)null);
+        }
+
+        public override IEnumerable<IPersistenceObject> FromStream(Zetbox.API.ZetboxStreamReader binStream)
+        {
+            var baseResult = base.FromStream(binStream);
+            var result = new List<IPersistenceObject>();
+            // it may be only an empty shell to stand-in for unreadable data
+            if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
+            this._ExportGuid = binStream.ReadGuid();
+            this._fk_A = binStream.ReadNullableInt32();
+            this._fk_B = binStream.ReadNullableInt32();
+            } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
+            return baseResult == null
+                ? result.Count == 0
+                    ? null
+                    : result
+                : baseResult.Concat(result);
+        }
+
+        public virtual void Export(System.Xml.XmlWriter xml, string[] modules)
+        {
+            xml.WriteAttributeString("ExportGuid", _ExportGuid.ToString());
+            // it may be only an empty shell to stand-in for unreadable data
+            if (!CurrentAccessRights.HasReadRights()) return;
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Zetbox.App.GUI");
+        }
+
+        public virtual void MergeImport(System.Xml.XmlReader xml)
+        {
+            // it may be only an empty shell to stand-in for unreadable data
+            if (!CurrentAccessRights.HasReadRights()) return;
+            switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "|ExportGuid":
+                this._ExportGuid = XmlStreamer.ReadGuid(xml);
+                break;
+            case "Zetbox.App.GUI|A":
+                this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            case "Zetbox.App.GUI|B":
+                this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
+                break;
+            }
+        }
+
+        #endregion
+
+        public override Type GetImplementedInterface()
+        {
+            return typeof(Presentable_displayedBy_SecondaryControlKinds_RelationEntry);
+        }
+
+        public override void ApplyChangesFrom(IPersistenceObject obj)
+        {
+            base.ApplyChangesFrom(obj);
+            var other = (Presentable_displayedBy_SecondaryControlKinds_RelationEntryMemoryImpl)obj;
+            var me = (Presentable_displayedBy_SecondaryControlKinds_RelationEntryMemoryImpl)this;
+
+            me._fk_A = other._fk_A;
+            me._fk_B = other._fk_B;
+        }
+
+
+        public override void ReloadReferences()
+        {
+            // Do not reload references if the current object has been deleted.
+            // TODO: enable when MemoryContext uses MemoryDataObjects
+            //if (this.ObjectState == DataObjectState.Deleted) return;
+
+            if (_fk_guid_A.HasValue)
+                AImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)Context.FindPersistenceObject<Zetbox.App.GUI.ViewModelDescriptor>(_fk_guid_A.Value);
+            else
+            if (_fk_A.HasValue)
+                AImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)Context.Find<Zetbox.App.GUI.ViewModelDescriptor>(_fk_A.Value);
+            else
+                AImpl = null;
+
+            if (_fk_guid_B.HasValue)
+                BImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.FindPersistenceObject<Zetbox.App.GUI.ControlKind>(_fk_guid_B.Value);
+            else
+            if (_fk_B.HasValue)
+                BImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.Find<Zetbox.App.GUI.ControlKind>(_fk_B.Value);
+            else
+                BImpl = null;
+
+        }
+
+
+        protected override void OnPropertyChanged(string property, object oldValue, object newValue)
+        {
+            base.OnPropertyChanged(property, oldValue, newValue);
+
+            if (property == "A" || property == "B")
+            {
+                var oldNotifier = (INotifyPropertyChanged)oldValue;
+                var newNotifier = (INotifyPropertyChanged)newValue;
+
+                if (oldNotifier != null) oldNotifier.PropertyChanged -= new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
+                if (newNotifier != null) newNotifier.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(AB_PropertyChanged);
+                ManageMyObjectState();
+            }
+        }
+
+        void AB_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "ObjectState")
+            {
+                ManageMyObjectState();
+            }
+        }
+
+        private void ManageMyObjectState()
+        {
+            if (A != null && A.ObjectState == DataObjectState.Deleted && this.Context != null)
+                this.Context.Delete(this);
+            if (B != null && B.ObjectState == DataObjectState.Deleted && this.Context != null)
+                this.Context.Delete(this);
+
+            if (this.ObjectState == DataObjectState.Deleted && A != null && B != null && A.ObjectState != DataObjectState.Deleted && B.ObjectState != DataObjectState.Deleted)
+                this.SetUnDeleted();
+        }
+    }
+    // END Zetbox.Generator.Templates.CollectionEntries.RelationEntry
+}
+
+namespace Zetbox.App.Projekte
+{
+    // BEGIN Zetbox.Generator.Templates.CollectionEntries.RelationEntry
+    [System.Diagnostics.DebuggerDisplay("Projekte_haben_Mitarbeiter_RelationEntryMemoryImpl")]
+    public class Projekte_haben_Mitarbeiter_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.ProjektMemoryImpl, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.MitarbeiterMemoryImpl>, Projekte_haben_Mitarbeiter_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
+    {
+        [Obsolete]
+        public Projekte_haben_Mitarbeiter_RelationEntryMemoryImpl()
+            : base(null)
+        {
+        }
+
+        public Projekte_haben_Mitarbeiter_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }
@@ -6039,14 +6039,14 @@ namespace Zetbox.App.Projekte
 
         public override Type GetImplementedInterface()
         {
-            return typeof(Projekt_haben_Mitarbeiter_RelationEntry);
+            return typeof(Projekte_haben_Mitarbeiter_RelationEntry);
         }
 
         public override void ApplyChangesFrom(IPersistenceObject obj)
         {
             base.ApplyChangesFrom(obj);
-            var other = (Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl)obj;
-            var me = (Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl)this;
+            var other = (Projekte_haben_Mitarbeiter_RelationEntryMemoryImpl)obj;
+            var me = (Projekte_haben_Mitarbeiter_RelationEntryMemoryImpl)this;
 
             me._fk_A = other._fk_A;
             me.AIndex = other.AIndex;
@@ -6120,16 +6120,16 @@ namespace Zetbox.App.Projekte
 namespace Zetbox.App.Base
 {
     // BEGIN Zetbox.Generator.Templates.CollectionEntries.RelationEntry
-    [System.Diagnostics.DebuggerDisplay("RoleMembership_resolves_Relation_RelationEntryMemoryImpl")]
-    public class RoleMembership_resolves_Relation_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Base.RoleMembership, Zetbox.App.Base.RoleMembershipMemoryImpl, Zetbox.App.Base.Relation, Zetbox.App.Base.RelationMemoryImpl>, RoleMembership_resolves_Relation_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
+    [System.Diagnostics.DebuggerDisplay("RoleMembership_resolves_Relations_RelationEntryMemoryImpl")]
+    public class RoleMembership_resolves_Relations_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Base.RoleMembership, Zetbox.App.Base.RoleMembershipMemoryImpl, Zetbox.App.Base.Relation, Zetbox.App.Base.RelationMemoryImpl>, RoleMembership_resolves_Relations_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
         [Obsolete]
-        public RoleMembership_resolves_Relation_RelationEntryMemoryImpl()
+        public RoleMembership_resolves_Relations_RelationEntryMemoryImpl()
             : base(null)
         {
         }
 
-        public RoleMembership_resolves_Relation_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
+        public RoleMembership_resolves_Relations_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }
@@ -6568,14 +6568,14 @@ namespace Zetbox.App.Base
 
         public override Type GetImplementedInterface()
         {
-            return typeof(RoleMembership_resolves_Relation_RelationEntry);
+            return typeof(RoleMembership_resolves_Relations_RelationEntry);
         }
 
         public override void ApplyChangesFrom(IPersistenceObject obj)
         {
             base.ApplyChangesFrom(obj);
-            var other = (RoleMembership_resolves_Relation_RelationEntryMemoryImpl)obj;
-            var me = (RoleMembership_resolves_Relation_RelationEntryMemoryImpl)this;
+            var other = (RoleMembership_resolves_Relations_RelationEntryMemoryImpl)obj;
+            var me = (RoleMembership_resolves_Relations_RelationEntryMemoryImpl)this;
 
             me._fk_A = other._fk_A;
             me.AIndex = other.AIndex;
@@ -7178,16 +7178,16 @@ namespace Zetbox.App.SchemaMigration
 namespace Zetbox.App.Test
 {
     // BEGIN Zetbox.Generator.Templates.CollectionEntries.RelationEntry
-    [System.Diagnostics.DebuggerDisplay("TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl")]
-    public class TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Test.TestStudent, Zetbox.App.Test.TestStudentMemoryImpl, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.FragebogenMemoryImpl>, TestStudent_füllt_aus_Fragebogen_RelationEntry
+    [System.Diagnostics.DebuggerDisplay("Student_füllt_aus_Testbogen_RelationEntryMemoryImpl")]
+    public class Student_füllt_aus_Testbogen_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Test.TestStudent, Zetbox.App.Test.TestStudentMemoryImpl, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.FragebogenMemoryImpl>, Student_füllt_aus_Testbogen_RelationEntry
     {
         [Obsolete]
-        public TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl()
+        public Student_füllt_aus_Testbogen_RelationEntryMemoryImpl()
             : base(null)
         {
         }
 
-        public TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
+        public Student_füllt_aus_Testbogen_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }
@@ -7494,14 +7494,14 @@ namespace Zetbox.App.Test
 
         public override Type GetImplementedInterface()
         {
-            return typeof(TestStudent_füllt_aus_Fragebogen_RelationEntry);
+            return typeof(Student_füllt_aus_Testbogen_RelationEntry);
         }
 
         public override void ApplyChangesFrom(IPersistenceObject obj)
         {
             base.ApplyChangesFrom(obj);
-            var other = (TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl)obj;
-            var me = (TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl)this;
+            var other = (Student_füllt_aus_Testbogen_RelationEntryMemoryImpl)obj;
+            var me = (Student_füllt_aus_Testbogen_RelationEntryMemoryImpl)this;
 
             me._fk_A = other._fk_A;
             me._fk_B = other._fk_B;
@@ -7564,19 +7564,19 @@ namespace Zetbox.App.Test
     // END Zetbox.Generator.Templates.CollectionEntries.RelationEntry
 }
 
-namespace Zetbox.App.GUI
+namespace Zetbox.App.Base
 {
     // BEGIN Zetbox.Generator.Templates.CollectionEntries.RelationEntry
-    [System.Diagnostics.DebuggerDisplay("ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl")]
-    public class ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ViewModelDescriptorMemoryImpl, Zetbox.App.GUI.ControlKind, Zetbox.App.GUI.ControlKindMemoryImpl>, ViewModelDescriptor_displayedBy_ControlKind_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
+    [System.Diagnostics.DebuggerDisplay("UniqueContraints_ensures_unique_on_Properties_RelationEntryMemoryImpl")]
+    public class UniqueContraints_ensures_unique_on_Properties_RelationEntryMemoryImpl : Zetbox.DalProvider.Memory.RelationEntryMemoryImpl<Zetbox.App.Base.IndexConstraint, Zetbox.App.Base.IndexConstraintMemoryImpl, Zetbox.App.Base.Property, Zetbox.App.Base.PropertyMemoryImpl>, UniqueContraints_ensures_unique_on_Properties_RelationEntry, Zetbox.API.IExportableInternal, Zetbox.App.Base.IExportable
     {
         [Obsolete]
-        public ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl()
+        public UniqueContraints_ensures_unique_on_Properties_RelationEntryMemoryImpl()
             : base(null)
         {
         }
 
-        public ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
+        public UniqueContraints_ensures_unique_on_Properties_RelationEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
         }
@@ -7647,7 +7647,7 @@ namespace Zetbox.App.GUI
         // END Zetbox.Generator.Templates.Properties.ExportGuidProperty
         #region RelationEntry.ApplyClassHeadTemplate
 
-        private static readonly Guid _relationID = new Guid("5404456a-4527-4e40-a660-b4a5e96e4a47");
+        private static readonly Guid _relationID = new Guid("29235ba6-5979-4ed8-8e75-6bd0837c7f28");
         public override Guid RelationID { get { return _relationID; } }
 
         IDataObject IRelationEntry.AObject
@@ -7659,7 +7659,7 @@ namespace Zetbox.App.GUI
             set
             {
                 // settor will do checking for us
-                A = (Zetbox.App.GUI.ViewModelDescriptor)value;
+                A = (Zetbox.App.Base.IndexConstraint)value;
             }
         }
 
@@ -7672,7 +7672,7 @@ namespace Zetbox.App.GUI
             set
             {
                 // settor will do checking for us
-                B = (Zetbox.App.GUI.ControlKind)value;
+                B = (Zetbox.App.Base.Property)value;
             }
         }
 
@@ -7684,8 +7684,8 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for A
         // fkBackingName=_fk_A; fkGuidBackingName=_fk_guid_A;
-        // referencedInterface=Zetbox.App.GUI.ViewModelDescriptor; moduleNamespace=Zetbox.App.GUI;
-        // will get inverse collection for notifications for SecondaryControlKinds
+        // referencedInterface=Zetbox.App.Base.IndexConstraint; moduleNamespace=Zetbox.App.Base;
+        // will get inverse collection for notifications for Properties
         // PositionStorage=none;
         // Target exportable; does not call events
 
@@ -7693,10 +7693,10 @@ namespace Zetbox.App.GUI
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
-        public Zetbox.App.GUI.ViewModelDescriptor A
+        public Zetbox.App.Base.IndexConstraint A
         {
             get { return AImpl; }
-            set { AImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)value; }
+            set { AImpl = (Zetbox.App.Base.IndexConstraintMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
@@ -7717,26 +7717,26 @@ namespace Zetbox.App.GUI
 
         private Guid? _fk_guid_A = null;
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor> _triggerFetchATask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor> TriggerFetchAAsync()
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.IndexConstraint> _triggerFetchATask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.IndexConstraint> TriggerFetchAAsync()
         {
             if (_triggerFetchATask != null) return _triggerFetchATask;
 
             if (_fk_A.HasValue)
-                _triggerFetchATask = Context.FindAsync<Zetbox.App.GUI.ViewModelDescriptor>(_fk_A.Value);
+                _triggerFetchATask = Context.FindAsync<Zetbox.App.Base.IndexConstraint>(_fk_A.Value);
             else
-                _triggerFetchATask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchATask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.IndexConstraint>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             return _triggerFetchATask;
         }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        internal Zetbox.App.GUI.ViewModelDescriptorMemoryImpl AImpl
+        internal Zetbox.App.Base.IndexConstraintMemoryImpl AImpl
         {
             get
             {
-                return (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)TriggerFetchAAsync().Result;
+                return (Zetbox.App.Base.IndexConstraintMemoryImpl)TriggerFetchAAsync().Result;
             }
             set
             {
@@ -7759,22 +7759,22 @@ namespace Zetbox.App.GUI
 
                 if (__oldValue != null)
                 {
-                    __oldValue.NotifyPropertyChanging("SecondaryControlKinds", null, null);
+                    __oldValue.NotifyPropertyChanging("Properties", null, null);
                 }
 
                 if (__newValue != null)
                 {
-                    __newValue.NotifyPropertyChanging("SecondaryControlKinds", null, null);
+                    __newValue.NotifyPropertyChanging("Properties", null, null);
                 }
 
                 // next, set the local reference
                 _fk_A = __newValue == null ? (int?)null : __newValue.ID;
 
                 if (__oldValue != null)
-                    __oldValue.OnSecondaryControlKindsCollectionChanged();
+                    __oldValue.OnPropertiesCollectionChanged();
 
                 if (__newValue != null)
-                    __newValue.OnSecondaryControlKindsCollectionChanged();
+                    __newValue.OnPropertiesCollectionChanged();
 
                 // everything is done. fire the Changed event
                 NotifyPropertyChanged("A", __oldValue, __newValue);
@@ -7788,7 +7788,7 @@ namespace Zetbox.App.GUI
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.Properties.ObjectReferencePropertyTemplate for B
         // fkBackingName=_fk_B; fkGuidBackingName=_fk_guid_B;
-        // referencedInterface=Zetbox.App.GUI.ControlKind; moduleNamespace=Zetbox.App.GUI;
+        // referencedInterface=Zetbox.App.Base.Property; moduleNamespace=Zetbox.App.Base;
         // no inverse navigator handling
         // PositionStorage=none;
         // Target exportable; does not call events
@@ -7797,10 +7797,10 @@ namespace Zetbox.App.GUI
         [XmlIgnore()]
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         // BEGIN Zetbox.Generator.Templates.Properties.DelegatingProperty
-        public Zetbox.App.GUI.ControlKind B
+        public Zetbox.App.Base.Property B
         {
             get { return BImpl; }
-            set { BImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)value; }
+            set { BImpl = (Zetbox.App.Base.PropertyMemoryImpl)value; }
         }
         // END Zetbox.Generator.Templates.Properties.DelegatingProperty
 
@@ -7821,26 +7821,26 @@ namespace Zetbox.App.GUI
 
         private Guid? _fk_guid_B = null;
 
-        Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> _triggerFetchBTask;
-        public Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> TriggerFetchBAsync()
+        Zetbox.API.Async.ZbTask<Zetbox.App.Base.Property> _triggerFetchBTask;
+        public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Property> TriggerFetchBAsync()
         {
             if (_triggerFetchBTask != null) return _triggerFetchBTask;
 
             if (_fk_B.HasValue)
-                _triggerFetchBTask = Context.FindAsync<Zetbox.App.GUI.ControlKind>(_fk_B.Value);
+                _triggerFetchBTask = Context.FindAsync<Zetbox.App.Base.Property>(_fk_B.Value);
             else
-                _triggerFetchBTask = new Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind>(Zetbox.API.Async.ZbTask.Synchron, () => null);
+                _triggerFetchBTask = new Zetbox.API.Async.ZbTask<Zetbox.App.Base.Property>(Zetbox.API.Async.ZbTask.Synchron, () => null);
 
             return _triggerFetchBTask;
         }
 
         // internal implementation
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        internal Zetbox.App.GUI.ControlKindMemoryImpl BImpl
+        internal Zetbox.App.Base.PropertyMemoryImpl BImpl
         {
             get
             {
-                return (Zetbox.App.GUI.ControlKindMemoryImpl)TriggerFetchBAsync().Result;
+                return (Zetbox.App.Base.PropertyMemoryImpl)TriggerFetchBAsync().Result;
             }
             set
             {
@@ -7906,8 +7906,8 @@ namespace Zetbox.App.GUI
             xml.WriteAttributeString("ExportGuid", _ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Zetbox.App.GUI");
-            if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Zetbox.App.GUI");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(A != null ? A.ExportGuid : (Guid?)null, xml, "A", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(B != null ? B.ExportGuid : (Guid?)null, xml, "B", "Zetbox.App.Base");
         }
 
         public virtual void MergeImport(System.Xml.XmlReader xml)
@@ -7918,10 +7918,10 @@ namespace Zetbox.App.GUI
             case "|ExportGuid":
                 this._ExportGuid = XmlStreamer.ReadGuid(xml);
                 break;
-            case "Zetbox.App.GUI|A":
+            case "Zetbox.App.Base|A":
                 this._fk_guid_A = XmlStreamer.ReadNullableGuid(xml);
                 break;
-            case "Zetbox.App.GUI|B":
+            case "Zetbox.App.Base|B":
                 this._fk_guid_B = XmlStreamer.ReadNullableGuid(xml);
                 break;
             }
@@ -7931,14 +7931,14 @@ namespace Zetbox.App.GUI
 
         public override Type GetImplementedInterface()
         {
-            return typeof(ViewModelDescriptor_displayedBy_ControlKind_RelationEntry);
+            return typeof(UniqueContraints_ensures_unique_on_Properties_RelationEntry);
         }
 
         public override void ApplyChangesFrom(IPersistenceObject obj)
         {
             base.ApplyChangesFrom(obj);
-            var other = (ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl)obj;
-            var me = (ViewModelDescriptor_displayedBy_ControlKind_RelationEntryMemoryImpl)this;
+            var other = (UniqueContraints_ensures_unique_on_Properties_RelationEntryMemoryImpl)obj;
+            var me = (UniqueContraints_ensures_unique_on_Properties_RelationEntryMemoryImpl)this;
 
             me._fk_A = other._fk_A;
             me._fk_B = other._fk_B;
@@ -7952,18 +7952,18 @@ namespace Zetbox.App.GUI
             //if (this.ObjectState == DataObjectState.Deleted) return;
 
             if (_fk_guid_A.HasValue)
-                AImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)Context.FindPersistenceObject<Zetbox.App.GUI.ViewModelDescriptor>(_fk_guid_A.Value);
+                AImpl = (Zetbox.App.Base.IndexConstraintMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.IndexConstraint>(_fk_guid_A.Value);
             else
             if (_fk_A.HasValue)
-                AImpl = (Zetbox.App.GUI.ViewModelDescriptorMemoryImpl)Context.Find<Zetbox.App.GUI.ViewModelDescriptor>(_fk_A.Value);
+                AImpl = (Zetbox.App.Base.IndexConstraintMemoryImpl)Context.Find<Zetbox.App.Base.IndexConstraint>(_fk_A.Value);
             else
                 AImpl = null;
 
             if (_fk_guid_B.HasValue)
-                BImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.FindPersistenceObject<Zetbox.App.GUI.ControlKind>(_fk_guid_B.Value);
+                BImpl = (Zetbox.App.Base.PropertyMemoryImpl)Context.FindPersistenceObject<Zetbox.App.Base.Property>(_fk_guid_B.Value);
             else
             if (_fk_B.HasValue)
-                BImpl = (Zetbox.App.GUI.ControlKindMemoryImpl)Context.Find<Zetbox.App.GUI.ControlKind>(_fk_B.Value);
+                BImpl = (Zetbox.App.Base.PropertyMemoryImpl)Context.Find<Zetbox.App.Base.Property>(_fk_B.Value);
             else
                 BImpl = null;
 

@@ -139,12 +139,12 @@ namespace Zetbox.App.Base
 				if (_Member == null)
 				{
 					_Member 
-						= new NHibernateASideCollectionWrapper<Zetbox.App.Base.Identity, Zetbox.App.Base.Group, Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl>(
+						= new NHibernateASideCollectionWrapper<Zetbox.App.Base.Identity, Zetbox.App.Base.Group, Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl.Identity_memberOf_Group_RelationEntryProxy, Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryNHibernateImpl.Identities_memberOf_Groups_RelationEntryProxy, Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.Member,
-                                p => (Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl.Identity_memberOf_Group_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
+                                p => (Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryNHibernateImpl.Identities_memberOf_Groups_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
                     _Member.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Member", null, null); if(OnMember_PostSetter != null && IsAttached) OnMember_PostSetter(this); };
                     if (Member_was_eagerLoaded) { Member_was_eagerLoaded = false; }
 				}
@@ -152,7 +152,7 @@ namespace Zetbox.App.Base
 			}
 		}
 
-		private NHibernateASideCollectionWrapper<Zetbox.App.Base.Identity, Zetbox.App.Base.Group, Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl> _Member;
+		private NHibernateASideCollectionWrapper<Zetbox.App.Base.Identity, Zetbox.App.Base.Group, Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryNHibernateImpl> _Member;
 		// ignored, but required for Serialization
         private bool Member_was_eagerLoaded = false;
 
@@ -629,7 +629,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Group> OnMember_P
         {
             public GroupProxy()
             {
-                Member = new Collection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl.Identity_memberOf_Group_RelationEntryProxy>();
+                Member = new Collection<Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryNHibernateImpl.Identities_memberOf_Groups_RelationEntryProxy>();
             }
 
             public virtual int ID { get; set; }
@@ -639,7 +639,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Group> OnMember_P
 
             public virtual Guid ExportGuid { get; set; }
 
-            public virtual ICollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl.Identity_memberOf_Group_RelationEntryProxy> Member { get; set; }
+            public virtual ICollection<Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryNHibernateImpl.Identities_memberOf_Groups_RelationEntryProxy> Member { get; set; }
 
             public virtual Zetbox.App.Base.ModuleNHibernateImpl.ModuleProxy Module { get; set; }
 

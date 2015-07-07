@@ -60,7 +60,7 @@ namespace Zetbox.App.Base
             {
                 if (_Relations == null)
                 {
-                    _Relations = new BSideListWrapper<Zetbox.App.Base.RoleMembership, Zetbox.App.Base.Relation, Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryEfImpl, EntityCollection<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryEfImpl>>(
+                    _Relations = new BSideListWrapper<Zetbox.App.Base.RoleMembership, Zetbox.App.Base.Relation, Zetbox.App.Base.RoleMembership_resolves_Relations_RelationEntryEfImpl, EntityCollection<Zetbox.App.Base.RoleMembership_resolves_Relations_RelationEntryEfImpl>>(
                             this,
                             RelationsImpl);
                 }
@@ -69,7 +69,7 @@ namespace Zetbox.App.Base
         }
         
         [EdmRelationshipNavigationProperty("Model", "FK_RoleMembership_resolves_Relations_A", "CollectionEntry")]
-        public EntityCollection<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryEfImpl> RelationsImpl
+        public EntityCollection<Zetbox.App.Base.RoleMembership_resolves_Relations_RelationEntryEfImpl> RelationsImpl
         {
             get
             {
@@ -77,14 +77,14 @@ namespace Zetbox.App.Base
             }
         }
 
-        private EntityCollection<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryEfImpl> _RelationsImplEntityCollection;
-        internal EntityCollection<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryEfImpl> GetRelationsImplCollection()
+        private EntityCollection<Zetbox.App.Base.RoleMembership_resolves_Relations_RelationEntryEfImpl> _RelationsImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Base.RoleMembership_resolves_Relations_RelationEntryEfImpl> GetRelationsImplCollection()
         {
             if (_RelationsImplEntityCollection == null)
             {
                 _RelationsImplEntityCollection
                     = ((IEntityWithRelationships)(this)).RelationshipManager
-                        .GetRelatedCollection<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryEfImpl>(
+                        .GetRelatedCollection<Zetbox.App.Base.RoleMembership_resolves_Relations_RelationEntryEfImpl>(
                             "Model.FK_RoleMembership_resolves_Relations_A",
                             "CollectionEntry");
                 // the EntityCollection has to be loaded before attaching the AssociationChanged event
@@ -99,7 +99,7 @@ namespace Zetbox.App.Base
             }
             return _RelationsImplEntityCollection;
         }
-        private BSideListWrapper<Zetbox.App.Base.RoleMembership, Zetbox.App.Base.Relation, Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryEfImpl, EntityCollection<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryEfImpl>> _Relations;
+        private BSideListWrapper<Zetbox.App.Base.RoleMembership, Zetbox.App.Base.Relation, Zetbox.App.Base.RoleMembership_resolves_Relations_RelationEntryEfImpl, EntityCollection<Zetbox.App.Base.RoleMembership_resolves_Relations_RelationEntryEfImpl>> _Relations;
 
         public Zetbox.API.Async.ZbTask TriggerFetchRelationsAsync()
         {

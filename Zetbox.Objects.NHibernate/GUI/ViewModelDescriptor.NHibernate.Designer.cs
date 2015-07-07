@@ -876,12 +876,12 @@ namespace Zetbox.App.GUI
 				if (_SecondaryControlKinds == null)
 				{
 					_SecondaryControlKinds 
-						= new NHibernateBSideCollectionWrapper<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ControlKind, Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl>(
+						= new NHibernateBSideCollectionWrapper<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ControlKind, Zetbox.App.GUI.Presentable_displayedBy_SecondaryControlKinds_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryProxy, Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Zetbox.App.GUI.Presentable_displayedBy_SecondaryControlKinds_RelationEntryNHibernateImpl.Presentable_displayedBy_SecondaryControlKinds_RelationEntryProxy, Zetbox.App.GUI.Presentable_displayedBy_SecondaryControlKinds_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.SecondaryControlKinds,
-                                p => (Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
+                                p => (Zetbox.App.GUI.Presentable_displayedBy_SecondaryControlKinds_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Zetbox.App.GUI.Presentable_displayedBy_SecondaryControlKinds_RelationEntryNHibernateImpl.Presentable_displayedBy_SecondaryControlKinds_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
                     _SecondaryControlKinds.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("SecondaryControlKinds", null, null); if(OnSecondaryControlKinds_PostSetter != null && IsAttached) OnSecondaryControlKinds_PostSetter(this); };
                     if (SecondaryControlKinds_was_eagerLoaded) { SecondaryControlKinds_was_eagerLoaded = false; }
 				}
@@ -889,7 +889,7 @@ namespace Zetbox.App.GUI
 			}
 		}
 
-		private NHibernateBSideCollectionWrapper<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ControlKind, Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl> _SecondaryControlKinds;
+		private NHibernateBSideCollectionWrapper<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ControlKind, Zetbox.App.GUI.Presentable_displayedBy_SecondaryControlKinds_RelationEntryNHibernateImpl> _SecondaryControlKinds;
 		// ignored, but required for Serialization
         private bool SecondaryControlKinds_was_eagerLoaded = false;
 
@@ -1426,18 +1426,18 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
             base.NotifyDeleting();
             if (OnNotifyDeleting_ViewModelDescriptor != null) OnNotifyDeleting_ViewModelDescriptor(this);
 
-            // should fetch && remember parent for Application_opens_a_ViewModelDescriptor_RelationEntry
-            // should fetch && remember parent for CompoundObject_has_ViewModelDescriptor_RelationEntry
+            // should fetch && remember parent for Application_opens_a_WorkspaceViewModel_RelationEntry
+            // should fetch && remember parent for CPObj_has_DefaultViewModelDescriptor_RelationEntry
             // should fetch && remember parent for FilterConfiguration_has_ViewModelDescriptor_RelationEntry
             // FK_Presentable_has_DefaultKind
             if (DefaultEditorKind != null) {
                 ((NHibernatePersistenceObject)DefaultEditorKind).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)DefaultEditorKind);
             }
-            // should fetch && remember parent for ObjectClass_has_ViewModelDescriptor_RelationEntry
-            // should fetch && remember parent for CompoundObject_may_has_ViewModelDescriptor_RelationEntry
-            // should fetch && remember parent for Property_has_ViewModelDescriptor_RelationEntry
-            // should fetch && remember parent for NavigationEntry_modeled_by_ViewModelDescriptor_RelationEntry
+            // should fetch && remember parent for Presentable_has_DefaultViewModelDescriptor_RelationEntry
+            // should fetch && remember parent for Presentable_may_has_DefaultPropViewModelDescriptor_RelationEntry
+            // should fetch && remember parent for Property_has_ValueModelDescriptor_RelationEntry
+            // should fetch && remember parent for Screen_modeled_by_ViewModelDescriptor_RelationEntry
             // FK_ViewModel_displayed_by_DefaultDisplayKind
             if (DefaultDisplayKind != null) {
                 ((NHibernatePersistenceObject)DefaultDisplayKind).ChildrenToDelete.Add(this);
@@ -1481,7 +1481,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
         {
             public ViewModelDescriptorProxy()
             {
-                SecondaryControlKinds = new Collection<Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryProxy>();
+                SecondaryControlKinds = new Collection<Zetbox.App.GUI.Presentable_displayedBy_SecondaryControlKinds_RelationEntryNHibernateImpl.Presentable_displayedBy_SecondaryControlKinds_RelationEntryProxy>();
             }
 
             public virtual int ID { get; set; }
@@ -1507,7 +1507,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
 
             public virtual Zetbox.App.Base.ModuleNHibernateImpl.ModuleProxy Module { get; set; }
 
-            public virtual ICollection<Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryProxy> SecondaryControlKinds { get; set; }
+            public virtual ICollection<Zetbox.App.GUI.Presentable_displayedBy_SecondaryControlKinds_RelationEntryNHibernateImpl.Presentable_displayedBy_SecondaryControlKinds_RelationEntryProxy> SecondaryControlKinds { get; set; }
 
             public virtual string ViewModelTypeRef { get; set; }
 

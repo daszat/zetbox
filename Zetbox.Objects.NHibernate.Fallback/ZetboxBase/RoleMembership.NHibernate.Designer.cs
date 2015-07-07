@@ -60,12 +60,12 @@ namespace Zetbox.App.Base
 				if (_Relations == null)
 				{
 					_Relations 
-						= new NHibernateBSideListWrapper<Zetbox.App.Base.RoleMembership, Zetbox.App.Base.Relation, Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl>(
+						= new NHibernateBSideListWrapper<Zetbox.App.Base.RoleMembership, Zetbox.App.Base.Relation, Zetbox.App.Base.RoleMembership_resolves_Relations_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl.RoleMembership_resolves_Relation_RelationEntryProxy, Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Zetbox.App.Base.RoleMembership_resolves_Relations_RelationEntryNHibernateImpl.RoleMembership_resolves_Relations_RelationEntryProxy, Zetbox.App.Base.RoleMembership_resolves_Relations_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.Relations,
-                                p => (Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl.RoleMembership_resolves_Relation_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
+                                p => (Zetbox.App.Base.RoleMembership_resolves_Relations_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Zetbox.App.Base.RoleMembership_resolves_Relations_RelationEntryNHibernateImpl.RoleMembership_resolves_Relations_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
                     _Relations.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Relations", null, null); if(OnRelations_PostSetter != null && IsAttached) OnRelations_PostSetter(this); };
                     if (Relations_was_eagerLoaded) { Relations_was_eagerLoaded = false; }
 				}
@@ -73,7 +73,7 @@ namespace Zetbox.App.Base
 			}
 		}
 
-		private NHibernateBSideListWrapper<Zetbox.App.Base.RoleMembership, Zetbox.App.Base.Relation, Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl> _Relations;
+		private NHibernateBSideListWrapper<Zetbox.App.Base.RoleMembership, Zetbox.App.Base.Relation, Zetbox.App.Base.RoleMembership_resolves_Relations_RelationEntryNHibernateImpl> _Relations;
 		// ignored, but required for Serialization
         private bool Relations_was_eagerLoaded = false;
 
@@ -246,14 +246,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.RoleMembership> O
         {
             public RoleMembershipProxy()
             {
-                Relations = new Collection<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl.RoleMembership_resolves_Relation_RelationEntryProxy>();
+                Relations = new Collection<Zetbox.App.Base.RoleMembership_resolves_Relations_RelationEntryNHibernateImpl.RoleMembership_resolves_Relations_RelationEntryProxy>();
             }
 
             public override Type ZetboxWrapper { get { return typeof(RoleMembershipNHibernateImpl); } }
 
             public override Type ZetboxProxy { get { return typeof(RoleMembershipProxy); } }
 
-            public virtual ICollection<Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl.RoleMembership_resolves_Relation_RelationEntryProxy> Relations { get; set; }
+            public virtual ICollection<Zetbox.App.Base.RoleMembership_resolves_Relations_RelationEntryNHibernateImpl.RoleMembership_resolves_Relations_RelationEntryProxy> Relations { get; set; }
 
             public virtual int? RoleMembership_pos { get; set; }
 

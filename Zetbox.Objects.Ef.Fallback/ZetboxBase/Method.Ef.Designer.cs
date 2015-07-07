@@ -1473,7 +1473,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnParamet
             {
                 if (_ShowByProperties == null)
                 {
-                    _ShowByProperties = new ASideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl>>(
+                    _ShowByProperties = new ASideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryEfImpl>>(
                             this,
                             ShowByPropertiesImpl);
                 }
@@ -1482,7 +1482,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnParamet
         }
         
         [EdmRelationshipNavigationProperty("Model", "FK_ObjRefProp_shows_Methods_B", "CollectionEntry")]
-        public EntityCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl> ShowByPropertiesImpl
+        public EntityCollection<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryEfImpl> ShowByPropertiesImpl
         {
             get
             {
@@ -1490,14 +1490,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnParamet
             }
         }
 
-        private EntityCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl> _ShowByPropertiesImplEntityCollection;
-        internal EntityCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl> GetShowByPropertiesImplCollection()
+        private EntityCollection<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryEfImpl> _ShowByPropertiesImplEntityCollection;
+        internal EntityCollection<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryEfImpl> GetShowByPropertiesImplCollection()
         {
             if (_ShowByPropertiesImplEntityCollection == null)
             {
                 _ShowByPropertiesImplEntityCollection
                     = ((IEntityWithRelationships)(this)).RelationshipManager
-                        .GetRelatedCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl>(
+                        .GetRelatedCollection<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryEfImpl>(
                             "Model.FK_ObjRefProp_shows_Methods_B",
                             "CollectionEntry");
                 // the EntityCollection has to be loaded before attaching the AssociationChanged event
@@ -1512,7 +1512,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnParamet
             }
             return _ShowByPropertiesImplEntityCollection;
         }
-        private ASideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl>> _ShowByProperties;
+        private ASideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryEfImpl>> _ShowByProperties;
 
         public Zetbox.API.Async.ZbTask TriggerFetchShowByPropertiesAsync()
         {

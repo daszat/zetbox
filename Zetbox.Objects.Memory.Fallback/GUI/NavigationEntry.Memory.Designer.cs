@@ -629,14 +629,14 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         public Zetbox.API.Async.ZbTask TriggerFetchGroupsAsync()
         {
             if (_triggerFetchGroupsTask != null) return _triggerFetchGroupsTask;
-            if (!Groups_was_eagerLoaded) _triggerFetchGroupsTask = Context.FetchRelationAsync<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl>(new Guid("b88c12ac-eabe-4aee-913e-5edd9d2a193a"), RelationEndRole.A, this);
+            if (!Groups_was_eagerLoaded) _triggerFetchGroupsTask = Context.FetchRelationAsync<Zetbox.App.GUI.NavigationScreen_accessed_by_Groups_RelationEntryMemoryImpl>(new Guid("b88c12ac-eabe-4aee-913e-5edd9d2a193a"), RelationEndRole.A, this);
             else _triggerFetchGroupsTask = new Zetbox.API.Async.ZbTask(Zetbox.API.Async.ZbTask.Synchron, null);
             _triggerFetchGroupsTask.OnResult(r =>
             {
                 _Groups
-                    = new ObservableBSideCollectionWrapper<Zetbox.App.GUI.NavigationEntry, Zetbox.App.Base.Group, Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl>>(
+                    = new ObservableBSideCollectionWrapper<Zetbox.App.GUI.NavigationEntry, Zetbox.App.Base.Group, Zetbox.App.GUI.NavigationScreen_accessed_by_Groups_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.NavigationScreen_accessed_by_Groups_RelationEntryMemoryImpl>>(
                         this,
-                        new RelationshipFilterASideCollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl>(this.Context, this));
+                        new RelationshipFilterASideCollection<Zetbox.App.GUI.NavigationScreen_accessed_by_Groups_RelationEntryMemoryImpl>(this.Context, this));
                         // _Groups.CollectionChanged is managed by OnGroupsCollectionChanged() and called from the RelationEntry
             });
             return _triggerFetchGroupsTask;
@@ -649,7 +649,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
                 OnGroups_PostSetter(this);
         }
 
-        private ObservableBSideCollectionWrapper<Zetbox.App.GUI.NavigationEntry, Zetbox.App.Base.Group, Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryMemoryImpl>> _Groups;
+        private ObservableBSideCollectionWrapper<Zetbox.App.GUI.NavigationEntry, Zetbox.App.Base.Group, Zetbox.App.GUI.NavigationScreen_accessed_by_Groups_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.NavigationScreen_accessed_by_Groups_RelationEntryMemoryImpl>> _Groups;
         private bool Groups_was_eagerLoaded = false;
         // END Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for Groups
 public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> OnGroups_PostSetter;

@@ -211,7 +211,7 @@ namespace Zetbox.App.Base
             {
                 if (_Methods == null)
                 {
-                    _Methods = new BSideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl>>(
+                    _Methods = new BSideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryEfImpl>>(
                             this,
                             MethodsImpl);
                 }
@@ -220,7 +220,7 @@ namespace Zetbox.App.Base
         }
         
         [EdmRelationshipNavigationProperty("Model", "FK_ObjRefProp_shows_Methods_A", "CollectionEntry")]
-        public EntityCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl> MethodsImpl
+        public EntityCollection<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryEfImpl> MethodsImpl
         {
             get
             {
@@ -228,14 +228,14 @@ namespace Zetbox.App.Base
             }
         }
 
-        private EntityCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl> _MethodsImplEntityCollection;
-        internal EntityCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl> GetMethodsImplCollection()
+        private EntityCollection<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryEfImpl> _MethodsImplEntityCollection;
+        internal EntityCollection<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryEfImpl> GetMethodsImplCollection()
         {
             if (_MethodsImplEntityCollection == null)
             {
                 _MethodsImplEntityCollection
                     = ((IEntityWithRelationships)(this)).RelationshipManager
-                        .GetRelatedCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl>(
+                        .GetRelatedCollection<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryEfImpl>(
                             "Model.FK_ObjRefProp_shows_Methods_A",
                             "CollectionEntry");
                 // the EntityCollection has to be loaded before attaching the AssociationChanged event
@@ -250,7 +250,7 @@ namespace Zetbox.App.Base
             }
             return _MethodsImplEntityCollection;
         }
-        private BSideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl>> _Methods;
+        private BSideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryEfImpl>> _Methods;
 
         public Zetbox.API.Async.ZbTask TriggerFetchMethodsAsync()
         {

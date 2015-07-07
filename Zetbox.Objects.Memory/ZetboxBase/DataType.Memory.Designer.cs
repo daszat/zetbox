@@ -816,13 +816,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
         public Zetbox.API.Async.ZbTask TriggerFetchImplementsInterfacesAsync()
         {
             if (_triggerFetchImplementsInterfacesTask != null) return _triggerFetchImplementsInterfacesTask;
-            _triggerFetchImplementsInterfacesTask = Context.FetchRelationAsync<Zetbox.App.Base.DataType_implements_Interface_RelationEntryMemoryImpl>(new Guid("692c1064-37a2-4be3-a81e-4cb91f673aa3"), RelationEndRole.A, this);
+            _triggerFetchImplementsInterfacesTask = Context.FetchRelationAsync<Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntryMemoryImpl>(new Guid("692c1064-37a2-4be3-a81e-4cb91f673aa3"), RelationEndRole.A, this);
             _triggerFetchImplementsInterfacesTask.OnResult(r =>
             {
                 _ImplementsInterfaces
-                    = new ObservableBSideCollectionWrapper<Zetbox.App.Base.DataType, Zetbox.App.Base.Interface, Zetbox.App.Base.DataType_implements_Interface_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.DataType_implements_Interface_RelationEntryMemoryImpl>>(
+                    = new ObservableBSideCollectionWrapper<Zetbox.App.Base.DataType, Zetbox.App.Base.Interface, Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntryMemoryImpl>>(
                         this,
-                        new RelationshipFilterASideCollection<Zetbox.App.Base.DataType_implements_Interface_RelationEntryMemoryImpl>(this.Context, this));
+                        new RelationshipFilterASideCollection<Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntryMemoryImpl>(this.Context, this));
                         // _ImplementsInterfaces.CollectionChanged is managed by OnImplementsInterfacesCollectionChanged() and called from the RelationEntry
             });
             return _triggerFetchImplementsInterfacesTask;
@@ -835,7 +835,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
                 OnImplementsInterfaces_PostSetter(this);
         }
 
-        private ObservableBSideCollectionWrapper<Zetbox.App.Base.DataType, Zetbox.App.Base.Interface, Zetbox.App.Base.DataType_implements_Interface_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.DataType_implements_Interface_RelationEntryMemoryImpl>> _ImplementsInterfaces;
+        private ObservableBSideCollectionWrapper<Zetbox.App.Base.DataType, Zetbox.App.Base.Interface, Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntryMemoryImpl>> _ImplementsInterfaces;
         // END Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for ImplementsInterfaces
 public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnImplementsInterfaces_PostSetter;
 

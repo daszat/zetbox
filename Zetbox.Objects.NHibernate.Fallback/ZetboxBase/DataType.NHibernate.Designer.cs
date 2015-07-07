@@ -755,12 +755,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
 				if (_ImplementsInterfaces == null)
 				{
 					_ImplementsInterfaces 
-						= new NHibernateBSideCollectionWrapper<Zetbox.App.Base.DataType, Zetbox.App.Base.Interface, Zetbox.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl>(
+						= new NHibernateBSideCollectionWrapper<Zetbox.App.Base.DataType, Zetbox.App.Base.Interface, Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<Zetbox.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl.DataType_implements_Interface_RelationEntryProxy, Zetbox.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntryNHibernateImpl.DataType_implements_ImplementedInterfaces_RelationEntryProxy, Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.ImplementsInterfaces,
-                                p => (Zetbox.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl.DataType_implements_Interface_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
+                                p => (Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntryNHibernateImpl.DataType_implements_ImplementedInterfaces_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
                     _ImplementsInterfaces.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("ImplementsInterfaces", null, null); if(OnImplementsInterfaces_PostSetter != null && IsAttached) OnImplementsInterfaces_PostSetter(this); };
                     if (ImplementsInterfaces_was_eagerLoaded) { ImplementsInterfaces_was_eagerLoaded = false; }
 				}
@@ -768,7 +768,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnConst
 			}
 		}
 
-		private NHibernateBSideCollectionWrapper<Zetbox.App.Base.DataType, Zetbox.App.Base.Interface, Zetbox.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl> _ImplementsInterfaces;
+		private NHibernateBSideCollectionWrapper<Zetbox.App.Base.DataType, Zetbox.App.Base.Interface, Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntryNHibernateImpl> _ImplementsInterfaces;
 		// ignored, but required for Serialization
         private bool ImplementsInterfaces_was_eagerLoaded = false;
 
@@ -2136,7 +2136,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
             public DataTypeProxy()
             {
                 Constraints = new Collection<Zetbox.App.Base.InstanceConstraintNHibernateImpl.InstanceConstraintProxy>();
-                ImplementsInterfaces = new Collection<Zetbox.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl.DataType_implements_Interface_RelationEntryProxy>();
+                ImplementsInterfaces = new Collection<Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntryNHibernateImpl.DataType_implements_ImplementedInterfaces_RelationEntryProxy>();
                 Methods = new Collection<Zetbox.App.Base.MethodNHibernateImpl.MethodProxy>();
                 Properties = new Collection<Zetbox.App.Base.PropertyNHibernateImpl.PropertyProxy>();
             }
@@ -2164,7 +2164,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.DataType> OnPrope
 
             public virtual string HelpText { get; set; }
 
-            public virtual ICollection<Zetbox.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl.DataType_implements_Interface_RelationEntryProxy> ImplementsInterfaces { get; set; }
+            public virtual ICollection<Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntryNHibernateImpl.DataType_implements_ImplementedInterfaces_RelationEntryProxy> ImplementsInterfaces { get; set; }
 
             public virtual ICollection<Zetbox.App.Base.MethodNHibernateImpl.MethodProxy> Methods { get; set; }
 

@@ -129,13 +129,13 @@ namespace Zetbox.App.Base
         public Zetbox.API.Async.ZbTask TriggerFetchPropertiesAsync()
         {
             if (_triggerFetchPropertiesTask != null) return _triggerFetchPropertiesTask;
-            _triggerFetchPropertiesTask = Context.FetchRelationAsync<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl>(new Guid("29235ba6-5979-4ed8-8e75-6bd0837c7f28"), RelationEndRole.A, this);
+            _triggerFetchPropertiesTask = Context.FetchRelationAsync<Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryMemoryImpl>(new Guid("29235ba6-5979-4ed8-8e75-6bd0837c7f28"), RelationEndRole.A, this);
             _triggerFetchPropertiesTask.OnResult(r =>
             {
                 _Properties
-                    = new ObservableBSideCollectionWrapper<Zetbox.App.Base.IndexConstraint, Zetbox.App.Base.Property, Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl>>(
+                    = new ObservableBSideCollectionWrapper<Zetbox.App.Base.IndexConstraint, Zetbox.App.Base.Property, Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryMemoryImpl>>(
                         this,
-                        new RelationshipFilterASideCollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl>(this.Context, this));
+                        new RelationshipFilterASideCollection<Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryMemoryImpl>(this.Context, this));
                         // _Properties.CollectionChanged is managed by OnPropertiesCollectionChanged() and called from the RelationEntry
             });
             return _triggerFetchPropertiesTask;
@@ -148,7 +148,7 @@ namespace Zetbox.App.Base
                 OnProperties_PostSetter(this);
         }
 
-        private ObservableBSideCollectionWrapper<Zetbox.App.Base.IndexConstraint, Zetbox.App.Base.Property, Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryMemoryImpl>> _Properties;
+        private ObservableBSideCollectionWrapper<Zetbox.App.Base.IndexConstraint, Zetbox.App.Base.Property, Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryMemoryImpl, ICollection<Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryMemoryImpl>> _Properties;
         // END Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for Properties
 public static event PropertyListChangedHandler<Zetbox.App.Base.IndexConstraint> OnProperties_PostSetter;
 

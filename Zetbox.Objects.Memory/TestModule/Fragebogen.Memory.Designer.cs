@@ -195,13 +195,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
         public Zetbox.API.Async.ZbTask TriggerFetchStudentAsync()
         {
             if (_triggerFetchStudentTask != null) return _triggerFetchStudentTask;
-            _triggerFetchStudentTask = Context.FetchRelationAsync<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>(new Guid("6819ca86-571c-4d59-bc30-cc1fb0decc9e"), RelationEndRole.B, this);
+            _triggerFetchStudentTask = Context.FetchRelationAsync<Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryMemoryImpl>(new Guid("6819ca86-571c-4d59-bc30-cc1fb0decc9e"), RelationEndRole.B, this);
             _triggerFetchStudentTask.OnResult(r =>
             {
                 _Student
-                    = new ObservableASideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>>(
+                    = new ObservableASideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryMemoryImpl>>(
                         this,
-                        new RelationshipFilterBSideCollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>(this.Context, this));
+                        new RelationshipFilterBSideCollection<Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryMemoryImpl>(this.Context, this));
                         // _Student.CollectionChanged is managed by OnStudentCollectionChanged() and called from the RelationEntry
             });
             return _triggerFetchStudentTask;
@@ -214,7 +214,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
                 OnStudent_PostSetter(this);
         }
 
-        private ObservableASideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryMemoryImpl>> _Student;
+        private ObservableASideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryMemoryImpl>> _Student;
         // END Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for Student
 public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnStudent_PostSetter;
 

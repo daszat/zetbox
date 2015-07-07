@@ -796,13 +796,13 @@ namespace Zetbox.App.Projekte
         public Zetbox.API.Async.ZbTask TriggerFetchProjekteAsync()
         {
             if (_triggerFetchProjekteTask != null) return _triggerFetchProjekteTask;
-            _triggerFetchProjekteTask = Context.FetchRelationAsync<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl>(new Guid("c7b3cf10-cdc8-454c-826c-04a0f7e5ef3e"), RelationEndRole.B, this);
+            _triggerFetchProjekteTask = Context.FetchRelationAsync<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryMemoryImpl>(new Guid("c7b3cf10-cdc8-454c-826c-04a0f7e5ef3e"), RelationEndRole.B, this);
             _triggerFetchProjekteTask.OnResult(r =>
             {
                 _Projekte
-                    = new ObservableASideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl, ICollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl>>(
+                    = new ObservableASideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryMemoryImpl, ICollection<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryMemoryImpl>>(
                         this,
-                        new RelationshipFilterBSideCollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl>(this.Context, this));
+                        new RelationshipFilterBSideCollection<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryMemoryImpl>(this.Context, this));
                         // _Projekte.CollectionChanged is managed by OnProjekteCollectionChanged() and called from the RelationEntry
             });
             return _triggerFetchProjekteTask;
@@ -815,7 +815,7 @@ namespace Zetbox.App.Projekte
                 OnProjekte_PostSetter(this);
         }
 
-        private ObservableASideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl, ICollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryMemoryImpl>> _Projekte;
+        private ObservableASideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryMemoryImpl, ICollection<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryMemoryImpl>> _Projekte;
         // END Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for Projekte
 public static event PropertyListChangedHandler<Zetbox.App.Projekte.Mitarbeiter> OnProjekte_PostSetter;
 

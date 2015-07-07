@@ -1066,15 +1066,15 @@ namespace Zetbox.App.Base
             // should fetch && remember parent for AbstractModuleMember_has_Module_RelationEntry
             // should fetch && remember parent for AccessControl_has_Module_RelationEntry
             // should fetch && remember parent for Application_has_Module_RelationEntry
-            // should fetch && remember parent for Property_has_Module_RelationEntry
+            // should fetch && remember parent for BaseProperty_has_Module_RelationEntry
             // should fetch && remember parent for ControlKind_has_Module_RelationEntry
             // should fetch && remember parent for FilterConfiguration_has_Module_RelationEntry
             // should fetch && remember parent for Group_has_Module_RelationEntry
             // should fetch && remember parent for Icon_has_Module_RelationEntry
             // should fetch && remember parent for Method_has_Module_RelationEntry
             // should fetch && remember parent for MigrationProject_migrates_to_Module_RelationEntry
-            // should fetch && remember parent for Module_contains_Assembly_RelationEntry
-            // should fetch && remember parent for Module_contains_DataType_RelationEntry
+            // should fetch && remember parent for Module_contains_Assemblies_RelationEntry
+            // should fetch && remember parent for Module_contains_DataTypes_RelationEntry
             // should fetch && remember parent for Module_has_Relation_RelationEntry
             // FK_Module_was_ChangedBy
             if (ChangedBy != null) {
@@ -1086,7 +1086,7 @@ namespace Zetbox.App.Base
                 ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
             }
-            // should fetch && remember parent for NavigationEntry_has_Module_RelationEntry
+            // should fetch && remember parent for NavigationScreen_has_Module_RelationEntry
             // should fetch && remember parent for Sequence_has_Module_RelationEntry
             // should fetch && remember parent for ServiceDescriptor_has_Module_RelationEntry
             // should fetch && remember parent for ViewDescriptor_has_Module_RelationEntry

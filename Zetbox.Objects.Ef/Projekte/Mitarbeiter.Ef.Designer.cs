@@ -840,7 +840,7 @@ namespace Zetbox.App.Projekte
             {
                 if (_Projekte == null)
                 {
-                    _Projekte = new ASideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryEfImpl, EntityCollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryEfImpl>>(
+                    _Projekte = new ASideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryEfImpl, EntityCollection<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryEfImpl>>(
                             this,
                             ProjekteImpl);
                 }
@@ -849,7 +849,7 @@ namespace Zetbox.App.Projekte
         }
         
         [EdmRelationshipNavigationProperty("Model", "FK_Projekte_haben_Mitarbeiter_B", "CollectionEntry")]
-        public EntityCollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryEfImpl> ProjekteImpl
+        public EntityCollection<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryEfImpl> ProjekteImpl
         {
             get
             {
@@ -857,14 +857,14 @@ namespace Zetbox.App.Projekte
             }
         }
 
-        private EntityCollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryEfImpl> _ProjekteImplEntityCollection;
-        internal EntityCollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryEfImpl> GetProjekteImplCollection()
+        private EntityCollection<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryEfImpl> _ProjekteImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryEfImpl> GetProjekteImplCollection()
         {
             if (_ProjekteImplEntityCollection == null)
             {
                 _ProjekteImplEntityCollection
                     = ((IEntityWithRelationships)(this)).RelationshipManager
-                        .GetRelatedCollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryEfImpl>(
+                        .GetRelatedCollection<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryEfImpl>(
                             "Model.FK_Projekte_haben_Mitarbeiter_B",
                             "CollectionEntry");
                 // the EntityCollection has to be loaded before attaching the AssociationChanged event
@@ -879,7 +879,7 @@ namespace Zetbox.App.Projekte
             }
             return _ProjekteImplEntityCollection;
         }
-        private ASideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryEfImpl, EntityCollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryEfImpl>> _Projekte;
+        private ASideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryEfImpl, EntityCollection<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryEfImpl>> _Projekte;
 
         public Zetbox.API.Async.ZbTask TriggerFetchProjekteAsync()
         {

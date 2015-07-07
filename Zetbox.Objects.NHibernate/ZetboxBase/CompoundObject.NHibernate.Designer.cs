@@ -707,13 +707,13 @@ namespace Zetbox.App.Base
             base.NotifyDeleting();
             if (OnNotifyDeleting_CompoundObject != null) OnNotifyDeleting_CompoundObject(this);
 
-            // should fetch && remember parent for CompoundObjectProperty_has_CompoundObject_RelationEntry
+            // should fetch && remember parent for CompoundObjectProperty_has_CompoundObjectDefinition_RelationEntry
             // FK_CPObj_has_DefaultViewModelDescriptor
             if (DefaultViewModelDescriptor != null) {
                 ((NHibernatePersistenceObject)DefaultViewModelDescriptor).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)DefaultViewModelDescriptor);
             }
-            // should fetch && remember parent for CompoundObjectParameter_has_CompoundObject_RelationEntry
+            // should fetch && remember parent for CPParameter_has_CompoundObject_RelationEntry
             // FK_Presentable_may_has_DefaultPropViewModelDescriptor
             if (DefaultPropertyViewModelDescriptor != null) {
                 ((NHibernatePersistenceObject)DefaultPropertyViewModelDescriptor).ChildrenToDelete.Add(this);

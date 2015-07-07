@@ -197,12 +197,12 @@ namespace Zetbox.App.Base
 				if (_Methods == null)
 				{
 					_Methods 
-						= new NHibernateBSideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl>(
+						= new NHibernateBSideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl.ObjectReferenceProperty_shows_Method_RelationEntryProxy, Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryNHibernateImpl.ObjRefProp_shows_Methods_RelationEntryProxy, Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.Methods,
-                                p => (Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl.ObjectReferenceProperty_shows_Method_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
+                                p => (Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryNHibernateImpl.ObjRefProp_shows_Methods_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
                     _Methods.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Methods", null, null); if(OnMethods_PostSetter != null && IsAttached) OnMethods_PostSetter(this); };
                     if (Methods_was_eagerLoaded) { Methods_was_eagerLoaded = false; }
 				}
@@ -210,7 +210,7 @@ namespace Zetbox.App.Base
 			}
 		}
 
-		private NHibernateBSideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl> _Methods;
+		private NHibernateBSideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryNHibernateImpl> _Methods;
 		// ignored, but required for Serialization
         private bool Methods_was_eagerLoaded = false;
 
@@ -1022,7 +1022,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
         {
             public ObjectReferencePropertyProxy()
             {
-                Methods = new Collection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl.ObjectReferenceProperty_shows_Method_RelationEntryProxy>();
+                Methods = new Collection<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryNHibernateImpl.ObjRefProp_shows_Methods_RelationEntryProxy>();
             }
 
             public override Type ZetboxWrapper { get { return typeof(ObjectReferencePropertyNHibernateImpl); } }
@@ -1033,7 +1033,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
 
             public virtual bool? IsInlineEditable { get; set; }
 
-            public virtual ICollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl.ObjectReferenceProperty_shows_Method_RelationEntryProxy> Methods { get; set; }
+            public virtual ICollection<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryNHibernateImpl.ObjRefProp_shows_Methods_RelationEntryProxy> Methods { get; set; }
 
             public virtual Zetbox.App.Base.RelationEndNHibernateImpl.RelationEndProxy RelationEnd { get; set; }
 

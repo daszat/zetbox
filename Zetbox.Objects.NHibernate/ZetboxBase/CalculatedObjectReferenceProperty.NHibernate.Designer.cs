@@ -60,12 +60,12 @@ namespace Zetbox.App.Base
 				if (_Inputs == null)
 				{
 					_Inputs 
-						= new NHibernateBSideCollectionWrapper<Zetbox.App.Base.CalculatedObjectReferenceProperty, Zetbox.App.Base.Property, Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl>(
+						= new NHibernateBSideCollectionWrapper<Zetbox.App.Base.CalculatedObjectReferenceProperty, Zetbox.App.Base.Property, Zetbox.App.Base.CalculatedReference_dependsOn_InputProperties_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryProxy, Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Zetbox.App.Base.CalculatedReference_dependsOn_InputProperties_RelationEntryNHibernateImpl.CalculatedReference_dependsOn_InputProperties_RelationEntryProxy, Zetbox.App.Base.CalculatedReference_dependsOn_InputProperties_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.Inputs,
-                                p => (Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
+                                p => (Zetbox.App.Base.CalculatedReference_dependsOn_InputProperties_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Zetbox.App.Base.CalculatedReference_dependsOn_InputProperties_RelationEntryNHibernateImpl.CalculatedReference_dependsOn_InputProperties_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
                     _Inputs.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Inputs", null, null); if(OnInputs_PostSetter != null && IsAttached) OnInputs_PostSetter(this); };
                     if (Inputs_was_eagerLoaded) { Inputs_was_eagerLoaded = false; }
 				}
@@ -73,7 +73,7 @@ namespace Zetbox.App.Base
 			}
 		}
 
-		private NHibernateBSideCollectionWrapper<Zetbox.App.Base.CalculatedObjectReferenceProperty, Zetbox.App.Base.Property, Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl> _Inputs;
+		private NHibernateBSideCollectionWrapper<Zetbox.App.Base.CalculatedObjectReferenceProperty, Zetbox.App.Base.Property, Zetbox.App.Base.CalculatedReference_dependsOn_InputProperties_RelationEntryNHibernateImpl> _Inputs;
 		// ignored, but required for Serialization
         private bool Inputs_was_eagerLoaded = false;
 
@@ -781,14 +781,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.CalculatedObjectR
         {
             public CalculatedObjectReferencePropertyProxy()
             {
-                Inputs = new Collection<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryProxy>();
+                Inputs = new Collection<Zetbox.App.Base.CalculatedReference_dependsOn_InputProperties_RelationEntryNHibernateImpl.CalculatedReference_dependsOn_InputProperties_RelationEntryProxy>();
             }
 
             public override Type ZetboxWrapper { get { return typeof(CalculatedObjectReferencePropertyNHibernateImpl); } }
 
             public override Type ZetboxProxy { get { return typeof(CalculatedObjectReferencePropertyProxy); } }
 
-            public virtual ICollection<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryProxy> Inputs { get; set; }
+            public virtual ICollection<Zetbox.App.Base.CalculatedReference_dependsOn_InputProperties_RelationEntryNHibernateImpl.CalculatedReference_dependsOn_InputProperties_RelationEntryProxy> Inputs { get; set; }
 
             public virtual Zetbox.App.Base.ObjectClassNHibernateImpl.ObjectClassProxy ReferencedClass { get; set; }
 

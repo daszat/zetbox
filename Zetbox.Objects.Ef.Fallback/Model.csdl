@@ -41,68 +41,68 @@
     <EntitySet Name="ViewDescriptorEfImpl" EntityType="Model.ViewDescriptorEfImpl" />
     <EntitySet Name="ViewModelDescriptorEfImpl" EntityType="Model.ViewModelDescriptorEfImpl" />
     <!-- EntitySets and AssociationSets for all object-object CollectionEntrys -->
-    <EntitySet Name="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl" EntityType="Model.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl" />
+    <EntitySet Name="CalculatedReference_dependsOn_InputProperties_RelationEntryEfImpl" EntityType="Model.CalculatedReference_dependsOn_InputProperties_RelationEntryEfImpl" />
     <AssociationSet Name="FK_CalculatedReference_dependsOn_InputProperties_A" Association="Model.FK_CalculatedReference_dependsOn_InputProperties_A" >
       <End Role="CalculatedReference" EntitySet="PropertyEfImpl" />
-      <End Role="CollectionEntry" EntitySet="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl" />
+      <End Role="CollectionEntry" EntitySet="CalculatedReference_dependsOn_InputProperties_RelationEntryEfImpl" />
     </AssociationSet>
     <AssociationSet Name="FK_CalculatedReference_dependsOn_InputProperties_B" Association="Model.FK_CalculatedReference_dependsOn_InputProperties_B" >
       <End Role="InputProperties" EntitySet="PropertyEfImpl" />
-      <End Role="CollectionEntry" EntitySet="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl" />
+      <End Role="CollectionEntry" EntitySet="CalculatedReference_dependsOn_InputProperties_RelationEntryEfImpl" />
     </AssociationSet>
-    <EntitySet Name="DataType_implements_Interface_RelationEntryEfImpl" EntityType="Model.DataType_implements_Interface_RelationEntryEfImpl" />
+    <EntitySet Name="DataType_implements_ImplementedInterfaces_RelationEntryEfImpl" EntityType="Model.DataType_implements_ImplementedInterfaces_RelationEntryEfImpl" />
     <AssociationSet Name="FK_DataType_implements_ImplementedInterfaces_A" Association="Model.FK_DataType_implements_ImplementedInterfaces_A" >
       <End Role="DataType" EntitySet="DataTypeEfImpl" />
-      <End Role="CollectionEntry" EntitySet="DataType_implements_Interface_RelationEntryEfImpl" />
+      <End Role="CollectionEntry" EntitySet="DataType_implements_ImplementedInterfaces_RelationEntryEfImpl" />
     </AssociationSet>
     <AssociationSet Name="FK_DataType_implements_ImplementedInterfaces_B" Association="Model.FK_DataType_implements_ImplementedInterfaces_B" >
       <End Role="ImplementedInterfaces" EntitySet="DataTypeEfImpl" />
-      <End Role="CollectionEntry" EntitySet="DataType_implements_Interface_RelationEntryEfImpl" />
+      <End Role="CollectionEntry" EntitySet="DataType_implements_ImplementedInterfaces_RelationEntryEfImpl" />
     </AssociationSet>
-    <EntitySet Name="Identity_memberOf_Group_RelationEntryEfImpl" EntityType="Model.Identity_memberOf_Group_RelationEntryEfImpl" />
+    <EntitySet Name="Identities_memberOf_Groups_RelationEntryEfImpl" EntityType="Model.Identities_memberOf_Groups_RelationEntryEfImpl" />
     <AssociationSet Name="FK_Identities_memberOf_Groups_A" Association="Model.FK_Identities_memberOf_Groups_A" >
       <End Role="Identities" EntitySet="IdentityEfImpl" />
-      <End Role="CollectionEntry" EntitySet="Identity_memberOf_Group_RelationEntryEfImpl" />
+      <End Role="CollectionEntry" EntitySet="Identities_memberOf_Groups_RelationEntryEfImpl" />
     </AssociationSet>
     <AssociationSet Name="FK_Identities_memberOf_Groups_B" Association="Model.FK_Identities_memberOf_Groups_B" >
       <End Role="Groups" EntitySet="GroupEfImpl" />
-      <End Role="CollectionEntry" EntitySet="Identity_memberOf_Group_RelationEntryEfImpl" />
+      <End Role="CollectionEntry" EntitySet="Identities_memberOf_Groups_RelationEntryEfImpl" />
     </AssociationSet>
-    <EntitySet Name="NavigationEntry_accessed_by_Group_RelationEntryEfImpl" EntityType="Model.NavigationEntry_accessed_by_Group_RelationEntryEfImpl" />
+    <EntitySet Name="NavigationScreen_accessed_by_Groups_RelationEntryEfImpl" EntityType="Model.NavigationScreen_accessed_by_Groups_RelationEntryEfImpl" />
     <AssociationSet Name="FK_NavigationScreen_accessed_by_Groups_A" Association="Model.FK_NavigationScreen_accessed_by_Groups_A" >
       <End Role="NavigationScreen" EntitySet="NavigationEntryEfImpl" />
-      <End Role="CollectionEntry" EntitySet="NavigationEntry_accessed_by_Group_RelationEntryEfImpl" />
+      <End Role="CollectionEntry" EntitySet="NavigationScreen_accessed_by_Groups_RelationEntryEfImpl" />
     </AssociationSet>
     <AssociationSet Name="FK_NavigationScreen_accessed_by_Groups_B" Association="Model.FK_NavigationScreen_accessed_by_Groups_B" >
       <End Role="Groups" EntitySet="GroupEfImpl" />
-      <End Role="CollectionEntry" EntitySet="NavigationEntry_accessed_by_Group_RelationEntryEfImpl" />
+      <End Role="CollectionEntry" EntitySet="NavigationScreen_accessed_by_Groups_RelationEntryEfImpl" />
     </AssociationSet>
-    <EntitySet Name="ObjectReferenceProperty_shows_Method_RelationEntryEfImpl" EntityType="Model.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl" />
+    <EntitySet Name="ObjRefProp_shows_Methods_RelationEntryEfImpl" EntityType="Model.ObjRefProp_shows_Methods_RelationEntryEfImpl" />
     <AssociationSet Name="FK_ObjRefProp_shows_Methods_A" Association="Model.FK_ObjRefProp_shows_Methods_A" >
       <End Role="ObjRefProp" EntitySet="PropertyEfImpl" />
-      <End Role="CollectionEntry" EntitySet="ObjectReferenceProperty_shows_Method_RelationEntryEfImpl" />
+      <End Role="CollectionEntry" EntitySet="ObjRefProp_shows_Methods_RelationEntryEfImpl" />
     </AssociationSet>
     <AssociationSet Name="FK_ObjRefProp_shows_Methods_B" Association="Model.FK_ObjRefProp_shows_Methods_B" >
       <End Role="Methods" EntitySet="MethodEfImpl" />
-      <End Role="CollectionEntry" EntitySet="ObjectReferenceProperty_shows_Method_RelationEntryEfImpl" />
+      <End Role="CollectionEntry" EntitySet="ObjRefProp_shows_Methods_RelationEntryEfImpl" />
     </AssociationSet>
-    <EntitySet Name="ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl" EntityType="Model.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl" />
+    <EntitySet Name="Presentable_displayedBy_SecondaryControlKinds_RelationEntryEfImpl" EntityType="Model.Presentable_displayedBy_SecondaryControlKinds_RelationEntryEfImpl" />
     <AssociationSet Name="FK_Presentable_displayedBy_SecondaryControlKinds_A" Association="Model.FK_Presentable_displayedBy_SecondaryControlKinds_A" >
       <End Role="Presentable" EntitySet="ViewModelDescriptorEfImpl" />
-      <End Role="CollectionEntry" EntitySet="ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl" />
+      <End Role="CollectionEntry" EntitySet="Presentable_displayedBy_SecondaryControlKinds_RelationEntryEfImpl" />
     </AssociationSet>
     <AssociationSet Name="FK_Presentable_displayedBy_SecondaryControlKinds_B" Association="Model.FK_Presentable_displayedBy_SecondaryControlKinds_B" >
       <End Role="SecondaryControlKinds" EntitySet="ControlKindEfImpl" />
-      <End Role="CollectionEntry" EntitySet="ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl" />
+      <End Role="CollectionEntry" EntitySet="Presentable_displayedBy_SecondaryControlKinds_RelationEntryEfImpl" />
     </AssociationSet>
-    <EntitySet Name="RoleMembership_resolves_Relation_RelationEntryEfImpl" EntityType="Model.RoleMembership_resolves_Relation_RelationEntryEfImpl" />
+    <EntitySet Name="RoleMembership_resolves_Relations_RelationEntryEfImpl" EntityType="Model.RoleMembership_resolves_Relations_RelationEntryEfImpl" />
     <AssociationSet Name="FK_RoleMembership_resolves_Relations_A" Association="Model.FK_RoleMembership_resolves_Relations_A" >
       <End Role="RoleMembership" EntitySet="AccessControlEfImpl" />
-      <End Role="CollectionEntry" EntitySet="RoleMembership_resolves_Relation_RelationEntryEfImpl" />
+      <End Role="CollectionEntry" EntitySet="RoleMembership_resolves_Relations_RelationEntryEfImpl" />
     </AssociationSet>
     <AssociationSet Name="FK_RoleMembership_resolves_Relations_B" Association="Model.FK_RoleMembership_resolves_Relations_B" >
       <End Role="Relations" EntitySet="RelationEfImpl" />
-      <End Role="CollectionEntry" EntitySet="RoleMembership_resolves_Relation_RelationEntryEfImpl" />
+      <End Role="CollectionEntry" EntitySet="RoleMembership_resolves_Relations_RelationEntryEfImpl" />
     </AssociationSet>
     <EntitySet Name="SourceColumn_created_Property_RelationEntryEfImpl" EntityType="Model.SourceColumn_created_Property_RelationEntryEfImpl" />
     <AssociationSet Name="FK_SourceColumn_created_Property_A" Association="Model.FK_SourceColumn_created_Property_A" >
@@ -113,14 +113,14 @@
       <End Role="Property" EntitySet="PropertyEfImpl" />
       <End Role="CollectionEntry" EntitySet="SourceColumn_created_Property_RelationEntryEfImpl" />
     </AssociationSet>
-    <EntitySet Name="IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl" EntityType="Model.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl" />
+    <EntitySet Name="UniqueContraints_ensures_unique_on_Properties_RelationEntryEfImpl" EntityType="Model.UniqueContraints_ensures_unique_on_Properties_RelationEntryEfImpl" />
     <AssociationSet Name="FK_UniqueContraints_ensures_unique_on_Properties_A" Association="Model.FK_UniqueContraints_ensures_unique_on_Properties_A" >
       <End Role="UniqueContraints" EntitySet="InstanceConstraintEfImpl" />
-      <End Role="CollectionEntry" EntitySet="IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl" />
+      <End Role="CollectionEntry" EntitySet="UniqueContraints_ensures_unique_on_Properties_RelationEntryEfImpl" />
     </AssociationSet>
     <AssociationSet Name="FK_UniqueContraints_ensures_unique_on_Properties_B" Association="Model.FK_UniqueContraints_ensures_unique_on_Properties_B" >
       <End Role="Properties" EntitySet="PropertyEfImpl" />
-      <End Role="CollectionEntry" EntitySet="IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl" />
+      <End Role="CollectionEntry" EntitySet="UniqueContraints_ensures_unique_on_Properties_RelationEntryEfImpl" />
     </AssociationSet>
 
     <!-- EntitySets and AssociationSets for all object-value CollectionEntrys -->
@@ -1927,7 +1927,7 @@
     B: ZeroOrMore Property as InputProperties
     Preferred Storage: Separate
   -->
-  <EntityType Name="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl" >
+  <EntityType Name="CalculatedReference_dependsOn_InputProperties_RelationEntryEfImpl" >
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -1952,7 +1952,7 @@
          Type="Model.CalculatedObjectReferencePropertyEfImpl" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl"
+         Type="Model.CalculatedReference_dependsOn_InputProperties_RelationEntryEfImpl"
          Multiplicity="*" />
   </Association>
   <Association Name="FK_CalculatedReference_dependsOn_InputProperties_B" >
@@ -1960,7 +1960,7 @@
          Type="Model.PropertyEfImpl" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl"
+         Type="Model.CalculatedReference_dependsOn_InputProperties_RelationEntryEfImpl"
          Multiplicity="*" />
   </Association>
   
@@ -1970,7 +1970,7 @@
     B: ZeroOrMore Interface as ImplementedInterfaces
     Preferred Storage: Separate
   -->
-  <EntityType Name="DataType_implements_Interface_RelationEntryEfImpl" >
+  <EntityType Name="DataType_implements_ImplementedInterfaces_RelationEntryEfImpl" >
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -1995,7 +1995,7 @@
          Type="Model.DataTypeEfImpl" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.DataType_implements_Interface_RelationEntryEfImpl"
+         Type="Model.DataType_implements_ImplementedInterfaces_RelationEntryEfImpl"
          Multiplicity="*" />
   </Association>
   <Association Name="FK_DataType_implements_ImplementedInterfaces_B" >
@@ -2003,7 +2003,7 @@
          Type="Model.InterfaceEfImpl" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.DataType_implements_Interface_RelationEntryEfImpl"
+         Type="Model.DataType_implements_ImplementedInterfaces_RelationEntryEfImpl"
          Multiplicity="*" />
   </Association>
   
@@ -2013,7 +2013,7 @@
     B: ZeroOrMore Group as Groups
     Preferred Storage: Separate
   -->
-  <EntityType Name="Identity_memberOf_Group_RelationEntryEfImpl" >
+  <EntityType Name="Identities_memberOf_Groups_RelationEntryEfImpl" >
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -2037,7 +2037,7 @@
          Type="Model.IdentityEfImpl" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.Identity_memberOf_Group_RelationEntryEfImpl"
+         Type="Model.Identities_memberOf_Groups_RelationEntryEfImpl"
          Multiplicity="*" />
   </Association>
   <Association Name="FK_Identities_memberOf_Groups_B" >
@@ -2045,7 +2045,7 @@
          Type="Model.GroupEfImpl" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.Identity_memberOf_Group_RelationEntryEfImpl"
+         Type="Model.Identities_memberOf_Groups_RelationEntryEfImpl"
          Multiplicity="*" />
   </Association>
   
@@ -2055,7 +2055,7 @@
     B: ZeroOrMore Group as Groups
     Preferred Storage: Separate
   -->
-  <EntityType Name="NavigationEntry_accessed_by_Group_RelationEntryEfImpl" >
+  <EntityType Name="NavigationScreen_accessed_by_Groups_RelationEntryEfImpl" >
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -2080,7 +2080,7 @@
          Type="Model.NavigationEntryEfImpl" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.NavigationEntry_accessed_by_Group_RelationEntryEfImpl"
+         Type="Model.NavigationScreen_accessed_by_Groups_RelationEntryEfImpl"
          Multiplicity="*" />
   </Association>
   <Association Name="FK_NavigationScreen_accessed_by_Groups_B" >
@@ -2088,7 +2088,7 @@
          Type="Model.GroupEfImpl" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.NavigationEntry_accessed_by_Group_RelationEntryEfImpl"
+         Type="Model.NavigationScreen_accessed_by_Groups_RelationEntryEfImpl"
          Multiplicity="*" />
   </Association>
   
@@ -2098,7 +2098,7 @@
     B: ZeroOrMore Method as Methods
     Preferred Storage: Separate
   -->
-  <EntityType Name="ObjectReferenceProperty_shows_Method_RelationEntryEfImpl" >
+  <EntityType Name="ObjRefProp_shows_Methods_RelationEntryEfImpl" >
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -2123,7 +2123,7 @@
          Type="Model.ObjectReferencePropertyEfImpl" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl"
+         Type="Model.ObjRefProp_shows_Methods_RelationEntryEfImpl"
          Multiplicity="*" />
   </Association>
   <Association Name="FK_ObjRefProp_shows_Methods_B" >
@@ -2131,7 +2131,7 @@
          Type="Model.MethodEfImpl" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl"
+         Type="Model.ObjRefProp_shows_Methods_RelationEntryEfImpl"
          Multiplicity="*" />
   </Association>
   
@@ -2141,7 +2141,7 @@
     B: ZeroOrMore ControlKind as SecondaryControlKinds
     Preferred Storage: Separate
   -->
-  <EntityType Name="ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl" >
+  <EntityType Name="Presentable_displayedBy_SecondaryControlKinds_RelationEntryEfImpl" >
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -2166,7 +2166,7 @@
          Type="Model.ViewModelDescriptorEfImpl" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl"
+         Type="Model.Presentable_displayedBy_SecondaryControlKinds_RelationEntryEfImpl"
          Multiplicity="*" />
   </Association>
   <Association Name="FK_Presentable_displayedBy_SecondaryControlKinds_B" >
@@ -2174,7 +2174,7 @@
          Type="Model.ControlKindEfImpl" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl"
+         Type="Model.Presentable_displayedBy_SecondaryControlKinds_RelationEntryEfImpl"
          Multiplicity="*" />
   </Association>
   
@@ -2184,7 +2184,7 @@
     B: ZeroOrMore Relation as Relations
     Preferred Storage: Separate
   -->
-  <EntityType Name="RoleMembership_resolves_Relation_RelationEntryEfImpl" >
+  <EntityType Name="RoleMembership_resolves_Relations_RelationEntryEfImpl" >
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -2211,7 +2211,7 @@
          Type="Model.RoleMembershipEfImpl" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.RoleMembership_resolves_Relation_RelationEntryEfImpl"
+         Type="Model.RoleMembership_resolves_Relations_RelationEntryEfImpl"
          Multiplicity="*" />
   </Association>
   <Association Name="FK_RoleMembership_resolves_Relations_B" >
@@ -2219,7 +2219,7 @@
          Type="Model.RelationEfImpl" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.RoleMembership_resolves_Relation_RelationEntryEfImpl"
+         Type="Model.RoleMembership_resolves_Relations_RelationEntryEfImpl"
          Multiplicity="*" />
   </Association>
   
@@ -2274,7 +2274,7 @@
     B: ZeroOrMore Property as Properties
     Preferred Storage: Separate
   -->
-  <EntityType Name="IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl" >
+  <EntityType Name="UniqueContraints_ensures_unique_on_Properties_RelationEntryEfImpl" >
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -2299,7 +2299,7 @@
          Type="Model.IndexConstraintEfImpl" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl"
+         Type="Model.UniqueContraints_ensures_unique_on_Properties_RelationEntryEfImpl"
          Multiplicity="*" />
   </Association>
   <Association Name="FK_UniqueContraints_ensures_unique_on_Properties_B" >
@@ -2307,7 +2307,7 @@
          Type="Model.PropertyEfImpl" 
          Multiplicity="0..1" />
     <End Role="CollectionEntry"
-         Type="Model.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl"
+         Type="Model.UniqueContraints_ensures_unique_on_Properties_RelationEntryEfImpl"
          Multiplicity="*" />
   </Association>
   

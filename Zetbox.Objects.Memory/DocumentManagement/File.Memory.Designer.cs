@@ -1006,13 +1006,13 @@ namespace at.dasz.DocumentManagement
         public Zetbox.API.Async.ZbTask TriggerFetchRevisionsAsync()
         {
             if (_triggerFetchRevisionsTask != null) return _triggerFetchRevisionsTask;
-            _triggerFetchRevisionsTask = Context.FetchRelationAsync<at.dasz.DocumentManagement.File_has_Blob_RelationEntryMemoryImpl>(new Guid("69d27812-e981-443b-a94b-dfe1a95f3aad"), RelationEndRole.A, this);
+            _triggerFetchRevisionsTask = Context.FetchRelationAsync<at.dasz.DocumentManagement.Document_has_Revisions_RelationEntryMemoryImpl>(new Guid("69d27812-e981-443b-a94b-dfe1a95f3aad"), RelationEndRole.A, this);
             _triggerFetchRevisionsTask.OnResult(r =>
             {
                 _Revisions
-                    = new ObservableBSideListWrapper<at.dasz.DocumentManagement.File, Zetbox.App.Base.Blob, at.dasz.DocumentManagement.File_has_Blob_RelationEntryMemoryImpl, ICollection<at.dasz.DocumentManagement.File_has_Blob_RelationEntryMemoryImpl>>(
+                    = new ObservableBSideListWrapper<at.dasz.DocumentManagement.File, Zetbox.App.Base.Blob, at.dasz.DocumentManagement.Document_has_Revisions_RelationEntryMemoryImpl, ICollection<at.dasz.DocumentManagement.Document_has_Revisions_RelationEntryMemoryImpl>>(
                         this,
-                        new RelationshipFilterASideCollection<at.dasz.DocumentManagement.File_has_Blob_RelationEntryMemoryImpl>(this.Context, this));
+                        new RelationshipFilterASideCollection<at.dasz.DocumentManagement.Document_has_Revisions_RelationEntryMemoryImpl>(this.Context, this));
                         // _Revisions.CollectionChanged is managed by OnRevisionsCollectionChanged() and called from the RelationEntry
             });
             return _triggerFetchRevisionsTask;
@@ -1025,7 +1025,7 @@ namespace at.dasz.DocumentManagement
                 OnRevisions_PostSetter(this);
         }
 
-        private ObservableBSideListWrapper<at.dasz.DocumentManagement.File, Zetbox.App.Base.Blob, at.dasz.DocumentManagement.File_has_Blob_RelationEntryMemoryImpl, ICollection<at.dasz.DocumentManagement.File_has_Blob_RelationEntryMemoryImpl>> _Revisions;
+        private ObservableBSideListWrapper<at.dasz.DocumentManagement.File, Zetbox.App.Base.Blob, at.dasz.DocumentManagement.Document_has_Revisions_RelationEntryMemoryImpl, ICollection<at.dasz.DocumentManagement.Document_has_Revisions_RelationEntryMemoryImpl>> _Revisions;
         // END Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for Revisions
 public static event PropertyListChangedHandler<at.dasz.DocumentManagement.File> OnRevisions_PostSetter;
 

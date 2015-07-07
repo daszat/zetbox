@@ -142,7 +142,7 @@ namespace Zetbox.App.Base
             {
                 if (_Properties == null)
                 {
-                    _Properties = new BSideCollectionWrapper<Zetbox.App.Base.IndexConstraint, Zetbox.App.Base.Property, Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl, EntityCollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl>>(
+                    _Properties = new BSideCollectionWrapper<Zetbox.App.Base.IndexConstraint, Zetbox.App.Base.Property, Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryEfImpl, EntityCollection<Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryEfImpl>>(
                             this,
                             PropertiesImpl);
                 }
@@ -151,7 +151,7 @@ namespace Zetbox.App.Base
         }
         
         [EdmRelationshipNavigationProperty("Model", "FK_UniqueContraints_ensures_unique_on_Properties_A", "CollectionEntry")]
-        public EntityCollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl> PropertiesImpl
+        public EntityCollection<Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryEfImpl> PropertiesImpl
         {
             get
             {
@@ -159,14 +159,14 @@ namespace Zetbox.App.Base
             }
         }
 
-        private EntityCollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl> _PropertiesImplEntityCollection;
-        internal EntityCollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl> GetPropertiesImplCollection()
+        private EntityCollection<Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryEfImpl> _PropertiesImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryEfImpl> GetPropertiesImplCollection()
         {
             if (_PropertiesImplEntityCollection == null)
             {
                 _PropertiesImplEntityCollection
                     = ((IEntityWithRelationships)(this)).RelationshipManager
-                        .GetRelatedCollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl>(
+                        .GetRelatedCollection<Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryEfImpl>(
                             "Model.FK_UniqueContraints_ensures_unique_on_Properties_A",
                             "CollectionEntry");
                 // the EntityCollection has to be loaded before attaching the AssociationChanged event
@@ -181,7 +181,7 @@ namespace Zetbox.App.Base
             }
             return _PropertiesImplEntityCollection;
         }
-        private BSideCollectionWrapper<Zetbox.App.Base.IndexConstraint, Zetbox.App.Base.Property, Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl, EntityCollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl>> _Properties;
+        private BSideCollectionWrapper<Zetbox.App.Base.IndexConstraint, Zetbox.App.Base.Property, Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryEfImpl, EntityCollection<Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryEfImpl>> _Properties;
 
         public Zetbox.API.Async.ZbTask TriggerFetchPropertiesAsync()
         {

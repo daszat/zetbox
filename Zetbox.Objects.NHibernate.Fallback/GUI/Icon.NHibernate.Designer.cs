@@ -807,11 +807,11 @@ namespace Zetbox.App.GUI
             base.NotifyDeleting();
             if (OnNotifyDeleting_Icon != null) OnNotifyDeleting_Icon(this);
 
-            // should fetch && remember parent for Application_has_Icon_RelationEntry
-            // should fetch && remember parent for BoolProperty_has_Icon_RelationEntry
-            // should fetch && remember parent for BoolProperty_has_Icon_RelationEntry
-            // should fetch && remember parent for BoolProperty_has_Icon_RelationEntry
-            // should fetch && remember parent for DataType_has_Icon_RelationEntry
+            // should fetch && remember parent for App_has_Icon_RelationEntry
+            // should fetch && remember parent for BoolProperty_has_FalseIcon_RelationEntry
+            // should fetch && remember parent for BoolProperty_has_NullIcon_RelationEntry
+            // should fetch && remember parent for BoolProperty_has_TrueIcon_RelationEntry
+            // should fetch && remember parent for DataType_has_DefaultIcon_RelationEntry
             // FK_Icon_has_Blob
             if (Blob != null) {
                 ((NHibernatePersistenceObject)Blob).ChildrenToDelete.Add(this);

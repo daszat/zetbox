@@ -332,12 +332,12 @@ using Zetbox.DalProvider.Ef;
 // The association from A to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_CalculatedReference_dependsOn_InputProperties_A",
     "CalculatedReference", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.CalculatedObjectReferencePropertyEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl)
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.CalculatedReference_dependsOn_InputProperties_RelationEntryEfImpl)
     )]
 // The association from B to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_CalculatedReference_dependsOn_InputProperties_B",
     "InputProperties", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.PropertyEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl)
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.CalculatedReference_dependsOn_InputProperties_RelationEntryEfImpl)
     )]
 
 	/*
@@ -515,12 +515,12 @@ using Zetbox.DalProvider.Ef;
 // The association from A to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_DataType_implements_ImplementedInterfaces_A",
     "DataType", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.DataTypeEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.DataType_implements_Interface_RelationEntryEfImpl)
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntryEfImpl)
     )]
 // The association from B to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_DataType_implements_ImplementedInterfaces_B",
     "ImplementedInterfaces", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.InterfaceEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.DataType_implements_Interface_RelationEntryEfImpl)
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntryEfImpl)
     )]
 
 	/*
@@ -878,12 +878,12 @@ using Zetbox.DalProvider.Ef;
 // The association from A to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_Identities_memberOf_Groups_A",
     "Identities", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.Identity_memberOf_Group_RelationEntryEfImpl)
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryEfImpl)
     )]
 // The association from B to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_Identities_memberOf_Groups_B",
     "Groups", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.GroupEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.Identity_memberOf_Group_RelationEntryEfImpl)
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryEfImpl)
     )]
 
 	/*
@@ -1151,12 +1151,12 @@ using Zetbox.DalProvider.Ef;
 // The association from A to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_NavigationScreen_accessed_by_Groups_A",
     "NavigationScreen", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.NavigationEntryEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryEfImpl)
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.NavigationScreen_accessed_by_Groups_RelationEntryEfImpl)
     )]
 // The association from B to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_NavigationScreen_accessed_by_Groups_B",
     "Groups", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.GroupEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryEfImpl)
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.NavigationScreen_accessed_by_Groups_RelationEntryEfImpl)
     )]
 
 	/*
@@ -1304,12 +1304,12 @@ using Zetbox.DalProvider.Ef;
 // The association from A to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_ObjRefProp_shows_Methods_A",
     "ObjRefProp", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.ObjectReferencePropertyEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl)
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryEfImpl)
     )]
 // The association from B to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_ObjRefProp_shows_Methods_B",
     "Methods", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.MethodEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryEfImpl)
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryEfImpl)
     )]
 
 	/*
@@ -1337,12 +1337,12 @@ using Zetbox.DalProvider.Ef;
 // The association from A to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_Presentable_displayedBy_SecondaryControlKinds_A",
     "Presentable", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.ViewModelDescriptorEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl)
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.Presentable_displayedBy_SecondaryControlKinds_RelationEntryEfImpl)
     )]
 // The association from B to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_Presentable_displayedBy_SecondaryControlKinds_B",
     "SecondaryControlKinds", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.ControlKindEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl)
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.GUI.Presentable_displayedBy_SecondaryControlKinds_RelationEntryEfImpl)
     )]
 
 	/*
@@ -1610,12 +1610,12 @@ using Zetbox.DalProvider.Ef;
 // The association from A to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_RoleMembership_resolves_Relations_A",
     "RoleMembership", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.RoleMembershipEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryEfImpl)
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.RoleMembership_resolves_Relations_RelationEntryEfImpl)
     )]
 // The association from B to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_RoleMembership_resolves_Relations_B",
     "Relations", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.RelationEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryEfImpl)
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.RoleMembership_resolves_Relations_RelationEntryEfImpl)
     )]
 
 	/*
@@ -2006,12 +2006,12 @@ using Zetbox.DalProvider.Ef;
 // The association from A to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_UniqueContraints_ensures_unique_on_Properties_A",
     "UniqueContraints", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IndexConstraintEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl)
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryEfImpl)
     )]
 // The association from B to the CollectionEntry
 [assembly: EdmRelationship("Model", "FK_UniqueContraints_ensures_unique_on_Properties_B",
     "Properties", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.PropertyEfImpl),
-    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryEfImpl)
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryEfImpl)
     )]
 
 	/*

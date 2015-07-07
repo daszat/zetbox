@@ -667,7 +667,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             {
                 if (_Groups == null)
                 {
-                    _Groups = new BSideCollectionWrapper<Zetbox.App.GUI.NavigationEntry, Zetbox.App.Base.Group, Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryEfImpl>>(
+                    _Groups = new BSideCollectionWrapper<Zetbox.App.GUI.NavigationEntry, Zetbox.App.Base.Group, Zetbox.App.GUI.NavigationScreen_accessed_by_Groups_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.NavigationScreen_accessed_by_Groups_RelationEntryEfImpl>>(
                             this,
                             GroupsImpl);
                 }
@@ -676,7 +676,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         }
         
         [EdmRelationshipNavigationProperty("Model", "FK_NavigationScreen_accessed_by_Groups_A", "CollectionEntry")]
-        public EntityCollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryEfImpl> GroupsImpl
+        public EntityCollection<Zetbox.App.GUI.NavigationScreen_accessed_by_Groups_RelationEntryEfImpl> GroupsImpl
         {
             get
             {
@@ -684,14 +684,14 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             }
         }
 
-        private EntityCollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryEfImpl> _GroupsImplEntityCollection;
-        internal EntityCollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryEfImpl> GetGroupsImplCollection()
+        private EntityCollection<Zetbox.App.GUI.NavigationScreen_accessed_by_Groups_RelationEntryEfImpl> _GroupsImplEntityCollection;
+        internal EntityCollection<Zetbox.App.GUI.NavigationScreen_accessed_by_Groups_RelationEntryEfImpl> GetGroupsImplCollection()
         {
             if (_GroupsImplEntityCollection == null)
             {
                 _GroupsImplEntityCollection
                     = ((IEntityWithRelationships)(this)).RelationshipManager
-                        .GetRelatedCollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryEfImpl>(
+                        .GetRelatedCollection<Zetbox.App.GUI.NavigationScreen_accessed_by_Groups_RelationEntryEfImpl>(
                             "Model.FK_NavigationScreen_accessed_by_Groups_A",
                             "CollectionEntry");
                 // the EntityCollection has to be loaded before attaching the AssociationChanged event
@@ -706,7 +706,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             }
             return _GroupsImplEntityCollection;
         }
-        private BSideCollectionWrapper<Zetbox.App.GUI.NavigationEntry, Zetbox.App.Base.Group, Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryEfImpl>> _Groups;
+        private BSideCollectionWrapper<Zetbox.App.GUI.NavigationEntry, Zetbox.App.Base.Group, Zetbox.App.GUI.NavigationScreen_accessed_by_Groups_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.NavigationScreen_accessed_by_Groups_RelationEntryEfImpl>> _Groups;
         private bool Groups_was_eagerLoaded = false;
 
         public Zetbox.API.Async.ZbTask TriggerFetchGroupsAsync()

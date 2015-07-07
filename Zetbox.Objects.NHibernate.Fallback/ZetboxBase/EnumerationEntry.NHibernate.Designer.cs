@@ -1258,7 +1258,7 @@ namespace Zetbox.App.Base
             base.NotifyDeleting();
             if (OnNotifyDeleting_EnumerationEntry != null) OnNotifyDeleting_EnumerationEntry(this);
 
-            // should fetch && remember parent for EnumDefaultValue_defaults_to_EnumerationEntry_RelationEntry
+            // should fetch && remember parent for EnumDefaultValue_defaults_to_EnumValue_RelationEntry
             // FK_Enumeration_has_EnumerationEntries
             if (Enumeration != null) {
                 ((NHibernatePersistenceObject)Enumeration).ChildrenToDelete.Add(this);
@@ -1274,7 +1274,7 @@ namespace Zetbox.App.Base
                 ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
             }
-            // should fetch && remember parent for SourceEnum_mapps_to_EnumerationEntry_RelationEntry
+            // should fetch && remember parent for SourceEnum_mapps_to_DestinationValue_RelationEntry
 
             ChangedBy = null;
             CreatedBy = null;

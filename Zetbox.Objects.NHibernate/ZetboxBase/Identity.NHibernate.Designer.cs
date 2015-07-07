@@ -185,12 +185,12 @@ namespace Zetbox.App.Base
 				if (_Groups == null)
 				{
 					_Groups 
-						= new NHibernateBSideCollectionWrapper<Zetbox.App.Base.Identity, Zetbox.App.Base.Group, Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl>(
+						= new NHibernateBSideCollectionWrapper<Zetbox.App.Base.Identity, Zetbox.App.Base.Group, Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl.Identity_memberOf_Group_RelationEntryProxy, Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryNHibernateImpl.Identities_memberOf_Groups_RelationEntryProxy, Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.Groups,
-                                p => (Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl.Identity_memberOf_Group_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
+                                p => (Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryNHibernateImpl.Identities_memberOf_Groups_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
                     _Groups.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Groups", null, null); if(OnGroups_PostSetter != null && IsAttached) OnGroups_PostSetter(this); };
                     if (Groups_was_eagerLoaded) { Groups_was_eagerLoaded = false; }
 				}
@@ -198,7 +198,7 @@ namespace Zetbox.App.Base
 			}
 		}
 
-		private NHibernateBSideCollectionWrapper<Zetbox.App.Base.Identity, Zetbox.App.Base.Group, Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl> _Groups;
+		private NHibernateBSideCollectionWrapper<Zetbox.App.Base.Identity, Zetbox.App.Base.Group, Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryNHibernateImpl> _Groups;
 		// ignored, but required for Serialization
         private bool Groups_was_eagerLoaded = false;
 
@@ -920,87 +920,87 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
             base.NotifyDeleting();
             if (OnNotifyDeleting_Identity != null) OnNotifyDeleting_Identity(this);
 
-            // should fetch && remember parent for AbstractModuleMember_was_Identity_RelationEntry
-            // should fetch && remember parent for AbstractModuleMember_was_Identity_RelationEntry
-            // should fetch && remember parent for AccessControl_was_Identity_RelationEntry
-            // should fetch && remember parent for AccessControl_was_Identity_RelationEntry
-            // should fetch && remember parent for Application_was_Identity_RelationEntry
-            // should fetch && remember parent for Application_was_Identity_RelationEntry
-            // should fetch && remember parent for Assembly_was_Identity_RelationEntry
-            // should fetch && remember parent for Assembly_was_Identity_RelationEntry
-            // should fetch && remember parent for Auftrag_ChangedBy_Identity_RelationEntry
-            // should fetch && remember parent for Auftrag_CreatedBy_Identity_RelationEntry
-            // should fetch && remember parent for BaseParameter_was_Identity_RelationEntry
-            // should fetch && remember parent for BaseParameter_was_Identity_RelationEntry
-            // should fetch && remember parent for CalendarBook_has_Identity_RelationEntry
-            // should fetch && remember parent for CalendarBook_was_Identity_RelationEntry
-            // should fetch && remember parent for CalendarBook_was_Identity_RelationEntry
-            // should fetch && remember parent for SecurityTestChild_allow_Identity_RelationEntry
-            // should fetch && remember parent for FileImportConfiguration_of_Identity_RelationEntry
-            // should fetch && remember parent for Constraint_was_Identity_RelationEntry
-            // should fetch && remember parent for Constraint_was_Identity_RelationEntry
-            // should fetch && remember parent for DataType_was_Identity_RelationEntry
-            // should fetch && remember parent for DataType_was_Identity_RelationEntry
-            // should fetch && remember parent for DefaultPropertyValue_was_Identity_RelationEntry
-            // should fetch && remember parent for DefaultPropertyValue_was_Identity_RelationEntry
-            // should fetch && remember parent for Blob_was_Identity_RelationEntry
-            // should fetch && remember parent for Blob_was_Identity_RelationEntry
-            // should fetch && remember parent for EnumerationEntry_was_Identity_RelationEntry
-            // should fetch && remember parent for EnumerationEntry_was_Identity_RelationEntry
-            // should fetch && remember parent for Event_was_Identity_RelationEntry
-            // should fetch && remember parent for Event_was_Identity_RelationEntry
-            // should fetch && remember parent for File_was_Identity_RelationEntry
-            // should fetch && remember parent for File_was_Identity_RelationEntry
-            // should fetch && remember parent for FileImportConfiguration_was_Identity_RelationEntry
-            // should fetch && remember parent for FileImportConfiguration_was_Identity_RelationEntry
-            // should fetch && remember parent for FilterConfiguration_was_Identity_RelationEntry
-            // should fetch && remember parent for FilterConfiguration_was_Identity_RelationEntry
-            // should fetch && remember parent for Kunde_was_Identity_RelationEntry
-            // should fetch && remember parent for Kunde_was_Identity_RelationEntry
-            // should fetch && remember parent for SavedListConfiguration_of_Identity_RelationEntry
-            // should fetch && remember parent for Method_was_Identity_RelationEntry
-            // should fetch && remember parent for Method_was_Identity_RelationEntry
-            // should fetch && remember parent for MigrationProject_was_Identity_RelationEntry
-            // should fetch && remember parent for MigrationProject_was_Identity_RelationEntry
+            // should fetch && remember parent for AbstractModuleMember_was_ChangedBy_RelationEntry
+            // should fetch && remember parent for AbstractModuleMember_was_CreatedBy_RelationEntry
+            // should fetch && remember parent for AccessControl_was_ChangedBy_RelationEntry
+            // should fetch && remember parent for AccessControl_was_CreatedBy_RelationEntry
+            // should fetch && remember parent for Application_was_ChangedBy_RelationEntry
+            // should fetch && remember parent for Application_was_CreatedBy_RelationEntry
+            // should fetch && remember parent for Assembly_was_ChangedBy_RelationEntry
+            // should fetch && remember parent for Assembly_was_CreatedBy_RelationEntry
+            // should fetch && remember parent for Auftrag_ChangedBy_ChangedBy_RelationEntry
+            // should fetch && remember parent for Auftrag_CreatedBy_CreatedBy_RelationEntry
+            // should fetch && remember parent for BaseParameter_was_ChangedBy_RelationEntry
+            // should fetch && remember parent for BaseParameter_was_CreatedBy_RelationEntry
+            // should fetch && remember parent for Calendar_has_Owner_RelationEntry
+            // should fetch && remember parent for Calendar_was_ChangedBy_RelationEntry
+            // should fetch && remember parent for Calendar_was_CreatedBy_RelationEntry
+            // should fetch && remember parent for Child_allow_Identity_RelationEntry
+            // should fetch && remember parent for Configuration_of_Identity_RelationEntry
+            // should fetch && remember parent for Constraint_was_ChangedBy_RelationEntry
+            // should fetch && remember parent for Constraint_was_CreatedBy_RelationEntry
+            // should fetch && remember parent for DataType_was_ChangedBy_RelationEntry
+            // should fetch && remember parent for DataType_was_CreatedBy_RelationEntry
+            // should fetch && remember parent for DefaultPropertyValue_was_ChangedBy_RelationEntry
+            // should fetch && remember parent for DefaultPropertyValue_was_CreatedBy_RelationEntry
+            // should fetch && remember parent for Document_was_ChangedBy_RelationEntry
+            // should fetch && remember parent for Document_was_CreatedBy_RelationEntry
+            // should fetch && remember parent for EnumerationEntry_was_ChangedBy_RelationEntry
+            // should fetch && remember parent for EnumerationEntry_was_CreatedBy_RelationEntry
+            // should fetch && remember parent for Event_was_ChangedBy_RelationEntry
+            // should fetch && remember parent for Event_was_CreatedBy_RelationEntry
+            // should fetch && remember parent for File_was_ChangedBy_RelationEntry
+            // should fetch && remember parent for File_was_CreatedBy_RelationEntry
+            // should fetch && remember parent for FileImportConfiguration_was_ChangedBy_RelationEntry
+            // should fetch && remember parent for FileImportConfiguration_was_CreatedBy_RelationEntry
+            // should fetch && remember parent for FilterConfiguration_was_ChangedBy_RelationEntry
+            // should fetch && remember parent for FilterConfiguration_was_CreatedBy_RelationEntry
+            // should fetch && remember parent for Kunde_was_ChangedBy_RelationEntry
+            // should fetch && remember parent for Kunde_was_CreatedBy_RelationEntry
+            // should fetch && remember parent for LstCfg_of_Owner_RelationEntry
+            // should fetch && remember parent for Method_was_ChangedBy_RelationEntry
+            // should fetch && remember parent for Method_was_CreatedBy_RelationEntry
+            // should fetch && remember parent for MigrationProject_was_ChangedBy_RelationEntry
+            // should fetch && remember parent for MigrationProject_was_CreatedBy_RelationEntry
             // should fetch && remember children for Mitarbeiter_is_a_Identity_RelationEntry
-            // should fetch && remember parent for Mitarbeiter_was_Identity_RelationEntry
-            // should fetch && remember parent for Mitarbeiter_was_Identity_RelationEntry
-            // should fetch && remember parent for Module_was_Identity_RelationEntry
-            // should fetch && remember parent for Module_was_Identity_RelationEntry
-            // should fetch && remember parent for NavigationEntry_was_Identity_RelationEntry
-            // should fetch && remember parent for NavigationEntry_was_Identity_RelationEntry
-            // should fetch && remember parent for Projekt_was_Identity_RelationEntry
-            // should fetch && remember parent for Projekt_was_Identity_RelationEntry
-            // should fetch && remember parent for Property_was_Identity_RelationEntry
-            // should fetch && remember parent for Property_was_Identity_RelationEntry
-            // should fetch && remember parent for Relation_was_Identity_RelationEntry
-            // should fetch && remember parent for Relation_was_Identity_RelationEntry
-            // should fetch && remember parent for RelationEnd_was_Identity_RelationEntry
-            // should fetch && remember parent for RelationEnd_was_Identity_RelationEntry
-            // should fetch && remember parent for SecurityTestChild_was_Identity_RelationEntry
-            // should fetch && remember parent for SecurityTestChild_was_Identity_RelationEntry
-            // should fetch && remember parent for Sequence_was_Identity_RelationEntry
-            // should fetch && remember parent for Sequence_was_Identity_RelationEntry
-            // should fetch && remember parent for ServiceDescriptor_was_Identity_RelationEntry
-            // should fetch && remember parent for ServiceDescriptor_was_Identity_RelationEntry
-            // should fetch && remember parent for SourceColumn_was_Identity_RelationEntry
-            // should fetch && remember parent for SourceColumn_was_Identity_RelationEntry
-            // should fetch && remember parent for SourceEnum_was_Identity_RelationEntry
-            // should fetch && remember parent for SourceEnum_was_Identity_RelationEntry
-            // should fetch && remember parent for SourceTable_was_Identity_RelationEntry
-            // should fetch && remember parent for SourceTable_was_Identity_RelationEntry
-            // should fetch && remember parent for StagingDatabase_was_Identity_RelationEntry
-            // should fetch && remember parent for StagingDatabase_was_Identity_RelationEntry
-            // should fetch && remember parent for SyncProvider_was_Identity_RelationEntry
-            // should fetch && remember parent for SyncProvider_was_Identity_RelationEntry
-            // should fetch && remember parent for Task_was_Identity_RelationEntry
-            // should fetch && remember parent for Task_was_Identity_RelationEntry
-            // should fetch && remember parent for TPHBaseObj_was_Identity_RelationEntry
-            // should fetch && remember parent for TPHBaseObj_was_Identity_RelationEntry
-            // should fetch && remember parent for WorkSchedule_was_Identity_RelationEntry
-            // should fetch && remember parent for WorkSchedule_was_Identity_RelationEntry
-            // should fetch && remember parent for WorkScheduleRule_was_Identity_RelationEntry
-            // should fetch && remember parent for WorkScheduleRule_was_Identity_RelationEntry
+            // should fetch && remember parent for Mitarbeiter_was_ChangedBy_RelationEntry
+            // should fetch && remember parent for Mitarbeiter_was_CreatedBy_RelationEntry
+            // should fetch && remember parent for Module_was_ChangedBy_RelationEntry
+            // should fetch && remember parent for Module_was_CreatedBy_RelationEntry
+            // should fetch && remember parent for NavigationScreen_was_ChangedBy_RelationEntry
+            // should fetch && remember parent for NavigationScreen_was_CreatedBy_RelationEntry
+            // should fetch && remember parent for Projekt_was_ChangedBy_RelationEntry
+            // should fetch && remember parent for Projekt_was_CreatedBy_RelationEntry
+            // should fetch && remember parent for Property_was_ChangedBy_RelationEntry
+            // should fetch && remember parent for Property_was_CreatedBy_RelationEntry
+            // should fetch && remember parent for Relation_was_ChangedBy_RelationEntry
+            // should fetch && remember parent for Relation_was_CreatedBy_RelationEntry
+            // should fetch && remember parent for RelationEnd_was_ChangedBy_RelationEntry
+            // should fetch && remember parent for RelationEnd_was_CreatedBy_RelationEntry
+            // should fetch && remember parent for SecurityTestChild_was_ChangedBy_RelationEntry
+            // should fetch && remember parent for SecurityTestChild_was_CreatedBy_RelationEntry
+            // should fetch && remember parent for Sequence_was_ChangedBy_RelationEntry
+            // should fetch && remember parent for Sequence_was_CreatedBy_RelationEntry
+            // should fetch && remember parent for ServiceDescriptor_was_ChangedBy_RelationEntry
+            // should fetch && remember parent for ServiceDescriptor_was_CreatedBy_RelationEntry
+            // should fetch && remember parent for SourceColumn_was_ChangedBy_RelationEntry
+            // should fetch && remember parent for SourceColumn_was_CreatedBy_RelationEntry
+            // should fetch && remember parent for SourceEnum_was_ChangedBy_RelationEntry
+            // should fetch && remember parent for SourceEnum_was_CreatedBy_RelationEntry
+            // should fetch && remember parent for SourceTable_was_ChangedBy_RelationEntry
+            // should fetch && remember parent for SourceTable_was_CreatedBy_RelationEntry
+            // should fetch && remember parent for StagingDatabase_was_ChangedBy_RelationEntry
+            // should fetch && remember parent for StagingDatabase_was_CreatedBy_RelationEntry
+            // should fetch && remember parent for SyncAccount_was_ChangedBy_RelationEntry
+            // should fetch && remember parent for SyncAccount_was_CreatedBy_RelationEntry
+            // should fetch && remember parent for Task_was_ChangedBy_RelationEntry
+            // should fetch && remember parent for Task_was_CreatedBy_RelationEntry
+            // should fetch && remember parent for TPHBaseObj_was_ChangedBy_RelationEntry
+            // should fetch && remember parent for TPHBaseObj_was_CreatedBy_RelationEntry
+            // should fetch && remember parent for WorkSchedule_was_ChangedBy_RelationEntry
+            // should fetch && remember parent for WorkSchedule_was_CreatedBy_RelationEntry
+            // should fetch && remember parent for WorkScheduleRule_was_ChangedBy_RelationEntry
+            // should fetch && remember parent for WorkScheduleRule_was_CreatedBy_RelationEntry
 
             Groups.Clear();
         }
@@ -1013,7 +1013,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
         {
             public IdentityProxy()
             {
-                Groups = new Collection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl.Identity_memberOf_Group_RelationEntryProxy>();
+                Groups = new Collection<Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryNHibernateImpl.Identities_memberOf_Groups_RelationEntryProxy>();
             }
 
             public virtual int ID { get; set; }
@@ -1025,7 +1025,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
 
             public virtual string DisplayName { get; set; }
 
-            public virtual ICollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl.Identity_memberOf_Group_RelationEntryProxy> Groups { get; set; }
+            public virtual ICollection<Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryNHibernateImpl.Identities_memberOf_Groups_RelationEntryProxy> Groups { get; set; }
 
             public virtual Guid? LoginToken { get; set; }
 

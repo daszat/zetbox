@@ -60,7 +60,7 @@ namespace Zetbox.App.Base
             {
                 if (_Inputs == null)
                 {
-                    _Inputs = new BSideCollectionWrapper<Zetbox.App.Base.CalculatedObjectReferenceProperty, Zetbox.App.Base.Property, Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl, EntityCollection<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl>>(
+                    _Inputs = new BSideCollectionWrapper<Zetbox.App.Base.CalculatedObjectReferenceProperty, Zetbox.App.Base.Property, Zetbox.App.Base.CalculatedReference_dependsOn_InputProperties_RelationEntryEfImpl, EntityCollection<Zetbox.App.Base.CalculatedReference_dependsOn_InputProperties_RelationEntryEfImpl>>(
                             this,
                             InputsImpl);
                 }
@@ -69,7 +69,7 @@ namespace Zetbox.App.Base
         }
         
         [EdmRelationshipNavigationProperty("Model", "FK_CalculatedReference_dependsOn_InputProperties_A", "CollectionEntry")]
-        public EntityCollection<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl> InputsImpl
+        public EntityCollection<Zetbox.App.Base.CalculatedReference_dependsOn_InputProperties_RelationEntryEfImpl> InputsImpl
         {
             get
             {
@@ -77,14 +77,14 @@ namespace Zetbox.App.Base
             }
         }
 
-        private EntityCollection<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl> _InputsImplEntityCollection;
-        internal EntityCollection<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl> GetInputsImplCollection()
+        private EntityCollection<Zetbox.App.Base.CalculatedReference_dependsOn_InputProperties_RelationEntryEfImpl> _InputsImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Base.CalculatedReference_dependsOn_InputProperties_RelationEntryEfImpl> GetInputsImplCollection()
         {
             if (_InputsImplEntityCollection == null)
             {
                 _InputsImplEntityCollection
                     = ((IEntityWithRelationships)(this)).RelationshipManager
-                        .GetRelatedCollection<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl>(
+                        .GetRelatedCollection<Zetbox.App.Base.CalculatedReference_dependsOn_InputProperties_RelationEntryEfImpl>(
                             "Model.FK_CalculatedReference_dependsOn_InputProperties_A",
                             "CollectionEntry");
                 // the EntityCollection has to be loaded before attaching the AssociationChanged event
@@ -99,7 +99,7 @@ namespace Zetbox.App.Base
             }
             return _InputsImplEntityCollection;
         }
-        private BSideCollectionWrapper<Zetbox.App.Base.CalculatedObjectReferenceProperty, Zetbox.App.Base.Property, Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl, EntityCollection<Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryEfImpl>> _Inputs;
+        private BSideCollectionWrapper<Zetbox.App.Base.CalculatedObjectReferenceProperty, Zetbox.App.Base.Property, Zetbox.App.Base.CalculatedReference_dependsOn_InputProperties_RelationEntryEfImpl, EntityCollection<Zetbox.App.Base.CalculatedReference_dependsOn_InputProperties_RelationEntryEfImpl>> _Inputs;
         private bool Inputs_was_eagerLoaded = false;
 
         public Zetbox.API.Async.ZbTask TriggerFetchInputsAsync()

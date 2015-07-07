@@ -592,12 +592,12 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
 				if (_Groups == null)
 				{
 					_Groups 
-						= new NHibernateBSideCollectionWrapper<Zetbox.App.GUI.NavigationEntry, Zetbox.App.Base.Group, Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl>(
+						= new NHibernateBSideCollectionWrapper<Zetbox.App.GUI.NavigationEntry, Zetbox.App.Base.Group, Zetbox.App.GUI.NavigationScreen_accessed_by_Groups_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl.NavigationEntry_accessed_by_Group_RelationEntryProxy, Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Zetbox.App.GUI.NavigationScreen_accessed_by_Groups_RelationEntryNHibernateImpl.NavigationScreen_accessed_by_Groups_RelationEntryProxy, Zetbox.App.GUI.NavigationScreen_accessed_by_Groups_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.Groups,
-                                p => (Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl.NavigationEntry_accessed_by_Group_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
+                                p => (Zetbox.App.GUI.NavigationScreen_accessed_by_Groups_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Zetbox.App.GUI.NavigationScreen_accessed_by_Groups_RelationEntryNHibernateImpl.NavigationScreen_accessed_by_Groups_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
                     _Groups.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Groups", null, null); if(OnGroups_PostSetter != null && IsAttached) OnGroups_PostSetter(this); };
                     if (Groups_was_eagerLoaded) { Groups_was_eagerLoaded = false; }
 				}
@@ -605,7 +605,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
 			}
 		}
 
-		private NHibernateBSideCollectionWrapper<Zetbox.App.GUI.NavigationEntry, Zetbox.App.Base.Group, Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl> _Groups;
+		private NHibernateBSideCollectionWrapper<Zetbox.App.GUI.NavigationEntry, Zetbox.App.Base.Group, Zetbox.App.GUI.NavigationScreen_accessed_by_Groups_RelationEntryNHibernateImpl> _Groups;
 		// ignored, but required for Serialization
         private bool Groups_was_eagerLoaded = false;
 
@@ -1674,7 +1674,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
             public NavigationEntryProxy()
             {
                 Children = new Collection<Zetbox.App.GUI.NavigationEntryNHibernateImpl.NavigationEntryProxy>();
-                Groups = new Collection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl.NavigationEntry_accessed_by_Group_RelationEntryProxy>();
+                Groups = new Collection<Zetbox.App.GUI.NavigationScreen_accessed_by_Groups_RelationEntryNHibernateImpl.NavigationScreen_accessed_by_Groups_RelationEntryProxy>();
             }
 
             public virtual int ID { get; set; }
@@ -1698,7 +1698,7 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
 
             public virtual Guid ExportGuid { get; set; }
 
-            public virtual ICollection<Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl.NavigationEntry_accessed_by_Group_RelationEntryProxy> Groups { get; set; }
+            public virtual ICollection<Zetbox.App.GUI.NavigationScreen_accessed_by_Groups_RelationEntryNHibernateImpl.NavigationScreen_accessed_by_Groups_RelationEntryProxy> Groups { get; set; }
 
             public virtual Zetbox.App.Base.ModuleNHibernateImpl.ModuleProxy Module { get; set; }
 

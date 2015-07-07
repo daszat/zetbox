@@ -142,7 +142,7 @@ namespace Zetbox.App.Base
             {
                 if (_Member == null)
                 {
-                    _Member = new ASideCollectionWrapper<Zetbox.App.Base.Identity, Zetbox.App.Base.Group, Zetbox.App.Base.Identity_memberOf_Group_RelationEntryEfImpl, EntityCollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryEfImpl>>(
+                    _Member = new ASideCollectionWrapper<Zetbox.App.Base.Identity, Zetbox.App.Base.Group, Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryEfImpl, EntityCollection<Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryEfImpl>>(
                             this,
                             MemberImpl);
                 }
@@ -151,7 +151,7 @@ namespace Zetbox.App.Base
         }
         
         [EdmRelationshipNavigationProperty("Model", "FK_Identities_memberOf_Groups_B", "CollectionEntry")]
-        public EntityCollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryEfImpl> MemberImpl
+        public EntityCollection<Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryEfImpl> MemberImpl
         {
             get
             {
@@ -159,14 +159,14 @@ namespace Zetbox.App.Base
             }
         }
 
-        private EntityCollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryEfImpl> _MemberImplEntityCollection;
-        internal EntityCollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryEfImpl> GetMemberImplCollection()
+        private EntityCollection<Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryEfImpl> _MemberImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryEfImpl> GetMemberImplCollection()
         {
             if (_MemberImplEntityCollection == null)
             {
                 _MemberImplEntityCollection
                     = ((IEntityWithRelationships)(this)).RelationshipManager
-                        .GetRelatedCollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryEfImpl>(
+                        .GetRelatedCollection<Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryEfImpl>(
                             "Model.FK_Identities_memberOf_Groups_B",
                             "CollectionEntry");
                 // the EntityCollection has to be loaded before attaching the AssociationChanged event
@@ -181,7 +181,7 @@ namespace Zetbox.App.Base
             }
             return _MemberImplEntityCollection;
         }
-        private ASideCollectionWrapper<Zetbox.App.Base.Identity, Zetbox.App.Base.Group, Zetbox.App.Base.Identity_memberOf_Group_RelationEntryEfImpl, EntityCollection<Zetbox.App.Base.Identity_memberOf_Group_RelationEntryEfImpl>> _Member;
+        private ASideCollectionWrapper<Zetbox.App.Base.Identity, Zetbox.App.Base.Group, Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryEfImpl, EntityCollection<Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryEfImpl>> _Member;
 
         public Zetbox.API.Async.ZbTask TriggerFetchMemberAsync()
         {

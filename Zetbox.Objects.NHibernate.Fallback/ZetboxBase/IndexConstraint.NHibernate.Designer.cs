@@ -139,12 +139,12 @@ namespace Zetbox.App.Base
 				if (_Properties == null)
 				{
 					_Properties 
-						= new NHibernateBSideCollectionWrapper<Zetbox.App.Base.IndexConstraint, Zetbox.App.Base.Property, Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl>(
+						= new NHibernateBSideCollectionWrapper<Zetbox.App.Base.IndexConstraint, Zetbox.App.Base.Property, Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl.IndexConstraint_ensures_unique_on_Property_RelationEntryProxy, Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryNHibernateImpl.UniqueContraints_ensures_unique_on_Properties_RelationEntryProxy, Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.Properties,
-                                p => (Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl.IndexConstraint_ensures_unique_on_Property_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
+                                p => (Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryNHibernateImpl.UniqueContraints_ensures_unique_on_Properties_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
                     _Properties.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Properties", null, null); if(OnProperties_PostSetter != null && IsAttached) OnProperties_PostSetter(this); };
                     if (Properties_was_eagerLoaded) { Properties_was_eagerLoaded = false; }
 				}
@@ -152,7 +152,7 @@ namespace Zetbox.App.Base
 			}
 		}
 
-		private NHibernateBSideCollectionWrapper<Zetbox.App.Base.IndexConstraint, Zetbox.App.Base.Property, Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl> _Properties;
+		private NHibernateBSideCollectionWrapper<Zetbox.App.Base.IndexConstraint, Zetbox.App.Base.Property, Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryNHibernateImpl> _Properties;
 		// ignored, but required for Serialization
         private bool Properties_was_eagerLoaded = false;
 
@@ -474,7 +474,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.IndexConstraint> 
         {
             public IndexConstraintProxy()
             {
-                Properties = new Collection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl.IndexConstraint_ensures_unique_on_Property_RelationEntryProxy>();
+                Properties = new Collection<Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryNHibernateImpl.UniqueContraints_ensures_unique_on_Properties_RelationEntryProxy>();
             }
 
             public override Type ZetboxWrapper { get { return typeof(IndexConstraintNHibernateImpl); } }
@@ -483,7 +483,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.IndexConstraint> 
 
             public virtual bool IsUnique { get; set; }
 
-            public virtual ICollection<Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl.IndexConstraint_ensures_unique_on_Property_RelationEntryProxy> Properties { get; set; }
+            public virtual ICollection<Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryNHibernateImpl.UniqueContraints_ensures_unique_on_Properties_RelationEntryProxy> Properties { get; set; }
 
         }
 

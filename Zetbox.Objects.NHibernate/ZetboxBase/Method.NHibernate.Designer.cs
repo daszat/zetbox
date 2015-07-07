@@ -1316,12 +1316,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnParamet
 				if (_ShowByProperties == null)
 				{
 					_ShowByProperties 
-						= new NHibernateASideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl>(
+						= new NHibernateASideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl.ObjectReferenceProperty_shows_Method_RelationEntryProxy, Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryNHibernateImpl.ObjRefProp_shows_Methods_RelationEntryProxy, Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.ShowByProperties,
-                                p => (Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl.ObjectReferenceProperty_shows_Method_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
+                                p => (Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryNHibernateImpl.ObjRefProp_shows_Methods_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
                     _ShowByProperties.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("ShowByProperties", null, null); if(OnShowByProperties_PostSetter != null && IsAttached) OnShowByProperties_PostSetter(this); };
                     if (ShowByProperties_was_eagerLoaded) { ShowByProperties_was_eagerLoaded = false; }
 				}
@@ -1329,7 +1329,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnParamet
 			}
 		}
 
-		private NHibernateASideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl> _ShowByProperties;
+		private NHibernateASideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryNHibernateImpl> _ShowByProperties;
 		// ignored, but required for Serialization
         private bool ShowByProperties_was_eagerLoaded = false;
 
@@ -2058,7 +2058,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnShowByP
             public MethodProxy()
             {
                 Parameter = new Collection<Zetbox.App.Base.BaseParameterNHibernateImpl.BaseParameterProxy>();
-                ShowByProperties = new Collection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl.ObjectReferenceProperty_shows_Method_RelationEntryProxy>();
+                ShowByProperties = new Collection<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryNHibernateImpl.ObjRefProp_shows_Methods_RelationEntryProxy>();
             }
 
             public virtual int ID { get; set; }
@@ -2100,7 +2100,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnShowByP
 
             public virtual ICollection<Zetbox.App.Base.BaseParameterNHibernateImpl.BaseParameterProxy> Parameter { get; set; }
 
-            public virtual ICollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl.ObjectReferenceProperty_shows_Method_RelationEntryProxy> ShowByProperties { get; set; }
+            public virtual ICollection<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryNHibernateImpl.ObjRefProp_shows_Methods_RelationEntryProxy> ShowByProperties { get; set; }
 
         }
 

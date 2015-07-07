@@ -979,12 +979,12 @@ namespace at.dasz.DocumentManagement
 				if (_Revisions == null)
 				{
 					_Revisions 
-						= new NHibernateBSideListWrapper<at.dasz.DocumentManagement.File, Zetbox.App.Base.Blob, at.dasz.DocumentManagement.File_has_Blob_RelationEntryNHibernateImpl>(
+						= new NHibernateBSideListWrapper<at.dasz.DocumentManagement.File, Zetbox.App.Base.Blob, at.dasz.DocumentManagement.Document_has_Revisions_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<at.dasz.DocumentManagement.File_has_Blob_RelationEntryNHibernateImpl.File_has_Blob_RelationEntryProxy, at.dasz.DocumentManagement.File_has_Blob_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<at.dasz.DocumentManagement.Document_has_Revisions_RelationEntryNHibernateImpl.Document_has_Revisions_RelationEntryProxy, at.dasz.DocumentManagement.Document_has_Revisions_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.Revisions,
-                                p => (at.dasz.DocumentManagement.File_has_Blob_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (at.dasz.DocumentManagement.File_has_Blob_RelationEntryNHibernateImpl.File_has_Blob_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
+                                p => (at.dasz.DocumentManagement.Document_has_Revisions_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (at.dasz.DocumentManagement.Document_has_Revisions_RelationEntryNHibernateImpl.Document_has_Revisions_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
                     _Revisions.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Revisions", null, null); if(OnRevisions_PostSetter != null && IsAttached) OnRevisions_PostSetter(this); };
                     if (Revisions_was_eagerLoaded) { Revisions_was_eagerLoaded = false; }
 				}
@@ -992,7 +992,7 @@ namespace at.dasz.DocumentManagement
 			}
 		}
 
-		private NHibernateBSideListWrapper<at.dasz.DocumentManagement.File, Zetbox.App.Base.Blob, at.dasz.DocumentManagement.File_has_Blob_RelationEntryNHibernateImpl> _Revisions;
+		private NHibernateBSideListWrapper<at.dasz.DocumentManagement.File, Zetbox.App.Base.Blob, at.dasz.DocumentManagement.Document_has_Revisions_RelationEntryNHibernateImpl> _Revisions;
 		// ignored, but required for Serialization
         private bool Revisions_was_eagerLoaded = false;
 
@@ -1712,8 +1712,8 @@ public static event PropertyListChangedHandler<at.dasz.DocumentManagement.File> 
                 ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
             }
-            // should fetch && remember parent for DocumentTestObject_has_File_RelationEntry
-            // should fetch && remember parent for DocumentTestObject_has_File_RelationEntry
+            // should fetch && remember parent for TestObj_has_AnotherFile_RelationEntry
+            // should fetch && remember parent for TestObj_has_AnyFile_RelationEntry
 
             Revisions.Clear();
             Blob = null;
@@ -1730,7 +1730,7 @@ public static event PropertyListChangedHandler<at.dasz.DocumentManagement.File> 
         {
             public FileProxy()
             {
-                Revisions = new Collection<at.dasz.DocumentManagement.File_has_Blob_RelationEntryNHibernateImpl.File_has_Blob_RelationEntryProxy>();
+                Revisions = new Collection<at.dasz.DocumentManagement.Document_has_Revisions_RelationEntryNHibernateImpl.Document_has_Revisions_RelationEntryProxy>();
             }
 
             public virtual int ID { get; set; }
@@ -1762,7 +1762,7 @@ public static event PropertyListChangedHandler<at.dasz.DocumentManagement.File> 
 
             public virtual string Name { get; set; }
 
-            public virtual ICollection<at.dasz.DocumentManagement.File_has_Blob_RelationEntryNHibernateImpl.File_has_Blob_RelationEntryProxy> Revisions { get; set; }
+            public virtual ICollection<at.dasz.DocumentManagement.Document_has_Revisions_RelationEntryNHibernateImpl.Document_has_Revisions_RelationEntryProxy> Revisions { get; set; }
 
             public virtual string Tags { get; set; }
 

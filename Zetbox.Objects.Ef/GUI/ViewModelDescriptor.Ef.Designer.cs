@@ -941,7 +941,7 @@ namespace Zetbox.App.GUI
             {
                 if (_SecondaryControlKinds == null)
                 {
-                    _SecondaryControlKinds = new BSideCollectionWrapper<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ControlKind, Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl>>(
+                    _SecondaryControlKinds = new BSideCollectionWrapper<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ControlKind, Zetbox.App.GUI.Presentable_displayedBy_SecondaryControlKinds_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.Presentable_displayedBy_SecondaryControlKinds_RelationEntryEfImpl>>(
                             this,
                             SecondaryControlKindsImpl);
                 }
@@ -950,7 +950,7 @@ namespace Zetbox.App.GUI
         }
         
         [EdmRelationshipNavigationProperty("Model", "FK_Presentable_displayedBy_SecondaryControlKinds_A", "CollectionEntry")]
-        public EntityCollection<Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl> SecondaryControlKindsImpl
+        public EntityCollection<Zetbox.App.GUI.Presentable_displayedBy_SecondaryControlKinds_RelationEntryEfImpl> SecondaryControlKindsImpl
         {
             get
             {
@@ -958,14 +958,14 @@ namespace Zetbox.App.GUI
             }
         }
 
-        private EntityCollection<Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl> _SecondaryControlKindsImplEntityCollection;
-        internal EntityCollection<Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl> GetSecondaryControlKindsImplCollection()
+        private EntityCollection<Zetbox.App.GUI.Presentable_displayedBy_SecondaryControlKinds_RelationEntryEfImpl> _SecondaryControlKindsImplEntityCollection;
+        internal EntityCollection<Zetbox.App.GUI.Presentable_displayedBy_SecondaryControlKinds_RelationEntryEfImpl> GetSecondaryControlKindsImplCollection()
         {
             if (_SecondaryControlKindsImplEntityCollection == null)
             {
                 _SecondaryControlKindsImplEntityCollection
                     = ((IEntityWithRelationships)(this)).RelationshipManager
-                        .GetRelatedCollection<Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl>(
+                        .GetRelatedCollection<Zetbox.App.GUI.Presentable_displayedBy_SecondaryControlKinds_RelationEntryEfImpl>(
                             "Model.FK_Presentable_displayedBy_SecondaryControlKinds_A",
                             "CollectionEntry");
                 // the EntityCollection has to be loaded before attaching the AssociationChanged event
@@ -980,7 +980,7 @@ namespace Zetbox.App.GUI
             }
             return _SecondaryControlKindsImplEntityCollection;
         }
-        private BSideCollectionWrapper<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ControlKind, Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryEfImpl>> _SecondaryControlKinds;
+        private BSideCollectionWrapper<Zetbox.App.GUI.ViewModelDescriptor, Zetbox.App.GUI.ControlKind, Zetbox.App.GUI.Presentable_displayedBy_SecondaryControlKinds_RelationEntryEfImpl, EntityCollection<Zetbox.App.GUI.Presentable_displayedBy_SecondaryControlKinds_RelationEntryEfImpl>> _SecondaryControlKinds;
 
         public Zetbox.API.Async.ZbTask TriggerFetchSecondaryControlKindsAsync()
         {

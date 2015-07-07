@@ -161,12 +161,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
 				if (_Student == null)
 				{
 					_Student 
-						= new NHibernateASideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl>(
+						= new NHibernateASideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl.TestStudent_füllt_aus_Fragebogen_RelationEntryProxy, Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryNHibernateImpl.Student_füllt_aus_Testbogen_RelationEntryProxy, Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.Student,
-                                p => (Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl.TestStudent_füllt_aus_Fragebogen_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
+                                p => (Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryNHibernateImpl.Student_füllt_aus_Testbogen_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
                     _Student.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Student", null, null); if(OnStudent_PostSetter != null && IsAttached) OnStudent_PostSetter(this); };
                     if (Student_was_eagerLoaded) { Student_was_eagerLoaded = false; }
 				}
@@ -174,7 +174,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
 			}
 		}
 
-		private NHibernateASideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl> _Student;
+		private NHibernateASideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryNHibernateImpl> _Student;
 		// ignored, but required for Serialization
         private bool Student_was_eagerLoaded = false;
 
@@ -389,7 +389,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnStu
             public FragebogenProxy()
             {
                 Antworten = new Collection<Zetbox.App.Test.AntwortNHibernateImpl.AntwortProxy>();
-                Student = new Collection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl.TestStudent_füllt_aus_Fragebogen_RelationEntryProxy>();
+                Student = new Collection<Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryNHibernateImpl.Student_füllt_aus_Testbogen_RelationEntryProxy>();
             }
 
             public virtual int ID { get; set; }
@@ -401,7 +401,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnStu
 
             public virtual int? BogenNummer { get; set; }
 
-            public virtual ICollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl.TestStudent_füllt_aus_Fragebogen_RelationEntryProxy> Student { get; set; }
+            public virtual ICollection<Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryNHibernateImpl.Student_füllt_aus_Testbogen_RelationEntryProxy> Student { get; set; }
 
         }
 

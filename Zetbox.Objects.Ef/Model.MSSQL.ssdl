@@ -223,13 +223,13 @@
     B: ZeroOrMore N_to_M_relations_B as BSide
     Preferred Storage: Separate
     -->
-    <EntitySet Name="N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntry" EntityType="Model.Store.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntry" Schema="test" Table="ASide_connectsTo_BSide" />
+    <EntitySet Name="ASide_connectsTo_BSide_RelationEntry" EntityType="Model.Store.ASide_connectsTo_BSide_RelationEntry" Schema="test" Table="ASide_connectsTo_BSide" />
     <AssociationSet Name="FK_ASide_connectsTo_BSide_A" Association="Model.Store.FK_ASide_connectsTo_BSide_A" >
       <End Role="ASide" EntitySet="N_to_M_relations_A" />
-      <End Role="CollectionEntry" EntitySet="N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntry" />
+      <End Role="CollectionEntry" EntitySet="ASide_connectsTo_BSide_RelationEntry" />
     </AssociationSet>
     <AssociationSet Name="FK_ASide_connectsTo_BSide_B" Association="Model.Store.FK_ASide_connectsTo_BSide_B" >
-      <End Role="CollectionEntry" EntitySet="N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntry" />
+      <End Role="CollectionEntry" EntitySet="ASide_connectsTo_BSide_RelationEntry" />
       <End Role="BSide" EntitySet="N_to_M_relations_B" />
     </AssociationSet>
     
@@ -239,13 +239,13 @@
     B: ZeroOrMore Property as InputProperties
     Preferred Storage: Separate
     -->
-    <EntitySet Name="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" EntityType="Model.Store.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" Schema="base" Table="CalculatedReference_dependsOn_InputProperties" />
+    <EntitySet Name="CalculatedReference_dependsOn_InputProperties_RelationEntry" EntityType="Model.Store.CalculatedReference_dependsOn_InputProperties_RelationEntry" Schema="base" Table="CalculatedReference_dependsOn_InputProperties" />
     <AssociationSet Name="FK_CalculatedReference_dependsOn_InputProperties_A" Association="Model.Store.FK_CalculatedReference_dependsOn_InputProperties_A" >
       <End Role="CalculatedReference" EntitySet="Property" />
-      <End Role="CollectionEntry" EntitySet="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" />
+      <End Role="CollectionEntry" EntitySet="CalculatedReference_dependsOn_InputProperties_RelationEntry" />
     </AssociationSet>
     <AssociationSet Name="FK_CalculatedReference_dependsOn_InputProperties_B" Association="Model.Store.FK_CalculatedReference_dependsOn_InputProperties_B" >
-      <End Role="CollectionEntry" EntitySet="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" />
+      <End Role="CollectionEntry" EntitySet="CalculatedReference_dependsOn_InputProperties_RelationEntry" />
       <End Role="InputProperties" EntitySet="Property" />
     </AssociationSet>
     
@@ -255,13 +255,13 @@
     B: ZeroOrMore Group as GroupReaders
     Preferred Storage: Separate
     -->
-    <EntitySet Name="CalendarBook_shared_r_Group_RelationEntry" EntityType="Model.Store.CalendarBook_shared_r_Group_RelationEntry" Schema="calendar" Table="Calendar_shared_r_GroupReaders" />
+    <EntitySet Name="Calendar_shared_r_GroupReaders_RelationEntry" EntityType="Model.Store.Calendar_shared_r_GroupReaders_RelationEntry" Schema="calendar" Table="Calendar_shared_r_GroupReaders" />
     <AssociationSet Name="FK_Calendar_shared_r_GroupReaders_A" Association="Model.Store.FK_Calendar_shared_r_GroupReaders_A" >
       <End Role="Calendar" EntitySet="CalendarBook" />
-      <End Role="CollectionEntry" EntitySet="CalendarBook_shared_r_Group_RelationEntry" />
+      <End Role="CollectionEntry" EntitySet="Calendar_shared_r_GroupReaders_RelationEntry" />
     </AssociationSet>
     <AssociationSet Name="FK_Calendar_shared_r_GroupReaders_B" Association="Model.Store.FK_Calendar_shared_r_GroupReaders_B" >
-      <End Role="CollectionEntry" EntitySet="CalendarBook_shared_r_Group_RelationEntry" />
+      <End Role="CollectionEntry" EntitySet="Calendar_shared_r_GroupReaders_RelationEntry" />
       <End Role="GroupReaders" EntitySet="Group" />
     </AssociationSet>
     
@@ -271,13 +271,13 @@
     B: ZeroOrMore Identity as Readers
     Preferred Storage: Separate
     -->
-    <EntitySet Name="CalendarBook_shared_r_Identity_RelationEntry" EntityType="Model.Store.CalendarBook_shared_r_Identity_RelationEntry" Schema="calendar" Table="Calendar_shared_r_Readers" />
+    <EntitySet Name="Calendar_shared_r_Readers_RelationEntry" EntityType="Model.Store.Calendar_shared_r_Readers_RelationEntry" Schema="calendar" Table="Calendar_shared_r_Readers" />
     <AssociationSet Name="FK_Calendar_shared_r_Readers_A" Association="Model.Store.FK_Calendar_shared_r_Readers_A" >
       <End Role="Calendar" EntitySet="CalendarBook" />
-      <End Role="CollectionEntry" EntitySet="CalendarBook_shared_r_Identity_RelationEntry" />
+      <End Role="CollectionEntry" EntitySet="Calendar_shared_r_Readers_RelationEntry" />
     </AssociationSet>
     <AssociationSet Name="FK_Calendar_shared_r_Readers_B" Association="Model.Store.FK_Calendar_shared_r_Readers_B" >
-      <End Role="CollectionEntry" EntitySet="CalendarBook_shared_r_Identity_RelationEntry" />
+      <End Role="CollectionEntry" EntitySet="Calendar_shared_r_Readers_RelationEntry" />
       <End Role="Readers" EntitySet="Identity" />
     </AssociationSet>
     
@@ -287,13 +287,13 @@
     B: ZeroOrMore Group as GroupWriters
     Preferred Storage: Separate
     -->
-    <EntitySet Name="CalendarBook_shared_w_Group_RelationEntry" EntityType="Model.Store.CalendarBook_shared_w_Group_RelationEntry" Schema="calendar" Table="Calendar_shared_w_GroupWriters" />
+    <EntitySet Name="Calendar_shared_w_GroupWriters_RelationEntry" EntityType="Model.Store.Calendar_shared_w_GroupWriters_RelationEntry" Schema="calendar" Table="Calendar_shared_w_GroupWriters" />
     <AssociationSet Name="FK_Calendar_shared_w_GroupWriters_A" Association="Model.Store.FK_Calendar_shared_w_GroupWriters_A" >
       <End Role="Calendar" EntitySet="CalendarBook" />
-      <End Role="CollectionEntry" EntitySet="CalendarBook_shared_w_Group_RelationEntry" />
+      <End Role="CollectionEntry" EntitySet="Calendar_shared_w_GroupWriters_RelationEntry" />
     </AssociationSet>
     <AssociationSet Name="FK_Calendar_shared_w_GroupWriters_B" Association="Model.Store.FK_Calendar_shared_w_GroupWriters_B" >
-      <End Role="CollectionEntry" EntitySet="CalendarBook_shared_w_Group_RelationEntry" />
+      <End Role="CollectionEntry" EntitySet="Calendar_shared_w_GroupWriters_RelationEntry" />
       <End Role="GroupWriters" EntitySet="Group" />
     </AssociationSet>
     
@@ -303,13 +303,13 @@
     B: ZeroOrMore Identity as Writers
     Preferred Storage: Separate
     -->
-    <EntitySet Name="CalendarBook_shared_w_Identity_RelationEntry" EntityType="Model.Store.CalendarBook_shared_w_Identity_RelationEntry" Schema="calendar" Table="Calendar_shared_w_Writers" />
+    <EntitySet Name="Calendar_shared_w_Writers_RelationEntry" EntityType="Model.Store.Calendar_shared_w_Writers_RelationEntry" Schema="calendar" Table="Calendar_shared_w_Writers" />
     <AssociationSet Name="FK_Calendar_shared_w_Writers_A" Association="Model.Store.FK_Calendar_shared_w_Writers_A" >
       <End Role="Calendar" EntitySet="CalendarBook" />
-      <End Role="CollectionEntry" EntitySet="CalendarBook_shared_w_Identity_RelationEntry" />
+      <End Role="CollectionEntry" EntitySet="Calendar_shared_w_Writers_RelationEntry" />
     </AssociationSet>
     <AssociationSet Name="FK_Calendar_shared_w_Writers_B" Association="Model.Store.FK_Calendar_shared_w_Writers_B" >
-      <End Role="CollectionEntry" EntitySet="CalendarBook_shared_w_Identity_RelationEntry" />
+      <End Role="CollectionEntry" EntitySet="Calendar_shared_w_Writers_RelationEntry" />
       <End Role="Writers" EntitySet="Identity" />
     </AssociationSet>
     
@@ -319,13 +319,13 @@
     B: ZeroOrMore Interface as ImplementedInterfaces
     Preferred Storage: Separate
     -->
-    <EntitySet Name="DataType_implements_Interface_RelationEntry" EntityType="Model.Store.DataType_implements_Interface_RelationEntry" Schema="base" Table="DataType_implements_ImplementedInterfaces" />
+    <EntitySet Name="DataType_implements_ImplementedInterfaces_RelationEntry" EntityType="Model.Store.DataType_implements_ImplementedInterfaces_RelationEntry" Schema="base" Table="DataType_implements_ImplementedInterfaces" />
     <AssociationSet Name="FK_DataType_implements_ImplementedInterfaces_A" Association="Model.Store.FK_DataType_implements_ImplementedInterfaces_A" >
       <End Role="DataType" EntitySet="DataType" />
-      <End Role="CollectionEntry" EntitySet="DataType_implements_Interface_RelationEntry" />
+      <End Role="CollectionEntry" EntitySet="DataType_implements_ImplementedInterfaces_RelationEntry" />
     </AssociationSet>
     <AssociationSet Name="FK_DataType_implements_ImplementedInterfaces_B" Association="Model.Store.FK_DataType_implements_ImplementedInterfaces_B" >
-      <End Role="CollectionEntry" EntitySet="DataType_implements_Interface_RelationEntry" />
+      <End Role="CollectionEntry" EntitySet="DataType_implements_ImplementedInterfaces_RelationEntry" />
       <End Role="ImplementedInterfaces" EntitySet="Interface" />
     </AssociationSet>
     
@@ -335,13 +335,13 @@
     B: ZeroOrMore Blob as Revisions
     Preferred Storage: Separate
     -->
-    <EntitySet Name="File_has_Blob_RelationEntry" EntityType="Model.Store.File_has_Blob_RelationEntry" Schema="doc" Table="Document_has_Revisions" />
+    <EntitySet Name="Document_has_Revisions_RelationEntry" EntityType="Model.Store.Document_has_Revisions_RelationEntry" Schema="doc" Table="Document_has_Revisions" />
     <AssociationSet Name="FK_Document_has_Revisions_A" Association="Model.Store.FK_Document_has_Revisions_A" >
       <End Role="Document" EntitySet="File" />
-      <End Role="CollectionEntry" EntitySet="File_has_Blob_RelationEntry" />
+      <End Role="CollectionEntry" EntitySet="Document_has_Revisions_RelationEntry" />
     </AssociationSet>
     <AssociationSet Name="FK_Document_has_Revisions_B" Association="Model.Store.FK_Document_has_Revisions_B" >
-      <End Role="CollectionEntry" EntitySet="File_has_Blob_RelationEntry" />
+      <End Role="CollectionEntry" EntitySet="Document_has_Revisions_RelationEntry" />
       <End Role="Revisions" EntitySet="Blob" />
     </AssociationSet>
     
@@ -351,13 +351,13 @@
     B: ZeroOrMore Group as Groups
     Preferred Storage: Separate
     -->
-    <EntitySet Name="Identity_memberOf_Group_RelationEntry" EntityType="Model.Store.Identity_memberOf_Group_RelationEntry" Schema="base" Table="Identities_memberOf_Groups" />
+    <EntitySet Name="Identities_memberOf_Groups_RelationEntry" EntityType="Model.Store.Identities_memberOf_Groups_RelationEntry" Schema="base" Table="Identities_memberOf_Groups" />
     <AssociationSet Name="FK_Identities_memberOf_Groups_A" Association="Model.Store.FK_Identities_memberOf_Groups_A" >
       <End Role="Identities" EntitySet="Identity" />
-      <End Role="CollectionEntry" EntitySet="Identity_memberOf_Group_RelationEntry" />
+      <End Role="CollectionEntry" EntitySet="Identities_memberOf_Groups_RelationEntry" />
     </AssociationSet>
     <AssociationSet Name="FK_Identities_memberOf_Groups_B" Association="Model.Store.FK_Identities_memberOf_Groups_B" >
-      <End Role="CollectionEntry" EntitySet="Identity_memberOf_Group_RelationEntry" />
+      <End Role="CollectionEntry" EntitySet="Identities_memberOf_Groups_RelationEntry" />
       <End Role="Groups" EntitySet="Group" />
     </AssociationSet>
     
@@ -367,13 +367,13 @@
     B: ZeroOrMore TestCustomObject as TCO_ManyList_Role
     Preferred Storage: Separate
     -->
-    <EntitySet Name="Muhblah_has_TestCustomObject_RelationEntry" EntityType="Model.Store.Muhblah_has_TestCustomObject_RelationEntry" Schema="test" Table="MB_Many_Role_has_TCO_ManyList_Role" />
+    <EntitySet Name="MB_Many_Role_has_TCO_ManyList_Role_RelationEntry" EntityType="Model.Store.MB_Many_Role_has_TCO_ManyList_Role_RelationEntry" Schema="test" Table="MB_Many_Role_has_TCO_ManyList_Role" />
     <AssociationSet Name="FK_MB_Many_Role_has_TCO_ManyList_Role_A" Association="Model.Store.FK_MB_Many_Role_has_TCO_ManyList_Role_A" >
       <End Role="MB_Many_Role" EntitySet="Muhblah" />
-      <End Role="CollectionEntry" EntitySet="Muhblah_has_TestCustomObject_RelationEntry" />
+      <End Role="CollectionEntry" EntitySet="MB_Many_Role_has_TCO_ManyList_Role_RelationEntry" />
     </AssociationSet>
     <AssociationSet Name="FK_MB_Many_Role_has_TCO_ManyList_Role_B" Association="Model.Store.FK_MB_Many_Role_has_TCO_ManyList_Role_B" >
-      <End Role="CollectionEntry" EntitySet="Muhblah_has_TestCustomObject_RelationEntry" />
+      <End Role="CollectionEntry" EntitySet="MB_Many_Role_has_TCO_ManyList_Role_RelationEntry" />
       <End Role="TCO_ManyList_Role" EntitySet="TestCustomObject" />
     </AssociationSet>
     
@@ -383,13 +383,13 @@
     B: ZeroOrMore Group as Groups
     Preferred Storage: Separate
     -->
-    <EntitySet Name="NavigationEntry_accessed_by_Group_RelationEntry" EntityType="Model.Store.NavigationEntry_accessed_by_Group_RelationEntry" Schema="gui" Table="NavigationScreen_accessed_by_Groups" />
+    <EntitySet Name="NavigationScreen_accessed_by_Groups_RelationEntry" EntityType="Model.Store.NavigationScreen_accessed_by_Groups_RelationEntry" Schema="gui" Table="NavigationScreen_accessed_by_Groups" />
     <AssociationSet Name="FK_NavigationScreen_accessed_by_Groups_A" Association="Model.Store.FK_NavigationScreen_accessed_by_Groups_A" >
       <End Role="NavigationScreen" EntitySet="NavigationEntry" />
-      <End Role="CollectionEntry" EntitySet="NavigationEntry_accessed_by_Group_RelationEntry" />
+      <End Role="CollectionEntry" EntitySet="NavigationScreen_accessed_by_Groups_RelationEntry" />
     </AssociationSet>
     <AssociationSet Name="FK_NavigationScreen_accessed_by_Groups_B" Association="Model.Store.FK_NavigationScreen_accessed_by_Groups_B" >
-      <End Role="CollectionEntry" EntitySet="NavigationEntry_accessed_by_Group_RelationEntry" />
+      <End Role="CollectionEntry" EntitySet="NavigationScreen_accessed_by_Groups_RelationEntry" />
       <End Role="Groups" EntitySet="Group" />
     </AssociationSet>
     
@@ -399,13 +399,13 @@
     B: ZeroOrMore Method as Methods
     Preferred Storage: Separate
     -->
-    <EntitySet Name="ObjectReferenceProperty_shows_Method_RelationEntry" EntityType="Model.Store.ObjectReferenceProperty_shows_Method_RelationEntry" Schema="gui" Table="ObjRefProp_shows_Methods" />
+    <EntitySet Name="ObjRefProp_shows_Methods_RelationEntry" EntityType="Model.Store.ObjRefProp_shows_Methods_RelationEntry" Schema="gui" Table="ObjRefProp_shows_Methods" />
     <AssociationSet Name="FK_ObjRefProp_shows_Methods_A" Association="Model.Store.FK_ObjRefProp_shows_Methods_A" >
       <End Role="ObjRefProp" EntitySet="Property" />
-      <End Role="CollectionEntry" EntitySet="ObjectReferenceProperty_shows_Method_RelationEntry" />
+      <End Role="CollectionEntry" EntitySet="ObjRefProp_shows_Methods_RelationEntry" />
     </AssociationSet>
     <AssociationSet Name="FK_ObjRefProp_shows_Methods_B" Association="Model.Store.FK_ObjRefProp_shows_Methods_B" >
-      <End Role="CollectionEntry" EntitySet="ObjectReferenceProperty_shows_Method_RelationEntry" />
+      <End Role="CollectionEntry" EntitySet="ObjRefProp_shows_Methods_RelationEntry" />
       <End Role="Methods" EntitySet="Method" />
     </AssociationSet>
     
@@ -415,13 +415,13 @@
     B: ZeroOrMore ControlKind as SecondaryControlKinds
     Preferred Storage: Separate
     -->
-    <EntitySet Name="ViewModelDescriptor_displayedBy_ControlKind_RelationEntry" EntityType="Model.Store.ViewModelDescriptor_displayedBy_ControlKind_RelationEntry" Schema="gui" Table="Presentable_displayedBy_SecondaryControlKinds" />
+    <EntitySet Name="Presentable_displayedBy_SecondaryControlKinds_RelationEntry" EntityType="Model.Store.Presentable_displayedBy_SecondaryControlKinds_RelationEntry" Schema="gui" Table="Presentable_displayedBy_SecondaryControlKinds" />
     <AssociationSet Name="FK_Presentable_displayedBy_SecondaryControlKinds_A" Association="Model.Store.FK_Presentable_displayedBy_SecondaryControlKinds_A" >
       <End Role="Presentable" EntitySet="ViewModelDescriptor" />
-      <End Role="CollectionEntry" EntitySet="ViewModelDescriptor_displayedBy_ControlKind_RelationEntry" />
+      <End Role="CollectionEntry" EntitySet="Presentable_displayedBy_SecondaryControlKinds_RelationEntry" />
     </AssociationSet>
     <AssociationSet Name="FK_Presentable_displayedBy_SecondaryControlKinds_B" Association="Model.Store.FK_Presentable_displayedBy_SecondaryControlKinds_B" >
-      <End Role="CollectionEntry" EntitySet="ViewModelDescriptor_displayedBy_ControlKind_RelationEntry" />
+      <End Role="CollectionEntry" EntitySet="Presentable_displayedBy_SecondaryControlKinds_RelationEntry" />
       <End Role="SecondaryControlKinds" EntitySet="ControlKind" />
     </AssociationSet>
     
@@ -431,13 +431,13 @@
     B: ZeroOrMore Mitarbeiter as Mitarbeiter
     Preferred Storage: Separate
     -->
-    <EntitySet Name="Projekt_haben_Mitarbeiter_RelationEntry" EntityType="Model.Store.Projekt_haben_Mitarbeiter_RelationEntry" Schema="projekte" Table="Projekte_haben_Mitarbeiter" />
+    <EntitySet Name="Projekte_haben_Mitarbeiter_RelationEntry" EntityType="Model.Store.Projekte_haben_Mitarbeiter_RelationEntry" Schema="projekte" Table="Projekte_haben_Mitarbeiter" />
     <AssociationSet Name="FK_Projekte_haben_Mitarbeiter_A" Association="Model.Store.FK_Projekte_haben_Mitarbeiter_A" >
       <End Role="Projekte" EntitySet="Projekt" />
-      <End Role="CollectionEntry" EntitySet="Projekt_haben_Mitarbeiter_RelationEntry" />
+      <End Role="CollectionEntry" EntitySet="Projekte_haben_Mitarbeiter_RelationEntry" />
     </AssociationSet>
     <AssociationSet Name="FK_Projekte_haben_Mitarbeiter_B" Association="Model.Store.FK_Projekte_haben_Mitarbeiter_B" >
-      <End Role="CollectionEntry" EntitySet="Projekt_haben_Mitarbeiter_RelationEntry" />
+      <End Role="CollectionEntry" EntitySet="Projekte_haben_Mitarbeiter_RelationEntry" />
       <End Role="Mitarbeiter" EntitySet="Mitarbeiter" />
     </AssociationSet>
     
@@ -447,13 +447,13 @@
     B: ZeroOrMore Relation as Relations
     Preferred Storage: Separate
     -->
-    <EntitySet Name="RoleMembership_resolves_Relation_RelationEntry" EntityType="Model.Store.RoleMembership_resolves_Relation_RelationEntry" Schema="base" Table="RoleMembership_resolves_Relations" />
+    <EntitySet Name="RoleMembership_resolves_Relations_RelationEntry" EntityType="Model.Store.RoleMembership_resolves_Relations_RelationEntry" Schema="base" Table="RoleMembership_resolves_Relations" />
     <AssociationSet Name="FK_RoleMembership_resolves_Relations_A" Association="Model.Store.FK_RoleMembership_resolves_Relations_A" >
       <End Role="RoleMembership" EntitySet="RoleMembership" />
-      <End Role="CollectionEntry" EntitySet="RoleMembership_resolves_Relation_RelationEntry" />
+      <End Role="CollectionEntry" EntitySet="RoleMembership_resolves_Relations_RelationEntry" />
     </AssociationSet>
     <AssociationSet Name="FK_RoleMembership_resolves_Relations_B" Association="Model.Store.FK_RoleMembership_resolves_Relations_B" >
-      <End Role="CollectionEntry" EntitySet="RoleMembership_resolves_Relation_RelationEntry" />
+      <End Role="CollectionEntry" EntitySet="RoleMembership_resolves_Relations_RelationEntry" />
       <End Role="Relations" EntitySet="Relation" />
     </AssociationSet>
     
@@ -479,13 +479,13 @@
     B: ZeroOrMore Fragebogen as Testbogen
     Preferred Storage: Separate
     -->
-    <EntitySet Name="TestStudent_füllt_aus_Fragebogen_RelationEntry" EntityType="Model.Store.TestStudent_füllt_aus_Fragebogen_RelationEntry" Schema="test" Table="Student_füllt_aus_Testbogen" />
+    <EntitySet Name="Student_füllt_aus_Testbogen_RelationEntry" EntityType="Model.Store.Student_füllt_aus_Testbogen_RelationEntry" Schema="test" Table="Student_füllt_aus_Testbogen" />
     <AssociationSet Name="FK_Student_füllt_aus_Testbogen_A" Association="Model.Store.FK_Student_füllt_aus_Testbogen_A" >
       <End Role="Student" EntitySet="TestStudent" />
-      <End Role="CollectionEntry" EntitySet="TestStudent_füllt_aus_Fragebogen_RelationEntry" />
+      <End Role="CollectionEntry" EntitySet="Student_füllt_aus_Testbogen_RelationEntry" />
     </AssociationSet>
     <AssociationSet Name="FK_Student_füllt_aus_Testbogen_B" Association="Model.Store.FK_Student_füllt_aus_Testbogen_B" >
-      <End Role="CollectionEntry" EntitySet="TestStudent_füllt_aus_Fragebogen_RelationEntry" />
+      <End Role="CollectionEntry" EntitySet="Student_füllt_aus_Testbogen_RelationEntry" />
       <End Role="Testbogen" EntitySet="Fragebogen" />
     </AssociationSet>
     
@@ -495,13 +495,13 @@
     B: ZeroOrMore Property as Properties
     Preferred Storage: Separate
     -->
-    <EntitySet Name="IndexConstraint_ensures_unique_on_Property_RelationEntry" EntityType="Model.Store.IndexConstraint_ensures_unique_on_Property_RelationEntry" Schema="base" Table="UniqueContraints_ensures_unique_on_Properties" />
+    <EntitySet Name="UniqueContraints_ensures_unique_on_Properties_RelationEntry" EntityType="Model.Store.UniqueContraints_ensures_unique_on_Properties_RelationEntry" Schema="base" Table="UniqueContraints_ensures_unique_on_Properties" />
     <AssociationSet Name="FK_UniqueContraints_ensures_unique_on_Properties_A" Association="Model.Store.FK_UniqueContraints_ensures_unique_on_Properties_A" >
       <End Role="UniqueContraints" EntitySet="IndexConstraint" />
-      <End Role="CollectionEntry" EntitySet="IndexConstraint_ensures_unique_on_Property_RelationEntry" />
+      <End Role="CollectionEntry" EntitySet="UniqueContraints_ensures_unique_on_Properties_RelationEntry" />
     </AssociationSet>
     <AssociationSet Name="FK_UniqueContraints_ensures_unique_on_Properties_B" Association="Model.Store.FK_UniqueContraints_ensures_unique_on_Properties_B" >
-      <End Role="CollectionEntry" EntitySet="IndexConstraint_ensures_unique_on_Property_RelationEntry" />
+      <End Role="CollectionEntry" EntitySet="UniqueContraints_ensures_unique_on_Properties_RelationEntry" />
       <End Role="Properties" EntitySet="Property" />
     </AssociationSet>
     
@@ -2781,7 +2781,7 @@
 
   <!-- EntityTypes for all object-object CollectionEntrys with their associations -->
 	
-  <EntityType Name="N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntry">
+  <EntityType Name="ASide_connectsTo_BSide_RelationEntry">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -2793,7 +2793,7 @@
   <!-- A to CollectionEntry -->
   <Association Name="FK_ASide_connectsTo_BSide_A">
     <End Role="ASide" Type="Model.Store.N_to_M_relations_A" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntry" Multiplicity="*" />
+    <End Role="CollectionEntry" Type="Model.Store.ASide_connectsTo_BSide_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ASide">
         <PropertyRef Name="ID" />
@@ -2807,7 +2807,7 @@
   <!-- B to CollectionEntry -->
   <Association Name="FK_ASide_connectsTo_BSide_B">
     <End Role="BSide" Type="Model.Store.N_to_M_relations_B" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntry" Multiplicity="*" />
+    <End Role="CollectionEntry" Type="Model.Store.ASide_connectsTo_BSide_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="BSide">
         <PropertyRef Name="ID" />
@@ -2819,7 +2819,7 @@
   </Association>
 
 	
-  <EntityType Name="CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry">
+  <EntityType Name="CalculatedReference_dependsOn_InputProperties_RelationEntry">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -2832,7 +2832,7 @@
   <!-- A to CollectionEntry -->
   <Association Name="FK_CalculatedReference_dependsOn_InputProperties_A">
     <End Role="CalculatedReference" Type="Model.Store.Property" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" Multiplicity="*" />
+    <End Role="CollectionEntry" Type="Model.Store.CalculatedReference_dependsOn_InputProperties_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CalculatedReference">
         <PropertyRef Name="ID" />
@@ -2846,7 +2846,7 @@
   <!-- B to CollectionEntry -->
   <Association Name="FK_CalculatedReference_dependsOn_InputProperties_B">
     <End Role="InputProperties" Type="Model.Store.Property" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry" Multiplicity="*" />
+    <End Role="CollectionEntry" Type="Model.Store.CalculatedReference_dependsOn_InputProperties_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="InputProperties">
         <PropertyRef Name="ID" />
@@ -2858,7 +2858,7 @@
   </Association>
 
 	
-  <EntityType Name="CalendarBook_shared_r_Group_RelationEntry">
+  <EntityType Name="Calendar_shared_r_GroupReaders_RelationEntry">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -2871,7 +2871,7 @@
   <!-- A to CollectionEntry -->
   <Association Name="FK_Calendar_shared_r_GroupReaders_A">
     <End Role="Calendar" Type="Model.Store.CalendarBook" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.CalendarBook_shared_r_Group_RelationEntry" Multiplicity="*" />
+    <End Role="CollectionEntry" Type="Model.Store.Calendar_shared_r_GroupReaders_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Calendar">
         <PropertyRef Name="ID" />
@@ -2885,7 +2885,7 @@
   <!-- B to CollectionEntry -->
   <Association Name="FK_Calendar_shared_r_GroupReaders_B">
     <End Role="GroupReaders" Type="Model.Store.Group" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.CalendarBook_shared_r_Group_RelationEntry" Multiplicity="*" />
+    <End Role="CollectionEntry" Type="Model.Store.Calendar_shared_r_GroupReaders_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="GroupReaders">
         <PropertyRef Name="ID" />
@@ -2897,7 +2897,7 @@
   </Association>
 
 	
-  <EntityType Name="CalendarBook_shared_r_Identity_RelationEntry">
+  <EntityType Name="Calendar_shared_r_Readers_RelationEntry">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -2909,7 +2909,7 @@
   <!-- A to CollectionEntry -->
   <Association Name="FK_Calendar_shared_r_Readers_A">
     <End Role="Calendar" Type="Model.Store.CalendarBook" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.CalendarBook_shared_r_Identity_RelationEntry" Multiplicity="*" />
+    <End Role="CollectionEntry" Type="Model.Store.Calendar_shared_r_Readers_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Calendar">
         <PropertyRef Name="ID" />
@@ -2923,7 +2923,7 @@
   <!-- B to CollectionEntry -->
   <Association Name="FK_Calendar_shared_r_Readers_B">
     <End Role="Readers" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.CalendarBook_shared_r_Identity_RelationEntry" Multiplicity="*" />
+    <End Role="CollectionEntry" Type="Model.Store.Calendar_shared_r_Readers_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Readers">
         <PropertyRef Name="ID" />
@@ -2935,7 +2935,7 @@
   </Association>
 
 	
-  <EntityType Name="CalendarBook_shared_w_Group_RelationEntry">
+  <EntityType Name="Calendar_shared_w_GroupWriters_RelationEntry">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -2948,7 +2948,7 @@
   <!-- A to CollectionEntry -->
   <Association Name="FK_Calendar_shared_w_GroupWriters_A">
     <End Role="Calendar" Type="Model.Store.CalendarBook" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.CalendarBook_shared_w_Group_RelationEntry" Multiplicity="*" />
+    <End Role="CollectionEntry" Type="Model.Store.Calendar_shared_w_GroupWriters_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Calendar">
         <PropertyRef Name="ID" />
@@ -2962,7 +2962,7 @@
   <!-- B to CollectionEntry -->
   <Association Name="FK_Calendar_shared_w_GroupWriters_B">
     <End Role="GroupWriters" Type="Model.Store.Group" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.CalendarBook_shared_w_Group_RelationEntry" Multiplicity="*" />
+    <End Role="CollectionEntry" Type="Model.Store.Calendar_shared_w_GroupWriters_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="GroupWriters">
         <PropertyRef Name="ID" />
@@ -2974,7 +2974,7 @@
   </Association>
 
 	
-  <EntityType Name="CalendarBook_shared_w_Identity_RelationEntry">
+  <EntityType Name="Calendar_shared_w_Writers_RelationEntry">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -2986,7 +2986,7 @@
   <!-- A to CollectionEntry -->
   <Association Name="FK_Calendar_shared_w_Writers_A">
     <End Role="Calendar" Type="Model.Store.CalendarBook" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.CalendarBook_shared_w_Identity_RelationEntry" Multiplicity="*" />
+    <End Role="CollectionEntry" Type="Model.Store.Calendar_shared_w_Writers_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Calendar">
         <PropertyRef Name="ID" />
@@ -3000,7 +3000,7 @@
   <!-- B to CollectionEntry -->
   <Association Name="FK_Calendar_shared_w_Writers_B">
     <End Role="Writers" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.CalendarBook_shared_w_Identity_RelationEntry" Multiplicity="*" />
+    <End Role="CollectionEntry" Type="Model.Store.Calendar_shared_w_Writers_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Writers">
         <PropertyRef Name="ID" />
@@ -3012,7 +3012,7 @@
   </Association>
 
 	
-  <EntityType Name="DataType_implements_Interface_RelationEntry">
+  <EntityType Name="DataType_implements_ImplementedInterfaces_RelationEntry">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -3025,7 +3025,7 @@
   <!-- A to CollectionEntry -->
   <Association Name="FK_DataType_implements_ImplementedInterfaces_A">
     <End Role="DataType" Type="Model.Store.DataType" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.DataType_implements_Interface_RelationEntry" Multiplicity="*" />
+    <End Role="CollectionEntry" Type="Model.Store.DataType_implements_ImplementedInterfaces_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="DataType">
         <PropertyRef Name="ID" />
@@ -3039,7 +3039,7 @@
   <!-- B to CollectionEntry -->
   <Association Name="FK_DataType_implements_ImplementedInterfaces_B">
     <End Role="ImplementedInterfaces" Type="Model.Store.Interface" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.DataType_implements_Interface_RelationEntry" Multiplicity="*" />
+    <End Role="CollectionEntry" Type="Model.Store.DataType_implements_ImplementedInterfaces_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ImplementedInterfaces">
         <PropertyRef Name="ID" />
@@ -3051,7 +3051,7 @@
   </Association>
 
 	
-  <EntityType Name="File_has_Blob_RelationEntry">
+  <EntityType Name="Document_has_Revisions_RelationEntry">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -3066,7 +3066,7 @@
   <!-- A to CollectionEntry -->
   <Association Name="FK_Document_has_Revisions_A">
     <End Role="Document" Type="Model.Store.File" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.File_has_Blob_RelationEntry" Multiplicity="*" />
+    <End Role="CollectionEntry" Type="Model.Store.Document_has_Revisions_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Document">
         <PropertyRef Name="ID" />
@@ -3080,7 +3080,7 @@
   <!-- B to CollectionEntry -->
   <Association Name="FK_Document_has_Revisions_B">
     <End Role="Revisions" Type="Model.Store.Blob" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.File_has_Blob_RelationEntry" Multiplicity="*" />
+    <End Role="CollectionEntry" Type="Model.Store.Document_has_Revisions_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Revisions">
         <PropertyRef Name="ID" />
@@ -3092,7 +3092,7 @@
   </Association>
 
 	
-  <EntityType Name="Identity_memberOf_Group_RelationEntry">
+  <EntityType Name="Identities_memberOf_Groups_RelationEntry">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -3104,7 +3104,7 @@
   <!-- A to CollectionEntry -->
   <Association Name="FK_Identities_memberOf_Groups_A">
     <End Role="Identities" Type="Model.Store.Identity" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.Identity_memberOf_Group_RelationEntry" Multiplicity="*" />
+    <End Role="CollectionEntry" Type="Model.Store.Identities_memberOf_Groups_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Identities">
         <PropertyRef Name="ID" />
@@ -3118,7 +3118,7 @@
   <!-- B to CollectionEntry -->
   <Association Name="FK_Identities_memberOf_Groups_B">
     <End Role="Groups" Type="Model.Store.Group" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.Identity_memberOf_Group_RelationEntry" Multiplicity="*" />
+    <End Role="CollectionEntry" Type="Model.Store.Identities_memberOf_Groups_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Groups">
         <PropertyRef Name="ID" />
@@ -3130,7 +3130,7 @@
   </Association>
 
 	
-  <EntityType Name="Muhblah_has_TestCustomObject_RelationEntry">
+  <EntityType Name="MB_Many_Role_has_TCO_ManyList_Role_RelationEntry">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -3142,7 +3142,7 @@
   <!-- A to CollectionEntry -->
   <Association Name="FK_MB_Many_Role_has_TCO_ManyList_Role_A">
     <End Role="MB_Many_Role" Type="Model.Store.Muhblah" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.Muhblah_has_TestCustomObject_RelationEntry" Multiplicity="*" />
+    <End Role="CollectionEntry" Type="Model.Store.MB_Many_Role_has_TCO_ManyList_Role_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="MB_Many_Role">
         <PropertyRef Name="ID" />
@@ -3156,7 +3156,7 @@
   <!-- B to CollectionEntry -->
   <Association Name="FK_MB_Many_Role_has_TCO_ManyList_Role_B">
     <End Role="TCO_ManyList_Role" Type="Model.Store.TestCustomObject" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.Muhblah_has_TestCustomObject_RelationEntry" Multiplicity="*" />
+    <End Role="CollectionEntry" Type="Model.Store.MB_Many_Role_has_TCO_ManyList_Role_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="TCO_ManyList_Role">
         <PropertyRef Name="ID" />
@@ -3168,7 +3168,7 @@
   </Association>
 
 	
-  <EntityType Name="NavigationEntry_accessed_by_Group_RelationEntry">
+  <EntityType Name="NavigationScreen_accessed_by_Groups_RelationEntry">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -3181,7 +3181,7 @@
   <!-- A to CollectionEntry -->
   <Association Name="FK_NavigationScreen_accessed_by_Groups_A">
     <End Role="NavigationScreen" Type="Model.Store.NavigationEntry" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.NavigationEntry_accessed_by_Group_RelationEntry" Multiplicity="*" />
+    <End Role="CollectionEntry" Type="Model.Store.NavigationScreen_accessed_by_Groups_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="NavigationScreen">
         <PropertyRef Name="ID" />
@@ -3195,7 +3195,7 @@
   <!-- B to CollectionEntry -->
   <Association Name="FK_NavigationScreen_accessed_by_Groups_B">
     <End Role="Groups" Type="Model.Store.Group" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.NavigationEntry_accessed_by_Group_RelationEntry" Multiplicity="*" />
+    <End Role="CollectionEntry" Type="Model.Store.NavigationScreen_accessed_by_Groups_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Groups">
         <PropertyRef Name="ID" />
@@ -3207,7 +3207,7 @@
   </Association>
 
 	
-  <EntityType Name="ObjectReferenceProperty_shows_Method_RelationEntry">
+  <EntityType Name="ObjRefProp_shows_Methods_RelationEntry">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -3220,7 +3220,7 @@
   <!-- A to CollectionEntry -->
   <Association Name="FK_ObjRefProp_shows_Methods_A">
     <End Role="ObjRefProp" Type="Model.Store.Property" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.ObjectReferenceProperty_shows_Method_RelationEntry" Multiplicity="*" />
+    <End Role="CollectionEntry" Type="Model.Store.ObjRefProp_shows_Methods_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ObjRefProp">
         <PropertyRef Name="ID" />
@@ -3234,7 +3234,7 @@
   <!-- B to CollectionEntry -->
   <Association Name="FK_ObjRefProp_shows_Methods_B">
     <End Role="Methods" Type="Model.Store.Method" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.ObjectReferenceProperty_shows_Method_RelationEntry" Multiplicity="*" />
+    <End Role="CollectionEntry" Type="Model.Store.ObjRefProp_shows_Methods_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Methods">
         <PropertyRef Name="ID" />
@@ -3246,7 +3246,7 @@
   </Association>
 
 	
-  <EntityType Name="ViewModelDescriptor_displayedBy_ControlKind_RelationEntry">
+  <EntityType Name="Presentable_displayedBy_SecondaryControlKinds_RelationEntry">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -3259,7 +3259,7 @@
   <!-- A to CollectionEntry -->
   <Association Name="FK_Presentable_displayedBy_SecondaryControlKinds_A">
     <End Role="Presentable" Type="Model.Store.ViewModelDescriptor" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.ViewModelDescriptor_displayedBy_ControlKind_RelationEntry" Multiplicity="*" />
+    <End Role="CollectionEntry" Type="Model.Store.Presentable_displayedBy_SecondaryControlKinds_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Presentable">
         <PropertyRef Name="ID" />
@@ -3273,7 +3273,7 @@
   <!-- B to CollectionEntry -->
   <Association Name="FK_Presentable_displayedBy_SecondaryControlKinds_B">
     <End Role="SecondaryControlKinds" Type="Model.Store.ControlKind" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.ViewModelDescriptor_displayedBy_ControlKind_RelationEntry" Multiplicity="*" />
+    <End Role="CollectionEntry" Type="Model.Store.Presentable_displayedBy_SecondaryControlKinds_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="SecondaryControlKinds">
         <PropertyRef Name="ID" />
@@ -3285,7 +3285,7 @@
   </Association>
 
 	
-  <EntityType Name="Projekt_haben_Mitarbeiter_RelationEntry">
+  <EntityType Name="Projekte_haben_Mitarbeiter_RelationEntry">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -3300,7 +3300,7 @@
   <!-- A to CollectionEntry -->
   <Association Name="FK_Projekte_haben_Mitarbeiter_A">
     <End Role="Projekte" Type="Model.Store.Projekt" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.Projekt_haben_Mitarbeiter_RelationEntry" Multiplicity="*" />
+    <End Role="CollectionEntry" Type="Model.Store.Projekte_haben_Mitarbeiter_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Projekte">
         <PropertyRef Name="ID" />
@@ -3314,7 +3314,7 @@
   <!-- B to CollectionEntry -->
   <Association Name="FK_Projekte_haben_Mitarbeiter_B">
     <End Role="Mitarbeiter" Type="Model.Store.Mitarbeiter" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.Projekt_haben_Mitarbeiter_RelationEntry" Multiplicity="*" />
+    <End Role="CollectionEntry" Type="Model.Store.Projekte_haben_Mitarbeiter_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Mitarbeiter">
         <PropertyRef Name="ID" />
@@ -3326,7 +3326,7 @@
   </Association>
 
 	
-  <EntityType Name="RoleMembership_resolves_Relation_RelationEntry">
+  <EntityType Name="RoleMembership_resolves_Relations_RelationEntry">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -3341,7 +3341,7 @@
   <!-- A to CollectionEntry -->
   <Association Name="FK_RoleMembership_resolves_Relations_A">
     <End Role="RoleMembership" Type="Model.Store.RoleMembership" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.RoleMembership_resolves_Relation_RelationEntry" Multiplicity="*" />
+    <End Role="CollectionEntry" Type="Model.Store.RoleMembership_resolves_Relations_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="RoleMembership">
         <PropertyRef Name="ID" />
@@ -3355,7 +3355,7 @@
   <!-- B to CollectionEntry -->
   <Association Name="FK_RoleMembership_resolves_Relations_B">
     <End Role="Relations" Type="Model.Store.Relation" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.RoleMembership_resolves_Relation_RelationEntry" Multiplicity="*" />
+    <End Role="CollectionEntry" Type="Model.Store.RoleMembership_resolves_Relations_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Relations">
         <PropertyRef Name="ID" />
@@ -3408,7 +3408,7 @@
   </Association>
 
 	
-  <EntityType Name="TestStudent_füllt_aus_Fragebogen_RelationEntry">
+  <EntityType Name="Student_füllt_aus_Testbogen_RelationEntry">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -3420,7 +3420,7 @@
   <!-- A to CollectionEntry -->
   <Association Name="FK_Student_füllt_aus_Testbogen_A">
     <End Role="Student" Type="Model.Store.TestStudent" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.TestStudent_füllt_aus_Fragebogen_RelationEntry" Multiplicity="*" />
+    <End Role="CollectionEntry" Type="Model.Store.Student_füllt_aus_Testbogen_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Student">
         <PropertyRef Name="ID" />
@@ -3434,7 +3434,7 @@
   <!-- B to CollectionEntry -->
   <Association Name="FK_Student_füllt_aus_Testbogen_B">
     <End Role="Testbogen" Type="Model.Store.Fragebogen" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.TestStudent_füllt_aus_Fragebogen_RelationEntry" Multiplicity="*" />
+    <End Role="CollectionEntry" Type="Model.Store.Student_füllt_aus_Testbogen_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Testbogen">
         <PropertyRef Name="ID" />
@@ -3446,7 +3446,7 @@
   </Association>
 
 	
-  <EntityType Name="IndexConstraint_ensures_unique_on_Property_RelationEntry">
+  <EntityType Name="UniqueContraints_ensures_unique_on_Properties_RelationEntry">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
@@ -3459,7 +3459,7 @@
   <!-- A to CollectionEntry -->
   <Association Name="FK_UniqueContraints_ensures_unique_on_Properties_A">
     <End Role="UniqueContraints" Type="Model.Store.IndexConstraint" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.IndexConstraint_ensures_unique_on_Property_RelationEntry" Multiplicity="*" />
+    <End Role="CollectionEntry" Type="Model.Store.UniqueContraints_ensures_unique_on_Properties_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="UniqueContraints">
         <PropertyRef Name="ID" />
@@ -3473,7 +3473,7 @@
   <!-- B to CollectionEntry -->
   <Association Name="FK_UniqueContraints_ensures_unique_on_Properties_B">
     <End Role="Properties" Type="Model.Store.Property" Multiplicity="0..1" />
-    <End Role="CollectionEntry" Type="Model.Store.IndexConstraint_ensures_unique_on_Property_RelationEntry" Multiplicity="*" />
+    <End Role="CollectionEntry" Type="Model.Store.UniqueContraints_ensures_unique_on_Properties_RelationEntry" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Properties">
         <PropertyRef Name="ID" />

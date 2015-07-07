@@ -862,12 +862,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
 				if (_Mitarbeiter == null)
 				{
 					_Mitarbeiter 
-						= new NHibernateBSideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl>(
+						= new NHibernateBSideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl.Projekt_haben_Mitarbeiter_RelationEntryProxy, Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryNHibernateImpl.Projekte_haben_Mitarbeiter_RelationEntryProxy, Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.Mitarbeiter,
-                                p => (Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl.Projekt_haben_Mitarbeiter_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
+                                p => (Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryNHibernateImpl.Projekte_haben_Mitarbeiter_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
                     _Mitarbeiter.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Mitarbeiter", null, null); if(OnMitarbeiter_PostSetter != null && IsAttached) OnMitarbeiter_PostSetter(this); };
                     if (Mitarbeiter_was_eagerLoaded) { Mitarbeiter_was_eagerLoaded = false; }
 				}
@@ -875,7 +875,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
 			}
 		}
 
-		private NHibernateBSideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl> _Mitarbeiter;
+		private NHibernateBSideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryNHibernateImpl> _Mitarbeiter;
 		// ignored, but required for Serialization
         private bool Mitarbeiter_was_eagerLoaded = false;
 
@@ -1607,7 +1607,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
             {
                 AuditJournal = new Collection<Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl.Projekt_AuditJournal_CollectionEntryProxy>();
                 Auftraege = new Collection<Zetbox.App.Projekte.AuftragNHibernateImpl.AuftragProxy>();
-                Mitarbeiter = new Collection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl.Projekt_haben_Mitarbeiter_RelationEntryProxy>();
+                Mitarbeiter = new Collection<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryNHibernateImpl.Projekte_haben_Mitarbeiter_RelationEntryProxy>();
                 Tasks = new Collection<Zetbox.App.Projekte.TaskNHibernateImpl.TaskProxy>();
             }
 
@@ -1642,7 +1642,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnTa
 
             public virtual string Kundenname { get; set; }
 
-            public virtual ICollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl.Projekt_haben_Mitarbeiter_RelationEntryProxy> Mitarbeiter { get; set; }
+            public virtual ICollection<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryNHibernateImpl.Projekte_haben_Mitarbeiter_RelationEntryProxy> Mitarbeiter { get; set; }
 
             public virtual string Name { get; set; }
 

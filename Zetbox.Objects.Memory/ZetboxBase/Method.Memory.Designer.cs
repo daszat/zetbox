@@ -1386,13 +1386,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnParamet
         public Zetbox.API.Async.ZbTask TriggerFetchShowByPropertiesAsync()
         {
             if (_triggerFetchShowByPropertiesTask != null) return _triggerFetchShowByPropertiesTask;
-            _triggerFetchShowByPropertiesTask = Context.FetchRelationAsync<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>(new Guid("02b3e9d5-fc2e-4ffe-8867-0977b88437cc"), RelationEndRole.B, this);
+            _triggerFetchShowByPropertiesTask = Context.FetchRelationAsync<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryMemoryImpl>(new Guid("02b3e9d5-fc2e-4ffe-8867-0977b88437cc"), RelationEndRole.B, this);
             _triggerFetchShowByPropertiesTask.OnResult(r =>
             {
                 _ShowByProperties
-                    = new ObservableASideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>>(
+                    = new ObservableASideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryMemoryImpl>>(
                         this,
-                        new RelationshipFilterBSideCollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>(this.Context, this));
+                        new RelationshipFilterBSideCollection<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryMemoryImpl>(this.Context, this));
                         // _ShowByProperties.CollectionChanged is managed by OnShowByPropertiesCollectionChanged() and called from the RelationEntry
             });
             return _triggerFetchShowByPropertiesTask;
@@ -1405,7 +1405,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnParamet
                 OnShowByProperties_PostSetter(this);
         }
 
-        private ObservableASideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryMemoryImpl>> _ShowByProperties;
+        private ObservableASideCollectionWrapper<Zetbox.App.Base.ObjectReferenceProperty, Zetbox.App.Base.Method, Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryMemoryImpl, ICollection<Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryMemoryImpl>> _ShowByProperties;
         // END Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for ShowByProperties
 public static event PropertyListChangedHandler<Zetbox.App.Base.Method> OnShowByProperties_PostSetter;
 
