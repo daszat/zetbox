@@ -399,7 +399,19 @@ namespace Zetbox.App.Packaging
                 case "Zetbox.App.GUI.ViewDescriptor_supports_TypeRef_RelationEntry":
                     return string.Empty;
                 case "Zetbox.App.Base.ObjectClass_implements_Interface_RelationEntry":
-                    return "Zetbox.App.Base.DataType_implements_Interface_RelationEntry";
+                case "Zetbox.App.Base.DataType_implements_Interface_RelationEntry":
+                    return "Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntry";
+                case "Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntry":
+                    return "Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntry";
+                case "Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntry":
+                    return "Zetbox.App.Base.RoleMembership_resolves_Relations_RelationEntry";
+
+                case "Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntry":
+                    return "Zetbox.App.GUI.NavigationScreen_accessed_by_Groups_RelationEntry";
+                case "Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntry":
+                    return "Zetbox.App.GUI.Presentable_displayedBy_SecondaryControlKinds_RelationEntry";
+                case "Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntry":
+                    return "Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntry";
                 default:
                     return ifTypeName;
             }
