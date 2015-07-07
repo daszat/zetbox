@@ -31,8 +31,8 @@ namespace Zetbox.DalProvider.Ef.Tests.N_to_M_relations
         [Test]
         public void should_be_of_proper_type()
         {
-            Assert.That(aSide1.BSide, Is.TypeOf<BSideCollectionWrapper<N_to_M_relations_A, N_to_M_relations_B, N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl, EntityCollection<N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl>>>());
-            Assert.That(bSide1.ASide, Is.TypeOf<ASideCollectionWrapper<N_to_M_relations_A, N_to_M_relations_B, N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl, EntityCollection<N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl>>>());
+            Assert.That(aSide1.BSide, Is.TypeOf<BSideCollectionWrapper<N_to_M_relations_A, N_to_M_relations_B, ASide_connectsTo_BSide_RelationEntryEfImpl, EntityCollection<ASide_connectsTo_BSide_RelationEntryEfImpl>>>());
+            Assert.That(bSide1.ASide, Is.TypeOf<ASideCollectionWrapper<N_to_M_relations_A, N_to_M_relations_B, ASide_connectsTo_BSide_RelationEntryEfImpl, EntityCollection<ASide_connectsTo_BSide_RelationEntryEfImpl>>>());
         }
 
         public class and_reloading : when_initializing

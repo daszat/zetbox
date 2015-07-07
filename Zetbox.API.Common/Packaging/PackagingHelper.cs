@@ -51,7 +51,7 @@ namespace Zetbox.App.Packaging
                 .ToList().OrderBy(i => i.Enumeration.Name).ThenBy(i => i.Name).ThenBy(i => i.ExportGuid));
 
             // export only relation entry ending on a "local" class. Since we do not have proper inter-module dependencies in place, we cannot support pushing interface implementations across modules.
-            AddMetaObjects(result, () => ctx.Internals().GetPersistenceObjectQuery<DataType_implements_Interface_RelationEntry>()
+            AddMetaObjects(result, () => ctx.Internals().GetPersistenceObjectQuery<DataType_implements_ImplementedInterfaces_RelationEntry>()
                 // Workaround for missing Module relation on DataType_implements_Interface_RelationEntry when creating ZetboxBase.xml
                 .Where(i => i.A != null && i.A.Module != null && i.B != null)
                 .Where(i => i.A.Module == module)
@@ -77,7 +77,7 @@ namespace Zetbox.App.Packaging
             // InstanceContstraints and Property Relation entries of UniqueConstraints
             AddMetaObjects(result, () => ctx.GetQuery<InstanceConstraint>().Where(i => i.Constrained.Module.ID == moduleID).ToList().AsQueryable() // local sorting because of GetInterfaceType
                 .ToList().OrderBy(i => i.Constrained.Name).ThenBy(i => ctx.GetInterfaceType(i).Type.Name).ThenBy(i => i.ExportGuid));
-            AddMetaObjects(result, () => ctx.Internals().GetPersistenceObjectQuery<IndexConstraint_ensures_unique_on_Property_RelationEntry>().Where(i => i.A.Constrained.Module.ID == moduleID || i.B.Module.ID == moduleID).ToList().AsQueryable()
+            AddMetaObjects(result, () => ctx.Internals().GetPersistenceObjectQuery<UniqueContraints_ensures_unique_on_Properties_RelationEntry>().Where(i => i.A.Constrained.Module.ID == moduleID || i.B.Module.ID == moduleID).ToList().AsQueryable()
                 .ToList().OrderBy(i => i.A.ExportGuid).ThenBy(i => i.B.ExportGuid));
 
             // TODO: Add Module to DefaultPropertyValue - or should that not be changable by other modules?
@@ -87,7 +87,7 @@ namespace Zetbox.App.Packaging
             // Security
             AddMetaObjects(result, () => ctx.GetQuery<RoleMembership>().Where(i => i.Module.ID == moduleID)
                 .ToList().OrderBy(i => i.ExportGuid));
-            AddMetaObjects(result, () => ctx.Internals().GetPersistenceObjectQuery<RoleMembership_resolves_Relation_RelationEntry>().Where(i => i.A.Module.ID == moduleID)
+            AddMetaObjects(result, () => ctx.Internals().GetPersistenceObjectQuery<RoleMembership_resolves_Relations_RelationEntry>().Where(i => i.A.Module.ID == moduleID)
                 .ToList().AsQueryable().ToList().OrderBy(i => i.A.ExportGuid).ThenBy(i => i.B.ExportGuid));
 
             // Sequences
@@ -132,7 +132,7 @@ namespace Zetbox.App.Packaging
                     .ToList().OrderBy(i => i.Title)
                     .ThenBy(i => i.Parent != null ? i.Parent.Title : String.Empty)
                     .ThenBy(i => i.ExportGuid));
-                AddMetaObjects(result, () => ctx.Internals().GetPersistenceObjectQuery<NavigationEntry_accessed_by_Group_RelationEntry>()
+                AddMetaObjects(result, () => ctx.Internals().GetPersistenceObjectQuery<NavigationScreen_accessed_by_Groups_RelationEntry>()
                     .Where(i => i.A.Module.ID == moduleID)
                     .ToList()
                     .AsQueryable()
@@ -151,7 +151,7 @@ namespace Zetbox.App.Packaging
                     .ToList().AsQueryable() // TODO: remove this workaround for GetInterfaceType()
                     .ToList().OrderBy(i => ctx.GetInterfaceType(i).Type.FullName)
                     .ThenBy(i => i.ExportGuid));
-                AddMetaObjects(result, () => ctx.Internals().GetPersistenceObjectQuery<ViewModelDescriptor_displayedBy_ControlKind_RelationEntry>()
+                AddMetaObjects(result, () => ctx.Internals().GetPersistenceObjectQuery<Presentable_displayedBy_SecondaryControlKinds_RelationEntry>()
                     .Where(i => i.A.Module.ID == moduleID)
                     .ToList().OrderBy(i => i.A.ViewModelTypeRef)
                     .ThenBy(i => i.A.ExportGuid)
@@ -163,7 +163,7 @@ namespace Zetbox.App.Packaging
                     .ThenBy(i => i.ExportGuid));
 
                 // Properties <-> Methods
-                AddMetaObjects(result, () => ctx.Internals().GetPersistenceObjectQuery<ObjectReferenceProperty_shows_Method_RelationEntry>()
+                AddMetaObjects(result, () => ctx.Internals().GetPersistenceObjectQuery<ObjRefProp_shows_Methods_RelationEntry>()
                     .Where(i => i.A.Module.ID == moduleID || i.B.Module.ID == moduleID)
                     .ToList()
                     .OrderBy(i => i.A.Name)

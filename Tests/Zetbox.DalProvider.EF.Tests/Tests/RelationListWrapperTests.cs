@@ -35,9 +35,9 @@ namespace Zetbox.DalProvider.Ef.Tests
     [TestFixture(10)]
     [TestFixture(50)]
     public class RelationListWrapperTests
-        : BasicListTests<BSideListWrapper<Projekt, Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntryEfImpl, EntityCollection<Projekt_haben_Mitarbeiter_RelationEntryEfImpl>>, Mitarbeiter>
+        : BasicListTests<BSideListWrapper<Projekt, Mitarbeiter, Projekte_haben_Mitarbeiter_RelationEntryEfImpl, EntityCollection<Projekte_haben_Mitarbeiter_RelationEntryEfImpl>>, Mitarbeiter>
     {
-        protected EntityCollection<Projekt_haben_Mitarbeiter_RelationEntryEfImpl> wrappedCollection;
+        protected EntityCollection<Projekte_haben_Mitarbeiter_RelationEntryEfImpl> wrappedCollection;
 
         private ProjektEfImpl parent;
 
@@ -56,7 +56,7 @@ namespace Zetbox.DalProvider.Ef.Tests
             return result;
         }
 
-        protected override BSideListWrapper<Projekt, Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntryEfImpl, EntityCollection<Projekt_haben_Mitarbeiter_RelationEntryEfImpl>> CreateCollection(List<Mitarbeiter> items)
+        protected override BSideListWrapper<Projekt, Mitarbeiter, Projekte_haben_Mitarbeiter_RelationEntryEfImpl, EntityCollection<Projekte_haben_Mitarbeiter_RelationEntryEfImpl>> CreateCollection(List<Mitarbeiter> items)
         {
             parent = (ProjektEfImpl)ctx.Create<Projekt>();
             parent.Name = "proj#" + parent.ID;
@@ -65,7 +65,7 @@ namespace Zetbox.DalProvider.Ef.Tests
             {
                 parent.Mitarbeiter.Add(item);
             }
-            return (BSideListWrapper<Projekt, Mitarbeiter, Projekt_haben_Mitarbeiter_RelationEntryEfImpl, EntityCollection<Projekt_haben_Mitarbeiter_RelationEntryEfImpl>>)parent.Mitarbeiter;
+            return (BSideListWrapper<Projekt, Mitarbeiter, Projekte_haben_Mitarbeiter_RelationEntryEfImpl, EntityCollection<Projekte_haben_Mitarbeiter_RelationEntryEfImpl>>)parent.Mitarbeiter;
         }
 
         protected override void AssertInvariants(List<Mitarbeiter> expectedItems)
