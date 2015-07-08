@@ -13,7 +13,7 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace Zetbox.App.Projekte.Client.Projekte.Reporting
+namespace Zetbox.App.Tests.Client.Projekte.Reporting
 {
     using System;
     using System.Collections.Generic;

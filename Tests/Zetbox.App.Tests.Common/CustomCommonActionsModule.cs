@@ -16,20 +16,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Autofac;
+using Zetbox.API;
 
-namespace Zetbox.App.Projekte.Client.DerivedReportTest
+namespace Zetbox.App.Tests.Common
 {
-    public class ProjectReport : Zetbox.App.Projekte.Client.Projekte.Reporting.ProjectReport
+    // not a feature, will be loaded by client/server module
+    public class CustomCommonActionsModule : Module
     {
-        public ProjectReport(Arebis.CodeGeneration.IGenerationHost _host)
-            : base(_host)
+        protected override void Load(ContainerBuilder moduleBuilder)
         {
+            base.Load(moduleBuilder);
 
-        }
+            moduleBuilder.RegisterZetboxImplementors(typeof(CustomCommonActionsModule).Assembly);
 
-        protected override string GetTitle()
-        {
-            return base.GetTitle() + " derived";
+            // Register explicit overrides here
         }
     }
 }

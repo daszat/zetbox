@@ -13,7 +13,7 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace Zetbox.App.Projekte.Client
+namespace Zetbox.App.Tests.Client
 {
     using System;
     using System.Collections.Generic;
@@ -34,10 +34,22 @@ namespace Zetbox.App.Projekte.Client
         {
             base.Load(moduleBuilder);
 
-            moduleBuilder.RegisterModule<Zetbox.App.Projekte.Common.CustomCommonActionsModule>();
+            moduleBuilder.RegisterModule<Zetbox.App.Tests.Common.CustomCommonActionsModule>();
 
             moduleBuilder.RegisterZetboxImplementors(typeof(CustomClientActionsModule).Assembly);
             moduleBuilder.RegisterViewModels(typeof(CustomClientActionsModule).Assembly);
+
+            // Register explicit overrides here
+            moduleBuilder
+                .Register<Zetbox.App.Tests.Client.Projekte.Reporting.ReportingHost>(c => new Zetbox.App.Tests.Client.Projekte.Reporting.ReportingHost(
+                        "Zetbox.App.Tests.Client.DerivedReportTest",
+                        typeof(CustomClientActionsModule).Assembly,
+                        c.Resolve<IFileOpener>(),
+                        c.Resolve<ITempFileService>(),
+                        c.Resolve<IReportingErrorReporter>()
+                    )
+                )
+                .InstancePerDependency();
         }
     }
 }

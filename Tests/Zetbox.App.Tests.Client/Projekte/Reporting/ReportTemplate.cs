@@ -16,31 +16,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Zetbox.API;
-using Zetbox.App.Projekte.Client.Projekte.Reporting;
+using Arebis.CodeGeneration;
+using Zetbox.App.Projekte;
 
-namespace Zetbox.App.Projekte
+namespace Zetbox.App.Tests.Client.Projekte.Reporting
 {
-    /// <summary>
-    /// Client implementation
-    /// </summary>
-    [Implementor]
-    public class ProjektActions
+    public class ReportTemplate : Zetbox.API.Common.Reporting.ReportTemplate
     {
-        private static Func<ReportingHost> _rptFactory;
-        public ProjektActions(Func<ReportingHost> rptFactory)
+        public ReportTemplate(IGenerationHost host)
+            : base(host)
         {
-            _rptFactory = rptFactory;
         }
 
-        [Invocation]
-        public static void GetSummaryReport(Projekt obj, MethodReturnEventArgs<System.Object> e, string title, Zetbox.App.Base.DateTimeRange range)
+        protected virtual string FormatProjectName(Projekt prj)
         {
-            using (var rpt = _rptFactory())
-            {
-                ProjectReport.Call(rpt);
-                rpt.Open("ProjectReport.pdf");
-            }
+            return prj.Name;
         }
     }
 }

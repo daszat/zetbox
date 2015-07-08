@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 
 
-namespace Zetbox.App.Projekte.Client.DerivedReportTest.Common
+namespace Zetbox.App.Tests.Client.Projekte.Reporting.Common
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\zetbox\Zetbox.App.Projekte.Client\DerivedReportTest\Common\DocumentStyles.cst")]
-    public partial class DocumentStyles : Zetbox.App.Projekte.Client.Projekte.Reporting.ReportTemplate
+    [Arebis.CodeGeneration.TemplateInfo(@"P:\zetbox\Tests\Zetbox.App.Tests.Client\Projekte\Reporting\Common\DocumentStyles.cst")]
+    public partial class DocumentStyles : Zetbox.App.Tests.Client.Projekte.Reporting.ReportTemplate
     {
 
 
@@ -25,7 +25,7 @@ namespace Zetbox.App.Projekte.Client.DerivedReportTest.Common
 
         public override void Generate()
         {
-#line 24 "P:\zetbox\Zetbox.App.Projekte.Client\DerivedReportTest\Common\DocumentStyles.cst"
+#line 24 "P:\zetbox\Tests\Zetbox.App.Tests.Client\Projekte\Reporting\Common\DocumentStyles.cst"
 this.WriteObjects("  \\styles {\r\n");
 this.WriteObjects("    Normal {\r\n");
 this.WriteObjects("      Font { Name = \"Verdana\" Size = 10 }\r\n");
@@ -43,7 +43,7 @@ this.WriteObjects("      }\r\n");
 this.WriteObjects("    }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    Title : Normal {\r\n");
-this.WriteObjects("      Font { Size = 16 Bold = true Color = Blue }\r\n");
+this.WriteObjects("      Font { Size = 16 Bold = true }\r\n");
 this.WriteObjects("    }\r\n");
 this.WriteObjects("	\r\n");
 this.WriteObjects("    Heading1 {\r\n");

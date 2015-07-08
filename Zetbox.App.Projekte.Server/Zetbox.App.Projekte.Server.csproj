@@ -83,11 +83,8 @@
     <Compile Include="CustomServerActionsModule.cs" />
     <Compile Include="Gui\TagCacheActions.cs" />
     <Compile Include="Gui\TagCacheService.cs" />
-    <Compile Include="TestModule\MethodTestActions.cs" />
     <Compile Include="ZetboxBase\BaseParameterActions.cs" />
     <Compile Include="ZetboxBase\MethodActions.cs" />
-    <Compile Include="Projekte\TaskActions.cs" />
-    <Compile Include="Projekte\ProjektActions.cs" />
     <Compile Include="SchemaMigration\MigrationProjectActions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="app.config" />

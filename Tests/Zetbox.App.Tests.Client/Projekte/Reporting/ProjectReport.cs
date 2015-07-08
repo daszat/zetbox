@@ -13,31 +13,23 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace Zetbox.App.Projekte.Client
+namespace Zetbox.App.Tests.Client.Projekte.Reporting
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.Linq;
     using System.Text;
-    using Autofac;
-    using Zetbox.API;
-    using Zetbox.API.Common.Reporting;
-    using Zetbox.API.Configuration;
-    using Zetbox.Client;
 
-    // Will be loaded by ClientModule
-    [Description("Zetbox client actions")]
-    public class CustomClientActionsModule : Module
+    public partial class ProjectReport
     {
-        protected override void Load(ContainerBuilder moduleBuilder)
+        protected virtual void PageSetup()
         {
-            base.Load(moduleBuilder);
+            Common.PageSetup.Call(Host, "Portrait");
+        }
 
-            moduleBuilder.RegisterModule<Zetbox.App.Projekte.Common.CustomCommonActionsModule>();
-
-            moduleBuilder.RegisterZetboxImplementors(typeof(CustomClientActionsModule).Assembly);
-            moduleBuilder.RegisterViewModels(typeof(CustomClientActionsModule).Assembly);
+        protected virtual string GetTitle()
+        {
+            return "Hello Project";
         }
     }
 }

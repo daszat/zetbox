@@ -97,16 +97,6 @@
     <Compile Include="Gui\NavigationEntryActions.cs" />
     <Compile Include="Gui\ViewDescriptorActions.cs" />
     <Compile Include="Gui\ViewModelDescriptorActions.cs" />
-    <Compile Include="Projekte\MitarbeiterActions.cs" />
-    <Compile Include="Projekte\KundeActions.cs" />
-    <Compile Include="TestModule\One_to_N_relations_NActions.cs" />
-    <Compile Include="TestModule\One_to_N_relations_OneActions.cs" />
-    <Compile Include="TestModule\TestStudentActions.cs" />
-    <Compile Include="TestModule\MethodTestActions.cs" />
-    <Compile Include="TestModule\RecurrenceRuleTesterActions.cs" />
-    <Compile Include="TestModule\SecurityTestParentActions.cs" />
-    <Compile Include="TestModule\SecurityTestChildActions.cs" />
-    <Compile Include="TestModule\TestObjClassActions.cs" />
     <Compile Include="ZetboxBase\OpenIDActions.cs" />
     <Compile Include="ZetboxBase\BaseParameterActions.cs" />
     <Compile Include="ZetboxBase\AssemblyActions.cs" />
@@ -180,8 +170,6 @@
     <Compile Include="ZetboxBase\ObjectReferencePropertyActions.cs" />
     <Compile Include="ZetboxBase\RelationActions.cs" />
     <Compile Include="ZetboxBase\RelationEndActions.cs" />
-    <Compile Include="Projekte\ProjektActions.cs" />
-    <Compile Include="Projekte\TaskActions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="app.config" />
     <None Include="packages.config" />

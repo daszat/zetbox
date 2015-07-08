@@ -16,8 +16,8 @@
 --%>
 <%@ CodeTemplate Language="C#" 
     Name="ProjectReport"
-    ClassName="Zetbox.App.Projekte.Client.Projekte.Reporting.ProjectReport"
-    Inherits="Zetbox.App.Projekte.Client.Projekte.Reporting.ReportTemplate" %>
+    ClassName="Zetbox.App.Tests.Client.Projekte.Reporting.ProjectReport"
+    Inherits="Zetbox.App.Tests.Client.Projekte.Reporting.ReportTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Collections.Generic" %>
 <%@ Import Namespace="System.Linq" %>

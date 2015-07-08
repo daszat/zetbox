@@ -108,12 +108,6 @@
     <Compile Include="Calendar\CalendarBookActions.cs" />
     <Compile Include="Calendar\EventActions.cs" />
     <Compile Include="CustomClientActionsModule.cs" />
-    <Compile Include="DerivedReportTest\Common\DocumentStyles1.Designer.cs">
-      <DependentUpon>DocumentStyles.cst</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="DerivedReportTest\ProjectReport.cs" />
     <Compile Include="DocumentManagement\FileActions.cs" />
     <Compile Include="Gui\NavigationActionActions.cs" />
     <Compile Include="Gui\NavigationSearchScreenActions.cs" />
@@ -126,6 +120,7 @@
     <Compile Include="Gui\RangeFilterConfigurationActions.cs" />
     <Compile Include="Gui\SinglePropertyFilterConfigurationActions.cs" />
     <Compile Include="Gui\IconActions.cs" />
+    <Compile Include="Helper\PdfReport.cs" />
     <Compile Include="ViewModel\TestModule\EventTestInputViewModel.cs" />
     <Compile Include="ZetboxBase\BoolPropertyActions.cs" />
     <Compile Include="ZetboxBase\CalculatedObjectReferencePropertyActions.cs" />
@@ -142,38 +137,11 @@
     <Compile Include="ZetboxBase\ObjectReferencePropertyActions.cs" />
     <Compile Include="ZetboxBase\StringPropertyActions.cs" />
     <Compile Include="ZetboxBase\CompoundObjectPropertyActions.cs" />
-    <Compile Include="Helper\PdfReport.cs" />
     <Compile Include="ZetboxBase\AssemblyActions.cs" />
     <Compile Include="ZetboxBase\BlobActions.cs" />
     <Compile Include="ZetboxBase\ObjectClassActions.cs" />
     <Compile Include="ZetboxBase\RelationActions.cs" />
-    <Compile Include="Projekte\ProjektActions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Projekte\Reporting\Common\DocumentInfo1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DocumentInfo.cst</DependentUpon>
-    </Compile>
-    <Compile Include="Projekte\Reporting\Common\DocumentStyles1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DocumentStyles.cst</DependentUpon>
-    </Compile>
-    <Compile Include="Projekte\Reporting\Common\PageSetup1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PageSetup.cst</DependentUpon>
-    </Compile>
-    <Compile Include="Projekte\Reporting\ProjectReport.cs">
-      <DependentUpon>ProjectReport.cst</DependentUpon>
-    </Compile>
-    <Compile Include="Projekte\Reporting\ProjectReport1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ProjectReport.cst</DependentUpon>
-    </Compile>
-    <Compile Include="Projekte\Reporting\ReportingHost.cs" />
-    <Compile Include="Projekte\Reporting\ReportTemplate.cs" />
     <Compile Include="ViewModel\Projekte\ReportScreenViewModel.cs" />
     <Compile Include="ViewModel\Projekte\ShowCalendarNavigationActionViewModel.cs" />
     <Compile Include="ViewModel\Projekte\TaskViewModel.cs" />
@@ -183,34 +151,12 @@
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
     <None Include="app.config" />
-    <None Include="DerivedReportTest\Common\DocumentStyles.cst">
-      <Generator>Arebis Template Processor</Generator>
-      <LastGenOutput>DocumentStyles1.Designer.cs</LastGenOutput>
-    </None>
     <None Include="packages.config" />
-    <Compile Include="Helper\RechnungXML.cs" />
-    <Compile Include="Helper\WordHelper.cs" />
     <Compile Include="SchemaMigration\MigrationProjectActions.cs" />
     <Compile Include="SchemaMigration\Report.cs" />
     <Compile Include="SchemaMigration\SourceColumnActions.cs" />
     <Compile Include="SchemaMigration\SourceTableActions.cs" />
     <Compile Include="SchemaMigration\StagingDatabaseActions.cs" />
-    <None Include="Projekte\Reporting\Common\DocumentInfo.cst">
-      <Generator>Arebis Template Processor</Generator>
-      <LastGenOutput>DocumentInfo1.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Projekte\Reporting\Common\DocumentStyles.cst">
-      <Generator>Arebis Template Processor</Generator>
-      <LastGenOutput>DocumentStyles1.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Projekte\Reporting\Common\PageSetup.cst">
-      <Generator>Arebis Template Processor</Generator>
-      <LastGenOutput>PageSetup1.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Projekte\Reporting\ProjectReport.cst">
-      <Generator>Arebis Template Processor</Generator>
-      <LastGenOutput>ProjectReport1.Designer.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zetbox.API.Client\Zetbox.API.Client.csproj">

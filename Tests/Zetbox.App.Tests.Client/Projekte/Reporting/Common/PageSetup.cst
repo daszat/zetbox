@@ -15,17 +15,18 @@
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 --%>
 <%@ CodeTemplate Language="C#" 
-    Name="Common.DocumentInfo"
-    ClassName="Zetbox.App.Projekte.Client.Projekte.Reporting.Common.DocumentInfo"
-    Inherits="Zetbox.App.Projekte.Client.Projekte.Reporting.ReportTemplate" %>
+    Name="Common.PageSetup"
+    ClassName="Zetbox.App.Tests.Client.Projekte.Reporting.Common.PageSetup"
+    Inherits="Zetbox.App.Tests.Client.Projekte.Reporting.ReportTemplate" %>
 <%@ Import Namespace="System" %>
 <%@ Import Namespace="System.Collections.Generic" %>
 <%@ Import Namespace="System.Linq" %>
-<%@ Parameter Name="Subject" Type="string" %>
-<%@ Parameter Name="Author" Type="string" %>
-Info
+<%@ Parameter Name="Orientation" Type="string" %>
+
+PageSetup
 {
-	Title = "<%= Subject %>"
-	Subject = "<%= Subject %>"
-	Author = "<%= Author %>"
+	Orientation = <%= Orientation %>
+	PageFormat = A4
+	TopMargin = 40
+	StartingNumber = 1
 }
