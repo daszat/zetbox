@@ -53,7 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomClientActionsModule.cs" />
+    <Compile Include="CustomClientTestActionsModule.cs" />
     <Compile Include="DerivedReportTest\Common\DocumentStyles.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

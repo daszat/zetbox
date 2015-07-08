@@ -12,25 +12,30 @@
 //
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Autofac;
-using Zetbox.API;
 
-namespace Zetbox.App.Tests.Common
+namespace Zetbox.App.Tests.Server
 {
-    // not a feature, will be loaded by client/server module
-    public class CustomCommonActionsModule : Module
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using Autofac;
+    using Zetbox.API;
+    using Zetbox.API.Server;
+    using Zetbox.API.Configuration;
+    using System.ComponentModel;
+
+    // Will be loaded by ServerModule
+    [Description("Zetbox server test actions")]
+    [AutoLoad(NotOnFallback = true)]
+    public class CustomServerTestActionsModule : Module
     {
         protected override void Load(ContainerBuilder moduleBuilder)
         {
             base.Load(moduleBuilder);
 
-            moduleBuilder.RegisterZetboxImplementors(typeof(CustomCommonActionsModule).Assembly);
-
-            // Register explicit overrides here
+            moduleBuilder.RegisterModule<Zetbox.App.Tests.Common.CustomCommonTestActionsModule>();
+            moduleBuilder.RegisterZetboxImplementors(typeof(CustomServerTestActionsModule).Assembly);
         }
     }
 }

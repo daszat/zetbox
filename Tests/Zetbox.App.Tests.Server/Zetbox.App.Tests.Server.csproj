@@ -45,7 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomServerActionsModule.cs" />
+    <Compile Include="CustomServerTestActionsModule.cs" />
     <Compile Include="Projekte\ProjektActions.cs" />
     <Compile Include="Projekte\TaskActions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

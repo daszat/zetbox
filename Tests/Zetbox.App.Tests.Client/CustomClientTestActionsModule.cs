@@ -27,23 +27,24 @@ namespace Zetbox.App.Tests.Client
     using Zetbox.Client;
 
     // Will be loaded by ClientModule
-    [Description("Zetbox client actions")]
-    public class CustomClientActionsModule : Module
+    [Description("Zetbox client test actions")]
+    [AutoLoad(NotOnFallback=true)]
+    public class CustomClientTestActionsModule : Module
     {
         protected override void Load(ContainerBuilder moduleBuilder)
         {
             base.Load(moduleBuilder);
 
-            moduleBuilder.RegisterModule<Zetbox.App.Tests.Common.CustomCommonActionsModule>();
+            moduleBuilder.RegisterModule<Zetbox.App.Tests.Common.CustomCommonTestActionsModule>();
 
-            moduleBuilder.RegisterZetboxImplementors(typeof(CustomClientActionsModule).Assembly);
-            moduleBuilder.RegisterViewModels(typeof(CustomClientActionsModule).Assembly);
+            moduleBuilder.RegisterZetboxImplementors(typeof(CustomClientTestActionsModule).Assembly);
+            moduleBuilder.RegisterViewModels(typeof(CustomClientTestActionsModule).Assembly);
 
             // Register explicit overrides here
             moduleBuilder
                 .Register<Zetbox.App.Tests.Client.Projekte.Reporting.ReportingHost>(c => new Zetbox.App.Tests.Client.Projekte.Reporting.ReportingHost(
                         "Zetbox.App.Tests.Client.DerivedReportTest",
-                        typeof(CustomClientActionsModule).Assembly,
+                        typeof(CustomClientTestActionsModule).Assembly,
                         c.Resolve<IFileOpener>(),
                         c.Resolve<ITempFileService>(),
                         c.Resolve<IReportingErrorReporter>()
