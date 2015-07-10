@@ -116,6 +116,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Zetbox.API.Client\Zetbox.API.Client.csproj">
+      <Project>{dd11a4f6-24c2-4935-8042-de49ca6b32c0}</Project>
+      <Name>Zetbox.API.Client</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Zetbox.API.Common\Zetbox.API.Common.csproj">
       <Project>{9677ae11-cb92-4f0a-a248-87a21586f0da}</Project>
       <Name>Zetbox.API.Common</Name>

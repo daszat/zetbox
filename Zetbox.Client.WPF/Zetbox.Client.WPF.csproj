@@ -265,14 +265,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\TestModule\EventTestInputEditor.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\TestModule\InstanceListTestDisplay.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\ZetboxBase\CompoundCollectionEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -282,10 +274,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ZetboxBase\CompoundListEditor.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\TestModule\NextEventsTestNavScreenDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -690,15 +678,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PasswordDialogResources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="View\TestModule\EventTestInputEditor.xaml.cs">
-      <DependentUpon>EventTestInputEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\TestModule\InstanceListTestDisplay.xaml.cs">
-      <DependentUpon>InstanceListTestDisplay.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\TestModule\NextEventsTestNavScreenDisplay.xaml.cs">
-      <DependentUpon>NextEventsTestNavScreenDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ZetboxBase\ActionDisplay.cs" />
     <Compile Include="View\ZetboxBase\CommandDisplay.cs" />

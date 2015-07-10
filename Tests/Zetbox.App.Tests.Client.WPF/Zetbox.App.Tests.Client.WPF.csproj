@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{93849B1B-BFB5-4EA4-96DB-972C7B365E15}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Zetbox.App.Tests.Client.WPF</RootNamespace>
+    <AssemblyName>Zetbox.App.Tests.Client.WPF</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\Debug\Client\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="View\EventTestInputEditor.xaml.cs">
+      <DependentUpon>EventTestInputEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\InstanceListTestDisplay.xaml.cs">
+      <DependentUpon>InstanceListTestDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\NextEventsTestNavScreenDisplay.xaml.cs">
+      <DependentUpon>NextEventsTestNavScreenDisplay.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="View\EventTestInputEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\InstanceListTestDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\NextEventsTestNavScreenDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Zetbox.API.Client\Zetbox.API.Client.csproj">
+      <Project>{dd11a4f6-24c2-4935-8042-de49ca6b32c0}</Project>
+      <Name>Zetbox.API.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Zetbox.API\Zetbox.API.csproj">
+      <Project>{ad0c7b9c-3c92-4f19-bbdf-416ad4700cb9}</Project>
+      <Name>Zetbox.API</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Zetbox.Client.WPF.Toolkit\Zetbox.Client.WPF.Toolkit.csproj">
+      <Project>{d5adaf5e-024d-46b1-b75d-0f93a3e4a50b}</Project>
+      <Name>Zetbox.Client.WPF.Toolkit</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Zetbox.Client\Zetbox.Client.csproj">
+      <Project>{a736e13f-d349-4ce5-a397-8438f58d0b9d}</Project>
+      <Name>Zetbox.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Zetbox.Objects\Zetbox.Objects.csproj">
+      <Project>{0c9e6e69-309f-46f7-a936-d5762229deb9}</Project>
+      <Name>Zetbox.Objects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Zetbox.App.Tests.Client\Zetbox.App.Tests.Client.csproj">
+      <Project>{84913d6b-f56c-4812-a2ec-4ac0f5c42ff4}</Project>
+      <Name>Zetbox.App.Tests.Client</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
