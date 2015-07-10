@@ -41,7 +41,7 @@ this.WriteObjects("  <EntityContainerMapping StorageEntityContainer=\"dbo\" CdmE
 this.WriteObjects("    \r\n");
 this.WriteObjects("    <!-- EntitySetMappings for classes -->\r\n");
 #line 38 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
-foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.Name))
+foreach(var cls in GetBaseClasses(ctx).OrderBy(c => c.Name))
     {
         var clsName = cls.Name;
 
@@ -83,7 +83,7 @@ this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    <!-- EntitySetMappings and AssociationSetMappings for object-object relations with a CollectionEntry -->\r\n");
 #line 75 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
-foreach(var rel in ctx.GetRelationsWithSeparateStorage())
+foreach(var rel in GetRelationsWithSeparateStorage(ctx))
     {
         string fkAName = Construct.ForeignKeyColumnName(rel.A);
         string fkBName = Construct.ForeignKeyColumnName(rel.B);
@@ -161,7 +161,7 @@ this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    <!-- AssociationSetMappings for direct object-object relations without a CollectionEntry -->\r\n");
 #line 146 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
-foreach(var rel in ctx.GetRelationsWithoutSeparateStorage())
+foreach(var rel in GetRelationsWithoutSeparateStorage(ctx))
     {
         RelationEnd principal, dependent;
     
@@ -205,7 +205,7 @@ this.WriteObjects("    </AssociationSetMapping>\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    <!-- EntitySetMappings and AssociationSetMappings for object-value CollectionEntrys -->\r\n");
 #line 187 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
-foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
+foreach(var prop in GetValueTypeProperties(ctx)
         .Where(p => p.IsList && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
         .OrderBy(p => p.ObjectClass.Name)
@@ -251,7 +251,7 @@ this.WriteObjects("    </AssociationSetMapping>\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    <!-- EntitySetMappings and AssociationSetMappings for object-struct CollectionEntrys -->\r\n");
 #line 229 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
-foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
+foreach(var prop in GetCompoundObjectProperties(ctx)
         .Where(p => p.IsList) // && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
         .OrderBy(p => p.ObjectClass.Name)

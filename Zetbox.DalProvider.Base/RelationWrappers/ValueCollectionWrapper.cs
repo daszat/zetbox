@@ -19,12 +19,13 @@ namespace Zetbox.DalProvider.Base.RelationWrappers
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Collections.Specialized;
     using System.Linq;
     using System.Text;
     using Zetbox.API;
 
     public abstract class ValueCollectionWrapper<TParent, TValue, TEntry, TEntryCollection>
-        : ICollection<TValue>
+        : ICollection<TValue>, INotifyCollectionChanged
         where TParent : IDataObject
         where TEntry : class, IValueCollectionEntry<TParent, TValue>
         where TEntryCollection : ICollection<TEntry>
@@ -61,6 +62,14 @@ namespace Zetbox.DalProvider.Base.RelationWrappers
         }
 
         #region Notifications
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
+        protected void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
+        {
+            if (CollectionChanged != null)
+            {
+                CollectionChanged(this, e);
+            }
+        }
 
         protected void NotifyOwner()
         {
@@ -84,6 +93,7 @@ namespace Zetbox.DalProvider.Base.RelationWrappers
         protected virtual void OnEntryAdded(TEntry entry)
         {
             NotifyOwner();
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, entry.Value));
         }
 
         /// <summary>
@@ -99,6 +109,7 @@ namespace Zetbox.DalProvider.Base.RelationWrappers
         protected virtual void OnEntryRemoved(TEntry entry)
         {
             NotifyOwner();
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, entry.Value));
         }
 
         #endregion

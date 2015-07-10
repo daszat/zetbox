@@ -22,6 +22,11 @@ IF ERRORLEVEL 1 GOTO FAIL
 Zetbox.Cli.exe %configs% -generate-resources=$safesolutionname$
 IF ERRORLEVEL 1 GOTO FAIL
 
+cd ..\..
+call ZbInstall %config%
+IF ERRORLEVEL 1 GOTO FAIL
+cd bin\Debug
+
 rem *********** Assets ***********
 xcopy /s /y ..\CodeGen\Assets\*.* ..\..\$safesolutionname$.Assets
 
@@ -41,12 +46,14 @@ rem optinal export SchemaMigration projects
 rem Zetbox.Cli.exe %config% -export ..\..\Data\SchemaMigrationProject.xml -schemamodules SchemaMigration
 rem IF ERRORLEVEL 1 GOTO FAIL
 
+popd
 echo ********************************************************************************
 echo ************************************ Success ***********************************
 echo ********************************************************************************
 GOTO EOF
 
 :FAIL
+popd
 echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX FAIL XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -55,5 +62,3 @@ rem return error without closing parent shell
 echo A | choice /c:A /n
 
 :EOF
-popd
-pause

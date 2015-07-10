@@ -1,0 +1,136 @@
+<%--
+    This file is part of zetbox.
+
+    Zetbox is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation, either version 3 of
+    the License, or (at your option) any later version.
+
+    Zetbox is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public
+    License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
+--%>
+<%@ CodeTemplate Language="C#" 
+    Name="Common.DocumentStyles"
+    ClassName="Zetbox.App.Tests.Client.Projekte.Reporting.Common.DocumentStyles"
+    Inherits="Zetbox.App.Tests.Client.Projekte.Reporting.ReportTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Linq" %>
+  \styles {
+    Normal {
+      Font { Name = "Verdana" Size = 10 }
+      ParagraphFormat {
+        SpaceBefore = 6
+        SpaceAfter = 6
+      }
+    }
+
+    Compact : Normal {
+      ParagraphFormat {
+        SpaceBefore = "0.07cm"
+        SpaceAfter = "0.07cm"
+      }
+    }
+
+    Title : Normal {
+      Font { Size = 16 Bold = true }
+    }
+	
+    Heading1 {
+      Font { Size = 14 Bold = true }
+      ParagraphFormat {
+		SpaceBefore = 6
+        SpaceAfter = 6
+        PageBreakBefore = false
+        OutlineLevel = Level1
+		KeepWithNext = True
+      }
+    }
+
+    Heading2 {
+      Font { Size = 12 Bold = true }
+      ParagraphFormat {
+        SpaceBefore = 6
+		SpaceAfter = 3
+        OutlineLevel = Level2
+		KeepWithNext = True
+      }
+    }
+
+    Heading3 {
+      Font { Size = 11 Bold = true }
+      ParagraphFormat {
+        SpaceAfter = 3
+        OutlineLevel = Level3
+		KeepWithNext = True
+      }
+    }
+
+    Heading4 {
+      Font { Size = 10 Bold = true }
+      ParagraphFormat {
+        SpaceAfter = 2
+        OutlineLevel = Level4
+		KeepWithNext = True
+      }
+    }
+
+    Heading5 { ParagraphFormat { OutlineLevel = Level5 } }
+	Heading6 { ParagraphFormat { OutlineLevel = Level6 } }
+	Heading7 { ParagraphFormat { OutlineLevel = Level7 } }
+	Heading8 { ParagraphFormat { OutlineLevel = Level8 } }
+	Heading9 { ParagraphFormat { OutlineLevel = Level9 } }
+
+    Header {
+      ParagraphFormat {
+        TabStops += {
+          Position = "16cm"
+          Alignment = Right
+        }
+      }
+    }
+
+    Footer {
+      ParagraphFormat {
+        TabStops += {
+          Position = "8cm"
+          Alignment = Center
+        }
+      }
+    }
+
+    InvalidStyleName {
+      Font { Bold = true Underline = Dash Color = Red }
+    }
+
+    TextBox : Normal {
+      ParagraphFormat {
+        Alignment = Justify
+        Borders
+        {
+          Width = 2.5
+          DistanceFromTop = 3
+          DistanceFromBottom = 3
+          DistanceFromLeft = 3
+          DistanceFromRight = 3
+        }
+        Shading { Color = SkyBlue }
+      }
+    }
+
+    TOC : Normal {
+      Font { }
+      ParagraphFormat {
+        TabStops += {
+          Position = "16cm"
+          Alignment = Right
+          Leader = Dots
+        }
+      }
+    }
+  }

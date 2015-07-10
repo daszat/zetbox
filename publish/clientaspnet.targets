@@ -9,8 +9,8 @@
   <PropertyGroup>
     <!-- deploys the compiled binaries into the local inetpub for debugging -->
     <PostBuildEvent Condition=" '$(OS)' == 'Windows_NT' ">
-      xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Common" "$(ProjectDir)\bin\Common"
-      xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Server" "$(ProjectDir)\bin\Server"
+      xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Common" "$(ProjectDir)\bin"
+      xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Server" "$(ProjectDir)\bin"
       xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Client" "$(ProjectDir)\bin\Client"
       xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Npgsql.*" "$(ProjectDir)\bin"
       xcopy /y /q /s /e /i "$(SolutionDir)\bin\$(Configuration)\Mono.Security.*" "$(ProjectDir)\bin"

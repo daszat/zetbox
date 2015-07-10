@@ -100,7 +100,7 @@ namespace Zetbox.API
         {
             string hostTypePrefix = string.Empty;
             List<string> hostTypePaths = new List<string>() { "Common" };
-            
+
             switch (type)
             {
                 case HostType.Client:
@@ -126,7 +126,7 @@ namespace Zetbox.API
                 default:
                     break;
             }
-        
+
             foreach (var path in hostTypePaths)
             {
                 var pathWithPrefix = string.IsNullOrWhiteSpace(hostTypePrefix)
@@ -138,6 +138,7 @@ namespace Zetbox.API
                 AssemblyLoader.SearchPath.Add(Path.Combine(rootedPath, loadGeneratedAssemblies ? "Generated" : "Fallback"));
                 AssemblyLoader.SearchPath.Add(rootedPath);
             }
+            AssemblyLoader.SearchPath.Add(Path.Combine(QualifySearchPath(hostTypePrefix), loadGeneratedAssemblies ? "Generated" : "Fallback"));
         }
 
         public static string QualifySearchPath(string path)
@@ -249,19 +250,33 @@ namespace Zetbox.API
         /// Returns the actual filename of a DLL or EXE matching a given base assembly name. Uses the SearchPath.
         /// </summary>
         /// <returns>null if the assembly cannot be located in the SearchPath. Otherwise, the full path.</returns>
-        private static string LocateAssembly(string baseName)
+        private static string LocateAssembly(string baseName, System.Globalization.CultureInfo culture)
         {
             foreach (string path in AssemblyLoader.SearchPath)
             {
-                string basePath = Path.Combine(path, baseName);
-                // Resolve .dll or .exe
-                if (File.Exists(basePath + ".dll"))
+                List<string> basePaths = new List<string>();
+
+                if (culture == null || string.IsNullOrEmpty(culture.Name))
                 {
-                    return basePath + ".dll";
+                    basePaths.Add(Path.Combine(path, baseName));
                 }
-                else if (File.Exists(basePath + ".exe"))
+                else
                 {
-                    return basePath + ".exe";
+                    // Search for a resource assembly
+                    basePaths.Add(Path.Combine(path, culture.Name, baseName));
+                }
+
+                foreach (var basePath in basePaths)
+                {
+                    // Resolve .dll or .exe
+                    if (File.Exists(basePath + ".dll"))
+                    {
+                        return basePath + ".dll";
+                    }
+                    else if (File.Exists(basePath + ".exe"))
+                    {
+                        return basePath + ".exe";
+                    }
                 }
             }
             return null;
@@ -300,7 +315,7 @@ namespace Zetbox.API
                     _currentlyLoading = baseName;
 
                     // search for file to load
-                    string sourceDll = LocateAssembly(baseName);
+                    string sourceDll = LocateAssembly(baseName, assemblyName.CultureInfo);
 
                     // assembly could not be found?
                     if (String.IsNullOrEmpty(sourceDll))

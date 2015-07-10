@@ -1,0 +1,37 @@
+<%--
+    This file is part of zetbox.
+
+    Zetbox is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation, either version 3 of
+    the License, or (at your option) any later version.
+
+    Zetbox is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public
+    License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
+--%>
+<%@ CodeTemplate Language="C#" 
+    Name="ProjectReport"
+    ClassName="Zetbox.App.Tests.Client.Projekte.Reporting.ProjectReport"
+    Inherits="Zetbox.App.Tests.Client.Projekte.Reporting.ReportTemplate" %>
+<%@ Import Namespace="System" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="System.Linq" %>
+
+\document [
+<% Common.DocumentInfo.Call(Host, "Invoice", null); %>
+] {
+<% Common.DocumentStyles.Call(Host); %>
+
+\section [
+<% PageSetup(); %>
+	] {
+        \paragraph [ Style = "Title" Format { SpaceBefore = "2cm" } ] {
+            <%= GetTitle() %>
+        }
+    }
+}

@@ -765,12 +765,12 @@ namespace Zetbox.App.Projekte
 				if (_Projekte == null)
 				{
 					_Projekte 
-						= new NHibernateASideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl>(
+						= new NHibernateASideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl.Projekt_haben_Mitarbeiter_RelationEntryProxy, Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryNHibernateImpl.Projekte_haben_Mitarbeiter_RelationEntryProxy, Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.Projekte,
-                                p => (Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl.Projekt_haben_Mitarbeiter_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
+                                p => (Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryNHibernateImpl.Projekte_haben_Mitarbeiter_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
                     _Projekte.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Projekte", null, null); if(OnProjekte_PostSetter != null && IsAttached) OnProjekte_PostSetter(this); };
                     if (Projekte_was_eagerLoaded) { Projekte_was_eagerLoaded = false; }
 				}
@@ -778,7 +778,7 @@ namespace Zetbox.App.Projekte
 			}
 		}
 
-		private NHibernateASideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl> _Projekte;
+		private NHibernateASideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryNHibernateImpl> _Projekte;
 		// ignored, but required for Serialization
         private bool Projekte_was_eagerLoaded = false;
 
@@ -1350,7 +1350,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Mitarbeiter> 
         {
             public MitarbeiterProxy()
             {
-                Projekte = new Collection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl.Projekt_haben_Mitarbeiter_RelationEntryProxy>();
+                Projekte = new Collection<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryNHibernateImpl.Projekte_haben_Mitarbeiter_RelationEntryProxy>();
             }
 
             public virtual int ID { get; set; }
@@ -1378,7 +1378,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Mitarbeiter> 
 
             public virtual string Name { get; set; }
 
-            public virtual ICollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl.Projekt_haben_Mitarbeiter_RelationEntryProxy> Projekte { get; set; }
+            public virtual ICollection<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryNHibernateImpl.Projekte_haben_Mitarbeiter_RelationEntryProxy> Projekte { get; set; }
 
             public virtual string SVNr { get; set; }
 

@@ -205,7 +205,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
             {
                 if (_Student == null)
                 {
-                    _Student = new ASideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl, EntityCollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl>>(
+                    _Student = new ASideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryEfImpl, EntityCollection<Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryEfImpl>>(
                             this,
                             StudentImpl);
                 }
@@ -214,7 +214,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
         }
         
         [EdmRelationshipNavigationProperty("Model", "FK_Student_füllt_aus_Testbogen_B", "CollectionEntry")]
-        public EntityCollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl> StudentImpl
+        public EntityCollection<Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryEfImpl> StudentImpl
         {
             get
             {
@@ -222,14 +222,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
             }
         }
 
-        private EntityCollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl> _StudentImplEntityCollection;
-        internal EntityCollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl> GetStudentImplCollection()
+        private EntityCollection<Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryEfImpl> _StudentImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryEfImpl> GetStudentImplCollection()
         {
             if (_StudentImplEntityCollection == null)
             {
                 _StudentImplEntityCollection
                     = ((IEntityWithRelationships)(this)).RelationshipManager
-                        .GetRelatedCollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl>(
+                        .GetRelatedCollection<Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryEfImpl>(
                             "Model.FK_Student_füllt_aus_Testbogen_B",
                             "CollectionEntry");
                 // the EntityCollection has to be loaded before attaching the AssociationChanged event
@@ -244,7 +244,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Fragebogen> OnAnt
             }
             return _StudentImplEntityCollection;
         }
-        private ASideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl, EntityCollection<Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryEfImpl>> _Student;
+        private ASideCollectionWrapper<Zetbox.App.Test.TestStudent, Zetbox.App.Test.Fragebogen, Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryEfImpl, EntityCollection<Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryEfImpl>> _Student;
 
         public Zetbox.API.Async.ZbTask TriggerFetchStudentAsync()
         {

@@ -38,18 +38,6 @@ namespace Zetbox.App.Projekte.Client
 
             moduleBuilder.RegisterZetboxImplementors(typeof(CustomClientActionsModule).Assembly);
             moduleBuilder.RegisterViewModels(typeof(CustomClientActionsModule).Assembly);
-
-            // Register explicit overrides here
-            moduleBuilder
-                .Register<Zetbox.App.Projekte.Client.Projekte.Reporting.ReportingHost>(c => new Zetbox.App.Projekte.Client.Projekte.Reporting.ReportingHost(
-                        "Zetbox.App.Projekte.Client.DerivedReportTest",
-                        typeof(CustomClientActionsModule).Assembly,
-                        c.Resolve<IFileOpener>(),
-                        c.Resolve<ITempFileService>(),
-                        c.Resolve<IReportingErrorReporter>()
-                    )
-                )
-                .InstancePerDependency();
         }
     }
 }

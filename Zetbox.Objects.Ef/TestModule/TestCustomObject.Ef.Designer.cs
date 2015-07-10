@@ -328,7 +328,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             {
                 if (_MuhBlah_ManyList_Nav == null)
                 {
-                    _MuhBlah_ManyList_Nav = new ASideCollectionWrapper<Zetbox.App.Test.Muhblah, Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryEfImpl, EntityCollection<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryEfImpl>>(
+                    _MuhBlah_ManyList_Nav = new ASideCollectionWrapper<Zetbox.App.Test.Muhblah, Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryEfImpl, EntityCollection<Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryEfImpl>>(
                             this,
                             MuhBlah_ManyList_NavImpl);
                 }
@@ -337,7 +337,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         }
         
         [EdmRelationshipNavigationProperty("Model", "FK_MB_Many_Role_has_TCO_ManyList_Role_B", "CollectionEntry")]
-        public EntityCollection<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryEfImpl> MuhBlah_ManyList_NavImpl
+        public EntityCollection<Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryEfImpl> MuhBlah_ManyList_NavImpl
         {
             get
             {
@@ -345,14 +345,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             }
         }
 
-        private EntityCollection<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryEfImpl> _MuhBlah_ManyList_NavImplEntityCollection;
-        internal EntityCollection<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryEfImpl> GetMuhBlah_ManyList_NavImplCollection()
+        private EntityCollection<Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryEfImpl> _MuhBlah_ManyList_NavImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryEfImpl> GetMuhBlah_ManyList_NavImplCollection()
         {
             if (_MuhBlah_ManyList_NavImplEntityCollection == null)
             {
                 _MuhBlah_ManyList_NavImplEntityCollection
                     = ((IEntityWithRelationships)(this)).RelationshipManager
-                        .GetRelatedCollection<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryEfImpl>(
+                        .GetRelatedCollection<Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryEfImpl>(
                             "Model.FK_MB_Many_Role_has_TCO_ManyList_Role_B",
                             "CollectionEntry");
                 // the EntityCollection has to be loaded before attaching the AssociationChanged event
@@ -367,7 +367,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             }
             return _MuhBlah_ManyList_NavImplEntityCollection;
         }
-        private ASideCollectionWrapper<Zetbox.App.Test.Muhblah, Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryEfImpl, EntityCollection<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryEfImpl>> _MuhBlah_ManyList_Nav;
+        private ASideCollectionWrapper<Zetbox.App.Test.Muhblah, Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryEfImpl, EntityCollection<Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryEfImpl>> _MuhBlah_ManyList_Nav;
 
         public Zetbox.API.Async.ZbTask TriggerFetchMuhBlah_ManyList_NavAsync()
         {

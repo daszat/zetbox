@@ -96,6 +96,15 @@ namespace Zetbox.Server.SchemaManagement
                 DoDeleteObjectClassSecurityRules(savedObjClass);
             }
 
+            foreach (var lstPop in savedObjClass.Properties.OfType<ValueTypeProperty>().Where(p => p.IsList))
+            {
+                DoDeleteValueTypePropertyList(savedObjClass, lstPop, string.Empty);
+            }
+            foreach (var lstPop in savedObjClass.Properties.OfType<CompoundObjectProperty>().Where(p => p.IsList))
+            {
+                DoDeleteCompoundObjectPropertyList(savedObjClass, lstPop, string.Empty);
+            }
+
             var mapping = savedObjClass.GetTableMapping();
             if (mapping == TableMapping.TPT)
             {

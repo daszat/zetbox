@@ -42,7 +42,7 @@ this.WriteObjects("                   assembly=\"Zetbox.Objects.NHibernateImpl\"
 this.WriteObjects("\r\n");
 this.WriteObjects("    <!-- RelationCollectionEntries -->\r\n");
 #line 39 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
-foreach (var rel in ctx.GetQuery<Relation>()
+foreach (var rel in GetRelations(ctx)
         .Where(r => r.Storage == StorageType.Separate)
         .ToList()
         .OrderBy(r => r.GetRelationClassName()))
@@ -95,7 +95,7 @@ this.WriteObjects("    </class>\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    <!-- ValueCollectionEntries are defined directly on use -->\r\n");
 #line 77 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
-foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
+foreach (var prop in GetValueTypeProperties(ctx)
                             .Where(p => p.IsList && !p.IsCalculated)
                             .Where(p => p.ObjectClass is ObjectClass)
                             .ToList()
@@ -146,7 +146,7 @@ this.WriteObjects("\r\n");
 #line 113 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
 this.WriteObjects("    <!-- CompoundObjectCollectionEntries -->\r\n");
 #line 115 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\CollectionEntriesHbm.cst"
-foreach (var prop in ctx.GetQuery<CompoundObjectProperty>()
+foreach (var prop in GetCompoundObjectProperties(ctx)
                             .Where(p => p.IsList /* && !p.IsCalculated */)
                             .Where(p => p.ObjectClass is ObjectClass)
                             .ToList()

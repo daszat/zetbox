@@ -58,13 +58,13 @@ namespace Zetbox.App.Test
         public Zetbox.API.Async.ZbTask TriggerFetchBSideAsync()
         {
             if (_triggerFetchBSideTask != null) return _triggerFetchBSideTask;
-            _triggerFetchBSideTask = Context.FetchRelationAsync<Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryMemoryImpl>(new Guid("3555da6e-0e9b-4f7c-903e-a51f3cce7cd9"), RelationEndRole.A, this);
+            _triggerFetchBSideTask = Context.FetchRelationAsync<Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryMemoryImpl>(new Guid("3555da6e-0e9b-4f7c-903e-a51f3cce7cd9"), RelationEndRole.A, this);
             _triggerFetchBSideTask.OnResult(r =>
             {
                 _BSide
-                    = new ObservableBSideCollectionWrapper<Zetbox.App.Test.N_to_M_relations_A, Zetbox.App.Test.N_to_M_relations_B, Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryMemoryImpl>>(
+                    = new ObservableBSideCollectionWrapper<Zetbox.App.Test.N_to_M_relations_A, Zetbox.App.Test.N_to_M_relations_B, Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryMemoryImpl>>(
                         this,
-                        new RelationshipFilterASideCollection<Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryMemoryImpl>(this.Context, this));
+                        new RelationshipFilterASideCollection<Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryMemoryImpl>(this.Context, this));
                         // _BSide.CollectionChanged is managed by OnBSideCollectionChanged() and called from the RelationEntry
             });
             return _triggerFetchBSideTask;
@@ -77,7 +77,7 @@ namespace Zetbox.App.Test
                 OnBSide_PostSetter(this);
         }
 
-        private ObservableBSideCollectionWrapper<Zetbox.App.Test.N_to_M_relations_A, Zetbox.App.Test.N_to_M_relations_B, Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryMemoryImpl>> _BSide;
+        private ObservableBSideCollectionWrapper<Zetbox.App.Test.N_to_M_relations_A, Zetbox.App.Test.N_to_M_relations_B, Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryMemoryImpl>> _BSide;
         // END Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for BSide
 public static event PropertyListChangedHandler<Zetbox.App.Test.N_to_M_relations_A> OnBSide_PostSetter;
 

@@ -38,20 +38,20 @@
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
-        <!-- rel=CalendarBook_shared_r_Group_RelationEntry -->
+        <!-- rel=Calendar_shared_r_GroupReaders_RelationEntry -->
         <!-- relEnd=Calendar otherEnd=GroupReaders -->
         <set name="GroupReaders" table="`Calendar_shared_r_GroupReaders`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_Calendar`" />
-            <one-to-many class="Zetbox.App.Calendar.CalendarBook_shared_r_Group_RelationEntryNHibernateImpl+CalendarBook_shared_r_Group_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.Calendar.Calendar_shared_r_GroupReaders_RelationEntryNHibernateImpl+Calendar_shared_r_GroupReaders_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
-        <!-- rel=CalendarBook_shared_w_Group_RelationEntry -->
+        <!-- rel=Calendar_shared_w_GroupWriters_RelationEntry -->
         <!-- relEnd=Calendar otherEnd=GroupWriters -->
         <set name="GroupWriters" table="`Calendar_shared_w_GroupWriters`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_Calendar`" />
-            <one-to-many class="Zetbox.App.Calendar.CalendarBook_shared_w_Group_RelationEntryNHibernateImpl+CalendarBook_shared_w_Group_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.Calendar.Calendar_shared_w_GroupWriters_RelationEntryNHibernateImpl+Calendar_shared_w_GroupWriters_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
         <!-- ValueTypeProperty isValue -->
@@ -67,20 +67,20 @@
 
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
-        <!-- rel=CalendarBook_shared_r_Identity_RelationEntry -->
+        <!-- rel=Calendar_shared_r_Readers_RelationEntry -->
         <!-- relEnd=Calendar otherEnd=Readers -->
         <set name="Readers" table="`Calendar_shared_r_Readers`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_Calendar`" />
-            <one-to-many class="Zetbox.App.Calendar.CalendarBook_shared_r_Identity_RelationEntryNHibernateImpl+CalendarBook_shared_r_Identity_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.Calendar.Calendar_shared_r_Readers_RelationEntryNHibernateImpl+Calendar_shared_r_Readers_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
-        <!-- rel=CalendarBook_shared_w_Identity_RelationEntry -->
+        <!-- rel=Calendar_shared_w_Writers_RelationEntry -->
         <!-- relEnd=Calendar otherEnd=Writers -->
         <set name="Writers" table="`Calendar_shared_w_Writers`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_Calendar`" />
-            <one-to-many class="Zetbox.App.Calendar.CalendarBook_shared_w_Identity_RelationEntryNHibernateImpl+CalendarBook_shared_w_Identity_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.Calendar.Calendar_shared_w_Writers_RelationEntryNHibernateImpl+Calendar_shared_w_Writers_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
 
@@ -634,11 +634,11 @@
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
-        <!-- rel=File_has_Blob_RelationEntry -->
+        <!-- rel=Document_has_Revisions_RelationEntry -->
         <!-- relEnd=Document otherEnd=Revisions -->
         <set name="Revisions" table="`Document_has_Revisions`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_Document`" />
-            <one-to-many class="at.dasz.DocumentManagement.File_has_Blob_RelationEntryNHibernateImpl+File_has_Blob_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
+            <one-to-many class="at.dasz.DocumentManagement.Document_has_Revisions_RelationEntryNHibernateImpl+Document_has_Revisions_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
         <!-- ValueTypeProperty isValue -->
@@ -1131,11 +1131,11 @@
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
-        <!-- rel=NavigationEntry_accessed_by_Group_RelationEntry -->
+        <!-- rel=NavigationScreen_accessed_by_Groups_RelationEntry -->
         <!-- relEnd=NavigationScreen otherEnd=Groups -->
         <set name="Groups" table="`NavigationScreen_accessed_by_Groups`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_NavigationScreen`" />
-            <one-to-many class="Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl+NavigationEntry_accessed_by_Group_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.GUI.NavigationScreen_accessed_by_Groups_RelationEntryNHibernateImpl+NavigationScreen_accessed_by_Groups_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
 <!-- ObjectReferenceProperty -->
@@ -1429,11 +1429,11 @@
 
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
-        <!-- rel=ViewModelDescriptor_displayedBy_ControlKind_RelationEntry -->
+        <!-- rel=Presentable_displayedBy_SecondaryControlKinds_RelationEntry -->
         <!-- relEnd=Presentable otherEnd=SecondaryControlKinds -->
         <set name="SecondaryControlKinds" table="`Presentable_displayedBy_SecondaryControlKinds`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_Presentable`" />
-            <one-to-many class="Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl+ViewModelDescriptor_displayedBy_ControlKind_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.GUI.Presentable_displayedBy_SecondaryControlKinds_RelationEntryNHibernateImpl+Presentable_displayedBy_SecondaryControlKinds_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
         <!-- ValueTypeProperty isValue -->
@@ -1630,11 +1630,11 @@
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
-        <!-- rel=Projekt_haben_Mitarbeiter_RelationEntry -->
+        <!-- rel=Projekte_haben_Mitarbeiter_RelationEntry -->
         <!-- relEnd=Mitarbeiter otherEnd=Projekte -->
         <set name="Projekte" table="`Projekte_haben_Mitarbeiter`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_Mitarbeiter`" />
-            <one-to-many class="Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl+Projekt_haben_Mitarbeiter_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryNHibernateImpl+Projekte_haben_Mitarbeiter_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
         <!-- ValueTypeProperty isValue -->
@@ -1718,11 +1718,11 @@
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
-        <!-- rel=Projekt_haben_Mitarbeiter_RelationEntry -->
+        <!-- rel=Projekte_haben_Mitarbeiter_RelationEntry -->
         <!-- relEnd=Projekte otherEnd=Mitarbeiter -->
         <set name="Mitarbeiter" table="`Projekte_haben_Mitarbeiter`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_Projekte`" />
-            <one-to-many class="Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl+Projekt_haben_Mitarbeiter_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryNHibernateImpl+Projekte_haben_Mitarbeiter_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
         <!-- ValueTypeProperty isValue -->
@@ -2469,11 +2469,11 @@
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
-        <!-- rel=TestStudent_füllt_aus_Fragebogen_RelationEntry -->
+        <!-- rel=Student_füllt_aus_Testbogen_RelationEntry -->
         <!-- relEnd=Testbogen otherEnd=Student -->
         <set name="Student" table="`Student_füllt_aus_Testbogen`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_Testbogen`" />
-            <one-to-many class="Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl+TestStudent_füllt_aus_Fragebogen_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryNHibernateImpl+Student_füllt_aus_Testbogen_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
 
@@ -2548,11 +2548,11 @@
 
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
-        <!-- rel=Muhblah_has_TestCustomObject_RelationEntry -->
+        <!-- rel=MB_Many_Role_has_TCO_ManyList_Role_RelationEntry -->
         <!-- relEnd=MB_Many_Role otherEnd=TCO_ManyList_Role -->
         <set name="TestCustomObjects_ManyList_Nav" table="`MB_Many_Role_has_TCO_ManyList_Role`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_MB_Many_Role`" />
-            <one-to-many class="Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl+Muhblah_has_TestCustomObject_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryNHibernateImpl+MB_Many_Role_has_TCO_ManyList_Role_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
 <!-- ObjectReferenceProperty -->
@@ -2596,11 +2596,11 @@
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
-        <!-- rel=N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntry -->
+        <!-- rel=ASide_connectsTo_BSide_RelationEntry -->
         <!-- relEnd=ASide otherEnd=BSide -->
         <set name="BSide" table="`ASide_connectsTo_BSide`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_ASide`" />
-            <one-to-many class="Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryNHibernateImpl+N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryNHibernateImpl+ASide_connectsTo_BSide_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
         <!-- ValueTypeProperty isValue -->
@@ -2630,11 +2630,11 @@
         <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
-        <!-- rel=N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntry -->
+        <!-- rel=ASide_connectsTo_BSide_RelationEntry -->
         <!-- relEnd=BSide otherEnd=ASide -->
         <set name="ASide" table="`ASide_connectsTo_BSide`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_BSide`" />
-            <one-to-many class="Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryNHibernateImpl+N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryNHibernateImpl+ASide_connectsTo_BSide_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
         <!-- ValueTypeProperty isValue -->
@@ -3339,11 +3339,11 @@
 
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
-        <!-- rel=Muhblah_has_TestCustomObject_RelationEntry -->
+        <!-- rel=MB_Many_Role_has_TCO_ManyList_Role_RelationEntry -->
         <!-- relEnd=TCO_ManyList_Role otherEnd=MB_Many_Role -->
         <set name="MuhBlah_ManyList_Nav" table="`MB_Many_Role_has_TCO_ManyList_Role`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_TCO_ManyList_Role`" />
-            <one-to-many class="Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl+Muhblah_has_TestCustomObject_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryNHibernateImpl+MB_Many_Role_has_TCO_ManyList_Role_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
 <!-- ObjectReferenceProperty -->
@@ -3484,11 +3484,11 @@
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
-        <!-- rel=TestStudent_füllt_aus_Fragebogen_RelationEntry -->
+        <!-- rel=Student_füllt_aus_Testbogen_RelationEntry -->
         <!-- relEnd=Student otherEnd=Testbogen -->
         <set name="Testbogen" table="`Student_füllt_aus_Testbogen`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_Student`" />
-            <one-to-many class="Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl+TestStudent_füllt_aus_Fragebogen_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryNHibernateImpl+Student_füllt_aus_Testbogen_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
 
@@ -3707,11 +3707,11 @@
             <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
-        <!-- rel=RoleMembership_resolves_Relation_RelationEntry -->
+        <!-- rel=RoleMembership_resolves_Relations_RelationEntry -->
         <!-- relEnd=RoleMembership otherEnd=Relations -->
         <set name="Relations" table="`RoleMembership_resolves_Relations`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_RoleMembership`" />
-            <one-to-many class="Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl+RoleMembership_resolves_Relation_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.Base.RoleMembership_resolves_Relations_RelationEntryNHibernateImpl+RoleMembership_resolves_Relations_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
 
@@ -4314,11 +4314,11 @@
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
-        <!-- rel=DataType_implements_Interface_RelationEntry -->
+        <!-- rel=DataType_implements_ImplementedInterfaces_RelationEntry -->
         <!-- relEnd=DataType otherEnd=ImplementedInterfaces -->
         <set name="ImplementsInterfaces" table="`DataType_implements_ImplementedInterfaces`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_DataType`" />
-            <one-to-many class="Zetbox.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl+DataType_implements_Interface_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntryNHibernateImpl+DataType_implements_ImplementedInterfaces_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
 <!-- ObjectReferenceProperty -->
@@ -4780,11 +4780,11 @@
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
-        <!-- rel=Identity_memberOf_Group_RelationEntry -->
+        <!-- rel=Identities_memberOf_Groups_RelationEntry -->
         <!-- relEnd=Groups otherEnd=Identities -->
         <set name="Member" table="`Identities_memberOf_Groups`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_Groups`" />
-            <one-to-many class="Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl+Identity_memberOf_Group_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryNHibernateImpl+Identities_memberOf_Groups_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
 <!-- ObjectReferenceProperty -->
@@ -4825,11 +4825,11 @@
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
-        <!-- rel=Identity_memberOf_Group_RelationEntry -->
+        <!-- rel=Identities_memberOf_Groups_RelationEntry -->
         <!-- relEnd=Identities otherEnd=Groups -->
         <set name="Groups" table="`Identities_memberOf_Groups`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_Identities`" />
-            <one-to-many class="Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl+Identity_memberOf_Group_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryNHibernateImpl+Identities_memberOf_Groups_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
         <!-- ValueTypeProperty isValue -->
@@ -4906,11 +4906,11 @@
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
-        <!-- rel=IndexConstraint_ensures_unique_on_Property_RelationEntry -->
+        <!-- rel=UniqueContraints_ensures_unique_on_Properties_RelationEntry -->
         <!-- relEnd=UniqueContraints otherEnd=Properties -->
         <set name="Properties" table="`UniqueContraints_ensures_unique_on_Properties`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_UniqueContraints`" />
-            <one-to-many class="Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl+IndexConstraint_ensures_unique_on_Property_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryNHibernateImpl+UniqueContraints_ensures_unique_on_Properties_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
 
@@ -5019,11 +5019,11 @@
 
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
-        <!-- rel=ObjectReferenceProperty_shows_Method_RelationEntry -->
+        <!-- rel=ObjRefProp_shows_Methods_RelationEntry -->
         <!-- relEnd=Methods otherEnd=ObjRefProp -->
         <set name="ShowByProperties" table="`ObjRefProp_shows_Methods`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_Methods`" />
-            <one-to-many class="Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl+ObjectReferenceProperty_shows_Method_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryNHibernateImpl+ObjRefProp_shows_Methods_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
 
@@ -5196,11 +5196,11 @@
             <!-- define the properties -->
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
-        <!-- rel=CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntry -->
+        <!-- rel=CalculatedReference_dependsOn_InputProperties_RelationEntry -->
         <!-- relEnd=CalculatedReference otherEnd=InputProperties -->
         <set name="Inputs" table="`CalculatedReference_dependsOn_InputProperties`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_CalculatedReference`" />
-            <one-to-many class="Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl+CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.Base.CalculatedReference_dependsOn_InputProperties_RelationEntryNHibernateImpl+CalculatedReference_dependsOn_InputProperties_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
 <!-- ObjectReferenceProperty -->
@@ -5286,11 +5286,11 @@
                   optimistic-lock="false"/>
 <!-- ObjectReferenceProperty -->
         <!-- NMProperty -->
-        <!-- rel=ObjectReferenceProperty_shows_Method_RelationEntry -->
+        <!-- rel=ObjRefProp_shows_Methods_RelationEntry -->
         <!-- relEnd=ObjRefProp otherEnd=Methods -->
         <set name="Methods" table="`ObjRefProp_shows_Methods`" inverse="true" cascade="none" batch-size="100" >
             <key column="`fk_ObjRefProp`" />
-            <one-to-many class="Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl+ObjectReferenceProperty_shows_Method_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
+            <one-to-many class="Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryNHibernateImpl+ObjRefProp_shows_Methods_RelationEntryProxy,Zetbox.Objects.NHibernateImpl" />
         </set>
 
 <!-- ObjectReferenceProperty -->

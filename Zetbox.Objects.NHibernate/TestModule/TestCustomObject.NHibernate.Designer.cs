@@ -298,12 +298,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
 				if (_MuhBlah_ManyList_Nav == null)
 				{
 					_MuhBlah_ManyList_Nav 
-						= new NHibernateASideCollectionWrapper<Zetbox.App.Test.Muhblah, Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl>(
+						= new NHibernateASideCollectionWrapper<Zetbox.App.Test.Muhblah, Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl.Muhblah_has_TestCustomObject_RelationEntryProxy, Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryNHibernateImpl.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryProxy, Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.MuhBlah_ManyList_Nav,
-                                p => (Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl.Muhblah_has_TestCustomObject_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
+                                p => (Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryNHibernateImpl.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
                     _MuhBlah_ManyList_Nav.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("MuhBlah_ManyList_Nav", null, null); if(OnMuhBlah_ManyList_Nav_PostSetter != null && IsAttached) OnMuhBlah_ManyList_Nav_PostSetter(this); };
                     if (MuhBlah_ManyList_Nav_was_eagerLoaded) { MuhBlah_ManyList_Nav_was_eagerLoaded = false; }
 				}
@@ -311,7 +311,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
 			}
 		}
 
-		private NHibernateASideCollectionWrapper<Zetbox.App.Test.Muhblah, Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl> _MuhBlah_ManyList_Nav;
+		private NHibernateASideCollectionWrapper<Zetbox.App.Test.Muhblah, Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryNHibernateImpl> _MuhBlah_ManyList_Nav;
 		// ignored, but required for Serialization
         private bool MuhBlah_ManyList_Nav_was_eagerLoaded = false;
 
@@ -964,7 +964,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             public TestCustomObjectProxy()
             {
                 MubBlah_List_Nav = new Collection<Zetbox.App.Test.MuhblahNHibernateImpl.MuhblahProxy>();
-                MuhBlah_ManyList_Nav = new Collection<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl.Muhblah_has_TestCustomObject_RelationEntryProxy>();
+                MuhBlah_ManyList_Nav = new Collection<Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryNHibernateImpl.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryProxy>();
                 PhoneNumbersOther = new Collection<Zetbox.App.Test.TestCustomObject_PhoneNumbersOther_CollectionEntryNHibernateImpl.TestCustomObject_PhoneNumbersOther_CollectionEntryProxy>();
             }
 
@@ -979,7 +979,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
 
             public virtual Zetbox.App.Test.MuhblahNHibernateImpl.MuhblahProxy MubBlah_Nav { get; set; }
 
-            public virtual ICollection<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl.Muhblah_has_TestCustomObject_RelationEntryProxy> MuhBlah_ManyList_Nav { get; set; }
+            public virtual ICollection<Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryNHibernateImpl.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryProxy> MuhBlah_ManyList_Nav { get; set; }
 
             public virtual Zetbox.App.Test.MuhblahNHibernateImpl.MuhblahProxy MuhBlah_One_Nav { get; set; }
 

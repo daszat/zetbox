@@ -19,7 +19,8 @@ namespace Zetbox.Generator.Templates.ObjectClasses
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    
+    using Zetbox.App.Base;
+
     public partial class CollectionEntries
     {
         protected virtual IEnumerable<string> GetAdditionalImports()

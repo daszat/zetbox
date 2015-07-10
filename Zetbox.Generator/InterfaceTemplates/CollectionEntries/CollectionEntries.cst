@@ -38,7 +38,7 @@ using System.Xml.Serialization;
 using Zetbox.API;
 
 <%
-    foreach (var rel in ctx.GetQuery<Relation>()
+    foreach (var rel in GetRelations(ctx)
         .Where(r => r.Storage == StorageType.Separate)
         .ToList() // GetRelationClassName is not mapped
         .OrderBy(r => r.GetRelationClassName()))
@@ -47,7 +47,7 @@ using Zetbox.API;
     }
 
 
-    foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
+    foreach (var prop in GetValueTypeProperties(ctx)
         .Where(p => p.IsList && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
         .ToList() // NHibernate-on-linux workaround
@@ -57,7 +57,7 @@ using Zetbox.API;
         ValueCollectionEntry.Call(Host, ctx, prop);
     }
     
-    foreach (var prop in ctx.GetQuery<CompoundObjectProperty>()
+    foreach (var prop in GetCompoundObjectProperties(ctx)
         .Where(p => p.IsList) // && !p.IsCalculated
         .Where(p => p.ObjectClass is ObjectClass)
         .ToList() // NHibernate-on-linux workaround

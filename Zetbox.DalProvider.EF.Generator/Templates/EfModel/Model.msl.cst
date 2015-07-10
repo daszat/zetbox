@@ -35,7 +35,7 @@
     
     <!-- EntitySetMappings for classes -->
 <%
-    foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.Name))
+    foreach(var cls in GetBaseClasses(ctx).OrderBy(c => c.Name))
     {
         var clsName = cls.Name;
 %>
@@ -72,7 +72,7 @@
 
     <!-- EntitySetMappings and AssociationSetMappings for object-object relations with a CollectionEntry -->
 <%
-    foreach(var rel in ctx.GetRelationsWithSeparateStorage())
+    foreach(var rel in GetRelationsWithSeparateStorage(ctx))
     {
         string fkAName = Construct.ForeignKeyColumnName(rel.A);
         string fkBName = Construct.ForeignKeyColumnName(rel.B);
@@ -143,7 +143,7 @@
 
     <!-- AssociationSetMappings for direct object-object relations without a CollectionEntry -->
 <%
-    foreach(var rel in ctx.GetRelationsWithoutSeparateStorage())
+    foreach(var rel in GetRelationsWithoutSeparateStorage(ctx))
     {
         RelationEnd principal, dependent;
     
@@ -184,7 +184,7 @@
 
     <!-- EntitySetMappings and AssociationSetMappings for object-value CollectionEntrys -->
 <%
-    foreach(var prop in ctx.GetQuery<ValueTypeProperty>()
+    foreach(var prop in GetValueTypeProperties(ctx)
         .Where(p => p.IsList && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
         .OrderBy(p => p.ObjectClass.Name)
@@ -226,7 +226,7 @@
 
     <!-- EntitySetMappings and AssociationSetMappings for object-struct CollectionEntrys -->
 <%
-    foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
+    foreach(var prop in GetCompoundObjectProperties(ctx)
         .Where(p => p.IsList) // && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
         .OrderBy(p => p.ObjectClass.Name)

@@ -20,6 +20,10 @@ namespace Zetbox.Generator
     using System.Linq;
     using System.Text;
     using Arebis.CodeGeneration;
+    using Zetbox.API;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
+    using Zetbox.Generator.Extensions;
 
     public class ResourceTemplate
         : CodeTemplate
@@ -84,6 +88,113 @@ namespace Zetbox.Generator
         {
             if (text == null) return null;
             return text.Replace("&", "&amp;").Replace("<", "&lt;").Replace(">", "&gt;").Replace("\"", "&quot;").Replace("'", "&apos;");
+        }
+
+        public bool IsFallback
+        {
+            get
+            {
+                return "true".Equals(Settings["isfallback"], StringComparison.CurrentCultureIgnoreCase);
+            }
+        }
+
+        protected virtual IQueryable<DataType> GetDataTypes(IZetboxContext ctx)
+        {
+            var qry = ctx.GetQuery<DataType>();
+            if (IsFallback)
+                qry = qry.Where(i => Compiler.FallbackModules.Contains(i.Module.Name));
+            return qry;
+        }
+
+        protected virtual IQueryable<ObjectClass> GetObjectClasses(IZetboxContext ctx)
+        {
+            var qry = ctx.GetQuery<ObjectClass>();
+            if (IsFallback)
+                qry = qry.Where(i => Compiler.FallbackModules.Contains(i.Module.Name));
+            return qry;
+        }
+
+        protected virtual IQueryable<ObjectClass> GetBaseClasses(IZetboxContext ctx)
+        {
+            var qry = ctx.GetQuery<ObjectClass>().Where(cls => cls.BaseObjectClass == null);
+            if (IsFallback)
+                qry = qry.Where(i => Compiler.FallbackModules.Contains(i.Module.Name));
+            return qry;
+        }
+
+        protected virtual IQueryable<ObjectClass> GetDerivedClasses(IZetboxContext ctx)
+        {
+            var qry = ctx.GetQuery<ObjectClass>().Where(cls => cls.BaseObjectClass != null);
+            if (IsFallback)
+                qry = qry.Where(i => Compiler.FallbackModules.Contains(i.Module.Name));
+            return qry;
+        }
+
+        protected virtual IQueryable<ObjectClass> GetDerivedTPTClasses(IZetboxContext ctx)
+        {
+            var qry = ctx.GetQuery<ObjectClass>()
+                .Where(cls => cls.BaseObjectClass != null)
+                .ToList()
+                .Where(cls => cls.GetTableMapping() == TableMapping.TPT)
+                .AsQueryable();
+            if (IsFallback)
+                qry = qry.Where(i => Compiler.FallbackModules.Contains(i.Module.Name));
+            return qry;
+        }
+
+
+        protected virtual IQueryable<CompoundObject> GetCompoundObjects(IZetboxContext ctx)
+        {
+            var qry = ctx.GetQuery<CompoundObject>();
+            if (IsFallback)
+                qry = qry.Where(i => Compiler.FallbackModules.Contains(i.Module.Name));
+            return qry;
+        }
+
+        protected virtual IQueryable<Relation> GetRelations(IZetboxContext ctx)
+        {
+            var qry = ctx.GetQuery<Relation>();
+            if (IsFallback)
+                qry = qry.Where(i => Compiler.FallbackModules.Contains(i.Module.Name));
+            return qry;
+        }
+
+        protected virtual IEnumerable<Relation> GetRelationsWithSeparateStorage(IZetboxContext ctx)
+        {
+            var qry = ctx.GetQuery<Relation>()
+                .Where(r => r.Storage == StorageType.Separate);
+            if (IsFallback)
+                qry = qry.Where(i => Compiler.FallbackModules.Contains(i.Module.Name));
+            return qry
+                .ToList()
+                .OrderBy(r => r.GetAssociationName());
+        }
+
+        protected virtual IEnumerable<Relation> GetRelationsWithoutSeparateStorage(IZetboxContext ctx)
+        {
+            var qry = ctx.GetQuery<Relation>()
+                .Where(r => r.Storage != StorageType.Separate);
+            if (IsFallback)
+                qry = qry.Where(i => Compiler.FallbackModules.Contains(i.Module.Name));
+            return qry
+                .ToList()
+                .OrderBy(r => r.GetAssociationName());
+        }
+
+        protected virtual IQueryable<ValueTypeProperty> GetValueTypeProperties(IZetboxContext ctx)
+        {
+            var qry = ctx.GetQuery<ValueTypeProperty>();
+            if (IsFallback)
+                qry = qry.Where(i => Compiler.FallbackModules.Contains(i.Module.Name));
+            return qry;
+        }
+
+        protected virtual IQueryable<CompoundObjectProperty> GetCompoundObjectProperties(IZetboxContext ctx)
+        {
+            var qry = ctx.GetQuery<CompoundObjectProperty>();
+            if (IsFallback)
+                qry = qry.Where(i => Compiler.FallbackModules.Contains(i.Module.Name));
+            return qry;
         }
     }
 }

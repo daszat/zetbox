@@ -170,6 +170,8 @@ M: System.Boolean Zetbox.DalProvider.Ef.EntityCollectionWrapper`2::Remove(TInter
 M: System.Void Zetbox.DalProvider.Ef.EntityCollectionWrapper`2::CopyTo(System.Array,System.Int32)
 M: System.Void Zetbox.DalProvider.Ef.EntityListWrapper`2::Insert(System.Int32,TInterface)
 M: System.Void Zetbox.Client.Presentables.ModuleEditor.WorkspaceViewModel::.ctor(Zetbox.Client.Presentables.IViewModelDependencies,Zetbox.API.IZetboxContext,Zetbox.Client.Presentables.ViewModel,System.Func`2<Zetbox.API.ContextIsolationLevel,Zetbox.API.IZetboxContext>)
+# Checked before usage
+T: Zetbox.API.Common.ZetboxAssetKeys
 
 R: Gendarme.Rules.Portability.DoNotHardcodePathsRule
 # Package URIs are FS-independent

@@ -56,6 +56,7 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries
         {
             RelationEnd relEnd = rel.GetEndFromRole(endRole);
             RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
+            var nav = relEnd.Navigator;
 
             // TODO: create/use ObjectReference*IMPLEMENTATION* instead (_fk* can already be made available)
             string moduleNamespace = rel.Module.Namespace;
@@ -72,12 +73,12 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.CollectionEntries
             string positionPropertyName = rel.NeedsPositionStorage(endRole)
                 ? name + Zetbox.API.Helper.PositionSuffix
                 : null;
-            string inverseNavigatorName = relEnd.Navigator != null
-                ? relEnd.Navigator.Name
+            string inverseNavigatorName = nav != null
+                ? nav.Name
                 : null;
-            bool inverseNavigatorIsList = relEnd.Navigator != null && relEnd.Navigator.GetIsList();
+            bool inverseNavigatorIsList = nav != null && nav.GetIsList();
             bool notifyInverseCollection = true;
-            bool eagerLoading = relEnd.Navigator != null && relEnd.Navigator.EagerLoading;
+            bool eagerLoading = nav != null && nav.EagerLoading;
             bool relDataTypeExportable = rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable();
             bool callGetterSetterEvents = false;
 

@@ -72,6 +72,14 @@ namespace Zetbox.Generator.Templates
             throw new InvalidOperationException("GetRelativeOutputPath is not overridden");
         }
 
+        protected virtual string RelativeExternBuildOutputSubDirectory
+        {
+            get
+            {
+                return IsFallback ? "Fallback" : "Generated";
+            }
+        }
+
         /// <summary>
         /// Override this to add one or more &lt;ItemGroup/>s to the project file
         /// </summary>

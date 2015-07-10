@@ -35,7 +35,7 @@
   
     <!-- EntitySets for all classes -->
 <%
-    foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.Name))
+    foreach(var cls in GetBaseClasses(ctx).OrderBy(c => c.Name))
     {
         var clsName = cls.Name;
 %>
@@ -55,7 +55,7 @@
 %>
     <!-- EntitySets and AssociationSets for all object-object CollectionEntrys -->
 <%
-    foreach (var rel in ctx.GetRelationsWithSeparateStorage())
+    foreach (var rel in GetRelationsWithSeparateStorage(ctx))
     {
         string entityName = rel.GetRelationClassName();
         string assocNameA = rel.GetRelationAssociationName(RelationEndRole.A);
@@ -78,7 +78,7 @@
 
     <!-- EntitySets and AssociationSets for all object-value CollectionEntrys -->
 <%
-    foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
+    foreach (var prop in GetValueTypeProperties(ctx)
         .Where(p => p.IsList && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
         .OrderBy(p => p.ObjectClass.Name)
@@ -99,7 +99,7 @@
 
     <!-- EntitySets and AssociationSets for all object-struct CollectionEntrys -->
 <%
-    foreach (var prop in ctx.GetQuery<CompoundObjectProperty>()
+    foreach (var prop in GetCompoundObjectProperties(ctx)
         .Where(p => p.IsList) // && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
         .OrderBy(p => p.ObjectClass.Name)
@@ -120,7 +120,7 @@
 
     <!-- AssociationSets for all object-object relations without CollectionEntrys -->
 <%
-    foreach (var rel in ctx.GetRelationsWithoutSeparateStorage())
+    foreach (var rel in GetRelationsWithoutSeparateStorage(ctx))
     {
         string assocName = rel.GetAssociationName();
         var a = rel.A;
@@ -146,7 +146,7 @@
   
   <!-- EntityTypes for all base classes -->
 <%
-    foreach (var cls in ctx.GetBaseClasses().OrderBy(c => c.Name))
+    foreach (var cls in GetBaseClasses(ctx).OrderBy(c => c.Name))
     {
         var clsName = cls.Name;
 %>
@@ -199,7 +199,7 @@
 
   <!-- EntityTypes for all other classes -->
 <%
-    foreach (var cls in ctx.GetDerivedClasses().OrderBy(c => c.Name))
+    foreach (var cls in GetDerivedClasses(ctx).OrderBy(c => c.Name))
     {
 %>
   <EntityType Name="<%= cls.Name %>EfImpl" BaseType="Model.<%= cls.BaseObjectClass.Name %>EfImpl"<%= GetAbstractModifier(cls) %>>
@@ -211,7 +211,7 @@
 
   <!-- EntityTypes and Associations for all object-object CollectionEntrys -->
 <%
-    foreach (var rel in ctx.GetRelationsWithSeparateStorage())
+    foreach (var rel in GetRelationsWithSeparateStorage(ctx))
     {
         var a = rel.A;
         var b = rel.B;
@@ -287,7 +287,7 @@
 
   <!-- EntityTypes and Associations for all object-value CollectionEntrys -->
 <%
-    foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
+    foreach (var prop in GetValueTypeProperties(ctx)
         .Where(p => p.IsList && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
         .OrderBy(p => p.ObjectClass.Name)
@@ -332,7 +332,7 @@
 
 <!-- EntityTypes and Associations for all object-CompoundObject CollectionEntrys -->
 <%
-    foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
+    foreach(var prop in GetCompoundObjectProperties(ctx)
         .Where(p => p.IsList) // && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
         .OrderBy(p => p.ObjectClass.Name)
@@ -380,7 +380,7 @@
 
   <!-- Associations for all object-object relations without CollectionEntrys -->
 <%
-    foreach (var rel in ctx.GetRelationsWithoutSeparateStorage())
+    foreach (var rel in GetRelationsWithoutSeparateStorage(ctx))
     {
         var a = rel.A;
         var b = rel.B;
@@ -400,7 +400,7 @@
 
   <!-- ComplexTypes for all CompoundObjects -->
 <%
-    foreach (var cls in ctx.GetQuery<CompoundObject>().OrderBy(s => s.Name))
+    foreach (var cls in GetCompoundObjects(ctx).OrderBy(s => s.Name))
     {
 %>
   <ComplexType Name="<%= cls.Name %>EfImpl" >

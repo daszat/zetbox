@@ -75,20 +75,25 @@
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MigraDoc.DocumentObjectModel, Version=1.32.3885.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\PDFsharp-MigraDoc-GDI-dasz.1.32.3886.0\lib\net35\MigraDoc.DocumentObjectModel.dll</HintPath>
+    <Reference Include="MigraDoc.DocumentObjectModel, Version=1.32.3887.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-GDI-dasz.1.32.3887.0\lib\net35\MigraDoc.DocumentObjectModel.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="MigraDoc.Rendering, Version=1.32.3885.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\PDFsharp-MigraDoc-GDI-dasz.1.32.3886.0\lib\net35\MigraDoc.Rendering.dll</HintPath>
+    <Reference Include="MigraDoc.Rendering, Version=1.32.3887.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-GDI-dasz.1.32.3887.0\lib\net35\MigraDoc.Rendering.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="MigraDoc.RtfRendering, Version=1.32.3885.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\PDFsharp-MigraDoc-GDI-dasz.1.32.3886.0\lib\net35\MigraDoc.RtfRendering.dll</HintPath>
+    <Reference Include="MigraDoc.RtfRendering, Version=1.32.3887.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-GDI-dasz.1.32.3887.0\lib\net35\MigraDoc.RtfRendering.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="PdfSharp, Version=1.32.2608.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\PDFsharp-MigraDoc-GDI-dasz.1.32.3886.0\lib\net35\PdfSharp.dll</HintPath>
+    <Reference Include="PdfSharp, Version=1.32.3887.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-GDI-dasz.1.32.3887.0\lib\net35\PdfSharp.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="PdfSharp.Charting, Version=1.32.2608.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\PDFsharp-MigraDoc-GDI-dasz.1.32.3886.0\lib\net35\PdfSharp.Charting.dll</HintPath>
+    <Reference Include="PdfSharp.Charting, Version=1.32.3887.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-GDI-dasz.1.32.3887.0\lib\net35\PdfSharp.Charting.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -147,8 +152,8 @@
       <Project>{CEB915D7-8E82-40F7-A100-0CBB1F9717E5}</Project>
       <Name>Zetbox.Assets</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Zetbox.Objects\Zetbox.Objects.csproj">
-      <Project>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</Project>
+    <ProjectReference Include="..\Zetbox.Objects.Fallback\Zetbox.Objects.csproj">
+      <Project>{218d5db5-5cc2-400d-9566-fc69c324ebc3}</Project>
       <Name>Zetbox.Objects</Name>
       <Private>False</Private>
     </ProjectReference>

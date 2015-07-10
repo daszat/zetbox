@@ -4,8 +4,25 @@
                    assembly="Zetbox.Objects.NHibernateImpl">
 
     <!-- RelationCollectionEntries -->
-    <class name="Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl+CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryProxy"
-           proxy="Zetbox.App.Base.CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryNHibernateImpl+CalculatedObjectReferenceProperty_dependsOn_Property_RelationEntryProxy"
+    <class name="Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryNHibernateImpl+ASide_connectsTo_BSide_RelationEntryProxy"
+           proxy="Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryNHibernateImpl+ASide_connectsTo_BSide_RelationEntryProxy"
+           table="`ASide_connectsTo_BSide`"
+           schema="`test`" >
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`test`</param>
+                <param name="sequence">`ASide_connectsTo_BSide_ID_seq`</param>
+            </generator>
+        </id>
+
+        <many-to-one name="A"
+                     column="`fk_ASide`" />
+        <many-to-one name="B"
+                     column="`fk_BSide`" />
+    </class>
+    <class name="Zetbox.App.Base.CalculatedReference_dependsOn_InputProperties_RelationEntryNHibernateImpl+CalculatedReference_dependsOn_InputProperties_RelationEntryProxy"
+           proxy="Zetbox.App.Base.CalculatedReference_dependsOn_InputProperties_RelationEntryNHibernateImpl+CalculatedReference_dependsOn_InputProperties_RelationEntryProxy"
            table="`CalculatedReference_dependsOn_InputProperties`"
            schema="`base`" >
 
@@ -22,8 +39,8 @@
                      column="`fk_InputProperties`" />
         <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
     </class>
-    <class name="Zetbox.App.Calendar.CalendarBook_shared_r_Group_RelationEntryNHibernateImpl+CalendarBook_shared_r_Group_RelationEntryProxy"
-           proxy="Zetbox.App.Calendar.CalendarBook_shared_r_Group_RelationEntryNHibernateImpl+CalendarBook_shared_r_Group_RelationEntryProxy"
+    <class name="Zetbox.App.Calendar.Calendar_shared_r_GroupReaders_RelationEntryNHibernateImpl+Calendar_shared_r_GroupReaders_RelationEntryProxy"
+           proxy="Zetbox.App.Calendar.Calendar_shared_r_GroupReaders_RelationEntryNHibernateImpl+Calendar_shared_r_GroupReaders_RelationEntryProxy"
            table="`Calendar_shared_r_GroupReaders`"
            schema="`calendar`" >
 
@@ -40,8 +57,8 @@
                      column="`fk_GroupReaders`" />
         <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
     </class>
-    <class name="Zetbox.App.Calendar.CalendarBook_shared_r_Identity_RelationEntryNHibernateImpl+CalendarBook_shared_r_Identity_RelationEntryProxy"
-           proxy="Zetbox.App.Calendar.CalendarBook_shared_r_Identity_RelationEntryNHibernateImpl+CalendarBook_shared_r_Identity_RelationEntryProxy"
+    <class name="Zetbox.App.Calendar.Calendar_shared_r_Readers_RelationEntryNHibernateImpl+Calendar_shared_r_Readers_RelationEntryProxy"
+           proxy="Zetbox.App.Calendar.Calendar_shared_r_Readers_RelationEntryNHibernateImpl+Calendar_shared_r_Readers_RelationEntryProxy"
            table="`Calendar_shared_r_Readers`"
            schema="`calendar`" >
 
@@ -57,8 +74,8 @@
         <many-to-one name="B"
                      column="`fk_Readers`" />
     </class>
-    <class name="Zetbox.App.Calendar.CalendarBook_shared_w_Group_RelationEntryNHibernateImpl+CalendarBook_shared_w_Group_RelationEntryProxy"
-           proxy="Zetbox.App.Calendar.CalendarBook_shared_w_Group_RelationEntryNHibernateImpl+CalendarBook_shared_w_Group_RelationEntryProxy"
+    <class name="Zetbox.App.Calendar.Calendar_shared_w_GroupWriters_RelationEntryNHibernateImpl+Calendar_shared_w_GroupWriters_RelationEntryProxy"
+           proxy="Zetbox.App.Calendar.Calendar_shared_w_GroupWriters_RelationEntryNHibernateImpl+Calendar_shared_w_GroupWriters_RelationEntryProxy"
            table="`Calendar_shared_w_GroupWriters`"
            schema="`calendar`" >
 
@@ -75,8 +92,8 @@
                      column="`fk_GroupWriters`" />
         <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
     </class>
-    <class name="Zetbox.App.Calendar.CalendarBook_shared_w_Identity_RelationEntryNHibernateImpl+CalendarBook_shared_w_Identity_RelationEntryProxy"
-           proxy="Zetbox.App.Calendar.CalendarBook_shared_w_Identity_RelationEntryNHibernateImpl+CalendarBook_shared_w_Identity_RelationEntryProxy"
+    <class name="Zetbox.App.Calendar.Calendar_shared_w_Writers_RelationEntryNHibernateImpl+Calendar_shared_w_Writers_RelationEntryProxy"
+           proxy="Zetbox.App.Calendar.Calendar_shared_w_Writers_RelationEntryNHibernateImpl+Calendar_shared_w_Writers_RelationEntryProxy"
            table="`Calendar_shared_w_Writers`"
            schema="`calendar`" >
 
@@ -92,8 +109,8 @@
         <many-to-one name="B"
                      column="`fk_Writers`" />
     </class>
-    <class name="Zetbox.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl+DataType_implements_Interface_RelationEntryProxy"
-           proxy="Zetbox.App.Base.DataType_implements_Interface_RelationEntryNHibernateImpl+DataType_implements_Interface_RelationEntryProxy"
+    <class name="Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntryNHibernateImpl+DataType_implements_ImplementedInterfaces_RelationEntryProxy"
+           proxy="Zetbox.App.Base.DataType_implements_ImplementedInterfaces_RelationEntryNHibernateImpl+DataType_implements_ImplementedInterfaces_RelationEntryProxy"
            table="`DataType_implements_ImplementedInterfaces`"
            schema="`base`" >
 
@@ -110,8 +127,8 @@
                      column="`fk_ImplementedInterfaces`" />
         <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
     </class>
-    <class name="at.dasz.DocumentManagement.File_has_Blob_RelationEntryNHibernateImpl+File_has_Blob_RelationEntryProxy"
-           proxy="at.dasz.DocumentManagement.File_has_Blob_RelationEntryNHibernateImpl+File_has_Blob_RelationEntryProxy"
+    <class name="at.dasz.DocumentManagement.Document_has_Revisions_RelationEntryNHibernateImpl+Document_has_Revisions_RelationEntryProxy"
+           proxy="at.dasz.DocumentManagement.Document_has_Revisions_RelationEntryNHibernateImpl+Document_has_Revisions_RelationEntryProxy"
            table="`Document_has_Revisions`"
            schema="`doc`" >
 
@@ -132,8 +149,8 @@
                   column="`fk_Document_pos`" />
         <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
     </class>
-    <class name="Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl+Identity_memberOf_Group_RelationEntryProxy"
-           proxy="Zetbox.App.Base.Identity_memberOf_Group_RelationEntryNHibernateImpl+Identity_memberOf_Group_RelationEntryProxy"
+    <class name="Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryNHibernateImpl+Identities_memberOf_Groups_RelationEntryProxy"
+           proxy="Zetbox.App.Base.Identities_memberOf_Groups_RelationEntryNHibernateImpl+Identities_memberOf_Groups_RelationEntryProxy"
            table="`Identities_memberOf_Groups`"
            schema="`base`" >
 
@@ -149,26 +166,8 @@
         <many-to-one name="B"
                      column="`fk_Groups`" />
     </class>
-    <class name="Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl+IndexConstraint_ensures_unique_on_Property_RelationEntryProxy"
-           proxy="Zetbox.App.Base.IndexConstraint_ensures_unique_on_Property_RelationEntryNHibernateImpl+IndexConstraint_ensures_unique_on_Property_RelationEntryProxy"
-           table="`UniqueContraints_ensures_unique_on_Properties`"
-           schema="`base`" >
-
-        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
-            <generator class="native">
-                <param name="schema">`base`</param>
-                <param name="sequence">`UniqueContraints_ensures_unique_on_Properties_ID_seq`</param>
-            </generator>
-        </id>
-
-        <many-to-one name="A"
-                     column="`fk_UniqueContraints`" />
-        <many-to-one name="B"
-                     column="`fk_Properties`" />
-        <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
-    </class>
-    <class name="Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl+Muhblah_has_TestCustomObject_RelationEntryProxy"
-           proxy="Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryNHibernateImpl+Muhblah_has_TestCustomObject_RelationEntryProxy"
+    <class name="Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryNHibernateImpl+MB_Many_Role_has_TCO_ManyList_Role_RelationEntryProxy"
+           proxy="Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryNHibernateImpl+MB_Many_Role_has_TCO_ManyList_Role_RelationEntryProxy"
            table="`MB_Many_Role_has_TCO_ManyList_Role`"
            schema="`test`" >
 
@@ -184,25 +183,8 @@
         <many-to-one name="B"
                      column="`fk_TCO_ManyList_Role`" />
     </class>
-    <class name="Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryNHibernateImpl+N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryProxy"
-           proxy="Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryNHibernateImpl+N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryProxy"
-           table="`ASide_connectsTo_BSide`"
-           schema="`test`" >
-
-        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
-            <generator class="native">
-                <param name="schema">`test`</param>
-                <param name="sequence">`ASide_connectsTo_BSide_ID_seq`</param>
-            </generator>
-        </id>
-
-        <many-to-one name="A"
-                     column="`fk_ASide`" />
-        <many-to-one name="B"
-                     column="`fk_BSide`" />
-    </class>
-    <class name="Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl+NavigationEntry_accessed_by_Group_RelationEntryProxy"
-           proxy="Zetbox.App.GUI.NavigationEntry_accessed_by_Group_RelationEntryNHibernateImpl+NavigationEntry_accessed_by_Group_RelationEntryProxy"
+    <class name="Zetbox.App.GUI.NavigationScreen_accessed_by_Groups_RelationEntryNHibernateImpl+NavigationScreen_accessed_by_Groups_RelationEntryProxy"
+           proxy="Zetbox.App.GUI.NavigationScreen_accessed_by_Groups_RelationEntryNHibernateImpl+NavigationScreen_accessed_by_Groups_RelationEntryProxy"
            table="`NavigationScreen_accessed_by_Groups`"
            schema="`gui`" >
 
@@ -219,8 +201,8 @@
                      column="`fk_Groups`" />
         <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
     </class>
-    <class name="Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl+ObjectReferenceProperty_shows_Method_RelationEntryProxy"
-           proxy="Zetbox.App.GUI.ObjectReferenceProperty_shows_Method_RelationEntryNHibernateImpl+ObjectReferenceProperty_shows_Method_RelationEntryProxy"
+    <class name="Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryNHibernateImpl+ObjRefProp_shows_Methods_RelationEntryProxy"
+           proxy="Zetbox.App.GUI.ObjRefProp_shows_Methods_RelationEntryNHibernateImpl+ObjRefProp_shows_Methods_RelationEntryProxy"
            table="`ObjRefProp_shows_Methods`"
            schema="`gui`" >
 
@@ -237,8 +219,26 @@
                      column="`fk_Methods`" />
         <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
     </class>
-    <class name="Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl+Projekt_haben_Mitarbeiter_RelationEntryProxy"
-           proxy="Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryNHibernateImpl+Projekt_haben_Mitarbeiter_RelationEntryProxy"
+    <class name="Zetbox.App.GUI.Presentable_displayedBy_SecondaryControlKinds_RelationEntryNHibernateImpl+Presentable_displayedBy_SecondaryControlKinds_RelationEntryProxy"
+           proxy="Zetbox.App.GUI.Presentable_displayedBy_SecondaryControlKinds_RelationEntryNHibernateImpl+Presentable_displayedBy_SecondaryControlKinds_RelationEntryProxy"
+           table="`Presentable_displayedBy_SecondaryControlKinds`"
+           schema="`gui`" >
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`gui`</param>
+                <param name="sequence">`Presentable_displayedBy_SecondaryControlKinds_ID_seq`</param>
+            </generator>
+        </id>
+
+        <many-to-one name="A"
+                     column="`fk_Presentable`" />
+        <many-to-one name="B"
+                     column="`fk_SecondaryControlKinds`" />
+        <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
+    </class>
+    <class name="Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryNHibernateImpl+Projekte_haben_Mitarbeiter_RelationEntryProxy"
+           proxy="Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryNHibernateImpl+Projekte_haben_Mitarbeiter_RelationEntryProxy"
            table="`Projekte_haben_Mitarbeiter`"
            schema="`projekte`" >
 
@@ -259,8 +259,8 @@
                   column="`fk_Projekte_pos`" />
         <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
     </class>
-    <class name="Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl+RoleMembership_resolves_Relation_RelationEntryProxy"
-           proxy="Zetbox.App.Base.RoleMembership_resolves_Relation_RelationEntryNHibernateImpl+RoleMembership_resolves_Relation_RelationEntryProxy"
+    <class name="Zetbox.App.Base.RoleMembership_resolves_Relations_RelationEntryNHibernateImpl+RoleMembership_resolves_Relations_RelationEntryProxy"
+           proxy="Zetbox.App.Base.RoleMembership_resolves_Relations_RelationEntryNHibernateImpl+RoleMembership_resolves_Relations_RelationEntryProxy"
            table="`RoleMembership_resolves_Relations`"
            schema="`base`" >
 
@@ -303,8 +303,8 @@
                   column="`fk_SourceColumn_pos`" />
         <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
     </class>
-    <class name="Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl+TestStudent_füllt_aus_Fragebogen_RelationEntryProxy"
-           proxy="Zetbox.App.Test.TestStudent_füllt_aus_Fragebogen_RelationEntryNHibernateImpl+TestStudent_füllt_aus_Fragebogen_RelationEntryProxy"
+    <class name="Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryNHibernateImpl+Student_füllt_aus_Testbogen_RelationEntryProxy"
+           proxy="Zetbox.App.Test.Student_füllt_aus_Testbogen_RelationEntryNHibernateImpl+Student_füllt_aus_Testbogen_RelationEntryProxy"
            table="`Student_füllt_aus_Testbogen`"
            schema="`test`" >
 
@@ -320,22 +320,22 @@
         <many-to-one name="B"
                      column="`fk_Testbogen`" />
     </class>
-    <class name="Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl+ViewModelDescriptor_displayedBy_ControlKind_RelationEntryProxy"
-           proxy="Zetbox.App.GUI.ViewModelDescriptor_displayedBy_ControlKind_RelationEntryNHibernateImpl+ViewModelDescriptor_displayedBy_ControlKind_RelationEntryProxy"
-           table="`Presentable_displayedBy_SecondaryControlKinds`"
-           schema="`gui`" >
+    <class name="Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryNHibernateImpl+UniqueContraints_ensures_unique_on_Properties_RelationEntryProxy"
+           proxy="Zetbox.App.Base.UniqueContraints_ensures_unique_on_Properties_RelationEntryNHibernateImpl+UniqueContraints_ensures_unique_on_Properties_RelationEntryProxy"
+           table="`UniqueContraints_ensures_unique_on_Properties`"
+           schema="`base`" >
 
         <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
             <generator class="native">
-                <param name="schema">`gui`</param>
-                <param name="sequence">`Presentable_displayedBy_SecondaryControlKinds_ID_seq`</param>
+                <param name="schema">`base`</param>
+                <param name="sequence">`UniqueContraints_ensures_unique_on_Properties_ID_seq`</param>
             </generator>
         </id>
 
         <many-to-one name="A"
-                     column="`fk_Presentable`" />
+                     column="`fk_UniqueContraints`" />
         <many-to-one name="B"
-                     column="`fk_SecondaryControlKinds`" />
+                     column="`fk_Properties`" />
         <property name="ExportGuid" column="`ExportGuid`" type="Guid" />
     </class>
 

@@ -60,7 +60,7 @@ namespace Zetbox.App.Test
             {
                 if (_BSide == null)
                 {
-                    _BSide = new BSideCollectionWrapper<Zetbox.App.Test.N_to_M_relations_A, Zetbox.App.Test.N_to_M_relations_B, Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl, EntityCollection<Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl>>(
+                    _BSide = new BSideCollectionWrapper<Zetbox.App.Test.N_to_M_relations_A, Zetbox.App.Test.N_to_M_relations_B, Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryEfImpl, EntityCollection<Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryEfImpl>>(
                             this,
                             BSideImpl);
                 }
@@ -69,7 +69,7 @@ namespace Zetbox.App.Test
         }
         
         [EdmRelationshipNavigationProperty("Model", "FK_ASide_connectsTo_BSide_A", "CollectionEntry")]
-        public EntityCollection<Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl> BSideImpl
+        public EntityCollection<Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryEfImpl> BSideImpl
         {
             get
             {
@@ -77,14 +77,14 @@ namespace Zetbox.App.Test
             }
         }
 
-        private EntityCollection<Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl> _BSideImplEntityCollection;
-        internal EntityCollection<Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl> GetBSideImplCollection()
+        private EntityCollection<Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryEfImpl> _BSideImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryEfImpl> GetBSideImplCollection()
         {
             if (_BSideImplEntityCollection == null)
             {
                 _BSideImplEntityCollection
                     = ((IEntityWithRelationships)(this)).RelationshipManager
-                        .GetRelatedCollection<Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl>(
+                        .GetRelatedCollection<Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryEfImpl>(
                             "Model.FK_ASide_connectsTo_BSide_A",
                             "CollectionEntry");
                 // the EntityCollection has to be loaded before attaching the AssociationChanged event
@@ -99,7 +99,7 @@ namespace Zetbox.App.Test
             }
             return _BSideImplEntityCollection;
         }
-        private BSideCollectionWrapper<Zetbox.App.Test.N_to_M_relations_A, Zetbox.App.Test.N_to_M_relations_B, Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl, EntityCollection<Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryEfImpl>> _BSide;
+        private BSideCollectionWrapper<Zetbox.App.Test.N_to_M_relations_A, Zetbox.App.Test.N_to_M_relations_B, Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryEfImpl, EntityCollection<Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryEfImpl>> _BSide;
 
         public Zetbox.API.Async.ZbTask TriggerFetchBSideAsync()
         {

@@ -129,4 +129,22 @@
   <data name="CreateLoginToken_description" xml:space="preserve">
     <value>Creates or re-creates the login token</value>
   </data>
+  <data name="SetPassword_label" xml:space="preserve">
+    <value>SetPassword</value>
+  </data>
+  <data name="SetPassword_description" xml:space="preserve">
+    <value>Sets a password hash from the given plain text password</value>
+  </data>
+  <data name="SetPassword(plainTextPassword)_label" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="SetPassword(plainTextPassword)_description" xml:space="preserve">
+    <value>The password as plain text</value>
+  </data>
+  <data name="SetPasswordUI_label" xml:space="preserve">
+    <value>Set password</value>
+  </data>
+  <data name="SetPasswordUI_description" xml:space="preserve">
+    <value>Sets a new password by opening a dialog</value>
+  </data>
 </root>

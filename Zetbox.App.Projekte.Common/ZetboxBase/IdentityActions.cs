@@ -18,6 +18,7 @@ namespace Zetbox.App.Base
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using CryptSharp;
     using Zetbox.API;
 
     [Implementor]
@@ -41,6 +42,20 @@ namespace Zetbox.App.Base
         public static void ClearLoginToken(Identity obj)
         {
             obj.LoginToken = null;
+        }
+
+        [Invocation]
+        public static void SetPassword(Identity obj, string plainTextPassword)
+        {
+            if (!string.IsNullOrEmpty(plainTextPassword))
+            {
+                obj.Password = Crypter.Blowfish.Crypt(plainTextPassword);
+            }
+            else
+            {
+                // null or empty is a valid argument as this means, that there is no local account (local password) and it is a pure OpenID account (or something)
+                obj.Password = null;
+            }
         }
     }
 }

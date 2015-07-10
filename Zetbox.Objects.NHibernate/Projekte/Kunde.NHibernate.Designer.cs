@@ -1136,7 +1136,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Kunde> OnEMai
                 ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
             }
-            // should fetch && remember parent for TestObjClass_has_Kunde_RelationEntry
+            // should fetch && remember parent for TestObjClass_has_ObjectProp_RelationEntry
 
             EMails.Clear();
             ChangedBy = null;

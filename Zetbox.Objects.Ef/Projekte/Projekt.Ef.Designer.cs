@@ -995,7 +995,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
             {
                 if (_Mitarbeiter == null)
                 {
-                    _Mitarbeiter = new BSideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryEfImpl, EntityCollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryEfImpl>>(
+                    _Mitarbeiter = new BSideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryEfImpl, EntityCollection<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryEfImpl>>(
                             this,
                             MitarbeiterImpl);
                 }
@@ -1004,7 +1004,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
         }
         
         [EdmRelationshipNavigationProperty("Model", "FK_Projekte_haben_Mitarbeiter_A", "CollectionEntry")]
-        public EntityCollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryEfImpl> MitarbeiterImpl
+        public EntityCollection<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryEfImpl> MitarbeiterImpl
         {
             get
             {
@@ -1012,14 +1012,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
             }
         }
 
-        private EntityCollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryEfImpl> _MitarbeiterImplEntityCollection;
-        internal EntityCollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryEfImpl> GetMitarbeiterImplCollection()
+        private EntityCollection<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryEfImpl> _MitarbeiterImplEntityCollection;
+        internal EntityCollection<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryEfImpl> GetMitarbeiterImplCollection()
         {
             if (_MitarbeiterImplEntityCollection == null)
             {
                 _MitarbeiterImplEntityCollection
                     = ((IEntityWithRelationships)(this)).RelationshipManager
-                        .GetRelatedCollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryEfImpl>(
+                        .GetRelatedCollection<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryEfImpl>(
                             "Model.FK_Projekte_haben_Mitarbeiter_A",
                             "CollectionEntry");
                 // the EntityCollection has to be loaded before attaching the AssociationChanged event
@@ -1034,7 +1034,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Projekte.Projekt> OnAu
             }
             return _MitarbeiterImplEntityCollection;
         }
-        private BSideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryEfImpl, EntityCollection<Zetbox.App.Projekte.Projekt_haben_Mitarbeiter_RelationEntryEfImpl>> _Mitarbeiter;
+        private BSideListWrapper<Zetbox.App.Projekte.Projekt, Zetbox.App.Projekte.Mitarbeiter, Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryEfImpl, EntityCollection<Zetbox.App.Projekte.Projekte_haben_Mitarbeiter_RelationEntryEfImpl>> _Mitarbeiter;
 
         public Zetbox.API.Async.ZbTask TriggerFetchMitarbeiterAsync()
         {

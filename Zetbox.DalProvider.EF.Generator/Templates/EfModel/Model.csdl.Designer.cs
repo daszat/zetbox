@@ -41,7 +41,7 @@ this.WriteObjects("  <EntityContainer Name=\"Entities\">\r\n");
 this.WriteObjects("  \r\n");
 this.WriteObjects("    <!-- EntitySets for all classes -->\r\n");
 #line 38 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.cst"
-foreach(var cls in ctx.GetBaseClasses().OrderBy(c => c.Name))
+foreach(var cls in GetBaseClasses(ctx).OrderBy(c => c.Name))
     {
         var clsName = cls.Name;
 
@@ -64,7 +64,7 @@ this.WriteObjects("    </AssociationSet>\r\n");
 #line 56 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.cst"
 this.WriteObjects("    <!-- EntitySets and AssociationSets for all object-object CollectionEntrys -->\r\n");
 #line 58 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.cst"
-foreach (var rel in ctx.GetRelationsWithSeparateStorage())
+foreach (var rel in GetRelationsWithSeparateStorage(ctx))
     {
         string entityName = rel.GetRelationClassName();
         string assocNameA = rel.GetRelationAssociationName(RelationEndRole.A);
@@ -89,7 +89,7 @@ this.WriteObjects("    </AssociationSet>\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    <!-- EntitySets and AssociationSets for all object-value CollectionEntrys -->\r\n");
 #line 81 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.cst"
-foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
+foreach (var prop in GetValueTypeProperties(ctx)
         .Where(p => p.IsList && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
         .OrderBy(p => p.ObjectClass.Name)
@@ -112,7 +112,7 @@ this.WriteObjects("    </AssociationSet>\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    <!-- EntitySets and AssociationSets for all object-struct CollectionEntrys -->\r\n");
 #line 102 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.cst"
-foreach (var prop in ctx.GetQuery<CompoundObjectProperty>()
+foreach (var prop in GetCompoundObjectProperties(ctx)
         .Where(p => p.IsList) // && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
         .OrderBy(p => p.ObjectClass.Name)
@@ -135,7 +135,7 @@ this.WriteObjects("    </AssociationSet>\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    <!-- AssociationSets for all object-object relations without CollectionEntrys -->\r\n");
 #line 123 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.cst"
-foreach (var rel in ctx.GetRelationsWithoutSeparateStorage())
+foreach (var rel in GetRelationsWithoutSeparateStorage(ctx))
     {
         string assocName = rel.GetAssociationName();
         var a = rel.A;
@@ -163,7 +163,7 @@ this.WriteObjects("  </EntityContainer>\r\n");
 this.WriteObjects("  \r\n");
 this.WriteObjects("  <!-- EntityTypes for all base classes -->\r\n");
 #line 149 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.cst"
-foreach (var cls in ctx.GetBaseClasses().OrderBy(c => c.Name))
+foreach (var cls in GetBaseClasses(ctx).OrderBy(c => c.Name))
     {
         var clsName = cls.Name;
 
@@ -221,7 +221,7 @@ this.WriteObjects("  </Association>\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("  <!-- EntityTypes for all other classes -->\r\n");
 #line 202 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.cst"
-foreach (var cls in ctx.GetDerivedClasses().OrderBy(c => c.Name))
+foreach (var cls in GetDerivedClasses(ctx).OrderBy(c => c.Name))
     {
 
 #line 205 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.cst"
@@ -237,7 +237,7 @@ this.WriteObjects("  </EntityType>\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("  <!-- EntityTypes and Associations for all object-object CollectionEntrys -->\r\n");
 #line 214 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.cst"
-foreach (var rel in ctx.GetRelationsWithSeparateStorage())
+foreach (var rel in GetRelationsWithSeparateStorage(ctx))
     {
         var a = rel.A;
         var b = rel.B;
@@ -323,7 +323,7 @@ this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("  <!-- EntityTypes and Associations for all object-value CollectionEntrys -->\r\n");
 #line 290 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.cst"
-foreach (var prop in ctx.GetQuery<ValueTypeProperty>()
+foreach (var prop in GetValueTypeProperties(ctx)
         .Where(p => p.IsList && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
         .OrderBy(p => p.ObjectClass.Name)
@@ -372,7 +372,7 @@ this.WriteObjects("  </Association>\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("<!-- EntityTypes and Associations for all object-CompoundObject CollectionEntrys -->\r\n");
 #line 335 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.cst"
-foreach(var prop in ctx.GetQuery<CompoundObjectProperty>()
+foreach(var prop in GetCompoundObjectProperties(ctx)
         .Where(p => p.IsList) // && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
         .OrderBy(p => p.ObjectClass.Name)
@@ -424,7 +424,7 @@ this.WriteObjects("  </Association>\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("  <!-- Associations for all object-object relations without CollectionEntrys -->\r\n");
 #line 383 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.cst"
-foreach (var rel in ctx.GetRelationsWithoutSeparateStorage())
+foreach (var rel in GetRelationsWithoutSeparateStorage(ctx))
     {
         var a = rel.A;
         var b = rel.B;
@@ -446,7 +446,7 @@ this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("  <!-- ComplexTypes for all CompoundObjects -->\r\n");
 #line 403 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.cst"
-foreach (var cls in ctx.GetQuery<CompoundObject>().OrderBy(s => s.Name))
+foreach (var cls in GetCompoundObjects(ctx).OrderBy(s => s.Name))
     {
 
 #line 406 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.cst"

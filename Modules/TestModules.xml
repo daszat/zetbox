@@ -248,54 +248,54 @@ public static void ObjectIsValid(Task obj, ObjectIsValidEventArgs e)
     <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
     <ZetboxBase:TableName>Tasks</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
-  <ZetboxBase:DataType_implements_Interface_RelationEntry ExportGuid="8c60753a-addf-4edf-92f8-8ad18157d9a5">
+  <ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry ExportGuid="8c60753a-addf-4edf-92f8-8ad18157d9a5">
     <ZetboxBase:A>f6e11d1d-a832-413a-bf1d-5ecf5f7bc79d</ZetboxBase:A>
     <ZetboxBase:B>a73f2d0a-786b-483d-b474-b9d9df42b8b3</ZetboxBase:B>
-  </ZetboxBase:DataType_implements_Interface_RelationEntry>
-  <ZetboxBase:DataType_implements_Interface_RelationEntry ExportGuid="d4171947-0bb8-4afd-8e8c-f1bb91ca9434">
+  </ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry>
+  <ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry ExportGuid="d4171947-0bb8-4afd-8e8c-f1bb91ca9434">
     <ZetboxBase:A>f6e11d1d-a832-413a-bf1d-5ecf5f7bc79d</ZetboxBase:A>
     <ZetboxBase:B>4ae6616a-eca3-47a5-b502-8e3c3913c2f0</ZetboxBase:B>
-  </ZetboxBase:DataType_implements_Interface_RelationEntry>
-  <ZetboxBase:DataType_implements_Interface_RelationEntry ExportGuid="d969f01b-8e07-465f-80c1-a19cf67c8cf9">
+  </ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry>
+  <ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry ExportGuid="d969f01b-8e07-465f-80c1-a19cf67c8cf9">
     <ZetboxBase:A>b9ddd097-4f45-40c5-87e9-7331ab58727c</ZetboxBase:A>
     <ZetboxBase:B>a73f2d0a-786b-483d-b474-b9d9df42b8b3</ZetboxBase:B>
-  </ZetboxBase:DataType_implements_Interface_RelationEntry>
-  <ZetboxBase:DataType_implements_Interface_RelationEntry ExportGuid="9c6e9aeb-b513-472a-8a40-62efa064d458">
+  </ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry>
+  <ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry ExportGuid="9c6e9aeb-b513-472a-8a40-62efa064d458">
     <ZetboxBase:A>b9ddd097-4f45-40c5-87e9-7331ab58727c</ZetboxBase:A>
     <ZetboxBase:B>4ae6616a-eca3-47a5-b502-8e3c3913c2f0</ZetboxBase:B>
-  </ZetboxBase:DataType_implements_Interface_RelationEntry>
-  <ZetboxBase:DataType_implements_Interface_RelationEntry ExportGuid="b7707e1b-5d4d-4e60-aa8a-c21b8a01a333">
+  </ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry>
+  <ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry ExportGuid="b7707e1b-5d4d-4e60-aa8a-c21b8a01a333">
     <ZetboxBase:A>77933a20-338a-4961-b751-62ffa0a75c6a</ZetboxBase:A>
     <ZetboxBase:B>a73f2d0a-786b-483d-b474-b9d9df42b8b3</ZetboxBase:B>
-  </ZetboxBase:DataType_implements_Interface_RelationEntry>
-  <ZetboxBase:DataType_implements_Interface_RelationEntry ExportGuid="db4db4c0-9c21-4ea8-ad4f-5ca7d7f67310">
+  </ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry>
+  <ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry ExportGuid="db4db4c0-9c21-4ea8-ad4f-5ca7d7f67310">
     <ZetboxBase:A>77933a20-338a-4961-b751-62ffa0a75c6a</ZetboxBase:A>
     <ZetboxBase:B>4ae6616a-eca3-47a5-b502-8e3c3913c2f0</ZetboxBase:B>
-  </ZetboxBase:DataType_implements_Interface_RelationEntry>
-  <ZetboxBase:DataType_implements_Interface_RelationEntry ExportGuid="d5926d75-e987-4e9b-93a6-44919ad0cafe">
+  </ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry>
+  <ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry ExportGuid="d5926d75-e987-4e9b-93a6-44919ad0cafe">
     <ZetboxBase:A>885939e8-82e1-4fdf-b80e-5f612d5131d3</ZetboxBase:A>
     <ZetboxBase:B>ef042c7f-93c0-4989-a7c9-0d03598671e5</ZetboxBase:B>
-  </ZetboxBase:DataType_implements_Interface_RelationEntry>
-  <ZetboxBase:DataType_implements_Interface_RelationEntry ExportGuid="0f9d7471-7f42-4e62-a59a-cb22b702bd7f">
+  </ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry>
+  <ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry ExportGuid="0f9d7471-7f42-4e62-a59a-cb22b702bd7f">
     <ZetboxBase:A>885939e8-82e1-4fdf-b80e-5f612d5131d3</ZetboxBase:A>
     <ZetboxBase:B>a73f2d0a-786b-483d-b474-b9d9df42b8b3</ZetboxBase:B>
-  </ZetboxBase:DataType_implements_Interface_RelationEntry>
-  <ZetboxBase:DataType_implements_Interface_RelationEntry ExportGuid="75519479-3d1c-4f85-aeb6-521101b7f3d4">
+  </ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry>
+  <ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry ExportGuid="75519479-3d1c-4f85-aeb6-521101b7f3d4">
     <ZetboxBase:A>885939e8-82e1-4fdf-b80e-5f612d5131d3</ZetboxBase:A>
     <ZetboxBase:B>353e603d-3fff-47d3-9b4b-6b2c63ba3f50</ZetboxBase:B>
-  </ZetboxBase:DataType_implements_Interface_RelationEntry>
-  <ZetboxBase:DataType_implements_Interface_RelationEntry ExportGuid="21117d5e-73c0-4667-9766-7c90216d2d0e">
+  </ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry>
+  <ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry ExportGuid="21117d5e-73c0-4667-9766-7c90216d2d0e">
     <ZetboxBase:A>885939e8-82e1-4fdf-b80e-5f612d5131d3</ZetboxBase:A>
     <ZetboxBase:B>4ae6616a-eca3-47a5-b502-8e3c3913c2f0</ZetboxBase:B>
-  </ZetboxBase:DataType_implements_Interface_RelationEntry>
-  <ZetboxBase:DataType_implements_Interface_RelationEntry ExportGuid="33251813-22bd-4913-8225-8f71da76e801">
+  </ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry>
+  <ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry ExportGuid="33251813-22bd-4913-8225-8f71da76e801">
     <ZetboxBase:A>3fbb42ca-a084-491d-9135-85ed24f1ef78</ZetboxBase:A>
     <ZetboxBase:B>a73f2d0a-786b-483d-b474-b9d9df42b8b3</ZetboxBase:B>
-  </ZetboxBase:DataType_implements_Interface_RelationEntry>
-  <ZetboxBase:DataType_implements_Interface_RelationEntry ExportGuid="36a57af0-4527-4d92-af6c-7007f44bdc25">
+  </ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry>
+  <ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry ExportGuid="36a57af0-4527-4d92-af6c-7007f44bdc25">
     <ZetboxBase:A>3fbb42ca-a084-491d-9135-85ed24f1ef78</ZetboxBase:A>
     <ZetboxBase:B>4ae6616a-eca3-47a5-b502-8e3c3913c2f0</ZetboxBase:B>
-  </ZetboxBase:DataType_implements_Interface_RelationEntry>
+  </ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry>
   <ZetboxBase:StringProperty ExportGuid="aaffed82-1f4c-4c0f-a52d-3ca4dbdefe94">
     <ZetboxBase:ChangedOn>2012-04-05T09:26:16.677239Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
@@ -3293,26 +3293,26 @@ public static void isValid_Projekt(Task obj, PropertyIsValidEventArgs e)
     <ZetboxBase:Reason>ExportGuid must be unique</ZetboxBase:Reason>
     <ZetboxBase:IsUnique>true</ZetboxBase:IsUnique>
   </ZetboxBase:IndexConstraint>
-  <ZetboxBase:IndexConstraint_ensures_unique_on_Property_RelationEntry ExportGuid="5c926d65-f77c-4b8e-b29f-9c08910c8f50">
+  <ZetboxBase:UniqueContraints_ensures_unique_on_Properties_RelationEntry ExportGuid="5c926d65-f77c-4b8e-b29f-9c08910c8f50">
     <ZetboxBase:A>8d894349-be23-413e-812f-1532a704dce1</ZetboxBase:A>
     <ZetboxBase:B>01f74ef3-9369-4e29-a811-293fc27f7c27</ZetboxBase:B>
-  </ZetboxBase:IndexConstraint_ensures_unique_on_Property_RelationEntry>
-  <ZetboxBase:IndexConstraint_ensures_unique_on_Property_RelationEntry ExportGuid="c8408d8e-2cac-4235-96db-ddb5d4dfb63c">
+  </ZetboxBase:UniqueContraints_ensures_unique_on_Properties_RelationEntry>
+  <ZetboxBase:UniqueContraints_ensures_unique_on_Properties_RelationEntry ExportGuid="c8408d8e-2cac-4235-96db-ddb5d4dfb63c">
     <ZetboxBase:A>9e082b31-a5b8-4cb6-97df-de33fcd2ac2b</ZetboxBase:A>
     <ZetboxBase:B>1c8414ef-f164-4f7e-a7bf-5fca894aa4f4</ZetboxBase:B>
-  </ZetboxBase:IndexConstraint_ensures_unique_on_Property_RelationEntry>
-  <ZetboxBase:IndexConstraint_ensures_unique_on_Property_RelationEntry ExportGuid="e7bc6a32-c9a4-422b-97c5-477933a60f9d">
+  </ZetboxBase:UniqueContraints_ensures_unique_on_Properties_RelationEntry>
+  <ZetboxBase:UniqueContraints_ensures_unique_on_Properties_RelationEntry ExportGuid="e7bc6a32-c9a4-422b-97c5-477933a60f9d">
     <ZetboxBase:A>a764ada6-a0d2-4e8e-8701-40d6f4abc324</ZetboxBase:A>
     <ZetboxBase:B>fc57ee0f-1ba5-445c-9007-a5ec1507cf39</ZetboxBase:B>
-  </ZetboxBase:IndexConstraint_ensures_unique_on_Property_RelationEntry>
-  <ZetboxBase:IndexConstraint_ensures_unique_on_Property_RelationEntry ExportGuid="7c318a79-c854-42cc-9a3b-3f5890f8d2dc">
+  </ZetboxBase:UniqueContraints_ensures_unique_on_Properties_RelationEntry>
+  <ZetboxBase:UniqueContraints_ensures_unique_on_Properties_RelationEntry ExportGuid="7c318a79-c854-42cc-9a3b-3f5890f8d2dc">
     <ZetboxBase:A>b1d3ad4f-2142-430d-9252-0d36c4d629da</ZetboxBase:A>
     <ZetboxBase:B>df36d615-9f6e-4075-ae1c-8c5cd8a4ef91</ZetboxBase:B>
-  </ZetboxBase:IndexConstraint_ensures_unique_on_Property_RelationEntry>
-  <ZetboxBase:IndexConstraint_ensures_unique_on_Property_RelationEntry ExportGuid="b6e92543-ebc3-409c-8be5-9e4b86158db1">
+  </ZetboxBase:UniqueContraints_ensures_unique_on_Properties_RelationEntry>
+  <ZetboxBase:UniqueContraints_ensures_unique_on_Properties_RelationEntry ExportGuid="b6e92543-ebc3-409c-8be5-9e4b86158db1">
     <ZetboxBase:A>e0414532-a07a-4bbb-9834-6fa2bd067b99</ZetboxBase:A>
     <ZetboxBase:B>9e6faf9c-4636-403b-94fa-98c789806793</ZetboxBase:B>
-  </ZetboxBase:IndexConstraint_ensures_unique_on_Property_RelationEntry>
+  </ZetboxBase:UniqueContraints_ensures_unique_on_Properties_RelationEntry>
   <ZetboxBase:CurrentDateTimeDefaultValue ExportGuid="382cf672-c96e-44bd-97b9-aee7a8ecdb9a">
     <ZetboxBase:ChangedOn>2011-08-06T08:30:57.891618Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-07-21T12:16:49Z</ZetboxBase:CreatedOn>
@@ -3436,72 +3436,72 @@ public static void isValid_Projekt(Task obj, PropertyIsValidEventArgs e)
     <ZetboxBase:ObjectClass>885939e8-82e1-4fdf-b80e-5f612d5131d3</ZetboxBase:ObjectClass>
     <ZetboxBase:Rights>3</ZetboxBase:Rights>
   </ZetboxBase:RoleMembership>
-  <ZetboxBase:RoleMembership_resolves_Relation_RelationEntry ExportGuid="cb6f2ed0-bc2d-417f-a795-b5748d2131e4">
+  <ZetboxBase:RoleMembership_resolves_Relations_RelationEntry ExportGuid="cb6f2ed0-bc2d-417f-a795-b5748d2131e4">
     <ZetboxBase:A>1126a629-7fa7-4e5a-9e59-53a703f8e908</ZetboxBase:A>
     <ZetboxBase:A_pos>1</ZetboxBase:A_pos>
     <ZetboxBase:B>035db8da-a9f4-4529-9f50-29afd9e6f043</ZetboxBase:B>
     <ZetboxBase:B_pos>1</ZetboxBase:B_pos>
-  </ZetboxBase:RoleMembership_resolves_Relation_RelationEntry>
-  <ZetboxBase:RoleMembership_resolves_Relation_RelationEntry ExportGuid="44714197-82ec-4f2e-a787-c2fb995f4eaf">
+  </ZetboxBase:RoleMembership_resolves_Relations_RelationEntry>
+  <ZetboxBase:RoleMembership_resolves_Relations_RelationEntry ExportGuid="44714197-82ec-4f2e-a787-c2fb995f4eaf">
     <ZetboxBase:A>223373dd-35b2-47a9-be57-0a5630fb7d35</ZetboxBase:A>
     <ZetboxBase:A_pos>2147483647</ZetboxBase:A_pos>
     <ZetboxBase:B>d3b22699-c804-4443-bf4d-5d083cb0d313</ZetboxBase:B>
     <ZetboxBase:B_pos>0</ZetboxBase:B_pos>
-  </ZetboxBase:RoleMembership_resolves_Relation_RelationEntry>
-  <ZetboxBase:RoleMembership_resolves_Relation_RelationEntry ExportGuid="42e50bcc-3c02-4068-861e-bdacb132762e">
+  </ZetboxBase:RoleMembership_resolves_Relations_RelationEntry>
+  <ZetboxBase:RoleMembership_resolves_Relations_RelationEntry ExportGuid="42e50bcc-3c02-4068-861e-bdacb132762e">
     <ZetboxBase:A>26259895-b4d4-4735-93ca-895fbe64cba3</ZetboxBase:A>
     <ZetboxBase:A_pos>2147483647</ZetboxBase:A_pos>
     <ZetboxBase:B>062fa6cf-bdb1-4994-9e8b-5fe5426c60aa</ZetboxBase:B>
     <ZetboxBase:B_pos>0</ZetboxBase:B_pos>
-  </ZetboxBase:RoleMembership_resolves_Relation_RelationEntry>
-  <ZetboxBase:RoleMembership_resolves_Relation_RelationEntry ExportGuid="48e2478f-37e0-40ea-a250-ea86d6fc8a9d">
+  </ZetboxBase:RoleMembership_resolves_Relations_RelationEntry>
+  <ZetboxBase:RoleMembership_resolves_Relations_RelationEntry ExportGuid="48e2478f-37e0-40ea-a250-ea86d6fc8a9d">
     <ZetboxBase:A>26259895-b4d4-4735-93ca-895fbe64cba3</ZetboxBase:A>
     <ZetboxBase:A_pos>2147483647</ZetboxBase:A_pos>
     <ZetboxBase:B>29d161a2-e532-4d94-860b-b9f66c351d8a</ZetboxBase:B>
     <ZetboxBase:B_pos>2</ZetboxBase:B_pos>
-  </ZetboxBase:RoleMembership_resolves_Relation_RelationEntry>
-  <ZetboxBase:RoleMembership_resolves_Relation_RelationEntry ExportGuid="622341dd-8839-42fd-8387-b4f80695aede">
+  </ZetboxBase:RoleMembership_resolves_Relations_RelationEntry>
+  <ZetboxBase:RoleMembership_resolves_Relations_RelationEntry ExportGuid="622341dd-8839-42fd-8387-b4f80695aede">
     <ZetboxBase:A>26259895-b4d4-4735-93ca-895fbe64cba3</ZetboxBase:A>
     <ZetboxBase:A_pos>2147483647</ZetboxBase:A_pos>
     <ZetboxBase:B>c7b3cf10-cdc8-454c-826c-04a0f7e5ef3e</ZetboxBase:B>
     <ZetboxBase:B_pos>1</ZetboxBase:B_pos>
-  </ZetboxBase:RoleMembership_resolves_Relation_RelationEntry>
-  <ZetboxBase:RoleMembership_resolves_Relation_RelationEntry ExportGuid="b7e33ef6-d51b-485d-b7f7-804fdf4fa756">
+  </ZetboxBase:RoleMembership_resolves_Relations_RelationEntry>
+  <ZetboxBase:RoleMembership_resolves_Relations_RelationEntry ExportGuid="b7e33ef6-d51b-485d-b7f7-804fdf4fa756">
     <ZetboxBase:A>2710dcb0-8e0f-43db-95c5-02e18c01f40f</ZetboxBase:A>
     <ZetboxBase:A_pos>2147483647</ZetboxBase:A_pos>
     <ZetboxBase:B>a6ed6bc7-2eb3-4e43-97f3-ec8aca0e120b</ZetboxBase:B>
     <ZetboxBase:B_pos>0</ZetboxBase:B_pos>
-  </ZetboxBase:RoleMembership_resolves_Relation_RelationEntry>
-  <ZetboxBase:RoleMembership_resolves_Relation_RelationEntry ExportGuid="31232ec0-b884-4458-b93d-27b44c2ccc3a">
+  </ZetboxBase:RoleMembership_resolves_Relations_RelationEntry>
+  <ZetboxBase:RoleMembership_resolves_Relations_RelationEntry ExportGuid="31232ec0-b884-4458-b93d-27b44c2ccc3a">
     <ZetboxBase:A>374744d2-680a-4d51-b65e-2301dad65849</ZetboxBase:A>
     <ZetboxBase:A_pos>2147483647</ZetboxBase:A_pos>
     <ZetboxBase:B>29d161a2-e532-4d94-860b-b9f66c351d8a</ZetboxBase:B>
     <ZetboxBase:B_pos>2</ZetboxBase:B_pos>
-  </ZetboxBase:RoleMembership_resolves_Relation_RelationEntry>
-  <ZetboxBase:RoleMembership_resolves_Relation_RelationEntry ExportGuid="f925e079-7bf8-4269-84bf-e0ab2e0f6141">
+  </ZetboxBase:RoleMembership_resolves_Relations_RelationEntry>
+  <ZetboxBase:RoleMembership_resolves_Relations_RelationEntry ExportGuid="f925e079-7bf8-4269-84bf-e0ab2e0f6141">
     <ZetboxBase:A>374744d2-680a-4d51-b65e-2301dad65849</ZetboxBase:A>
     <ZetboxBase:A_pos>2147483647</ZetboxBase:A_pos>
     <ZetboxBase:B>434dab4f-0dcd-4724-a62b-730540ce143a</ZetboxBase:B>
     <ZetboxBase:B_pos>0</ZetboxBase:B_pos>
-  </ZetboxBase:RoleMembership_resolves_Relation_RelationEntry>
-  <ZetboxBase:RoleMembership_resolves_Relation_RelationEntry ExportGuid="43fb1417-d614-4412-991f-ddf97e4c6074">
+  </ZetboxBase:RoleMembership_resolves_Relations_RelationEntry>
+  <ZetboxBase:RoleMembership_resolves_Relations_RelationEntry ExportGuid="43fb1417-d614-4412-991f-ddf97e4c6074">
     <ZetboxBase:A>374744d2-680a-4d51-b65e-2301dad65849</ZetboxBase:A>
     <ZetboxBase:A_pos>2147483647</ZetboxBase:A_pos>
     <ZetboxBase:B>c7b3cf10-cdc8-454c-826c-04a0f7e5ef3e</ZetboxBase:B>
     <ZetboxBase:B_pos>1</ZetboxBase:B_pos>
-  </ZetboxBase:RoleMembership_resolves_Relation_RelationEntry>
-  <ZetboxBase:RoleMembership_resolves_Relation_RelationEntry ExportGuid="221d7d73-7b99-49f9-babc-e8f33cbccc80">
+  </ZetboxBase:RoleMembership_resolves_Relations_RelationEntry>
+  <ZetboxBase:RoleMembership_resolves_Relations_RelationEntry ExportGuid="221d7d73-7b99-49f9-babc-e8f33cbccc80">
     <ZetboxBase:A>3f419c0f-df37-44d4-a035-5b19020ec261</ZetboxBase:A>
     <ZetboxBase:A_pos>2</ZetboxBase:A_pos>
     <ZetboxBase:B>29d161a2-e532-4d94-860b-b9f66c351d8a</ZetboxBase:B>
     <ZetboxBase:B_pos>2</ZetboxBase:B_pos>
-  </ZetboxBase:RoleMembership_resolves_Relation_RelationEntry>
-  <ZetboxBase:RoleMembership_resolves_Relation_RelationEntry ExportGuid="c27f9d36-453b-4959-b9ce-768250f50010">
+  </ZetboxBase:RoleMembership_resolves_Relations_RelationEntry>
+  <ZetboxBase:RoleMembership_resolves_Relations_RelationEntry ExportGuid="c27f9d36-453b-4959-b9ce-768250f50010">
     <ZetboxBase:A>3f419c0f-df37-44d4-a035-5b19020ec261</ZetboxBase:A>
     <ZetboxBase:A_pos>1</ZetboxBase:A_pos>
     <ZetboxBase:B>c7b3cf10-cdc8-454c-826c-04a0f7e5ef3e</ZetboxBase:B>
     <ZetboxBase:B_pos>1</ZetboxBase:B_pos>
-  </ZetboxBase:RoleMembership_resolves_Relation_RelationEntry>
+  </ZetboxBase:RoleMembership_resolves_Relations_RelationEntry>
   <ZetboxBase:Method ExportGuid="07b6746b-586f-43fb-ae7e-317cd1ace4bf">
     <ZetboxBase:ChangedOn>2012-04-05T09:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
@@ -5795,30 +5795,30 @@ public static void ObjectIsValid(TPHDerivedBObj obj, ObjectIsValidEventArgs e)
     <ZetboxBase:Name>Third</ZetboxBase:Name>
     <ZetboxBase:Value>3</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
-  <ZetboxBase:DataType_implements_Interface_RelationEntry ExportGuid="d1d2b3ef-b90d-469b-8cec-2807e83a1b41">
+  <ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry ExportGuid="d1d2b3ef-b90d-469b-8cec-2807e83a1b41">
     <ZetboxBase:A>3a8d152e-b8d1-4439-bfe4-367731218ce9</ZetboxBase:A>
     <ZetboxBase:B>4ae6616a-eca3-47a5-b502-8e3c3913c2f0</ZetboxBase:B>
-  </ZetboxBase:DataType_implements_Interface_RelationEntry>
-  <ZetboxBase:DataType_implements_Interface_RelationEntry ExportGuid="8ba978ac-5e3f-4c5b-bb4d-d4356fc9e96c">
+  </ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry>
+  <ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry ExportGuid="8ba978ac-5e3f-4c5b-bb4d-d4356fc9e96c">
     <ZetboxBase:A>12e49195-6ff4-49cd-b3a9-37f7bc350a5e</ZetboxBase:A>
     <ZetboxBase:B>606a487e-35da-4ce9-91d1-f0cd844d7a35</ZetboxBase:B>
-  </ZetboxBase:DataType_implements_Interface_RelationEntry>
-  <ZetboxBase:DataType_implements_Interface_RelationEntry ExportGuid="dcfb2e10-569d-412e-9f66-c42d6959fbe2">
+  </ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry>
+  <ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry ExportGuid="dcfb2e10-569d-412e-9f66-c42d6959fbe2">
     <ZetboxBase:A>09dfa3cf-4a15-48ed-b76a-c330ac7379e0</ZetboxBase:A>
     <ZetboxBase:B>a73f2d0a-786b-483d-b474-b9d9df42b8b3</ZetboxBase:B>
-  </ZetboxBase:DataType_implements_Interface_RelationEntry>
-  <ZetboxBase:DataType_implements_Interface_RelationEntry ExportGuid="83c778d4-d0f7-473d-82c4-4fed100cee73">
+  </ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry>
+  <ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry ExportGuid="83c778d4-d0f7-473d-82c4-4fed100cee73">
     <ZetboxBase:A>19f38f05-e88e-44c6-bfdf-d502b3632028</ZetboxBase:A>
     <ZetboxBase:B>c8ff9958-dd26-4a92-a049-7fa9d51d8bf2</ZetboxBase:B>
-  </ZetboxBase:DataType_implements_Interface_RelationEntry>
-  <ZetboxBase:DataType_implements_Interface_RelationEntry ExportGuid="84461d1b-d1a1-4045-9efa-c5c80a4f9edf">
+  </ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry>
+  <ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry ExportGuid="84461d1b-d1a1-4045-9efa-c5c80a4f9edf">
     <ZetboxBase:A>430ba80a-a9e4-4700-a0c3-06b21f2c77fe</ZetboxBase:A>
     <ZetboxBase:B>a73f2d0a-786b-483d-b474-b9d9df42b8b3</ZetboxBase:B>
-  </ZetboxBase:DataType_implements_Interface_RelationEntry>
-  <ZetboxBase:DataType_implements_Interface_RelationEntry ExportGuid="81b66ad0-5d9d-47b8-8c16-b35dc75a2135">
+  </ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry>
+  <ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry ExportGuid="81b66ad0-5d9d-47b8-8c16-b35dc75a2135">
     <ZetboxBase:A>430ba80a-a9e4-4700-a0c3-06b21f2c77fe</ZetboxBase:A>
     <ZetboxBase:B>4ae6616a-eca3-47a5-b502-8e3c3913c2f0</ZetboxBase:B>
-  </ZetboxBase:DataType_implements_Interface_RelationEntry>
+  </ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry>
   <ZetboxBase:StringProperty ExportGuid="e7371fa9-cd18-4cdc-91c3-a73c0984a019">
     <ZetboxBase:ChangedOn>2012-04-05T09:26:18.498541Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
@@ -11570,14 +11570,14 @@ public static void isValid_BString(TPHDerivedBObj obj, PropertyIsValidEventArgs 
     <ZetboxBase:Reason>ExportGuid must be unique</ZetboxBase:Reason>
     <ZetboxBase:IsUnique>true</ZetboxBase:IsUnique>
   </ZetboxBase:IndexConstraint>
-  <ZetboxBase:IndexConstraint_ensures_unique_on_Property_RelationEntry ExportGuid="3d0fa580-dc93-4d95-a2cb-ca468ed7fe3d">
+  <ZetboxBase:UniqueContraints_ensures_unique_on_Properties_RelationEntry ExportGuid="3d0fa580-dc93-4d95-a2cb-ca468ed7fe3d">
     <ZetboxBase:A>126310f6-f63c-45c4-ab52-cde6d90d4f61</ZetboxBase:A>
     <ZetboxBase:B>73f5e7ac-1dfc-4149-9995-8e3b04a95614</ZetboxBase:B>
-  </ZetboxBase:IndexConstraint_ensures_unique_on_Property_RelationEntry>
-  <ZetboxBase:IndexConstraint_ensures_unique_on_Property_RelationEntry ExportGuid="4700f86e-0cb0-4c2f-a166-06234c79ea00">
+  </ZetboxBase:UniqueContraints_ensures_unique_on_Properties_RelationEntry>
+  <ZetboxBase:UniqueContraints_ensures_unique_on_Properties_RelationEntry ExportGuid="4700f86e-0cb0-4c2f-a166-06234c79ea00">
     <ZetboxBase:A>fb3392e5-6a87-476b-bc3e-89776159ab1f</ZetboxBase:A>
     <ZetboxBase:B>65839be9-d3b7-4910-9812-c2d44d008c41</ZetboxBase:B>
-  </ZetboxBase:IndexConstraint_ensures_unique_on_Property_RelationEntry>
+  </ZetboxBase:UniqueContraints_ensures_unique_on_Properties_RelationEntry>
   <ZetboxBase:NewGuidDefaultValue ExportGuid="98a92861-e539-41e0-bd7e-2b6d11561234">
     <ZetboxBase:ChangedOn>2012-07-18T19:41:43.085769Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2012-07-18T19:41:43.085769Z</ZetboxBase:CreatedOn>
@@ -11720,12 +11720,12 @@ public static void isValid_BString(TPHDerivedBObj obj, PropertyIsValidEventArgs 
     <ZetboxBase:ObjectClass>09dfa3cf-4a15-48ed-b76a-c330ac7379e0</ZetboxBase:ObjectClass>
     <ZetboxBase:Rights>15</ZetboxBase:Rights>
   </ZetboxBase:RoleMembership>
-  <ZetboxBase:RoleMembership_resolves_Relation_RelationEntry ExportGuid="7b456c1e-f781-4b82-ab8e-fbb2b3cfb6b8">
+  <ZetboxBase:RoleMembership_resolves_Relations_RelationEntry ExportGuid="7b456c1e-f781-4b82-ab8e-fbb2b3cfb6b8">
     <ZetboxBase:A>5321160a-9207-4b84-8644-5d6820221ca7</ZetboxBase:A>
     <ZetboxBase:A_pos>2147483647</ZetboxBase:A_pos>
     <ZetboxBase:B>e20bcbaa-6660-4a03-bc46-0690b7988c67</ZetboxBase:B>
     <ZetboxBase:B_pos>0</ZetboxBase:B_pos>
-  </ZetboxBase:RoleMembership_resolves_Relation_RelationEntry>
+  </ZetboxBase:RoleMembership_resolves_Relations_RelationEntry>
   <ZetboxBase:Sequence ExportGuid="57a01b4f-940d-4089-b239-fa5a46dc7d00">
     <ZetboxBase:ChangedOn>2012-04-20T12:18:21.445954Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-11-25T22:51:32Z</ZetboxBase:CreatedOn>
@@ -12015,6 +12015,31 @@ public static void SummaryCanExecReason(MethodTest obj, MethodReturnEventArgs&lt
     <ZetboxBase:Name>Summary</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>68a664ee-67e0-4ba7-a0dc-148b9dfa32a7</ZetboxBase:ObjectClass>
   </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="654a1fca-f430-46b1-bb44-c704e7849a06">
+    <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2015-06-18T09:56:53.752158Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void GetCurrent(RecurrenceRuleTester obj, MethodReturnEventArgs&lt;DateTime&gt; e, DateTime? dt)
+{
+}
+
+[Invocation]
+public static void GetCurrentCanExec(RecurrenceRuleTester obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetCurrentCanExecReason(RecurrenceRuleTester obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2012-09-26T07:45:30.971203Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:InvokeOnServer>false</ZetboxBase:InvokeOnServer>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <ZetboxBase:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</ZetboxBase:Module>
+    <ZetboxBase:Name>GetCurrent</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>b6c60adc-19f0-4169-8b78-53d7eaa549f7</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
   <ZetboxBase:Method ExportGuid="6234860c-9ebc-4fea-8480-5aa2ad648adb">
     <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2012-09-26T07:45:30.971203Z</ZetboxBase:ChangedOn>
@@ -12129,6 +12154,28 @@ public static void TestMethodCanExecReason(TestObjClass obj, MethodReturnEventAr
     <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
     <ZetboxBase:Name>str</ZetboxBase:Name>
   </ZetboxBase:StringParameter>
+  <ZetboxBase:DateTimeParameter ExportGuid="9086e8ab-c57a-43a7-8eb6-a261f57a2679">
+    <ZetboxBase:ChangedOn>2012-09-26T07:45:30.971203Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2012-09-26T07:45:30.971203Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>true</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>654a1fca-f430-46b1-bb44-c704e7849a06</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>dt</ZetboxBase:Name>
+    <ZetboxBase:DateTimeStyle>1</ZetboxBase:DateTimeStyle>
+  </ZetboxBase:DateTimeParameter>
+  <ZetboxBase:DateTimeParameter ExportGuid="95d94334-756c-425f-af97-e7241d7b52e7">
+    <ZetboxBase:ChangedOn>2012-09-26T08:26:33.867073Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2012-09-26T08:26:33.867073Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>true</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>654a1fca-f430-46b1-bb44-c704e7849a06</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>1</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>retval</ZetboxBase:Name>
+    <ZetboxBase:DateTimeStyle>1</ZetboxBase:DateTimeStyle>
+  </ZetboxBase:DateTimeParameter>
   <ZetboxBase:DateTimeParameter ExportGuid="9f62f945-85d9-48a3-a8ea-53503197b444">
     <ZetboxBase:ChangedOn>2012-09-26T07:45:30.971203Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2012-09-26T07:45:30.971203Z</ZetboxBase:CreatedOn>
@@ -12437,60 +12484,60 @@ public static void TestMethodCanExecReason(TestObjClass obj, MethodReturnEventAr
     <GUI:Name>Test Application</GUI:Name>
     <GUI:RootScreen>c727bd24-60b2-4ea9-901f-4d65672563a1</GUI:RootScreen>
   </GUI:Application>
-  <GUI:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="ed558acc-b436-4a47-af2b-27f58100a4c6">
+  <GUI:ObjRefProp_shows_Methods_RelationEntry ExportGuid="ed558acc-b436-4a47-af2b-27f58100a4c6">
     <GUI:A>bf48b883-8821-4c4e-8509-590a72604f9e</GUI:A>
     <GUI:B>37951886-6ea4-4adc-a59f-b78a3d981180</GUI:B>
-  </GUI:ObjectReferenceProperty_shows_Method_RelationEntry>
-  <GUI:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="714f31f3-c4c9-4e8d-b224-1b8eeaab8af6">
+  </GUI:ObjRefProp_shows_Methods_RelationEntry>
+  <GUI:ObjRefProp_shows_Methods_RelationEntry ExportGuid="714f31f3-c4c9-4e8d-b224-1b8eeaab8af6">
     <GUI:A>bf48b883-8821-4c4e-8509-590a72604f9e</GUI:A>
     <GUI:B>63be30c4-22cf-4323-8d2a-21f7a8c3a440</GUI:B>
-  </GUI:ObjectReferenceProperty_shows_Method_RelationEntry>
-  <GUI:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="f8e00dec-4eee-46e3-af25-94aee1e5b950">
+  </GUI:ObjRefProp_shows_Methods_RelationEntry>
+  <GUI:ObjRefProp_shows_Methods_RelationEntry ExportGuid="f8e00dec-4eee-46e3-af25-94aee1e5b950">
     <GUI:A>bf48b883-8821-4c4e-8509-590a72604f9e</GUI:A>
     <GUI:B>7901a41d-6ee0-4283-86fe-f19982464f73</GUI:B>
-  </GUI:ObjectReferenceProperty_shows_Method_RelationEntry>
-  <GUI:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="b7cf0618-ddf6-481a-9d5f-5f22b8fd089c">
+  </GUI:ObjRefProp_shows_Methods_RelationEntry>
+  <GUI:ObjRefProp_shows_Methods_RelationEntry ExportGuid="b7cf0618-ddf6-481a-9d5f-5f22b8fd089c">
     <GUI:A>bf48b883-8821-4c4e-8509-590a72604f9e</GUI:A>
     <GUI:B>792be50b-66d7-4299-9c13-29609766f098</GUI:B>
-  </GUI:ObjectReferenceProperty_shows_Method_RelationEntry>
-  <GUI:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="ae254dd5-d7c4-4f72-94de-2c76e420176d">
+  </GUI:ObjRefProp_shows_Methods_RelationEntry>
+  <GUI:ObjRefProp_shows_Methods_RelationEntry ExportGuid="ae254dd5-d7c4-4f72-94de-2c76e420176d">
     <GUI:A>bf48b883-8821-4c4e-8509-590a72604f9e</GUI:A>
     <GUI:B>838ddba3-52d5-444b-b29d-4b8105b1be34</GUI:B>
-  </GUI:ObjectReferenceProperty_shows_Method_RelationEntry>
-  <GUI:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="8ac65c5c-4053-477a-a9c6-4200b7808b2c">
+  </GUI:ObjRefProp_shows_Methods_RelationEntry>
+  <GUI:ObjRefProp_shows_Methods_RelationEntry ExportGuid="8ac65c5c-4053-477a-a9c6-4200b7808b2c">
     <GUI:A>bf48b883-8821-4c4e-8509-590a72604f9e</GUI:A>
     <GUI:B>bc1f2b7c-b185-4cda-86ed-dd69e04a8e5e</GUI:B>
-  </GUI:ObjectReferenceProperty_shows_Method_RelationEntry>
-  <GUI:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="9490ce2c-2fd2-4149-a1d0-d7a361f373f4">
+  </GUI:ObjRefProp_shows_Methods_RelationEntry>
+  <GUI:ObjRefProp_shows_Methods_RelationEntry ExportGuid="9490ce2c-2fd2-4149-a1d0-d7a361f373f4">
     <GUI:A>bf48b883-8821-4c4e-8509-590a72604f9e</GUI:A>
     <GUI:B>cf553e4f-1f54-4b47-a4bd-0cd852d9421f</GUI:B>
-  </GUI:ObjectReferenceProperty_shows_Method_RelationEntry>
-  <GUI:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="0cabe566-12ad-4776-9a9c-0b29c31598fc">
+  </GUI:ObjRefProp_shows_Methods_RelationEntry>
+  <GUI:ObjRefProp_shows_Methods_RelationEntry ExportGuid="0cabe566-12ad-4776-9a9c-0b29c31598fc">
     <GUI:A>02a7d534-9325-48e5-bbc2-b61420afd940</GUI:A>
     <GUI:B>37951886-6ea4-4adc-a59f-b78a3d981180</GUI:B>
-  </GUI:ObjectReferenceProperty_shows_Method_RelationEntry>
-  <GUI:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="c561ffea-1142-462b-adfc-52fb7d6e735e">
+  </GUI:ObjRefProp_shows_Methods_RelationEntry>
+  <GUI:ObjRefProp_shows_Methods_RelationEntry ExportGuid="c561ffea-1142-462b-adfc-52fb7d6e735e">
     <GUI:A>02a7d534-9325-48e5-bbc2-b61420afd940</GUI:A>
     <GUI:B>63be30c4-22cf-4323-8d2a-21f7a8c3a440</GUI:B>
-  </GUI:ObjectReferenceProperty_shows_Method_RelationEntry>
-  <GUI:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="2952ca97-4210-4c26-9af5-d6062c2683e3">
+  </GUI:ObjRefProp_shows_Methods_RelationEntry>
+  <GUI:ObjRefProp_shows_Methods_RelationEntry ExportGuid="2952ca97-4210-4c26-9af5-d6062c2683e3">
     <GUI:A>02a7d534-9325-48e5-bbc2-b61420afd940</GUI:A>
     <GUI:B>7901a41d-6ee0-4283-86fe-f19982464f73</GUI:B>
-  </GUI:ObjectReferenceProperty_shows_Method_RelationEntry>
-  <GUI:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="f6273fd6-a7aa-4dfe-8e14-5832495f86ca">
+  </GUI:ObjRefProp_shows_Methods_RelationEntry>
+  <GUI:ObjRefProp_shows_Methods_RelationEntry ExportGuid="f6273fd6-a7aa-4dfe-8e14-5832495f86ca">
     <GUI:A>02a7d534-9325-48e5-bbc2-b61420afd940</GUI:A>
     <GUI:B>792be50b-66d7-4299-9c13-29609766f098</GUI:B>
-  </GUI:ObjectReferenceProperty_shows_Method_RelationEntry>
-  <GUI:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="62590ca5-ee2a-4273-ae5e-f6539f04edc8">
+  </GUI:ObjRefProp_shows_Methods_RelationEntry>
+  <GUI:ObjRefProp_shows_Methods_RelationEntry ExportGuid="62590ca5-ee2a-4273-ae5e-f6539f04edc8">
     <GUI:A>02a7d534-9325-48e5-bbc2-b61420afd940</GUI:A>
     <GUI:B>838ddba3-52d5-444b-b29d-4b8105b1be34</GUI:B>
-  </GUI:ObjectReferenceProperty_shows_Method_RelationEntry>
-  <GUI:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="4d7fee7a-5c7b-48bd-a1f2-f458a912b1a3">
+  </GUI:ObjRefProp_shows_Methods_RelationEntry>
+  <GUI:ObjRefProp_shows_Methods_RelationEntry ExportGuid="4d7fee7a-5c7b-48bd-a1f2-f458a912b1a3">
     <GUI:A>02a7d534-9325-48e5-bbc2-b61420afd940</GUI:A>
     <GUI:B>bc1f2b7c-b185-4cda-86ed-dd69e04a8e5e</GUI:B>
-  </GUI:ObjectReferenceProperty_shows_Method_RelationEntry>
-  <GUI:ObjectReferenceProperty_shows_Method_RelationEntry ExportGuid="d2bca110-3244-4e01-9a65-19a86cf3a52d">
+  </GUI:ObjRefProp_shows_Methods_RelationEntry>
+  <GUI:ObjRefProp_shows_Methods_RelationEntry ExportGuid="d2bca110-3244-4e01-9a65-19a86cf3a52d">
     <GUI:A>02a7d534-9325-48e5-bbc2-b61420afd940</GUI:A>
     <GUI:B>cf553e4f-1f54-4b47-a4bd-0cd852d9421f</GUI:B>
-  </GUI:ObjectReferenceProperty_shows_Method_RelationEntry>
+  </GUI:ObjRefProp_shows_Methods_RelationEntry>
 </ZetboxPackaging>

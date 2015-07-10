@@ -303,7 +303,7 @@ namespace Zetbox.API.AbstractConsumerTests.N_to_M_relations
         public void when_deleting_RelationEntry()
         {
             aSide1.BSide.Add(bSide1);
-            var relEntry = ctx.AttachedObjects.OfType<N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntry>().Single();
+            var relEntry = ctx.AttachedObjects.OfType<ASide_connectsTo_BSide_RelationEntry>().Single();
             SubmitAndReload();
 
             // doesn't work on the client, because the RelationEntry cannot pass the GetList facade
@@ -311,7 +311,7 @@ namespace Zetbox.API.AbstractConsumerTests.N_to_M_relations
 
             // trigger loading the relation entry
             Assert.That(aSide1.BSide.ToList(), Has.Member(bSide1));
-            relEntry = ctx.AttachedObjects.OfType<N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntry>().Single();
+            relEntry = ctx.AttachedObjects.OfType<ASide_connectsTo_BSide_RelationEntry>().Single();
             ctx.Delete(relEntry);
 
             Assert.That(aSide1.BSide, Is.Empty);
@@ -329,7 +329,7 @@ namespace Zetbox.API.AbstractConsumerTests.N_to_M_relations
         [Test]
         public void when_creating_RelationEntry()
         {
-            var relEntry = ctx.Internals().CreateRelationCollectionEntry<N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntry>();
+            var relEntry = ctx.Internals().CreateRelationCollectionEntry<ASide_connectsTo_BSide_RelationEntry>();
             relEntry.A = aSide1;
             relEntry.B = bSide1;
 

@@ -1046,7 +1046,7 @@ namespace at.dasz.DocumentManagement
             {
                 if (_Revisions == null)
                 {
-                    _Revisions = new BSideListWrapper<at.dasz.DocumentManagement.File, Zetbox.App.Base.Blob, at.dasz.DocumentManagement.File_has_Blob_RelationEntryEfImpl, EntityCollection<at.dasz.DocumentManagement.File_has_Blob_RelationEntryEfImpl>>(
+                    _Revisions = new BSideListWrapper<at.dasz.DocumentManagement.File, Zetbox.App.Base.Blob, at.dasz.DocumentManagement.Document_has_Revisions_RelationEntryEfImpl, EntityCollection<at.dasz.DocumentManagement.Document_has_Revisions_RelationEntryEfImpl>>(
                             this,
                             RevisionsImpl);
                 }
@@ -1055,7 +1055,7 @@ namespace at.dasz.DocumentManagement
         }
         
         [EdmRelationshipNavigationProperty("Model", "FK_Document_has_Revisions_A", "CollectionEntry")]
-        public EntityCollection<at.dasz.DocumentManagement.File_has_Blob_RelationEntryEfImpl> RevisionsImpl
+        public EntityCollection<at.dasz.DocumentManagement.Document_has_Revisions_RelationEntryEfImpl> RevisionsImpl
         {
             get
             {
@@ -1063,14 +1063,14 @@ namespace at.dasz.DocumentManagement
             }
         }
 
-        private EntityCollection<at.dasz.DocumentManagement.File_has_Blob_RelationEntryEfImpl> _RevisionsImplEntityCollection;
-        internal EntityCollection<at.dasz.DocumentManagement.File_has_Blob_RelationEntryEfImpl> GetRevisionsImplCollection()
+        private EntityCollection<at.dasz.DocumentManagement.Document_has_Revisions_RelationEntryEfImpl> _RevisionsImplEntityCollection;
+        internal EntityCollection<at.dasz.DocumentManagement.Document_has_Revisions_RelationEntryEfImpl> GetRevisionsImplCollection()
         {
             if (_RevisionsImplEntityCollection == null)
             {
                 _RevisionsImplEntityCollection
                     = ((IEntityWithRelationships)(this)).RelationshipManager
-                        .GetRelatedCollection<at.dasz.DocumentManagement.File_has_Blob_RelationEntryEfImpl>(
+                        .GetRelatedCollection<at.dasz.DocumentManagement.Document_has_Revisions_RelationEntryEfImpl>(
                             "Model.FK_Document_has_Revisions_A",
                             "CollectionEntry");
                 // the EntityCollection has to be loaded before attaching the AssociationChanged event
@@ -1085,7 +1085,7 @@ namespace at.dasz.DocumentManagement
             }
             return _RevisionsImplEntityCollection;
         }
-        private BSideListWrapper<at.dasz.DocumentManagement.File, Zetbox.App.Base.Blob, at.dasz.DocumentManagement.File_has_Blob_RelationEntryEfImpl, EntityCollection<at.dasz.DocumentManagement.File_has_Blob_RelationEntryEfImpl>> _Revisions;
+        private BSideListWrapper<at.dasz.DocumentManagement.File, Zetbox.App.Base.Blob, at.dasz.DocumentManagement.Document_has_Revisions_RelationEntryEfImpl, EntityCollection<at.dasz.DocumentManagement.Document_has_Revisions_RelationEntryEfImpl>> _Revisions;
 
         public Zetbox.API.Async.ZbTask TriggerFetchRevisionsAsync()
         {

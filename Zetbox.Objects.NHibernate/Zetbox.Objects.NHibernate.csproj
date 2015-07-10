@@ -27,7 +27,7 @@
     <NoWarn>1591,0168,0414,0219</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
-    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Debug\Server\Fallback\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Debug\Server\Generated\</OutputPath>
     <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Server\Generated\</OutputPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\Debug\</ZetboxAPIPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
@@ -41,7 +41,7 @@
     <NoWarn>1591,0168,0414,0219</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
-    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Release\Server\Fallback\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Release\Server\Generated\</OutputPath>
     <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Server\Generated\</OutputPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\Release\</ZetboxAPIPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
@@ -57,7 +57,7 @@
     <NoWarn>1591,0168,0414,0219</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
-    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Debug\Server\Fallback\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Debug\Server\Generated\</OutputPath>
     <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Server\Generated\</OutputPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\Debug\</ZetboxAPIPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>

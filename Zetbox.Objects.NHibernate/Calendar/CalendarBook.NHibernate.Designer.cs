@@ -494,12 +494,12 @@ namespace Zetbox.App.Calendar
 				if (_GroupReaders == null)
 				{
 					_GroupReaders 
-						= new NHibernateBSideCollectionWrapper<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Group, Zetbox.App.Calendar.CalendarBook_shared_r_Group_RelationEntryNHibernateImpl>(
+						= new NHibernateBSideCollectionWrapper<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Group, Zetbox.App.Calendar.Calendar_shared_r_GroupReaders_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<Zetbox.App.Calendar.CalendarBook_shared_r_Group_RelationEntryNHibernateImpl.CalendarBook_shared_r_Group_RelationEntryProxy, Zetbox.App.Calendar.CalendarBook_shared_r_Group_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Zetbox.App.Calendar.Calendar_shared_r_GroupReaders_RelationEntryNHibernateImpl.Calendar_shared_r_GroupReaders_RelationEntryProxy, Zetbox.App.Calendar.Calendar_shared_r_GroupReaders_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.GroupReaders,
-                                p => (Zetbox.App.Calendar.CalendarBook_shared_r_Group_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.Calendar.CalendarBook_shared_r_Group_RelationEntryNHibernateImpl.CalendarBook_shared_r_Group_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
+                                p => (Zetbox.App.Calendar.Calendar_shared_r_GroupReaders_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Zetbox.App.Calendar.Calendar_shared_r_GroupReaders_RelationEntryNHibernateImpl.Calendar_shared_r_GroupReaders_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
                     _GroupReaders.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("GroupReaders", null, null); if(OnGroupReaders_PostSetter != null && IsAttached) OnGroupReaders_PostSetter(this); };
                     if (GroupReaders_was_eagerLoaded) { GroupReaders_was_eagerLoaded = false; }
 				}
@@ -507,7 +507,7 @@ namespace Zetbox.App.Calendar
 			}
 		}
 
-		private NHibernateBSideCollectionWrapper<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Group, Zetbox.App.Calendar.CalendarBook_shared_r_Group_RelationEntryNHibernateImpl> _GroupReaders;
+		private NHibernateBSideCollectionWrapper<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Group, Zetbox.App.Calendar.Calendar_shared_r_GroupReaders_RelationEntryNHibernateImpl> _GroupReaders;
 		// ignored, but required for Serialization
         private bool GroupReaders_was_eagerLoaded = false;
 
@@ -532,12 +532,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
 				if (_GroupWriters == null)
 				{
 					_GroupWriters 
-						= new NHibernateBSideCollectionWrapper<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Group, Zetbox.App.Calendar.CalendarBook_shared_w_Group_RelationEntryNHibernateImpl>(
+						= new NHibernateBSideCollectionWrapper<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Group, Zetbox.App.Calendar.Calendar_shared_w_GroupWriters_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<Zetbox.App.Calendar.CalendarBook_shared_w_Group_RelationEntryNHibernateImpl.CalendarBook_shared_w_Group_RelationEntryProxy, Zetbox.App.Calendar.CalendarBook_shared_w_Group_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Zetbox.App.Calendar.Calendar_shared_w_GroupWriters_RelationEntryNHibernateImpl.Calendar_shared_w_GroupWriters_RelationEntryProxy, Zetbox.App.Calendar.Calendar_shared_w_GroupWriters_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.GroupWriters,
-                                p => (Zetbox.App.Calendar.CalendarBook_shared_w_Group_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.Calendar.CalendarBook_shared_w_Group_RelationEntryNHibernateImpl.CalendarBook_shared_w_Group_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
+                                p => (Zetbox.App.Calendar.Calendar_shared_w_GroupWriters_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Zetbox.App.Calendar.Calendar_shared_w_GroupWriters_RelationEntryNHibernateImpl.Calendar_shared_w_GroupWriters_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
                     _GroupWriters.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("GroupWriters", null, null); if(OnGroupWriters_PostSetter != null && IsAttached) OnGroupWriters_PostSetter(this); };
                     if (GroupWriters_was_eagerLoaded) { GroupWriters_was_eagerLoaded = false; }
 				}
@@ -545,7 +545,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
 			}
 		}
 
-		private NHibernateBSideCollectionWrapper<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Group, Zetbox.App.Calendar.CalendarBook_shared_w_Group_RelationEntryNHibernateImpl> _GroupWriters;
+		private NHibernateBSideCollectionWrapper<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Group, Zetbox.App.Calendar.Calendar_shared_w_GroupWriters_RelationEntryNHibernateImpl> _GroupWriters;
 		// ignored, but required for Serialization
         private bool GroupWriters_was_eagerLoaded = false;
 
@@ -804,12 +804,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
 				if (_Readers == null)
 				{
 					_Readers 
-						= new NHibernateBSideCollectionWrapper<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Identity, Zetbox.App.Calendar.CalendarBook_shared_r_Identity_RelationEntryNHibernateImpl>(
+						= new NHibernateBSideCollectionWrapper<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Identity, Zetbox.App.Calendar.Calendar_shared_r_Readers_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<Zetbox.App.Calendar.CalendarBook_shared_r_Identity_RelationEntryNHibernateImpl.CalendarBook_shared_r_Identity_RelationEntryProxy, Zetbox.App.Calendar.CalendarBook_shared_r_Identity_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Zetbox.App.Calendar.Calendar_shared_r_Readers_RelationEntryNHibernateImpl.Calendar_shared_r_Readers_RelationEntryProxy, Zetbox.App.Calendar.Calendar_shared_r_Readers_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.Readers,
-                                p => (Zetbox.App.Calendar.CalendarBook_shared_r_Identity_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.Calendar.CalendarBook_shared_r_Identity_RelationEntryNHibernateImpl.CalendarBook_shared_r_Identity_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
+                                p => (Zetbox.App.Calendar.Calendar_shared_r_Readers_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Zetbox.App.Calendar.Calendar_shared_r_Readers_RelationEntryNHibernateImpl.Calendar_shared_r_Readers_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
                     _Readers.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Readers", null, null); if(OnReaders_PostSetter != null && IsAttached) OnReaders_PostSetter(this); };
                     if (Readers_was_eagerLoaded) { Readers_was_eagerLoaded = false; }
 				}
@@ -817,7 +817,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
 			}
 		}
 
-		private NHibernateBSideCollectionWrapper<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Identity, Zetbox.App.Calendar.CalendarBook_shared_r_Identity_RelationEntryNHibernateImpl> _Readers;
+		private NHibernateBSideCollectionWrapper<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Identity, Zetbox.App.Calendar.Calendar_shared_r_Readers_RelationEntryNHibernateImpl> _Readers;
 		// ignored, but required for Serialization
         private bool Readers_was_eagerLoaded = false;
 
@@ -842,12 +842,12 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
 				if (_Writers == null)
 				{
 					_Writers 
-						= new NHibernateBSideCollectionWrapper<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Identity, Zetbox.App.Calendar.CalendarBook_shared_w_Identity_RelationEntryNHibernateImpl>(
+						= new NHibernateBSideCollectionWrapper<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Identity, Zetbox.App.Calendar.Calendar_shared_w_Writers_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<Zetbox.App.Calendar.CalendarBook_shared_w_Identity_RelationEntryNHibernateImpl.CalendarBook_shared_w_Identity_RelationEntryProxy, Zetbox.App.Calendar.CalendarBook_shared_w_Identity_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Zetbox.App.Calendar.Calendar_shared_w_Writers_RelationEntryNHibernateImpl.Calendar_shared_w_Writers_RelationEntryProxy, Zetbox.App.Calendar.Calendar_shared_w_Writers_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.Writers,
-                                p => (Zetbox.App.Calendar.CalendarBook_shared_w_Identity_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.Calendar.CalendarBook_shared_w_Identity_RelationEntryNHibernateImpl.CalendarBook_shared_w_Identity_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
+                                p => (Zetbox.App.Calendar.Calendar_shared_w_Writers_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Zetbox.App.Calendar.Calendar_shared_w_Writers_RelationEntryNHibernateImpl.Calendar_shared_w_Writers_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
                     _Writers.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("Writers", null, null); if(OnWriters_PostSetter != null && IsAttached) OnWriters_PostSetter(this); };
                     if (Writers_was_eagerLoaded) { Writers_was_eagerLoaded = false; }
 				}
@@ -855,7 +855,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
 			}
 		}
 
-		private NHibernateBSideCollectionWrapper<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Identity, Zetbox.App.Calendar.CalendarBook_shared_w_Identity_RelationEntryNHibernateImpl> _Writers;
+		private NHibernateBSideCollectionWrapper<Zetbox.App.Calendar.CalendarBook, Zetbox.App.Base.Identity, Zetbox.App.Calendar.Calendar_shared_w_Writers_RelationEntryNHibernateImpl> _Writers;
 		// ignored, but required for Serialization
         private bool Writers_was_eagerLoaded = false;
 
@@ -1294,8 +1294,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
                 ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
             }
-            // should fetch && remember parent for Event_of_CalendarBook_RelationEntry
-            // should fetch && remember parent for WorkScheduleSyncProvider_for_CalendarBook_RelationEntry
+            // should fetch && remember parent for Event_of_Calendar_RelationEntry
+            // should fetch && remember parent for SyncAccount_for_Calendar_RelationEntry
 
             GroupReaders.Clear();
             GroupWriters.Clear();
@@ -1314,10 +1314,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
         {
             public CalendarBookProxy()
             {
-                GroupReaders = new Collection<Zetbox.App.Calendar.CalendarBook_shared_r_Group_RelationEntryNHibernateImpl.CalendarBook_shared_r_Group_RelationEntryProxy>();
-                GroupWriters = new Collection<Zetbox.App.Calendar.CalendarBook_shared_w_Group_RelationEntryNHibernateImpl.CalendarBook_shared_w_Group_RelationEntryProxy>();
-                Readers = new Collection<Zetbox.App.Calendar.CalendarBook_shared_r_Identity_RelationEntryNHibernateImpl.CalendarBook_shared_r_Identity_RelationEntryProxy>();
-                Writers = new Collection<Zetbox.App.Calendar.CalendarBook_shared_w_Identity_RelationEntryNHibernateImpl.CalendarBook_shared_w_Identity_RelationEntryProxy>();
+                GroupReaders = new Collection<Zetbox.App.Calendar.Calendar_shared_r_GroupReaders_RelationEntryNHibernateImpl.Calendar_shared_r_GroupReaders_RelationEntryProxy>();
+                GroupWriters = new Collection<Zetbox.App.Calendar.Calendar_shared_w_GroupWriters_RelationEntryNHibernateImpl.Calendar_shared_w_GroupWriters_RelationEntryProxy>();
+                Readers = new Collection<Zetbox.App.Calendar.Calendar_shared_r_Readers_RelationEntryNHibernateImpl.Calendar_shared_r_Readers_RelationEntryProxy>();
+                Writers = new Collection<Zetbox.App.Calendar.Calendar_shared_w_Writers_RelationEntryNHibernateImpl.Calendar_shared_w_Writers_RelationEntryProxy>();
             }
 
             public virtual int ID { get; set; }
@@ -1335,9 +1335,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
 
             public virtual Guid ExportGuid { get; set; }
 
-            public virtual ICollection<Zetbox.App.Calendar.CalendarBook_shared_r_Group_RelationEntryNHibernateImpl.CalendarBook_shared_r_Group_RelationEntryProxy> GroupReaders { get; set; }
+            public virtual ICollection<Zetbox.App.Calendar.Calendar_shared_r_GroupReaders_RelationEntryNHibernateImpl.Calendar_shared_r_GroupReaders_RelationEntryProxy> GroupReaders { get; set; }
 
-            public virtual ICollection<Zetbox.App.Calendar.CalendarBook_shared_w_Group_RelationEntryNHibernateImpl.CalendarBook_shared_w_Group_RelationEntryProxy> GroupWriters { get; set; }
+            public virtual ICollection<Zetbox.App.Calendar.Calendar_shared_w_GroupWriters_RelationEntryNHibernateImpl.Calendar_shared_w_GroupWriters_RelationEntryProxy> GroupWriters { get; set; }
 
             public virtual bool IsDeactivated { get; set; }
 
@@ -1345,9 +1345,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.CalendarBook>
 
             public virtual Zetbox.App.Base.IdentityNHibernateImpl.IdentityProxy Owner { get; set; }
 
-            public virtual ICollection<Zetbox.App.Calendar.CalendarBook_shared_r_Identity_RelationEntryNHibernateImpl.CalendarBook_shared_r_Identity_RelationEntryProxy> Readers { get; set; }
+            public virtual ICollection<Zetbox.App.Calendar.Calendar_shared_r_Readers_RelationEntryNHibernateImpl.Calendar_shared_r_Readers_RelationEntryProxy> Readers { get; set; }
 
-            public virtual ICollection<Zetbox.App.Calendar.CalendarBook_shared_w_Identity_RelationEntryNHibernateImpl.CalendarBook_shared_w_Identity_RelationEntryProxy> Writers { get; set; }
+            public virtual ICollection<Zetbox.App.Calendar.Calendar_shared_w_Writers_RelationEntryNHibernateImpl.Calendar_shared_w_Writers_RelationEntryProxy> Writers { get; set; }
 
             public virtual ICollection<CalendarBook_RightsNHibernateImpl> SecurityRightsCollectionImpl { get; set; }
 

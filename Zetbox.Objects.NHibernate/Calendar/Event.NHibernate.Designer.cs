@@ -1613,7 +1613,7 @@ namespace Zetbox.App.Calendar
                 ((NHibernatePersistenceObject)CreatedBy).ChildrenToDelete.Add(this);
                 ParentsToDelete.Add((NHibernatePersistenceObject)CreatedBy);
             }
-            // should fetch && remember parent for EventTestObject_of_Event_RelationEntry
+            // should fetch && remember parent for Test_of_Event_RelationEntry
 
             Calendar = null;
             ChangedBy = null;

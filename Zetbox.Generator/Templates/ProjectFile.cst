@@ -53,7 +53,7 @@
     <NoWarn>1591,0168,0414,0219</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
-    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Debug\<%= GetRelativeOutputPath().Replace('/', '\\') %>\Fallback\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Debug\<%= GetRelativeOutputPath().Replace('/', '\\') %>\<%= RelativeExternBuildOutputSubDirectory %>\</OutputPath>
     <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\<%= GetRelativeOutputPath().Replace('/', '\\') %>\Generated\</OutputPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\Debug\</ZetboxAPIPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
@@ -67,7 +67,7 @@
     <NoWarn>1591,0168,0414,0219</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
-    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Release\<%= GetRelativeOutputPath().Replace('/', '\\') %>\Fallback\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Release\<%= GetRelativeOutputPath().Replace('/', '\\') %>\<%= RelativeExternBuildOutputSubDirectory %>\</OutputPath>
     <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\<%= GetRelativeOutputPath().Replace('/', '\\') %>\Generated\</OutputPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\Release\</ZetboxAPIPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
@@ -83,7 +83,7 @@
     <NoWarn>1591,0168,0414,0219</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <!-- hardcode output path for external builds; the generator replaces this value from configuration -->
-    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Debug\<%= GetRelativeOutputPath().Replace('/', '\\') %>\Fallback\</OutputPath>
+    <OutputPath Condition=" '$(OutputPathOverride)' == '' ">..\bin\Debug\<%= GetRelativeOutputPath().Replace('/', '\\') %>\<%= RelativeExternBuildOutputSubDirectory %>\</OutputPath>
     <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\<%= GetRelativeOutputPath().Replace('/', '\\') %>\Generated\</OutputPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\Debug\</ZetboxAPIPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>

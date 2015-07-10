@@ -319,13 +319,13 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         public Zetbox.API.Async.ZbTask TriggerFetchMuhBlah_ManyList_NavAsync()
         {
             if (_triggerFetchMuhBlah_ManyList_NavTask != null) return _triggerFetchMuhBlah_ManyList_NavTask;
-            _triggerFetchMuhBlah_ManyList_NavTask = Context.FetchRelationAsync<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>(new Guid("d1e0da3e-ce64-4587-b62d-70c0f4371d97"), RelationEndRole.B, this);
+            _triggerFetchMuhBlah_ManyList_NavTask = Context.FetchRelationAsync<Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryMemoryImpl>(new Guid("d1e0da3e-ce64-4587-b62d-70c0f4371d97"), RelationEndRole.B, this);
             _triggerFetchMuhBlah_ManyList_NavTask.OnResult(r =>
             {
                 _MuhBlah_ManyList_Nav
-                    = new ObservableASideCollectionWrapper<Zetbox.App.Test.Muhblah, Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>>(
+                    = new ObservableASideCollectionWrapper<Zetbox.App.Test.Muhblah, Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryMemoryImpl>>(
                         this,
-                        new RelationshipFilterBSideCollection<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>(this.Context, this));
+                        new RelationshipFilterBSideCollection<Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryMemoryImpl>(this.Context, this));
                         // _MuhBlah_ManyList_Nav.CollectionChanged is managed by OnMuhBlah_ManyList_NavCollectionChanged() and called from the RelationEntry
             });
             return _triggerFetchMuhBlah_ManyList_NavTask;
@@ -338,7 +338,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                 OnMuhBlah_ManyList_Nav_PostSetter(this);
         }
 
-        private ObservableASideCollectionWrapper<Zetbox.App.Test.Muhblah, Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.Muhblah_has_TestCustomObject_RelationEntryMemoryImpl>> _MuhBlah_ManyList_Nav;
+        private ObservableASideCollectionWrapper<Zetbox.App.Test.Muhblah, Zetbox.App.Test.TestCustomObject, Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryMemoryImpl, ICollection<Zetbox.App.Test.MB_Many_Role_has_TCO_ManyList_Role_RelationEntryMemoryImpl>> _MuhBlah_ManyList_Nav;
         // END Zetbox.Generator.Templates.Properties.CollectionEntryListProperty for MuhBlah_ManyList_Nav
 public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject> OnMuhBlah_ManyList_Nav_PostSetter;
 

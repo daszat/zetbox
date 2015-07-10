@@ -1387,7 +1387,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
                 x.ParentsToDelete.Add(this);
                 ChildrenToDelete.Add(x);
             }
-            // should fetch && remember parent for WorkScheduleSyncProvider_of_WorkSchedule_RelationEntry
+            // should fetch && remember parent for SyncAccount_of_WorkSchedule_RelationEntry
             // FK_WorkSchedule_has_Module
             if (Module != null) {
                 ((NHibernatePersistenceObject)Module).ChildrenToDelete.Add(this);

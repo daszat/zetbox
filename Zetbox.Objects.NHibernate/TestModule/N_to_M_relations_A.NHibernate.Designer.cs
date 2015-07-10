@@ -60,12 +60,12 @@ namespace Zetbox.App.Test
 				if (_BSide == null)
 				{
 					_BSide 
-						= new NHibernateBSideCollectionWrapper<Zetbox.App.Test.N_to_M_relations_A, Zetbox.App.Test.N_to_M_relations_B, Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryNHibernateImpl>(
+						= new NHibernateBSideCollectionWrapper<Zetbox.App.Test.N_to_M_relations_A, Zetbox.App.Test.N_to_M_relations_B, Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryNHibernateImpl>(
 							this, 
-							new ProjectedCollection<Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryNHibernateImpl.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryProxy, Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryNHibernateImpl>(
+							new ProjectedCollection<Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryNHibernateImpl.ASide_connectsTo_BSide_RelationEntryProxy, Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryNHibernateImpl>(
                                 () => this.Proxy.BSide,
-                                p => (Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
-                                ce => (Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryNHibernateImpl.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
+                                p => (Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryNHibernateImpl)OurContext.AttachAndWrap(p),
+                                ce => (Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryNHibernateImpl.ASide_connectsTo_BSide_RelationEntryProxy)((NHibernatePersistenceObject)ce).NHibernateProxy));
                     _BSide.CollectionChanged += (s, e) => { this.NotifyPropertyChanged("BSide", null, null); if(OnBSide_PostSetter != null && IsAttached) OnBSide_PostSetter(this); };
                     if (BSide_was_eagerLoaded) { BSide_was_eagerLoaded = false; }
 				}
@@ -73,7 +73,7 @@ namespace Zetbox.App.Test
 			}
 		}
 
-		private NHibernateBSideCollectionWrapper<Zetbox.App.Test.N_to_M_relations_A, Zetbox.App.Test.N_to_M_relations_B, Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryNHibernateImpl> _BSide;
+		private NHibernateBSideCollectionWrapper<Zetbox.App.Test.N_to_M_relations_A, Zetbox.App.Test.N_to_M_relations_B, Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryNHibernateImpl> _BSide;
 		// ignored, but required for Serialization
         private bool BSide_was_eagerLoaded = false;
 
@@ -327,7 +327,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.N_to_M_relations_
         {
             public N_to_M_relations_AProxy()
             {
-                BSide = new Collection<Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryNHibernateImpl.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryProxy>();
+                BSide = new Collection<Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryNHibernateImpl.ASide_connectsTo_BSide_RelationEntryProxy>();
             }
 
             public virtual int ID { get; set; }
@@ -335,7 +335,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.N_to_M_relations_
             public virtual Type ZetboxWrapper { get { return typeof(N_to_M_relations_ANHibernateImpl); } }
             public virtual Type ZetboxProxy { get { return typeof(N_to_M_relations_AProxy); } }
 
-            public virtual ICollection<Zetbox.App.Test.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryNHibernateImpl.N_to_M_relations_A_connectsTo_N_to_M_relations_B_RelationEntryProxy> BSide { get; set; }
+            public virtual ICollection<Zetbox.App.Test.ASide_connectsTo_BSide_RelationEntryNHibernateImpl.ASide_connectsTo_BSide_RelationEntryProxy> BSide { get; set; }
 
             public virtual string Name { get; set; }
 
