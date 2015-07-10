@@ -85,6 +85,11 @@
     <Compile Include="Projekte\Reporting\ReportingHost.cs" />
     <Compile Include="Projekte\Reporting\ReportTemplate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\InstanceListTestViewModel.cs" />
+    <Compile Include="ViewModels\NextEventsTestNavScreenViewModel.cs" />
+    <Compile Include="ViewModels\TestAppNavigationScreenViewModel.cs" />
+    <Compile Include="ViewModels\TestCustomObjectViewModel.cs" />
+    <Compile Include="ViewModels\TestObjClassViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
