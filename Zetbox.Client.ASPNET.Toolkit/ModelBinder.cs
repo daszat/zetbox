@@ -24,6 +24,7 @@ namespace Zetbox.Client.ASPNET
     using Zetbox.Client.Presentables;
     using System.ComponentModel;
     using Zetbox.API.Utils;
+    using Autofac.Integration.Mvc;
 
     #region ZetboxViewModelBinder
     public interface IZetboxViewModelBinder : IModelBinder
@@ -33,10 +34,14 @@ namespace Zetbox.Client.ASPNET
     public class ZetboxViewModelBinder : DefaultModelBinder, IZetboxViewModelBinder
     {
         IViewModelFactory _vmf;
+        IValidationManager _validation;
+        ZetboxContextHttpScope _scope;
 
-        public ZetboxViewModelBinder(IViewModelFactory vmf)
+        public ZetboxViewModelBinder(IViewModelFactory vmf, IValidationManager validation, ZetboxContextHttpScope scope)
         {
             _vmf = vmf;
+            _validation = validation;
+            _scope = scope;
         }
 
         protected override PropertyDescriptorCollection GetModelProperties(ControllerContext controllerContext, ModelBindingContext bindingContext)
@@ -54,24 +59,17 @@ namespace Zetbox.Client.ASPNET
 
         protected override object CreateModel(ControllerContext controllerContext, ModelBindingContext bindingContext, Type modelType)
         {
-            var scope = DependencyResolver.Current.GetService<ZetboxContextHttpScope>();
-            return _vmf.CreateViewModel<ViewModel.Factory>(modelType).Invoke(scope.Context, null);
+            return _vmf.CreateViewModel<ViewModel.Factory>(modelType).Invoke(_scope.Context, null);
         }
 
-        public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+        protected override bool OnPropertyValidating(ControllerContext controllerContext, ModelBindingContext bindingContext, PropertyDescriptor propertyDescriptor, object value)
         {
-            var mdl = base.BindModel(controllerContext, bindingContext);
-            var errorInfo = mdl as IDataErrorInfo;
-
-            if (errorInfo != null)
+            var vmdl = bindingContext.Model as ViewModel;
+            if (vmdl != null)
             {
-                var error = errorInfo.Error;
-                if (!string.IsNullOrWhiteSpace(error))
-                {
-                    bindingContext.ModelState.AddModelError(bindingContext.ModelName, error);
-                }
+                _validation.RegisterForValidation(bindingContext.ModelName + "." + propertyDescriptor.Name, vmdl);
             }
-            return mdl;
+            return base.OnPropertyValidating(controllerContext, bindingContext, propertyDescriptor, value);
         }
     }
 
@@ -81,18 +79,16 @@ namespace Zetbox.Client.ASPNET
 
     public class ZetboxViewModelBinderProvider : IZetboxViewModelBinderProvider
     {
-        private readonly Func<IZetboxViewModelBinder> _factory;
-
-        public ZetboxViewModelBinderProvider(Func<IZetboxViewModelBinder> factory)
+        public ZetboxViewModelBinderProvider()
         {
-            _factory = factory;
         }
 
         public IModelBinder GetBinder(Type modelType)
         {
             if (typeof(ViewModel).IsAssignableFrom(modelType))
             {
-                return _factory();
+                // IZetboxViewModelBinder has some http request dependencies
+                return DependencyResolver.Current.GetService<IZetboxViewModelBinder>();
             }
             return null;
         }

@@ -41,7 +41,7 @@ namespace Zetbox.Client.ASPNET.Controllers
         [HttpPost]
         public ActionResult Create(DataObjectEditViewModel<Zetbox.App.Projekte.Projekt> vmdl)
         {
-            TryValidateModel(vmdl);
+            UpdateModelState();
             if (ModelState.IsValid)
             {
                 DataContext.SubmitChanges();
@@ -66,7 +66,7 @@ namespace Zetbox.Client.ASPNET.Controllers
         [HttpPost]
         public ActionResult Edit(DataObjectEditViewModel<Zetbox.App.Projekte.Projekt> vmdl)
         {
-            TryValidateModel(vmdl);
+            UpdateModelState();
             if (ModelState.IsValid)
             {
                 DataContext.SubmitChanges();

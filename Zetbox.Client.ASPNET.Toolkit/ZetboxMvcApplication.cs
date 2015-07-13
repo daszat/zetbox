@@ -80,16 +80,24 @@ namespace Zetbox.Client.ASPNET
             container.ApplyPerfCounterTracker();
 
             SetupModelBinder(container);
-            SetupValidatorProvider(container);
+            SetupValidation(container);
 
             API.AppDomainInitializer.InitializeFrom(container);
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
         }
 
-        private static void SetupValidatorProvider(IContainer container)
+        protected virtual void SetupValidation(IContainer container)
         {
-            // TODO: Disable until validation in zetbox has been refactored
-            // ModelValidatorProviders.Providers.Add((ModelValidatorProvider)container.Resolve<IViewModelValidatorProvider>());
+            // Remove DataErrorInfoModelValidatorProvider
+            // Our IZetboxViewModelBinder will register
+            // HTML Fields at the IValidationManager
+            // ZetboxController.UpdateModelState() will 
+            // write those errors to the ModelStateDictionary
+            var toRemove = ModelValidatorProviders.Providers.OfType<DataErrorInfoModelValidatorProvider>().ToList();
+            foreach(var r in toRemove)
+            {
+                ModelValidatorProviders.Providers.Remove(r);
+            }
         }
 
         protected virtual void SetupModelBinder(IContainer container)
@@ -104,6 +112,7 @@ namespace Zetbox.Client.ASPNET
             builder.RegisterModelBinders(typeof(ZetboxMvcApplication).Assembly);
             builder.RegisterModelBinderProvider();
 
+            // Register our model binder manual, as they also deal with derived impelementations
             builder
                 .RegisterType<ZetboxViewModelBinderProvider>()
                 .As<IZetboxViewModelBinderProvider>()
@@ -112,7 +121,7 @@ namespace Zetbox.Client.ASPNET
             builder
                 .RegisterType<ZetboxViewModelBinder>()
                 .As<IZetboxViewModelBinder>()
-                .SingleInstance();
+                .InstancePerHttpRequest(); // ZetboxViewModelBinder has some http request dependencies
 
             builder
                 .RegisterType<LookupDictionaryModelBinderProvider>()
@@ -125,9 +134,9 @@ namespace Zetbox.Client.ASPNET
                 .SingleInstance();
 
             builder
-                .RegisterType<ViewModelValidatorProvider>()
-                .As<IViewModelValidatorProvider>()
-                .SingleInstance();
+                .RegisterType<ValidationManager>()
+                .As<IValidationManager>()
+                .InstancePerHttpRequest();
 
             builder.RegisterModule<AspNetClientModule>();
 

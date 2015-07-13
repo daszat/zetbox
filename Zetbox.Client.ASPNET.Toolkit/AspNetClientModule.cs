@@ -30,12 +30,14 @@ namespace Zetbox.Client.ASPNET
 
     public class ZetboxContextHttpScope
     {
-        public ZetboxContextHttpScope(IZetboxContext ctx)
+        public ZetboxContextHttpScope(IZetboxContext ctx, IValidationManager validation)
         {
             Context = ctx;
+            Validation = validation;
         }
 
         public IZetboxContext Context { get; private set; }
+        public IValidationManager Validation {get; private set;}
     }
 
     [Description("The ASP.NET MVC Client Module")]
@@ -111,7 +113,7 @@ namespace Zetbox.Client.ASPNET
                 .SingleInstance();
 
             moduleBuilder
-                .Register<ZetboxContextHttpScope>(c => new ZetboxContextHttpScope(c.Resolve<IZetboxContext>()))
+                .Register<ZetboxContextHttpScope>(c => new ZetboxContextHttpScope(c.Resolve<IZetboxContext>(), c.Resolve<IValidationManager>()))
                 .InstancePerHttpRequest();
 
             moduleBuilder

@@ -44,8 +44,7 @@ namespace Zetbox.Client.ASPNET.Controllers
             vmdl.ProjectID = project;
             vmdl.Object.Projekt = DataContext.Find<Zetbox.App.Projekte.Projekt>(project);
 
-            ModelState.Clear();
-            TryValidateModel(vmdl);
+            UpdateModelState();
             if (ModelState.IsValid)
             {
                 DataContext.SubmitChanges();
@@ -73,7 +72,7 @@ namespace Zetbox.Client.ASPNET.Controllers
         [HttpPost]
         public ActionResult Edit(TaskEditViewModel vmdl)
         {
-            TryValidateModel(vmdl);
+            UpdateModelState();
             if (ModelState.IsValid)
             {
                 DataContext.SubmitChanges();
