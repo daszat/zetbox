@@ -57,6 +57,22 @@ namespace Zetbox.Client.ASPNET
             var scope = DependencyResolver.Current.GetService<ZetboxContextHttpScope>();
             return _vmf.CreateViewModel<ViewModel.Factory>(modelType).Invoke(scope.Context, null);
         }
+
+        public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+        {
+            var mdl = base.BindModel(controllerContext, bindingContext);
+            var errorInfo = mdl as IDataErrorInfo;
+
+            if (errorInfo != null)
+            {
+                var error = errorInfo.Error;
+                if (!string.IsNullOrWhiteSpace(error))
+                {
+                    bindingContext.ModelState.AddModelError(bindingContext.ModelName, error);
+                }
+            }
+            return mdl;
+        }
     }
 
     public interface IZetboxViewModelBinderProvider : IModelBinderProvider
@@ -145,15 +161,7 @@ namespace Zetbox.Client.ASPNET
                         ValueProvider = bindingContext.ValueProvider
                     };
 
-                    var vmdl = valueBinder.BindModel(controllerContext, innerBindingContext) as ViewModel;
-                    if (vmdl != null)
-                    {
-                        var error = ((IDataErrorInfo)vmdl).Error;
-                        if(!string.IsNullOrWhiteSpace(error))
-                        {
-                            bindingContext.ModelState.AddModelError(modelName, error);
-                        }
-                    }
+                    valueBinder.BindModel(controllerContext, innerBindingContext);
                 }
             }
 
