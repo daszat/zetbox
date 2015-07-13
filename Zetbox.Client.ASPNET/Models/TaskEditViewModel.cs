@@ -27,6 +27,13 @@ namespace Zetbox.Client.ASPNET.Models
 
         public int ProjectID { get; set; }
 
+        protected override DataObjectViewModel FetchViewModel()
+        {
+            var vmdl = base.FetchViewModel();
+            ((ObjectReferenceViewModel)vmdl.PropertyModelsByName["Projekt"]).RespectRequiredFilter = false;
+            return vmdl;
+        }
+
         public DataObjectViewModel ProjectViewModel
         {
             get
