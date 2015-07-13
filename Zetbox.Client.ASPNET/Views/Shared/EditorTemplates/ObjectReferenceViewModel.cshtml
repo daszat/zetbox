@@ -1,6 +1,19 @@
 ﻿@model ObjectReferenceViewModel
 
 @using Zetbox.Client.ASPNET
+@using Zetbox.Client.Presentables
 @using Zetbox.Client.Presentables.ValueViewModels
 
-Not implemented yet, use a Display instead
+@Html.DropDownListFor(
+    m => m.Value,
+    Model.PossibleValues
+         .Select(i => new SelectListItem()
+         {
+             Text = i.Name,
+             Value = i is DataObjectViewModel ? ((DataObjectViewModel)i).ID.ToString() : string.Empty
+         }),
+    Model.Value != null ? Model.Value.ID.ToString() : string.Empty,
+    string.Empty,
+    new { @class = ViewData["class"], placeholder = Model.ToolTip }
+)
+@Html.ValidationMessageFor(m => m.Value)

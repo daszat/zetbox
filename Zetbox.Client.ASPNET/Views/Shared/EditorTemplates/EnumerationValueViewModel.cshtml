@@ -12,6 +12,6 @@
              Value = i.Key != null ? i.Key.Value.ToString() : string.Empty,
              Selected = i.Key == Model.Value
          }),
-    new { @class = "form-control " + ViewData["class"], placeholder = Model.ToolTip }
+    new { @class = ViewData["class"], placeholder = Model.ToolTip }
 )
 @Html.ValidationMessageFor(model => model.Value)
