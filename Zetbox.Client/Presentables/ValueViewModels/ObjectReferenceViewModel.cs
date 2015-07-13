@@ -604,7 +604,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
             if (string.IsNullOrEmpty(SearchString))
             {
-                if (_filterModels.Any(f => f.Required)) return null;
+                if (RespectRequiredFilter && _filterModels.Any(f => f.Required)) return null;
                 return qry;
             }
 
@@ -668,6 +668,26 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                     _searchString = value;
                     OnPropertyChanged("SearchString");
                     OnErrorChanged(); // Maybe error state has changed
+                }
+            }
+        }
+
+        private bool _RespectRequiredFilter = true;
+        /// <summary>
+        /// If set to false, no filter is required. Default value is true.
+        /// </summary>
+        public bool RespectRequiredFilter
+        {
+            get
+            {
+                return _RespectRequiredFilter;
+            }
+            set
+            {
+                if (_RespectRequiredFilter != value)
+                {
+                    _RespectRequiredFilter = value;
+                    OnPropertyChanged("RespectRequiredFilter");
                 }
             }
         }
