@@ -341,7 +341,7 @@ namespace Zetbox.Client.Models
         {
             get
             {
-                return this["Value"];
+                return this.ValueError;
             }
         }
 
