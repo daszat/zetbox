@@ -19,6 +19,7 @@ namespace Zetbox.App.Base
     using System.Linq;
     using System.Text;
     using Zetbox.API;
+    using Zetbox.App.Projekte.Common.ZetboxBase;
 
     [Implementor]
     public static class NotNullableConstraintActions
@@ -62,7 +63,7 @@ namespace Zetbox.App.Base
             object constrainedObjectParam,
             object constrainedValueParam)
         {
-            e.Result = String.IsNullOrEmpty(obj.Reason) ? "Wert muss gesetzt sein" : String.Format("Wert muss gesetzt sein: {0}", obj.Reason);
+            e.Result = String.IsNullOrWhiteSpace(obj.Reason) ? Strings.ErrorEmptyValue : String.Format("{0}: {1}", Strings.ErrorEmptyValue, obj.Reason);
         }
     }
 }

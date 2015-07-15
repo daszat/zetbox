@@ -156,11 +156,11 @@ namespace Zetbox.Client.Tests.ValueViewModels
             [Test]
             public void should_not_clear_Error()
             {
-                var oldError = obj.Error;
+                var oldError = obj.IsValid;
 
                 RaiseValueModelChangedEvent();
 
-                Assert.That(obj.Error, Is.EqualTo(oldError));
+                Assert.That(obj.IsValid, Is.EqualTo(oldError));
                 valueModelMock.Verify();
             }
 
@@ -231,11 +231,11 @@ namespace Zetbox.Client.Tests.ValueViewModels
             [Test]
             public void should_not_clear_Error()
             {
-                var oldError = obj.Error;
+                var oldError = obj.IsValid;
 
                 Assert.That(() => obj.FormattedValue = nextPartialInput, Throws.InvalidOperationException);
 
-                Assert.That(obj.Error, Is.EqualTo(oldError));
+                Assert.That(obj.IsValid, Is.EqualTo(oldError));
                 valueModelMock.Verify();
             }
         }
@@ -299,11 +299,11 @@ namespace Zetbox.Client.Tests.ValueViewModels
             [Test]
             public void should_not_clear_Error()
             {
-                var oldError = obj.Error;
+                var oldError = obj.IsValid;
 
                 Assert.That(() => obj.FormattedValue = validInput, Throws.InvalidOperationException);
 
-                Assert.That(obj.Error, Is.EqualTo(oldError));
+                Assert.That(obj.IsValid, Is.EqualTo(oldError));
                 valueModelMock.Verify();
             }
         }
@@ -366,11 +366,11 @@ namespace Zetbox.Client.Tests.ValueViewModels
             [Test]
             public void should_not_clear_Error()
             {
-                var oldError = obj.Error;
+                var oldError = obj.IsValid;
 
                 Assert.That(() => obj.Value = validValue, Throws.InvalidOperationException);
 
-                Assert.That(obj.Error, Is.EqualTo(oldError));
+                Assert.That(obj.IsValid, Is.EqualTo(oldError));
                 valueModelMock.Verify();
             }
         }

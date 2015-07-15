@@ -27,6 +27,11 @@ namespace Zetbox.Client
         public List<string> Errors { get; private set; }
 
         public List<ValidationError> Children { get; private set; }
+
+        public override string ToString()
+        {
+            return string.Join("\n", Errors.Where(i => !string.IsNullOrWhiteSpace(i)));
+        }
     }
 
     public interface IValidationManager

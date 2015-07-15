@@ -100,8 +100,7 @@ namespace Zetbox.Client.Tests.ValueViewModels.Enumerations
         public void should_set_Error()
         {
             obj.FormattedValue = "Foo";
-
-            Assert.That(obj.Error, Is.Not.Empty);
+            Assert.That(obj.IsValid, Is.False);
         }
 
         [Test]

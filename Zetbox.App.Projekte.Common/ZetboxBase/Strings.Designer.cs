@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Zetbox.Client.Presentables {
+namespace Zetbox.App.Projekte.Common.ZetboxBase {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Zetbox.Client.Presentables {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class DataObjectViewModelResources {
+    internal class Strings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal DataObjectViewModelResources() {
+        internal Strings() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Zetbox.Client.Presentables {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Zetbox.Client.Presentables.DataObjectViewModelResources", typeof(DataObjectViewModelResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Zetbox.App.Projekte.Common.ZetboxBase.Strings", typeof(Strings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,11 @@ namespace Zetbox.Client.Presentables {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Access to this item is denied.
+        ///   Looks up a localized string similar to A value is required.
         /// </summary>
-        internal static string AccessDeniedText {
+        internal static string ErrorEmptyValue {
             get {
-                return ResourceManager.GetString("AccessDeniedText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Object has some invalid properties.
-        /// </summary>
-        internal static string ErrorInvalidProperties {
-            get {
-                return ResourceManager.GetString("ErrorInvalidProperties", resourceCulture);
+                return ResourceManager.GetString("ErrorEmptyValue", resourceCulture);
             }
         }
     }

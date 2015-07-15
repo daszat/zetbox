@@ -9,6 +9,7 @@ namespace Zetbox.App.Projekte.Client.ViewModel.TestModule
     using Zetbox.Client.Presentables.Calendar;
     using System.ComponentModel;
     using cal = Zetbox.App.Calendar;
+    using Zetbox.Client;
 
     [ViewModelDescriptor]
     public class EventTestInputViewModel : EventInputViewModel, IEventInputViewModel
@@ -26,17 +27,27 @@ namespace Zetbox.App.Projekte.Client.ViewModel.TestModule
             get { return "EventTestInputViewModel"; }
         }
 
-        public override string Error
+        public override void Validate()
         {
-            get
+            base.Validate();
+
+            var result = ValidationError;
+
+            StartDate.Validate();
+            if (!StartDate.IsValid)
             {
-                var sb = new StringBuilder();
-
-                if (!string.IsNullOrEmpty(StartDate.Error)) sb.AppendLine(StartDate.Error);
-                if (!string.IsNullOrEmpty(EndDate.Error)) sb.AppendLine(EndDate.Error);
-
-                return sb.ToString();
+                result = result ?? new ValidationError(this);
+                result.Children.Add(StartDate.ValidationError);
             }
+
+            EndDate.Validate();
+            if (!EndDate.IsValid)
+            {
+                result = result ?? new ValidationError(this);
+                result.Children.Add(EndDate.ValidationError);
+            }
+
+            UpdateError(result);
         }
 
         public override EventViewModel CreateNew()

@@ -586,28 +586,27 @@ namespace Zetbox.Client.Presentables
 
         #region IDataErrorInfo Members
 
-        public string Error
+        string IDataErrorInfo.Error
         {
             get
             {
-                if (Object.CurrentAccessRights.HasNoRights()) return string.Empty;
-                else return string.Join("\n", PropertyModels.OfType<IDataErrorInfo>().Select(idei => idei.Error).Where(s => !String.IsNullOrEmpty(s)).ToArray());
+                Validate();
+                if (ValidationError != null)
+                {
+                    return ValidationError.ToString();
+                }
+                else
+                {
+                    return string.Empty;
+                }
             }
         }
 
-        public string this[string columnName]
+        string IDataErrorInfo.this[string columnName]
         {
             get
             {
-                if (PropertyModelsByName.ContainsKey(columnName))
-                {
-                    var idei = PropertyModelsByName[columnName] as IDataErrorInfo;
-                    if (idei != null)
-                    {
-                        return idei.Error;
-                    }
-                }
-                return String.Empty;
+                return string.Empty;
             }
         }
 
@@ -627,22 +626,16 @@ namespace Zetbox.Client.Presentables
                 .Select(i => { i.Validate(); return i.ValidationError; })
                 .Where(i => i != null)
                 .ToArray();
+
             if (errors.Any())
             {
                 result = result ?? new ValidationError(this);
-                result.Errors.Add("Object has some invalid properties");
+                result.Errors.Add(DataObjectViewModelResources.ErrorInvalidProperties);
                 result.Children.Clear();
                 result.Children.AddRange(errors);
             }
 
-            if (result != null)
-            {
-                UpdateError(result);
-            }
-            else
-            {
-                ClearError();
-            }
+            UpdateError(result);
         }
 
         #endregion

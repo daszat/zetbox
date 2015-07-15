@@ -106,13 +106,13 @@ namespace Zetbox.Client.Presentables.Calendar
 
         public bool CanNew()
         {
-            return SelectedInputViewModel != null && string.IsNullOrEmpty(SelectedInputViewModel.Error);
+            return SelectedInputViewModel != null && SelectedInputViewModel.IsValid;
         }
 
         public string CanNewReason()
         {
             if(SelectedInputViewModel == null) return CommonCommandsResources.DataObjectCommand_NothingSelected;
-            if (!string.IsNullOrEmpty(SelectedInputViewModel.Error)) return SelectedInputViewModel.Error;
+            if (!SelectedInputViewModel.IsValid) return SelectedInputViewModel.ValidationError.ToString();
 
             return CommonCommandsResources.DataObjectCommand_ProgrammerError;
         }

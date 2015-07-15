@@ -12,9 +12,11 @@ namespace Zetbox.Client.Presentables.Calendar
     using Zetbox.Client.Presentables.ValueViewModels;
     using cal = Zetbox.App.Calendar;
 
-    public interface IEventInputViewModel : IDataErrorInfo
+    public interface IEventInputViewModel
     {
         EventViewModel CreateNew();
+        bool IsValid { get; }
+        ValidationError ValidationError { get; }
     }
 
     [ViewModelDescriptor]
@@ -169,23 +171,31 @@ namespace Zetbox.Client.Presentables.Calendar
         }
         #endregion
 
-        public virtual string Error
+        public override void Validate()
         {
-            get
+            base.Validate();
+            var result = ValidationError;
+            if (string.IsNullOrEmpty(Summary.Value))
             {
-                var sb = new StringBuilder();
-
-                if (string.IsNullOrEmpty(Summary.Value)) sb.AppendLine("Summary is empty");
-                if (!string.IsNullOrEmpty(StartDate.Error)) sb.AppendLine(StartDate.Error);
-                if (!string.IsNullOrEmpty(EndDate.Error)) sb.AppendLine(EndDate.Error);
-
-                return sb.ToString();
+                result = result ?? new ValidationError(this);
+                result.Errors.Add("Summary is empty");
             }
-        }
 
-        string IDataErrorInfo.this[string columnName]
-        {
-            get { return string.Empty; }
+            StartDate.Validate();
+            if (!StartDate.IsValid)
+            {
+                result = result ?? new ValidationError(this);
+                result.Children.Add(StartDate.ValidationError);
+            }
+
+            EndDate.Validate();
+            if (!EndDate.IsValid)
+            {
+                result = result ?? new ValidationError(this);
+                result.Children.Add(EndDate.ValidationError);
+            }
+
+            UpdateError(result);
         }
 
         public virtual EventViewModel CreateNew()

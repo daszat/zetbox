@@ -139,7 +139,7 @@
     <value>Unable to convert type</value>
   </data>
   <data name="ErrorEmptyValue" xml:space="preserve">
-    <value>Empty value</value>
+    <value>A value is required</value>
   </data>
   <data name="False" xml:space="preserve">
     <value>False</value>
