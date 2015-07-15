@@ -56,6 +56,13 @@ namespace Zetbox.Client.Presentables
         /// IAssetManager instance
         /// </summary>
         IAssetsManager Assets { get; }
+
+        /// <summary>
+        /// IValidationManager instance
+        /// </summary>
+        IValidationManager ValidationManager { get; }
+
+        Zetbox.API.Client.PerfCounter.IPerfCounter PerfCounter { get; }
     }
 
     [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
@@ -130,6 +137,8 @@ namespace Zetbox.Client.Presentables
 
         public IAssetsManager Assets { get { return _dependencies.Assets; } }
 
+        public IValidationManager ValidationManager { get { return _dependencies.ValidationManager; } }
+
         /// <summary>
         /// A <see cref="IZetboxContext"/> to access the current user's data
         /// </summary>
@@ -153,11 +162,6 @@ namespace Zetbox.Client.Presentables
             }
         }
 
-#if DEBUG
-        private static int _debugViewModelCounter = 0;
-        private static int _debugViewModelLogOutCounter = 0;
-#endif
-
         /// <param name="dependencies">The <see cref="IViewModelDependencies"/> to access the current application context</param>
         /// <param name="dataCtx">The <see cref="IZetboxContext"/> to access the current user's data session</param>
         /// <param name="parent">The parent <see cref="ViewModel"/> to ...</param>
@@ -171,13 +175,7 @@ namespace Zetbox.Client.Presentables
             if (_parent != null) _parent.PropertyChanged += (s, e) => { if (e.PropertyName == "Highlight" || e.PropertyName == "HighlightAsync") OnHighlightChanged(); };
             dataCtx.IsElevatedModeChanged += new EventHandler(dataCtx_IsElevatedModeChanged);
 
-#if DEBUG
-            _debugViewModelCounter++;
-            if (++_debugViewModelLogOutCounter % 100 == 0)
-            {
-                _log.DebugFormat("# ViewModels = {0}", _debugViewModelCounter);
-            }
-#endif
+            _dependencies.PerfCounter.IncrementViewModel();
         }
 
         public void Dispose()
@@ -188,12 +186,10 @@ namespace Zetbox.Client.Presentables
 
         protected virtual void Dispose(bool disposing)
         {
-#if DEBUG
             if (disposing)
             {
-                _debugViewModelCounter--;
+                _dependencies.PerfCounter.DecrementViewModel();
             }
-#endif
         }
 
         void dataCtx_IsElevatedModeChanged(object sender, EventArgs e)
@@ -506,6 +502,47 @@ namespace Zetbox.Client.Presentables
             return string.Empty;
         }
         #endregion
+
+        #region Error management
+        private ValidationError _errorCache = null;
+        public virtual ValidationError ValidationError
+        {
+            get
+            {
+                return _errorCache;
+            }
+        }
+
+        public virtual bool IsValid
+        {
+            get
+            {
+                return _errorCache == null;
+            }
+        }
+
+        /// <summary>
+        /// Validates this ViewModel. If implemented, this method should update a validation error
+        /// </summary>
+        public virtual void Validate()
+        {
+            // To be implemented in derived classes
+        }
+
+        protected void UpdateError(ValidationError error)
+        {
+            _errorCache = error;
+            ValidationManager.Notify(this);
+            OnPropertyChanged("Error");
+        }
+
+        protected void ClearError()
+        {
+            _errorCache = null;
+            ValidationManager.Notify(this);
+            OnPropertyChanged("Error");
+        }
+        #endregion
     }
 
     public struct Highlight
@@ -636,6 +673,17 @@ namespace Zetbox.Client.Presentables
         }
 
         public IAssetsManager Assets
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public IValidationManager ValidationManager
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+
+        public API.Client.PerfCounter.IPerfCounter PerfCounter
         {
             get { throw new NotImplementedException(); }
         }

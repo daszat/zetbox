@@ -34,10 +34,10 @@ namespace Zetbox.Client.ASPNET
     public class ZetboxViewModelBinder : DefaultModelBinder, IZetboxViewModelBinder
     {
         IViewModelFactory _vmf;
-        IValidationManager _validation;
+        IMVCValidationManager _validation;
         ZetboxContextHttpScope _scope;
 
-        public ZetboxViewModelBinder(IViewModelFactory vmf, IValidationManager validation, ZetboxContextHttpScope scope)
+        public ZetboxViewModelBinder(IViewModelFactory vmf, IMVCValidationManager validation, ZetboxContextHttpScope scope)
         {
             _vmf = vmf;
             _validation = validation;
@@ -67,7 +67,7 @@ namespace Zetbox.Client.ASPNET
             var vmdl = bindingContext.Model as ViewModel;
             if (vmdl != null)
             {
-                _validation.RegisterForValidation(bindingContext.ModelName + "." + propertyDescriptor.Name, vmdl);
+                _validation.RegisterNameTagForValidation(bindingContext.ModelName + "." + propertyDescriptor.Name, vmdl);
             }
             return base.OnPropertyValidating(controllerContext, bindingContext, propertyDescriptor, value);
         }

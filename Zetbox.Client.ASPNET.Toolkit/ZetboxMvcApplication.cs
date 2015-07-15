@@ -133,11 +133,6 @@ namespace Zetbox.Client.ASPNET
                 .As<ILookupDictionaryModelBinder>()
                 .SingleInstance();
 
-            builder
-                .RegisterType<ValidationManager>()
-                .As<IValidationManager>()
-                .InstancePerHttpRequest();
-
             builder.RegisterModule<AspNetClientModule>();
 
             // Register zetbox specific ViewModels

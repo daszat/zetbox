@@ -8,29 +8,31 @@ using Zetbox.Client.Presentables;
 
 namespace Zetbox.Client.ASPNET
 {
-    public interface IValidationManager
+    public interface IMVCValidationManager : IValidationManager
     {
-        void RegisterForValidation(string key, ViewModel vmdl);
+        void RegisterNameTagForValidation(string nameTag, ViewModel vmdl);
         void Validate(ModelStateDictionary mdlState);
     }
 
-    public class ValidationManager : IValidationManager
+    public class MVCValidationManager : ValidationManager, IMVCValidationManager
     {
-        private Dictionary<string, ViewModel> _validationRequests = new Dictionary<string, ViewModel>();
+        private Dictionary<string, ViewModel> _nameTags = new Dictionary<string, ViewModel>();
 
-        public void RegisterForValidation(string key, ViewModel vmdl)
+        public void RegisterNameTagForValidation(string nameTag, ViewModel vmdl)
         {
-            _validationRequests[key] = vmdl;
+            _nameTags[nameTag] = vmdl;
         }
 
         public void Validate(ModelStateDictionary mdlState)
         {
-            foreach (var kv in _validationRequests)
+            base.Validate();
+
+            foreach (var kv in _nameTags)
             {
-                var error = kv.Value as IDataErrorInfo;
+                var error = kv.Value.ValidationError;
                 if (error != null)
                 {
-                    var strError = error.Error;
+                    var strError = string.Join("\n", error.Errors);
                     if (!string.IsNullOrWhiteSpace(strError))
                     {
                         mdlState.AddModelError(kv.Key, strError);

@@ -50,5 +50,19 @@ namespace Zetbox.API.Client.PerfCounter
             }
         }
 
+        public void IncrementViewModel()
+        {
+            foreach (var a in _appender ?? Empty)
+            {
+                a.IncrementViewModel();
+            }
+        }
+        public void DecrementViewModel()
+        {
+            foreach (var a in _appender ?? Empty)
+            {
+                a.DecrementViewModel();
+            }
+        }
     }
 }

@@ -29,6 +29,7 @@ namespace Zetbox.Client
     using Zetbox.API.Common.GUI;
     using System.ComponentModel;
     using Zetbox.API.Common.Reporting;
+using Zetbox.API.Client.PerfCounter;
 
     [Feature]
     [Description("The Client Module")]
@@ -36,13 +37,15 @@ namespace Zetbox.Client
     {
         private class ViewModelDependencies : IViewModelDependencies
         {
-            public ViewModelDependencies(IViewModelFactory f, IFrozenContext frozenCtx, IPrincipalResolver principalResolver, IIconConverter iconConverter, IAssetsManager assetMgr)
+            public ViewModelDependencies(IViewModelFactory f, IFrozenContext frozenCtx, IPrincipalResolver principalResolver, IIconConverter iconConverter, IAssetsManager assetMgr, IValidationManager validationManager, IPerfCounter perfCounter)
             {
                 Factory = f;
                 FrozenContext = frozenCtx;
                 PrincipalResolver = principalResolver;
                 IconConverter = iconConverter;
                 Assets = assetMgr;
+                ValidationManager = validationManager;
+                PerfCounter = perfCounter;
             }
 
             #region IViewModelDependencies Members
@@ -77,6 +80,18 @@ namespace Zetbox.Client
                 private set;
             }
 
+            public IValidationManager ValidationManager
+            {
+                get;
+                private set;
+            }
+
+            public IPerfCounter PerfCounter
+            {
+                get;
+                private set;
+            }
+
             #endregion
         }
 
@@ -93,7 +108,9 @@ namespace Zetbox.Client
                     c.Resolve<IFrozenContext>(),
                     c.Resolve<IPrincipalResolver>(),
                     c.Resolve<IIconConverter>(),
-                    c.Resolve<IAssetsManager>()))
+                    c.Resolve<IAssetsManager>(),
+                    c.Resolve<IValidationManager>(),
+                    c.Resolve<IPerfCounter>()))
                 .As<IViewModelDependencies>();
 
             moduleBuilder
@@ -125,6 +142,11 @@ namespace Zetbox.Client
                 .RegisterType<Zetbox.Client.Reporting.ReportingErrorDialog>()
                 .AsImplementedInterfaces()
                 .InstancePerDependency();
+
+            moduleBuilder
+               .RegisterType<ValidationManager>()
+               .As<IValidationManager>()
+               .InstancePerLifetimeScope();
 
             moduleBuilder
                 .Register<Zetbox.Client.Reporting.ReportingHost>(c => new Zetbox.Client.Reporting.ReportingHost(

@@ -27,32 +27,35 @@ namespace Zetbox.Client.ASPNET
     using Zetbox.API.Common;
     using Zetbox.API.Common.GUI;
     using Zetbox.API.Client;
+using Zetbox.API.Client.PerfCounter;
 
     public class ZetboxContextHttpScope
     {
-        public ZetboxContextHttpScope(IZetboxContext ctx, IValidationManager validation)
+        public ZetboxContextHttpScope(IZetboxContext ctx, IMVCValidationManager validation)
         {
             Context = ctx;
             Validation = validation;
         }
 
         public IZetboxContext Context { get; private set; }
-        public IValidationManager Validation {get; private set;}
+        public IMVCValidationManager Validation {get; private set;}
     }
 
-    [Description("The ASP.NET MVC Client Module")]
+    [Description("The ASP.NET MVC Client Module. It replaces the Client Module.")]
     public class AspNetClientModule : Module
     {
         #region ViewModelDependencies
         private class ViewModelDependencies : IViewModelDependencies
         {
-            public ViewModelDependencies(IViewModelFactory f, IFrozenContext frozenCtx, IPrincipalResolver principalResolver, IIconConverter iconConverter, IAssetsManager assetMgr)
+            public ViewModelDependencies(IViewModelFactory f, IFrozenContext frozenCtx, IPrincipalResolver principalResolver, IIconConverter iconConverter, IAssetsManager assetMgr, IValidationManager validationManager, IPerfCounter perfCounter)
             {
                 Factory = f;
                 FrozenContext = frozenCtx;
                 PrincipalResolver = principalResolver;
                 IconConverter = iconConverter;
                 Assets = assetMgr;
+                ValidationManager = validationManager;
+                PerfCounter = perfCounter;
             }
 
             #region IViewModelDependencies Members
@@ -87,6 +90,17 @@ namespace Zetbox.Client.ASPNET
                 private set;
             }
 
+            public IValidationManager ValidationManager
+            {
+                get;
+                private set;
+            }
+
+            public IPerfCounter PerfCounter
+            {
+                get;
+                private set;
+            }
             #endregion
         }
         #endregion
@@ -104,7 +118,9 @@ namespace Zetbox.Client.ASPNET
                     c.Resolve<IFrozenContext>(),
                     c.Resolve<IPrincipalResolver>(),
                     c.Resolve<IIconConverter>(),
-                    c.Resolve<IAssetsManager>()))
+                    c.Resolve<IAssetsManager>(),
+                    c.Resolve<IValidationManager>(),
+                    c.Resolve<IPerfCounter>()))
                 .As<IViewModelDependencies>();
 
             moduleBuilder
@@ -113,7 +129,7 @@ namespace Zetbox.Client.ASPNET
                 .SingleInstance();
 
             moduleBuilder
-                .Register<ZetboxContextHttpScope>(c => new ZetboxContextHttpScope(c.Resolve<IZetboxContext>(), c.Resolve<IValidationManager>()))
+                .Register<ZetboxContextHttpScope>(c => new ZetboxContextHttpScope(c.Resolve<IZetboxContext>(), c.Resolve<IMVCValidationManager>()))
                 .InstancePerHttpRequest();
 
             moduleBuilder
@@ -126,6 +142,12 @@ namespace Zetbox.Client.ASPNET
                 .RegisterType<Zetbox.Client.GUI.DialogCreator>()
                 .AsSelf()
                 .InstancePerDependency();
+
+            moduleBuilder
+                .RegisterType<MVCValidationManager>()
+                .As<IValidationManager>()
+                .As<IMVCValidationManager>()
+                .InstancePerHttpRequest();
 
             moduleBuilder.RegisterViewModels(typeof(ClientModule).Assembly);
             moduleBuilder.RegisterModule((Module)Activator.CreateInstance(Type.GetType("Zetbox.App.Projekte.Client.CustomClientActionsModule, Zetbox.App.Projekte.Client", true)));

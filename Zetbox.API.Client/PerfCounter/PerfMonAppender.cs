@@ -58,10 +58,13 @@ namespace Zetbox.API.Client.PerfCounter
 
         private static readonly CounterDesc[] _counterDescs = new[] 
         { 
-            new CounterDesc("ViewModelFetchPerSec", "# of ViewModels fetched / sec.", PerformanceCounterType.RateOfCountsPerSecond32, (pma, desc) => ((PerfMonAppender)pma)._ViewModelFetchPerSec = desc.Get(pma)),
-            new CounterDesc("ViewModelFetchTotal", "# of ViewModels fetched.", PerformanceCounterType.NumberOfItems64, (pma, desc) => ((PerfMonAppender)pma)._ViewModelFetchTotal = desc.Get(pma)),
-            new CounterDesc("ViewModelCreatePerSec", "# of ViewModels created / sec.", PerformanceCounterType.RateOfCountsPerSecond32, (pma, desc) => ((PerfMonAppender)pma)._ViewModelCreatePerSec = desc.Get(pma)),
-            new CounterDesc("ViewModelCreateTotal", "# of ViewModels created.", PerformanceCounterType.NumberOfItems64, (pma, desc) => ((PerfMonAppender)pma)._ViewModelCreateTotal = desc.Get(pma)),
+            new CounterDesc("ViewModelFetchPerSec", "# of ViewModels fetched from Cache / sec.", PerformanceCounterType.RateOfCountsPerSecond32, (pma, desc) => ((PerfMonAppender)pma)._ViewModelFetchPerSec = desc.Get(pma)),
+            new CounterDesc("ViewModelFetchTotal", "# of ViewModels fetched from Cache.", PerformanceCounterType.NumberOfItems64, (pma, desc) => ((PerfMonAppender)pma)._ViewModelFetchTotal = desc.Get(pma)),
+            new CounterDesc("ViewModelCreatePerSec", "# of ViewModels created / sec in Cache .", PerformanceCounterType.RateOfCountsPerSecond32, (pma, desc) => ((PerfMonAppender)pma)._ViewModelCreatePerSec = desc.Get(pma)),
+            new CounterDesc("ViewModelCreateTotal", "# of ViewModels created in Cache.", PerformanceCounterType.NumberOfItems64, (pma, desc) => ((PerfMonAppender)pma)._ViewModelCreateTotal = desc.Get(pma)),
+
+            new CounterDesc("ViewModelTotal", "# of ViewModels.", PerformanceCounterType.NumberOfItems64, (pma, desc) => ((PerfMonAppender)pma)._ViewModelTotal = desc.Get(pma)),
+            new CounterDesc("ViewModelPerSec", "# of ViewModels / sec.", PerformanceCounterType.NumberOfItems64, (pma, desc) => ((PerfMonAppender)pma)._ViewModelPerSec = desc.Get(pma)),
         };
 
         protected override MethodPerformanceCounter.Desc[] MethodCounterDesciptors
@@ -99,5 +102,21 @@ namespace Zetbox.API.Client.PerfCounter
             _ViewModelCreatePerSec.Increment();
             _ViewModelCreateTotal.Increment();
         }
+
+        PerformanceCounter _ViewModelPerSec;
+        PerformanceCounter _ViewModelTotal;
+        public void IncrementViewModel()
+        {
+            if (!initialized) return;
+            _ViewModelPerSec.Increment();
+            _ViewModelTotal.Increment();
+        }
+
+        public void DecrementViewModel()
+        {
+            if (!initialized) return;
+            _ViewModelTotal.Decrement();
+        }
+
     }
 }

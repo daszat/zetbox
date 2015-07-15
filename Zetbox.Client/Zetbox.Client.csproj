@@ -438,6 +438,7 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ValidationManager.cs" />
     <Compile Include="ZetboxContextExceptionHandler.cs" />
     <Compile Include="ZetboxContextExceptionHandlerResources.Designer.cs">
       <AutoGen>True</AutoGen>
