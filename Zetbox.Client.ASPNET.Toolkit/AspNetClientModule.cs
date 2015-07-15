@@ -120,7 +120,7 @@ namespace Zetbox.Client.ASPNET
                 .RegisterType<AspNetViewModelFactory>()
                 .As<IViewModelFactory>()
                 .As<IToolkit>()
-                .SingleInstance();
+                .InstancePerLifetimeScope(); // Not per HTTP Request, as custom actions also need a ViewModelFactory. They'll get the root scope.
 
             moduleBuilder
                 .RegisterType<Zetbox.Client.GUI.DialogCreator>()
