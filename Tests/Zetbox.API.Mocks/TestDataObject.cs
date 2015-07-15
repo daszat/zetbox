@@ -314,6 +314,11 @@ namespace Zetbox.API.Mocks
             throw new NotImplementedException();
         }
 
+        public ObjectIsValidResult Validate()
+        {
+            return ObjectIsValidResult.Valid;
+        }
+
         #region TransientState
         [NonSerialized]
         private Dictionary<object, object> _transientState;

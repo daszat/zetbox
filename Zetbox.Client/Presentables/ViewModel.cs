@@ -531,6 +531,7 @@ namespace Zetbox.Client.Presentables
 
         protected void UpdateError(ValidationError error)
         {
+            if (error == null) throw new ArgumentNullException("error", "To clear an error call ClearError()");
             _errorCache = error;
             ValidationManager.Notify(this);
             OnPropertyChanged("Error");

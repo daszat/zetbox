@@ -24,9 +24,9 @@ namespace Zetbox.Client
 
         public ViewModel Source { get; set; }
         public ViewModel OriginalSource { get; set; }
-        public IList<string> Errors { get; private set; }
+        public List<string> Errors { get; private set; }
 
-        public IList<ValidationError> Children { get; private set; }
+        public List<ValidationError> Children { get; private set; }
     }
 
     public interface IValidationManager

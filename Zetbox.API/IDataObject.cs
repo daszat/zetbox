@@ -360,6 +360,12 @@ namespace Zetbox.API
         /// <returns></returns>
         ZbTask TriggerFetch(string propName);
 
+        /// <summary>
+        /// Validates the Object. Checks, if the Object Level Constraint is valid. Properties are not validated.
+        /// </summary>
+        /// <returns></returns>
+        ObjectIsValidResult Validate();
+
         #region //// INTERNALS /////
         // TODO: move to separate interface
 

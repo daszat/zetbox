@@ -59,6 +59,8 @@ namespace Zetbox.Client.Presentables
             _object.PropertyChanged += Object_PropertyChanged;
             isReadOnlyStore = _object.IsReadonly;
             dataCtx.IsElevatedModeChanged += new EventHandler(dataCtx_IsElevatedModeChanged);
+
+            ValidationManager.Register(this);
         }
 
         void dataCtx_IsElevatedModeChanged(object sender, EventArgs e)
@@ -606,6 +608,40 @@ namespace Zetbox.Client.Presentables
                     }
                 }
                 return String.Empty;
+            }
+        }
+
+        public override void Validate()
+        {
+            if (Object.CurrentAccessRights.HasNoRights()) return;
+
+            ValidationError result = null;
+
+            var objError = Object.Validate();
+            if (!objError.IsValid)
+            {
+                result = new ValidationError(this, objError.Errors);
+            }
+
+            var errors = PropertyModels
+                .Select(i => { i.Validate(); return i.ValidationError; })
+                .Where(i => i != null)
+                .ToArray();
+            if (errors.Any())
+            {
+                result = result ?? new ValidationError(this);
+                result.Errors.Add("Object has some invalid properties");
+                result.Children.Clear();
+                result.Children.AddRange(errors);
+            }
+
+            if (result != null)
+            {
+                UpdateError(result);
+            }
+            else
+            {
+                ClearError();
             }
         }
 

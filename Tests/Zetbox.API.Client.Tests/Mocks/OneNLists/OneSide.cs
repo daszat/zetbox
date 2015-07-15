@@ -132,6 +132,10 @@ namespace Zetbox.API.Client.Mocks.OneNLists
             throw new NotImplementedException();
         }
 
+        public ObjectIsValidResult Validate()
+        {
+            return ObjectIsValidResult.Valid;
+        }
         #endregion
 
         #region IPersistenceObject Members

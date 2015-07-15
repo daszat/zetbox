@@ -273,6 +273,18 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         #endregion
 
         #region IDataErrorInfo Members
+        public override void Validate()
+        {
+            var error = this.Error; // First attempt. TODO: Replace all overrides of Error with an override to this method.
+            if(!string.IsNullOrEmpty(error))
+            {
+                UpdateError(new ValidationError(this, error));
+            }
+            else
+            {
+                ClearError();
+            }
+        }
 
         public virtual string Error
         {
@@ -1319,7 +1331,12 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 else
                 {
                     MatchCollection matches;
-                    if (null != (matches = Regex.Matches(str, @"^(\d?\d):?(\d\d)$")))
+                    if(string.IsNullOrEmpty(str))
+                    {
+                        result.Value = null;
+                        result.Error = string.Format("{0}: {1}", this.Label, ValueViewModelResources.ErrorConvertingType);
+                    }
+                    else if (null != (matches = Regex.Matches(str, @"^(\d?\d):?(\d\d)$")))
                     {
                         int hours, minutes;
                         if (matches.Count == 1
