@@ -12,11 +12,11 @@ else
     if (Model.DatePartVisible)
     {
         @Html.TextBoxFor(m => m.DatePartString, new { @class = "datePicker" + ViewData["class"], placeholder = Model.ToolTip })
-        @Html.ValidationMessageFor(model => model.DatePartString)
     }
     if (Model.TimePartVisible)
     {
         @Html.TextBoxFor(m => m.TimePartString, new { @class = "timePicker" + ViewData["class"], placeholder = Model.ToolTip })
-        @Html.ValidationMessageFor(model => model.TimePartString)
     }
+    
+    @Html.ValidationMessageFor(model => model)
 }

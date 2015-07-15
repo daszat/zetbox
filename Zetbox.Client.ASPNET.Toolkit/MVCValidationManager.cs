@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using Zetbox.Client.Presentables;
+using Zetbox.Client.Presentables.ValueViewModels;
 
 namespace Zetbox.Client.ASPNET
 {
@@ -27,15 +28,23 @@ namespace Zetbox.Client.ASPNET
         {
             base.Validate();
 
-            foreach (var kv in _nameTags)
+            foreach (var tags in _nameTags)
             {
-                var error = kv.Value.ValidationError;
+                var error = tags.Value.ValidationError;
                 if (error != null)
                 {
-                    var strError = string.Join("\n", error.Errors);
+                    var strError = string.Join(", ", error.Errors);
                     if (!string.IsNullOrWhiteSpace(strError))
                     {
-                        mdlState.AddModelError(kv.Key, strError);
+                        if (tags.Value is DataObjectViewModel)
+                        {
+                            // Special case DatObject: remove any key
+                            mdlState.AddModelError("", strError);
+                        }
+                        else
+                        {
+                            mdlState.AddModelError(tags.Key, strError);
+                        }
                     }
                 }
             }

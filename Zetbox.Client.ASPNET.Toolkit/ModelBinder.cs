@@ -67,7 +67,7 @@ namespace Zetbox.Client.ASPNET
             var vmdl = bindingContext.Model as ViewModel;
             if (vmdl != null)
             {
-                _validation.RegisterNameTagForValidation(bindingContext.ModelName + "." + propertyDescriptor.Name, vmdl);
+                _validation.RegisterNameTagForValidation(bindingContext.ModelName, vmdl);
             }
             return base.OnPropertyValidating(controllerContext, bindingContext, propertyDescriptor, value);
         }

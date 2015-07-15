@@ -10,5 +10,5 @@
 else
 {
     @Html.TextBoxFor(m => m.FormattedValue, new { @class = ViewData["class"], placeholder = Model.ToolTip })
-    @Html.ValidationMessageFor(model => model.FormattedValue)
+    @Html.ValidationMessageFor(model => model)
 }

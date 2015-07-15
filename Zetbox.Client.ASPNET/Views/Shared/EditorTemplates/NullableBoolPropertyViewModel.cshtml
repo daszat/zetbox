@@ -10,5 +10,5 @@
 else
 {
     @Html.CheckBox("Value", Model.Value ?? false, new { @class = "" + ViewData["class"], placeholder = ViewData["placeholder"] as string })
-    @Html.ValidationMessageFor(m => m.Value)
+    @Html.ValidationMessageFor(m => m)
 }
