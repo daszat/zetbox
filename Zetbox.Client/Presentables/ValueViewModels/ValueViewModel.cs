@@ -1309,7 +1309,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                     if (string.IsNullOrEmpty(str))
                     {
                         result.Value = null;
-                        result.Error = string.Format("{0}: {1}", this.Label, ValueViewModelResources.ErrorConvertingType);
+                        result.Error = ValueViewModelResources.TimeIsRequired;
                     }
                     else if (null != (matches = Regex.Matches(str, @"^(\d?\d):?(\d\d)$")))
                     {
@@ -1325,12 +1325,12 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         }
                         else
                         {
-                            result.Error = string.Format("{0}: {1}", this.Label, ValueViewModelResources.ErrorConvertingType);
+                            result.Error = ValueViewModelResources.ErrorConvertingType;
                         }
                     }
                     else
                     {
-                        result.Error = string.Format("{0}: {1}", this.Label, ValueViewModelResources.ErrorConvertingType);
+                        result.Error = ValueViewModelResources.ErrorConvertingType;
                     }
                 }
                 return result;
@@ -1674,13 +1674,15 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 if (!_datePartViewModel.IsValid)
                 {
                     result = result ?? new ValidationError(this);
+                    result.Errors.AddRange(_datePartViewModel.ValidationError.Errors);
+
                     if ((!AllowNullInput && !_datePartViewModel.Value.HasValue)
                        || (_timePartViewModel.Value.HasValue && !_datePartViewModel.Value.HasValue))
                     {
                         // Date is null
                         result.Errors.Add(ValueViewModelResources.DateIsRequired);
                     }
-                    result.Children.Add(_datePartViewModel.ValidationError);
+                    // Don't add Children as they never apear outside this viewmodel
                 }
             }
             if (TimePartVisible)
@@ -1689,14 +1691,15 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 if (!_timePartViewModel.IsValid)
                 {
                     result = result ?? new ValidationError(this);
+                    result.Errors.AddRange(_timePartViewModel.ValidationError.Errors);
+
                     if ((!AllowNullInput && !_timePartViewModel.Value.HasValue)
                         || (_datePartViewModel.Value.HasValue && !_timePartViewModel.Value.HasValue))
                     {
                         // both no null input allowed or there is a datepart => error
                         result.Errors.Add(ValueViewModelResources.TimeIsRequired);
                     }
-
-                    result.Children.Add(_timePartViewModel.ValidationError);
+                    // Don't add Children as they never apear outside this viewmodel
                 }
             }
 
