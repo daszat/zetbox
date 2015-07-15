@@ -21,6 +21,7 @@ namespace Zetbox.Client.Presentables
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
+    using log4net;
     using Zetbox.API;
     using Zetbox.API.Common;
     using Zetbox.API.Common.GUI;
@@ -87,8 +88,10 @@ namespace Zetbox.Client.Presentables
     /// <remarks>
     /// See http://blogs.msdn.com/dancre/archive/2006/10/11/datamodel-view-viewmodel-pattern-series.aspx and various others.
     /// </remarks>
-    public abstract class ViewModel : INotifyPropertyChanged
+    public abstract class ViewModel : INotifyPropertyChanged, IDisposable
     {
+        private static readonly ILog _log = LogManager.GetLogger(typeof(ViewModel));
+
         public delegate ViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
 
         private readonly IViewModelDependencies _dependencies;
@@ -150,6 +153,11 @@ namespace Zetbox.Client.Presentables
             }
         }
 
+#if DEBUG
+        private static int _debugViewModelCounter = 0;
+        private static int _debugViewModelLogOutCounter = 0;
+#endif
+
         /// <param name="dependencies">The <see cref="IViewModelDependencies"/> to access the current application context</param>
         /// <param name="dataCtx">The <see cref="IZetboxContext"/> to access the current user's data session</param>
         /// <param name="parent">The parent <see cref="ViewModel"/> to ...</param>
@@ -162,6 +170,30 @@ namespace Zetbox.Client.Presentables
 
             if (_parent != null) _parent.PropertyChanged += (s, e) => { if (e.PropertyName == "Highlight" || e.PropertyName == "HighlightAsync") OnHighlightChanged(); };
             dataCtx.IsElevatedModeChanged += new EventHandler(dataCtx_IsElevatedModeChanged);
+
+#if DEBUG
+            _debugViewModelCounter++;
+            if (++_debugViewModelLogOutCounter % 100 == 0)
+            {
+                _log.DebugFormat("# ViewModels = {0}", _debugViewModelCounter);
+            }
+#endif
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+#if DEBUG
+            if (disposing)
+            {
+                _debugViewModelCounter--;
+            }
+#endif
         }
 
         void dataCtx_IsElevatedModeChanged(object sender, EventArgs e)

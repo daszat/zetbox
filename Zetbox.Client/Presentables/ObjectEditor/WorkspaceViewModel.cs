@@ -31,7 +31,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
 
     [ViewModelDescriptor]
     public class WorkspaceViewModel
-        : WindowViewModel, IMultipleInstancesManager, IContextViewModel, IDeleteCommandParameter, IDisposable
+        : WindowViewModel, IMultipleInstancesManager, IContextViewModel, IDeleteCommandParameter
     {
         public new delegate WorkspaceViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
         private readonly IZetboxContextExceptionHandler _exceptionHandler;
@@ -489,13 +489,14 @@ namespace Zetbox.Client.Presentables.ObjectEditor
         }
         #endregion
 
-        #region IDisposable Members
-
-        public void Dispose()
+        #region Dispose
+        protected override void Dispose(bool disposing)
         {
-            ViewModelFactory.OnIMultipleInstancesManagerDisposed(DataContext, this);
+            if (disposing)
+            {
+                ViewModelFactory.OnIMultipleInstancesManagerDisposed(DataContext, this);
+            }
         }
-
         #endregion
 
         #region IDeleteCommandParameter members
