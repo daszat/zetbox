@@ -5,15 +5,14 @@
 @using Zetbox.Client.Presentables.ValueViewModels
 
 @Html.DropDownListFor(
-    m => m.Value,
+    m => m.ValueID,
     Model.PossibleValues
          .Select(i => new SelectListItem()
          {
              Text = i.Name,
              Value = i is DataObjectViewModel ? ((DataObjectViewModel)i).ID.ToString() : string.Empty
          }),
-    Model.Value != null ? Model.Value.ID.ToString() : string.Empty,
-    string.Empty,
+    string.Empty, // Add empty value, PossibleValues don't return a empty value
     new { @class = ViewData["class"], placeholder = Model.ToolTip }
 )
 @Html.ValidationMessageFor(m => m)

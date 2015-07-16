@@ -121,7 +121,6 @@
     <Compile Include="Filters\InitializeZetboxMembershipAttribute.cs" />
     <Compile Include="HtmlHelpers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SelectExtensions.cs" />
     <Compile Include="MVCValidationManager.cs" />
     <Compile Include="ViewModel\DataObjectEditViewModel.cs" />
     <Compile Include="ViewModel\SearchViewModel.cs" />

@@ -380,7 +380,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         var obj = ValueModel.Value;
                         if (obj != null)
                         {
-                            _valueCache = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), ValueModel.Value);
+                            _valueCache = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, GetWorkspace(), ValueModel.Value);
                             EnsureValuePossible(_valueCache);
                         }
                         _valueCacheInititalized = true;
@@ -459,6 +459,29 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             {
                 // reuse synchronous setter to await/cancel a potential running fetch task
                 this.Value = value;
+            }
+        }
+
+        /// <summary>
+        /// The ID of the referenced Object or null if empty
+        /// </summary>
+        public int? ValueID
+        {
+            get
+            {
+                return this.Value != null ? (int?)this.Value.ID : null;
+            }
+            set
+            {
+                if(value != null && value != Helper.INVALIDID)
+                {
+                    var obj = DataContext.Find(ReferencedClass.GetDescribedInterfaceType(), value.Value);
+                    this.Value = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, GetWorkspace(), obj);
+                }
+                else
+                {
+                    this.Value = null;
+                }
             }
         }
         #endregion
@@ -570,7 +593,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                     var mdlList = fetchTask.Result
                                 .OfType<IDataObject>()
                                 .Take(PossibleValuesLimit)
-                                .Select(i => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), i))
+                                .Select(i => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, GetWorkspace(), i))
                                 .Cast<ViewModel>()
                                 .OrderBy(v => v.Name)
                                 .ToList();
@@ -797,7 +820,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                     if (obj.ObjectState == DataObjectState.New) return false;
                     obj = DataContext.Find(DataContext.GetInterfaceType(obj), obj.ID);
                 }
-                Value = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this.GetWorkspace(), obj);
+                Value = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, GetWorkspace(), obj);
             }
             return false;
         }
