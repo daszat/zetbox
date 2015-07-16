@@ -278,13 +278,16 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             var result = base.Validate();
 
-            ValueModel.Validate();
-            var error = ValueModel.Error;
-
-            if (!string.IsNullOrEmpty(error))
+            if (IsValid)
             {
-                result = EnsureError(result);
-                result.AddError(error);
+                ValueModel.Validate();
+                var error = ValueModel.Error;
+
+                if (!string.IsNullOrEmpty(error))
+                {
+                    result = EnsureError(result);
+                    result.AddError(error);
+                }
             }
 
             return result;
@@ -804,7 +807,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         public override ValidationError Validate()
         {
             var result = base.Validate();
-            if (!string.IsNullOrEmpty(_partialUserInputError))
+            if (IsValid && !string.IsNullOrEmpty(_partialUserInputError))
             {
                 result = EnsureError(result);
                 result.Errors.Add(_partialUserInputError);
@@ -888,7 +891,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             var result = base.Validate();
 
-            if(_illegalNullInput)
+            if(IsValid && _illegalNullInput)
             {
                 result = EnsureError(result);
                 result.Errors.Add(ValueViewModelResources.ErrorEmptyValue);
@@ -1695,38 +1698,41 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             var result = base.Validate();
 
-            if (DatePartVisible)
+            if (IsValid)
             {
-                _datePartViewModel.Validate();
-                if (!_datePartViewModel.IsValid)
+                if (DatePartVisible)
                 {
-                    result = EnsureError(result);
-                    result.Errors.AddRange(_datePartViewModel.ValidationError.Errors);
-
-                    if ((!AllowNullInput && !_datePartViewModel.Value.HasValue)
-                       || (_timePartViewModel.Value.HasValue && !_datePartViewModel.Value.HasValue))
+                    _datePartViewModel.Validate();
+                    if (!_datePartViewModel.IsValid)
                     {
-                        // Date is null
-                        result.Errors.Add(ValueViewModelResources.DateIsRequired);
+                        result = EnsureError(result);
+                        result.Errors.AddRange(_datePartViewModel.ValidationError.Errors);
+
+                        if ((!AllowNullInput && !_datePartViewModel.Value.HasValue)
+                           || (_timePartViewModel.Value.HasValue && !_datePartViewModel.Value.HasValue))
+                        {
+                            // Date is null
+                            result.Errors.Add(ValueViewModelResources.DateIsRequired);
+                        }
+                        // Don't add Children as they never apear outside this viewmodel
                     }
-                    // Don't add Children as they never apear outside this viewmodel
                 }
-            }
-            if (TimePartVisible)
-            {
-                _timePartViewModel.Validate();
-                if (!_timePartViewModel.IsValid)
+                if (TimePartVisible)
                 {
-                    result = EnsureError(result);
-                    result.Errors.AddRange(_timePartViewModel.ValidationError.Errors);
-
-                    if ((!AllowNullInput && !_timePartViewModel.Value.HasValue)
-                        || (_datePartViewModel.Value.HasValue && !_timePartViewModel.Value.HasValue))
+                    _timePartViewModel.Validate();
+                    if (!_timePartViewModel.IsValid)
                     {
-                        // both no null input allowed or there is a datepart => error
-                        result.Errors.Add(ValueViewModelResources.TimeIsRequired);
+                        result = EnsureError(result);
+                        result.Errors.AddRange(_timePartViewModel.ValidationError.Errors);
+
+                        if ((!AllowNullInput && !_timePartViewModel.Value.HasValue)
+                            || (_datePartViewModel.Value.HasValue && !_timePartViewModel.Value.HasValue))
+                        {
+                            // both no null input allowed or there is a datepart => error
+                            result.Errors.Add(ValueViewModelResources.TimeIsRequired);
+                        }
+                        // Don't add Children as they never apear outside this viewmodel
                     }
-                    // Don't add Children as they never apear outside this viewmodel
                 }
             }
 
