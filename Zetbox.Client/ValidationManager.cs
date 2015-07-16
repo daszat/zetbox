@@ -9,21 +9,14 @@ namespace Zetbox.Client
     public class ValidationError
     {
         public ValidationError(ViewModel source, params string[] errors)
-            : this(source, source, errors)
-        {
-        }
-
-        public ValidationError(ViewModel source, ViewModel originalSource, params string[] errors)
         {
             this.Source = source;
-            this.OriginalSource = originalSource;
 
             this.Errors = new List<string>(errors);
             this.Children = new List<ValidationError>();
         }
 
         public ViewModel Source { get; set; }
-        public ViewModel OriginalSource { get; set; }
         public List<string> Errors { get; private set; }
 
         public List<ValidationError> Children { get; private set; }
