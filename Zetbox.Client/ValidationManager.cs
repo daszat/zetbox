@@ -111,7 +111,9 @@ namespace Zetbox.Client
             _isValidating = true;
             try
             {
-                foreach (var vmdl in _validationRequests)
+                // Clone the ValidationRequests list, as during the validation it may happen that new ViewModels are created. 
+                // During creation they will register at the validation manager.
+                foreach (var vmdl in _validationRequests.ToList())
                 {
                     vmdl.Validate();
                 }
