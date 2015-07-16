@@ -34,20 +34,20 @@
         <TextBox Grid.Row="0"
                  Grid.Column="0"
                  Grid.ColumnSpan="2"
-                 Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
+                 Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <TextBox Grid.Row="1"
                  Grid.Column="0"
                  Grid.ColumnSpan="2"
-                 Text="{Binding Notes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+                 Text="{Binding Notes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                  AcceptsReturn="True" />
 
         <TextBox Grid.Row="2"
                  Grid.Column="0"
-                 Text="{Binding From, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
+                 Text="{Binding From, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <TextBox Grid.Row="2"
                  Grid.Column="1"
-                 Text="{Binding Thru, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
+                 Text="{Binding Thru, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
     </Grid>
 </UserControl>

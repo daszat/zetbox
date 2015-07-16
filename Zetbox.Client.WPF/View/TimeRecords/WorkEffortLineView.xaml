@@ -19,12 +19,12 @@
     -->
 
     <UniformGrid Rows="1">
-        <TextBox Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
+        <TextBox Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-        <TextBox Text="{Binding Notes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
+        <TextBox Text="{Binding Notes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-        <TextBox Text="{Binding From, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
+        <TextBox Text="{Binding From, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-        <TextBox Text="{Binding Thru, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
+        <TextBox Text="{Binding Thru, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
     </UniformGrid>
 </UserControl>

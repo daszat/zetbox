@@ -43,7 +43,7 @@
 
         <!-- configured from code, see RefreshGridView() -->
         <ctrls:ZetboxListView x:Name="lst"
-                              ItemsSource="{Binding ValueAsync, Mode=OneWay, ValidatesOnDataErrors=true}"
+                              ItemsSource="{Binding ValueAsync, Mode=OneWay}"
                               MinHeight="50"
                               SelectedZetboxItems="{Binding SelectedItems}"
                               ItemContainerStyle="{StaticResource ListViewAsGridViewItemContainerStyle}"

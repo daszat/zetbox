@@ -30,7 +30,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type view:NullablePropertyTextBoxView}">
                     <kevin:InfoTextBox x:Name="txtNullablePropertyTextBoxView"
-                                       Text="{Binding FormattedValue, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+                                       Text="{Binding FormattedValue, UpdateSourceTrigger=PropertyChanged}"
                                        TextBoxInfo="{Binding ToolTip}"
                                        VerticalAlignment="Top"
                                        IsReadOnly="{Binding IsReadOnly}">
@@ -60,7 +60,7 @@
                                              Margin="2,0,0,0"
                                              Style="{StaticResource ImageOnlyButton}" />
                         <kevin:InfoTextBox x:Name="txtNullablePropertyTextBoxView"
-                                           Text="{Binding FormattedValue, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+                                           Text="{Binding FormattedValue, UpdateSourceTrigger=PropertyChanged}"
                                            TextBoxInfo="{Binding ToolTip}"
                                            VerticalAlignment="Top"
                                            IsReadOnly="{Binding IsReadOnly}">
@@ -91,7 +91,7 @@
                               IsEditable="True"
                               DisplayMemberPath="Value"
                               IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
-                              SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}">
+                              SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                         <ComboBox.ContextMenu>
                             <ContextMenu>
                                 <MenuItem Command="{Binding ClearValueCommand, Converter={StaticResource CommandConverter}}"
@@ -165,8 +165,8 @@
                                   IsSynchronizedWithCurrentItem="False"
                                   IsEditable="True"
                                   Text="{Binding SearchString, Mode=OneWayToSource}"
-                                  ItemsSource="{Binding PossibleValuesAsync, Mode=OneWay, ValidatesOnDataErrors=true}"
-                                  SelectedItem="{Binding ValueAsync, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+                                  ItemsSource="{Binding PossibleValuesAsync, Mode=OneWay}"
+                                  SelectedItem="{Binding ValueAsync, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                   IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
                                   HorizontalContentAlignment="Stretch">
                             <ComboBox.ItemTemplate>
@@ -187,7 +187,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type view:NullableBoolValueView}">
                     <CheckBox x:Name="PART_cb"
-                              IsChecked="{Binding Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+                              IsChecked="{Binding Value, UpdateSourceTrigger=PropertyChanged}"
                               IsThreeState="{Binding AllowNullInput, Mode=OneWay}"
                               IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
                               ToolTip="{Binding ToolTip}"

@@ -38,7 +38,7 @@
                     HorizontalContentAlignment="Stretch">
             <TabControl.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Name, Mode=OneWay, ValidatesOnDataErrors=true}" />
+                    <TextBlock Text="{Binding Name, Mode=OneWay}" />
                 </DataTemplate>
             </TabControl.ItemTemplate>
             <TabControl.ContentTemplate>

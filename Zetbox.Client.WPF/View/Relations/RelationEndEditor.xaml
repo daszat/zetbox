@@ -29,20 +29,16 @@
                   Margin="5,0">
             <DockPanel LastChildFill="False">
                 <ctrls:LabeledView DockPanel.Dock="Top"
-                                  Margin="5,0,5,0"
-                                  DataContext="{Binding PropertyModelsByName[Type], UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
+                                  DataContext="{Binding PropertyModelsByName[Type], UpdateSourceTrigger=PropertyChanged}" />
 
                 <ctrls:LabeledView DockPanel.Dock="Top"
-                                  Margin="5,0,5,0"
-                                  DataContext="{Binding PropertyModelsByName[Multiplicity], UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
+                                  DataContext="{Binding PropertyModelsByName[Multiplicity], UpdateSourceTrigger=PropertyChanged}" />
 
                 <ctrls:LabeledView DockPanel.Dock="Top"
-                                  Margin="5,0,5,0"
-                                  DataContext="{Binding PropertyModelsByName[HasPersistentOrder], UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
+                                  DataContext="{Binding PropertyModelsByName[HasPersistentOrder], UpdateSourceTrigger=PropertyChanged}" />
 
                 <ctrls:LabeledView DockPanel.Dock="Top"
-                                  Margin="5,0,5,0"
-                                  DataContext="{Binding PropertyModelsByName[Navigator], UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
+                                  DataContext="{Binding PropertyModelsByName[Navigator], UpdateSourceTrigger=PropertyChanged}" />
 
                 <ctrls:DataObjectActionsTray DockPanel.Dock="Top" />
             </DockPanel>

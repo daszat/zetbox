@@ -49,7 +49,7 @@
         </ItemsControl>
 
         <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <ItemsControl ItemsSource="{Binding Items, ValidatesOnDataErrors=true}"
+            <ItemsControl ItemsSource="{Binding Items}"
                           BorderThickness="0"
                           HorizontalContentAlignment="Stretch"
                           VerticalContentAlignment="Stretch">

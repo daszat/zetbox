@@ -31,25 +31,25 @@
                 IsSynchronizedWithCurrentItem="False"
                 ItemsSource="{Binding Years}"
                 IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
-                SelectedValue="{Binding Year, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+                SelectedValue="{Binding Year, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 MinWidth="75" />
       <ComboBox DisplayMemberPath="Name"
                 IsSynchronizedWithCurrentItem="False"
                 ItemsSource="{Binding HalfYears}"
                 IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
-                SelectedValue="{Binding HalfYear, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+                SelectedValue="{Binding HalfYear, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 MinWidth="75" />
       <ComboBox DisplayMemberPath="Name"
                 IsSynchronizedWithCurrentItem="False"
                 ItemsSource="{Binding Quaters}"
                 IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
-                SelectedValue="{Binding Quater, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+                SelectedValue="{Binding Quater, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 MinWidth="75" />
       <ComboBox DisplayMemberPath="Name"
                 IsSynchronizedWithCurrentItem="False"
                 ItemsSource="{Binding Months}"
                 IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
-                SelectedValue="{Binding Month, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+                SelectedValue="{Binding Month, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 MinWidth="75" />
     </UniformGrid>
   </ctrls:LabeledContainer>
