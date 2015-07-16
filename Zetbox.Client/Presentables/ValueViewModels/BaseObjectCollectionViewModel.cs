@@ -578,7 +578,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         _wrapper = new SortedWrapper<IDataObject>(ObjectCollectionModel.Value, ReferencedClass.GetDescribedInterfaceType(), ObjectCollectionModel, InitialSortProperty);
                         _valueCache = new ReadOnlyObservableProjectedList<IDataObject, DataObjectViewModel>(
                             _wrapper,
-                            obj => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj),
+                            obj => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, GetWorkspace(), obj),
                             mdl => mdl.Object);
                         _valueCache.CollectionChanged += ValueListChanged;
                         t.Result = _valueCache;
@@ -697,7 +697,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             if (p.Object == null)
             {
                 var obj = DataContext.Create(DataContext.GetInterfaceType(this.ReferencedClass.GetDataType()));
-                p.Object = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj);
+                p.Object = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, GetWorkspace(), obj);
                 _proxyCache[p.Object.Object] = p;
             }
             return p.Object;
@@ -709,7 +709,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             DataObjectViewModelProxy result;
             if (!_proxyCache.TryGetValue(obj, out result))
             {
-                result = new DataObjectViewModelProxy() { Object = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj) };
+                result = new DataObjectViewModelProxy() { Object = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, GetWorkspace(), obj) };
                 _proxyCache[obj] = result;
             }
             return result;

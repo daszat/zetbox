@@ -55,7 +55,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             {
                 var obj = Object != null ? Object.GetObject(DataContext) : null;
                 if (obj == null) return null;
-                return DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, obj);
+                return DataObjectViewModel.Fetch(ViewModelFactory, DataContext, GetWorkspace(), obj);
             }
         }
 
