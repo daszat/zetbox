@@ -31,7 +31,7 @@ namespace Zetbox.Client.Presentables
     /// </summary>
     [ViewModelDescriptor]
     public abstract class PropertyGroupViewModel
-        : ViewModel, IDataErrorInfo
+        : ViewModel
     {
         public new delegate PropertyGroupViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string tagName, string title, IEnumerable<ViewModel> lst);
 
@@ -98,28 +98,6 @@ namespace Zetbox.Client.Presentables
         }
         #endregion
 
-        #region IDataErrorInfo Members
-
-        public string Error
-        {
-            get { return this["Title"]; }
-        }
-
-        public string this[string columnName]
-        {
-            get
-            {
-                switch (columnName)
-                {
-                    case "Title":
-                        return String.Join("\n", properties.OfType<IDataErrorInfo>().Select(idei => idei.Error).Where(s => !String.IsNullOrEmpty(s)).ToArray());
-                    default:
-                        return null;
-                }
-            }
-        }
-
-        #endregion
 
         #region Event handlers
 

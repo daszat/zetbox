@@ -606,7 +606,7 @@ namespace Zetbox.Client.Presentables
         {
             get
             {
-                return string.Empty;
+                return ((IDataErrorInfo)this).Error;
             }
         }
 

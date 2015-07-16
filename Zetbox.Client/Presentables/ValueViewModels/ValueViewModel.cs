@@ -297,7 +297,6 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                Validate();
                 if (ValidationError != null)
                 {
                     return ValidationError.ToString();
@@ -313,7 +312,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                return string.Empty;
+                return ((IDataErrorInfo)this).Error;
             }
         }
 
