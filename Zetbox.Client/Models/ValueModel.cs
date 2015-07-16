@@ -163,7 +163,7 @@ namespace Zetbox.Client.Models
         /// <summary>
         /// Checks constraints on the object and puts the results into the cache.
         /// </summary> 
-        protected void CheckConstraints()
+        public void Validate()
         {
         }
         #endregion

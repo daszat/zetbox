@@ -326,7 +326,7 @@ namespace Zetbox.Client.Models
         /// <summary>
         /// Checks constraints on the object and puts the results into the cache.
         /// </summary> 
-        protected void CheckConstraints()
+        public void Validate()
         {
             if (Object is IDataErrorInfo)
             {
@@ -452,7 +452,7 @@ namespace Zetbox.Client.Models
                 if (!IsPropertyInitialized() || !object.Equals(GetPropertyValue(), value))
                 {
                     SetPropertyValue(value);
-                    CheckConstraints();
+                    Validate();
                     NotifyValueChanged();
                 }
             }
@@ -547,7 +547,7 @@ namespace Zetbox.Client.Models
 
                     Object.SetPropertyValue<TValue>(Property.Name, value);
 
-                    CheckConstraints();
+                    Validate();
 
                     NotifyValueChanged();
                 }

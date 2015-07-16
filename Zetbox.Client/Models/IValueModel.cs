@@ -82,6 +82,11 @@ namespace Zetbox.Client.Models
         bool ReportErrors { get; }
 
         /// <summary>
+        /// (Re) Validates the model
+        /// </summary>
+        void Validate();
+
+        /// <summary>
         /// DefaultKind override from the underlying Value model.
         /// </summary>
         ControlKind RequestedKind { get; }

@@ -276,15 +276,19 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         #region IDataErrorInfo Members
         public override void Validate()
         {
+            base.Validate();
+            var result = ValidationError;
+
+            ValueModel.Validate();
             var error = ValueModel.Error;
+
             if (!string.IsNullOrEmpty(error))
             {
-                UpdateError(new ValidationError(this, error));
+                result = result ?? new ValidationError(this);
+                result.Errors.Add(error);
             }
-            else
-            {
-                ClearError();
-            }
+
+            UpdateError(result);
         }
 
         string IDataErrorInfo.Error
@@ -862,12 +866,36 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         protected override ZbTask<TValue?> GetValueFromModelAsync()
         {
-            return new ZbTask<TValue?>(ZbTask.Synchron, () => ValueModel.Value);
+            return new ZbTask<TValue?>(ZbTask.Synchron, () =>
+            {
+                return _illegalNullInput ? null : ValueModel.Value;
+            });
         }
+
+        private bool _illegalNullInput = false;
 
         protected override void SetValueToModel(TValue? value)
         {
+            if(!AllowNullInput && value == null)
+            {
+                _illegalNullInput = true;
+                return;
+            }
+            _illegalNullInput = false;
             ValueModel.Value = value;
+        }
+
+        public override void Validate()
+        {
+            base.Validate();
+            var result = ValidationError;
+            if(_illegalNullInput)
+            {
+                result = result ?? new ValidationError(this);
+                result.Errors.Add(ValueViewModelResources.ErrorEmptyValue);
+            }
+
+            UpdateError(result);
         }
     }
 
@@ -942,9 +970,10 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             {
                 if (_PossibleValues == null)
                 {
+                    var entries = EnumModel.GetEntries().Select(kv => new KeyValuePair<int?, string>(kv.Key, kv.Value));
                     this._PossibleValues = new ReadOnlyCollection<KeyValuePair<int?, string>>(
                         new[] { new KeyValuePair<int?, string>(null, String.Empty) }
-                        .Concat(EnumModel.GetEntries().Select(kv => new KeyValuePair<int?, string>(kv.Key, kv.Value)))
+                        .Concat(entries)
                         .ToList()
                     );
                 }
