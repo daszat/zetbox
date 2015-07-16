@@ -19,6 +19,7 @@ namespace Zetbox.Generator.InterfaceTemplates
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
     using System.Text;
     using Zetbox.API;
     using Zetbox.App.Base;
@@ -96,6 +97,17 @@ namespace Zetbox.Generator.InterfaceTemplates
                             };
                         })
                         .ToList();
+                }
+                catch (TargetInvocationException ex)
+                {
+                    var inner = ex.StripTargetInvocationExceptions();
+                    if (inner is TypeLoadException || inner is NotImplementedException)
+                    {
+                        if (!IsFallback)
+                        {
+                            Log.WarnFormat("TypeLoadException: Skipping rendering for {0}: {1}", objClass, ex.Message);
+                        }
+                    }
                 }
                 catch (TypeLoadException ex)
                 {
