@@ -584,13 +584,11 @@ namespace Zetbox.Client.Presentables
         }
         #endregion
 
-        #region IDataErrorInfo Members
-
+        #region Validation
         string IDataErrorInfo.Error
         {
             get
             {
-                Validate();
                 if (ValidationError != null)
                 {
                     return ValidationError.ToString();

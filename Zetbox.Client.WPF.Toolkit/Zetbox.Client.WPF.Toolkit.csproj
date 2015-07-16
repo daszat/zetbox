@@ -105,6 +105,7 @@
     <Compile Include="CustomControls\ContentAdorner.cs" />
     <Compile Include="CustomControls\HelpButton.cs" />
     <Compile Include="CustomControls\DataObjectActionsTray.cs" />
+    <Compile Include="CustomControls\ErrorMarker.cs" />
     <Compile Include="CustomControls\ObjectHeader.cs" />
     <Compile Include="CustomControls\CustomControlsResources.Designer.cs">
       <AutoGen>True</AutoGen>

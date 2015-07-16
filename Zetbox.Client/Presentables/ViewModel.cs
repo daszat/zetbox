@@ -529,7 +529,7 @@ namespace Zetbox.Client.Presentables
             // First, clear the error
             _errorCache = null;
             ValidationManager.Notify(this);
-            OnPropertyChanged("Error");
+            OnErrorChanged();
 
             // derived implementations may re-create an error object via CreateError()
             return null;
@@ -543,8 +543,15 @@ namespace Zetbox.Client.Presentables
         {
             _errorCache = ValidationError.CreateIfNull(current, this);
             ValidationManager.Notify(this);
-            OnPropertyChanged("Error");
+            OnErrorChanged();
             return _errorCache;
+        }
+
+        private void OnErrorChanged()
+        {
+            OnPropertyChanged("Error");
+            OnPropertyChanged("IsValid");
+            OnPropertyChanged("ValidationError");
         }
         #endregion
     }

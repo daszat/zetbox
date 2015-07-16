@@ -35,9 +35,17 @@ namespace Zetbox.Client
             Errors.AddRange(errors);
         }
 
+        public string Message
+        {
+            get
+            {
+                return string.Join("\n", Errors.Where(i => !string.IsNullOrWhiteSpace(i)));
+            }
+        }
+
         public override string ToString()
         {
-            return string.Join("\n", Errors.Where(i => !string.IsNullOrWhiteSpace(i)));
+            return Message;
         }
     }
 
