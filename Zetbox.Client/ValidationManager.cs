@@ -8,18 +8,32 @@ namespace Zetbox.Client
 {
     public class ValidationError
     {
-        public ValidationError(ViewModel source, params string[] errors)
+        public static ValidationError CreateIfNull(ValidationError current, ViewModel source)
+        {
+            return current ?? new ValidationError(source);
+        }
+
+        private ValidationError(ViewModel source)
         {
             this.Source = source;
 
-            this.Errors = new List<string>(errors);
+            this.Errors = new List<string>();
             this.Children = new List<ValidationError>();
         }
 
         public ViewModel Source { get; set; }
         public List<string> Errors { get; private set; }
-
         public List<ValidationError> Children { get; private set; }
+
+        public void AddError(string error)
+        {
+            Errors.Add(error);
+        }
+
+        public void AddErrors(IEnumerable<string> errors)
+        {
+            Errors.AddRange(errors);
+        }
 
         public override string ToString()
         {

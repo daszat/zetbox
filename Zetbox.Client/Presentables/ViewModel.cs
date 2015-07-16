@@ -524,30 +524,27 @@ namespace Zetbox.Client.Presentables
         /// <summary>
         /// Validates this ViewModel. If implemented, this method should update a validation error
         /// </summary>
-        public virtual void Validate()
+        public virtual ValidationError Validate()
         {
-            // To be implemented in derived classes
-        }
-
-        protected void UpdateError(ValidationError error)
-        {
-            if (error != null)
-            {
-                _errorCache = error;
-                ValidationManager.Notify(this);
-                OnPropertyChanged("Error");
-            }
-            else
-            {
-                ClearError();
-            }
-        }
-
-        protected void ClearError()
-        {
+            // First, clear the error
             _errorCache = null;
             ValidationManager.Notify(this);
             OnPropertyChanged("Error");
+
+            // derived implementations may re-create an error object via CreateError()
+            return null;
+        }
+
+        /// <summary>
+        /// Ensures, that a ValidationError object is present. This method will not destroy a currently available error.
+        /// </summary>
+        /// <returns></returns>
+        protected ValidationError EnsureError(ValidationError current)
+        {
+            _errorCache = ValidationError.CreateIfNull(current, this);
+            ValidationManager.Notify(this);
+            OnPropertyChanged("Error");
+            return _errorCache;
         }
         #endregion
     }

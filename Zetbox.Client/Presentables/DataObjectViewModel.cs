@@ -610,16 +610,17 @@ namespace Zetbox.Client.Presentables
             }
         }
 
-        public override void Validate()
+        public override ValidationError Validate()
         {
-            if (Object.CurrentAccessRights.HasNoRights()) return;
+            var result = base.Validate();
+            if (Object.CurrentAccessRights.HasNoRights()) return result;
 
-            ValidationError result = null;
 
             var objError = Object.Validate();
             if (!objError.IsValid)
             {
-                result = new ValidationError(this, objError.Errors);
+                result = EnsureError(result);
+                result.AddErrors(objError.Errors);
             }
 
             var errors = PropertyModels
@@ -629,13 +630,13 @@ namespace Zetbox.Client.Presentables
 
             if (errors.Any())
             {
-                result = result ?? new ValidationError(this);
+                result = EnsureError(result);
                 result.Errors.Add(DataObjectViewModelResources.ErrorInvalidProperties);
                 result.Children.Clear();
                 result.Children.AddRange(errors);
             }
 
-            UpdateError(result);
+            return result;
         }
 
         #endregion

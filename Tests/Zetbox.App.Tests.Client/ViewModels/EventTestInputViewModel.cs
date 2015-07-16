@@ -27,27 +27,30 @@ namespace Zetbox.App.Projekte.Client.ViewModel.TestModule
             get { return "EventTestInputViewModel"; }
         }
 
-        public override void Validate()
+        public override ValidationError Validate()
         {
-            base.Validate();
-
-            var result = ValidationError;
+            var result = base.Validate();
 
             StartDate.Validate();
             if (!StartDate.IsValid)
             {
-                result = result ?? new ValidationError(this);
+                result = EnsureError(result);
                 result.Children.Add(StartDate.ValidationError);
             }
 
             EndDate.Validate();
             if (!EndDate.IsValid)
             {
-                result = result ?? new ValidationError(this);
+                result = EnsureError(result);
                 result.Children.Add(EndDate.ValidationError);
             }
 
-            UpdateError(result);
+            if(result != null)
+            {
+                result.AddError("Some properties are invalid");
+            }
+
+            return result;
         }
 
         public override EventViewModel CreateNew()

@@ -171,31 +171,37 @@ namespace Zetbox.Client.Presentables.Calendar
         }
         #endregion
 
-        public override void Validate()
+        public override ValidationError Validate()
         {
-            base.Validate();
-            var result = ValidationError;
-            if (string.IsNullOrEmpty(Summary.Value))
+            var result = base.Validate();
+
+            Summary.Validate();
+            if (!Summary.IsValid)
             {
-                result = result ?? new ValidationError(this);
-                result.Errors.Add("Summary is empty");
+                result = EnsureError(result);
+                result.Children.Add(Summary.ValidationError);
             }
 
             StartDate.Validate();
             if (!StartDate.IsValid)
             {
-                result = result ?? new ValidationError(this);
+                result = EnsureError(result);
                 result.Children.Add(StartDate.ValidationError);
             }
 
             EndDate.Validate();
             if (!EndDate.IsValid)
             {
-                result = result ?? new ValidationError(this);
+                result = EnsureError(result);
                 result.Children.Add(EndDate.ValidationError);
             }
 
-            UpdateError(result);
+            if(result != null)
+            {
+                result.AddError(DataObjectViewModelResources.ErrorInvalidProperties);
+            }
+
+            return result;
         }
 
         public virtual EventViewModel CreateNew()

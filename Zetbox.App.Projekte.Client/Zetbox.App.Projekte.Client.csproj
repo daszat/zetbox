@@ -121,7 +121,6 @@
     <Compile Include="Gui\SinglePropertyFilterConfigurationActions.cs" />
     <Compile Include="Gui\IconActions.cs" />
     <Compile Include="Helper\PdfReport.cs" />
-    <Compile Include="ViewModel\TestModule\EventTestInputViewModel.cs" />
     <Compile Include="ZetboxBase\BoolPropertyActions.cs" />
     <Compile Include="ZetboxBase\CalculatedObjectReferencePropertyActions.cs" />
     <Compile Include="ZetboxBase\IdentityActions.cs" />

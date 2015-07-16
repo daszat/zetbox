@@ -274,21 +274,20 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         #endregion
 
         #region IDataErrorInfo Members
-        public override void Validate()
+        public override ValidationError Validate()
         {
-            base.Validate();
-            var result = ValidationError;
+            var result = base.Validate();
 
             ValueModel.Validate();
             var error = ValueModel.Error;
 
             if (!string.IsNullOrEmpty(error))
             {
-                result = result ?? new ValidationError(this);
-                result.Errors.Add(error);
+                result = EnsureError(result);
+                result.AddError(error);
             }
 
-            UpdateError(result);
+            return result;
         }
 
         string IDataErrorInfo.Error
@@ -802,16 +801,16 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         #endregion
 
         #region Validation
-        public override void Validate()
+        public override ValidationError Validate()
         {
-            base.Validate();
-            var result = ValidationError;
+            var result = base.Validate();
             if (!string.IsNullOrEmpty(_partialUserInputError))
             {
-                result = result ?? new ValidationError(this);
+                result = EnsureError(result);
                 result.Errors.Add(_partialUserInputError);
             }
-            UpdateError(result);
+
+            return result;
         }
         #endregion
     }
@@ -885,17 +884,17 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             ValueModel.Value = value;
         }
 
-        public override void Validate()
+        public override ValidationError Validate()
         {
-            base.Validate();
-            var result = ValidationError;
+            var result = base.Validate();
+
             if(_illegalNullInput)
             {
-                result = result ?? new ValidationError(this);
+                result = EnsureError(result);
                 result.Errors.Add(ValueViewModelResources.ErrorEmptyValue);
             }
 
-            UpdateError(result);
+            return result;
         }
     }
 
@@ -1692,17 +1691,16 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             base.OnFocus();
         }
 
-        public override void Validate()
+        public override ValidationError Validate()
         {
-            base.Validate();
-            var result = ValidationError;
+            var result = base.Validate();
 
             if (DatePartVisible)
             {
                 _datePartViewModel.Validate();
                 if (!_datePartViewModel.IsValid)
                 {
-                    result = result ?? new ValidationError(this);
+                    result = EnsureError(result);
                     result.Errors.AddRange(_datePartViewModel.ValidationError.Errors);
 
                     if ((!AllowNullInput && !_datePartViewModel.Value.HasValue)
@@ -1719,7 +1717,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 _timePartViewModel.Validate();
                 if (!_timePartViewModel.IsValid)
                 {
-                    result = result ?? new ValidationError(this);
+                    result = EnsureError(result);
                     result.Errors.AddRange(_timePartViewModel.ValidationError.Errors);
 
                     if ((!AllowNullInput && !_timePartViewModel.Value.HasValue)
@@ -1732,7 +1730,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 }
             }
 
-            UpdateError(result);
+            return result;
         }
     }
 

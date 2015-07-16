@@ -724,16 +724,15 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             OnPropertyChanged("PossibleValuesAsync");
         }
 
-        public override void Validate()
+        public override ValidationError Validate()
         {
-            base.Validate();
-            var result = ValidationError;
+            var result = base.Validate();
             if (!string.IsNullOrEmpty(SearchString) && Value == null)
             {
-                result = result ?? new ValidationError(this);
+                result = EnsureError(result);
                 result.Errors.Add(ObjectReferenceViewModelResources.Error_SearchString_NoValue);
             }
-            UpdateError(result);
+            return result;
         }
 
         private GridDisplayConfiguration _displayedColumns = null;
