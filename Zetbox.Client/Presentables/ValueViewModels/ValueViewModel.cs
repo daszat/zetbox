@@ -90,6 +90,8 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             this.ValueModel = mdl;
             dataCtx.IsElevatedModeChanged += new EventHandler(Context_IsElevatedModeChanged);
+
+            ValidationManager.Register(this);
         }
 
         void Context_IsElevatedModeChanged(object sender, EventArgs e)
@@ -161,15 +163,6 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             Validate();
             OnPropertyChanged("Error");
-            if (!IsValid && ValueModel.ReportErrors)
-            {
-                // Register with a IContextViewModel
-                var ctxVmdl = ViewModelFactory.GetWorkspace(DataContext) as IContextViewModel;
-                if (ctxVmdl != null)
-                {
-                    ctxVmdl.RegisterError(this);
-                }
-            }
         }
 
         protected override string GetHelpText()

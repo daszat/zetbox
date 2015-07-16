@@ -47,7 +47,5 @@ namespace Zetbox.Client.Presentables
         ICommandViewModel DeleteCommand { get; }
 
         bool IsContextModified { get; }
-
-        void RegisterError(IDataErrorInfo vmdl);
     }
 }

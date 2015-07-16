@@ -277,11 +277,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataObjectSelectionTaskViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\ErrorListViewModelResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ErrorListViewModelResources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Presentables\ExceptionReporterViewModel.cs" />
     <Compile Include="Presentables\ExceptionReporterViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -377,7 +372,6 @@
     <Compile Include="Presentables\GUI\MultiLineEditorDialogViewModel.cs" />
     <Compile Include="Presentables\ZetboxBase\CommonCommands.cs" />
     <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModel.cs" />
-    <Compile Include="Presentables\ErrorListViewModel.cs" />
     <Compile Include="Presentables\ICommandViewModel.cs" />
     <Compile Include="Presentables\ILabeledViewModel.cs" />
     <Compile Include="Presentables\IViewModelFactory.cs" />
@@ -469,7 +463,6 @@
     <EmbeddedResource Include="Presentables\DataObjectSelectionTaskViewModelResources.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="Presentables\DataObjectViewModelResources.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="Presentables\DocumentManagement\ImportedFileNavigationSearchScreenViewModelResources.x-zb-Pseudo.resx" />
-    <EmbeddedResource Include="Presentables\ErrorListViewModelResources.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="Presentables\ExceptionReporterViewModelResources.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="Presentables\FilterViewModels\FilterViewModelResources.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="Presentables\GUI\MultiLineEditorDialogViewModelResources.x-zb-Pseudo.resx" />
@@ -587,12 +580,6 @@
     <EmbeddedResource Include="Presentables\DataObjectSelectionTaskViewModelResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>DataObjectSelectionTaskViewModelResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ErrorListViewModelResources.de.resx">
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ErrorListViewModelResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ErrorListViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentables\ExceptionReporterViewModelResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

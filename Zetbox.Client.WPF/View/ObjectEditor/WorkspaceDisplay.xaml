@@ -6,6 +6,7 @@
                   xmlns:client="clr-namespace:Zetbox.Client.Presentables;assembly=Zetbox.Client"
                   xmlns:commands="clr-namespace:Zetbox.Client.WPF.Commands;assembly=Zetbox.Client.WPF.Toolkit"
                   xmlns:tk="clr-namespace:Zetbox.Client.WPF.Toolkit;assembly=Zetbox.Client.WPF.Toolkit"
+                  xmlns:local="clr-namespace:Zetbox.Client.WPF.View.ObjectEditor"
                   Title="{Binding Name}"
                   Height="600"
                   Width="800"
@@ -83,25 +84,14 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
-
             <Expander Grid.Column="0"
                       Style="{StaticResource Area1Expander}"
-                      IsExpanded="{Binding ShowItemsList}"
+                      x:Name="expanderLeft"
                       ExpandDirection="Right"
                       Header="{Binding ItemsLabel}"
                       Expanded="Expander_Expanded"
                       Collapsed="Expander_Collapsed">
-                <DockPanel>
-                    <TextBlock DockPanel.Dock="Top"
-                               HorizontalAlignment="Center"
-                               Text="{Binding ItemsLabel}" />
-                    <ListBox x:Name="lstItems"
-                             ItemsSource="{Binding Items}"
-                             SelectedItem="{Binding SelectedItem}"
-                             ItemContainerStyle="{StaticResource ListBoxItemContainerStyle}"
-                             ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
-                             BorderThickness="0" />
-                </DockPanel>
+                <local:SideBarLeft />
             </Expander>
 
             <GridSplitter Grid.Column="1"

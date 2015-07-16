@@ -40,19 +40,36 @@ namespace Zetbox.Client.WPF.View.ObjectEditor
     /// Interaction logic for DesktopView.xaml
     /// </summary>
     [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
-    public partial class WorkspaceDisplay : WindowView, IHasViewModel<WorkspaceViewModel>, IDragDropTarget, IDragDropSource
+    public partial class WorkspaceDisplay : WindowView
     {
         public WorkspaceDisplay()
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             InitializeComponent();
         }
-        private WpfDragDropHelper _dragDrop;
 
-        protected override void OnInitialized(EventArgs e)
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
         {
-            base.OnInitialized(e);
-            this.lstItems.Loaded += (s, e2) => { _dragDrop = new WpfDragDropHelper(lstItems.FindScrollContentPresenter() ?? this.lstItems, this); };
+            base.OnPropertyChanged(e);
+            if (e.Property == DataContextProperty)
+            {
+                if (ViewModel != null)
+                {
+                    ViewModel.PropertyChanged += ViewModel_PropertyChanged;
+                }
+            }
+        }
+
+        void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch(e.PropertyName)
+            {
+                case "ShowItemsList":
+                case "ShowErrors":
+                    if (ViewModel.ShowItemsList == true || ViewModel.ShowErrors == true)
+                        expanderLeft.IsExpanded = true;
+                    break;
+            }
         }
 
         public WorkspaceViewModel ViewModel
@@ -64,7 +81,7 @@ namespace Zetbox.Client.WPF.View.ObjectEditor
         private GridLength? _columnWidth;
         private void Expander_Expanded(object sender, RoutedEventArgs e)
         {
-            column0.Width = _columnWidth ?? new GridLength(150);
+            column0.Width = _columnWidth ?? new GridLength(250);
             if (gridSplitter != null) gridSplitter.IsEnabled = true;
         }
 
@@ -76,30 +93,5 @@ namespace Zetbox.Client.WPF.View.ObjectEditor
         }
         #endregion
 
-        #region IDragDrop*
-        bool IDragDropTarget.CanDrop
-        {
-            get { return ViewModel != null && ViewModel.CanDrop; }
-        }
-
-        string[] IDragDropTarget.AcceptableDataFormats
-        {
-            get
-            {
-                return WpfDragDropHelper.ZetboxObjectDataFormats;
-            }
-        }
-
-        bool IDragDropTarget.OnDrop(string format, object data)
-        {
-            if (ViewModel == null) return false;
-            return ViewModel.OnDrop(data);
-        }
-
-        object IDragDropSource.GetData()
-        {
-            return ViewModel.DoDragDrop();
-        }
-        #endregion
     }
 }

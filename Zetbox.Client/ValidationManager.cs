@@ -80,6 +80,8 @@ namespace Zetbox.Client
         /// Returns all current errors.
         /// </summary>
         IEnumerable<ValidationError> Errors { get; }
+
+        bool IsValid { get; }
     }
 
     public class ValidationManager : IValidationManager
@@ -139,6 +141,15 @@ namespace Zetbox.Client
             get 
             {
                 return _validationRequests.Where(i => i.ValidationError != null).Select(i => i.ValidationError);
+            }
+        }
+
+
+        public bool IsValid
+        {
+            get 
+            {
+                return !Errors.Any();
             }
         }
     }

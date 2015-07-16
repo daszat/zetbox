@@ -129,6 +129,15 @@
   <data name="CanClose_Title" xml:space="preserve">
     <value>Unsaved data</value>
   </data>
+  <data name="ErrorsLabel" xml:space="preserve">
+    <value>Errors</value>
+  </data>
+  <data name="GotoObjectCommand_Name" xml:space="preserve">
+    <value>Goto</value>
+  </data>
+  <data name="GotoObjectCommand_Tooltip" xml:space="preserve">
+    <value>Got to the error</value>
+  </data>
   <data name="ItemsLabel" xml:space="preserve">
     <value>Objects:</value>
   </data>

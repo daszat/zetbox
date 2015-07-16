@@ -209,6 +209,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\ObjectEditor\ErrorList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ObjectEditor\SideBarLeft.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\SelectionDialogGrid.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -336,12 +344,6 @@
     <Page Include="View\DocumentManagement\ImageEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\ErrorListView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\ExceptionReporterDialog.xaml">
       <SubType>Designer</SubType>
@@ -627,6 +629,12 @@
       <DependentUpon>WorkScheduleRuleInstanceDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\GUI\Panels.cs" />
+    <Compile Include="View\ObjectEditor\ErrorList.xaml.cs">
+      <DependentUpon>ErrorList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ObjectEditor\SideBarLeft.xaml.cs">
+      <DependentUpon>SideBarLeft.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\SelectionDialogGrid.xaml.cs">
       <DependentUpon>SelectionDialogGrid.xaml</DependentUpon>
     </Compile>
@@ -758,9 +766,6 @@
     </Compile>
     <Compile Include="View\DocumentManagement\ImageEditor.xaml.cs">
       <DependentUpon>ImageEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ErrorListView.xaml.cs">
-      <DependentUpon>ErrorListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ExceptionReporterDialog.xaml.cs">
       <DependentUpon>ExceptionReporterDialog.xaml</DependentUpon>
