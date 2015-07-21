@@ -251,6 +251,88 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
         public static event PropertyIsValidHandler<Zetbox.App.Base.Identity> OnGroups_IsValid;
 
         /// <summary>
+        /// If true, the item will be hidden in any search
+        /// </summary>
+        // value type property
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public bool IsDeactivated
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _IsDeactivated;
+                if (!_isIsDeactivatedSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("4a2da2e9-9492-41a3-9969-d5ffa1cac3b3"));
+                    if (__p != null) {
+                        _isIsDeactivatedSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this._IsDeactivated = (bool)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'Identity.IsDeactivated'");
+                    }
+                }
+                if (OnIsDeactivated_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<bool>(__result);
+                    OnIsDeactivated_Getter(this, __e);
+                    __result = _IsDeactivated = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isIsDeactivatedSet = true;
+                if (_IsDeactivated != value)
+                {
+                    var __oldValue = _IsDeactivated;
+                    var __newValue = value;
+                    if (OnIsDeactivated_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnIsDeactivated_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("IsDeactivated", __oldValue, __newValue);
+                    _IsDeactivated = __newValue;
+                    NotifyPropertyChanged("IsDeactivated", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnIsDeactivated_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnIsDeactivated_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("IsDeactivated");
+                }
+            }
+        }
+        private bool _IsDeactivated_store;
+        private bool _IsDeactivated {
+            get { return _IsDeactivated_store; }
+            set {
+                ReportEfPropertyChanging("IsDeactivated");
+                _IsDeactivated_store = value;
+                ReportEfPropertyChanged("IsDeactivated");
+            }
+        }
+        private bool _isIsDeactivatedSet = false;
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Zetbox.App.Base.Identity, bool> OnIsDeactivated_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.Identity, bool> OnIsDeactivated_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.Identity, bool> OnIsDeactivated_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Base.Identity> OnIsDeactivated_IsValid;
+
+        /// <summary>
         /// A token for simple login with a URL
         /// </summary>
         // value type property
@@ -783,6 +865,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
 
             me.CalendarConfiguration = other.CalendarConfiguration;
             me.DisplayName = other.DisplayName;
+            me.IsDeactivated = other.IsDeactivated;
             me.LoginToken = other.LoginToken;
             me.Password = other.Password;
             me.UserName = other.UserName;
@@ -809,6 +892,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
             {
                 case "CalendarConfiguration":
                 case "DisplayName":
+                case "IsDeactivated":
                 case "LoginToken":
                 case "OpenID":
                 case "Password":
@@ -891,6 +975,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
                         obj => obj.Groups,
                         null, // lists are read-only properties
                         obj => OnGroups_IsValid), 
+                    // else
+                    new PropertyDescriptorEfImpl<Identity, bool>(
+                        lazyCtx,
+                        new Guid("4a2da2e9-9492-41a3-9969-d5ffa1cac3b3"),
+                        "IsDeactivated",
+                        null,
+                        obj => obj.IsDeactivated,
+                        (obj, val) => obj.IsDeactivated = val,
+						obj => OnIsDeactivated_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<Identity, Guid?>(
                         lazyCtx,
@@ -1052,6 +1145,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
             if (!CurrentAccessRights.HasReadRights()) return;
             binStream.Write(this._CalendarConfiguration);
             binStream.Write(this._DisplayName);
+            binStream.Write(this._isIsDeactivatedSet);
+            if (this._isIsDeactivatedSet) {
+                binStream.Write(this._IsDeactivated);
+            }
             binStream.Write(this._LoginToken);
             binStream.Write(this.OpenID);
             binStream.Write(this._Password);
@@ -1066,6 +1163,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
             this._CalendarConfiguration = binStream.ReadString();
             this._DisplayName = binStream.ReadString();
+            this._isIsDeactivatedSet = binStream.ReadBoolean();
+            if (this._isIsDeactivatedSet) {
+                this._IsDeactivated = binStream.ReadBoolean();
+            }
             this._LoginToken = binStream.ReadNullableGuid();
             {
                 // use backing store to avoid notifications

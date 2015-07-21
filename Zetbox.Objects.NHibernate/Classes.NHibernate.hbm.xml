@@ -4833,6 +4833,10 @@
         </set>
 
         <!-- ValueTypeProperty isValue -->
+        <property name="IsDeactivated" 
+                  column="`IsDeactivated`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
         <property name="LoginToken" 
                   column="`LoginToken`" 
                   optimistic-lock="false"/>

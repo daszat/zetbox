@@ -1203,6 +1203,10 @@ namespace Zetbox {
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("5f534204-f0d5-4d6f-8efa-7ff248580ba3"); }
                                 }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> IsDeactivated
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("4a2da2e9-9492-41a3-9969-d5ffa1cac3b3"); }
+                                }
                                 public static TypedGuid<global::Zetbox.App.Base.Property> LoginToken
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("267074ae-3a16-41bd-b9af-f09fa27e8d5a"); }

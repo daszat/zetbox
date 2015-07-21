@@ -11,7 +11,7 @@ namespace Zetbox.App.Base
     /// Represents an Identity
     /// </summary>
     [Zetbox.API.DefinitionGuid("31d8890a-67fc-4a78-9d35-9ff0b9e09b4c")]
-    public interface Identity : IDataObject 
+    public interface Identity : IDataObject, Zetbox.App.Base.IDeactivatable 
     {
 
         /// <summary>

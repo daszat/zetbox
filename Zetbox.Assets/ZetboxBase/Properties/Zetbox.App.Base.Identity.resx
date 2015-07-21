@@ -135,6 +135,12 @@
   <data name="Groups_description" xml:space="preserve">
     <value>Identites are member of groups</value>
   </data>
+  <data name="IsDeactivated_label" xml:space="preserve">
+    <value>Is deactivated</value>
+  </data>
+  <data name="IsDeactivated_description" xml:space="preserve">
+    <value>If true, the item will be hidden in any search</value>
+  </data>
   <data name="LoginToken_label" xml:space="preserve">
     <value>Login token</value>
   </data>
