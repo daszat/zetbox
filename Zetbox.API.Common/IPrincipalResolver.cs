@@ -127,7 +127,7 @@ namespace Zetbox.API.Common
                     try
                     {
                         var identity = _resolverCtx.GetQuery<Identity>().Where(i => i.UserName.ToLower() == id).FirstOrDefault();
-                        if (identity != null)
+                        if (identity != null && identity.IsDeactivated == false)
                         {
                             result = _cache[id] = new ZetboxPrincipal(id: identity.ID, userName: identity.UserName, displayName: identity.DisplayName, groups: identity.Groups.Select(g => new ZetboxPrincipalGroup(id: g.ID, name: g.Name, exportGuid: g.ExportGuid)));
                         }
