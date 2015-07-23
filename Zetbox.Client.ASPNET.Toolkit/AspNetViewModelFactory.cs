@@ -13,7 +13,7 @@ namespace Zetbox.Client.ASPNET
 
     public class AspNetViewModelFactory : ViewModelFactory
     {
-        public AspNetViewModelFactory(LifetimeScopeFactory scopeFactory, Autofac.ILifetimeScope scope, IFrozenContext frozenCtx, ZetboxConfig cfg, IPerfCounter perfCounter, DialogCreator.Factory dialogFactory)
+        public AspNetViewModelFactory(ILifetimeScopeFactory scopeFactory, Autofac.ILifetimeScope scope, IFrozenContext frozenCtx, ZetboxConfig cfg, IPerfCounter perfCounter, DialogCreator.Factory dialogFactory)
             : base(scopeFactory, scope, frozenCtx, cfg, perfCounter, dialogFactory)
         {
         }

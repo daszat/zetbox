@@ -22,6 +22,11 @@ namespace Zetbox.Client.Presentables
     using Zetbox.App.GUI;
     using Zetbox.Client.GUI;
 
+    public interface ILifetimeScopeFactory
+    {
+        Autofac.ILifetimeScope BeginLifetimeScope();
+    }
+
     public interface IViewModelFactoryScope : IDisposable
     {
         Autofac.ILifetimeScope Scope { get; }

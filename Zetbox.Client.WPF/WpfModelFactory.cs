@@ -34,7 +34,7 @@ namespace Zetbox.Client.WPF
     public class WpfModelFactory
         : ViewModelFactory
     {
-        public WpfModelFactory(LifetimeScopeFactory scopeFactory, Autofac.ILifetimeScope scope, IFrozenContext frozenCtx, ZetboxConfig cfg, IPerfCounter perfCounter, DialogCreator.Factory dialogFactory)
+        public WpfModelFactory(ILifetimeScopeFactory scopeFactory, Autofac.ILifetimeScope scope, IFrozenContext frozenCtx, ZetboxConfig cfg, IPerfCounter perfCounter, DialogCreator.Factory dialogFactory)
             : base(scopeFactory, scope, frozenCtx, cfg, perfCounter, dialogFactory)
         {
         }

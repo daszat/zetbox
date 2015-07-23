@@ -31,10 +31,9 @@ namespace Zetbox.Client.Forms
     public class FormsModelFactory
         : ViewModelFactory
     {
-
         private List<WorkspaceView> _workspaces = new List<WorkspaceView>();
 
-        public FormsModelFactory(LifetimeScopeFactory scopeFactory, Autofac.ILifetimeScope scope, IFrozenContext metaCtx, ZetboxConfig cfg, IPerfCounter perfCounter, DialogCreator.Factory dialogFactory)
+        public FormsModelFactory(ILifetimeScopeFactory scopeFactory, Autofac.ILifetimeScope scope, IFrozenContext metaCtx, ZetboxConfig cfg, IPerfCounter perfCounter, DialogCreator.Factory dialogFactory)
             : base(scopeFactory, scope, metaCtx, cfg, perfCounter, dialogFactory)
         {
         }

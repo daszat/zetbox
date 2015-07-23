@@ -35,7 +35,7 @@ namespace Zetbox.Client.Presentables
     using Zetbox.Client.GUI;
     using Zetbox.Client.Presentables.ValueViewModels;
 
-    public class LifetimeScopeFactory
+    class LifetimeScopeFactory : ILifetimeScopeFactory
     {
         private readonly ILifetimeScope _scope;
         public LifetimeScopeFactory(ILifetimeScope scope)
@@ -89,7 +89,7 @@ namespace Zetbox.Client.Presentables
         public abstract Toolkit Toolkit { get; }
 
         protected readonly Autofac.ILifetimeScope Scope;
-        protected readonly LifetimeScopeFactory ScopeFactory;
+        protected readonly ILifetimeScopeFactory ScopeFactory;
         protected readonly IFrozenContext FrozenContext;
         protected readonly ZetboxConfig Configuration;
         protected readonly DialogCreator.Factory DialogFactory;
@@ -126,7 +126,7 @@ namespace Zetbox.Client.Presentables
 
         private readonly Dictionary<VMCacheKey, object> _viewModelFactoryCache;
 
-        protected ViewModelFactory(LifetimeScopeFactory scopeFactory, Autofac.ILifetimeScope scope, IFrozenContext frozenCtx, ZetboxConfig cfg, IPerfCounter perfCounter, DialogCreator.Factory dialogFactory)
+        protected ViewModelFactory(ILifetimeScopeFactory scopeFactory, Autofac.ILifetimeScope scope, IFrozenContext frozenCtx, ZetboxConfig cfg, IPerfCounter perfCounter, DialogCreator.Factory dialogFactory)
         {
             if (scopeFactory == null) throw new ArgumentNullException("scopeFactory");
             if (scope == null) throw new ArgumentNullException("scope");

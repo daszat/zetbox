@@ -115,7 +115,7 @@ using Zetbox.API.Client.PerfCounter;
 
             moduleBuilder
                 .Register<LifetimeScopeFactory>(c => new LifetimeScopeFactory(c.Resolve<ILifetimeScope>()))
-                .AsSelf()
+                .As<ILifetimeScopeFactory>()
                 .SingleInstance();
 
             moduleBuilder
