@@ -611,8 +611,10 @@ namespace Zetbox.Client.Presentables
         public override ValidationError Validate()
         {
             var result = base.Validate();
+            // No access rights, no validation
             if (Object.CurrentAccessRights.HasNoRights()) return result;
-
+            // Deleted or not attacted -> no validation
+            if(Object.ObjectState.In(DataObjectState.Deleted, DataObjectState.Detached, DataObjectState.NotDeserialized)) return result;
 
             var objError = Object.Validate();
             if (!objError.IsValid)

@@ -328,6 +328,25 @@ namespace Zetbox.Client.Models
         /// </summary> 
         public void Validate()
         {
+            if(Object is IDataObject)
+            {
+                var obj = (IDataObject)Object;
+                if(obj.ObjectState.In(DataObjectState.Deleted, DataObjectState.NotDeserialized, DataObjectState.Detached))
+                {
+                    this.ValueError = "";
+                    return;
+                }
+            }
+            else if (Object is BaseCompoundObject)
+            {
+                var obj = (BaseCompoundObject)Object;
+                if (obj.ParentObject == null)
+                {
+                    this.ValueError = "";
+                    return;
+                }
+            }
+
             if (Object is IDataErrorInfo)
             {
                 this.ValueError = ((IDataErrorInfo)Object)[Property.Name];
