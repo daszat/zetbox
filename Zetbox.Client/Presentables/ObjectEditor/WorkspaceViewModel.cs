@@ -22,6 +22,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
+    using Autofac;
     using Zetbox.API;
     using Zetbox.API.Client;
     using Zetbox.App.Base;
@@ -36,6 +37,18 @@ namespace Zetbox.Client.Presentables.ObjectEditor
     {
         public new delegate WorkspaceViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
         private readonly IZetboxContextExceptionHandler _exceptionHandler;
+
+        public static WorkspaceViewModel Create(ILifetimeScope scope, IZetboxContext ctx)
+        {
+            if (scope == null) throw new ArgumentNullException("scope");
+            if (ctx == null) throw new ArgumentNullException("ctx");
+
+            var vmf = scope.Resolve<IViewModelFactory>();
+
+            var ws = vmf.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(ctx, null);
+            ws.Closed += (s, e) => scope.Dispose();
+            return ws;
+        }
 
         public WorkspaceViewModel(IViewModelDependencies appCtx,
             IZetboxContext dataCtx, ViewModel parent,
@@ -247,11 +260,6 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                 }
                 return _saveAndCloseCommand;
             }
-        }
-
-        public void Close()
-        {
-            this.Show = false;
         }
 
         void IContextViewModel.Abort()
@@ -626,14 +634,14 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                 {
                     ViewModelFactory.ShowModel(item, true);
                 }
-                if(item is BaseValueViewModel)
+                if (item is BaseValueViewModel)
                 {
                     var objVmdl = item.Parent as DataObjectViewModel;
-                    if(objVmdl != null)
+                    if (objVmdl != null)
                     {
                         ViewModelFactory.ShowModel(objVmdl, true);
                         var grp = objVmdl.PropertyGroups.FirstOrDefault(i => i.PropertyModels.Contains(item));
-                        if(grp != null)
+                        if (grp != null)
                         {
                             objVmdl.SelectedPropertyGroup = grp;
                         }

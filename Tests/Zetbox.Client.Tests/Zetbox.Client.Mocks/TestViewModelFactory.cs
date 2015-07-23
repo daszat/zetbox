@@ -29,10 +29,10 @@ namespace Zetbox.Client.Mocks
     class TestViewModelFactory
         : ViewModelFactory
     {
-        public TestViewModelFactory(Autofac.ILifetimeScope container,
+        public TestViewModelFactory(LifetimeScopeFactory scopeFactory, Autofac.ILifetimeScope scope,
             IFrozenContext frozenCtx,
             ZetboxConfig cfg, IPerfCounter perfCounter, DialogCreator.Factory dialogFactory)
-            : base(container, frozenCtx, cfg, perfCounter, dialogFactory)
+            : base(scopeFactory, scope, frozenCtx, cfg, perfCounter, dialogFactory)
         {
         }
 

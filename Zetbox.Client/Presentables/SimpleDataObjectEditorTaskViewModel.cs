@@ -54,11 +54,6 @@ namespace Zetbox.Client.Presentables
                 return _CloseCommand;
             }
         }
-
-        public void Close()
-        {
-            base.Show = false;
-        }
         #endregion
 
         #region Public interface

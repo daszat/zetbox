@@ -35,6 +35,48 @@ namespace Zetbox.Client.Presentables
     using Zetbox.Client.GUI;
     using Zetbox.Client.Presentables.ValueViewModels;
 
+    public class LifetimeScopeFactory
+    {
+        private readonly ILifetimeScope _scope;
+        public LifetimeScopeFactory(ILifetimeScope scope)
+        {
+            _scope = scope;
+        }
+
+        public ILifetimeScope BeginLifetimeScope()
+        {
+            return _scope.BeginLifetimeScope();
+        }
+    }
+
+    class ViewModelFactoryScope : IViewModelFactoryScope
+    {
+        public ViewModelFactoryScope(ILifetimeScope scope, IViewModelFactory f)
+        {
+            if (scope == null) throw new ArgumentNullException("scope");
+            if (f == null) throw new ArgumentNullException("f");
+            this.Scope = scope;
+            this.ViewModelFactory = f;
+        }
+
+        public ILifetimeScope Scope
+        {
+            get;
+            private set;
+        }
+
+        public IViewModelFactory ViewModelFactory
+        {
+            get;
+            private set;
+        }
+
+        public void Dispose()
+        {
+            Scope.Dispose();
+        }
+    }
+
     /// <summary>
     /// Abstract base class to provide basic functionality of all model factories. Toolkit-specific implementations of this class will be 
     /// used by the rendering infrastructure to create ViewModels and Views.
@@ -46,7 +88,8 @@ namespace Zetbox.Client.Presentables
         /// </summary>
         public abstract Toolkit Toolkit { get; }
 
-        protected readonly Autofac.ILifetimeScope Container;
+        protected readonly Autofac.ILifetimeScope Scope;
+        protected readonly LifetimeScopeFactory ScopeFactory;
         protected readonly IFrozenContext FrozenContext;
         protected readonly ZetboxConfig Configuration;
         protected readonly DialogCreator.Factory DialogFactory;
@@ -83,14 +126,16 @@ namespace Zetbox.Client.Presentables
 
         private readonly Dictionary<VMCacheKey, object> _viewModelFactoryCache;
 
-        protected ViewModelFactory(Autofac.ILifetimeScope container, IFrozenContext frozenCtx, ZetboxConfig cfg, IPerfCounter perfCounter, DialogCreator.Factory dialogFactory)
+        protected ViewModelFactory(LifetimeScopeFactory scopeFactory, Autofac.ILifetimeScope scope, IFrozenContext frozenCtx, ZetboxConfig cfg, IPerfCounter perfCounter, DialogCreator.Factory dialogFactory)
         {
-            if (container == null) throw new ArgumentNullException("container");
+            if (scopeFactory == null) throw new ArgumentNullException("scopeFactory");
+            if (scope == null) throw new ArgumentNullException("scope");
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
             if (cfg == null) throw new ArgumentNullException("cfg");
             if (dialogFactory == null) throw new ArgumentNullException("dialogFactory");
 
-            this.Container = container;
+            this.ScopeFactory = scopeFactory;
+            this.Scope = scope;
             this.FrozenContext = frozenCtx;
             this.Configuration = cfg;
             this.Managers = new Dictionary<IZetboxContext, IMultipleInstancesManager>();
@@ -126,9 +171,9 @@ namespace Zetbox.Client.Presentables
             if (obj == null) throw new ArgumentNullException("obj");
 
             var desc = obj.GetCompoundObjectDefinition(FrozenContext).DefaultViewModelDescriptor;
-            var t = desc != null 
+            var t = desc != null
                 ? Type.GetType(desc.ViewModelTypeRef, true)
-                :  typeof(CompoundObjectViewModel);
+                : typeof(CompoundObjectViewModel);
             return CreateViewModel<TModelFactory>(ResolveFactory(t));
         }
 
@@ -297,7 +342,7 @@ namespace Zetbox.Client.Presentables
                     Logging.Log.WarnFormat("CreateViewModel was called {0} times", _resolveCounter);
                 }
 
-                var factory = Container.Resolve(t);
+                var factory = Scope.Resolve(t);
                 if (t != typeof(TModelFactory))
                 {
 
@@ -565,7 +610,7 @@ namespace Zetbox.Client.Presentables
                 if (dom.Object == null || dom.Object.Context == null)
                 {
                     // Invalid object, like a deleted one
-                    return false; 
+                    return false;
                 }
                 return Managers.ContainsKey(dom.Object.Context);
             }
@@ -674,5 +719,20 @@ namespace Zetbox.Client.Presentables
             result.Title = title;
             return result;
         }
+
+        #region Scope Management
+        public IViewModelFactoryScope CreateNewScope()
+        {
+            var scope = ScopeFactory.BeginLifetimeScope();
+            var vmf = scope.Resolve<IViewModelFactory>();
+            return new ViewModelFactoryScope(scope, vmf);
+        }
+
+        public IZetboxContext CreateNewContext(ContextIsolationLevel isolationLevel = ContextIsolationLevel.PreferContextCache, ILifetimeScope scope = null)
+        {
+            var factory = (scope ?? Scope).Resolve<Func<ContextIsolationLevel, IZetboxContext>>();
+            return factory(isolationLevel);
+        }
+        #endregion
     }
 }

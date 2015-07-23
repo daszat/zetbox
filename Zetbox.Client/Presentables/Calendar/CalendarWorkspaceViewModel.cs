@@ -18,6 +18,7 @@ namespace Zetbox.Client.Presentables.Calendar
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using Autofac;
     using Zetbox.API;
     using Zetbox.API.Async;
     using Zetbox.API.Utils;
@@ -151,17 +152,14 @@ namespace Zetbox.Client.Presentables.Calendar
         };
 
         private bool _shouldUpdateCalendarItems = true;
-        private Func<IZetboxContext> _ctxFactory;
         private Func<ReportingHost> _rptFactory;
         private readonly FetchCache _fetchCache;
 
-        public CalendarWorkspaceViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, Func<IZetboxContext> ctxFactory, Func<ReportingHost> rptFactory)
+        public CalendarWorkspaceViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, Func<ReportingHost> rptFactory)
             : base(appCtx, dataCtx, parent)
         {
-            if (ctxFactory == null) throw new ArgumentNullException("ctxFactory");
             if (dataCtx.IsolationLevel != ContextIsolationLevel.MergeQueryData) throw new ArgumentOutOfRangeException("dataCtx", string.Format("CalendarWorkspaceViewModel requires a MergeQueryData context. The specified dataCtx ({0}) has {1}", dataCtx, dataCtx.IsolationLevel));
 
-            _ctxFactory = ctxFactory;
             _rptFactory = rptFactory;
 
             _fetchCache = new FetchCache(ViewModelFactory, DataContext, this);
@@ -271,7 +269,7 @@ namespace Zetbox.Client.Presentables.Calendar
         protected CalendarConfigurationList GetSavedConfig()
         {
             if (CurrentPrincipal == null) return new CalendarConfigurationList();
-            using (var ctx = _ctxFactory())
+            using (var ctx = ViewModelFactory.CreateNewContext())
             {
                 var idenity = ctx.Find<Identity>(CurrentPrincipal.ID);
                 CalendarConfigurationList obj;
@@ -291,7 +289,7 @@ namespace Zetbox.Client.Presentables.Calendar
         protected void SaveConfig(CalendarConfigurationList config)
         {
             if (config == null) throw new ArgumentNullException("config");
-            using (var ctx = _ctxFactory())
+            using (var ctx = ViewModelFactory.CreateNewContext())
             {
                 var idenity = ctx.Find<Identity>(CurrentPrincipal.ID);
                 idenity.CalendarConfiguration = config.ToXmlString();
@@ -359,20 +357,24 @@ namespace Zetbox.Client.Presentables.Calendar
         public void Open(EventViewModel evt)
         {
             if (evt == null) return;
-            var ctx = _ctxFactory();
-            var source = evt.Event.Source.GetObject(ctx);
-            if (source != null && !source.CurrentAccessRights.HasReadRights())
+            using (var newScope = ViewModelFactory.CreateNewScope())
             {
-                ViewModelFactory.ShowMessage(CalendarResources.CannotOpenNoRightsMessage, CalendarResources.CannotOpenNoRightsCaption);
-                return;
-            }
+                var newCtx = newScope.ViewModelFactory.CreateNewContext();
 
-            var ws = ViewModelFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(ctx, null);
-            if (source != null)
-                ws.ShowObject(source);
-            else
-                ws.ShowObject(evt.Event);
-            ViewModelFactory.ShowDialog(ws, this);
+                var source = evt.Event.Source.GetObject(newCtx);
+                if (source != null && !source.CurrentAccessRights.HasReadRights())
+                {
+                    newScope.ViewModelFactory.ShowMessage(CalendarResources.CannotOpenNoRightsMessage, CalendarResources.CannotOpenNoRightsCaption);
+                    return;
+                }
+
+                var ws = ObjectEditor.WorkspaceViewModel.Create(newScope.Scope, newCtx);
+                if (source != null)
+                    ws.ShowObject(source);
+                else
+                    ws.ShowObject(evt.Event);
+                newScope.ViewModelFactory.ShowDialog(ws, this);
+            }
 
             _fetchCache.Invalidate();
             CurrentView.Refresh(); // A dialog makes it easy to know when the time for a refresh has come
@@ -423,7 +425,7 @@ namespace Zetbox.Client.Presentables.Calendar
         {
             if (!CanNew()) return;
 
-            using (var ctx = _ctxFactory())
+            using (var ctx = ViewModelFactory.CreateNewContext())
             {
                 var calendar = ctx.Find<cal.CalendarBook>(SelectedItem.Calendar.ID);
                 var dlg = ViewModelFactory.CreateViewModel<NewEventDialogViewModel.Factory>().Invoke(ctx, null, calendar);

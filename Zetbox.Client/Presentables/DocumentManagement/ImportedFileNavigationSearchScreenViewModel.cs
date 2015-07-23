@@ -24,19 +24,17 @@ namespace Zetbox.Client.Presentables.DocumentManagement
     using Zetbox.Client.Presentables.GUI;
     using Zetbox.App.GUI;
     using at.dasz.DocumentManagement;
+    using Autofac;
 
     [ViewModelDescriptor]
     public class ImportedFileNavigationSearchScreenViewModel : NavigationSearchScreenViewModel
     {
         public new delegate ImportedFileNavigationSearchScreenViewModel Factory(IZetboxContext dataCtx, ViewModel parent, NavigationSearchScreen screen);
 
-        private readonly Func<IZetboxContext> _ctxFactory;
-
-        public ImportedFileNavigationSearchScreenViewModel(IViewModelDependencies appCtx, Func<IZetboxContext> ctxFactory,
+        public ImportedFileNavigationSearchScreenViewModel(IViewModelDependencies appCtx,
             IZetboxContext dataCtx, ViewModel parent, NavigationSearchScreen screen)
             : base(appCtx, dataCtx, parent, screen)
         {
-            _ctxFactory = ctxFactory;
             base.Type = typeof(ImportedFile).GetObjectClass(FrozenContext);
         }
 
@@ -46,7 +44,7 @@ namespace Zetbox.Client.Presentables.DocumentManagement
             base.ListViewModel.ViewMethod = InstanceListViewMethod.Details;
             base.ListViewModel.AllowAddNew = false;
             base.ListViewModel.AllowDelete = true;
-            
+
             // call base later as a nav-screen may override default behavior
             base.InitializeListViewModel(mdl);
 
@@ -65,7 +63,7 @@ namespace Zetbox.Client.Presentables.DocumentManagement
                         ImportedFileNavigationSearchScreenViewModelResources.OpenAllCommand_Label,
                         ImportedFileNavigationSearchScreenViewModelResources.OpenAllCommand_Tooltip,
                         OpenAll,
-                        () => ListViewModel.Instances.Count > 0, 
+                        () => ListViewModel.Instances.Count > 0,
                         () => ImportedFileNavigationSearchScreenViewModelResources.OpenAllCommand_Reason);
                     _OpenAllCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.fileopen_png.Find(FrozenContext));
                 }
@@ -75,11 +73,13 @@ namespace Zetbox.Client.Presentables.DocumentManagement
 
         public void OpenAll()
         {
-            var newCtx = _ctxFactory();
-            var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(newCtx, null);
-            ViewModelFactory.ShowModel(newWorkspace, true);
+            var newScope = ViewModelFactory.CreateNewScope();
+            var newCtx = newScope.ViewModelFactory.CreateNewContext();
 
-            ViewModelFactory.CreateDelayedTask(newWorkspace, () =>
+            var newWorkspace = ObjectEditor.WorkspaceViewModel.Create(newScope.Scope, newCtx);
+            newScope.ViewModelFactory.ShowModel(newWorkspace, true);
+
+            newScope.ViewModelFactory.CreateDelayedTask(newWorkspace, () =>
             {
                 foreach (var obj in ListViewModel.Instances)
                 {

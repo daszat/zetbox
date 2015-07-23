@@ -5,6 +5,7 @@ namespace Zetbox.Client.Presentables.Calendar
     using System.Linq;
     using System.Text;
     using System.Threading;
+    using Autofac;
     using Zetbox.API;
     using Zetbox.API.Async;
     using Zetbox.API.Utils;
@@ -21,14 +22,12 @@ namespace Zetbox.Client.Presentables.Calendar
         public new delegate NextEventsSummaryViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
 
         private readonly FetchCache _fetchCache;
-        private readonly Func<IZetboxContext> _ctxFactory;
         private readonly System.Timers.Timer _timer;
         private readonly SynchronizationContext _syncContext;
 
-        public NextEventsSummaryViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, Func<IZetboxContext> ctxFactory)
+        public NextEventsSummaryViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent)
             : base(appCtx, dataCtx, parent)
         {
-            _ctxFactory = ctxFactory;
             _fetchCache = new FetchCache(ViewModelFactory, DataContext, this);
             _syncContext = SynchronizationContext.Current;
 
@@ -154,7 +153,7 @@ namespace Zetbox.Client.Presentables.Calendar
         protected ZbTask<CalendarConfigurationList> GetSavedConfigAsync()
         {
             if (CurrentPrincipal == null) return new ZbTask<CalendarConfigurationList>(new CalendarConfigurationList());
-            var ctx = _ctxFactory();
+            var ctx = ViewModelFactory.CreateNewContext();
             var idenityTask = ctx.FindAsync<Identity>(CurrentPrincipal.ID);
             return new ZbTask<CalendarConfigurationList>(idenityTask)
                 .OnResult(t =>
@@ -236,20 +235,24 @@ namespace Zetbox.Client.Presentables.Calendar
         public void Open()
         {
             if (!CanOpen()) return;
-            var ctx = _ctxFactory();
-            var source = SelectedItem.Event.Source.GetObject(ctx);
-            if (source != null && !source.CurrentAccessRights.HasReadRights())
+            using (var newScope = ViewModelFactory.CreateNewScope())
             {
-                ViewModelFactory.ShowMessage(CalendarResources.CannotOpenNoRightsMessage, CalendarResources.CannotOpenNoRightsCaption);
-                return;
-            }
+                var newCtx = newScope.ViewModelFactory.CreateNewContext();
 
-            var ws = ViewModelFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(ctx, null);
-            if (source != null)
-                ws.ShowObject(source);
-            else
-                ws.ShowObject(SelectedItem.Event);
-            ViewModelFactory.ShowDialog(ws, this);
+                var source = SelectedItem.Event.Source.GetObject(newCtx);
+                if (source != null && !source.CurrentAccessRights.HasReadRights())
+                {
+                    ViewModelFactory.ShowMessage(CalendarResources.CannotOpenNoRightsMessage, CalendarResources.CannotOpenNoRightsCaption);
+                    return;
+                }
+
+                var ws = ObjectEditor.WorkspaceViewModel.Create(newScope.Scope, newCtx);
+                if (source != null)
+                    ws.ShowObject(source);
+                else
+                    ws.ShowObject(SelectedItem.Event);
+                ViewModelFactory.ShowDialog(ws, this);
+            }
 
             _fetchCache.Invalidate();
             Refresh(); // A dialog makes it easy to know when the time for a refresh has come

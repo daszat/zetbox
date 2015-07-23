@@ -106,7 +106,7 @@ namespace Zetbox.Client.Presentables.GUI
         private void Save(string name)
         {
             if (string.IsNullOrEmpty(name)) throw new ArgumentNullException("name");
-            using (var ctx = ctxFactory())
+            using (var ctx = ViewModelFactory.CreateNewContext())
             {
                 var config = GetSavedConfig(ctx);
                 var obj = ExtractConfigurationObject(config);

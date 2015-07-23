@@ -34,8 +34,8 @@ namespace Zetbox.Client.WPF
     public class WpfModelFactory
         : ViewModelFactory
     {
-        public WpfModelFactory(Autofac.ILifetimeScope container, IFrozenContext frozenCtx, ZetboxConfig cfg, IPerfCounter perfCounter, DialogCreator.Factory dialogFactory)
-            : base(container, frozenCtx, cfg, perfCounter, dialogFactory)
+        public WpfModelFactory(LifetimeScopeFactory scopeFactory, Autofac.ILifetimeScope scope, IFrozenContext frozenCtx, ZetboxConfig cfg, IPerfCounter perfCounter, DialogCreator.Factory dialogFactory)
+            : base(scopeFactory, scope, frozenCtx, cfg, perfCounter, dialogFactory)
         {
         }
 
@@ -48,7 +48,7 @@ namespace Zetbox.Client.WPF
         /// <summary>
         /// Explicit shutdown counter
         /// </summary>
-        private int windowCounter = 0;
+        private static int windowCounter = 0;
 
         private Dictionary<ViewModel, Window> _windowList = new Dictionary<ViewModel, Window>();
 

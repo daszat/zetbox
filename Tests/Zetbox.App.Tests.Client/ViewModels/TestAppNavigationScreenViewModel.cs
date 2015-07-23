@@ -132,11 +132,13 @@ namespace Zetbox.Client.Presentables.TestModule
                     "Open the tester in a real workspace",
                     () =>
                     {
-                        var ctx = _ctxFactory();
-                        var ws = ViewModelFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(ctx, null);
-                        ViewModelFactory.ShowModel(ws, activate: true);
+                        var newScope = ViewModelFactory.CreateNewScope();
+                        var newCtx = newScope.ViewModelFactory.CreateNewContext();
+                        var ws = ObjectEditor.WorkspaceViewModel.Create(newScope.Scope, newCtx);
 
-                        ws.ShowModel(ViewModelFactory.CreateViewModel<InstanceListTestViewModel.Factory>().Invoke(ctx, ws, this.Screen));
+                        newScope.ViewModelFactory.ShowModel(ws, activate: true);
+
+                        ws.ShowModel(newScope.ViewModelFactory.CreateViewModel<InstanceListTestViewModel.Factory>().Invoke(newCtx, ws, this.Screen));
                     },
                     null,
                     null));

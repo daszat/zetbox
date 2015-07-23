@@ -114,6 +114,11 @@ using Zetbox.API.Client.PerfCounter;
                 .As<IViewModelDependencies>();
 
             moduleBuilder
+                .Register<LifetimeScopeFactory>(c => new LifetimeScopeFactory(c.Resolve<ILifetimeScope>()))
+                .AsSelf()
+                .SingleInstance();
+
+            moduleBuilder
                 .Register<ThreadPrincipalResolver>(c => new ThreadPrincipalResolver(c.Resolve<ILifetimeScope>()))
                 .As<IPrincipalResolver>()
                 .SingleInstance();
