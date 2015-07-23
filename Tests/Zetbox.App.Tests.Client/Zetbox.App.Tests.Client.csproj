@@ -85,12 +85,15 @@
     <Compile Include="Projekte\Reporting\ReportingHost.cs" />
     <Compile Include="Projekte\Reporting\ReportTemplate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\EventTestInputViewModel.cs" />
-    <Compile Include="ViewModels\InstanceListTestViewModel.cs" />
-    <Compile Include="ViewModels\NextEventsTestNavScreenViewModel.cs" />
-    <Compile Include="ViewModels\TestAppNavigationScreenViewModel.cs" />
-    <Compile Include="ViewModels\TestCustomObjectViewModel.cs" />
-    <Compile Include="ViewModels\TestObjClassViewModel.cs" />
+    <Compile Include="ViewModels\TestModule\EventTestInputViewModel.cs" />
+    <Compile Include="ViewModels\TestModule\InstanceListTestViewModel.cs" />
+    <Compile Include="ViewModels\TestModule\NextEventsTestNavScreenViewModel.cs" />
+    <Compile Include="ViewModels\Projekte\ReportScreenViewModel.cs" />
+    <Compile Include="ViewModels\Projekte\ShowCalendarNavigationActionViewModel.cs" />
+    <Compile Include="ViewModels\Projekte\TaskViewModel.cs" />
+    <Compile Include="ViewModels\TestModule\TestAppNavigationScreenViewModel.cs" />
+    <Compile Include="ViewModels\TestModule\TestCustomObjectViewModel.cs" />
+    <Compile Include="ViewModels\TestModule\TestObjClassViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
