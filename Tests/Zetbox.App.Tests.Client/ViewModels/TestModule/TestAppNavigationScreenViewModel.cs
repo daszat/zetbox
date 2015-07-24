@@ -128,6 +128,66 @@ namespace Zetbox.Client.Presentables.TestModule
                 .Invoke(
                     DataContext,
                     this,
+                    "Test Big DialogCreator",
+                    "Opens a very complex dialog",
+                    () =>
+                    {
+                        ViewModelFactory.CreateDialog(DataContext, "Test dialog")
+                            .AddGroupBox("grp1", "Group 1",
+                                c => c.AddTextBlock("txt1", "txt label", "Textblock 1")
+                                      .AddTextBlock("txt2", "", "Textblock 2")
+                                      .AddTextBlock("txt3", "txt label"))
+                            .AddGroupBox("grp2", "Group 2",
+                                c => c.AddString("txt4", "string", "", description: "enter something")
+                                      .AddMultiLineString("txt5", "string", "", description: "enter something"))
+                            .AddTabControl("tabCtrl", "",
+                                c => c.AddTabItem("ti1", "Tab 1",
+                                        i => i.AddString("txt6", "string 6")
+                                              .AddString("txt7", "string 7")
+                                              .AddString("txt10", "string 10")
+                                              .AddString("txt11", "string 11")
+                                              .AddString("txt12", "string 12")
+                                              .AddInt("int13", "int 13")
+                                              .AddString("txt14", "string 14")
+                                              .AddDateTime("dt15", "date 15")
+                                              .AddString("txt16", "string 16")
+                                              .AddString("txt17", "string 17")
+                                              .AddBool("bool18", "bool 18")
+                                              .AddString("txt19", "string 19")
+                                              .AddTextBlock(null, "text 20")
+                                              .AddString("txt21", "string 21")
+                                              .AddEnumeration("enum22", "enum 22", FrozenContext.FindPersistenceObject<Zetbox.App.Base.Enumeration>(new Guid("1385e46d-3e5b-4d91-bf9a-94a740f08ba1")))
+                                              .AddString("txt23", "string 23"))
+                                      .AddTabItem("ti2", "Tab 3",
+                                        i => i.AddString("txt8", "string 8")
+                                              .AddString("txt9", "string 9")))
+                            .YesNo()
+                            .DefaultButtons("Execute", "Cancel")
+                            .AddButton("Execute and Continue", values =>
+                            {
+                                ViewModelFactory.ShowMessage(
+                                    "Execute and Continue: \n\n" + string.Join("\n", values.Select(i => string.Format("{0}: \"{1}\"", i.Key, i.Value))),
+                                    "Execute and Continue");
+                            })
+                            .OnAccept(values => { })
+                            .OnCancel(() =>
+                            {
+                                ViewModelFactory.ShowMessage("Cancel!!", "Cancel");
+                            })
+                            .Show(values =>
+                            {
+                                ViewModelFactory.ShowMessage(
+                                    string.Join("\n", values.Select(i => string.Format("{0}: \"{1}\"", i.Key, i.Value))),
+                                    "received parameter");
+                            });
+                    },
+                    null,
+                    null));
+
+            result.Add(ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
+                .Invoke(
+                    DataContext,
+                    this,
                     "Open InstanceListTester",
                     "Open the tester in a real workspace",
                     () =>

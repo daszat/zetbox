@@ -42,6 +42,22 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             InitializeComponent();
+
+            this.SizeChanged += ParameterInputTaskDialog_SizeChanged;
+        }
+
+        private static readonly int MAXIMIZE_LIMIT = 800; // TODO: Calculate this value or at least calculate it
+
+        void ParameterInputTaskDialog_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (e.NewSize.Height > MAXIMIZE_LIMIT
+             && this.SizeToContent == System.Windows.SizeToContent.WidthAndHeight
+             && this.WindowState != System.Windows.WindowState.Maximized)
+            {
+                e.Handled = true;
+                this.SizeToContent = System.Windows.SizeToContent.Manual;
+                this.WindowState = System.Windows.WindowState.Maximized;
+            }
         }
 
         #region IHasViewModel<IValueInputTaskViewModel> Members
