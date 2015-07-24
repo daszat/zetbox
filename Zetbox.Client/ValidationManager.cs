@@ -87,6 +87,7 @@ namespace Zetbox.Client
     public class ValidationManager : IValidationManager
     {
         private List<ViewModel> _validationRequests = new List<ViewModel>();
+        private List<ValidationError> _errors = null;
         private bool _isValidating = false;
 
         public event EventHandler Changed;
@@ -96,6 +97,7 @@ namespace Zetbox.Client
             if (!_validationRequests.Contains(vmdl))
             {
                 _validationRequests.Add(vmdl);
+                _errors = null;
             }
         }
 
@@ -109,6 +111,7 @@ namespace Zetbox.Client
 
         protected virtual void OnNotifyChanged()
         {
+            _errors = null;
             var temp = Changed;
             if (temp != null)
             {
@@ -140,7 +143,11 @@ namespace Zetbox.Client
         {
             get 
             {
-                return _validationRequests.Where(i => i.ValidationError != null).Select(i => i.ValidationError);
+                if(_errors == null)
+                {
+                    _errors = _validationRequests.Where(i => i.ValidationError != null).Select(i => i.ValidationError).ToList();
+                }
+                return _errors;
             }
         }
 
