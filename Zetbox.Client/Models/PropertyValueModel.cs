@@ -290,7 +290,12 @@ namespace Zetbox.Client.Models
                 if (Object is IDataObject)
                 {
                     var dataObj = (IDataObject)Object;
-                    return dataObj.ObjectState != DataObjectState.Deleted;
+                    return dataObj.ObjectState.In(DataObjectState.New, DataObjectState.Modified, DataObjectState.Unmodified); // Include Unmodified, maybe a constraint depends on a foreign object
+                }
+                else if (Object is BaseCompoundObject)
+                {
+                    var cpObj = (BaseCompoundObject)Object;
+                    return cpObj.ParentObject != null;
                 }
                 return true;
             }
@@ -328,23 +333,10 @@ namespace Zetbox.Client.Models
         /// </summary> 
         public void Validate()
         {
-            if(Object is IDataObject)
+            if (!ReportErrors)
             {
-                var obj = (IDataObject)Object;
-                if(obj.ObjectState.In(DataObjectState.Deleted, DataObjectState.NotDeserialized, DataObjectState.Detached))
-                {
-                    this.ValueError = "";
-                    return;
-                }
-            }
-            else if (Object is BaseCompoundObject)
-            {
-                var obj = (BaseCompoundObject)Object;
-                if (obj.ParentObject == null)
-                {
-                    this.ValueError = "";
-                    return;
-                }
+                this.ValueError = "";
+                return;
             }
 
             if (Object is IDataErrorInfo)

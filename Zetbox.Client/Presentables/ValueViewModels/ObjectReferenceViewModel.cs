@@ -727,6 +727,8 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         public override ValidationError Validate()
         {
             var result = base.Validate();
+            if(!ValueModel.ReportErrors) return result;
+
             if (!string.IsNullOrEmpty(SearchString) && Value == null)
             {
                 result = EnsureError(result);

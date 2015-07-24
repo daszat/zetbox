@@ -270,6 +270,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         public override ValidationError Validate()
         {
             var result = base.Validate();
+            if (!ValueModel.ReportErrors) return result;
 
             if (IsValid)
             {
@@ -799,6 +800,8 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         public override ValidationError Validate()
         {
             var result = base.Validate();
+            if (!ValueModel.ReportErrors) return result;
+
             if (IsValid && !string.IsNullOrEmpty(_partialUserInputError))
             {
                 result = EnsureError(result);
@@ -882,6 +885,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         public override ValidationError Validate()
         {
             var result = base.Validate();
+            if (!ValueModel.ReportErrors) return result;
 
             if(IsValid && _illegalNullInput)
             {
@@ -1689,6 +1693,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         public override ValidationError Validate()
         {
             var result = base.Validate();
+            if (!ValueModel.ReportErrors) return result;
 
             if (IsValid)
             {
