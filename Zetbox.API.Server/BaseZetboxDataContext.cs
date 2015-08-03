@@ -249,7 +249,7 @@ namespace Zetbox.API.Server
             // return GetQuery<T>().Cast<IDataObject>();
 
             var result = new List<IDataObject>();
-            foreach (var o in GetQuery<T>())
+            foreach (var o in GetQuery<T>().WithDeactivated())
             {
                 result.Add(o);
             }

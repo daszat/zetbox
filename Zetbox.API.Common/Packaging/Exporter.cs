@@ -248,7 +248,9 @@ namespace Zetbox.App.Packaging
         // workaround gendarme spinning in a loop when checking ExportFromContext
         private static IOrderedEnumerable<IDataObject> AllExportables(IReadOnlyZetboxContext ctx, ObjectClass objClass)
         {
-            return ctx.Internals().GetAll(objClass.GetDescribedInterfaceType()).Where(obj => obj.GetObjectClass(ctx) == objClass).OrderBy(obj => ((IExportable)obj).ExportGuid);
+            return ctx.Internals().GetAll(objClass.GetDescribedInterfaceType())
+                                            .Where(obj => obj.GetObjectClass(ctx) == objClass)
+                                            .OrderBy(obj => ((IExportable)obj).ExportGuid);
         }
 
         #region Xml/Export private Methods
