@@ -367,13 +367,16 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         private ZbTask<DataObjectViewModel> _fetchValueTask;
         protected override ZbTask<DataObjectViewModel> GetValueFromModelAsync()
         {
-            if (_fetchValueTask == null)
+            // Prevent clearing this state variable during clearing. Some notifications (Error, Value, etc.) are setting this to null
+            // to signal a refresh. Task: Reduce this behaviour
+            var result = _fetchValueTask;
+            if (result == null)
             {
                 SetBusy();
-                _fetchValueTask = new ZbTask<DataObjectViewModel>(ValueModel.GetValueAsync());
-                _fetchValueTask.Finally(ClearBusy);
+                _fetchValueTask = result = new ZbTask<DataObjectViewModel>(ValueModel.GetValueAsync());
+                result.Finally(ClearBusy);
                 // Avoid stackoverflow
-                _fetchValueTask.OnResult(t =>
+                result.OnResult(t =>
                 {
                     if (!_valueCacheInititalized)
                     {
@@ -390,7 +393,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 });
             }
 
-            return _fetchValueTask;
+            return result;
         }
 
         protected override void SetValueToModel(DataObjectViewModel value)
