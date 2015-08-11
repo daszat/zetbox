@@ -133,5 +133,56 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
         {
             get { return WorkspaceViewModelResources.Name; }
         }
+
+        public bool CanDrop { get { return true; } }
+
+        public bool OnDrop(object data)
+        {
+            var files = data as string[];
+            if (files == null) return false;
+
+            var newScope = ViewModelFactory.CreateNewScope();
+            var newCtx = newScope.ViewModelFactory.CreateNewContext();
+            var objects = new List<IDataObject>();
+
+            foreach (var file in files)
+            {
+                try
+                {
+                    var xml = new System.Xml.XmlDocument();
+                    xml.Load(file);
+                    if (xml.DocumentElement.LocalName == "ZetboxPackaging")
+                    {
+                        objects.AddRange(Zetbox.App.Packaging.Importer.LoadFromXml(newCtx, file).OfType<IDataObject>());
+                    }
+                }
+                catch(Exception ex)
+                {
+                    // not an xml...
+                    Zetbox.API.Utils.Logging.Client.Error("Unable to import file.", ex);
+                }
+            }
+
+            if(objects.Count > 0)
+            {
+                var newWorkspace = ObjectEditor.WorkspaceViewModel.Create(newScope.Scope, newCtx);
+                newScope.ViewModelFactory.ShowModel(newWorkspace, true);
+
+                foreach (var obj in objects)
+                {
+                    newWorkspace.ShowObject(obj);
+                }
+
+                newScope.ViewModelFactory.CreateDelayedTask(newWorkspace, () =>
+                {
+                    newWorkspace.SelectedItem = newWorkspace.Items.FirstOrDefault();
+                });
+            }
+            else
+            {
+                newScope.Dispose();
+            }
+            return true;
+        }
     }
 }

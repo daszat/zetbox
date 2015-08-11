@@ -237,6 +237,34 @@ namespace Zetbox.App.Packaging
             }
         }
 
+        public static void Export(IReadOnlyZetboxContext ctx, Stream stream, IEnumerable<IDataObject> objects, string streamDescription)
+        {
+            using (var s = new StreamPackageProvider(stream, BasePackageProvider.Modes.Write, streamDescription))
+            {
+                Export(ctx, s, objects);
+            }
+        }
+
+        public static void Export(IReadOnlyZetboxContext ctx, IPackageProvider s, IEnumerable<IDataObject> objects)
+        {
+            var schemaList = objects.Select(i => i.GetObjectClass(ctx).Module).Distinct().ToArray();
+            var schemaNamespaces = schemaList.Select(m => m.Namespace).ToArray();
+
+            WriteStartDocument(s, ctx, schemaList);
+
+            var iexpIf = ctx.GetIExportableInterface();
+
+            foreach (var obj in objects)
+            {
+                ExportObject(s, obj, schemaNamespaces);
+            }
+
+            // TODO: Add as many relations as possible
+
+            s.Writer.WriteEndElement();
+            s.Writer.WriteEndDocument();
+        }
+
         // workaround gendarme spinning in a loop when checking ExportFromContext
         private static IEnumerable<IModuleMember> AllModuleMembers(IReadOnlyZetboxContext ctx, ObjectClass objClass)
         {
@@ -346,18 +374,7 @@ namespace Zetbox.App.Packaging
                 }
             }
 
-            DateTime? lastChanged = new DateTime?[] { 
-                ctx.GetQuery<Zetbox.App.Base.Constraint>().Max(d => d.ChangedOn),
-                ctx.GetQuery<Zetbox.App.Base.DataType>().Max(d => d.ChangedOn),
-                ctx.GetQuery<Zetbox.App.Base.DefaultPropertyValue>().Max(d => d.ChangedOn),
-                ctx.GetQuery<Zetbox.App.Base.EnumerationEntry>().Max(d => d.ChangedOn),
-                ctx.GetQuery<Zetbox.App.Base.Module>().Max(d => d.ChangedOn),
-                ctx.GetQuery<Zetbox.App.Base.Property>().Max(d => d.ChangedOn),
-                ctx.GetQuery<Zetbox.App.Base.Relation>().Max(d => d.ChangedOn),
-                ctx.GetQuery<Zetbox.App.Base.RelationEnd>().Max(d => d.ChangedOn)
-            }.Max();
-
-            writer.WriteAttributeString("date", XmlConvert.ToString(lastChanged ?? DateTime.Now, XmlDateTimeSerializationMode.Utc));
+            writer.WriteAttributeString("date", XmlConvert.ToString(DateTime.Now, XmlDateTimeSerializationMode.Utc));
         }
 
         private static List<Zetbox.App.Base.Module> GetModules(IReadOnlyZetboxContext ctx, string[] moduleNames)

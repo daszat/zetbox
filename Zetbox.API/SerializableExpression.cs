@@ -595,6 +595,16 @@ namespace Zetbox.API
     /// </summary>
     [Serializable]
     [DataContract(Namespace = "http://dasz.at/Zetbox/", Name = "ConstantExpression")]
+    // Support the most common list types, e.g. asking for a bunch of objects (Guid, int)
+    [KnownType(typeof(List<Guid>))]
+    [KnownType(typeof(List<int>))]
+    [KnownType(typeof(List<short>))]
+    [KnownType(typeof(List<decimal>))]
+    [KnownType(typeof(List<double>))]
+    [KnownType(typeof(List<float>))]
+    [KnownType(typeof(List<DateTime>))]
+    [KnownType(typeof(List<String>))]
+    [KnownType(typeof(List<IPersistenceObject>))]
     public class SerializableConstantExpression : SerializableExpression
     {
         internal SerializableConstantExpression(ConstantExpression e, SerializationContext ctx)

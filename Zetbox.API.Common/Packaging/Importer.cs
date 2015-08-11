@@ -149,7 +149,7 @@ namespace Zetbox.App.Packaging
         /// </summary>
         /// <param name="ctx"></param>
         /// <param name="filenames"></param>
-        public static void LoadFromXml(IZetboxContext ctx, params string[] filenames)
+        public static IEnumerable<IPersistenceObject> LoadFromXml(IZetboxContext ctx, params string[] filenames)
         {
             var packages = new List<FileSystemPackageProvider>();
             try
@@ -158,7 +158,7 @@ namespace Zetbox.App.Packaging
                 {
                     packages.Add(new FileSystemPackageProvider(f, BasePackageProvider.Modes.Read));
                 }
-                LoadFromXml(ctx, packages.ToArray());
+                return LoadFromXml(ctx, packages.ToArray());
             }
             finally
             {
@@ -169,11 +169,11 @@ namespace Zetbox.App.Packaging
             }
         }
 
-        public static void LoadFromXml(IZetboxContext ctx, Stream stream, string streamDescription)
+        public static IEnumerable<IPersistenceObject> LoadFromXml(IZetboxContext ctx, Stream stream, string streamDescription)
         {
             using (var s = new StreamPackageProvider(stream, BasePackageProvider.Modes.Read, streamDescription))
             {
-                LoadFromXml(ctx, s);
+                return LoadFromXml(ctx, s);
             }
         }
 
@@ -182,7 +182,7 @@ namespace Zetbox.App.Packaging
         /// </summary>
         /// <param name="ctx"></param>
         /// <param name="providers">a stream containing a database.xml</param>
-        public static void LoadFromXml(IZetboxContext ctx, params IPackageProvider[] providers)
+        public static IEnumerable<IPersistenceObject> LoadFromXml(IZetboxContext ctx, params IPackageProvider[] providers)
         {
             if (ctx == null) { throw new ArgumentNullException("ctx"); }
             if (providers == null) { throw new ArgumentNullException("providers"); }
@@ -246,6 +246,7 @@ namespace Zetbox.App.Packaging
                     }
                 }
                 Log.Debug("Import finished");
+                return importedObjects.Values;
             }
         }
         #endregion
