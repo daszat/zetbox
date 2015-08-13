@@ -237,6 +237,14 @@ namespace Zetbox.App.Packaging
             }
         }
 
+        public static void Export(IReadOnlyZetboxContext ctx, string filename, IEnumerable<IDataObject> objects)
+        {
+            using (var s = new FileSystemPackageProvider(filename, BasePackageProvider.Modes.Write))
+            {
+                Export(ctx, s, objects);
+            }
+        }
+
         public static void Export(IReadOnlyZetboxContext ctx, Stream stream, IEnumerable<IDataObject> objects, string streamDescription)
         {
             using (var s = new StreamPackageProvider(stream, BasePackageProvider.Modes.Write, streamDescription))
