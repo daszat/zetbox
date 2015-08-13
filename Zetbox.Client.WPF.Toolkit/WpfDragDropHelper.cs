@@ -28,6 +28,7 @@ namespace Zetbox.Client.WPF.Toolkit
     using System.Windows.Input;
     using System.Windows.Media;
     using Zetbox.API;
+    using Zetbox.App.Extensions;
 
     public interface IDragDropTarget
     {
@@ -172,15 +173,23 @@ namespace Zetbox.Client.WPF.Toolkit
                                     lst = (Zetbox.API.IDataObject[])data;
                                 }
 
-                                dragData.SetData(new[] 
-                                { 
-                                    new VirtualFileDataObject.FileDescriptor() 
+                                if (lst.Any())
+                                {
+                                    var ctx = lst.First().Context;
+                                    var exportable = lst.Where(i => i.GetObjectClass(ctx).ImplementsIExportable()).ToList();
+                                    if (exportable.Count > 0)
                                     {
-                                        Name = "Zetbox.xml",
-                                        ChangeTimeUtc = DateTime.UtcNow,
-                                        StreamContents = (s) => Zetbox.App.Packaging.Exporter.Export(lst.First().Context, s, lst, "Drag 'n' Drop export")
-                                    }   
-                                });
+                                        dragData.SetData(new[]
+                                        {
+                                            new VirtualFileDataObject.FileDescriptor()
+                                            {
+                                                Name = "Zetbox.xml",
+                                                ChangeTimeUtc = DateTime.UtcNow,
+                                                StreamContents = (s) => Zetbox.App.Packaging.Exporter.Export(ctx, s, exportable, "Drag 'n' Drop export")
+                                            }
+                                        });
+                                    }
+                                }
                             }
 
                             // Blocking call
