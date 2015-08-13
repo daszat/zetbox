@@ -120,6 +120,7 @@ namespace Zetbox.App.Packaging
                     .ToList().OrderBy(i => i.IconFile).ThenBy(i => i.ExportGuid).ToList();
                 AddMetaObjects(result, () => icons.AsQueryable());
                 AddMetaObjects(result, () => icons.Select(i => i.Blob).AsQueryable());
+
                 AddMetaObjects(result, () => ctx.GetQuery<ViewModelDescriptor>().Where(i => i.Module.ID == moduleID)
                     .ToList().OrderBy(i => i.ViewModelTypeRef).ThenBy(i => i.ExportGuid));
                 AddMetaObjects(result, () => ctx.GetQuery<ViewDescriptor>().Where(i => i.Module.ID == moduleID)
