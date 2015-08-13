@@ -126,6 +126,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         InstanceListViewModelResources.ExportCSVCommand,
                         InstanceListViewModelResources.ExportCSVCommand_Tooltip,
                         Export, null, null);
+                    _ExportCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.document_export_png.Find(FrozenContext));
                 }
                 return _ExportCommand;
             }
@@ -171,6 +172,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         ExportXML,
                         CanExportXML,
                         null);
+                    _ExportXMLCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.document_export_png.Find(FrozenContext));
                 }
                 return _ExportXMLCommand;
             }
