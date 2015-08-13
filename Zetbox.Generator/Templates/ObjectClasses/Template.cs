@@ -142,7 +142,8 @@ namespace Zetbox.Generator.Templates.ObjectClasses
                 GetTypeName(),
                 this.DataType
                     .Properties
-                    .OfType<CompoundObjectProperty>());
+                    .OfType<CompoundObjectProperty>(),
+                false);
         }
 
         protected override void ApplyApplyChangesFromMethod()

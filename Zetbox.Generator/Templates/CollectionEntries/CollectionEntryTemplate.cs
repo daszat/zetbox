@@ -67,7 +67,7 @@ namespace Zetbox.Generator.Templates.CollectionEntries
 
         protected virtual void ApplyConstructorTemplate()
         {
-            ObjectClasses.Constructors.Call(Host, ctx, GetCeClassName(), new CompoundObjectProperty[0]);
+            ObjectClasses.Constructors.Call(Host, ctx, GetCeClassName(), new CompoundObjectProperty[0], false);
         }
 
         protected abstract bool IsExportable();

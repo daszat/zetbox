@@ -62,6 +62,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.CompoundObjects
                 this.DataType
                     .Properties
                     .OfType<CompoundObjectProperty>(),
+                false,
                 ImplementationSuffix,
                 ImplementationPropertySuffix,
                 null);
@@ -84,6 +85,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.CompoundObjects
                 this.DataType
                     .Properties
                     .OfType<CompoundObjectProperty>(),
+                false,
                 ImplementationSuffix,
                 ImplementationPropertySuffix,
                 null);
@@ -103,6 +105,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.CompoundObjects
                 this.DataType
                     .Properties
                     .OfType<CompoundObjectProperty>(),
+                false,
                 ImplementationSuffix,
                 ImplementationPropertySuffix,
                 "lazyCtx");
@@ -125,6 +128,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.CompoundObjects
                 this.DataType
                     .Properties
                     .OfType<CompoundObjectProperty>(),
+                false,
                 ImplementationSuffix,
                 ImplementationPropertySuffix,
                 "lazyCtx");
