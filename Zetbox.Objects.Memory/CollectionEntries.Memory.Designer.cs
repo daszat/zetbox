@@ -8511,11 +8511,13 @@ namespace Zetbox.App.Projekte
         public Projekt_AuditJournal_CollectionEntryMemoryImpl()
             : base(null)
         {
+            ValueImpl = new Zetbox.App.Base.AuditEntryMemoryImpl(null, this, "Value");
         }
 
         public Projekt_AuditJournal_CollectionEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
+            ValueImpl = new Zetbox.App.Base.AuditEntryMemoryImpl(lazyCtx, this, "Value");
         }
         // BEGIN Zetbox.Generator.Templates.Properties.IdProperty
         public override int ID
@@ -8793,11 +8795,13 @@ namespace Zetbox.App.Test
         public TestCustomObject_PhoneNumbersOther_CollectionEntryMemoryImpl()
             : base(null)
         {
+            ValueImpl = new Zetbox.App.Test.TestPhoneCompoundObjectMemoryImpl(null, this, "Value");
         }
 
         public TestCustomObject_PhoneNumbersOther_CollectionEntryMemoryImpl(Func<IFrozenContext> lazyCtx)
             : base(lazyCtx)
         {
+            ValueImpl = new Zetbox.App.Test.TestPhoneCompoundObjectMemoryImpl(lazyCtx, this, "Value");
         }
         // BEGIN Zetbox.Generator.Templates.Properties.IdProperty
         public override int ID
