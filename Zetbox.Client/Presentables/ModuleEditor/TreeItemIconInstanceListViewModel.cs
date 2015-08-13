@@ -28,7 +28,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
 
     public class TreeItemIconInstanceListViewModel : TreeItemInstanceListViewModel
     {
-        public new delegate TreeItemIconInstanceListViewModel Factory(IZetboxContext dataCtx, ViewModel parent, ObjectClass type, Func<IQueryable> qry);
+        public new delegate TreeItemIconInstanceListViewModel Factory(IZetboxContext dataCtx, ViewModel parent, ObjectClass type, Func<IQueryable> qry, Module currentModule);
 
         public TreeItemIconInstanceListViewModel(
             IViewModelDependencies appCtx,
@@ -38,9 +38,17 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             Lazy<IUIExceptionReporter> errorReporter,
             IZetboxContext dataCtx, ViewModel parent,
             ObjectClass type,
-            Func<IQueryable> qry)
+            Func<IQueryable> qry,
+            Module currentModule)
             : base(appCtx, config, fileOpener, tmpService, errorReporter, dataCtx, parent, type, qry)
         {
+            CurrentModule = currentModule;
+        }
+
+        public Module CurrentModule
+        {
+            get;
+            private set;
         }
 
         public override bool CanDrop
@@ -58,8 +66,9 @@ namespace Zetbox.Client.Presentables.ModuleEditor
 
             var newScope = ViewModelFactory.CreateNewScope();
             var newCtx = newScope.ViewModelFactory.CreateNewContext();
+            var module = newCtx.Find<Module>(CurrentModule.ID);
             var objects = new List<IDataObject>();
-
+            
             foreach (var file in files)
             {
                 try
@@ -75,9 +84,10 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                         case ".ico":
                             var obj = newCtx.Create<Icon>();
                             var fi = new System.IO.FileInfo(file);
-                            int id = obj.Context.CreateBlob(fi, fi.GetMimeType());
-                            obj.Blob = obj.Context.Find<Zetbox.App.Base.Blob>(id);
+                            int id = newCtx.CreateBlob(fi, fi.GetMimeType());
+                            obj.Blob = newCtx.Find<Zetbox.App.Base.Blob>(id);
                             obj.IconFile = obj.Blob.OriginalName;
+                            obj.Module = module;
                             objects.Add(obj);
                             break;
                     }

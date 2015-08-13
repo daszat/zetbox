@@ -211,7 +211,8 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                     // Icons
                     lstMdl = ViewModelFactory.CreateViewModel<TreeItemIconInstanceListViewModel.Factory>().Invoke(DataContext, this,
                         typeof(Icon).GetObjectClass(FrozenContext),
-                        () => DataContext.GetQuery<Icon>().Where(i => i.Module == CurrentModule).OrderBy(i => i.IconFile));
+                        () => DataContext.GetQuery<Icon>().Where(i => i.Module == CurrentModule).OrderBy(i => i.IconFile),
+                        CurrentModule);
                     SetupViewModel(lstMdl);
                     grpMdl.Children.Add(lstMdl);
                     
