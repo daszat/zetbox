@@ -75,6 +75,11 @@ namespace Zetbox.Client.WPF.Toolkit
         { 
             ZetboxObjectDataFormat,
         };
+        public static readonly string[] ZetboxObjectDataFormatsWithFileDrop = new[]
+        {
+            ZetboxObjectDataFormat,
+            "FileDrop",
+        };
         public static readonly string[] AllAcceptableDataFormats = new[] 
         {
             WpfDragDropHelper.ZetboxObjectDataFormat, 

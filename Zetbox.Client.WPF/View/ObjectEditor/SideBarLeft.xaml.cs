@@ -51,7 +51,7 @@ namespace Zetbox.Client.WPF.View.ObjectEditor
         {
             get
             {
-                return WpfDragDropHelper.ZetboxObjectDataFormats;
+                return WpfDragDropHelper.ZetboxObjectDataFormatsWithFileDrop;
             }
         }
 
