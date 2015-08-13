@@ -170,13 +170,13 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
 
                 foreach (var obj in objects)
                 {
-                    newWorkspace.ShowObject(obj);
+                    newWorkspace.ShowObject(obj, activate: false);
                 }
 
                 newScope.ViewModelFactory.CreateDelayedTask(newWorkspace, () =>
                 {
                     newWorkspace.SelectedItem = newWorkspace.Items.FirstOrDefault();
-                });
+                }).Trigger();
             }
             else
             {

@@ -467,7 +467,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
 
         #region Model Management
 
-        public DataObjectViewModel ShowObject(IDataObject obj, ControlKind requestedKind = null)
+        public DataObjectViewModel ShowObject(IDataObject obj, ControlKind requestedKind = null, bool activate = true)
         {
             obj = obj == null || obj.Context == DataContext
                 ? obj
@@ -479,7 +479,11 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                 vm.RequestedKind = requestedKind;
                 AddItem(vm);
             }
-            SelectedItem = vm;
+
+            if (activate)
+            {
+                SelectedItem = vm;
+            }
             return vm;
         }
 
@@ -558,6 +562,44 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                 {
                     ShowObject(obj);
                 }
+
+                return true;
+            }
+            if (data is string[])
+            {
+                var files = (string[])data;
+                var objects = new List<IDataObject>();
+                foreach (var file in files)
+                {
+                    try
+                    {
+                        var xml = new System.Xml.XmlDocument();
+                        xml.Load(file);
+                        if (xml.DocumentElement.LocalName == "ZetboxPackaging")
+                        {
+                            objects.AddRange(Zetbox.App.Packaging.Importer.LoadFromXml(DataContext, file).OfType<IDataObject>());
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        // not an xml...
+                        Zetbox.API.Utils.Logging.Client.Error("Unable to import file.", ex);
+                    }
+                }
+
+                if (objects.Count > 0)
+                {
+                    foreach (var obj in objects)
+                    {
+                        ShowObject(obj, activate: false);
+                    }
+
+                    ViewModelFactory.CreateDelayedTask(this, () =>
+                    {
+                        this.SelectedItem = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, objects.First());
+                    }).Trigger();
+                }
+                return true;
             }
             return false;
         }

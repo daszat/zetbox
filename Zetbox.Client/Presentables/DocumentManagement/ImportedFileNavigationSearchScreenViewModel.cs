@@ -83,7 +83,7 @@ namespace Zetbox.Client.Presentables.DocumentManagement
             {
                 foreach (var obj in ListViewModel.Instances)
                 {
-                    newWorkspace.ShowObject(obj.Object);
+                    newWorkspace.ShowObject(obj.Object, activate: false);
                 }
                 newWorkspace.SelectedItem = newWorkspace.Items.FirstOrDefault();
             }).Trigger();
