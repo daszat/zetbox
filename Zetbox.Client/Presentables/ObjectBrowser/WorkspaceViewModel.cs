@@ -134,6 +134,75 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
             get { return WorkspaceViewModelResources.Name; }
         }
 
+        #region Import command
+        private ICommandViewModel _ImportCommand = null;
+        public ICommandViewModel ImportCommand
+        {
+            get
+            {
+                if (_ImportCommand == null)
+                {
+                    _ImportCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Import", "Import zetbox objects", Import, CanImport, CanImportReason);
+                }
+                return _ImportCommand;
+            }
+        }
+
+        public bool CanImport()
+        {
+            return true;
+        }
+
+        public string CanImportReason()
+        {
+            return "";
+        }
+
+        public void Import()
+        {
+            if (!CanImport()) return;
+            var filename = ViewModelFactory.GetSourceFileNameFromUser("XML|*.xml", "All files|*.*");
+            if (!string.IsNullOrWhiteSpace(filename))
+            {
+                var newScope = ViewModelFactory.CreateNewScope();
+                var newCtx = newScope.ViewModelFactory.CreateNewContext();
+                var objects = new List<IDataObject>();
+
+                try
+                {
+                    objects.AddRange(Zetbox.App.Packaging.Importer.LoadFromXml(newCtx, filename).OfType<IDataObject>());
+                }
+                catch (Exception ex)
+                {
+                    // not an xml...
+                    Zetbox.API.Utils.Logging.Client.Error("Unable to import file.", ex);
+                    ViewModelFactory.ShowMessage("Unable to import file: " + ex.Message, "Error");
+                }
+
+                if (objects.Count > 0)
+                {
+                    var newWorkspace = ObjectEditor.WorkspaceViewModel.Create(newScope.Scope, newCtx);
+                    newScope.ViewModelFactory.ShowModel(newWorkspace, true);
+
+                    foreach (var obj in objects)
+                    {
+                        newWorkspace.ShowObject(obj, activate: false);
+                    }
+
+                    newScope.ViewModelFactory.CreateDelayedTask(newWorkspace, () =>
+                    {
+                        newWorkspace.SelectedItem = newWorkspace.Items.FirstOrDefault();
+                    }).Trigger();
+                }
+                else
+                {
+                    newScope.Dispose();
+                }
+
+            }
+        }
+        #endregion
+
         public bool CanDrop { get { return true; } }
 
         public bool OnDrop(object data)
@@ -156,14 +225,14 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
                         objects.AddRange(Zetbox.App.Packaging.Importer.LoadFromXml(newCtx, file).OfType<IDataObject>());
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     // not an xml...
                     Zetbox.API.Utils.Logging.Client.Error("Unable to import file.", ex);
                 }
             }
 
-            if(objects.Count > 0)
+            if (objects.Count > 0)
             {
                 var newWorkspace = ObjectEditor.WorkspaceViewModel.Create(newScope.Scope, newCtx);
                 newScope.ViewModelFactory.ShowModel(newWorkspace, true);

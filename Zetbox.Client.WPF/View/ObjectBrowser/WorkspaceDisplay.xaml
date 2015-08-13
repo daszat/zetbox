@@ -45,6 +45,9 @@
                     </Style>
                 </MenuItem.ItemContainerStyle>
             </MenuItem>
+            <MenuItem Command="{Binding ImportCommand, Converter={StaticResource CommandConverter}}"
+                      Header="{Binding ImportCommand.Label}"
+                      ToolTip="{Binding ImportCommand.ToolTip}" />
         </Menu>
         <Grid>
             <Grid.ColumnDefinitions>
