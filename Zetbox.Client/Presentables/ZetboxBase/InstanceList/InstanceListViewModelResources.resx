@@ -171,4 +171,10 @@
   <data name="ExportBusyMessageFormat" xml:space="preserve">
     <value>Exporting page {0}</value>
   </data>
+  <data name="ExportXmlCommand" xml:space="preserve">
+    <value>Export as XML</value>
+  </data>
+  <data name="ExportXmlommand_Tooltip" xml:space="preserve">
+    <value>Export as XML to another zetbox instance</value>
+  </data>
 </root>
