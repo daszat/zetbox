@@ -31,12 +31,10 @@
                     <br />
                 </ctrls:Widget>
                 <ctrls:Widget runat="server" Title="<%$ Resources:Strings, ContactTitle %>">
-                    dasz.at OG <br/>
-                    Ignaz-Köck-Straße 10/4108<br/>
-                    1210 Wien <br/><br/>
-
-                    David Schmitt: +43 664 2602670<br/>
-                    Arthur Zaczek: +43 664 2357181<br/><br/>
+                    dasz.at e.U.<br/>
+                    Löhnergasse 12/2<br/>
+                    1120 Wien<br/>
+                    <br/>
 
                     <a href="mailto:office@dasz.at">office@dasz.at</a> <br/>
                     <a href="http://dasz.at">http://dasz.at</a>                    
