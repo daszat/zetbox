@@ -397,12 +397,12 @@ namespace PrepareEnv
             }
         }
 
-        private static string WindowsSdkDir
+        private static string LocateMage()
         {
-            get
-            {
-                var result = new[] {
+            var candidates = new[] {
                     Environment.GetEnvironmentVariable("WindowsSdkDir"),
+                    Environment.GetEnvironmentVariable("MagePath"),
+                    // Obsolete, but keep for compatibility
                     @"C:\Program Files\Microsoft SDKs\Windows\v8.1",
                     @"C:\Program Files\Microsoft SDKs\Windows\v8.1A",
                     @"C:\Program Files\Microsoft SDKs\Windows\v8.0",
@@ -417,11 +417,32 @@ namespace PrepareEnv
                     @"C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1",
                     @"C:\Program Files (x86)\Microsoft SDKs\Windows\v7.1A",
                     @"C:\Program Files (x86)\Microsoft SDKs\Windows\v6.0",
-                }.FirstOrDefault(p => p != null && Directory.Exists(p) && File.Exists(Path.Combine(p, "Bin", "NETFX 4.0 Tools", "mage.exe")));
-                if (result == null)
-                    throw new InvalidOperationException("%WindowsSdkDir% is empty or doesn't exist");
-                return result;
+                }
+            .Concat(Environment.GetEnvironmentVariable("PATH").Split(';'))
+            .Where(p => p != null && Directory.Exists(p))
+            .ToList();
+
+            var result = candidates.FirstOrDefault(p =>
+                    File.Exists(Path.Combine(p, "mage.exe")));
+            if (result != null)
+            {
+                result = Path.Combine(result, "mage.exe");
             }
+
+            // For compatibility
+            if (result == null)
+            {
+                result = candidates.FirstOrDefault(p =>
+                    File.Exists(Path.Combine(p, "Bin", "NETFX 4.0 Tools", "mage.exe")));
+                if (result != null)
+                {
+                    result = Path.Combine(result, "Bin", "NETFX 4.0 Tools", "mage.exe");
+                }
+            }
+
+            if (result == null)
+                throw new InvalidOperationException("%WindowsSdkDir% or %MagePath% is empty or doesn't exist, also mage.exe could not be found on %PATH%.");
+            return result;
         }
 
         private static void SignMage(EnvConfig envConfig, string templateName, string outputName)
@@ -429,7 +450,7 @@ namespace PrepareEnv
             Program.LogAction("signing with mage: [{0}]", outputName);
             var pw = _passphrase == null ? string.Empty : string.Format("-Password {0}", _passphrase);
             var args = string.Format("-Sign {0} -ToFile {1} -Certfile {2} {3}", templateName, outputName, envConfig.ClickOnce.KeyFile, pw);
-            var proc = Process.Start(Path.Combine(WindowsSdkDir, "Bin", "NETFX 4.0 Tools", "mage.exe"), args);
+            var proc = Process.Start(LocateMage(), args);
             proc.WaitForExit();
             if (proc.ExitCode != 0)
             {
