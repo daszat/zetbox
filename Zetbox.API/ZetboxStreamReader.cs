@@ -837,7 +837,7 @@ namespace Zetbox.API
                     array.CopyTo((Array)value);
                 }
                 // only IEnumerable<> -> use List<>
-                else if (type.IsGenericType && type.GetGenericArguments().Length == 1 && type.GetGenericTypeDefinition() == typeof(IEnumerable<>))
+                else if (typeof(System.Collections.IEnumerable).IsAssignableFrom(type) && type != typeof(string))
                 {
                     var elementType = type.FindElementTypes().Single(t => t != typeof(object));
                     var array = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(elementType));

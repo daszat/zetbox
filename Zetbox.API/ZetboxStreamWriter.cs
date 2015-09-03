@@ -650,18 +650,28 @@ namespace Zetbox.API
                 if (type.IsArray)
                 {
                     var elementType = type.GetElementType();
-                    foreach (var element in (System.Collections.IEnumerable)value)
-                    {
-                        _dest.Write(true);
-                        WriteInternal(element, elementType);
-                    }
-                    _dest.Write(false);
+                    WriteArrayInternal(value, elementType);
+                }
+                else if (typeof(System.Collections.IEnumerable).IsAssignableFrom(type) && type != typeof(string))
+                {
+                    var elementType = type.FindElementTypes().Single(t => t != typeof(object));
+                    WriteArrayInternal(value, elementType);
                 }
                 else
                 {
                     WriteInternal(value, type);
                 }
             }
+        }
+
+        private void WriteArrayInternal(object value, Type elementType)
+        {
+            foreach (var element in (System.Collections.IEnumerable)value)
+            {
+                _dest.Write(true);
+                WriteInternal(element, elementType);
+            }
+            _dest.Write(false);
         }
 
         // Serialize only basic types
