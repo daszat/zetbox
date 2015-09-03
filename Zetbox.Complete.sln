@@ -128,7 +128,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.Objects", "Zetbox.Ob
 		{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9} = {AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.DalProvider.EF", "Zetbox.DalProvider.EF\Zetbox.DalProvider.EF.csproj", "{52EC8DFB-9C75-4FDB-9EE1-E78847F7F711}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.DalProvider.Ef", "Zetbox.DalProvider.EF\Zetbox.DalProvider.Ef.csproj", "{52EC8DFB-9C75-4FDB-9EE1-E78847F7F711}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.Client.Forms", "Zetbox.Client.Forms\Zetbox.Client.Forms.csproj", "{C701ED04-08B2-4ABA-B2D3-33502690C8DA}"
 EndProject
@@ -195,7 +195,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.Objects.Ef", "Zetbox
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.DalProvider.Client.Generator", "Zetbox.DalProvider.Client.Generator\Zetbox.DalProvider.Client.Generator.csproj", "{F81E2AB4-0622-40A3-B7E3-9FAC0EE4A31B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.DalProvider.EF.Generator", "Zetbox.DalProvider.EF.Generator\Zetbox.DalProvider.EF.Generator.csproj", "{A2C68E17-5B32-4F4E-B83A-DC7122623FDD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.DalProvider.Ef.Generator", "Zetbox.DalProvider.EF.Generator\Zetbox.DalProvider.Ef.Generator.csproj", "{A2C68E17-5B32-4F4E-B83A-DC7122623FDD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.DalProvider.Base", "Zetbox.DalProvider.Base\Zetbox.DalProvider.Base.csproj", "{A242A751-9F97-4F1C-ABE5-57B28133DEF4}"
 EndProject
