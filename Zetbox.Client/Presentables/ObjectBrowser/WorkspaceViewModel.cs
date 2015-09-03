@@ -20,6 +20,7 @@ using System.Linq;
 using System.Text;
 using Zetbox.API;
 using Zetbox.API.Client;
+using Zetbox.API.Configuration;
 using Zetbox.App.Base;
 using Zetbox.App.Extensions;
 using Zetbox.Client.Presentables.ZetboxBase;
@@ -31,10 +32,13 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
         : WindowViewModel
     {
         public new delegate WorkspaceViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
+        private ZetboxConfig _cfg;
 
-        public WorkspaceViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent)
+        public WorkspaceViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, ZetboxConfig cfg)
             : base(appCtx, dataCtx, parent)
         {
+            if (cfg == null) throw new ArgumentNullException("cfg");
+            _cfg = cfg;
         }
 
         #region Data
@@ -131,7 +135,10 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
 
         public override string Name
         {
-            get { return WorkspaceViewModelResources.Name; }
+            get
+            {
+                return string.Format("{0} - {1}", WorkspaceViewModelResources.Name, _cfg.ConfigName);
+            }
         }
 
         #region Import command
