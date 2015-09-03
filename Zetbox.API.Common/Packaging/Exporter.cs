@@ -257,20 +257,44 @@ namespace Zetbox.App.Packaging
         {
             var schemaList = objects.Select(i => i.GetObjectClass(ctx).Module).Distinct().ToArray();
             var schemaNamespaces = schemaList.Select(m => m.Namespace).ToArray();
+            var allObjectGuids = new HashSet<Guid>();
 
             WriteStartDocument(s, ctx, schemaList);
 
-            var iexpIf = ctx.GetIExportableInterface();
-
-            foreach (var obj in objects)
-            {
-                ExportObject(s, obj, schemaNamespaces);
-            }
-
-            // TODO: Add as many relations as possible
+            ExportInternal(ctx, s, schemaNamespaces, allObjectGuids, objects);
 
             s.Writer.WriteEndElement();
             s.Writer.WriteEndDocument();
+        }
+
+        private static void ExportInternal(IReadOnlyZetboxContext ctx, IPackageProvider s, string[] schemaNamespaces, HashSet<Guid> allObjectGuids, IEnumerable<IDataObject> objects)
+        {
+            foreach (var obj in objects)
+            {
+                var exp = (IExportable)obj;
+                if (allObjectGuids.Contains(exp.ExportGuid)) continue;
+                allObjectGuids.Add(exp.ExportGuid);
+
+                ExportObject(s, obj, schemaNamespaces);
+                var cls = obj.GetObjectClass(ctx);
+                foreach (var rel in cls.GetRelations())
+                {
+                    IEnumerable<IDataObject> lst = null;
+                    if (rel.Containment == ContainmentSpecification.AContainsB && rel.A.Type == cls && rel.A.Navigator != null)
+                    {
+                        lst = obj.GetPropertyValue<IEnumerable>(rel.A.Navigator.Name).OfType<IDataObject>();
+                    }
+                    else if (rel.Containment == ContainmentSpecification.BContainsA && rel.B.Type == cls && rel.B.Navigator != null)
+                    {
+                        lst = obj.GetPropertyValue<IEnumerable>(rel.B.Navigator.Name).OfType<IDataObject>();
+                    }
+
+                    if (lst != null && lst.Any())
+                    {
+                        ExportInternal(ctx, s, schemaNamespaces, allObjectGuids, lst);
+                    }
+                }
+            }
         }
 
         // workaround gendarme spinning in a loop when checking ExportFromContext
