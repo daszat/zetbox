@@ -34,7 +34,7 @@ cd ..\bin\Debug
 ls *.nuspec | % {
 	$file = $_.Name
 	$file | out-host
-	..\..\.nuget\nuget.exe pack $file
+	nuget pack $file
 }
 
 popd
