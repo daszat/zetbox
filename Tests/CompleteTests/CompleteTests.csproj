@@ -17,7 +17,6 @@
     <StartArguments>CompleteTests.nunit /config:Studio</StartArguments>
     <NoWarn>1591</NoWarn>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>8c596386</NuGetPackageImportStamp>
     <GitVersion_NoFetchEnabled>true</GitVersion_NoFetchEnabled>
@@ -146,5 +145,5 @@ IF EXIST ".\bin\CodeGen\bin\" (.\bin\debug\PrepareEnv.exe .\bin\Debug\Tests\)
 
 </PostBuildEvent>
   </PropertyGroup>
-  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
 </Project>
+

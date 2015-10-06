@@ -34,7 +34,6 @@
     <StartArguments>Zetbox.DalProvider.EF.Tests.nunit /config:Studio</StartArguments>
     <NoWarn>1591</NoWarn>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>f81b96c3</NuGetPackageImportStamp>
     <GitVersion_NoFetchEnabled>true</GitVersion_NoFetchEnabled>
@@ -217,5 +216,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
 </Project>
+
