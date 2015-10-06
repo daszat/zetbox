@@ -20,6 +20,7 @@
     <RestorePackages>true</RestorePackages>
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>b5b063cf</NuGetPackageImportStamp>
+    <GitVersion_NoFetchEnabled>true</GitVersion_NoFetchEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
