@@ -82,21 +82,22 @@ namespace Zetbox.Client.Presentables
 
         private ZetboxContextModel GetModel(IZetboxContext ctx)
         {
-            return new ZetboxContextModel(ctx);
+            return _activeCtxCache.FirstOrDefault(m => m.DebuggingContext == ctx) ?? new ZetboxContextModel(ctx);
         }
 
         void IZetboxContextDebugger.Created(IZetboxContext ctx)
         {
             _activeCtxCache.Add(GetModel(ctx));
-            ctx.Disposing += Disposing;
+            ctx.Disposed += Disposed;
             ctx.Changed += Changed;
         }
 
-        void Disposing(object sender, GenericEventArgs<IReadOnlyZetboxContext> e)
+        void Disposed(object sender, GenericEventArgs<IReadOnlyZetboxContext> e)
         {
             var mdl = GetModel((IZetboxContext)e.Data);
             _activeCtxCache.Remove(mdl);
             _disposedCtxCache.Add(mdl);
+            mdl.Disposed();
         }
 
         void Changed(object sender, GenericEventArgs<IZetboxContext> e)
@@ -112,6 +113,17 @@ namespace Zetbox.Client.Presentables
     /// </summary>
     public class ZetboxContextModel : INotifyPropertyChanged
     {
+        public ZetboxContextModel(IZetboxContext dataCtx)
+        {
+            DebuggingContext = dataCtx;
+            CreatedOn = DateTime.Now;
+            DisposedAt = "still active";
+            if (dataCtx is IDebuggingZetboxContext)
+            {
+                CreatedAt = String.Join(String.Empty, ((IDebuggingZetboxContext)dataCtx).CreatedAt.GetFrames().Take(10).Select(sf => sf.ToString()).ToArray());
+            }
+        }
+
         #region INotifyPropertyChanged Members
 
         private event PropertyChangedEventHandler _PropertyChangedEvent;
@@ -139,14 +151,8 @@ namespace Zetbox.Client.Presentables
 
         #endregion
 
-        protected IZetboxContext DebuggingContext { get; private set; }
-
-        public ZetboxContextModel(IZetboxContext dataCtx)
-        {
-            DebuggingContext = dataCtx;
-        }
-
         #region Public Interface
+        public IZetboxContext DebuggingContext { get; private set; }
 
         private ObservableCollection<string> _objCache = new ObservableCollection<string>();
         public ObservableCollection<string> AttachedObjects
@@ -170,47 +176,28 @@ namespace Zetbox.Client.Presentables
                 {
                     _countCache = value;
                     OnPropertyChanged("Count");
+                    OnPropertyChanged("Name");
                 }
             }
         }
 
-        public string CreatedAt
+        public string CreatedAt { get; private set; }
+        public DateTime CreatedOn { get; private set; }
+        public string DisposedAt { get; private set; }
+
+        internal void Disposed()
         {
-            get
+            IDebuggingZetboxContext dbgCtx = DebuggingContext as IDebuggingZetboxContext;
+            if (dbgCtx != null && dbgCtx.DisposedAt != null)
             {
-                if (DebuggingContext is IDebuggingZetboxContext)
-                {
-                    return String.Join(String.Empty, ((IDebuggingZetboxContext)DebuggingContext).CreatedAt.GetFrames().Take(10).Select(sf => sf.ToString()).ToArray());
-                }
-                else
-                {
-                    return string.Empty;
-                }
+                DisposedAt = String.Join(String.Empty, dbgCtx.DisposedAt.GetFrames().Take(10).Select(sf => sf.ToString()).ToArray());
+                OnPropertyChanged("DisposedAt");
             }
+
+            // Release to GC
+            DebuggingContext = null;
         }
 
-        public string DisposedAt
-        {
-            get
-            {
-                IDebuggingZetboxContext dbgCtx = DebuggingContext as IDebuggingZetboxContext;
-                if (dbgCtx != null)
-                {
-                    if (dbgCtx.DisposedAt == null)
-                    {
-                        return "still active";
-                    }
-                    else
-                    {
-                        return String.Join(String.Empty, dbgCtx.DisposedAt.GetFrames().Take(10).Select(sf => sf.ToString()).ToArray());
-                    }
-                }
-                else
-                {
-                    return string.Empty;
-                }
-            }
-        }
 
         #endregion
 
@@ -222,22 +209,20 @@ namespace Zetbox.Client.Presentables
         /// is only called by the <see cref="ZetboxDebuggerAsViewModel"/>
         internal void OnContextChanged()
         {
-            var objs = DebuggingContext.AttachedObjects.OfType<IDataObject>().ToArray();
-            SyncObjects(objs);
-        }
+            if (DebuggingContext == null) return;
 
-        private void SyncObjects(IDataObject[] objs)
-        {
+            var objs = DebuggingContext.AttachedObjects.OfType<IDataObject>().ToArray();
+
             _objCache.Clear();
             objs.ForEach(o => _objCache.Add(string.Format("({0}) {1}", o.ID, DebuggingContext.GetInterfaceType(o).Type.FullName)));
+
             Count = objs.Length;
         }
-
         #endregion
 
         public string Name
         {
-            get { return "ZetboxContext"; }
+            get { return string.Format("{0}, Items: {1}", CreatedOn, Count); }
         }
     }
 }

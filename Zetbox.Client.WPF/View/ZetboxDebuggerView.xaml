@@ -5,8 +5,8 @@
         xmlns:view="clr-namespace:Zetbox.Client.WPF.View"
         xmlns:client="clr-namespace:Zetbox.Client.Presentables;assembly=Zetbox.Client"
         Title="ZetboxContext Debugger"
-        Height="360"
-        Width="300"
+        Width="640"
+        Height="480"
         WindowStyle="ToolWindow"
         ShowInTaskbar="False">
     <!--
@@ -28,22 +28,12 @@
 
     <Window.Resources>
         <DataTemplate DataType="{x:Type client:ZetboxContextModel}">
-            <StackPanel Orientation="Vertical">
-                <TextBlock Text="{Binding Count, Converter={StaticResource FormattingConverter}, ConverterParameter='Count: {0}'}" />
-                <Expander Header="Created at">
-                    <TextBlock Text="{Binding CreatedAt}"
-                               Margin="10,0,0,0" />
-                </Expander>
-                <Expander Header="Disposed at">
-                    <TextBlock Text="{Binding DisposedAt}"
-                               Margin="10,0,0,0" />
-                </Expander>
-            </StackPanel>
+            <TextBlock Text="{Binding Name}" />
         </DataTemplate>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
+            <ColumnDefinition Width="200" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -51,39 +41,63 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        <!-- Row 0 -->
         <DockPanel Grid.Row="0"
-                   Grid.Column="0">
+                   Grid.Column="0"
+                   Margin="{StaticResource DialogMargin}">
             <TextBlock DockPanel.Dock="Top"
                        HorizontalAlignment="Center"
                        Text="{Binding ActiveContexts.Count, Converter={StaticResource FormattingConverter}, ConverterParameter='Active Contexts: {0}'}" />
-            <ListBox ItemsSource="{Binding ActiveContexts}"
-                     x:Name="lstActiveContexts"
-                     IsSynchronizedWithCurrentItem="True"
-                     BorderThickness="0" />
+            <ListView ItemsSource="{Binding ActiveContexts}"
+                      x:Name="lstActiveContexts" />
         </DockPanel>
-        <ListBox Grid.Row="0"
-                 Grid.Column="1"
-                 DataContext="{Binding ElementName=lstActiveContexts, Path=Items}"
-                 ItemsSource="{Binding Path=AttachedObjects}"
-                 IsSynchronizedWithCurrentItem="True" />
+        <DockPanel Grid.Row="0"
+                   Grid.Column="1"
+                   DataContext="{Binding ElementName=lstActiveContexts, Path=SelectedItem}"
+                   Margin="{StaticResource DialogMargin}">
+            <Expander DockPanel.Dock="Top"
+                      Header="Created at">
+                <TextBlock Text="{Binding CreatedAt}"
+                           Margin="10,0,0,0" />
+            </Expander>
+            <Expander DockPanel.Dock="Top"
+                      Header="Disposed at">
+                <TextBlock Text="{Binding DisposedAt}"
+                           Margin="10,0,0,0" />
+            </Expander>
+            <TextBlock DockPanel.Dock="Top"
+                       Text="Items"
+                       Margin="0,5,0,0"/>
+            <ListView ItemsSource="{Binding Path=AttachedObjects}" />
+        </DockPanel>
+        <!-- Row 1 -->
         <GridSplitter Grid.Row="1"
                       Grid.ColumnSpan="2"
                       ResizeDirection="Rows" />
+        <!-- Row 2 -->
         <DockPanel Grid.Row="2"
-                   Grid.Column="0">
+                   Grid.Column="0"
+                   Margin="{StaticResource DialogMargin}">
             <TextBlock DockPanel.Dock="Top"
                        HorizontalAlignment="Center"
                        Text="{Binding DisposedContexts.Count, Converter={StaticResource FormattingConverter}, ConverterParameter='Disposed Contexts: {0}'}" />
-            <ListBox ItemsSource="{Binding DisposedContexts}"
-                     x:Name="lstDisposedContexts"
-                     IsSynchronizedWithCurrentItem="True"
-                     BorderThickness="0" />
+            <ListView ItemsSource="{Binding DisposedContexts}"
+                      x:Name="lstDisposedContexts" />
         </DockPanel>
-        <ListBox Grid.Row="2"
-                 Grid.Column="1"
-                 DataContext="{Binding ElementName=lstDisposedContexts, Path=Items}"
-                 ItemsSource="{Binding Path=AttachedObjects}"
-                 IsSynchronizedWithCurrentItem="True">
-        </ListBox>
+        <DockPanel Grid.Row="2"
+                   Grid.Column="1"
+                   DataContext="{Binding ElementName=lstDisposedContexts, Path=SelectedItem}"
+                   Margin="{StaticResource DialogMargin}">
+            <Expander DockPanel.Dock="Top"
+                      Header="Created at">
+                <TextBlock Text="{Binding CreatedAt}"
+                           Margin="10,0,0,0" />
+            </Expander>
+            <Expander DockPanel.Dock="Top"
+                      Header="Disposed at">
+                <TextBlock Text="{Binding DisposedAt}"
+                           Margin="10,0,0,0" />
+            </Expander>
+        </DockPanel>
     </Grid>
 </Window>
