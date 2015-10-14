@@ -104,6 +104,7 @@ namespace Zetbox.DalProvider.Client
         }
 
         public event GenericEventHandler<IReadOnlyZetboxContext> Disposing;
+        public event GenericEventHandler<IReadOnlyZetboxContext> Disposed;
 
         [SuppressMessage("Microsoft.Performance", "CA1805:DoNotInitializeUnnecessarily", Justification = "Clarifies intent of variable")]
         private bool disposed = false;
@@ -113,7 +114,7 @@ namespace Zetbox.DalProvider.Client
         /// </summary>
         public void Dispose()
         {
-            GenericEventHandler<IReadOnlyZetboxContext> temp = Disposing;
+            var temp = Disposing;
             if (temp != null)
             {
                 temp(this, new GenericEventArgs<IReadOnlyZetboxContext>() { Data = this });
@@ -130,6 +131,11 @@ namespace Zetbox.DalProvider.Client
                 disposed = true;
             }
 
+            temp = Disposed;
+            if (temp != null)
+            {
+                temp(this, new GenericEventArgs<IReadOnlyZetboxContext>() { Data = this });
+            }
             ZetboxContextEventListenerHelper.OnDisposed(_eventListeners, this);
         }
 

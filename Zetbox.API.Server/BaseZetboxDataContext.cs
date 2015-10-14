@@ -73,17 +73,26 @@ namespace Zetbox.API.Server
         /// Fired when the Context is beeing disposed.
         /// </summary>
         public event GenericEventHandler<IReadOnlyZetboxContext> Disposing;
+        /// <summary>
+        /// Fired when the Context was disposed.
+        /// </summary>
+        public event GenericEventHandler<IReadOnlyZetboxContext> Disposed;
 
         // TODO: implement proper IDisposable pattern
         public virtual void Dispose()
         {
-            GenericEventHandler<IReadOnlyZetboxContext> temp = Disposing;
+            var temp = Disposing;
             if (temp != null)
             {
                 temp(this, new GenericEventArgs<IReadOnlyZetboxContext>() { Data = this });
             }
             IsDisposed = true;
 
+            temp = Disposed;
+            if (temp != null)
+            {
+                temp(this, new GenericEventArgs<IReadOnlyZetboxContext>() { Data = this });
+            }
             ZetboxContextEventListenerHelper.OnDisposed(eventListeners, this);
         }
 

@@ -121,6 +121,10 @@ namespace Zetbox.API
         /// Fired when the Context is beeing disposed.
         /// </summary>
         event GenericEventHandler<IReadOnlyZetboxContext> Disposing;
+        /// <summary>
+        /// Fired when the Context was disposed.
+        /// </summary>
+        event GenericEventHandler<IReadOnlyZetboxContext> Disposed;
 
         /// <summary>
         /// Returns a Query by T
