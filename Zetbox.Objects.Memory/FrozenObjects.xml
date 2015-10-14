@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2015-08-13T08:17:10.2412304Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2015-10-14T09:28:01.817854Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -15352,6 +15352,10 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
   <GUI:ControlKind ExportGuid="18c0afa2-61bc-4ecb-b1e9-47b33b294573">
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Name>Zetbox.App.GUI.DataObjectSelectionTaskKind</GUI:Name>
+  </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="1b3c874d-bab3-4c34-9bbb-b8dbc44c16a8">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>Zetbox.App.GUI.CacheDebuggerKind</GUI:Name>
   </GUI:ControlKind>
   <GUI:ControlKind ExportGuid="1c39f2f9-f4ba-4653-b92f-4672dfc4294a">
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
@@ -62934,6 +62938,7 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
     <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.ActionViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="f87858ba-688f-495d-99c0-b52ad117a4c2">
+    <GUI:DefaultEditorKind>1b3c874d-bab3-4c34-9bbb-b8dbc44c16a8</GUI:DefaultEditorKind>
     <GUI:Deleted>false</GUI:Deleted>
     <GUI:Description>ViewModel for the Cache Debugger</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
@@ -63252,6 +63257,7 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="2509d44a-64df-468b-8980-04fae9bc1e9e">
+    <GUI:ControlKind>1b3c874d-bab3-4c34-9bbb-b8dbc44c16a8</GUI:ControlKind>
     <GUI:ControlTypeRef>Zetbox.Client.WPF.View.CacheDebuggerDisplay, Zetbox.Client.WPF</GUI:ControlTypeRef>
     <GUI:Deleted>false</GUI:Deleted>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>

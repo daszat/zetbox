@@ -4395,6 +4395,10 @@ namespace Zetbox {
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("aa2fb611-a8aa-44b7-9b55-80ef3ef4c4b1"); }
                 }
+                public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_CacheDebuggerKind
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("1b3c874d-bab3-4c34-9bbb-b8dbc44c16a8"); }
+                }
                 public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_CheckboxKind
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("12b829e1-abab-43f3-99ea-e33cd383d7e6"); }

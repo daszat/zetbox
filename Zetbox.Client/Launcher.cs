@@ -54,33 +54,50 @@ namespace Zetbox.Client
             if (args.Contains("-installperfcounter"))
             {
                 if (perfCounter != null) perfCounter.Install();
+                // install and exit
             }
             else if (args.Contains("-uninstallperfcounter"))
             {
                 if (perfCounter != null) perfCounter.Install();
-            }
-            else if (args.Length > 0)
-            {
-                var appGuid = new Guid(args[0]);
-                LaunchApplication(appGuid);
-            }
-            else if (cfg.Client.Application != null && cfg.Client.Application != Guid.Empty)
-            {
-                LaunchApplication(cfg.Client.Application.Value);
+                // uninstall and exit
             }
             else
             {
-                var ws = mdlFactory.CreateViewModel<WorkspaceViewModel.Factory>().Invoke(ctxFactory(ContextIsolationLevel.MergeQueryData), null);
-                ControlKind launcher = Zetbox.NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_LauncherKind.Find(frozenCtx);
-                mdlFactory.ShowModel(ws, launcher, true);
+                // Extract app guid
+                Guid appGuid = Guid.Empty;
+                foreach (var g in args)
+                {
+                    if (Guid.TryParse(g, out appGuid))
+                        break;
+                }
+
+                if (appGuid != Guid.Empty)
+                {
+                    LaunchApplication(appGuid);
+                }
+                else if (cfg.Client.Application != null && cfg.Client.Application != Guid.Empty)
+                {
+                    LaunchApplication(cfg.Client.Application.Value);
+                }
+                else
+                {
+                    var ws = mdlFactory.CreateViewModel<WorkspaceViewModel.Factory>().Invoke(ctxFactory(ContextIsolationLevel.MergeQueryData), null);
+                    ControlKind launcher = Zetbox.NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_LauncherKind.Find(frozenCtx);
+                    mdlFactory.ShowModel(ws, launcher, true);
+                }
+
+                // other arguments
+                if (args.Contains("-showdebugger"))
+                {
+                    var ctx = ctxFactory(ContextIsolationLevel.PreferContextCache);
+
+                    var ctxDebugger = mdlFactory.CreateViewModel<ZetboxDebuggerAsViewModel.Factory>().Invoke(ctx, null);
+                    mdlFactory.ShowModel(ctxDebugger, true);
+
+                    var cacheDebugger = mdlFactory.CreateViewModel<CacheDebuggerViewModel.Factory>().Invoke(ctx, null);
+                    mdlFactory.ShowModel(cacheDebugger, true);
+                }
             }
-
-
-            //var ctxDebugger = mdlFactory.CreateViewModel<ZetboxDebuggerAsViewModel.Factory>().Invoke(ctxFactory());
-            //mdlFactory.ShowModel(ctxDebugger, true);
-
-            //var cacheDebugger = mdlFactory.CreateViewModel<CacheDebuggerViewModel.Factory>().Invoke(ctxFactory());
-            //mdlFactory.ShowModel(cacheDebugger, true);
         }
 
         private void LaunchApplication(Guid appGuid)

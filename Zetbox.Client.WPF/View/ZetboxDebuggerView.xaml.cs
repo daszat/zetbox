@@ -34,12 +34,17 @@ namespace Zetbox.Client.WPF.View
     /// Interaction logic for ZetboxDebuggerView.xaml
     /// </summary>
     [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
-    public partial class ZetboxDebuggerView : Window
+    public partial class ZetboxDebuggerView : Window, IHasViewModel<ZetboxDebuggerAsViewModel>
     {
         public ZetboxDebuggerView()
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             InitializeComponent();
+        }
+
+        public ZetboxDebuggerAsViewModel ViewModel
+        {
+            get { return (ZetboxDebuggerAsViewModel)DataContext; }
         }
     }
 }
