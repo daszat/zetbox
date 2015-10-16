@@ -97,7 +97,8 @@ namespace Zetbox.Client.Presentables.GUI
                                     t.Result.Rw.Add(ViewModelFactory.CreateViewModel<SavedListConfigViewModel.Factory>().Invoke(DataContext, this, item, cfg.Owner != null));
                                 }
                             }
-                        });
+                        })
+                        .Finally(() => ctx.Dispose());
                     return result;
                 },
                 set: null);
