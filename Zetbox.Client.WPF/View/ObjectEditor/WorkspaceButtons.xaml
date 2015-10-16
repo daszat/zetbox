@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="Zetbox.Client.WPF.View.ObjectEditor.WorkspaceButtons"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
+             xmlns:styles="clr-namespace:Zetbox.Client.WPF.Styles;assembly=Zetbox.Client.WPF.Toolkit"
+             xmlns:client="clr-namespace:Zetbox.Client.Presentables;assembly=Zetbox.Client"
+             xmlns:commands="clr-namespace:Zetbox.Client.WPF.Commands;assembly=Zetbox.Client.WPF.Toolkit"
+             xmlns:tk="clr-namespace:Zetbox.Client.WPF.Toolkit;assembly=Zetbox.Client.WPF.Toolkit"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <DockPanel>
+        <ItemsControl DockPanel.Dock="Right"
+                              ItemsSource="{Binding Commands}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <DockPanel IsItemsHost="True" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemContainerStyle>
+                <Style>
+                    <Setter Property="DockPanel.Dock" Value="Right"/>
+                    <Setter Property="ContentPresenter.ContentTemplateSelector" Value="{StaticResource defaultTemplateSelector}"/>
+                    <Setter Property="tk:VisualTypeTemplateSelector.RequestedKind" Value="{Binding RequestedKind, Mode=OneWay}" />
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+        </ItemsControl>
+        <ctrls:CommandButton DockPanel.Dock="Left"
+                                     CommandViewModel="{Binding ReportProblemCommand}"
+                                     Style="{StaticResource ImageButton}" />
+        <ToggleButton DockPanel.Dock="Left"
+                              Command="{Binding ElevatedModeCommand, Converter={StaticResource CommandConverter}}"
+                              Visibility="{Binding ElevatedModeCommand.Show, Converter={StaticResource BooleanToVisibilityConverter}}"
+                              IsChecked="{Binding ElevatedModeCommand.IsElevated, Mode=OneWay}">
+            <Border Padding="5">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="{Binding Path=ElevatedModeCommand.Icon, Converter={StaticResource ImageConverter}}"
+                                   MaxHeight="{StaticResource SmallControlHeight}"
+                                   MaxWidth="{StaticResource SmallControlHeight}" />
+                    <ContentPresenter Content="{Binding Path=ElevatedModeCommand.Label}"
+                                              HorizontalAlignment="Center"
+                                              VerticalAlignment="Center" />
+                </StackPanel>
+            </Border>
+        </ToggleButton>
+        <TextBlock Text="{Binding SaveChangesHintText}"
+                           Visibility="{Binding IsContextModified, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}"
+                           VerticalAlignment="Bottom"
+                           Margin="0"
+                           MaxHeight="50"
+                           TextWrapping="Wrap"
+                           styles:Margin.Left="{StaticResource ItemMargin}"
+                           styles:Margin.Right="{StaticResource ItemMargin}" />
+    </DockPanel>
+</UserControl>

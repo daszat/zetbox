@@ -33,49 +33,7 @@
         <Border DockPanel.Dock="Bottom"
                 Style="{StaticResource AreaGroup1BorderStyle}"
                 Margin="{StaticResource AreaGroup1Margin}">
-            <DockPanel>
-                <ItemsControl DockPanel.Dock="Right"
-                              ItemsSource="{Binding Commands}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <DockPanel IsItemsHost="True" />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemContainerStyle>
-                        <Style>
-                            <Setter Property="DockPanel.Dock" Value="Right"/>
-                            <Setter Property="ContentPresenter.ContentTemplateSelector" Value="{StaticResource defaultTemplateSelector}"/>
-                            <Setter Property="tk:VisualTypeTemplateSelector.RequestedKind" Value="{Binding RequestedKind, Mode=OneWay}" />
-                        </Style>
-                    </ItemsControl.ItemContainerStyle>
-                </ItemsControl>
-                <ctrls:CommandButton DockPanel.Dock="Left"
-                                     CommandViewModel="{Binding ReportProblemCommand}"
-                                     Style="{StaticResource ImageButton}" />
-                <ToggleButton DockPanel.Dock="Left"
-                              Command="{Binding ElevatedModeCommand, Converter={StaticResource CommandConverter}}"
-                              Visibility="{Binding ElevatedModeCommand.Show, Converter={StaticResource BooleanToVisibilityConverter}}"
-                              IsChecked="{Binding ElevatedModeCommand.IsElevated, Mode=OneWay}">
-                    <Border Padding="5">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="{Binding Path=ElevatedModeCommand.Icon, Converter={StaticResource ImageConverter}}"
-                                   MaxHeight="{StaticResource SmallControlHeight}"
-                                   MaxWidth="{StaticResource SmallControlHeight}" />
-                            <ContentPresenter Content="{Binding Path=ElevatedModeCommand.Label}"
-                                              HorizontalAlignment="Center"
-                                              VerticalAlignment="Center" />
-                        </StackPanel>
-                    </Border>
-                </ToggleButton>
-                <TextBlock Text="{Binding SaveChangesHintText}"
-                           Visibility="{Binding IsContextModified, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}"
-                           VerticalAlignment="Bottom"
-                           Margin="0"
-                           MaxHeight="50"
-                           TextWrapping="Wrap"
-                           styles:Margin.Left="{StaticResource ItemMargin}"
-                           styles:Margin.Right="{StaticResource ItemMargin}" />
-            </DockPanel>
+            <local:WorkspaceButtons />
         </Border>
         <Grid>
             <Grid.ColumnDefinitions>
