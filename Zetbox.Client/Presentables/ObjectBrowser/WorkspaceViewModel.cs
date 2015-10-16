@@ -105,6 +105,13 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
         #endregion
 
         #region Utilities and UI callbacks
+        public override string Name
+        {
+            get
+            {
+                return string.Format("{0} - {1}", WorkspaceViewModelResources.Name, _cfg.ConfigName);
+            }
+        }
 
         private void LoadModules()
         {
@@ -132,14 +139,6 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
         }
 
         #endregion
-
-        public override string Name
-        {
-            get
-            {
-                return string.Format("{0} - {1}", WorkspaceViewModelResources.Name, _cfg.ConfigName);
-            }
-        }
 
         #region Import command
         private ICommandViewModel _ImportCommand = null;
@@ -210,6 +209,60 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
         }
         #endregion
 
+        #region Debugger command
+        private ICommandViewModel _DebuggerCommand = null;
+        public ICommandViewModel DebuggerCommand
+        {
+            get
+            {
+                if (_DebuggerCommand == null)
+                {
+                    _DebuggerCommand = ViewModelFactory.CreateViewModel<DebuggerCommandViewModel.Factory>().Invoke(DataContext, this);
+                }
+                return _DebuggerCommand;
+            }
+        }
+
+        public class DebuggerCommandViewModel : CommandViewModel
+        {
+            public new delegate DebuggerCommandViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
+
+            public DebuggerCommandViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent)
+                : base(appCtx, dataCtx, parent, "Show Debugger", "Shows the zetbox debugger")
+            {
+            }
+
+            public bool Show
+            {
+                get
+                {
+                    return CurrentPrincipal.IsAdministrator();
+                }
+            }
+
+            public override bool CanExecute(object data)
+            {
+                var result =  CurrentPrincipal.IsAdministrator();
+                if(!result)
+                {
+                    this.Reason = "Only a Administrator may start the debugger";
+                }
+                return result;
+            }
+
+            protected override void DoExecute(object data)
+            {
+                var scope = ViewModelFactory.CreateNewScope();
+                var ctx = scope.ViewModelFactory.CreateNewContext();
+
+                var debugger = scope.ViewModelFactory.CreateViewModel<Zetbox.Client.Presentables.Debugger.DebuggerWindowViewModel.Factory>().Invoke(ctx, null);
+                debugger.Closed += (s, e) => scope.Dispose(); 
+                scope.ViewModelFactory.ShowModel(debugger, true);
+            }
+        }        
+        #endregion
+
+        #region DragDrop
         public bool CanDrop { get { return true; } }
 
         public bool OnDrop(object data)
@@ -260,5 +313,6 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
             }
             return true;
         }
+        #endregion
     }
 }

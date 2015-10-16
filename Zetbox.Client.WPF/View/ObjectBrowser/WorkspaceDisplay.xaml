@@ -48,6 +48,10 @@
             <MenuItem Command="{Binding ImportCommand, Converter={StaticResource CommandConverter}}"
                       Header="{Binding ImportCommand.Label}"
                       ToolTip="{Binding ImportCommand.ToolTip}" />
+            <MenuItem Command="{Binding DebuggerCommand, Converter={StaticResource CommandConverter}}"
+                      Header="{Binding DebuggerCommand.Label}"
+                      ToolTip="{Binding DebuggerCommand.ToolTip}"
+                      Visibility="{Binding DebuggerCommand.Show, Converter={StaticResource BooleanToVisibilityConverter}}" />
         </Menu>
         <Grid>
             <Grid.ColumnDefinitions>
