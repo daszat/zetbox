@@ -157,7 +157,8 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                         {
                             foreach (var mdl in assemblyLstMdl.SelectedItems)
                             {
-                                var ctx = ViewModelFactory.CreateNewContext();
+                                var scope = ViewModelFactory.CreateNewScope();
+                                var ctx = scope.ViewModelFactory.CreateNewContext();
 
                                 var a = ctx.Find<Assembly>(mdl.ID);
                                 var workspaceShown = a.RegenerateTypeRefs();
@@ -168,6 +169,11 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                                     // when new Descriptor has been created a Workspace will 
                                     // show those Descriptors and the user has to submit them
                                     ctx.SubmitChanges();
+                                    scope.Dispose();
+                                }
+                                else
+                                {
+                                    // TODO: This will produce a scope leak!
                                 }
                             }
                         },
