@@ -102,11 +102,11 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
             if (appMdl.WindowModelType != null)
             {
-                // responsibility to externalCtx's disposal passes to newWorkspace
                 var newWorkspace = newScope.ViewModelFactory.CreateViewModel<WindowViewModel.Factory>(appMdl.WindowModelType).Invoke(
                     newScope.ViewModelFactory.CreateNewContext(ContextIsolationLevel.MergeQueryData), // no data changes in applications! Open a workspace
                     null
                 );
+                newWorkspace.Closed += (s, e) => newScope.Dispose();
                 ViewModelFactory.ShowModel(newWorkspace, true);
             }
             else if (appMdl.RootScreen != null)
@@ -116,6 +116,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                     null,
                     appMdl.RootScreen
                 );
+                newWorkspace.Closed += (s, e) => newScope.Dispose();
                 ViewModelFactory.ShowModel(newWorkspace, true);
             }
             else
