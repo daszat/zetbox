@@ -91,11 +91,8 @@ namespace Zetbox.Client
                 {
                     var ctx = ctxFactory(ContextIsolationLevel.PreferContextCache);
 
-                    var ctxDebugger = mdlFactory.CreateViewModel<ZetboxDebuggerAsViewModel.Factory>().Invoke(ctx, null);
-                    mdlFactory.ShowModel(ctxDebugger, true);
-
-                    var cacheDebugger = mdlFactory.CreateViewModel<CacheDebuggerViewModel.Factory>().Invoke(ctx, null);
-                    mdlFactory.ShowModel(cacheDebugger, true);
+                    var debugger = mdlFactory.CreateViewModel<Zetbox.Client.Presentables.Debugger.DebuggerWindowViewModel.Factory>().Invoke(ctx, null);
+                    mdlFactory.ShowModel(debugger, true);
                 }
             }
         }

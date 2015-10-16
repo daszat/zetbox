@@ -13,7 +13,7 @@
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace Zetbox.Client.Presentables
+namespace Zetbox.Client.Presentables.Debugger
 {
     using System;
     using System.Collections.Generic;
@@ -25,25 +25,25 @@ namespace Zetbox.Client.Presentables
     using Zetbox.API;
 
     [ViewModelDescriptor]
-    public class ZetboxDebuggerAsViewModel
+    public class ZetboxContextDebuggerViewModel
         : ViewModel, IZetboxContextDebugger
     {
-        public new delegate ZetboxDebuggerAsViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
+        public new delegate ZetboxContextDebuggerViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
 
-        public ZetboxDebuggerAsViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent)
+        public ZetboxContextDebuggerViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent)
             : base(appCtx, dataCtx, parent)
         {
             ZetboxContextDebuggerSingleton.SetDebugger(this);
         }
 
-        public ZetboxDebuggerAsViewModel(bool designMode)
+        public ZetboxContextDebuggerViewModel(bool designMode)
             : base(designMode)
         {
         }
 
         public override string Name
         {
-            get { return this.GetType().Name; }
+            get { return ZetboxContextDebuggerViewModelResources.Name; }
         }
 
         #region Public Interface
@@ -206,7 +206,7 @@ namespace Zetbox.Client.Presentables
         /// <summary>
         /// Update the model's state when the context is changed
         /// </summary>
-        /// is only called by the <see cref="ZetboxDebuggerAsViewModel"/>
+        /// is only called by the <see cref="ZetboxContextDebuggerViewModel"/>
         internal void OnContextChanged()
         {
             if (DebuggingContext == null) return;

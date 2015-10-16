@@ -26,25 +26,27 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Zetbox.Client.GUI;
-using Zetbox.Client.Presentables;
+using Zetbox.Client.Presentables.Debugger;
+using Zetbox.Client.WPF.CustomControls;
+using Zetbox.Client.WPF.Toolkit;
 
-namespace Zetbox.Client.WPF.View
+namespace Zetbox.Client.WPF.View.Debugger
 {
     /// <summary>
-    /// Interaction logic for ZetboxDebuggerView.xaml
+    /// Interaction logic for CacheDebuggerDisplay.xaml
     /// </summary>
     [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
-    public partial class ZetboxDebuggerView : Window, IHasViewModel<ZetboxDebuggerAsViewModel>
+    public partial class CacheDebuggerDisplay : UserControl, IHasViewModel<CacheDebuggerViewModel>
     {
-        public ZetboxDebuggerView()
+        public CacheDebuggerDisplay()
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             InitializeComponent();
         }
 
-        public ZetboxDebuggerAsViewModel ViewModel
+        public CacheDebuggerViewModel ViewModel
         {
-            get { return (ZetboxDebuggerAsViewModel)DataContext; }
+            get { return (CacheDebuggerViewModel)WPFHelper.SanitizeDataContext(DataContext); }
         }
     }
 }

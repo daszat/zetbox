@@ -1,14 +1,10 @@
-﻿<Window x:Class="Zetbox.Client.WPF.View.ZetboxDebuggerView"
+﻿<UserControl x:Class="Zetbox.Client.WPF.View.Debugger.ZetboxContextDebuggerView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
         xmlns:view="clr-namespace:Zetbox.Client.WPF.View"
         xmlns:client="clr-namespace:Zetbox.Client.Presentables;assembly=Zetbox.Client"
-        Title="ZetboxContext Debugger"
-        Width="640"
-        Height="480"
-        WindowStyle="ToolWindow"
-        ShowInTaskbar="False">
+        xmlns:debugger="clr-namespace:Zetbox.Client.Presentables.Debugger;assembly=Zetbox.Client">
     <!--
     This file is part of zetbox.
 
@@ -26,11 +22,11 @@
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
     -->
 
-    <Window.Resources>
-        <DataTemplate DataType="{x:Type client:ZetboxContextModel}">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type debugger:ZetboxContextModel}">
             <TextBlock Text="{Binding Name}" />
         </DataTemplate>
-    </Window.Resources>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200" />
@@ -100,4 +96,4 @@
             </Expander>
         </DockPanel>
     </Grid>
-</Window>
+</UserControl>

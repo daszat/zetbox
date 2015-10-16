@@ -159,7 +159,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\CacheDebuggerDisplay.xaml">
+    <Page Include="View\Debugger\PerfMonDebuggerDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Debugger\RequestDebuggerDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Debugger\CacheDebuggerDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <Generator>MSBuild:Compile</Generator>
@@ -206,6 +214,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\Calendar\WeekCalendar\CalendarLedger.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Debugger\DebuggerWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -513,7 +525,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\ZetboxDebuggerView.xaml">
+    <Page Include="View\Debugger\ZetboxContextDebuggerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <Generator>MSBuild:Compile</Generator>
@@ -627,6 +639,15 @@
     </Compile>
     <Compile Include="View\Calendar\WorkScheduleRuleInstanceDisplay.xaml.cs">
       <DependentUpon>WorkScheduleRuleInstanceDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Debugger\PerfMonDebuggerDisplay.xaml.cs">
+      <DependentUpon>PerfMonDebuggerDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Debugger\RequestDebuggerDisplay.xaml.cs">
+      <DependentUpon>RequestDebuggerDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Debugger\DebuggerWindow.xaml.cs">
+      <DependentUpon>DebuggerWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\GUI\Panels.cs" />
     <Compile Include="View\ObjectEditor\ErrorList.xaml.cs">
@@ -746,7 +767,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>WpfToolkitResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="View\CacheDebuggerDisplay.xaml.cs">
+    <Compile Include="View\Debugger\CacheDebuggerDisplay.xaml.cs">
       <DependentUpon>CacheDebuggerDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Calendar\WeekCalendar\CalendarDay.xaml.cs">
@@ -869,8 +890,8 @@
     <Compile Include="View\GUI\DashboardDisplay.xaml.cs">
       <DependentUpon>DashboardDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ZetboxDebuggerView.xaml.cs">
-      <DependentUpon>ZetboxDebuggerView.xaml</DependentUpon>
+    <Compile Include="View\Debugger\ZetboxContextDebuggerView.xaml.cs">
+      <DependentUpon>ZetboxContextDebuggerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="UndoRedo.cs" />
     <Compile Include="View\ObjectEditor\DataObjectEditor.xaml.cs">

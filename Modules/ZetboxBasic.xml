@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2015-10-14T09:28:45.1712826Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2015-10-16T08:09:17.9405881Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="84f486f7-19fe-49ad-8e4a-6c05089e7684">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.650235Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
@@ -8000,7 +8000,7 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="bec5adb5-06fe-4c4f-8d72-69d4c359cb08">
     <GUI:DefaultEditorKind>7e30f1de-076c-42d3-80b2-9c1111a6cdfb</GUI:DefaultEditorKind>
-    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Deleted>true</GUI:Deleted>
     <GUI:Description>A list of errors from the currently active DataObjects</GUI:Description>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.ErrorListViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
@@ -8224,7 +8224,7 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
   <GUI:ViewDescriptor ExportGuid="b53bfe42-5122-47b2-8eab-b1e223073186">
     <GUI:ControlKind>7e30f1de-076c-42d3-80b2-9c1111a6cdfb</GUI:ControlKind>
     <GUI:ControlTypeRef>Zetbox.Client.WPF.View.ErrorListView, Zetbox.Client.WPF</GUI:ControlTypeRef>
-    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Deleted>true</GUI:Deleted>
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
@@ -8592,6 +8592,10 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Name>Zetbox.App.GUI.TextboxKind</GUI:Name>
   </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="22f7f299-fa15-4ea6-8d21-6da2996d737c">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>Zetbox.App.GUI.ZetboxDebuggerWindowKind</GUI:Name>
+  </GUI:ControlKind>
   <GUI:ControlKind ExportGuid="2445ac09-ac5e-4bfd-8bd3-166df6fc5176">
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Name>Zetbox.App.GUI.RangeFilterKind</GUI:Name>
@@ -8672,7 +8676,7 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
   </GUI:ControlKind>
   <GUI:ControlKind ExportGuid="59253ed1-a3a5-4574-b3bb-3c4fa535d21c">
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
-    <GUI:Name>Zetbox.App.GUI.ZetboxDebuggerKind</GUI:Name>
+    <GUI:Name>Zetbox.App.GUI.ZetboxContextDebuggerKind</GUI:Name>
   </GUI:ControlKind>
   <GUI:ControlKind ExportGuid="5b3cb902-ef6a-4d70-9b85-824a43bfbb8c">
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
@@ -8712,6 +8716,10 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Name>Zetbox.App.GUI.EmailStringEditorKind</GUI:Name>
     <GUI:Parent>2279b0a6-36b8-4c97-b1fd-9eb1710e74f3</GUI:Parent>
+  </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="7b8275b2-2760-44cd-a79d-33cef9f92e61">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>Zetbox.App.GUI.PerfMonDebuggerKind</GUI:Name>
   </GUI:ControlKind>
   <GUI:ControlKind ExportGuid="7e30f1de-076c-42d3-80b2-9c1111a6cdfb">
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
@@ -8880,6 +8888,10 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Name>Zetbox.App.GUI.RelationEditorKind</GUI:Name>
     <GUI:Parent>06bf9adc-c5bc-4552-abdc-18a96c527962</GUI:Parent>
+  </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="f8613842-c978-4db6-8568-20b0fd7ee1a0">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>Zetbox.App.GUI.RequestDebuggerKind</GUI:Name>
   </GUI:ControlKind>
   <GUI:ControlKind ExportGuid="f9092349-b263-4887-b605-cccac6a361bd">
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
@@ -43523,13 +43535,6 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.ActionViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
-  <GUI:ViewModelDescriptor ExportGuid="f87858ba-688f-495d-99c0-b52ad117a4c2">
-    <GUI:DefaultEditorKind>1b3c874d-bab3-4c34-9bbb-b8dbc44c16a8</GUI:DefaultEditorKind>
-    <GUI:Deleted>false</GUI:Deleted>
-    <GUI:Description>ViewModel for the Cache Debugger</GUI:Description>
-    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.CacheDebuggerViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
-  </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="7ec25c1a-c819-4219-9432-af1fdb0aaf63">
     <GUI:DefaultEditorKind>18c0afa2-61bc-4ecb-b1e9-47b33b294573</GUI:DefaultEditorKind>
     <GUI:Deleted>false</GUI:Deleted>
@@ -43550,6 +43555,41 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
     <GUI:Description>DataObjectViewModel with specific extensions for DataTypes</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.DataTypeViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="f87858ba-688f-495d-99c0-b52ad117a4c2">
+    <GUI:DefaultEditorKind>1b3c874d-bab3-4c34-9bbb-b8dbc44c16a8</GUI:DefaultEditorKind>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Description>A debugger ViewModel for the Cache Debugger</GUI:Description>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.Debugger.CacheDebuggerViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="c56bfb67-31c7-497c-974f-0a480edb8c27">
+    <GUI:DefaultEditorKind>22f7f299-fa15-4ea6-8d21-6da2996d737c</GUI:DefaultEditorKind>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Description>A debugger Window ViewModel</GUI:Description>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.Debugger.DebuggerWindowViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="48861012-dcf1-404d-838b-b088a1fba218">
+    <GUI:DefaultEditorKind>7b8275b2-2760-44cd-a79d-33cef9f92e61</GUI:DefaultEditorKind>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Description>A debugger ViewModel for PerfMon</GUI:Description>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.Debugger.PerfMonDebuggerViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="e59ed16e-4c3f-4705-b47b-46346efd4a08">
+    <GUI:DefaultEditorKind>f8613842-c978-4db6-8568-20b0fd7ee1a0</GUI:DefaultEditorKind>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Description>A debugger ViewModel for Requests</GUI:Description>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.Debugger.RequestDebuggerViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="b1df266b-a841-4669-9199-a6a01f6dbfcc">
+    <GUI:DefaultEditorKind>59253ed1-a3a5-4574-b3bb-3c4fa535d21c</GUI:DefaultEditorKind>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Description>A debugger window showing the used IZetboxContexts and their AttachedObjects</GUI:Description>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.Debugger.ZetboxContextDebuggerViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="a658dd55-98ef-4c55-978a-d9ce13386135">
     <GUI:DefaultEditorKind>017abeeb-c2fa-4203-83fb-e64bb418b0a1</GUI:DefaultEditorKind>
@@ -43828,13 +43868,6 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.ZetboxBase.TypeRefPropertyViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
-  <GUI:ViewModelDescriptor ExportGuid="b1df266b-a841-4669-9199-a6a01f6dbfcc">
-    <GUI:DefaultEditorKind>59253ed1-a3a5-4574-b3bb-3c4fa535d21c</GUI:DefaultEditorKind>
-    <GUI:Deleted>false</GUI:Deleted>
-    <GUI:Description>A debugger window showing the used IZetboxContexts and their AttachedObjects</GUI:Description>
-    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.ZetboxDebuggerAsViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
-  </GUI:ViewModelDescriptor>
   <GUI:ViewDescriptor ExportGuid="82c0bcbd-2184-4c36-adaf-60ad5e984dee">
     <GUI:ControlKind>6b5093bb-3ac0-4710-b30d-d72a50b09ee8</GUI:ControlKind>
     <GUI:ControlTypeRef>ERROR</GUI:ControlTypeRef>
@@ -43844,7 +43877,35 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="2509d44a-64df-468b-8980-04fae9bc1e9e">
     <GUI:ControlKind>1b3c874d-bab3-4c34-9bbb-b8dbc44c16a8</GUI:ControlKind>
-    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.CacheDebuggerDisplay, Zetbox.Client.WPF</GUI:ControlTypeRef>
+    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.Debugger.CacheDebuggerDisplay, Zetbox.Client.WPF</GUI:ControlTypeRef>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:Toolkit>0</GUI:Toolkit>
+  </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="f27f7a1b-a0d7-4d68-81bf-2e6d0a8bf68a">
+    <GUI:ControlKind>22f7f299-fa15-4ea6-8d21-6da2996d737c</GUI:ControlKind>
+    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.Debugger.DebuggerWindow, Zetbox.Client.WPF</GUI:ControlTypeRef>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:Toolkit>0</GUI:Toolkit>
+  </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="4cc14366-ef63-4f10-a306-6c8678321103">
+    <GUI:ControlKind>7b8275b2-2760-44cd-a79d-33cef9f92e61</GUI:ControlKind>
+    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.Debugger.PerfMonDebuggerDisplay, Zetbox.Client.WPF</GUI:ControlTypeRef>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:Toolkit>0</GUI:Toolkit>
+  </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="0a2ef2cb-1991-4936-8c4c-300bbb5858e1">
+    <GUI:ControlKind>f8613842-c978-4db6-8568-20b0fd7ee1a0</GUI:ControlKind>
+    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.Debugger.RequestDebuggerDisplay, Zetbox.Client.WPF</GUI:ControlTypeRef>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:Toolkit>0</GUI:Toolkit>
+  </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="074fdde3-165d-452a-84cc-3b2bd35ab4d6">
+    <GUI:ControlKind>59253ed1-a3a5-4574-b3bb-3c4fa535d21c</GUI:ControlKind>
+    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.Debugger.ZetboxContextDebuggerView, Zetbox.Client.WPF</GUI:ControlTypeRef>
     <GUI:Deleted>false</GUI:Deleted>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
@@ -44082,13 +44143,6 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
   <GUI:ViewDescriptor ExportGuid="7c8ec397-b0b9-4238-944b-67cd24f98fde">
     <GUI:ControlKind>a3f09ef3-2fac-4d7e-aea8-cbf0eab4de70</GUI:ControlKind>
     <GUI:ControlTypeRef>Zetbox.Client.WPF.View.ZetboxBase.TextDisplay, Zetbox.Client.WPF</GUI:ControlTypeRef>
-    <GUI:Deleted>false</GUI:Deleted>
-    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
-    <GUI:Toolkit>0</GUI:Toolkit>
-  </GUI:ViewDescriptor>
-  <GUI:ViewDescriptor ExportGuid="074fdde3-165d-452a-84cc-3b2bd35ab4d6">
-    <GUI:ControlKind>59253ed1-a3a5-4574-b3bb-3c4fa535d21c</GUI:ControlKind>
-    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.ZetboxDebuggerView, Zetbox.Client.WPF</GUI:ControlTypeRef>
     <GUI:Deleted>false</GUI:Deleted>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
