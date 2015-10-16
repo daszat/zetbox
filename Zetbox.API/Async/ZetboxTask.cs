@@ -555,7 +555,10 @@ namespace Zetbox.API.Async
             }
             finally
             {
-                RunFinallyActions();
+                if (State != ZbTaskState.ResultEventRunning && State != ZbTaskState.ResultEventsPosted)
+                {
+                    RunFinallyActions();
+                }
             }
         }
 
