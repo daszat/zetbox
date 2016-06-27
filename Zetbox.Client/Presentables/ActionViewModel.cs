@@ -169,10 +169,21 @@ namespace Zetbox.Client.Presentables
 
         private void HandleResult(object result, object callback)
         {
-            IDataObject obj = result as IDataObject;
+            var obj = result as IDataObject;
+            var list = result as IEnumerable<IDataObject>;
+
             if (obj != null && obj.Context == DataContext)
             {
                 this.ViewModelFactory.ShowModel(DataObjectViewModel.Fetch(this.ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj), true);
+            }
+            else if (list != null && list.All(i => i.Context == DataContext))
+            {
+                var first = true;
+                foreach (var o in list)
+                {
+                    this.ViewModelFactory.ShowModel(DataObjectViewModel.Fetch(this.ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), o), first);
+                    first = false;
+                }
             }
             else if (result != null)
             {
