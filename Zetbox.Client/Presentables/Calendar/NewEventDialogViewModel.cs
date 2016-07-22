@@ -76,8 +76,11 @@ namespace Zetbox.Client.Presentables.Calendar
 
         public EventViewModel CreateNew()
         {
-            if(_selectedInputViewModel == null) return null;
-            return _selectedInputViewModel.CreateNew();
+            if (_selectedInputViewModel != null)
+            {
+                return _selectedInputViewModel.CreateNew();
+            }
+            return null;
         }
 
         #region Commands
@@ -106,7 +109,12 @@ namespace Zetbox.Client.Presentables.Calendar
 
         public bool CanNew()
         {
-            return SelectedInputViewModel != null && SelectedInputViewModel.IsValid;
+            if(SelectedInputViewModel == null) return false;
+            if (!SelectedInputViewModel.IsValid)
+            {
+                SelectedInputViewModel.Validate();
+            }
+            return SelectedInputViewModel.IsValid;
         }
 
         public string CanNewReason()
@@ -119,6 +127,7 @@ namespace Zetbox.Client.Presentables.Calendar
 
         public void New()
         {
+            if (SelectedInputViewModel != null) SelectedInputViewModel.Validate();
             if (!CanNew()) return;
 
             Result = true;

@@ -156,6 +156,9 @@
   <data name="LocationLabel" xml:space="preserve">
     <value>Ort</value>
   </data>
+  <data name="NewEventErrors" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
   <data name="NewEventLabel" xml:space="preserve">
     <value>Neuer Termin</value>
   </data>

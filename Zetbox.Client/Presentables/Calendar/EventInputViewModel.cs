@@ -16,6 +16,7 @@ namespace Zetbox.Client.Presentables.Calendar
     {
         EventViewModel CreateNew();
         bool IsValid { get; }
+        ValidationError Validate();
         ValidationError ValidationError { get; }
     }
 
