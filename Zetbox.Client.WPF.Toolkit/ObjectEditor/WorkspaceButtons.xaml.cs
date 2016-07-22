@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Zetbox.Client.WPF.View.ObjectEditor
+namespace Zetbox.Client.WPF.ObjectEditor
 {
     /// <summary>
     /// Interaction logic for WorkspaceButtons.xaml

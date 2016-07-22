@@ -6,7 +6,7 @@
                   xmlns:client="clr-namespace:Zetbox.Client.Presentables;assembly=Zetbox.Client"
                   xmlns:commands="clr-namespace:Zetbox.Client.WPF.Commands;assembly=Zetbox.Client.WPF.Toolkit"
                   xmlns:tk="clr-namespace:Zetbox.Client.WPF.Toolkit;assembly=Zetbox.Client.WPF.Toolkit"
-                  xmlns:local="clr-namespace:Zetbox.Client.WPF.View.ObjectEditor"
+                  xmlns:tkeditor="clr-namespace:Zetbox.Client.WPF.ObjectEditor;assembly=Zetbox.Client.WPF.Toolkit"
                   Title="{Binding Name}"
                   Height="600"
                   Width="800"
@@ -33,7 +33,7 @@
         <Border DockPanel.Dock="Bottom"
                 Style="{StaticResource AreaGroup1BorderStyle}"
                 Margin="{StaticResource AreaGroup1Margin}">
-            <local:WorkspaceButtons />
+            <tkeditor:WorkspaceButtons />
         </Border>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -49,7 +49,7 @@
                       Header="{Binding ItemsLabel}"
                       Expanded="Expander_Expanded"
                       Collapsed="Expander_Collapsed">
-                <local:SideBarLeft />
+                <tkeditor:SideBarLeft />
             </Expander>
 
             <GridSplitter Grid.Column="1"

@@ -15,7 +15,7 @@ using Zetbox.Client.GUI;
 using Zetbox.Client.Presentables.ObjectEditor;
 using Zetbox.Client.WPF.Toolkit;
 
-namespace Zetbox.Client.WPF.View.ObjectEditor
+namespace Zetbox.Client.WPF.ObjectEditor
 {
     /// <summary>
     /// Interaction logic for SideBarLeft.xaml

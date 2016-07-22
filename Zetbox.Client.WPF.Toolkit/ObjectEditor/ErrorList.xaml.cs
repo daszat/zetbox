@@ -14,7 +14,7 @@ using System.Windows.Shapes;
 using Zetbox.Client.GUI;
 using Zetbox.Client.Presentables.ObjectEditor;
 
-namespace Zetbox.Client.WPF.View.ObjectEditor
+namespace Zetbox.Client.WPF.ObjectEditor
 {
     /// <summary>
     /// Interaction logic for ErrorList.xaml

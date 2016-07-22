@@ -121,6 +121,15 @@
     <Compile Include="CustomControls\TracingUserControl.cs" />
     <Compile Include="CustomControls\ZetboxDatePicker.cs" />
     <Compile Include="CustomControls\ZoomBorder.cs" />
+    <Compile Include="ObjectEditor\ErrorList.xaml.cs">
+      <DependentUpon>ErrorList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ObjectEditor\SideBarLeft.xaml.cs">
+      <DependentUpon>SideBarLeft.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ObjectEditor\WorkspaceButtons.xaml.cs">
+      <DependentUpon>WorkspaceButtons.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Styles\Controls.cs" />
     <Compile Include="Styles\Defaults.cs" />
     <Compile Include="Styles\Margin.cs" />
@@ -183,6 +192,18 @@
     <Page Include="CustomControls\ErrorReporter.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ObjectEditor\ErrorList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ObjectEditor\SideBarLeft.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ObjectEditor\WorkspaceButtons.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
