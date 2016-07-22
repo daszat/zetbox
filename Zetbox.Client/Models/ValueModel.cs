@@ -163,8 +163,13 @@ namespace Zetbox.Client.Models
         /// <summary>
         /// Checks constraints on the object and puts the results into the cache.
         /// </summary> 
-        public void Validate()
+        public virtual void Validate()
         {
+            if (!ReportErrors)
+            {
+                this.ValueError = "";
+                return;
+            }
         }
         #endregion
 
@@ -174,7 +179,7 @@ namespace Zetbox.Client.Models
         {
             get
             {
-                return this["Value"];
+                return this.ValueError;
             }
         }
 
@@ -182,7 +187,14 @@ namespace Zetbox.Client.Models
         {
             get
             {
-                return null;
+                if (columnName == "Value")
+                {
+                    return this.ValueError;
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
 
@@ -240,6 +252,13 @@ namespace Zetbox.Client.Models
             this.Value = (TValue)val;
         }
         #endregion
+
+        public override void Validate()
+        {
+            base.Validate();
+
+            ValueError = ReportErrors && !AllowNullInput && Value == null ? Zetbox.Client.Presentables.ValueViewModels.ValueViewModelResources.ErrorEmptyValue : "";
+        }
 
     }
 
