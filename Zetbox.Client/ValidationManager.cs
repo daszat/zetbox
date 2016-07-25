@@ -1,38 +1,75 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using Zetbox.Client.Presentables;
 
 namespace Zetbox.Client
 {
-    public class ValidationError
+    public class ValidationError : INotifyPropertyChanged
     {
-        public static ValidationError CreateIfNull(ValidationError current, ViewModel source)
-        {
-            return current ?? new ValidationError(source);
-        }
-
-        private ValidationError(ViewModel source)
+        public ValidationError(ViewModel source)
         {
             this.Source = source;
 
-            this.Errors = new List<string>();
-            this.Children = new List<ValidationError>();
+            this.Errors = new ObservableCollection<string>();
+            this.Errors.CollectionChanged += (s, e) =>
+            {
+                var temp = PropertyChanged;
+                if (temp != null)
+                {
+                    temp(this, new PropertyChangedEventArgs("HasErrors"));
+                }
+            };
+            this.Children = new ObservableCollection<ValidationError>();
         }
 
-        public ViewModel Source { get; set; }
-        public List<string> Errors { get; private set; }
-        public List<ValidationError> Children { get; private set; }
+        public ViewModel Source { get; private set; }
+        public ObservableCollection<string> Errors { get; private set; }
+        public ObservableCollection<ValidationError> Children { get; private set; }
+
+        public bool HasErrors
+        {
+            get
+            {
+                return Errors.Count > 0;
+            }
+        }
 
         public void AddError(string error)
         {
+            if (error == null) return;
+
             Errors.Add(error);
         }
 
         public void AddErrors(IEnumerable<string> errors)
         {
-            Errors.AddRange(errors);
+            if (errors == null) return;
+
+            foreach (var e in errors)
+            {
+                AddError(e);
+            }
+        }
+
+        public void AddChild(ValidationError child)
+        {
+            if (child == null) return;
+
+            Children.Add(child);
+        }
+
+        public void AddChildren(IEnumerable<ValidationError> children)
+        {
+            if (children == null) return;
+
+            foreach (var child in children)
+            {
+                AddChild(child);
+            }
         }
 
         public string Message
@@ -47,6 +84,8 @@ namespace Zetbox.Client
         {
             return Message;
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 
     public interface IValidationManager
@@ -145,7 +184,7 @@ namespace Zetbox.Client
             {
                 if(_errors == null)
                 {
-                    _errors = _validationRequests.Where(i => i.ValidationError != null).Select(i => i.ValidationError).ToList();
+                    _errors = _validationRequests.Where(i => i.ValidationError.HasErrors).Select(i => i.ValidationError).ToList();
                 }
                 return _errors;
             }

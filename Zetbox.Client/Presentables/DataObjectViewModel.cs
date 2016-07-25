@@ -619,21 +619,19 @@ namespace Zetbox.Client.Presentables
             var objError = Object.Validate();
             if (!objError.IsValid)
             {
-                result = EnsureError(result);
                 result.AddErrors(objError.Errors);
             }
 
             var errors = PropertyModels
-                .Select(i => { i.Validate(); return i.ValidationError; })
-                .Where(i => i != null)
+                .Select(i => i.Validate())
+                .Where(i => i.HasErrors)
                 .ToArray();
 
             if (errors.Any())
             {
-                result = EnsureError(result);
-                result.Errors.Add(DataObjectViewModelResources.ErrorInvalidProperties);
+                result.AddError(DataObjectViewModelResources.ErrorInvalidProperties);
                 result.Children.Clear();
-                result.Children.AddRange(errors);
+                result.AddChildren(errors);
             }
 
             return result;

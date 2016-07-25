@@ -272,14 +272,13 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             var result = base.Validate();
             if (!ValueModel.ReportErrors) return result;
 
-            if (IsValid)
+            if (NeedsValidation)
             {
                 ValueModel.Validate();
                 var error = ValueModel.Error;
 
                 if (!string.IsNullOrEmpty(error))
                 {
-                    result = EnsureError(result);
                     result.AddError(error);
                 }
             }
@@ -804,7 +803,6 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
             if (IsValid && !string.IsNullOrEmpty(_partialUserInputError))
             {
-                result = EnsureError(result);
                 result.Errors.Add(_partialUserInputError);
             }
 
@@ -889,7 +887,6 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
             if(IsValid && _illegalNullInput)
             {
-                result = EnsureError(result);
                 result.Errors.Add(ValueViewModelResources.ErrorEmptyValue);
             }
 
@@ -1695,15 +1692,14 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             var result = base.Validate();
             if (!ValueModel.ReportErrors) return result;
 
-            if (IsValid)
+            if (NeedsValidation)
             {
                 if (DatePartVisible)
                 {
                     _datePartViewModel.Validate();
                     if (!_datePartViewModel.IsValid)
                     {
-                        result = EnsureError(result);
-                        result.Errors.AddRange(_datePartViewModel.ValidationError.Errors);
+                        result.AddErrors(_datePartViewModel.ValidationError.Errors);
 
                         if ((!AllowNullInput && !_datePartViewModel.Value.HasValue)
                            || (_timePartViewModel.Value.HasValue && !_datePartViewModel.Value.HasValue))
@@ -1719,8 +1715,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                     _timePartViewModel.Validate();
                     if (!_timePartViewModel.IsValid)
                     {
-                        result = EnsureError(result);
-                        result.Errors.AddRange(_timePartViewModel.ValidationError.Errors);
+                        result.AddErrors(_timePartViewModel.ValidationError.Errors);
 
                         if ((!AllowNullInput && !_timePartViewModel.Value.HasValue)
                             || (_datePartViewModel.Value.HasValue && !_timePartViewModel.Value.HasValue))

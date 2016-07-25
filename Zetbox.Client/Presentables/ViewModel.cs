@@ -167,6 +167,7 @@ namespace Zetbox.Client.Presentables
         /// <param name="parent">The parent <see cref="ViewModel"/> to ...</param>
         protected ViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent)
         {
+            _errorCache = new ValidationError(this);
             _parent = parent;
             IsInDesignMode = false;
             _dependencies = dependencies;
@@ -504,7 +505,7 @@ namespace Zetbox.Client.Presentables
         #endregion
 
         #region Error management
-        private ValidationError _errorCache = null;
+        private ValidationError _errorCache;
         public virtual ValidationError ValidationError
         {
             get
@@ -517,33 +518,33 @@ namespace Zetbox.Client.Presentables
         {
             get
             {
-                return _errorCache == null;
+                return !_errorCache.HasErrors;
             }
         }
 
         /// <summary>
-        /// Validates this ViewModel. If implemented, this method should update a validation error
+        /// If there are errors, futher validation is not needed
+        /// If there are no errors, another validation yield return errors
+        /// </summary>
+        protected bool NeedsValidation
+        {
+            get
+            {
+                return !_errorCache.HasErrors;
+            }
+        }
+
+        /// <summary>
+        /// Validates this ViewModel. If implemented, this method should update add a validation error
         /// </summary>
         public virtual ValidationError Validate()
         {
             // First, clear the error
-            _errorCache = null;
+            _errorCache = new ValidationError(this);
             ValidationManager.Notify(this);
             OnErrorChanged();
 
-            // derived implementations may re-create an error object via CreateError()
-            return null;
-        }
-
-        /// <summary>
-        /// Ensures, that a ValidationError object is present. This method will not destroy a currently available error.
-        /// </summary>
-        /// <returns></returns>
-        protected ValidationError EnsureError(ValidationError current)
-        {
-            _errorCache = ValidationError.CreateIfNull(current, this);
-            ValidationManager.Notify(this);
-            OnErrorChanged();
+            // return error object for convenience
             return _errorCache;
         }
 

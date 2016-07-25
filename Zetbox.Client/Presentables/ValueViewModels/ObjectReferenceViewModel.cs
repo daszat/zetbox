@@ -734,7 +734,6 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
             if (!string.IsNullOrEmpty(SearchString) && Value == null)
             {
-                result = EnsureError(result);
                 result.Errors.Add(ObjectReferenceViewModelResources.Error_SearchString_NoValue);
             }
             return result;

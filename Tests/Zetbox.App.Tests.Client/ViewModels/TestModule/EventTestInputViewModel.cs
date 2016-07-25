@@ -34,14 +34,12 @@ namespace Zetbox.App.Projekte.Client.ViewModel.TestModule
             StartDate.Validate();
             if (!StartDate.IsValid)
             {
-                result = EnsureError(result);
                 result.Children.Add(StartDate.ValidationError);
             }
 
             EndDate.Validate();
             if (!EndDate.IsValid)
             {
-                result = EnsureError(result);
                 result.Children.Add(EndDate.ValidationError);
             }
 
