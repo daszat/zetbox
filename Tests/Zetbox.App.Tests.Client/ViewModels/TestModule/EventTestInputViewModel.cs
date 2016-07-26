@@ -43,7 +43,7 @@ namespace Zetbox.App.Projekte.Client.ViewModel.TestModule
                 ValidationError.Children.Add(EndDate.ValidationError);
             }
 
-            if (!IsValid)
+            if (ValidationError.Children.Any())
             {
                 ValidationError.AddError("Some properties are invalid");
             }

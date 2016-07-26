@@ -194,7 +194,7 @@ namespace Zetbox.Client.Presentables.Calendar
                 ValidationError.Children.Add(EndDate.ValidationError);
             }
 
-            if (!IsValid)
+            if (ValidationError.Children.Any())
             {
                 ValidationError.AddError(DataObjectViewModelResources.ErrorInvalidProperties);
             }
