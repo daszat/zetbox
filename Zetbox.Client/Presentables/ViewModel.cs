@@ -526,11 +526,11 @@ namespace Zetbox.Client.Presentables
         /// If there are errors, futher validation is not needed
         /// If there are no errors, another validation yield return errors
         /// </summary>
-        protected bool NeedsValidation
+        protected virtual bool NeedsValidation
         {
             get
             {
-                return !_errorCache.HasErrors;
+                return IsEnabled && !_errorCache.HasErrors;
             }
         }
 
@@ -539,9 +539,15 @@ namespace Zetbox.Client.Presentables
         /// </summary>
         public virtual ValidationError Validate()
         {
-            // First, clear the error
+            // first, clear the error
             _errorCache = new ValidationError(this);
-            ValidationManager.Notify(this);
+
+            // notify, if validation is needed
+            if (NeedsValidation)
+            {
+                ValidationManager.Notify(this);
+            }
+            // error is always changing
             OnErrorChanged();
 
             // return error object for convenience

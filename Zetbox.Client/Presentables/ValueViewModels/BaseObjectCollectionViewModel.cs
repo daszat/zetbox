@@ -564,6 +564,15 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             GetValueFromModelAsync().Wait();
         }
 
+        protected override bool NeedsValidation
+        {
+            get
+            {
+                return _valueCacheInititalized && base.NeedsValidation;
+            }
+        }
+
+        private bool _valueCacheInititalized = false;
         ReadOnlyObservableProjectedList<IDataObject, DataObjectViewModel> _valueCache;
         SortedWrapper<IDataObject> _wrapper;
         private ZbTask<IReadOnlyObservableList<DataObjectViewModel>> _fetchValueTask;
@@ -581,6 +590,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                             obj => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, GetWorkspace(), obj),
                             mdl => mdl.Object);
                         _valueCache.CollectionChanged += ValueListChanged;
+                        _valueCacheInititalized = true;
                         t.Result = _valueCache;
                     });
                 // TODO: Split here to avoid a stackoverflow exception!

@@ -727,10 +727,19 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             OnPropertyChanged("PossibleValuesAsync");
         }
 
+        protected override bool NeedsValidation
+        {
+            get
+            {
+                return _valueCacheInititalized && base.NeedsValidation;
+            }
+        }
+
         public override ValidationError Validate()
         {
             var result = base.Validate();
             if(!ValueModel.ReportErrors) return result;
+            if (!NeedsValidation) return result;
 
             if (!string.IsNullOrEmpty(SearchString) && Value == null)
             {
