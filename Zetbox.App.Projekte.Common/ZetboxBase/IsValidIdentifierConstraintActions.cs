@@ -36,8 +36,8 @@ namespace Zetbox.App.Base
                    object constrainedObjectParam,
                    object constrainedValueParam)
         {
-            e.Result = (constrainedValueParam != null) &&
-                System.CodeDom.Compiler.CodeGenerator.IsValidLanguageIndependentIdentifier((string)constrainedValueParam);
+            e.Result = string.IsNullOrEmpty(constrainedValueParam as string) 
+                    || System.CodeDom.Compiler.CodeGenerator.IsValidLanguageIndependentIdentifier((string)constrainedValueParam);
         }
 
         [Invocation]
