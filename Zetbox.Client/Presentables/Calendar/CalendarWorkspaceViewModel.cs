@@ -425,16 +425,17 @@ namespace Zetbox.Client.Presentables.Calendar
         {
             if (!CanNew()) return;
 
-            using (var ctx = ViewModelFactory.CreateNewContext())
+            using(var scope = ViewModelFactory.CreateNewScope())
             {
+                var ctx = scope.ViewModelFactory.CreateNewContext();
                 var calendar = ctx.Find<cal.CalendarBook>(SelectedItem.Calendar.ID);
-                var dlg = ViewModelFactory.CreateViewModel<NewEventDialogViewModel.Factory>().Invoke(ctx, null, calendar);
+                var dlg = scope.ViewModelFactory.CreateViewModel<NewEventDialogViewModel.Factory>().Invoke(ctx, null, calendar);
 
-                var args = new NewEventViewModelsArgs(ctx, ViewModelFactory, dlg, calendar, selectedDate, isAllDay);
+                var args = new NewEventViewModelsArgs(ctx, scope.ViewModelFactory, dlg, calendar, selectedDate, isAllDay);
                 calendar.GetNewEventViewModels(args);
 
                 dlg.InputViewModels = args.ViewModels;
-                ViewModelFactory.ShowDialog(dlg);
+                scope.ViewModelFactory.ShowDialog(dlg);
                 if (dlg.Result == true)
                 {
                     var newItem = dlg.CreateNew();

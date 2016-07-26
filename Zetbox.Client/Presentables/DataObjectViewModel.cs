@@ -608,18 +608,18 @@ namespace Zetbox.Client.Presentables
             }
         }
 
-        public override ValidationError Validate()
+        protected override void DoValidate()
         {
-            var result = base.Validate();
+            base.DoValidate();
             // No access rights, no validation
-            if (Object.CurrentAccessRights.HasNoRights()) return result;
+            if (Object.CurrentAccessRights.HasNoRights()) return;
             // Deleted or not attacted -> no validation
-            if(Object.ObjectState.In(DataObjectState.Deleted, DataObjectState.Detached, DataObjectState.NotDeserialized)) return result;
+            if(Object.ObjectState.In(DataObjectState.Deleted, DataObjectState.Detached, DataObjectState.NotDeserialized)) return;
 
             var objError = Object.Validate();
             if (!objError.IsValid)
             {
-                result.AddErrors(objError.Errors);
+                ValidationError.AddErrors(objError.Errors);
             }
 
             if (_propertyModels != null)
@@ -627,18 +627,17 @@ namespace Zetbox.Client.Presentables
                 // Validate only, if properties are loaded
                 var errors = PropertyModels
                     .Select(i => i.Validate())
+                    .ToArray()
                     .Where(i => i.HasErrors)
                     .ToArray();
 
                 if (errors.Any())
                 {
-                    result.AddError(DataObjectViewModelResources.ErrorInvalidProperties);
-                    result.Children.Clear();
-                    result.AddChildren(errors);
+                    ValidationError.AddError(DataObjectViewModelResources.ErrorInvalidProperties);
+                    ValidationError.Children.Clear();
+                    ValidationError.AddChildren(errors);
                 }
             }
-
-            return result;
         }
 
         #endregion

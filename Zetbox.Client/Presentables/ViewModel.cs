@@ -506,7 +506,7 @@ namespace Zetbox.Client.Presentables
 
         #region Error management
         private ValidationError _errorCache;
-        public virtual ValidationError ValidationError
+        public ValidationError ValidationError
         {
             get
             {
@@ -530,28 +530,36 @@ namespace Zetbox.Client.Presentables
         {
             get
             {
-                return IsEnabled && !_errorCache.HasErrors;
+                return IsEnabled;
             }
+        }
+
+        public ValidationError Validate()
+        {
+            // Reset error cache
+            _errorCache.Errors.Clear();
+            _errorCache.Children.Clear(); 
+            
+            DoValidate();
+
+            if(_errorCache == null)
+            {
+                _errorCache = new ValidationError(this);
+            }
+
+            // notify
+            ValidationManager.Notify(this);
+            OnErrorChanged();
+
+            // return error object for convenience
+            return _errorCache;
         }
 
         /// <summary>
         /// Validates this ViewModel. If implemented, this method should update add a validation error
         /// </summary>
-        public virtual ValidationError Validate()
+        protected virtual void DoValidate()
         {
-            // first, clear the error
-            _errorCache = new ValidationError(this);
-
-            // notify, if validation is needed
-            if (NeedsValidation)
-            {
-                ValidationManager.Notify(this);
-            }
-            // error is always changing
-            OnErrorChanged();
-
-            // return error object for convenience
-            return _errorCache;
         }
 
         private void OnErrorChanged()
