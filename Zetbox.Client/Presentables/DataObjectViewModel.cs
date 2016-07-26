@@ -622,16 +622,20 @@ namespace Zetbox.Client.Presentables
                 result.AddErrors(objError.Errors);
             }
 
-            var errors = PropertyModels
-                .Select(i => i.Validate())
-                .Where(i => i.HasErrors)
-                .ToArray();
-
-            if (errors.Any())
+            if (_propertyModels != null)
             {
-                result.AddError(DataObjectViewModelResources.ErrorInvalidProperties);
-                result.Children.Clear();
-                result.AddChildren(errors);
+                // Validate only, if properties are loaded
+                var errors = PropertyModels
+                    .Select(i => i.Validate())
+                    .Where(i => i.HasErrors)
+                    .ToArray();
+
+                if (errors.Any())
+                {
+                    result.AddError(DataObjectViewModelResources.ErrorInvalidProperties);
+                    result.Children.Clear();
+                    result.AddChildren(errors);
+                }
             }
 
             return result;
