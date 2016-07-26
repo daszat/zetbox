@@ -174,12 +174,6 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 }
             }
         }
-
-        public override string Name
-        {
-            get { return Value == null ? "(null)" : "Reference to " + Value.Name; }
-        }
-
         #endregion
 
         #region Commands

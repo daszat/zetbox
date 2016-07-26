@@ -179,11 +179,6 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         #endregion
 
         #region Name
-        public override string Name
-        {
-            get { return ReferencedObject != null ? ReferencedObject.Name : string.Empty; }
-        }
-
         public override string ToString()
         {
             return Name;
