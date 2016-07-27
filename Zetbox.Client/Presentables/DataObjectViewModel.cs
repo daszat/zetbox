@@ -608,13 +608,25 @@ namespace Zetbox.Client.Presentables
             }
         }
 
+        protected override bool NeedsValidation
+        {
+            get
+            {
+                if (!base.NeedsValidation) return false;
+
+                // No access rights, no validation
+                if (Object.CurrentAccessRights.HasNoRights()) return false;
+                // Deleted, not attacted or unmodified -> no validation
+                if (Object.ObjectState.In(DataObjectState.Deleted, DataObjectState.Unmodified, DataObjectState.Detached, DataObjectState.NotDeserialized)) return false;
+
+                return true;
+            }
+        }
+
         protected override void DoValidate()
         {
             base.DoValidate();
-            // No access rights, no validation
-            if (Object.CurrentAccessRights.HasNoRights()) return;
-            // Deleted or not attacted -> no validation
-            if(Object.ObjectState.In(DataObjectState.Deleted, DataObjectState.Detached, DataObjectState.NotDeserialized)) return;
+            if (!NeedsValidation) return;
 
             var objError = Object.Validate();
             if (!objError.IsValid)
