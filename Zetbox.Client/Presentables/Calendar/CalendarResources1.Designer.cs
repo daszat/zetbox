@@ -160,6 +160,15 @@ namespace Zetbox.Client.Presentables.Calendar {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Until date must be after from date.
+        /// </summary>
+        internal static string ErrorUnitlDate {
+            get {
+                return ResourceManager.GetString("ErrorUnitlDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to From.
         /// </summary>
         internal static string FromLabel {

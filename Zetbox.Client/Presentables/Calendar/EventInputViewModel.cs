@@ -189,6 +189,10 @@ namespace Zetbox.Client.Presentables.Calendar
             }
 
             EndDate.Validate();
+            if (StartDate.Value.HasValue && EndDate.Value.HasValue && EndDate.Value.Value < StartDate.Value.Value)
+            {
+                EndDate.ValidationError.AddError(CalendarResources.ErrorUnitlDate);
+            }
             if (!EndDate.IsValid)
             {
                 ValidationError.Children.Add(EndDate.ValidationError);

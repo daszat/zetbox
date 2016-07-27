@@ -150,6 +150,9 @@
   <data name="DlgDateRangeTitle" xml:space="preserve">
     <value>Bereich angeben</value>
   </data>
+  <data name="ErrorUnitlDate" xml:space="preserve">
+    <value>Bis Datum muss nach dem Von Datum sein</value>
+  </data>
   <data name="FromLabel" xml:space="preserve">
     <value>Von</value>
   </data>
