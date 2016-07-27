@@ -568,7 +568,14 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             get
             {
-                return _valueCacheInititalized && base.NeedsValidation;
+                // Shortcut
+                if (!base.NeedsValidation) return false;
+
+                // TODO: Hack! New Objects needs a validation as the value cache might not be initialized, because noone set a value.
+                var obj = (ObjectCollectionModel as Zetbox.Client.Models.BasePropertyValueModel).IfNotNull(i => i.Object as IDataObject);
+                if (obj != null && obj.ObjectState == DataObjectState.New) return true;
+
+                return _valueCacheInititalized;
             }
         }
 
