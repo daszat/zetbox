@@ -168,6 +168,9 @@ namespace Zetbox.Client.Presentables
         protected ViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent)
         {
             _errorCache = new ValidationError(this);
+            _errorCache.Errors.CollectionChanged += (s, e) => OnErrorChanged();
+            _errorCache.Children.CollectionChanged += (s, e) => OnErrorChanged();
+
             _parent = parent;
             IsInDesignMode = false;
             _dependencies = dependencies;
