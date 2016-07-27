@@ -446,7 +446,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         }
                     });
             dlg.FollowRelationsOne = true;
-            dlg.FollowRelationsMany = false; // TODO: Not working yet, linq predicate is wrong
+            dlg.FollowRelationsMany = true;
             ViewModelFactory.ShowDialog(dlg);
         }
 

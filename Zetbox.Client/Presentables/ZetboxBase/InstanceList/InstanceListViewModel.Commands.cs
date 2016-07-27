@@ -242,6 +242,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                     _type,
                     props => { });
             dlg.FollowRelationsOne = true;
+            dlg.FollowRelationsMany = true;
+            dlg.FollowRelationsManyDeep = false; // Only first level!
             dlg.MultiSelect = true;
             dlg.UpdateInitialSelectedProperties(this.DisplayedProperties);
             dlg.SelectedPropertySelectionChanged += (s, e) =>

@@ -52,7 +52,6 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         #region Configuration
         private bool _followCompoundObjects = false;
-
         public bool FollowCompoundObjects
         {
             get { return _followCompoundObjects; }
@@ -73,17 +72,6 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        private bool _showCalculated = true;
-        public bool ShowCalculated
-        {
-            get { return _showCalculated; }
-            set
-            {
-                _showCalculated = value;
-                OnPropertyChanged("ShowCalculated");
-            }
-        }
-
         private bool _followRelationsMany = false;
         public bool FollowRelationsMany
         {
@@ -92,10 +80,31 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             {
                 _followRelationsMany = value;
                 OnPropertyChanged("FollowRelationsMany");
-                if (value == true)
-                {
-                    Logging.Client.Warn("PropertySelectionTaskViewModel.FollowRelationsMany was set to true, this is not supported by the linq predicate builder yet");
-                }
+            }
+        }
+
+        private bool _followRelationsManyDeep = true;
+        /// <summary>
+        /// If true and FollowRelationsMany is set to true, n:m relations are followed unlimited.  If false, only the first level is shown.
+        /// </summary>
+        public bool FollowRelationsManyDeep
+        {
+            get { return _followRelationsManyDeep; }
+            set
+            {
+                _followRelationsManyDeep = value;
+                OnPropertyChanged("FollowRelationsManyDeep");
+            }
+        }
+
+        private bool _showCalculated = true;
+        public bool ShowCalculated
+        {
+            get { return _showCalculated; }
+            set
+            {
+                _showCalculated = value;
+                OnPropertyChanged("ShowCalculated");
             }
         }
         #endregion
@@ -372,11 +381,11 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                             _PossibleValues.Add(ViewModelFactory.CreateViewModel<SelectedPropertyViewModel.Factory>().Invoke(DataContext, Parent, prop, this));
                         }
                     }
-                    if ((Parent.FollowRelationsOne || Parent.FollowRelationsMany) && _prop is ObjectReferenceProperty)
+                    if ((Parent.FollowRelationsOne || (Parent.FollowRelationsMany && Parent.FollowRelationsManyDeep)) && _prop is ObjectReferenceProperty)
                     {
                         var objRefProp = (ObjectReferenceProperty)_prop;
-                        if ((Parent.FollowRelationsOne && !objRefProp.GetIsList()) ||
-                            (Parent.FollowRelationsMany && objRefProp.GetIsList()))
+                        if ((Parent.FollowRelationsOne && !objRefProp.GetIsList())
+                         || (Parent.FollowRelationsMany && Parent.FollowRelationsManyDeep && objRefProp.GetIsList()))
                         {
                             foreach (var prop in objRefProp.GetReferencedObjectClass().Properties)
                             {
