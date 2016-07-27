@@ -571,8 +571,13 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 // Shortcut
                 if (!base.NeedsValidation) return false;
 
-                // TODO: Hack! New Objects needs a validation as the value cache might not be initialized, because noone set a value.
+                // TODO: Hack! 
                 var obj = (ObjectCollectionModel as Zetbox.Client.Models.BasePropertyValueModel).IfNotNull(i => i.Object as IDataObject);
+
+                // Non-Properties should always be validated
+                if (obj == null) return true;
+
+                // New Objects needs a validation as the value cache might not be initialized, because no one set a value.
                 if (obj != null && obj.ObjectState == DataObjectState.New) return true;
 
                 return _valueCacheInititalized;
