@@ -144,6 +144,11 @@ namespace Zetbox.Client.Models
             this.IsServerSideFilter = true;
         }
 
+        public override string ToString()
+        {
+            return string.Format("{0}: {1} ({2})", this.GetType().Name, Label, ValueSource);
+        }
+
         void FilterArguments_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             foreach (FilterArgumentConfig cfg in e.NewItems)

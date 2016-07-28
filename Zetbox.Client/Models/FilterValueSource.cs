@@ -55,6 +55,11 @@ namespace Zetbox.Client.Models
 
         #endregion
 
+        public override string ToString()
+        {
+            return Expression.Replace(FilterModel.PREDICATE_PLACEHOLDER, "");
+        }
+
         public static IFilterValueSource FromProperty(Property p)
         {
             if (p == null) throw new ArgumentNullException("p");
