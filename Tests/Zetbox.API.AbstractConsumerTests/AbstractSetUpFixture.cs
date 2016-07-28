@@ -102,7 +102,7 @@ namespace Zetbox.API.AbstractConsumerTests
                 .RegisterType<MockedViewModelFactory>()
                 .As<MockedViewModelFactory>()
                 .As<IViewModelFactory>()
-                .SingleInstance(); // Must be a single instance as a new scope might open a model
+                .InstancePerLifetimeScope();
 
             builder
                 .RegisterType<PerfCounterDispatcher>()
