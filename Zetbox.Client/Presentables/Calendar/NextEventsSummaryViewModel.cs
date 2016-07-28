@@ -37,6 +37,12 @@ namespace Zetbox.Client.Presentables.Calendar
             _timer.Start();
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            _timer.Dispose();
+            base.Dispose(disposing);
+        }
+
         public override string Name
         {
             get { return "NextEventsSummaryViewModel"; }
