@@ -22,12 +22,15 @@ namespace Zetbox.Client.Models
     using System.Text;
     using Zetbox.App.Base;
     using Zetbox.API;
+    using Zetbox.App.Extensions;
 
     public class FilterValueSource : IFilterValueSource
     {
-        private FilterValueSource(string expression)
+        private FilterValueSource(string expression, string lastInnerExpression)
         {
             this.Expression = expression;
+            this.LastInnerExpression = lastInnerExpression;
+            this.OuterExpression = expression.Replace(lastInnerExpression + FilterModel.PREDICATE_PLACEHOLDER, FilterModel.PREDICATE_PLACEHOLDER);
         }
 
         #region IFilterValueSource Members
@@ -38,23 +41,56 @@ namespace Zetbox.Client.Models
             private set;
         }
 
+        public string LastInnerExpression
+        {
+            get;
+            private set;
+        }
+
+        public string OuterExpression 
+        { 
+            get; 
+            private set; 
+        }
+
         #endregion
 
         public static IFilterValueSource FromProperty(Property p)
         {
             if (p == null) throw new ArgumentNullException("p");
-            return new FilterValueSource(p.Name);
+            return new FilterValueSource(p.Name + FilterModel.PREDICATE_PLACEHOLDER, p.Name);
         }
 
-        public static IFilterValueSource FromProperty(IEnumerable<Property> p)
+        public static IFilterValueSource FromProperty(IEnumerable<Property> properties)
         {
-            if (p == null) throw new ArgumentNullException("p");
-            return new FilterValueSource(string.Join(".", p.Select(i => i.Name).ToArray()));
+            if (properties == null) throw new ArgumentNullException("properties");
+            if (!properties.Any()) throw new ArgumentOutOfRangeException("properties", "At least one property is requiered");
+
+            var result = FilterModel.PREDICATE_PLACEHOLDER;
+            var isInList = false;
+
+            foreach (var p in properties)
+            {
+                if (!isInList)
+                {
+                    result = result.Replace(FilterModel.PREDICATE_PLACEHOLDER, string.Format(".{0}{1}", p.Name, FilterModel.PREDICATE_PLACEHOLDER));
+                }
+                else
+                {
+                    result = result.Replace(FilterModel.PREDICATE_PLACEHOLDER, string.Format(".Any({0}{1})", p.Name, FilterModel.PREDICATE_PLACEHOLDER));
+                }
+
+                isInList = p.GetIsList();
+            }
+
+            result = result.Trim('.');
+
+            return new FilterValueSource(result, string.Join(".", properties.Reverse().TakeWhile(i => !i.GetIsList()).Reverse().Select(i => i.Name)));
         }
 
         public static IFilterValueSource FromExpression(string exp)
         {
-            return new FilterValueSource(exp);
+            return new FilterValueSource(exp, exp);
         }
     }
 }
