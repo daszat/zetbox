@@ -38,7 +38,7 @@ namespace Zetbox.API.AbstractConsumerTests
             throw new NotImplementedException();
         }
 
-        private bool _decisionFromUser = false;
+        private static bool _decisionFromUser = false;
         public void SetDecisionFromUser(bool d)
         {
             _decisionFromUser = d;
@@ -59,14 +59,14 @@ namespace Zetbox.API.AbstractConsumerTests
             throw new NotImplementedException();
         }
 
-        public ViewModel LastShownModel { get; private set; }
+        public static ViewModel LastShownModel { get; private set; }
         protected override void ShowInView(ViewModel mdl, object view, bool activate, bool asDialog, ViewModel ownerMdl)
         {
             LastShownModel = mdl;
         }
 
-        public string LastShownCaption { get; private set; }
-        public string LastShownMessage { get; private set; }
+        public static string LastShownCaption { get; private set; }
+        public static string LastShownMessage { get; private set; }
         public override void ShowMessage(string message, string caption)
         {
             LastShownCaption = caption;
@@ -87,7 +87,7 @@ namespace Zetbox.API.AbstractConsumerTests
         public T GetLastShownModel<T>()
             where T : ViewModel
         {
-            return (T)this.LastShownModel;
+            return (T)LastShownModel;
         }
     }
 }
