@@ -59,24 +59,36 @@ namespace Zetbox.API.AbstractConsumerTests
             throw new NotImplementedException();
         }
 
-        public static ViewModel LastShownModel { get; private set; }
-        protected override void ShowInView(ViewModel mdl, object view, bool activate, bool asDialog, ViewModel ownerMdl)
+        private static ViewModel _lastShownModel;
+        public ViewModel LastShownModel
         {
-            LastShownModel = mdl;
+            get
+            {
+                return _lastShownModel;
+            }
         }
 
-        public static string LastShownCaption { get; private set; }
-        public static string LastShownMessage { get; private set; }
+        protected override void ShowInView(ViewModel mdl, object view, bool activate, bool asDialog, ViewModel ownerMdl)
+        {
+            _lastShownModel = mdl;
+        }
+
+        private static string _lastShownCaption;
+        private static string _lastShownMessage;
+
+        public string LastShownCaption { get { return _lastShownCaption; } }
+        public string LastShownMessage { get { return _lastShownMessage; } }
+
         public override void ShowMessage(string message, string caption)
         {
-            LastShownCaption = caption;
-            LastShownMessage = message;
+            _lastShownCaption = caption;
+            _lastShownMessage = message;
         }
 
         public void ResetMock()
         {
-            LastShownMessage = LastShownCaption = string.Empty;
-            LastShownModel = null;
+            _lastShownMessage = _lastShownCaption = string.Empty;
+            _lastShownModel = null;
         }
 
         public override Zetbox.App.GUI.Toolkit Toolkit
