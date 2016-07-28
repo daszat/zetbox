@@ -1114,7 +1114,7 @@ namespace Zetbox.Client.Models
 
         protected override string GetPredicate()
         {
-            // Remove a possible PREDICATE_PLACEHOLDER - there shouldn't be one
+            // Remove PREDICATE_PLACEHOLDER - a OptionalPredicate contains the ready made expression
             return ValueSource.Expression.Replace(PREDICATE_PLACEHOLDER, "");
         }
 

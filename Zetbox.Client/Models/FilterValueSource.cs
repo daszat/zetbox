@@ -90,7 +90,7 @@ namespace Zetbox.Client.Models
 
         public static IFilterValueSource FromExpression(string exp)
         {
-            return new FilterValueSource(exp, exp);
+            return new FilterValueSource(exp + FilterModel.PREDICATE_PLACEHOLDER, exp);
         }
     }
 }
