@@ -46,7 +46,8 @@ namespace Zetbox.App.Base
         {
             using (Logging.Log.InfoTraceMethodCall(assembly.Name))
             {
-                var ctx = assembly.Context;
+                var newScope = _mdlFactory.CreateNewScope();
+                var ctx = newScope.ViewModelFactory.CreateNewContext();
 
                 try
                 {
@@ -61,18 +62,19 @@ namespace Zetbox.App.Base
 
                     if (newDescriptors.Count > 0)
                     {
-                        var workSpace = _mdlFactory.CreateViewModel<Zetbox.Client.Presentables.ObjectEditor.WorkspaceViewModel.Factory>().Invoke(ctx, null);
+                        var workSpace = Zetbox.Client.Presentables.ObjectEditor.WorkspaceViewModel.Create(newScope.Scope, ctx);
                         foreach (IDataObject i in newDescriptors)
                         {
-                            workSpace.AddItem(DataObjectViewModel.Fetch(_mdlFactory, ctx, workSpace, i));
+                            workSpace.AddItem(DataObjectViewModel.Fetch(newScope.ViewModelFactory, ctx, workSpace, i));
                         }
 
-                        _mdlFactory.ShowModel(workSpace, true);
+                        newScope.ViewModelFactory.ShowModel(workSpace, true);
                         e.Result = true;
                     }
                     else
                     {
-                        _mdlFactory.ShowMessage("Regenerating TypeRefs finished successfully, no new Descriptors or Assemblies found", "Success");
+                        newScope.ViewModelFactory.ShowMessage("Regenerating TypeRefs finished successfully, no new Descriptors or Assemblies found", "Success");
+                        newScope.Dispose();
                         e.Result = false;
                     }
                 }
