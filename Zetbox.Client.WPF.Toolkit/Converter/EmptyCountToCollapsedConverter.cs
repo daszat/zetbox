@@ -23,7 +23,7 @@ namespace Zetbox.Client.WPF.Converter
     using System.Windows;
     using System.Windows.Data;
 
-    [ValueConversion(typeof(string), typeof(Visibility))]
+    [ValueConversion(typeof(IEnumerable), typeof(Visibility))]
     public sealed class EmptyCountToCollapsedConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
