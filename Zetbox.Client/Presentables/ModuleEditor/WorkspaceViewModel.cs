@@ -260,7 +260,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             lstMdl.AllowAddNew = true;
             lstMdl.AllowDelete = true;
             lstMdl.ViewMethod = InstanceListViewMethod.Details;
-            var toRemove = lstMdl.Filter.SingleOrDefault(f => f.ValueSource != null && f.ValueSource.Expression == "Module");
+            var toRemove = lstMdl.Filter.SingleOrDefault(f => f.ValueSource != null && f.ValueSource.LastInnerExpression == "Module");
             if (toRemove != null)
                 lstMdl.FilterList.RemoveFilter(toRemove);
             lstMdl.EndInit();
