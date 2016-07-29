@@ -215,6 +215,15 @@ namespace Zetbox.App.Base
                             newParam.Description = param.Description;
                             newParam.IsList = param.IsList;
                             newParam.IsReturnParameter = param.IsReturnParameter;
+
+                            if(param is CLRObjectParameter)
+                            {
+                                ((CLRObjectParameter)newParam).TypeRef = ((CLRObjectParameter)param).TypeRef;
+                            }
+                            else if (param is ObjectReferenceParameter)
+                            {
+                                ((ObjectReferenceParameter)newParam).ObjectClass = ((ObjectReferenceParameter)param).ObjectClass;
+                            }
                         }
                     }
                 }
