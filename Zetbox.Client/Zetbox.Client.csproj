@@ -253,6 +253,12 @@
     <Compile Include="Presentables\ModuleEditor\GroupingTreeItemViewModel.cs" />
     <Compile Include="Presentables\ModuleEditor\TreeItemIconInstanceListViewModel.cs" />
     <Compile Include="Presentables\ObjectBrowser\ObjectClassViewModel.cs" />
+    <Compile Include="Presentables\ObjectEditor\MergeObjectsTaskViewModel.cs" />
+    <Compile Include="Presentables\ObjectEditor\MergeObjectsTaskViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MergeObjectsTaskViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Presentables\PropertiesPrewiewViewModel.cs" />
     <Compile Include="Presentables\TextViewModel.cs" />
     <Compile Include="Presentables\ValueViewModels\CompoundCollectionViewModel.cs" />
@@ -509,6 +515,10 @@
     <EmbeddedResource Include="Presentables\GUI\NavigatorViewModelResources.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="Presentables\GUI\SavedListConfiguratorViewModelResources.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="Presentables\ObjectBrowser\WorkspaceViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\ObjectEditor\MergeObjectsTaskViewModelResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MergeObjectsTaskViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Presentables\ObjectEditor\WorkspaceViewModelResources.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="Presentables\ParameterInputTaskViewModelResources.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="Presentables\SimpleDataObjectEditorTaskViewModelResources.x-zb-Pseudo.resx" />

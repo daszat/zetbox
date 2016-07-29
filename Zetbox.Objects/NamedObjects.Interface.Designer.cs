@@ -3114,6 +3114,13 @@ namespace Zetbox {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("94ea407f-9816-470e-9e52-6607830c7c0b"); }
                                 }
                             }
+                            public static class Task_Methods
+                            {
+                                public static TypedGuid<global::Zetbox.App.Base.Method> GetMergeableProperties
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Method>("88795123-b204-4239-9f3a-9221e5ba4d94"); }
+                                }
+                            }
                             public static class Task_Properties
                             {
                                 public static TypedGuid<global::Zetbox.App.Base.Property> Aufwand
@@ -4530,6 +4537,10 @@ namespace Zetbox {
                 public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_LauncherKind
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("90d5ff7f-0c82-4278-bb8d-49c240f6bc2c"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_MergeObjectsTaskKind
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("e9f6ae36-3fd3-4363-9c13-1febf5f52059"); }
                 }
                 public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_MonthEditorKind
                 {
@@ -7875,6 +7886,10 @@ namespace Zetbox {
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ObjectClassViewModel
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("6b368136-addd-4e86-ad29-3d2158a00de5"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ObjectEditor_MergeObjectsTaskViewModel
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("dc0f77ee-17b4-4a3f-b95f-67828f27f454"); }
                 }
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ObjectEditor_WorkspaceViewModel
                 {

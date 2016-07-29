@@ -463,6 +463,48 @@ namespace Zetbox.Client.Presentables
         }
         #endregion
 
+        #region Commands
+        protected override ObservableCollection<ICommandViewModel> CreateCommands()
+        {
+            var result = base.CreateCommands();
+
+            if (Object.GetObjectClass(FrozenContext).ImplementsIMergeable() && GetWorkspace() is IMultipleInstancesManager)
+            {
+                result.Add(MergeCommand);
+            }
+
+            return result;
+        }
+
+        #region Merge command
+        private ICommandViewModel _MergeCommand = null;
+        public ICommandViewModel MergeCommand
+        {
+            get
+            {
+                if (_MergeCommand == null)
+                {
+                    _MergeCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
+                        DataObjectViewModelResources.MergeCommand_Name,
+                        DataObjectViewModelResources.MergeCommand_Tooltip,
+                        Merge, null, null);
+                    _MergeCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.reload_png.Find(FrozenContext));
+                }
+                return _MergeCommand;
+            }
+        }
+
+        public void Merge()
+        {
+            var ws = (IMultipleInstancesManager)GetWorkspace();
+
+            var task = ViewModelFactory.CreateViewModel<ObjectEditor.MergeObjectsTaskViewModel.Factory>().Invoke(DataContext, GetWorkspace(), (IMergeable)Object, null);
+            ws.AddItem(task);
+            ws.SelectedItem = task;
+        }
+        #endregion
+        #endregion
+
         #region Utilities and UI callbacks
 
         private void InitialiseToStringCache()

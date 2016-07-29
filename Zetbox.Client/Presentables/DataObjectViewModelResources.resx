@@ -123,4 +123,10 @@
   <data name="ErrorInvalidProperties" xml:space="preserve">
     <value>Object has some invalid properties</value>
   </data>
+  <data name="MergeCommand_Name" xml:space="preserve">
+    <value>Merge</value>
+  </data>
+  <data name="MergeCommand_Tooltip" xml:space="preserve">
+    <value>Merge another object to this one</value>
+  </data>
 </root>

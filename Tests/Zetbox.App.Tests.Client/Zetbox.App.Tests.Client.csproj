@@ -60,6 +60,7 @@
       <DependentUpon>DocumentStyles.cst</DependentUpon>
     </Compile>
     <Compile Include="DerivedReportTest\ProjectReport.cs" />
+    <Compile Include="Projekte\TaskActions.cs" />
     <Compile Include="Projekte\ProjektActions.cs" />
     <Compile Include="Projekte\Reporting\Common\DocumentInfo.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -155,4 +156,3 @@
   </Target>
   -->
 </Project>
-

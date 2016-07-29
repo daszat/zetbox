@@ -161,6 +161,33 @@ namespace Zetbox.Client.Presentables.ZetboxBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Merge.
+        /// </summary>
+        internal static string MergeCommand {
+            get {
+                return ResourceManager.GetString("MergeCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select two objects.
+        /// </summary>
+        internal static string MergeCommand_Reason {
+            get {
+                return ResourceManager.GetString("MergeCommand_Reason", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Merges two objects into one.
+        /// </summary>
+        internal static string MergeCommand_Tooltip {
+            get {
+                return ResourceManager.GetString("MergeCommand_Tooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to List of {0}.
         /// </summary>
         internal static string Name {

@@ -46,6 +46,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
             if (AllowExport) result.Add(ExportContainerCommand);
 
+            if (AllowMerge) result.Add(MergeCommand);
+
             return result;
         }
 
@@ -62,6 +64,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             if (commandsStore.Contains(RefreshCommand)) commandsStore.Remove(RefreshCommand);
             if (!AllowDelete && commandsStore.Contains(DeleteCommand)) commandsStore.Remove(DeleteCommand);
             if (!AllowExport && commandsStore.Contains(ExportContainerCommand)) commandsStore.Remove(ExportContainerCommand);
+            if (!AllowMerge && commandsStore.Contains(MergeCommand)) commandsStore.Remove(MergeCommand);
 
             var index = 0;
             if (AllowAddNew && !commandsStore.Contains(NewCommand)) commandsStore.Insert(index++, NewCommand);
@@ -70,6 +73,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             if (!commandsStore.Contains(RefreshCommand)) commandsStore.Insert(index++, RefreshCommand);
             if (AllowDelete && !commandsStore.Contains(DeleteCommand)) commandsStore.Insert(index++, DeleteCommand);
             if (AllowExport && !commandsStore.Contains(ExportContainerCommand)) commandsStore.Insert(index++, ExportContainerCommand);
+            if (AllowMerge && !commandsStore.Contains(MergeCommand)) commandsStore.Insert(index++, MergeCommand);
         }
 
         private ICommandViewModel _defaultCommand;
@@ -265,6 +269,63 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             _displayedColumns = null;
             OnPropertyChanged("DisplayedColumns");
+        }
+
+        private ICommandViewModel _MergeCommand = null;
+        public ICommandViewModel MergeCommand
+        {
+            get
+            {
+                if (_MergeCommand == null)
+                {
+                    _MergeCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, 
+                        InstanceListViewModelResources.MergeCommand, 
+                        InstanceListViewModelResources.MergeCommand_Tooltip, 
+                        Merge, CanMerge, CanMergeReason);
+                }
+                return _MergeCommand;
+            }
+        }
+
+        public bool CanMerge()
+        {
+            return DataType.ImplementsIMergeable() && SelectedItems.Count == 2;
+        }
+
+        public string CanMergeReason()
+        {
+            return InstanceListViewModelResources.MergeCommand_Reason;
+        }
+
+        public void Merge()
+        {
+            if (!CanMerge()) return;
+
+            if (GetWorkspace() is IContextViewModel && GetWorkspace() is IMultipleInstancesManager)
+            {
+                // Stay in current workspace
+                var ws = (IMultipleInstancesManager)GetWorkspace();
+                if(ws != null)
+                {
+                    var task = ViewModelFactory.CreateViewModel<ObjectEditor.MergeObjectsTaskViewModel.Factory>().Invoke(DataContext, GetWorkspace(), (IMergeable)SelectedItems[0], (IMergeable)SelectedItems[1]);
+                    ws.AddItem(task);
+                    ws.SelectedItem = task;
+                }
+            } 
+            else 
+            {
+                var newScope = ViewModelFactory.CreateNewScope();
+                var newCtx = newScope.ViewModelFactory.CreateNewContext();
+
+                var ift = DataType.GetDescribedInterfaceType();
+                var target = newCtx.Find(ift, SelectedItems[0].ID);
+                var source = newCtx.Find(ift, SelectedItems[1].ID);
+
+                var ws = ObjectEditor.WorkspaceViewModel.Create(newScope.Scope, newCtx);
+                var task = newScope.ViewModelFactory.CreateViewModel<ObjectEditor.MergeObjectsTaskViewModel.Factory>().Invoke(newCtx, ws, (IMergeable)target, (IMergeable)source);
+                ws.ShowModel(task);
+                newScope.ViewModelFactory.ShowModel(ws, true);
+            }
         }
         #endregion
 

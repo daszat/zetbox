@@ -283,6 +283,26 @@ namespace Zetbox.App.Extensions
             return false;
         }
 
+        public static bool ImplementsIMergeable(this ObjectClass cls)
+        {
+            return ImplementsIMergeable(cls, true);
+        }
+
+        public static bool ImplementsIMergeable(this ObjectClass cls, bool lookupInBase)
+        {
+            if (cls == null) { throw new ArgumentNullException("cls"); }
+
+            while (cls != null)
+            {
+                // TODO: use named objects
+                if (cls.ImplementsInterfaces.Count(o => o.Name == "IMergeable" && o.Module.Name == "ZetboxBase") == 1)
+                    return true;
+                if (!lookupInBase) return false;
+                cls = cls.BaseObjectClass;
+            }
+            return false;
+        }
+
         public static IList<Property> GetAllProperties(this DataType cls)
         {
             if (cls == null) { throw new ArgumentNullException("cls"); }

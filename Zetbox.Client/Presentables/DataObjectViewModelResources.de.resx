@@ -123,4 +123,10 @@
   <data name="ErrorInvalidProperties" xml:space="preserve">
     <value>Der Datensatz enthält einige ungültige Werte</value>
   </data>
+  <data name="MergeCommand_Name" xml:space="preserve">
+    <value>Zusammenführen</value>
+  </data>
+  <data name="MergeCommand_Tooltip" xml:space="preserve">
+    <value>Führt einen anderen Datensatz mit diesem zusammen</value>
+  </data>
 </root>

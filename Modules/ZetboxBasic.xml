@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2015-10-16T08:09:17.9405881Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2016-07-29T09:22:36.0138986Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="84f486f7-19fe-49ad-8e4a-6c05089e7684">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.650235Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
@@ -8880,6 +8880,10 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <GUI:Name>Zetbox.App.GUI.TabControl</GUI:Name>
     <GUI:Parent>933e0b1f-ea8c-4de1-8a86-a925aad86343</GUI:Parent>
   </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="e9f6ae36-3fd3-4363-9c13-1febf5f52059">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>Zetbox.App.GUI.MergeObjectsTaskKind</GUI:Name>
+  </GUI:ControlKind>
   <GUI:ControlKind ExportGuid="f3ef02a1-2f89-4edf-91c8-0d79b4e6f0c4">
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Name>Zetbox.App.GUI.SingleLineKind</GUI:Name>
@@ -15139,6 +15143,16 @@ public static void ObjectIsValid(Identity obj, ObjectIsValidEventArgs e)
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>IInvocation</ZetboxBase:Name>
+    <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
+    <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
+    <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
+  </ZetboxBase:Interface>
+  <ZetboxBase:Interface ExportGuid="6c5a1b7e-2d9d-4305-af7c-887f32fe1c34">
+    <ZetboxBase:ChangedOn>2016-07-29T06:57:22.98526Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2016-07-29T06:57:22.98526Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>This object can be merged (and replaced) by another object</ZetboxBase:Description>
+    <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
+    <ZetboxBase:Name>IMergeable</ZetboxBase:Name>
     <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
     <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
     <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
@@ -33202,6 +33216,31 @@ public static void GetCodeTemplateCanExecReason(IInvocation obj, MethodReturnEve
     <ZetboxBase:Name>GetCodeTemplate</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>0999effb-c645-45e1-b3c2-5654530d0acb</ZetboxBase:ObjectClass>
   </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="3a2bbc57-639e-4c92-8aac-41566b42dff0">
+    <ZetboxBase:ChangedOn>2016-07-29T07:02:28.500411Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void GetMergeableProperties(IMergeable obj, IEnumerable&lt;System.Object&gt; properties)
+{
+}
+
+[Invocation]
+public static void GetMergeablePropertiesCanExec(IMergeable obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetMergeablePropertiesCanExecReason(IMergeable obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2016-07-29T07:02:28.500411Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Adapts a list of mergeable properties</ZetboxBase:Description>
+    <ZetboxBase:InvokeOnServer>false</ZetboxBase:InvokeOnServer>
+    <GUI:IsDisplayable>false</GUI:IsDisplayable>
+    <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
+    <ZetboxBase:Name>GetMergeableProperties</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>6c5a1b7e-2d9d-4305-af7c-887f32fe1c34</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
   <ZetboxBase:Method ExportGuid="ded38fac-122d-46a6-8000-9e67e3809b7b">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
@@ -34343,6 +34382,18 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
     <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
     <ZetboxBase:Name>ReturnValue</ZetboxBase:Name>
   </ZetboxBase:StringParameter>
+  <ZetboxBase:CLRObjectParameter ExportGuid="ac745461-b1d2-42f4-9b57-63d35bf2edc1">
+    <ZetboxBase:ChangedOn>2016-07-29T07:07:58.99584Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2016-07-29T07:07:58.99584Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>List of Viewmodels representing properties that should be merged</ZetboxBase:Description>
+    <ZetboxBase:IsList>true</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>3a2bbc57-639e-4c92-8aac-41566b42dff0</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>properties</ZetboxBase:Name>
+    <ZetboxBase:TypeRef>System.Object</ZetboxBase:TypeRef>
+  </ZetboxBase:CLRObjectParameter>
   <ZetboxBase:StringParameter ExportGuid="6e79179a-c2e7-490b-8eb8-5dd1a5fede9f">
     <ZetboxBase:ChangedOn>2011-12-02T19:04:31.820932Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-12-02T19:04:31.820932Z</ZetboxBase:CreatedOn>
@@ -43640,6 +43691,13 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.ObjectClassViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="dc0f77ee-17b4-4a3f-b95f-67828f27f454">
+    <GUI:DefaultEditorKind>e9f6ae36-3fd3-4363-9c13-1febf5f52059</GUI:DefaultEditorKind>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Description>A TaskViewModel for merging two objects</GUI:Description>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.ObjectEditor.MergeObjectsTaskViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="ffc833d5-a2a5-4cde-8335-6285973742d8">
     <GUI:DefaultEditorKind>329837fd-1146-48b2-9f4e-79aec8958b1e</GUI:DefaultEditorKind>
     <GUI:Deleted>false</GUI:Deleted>
@@ -43948,6 +44006,13 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
   <GUI:ViewDescriptor ExportGuid="8fa28c18-ee3a-476c-a79d-d9ef61a943d8">
     <GUI:ControlKind>06bf9adc-c5bc-4552-abdc-18a96c527962</GUI:ControlKind>
     <GUI:ControlTypeRef>Zetbox.Client.WPF.View.ObjectEditor.DataObjectEditor, Zetbox.Client.WPF</GUI:ControlTypeRef>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:Toolkit>0</GUI:Toolkit>
+  </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="c8426c4b-0787-4f1d-88d4-887137cd74a2">
+    <GUI:ControlKind>e9f6ae36-3fd3-4363-9c13-1febf5f52059</GUI:ControlKind>
+    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.ObjectEditor.MergeObjectsTask, Zetbox.Client.WPF</GUI:ControlTypeRef>
     <GUI:Deleted>false</GUI:Deleted>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>

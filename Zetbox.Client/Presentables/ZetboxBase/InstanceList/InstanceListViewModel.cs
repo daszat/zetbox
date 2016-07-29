@@ -417,6 +417,26 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
+        private bool _allowMerge = true;
+        [DefaultValue(true)]
+        public bool AllowMerge
+        {
+            get
+            {
+                return DataType.ImplementsIMergeable() && _allowMerge;
+            }
+            set
+            {
+                if (_allowMerge != value)
+                {
+                    _allowMerge = value;
+                    UpdateCommands();
+                    OnPropertyChanged("AllowMerge");
+                }
+            }
+        }
+
+
         private bool? _isInlineEditable = null;
         /// <summary>
         /// If true, all Items are editable in the list directly. By default, this is true, if the displayed data type is a simple object.

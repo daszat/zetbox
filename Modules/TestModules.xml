@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2015-10-16T08:09:29.8600835Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2016-07-29T09:22:51.9429323Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="a56d9701-d98e-49ab-bd49-a491d09e2d46">
     <ZetboxBase:ChangedOn>2011-08-06T08:30:47.664236Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
@@ -295,6 +295,10 @@ public static void ObjectIsValid(Task obj, ObjectIsValidEventArgs e)
   <ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry ExportGuid="36a57af0-4527-4d92-af6c-7007f44bdc25">
     <ZetboxBase:A>3fbb42ca-a084-491d-9135-85ed24f1ef78</ZetboxBase:A>
     <ZetboxBase:B>4ae6616a-eca3-47a5-b502-8e3c3913c2f0</ZetboxBase:B>
+  </ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry>
+  <ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry ExportGuid="c7883c88-ebf6-4fda-b4a6-d45644e8390e">
+    <ZetboxBase:A>3fbb42ca-a084-491d-9135-85ed24f1ef78</ZetboxBase:A>
+    <ZetboxBase:B>6c5a1b7e-2d9d-4305-af7c-887f32fe1c34</ZetboxBase:B>
   </ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry>
   <ZetboxBase:StringProperty ExportGuid="aaffed82-1f4c-4c0f-a52d-3ca4dbdefe94">
     <ZetboxBase:ChangedOn>2012-04-05T09:26:16.677239Z</ZetboxBase:ChangedOn>
@@ -3599,6 +3603,29 @@ public static void GetSummaryReportCanExecReason(Projekt obj, MethodReturnEventA
     <ZetboxBase:Name>GetSummaryReport</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>885939e8-82e1-4fdf-b80e-5f612d5131d3</ZetboxBase:ObjectClass>
   </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="88795123-b204-4239-9f3a-9221e5ba4d94">
+    <ZetboxBase:ChangedOn>2016-07-29T09:16:48.689039Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void GetMergeableProperties(Task obj, IEnumerable&lt;System.Object&gt; properties)
+{
+}
+
+[Invocation]
+public static void GetMergeablePropertiesCanExec(Task obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetMergeablePropertiesCanExecReason(Task obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2016-07-29T09:16:48.689039Z</ZetboxBase:CreatedOn>
+    <GUI:IsDisplayable>false</GUI:IsDisplayable>
+    <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
+    <ZetboxBase:Name>GetMergeableProperties</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>3fbb42ca-a084-491d-9135-85ed24f1ef78</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
   <ZetboxBase:BoolParameter ExportGuid="a5538f74-d4c6-498a-95c0-b526dddf86be">
     <ZetboxBase:ChangedOn>2011-08-06T08:31:01.310814Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
@@ -3724,6 +3751,18 @@ public static void GetSummaryReportCanExecReason(Projekt obj, MethodReturnEventA
     <ZetboxBase:Parameter_pos>1</ZetboxBase:Parameter_pos>
     <ZetboxBase:Name>title</ZetboxBase:Name>
   </ZetboxBase:StringParameter>
+  <ZetboxBase:CLRObjectParameter ExportGuid="b50a3567-4907-4a17-b9ec-957d949d900b">
+    <ZetboxBase:ChangedOn>2016-07-29T09:16:48.689039Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2016-07-29T09:16:48.689039Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>List of Viewmodels representing properties that should be merged</ZetboxBase:Description>
+    <ZetboxBase:IsList>true</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>88795123-b204-4239-9f3a-9221e5ba4d94</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>properties</ZetboxBase:Name>
+    <ZetboxBase:TypeRef>System.Object</ZetboxBase:TypeRef>
+  </ZetboxBase:CLRObjectParameter>
   <GUI:ViewModelDescriptor ExportGuid="5c674594-0416-4d5f-9d9f-1388a8df629a">
     <GUI:Deleted>false</GUI:Deleted>
     <GUI:Description>ViewModel for Projekte Calendar Workspace</GUI:Description>

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Zetbox.Client.Presentables {
+namespace Zetbox.Client.Presentables.ObjectEditor {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Zetbox.Client.Presentables {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class DataObjectViewModelResources {
+    internal class MergeObjectsTaskViewModelResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal DataObjectViewModelResources() {
+        internal MergeObjectsTaskViewModelResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Zetbox.Client.Presentables {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Zetbox.Client.Presentables.DataObjectViewModelResources", typeof(DataObjectViewModelResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Zetbox.Client.Presentables.ObjectEditor.MergeObjectsTaskViewModelResources", typeof(MergeObjectsTaskViewModelResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,38 +61,11 @@ namespace Zetbox.Client.Presentables {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Access to this item is denied.
+        ///   Looks up a localized string similar to Merge objects.
         /// </summary>
-        internal static string AccessDeniedText {
+        internal static string Name {
             get {
-                return ResourceManager.GetString("AccessDeniedText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Object has some invalid properties.
-        /// </summary>
-        internal static string ErrorInvalidProperties {
-            get {
-                return ResourceManager.GetString("ErrorInvalidProperties", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Merge.
-        /// </summary>
-        internal static string MergeCommand_Name {
-            get {
-                return ResourceManager.GetString("MergeCommand_Name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Merge another object to this one.
-        /// </summary>
-        internal static string MergeCommand_Tooltip {
-            get {
-                return ResourceManager.GetString("MergeCommand_Tooltip", resourceCulture);
+                return ResourceManager.GetString("Name", resourceCulture);
             }
         }
     }
