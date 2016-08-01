@@ -33,6 +33,8 @@ namespace Zetbox.Client.Presentables
         /// <returns>false if saving failed due to communication or validation errors</returns>
         bool Save();
         ICommandViewModel SaveCommand { get; }
+        event EventHandler Saving;
+        event EventHandler Saved;
 
         void Abort();
         ICommandViewModel AbortCommand { get; }

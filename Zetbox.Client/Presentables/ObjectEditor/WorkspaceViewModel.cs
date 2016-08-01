@@ -304,6 +304,26 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             return ValidationManager.IsValid;
         }
 
+        public event EventHandler Saving;
+        private void OnSaving()
+        {
+            var temp = Saving;
+            if (temp != null)
+            {
+                temp(this, EventArgs.Empty);
+            }
+        }
+
+        public event EventHandler Saved;
+        private void OnSaved()
+        {
+            var temp = Saved;
+            if (temp != null)
+            {
+                temp(this, EventArgs.Empty);
+            }
+        }
+
         public bool Save()
         {
             UpdateErrors();
@@ -311,7 +331,10 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             {
                 try
                 {
+                    OnSaving();
                     DataContext.SubmitChanges();
+                    OnSaved();
+
                     foreach (var i in Items.OfType<DataObjectViewModel>().ToList())
                     {
                         if (i.Object == null || i.Object.ObjectState == DataObjectState.Deleted)
