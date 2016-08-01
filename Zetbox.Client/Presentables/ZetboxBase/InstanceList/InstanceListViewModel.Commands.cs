@@ -55,25 +55,32 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             if (commandsStore == null) return;
 
+            // Recreate list, but preserce content
+            // This is needed, as the Toolbar will not re-apply a DataTemplate
+            // http://stackoverflow.com/questions/16019855/how-can-i-solve-a-toolbar-bug-with-datatemplates
+            commandsStore = new ObservableCollection<ICommandViewModel>(commandsStore);
+
             var showOpenCommand = AllowOpen && (OpenCommand == DefaultCommand);
             var showDefaultCommand = OpenCommand != DefaultCommand;
 
-            if (!AllowAddNew && commandsStore.Contains(NewCommand)) commandsStore.Remove(NewCommand);
-            if (!showOpenCommand && commandsStore.Contains(OpenCommand)) commandsStore.Remove(OpenCommand);
-            if (!showDefaultCommand && commandsStore.Contains(DefaultCommand)) commandsStore.Remove(DefaultCommand);
+            if (commandsStore.Contains(NewCommand)) commandsStore.Remove(NewCommand);
+            if (commandsStore.Contains(OpenCommand)) commandsStore.Remove(OpenCommand);
+            if (commandsStore.Contains(_defaultCommand)) commandsStore.Remove(DefaultCommand);
             if (commandsStore.Contains(RefreshCommand)) commandsStore.Remove(RefreshCommand);
-            if (!AllowDelete && commandsStore.Contains(DeleteCommand)) commandsStore.Remove(DeleteCommand);
-            if (!AllowExport && commandsStore.Contains(ExportContainerCommand)) commandsStore.Remove(ExportContainerCommand);
-            if (!AllowMerge && commandsStore.Contains(MergeCommand)) commandsStore.Remove(MergeCommand);
+            if (commandsStore.Contains(DeleteCommand)) commandsStore.Remove(DeleteCommand);
+            if (commandsStore.Contains(ExportContainerCommand)) commandsStore.Remove(ExportContainerCommand);
+            if (commandsStore.Contains(MergeCommand)) commandsStore.Remove(MergeCommand);
 
             var index = 0;
-            if (AllowAddNew && !commandsStore.Contains(NewCommand)) commandsStore.Insert(index++, NewCommand);
-            if (showOpenCommand && !commandsStore.Contains(OpenCommand)) commandsStore.Insert(index++, OpenCommand);
-            if (showDefaultCommand && !commandsStore.Contains(DefaultCommand)) commandsStore.Insert(index++, DefaultCommand);
-            if (!commandsStore.Contains(RefreshCommand)) commandsStore.Insert(index++, RefreshCommand);
-            if (AllowDelete && !commandsStore.Contains(DeleteCommand)) commandsStore.Insert(index++, DeleteCommand);
-            if (AllowExport && !commandsStore.Contains(ExportContainerCommand)) commandsStore.Insert(index++, ExportContainerCommand);
-            if (AllowMerge && !commandsStore.Contains(MergeCommand)) commandsStore.Insert(index++, MergeCommand);
+            if (AllowAddNew) commandsStore.Insert(index++, NewCommand);
+            if (showOpenCommand) commandsStore.Insert(index++, OpenCommand);
+            if (showDefaultCommand) commandsStore.Insert(index++, DefaultCommand);
+            commandsStore.Insert(index++, RefreshCommand);
+            if (AllowDelete) commandsStore.Insert(index++, DeleteCommand);
+            if (AllowExport) commandsStore.Insert(index++, ExportContainerCommand);
+            if (AllowMerge) commandsStore.Insert(index++, MergeCommand);
+
+            OnPropertyChanged("Commands");
         }
 
         private ICommandViewModel _defaultCommand;

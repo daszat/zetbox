@@ -105,6 +105,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             OnPropertyChanged("AllowAddNew");
             OnPropertyChanged("AllowDelete");
+            OnPropertyChanged("AllowMerge");
+            UpdateCommands();
         }
 
         #region Kind Management
@@ -423,6 +425,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             get
             {
+                if (DataContext.IsElevatedMode) return true;
                 return DataType.ImplementsIMergeable() && _allowMerge;
             }
             set
