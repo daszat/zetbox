@@ -418,6 +418,29 @@ namespace Zetbox.API
 
         #endregion
 
+        #region IDataObject
+
+        /// <summary>
+        /// Serialize a IDataObject. Format is: ID, type if not null.
+        /// </summary>
+        /// <param name="val">Value to serialize</param>
+        public void Write(IDataObject val)
+        {
+            TraceCurrentPos();
+            SerializerTrace("Writing IDataObject {0}", val);
+            if (val != null)
+            {
+                _dest.Write(val.ID);
+                Write(val.Context.GetInterfaceType(val).ToSerializableType());
+            }
+            else
+            {
+                _dest.Write(Helper.INVALIDID);
+            }
+        }
+
+        #endregion
+
         #region SerializableExpression and SerializableExpression[]
 
         /// <summary>
@@ -712,6 +735,10 @@ namespace Zetbox.API
             else if (type.IsICompoundObject())
             {
                 Write((ICompoundObject)value);
+            }
+            else if (type.IsIDataObject())
+            {
+                Write((IDataObject)value);
             }
             else
             {

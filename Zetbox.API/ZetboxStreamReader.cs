@@ -569,6 +569,42 @@ namespace Zetbox.API
 
         #endregion
 
+        #region IDataObject
+
+        public class IDataObjectProxy
+        {
+            public IDataObjectProxy(SerializableType type, int id)
+            {
+                this.Type = type;
+                this.ID = id;
+            }
+
+            public SerializableType Type { get; private set; }
+            public int ID { get; private set; }
+        }
+
+        /// <summary>
+        /// Deserialize a IDataObject, expected format: ID, type if not null
+        /// </summary>
+        public IDataObjectProxy ReadIDataObjectProxy()
+        {
+            TraceCurrentPos();
+            var id = _source.ReadInt32();
+            IDataObjectProxy result = null;
+            if (id != Helper.INVALIDID)
+            {
+                result = new IDataObjectProxy(ReadSerializableType(), id);
+                SerializerTrace("read IDataObject value: [{1}]", id);
+            }
+            else
+            {
+                SerializerTrace("read IDataObject value: [null]");
+            }
+            return result;
+        }
+
+        #endregion
+
         #region SerializableExpression and SerializableExpression[]
 
         /// <summary>
@@ -907,6 +943,10 @@ namespace Zetbox.API
             else if (type.IsICompoundObject())
             {
                 value = ReadCompoundObject(type);
+            }
+            else if (type.IsIDataObject())
+            {
+                value = ReadIDataObjectProxy();
             }
             else
             {

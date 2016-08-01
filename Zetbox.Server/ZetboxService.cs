@@ -475,10 +475,11 @@ namespace Zetbox.Server
                             foreach (var t in parameterTypes)
                             {
                                 object val;
+                                var systemType = t.GetSystemType();
                                 parameterReader.Read(out val,
-                                    t.GetSystemType().IsIStreamable()
-                                        ? ctx.ToImplementationType(ctx.GetInterfaceType(t.GetSystemType())).Type
-                                        : t.GetSystemType());
+                                    systemType.IsICompoundObject() // IDataObjects are serialized as proxy, only ICompoundObject are serialized directoy
+                                        ? ctx.ToImplementationType(ctx.GetInterfaceType(systemType)).Type
+                                        : systemType);
                                 parameterList.Add(val);
                             }
                         }
@@ -486,13 +487,25 @@ namespace Zetbox.Server
                         var changedObjects = new MemoryStream(changedObjectsArray);
                         changedObjects.Seek(0, SeekOrigin.Begin);
 
+                        var readObjects = ReadObjects(changedObjects, ctx);
+
+                        // Context is ready, translate IDataObjectParameter
+                        for(int i=0;i<parameterList.Count;i++)
+                        {
+                            var p = parameterList[i] as ZetboxStreamReader.IDataObjectProxy;
+                            if(p != null)
+                            {
+                                parameterList[i] = ctx.Find(_iftFactory(p.Type.GetSystemType()), p.ID);
+                            }
+                        }
+
                         IEnumerable<IPersistenceObject> changedObjectsList;
                         var result = _sohFactory
                             .GetServerObjectHandler(_iftFactory(type.GetSystemType()))
                             .InvokeServerMethod(version, ctx, ID, method,
                                 parameterTypes.Select(t => t.GetSystemType()),
                                 parameterList,
-                                ReadObjects(changedObjects, ctx),
+                                readObjects,
                                 notificationRequests ?? new ObjectNotificationRequest[0],
                                 out changedObjectsList);
 

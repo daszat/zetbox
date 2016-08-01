@@ -86,7 +86,6 @@ namespace Zetbox.IntegrationTests.Methods
         }
 
         [Test]
-        [Ignore("passing objects as parameter is not implemented yet")]
         public void should_receive_sent_retval()
         {
             var newC = ctx.Create<TestObjClass>();
