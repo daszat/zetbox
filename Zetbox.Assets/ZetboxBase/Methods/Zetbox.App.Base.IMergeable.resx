@@ -129,4 +129,16 @@
   <data name="GetMergeableProperties(properties)_description" xml:space="preserve">
     <value>List of Viewmodels representing properties that should be merged</value>
   </data>
+  <data name="MergeFrom_label" xml:space="preserve">
+    <value>MergeFrom</value>
+  </data>
+  <data name="MergeFrom_description" xml:space="preserve">
+    <value>Implemente additional merge tasks here. This method is called on the target object.</value>
+  </data>
+  <data name="MergeFrom(source)_label" xml:space="preserve">
+    <value>source</value>
+  </data>
+  <data name="MergeFrom(source)_description" xml:space="preserve">
+    <value>The source object</value>
+  </data>
 </root>

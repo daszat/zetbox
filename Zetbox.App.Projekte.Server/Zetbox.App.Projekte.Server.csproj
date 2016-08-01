@@ -87,6 +87,7 @@
     <Compile Include="ZetboxBase\MethodActions.cs" />
     <Compile Include="SchemaMigration\MigrationProjectActions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ZetboxBase\ObjectClassActions.cs" />
     <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Zetbox.snk" />

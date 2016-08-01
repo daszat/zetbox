@@ -899,6 +899,69 @@ namespace Zetbox.App.Projekte
         }
         // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
+        /// <summary>
+        /// 
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnMergeFrom_Task")]
+        public virtual void MergeFrom(Zetbox.API.IDataObject source)
+        {
+            // base.MergeFrom();
+            if (OnMergeFrom_Task != null)
+            {
+                OnMergeFrom_Task(this, source);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on method Task.MergeFrom");
+            }
+        }
+        public delegate void MergeFrom_Handler<T>(T obj, Zetbox.API.IDataObject source);
+        public static event MergeFrom_Handler<Task> OnMergeFrom_Task;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<Task> OnMergeFrom_Task_CanExec;
+
+        [EventBasedMethod("OnMergeFrom_Task_CanExec")]
+        public virtual bool MergeFromCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnMergeFrom_Task_CanExec != null)
+				{
+					OnMergeFrom_Task_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Task> OnMergeFrom_Task_CanExecReason;
+
+        [EventBasedMethod("OnMergeFrom_Task_CanExecReason")]
+        public virtual string MergeFromCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnMergeFrom_Task_CanExecReason != null)
+				{
+					OnMergeFrom_Task_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
         public override Type GetImplementedInterface()
         {
             return typeof(Task);

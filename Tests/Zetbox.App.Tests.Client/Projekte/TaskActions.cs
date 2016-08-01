@@ -31,5 +31,10 @@ namespace Zetbox.App.Projekte
         public static void GetMergeableProperties(Task obj, IEnumerable<System.Object> properties)
         {
         }
+
+        [Invocation]
+        public static void MergeFrom(Task obj, Zetbox.API.IDataObject source)
+        {
+        }
     }
 }

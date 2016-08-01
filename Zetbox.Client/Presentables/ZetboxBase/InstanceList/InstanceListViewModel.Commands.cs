@@ -282,6 +282,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         InstanceListViewModelResources.MergeCommand, 
                         InstanceListViewModelResources.MergeCommand_Tooltip, 
                         Merge, CanMerge, CanMergeReason);
+                    _MergeCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.reload_png.Find(FrozenContext));
                 }
                 return _MergeCommand;
             }

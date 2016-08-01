@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2016-07-29T09:22:51.9429323Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2016-08-01T08:25:24.105481Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="a56d9701-d98e-49ab-bd49-a491d09e2d46">
     <ZetboxBase:ChangedOn>2011-08-06T08:30:47.664236Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
@@ -3626,6 +3626,29 @@ public static void GetMergeablePropertiesCanExecReason(Task obj, MethodReturnEve
     <ZetboxBase:Name>GetMergeableProperties</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>3fbb42ca-a084-491d-9135-85ed24f1ef78</ZetboxBase:ObjectClass>
   </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="69c9724c-e246-4688-8238-66fdae1c5136">
+    <ZetboxBase:ChangedOn>2016-08-01T06:16:50.773277Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void MergeFrom(Task obj, Zetbox.API.IDataObject source)
+{
+}
+
+[Invocation]
+public static void MergeFromCanExec(Task obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void MergeFromCanExecReason(Task obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2016-08-01T06:16:50.773277Z</ZetboxBase:CreatedOn>
+    <GUI:IsDisplayable>false</GUI:IsDisplayable>
+    <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
+    <ZetboxBase:Name>MergeFrom</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>3fbb42ca-a084-491d-9135-85ed24f1ef78</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
   <ZetboxBase:BoolParameter ExportGuid="a5538f74-d4c6-498a-95c0-b526dddf86be">
     <ZetboxBase:ChangedOn>2011-08-06T08:31:01.310814Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
@@ -3762,6 +3785,18 @@ public static void GetMergeablePropertiesCanExecReason(Task obj, MethodReturnEve
     <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
     <ZetboxBase:Name>properties</ZetboxBase:Name>
     <ZetboxBase:TypeRef>System.Object</ZetboxBase:TypeRef>
+  </ZetboxBase:CLRObjectParameter>
+  <ZetboxBase:CLRObjectParameter ExportGuid="95a03be2-ab40-4f4c-881d-ad4103414986">
+    <ZetboxBase:ChangedOn>2016-08-01T06:16:50.773277Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2016-08-01T06:16:50.773277Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>The source object</ZetboxBase:Description>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>69c9724c-e246-4688-8238-66fdae1c5136</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>source</ZetboxBase:Name>
+    <ZetboxBase:TypeRef>Zetbox.API.IDataObject, Zetbox.API</ZetboxBase:TypeRef>
   </ZetboxBase:CLRObjectParameter>
   <GUI:ViewModelDescriptor ExportGuid="5c674594-0416-4d5f-9d9f-1388a8df629a">
     <GUI:Deleted>false</GUI:Deleted>

@@ -515,6 +515,7 @@
     <EmbeddedResource Include="Presentables\GUI\NavigatorViewModelResources.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="Presentables\GUI\SavedListConfiguratorViewModelResources.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="Presentables\ObjectBrowser\WorkspaceViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\ObjectEditor\MergeObjectsTaskViewModelResources.de.resx" />
     <EmbeddedResource Include="Presentables\ObjectEditor\MergeObjectsTaskViewModelResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>MergeObjectsTaskViewModelResources.Designer.cs</LastGenOutput>

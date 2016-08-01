@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2016-07-29T09:22:36.0138986Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2016-08-01T08:25:08.9382223Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="84f486f7-19fe-49ad-8e4a-6c05089e7684">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.650235Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
@@ -33241,6 +33241,31 @@ public static void GetMergeablePropertiesCanExecReason(IMergeable obj, MethodRet
     <ZetboxBase:Name>GetMergeableProperties</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>6c5a1b7e-2d9d-4305-af7c-887f32fe1c34</ZetboxBase:ObjectClass>
   </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="da6f314a-7076-42d5-9377-84be10f1afbe">
+    <ZetboxBase:ChangedOn>2016-08-01T06:16:30.033046Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void MergeFrom(IMergeable obj, Zetbox.API.IDataObject source)
+{
+}
+
+[Invocation]
+public static void MergeFromCanExec(IMergeable obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void MergeFromCanExecReason(IMergeable obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2016-08-01T06:16:30.033046Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Implemente additional merge tasks here. This method is called on the target object.</ZetboxBase:Description>
+    <ZetboxBase:InvokeOnServer>false</ZetboxBase:InvokeOnServer>
+    <GUI:IsDisplayable>false</GUI:IsDisplayable>
+    <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
+    <ZetboxBase:Name>MergeFrom</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>6c5a1b7e-2d9d-4305-af7c-887f32fe1c34</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
   <ZetboxBase:Method ExportGuid="ded38fac-122d-46a6-8000-9e67e3809b7b">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
@@ -33499,6 +33524,31 @@ public static void GetNameCanExecReason(ObjectClass obj, MethodReturnEventArgs&l
     <GUI:IsDisplayable>false</GUI:IsDisplayable>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>GetName</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>20888dfc-1fbc-47c8-9f3c-c6a30a5c0048</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="33c88040-11c1-408d-a6f9-73097edeb7ff">
+    <ZetboxBase:ChangedOn>2016-08-01T08:06:56.958434Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void ReplaceObject(ObjectClass obj, Zetbox.API.IDataObject target, Zetbox.API.IDataObject source)
+{
+}
+
+[Invocation]
+public static void ReplaceObjectCanExec(ObjectClass obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void ReplaceObjectCanExecReason(ObjectClass obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2016-08-01T06:19:58.113094Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Replaces all references of the given object with the target object. Does not change any other properties and will not delete the source object.</ZetboxBase:Description>
+    <ZetboxBase:InvokeOnServer>true</ZetboxBase:InvokeOnServer>
+    <GUI:IsDisplayable>false</GUI:IsDisplayable>
+    <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
+    <ZetboxBase:Name>ReplaceObject</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>20888dfc-1fbc-47c8-9f3c-c6a30a5c0048</ZetboxBase:ObjectClass>
   </ZetboxBase:Method>
   <ZetboxBase:Method ExportGuid="2e3df852-a5ef-499b-a294-1705be9177d9">
@@ -34394,6 +34444,18 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
     <ZetboxBase:Name>properties</ZetboxBase:Name>
     <ZetboxBase:TypeRef>System.Object</ZetboxBase:TypeRef>
   </ZetboxBase:CLRObjectParameter>
+  <ZetboxBase:CLRObjectParameter ExportGuid="4f43abd4-95ef-4034-8808-93704e5fc006">
+    <ZetboxBase:ChangedOn>2016-08-01T06:16:30.033046Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2016-08-01T06:16:30.033046Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>The source object</ZetboxBase:Description>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>da6f314a-7076-42d5-9377-84be10f1afbe</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>source</ZetboxBase:Name>
+    <ZetboxBase:TypeRef>Zetbox.API.IDataObject, Zetbox.API</ZetboxBase:TypeRef>
+  </ZetboxBase:CLRObjectParameter>
   <ZetboxBase:StringParameter ExportGuid="6e79179a-c2e7-490b-8eb8-5dd1a5fede9f">
     <ZetboxBase:ChangedOn>2011-12-02T19:04:31.820932Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-12-02T19:04:31.820932Z</ZetboxBase:CreatedOn>
@@ -34539,6 +34601,30 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
     <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
     <ZetboxBase:Name>name</ZetboxBase:Name>
   </ZetboxBase:StringParameter>
+  <ZetboxBase:CLRObjectParameter ExportGuid="0f99cb42-7929-4f2f-99ff-194ffa72893e">
+    <ZetboxBase:ChangedOn>2016-08-01T08:07:35.03361Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2016-08-01T06:19:58.113094Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>The object that will be replaced</ZetboxBase:Description>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>33c88040-11c1-408d-a6f9-73097edeb7ff</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>1</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>source</ZetboxBase:Name>
+    <ZetboxBase:TypeRef>Zetbox.API.IDataObject, Zetbox.API</ZetboxBase:TypeRef>
+  </ZetboxBase:CLRObjectParameter>
+  <ZetboxBase:CLRObjectParameter ExportGuid="9a86d8fa-cd95-477c-98d1-1d9e0d18f275">
+    <ZetboxBase:ChangedOn>2016-08-01T08:07:35.03361Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2016-08-01T08:06:53.023092Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>The new object</ZetboxBase:Description>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>33c88040-11c1-408d-a6f9-73097edeb7ff</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>target</ZetboxBase:Name>
+    <ZetboxBase:TypeRef>Zetbox.API.IDataObject, Zetbox.API</ZetboxBase:TypeRef>
+  </ZetboxBase:CLRObjectParameter>
   <ZetboxBase:BoolParameter ExportGuid="2f24bcd1-eb56-4350-b9a7-686f1641ab6e">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:01.189807Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-02-11T21:37:39Z</ZetboxBase:CreatedOn>

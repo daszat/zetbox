@@ -7,6 +7,26 @@
              xmlns:styles="clr-namespace:Zetbox.Client.WPF.Styles;assembly=Zetbox.Client.WPF.Toolkit"
              xmlns:tk="clr-namespace:Zetbox.Client.WPF.Toolkit;assembly=Zetbox.Client.WPF.Toolkit">
     <DockPanel>
-            
+        <ctrls:ObjectHeader DockPanel.Dock="Top" />
+        <Grid DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <ctrls:LabeledView Grid.Column="0"
+                               DataContext="{Binding Target}" />
+            <ctrls:LabeledView Grid.Column="2"
+                               DataContext="{Binding Source}" />
+        </Grid>
+        <ScrollViewer>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+            </Grid>
+        </ScrollViewer>
     </DockPanel>
 </UserControl>

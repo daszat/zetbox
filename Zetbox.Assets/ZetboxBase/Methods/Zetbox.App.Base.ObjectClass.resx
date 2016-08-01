@@ -165,4 +165,22 @@
   <data name="GetName(name)_description" xml:space="preserve">
     <value>the requested name</value>
   </data>
+  <data name="ReplaceObject_label" xml:space="preserve">
+    <value>ReplaceObject</value>
+  </data>
+  <data name="ReplaceObject_description" xml:space="preserve">
+    <value>Replaces all references of the given object with the target object. Does not change any other properties and will not delete the source object.</value>
+  </data>
+  <data name="ReplaceObject(target)_label" xml:space="preserve">
+    <value>target</value>
+  </data>
+  <data name="ReplaceObject(target)_description" xml:space="preserve">
+    <value>The new object</value>
+  </data>
+  <data name="ReplaceObject(source)_label" xml:space="preserve">
+    <value>source</value>
+  </data>
+  <data name="ReplaceObject(source)_description" xml:space="preserve">
+    <value>The object that will be replaced</value>
+  </data>
 </root>

@@ -16,7 +16,6 @@
     <!-- this is referenced by the generator to put the results in their right place -->
     <RelativeOutputPath>Common</RelativeOutputPath>
     <TargetFrameworkProfile />
-    <GitVersion_NoFetchEnabled>true</GitVersion_NoFetchEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

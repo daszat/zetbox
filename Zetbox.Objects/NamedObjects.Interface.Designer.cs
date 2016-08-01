@@ -1433,6 +1433,10 @@ namespace Zetbox {
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Method>("171d4016-4373-471f-88e1-9f541ef62949"); }
                                 }
+                                public static TypedGuid<global::Zetbox.App.Base.Method> ReplaceObject
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Method>("33c88040-11c1-408d-a6f9-73097edeb7ff"); }
+                                }
                             }
                             public static class ObjectClass_Properties
                             {
@@ -3119,6 +3123,10 @@ namespace Zetbox {
                                 public static TypedGuid<global::Zetbox.App.Base.Method> GetMergeableProperties
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Method>("88795123-b204-4239-9f3a-9221e5ba4d94"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Method> MergeFrom
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Method>("69c9724c-e246-4688-8238-66fdae1c5136"); }
                                 }
                             }
                             public static class Task_Properties

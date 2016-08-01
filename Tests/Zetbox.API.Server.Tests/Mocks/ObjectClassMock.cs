@@ -109,6 +109,11 @@ namespace Zetbox.API.Server.Mocks
             throw new NotImplementedException();
         }
 
+        public void ReplaceObject(Zetbox.API.IDataObject target, Zetbox.API.IDataObject source)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
         #region DataType Members
