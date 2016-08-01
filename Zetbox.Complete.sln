@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{ACC74A05-6833-4897-B739-8D5E82E846C2}"
 	ProjectSection(SolutionItems) = preProject
@@ -216,6 +216,7 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.Server.HttpService", "Zetbox.Server.HttpService\Zetbox.Server.HttpService.csproj", "{FD3C71B3-330F-4FFC-A525-37E1AD338FF8}"
 	ProjectSection(ProjectDependencies) = postProject
 		{26C035B1-A53D-44E0-BEED-CB97EC56B38E} = {26C035B1-A53D-44E0-BEED-CB97EC56B38E}
+		{E1275AE6-5060-4E93-88D8-BA48BA52DC7A} = {E1275AE6-5060-4E93-88D8-BA48BA52DC7A}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.Microsoft", "Zetbox.Microsoft\Zetbox.Microsoft.csproj", "{C071C75B-9FE5-4AF2-BD32-C3C1DD110928}"
