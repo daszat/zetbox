@@ -47,11 +47,21 @@
             </MenuItem>
             <MenuItem Command="{Binding ImportCommand, Converter={StaticResource CommandConverter}}"
                       Header="{Binding ImportCommand.Label}"
+                      Icon="{Binding ImportCommand.Icon, Converter={StaticResource ImageCtrlConverter}, ConverterParameter='16,16'}"
                       ToolTip="{Binding ImportCommand.ToolTip}" />
-            <MenuItem Command="{Binding DebuggerCommand, Converter={StaticResource CommandConverter}}"
+            <MenuItem Header="{Binding AdminMenuAsString}"
+                      Visibility="{Binding IsAdministrator}">
+                <MenuItem Command="{Binding ElevatedModeCommand, Converter={StaticResource CommandConverter}}"
+                      Header="{Binding ElevatedModeCommand.Label}"
+                      Icon="{Binding ElevatedModeCommand.Icon, Converter={StaticResource ImageCtrlConverter}, ConverterParameter='16,16'}"
+                      ToolTip="{Binding ElevatedModeCommand.ToolTip}"
+                      Visibility="{Binding ElevatedModeCommand.Show, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <MenuItem Command="{Binding DebuggerCommand, Converter={StaticResource CommandConverter}}"
                       Header="{Binding DebuggerCommand.Label}"
+                      Icon="{Binding DebuggerCommand.Icon, Converter={StaticResource ImageCtrlConverter}, ConverterParameter='16,16'}"
                       ToolTip="{Binding DebuggerCommand.ToolTip}"
                       Visibility="{Binding DebuggerCommand.Show, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            </MenuItem>
         </Menu>
         <Grid>
             <Grid.ColumnDefinitions>

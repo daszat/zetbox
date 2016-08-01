@@ -138,6 +138,22 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
             }
         }
 
+        public string AdminMenuAsString
+        {
+            get
+            {
+                return WorkspaceViewModelResources.Admin;
+            }
+        }
+
+        public bool IsAdministrator
+        {
+            get
+            {
+                return CurrentPrincipal != null && CurrentPrincipal.IsAdministrator();
+            }
+        }
+
         #endregion
 
         #region Import command
@@ -205,6 +221,21 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
                     newScope.Dispose();
                 }
 
+            }
+        }
+        #endregion
+
+        #region ElevatedModeCommand
+        private ICommandViewModel _ElevatedModeCommand = null;
+        public ICommandViewModel ElevatedModeCommand
+        {
+            get
+            {
+                if (_ElevatedModeCommand == null)
+                {
+                    _ElevatedModeCommand = ViewModelFactory.CreateViewModel<ElevatedModeCommand.Factory>().Invoke(DataContext, this);
+                }
+                return _ElevatedModeCommand;
             }
         }
         #endregion
