@@ -297,7 +297,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public bool CanMerge()
         {
-            return DataType.ImplementsIMergeable() && SelectedItems.Count == 2;
+            return SelectedItems.Count == 2;
         }
 
         public string CanMergeReason()
@@ -315,7 +315,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 var ws = (IMultipleInstancesManager)GetWorkspace();
                 if(ws != null)
                 {
-                    var task = ViewModelFactory.CreateViewModel<ObjectEditor.MergeObjectsTaskViewModel.Factory>().Invoke(DataContext, GetWorkspace(), (IMergeable)SelectedItems[0], (IMergeable)SelectedItems[1]);
+                    var task = ViewModelFactory.CreateViewModel<ObjectEditor.MergeObjectsTaskViewModel.Factory>().Invoke(DataContext, GetWorkspace(), SelectedItems[0].Object, SelectedItems[1].Object);
                     ws.AddItem(task);
                     ws.SelectedItem = task;
                 }
@@ -330,7 +330,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 var source = newCtx.Find(ift, SelectedItems[1].ID);
 
                 var ws = ObjectEditor.WorkspaceViewModel.Create(newScope.Scope, newCtx);
-                var task = newScope.ViewModelFactory.CreateViewModel<ObjectEditor.MergeObjectsTaskViewModel.Factory>().Invoke(newCtx, ws, (IMergeable)target, (IMergeable)source);
+                var task = newScope.ViewModelFactory.CreateViewModel<ObjectEditor.MergeObjectsTaskViewModel.Factory>().Invoke(newCtx, ws, target, source);
                 ws.ShowModel(task);
                 newScope.ViewModelFactory.ShowModel(ws, true);
             }

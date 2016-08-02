@@ -14,20 +14,20 @@ namespace Zetbox.Client.Presentables.ObjectEditor
     [ViewModelDescriptor]
     public class MergeObjectsTaskViewModel : ViewModel
     {
-        public new delegate MergeObjectsTaskViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Zetbox.App.Base.IMergeable target, Zetbox.App.Base.IMergeable source);
+        public new delegate MergeObjectsTaskViewModel Factory(IZetboxContext dataCtx, ViewModel parent, IDataObject target, IDataObject source);
 
-        public MergeObjectsTaskViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, Zetbox.App.Base.IMergeable target, Zetbox.App.Base.IMergeable source)
+        public MergeObjectsTaskViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, IDataObject target, IDataObject source)
             : base(appCtx, dataCtx, parent)
         {
             if (target == null && source == null) throw new ArgumentException("Either source or target must not be null");
 
-            ObjectClass = ((IDataObject)(source ?? target)).GetObjectClass(FrozenContext);
+            ObjectClass = (source ?? target).GetObjectClass(FrozenContext);
 
             _targetMdl = new ObjectReferenceValueModel("Target", "", false, false, ObjectClass);
-            _targetMdl.Value = (IDataObject)target;
+            _targetMdl.Value = target;
 
             _sourceMdl = new ObjectReferenceValueModel("Source", "", false, false, ObjectClass);
-            _sourceMdl.Value = (IDataObject)source;
+            _sourceMdl.Value = source;
 
             var ws = GetWorkspace() as IContextViewModel;
             if(ws == null)
@@ -42,9 +42,14 @@ namespace Zetbox.Client.Presentables.ObjectEditor
         void OnSaving(object sender, EventArgs e)
         {
             // optional additional merge tasks
-            TargetObject.MergeFrom(_sourceMdl.Value);
+            var mergeable = _targetMdl.Value as IMergeable;
+            if (mergeable != null)
+            {
+                mergeable.MergeFrom(_sourceMdl.Value);
+            }
 
             // save the workspace
+            // done by caller
         }
 
         void OnSaved(object sender, EventArgs e)
@@ -73,21 +78,6 @@ namespace Zetbox.Client.Presentables.ObjectEditor
 
         private ObjectReferenceValueModel _targetMdl = null;
         private ObjectReferenceValueModel _sourceMdl = null;
-
-        public Zetbox.App.Base.IMergeable TargetObject
-        {
-            get
-            {
-                return (IMergeable)_targetMdl.Value;
-            }
-        }
-        public Zetbox.App.Base.IMergeable SourceObject
-        {
-            get
-            {
-                return (IMergeable)_sourceMdl.Value;
-            }
-        }
 
         public ObjectClass ObjectClass { get; private set; }
 

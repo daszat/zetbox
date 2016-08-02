@@ -498,7 +498,7 @@ namespace Zetbox.Client.Presentables
         {
             var ws = (IMultipleInstancesManager)GetWorkspace();
 
-            var task = ViewModelFactory.CreateViewModel<ObjectEditor.MergeObjectsTaskViewModel.Factory>().Invoke(DataContext, GetWorkspace(), (IMergeable)Object, null);
+            var task = ViewModelFactory.CreateViewModel<ObjectEditor.MergeObjectsTaskViewModel.Factory>().Invoke(DataContext, GetWorkspace(), Object, null);
             ws.AddItem(task);
             ws.SelectedItem = task;
         }
