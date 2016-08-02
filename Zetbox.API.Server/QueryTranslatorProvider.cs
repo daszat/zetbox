@@ -548,8 +548,10 @@ namespace Zetbox.API.Server
                 // If this is not a static access AND the member type(!) and expression type do not match, fixup MemberInfo
                 if (e != null && !member.DeclaringType.IsAssignableFrom(type))
                 {
-                    // TODO: Bad Hack!
-                    if (e.Type.Name.EndsWith("_RelationEntryEfImpl") || e.Type.Name.EndsWith("_RelationEntryProxy"))
+                    // Fix access over a n:m relation.
+                    // Skip the fix, if the relation is used directly.
+                    if (!typeof(IRelationEntry).IsAssignableFrom(m.Member.DeclaringType)
+                     && (e.Type.Name.EndsWith("_RelationEntryEfImpl") || e.Type.Name.EndsWith("_RelationEntryProxy"))) // TODO: Bad Hack!
                     {
                         var a = type.FindProperty("A").Cast<PropertyInfo>().Single();
                         var b = type.FindProperty("B").Cast<PropertyInfo>().Single();
