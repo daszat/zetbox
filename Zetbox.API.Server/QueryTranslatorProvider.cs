@@ -246,7 +246,7 @@ namespace Zetbox.API.Server
                 return AddFilter(source, Ctx.GetImplementationType(type).ToInterfaceType());
             }
             // Methods requiring special translation
-            else if (m.Method.DeclaringType == typeof(Queryable) && m.Method.GetParameters().Length > 1)
+            else if ((m.Method.DeclaringType == typeof(Queryable) || m.Method.DeclaringType == typeof(System.Linq.Enumerable)) && m.Method.GetParameters().Length > 1)
             {
                 var source = Visit(m.Arguments[0]);
                 // unpack IQueryable<T>
@@ -285,12 +285,27 @@ namespace Zetbox.API.Server
                             // the number of generic arguments to the predicate
                             var predicateArgCount = ExtractArgCount(newPredicate.Type);
 
-                            MethodInfo newMethod = typeof(Queryable).GetMethods()
-                                   .Single(mi => mi.Name == m.Method.Name
-                                       && mi.GetParameters().Length == 2
-                                       && ExtractArgCount(mi.GetParameters()[1].ParameterType.GetGenericArguments().Single()) == predicateArgCount
-                                       && mi.GetParameters()[1].ParameterType.GetGenericArguments().Single().GetGenericArguments()[1] == newPredicate.Type.GetGenericArguments()[1])
-                                   .MakeGenericMethod(sourceType);
+                            MethodInfo newMethod;
+                            if (m.Method.DeclaringType == typeof(Queryable))
+                            {
+                                // Expression<Func<TSource, ?>> predicate
+                                newMethod = typeof(Queryable).GetMethods()
+                                       .Single(mi => mi.Name == m.Method.Name
+                                           && mi.GetParameters().Length == 2
+                                           && ExtractArgCount(mi.GetParameters()[1].ParameterType.GetGenericArguments().Single()) == predicateArgCount
+                                           && mi.GetParameters()[1].ParameterType.GetGenericArguments().Single().GetGenericArguments()[1] == newPredicate.Type.GetGenericArguments()[1])
+                                       .MakeGenericMethod(sourceType);
+                            }
+                            else
+                            {
+                                // Func<TSource, ?> predicate
+                                newMethod = typeof(System.Linq.Enumerable).GetMethods()
+                                       .Single(mi => mi.Name == m.Method.Name
+                                           && mi.GetParameters().Length == 2
+                                           && ExtractArgCount(mi.GetParameters()[1].ParameterType) == predicateArgCount
+                                           && mi.GetParameters()[1].ParameterType.GetGenericArguments()[1] == newPredicate.Type.GetGenericArguments()[1])
+                                       .MakeGenericMethod(sourceType);
+                            }
 
                             return Expression.Call(null, newMethod, new[] { source, newPredicate });
                         }
@@ -335,11 +350,23 @@ namespace Zetbox.API.Server
                                 // the number of generic arguments to the predicate
                                 var predicateArgCount = ExtractArgCount(newKeySelector.Type);
 
-                                MethodInfo newMethod = typeof(Queryable).GetMethods()
-                                    .Single(mi => mi.Name == m.Method.Name
-                                        && mi.GetParameters().Length == 2
-                                       && ExtractArgCount(mi.GetParameters()[1].ParameterType.GetGenericArguments().Single()) == predicateArgCount)
-                                    .MakeGenericMethod(sourceType, newKeySelector.Body.Type);
+                                MethodInfo newMethod;
+                                if (m.Method.DeclaringType == typeof(Queryable))
+                                {
+                                    newMethod = typeof(Queryable).GetMethods()
+                                        .Single(mi => mi.Name == m.Method.Name
+                                            && mi.GetParameters().Length == 2
+                                            && ExtractArgCount(mi.GetParameters()[1].ParameterType.GetGenericArguments().Single()) == predicateArgCount)
+                                        .MakeGenericMethod(sourceType, newKeySelector.Body.Type);
+                                }
+                                else
+                                {
+                                    newMethod = typeof(System.Linq.Enumerable).GetMethods()
+                                        .Single(mi => mi.Name == m.Method.Name
+                                            && mi.GetParameters().Length == 2
+                                            && ExtractArgCount(mi.GetParameters()[1].ParameterType) == predicateArgCount)
+                                        .MakeGenericMethod(sourceType, newKeySelector.Body.Type);
+                                }
 
                                 return Expression.Call(null, newMethod, new[] { source, newKeySelector });
                             }
@@ -519,9 +546,29 @@ namespace Zetbox.API.Server
             {
                 MemberInfo member = m.Member;
                 // If this is not a static access AND the member type(!) and expression type do not match, fixup MemberInfo
-                if (e != null && !member.DeclaringType.IsAssignableFrom(e.Type))
+                if (e != null && !member.DeclaringType.IsAssignableFrom(type))
                 {
-                    member = e.Type.FindProperty(m.Member.Name).Single();
+                    // TODO: Bad Hack!
+                    if (e.Type.Name.EndsWith("_RelationEntryEfImpl") || e.Type.Name.EndsWith("_RelationEntryProxy"))
+                    {
+                        var a = type.FindProperty("A").Cast<PropertyInfo>().Single();
+                        var b = type.FindProperty("B").Cast<PropertyInfo>().Single();
+                        // Fix n:m relation
+                        if (TranslateType(a.PropertyType) == TranslateType(member.DeclaringType))
+                        {
+                            e = Expression.MakeMemberAccess(e, b);
+                            member = b.PropertyType.FindProperty(memberName).Single();
+                        }
+                        else
+                        {
+                            e = Expression.MakeMemberAccess(e, a);
+                            member = a.PropertyType.FindProperty(memberName).Single();
+                        }
+                    }
+                    else
+                    {
+                        member = type.FindProperty(m.Member.Name).Single();
+                    }
                 }
                 result = Expression.MakeMemberAccess(e, member);
             }
