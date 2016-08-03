@@ -658,7 +658,7 @@ namespace Zetbox.API.Server
 
         private Expression AddSecurityFilter(Expression e, InterfaceType ifType)
         {
-            if (Principal == null || !ifType.Type.IsIDataObject()) return e;
+            if (Principal == null || Ctx.IsElevatedMode || !ifType.Type.IsIDataObject()) return e;
 
             // Case #1363: May return NULL during initialization
             var objClass = MetaDataResolver.GetObjectClass(ifType);

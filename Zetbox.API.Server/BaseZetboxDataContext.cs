@@ -991,11 +991,21 @@ namespace Zetbox.API.Server
             get { return this.principalStore; }
         }
 
+        private bool _elevatedMode = false;
         public void SetElevatedMode(bool elevatedMode)
         {
+            if (_elevatedMode != elevatedMode)
+            {
+                _elevatedMode = elevatedMode;
+                var temp = IsElevatedModeChanged;
+                if (temp != null)
+                {
+                    temp(this, EventArgs.Empty);
+                }
+            }
         }
-        public bool IsElevatedMode { get { return true; } }
-        public event EventHandler IsElevatedModeChanged { add { } remove { } }
+        public bool IsElevatedMode { get { return _elevatedMode; } }
+        public event EventHandler IsElevatedModeChanged;
 
         public abstract ContextIsolationLevel IsolationLevel { get; }
     }
