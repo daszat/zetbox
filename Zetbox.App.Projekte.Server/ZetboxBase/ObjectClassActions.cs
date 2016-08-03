@@ -102,6 +102,7 @@ namespace Zetbox.App.Base
                     }
                 }
 
+                ctx.Delete(sourceObj);
                 ctx.SubmitChanges();
             }
             finally
