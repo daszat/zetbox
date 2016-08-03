@@ -19,10 +19,19 @@
                 </Grid.ColumnDefinitions>
                 <!-- label -->
                 <ctrls:LabeledView Grid.Column="1"
-                               DataContext="{Binding Target}" />
-                <!-- Commands -->
+                                   DataContext="{Binding Target}"
+                                   VerticalAlignment="Center" />
+
+                <ctrls:CommandButton Grid.Column="2"
+                                     CommandViewModel="{Binding SwapCommand}"
+                                     HorizontalAlignment="Center"
+                                     Width="25"
+                                     Height="25"
+                                     Style="{StaticResource ImageOnlyButton}" />
+
                 <ctrls:LabeledView Grid.Column="3"
-                               DataContext="{Binding Source}" />
+                                   DataContext="{Binding Source}"
+                                   VerticalAlignment="Center" />
                 <!-- scrollbar -->
             </Grid>
             <ScrollViewer>

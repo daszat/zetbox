@@ -40,6 +40,16 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             ws.Saved += OnSaved;
         }
 
+        private ObjectReferenceValueModel _targetMdl = null;
+        private ObjectReferenceValueModel _sourceMdl = null;
+
+        public ObjectClass ObjectClass { get; private set; }
+
+        public override string Name
+        {
+            get { return MergeObjectsTaskViewModelResources.Name; }
+        }
+
         void _mdl_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if(e.PropertyName == "Value")
@@ -83,16 +93,6 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             {
                 base.Icon = value;
             }
-        }
-
-        private ObjectReferenceValueModel _targetMdl = null;
-        private ObjectReferenceValueModel _sourceMdl = null;
-
-        public ObjectClass ObjectClass { get; private set; }
-
-        public override string Name
-        {
-            get { return MergeObjectsTaskViewModelResources.Name; }
         }
 
         private ObjectReferenceViewModel _target = null;
@@ -139,7 +139,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
         {
             get
             {
-                if (_properties == null && _targetMdl.Value != null && _sourceMdl.Value != null)
+                if (_properties == null && Target.Value != null && Source.Value != null)
                 {
                     _properties = new List<MergePropertyViewModel>();
 
@@ -156,5 +156,30 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                 return _properties;
             }
         }
+
+        #region Swap command
+        private ICommandViewModel _SwapCommand = null;
+        public ICommandViewModel SwapCommand
+        {
+            get
+            {
+                if (_SwapCommand == null)
+                {
+                    _SwapCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Spaw", "Swap target and source", Swap, null, null);
+                    _SwapCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.reload_png.Find(FrozenContext));
+                }
+                return _SwapCommand;
+            }
+        }
+
+        public void Swap()
+        {
+            var tmp = _targetMdl.Value;
+            _targetMdl.Value = _sourceMdl.Value;
+            _sourceMdl.Value = tmp;
+
+            ClearProperties();
+        }
+        #endregion
     }
 }
