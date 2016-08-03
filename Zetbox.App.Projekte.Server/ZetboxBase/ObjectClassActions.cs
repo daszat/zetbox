@@ -30,15 +30,12 @@ namespace Zetbox.App.Base
     [Implementor]
     public class ObjectClassActions
     {
-        private static ILifetimeScope _scopeFactory;
         private static IFrozenContext _frozenCtx;
 
-        public ObjectClassActions(ILifetimeScope scopeFactory, IFrozenContext frozenCtx)
+        public ObjectClassActions(IFrozenContext frozenCtx)
         {
-            if (scopeFactory == null) throw new ArgumentNullException("scopeFactory");
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
 
-            _scopeFactory = scopeFactory;
             _frozenCtx = frozenCtx;
         }
 
@@ -52,7 +49,7 @@ namespace Zetbox.App.Base
             var cls = _frozenCtx.FindPersistenceObject<ObjectClass>(obj.ExportGuid);
             var clsType = cls.GetDescribedInterfaceType();
 
-            if(clsType != _frozenCtx.GetInterfaceType(target) 
+            if (clsType != _frozenCtx.GetInterfaceType(target)
             || clsType != _frozenCtx.GetInterfaceType(source))
             {
                 throw new ArgumentException("source and target must match the object class");
@@ -62,14 +59,15 @@ namespace Zetbox.App.Base
                 .Where(i => i.Type == cls)
                 .ToList();
 
-            using (var scope = _scopeFactory.BeginLifetimeScope())
-            using (var ctx = scope.Resolve<IZetboxServerContext>())
+            var ctx = obj.Context;
+            ctx.SetElevatedMode(true);
+            try
             {
                 var targetObj = ctx.FindPersistenceObject(clsType, target.ID);
                 var sourceObj = ctx.FindPersistenceObject(clsType, source.ID);
                 var sourceID = source.ID;
 
-                foreach(var relEnd in relEnds)
+                foreach (var relEnd in relEnds)
                 {
                     var otherEnd = relEnd.Parent.GetOtherEnd(relEnd);
                     var rel = relEnd.Parent;
@@ -96,15 +94,19 @@ namespace Zetbox.App.Base
                                 refObj.SetPropertyValue(propName, targetObj);
                             }
                         }
-                    } 
-                    else 
+                    }
+                    else
                     {
                         // Not my business
                         // The only side that that mathers is the side, that POINTS to the object in question.
-                    }                    
+                    }
                 }
 
                 ctx.SubmitChanges();
+            }
+            finally
+            {
+                ctx.SetElevatedMode(false);
             }
         }
     }
