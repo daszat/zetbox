@@ -7,6 +7,8 @@ namespace Zetbox.Client.Presentables.ObjectEditor
     using Zetbox.Client.Presentables;
     using Zetbox.API;
     using Zetbox.Client.Presentables.ValueViewModels;
+    using Zetbox.App.Base;
+    using Zetbox.App.Extensions;
 
     [ViewModelDescriptor]
     public class MergePropertyViewModel : ViewModel
@@ -27,7 +29,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
         {
             base.Dispose(disposing);
 
-            if(disposing)
+            if (disposing)
             {
                 // Reminder: if listener where implemented, remove them here
                 Target = null;
@@ -47,7 +49,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             }
             set
             {
-                if(_usingSource != value)
+                if (_usingSource != value)
                 {
                     _usingSource = value;
                     OnPropertyChanged("UsingSource");
@@ -89,7 +91,38 @@ namespace Zetbox.Client.Presentables.ObjectEditor
 
         public void UseSource()
         {
-            Target.ValueModel.SetUntypedValue(Source.ValueModel.GetUntypedValue());
+            if (Target is ObjectListViewModel)
+            {
+                var t = (ObjectListViewModel)Target;
+                var s = (ObjectListViewModel)Source;
+                var lst = s.Value.ToList(); // Duplicate list
+
+                ClearList(t);
+                ClearList(s); // Clear now - a later clear would destroy the others end pointer
+
+                foreach (var obj in lst)
+                {
+                    t.Add(obj);
+                }
+            }
+            else if (Target is ObjectCollectionViewModel)
+            {
+                var t = (ObjectCollectionViewModel)Target;
+                var s = (ObjectCollectionViewModel)Source;
+                var lst = s.Value.ToList();
+
+                ClearCollection(t);
+                ClearCollection(s);
+
+                foreach (var obj in lst)
+                {
+                    t.Add(obj);
+                }
+            }
+            else
+            {
+                Target.ValueModel.SetUntypedValue(Source.ValueModel.GetUntypedValue());
+            }
             UsingSource = true;
             UsingTarget = false;
         }
@@ -112,7 +145,17 @@ namespace Zetbox.Client.Presentables.ObjectEditor
 
         public void UseTarget()
         {
-            // Nothing to do
+            // Clear source lists to prevent merging during replace
+            if (Source is ObjectListViewModel)
+            {
+                var s = (ObjectListViewModel)Source;
+                ClearList(s);
+            }
+            if (Source is ObjectCollectionViewModel)
+            {
+                var s = (ObjectCollectionViewModel)Source;
+                ClearCollection(s);
+            }
 
             UsingSource = false;
             UsingTarget = true;
@@ -127,7 +170,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             {
                 if (_MergeValuesCommand == null)
                 {
-                    _MergeValuesCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Merge values", "Merges source and target values", MergeValues, 
+                    _MergeValuesCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Merge values", "Merges source and target values", MergeValues,
                         CanMergeValues,
                         CanMergeValuesReason);
                     _MergeValuesCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.reload_png.Find(FrozenContext));
@@ -138,24 +181,90 @@ namespace Zetbox.Client.Presentables.ObjectEditor
 
         private bool CanMergeValues()
         {
-            return Target is StringValueViewModel;
+            return Target is StringValueViewModel
+                || Target is ObjectListViewModel
+                || Target is ObjectCollectionViewModel;
         }
 
         private string CanMergeValuesReason()
         {
-            return "Only strings can be merged";
+            return "Only strings and lists can be merged";
         }
 
         public void MergeValues()
         {
             if (!CanMergeValues()) return;
 
-            ((StringValueViewModel)Target).Value += ", " + ((StringValueViewModel)Source).Value;
+            if (Target is StringValueViewModel)
+            {
+                ((StringValueViewModel)Target).Value += ", " + ((StringValueViewModel)Source).Value;
+            }
+            else if (Target is ObjectListViewModel)
+            {
+                var t = (ObjectListViewModel)Target;
+                var s = (ObjectListViewModel)Source;
+                var lst = s.Value.ToList();
+
+                ClearList(s);
+                foreach (var obj in lst)
+                {
+                    t.Add(obj);
+                }
+                
+            }
+            else if (Target is ObjectCollectionViewModel)
+            {
+                var t = (ObjectCollectionViewModel)Target;
+                var s = (ObjectCollectionViewModel)Source;
+                var lst = s.Value.ToList();
+
+                ClearCollection(s);
+                foreach (var obj in lst)
+                {
+                    t.Add(obj);
+                }
+            }
 
             UsingSource = true;
             UsingTarget = true;
         }
         #endregion
+
+        private void ClearCollection(ObjectCollectionViewModel s)
+        {
+            var mdl = s.ObjectCollectionModel;
+            var rel = mdl.RelEnd.Parent;
+            var otherEnd = rel.GetOtherEnd(mdl.RelEnd);
+            if (otherEnd != null && otherEnd.Multiplicity.UpperBound() > 1 && rel.Containment != ContainmentSpecification.Independent)
+            {
+                foreach (var obj in mdl.Value.ToList())
+                {
+                    DataContext.Delete(obj);
+                }
+            }
+            else
+            {
+                s.ClearValue();
+            }
+        }
+
+        private void ClearList(ObjectListViewModel s)
+        {
+            var mdl = s.ObjectCollectionModel;
+            var rel = mdl.RelEnd.Parent;
+            var otherEnd = rel.GetOtherEnd(mdl.RelEnd);
+            if (otherEnd != null && otherEnd.Multiplicity.UpperBound() > 1 && rel.Containment != ContainmentSpecification.Independent)
+            {
+                foreach (var obj in mdl.Value.ToList())
+                {
+                    DataContext.Delete(obj);
+                }
+            }
+            else
+            {
+                s.ClearValue();
+            }
+        }
 
         public override string Name
         {
