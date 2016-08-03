@@ -4550,6 +4550,10 @@ namespace Zetbox {
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("e9f6ae36-3fd3-4363-9c13-1febf5f52059"); }
                 }
+                public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_MergePropertyEditorKind
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("796b49af-733b-4df8-bc66-f638b92e5767"); }
+                }
                 public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_MonthEditorKind
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("a09a78f4-a583-4fef-8ae7-cf7acd95e8b8"); }
@@ -7898,6 +7902,10 @@ namespace Zetbox {
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ObjectEditor_MergeObjectsTaskViewModel
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("dc0f77ee-17b4-4a3f-b95f-67828f27f454"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ObjectEditor_MergePropertyViewModel
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("0580347f-014a-4802-8d34-3495dd035ee3"); }
                 }
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ObjectEditor_WorkspaceViewModel
                 {

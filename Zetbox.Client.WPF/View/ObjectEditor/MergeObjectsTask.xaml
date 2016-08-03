@@ -8,25 +8,35 @@
              xmlns:tk="clr-namespace:Zetbox.Client.WPF.Toolkit;assembly=Zetbox.Client.WPF.Toolkit">
     <DockPanel>
         <ctrls:ObjectHeader DockPanel.Dock="Top" />
-        <Grid DockPanel.Dock="Top">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="50" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <ctrls:LabeledView Grid.Column="0"
-                               DataContext="{Binding Target}" />
-            <ctrls:LabeledView Grid.Column="2"
-                               DataContext="{Binding Source}" />
-        </Grid>
-        <ScrollViewer>
-            <Grid>
+        <DockPanel Margin="{StaticResource ItemMargin}">
+            <Grid DockPanel.Dock="Top">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="110" />
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="{x:Static SystemParameters.VerticalScrollBarWidth }" />
                 </Grid.ColumnDefinitions>
+                <!-- label -->
+                <ctrls:LabeledView Grid.Column="1"
+                               DataContext="{Binding Target}" />
+                <!-- Commands -->
+                <ctrls:LabeledView Grid.Column="3"
+                               DataContext="{Binding Source}" />
+                <!-- scrollbar -->
             </Grid>
-        </ScrollViewer>
+            <ScrollViewer>
+                <ItemsControl ItemsSource="{Binding Properties}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ContentPresenter Content="{Binding}"
+                                          VerticalAlignment="Stretch"
+                                          tk:VisualTypeTemplateSelector.RequestedKind="{Binding RequestedKind, Mode=OneWay}"
+                                          ContentTemplateSelector="{StaticResource defaultTemplateSelector}"/>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </DockPanel>
     </DockPanel>
 </UserControl>

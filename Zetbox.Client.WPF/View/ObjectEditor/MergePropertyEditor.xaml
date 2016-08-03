@@ -1,0 +1,89 @@
+﻿<UserControl x:Class="Zetbox.Client.WPF.View.ObjectEditor.MergePropertyEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
+             xmlns:styles="clr-namespace:Zetbox.Client.WPF.Styles;assembly=Zetbox.Client.WPF.Toolkit"
+             xmlns:tk="clr-namespace:Zetbox.Client.WPF.Toolkit;assembly=Zetbox.Client.WPF.Toolkit">
+    <!--
+    This file is part of zetbox.
+
+    Zetbox is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation, either version 3 of
+    the License, or (at your option) any later version.
+
+    Zetbox is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public
+    License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
+    -->
+    <Border BorderBrush="{StaticResource AreaGroup1Border}"
+            BorderThickness="1"
+            Margin="{StaticResource ItemMargin}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="110" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            
+            <TextBlock Grid.Column="0" Text="{Binding Target.Label}" />
+
+            <Border Grid.Column="1">
+                <Border.Style>
+                    <Style TargetType="{x:Type Border}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding UsingTarget}" Value="True">
+                                <Setter Property="Background" Value="#aaffaa" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+
+                <ContentPresenter Content="{Binding Target, Mode=OneWay}"
+                                  tk:VisualTypeTemplateSelector.RequestedKind="{Binding RequestedKind, Mode=OneWay}"
+                                  ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+            </Border>
+
+            <UniformGrid Grid.Column="2"
+                         Rows="1" >
+                <ctrls:CommandButton CommandViewModel="{Binding UseTargetCommand}"
+                                     Width="25"
+                                     Height="25"
+                                     Style="{StaticResource ImageOnlyButton}"
+                                     Margin="{StaticResource DialogMargin}" />
+                <ctrls:CommandButton CommandViewModel="{Binding MergeValuesCommand}"
+                                     Width="25"
+                                     Height="25"
+                                     Style="{StaticResource ImageOnlyButton}"
+                                     Margin="{StaticResource DialogMargin}" />
+                <ctrls:CommandButton CommandViewModel="{Binding UseSourceCommand}"
+                                     Width="25"
+                                     Height="25"
+                                     Style="{StaticResource ImageOnlyButton}"
+                                     Margin="{StaticResource DialogMargin}" />
+            </UniformGrid>
+
+            <Border Grid.Column="3">
+                <Border.Style>
+                    <Style TargetType="{x:Type Border}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding UsingSource}" Value="True">
+                                <Setter Property="Background" Value="#aaffaa" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <ContentPresenter Content="{Binding Source, Mode=OneWay}"
+                                  tk:VisualTypeTemplateSelector.RequestedKind="{Binding RequestedKind, Mode=OneWay}"
+                                  ContentTemplateSelector="{StaticResource defaultTemplateSelector}"/>
+            </Border>
+        </Grid>
+    </Border>
+</UserControl>

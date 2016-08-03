@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2016-08-01T08:25:08.9382223Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2016-08-02T12:34:30.8386099Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="84f486f7-19fe-49ad-8e4a-6c05089e7684">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.650235Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
@@ -8716,6 +8716,10 @@ public static void GetNameCanExecReason(ViewModelDescriptor obj, MethodReturnEve
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
     <GUI:Name>Zetbox.App.GUI.EmailStringEditorKind</GUI:Name>
     <GUI:Parent>2279b0a6-36b8-4c97-b1fd-9eb1710e74f3</GUI:Parent>
+  </GUI:ControlKind>
+  <GUI:ControlKind ExportGuid="796b49af-733b-4df8-bc66-f638b92e5767">
+    <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
+    <GUI:Name>Zetbox.App.GUI.MergePropertyEditorKind</GUI:Name>
   </GUI:ControlKind>
   <GUI:ControlKind ExportGuid="7b8275b2-2760-44cd-a79d-33cef9f92e61">
     <GUI:Module>84f486f7-19fe-49ad-8e4a-6c05089e7684</GUI:Module>
@@ -43784,6 +43788,13 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.ObjectEditor.MergeObjectsTaskViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="0580347f-014a-4802-8d34-3495dd035ee3">
+    <GUI:DefaultEditorKind>796b49af-733b-4df8-bc66-f638b92e5767</GUI:DefaultEditorKind>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Description>A EditorViewModel for merging properties</GUI:Description>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.ObjectEditor.MergePropertyViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="ffc833d5-a2a5-4cde-8335-6285973742d8">
     <GUI:DefaultEditorKind>329837fd-1146-48b2-9f4e-79aec8958b1e</GUI:DefaultEditorKind>
     <GUI:Deleted>false</GUI:Deleted>
@@ -44099,6 +44110,13 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
   <GUI:ViewDescriptor ExportGuid="c8426c4b-0787-4f1d-88d4-887137cd74a2">
     <GUI:ControlKind>e9f6ae36-3fd3-4363-9c13-1febf5f52059</GUI:ControlKind>
     <GUI:ControlTypeRef>Zetbox.Client.WPF.View.ObjectEditor.MergeObjectsTask, Zetbox.Client.WPF</GUI:ControlTypeRef>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:Toolkit>0</GUI:Toolkit>
+  </GUI:ViewDescriptor>
+  <GUI:ViewDescriptor ExportGuid="5af82330-df96-4c69-a745-ce5fc797ef6c">
+    <GUI:ControlKind>796b49af-733b-4df8-bc66-f638b92e5767</GUI:ControlKind>
+    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.ObjectEditor.MergePropertyEditor, Zetbox.Client.WPF</GUI:ControlTypeRef>
     <GUI:Deleted>false</GUI:Deleted>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>

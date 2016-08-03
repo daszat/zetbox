@@ -259,6 +259,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MergeObjectsTaskViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Presentables\ObjectEditor\MergePropertyViewModel.cs" />
     <Compile Include="Presentables\PropertiesPrewiewViewModel.cs" />
     <Compile Include="Presentables\TextViewModel.cs" />
     <Compile Include="Presentables\ValueViewModels\CompoundCollectionViewModel.cs" />

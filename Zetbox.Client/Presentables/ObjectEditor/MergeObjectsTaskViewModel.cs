@@ -25,6 +25,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
 
             _targetMdl = new ObjectReferenceValueModel("Target", "", false, false, ObjectClass);
             _targetMdl.Value = target;
+            _targetMdl.PropertyChanged += _mdl_PropertyChanged;
 
             _sourceMdl = new ObjectReferenceValueModel("Source", "", false, false, ObjectClass);
             _sourceMdl.Value = source;
@@ -37,6 +38,14 @@ namespace Zetbox.Client.Presentables.ObjectEditor
 
             ws.Saving += OnSaving;
             ws.Saved += OnSaved;
+        }
+
+        void _mdl_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if(e.PropertyName == "Value")
+            {
+                ClearProperties();
+            }
         }
 
         void OnSaving(object sender, EventArgs e)
@@ -109,6 +118,42 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                     _source = ViewModelFactory.CreateViewModel<ObjectReferenceViewModel.Factory>().Invoke(DataContext, this, _sourceMdl);
                 }
                 return _source;
+            }
+        }
+
+        private void ClearProperties()
+        {
+            if(_properties != null)
+            {
+                foreach(var p in _properties)
+                {
+                    p.Dispose();
+                }
+            }
+            _properties = null;
+            OnPropertyChanged("Properties");
+        }
+
+        private List<MergePropertyViewModel> _properties;
+        public IEnumerable<MergePropertyViewModel> Properties
+        {
+            get
+            {
+                if (_properties == null && _targetMdl.Value != null && _sourceMdl.Value != null)
+                {
+                    _properties = new List<MergePropertyViewModel>();
+
+                    var target = Target.Value;
+                    var source = Source.Value;
+                    foreach(var p in target.PropertyModelsByName.Where(i => !i.Value.IsReadOnly))
+                    {
+                        var targetProp = p.Value;
+                        var sourceProp = source.PropertyModelsByName[p.Key];
+
+                        _properties.Add(ViewModelFactory.CreateViewModel<MergePropertyViewModel.Factory>().Invoke(DataContext, this, targetProp, sourceProp));
+                    }
+                }
+                return _properties;
             }
         }
     }
