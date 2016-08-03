@@ -81,6 +81,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
 
             // Cleanup UI
             _sourceMdl.Value = null;
+            ClearProperties();
         }
 
         public override System.Drawing.Image Icon
