@@ -153,6 +153,13 @@ namespace Zetbox.Client.Presentables.ObjectEditor
 
                         _properties.Add(ViewModelFactory.CreateViewModel<MergePropertyViewModel.Factory>().Invoke(DataContext, this, targetProp, sourceProp));
                     }
+
+                    // optional add more properties/tasks
+                    var mergeable = _targetMdl.Value as IMergeable;
+                    if (mergeable != null)
+                    {
+                        mergeable.GetMergeableProperties(_properties);
+                    }
                 }
                 return _properties;
             }
