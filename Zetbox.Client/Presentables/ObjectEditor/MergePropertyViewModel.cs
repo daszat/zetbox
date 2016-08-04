@@ -97,8 +97,8 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                 var s = (ObjectListViewModel)Source;
                 var lst = s.Value.ToList(); // Duplicate list
 
-                ClearList(t);
-                ClearList(s); // Clear now - a later clear would destroy the others end pointer
+                ClearList(t); // Clear/Delete target
+                s.ClearValue(); // Clear now - a later clear would destroy the others end pointer
 
                 foreach (var obj in lst)
                 {
@@ -111,8 +111,8 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                 var s = (ObjectCollectionViewModel)Source;
                 var lst = s.Value.ToList();
 
-                ClearCollection(t);
-                ClearCollection(s);
+                ClearCollection(t); // Clear/Delete target
+                s.ClearValue(); // Clear now - a later clear would destroy the others end pointer
 
                 foreach (var obj in lst)
                 {
@@ -205,7 +205,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                 var s = (ObjectListViewModel)Source;
                 var lst = s.Value.ToList();
 
-                ClearList(s);
+                s.ClearValue();
                 foreach (var obj in lst)
                 {
                     t.Add(obj);
@@ -218,7 +218,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                 var s = (ObjectCollectionViewModel)Source;
                 var lst = s.Value.ToList();
 
-                ClearCollection(s);
+                s.ClearValue();
                 foreach (var obj in lst)
                 {
                     t.Add(obj);
