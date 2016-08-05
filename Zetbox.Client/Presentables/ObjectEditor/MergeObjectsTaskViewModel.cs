@@ -68,17 +68,25 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             }
 
             // save the workspace
-            // done by caller
+            // this will submit all local changes 
+            // and prevent a re-save due to "ReplaceObject"
+            DataContext.SubmitChanges();
+
+            // Send replace request to the server
+            // The replace task will run in a elevated context
+            var objClass = DataContext.FindPersistenceObject<ObjectClass>(ObjectClass.ExportGuid); // call from our context
+            objClass.ReplaceObject(_targetMdl.Value, _sourceMdl.Value);
+
+            // As ReplaceObject is changing objects, those changes are serialized back.
+            // But ReplaceObject is also submitting those changes, so we have to fix that here to prevent a re-save
+            foreach (var obj in DataContext.AttachedObjects.Where(i => i.ObjectState == DataObjectState.Modified))
+            {
+                ((BasePersistenceObject)obj).SetUnmodified();
+            }
         }
 
         void OnSaved(object sender, EventArgs e)
         {
-            // Send replace request to the server
-            // The replace task will run in a server context
-            // but does not change anything else
-            var objClass = DataContext.FindPersistenceObject<ObjectClass>(ObjectClass.ExportGuid); // call from our context
-            objClass.ReplaceObject(_targetMdl.Value, _sourceMdl.Value);
-
             // Cleanup UI
             _sourceMdl.Value = null;
             ClearProperties();
