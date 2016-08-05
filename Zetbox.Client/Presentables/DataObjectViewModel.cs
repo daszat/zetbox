@@ -364,6 +364,7 @@ namespace Zetbox.Client.Presentables
             {
                 if (DataContext.IsElevatedMode) return false;
                 if (DataContext.IsReadonly) return true;
+                if (Object.IsReadonly) return true;
                 return isReadOnlyStore;
             }
             set
@@ -371,11 +372,13 @@ namespace Zetbox.Client.Presentables
                 if (isReadOnlyStore != value)
                 {
                     isReadOnlyStore = value;
+                    var propIsReadOnly = this.IsReadOnly;
+
                     if (_propertyModels != null)
                     {
                         foreach (var e in _propertyModels)
                         {
-                            e.Value.IsReadOnly = isReadOnlyStore;
+                            e.Value.IsReadOnly = propIsReadOnly;
                         }
                     }
                     OnPropertyChanged("IsReadOnly");
