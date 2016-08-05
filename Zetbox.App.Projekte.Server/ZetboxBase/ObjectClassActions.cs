@@ -30,12 +30,15 @@ namespace Zetbox.App.Base
     [Implementor]
     public class ObjectClassActions
     {
+        private static ILifetimeScope _scopeFactory;
         private static IFrozenContext _frozenCtx;
 
-        public ObjectClassActions(IFrozenContext frozenCtx)
+        public ObjectClassActions(ILifetimeScope scopeFactory, IFrozenContext frozenCtx)
         {
+            if (scopeFactory == null) throw new ArgumentNullException("scopeFactory");
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
 
+            _scopeFactory = scopeFactory;
             _frozenCtx = frozenCtx;
         }
 
@@ -50,7 +53,7 @@ namespace Zetbox.App.Base
             var clsType = cls.GetDescribedInterfaceType();
 
             if (clsType != _frozenCtx.GetInterfaceType(target)
-            || clsType != _frozenCtx.GetInterfaceType(source))
+             || clsType != _frozenCtx.GetInterfaceType(source))
             {
                 throw new ArgumentException("source and target must match the object class");
             }
@@ -59,9 +62,8 @@ namespace Zetbox.App.Base
                 .Where(i => i.Type == cls)
                 .ToList();
 
-            var ctx = obj.Context;
-            ctx.SetElevatedMode(true);
-            try
+            using (var scope = _scopeFactory.BeginLifetimeScope())
+            using (var ctx = scope.Resolve<IZetboxServerContext>())
             {
                 var targetObj = ctx.FindPersistenceObject(clsType, target.ID);
                 var sourceObj = ctx.FindPersistenceObject(clsType, source.ID);
@@ -104,10 +106,6 @@ namespace Zetbox.App.Base
 
                 ctx.Delete(sourceObj);
                 ctx.SubmitChanges();
-            }
-            finally
-            {
-                ctx.SetElevatedMode(false);
             }
         }
     }
