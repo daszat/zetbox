@@ -661,6 +661,13 @@ namespace Zetbox.Client.Presentables
 
                 // No access rights, no validation
                 if (Object.CurrentAccessRights.HasNoRights()) return false;
+
+                // If any property is invalid (due to a change that not has been written back), validate
+                if (_propertyModels != null)
+                {
+                    if (_propertyModels.Any(p => !p.Value.IsValid)) return true;
+                }
+
                 // Deleted, not attacted or unmodified -> no validation
                 if (Object.ObjectState.In(DataObjectState.Deleted, DataObjectState.Unmodified, DataObjectState.Detached, DataObjectState.NotDeserialized)) return false;
 
