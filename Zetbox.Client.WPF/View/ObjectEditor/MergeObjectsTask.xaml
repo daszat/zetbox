@@ -18,20 +18,25 @@
                     <ColumnDefinition Width="{x:Static SystemParameters.VerticalScrollBarWidth }" />
                 </Grid.ColumnDefinitions>
                 <!-- label -->
-                <ctrls:LabeledView Grid.Column="1"
-                                   DataContext="{Binding Target}"
-                                   VerticalAlignment="Center" />
+                <StackPanel Grid.Column="1">
+                    <ctrls:LabeledView DataContext="{Binding Target}"
+                                       VerticalAlignment="Center" />
+                    <TextBlock Text="{Binding TargetHelpText}" />
+                </StackPanel>
 
                 <ctrls:CommandButton Grid.Column="2"
                                      CommandViewModel="{Binding SwapCommand}"
                                      HorizontalAlignment="Center"
+                                     VerticalAlignment="Top"
                                      Width="25"
                                      Height="25"
                                      Style="{StaticResource ImageOnlyButton}" />
 
-                <ctrls:LabeledView Grid.Column="3"
-                                   DataContext="{Binding Source}"
-                                   VerticalAlignment="Center" />
+                <StackPanel Grid.Column="3">
+                    <ctrls:LabeledView DataContext="{Binding Source}"
+                                       VerticalAlignment="Center" />
+                    <TextBlock Text="{Binding SourceHelpText}" />
+                </StackPanel>
                 <!-- scrollbar -->
             </Grid>
             <ScrollViewer>

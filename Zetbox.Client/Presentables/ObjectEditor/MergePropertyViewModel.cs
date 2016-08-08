@@ -82,7 +82,10 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             {
                 if (_UseSourceCommand == null)
                 {
-                    _UseSourceCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Use source", "Use the source value", UseSource, null, null);
+                    _UseSourceCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, 
+                        MergePropertyViewModelResources.UseSourceCommand,
+                        MergePropertyViewModelResources.UseSourceCommand_Tooltip, 
+                        UseSource, null, null);
                     _UseSourceCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.back_png.Find(FrozenContext));
                 }
                 return _UseSourceCommand;
@@ -136,7 +139,12 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             {
                 if (_UseTargetCommand == null)
                 {
-                    _UseTargetCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Use target", "Use the target value", UseTarget, null, null);
+                    _UseTargetCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                        DataContext, 
+                        this, 
+                        MergePropertyViewModelResources.UseTargetCommand,
+                        MergePropertyViewModelResources.UseTargetCommand_Tooltip, 
+                        UseTarget, null, null);
                     _UseTargetCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.ok_png.Find(FrozenContext));
                 }
                 return _UseTargetCommand;
@@ -170,7 +178,12 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             {
                 if (_MergeValuesCommand == null)
                 {
-                    _MergeValuesCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Merge values", "Merges source and target values", MergeValues,
+                    _MergeValuesCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                        DataContext, 
+                        this, 
+                        MergePropertyViewModelResources.MergeValuesCommand,
+                        MergePropertyViewModelResources.MergeValuesCommand_Tooltip, 
+                        MergeValues,
                         CanMergeValues,
                         CanMergeValuesReason);
                     _MergeValuesCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.reload_png.Find(FrozenContext));
@@ -188,7 +201,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor
 
         private string CanMergeValuesReason()
         {
-            return "Only strings and lists can be merged";
+            return MergePropertyViewModelResources.MergeValuesCommand_Reason;
         }
 
         public void MergeValues()

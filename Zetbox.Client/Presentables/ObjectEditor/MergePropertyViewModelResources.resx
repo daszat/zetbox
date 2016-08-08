@@ -117,25 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Name" xml:space="preserve">
-    <value>Zusammenführen</value>
+  <data name="MergeValuesCommand" xml:space="preserve">
+    <value>Merge values</value>
   </data>
-  <data name="Source" xml:space="preserve">
-    <value>Ersetzen</value>
+  <data name="MergeValuesCommand_Reason" xml:space="preserve">
+    <value>Only strings and lists can be merged</value>
   </data>
-  <data name="Source_Tooltip" xml:space="preserve">
-    <value>Dieser Datensatz wird durch den anderen Datensatz ersetzt. Dieser Datensatz wird gelöscht.</value>
+  <data name="MergeValuesCommand_Tooltip" xml:space="preserve">
+    <value>Merges both values</value>
   </data>
-  <data name="SwapCommand" xml:space="preserve">
-    <value>Tauschen</value>
+  <data name="UseSourceCommand" xml:space="preserve">
+    <value>Use replace</value>
   </data>
-  <data name="SwapCommand_Tooltip" xml:space="preserve">
-    <value>Vertaucht die zusammenzuführenden Datensätze.</value>
+  <data name="UseSourceCommand_Tooltip" xml:space="preserve">
+    <value>Use the replace value</value>
   </data>
-  <data name="Target" xml:space="preserve">
-    <value>Neu</value>
+  <data name="UseTargetCommand" xml:space="preserve">
+    <value>Use new</value>
   </data>
-  <data name="Target_Tooltip" xml:space="preserve">
-    <value>Dieser Datensatz ersetzt den anderen Datensatz.</value>
+  <data name="UseTargetCommand_Tooltip" xml:space="preserve">
+    <value>Use the new value</value>
   </data>
 </root>

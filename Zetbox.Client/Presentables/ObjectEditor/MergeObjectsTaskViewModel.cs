@@ -23,11 +23,11 @@ namespace Zetbox.Client.Presentables.ObjectEditor
 
             ObjectClass = (source ?? target).GetObjectClass(FrozenContext);
 
-            _targetMdl = new ObjectReferenceValueModel("Target", "", false, false, ObjectClass);
+            _targetMdl = new ObjectReferenceValueModel(MergeObjectsTaskViewModelResources.Target, MergeObjectsTaskViewModelResources.Target_Tooltip, false, false, ObjectClass);
             _targetMdl.Value = target;
             _targetMdl.PropertyChanged += _mdl_PropertyChanged;
 
-            _sourceMdl = new ObjectReferenceValueModel("Source", "", false, false, ObjectClass);
+            _sourceMdl = new ObjectReferenceValueModel(MergeObjectsTaskViewModelResources.Source, MergeObjectsTaskViewModelResources.Source_Tooltip, false, false, ObjectClass);
             _sourceMdl.Value = source;
 
             var ws = GetWorkspace() as IContextViewModel;
@@ -181,7 +181,12 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             {
                 if (_SwapCommand == null)
                 {
-                    _SwapCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Spaw", "Swap target and source", Swap, null, null);
+                    _SwapCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                        DataContext, 
+                        this, 
+                        MergeObjectsTaskViewModelResources.SwapCommand, 
+                        MergeObjectsTaskViewModelResources.SwapCommand_Tooltip, 
+                        Swap, null, null);
                     _SwapCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.reload_png.Find(FrozenContext));
                 }
                 return _SwapCommand;
@@ -195,6 +200,24 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             _sourceMdl.Value = tmp;
 
             ClearProperties();
+        }
+        #endregion
+
+        #region Text
+        public string TargetHelpText
+        {
+            get
+            {
+                return MergeObjectsTaskViewModelResources.Target_Tooltip;
+            }
+        }
+        
+        public string SourceHelpText
+        {
+            get
+            {
+                return MergeObjectsTaskViewModelResources.Source_Tooltip;
+            }
         }
         #endregion
     }

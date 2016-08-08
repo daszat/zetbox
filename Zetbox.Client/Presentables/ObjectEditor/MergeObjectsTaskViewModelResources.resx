@@ -120,4 +120,22 @@
   <data name="Name" xml:space="preserve">
     <value>Merge objects</value>
   </data>
+  <data name="Source" xml:space="preserve">
+    <value>Replace</value>
+  </data>
+  <data name="Source_Tooltip" xml:space="preserve">
+    <value>This object will be replaced by the other object. This object will be deleted.</value>
+  </data>
+  <data name="SwapCommand" xml:space="preserve">
+    <value>Swap</value>
+  </data>
+  <data name="SwapCommand_Tooltip" xml:space="preserve">
+    <value>Swap new and replace objects</value>
+  </data>
+  <data name="Target" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="Target_Tooltip" xml:space="preserve">
+    <value>This object will replace the other object.</value>
+  </data>
 </root>

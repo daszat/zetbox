@@ -260,6 +260,11 @@
       <DependentUpon>MergeObjectsTaskViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Presentables\ObjectEditor\MergePropertyViewModel.cs" />
+    <Compile Include="Presentables\ObjectEditor\MergePropertyViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MergePropertyViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Presentables\PropertiesPrewiewViewModel.cs" />
     <Compile Include="Presentables\TextViewModel.cs" />
     <Compile Include="Presentables\ValueViewModels\CompoundCollectionViewModel.cs" />
@@ -520,6 +525,11 @@
     <EmbeddedResource Include="Presentables\ObjectEditor\MergeObjectsTaskViewModelResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>MergeObjectsTaskViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\ObjectEditor\MergePropertyViewModelResources.de.resx" />
+    <EmbeddedResource Include="Presentables\ObjectEditor\MergePropertyViewModelResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MergePropertyViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentables\ObjectEditor\WorkspaceViewModelResources.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="Presentables\ParameterInputTaskViewModelResources.x-zb-Pseudo.resx" />

@@ -22,14 +22,14 @@ namespace Zetbox.Client.Presentables.ObjectEditor {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class MergeObjectsTaskViewModelResources {
+    internal class MergePropertyViewModelResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal MergeObjectsTaskViewModelResources() {
+        internal MergePropertyViewModelResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Zetbox.Client.Presentables.ObjectEditor {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Zetbox.Client.Presentables.ObjectEditor.MergeObjectsTaskViewModelResources", typeof(MergeObjectsTaskViewModelResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Zetbox.Client.Presentables.ObjectEditor.MergePropertyViewModelResources", typeof(MergePropertyViewModelResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,65 +61,65 @@ namespace Zetbox.Client.Presentables.ObjectEditor {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Merge objects.
+        ///   Looks up a localized string similar to Merge values.
         /// </summary>
-        internal static string Name {
+        internal static string MergeValuesCommand {
             get {
-                return ResourceManager.GetString("Name", resourceCulture);
+                return ResourceManager.GetString("MergeValuesCommand", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Replace.
+        ///   Looks up a localized string similar to Only strings and lists can be merged.
         /// </summary>
-        internal static string Source {
+        internal static string MergeValuesCommand_Reason {
             get {
-                return ResourceManager.GetString("Source", resourceCulture);
+                return ResourceManager.GetString("MergeValuesCommand_Reason", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This object will be replaced by the other object. This object will be deleted..
+        ///   Looks up a localized string similar to Merges both values.
         /// </summary>
-        internal static string Source_Tooltip {
+        internal static string MergeValuesCommand_Tooltip {
             get {
-                return ResourceManager.GetString("Source_Tooltip", resourceCulture);
+                return ResourceManager.GetString("MergeValuesCommand_Tooltip", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Swap.
+        ///   Looks up a localized string similar to Use replace.
         /// </summary>
-        internal static string SwapCommand {
+        internal static string UseSourceCommand {
             get {
-                return ResourceManager.GetString("SwapCommand", resourceCulture);
+                return ResourceManager.GetString("UseSourceCommand", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Swap new and replace objects.
+        ///   Looks up a localized string similar to Use the replace value.
         /// </summary>
-        internal static string SwapCommand_Tooltip {
+        internal static string UseSourceCommand_Tooltip {
             get {
-                return ResourceManager.GetString("SwapCommand_Tooltip", resourceCulture);
+                return ResourceManager.GetString("UseSourceCommand_Tooltip", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New.
+        ///   Looks up a localized string similar to Use new.
         /// </summary>
-        internal static string Target {
+        internal static string UseTargetCommand {
             get {
-                return ResourceManager.GetString("Target", resourceCulture);
+                return ResourceManager.GetString("UseTargetCommand", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This object will replace the other object..
+        ///   Looks up a localized string similar to Use the new value.
         /// </summary>
-        internal static string Target_Tooltip {
+        internal static string UseTargetCommand_Tooltip {
             get {
-                return ResourceManager.GetString("Target_Tooltip", resourceCulture);
+                return ResourceManager.GetString("UseTargetCommand_Tooltip", resourceCulture);
             }
         }
     }
