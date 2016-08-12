@@ -58,6 +58,14 @@ namespace Zetbox.App.Base
                 throw new ArgumentException("source and target must match the object class");
             }
 
+            Logging.Server.InfoFormat("ReplaceObject: target = {0} ({1}) - \"{2}\"; source = target = {3} ({4}) - \"{5}\"",
+                target.GetType().Name,
+                target.ID,
+                target,
+                source.GetType().Name,
+                source.ID,
+                source);
+
             var relEnds = _frozenCtx.GetQuery<RelationEnd>()
                 .Where(i => i.Type == cls)
                 .ToList();
@@ -83,6 +91,7 @@ namespace Zetbox.App.Base
 
                         if (prop.GetIsList())
                         {
+                            Logging.Server.DebugFormat("Replacing on list {0}", propName);
                             foreach (var refObj in ctx.Internals().GetPersistenceObjectQuery(ifType).Where(string.Format("{0}.Any(ID == @0)", propName), sourceID))
                             {
                                 refObj.RemoveFromCollection(propName, sourceObj);
@@ -91,6 +100,7 @@ namespace Zetbox.App.Base
                         }
                         else
                         {
+                            Logging.Server.DebugFormat("Replacing on property {0}", propName);
                             foreach (var refObj in ctx.Internals().GetPersistenceObjectQuery(ifType).Where(string.Format("{0}.ID == @0", propName), sourceID))
                             {
                                 refObj.SetPropertyValue(propName, targetObj);
