@@ -126,6 +126,9 @@
   <data name="MergeCommand_Name" xml:space="preserve">
     <value>Zusammenführen</value>
   </data>
+  <data name="MergeCommand_Reason" xml:space="preserve">
+    <value>Zusammenführen ist nicht möglich. Entweder fehlen Rechte oder der Datensatz kann nicht zusammegeführt werden</value>
+  </data>
   <data name="MergeCommand_Tooltip" xml:space="preserve">
     <value>Führt einen anderen Datensatz mit diesem zusammen</value>
   </data>

@@ -126,6 +126,9 @@
   <data name="MergeCommand_Name" xml:space="preserve">
     <value>Merge</value>
   </data>
+  <data name="MergeCommand_Reason" xml:space="preserve">
+    <value>Merge is not allowed. No rights or the object does not support merging</value>
+  </data>
   <data name="MergeCommand_Tooltip" xml:space="preserve">
     <value>Merge another object to this one</value>
   </data>

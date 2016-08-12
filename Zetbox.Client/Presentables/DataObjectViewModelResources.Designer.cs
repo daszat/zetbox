@@ -88,6 +88,15 @@ namespace Zetbox.Client.Presentables {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Merge is not allowed. No rights or the object does not support merging.
+        /// </summary>
+        internal static string MergeCommand_Reason {
+            get {
+                return ResourceManager.GetString("MergeCommand_Reason", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Merge another object to this one.
         /// </summary>
         internal static string MergeCommand_Tooltip {

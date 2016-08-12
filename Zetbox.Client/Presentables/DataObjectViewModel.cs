@@ -471,7 +471,7 @@ namespace Zetbox.Client.Presentables
         {
             var result = base.CreateCommands();
 
-            if (Object.GetObjectClass(FrozenContext).ImplementsIMergeable() && GetWorkspace() is IMultipleInstancesManager)
+            if (CanMerge())
             {
                 result.Add(MergeCommand);
             }
@@ -490,11 +490,22 @@ namespace Zetbox.Client.Presentables
                     _MergeCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
                         DataObjectViewModelResources.MergeCommand_Name,
                         DataObjectViewModelResources.MergeCommand_Tooltip,
-                        Merge, null, null);
+                        Merge, 
+                        CanMerge,
+                        () => DataObjectViewModelResources.MergeCommand_Reason);
                     _MergeCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.reload_png.Find(FrozenContext));
                 }
                 return _MergeCommand;
             }
+        }
+
+        private bool CanMerge()
+        {
+            if (DataContext.IsElevatedMode) return true;
+
+            return Object.CurrentAccessRights.HasWriteRights()
+                && Object.GetObjectClass(FrozenContext).ImplementsIMergeable()
+                && GetWorkspace() is IMultipleInstancesManager;
         }
 
         public void Merge()
