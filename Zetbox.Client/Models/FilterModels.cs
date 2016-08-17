@@ -55,6 +55,10 @@ namespace Zetbox.Client.Models
         Not = 7,
         IsNull = 8,
         IsNotNull = 9,
+        /// <summary>
+        /// Only for IDataObjects
+        /// </summary>
+        ContainsObject = 10,
     }
 
     public sealed class FilterArgumentConfig
@@ -126,7 +130,8 @@ namespace Zetbox.Client.Models
             }
             else
             {
-                mdl = SingleValueFilterModel.Create(ctx, frozenCtx, label, props, kind, argKind, argumentViewModelDescriptor: argVMDL);
+                var isList = last.GetIsList();
+                mdl = SingleValueFilterModel.Create(ctx, frozenCtx, label, props, kind, !isList ? argKind : null, argumentViewModelDescriptor: !isList ? argVMDL : null);
             }
 
             // Don't set requiered here - this method is used for custom filter. Caller can set it self.
@@ -397,17 +402,17 @@ namespace Zetbox.Client.Models
             return fmdl;
         }
 
-        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, string predicate, ObjectClass referencedClass)
+        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, string predicate, ObjectClass referencedClass, bool isList)
         {
-            return Create(frozenCtx, label, predicate, referencedClass, null, null);
+            return Create(frozenCtx, label, predicate, referencedClass, null, null, isList);
         }
 
-        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, string predicate, ObjectClass referencedClass, ControlKind requestedKind, ControlKind requestedArgumentKind)
+        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, string predicate, ObjectClass referencedClass, ControlKind requestedKind, ControlKind requestedArgumentKind, bool isList)
         {
-            return Create(frozenCtx, label, FilterValueSource.FromExpression(predicate), referencedClass, requestedKind, requestedArgumentKind);
+            return Create(frozenCtx, label, FilterValueSource.FromExpression(predicate), referencedClass, requestedKind, requestedArgumentKind, isList);
         }
 
-        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, IFilterValueSource predicate, ObjectClass referencedClass, ControlKind requestedKind, ControlKind requestedArgumentKind, ViewModelDescriptor argumentViewModelDescriptor = null)
+        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, IFilterValueSource predicate, ObjectClass referencedClass, ControlKind requestedKind, ControlKind requestedArgumentKind, bool isList, ViewModelDescriptor argumentViewModelDescriptor = null)
         {
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
 
@@ -415,7 +420,7 @@ namespace Zetbox.Client.Models
             {
                 Label = label,
                 ValueSource = predicate,
-                Operator = FilterOperators.Equals,
+                Operator = isList ? FilterOperators.ContainsObject : FilterOperators.Equals,
                 ViewModelType = ViewModelDescriptors.Zetbox_Client_Presentables_FilterViewModels_SingleValueFilterViewModel.Find(frozenCtx),
                 RequestedKind = requestedKind,
                 RefreshOnFilterChanged = true,
@@ -567,7 +572,7 @@ namespace Zetbox.Client.Models
             }
             else if (last is ObjectReferenceProperty)
             {
-                return Create(frozenCtx, label, predicate, ((ObjectReferenceProperty)last).GetReferencedObjectClass(), requestedKind, requestedArgumentKind, argumentViewModelDescriptor: argumentViewModelDescriptor);
+                return Create(frozenCtx, label, predicate, ((ObjectReferenceProperty)last).GetReferencedObjectClass(), requestedKind, requestedArgumentKind, last.GetIsList(), argumentViewModelDescriptor: argumentViewModelDescriptor);
             }
             else if (last is CompoundObjectProperty)
             {
@@ -623,6 +628,8 @@ namespace Zetbox.Client.Models
                     return expr.Replace(PREDICATE_PLACEHOLDER, " != null");
                 case FilterOperators.IsNull:
                     return expr.Replace(PREDICATE_PLACEHOLDER, " == null");
+                case FilterOperators.ContainsObject:
+                    return expr.Replace(PREDICATE_PLACEHOLDER, ".Any(it == @0)");
                 case FilterOperators.Contains:
                     {
                         // Only for strings
