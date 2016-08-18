@@ -177,5 +177,24 @@ namespace Zetbox.Client.Presentables
             return result;
         }
         #endregion
+
+        protected override void OnClose()
+        {
+            base.OnClose();
+            Dispose();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+
+            if (_parameterModelList != null)
+            {
+                foreach (var p in _parameterModelList)
+                {
+                    p.Dispose();
+                }
+            }
+        }
     }
 }

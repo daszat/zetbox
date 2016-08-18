@@ -100,6 +100,12 @@ namespace Zetbox.Client
         void Register(ViewModel vmdl);
 
         /// <summary>
+        /// Unregisters a ViewModel at the Validation Manager
+        /// </summary>
+        /// <param name="vmdl"></param>
+        void Unregister(ViewModel vmdl);
+
+        /// <summary>
         /// Notifies the ValidationManager about the error state change of a ViewModel.
         /// </summary>
         /// <param name="vmdl"></param>
@@ -136,6 +142,15 @@ namespace Zetbox.Client
             if (!_validationRequests.Contains(vmdl))
             {
                 _validationRequests.Add(vmdl);
+                _errors = null;
+            }
+        }
+
+        public virtual void Unregister(ViewModel vmdl)
+        {
+            if (_validationRequests.Contains(vmdl))
+            {
+                _validationRequests.Remove(vmdl);
                 _errors = null;
             }
         }

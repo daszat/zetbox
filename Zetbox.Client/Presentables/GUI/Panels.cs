@@ -62,6 +62,16 @@ namespace Zetbox.Client.Presentables.GUI
                 return _children;
             }
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+
+            foreach(var c in _children)
+            {
+                c.Dispose();
+            }
+        }
     }
 
 

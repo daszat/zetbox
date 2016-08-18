@@ -63,6 +63,12 @@ namespace Zetbox.Client.Presentables
             ValidationManager.Register(this);
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            ValidationManager.Unregister(this);
+        }
+
         void dataCtx_IsElevatedModeChanged(object sender, EventArgs e)
         {
             OnPropertyChanged("IsReadOnly");

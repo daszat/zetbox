@@ -94,6 +94,12 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             ValidationManager.Register(this);
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            ValidationManager.Unregister(this);
+        }
+
         void Context_IsElevatedModeChanged(object sender, EventArgs e)
         {
             OnPropertyChanged("IsReadOnly");
