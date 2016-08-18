@@ -1550,6 +1550,13 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             _datePartViewModel = ViewModelFactory.CreateViewModel<NullableDatePartPropertyViewModel.Factory>().Invoke(DataContext, this, mdl);
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            _timePartViewModel.Dispose();
+            _datePartViewModel.Dispose();
+        }
+
         void DateTimeModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
