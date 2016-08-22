@@ -150,11 +150,17 @@
   <data name="DlgDateRangeTitle" xml:space="preserve">
     <value>Enter a range</value>
   </data>
+  <data name="ErrorUnitlDate" xml:space="preserve">
+    <value>Until date must be after from date</value>
+  </data>
   <data name="FromLabel" xml:space="preserve">
     <value>From</value>
   </data>
   <data name="LocationLabel" xml:space="preserve">
     <value>Location</value>
+  </data>
+  <data name="NewEventErrors" xml:space="preserve">
+    <value>Error</value>
   </data>
   <data name="NewEventLabel" xml:space="preserve">
     <value>New Event</value>

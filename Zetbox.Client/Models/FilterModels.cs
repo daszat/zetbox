@@ -55,6 +55,10 @@ namespace Zetbox.Client.Models
         Not = 7,
         IsNull = 8,
         IsNotNull = 9,
+        /// <summary>
+        /// Only for IDataObjects
+        /// </summary>
+        ContainsObject = 10,
     }
 
     public sealed class FilterArgumentConfig
@@ -91,6 +95,8 @@ namespace Zetbox.Client.Models
     public abstract class FilterModel
         : IUIFilterModel
     {
+        public static readonly string PREDICATE_PLACEHOLDER = "@@PREDICATE@@";
+
         public static FilterModel FromProperty(IZetboxContext ctx, IFrozenContext frozenCtx, Property prop)
         {
             return FromProperty(ctx, frozenCtx, new[] { prop });
@@ -124,7 +130,8 @@ namespace Zetbox.Client.Models
             }
             else
             {
-                mdl = SingleValueFilterModel.Create(ctx, frozenCtx, label, props, kind, argKind, argumentViewModelDescriptor: argVMDL);
+                var isList = last.GetIsList();
+                mdl = SingleValueFilterModel.Create(ctx, frozenCtx, label, props, kind, !isList ? argKind : null, argumentViewModelDescriptor: !isList ? argVMDL : null);
             }
 
             // Don't set requiered here - this method is used for custom filter. Caller can set it self.
@@ -140,6 +147,11 @@ namespace Zetbox.Client.Models
             this.FilterArguments = new ObservableCollection<FilterArgumentConfig>();
             this.FilterArguments.CollectionChanged += FilterArguments_CollectionChanged;
             this.IsServerSideFilter = true;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{0}: {1} ({2})", this.GetType().Name, Label, ValueSource);
         }
 
         void FilterArguments_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -279,7 +291,6 @@ namespace Zetbox.Client.Models
         #endregion
     }
 
-
     public class ToStringFilterModel : FilterModel
     {
         public ToStringFilterModel(IReadOnlyZetboxContext frozenCtx)
@@ -391,18 +402,17 @@ namespace Zetbox.Client.Models
             return fmdl;
         }
 
-
-        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, string predicate, ObjectClass referencedClass)
+        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, string predicate, ObjectClass referencedClass, bool isList)
         {
-            return Create(frozenCtx, label, predicate, referencedClass, null, null);
+            return Create(frozenCtx, label, predicate, referencedClass, null, null, isList);
         }
 
-        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, string predicate, ObjectClass referencedClass, ControlKind requestedKind, ControlKind requestedArgumentKind)
+        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, string predicate, ObjectClass referencedClass, ControlKind requestedKind, ControlKind requestedArgumentKind, bool isList)
         {
-            return Create(frozenCtx, label, FilterValueSource.FromExpression(predicate), referencedClass, requestedKind, requestedArgumentKind);
+            return Create(frozenCtx, label, FilterValueSource.FromExpression(predicate), referencedClass, requestedKind, requestedArgumentKind, isList);
         }
 
-        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, IFilterValueSource predicate, ObjectClass referencedClass, ControlKind requestedKind, ControlKind requestedArgumentKind, ViewModelDescriptor argumentViewModelDescriptor = null)
+        public static SingleValueFilterModel Create(IFrozenContext frozenCtx, string label, IFilterValueSource predicate, ObjectClass referencedClass, ControlKind requestedKind, ControlKind requestedArgumentKind, bool isList, ViewModelDescriptor argumentViewModelDescriptor = null)
         {
             if (frozenCtx == null) throw new ArgumentNullException("frozenCtx");
 
@@ -410,7 +420,7 @@ namespace Zetbox.Client.Models
             {
                 Label = label,
                 ValueSource = predicate,
-                Operator = FilterOperators.Equals,
+                Operator = isList ? FilterOperators.ContainsObject : FilterOperators.Equals,
                 ViewModelType = ViewModelDescriptors.Zetbox_Client_Presentables_FilterViewModels_SingleValueFilterViewModel.Find(frozenCtx),
                 RequestedKind = requestedKind,
                 RefreshOnFilterChanged = true,
@@ -562,7 +572,7 @@ namespace Zetbox.Client.Models
             }
             else if (last is ObjectReferenceProperty)
             {
-                return Create(frozenCtx, label, predicate, ((ObjectReferenceProperty)last).GetReferencedObjectClass(), requestedKind, requestedArgumentKind, argumentViewModelDescriptor: argumentViewModelDescriptor);
+                return Create(frozenCtx, label, predicate, ((ObjectReferenceProperty)last).GetReferencedObjectClass(), requestedKind, requestedArgumentKind, last.GetIsList(), argumentViewModelDescriptor: argumentViewModelDescriptor);
             }
             else if (last is CompoundObjectProperty)
             {
@@ -603,31 +613,35 @@ namespace Zetbox.Client.Models
             switch (Operator)
             {
                 case FilterOperators.Equals:
-                    return string.Format("{0} = @0", expr);
+                    return expr.Replace(PREDICATE_PLACEHOLDER, " = @0");
                 case FilterOperators.Less:
-                    return string.Format("{0} < @0", expr);
+                    return expr.Replace(PREDICATE_PLACEHOLDER, " < @0");
                 case FilterOperators.LessOrEqual:
-                    return string.Format("{0} <= @0", expr);
+                    return expr.Replace(PREDICATE_PLACEHOLDER, " <= @0");
                 case FilterOperators.Greater:
-                    return string.Format("{0} > @0", expr);
+                    return expr.Replace(PREDICATE_PLACEHOLDER, " > @0");
                 case FilterOperators.GreaterOrEqual:
-                    return string.Format("{0} >= @0", expr);
+                    return expr.Replace(PREDICATE_PLACEHOLDER, " >= @0");
                 case FilterOperators.Not:
-                    return string.Format("{0} != @0", expr);
+                    return expr.Replace(PREDICATE_PLACEHOLDER, " != @0");
                 case FilterOperators.IsNotNull:
-                    return string.Format("{0} != null", expr);
+                    return expr.Replace(PREDICATE_PLACEHOLDER, " != null");
                 case FilterOperators.IsNull:
-                    return string.Format("{0} == null", expr);
+                    return expr.Replace(PREDICATE_PLACEHOLDER, " == null");
+                case FilterOperators.ContainsObject:
+                    return expr.Replace(PREDICATE_PLACEHOLDER, ".Any(it == @0)");
                 case FilterOperators.Contains:
                     {
                         // Only for strings
                         var parts = GetStringParts();
+                        var lastInner = ValueSource.LastInnerExpression;
+                        var outerExpr = ValueSource.OuterExpression;
                         var sb = new StringBuilder();
                         sb.Append("( (1==0) ");
                         int counter = 0;
                         foreach (var p in parts)
                         {
-                            sb.AppendFormat(" || ({0} != null && {0}.ToLower().Contains(@{1}.ToLower()) )", expr, counter++);
+                            sb.AppendFormat(" || {0}", outerExpr.Replace(PREDICATE_PLACEHOLDER, string.Format("{0} != null && {0}.ToLower().Contains(@{1}.ToLower())", lastInner, counter++)));
                         }
                         sb.Append(")");
                         return sb.ToString();
@@ -667,14 +681,14 @@ namespace Zetbox.Client.Models
                 if (args[counter] != null)
                 {
                     sb.AppendFormat("({0}.{1} == @{2}) && ",
-                        ValueSource.Expression,
+                        ValueSource.LastInnerExpression,
                         prop,
                         counter);
                 }
                 counter++;
             }
             sb.Remove(sb.Length - 3, 3);
-            return sb.ToString();
+            return ValueSource.OuterExpression.Replace(PREDICATE_PLACEHOLDER, sb.ToString());
         }
 
         private string[] _propNames;
@@ -747,7 +761,7 @@ namespace Zetbox.Client.Models
 
         protected override string GetPredicate()
         {
-            return string.Format("{0} >= @0 && {0} < @0.AddMonths(1)", ValueSource.Expression);
+            return ValueSource.OuterExpression.Replace(PREDICATE_PLACEHOLDER, string.Format("{0} >= @0 && {0} < @0.AddMonths(1)", ValueSource.LastInnerExpression));
         }
     }
 
@@ -787,7 +801,7 @@ namespace Zetbox.Client.Models
 
         protected override string GetPredicate()
         {
-            return string.Format("{0}.Year == @0", ValueSource.Expression);
+            return ValueSource.OuterExpression.Replace(PREDICATE_PLACEHOLDER, string.Format("{0}.Year == @0", ValueSource.LastInnerExpression));
         }
     }
 
@@ -848,7 +862,7 @@ namespace Zetbox.Client.Models
 
         protected override string GetPredicate()
         {
-            return string.Format("{0} >= @0 AND {0} <= @1", ValueSource.Expression);
+            return ValueSource.OuterExpression.Replace(PREDICATE_PLACEHOLDER, string.Format("{0} >= @0 AND {0} <= @1", ValueSource.LastInnerExpression));
         }
 
         public DateTimeValueModel From
@@ -882,7 +896,7 @@ namespace Zetbox.Client.Models
 
         protected override string GetPredicate()
         {
-            return string.Format("({0} >= @0 AND {0} < @1) OR ({1} >= @0 AND {1} < @1) OR ({0} < @0 AND {1} >= @1)", ValueSource.Expression, ToValueSource.Expression);
+            return ValueSource.OuterExpression.Replace(PREDICATE_PLACEHOLDER, string.Format("({0} >= @0 AND {0} < @1) OR ({1} >= @0 AND {1} < @1) OR ({0} < @0 AND {1} >= @1)", ValueSource.LastInnerExpression, ToValueSource.LastInnerExpression));
         }
 
         public IFilterValueSource ToValueSource
@@ -978,26 +992,26 @@ namespace Zetbox.Client.Models
                 sb.Append(GetPredicate(ToOperator, "@1"));
             }
 
-            return sb.ToString();
+            return ValueSource.OuterExpression.Replace(PREDICATE_PLACEHOLDER, sb.ToString());
         }
 
         private string GetPredicate(FilterOperators op, string arg)
         {
             if (op == FilterOperators.Contains)
             {
-                return string.Format("{0}.ToLower().Contains({1}.ToLower())", ValueSource.Expression, arg);
+                return string.Format("{0}.ToLower().Contains({1}.ToLower())", ValueSource.LastInnerExpression, arg);
             }
             else if (op == FilterOperators.IsNull)
             {
-                return string.Format("{0} = null", ValueSource.Expression);
+                return string.Format("{0} = null", ValueSource.LastInnerExpression);
             }
             else if (op == FilterOperators.IsNotNull)
             {
-                return string.Format("{0} != null", ValueSource.Expression);
+                return string.Format("{0} != null", ValueSource.LastInnerExpression);
             }
             else
             {
-                return string.Format("{0} {1} {2}", ValueSource.Expression, GetOperatorExpression(op), arg);
+                return string.Format("{0} {1} {2}", ValueSource.LastInnerExpression, GetOperatorExpression(op), arg);
             }
         }
 
@@ -1112,7 +1126,8 @@ namespace Zetbox.Client.Models
 
         protected override string GetPredicate()
         {
-            return ValueSource.Expression;
+            // Remove PREDICATE_PLACEHOLDER - a OptionalPredicate contains the ready made expression
+            return ValueSource.Expression.Replace(PREDICATE_PLACEHOLDER, "");
         }
 
         public override bool Enabled

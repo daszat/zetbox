@@ -17,6 +17,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
     using System.Collections.ObjectModel;
     using Zetbox.Client.GUI;
     using Zetbox.App.Extensions;
+    using Autofac;
 
     [CLSCompliant(false)]
     public class DataTypeGraph : BidirectionalGraph<DataTypeGraphModel, IEdge<DataTypeGraphModel>>
@@ -33,17 +34,15 @@ namespace Zetbox.Client.Presentables.ModuleEditor
     [ViewModelDescriptor]
     public class DiagramViewModel : ViewModel, IRefreshCommandListener
     {
-        public new delegate DiagramViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Module module);
+        public new delegate DiagramViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Zetbox.App.Base.Module module);
 
-        public DiagramViewModel(IViewModelDependencies appCtx, ViewModel parent, IZetboxContext dataCtx, Module module, Func<IZetboxContext> ctxFactory)
+        public DiagramViewModel(IViewModelDependencies appCtx, ViewModel parent, IZetboxContext dataCtx, Zetbox.App.Base.Module module)
             : base(appCtx, dataCtx, parent)
         {
-            this.ctxFactory = ctxFactory;
             this.Module = module;
         }
 
-        protected readonly Func<IZetboxContext> ctxFactory;
-        public Module Module { get; private set; }
+        public Zetbox.App.Base.Module Module { get; private set; }
 
         public ViewModel DashboardViewModel
         {
@@ -113,7 +112,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             {
                 if (_moduleViewModels == null)
                 {
-                    _moduleViewModels = new ObservableCollection<ModuleGraphViewModel>(DataContext.GetQuery<Module>()
+                    _moduleViewModels = new ObservableCollection<ModuleGraphViewModel>(DataContext.GetQuery<Zetbox.App.Base.Module>()
                                     .OrderBy(m => m.Name)
                                     .ToList()
                                     .Select(m => ViewModelFactory.CreateViewModel<ModuleGraphViewModel.Factory>().Invoke(DataContext, this, m))
@@ -178,7 +177,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             _dataTypeViewModels = null;
             if (_moduleViewModels != null)
             {
-                var newModules = DataContext.GetQuery<Module>().ToList();
+                var newModules = DataContext.GetQuery<Zetbox.App.Base.Module>().ToList();
                 // Add new ones, keep existing ones
                 foreach (var newModule in newModules.Except(_moduleViewModels.Select(mv => mv.Module)))
                 {
@@ -432,17 +431,18 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                 {
                     _NewRelationCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "New Relation", "Creates a new Relation", () =>
                     {
-                        var newCtx = ctxFactory();
-                        var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx, null);
+                        var newScope = ViewModelFactory.CreateNewScope();
+                        var newCtx = newScope.ViewModelFactory.CreateNewContext();
+                        var newWorkspace = ObjectEditorWorkspace.Create(newScope.Scope, newCtx);
                         var newRel = newCtx.Create<Relation>();
 
-                        newRel.Module = newCtx.Find<Module>(Module.ID);
+                        newRel.Module = newCtx.Find<Zetbox.App.Base.Module>(Module.ID);
                         // First() and Last() may be the same
                         newRel.A.Type = newCtx.Find<ObjectClass>(SelectedGraphDataTypeViewModels.First().ID);
                         newRel.B.Type = newCtx.Find<ObjectClass>(SelectedGraphDataTypeViewModels.Last().ID);
 
-                        newWorkspace.ShowModel(DataObjectViewModel.Fetch(ViewModelFactory, newCtx, newWorkspace, newRel));
-                        ViewModelFactory.ShowModel(newWorkspace, true);
+                        newWorkspace.ShowModel(DataObjectViewModel.Fetch(newScope.ViewModelFactory, newCtx, newWorkspace, newRel));
+                        newScope.ViewModelFactory.ShowModel(newWorkspace, true);
                     },
                     () => (SelectedGraphDataTypeViewModels.Count() == 1 || SelectedGraphDataTypeViewModels.Count() == 2) && SelectedGraphDataTypeViewModels.Any(dt => dt.DataType is ObjectClass),
                     null);

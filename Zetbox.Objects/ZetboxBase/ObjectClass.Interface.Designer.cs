@@ -129,5 +129,10 @@ namespace Zetbox.App.Base
         /// 
         /// </summary>
         IEnumerable<Zetbox.App.Base.Method> GetInheritedMethods();
+
+        /// <summary>
+        /// Replaces all references of the given object with the target object. Does not change any other properties and will not delete the source object.
+        /// </summary>
+        void ReplaceObject(Zetbox.API.IDataObject target, Zetbox.API.IDataObject source);
     }
 }

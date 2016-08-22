@@ -171,4 +171,19 @@
   <data name="ExportBusyMessageFormat" xml:space="preserve">
     <value>Exporting page {0}</value>
   </data>
+  <data name="ExportXmlCommand" xml:space="preserve">
+    <value>Export as XML</value>
+  </data>
+  <data name="ExportXmlommand_Tooltip" xml:space="preserve">
+    <value>Export as XML to another zetbox instance</value>
+  </data>
+  <data name="MergeCommand" xml:space="preserve">
+    <value>Merge</value>
+  </data>
+  <data name="MergeCommand_Reason" xml:space="preserve">
+    <value>Please select two objects</value>
+  </data>
+  <data name="MergeCommand_Tooltip" xml:space="preserve">
+    <value>Merges two objects into one</value>
+  </data>
 </root>

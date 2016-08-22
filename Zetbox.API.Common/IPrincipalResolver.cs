@@ -73,6 +73,7 @@ namespace Zetbox.API.Common
 
         private readonly ILifetimeScope _parentScope;
         private readonly Dictionary<string, ZetboxPrincipal> _cache;
+        private DateTime _clearTime = DateTime.MinValue;
 
         private ILifetimeScope _currentScope;
         private IReadOnlyZetboxContext _resolverCtx;
@@ -86,14 +87,15 @@ namespace Zetbox.API.Common
 
         private void CheckScope()
         {
-            // for now, just cache indefinitely. the service will have to be recycled regularily
-            if (_currentScope == null)
+            // for now, clear the cache every hour
+            if (_currentScope == null || _clearTime < DateTime.Now)
             {
                 Logging.Log.Info("(Re-)Initialising BaseIdentityResolver's cache");
                 _cache.Clear();
                 if (_currentScope != null) _currentScope.Dispose();
                 _currentScope = _parentScope.BeginLifetimeScope();
                 _resolverCtx = _currentScope.Resolve<IReadOnlyZetboxContext>();
+                _clearTime = DateTime.Now.AddHours(1);
             }
         }
 
@@ -125,7 +127,7 @@ namespace Zetbox.API.Common
                     try
                     {
                         var identity = _resolverCtx.GetQuery<Identity>().Where(i => i.UserName.ToLower() == id).FirstOrDefault();
-                        if (identity != null)
+                        if (identity != null && identity.IsDeactivated == false)
                         {
                             result = _cache[id] = new ZetboxPrincipal(id: identity.ID, userName: identity.UserName, displayName: identity.DisplayName, groups: identity.Groups.Select(g => new ZetboxPrincipalGroup(id: g.ID, name: g.Name, exportGuid: g.ExportGuid)));
                         }

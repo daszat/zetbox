@@ -21,6 +21,7 @@
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
     -->
     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    <converter:BooleanToInvisibilityConverter x:Key="BooleanToInvisibilityConverter" />
     <converter:ImageConverter x:Key="ImageConverter" />
 
     <Style TargetType="{x:Type ctrls:HelpButton}">
@@ -35,39 +36,62 @@
         </Setter>
     </Style>
 
+    <Style x:Key="labeledViewBackround" 
+           TargetType="{x:Type Border}">
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Margin" Value="-1" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsValid}" Value="false">
+                <Setter Property="Background" Value="LightCoral" />
+                <Setter Property="BorderBrush" Value="Red" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+
     <Style TargetType="{x:Type ctrls:LabeledView}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ctrls:LabeledView}">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition MinWidth="{Binding Path=LabelMinWidth, RelativeSource={x:Static RelativeSource.TemplatedParent}}"
+                    <Border Style="{StaticResource labeledViewBackround}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition MinWidth="{Binding Path=LabelMinWidth, RelativeSource={x:Static RelativeSource.TemplatedParent}}"
                                               Width="{Binding Path=LabelWidth, RelativeSource={x:Static RelativeSource.TemplatedParent}}"
                                               SharedSizeGroup="{Binding Path=LabelSharedSizeGroup, RelativeSource={x:Static RelativeSource.TemplatedParent}}" />
-                            <ColumnDefinition Width="1*" />
-                        </Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
 
-                        <StackPanel Grid.Column="0"
-                                    Orientation="Horizontal"
-                                    VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={x:Static RelativeSource.TemplatedParent}}">
-                            <TextBlock Text="{Binding Label, Mode=OneWay}"
+                            <DockPanel Grid.Column="0"
+                                   VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={x:Static RelativeSource.TemplatedParent}}">
+                                <TextBlock DockPanel.Dock="Left"
+                                       Text="{Binding Label, Mode=OneWay}"
                                        ToolTip="{Binding ToolTip, Mode=OneWay}" />
-                            <TextBlock Text="*"
+                                <TextBlock DockPanel.Dock="Left"
+                                       Text="*"
                                        Margin="2,0,0,0"
                                        Foreground="Red"
                                        FontWeight="Bold"
                                        Visibility="{Binding Required, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                            <ctrls:HelpButton Margin="5,0,0,0"
+                                <ctrls:HelpButton DockPanel.Dock="Left"
+                                              Margin="5,0,0,0"
                                               VerticalAlignment="Top" />
-                        </StackPanel>
+                                <ctrls:ErrorMarker DockPanel.Dock="Right" 
+                                               HorizontalAlignment="Right"
+                                               Margin="5,0,0,0" 
+                                               ToolTip="{Binding ValidationError}"
+                                               Visibility="{Binding IsValid, Converter={StaticResource BooleanToInvisibilityConverter}}"/>
+                            </DockPanel>
 
-                        <ContentPresenter Grid.Column="1"
+                            <ContentPresenter Grid.Column="1"
                                           x:Name="PART_ContentPresenter"
                                           Margin="5,0,0,0"
                                           VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={x:Static RelativeSource.TemplatedParent}}"
                                           Content="{Binding Model, Mode=OneWay}"
                                           tk:VisualTypeTemplateSelector.RequestedKind="{Binding RequestedKind, Mode=OneWay, RelativeSource={x:Static RelativeSource.TemplatedParent}}" />
-                    </Grid>
+                        </Grid>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -85,20 +109,26 @@
                             <ColumnDefinition Width="1*" />
                         </Grid.ColumnDefinitions>
 
-                        <StackPanel Grid.Column="0"
-                                    Orientation="Horizontal"
-                                    Margin="0,3,0,0">
-                            <TextBlock Grid.Column="0"
+                        <DockPanel Grid.Column="0"
+                                   Margin="0,3,0,0">
+                            <TextBlock DockPanel.Dock="Left"                                       
                                        Text="{Binding Label, Mode=OneWay, RelativeSource={x:Static RelativeSource.TemplatedParent}}"
                                        ToolTip="{Binding ToolTip, Mode=OneWay, RelativeSource={x:Static RelativeSource.TemplatedParent}}" />
-                            <TextBlock Text="*"
+                            <TextBlock DockPanel.Dock="Left"
+                                       Text="*"
                                        Margin="2,0,0,0"
                                        Foreground="Red"
                                        FontWeight="Bold"
                                        Visibility="{Binding Required, Mode=OneWay, RelativeSource={x:Static RelativeSource.TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                            <ctrls:HelpButton Margin="5,0,0,0"
+                            <ctrls:HelpButton DockPanel.Dock="Left"
+                                              Margin="5,0,0,0"
                                               VerticalAlignment="Top" />
-                        </StackPanel>
+                            <ctrls:ErrorMarker DockPanel.Dock="Right" 
+                                               HorizontalAlignment="Right"
+                                               Margin="5,0,0,0" 
+                                               ToolTip="{Binding ValidationError}"
+                                               Visibility="{Binding IsValid, Converter={StaticResource BooleanToInvisibilityConverter}}"/>
+                        </DockPanel>
 
                         <ContentPresenter Grid.Column="1"
                                           Margin="5,0,0,0"
@@ -114,19 +144,26 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ctrls:LabeledViewHorizontal}">
                     <DockPanel>
-                        <StackPanel DockPanel.Dock="Top"
-                                    Orientation="Horizontal"
-                                    VerticalAlignment="Top">
-                            <TextBlock Text="{Binding Label, Mode=OneWay}"
+                        <DockPanel DockPanel.Dock="Top"
+                                   VerticalAlignment="Top">
+                            <TextBlock DockPanel.Dock="Left"
+                                       Text="{Binding Label, Mode=OneWay}"
                                        ToolTip="{Binding ToolTip, Mode=OneWay}" />
-                            <TextBlock Text="*"
+                            <TextBlock DockPanel.Dock="Left"
+                                       Text="*"
                                        Margin="2,0,0,0"
                                        Foreground="Red"
                                        FontWeight="Bold"
                                        Visibility="{Binding Required, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                            <ctrls:HelpButton Margin="5,0,0,0"
+                            <ctrls:HelpButton DockPanel.Dock="Left"
+                                              Margin="5,0,0,0"
                                               VerticalAlignment="Top" />
-                        </StackPanel>
+                            <ctrls:ErrorMarker DockPanel.Dock="Right" 
+                                               HorizontalAlignment="Right"
+                                               Margin="5,0,0,0" 
+                                               ToolTip="{Binding ValidationError.Message}"
+                                               Visibility="{Binding IsValid, Converter={StaticResource BooleanToInvisibilityConverter}}"/>
+                        </DockPanel>
 
                         <ContentPresenter Grid.Row="1"
                                           x:Name="PART_ContentPresenter"
@@ -164,6 +201,26 @@
                             </TextBlock.Style>
                         </TextBlock>
                     </DockPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type ctrls:ErrorMarker}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ctrls:ErrorMarker}">
+                    <Border Background="Red"  
+                                    Width="20"                                     
+                                    Height="20" 
+                                    CornerRadius="10">
+                        <TextBlock Text="!" 
+                                           VerticalAlignment="Center" 
+                                           HorizontalAlignment="Center" 
+                                           FontWeight="Bold" 
+                                           Foreground="White">
+                        </TextBlock>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

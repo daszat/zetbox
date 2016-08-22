@@ -109,6 +109,23 @@ namespace Zetbox.API.Client.PerfCounter
             }
         }
 
+        protected long ViewModel { get; private set; }
+        public void IncrementViewModel()
+        {
+            lock (counterLock)
+            {
+                ViewModel++;
+            }
+        }
+        public void DecrementViewModel()
+        {
+            lock (counterLock)
+            {
+                ViewModel--;
+                Dump(false);
+            }
+        }
+
         /// <summary>
         /// Default implementation does nothing. You need to read the values directly.
         /// </summary>
@@ -119,6 +136,7 @@ namespace Zetbox.API.Client.PerfCounter
             base.FormatTo(values);
             values["ViewModelCreate"] = ViewModelCreate.ToString();
             values["ViewModelFetch"] = ViewModelFetch.ToString();
+            values["ViewModel"] = ViewModel.ToString();
         }
     }
 }

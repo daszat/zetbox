@@ -45,7 +45,10 @@ namespace Zetbox.App.GUI
                 var fi = new System.IO.FileInfo(path);
                 int id = obj.Context.CreateBlob(fi, fi.GetMimeType());
                 obj.Blob = obj.Context.Find<Zetbox.App.Base.Blob>(id);
-                obj.IconFile = obj.Blob.OriginalName;
+                if (string.IsNullOrWhiteSpace(obj.IconFile))
+                {
+                    obj.IconFile = obj.Blob.OriginalName;
+                }
             }
         }
 

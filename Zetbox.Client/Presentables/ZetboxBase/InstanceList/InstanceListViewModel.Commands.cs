@@ -46,6 +46,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
             if (AllowExport) result.Add(ExportContainerCommand);
 
+            if (AllowMerge) result.Add(MergeCommand);
+
             return result;
         }
 
@@ -53,23 +55,32 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             if (commandsStore == null) return;
 
+            // Recreate list, but preserce content
+            // This is needed, as the Toolbar will not re-apply a DataTemplate
+            // http://stackoverflow.com/questions/16019855/how-can-i-solve-a-toolbar-bug-with-datatemplates
+            commandsStore = new ObservableCollection<ICommandViewModel>(commandsStore);
+
             var showOpenCommand = AllowOpen && (OpenCommand == DefaultCommand);
             var showDefaultCommand = OpenCommand != DefaultCommand;
 
-            if (!AllowAddNew && commandsStore.Contains(NewCommand)) commandsStore.Remove(NewCommand);
-            if (!showOpenCommand && commandsStore.Contains(OpenCommand)) commandsStore.Remove(OpenCommand);
-            if (!showDefaultCommand && commandsStore.Contains(DefaultCommand)) commandsStore.Remove(DefaultCommand);
+            if (commandsStore.Contains(NewCommand)) commandsStore.Remove(NewCommand);
+            if (commandsStore.Contains(OpenCommand)) commandsStore.Remove(OpenCommand);
+            if (commandsStore.Contains(_defaultCommand)) commandsStore.Remove(DefaultCommand);
             if (commandsStore.Contains(RefreshCommand)) commandsStore.Remove(RefreshCommand);
-            if (!AllowDelete && commandsStore.Contains(DeleteCommand)) commandsStore.Remove(DeleteCommand);
-            if (!AllowExport && commandsStore.Contains(ExportContainerCommand)) commandsStore.Remove(ExportContainerCommand);
+            if (commandsStore.Contains(DeleteCommand)) commandsStore.Remove(DeleteCommand);
+            if (commandsStore.Contains(ExportContainerCommand)) commandsStore.Remove(ExportContainerCommand);
+            if (commandsStore.Contains(MergeCommand)) commandsStore.Remove(MergeCommand);
 
             var index = 0;
-            if (AllowAddNew && !commandsStore.Contains(NewCommand)) commandsStore.Insert(index++, NewCommand);
-            if (showOpenCommand && !commandsStore.Contains(OpenCommand)) commandsStore.Insert(index++, OpenCommand);
-            if (showDefaultCommand && !commandsStore.Contains(DefaultCommand)) commandsStore.Insert(index++, DefaultCommand);
-            if (!commandsStore.Contains(RefreshCommand)) commandsStore.Insert(index++, RefreshCommand);
-            if (AllowDelete && !commandsStore.Contains(DeleteCommand)) commandsStore.Insert(index++, DeleteCommand);
-            if (AllowExport && !commandsStore.Contains(ExportContainerCommand)) commandsStore.Insert(index++, ExportContainerCommand);
+            if (AllowAddNew) commandsStore.Insert(index++, NewCommand);
+            if (showOpenCommand) commandsStore.Insert(index++, OpenCommand);
+            if (showDefaultCommand) commandsStore.Insert(index++, DefaultCommand);
+            commandsStore.Insert(index++, RefreshCommand);
+            if (AllowDelete) commandsStore.Insert(index++, DeleteCommand);
+            if (AllowExport) commandsStore.Insert(index++, ExportContainerCommand);
+            if (AllowMerge) commandsStore.Insert(index++, MergeCommand);
+
+            OnPropertyChanged("Commands");
         }
 
         private ICommandViewModel _defaultCommand;
@@ -242,6 +253,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                     _type,
                     props => { });
             dlg.FollowRelationsOne = true;
+            dlg.FollowRelationsMany = true;
+            dlg.FollowRelationsManyDeep = false; // Only first level!
             dlg.MultiSelect = true;
             dlg.UpdateInitialSelectedProperties(this.DisplayedProperties);
             dlg.SelectedPropertySelectionChanged += (s, e) =>
@@ -263,6 +276,64 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             _displayedColumns = null;
             OnPropertyChanged("DisplayedColumns");
+        }
+
+        private ICommandViewModel _MergeCommand = null;
+        public ICommandViewModel MergeCommand
+        {
+            get
+            {
+                if (_MergeCommand == null)
+                {
+                    _MergeCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, 
+                        InstanceListViewModelResources.MergeCommand, 
+                        InstanceListViewModelResources.MergeCommand_Tooltip, 
+                        Merge, CanMerge, CanMergeReason);
+                    _MergeCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.reload_png.Find(FrozenContext));
+                }
+                return _MergeCommand;
+            }
+        }
+
+        public bool CanMerge()
+        {
+            return SelectedItems.Count == 2;
+        }
+
+        public string CanMergeReason()
+        {
+            return InstanceListViewModelResources.MergeCommand_Reason;
+        }
+
+        public void Merge()
+        {
+            if (!CanMerge()) return;
+
+            if (GetWorkspace() is IContextViewModel && GetWorkspace() is IMultipleInstancesManager)
+            {
+                // Stay in current workspace
+                var ws = (IMultipleInstancesManager)GetWorkspace();
+                if(ws != null)
+                {
+                    var task = ViewModelFactory.CreateViewModel<ObjectEditor.MergeObjectsTaskViewModel.Factory>().Invoke(DataContext, GetWorkspace(), SelectedItems[0].Object, SelectedItems[1].Object);
+                    ws.AddItem(task);
+                    ws.SelectedItem = task;
+                }
+            } 
+            else 
+            {
+                var newScope = ViewModelFactory.CreateNewScope();
+                var newCtx = newScope.ViewModelFactory.CreateNewContext();
+
+                var ift = DataType.GetDescribedInterfaceType();
+                var target = newCtx.Find(ift, SelectedItems[0].ID);
+                var source = newCtx.Find(ift, SelectedItems[1].ID);
+
+                var ws = ObjectEditor.WorkspaceViewModel.Create(newScope.Scope, newCtx);
+                var task = newScope.ViewModelFactory.CreateViewModel<ObjectEditor.MergeObjectsTaskViewModel.Factory>().Invoke(newCtx, ws, target, source);
+                ws.ShowModel(task);
+                newScope.ViewModelFactory.ShowModel(ws, RequestedWorkspaceKind, true);
+            }
         }
         #endregion
 

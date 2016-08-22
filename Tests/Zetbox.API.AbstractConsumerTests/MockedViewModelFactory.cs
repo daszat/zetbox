@@ -28,8 +28,8 @@ namespace Zetbox.API.AbstractConsumerTests
 
     public class MockedViewModelFactory : ViewModelFactory
     {
-        public MockedViewModelFactory(ILifetimeScope container, IFrozenContext frozenCtx, ZetboxConfig cfg, IPerfCounter perfCounter, DialogCreator.Factory dialogFactory)
-            : base(container, frozenCtx, cfg, perfCounter, dialogFactory)
+        public MockedViewModelFactory(ILifetimeScopeFactory scopeFactory, Autofac.ILifetimeScope scope, IFrozenContext frozenCtx, ZetboxConfig cfg, IPerfCounter perfCounter, DialogCreator.Factory dialogFactory)
+            : base(scopeFactory, scope, frozenCtx, cfg, perfCounter, dialogFactory)
         {
         }
 
@@ -38,7 +38,7 @@ namespace Zetbox.API.AbstractConsumerTests
             throw new NotImplementedException();
         }
 
-        private bool _decisionFromUser = false;
+        private static bool _decisionFromUser = false;
         public void SetDecisionFromUser(bool d)
         {
             _decisionFromUser = d;
@@ -59,24 +59,36 @@ namespace Zetbox.API.AbstractConsumerTests
             throw new NotImplementedException();
         }
 
-        public ViewModel LastShownModel { get; private set; }
-        protected override void ShowInView(ViewModel mdl, object view, bool activate, bool asDialog, ViewModel ownerMdl)
+        private static ViewModel _lastShownModel;
+        public ViewModel LastShownModel
         {
-            LastShownModel = mdl;
+            get
+            {
+                return _lastShownModel;
+            }
         }
 
-        public string LastShownCaption { get; private set; }
-        public string LastShownMessage { get; private set; }
+        protected override void ShowInView(ViewModel mdl, object view, bool activate, bool asDialog, ViewModel ownerMdl)
+        {
+            _lastShownModel = mdl;
+        }
+
+        private static string _lastShownCaption;
+        private static string _lastShownMessage;
+
+        public string LastShownCaption { get { return _lastShownCaption; } }
+        public string LastShownMessage { get { return _lastShownMessage; } }
+
         public override void ShowMessage(string message, string caption)
         {
-            LastShownCaption = caption;
-            LastShownMessage = message;
+            _lastShownCaption = caption;
+            _lastShownMessage = message;
         }
 
         public void ResetMock()
         {
-            LastShownMessage = LastShownCaption = string.Empty;
-            LastShownModel = null;
+            _lastShownMessage = _lastShownCaption = string.Empty;
+            _lastShownModel = null;
         }
 
         public override Zetbox.App.GUI.Toolkit Toolkit
@@ -87,7 +99,7 @@ namespace Zetbox.API.AbstractConsumerTests
         public T GetLastShownModel<T>()
             where T : ViewModel
         {
-            return (T)this.LastShownModel;
+            return (T)LastShownModel;
         }
     }
 }

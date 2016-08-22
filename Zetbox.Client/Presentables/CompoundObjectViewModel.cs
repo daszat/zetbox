@@ -51,7 +51,6 @@ namespace Zetbox.Client.Presentables
 
         private void ObjectPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            // propagate updates for IDataErrorInfo
             OnPropertyChanged("PropertyModels");
             OnPropertyChanged("PropertyModelsByName");
             OnPropertyChanged("PropertyGroups");

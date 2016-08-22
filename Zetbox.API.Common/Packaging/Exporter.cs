@@ -237,6 +237,66 @@ namespace Zetbox.App.Packaging
             }
         }
 
+        public static void Export(IReadOnlyZetboxContext ctx, string filename, IEnumerable<IDataObject> objects)
+        {
+            using (var s = new FileSystemPackageProvider(filename, BasePackageProvider.Modes.Write))
+            {
+                Export(ctx, s, objects);
+            }
+        }
+
+        public static void Export(IReadOnlyZetboxContext ctx, Stream stream, IEnumerable<IDataObject> objects, string streamDescription)
+        {
+            using (var s = new StreamPackageProvider(stream, BasePackageProvider.Modes.Write, streamDescription))
+            {
+                Export(ctx, s, objects);
+            }
+        }
+
+        public static void Export(IReadOnlyZetboxContext ctx, IPackageProvider s, IEnumerable<IDataObject> objects)
+        {
+            var schemaList = objects.Select(i => i.GetObjectClass(ctx).Module).Distinct().ToArray();
+            var schemaNamespaces = schemaList.Select(m => m.Namespace).ToArray();
+            var allObjectGuids = new HashSet<Guid>();
+
+            WriteStartDocument(s, ctx, schemaList);
+
+            ExportInternal(ctx, s, schemaNamespaces, allObjectGuids, objects);
+
+            s.Writer.WriteEndElement();
+            s.Writer.WriteEndDocument();
+        }
+
+        private static void ExportInternal(IReadOnlyZetboxContext ctx, IPackageProvider s, string[] schemaNamespaces, HashSet<Guid> allObjectGuids, IEnumerable<IDataObject> objects)
+        {
+            foreach (var obj in objects)
+            {
+                var exp = (IExportable)obj;
+                if (allObjectGuids.Contains(exp.ExportGuid)) continue;
+                allObjectGuids.Add(exp.ExportGuid);
+
+                ExportObject(s, obj, schemaNamespaces);
+                var cls = obj.GetObjectClass(ctx);
+                foreach (var rel in cls.GetRelations())
+                {
+                    IEnumerable<IDataObject> lst = null;
+                    if (rel.Containment == ContainmentSpecification.AContainsB && rel.A.Type == cls && rel.A.Navigator != null)
+                    {
+                        lst = obj.GetPropertyValue<IEnumerable>(rel.A.Navigator.Name).OfType<IDataObject>();
+                    }
+                    else if (rel.Containment == ContainmentSpecification.BContainsA && rel.B.Type == cls && rel.B.Navigator != null)
+                    {
+                        lst = obj.GetPropertyValue<IEnumerable>(rel.B.Navigator.Name).OfType<IDataObject>();
+                    }
+
+                    if (lst != null && lst.Any())
+                    {
+                        ExportInternal(ctx, s, schemaNamespaces, allObjectGuids, lst);
+                    }
+                }
+            }
+        }
+
         // workaround gendarme spinning in a loop when checking ExportFromContext
         private static IEnumerable<IModuleMember> AllModuleMembers(IReadOnlyZetboxContext ctx, ObjectClass objClass)
         {
@@ -248,7 +308,9 @@ namespace Zetbox.App.Packaging
         // workaround gendarme spinning in a loop when checking ExportFromContext
         private static IOrderedEnumerable<IDataObject> AllExportables(IReadOnlyZetboxContext ctx, ObjectClass objClass)
         {
-            return ctx.Internals().GetAll(objClass.GetDescribedInterfaceType()).Where(obj => obj.GetObjectClass(ctx) == objClass).OrderBy(obj => ((IExportable)obj).ExportGuid);
+            return ctx.Internals().GetAll(objClass.GetDescribedInterfaceType())
+                                            .Where(obj => obj.GetObjectClass(ctx) == objClass)
+                                            .OrderBy(obj => ((IExportable)obj).ExportGuid);
         }
 
         #region Xml/Export private Methods
@@ -344,18 +406,7 @@ namespace Zetbox.App.Packaging
                 }
             }
 
-            DateTime? lastChanged = new DateTime?[] { 
-                ctx.GetQuery<Zetbox.App.Base.Constraint>().Max(d => d.ChangedOn),
-                ctx.GetQuery<Zetbox.App.Base.DataType>().Max(d => d.ChangedOn),
-                ctx.GetQuery<Zetbox.App.Base.DefaultPropertyValue>().Max(d => d.ChangedOn),
-                ctx.GetQuery<Zetbox.App.Base.EnumerationEntry>().Max(d => d.ChangedOn),
-                ctx.GetQuery<Zetbox.App.Base.Module>().Max(d => d.ChangedOn),
-                ctx.GetQuery<Zetbox.App.Base.Property>().Max(d => d.ChangedOn),
-                ctx.GetQuery<Zetbox.App.Base.Relation>().Max(d => d.ChangedOn),
-                ctx.GetQuery<Zetbox.App.Base.RelationEnd>().Max(d => d.ChangedOn)
-            }.Max();
-
-            writer.WriteAttributeString("date", XmlConvert.ToString(lastChanged ?? DateTime.Now, XmlDateTimeSerializationMode.Utc));
+            writer.WriteAttributeString("date", XmlConvert.ToString(DateTime.Now, XmlDateTimeSerializationMode.Utc));
         }
 
         private static List<Zetbox.App.Base.Module> GetModules(IReadOnlyZetboxContext ctx, string[] moduleNames)

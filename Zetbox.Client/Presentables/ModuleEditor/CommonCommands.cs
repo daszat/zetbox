@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Autofac;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,23 +14,20 @@ namespace Zetbox.Client.Presentables.ModuleEditor
 {
     public class NewObjectClassCommand : CommandViewModel
     {
-        public new delegate NewObjectClassCommand Factory(IZetboxContext dataCtx, ViewModel parent, Module module);
+        public new delegate NewObjectClassCommand Factory(IZetboxContext dataCtx, ViewModel parent, Zetbox.App.Base.Module module);
 
-        protected readonly Func<IZetboxContext> ctxFactory;
-        protected readonly Module module;
+        protected readonly Zetbox.App.Base.Module module;
 
         public NewObjectClassCommand(IViewModelDependencies appCtx,
-            IZetboxContext dataCtx, ViewModel parent, Module module,
-            Func<IZetboxContext> ctxFactory)
+            IZetboxContext dataCtx, ViewModel parent, Zetbox.App.Base.Module module)
             : base(appCtx, dataCtx, parent, "New Class", "Creates a new Class")
         {
-            this.ctxFactory = ctxFactory;
             this.module = module;
         }
 
         public delegate void CreatedEventHandler(ObjectClass newCls);
         public CreatedEventHandler Created;
-        public Func<Module> GetCurrentModule;
+        public Func<Zetbox.App.Base.Module> GetCurrentModule;
 
         public override System.Drawing.Image Icon
         {
@@ -64,11 +62,11 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                             .DefaultButtons("Create", "Cancel")
                             .Show(values =>
                             {
-                                var newCtx = ctxFactory();
-                                var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx, null);
+                                var newScope = ViewModelFactory.CreateNewScope();
+                                var newCtx = newScope.ViewModelFactory.CreateNewContext();
                                 var newCls = newCtx.Create<ObjectClass>();
 
-                                newCls.Module = newCtx.Find<Module>(GetCurrentModule != null ? GetCurrentModule().ID : module.ID);
+                                newCls.Module = newCtx.Find<Zetbox.App.Base.Module>(GetCurrentModule != null ? GetCurrentModule().ID : module.ID);
                                 newCls.Name = (string)values["name"];
                                 newCls.TableName = (string)values["table"];
                                 newCls.Description = (string)values["description"];
@@ -96,8 +94,9 @@ namespace Zetbox.Client.Presentables.ModuleEditor
 
                                 if ((bool)values["show"])
                                 {
-                                    newWorkspace.ShowModel(DataObjectViewModel.Fetch(ViewModelFactory, newCtx, newWorkspace, newCls));
-                                    ViewModelFactory.ShowModel(newWorkspace, true);
+                                    var newWorkspace = ObjectEditorWorkspace.Create(newScope.Scope, newCtx);
+                                    newWorkspace.ShowModel(DataObjectViewModel.Fetch(newScope.ViewModelFactory, newCtx, newWorkspace, newCls));
+                                    newScope.ViewModelFactory.ShowModel(newWorkspace, true);
                                 }
                                 else
                                 {
@@ -110,6 +109,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                                     {
                                         Created(newCls);
                                     }
+                                    newScope.Dispose();
                                 }
                             });
         }

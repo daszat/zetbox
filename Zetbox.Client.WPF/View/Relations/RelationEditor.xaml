@@ -35,25 +35,21 @@
                           Margin="{StaticResource DialogMargin}">
                     <DockPanel>
                         <ctrls:LabeledView DockPanel.Dock="Top"
-                                           Margin="5,0,5,0"
-                                           DataContext="{Binding PropertyModelsByName[Description], UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
+                                           DataContext="{Binding PropertyModelsByName[Description], UpdateSourceTrigger=PropertyChanged}" />
 
                         <ctrls:LabeledView DockPanel.Dock="Top"
-                                           Margin="5,0,5,0"
-                                           DataContext="{Binding PropertyModelsByName[Module], UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
+                                           DataContext="{Binding PropertyModelsByName[Module], UpdateSourceTrigger=PropertyChanged}" />
 
                         <ctrls:LabeledView DockPanel.Dock="Top"
-                                           Margin="5,0,5,0"
-                                           DataContext="{Binding PropertyModelsByName[Storage], UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
+                                           DataContext="{Binding PropertyModelsByName[Storage], UpdateSourceTrigger=PropertyChanged}" />
 
                         <ctrls:LabeledView DockPanel.Dock="Top"
-                                           Margin="5,0,5,0"
-                                           DataContext="{Binding PropertyModelsByName[Containment], UpdateSourceTrigger=PropertyChanged,ValidatesOnDataErrors=True}" />
+                                           DataContext="{Binding PropertyModelsByName[Containment], UpdateSourceTrigger=PropertyChanged}" />
                     </DockPanel>
                 </GroupBox>
 
                 <Grid DockPanel.Dock="Top"
-                      Margin="5,0,5,0">
+                      Margin="{StaticResource DialogMargin}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -70,20 +66,25 @@
                     <TextBlock Grid.Row="0"
                                Grid.Column="0"
                                HorizontalAlignment="Center"
+                               Margin="{StaticResource ItemMargin}"
                                FontWeight="Bold">A</TextBlock>
                     <TextBox Grid.Row="0"
                              Grid.Column="1"
-                             Text="{Binding A.RoleName.Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
+                             Margin="{StaticResource ItemMargin}"
+                             Text="{Binding A.RoleName.Value, UpdateSourceTrigger=PropertyChanged}" />
                     <TextBox Grid.Row="0"
                              Grid.Column="2"
                              Grid.ColumnSpan="2"
-                             Text="{Binding PropertyModelsByName[Verb].Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
+                             Margin="{StaticResource ItemMargin}"
+                             Text="{Binding PropertyModelsByName[Verb].Value, UpdateSourceTrigger=PropertyChanged}" />
                     <TextBox Grid.Row="0"
                              Grid.Column="4"
-                             Text="{Binding B.RoleName.Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}" />
+                             Margin="{StaticResource ItemMargin}"
+                             Text="{Binding B.RoleName.Value, UpdateSourceTrigger=PropertyChanged}" />
                     <TextBlock Grid.Row="0"
                                Grid.Column="5"
                                HorizontalAlignment="Center"
+                               Margin="{StaticResource ItemMargin}"
                                FontWeight="Bold">B</TextBlock>
 
                     <rels:RelationEndEditor Grid.Row="1"
@@ -117,45 +118,55 @@
                         <!-- A -->
                         <TextBlock Grid.Row="0"
                                    Grid.Column="0"
+                                   Margin="{StaticResource ItemMargin}"
                                    Text="{Binding A.RoleName.Value}" />
                         <TextBlock Grid.Row="0"
+                                   Margin="{StaticResource ItemMargin}"
                                    Grid.Column="1"
                                    Text="{Binding PropertyModelsByName[Verb].Value}" />
                         <ContentPresenter Grid.Row="0"
                                           Grid.Column="2"
+                                   Margin="{StaticResource ItemMargin}"
                                           tk:VisualTypeTemplateSelector.RequestedKind="{Binding RequestedKind, Mode=OneWay}"
                                           ContentTemplateSelector="{StaticResource defaultTemplateSelector}"
                                           Content="{Binding B.PropertyModelsByName[Multiplicity]}" />
                         <TextBlock Grid.Row="0"
                                    Grid.Column="3"
+                                   Margin="{StaticResource ItemMargin}"
                                    Text="{Binding B.RoleName.Value}"></TextBlock>
 
                         <!-- B -->
                         <TextBlock Grid.Row="1"
                                    Grid.Column="0"
+                                   Margin="{StaticResource ItemMargin}"
                                    Text="{Binding B.RoleName.Value}"></TextBlock>
                         <TextBlock Grid.Row="1"
                                    Grid.Column="1"
+                                   Margin="{StaticResource ItemMargin}"
                                    Text="{Binding PropertyModelsByName[Verb].Value}" />
                         <ContentPresenter Grid.Row="1"
                                           Grid.Column="2"
+                                          Margin="{StaticResource ItemMargin}"
                                           tk:VisualTypeTemplateSelector.RequestedKind="{Binding RequestedKind, Mode=OneWay}"
                                           ContentTemplateSelector="{StaticResource defaultTemplateSelector}"
                                           Content="{Binding A.PropertyModelsByName[Multiplicity]}" />
                         <TextBlock Grid.Row="1"
                                    Grid.Column="3"
+                                   Margin="{StaticResource ItemMargin}"
                                    Text="{Binding A.RoleName.Value}"></TextBlock>
 
                         <!-- Navigator A -->
                         <TextBlock Grid.Row="2"
                                    Grid.Column="0"
                                    Grid.ColumnSpan="4"
+                                   Margin="{StaticResource ItemMargin}"
                                    Text="{Binding NavigatorADescription}" />
 
                         <!-- Navigator B -->
                         <TextBlock Grid.Row="3"
                                    Grid.Column="0"
                                    Grid.ColumnSpan="4"
+                                   Margin="{StaticResource ItemMargin}"
                                    Text="{Binding NavigatorBDescription}" />
                     </Grid>
                 </GroupBox>

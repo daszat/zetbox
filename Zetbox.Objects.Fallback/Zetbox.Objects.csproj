@@ -198,6 +198,7 @@
     <Compile Include="ZetboxBase\IDeactivatable.Interface.Designer.cs" />
     <Compile Include="ZetboxBase\IExportable.Interface.Designer.cs" />
     <Compile Include="ZetboxBase\IInvocation.Interface.Designer.cs" />
+    <Compile Include="ZetboxBase\IMergeable.Interface.Designer.cs" />
     <Compile Include="SchemaMigration\IMigrationInfo.Interface.Designer.cs" />
     <Compile Include="ZetboxBase\IModuleMember.Interface.Designer.cs" />
     <Compile Include="ZetboxBase\INamedObject.Interface.Designer.cs" />

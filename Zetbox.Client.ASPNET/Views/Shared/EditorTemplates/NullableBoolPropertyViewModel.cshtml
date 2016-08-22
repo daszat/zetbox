@@ -9,6 +9,6 @@
 }
 else
 {
-    @Html.CheckBoxFor(m => m.Value, new { @class = ViewData["class"], placeholder = Model.ToolTip })
-    @Html.ValidationMessageFor(model => model.Value)
+    @Html.CheckBox("Value", Model.Value ?? false, new { @class = "" + ViewData["class"], placeholder = ViewData["placeholder"] as string })
+    @Html.ValidationMessageFor(m => m)
 }

@@ -22,19 +22,33 @@ namespace Zetbox.Client.Presentables.ObjectEditor
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
+    using Autofac;
     using Zetbox.API;
     using Zetbox.API.Client;
     using Zetbox.App.Base;
     using Zetbox.App.Extensions;
     using Zetbox.App.GUI;
+    using Zetbox.Client.Presentables.ValueViewModels;
     using Zetbox.Client.Presentables.ZetboxBase;
 
     [ViewModelDescriptor]
     public class WorkspaceViewModel
-        : WindowViewModel, IMultipleInstancesManager, IContextViewModel, IDeleteCommandParameter, IDisposable
+        : WindowViewModel, IMultipleInstancesManager, IContextViewModel, IDeleteCommandParameter
     {
         public new delegate WorkspaceViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
         private readonly IZetboxContextExceptionHandler _exceptionHandler;
+
+        public static WorkspaceViewModel Create(ILifetimeScope scope, IZetboxContext ctx)
+        {
+            if (scope == null) throw new ArgumentNullException("scope");
+            if (ctx == null) throw new ArgumentNullException("ctx");
+
+            var vmf = scope.Resolve<IViewModelFactory>();
+
+            var ws = vmf.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(ctx, null);
+            ws.Closed += (s, e) => scope.Dispose();
+            return ws;
+        }
 
         public WorkspaceViewModel(IViewModelDependencies appCtx,
             IZetboxContext dataCtx, ViewModel parent,
@@ -48,6 +62,8 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             Items = new ObservableCollection<ViewModel>();
             Items.CollectionChanged += new NotifyCollectionChangedEventHandler(Items_CollectionChanged);
             appCtx.Factory.OnIMultipleInstancesManagerCreated(dataCtx, this);
+
+            ValidationManager.Changed += ValidationManager_Changed;
         }
 
         void Items_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -66,6 +82,14 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             get
             {
                 return WorkspaceViewModelResources.ItemsLabel;
+            }
+        }
+
+        public string ErrorsLabel
+        {
+            get
+            {
+                return WorkspaceViewModelResources.ErrorsLabel;
             }
         }
 
@@ -238,43 +262,36 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             }
         }
 
-        public void Close()
-        {
-            this.Show = false;
-        }
-
         void IContextViewModel.Abort()
         {
             Close();
         }
 
-        List<IDataErrorInfo> _currentErrors = new List<IDataErrorInfo>();
-
-        public IEnumerable<IDataErrorInfo> GetErrors()
+        private IEnumerable<ErrorDescriptor> _errors;
+        public IEnumerable<ErrorDescriptor> Errors
         {
-            return _currentErrors;
+            get
+            {
+                if (_errors == null)
+                {
+                    _errors = ValidationManager
+                        .Errors
+                        .Where(i => i.Source is DataObjectViewModel)
+                        .Select(i => ViewModelFactory.CreateViewModel<ErrorDescriptor.Factory>().Invoke(DataContext, this, i));
+                }
+                return _errors;
+            }
         }
 
         public void UpdateErrors()
         {
-            _currentErrors = DataContext.AttachedObjects
-                .Where(o => o.CurrentAccessRights.HasReadRights())
-                .Where(o => o.ObjectState == DataObjectState.Modified || o.ObjectState == DataObjectState.New)
-                .OfType<IDataErrorInfo>()
-                .Where(s => !String.IsNullOrEmpty(s.Error))
-                .ToList();
+            ValidationManager.Validate();
+        }
 
-            foreach (var e in _errorViewModels.ToArray())
-            {
-                if (!string.IsNullOrEmpty(e.Error))
-                {
-                    _currentErrors.Add(e);
-                }
-                else
-                {
-                    _errorViewModels.Remove(e);
-                }
-            }
+        void ValidationManager_Changed(object sender, EventArgs e)
+        {
+            _errors = null;
+            OnPropertyChanged("Errors");
         }
 
         /// <summary>
@@ -284,17 +301,40 @@ namespace Zetbox.Client.Presentables.ObjectEditor
         /// <returns></returns>
         public bool CanSave()
         {
-            return _currentErrors.Count == 0;
+            return ValidationManager.IsValid;
+        }
+
+        public event EventHandler Saving;
+        private void OnSaving()
+        {
+            var temp = Saving;
+            if (temp != null)
+            {
+                temp(this, EventArgs.Empty);
+            }
+        }
+
+        public event EventHandler Saved;
+        private void OnSaved()
+        {
+            var temp = Saved;
+            if (temp != null)
+            {
+                temp(this, EventArgs.Empty);
+            }
         }
 
         public bool Save()
         {
             UpdateErrors();
-            if (_currentErrors.Count == 0)
+            if (ValidationManager.IsValid)
             {
                 try
                 {
+                    OnSaving();
                     DataContext.SubmitChanges();
+                    OnSaved();
+
                     foreach (var i in Items.OfType<DataObjectViewModel>().ToList())
                     {
                         if (i.Object == null || i.Object.ObjectState == DataObjectState.Deleted)
@@ -382,11 +422,30 @@ namespace Zetbox.Client.Presentables.ObjectEditor
         public void ShowVerificationResults()
         {
             UpdateErrors();
-            if (_currentErrors.Count > 0)
+            if (!ValidationManager.IsValid)
             {
-                var errorList = ViewModelFactory.CreateViewModel<ErrorListViewModel.Factory>().Invoke(DataContext, this);
-                errorList.RefreshErrors();
-                ViewModelFactory.ShowModel(errorList, true);
+                ShowErrors = true;
+            }
+            else
+            {
+                ShowErrors = false;
+            }
+        }
+
+        private bool _showErrors = false;
+        public bool ShowErrors
+        {
+            get
+            {
+                return _showErrors;
+            }
+            set
+            {
+                if (_showErrors != value)
+                {
+                    _showErrors = value;
+                    OnPropertyChanged("ShowErrors");
+                }
             }
         }
 
@@ -429,17 +488,9 @@ namespace Zetbox.Client.Presentables.ObjectEditor
 
         #endregion
 
-        #region ErrorManagement
-        private HashSet<IDataErrorInfo> _errorViewModels = new HashSet<IDataErrorInfo>();
-        public void RegisterError(IDataErrorInfo vmdl)
-        {
-            _errorViewModels.Add(vmdl);
-        }
-        #endregion
-
         #region Model Management
 
-        public DataObjectViewModel ShowObject(IDataObject obj, ControlKind requestedKind = null)
+        public DataObjectViewModel ShowObject(IDataObject obj, ControlKind requestedKind = null, bool activate = true)
         {
             obj = obj == null || obj.Context == DataContext
                 ? obj
@@ -451,7 +502,11 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                 vm.RequestedKind = requestedKind;
                 AddItem(vm);
             }
-            SelectedItem = vm;
+
+            if (activate)
+            {
+                SelectedItem = vm;
+            }
             return vm;
         }
 
@@ -489,13 +544,14 @@ namespace Zetbox.Client.Presentables.ObjectEditor
         }
         #endregion
 
-        #region IDisposable Members
-
-        public void Dispose()
+        #region Dispose
+        protected override void Dispose(bool disposing)
         {
-            ViewModelFactory.OnIMultipleInstancesManagerDisposed(DataContext, this);
+            if (disposing)
+            {
+                ViewModelFactory.OnIMultipleInstancesManagerDisposed(DataContext, this);
+            }
         }
-
         #endregion
 
         #region IDeleteCommandParameter members
@@ -529,6 +585,44 @@ namespace Zetbox.Client.Presentables.ObjectEditor
                 {
                     ShowObject(obj);
                 }
+
+                return true;
+            }
+            if (data is string[])
+            {
+                var files = (string[])data;
+                var objects = new List<IDataObject>();
+                foreach (var file in files)
+                {
+                    try
+                    {
+                        var xml = new System.Xml.XmlDocument();
+                        xml.Load(file);
+                        if (xml.DocumentElement.LocalName == "ZetboxPackaging")
+                        {
+                            objects.AddRange(Zetbox.App.Packaging.Importer.LoadFromXml(DataContext, file).OfType<IDataObject>());
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        // not an xml...
+                        Zetbox.API.Utils.Logging.Client.Error("Unable to import file.", ex);
+                    }
+                }
+
+                if (objects.Count > 0)
+                {
+                    foreach (var obj in objects)
+                    {
+                        ShowObject(obj, activate: false);
+                    }
+
+                    ViewModelFactory.CreateDelayedTask(this, () =>
+                    {
+                        this.SelectedItem = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, objects.First());
+                    }).Trigger();
+                }
+                return true;
             }
             return false;
         }
@@ -543,5 +637,87 @@ namespace Zetbox.Client.Presentables.ObjectEditor
             return null;
         }
         #endregion
+    }
+
+    public class ErrorDescriptor : ViewModel
+    {
+        public new delegate ErrorDescriptor Factory(IZetboxContext dataCtx, WorkspaceViewModel parent, ValidationError error);
+
+        private readonly ValidationError _error;
+        private readonly WorkspaceViewModel _workspace;
+
+        public ErrorDescriptor(IViewModelDependencies dependencies, IZetboxContext dataCtx, WorkspaceViewModel parent, ValidationError error)
+            : base(dependencies, dataCtx, parent)
+        {
+            this._error = error;
+            this._workspace = parent;
+        }
+
+        public ViewModel Item { get { return _error.Source; } }
+        public ValidationError Error { get { return _error; } }
+
+        public IEnumerable<string> Errors { get { return _error.Errors; } }
+        public IEnumerable<ErrorDescriptor> Children
+        {
+            get
+            {
+                return _error
+                    .Children
+                    .Select(i => ViewModelFactory.CreateViewModel<ErrorDescriptor.Factory>().Invoke(DataContext, _workspace, i));
+            }
+        }
+
+        private ICommandViewModel _GotoObjectCommand = null;
+        public ICommandViewModel GotoObjectCommand
+        {
+            get
+            {
+                if (_GotoObjectCommand == null)
+                {
+                    _GotoObjectCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(
+                        DataContext,
+                        null,
+                        WorkspaceViewModelResources.GotoObjectCommand_Name,
+                        WorkspaceViewModelResources.GotoObjectCommand_Tooltip,
+                        GotoObject, CanExecGotoObject, null);
+                }
+                return _GotoObjectCommand;
+            }
+        }
+
+        public bool CanExecGotoObject()
+        {
+            return Item is DataObjectViewModel || Item is BaseValueViewModel;
+        }
+
+        public void GotoObject()
+        {
+            if (CanExecGotoObject())
+            {
+                var item = Item;
+                if (item is DataObjectViewModel)
+                {
+                    ViewModelFactory.ShowModel(item, true);
+                }
+                if (item is BaseValueViewModel)
+                {
+                    var objVmdl = item.Parent as DataObjectViewModel;
+                    if (objVmdl != null)
+                    {
+                        ViewModelFactory.ShowModel(objVmdl, true);
+                        var grp = objVmdl.PropertyGroups.FirstOrDefault(i => i.PropertyModels.Contains(item));
+                        if (grp != null)
+                        {
+                            objVmdl.SelectedPropertyGroup = grp;
+                        }
+                    }
+                }
+            }
+        }
+
+        public override string Name
+        {
+            get { return Item.IfNotNull(i => i.Name); }
+        }
     }
 }

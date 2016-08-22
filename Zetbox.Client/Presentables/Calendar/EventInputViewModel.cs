@@ -12,9 +12,12 @@ namespace Zetbox.Client.Presentables.Calendar
     using Zetbox.Client.Presentables.ValueViewModels;
     using cal = Zetbox.App.Calendar;
 
-    public interface IEventInputViewModel : IDataErrorInfo
+    public interface IEventInputViewModel
     {
         EventViewModel CreateNew();
+        bool IsValid { get; }
+        ValidationError Validate();
+        ValidationError ValidationError { get; }
     }
 
     [ViewModelDescriptor]
@@ -169,23 +172,36 @@ namespace Zetbox.Client.Presentables.Calendar
         }
         #endregion
 
-        public virtual string Error
+        protected override void DoValidate()
         {
-            get
+            base.DoValidate();
+
+            Summary.Validate();
+            if (!Summary.IsValid)
             {
-                var sb = new StringBuilder();
-
-                if (string.IsNullOrEmpty(Summary.Value)) sb.AppendLine("Summary is empty");
-                if (!string.IsNullOrEmpty(StartDate.Error)) sb.AppendLine(StartDate.Error);
-                if (!string.IsNullOrEmpty(EndDate.Error)) sb.AppendLine(EndDate.Error);
-
-                return sb.ToString();
+                ValidationError.Children.Add(Summary.ValidationError);
             }
-        }
 
-        string IDataErrorInfo.this[string columnName]
-        {
-            get { return string.Empty; }
+            StartDate.Validate();
+            if (!StartDate.IsValid)
+            {
+                ValidationError.Children.Add(StartDate.ValidationError);
+            }
+
+            EndDate.Validate();
+            if (StartDate.Value.HasValue && EndDate.Value.HasValue && EndDate.Value.Value < StartDate.Value.Value)
+            {
+                EndDate.ValidationError.AddError(CalendarResources.ErrorUnitlDate);
+            }
+            if (!EndDate.IsValid)
+            {
+                ValidationError.Children.Add(EndDate.ValidationError);
+            }
+
+            if (ValidationError.Children.Any())
+            {
+                ValidationError.AddError(DataObjectViewModelResources.ErrorInvalidProperties);
+            }
         }
 
         public virtual EventViewModel CreateNew()

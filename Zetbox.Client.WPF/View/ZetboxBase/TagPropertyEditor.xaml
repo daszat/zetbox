@@ -42,7 +42,7 @@
                           Style="{StaticResource zbDropDownButtonStyle}">
             </ToggleButton>
             <kevin:InfoTextBox x:Name="txt"
-                               Text="{Binding FormattedValue, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+                               Text="{Binding FormattedValue, UpdateSourceTrigger=PropertyChanged}"
                                TextBoxInfo="{Binding ToolTip}"
                                VerticalAlignment="Top"
                                IsReadOnly="{Binding IsReadOnly}"

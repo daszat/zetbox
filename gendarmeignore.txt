@@ -46,6 +46,7 @@ T: Zetbox.Server.SchemaManagement.Cases
 T: Zetbox.Server.SchemaManagement.SchemaManager
 T: Zetbox.API.Migration.OutputStream
 T: Zetbox.API.StreamPackageProvider
+T: Zetbox.Client.Presentables.ViewModel
 # False positive
 T: Zetbox.Client.WPF.View.DocumentManagement.PreviewersManager
 

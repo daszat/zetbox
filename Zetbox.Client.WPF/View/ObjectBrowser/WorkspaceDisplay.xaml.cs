@@ -40,7 +40,7 @@ namespace Zetbox.Client.WPF.View.ObjectBrowser
     /// Interaction logic for WorkspaceDisplay.xaml, a read-only display of a <see cref="Zetbox.Client.Presentables.ObjectBrowser.WorkspaceViewModel"/>.
     /// </summary>
     [ViewDescriptor(Zetbox.App.GUI.Toolkit.WPF)]
-    public partial class WorkspaceDisplay : WindowView, IHasViewModel<WorkspaceViewModel>
+    public partial class WorkspaceDisplay : WindowView, IHasViewModel<WorkspaceViewModel>, IDragDropTarget
     {
         /// <summary>
         /// Initializes a new instance of the WorkspaceDisplay class.
@@ -49,7 +49,11 @@ namespace Zetbox.Client.WPF.View.ObjectBrowser
         {
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             InitializeComponent();
+
+            _dragDrop = new WpfDragDropHelper(this);
         }
+
+        WpfDragDropHelper _dragDrop;
 
         private void ModuleTreeSelectedItemChangedHandler(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
@@ -66,6 +70,21 @@ namespace Zetbox.Client.WPF.View.ObjectBrowser
         public WorkspaceViewModel ViewModel
         {
             get { return (WorkspaceViewModel)WPFHelper.SanitizeDataContext(DataContext); }
+        }
+
+        public bool CanDrop
+        {
+            get { return ViewModel != null && ViewModel.CanDrop; }
+        }
+
+        public string[] AcceptableDataFormats
+        {
+            get { return new[] { "FileDrop" }; }
+        }
+
+        public bool OnDrop(string format, object data)
+        {
+            return ViewModel.OnDrop(data);
         }
     }
 }

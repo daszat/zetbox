@@ -1,0 +1,50 @@
+﻿<Window x:Class="Zetbox.Client.WPF.View.Debugger.DebuggerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ctrls="clr-namespace:Zetbox.Client.WPF.CustomControls;assembly=Zetbox.Client.WPF.Toolkit"
+        xmlns:commands="clr-namespace:Zetbox.Client.WPF.Commands;assembly=Zetbox.Client.WPF.Toolkit"
+        xmlns:view="clr-namespace:Zetbox.Client.WPF.View"
+        xmlns:client="clr-namespace:Zetbox.Client.Presentables;assembly=Zetbox.Client"
+        commands:SmartRoutedUICommand.IsCommandSink="True"
+        Title="{Binding Name}"
+        Width="640"
+        Height="480"
+        WindowStyle="ToolWindow"
+        ShowInTaskbar="False">
+    <!--
+    This file is part of zetbox.
+
+    Zetbox is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation, either version 3 of
+    the License, or (at your option) any later version.
+
+    Zetbox is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public
+    License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
+    -->
+
+    <TabControl>
+        <TabItem Header="{Binding ContextDebugger.Name}">
+            <ContentPresenter Content="{Binding ContextDebugger, Mode=OneWay}"
+                              ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+        </TabItem>
+        <TabItem Header="{Binding CacheDebugger.Name}">
+            <ContentPresenter Content="{Binding CacheDebugger, Mode=OneWay}" 
+                              ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+        </TabItem>
+        <TabItem Header="{Binding RequestDebugger.Name}">
+            <ContentPresenter Content="{Binding RequestDebugger, Mode=OneWay}"
+                              ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+        </TabItem>
+        <TabItem Header="{Binding PerfMonDebugger.Name}">
+            <ContentPresenter Content="{Binding PerfMonDebugger, Mode=OneWay}" 
+                              ContentTemplateSelector="{StaticResource defaultTemplateSelector}" />
+        </TabItem>
+    </TabControl>
+    
+</Window>

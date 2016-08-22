@@ -38,7 +38,7 @@
                                  Margin="{StaticResource DialogMargin}" />
         </UniformGrid>
 
-        <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+        <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}"
                  AcceptsReturn="True"
                  AcceptsTab="True"
                  VerticalContentAlignment="Top"

@@ -33,6 +33,12 @@ namespace Zetbox.App.Base
         [Invocation]
         public static void GetParameterTypeString(CLRObjectParameter obj, MethodReturnEventArgs<string> e)
         {
+            if(obj == null || string.IsNullOrWhiteSpace(obj.TypeRef))
+            {
+                e.Result = "<no type set>";
+                return;
+            }
+
             var type = Type.GetType(obj.TypeRef, throwOnError: false);
             if (type == null)
             {

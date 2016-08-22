@@ -30,6 +30,7 @@
 <%@ Parameter Name="ctx" Type="IZetboxContext" %>
 <%@ Parameter Name="className" Type="string" %>
 <%@ Parameter Name="compoundObjectProperties" Type="IEnumerable<CompoundObjectProperty>" %>
+<%@ Parameter Name="asCollectionEntry" Type="bool" %>
         [Obsolete]
         public <%= className %>()
             : base(null)

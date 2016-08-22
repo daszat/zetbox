@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2015-06-16T08:44:59Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2016-08-02T12:34:43.3896415Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="a56d9701-d98e-49ab-bd49-a491d09e2d46">
     <ZetboxBase:ChangedOn>2011-08-06T08:30:47.664236Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
@@ -295,6 +295,10 @@ public static void ObjectIsValid(Task obj, ObjectIsValidEventArgs e)
   <ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry ExportGuid="36a57af0-4527-4d92-af6c-7007f44bdc25">
     <ZetboxBase:A>3fbb42ca-a084-491d-9135-85ed24f1ef78</ZetboxBase:A>
     <ZetboxBase:B>4ae6616a-eca3-47a5-b502-8e3c3913c2f0</ZetboxBase:B>
+  </ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry>
+  <ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry ExportGuid="c7883c88-ebf6-4fda-b4a6-d45644e8390e">
+    <ZetboxBase:A>3fbb42ca-a084-491d-9135-85ed24f1ef78</ZetboxBase:A>
+    <ZetboxBase:B>6c5a1b7e-2d9d-4305-af7c-887f32fe1c34</ZetboxBase:B>
   </ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry>
   <ZetboxBase:StringProperty ExportGuid="aaffed82-1f4c-4c0f-a52d-3ca4dbdefe94">
     <ZetboxBase:ChangedOn>2012-04-05T09:26:16.677239Z</ZetboxBase:ChangedOn>
@@ -3599,6 +3603,52 @@ public static void GetSummaryReportCanExecReason(Projekt obj, MethodReturnEventA
     <ZetboxBase:Name>GetSummaryReport</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>885939e8-82e1-4fdf-b80e-5f612d5131d3</ZetboxBase:ObjectClass>
   </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="88795123-b204-4239-9f3a-9221e5ba4d94">
+    <ZetboxBase:ChangedOn>2016-07-29T09:16:48.689039Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void GetMergeableProperties(Task obj, IEnumerable&lt;System.Object&gt; properties)
+{
+}
+
+[Invocation]
+public static void GetMergeablePropertiesCanExec(Task obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetMergeablePropertiesCanExecReason(Task obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2016-07-29T09:16:48.689039Z</ZetboxBase:CreatedOn>
+    <GUI:IsDisplayable>false</GUI:IsDisplayable>
+    <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
+    <ZetboxBase:Name>GetMergeableProperties</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>3fbb42ca-a084-491d-9135-85ed24f1ef78</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="69c9724c-e246-4688-8238-66fdae1c5136">
+    <ZetboxBase:ChangedOn>2016-08-01T06:16:50.773277Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void MergeFrom(Task obj, Zetbox.API.IDataObject source)
+{
+}
+
+[Invocation]
+public static void MergeFromCanExec(Task obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void MergeFromCanExecReason(Task obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2016-08-01T06:16:50.773277Z</ZetboxBase:CreatedOn>
+    <GUI:IsDisplayable>false</GUI:IsDisplayable>
+    <ZetboxBase:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</ZetboxBase:Module>
+    <ZetboxBase:Name>MergeFrom</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>3fbb42ca-a084-491d-9135-85ed24f1ef78</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
   <ZetboxBase:BoolParameter ExportGuid="a5538f74-d4c6-498a-95c0-b526dddf86be">
     <ZetboxBase:ChangedOn>2011-08-06T08:31:01.310814Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
@@ -3724,6 +3774,30 @@ public static void GetSummaryReportCanExecReason(Projekt obj, MethodReturnEventA
     <ZetboxBase:Parameter_pos>1</ZetboxBase:Parameter_pos>
     <ZetboxBase:Name>title</ZetboxBase:Name>
   </ZetboxBase:StringParameter>
+  <ZetboxBase:CLRObjectParameter ExportGuid="b50a3567-4907-4a17-b9ec-957d949d900b">
+    <ZetboxBase:ChangedOn>2016-07-29T09:16:48.689039Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2016-07-29T09:16:48.689039Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>List of Viewmodels representing properties that should be merged</ZetboxBase:Description>
+    <ZetboxBase:IsList>true</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>88795123-b204-4239-9f3a-9221e5ba4d94</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>properties</ZetboxBase:Name>
+    <ZetboxBase:TypeRef>System.Object</ZetboxBase:TypeRef>
+  </ZetboxBase:CLRObjectParameter>
+  <ZetboxBase:CLRObjectParameter ExportGuid="95a03be2-ab40-4f4c-881d-ad4103414986">
+    <ZetboxBase:ChangedOn>2016-08-01T06:16:50.773277Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2016-08-01T06:16:50.773277Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>The source object</ZetboxBase:Description>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>69c9724c-e246-4688-8238-66fdae1c5136</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>source</ZetboxBase:Name>
+    <ZetboxBase:TypeRef>Zetbox.API.IDataObject, Zetbox.API</ZetboxBase:TypeRef>
+  </ZetboxBase:CLRObjectParameter>
   <GUI:ViewModelDescriptor ExportGuid="5c674594-0416-4d5f-9d9f-1388a8df629a">
     <GUI:Deleted>false</GUI:Deleted>
     <GUI:Description>ViewModel for Projekte Calendar Workspace</GUI:Description>
@@ -3740,19 +3814,19 @@ public static void GetSummaryReportCanExecReason(Projekt obj, MethodReturnEventA
     <GUI:Deleted>false</GUI:Deleted>
     <GUI:Description>ViewModel für Projekte Navigation Action, showing a report</GUI:Description>
     <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
-    <GUI:ViewModelTypeRef>Zetbox.App.Projekte.Client.ViewModel.Projekte.ReportScreenViewModel, Zetbox.App.Projekte.Client</GUI:ViewModelTypeRef>
+    <GUI:ViewModelTypeRef>Zetbox.App.Projekte.Client.ViewModel.Projekte.ReportScreenViewModel, Zetbox.App.Tests.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="ec83ad5c-a62a-4407-81d4-6f6ab15ef633">
     <GUI:Deleted>false</GUI:Deleted>
     <GUI:Description>ViewModel für Projekte Navigation Action, showing a calendar</GUI:Description>
     <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
-    <GUI:ViewModelTypeRef>Zetbox.App.Projekte.Client.ViewModel.Projekte.ShowCalendarNavigationActionViewModel, Zetbox.App.Projekte.Client</GUI:ViewModelTypeRef>
+    <GUI:ViewModelTypeRef>Zetbox.App.Projekte.Client.ViewModel.Projekte.ShowCalendarNavigationActionViewModel, Zetbox.App.Tests.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="4d307461-610a-4403-92b9-bb686dacf276">
     <GUI:Deleted>false</GUI:Deleted>
     <GUI:Description>ViewModes for Projekte Tasks</GUI:Description>
     <GUI:Module>a56d9701-d98e-49ab-bd49-a491d09e2d46</GUI:Module>
-    <GUI:ViewModelTypeRef>Zetbox.App.Projekte.Client.ViewModel.Projekte.TaskViewModel, Zetbox.App.Projekte.Client</GUI:ViewModelTypeRef>
+    <GUI:ViewModelTypeRef>Zetbox.App.Projekte.Client.ViewModel.Projekte.TaskViewModel, Zetbox.App.Tests.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
   <GUI:NavigationAction ExportGuid="812d22c1-9385-4f5e-84d9-973c8285aae2">
     <GUI:ChangedOn>2011-10-19T14:23:36.583319Z</GUI:ChangedOn>
@@ -12213,56 +12287,56 @@ public static void TestMethodCanExecReason(TestObjClass obj, MethodReturnEventAr
     <GUI:Deleted>false</GUI:Deleted>
     <GUI:Description>ViewModel for creating/editing a Test-Event</GUI:Description>
     <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
-    <GUI:ViewModelTypeRef>Zetbox.App.Projekte.Client.ViewModel.TestModule.EventTestInputViewModel, Zetbox.App.Projekte.Client</GUI:ViewModelTypeRef>
+    <GUI:ViewModelTypeRef>Zetbox.App.Projekte.Client.ViewModel.TestModule.EventTestInputViewModel, Zetbox.App.Tests.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="bcbf8fb7-5ac8-4b9f-8436-32a092b138af">
     <GUI:Deleted>false</GUI:Deleted>
     <GUI:Description>Special ViewModel for the TestCustomObject</GUI:Description>
     <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
-    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.TestCustomObjectViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.TestCustomObjectViewModel, Zetbox.App.Tests.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="7f6730fe-c856-4ce2-a72c-5503e1162890">
     <GUI:Deleted>false</GUI:Deleted>
     <GUI:Description>Test screen for InstanceList</GUI:Description>
     <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
-    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.TestModule.InstanceListTestViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.TestModule.InstanceListTestViewModel, Zetbox.App.Tests.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="6dace7b6-5ff2-4fb7-9b0b-328a16355986">
     <GUI:DefaultEditorKind>8455ee76-f3c5-4d73-8d3f-d79200b95976</GUI:DefaultEditorKind>
     <GUI:Deleted>false</GUI:Deleted>
     <GUI:Description>NavScreenViewModel for testing next events summary display</GUI:Description>
     <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
-    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.TestModule.NextEventsTestNavScreenViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.TestModule.NextEventsTestNavScreenViewModel, Zetbox.App.Tests.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="ecd12c12-1883-4c54-ad47-b9560642ed71">
     <GUI:Deleted>false</GUI:Deleted>
     <GUI:Description>NavScreenViewModel for the root of the test application</GUI:Description>
     <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
-    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.TestModule.TestAppNavigationScreenViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.TestModule.TestAppNavigationScreenViewModel, Zetbox.App.Tests.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="324e0c7b-e5c1-4f99-ad18-3f12efa33d8b">
     <GUI:Deleted>false</GUI:Deleted>
     <GUI:Description>A special ViewModel for TestObjClass</GUI:Description>
     <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
-    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.TestObjClassViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.TestObjClassViewModel, Zetbox.App.Tests.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewDescriptor ExportGuid="62c6636c-0cd5-4081-9aaa-c044f05e8020">
     <GUI:ControlKind>aa843e93-7f18-45c5-8608-4470aba9f18a</GUI:ControlKind>
-    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.TestModule.EventTestInputEditor, Zetbox.Client.WPF</GUI:ControlTypeRef>
+    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.TestModule.EventTestInputEditor, Zetbox.App.Tests.Client.WPF</GUI:ControlTypeRef>
     <GUI:Deleted>false</GUI:Deleted>
     <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="d2376da7-7632-496d-a2c6-ed5bc8545250">
     <GUI:ControlKind>b2be0e95-d69e-44ff-8d19-2ccd70da2512</GUI:ControlKind>
-    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.TestModule.InstanceListTestDisplay, Zetbox.Client.WPF</GUI:ControlTypeRef>
+    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.TestModule.InstanceListTestDisplay, Zetbox.App.Tests.Client.WPF</GUI:ControlTypeRef>
     <GUI:Deleted>false</GUI:Deleted>
     <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>
   </GUI:ViewDescriptor>
   <GUI:ViewDescriptor ExportGuid="02b7be0a-e2e2-4836-ac5b-dd370268a6ae">
     <GUI:ControlKind>8455ee76-f3c5-4d73-8d3f-d79200b95976</GUI:ControlKind>
-    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.TestModule.NextEventsTestNavScreenDisplay, Zetbox.Client.WPF</GUI:ControlTypeRef>
+    <GUI:ControlTypeRef>Zetbox.Client.WPF.View.TestModule.NextEventsTestNavScreenDisplay, Zetbox.App.Tests.Client.WPF</GUI:ControlTypeRef>
     <GUI:Deleted>false</GUI:Deleted>
     <GUI:Module>81e8ce31-65eb-46fe-ba86-de7452692d5b</GUI:Module>
     <GUI:Toolkit>0</GUI:Toolkit>

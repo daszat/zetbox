@@ -257,10 +257,18 @@ namespace Zetbox.API.Mocks
 
         #region IDisposable Members
         public event GenericEventHandler<IReadOnlyZetboxContext> Disposing;
-
+        public event GenericEventHandler<IReadOnlyZetboxContext> Disposed;
         public void Dispose()
         {
-            GenericEventHandler<IReadOnlyZetboxContext> temp = Disposing;
+            var temp = Disposing;
+            if (temp != null)
+            {
+                temp(this, new GenericEventArgs<IReadOnlyZetboxContext>() { Data = this });
+            }
+
+            // ...
+
+            temp = Disposed;
             if (temp != null)
             {
                 temp(this, new GenericEventArgs<IReadOnlyZetboxContext>() { Data = this });

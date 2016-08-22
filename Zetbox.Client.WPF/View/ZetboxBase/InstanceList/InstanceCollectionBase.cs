@@ -120,7 +120,7 @@ namespace Zetbox.Client.WPF.View.ZetboxBase
         {
             get
             {
-                return WpfDragDropHelper.ZetboxObjectDataFormats;
+                return WpfDragDropHelper.ZetboxObjectDataFormatsWithFileDrop;
             }
         }
 

@@ -61,6 +61,7 @@ namespace Zetbox.Client.Presentables.FilterViewModels
                             Name = FilterViewModelResources.OperatorEquals;
                             break;
                         case FilterOperators.Contains:
+                        case FilterOperators.ContainsObject:
                             Name = FilterViewModelResources.OperatorContains;
                             break;
                         case FilterOperators.Less:

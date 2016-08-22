@@ -191,6 +191,16 @@ namespace Zetbox.Client.ASPNET
             return new MvcHtmlString(string.Format("<div class=\"alert alert-success\">{0}</div>", HttpUtility.HtmlEncode(msg)));
         }
 
+        public static MvcHtmlString WarningMessage(this HtmlHelper helper, string msg)
+        {
+            if (string.IsNullOrWhiteSpace(msg))
+            {
+                return MvcHtmlString.Empty;
+            }
+
+            return new MvcHtmlString(string.Format("<div class=\"alert alert-warning\">{0}</div>", HttpUtility.HtmlEncode(msg)));
+        }
+
         public static MvcHtmlString BootstrapValidationSummary(this HtmlHelper htmlHelper, bool excludePropertyErrors = false)
         {
             if (htmlHelper == null)

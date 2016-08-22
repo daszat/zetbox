@@ -40,5 +40,7 @@ namespace Zetbox.API
     public interface IFilterValueSource
     {
         string Expression { get; }
+        string LastInnerExpression { get; }
+        string OuterExpression { get; }
     }
 }

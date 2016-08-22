@@ -45,11 +45,11 @@ namespace Zetbox.IntegrationTests.Security
             ws.UpdateErrors();
 
             var workaround1 = string.Format(": child1.ChangedOn={0}, child1.CreatedOn={1}", child1.ChangedOn, child1.CreatedOn);
-            Assert.That(string.IsNullOrEmpty(child1Vmdl.Error), Is.True, child1Vmdl.Error + workaround1);
+            Assert.That(child1Vmdl.IsValid, Is.True, child1Vmdl.ValidationError + workaround1);
             var workaround2 = string.Format(": child2.ChangedOn={0}, child2.CreatedOn={1}", child2.ChangedOn, child2.CreatedOn);
-            Assert.That(string.IsNullOrEmpty(child2Vmdl.Error), Is.True, child2Vmdl.Error + workaround2);
-            Assert.That(ws.CanSave(), Is.True, string.Join("\n", ws.GetErrors().Select(e => e.Error).ToArray()));
-            Assert.That(ws.GetErrors(), Is.Empty);
+            Assert.That(child2Vmdl.IsValid, Is.True, child2Vmdl.ValidationError + workaround1);
+            Assert.That(ws.CanSave(), Is.True, string.Join("\n", ws.Errors.Select(e => e.Error.Message).ToArray()));
+            Assert.That(ws.Errors, Is.Empty);
         }
 
         public class in_same_context : when_updating_calcprop

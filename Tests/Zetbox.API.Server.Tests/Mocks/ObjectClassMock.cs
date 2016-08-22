@@ -109,6 +109,11 @@ namespace Zetbox.API.Server.Mocks
             throw new NotImplementedException();
         }
 
+        public void ReplaceObject(Zetbox.API.IDataObject target, Zetbox.API.IDataObject source)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
         #region DataType Members
@@ -235,6 +240,11 @@ namespace Zetbox.API.Server.Mocks
         public ZbTask TriggerFetch(string propName)
         {
             throw new NotImplementedException();
+        }
+
+        public ObjectIsValidResult Validate()
+        {
+            return ObjectIsValidResult.Valid;
         }
         #endregion
 

@@ -105,6 +105,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             OnPropertyChanged("AllowAddNew");
             OnPropertyChanged("AllowDelete");
+            OnPropertyChanged("AllowMerge");
+            UpdateCommands();
         }
 
         #region Kind Management
@@ -416,6 +418,27 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 }
             }
         }
+
+        private bool _allowMerge = true;
+        [DefaultValue(true)]
+        public bool AllowMerge
+        {
+            get
+            {
+                if (DataContext.IsElevatedMode) return true;
+                return DataType.ImplementsIMergeable() && _allowMerge;
+            }
+            set
+            {
+                if (_allowMerge != value)
+                {
+                    _allowMerge = value;
+                    UpdateCommands();
+                    OnPropertyChanged("AllowMerge");
+                }
+            }
+        }
+
 
         private bool? _isInlineEditable = null;
         /// <summary>

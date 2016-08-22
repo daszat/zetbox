@@ -102,7 +102,7 @@ namespace Zetbox.API.AbstractConsumerTests
                 .RegisterType<MockedViewModelFactory>()
                 .As<MockedViewModelFactory>()
                 .As<IViewModelFactory>()
-                .SingleInstance();
+                .InstancePerLifetimeScope();
 
             builder
                 .RegisterType<PerfCounterDispatcher>()

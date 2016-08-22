@@ -23,7 +23,7 @@
     -->
 
     <TextBox x:Name="txt"
-             Text="{Binding Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+             Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}"
              IsReadOnly="{Binding IsReadOnly}"
              AcceptsReturn="True"
              AcceptsTab="True"

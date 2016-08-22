@@ -156,4 +156,13 @@
   <data name="SaveChangesHint" xml:space="preserve">
     <value>Um die Änderungen zu übernehmen drücken Sie bitte Speichern</value>
   </data>
+  <data name="ErrorsLabel" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="GotoObjectCommand_Name" xml:space="preserve">
+    <value>Anzeigen</value>
+  </data>
+  <data name="GotoObjectCommand_Tooltip" xml:space="preserve">
+    <value>Zeigt den Fehler an</value>
+  </data>
 </root>

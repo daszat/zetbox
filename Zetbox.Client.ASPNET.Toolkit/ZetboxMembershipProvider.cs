@@ -325,7 +325,7 @@ namespace Zetbox.Client.ASPNET
         {
             var ctx = GetContext();
             var usr = GetUser(ctx, userName);
-            if (!string.IsNullOrWhiteSpace(usr.OpenID.UserID))
+            if (usr.OpenID != null && !string.IsNullOrWhiteSpace(usr.OpenID.UserID))
             {
                 return new[] { new OAuthAccountData(usr.OpenID.Provider, usr.OpenID.UserID) };
             }
@@ -339,7 +339,7 @@ namespace Zetbox.Client.ASPNET
         {
             var ctx = GetContext();
             var usr = GetUser(ctx, provider, providerUserId);
-            if (usr != null)
+            if (usr != null && usr.OpenID != null)
             {
                 usr.OpenID.Provider = null;
                 usr.OpenID.UserID = null;

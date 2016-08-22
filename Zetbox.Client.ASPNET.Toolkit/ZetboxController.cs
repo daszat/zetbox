@@ -25,16 +25,26 @@ namespace Zetbox.Client.ASPNET
 
     public class ZetboxController : Controller
     {
-        protected IViewModelFactory ViewModelFactory { get; private set; }
+        private ZetboxContextHttpScope _contextScope;
         protected IZetboxContext DataContext
         {
-            get; private set;
+            get
+            {
+                return _contextScope.Context;
+            }
         }
+        protected IViewModelFactory ViewModelFactory { get; private set; }
 
         public ZetboxController(IViewModelFactory vmf, ZetboxContextHttpScope contextScope)
         {
+            _contextScope = contextScope;
             this.ViewModelFactory = vmf;
-            this.DataContext = contextScope.Context;
+        }
+
+        protected void Validate()
+        {
+            ModelState.Clear();
+            _contextScope.Validation.Validate(ModelState);
         }
     }
 }

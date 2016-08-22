@@ -17,14 +17,12 @@ namespace Zetbox.Client.Presentables.ModuleEditor
         public new delegate ModuleGraphViewModel Factory(IZetboxContext dataCtx, DiagramViewModel parent, Module obj);
 
         private DiagramViewModel _diagMdl;
-        protected readonly Func<IZetboxContext> ctxFactory;
 
         public ModuleGraphViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, DiagramViewModel parent,
-            Module obj, Func<IZetboxContext> ctxFactory)
+            Module obj)
             : base(appCtx, dataCtx, parent, obj)
         {
             this._diagMdl = parent;
-            this.ctxFactory = ctxFactory;
             this.Module = obj;
             this._diagMdl.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(_diagMdl_PropertyChanged);
         }
@@ -117,14 +115,12 @@ namespace Zetbox.Client.Presentables.ModuleEditor
         public new delegate DataTypeGraphModel Factory(IZetboxContext dataCtx, DiagramViewModel parent, DataType obj);
 
         private DiagramViewModel _diagMdl;
-        protected readonly Func<IZetboxContext> ctxFactory;
 
         public DataTypeGraphModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, DiagramViewModel parent,
-            DataType obj, Func<IZetboxContext> ctxFactory)
+            DataType obj)
             : base(appCtx, dataCtx, parent, obj)
         {
             this._diagMdl = parent;
-            this.ctxFactory = ctxFactory;
             this.DataType = obj;
         }
 
@@ -216,7 +212,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
 
         public void AddProperty()
         {
-            using (var ctx = ctxFactory())
+            using (var ctx = ViewModelFactory.CreateNewContext())
             {
                 var dt = ctx.FindPersistenceObject<DataType>(DataType.ExportGuid);
                 dt.AddProperty();

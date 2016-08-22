@@ -122,11 +122,11 @@ namespace Zetbox.Client.Tests.ValueViewModels
             [Test]
             public void should_not_clear_Error()
             {
-                var oldError = obj.Error;
+                var oldError = obj.IsValid;
 
                 RaiseValueModelChangedEvent();
 
-                Assert.That(obj.Error, Is.EqualTo(oldError));
+                Assert.That(obj.IsValid, Is.EqualTo(oldError));
                 valueModelMock.Verify();
             }
 
@@ -183,7 +183,7 @@ namespace Zetbox.Client.Tests.ValueViewModels
             {
                 obj.FormattedValue = newPartialInput;
 
-                Assert.That(obj.Error, Is.EqualTo(errorString));
+                Assert.That(obj.ValidationError.ToString(), Is.EqualTo(errorString));
                 valueModelMock.Verify();
             }
 
@@ -327,7 +327,7 @@ namespace Zetbox.Client.Tests.ValueViewModels
                 valueModelMock.SetupSet(o => o.Value = parsedValue);
                 obj.FormattedValue = finalInput;
 
-                Assert.That(obj.Error, Is.Null.Or.Empty);
+                Assert.That(obj.IsValid, Is.True);
                 valueModelMock.Verify();
             }
 

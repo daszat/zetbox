@@ -20,6 +20,7 @@ using System.Linq;
 using System.Text;
 using Zetbox.API;
 using Zetbox.API.Client;
+using Zetbox.API.Configuration;
 using Zetbox.App.Base;
 using Zetbox.App.Extensions;
 using Zetbox.Client.Presentables.ZetboxBase;
@@ -31,10 +32,13 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
         : WindowViewModel
     {
         public new delegate WorkspaceViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
+        private ZetboxConfig _cfg;
 
-        public WorkspaceViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent)
+        public WorkspaceViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, ZetboxConfig cfg)
             : base(appCtx, dataCtx, parent)
         {
+            if (cfg == null) throw new ArgumentNullException("cfg");
+            _cfg = cfg;
         }
 
         #region Data
@@ -101,6 +105,13 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
         #endregion
 
         #region Utilities and UI callbacks
+        public override string Name
+        {
+            get
+            {
+                return string.Format("{0} - {1}", WorkspaceViewModelResources.Name, _cfg.ConfigName);
+            }
+        }
 
         private void LoadModules()
         {
@@ -127,11 +138,212 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
             }
         }
 
+        public string AdminMenuAsString
+        {
+            get
+            {
+                return WorkspaceViewModelResources.Admin;
+            }
+        }
+
+        public bool IsAdministrator
+        {
+            get
+            {
+                return CurrentPrincipal != null && CurrentPrincipal.IsAdministrator();
+            }
+        }
+
         #endregion
 
-        public override string Name
+        #region Import command
+        private ICommandViewModel _ImportCommand = null;
+        public ICommandViewModel ImportCommand
         {
-            get { return WorkspaceViewModelResources.Name; }
+            get
+            {
+                if (_ImportCommand == null)
+                {
+                    _ImportCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Import", "Import zetbox objects", Import, CanImport, CanImportReason);
+                }
+                return _ImportCommand;
+            }
         }
+
+        public bool CanImport()
+        {
+            return true;
+        }
+
+        public string CanImportReason()
+        {
+            return "";
+        }
+
+        public void Import()
+        {
+            if (!CanImport()) return;
+            var filename = ViewModelFactory.GetSourceFileNameFromUser("XML|*.xml", "All files|*.*");
+            if (!string.IsNullOrWhiteSpace(filename))
+            {
+                var newScope = ViewModelFactory.CreateNewScope();
+                var newCtx = newScope.ViewModelFactory.CreateNewContext();
+                var objects = new List<IDataObject>();
+
+                try
+                {
+                    objects.AddRange(Zetbox.App.Packaging.Importer.LoadFromXml(newCtx, filename).OfType<IDataObject>());
+                }
+                catch (Exception ex)
+                {
+                    // not an xml...
+                    Zetbox.API.Utils.Logging.Client.Error("Unable to import file.", ex);
+                    ViewModelFactory.ShowMessage("Unable to import file: " + ex.Message, "Error");
+                }
+
+                if (objects.Count > 0)
+                {
+                    var newWorkspace = ObjectEditor.WorkspaceViewModel.Create(newScope.Scope, newCtx);
+                    newScope.ViewModelFactory.ShowModel(newWorkspace, true);
+
+                    foreach (var obj in objects)
+                    {
+                        newWorkspace.ShowObject(obj, activate: false);
+                    }
+
+                    newScope.ViewModelFactory.CreateDelayedTask(newWorkspace, () =>
+                    {
+                        newWorkspace.SelectedItem = newWorkspace.Items.FirstOrDefault();
+                    }).Trigger();
+                }
+                else
+                {
+                    newScope.Dispose();
+                }
+
+            }
+        }
+        #endregion
+
+        #region ElevatedModeCommand
+        private ICommandViewModel _ElevatedModeCommand = null;
+        public ICommandViewModel ElevatedModeCommand
+        {
+            get
+            {
+                if (_ElevatedModeCommand == null)
+                {
+                    _ElevatedModeCommand = ViewModelFactory.CreateViewModel<ElevatedModeCommand.Factory>().Invoke(DataContext, this);
+                }
+                return _ElevatedModeCommand;
+            }
+        }
+        #endregion
+
+        #region Debugger command
+        private ICommandViewModel _DebuggerCommand = null;
+        public ICommandViewModel DebuggerCommand
+        {
+            get
+            {
+                if (_DebuggerCommand == null)
+                {
+                    _DebuggerCommand = ViewModelFactory.CreateViewModel<DebuggerCommandViewModel.Factory>().Invoke(DataContext, this);
+                }
+                return _DebuggerCommand;
+            }
+        }
+
+        public class DebuggerCommandViewModel : CommandViewModel
+        {
+            public new delegate DebuggerCommandViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
+
+            public DebuggerCommandViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent)
+                : base(appCtx, dataCtx, parent, "Show Debugger", "Shows the zetbox debugger")
+            {
+            }
+
+            public bool Show
+            {
+                get
+                {
+                    return CurrentPrincipal.IsAdministrator();
+                }
+            }
+
+            public override bool CanExecute(object data)
+            {
+                var result =  CurrentPrincipal.IsAdministrator();
+                if(!result)
+                {
+                    this.Reason = "Only a Administrator may start the debugger";
+                }
+                return result;
+            }
+
+            protected override void DoExecute(object data)
+            {
+                var scope = ViewModelFactory.CreateNewScope();
+                var ctx = scope.ViewModelFactory.CreateNewContext();
+
+                var debugger = scope.ViewModelFactory.CreateViewModel<Zetbox.Client.Presentables.Debugger.DebuggerWindowViewModel.Factory>().Invoke(ctx, null);
+                debugger.Closed += (s, e) => scope.Dispose(); 
+                scope.ViewModelFactory.ShowModel(debugger, true);
+            }
+        }        
+        #endregion
+
+        #region DragDrop
+        public bool CanDrop { get { return true; } }
+
+        public bool OnDrop(object data)
+        {
+            var files = data as string[];
+            if (files == null) return false;
+
+            var newScope = ViewModelFactory.CreateNewScope();
+            var newCtx = newScope.ViewModelFactory.CreateNewContext();
+            var objects = new List<IDataObject>();
+
+            foreach (var file in files)
+            {
+                try
+                {
+                    var xml = new System.Xml.XmlDocument();
+                    xml.Load(file);
+                    if (xml.DocumentElement.LocalName == "ZetboxPackaging")
+                    {
+                        objects.AddRange(Zetbox.App.Packaging.Importer.LoadFromXml(newCtx, file).OfType<IDataObject>());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // not an xml...
+                    Zetbox.API.Utils.Logging.Client.Error("Unable to import file.", ex);
+                }
+            }
+
+            if (objects.Count > 0)
+            {
+                var newWorkspace = ObjectEditor.WorkspaceViewModel.Create(newScope.Scope, newCtx);
+                newScope.ViewModelFactory.ShowModel(newWorkspace, true);
+
+                foreach (var obj in objects)
+                {
+                    newWorkspace.ShowObject(obj, activate: false);
+                }
+
+                newScope.ViewModelFactory.CreateDelayedTask(newWorkspace, () =>
+                {
+                    newWorkspace.SelectedItem = newWorkspace.Items.FirstOrDefault();
+                }).Trigger();
+            }
+            else
+            {
+                newScope.Dispose();
+            }
+            return true;
+        }
+        #endregion
     }
 }

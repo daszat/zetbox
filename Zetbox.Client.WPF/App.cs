@@ -74,7 +74,7 @@ namespace Zetbox.Client.WPF
         {
             string[] result;
 
-            if (args.Length >= 1)
+            if (args.Length >= 1 && !args[0].StartsWith("-"))
             {
                 configFilePath = args[0];
                 result = args.Skip(1).ToArray();

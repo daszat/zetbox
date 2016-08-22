@@ -90,6 +90,14 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         {
             this.ValueModel = mdl;
             dataCtx.IsElevatedModeChanged += new EventHandler(Context_IsElevatedModeChanged);
+
+            ValidationManager.Register(this);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            ValidationManager.Unregister(this);
         }
 
         void Context_IsElevatedModeChanged(object sender, EventArgs e)
@@ -159,16 +167,8 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         protected virtual void OnErrorChanged()
         {
+            Validate();
             OnPropertyChanged("Error");
-            if (!string.IsNullOrEmpty(this.Error) && ValueModel.ReportErrors)
-            {
-                // Register with a IContextViewModel
-                var ctxVmdl = ViewModelFactory.GetWorkspace(DataContext) as IContextViewModel;
-                if (ctxVmdl != null)
-                {
-                    ctxVmdl.RegisterError(this);
-                }
-            }
         }
 
         protected override string GetHelpText()
@@ -274,19 +274,49 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         #region IDataErrorInfo Members
 
-        public virtual string Error
+        protected override bool NeedsValidation
         {
             get
             {
-                return ValueModel.Error;
+                return !IsReadOnly && base.NeedsValidation;
             }
         }
 
-        public virtual string this[string columnName]
+        protected override void DoValidate()
+        {
+            base.DoValidate();
+            if (!ValueModel.ReportErrors) return;
+            if (!NeedsValidation) return;
+
+            ValueModel.Validate();
+            var error = ValueModel.Error;
+
+            if (IsValid && !string.IsNullOrEmpty(error))
+            {
+                ValidationError.AddError(error);
+            }
+        }
+
+        string IDataErrorInfo.Error
         {
             get
             {
-                return ValueModel[columnName];
+                if (ValidationError != null)
+                {
+                    return ValidationError.ToString();
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
+        }
+
+        string IDataErrorInfo.this[string columnName]
+        {
+            get
+            {
+                return ((IDataErrorInfo)this).Error;
             }
         }
 
@@ -494,7 +524,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
             else if (!AllowNullInput && parseResult.Value == null)
             {
-                OnPartialInput(value, "Wert muss gesetzt sein");
+                OnPartialInput(value, ValueViewModelResources.ErrorEmptyValue);
             }
             else
             {
@@ -776,38 +806,18 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         #endregion
 
-        #region IDataErrorInfo Members
-
-        public override string Error
+        #region Validation
+        protected override void DoValidate()
         {
-            get
+            base.DoValidate();
+            if (!ValueModel.ReportErrors) return;
+            if (!NeedsValidation) return;
+
+            if (IsValid && !string.IsNullOrEmpty(_partialUserInputError))
             {
-                var baseError = base.Error;
-                if (string.IsNullOrEmpty(baseError))
-                {
-                    return _partialUserInputError;
-                }
-                else
-                {
-                    return baseError + "\n" + _partialUserInputError;
-                }
+                ValidationError.Errors.Add(_partialUserInputError);
             }
         }
-
-        public override string this[string columnName]
-        {
-            get
-            {
-                switch (columnName)
-                {
-                    case "FormattedValue":
-                        return Error;
-                    default:
-                        return base[columnName];
-                }
-            }
-        }
-
         #endregion
     }
 
@@ -842,7 +852,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 {
                     return new ParseResult<TValue?>()
                     {
-                        Error = string.Format("{0}: {1}", this.Label, ValueViewModelResources.ErrorEmptyValue)
+                        Error = ValueViewModelResources.ErrorEmptyValue
                     };
                 }
                 return new ParseResult<TValue?>()
@@ -854,19 +864,42 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             {
                 return new ParseResult<TValue?>()
                 {
-                    Error = string.Format("{0}: {1}", this.Label, ValueViewModelResources.ErrorConvertingType)
+                    Error = ValueViewModelResources.ErrorConvertingType
                 };
             }
         }
 
         protected override ZbTask<TValue?> GetValueFromModelAsync()
         {
-            return new ZbTask<TValue?>(ZbTask.Synchron, () => ValueModel.Value);
+            return new ZbTask<TValue?>(ZbTask.Synchron, () =>
+            {
+                return _illegalNullInput ? null : ValueModel.Value;
+            });
         }
+
+        private bool _illegalNullInput = false;
 
         protected override void SetValueToModel(TValue? value)
         {
+            if (!AllowNullInput && value == null)
+            {
+                _illegalNullInput = true;
+                return;
+            }
+            _illegalNullInput = false;
             ValueModel.Value = value;
+        }
+
+        protected override void DoValidate()
+        {
+            base.DoValidate();
+            if (!ValueModel.ReportErrors) return;
+            if (!NeedsValidation) return;
+
+            if (IsValid && _illegalNullInput)
+            {
+                ValidationError.Errors.Add(ValueViewModelResources.ErrorEmptyValue);
+            }
         }
     }
 
@@ -941,9 +974,10 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             {
                 if (_PossibleValues == null)
                 {
+                    var entries = EnumModel.GetEntries().Select(kv => new KeyValuePair<int?, string>(kv.Key, kv.Value));
                     this._PossibleValues = new ReadOnlyCollection<KeyValuePair<int?, string>>(
                         new[] { new KeyValuePair<int?, string>(null, String.Empty) }
-                        .Concat(EnumModel.GetEntries().Select(kv => new KeyValuePair<int?, string>(kv.Key, kv.Value)))
+                        .Concat(entries)
                         .ToList()
                     );
                 }
@@ -1005,20 +1039,6 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 Value = value,
                 Error = error
             };
-        }
-
-        public override string this[string columnName]
-        {
-            get
-            {
-                switch (columnName)
-                {
-                    case "SelectedItem":
-                        return Error;
-                    default:
-                        return base[columnName];
-                }
-            }
         }
     }
 
@@ -1319,7 +1339,12 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 else
                 {
                     MatchCollection matches;
-                    if (null != (matches = Regex.Matches(str, @"^(\d?\d):?(\d\d)$")))
+                    if (string.IsNullOrEmpty(str))
+                    {
+                        result.Value = null;
+                        result.Error = ValueViewModelResources.TimeIsRequired;
+                    }
+                    else if (null != (matches = Regex.Matches(str, @"^(\d?\d):?(\d\d)$")))
                     {
                         int hours, minutes;
                         if (matches.Count == 1
@@ -1333,12 +1358,12 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         }
                         else
                         {
-                            result.Error = string.Format("{0}: {1}", this.Label, ValueViewModelResources.ErrorConvertingType);
+                            result.Error = ValueViewModelResources.ErrorConvertingType;
                         }
                     }
                     else
                     {
-                        result.Error = string.Format("{0}: {1}", this.Label, ValueViewModelResources.ErrorConvertingType);
+                        result.Error = ValueViewModelResources.ErrorConvertingType;
                     }
                 }
                 return result;
@@ -1525,6 +1550,13 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             _datePartViewModel = ViewModelFactory.CreateViewModel<NullableDatePartPropertyViewModel.Factory>().Invoke(DataContext, this, mdl);
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            _timePartViewModel.Dispose();
+            _datePartViewModel.Dispose();
+        }
+
         void DateTimeModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
@@ -1671,52 +1703,45 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             base.OnFocus();
         }
 
-        public override string Error
+        protected override void DoValidate()
         {
-            get
+            base.DoValidate();
+            if (!ValueModel.ReportErrors) return;
+            if (!NeedsValidation) return;
+
+            if (IsValid)
             {
-                var errors = new[] { base.Error, GetDatePartError(), GetTimePartError() };
-                return string.Join("\n", errors.Where(i => !string.IsNullOrEmpty(i)).ToArray());
-            }
-        }
-
-        private string GetTimePartError()
-        {
-            // Only complain if time is visible
-            if (!TimePartVisible) return string.Empty;
-
-            // both no null input allowed or there is a datepart => error
-            var timeIsNull = (!AllowNullInput && !_timePartViewModel.Value.HasValue)
-                || (_datePartViewModel.Value.HasValue && !_timePartViewModel.Value.HasValue)
-                ? ValueViewModelResources.TimeIsRequired
-                : string.Empty;
-            return string.Join("\n", new string[] { _timePartViewModel.Error, timeIsNull }.Where(s => !string.IsNullOrEmpty(s)).ToArray());
-        }
-
-        private string GetDatePartError()
-        {
-            // Only complain if date is visible
-            if (!DatePartVisible) return string.Empty;
-
-            var dateIsNull = (!AllowNullInput && !_datePartViewModel.Value.HasValue)
-                || (_timePartViewModel.Value.HasValue && !_datePartViewModel.Value.HasValue)
-                ? ValueViewModelResources.DateIsRequired
-                : string.Empty;
-            return string.Join("\n", new string[] { _datePartViewModel.Error, dateIsNull }.Where(s => !string.IsNullOrEmpty(s)).ToArray());
-        }
-
-        public override string this[string columnName]
-        {
-            get
-            {
-                switch (columnName)
+                if (DatePartVisible)
                 {
-                    case "TimePartString":
-                        return GetTimePartError();
-                    case "DatePartString":
-                        return GetDatePartError();
-                    default:
-                        return base[columnName];
+                    _datePartViewModel.Validate();
+                    if (!_datePartViewModel.IsValid)
+                    {
+                        ValidationError.AddErrors(_datePartViewModel.ValidationError.Errors);
+
+                        if ((!AllowNullInput && !_datePartViewModel.Value.HasValue)
+                           || (_timePartViewModel.Value.HasValue && !_datePartViewModel.Value.HasValue))
+                        {
+                            // Date is null
+                            ValidationError.Errors.Add(ValueViewModelResources.DateIsRequired);
+                        }
+                        // Don't add Children as they never apear outside this viewmodel
+                    }
+                }
+                if (TimePartVisible)
+                {
+                    _timePartViewModel.Validate();
+                    if (!_timePartViewModel.IsValid)
+                    {
+                        ValidationError.AddErrors(_timePartViewModel.ValidationError.Errors);
+
+                        if ((!AllowNullInput && !_timePartViewModel.Value.HasValue)
+                            || (_datePartViewModel.Value.HasValue && !_timePartViewModel.Value.HasValue))
+                        {
+                            // both no null input allowed or there is a datepart => error
+                            ValidationError.Errors.Add(ValueViewModelResources.TimeIsRequired);
+                        }
+                        // Don't add Children as they never apear outside this viewmodel
+                    }
                 }
             }
         }

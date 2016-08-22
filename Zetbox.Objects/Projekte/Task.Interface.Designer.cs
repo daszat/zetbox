@@ -11,7 +11,7 @@ namespace Zetbox.App.Projekte
     /// 
     /// </summary>
     [Zetbox.API.DefinitionGuid("3fbb42ca-a084-491d-9135-85ed24f1ef78")]
-    public interface Task : IDataObject, Zetbox.App.Base.IChangedBy, Zetbox.App.Base.IExportable 
+    public interface Task : IDataObject, Zetbox.App.Base.IChangedBy, Zetbox.App.Base.IExportable, Zetbox.App.Base.IMergeable 
     {
 
         /// <summary>

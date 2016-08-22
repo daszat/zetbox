@@ -22,6 +22,17 @@ namespace Zetbox.Client.Presentables
     using Zetbox.App.GUI;
     using Zetbox.Client.GUI;
 
+    public interface ILifetimeScopeFactory
+    {
+        Autofac.ILifetimeScope BeginLifetimeScope();
+    }
+
+    public interface IViewModelFactoryScope : IDisposable
+    {
+        Autofac.ILifetimeScope Scope { get; }
+        IViewModelFactory ViewModelFactory { get; }
+    }
+
     public interface IViewModelFactory : IToolkit
     {
         void ShowModel(ViewModel mdl, bool activate);
@@ -58,5 +69,19 @@ namespace Zetbox.Client.Presentables
         IPerfCounter PerfCounter { get; }
 
         DialogCreator CreateDialog(IZetboxContext ctx, string title);
+
+        /// <summary>
+        /// Creates a new LifetimeScope from the root scope!
+        /// </summary>
+        /// <returns></returns>
+        IViewModelFactoryScope CreateNewScope();
+
+        /// <summary>
+        /// Creates a new Zetboxcontext within the given scope. If no scope is given, the current scope is used.
+        /// </summary>
+        /// <param name="isolationLevel"></param>
+        /// <param name="scope"></param>
+        /// <returns></returns>
+        IZetboxContext CreateNewContext(ContextIsolationLevel isolationLevel = ContextIsolationLevel.PreferContextCache, Autofac.ILifetimeScope scope = null);
     }
 }

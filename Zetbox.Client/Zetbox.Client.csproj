@@ -18,9 +18,9 @@
     <NoWarn>1591</NoWarn>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
     <TargetFrameworkProfile />
-    <NuGetPackageImportStamp>2c48e959</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>0bf23e1e</NuGetPackageImportStamp>
+    <GitVersion_NoFetchEnabled>true</GitVersion_NoFetchEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -151,9 +151,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ActionViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Presentables\CacheDebuggerViewModel.cs" />
+    <Compile Include="Presentables\Debugger\PerfMonDebuggerViewModel.cs" />
+    <Compile Include="Presentables\Debugger\PerfMonDebuggerViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PerfMonDebuggerViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentables\Debugger\RequestDebuggerViewModel.cs" />
+    <Compile Include="Presentables\Debugger\DebuggerWindowViewModel.cs" />
+    <Compile Include="Presentables\Debugger\CacheDebuggerViewModel.cs" />
     <Compile Include="Models\ColumnDisplayModel.cs" />
-    <Compile Include="Presentables\CacheDebuggerViewModelResources.Designer.cs">
+    <Compile Include="Presentables\Debugger\CacheDebuggerViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CacheDebuggerViewModelResources.resx</DependentUpon>
@@ -189,6 +197,21 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DataObjectViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentables\Debugger\DebuggerWindowViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DebuggerWindowViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentables\Debugger\RequestDebuggerViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RequestDebuggerViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentables\Debugger\ZetboxContextDebuggerViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ZetboxContextDebuggerViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Presentables\DocumentManagement\ImportedFileNavigationSearchScreenViewModel.cs" />
     <Compile Include="Presentables\DocumentManagement\ImportedFileNavigationSearchScreenViewModelResources.Designer.cs">
@@ -228,13 +251,21 @@
     <Compile Include="Presentables\ModuleEditor\DataTypeViewModels.cs" />
     <Compile Include="Presentables\ModuleEditor\DiagramViewModel.cs" />
     <Compile Include="Presentables\ModuleEditor\GroupingTreeItemViewModel.cs" />
+    <Compile Include="Presentables\ModuleEditor\TreeItemIconInstanceListViewModel.cs" />
     <Compile Include="Presentables\ObjectBrowser\ObjectClassViewModel.cs" />
+    <Compile Include="Presentables\ObjectEditor\MergeObjectsTaskViewModel.cs" />
+    <Compile Include="Presentables\ObjectEditor\MergeObjectsTaskViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MergeObjectsTaskViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Presentables\ObjectEditor\MergePropertyViewModel.cs" />
+    <Compile Include="Presentables\ObjectEditor\MergePropertyViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MergePropertyViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Presentables\PropertiesPrewiewViewModel.cs" />
-    <Compile Include="Presentables\TestModule\TestObjClassViewModel.cs" />
-    <Compile Include="Presentables\TestModule\TestCustomObjectViewModel.cs" />
-    <Compile Include="Presentables\TestModule\InstanceListTestViewModel.cs" />
-    <Compile Include="Presentables\TestModule\NextEventsTestNavScreenViewModel.cs" />
-    <Compile Include="Presentables\TestModule\TestAppNavigationScreenViewModel.cs" />
     <Compile Include="Presentables\TextViewModel.cs" />
     <Compile Include="Presentables\ValueViewModels\CompoundCollectionViewModel.cs" />
     <Compile Include="Presentables\ValueViewModels\CompoundListViewModel.cs" />
@@ -281,11 +312,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DataObjectSelectionTaskViewModelResources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Presentables\ErrorListViewModelResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ErrorListViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Presentables\ExceptionReporterViewModel.cs" />
     <Compile Include="Presentables\ExceptionReporterViewModelResources.Designer.cs">
@@ -382,14 +408,13 @@
     <Compile Include="Presentables\GUI\MultiLineEditorDialogViewModel.cs" />
     <Compile Include="Presentables\ZetboxBase\CommonCommands.cs" />
     <Compile Include="Presentables\ZetboxBase\InstanceList\InstanceListViewModel.cs" />
-    <Compile Include="Presentables\ErrorListViewModel.cs" />
     <Compile Include="Presentables\ICommandViewModel.cs" />
     <Compile Include="Presentables\ILabeledViewModel.cs" />
     <Compile Include="Presentables\IViewModelFactory.cs" />
     <Compile Include="Presentables\IMultipleInstancesManager.cs" />
     <Compile Include="Presentables\ZetboxBase\ApplicationViewModel.cs" />
     <Compile Include="Presentables\ZetboxBase\TagPropertyEditorViewModel.cs" />
-    <Compile Include="Presentables\ZetboxDebuggerAsViewModel.cs" />
+    <Compile Include="Presentables\Debugger\ZetboxContextDebuggerViewModel.cs" />
     <Compile Include="Presentables\ValueViewModels\DataObjectViewModelProxy.cs" />
     <Compile Include="Presentables\ValueViewModels\ObjectReferenceHelper.cs" />
     <Compile Include="Presentables\ValueViewModels\ObjectReferenceViewModelResources.Designer.cs">
@@ -443,6 +468,7 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ValidationManager.cs" />
     <Compile Include="ZetboxContextExceptionHandler.cs" />
     <Compile Include="ZetboxContextExceptionHandlerResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -457,7 +483,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Models\FilterModelsResources.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="Presentables\ActionViewModelResources.x-zb-Pseudo.resx" />
-    <EmbeddedResource Include="Presentables\CacheDebuggerViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\Debugger\CacheDebuggerViewModelResources.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="Presentables\Calendar\CalendarResources.de.resx" />
     <EmbeddedResource Include="Presentables\Calendar\CalendarResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -472,14 +498,39 @@
     <EmbeddedResource Include="Presentables\Calendar\WeekCalendar\WeekCalendarViewModelResources.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="Presentables\DataObjectSelectionTaskViewModelResources.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="Presentables\DataObjectViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\Debugger\DebuggerWindowViewModelResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>DebuggerWindowViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\Debugger\PerfMonDebuggerViewModelResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>PerfMonDebuggerViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\Debugger\RequestDebuggerViewModelResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RequestDebuggerViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\Debugger\ZetboxContextDebuggerViewModelResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ZetboxContextDebuggerViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Presentables\DocumentManagement\ImportedFileNavigationSearchScreenViewModelResources.x-zb-Pseudo.resx" />
-    <EmbeddedResource Include="Presentables\ErrorListViewModelResources.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="Presentables\ExceptionReporterViewModelResources.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="Presentables\FilterViewModels\FilterViewModelResources.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="Presentables\GUI\MultiLineEditorDialogViewModelResources.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="Presentables\GUI\NavigatorViewModelResources.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="Presentables\GUI\SavedListConfiguratorViewModelResources.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="Presentables\ObjectBrowser\WorkspaceViewModelResources.x-zb-Pseudo.resx" />
+    <EmbeddedResource Include="Presentables\ObjectEditor\MergeObjectsTaskViewModelResources.de.resx" />
+    <EmbeddedResource Include="Presentables\ObjectEditor\MergeObjectsTaskViewModelResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MergeObjectsTaskViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentables\ObjectEditor\MergePropertyViewModelResources.de.resx" />
+    <EmbeddedResource Include="Presentables\ObjectEditor\MergePropertyViewModelResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MergePropertyViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Presentables\ObjectEditor\WorkspaceViewModelResources.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="Presentables\ParameterInputTaskViewModelResources.x-zb-Pseudo.resx" />
     <EmbeddedResource Include="Presentables\SimpleDataObjectEditorTaskViewModelResources.x-zb-Pseudo.resx" />
@@ -541,9 +592,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ActionViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\CacheDebuggerViewModelResources.de.resx">
+    <EmbeddedResource Include="Presentables\Debugger\CacheDebuggerViewModelResources.de.resx">
     </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\CacheDebuggerViewModelResources.resx">
+    <EmbeddedResource Include="Presentables\Debugger\CacheDebuggerViewModelResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>CacheDebuggerViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
@@ -591,12 +642,6 @@
     <EmbeddedResource Include="Presentables\DataObjectSelectionTaskViewModelResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>DataObjectSelectionTaskViewModelResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ErrorListViewModelResources.de.resx">
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentables\ErrorListViewModelResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ErrorListViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentables\ExceptionReporterViewModelResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -749,12 +794,11 @@
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>
-  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
-  <Import Project="..\packages\GitVersionTask.3.0.0-beta0002\Build\GitVersionTask.targets" Condition="Exists('..\packages\GitVersionTask.3.0.0-beta0002\Build\GitVersionTask.targets')" />
+  <Import Project="..\packages\GitVersionTask.3.6.2\build\portable-net+sl+win+wpa+wp\GitVersionTask.targets" Condition="Exists('..\packages\GitVersionTask.3.6.2\build\portable-net+sl+win+wpa+wp\GitVersionTask.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\GitVersionTask.3.0.0-beta0002\Build\GitVersionTask.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\GitVersionTask.3.0.0-beta0002\Build\GitVersionTask.targets'))" />
+    <Error Condition="!Exists('..\packages\GitVersionTask.3.6.2\build\portable-net+sl+win+wpa+wp\GitVersionTask.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\GitVersionTask.3.6.2\build\portable-net+sl+win+wpa+wp\GitVersionTask.targets'))" />
   </Target>
 </Project>

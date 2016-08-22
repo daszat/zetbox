@@ -67,7 +67,7 @@
                 </TabControl.ContentTemplate>
                 <TabControl.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Title, Mode=OneWay, ValidatesOnDataErrors=true}" />
+                        <TextBlock Text="{Binding Title, Mode=OneWay}" />
                     </DataTemplate>
                 </TabControl.ItemTemplate>
             </TabControl>

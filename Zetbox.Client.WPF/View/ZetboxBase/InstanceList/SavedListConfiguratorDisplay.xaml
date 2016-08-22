@@ -27,7 +27,7 @@
         </ctrls:DropDownButton>
         <ComboBox IsSynchronizedWithCurrentItem="False"
                   ItemsSource="{Binding ConfigsAsync}"
-                  SelectedValue="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+                  SelectedValue="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   HorizontalContentAlignment="Stretch"
                   TextSearch.TextPath="Name"
                   IsEditable="True">

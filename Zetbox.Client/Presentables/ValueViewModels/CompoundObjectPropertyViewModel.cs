@@ -42,14 +42,8 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         }
 
         #region Public Interface
-
         public ICompoundObjectValueModel CompoundObjectModel { get; private set; }
         public CompoundObject ReferencedType { get { return CompoundObjectModel.CompoundObjectDefinition; } }
-
-        public override string Name
-        {
-            get { return Value == null ? "(null)" : "CompoundObject: " + Value.Name; }
-        }
         #endregion
 
         protected override ParseResult<CompoundObjectViewModel> ParseValue(string str)

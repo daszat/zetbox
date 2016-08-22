@@ -20,12 +20,18 @@ namespace Zetbox.API.Client.PerfCounter
 
     public interface IPerfCounter : IBasePerfCounter
     {
+        void IncrementViewModel();
+        void DecrementViewModel();
+
         void IncrementViewModelFetch();
         void IncrementViewModelCreate();
     }
 
     public interface IPerfCounterAppender : IBasePerfCounterAppender
     {
+        void IncrementViewModel();
+        void DecrementViewModel();
+
         void IncrementViewModelFetch();
         void IncrementViewModelCreate();
     }

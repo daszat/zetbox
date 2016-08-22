@@ -214,7 +214,7 @@ namespace Zetbox.API.Client
             {
                 var errorMsg = String.Format("Error when accessing server({0}): {1}: {2}", GetBlobStreamUri, ex.Status, ex.Response);
                 Log.Error(errorMsg);
-                throw new ApplicationException(errorMsg, ex);
+                throw new InvalidOperationException(errorMsg, ex);
             }
         }
 

@@ -290,7 +290,12 @@ namespace Zetbox.Client.Models
                 if (Object is IDataObject)
                 {
                     var dataObj = (IDataObject)Object;
-                    return dataObj.ObjectState != DataObjectState.Deleted;
+                    return dataObj.ObjectState.In(DataObjectState.New, DataObjectState.Modified, DataObjectState.Unmodified); // Include Unmodified, maybe a constraint depends on a foreign object
+                }
+                else if (Object is BaseCompoundObject)
+                {
+                    var cpObj = (BaseCompoundObject)Object;
+                    return cpObj.ParentObject != null;
                 }
                 return true;
             }
@@ -326,8 +331,14 @@ namespace Zetbox.Client.Models
         /// <summary>
         /// Checks constraints on the object and puts the results into the cache.
         /// </summary> 
-        protected void CheckConstraints()
+        public void Validate()
         {
+            if (!ReportErrors)
+            {
+                this.ValueError = "";
+                return;
+            }
+
             if (Object is IDataErrorInfo)
             {
                 this.ValueError = ((IDataErrorInfo)Object)[Property.Name];
@@ -341,7 +352,7 @@ namespace Zetbox.Client.Models
         {
             get
             {
-                return this["Value"];
+                return this.ValueError;
             }
         }
 
@@ -452,7 +463,7 @@ namespace Zetbox.Client.Models
                 if (!IsPropertyInitialized() || !object.Equals(GetPropertyValue(), value))
                 {
                     SetPropertyValue(value);
-                    CheckConstraints();
+                    Validate();
                     NotifyValueChanged();
                 }
             }
@@ -547,7 +558,7 @@ namespace Zetbox.Client.Models
 
                     Object.SetPropertyValue<TValue>(Property.Name, value);
 
-                    CheckConstraints();
+                    Validate();
 
                     NotifyValueChanged();
                 }

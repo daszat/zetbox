@@ -1435,6 +1435,69 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
         }
         // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
+        /// <summary>
+        /// Replaces all references of the given object with the target object. Does not change any other properties and will not delete the source object.
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnReplaceObject_ObjectClass")]
+        public virtual void ReplaceObject(Zetbox.API.IDataObject target, Zetbox.API.IDataObject source)
+        {
+            // base.ReplaceObject();
+            if (OnReplaceObject_ObjectClass != null)
+            {
+                OnReplaceObject_ObjectClass(this, target, source);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on method ObjectClass.ReplaceObject");
+            }
+        }
+        public delegate void ReplaceObject_Handler<T>(T obj, Zetbox.API.IDataObject target, Zetbox.API.IDataObject source);
+        public static event ReplaceObject_Handler<ObjectClass> OnReplaceObject_ObjectClass;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<ObjectClass> OnReplaceObject_ObjectClass_CanExec;
+
+        [EventBasedMethod("OnReplaceObject_ObjectClass_CanExec")]
+        public virtual bool ReplaceObjectCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnReplaceObject_ObjectClass_CanExec != null)
+				{
+					OnReplaceObject_ObjectClass_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<ObjectClass> OnReplaceObject_ObjectClass_CanExecReason;
+
+        [EventBasedMethod("OnReplaceObject_ObjectClass_CanExecReason")]
+        public virtual string ReplaceObjectCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnReplaceObject_ObjectClass_CanExecReason != null)
+				{
+					OnReplaceObject_ObjectClass_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
         public override Type GetImplementedInterface()
         {
             return typeof(ObjectClass);

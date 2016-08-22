@@ -852,6 +852,132 @@ namespace Zetbox.App.Projekte
 
         public static event PropertyIsValidHandler<Zetbox.App.Projekte.Task> OnProjekt_IsValid;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetMergeableProperties_Task")]
+        public virtual void GetMergeableProperties(IEnumerable<System.Object> properties)
+        {
+            // base.GetMergeableProperties();
+            if (OnGetMergeableProperties_Task != null)
+            {
+                OnGetMergeableProperties_Task(this, properties);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on method Task.GetMergeableProperties");
+            }
+        }
+        public delegate void GetMergeableProperties_Handler<T>(T obj, IEnumerable<System.Object> properties);
+        public static event GetMergeableProperties_Handler<Task> OnGetMergeableProperties_Task;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<Task> OnGetMergeableProperties_Task_CanExec;
+
+        [EventBasedMethod("OnGetMergeableProperties_Task_CanExec")]
+        public virtual bool GetMergeablePropertiesCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetMergeableProperties_Task_CanExec != null)
+				{
+					OnGetMergeableProperties_Task_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Task> OnGetMergeableProperties_Task_CanExecReason;
+
+        [EventBasedMethod("OnGetMergeableProperties_Task_CanExecReason")]
+        public virtual string GetMergeablePropertiesCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetMergeableProperties_Task_CanExecReason != null)
+				{
+					OnGetMergeableProperties_Task_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
+        /// <summary>
+        /// 
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnMergeFrom_Task")]
+        public virtual void MergeFrom(Zetbox.API.IDataObject source)
+        {
+            // base.MergeFrom();
+            if (OnMergeFrom_Task != null)
+            {
+                OnMergeFrom_Task(this, source);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on method Task.MergeFrom");
+            }
+        }
+        public delegate void MergeFrom_Handler<T>(T obj, Zetbox.API.IDataObject source);
+        public static event MergeFrom_Handler<Task> OnMergeFrom_Task;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<Task> OnMergeFrom_Task_CanExec;
+
+        [EventBasedMethod("OnMergeFrom_Task_CanExec")]
+        public virtual bool MergeFromCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnMergeFrom_Task_CanExec != null)
+				{
+					OnMergeFrom_Task_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<Task> OnMergeFrom_Task_CanExecReason;
+
+        [EventBasedMethod("OnMergeFrom_Task_CanExecReason")]
+        public virtual string MergeFromCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnMergeFrom_Task_CanExecReason != null)
+				{
+					OnMergeFrom_Task_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
         public override Type GetImplementedInterface()
         {
             return typeof(Task);

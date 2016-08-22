@@ -38,6 +38,11 @@ namespace Zetbox.Client.Presentables
         {
         }
 
+        public void Close()
+        {
+            this.Show = false;
+        }
+
         private bool _show = true;
         public bool Show
         {
@@ -57,8 +62,15 @@ namespace Zetbox.Client.Presentables
             }
         }
 
+        public EventHandler Closed;
+
         protected virtual void OnClose()
         {
+            var temp = Closed;
+            if (temp != null)
+            {
+                temp(this, EventArgs.Empty);
+            }
         }
 
         /// <summary>

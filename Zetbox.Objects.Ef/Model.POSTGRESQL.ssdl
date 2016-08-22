@@ -1882,6 +1882,7 @@
     <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="CalendarConfiguration" Type="varchar" Nullable="true" />
     <Property Name="DisplayName" Type="varchar" MaxLength="200" Nullable="true" />
+    <Property Name="IsDeactivated" Type="bool" Nullable="false" />
     <Property Name="LoginToken" Type="uuid" Nullable="true" />
     <Property Name="Password" Type="varchar" MaxLength="100" Nullable="true" />
     <Property Name="UserName" Type="varchar" MaxLength="100" Nullable="true" />

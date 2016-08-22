@@ -174,12 +174,6 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 }
             }
         }
-
-        public override string Name
-        {
-            get { return Value == null ? "(null)" : "Reference to " + Value.Name; }
-        }
-
         #endregion
 
         #region Commands
@@ -367,20 +361,23 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         private ZbTask<DataObjectViewModel> _fetchValueTask;
         protected override ZbTask<DataObjectViewModel> GetValueFromModelAsync()
         {
-            if (_fetchValueTask == null)
+            // Prevent clearing this state variable during clearing. Some notifications (Error, Value, etc.) are setting this to null
+            // to signal a refresh. Task: Reduce this behaviour
+            var result = _fetchValueTask;
+            if (result == null)
             {
                 SetBusy();
-                _fetchValueTask = new ZbTask<DataObjectViewModel>(ValueModel.GetValueAsync());
-                _fetchValueTask.Finally(ClearBusy);
+                _fetchValueTask = result = new ZbTask<DataObjectViewModel>(ValueModel.GetValueAsync());
+                result.Finally(ClearBusy);
                 // Avoid stackoverflow
-                _fetchValueTask.OnResult(t =>
+                result.OnResult(t =>
                 {
                     if (!_valueCacheInititalized)
                     {
                         var obj = ValueModel.Value;
                         if (obj != null)
                         {
-                            _valueCache = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), ValueModel.Value);
+                            _valueCache = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, GetWorkspace(), ValueModel.Value);
                             EnsureValuePossible(_valueCache);
                         }
                         _valueCacheInititalized = true;
@@ -390,7 +387,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 });
             }
 
-            return _fetchValueTask;
+            return result;
         }
 
         protected override void SetValueToModel(DataObjectViewModel value)
@@ -459,6 +456,29 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             {
                 // reuse synchronous setter to await/cancel a potential running fetch task
                 this.Value = value;
+            }
+        }
+
+        /// <summary>
+        /// The ID of the referenced Object or null if empty
+        /// </summary>
+        public int? ValueID
+        {
+            get
+            {
+                return this.Value != null ? (int?)this.Value.ID : null;
+            }
+            set
+            {
+                if(value != null && value != Helper.INVALIDID)
+                {
+                    var obj = DataContext.Find(ReferencedClass.GetDescribedInterfaceType(), value.Value);
+                    this.Value = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, GetWorkspace(), obj);
+                }
+                else
+                {
+                    this.Value = null;
+                }
             }
         }
         #endregion
@@ -570,7 +590,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                     var mdlList = fetchTask.Result
                                 .OfType<IDataObject>()
                                 .Take(PossibleValuesLimit)
-                                .Select(i => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), i))
+                                .Select(i => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, GetWorkspace(), i))
                                 .Cast<ViewModel>()
                                 .OrderBy(v => v.Name)
                                 .ToList();
@@ -604,7 +624,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
             if (string.IsNullOrEmpty(SearchString))
             {
-                if (_filterModels.Any(f => f.Required)) return null;
+                if (RespectRequiredFilter && _filterModels.Any(f => f.Required)) return null;
                 return qry;
             }
 
@@ -663,11 +683,32 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
             set
             {
+                if (string.IsNullOrWhiteSpace(_searchString) && string.IsNullOrWhiteSpace(value)) return; // treat null and empty as equal
                 if (_searchString != value)
                 {
                     _searchString = value;
                     OnPropertyChanged("SearchString");
                     OnErrorChanged(); // Maybe error state has changed
+                }
+            }
+        }
+
+        private bool _RespectRequiredFilter = true;
+        /// <summary>
+        /// If set to false, no filter is required. Default value is true.
+        /// </summary>
+        public bool RespectRequiredFilter
+        {
+            get
+            {
+                return _RespectRequiredFilter;
+            }
+            set
+            {
+                if (_RespectRequiredFilter != value)
+                {
+                    _RespectRequiredFilter = value;
+                    OnPropertyChanged("RespectRequiredFilter");
                 }
             }
         }
@@ -681,18 +722,35 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             OnPropertyChanged("PossibleValuesAsync");
         }
 
-        public override string Error
+        protected override bool NeedsValidation
         {
             get
             {
-                if (!string.IsNullOrEmpty(SearchString) && Value == null)
-                {
-                    return ObjectReferenceViewModelResources.Error_SearchString_NoValue;
-                }
-                else
-                {
-                    return base.Error;
-                }
+                // Shortcut
+                if (!base.NeedsValidation) return false;
+
+                // TODO: Hack! 
+                var obj = (ObjectReferenceModel as Zetbox.Client.Models.BasePropertyValueModel).IfNotNull(i => i.Object as IDataObject);
+
+                // Non-Properties should always be validated
+                if (obj == null) return true;
+
+                // New Objects needs a validation as the value cache might not be initialized, because no one set a value.
+                if (obj != null && obj.ObjectState == DataObjectState.New) return true;
+
+                return _valueCacheInititalized;
+            }
+        }
+
+        protected override void DoValidate()
+        {
+            base.DoValidate();
+            if(!ValueModel.ReportErrors) return;
+            if (!NeedsValidation) return;
+
+            if (IsValid && !string.IsNullOrEmpty(SearchString) && Value == null)
+            {
+                ValidationError.Errors.Add(ObjectReferenceViewModelResources.Error_SearchString_NoValue);
             }
         }
 
@@ -780,7 +838,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                     if (obj.ObjectState == DataObjectState.New) return false;
                     obj = DataContext.Find(DataContext.GetInterfaceType(obj), obj.ID);
                 }
-                Value = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this.GetWorkspace(), obj);
+                Value = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, GetWorkspace(), obj);
             }
             return false;
         }

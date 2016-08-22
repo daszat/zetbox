@@ -112,12 +112,24 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AccessDeniedText" xml:space="preserve">
     <value>Der Zugriff auf diesem Datensatz wurde verweigert</value>
+  </data>
+  <data name="ErrorInvalidProperties" xml:space="preserve">
+    <value>Der Datensatz enthält einige ungültige Werte</value>
+  </data>
+  <data name="MergeCommand_Name" xml:space="preserve">
+    <value>Zusammenführen</value>
+  </data>
+  <data name="MergeCommand_Reason" xml:space="preserve">
+    <value>Zusammenführen ist nicht möglich. Entweder fehlen Rechte oder der Datensatz kann nicht zusammegeführt werden</value>
+  </data>
+  <data name="MergeCommand_Tooltip" xml:space="preserve">
+    <value>Führt einen anderen Datensatz mit diesem zusammen</value>
   </data>
 </root>

@@ -21,6 +21,7 @@ namespace Zetbox.Client.Presentables
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
+    using log4net;
     using Zetbox.API;
     using Zetbox.API.Common;
     using Zetbox.API.Common.GUI;
@@ -55,6 +56,13 @@ namespace Zetbox.Client.Presentables
         /// IAssetManager instance
         /// </summary>
         IAssetsManager Assets { get; }
+
+        /// <summary>
+        /// IValidationManager instance
+        /// </summary>
+        IValidationManager ValidationManager { get; }
+
+        Zetbox.API.Client.PerfCounter.IPerfCounter PerfCounter { get; }
     }
 
     [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
@@ -87,8 +95,10 @@ namespace Zetbox.Client.Presentables
     /// <remarks>
     /// See http://blogs.msdn.com/dancre/archive/2006/10/11/datamodel-view-viewmodel-pattern-series.aspx and various others.
     /// </remarks>
-    public abstract class ViewModel : INotifyPropertyChanged
+    public abstract class ViewModel : INotifyPropertyChanged, IDisposable
     {
+        private static readonly ILog _log = LogManager.GetLogger(typeof(ViewModel));
+
         public delegate ViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
 
         private readonly IViewModelDependencies _dependencies;
@@ -127,6 +137,8 @@ namespace Zetbox.Client.Presentables
 
         public IAssetsManager Assets { get { return _dependencies.Assets; } }
 
+        public IValidationManager ValidationManager { get { return _dependencies.ValidationManager; } }
+
         /// <summary>
         /// A <see cref="IZetboxContext"/> to access the current user's data
         /// </summary>
@@ -155,6 +167,10 @@ namespace Zetbox.Client.Presentables
         /// <param name="parent">The parent <see cref="ViewModel"/> to ...</param>
         protected ViewModel(IViewModelDependencies dependencies, IZetboxContext dataCtx, ViewModel parent)
         {
+            _errorCache = new ValidationError(this);
+            _errorCache.Errors.CollectionChanged += (s, e) => OnErrorChanged();
+            _errorCache.Children.CollectionChanged += (s, e) => OnErrorChanged();
+
             _parent = parent;
             IsInDesignMode = false;
             _dependencies = dependencies;
@@ -162,6 +178,22 @@ namespace Zetbox.Client.Presentables
 
             if (_parent != null) _parent.PropertyChanged += (s, e) => { if (e.PropertyName == "Highlight" || e.PropertyName == "HighlightAsync") OnHighlightChanged(); };
             dataCtx.IsElevatedModeChanged += new EventHandler(dataCtx_IsElevatedModeChanged);
+
+            _dependencies.PerfCounter.IncrementViewModel();
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                _dependencies.PerfCounter.DecrementViewModel();
+            }
         }
 
         void dataCtx_IsElevatedModeChanged(object sender, EventArgs e)
@@ -474,6 +506,72 @@ namespace Zetbox.Client.Presentables
             return string.Empty;
         }
         #endregion
+
+        #region Error management
+        private ValidationError _errorCache;
+        public ValidationError ValidationError
+        {
+            get
+            {
+                return _errorCache;
+            }
+        }
+
+        public virtual bool IsValid
+        {
+            get
+            {
+                return !_errorCache.HasErrors;
+            }
+        }
+
+        /// <summary>
+        /// If there are errors, futher validation is not needed
+        /// If there are no errors, another validation yield return errors
+        /// </summary>
+        protected virtual bool NeedsValidation
+        {
+            get
+            {
+                return IsEnabled;
+            }
+        }
+
+        public ValidationError Validate()
+        {
+            // Reset error cache
+            _errorCache.Errors.Clear();
+            _errorCache.Children.Clear(); 
+            
+            DoValidate();
+
+            if(_errorCache == null)
+            {
+                _errorCache = new ValidationError(this);
+            }
+
+            // notify
+            ValidationManager.Notify(this);
+            OnErrorChanged();
+
+            // return error object for convenience
+            return _errorCache;
+        }
+
+        /// <summary>
+        /// Validates this ViewModel. If implemented, this method should update add a validation error
+        /// </summary>
+        protected virtual void DoValidate()
+        {
+        }
+
+        private void OnErrorChanged()
+        {
+            OnPropertyChanged("Error");
+            OnPropertyChanged("IsValid");
+            OnPropertyChanged("ValidationError");
+        }
+        #endregion
     }
 
     public struct Highlight
@@ -604,6 +702,17 @@ namespace Zetbox.Client.Presentables
         }
 
         public IAssetsManager Assets
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public IValidationManager ValidationManager
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+
+        public API.Client.PerfCounter.IPerfCounter PerfCounter
         {
             get { throw new NotImplementedException(); }
         }

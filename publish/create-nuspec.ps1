@@ -1,3 +1,5 @@
+$ErrorActionPreference = "Stop"
+
 "Creating *.nuspec from template with a version from GitVersion" | out-host
 
 # don't forget to 
@@ -8,7 +10,7 @@ rm *.nupkg
 cp README.zetbox.txt ..\bin\Debug
 cp *.* ..\bin\Debug
 
-$str = (..\packages\GitVersion.CommandLine.3.0.0-beta0002\Tools\GitVersion.exe) | out-string
+$str = GitVersion /nofetch | out-string
 $json = ConvertFrom-Json $str
 
 $version = $json.NuGetVersionV2
@@ -32,7 +34,7 @@ cd ..\bin\Debug
 ls *.nuspec | % {
 	$file = $_.Name
 	$file | out-host
-	..\..\.nuget\nuget.exe pack $file
+	nuget pack $file
 }
 
 popd

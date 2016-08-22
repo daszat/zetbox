@@ -33,9 +33,9 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <NoWarn>1591</NoWarn>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(MSBuildProjectDirectory)\..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
     <TargetFrameworkProfile />
-    <NuGetPackageImportStamp>3bc2417c</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>ed0f611c</NuGetPackageImportStamp>
+    <GitVersion_NoFetchEnabled>true</GitVersion_NoFetchEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -159,7 +159,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\CacheDebuggerDisplay.xaml">
+    <Page Include="View\Debugger\PerfMonDebuggerDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Debugger\RequestDebuggerDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Debugger\CacheDebuggerDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <Generator>MSBuild:Compile</Generator>
@@ -208,6 +216,18 @@
     <Page Include="View\Calendar\WeekCalendar\CalendarLedger.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Debugger\DebuggerWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ObjectEditor\MergeObjectsTask.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ObjectEditor\MergePropertyEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\SelectionDialogGrid.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -265,14 +285,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\TestModule\EventTestInputEditor.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\TestModule\InstanceListTestDisplay.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\ZetboxBase\CompoundCollectionEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -282,10 +294,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ZetboxBase\CompoundListEditor.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\TestModule\NextEventsTestNavScreenDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -348,12 +356,6 @@
     <Page Include="View\DocumentManagement\ImageEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\ErrorListView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\ExceptionReporterDialog.xaml">
       <SubType>Designer</SubType>
@@ -523,7 +525,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\ZetboxDebuggerView.xaml">
+    <Page Include="View\Debugger\ZetboxContextDebuggerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <Generator>MSBuild:Compile</Generator>
@@ -638,7 +640,22 @@
     <Compile Include="View\Calendar\WorkScheduleRuleInstanceDisplay.xaml.cs">
       <DependentUpon>WorkScheduleRuleInstanceDisplay.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Debugger\PerfMonDebuggerDisplay.xaml.cs">
+      <DependentUpon>PerfMonDebuggerDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Debugger\RequestDebuggerDisplay.xaml.cs">
+      <DependentUpon>RequestDebuggerDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Debugger\DebuggerWindow.xaml.cs">
+      <DependentUpon>DebuggerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\GUI\Panels.cs" />
+    <Compile Include="View\ObjectEditor\MergeObjectsTask.xaml.cs">
+      <DependentUpon>MergeObjectsTask.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ObjectEditor\MergePropertyEditor.xaml.cs">
+      <DependentUpon>MergePropertyEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\SelectionDialogGrid.xaml.cs">
       <DependentUpon>SelectionDialogGrid.xaml</DependentUpon>
     </Compile>
@@ -690,15 +707,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PasswordDialogResources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="View\TestModule\EventTestInputEditor.xaml.cs">
-      <DependentUpon>EventTestInputEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\TestModule\InstanceListTestDisplay.xaml.cs">
-      <DependentUpon>InstanceListTestDisplay.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\TestModule\NextEventsTestNavScreenDisplay.xaml.cs">
-      <DependentUpon>NextEventsTestNavScreenDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ZetboxBase\ActionDisplay.cs" />
     <Compile Include="View\ZetboxBase\CommandDisplay.cs" />
@@ -759,7 +767,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>WpfToolkitResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="View\CacheDebuggerDisplay.xaml.cs">
+    <Compile Include="View\Debugger\CacheDebuggerDisplay.xaml.cs">
       <DependentUpon>CacheDebuggerDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Calendar\WeekCalendar\CalendarDay.xaml.cs">
@@ -779,9 +787,6 @@
     </Compile>
     <Compile Include="View\DocumentManagement\ImageEditor.xaml.cs">
       <DependentUpon>ImageEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ErrorListView.xaml.cs">
-      <DependentUpon>ErrorListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ExceptionReporterDialog.xaml.cs">
       <DependentUpon>ExceptionReporterDialog.xaml</DependentUpon>
@@ -885,8 +890,8 @@
     <Compile Include="View\GUI\DashboardDisplay.xaml.cs">
       <DependentUpon>DashboardDisplay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ZetboxDebuggerView.xaml.cs">
-      <DependentUpon>ZetboxDebuggerView.xaml</DependentUpon>
+    <Compile Include="View\Debugger\ZetboxContextDebuggerView.xaml.cs">
+      <DependentUpon>ZetboxContextDebuggerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="UndoRedo.cs" />
     <Compile Include="View\ObjectEditor\DataObjectEditor.xaml.cs">
@@ -1048,6 +1053,13 @@
     <Resource Include="Images\settings.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\GitVersionTask.3.6.2\build\portable-net+sl+win+wpa+wp\GitVersionTask.targets" Condition="Exists('..\packages\GitVersionTask.3.6.2\build\portable-net+sl+win+wpa+wp\GitVersionTask.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\GitVersionTask.3.6.2\build\portable-net+sl+win+wpa+wp\GitVersionTask.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\GitVersionTask.3.6.2\build\portable-net+sl+win+wpa+wp\GitVersionTask.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
@@ -1055,12 +1067,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
-  <Import Project="..\packages\GitVersionTask.3.0.0-beta0002\Build\GitVersionTask.targets" Condition="Exists('..\packages\GitVersionTask.3.0.0-beta0002\Build\GitVersionTask.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\GitVersionTask.3.0.0-beta0002\Build\GitVersionTask.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\GitVersionTask.3.0.0-beta0002\Build\GitVersionTask.targets'))" />
-  </Target>
 </Project>

@@ -313,6 +313,11 @@ namespace Zetbox.API
 
         #region IDataErrorInfo Members
 
+        public ObjectIsValidResult Validate()
+        {
+            return ObjectIsValid();
+        }
+
         protected virtual ObjectIsValidResult ObjectIsValid()
         {
             return ObjectIsValidResult.Valid;

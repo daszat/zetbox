@@ -55,7 +55,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             {
                 var obj = Object != null ? Object.GetObject(DataContext) : null;
                 if (obj == null) return null;
-                return DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, obj);
+                return DataObjectViewModel.Fetch(ViewModelFactory, DataContext, GetWorkspace(), obj);
             }
         }
 
@@ -179,11 +179,6 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         #endregion
 
         #region Name
-        public override string Name
-        {
-            get { return ReferencedObject != null ? ReferencedObject.Name : string.Empty; }
-        }
-
         public override string ToString()
         {
             return Name;

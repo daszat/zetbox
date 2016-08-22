@@ -31,7 +31,7 @@
 
         <ComboBox x:Name="cb"
                   IsSynchronizedWithCurrentItem="False"
-                  Text="{Binding Value, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}"
+                  Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}"
                   ItemsSource="{Binding PossibleValues, Mode=OneWay}"
                   IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
                   ToolTip="{Binding ToolTip}"

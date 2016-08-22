@@ -6,6 +6,7 @@
                   xmlns:client="clr-namespace:Zetbox.Client.Presentables;assembly=Zetbox.Client"
                   xmlns:commands="clr-namespace:Zetbox.Client.WPF.Commands;assembly=Zetbox.Client.WPF.Toolkit"
                   xmlns:tk="clr-namespace:Zetbox.Client.WPF.Toolkit;assembly=Zetbox.Client.WPF.Toolkit"
+                  xmlns:tkeditor="clr-namespace:Zetbox.Client.WPF.ObjectEditor;assembly=Zetbox.Client.WPF.Toolkit"
                   Title="{Binding Name}"
                   Height="600"
                   Width="800"
@@ -32,49 +33,7 @@
         <Border DockPanel.Dock="Bottom"
                 Style="{StaticResource AreaGroup1BorderStyle}"
                 Margin="{StaticResource AreaGroup1Margin}">
-            <DockPanel>
-                <ItemsControl DockPanel.Dock="Right"
-                              ItemsSource="{Binding Commands}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <DockPanel IsItemsHost="True" />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemContainerStyle>
-                        <Style>
-                            <Setter Property="DockPanel.Dock" Value="Right"/>
-                            <Setter Property="ContentPresenter.ContentTemplateSelector" Value="{StaticResource defaultTemplateSelector}"/>
-                            <Setter Property="tk:VisualTypeTemplateSelector.RequestedKind" Value="{Binding RequestedKind, Mode=OneWay}" />
-                        </Style>
-                    </ItemsControl.ItemContainerStyle>
-                </ItemsControl>
-                <ctrls:CommandButton DockPanel.Dock="Left"
-                                     CommandViewModel="{Binding ReportProblemCommand}"
-                                     Style="{StaticResource ImageButton}" />
-                <ToggleButton DockPanel.Dock="Left"
-                              Command="{Binding ElevatedModeCommand, Converter={StaticResource CommandConverter}}"
-                              Visibility="{Binding ElevatedModeCommand.Show, Converter={StaticResource BooleanToVisibilityConverter}}"
-                              IsChecked="{Binding ElevatedModeCommand.IsElevated, Mode=OneWay}">
-                    <Border Padding="5">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="{Binding Path=ElevatedModeCommand.Icon, Converter={StaticResource ImageConverter}}"
-                                   MaxHeight="{StaticResource SmallControlHeight}"
-                                   MaxWidth="{StaticResource SmallControlHeight}" />
-                            <ContentPresenter Content="{Binding Path=ElevatedModeCommand.Label}"
-                                              HorizontalAlignment="Center"
-                                              VerticalAlignment="Center" />
-                        </StackPanel>
-                    </Border>
-                </ToggleButton>
-                <TextBlock Text="{Binding SaveChangesHintText}"
-                           Visibility="{Binding IsContextModified, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}"
-                           VerticalAlignment="Bottom"
-                           Margin="0"
-                           MaxHeight="50"
-                           TextWrapping="Wrap"
-                           styles:Margin.Left="{StaticResource ItemMargin}"
-                           styles:Margin.Right="{StaticResource ItemMargin}" />
-            </DockPanel>
+            <tkeditor:WorkspaceButtons />
         </Border>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -83,25 +42,14 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
-
             <Expander Grid.Column="0"
                       Style="{StaticResource Area1Expander}"
-                      IsExpanded="{Binding ShowItemsList}"
+                      x:Name="expanderLeft"
                       ExpandDirection="Right"
                       Header="{Binding ItemsLabel}"
                       Expanded="Expander_Expanded"
                       Collapsed="Expander_Collapsed">
-                <DockPanel>
-                    <TextBlock DockPanel.Dock="Top"
-                               HorizontalAlignment="Center"
-                               Text="{Binding ItemsLabel}" />
-                    <ListBox x:Name="lstItems"
-                             ItemsSource="{Binding Items}"
-                             SelectedItem="{Binding SelectedItem}"
-                             ItemContainerStyle="{StaticResource ListBoxItemContainerStyle}"
-                             ItemTemplateSelector="{StaticResource listItemTemplateSelector}"
-                             BorderThickness="0" />
-                </DockPanel>
+                <tkeditor:SideBarLeft />
             </Expander>
 
             <GridSplitter Grid.Column="1"

@@ -31,7 +31,7 @@
               SelectedValuePath="Key"
               ItemsSource="{Binding PossibleValues}"
               IsEnabled="{Binding IsReadOnly, Converter={StaticResource InvertedBoolConverter}}"
-              SelectedValue="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=true}">
+              SelectedValue="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
         <ComboBox.ContextMenu>
             <ContextMenu>
                 <MenuItem Command="{Binding ClearValueCommand, Converter={StaticResource CommandConverter}}"

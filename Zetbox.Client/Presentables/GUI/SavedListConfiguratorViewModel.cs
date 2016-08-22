@@ -37,12 +37,9 @@ namespace Zetbox.Client.Presentables.GUI
     {
         public new delegate SavedListConfiguratorViewModel Factory(IZetboxContext dataCtx, InstanceListViewModel parent);
 
-        protected readonly Func<IZetboxContext> ctxFactory;
-
-        public SavedListConfiguratorViewModel(IViewModelDependencies appCtx, Func<IZetboxContext> ctxFactory, IZetboxContext dataCtx, InstanceListViewModel parent)
+        public SavedListConfiguratorViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, InstanceListViewModel parent)
             : base(appCtx, dataCtx, parent)
         {
-            this.ctxFactory = ctxFactory;
         }
 
         protected override ObservableCollection<ICommandViewModel> CreateCommands()
@@ -81,7 +78,7 @@ namespace Zetbox.Client.Presentables.GUI
                 },
                 createTask: () =>
                 {
-                    var ctx = ctxFactory();
+                    var ctx = ViewModelFactory.CreateNewContext();
                     var qryTask = ctx.GetQuery<SavedListConfiguration>()
                             .Where(i => i.Type.ExportGuid == Parent.DataType.ExportGuid) // Parent.DataType might be from FrozenContext
                             .Where(i => i.Owner == null || i.Owner.ID == this.CurrentPrincipal.ID)
@@ -100,7 +97,8 @@ namespace Zetbox.Client.Presentables.GUI
                                     t.Result.Rw.Add(ViewModelFactory.CreateViewModel<SavedListConfigViewModel.Factory>().Invoke(DataContext, this, item, cfg.Owner != null));
                                 }
                             }
-                        });
+                        })
+                        .Finally(() => ctx.Dispose());
                     return result;
                 },
                 set: null);
@@ -280,7 +278,7 @@ namespace Zetbox.Client.Presentables.GUI
             if (itemToDelete == null) throw new ArgumentNullException("itemToDelete");
             if (ViewModelFactory.GetDecisionFromUser(string.Format(SavedListConfiguratorViewModelResources.DeleteMessage, itemToDelete.Name), SavedListConfiguratorViewModelResources.DeleteTitle) == true)
             {
-                using (var ctx = ctxFactory())
+                using (var ctx = ViewModelFactory.CreateNewContext())
                 {
                     var config = GetSavedConfig(ctx);
                     var obj = ExtractConfigurationObject(config);
@@ -334,7 +332,7 @@ namespace Zetbox.Client.Presentables.GUI
                 .Show(p => { newName = p["name"] as string; });
             if (string.IsNullOrEmpty(newName)) return;
 
-            using (var ctx = ctxFactory())
+            using (var ctx = ViewModelFactory.CreateNewContext())
             {
                 var config = GetSavedConfig(ctx);
                 var obj = ExtractConfigurationObject(config);

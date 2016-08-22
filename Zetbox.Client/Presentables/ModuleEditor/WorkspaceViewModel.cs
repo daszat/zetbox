@@ -34,13 +34,9 @@ namespace Zetbox.Client.Presentables.ModuleEditor
     {
         public new delegate WorkspaceViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
 
-        protected readonly Func<ContextIsolationLevel, IZetboxContext> ctxFactory;
-
-        public WorkspaceViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, Func<ContextIsolationLevel, IZetboxContext> ctxFactory)
-            : base(appCtx, ctxFactory(ContextIsolationLevel.MergeQueryData), parent) // Use another data context, this workspace does not edit anything
+        public WorkspaceViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent)
+            : base(appCtx, appCtx == null ? null : appCtx.Factory.CreateNewContext(ContextIsolationLevel.MergeQueryData), parent) // Use another data context, this workspace does not edit anything
         {
-            if (ctxFactory == null) throw new ArgumentNullException("ctxFactory");
-            this.ctxFactory = ctxFactory;
         }
 
         private Module _CurrentModule;
@@ -161,7 +157,8 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                         {
                             foreach (var mdl in assemblyLstMdl.SelectedItems)
                             {
-                                var ctx = ctxFactory(ContextIsolationLevel.PreferContextCache);
+                                var scope = ViewModelFactory.CreateNewScope();
+                                var ctx = scope.ViewModelFactory.CreateNewContext();
 
                                 var a = ctx.Find<Assembly>(mdl.ID);
                                 var workspaceShown = a.RegenerateTypeRefs();
@@ -172,6 +169,11 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                                     // when new Descriptor has been created a Workspace will 
                                     // show those Descriptors and the user has to submit them
                                     ctx.SubmitChanges();
+                                    scope.Dispose();
+                                }
+                                else
+                                {
+                                    // TODO: This will produce a scope leak!
                                 }
                             }
                         },
@@ -213,9 +215,10 @@ namespace Zetbox.Client.Presentables.ModuleEditor
                     grpMdl.Children.Add(ctrlKindMdl);
 
                     // Icons
-                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemInstanceListViewModel.Factory>().Invoke(DataContext, this,
+                    lstMdl = ViewModelFactory.CreateViewModel<TreeItemIconInstanceListViewModel.Factory>().Invoke(DataContext, this,
                         typeof(Icon).GetObjectClass(FrozenContext),
-                        () => DataContext.GetQuery<Icon>().Where(i => i.Module == CurrentModule).OrderBy(i => i.IconFile));
+                        () => DataContext.GetQuery<Icon>().Where(i => i.Module == CurrentModule).OrderBy(i => i.IconFile),
+                        CurrentModule);
                     SetupViewModel(lstMdl);
                     grpMdl.Children.Add(lstMdl);
                     
@@ -257,7 +260,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
             lstMdl.AllowAddNew = true;
             lstMdl.AllowDelete = true;
             lstMdl.ViewMethod = InstanceListViewMethod.Details;
-            var toRemove = lstMdl.Filter.SingleOrDefault(f => f.ValueSource != null && f.ValueSource.Expression == "Module");
+            var toRemove = lstMdl.Filter.SingleOrDefault(f => f.ValueSource != null && f.ValueSource.LastInnerExpression == "Module");
             if (toRemove != null)
                 lstMdl.FilterList.RemoveFilter(toRemove);
             lstMdl.EndInit();
@@ -336,11 +339,12 @@ namespace Zetbox.Client.Presentables.ModuleEditor
         public void EditCurrentModule()
         {
             if (CurrentModule == null) return;
-            var newCtx = ctxFactory(ContextIsolationLevel.PreferContextCache);
-            var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx, null);
+            var newScope = ViewModelFactory.CreateNewScope();
+            var newCtx = newScope.ViewModelFactory.CreateNewContext();
+            var ws = ObjectEditor.WorkspaceViewModel.Create(newScope.Scope, newCtx);
 
-            newWorkspace.ShowObject(CurrentModule);
-            ViewModelFactory.ShowModel(newWorkspace, true);
+            ws.ShowObject(CurrentModule);
+            newScope.ViewModelFactory.ShowModel(ws, true);
         }
 
         private ICommandViewModel _ReportProblemCommand = null;

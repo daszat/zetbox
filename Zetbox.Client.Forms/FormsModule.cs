@@ -35,7 +35,7 @@ namespace Zetbox.Client.Forms
                 .RegisterType<FormsModelFactory>()
                 .As<IViewModelFactory>()
                 .As<IToolkit>()
-                .SingleInstance();
+                .InstancePerLifetimeScope();
         }
     }
 }

@@ -8,6 +8,7 @@
 /Zetbox.Server.HttpService/Bootstrapper
 /Zetbox.Server.HttpService/Client
 /Zetbox.Server.HttpService/Common
+/Zetbox.Server.HttpService/Logs
 /Zetbox.Complete.suo
 /Zetbox.Complete.userprefs
 obj
@@ -17,8 +18,6 @@ bin
 Bin
 VersionInfo.Designer.cs
 /Documentation/ZetboxGuide/tmp
-/Zetbox.Server.HttpService/Logs/Zetbox.Server.Service.log
-/Zetbox.Server.HttpService/Logs/SchemaReport.log
 
 /packages
 
@@ -27,3 +26,4 @@ VersionInfo.Designer.cs
 /Templates/ProjectTemplates/ZetboxApp/packages/Npgsql.*
 
 /publish/*.nupkg
+

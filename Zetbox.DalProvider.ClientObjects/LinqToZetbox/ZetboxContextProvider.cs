@@ -79,6 +79,8 @@ namespace Zetbox.DalProvider.Client
             return new ZbTask<List<IDataObject>>(serviceTask)
                 .OnResult(t =>
                 {
+                    if (_context.IsDisposed) return;
+
                     _context.RecordNotifications();
                     try
                     {
@@ -126,6 +128,8 @@ namespace Zetbox.DalProvider.Client
             return new ZbTask<List<T>>(getListTask)
                 .OnResult(t =>
                 {
+                    if (_context.IsDisposed) return;
+
                     _context.RecordNotifications();
 
                     try
@@ -187,6 +191,8 @@ namespace Zetbox.DalProvider.Client
                 })
                 .OnResult(t =>
                 {
+                    if (_context.IsDisposed) return;
+
                     _context.RecordNotifications();
                     try
                     {
@@ -208,6 +214,8 @@ namespace Zetbox.DalProvider.Client
 
             return task.OnResult(t =>
             {
+                if (_context.IsDisposed) return;
+
                 try
                 {
                     if (result == null

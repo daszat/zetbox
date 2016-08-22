@@ -509,6 +509,33 @@ WHERE parent_object_id = OBJECT_ID(@tbl)", new Dictionary<string, object>(){
                 });
         }
 
+        private void DropExistingDefaultConstraint(TableRef tblName, string colName)
+        {
+            var existingDefaultConstraintName = (string)ExecuteScalar(@"SELECT obj.name FROM sys.sysconstraints c
+INNER JOIN sys.sysobjects obj on (c.constid = obj.id)
+INNER JOIN sys.sysobjects tbl on (c.id = tbl.id)
+INNER JOIN sys.syscolumns col on (c.colid = col.colid AND col.id = tbl.id)
+WHERE tbl.id = OBJECT_ID(@table) and col.name = @column AND obj.xtype = 'D'",
+                new Dictionary<string, object>()
+                    {
+                        { "@table", FormatSchemaName(tblName) },
+                        { "@column", colName },
+                    });
+
+            if (!string.IsNullOrWhiteSpace(existingDefaultConstraintName))
+            {
+                ExecuteNonQuery(string.Format("ALTER TABLE {0} DROP CONSTRAINT {1}",
+                    FormatSchemaName(tblName),
+                    QuoteIdentifier(existingDefaultConstraintName)));
+            }
+        }
+
+        public override void DropColumn(TableRef tblName, string colName)
+        {
+            DropExistingDefaultConstraint(tblName, colName);
+            base.DropColumn(tblName, colName);
+        }
+
         protected override void DoColumn(bool add, TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, params DatabaseConstraint[] constraints)
         {
             StringBuilder sb = new StringBuilder();
@@ -568,24 +595,10 @@ WHERE parent_object_id = OBJECT_ID(@tbl)", new Dictionary<string, object>(){
             // Drop an existing constraint
             if (!add)
             {
-                var existingDefaultConstraintName = (string)ExecuteScalar(@"SELECT obj.name FROM sys.sysconstraints c
-INNER JOIN sys.sysobjects obj on (c.constid = obj.id)
-INNER JOIN sys.sysobjects tbl on (c.id = tbl.id)
-INNER JOIN sys.syscolumns col on (c.colid = col.colid AND col.id = tbl.id)
-WHERE tbl.id = OBJECT_ID(@table) and col.name = @column AND obj.xtype = 'D'",
-                    new Dictionary<string, object>()
-                    {
-                        { "@table", FormatSchemaName(tblName) },
-                        { "@column", colName },
-                    });
+                // Drop default constraint
+                DropExistingDefaultConstraint(tblName, colName);
 
-                if (!string.IsNullOrWhiteSpace(existingDefaultConstraintName))
-                {
-                    ExecuteNonQuery(string.Format("ALTER TABLE {0} DROP CONSTRAINT {1}",
-                        FormatSchemaName(tblName),
-                        QuoteIdentifier(existingDefaultConstraintName)));
-                }
-
+                // Drop check constraint
                 ExecuteNonQuery(string.Format("IF OBJECT_ID('{0}') IS NOT NULL\nALTER TABLE {1} DROP CONSTRAINT {2}",
                     FormatSchemaName(new ConstraintRef(tblName.Database, tblName.Schema, checkConstrName)),
                     FormatSchemaName(tblName),

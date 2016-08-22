@@ -28,18 +28,14 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     {
         public new delegate ApplicationViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Application app);
 
-        protected readonly Func<ContextIsolationLevel, IZetboxContext> ctxFactory;
-
         protected readonly Application app;
 
         public ApplicationViewModel(
             IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent,
-            Application app,
-            Func<ContextIsolationLevel, IZetboxContext> ctxFactory)
+            Application app)
             : base(appCtx, dataCtx, parent)
         {
             if (app == null) throw new ArgumentNullException("app");
-            this.ctxFactory = ctxFactory;
             this.app = app;
             _wndMdlType = app.WorkspaceViewModel != null
                 ? Type.GetType(app.WorkspaceViewModel.ViewModelTypeRef, true)
@@ -102,22 +98,25 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             if (appMdl == null) throw new ArgumentNullException("appMdl");
 
+            var newScope = ViewModelFactory.CreateNewScope();
+
             if (appMdl.WindowModelType != null)
             {
-                // responsibility to externalCtx's disposal passes to newWorkspace
-                var newWorkspace = ViewModelFactory.CreateViewModel<WindowViewModel.Factory>(appMdl.WindowModelType).Invoke(
-                    ctxFactory(ContextIsolationLevel.MergeQueryData) // no data changes in applications! Open a workspace
-                    , null
+                var newWorkspace = newScope.ViewModelFactory.CreateViewModel<WindowViewModel.Factory>(appMdl.WindowModelType).Invoke(
+                    newScope.ViewModelFactory.CreateNewContext(ContextIsolationLevel.MergeQueryData), // no data changes in applications! Open a workspace
+                    null
                 );
+                newWorkspace.Closed += (s, e) => newScope.Dispose();
                 ViewModelFactory.ShowModel(newWorkspace, true);
             }
             else if (appMdl.RootScreen != null)
             {
-                var newWorkspace = ViewModelFactory.CreateViewModel<NavigatorViewModel.Factory>().Invoke(
-                    ctxFactory(ContextIsolationLevel.MergeQueryData), // no data changes on navigation screens! Open a workspace
+                var newWorkspace = newScope.ViewModelFactory.CreateViewModel<NavigatorViewModel.Factory>().Invoke(
+                    newScope.ViewModelFactory.CreateNewContext(ContextIsolationLevel.MergeQueryData), // no data changes on navigation screens! Open a workspace
                     null,
                     appMdl.RootScreen
                 );
+                newWorkspace.Closed += (s, e) => newScope.Dispose();
                 ViewModelFactory.ShowModel(newWorkspace, true);
             }
             else

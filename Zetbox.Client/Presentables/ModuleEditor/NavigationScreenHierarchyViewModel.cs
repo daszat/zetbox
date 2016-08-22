@@ -33,14 +33,12 @@ namespace Zetbox.Client.Presentables.ModuleEditor
     {
         public new delegate NavigationScreenHierarchyViewModel Factory(IZetboxContext dataCtx, ViewModel parent, Module module);
 
-        public NavigationScreenHierarchyViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, Module module, Func<IZetboxContext> ctxFactory)
+        public NavigationScreenHierarchyViewModel(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, Module module)
             : base(appCtx, dataCtx, parent)
         {
-            this.ctxFactory = ctxFactory;
             this.Module = module;
         }
 
-        protected readonly Func<IZetboxContext> ctxFactory;
         public Module Module { get; private set; }
 
         public override string Name

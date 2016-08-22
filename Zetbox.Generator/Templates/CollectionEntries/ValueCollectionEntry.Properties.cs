@@ -25,6 +25,19 @@ namespace Zetbox.Generator.Templates.CollectionEntries
 
     public partial class ValueCollectionEntry
     {
+        protected override void ApplyConstructorTemplate()
+        {
+            var cop = prop as CompoundObjectProperty;
+            if (cop != null)
+            {
+                ObjectClasses.Constructors.Call(Host, ctx, GetCeClassName(), new[] { cop }, true);
+            }
+            else
+            {
+                base.ApplyConstructorTemplate();
+            }
+        }
+
         protected override void ApplyAPropertyTemplate()
         {
             var interfaceType = prop.ObjectClass.Module.Namespace + "." + prop.ObjectClass.Name;

@@ -59,6 +59,14 @@ namespace Zetbox.Client.Presentables
             _object.PropertyChanged += Object_PropertyChanged;
             isReadOnlyStore = _object.IsReadonly;
             dataCtx.IsElevatedModeChanged += new EventHandler(dataCtx_IsElevatedModeChanged);
+
+            ValidationManager.Register(this);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            ValidationManager.Unregister(this);
         }
 
         void dataCtx_IsElevatedModeChanged(object sender, EventArgs e)
@@ -362,6 +370,7 @@ namespace Zetbox.Client.Presentables
             {
                 if (DataContext.IsElevatedMode) return false;
                 if (DataContext.IsReadonly) return true;
+                if (Object.IsReadonly) return true;
                 return isReadOnlyStore;
             }
             set
@@ -369,11 +378,13 @@ namespace Zetbox.Client.Presentables
                 if (isReadOnlyStore != value)
                 {
                     isReadOnlyStore = value;
+                    var propIsReadOnly = this.IsReadOnly;
+
                     if (_propertyModels != null)
                     {
                         foreach (var e in _propertyModels)
                         {
-                            e.Value.IsReadOnly = isReadOnlyStore;
+                            e.Value.IsReadOnly = propIsReadOnly;
                         }
                     }
                     OnPropertyChanged("IsReadOnly");
@@ -459,6 +470,59 @@ namespace Zetbox.Client.Presentables
                 return _ActionViewModelsByName;
             }
         }
+        #endregion
+
+        #region Commands
+        protected override ObservableCollection<ICommandViewModel> CreateCommands()
+        {
+            var result = base.CreateCommands();
+
+            if (CanMerge())
+            {
+                result.Add(MergeCommand);
+            }
+
+            return result;
+        }
+
+        #region Merge command
+        private ICommandViewModel _MergeCommand = null;
+        public ICommandViewModel MergeCommand
+        {
+            get
+            {
+                if (_MergeCommand == null)
+                {
+                    _MergeCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
+                        DataObjectViewModelResources.MergeCommand_Name,
+                        DataObjectViewModelResources.MergeCommand_Tooltip,
+                        Merge, 
+                        CanMerge,
+                        () => DataObjectViewModelResources.MergeCommand_Reason);
+                    _MergeCommand.Icon = IconConverter.ToImage(NamedObjects.Gui.Icons.ZetboxBase.reload_png.Find(FrozenContext));
+                }
+                return _MergeCommand;
+            }
+        }
+
+        private bool CanMerge()
+        {
+            if (DataContext.IsElevatedMode) return true;
+
+            return Object.CurrentAccessRights.HasWriteRights()
+                && Object.GetObjectClass(FrozenContext).ImplementsIMergeable()
+                && GetWorkspace() is IMultipleInstancesManager;
+        }
+
+        public void Merge()
+        {
+            var ws = (IMultipleInstancesManager)GetWorkspace();
+
+            var task = ViewModelFactory.CreateViewModel<ObjectEditor.MergeObjectsTaskViewModel.Factory>().Invoke(DataContext, GetWorkspace(), Object, null);
+            ws.AddItem(task);
+            ws.SelectedItem = task;
+        }
+        #endregion
         #endregion
 
         #region Utilities and UI callbacks
@@ -582,30 +646,78 @@ namespace Zetbox.Client.Presentables
         }
         #endregion
 
-        #region IDataErrorInfo Members
-
-        public string Error
+        #region Validation
+        string IDataErrorInfo.Error
         {
             get
             {
-                if (Object.CurrentAccessRights.HasNoRights()) return string.Empty;
-                else return string.Join("\n", PropertyModels.OfType<IDataErrorInfo>().Select(idei => idei.Error).Where(s => !String.IsNullOrEmpty(s)).ToArray());
+                if (ValidationError != null)
+                {
+                    return ValidationError.ToString();
+                }
+                else
+                {
+                    return string.Empty;
+                }
             }
         }
 
-        public string this[string columnName]
+        string IDataErrorInfo.this[string columnName]
         {
             get
             {
-                if (PropertyModelsByName.ContainsKey(columnName))
+                return ((IDataErrorInfo)this).Error;
+            }
+        }
+
+        protected override bool NeedsValidation
+        {
+            get
+            {
+                if (!base.NeedsValidation) return false;
+
+                // No access rights, no validation
+                if (Object.CurrentAccessRights.HasNoRights()) return false;
+
+                // If any property is invalid (due to a change that not has been written back), validate
+                if (_propertyModels != null)
                 {
-                    var idei = PropertyModelsByName[columnName] as IDataErrorInfo;
-                    if (idei != null)
-                    {
-                        return idei.Error;
-                    }
+                    if (_propertyModels.Any(p => !p.Value.IsValid)) return true;
                 }
-                return String.Empty;
+
+                // Deleted, not attacted or unmodified -> no validation
+                if (Object.ObjectState.In(DataObjectState.Deleted, DataObjectState.Unmodified, DataObjectState.Detached, DataObjectState.NotDeserialized)) return false;
+
+                return true;
+            }
+        }
+
+        protected override void DoValidate()
+        {
+            base.DoValidate();
+            if (!NeedsValidation) return;
+
+            var objError = Object.Validate();
+            if (!objError.IsValid)
+            {
+                ValidationError.AddErrors(objError.Errors);
+            }
+
+            if (_propertyModels != null)
+            {
+                // Validate only, if properties are loaded
+                var errors = PropertyModels
+                    .Select(i => i.Validate())
+                    .ToArray()
+                    .Where(i => i.HasErrors)
+                    .ToArray();
+
+                if (errors.Any())
+                {
+                    ValidationError.AddError(DataObjectViewModelResources.ErrorInvalidProperties);
+                    ValidationError.Children.Clear();
+                    ValidationError.AddChildren(errors);
+                }
             }
         }
 

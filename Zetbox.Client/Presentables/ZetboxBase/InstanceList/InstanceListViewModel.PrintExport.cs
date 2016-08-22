@@ -24,6 +24,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     using System.Text;
     using Zetbox.API;
     using Zetbox.API.Async;
+    using Zetbox.App.Extensions;
     using Zetbox.Client.Models;
 
     public partial class InstanceListViewModel
@@ -125,6 +126,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         InstanceListViewModelResources.ExportCSVCommand,
                         InstanceListViewModelResources.ExportCSVCommand_Tooltip,
                         Export, null, null);
+                    _ExportCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.document_export_png.Find(FrozenContext));
                 }
                 return _ExportCommand;
             }
@@ -157,6 +159,74 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         }
 
+        private ICommandViewModel _ExportXMLCommand = null;
+        public ICommandViewModel ExportXMLCommand
+        {
+            get
+            {
+                if (_ExportXMLCommand == null)
+                {
+                    _ExportXMLCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
+                        InstanceListViewModelResources.ExportXmlCommand,
+                        InstanceListViewModelResources.ExportXmlommand_Tooltip,
+                        ExportXML,
+                        CanExportXML,
+                        null);
+                    _ExportXMLCommand.Icon = IconConverter.ToImage(Zetbox.NamedObjects.Gui.Icons.ZetboxBase.document_export_png.Find(FrozenContext));
+                }
+                return _ExportXMLCommand;
+            }
+        }
+
+        private bool? _canExportXML;
+        public bool CanExportXML()
+        {
+            if (_canExportXML == null)
+            {
+                _canExportXML = DataType.ImplementsIExportable();
+            }
+            return _canExportXML.Value;
+        }
+
+        public void ExportXML()
+        {
+            var fileName = ViewModelFactory.GetDestinationFileNameFromUser("Zetbox.xml", "XML|*.xml");
+            if (!string.IsNullOrWhiteSpace(fileName))
+            {
+                SetBusy(string.Format(InstanceListViewModelResources.ExportBusyMessageFormat, 1));
+                var unpagedQuery = GetUnpagedQuery();
+
+                var objects = new List<IDataObject>();
+                GetPagedQuery(0, Helper.MAXLISTCOUNT, unpagedQuery)
+                    .OnError(ex => OnExportPageError(ex))
+                    .OnResult(OnExportPageResultFactory(objects, 0, Helper.MAXLISTCOUNT, unpagedQuery, fileName));
+            }
+        }
+
+        private Action<ZbTask<IEnumerable>> OnExportPageResultFactory(List<IDataObject> objects, int page, int pageSize, IQueryable unpagedQuery, string fileName)
+        {
+            return t =>
+            {
+                var result = t.Result.Cast<IDataObject>().ToList();
+                objects.AddRange(result);
+                bool queryAgain = result.Count == pageSize;
+
+                if (queryAgain)
+                {
+                    CurrentBusyMessage = string.Format(InstanceListViewModelResources.ExportBusyMessageFormat, page + 1);
+                    GetPagedQuery(page + 1, pageSize, unpagedQuery)
+                        .OnError(ex => OnExportPageError(ex))
+                        .OnResult(OnExportPageResultFactory(objects, page + 1, pageSize, unpagedQuery, fileName));
+                }
+                else
+                {
+                    Zetbox.App.Packaging.Exporter.Export(DataContext, fileName, objects);
+                    fileOpener.ShellExecute(Path.GetDirectoryName(fileName));
+                    ClearBusy();
+                }
+            };
+        }
+
         private Action<ZbTask<IEnumerable>> OnExportPageResultFactory(StreamWriter sw, List<ColumnDisplayModel> cols, int page, int pageSize, IQueryable unpagedQuery, string tmpFile)
         {
             return t =>
@@ -179,9 +249,15 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             };
         }
 
-        private void OnExportPageError(IDisposable sw, Exception ex)
+        private void OnExportPageError(Exception ex)
         {
-            sw.Dispose();
+            OnExportPageError(null, ex);
+        }
+
+        private void OnExportPageError(IDisposable d, Exception ex)
+        {
+            if(d != null) d.Dispose();
+
             ClearBusy();
             errorReporter.Value.Show(ex);
         }
@@ -256,7 +332,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                     _ExportContainerCommand = ViewModelFactory.CreateViewModel<ContainerCommand.Factory>().Invoke(DataContext, this,
                         InstanceListViewModelResources.ExportContainerCommand,
                         InstanceListViewModelResources.ExportContainerCommand_Tooltip,
-                        ExportCommand, PrintCommand);
+                        ExportCommand, PrintCommand, ExportXMLCommand);
                 }
                 return _ExportContainerCommand;
             }

@@ -418,6 +418,29 @@ namespace Zetbox.API
 
         #endregion
 
+        #region IDataObject
+
+        /// <summary>
+        /// Serialize a IDataObject. Format is: ID, type if not null.
+        /// </summary>
+        /// <param name="val">Value to serialize</param>
+        public void Write(IDataObject val)
+        {
+            TraceCurrentPos();
+            SerializerTrace("Writing IDataObject {0}", val);
+            if (val != null)
+            {
+                _dest.Write(val.ID);
+                Write(val.Context.GetInterfaceType(val).ToSerializableType());
+            }
+            else
+            {
+                _dest.Write(Helper.INVALIDID);
+            }
+        }
+
+        #endregion
+
         #region SerializableExpression and SerializableExpression[]
 
         /// <summary>
@@ -650,18 +673,28 @@ namespace Zetbox.API
                 if (type.IsArray)
                 {
                     var elementType = type.GetElementType();
-                    foreach (var element in (System.Collections.IEnumerable)value)
-                    {
-                        _dest.Write(true);
-                        WriteInternal(element, elementType);
-                    }
-                    _dest.Write(false);
+                    WriteArrayInternal(value, elementType);
+                }
+                else if (typeof(System.Collections.IEnumerable).IsAssignableFrom(type) && type != typeof(string))
+                {
+                    var elementType = type.FindElementTypes().Single(t => t != typeof(object));
+                    WriteArrayInternal(value, elementType);
                 }
                 else
                 {
                     WriteInternal(value, type);
                 }
             }
+        }
+
+        private void WriteArrayInternal(object value, Type elementType)
+        {
+            foreach (var element in (System.Collections.IEnumerable)value)
+            {
+                _dest.Write(true);
+                WriteInternal(element, elementType);
+            }
+            _dest.Write(false);
         }
 
         // Serialize only basic types
@@ -702,6 +735,10 @@ namespace Zetbox.API
             else if (type.IsICompoundObject())
             {
                 Write((ICompoundObject)value);
+            }
+            else if (type.IsIDataObject())
+            {
+                Write((IDataObject)value);
             }
             else
             {

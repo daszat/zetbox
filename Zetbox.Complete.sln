@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{ACC74A05-6833-4897-B739-8D5E82E846C2}"
 	ProjectSection(SolutionItems) = preProject
@@ -128,7 +128,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.Objects", "Zetbox.Ob
 		{AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9} = {AD0C7B9C-3C92-4F19-BBDF-416AD4700CB9}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.DalProvider.EF", "Zetbox.DalProvider.EF\Zetbox.DalProvider.EF.csproj", "{52EC8DFB-9C75-4FDB-9EE1-E78847F7F711}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.DalProvider.Ef", "Zetbox.DalProvider.EF\Zetbox.DalProvider.Ef.csproj", "{52EC8DFB-9C75-4FDB-9EE1-E78847F7F711}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.Client.Forms", "Zetbox.Client.Forms\Zetbox.Client.Forms.csproj", "{C701ED04-08B2-4ABA-B2D3-33502690C8DA}"
 EndProject
@@ -195,7 +195,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.Objects.Ef", "Zetbox
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.DalProvider.Client.Generator", "Zetbox.DalProvider.Client.Generator\Zetbox.DalProvider.Client.Generator.csproj", "{F81E2AB4-0622-40A3-B7E3-9FAC0EE4A31B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.DalProvider.EF.Generator", "Zetbox.DalProvider.EF.Generator\Zetbox.DalProvider.EF.Generator.csproj", "{A2C68E17-5B32-4F4E-B83A-DC7122623FDD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.DalProvider.Ef.Generator", "Zetbox.DalProvider.EF.Generator\Zetbox.DalProvider.Ef.Generator.csproj", "{A2C68E17-5B32-4F4E-B83A-DC7122623FDD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.DalProvider.Base", "Zetbox.DalProvider.Base\Zetbox.DalProvider.Base.csproj", "{A242A751-9F97-4F1C-ABE5-57B28133DEF4}"
 EndProject
@@ -216,6 +216,7 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.Server.HttpService", "Zetbox.Server.HttpService\Zetbox.Server.HttpService.csproj", "{FD3C71B3-330F-4FFC-A525-37E1AD338FF8}"
 	ProjectSection(ProjectDependencies) = postProject
 		{26C035B1-A53D-44E0-BEED-CB97EC56B38E} = {26C035B1-A53D-44E0-BEED-CB97EC56B38E}
+		{E1275AE6-5060-4E93-88D8-BA48BA52DC7A} = {E1275AE6-5060-4E93-88D8-BA48BA52DC7A}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.Microsoft", "Zetbox.Microsoft\Zetbox.Microsoft.csproj", "{C071C75B-9FE5-4AF2-BD32-C3C1DD110928}"
@@ -224,9 +225,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrepareEnv", "PrepareEnv\Pr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{81AEBEAC-66DE-4E5B-BC58-B14021BCAA9E}"
 	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\nuget.exe = .nuget\nuget.exe
-		.nuget\nuget.targets = .nuget\nuget.targets
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
@@ -288,6 +286,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.App.Tests.Common", "Tests\Zetbox.App.Tests.Common\Zetbox.App.Tests.Common.csproj", "{E8691675-A0AC-40DC-B482-A6284B0BA3C6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.App.Tests.Server", "Tests\Zetbox.App.Tests.Server\Zetbox.App.Tests.Server.csproj", "{9C21C092-0900-4BBF-9BCB-7FA3B30C6CC8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.App.Tests.Client.WPF", "Tests\Zetbox.App.Tests.Client.WPF\Zetbox.App.Tests.Client.WPF.csproj", "{93849B1B-BFB5-4EA4-96DB-972C7B365E15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1638,7 +1638,6 @@ Global
 		{B6067874-709A-44F3-89BF-D89365B37F2E}.Minimal|Any CPU.ActiveCfg = Release|Any CPU
 		{B6067874-709A-44F3-89BF-D89365B37F2E}.Minimal|Any CPU.Build.0 = Release|Any CPU
 		{B6067874-709A-44F3-89BF-D89365B37F2E}.Minimal|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{B6067874-709A-44F3-89BF-D89365B37F2E}.Minimal|Mixed Platforms.Build.0 = Release|Any CPU
 		{B6067874-709A-44F3-89BF-D89365B37F2E}.Minimal|x86.ActiveCfg = Release|Any CPU
 		{B6067874-709A-44F3-89BF-D89365B37F2E}.Release|.NET.ActiveCfg = Release|Any CPU
 		{B6067874-709A-44F3-89BF-D89365B37F2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -1662,7 +1661,6 @@ Global
 		{03ACD22D-30DF-436F-8B44-6A1CE180E950}.Minimal|Any CPU.ActiveCfg = Release|Any CPU
 		{03ACD22D-30DF-436F-8B44-6A1CE180E950}.Minimal|Any CPU.Build.0 = Release|Any CPU
 		{03ACD22D-30DF-436F-8B44-6A1CE180E950}.Minimal|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{03ACD22D-30DF-436F-8B44-6A1CE180E950}.Minimal|Mixed Platforms.Build.0 = Release|Any CPU
 		{03ACD22D-30DF-436F-8B44-6A1CE180E950}.Minimal|x86.ActiveCfg = Release|Any CPU
 		{03ACD22D-30DF-436F-8B44-6A1CE180E950}.Release|.NET.ActiveCfg = Release|Any CPU
 		{03ACD22D-30DF-436F-8B44-6A1CE180E950}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -1806,7 +1804,6 @@ Global
 		{84913D6B-F56C-4812-A2EC-4AC0F5C42FF4}.Minimal|Any CPU.ActiveCfg = Release|Any CPU
 		{84913D6B-F56C-4812-A2EC-4AC0F5C42FF4}.Minimal|Any CPU.Build.0 = Release|Any CPU
 		{84913D6B-F56C-4812-A2EC-4AC0F5C42FF4}.Minimal|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{84913D6B-F56C-4812-A2EC-4AC0F5C42FF4}.Minimal|Mixed Platforms.Build.0 = Release|Any CPU
 		{84913D6B-F56C-4812-A2EC-4AC0F5C42FF4}.Minimal|x86.ActiveCfg = Release|Any CPU
 		{84913D6B-F56C-4812-A2EC-4AC0F5C42FF4}.Release|.NET.ActiveCfg = Release|Any CPU
 		{84913D6B-F56C-4812-A2EC-4AC0F5C42FF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -1830,7 +1827,6 @@ Global
 		{E8691675-A0AC-40DC-B482-A6284B0BA3C6}.Minimal|Any CPU.ActiveCfg = Release|Any CPU
 		{E8691675-A0AC-40DC-B482-A6284B0BA3C6}.Minimal|Any CPU.Build.0 = Release|Any CPU
 		{E8691675-A0AC-40DC-B482-A6284B0BA3C6}.Minimal|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{E8691675-A0AC-40DC-B482-A6284B0BA3C6}.Minimal|Mixed Platforms.Build.0 = Release|Any CPU
 		{E8691675-A0AC-40DC-B482-A6284B0BA3C6}.Minimal|x86.ActiveCfg = Release|Any CPU
 		{E8691675-A0AC-40DC-B482-A6284B0BA3C6}.Release|.NET.ActiveCfg = Release|Any CPU
 		{E8691675-A0AC-40DC-B482-A6284B0BA3C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -1854,7 +1850,6 @@ Global
 		{9C21C092-0900-4BBF-9BCB-7FA3B30C6CC8}.Minimal|Any CPU.ActiveCfg = Release|Any CPU
 		{9C21C092-0900-4BBF-9BCB-7FA3B30C6CC8}.Minimal|Any CPU.Build.0 = Release|Any CPU
 		{9C21C092-0900-4BBF-9BCB-7FA3B30C6CC8}.Minimal|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{9C21C092-0900-4BBF-9BCB-7FA3B30C6CC8}.Minimal|Mixed Platforms.Build.0 = Release|Any CPU
 		{9C21C092-0900-4BBF-9BCB-7FA3B30C6CC8}.Minimal|x86.ActiveCfg = Release|Any CPU
 		{9C21C092-0900-4BBF-9BCB-7FA3B30C6CC8}.Release|.NET.ActiveCfg = Release|Any CPU
 		{9C21C092-0900-4BBF-9BCB-7FA3B30C6CC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -1862,6 +1857,28 @@ Global
 		{9C21C092-0900-4BBF-9BCB-7FA3B30C6CC8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{9C21C092-0900-4BBF-9BCB-7FA3B30C6CC8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{9C21C092-0900-4BBF-9BCB-7FA3B30C6CC8}.Release|x86.ActiveCfg = Release|Any CPU
+		{93849B1B-BFB5-4EA4-96DB-972C7B365E15}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{93849B1B-BFB5-4EA4-96DB-972C7B365E15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93849B1B-BFB5-4EA4-96DB-972C7B365E15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93849B1B-BFB5-4EA4-96DB-972C7B365E15}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{93849B1B-BFB5-4EA4-96DB-972C7B365E15}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{93849B1B-BFB5-4EA4-96DB-972C7B365E15}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{93849B1B-BFB5-4EA4-96DB-972C7B365E15}.Linux.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{93849B1B-BFB5-4EA4-96DB-972C7B365E15}.Linux.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93849B1B-BFB5-4EA4-96DB-972C7B365E15}.Linux.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93849B1B-BFB5-4EA4-96DB-972C7B365E15}.Linux.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{93849B1B-BFB5-4EA4-96DB-972C7B365E15}.Linux.Debug|x86.ActiveCfg = Debug|Any CPU
+		{93849B1B-BFB5-4EA4-96DB-972C7B365E15}.Minimal|.NET.ActiveCfg = Release|Any CPU
+		{93849B1B-BFB5-4EA4-96DB-972C7B365E15}.Minimal|Any CPU.ActiveCfg = Release|Any CPU
+		{93849B1B-BFB5-4EA4-96DB-972C7B365E15}.Minimal|Any CPU.Build.0 = Release|Any CPU
+		{93849B1B-BFB5-4EA4-96DB-972C7B365E15}.Minimal|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{93849B1B-BFB5-4EA4-96DB-972C7B365E15}.Minimal|x86.ActiveCfg = Release|Any CPU
+		{93849B1B-BFB5-4EA4-96DB-972C7B365E15}.Release|.NET.ActiveCfg = Release|Any CPU
+		{93849B1B-BFB5-4EA4-96DB-972C7B365E15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93849B1B-BFB5-4EA4-96DB-972C7B365E15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93849B1B-BFB5-4EA4-96DB-972C7B365E15}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{93849B1B-BFB5-4EA4-96DB-972C7B365E15}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{93849B1B-BFB5-4EA4-96DB-972C7B365E15}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1906,5 +1923,6 @@ Global
 		{84913D6B-F56C-4812-A2EC-4AC0F5C42FF4} = {ACC74A05-6833-4897-B739-8D5E82E846C2}
 		{E8691675-A0AC-40DC-B482-A6284B0BA3C6} = {ACC74A05-6833-4897-B739-8D5E82E846C2}
 		{9C21C092-0900-4BBF-9BCB-7FA3B30C6CC8} = {ACC74A05-6833-4897-B739-8D5E82E846C2}
+		{93849B1B-BFB5-4EA4-96DB-972C7B365E15} = {ACC74A05-6833-4897-B739-8D5E82E846C2}
 	EndGlobalSection
 EndGlobal

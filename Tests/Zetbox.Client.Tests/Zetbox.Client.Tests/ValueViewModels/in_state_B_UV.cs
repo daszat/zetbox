@@ -227,7 +227,7 @@ namespace Zetbox.Client.Tests.ValueViewModels
                 valueModelMock.SetupProperty(o => o.Value);
                 obj.Value = value;
 
-                Assert.That(obj.Error, Is.Null.Or.Empty);
+                Assert.That(obj.IsValid, Is.True);
                 valueModelMock.Verify();
             }
         }
@@ -277,7 +277,7 @@ namespace Zetbox.Client.Tests.ValueViewModels
             {
                 obj.FormattedValue = partialInput;
 
-                Assert.That(obj.Error, Is.EqualTo(errorString));
+                Assert.That(obj.ValidationError.ToString(), Is.EqualTo(errorString));
                 valueModelMock.Verify();
             }
 
@@ -412,7 +412,7 @@ namespace Zetbox.Client.Tests.ValueViewModels
             {
                 obj.FormattedValue = inputValue;
 
-                Assert.That(obj.Error, Is.Null.Or.Empty);
+                Assert.That(obj.IsValid, Is.True);
                 valueModelMock.Verify();
             }
         }
@@ -465,7 +465,7 @@ namespace Zetbox.Client.Tests.ValueViewModels
             {
                 RaiseValueModelChangedEvent();
 
-                Assert.That(obj.Error, Is.Null.Or.Empty);
+                Assert.That(obj.IsValid, Is.True);
                 valueModelMock.Verify();
             }
         }

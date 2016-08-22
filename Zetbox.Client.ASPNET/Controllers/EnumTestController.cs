@@ -45,10 +45,16 @@ namespace Zetbox.Client.ASPNET.Controllers
         // POST: /EnumTest/Create
 
         [HttpPost]
-        public ActionResult Create(DataObjectEditViewModel<Zetbox.App.Test.PropertyEnumTest> mdl)
+        public ActionResult Create(DataObjectEditViewModel<Zetbox.App.Test.PropertyEnumTest> vmdl)
         {
-            DataContext.SubmitChanges();
-            return RedirectToAction("Index");
+            Validate();
+            if (ModelState.IsValid)
+            {
+                DataContext.SubmitChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(vmdl);
         }
 
         //
@@ -65,10 +71,15 @@ namespace Zetbox.Client.ASPNET.Controllers
         // POST: /EnumTest/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(DataObjectEditViewModel<Zetbox.App.Test.PropertyEnumTest> mdl)
+        public ActionResult Edit(DataObjectEditViewModel<Zetbox.App.Test.PropertyEnumTest> vmdl)
         {
-            DataContext.SubmitChanges();
-            return RedirectToAction("Details", new { id = mdl.ID });
+            Validate();
+            if (ModelState.IsValid)
+            {
+                DataContext.SubmitChanges();
+                return RedirectToAction("Details", new { id = vmdl.ID });
+            }
+            return View(vmdl);
         }
     }
 }

@@ -204,5 +204,21 @@ namespace Zetbox.Client.Presentables
             Commands.Insert(0, cmd);
         }
         #endregion
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+
+            foreach(var i in _items)
+            {
+                i.Dispose();
+            }
+        }
+
+        protected override void OnClose()
+        {
+            base.OnClose();
+            this.Dispose();
+        }
     }
 }

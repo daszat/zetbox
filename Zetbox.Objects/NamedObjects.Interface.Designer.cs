@@ -1203,6 +1203,10 @@ namespace Zetbox {
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("5f534204-f0d5-4d6f-8efa-7ff248580ba3"); }
                                 }
+                                public static TypedGuid<global::Zetbox.App.Base.Property> IsDeactivated
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Property>("4a2da2e9-9492-41a3-9969-d5ffa1cac3b3"); }
+                                }
                                 public static TypedGuid<global::Zetbox.App.Base.Property> LoginToken
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("267074ae-3a16-41bd-b9af-f09fa27e8d5a"); }
@@ -1428,6 +1432,10 @@ namespace Zetbox {
                                 public static TypedGuid<global::Zetbox.App.Base.Method> GetName
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Method>("171d4016-4373-471f-88e1-9f541ef62949"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Method> ReplaceObject
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Method>("33c88040-11c1-408d-a6f9-73097edeb7ff"); }
                                 }
                             }
                             public static class ObjectClass_Properties
@@ -3110,6 +3118,17 @@ namespace Zetbox {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Property>("94ea407f-9816-470e-9e52-6607830c7c0b"); }
                                 }
                             }
+                            public static class Task_Methods
+                            {
+                                public static TypedGuid<global::Zetbox.App.Base.Method> GetMergeableProperties
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Method>("88795123-b204-4239-9f3a-9221e5ba4d94"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Method> MergeFrom
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Method>("69c9724c-e246-4688-8238-66fdae1c5136"); }
+                                }
+                            }
                             public static class Task_Properties
                             {
                                 public static TypedGuid<global::Zetbox.App.Base.Property> Aufwand
@@ -4391,6 +4410,10 @@ namespace Zetbox {
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("aa2fb611-a8aa-44b7-9b55-80ef3ef4c4b1"); }
                 }
+                public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_CacheDebuggerKind
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("1b3c874d-bab3-4c34-9bbb-b8dbc44c16a8"); }
+                }
                 public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_CheckboxKind
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("12b829e1-abab-43f3-99ea-e33cd383d7e6"); }
@@ -4523,6 +4546,14 @@ namespace Zetbox {
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("90d5ff7f-0c82-4278-bb8d-49c240f6bc2c"); }
                 }
+                public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_MergeObjectsTaskKind
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("e9f6ae36-3fd3-4363-9c13-1febf5f52059"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_MergePropertyEditorKind
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("796b49af-733b-4df8-bc66-f638b92e5767"); }
+                }
                 public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_MonthEditorKind
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("a09a78f4-a583-4fef-8ae7-cf7acd95e8b8"); }
@@ -4611,6 +4642,10 @@ namespace Zetbox {
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("2f6233fe-6fd6-4145-b438-64cc85f89fd8"); }
                 }
+                public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_PerfMonDebuggerKind
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("7b8275b2-2760-44cd-a79d-33cef9f92e61"); }
+                }
                 public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_PropertiesPreview
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("dc5982a3-8b8f-44e1-b860-1400a41c4275"); }
@@ -4634,6 +4669,10 @@ namespace Zetbox {
                 public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_RelationEditorKind
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("f7cf3060-5fa5-4077-93e9-5fc681f875fe"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_RequestDebuggerKind
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("f8613842-c978-4db6-8568-20b0fd7ee1a0"); }
                 }
                 public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_SimpleBoolFilterKind
                 {
@@ -4703,9 +4742,13 @@ namespace Zetbox {
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("329837fd-1146-48b2-9f4e-79aec8958b1e"); }
                 }
-                public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_ZetboxDebuggerKind
+                public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_ZetboxContextDebuggerKind
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("59253ed1-a3a5-4574-b3bb-3c4fa535d21c"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_GUI_ZetboxDebuggerWindowKind
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ControlKind>("22f7f299-fa15-4ea6-8d21-6da2996d737c"); }
                 }
                 public static TypedGuid<global::Zetbox.App.GUI.ControlKind> Zetbox_App_SchemaMigration_DestinationPropertyEditor
                 {
@@ -4748,13 +4791,437 @@ namespace Zetbox {
                     {
                         get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("41aa8db8-5a1e-41a0-85b1-229029d7794d"); }
                     }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> address_book_new_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("1b84be39-fbcf-4b48-89c4-a692f7081254"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> alien_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("f9426807-fd81-4cf7-90cd-b4c39e11ee7c"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> anchor_over_background_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("0f596c4e-e787-48ea-95f7-2ed1e167af5d"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_ant_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("70429cf6-cde4-4071-9917-06787868d5e4"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_armadillo_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("e6af4d95-fe13-436f-b447-83199302e709"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_bat_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("61aa3201-e70c-4128-a408-4e31b236ae3d"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_bear_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("59a54ba3-8266-4471-9edc-28bf95e52b59"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_beaver_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("694479c4-33ac-4c5d-8f47-4c15b005c1cf"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_bee_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("4f9894e7-1d7c-4524-8d61-3de930bdc959"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_bird_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c7fae683-af97-4366-a331-d8c947d8a916"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_black_widow_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("83eb8b49-c2a0-4c1e-bf00-107914764f76"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_blowfish_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("8989f934-61ca-435f-9039-555493efa3dd"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_bull_head_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c5892701-0f48-4ab0-b305-28ea4f06385c"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_bumble_bee_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("a3df930e-212c-44ab-85c3-42d2c7ee0e89"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_butterfly_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("86220794-1266-468b-a95a-ae4f092b6c01"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_cat_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("9de46c37-11fa-4c5a-b98f-0ae966994c49"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_cow_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("a0eccdf8-3295-4b28-9adf-e0f93f67f543"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_crow_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("db24019a-61df-4272-adf7-017ec85c6815"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_dog_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("e8e66d99-bc2f-4be7-afa5-e5f0bfde2a3b"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_dolphin_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("cc1419cd-4df0-4a66-8473-af9ae473bade"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_doves_of_peace_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("1cbbf69b-cf34-4b1e-90e4-060945df1a3e"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_dragon_abstract_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("df7003ca-154a-4870-b248-b86dbd579e29"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_dragon_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("f6f237c9-8a6b-404e-ab4b-bb7653e27689"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_eagle_face_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("fbce3435-9d19-418c-aa48-3b01905056c4"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_eagle_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("6f354c6b-e15d-46cd-9893-7c9e810f18b9"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_elephant_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("7373ae8c-26ff-40f1-9b7a-62a8a496d6c4"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_elk_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("8b23660f-8fd4-4875-a6f8-e04e2d6cfdb1"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_feather_4_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("27e4c767-22fe-4822-b29d-1fd7f9669c49"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_frog_poison_dart_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("f22a00f0-9e3a-4448-98a5-4c889bae7cbc"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_gaur_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("b7485a21-7172-446c-a12f-328dcd8df62f"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_giraffe_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("992978f5-40e7-4412-932b-2083c5ff681e"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_gnu_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("5fea5845-44e1-41fe-ac4a-97237f8002f3"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_goat_head_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("5b3e1825-400b-46d8-8771-5af940994100"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_goat_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("efa84404-663e-4f13-a06b-b93ba85ebe81"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_hamster_face_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c87b1232-b7bd-4ba1-a073-5c7a9408ab28"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_hippo_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("879c5146-e8f7-418c-80d3-a319e41e3457"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_hornet_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("5dc37867-e24c-4679-8944-e5afff99d7c8"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_horse_flame_outline_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("d80a9eb9-f273-407d-8529-3442617f5643"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_hummingbird_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("d54ab6de-77ff-472e-b3ae-736de9b9889b"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_kitten_cute_toon_character_t_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("22c7f34f-2ab6-4962-b5db-c75c2c419078"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_ladybug_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("99fac34e-8b70-40dc-b6f3-da5e76c0841b"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_lion_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("36df16d7-43f0-422e-a5bf-8843270ae9d8"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_lion_rampant_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("528b6d92-78c5-4a03-8d5e-be19042cb01c"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_lizard_eft_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("2a06394b-719b-4182-9adc-fc50b6a1e59f"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_mouse_on_top_of_a_cheese_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("4450319a-21a9-4aef-b036-6fd43354bad0"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_mouse_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("3e419c6f-d9db-40fa-94cf-53cd02765813"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_octopus_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("8c47c2e2-c66c-4158-a68e-fecb5bfe7087"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_owl_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("1881d6d2-9094-4c31-a35d-252a4ed5e470"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_penguin_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("9fb76160-5f4f-4df9-b6e2-f2805725b68d"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_rabbit_face_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("9827e583-3f8c-4372-8f7d-0d55322b8398"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_rabbit_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c8884542-1966-45e4-8900-8e9368f45e94"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_ram_dall_sheep_ram_stylized_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("3d62900f-2e7b-4841-aec2-cf61ae5b33ad"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_scarabe_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("f38159bc-b76a-421f-8a6c-a4ccebe97dc9"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_sheep_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("3e0c87ae-45b1-4f93-bae6-9fbd79a550bf"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_whale_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c9023825-df01-47da-8cec-ecd7e2ab1a0c"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> animals_zebra_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("70fb17d8-0afe-4602-ac8e-5dffeac4b64b"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> anonymous_simple_weather_symbols_1_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("141b6d43-53f1-46f6-ad08-32e4a965ac31"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> anonymous_simple_weather_symbols_10_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("1dfad3e8-ed5e-47a4-a1d4-cb2f44e45045"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> anonymous_simple_weather_symbols_11_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("fba9c57b-3499-438c-a8dd-4ab1dc2f2f9e"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> anonymous_simple_weather_symbols_12_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("b2844986-cab1-4083-828c-15a7612af378"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> anonymous_simple_weather_symbols_13_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("82f043c2-4b18-436c-826e-ffd0fd1a24f2"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> anonymous_simple_weather_symbols_14_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("37bd9aac-875a-403c-a475-6e61a0eea1c9"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> anonymous_simple_weather_symbols_15_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("2fd01f02-7e15-4cc4-85a4-e4bacc92f6cd"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> anonymous_simple_weather_symbols_2_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("a88a3069-c8af-4c69-b231-ddf3fe12521c"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> anonymous_simple_weather_symbols_3_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("24798ae2-9a10-4f08-ae79-509bca0ed965"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> anonymous_simple_weather_symbols_4_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("858e5a77-716a-45d2-9e35-086174866d1c"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> anonymous_simple_weather_symbols_5_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("6e37495e-3de3-423b-8252-7868dd5c0a94"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> anonymous_simple_weather_symbols_6_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("66ff9737-2092-469f-9fed-300d5853804c"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> anonymous_simple_weather_symbols_7_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c75dc183-7474-43b8-b4b4-5e3865f75569"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> anonymous_simple_weather_symbols_8_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("1565b3b3-d1ac-4dab-9f5c-9d85a0e1fcc0"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> anonymous_simple_weather_symbols_9_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("eb723995-9d61-4030-9cef-9ac951fd2405"); }
+                    }
                     public static TypedGuid<global::Zetbox.App.GUI.Icon> app_ico
                     {
                         get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("fdbaa130-0be2-400b-9a4d-94d2ccaf00b7"); }
                     }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> application_exit_5_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("47723d8a-040c-423d-8000-f3ea0c103aea"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> appointment_missed_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("dd16e3d0-0257-4a0d-9f12-5374095eb0e3"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> appointment_new_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c70343b6-e9e5-49dc-a997-867e88524712"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> appointment_soon_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c4fa69cb-0f7f-4cdc-a724-ef130026e815"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> archive_extract_2_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("ea94c788-d343-4d7c-9db9-1789128abca8"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> archive_insert_2_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("09838f49-1754-42c0-895d-a536d4b914a6"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> arrow_down_3_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("abad61f5-0568-4d12-be65-5c4d9da4866c"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> arrow_down_double_3_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("5709a0c8-de97-41a2-8f22-d3bbd6abe8a7"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> arrow_down_double_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("3608ece1-170b-46d6-b4d3-1dc46370c7ba"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> arrow_down_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("72417e42-2f62-415a-9d34-3d2fbdab7c2d"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> arrow_left_3_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("358debc4-289d-4fc3-a5e2-e67f00c386ce"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> arrow_left_double_3_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("020f7736-e06a-49e1-9f02-9ec754827735"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> arrow_left_double_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("b6293df4-2136-4f4c-9658-d174380ae599"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> arrow_left_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("51faebaa-f31b-4615-ad61-c74b2ba8f45e"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> arrow_right_3_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("95948b43-7ed3-4a04-828b-35df5a0e331a"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> arrow_right_double_3_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("84625e1f-8af0-4cf5-8f89-bc4e1c6d2d0e"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> arrow_right_double_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("41df4087-4a83-49d4-8e65-bd18ab012151"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> arrow_right_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("9ee7a04b-2184-47e9-a7f8-c14b497f1c05"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> arrow_up_3_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("6cdd7c87-fbf7-4375-8ef1-720d601adbba"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> arrow_up_double_3_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("627db657-b631-4336-b058-4d104917da4c"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> arrow_up_double_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("bfbb243e-396e-4c11-b2c4-387f673ef456"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> arrow_up_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("4bae27eb-883b-48b2-8d2c-43254f35e5f4"); }
+                    }
                     public static TypedGuid<global::Zetbox.App.GUI.Icon> back_png
                     {
                         get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("e685b093-3732-4fee-958b-510474f0cedf"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> backpack_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("25fab22b-9803-486f-a530-c1bbc62e5ea7"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> bbq_gril_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("ee5888d8-dbd1-4461-8686-96f95194dd72"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> book_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("75326107-27fb-4118-a39a-9cd9e20644a2"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> bookmark_folder_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("e5f58f68-e811-4590-a293-202ee787e643"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> bookmark_new_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("8e3af995-3c48-48fe-a800-acf60f3c5cf6"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> bookmark_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("bd599363-8d63-486c-9481-3a35125cad3f"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> books_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("fbae33d5-602f-4eed-b979-6467e84fa94b"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> button_blue_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("354a72bb-a40a-4aa4-b57b-0b1b88ddc863"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> button_green_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("ed25c84d-b48a-42d3-a1bd-b047d0f67b2f"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> button_purple_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("652a9380-fbac-4aa3-a088-6d24eaf4ad63"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> button_red_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("7aa6619c-7300-4903-b52d-4f6f8e3fdf06"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> button_seagreen_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("dba943e5-f4db-4d22-95b1-78124180b128"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> button_yellow_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("ad093c17-d62f-4abf-8323-97da64bd9335"); }
                     }
                     public static TypedGuid<global::Zetbox.App.GUI.Icon> cab_ico
                     {
@@ -4763,6 +5230,58 @@ namespace Zetbox {
                     public static TypedGuid<global::Zetbox.App.GUI.Icon> cal_png
                     {
                         get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("bc63e83e-d074-45fe-81eb-0b6d331fb0db"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> call_start_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c602bcd9-62bb-4b0b-af42-54c06b71d156"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> call_stop_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("32038f58-7b49-4ab1-acba-2902f20a9824"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> cat_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("5ccfede0-efcc-4fbf-b958-ed2c53661d09"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> character_set_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("89fc372c-adeb-43a8-9245-32f653f1dcc8"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> circle_blue_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("2c7fb4ef-cb7d-4c9a-9292-716d4f6650f1"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> circle_green_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("f6de1e09-21f6-431f-afaf-74b2b8cce841"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> circle_grey_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("4300098b-9365-4544-a78b-bc1749d5737b"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> circle_orange_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("073eafdc-d3c6-4fed-a8bf-e49a9a327640"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> circle_purple_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("ccd9ee63-e8e3-476c-8d27-59399caa7e37"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> circle_red_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("d8c3f903-b29e-4f14-8871-adfc5651ae56"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> circle_tan_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("5cc7b1af-5894-401c-9f97-87addb0de49f"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> circle_yellow_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("343ac6b4-0be2-4172-bc0f-086defc2bafa"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> click_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("945c83e7-a2bf-4fef-bd46-eb06616e5f4f"); }
                     }
                     public static TypedGuid<global::Zetbox.App.GUI.Icon> Code_ClassCS_ico
                     {
@@ -4775,6 +5294,46 @@ namespace Zetbox {
                     public static TypedGuid<global::Zetbox.App.GUI.Icon> Code_WebService_ico
                     {
                         get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("e2c2a9a4-a16b-477d-829c-3c83049a6ee9"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> color_fill_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("798fd956-8311-4354-ac1c-6a1f0bd2f35b"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> color_picker_black_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("389fc821-7aa2-45f4-a057-7273388b69c5"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> color_picker_grey_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("4c93cc4c-4eaf-4808-81eb-6407d3506d3a"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> color_picker_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("1ef6b661-7e2c-424a-936a-41d2f798fba3"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> color_picker_white_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("aefb550b-400a-4135-bd6c-606c3214899d"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> colorize_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("6d679e23-2746-47a3-904c-874c2201f3dc"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> configure_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("f7a71a6d-f410-4eb6-b2e5-fe3c2fd8af3f"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> contact_new_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("7885b9c7-15e5-42bc-95b5-48a6f19f8ca8"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> crystal_smiley_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("34b6ffee-8ea7-40f6-b431-ec568e2ede5e"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> dashboard_show_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("3502e953-7dd8-4c05-8185-c6823e06a750"); }
                     }
                     public static TypedGuid<global::Zetbox.App.GUI.Icon> date_png
                     {
@@ -4796,17 +5355,1557 @@ namespace Zetbox {
                     {
                         get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("84e97f4c-ceca-49d6-be50-aaa92b5b1ba8"); }
                     }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> devil_bat_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("ab07acf7-c1ce-4eca-a735-7c420ee10513"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> diamond_blue_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("3201344f-8458-4da9-98e2-d9fa07a85b09"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> diamond_green_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("4aa33943-a172-4e10-abe1-18984a2b278a"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> diamond_orange_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("765a2c44-d26a-47c0-a2a0-9116d9abc418"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> diamond_red_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("07cb3e9e-11c1-43b0-9f9d-4d211cd789d3"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> document_decrypt_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("13da8e18-0d99-48c8-9693-a13207cffa3b"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> document_encrypt_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("06c147be-8345-4699-9a7d-a74fd866abab"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> document_export_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("f806f91d-02ef-4bcc-b7bf-31d54f37aa34"); }
+                    }
                     public static TypedGuid<global::Zetbox.App.GUI.Icon> document_ico
                     {
                         get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("267ce6ec-7982-46d3-b1bc-2e1ea6adf815"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> document_import_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("86e8f189-e6a0-420c-84f5-c78b4c619d67"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> document_new_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("519d4399-51e7-4dcd-8972-1c8759f26412"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> document_page_setup_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c62505d5-93c5-47c8-9106-e67e4c89757a"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> document_sign_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("f032ee92-44ee-428c-86b3-678e195ef995"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> edit_bomb_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("80b5495c-de82-4a7d-afb2-f636d6002993"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> edit_clear_list_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("6c872a58-6d3f-412b-911a-1b1765d52661"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> edit_clear_locationbar_ltr_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("7a94ee4d-ffb8-477f-8767-795cb5afe8eb"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> edit_clear_locationbar_rtl_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("87210f27-b330-487a-ab5a-2095d82a96b1"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> edit_clear_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("05fe971e-1175-4355-8af0-4ee7a902cd51"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> edit_copy_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("af285b13-063e-40df-887a-d2d837ed9e7e"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> edit_cut_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("6d122198-c0c7-4b6f-85be-0bafbc228a65"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> edit_find_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("0eefcda9-0210-4aca-ad7b-2d661bf810bb"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> edit_paste_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("a0102f64-fed9-44ec-815a-1ce3b9ea9e68"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> edit_redo_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("525874a6-98bf-4015-a90a-73c03cc45f21"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> edit_undelete_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("de883e5f-cf75-449b-a665-1cb16fd11089"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> edit_undo_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("7d45c651-5142-4245-a4ef-1e7c3ddd17bc"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> emblem_advertisement_dollar_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("31f10739-1fbf-4048-97a1-63961af05dde"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> emblem_advertisement_euro_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("98eaf2ed-d839-4c88-9c9b-13506b2225ec"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> emblem_advertisement_pound_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("14f2752f-3c3d-4717-9c07-8098166a66ff"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> emblem_brackets_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("388d715c-c804-4f49-8f3b-13d21c1c733c"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> emblem_conflicting_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("1c6091a8-ccf0-4955-acb5-1500337e2cd2"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> emblem_default_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("bf329dac-1cdf-48d4-97a6-920f5a387511"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> emblem_money_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("9b6416a3-4cbe-4def-b4e8-ecca6e695475"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> emblem_office_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("92b0f9c4-ac2b-4b21-9f4e-512e72d65ff2"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> emblem_paragraph_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("1a6af064-19f9-4869-abae-3bbf3d7e780b"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> emblem_percentage_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("8fb9e31a-e224-4ab3-bb05-428e83c37941"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> emblem_photos_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("211c44e3-ee20-4414-b736-943ccca9dbf6"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> emblem_web_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("7d8a5b81-affa-43d7-b0f9-279f2efa6426"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> emblem_what_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c6cf34ab-8aeb-4e6e-b0cd-5275c076eebd"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> eye_png_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("6ba728bd-eae2-4a33-96a6-4ec8addde968"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_angel_2_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("1182c5c6-d5fc-41d6-ad94-3e4fc218157b"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_angel_3_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("eebb9804-53eb-4b3f-b03e-a498e1cee219"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_angel_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("2eba776e-9a65-405c-bb0f-3a1ba597cc58"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_angry_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("2f9cffd5-e8e8-42ff-ba75-a9ab546a3c88"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_cool_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("b89425ce-b76b-47ff-b643-f577020a7c06"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_crying_2_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c964031f-ff7a-408e-80c2-7682dab84f31"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_crying_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("5a4444e0-dae1-4c4c-847a-6fd90041686d"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_devilish_2_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("a4e3d9b6-806a-4299-be03-8565276a1066"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_devilish_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("4c45cda0-eebb-4a05-8eeb-b059c04043b9"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_embarrassed_2_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("e59da2c8-9dc6-482a-b2ff-f6fe13f397ba"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_embarrassed_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("9ea62e3f-31d3-499e-9420-fd39ffdaa05f"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_glasses_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c792a087-f012-4fe0-95b4-db9dd6844008"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_grin_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("eabd70c3-0dae-4723-a720-d56922391e05"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_kiss_2_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("ecb8b250-d075-41f4-b432-a82ea54cf528"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_kiss_3_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("12004d52-9480-4548-ae53-95a4de7c23a3"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_kiss_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("49617f8f-1807-4ba2-8be7-f75d99386f5f"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_laugh_2_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("8ac42ac7-ee95-4fd9-b4c9-fe6138fd0986"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_laugh_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("af016977-3c43-4f95-8ccd-efadace5f29d"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_monkey_2_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("77870a3b-6aa7-40c7-bc5c-abe71c865528"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_monkey_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("b29e204d-b855-439d-af88-9a979d310b89"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_plain_2_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("9d035991-a464-46c9-ad09-7ff8d5c062a5"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_plain_3_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("aa958516-d501-4bc9-abde-714b57818231"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_plain_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("3f1ed0b3-7f0c-482e-a90c-0298e14140b3"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_raspberry_2_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("10f7ebc4-6a9f-4019-ad27-6d89000839b0"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_raspberry_3_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("537d119b-df4d-49dd-b109-7c93376abcd2"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_raspberry_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("08898fe3-93c9-470b-948d-9f2dd2f696a7"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_sad_2_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("1b570068-d2a0-4385-95e7-6a12f85adca5"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_sad_3_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("a25549c2-f1e0-4281-867f-adf3d2e5c3ab"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_sad_4_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("3af0691a-9e25-467f-b0b2-d6f9ed154bf0"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_sad_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("5265ff5a-f7b6-49d9-9ee8-2ef94ba241e7"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_sick_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("2a12d1d5-866e-4327-9a05-d24b38012777"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_smile_2_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("726253db-4152-4453-9e44-857fb3658628"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_smile_3_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c537d791-cb12-4b58-84be-06245a780886"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_smile_4_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("fd80adbd-d0af-4cd3-bad1-4eb4b48801b5"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_smile_big_2_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("32cf6143-43f9-497f-a18e-49ab8b33baba"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_smile_big_3_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("96a92a57-4ba5-4e1f-b3c9-b15fc93d7b89"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_smile_big_4_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("86e5fb56-2f69-4c0b-b9eb-e66ae3f8de30"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_smile_big_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("bbbd1f8f-bc15-4773-bb96-39319e17d12d"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_smile_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c912933b-81da-43ea-9d66-1feaff609fd0"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_smirk_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("e24ce76b-2e22-4452-8634-e3600455275a"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_supprised_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("6f15043e-a3ca-4670-b722-f5cbd0c123a4"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_surprise_2_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("3988fb5a-3506-424a-9831-5c34c45e0487"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_surprise_3_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("20568d8b-46c6-4fdc-979c-028fdcaf6745"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_surprise_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("f06174e1-c840-4c0d-9b52-4a90502f591c"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_tired_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("256e6bd9-1df6-4e58-91cb-3b00dffee410"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_uncertain_2_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("ea60c43f-42b7-4d1f-80af-7431db2b077d"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_uncertain_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("9efb317f-f838-4baa-af60-806e62afc8ce"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_wink_2_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("58631241-f179-4f23-bc44-fd93fe0e1786"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_wink_3_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("048ebb2c-c294-4070-b8a7-820646474897"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_wink_4_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("e269524b-1904-402f-9767-5775cbab5100"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_wink_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("a967850d-bce4-4b4a-a155-508ee5f871ff"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> face_worried_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("ad02366b-34a7-4dc0-b8ad-7675bb5c61d8"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> feed_subscribe_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("a34b80c7-1a64-499e-8062-f28fc4367550"); }
                     }
                     public static TypedGuid<global::Zetbox.App.GUI.Icon> fileopen_png
                     {
                         get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("f1f14c5c-4cbd-499e-a388-3cf56aa80a11"); }
                     }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> filter_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("af01ab64-ed1d-4cbb-96d1-38c625158238"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_2_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("98465657-2a7c-471e-87b8-e35e848f960a"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_3_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("3fb2641f-dfe2-4723-bfcf-f696599e59d0"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_ad_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c5b49704-9f5d-4833-a883-e075fb70ae88"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_ae_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("e4a21b16-47c1-4555-9b96-a3b34232ff7e"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_af_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("45dacd29-d3f5-4677-a64c-f9d678cab7cd"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_ag_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("0ac413fa-dae4-4e2a-b27f-84cdcba6c287"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_ai_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("a2b7c1eb-2ba1-47ad-a349-f5b91651d2a8"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_al_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("083f6d45-2755-4910-8f48-5fd8e07fb4a7"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_alderney_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("876e842c-105d-40a6-bac9-d1895ca0c71e"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_am_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c9c03f79-d63d-4a13-b44c-037a887ad48a"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_an_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("ee6b5d6c-1b6e-496c-900b-a3926d962aa8"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_ao_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("7ae3fa83-ea92-4783-8c38-9b250da98082"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_aq_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("ffb47f35-da69-42c2-8c76-fafa7d861ec5"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_ar_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("ead1e6f2-843d-4ec6-bf74-97cb92296d82"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_as_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("bf031a0d-f9c8-4988-9c0a-af916e232c67"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_at_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("b604c1cb-5b18-4543-af3a-318a148dba04"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_au_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("e6ced7be-986c-48df-a66e-8898c44e7d27"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_aw_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("83495855-35ae-4ec7-8607-4222e33466bc"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_ax_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("f1c17b91-f2ed-43a7-b456-3bd3254ef905"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_az_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("eefdd82d-434f-4977-b681-cb486755b7d2"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_azores_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("45ab0c8f-cfa2-4888-8744-60efa2d04cb2"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_ba_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("4bc08039-794a-4579-9c04-5175de904aef"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_bb_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("418a8999-b6df-4f05-99f7-ff1b42ef22aa"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_bd_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c0e0af43-7563-44d8-8b2f-8d3562c57ca2"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_be_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c86bd453-ba22-44ea-a045-bb63b8b34145"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_bf_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("916f918a-0eeb-4547-be8b-1893f0846b80"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_bg_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("8065f86f-7ece-434b-aa4d-5f9584fd7ab4"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_bh_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("2a16ce4e-7e2d-4b76-84ed-b3acc2604ed0"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_bi_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("f9e77ec1-ce96-43f9-8485-87f2acfb66d2"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_bj_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("5a01f026-e31b-4cb8-9090-64f1b86659f3"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_bl_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("9c6b0c10-39e4-4eca-b702-acef4eaf8a8e"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_black_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("fd41975e-f64d-418f-9281-fc0ad5e7c9f2"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_blue_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("277fade7-5955-4873-8df7-a7c8ffce0700"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_bm_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("40e6cbeb-f8e1-4fb9-8f0d-9533b3ec6800"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_bn_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("1681ad4e-e1fd-4a6f-8097-cea49fe40b7e"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_bo_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("006824bb-d533-459a-9145-328bdc72340f"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_bonaire_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("cd20e917-612a-4132-a783-850fe9e5fd34"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_br_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("ae725b4b-73a7-4bc2-9d4f-84282cdd8c10"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_british_antarctic_territory_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("9b98ca00-9434-4bb3-99a5-8ae2f4f2dbba"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_bs_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("7cc218a0-526d-4cf4-904a-279a0a940507"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_bt_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("fe1cdb95-7fd0-4188-8cdd-dc606c15d623"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_bv_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("5114fb7d-e651-4f24-a67b-0a6736e8f8d9"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_bw_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("5af6dc04-a2f7-4b54-abeb-9eb9d6c16065"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_by_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("47699b88-96af-4cd9-9059-5d5c6835548e"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_bz_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("cbdd5a89-e732-4580-bebc-59d3ff265f79"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_ca_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("668f7319-c9d0-4052-b50c-df08e130bc3c"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_cc_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("6039590c-2bcb-4ad4-9323-d361f8b80d9e"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_cd_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("abae9d05-b4dc-487a-88de-0299c4687381"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_cf_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("0d9d12a6-7f1b-494f-aac8-7869a6b633c9"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_cg_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("32d3ce1e-5c50-4e39-a0c8-cbed713ea499"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_ch_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("29c14c15-ac0c-4574-9170-1177783a18c8"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_ci_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("f14038b0-c25f-434f-b9d1-e3fa600b5b41"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_ck_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("211ca12f-70e2-4020-a37c-9e871c5540cc"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_cl_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("3830cc85-ebc9-496e-8af7-1fbd6809e36b"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_cm_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("2b98ee66-90b0-4a36-bae8-62f8e3225f2e"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_cn_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c7d338c6-460f-4b6a-b9f1-f939f994bf6e"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_co_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("a91f5605-0b61-468b-8266-0b635876dcce"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_cr_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("93f3fb30-1a00-4512-8a7d-01c8cf71beab"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_cu_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("fa58c23a-d2ab-4efe-b71b-d1849060534d"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_curaçao_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("89d867fe-37be-4375-b339-4cfad9c79e81"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_cv_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("6591fdef-14f8-4aea-b883-15db1ea3d70b"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_cx_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("d7c0f536-d39e-4019-8495-e20b8575853e"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_cy_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("cba8fe4f-2deb-4732-a25b-9d26fef6dbb2"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_cz_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("653a9198-bc19-4ca5-93d4-4427060772b9"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_de_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("ee98ec7e-ecdd-4b0b-bfd6-a5fa6400801a"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_dj_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("22db1fd4-9ec1-45d9-89d6-b40aa4c03a46"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_dk_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("2d0ab111-27e8-41e5-abb5-0eac787928ec"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_dm_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("e777d10c-d994-4a6b-a300-008113eea33e"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_do_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("6308c97c-a357-4fa1-a266-39d104ba7f55"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_dz_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("5ae748f0-f0df-4077-87c1-1b9823b93a98"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_ec_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("f03ce4ff-82c1-4ed8-ac89-7ebf2f11bd9d"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_ee_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("a146d888-d26a-4aa6-a408-19d56acc41ab"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_eg_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("2a39e20f-4ec7-42b4-a69d-3cc2ff0848fa"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_eh_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("45dcb4ff-f934-49fd-b680-0e4de0d00e38"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_er_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("66bb87c7-6f5b-43b7-9a7f-8c966cdb1720"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_es_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("e8c99167-c385-47a6-b63e-b60076fae7f1"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_et_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("208e229e-a844-4ccd-a9e8-77b84c08ad49"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_fi_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("a7d41daf-7523-473d-8dba-415a3a6cc40d"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_fj_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("ca61c198-941c-49a5-8a5c-f0cd572cff0c"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_fk_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("f7c47522-96b2-44f3-9cc5-3acf699041a9"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_fm_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("fc332a7f-21e9-4df8-a4b1-c4ecec6d0dcb"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_fo_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("a18f1f7e-89c8-4123-a2e5-686c2b1fd546"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_fr_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("253b57ca-ad38-4f3a-af2a-45520cee351a"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_ga_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c06d451d-9f35-4b1d-a143-8eece39ab466"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_gb_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("e696e654-82a6-45ae-ae6d-d4c47222202f"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_gd_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("b43ad814-ff3f-4253-b393-403efbd24065"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_ge_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("3e3a8c8d-2e0d-4aa6-a7e0-49c1aa54389a"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_gf_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c5d15bf3-ec54-457b-84c0-536fb18c2bad"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_gg_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("3700ca73-1c5e-4363-ace2-2978beac2c0a"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_gh_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("4281d5cb-dd52-4916-901c-221b7b6826b4"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_gi_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("32925d0a-052b-4c6e-b00e-5f51aa3e96ec"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_gl_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("602bcc44-25c8-442d-8102-c91d8f987fff"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_gm_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("97bfc197-1160-4e0c-b075-5926ed57b64b"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_gn_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("ba3840e4-baed-4c6c-9d62-e8149d6628c8"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_gp_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("5bc10161-6ae2-4dda-b203-ef119da8728c"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_gq_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("d5e7be62-42f1-4b2d-add5-48c5b7bdf8e8"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_gr_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("0bb74535-5b15-48c8-969e-3f405d574d74"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_green_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("9ada849a-ff33-4fc6-94d2-f88a1c00d978"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_gs_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("ae5517d2-e8de-497a-930b-a8ea90dadb17"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_gt_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("0aa1b757-94f6-4280-8f18-5af0bb251bc9"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_gu_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("18dc02cb-f72c-4792-9056-d80e5a7e810f"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_gw_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("d4c47044-97eb-49de-ae98-7de123b09ff8"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_gy_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("d9372387-4194-4e2b-8cba-3ee888731ae0"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_herm_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("6a4b6644-9ace-4dfd-a40f-5caaacec638b"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_hk_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("5ee54935-02af-4736-bbeb-e1cb4d4b057b"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_hm_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("12942959-be48-4c3e-bc30-50dfa22a4be4"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_hn_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("79a6cefb-9a5d-40c4-86d9-8db6ffde4cd3"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_hr_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("6e8319d0-f76f-49bc-8b75-05717dae0173"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_ht_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("109703f2-b984-4768-ad33-ee71058a17d7"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_hu_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("0f4ea8fb-8da8-407e-8d3a-804905dd1d59"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_id_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("775368ae-4a8e-4583-b7b8-9d69fb41899d"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_ie_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("8a3eb783-9d13-41e6-b2aa-149a731b5024"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_il_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("efffdf6d-556a-4f53-acd7-334a866f5f47"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_im_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("bd9a6460-ac52-47f5-b7da-f70b97ea4ecb"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_in_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("41ba18c1-4e60-4afc-9bad-dfd9750b177b"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_io_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("9d83a037-4da0-413f-8e95-64fdf8cd9b43"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_iq_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("ab3b5a9a-158e-4e1e-ae60-88837137db75"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_ir_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("a569a9a3-27a3-423d-aad7-628400245947"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_is_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("eba0b4a8-076a-4d98-a774-c54b465c1d5b"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_it_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("0d0fb339-0fde-4c7f-8255-7d66e6d58485"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_je_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("80f20b76-89b4-4ecf-849b-761bb5916050"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_jm_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("e36a5592-d9d2-4e9d-ba42-3ccafae8025c"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_jo_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("31c43b5f-502e-452a-9182-9dcd973a8c8f"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_jp_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("43398860-f82c-448c-84a5-d274aab6f5be"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_ke_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("1fea9e4f-68cd-46b9-b838-a250fa9adc7c"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_kg_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("d762d334-5473-46ed-a894-523e97b2df66"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_kh_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c3cd96f2-3ba2-40fa-a2a3-3fe4efa139a9"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_ki_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("939095dd-7977-472c-b6ef-a386f85d095a"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_km_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("e202918a-7a38-490c-8022-21df254273fa"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_kn_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("bea62dbe-0210-445a-9f29-a75dca04bd80"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_kosovo_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("b9cbc507-3660-4799-a608-c1f1683069cb"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_kp_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("acc0d6fd-e0e3-40a7-b730-4d7542b0672b"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_kr_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("4390c94c-7de9-40c5-bc0d-a17e638500ab"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_kw_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("88da6d09-2a36-42e5-8fb3-68169e0ef627"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_ky_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("0ad40e68-f827-4ec6-ad4d-bcf528f22f3c"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_kz_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("01b5c902-f9a5-4f06-988c-ddb2b946936a"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_la_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("d848047f-01c8-4ef3-8328-e3debc772e8a"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_lb_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("a06eec8d-8813-4b86-b1d2-da7e7126e0d6"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_lc_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("7b8044f9-e935-4920-ad3f-523847953794"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_li_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("030d5ec3-21da-46b7-8317-95dbb7a22cbc"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_lk_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c535a04b-4353-4484-bd19-660285f70f2b"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_lr_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("e5935dae-8999-4cf7-8af3-a2e8a6247fd3"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_ls_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("93506906-7ee0-4178-bd79-7549da459c19"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_lt_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("6ebfad0d-d3d5-4c2d-9ac1-95a8f71955e6"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_lu_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("189d78ba-f02d-4868-bdef-d12ff64bcf5e"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_lv_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c27ea5c2-df0e-4183-b787-054da953023d"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_ly_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("373d377c-3ae2-44be-94f3-0af447226754"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_ma_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("98d6b812-67d7-4260-8c12-1baff8e6f48a"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_madeira_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("e2944038-d582-4dd9-9591-4371d200f09f"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_mc_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("ab99f8cb-3286-4986-926b-c687c9b5b581"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_md_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("0cdc6c4c-ebdd-4867-a8dd-72c1c93da3fc"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_me_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("024d6385-1c11-484f-9720-94715a452d62"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_mf_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("f51ba78b-0426-4baf-8f1b-47e5cefb8f24"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_mg_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("7fab703d-0aad-4e74-84b4-adf8a9eae2ef"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_mh_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("7a3502c7-c025-46cd-bfb1-b5f26514845b"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_mk_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("d5697eca-c01d-4bbf-b5ae-43b4636b09b6"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_ml_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("04f5506a-978e-44bb-aa54-310208e1fe1a"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_mm_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("a779a569-9c3e-4599-b2f7-616dbc6eeb3b"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_mn_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("8a23835f-fc54-4ef2-97d2-8c79c9cd8353"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_mo_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("1c9fcd76-8922-472a-b9d0-0b6cc94041ac"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_mp_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("b7a8decb-6745-462e-a950-2333a9187d2c"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_mq_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("84a4f1a6-a712-4733-80ba-af5a1252e323"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_mr_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c00520ec-0e02-4a3b-ab85-9a069b4950fd"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_ms_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("504a7fd8-c741-4bdc-bdd0-78313ed2af27"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_mt_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("b586ce91-47b3-41f0-a600-efd48dd61672"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_mu_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("ed48c389-e5ff-4651-bb56-afd6365174ff"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_mv_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("894af655-f132-4747-91c4-c64fe0bbba62"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_mw_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c10d8baf-bbc4-4b97-9142-438e71faeb9e"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_mx_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("8a3ef0f3-fe7a-4e05-a6d1-4a8cecb7ffb1"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_my_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("12d25766-44ef-445c-a35e-a6400318ab39"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_mz_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("6994bc77-6ef6-457e-9197-49b08dcb8cbb"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_na_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("bf084fa5-6e39-4990-87f9-db1ab95c1ac5"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_nc_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("fc543187-1b13-4be6-ac1d-52018a733db2"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_ne_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c348445a-a672-4e75-9ca6-205de7472f73"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_nf_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("6b61bd57-1d03-4975-952f-62a3d0626eef"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_ng_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("44569598-a611-4732-93a5-f622db2127a6"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_ni_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("bd912f8f-de62-4445-b95c-9557cf2ac0df"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_nl_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("ae7d5755-555e-4e8f-9ade-8790a8956281"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_no_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c97acc22-cf1f-433c-a4b6-e694af33e5b3"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_np_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("5fc8ee5b-0698-4f19-b513-d1a228cb13a7"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_nr_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("b50954db-d071-4e4e-886e-fb2eac6320e5"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_nu_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("8039a494-fab5-4083-a410-74da65a7e17f"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_nz_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("eafbfc17-0796-4ad6-9ba1-fbf27e145bcd"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_om_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("fca1787a-25e4-4958-b239-12254a07c436"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_pa_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("059fdb86-c200-4e1e-bc58-441f49132c99"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_pe_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("842e70cf-1956-4831-9d9d-90d6e6919ddf"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_pf_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("78182c2a-8fbd-4589-8cfc-65cae7150188"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_pg_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("8698b312-a219-4b6b-b79d-8365aa64b439"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_ph_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("ba86663c-532b-4329-bddd-0e8a5fbc1164"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_pk_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("26f5dc5c-42fd-4a6b-8ff0-b6d44328da75"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_pl_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("a33aeab8-f483-44b9-8035-3c0d9b85f176"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_pm_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c457bb44-b48e-4125-b8be-218ee9f8b2ae"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_pn_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c4b98b51-5b02-458f-b0a9-0be962cbfd9e"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_pr_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("8f6d8efe-5e99-437f-87f2-36fe0381b861"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_ps_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("3bc38613-887d-43bc-a388-f8f0aab7911b"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_pt_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("0e5c269b-bee6-493f-b2ea-c9ecc94794db"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_pw_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("15a64abe-9172-4759-a61e-c45fb00e0efb"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_py_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("8057fa84-3091-40c1-b929-7208eb8b88c0"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_qa_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("90b799dd-d24a-4fcd-a2f0-d512038ef5a8"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_re_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("21f172db-8af7-4d78-bf3a-cb84538c79c3"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_red_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("39f38627-772c-435a-a552-f553333e1012"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_ro_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("267b8126-9d5a-4ad9-a747-b7882f4bd07f"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_rs_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c0e08095-ac5f-409d-8ceb-592c5103ef41"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_ru_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("280ed33c-9edf-402c-aa55-037471281aed"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_rw_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("55be18fe-8900-4a81-90f2-ff9a9d0b15b4"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_sa_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("e8ebaa0a-ebaf-46b9-97bc-e17e6e121570"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_saba_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("b71eb7f2-eff6-4651-a4e8-0ba101a410a5"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_sark_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c3714812-b928-431c-a663-ab0d0e190692"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_sb_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("47b60a41-0a05-4de8-b865-0feae4428225"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_sc_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("3ea67ccd-f32e-4ada-9b3a-54d1e704a396"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_sd_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("8c9418dd-b2b3-4e0a-b620-666e9276b2b1"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_se_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("fa8675ee-f55a-4a67-8cb8-fee16754ee48"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_sg_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("85192d9d-7f64-4986-b3da-38e556d30de8"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_sh_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("15195aa4-7523-4766-8621-ce5b4fe10b7f"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_si_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("32d4e136-7da6-4241-ba14-58825425dd99"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_sint_eustatius_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("9079cfdd-8cd1-4955-88a5-af148ac05d2f"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_sint_maarten_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("b5799aa5-108b-46c5-9b61-273d5fc4202d"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_sj_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("bb854492-4f1d-4f0c-9d35-e34eca3c300e"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_sk_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("d05b0dff-3d85-4c98-a226-7675bf415fd5"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_sl_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("0c5dd30d-ca41-41c4-897e-59ae533bce7c"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_sm_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("2bf93053-d7b5-40f8-bfab-7ea9eb0d9cbf"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_sn_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("0f7199ae-0be6-4e8a-9f2d-c42ccc143c52"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_so_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("6a440237-ef0d-4fe1-bcf8-34be962cf419"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_sr_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("e24de4ae-17af-47a8-8e5a-7d57503e251f"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_st_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("dad7753f-c9ca-4f4c-874c-1536f088ce9a"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_sv_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("d6a81e74-076d-47cd-b2c1-822b189278bf"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_sy_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("126c09a2-6a2f-4b50-b5b2-cf1cf8dffe67"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_sz_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("a8bc60d1-32a8-4c91-b80e-edd6908b55f2"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_tc_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("2752a65e-0bc5-41e1-8205-e3e73d8b9f9d"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_td_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("608cff08-4792-4927-86bf-57fd311cc40a"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_tf_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("1a5cfb58-81e0-4132-b11d-9193a63f62fe"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_tg_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("a2d109e3-dee3-44d2-aa27-c1480fc8adcb"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_th_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("ccbc8830-27b2-4952-97db-baf7679037f6"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_tj_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("4d5fa414-91dd-4dc3-ade6-da38a917808f"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_tk_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("92e3a3f8-7402-44cd-b728-79ce94733201"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_tl_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("7e393fa9-12ad-40cd-9216-4439b0660c18"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_tm_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("9a30b430-f627-4c2f-ae21-e061cea42167"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_tn_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("b7569870-c9e4-481d-8c85-6a2a2d74beda"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_to_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("6967c9ec-0c01-4f29-ae73-73de72765d72"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_tr_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("dcdfc118-2628-40ed-bb28-dd4aa13ebec2"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_tristan_da_cunha_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("b4b3b6d8-eb4c-4cb1-9549-5578c86eff1f"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_tt_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("1c81a975-ec9c-43ca-b259-5ab2894344a7"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_tv_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("04ce9097-55a1-4730-97f0-f333365f976a"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_tw_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("92e96e68-bab6-46f7-a32b-ea86d6620b03"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_tz_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("40660953-1647-41d8-8380-52182709041d"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_ua_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("d38aa220-3d41-49a0-9eb9-66ea7aff9e5f"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_ug_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("673c64c1-df8f-4922-a82a-dcfa0d0aaa3f"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_um_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("809c9897-868a-44e8-88c4-d829f8315e5b"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_us_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("409fb8af-f209-4275-ac3d-c7188e73a25c"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_uy_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("2593e419-f536-495a-bb71-b99daf51cf88"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_uz_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("0b2c4536-a79b-49c7-9dac-e995065107b7"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_va_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("7b8dd3a5-6aeb-4820-aa28-341e17d26e84"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_vc_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("e4602126-54d3-43c2-b298-045f7794e976"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_ve_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("bf165176-cd54-45a6-b9f4-3973851aba8c"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_vg_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("bfc47e86-2c0f-41b3-a4cc-0ba5531f0599"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_vi_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("6881f886-5337-44b9-b98e-3dcaf95ef589"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_vn_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("d416f9ce-ff36-439b-83fe-c900cc3140c1"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_vu_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("6c1970af-a009-44f1-bedf-ffa678e6bac9"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_wf_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("d9097a2b-9f64-44d7-9522-fa7b978bddd6"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_ws_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c4929795-7527-44fd-868e-af749113f751"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_ye_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("71b941f7-e02e-4b5f-9ab4-8326616decfd"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_yellow_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("789e3655-a66d-448e-8547-d727288bb4fd"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_za_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("59034fdb-d1f8-4b4b-ba61-858c91cfb8e0"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_zm_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("fc31b268-80b6-4180-9062-08b55a079d84"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> flag_zw_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("4b10327c-5e3b-4adf-9107-22fa32b3dd2a"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> folder_new_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("79f1ba04-94ed-4d28-9acd-7c349a8193e5"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> food_apple_worm_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c822dca7-2358-4e66-a381-6390189ade36"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> food_beer_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("52e8d00c-08e9-466c-b190-5b05a7a0bbba"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> food_blackberry_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("91272f6c-f841-48a4-a9af-3bbad41d14d3"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> food_cupcake_iced_with_cherry_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("cc94d469-f5ad-429b-99db-c929a20bb83d"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> food_egg_blue_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("74791d34-1a59-4534-8acf-ecb6f7371b9b"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> food_fried_egg_sunny_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("0ae93724-aef2-4308-86f7-3785204fe08a"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> food_grapes_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("6897de40-96f3-4e7d-b69b-49ba56a11b78"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> food_kiwi_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("edfb1954-0e8f-4735-b83e-92cd593e7950"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> food_peper_cayenne_red_chili_pepper_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("3fa6b026-dd2b-4ca4-84f6-e93c312a285d"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> food_strawberry_with_light_shadow_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("3c25688e-29c5-493f-b9bc-4a02b37a8260"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> food_worm_in_apple_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("ed85d562-b16b-42a5-81f3-ec93fa8af3ab"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> fork_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("ee34adb3-0278-48db-8973-c964aad231cb"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> format_fill_color_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("5a821ebb-a420-44ed-986e-be4814eaa21f"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> format_font_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("213bab3f-a561-4ec8-aed5-033d5626758d"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> format_stroke_color_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("91b6d4d5-0031-4116-b141-c2d236c8bdd4"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> format_text_bold_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("099bf191-fe52-4222-9877-6b9e7603ad6e"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> format_text_color_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("f0b5c4d4-dd84-492d-b49b-b81d13aed9cb"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> format_text_italic_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("b1d054a5-300b-4b68-9f50-820fdb50da54"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> format_text_underline_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("789593de-507e-4a15-9fc3-c60cc8ac71fe"); }
+                    }
                     public static TypedGuid<global::Zetbox.App.GUI.Icon> forward_png
                     {
                         get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("6a992747-2739-4d72-902d-38810394780f"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> ghost_blue_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("6fd08303-840c-42ec-9a49-eb475c173a64"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> ghost_game_basic_guy_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("d76b0438-21c4-4ad0-93cc-0de98d2b4099"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> ghost_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("83875c41-c0be-4dd5-a1a4-eaeb737a4665"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> heart_3_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("a81bba15-e90f-4e7a-b241-980cacd37348"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> help_2_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("ad1153a6-869b-4734-8a11-0a66233d9c83"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> help_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("cac76878-4cdd-49a2-83fb-e925b860f845"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> hourglass_2_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("f12b578e-cd69-4039-a872-aabefd19b39e"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> human_skull_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("580f6dde-bfcd-47bb-89f2-7de807ccb9cc"); }
                     }
                     public static TypedGuid<global::Zetbox.App.GUI.Icon> idr_dll_ico
                     {
@@ -4816,25 +6915,337 @@ namespace Zetbox {
                     {
                         get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("d2c90a25-c93b-4f52-a358-199ac0d71248"); }
                     }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> insert_image_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("8dce42b5-8a0a-4194-bc43-4664ff62516c"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> irc_unvoice_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("a208c7da-880a-437a-9844-2560533c0895"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> irc_voice_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("fb9ba636-6c7a-4c06-8280-5f9d28393773"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> irkick_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("6b6e50b9-2cde-4c61-9df5-088aa5256650"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> irkickflash_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("b6a45ed8-a26e-411c-8ba3-539cb6180e91"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> irkickoff_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("9d4cc206-629c-4937-897e-f35902398ed0"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> jigsaw_piece_t_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("8316fab6-0f23-45f7-ba0e-4002bb36a24c"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> kalarm_disabled_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("0c5df4ab-1224-48b6-ab3b-92dceadba1d7"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> kalarm_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("b7e8c52c-5969-462d-a6fc-9f60e74d0b2c"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> kmix_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("8cbdb6f9-ac9b-4501-92c8-3bddc7f8855e"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> kmixdocked_error_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("3d1fc326-f9dd-41ee-9c55-a5062a64cb76"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> kmixdocked_mute_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c6c2087f-52a8-4e38-ac1f-a570c50c6d95"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> lifejacket_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("6dca938c-24c3-45e9-b27d-ad5929e84cce"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> light_bulb_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("d6881f21-0d73-4eb2-81fb-6db8ab2b93a2"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> magic_tophat_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("507a696f-81d7-4edd-9f91-cbaf62f88a8b"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> mail_forward_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("6fbd700c-7519-4eb2-9120-a9f92d23f924"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> mail_get_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("0778987f-141b-496a-9ebd-28bfe0902555"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> mail_message_new_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("516d61e0-ecc5-47c1-ab5d-e72863359f98"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> mail_reply_all_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("030c3477-c574-4c44-a6b4-594c03e0d861"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> mail_reply_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("14b2fff1-64c9-405f-80c2-f536c567a1e0"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> mail_send_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c91bd329-2c1b-47c4-8abd-baa795c94e5d"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> map_compass_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("bcd2076d-043a-4c70-8fbf-fea0ed517248"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> media_playback_pause_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("5cb51c16-eea3-42b2-acbb-878de8713a83"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> media_playback_start_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("0d57019f-c253-419a-8229-ddff8975164b"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> media_playback_stop_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("d8d93447-5750-45d0-89fa-8446e005f5e5"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> media_record_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("66a05a91-7fa1-4273-867d-0642492fcc95"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> media_seek_backward_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("893d8b41-96bc-4478-9b7b-9047aeb52891"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> media_seek_forward_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("de311cf3-77e0-434b-967e-40dfc2ecf814"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> molicule_sphalerite_unit_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("e43ab154-dedb-4184-b332-7dbc0ea8adfb"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> molicule_stilleite_zinc_selenide_unit_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("82598271-467e-415c-9529-69d2ff1b2370"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> money_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("dc999ef4-aedb-464c-8222-07d35d92852f"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> network_connect_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("0c42ffca-f047-4a72-9ff4-3a390a0b23f8"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> network_disconnect_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("7d657d90-08f7-48c5-a08b-5145f23064db"); }
+                    }
                     public static TypedGuid<global::Zetbox.App.GUI.Icon> new_png
                     {
                         get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c9b11ee6-8a62-4af3-9ee7-d6e78eeadad7"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> new_tab_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("9ab7f91c-70f9-448b-a34f-f5add2f07f4b"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> news_subscribe_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("5ccc796b-a9be-4756-a203-0ff1fd260bea"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> news_unsubscribe_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c90970ad-6bf1-483a-84b5-4717c553dfb4"); }
                     }
                     public static TypedGuid<global::Zetbox.App.GUI.Icon> no_png
                     {
                         get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("f2db9015-0f03-41ef-9113-fb10a7b45d6c"); }
                     }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> object_flip_horizontal_2_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("f93e6352-0c13-42ed-8abb-0f4901a091bb"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> object_flip_horizontal_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("a85ce119-269a-4564-9f98-75ef43da75a8"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> object_flip_vertical_2_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("b0a6c8bb-1367-496f-bb83-398ef97e89c2"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> object_flip_vertical_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("9523b75f-06f7-4a37-a461-136db5b3bfef"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> object_rotate_left_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("8e818c5d-1a83-4513-a185-29d52f4c2342"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> object_rotate_right_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("161f3660-bb31-4c37-9775-356c7dd61c5e"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> office_chart_area_percentage_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("5dc176f5-9cd4-4bf7-bde2-bfd822b884d8"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> office_chart_area_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("5ea9c5ae-bd0b-4df5-8c49-0330424e0be3"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> office_chart_area_stacked_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("276a7361-8e70-4e8c-892c-5f657f593862"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> office_chart_bar_percentage_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c8af67d2-93a2-4ca2-8e54-537138636956"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> office_chart_bar_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("db535873-9853-4e2f-a071-6c06472895f2"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> office_chart_bar_stacked_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("a60d3810-cfd6-4641-aadf-45b84409b457"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> office_chart_line_percentage_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("b3928dd3-7525-4b9b-b38e-5c6491210390"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> office_chart_line_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("43ff7297-e04e-44ab-8efe-9ea3b75e21fc"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> office_chart_line_stacked_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("6d0059c8-377b-459b-a6c6-61adc5ba5c10"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> office_chart_pie_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("605ad45c-7bf2-48f1-a8a7-2925b9bd111c"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> office_chart_polar_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("452fcf34-b096-4596-8a83-8682acc1f5c0"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> office_chart_polar_stacked_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("0d061bbd-371e-4159-a5f4-852d59cb0796"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> office_chart_ring_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("6fa288c2-bae6-4432-8dd5-500a67078cc5"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> office_chart_scatter_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("f2948492-0d49-4968-bacf-36ade3339c0b"); }
+                    }
                     public static TypedGuid<global::Zetbox.App.GUI.Icon> ok_png
                     {
                         get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("b2c884fb-87a7-4abe-9893-be4ef2cd4888"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> openterm_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("06015eb8-63ad-4b45-b3ec-e17e856d712c"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> orc_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("06569daf-8125-49fd-9c14-e6dd7f9eb92f"); }
                     }
                     public static TypedGuid<global::Zetbox.App.GUI.Icon> otheroptions_ico
                     {
                         get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("82552e60-5677-439e-af81-5eafb194f784"); }
                     }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> oval_blue_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("e0bf6b27-390f-4ca2-9135-9d9cad629cd4"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> oval_green_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("bc20254b-544d-4535-aba3-314b098c7b1e"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> oval_grey_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("e0c77da3-0448-45cf-bd49-767f397f1a5f"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> oval_orange_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("42abc39d-9587-4665-9a17-24fb61b665ab"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> oval_purple_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("8ca7ab5f-facc-4065-b9c0-14e8bea23220"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> oval_red_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("5e50b2e7-d0b5-4149-8ed6-2152e54af36c"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> oval_tan_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("a1de4925-77fa-47bd-a8d2-fe40e36d46ef"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> oval_yellow_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("42271e8b-200b-47cb-b586-f982ad337113"); }
+                    }
                     public static TypedGuid<global::Zetbox.App.GUI.Icon> pen_png
                     {
                         get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("d7d4767f-0b2d-468a-8931-866ce07828cb"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> people_block_figure_fireman_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("f84c8511-dd7d-477b-9ba5-02cf1c0c76c9"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> people_boy_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("faa0552a-908c-493a-b715-502e8f4193ed"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> people_delivery_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("6aff9f77-eb7b-4c1e-8bb3-0c12c1f0e243"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> people_girl_anime_with_silver_hair_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("d9a1725a-6b95-4fc5-b99f-114b479d1398"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> people_girl_blowing_dandelion_seeds_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("d02edddc-d5c9-4f1e-82e7-90c51c448014"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> people_kid_head_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("fa1b9506-888a-4b86-9779-37b4024b5746"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> people_melting_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("e532632a-75fd-4f04-8b27-914adfad12be"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> people_xbill_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("ba5c7df8-a11c-4907-b364-95dd29701e4e"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> plant_acorn_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("ef483a7f-5e5f-4833-bdf6-754be18e6d20"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> plant_flower_apple_blossom_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("72cc8d73-fe55-4d60-93e4-0fa509610258"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> plant_leaf_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("b2466710-ffe7-4a5a-87f9-687e04d367f4"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> plant_mushroom_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("ec7aa78a-8179-4d85-9dd8-cfea9ede55a8"); }
                     }
                     public static TypedGuid<global::Zetbox.App.GUI.Icon> Printer_png
                     {
@@ -4844,6 +7255,42 @@ namespace Zetbox {
                     {
                         get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("ed2d3e60-d89b-4fce-92e5-0686a742e2ee"); }
                     }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> radio_old_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("419d4a66-9972-4818-af94-8ee1900c6e4d"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> rectagle_blue_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("a409bd61-a173-4126-9171-95f1f23ba3d6"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> rectagle_green_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("3a3e72db-224e-470a-9bb4-5e4cc0ccdc6f"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> rectagle_grey_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("efbefd3a-c736-4a4f-a156-ea204a4c7ca7"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> rectagle_orange_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("feff638d-131b-4a5e-9dc4-07fb9b2d5233"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> rectagle_purple_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("7c72050c-a6a4-42af-b7da-40bbd6f3eff2"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> rectagle_red_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("04a780e3-47f1-4855-bc40-6f9304d44a60"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> rectagle_tan_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("835c35cb-27a5-4129-af42-f48c4ebc1459"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> rectagle_yellow_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("bd6ec700-a4b4-4c4b-ab1b-a4e0d287d8f1"); }
+                    }
                     public static TypedGuid<global::Zetbox.App.GUI.Icon> reload_png
                     {
                         get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("bbfd9a59-257a-42e6-a1f4-90de28bd7f7a"); }
@@ -4851,6 +7298,10 @@ namespace Zetbox {
                     public static TypedGuid<global::Zetbox.App.GUI.Icon> Resource_Bitmap_ico
                     {
                         get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("1cb8d37f-c885-4cf0-8845-8e7333696505"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> ribbon_blue_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("5be4f172-c11c-46af-910e-204d34a723f7"); }
                     }
                     public static TypedGuid<global::Zetbox.App.GUI.Icon> save_all_png
                     {
@@ -4860,13 +7311,53 @@ namespace Zetbox {
                     {
                         get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("d78f970f-76be-47eb-8e04-72ed7d3c3fb7"); }
                     }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> scroll_blank_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("1665f9c9-7182-461b-9897-31754ddf8917"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> sea_mine_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("7f391f71-4ebd-49a2-b29e-a66148a6e473"); }
+                    }
                     public static TypedGuid<global::Zetbox.App.GUI.Icon> search_png
                     {
                         get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("dbb2f49e-48f4-49fc-a9a6-53a403f8ac4b"); }
                     }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> share_3_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("646b16a5-b9db-41bc-bbbc-3ed25f11f3e9"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> shield_2_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("8ba3a116-6548-4640-b905-6a6d7cbf12fb"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> sign_crossroads_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("2564ef0f-1dc8-43c5-a8d0-4296a1198513"); }
+                    }
                     public static TypedGuid<global::Zetbox.App.GUI.Icon> stop_png
                     {
                         get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("da02708c-58e1-4219-8a55-06202c724171"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> suitcase_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("d7b5f7f0-d5a4-4d5b-a5ff-9f113ba9b225"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> sun_wearing_shades_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("6947600d-c967-471c-831d-bcaf8f5dc613"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> system_switch_user_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("f0f895b6-3ad1-49d0-8aa2-b79ed426d9c0"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> text_speak_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("b1d2af56-f86e-432a-b41b-125d65cf5dc0"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> thumbnail_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("4d8cedc8-34ac-45f4-8cd8-0e4d5fdc7baf"); }
                     }
                     public static TypedGuid<global::Zetbox.App.GUI.Icon> tip_png
                     {
@@ -4876,9 +7367,61 @@ namespace Zetbox {
                     {
                         get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("32dc1dd9-6f33-486a-a504-133f93ae02b9"); }
                     }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> toggle_log_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("f914afa0-ba3a-419c-94cf-007c94128b97"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> tool_animator_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("01d1183c-6666-4b2b-b584-39d10d0681ef"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> tools_anvil_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("148ed86b-20bf-4a1b-a4b3-a6bda68397e5"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> tools_check_spelling_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("a2021d5d-fd19-491b-bae5-de579eb3d291"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> tools_hammer_and_nails_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("68d46d93-f6f0-44b0-8f48-b1ae1753972e"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> tools_report_bug_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("4e6247c9-233c-470e-b266-9cb6bdd06826"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> tools_wizard_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("2cc407e7-4b5f-47e0-b385-692603cff85a"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> transform_move_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("2e70e511-bd0c-4e0a-ae44-c066d4552769"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> transportation_hummer_01_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("05797dab-f039-4c73-94ba-4cbc438eb96d"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> transportation_motorcycle_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("b4dd360b-7a36-46a6-b56d-71a681ee01d5"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> transportation_plane_business_jet_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("bc275bab-1c5e-48d7-9e59-6245b1787ccb"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> transportation_plane_cessna_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("af4b4109-fd27-44c6-a8f0-9b11a586f130"); }
+                    }
                     public static TypedGuid<global::Zetbox.App.GUI.Icon> UI_WebUserControl_ico
                     {
                         get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("5ec2d5a8-ee02-4252-9ab3-9c031160be22"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> umbrella_black_png_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("1ba82eb6-7bf8-48cb-85ad-f673054f89b6"); }
                     }
                     public static TypedGuid<global::Zetbox.App.GUI.Icon> user_ico
                     {
@@ -4892,13 +7435,229 @@ namespace Zetbox {
                     {
                         get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("0f4acffa-6dc8-4d87-89ee-2d21cfa3d088"); }
                     }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> view_history_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("864d578d-ddd4-41ad-9b2f-c37351d21840"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> view_media_artist_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("aa52ebbb-3b65-43df-a425-cd96000672c4"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> view_media_equalizer_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("58e73ee9-214f-4a0f-b4c0-f7f4b8f9bef3"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> virus_detected_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("b1042528-a0a6-4a1b-979b-4e0871be587c"); }
+                    }
                     public static TypedGuid<global::Zetbox.App.GUI.Icon> VSProject_genericproject_ico
                     {
                         get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("1710903b-aa64-4a26-a9fe-cd97fa91d67f"); }
                     }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> wallet_closed_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("22c08b95-5515-4ed5-8e33-f63dbf350668"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> wallet_open_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("1da476e8-f89c-4371-93e3-d829add722d3"); }
+                    }
                     public static TypedGuid<global::Zetbox.App.GUI.Icon> warning_png
                     {
                         get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("26947a85-20f2-4cfc-ae07-5b418acb2685"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> water_drop_1_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("c63fe7d6-4b77-45bf-a287-f00f9b781f53"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_clear_2_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("7193c91c-add0-4ad5-b122-0d2a5e7f97a1"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_clear_3_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("64140458-863d-48d8-b84f-5ea01c78b106"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_clear_night_2_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("7d95f2a6-ac1b-47f3-a312-10b5c42658ef"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_clear_night_3_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("38a09063-a54e-4681-8dcc-f0199d2a8586"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_clear_night_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("27c6c720-17b1-452b-9c72-ab742c46ab33"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_clear_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("49414d0a-5112-48db-a041-d6f02bacea7b"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_clouds_night_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("806887d5-1e0c-4854-9714-93d13fb09349"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_clouds_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("3d490927-9449-46ce-913f-9614e0affce1"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_few_clouds_2_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("3f2f7145-5b99-4e86-b9c9-8ad7a1fcda56"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_few_clouds_3_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("ef8ee8b5-0997-42d8-8af7-f7ab4d41c391"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_few_clouds_night_2_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("be18307b-0e00-4a65-9c98-bd41707d03dc"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_few_clouds_night_3_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("dbe0fd6f-0c3c-4489-b327-43cac4faa4e3"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_few_clouds_night_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("37c8f20b-93d5-45f5-87e3-19e089e7b22c"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_few_clouds_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("172a8417-0bd2-4968-9b21-809cb2329fe4"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_fog_2_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("5d62b7fd-3790-4c44-abb6-014449e28d5b"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_fog_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("e82d26a6-1124-4eac-9579-856777a8f1ba"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_freezing_rain_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("96edb6cd-904b-4a4f-864f-b71adc06f114"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_hail_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("dc463958-6fa9-4aa4-86ab-cb5a33d817cd"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_many_clouds_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("4e82b3de-319e-4cb6-9266-6b7d1d5b3a3d"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_mist_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("ebd7dd99-08a6-42b6-af78-f952ec5f80de"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_none_available_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("e457ebc9-0799-418e-8078-7edf18334ebf"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_overcast_2_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("fba4e3d3-f6f6-45f7-9ef8-bfecd489d6cd"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_overcast_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("9c2ffc42-15fc-4a69-8d7a-9490c326b5b3"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_severe_alert_2_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("547d1a4e-6f86-4a3b-8125-463de9f38bf7"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_severe_alert_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("9a61be6f-890e-4ece-a854-5eddd36760cb"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_showers_2_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("8acb86a5-8eb9-4664-ab1e-2ec4f1450e8f"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_showers_3_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("81afc09c-2aae-4854-a196-d93250764ec0"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_showers_day_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("874d7e67-ddfb-40bf-baec-5476231daf77"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_showers_night_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("8ad337e0-1d65-46fd-9e48-9da84cfe891f"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_showers_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("ad110381-486c-411d-87ac-dca23e4597d0"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_showers_scattered_2_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("9d752966-2a3d-4ccd-a09a-e19335f1efde"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_showers_scattered_3_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("be8d5401-8891-4de6-9aa2-7030bbff593e"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_showers_scattered_day_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("dfb10fba-47c4-4888-883c-aeb4a5db7bfe"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_showers_scattered_night_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("0d99e922-d27a-4920-b678-7bac45cbc477"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_showers_scattered_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("15738c75-5c62-449b-aca0-7b14e583e828"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_snow_2_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("6faa9385-ada0-49cd-8e64-ab3bf98fc3c9"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_snow_3_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("34940fb0-457c-4d0e-aed9-1db592a0e5ad"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_snow_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("61052ba7-f820-430f-a42c-dd51552d453f"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_snow_rain_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("ccbf39cb-a6f5-4df5-8708-0fe9b6351591"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_snow_scattered_day_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("8ccffdb6-5ff9-4136-9a30-30fbc3531c51"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_snow_scattered_night_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("dece7c00-433f-4bdf-8346-1accf0e5d375"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_snow_scattered_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("5d93fd66-e33d-4095-913a-2a83c88da6cd"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_storm_2_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("9bcac113-f6bd-4ee3-8780-34a935f59b0a"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_storm_3_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("f1ed8be0-582a-4c0f-afa2-c0470ca3942d"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_storm_day_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("15a4cef9-f123-43c7-9aed-18b77c793370"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_storm_night_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("deb10764-28a7-4601-875c-a70c33cb48e0"); }
+                    }
+                    public static TypedGuid<global::Zetbox.App.GUI.Icon> weather_storm_png
+                    {
+                        get { return new TypedGuid<global::Zetbox.App.GUI.Icon>("f98b4264-c180-4b95-84cf-9eb08b38095d"); }
                     }
                 }
             }
@@ -4923,10 +7682,6 @@ namespace Zetbox {
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ActionViewModel
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("3d779eaf-1c37-4c3b-822b-0b1af0926802"); }
-                }
-                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_CacheDebuggerViewModel
-                {
-                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("f87858ba-688f-495d-99c0-b52ad117a4c2"); }
                 }
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_Calendar_CalendarViewModel
                 {
@@ -4975,6 +7730,26 @@ namespace Zetbox {
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_DataTypeViewModel
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("8c72dff9-c3b8-417b-a2ef-5f22ffe9dd54"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_Debugger_CacheDebuggerViewModel
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("f87858ba-688f-495d-99c0-b52ad117a4c2"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_Debugger_DebuggerWindowViewModel
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("c56bfb67-31c7-497c-974f-0a480edb8c27"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_Debugger_PerfMonDebuggerViewModel
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("48861012-dcf1-404d-838b-b088a1fba218"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_Debugger_RequestDebuggerViewModel
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("e59ed16e-4c3f-4705-b47b-46346efd4a08"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_Debugger_ZetboxContextDebuggerViewModel
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("b1df266b-a841-4669-9199-a6a01f6dbfcc"); }
                 }
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_DocumentManagement_FilePropertyViewModel
                 {
@@ -5123,6 +7898,14 @@ namespace Zetbox {
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ObjectClassViewModel
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("6b368136-addd-4e86-ad29-3d2158a00de5"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ObjectEditor_MergeObjectsTaskViewModel
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("dc0f77ee-17b4-4a3f-b95f-67828f27f454"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ObjectEditor_MergePropertyViewModel
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("0580347f-014a-4802-8d34-3495dd035ee3"); }
                 }
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ObjectEditor_WorkspaceViewModel
                 {
@@ -5311,10 +8094,6 @@ namespace Zetbox {
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ZetboxBase_TypeRefPropertyViewModel
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("d96d030e-eebe-4b7f-8b55-dca30cbd4bde"); }
-                }
-                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ZetboxDebuggerAsViewModel
-                {
-                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("b1df266b-a841-4669-9199-a6a01f6dbfcc"); }
                 }
             }
         }

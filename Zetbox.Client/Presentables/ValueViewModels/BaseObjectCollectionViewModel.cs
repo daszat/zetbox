@@ -564,6 +564,27 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             GetValueFromModelAsync().Wait();
         }
 
+        protected override bool NeedsValidation
+        {
+            get
+            {
+                // Shortcut
+                if (!base.NeedsValidation) return false;
+
+                // TODO: Hack! 
+                var obj = (ObjectCollectionModel as Zetbox.Client.Models.BasePropertyValueModel).IfNotNull(i => i.Object as IDataObject);
+
+                // Non-Properties should always be validated
+                if (obj == null) return true;
+
+                // New Objects needs a validation as the value cache might not be initialized, because no one set a value.
+                if (obj != null && obj.ObjectState == DataObjectState.New) return true;
+
+                return _valueCacheInititalized;
+            }
+        }
+
+        private bool _valueCacheInititalized = false;
         ReadOnlyObservableProjectedList<IDataObject, DataObjectViewModel> _valueCache;
         SortedWrapper<IDataObject> _wrapper;
         private ZbTask<IReadOnlyObservableList<DataObjectViewModel>> _fetchValueTask;
@@ -578,9 +599,10 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                         _wrapper = new SortedWrapper<IDataObject>(ObjectCollectionModel.Value, ReferencedClass.GetDescribedInterfaceType(), ObjectCollectionModel, InitialSortProperty);
                         _valueCache = new ReadOnlyObservableProjectedList<IDataObject, DataObjectViewModel>(
                             _wrapper,
-                            obj => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj),
+                            obj => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, GetWorkspace(), obj),
                             mdl => mdl.Object);
                         _valueCache.CollectionChanged += ValueListChanged;
+                        _valueCacheInititalized = true;
                         t.Result = _valueCache;
                     });
                 // TODO: Split here to avoid a stackoverflow exception!
@@ -697,7 +719,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             if (p.Object == null)
             {
                 var obj = DataContext.Create(DataContext.GetInterfaceType(this.ReferencedClass.GetDataType()));
-                p.Object = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj);
+                p.Object = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, GetWorkspace(), obj);
                 _proxyCache[p.Object.Object] = p;
             }
             return p.Object;
@@ -709,7 +731,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             DataObjectViewModelProxy result;
             if (!_proxyCache.TryGetValue(obj, out result))
             {
-                result = new DataObjectViewModelProxy() { Object = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj) };
+                result = new DataObjectViewModelProxy() { Object = DataObjectViewModel.Fetch(ViewModelFactory, DataContext, GetWorkspace(), obj) };
                 _proxyCache[obj] = result;
             }
             return result;

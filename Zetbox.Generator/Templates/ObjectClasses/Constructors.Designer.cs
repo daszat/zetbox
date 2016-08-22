@@ -17,42 +17,44 @@ namespace Zetbox.Generator.Templates.ObjectClasses
 		protected IZetboxContext ctx;
 		protected string className;
 		protected IEnumerable<CompoundObjectProperty> compoundObjectProperties;
+		protected bool asCollectionEntry;
 
 
-        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, string className, IEnumerable<CompoundObjectProperty> compoundObjectProperties)
+        public static void Call(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, string className, IEnumerable<CompoundObjectProperty> compoundObjectProperties, bool asCollectionEntry)
         {
             if (_host == null) { throw new global::System.ArgumentNullException("_host"); }
 
-            _host.CallTemplate("ObjectClasses.Constructors", ctx, className, compoundObjectProperties);
+            _host.CallTemplate("ObjectClasses.Constructors", ctx, className, compoundObjectProperties, asCollectionEntry);
         }
 
-        public Constructors(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, string className, IEnumerable<CompoundObjectProperty> compoundObjectProperties)
+        public Constructors(Arebis.CodeGeneration.IGenerationHost _host, IZetboxContext ctx, string className, IEnumerable<CompoundObjectProperty> compoundObjectProperties, bool asCollectionEntry)
             : base(_host)
         {
 			this.ctx = ctx;
 			this.className = className;
 			this.compoundObjectProperties = compoundObjectProperties;
+			this.asCollectionEntry = asCollectionEntry;
 
         }
 
         public override void Generate()
         {
-#line 33 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
+#line 34 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
 this.WriteObjects("        [Obsolete]\r\n");
 this.WriteObjects("        public ",  className , "()\r\n");
 this.WriteObjects("            : base(null)\r\n");
 this.WriteObjects("        {\r\n");
-#line 37 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
-ApplyCompoundObjectPropertyInitialisers(null); 
 #line 38 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
+ApplyCompoundObjectPropertyInitialisers(null); 
+#line 39 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
 this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        public ",  className , "(Func<IFrozenContext> lazyCtx)\r\n");
 this.WriteObjects("            : base(lazyCtx)\r\n");
 this.WriteObjects("        {\r\n");
-#line 43 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
-ApplyCompoundObjectPropertyInitialisers("lazyCtx"); 
 #line 44 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
+ApplyCompoundObjectPropertyInitialisers("lazyCtx"); 
+#line 45 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\Constructors.cst"
 this.WriteObjects("        }\r\n");
 
         }

@@ -50,7 +50,7 @@ namespace Zetbox.API
 
         public void ShellExecute(string filename, string verb)
         {
-            if (!File.Exists(filename)) throw new ArgumentOutOfRangeException("filename");
+            if (!File.Exists(filename) && !Directory.Exists(filename)) throw new ArgumentOutOfRangeException("filename");
 
             var si = new ProcessStartInfo();
             si.UseShellExecute = true;

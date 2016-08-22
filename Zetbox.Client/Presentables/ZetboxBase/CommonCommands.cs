@@ -20,6 +20,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     using System.ComponentModel;
     using System.Linq;
     using System.Text;
+    using Autofac;
     using Zetbox.API;
     using Zetbox.API.Client;
     using Zetbox.API.Utils;
@@ -66,7 +67,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
     public abstract class ActivateDataObjectCommand : CommandViewModel
     {
-        protected readonly Func<IZetboxContext> ctxFactory;
+        protected readonly Func<ILifetimeScope> scopeFactory;
 
         protected bool UseSeparateContext { get { return !(ViewModelFactory.GetWorkspace(DataContext) is IContextViewModel); } }
 
@@ -91,12 +92,12 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        public ActivateDataObjectCommand(IViewModelDependencies appCtx, Func<IZetboxContext> ctxFactory, IZetboxContext dataCtx, ViewModel parent, string label, string tooltip)
+        public ActivateDataObjectCommand(IViewModelDependencies appCtx, Func<ILifetimeScope> scopeFactory, IZetboxContext dataCtx, ViewModel parent, string label, string tooltip)
             : base(appCtx, dataCtx, parent, label, tooltip)
         {
-            if (ctxFactory == null) throw new ArgumentNullException("ctxFactory");
+            if (scopeFactory == null) throw new ArgumentNullException("scopeFactory");
 
-            this.ctxFactory = ctxFactory;
+            this.scopeFactory = scopeFactory;
         }
 
         protected void ActivateItem(IEnumerable<ViewModel> items)
@@ -129,19 +130,19 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             OnItemsOpened(this, new ItemsOpenedEventArgs(openingArgs.Items));
         }
 
-        protected void ActivateForeignItems(IZetboxContext newCtx, IEnumerable<IDataObject> items)
+        protected void ActivateForeignItems(IViewModelFactoryScope newScope, IZetboxContext newCtx, IEnumerable<IDataObject> items)
         {
+            if (newScope == null) throw new ArgumentNullException("newScope");
             if (newCtx == null) throw new ArgumentNullException("newCtx");
             if (items == null || items.Count() == 0) return;
 
-            var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditor.WorkspaceViewModel.Factory>().Invoke(newCtx, null);
-
-            ViewModelFactory.ShowModel(newWorkspace, RequestedWorkspaceKind, true);
+            var newWorkspace = ObjectEditor.WorkspaceViewModel.Create(newScope.Scope, newCtx);
+            newScope.ViewModelFactory.ShowModel(newWorkspace, RequestedWorkspaceKind, true);
 
             // ShowForeignObject may take a while
-            ViewModelFactory.CreateDelayedTask(newWorkspace, () =>
+            newScope.ViewModelFactory.CreateDelayedTask(newWorkspace, () =>
             {
-                var newViewModels = items.Select(i => DataObjectViewModel.Fetch(ViewModelFactory, newCtx, this, newCtx.Find(DataContext.GetInterfaceType(i), i.ID)));
+                var newViewModels = items.Select(i => DataObjectViewModel.Fetch(newScope.ViewModelFactory, newCtx, this, newCtx.Find(DataContext.GetInterfaceType(i), i.ID)));
                 var openingArgs = new ItemsOpeningEventArgs(newCtx, newWorkspace, newViewModels);
 
                 OnItemsOpening(newWorkspace, openingArgs);
@@ -200,9 +201,9 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         protected IEnumerable<ViewModel> SelectedItems { get { return ((ICommandParameter)Parent).SelectedItems; } }
         protected IOpenCommandParameter Parameter { get { return Parent as IOpenCommandParameter; } }
 
-        public OpenDataObjectCommand(IViewModelDependencies appCtx, Func<IZetboxContext> ctxFactory,
+        public OpenDataObjectCommand(IViewModelDependencies appCtx, Func<ILifetimeScope> scopeFactory,
             IZetboxContext dataCtx, ViewModel parent)
-            : base(appCtx, ctxFactory, dataCtx, parent, CommonCommandsResources.OpenDataObjectCommand_Name, CommonCommandsResources.OpenDataObjectCommand_Tooltip)
+            : base(appCtx, scopeFactory, dataCtx, parent, CommonCommandsResources.OpenDataObjectCommand_Name, CommonCommandsResources.OpenDataObjectCommand_Tooltip)
         {
             if (!(parent is ICommandParameter)) throw new ArgumentOutOfRangeException("parent", "parent needs to implement ICommandParameter");
 
@@ -255,7 +256,9 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             var vModels = SelectedItems.OfType<DataObjectViewModel>().ToList();
             if (UseSeparateContext)
             {
-                ActivateForeignItems(ctxFactory(), vModels.Select(dovm => dovm.Object));
+                var newScope = ViewModelFactory.CreateNewScope();
+                var newCtx = newScope.ViewModelFactory.CreateNewContext();
+                ActivateForeignItems(newScope, newCtx, vModels.Select(dovm => dovm.Object));
             }
             else
             {
@@ -295,22 +298,19 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             }
         }
 
-        private readonly Func<IZetboxContext> _ctxFactory;
         private readonly IZetboxContextExceptionHandler _exceptionHandler;
 
         public DeleteDataObjectCommand(IViewModelDependencies appCtx,
             IZetboxContext dataCtx, ViewModel parent,
-            Func<IZetboxContext> ctxFactory, IZetboxContextExceptionHandler exceptionHandler)
+            IZetboxContextExceptionHandler exceptionHandler)
             : base(appCtx, dataCtx, parent, CommonCommandsResources.DeleteDataObjectCommand_Name, CommonCommandsResources.DeleteDataObjectCommand_Tooltip)
         {
-            if (ctxFactory == null) throw new ArgumentNullException("ctxFactory");
             if (exceptionHandler == null) throw new ArgumentNullException("exceptionHandler");
             if (!(parent is ICommandParameter)) throw new ArgumentOutOfRangeException("parent", "parent needs to implement ICommandParameter");
 
             if (this.Parameter != null)
                 this.Parameter.PropertyChanged += OnParameterChanged;
 
-            this._ctxFactory = ctxFactory;
             this._exceptionHandler = exceptionHandler;
         }
 
@@ -386,7 +386,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
             {
                 try
                 {
-                    using (var ctx = _ctxFactory())
+                    using (var ctx = ViewModelFactory.CreateNewContext())
                     {
                         // make local copy to avoid stumbling over changing lists while iterating over them
                         foreach (var item in SelectedItems.Cast<DataObjectViewModel>().ToList())
@@ -461,9 +461,9 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         protected IRefreshCommandListener Listener { get { return Parent as IRefreshCommandListener; } }
         protected ObjectClass Type { get; private set; }
 
-        public NewDataObjectCommand(IViewModelDependencies appCtx, Func<IZetboxContext> ctxFactory,
+        public NewDataObjectCommand(IViewModelDependencies appCtx, Func<ILifetimeScope> scopeFactory,
             IZetboxContext dataCtx, ViewModel parent, ObjectClass type)
-            : base(appCtx, ctxFactory, dataCtx, parent, CommonCommandsResources.NewDataObjectCommand_Name, CommonCommandsResources.NewDataObjectCommand_Tooltip)
+            : base(appCtx, scopeFactory, dataCtx, parent, CommonCommandsResources.NewDataObjectCommand_Name, CommonCommandsResources.NewDataObjectCommand_Tooltip)
         {
             if (this.Parameter != null)
                 this.Parameter.PropertyChanged += OnParameterChanged;
@@ -549,10 +549,11 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             if (UseSeparateContext)
             {
-                var newCtx = ctxFactory();
-                var newObj = newCtx.Create(DataContext.GetInterfaceType(dtType.GetDataType()));
+                var newScope = ViewModelFactory.CreateNewScope();
+                var newCtx = newScope.ViewModelFactory.CreateNewContext();
+                var newObj = newCtx.Create(newCtx.GetInterfaceType(dtType.GetDataType()));
                 OnObjectCreated(newObj);
-                ActivateForeignItems(newCtx, new[] { newObj });
+                ActivateForeignItems(newScope, newCtx, new[] { newObj });
             }
             else
             {
@@ -611,16 +612,13 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     {
         public new delegate EditDataObjectClassCommand Factory(IZetboxContext dataCtx, ViewModel parent, DataType type);
 
-        protected readonly Func<IZetboxContext> ctxFactory;
         protected DataType Type { get; private set; }
 
         public EditDataObjectClassCommand(IViewModelDependencies appCtx,
-            IZetboxContext dataCtx, ViewModel parent, DataType type,
-            Func<IZetboxContext> ctxFactory)
+            IZetboxContext dataCtx, ViewModel parent, DataType type)
             : base(appCtx, dataCtx, parent, CommonCommandsResources.EditDataObjectClassCommand_Name, CommonCommandsResources.EditDataObjectClassCommand_Tooltip)
         {
             this.Type = type;
-            this.ctxFactory = ctxFactory;
         }
 
         public override bool CanExecute(object data)
@@ -630,11 +628,12 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         protected override void DoExecute(object data)
         {
-            var newCtx = ctxFactory();
+            var newScope = ViewModelFactory.CreateNewScope();
+            var newCtx = newScope.ViewModelFactory.CreateNewContext();
             var newObjClass = newCtx.FindPersistenceObject<DataType>(this.Type.ExportGuid);
-            var newWorkspace = ViewModelFactory.CreateViewModel<ObjectEditorWorkspace.Factory>().Invoke(newCtx, null);
+            var newWorkspace = ObjectEditorWorkspace.Create(newScope.Scope, newCtx);
             newWorkspace.ShowObject(newObjClass);
-            ViewModelFactory.ShowModel(newWorkspace, true);
+            newScope.ViewModelFactory.ShowModel(newWorkspace, true);
         }
     }
 
@@ -836,13 +835,9 @@ namespace Zetbox.Client.Presentables.ZetboxBase
     {
         public new delegate ObjectBrowserCommand Factory(IZetboxContext dataCtx, ViewModel parent);
 
-        private Func<IZetboxContext> _ctxFactory;
-
-        public ObjectBrowserCommand(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent, Func<IZetboxContext> ctxFactory)
+        public ObjectBrowserCommand(IViewModelDependencies appCtx, IZetboxContext dataCtx, ViewModel parent)
             : base(appCtx, dataCtx, parent, CommonCommandsResources.ObjectBrowserCommand_Name, CommonCommandsResources.ObjectBrowserCommand_Tooltip)
         {
-            if (ctxFactory == null) throw new ArgumentNullException("ctxFactory");
-            _ctxFactory = ctxFactory;
         }
 
         public override System.Drawing.Image Icon
@@ -881,9 +876,11 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             if (CanExecute(data))
             {
-                var ws = ViewModelFactory.CreateViewModel<Zetbox.Client.Presentables.ObjectBrowser.WorkspaceViewModel.Factory>().Invoke(_ctxFactory(), null);
+                var newScope = ViewModelFactory.CreateNewScope();
+                var newCtx = newScope.ViewModelFactory.CreateNewContext();
+                var ws = newScope.ViewModelFactory.CreateViewModel<ObjectBrowser.WorkspaceViewModel.Factory>().Invoke(newCtx, null);
                 ControlKind launcher = Zetbox.NamedObjects.Gui.ControlKinds.Zetbox_App_GUI_LauncherKind.Find(FrozenContext);
-                ViewModelFactory.ShowModel(ws, launcher, true);
+                newScope.ViewModelFactory.ShowModel(ws, launcher, true);
             }
         }
     }

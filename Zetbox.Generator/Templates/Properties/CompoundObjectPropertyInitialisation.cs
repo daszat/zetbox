@@ -26,17 +26,17 @@ namespace Zetbox.Generator.Templates.Properties
 
     public partial class CompoundObjectPropertyInitialisation
     {
-        public static void Call(IGenerationHost _host, IZetboxContext ctx, IEnumerable<CompoundObjectProperty> properties, string implementationSuffix, string implementationPropertySuffix, string lazyCtxProperty)
+        public static void Call(IGenerationHost _host, IZetboxContext ctx, IEnumerable<CompoundObjectProperty> properties, bool asCollectionEntry, string implementationSuffix, string implementationPropertySuffix, string lazyCtxProperty)
         {
-            foreach (var p in properties.Where(p => !p.IsList).OrderBy(p => p.Name))
+            foreach (var p in properties.Where(p => asCollectionEntry || !p.IsList).OrderBy(p => p.Name))
             {
-                Call(_host, ctx, p, implementationSuffix, implementationPropertySuffix, lazyCtxProperty);
+                Call(_host, ctx, p, asCollectionEntry, implementationSuffix, implementationPropertySuffix, lazyCtxProperty);
             }
         }
 
-        public static void Call(IGenerationHost _host, IZetboxContext ctx, CompoundObjectProperty property, string implementationSuffix, string implementationPropertySuffix, string lazyCtxProperty)
+        public static void Call(IGenerationHost _host, IZetboxContext ctx, CompoundObjectProperty property, bool asCollectionEntry, string implementationSuffix, string implementationPropertySuffix, string lazyCtxProperty)
         {
-            string propertyName = property.Name;
+            string propertyName = asCollectionEntry ? "Value" : property.Name;
             string backingStoreName = propertyName + implementationPropertySuffix;
             string typeName = property.GetElementTypeString();
             string implementationTypeName = typeName + implementationSuffix;

@@ -23,7 +23,7 @@
     License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
     -->
 
-    <ItemsControl ItemsSource="{Binding Value.PropertyModels, ValidatesOnDataErrors=true}"
+    <ItemsControl ItemsSource="{Binding Value.PropertyModels}"
                   BorderThickness="0"
                   Grid.IsSharedSizeScope="True"
                   HorizontalContentAlignment="Stretch"

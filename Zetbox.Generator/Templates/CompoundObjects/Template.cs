@@ -58,7 +58,8 @@ namespace Zetbox.Generator.Templates.CompoundObjects
                 GetTypeName(),
                 this.DataType
                     .Properties
-                    .OfType<CompoundObjectProperty>());
+                    .OfType<CompoundObjectProperty>(),
+                false);
 
             string clsName = this.GetTypeName();
 
@@ -79,6 +80,7 @@ namespace Zetbox.Generator.Templates.CompoundObjects
                 this.DataType
                     .Properties
                     .OfType<CompoundObjectProperty>(),
+                false,
                 ImplementationSuffix,
                 ImplementationPropertySuffix,
                 "lazyCtx");

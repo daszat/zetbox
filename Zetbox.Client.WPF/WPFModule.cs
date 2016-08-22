@@ -39,7 +39,7 @@ namespace Zetbox.Client.WPF
                 .RegisterType<WpfModelFactory>()
                 .As<IViewModelFactory>()
                 .As<IToolkit>()
-                .SingleInstance();
+                .InstancePerLifetimeScope();
 
             builder
                 .RegisterType<PasswordDialog.Adapter>()
