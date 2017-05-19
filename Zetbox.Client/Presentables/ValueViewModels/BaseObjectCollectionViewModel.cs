@@ -754,11 +754,26 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                     GetValueFromModelAsync()
                         .OnResult(t =>
                         {
-                            _proxyInstances = new BaseObjectCollectionViewModelProxyList(
-                                ObjectCollectionModel,
-                                ObjectCollectionModel.Value,
-                                (vm) => GetProxy(vm),
-                                (p) => GetObjectFromProxy(p).Object);
+                            if (AllowInlineAddNew)
+                            {
+                                _proxyInstances = new BaseObjectCollectionViewModelProxyList(
+                                    ObjectCollectionModel,
+                                    ObjectCollectionModel.Value,
+                                    (vm) => GetProxy(vm),
+                                    (p) => GetObjectFromProxy(p).Object,
+                                    false);
+                            }
+                            else
+                            {
+                                // Supports sorting but no inline adding
+                                _proxyInstances = new BaseObjectCollectionViewModelProxyList(
+                                    ObjectCollectionModel,
+                                    _wrapper,
+                                    (vm) => GetProxy(vm),
+                                    (p) => GetObjectFromProxy(p).Object,
+                                    true);
+                                _wrapper.CollectionChanged += (s, e) => { _proxyInstances.NotifyCollectionChanged(); };
+                            }
                             OnPropertyChanged("ValueProxiesAsync");
                         });
                 }
@@ -867,9 +882,14 @@ namespace Zetbox.Client.Presentables.ValueViewModels
     /// </summary>
     public sealed class BaseObjectCollectionViewModelProxyList : AbstractObservableProjectedList<IDataObject, DataObjectViewModelProxy>, IList, IList<DataObjectViewModelProxy>
     {
-        public BaseObjectCollectionViewModelProxyList(INotifyCollectionChanged notifier, object collection, Func<IDataObject, DataObjectViewModelProxy> select, Func<DataObjectViewModelProxy, IDataObject> inverter)
-            : base(notifier, collection, select, inverter, false)
+        public BaseObjectCollectionViewModelProxyList(INotifyCollectionChanged notifier, object collection, Func<IDataObject, DataObjectViewModelProxy> select, Func<DataObjectViewModelProxy, IDataObject> inverter, bool isReadOnly)
+            : base(notifier, collection, select, inverter, isReadOnly)
         {
+        }
+
+        public void NotifyCollectionChanged()
+        {
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
     }
 }
