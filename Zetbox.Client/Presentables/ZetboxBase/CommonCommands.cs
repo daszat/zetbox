@@ -225,6 +225,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public override bool CanExecute(object data)
         {
+            if (DataContext.IsDisposed) return false;
+
             if (Parameter == null)
             {
                 Reason = CommonCommandsResources.DataObjectCommand_NothingSelected;
@@ -328,6 +330,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public override bool CanExecute(object data)
         {
+            if (DataContext.IsDisposed) return false;
+
             if (data != null)
             {
                 Reason = string.Format(CommonCommandsResources.DataObjectCommand_ProgrammerError, data);
@@ -484,6 +488,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public override bool CanExecute(object data)
         {
+            if (DataContext.IsDisposed) return false;
+
             if (Parameter == null)
             {
                 Reason = CommonCommandsResources.DataObjectCommand_NothingSelected;
@@ -623,7 +629,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public override bool CanExecute(object data)
         {
-            return true;
+            return !DataContext.IsDisposed;
         }
 
         protected override void DoExecute(object data)
@@ -677,6 +683,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         public event EventHandler<CanRefreshEventArgs> CanRefresh;
         public override bool CanExecute(object data)
         {
+            if (DataContext.IsDisposed) return false;
+
             if (Listener == null)
             {
                 Reason = CommonCommandsResources.DataObjectCommand_NothingSelected;
@@ -748,7 +756,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public override bool CanExecute(object data)
         {
-            return true;
+            return !DataContext.IsDisposed;
         }
 
         protected override void DoExecute(object data)
@@ -811,6 +819,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public override bool CanExecute(object data)
         {
+            if (DataContext.IsDisposed) return false;
+
             if (CurrentPrincipal == null || !CurrentPrincipal.IsAdministrator())
             {
                 this.Reason = CommonCommandsResources.ElevatedModeCommand_Error;
@@ -862,6 +872,8 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public override bool CanExecute(object data)
         {
+            if (DataContext.IsDisposed) return false;
+
             if (CurrentPrincipal == null || !CurrentPrincipal.IsAdministrator())
             {
                 this.Reason = CommonCommandsResources.ElevatedModeCommand_Error;

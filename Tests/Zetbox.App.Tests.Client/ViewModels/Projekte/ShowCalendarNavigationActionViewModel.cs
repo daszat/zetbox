@@ -37,7 +37,7 @@ namespace Zetbox.App.Projekte.Client.ViewModel.Projekte
 
         public override bool CanExecute()
         {
-            return true;
+            return !DataContext.IsDisposed;
         }
 
         public override void Execute()

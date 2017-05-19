@@ -74,20 +74,7 @@ namespace Zetbox.Client.Presentables
 
         protected override PropertyGroupViewModel CreatePropertyGroup(string tag, string translatedTag, PropertyGroupCollection lst)
         {
-            if (tag == "Properties" && (_dataType is ObjectClass || _dataType is CompoundObject))
-            {
-                return ViewModelFactory.CreateViewModel<MultiplePropertyGroupViewModel.Factory>()
-                    .Invoke(
-                        DataContext,
-                        this,
-                        tag,
-                        translatedTag,
-                        lst.Concat(new[] { 
-                               ViewModelFactory.CreateViewModel<LabeledViewContainerViewModel.Factory>().Invoke(DataContext, this, "Preview", "", ViewModelFactory.CreateViewModel<PropertiesPrewiewViewModel.Factory>().Invoke(DataContext, this, _dataType)) 
-                           })
-                           .ToArray());
-            }
-            else if (tag == "GUI")
+            if (tag == "GUI")
             {
                 return ViewModelFactory.CreateViewModel<CustomPropertyGroupViewModel.Factory>()
                     .Invoke(
@@ -102,8 +89,15 @@ namespace Zetbox.Client.Presentables
                                     this,
                                     tag,
                                     new[] {
-                                        ViewModelFactory.CreateViewModel<GroupBoxViewModel.Factory>().Invoke(DataContext, this, "Settings", lst.GetWithKeys().Where(kv => !kv.Key.StartsWith("Show")).Select(kv => kv.Value)),
-                                        ViewModelFactory.CreateViewModel<GroupBoxViewModel.Factory>().Invoke(DataContext, this, "Display", lst.GetWithKeys().Where(kv => kv.Key.StartsWith("Show")).Select(kv => kv.Value)),
+                                        ViewModelFactory.CreateViewModel<GroupBoxViewModel.Factory>().Invoke(DataContext, this, "Settings", 
+                                            lst.GetWithKeys().Where(kv => !kv.Key.StartsWith("Show"))
+                                                .Select(kv => kv.Value)),
+                                        ViewModelFactory.CreateViewModel<GroupBoxViewModel.Factory>().Invoke(DataContext, this, "List", 
+                                            lst.GetWithKeys().Where(kv => kv.Key.StartsWith("Show"))
+                                                .Select(kv => kv.Value)
+                                                .Concat(new[] { 
+                                                    ViewModelFactory.CreateViewModel<LabeledViewContainerViewModel.Factory>().Invoke(DataContext, this, "Preview", "", ViewModelFactory.CreateViewModel<PropertiesPrewiewViewModel.Factory>().Invoke(DataContext, this, _dataType)) 
+                                                })),
                                     })
                         });
             }

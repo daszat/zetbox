@@ -27,3 +27,8 @@ VersionInfo.Designer.cs
 
 /publish/*.nupkg
 
+/.vs/Zetbox.Complete.sqlite
+/.vs/config/applicationhost.config
+/TestResults/Zetbox.Complete.TE.Tests.mdf
+/TestResults/Zetbox.Complete.TE.Tests_log.ldf
+/UpgradeLog.htm

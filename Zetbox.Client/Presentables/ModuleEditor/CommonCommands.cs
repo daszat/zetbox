@@ -43,7 +43,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
 
         public override bool CanExecute(object data)
         {
-            return true;
+            return !DataContext.IsDisposed;
         }
 
         protected override void DoExecute(object data)
