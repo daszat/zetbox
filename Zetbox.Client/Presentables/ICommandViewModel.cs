@@ -403,7 +403,9 @@ namespace Zetbox.Client.Presentables
 
         public override bool CanExecute(object data)
         {
+            if (DataContext.IsDisposed) return false;
             if (canExecute == null) return true;
+
             var canExec = canExecute();
             if (getReason != null)
             {
@@ -435,7 +437,9 @@ namespace Zetbox.Client.Presentables
 
         public override bool CanExecute(object data)
         {
+            if (DataContext.IsDisposed) return false;
             if (canExecute == null) return true;
+
             if (data is T)
             {
                 return canExecute((T)data);
@@ -471,6 +475,8 @@ namespace Zetbox.Client.Presentables
 
         public override bool CanExecute(object data)
         {
+            if (DataContext.IsDisposed) return false;
+
             if (data is IEnumerable<T>)
             {
                 return ((IEnumerable<T>)data).Count() > 0;
@@ -549,7 +555,7 @@ namespace Zetbox.Client.Presentables
 
         public override bool CanExecute(object data)
         {
-            return true;
+            return !DataContext.IsDisposed;
         }
 
         protected override void DoExecute(object data)

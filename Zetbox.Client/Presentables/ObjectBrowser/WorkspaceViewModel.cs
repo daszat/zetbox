@@ -273,7 +273,9 @@ namespace Zetbox.Client.Presentables.ObjectBrowser
 
             public override bool CanExecute(object data)
             {
-                var result =  CurrentPrincipal.IsAdministrator();
+                if (DataContext.IsDisposed) return false;
+
+                var result = CurrentPrincipal.IsAdministrator();
                 if(!result)
                 {
                     this.Reason = "Only a Administrator may start the debugger";

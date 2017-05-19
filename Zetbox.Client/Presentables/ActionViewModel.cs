@@ -98,6 +98,8 @@ namespace Zetbox.Client.Presentables
         private static Dictionary<Tuple<Type, string>, Func<object, string>> _canExecReasonCache = new Dictionary<Tuple<Type, string>, Func<object, string>>();
         public override bool CanExecute(object data)
         {
+            if (DataContext.IsDisposed) return false;
+
             Func<object, bool> canExec;
             var key = new Tuple<Type, string>(Object.GetType(), Method.Name);
             if (!_canExecCache.TryGetValue(key, out canExec))
