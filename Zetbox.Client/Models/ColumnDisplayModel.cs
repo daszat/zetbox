@@ -210,17 +210,44 @@ namespace Zetbox.Client.Models
             var propsPath = new StringBuilder("it");
             var lastProp = props.Last();
             var standInValue = GetStandInValue(lastProp);
+            var containsList = false;
             foreach (var p in props.Take(props.Count - 1))
             {
                 propsPath.Append('.').Append(p.Name);
-                result.Append(propsPath).Append("==null?").Append(standInValue).Append(":");
-            }
-            propsPath.Append('.').Append(lastProp.Name);
-            result.Append(propsPath);
 
-            if (lastProp is ObjectReferenceProperty)
+                if (p.GetIsList())
+                {
+                    result.Append(propsPath).Append("==null?0:").Append(propsPath);
+                    containsList = true;
+                    break; // can't sort lists
+                }
+                else
+                {
+                    result.Append(propsPath).Append("==null?").Append(standInValue).Append(":");
+                }
+            }
+
+            if (!containsList && !lastProp.GetIsList())
             {
-                result.Append("!=null?").Append(propsPath).Append(".ID:-1");
+                // No lists on prop path
+                propsPath.Append('.').Append(lastProp.Name);
+                result.Append(propsPath);
+
+                if (lastProp is ObjectReferenceProperty)
+                {
+                    result.Append("!=null?").Append(propsPath).Append(".ID:-1");
+                }
+            }
+            else if(result.Length == 0)
+            {
+                // it's a list
+                propsPath.Append('.').Append(lastProp.Name);
+                result.Append(propsPath).Append(".Count()");
+            }
+            else
+            {
+                // it's a list on a path or the ref. property has a sort priority
+                result.Append(".Count()");
             }
 
             return result.ToString();
