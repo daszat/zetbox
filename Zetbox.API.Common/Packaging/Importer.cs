@@ -153,14 +153,18 @@ namespace Zetbox.App.Packaging
         /// <param name="doSubmit">A callback which should submit changes during module deletion. On the server side, it's recommended to call SubmitRestore().</param>
         public static void DeleteModule(Func<IZetboxContext> ctx, string module, Action<IZetboxContext> doSubmit)
         {
+            if (ctx == null) throw new ArgumentNullException("ctx");
+            if (string.IsNullOrWhiteSpace(module)) throw new ArgumentNullException("module");
+            if (doSubmit == null) throw new ArgumentNullException("doSubmit");
+
             var schemaList = PackagingHelper.GetModules(ctx(), new[] { module });
             if (schemaList.Count == 0)
             {
-                throw new ArgumentException("module", string.Format("Module \"{0}\" not found.", module));
+                throw new ArgumentException(string.Format("Module \"{0}\" not found.", module), "module");
             }
             else if (schemaList.Count > 1)
             {
-                throw new ArgumentException("module", string.Format("Can't use wildcards. Please delete only one module."));
+                throw new ArgumentException("Can't use wildcards. Please delete only one module.", "module");
             }
 
             int moduleID = schemaList.Single().ID;
