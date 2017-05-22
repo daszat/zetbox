@@ -120,6 +120,14 @@ namespace Zetbox.API.Server
                 });
 
             builder
+                .RegisterCmdLineAction("deletemodule=", "delete the specified module from the database. Use updatedeployedschema to apply schema changes.",
+                (scope, arg) =>
+                {
+                    var config = scope.Resolve<ZetboxConfig>();
+                    scope.Resolve<IServer>().DeleteModule(arg);
+                });
+
+            builder
                 .RegisterCmdLineAction("checkdeployedschema", "checks the sql schema against the deployed schema",
                 scope =>
                 {

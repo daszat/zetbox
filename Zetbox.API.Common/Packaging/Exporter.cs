@@ -62,7 +62,7 @@ namespace Zetbox.App.Packaging
             {
                 Log.InfoFormat("Starting Publish for Modules {0}", string.Join(", ", ownerModules));
                 Log.Debug("Loading modulelist");
-                var moduleList = GetModules(ctx, ownerModules);
+                var moduleList = PackagingHelper.GetModules(ctx, ownerModules);
                 WriteStartDocument(s, ctx, new Zetbox.App.Base.Module[] 
                         { 
                             ctx.GetQuery<Zetbox.App.Base.Module>().First(m => m.Name == "ZetboxBase"),
@@ -142,7 +142,7 @@ namespace Zetbox.App.Packaging
 
                 var allData = ownerModules.Contains("*");
 
-                var schemaList = GetModules(ctx, schemaModules);
+                var schemaList = PackagingHelper.GetModules(ctx, schemaModules);
                 var schemaNamespaces = schemaList.Select(m => m.Namespace).ToArray();
 
                 WriteStartDocument(s, ctx, schemaList);
@@ -407,29 +407,6 @@ namespace Zetbox.App.Packaging
             }
 
             writer.WriteAttributeString("date", XmlConvert.ToString(DateTime.Now, XmlDateTimeSerializationMode.Utc));
-        }
-
-        private static List<Zetbox.App.Base.Module> GetModules(IReadOnlyZetboxContext ctx, string[] moduleNames)
-        {
-            var moduleList = new List<Zetbox.App.Base.Module>();
-            if (moduleNames.Contains("*"))
-            {
-                moduleList.AddRange(ctx.GetQuery<Zetbox.App.Base.Module>());
-            }
-            else
-            {
-                foreach (var name in moduleNames)
-                {
-                    var module = ctx.GetQuery<Zetbox.App.Base.Module>().Where(m => m.Name == name).FirstOrDefault();
-                    if (module == null)
-                    {
-                        Log.WarnFormat("Module {0} not found, skipping entry", name);
-                        continue;
-                    }
-                    moduleList.Add(module);
-                }
-            }
-            return moduleList.OrderBy(m => m.Name).ToList();
         }
         #endregion
     }
