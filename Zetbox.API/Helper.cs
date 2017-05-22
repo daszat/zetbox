@@ -966,6 +966,38 @@ namespace Zetbox.API
             remove.Invoke(col, new object[] { val });
         }
 
+        /// <summary>
+        /// Clears a collection.
+        /// </summary>
+        /// <param name="obj">Object holding the collection</param>
+        /// <param name="propName">Propertyname of the collection</param>
+        public static void ClearCollection(this object obj, string propName)
+        {
+            if (obj == null) { throw new ArgumentNullException("obj"); }
+
+            PropertyInfo pi = obj.GetType().GetProperty(propName);
+            if (pi == null) throw new ArgumentOutOfRangeException("propName", string.Format("Property {0} was not found in Type {1}", propName, obj.GetType().FullName));
+
+            Type collectionType = obj.GetPropertyType(propName);
+            object collection = pi.GetValue(obj, null);
+            if (collection == null) throw new ArgumentException("Collection cannot be null");
+
+            MethodInfo clear = collectionType.FindMethod("Clear", null);
+            if (clear == null) throw new ArgumentException("Cound not find \"Clear\" method of the given Collection");
+            clear.Invoke(collection, new object[] { });
+        }
+
+        public static void Clear(this ICollection col)
+        {
+            if (col == null) throw new ArgumentNullException("col");
+
+            Type collectionType = col.GetType();
+
+            MethodInfo clear = collectionType.FindMethod("Clear", null);
+            if (clear == null) throw new ArgumentException("Cound not find \"Remove\" method of the given Collection");
+            clear.Invoke(col, new object[] { });
+        }
+
 
         /// <summary>
         /// Calls a public method on the given object. Uses Reflection.
