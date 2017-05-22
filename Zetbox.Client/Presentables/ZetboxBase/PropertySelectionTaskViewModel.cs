@@ -387,7 +387,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                         if ((Parent.FollowRelationsOne && !objRefProp.GetIsList())
                          || (Parent.FollowRelationsMany && Parent.FollowRelationsManyDeep && objRefProp.GetIsList()))
                         {
-                            foreach (var prop in objRefProp.GetReferencedObjectClass().Properties)
+                            foreach (var prop in objRefProp.GetReferencedObjectClass().GetAllProperties())
                             {
                                 _PossibleValues.Add(ViewModelFactory.CreateViewModel<SelectedPropertyViewModel.Factory>().Invoke(DataContext, Parent, prop, this));
                             }
