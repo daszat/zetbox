@@ -121,7 +121,7 @@
     <value>Der Zugriff auf diesem Datensatz wurde verweigert</value>
   </data>
   <data name="ErrorInvalidProperties" xml:space="preserve">
-    <value>Der Datensatz enthält einige ungültige Werte</value>
+    <value>Bitte kontrollieren Sie Ihre Eingaben.</value>
   </data>
   <data name="MergeCommand_Name" xml:space="preserve">
     <value>Zusammenführen</value>
