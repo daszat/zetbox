@@ -405,8 +405,10 @@ namespace PrepareEnv
             if (!string.IsNullOrEmpty(envConfig.BinaryTarget))
             {
                 var configTargetDir = Path.Combine(envConfig.BinaryTarget, "Configs");
+                LogDetail("copy folder");
                 // copy all configs
                 CopyFolder(envConfig.ConfigSource, configTargetDir);
+                LogDetail("deploy configs");
                 // find all app.configs
                 DeployConfigs(configTargetDir, envConfig.BinaryTarget);
             }
@@ -420,6 +422,8 @@ namespace PrepareEnv
             foreach (var appConfigFile in Directory.GetFiles(configSourceDir, "*.config"))
             {
                 var targetAssemblyFile = Path.GetFileNameWithoutExtension(appConfigFile);
+                EnforceBindingRedirects(appConfigFile, assemblyTargetDir);
+
                 if (targetAssemblyFile.EndsWith(".Web", StringComparison.InvariantCultureIgnoreCase))
                 {
                     var wwwRootName = targetAssemblyFile.Substring(0, targetAssemblyFile.Length - 4);
@@ -440,6 +444,44 @@ namespace PrepareEnv
                     }
                 }
             }
+        }
+
+        private static void EnforceBindingRedirects(string configPath, string assemblyTargetDir)
+        {
+            LogDetail("enforcing binding redirects for {0}", configPath);
+
+            var doc = new XmlDocument();
+            doc.Load(configPath);
+
+            XmlNamespaceManager nsmgr = new XmlNamespaceManager(doc.NameTable);
+            nsmgr.AddNamespace("ab", "urn:schemas-microsoft-com:asm.v1");
+
+            var dependentAssemblies = doc.SelectNodes("/configuration/runtime/ab:assemblyBinding/ab:dependentAssembly", nsmgr);
+            foreach (XmlElement dependentAssembly in dependentAssemblies)
+            {
+                var redirect = dependentAssembly.SelectSingleNode("ab:bindingRedirect", nsmgr);
+                var assemblyIdentity = dependentAssembly.SelectSingleNode("ab:assemblyIdentity", nsmgr);
+                if (redirect != null && assemblyIdentity != null)
+                {
+                    var name = assemblyIdentity.Attributes["name"].Value;
+                    var files = FindFiles(name + ".dll", assemblyTargetDir);
+
+                    if (files.Any())
+                    {
+                        var a = Assembly.LoadFile(Path.GetFullPath(files.FirstOrDefault()));
+                        var newVersion = a.GetName().Version.ToString();
+                        LogDetail("{0} => {1}", name, newVersion);
+                        redirect.Attributes["oldVersion"].Value = "0.0.0.0-" + newVersion;
+                        redirect.Attributes["newVersion"].Value = newVersion;
+                    }
+                    else 
+                    {
+                        LogDetail("File {0} not found", name);
+                    }
+                }
+            }
+
+            doc.Save(configPath);
         }
 
         /// <summary>
