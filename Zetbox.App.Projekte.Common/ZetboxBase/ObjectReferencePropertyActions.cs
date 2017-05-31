@@ -58,7 +58,7 @@ namespace Zetbox.App.Base
         public static void GetPropertyTypeString(ObjectReferenceProperty obj, MethodReturnEventArgs<string> e)
         {
             GetElementTypeString(obj, e);
-            if (obj.RelationEnd != null)
+            if (obj.RelationEnd != null && obj.RelationEnd.Parent != null)
             {
                 PropertyActions.DecorateParameterType(obj, e, false, obj.GetIsList(), obj.RelationEnd.Parent.GetOtherEnd(obj.RelationEnd).HasPersistentOrder);
             }
@@ -70,9 +70,15 @@ namespace Zetbox.App.Base
             if (prop == null) { throw new ArgumentNullException("prop"); }
             RelationEnd relEnd = prop.RelationEnd;
             Relation rel = relEnd.GetParent();
-            RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
-
-            e.Result = otherEnd.Multiplicity.UpperBound() > 1;
+            if (rel != null)
+            {
+                RelationEnd otherEnd = rel.GetOtherEnd(relEnd);
+                e.Result = otherEnd.Multiplicity.UpperBound() > 1;
+            }
+            else
+            {
+                e.Result = false;
+            }
         }
 
         [Invocation]

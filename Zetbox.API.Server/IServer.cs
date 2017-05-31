@@ -29,6 +29,7 @@ namespace Zetbox.API.Server
         void Export(string file, string[] schemaModules, string[] ownerModules);
         void Import(params string[] files);
         void Publish(string file, string[] ownerModules);
+        void DeleteModule(string module);
         void RunBenchmarks();
         void RunFixes();
         void SyncIdentities(string source);

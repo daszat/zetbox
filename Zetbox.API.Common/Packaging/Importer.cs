@@ -16,6 +16,7 @@
 namespace Zetbox.App.Packaging
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
@@ -23,14 +24,14 @@ namespace Zetbox.App.Packaging
     using System.Text;
     using System.Xml;
     using System.Xml.XPath;
-
     using Zetbox.API;
     using Zetbox.API.Utils;
     using Zetbox.App.Base;
+    using Zetbox.App.GUI;
 
     public class Importer
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger(typeof(Importer));
+        private readonly static log4net.ILog Log = Logging.Exporter;
 
         #region Public Methods
         public static void Deploy(IZetboxContext ctx, params string[] filenames)
@@ -127,7 +128,7 @@ namespace Zetbox.App.Packaging
                 foreach (var pairToDelete in objectsToDelete)
                 {
                     // Don't delete blobs, the blob garbage collector should delete them.
-                    if (pairToDelete.Value is Blob) continue; 
+                    if (pairToDelete.Value is Blob) continue;
 
                     ctx.Delete(pairToDelete.Value);
                 }
@@ -142,6 +143,113 @@ namespace Zetbox.App.Packaging
 
                 Log.Debug("Deployment finished");
             }
+        }
+
+        /// <summary>
+        /// Deletes the given module. Each type is deleted and commited to aviod cirular and komplex delete graphs. Therefore, the context factory is necessary.
+        /// </summary>
+        /// <param name="ctx">A context factory. On the server side, it's recommended to create a server context.</param>
+        /// <param name="module">The module to delete</param>
+        /// <param name="doSubmit">A callback which should submit changes during module deletion. On the server side, it's recommended to call SubmitRestore().</param>
+        public static void DeleteModule(Func<IZetboxContext> ctx, string module, Action<IZetboxContext> doSubmit)
+        {
+            if (ctx == null) throw new ArgumentNullException("ctx");
+            if (string.IsNullOrWhiteSpace(module)) throw new ArgumentNullException("module");
+            if (doSubmit == null) throw new ArgumentNullException("doSubmit");
+
+            var schemaList = PackagingHelper.GetModules(ctx(), new[] { module });
+            if (schemaList.Count == 0)
+            {
+                throw new ArgumentException(string.Format("Module \"{0}\" not found.", module), "module");
+            }
+            else if (schemaList.Count > 1)
+            {
+                throw new ArgumentException("Can't use wildcards. Please delete only one module.", "module");
+            }
+
+            int moduleID = schemaList.Single().ID;
+
+            Delete<Application>(ctx(), doSubmit, c => c.GetQuery<Application>().Where(i => i.Module.ID == moduleID));
+            Delete<NavigationScreen_accessed_by_Groups_RelationEntry>(ctx(), doSubmit, c => c.Internals().GetPersistenceObjectQuery<NavigationScreen_accessed_by_Groups_RelationEntry>().Where(i => i.A.Module.ID == moduleID));
+            while(Delete<NavigationEntry>(ctx(), doSubmit, c => c.GetQuery<NavigationEntry>().Where(i => i.Module.ID == moduleID).Where(i => i.Children.Count == 0)) > 0);
+
+            // Security
+            Delete<Group>(ctx(), doSubmit, c => c.GetQuery<Group>().Where(i => i.Module.ID == moduleID));
+            Delete<GroupMembership>(ctx(), doSubmit, c => c.GetQuery<GroupMembership>().Where(i => i.Module.ID == moduleID));
+
+            // Security
+            Delete<RoleMembership_resolves_Relations_RelationEntry>(ctx(), doSubmit, c => c.Internals().GetPersistenceObjectQuery<RoleMembership_resolves_Relations_RelationEntry>().Where(i => i.A.Module.ID == moduleID));
+            Delete<RoleMembership>(ctx(), doSubmit, c => c.GetQuery<RoleMembership>().Where(i => i.Module.ID == moduleID));
+
+            Delete<FilterConfiguration>(ctx(), doSubmit, c => c.GetQuery<FilterConfiguration>().Where(i => i.Module.ID == moduleID));
+
+            // Relations
+            Delete<Relation>(ctx(), doSubmit, c => c.GetQuery<Relation>().Where(i => i.Module.ID == moduleID), obj => { obj.Context.Delete(obj.A); obj.Context.Delete(obj.B); });
+
+            // TODO: Add Module to Constraint - or should that not be changable by other modules?
+            // All Property Contstraints
+            Delete<Zetbox.App.Base.Constraint>(ctx(), doSubmit, c => c.GetQuery<Zetbox.App.Base.Constraint>().Where(i => i.ConstrainedProperty.Module.ID == moduleID));
+
+            // InstanceContstraints and Property Relation entries of UniqueConstraints
+            Delete<InstanceConstraint>(ctx(), doSubmit, c => c.GetQuery<InstanceConstraint>().Where(i => i.Constrained.Module.ID == moduleID));
+            Delete<UniqueContraints_ensures_unique_on_Properties_RelationEntry>(ctx(), doSubmit, c => c.Internals().GetPersistenceObjectQuery<UniqueContraints_ensures_unique_on_Properties_RelationEntry>().Where(i => i.A.Constrained.Module.ID == moduleID || i.B.Module.ID == moduleID));
+
+            // TODO: Add Module to DefaultPropertyValue - or should that not be changable by other modules?
+            Delete<DefaultPropertyValue>(ctx(), doSubmit, c => c.GetQuery<DefaultPropertyValue>().Where(i => i.Property.Module.ID == moduleID));
+
+            // Properties <-> Methods
+            Delete<ObjRefProp_shows_Methods_RelationEntry>(ctx(), doSubmit, c => c.Internals().GetPersistenceObjectQuery<ObjRefProp_shows_Methods_RelationEntry>().Where(i => i.A.Module.ID == moduleID || i.B.Module.ID == moduleID));
+
+            Delete<Property>(ctx(), doSubmit, c => c.GetQuery<Property>().Where(i => i.Module.ID == moduleID));
+
+            Delete<BaseParameter>(ctx(), doSubmit, c => c.GetQuery<BaseParameter>().Where(i => i.Method.Module.ID == moduleID));
+            Delete<Method>(ctx(), doSubmit, c => c.GetQuery<Method>().Where(i => i.Module.ID == moduleID));
+
+            // export only relation entry ending on a "local" class. Since we do not have proper inter-module dependencies in place, we cannot support pushing interface implementations across modules.
+            Delete<DataType_implements_ImplementedInterfaces_RelationEntry>(ctx(), doSubmit, c => c.Internals().GetPersistenceObjectQuery<DataType_implements_ImplementedInterfaces_RelationEntry>()
+                // Workaround for missing Module relation on DataType_implements_Interface_RelationEntry when creating ZetboxBase.xml
+                .Where(i => i.A != null && i.A.Module != null && i.B != null)
+                .Where(i => i.A.Module.ID == moduleID));
+            Delete<EnumerationEntry>(ctx(), doSubmit, c => c.GetQuery<EnumerationEntry>().Where(i => i.Enumeration.Module.ID == moduleID));
+            while(Delete<ObjectClass>(ctx(), doSubmit, c => c.GetQuery<ObjectClass>().Where(i => i.Module.ID == moduleID).Where(i => i.SubClasses.Count == 0)) > 0);
+            Delete<DataType>(ctx(), doSubmit, c => c.GetQuery<DataType>().Where(i => i.Module.ID == moduleID), obj => { obj.ImplementsInterfaces.Clear(); });
+
+            // Sequences
+            Delete<Sequence>(ctx(), doSubmit, c => c.GetQuery<Sequence>().Where(i => i.Module.ID == moduleID));
+
+            var localCtx = ctx();
+            var icons = localCtx.GetQuery<Icon>().Where(i => i.Module.ID == moduleID).ToList();
+            Delete<Icon>(localCtx, doSubmit, c => icons.Select(i => i.Blob));
+            Delete<Icon>(localCtx, doSubmit, c => icons);
+
+            Delete<ViewModelDescriptor>(ctx(), doSubmit, c => c.GetQuery<ViewModelDescriptor>().Where(i => i.Module.ID == moduleID));
+            Delete<ViewDescriptor>(ctx(), doSubmit, c => c.GetQuery<ViewDescriptor>().Where(i => i.Module.ID == moduleID));
+
+            Delete<ControlKind>(ctx(), doSubmit, c => c.GetQuery<ControlKind>().Where(i => i.Module.ID == moduleID));
+            Delete<Presentable_displayedBy_SecondaryControlKinds_RelationEntry>(ctx(), doSubmit, c => c.Internals().GetPersistenceObjectQuery<Presentable_displayedBy_SecondaryControlKinds_RelationEntry>().Where(i => i.A.Module.ID == moduleID));
+
+            Delete<Assembly>(ctx(), doSubmit, c => c.GetQuery<Assembly>().Where(i => i.Module.ID == moduleID));
+
+            // Finally
+            Delete<Module>(ctx(), doSubmit, c => c.GetQuery<Module>().Where(i => i.ID == moduleID));
+        }
+
+        private static int Delete<T>(IZetboxContext ctx, Action<IZetboxContext> doSubmit, Func<IZetboxContext, IEnumerable> lst, Action<T> preDelete = null)
+        {
+            int counter = 0;
+            foreach (IPersistenceObject obj in lst(ctx))
+            {
+                if (preDelete != null)
+                {
+                    preDelete((T)obj);
+                }
+                ctx.Delete(obj);
+                counter++;
+            }
+
+            doSubmit(ctx);
+
+            return counter;
         }
 
         /// <summary>

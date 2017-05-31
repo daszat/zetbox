@@ -144,6 +144,15 @@ namespace Zetbox.Server
             }
         }
 
+        public void DeleteModule(string module)
+        {
+            using (Log.InfoTraceMethodCallFormat("DeleteModule", "Module=[{0}]", module))
+            using (var subContainer = container.BeginLifetimeScope())
+            {
+                Importer.DeleteModule(() => subContainer.Resolve<IZetboxServerContext>(), module, (ctx) => ((IZetboxServerContext)ctx).SubmitRestore());
+            }
+        }
+
         public void CheckSchemaFromCurrentMetaData(bool withRepair)
         {
             using (Log.InfoTraceMethodCallFormat("CheckSchemaFromCurrentMetaData", "withRepair=[{0}]", withRepair))

@@ -35,6 +35,8 @@ namespace Zetbox.App.Packaging
 
     internal static class PackagingHelper
     {
+        private readonly static log4net.ILog Log = Logging.Exporter;
+
         public static List<IPersistenceObject> GetSchemaObjects(IZetboxContext ctx, Module module)
         {
             var result = new List<IPersistenceObject>();
@@ -174,6 +176,30 @@ namespace Zetbox.App.Packaging
                 return result;
             }
         }
+
+        public static List<Zetbox.App.Base.Module> GetModules(IReadOnlyZetboxContext ctx, string[] moduleNames)
+        {
+            var moduleList = new List<Zetbox.App.Base.Module>();
+            if (moduleNames.Contains("*"))
+            {
+                moduleList.AddRange(ctx.GetQuery<Zetbox.App.Base.Module>());
+            }
+            else
+            {
+                foreach (var name in moduleNames)
+                {
+                    var module = ctx.GetQuery<Zetbox.App.Base.Module>().Where(m => m.Name == name).FirstOrDefault();
+                    if (module == null)
+                    {
+                        Log.WarnFormat("Module {0} not found, skipping entry", name);
+                        continue;
+                    }
+                    moduleList.Add(module);
+                }
+            }
+            return moduleList.OrderBy(m => m.Name).ToList();
+        }
+
 
         private static void AddMetaObjects<T>(List<IPersistenceObject> result, Func<IEnumerable<T>> objects)
             where T : IPersistenceObject

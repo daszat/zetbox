@@ -307,7 +307,9 @@ namespace Zetbox.API
                 {
                     if (_missingAssemblies.Contains(name)) return null; // shortcut
 
-                    AssemblyName assemblyName = new AssemblyName(name);
+                    // Strip off version, redirect to the first found version. This is hopefully the latest version.
+                    // In general it should not be the case, that one and the same assembly resists in twice, in different Versions, on different places.
+                    AssemblyName assemblyName = new AssemblyName(new AssemblyName(name).Name); 
                     string baseName = assemblyName.Name;
 
                     // Prevent loading twice, it doesn't help
@@ -384,10 +386,10 @@ namespace Zetbox.API
                     {
                         assemblyName.CodeBase = dllToLoad;
                         result = Assembly.Load(assemblyName);
-
-                        // If the assembly could not be loaded, do nothing! Return null. 
-                        // See http://forums.microsoft.com/MSDN/ShowPost.aspx?PostID=1109769&SiteID=1
                     }
+
+                    // If the assembly could not be loaded, do nothing! Return null. 
+                    // See http://forums.microsoft.com/MSDN/ShowPost.aspx?PostID=1109769&SiteID=1
                     if (result == null)
                         Log.WarnFormat("Cannot load {0}", baseName);
                     return result;
