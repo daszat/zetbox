@@ -109,7 +109,8 @@ namespace Zetbox.DalProvider.Base.RelationWrappers
         protected virtual void OnEntryRemoved(TEntry entry)
         {
             NotifyOwner();
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, entry.Value));
+            // #13: NotifyCollectionChangedAction.Remove is failing
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset)); //, entry.Value));
         }
 
         #endregion

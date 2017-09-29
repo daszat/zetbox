@@ -331,8 +331,7 @@ namespace Zetbox.DalProvider.Base.RelationWrappers
         {
             NotifyOwnerChanged();
 
-            if (_CollectionChanged != null)
-                _CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, newItem, index));
+            _CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, newItem, index));
 
             // newItem.PropertyChanged += item_PropertyChanged;
         }
@@ -341,8 +340,8 @@ namespace Zetbox.DalProvider.Base.RelationWrappers
         {
             NotifyOwnerChanged();
 
-            if (_CollectionChanged != null)
-                _CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, removedItem, index));
+            // #13: NotifyCollectionChangedAction.Remove is failing
+            _CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset)); //, removedItem, index));
 
             //removedItem.PropertyChanged -= item_PropertyChanged;
         }
@@ -351,8 +350,7 @@ namespace Zetbox.DalProvider.Base.RelationWrappers
         {
             NotifyOwnerChanged();
 
-            if (_CollectionChanged != null)
-                _CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            _CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
 
         protected virtual void OnCollectionResetting()
