@@ -9,7 +9,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.Generator.Templates.ObjectClasses
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst")]
     public partial class OnPropertyChange : Zetbox.Generator.ResourceTemplate
     {
 		protected IZetboxContext ctx;
@@ -33,18 +33,18 @@ namespace Zetbox.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 30 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
+#line 30 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
 var recalcProps = GetRecalcProperties();                                                                         
-#line 31 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
+#line 31 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
 var auditProps = GetAuditProperties();                                                                           
-#line 32 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
+#line 32 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
 var nonModProps = GetNonModifyingProperties();                                                                   
-#line 33 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
+#line 33 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
 this.WriteObjects("        #region ",  this.GetType() , "\r\n");
 this.WriteObjects("\r\n");
-#line 35 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
+#line 35 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
 if (auditProps.Count > 0 && !(dt is CompoundObject)) {                                                           
-#line 36 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
+#line 36 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
 this.WriteObjects("        protected override void OnPropertyChanged(string property, object oldValue, object newValue)\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            base.OnPropertyChanged(property, oldValue, newValue);\r\n");
@@ -52,71 +52,71 @@ this.WriteObjects("\r\n");
 this.WriteObjects("            // Do not audit calculated properties\r\n");
 this.WriteObjects("            switch (property)\r\n");
 this.WriteObjects("            {\r\n");
-#line 43 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
+#line 43 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
 foreach (var prop in auditProps ) {                                                                         
-#line 44 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
+#line 44 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
 this.WriteObjects("                case \"",  prop.Name , "\":\r\n");
-#line 45 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
+#line 45 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
 }                                                                                                           
-#line 46 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
+#line 46 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
 this.WriteObjects("                    AuditPropertyChange(property, oldValue, newValue);\r\n");
 this.WriteObjects("                    break;\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
-#line 50 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
+#line 50 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
 }                                                                                                                
-#line 51 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
+#line 51 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
 if (recalcProps.Count > 0 && !(dt is CompoundObject)) {                                                          
-#line 52 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
+#line 52 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        public override void Recalculate(string property)\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            switch (property)\r\n");
 this.WriteObjects("            {\r\n");
-#line 57 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
+#line 57 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
 foreach (var prop in recalcProps) {                                                                         
-#line 58 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
+#line 58 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
 this.WriteObjects("                case \"",  prop.Name , "\":\r\n");
-#line 59 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
+#line 59 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
 ApplyNotifyPropertyChanging(prop);                                                                      
-#line 60 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
+#line 60 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
 this.WriteObjects("                    _",  prop.Name , "_IsDirty = true;\r\n");
-#line 61 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
+#line 61 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
 ApplyNotifyPropertyChanged(prop);                                                                       
-#line 62 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
+#line 62 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
 this.WriteObjects("                    return;\r\n");
-#line 63 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
+#line 63 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
 }                                                                                                           
-#line 64 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
+#line 64 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
 this.WriteObjects("            }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("            base.Recalculate(property);\r\n");
 this.WriteObjects("        }\r\n");
-#line 68 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
+#line 68 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
 }                                                                                                                
-#line 69 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
+#line 69 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
 if (nonModProps.Count > 0) {                                                                                     
-#line 70 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
+#line 70 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        protected override bool ShouldSetModified(string property)\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            switch (property)\r\n");
 this.WriteObjects("            {\r\n");
-#line 75 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
+#line 75 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
 foreach (var prop in nonModProps) {                                                                         
-#line 76 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
+#line 76 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
 this.WriteObjects("                case \"",  prop.Name , "\":\r\n");
-#line 77 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
+#line 77 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
 }                                                                                                           
-#line 78 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
+#line 78 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
 this.WriteObjects("                    return false;\r\n");
 this.WriteObjects("                default:\r\n");
 this.WriteObjects("                    return base.ShouldSetModified(property);\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
-#line 83 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
+#line 83 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
 }                                                                                                                
-#line 84 "P:\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
+#line 84 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\OnPropertyChange.cst"
 this.WriteObjects("        #endregion // ",  this.GetType() , "\r\n");
 
         }

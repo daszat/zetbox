@@ -12,7 +12,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst")]
     public partial class ModelMsl : Zetbox.Generator.ResourceTemplate
     {
 		protected IZetboxContext ctx;
@@ -34,28 +34,28 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
 
         public override void Generate()
         {
-#line 32 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 32 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 this.WriteObjects("<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n");
 this.WriteObjects("<Mapping Space=\"C-S\" xmlns=\"urn:schemas-microsoft-com:windows:storage:mapping:CS\">\r\n");
 this.WriteObjects("  <EntityContainerMapping StorageEntityContainer=\"dbo\" CdmEntityContainer=\"Entities\">\r\n");
 this.WriteObjects("    \r\n");
 this.WriteObjects("    <!-- EntitySetMappings for classes -->\r\n");
-#line 38 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 38 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 foreach(var cls in GetBaseClasses(ctx).OrderBy(c => c.Name))
     {
         var clsName = cls.Name;
 
-#line 42 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 42 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 this.WriteObjects("    <EntitySetMapping Name=\"",  clsName , "EfImpl\">\r\n");
-#line 43 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 43 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 ApplyEntityTypeMapping(cls); 
-#line 44 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 44 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 this.WriteObjects("    </EntitySetMapping>\r\n");
-#line 46 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 46 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 if (cls.NeedsRightsTable())
 		{
 
-#line 49 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 49 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 this.WriteObjects("    <EntitySetMapping Name=\"",  Construct.SecurityRulesClassName(cls) , "\">\r\n");
 this.WriteObjects("      <EntityTypeMapping TypeName=\"Model.",  Construct.SecurityRulesClassName(cls) , "\">\r\n");
 this.WriteObjects("        <MappingFragment StoreEntitySet=\"",  Construct.SecurityRulesClassName(cls) , "\">\r\n");
@@ -74,56 +74,56 @@ this.WriteObjects("        <ScalarProperty Name=\"ID\" ColumnName=\"ID\" />\r\n"
 this.WriteObjects("        <ScalarProperty Name=\"Identity\" ColumnName=\"Identity\" />\r\n");
 this.WriteObjects("      </EndProperty>\r\n");
 this.WriteObjects("    </AssociationSetMapping>\r\n");
-#line 68 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 68 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 }
     }
 
-#line 71 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 71 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    <!-- EntitySetMappings and AssociationSetMappings for object-object relations with a CollectionEntry -->\r\n");
-#line 75 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 75 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 foreach(var rel in GetRelationsWithSeparateStorage(ctx))
     {
         string fkAName = Construct.ForeignKeyColumnName(rel.A);
         string fkBName = Construct.ForeignKeyColumnName(rel.B);
 
-#line 80 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 80 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 this.WriteObjects("    <!--\r\n");
-#line 82 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 82 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 RelationDebugTemplate.Call(Host, ctx, rel);
 
-#line 84 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 84 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 this.WriteObjects("    -->\r\n");
 this.WriteObjects("    <EntitySetMapping Name=\"",  rel.GetRelationClassName() , "EfImpl\">\r\n");
 this.WriteObjects("      <EntityTypeMapping TypeName=\"Model.",  rel.GetRelationClassName() , "EfImpl\">\r\n");
 this.WriteObjects("        <MappingFragment StoreEntitySet=\"",  rel.GetRelationClassName() , "\">\r\n");
 this.WriteObjects("          <ScalarProperty Name=\"ID\" ColumnName=\"ID\" />\r\n");
-#line 90 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 90 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 if (rel.A.Type.ImplementsIExportable() && rel.B.Type.ImplementsIExportable())
 		{
 
-#line 93 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 93 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 this.WriteObjects("		  <ScalarProperty Name=\"ExportGuid\" ColumnName=\"ExportGuid\" />\r\n");
-#line 95 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 95 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 }
 		if (rel.NeedsPositionStorage(RelationEndRole.A))
 		{
 
-#line 99 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 99 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 this.WriteObjects("          <ScalarProperty Name=\"A",  Zetbox.API.Helper.PositionSuffix , "\" ColumnName=\"",  fkAName , "",  Zetbox.API.Helper.PositionSuffix , "\" />\r\n");
-#line 101 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 101 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 }
 
 		if (rel.NeedsPositionStorage(RelationEndRole.B))
 		{
 
-#line 106 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 106 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 this.WriteObjects("          <ScalarProperty Name=\"B",  Zetbox.API.Helper.PositionSuffix , "\" ColumnName=\"",  fkBName , "",  Zetbox.API.Helper.PositionSuffix , "\" />\r\n");
-#line 108 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 108 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 }
 
-#line 110 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 110 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 this.WriteObjects("        </MappingFragment>\r\n");
 this.WriteObjects("      </EntityTypeMapping>\r\n");
 this.WriteObjects("    </EntitySetMapping>\r\n");
@@ -152,15 +152,15 @@ this.WriteObjects("      </EndProperty>\r\n");
 this.WriteObjects("      <Condition ColumnName=\"",  fkBName , "\" IsNull=\"false\"/>\r\n");
 this.WriteObjects("    </AssociationSetMapping>\r\n");
 this.WriteObjects("\r\n");
-#line 139 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 139 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 }
     
 
-#line 142 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 142 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("    <!-- AssociationSetMappings for direct object-object relations without a CollectionEntry -->\r\n");
-#line 146 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 146 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 foreach(var rel in GetRelationsWithoutSeparateStorage(ctx))
     {
         RelationEnd principal, dependent;
@@ -179,12 +179,12 @@ foreach(var rel in GetRelationsWithoutSeparateStorage(ctx))
                 throw new NotImplementedException();
         }
 
-#line 164 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 164 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 this.WriteObjects("    <!--\r\n");
-#line 166 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 166 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 RelationDebugTemplate.Call(Host, ctx, rel);
 
-#line 168 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 168 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 this.WriteObjects("    -->\r\n");
 this.WriteObjects("    <AssociationSetMapping Name=\"",  rel.GetAssociationName() , "\"\r\n");
 this.WriteObjects("                           TypeName=\"Model.",  rel.GetAssociationName() , "\"\r\n");
@@ -197,14 +197,14 @@ this.WriteObjects("        <ScalarProperty Name=\"ID\" ColumnName=\"ID\"/>\r\n")
 this.WriteObjects("      </EndProperty>\r\n");
 this.WriteObjects("      <Condition ColumnName=\"",  Construct.ForeignKeyColumnName(principal) , "\" IsNull=\"false\"/>\r\n");
 this.WriteObjects("    </AssociationSetMapping>\r\n");
-#line 181 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 181 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 }
     
 
-#line 184 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 184 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("    <!-- EntitySetMappings and AssociationSetMappings for object-value CollectionEntrys -->\r\n");
-#line 187 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 187 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 foreach(var prop in GetValueTypeProperties(ctx)
         .Where(p => p.IsList && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
@@ -213,22 +213,22 @@ foreach(var prop in GetValueTypeProperties(ctx)
     { 
         var propClsName = prop.ObjectClass.Name;
 
-#line 195 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 195 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 this.WriteObjects("    <EntitySetMapping Name=\"",  prop.GetCollectionEntryClassName() , "EfImpl\">\r\n");
 this.WriteObjects("      <EntityTypeMapping TypeName=\"Model.",  prop.GetCollectionEntryClassName() , "EfImpl\">\r\n");
 this.WriteObjects("        <MappingFragment StoreEntitySet=\"",  prop.GetCollectionEntryClassName() , "\">\r\n");
 this.WriteObjects("          <ScalarProperty Name=\"ID\" ColumnName=\"ID\" />\r\n");
 this.WriteObjects("          <ScalarProperty Name=\"Value\" ColumnName=\"",  prop.Name , "\" />\r\n");
-#line 201 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 201 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 if (prop.HasPersistentOrder)
 		{
 
-#line 204 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 204 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 this.WriteObjects("          <ScalarProperty Name=\"B",  Zetbox.API.Helper.PositionSuffix , "\" ColumnName=\"BIndex\" />\r\n");
-#line 206 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 206 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 }
 
-#line 208 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 208 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 this.WriteObjects("        </MappingFragment>\r\n");
 this.WriteObjects("      </EntityTypeMapping>\r\n");
 this.WriteObjects("    </EntitySetMapping>\r\n");
@@ -243,14 +243,14 @@ this.WriteObjects("        <ScalarProperty Name=\"ID\" ColumnName=\"ID\"/>\r\n")
 this.WriteObjects("      </EndProperty>\r\n");
 this.WriteObjects("      <Condition ColumnName=\"",  Construct.ForeignKeyColumnName(prop)  , "\" IsNull=\"false\"/>\r\n");
 this.WriteObjects("    </AssociationSetMapping>\r\n");
-#line 223 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 223 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 }
     
 
-#line 226 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 226 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("    <!-- EntitySetMappings and AssociationSetMappings for object-struct CollectionEntrys -->\r\n");
-#line 229 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 229 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 foreach(var prop in GetCompoundObjectProperties(ctx)
         .Where(p => p.IsList) // && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
@@ -259,24 +259,24 @@ foreach(var prop in GetCompoundObjectProperties(ctx)
     { 
         var propClsName = prop.ObjectClass.Name;
 
-#line 237 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 237 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 this.WriteObjects("    <EntitySetMapping Name=\"",  prop.GetCollectionEntryClassName() , "EfImpl\">\r\n");
 this.WriteObjects("      <EntityTypeMapping TypeName=\"Model.",  prop.GetCollectionEntryClassName() , "EfImpl\">\r\n");
 this.WriteObjects("        <MappingFragment StoreEntitySet=\"",  prop.GetCollectionEntryClassName() , "\">\r\n");
 this.WriteObjects("          <ScalarProperty Name=\"ID\" ColumnName=\"ID\" />\r\n");
 this.WriteObjects("          ");
-#line 241 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 241 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 ModelMslEntityTypeMappingComplexProperty.Call(Host, ctx, prop, "Value", string.Empty); 
-#line 243 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 243 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 if (prop.HasPersistentOrder)
 		{
 
-#line 246 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 246 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 this.WriteObjects("          <ScalarProperty Name=\"Value",  Zetbox.API.Helper.PositionSuffix , "\" ColumnName=\"BIndex\" />\r\n");
-#line 248 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 248 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 }
 
-#line 250 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 250 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 this.WriteObjects("        </MappingFragment>\r\n");
 this.WriteObjects("      </EntityTypeMapping>\r\n");
 this.WriteObjects("    </EntitySetMapping>\r\n");
@@ -291,11 +291,11 @@ this.WriteObjects("        <ScalarProperty Name=\"ID\" ColumnName=\"ID\"/>\r\n")
 this.WriteObjects("      </EndProperty>\r\n");
 this.WriteObjects("      <Condition ColumnName=\"",  Construct.ForeignKeyColumnName(prop) , "\" IsNull=\"false\"/>\r\n");
 this.WriteObjects("    </AssociationSetMapping>\r\n");
-#line 265 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 265 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 }
     
 
-#line 268 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
+#line 268 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.msl.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("	<FunctionImportMapping FunctionImportName=\"GetContinuousSequenceNumber\" FunctionName=\"Model.Store.GetContinuousSequenceNumber\" />\r\n");
 this.WriteObjects("    <FunctionImportMapping FunctionImportName=\"GetSequenceNumber\" FunctionName=\"Model.Store.GetSequenceNumber\" />\r\n");

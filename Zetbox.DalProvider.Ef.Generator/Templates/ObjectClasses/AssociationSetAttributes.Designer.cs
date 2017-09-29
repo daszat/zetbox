@@ -13,7 +13,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst")]
     public partial class AssociationSetAttributes : Zetbox.Generator.ResourceTemplate
     {
 		protected IZetboxContext ctx;
@@ -35,7 +35,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 33 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
+#line 33 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
 this.WriteObjects("using System.Data.Metadata.Edm;\r\n");
 this.WriteObjects("using System.Data.Objects.DataClasses;\r\n");
 this.WriteObjects("using System.Xml;\r\n");
@@ -44,26 +44,26 @@ this.WriteObjects("\r\n");
 this.WriteObjects("using Zetbox.API;\r\n");
 this.WriteObjects("using Zetbox.DalProvider.Ef;\r\n");
 this.WriteObjects("\r\n");
-#line 42 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
+#line 42 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
 foreach (var rel in GetRelations(ctx).ToList().OrderBy(r => r.GetAssociationName()))
 	{
 
-#line 45 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
+#line 45 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("	/*\r\n");
-#line 48 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
+#line 48 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
 RelationDebugTemplate.Call(Host, ctx, rel);
 
-#line 50 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
+#line 50 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
 this.WriteObjects("	*/\r\n");
-#line 52 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
+#line 52 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
 switch (rel.Storage)
 		{
 			case StorageType.MergeIntoA:
 			case StorageType.MergeIntoB:
 			case StorageType.Replicate:
 
-#line 58 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
+#line 58 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("// basic association\r\n");
 this.WriteObjects("[assembly: EdmRelationship(\r\n");
@@ -72,11 +72,11 @@ this.WriteObjects("    \"",  rel.A.RoleName , "\", RelationshipMultiplicity.",  
 this.WriteObjects("    \"",  rel.B.RoleName , "\", RelationshipMultiplicity.",  rel.B.Multiplicity.ToCsdlRelationshipMultiplicity() , ", typeof(",  rel.B.Type.GetDataTypeString() + ImplementationSuffix , ")\r\n");
 this.WriteObjects("    )]\r\n");
 this.WriteObjects("\r\n");
-#line 67 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
+#line 67 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
 break;
 			case StorageType.Separate:
 
-#line 70 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
+#line 70 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("// The association from A to the CollectionEntry\r\n");
 this.WriteObjects("[assembly: EdmRelationship(\"Model\", \"",  rel.GetRelationAssociationName(RelationEndRole.A) , "\",\r\n");
@@ -88,7 +88,7 @@ this.WriteObjects("[assembly: EdmRelationship(\"Model\", \"",  rel.GetRelationAs
 this.WriteObjects("    \"",  rel.B.RoleName , "\", RelationshipMultiplicity.ZeroOrOne, typeof(",  rel.B.Type.GetDataTypeString() + ImplementationSuffix , "),\r\n");
 this.WriteObjects("    \"CollectionEntry\", RelationshipMultiplicity.Many, typeof(",  rel.GetRelationFullName() + ImplementationSuffix , ")\r\n");
 this.WriteObjects("    )]\r\n");
-#line 82 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
+#line 82 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
 break;
 			default:
 				throw new NotImplementedException(String.Format("Unknown StorageHint.{0} preference", rel.Storage));
@@ -96,9 +96,9 @@ break;
 	}
 
 
-#line 89 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
+#line 89 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
 this.WriteObjects("\r\n");
-#line 91 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
+#line 91 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
 foreach (var prop in GetValueTypeProperties(ctx)
 		.Where(p => p.IsList && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
@@ -106,7 +106,7 @@ foreach (var prop in GetValueTypeProperties(ctx)
 		.ThenBy(p => p.Name))
 	{
 
-#line 98 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
+#line 98 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("// object-value association\r\n");
 this.WriteObjects("[assembly: EdmRelationship(\r\n");
@@ -115,12 +115,12 @@ this.WriteObjects("    \"",  prop.ObjectClass.Name , "\", RelationshipMultiplici
 this.WriteObjects("    \"CollectionEntry\", RelationshipMultiplicity.Many, typeof(",  prop.GetCollectionEntryFullName() + ImplementationSuffix , ")\r\n");
 this.WriteObjects("    )]\r\n");
 this.WriteObjects("\r\n");
-#line 107 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
+#line 107 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
 }
 
-#line 109 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
+#line 109 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
 this.WriteObjects("\r\n");
-#line 111 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
+#line 111 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
 foreach (var prop in GetCompoundObjectProperties(ctx)
 		.Where(p => p.IsList) // && !p.IsCalculated)
         .Where(p => p.ObjectClass is ObjectClass)
@@ -128,7 +128,7 @@ foreach (var prop in GetCompoundObjectProperties(ctx)
 		.ThenBy(p => p.Name))
 	{
 
-#line 118 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
+#line 118 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("// object-struct association\r\n");
 this.WriteObjects("[assembly: EdmRelationship(\r\n");
@@ -137,19 +137,19 @@ this.WriteObjects("    \"",  prop.ObjectClass.Name , "\", RelationshipMultiplici
 this.WriteObjects("    \"CollectionEntry\", RelationshipMultiplicity.Many, typeof(",  prop.GetCollectionEntryFullName() + ImplementationSuffix , ")\r\n");
 this.WriteObjects("    )]\r\n");
 this.WriteObjects("\r\n");
-#line 127 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
+#line 127 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
 }
 
-#line 129 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
+#line 129 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
 this.WriteObjects("\r\n");
-#line 131 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
+#line 131 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
 foreach (var cls in GetObjectClasses(ctx).Where(c => c.BaseObjectClass == null)
 		.OrderBy(c => c.Name))
 	{
 		if (cls.NeedsRightsTable())
 		{
 
-#line 137 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
+#line 137 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
 this.WriteObjects("[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute(\"Model\", \"",  Construct.SecurityRulesFKName(cls) , "\", \r\n");
 this.WriteObjects("	\"",  cls.Name , "\", \r\n");
 this.WriteObjects("	global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, \r\n");
@@ -157,7 +157,7 @@ this.WriteObjects("	typeof(",  cls.Module.Namespace + "." + cls.Name + Implement
 this.WriteObjects("	\"",  Construct.SecurityRulesClassName(cls) , "\", \r\n");
 this.WriteObjects("	global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, \r\n");
 this.WriteObjects("	typeof(",  cls.Module.Namespace + "." + Construct.SecurityRulesClassName(cls) + ImplementationSuffix , "))]\r\n");
-#line 145 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
+#line 145 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\ObjectClasses\AssociationSetAttributes.cst"
 }
 	}
 

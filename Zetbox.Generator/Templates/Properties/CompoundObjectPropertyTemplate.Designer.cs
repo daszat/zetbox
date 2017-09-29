@@ -9,7 +9,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.Generator.Templates.Properties
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"C:\Projects\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst")]
     public partial class CompoundObjectPropertyTemplate : Zetbox.Generator.MemberTemplate
     {
 		protected IZetboxContext ctx;
@@ -47,12 +47,12 @@ namespace Zetbox.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 37 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 37 "C:\Projects\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("        // BEGIN ",  this.GetType() , "\r\n");
 this.WriteObjects("        // implement the user-visible interface\r\n");
-#line 39 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 39 "C:\Projects\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 DelegatingProperty.Call(Host, ctx, propName, coType, backingPropertyName, coImplementationType); 
-#line 40 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 40 "C:\Projects\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        /// <summary>backing store for ",  UglyXmlEncode(propName) , "</summary>\r\n");
 this.WriteObjects("        private ",  coImplementationType , " ",  backingStoreName , ";\r\n");
@@ -89,10 +89,10 @@ this.WriteObjects("                    if(IsAttached) UpdateChangedInfo = true;\
 this.WriteObjects("                }\r\n");
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
-#line 77 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 77 "C:\Projects\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 AddSerialization(serializationList, coType, propName, coImplementationType, backingPropertyName);
 
-#line 79 "P:\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
+#line 79 "C:\Projects\zetbox\Zetbox.Generator\Templates\Properties\CompoundObjectPropertyTemplate.cst"
 this.WriteObjects("        // END ",  this.GetType() , "");
 
         }
