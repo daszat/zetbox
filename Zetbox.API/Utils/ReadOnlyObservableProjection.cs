@@ -77,9 +77,11 @@ namespace Zetbox.API.Utils
                         e.OldStartingIndex));
                     break;
                 case NotifyCollectionChangedAction.Remove:
-                    OnCollectionChanged(new NotifyCollectionChangedEventArgs(e.Action,
-                        e.OldItems.Cast<TInput>().Select(this.Selector).ToList(),
-                        e.OldStartingIndex));
+                    // #13: NotifyCollectionChangedAction.Remove is failing
+                    OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+                    //OnCollectionChanged(new NotifyCollectionChangedEventArgs(e.Action,
+                    //    e.OldItems.Cast<TInput>().Select(this.Selector).ToList(),
+                    //    e.OldStartingIndex));
                     break;
                 case NotifyCollectionChangedAction.Replace:
                     OnCollectionChanged(new NotifyCollectionChangedEventArgs(e.Action,

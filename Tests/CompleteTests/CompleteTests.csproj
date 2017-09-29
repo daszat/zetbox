@@ -133,16 +133,7 @@
   </Target>
   <PropertyGroup>
     <PostBuildEvent>
-echo *******************************************************************
-echo **** Read gendarme-powershell-policy.txt if this does not run! ****
-echo *******************************************************************
-cd "$(SolutionDir)"
-echo powershell -command ".\gendarmeXML.ps1"
-powershell -command ".\gendarmeXML.ps1"
-type "bin\gendarme.txt"
-
 IF EXIST ".\bin\CodeGen\bin\" (.\bin\debug\PrepareEnv.exe .\bin\Debug\Tests\)
-
 </PostBuildEvent>
   </PropertyGroup>
 </Project>

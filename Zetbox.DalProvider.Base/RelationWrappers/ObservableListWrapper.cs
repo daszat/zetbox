@@ -45,7 +45,8 @@ namespace Zetbox.DalProvider.Base.RelationWrappers
         {
             entry.Context.Delete(entry);
             base.OnEntryRemoved(entry);
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, ItemFromEntry(entry)));
+            // #13: NotifyCollectionChangedAction.Remove is failing
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset)); //, ItemFromEntry(entry)));
         }
 
         #region INotifyCollectionChanged Members
@@ -85,7 +86,8 @@ namespace Zetbox.DalProvider.Base.RelationWrappers
         {
             entry.Context.Delete(entry);
             base.OnEntryRemoved(entry);
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, ItemFromEntry(entry)));
+            // #13: NotifyCollectionChangedAction.Remove is failing
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset)); //, ItemFromEntry(entry)));
         }
 
         #region INotifyCollectionChanged Members

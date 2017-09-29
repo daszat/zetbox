@@ -8,7 +8,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.Generator.Templates.Properties
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\zetbox\Zetbox.Generator\Templates\Properties\ListProperty.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"C:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ListProperty.cst")]
     public partial class ListProperty : Zetbox.Generator.MemberTemplate
     {
 		protected IZetboxContext ctx;
@@ -38,12 +38,12 @@ namespace Zetbox.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 33 "P:\zetbox\Zetbox.Generator\Templates\Properties\ListProperty.cst"
+#line 33 "C:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ListProperty.cst"
 ApplyAttributesTemplate();
 
 	var backingName = BackingMemberFromName(name);
 
-#line 37 "P:\zetbox\Zetbox.Generator\Templates\Properties\ListProperty.cst"
+#line 37 "C:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ListProperty.cst"
 this.WriteObjects("   		// ",  this.GetType() , "\r\n");
 this.WriteObjects("        ",  GetModifiers() , " ",  GetPropertyTypeString() , " ",  name , "\r\n");
 this.WriteObjects("        {\r\n");
@@ -53,13 +53,13 @@ this.WriteObjects("                if (",  backingName , " == null)\r\n");
 this.WriteObjects("                    ",  backingName , " = ",  GetInitialisationExpression() , ";\r\n");
 this.WriteObjects("                return ",  backingName , ";\r\n");
 this.WriteObjects("            }\r\n");
-#line 47 "P:\zetbox\Zetbox.Generator\Templates\Properties\ListProperty.cst"
+#line 47 "C:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ListProperty.cst"
 ApplySettor();
 
-#line 49 "P:\zetbox\Zetbox.Generator\Templates\Properties\ListProperty.cst"
+#line 49 "C:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ListProperty.cst"
 this.WriteObjects("        }\r\n");
 this.WriteObjects("        private ",  GetBackingTypeString() , " ",  backingName , ";\r\n");
-#line 52 "P:\zetbox\Zetbox.Generator\Templates\Properties\ListProperty.cst"
+#line 52 "C:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ListProperty.cst"
 AddSerialization(serializationList, name);
 
 

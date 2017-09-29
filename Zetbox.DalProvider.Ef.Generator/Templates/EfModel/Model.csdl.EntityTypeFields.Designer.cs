@@ -13,7 +13,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst")]
     public partial class ModelCsdlEntityTypeFields : Zetbox.Generator.ResourceTemplate
     {
 		protected IZetboxContext ctx;
@@ -37,7 +37,7 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
 
         public override void Generate()
         {
-#line 36 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 36 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
 /*
 	 * TODO: Actually, all this should die and become a bunch of polymorphic calls.
      * See also Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings.PropertiesHbm
@@ -57,28 +57,28 @@ namespace Zetbox.DalProvider.Ef.Generator.Templates.EfModel
 			{
 				Debug.Assert(relEnd != null);
 
-#line 55 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 55 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
 this.WriteObjects("    <NavigationProperty Name=\"",  p.Name + ImplementationPropertySuffix , "\"\r\n");
 this.WriteObjects("                        Relationship=\"Model.",  rel.GetRelationAssociationName(relEnd.GetRole()) , "\"\r\n");
 this.WriteObjects("                        FromRole=\"",  relEnd.RoleName , "\"\r\n");
 this.WriteObjects("                        ToRole=\"CollectionEntry\" />\r\n");
-#line 60 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 60 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
 }
 			else
 			{
 
-#line 64 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 64 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
 this.WriteObjects("    <NavigationProperty Name=\"",  p.Name + ImplementationPropertySuffix , "\"\r\n");
 this.WriteObjects("                        Relationship=\"Model.",  rel.GetAssociationName() , "\"\r\n");
 this.WriteObjects("                        FromRole=\"",  relEnd.RoleName , "\"\r\n");
 this.WriteObjects("                        ToRole=\"",  otherEnd.RoleName , "\" />\r\n");
-#line 70 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 70 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
 if (rel.NeedsPositionStorage(relEnd.GetRole()))
 				{
 
-#line 73 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 73 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
 this.WriteObjects("    <Property Name=\"",  Construct.ListPositionPropertyName(relEnd) , "\" Type=\"Int32\" Nullable=\"true\" />\r\n");
-#line 75 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 75 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
 }
 			}
 		}
@@ -88,19 +88,19 @@ this.WriteObjects("    <Property Name=\"",  Construct.ListPositionPropertyName(r
 			if (prop.IsList && !prop.IsCalculated)
 			{
 
-#line 84 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 84 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
 this.WriteObjects("    <NavigationProperty Name=\"",  prop.Name + ImplementationPropertySuffix , "\"\r\n");
 this.WriteObjects("                        Relationship=\"Model.",  prop.GetAssociationName() , "\"\r\n");
 this.WriteObjects("                        FromRole=\"",  prop.ObjectClass.Name , "\"\r\n");
 this.WriteObjects("                        ToRole=\"CollectionEntry\" />\r\n");
-#line 89 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 89 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
 }
 			else
 			{
 
-#line 93 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 93 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
 this.WriteObjects("    ",  ModelCsdl.PlainPropertyDefinitionFromValueType((ValueTypeProperty)p, p.Name, ImplementationPropertySuffix) , "\r\n");
-#line 95 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 95 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
 }
 		}
 		else if (p is CompoundObjectProperty)
@@ -109,22 +109,22 @@ this.WriteObjects("    ",  ModelCsdl.PlainPropertyDefinitionFromValueType((Value
 			if (prop.IsList)
 			{
 
-#line 103 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 103 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
 this.WriteObjects("    <NavigationProperty Name=\"",  prop.Name + ImplementationPropertySuffix , "\"\r\n");
 this.WriteObjects("                        Relationship=\"Model.",  prop.GetAssociationName() , "\"\r\n");
 this.WriteObjects("                        FromRole=\"",  prop.ObjectClass.Name , "\"\r\n");
 this.WriteObjects("                        ToRole=\"CollectionEntry\" />\r\n");
-#line 108 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 108 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
 }
 			else
 			{
 			// Nullable Complex types are not supported by EF
 
-#line 113 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 113 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
 this.WriteObjects("    <Property Name=\"",  p.Name + ImplementationPropertySuffix , "\"\r\n");
 this.WriteObjects("              Type=\"Model.",  prop.CompoundObjectDefinition.Name , "EfImpl\"\r\n");
 this.WriteObjects("              Nullable=\"false\" />\r\n");
-#line 117 "P:\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
+#line 117 "C:\Projects\zetbox\Zetbox.DalProvider.EF.Generator\Templates\EfModel\Model.csdl.EntityTypeFields.cst"
 }
 		}	
 	}

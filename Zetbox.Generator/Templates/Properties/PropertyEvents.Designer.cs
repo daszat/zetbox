@@ -4,7 +4,7 @@ using Zetbox.API;
 
 namespace Zetbox.Generator.Templates.Properties
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"C:\Projects\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst")]
     public partial class PropertyEvents : Zetbox.Generator.MemberTemplate
     {
 		protected IZetboxContext ctx;
@@ -36,18 +36,18 @@ namespace Zetbox.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 29 "P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
+#line 29 "C:\Projects\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
 if (hasGetters) { 
-#line 30 "P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
+#line 30 "C:\Projects\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
 this.WriteObjects("		",  GetModifiers() , " event PropertyGetterHandler<",  objType , ", ",  propType , "> ",  eventName , "_Getter;\r\n");
-#line 31 "P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
+#line 31 "C:\Projects\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
 } 
-#line 32 "P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
+#line 32 "C:\Projects\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
 if (hasSetters) { 
-#line 33 "P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
+#line 33 "C:\Projects\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
 this.WriteObjects("		",  GetModifiers() , " event PropertyPreSetterHandler<",  objType , ", ",  propType , "> ",  eventName , "_PreSetter;\r\n");
 this.WriteObjects("		",  GetModifiers() , " event PropertyPostSetterHandler<",  objType , ", ",  propType , "> ",  eventName , "_PostSetter;\r\n");
-#line 35 "P:\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
+#line 35 "C:\Projects\zetbox\Zetbox.Generator\Templates\Properties\PropertyEvents.cst"
 } 
 
         }

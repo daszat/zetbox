@@ -10,7 +10,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.Generator.Templates.Properties
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\zetbox\Zetbox.Generator\Templates\Properties\ValueCollectionProperty.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"C:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ValueCollectionProperty.cst")]
     public partial class ValueCollectionProperty : Zetbox.Generator.MemberTemplate
     {
 		protected IZetboxContext ctx;
@@ -60,11 +60,11 @@ namespace Zetbox.Generator.Templates.Properties
 
         public override void Generate()
         {
-#line 46 "P:\zetbox\Zetbox.Generator\Templates\Properties\ValueCollectionProperty.cst"
+#line 46 "C:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ValueCollectionProperty.cst"
 AddSerialization(serializationList, underlyingCollectionName);
 	var eventName = "On" + name + "_PostSetter";
 
-#line 49 "P:\zetbox\Zetbox.Generator\Templates\Properties\ValueCollectionProperty.cst"
+#line 49 "C:\Projects\zetbox\Zetbox.Generator\Templates\Properties\ValueCollectionProperty.cst"
 this.WriteObjects("		// ",  this.GetType() , "\r\n");
 this.WriteObjects("		",  GetModifiers() , " ",  exposedCollectionInterface , "<",  referencedType , "> ",  name , "\r\n");
 this.WriteObjects("		{\r\n");

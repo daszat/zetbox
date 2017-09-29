@@ -7,7 +7,7 @@ using Zetbox.App.Base;
 
 namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ClassesHbm.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"C:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ClassesHbm.cst")]
     public partial class ClassesHbm : Zetbox.Generator.ResourceTemplate
     {
 		protected IZetboxContext ctx;
@@ -31,17 +31,17 @@ namespace Zetbox.DalProvider.NHibernate.Generator.Templates.Mappings
 
         public override void Generate()
         {
-#line 28 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ClassesHbm.cst"
+#line 28 "C:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ClassesHbm.cst"
 this.WriteObjects("<?xml version=\"1.0\"?>\r\n");
 this.WriteObjects("<hibernate-mapping xmlns=\"urn:nhibernate-mapping-2.2\" \r\n");
 this.WriteObjects("                   default-cascade=\"save-update\">\r\n");
-#line 31 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ClassesHbm.cst"
+#line 31 "C:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ClassesHbm.cst"
 foreach (var oc in GetObjectClasses(ctx).Where(c => c.BaseObjectClass == null).ToList().OrderBy(c => c.Module.Name).ThenBy(c => c.Name)) {          
-#line 32 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ClassesHbm.cst"
+#line 32 "C:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ClassesHbm.cst"
 ApplyObjectClassTemplate(oc);                                                               
-#line 33 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ClassesHbm.cst"
+#line 33 "C:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ClassesHbm.cst"
 }                                                                                                
-#line 34 "P:\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ClassesHbm.cst"
+#line 34 "C:\Projects\zetbox\Zetbox.DalProvider.NHibernate.Generator\Templates\Mappings\ClassesHbm.cst"
 this.WriteObjects("</hibernate-mapping>");
 
         }
