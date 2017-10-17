@@ -120,7 +120,7 @@ namespace Zetbox.API
         public void Report(string message, string description, System.Drawing.Bitmap screenshot, Exception exeption)
         {
             // TODO: Hardocded mail addresses
-            var msg = new MailMessage("office@dasz.at", "fogbugz@dasz.at");
+            var msg = new MailMessage("office@dasz.at", "office@dasz.at");
             msg.Subject = message != null ? message.Replace("\n", "").Replace("\r", "") : string.Empty;
             msg.Body = string.Format("{0}\n\n{1}\n\nException:\n{2}", message, description, exeption);
 
