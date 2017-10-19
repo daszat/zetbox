@@ -254,6 +254,9 @@ namespace Zetbox.API.Server
 
                 switch (m.Method.Name)
                 {
+                    case "Contains":
+                        // pass through, argument is a constant
+                        return m;
                     case "All": // bool All<TSource>(this IQueryable<TSource> source, Expression<Func<TSource, bool>> predicate)
                     case "Any": // bool Any<TSource>(this IQueryable<TSource> source, Expression<Func<TSource, bool>> predicate);
                     case "Count": // Count<TSource>(this IQueryable<TSource> source, Expression<Func<TSource, bool>> predicate);
