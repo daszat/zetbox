@@ -62,12 +62,20 @@ namespace Zetbox.Server.SchemaManagement
                 .Named<ISchemaProvider>("OLEDB")
                 .InstancePerDependency();
             builder
-                .Register(c => new LoggingSchemaProviderAdapter(new SqlProvider.SqlServer()))
+                .Register(c =>
+                {
+                    ZetboxConfig cfg = c.Resolve<ZetboxConfig>();
+                    return new LoggingSchemaProviderAdapter(new SqlProvider.SqlServer(cfg.Force));
+                })
                 .As<ISchemaProvider>()
                 .Named<ISchemaProvider>("MSSQL")
                 .InstancePerDependency();
             builder
-                .Register(c => new LoggingSchemaProviderAdapter(new NpgsqlProvider.Postgresql()))
+                .Register(c =>
+                {
+                    ZetboxConfig cfg = c.Resolve<ZetboxConfig>();
+                    return new LoggingSchemaProviderAdapter(new NpgsqlProvider.Postgresql(cfg.Force));
+                })
                 .As<ISchemaProvider>()
                 .Named<ISchemaProvider>("POSTGRESQL")
                 .InstancePerDependency();

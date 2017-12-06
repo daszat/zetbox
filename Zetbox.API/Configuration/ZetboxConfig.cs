@@ -120,6 +120,11 @@ namespace Zetbox.API.Configuration
 
         [XmlIgnore]
         [DefaultValue(false)]
+        public bool Force { get; set; }
+
+
+        [XmlIgnore]
+        [DefaultValue(false)]
         public bool IsFallback { get; set; }
 
         [XmlIgnore]

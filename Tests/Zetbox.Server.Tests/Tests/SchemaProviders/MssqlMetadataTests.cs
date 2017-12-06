@@ -27,7 +27,7 @@ namespace Zetbox.Server.Tests.SchemaTests.SchemaProviders
     {
         protected override SqlServer GetProvider()
         {
-            return new SqlServer();
+            return new SqlServer(false);
         }
 
         [Test]

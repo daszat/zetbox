@@ -26,7 +26,7 @@ namespace Zetbox.Server.Tests.SchemaTests.SchemaProviders.TableStructure
     {
         protected override Postgresql GetProvider()
         {
-            var result = new Postgresql();
+            var result = new Postgresql(false);
             result.Open(SchemaProviderFixture<Postgresql>.PostgresqlTestConnection);
             result.BeginTransaction();
             return result;

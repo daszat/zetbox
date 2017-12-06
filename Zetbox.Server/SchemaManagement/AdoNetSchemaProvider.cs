@@ -37,6 +37,13 @@ namespace Zetbox.Server.SchemaManagement
         protected abstract log4net.ILog Log { get; }
         protected abstract log4net.ILog QueryLog { get; }
 
+        protected bool Force { get; private set; }
+
+        public AdoNetSchemaProvider(bool force)
+        {
+            this.Force = force;
+        }
+
         #region ADO.NET Infrastructure
 
         protected void LogError(string query, IDictionary<string, object> args)
@@ -115,6 +122,7 @@ namespace Zetbox.Server.SchemaManagement
             catch
             {
                 LogError(query, args);
+                // cannot ignore
                 throw;
             }
         }
@@ -149,7 +157,7 @@ namespace Zetbox.Server.SchemaManagement
             catch
             {
                 LogError(query, args);
-                throw;
+                if(!Force) throw;
             }
         }
 
@@ -178,7 +186,7 @@ namespace Zetbox.Server.SchemaManagement
                     catch
                     {
                         LogError(cmdString, null);
-                        throw;
+                        if (!Force) throw;
                     }
                 }
             }

@@ -27,7 +27,7 @@ namespace Zetbox.Server.Tests.SchemaTests.SchemaProviders
     {
         protected override Postgresql GetProvider()
         {
-            return new Postgresql();
+            return new Postgresql(false);
         }
 
         [Test]

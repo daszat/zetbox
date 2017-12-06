@@ -40,6 +40,12 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
         private readonly static log4net.ILog _queryLog = log4net.LogManager.GetLogger("Zetbox.Server.Schema.MSSQL.Queries");
         protected override log4net.ILog QueryLog { get { return _queryLog; } }
 
+        public SqlServer(bool force)
+            : base(force)
+        {
+
+        }
+
         #region Meta data
 
         public override string ConfigName { get { return "MSSQL"; } }

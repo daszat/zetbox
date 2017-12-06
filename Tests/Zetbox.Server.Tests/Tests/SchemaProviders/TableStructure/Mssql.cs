@@ -26,7 +26,7 @@ namespace Zetbox.Server.Tests.SchemaTests.SchemaProviders.TableStructure
     {
         protected override SqlServer GetProvider()
         {
-            var result = new SqlServer();
+            var result = new SqlServer(false);
             result.Open(SchemaProviderFixture<SqlServer>.SqlServerTestConnection);
             result.BeginTransaction();
             return result;
