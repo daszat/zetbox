@@ -40,6 +40,12 @@ namespace Zetbox.Server.SchemaManagement.SqlProvider
         private readonly static log4net.ILog _queryLog = log4net.LogManager.GetLogger("Zetbox.Server.Schema.MSSQL.Queries");
         protected override log4net.ILog QueryLog { get { return _queryLog; } }
 
+        public SqlServer(bool force)
+            : base(force)
+        {
+
+        }
+
         #region Meta data
 
         public override string ConfigName { get { return "MSSQL"; } }
@@ -877,7 +883,7 @@ WHERE tbl.id = OBJECT_ID(@table) and col.name = @column AND obj.xtype = 'D'",
                 }
             }
 
-            ExecuteNonQuery(string.Format("CREATE {0} {1} INDEX {2} ON [{3}].[{4}] ({5}){6}",
+            ExecuteNonQuery(string.Format("CREATE {0} {1} INDEX [{2}] ON [{3}].[{4}] ({5}){6}",
                 unique ? "UNIQUE" : string.Empty,
                 clustered ? "CLUSTERED" : string.Empty,
                 idxName,

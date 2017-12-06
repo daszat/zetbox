@@ -41,6 +41,12 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
 
         private readonly static log4net.ILog _copyLog = log4net.LogManager.GetLogger("Zetbox.Server.Schema.Npgsql.COPY");
 
+        public Postgresql(bool force) 
+            : base(force)
+        {
+
+        }
+
         #region Meta data
 
         public override string ConfigName { get { return "POSTGRESQL"; } }

@@ -63,6 +63,15 @@ namespace Zetbox.API.Server
                 .RegisterCmdLineDataOption("ownermodules=", "A semicolon-separated list of data-owning modules to export", OwnerModulesKey);
 
             builder
+                .RegisterCmdLineAction("foce", "Force a operation. When using with Schema Management, every error will be ignored. Use --checkdeployedschema and --repairschema to ensure a valid schema.",
+                (scope, arg) =>
+                {
+                    var config = scope.Resolve<ZetboxConfig>();
+                    config.Force = true;
+                });
+
+
+            builder
                 .RegisterCmdLineAction("deploy=", "deploy the database from the specified xml file",
                 (scope, arg) =>
                 {
