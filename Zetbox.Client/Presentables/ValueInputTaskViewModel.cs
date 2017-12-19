@@ -30,7 +30,7 @@ using System.Collections.ObjectModel;
 namespace Zetbox.Client.Presentables
 {
     [ViewModelDescriptor]
-    internal class ValueInputTaskViewModel
+    public class ValueInputTaskViewModel
         : WindowViewModel, Zetbox.Client.Presentables.IValueInputTaskViewModel
     {
         public new delegate ValueInputTaskViewModel Factory(IZetboxContext dataCtx, ViewModel parent, string name,
@@ -55,6 +55,15 @@ namespace Zetbox.Client.Presentables
 
         private Action<Dictionary<object, object>> _callback;
         public Action CancelCallback { get; set; }
+
+        public class CanInvokeEventArgs<T> : EventArgs
+        {
+            public T Result { get; set; }
+            public Dictionary<object, object> Values { get; set; }
+        }
+
+        public event EventHandler<CanInvokeEventArgs<bool>> CanInvoke;
+        public event EventHandler<CanInvokeEventArgs<string>> CanInvokeReason;
 
         #region Parameter
         private IEnumerable<ViewModel> _items;
@@ -108,7 +117,18 @@ namespace Zetbox.Client.Presentables
                     ValueInputTaskViewModelResources.InvokeCommand_Name,
                     ValueInputTaskViewModelResources.InvokeCommand_Tooltip,
                     Invoke,
-                    null, null);
+                    () =>
+                    {
+                        var e = new CanInvokeEventArgs<bool>() { Result = true, Values = ExtractValues() };
+                        CanInvoke?.Invoke(this, e);
+                        return e.Result;
+                    },
+                    () =>
+                    {
+                        var e = new CanInvokeEventArgs<string>() { Result = "", Values = ExtractValues() };
+                        CanInvokeReason?.Invoke(this, e);
+                        return e.Result;
+                    });
                 _InvokeCommand.IsDefault = true;
             }
         }
@@ -198,7 +218,7 @@ namespace Zetbox.Client.Presentables
                             {
                                 callback(ExtractValues());
                                 Show = false;
-                            }, 
+                            },
                             null,
                             null);
             Commands.Insert(0, cmd);
@@ -209,7 +229,7 @@ namespace Zetbox.Client.Presentables
         {
             base.Dispose(disposing);
 
-            foreach(var i in _items)
+            foreach (var i in _items)
             {
                 i.Dispose();
             }

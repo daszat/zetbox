@@ -92,7 +92,7 @@ namespace Zetbox.Client.Presentables.TestModule
                                       .AddTextBlock("txt2", "", "Textblock 2")
                                       .AddTextBlock("txt3", "txt label"))
                             .AddGroupBox("grp2", "Group 2",
-                                c => c.AddString("txt4", "string", "", description: "enter something")
+                                c => c.AddString("txt4", "string (test)", "", description: "enter something")
                                       .AddMultiLineString("txt5", "string", "", description: "enter something"))
                             .AddTabControl("tabCtrl", "",
                                 c => c.AddTabItem("ti1", "Tab 1",
@@ -110,6 +110,7 @@ namespace Zetbox.Client.Presentables.TestModule
                                     "Execute and Continue");
                             })
                             .OnAccept(values => { })
+                            .OnCanAccept(values => (string)values["txt4"] == "test", values => "\"string\" must be \"test\"")
                             .OnCancel(() =>
                             {
                                 ViewModelFactory.ShowMessage("Cancel!!", "Cancel");

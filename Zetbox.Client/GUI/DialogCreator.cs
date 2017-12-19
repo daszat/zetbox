@@ -73,6 +73,9 @@ namespace Zetbox.Client.GUI
         private static readonly Action<Dictionary<object, object>> _doNothing = p => { };
 
         public Action<Dictionary<object, object>> OnAcceptAction { get; set; }
+        public event EventHandler<ValueInputTaskViewModel.CanInvokeEventArgs<bool>> CanAcceptAction;
+        public event EventHandler<ValueInputTaskViewModel.CanInvokeEventArgs<string>> CanAcceptActionReason;
+
         public Action OnCancelAction { get; set; }
         public List<Tuple<string, string, Action<Dictionary<object, object>>>> AdditionalButtons { get; private set; }
 
@@ -111,6 +114,8 @@ namespace Zetbox.Client.GUI
             }
 
             var dlg = ViewModelFactory.CreateViewModel<ValueInputTaskViewModel.Factory>().Invoke(DataContext, null, Title, Items, ValueModels, ok);
+            dlg.CanInvoke += CanAcceptAction;
+            dlg.CanInvokeReason += CanAcceptActionReason;
             dlg.SetInvokeCommandLabel(AcceptLabel.IfNullOrWhiteSpace(DialogCreatorResources.Accept));
             dlg.SetCancelCommandLabel(CancelLabel.IfNullOrWhiteSpace(DialogCreatorResources.Cancel));
             dlg.CancelCallback = OnCancelAction;
@@ -398,6 +403,14 @@ namespace Zetbox.Client.GUI
         {
             if (c == null) throw new ArgumentNullException("c");
             c.OnAcceptAction = action;
+            return c;
+        }
+
+        public static DialogCreator OnCanAccept(this DialogCreator c, Func<Dictionary<object, object>, bool> canAccept, Func<Dictionary<object, object>, string> canAcceptReason = null)
+        {
+            if (c == null) throw new ArgumentNullException("c");
+            c.CanAcceptAction += (s, e) => e.Result = canAccept?.Invoke(e.Values) ?? true;
+            c.CanAcceptActionReason += (s, e) => e.Result = canAcceptReason?.Invoke(e.Values) ?? "";
             return c;
         }
 
