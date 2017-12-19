@@ -168,7 +168,11 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public void AddFilter(IFilterModel mdl)
         {
-            FilterList.AddFilter(mdl);
+            AddFilter(-1, mdl);
+        }
+        public void AddFilter(int index, IFilterModel mdl)
+        {
+            FilterList.AddFilter(index, mdl);
         }
 
         public void RemoveFilter(IFilterModel mdl)
