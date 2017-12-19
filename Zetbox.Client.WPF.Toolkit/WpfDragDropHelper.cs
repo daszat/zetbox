@@ -521,7 +521,8 @@ namespace Zetbox.Client.WPF.Toolkit
             }
             if (!NativeMethods.SUCCEEDED(hr)) // Not redundant; hr gets updated in the block above
             {
-                Marshal.ThrowExceptionForHR(hr);
+                // Ignore this kind of error - it's unhandled
+                // Marshal.ThrowExceptionForHR(hr);
             }
         }
 
