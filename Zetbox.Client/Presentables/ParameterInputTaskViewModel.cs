@@ -117,7 +117,7 @@ namespace Zetbox.Client.Presentables
         }
 
         #region Commands
-        private ICommandViewModel _InvokeCommand = null;
+        private SimpleCommandViewModel _InvokeCommand = null;
         public ICommandViewModel InvokeCommand
         {
             get
@@ -132,6 +132,7 @@ namespace Zetbox.Client.Presentables
                         Invoke,
                         null,
                         null);
+                    _InvokeCommand.IsDefault = true;
                 }
                 return _InvokeCommand;
             }
