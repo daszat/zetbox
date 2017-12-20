@@ -89,7 +89,7 @@ namespace Zetbox.Generator.InterfaceTemplates
 
                             return new NamedObjectDescriptor()
                             {
-                                Type = typeName,
+                                Type = ctx.GetInterfaceType((IPersistenceObject)ino.Ino).Type.FullName,
                                 Name = splitName.Last(),
                                 Path = path,
                                 PathString = string.Join(".", path),
