@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2016-08-02T12:34:38.0230831Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2017-12-20T15:32:29.4606521Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -1030,8 +1030,8 @@ public static void isValid_Writers(CalendarBook obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>42bc4d9d-9ca0-4ead-8079-cf6f96456e16</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:EnumerationProperty ExportGuid="8755ff98-63d1-4a74-b0e3-da08a81f7f4e">
-    <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2017-12-20T15:21:53.602521Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_DayOfWeek(DayOfWeekWorkScheduleRule obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.DayOfWeek&gt; e)
 {
@@ -1068,8 +1068,8 @@ public static void isValid_DayOfWeek(DayOfWeekWorkScheduleRule obj, PropertyIsVa
     <ZetboxBase:Enumeration>3961bb73-7ab6-4529-9457-ede6927224c7</ZetboxBase:Enumeration>
   </ZetboxBase:EnumerationProperty>
   <ZetboxBase:IntProperty ExportGuid="0fdcab86-001e-429d-af31-a5d0df5e6c75">
-    <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2017-12-20T15:21:53.602521Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_Offset(EasterWorkScheduleRule obj, PropertyGetterEventArgs&lt;int?&gt; e)
 {
@@ -1698,8 +1698,8 @@ public static void isValid_SyncHash(Event obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:IntProperty ExportGuid="7d16cd01-93ce-44d2-bb69-ac06f5b61aaf">
-    <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2017-12-20T15:21:53.602521Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_Day(FixedYearlyWorkScheduleRule obj, PropertyGetterEventArgs&lt;int&gt; e)
 {
@@ -1734,8 +1734,8 @@ public static void isValid_Day(FixedYearlyWorkScheduleRule obj, PropertyIsValidE
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:IntProperty>
   <ZetboxBase:IntProperty ExportGuid="43be3542-1b21-4423-aeb4-f9e411b2453f">
-    <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:16.677239Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2017-12-20T15:21:53.602521Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_Month(FixedYearlyWorkScheduleRule obj, PropertyGetterEventArgs&lt;int&gt; e)
 {
@@ -2324,8 +2324,8 @@ public static void isValid_Module(WorkSchedule obj, PropertyIsValidEventArgs e)
     <ZetboxBase:RelationEnd>78fb096f-3816-4fe3-96d8-b8a5f267d622</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:StringProperty ExportGuid="49cdf3fb-639f-4c20-b9ca-9af1bbe0d4d7">
-    <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2013-02-18T14:34:30.773699Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2017-12-20T15:21:53.602521Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_Name(WorkSchedule obj, PropertyGetterEventArgs&lt;string&gt; e)
 {
@@ -2582,8 +2582,8 @@ public static void isValid_ExportGuid(WorkScheduleRule obj, PropertyIsValidEvent
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:GuidProperty>
   <ZetboxBase:BoolProperty ExportGuid="09cfc4e1-c106-46ec-825d-31226d8df335">
-    <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2013-02-18T14:37:16.905201Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2017-12-20T15:21:53.602521Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_IsWorkingDay(WorkScheduleRule obj, PropertyGetterEventArgs&lt;bool&gt; e)
 {
@@ -2658,8 +2658,8 @@ public static void isValid_Module(WorkScheduleRule obj, PropertyIsValidEventArgs
     <ZetboxBase:RelationEnd>b59c36c3-4dd0-4f11-9fa6-1d6d482542ab</ZetboxBase:RelationEnd>
   </ZetboxBase:ObjectReferenceProperty>
   <ZetboxBase:StringProperty ExportGuid="88bd31d8-6963-49ed-8ac8-31d438744eef">
-    <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2013-02-18T14:37:16.905201Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2017-12-20T15:21:53.602521Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_Name(WorkScheduleRule obj, PropertyGetterEventArgs&lt;string&gt; e)
 {
@@ -2696,8 +2696,8 @@ public static void isValid_Name(WorkScheduleRule obj, PropertyIsValidEventArgs e
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="940552fc-7cb1-4512-9096-54c3e70f7a1f">
-    <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2013-02-18T14:37:16.905201Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2017-12-20T15:21:53.602521Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ValidFrom(WorkScheduleRule obj, PropertyGetterEventArgs&lt;DateTime?&gt; e)
 {
@@ -2735,8 +2735,8 @@ public static void isValid_ValidFrom(WorkScheduleRule obj, PropertyIsValidEventA
     <ZetboxBase:DateTimeStyle>2</ZetboxBase:DateTimeStyle>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:DateTimeProperty ExportGuid="4fced9a6-fe27-44a2-a21d-17a09c720588">
-    <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2013-02-18T14:37:16.905201Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2017-12-20T15:21:53.602521Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ValidUntil(WorkScheduleRule obj, PropertyGetterEventArgs&lt;DateTime?&gt; e)
 {
@@ -2774,8 +2774,8 @@ public static void isValid_ValidUntil(WorkScheduleRule obj, PropertyIsValidEvent
     <ZetboxBase:DateTimeStyle>2</ZetboxBase:DateTimeStyle>
   </ZetboxBase:DateTimeProperty>
   <ZetboxBase:DecimalProperty ExportGuid="20370deb-580a-44e6-b201-f5740ee5e330">
-    <ZetboxBase:CategoryTags>Summary</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2013-02-18T14:37:16.905201Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2017-12-20T15:21:53.602521Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_WorkingHours(WorkScheduleRule obj, PropertyGetterEventArgs&lt;decimal&gt; e)
 {
