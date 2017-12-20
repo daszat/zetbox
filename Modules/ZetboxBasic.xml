@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2017-12-20T15:32:21.7411022Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2017-12-20T17:16:16.7689249Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="84f486f7-19fe-49ad-8e4a-6c05089e7684">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.650235Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
@@ -17253,6 +17253,10 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
     <ZetboxBase:A>afd99ba6-f150-4ed4-ad1f-4ef57b14728b</ZetboxBase:A>
     <ZetboxBase:B>4ae6616a-eca3-47a5-b502-8e3c3913c2f0</ZetboxBase:B>
   </ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry>
+  <ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry ExportGuid="be7be078-ecd2-4c1b-bfc7-152e3f47345f">
+    <ZetboxBase:A>2cb3f778-dd6a-46c7-ad2b-5f8691313035</ZetboxBase:A>
+    <ZetboxBase:B>9c7c4532-2624-4b37-8f77-1ef06a6d174b</ZetboxBase:B>
+  </ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry>
   <ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry ExportGuid="4fff8358-8086-47ac-adc3-300e89bf396d">
     <ZetboxBase:A>ac1d5ac9-d909-438f-a4f5-f64ea6904944</ZetboxBase:A>
     <ZetboxBase:B>a73f2d0a-786b-483d-b474-b9d9df42b8b3</ZetboxBase:B>
@@ -17280,6 +17284,10 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
   <ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry ExportGuid="ec85ed1b-4142-4aec-a1fe-0c2013ffb712">
     <ZetboxBase:A>74785c72-3271-4fb7-95fc-86b0baa09c8e</ZetboxBase:A>
     <ZetboxBase:B>4ae6616a-eca3-47a5-b502-8e3c3913c2f0</ZetboxBase:B>
+  </ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry>
+  <ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry ExportGuid="abaa9d85-936a-4bbc-85ac-ec05fbf88a0d">
+    <ZetboxBase:A>ee475de2-d626-49e9-9e40-6bb12cb026d4</ZetboxBase:A>
+    <ZetboxBase:B>9c7c4532-2624-4b37-8f77-1ef06a6d174b</ZetboxBase:B>
   </ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry>
   <ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry ExportGuid="23e0fef4-8c80-4690-8547-8871704b4460">
     <ZetboxBase:A>6365c62d-60a6-4fa3-9c78-370ffcc50478</ZetboxBase:A>
@@ -32739,6 +32747,29 @@ public static void OpenCanExecReason(Blob obj, MethodReturnEventArgs&lt;string&g
     <ZetboxBase:Name>Open</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>afd99ba6-f150-4ed4-ad1f-4ef57b14728b</ZetboxBase:ObjectClass>
   </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="75520096-2a15-4d13-b099-2fd0cbe361ad">
+    <ZetboxBase:ChangedOn>2017-12-20T16:19:37.942226Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void GetName(CompoundObject obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void GetNameCanExec(CompoundObject obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetNameCanExecReason(CompoundObject obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2017-12-20T16:19:37.942226Z</ZetboxBase:CreatedOn>
+    <GUI:IsDisplayable>false</GUI:IsDisplayable>
+    <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
+    <ZetboxBase:Name>GetName</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>2cb3f778-dd6a-46c7-ad2b-5f8691313035</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
   <ZetboxBase:Method ExportGuid="2056bc89-f6c6-4c27-96aa-12790af6fb24">
     <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
@@ -33026,6 +33057,29 @@ public static void GetLabelByValueCanExecReason(Enumeration obj, MethodReturnEve
     <GUI:IsDisplayable>false</GUI:IsDisplayable>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>GetLabelByValue</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>ee475de2-d626-49e9-9e40-6bb12cb026d4</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="74c589cc-d339-4918-b91b-068fd15a67fa">
+    <ZetboxBase:ChangedOn>2017-12-20T16:19:37.942226Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void GetName(Enumeration obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void GetNameCanExec(Enumeration obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void GetNameCanExecReason(Enumeration obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2017-12-20T16:19:37.942226Z</ZetboxBase:CreatedOn>
+    <GUI:IsDisplayable>false</GUI:IsDisplayable>
+    <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
+    <ZetboxBase:Name>GetName</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>ee475de2-d626-49e9-9e40-6bb12cb026d4</ZetboxBase:ObjectClass>
   </ZetboxBase:Method>
   <ZetboxBase:Method ExportGuid="f8a6c6b0-eb32-4883-a7f5-4b4049af2aab">
@@ -34180,6 +34234,17 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
     <ZetboxBase:Name>retval</ZetboxBase:Name>
     <ZetboxBase:TypeRef>System.IO.Stream, mscorlib</ZetboxBase:TypeRef>
   </ZetboxBase:CLRObjectParameter>
+  <ZetboxBase:StringParameter ExportGuid="ce534028-63b3-4630-b985-c5739a57cd45">
+    <ZetboxBase:ChangedOn>2017-12-20T16:19:37.942226Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2017-12-20T16:19:37.942226Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>the requested name</ZetboxBase:Description>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>true</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>75520096-2a15-4d13-b099-2fd0cbe361ad</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>name</ZetboxBase:Name>
+  </ZetboxBase:StringParameter>
   <ZetboxBase:CLRObjectParameter ExportGuid="d0d5e933-5bca-4be9-8cbb-91088065f2cb">
     <ZetboxBase:ChangedOn>2013-03-22T13:49:09.665737Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
@@ -34393,6 +34458,17 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
     <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
     <ZetboxBase:Name>val</ZetboxBase:Name>
   </ZetboxBase:IntParameter>
+  <ZetboxBase:StringParameter ExportGuid="54dfe138-0bca-46d6-803e-fa0ef2320570">
+    <ZetboxBase:ChangedOn>2017-12-20T16:19:37.942226Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2017-12-20T16:19:37.942226Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>the requested name</ZetboxBase:Description>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>true</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>74c589cc-d339-4918-b91b-068fd15a67fa</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>name</ZetboxBase:Name>
+  </ZetboxBase:StringParameter>
   <ZetboxBase:StringParameter ExportGuid="b2b3ddbe-33f8-4c86-af2c-cf05d97df405">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:01.120803Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-11-19T18:21:50Z</ZetboxBase:CreatedOn>

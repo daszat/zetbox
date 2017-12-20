@@ -102,7 +102,7 @@ namespace Zetbox.Generator
         {
             var qry = ctx.GetQuery<DataType>();
             if (IsFallback)
-                qry = qry.Where(i => Compiler.FallbackModules.Contains(i.Module.Name));
+                qry = qry.ToArray().Where(i => Compiler.FallbackModules.Contains(i.Module.Name)).AsQueryable();
             return qry;
         }
 
@@ -110,7 +110,7 @@ namespace Zetbox.Generator
         {
             var qry = ctx.GetQuery<ObjectClass>();
             if (IsFallback)
-                qry = qry.Where(i => Compiler.FallbackModules.Contains(i.Module.Name));
+                qry = qry.ToArray().Where(i => Compiler.FallbackModules.Contains(i.Module.Name)).AsQueryable();
             return qry;
         }
 
@@ -118,7 +118,7 @@ namespace Zetbox.Generator
         {
             var qry = ctx.GetQuery<ObjectClass>().Where(cls => cls.BaseObjectClass == null);
             if (IsFallback)
-                qry = qry.Where(i => Compiler.FallbackModules.Contains(i.Module.Name));
+                qry = qry.ToArray().Where(i => Compiler.FallbackModules.Contains(i.Module.Name)).AsQueryable();
             return qry;
         }
 
@@ -126,7 +126,7 @@ namespace Zetbox.Generator
         {
             var qry = ctx.GetQuery<ObjectClass>().Where(cls => cls.BaseObjectClass != null);
             if (IsFallback)
-                qry = qry.Where(i => Compiler.FallbackModules.Contains(i.Module.Name));
+                qry = qry.ToArray().Where(i => Compiler.FallbackModules.Contains(i.Module.Name)).AsQueryable();
             return qry;
         }
 
@@ -138,7 +138,7 @@ namespace Zetbox.Generator
                 .Where(cls => cls.GetTableMapping() == TableMapping.TPT)
                 .AsQueryable();
             if (IsFallback)
-                qry = qry.Where(i => Compiler.FallbackModules.Contains(i.Module.Name));
+                qry = qry.ToArray().Where(i => Compiler.FallbackModules.Contains(i.Module.Name)).AsQueryable();
             return qry;
         }
 
@@ -147,7 +147,7 @@ namespace Zetbox.Generator
         {
             var qry = ctx.GetQuery<CompoundObject>();
             if (IsFallback)
-                qry = qry.Where(i => Compiler.FallbackModules.Contains(i.Module.Name));
+                qry = qry.ToArray().Where(i => Compiler.FallbackModules.Contains(i.Module.Name)).AsQueryable();
             return qry;
         }
 
@@ -155,7 +155,7 @@ namespace Zetbox.Generator
         {
             var qry = ctx.GetQuery<Relation>();
             if (IsFallback)
-                qry = qry.Where(i => Compiler.FallbackModules.Contains(i.Module.Name));
+                qry = qry.ToArray().Where(i => Compiler.FallbackModules.Contains(i.Module.Name)).AsQueryable();
             return qry;
         }
 
@@ -164,7 +164,7 @@ namespace Zetbox.Generator
             var qry = ctx.GetQuery<Relation>()
                 .Where(r => r.Storage == StorageType.Separate);
             if (IsFallback)
-                qry = qry.Where(i => Compiler.FallbackModules.Contains(i.Module.Name));
+                qry = qry.ToArray().Where(i => Compiler.FallbackModules.Contains(i.Module.Name)).AsQueryable();
             return qry
                 .ToList()
                 .OrderBy(r => r.GetAssociationName());
@@ -175,7 +175,7 @@ namespace Zetbox.Generator
             var qry = ctx.GetQuery<Relation>()
                 .Where(r => r.Storage != StorageType.Separate);
             if (IsFallback)
-                qry = qry.Where(i => Compiler.FallbackModules.Contains(i.Module.Name));
+                qry = qry.ToArray().Where(i => Compiler.FallbackModules.Contains(i.Module.Name)).AsQueryable();
             return qry
                 .ToList()
                 .OrderBy(r => r.GetAssociationName());
@@ -185,7 +185,7 @@ namespace Zetbox.Generator
         {
             var qry = ctx.GetQuery<ValueTypeProperty>();
             if (IsFallback)
-                qry = qry.Where(i => Compiler.FallbackModules.Contains(i.Module.Name));
+                qry = qry.ToArray().Where(i => Compiler.FallbackModules.Contains(i.Module.Name)).AsQueryable();
             return qry;
         }
 
@@ -193,7 +193,7 @@ namespace Zetbox.Generator
         {
             var qry = ctx.GetQuery<CompoundObjectProperty>();
             if (IsFallback)
-                qry = qry.Where(i => Compiler.FallbackModules.Contains(i.Module.Name));
+                qry = qry.ToArray().Where(i => Compiler.FallbackModules.Contains(i.Module.Name)).AsQueryable();
             return qry;
         }
     }

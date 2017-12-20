@@ -46,6 +46,12 @@ namespace Zetbox.App.Base
             e.Result = entry != null ? entry.GetLabel() : string.Empty;
         }
 
+        [Invocation]
+        public static void GetName(Enumeration obj, MethodReturnEventArgs<string> e)
+        {
+            e.Result = string.Format("Base.Enumerations.{0}.{1}", obj.Module.Namespace, obj.Name);
+        }
+
         /// <summary>
         /// ToString Event überschreiben
         /// </summary>
