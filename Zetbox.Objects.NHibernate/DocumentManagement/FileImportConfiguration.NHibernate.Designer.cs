@@ -1104,9 +1104,7 @@ namespace at.dasz.DocumentManagement
             xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this.Proxy.ChangedOn, xml, "ChangedOn", "at.dasz.DocumentManagement");
-            System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "at.dasz.DocumentManagement");
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this.Proxy.MachineName, xml, "MachineName", "at.dasz.DocumentManagement");
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this.Proxy.PickupDirectory, xml, "PickupDirectory", "at.dasz.DocumentManagement");

@@ -58,7 +58,6 @@
             break;
         case SerializerDirection.Export:
 %>
-            System.Diagnostics.Debug.Assert(this.<%= isSetFlagName %>, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("<%= xmlnamespace %>")) XmlStreamer.ToStream((int?)<%= backingStoreName %>, <%= streamName %>, "<%= xmlname %>", "<%= xmlnamespace %>");
 <%
             break;

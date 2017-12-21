@@ -1953,13 +1953,9 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnSu
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.BaseObjectClass != null ? this.Proxy.BaseObjectClass.ExportGuid : (Guid?)null, xml, "BaseObjectClass", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.CodeTemplate, xml, "CodeTemplate", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.DefaultViewModelDescriptor != null ? this.Proxy.DefaultViewModelDescriptor.ExportGuid : (Guid?)null, xml, "DefaultViewModelDescriptor", "Zetbox.App.GUI");
-            System.Diagnostics.Debug.Assert(this._isIsAbstractSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.IsAbstract, xml, "IsAbstract", "Zetbox.App.Base");
-            System.Diagnostics.Debug.Assert(this._isIsCreatedProgrammaticallySet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.IsCreatedProgrammatically, xml, "IsCreatedProgrammatically", "Zetbox.App.Base");
-            System.Diagnostics.Debug.Assert(this._isIsFrozenObjectSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.IsFrozenObject, xml, "IsFrozenObject", "Zetbox.App.Base");
-            System.Diagnostics.Debug.Assert(this._isIsSimpleObjectSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.IsSimpleObject, xml, "IsSimpleObject", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream((int?)Proxy.TableMapping, xml, "TableMapping", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.TableName, xml, "TableName", "Zetbox.App.Base");

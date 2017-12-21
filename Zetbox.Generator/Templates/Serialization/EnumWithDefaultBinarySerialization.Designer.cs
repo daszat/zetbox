@@ -73,19 +73,18 @@ break;
         case SerializerDirection.Export:
 
 #line 61 "C:\Projects\zetbox\Zetbox.Generator\Templates\Serialization\EnumWithDefaultBinarySerialization.cst"
-this.WriteObjects("            System.Diagnostics.Debug.Assert(this.",  isSetFlagName , ", \"Exported objects need to have all default values evaluated\");\r\n");
 this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream((int?)",  backingStoreName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 64 "C:\Projects\zetbox\Zetbox.Generator\Templates\Serialization\EnumWithDefaultBinarySerialization.cst"
+#line 63 "C:\Projects\zetbox\Zetbox.Generator\Templates\Serialization\EnumWithDefaultBinarySerialization.cst"
 break;
         case SerializerDirection.MergeImport:
 
-#line 67 "C:\Projects\zetbox\Zetbox.Generator\Templates\Serialization\EnumWithDefaultBinarySerialization.cst"
+#line 66 "C:\Projects\zetbox\Zetbox.Generator\Templates\Serialization\EnumWithDefaultBinarySerialization.cst"
 this.WriteObjects("            case \"",  xmlnamespace , "|",  xmlname , "\":\r\n");
 this.WriteObjects("                // Import must have default value set\r\n");
 this.WriteObjects("                ",  backingStoreName , " = (",  enumerationType , ")XmlStreamer.ReadNullableInt32(",  streamName , ");\r\n");
 this.WriteObjects("                this.",  isSetFlagName , " = true;\r\n");
 this.WriteObjects("                break;\r\n");
-#line 73 "C:\Projects\zetbox\Zetbox.Generator\Templates\Serialization\EnumWithDefaultBinarySerialization.cst"
+#line 72 "C:\Projects\zetbox\Zetbox.Generator\Templates\Serialization\EnumWithDefaultBinarySerialization.cst"
 break;
         default:
             throw new ArgumentOutOfRangeException("direction");

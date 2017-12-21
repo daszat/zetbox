@@ -1902,13 +1902,9 @@ public static event PropertyListChangedHandler<at.dasz.DocumentManagement.File> 
             if (!CurrentAccessRights.HasReadRights()) return;
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ExportCompoundObject(this.AttachedTo, xml, "AttachedTo", "at.dasz.DocumentManagement");
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(Blob != null ? Blob.ExportGuid : (Guid?)null, xml, "Blob", "at.dasz.DocumentManagement");
-            System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "at.dasz.DocumentManagement");
-            System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "at.dasz.DocumentManagement");
-            System.Diagnostics.Debug.Assert(this._isIsFileReadonlySet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this._IsFileReadonly, xml, "IsFileReadonly", "at.dasz.DocumentManagement");
-            System.Diagnostics.Debug.Assert(this._isKeepRevisionsSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this._KeepRevisions, xml, "KeepRevisions", "at.dasz.DocumentManagement");
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this._Name, xml, "Name", "at.dasz.DocumentManagement");
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this._Tags, xml, "Tags", "at.dasz.DocumentManagement");

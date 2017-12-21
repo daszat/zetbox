@@ -1080,7 +1080,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
             base.Export(xml, modules);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            System.Diagnostics.Debug.Assert(this._isEagerLoadingSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.EagerLoading, xml, "EagerLoading", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.IsInlineEditable, xml, "IsInlineEditable", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.RelationEnd != null ? this.Proxy.RelationEnd.ExportGuid : (Guid?)null, xml, "RelationEnd", "Zetbox.App.Base");

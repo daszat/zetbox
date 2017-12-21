@@ -1581,7 +1581,6 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.ViewModelDescripto
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.DefaultGridCellDisplayKind != null ? this.Proxy.DefaultGridCellDisplayKind.ExportGuid : (Guid?)null, xml, "DefaultGridCellDisplayKind", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.DefaultGridCellEditorKind != null ? this.Proxy.DefaultGridCellEditorKind.ExportGuid : (Guid?)null, xml, "DefaultGridCellEditorKind", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.DefaultGridCellPreEditorKind != null ? this.Proxy.DefaultGridCellPreEditorKind.ExportGuid : (Guid?)null, xml, "DefaultGridCellPreEditorKind", "Zetbox.App.GUI");
-            System.Diagnostics.Debug.Assert(this._isDeletedSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.Deleted, xml, "Deleted", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.Description, xml, "Description", "Zetbox.App.GUI");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.GUI")) XmlStreamer.ToStream(this.Proxy.Module != null ? this.Proxy.Module.ExportGuid : (Guid?)null, xml, "Module", "Zetbox.App.GUI");

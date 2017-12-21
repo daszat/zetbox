@@ -1,11 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{218D5DB5-5CC2-400D-9566-FC69C324EBC3}</ProjectGuid>
+    <ProjectGuid>{0C9E6E69-309F-46F7-A936-D5762229DEB9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>Zetbox.Objects</RootNamespace>
     <AssemblyName>Zetbox.Objects</AssemblyName>
