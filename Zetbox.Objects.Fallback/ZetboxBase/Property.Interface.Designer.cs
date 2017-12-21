@@ -15,6 +15,15 @@ namespace Zetbox.App.Base
     {
 
         /// <summary>
+        /// For collection properties, allow filtering
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("018cd3e6-aff1-457c-853a-d0f1a4173dba")]
+        bool AllowFilterCollections {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// A space separated list of category names containing this Property
         /// </summary>
         [Zetbox.API.DefinitionGuid("13418a59-a804-4bc7-88ed-4d3509940301")]

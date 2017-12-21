@@ -186,7 +186,7 @@
     <Compile Include="Utils\LookupDictionary.cs" />
     <Compile Include="Utils\MagicCollectionFactory.cs" />
     <Compile Include="Utils\Options.cs" />
-    <Compile Include="Utils\SortedWrapper.cs" />
+    <Compile Include="Utils\SortFilterWrapper.cs" />
     <Compile Include="Utils\XmlDictionary.cs" />
     <Compile Include="XmlStreamer.cs" />
   </ItemGroup>

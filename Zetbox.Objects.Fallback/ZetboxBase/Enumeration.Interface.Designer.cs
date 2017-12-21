@@ -11,7 +11,7 @@ namespace Zetbox.App.Base
     /// Metadefinition Object for Enumerations.
     /// </summary>
     [Zetbox.API.DefinitionGuid("ee475de2-d626-49e9-9e40-6bb12cb026d4")]
-    public interface Enumeration : Zetbox.App.Base.DataType 
+    public interface Enumeration : Zetbox.App.Base.DataType, Zetbox.App.Base.INamedObject 
     {
 
         /// <summary>

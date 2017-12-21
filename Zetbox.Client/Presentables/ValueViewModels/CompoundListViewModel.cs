@@ -68,27 +68,10 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         #endregion
 
+        #region Move
         public bool CanMove()
         {
-            return SelectedItem != null && !IsSorting && !IsReadOnly;
-        }
-
-        private ICommandViewModel _MoveItemUpCommand = null;
-        public ICommandViewModel MoveItemUpCommand
-        {
-            get
-            {
-                if (_MoveItemUpCommand == null)
-                {
-                    _MoveItemUpCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, 
-                        BaseObjectCollectionViewModelResources.MoveItemUpCommand_Name,
-                        BaseObjectCollectionViewModelResources.MoveItemUpCommand_Tooltip,
-                        MoveItemUp,
-                        CanMove,
-                        null);
-                }
-                return _MoveItemUpCommand;
-            }
+            return SelectedItem != null && !IsFiltering && !IsSorting && !IsReadOnly;
         }
 
         public void MoveItemUp()
@@ -108,7 +91,102 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             {
                 ValueModel.Value.RemoveAt(idx);
                 ValueModel.Value.Insert(idx - 1, item.Object);
-                //SelectedItem = item;
+            }
+        }
+
+        public void MoveItemTop()
+        {
+            var memories = SelectedItems.ToList();
+            memories.Reverse();
+            memories.ForEach(i => MoveItemTop(i));
+            SelectedItems.Clear();
+            memories.ForEach(i => SelectedItems.Add(i));
+        }
+
+        public void MoveItemTop(CompoundObjectViewModel item)
+        {
+            if (item == null) { return; }
+
+            var idx = ValueModel.Value.IndexOf(item.Object);
+            if (idx > 0)
+            {
+                ValueModel.Value.RemoveAt(idx);
+                ValueModel.Value.Insert(0, item.Object);
+            }
+        }
+
+        public void MoveItemDown()
+        {
+            var memories = SelectedItems.ToList();
+            memories.ForEach(i => MoveItemDown(i));
+            SelectedItems.Clear();
+            memories.ForEach(i => SelectedItems.Add(i));
+        }
+
+        public void MoveItemDown(CompoundObjectViewModel item)
+        {
+            if (item == null) { return; }
+
+            var idx = ValueModel.Value.IndexOf(item.Object);
+            if (idx != -1 && idx + 1 < Value.Count)
+            {
+                ValueModel.Value.RemoveAt(idx);
+                ValueModel.Value.Insert(idx + 1, item.Object);
+            }
+        }
+        public void MoveItemBottom()
+        {
+            var memories = SelectedItems.ToList();
+            memories.ForEach(i => MoveItemBottom(i));
+            SelectedItems.Clear();
+            memories.ForEach(i => SelectedItems.Add(i));
+        }
+
+        public void MoveItemBottom(CompoundObjectViewModel item)
+        {
+            if (item == null) { return; }
+
+            var idx = ValueModel.Value.IndexOf(item.Object);
+            if (idx != -1 && idx + 1 < Value.Count)
+            {
+                ValueModel.Value.RemoveAt(idx);
+                ValueModel.Value.Add(item.Object);
+            }
+        }
+
+        private ICommandViewModel _MoveItemUpCommand = null;
+        public ICommandViewModel MoveItemUpCommand
+        {
+            get
+            {
+                if (_MoveItemUpCommand == null)
+                {
+                    _MoveItemUpCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
+                        BaseObjectCollectionViewModelResources.MoveItemUpCommand_Name,
+                        BaseObjectCollectionViewModelResources.MoveItemUpCommand_Tooltip,
+                        MoveItemUp,
+                        CanMove,
+                        null);
+                }
+                return _MoveItemUpCommand;
+            }
+        }
+
+        private ICommandViewModel _MoveItemTopCommand = null;
+        public ICommandViewModel MoveItemTopCommand
+        {
+            get
+            {
+                if (_MoveItemTopCommand == null)
+                {
+                    _MoveItemTopCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
+                        BaseObjectCollectionViewModelResources.MoveItemTopCommand_Name,
+                        BaseObjectCollectionViewModelResources.MoveItemTopCommand_Tooltip,
+                        MoveItemTop,
+                        CanMove,
+                        null);
+                }
+                return _MoveItemTopCommand;
             }
         }
 
@@ -130,26 +208,24 @@ namespace Zetbox.Client.Presentables.ValueViewModels
             }
         }
 
-        public void MoveItemDown()
+        private ICommandViewModel _MoveItemBottomCommand = null;
+        public ICommandViewModel MoveItemBottomCommand
         {
-            var memories = SelectedItems.ToList();
-            memories.ForEach(i => MoveItemDown(i));
-            SelectedItems.Clear();
-            memories.ForEach(i => SelectedItems.Add(i));
-        }
-
-        public void MoveItemDown(CompoundObjectViewModel item)
-        {
-            if (item == null) { return; }
-
-            var idx = ValueModel.Value.IndexOf(item.Object);
-            if (idx != -1 && idx + 1 < Value.Count)
+            get
             {
-                ValueModel.Value.RemoveAt(idx);
-                ValueModel.Value.Insert(idx + 1, item.Object);
-                //SelectedItem = item;
+                if (_MoveItemBottomCommand == null)
+                {
+                    _MoveItemBottomCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this,
+                        BaseObjectCollectionViewModelResources.MoveItemBottomCommand_Name,
+                        BaseObjectCollectionViewModelResources.MoveItemBottomCommand_Tooltip,
+                        MoveItemBottom,
+                        CanMove,
+                        null);
+                }
+                return _MoveItemBottomCommand;
             }
         }
+        #endregion
 
         protected override void OnPropertyChanged(string propertyName)
         {

@@ -305,16 +305,36 @@ namespace Zetbox.Client.Presentables.ZetboxBase
 
         public void AddFilter(IFilterModel mdl)
         {
-            AddFilter(mdl, false, null);
+            AddFilter(-1, mdl, false, null);
+        }
+        public void AddFilter(int index, IFilterModel mdl)
+        {
+            AddFilter(index, mdl, false, null);
         }
         public void AddFilter(IFilterModel mdl, bool allowRemove)
         {
-            AddFilter(mdl, allowRemove, null);
+            AddFilter(-1, mdl, allowRemove, null);
+        }
+        public void AddFilter(int index, IFilterModel mdl, bool allowRemove)
+        {
+            AddFilter(index, mdl, allowRemove, null);
         }
         public void AddFilter(IFilterModel mdl, bool allowRemove, IEnumerable<Property> sourceProperties)
         {
+            AddFilter(-1, mdl, allowRemove, sourceProperties);
+        }
+        public void AddFilter(int index, IFilterModel mdl, bool allowRemove, IEnumerable<Property> sourceProperties)
+        {
             InitializeFilter();
-            _filter.Add(mdl);
+            if (index >= 0)
+            {
+                _filter.Insert(index, mdl);
+            }
+            else
+            {
+                _filter.Add(mdl);
+            }
+
             if (mdl is IUIFilterModel)
             {
                 var uimdl = (IUIFilterModel)mdl;

@@ -21,11 +21,12 @@ namespace Zetbox.Client.GUI
     using System.Text;
     using Zetbox.API;
     using Zetbox.App.GUI;
+    using Zetbox.App.Extensions;
     using Zetbox.Client.Models;
     using Zetbox.Client.Presentables;
     using Zetbox.Client.Presentables.GUI;
     using Zetbox.Client.Presentables.ValueViewModels;
-
+    
     public class DialogCreator
     {
         public delegate DialogCreator Factory(IZetboxContext ctx);
@@ -72,6 +73,9 @@ namespace Zetbox.Client.GUI
         private static readonly Action<Dictionary<object, object>> _doNothing = p => { };
 
         public Action<Dictionary<object, object>> OnAcceptAction { get; set; }
+        public event EventHandler<ValueInputTaskViewModel.CanInvokeEventArgs<bool>> CanAcceptAction;
+        public event EventHandler<ValueInputTaskViewModel.CanInvokeEventArgs<string>> CanAcceptActionReason;
+
         public Action OnCancelAction { get; set; }
         public List<Tuple<string, string, Action<Dictionary<object, object>>>> AdditionalButtons { get; private set; }
 
@@ -110,6 +114,8 @@ namespace Zetbox.Client.GUI
             }
 
             var dlg = ViewModelFactory.CreateViewModel<ValueInputTaskViewModel.Factory>().Invoke(DataContext, null, Title, Items, ValueModels, ok);
+            dlg.CanInvoke += CanAcceptAction;
+            dlg.CanInvokeReason += CanAcceptActionReason;
             dlg.SetInvokeCommandLabel(AcceptLabel.IfNullOrWhiteSpace(DialogCreatorResources.Accept));
             dlg.SetCancelCommandLabel(CancelLabel.IfNullOrWhiteSpace(DialogCreatorResources.Cancel));
             dlg.CancelCallback = OnCancelAction;
@@ -188,6 +194,26 @@ namespace Zetbox.Client.GUI
                 vmdl = c.ViewModelFactory.CreateViewModel<NullableDateTimePropertyViewModel.Factory>(vmdesc).Invoke(c.DataContext, null, mdl);
             else
                 vmdl = c.ViewModelFactory.CreateViewModel<NullableDateTimePropertyViewModel.Factory>().Invoke(c.DataContext, null, mdl);
+
+            if (requestedKind != null)
+                vmdl.RequestedKind = requestedKind;
+
+            c.Add(key, vmdl);
+            return c;
+        }
+        public static DialogCreator AddMonthSelector(this DialogCreator c, object key, string label, DateTime? value = null, Zetbox.App.Base.DateTimeStyles style = Zetbox.App.Base.DateTimeStyles.Date, bool allowNullInput = false, bool isReadOnly = false, ControlKind requestedKind = null, ViewModelDescriptor vmdesc = null, string description = null)
+        {
+            if (c == null) throw new ArgumentNullException("c");
+            if (key == null) throw new ArgumentNullException("key");
+
+            var mdl = new DateTimeValueModel(label, description, allowNullInput, isReadOnly, style);
+            mdl.Value = value ?? DateTime.Today.FirstMonthDay();
+
+            BaseValueViewModel vmdl;
+            if (vmdesc != null)
+                vmdl = c.ViewModelFactory.CreateViewModel<NullableDateTimePropertyViewModel.Factory>(vmdesc).Invoke(c.DataContext, null, mdl);
+            else
+                vmdl = c.ViewModelFactory.CreateViewModel<NullableMonthPropertyViewModel.Factory>().Invoke(c.DataContext, null, mdl);
 
             if (requestedKind != null)
                 vmdl.RequestedKind = requestedKind;
@@ -283,6 +309,30 @@ namespace Zetbox.Client.GUI
             c.Add(key, vmdl);
             return c;
         }
+
+        public static DialogCreator AddCompoundObject(this DialogCreator c, object key, string label, Zetbox.App.Base.CompoundObject cpo, ICompoundObject value = null, bool allowNullInput = false, bool isReadOnly = false, ControlKind requestedKind = null, ViewModelDescriptor vmdesc = null, string description = null, string helpText = null)
+        {
+            if (c == null) throw new ArgumentNullException("c");
+            if (key == null) throw new ArgumentNullException("key");
+
+            var mdl = new CompoundObjectValueModel(c.DataContext, label, description, allowNullInput, isReadOnly, cpo);
+            mdl.Value = value ?? c.DataContext.CreateCompoundObject(cpo.GetDescribedInterfaceType());
+            mdl.HelpText = helpText;
+
+            vmdesc = vmdesc ?? cpo.DefaultPropertyViewModelDescriptor;
+
+            BaseValueViewModel vmdl;
+            if (vmdesc != null)
+                vmdl = c.ViewModelFactory.CreateViewModel<CompoundObjectPropertyViewModel.Factory>(vmdesc).Invoke(c.DataContext, null, mdl);
+            else
+                vmdl = c.ViewModelFactory.CreateViewModel<CompoundObjectPropertyViewModel.Factory>().Invoke(c.DataContext, null, mdl);
+
+            if (requestedKind != null)
+                vmdl.RequestedKind = requestedKind;
+
+            c.Add(key, vmdl);
+            return c;
+        }
         #endregion
 
         #region Panels
@@ -353,6 +403,14 @@ namespace Zetbox.Client.GUI
         {
             if (c == null) throw new ArgumentNullException("c");
             c.OnAcceptAction = action;
+            return c;
+        }
+
+        public static DialogCreator OnCanAccept(this DialogCreator c, Func<Dictionary<object, object>, bool> canAccept, Func<Dictionary<object, object>, string> canAcceptReason = null)
+        {
+            if (c == null) throw new ArgumentNullException("c");
+            c.CanAcceptAction += (s, e) => e.Result = canAccept?.Invoke(e.Values) ?? true;
+            c.CanAcceptActionReason += (s, e) => e.Result = canAcceptReason?.Invoke(e.Values) ?? "";
             return c;
         }
 

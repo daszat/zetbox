@@ -438,6 +438,70 @@ namespace Zetbox.App.Base
         // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
 
         /// <summary>
+        /// 
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnGetName_CompoundObject")]
+        public virtual string GetName()
+        {
+            var e = new MethodReturnEventArgs<string>();
+            if (OnGetName_CompoundObject != null)
+            {
+                OnGetName_CompoundObject(this, e);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on CompoundObject.GetName");
+            }
+            return e.Result;
+        }
+        public delegate void GetName_Handler<T>(T obj, MethodReturnEventArgs<string> ret);
+        public static event GetName_Handler<CompoundObject> OnGetName_CompoundObject;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<CompoundObject> OnGetName_CompoundObject_CanExec;
+
+        [EventBasedMethod("OnGetName_CompoundObject_CanExec")]
+        public virtual bool GetNameCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnGetName_CompoundObject_CanExec != null)
+				{
+					OnGetName_CompoundObject_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<CompoundObject> OnGetName_CompoundObject_CanExecReason;
+
+        [EventBasedMethod("OnGetName_CompoundObject_CanExecReason")]
+        public virtual string GetNameCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnGetName_CompoundObject_CanExecReason != null)
+				{
+					OnGetName_CompoundObject_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
+        /// <summary>
         /// Implements all available interfaces as Properties and Methods
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method

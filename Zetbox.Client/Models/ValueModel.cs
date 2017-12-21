@@ -329,9 +329,9 @@ namespace Zetbox.Client.Models
         private DateTimeStyles _dateTimeStyle;
         public DateTimeStyles DateTimeStyle
         {
-            get 
-            { 
-                return _dateTimeStyle; 
+            get
+            {
+                return _dateTimeStyle;
             }
         }
 
@@ -580,10 +580,9 @@ namespace Zetbox.Client.Models
             }
         }
 
-        public bool? IsInlineEditable
-        {
-            get { return false; }
-        }
+        public bool? IsInlineEditable { get; set; }
+
+        public bool AllowFilter { get; set; }
         #endregion
 
         #region INotifyCollectionChanged Members

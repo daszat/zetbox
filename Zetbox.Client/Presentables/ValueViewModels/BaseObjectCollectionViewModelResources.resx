@@ -129,14 +129,29 @@
   <data name="CreateNewCommand_Tooltip" xml:space="preserve">
     <value>Creates a new Item suitable for adding to the list.</value>
   </data>
+  <data name="FilterHeader" xml:space="preserve">
+    <value>Filter</value>
+  </data>
   <data name="MoreItems" xml:space="preserve">
     <value>({0}): {1}...</value>
+  </data>
+  <data name="MoveItemBottomCommand_Name" xml:space="preserve">
+    <value>Bottom</value>
+  </data>
+  <data name="MoveItemBottomCommand_Tooltip" xml:space="preserve">
+    <value>Moves the item to the bottom</value>
   </data>
   <data name="MoveItemDownCommand_Name" xml:space="preserve">
     <value>Down</value>
   </data>
   <data name="MoveItemDownCommand_Tooltip" xml:space="preserve">
     <value>Moves the item down</value>
+  </data>
+  <data name="MoveItemTopCommand_Name" xml:space="preserve">
+    <value>Top</value>
+  </data>
+  <data name="MoveItemTopCommand_Tooltip" xml:space="preserve">
+    <value>Moves the item to the top</value>
   </data>
   <data name="MoveItemUpCommand_Name" xml:space="preserve">
     <value>Up</value>
@@ -155,5 +170,11 @@
   </data>
   <data name="RemoveCommand_Tooltip" xml:space="preserve">
     <value>Remove selection from list</value>
+  </data>
+  <data name="TextFilter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="TextFilter_Tooltip" xml:space="preserve">
+    <value>Filters all string properties</value>
   </data>
 </root>

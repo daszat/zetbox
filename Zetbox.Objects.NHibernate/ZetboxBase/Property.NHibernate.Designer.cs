@@ -43,6 +43,7 @@ namespace Zetbox.App.Base
             : base(lazyCtx) // do not pass proxy to base data object
         {
             this.Proxy = proxy;
+            _isAllowFilterCollectionsSet = Proxy.ID > 0;
             _isChangedOnSet = Proxy.ID > 0;
             _isCreatedOnSet = Proxy.ID > 0;
             _isExportGuidSet = Proxy.ID > 0;
@@ -50,6 +51,84 @@ namespace Zetbox.App.Base
 
         /// <summary>the NHibernate proxy of the represented entity</summary>
         internal readonly PropertyProxy Proxy;
+
+        /// <summary>
+        /// For collection properties, allow filtering
+        /// </summary>
+
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        public bool AllowFilterCollections
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = FetchAllowFilterCollectionsOrDefault();
+                if (OnAllowFilterCollections_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<bool>(__result);
+                    OnAllowFilterCollections_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isAllowFilterCollectionsSet = true;
+                if (Proxy.AllowFilterCollections != value)
+                {
+                    var __oldValue = Proxy.AllowFilterCollections;
+                    var __newValue = value;
+                    if (OnAllowFilterCollections_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnAllowFilterCollections_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("AllowFilterCollections", __oldValue, __newValue);
+                    Proxy.AllowFilterCollections = __newValue;
+                    NotifyPropertyChanged("AllowFilterCollections", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnAllowFilterCollections_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnAllowFilterCollections_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("AllowFilterCollections");
+                }
+            }
+        }
+
+
+        private bool FetchAllowFilterCollectionsOrDefault()
+        {
+            var __result = Proxy.AllowFilterCollections;
+                if (!_isAllowFilterCollectionsSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("018cd3e6-aff1-457c-853a-d0f1a4173dba"));
+                    if (__p != null) {
+                        _isAllowFilterCollectionsSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this.Proxy.AllowFilterCollections = (bool)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'Zetbox.App.Base.Property.AllowFilterCollections'");
+                    }
+                }
+            return __result;
+        }
+
+        private bool _isAllowFilterCollectionsSet = false;
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<Zetbox.App.Base.Property, bool> OnAllowFilterCollections_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.Property, bool> OnAllowFilterCollections_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.Property, bool> OnAllowFilterCollections_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Base.Property> OnAllowFilterCollections_IsValid;
 
         /// <summary>
         /// A space separated list of category names containing this Property
@@ -2122,6 +2201,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             var otherImpl = (PropertyNHibernateImpl)obj;
             var me = (Property)this;
 
+            me.AllowFilterCollections = other.AllowFilterCollections;
             me.CategoryTags = other.CategoryTags;
             me.ChangedOn = other.ChangedOn;
             me.CreatedOn = other.CreatedOn;
@@ -2221,6 +2301,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             // Do not audit calculated properties
             switch (property)
             {
+                case "AllowFilterCollections":
                 case "CategoryTags":
                 case "ChangedBy":
                 case "ChangedOn":
@@ -2380,6 +2461,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 if (_properties != null) return;
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
+                    // else
+                    new PropertyDescriptorNHibernateImpl<Property, bool>(
+                        lazyCtx,
+                        new Guid("018cd3e6-aff1-457c-853a-d0f1a4173dba"),
+                        "AllowFilterCollections",
+                        null,
+                        obj => obj.AllowFilterCollections,
+                        (obj, val) => obj.AllowFilterCollections = val,
+						obj => OnAllowFilterCollections_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<Property, string>(
                         lazyCtx,
@@ -2625,6 +2715,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
         [EventBasedMethod("OnNotifyPreSave_Property")]
         public override void NotifyPreSave()
         {
+            FetchAllowFilterCollectionsOrDefault();
             FetchChangedOnOrDefault();
             FetchCodeTemplateOrDefault();
             FetchCreatedOnOrDefault();
@@ -2746,6 +2837,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             public virtual Type ZetboxWrapper { get { return typeof(PropertyNHibernateImpl); } }
             public virtual Type ZetboxProxy { get { return typeof(PropertyProxy); } }
 
+            public virtual bool AllowFilterCollections { get; set; }
+
             public virtual string CategoryTags { get; set; }
 
             public virtual Zetbox.App.Base.IdentityNHibernateImpl.IdentityProxy ChangedBy { get; set; }
@@ -2804,6 +2897,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
+            binStream.Write(this._isAllowFilterCollectionsSet);
+            if (this._isAllowFilterCollectionsSet) {
+                binStream.Write(this.Proxy.AllowFilterCollections);
+            }
             binStream.Write(this.Proxy.CategoryTags);
             binStream.Write(this.Proxy.ChangedBy != null ? OurContext.GetIdFromProxy(this.Proxy.ChangedBy) : (int?)null);
             binStream.Write(this._isChangedOnSet);
@@ -2858,6 +2955,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
+            this._isAllowFilterCollectionsSet = binStream.ReadBoolean();
+            if (this._isAllowFilterCollectionsSet) {
+                this.Proxy.AllowFilterCollections = binStream.ReadBoolean();
+            }
             this.Proxy.CategoryTags = binStream.ReadString();
             binStream.Read(out this._fk_ChangedBy);
             this._isChangedOnSet = binStream.ReadBoolean();
@@ -2916,6 +3017,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             xml.WriteAttributeString("ExportGuid", this.Proxy.ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
+            System.Diagnostics.Debug.Assert(this._isAllowFilterCollectionsSet, "Exported objects need to have all default values evaluated");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.AllowFilterCollections, xml, "AllowFilterCollections", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.CategoryTags, xml, "CategoryTags", "Zetbox.App.Base");
             System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.ChangedOn, xml, "ChangedOn", "Zetbox.App.Base");
@@ -2943,6 +3046,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Zetbox.App.Base|AllowFilterCollections":
+                // Import must have default value set
+                this.Proxy.AllowFilterCollections = XmlStreamer.ReadBoolean(xml);
+                this._isAllowFilterCollectionsSet = true;
+                break;
             case "Zetbox.App.Base|CategoryTags":
                 this.Proxy.CategoryTags = XmlStreamer.ReadString(xml);
                 break;

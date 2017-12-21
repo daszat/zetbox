@@ -602,6 +602,10 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         {
             DisplayedColumns.Columns.Add(ColumnDisplayModel.Create(GridDisplayConfiguration.Mode.ReadOnly, propPath));
         }
+        public void AddDisplayColumn(int index, Property[] propPath)
+        {
+            DisplayedColumns.Columns.Insert(index, ColumnDisplayModel.Create(GridDisplayConfiguration.Mode.ReadOnly, propPath));
+        }
 
         public void RemoveDisplayColumn(Property property)
         {

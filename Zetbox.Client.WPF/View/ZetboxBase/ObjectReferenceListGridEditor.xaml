@@ -30,10 +30,12 @@
     </ctrls:PropertyEditor.Resources>
     <DockPanel>
         <UniformGrid DockPanel.Dock="Left"
-                     Rows="2"
+                     Columns="1"
                      VerticalAlignment="Top">
+            <ctrls:CommandButton CommandViewModel="{Binding Path=MoveItemTopCommand}" />
             <ctrls:CommandButton CommandViewModel="{Binding Path=MoveItemUpCommand}" />
             <ctrls:CommandButton CommandViewModel="{Binding Path=MoveItemDownCommand}" />
+            <ctrls:CommandButton CommandViewModel="{Binding Path=MoveItemBottomCommand}" />
         </UniformGrid>
 
         <ctrls:WorkaroundToolBar DockPanel.Dock="Top"
@@ -46,6 +48,13 @@
             </ctrls:WorkaroundToolBar.Resources>
         </ctrls:WorkaroundToolBar>
 
+        <Expander DockPanel.Dock="Top"
+                  Style="{StaticResource Item1Expander}"
+                  Header="{Binding FilterHeader}"
+                  Visibility="{Binding AllowFilter, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  IsExpanded="True">
+            <ctrls:LabeledView DataContext="{Binding FilterText}" />
+        </Expander>
         <!-- configured from code, see RefreshGridView() -->
         <ctrls:ZetboxDataGrid x:Name="lst"
                               BorderThickness="0"

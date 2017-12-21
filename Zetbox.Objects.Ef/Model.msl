@@ -1161,6 +1161,7 @@
 	    <MappingFragment StoreEntitySet="Property">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Properties_pos" ColumnName="fk_ObjectClass_pos" />
+          <ScalarProperty Name="AllowFilterCollections" ColumnName="AllowFilterCollections" />
           <ScalarProperty Name="CategoryTags" ColumnName="CategoryTags" />
           <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
           <ScalarProperty Name="CodeTemplate" ColumnName="CodeTemplate" />
@@ -1180,6 +1181,7 @@
 	    <MappingFragment StoreEntitySet="Property">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Properties_pos" ColumnName="fk_ObjectClass_pos" />
+          <ScalarProperty Name="AllowFilterCollections" ColumnName="AllowFilterCollections" />
           <ScalarProperty Name="CategoryTags" ColumnName="CategoryTags" />
           <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
           <ScalarProperty Name="CodeTemplate" ColumnName="CodeTemplate" />
@@ -1201,6 +1203,7 @@
 	    <MappingFragment StoreEntitySet="Property">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Properties_pos" ColumnName="fk_ObjectClass_pos" />
+          <ScalarProperty Name="AllowFilterCollections" ColumnName="AllowFilterCollections" />
           <ScalarProperty Name="CategoryTags" ColumnName="CategoryTags" />
           <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
           <ScalarProperty Name="CodeTemplate" ColumnName="CodeTemplate" />
@@ -1225,6 +1228,7 @@
 	    <MappingFragment StoreEntitySet="Property">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Properties_pos" ColumnName="fk_ObjectClass_pos" />
+          <ScalarProperty Name="AllowFilterCollections" ColumnName="AllowFilterCollections" />
           <ScalarProperty Name="CategoryTags" ColumnName="CategoryTags" />
           <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
           <ScalarProperty Name="CodeTemplate" ColumnName="CodeTemplate" />
@@ -1246,6 +1250,7 @@
 	    <MappingFragment StoreEntitySet="Property">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Properties_pos" ColumnName="fk_ObjectClass_pos" />
+          <ScalarProperty Name="AllowFilterCollections" ColumnName="AllowFilterCollections" />
           <ScalarProperty Name="CategoryTags" ColumnName="CategoryTags" />
           <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
           <ScalarProperty Name="CodeTemplate" ColumnName="CodeTemplate" />
@@ -1271,6 +1276,7 @@
 	    <MappingFragment StoreEntitySet="Property">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Properties_pos" ColumnName="fk_ObjectClass_pos" />
+          <ScalarProperty Name="AllowFilterCollections" ColumnName="AllowFilterCollections" />
           <ScalarProperty Name="CategoryTags" ColumnName="CategoryTags" />
           <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
           <ScalarProperty Name="CodeTemplate" ColumnName="CodeTemplate" />
@@ -1294,6 +1300,7 @@
 	    <MappingFragment StoreEntitySet="Property">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Properties_pos" ColumnName="fk_ObjectClass_pos" />
+          <ScalarProperty Name="AllowFilterCollections" ColumnName="AllowFilterCollections" />
           <ScalarProperty Name="CategoryTags" ColumnName="CategoryTags" />
           <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
           <ScalarProperty Name="CodeTemplate" ColumnName="CodeTemplate" />
@@ -1318,6 +1325,7 @@
 	    <MappingFragment StoreEntitySet="Property">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Properties_pos" ColumnName="fk_ObjectClass_pos" />
+          <ScalarProperty Name="AllowFilterCollections" ColumnName="AllowFilterCollections" />
           <ScalarProperty Name="CategoryTags" ColumnName="CategoryTags" />
           <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
           <ScalarProperty Name="CodeTemplate" ColumnName="CodeTemplate" />
@@ -1340,6 +1348,7 @@
 	    <MappingFragment StoreEntitySet="Property">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Properties_pos" ColumnName="fk_ObjectClass_pos" />
+          <ScalarProperty Name="AllowFilterCollections" ColumnName="AllowFilterCollections" />
           <ScalarProperty Name="CategoryTags" ColumnName="CategoryTags" />
           <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
           <ScalarProperty Name="CodeTemplate" ColumnName="CodeTemplate" />
@@ -1362,6 +1371,7 @@
 	    <MappingFragment StoreEntitySet="Property">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Properties_pos" ColumnName="fk_ObjectClass_pos" />
+          <ScalarProperty Name="AllowFilterCollections" ColumnName="AllowFilterCollections" />
           <ScalarProperty Name="CategoryTags" ColumnName="CategoryTags" />
           <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
           <ScalarProperty Name="CodeTemplate" ColumnName="CodeTemplate" />
@@ -1384,6 +1394,7 @@
 	    <MappingFragment StoreEntitySet="Property">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Properties_pos" ColumnName="fk_ObjectClass_pos" />
+          <ScalarProperty Name="AllowFilterCollections" ColumnName="AllowFilterCollections" />
           <ScalarProperty Name="CategoryTags" ColumnName="CategoryTags" />
           <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
           <ScalarProperty Name="CodeTemplate" ColumnName="CodeTemplate" />
@@ -1406,6 +1417,7 @@
 	    <MappingFragment StoreEntitySet="Property">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Properties_pos" ColumnName="fk_ObjectClass_pos" />
+          <ScalarProperty Name="AllowFilterCollections" ColumnName="AllowFilterCollections" />
           <ScalarProperty Name="CategoryTags" ColumnName="CategoryTags" />
           <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
           <ScalarProperty Name="CodeTemplate" ColumnName="CodeTemplate" />

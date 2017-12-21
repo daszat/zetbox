@@ -11,7 +11,7 @@ namespace Zetbox.App.Base
     /// Metadefinition Object for Compound Objects.
     /// </summary>
     [Zetbox.API.DefinitionGuid("2cb3f778-dd6a-46c7-ad2b-5f8691313035")]
-    public interface CompoundObject : Zetbox.App.Base.DataType 
+    public interface CompoundObject : Zetbox.App.Base.DataType, Zetbox.App.Base.INamedObject 
     {
 
         /// <summary>

@@ -2235,6 +2235,7 @@
     <Property Name="fk_ControlKind" Type="int" />
     <Property Name="fk_ChangedBy" Type="int" />
     <Property Name="fk_CreatedBy" Type="int" />
+    <Property Name="AllowFilterCollections" Type="bit" Nullable="false" />
     <Property Name="CategoryTags" Type="nvarchar" MaxLength="4000" Nullable="true" />
     <Property Name="ChangedOn" Type="datetime2" Nullable="false" />
     <Property Name="CodeTemplate" Type="nvarchar" Nullable="true" />

@@ -362,7 +362,7 @@ namespace Zetbox.Generator
             }
             else
             {
-                return ctx.GetQuery<ObjectClass>().Where(i => FallbackModules.Contains(i.Module.Name));
+                return ctx.GetQuery<ObjectClass>().ToArray().Where(i => FallbackModules.Contains(i.Module.Name)).AsQueryable();
             }
         }
 
@@ -376,7 +376,7 @@ namespace Zetbox.Generator
             }
             else
             {
-                return ctx.GetQuery<Interface>().Where(i => FallbackModules.Contains(i.Module.Name));
+                return ctx.GetQuery<Interface>().ToArray().Where(i => FallbackModules.Contains(i.Module.Name)).AsQueryable();
             }
         }
 
@@ -390,7 +390,7 @@ namespace Zetbox.Generator
             }
             else
             {
-                return ctx.GetQuery<Enumeration>().Where(i => FallbackModules.Contains(i.Module.Name));
+                return ctx.GetQuery<Enumeration>().ToArray().Where(i => FallbackModules.Contains(i.Module.Name)).AsQueryable();
             }
         }
 
@@ -404,7 +404,7 @@ namespace Zetbox.Generator
             }
             else
             {
-                return ctx.GetQuery<CompoundObject>().Where(i => FallbackModules.Contains(i.Module.Name));
+                return ctx.GetQuery<CompoundObject>().ToArray().Where(i => FallbackModules.Contains(i.Module.Name)).AsQueryable();
             }
         }
 
