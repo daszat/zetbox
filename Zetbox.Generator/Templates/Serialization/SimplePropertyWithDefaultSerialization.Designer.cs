@@ -69,19 +69,18 @@ break;
         case SerializerDirection.Export:
 
 #line 57 "C:\Projects\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
-this.WriteObjects("            System.Diagnostics.Debug.Assert(this.",  isSetFlagName , ", \"Exported objects need to have all default values evaluated\");\r\n");
 this.WriteObjects("            if (modules.Contains(\"*\") || modules.Contains(\"",  xmlnamespace , "\")) XmlStreamer.ToStream(this.",  memberName , ", ",  streamName , ", \"",  xmlname , "\", \"",  xmlnamespace , "\");\r\n");
-#line 60 "C:\Projects\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
+#line 59 "C:\Projects\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
 break;
         case SerializerDirection.MergeImport:
 
-#line 63 "C:\Projects\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
+#line 62 "C:\Projects\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
 this.WriteObjects("            case \"",  xmlnamespace , "|",  xmlname , "\":\r\n");
 this.WriteObjects("                // Import must have default value set\r\n");
 this.WriteObjects("                this.",  memberName , " = XmlStreamer.",  memberType.SerializerReadMethod() , "(",  streamName , ");\r\n");
 this.WriteObjects("                this.",  isSetFlagName , " = true;\r\n");
 this.WriteObjects("                break;\r\n");
-#line 69 "C:\Projects\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
+#line 68 "C:\Projects\zetbox\Zetbox.Generator\Templates\Serialization\SimplePropertyWithDefaultSerialization.cst"
 break;
         default:
             throw new ArgumentOutOfRangeException("direction");

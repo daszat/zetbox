@@ -574,7 +574,6 @@ namespace Zetbox.App.Base
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._NewValue, xml, "NewValue", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._OldValue, xml, "OldValue", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._PropertyName, xml, "PropertyName", "Zetbox.App.Base");
-            System.Diagnostics.Debug.Assert(this._isTimestampSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._Timestamp, xml, "Timestamp", "Zetbox.App.Base");
         }
 

@@ -1859,13 +1859,9 @@ public static event PropertyListChangedHandler<at.dasz.DocumentManagement.File> 
             if (!CurrentAccessRights.HasReadRights()) return;
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ExportCompoundObject(this.AttachedTo, xml, "AttachedTo", "at.dasz.DocumentManagement");
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this.Proxy.Blob != null ? this.Proxy.Blob.ExportGuid : (Guid?)null, xml, "Blob", "at.dasz.DocumentManagement");
-            System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this.Proxy.ChangedOn, xml, "ChangedOn", "at.dasz.DocumentManagement");
-            System.Diagnostics.Debug.Assert(this._isCreatedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "at.dasz.DocumentManagement");
-            System.Diagnostics.Debug.Assert(this._isIsFileReadonlySet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this.Proxy.IsFileReadonly, xml, "IsFileReadonly", "at.dasz.DocumentManagement");
-            System.Diagnostics.Debug.Assert(this._isKeepRevisionsSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this.Proxy.KeepRevisions, xml, "KeepRevisions", "at.dasz.DocumentManagement");
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this.Proxy.Name, xml, "Name", "at.dasz.DocumentManagement");
             if (modules.Contains("*") || modules.Contains("at.dasz.DocumentManagement")) XmlStreamer.ToStream(this.Proxy.Tags, xml, "Tags", "at.dasz.DocumentManagement");

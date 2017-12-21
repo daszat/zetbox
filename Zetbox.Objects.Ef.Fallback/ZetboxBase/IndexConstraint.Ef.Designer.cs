@@ -530,7 +530,6 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.IndexConstraint> 
             base.Export(xml, modules);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
-            System.Diagnostics.Debug.Assert(this._isIsUniqueSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._IsUnique, xml, "IsUnique", "Zetbox.App.Base");
         }
 
