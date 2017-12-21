@@ -30,10 +30,12 @@
     </ctrls:PropertyEditor.Resources>
     <DockPanel>
         <UniformGrid DockPanel.Dock="Left"
-                     Rows="2"
+                     Columns="1"
                      VerticalAlignment="Top">
+            <ctrls:CommandButton CommandViewModel="{Binding Path=MoveItemTopCommand}" />
             <ctrls:CommandButton CommandViewModel="{Binding Path=MoveItemUpCommand}" />
             <ctrls:CommandButton CommandViewModel="{Binding Path=MoveItemDownCommand}" />
+            <ctrls:CommandButton CommandViewModel="{Binding Path=MoveItemBottomCommand}" />
         </UniformGrid>
 
         <ctrls:WorkaroundToolBar DockPanel.Dock="Top"
