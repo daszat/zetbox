@@ -71,7 +71,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         #region Move
         public bool CanMove()
         {
-            return SelectedItem != null && !IsSorting && !IsReadOnly;
+            return SelectedItem != null && !IsFiltering && !IsSorting && !IsReadOnly;
         }
 
         public void MoveItemUp()

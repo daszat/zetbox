@@ -38,6 +38,77 @@ namespace Zetbox.App.Base
         }
 
         /// <summary>
+        /// For collection properties, allow filtering
+        /// </summary>
+        // value type property
+        // BEGIN Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+        public bool AllowFilterCollections
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _AllowFilterCollections;
+                if (!_isAllowFilterCollectionsSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("018cd3e6-aff1-457c-853a-d0f1a4173dba"));
+                    if (__p != null) {
+                        _isAllowFilterCollectionsSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this._AllowFilterCollections = (bool)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'Property.AllowFilterCollections'");
+                    }
+                }
+                if (OnAllowFilterCollections_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<bool>(__result);
+                    OnAllowFilterCollections_Getter(this, __e);
+                    __result = _AllowFilterCollections = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isAllowFilterCollectionsSet = true;
+                if (_AllowFilterCollections != value)
+                {
+                    var __oldValue = _AllowFilterCollections;
+                    var __newValue = value;
+                    if (OnAllowFilterCollections_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnAllowFilterCollections_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("AllowFilterCollections", __oldValue, __newValue);
+                    _AllowFilterCollections = __newValue;
+                    NotifyPropertyChanged("AllowFilterCollections", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnAllowFilterCollections_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnAllowFilterCollections_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("AllowFilterCollections");
+                }
+            }
+        }
+        private bool _AllowFilterCollections;
+        private bool _isAllowFilterCollectionsSet = false;
+        // END Zetbox.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Zetbox.App.Base.Property, bool> OnAllowFilterCollections_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.Property, bool> OnAllowFilterCollections_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.Property, bool> OnAllowFilterCollections_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Base.Property> OnAllowFilterCollections_IsValid;
+
+        /// <summary>
         /// A space separated list of category names containing this Property
         /// </summary>
         // value type property
@@ -2243,6 +2314,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             var otherImpl = (PropertyMemoryImpl)obj;
             var me = (Property)this;
 
+            me.AllowFilterCollections = other.AllowFilterCollections;
             me.CategoryTags = other.CategoryTags;
             me.ChangedOn = other.ChangedOn;
             this.CodeTemplate = otherImpl.CodeTemplate;
@@ -2343,6 +2415,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             // Do not audit calculated properties
             switch (property)
             {
+                case "AllowFilterCollections":
                 case "CategoryTags":
                 case "ChangedBy":
                 case "ChangedOn":
@@ -2503,6 +2576,15 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
                 if (_properties != null) return;
 
                 _properties = new System.ComponentModel.PropertyDescriptor[] {
+                    // else
+                    new PropertyDescriptorMemoryImpl<Property, bool>(
+                        lazyCtx,
+                        new Guid("018cd3e6-aff1-457c-853a-d0f1a4173dba"),
+                        "AllowFilterCollections",
+                        null,
+                        obj => obj.AllowFilterCollections,
+                        (obj, val) => obj.AllowFilterCollections = val,
+						obj => OnAllowFilterCollections_IsValid), 
                     // else
                     new PropertyDescriptorMemoryImpl<Property, string>(
                         lazyCtx,
@@ -2813,6 +2895,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             base.ToStream(binStream, auxObjects, eagerLoadLists);
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
+            binStream.Write(this._isAllowFilterCollectionsSet);
+            if (this._isAllowFilterCollectionsSet) {
+                binStream.Write(this._AllowFilterCollections);
+            }
             binStream.Write(this._CategoryTags);
             binStream.Write(ChangedBy != null ? ChangedBy.ID : (int?)null);
             binStream.Write(this._isChangedOnSet);
@@ -2867,6 +2953,10 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             var result = new List<IPersistenceObject>();
             // it may be only an empty shell to stand-in for unreadable data
             if (CurrentAccessRights != Zetbox.API.AccessRights.None) {
+            this._isAllowFilterCollectionsSet = binStream.ReadBoolean();
+            if (this._isAllowFilterCollectionsSet) {
+                this._AllowFilterCollections = binStream.ReadBoolean();
+            }
             this._CategoryTags = binStream.ReadString();
             this._fk_ChangedBy = binStream.ReadNullableInt32();
             this._isChangedOnSet = binStream.ReadBoolean();
@@ -2925,6 +3015,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             xml.WriteAttributeString("ExportGuid", this._ExportGuid.ToString());
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
+            System.Diagnostics.Debug.Assert(this._isAllowFilterCollectionsSet, "Exported objects need to have all default values evaluated");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._AllowFilterCollections, xml, "AllowFilterCollections", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._CategoryTags, xml, "CategoryTags", "Zetbox.App.Base");
             System.Diagnostics.Debug.Assert(this._isChangedOnSet, "Exported objects need to have all default values evaluated");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Zetbox.App.Base");
@@ -2952,6 +3044,11 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Property> OnConst
             // it may be only an empty shell to stand-in for unreadable data
             if (!CurrentAccessRights.HasReadRights()) return;
             switch (xml.NamespaceURI + "|" + xml.LocalName) {
+            case "Zetbox.App.Base|AllowFilterCollections":
+                // Import must have default value set
+                this._AllowFilterCollections = XmlStreamer.ReadBoolean(xml);
+                this._isAllowFilterCollectionsSet = true;
+                break;
             case "Zetbox.App.Base|CategoryTags":
                 this._CategoryTags = XmlStreamer.ReadString(xml);
                 break;

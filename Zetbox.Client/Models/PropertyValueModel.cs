@@ -741,6 +741,8 @@ namespace Zetbox.Client.Models
         {
             get { return _property.CompoundObjectDefinition; }
         }
+
+        public bool AllowFilter => _property.AllowFilterCollections;
     }
 
     public class CompoundCollectionPropertyValueModel
@@ -850,6 +852,7 @@ namespace Zetbox.Client.Models
             get { return this.objRefProp.IsInlineEditable; }
         }
 
+        public bool AllowFilter => objRefProp.AllowFilterCollections;
         #endregion
 
         #region INotifyCollectionChanged Members

@@ -586,7 +586,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         private bool _valueCacheInititalized = false;
         ReadOnlyObservableProjectedList<IDataObject, DataObjectViewModel> _valueCache;
-        SortedWrapper<IDataObject> _wrapper;
+        SortFilterWrapper<IDataObject> _wrapper;
         private ZbTask<IReadOnlyObservableList<DataObjectViewModel>> _fetchValueTask;
         protected override ZbTask<IReadOnlyObservableList<DataObjectViewModel>> GetValueFromModelAsync()
         {
@@ -596,7 +596,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 _fetchValueTask = new ZbTask<IReadOnlyObservableList<DataObjectViewModel>>(ObjectCollectionModel.GetValueAsync())
                     .OnResult(t =>
                     {
-                        _wrapper = new SortedWrapper<IDataObject>(ObjectCollectionModel.Value, ReferencedClass.GetDescribedInterfaceType(), ObjectCollectionModel, InitialSortProperty);
+                        _wrapper = new SortFilterWrapper<IDataObject>(ObjectCollectionModel.Value, ReferencedClass.GetDescribedInterfaceType(), ObjectCollectionModel, InitialSortProperty);
                         _valueCache = new ReadOnlyObservableProjectedList<IDataObject, DataObjectViewModel>(
                             _wrapper,
                             obj => DataObjectViewModel.Fetch(ViewModelFactory, DataContext, GetWorkspace(), obj),
@@ -816,6 +816,72 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         public string SortProperty { get { return _sortProperty; } }
         public System.ComponentModel.ListSortDirection SortDirection { get { return _sortDirection; } }
+        #endregion
+
+        #region Filtering
+        private bool? _allowFilter = null;
+        public bool AllowFilter
+        {
+            get
+            {
+                return _allowFilter ?? ObjectCollectionModel.AllowFilter;
+            }
+            set
+            {
+                if(_allowFilter != value)
+                {
+                    _allowFilter = value;
+                    OnPropertyChanged("AllowFilter");
+                }
+            }
+        }
+
+        private ClassValueModel<string> _filterTextMdl = null;
+        private StringValueViewModel _filterText = null;
+
+        public ViewModel FilterText
+        {
+            get
+            {
+                if(_filterText == null)
+                {
+                    _filterTextMdl = new ClassValueModel<string>(
+                        BaseObjectCollectionViewModelResources.TextFilter,
+                        BaseObjectCollectionViewModelResources.TextFilter_Tooltip,
+                        true, false);
+                    _filterTextMdl.PropertyChanged += (s, e) =>
+                    {
+                        if (e.PropertyName == "Value")
+                        {
+                            OnPropertyChanged("FilterText");
+                            OnPropertyChanged("IsFiltering");
+
+                            EnsureValueCache();
+                            _wrapper.Filter(_filterText.Value, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+                            OnPropertyChanged("ValueProxiesAsync");
+                        }
+                    };
+                    _filterText = ViewModelFactory.CreateViewModel<StringValueViewModel.Factory>().Invoke(DataContext, this, _filterTextMdl);
+                }
+                return _filterText;
+            }
+        }
+
+        public string FilterHeader
+        {
+            get
+            {
+                return BaseObjectCollectionViewModelResources.FilterHeader;
+            }
+        }
+
+        public bool IsFiltering
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(_filterTextMdl?.Value);
+            }
+        }
         #endregion
 
         #region IFormattedValueViewModel Members

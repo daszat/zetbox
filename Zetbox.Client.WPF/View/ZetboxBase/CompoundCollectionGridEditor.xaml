@@ -38,6 +38,13 @@
                 </DataTemplate>
             </ctrls:WorkaroundToolBar.Resources>
         </ctrls:WorkaroundToolBar>
+        <Expander DockPanel.Dock="Top"
+                  Style="{StaticResource Item1Expander}"
+                  Header="{Binding FilterHeader}"
+                  Visibility="{Binding AllowFilter, Converter={StaticResource BooleanToVisibilityConverter}}"
+                  IsExpanded="True">
+            <ctrls:LabeledView DataContext="{Binding FilterText}" />
+        </Expander>
         <!-- configured from code, see RefreshGridView() -->
         <ctrls:ZetboxDataGrid x:Name="lst"
                               BorderThickness="0"

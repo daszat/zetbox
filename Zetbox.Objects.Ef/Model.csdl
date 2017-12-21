@@ -2222,6 +2222,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="AllowFilterCollections" Type="Boolean" Nullable="false"  />
     <Property Name="CategoryTags" Type="String" Nullable="true" MaxLength="4000"  />
     <NavigationProperty Name="ChangedByImpl"
                         Relationship="Model.FK_Property_was_ChangedBy"

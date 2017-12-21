@@ -141,6 +141,7 @@ namespace Zetbox.Client.Models
     public interface ICompoundCollectionValueModel<TCollection> : IValueModel<TCollection>, INotifyCollectionChanged
     {
         CompoundObject CompoundObjectDefinition { get; }
+        bool AllowFilter { get; }
     }
 
     // TODO: refactor to use ICollectionValueModel<TValue>
@@ -149,5 +150,6 @@ namespace Zetbox.Client.Models
         ObjectClass ReferencedClass { get; }
         RelationEnd RelEnd { get; }
         bool? IsInlineEditable { get; }
+        bool AllowFilter { get; }
     }
 }

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2017-12-20T17:38:53.2048849Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2017-12-21T10:07:10.8467242Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -44474,6 +44474,45 @@ public static void isValid_UserID(OpenID obj, PropertyIsValidEventArgs e)
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
+  <ZetboxBase:BoolProperty ExportGuid="018cd3e6-aff1-457c-853a-d0f1a4173dba">
+    <ZetboxBase:CategoryTags>GUI</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2017-12-21T09:43:56.466861Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_AllowFilterCollections(Property obj, PropertyGetterEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_AllowFilterCollections(Property obj, PropertyPreSetterEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_AllowFilterCollections(Property obj, PropertyPostSetterEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_AllowFilterCollections(Property obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.AllowFilterCollections == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2017-12-21T09:43:56.466861Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultValue>6a2e992d-886b-4be2-90f3-3121193ee2f4</ZetboxBase:DefaultValue>
+    <ZetboxBase:Description>For collection properties, allow filtering</ZetboxBase:Description>
+    <ZetboxBase:Label>Allow filtering collections</ZetboxBase:Label>
+    <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
+    <ZetboxBase:Name>AllowFilterCollections</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>e5f93f63-9cb8-40a5-8118-d1d9e479370c</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>1501</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>09d1f453-d0d9-429e-88e7-e84b33de7c2e</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:BoolProperty>
   <ZetboxBase:StringProperty ExportGuid="13418a59-a804-4bc7-88ed-4d3509940301">
     <ZetboxBase:CategoryTags>Main, Summary</ZetboxBase:CategoryTags>
     <ZetboxBase:ChangedOn>2013-11-12T09:22:54.445024Z</ZetboxBase:ChangedOn>
@@ -50943,6 +50982,11 @@ public static void isValid_IsList(ValueTypeProperty obj, PropertyIsValidEventArg
     <ZetboxBase:MaxLength>255</ZetboxBase:MaxLength>
     <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
   </ZetboxBase:StringRangeConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="c69cbca3-3e60-4833-b563-ff111c76a301">
+    <ZetboxBase:ChangedOn>2017-12-21T09:43:56.466861Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>018cd3e6-aff1-457c-853a-d0f1a4173dba</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2017-12-21T09:43:56.466861Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
   <ZetboxBase:StringRangeConstraint ExportGuid="9d9c8bf8-26cf-4a35-a542-1fc4ebcd2504">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:05.738067Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>13418a59-a804-4bc7-88ed-4d3509940301</ZetboxBase:ConstrainedProperty>
@@ -51912,6 +51956,12 @@ public static void isValid_IsList(ValueTypeProperty obj, PropertyIsValidEventArg
     <ZetboxBase:ChangedOn>2012-09-28T09:40:25.432144Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2012-09-28T09:40:25.432144Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Property>373f0036-42d6-41e2-a2a4-74462537f426</ZetboxBase:Property>
+    <ZetboxBase:BoolValue>false</ZetboxBase:BoolValue>
+  </ZetboxBase:BoolDefaultValue>
+  <ZetboxBase:BoolDefaultValue ExportGuid="6a2e992d-886b-4be2-90f3-3121193ee2f4">
+    <ZetboxBase:ChangedOn>2017-12-21T09:43:56.466861Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2017-12-21T09:43:56.466861Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Property>018cd3e6-aff1-457c-853a-d0f1a4173dba</ZetboxBase:Property>
     <ZetboxBase:BoolValue>false</ZetboxBase:BoolValue>
   </ZetboxBase:BoolDefaultValue>
   <ZetboxBase:CurrentDateTimeDefaultValue ExportGuid="f2eb3e40-7689-413b-ae77-3bc0f5706887">

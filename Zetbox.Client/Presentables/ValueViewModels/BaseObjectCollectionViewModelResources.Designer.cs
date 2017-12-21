@@ -98,6 +98,15 @@ namespace Zetbox.Client.Presentables.ValueViewModels {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Filter.
+        /// </summary>
+        internal static string FilterHeader {
+            get {
+                return ResourceManager.GetString("FilterHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ({0}): {1}....
         /// </summary>
         internal static string MoreItems {
@@ -211,6 +220,24 @@ namespace Zetbox.Client.Presentables.ValueViewModels {
         internal static string RemoveCommand_Tooltip {
             get {
                 return ResourceManager.GetString("RemoveCommand_Tooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter.
+        /// </summary>
+        internal static string TextFilter {
+            get {
+                return ResourceManager.GetString("TextFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filters all string properties.
+        /// </summary>
+        internal static string TextFilter_Tooltip {
+            get {
+                return ResourceManager.GetString("TextFilter_Tooltip", resourceCulture);
             }
         }
     }

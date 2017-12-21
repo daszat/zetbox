@@ -1589,6 +1589,10 @@ namespace Zetbox {
                             }
                             public static class Property_Properties
                             {
+                                public static TypedGuid<global::Zetbox.App.Base.BoolProperty> AllowFilterCollections
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.BoolProperty>("018cd3e6-aff1-457c-853a-d0f1a4173dba"); }
+                                }
                                 public static TypedGuid<global::Zetbox.App.Base.StringProperty> CategoryTags
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.StringProperty>("13418a59-a804-4bc7-88ed-4d3509940301"); }

@@ -5111,6 +5111,10 @@
 
         <!-- define the properties -->
         <!-- ValueTypeProperty isValue -->
+        <property name="AllowFilterCollections" 
+                  column="`AllowFilterCollections`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
         <property name="CategoryTags" 
                   column="`CategoryTags`" 
                   optimistic-lock="false"/>

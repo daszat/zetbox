@@ -129,6 +129,9 @@
   <data name="CreateNewCommand_Tooltip" xml:space="preserve">
     <value>Creates a new Item suitable for adding to the list.</value>
   </data>
+  <data name="FilterHeader" xml:space="preserve">
+    <value>Filter</value>
+  </data>
   <data name="MoreItems" xml:space="preserve">
     <value>({0}): {1}...</value>
   </data>
@@ -167,5 +170,11 @@
   </data>
   <data name="RemoveCommand_Tooltip" xml:space="preserve">
     <value>Remove selection from list</value>
+  </data>
+  <data name="TextFilter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="TextFilter_Tooltip" xml:space="preserve">
+    <value>Filters all string properties</value>
   </data>
 </root>

@@ -71,7 +71,6 @@ namespace Zetbox.Client.Presentables
             get { return IconConverter.ToImage(_dataType.DefaultIcon); }
         }
 
-
         protected override PropertyGroupViewModel CreatePropertyGroup(string tag, string translatedTag, PropertyGroupCollection lst)
         {
             if (tag == "GUI")

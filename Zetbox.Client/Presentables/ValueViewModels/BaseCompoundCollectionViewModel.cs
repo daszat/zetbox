@@ -444,7 +444,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
         }
 
         ReadOnlyObservableProjectedList<ICompoundObject, CompoundObjectViewModel> _valueCache;
-        SortedWrapper<ICompoundObject> _wrapper;
+        SortFilterWrapper<ICompoundObject> _wrapper;
         private ZbTask<IReadOnlyObservableList<CompoundObjectViewModel>> _fetchValueTask;
         protected override ZbTask<IReadOnlyObservableList<CompoundObjectViewModel>> GetValueFromModelAsync()
         {
@@ -454,7 +454,7 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 _fetchValueTask = new ZbTask<IReadOnlyObservableList<CompoundObjectViewModel>>(ObjectCollectionModel.GetValueAsync())
                     .OnResult(t =>
                     {
-                        _wrapper = new SortedWrapper<ICompoundObject>(ObjectCollectionModel.Value, ReferencedClass.GetDescribedInterfaceType(), ObjectCollectionModel, InitialSortProperty);
+                        _wrapper = new SortFilterWrapper<ICompoundObject>(ObjectCollectionModel.Value, ReferencedClass.GetDescribedInterfaceType(), ObjectCollectionModel, InitialSortProperty);
                         _valueCache = new ReadOnlyObservableProjectedList<ICompoundObject, CompoundObjectViewModel>(
                             _wrapper,
                             obj => CompoundObjectViewModel.Fetch(ViewModelFactory, DataContext, ViewModelFactory.GetWorkspace(DataContext), obj),
@@ -658,6 +658,57 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         public string SortProperty { get { return _sortProperty; } }
         public System.ComponentModel.ListSortDirection SortDirection { get { return _sortDirection; } }
+        #endregion
+
+        #region Filtering
+        private bool? _allowFilter = null;
+        public bool AllowFilter
+        {
+            get
+            {
+                return _allowFilter ?? ObjectCollectionModel.AllowFilter;
+            }
+            set
+            {
+                if (_allowFilter != value)
+                {
+                    _allowFilter = value;
+                    OnPropertyChanged("AllowFilter");
+                }
+            }
+        }
+
+        private string _filterText = null;
+
+        public string FilterText
+        {
+            get
+            {
+                return _filterText;
+            }
+            set
+            {
+                if (_filterText != value)
+                {
+                    _filterText = value;
+                    OnPropertyChanged("FilterText");
+                    OnPropertyChanged("IsFiltering");
+
+                    EnsureValueCache();
+                    _wrapper.Filter(_filterText, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+                    OnPropertyChanged("ValueProxiesAsync");
+                }
+            }
+        }
+
+        public bool IsFiltering
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(_filterText);
+            }
+        }
+
         #endregion
 
         #region IFormattedValueViewModel Members

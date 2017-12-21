@@ -22,19 +22,25 @@ namespace Zetbox.API.Utils
     using System.ComponentModel;
     using System.Linq;
     using System.Linq.Dynamic;
+    using System.Reflection;
     using System.Text;
 
-    public sealed class SortedWrapper<T> : INotifyCollectionChanged, IList<T>
+    /// <summary>
+    /// Wraps a collection to enable sorting and filtering
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public sealed class SortFilterWrapper<T> : INotifyCollectionChanged, IList<T>
     {
-        private List<T> _sortedList;
+        private List<T> _sortedFilteredList;
         private IEnumerable _collection;
         private InterfaceType _elementType;
         private INotifyCollectionChanged _notifier;
 
         private string _sortProp;
         private ListSortDirection _direction = ListSortDirection.Ascending;
+        private string _filterText;
 
-        public SortedWrapper(IEnumerable collection, InterfaceType elementType, INotifyCollectionChanged notifier, string defaultSortProperty)
+        public SortFilterWrapper(IEnumerable collection, InterfaceType elementType, INotifyCollectionChanged notifier, string defaultSortProperty)
         {
             if (collection == null) throw new ArgumentNullException("collection");
             if (notifier == null) throw new ArgumentNullException("notifier");
@@ -48,34 +54,53 @@ namespace Zetbox.API.Utils
             Sort(_sortProp, _direction, null);
         }
 
-        public void Sort(string p, ListSortDirection direction, NotifyCollectionChangedEventArgs eventArgs)
+        public void Sort(string p, ListSortDirection direction, NotifyCollectionChangedEventArgs eventArgs = null)
         {
             _sortProp = p;
             _direction = direction;
-            if (string.IsNullOrEmpty(_sortProp))
-            {
-                _sortedList = _collection.Cast<T>().ToList();
+            ApplySortAndFilter(eventArgs);
+        }
+
+        /// <summary>
+        /// Filters all string properties
+        /// </summary>
+        /// <param name="txt"></param>
+        /// <param name="eventArgs"></param>
+        public void Filter(string txt, NotifyCollectionChangedEventArgs eventArgs = null)
+        {
+            _filterText = txt;
+            ApplySortAndFilter(eventArgs);
+        }
+
+        private void ApplySortAndFilter(NotifyCollectionChangedEventArgs eventArgs)
+        {
+            var qry = _collection.AsQueryable()
+                    .AddCast(_elementType.Type);
+
+            if (!string.IsNullOrEmpty(_sortProp))
+            { 
+                qry = qry.OrderBy(string.Format("{0} {1}", _sortProp, _direction == ListSortDirection.Descending ? "desc" : string.Empty));
             }
-            else
+
+            if (!string.IsNullOrEmpty(_filterText))
             {
-                _sortedList = _collection
-                    .AsQueryable()
-                    .AddCast(_elementType.Type)
-                    .OrderBy(string.Format("{0} {1}", _sortProp, _direction == ListSortDirection.Descending ? "desc" : string.Empty))
-                    .Cast<T>()
-                    .ToList();
+                var filter = _elementType.Type
+                    .GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy)
+                    .Where(i => i.PropertyType == typeof(string))
+                    .Select(i => string.Format("({0} != null && {0}.ToLower().Contains(@0))", i.Name))
+                    .ToArray();
+                qry = qry.Where(string.Join(" || ", filter), _filterText.ToLower());
             }
+
+            _sortedFilteredList = qry.Cast<T>().ToList();
+
             if (eventArgs != null)
                 OnCollectionChanged(eventArgs);
         }
 
         private void OnCollectionChanged(NotifyCollectionChangedEventArgs eventArgs)
         {
-            var temp = CollectionChanged;
-            if (temp != null)
-            {
-                temp(this, eventArgs);
-            }
+            CollectionChanged?.Invoke(this, eventArgs);
         }
 
         void notifier_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -83,7 +108,9 @@ namespace Zetbox.API.Utils
             if (e.OldItems == null && e.NewItems == null)
             {
                 // we would have to map here, ignore
-                Sort(_sortProp, _direction, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+                Sort(_sortProp, _direction);
+                Filter(_filterText);
+                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
                 return;
             }
 
@@ -92,18 +119,24 @@ namespace Zetbox.API.Utils
                 // we can pass the event on with the specified NewItems
                 // but we must loose the indices, as they'll change on sort
                 case NotifyCollectionChangedAction.Add:
-                    Sort(_sortProp, _direction, new NotifyCollectionChangedEventArgs(e.Action, e.NewItems));
+                    Sort(_sortProp, _direction);
+                    Filter(_filterText);
+                    OnCollectionChanged(new NotifyCollectionChangedEventArgs(e.Action, e.NewItems));
                     break;
                 // we can pass the event on with the specified OldItems
                 // but we must loose the indices, as they'll change on sort
                 case NotifyCollectionChangedAction.Remove:
-                    Sort(_sortProp, _direction, new NotifyCollectionChangedEventArgs(e.Action, e.OldItems));
+                    Sort(_sortProp, _direction);
+                    Filter(_filterText);
+                    OnCollectionChanged(new NotifyCollectionChangedEventArgs(e.Action, e.OldItems));
                     break;
                 case NotifyCollectionChangedAction.Move:
                 case NotifyCollectionChangedAction.Replace:
                 case NotifyCollectionChangedAction.Reset:
                     // too complex to map (could result in multiple new events), just notify as reset
-                    Sort(_sortProp, _direction, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+                    Sort(_sortProp, _direction);
+                    Filter(_filterText);
+                    OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
                     break;
                 default:
                     break;
@@ -120,12 +153,12 @@ namespace Zetbox.API.Utils
 
         public int IndexOf(T item)
         {
-            return _sortedList.IndexOf(item);
+            return _sortedFilteredList.IndexOf(item);
         }
 
         public void Insert(int index, T item)
         {
-            
+
         }
 
         public void RemoveAt(int index)
@@ -137,7 +170,7 @@ namespace Zetbox.API.Utils
         {
             get
             {
-                return _sortedList[index];
+                return _sortedFilteredList[index];
             }
             set
             {
@@ -161,7 +194,7 @@ namespace Zetbox.API.Utils
 
         public bool Contains(T item)
         {
-            return _sortedList.Contains(item);
+            return _sortedFilteredList.Contains(item);
         }
 
         public void CopyTo(T[] array, int arrayIndex)
@@ -171,7 +204,7 @@ namespace Zetbox.API.Utils
 
         public int Count
         {
-            get { return _sortedList.Count; }
+            get { return _sortedFilteredList.Count; }
         }
 
         public bool IsReadOnly
@@ -190,7 +223,7 @@ namespace Zetbox.API.Utils
 
         public IEnumerator<T> GetEnumerator()
         {
-            return _sortedList.GetEnumerator();
+            return _sortedFilteredList.GetEnumerator();
         }
 
         #endregion
@@ -199,7 +232,7 @@ namespace Zetbox.API.Utils
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return _sortedList.GetEnumerator();
+            return _sortedFilteredList.GetEnumerator();
         }
 
         #endregion
