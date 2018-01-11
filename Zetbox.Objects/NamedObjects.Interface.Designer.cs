@@ -4485,6 +4485,10 @@ namespace Zetbox {
                 {
                     get { return new TypedGuid<global::Zetbox.App.Base.Group>("76d43cf2-4ddf-4a3a-9ad6-28cabfdddff1"); }
                 }
+                public static TypedGuid<global::Zetbox.App.Base.Group> WorkScheduleAdmin
+                {
+                    get { return new TypedGuid<global::Zetbox.App.Base.Group>("350c90b7-e68f-441c-9c67-cc9119a3c7ce"); }
+                }
             }
             public static class Sequences
             {
