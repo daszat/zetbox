@@ -118,7 +118,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
         private ObjectClass GetLastClass()
         {
             var relations = Value.Select(dovm => dovm.Object).Cast<Relation>();
-            ObjectClass nextType = StartingObjectClass.Object as ObjectClass;
+            ObjectClass nextType = StartingObjectClass?.Object as ObjectClass;
             foreach (var rel in relations)
             {
                 if (rel.A.Type == nextType)
