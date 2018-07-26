@@ -66,6 +66,7 @@ namespace Zetbox.Client.GUI
         public string Title { get; set; }
         public string AcceptLabel { get; set; }
         public string CancelLabel { get; set; }
+        public bool ShowModal { get; set; } = true;
 
         public List<ViewModel> Items { get; private set; }
         public List<Tuple<object, BaseValueViewModel>> ValueModels { get; private set; }
@@ -123,7 +124,14 @@ namespace Zetbox.Client.GUI
             {
                 dlg.AddButton(btn.Item1, btn.Item2, btn.Item3);
             }
-            ViewModelFactory.ShowDialog(dlg, ownerMdl ?? ViewModelFactory.GetWorkspace(DataContext));
+            if (ShowModal)
+            {
+                ViewModelFactory.ShowDialog(dlg, ownerMdl ?? ViewModelFactory.GetWorkspace(DataContext));
+            }
+            else
+            {
+                ViewModelFactory.ShowModel(dlg, true);
+            }
         }
     }
 
@@ -418,6 +426,16 @@ namespace Zetbox.Client.GUI
         {
             if (c == null) throw new ArgumentNullException("c");
             c.OnCancelAction = action;
+            return c;
+        }
+        #endregion
+
+        #region Other settings
+        public static DialogCreator ShowModal(this DialogCreator c, bool modal = true)
+        {
+            if (c == null) throw new ArgumentNullException("c");
+            c.ShowModal = modal;
+
             return c;
         }
         #endregion
