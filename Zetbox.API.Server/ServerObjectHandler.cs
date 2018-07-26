@@ -352,7 +352,8 @@ namespace Zetbox.API.Server
             // then apply changes
             foreach (var obj in objects.Where(o => o.ClientObjectState == DataObjectState.Modified))
             {
-                var ctxObj = ctx.FindPersistenceObject(ctx.GetInterfaceType(obj), obj.ID);
+                var ifType = ctx.GetInterfaceType(obj);
+                var ctxObj = ctx.FindPersistenceObject(ifType, obj.ID);
                 ((BasePersistenceObject)ctxObj).RecordNotifications();
                 // optimistic concurrency
                 if (obj is Zetbox.App.Base.IChangedBy)
@@ -361,10 +362,22 @@ namespace Zetbox.API.Server
                     var send = (Zetbox.App.Base.IChangedBy)obj;
                     if (Math.Abs((orig.ChangedOn - send.ChangedOn).Ticks) > 15) // postgres is only accurate down to µs (1/1000th ms), but DateTime is accurate down to 1/10th µs. Rounding errors cause invalid concurrency failures.
                     {
+                        string objStr;
+                        try
+                        {
+                            objStr = send.ToString();
+                        }
+                        catch
+                        {
+                            // Some ToString implementations might not deal with 
+                            // detached objects correctly, use an alternative
+                            // string representation
+                            objStr = string.Format("{0} #{1}", ifType.Type.Name, obj.ID);
+                        }
                         concurrencyFailed.Add(new ConcurrencyExceptionDetail(
                             Guid.Empty, // TODO: There is no frozen context here. Refactor *HanderFatories to autofac modules!
                             obj.ID,
-                            send.ToString(),
+                            objStr,
                             orig.ChangedOn,
                             orig.ChangedBy != null ? orig.ChangedBy.ToString() : string.Empty));
                     }

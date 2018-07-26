@@ -82,8 +82,8 @@ namespace Zetbox.Client.Presentables.TestModule
                 .Invoke(
                     DataContext,
                     this,
-                    "Test DialogCreator",
-                    "Opens a complex dialog",
+                    "Test DialogCreator non-modal",
+                    "Opens a complex non-modal dialog",
                     () =>
                     {
                         ViewModelFactory.CreateDialog(DataContext, "Test dialog")
@@ -115,6 +115,7 @@ namespace Zetbox.Client.Presentables.TestModule
                             {
                                 ViewModelFactory.ShowMessage("Cancel!!", "Cancel");
                             })
+                            .ShowModal(false)
                             .Show(values =>
                             {
                                 ViewModelFactory.ShowMessage(

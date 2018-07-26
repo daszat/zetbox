@@ -810,8 +810,11 @@ namespace Zetbox.Server.SchemaManagement
 
             var tblName = relEnd.Type.GetTableRef(db);
             string colName = Construct.ListPositionColumnName(otherEnd);
-            // always allow nulls for items missing a definite order
-            db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, true);
+            if (!db.CheckColumnExists(tblName, colName))
+            {
+                // always allow nulls for items missing a definite order
+                db.CreateColumn(tblName, colName, System.Data.DbType.Int32, 0, 0, true);
+            }
 
             PostMigration(RelationMigrationEventType.ChangeHasPositionStorage, savedRel, rel);
         }
@@ -1861,7 +1864,8 @@ namespace Zetbox.Server.SchemaManagement
             var tblName = db.GetTableName(rel.Module.SchemaName, rel.GetRelationTableName());
             var fkName = Construct.ForeignKeyColumnName(rel.GetEndFromRole(role));
 
-            db.CreateColumn(tblName, fkName + Zetbox.API.Helper.PositionSuffix, System.Data.DbType.Int32, 0, 0, true);
+            if(!db.CheckColumnExists(tblName, fkName + Zetbox.API.Helper.PositionSuffix))
+                db.CreateColumn(tblName, fkName + Zetbox.API.Helper.PositionSuffix, System.Data.DbType.Int32, 0, 0, true);
 
             PostMigration(RelationMigrationEventType.ChangeHasPositionStorage, savedRel, rel);
         }
