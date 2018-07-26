@@ -172,15 +172,21 @@ namespace Zetbox.Client.WPF.View.Calendar
                         {
                             Children =
                             {
-                                new TextBlock() 
+                                new TextBlock()
                                 {
                                     Text = item.Summary,
                                 },
-                                new TextBlock() 
+                                new TextBlock()
                                 {
                                     Text = item.FromToText,
+                                },
+                                new TextBlock()
+                                {
+                                    Text = !string.IsNullOrWhiteSpace(item.Location) ? $"({item.Location})" : "",
+                                    FontWeight = FontWeights.Normal,
                                 }
-                            }
+                            },
+                            ToolTip = $"{item.Summary}\n{item.FromToText}\n{(!string.IsNullOrWhiteSpace(item.Location) ? $"({item.Location})" : "")}"
                         };
 
                         items.Children.Add(border);
