@@ -61,25 +61,27 @@ namespace Zetbox.API.AbstractConsumerTests.ContextTests
         }
 
         [Test]
-        [ExpectedException(typeof(ConcurrencyException))]
         public void should_fail_when_parallel_changes()
         {
-            var ctx1 = GetContext();
-            var ctx2 = GetContext();
+            Assert.Throws<ConcurrencyException>(() =>
+            {
+                var ctx1 = GetContext();
+                var ctx2 = GetContext();
 
-            var obj1 = ctx1.GetQuery<Projekt>().First();
-            var obj2 = ctx2.FindPersistenceObject<Projekt>(obj1.ID);
+                var obj1 = ctx1.GetQuery<Projekt>().First();
+                var obj2 = ctx2.FindPersistenceObject<Projekt>(obj1.ID);
 
-            Assert.That(obj1.ID, Is.EqualTo(obj2.ID));
-            Assert.That(obj1.Name, Is.EqualTo(obj2.Name));
+                Assert.That(obj1.ID, Is.EqualTo(obj2.ID));
+                Assert.That(obj1.Name, Is.EqualTo(obj2.Name));
 
-            obj1.Name = "Test1";
-            ctx1.SubmitChanges();
+                obj1.Name = "Test1";
+                ctx1.SubmitChanges();
 
-            System.Threading.Thread.Sleep(1000); // Wait, wait. Concurrency relies on a timestamp
+                System.Threading.Thread.Sleep(1000); // Wait, wait. Concurrency relies on a timestamp
 
-            obj2.Name = "Test2";
-            ctx2.SubmitChanges();
+                obj2.Name = "Test2";
+                ctx2.SubmitChanges();
+            });
         }
 
         [Test]

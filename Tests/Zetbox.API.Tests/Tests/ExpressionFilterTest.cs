@@ -69,11 +69,13 @@ namespace Zetbox.API.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(NotImplementedException))]
         public void IllegalExpressionClass_UnknownToString()
         {
-            IllegalExpression e = new IllegalExpression();
-            e.ToString();
+            Assert.Throws<NotImplementedException>(() =>
+            {
+                IllegalExpression e = new IllegalExpression();
+                e.ToString();
+            });
         }
     }
 }

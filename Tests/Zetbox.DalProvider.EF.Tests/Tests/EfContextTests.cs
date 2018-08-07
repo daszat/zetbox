@@ -86,21 +86,23 @@ namespace Zetbox.DalProvider.Ef.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
         public void Attach_IDataObject_Existing_Twice_But_Different()
         {
-            using (IZetboxContext ctx = GetContext())
+            Assert.Throws<InvalidOperationException>(() =>
             {
-                TestObjClass obj1 = new TestObjClassEfImpl(null) { ID = 3, ClientObjectState = DataObjectState.Unmodified };
-                Assert.That(((TestObjClassEfImpl)obj1).EntityState, Is.EqualTo(EntityState.Detached));
-                ctx.Attach(obj1);
-                Assert.That(((TestObjClassEfImpl)obj1).EntityState, Is.EqualTo(EntityState.Unchanged));
+                using (IZetboxContext ctx = GetContext())
+                {
+                    TestObjClass obj1 = new TestObjClassEfImpl(null) { ID = 3, ClientObjectState = DataObjectState.Unmodified };
+                    Assert.That(((TestObjClassEfImpl)obj1).EntityState, Is.EqualTo(EntityState.Detached));
+                    ctx.Attach(obj1);
+                    Assert.That(((TestObjClassEfImpl)obj1).EntityState, Is.EqualTo(EntityState.Unchanged));
 
-                TestObjClass obj2 = new TestObjClassEfImpl(null) { ID = 3, ClientObjectState = DataObjectState.Unmodified };
-                Assert.That(((TestObjClassEfImpl)obj2).EntityState, Is.EqualTo(EntityState.Detached));
-                ctx.Attach(obj2);
-                Assert.That(((TestObjClassEfImpl)obj2).EntityState, Is.EqualTo(EntityState.Unchanged));
-            }
+                    TestObjClass obj2 = new TestObjClassEfImpl(null) { ID = 3, ClientObjectState = DataObjectState.Unmodified };
+                    Assert.That(((TestObjClassEfImpl)obj2).EntityState, Is.EqualTo(EntityState.Detached));
+                    ctx.Attach(obj2);
+                    Assert.That(((TestObjClassEfImpl)obj2).EntityState, Is.EqualTo(EntityState.Unchanged));
+                }
+            });
         }
 
         //[Test]
@@ -199,13 +201,15 @@ namespace Zetbox.DalProvider.Ef.Tests
             }
         }
         [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
         public void Detach_IDataObject_Failed()
         {
-            using (IZetboxContext ctx = GetContext())
+            Assert.Throws<InvalidOperationException>(() =>
             {
-                ctx.Detach(new TestObjClassEfImpl(null));
-            }
+                using (IZetboxContext ctx = GetContext())
+                {
+                    ctx.Detach(new TestObjClassEfImpl(null));
+                }
+            });
         }
 
         [Test]

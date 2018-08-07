@@ -380,21 +380,21 @@ namespace Zetbox.Server.Tests
             }
         }
 
-        [Test]
-        [ExpectedException]
-        [Ignore("Undefined behaviour: different between NH and EF")]
-        public void GetObjectsWithObjectFilterAndCastAndOtherGenericFilter()
-        {
-            // Strange, but does not work
-            using (IZetboxContext ctx = GetContext())
-            {
-                var module = ctx.GetQuery<Zetbox.App.Base.Module>().Where(m => m.Name == "ZetboxBase").Single();
-                Assert.That(module, Is.Not.Null);
-                var result = ctx.GetQuery<ObjectClass>().Where(c => c.Module == module).Cast<IDataObject>().Where(i => i.ID > 0).ToList();
-                Assert.That(result, Is.Not.Null);
-                Assert.That(result.Count, Is.GreaterThan(0));
-            }
-        }
+        //[Test]
+        //[ExpectedException]
+        //[Ignore("Undefined behaviour: different between NH and EF")]
+        //public void GetObjectsWithObjectFilterAndCastAndOtherGenericFilter()
+        //{
+        //    // Strange, but does not work
+        //    using (IZetboxContext ctx = GetContext())
+        //    {
+        //        var module = ctx.GetQuery<Zetbox.App.Base.Module>().Where(m => m.Name == "ZetboxBase").Single();
+        //        Assert.That(module, Is.Not.Null);
+        //        var result = ctx.GetQuery<ObjectClass>().Where(c => c.Module == module).Cast<IDataObject>().Where(i => i.ID > 0).ToList();
+        //        Assert.That(result, Is.Not.Null);
+        //        Assert.That(result.Count, Is.GreaterThan(0));
+        //    }
+        //}
 
         [Test]
         public void GetObjectsWithInvalidButExcusedCast()
@@ -410,33 +410,37 @@ namespace Zetbox.Server.Tests
         }
 
         [Test]
-        [ExpectedException]
         public void GetObjectsWithInvalidCast()
         {
-            using (IZetboxContext ctx = GetContext())
+            Assert.Throws<Exception>(() =>
             {
-                var module = ctx.GetQuery<Zetbox.App.Base.Module>().Where(m => m.Name == "ZetboxBase").Single();
-                Assert.That(module, Is.Not.Null);
-                var result = ctx.GetQuery<DataType>().Where(c => c.Module == module).Cast<IList<int>>().Where(i => i.Count > 10).ToList();
+                using (IZetboxContext ctx = GetContext())
+                {
+                    var module = ctx.GetQuery<Zetbox.App.Base.Module>().Where(m => m.Name == "ZetboxBase").Single();
+                    Assert.That(module, Is.Not.Null);
+                    var result = ctx.GetQuery<DataType>().Where(c => c.Module == module).Cast<IList<int>>().Where(i => i.Count > 10).ToList();
 
-                // never reached
-                Assert.That(result, Is.Not.Null);
-            }
+                    // never reached
+                    Assert.That(result, Is.Not.Null);
+                }
+            });
         }
 
         [Test]
-        [ExpectedException]
         public void GetObjectsWithSemivalidCast()
         {
-            using (IZetboxContext ctx = GetContext())
+            Assert.Throws<Exception>(() =>
             {
-                var module = ctx.GetQuery<Zetbox.App.Base.Module>().Where(m => m.Name == "ZetboxBase").Single();
-                Assert.That(module, Is.Not.Null);
-                var result = ctx.GetQuery<DataType>().Where(c => c.Module == module).Cast<ObjectClass>().Where(cls => cls.TableName == "SomeTable").ToList();
+                using (IZetboxContext ctx = GetContext())
+                {
+                    var module = ctx.GetQuery<Zetbox.App.Base.Module>().Where(m => m.Name == "ZetboxBase").Single();
+                    Assert.That(module, Is.Not.Null);
+                    var result = ctx.GetQuery<DataType>().Where(c => c.Module == module).Cast<ObjectClass>().Where(cls => cls.TableName == "SomeTable").ToList();
 
-                // never reached
-                Assert.That(result, Is.Not.Null);
-            }
+                    // never reached
+                    Assert.That(result, Is.Not.Null);
+                }
+            });
         }
     }
 }

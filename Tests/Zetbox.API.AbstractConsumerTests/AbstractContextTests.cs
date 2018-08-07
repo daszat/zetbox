@@ -181,24 +181,28 @@ namespace Zetbox.API.AbstractConsumerTests
         }
 
         [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
         public void should_fail_on_existing_transaction()
         {
-            using (var ctx = GetContext())
+            Assert.Throws<InvalidOperationException>(() =>
             {
-                ctx.BeginTransaction();
-                ctx.BeginTransaction();
-            }
+                using (var ctx = GetContext())
+                {
+                    ctx.BeginTransaction();
+                    ctx.BeginTransaction();
+                }
+            });
         }
 
         [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
         public void commit_should_fail_on_non_existing_transaction()
         {
-            using (var ctx = GetContext())
+            Assert.Throws<InvalidOperationException>(() =>
             {
-                ctx.CommitTransaction();
-            }
+                using (var ctx = GetContext())
+                {
+                    ctx.CommitTransaction();
+                }
+            });
         }
 
         [Test]
@@ -342,33 +346,39 @@ namespace Zetbox.API.AbstractConsumerTests
         }
 
         [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
         public void should_fail_on_wrong_sequence_method()
         {
-            using (var ctx = GetContext())
+            Assert.Throws<InvalidOperationException>(() =>
             {
-                ctx.GetSequenceNumber(continuousSequence);
-            }
+                using (var ctx = GetContext())
+                {
+                    ctx.GetSequenceNumber(continuousSequence);
+                }
+            });
         }
 
         [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
         public void should_fail_on_wrong_continuous_sequence_method()
         {
-            using (var ctx = GetContext())
+            Assert.Throws<InvalidOperationException>(() =>
             {
-                ctx.GetContinuousSequenceNumber(sequence);
-            }
+                using (var ctx = GetContext())
+                {
+                    ctx.GetContinuousSequenceNumber(sequence);
+                }
+            });
         }
 
         [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
         public void should_fail_on_increment_continuous_sequence_without_transaction()
         {
-            using (var ctx = GetContext())
+            Assert.Throws<InvalidOperationException>(() =>
             {
-                ctx.GetContinuousSequenceNumber(sequence);
-            }
+                using (var ctx = GetContext())
+                {
+                    ctx.GetContinuousSequenceNumber(sequence);
+                }
+            });
         }
 
         [Test]

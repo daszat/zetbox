@@ -53,7 +53,7 @@ namespace Zetbox.API.AbstractConsumerTests
         {
         }
 
-        [SetUp]
+        [OneTimeSetUp]
         public void SetUpTestFixture()
         {
             using (Log.InfoTraceMethodCall("EarlySetup"))
@@ -62,6 +62,11 @@ namespace Zetbox.API.AbstractConsumerTests
             }
             using (Log.InfoTraceMethodCall("Starting up"))
             {
+                var workDir = NUnit.Framework.TestContext.Parameters.Get<string>("WorkDirectory", "");
+                if(!string.IsNullOrWhiteSpace(workDir ))
+                {
+                    System.Environment.CurrentDirectory = workDir;
+                }
                 var config = ZetboxConfig.FromFile(GetHostType(), null, GetConfigFile());
 
                 AssemblyLoader.Bootstrap(AppDomain.CurrentDomain, config);
@@ -132,7 +137,7 @@ namespace Zetbox.API.AbstractConsumerTests
             }
         }
 
-        [TearDown]
+        [OneTimeTearDown]
         public virtual void TearDown()
         {
             using (Log.InfoTraceMethodCall("Shutting down"))

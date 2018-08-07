@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{ACC74A05-6833-4897-B739-8D5E82E846C2}"
 	ProjectSection(SolutionItems) = preProject
@@ -288,6 +288,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.App.Tests.Server", "Tests\Zetbox.App.Tests.Server\Zetbox.App.Tests.Server.csproj", "{9C21C092-0900-4BBF-9BCB-7FA3B30C6CC8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zetbox.App.Tests.Client.WPF", "Tests\Zetbox.App.Tests.Client.WPF\Zetbox.App.Tests.Client.WPF.csproj", "{93849B1B-BFB5-4EA4-96DB-972C7B365E15}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{301A4B54-A326-4430-97EF-69078638C9FD}"
+	ProjectSection(SolutionItems) = preProject
+		zetbox-tests.runsettings = zetbox-tests.runsettings
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1924,5 +1929,8 @@ Global
 		{E8691675-A0AC-40DC-B482-A6284B0BA3C6} = {ACC74A05-6833-4897-B739-8D5E82E846C2}
 		{9C21C092-0900-4BBF-9BCB-7FA3B30C6CC8} = {ACC74A05-6833-4897-B739-8D5E82E846C2}
 		{93849B1B-BFB5-4EA4-96DB-972C7B365E15} = {ACC74A05-6833-4897-B739-8D5E82E846C2}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6BE17563-FFFB-4D51-83B3-69608404B347}
 	EndGlobalSection
 EndGlobal

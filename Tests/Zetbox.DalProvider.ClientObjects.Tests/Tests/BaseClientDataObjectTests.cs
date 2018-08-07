@@ -105,18 +105,19 @@ namespace Zetbox.DalProvider.Client.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ApplyChanges_Null()
         {
-            BaseClientDataObjectMockImpl result = null;
-            obj.ApplyChangesFrom(result);
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                BaseClientDataObjectMockImpl result = null;
+                obj.ApplyChangesFrom(result);
+            });
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ToStream_Null()
         {
-            obj.ToStream((ZetboxStreamWriter)null, null, false);
+            Assert.Throws<ArgumentNullException>(() => { obj.ToStream((ZetboxStreamWriter)null, null, false); });
         }
 
         [Test]
@@ -149,14 +150,16 @@ namespace Zetbox.DalProvider.Client.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void FromStream_Null_StreamReader()
         {
-            using (IZetboxContext ctx = GetContext())
+            Assert.Throws<ArgumentNullException>(() =>
             {
-                BaseClientDataObjectMockImpl result = new BaseClientDataObjectMockImpl(null);
-                result.FromStream((ZetboxStreamReader)null);
-            }
+                using (IZetboxContext ctx = GetContext())
+                {
+                    BaseClientDataObjectMockImpl result = new BaseClientDataObjectMockImpl(null);
+                    result.FromStream((ZetboxStreamReader)null);
+                }
+            });
         }
 
         [Test]
@@ -188,18 +191,20 @@ namespace Zetbox.DalProvider.Client.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void AttachToContext_New_InvalidID()
         {
-            Assert.That(obj.Context, Is.Null);
-            using (IZetboxContext ctx = GetContext())
+            Assert.Throws<ArgumentException>(() =>
             {
-                obj.SetPrivatePropertyValue<int>("ID", Helper.INVALIDID);
-                obj.AttachToContext(ctx, scope.Resolve<Func<IFrozenContext>>());
-                Assert.That(obj.Context, Is.Not.Null);
-                Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.New));
-                Assert.That(PropertyChangedCalled, Is.False);
-            }
+                Assert.That(obj.Context, Is.Null);
+                using (IZetboxContext ctx = GetContext())
+                {
+                    obj.SetPrivatePropertyValue<int>("ID", Helper.INVALIDID);
+                    obj.AttachToContext(ctx, scope.Resolve<Func<IFrozenContext>>());
+                    Assert.That(obj.Context, Is.Not.Null);
+                    Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.New));
+                    Assert.That(PropertyChangedCalled, Is.False);
+                }
+            });
         }
 
         [Test]
@@ -236,17 +241,19 @@ namespace Zetbox.DalProvider.Client.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(WrongZetboxContextException))]
         public void DetachFromContext_NotAttached()
         {
-            Assert.That(obj.Context, Is.Null);
-            obj.SetPrivatePropertyValue<int>("ID", 10);
-            using (IZetboxContext ctx = GetContext())
+            Assert.Throws<WrongZetboxContextException>(() =>
             {
-                obj.DetachFromContext(ctx);
                 Assert.That(obj.Context, Is.Null);
-                Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
-            }
+                obj.SetPrivatePropertyValue<int>("ID", 10);
+                using (IZetboxContext ctx = GetContext())
+                {
+                    obj.DetachFromContext(ctx);
+                    Assert.That(obj.Context, Is.Null);
+                    Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Unmodified));
+                }
+            });
         }
     }
 }

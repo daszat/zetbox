@@ -223,21 +223,24 @@ namespace Zetbox.IntegrationTests
         }
 
         [Test]
-        [ExpectedException(typeof(System.ServiceModel.FaultException))]
+
         [Ignore("Illegal Expression checking disabled for now")]
         public void GetObjectsWithParameterIllegalAggreggation()
         {
-            using (IZetboxContext ctx = GetContext())
+            Assert.Throws<InvalidOperationException>(() =>
             {
-                var test = from z in ctx.GetQuery<ObjectClass>()
-                           where z.Properties.Count() > 0
-                           select z;
-
-                foreach (var t in test)
+                using (IZetboxContext ctx = GetContext())
                 {
-                    Log.DebugFormat("GetObjectsWithParameterIllegalAggreggation: {0}", t.Name);
+                    var test = from z in ctx.GetQuery<ObjectClass>()
+                               where z.Properties.Count() > 0
+                               select z;
+
+                    foreach (var t in test)
+                    {
+                        Log.DebugFormat("GetObjectsWithParameterIllegalAggreggation: {0}", t.Name);
+                    }
                 }
-            }
+            });
         }
 
         [Test]
@@ -256,70 +259,80 @@ namespace Zetbox.IntegrationTests
         }
 
         [Test]
-        [ExpectedException(typeof(NotSupportedException))]
         public void GetObjectsWithProjection()
         {
-            using (IZetboxContext ctx = GetContext())
+            Assert.Throws<InvalidOperationException>(() =>
             {
-                var test = ctx.GetQuery<ObjectClass>()
-                    .Select(z => new { A = z.Name, B = z.TableName });
-                foreach (var t in test)
+                using (IZetboxContext ctx = GetContext())
                 {
-                    Log.DebugFormat("GetObjectsWithProjection: {0}", t.A);
+                    var test = ctx.GetQuery<ObjectClass>()
+                        .Select(z => new { A = z.Name, B = z.TableName });
+                    foreach (var t in test)
+                    {
+                        Log.DebugFormat("GetObjectsWithProjection: {0}", t.A);
+                    }
                 }
-            }
+            });
         }
 
         [Test]
-        [ExpectedException(typeof(NotSupportedException))]
         public void GetObjectsWithGroupBy()
         {
-            using (IZetboxContext ctx = GetContext())
+            Assert.Throws<NotSupportedException>(() =>
             {
-                var test = ctx.GetQuery<ObjectClass>()
-                    .GroupBy(z => z.Name)
-                    .ToList();
-                foreach (var t in test)
+                using (IZetboxContext ctx = GetContext())
                 {
-                    Log.DebugFormat("GetObjectsWithGroupBy: {0}", t.Key);
+                    var test = ctx.GetQuery<ObjectClass>()
+                        .GroupBy(z => z.Name)
+                        .ToList();
+                    foreach (var t in test)
+                    {
+                        Log.DebugFormat("GetObjectsWithGroupBy: {0}", t.Key);
+                    }
                 }
-            }
+            });
         }
 
         [Test]
-        [ExpectedException(typeof(NotSupportedException))]
         public void GetObjectsWithCount()
         {
-            using (IZetboxContext ctx = GetContext())
+            Assert.Throws<NotSupportedException>(() =>
             {
-                var test = ctx.GetQuery<ObjectClass>()
-                    .Count();
-                Log.DebugFormat("GetObjectsWithCount: {0}", test);
-            }
+                using (IZetboxContext ctx = GetContext())
+                {
+                    var test = ctx.GetQuery<ObjectClass>()
+                        .Count();
+                    Log.DebugFormat("GetObjectsWithCount: {0}", test);
+                }
+            });
         }
 
         [Test]
-        [ExpectedException(typeof(NotSupportedException))]
         public void GetObjectsWithMin()
         {
-            using (IZetboxContext ctx = GetContext())
+            Assert.Throws<NotSupportedException>(() =>
             {
-                var test = ctx.GetQuery<ObjectClass>()
-                    .Min(cls => cls.ID);
-                Log.DebugFormat("GetObjectsWithMin: {0}", test);
-            }
+                using (IZetboxContext ctx = GetContext())
+                {
+                    var test = ctx.GetQuery<ObjectClass>()
+                        .Min(cls => cls.ID);
+                    Log.DebugFormat("GetObjectsWithMin: {0}", test);
+                }
+            });
         }
 
         [Test]
-        [ExpectedException(typeof(NotSupportedException))]
         public void GetObjectsWithAverage()
         {
-            using (IZetboxContext ctx = GetContext())
+            Assert.Throws<NotSupportedException>(() =>
             {
-                var test = ctx.GetQuery<ObjectClass>()
-                    .Average(cls => cls.ID);
-                Log.DebugFormat("GetObjectsWithAverage: {0}", test);
-            }
+                using (IZetboxContext ctx = GetContext())
+                {
+                    var test = ctx.GetQuery<ObjectClass>()
+                        .Average(cls => cls.ID);
+                    Log.DebugFormat("GetObjectsWithAverage: {0}", test);
+                }
+            });
         }
 
         [Test]

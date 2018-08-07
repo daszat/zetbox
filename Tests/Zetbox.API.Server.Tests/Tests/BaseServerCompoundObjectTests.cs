@@ -46,10 +46,9 @@ namespace Zetbox.API.Server.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ToStream_Null()
         {
-            obj.ToStream((ZetboxStreamWriter)null, null, false);
+            Assert.Throws<ArgumentNullException>(() => obj.ToStream((ZetboxStreamWriter)null, null, false));
         }
 
         [Test]
@@ -74,11 +73,13 @@ namespace Zetbox.API.Server.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void FromStream_Null_StreamReader()
         {
-            TestCompoundObject result = new TestCompoundObject();
-            result.FromStream((ZetboxStreamReader)null);
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                TestCompoundObject result = new TestCompoundObject();
+                result.FromStream((ZetboxStreamReader)null);
+            });
         }
 
         [Test]
