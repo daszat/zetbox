@@ -11,7 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Content package for zetbox Test Modules. This package is only interesting for those who want to extend zetbox with EXTERNAL features and want to use zetbox test modules.</description>
     <releaseNotes>First package.</releaseNotes>
-    <copyright>Copyright © 2015 dasz.at e.U.</copyright>
+    <copyright>Copyright © 2018 dasz.at e.U.</copyright>
     <tags>Platform Database ORM Applications</tags>
     <dependencies>
 		<!-- Content only package -->
