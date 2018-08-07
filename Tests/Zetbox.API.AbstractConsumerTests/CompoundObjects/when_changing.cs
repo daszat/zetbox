@@ -24,11 +24,13 @@ namespace Zetbox.API.AbstractConsumerTests.CompoundObjects
     public abstract class when_changing : CompoundObjectFixture
     {
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void should_not_be_set_null()
         {
-            Assert.That(obj.PhoneNumberOffice, Is.Not.Null);
-            obj.PhoneNumberOffice = null;
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                Assert.That(obj.PhoneNumberOffice, Is.Not.Null);
+                obj.PhoneNumberOffice = null;
+            });
         }
 
         [Test]

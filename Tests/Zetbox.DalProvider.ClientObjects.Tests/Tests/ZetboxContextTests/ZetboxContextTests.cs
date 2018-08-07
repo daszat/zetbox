@@ -307,10 +307,9 @@ namespace Zetbox.DalProvider.Client.Tests.ZetboxContextTests
         //}
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void Attach_IDataObject_Null()
         {
-            ctx.Attach((IDataObject)null);
+            Assert.Throws<ArgumentNullException>(() => { ctx.Attach((IDataObject)null); });
         }
 
         //[Test]
@@ -337,10 +336,9 @@ namespace Zetbox.DalProvider.Client.Tests.ZetboxContextTests
         //}
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void Detach_Null()
         {
-            ctx.Detach((IDataObject)null);
+            Assert.Throws<ArgumentNullException>(() => { ctx.Detach((IDataObject)null); });
         }
 
         //[Test]
@@ -368,10 +366,9 @@ namespace Zetbox.DalProvider.Client.Tests.ZetboxContextTests
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void Delete_Null()
         {
-            ctx.Delete((IDataObject)null);
+            Assert.Throws<ArgumentNullException>(() => { ctx.Delete((IDataObject)null); });
         }
 
         //[Test]
@@ -384,12 +381,14 @@ namespace Zetbox.DalProvider.Client.Tests.ZetboxContextTests
         //}
 
         [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
         public void Delete_Wrong_Context()
         {
-            TestObjClass obj = GetContext().Find<TestObjClass>(1);
-            ctx.Delete(obj);
-            Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Deleted));
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                TestObjClass obj = GetContext().Find<TestObjClass>(1);
+                ctx.Delete(obj);
+                Assert.That(obj.ObjectState, Is.EqualTo(DataObjectState.Deleted));
+            });
         }
 
         [Test]

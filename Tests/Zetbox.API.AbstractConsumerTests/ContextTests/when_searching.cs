@@ -24,7 +24,7 @@ namespace Zetbox.API.AbstractConsumerTests.ContextTests
     using Zetbox.App.Base;
     using Zetbox.App.Test;
 
-    public class when_searching
+    public abstract class when_searching
         : AbstractTestFixture
     {
 
@@ -52,16 +52,16 @@ namespace Zetbox.API.AbstractConsumerTests.ContextTests
             Assert.That(secondHalf[4], Is.SameAs(objs[9]), "9");
         }
 
-        [TestCase(10, 10, 10)]
-        [TestCase(20, 10, 10)]
-        [TestCase(10, 20, 10, Ignore = true, IgnoreReason = "NHibernate bug, see Case 9162")]
-        public void and_taking_twice(int first, int second, int expected)
-        {
-            var ctx = GetContext();
-            var baseQuery = ctx.GetQuery<ObjectClass>().OrderBy(o => o.ID);
-            var objs = baseQuery.Take(first).Take(second).ToList();
-            Assert.That(objs.Count, Is.EqualTo(expected), string.Format("Did not receive correct amount of objects after Take({0}).Take({1})", first, second));
-        }
+        //[TestCase(10, 10, 10)]
+        //[TestCase(20, 10, 10)]
+        //[TestCase(10, 20, 10, Ignore = true, IgnoreReason = "NHibernate bug, see Case 9162")]
+        //public void and_taking_twice(int first, int second, int expected)
+        //{
+        //    var ctx = GetContext();
+        //    var baseQuery = ctx.GetQuery<ObjectClass>().OrderBy(o => o.ID);
+        //    var objs = baseQuery.Take(first).Take(second).ToList();
+        //    Assert.That(objs.Count, Is.EqualTo(expected), string.Format("Did not receive correct amount of objects after Take({0}).Take({1})", first, second));
+        //}
 
         [TestCase(10, 10, 10)]
         [TestCase(20, 10, 10)]

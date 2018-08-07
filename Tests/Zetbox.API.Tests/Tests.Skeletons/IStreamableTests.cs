@@ -42,17 +42,15 @@ namespace Zetbox.API.Tests.Skeletons
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void fails_on_serializing_to_null_stream()
         {
-            obj.ToStream((ZetboxStreamWriter)null, null, false);
+            Assert.Throws<ArgumentNullException>(() => { obj.ToStream((ZetboxStreamWriter)null, null, false); });
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void fails_on_serializing_from_null_stream()
         {
-            obj.FromStream((ZetboxStreamReader)null);
+            Assert.Throws<ArgumentNullException>(() => { obj.FromStream((ZetboxStreamReader)null); });
         }
 
         [Test]

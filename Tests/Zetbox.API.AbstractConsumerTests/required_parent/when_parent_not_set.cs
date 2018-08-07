@@ -25,7 +25,7 @@ namespace Zetbox.API.AbstractConsumerTests.required_parent
 
     using NUnit.Framework;
 
-    public class when_parent_not_set
+    public abstract class when_parent_not_set
         : RequiredParentFixture
     {
         [Test]

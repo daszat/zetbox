@@ -124,26 +124,28 @@ namespace Zetbox.DalProvider.Ef.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
         public void FromStream_Attached_fails()
         {
-            var typeMap = scope.Resolve<TypeMap>();
-            using (var ms = new MemoryStream())
-            using (var sw = new ZetboxStreamWriter(typeMap, new BinaryWriter(ms)))
-            using (var sr = new ZetboxStreamReader(typeMap, new BinaryReader(ms)))
+            Assert.Throws<InvalidOperationException>(() =>
             {
-                obj.ToStream(sw, null, false);
-
-                Assert.That(ms.Length, Is.GreaterThan(0));
-
-                ms.Seek(0, SeekOrigin.Begin);
-
-                using (var ctx = GetContext())
+                var typeMap = scope.Resolve<TypeMap>();
+                using (var ms = new MemoryStream())
+                using (var sw = new ZetboxStreamWriter(typeMap, new BinaryWriter(ms)))
+                using (var sr = new ZetboxStreamReader(typeMap, new BinaryReader(ms)))
                 {
-                    var result = ctx.Create<ObjectClass>();
-                    result.FromStream(sr);
+                    obj.ToStream(sw, null, false);
+
+                    Assert.That(ms.Length, Is.GreaterThan(0));
+
+                    ms.Seek(0, SeekOrigin.Begin);
+
+                    using (var ctx = GetContext())
+                    {
+                        var result = ctx.Create<ObjectClass>();
+                        result.FromStream(sr);
+                    }
                 }
-            }
+            });
         }
 
         [Test]
@@ -160,23 +162,25 @@ namespace Zetbox.DalProvider.Ef.Tests
         }
 
         [Test]
-        [ExpectedException(typeof(WrongZetboxContextException))]
         public void AttachToContext_Other_fails()
         {
-            var local_obj = CreateObjectInstance();
-            Assert.That(local_obj.Context, Is.Null);
-            using (IZetboxContext ctx = GetContext())
+            Assert.Throws<WrongZetboxContextException>(() =>
             {
-                local_obj.AttachToContext(ctx, scope.Resolve<Func<IFrozenContext>>());
-                Assert.That(local_obj.Context, Is.Not.Null);
-                Assert.That(local_obj.EntityState, Is.EqualTo(System.Data.EntityState.Detached));
-                using (IZetboxContext ctx2 = GetContext())
+                var local_obj = CreateObjectInstance();
+                Assert.That(local_obj.Context, Is.Null);
+                using (IZetboxContext ctx = GetContext())
                 {
-                    local_obj.AttachToContext(ctx2, scope.Resolve<Func<IFrozenContext>>());
+                    local_obj.AttachToContext(ctx, scope.Resolve<Func<IFrozenContext>>());
                     Assert.That(local_obj.Context, Is.Not.Null);
                     Assert.That(local_obj.EntityState, Is.EqualTo(System.Data.EntityState.Detached));
+                    using (IZetboxContext ctx2 = GetContext())
+                    {
+                        local_obj.AttachToContext(ctx2, scope.Resolve<Func<IFrozenContext>>());
+                        Assert.That(local_obj.Context, Is.Not.Null);
+                        Assert.That(local_obj.EntityState, Is.EqualTo(System.Data.EntityState.Detached));
+                    }
                 }
-            }
+            });
         }
     }
 }

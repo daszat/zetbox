@@ -131,7 +131,7 @@ namespace Zetbox.API.Server.Tests
             new TableRef("x", "y", "z"),
         };
 
-        public IEnumerable<LessThanComparison> DboRefTestCases()
+        public static IEnumerable<LessThanComparison> DboRefTestCases()
         {
             var pos = 0;
             foreach (var first in ascendingValues)

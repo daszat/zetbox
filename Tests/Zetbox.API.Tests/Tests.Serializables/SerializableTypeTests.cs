@@ -50,19 +50,23 @@ namespace Zetbox.API.Tests.Serializables
         }
 
         [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
         public void GetSystemType_fails_on_invalid_AssemblyQualifiedName()
         {
-            t.AssemblyQualifiedName = "Test";
-            t.GetSystemType();
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                t.AssemblyQualifiedName = "Test";
+                t.GetSystemType();
+            });
         }
 
         [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
         public void GetSystemType_fails_on_invalid_TypeName()
         {
-            t.TypeName = "Invalid Test Class Name";
-            t.GetSystemType();
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                t.TypeName = "Invalid Test Class Name";
+                t.GetSystemType();
+            });
         }
     }
 }

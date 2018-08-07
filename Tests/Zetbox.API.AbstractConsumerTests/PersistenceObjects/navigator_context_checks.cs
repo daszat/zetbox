@@ -35,14 +35,16 @@ namespace Zetbox.API.AbstractConsumerTests.PersistenceObjects
         }
 
         [Test]
-        [ExpectedException(typeof(WrongZetboxContextException))]
         public void set_1_N_wrong_context()
         {
-            var otherCtx = GetContext();
-            Assert.That(ctx, Is.Not.SameAs(otherCtx));
-            var a = ctx.Create<TestCustomObject>();
-            var b = otherCtx.Create<Muhblah>();
-            a.MubBlah_Nav = b;
+            Assert.Throws<WrongZetboxContextException>(() =>
+            {
+                var otherCtx = GetContext();
+                Assert.That(ctx, Is.Not.SameAs(otherCtx));
+                var a = ctx.Create<TestCustomObject>();
+                var b = otherCtx.Create<Muhblah>();
+                a.MubBlah_Nav = b;
+            });
         }
 
         [Test]
@@ -54,14 +56,16 @@ namespace Zetbox.API.AbstractConsumerTests.PersistenceObjects
         }
 
         [Test]
-        [ExpectedException(typeof(WrongZetboxContextException))]
         public void set_N_1_wrong_context()
         {
-            var otherCtx = GetContext();
-            Assert.That(ctx, Is.Not.SameAs(otherCtx));
-            var a = ctx.Create<TestCustomObject>();
-            var b = otherCtx.Create<Muhblah>();
-            b.TestCustomObjects_List_Nav.Add(a);
+            Assert.Throws<WrongZetboxContextException>(() =>
+            {
+                var otherCtx = GetContext();
+                Assert.That(ctx, Is.Not.SameAs(otherCtx));
+                var a = ctx.Create<TestCustomObject>();
+                var b = otherCtx.Create<Muhblah>();
+                b.TestCustomObjects_List_Nav.Add(a);
+            });
         }
 
         [Test]
@@ -73,14 +77,16 @@ namespace Zetbox.API.AbstractConsumerTests.PersistenceObjects
         }
 
         [Test]
-        [ExpectedException(typeof(WrongZetboxContextException))]
         public void set_N_M_wrong_context()
         {
-            var otherCtx = GetContext();
-            Assert.That(ctx, Is.Not.SameAs(otherCtx));
-            var a = ctx.Create<TestCustomObject>();
-            var b = otherCtx.Create<Muhblah>();
-            b.TestCustomObjects_ManyList_Nav.Add(a);
+            Assert.Throws<WrongZetboxContextException>(() =>
+            {
+                var otherCtx = GetContext();
+                Assert.That(ctx, Is.Not.SameAs(otherCtx));
+                var a = ctx.Create<TestCustomObject>();
+                var b = otherCtx.Create<Muhblah>();
+                b.TestCustomObjects_ManyList_Nav.Add(a);
+            });
         }
 
         [Test]
@@ -92,14 +98,16 @@ namespace Zetbox.API.AbstractConsumerTests.PersistenceObjects
         }
 
         [Test]
-        [ExpectedException(typeof(WrongZetboxContextException))]
         public void set_1_1_wrong_context()
         {
-            var otherCtx = GetContext();
-            Assert.That(ctx, Is.Not.SameAs(otherCtx));
-            var a = ctx.Create<TestCustomObject>();
-            var b = otherCtx.Create<Muhblah>();
-            a.MuhBlah_One_Nav = b;
+            Assert.Throws<WrongZetboxContextException>(() =>
+            {
+                var otherCtx = GetContext();
+                Assert.That(ctx, Is.Not.SameAs(otherCtx));
+                var a = ctx.Create<TestCustomObject>();
+                var b = otherCtx.Create<Muhblah>();
+                a.MuhBlah_One_Nav = b;
+            });
         }
     }
 }

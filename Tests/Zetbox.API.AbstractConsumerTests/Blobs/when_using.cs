@@ -73,13 +73,15 @@ namespace Zetbox.API.AbstractConsumerTests.Blobs
         }
 
         [Test]
-        [ExpectedException()] // Any, since could be executed on server, client or integration tests
         public void should_not_be_changed()
         {
-            var blob = ctx.Find<Blob>(blob_id);
-            Assert.That(blob, Is.Not.Null);
-            blob.OriginalName = "test.txt";
-            ctx.SubmitChanges();
+            Assert.Throws<Exception>(() =>
+            {
+                var blob = ctx.Find<Blob>(blob_id);
+                Assert.That(blob, Is.Not.Null);
+                blob.OriginalName = "test.txt";
+                ctx.SubmitChanges();
+            });
         }
 
         [Test]

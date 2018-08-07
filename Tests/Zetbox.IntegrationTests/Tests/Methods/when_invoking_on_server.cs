@@ -71,10 +71,9 @@ namespace Zetbox.IntegrationTests.Methods
         }
 
         [Test]
-        [ExpectedException]
         public void should_fail_not_implemented()
         {
-            obj.ServerParameterless();
+            Assert.Throws<Exception>(() => { obj.ServerParameterless(); });
         }
 
         [Test]

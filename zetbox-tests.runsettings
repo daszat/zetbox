@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- File name extension must be .runsettings -->
+<RunSettings>
+  <!-- Configurations that affect the Test Framework -->
+  <RunConfiguration>
+    <!-- Path relative to solution directory -->
+    <ResultsDirectory>.\TestResults</ResultsDirectory>
+
+    <!-- [x86] | x64  
+      - You can also change it from menu Test, Test Settings, Default Processor Architecture -->
+    <TargetPlatform>x86</TargetPlatform>
+
+    <!-- Framework35 | [Framework40] | Framework45 -->
+    <TargetFrameworkVersion>Framework40</TargetFrameworkVersion>
+
+    <TreatTestAdapterErrorsAsWarnings>false</TreatTestAdapterErrorsAsWarnings>
+
+    <CollectSourceInformation>true</CollectSourceInformation>
+
+    <!-- Uncomment the below for settings test adapter paths , a semicolon seperated list-->
+    <!--  
+      <TestAdapterPaths>%SystemDrive%\Temp\foo;%SystemDrive%\Temp\bar</TestAdapterPaths>
+       -->
+    <!-- 0 = As many processes as possible, limited by number of cores on machine, 1 = Sequential (1 process), 2-> Given number of processes up to limit by number of cores on machine-->
+    <MaxCpuCount>0</MaxCpuCount>
+  </RunConfiguration>
+
+  <TestRunParameters>
+    <Parameter name="WorkDirectory" value="c:\Projects\zetbox" />
+  </TestRunParameters>
+
+  <!-- NUnit3 adapter, uncomment to set as appropriate, numeric, booleans, enums have their default values below, except RandomSeed -->
+  <NUnit>
+    <WorkDirectory>c:\Projects\zetbox</WorkDirectory>
+  </NUnit>
+</RunSettings>
