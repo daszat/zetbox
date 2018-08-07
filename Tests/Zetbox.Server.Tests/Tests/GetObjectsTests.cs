@@ -47,6 +47,13 @@ namespace Zetbox.Server.Tests
         }
 
         [Test]
+        public void GetObjects_With_ToArray()
+        {
+            var list = ctx.GetQuery<Zetbox.App.Base.ObjectClass>().ToArray();
+            Assert.That(list.Count, Is.GreaterThan(0));
+        }
+
+        [Test]
         public void GetObjects_Twice()
         {
             List<Zetbox.App.Base.ObjectClass> list1 = ctx.GetQuery<Zetbox.App.Base.ObjectClass>().ToList();
@@ -196,7 +203,6 @@ namespace Zetbox.Server.Tests
         }
 
         [Test]
-        [Ignore("Case 471")]
         public void GetObjects_With_Single()
         {
             var guiModule = ctx.GetQuery<Zetbox.App.Base.Module>().Where(m => m.Name == "GUI").Single();
@@ -205,7 +211,6 @@ namespace Zetbox.Server.Tests
         }
 
         [Test]
-        [Ignore("Case 471")]
         public void GetObjects_Single()
         {
             var guiModule = ctx.GetQuery<Zetbox.App.Base.Module>().Single(m => m.Name == "GUI");
@@ -262,7 +267,6 @@ namespace Zetbox.Server.Tests
         }
 
         [Test]
-        [Ignore("Case 1760: Enum member access does not work yet")]
         public void GetObjects_With_EnumAccessor()
         {
             StorageType v = StorageType.MergeIntoA;
@@ -282,7 +286,6 @@ namespace Zetbox.Server.Tests
         }
 
         [Test]
-        [Ignore("Case 1760: Enum member access does not work yet")]
         public void GetObjects_With_Nullable_EnumAccessor()
         {
             DateTimeStyles v = DateTimeStyles.Date;
@@ -302,7 +305,6 @@ namespace Zetbox.Server.Tests
         }
 
         [Test]
-        [Ignore("Case 1760: Enum member access does not work yet")]
         public void GetObjects_With_Nullable_EnumAccessor_Nullable_Value()
         {
             DateTimeStyles? v = DateTimeStyles.Date;
@@ -322,7 +324,6 @@ namespace Zetbox.Server.Tests
         }
 
         [Test]
-        [Ignore("Case 1760: Enum member access does not work yet")]
         public void GetObjects_With_Nullable_EnumAccessor_With_Null_Value()
         {
             DateTimeStyles? v = null;
@@ -380,6 +381,29 @@ namespace Zetbox.Server.Tests
             }
         }
 
+        [Test]
+        public void GetObjects_With_Where_true()
+        {
+            int mID = ctx.GetQuery<Zetbox.App.Base.ObjectClass>().First().Module.ID;
+            using (var otherCtx = GetContext())
+            {
+                var result = otherCtx.GetQuery<Zetbox.App.Base.ObjectClass>().Where(c => true).ToList();
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result.Count, Is.GreaterThan(0));
+            }
+        }
+        [Test]
+        public void GetObjects_With_Where_1_eq_1()
+        {
+            int mID = ctx.GetQuery<Zetbox.App.Base.ObjectClass>().First().Module.ID;
+            using (var otherCtx = GetContext())
+            {
+                var result = otherCtx.GetQuery<Zetbox.App.Base.ObjectClass>().Where(c => 1 == 1).ToList();
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result.Count, Is.GreaterThan(0));
+            }
+        }
+
         //[Test]
         //[ExpectedException]
         //[Ignore("Undefined behaviour: different between NH and EF")]
@@ -412,7 +436,7 @@ namespace Zetbox.Server.Tests
         [Test]
         public void GetObjectsWithInvalidCast()
         {
-            Assert.Throws<Exception>(() =>
+            Assert.That(() =>
             {
                 using (IZetboxContext ctx = GetContext())
                 {
@@ -423,13 +447,13 @@ namespace Zetbox.Server.Tests
                     // never reached
                     Assert.That(result, Is.Not.Null);
                 }
-            });
+            }, Throws.InstanceOf<Exception>());
         }
 
         [Test]
         public void GetObjectsWithSemivalidCast()
         {
-            Assert.Throws<Exception>(() =>
+            Assert.That(() =>
             {
                 using (IZetboxContext ctx = GetContext())
                 {
@@ -440,7 +464,7 @@ namespace Zetbox.Server.Tests
                     // never reached
                     Assert.That(result, Is.Not.Null);
                 }
-            });
+            }, Throws.InstanceOf<Exception>());
         }
     }
 }
