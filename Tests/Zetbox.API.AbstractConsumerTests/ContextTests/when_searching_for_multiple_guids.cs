@@ -24,7 +24,7 @@ namespace Zetbox.API.AbstractConsumerTests.ContextTests
     using Zetbox.App.Base;
     using Zetbox.App.Test;
 
-    public class when_searching_for_multiple_guids
+    public abstract class when_searching_for_multiple_guids
         : AbstractTestFixture
     {
         IZetboxContext ctx;

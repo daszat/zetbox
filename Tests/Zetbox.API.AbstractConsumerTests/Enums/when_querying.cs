@@ -23,7 +23,7 @@ namespace Zetbox.API.AbstractConsumerTests.Enums
     using Zetbox.API;
     using Zetbox.App.Test;
 
-    public class when_querying : AbstractTestFixture
+    public abstract class when_querying : AbstractTestFixture
     {
         [Test]
         public void should_compare_equal()
