@@ -923,6 +923,70 @@ public static event PropertyListChangedHandler<Zetbox.App.Calendar.WorkSchedule>
         public static event PropertyIsValidHandler<Zetbox.App.Calendar.WorkSchedule> OnWorkScheduleRules_IsValid;
 
         /// <summary>
+        /// Duplicates this work schedule
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnDuplicate_WorkSchedule")]
+        public virtual Zetbox.App.Calendar.WorkSchedule Duplicate()
+        {
+            var e = new MethodReturnEventArgs<Zetbox.App.Calendar.WorkSchedule>();
+            if (OnDuplicate_WorkSchedule != null)
+            {
+                OnDuplicate_WorkSchedule(this, e);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on WorkSchedule.Duplicate");
+            }
+            return e.Result;
+        }
+        public delegate void Duplicate_Handler<T>(T obj, MethodReturnEventArgs<Zetbox.App.Calendar.WorkSchedule> ret);
+        public static event Duplicate_Handler<WorkSchedule> OnDuplicate_WorkSchedule;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<WorkSchedule> OnDuplicate_WorkSchedule_CanExec;
+
+        [EventBasedMethod("OnDuplicate_WorkSchedule_CanExec")]
+        public virtual bool DuplicateCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnDuplicate_WorkSchedule_CanExec != null)
+				{
+					OnDuplicate_WorkSchedule_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<WorkSchedule> OnDuplicate_WorkSchedule_CanExecReason;
+
+        [EventBasedMethod("OnDuplicate_WorkSchedule_CanExecReason")]
+        public virtual string DuplicateCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnDuplicate_WorkSchedule_CanExecReason != null)
+				{
+					OnDuplicate_WorkSchedule_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
+        /// <summary>
         /// Gets the number of free days between two dates
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method

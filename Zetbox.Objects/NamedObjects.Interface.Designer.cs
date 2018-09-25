@@ -2195,6 +2195,10 @@ namespace Zetbox {
                             }
                             public static class WorkSchedule_Methods
                             {
+                                public static TypedGuid<global::Zetbox.App.Base.Method> Duplicate
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Method>("6dd4ffcb-f911-4dce-b58d-c6b2eb6ba335"); }
+                                }
                                 public static TypedGuid<global::Zetbox.App.Base.Method> GetOffDays
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Method>("79e9a145-8d0d-400c-a3b8-875c9bda44e8"); }
