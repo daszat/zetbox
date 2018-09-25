@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2018-01-11T14:28:27.4573572Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2018-09-25T14:55:00.7827835Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -41858,6 +41858,7 @@ public static void isValid_Enumeration(EnumerationEntry obj, PropertyIsValidEven
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>Übergeordnete Enumeration</ZetboxBase:Description>
+    <GUI:FilterConfiguration>c6f24475-470c-4d02-a681-bbd6f97fdadc</GUI:FilterConfiguration>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>Enumeration</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>6365c62d-60a6-4fa3-9c78-370ffcc50478</ZetboxBase:ObjectClass>
@@ -41971,6 +41972,7 @@ public static void isValid_Name(EnumerationEntry obj, PropertyIsValidEventArgs e
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>CLR name of this entry</ZetboxBase:Description>
+    <GUI:FilterConfiguration>e636722d-065e-4a7e-94e3-76fb1ff91c3a</GUI:FilterConfiguration>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>Name</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>6365c62d-60a6-4fa3-9c78-370ffcc50478</ZetboxBase:ObjectClass>
@@ -64797,6 +64799,15 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
     <GUI:ViewModelDescriptor>4ff2b6ec-a47f-431b-aa6d-d10b39f8d628</GUI:ViewModelDescriptor>
     <GUI:Property>9afc74a4-4eeb-4c39-879c-eacc8f369fa7</GUI:Property>
   </GUI:SinglePropertyFilterConfiguration>
+  <GUI:SinglePropertyFilterConfiguration ExportGuid="c6f24475-470c-4d02-a681-bbd6f97fdadc">
+    <GUI:ChangedOn>2018-09-25T14:54:04.501847Z</GUI:ChangedOn>
+    <GUI:CreatedOn>2018-09-25T14:54:04.501847Z</GUI:CreatedOn>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:RefreshOnFilterChanged>false</GUI:RefreshOnFilterChanged>
+    <GUI:Required>false</GUI:Required>
+    <GUI:ViewModelDescriptor>4ff2b6ec-a47f-431b-aa6d-d10b39f8d628</GUI:ViewModelDescriptor>
+    <GUI:Property>115c3bfb-72fd-46f2-81fe-74ce1cfa1874</GUI:Property>
+  </GUI:SinglePropertyFilterConfiguration>
   <GUI:SinglePropertyFilterConfiguration ExportGuid="dc523326-547a-4207-80c8-f98adeb6caf3">
     <GUI:ChangedOn>2011-08-06T04:30:56.00251Z</GUI:ChangedOn>
     <GUI:CreatedOn>2011-06-11T05:59:54Z</GUI:CreatedOn>
@@ -64805,6 +64816,15 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
     <GUI:Required>false</GUI:Required>
     <GUI:ViewModelDescriptor>4ff2b6ec-a47f-431b-aa6d-d10b39f8d628</GUI:ViewModelDescriptor>
     <GUI:Property>4e1fb30b-e528-4968-95b0-f3a38eafe643</GUI:Property>
+  </GUI:SinglePropertyFilterConfiguration>
+  <GUI:SinglePropertyFilterConfiguration ExportGuid="e636722d-065e-4a7e-94e3-76fb1ff91c3a">
+    <GUI:ChangedOn>2018-09-25T14:54:04.501847Z</GUI:ChangedOn>
+    <GUI:CreatedOn>2018-09-25T14:54:04.501847Z</GUI:CreatedOn>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:RefreshOnFilterChanged>false</GUI:RefreshOnFilterChanged>
+    <GUI:Required>false</GUI:Required>
+    <GUI:ViewModelDescriptor>4ff2b6ec-a47f-431b-aa6d-d10b39f8d628</GUI:ViewModelDescriptor>
+    <GUI:Property>1c1e497b-294f-442e-8793-478b298d4aba</GUI:Property>
   </GUI:SinglePropertyFilterConfiguration>
   <GUI:ObjRefProp_shows_Methods_RelationEntry ExportGuid="6dfb7de5-b13e-4833-b77d-ed74f8cdc0c9">
     <GUI:A>e7d91162-0aa8-4fe3-9e29-d0519781ceb7</GUI:A>
