@@ -38,6 +38,7 @@ namespace Zetbox.API.Server
         /// <param name="properties">Pass null to recalculate all properties. Or, pass the list properties you want to have recalculated. An empty list, of course, will not process anything.</param>
         void RecalculateProperties(Property[] properties);
         void WipeDatabase();
+        void WaitForDatabase();
         void RefreshRights();
     }
 }

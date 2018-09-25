@@ -230,6 +230,12 @@ namespace Zetbox.API.Server
                 {
                     scope.Resolve<IServer>().WipeDatabase();
                 });
+            builder
+                .RegisterCmdLineAction("wait-for-database", "Waits until the database is online. This is useful in a Docker scenario.",
+                scope =>
+                {
+                    scope.Resolve<IServer>().WaitForDatabase();
+                });
 
             builder
                 .RegisterCmdLineListAction("recalc-all:", "Recalculate calculated properties. This may be needed if the implementation has changed and no proper migration is in place. If no ; seperated list of properties is provided, all properties will be recalculated. e.g -recalc-all or -recalc-all=module.objclass.prop;module.objclass.prop2",

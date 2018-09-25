@@ -241,27 +241,28 @@ namespace Zetbox.Client.Presentables.Calendar
         public void Open()
         {
             if (!CanOpen()) return;
-            using (var newScope = ViewModelFactory.CreateNewScope())
+            var newScope = ViewModelFactory.CreateNewScope();
+            var newCtx = newScope.ViewModelFactory.CreateNewContext();
+
+            var source = SelectedItem.Event.Source.GetObject(newCtx);
+            if (source != null && !source.CurrentAccessRights.HasReadRights())
             {
-                var newCtx = newScope.ViewModelFactory.CreateNewContext();
-
-                var source = SelectedItem.Event.Source.GetObject(newCtx);
-                if (source != null && !source.CurrentAccessRights.HasReadRights())
-                {
-                    ViewModelFactory.ShowMessage(CalendarResources.CannotOpenNoRightsMessage, CalendarResources.CannotOpenNoRightsCaption);
-                    return;
-                }
-
-                var ws = ObjectEditor.WorkspaceViewModel.Create(newScope.Scope, newCtx);
-                if (source != null)
-                    ws.ShowObject(source);
-                else
-                    ws.ShowObject(SelectedItem.Event);
-                ViewModelFactory.ShowDialog(ws, this);
+                ViewModelFactory.ShowMessage(CalendarResources.CannotOpenNoRightsMessage, CalendarResources.CannotOpenNoRightsCaption);
+                return;
             }
 
-            _fetchCache.Invalidate();
-            Refresh(); // A dialog makes it easy to know when the time for a refresh has come
+            var ws = ObjectEditor.WorkspaceViewModel.Create(newScope.Scope, newCtx);
+            if (source != null)
+                ws.ShowObject(source);
+            else
+                ws.ShowObject(SelectedItem.Event);
+            ws.Closed += (s, e) =>
+            {
+                _fetchCache.Invalidate();
+                Refresh(); // A dialog makes it easy to know when the time for a refresh has come
+            };
+
+            ViewModelFactory.ShowModel(ws, true);
         }
 
         #endregion

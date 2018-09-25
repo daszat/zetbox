@@ -117,5 +117,46 @@ namespace Zetbox.App.Calendar
 
             return result;
         }
+
+        [Invocation]
+        public static void Duplicate(WorkSchedule obj, MethodReturnEventArgs<Zetbox.App.Calendar.WorkSchedule> e)
+        {
+            var ctx = obj.Context;
+            var result = ctx.Create<WorkSchedule>();
+
+            result.Name = obj.Name + " Copy";
+            result.BaseWorkSchedule = obj.BaseWorkSchedule;
+            result.Module = obj.Module;
+
+            foreach(var rule in obj.WorkScheduleRules)
+            {
+                var newRule = (WorkScheduleRule)ctx.Create(ctx.GetInterfaceType(rule));
+                result.WorkScheduleRules.Add(rule);
+                newRule.WorkSchedule = result;
+
+                newRule.Module = rule.Module;
+                newRule.Name = rule.Name;
+                newRule.IsWorkingDay = rule.IsWorkingDay;
+                newRule.WorkingHours = rule.WorkingHours;
+                newRule.ValidFrom = rule.ValidFrom;
+                newRule.ValidUntil = rule.ValidUntil;
+
+                if (rule is DayOfWeekWorkScheduleRule)
+                {
+                    ((DayOfWeekWorkScheduleRule)newRule).DayOfWeek = ((DayOfWeekWorkScheduleRule)rule).DayOfWeek;
+                }
+                else if (rule is FixedYearlyWorkScheduleRule)
+                {
+                    ((FixedYearlyWorkScheduleRule)newRule).Day = ((FixedYearlyWorkScheduleRule)rule).Day;
+                    ((FixedYearlyWorkScheduleRule)newRule).Month = ((FixedYearlyWorkScheduleRule)rule).Month;
+                }
+                else if (rule is EasterWorkScheduleRule)
+                {
+                    ((EasterWorkScheduleRule)newRule).Offset = ((EasterWorkScheduleRule)rule).Offset;
+                }
+            }
+
+            e.Result = result;
+        }
     }
 }

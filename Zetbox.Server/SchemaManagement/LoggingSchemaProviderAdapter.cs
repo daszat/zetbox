@@ -95,6 +95,12 @@ namespace Zetbox.Server.SchemaManagement
             _provider.Open(connectionString);
         }
 
+        public void Close()
+        {
+            Log.Info("Closing connection");
+            _provider.Close();
+        }
+
         public string GetSafeConnectionString() { return _provider.GetSafeConnectionString(); }
 
         public string GetSafeConnectionString(string connectionString) { return _provider.GetSafeConnectionString(connectionString); }

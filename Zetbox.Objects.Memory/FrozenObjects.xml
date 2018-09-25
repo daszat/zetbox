@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2018-01-11T14:28:27.4573572Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2018-09-25T15:52:35.993318Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -4419,8 +4419,36 @@ public static void ScheduleSyncNowCanExecReason(SyncProvider obj, MethodReturnEv
     <ZetboxBase:Name>ScheduleSyncNow</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>12ce65c1-e00b-44be-b119-eb520b46616e</ZetboxBase:ObjectClass>
   </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="6dd4ffcb-f911-4dce-b58d-c6b2eb6ba335">
+    <ZetboxBase:CategoryTags>Edit</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2018-09-25T15:48:23.938904Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void Duplicate(WorkSchedule obj, MethodReturnEventArgs&lt;Zetbox.App.Calendar.WorkSchedule&gt; e)
+{
+}
+
+[Invocation]
+public static void DuplicateCanExec(WorkSchedule obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void DuplicateCanExecReason(WorkSchedule obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2018-09-25T15:06:47.093747Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Duplicates this work schedule</ZetboxBase:Description>
+    <GUI:Icon>af285b13-063e-40df-887a-d2d837ed9e7e</GUI:Icon>
+    <ZetboxBase:InvokeOnServer>false</ZetboxBase:InvokeOnServer>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
+    <ZetboxBase:Name>Duplicate</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>901a2ddd-1330-4129-b8a2-92b8e655d168</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
   <ZetboxBase:Method ExportGuid="79e9a145-8d0d-400c-a3b8-875c9bda44e8">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Check</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2018-09-25T15:48:47.232784Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void GetOffDays(WorkSchedule obj, MethodReturnEventArgs&lt;int&gt; e, DateTime from, DateTime until)
 {
@@ -4438,13 +4466,15 @@ public static void GetOffDaysCanExecReason(WorkSchedule obj, MethodReturnEventAr
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2011-06-15T10:43:48Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>Gets the number of free days between two dates</ZetboxBase:Description>
+    <ZetboxBase:InvokeOnServer>false</ZetboxBase:InvokeOnServer>
     <GUI:IsDisplayable>true</GUI:IsDisplayable>
     <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
     <ZetboxBase:Name>GetOffDays</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>901a2ddd-1330-4129-b8a2-92b8e655d168</ZetboxBase:ObjectClass>
   </ZetboxBase:Method>
   <ZetboxBase:Method ExportGuid="1e9a4f60-a4ec-41ae-9f1e-bb80bbe70bc3">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Check</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2018-09-25T15:48:47.232784Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void GetWorkingDays(WorkSchedule obj, MethodReturnEventArgs&lt;int&gt; e, DateTime from, DateTime until)
 {
@@ -4462,13 +4492,15 @@ public static void GetWorkingDaysCanExecReason(WorkSchedule obj, MethodReturnEve
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2011-06-15T10:42:22Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>Get the number of working days between two dates</ZetboxBase:Description>
+    <ZetboxBase:InvokeOnServer>false</ZetboxBase:InvokeOnServer>
     <GUI:IsDisplayable>true</GUI:IsDisplayable>
     <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
     <ZetboxBase:Name>GetWorkingDays</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>901a2ddd-1330-4129-b8a2-92b8e655d168</ZetboxBase:ObjectClass>
   </ZetboxBase:Method>
   <ZetboxBase:Method ExportGuid="bb7592bc-26e6-463f-a806-91f56dc9fa6e">
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:07.103536Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CategoryTags>Check</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2018-09-25T15:48:47.232784Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void GetWorkingHours(WorkSchedule obj, MethodReturnEventArgs&lt;decimal&gt; e, DateTime from, DateTime until)
 {
@@ -4486,6 +4518,7 @@ public static void GetWorkingHoursCanExecReason(WorkSchedule obj, MethodReturnEv
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2011-06-15T10:41:04Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>Returns the amount of working hours between two dates</ZetboxBase:Description>
+    <ZetboxBase:InvokeOnServer>false</ZetboxBase:InvokeOnServer>
     <GUI:IsDisplayable>true</GUI:IsDisplayable>
     <ZetboxBase:Module>1bdbed14-0f97-499c-9208-cc79fdb14d06</ZetboxBase:Module>
     <ZetboxBase:Name>GetWorkingHours</ZetboxBase:Name>
@@ -4529,6 +4562,17 @@ public static void AppliesToCanExecReason(WorkScheduleRule obj, MethodReturnEven
     <ZetboxBase:Name>args</ZetboxBase:Name>
     <ZetboxBase:TypeRef>System.Object, mscorlib</ZetboxBase:TypeRef>
   </ZetboxBase:CLRObjectParameter>
+  <ZetboxBase:ObjectReferenceParameter ExportGuid="858e392b-e41f-4f55-9420-65069d35d1dc">
+    <ZetboxBase:ChangedOn>2018-09-25T15:06:47.093747Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2018-09-25T15:06:47.093747Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>true</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>6dd4ffcb-f911-4dce-b58d-c6b2eb6ba335</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>retVal</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>901a2ddd-1330-4129-b8a2-92b8e655d168</ZetboxBase:ObjectClass>
+  </ZetboxBase:ObjectReferenceParameter>
   <ZetboxBase:DateTimeParameter ExportGuid="ec4b729a-cf80-4ef1-a0b6-d7c35ea08986">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:00.426763Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-15T10:43:48Z</ZetboxBase:CreatedOn>
@@ -41858,6 +41902,7 @@ public static void isValid_Enumeration(EnumerationEntry obj, PropertyIsValidEven
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>Übergeordnete Enumeration</ZetboxBase:Description>
+    <GUI:FilterConfiguration>c6f24475-470c-4d02-a681-bbd6f97fdadc</GUI:FilterConfiguration>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>Enumeration</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>6365c62d-60a6-4fa3-9c78-370ffcc50478</ZetboxBase:ObjectClass>
@@ -41971,6 +42016,7 @@ public static void isValid_Name(EnumerationEntry obj, PropertyIsValidEventArgs e
 </ZetboxBase:CodeTemplate>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>CLR name of this entry</ZetboxBase:Description>
+    <GUI:FilterConfiguration>e636722d-065e-4a7e-94e3-76fb1ff91c3a</GUI:FilterConfiguration>
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>Name</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>6365c62d-60a6-4fa3-9c78-370ffcc50478</ZetboxBase:ObjectClass>
@@ -64797,6 +64843,15 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
     <GUI:ViewModelDescriptor>4ff2b6ec-a47f-431b-aa6d-d10b39f8d628</GUI:ViewModelDescriptor>
     <GUI:Property>9afc74a4-4eeb-4c39-879c-eacc8f369fa7</GUI:Property>
   </GUI:SinglePropertyFilterConfiguration>
+  <GUI:SinglePropertyFilterConfiguration ExportGuid="c6f24475-470c-4d02-a681-bbd6f97fdadc">
+    <GUI:ChangedOn>2018-09-25T14:54:04.501847Z</GUI:ChangedOn>
+    <GUI:CreatedOn>2018-09-25T14:54:04.501847Z</GUI:CreatedOn>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:RefreshOnFilterChanged>false</GUI:RefreshOnFilterChanged>
+    <GUI:Required>false</GUI:Required>
+    <GUI:ViewModelDescriptor>4ff2b6ec-a47f-431b-aa6d-d10b39f8d628</GUI:ViewModelDescriptor>
+    <GUI:Property>115c3bfb-72fd-46f2-81fe-74ce1cfa1874</GUI:Property>
+  </GUI:SinglePropertyFilterConfiguration>
   <GUI:SinglePropertyFilterConfiguration ExportGuid="dc523326-547a-4207-80c8-f98adeb6caf3">
     <GUI:ChangedOn>2011-08-06T04:30:56.00251Z</GUI:ChangedOn>
     <GUI:CreatedOn>2011-06-11T05:59:54Z</GUI:CreatedOn>
@@ -64805,6 +64860,15 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
     <GUI:Required>false</GUI:Required>
     <GUI:ViewModelDescriptor>4ff2b6ec-a47f-431b-aa6d-d10b39f8d628</GUI:ViewModelDescriptor>
     <GUI:Property>4e1fb30b-e528-4968-95b0-f3a38eafe643</GUI:Property>
+  </GUI:SinglePropertyFilterConfiguration>
+  <GUI:SinglePropertyFilterConfiguration ExportGuid="e636722d-065e-4a7e-94e3-76fb1ff91c3a">
+    <GUI:ChangedOn>2018-09-25T14:54:04.501847Z</GUI:ChangedOn>
+    <GUI:CreatedOn>2018-09-25T14:54:04.501847Z</GUI:CreatedOn>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:RefreshOnFilterChanged>false</GUI:RefreshOnFilterChanged>
+    <GUI:Required>false</GUI:Required>
+    <GUI:ViewModelDescriptor>4ff2b6ec-a47f-431b-aa6d-d10b39f8d628</GUI:ViewModelDescriptor>
+    <GUI:Property>1c1e497b-294f-442e-8793-478b298d4aba</GUI:Property>
   </GUI:SinglePropertyFilterConfiguration>
   <GUI:ObjRefProp_shows_Methods_RelationEntry ExportGuid="6dfb7de5-b13e-4833-b77d-ed74f8cdc0c9">
     <GUI:A>e7d91162-0aa8-4fe3-9e29-d0519781ceb7</GUI:A>

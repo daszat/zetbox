@@ -243,6 +243,16 @@ namespace Zetbox.Server.SchemaManagement
             db.Open();
         }
 
+        public void Close()
+        {
+            if(db != null)
+            {
+                db.Close();
+                db = null;
+                currentConnectionString = null;
+            }
+        }
+
         public string GetSafeConnectionString()
         {
             return GetSafeConnectionString(currentConnectionString);

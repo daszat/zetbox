@@ -131,7 +131,7 @@ namespace Zetbox.Client.Presentables.Calendar
     {
         public new delegate CalendarWorkspaceViewModel Factory(IZetboxContext dataCtx, ViewModel parent);
 
-        public static string[] Colors = new[] { 
+        public static string[] Colors = new[] {
             "#F1F5E3",
 
             "#FFAAAA",
@@ -139,7 +139,7 @@ namespace Zetbox.Client.Presentables.Calendar
             "#AAAAFF",
             "#AAFFFF",
             "#FFAAFF",
-        
+
             "#FFCCCC",
             "#CCFFCC",
             "#CCCCFF",
@@ -357,27 +357,29 @@ namespace Zetbox.Client.Presentables.Calendar
         public void Open(EventViewModel evt)
         {
             if (evt == null) return;
-            using (var newScope = ViewModelFactory.CreateNewScope())
+            var newScope = ViewModelFactory.CreateNewScope();
+            var newCtx = newScope.ViewModelFactory.CreateNewContext();
+
+            var source = evt.Event.Source.GetObject(newCtx);
+            if (source != null && !source.CurrentAccessRights.HasReadRights())
             {
-                var newCtx = newScope.ViewModelFactory.CreateNewContext();
-
-                var source = evt.Event.Source.GetObject(newCtx);
-                if (source != null && !source.CurrentAccessRights.HasReadRights())
-                {
-                    newScope.ViewModelFactory.ShowMessage(CalendarResources.CannotOpenNoRightsMessage, CalendarResources.CannotOpenNoRightsCaption);
-                    return;
-                }
-
-                var ws = ObjectEditor.WorkspaceViewModel.Create(newScope.Scope, newCtx);
-                if (source != null)
-                    ws.ShowObject(source);
-                else
-                    ws.ShowObject(evt.Event);
-                newScope.ViewModelFactory.ShowDialog(ws, this);
+                newScope.ViewModelFactory.ShowMessage(CalendarResources.CannotOpenNoRightsMessage, CalendarResources.CannotOpenNoRightsCaption);
+                newScope.Dispose();
+                return;
             }
 
-            _fetchCache.Invalidate();
-            CurrentView.Refresh(); // A dialog makes it easy to know when the time for a refresh has come
+            var ws = ObjectEditor.WorkspaceViewModel.Create(newScope.Scope, newCtx);
+            if (source != null)
+                ws.ShowObject(source);
+            else
+                ws.ShowObject(evt.Event);
+
+            ws.Closed += (s, e) =>
+            {
+                _fetchCache.Invalidate();
+                CurrentView.Refresh(); // A dialog makes it easy to know when the time for a refresh has come
+            };
+            newScope.ViewModelFactory.ShowModel(ws, true);
         }
         #endregion
 
@@ -425,17 +427,18 @@ namespace Zetbox.Client.Presentables.Calendar
         {
             if (!CanNew()) return;
 
-            using(var scope = ViewModelFactory.CreateNewScope())
+            var scope = ViewModelFactory.CreateNewScope();
+            var ctx = scope.ViewModelFactory.CreateNewContext();
+            var calendar = ctx.Find<cal.CalendarBook>(SelectedItem.Calendar.ID);
+            var dlg = scope.ViewModelFactory.CreateViewModel<NewEventDialogViewModel.Factory>().Invoke(ctx, null, calendar);
+
+            var args = new NewEventViewModelsArgs(ctx, scope.ViewModelFactory, dlg, calendar, selectedDate, isAllDay);
+            calendar.GetNewEventViewModels(args);
+
+            dlg.InputViewModels = args.ViewModels;
+            scope.ViewModelFactory.ShowModel(dlg, true);
+            dlg.Closed += (s, e) =>
             {
-                var ctx = scope.ViewModelFactory.CreateNewContext();
-                var calendar = ctx.Find<cal.CalendarBook>(SelectedItem.Calendar.ID);
-                var dlg = scope.ViewModelFactory.CreateViewModel<NewEventDialogViewModel.Factory>().Invoke(ctx, null, calendar);
-
-                var args = new NewEventViewModelsArgs(ctx, scope.ViewModelFactory, dlg, calendar, selectedDate, isAllDay);
-                calendar.GetNewEventViewModels(args);
-
-                dlg.InputViewModels = args.ViewModels;
-                scope.ViewModelFactory.ShowDialog(dlg);
                 if (dlg.Result == true)
                 {
                     var newItem = dlg.CreateNew();
@@ -447,7 +450,8 @@ namespace Zetbox.Client.Presentables.Calendar
                         CurrentView.SelectedItem = (EventViewModel)DataObjectViewModel.Fetch(ViewModelFactory, DataContext, this, DataContext.Find<cal.Event>(newItem.ID));
                     }
                 }
-            }
+                scope.Dispose();
+            };
         }
         #endregion
 

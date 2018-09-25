@@ -47,6 +47,11 @@ namespace Zetbox.App.Calendar
         ICollection<Zetbox.App.Calendar.WorkScheduleRule> WorkScheduleRules { get; }
 
         /// <summary>
+        /// Duplicates this work schedule
+        /// </summary>
+        Zetbox.App.Calendar.WorkSchedule Duplicate();
+
+        /// <summary>
         /// Gets the number of free days between two dates
         /// </summary>
         int GetOffDays(DateTime from, DateTime until);

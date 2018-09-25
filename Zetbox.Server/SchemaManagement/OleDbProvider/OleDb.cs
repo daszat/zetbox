@@ -69,6 +69,16 @@ namespace Zetbox.Server.SchemaManagement.OleDbProvider
                 quoteSuffix = row["LiteralValue"] as string;
         }
 
+        public void Close()
+        {
+            if (db != null)
+            {
+                db.Close();
+                db = null;
+                currentConnectionString = null;
+            }
+        }
+
         public string GetSafeConnectionString()
         {
             return currentConnectionString;
