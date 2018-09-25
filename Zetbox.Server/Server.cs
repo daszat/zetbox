@@ -382,6 +382,33 @@ namespace Zetbox.Server
             }
         }
 
+        public void WaitForDatabase()
+        {
+            using (var subContainer = container.BeginLifetimeScope())
+            {
+                var config = subContainer.Resolve<ZetboxConfig>();
+                var connectionString = config.Server.GetConnectionString(Zetbox.API.Helper.ZetboxConnectionStringKey);
+                var schemaProvider = subContainer.ResolveNamed<ISchemaProvider>(connectionString.SchemaProvider);
+                Logging.Server.Info($"Waiting for the database to get online ...");
+                while (true)
+                {
+                    try
+                    {
+                        schemaProvider.Open(connectionString.ConnectionString);
+                        Logging.Server.Info($"... database is online");
+                        return;
+                    }
+                    catch(Exception ex)
+                    {
+                        Logging.Server.Info($"... {ex.Message}");
+                        Logging.Server.Info($"    {schemaProvider.GetSafeConnectionString()}");
+                        schemaProvider.Close();
+                        System.Threading.Thread.Sleep(1000);
+                    }
+                }
+            }
+        }
+
         public void RefreshRights()
         {
             using (var subContainer = container.BeginLifetimeScope())

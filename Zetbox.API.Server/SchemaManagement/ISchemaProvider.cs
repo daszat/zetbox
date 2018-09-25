@@ -607,6 +607,7 @@ namespace Zetbox.API.Server
         #region Connection and Transaction Handling
 
         void Open(string connectionString);
+        void Close();
 
         /// <summary>
         /// Gets a copy of the connection string for the currently open connection, safe for logging. That is, without any sensitive credential information.
