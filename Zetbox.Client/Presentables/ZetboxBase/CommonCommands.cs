@@ -505,7 +505,7 @@ namespace Zetbox.Client.Presentables.ZetboxBase
                 Reason = CommonCommandsResources.DataObjectCommand_IsReadOnly;
                 return false;
             }
-            else if (Type.HasAccessControlList() && !Type.GetGroupAccessRights(CurrentPrincipal).HasCreateRights())
+            else if (Type.HasAccessControlList() && !(CurrentPrincipal.IsAdministrator() || Type.GetGroupAccessRights(CurrentPrincipal).HasCreateRights()))
             {
                 Reason = CommonCommandsResources.DataObjectCommand_NotAllowed;
                 return false;
