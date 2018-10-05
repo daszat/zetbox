@@ -230,6 +230,7 @@ namespace Zetbox.Client.WPF.View.Calendar
                     {
                         ViewModel.WeekCalendar.NotifyOpen(vmdl.EventViewModel);
                     }
+                    e.Handled = true;
                 }
             }
         }
