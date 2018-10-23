@@ -62,6 +62,7 @@ namespace Zetbox.App.Packaging
             using (Log.InfoTraceMethodCall("Deploy"))
             {
                 Log.InfoFormat("Starting Deployment from {0}", string.Join(", ", providers.Select(p => p.ToString()).ToArray()));
+                ctx.TransientState["__IS_CURRENTLY_IMPORTING__"] = true;
                 try
                 {
                     // TODO: Das muss ich z.Z. machen, weil die erste Query eine Entity Query ist und noch nix geladen wurde....
@@ -141,6 +142,7 @@ namespace Zetbox.App.Packaging
                     }
                 }
 
+                ctx.TransientState.Remove("__IS_CURRENTLY_IMPORTING__");
                 Log.Debug("Deployment finished");
             }
         }
@@ -298,6 +300,7 @@ namespace Zetbox.App.Packaging
             using (Log.InfoTraceMethodCall("LoadFromXml"))
             {
                 Log.DebugFormat("Starting Import from {0}", string.Join(", ", providers.Select(p => p.ToString()).ToArray()));
+                ctx.TransientState["__IS_CURRENTLY_IMPORTING__"] = true;
                 try
                 {
                     using (Log.DebugTraceMethodCall("initialisation query"))
@@ -353,6 +356,7 @@ namespace Zetbox.App.Packaging
                         ((BaseNotifyingObject)obj).PlaybackNotifications();
                     }
                 }
+                ctx.TransientState.Remove("__IS_CURRENTLY_IMPORTING__");
                 Log.Debug("Import finished");
                 return importedObjects.Values;
             }

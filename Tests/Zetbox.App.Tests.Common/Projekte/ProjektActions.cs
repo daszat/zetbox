@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Zetbox.API;
+using Zetbox.App.Extensions;
 
 namespace Zetbox.App.Projekte
 {
@@ -41,12 +42,16 @@ namespace Zetbox.App.Projekte
         [Invocation]
         public static void postSet_Tasks(Projekt obj)
         {
+            if (obj.Context.IsCurrentlyImporting()) return;
+
             obj.Recalculate("AufwandGes");
         }
 
         [Invocation]
         public static void postSet_KickOffAm(Projekt obj, PropertyPostSetterEventArgs<DateTime> e)
         {
+            if (obj.Context.IsCurrentlyImporting()) return;
+
             if (obj.KickOffBis.HasValue)
             {
                 obj.KickOffBis = e.NewValue.Date + obj.KickOffBis.Value.TimeOfDay;
@@ -56,6 +61,8 @@ namespace Zetbox.App.Projekte
         [Invocation]
         public static void preSet_KickOffBis(Projekt obj, PropertyPreSetterEventArgs<DateTime?> e)
         {
+            if (obj.Context.IsCurrentlyImporting()) return;
+
             if (e.NewValue.HasValue)
             {
                 e.Result = obj.KickOffAm.Date + e.NewValue.Value.TimeOfDay;
