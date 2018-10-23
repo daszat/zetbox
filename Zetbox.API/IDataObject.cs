@@ -654,4 +654,56 @@ namespace Zetbox.API
     {
         T ID { get; }
     }
+
+    public static class IDataObjectTransientStateExtensions
+    {
+        public static TCacheItem TransientState<TCacheItem, TKey>(this IDataObject obj, string transientCacheKey, TKey key, Func<TCacheItem> getter)
+        {
+            if (obj == null) throw new ArgumentNullException("obj");
+            if (string.IsNullOrEmpty(transientCacheKey)) throw new ArgumentNullException("transientCacheKey");
+            if (getter == null) throw new ArgumentNullException("getter");
+
+            // Ensure cache
+            // Ensure transient cache
+            if (!obj.TransientState.ContainsKey(transientCacheKey))
+            {
+                obj.TransientState[transientCacheKey] = new Dictionary<TKey, TCacheItem>();
+            }
+            Dictionary<TKey, TCacheItem> cache = (Dictionary<TKey, TCacheItem>)obj.TransientState[transientCacheKey];
+
+            TCacheItem result;
+            if (!cache.TryGetValue(key, out result))
+            {
+                result = getter();
+                cache[key] = result;
+                return result;
+            }
+            else
+            {
+                // Cachehit
+                // Maybe count it here
+                return result;
+            }
+        }
+
+        public static TCacheItem TransientState<TCacheItem>(this IDataObject obj, string transientCacheKey, Func<TCacheItem> getter)
+        {
+            if (obj == null) throw new ArgumentNullException("obj");
+            if (string.IsNullOrEmpty(transientCacheKey)) throw new ArgumentNullException("transientCacheKey");
+            if (getter == null) throw new ArgumentNullException("getter");
+
+            if (!obj.TransientState.ContainsKey(transientCacheKey))
+            {
+                var result = getter();
+                obj.TransientState[transientCacheKey] = result;
+                return result;
+            }
+            else
+            {
+                // Cachehit
+                // Maybe count it here
+                return (TCacheItem)obj.TransientState[transientCacheKey];
+            }
+        }
+    }
 }
