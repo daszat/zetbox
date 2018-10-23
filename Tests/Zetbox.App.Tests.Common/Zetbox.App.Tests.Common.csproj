@@ -64,6 +64,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Zetbox.API.Common\Zetbox.API.Common.csproj">
+      <Project>{9677ae11-cb92-4f0a-a248-87a21586f0da}</Project>
+      <Name>Zetbox.API.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Zetbox.API\Zetbox.API.csproj">
       <Project>{ad0c7b9c-3c92-4f19-bbdf-416ad4700cb9}</Project>
       <Name>Zetbox.API</Name>
@@ -83,4 +87,3 @@
   </Target>
   -->
 </Project>
-

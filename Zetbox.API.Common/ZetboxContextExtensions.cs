@@ -90,5 +90,20 @@ namespace Zetbox.App.Extensions
             if (!IsSingleton<T>(ctx, singleton))
                 throw new InvalidOperationException(string.Format("The Type {0} is not a singletion", typeof(T).FullName));
         }
+
+        /// <summary>
+        /// Indicates, that a import is currently running.
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <remarks>
+        /// This is usefull to prevent your business logic from changing or recalculating data during import.
+        /// Note! This only applies to object references during import, as Notify* is not called during SubmitRestore and 
+        /// all primitive types are imported directly to their backing stores.
+        /// </remarks>
+        /// <returns></returns>
+        public static bool IsCurrentlyImporting(this IReadOnlyZetboxContext ctx)
+        {
+            return ctx.TransientState.ContainsKey("__IS_CURRENTLY_IMPORTING__") && ctx.TransientState["__IS_CURRENTLY_IMPORTING__"] as bool? == true;
+        }
     }
 }

@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Zetbox.API;
+using Zetbox.App.Extensions;
 
 namespace Zetbox.App.Projekte
 {
@@ -40,12 +41,14 @@ namespace Zetbox.App.Projekte
         [Invocation]
         public static void postSet_Aufwand(Task obj, PropertyPostSetterEventArgs<double?> e)
         {
+            if (obj.Context.IsCurrentlyImporting()) return;
             if (obj.Projekt != null) obj.Projekt.Recalculate("AufwandGes");
         }
 
         [Invocation]
         public static void postSet_Projekt(Task obj, PropertyPostSetterEventArgs<Projekt> e)
         {
+            if (obj.Context.IsCurrentlyImporting()) return;
             if (e.OldValue != null) e.OldValue.Recalculate("AufwandGes");
             if (e.NewValue != null) e.NewValue.Recalculate("AufwandGes");
         }
