@@ -34,7 +34,7 @@ namespace Zetbox.Generator.Templates
         {
 #line 27 "C:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
 this.WriteObjects("<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n");
-this.WriteObjects("<Project ToolsVersion=\"4.0\" DefaultTargets=\"Build\" xmlns=\"http://schemas.microsoft.com/developer/msbuild/2003\">\r\n");
+this.WriteObjects("<Project ToolsVersion=\"12.0\" DefaultTargets=\"Build\" xmlns=\"http://schemas.microsoft.com/developer/msbuild/2003\">\r\n");
 this.WriteObjects("  <PropertyGroup>\r\n");
 this.WriteObjects("    <Configuration Condition=\" '$(Configuration)' == '' \">Debug</Configuration>\r\n");
 this.WriteObjects("    <Platform Condition=\" '$(Platform)' == '' \">AnyCPU</Platform>\r\n");
@@ -44,7 +44,7 @@ this.WriteObjects("    <ProjectGuid>",  projectGuid , "</ProjectGuid>\r\n");
 this.WriteObjects("    <OutputType>Library</OutputType>\r\n");
 this.WriteObjects("    <RootNamespace>",  GetAssemblyName() , "</RootNamespace>\r\n");
 this.WriteObjects("    <AssemblyName>",  GetAssemblyName() , "</AssemblyName>\r\n");
-this.WriteObjects("    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>\r\n");
+this.WriteObjects("    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>\r\n");
 this.WriteObjects("    <FileAlignment>512</FileAlignment>\r\n");
 this.WriteObjects("    <SignAssembly>true</SignAssembly>\r\n");
 this.WriteObjects("    <AssemblyOriginatorKeyFile>Zetbox.Objects.snk</AssemblyOriginatorKeyFile>\r\n");
@@ -66,6 +66,7 @@ this.WriteObjects("    <OutputPath Condition=\" '$(OutputPathOverride)' == '' \"
 this.WriteObjects("    <OutputPath Condition=\" '$(OutputPathOverride)' != '' \">$(OutputPathOverride)\\",  GetRelativeOutputPath().Replace('/', '\\') , "\\Generated\\</OutputPath>\r\n");
 this.WriteObjects("    <ZetboxAPIPath Condition=\" '$(ZetboxAPIPathOverride)' == '' \">..\\bin\\Debug\\</ZetboxAPIPath>\r\n");
 this.WriteObjects("    <ZetboxAPIPath Condition=\" '$(ZetboxAPIPathOverride)' != '' \">$(ZetboxAPIPathOverride)</ZetboxAPIPath>\r\n");
+this.WriteObjects("    <Prefer32Bit>false</Prefer32Bit>\r\n");
 this.WriteObjects("  </PropertyGroup>\r\n");
 this.WriteObjects("  <PropertyGroup Condition=\" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' \">\r\n");
 this.WriteObjects("    <DebugType>pdbonly</DebugType>\r\n");
@@ -80,6 +81,7 @@ this.WriteObjects("    <OutputPath Condition=\" '$(OutputPathOverride)' == '' \"
 this.WriteObjects("    <OutputPath Condition=\" '$(OutputPathOverride)' != '' \">$(OutputPathOverride)\\",  GetRelativeOutputPath().Replace('/', '\\') , "\\Generated\\</OutputPath>\r\n");
 this.WriteObjects("    <ZetboxAPIPath Condition=\" '$(ZetboxAPIPathOverride)' == '' \">..\\bin\\Release\\</ZetboxAPIPath>\r\n");
 this.WriteObjects("    <ZetboxAPIPath Condition=\" '$(ZetboxAPIPathOverride)' != '' \">$(ZetboxAPIPathOverride)</ZetboxAPIPath>\r\n");
+this.WriteObjects("    <Prefer32Bit>false</Prefer32Bit>\r\n");
 this.WriteObjects("  </PropertyGroup>\r\n");
 this.WriteObjects("  <PropertyGroup Condition=\" '$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU' \">\r\n");
 this.WriteObjects("    <DebugSymbols>true</DebugSymbols>\r\n");
@@ -96,12 +98,13 @@ this.WriteObjects("    <OutputPath Condition=\" '$(OutputPathOverride)' == '' \"
 this.WriteObjects("    <OutputPath Condition=\" '$(OutputPathOverride)' != '' \">$(OutputPathOverride)\\",  GetRelativeOutputPath().Replace('/', '\\') , "\\Generated\\</OutputPath>\r\n");
 this.WriteObjects("    <ZetboxAPIPath Condition=\" '$(ZetboxAPIPathOverride)' == '' \">..\\bin\\Debug\\</ZetboxAPIPath>\r\n");
 this.WriteObjects("    <ZetboxAPIPath Condition=\" '$(ZetboxAPIPathOverride)' != '' \">$(ZetboxAPIPathOverride)</ZetboxAPIPath>\r\n");
+this.WriteObjects("    <Prefer32Bit>false</Prefer32Bit>\r\n");
 this.WriteObjects("  </PropertyGroup>\r\n");
 this.WriteObjects("  <!-- additional properties have to come in a separate group to receive correct $(OutputPath) -->\r\n");
 this.WriteObjects("  <PropertyGroup>\r\n");
-#line 93 "C:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
+#line 96 "C:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
 ApplyAdditionalProperties(); 
-#line 94 "C:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
+#line 97 "C:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
 this.WriteObjects("  </PropertyGroup>\r\n");
 this.WriteObjects("  <ItemGroup>\r\n");
 this.WriteObjects("    <AdditionalReferencePath Include=\"$(OutputPath)\" />\r\n");
@@ -128,25 +131,25 @@ this.WriteObjects("    </Reference>\r\n");
 this.WriteObjects("    <Reference Include=\"WindowsBase\">\r\n");
 this.WriteObjects("      <RequiredTargetFramework>3.5</RequiredTargetFramework>\r\n");
 this.WriteObjects("    </Reference>\r\n");
-#line 120 "C:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
+#line 123 "C:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
 ApplyAdditionalReferences(); 
-#line 121 "C:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
+#line 124 "C:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
 this.WriteObjects("  </ItemGroup>\r\n");
 this.WriteObjects("  <ItemGroup>\r\n");
-#line 123 "C:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
-foreach (var name in fileNames) { 
-#line 124 "C:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
-this.WriteObjects("    <Compile Include=\"",  name.Replace('/', '\\') , "\" />\r\n");
-#line 125 "C:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
-} 
 #line 126 "C:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
+foreach (var name in fileNames) { 
+#line 127 "C:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
+this.WriteObjects("    <Compile Include=\"",  name.Replace('/', '\\') , "\" />\r\n");
+#line 128 "C:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
+} 
+#line 129 "C:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
 this.WriteObjects("  </ItemGroup>\r\n");
 this.WriteObjects("  <ItemGroup>\r\n");
 this.WriteObjects("    <None Include=\"Zetbox.Objects.snk\" />\r\n");
 this.WriteObjects("  </ItemGroup>\r\n");
-#line 130 "C:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
+#line 133 "C:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
 ApplyAdditionalItemGroups(); 
-#line 131 "C:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
+#line 134 "C:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
 this.WriteObjects("  <Import Project=\"$(MSBuildBinPath)\\Microsoft.CSharp.targets\" />\r\n");
 this.WriteObjects("  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. \r\n");
 this.WriteObjects("       Other similar extension points exist, see Microsoft.Common.targets.\r\n");
@@ -155,9 +158,9 @@ this.WriteObjects("  </Target>\r\n");
 this.WriteObjects("  -->\r\n");
 this.WriteObjects("  <Target Name=\"AfterBuild\">\r\n");
 this.WriteObjects("  </Target>\r\n");
-#line 139 "C:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
+#line 142 "C:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
 ApplyAdditionalPropertyGroups(); 
-#line 140 "C:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
+#line 143 "C:\Projects\zetbox\Zetbox.Generator\Templates\ProjectFile.cst"
 this.WriteObjects("</Project>");
 
         }
