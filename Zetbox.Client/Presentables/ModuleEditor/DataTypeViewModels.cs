@@ -223,7 +223,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
         #endregion
 
         private ReadOnlyProjectedList<Property, DescribedPropertyViewModel> _propertyModels;
-        public IReadOnlyList<DescribedPropertyViewModel> DescribedPropertyModels
+        public API.Utils.IReadOnlyList<DescribedPropertyViewModel> DescribedPropertyModels
         {
             get
             {
@@ -239,7 +239,7 @@ namespace Zetbox.Client.Presentables.ModuleEditor
         }
 
         private ReadOnlyProjectedList<Method, DescribedMethodViewModel> _methodModels;
-        public IReadOnlyList<DescribedMethodViewModel> DescribedMethods
+        public API.Utils.IReadOnlyList<DescribedMethodViewModel> DescribedMethods
         {
             get
             {

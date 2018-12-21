@@ -1444,6 +1444,129 @@
         <!-- define the subclasses -->
 
     </class>
+    <class name="Zetbox.App.LicenseManagement.LicenseNHibernateImpl+LicenseProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.LicenseManagement.LicenseNHibernateImpl+LicenseProxy, Zetbox.Objects.NHibernateImpl"
+           schema="`lm`"
+           table="`Licenses`"
+           abstract="false"
+           dynamic-update="true"
+           optimistic-lock="dirty"
+           batch-size="100">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`lm`</param>
+                <param name="sequence">`Licenses_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="ChangedOn" type="Timestamp"
+                  column="`ChangedOn`" 
+                  optimistic-lock="true"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="CreatedOn" type="Timestamp"
+                  column="`CreatedOn`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Description" 
+                  column="`Description`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ExportGuid" 
+                  column="`ExportGuid`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Licensee" 
+                  column="`Licensee`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="LicenseSubject" 
+                  column="`LicenseSubject`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Licensor" 
+                  column="`Licensor`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Signature" 
+                  column="`Signature`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ValidFrom" type="Timestamp"
+                  column="`ValidFrom`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="ValidThru" type="Timestamp"
+                  column="`ValidThru`" 
+                  optimistic-lock="false"/>
+
+        <!-- define the subclasses -->
+
+    </class>
+    <class name="Zetbox.App.LicenseManagement.PrivateKeyNHibernateImpl+PrivateKeyProxy, Zetbox.Objects.NHibernateImpl"
+           proxy="Zetbox.App.LicenseManagement.PrivateKeyNHibernateImpl+PrivateKeyProxy, Zetbox.Objects.NHibernateImpl"
+           schema="`lm`"
+           table="`PrivateKeys`"
+           abstract="false"
+           dynamic-update="true"
+           optimistic-lock="dirty"
+           batch-size="100">
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`lm`</param>
+                <param name="sequence">`PrivateKeys_ID_seq`</param>
+            </generator>
+        </id>
+
+        <!-- define the properties -->
+        <!-- CompoundObjectProperty IsList -->
+        <set name="AuditJournal" inverse="true" batch-size="100">
+            <key column="`fk_PrivateKey`" />
+            <one-to-many class="Zetbox.App.LicenseManagement.PrivateKey_AuditJournal_CollectionEntryNHibernateImpl+PrivateKey_AuditJournal_CollectionEntryProxy,Zetbox.Objects.NHibernateImpl" />
+        </set>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Certificate" 
+                  column="`Certificate`" 
+                  optimistic-lock="false"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="ChangedBy" column="`fk_ChangedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="ChangedOn" type="Timestamp"
+                  column="`ChangedOn`" 
+                  optimistic-lock="true"/>
+<!-- ObjectReferenceProperty -->
+        <many-to-one name="CreatedBy" column="`fk_CreatedBy`" class="Zetbox.App.Base.IdentityNHibernateImpl+IdentityProxy, Zetbox.Objects.NHibernateImpl" />
+
+        <!-- ValueTypeProperty isValue -->
+        <property name="CreatedOn" type="Timestamp"
+                  column="`CreatedOn`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Description" 
+                  column="`Description`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="IsDeactivated" 
+                  column="`IsDeactivated`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Password" 
+                  column="`Password`" 
+                  optimistic-lock="false"/>
+
+        <!-- define the subclasses -->
+
+    </class>
     <class name="Zetbox.App.Projekte.AuftragNHibernateImpl+AuftragProxy, Zetbox.Objects.NHibernateImpl"
            proxy="Zetbox.App.Projekte.AuftragNHibernateImpl+AuftragProxy, Zetbox.Objects.NHibernateImpl"
            schema="`projekte`"

@@ -83,7 +83,7 @@ namespace Zetbox.Client.Presentables
         /// <summary>
         /// A read only list of all known BaseValueViewModels fetched from the ObjectClass.
         /// </summary>
-        public IReadOnlyList<BaseValueViewModel> PropertyModels
+        public API.Utils.IReadOnlyList<BaseValueViewModel> PropertyModels
         {
             get
             {

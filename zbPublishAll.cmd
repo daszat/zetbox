@@ -30,7 +30,7 @@ rem need to export both modules to receive all necessary meta-data
 bin\debug\Zetbox.Cli.exe %config% -publish Modules\ZetboxBasic.xml -ownermodules ZetboxBase;GUI;SchemaMigration
 IF ERRORLEVEL 1 GOTO FAIL
 
-bin\debug\Zetbox.Cli.exe %config% -publish Modules\ZetboxUtils.xml -ownermodules DocumentManagement;ModuleEditor;Calendar
+bin\debug\Zetbox.Cli.exe %config% -publish Modules\ZetboxUtils.xml -ownermodules DocumentManagement;ModuleEditor;Calendar;LicenseManagement
 IF ERRORLEVEL 1 GOTO FAIL
 
 bin\debug\Zetbox.Cli.exe %config% -publish Modules\TestModules.xml -ownermodules Projekte;TestModule

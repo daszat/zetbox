@@ -930,6 +930,23 @@
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="LicenseEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.LicenseEfImpl)">
+	    <MappingFragment StoreEntitySet="License">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="Licensee" ColumnName="Licensee" />
+          <ScalarProperty Name="LicenseSubject" ColumnName="LicenseSubject" />
+          <ScalarProperty Name="Licensor" ColumnName="Licensor" />
+          <ScalarProperty Name="Signature" ColumnName="Signature" />
+          <ScalarProperty Name="ValidFrom" ColumnName="ValidFrom" />
+          <ScalarProperty Name="ValidThru" ColumnName="ValidThru" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="MethodEfImpl">
       <EntityTypeMapping TypeName="IsTypeOf(Model.MethodEfImpl)">
 	    <MappingFragment StoreEntitySet="Method">
@@ -1118,6 +1135,19 @@
 	    <MappingFragment StoreEntitySet="OrderedOneEnd">
 	      <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="SomeInt" ColumnName="SomeInt" />
+	    </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PrivateKeyEfImpl">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.PrivateKeyEfImpl)">
+	    <MappingFragment StoreEntitySet="PrivateKey">
+	      <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Certificate" ColumnName="Certificate" />
+          <ScalarProperty Name="ChangedOn" ColumnName="ChangedOn" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="IsDeactivated" ColumnName="IsDeactivated" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
 	    </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -3982,6 +4012,40 @@
       <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
     </AssociationSetMapping>
     <!--
+    Relation: FK_License_was_ChangedBy
+    A: ZeroOrMore License as License
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_License_was_ChangedBy"
+                           TypeName="Model.FK_License_was_ChangedBy"
+                           StoreEntitySet="License" >
+      <EndProperty Name="ChangedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_ChangedBy"/>
+      </EndProperty>
+      <EndProperty Name="License">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ChangedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_License_was_CreatedBy
+    A: ZeroOrMore License as License
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_License_was_CreatedBy"
+                           TypeName="Model.FK_License_was_CreatedBy"
+                           StoreEntitySet="License" >
+      <EndProperty Name="CreatedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
+      </EndProperty>
+      <EndProperty Name="License">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
     Relation: FK_LstCfg_has_Type
     A: ZeroOrMore SavedListConfiguration as LstCfg
     B: One ObjectClass as Type
@@ -4694,6 +4758,40 @@
         <ScalarProperty Name="ID" ColumnName="ID"/>
       </EndProperty>
       <Condition ColumnName="fk_DefaultPropViewModelDescriptor" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_PrivateKey_was_ChangedBy
+    A: ZeroOrMore PrivateKey as PrivateKey
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_PrivateKey_was_ChangedBy"
+                           TypeName="Model.FK_PrivateKey_was_ChangedBy"
+                           StoreEntitySet="PrivateKey" >
+      <EndProperty Name="ChangedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_ChangedBy"/>
+      </EndProperty>
+      <EndProperty Name="PrivateKey">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_ChangedBy" IsNull="false"/>
+    </AssociationSetMapping>
+    <!--
+    Relation: FK_PrivateKey_was_CreatedBy
+    A: ZeroOrMore PrivateKey as PrivateKey
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+    -->
+    <AssociationSetMapping Name="FK_PrivateKey_was_CreatedBy"
+                           TypeName="Model.FK_PrivateKey_was_CreatedBy"
+                           StoreEntitySet="PrivateKey" >
+      <EndProperty Name="CreatedBy">
+        <ScalarProperty Name="ID" ColumnName="fk_CreatedBy"/>
+      </EndProperty>
+      <EndProperty Name="PrivateKey">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_CreatedBy" IsNull="false"/>
     </AssociationSetMapping>
     <!--
     Relation: FK_Projekt_has_Auftraege
@@ -5927,6 +6025,32 @@
     </AssociationSetMapping>
 
     <!-- EntitySetMappings and AssociationSetMappings for object-struct CollectionEntrys -->
+    <EntitySetMapping Name="PrivateKey_AuditJournal_CollectionEntryEfImpl">
+      <EntityTypeMapping TypeName="Model.PrivateKey_AuditJournal_CollectionEntryEfImpl">
+        <MappingFragment StoreEntitySet="PrivateKey_AuditJournal_CollectionEntry">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+                    <ComplexProperty Name="ValueImpl" TypeName="Model.AuditEntryEfImpl">
+          <ScalarProperty Name="Identity" ColumnName="AuditJournal_Identity" />
+          <ScalarProperty Name="MessageFormat" ColumnName="AuditJournal_MessageFormat" />
+          <ScalarProperty Name="NewValue" ColumnName="AuditJournal_NewValue" />
+          <ScalarProperty Name="OldValue" ColumnName="AuditJournal_OldValue" />
+          <ScalarProperty Name="PropertyName" ColumnName="AuditJournal_PropertyName" />
+          <ScalarProperty Name="Timestamp" ColumnName="AuditJournal_Timestamp" />
+          </ComplexProperty>
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="FK_PrivateKey_value_AuditJournal"
+                           TypeName="Model.FK_PrivateKey_value_AuditJournal"
+                           StoreEntitySet="PrivateKey_AuditJournal_CollectionEntry" >
+      <EndProperty Name="PrivateKey">
+        <ScalarProperty Name="ID" ColumnName="fk_PrivateKey"/>
+      </EndProperty>
+      <EndProperty Name="CollectionEntry">
+        <ScalarProperty Name="ID" ColumnName="ID"/>
+      </EndProperty>
+      <Condition ColumnName="fk_PrivateKey" IsNull="false"/>
+    </AssociationSetMapping>
     <EntitySetMapping Name="Projekt_AuditJournal_CollectionEntryEfImpl">
       <EntityTypeMapping TypeName="Model.Projekt_AuditJournal_CollectionEntryEfImpl">
         <MappingFragment StoreEntitySet="Projekt_AuditJournal_CollectionEntry">

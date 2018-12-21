@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Web.Mvc;
 using System.Web.Security;
+using CompareAttribute = System.ComponentModel.DataAnnotations.CompareAttribute;
 
 namespace Zetbox.Client.ASPNET.Models
 {

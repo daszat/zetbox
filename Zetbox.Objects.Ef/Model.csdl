@@ -52,6 +52,7 @@
     <EntitySet Name="IdentityEfImpl" EntityType="Model.IdentityEfImpl" />
     <EntitySet Name="InstanceConstraintEfImpl" EntityType="Model.InstanceConstraintEfImpl" />
     <EntitySet Name="KundeEfImpl" EntityType="Model.KundeEfImpl" />
+    <EntitySet Name="LicenseEfImpl" EntityType="Model.LicenseEfImpl" />
     <EntitySet Name="MethodEfImpl" EntityType="Model.MethodEfImpl" />
     <EntitySet Name="MethodTestEfImpl" EntityType="Model.MethodTestEfImpl" />
     <EntitySet Name="MigrationLogEfImpl" EntityType="Model.MigrationLogEfImpl" />
@@ -67,6 +68,7 @@
     <EntitySet Name="One_to_N_relations_OrderedNEfImpl" EntityType="Model.One_to_N_relations_OrderedNEfImpl" />
     <EntitySet Name="OrderedNEndEfImpl" EntityType="Model.OrderedNEndEfImpl" />
     <EntitySet Name="OrderedOneEndEfImpl" EntityType="Model.OrderedOneEndEfImpl" />
+    <EntitySet Name="PrivateKeyEfImpl" EntityType="Model.PrivateKeyEfImpl" />
     <EntitySet Name="ProjektEfImpl" EntityType="Model.ProjektEfImpl" />
     <EntitySet Name="Projekt_Rights" EntityType="Model.Projekt_Rights" />
     <AssociationSet Name="FK_Projekte_Rights" Association="Model.FK_Projekte_Rights">
@@ -290,6 +292,11 @@
     </AssociationSet>
 
     <!-- EntitySets and AssociationSets for all object-struct CollectionEntrys -->
+    <EntitySet Name="PrivateKey_AuditJournal_CollectionEntryEfImpl" EntityType="Model.PrivateKey_AuditJournal_CollectionEntryEfImpl" />
+    <AssociationSet Name="FK_PrivateKey_value_AuditJournal" Association="Model.FK_PrivateKey_value_AuditJournal" >
+      <End Role="PrivateKey" EntitySet="PrivateKeyEfImpl" />
+      <End Role="CollectionEntry" EntitySet="PrivateKey_AuditJournal_CollectionEntryEfImpl" />
+    </AssociationSet>
     <EntitySet Name="Projekt_AuditJournal_CollectionEntryEfImpl" EntityType="Model.Projekt_AuditJournal_CollectionEntryEfImpl" />
     <AssociationSet Name="FK_Projekt_value_AuditJournal" Association="Model.FK_Projekt_value_AuditJournal" >
       <End Role="Projekt" EntitySet="ProjektEfImpl" />
@@ -610,6 +617,14 @@
       <End Role="Kunde" EntitySet="KundeEfImpl" />
       <End Role="CreatedBy" EntitySet="IdentityEfImpl" />
     </AssociationSet>
+    <AssociationSet Name="FK_License_was_ChangedBy" Association="Model.FK_License_was_ChangedBy" >
+      <End Role="License" EntitySet="LicenseEfImpl" />
+      <End Role="ChangedBy" EntitySet="IdentityEfImpl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_License_was_CreatedBy" Association="Model.FK_License_was_CreatedBy" >
+      <End Role="License" EntitySet="LicenseEfImpl" />
+      <End Role="CreatedBy" EntitySet="IdentityEfImpl" />
+    </AssociationSet>
     <AssociationSet Name="FK_LstCfg_has_Type" Association="Model.FK_LstCfg_has_Type" >
       <End Role="LstCfg" EntitySet="SavedListConfigurationEfImpl" />
       <End Role="Type" EntitySet="DataTypeEfImpl" />
@@ -777,6 +792,14 @@
     <AssociationSet Name="FK_Presentable_may_has_DefaultPropViewModelDescriptor" Association="Model.FK_Presentable_may_has_DefaultPropViewModelDescriptor" >
       <End Role="Presentable" EntitySet="DataTypeEfImpl" />
       <End Role="DefaultPropViewModelDescriptor" EntitySet="ViewModelDescriptorEfImpl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PrivateKey_was_ChangedBy" Association="Model.FK_PrivateKey_was_ChangedBy" >
+      <End Role="PrivateKey" EntitySet="PrivateKeyEfImpl" />
+      <End Role="ChangedBy" EntitySet="IdentityEfImpl" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PrivateKey_was_CreatedBy" Association="Model.FK_PrivateKey_was_CreatedBy" >
+      <End Role="PrivateKey" EntitySet="PrivateKeyEfImpl" />
+      <End Role="CreatedBy" EntitySet="IdentityEfImpl" />
     </AssociationSet>
     <AssociationSet Name="FK_Projekt_has_Auftraege" Association="Model.FK_Projekt_has_Auftraege" >
       <End Role="Projekt" EntitySet="ProjektEfImpl" />
@@ -1848,6 +1871,30 @@
     <Property Name="Ort" Type="String" Nullable="true" MaxLength="100"  />
     <Property Name="PLZ" Type="String" Nullable="false" MaxLength="10"  />
   </EntityType>
+  <EntityType Name="LicenseEfImpl">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ChangedByImpl"
+                        Relationship="Model.FK_License_was_ChangedBy"
+                        FromRole="License"
+                        ToRole="ChangedBy" />
+    <Property Name="ChangedOn" Type="DateTime" Nullable="false"  ConcurrencyMode="Fixed"/>
+    <NavigationProperty Name="CreatedByImpl"
+                        Relationship="Model.FK_License_was_CreatedBy"
+                        FromRole="License"
+                        ToRole="CreatedBy" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
+    <Property Name="Description" Type="String" Nullable="true" MaxLength="2147483647"  />
+    <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
+    <Property Name="Licensee" Type="String" Nullable="false" MaxLength="2147483647"  />
+    <Property Name="LicenseSubject" Type="Int32" Nullable="true"  />
+    <Property Name="Licensor" Type="String" Nullable="false" MaxLength="2147483647"  />
+    <Property Name="Signature" Type="String" Nullable="true" MaxLength="2147483647"  />
+    <Property Name="ValidFrom" Type="DateTime" Nullable="false"  />
+    <Property Name="ValidThru" Type="DateTime" Nullable="false"  />
+  </EntityType>
   <EntityType Name="MethodEfImpl">
     <Key>
       <PropertyRef Name="ID" />
@@ -2152,6 +2199,30 @@
                         FromRole="OneEnd"
                         ToRole="NEnds" />
     <Property Name="SomeInt" Type="Int32" Nullable="true"  />
+  </EntityType>
+  <EntityType Name="PrivateKeyEfImpl">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AuditJournalImpl"
+                        Relationship="Model.FK_PrivateKey_value_AuditJournal"
+                        FromRole="PrivateKey"
+                        ToRole="CollectionEntry" />
+    <Property Name="Certificate" Type="String" Nullable="false" MaxLength="2147483647"  />
+    <NavigationProperty Name="ChangedByImpl"
+                        Relationship="Model.FK_PrivateKey_was_ChangedBy"
+                        FromRole="PrivateKey"
+                        ToRole="ChangedBy" />
+    <Property Name="ChangedOn" Type="DateTime" Nullable="false"  ConcurrencyMode="Fixed"/>
+    <NavigationProperty Name="CreatedByImpl"
+                        Relationship="Model.FK_PrivateKey_was_CreatedBy"
+                        FromRole="PrivateKey"
+                        ToRole="CreatedBy" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="2147483647"  />
+    <Property Name="IsDeactivated" Type="Boolean" Nullable="false"  />
+    <Property Name="Password" Type="String" Nullable="true" MaxLength="2147483647"  />
   </EntityType>
   <EntityType Name="ProjektEfImpl">
     <Key>
@@ -4159,6 +4230,31 @@
   </Association>
 
 <!-- EntityTypes and Associations for all object-CompoundObject CollectionEntrys -->
+  <!-- PrivateKey.AuditJournal -->
+  <EntityType Name="PrivateKey_AuditJournal_CollectionEntryEfImpl" >
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    
+    <!-- A -->
+    <NavigationProperty Name="ParentImpl"
+                        Relationship="Model.FK_PrivateKey_value_AuditJournal"
+                        FromRole="CollectionEntry"
+                        ToRole="PrivateKey" />
+    <!-- B -->
+    <Property Name="ValueImpl"
+              Type="Model.AuditEntryEfImpl"
+              Nullable="false" />
+  </EntityType>
+  <Association Name="FK_PrivateKey_value_AuditJournal" >
+    <End Role="PrivateKey"
+         Type="Model.PrivateKeyEfImpl" 
+         Multiplicity="0..1" />
+    <End Role="CollectionEntry"
+         Type="Model.PrivateKey_AuditJournal_CollectionEntryEfImpl" 
+         Multiplicity="*" />
+  </Association>
   <!-- Projekt.AuditJournal -->
   <EntityType Name="Projekt_AuditJournal_CollectionEntryEfImpl" >
     <Key>
@@ -4827,6 +4923,22 @@
          Type="Model.IdentityEfImpl" 
          Multiplicity="0..1" />
   </Association>
+  <Association Name="FK_License_was_ChangedBy" >
+    <End Role="License"
+         Type="Model.LicenseEfImpl" 
+         Multiplicity="*" />
+    <End Role="ChangedBy"
+         Type="Model.IdentityEfImpl" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_License_was_CreatedBy" >
+    <End Role="License"
+         Type="Model.LicenseEfImpl" 
+         Multiplicity="*" />
+    <End Role="CreatedBy"
+         Type="Model.IdentityEfImpl" 
+         Multiplicity="0..1" />
+  </Association>
   <Association Name="FK_LstCfg_has_Type" >
     <End Role="LstCfg"
          Type="Model.SavedListConfigurationEfImpl" 
@@ -5161,6 +5273,22 @@
          Multiplicity="*" />
     <End Role="DefaultPropViewModelDescriptor"
          Type="Model.ViewModelDescriptorEfImpl" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_PrivateKey_was_ChangedBy" >
+    <End Role="PrivateKey"
+         Type="Model.PrivateKeyEfImpl" 
+         Multiplicity="*" />
+    <End Role="ChangedBy"
+         Type="Model.IdentityEfImpl" 
+         Multiplicity="0..1" />
+  </Association>
+  <Association Name="FK_PrivateKey_was_CreatedBy" >
+    <End Role="PrivateKey"
+         Type="Model.PrivateKeyEfImpl" 
+         Multiplicity="*" />
+    <End Role="CreatedBy"
+         Type="Model.IdentityEfImpl" 
          Multiplicity="0..1" />
   </Association>
   <Association Name="FK_Projekt_has_Auftraege" >

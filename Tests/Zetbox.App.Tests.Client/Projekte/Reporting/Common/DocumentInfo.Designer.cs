@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Zetbox.App.Tests.Client.Projekte.Reporting.Common
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\zetbox\Tests\Zetbox.App.Tests.Client\Projekte\Reporting\Common\DocumentInfo.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"C:\Projects\zetbox\Tests\Zetbox.App.Tests.Client\Projekte\Reporting\Common\DocumentInfo.cst")]
     public partial class DocumentInfo : Zetbox.App.Tests.Client.Projekte.Reporting.ReportTemplate
     {
 		protected string Subject;
@@ -29,7 +29,7 @@ namespace Zetbox.App.Tests.Client.Projekte.Reporting.Common
 
         public override void Generate()
         {
-#line 26 "P:\zetbox\Tests\Zetbox.App.Tests.Client\Projekte\Reporting\Common\DocumentInfo.cst"
+#line 26 "C:\Projects\zetbox\Tests\Zetbox.App.Tests.Client\Projekte\Reporting\Common\DocumentInfo.cst"
 this.WriteObjects("Info\r\n");
 this.WriteObjects("{\r\n");
 this.WriteObjects("	Title = \"",  Subject , "\"\r\n");

@@ -6,7 +6,7 @@ using Zetbox.Client.Presentables.Calendar;
 
 namespace Zetbox.Client.Reporting.Calendar
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\zetbox\Zetbox.Client\Reporting\Calendar\SheetDays.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"C:\Projects\zetbox\Zetbox.Client\Reporting\Calendar\SheetDays.cst")]
     public partial class SheetDays : Zetbox.API.Common.Reporting.ReportTemplate
     {
 		protected IEnumerable<CalendarItemViewModel> events;
@@ -32,15 +32,15 @@ namespace Zetbox.Client.Reporting.Calendar
 
         public override void Generate()
         {
-#line 12 "P:\zetbox\Zetbox.Client\Reporting\Calendar\SheetDays.cst"
+#line 12 "C:\Projects\zetbox\Zetbox.Client\Reporting\Calendar\SheetDays.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("\\document  {\r\n");
-#line 15 "P:\zetbox\Zetbox.Client\Reporting\Calendar\SheetDays.cst"
+#line 15 "C:\Projects\zetbox\Zetbox.Client\Reporting\Calendar\SheetDays.cst"
 var current = start;
     while(current <= end) {
         var lst = events.Where(e => e.From.Date == current);
 
-#line 19 "P:\zetbox\Zetbox.Client\Reporting\Calendar\SheetDays.cst"
+#line 19 "C:\Projects\zetbox\Zetbox.Client\Reporting\Calendar\SheetDays.cst"
 this.WriteObjects("    \\section [\r\n");
 this.WriteObjects("        PageSetup\r\n");
 this.WriteObjects("        {\r\n");
@@ -73,9 +73,9 @@ this.WriteObjects("                    \\cell { }\r\n");
 this.WriteObjects("                    \\cell [ Borders { Right { Width = 0 } } ] { }\r\n");
 this.WriteObjects("                    \\cell [ Borders { Left  { Width = 0 } } ] { ",  string.Join(" \\linebreak ", lst.Where(e => e.IsAllDay).Select(e => Format(e.Summary))) , " }\r\n");
 this.WriteObjects("                }\r\n");
-#line 51 "P:\zetbox\Zetbox.Client\Reporting\Calendar\SheetDays.cst"
+#line 51 "C:\Projects\zetbox\Zetbox.Client\Reporting\Calendar\SheetDays.cst"
 for(int hour = 0; hour < 24; hour++) { 
-#line 52 "P:\zetbox\Zetbox.Client\Reporting\Calendar\SheetDays.cst"
+#line 52 "C:\Projects\zetbox\Zetbox.Client\Reporting\Calendar\SheetDays.cst"
 this.WriteObjects("                \\row [ \r\n");
 this.WriteObjects("                    Height = \"0.6cm\" \r\n");
 this.WriteObjects("                    VerticalAlignment = Center\r\n");
@@ -84,16 +84,16 @@ this.WriteObjects("                    \\cell { }\r\n");
 this.WriteObjects("                    \\cell [ Borders { Right { Width = 0 } } ] { ",  string.Format("{0:00}:00", hour) , " }\r\n");
 this.WriteObjects("                    \\cell [ Borders { Left  { Width = 0 } } ] { ",  string.Join(", ", lst.Where(e => !e.IsAllDay && e.From.Hour == hour).Select(e => Format(e.Summary))) , " }\r\n");
 this.WriteObjects("                }\r\n");
-#line 60 "P:\zetbox\Zetbox.Client\Reporting\Calendar\SheetDays.cst"
+#line 60 "C:\Projects\zetbox\Zetbox.Client\Reporting\Calendar\SheetDays.cst"
 } 
-#line 61 "P:\zetbox\Zetbox.Client\Reporting\Calendar\SheetDays.cst"
+#line 61 "C:\Projects\zetbox\Zetbox.Client\Reporting\Calendar\SheetDays.cst"
 this.WriteObjects("            }\r\n");
 this.WriteObjects("        }\r\n");
 this.WriteObjects("    }\r\n");
-#line 65 "P:\zetbox\Zetbox.Client\Reporting\Calendar\SheetDays.cst"
+#line 65 "C:\Projects\zetbox\Zetbox.Client\Reporting\Calendar\SheetDays.cst"
 current = current.AddDays(1);
     } 
-#line 67 "P:\zetbox\Zetbox.Client\Reporting\Calendar\SheetDays.cst"
+#line 67 "C:\Projects\zetbox\Zetbox.Client\Reporting\Calendar\SheetDays.cst"
 this.WriteObjects("}");
 
         }
