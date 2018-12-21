@@ -2968,6 +2968,10 @@ namespace Zetbox {
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Method>("eb53e9ca-fde9-419c-9b04-772faa0f4bbb"); }
                                 }
+                                public static TypedGuid<global::Zetbox.App.Base.Method> LoadFromFile
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Method>("665418f2-f40e-4028-bb99-c3d3cecca194"); }
+                                }
                             }
                             public static class PrivateKey_Properties
                             {

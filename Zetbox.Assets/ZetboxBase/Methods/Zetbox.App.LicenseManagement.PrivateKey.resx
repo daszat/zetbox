@@ -121,6 +121,18 @@
     <value>Load</value>
   </data>
   <data name="Load_description" xml:space="preserve">
+    <value>Asks the user to open a file and loads the certificate</value>
+  </data>
+  <data name="LoadFromFile_label" xml:space="preserve">
+    <value>LoadFromFile</value>
+  </data>
+  <data name="LoadFromFile_description" xml:space="preserve">
     <value>Loads a certificate from file</value>
+  </data>
+  <data name="LoadFromFile(file)_label" xml:space="preserve">
+    <value>file</value>
+  </data>
+  <data name="LoadFromFile(file)_description" xml:space="preserve">
+    <value />
   </data>
 </root>

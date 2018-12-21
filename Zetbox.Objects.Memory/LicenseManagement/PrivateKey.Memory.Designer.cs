@@ -687,7 +687,7 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
         public static event PropertyIsValidHandler<Zetbox.App.LicenseManagement.PrivateKey> OnPassword_IsValid;
 
         /// <summary>
-        /// Loads a certificate from file
+        /// Asks the user to open a file and loads the certificate
         /// </summary>
         // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
         [EventBasedMethod("OnLoad_PrivateKey")]
@@ -739,6 +739,69 @@ public static event PropertyListChangedHandler<Zetbox.App.LicenseManagement.Priv
 				if (OnLoad_PrivateKey_CanExecReason != null)
 				{
 					OnLoad_PrivateKey_CanExecReason(this, e);
+				}
+				else
+				{
+					e.Result = string.Empty;
+				}
+				return e.Result;
+			}
+        }
+        // END Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+
+        /// <summary>
+        /// Loads a certificate from file
+        /// </summary>
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.Method
+        [EventBasedMethod("OnLoadFromFile_PrivateKey")]
+        public virtual void LoadFromFile(string file)
+        {
+            // base.LoadFromFile();
+            if (OnLoadFromFile_PrivateKey != null)
+            {
+                OnLoadFromFile_PrivateKey(this, file);
+            }
+            else
+            {
+                throw new NotImplementedException("No handler registered on method PrivateKey.LoadFromFile");
+            }
+        }
+        public delegate void LoadFromFile_Handler<T>(T obj, string file);
+        public static event LoadFromFile_Handler<PrivateKey> OnLoadFromFile_PrivateKey;
+        // BEGIN Zetbox.Generator.Templates.ObjectClasses.MethodCanExec
+		// CanExec
+		public static event CanExecMethodEventHandler<PrivateKey> OnLoadFromFile_PrivateKey_CanExec;
+
+        [EventBasedMethod("OnLoadFromFile_PrivateKey_CanExec")]
+        public virtual bool LoadFromFileCanExec
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<bool>();
+				if (OnLoadFromFile_PrivateKey_CanExec != null)
+				{
+					OnLoadFromFile_PrivateKey_CanExec(this, e);
+				}
+				else
+				{
+					e.Result = true;
+				}
+				return e.Result;
+			}
+        }
+
+		// CanExecReason
+		public static event CanExecReasonMethodEventHandler<PrivateKey> OnLoadFromFile_PrivateKey_CanExecReason;
+
+        [EventBasedMethod("OnLoadFromFile_PrivateKey_CanExecReason")]
+        public virtual string LoadFromFileCanExecReason
+        {
+			get 
+			{
+				var e = new MethodReturnEventArgs<string>();
+				if (OnLoadFromFile_PrivateKey_CanExecReason != null)
+				{
+					OnLoadFromFile_PrivateKey_CanExecReason(this, e);
 				}
 				else
 				{

@@ -42,8 +42,13 @@ namespace Zetbox.App.LicenseManagement
         }
 
         /// <summary>
-        /// Loads a certificate from file
+        /// Asks the user to open a file and loads the certificate
         /// </summary>
         void Load();
+
+        /// <summary>
+        /// Loads a certificate from file
+        /// </summary>
+        void LoadFromFile(string file);
     }
 }

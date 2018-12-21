@@ -16,24 +16,29 @@ namespace Zetbox.App.LicenseManagement
 {
     using System;
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
     using System.Text;
     using Zetbox.API;
+    using Zetbox.Client.Presentables;
 
     [Implementor]
-    public static class PrivateKeyActions
+    public class PrivateKeyActions
     {
-        [Invocation]
-        public static void ToString(PrivateKey obj, MethodReturnEventArgs<string> e)
+        private static IViewModelFactory _factory;
+
+        public PrivateKeyActions(IViewModelFactory factory)
         {
-            e.Result = obj.Description;
+            _factory = factory;
         }
 
         [Invocation]
-        public static void LoadFromFile(PrivateKey obj, string file)
+        public static void Load(PrivateKey obj)
         {
-            obj.Certificate = Convert.ToBase64String(File.ReadAllBytes(file));
+            string path = _factory.GetSourceFileNameFromUser();
+            if (!string.IsNullOrEmpty(path))
+            {
+                obj.LoadFromFile(path);
+            }
         }
     }
 }

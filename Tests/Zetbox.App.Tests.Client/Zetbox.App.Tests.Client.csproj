@@ -89,6 +89,7 @@
     <Compile Include="Projekte\Reporting\ReportingHost.cs" />
     <Compile Include="Projekte\Reporting\ReportTemplate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\LicenseManagement\CheckLicenseNavigationActionViewModel.cs" />
     <Compile Include="ViewModels\TestModule\EventTestInputViewModel.cs" />
     <Compile Include="ViewModels\TestModule\InstanceListTestViewModel.cs" />
     <Compile Include="ViewModels\TestModule\NextEventsTestNavScreenViewModel.cs" />
@@ -122,6 +123,7 @@
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ProjectReport.Designer.cs</LastGenOutput>
     </None>
+    <EmbeddedResource Include="ViewModels\LicenseManagement\test.cer" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Zetbox.API.Client\Zetbox.API.Client.csproj">

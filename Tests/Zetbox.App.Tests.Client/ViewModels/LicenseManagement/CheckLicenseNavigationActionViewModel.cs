@@ -12,28 +12,38 @@
 //
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
-namespace Zetbox.App.LicenseManagement
+namespace Zetbox.App.Projekte.Client.ViewModel.LicenseManagement
 {
     using System;
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
     using System.Text;
     using Zetbox.API;
+    using Zetbox.Client.Presentables;
+    using Zetbox.Client.Presentables.GUI;
+    using Zetbox.App.GUI;
 
-    [Implementor]
-    public static class PrivateKeyActions
+    [ViewModelDescriptor]
+    public class CheckLicenseNavigationActionViewModel : NavigationActionViewModel
     {
-        [Invocation]
-        public static void ToString(PrivateKey obj, MethodReturnEventArgs<string> e)
+        public new delegate CheckLicenseNavigationActionViewModel Factory(IZetboxContext dataCtx, ViewModel parent, NavigationAction screen);
+
+
+        public CheckLicenseNavigationActionViewModel(IViewModelDependencies appCtx,
+            IZetboxContext dataCtx, ViewModel parent, NavigationAction screen)
+            : base(appCtx, dataCtx, parent, screen)
         {
-            e.Result = obj.Description;
         }
 
-        [Invocation]
-        public static void LoadFromFile(PrivateKey obj, string file)
+        public override bool CanExecute()
         {
-            obj.Certificate = Convert.ToBase64String(File.ReadAllBytes(file));
+            return !DataContext.IsDisposed;
+        }
+
+        public override void Execute()
+        {
+            // To be continued
+
         }
     }
 }
