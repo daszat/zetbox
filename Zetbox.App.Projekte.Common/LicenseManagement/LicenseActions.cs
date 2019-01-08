@@ -83,7 +83,7 @@ namespace Zetbox.App.LicenseManagement
                 throw new ArgumentException("certificate", "certificate is neither a X509Certificate2 or a byte[]");
             }
 
-            var cng_public = (System.Security.Cryptography.RSACng)cert.PublicKey.Key;
+            var cng_public = (System.Security.Cryptography.RSACryptoServiceProvider)cert.PublicKey.Key;
             var hash = ComputeHash(obj);
             e.Result = cng_public.VerifyHash(hash, Convert.FromBase64String(obj.Signature), HashAlgorithmName.SHA512, RSASignaturePadding.Pkcs1);
         }
