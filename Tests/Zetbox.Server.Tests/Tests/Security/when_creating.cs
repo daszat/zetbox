@@ -38,6 +38,8 @@ namespace Zetbox.Server.Tests.Security
         {
             var newProj = id1Ctx.Create<Projekt>();
             newProj.Name = "Test";
+            newProj.KickOffAm = DateTime.Today;
+            newProj.Von = DateTime.Today;
             id1Ctx.SubmitChanges();
 
             Assert.That(srvCtx.GetQuery<Projekt>().Count(), Is.EqualTo(projectCount + 1));
@@ -51,6 +53,8 @@ namespace Zetbox.Server.Tests.Security
         {
             var newProj = srvCtx.Create<Projekt>();
             newProj.Name = "Test";
+            newProj.KickOffAm = DateTime.Today;
+            newProj.Von = DateTime.Today;
             srvCtx.SubmitChanges();
 
             Assert.That(srvCtx.GetQuery<Projekt>().Count(), Is.EqualTo(projectCount + 1));
@@ -64,6 +68,8 @@ namespace Zetbox.Server.Tests.Security
         {
             var newTask = id1Ctx.Create<Task>();
             newTask.Name = "Test";
+            newTask.Aufwand = 1;
+            newTask.DatumVon = DateTime.Today;
             prj1.Tasks.Add(newTask);
             id1Ctx.SubmitChanges();
 
@@ -78,6 +84,8 @@ namespace Zetbox.Server.Tests.Security
         {
             var newTask = srvCtx.Create<Task>();
             newTask.Name = "Test";
+            newTask.Aufwand = 1;
+            newTask.DatumVon = DateTime.Today;
             srvCtx.Find<Projekt>(prj1.ID).Tasks.Add(newTask);
             srvCtx.SubmitChanges();
 

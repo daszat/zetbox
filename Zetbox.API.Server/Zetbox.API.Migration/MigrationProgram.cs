@@ -161,12 +161,6 @@ namespace Zetbox.API.Migration
 
             ConfigureBuilder(builder);
 
-            // register deployment-specific components
-            if (ConfigurationManager.GetSection("migrationcomponents") != null)
-            {
-                builder.RegisterModule(new ConfigurationSettingsReader("migrationcomponents"));
-            }
-
             return builder.Build();
         }
 

@@ -105,12 +105,6 @@ namespace Zetbox.Cli
 
             var builder = Zetbox.API.Utils.AutoFacBuilder.CreateContainerBuilder(config, modules);
 
-            // register deployment-specific components
-            if (ConfigurationManager.GetSection("clicomponents") != null)
-            {
-                builder.RegisterModule(new ConfigurationSettingsReader("clicomponents"));
-            }
-
             var container = builder.Build();
             API.AppDomainInitializer.InitializeFrom(container);
             return container;

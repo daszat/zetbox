@@ -11,7 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Client WPF components for the zetbox.</description>
     <releaseNotes>First package.</releaseNotes>
-    <copyright>Copyright © 2018 dasz.at OG</copyright>
+    <copyright>Copyright © 2019 dasz.at OG</copyright>
     <tags>Platform Database ORM Applications</tags>
     <dependencies>
       <dependency id="zetboxBasic" version="[##version##]" />

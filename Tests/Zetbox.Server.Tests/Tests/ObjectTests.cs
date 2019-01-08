@@ -50,16 +50,24 @@ namespace Zetbox.Server.Tests
 
             var prj1 = setupCtx.Create<Projekt>();
             prj1.Name = "blubb";
+            prj1.KickOffAm = DateTime.Today;
+            prj1.Von = DateTime.Today;
 
             var prj2 = setupCtx.Create<Projekt>();
             prj2.Name = "flubb";
+            prj2.KickOffAm = DateTime.Today;
+            prj2.Von = DateTime.Today;
             var task1 = setupCtx.Create<Task>();
             task1.Projekt = prj2;
             task1.Name = "Task1";
+            task1.Aufwand = 1;
+            task1.DatumVon = DateTime.Today;
 
             var task2 = setupCtx.Create<Task>();
             task2.Projekt = prj2;
             task2.Name = "Task2";
+            task2.Aufwand = 1;
+            task2.DatumVon = DateTime.Today;
 
             setupCtx.SubmitChanges();
 

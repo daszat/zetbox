@@ -64,13 +64,19 @@ namespace Zetbox.API.AbstractConsumerTests
 
             var prj = ctx.Create<Projekt>();
             prj.Name = "Zetbox";
+            prj.KickOffAm = DateTime.Today;
+            prj.Von = DateTime.Today;
 
             var task1 = ctx.Create<Task>();
             task1.Name = "task1";
+            task1.Aufwand = 1;
+            task1.DatumVon = DateTime.Today;
             task1.Projekt = prj;
 
             var task2 = ctx.Create<Task>();
             task2.Name = "task2";
+            task2.Aufwand = 1;
+            task2.DatumVon = DateTime.Today;
             task2.Projekt = prj;
 
             var ma1 = ctx.Create<Mitarbeiter>();
