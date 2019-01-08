@@ -1974,6 +1974,7 @@
     <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
     <Property Name="Description" Type="varchar" Nullable="true" />
     <Property Name="ExportGuid" Type="uuid" Nullable="false" />
+    <Property Name="LicenseData" Type="varchar" Nullable="true" />
     <Property Name="Licensee" Type="varchar" Nullable="false" />
     <Property Name="LicenseSubject" Type="int4" Nullable="true" />
     <Property Name="Licensor" Type="varchar" Nullable="false" />

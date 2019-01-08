@@ -2937,6 +2937,10 @@ namespace Zetbox {
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.GuidProperty>("ae35124b-5da8-4af2-a5e3-f0084cf690ad"); }
                                 }
+                                public static TypedGuid<global::Zetbox.App.Base.StringProperty> LicenseData
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.StringProperty>("ccfbd6fd-24cf-4624-9d3e-9f47e2c6a1fa"); }
+                                }
                                 public static TypedGuid<global::Zetbox.App.Base.StringProperty> Licensee
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.StringProperty>("86553c32-7f63-41f3-a3a2-28a5801935b9"); }

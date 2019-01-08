@@ -541,6 +541,64 @@ namespace Zetbox.App.LicenseManagement
         public static event PropertyIsValidHandler<Zetbox.App.LicenseManagement.License> OnExportGuid_IsValid;
 
         /// <summary>
+        /// Optional additional data attached to this license
+        /// </summary>
+
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        public string LicenseData
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = Proxy.LicenseData;
+                if (OnLicenseData_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnLicenseData_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (Proxy.LicenseData != value)
+                {
+                    var __oldValue = Proxy.LicenseData;
+                    var __newValue = value;
+                    if (OnLicenseData_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnLicenseData_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("LicenseData", __oldValue, __newValue);
+                    Proxy.LicenseData = __newValue;
+                    NotifyPropertyChanged("LicenseData", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnLicenseData_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnLicenseData_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("LicenseData");
+                }
+            }
+        }
+
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<Zetbox.App.LicenseManagement.License, string> OnLicenseData_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.LicenseManagement.License, string> OnLicenseData_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.LicenseManagement.License, string> OnLicenseData_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.LicenseManagement.License> OnLicenseData_IsValid;
+
+        /// <summary>
         /// The licensee of this license
         /// </summary>
 
@@ -1179,6 +1237,7 @@ namespace Zetbox.App.LicenseManagement
             me.CreatedOn = other.CreatedOn;
             me.Description = other.Description;
             me.ExportGuid = other.ExportGuid;
+            me.LicenseData = other.LicenseData;
             me.Licensee = other.Licensee;
             me.LicenseSubject = other.LicenseSubject;
             me.Licensor = other.Licensor;
@@ -1235,6 +1294,7 @@ namespace Zetbox.App.LicenseManagement
                 case "CreatedOn":
                 case "Description":
                 case "ExportGuid":
+                case "LicenseData":
                 case "Licensee":
                 case "LicenseSubject":
                 case "Licensor":
@@ -1346,6 +1406,15 @@ namespace Zetbox.App.LicenseManagement
                         obj => obj.ExportGuid,
                         (obj, val) => obj.ExportGuid = val,
 						obj => OnExportGuid_IsValid), 
+                    // else
+                    new PropertyDescriptorNHibernateImpl<License, string>(
+                        lazyCtx,
+                        new Guid("ccfbd6fd-24cf-4624-9d3e-9f47e2c6a1fa"),
+                        "LicenseData",
+                        null,
+                        obj => obj.LicenseData,
+                        (obj, val) => obj.LicenseData = val,
+						obj => OnLicenseData_IsValid), 
                     // else
                     new PropertyDescriptorNHibernateImpl<License, string>(
                         lazyCtx,
@@ -1469,6 +1538,7 @@ namespace Zetbox.App.LicenseManagement
             SetNotInitializedProperty("ChangedBy");
             SetNotInitializedProperty("CreatedBy");
             SetNotInitializedProperty("Description");
+            SetNotInitializedProperty("LicenseData");
             SetNotInitializedProperty("Licensee");
             SetNotInitializedProperty("LicenseSubject");
             SetNotInitializedProperty("Licensor");
@@ -1527,6 +1597,8 @@ namespace Zetbox.App.LicenseManagement
 
             public virtual Guid ExportGuid { get; set; }
 
+            public virtual string LicenseData { get; set; }
+
             public virtual string Licensee { get; set; }
 
             public virtual int? LicenseSubject { get; set; }
@@ -1566,6 +1638,7 @@ namespace Zetbox.App.LicenseManagement
             if (this._isExportGuidSet) {
                 binStream.Write(this.Proxy.ExportGuid);
             }
+            binStream.Write(this.Proxy.LicenseData);
             binStream.Write(this.Proxy.Licensee);
             binStream.Write(this.Proxy.LicenseSubject);
             binStream.Write(this.Proxy.Licensor);
@@ -1598,6 +1671,7 @@ namespace Zetbox.App.LicenseManagement
             if (this._isExportGuidSet) {
                 this.Proxy.ExportGuid = binStream.ReadGuid();
             }
+            this.Proxy.LicenseData = binStream.ReadString();
             this.Proxy.Licensee = binStream.ReadString();
             this.Proxy.LicenseSubject = binStream.ReadNullableInt32();
             this.Proxy.Licensor = binStream.ReadString();
@@ -1623,6 +1697,7 @@ namespace Zetbox.App.LicenseManagement
             if (modules.Contains("*") || modules.Contains("Zetbox.App.LicenseManagement")) XmlStreamer.ToStream(this.Proxy.ChangedOn, xml, "ChangedOn", "Zetbox.App.LicenseManagement");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.LicenseManagement")) XmlStreamer.ToStream(this.Proxy.CreatedOn, xml, "CreatedOn", "Zetbox.App.LicenseManagement");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.LicenseManagement")) XmlStreamer.ToStream(this.Proxy.Description, xml, "Description", "Zetbox.App.LicenseManagement");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.LicenseManagement")) XmlStreamer.ToStream(this.Proxy.LicenseData, xml, "LicenseData", "Zetbox.App.LicenseManagement");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.LicenseManagement")) XmlStreamer.ToStream(this.Proxy.Licensee, xml, "Licensee", "Zetbox.App.LicenseManagement");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.LicenseManagement")) XmlStreamer.ToStream(this.Proxy.LicenseSubject, xml, "LicenseSubject", "Zetbox.App.LicenseManagement");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.LicenseManagement")) XmlStreamer.ToStream(this.Proxy.Licensor, xml, "Licensor", "Zetbox.App.LicenseManagement");
@@ -1653,6 +1728,9 @@ namespace Zetbox.App.LicenseManagement
                 // Import must have default value set
                 this.Proxy.ExportGuid = XmlStreamer.ReadGuid(xml);
                 this._isExportGuidSet = true;
+                break;
+            case "Zetbox.App.LicenseManagement|LicenseData":
+                this.Proxy.LicenseData = XmlStreamer.ReadString(xml);
                 break;
             case "Zetbox.App.LicenseManagement|Licensee":
                 this.Proxy.Licensee = XmlStreamer.ReadString(xml);

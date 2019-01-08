@@ -938,6 +938,7 @@
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
+          <ScalarProperty Name="LicenseData" ColumnName="LicenseData" />
           <ScalarProperty Name="Licensee" ColumnName="Licensee" />
           <ScalarProperty Name="LicenseSubject" ColumnName="LicenseSubject" />
           <ScalarProperty Name="Licensor" ColumnName="Licensor" />

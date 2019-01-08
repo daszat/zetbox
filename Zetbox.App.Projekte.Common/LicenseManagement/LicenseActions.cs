@@ -61,6 +61,8 @@ namespace Zetbox.App.LicenseManagement
                 sw.Write(obj.ValidFrom);
                 sw.Write(obj.ValidThru);
                 sw.Write(obj.LicenseSubject);
+                sw.Write(obj.LicenseData ?? "");
+                sw.Flush();
 
                 return sha.ComputeHash(ms.GetBuffer());
             }

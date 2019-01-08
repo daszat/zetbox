@@ -1888,6 +1888,7 @@
     <Property Name="CreatedOn" Type="DateTime" Nullable="false"  />
     <Property Name="Description" Type="String" Nullable="true" MaxLength="2147483647"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
+    <Property Name="LicenseData" Type="String" Nullable="true" MaxLength="2147483647"  />
     <Property Name="Licensee" Type="String" Nullable="false" MaxLength="2147483647"  />
     <Property Name="LicenseSubject" Type="Int32" Nullable="true"  />
     <Property Name="Licensor" Type="String" Nullable="false" MaxLength="2147483647"  />

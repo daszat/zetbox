@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2018-12-21T11:28:16.2428944Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2019-01-08T11:34:06.3363314Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -7071,7 +7071,7 @@ public static void ObjectIsValid(PrivateKey obj, ObjectIsValidEventArgs e)
   <ZetboxBase:ObjectReferenceProperty ExportGuid="7bfbe8d0-5cea-4aa6-8a89-0ea91770fb82">
     <ZetboxBase:AllowFilterCollections>false</ZetboxBase:AllowFilterCollections>
     <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2018-12-21T07:59:45.219199Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2019-01-08T11:31:25.937385Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedBy(License obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -7100,7 +7100,7 @@ public static void isValid_ChangedBy(License obj, PropertyIsValidEventArgs e)
     <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
     <ZetboxBase:Name>ChangedBy</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>dba4beb1-acfb-45f5-9261-6486536016f6</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>16</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>17</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <ZetboxBase:EagerLoading>false</ZetboxBase:EagerLoading>
     <ZetboxBase:RelationEnd>c8fd0721-2615-4490-8af2-869fdc888926</ZetboxBase:RelationEnd>
@@ -7108,7 +7108,7 @@ public static void isValid_ChangedBy(License obj, PropertyIsValidEventArgs e)
   <ZetboxBase:DateTimeProperty ExportGuid="d02c4d91-59dd-4f4a-93cf-85669295c164">
     <ZetboxBase:AllowFilterCollections>false</ZetboxBase:AllowFilterCollections>
     <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2018-12-21T07:59:45.219199Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2019-01-08T11:31:25.937385Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ChangedOn(License obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -7138,7 +7138,7 @@ public static void isValid_ChangedOn(License obj, PropertyIsValidEventArgs e)
     <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
     <ZetboxBase:Name>ChangedOn</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>dba4beb1-acfb-45f5-9261-6486536016f6</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>14</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>15</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>fc74b434-3801-4e4a-ab67-e65a9e014005</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -7147,7 +7147,7 @@ public static void isValid_ChangedOn(License obj, PropertyIsValidEventArgs e)
   <ZetboxBase:ObjectReferenceProperty ExportGuid="19c92597-0c31-4b78-9747-673ccbe04612">
     <ZetboxBase:AllowFilterCollections>false</ZetboxBase:AllowFilterCollections>
     <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2018-12-21T07:59:45.219199Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2019-01-08T11:31:25.937385Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedBy(License obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
 {
@@ -7176,7 +7176,7 @@ public static void isValid_CreatedBy(License obj, PropertyIsValidEventArgs e)
     <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
     <ZetboxBase:Name>CreatedBy</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>dba4beb1-acfb-45f5-9261-6486536016f6</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>15</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>16</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <ZetboxBase:EagerLoading>false</ZetboxBase:EagerLoading>
     <ZetboxBase:RelationEnd>c33dd104-f8a4-4fed-ab6c-64c57e978ee9</ZetboxBase:RelationEnd>
@@ -7184,7 +7184,7 @@ public static void isValid_CreatedBy(License obj, PropertyIsValidEventArgs e)
   <ZetboxBase:DateTimeProperty ExportGuid="a25fd55e-1982-4d02-bd29-22e8f8b1c451">
     <ZetboxBase:AllowFilterCollections>false</ZetboxBase:AllowFilterCollections>
     <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2018-12-21T07:59:45.219199Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2019-01-08T11:31:25.937385Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_CreatedOn(License obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
 {
@@ -7214,7 +7214,7 @@ public static void isValid_CreatedOn(License obj, PropertyIsValidEventArgs e)
     <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
     <ZetboxBase:Name>CreatedOn</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>dba4beb1-acfb-45f5-9261-6486536016f6</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>13</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>14</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>fc74b434-3801-4e4a-ab67-e65a9e014005</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -7260,7 +7260,7 @@ public static void isValid_Description(License obj, PropertyIsValidEventArgs e)
   <ZetboxBase:GuidProperty ExportGuid="ae35124b-5da8-4af2-a5e3-f0084cf690ad">
     <ZetboxBase:AllowFilterCollections>false</ZetboxBase:AllowFilterCollections>
     <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2018-12-21T07:59:45.219199Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2019-01-08T11:31:25.937385Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(License obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -7290,12 +7290,52 @@ public static void isValid_ExportGuid(License obj, PropertyIsValidEventArgs e)
     <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
     <ZetboxBase:Name>ExportGuid</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>dba4beb1-acfb-45f5-9261-6486536016f6</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>17</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>18</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>2b6fb70f-a382-4057-a139-cc33333d619d</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:GuidProperty>
+  <ZetboxBase:StringProperty ExportGuid="ccfbd6fd-24cf-4624-9d3e-9f47e2c6a1fa">
+    <ZetboxBase:AllowFilterCollections>false</ZetboxBase:AllowFilterCollections>
+    <ZetboxBase:CategoryTags>Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2019-01-08T11:31:25.937385Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_LicenseData(License obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_LicenseData(License obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_LicenseData(License obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_LicenseData(License obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.LicenseData == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2019-01-08T11:31:25.937385Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Optional additional data attached to this license</ZetboxBase:Description>
+    <ZetboxBase:HelpText>Usually a JSON or XML content.</ZetboxBase:HelpText>
+    <ZetboxBase:Label>License data</ZetboxBase:Label>
+    <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
+    <ZetboxBase:Name>LicenseData</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>dba4beb1-acfb-45f5-9261-6486536016f6</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>12</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>a5e18586-d80f-49cf-8aa1-41d305eee289</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:StringProperty>
   <ZetboxBase:StringProperty ExportGuid="86553c32-7f63-41f3-a3a2-28a5801935b9">
     <ZetboxBase:AllowFilterCollections>false</ZetboxBase:AllowFilterCollections>
     <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
@@ -7420,7 +7460,7 @@ public static void isValid_Licensor(License obj, PropertyIsValidEventArgs e)
   <ZetboxBase:StringProperty ExportGuid="e6c5b0a0-ed58-4ba1-bd23-ed24f315620d">
     <ZetboxBase:AllowFilterCollections>false</ZetboxBase:AllowFilterCollections>
     <ZetboxBase:CategoryTags>Main</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2018-12-21T07:59:45.219199Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2019-01-08T11:31:25.937385Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_Signature(License obj, PropertyGetterEventArgs&lt;string&gt; e)
 {
@@ -7449,7 +7489,7 @@ public static void isValid_Signature(License obj, PropertyIsValidEventArgs e)
     <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
     <ZetboxBase:Name>Signature</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>dba4beb1-acfb-45f5-9261-6486536016f6</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>12</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>13</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -8042,6 +8082,12 @@ public static void isValid_Password(PrivateKey obj, PropertyIsValidEventArgs e)
     <ZetboxBase:ConstrainedProperty>ae35124b-5da8-4af2-a5e3-f0084cf690ad</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="945b68c3-6a45-4190-b3ee-0b6b4412c547">
+    <ZetboxBase:ChangedOn>2019-01-08T11:31:25.937385Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>ccfbd6fd-24cf-4624-9d3e-9f47e2c6a1fa</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2019-01-08T11:31:25.937385Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="8ad5a1ad-5d5b-49bd-b270-cd46c6740b35">
     <ZetboxBase:ChangedOn>2018-12-21T07:35:47.451788Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>86553c32-7f63-41f3-a3a2-28a5801935b9</ZetboxBase:ConstrainedProperty>

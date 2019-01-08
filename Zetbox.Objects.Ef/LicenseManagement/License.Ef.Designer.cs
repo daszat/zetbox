@@ -574,6 +574,75 @@ namespace Zetbox.App.LicenseManagement
         public static event PropertyIsValidHandler<Zetbox.App.LicenseManagement.License> OnExportGuid_IsValid;
 
         /// <summary>
+        /// Optional additional data attached to this license
+        /// </summary>
+        // value type property
+        // BEGIN Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+        [XmlIgnore()]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+        [EdmScalarProperty()]
+        public string LicenseData
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = _LicenseData;
+                if (OnLicenseData_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<string>(__result);
+                    OnLicenseData_Getter(this, __e);
+                    __result = _LicenseData = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                if (_LicenseData != value)
+                {
+                    var __oldValue = _LicenseData;
+                    var __newValue = value;
+                    if (OnLicenseData_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<string>(__oldValue, __newValue);
+                        OnLicenseData_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("LicenseData", __oldValue, __newValue);
+                    _LicenseData = __newValue;
+                    NotifyPropertyChanged("LicenseData", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnLicenseData_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<string>(__oldValue, __newValue);
+                        OnLicenseData_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("LicenseData");
+                }
+            }
+        }
+        private string _LicenseData_store;
+        private string _LicenseData {
+            get { return _LicenseData_store; }
+            set {
+                ReportEfPropertyChanging("LicenseData");
+                _LicenseData_store = value;
+                ReportEfPropertyChanged("LicenseData");
+            }
+        }
+        // END Zetbox.DalProvider.Ef.Generator.Templates.Properties.NotifyingDataProperty
+		public static event PropertyGetterHandler<Zetbox.App.LicenseManagement.License, string> OnLicenseData_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.LicenseManagement.License, string> OnLicenseData_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.LicenseManagement.License, string> OnLicenseData_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.LicenseManagement.License> OnLicenseData_IsValid;
+
+        /// <summary>
         /// The licensee of this license
         /// </summary>
         // value type property
@@ -1275,6 +1344,7 @@ namespace Zetbox.App.LicenseManagement
             me.CreatedOn = other.CreatedOn;
             me.Description = other.Description;
             me.ExportGuid = other.ExportGuid;
+            me.LicenseData = other.LicenseData;
             me.Licensee = other.Licensee;
             me.LicenseSubject = other.LicenseSubject;
             me.Licensor = other.Licensor;
@@ -1303,6 +1373,7 @@ namespace Zetbox.App.LicenseManagement
                 case "CreatedOn":
                 case "Description":
                 case "ExportGuid":
+                case "LicenseData":
                 case "Licensee":
                 case "LicenseSubject":
                 case "Licensor":
@@ -1415,6 +1486,15 @@ namespace Zetbox.App.LicenseManagement
                         obj => obj.ExportGuid,
                         (obj, val) => obj.ExportGuid = val,
 						obj => OnExportGuid_IsValid), 
+                    // else
+                    new PropertyDescriptorEfImpl<License, string>(
+                        lazyCtx,
+                        new Guid("ccfbd6fd-24cf-4624-9d3e-9f47e2c6a1fa"),
+                        "LicenseData",
+                        null,
+                        obj => obj.LicenseData,
+                        (obj, val) => obj.LicenseData = val,
+						obj => OnLicenseData_IsValid), 
                     // else
                     new PropertyDescriptorEfImpl<License, string>(
                         lazyCtx,
@@ -1534,6 +1614,7 @@ namespace Zetbox.App.LicenseManagement
             SetNotInitializedProperty("ChangedBy");
             SetNotInitializedProperty("CreatedBy");
             SetNotInitializedProperty("Description");
+            SetNotInitializedProperty("LicenseData");
             SetNotInitializedProperty("Licensee");
             SetNotInitializedProperty("LicenseSubject");
             SetNotInitializedProperty("Licensor");
@@ -1619,6 +1700,7 @@ namespace Zetbox.App.LicenseManagement
             if (this._isExportGuidSet) {
                 binStream.Write(this._ExportGuid);
             }
+            binStream.Write(this._LicenseData);
             binStream.Write(this._Licensee);
             binStream.Write(this._LicenseSubject);
             binStream.Write(this._Licensor);
@@ -1651,6 +1733,7 @@ namespace Zetbox.App.LicenseManagement
             if (this._isExportGuidSet) {
                 this._ExportGuid = binStream.ReadGuid();
             }
+            this._LicenseData = binStream.ReadString();
             this._Licensee = binStream.ReadString();
             this._LicenseSubject = binStream.ReadNullableInt32();
             this._Licensor = binStream.ReadString();
@@ -1676,6 +1759,7 @@ namespace Zetbox.App.LicenseManagement
             if (modules.Contains("*") || modules.Contains("Zetbox.App.LicenseManagement")) XmlStreamer.ToStream(this._ChangedOn, xml, "ChangedOn", "Zetbox.App.LicenseManagement");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.LicenseManagement")) XmlStreamer.ToStream(this._CreatedOn, xml, "CreatedOn", "Zetbox.App.LicenseManagement");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.LicenseManagement")) XmlStreamer.ToStream(this._Description, xml, "Description", "Zetbox.App.LicenseManagement");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.LicenseManagement")) XmlStreamer.ToStream(this._LicenseData, xml, "LicenseData", "Zetbox.App.LicenseManagement");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.LicenseManagement")) XmlStreamer.ToStream(this._Licensee, xml, "Licensee", "Zetbox.App.LicenseManagement");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.LicenseManagement")) XmlStreamer.ToStream(this._LicenseSubject, xml, "LicenseSubject", "Zetbox.App.LicenseManagement");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.LicenseManagement")) XmlStreamer.ToStream(this._Licensor, xml, "Licensor", "Zetbox.App.LicenseManagement");
@@ -1706,6 +1790,9 @@ namespace Zetbox.App.LicenseManagement
                 // Import must have default value set
                 this._ExportGuid = XmlStreamer.ReadGuid(xml);
                 this._isExportGuidSet = true;
+                break;
+            case "Zetbox.App.LicenseManagement|LicenseData":
+                this._LicenseData = XmlStreamer.ReadString(xml);
                 break;
             case "Zetbox.App.LicenseManagement|Licensee":
                 this._Licensee = XmlStreamer.ReadString(xml);

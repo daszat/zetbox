@@ -1484,6 +1484,10 @@
                   column="`ExportGuid`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
+        <property name="LicenseData" 
+                  column="`LicenseData`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
         <property name="Licensee" 
                   column="`Licensee`" 
                   optimistic-lock="false"/>

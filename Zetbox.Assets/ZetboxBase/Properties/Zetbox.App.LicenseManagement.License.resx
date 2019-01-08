@@ -153,6 +153,12 @@
   <data name="ExportGuid_description" xml:space="preserve">
     <value>Export Guid</value>
   </data>
+  <data name="LicenseData_label" xml:space="preserve">
+    <value>License data</value>
+  </data>
+  <data name="LicenseData_description" xml:space="preserve">
+    <value>Optional additional data attached to this license</value>
+  </data>
   <data name="Licensee_label" xml:space="preserve">
     <value>Licensee</value>
   </data>

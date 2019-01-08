@@ -24,6 +24,15 @@ namespace Zetbox.App.LicenseManagement
         }
 
         /// <summary>
+        /// Optional additional data attached to this license
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("ccfbd6fd-24cf-4624-9d3e-9f47e2c6a1fa")]
+        string LicenseData {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// The licensee of this license
         /// </summary>
         [Zetbox.API.DefinitionGuid("86553c32-7f63-41f3-a3a2-28a5801935b9")]
