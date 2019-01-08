@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\UtilPack.NuGet.MSBuild.2.7.0\build\UtilPack.NuGet.MSBuild.props" Condition="Exists('..\packages\UtilPack.NuGet.MSBuild.2.7.0\build\UtilPack.NuGet.MSBuild.props')" />
+  <Import Project="..\packages\UtilPack.NuGet.MSBuild.2.9.1\build\UtilPack.NuGet.MSBuild.props" Condition="Exists('..\packages\UtilPack.NuGet.MSBuild.2.9.1\build\UtilPack.NuGet.MSBuild.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -82,9 +82,8 @@
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.5.0.4\lib\net40\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Entity" />
@@ -369,8 +368,8 @@ bash -c 'cp -r "$(SolutionDir)/bin/$(Configuration)"/{Client,Common,Server} "$(P
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\UtilPack.NuGet.MSBuild.2.7.0\build\UtilPack.NuGet.MSBuild.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UtilPack.NuGet.MSBuild.2.7.0\build\UtilPack.NuGet.MSBuild.props'))" />
     <Error Condition="!Exists('..\packages\GitVersionTask.4.0.0\build\GitVersionTask.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\GitVersionTask.4.0.0\build\GitVersionTask.targets'))" />
+    <Error Condition="!Exists('..\packages\UtilPack.NuGet.MSBuild.2.9.1\build\UtilPack.NuGet.MSBuild.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\UtilPack.NuGet.MSBuild.2.9.1\build\UtilPack.NuGet.MSBuild.props'))" />
   </Target>
   <Import Project="..\packages\GitVersionTask.4.0.0\build\GitVersionTask.targets" Condition="Exists('..\packages\GitVersionTask.4.0.0\build\GitVersionTask.targets')" />
 </Project>
