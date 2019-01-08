@@ -50,14 +50,14 @@ namespace Zetbox.Client.WPF.View
 
         private void AddNewHandler(object sender, RoutedEventArgs e)
         {
-            var model = (IValueListViewModel<string, IReadOnlyList<string>>)WPFHelper.SanitizeDataContext(DataContext);
+            var model = (IValueListViewModel<string, API.Utils.IReadOnlyList<string>>)WPFHelper.SanitizeDataContext(DataContext);
             model.Add(String.Empty);
             PART_ItemEditBox.Focus();
         }
 
         private void RemoveHandler(object sender, RoutedEventArgs e)
         {
-            var model = (IValueListViewModel<string, IReadOnlyList<string>>)WPFHelper.SanitizeDataContext(DataContext);
+            var model = (IValueListViewModel<string, API.Utils.IReadOnlyList<string>>)WPFHelper.SanitizeDataContext(DataContext);
             model.Remove();
         }
 

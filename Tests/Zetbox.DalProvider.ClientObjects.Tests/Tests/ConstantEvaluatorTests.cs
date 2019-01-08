@@ -47,7 +47,7 @@ namespace Zetbox.DalProvider.Client.Tests
 
     public class ConstantEvaluatorTests
     {
-        public IEnumerable<object> GetTestCases()
+        public static IEnumerable<object> GetTestCases()
         {
             yield return new CETData() { Description = "box null to int?", Expression = Expression.Convert(Expression.Constant(null), typeof(int?)), ExpectedValue = null };
             yield return new CETData() { Description = "box enum to int?", Expression = Expression.Convert(Expression.Constant(TestEnum.Foo), typeof(int?)), ExpectedValue = 3 };

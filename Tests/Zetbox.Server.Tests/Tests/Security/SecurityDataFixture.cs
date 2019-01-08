@@ -117,12 +117,16 @@ namespace Zetbox.Server.Tests.Security
                 // Create TestData with Identity 1
                 prj1 = ctx.Create<Projekt>();
                 prj1.Name = "Project User 1";
+                prj1.KickOffAm = DateTime.Today;
+                prj1.Von = DateTime.Today;
                 prj1.Mitarbeiter.Add(ctx.Find<Mitarbeiter>(ma1.ID));
                 CreateTasks(ctx, prj1);
 
                 // Create TestData with Identity 1, common
                 prjCommon = ctx.Create<Projekt>();
                 prjCommon.Name = "Project Common";
+                prjCommon.KickOffAm = DateTime.Today;
+                prjCommon.Von = DateTime.Today;
                 prjCommon.Mitarbeiter.Add(ctx.Find<Mitarbeiter>(ma1.ID));
                 prjCommon.Mitarbeiter.Add(ctx.Find<Mitarbeiter>(ma2.ID));
                 CreateTasks(ctx, prjCommon);
@@ -139,6 +143,8 @@ namespace Zetbox.Server.Tests.Security
                 // Create TestData with Identity 2
                 prj2 = ctx.Create<Projekt>();
                 prj2.Name = "Project User 2";
+                prj2.KickOffAm = DateTime.Today;
+                prj2.Von = DateTime.Today;
                 prj2.Mitarbeiter.Add(ctx.Find<Mitarbeiter>(ma2.ID));
                 CreateTasks(ctx, prj2);
                 ctx.SubmitChanges();
@@ -173,6 +179,8 @@ namespace Zetbox.Server.Tests.Security
             {
                 var t = ctx.Create<Task>();
                 t.Name = "Task " + i;
+                t.Aufwand = i + 10;
+                t.DatumVon = DateTime.Today;
                 p.Tasks.Add(t);
             }
         }

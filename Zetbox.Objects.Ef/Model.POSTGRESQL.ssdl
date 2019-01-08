@@ -56,6 +56,7 @@
     <EntitySet Name="Identity" EntityType="Model.Store.Identity" Schema="base" Table="Identities"/>
     <EntitySet Name="InstanceConstraint" EntityType="Model.Store.InstanceConstraint" Schema="base" Table="InstanceConstraint"/>
     <EntitySet Name="Kunde" EntityType="Model.Store.Kunde" Schema="projekte" Table="Kunden"/>
+    <EntitySet Name="License" EntityType="Model.Store.License" Schema="lm" Table="Licenses"/>
     <EntitySet Name="Method" EntityType="Model.Store.Method" Schema="base" Table="Methods"/>
     <EntitySet Name="MethodTest" EntityType="Model.Store.MethodTest" Schema="test" Table="MethodTests"/>
     <EntitySet Name="MigrationLog" EntityType="Model.Store.MigrationLog" Schema="migration" Table="MigrationLogs"/>
@@ -71,6 +72,7 @@
     <EntitySet Name="One_to_N_relations_OrderedN" EntityType="Model.Store.One_to_N_relations_OrderedN" Schema="test" Table="One_to_N_relations_OrderedNs"/>
     <EntitySet Name="OrderedNEnd" EntityType="Model.Store.OrderedNEnd" Schema="test" Table="OrderedNEnds"/>
     <EntitySet Name="OrderedOneEnd" EntityType="Model.Store.OrderedOneEnd" Schema="test" Table="OrderedOneEnds"/>
+    <EntitySet Name="PrivateKey" EntityType="Model.Store.PrivateKey" Schema="lm" Table="PrivateKeys"/>
     <EntitySet Name="Projekt" EntityType="Model.Store.Projekt" Schema="projekte" Table="Projekte"/>
     <EntitySet Name="Projekt_Rights" EntityType="Model.Store.Projekt_Rights" Schema="projekte" Table="Projekte_Rights"/>
     <AssociationSet Name="FK_Projekte_Rights" Association="Model.Store.FK_Projekte_Rights">
@@ -816,6 +818,14 @@
       <End Role="Kunde" EntitySet="Kunde" />
       <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
+    <AssociationSet Name="FK_License_was_ChangedBy" Association="Model.Store.FK_License_was_ChangedBy" >
+      <End Role="License" EntitySet="License" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_License_was_CreatedBy" Association="Model.Store.FK_License_was_CreatedBy" >
+      <End Role="License" EntitySet="License" />
+      <End Role="CreatedBy" EntitySet="Identity" />
+    </AssociationSet>
     <AssociationSet Name="FK_LstCfg_has_Type" Association="Model.Store.FK_LstCfg_has_Type" >
       <End Role="LstCfg" EntitySet="SavedListConfiguration" />
       <End Role="Type" EntitySet="ObjectClass" />
@@ -983,6 +993,14 @@
     <AssociationSet Name="FK_Presentable_may_has_DefaultPropViewModelDescriptor" Association="Model.Store.FK_Presentable_may_has_DefaultPropViewModelDescriptor" >
       <End Role="Presentable" EntitySet="CompoundObject" />
       <End Role="DefaultPropViewModelDescriptor" EntitySet="ViewModelDescriptor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PrivateKey_was_ChangedBy" Association="Model.Store.FK_PrivateKey_was_ChangedBy" >
+      <End Role="PrivateKey" EntitySet="PrivateKey" />
+      <End Role="ChangedBy" EntitySet="Identity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PrivateKey_was_CreatedBy" Association="Model.Store.FK_PrivateKey_was_CreatedBy" >
+      <End Role="PrivateKey" EntitySet="PrivateKey" />
+      <End Role="CreatedBy" EntitySet="Identity" />
     </AssociationSet>
     <AssociationSet Name="FK_Projekt_has_Auftraege" Association="Model.Store.FK_Projekt_has_Auftraege" >
       <End Role="Projekt" EntitySet="Projekt" />
@@ -1280,6 +1298,12 @@
     
 
     <!-- EntitySets and AssociationSet for all object-struct CollectionEntrys -->
+    <EntitySet Name="PrivateKey_AuditJournal_CollectionEntry" EntityType="Model.Store.PrivateKey_AuditJournal_CollectionEntry" Schema="lm" Table="PrivateKeys_AuditJournalCollection" />
+    <AssociationSet Name="FK_PrivateKey_value_AuditJournal" Association="Model.Store.FK_PrivateKey_value_AuditJournal" >
+      <End Role="PrivateKey" EntitySet="PrivateKey" />
+      <End Role="CollectionEntry" EntitySet="PrivateKey_AuditJournal_CollectionEntry" />
+    </AssociationSet>
+    
     <EntitySet Name="Projekt_AuditJournal_CollectionEntry" EntityType="Model.Store.Projekt_AuditJournal_CollectionEntry" Schema="projekte" Table="Projekte_AuditJournalCollection" />
     <AssociationSet Name="FK_Projekt_value_AuditJournal" Association="Model.Store.FK_Projekt_value_AuditJournal" >
       <End Role="Projekt" EntitySet="Projekt" />
@@ -1939,6 +1963,26 @@
     <Property Name="PLZ" Type="varchar" MaxLength="10" Nullable="false" />
   </EntityType>
 	
+  <EntityType Name="License">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_ChangedBy" Type="int4" />
+    <Property Name="fk_CreatedBy" Type="int4" />
+    <Property Name="ChangedOn" Type="timestamp" Nullable="false" />
+    <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
+    <Property Name="Description" Type="varchar" Nullable="true" />
+    <Property Name="ExportGuid" Type="uuid" Nullable="false" />
+    <Property Name="LicenseData" Type="varchar" Nullable="true" />
+    <Property Name="Licensee" Type="varchar" Nullable="false" />
+    <Property Name="LicenseSubject" Type="int4" Nullable="true" />
+    <Property Name="Licensor" Type="varchar" Nullable="false" />
+    <Property Name="Signature" Type="varchar" Nullable="true" />
+    <Property Name="ValidFrom" Type="timestamp" Nullable="false" />
+    <Property Name="ValidThru" Type="timestamp" Nullable="false" />
+  </EntityType>
+	
   <EntityType Name="Method">
     <Key>
       <PropertyRef Name="ID" />
@@ -2178,6 +2222,21 @@
     </Key>
     <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="SomeInt" Type="int4" Nullable="true" />
+  </EntityType>
+	
+  <EntityType Name="PrivateKey">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_ChangedBy" Type="int4" />
+    <Property Name="fk_CreatedBy" Type="int4" />
+    <Property Name="Certificate" Type="varchar" Nullable="false" />
+    <Property Name="ChangedOn" Type="timestamp" Nullable="false" />
+    <Property Name="CreatedOn" Type="timestamp" Nullable="false" />
+    <Property Name="Description" Type="varchar" Nullable="false" />
+    <Property Name="IsDeactivated" Type="bool" Nullable="false" />
+    <Property Name="Password" Type="varchar" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="Projekt">
@@ -4568,6 +4627,34 @@
   </Association>
 
 
+  <Association Name="FK_License_was_ChangedBy">
+    <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <End Role="License" Type="Model.Store.License" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChangedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="License">
+        <PropertyRef Name="fk_ChangedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_License_was_CreatedBy">
+    <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <End Role="License" Type="Model.Store.License" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreatedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="License">
+        <PropertyRef Name="fk_CreatedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
   <Association Name="FK_LstCfg_has_Type">
     <End Role="Type" Type="Model.Store.ObjectClass" Multiplicity="0..1" />
     <End Role="LstCfg" Type="Model.Store.SavedListConfiguration" Multiplicity="*" />
@@ -5151,6 +5238,34 @@
       </Principal>
       <Dependent Role="Presentable">
         <PropertyRef Name="fk_DefaultPropViewModelDescriptor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_PrivateKey_was_ChangedBy">
+    <End Role="ChangedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <End Role="PrivateKey" Type="Model.Store.PrivateKey" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChangedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PrivateKey">
+        <PropertyRef Name="fk_ChangedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+
+
+  <Association Name="FK_PrivateKey_was_CreatedBy">
+    <End Role="CreatedBy" Type="Model.Store.Identity" Multiplicity="0..1" />
+    <End Role="PrivateKey" Type="Model.Store.PrivateKey" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreatedBy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PrivateKey">
+        <PropertyRef Name="fk_CreatedBy" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -6383,6 +6498,35 @@
 
 
     <!-- EntityTypes and Associations for all object-struct CollectionEntrys -->
+    <EntityType Name="PrivateKey_AuditJournal_CollectionEntry" >
+      <Key>
+        <PropertyRef Name="ID" />
+      </Key>
+      <Property Name="ID" Type="int4" Nullable="false" StoreGeneratedPattern="Identity" />
+      <Property Name="fk_PrivateKey" Type="int4" Nullable="true" />
+    <Property Name="AuditJournal_Identity" Type="varchar" Nullable="true" />
+    <Property Name="AuditJournal_MessageFormat" Type="varchar" Nullable="true" />
+    <Property Name="AuditJournal_NewValue" Type="varchar" Nullable="true" />
+    <Property Name="AuditJournal_OldValue" Type="varchar" Nullable="true" />
+    <Property Name="AuditJournal_PropertyName" Type="varchar" Nullable="true" />
+    <Property Name="AuditJournal_Timestamp" Type="timestamp" Nullable="true" />
+    </EntityType>
+
+    <Association Name="FK_PrivateKey_value_AuditJournal">
+      <End Role="PrivateKey" Type="Model.Store.PrivateKey" Multiplicity="0..1">
+        <OnDelete Action="Cascade" />
+      </End>
+      <End Role="CollectionEntry" Type="Model.Store.PrivateKey_AuditJournal_CollectionEntry" Multiplicity="*" />
+      <ReferentialConstraint>
+        <Principal Role="PrivateKey">
+          <PropertyRef Name="ID" />
+        </Principal>
+        <Dependent Role="CollectionEntry">
+          <PropertyRef Name="fk_PrivateKey" />
+        </Dependent>
+      </ReferentialConstraint>
+    </Association>
+
     <EntityType Name="Projekt_AuditJournal_CollectionEntry" >
       <Key>
         <PropertyRef Name="ID" />

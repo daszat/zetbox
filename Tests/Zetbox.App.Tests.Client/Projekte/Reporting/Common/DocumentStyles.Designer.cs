@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Zetbox.App.Tests.Client.Projekte.Reporting.Common
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"P:\zetbox\Tests\Zetbox.App.Tests.Client\Projekte\Reporting\Common\DocumentStyles.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"C:\Projects\zetbox\Tests\Zetbox.App.Tests.Client\Projekte\Reporting\Common\DocumentStyles.cst")]
     public partial class DocumentStyles : Zetbox.App.Tests.Client.Projekte.Reporting.ReportTemplate
     {
 
@@ -25,7 +25,7 @@ namespace Zetbox.App.Tests.Client.Projekte.Reporting.Common
 
         public override void Generate()
         {
-#line 24 "P:\zetbox\Tests\Zetbox.App.Tests.Client\Projekte\Reporting\Common\DocumentStyles.cst"
+#line 24 "C:\Projects\zetbox\Tests\Zetbox.App.Tests.Client\Projekte\Reporting\Common\DocumentStyles.cst"
 this.WriteObjects("  \\styles {\r\n");
 this.WriteObjects("    Normal {\r\n");
 this.WriteObjects("      Font { Name = \"Verdana\" Size = 10 }\r\n");

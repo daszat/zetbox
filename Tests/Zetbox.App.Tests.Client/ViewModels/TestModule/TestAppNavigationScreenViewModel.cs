@@ -20,7 +20,9 @@ namespace Zetbox.Client.Presentables.TestModule
     using System.Linq;
     using System.Text;
     using Zetbox.API;
+    using Zetbox.App.Base;
     using Zetbox.App.GUI;
+    using Zetbox.App.LicenseManagement;
     using Zetbox.Client.GUI;
     using Zetbox.Client.Presentables;
     using Zetbox.Client.Presentables.GUI;
@@ -201,6 +203,38 @@ namespace Zetbox.Client.Presentables.TestModule
                         newScope.ViewModelFactory.ShowModel(ws, activate: true);
 
                         ws.ShowModel(newScope.ViewModelFactory.CreateViewModel<InstanceListTestViewModel.Factory>().Invoke(newCtx, ws, this.Screen));
+                    },
+                    null,
+                    null));
+
+            result.Add(ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>()
+                .Invoke(
+                    DataContext,
+                    this,
+                    "Check License",
+                    "Check License",
+                    () =>
+                    {
+                        var newScope = ViewModelFactory.CreateNewScope();
+                        var newCtx = newScope.ViewModelFactory.CreateNewContext();
+
+                        var selectClass = newScope.ViewModelFactory.CreateViewModel<DataObjectSelectionTaskViewModel.Factory>().Invoke(
+                                newCtx,
+                                this,
+                                (ObjectClass)NamedObjects.Base.Classes.Zetbox.App.LicenseManagement.License.Find(FrozenContext),
+                                null,
+                                (chosen) =>
+                                {
+                                    if (chosen != null)
+                                    {
+                                        var l = (License)chosen.First().Object;
+                                        var valid = l.IsSignatureValid(App.Tests.Client.ViewModels.LicenseManagement.Resources.test_cer);
+                                        newScope.ViewModelFactory.ShowMessage($"License valid = {valid}", "Result");
+                                    }
+                                    newScope.Dispose();
+                                },
+                                null);
+                        newScope.ViewModelFactory.ShowDialog(selectClass);
                     },
                     null,
                     null));

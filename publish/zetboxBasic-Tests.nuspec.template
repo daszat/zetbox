@@ -11,7 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Unit tests for the zetbox.</description>
     <releaseNotes>First package.</releaseNotes>
-    <copyright>Copyright © 2018 dasz.at OG</copyright>
+    <copyright>Copyright © 2019 dasz.at OG</copyright>
     <dependencies>
       <dependency id="NUnit" version="[3.10.1,4)" />
       <dependency id="zetboxBasic" version="[##version##]" />

@@ -1325,6 +1325,36 @@ using Zetbox.DalProvider.Ef;
 
 
 	/*
+    Relation: FK_License_was_ChangedBy
+    A: ZeroOrMore License as License
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_License_was_ChangedBy",
+    "License", RelationshipMultiplicity.Many, typeof(Zetbox.App.LicenseManagement.LicenseEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_License_was_CreatedBy
+    A: ZeroOrMore License as License
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_License_was_CreatedBy",
+    "License", RelationshipMultiplicity.Many, typeof(Zetbox.App.LicenseManagement.LicenseEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
+    )]
+
+
+	/*
     Relation: FK_LstCfg_has_Type
     A: ZeroOrMore SavedListConfiguration as LstCfg
     B: One ObjectClass as Type
@@ -2023,6 +2053,36 @@ using Zetbox.DalProvider.Ef;
     "Model", "FK_Presentable_may_has_DefaultPropViewModelDescriptor",
     "Presentable", RelationshipMultiplicity.Many, typeof(Zetbox.App.Base.CompoundObjectEfImpl),
     "DefaultPropViewModelDescriptor", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.GUI.ViewModelDescriptorEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_PrivateKey_was_ChangedBy
+    A: ZeroOrMore PrivateKey as PrivateKey
+    B: ZeroOrOne Identity as ChangedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_PrivateKey_was_ChangedBy",
+    "PrivateKey", RelationshipMultiplicity.Many, typeof(Zetbox.App.LicenseManagement.PrivateKeyEfImpl),
+    "ChangedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
+    )]
+
+
+	/*
+    Relation: FK_PrivateKey_was_CreatedBy
+    A: ZeroOrMore PrivateKey as PrivateKey
+    B: ZeroOrOne Identity as CreatedBy
+    Preferred Storage: MergeIntoA
+	*/
+
+// basic association
+[assembly: EdmRelationship(
+    "Model", "FK_PrivateKey_was_CreatedBy",
+    "PrivateKey", RelationshipMultiplicity.Many, typeof(Zetbox.App.LicenseManagement.PrivateKeyEfImpl),
+    "CreatedBy", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.Base.IdentityEfImpl)
     )]
 
 
@@ -3182,6 +3242,14 @@ using Zetbox.DalProvider.Ef;
     "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.Test.Muhblah_StringCollection_CollectionEntryEfImpl)
     )]
 
+
+
+// object-struct association
+[assembly: EdmRelationship(
+    "Model", "FK_PrivateKey_value_AuditJournal",
+    "PrivateKey", RelationshipMultiplicity.ZeroOrOne, typeof(Zetbox.App.LicenseManagement.PrivateKeyEfImpl),
+    "CollectionEntry", RelationshipMultiplicity.Many, typeof(Zetbox.App.LicenseManagement.PrivateKey_AuditJournal_CollectionEntryEfImpl)
+    )]
 
 
 // object-struct association

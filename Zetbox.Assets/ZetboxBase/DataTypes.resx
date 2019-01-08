@@ -729,6 +729,12 @@
   <data name="Zetbox.App.Projekte.Kunde_description" xml:space="preserve">
     <value />
   </data>
+  <data name="Zetbox.App.LicenseManagement.License" xml:space="preserve">
+    <value>License</value>
+  </data>
+  <data name="Zetbox.App.LicenseManagement.License_description" xml:space="preserve">
+    <value>A single License</value>
+  </data>
   <data name="Zetbox.App.GUI.ListSortDirection" xml:space="preserve">
     <value>ListSortDirection</value>
   </data>
@@ -920,6 +926,12 @@
   </data>
   <data name="Zetbox.App.Test.OrderedOneEnd_description" xml:space="preserve">
     <value>A test class for persistently ordered 1:N relations</value>
+  </data>
+  <data name="Zetbox.App.LicenseManagement.PrivateKey" xml:space="preserve">
+    <value>PrivateKey</value>
+  </data>
+  <data name="Zetbox.App.LicenseManagement.PrivateKey_description" xml:space="preserve">
+    <value>A private key for signing</value>
   </data>
   <data name="Zetbox.App.Projekte.Projekt" xml:space="preserve">
     <value>Projekt</value>

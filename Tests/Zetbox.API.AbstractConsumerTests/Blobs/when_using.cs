@@ -75,7 +75,7 @@ namespace Zetbox.API.AbstractConsumerTests.Blobs
         [Test]
         public void should_not_be_changed()
         {
-            Assert.Throws<Exception>(() =>
+            Assert.Throws<InvalidOperationException>(() =>
             {
                 var blob = ctx.Find<Blob>(blob_id);
                 Assert.That(blob, Is.Not.Null);

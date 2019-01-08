@@ -9,10 +9,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Zetbox.App.Tests.Client</RootNamespace>
     <AssemblyName>Zetbox.App.Tests.Client</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <GitVersion_NoFetchEnabled>true</GitVersion_NoFetchEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,6 +32,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Arebis.CodeGeneration, Version=1.3.0.0, Culture=neutral, PublicKeyToken=1012dfebee6c8abd, processorArchitecture=MSIL">
@@ -42,7 +45,6 @@
     </Reference>
     <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -86,6 +88,11 @@
     <Compile Include="Projekte\Reporting\ReportingHost.cs" />
     <Compile Include="Projekte\Reporting\ReportTemplate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\LicenseManagement\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\TestModule\EventTestInputViewModel.cs" />
     <Compile Include="ViewModels\TestModule\InstanceListTestViewModel.cs" />
     <Compile Include="ViewModels\TestModule\NextEventsTestNavScreenViewModel.cs" />
@@ -119,6 +126,11 @@
       <Generator>Arebis Template Processor</Generator>
       <LastGenOutput>ProjectReport.Designer.cs</LastGenOutput>
     </None>
+    <EmbeddedResource Include="ViewModels\LicenseManagement\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewModels\LicenseManagement\test.cer" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Zetbox.API.Client\Zetbox.API.Client.csproj">

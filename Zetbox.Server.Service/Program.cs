@@ -122,12 +122,6 @@ namespace Zetbox.Server.Service
 
             builder.RegisterType<WindowsService>().SingleInstance();
 
-            // register deployment-specific components
-            if (ConfigurationManager.GetSection("servercomponents") != null)
-            {
-                builder.RegisterModule(new ConfigurationSettingsReader("servercomponents"));
-            }
-
             var container = builder.Build();
             container.ApplyPerfCounterTracker();
 

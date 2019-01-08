@@ -47,9 +47,13 @@ namespace Zetbox.Server.Tests
 
             var prj1 = setupCtx.Create<Projekt>();
             prj1.Name = "blubb";
+            prj1.KickOffAm = DateTime.Today;
+            prj1.Von = DateTime.Today;
 
             var prj2 = setupCtx.Create<Projekt>();
             prj2.Name = "flubb";
+            prj2.KickOffAm = DateTime.Today;
+            prj2.Von = DateTime.Today;
 
             setupCtx.SubmitChanges();
 

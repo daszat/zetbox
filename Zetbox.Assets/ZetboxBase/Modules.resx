@@ -135,6 +135,12 @@
   <data name="GUI_description" xml:space="preserve">
     <value />
   </data>
+  <data name="LicenseManagement" xml:space="preserve">
+    <value>LicenseManagement</value>
+  </data>
+  <data name="LicenseManagement_description" xml:space="preserve">
+    <value>License Management Module</value>
+  </data>
   <data name="ModuleEditor" xml:space="preserve">
     <value>ModuleEditor</value>
   </data>

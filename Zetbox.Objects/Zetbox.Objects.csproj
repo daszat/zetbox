@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Zetbox.Objects</RootNamespace>
     <AssemblyName>Zetbox.Objects</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Zetbox.Objects.snk</AssemblyOriginatorKeyFile>
@@ -31,6 +31,7 @@
     <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Common\Generated\</OutputPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\Debug\</ZetboxAPIPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -45,6 +46,7 @@
     <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Common\Generated\</OutputPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\Release\</ZetboxAPIPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Linux.Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -61,6 +63,7 @@
     <OutputPath Condition=" '$(OutputPathOverride)' != '' ">$(OutputPathOverride)\Common\Generated\</OutputPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' == '' ">..\bin\Debug\</ZetboxAPIPath>
     <ZetboxAPIPath Condition=" '$(ZetboxAPIPathOverride)' != '' ">$(ZetboxAPIPathOverride)</ZetboxAPIPath>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <!-- additional properties have to come in a separate group to receive correct $(OutputPath) -->
   <PropertyGroup>
@@ -170,6 +173,7 @@
     <Compile Include="ZetboxBase\IsValidIdentifierConstraint.Interface.Designer.cs" />
     <Compile Include="ZetboxBase\IsValidNamespaceConstraint.Interface.Designer.cs" />
     <Compile Include="Projekte\Kunde.Interface.Designer.cs" />
+    <Compile Include="LicenseManagement\License.Interface.Designer.cs" />
     <Compile Include="ZetboxBase\Method.Interface.Designer.cs" />
     <Compile Include="ZetboxBase\MethodInvocationConstraint.Interface.Designer.cs" />
     <Compile Include="TestModule\MethodTest.Interface.Designer.cs" />
@@ -198,6 +202,7 @@
     <Compile Include="GUI\OptionalPredicateFilterConfiguration.Interface.Designer.cs" />
     <Compile Include="TestModule\OrderedNEnd.Interface.Designer.cs" />
     <Compile Include="TestModule\OrderedOneEnd.Interface.Designer.cs" />
+    <Compile Include="LicenseManagement\PrivateKey.Interface.Designer.cs" />
     <Compile Include="Projekte\Projekt.Interface.Designer.cs" />
     <Compile Include="ZetboxBase\Property.Interface.Designer.cs" />
     <Compile Include="TestModule\PropertyBoolTest.Interface.Designer.cs" />

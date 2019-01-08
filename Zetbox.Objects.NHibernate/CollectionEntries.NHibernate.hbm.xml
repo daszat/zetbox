@@ -384,6 +384,49 @@
     </class>
 
     <!-- CompoundObjectCollectionEntries -->
+    <class name="Zetbox.App.LicenseManagement.PrivateKey_AuditJournal_CollectionEntryNHibernateImpl+PrivateKey_AuditJournal_CollectionEntryProxy"
+           proxy="Zetbox.App.LicenseManagement.PrivateKey_AuditJournal_CollectionEntryNHibernateImpl+PrivateKey_AuditJournal_CollectionEntryProxy"
+           table="`PrivateKeys_AuditJournalCollection`"
+           schema="`lm`" >
+
+        <id name="ID" column="`ID`" type="Int32" unsaved-value="0">
+            <generator class="native">
+                <param name="schema">`lm`</param>
+                <param name="sequence">`PrivateKeys_AuditJournalCollection_ID_seq`</param>
+            </generator>
+        </id>
+
+        <many-to-one name="Parent"
+                     column="`fk_PrivateKey`" />
+        <!-- CompoundObjectProperty isValue -->
+        <component name="Value" class="Zetbox.App.Base.AuditEntryNHibernateImpl,Zetbox.Objects.NHibernateImpl">
+        <!-- ValueTypeProperty isValue -->
+        <property name="Identity" 
+                  column="`AuditJournal_Identity`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="MessageFormat" 
+                  column="`AuditJournal_MessageFormat`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="NewValue" 
+                  column="`AuditJournal_NewValue`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="OldValue" 
+                  column="`AuditJournal_OldValue`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="PropertyName" 
+                  column="`AuditJournal_PropertyName`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
+        <property name="Timestamp" type="Timestamp"
+                  column="`AuditJournal_Timestamp`" 
+                  optimistic-lock="false"/>
+        </component>
+    </class>
+
     <class name="Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl+Projekt_AuditJournal_CollectionEntryProxy"
            proxy="Zetbox.App.Projekte.Projekt_AuditJournal_CollectionEntryNHibernateImpl+Projekt_AuditJournal_CollectionEntryProxy"
            table="`Projekte_AuditJournalCollection`"

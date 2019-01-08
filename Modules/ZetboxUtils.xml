@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2018-09-25T15:53:30.3710787Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2019-01-08T11:34:06.3363314Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -6944,6 +6944,1538 @@ public static void MakeStaticFileCanExecReason(ImportedFile obj, MethodReturnEve
     <GUI:Name>Document Management</GUI:Name>
     <GUI:RootScreen>6c3f5c91-7245-479d-aeb3-64ebcdcfc4e0</GUI:RootScreen>
   </GUI:Application>
+  <ZetboxBase:Module ExportGuid="26607d55-07ac-4c08-825d-cb37980c062a">
+    <ZetboxBase:ChangedOn>2018-12-21T07:32:12.633304Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2018-12-21T07:32:12.633304Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>License Management Module</ZetboxBase:Description>
+    <ZetboxBase:Name>LicenseManagement</ZetboxBase:Name>
+    <ZetboxBase:Namespace>Zetbox.App.LicenseManagement</ZetboxBase:Namespace>
+    <ZetboxBase:SchemaName>lm</ZetboxBase:SchemaName>
+  </ZetboxBase:Module>
+  <ZetboxBase:ObjectClass ExportGuid="dba4beb1-acfb-45f5-9261-6486536016f6">
+    <ZetboxBase:ChangedOn>2018-12-21T07:36:27.685727Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:CreatedOn>
+    <GUI:DefaultIcon>1a6af064-19f9-4869-abae-3bbf3d7e780b</GUI:DefaultIcon>
+    <ZetboxBase:Description>A single License</ZetboxBase:Description>
+    <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
+    <ZetboxBase:Name>License</ZetboxBase:Name>
+    <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
+    <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
+    <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void ToString(License obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void NotifyPreSave(License obj)
+{
+}
+
+[Invocation]
+public static void NotifyPostSave(License obj)
+{
+}
+
+[Invocation]
+public static void NotifyCreated(License obj)
+{
+}
+
+[Invocation]
+public static void NotifyDeleting(License obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(License obj, ObjectIsValidEventArgs e)
+{
+}
+
+</ZetboxBase:CodeTemplate>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
+    <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
+    <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
+    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <ZetboxBase:TableName>Licenses</ZetboxBase:TableName>
+  </ZetboxBase:ObjectClass>
+  <ZetboxBase:ObjectClass ExportGuid="40673c91-596b-4c4a-aabc-c94a14434194">
+    <ZetboxBase:ChangedOn>2018-12-21T08:23:43.942864Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:CreatedOn>
+    <GUI:DefaultIcon>06c147be-8345-4699-9a7d-a74fd866abab</GUI:DefaultIcon>
+    <ZetboxBase:Description>A private key for signing</ZetboxBase:Description>
+    <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
+    <ZetboxBase:Name>PrivateKey</ZetboxBase:Name>
+    <GUI:ShowIconInLists>false</GUI:ShowIconInLists>
+    <GUI:ShowIdInLists>false</GUI:ShowIdInLists>
+    <GUI:ShowNameInLists>false</GUI:ShowNameInLists>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void ToString(PrivateKey obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void NotifyPreSave(PrivateKey obj)
+{
+}
+
+[Invocation]
+public static void NotifyPostSave(PrivateKey obj)
+{
+}
+
+[Invocation]
+public static void NotifyCreated(PrivateKey obj)
+{
+}
+
+[Invocation]
+public static void NotifyDeleting(PrivateKey obj)
+{
+}
+
+[Invocation]
+public static void ObjectIsValid(PrivateKey obj, ObjectIsValidEventArgs e)
+{
+}
+
+</ZetboxBase:CodeTemplate>
+    <GUI:DefaultViewModelDescriptor>d8e95ac5-d46a-4dfa-a574-12ea299eadc4</GUI:DefaultViewModelDescriptor>
+    <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
+    <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
+    <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
+    <GUI:IsSimpleObject>false</GUI:IsSimpleObject>
+    <ZetboxBase:TableName>PrivateKeys</ZetboxBase:TableName>
+  </ZetboxBase:ObjectClass>
+  <ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry ExportGuid="3cc3402a-dbf8-4668-9d32-98ae8b0cfa6b">
+    <ZetboxBase:A>dba4beb1-acfb-45f5-9261-6486536016f6</ZetboxBase:A>
+    <ZetboxBase:B>a73f2d0a-786b-483d-b474-b9d9df42b8b3</ZetboxBase:B>
+  </ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry>
+  <ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry ExportGuid="440eed9b-4826-4ada-b41d-4a60e2ce0bbf">
+    <ZetboxBase:A>dba4beb1-acfb-45f5-9261-6486536016f6</ZetboxBase:A>
+    <ZetboxBase:B>4ae6616a-eca3-47a5-b502-8e3c3913c2f0</ZetboxBase:B>
+  </ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry>
+  <ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry ExportGuid="989c1792-653a-4d8b-ad95-d06436313474">
+    <ZetboxBase:A>40673c91-596b-4c4a-aabc-c94a14434194</ZetboxBase:A>
+    <ZetboxBase:B>ef042c7f-93c0-4989-a7c9-0d03598671e5</ZetboxBase:B>
+  </ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry>
+  <ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry ExportGuid="f0443d2f-446d-4b7c-8104-d6c08a4a7e41">
+    <ZetboxBase:A>40673c91-596b-4c4a-aabc-c94a14434194</ZetboxBase:A>
+    <ZetboxBase:B>a73f2d0a-786b-483d-b474-b9d9df42b8b3</ZetboxBase:B>
+  </ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry>
+  <ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry ExportGuid="a0238bf1-20e0-45d2-b32f-adfc869ed1cd">
+    <ZetboxBase:A>40673c91-596b-4c4a-aabc-c94a14434194</ZetboxBase:A>
+    <ZetboxBase:B>606a487e-35da-4ce9-91d1-f0cd844d7a35</ZetboxBase:B>
+  </ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry>
+  <ZetboxBase:ObjectReferenceProperty ExportGuid="7bfbe8d0-5cea-4aa6-8a89-0ea91770fb82">
+    <ZetboxBase:AllowFilterCollections>false</ZetboxBase:AllowFilterCollections>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2019-01-08T11:31:25.937385Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_ChangedBy(License obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ChangedBy(License obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ChangedBy(License obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ChangedBy(License obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ChangedBy == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Identity which changed this object</ZetboxBase:Description>
+    <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
+    <ZetboxBase:Name>ChangedBy</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>dba4beb1-acfb-45f5-9261-6486536016f6</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>17</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
+    <ZetboxBase:EagerLoading>false</ZetboxBase:EagerLoading>
+    <ZetboxBase:RelationEnd>c8fd0721-2615-4490-8af2-869fdc888926</ZetboxBase:RelationEnd>
+  </ZetboxBase:ObjectReferenceProperty>
+  <ZetboxBase:DateTimeProperty ExportGuid="d02c4d91-59dd-4f4a-93cf-85669295c164">
+    <ZetboxBase:AllowFilterCollections>false</ZetboxBase:AllowFilterCollections>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2019-01-08T11:31:25.937385Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_ChangedOn(License obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ChangedOn(License obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ChangedOn(License obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ChangedOn(License obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ChangedOn == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultValue>2b447256-7eeb-49f5-a7d5-4b1164b153e8</ZetboxBase:DefaultValue>
+    <ZetboxBase:Description>Date and time where this object was changed</ZetboxBase:Description>
+    <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
+    <ZetboxBase:Name>ChangedOn</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>dba4beb1-acfb-45f5-9261-6486536016f6</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>15</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>fc74b434-3801-4e4a-ab67-e65a9e014005</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:DateTimeProperty>
+  <ZetboxBase:ObjectReferenceProperty ExportGuid="19c92597-0c31-4b78-9747-673ccbe04612">
+    <ZetboxBase:AllowFilterCollections>false</ZetboxBase:AllowFilterCollections>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2019-01-08T11:31:25.937385Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_CreatedBy(License obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_CreatedBy(License obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_CreatedBy(License obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_CreatedBy(License obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.CreatedBy == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Identity which created this object</ZetboxBase:Description>
+    <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
+    <ZetboxBase:Name>CreatedBy</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>dba4beb1-acfb-45f5-9261-6486536016f6</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>16</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
+    <ZetboxBase:EagerLoading>false</ZetboxBase:EagerLoading>
+    <ZetboxBase:RelationEnd>c33dd104-f8a4-4fed-ab6c-64c57e978ee9</ZetboxBase:RelationEnd>
+  </ZetboxBase:ObjectReferenceProperty>
+  <ZetboxBase:DateTimeProperty ExportGuid="a25fd55e-1982-4d02-bd29-22e8f8b1c451">
+    <ZetboxBase:AllowFilterCollections>false</ZetboxBase:AllowFilterCollections>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2019-01-08T11:31:25.937385Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_CreatedOn(License obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_CreatedOn(License obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_CreatedOn(License obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_CreatedOn(License obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.CreatedOn == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultValue>f2b7c622-bc12-4160-8047-422069893526</ZetboxBase:DefaultValue>
+    <ZetboxBase:Description>Date and time where this object was created</ZetboxBase:Description>
+    <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
+    <ZetboxBase:Name>CreatedOn</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>dba4beb1-acfb-45f5-9261-6486536016f6</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>14</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>fc74b434-3801-4e4a-ab67-e65a9e014005</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:DateTimeProperty>
+  <ZetboxBase:StringProperty ExportGuid="bb043766-bd52-4e8f-b98a-6c35867db9e1">
+    <ZetboxBase:AllowFilterCollections>false</ZetboxBase:AllowFilterCollections>
+    <ZetboxBase:CategoryTags>Summay, Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2018-12-21T07:54:33.984427Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_Description(License obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Description(License obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Description(License obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Description(License obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Description == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2018-12-21T07:54:33.984427Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
+    <ZetboxBase:Name>Description</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>dba4beb1-acfb-45f5-9261-6486536016f6</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>10</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:StringProperty>
+  <ZetboxBase:GuidProperty ExportGuid="ae35124b-5da8-4af2-a5e3-f0084cf690ad">
+    <ZetboxBase:AllowFilterCollections>false</ZetboxBase:AllowFilterCollections>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2019-01-08T11:31:25.937385Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_ExportGuid(License obj, PropertyGetterEventArgs&lt;Guid&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ExportGuid(License obj, PropertyPreSetterEventArgs&lt;Guid&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ExportGuid(License obj, PropertyPostSetterEventArgs&lt;Guid&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ExportGuid(License obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ExportGuid == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultValue>da03c33c-7ae5-474a-8aec-447ea8273c22</ZetboxBase:DefaultValue>
+    <ZetboxBase:Description>Export Guid</ZetboxBase:Description>
+    <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
+    <ZetboxBase:Name>ExportGuid</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>dba4beb1-acfb-45f5-9261-6486536016f6</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>18</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>2b6fb70f-a382-4057-a139-cc33333d619d</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:GuidProperty>
+  <ZetboxBase:StringProperty ExportGuid="ccfbd6fd-24cf-4624-9d3e-9f47e2c6a1fa">
+    <ZetboxBase:AllowFilterCollections>false</ZetboxBase:AllowFilterCollections>
+    <ZetboxBase:CategoryTags>Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2019-01-08T11:31:25.937385Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_LicenseData(License obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_LicenseData(License obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_LicenseData(License obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_LicenseData(License obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.LicenseData == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2019-01-08T11:31:25.937385Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Optional additional data attached to this license</ZetboxBase:Description>
+    <ZetboxBase:HelpText>Usually a JSON or XML content.</ZetboxBase:HelpText>
+    <ZetboxBase:Label>License data</ZetboxBase:Label>
+    <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
+    <ZetboxBase:Name>LicenseData</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>dba4beb1-acfb-45f5-9261-6486536016f6</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>12</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>a5e18586-d80f-49cf-8aa1-41d305eee289</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:StringProperty>
+  <ZetboxBase:StringProperty ExportGuid="86553c32-7f63-41f3-a3a2-28a5801935b9">
+    <ZetboxBase:AllowFilterCollections>false</ZetboxBase:AllowFilterCollections>
+    <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2018-12-21T07:39:27.621713Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_Licensee(License obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Licensee(License obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Licensee(License obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Licensee(License obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Licensee == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2018-12-21T07:35:47.451788Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>The licensee of this license</ZetboxBase:Description>
+    <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
+    <ZetboxBase:Name>Licensee</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>dba4beb1-acfb-45f5-9261-6486536016f6</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>2</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:StringProperty>
+  <ZetboxBase:IntProperty ExportGuid="fea12587-60b9-41c2-9123-6884dc7f51c6">
+    <ZetboxBase:AllowFilterCollections>false</ZetboxBase:AllowFilterCollections>
+    <ZetboxBase:CategoryTags>Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2018-12-21T07:59:45.219199Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_LicenseSubject(License obj, PropertyGetterEventArgs&lt;int?&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_LicenseSubject(License obj, PropertyPreSetterEventArgs&lt;int?&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_LicenseSubject(License obj, PropertyPostSetterEventArgs&lt;int?&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_LicenseSubject(License obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.LicenseSubject == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2018-12-21T07:59:32.568782Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>A integer represeting the license subject</ZetboxBase:Description>
+    <ZetboxBase:HelpText>The property represents the license subject. E.g. this may be:
+
+&lt;ul&gt;
+&lt;li&gt;A max. Number of users&lt;/li&gt;
+&lt;li&gt;A enumeration value representing a Feature&lt;/li&gt;
+&lt;/ul&gt;</ZetboxBase:HelpText>
+    <ZetboxBase:Label>License subject</ZetboxBase:Label>
+    <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
+    <ZetboxBase:Name>LicenseSubject</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>dba4beb1-acfb-45f5-9261-6486536016f6</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>11</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>edaf9334-dc36-4778-aa33-1e5cdaeeb767</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:IntProperty>
+  <ZetboxBase:StringProperty ExportGuid="906bc74c-e8b8-4b51-83b3-597ca6062090">
+    <ZetboxBase:AllowFilterCollections>false</ZetboxBase:AllowFilterCollections>
+    <ZetboxBase:CategoryTags>Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2018-12-21T07:39:27.621713Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_Licensor(License obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Licensor(License obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Licensor(License obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Licensor(License obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Licensor == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2018-12-21T07:37:47.449596Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Licensor of this License</ZetboxBase:Description>
+    <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
+    <ZetboxBase:Name>Licensor</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>dba4beb1-acfb-45f5-9261-6486536016f6</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>5</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:StringProperty>
+  <ZetboxBase:StringProperty ExportGuid="e6c5b0a0-ed58-4ba1-bd23-ed24f315620d">
+    <ZetboxBase:AllowFilterCollections>false</ZetboxBase:AllowFilterCollections>
+    <ZetboxBase:CategoryTags>Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2019-01-08T11:31:25.937385Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_Signature(License obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Signature(License obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Signature(License obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Signature(License obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Signature == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2018-12-21T07:53:22.472066Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Encoded Signature</ZetboxBase:Description>
+    <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
+    <ZetboxBase:Name>Signature</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>dba4beb1-acfb-45f5-9261-6486536016f6</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>13</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:StringProperty>
+  <ZetboxBase:DateTimeProperty ExportGuid="b8d29d74-eb31-47d4-bca1-a4c4c0f93c1c">
+    <ZetboxBase:AllowFilterCollections>false</ZetboxBase:AllowFilterCollections>
+    <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2018-12-21T07:54:33.984427Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_ValidFrom(License obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ValidFrom(License obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ValidFrom(License obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ValidFrom(License obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ValidFrom == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2018-12-21T07:39:27.621713Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultValue>8f500caf-c8bc-4ef7-b365-2b04df8cbe33</ZetboxBase:DefaultValue>
+    <ZetboxBase:Description>License is valid from</ZetboxBase:Description>
+    <ZetboxBase:Label>Valid from</ZetboxBase:Label>
+    <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
+    <ZetboxBase:Name>ValidFrom</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>dba4beb1-acfb-45f5-9261-6486536016f6</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>7</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>fc74b434-3801-4e4a-ab67-e65a9e014005</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:DateTimeStyle>2</ZetboxBase:DateTimeStyle>
+  </ZetboxBase:DateTimeProperty>
+  <ZetboxBase:DateTimeProperty ExportGuid="75a9ef4f-b914-47e2-ad0a-f2f63fd8c60f">
+    <ZetboxBase:AllowFilterCollections>false</ZetboxBase:AllowFilterCollections>
+    <ZetboxBase:CategoryTags>Summay, Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2018-12-21T07:54:33.984427Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_ValidThru(License obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ValidThru(License obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ValidThru(License obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ValidThru(License obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ValidThru == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2018-12-21T07:39:27.621713Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>License is valid thru</ZetboxBase:Description>
+    <ZetboxBase:Label>Valid thru</ZetboxBase:Label>
+    <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
+    <ZetboxBase:Name>ValidThru</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>dba4beb1-acfb-45f5-9261-6486536016f6</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>9</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>fc74b434-3801-4e4a-ab67-e65a9e014005</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:DateTimeStyle>2</ZetboxBase:DateTimeStyle>
+  </ZetboxBase:DateTimeProperty>
+  <ZetboxBase:CompoundObjectProperty ExportGuid="3ea184f1-d6f7-4ceb-be7f-525da44ed3b4">
+    <ZetboxBase:AllowFilterCollections>false</ZetboxBase:AllowFilterCollections>
+    <ZetboxBase:CategoryTags>Änderungen</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2018-12-21T08:26:22.636718Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_AuditJournal(PrivateKey obj, PropertyGetterEventArgs&lt;ICollection&lt;Zetbox.App.Base.AuditEntry&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_AuditJournal(PrivateKey obj, PropertyPreSetterEventArgs&lt;ICollection&lt;Zetbox.App.Base.AuditEntry&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_AuditJournal(PrivateKey obj, PropertyPostSetterEventArgs&lt;ICollection&lt;Zetbox.App.Base.AuditEntry&gt;&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_AuditJournal(PrivateKey obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.AuditJournal == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Eine Liste der Änderungen an diesem Datensatz.</ZetboxBase:Description>
+    <ZetboxBase:Label>Änderungen</ZetboxBase:Label>
+    <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
+    <ZetboxBase:Name>AuditJournal</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>40673c91-596b-4c4a-aabc-c94a14434194</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>9</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>b8e11c28-a64b-4e9b-a18d-1e0f006faedc</GUI:ValueModelDescriptor>
+    <ZetboxBase:CompoundObjectDefinition>84d3d914-cb79-41fe-8aae-54128e7edb87</ZetboxBase:CompoundObjectDefinition>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsList>true</ZetboxBase:IsList>
+  </ZetboxBase:CompoundObjectProperty>
+  <ZetboxBase:StringProperty ExportGuid="f5c7f0dc-9d99-4e24-bb70-84de196659f7">
+    <ZetboxBase:AllowFilterCollections>false</ZetboxBase:AllowFilterCollections>
+    <ZetboxBase:CategoryTags>Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2018-12-21T08:26:22.636718Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_Certificate(PrivateKey obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Certificate(PrivateKey obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Certificate(PrivateKey obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Certificate(PrivateKey obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Certificate == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2018-12-21T08:22:27.982735Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>The certificate</ZetboxBase:Description>
+    <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
+    <ZetboxBase:Name>Certificate</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>40673c91-596b-4c4a-aabc-c94a14434194</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>3</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>a5e18586-d80f-49cf-8aa1-41d305eee289</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:StringProperty>
+  <ZetboxBase:ObjectReferenceProperty ExportGuid="90b012c1-d559-4790-a95a-7073e8d9ac63">
+    <ZetboxBase:AllowFilterCollections>false</ZetboxBase:AllowFilterCollections>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2018-12-21T08:26:22.636718Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_ChangedBy(PrivateKey obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ChangedBy(PrivateKey obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ChangedBy(PrivateKey obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ChangedBy(PrivateKey obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ChangedBy == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Identity which changed this object</ZetboxBase:Description>
+    <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
+    <ZetboxBase:Name>ChangedBy</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>40673c91-596b-4c4a-aabc-c94a14434194</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>8</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
+    <ZetboxBase:EagerLoading>false</ZetboxBase:EagerLoading>
+    <ZetboxBase:RelationEnd>531ff209-c27b-430b-8b55-4612aaa933a3</ZetboxBase:RelationEnd>
+  </ZetboxBase:ObjectReferenceProperty>
+  <ZetboxBase:DateTimeProperty ExportGuid="ab81f118-d3c5-48e8-b8b2-c921901b7d44">
+    <ZetboxBase:AllowFilterCollections>false</ZetboxBase:AllowFilterCollections>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2018-12-21T08:26:22.636718Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_ChangedOn(PrivateKey obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_ChangedOn(PrivateKey obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_ChangedOn(PrivateKey obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_ChangedOn(PrivateKey obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.ChangedOn == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultValue>765887f3-e420-4630-921e-c7b2a5d5a28a</ZetboxBase:DefaultValue>
+    <ZetboxBase:Description>Date and time where this object was changed</ZetboxBase:Description>
+    <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
+    <ZetboxBase:Name>ChangedOn</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>40673c91-596b-4c4a-aabc-c94a14434194</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>6</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>fc74b434-3801-4e4a-ab67-e65a9e014005</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:DateTimeProperty>
+  <ZetboxBase:ObjectReferenceProperty ExportGuid="43ad6d2a-2b08-4f1a-b1e9-1882071fc570">
+    <ZetboxBase:AllowFilterCollections>false</ZetboxBase:AllowFilterCollections>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2018-12-21T08:26:22.636718Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_CreatedBy(PrivateKey obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_CreatedBy(PrivateKey obj, PropertyPreSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_CreatedBy(PrivateKey obj, PropertyPostSetterEventArgs&lt;Zetbox.App.Base.Identity&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_CreatedBy(PrivateKey obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.CreatedBy == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Identity which created this object</ZetboxBase:Description>
+    <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
+    <ZetboxBase:Name>CreatedBy</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>40673c91-596b-4c4a-aabc-c94a14434194</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>7</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
+    <ZetboxBase:EagerLoading>false</ZetboxBase:EagerLoading>
+    <ZetboxBase:RelationEnd>ac2303eb-8b39-4c93-aede-f82646dc2fe5</ZetboxBase:RelationEnd>
+  </ZetboxBase:ObjectReferenceProperty>
+  <ZetboxBase:DateTimeProperty ExportGuid="00d47e8e-ddb9-4c8d-91a8-ff17ed11800c">
+    <ZetboxBase:AllowFilterCollections>false</ZetboxBase:AllowFilterCollections>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2018-12-21T08:26:22.636718Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_CreatedOn(PrivateKey obj, PropertyGetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_CreatedOn(PrivateKey obj, PropertyPreSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_CreatedOn(PrivateKey obj, PropertyPostSetterEventArgs&lt;DateTime&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_CreatedOn(PrivateKey obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.CreatedOn == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultValue>0055abbe-8e34-4bde-befd-d38604d63456</ZetboxBase:DefaultValue>
+    <ZetboxBase:Description>Date and time where this object was created</ZetboxBase:Description>
+    <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
+    <ZetboxBase:Name>CreatedOn</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>40673c91-596b-4c4a-aabc-c94a14434194</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>5</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>fc74b434-3801-4e4a-ab67-e65a9e014005</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:DateTimeProperty>
+  <ZetboxBase:StringProperty ExportGuid="69f742f2-43b2-470a-b168-2931045717d0">
+    <ZetboxBase:AllowFilterCollections>false</ZetboxBase:AllowFilterCollections>
+    <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2018-12-21T08:25:31.312988Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_Description(PrivateKey obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Description(PrivateKey obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Description(PrivateKey obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Description(PrivateKey obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Description == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2018-12-21T08:22:27.982735Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
+    <ZetboxBase:Name>Description</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>40673c91-596b-4c4a-aabc-c94a14434194</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>1</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:StringProperty>
+  <ZetboxBase:BoolProperty ExportGuid="3398cbdb-adf7-40fe-a0fe-c981ae1fe93a">
+    <ZetboxBase:AllowFilterCollections>false</ZetboxBase:AllowFilterCollections>
+    <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2018-12-21T08:26:22.636718Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_IsDeactivated(PrivateKey obj, PropertyGetterEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_IsDeactivated(PrivateKey obj, PropertyPreSetterEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_IsDeactivated(PrivateKey obj, PropertyPostSetterEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_IsDeactivated(PrivateKey obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.IsDeactivated == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultValue>4d0161b0-8259-4781-82e6-76896aead5bf</ZetboxBase:DefaultValue>
+    <ZetboxBase:Description>If true, the item will be hidden in any search</ZetboxBase:Description>
+    <ZetboxBase:Label>Is deactivated</ZetboxBase:Label>
+    <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
+    <ZetboxBase:Name>IsDeactivated</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>40673c91-596b-4c4a-aabc-c94a14434194</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>10</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>09d1f453-d0d9-429e-88e7-e84b33de7c2e</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:BoolProperty>
+  <ZetboxBase:StringProperty ExportGuid="86e8eff6-4e23-4837-a812-7586f303e761">
+    <ZetboxBase:AllowFilterCollections>false</ZetboxBase:AllowFilterCollections>
+    <ZetboxBase:CategoryTags>Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2018-12-21T08:26:22.636718Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_Password(PrivateKey obj, PropertyGetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_Password(PrivateKey obj, PropertyPreSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_Password(PrivateKey obj, PropertyPostSetterEventArgs&lt;string&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_Password(PrivateKey obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.Password == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2018-12-21T08:25:31.312988Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
+    <ZetboxBase:Name>Password</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>40673c91-596b-4c4a-aabc-c94a14434194</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>4</ZetboxBase:Properties_pos>
+    <GUI:RequestedKind>2f6233fe-6fd6-4145-b438-64cc85f89fd8</GUI:RequestedKind>
+    <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:StringProperty>
+  <ZetboxBase:Relation ExportGuid="14d089bb-9cfb-4307-a9d5-1b4f55fe0807">
+    <ZetboxBase:A>c33dd104-f8a4-4fed-ab6c-64c57e978ee9</ZetboxBase:A>
+    <ZetboxBase:B>d9081901-fbd3-4153-8250-4f9e88d629ba</ZetboxBase:B>
+    <ZetboxBase:ChangedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:Containment>0</ZetboxBase:Containment>
+    <ZetboxBase:CreatedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
+    <ZetboxBase:Storage>1</ZetboxBase:Storage>
+    <ZetboxBase:Verb>was</ZetboxBase:Verb>
+  </ZetboxBase:Relation>
+  <ZetboxBase:Relation ExportGuid="7ab47663-cdfe-4ca7-a852-8b00ed585cbf">
+    <ZetboxBase:A>c8fd0721-2615-4490-8af2-869fdc888926</ZetboxBase:A>
+    <ZetboxBase:B>7517b055-0c05-46ac-bbb5-07d9f2066053</ZetboxBase:B>
+    <ZetboxBase:ChangedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:Containment>0</ZetboxBase:Containment>
+    <ZetboxBase:CreatedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
+    <ZetboxBase:Storage>1</ZetboxBase:Storage>
+    <ZetboxBase:Verb>was</ZetboxBase:Verb>
+  </ZetboxBase:Relation>
+  <ZetboxBase:Relation ExportGuid="131e0c96-e9bd-42bb-9971-d6073eca441e">
+    <ZetboxBase:A>531ff209-c27b-430b-8b55-4612aaa933a3</ZetboxBase:A>
+    <ZetboxBase:B>cbee11c1-bacc-4902-b994-96ca07faa114</ZetboxBase:B>
+    <ZetboxBase:ChangedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:Containment>0</ZetboxBase:Containment>
+    <ZetboxBase:CreatedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
+    <ZetboxBase:Storage>1</ZetboxBase:Storage>
+    <ZetboxBase:Verb>was</ZetboxBase:Verb>
+  </ZetboxBase:Relation>
+  <ZetboxBase:Relation ExportGuid="56cf4a79-a8eb-49b4-9cdf-45600b477e05">
+    <ZetboxBase:A>ac2303eb-8b39-4c93-aede-f82646dc2fe5</ZetboxBase:A>
+    <ZetboxBase:B>6061fff2-389f-45e5-a681-8ea9ac69c767</ZetboxBase:B>
+    <ZetboxBase:ChangedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:Containment>0</ZetboxBase:Containment>
+    <ZetboxBase:CreatedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
+    <ZetboxBase:Storage>1</ZetboxBase:Storage>
+    <ZetboxBase:Verb>was</ZetboxBase:Verb>
+  </ZetboxBase:Relation>
+  <ZetboxBase:RelationEnd ExportGuid="7517b055-0c05-46ac-bbb5-07d9f2066053">
+    <ZetboxBase:BParent>7ab47663-cdfe-4ca7-a852-8b00ed585cbf</ZetboxBase:BParent>
+    <ZetboxBase:ChangedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:Multiplicity>1</ZetboxBase:Multiplicity>
+    <ZetboxBase:RoleName>ChangedBy</ZetboxBase:RoleName>
+    <ZetboxBase:Type>31d8890a-67fc-4a78-9d35-9ff0b9e09b4c</ZetboxBase:Type>
+  </ZetboxBase:RelationEnd>
+  <ZetboxBase:RelationEnd ExportGuid="cbee11c1-bacc-4902-b994-96ca07faa114">
+    <ZetboxBase:BParent>131e0c96-e9bd-42bb-9971-d6073eca441e</ZetboxBase:BParent>
+    <ZetboxBase:ChangedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:Multiplicity>1</ZetboxBase:Multiplicity>
+    <ZetboxBase:RoleName>ChangedBy</ZetboxBase:RoleName>
+    <ZetboxBase:Type>31d8890a-67fc-4a78-9d35-9ff0b9e09b4c</ZetboxBase:Type>
+  </ZetboxBase:RelationEnd>
+  <ZetboxBase:RelationEnd ExportGuid="6061fff2-389f-45e5-a681-8ea9ac69c767">
+    <ZetboxBase:BParent>56cf4a79-a8eb-49b4-9cdf-45600b477e05</ZetboxBase:BParent>
+    <ZetboxBase:ChangedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:Multiplicity>1</ZetboxBase:Multiplicity>
+    <ZetboxBase:RoleName>CreatedBy</ZetboxBase:RoleName>
+    <ZetboxBase:Type>31d8890a-67fc-4a78-9d35-9ff0b9e09b4c</ZetboxBase:Type>
+  </ZetboxBase:RelationEnd>
+  <ZetboxBase:RelationEnd ExportGuid="d9081901-fbd3-4153-8250-4f9e88d629ba">
+    <ZetboxBase:BParent>14d089bb-9cfb-4307-a9d5-1b4f55fe0807</ZetboxBase:BParent>
+    <ZetboxBase:ChangedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:Multiplicity>1</ZetboxBase:Multiplicity>
+    <ZetboxBase:RoleName>CreatedBy</ZetboxBase:RoleName>
+    <ZetboxBase:Type>31d8890a-67fc-4a78-9d35-9ff0b9e09b4c</ZetboxBase:Type>
+  </ZetboxBase:RelationEnd>
+  <ZetboxBase:RelationEnd ExportGuid="c33dd104-f8a4-4fed-ab6c-64c57e978ee9">
+    <ZetboxBase:AParent>14d089bb-9cfb-4307-a9d5-1b4f55fe0807</ZetboxBase:AParent>
+    <ZetboxBase:ChangedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:Multiplicity>3</ZetboxBase:Multiplicity>
+    <ZetboxBase:Navigator>19c92597-0c31-4b78-9747-673ccbe04612</ZetboxBase:Navigator>
+    <ZetboxBase:RoleName>License</ZetboxBase:RoleName>
+    <ZetboxBase:Type>dba4beb1-acfb-45f5-9261-6486536016f6</ZetboxBase:Type>
+  </ZetboxBase:RelationEnd>
+  <ZetboxBase:RelationEnd ExportGuid="c8fd0721-2615-4490-8af2-869fdc888926">
+    <ZetboxBase:AParent>7ab47663-cdfe-4ca7-a852-8b00ed585cbf</ZetboxBase:AParent>
+    <ZetboxBase:ChangedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:Multiplicity>3</ZetboxBase:Multiplicity>
+    <ZetboxBase:Navigator>7bfbe8d0-5cea-4aa6-8a89-0ea91770fb82</ZetboxBase:Navigator>
+    <ZetboxBase:RoleName>License</ZetboxBase:RoleName>
+    <ZetboxBase:Type>dba4beb1-acfb-45f5-9261-6486536016f6</ZetboxBase:Type>
+  </ZetboxBase:RelationEnd>
+  <ZetboxBase:RelationEnd ExportGuid="531ff209-c27b-430b-8b55-4612aaa933a3">
+    <ZetboxBase:AParent>131e0c96-e9bd-42bb-9971-d6073eca441e</ZetboxBase:AParent>
+    <ZetboxBase:ChangedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:Multiplicity>3</ZetboxBase:Multiplicity>
+    <ZetboxBase:Navigator>90b012c1-d559-4790-a95a-7073e8d9ac63</ZetboxBase:Navigator>
+    <ZetboxBase:RoleName>PrivateKey</ZetboxBase:RoleName>
+    <ZetboxBase:Type>40673c91-596b-4c4a-aabc-c94a14434194</ZetboxBase:Type>
+  </ZetboxBase:RelationEnd>
+  <ZetboxBase:RelationEnd ExportGuid="ac2303eb-8b39-4c93-aede-f82646dc2fe5">
+    <ZetboxBase:AParent>56cf4a79-a8eb-49b4-9cdf-45600b477e05</ZetboxBase:AParent>
+    <ZetboxBase:ChangedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:Multiplicity>3</ZetboxBase:Multiplicity>
+    <ZetboxBase:Navigator>43ad6d2a-2b08-4f1a-b1e9-1882071fc570</ZetboxBase:Navigator>
+    <ZetboxBase:RoleName>PrivateKey</ZetboxBase:RoleName>
+    <ZetboxBase:Type>40673c91-596b-4c4a-aabc-c94a14434194</ZetboxBase:Type>
+  </ZetboxBase:RelationEnd>
+  <ZetboxBase:ClientReadOnlyConstraint ExportGuid="500a2d1b-afd1-4475-8203-7fd330b8c4ba">
+    <ZetboxBase:ChangedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>7bfbe8d0-5cea-4aa6-8a89-0ea91770fb82</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:ClientReadOnlyConstraint>
+  <ZetboxBase:ClientReadOnlyConstraint ExportGuid="0e789357-fdc2-43da-9fd0-40f9fe9edb99">
+    <ZetboxBase:ChangedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>d02c4d91-59dd-4f4a-93cf-85669295c164</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:ClientReadOnlyConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="14aea10b-9385-44cf-a3e9-aeba8b6bc38e">
+    <ZetboxBase:ChangedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>d02c4d91-59dd-4f4a-93cf-85669295c164</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:ClientReadOnlyConstraint ExportGuid="76b33a1c-b12d-4f5e-83b7-212d8976091c">
+    <ZetboxBase:ChangedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>19c92597-0c31-4b78-9747-673ccbe04612</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:ClientReadOnlyConstraint>
+  <ZetboxBase:ClientReadOnlyConstraint ExportGuid="f0e6064d-13ff-419d-8026-66029c588187">
+    <ZetboxBase:ChangedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>a25fd55e-1982-4d02-bd29-22e8f8b1c451</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:ClientReadOnlyConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="4b146f16-8c3d-490e-8111-c4aa42fd214f">
+    <ZetboxBase:ChangedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>a25fd55e-1982-4d02-bd29-22e8f8b1c451</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="cdf987f3-015a-461b-9f33-cf89a657a83f">
+    <ZetboxBase:ChangedOn>2018-12-21T07:54:33.984427Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>bb043766-bd52-4e8f-b98a-6c35867db9e1</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2018-12-21T07:54:33.984427Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
+  <ZetboxBase:InitOnlyConstraint ExportGuid="8b432ee2-eb1f-4a57-b2c8-57e51a587ec0">
+    <ZetboxBase:ChangedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>ae35124b-5da8-4af2-a5e3-f0084cf690ad</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:InitOnlyConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="5f14cc20-1bb1-480e-806d-07142ef1221f">
+    <ZetboxBase:ChangedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>ae35124b-5da8-4af2-a5e3-f0084cf690ad</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="945b68c3-6a45-4190-b3ee-0b6b4412c547">
+    <ZetboxBase:ChangedOn>2019-01-08T11:31:25.937385Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>ccfbd6fd-24cf-4624-9d3e-9f47e2c6a1fa</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2019-01-08T11:31:25.937385Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="8ad5a1ad-5d5b-49bd-b270-cd46c6740b35">
+    <ZetboxBase:ChangedOn>2018-12-21T07:35:47.451788Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>86553c32-7f63-41f3-a3a2-28a5801935b9</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2018-12-21T07:35:47.451788Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="3babcf9b-94ad-4d3d-ad6b-22722e044bd3">
+    <ZetboxBase:ChangedOn>2018-12-21T07:35:47.451788Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>86553c32-7f63-41f3-a3a2-28a5801935b9</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2018-12-21T07:35:47.451788Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="e1d809c1-c5bf-4a0f-ae12-95b55eeadde1">
+    <ZetboxBase:ChangedOn>2018-12-21T07:37:47.449596Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>906bc74c-e8b8-4b51-83b3-597ca6062090</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2018-12-21T07:37:47.449596Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="9f5f5615-3d3f-4d71-ab66-3d7b308d32ce">
+    <ZetboxBase:ChangedOn>2018-12-21T07:37:47.449596Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>906bc74c-e8b8-4b51-83b3-597ca6062090</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2018-12-21T07:37:47.449596Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="e8750e10-71a5-486e-a467-1e2b0675800c">
+    <ZetboxBase:ChangedOn>2018-12-21T07:53:22.472066Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>e6c5b0a0-ed58-4ba1-bd23-ed24f315620d</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2018-12-21T07:53:22.472066Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
+  <ZetboxBase:ViewReadOnlyConstraint ExportGuid="95759167-b771-4880-9063-6829b99f9485">
+    <ZetboxBase:ChangedOn>2018-12-21T07:53:22.472066Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>e6c5b0a0-ed58-4ba1-bd23-ed24f315620d</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2018-12-21T07:53:22.472066Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:ViewReadOnlyConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="5a88f908-db66-4ce9-a982-4c522971bfc9">
+    <ZetboxBase:ChangedOn>2018-12-21T07:39:27.621713Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>b8d29d74-eb31-47d4-bca1-a4c4c0f93c1c</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2018-12-21T07:39:27.621713Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="f23333fd-71a9-4876-b810-ad90421d941e">
+    <ZetboxBase:ChangedOn>2018-12-21T07:39:27.621713Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>75a9ef4f-b914-47e2-ad0a-f2f63fd8c60f</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2018-12-21T07:39:27.621713Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:ClientReadOnlyConstraint ExportGuid="33b592ae-4c9d-4fcb-ae03-4bc30be3e810">
+    <ZetboxBase:ChangedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>3ea184f1-d6f7-4ceb-be7f-525da44ed3b4</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Reason>Auditing is managed on the server.</ZetboxBase:Reason>
+  </ZetboxBase:ClientReadOnlyConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="08b35f3b-7cd6-412d-ad3c-c9b3d4fa513c">
+    <ZetboxBase:ChangedOn>2018-12-21T08:22:27.982735Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>f5c7f0dc-9d99-4e24-bb70-84de196659f7</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2018-12-21T08:22:27.982735Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="ddafc161-62ef-4178-ad21-f5bad0c56272">
+    <ZetboxBase:ChangedOn>2018-12-21T08:22:27.982735Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>f5c7f0dc-9d99-4e24-bb70-84de196659f7</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2018-12-21T08:22:27.982735Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
+  <ZetboxBase:ClientReadOnlyConstraint ExportGuid="9a776172-7391-4e4e-ab6b-554772ba876f">
+    <ZetboxBase:ChangedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>90b012c1-d559-4790-a95a-7073e8d9ac63</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:ClientReadOnlyConstraint>
+  <ZetboxBase:ClientReadOnlyConstraint ExportGuid="42aa2eea-b474-420e-a519-9a4bd3ffd3cd">
+    <ZetboxBase:ChangedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>ab81f118-d3c5-48e8-b8b2-c921901b7d44</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:ClientReadOnlyConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="7e48ea0b-d73a-4584-8620-cf9a082218eb">
+    <ZetboxBase:ChangedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>ab81f118-d3c5-48e8-b8b2-c921901b7d44</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:ClientReadOnlyConstraint ExportGuid="40b0ce19-697e-4dee-9606-157a1f2381de">
+    <ZetboxBase:ChangedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>43ad6d2a-2b08-4f1a-b1e9-1882071fc570</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:ClientReadOnlyConstraint>
+  <ZetboxBase:ClientReadOnlyConstraint ExportGuid="04311d13-b7ab-4fce-b9a8-031886348486">
+    <ZetboxBase:ChangedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>00d47e8e-ddb9-4c8d-91a8-ff17ed11800c</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:ClientReadOnlyConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="317674a8-c313-402d-ae94-7c93e187f5fc">
+    <ZetboxBase:ChangedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>00d47e8e-ddb9-4c8d-91a8-ff17ed11800c</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="54480f22-628a-4396-bbfc-71243b4aa166">
+    <ZetboxBase:ChangedOn>2018-12-21T08:22:27.982735Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>69f742f2-43b2-470a-b168-2931045717d0</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2018-12-21T08:22:27.982735Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="45299405-8d1c-4dad-b9df-d10722d1a137">
+    <ZetboxBase:ChangedOn>2018-12-21T08:22:27.982735Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>69f742f2-43b2-470a-b168-2931045717d0</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2018-12-21T08:22:27.982735Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="a91a3ca8-0ff9-48ea-a71d-561526e469af">
+    <ZetboxBase:ChangedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>3398cbdb-adf7-40fe-a0fe-c981ae1fe93a</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
+  <ZetboxBase:StringRangeConstraint ExportGuid="83f31881-cc0c-4077-812e-0c456aae45d0">
+    <ZetboxBase:ChangedOn>2018-12-21T08:25:31.312988Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>86e8eff6-4e23-4837-a812-7586f303e761</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2018-12-21T08:25:31.312988Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
+  </ZetboxBase:StringRangeConstraint>
+  <ZetboxBase:IndexConstraint ExportGuid="24de9853-117f-410b-b789-c90b69aeb8dd">
+    <ZetboxBase:Constrained>dba4beb1-acfb-45f5-9261-6486536016f6</ZetboxBase:Constrained>
+    <ZetboxBase:Reason>ExportGuid must be unique</ZetboxBase:Reason>
+    <ZetboxBase:IsUnique>true</ZetboxBase:IsUnique>
+  </ZetboxBase:IndexConstraint>
+  <ZetboxBase:UniqueContraints_ensures_unique_on_Properties_RelationEntry ExportGuid="22c57462-7d19-41d3-b2c8-a84b2d970fe3">
+    <ZetboxBase:A>24de9853-117f-410b-b789-c90b69aeb8dd</ZetboxBase:A>
+    <ZetboxBase:B>ae35124b-5da8-4af2-a5e3-f0084cf690ad</ZetboxBase:B>
+  </ZetboxBase:UniqueContraints_ensures_unique_on_Properties_RelationEntry>
+  <ZetboxBase:CurrentDateTimeDefaultValue ExportGuid="2b447256-7eeb-49f5-a7d5-4b1164b153e8">
+    <ZetboxBase:ChangedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Property>d02c4d91-59dd-4f4a-93cf-85669295c164</ZetboxBase:Property>
+  </ZetboxBase:CurrentDateTimeDefaultValue>
+  <ZetboxBase:CurrentDateTimeDefaultValue ExportGuid="f2b7c622-bc12-4160-8047-422069893526">
+    <ZetboxBase:ChangedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Property>a25fd55e-1982-4d02-bd29-22e8f8b1c451</ZetboxBase:Property>
+  </ZetboxBase:CurrentDateTimeDefaultValue>
+  <ZetboxBase:NewGuidDefaultValue ExportGuid="da03c33c-7ae5-474a-8aec-447ea8273c22">
+    <ZetboxBase:ChangedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2018-12-21T07:34:00.736815Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Property>ae35124b-5da8-4af2-a5e3-f0084cf690ad</ZetboxBase:Property>
+  </ZetboxBase:NewGuidDefaultValue>
+  <ZetboxBase:CurrentDateTimeDefaultValue ExportGuid="8f500caf-c8bc-4ef7-b365-2b04df8cbe33">
+    <ZetboxBase:ChangedOn>2018-12-21T07:39:27.621713Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2018-12-21T07:39:27.621713Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Property>b8d29d74-eb31-47d4-bca1-a4c4c0f93c1c</ZetboxBase:Property>
+  </ZetboxBase:CurrentDateTimeDefaultValue>
+  <ZetboxBase:CurrentDateTimeDefaultValue ExportGuid="765887f3-e420-4630-921e-c7b2a5d5a28a">
+    <ZetboxBase:ChangedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Property>ab81f118-d3c5-48e8-b8b2-c921901b7d44</ZetboxBase:Property>
+  </ZetboxBase:CurrentDateTimeDefaultValue>
+  <ZetboxBase:CurrentDateTimeDefaultValue ExportGuid="0055abbe-8e34-4bde-befd-d38604d63456">
+    <ZetboxBase:ChangedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Property>00d47e8e-ddb9-4c8d-91a8-ff17ed11800c</ZetboxBase:Property>
+  </ZetboxBase:CurrentDateTimeDefaultValue>
+  <ZetboxBase:BoolDefaultValue ExportGuid="4d0161b0-8259-4781-82e6-76896aead5bf">
+    <ZetboxBase:ChangedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2018-12-21T08:20:18.110295Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Property>3398cbdb-adf7-40fe-a0fe-c981ae1fe93a</ZetboxBase:Property>
+    <ZetboxBase:BoolValue>false</ZetboxBase:BoolValue>
+  </ZetboxBase:BoolDefaultValue>
+  <ZetboxBase:Method ExportGuid="b6dd86e3-d5a8-438b-9abd-e1af540d14dc">
+    <ZetboxBase:ChangedOn>2018-12-21T11:15:48.265269Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void Check(License obj, MethodReturnEventArgs&lt;bool&gt; e, &lt;no type set&gt; certificate)
+{
+}
+
+[Invocation]
+public static void CheckCanExec(License obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void CheckCanExecReason(License obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2018-12-21T08:08:02.364685Z</ZetboxBase:CreatedOn>
+    <GUI:Icon>b2c884fb-87a7-4abe-9893-be4ef2cd4888</GUI:Icon>
+    <ZetboxBase:InvokeOnServer>false</ZetboxBase:InvokeOnServer>
+    <GUI:IsDisplayable>false</GUI:IsDisplayable>
+    <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
+    <ZetboxBase:Name>Check</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>dba4beb1-acfb-45f5-9261-6486536016f6</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="c83f0514-3732-466e-a7d7-2d953627ab80">
+    <ZetboxBase:ChangedOn>2018-12-21T11:15:48.265269Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void IsSignatureValid(License obj, MethodReturnEventArgs&lt;bool&gt; e, System.Object certificate)
+{
+}
+
+[Invocation]
+public static void IsSignatureValidCanExec(License obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void IsSignatureValidCanExecReason(License obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2018-12-21T08:16:16.520227Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Checks, if the signature is valid</ZetboxBase:Description>
+    <GUI:Icon>b2c884fb-87a7-4abe-9893-be4ef2cd4888</GUI:Icon>
+    <ZetboxBase:InvokeOnServer>false</ZetboxBase:InvokeOnServer>
+    <GUI:IsDisplayable>false</GUI:IsDisplayable>
+    <ZetboxBase:Label>Is signature valid</ZetboxBase:Label>
+    <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
+    <ZetboxBase:Name>IsSignatureValid</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>dba4beb1-acfb-45f5-9261-6486536016f6</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="4627b2a1-5858-44fd-a952-41bbad3d0afc">
+    <ZetboxBase:ChangedOn>2018-12-21T11:15:48.265269Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void IsValid(License obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void IsValidCanExec(License obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void IsValidCanExecReason(License obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2018-12-21T08:14:02.934227Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Checks, if the time range is valid</ZetboxBase:Description>
+    <GUI:Icon>b2c884fb-87a7-4abe-9893-be4ef2cd4888</GUI:Icon>
+    <ZetboxBase:InvokeOnServer>false</ZetboxBase:InvokeOnServer>
+    <GUI:IsDisplayable>false</GUI:IsDisplayable>
+    <ZetboxBase:Label>Is valid</ZetboxBase:Label>
+    <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
+    <ZetboxBase:Name>IsValid</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>dba4beb1-acfb-45f5-9261-6486536016f6</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="cd865690-c5d1-4391-911c-524be49b2a7c">
+    <ZetboxBase:ChangedOn>2018-12-21T11:15:48.265269Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void Sign(License obj, Zetbox.App.LicenseManagement.PrivateKey certificate)
+{
+}
+
+[Invocation]
+public static void SignCanExec(License obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void SignCanExecReason(License obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2018-12-21T08:17:38.536991Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Signs this certificate</ZetboxBase:Description>
+    <GUI:Icon>06c147be-8345-4699-9a7d-a74fd866abab</GUI:Icon>
+    <ZetboxBase:InvokeOnServer>false</ZetboxBase:InvokeOnServer>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
+    <ZetboxBase:Name>Sign</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>dba4beb1-acfb-45f5-9261-6486536016f6</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="eb53e9ca-fde9-419c-9b04-772faa0f4bbb">
+    <ZetboxBase:ChangedOn>2018-12-21T10:59:24.399844Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void Load(PrivateKey obj)
+{
+}
+
+[Invocation]
+public static void LoadCanExec(PrivateKey obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void LoadCanExecReason(PrivateKey obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2018-12-21T08:32:19.743907Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Asks the user to open a file and loads the certificate</ZetboxBase:Description>
+    <GUI:Icon>f1f14c5c-4cbd-499e-a388-3cf56aa80a11</GUI:Icon>
+    <ZetboxBase:InvokeOnServer>false</ZetboxBase:InvokeOnServer>
+    <GUI:IsDisplayable>true</GUI:IsDisplayable>
+    <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
+    <ZetboxBase:Name>Load</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>40673c91-596b-4c4a-aabc-c94a14434194</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
+  <ZetboxBase:Method ExportGuid="665418f2-f40e-4028-bb99-c3d3cecca194">
+    <ZetboxBase:ChangedOn>2018-12-21T10:59:24.399844Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void LoadFromFile(PrivateKey obj, string file)
+{
+}
+
+[Invocation]
+public static void LoadFromFileCanExec(PrivateKey obj, MethodReturnEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void LoadFromFileCanExecReason(PrivateKey obj, MethodReturnEventArgs&lt;string&gt; e)
+{
+}
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2018-12-21T10:58:27.876177Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Loads a certificate from file</ZetboxBase:Description>
+    <ZetboxBase:InvokeOnServer>false</ZetboxBase:InvokeOnServer>
+    <GUI:IsDisplayable>false</GUI:IsDisplayable>
+    <ZetboxBase:Module>26607d55-07ac-4c08-825d-cb37980c062a</ZetboxBase:Module>
+    <ZetboxBase:Name>LoadFromFile</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>40673c91-596b-4c4a-aabc-c94a14434194</ZetboxBase:ObjectClass>
+  </ZetboxBase:Method>
+  <ZetboxBase:CLRObjectParameter ExportGuid="92ca01ab-2dee-4bc9-8f38-0c5acc47402a">
+    <ZetboxBase:ChangedOn>2018-12-21T08:12:52.158727Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2018-12-21T08:10:22.053629Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Certificate either as byte array or as X509Certificate class</ZetboxBase:Description>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>b6dd86e3-d5a8-438b-9abd-e1af540d14dc</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>1</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>certificate</ZetboxBase:Name>
+    <ZetboxBase:TypeRef>System.Object, mscorlib</ZetboxBase:TypeRef>
+  </ZetboxBase:CLRObjectParameter>
+  <ZetboxBase:BoolParameter ExportGuid="7e239916-f23a-4753-8e91-abb73058d255">
+    <ZetboxBase:ChangedOn>2018-12-21T08:08:44.877472Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2018-12-21T08:08:44.877472Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>true</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>b6dd86e3-d5a8-438b-9abd-e1af540d14dc</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>retVal</ZetboxBase:Name>
+  </ZetboxBase:BoolParameter>
+  <ZetboxBase:CLRObjectParameter ExportGuid="97959d58-e268-4de8-8995-c6b1e8c0ff66">
+    <ZetboxBase:ChangedOn>2018-12-21T08:16:16.520227Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2018-12-21T08:16:16.520227Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Description>Certificate either as byte array or as X509Certificate class</ZetboxBase:Description>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>c83f0514-3732-466e-a7d7-2d953627ab80</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>1</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>certificate</ZetboxBase:Name>
+    <ZetboxBase:TypeRef>System.Object, mscorlib</ZetboxBase:TypeRef>
+  </ZetboxBase:CLRObjectParameter>
+  <ZetboxBase:BoolParameter ExportGuid="c92a1fa3-ab91-42db-9ab9-161a3bc86aba">
+    <ZetboxBase:ChangedOn>2018-12-21T08:16:16.520227Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2018-12-21T08:16:16.520227Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>true</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>c83f0514-3732-466e-a7d7-2d953627ab80</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>retVal</ZetboxBase:Name>
+  </ZetboxBase:BoolParameter>
+  <ZetboxBase:BoolParameter ExportGuid="4b9084a1-4642-4318-8c29-52aed6950555">
+    <ZetboxBase:ChangedOn>2018-12-21T08:14:02.934227Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2018-12-21T08:14:02.934227Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>true</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>4627b2a1-5858-44fd-a952-41bbad3d0afc</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>retVal</ZetboxBase:Name>
+  </ZetboxBase:BoolParameter>
+  <ZetboxBase:ObjectReferenceParameter ExportGuid="0afe9d0a-6a15-49c0-9dfc-60ce4ad41047">
+    <ZetboxBase:ChangedOn>2018-12-21T08:35:17.9692Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2018-12-21T08:35:17.9692Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>cd865690-c5d1-4391-911c-524be49b2a7c</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>certificate</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>40673c91-596b-4c4a-aabc-c94a14434194</ZetboxBase:ObjectClass>
+  </ZetboxBase:ObjectReferenceParameter>
+  <ZetboxBase:StringParameter ExportGuid="9f66aa85-3b8a-4118-a9f0-dec7c5a63b78">
+    <ZetboxBase:ChangedOn>2018-12-21T10:58:27.876177Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2018-12-21T10:58:27.876177Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+    <ZetboxBase:IsNullable>false</ZetboxBase:IsNullable>
+    <ZetboxBase:IsReturnParameter>false</ZetboxBase:IsReturnParameter>
+    <ZetboxBase:Method>665418f2-f40e-4028-bb99-c3d3cecca194</ZetboxBase:Method>
+    <ZetboxBase:Parameter_pos>0</ZetboxBase:Parameter_pos>
+    <ZetboxBase:Name>file</ZetboxBase:Name>
+  </ZetboxBase:StringParameter>
   <ZetboxBase:Module ExportGuid="0fe1ab38-860a-414f-a599-b0b86a22ce1a">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.660236Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-03-30T06:47:44Z</ZetboxBase:CreatedOn>
