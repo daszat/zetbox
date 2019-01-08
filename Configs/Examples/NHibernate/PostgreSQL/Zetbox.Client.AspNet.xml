@@ -13,6 +13,7 @@
     </ConnectionStrings>
     <DocumentStore>DocumentStore\Server\</DocumentStore>
     <Modules>
+      <Module>Zetbox.Client.ClientModule, Zetbox.Client</Module>
       <Module>Zetbox.Server.ServerModule, Zetbox.Server</Module>
       <Module>Zetbox.DalProvider.NHibernate.NHibernateProvider, Zetbox.DalProvider.NHibernate</Module>
     </Modules>
