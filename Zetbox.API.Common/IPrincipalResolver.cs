@@ -41,7 +41,12 @@ namespace Zetbox.API.Common
         /// <param name="identity">a security principal</param>
         /// <returns>a Identity or null if none was found.</returns>
         ZetboxPrincipal Resolve(IIdentity identity);
-    }
+
+        /// <summary>
+        /// Clear the cache
+        /// </summary>
+        void ClearCache();
+    }    
 
     [Serializable]
     public class UnresolvablePrincipalException : Exception
@@ -149,6 +154,14 @@ namespace Zetbox.API.Common
             }
 
             return result;
+        }
+
+        void IPrincipalResolver.ClearCache()
+        {
+            lock (_lock)
+            {
+                _clearTime = DateTime.MinValue;
+            }
         }
     }
 }
