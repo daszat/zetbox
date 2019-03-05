@@ -35,5 +35,9 @@ namespace Zetbox.Client.Mocks
         {
             return null;
         }
+
+        void IPrincipalResolver.ClearCache()
+        {
+        }
     }
 }

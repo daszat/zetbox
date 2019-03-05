@@ -20,10 +20,24 @@ namespace Zetbox.App.Base
     using System.Text;
     using CryptSharp;
     using Zetbox.API;
+    using Zetbox.API.Common;
 
     [Implementor]
-    public static class IdentityActions
+    public class IdentityActions
     {
+        private static IPrincipalResolver _principalResolver;
+
+        public IdentityActions(IPrincipalResolver principalResolver)
+        {
+            _principalResolver = principalResolver;
+        }
+
+        [Invocation]
+        public static void NotifyPostSave(Identity obj)
+        {
+            _principalResolver.ClearCache();
+        }
+
         [Invocation]
         public static void ToString(Identity obj, MethodReturnEventArgs<string> e)
         {
