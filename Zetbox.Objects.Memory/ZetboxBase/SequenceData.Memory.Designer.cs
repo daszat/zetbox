@@ -18,7 +18,7 @@ namespace Zetbox.App.Base
     using Zetbox.DalProvider.Memory;
 
     /// <summary>
-    /// 
+    /// Holds the current Number of a database sequence
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("SequenceData")]
     public class SequenceDataMemoryImpl : Zetbox.DalProvider.Memory.DataObjectMemoryImpl, SequenceData

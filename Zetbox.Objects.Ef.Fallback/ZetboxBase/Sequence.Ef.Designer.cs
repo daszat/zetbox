@@ -762,12 +762,12 @@ namespace Zetbox.App.Base
         public static event PropertyIsValidHandler<Zetbox.App.Base.Sequence> OnIsContinuous_IsValid;
 
         /// <summary>
-        /// 
+        /// Module of the sequence. If a module is set, this sequence will be exported with the module. Otherwise it&apos;s treated as a zetbox instance specific sequence.
         /// </summary>
     /*
     Relation: FK_Sequence_has_Module
     A: ZeroOrMore Sequence as Sequence
-    B: One Module as Module
+    B: ZeroOrOne Module as Module
     Preferred Storage: MergeIntoA
     */
         // object reference property

@@ -712,7 +712,7 @@ namespace Zetbox.App.Base
         public static event PropertyIsValidHandler<Zetbox.App.Base.Sequence> OnIsContinuous_IsValid;
 
         /// <summary>
-        /// 
+        /// Module of the sequence. If a module is set, this sequence will be exported with the module. Otherwise it&apos;s treated as a zetbox instance specific sequence.
         /// </summary>
         // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ObjectReferencePropertyTemplate for Module
         // fkBackingName=this.Proxy.Module; fkGuidBackingName=_fk_guid_Module;

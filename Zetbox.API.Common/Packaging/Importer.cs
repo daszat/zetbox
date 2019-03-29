@@ -217,7 +217,7 @@ namespace Zetbox.App.Packaging
             Delete<DataType>(ctx(), doSubmit, c => c.GetQuery<DataType>().Where(i => i.Module.ID == moduleID), obj => { obj.ImplementsInterfaces.Clear(); });
 
             // Sequences
-            Delete<Sequence>(ctx(), doSubmit, c => c.GetQuery<Sequence>().Where(i => i.Module.ID == moduleID));
+            Delete<Sequence>(ctx(), doSubmit, c => c.GetQuery<Sequence>().Where(i => i.Module != null && i.Module.ID == moduleID));
 
             var localCtx = ctx();
             var icons = localCtx.GetQuery<Icon>().Where(i => i.Module.ID == moduleID).ToList();

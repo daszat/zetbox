@@ -93,7 +93,7 @@ namespace Zetbox.App.Packaging
                 .ToList().AsQueryable().ToList().OrderBy(i => i.A.ExportGuid).ThenBy(i => i.B.ExportGuid));
 
             // Sequences
-            AddMetaObjects(result, () => ctx.GetQuery<Sequence>().Where(i => i.Module.ID == moduleID)
+            AddMetaObjects(result, () => ctx.GetQuery<Sequence>().Where(i => i.Module != null && i.Module.ID == moduleID)
                 .ToList().OrderBy(i => i.Description).ThenBy(i => i.ExportGuid));
 
             return result;

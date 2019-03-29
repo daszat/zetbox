@@ -169,7 +169,7 @@
     <value>Module</value>
   </data>
   <data name="Module_description" xml:space="preserve">
-    <value />
+    <value>Module of the sequence. If a module is set, this sequence will be exported with the module. Otherwise it's treated as a zetbox instance specific sequence.</value>
   </data>
   <data name="Name_label" xml:space="preserve">
     <value>Name</value>

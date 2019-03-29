@@ -2195,6 +2195,10 @@ namespace Zetbox {
                             }
                             public static class WorkSchedule_Methods
                             {
+                                public static TypedGuid<global::Zetbox.App.Base.Method> Duplicate
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Method>("6dd4ffcb-f911-4dce-b58d-c6b2eb6ba335"); }
+                                }
                                 public static TypedGuid<global::Zetbox.App.Base.Method> GetOffDays
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.Method>("79e9a145-8d0d-400c-a3b8-875c9bda44e8"); }
@@ -2875,6 +2879,141 @@ namespace Zetbox {
                                 public static TypedGuid<global::Zetbox.App.Base.BoolProperty> IsCurrentYearDefault
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.BoolProperty>("495159f4-a983-4a2a-a8f1-2291647673fd"); }
+                                }
+                            }
+                        }
+                        public static class LicenseManagement
+                        {
+                            public static TypedGuid<global::Zetbox.App.Base.ObjectClass> License
+                            {
+                                get { return new TypedGuid<global::Zetbox.App.Base.ObjectClass>("dba4beb1-acfb-45f5-9261-6486536016f6"); }
+                            }
+                            public static TypedGuid<global::Zetbox.App.Base.ObjectClass> PrivateKey
+                            {
+                                get { return new TypedGuid<global::Zetbox.App.Base.ObjectClass>("40673c91-596b-4c4a-aabc-c94a14434194"); }
+                            }
+                            public static class License_Methods
+                            {
+                                public static TypedGuid<global::Zetbox.App.Base.Method> Check
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Method>("b6dd86e3-d5a8-438b-9abd-e1af540d14dc"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Method> IsSignatureValid
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Method>("c83f0514-3732-466e-a7d7-2d953627ab80"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Method> IsValid
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Method>("4627b2a1-5858-44fd-a952-41bbad3d0afc"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Method> Sign
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Method>("cd865690-c5d1-4391-911c-524be49b2a7c"); }
+                                }
+                            }
+                            public static class License_Properties
+                            {
+                                public static TypedGuid<global::Zetbox.App.Base.ObjectReferenceProperty> ChangedBy
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.ObjectReferenceProperty>("7bfbe8d0-5cea-4aa6-8a89-0ea91770fb82"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.DateTimeProperty> ChangedOn
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.DateTimeProperty>("d02c4d91-59dd-4f4a-93cf-85669295c164"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.ObjectReferenceProperty> CreatedBy
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.ObjectReferenceProperty>("19c92597-0c31-4b78-9747-673ccbe04612"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.DateTimeProperty> CreatedOn
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.DateTimeProperty>("a25fd55e-1982-4d02-bd29-22e8f8b1c451"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.StringProperty> Description
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.StringProperty>("bb043766-bd52-4e8f-b98a-6c35867db9e1"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.GuidProperty> ExportGuid
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.GuidProperty>("ae35124b-5da8-4af2-a5e3-f0084cf690ad"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.StringProperty> LicenseData
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.StringProperty>("ccfbd6fd-24cf-4624-9d3e-9f47e2c6a1fa"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.StringProperty> Licensee
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.StringProperty>("86553c32-7f63-41f3-a3a2-28a5801935b9"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.IntProperty> LicenseSubject
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.IntProperty>("fea12587-60b9-41c2-9123-6884dc7f51c6"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.StringProperty> Licensor
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.StringProperty>("906bc74c-e8b8-4b51-83b3-597ca6062090"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.StringProperty> Signature
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.StringProperty>("e6c5b0a0-ed58-4ba1-bd23-ed24f315620d"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.DateTimeProperty> ValidFrom
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.DateTimeProperty>("b8d29d74-eb31-47d4-bca1-a4c4c0f93c1c"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.DateTimeProperty> ValidThru
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.DateTimeProperty>("75a9ef4f-b914-47e2-ad0a-f2f63fd8c60f"); }
+                                }
+                            }
+                            public static class PrivateKey_Methods
+                            {
+                                public static TypedGuid<global::Zetbox.App.Base.Method> Load
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Method>("eb53e9ca-fde9-419c-9b04-772faa0f4bbb"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.Method> LoadFromFile
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.Method>("665418f2-f40e-4028-bb99-c3d3cecca194"); }
+                                }
+                            }
+                            public static class PrivateKey_Properties
+                            {
+                                public static TypedGuid<global::Zetbox.App.Base.CompoundObjectProperty> AuditJournal
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.CompoundObjectProperty>("3ea184f1-d6f7-4ceb-be7f-525da44ed3b4"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.StringProperty> Certificate
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.StringProperty>("f5c7f0dc-9d99-4e24-bb70-84de196659f7"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.ObjectReferenceProperty> ChangedBy
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.ObjectReferenceProperty>("90b012c1-d559-4790-a95a-7073e8d9ac63"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.DateTimeProperty> ChangedOn
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.DateTimeProperty>("ab81f118-d3c5-48e8-b8b2-c921901b7d44"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.ObjectReferenceProperty> CreatedBy
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.ObjectReferenceProperty>("43ad6d2a-2b08-4f1a-b1e9-1882071fc570"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.DateTimeProperty> CreatedOn
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.DateTimeProperty>("00d47e8e-ddb9-4c8d-91a8-ff17ed11800c"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.StringProperty> Description
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.StringProperty>("69f742f2-43b2-470a-b168-2931045717d0"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.BoolProperty> IsDeactivated
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.BoolProperty>("3398cbdb-adf7-40fe-a0fe-c981ae1fe93a"); }
+                                }
+                                public static TypedGuid<global::Zetbox.App.Base.StringProperty> Password
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.StringProperty>("86e8eff6-4e23-4837-a812-7586f303e761"); }
                                 }
                             }
                         }
@@ -4484,6 +4623,10 @@ namespace Zetbox {
                 public static TypedGuid<global::Zetbox.App.Base.Group> Everyone
                 {
                     get { return new TypedGuid<global::Zetbox.App.Base.Group>("76d43cf2-4ddf-4a3a-9ad6-28cabfdddff1"); }
+                }
+                public static TypedGuid<global::Zetbox.App.Base.Group> WorkScheduleAdmin
+                {
+                    get { return new TypedGuid<global::Zetbox.App.Base.Group>("350c90b7-e68f-441c-9c67-cc9119a3c7ce"); }
                 }
             }
             public static class Sequences

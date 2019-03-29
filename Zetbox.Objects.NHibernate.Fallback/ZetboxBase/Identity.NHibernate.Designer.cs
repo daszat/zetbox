@@ -1048,6 +1048,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
             // should fetch && remember parent for FilterConfiguration_was_CreatedBy_RelationEntry
             // should fetch && remember parent for Kunde_was_ChangedBy_RelationEntry
             // should fetch && remember parent for Kunde_was_CreatedBy_RelationEntry
+            // should fetch && remember parent for License_was_ChangedBy_RelationEntry
+            // should fetch && remember parent for License_was_CreatedBy_RelationEntry
             // should fetch && remember parent for LstCfg_of_Owner_RelationEntry
             // should fetch && remember parent for Method_was_ChangedBy_RelationEntry
             // should fetch && remember parent for Method_was_CreatedBy_RelationEntry
@@ -1060,6 +1062,8 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Identity> OnGroup
             // should fetch && remember parent for Module_was_CreatedBy_RelationEntry
             // should fetch && remember parent for NavigationScreen_was_ChangedBy_RelationEntry
             // should fetch && remember parent for NavigationScreen_was_CreatedBy_RelationEntry
+            // should fetch && remember parent for PrivateKey_was_ChangedBy_RelationEntry
+            // should fetch && remember parent for PrivateKey_was_CreatedBy_RelationEntry
             // should fetch && remember parent for Projekt_was_ChangedBy_RelationEntry
             // should fetch && remember parent for Projekt_was_CreatedBy_RelationEntry
             // should fetch && remember parent for Property_was_ChangedBy_RelationEntry

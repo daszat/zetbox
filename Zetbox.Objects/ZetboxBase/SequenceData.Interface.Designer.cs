@@ -8,7 +8,7 @@ namespace Zetbox.App.Base
     using Zetbox.API;
 
     /// <summary>
-    /// 
+    /// Holds the current Number of a database sequence
     /// </summary>
     [Zetbox.API.DefinitionGuid("6efc1387-cffc-4cff-9af3-19365d888f4b")]
     public interface SequenceData : IDataObject 

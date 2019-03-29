@@ -2500,7 +2500,7 @@ using Zetbox.DalProvider.Ef;
 	/*
     Relation: FK_Sequence_has_Module
     A: ZeroOrMore Sequence as Sequence
-    B: One Module as Module
+    B: ZeroOrOne Module as Module
     Preferred Storage: MergeIntoA
 	*/
 
