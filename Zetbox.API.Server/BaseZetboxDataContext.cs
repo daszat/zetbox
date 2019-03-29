@@ -940,7 +940,11 @@ namespace Zetbox.API.Server
         private Sequence GetSequence(Guid sequenceGuid)
         {
             if (sequenceGuid == Guid.Empty) throw new ArgumentNullException("sequenceGuid");
+            // First, check the faster frozen context
             var s = lazyCtx().FindPersistenceObject<Sequence>(sequenceGuid);
+            // Then, if not found, check the database
+            if (s == null) s = FindPersistenceObject<Sequence>(sequenceGuid);
+            // Fail, if no sequence was found
             if (s == null) throw new ArgumentOutOfRangeException("sequenceGuid");
             return s;
         }
