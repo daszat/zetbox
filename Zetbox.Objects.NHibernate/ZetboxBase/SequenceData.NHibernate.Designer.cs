@@ -19,7 +19,7 @@ namespace Zetbox.App.Base
     using Zetbox.DalProvider.NHibernate;
 
     /// <summary>
-    /// 
+    /// Holds the current Number of a database sequence
     /// </summary>
     [System.Diagnostics.DebuggerDisplay("SequenceData")]
     public class SequenceDataNHibernateImpl : Zetbox.DalProvider.NHibernate.DataObjectNHibernateImpl, SequenceData

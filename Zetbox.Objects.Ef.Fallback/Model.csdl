@@ -1378,7 +1378,7 @@
                         Relationship="Model.FK_Sequence_has_Data"
                         FromRole="Sequence"
                         ToRole="Data" />
-    <Property Name="Description" Type="String" Nullable="false" MaxLength="2147483647"  />
+    <Property Name="Description" Type="String" Nullable="true" MaxLength="2147483647"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
     <Property Name="IsContinuous" Type="Boolean" Nullable="false"  />
     <NavigationProperty Name="ModuleImpl"

@@ -20,7 +20,7 @@ namespace Zetbox.App.Base
     using Zetbox.DalProvider.Ef;
 
     /// <summary>
-    /// 
+    /// Holds the current Number of a database sequence
     /// </summary>
     [EdmEntityType(NamespaceName="Model", Name="SequenceDataEfImpl")]
     [System.Diagnostics.DebuggerDisplay("SequenceData")]

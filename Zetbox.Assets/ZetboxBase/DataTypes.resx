@@ -1093,7 +1093,7 @@
     <value>SequenceData</value>
   </data>
   <data name="Zetbox.App.Base.SequenceData_description" xml:space="preserve">
-    <value />
+    <value>Holds the current Number of a database sequence</value>
   </data>
   <data name="Zetbox.App.Base.ServiceDescriptor" xml:space="preserve">
     <value>ServiceDescriptor</value>

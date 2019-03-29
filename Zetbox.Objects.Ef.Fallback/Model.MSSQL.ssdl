@@ -1432,6 +1432,26 @@
     <Property Name="PLZ" Type="nvarchar" MaxLength="10" Nullable="false" />
   </EntityType>
 	
+  <EntityType Name="License">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_ChangedBy" Type="int" />
+    <Property Name="fk_CreatedBy" Type="int" />
+    <Property Name="ChangedOn" Type="datetime2" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" Nullable="true" />
+    <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="LicenseData" Type="nvarchar" Nullable="true" />
+    <Property Name="Licensee" Type="nvarchar" Nullable="false" />
+    <Property Name="LicenseSubject" Type="int" Nullable="true" />
+    <Property Name="Licensor" Type="nvarchar" Nullable="false" />
+    <Property Name="Signature" Type="nvarchar" Nullable="true" />
+    <Property Name="ValidFrom" Type="datetime2" Nullable="false" />
+    <Property Name="ValidThru" Type="datetime2" Nullable="false" />
+  </EntityType>
+	
   <EntityType Name="Method">
     <Key>
       <PropertyRef Name="ID" />
@@ -1671,6 +1691,21 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="SomeInt" Type="int" Nullable="true" />
+  </EntityType>
+	
+  <EntityType Name="PrivateKey">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="fk_ChangedBy" Type="int" />
+    <Property Name="fk_CreatedBy" Type="int" />
+    <Property Name="Certificate" Type="nvarchar" Nullable="false" />
+    <Property Name="ChangedOn" Type="datetime2" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" Nullable="false" />
+    <Property Name="IsDeactivated" Type="bit" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" Nullable="true" />
   </EntityType>
 	
   <EntityType Name="Projekt">
@@ -1964,7 +1999,7 @@
     <Property Name="fk_CreatedBy" Type="int" />
     <Property Name="ChangedOn" Type="datetime2" Nullable="false" />
     <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
-    <Property Name="Description" Type="nvarchar" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" Nullable="true" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="IsContinuous" Type="bit" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
