@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2019-03-29T21:41:16.2215215Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2019-04-15T07:33:44.5700533Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="a56d9701-d98e-49ab-bd49-a491d09e2d46">
     <ZetboxBase:ChangedOn>2011-08-06T08:30:47.664236Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
@@ -5909,6 +5909,7 @@ public static void ObjectIsValid(TPHDerivedBObj obj, ObjectIsValidEventArgs e)
     <ZetboxBase:Enumeration>67b48828-e7d2-4432-a942-88e96d74b40a</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>100</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>First</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>0</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="c8403ba5-7e86-4b0f-b9a5-47720cd79b48">
@@ -5918,6 +5919,7 @@ public static void ObjectIsValid(TPHDerivedBObj obj, ObjectIsValidEventArgs e)
     <ZetboxBase:Enumeration>67b48828-e7d2-4432-a942-88e96d74b40a</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>200</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Second</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>1</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="93bac9f3-c4c6-4ed2-9c93-0f4575200333">
@@ -5926,6 +5928,7 @@ public static void ObjectIsValid(TPHDerivedBObj obj, ObjectIsValidEventArgs e)
     <ZetboxBase:Enumeration>67b48828-e7d2-4432-a942-88e96d74b40a</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>201</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Third</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>3</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry ExportGuid="d1d2b3ef-b90d-469b-8cec-2807e83a1b41">

@@ -4832,6 +4832,10 @@
                   column="`Name`" 
                   optimistic-lock="false"/>
         <!-- ValueTypeProperty isValue -->
+        <property name="NotSelectable" 
+                  column="`NotSelectable`" 
+                  optimistic-lock="false"/>
+        <!-- ValueTypeProperty isValue -->
         <property name="Value" 
                   column="`Value`" 
                   optimistic-lock="false"/>

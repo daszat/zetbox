@@ -1581,6 +1581,7 @@
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
     <Property Name="Label" Type="String" Nullable="true" MaxLength="200"  />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="200"  />
+    <Property Name="NotSelectable" Type="Boolean" Nullable="false"  />
     <Property Name="Value" Type="Int32" Nullable="false"  />
   </EntityType>
   <EntityType Name="EventEfImpl">

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2019-03-29T21:40:11.9289951Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2019-04-15T07:32:34.8749933Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -36157,7 +36157,7 @@ public static void ObjectIsValid(EnumDefaultValue obj, ObjectIsValidEventArgs e)
     <ZetboxBase:TableName>EnumDefaultValues</ZetboxBase:TableName>
   </ZetboxBase:ObjectClass>
   <ZetboxBase:ObjectClass ExportGuid="ee475de2-d626-49e9-9e40-6bb12cb026d4">
-    <ZetboxBase:ChangedOn>2013-11-12T09:04:43.281613Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2019-04-15T07:31:47.862134Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <GUI:DefaultIcon>0f4acffa-6dc8-4d87-89ee-2d21cfa3d088</GUI:DefaultIcon>
     <ZetboxBase:Description>Metadefinition Object for Enumerations.</ZetboxBase:Description>
@@ -36198,7 +36198,7 @@ public static void ObjectIsValid(Enumeration obj, ObjectIsValidEventArgs e)
 }
 
 </ZetboxBase:CodeTemplate>
-    <GUI:DefaultViewModelDescriptor>8c72dff9-c3b8-417b-a2ef-5f22ffe9dd54</GUI:DefaultViewModelDescriptor>
+    <GUI:DefaultViewModelDescriptor>ec757023-9316-4dae-9867-8081eefab9a8</GUI:DefaultViewModelDescriptor>
     <ZetboxBase:IsAbstract>false</ZetboxBase:IsAbstract>
     <ZetboxBase:IsCreatedProgrammatically>false</ZetboxBase:IsCreatedProgrammatically>
     <ZetboxBase:IsFrozenObject>false</ZetboxBase:IsFrozenObject>
@@ -43410,7 +43410,7 @@ public static void isValid_Description(EnumerationEntry obj, PropertyIsValidEven
   <ZetboxBase:ObjectReferenceProperty ExportGuid="115c3bfb-72fd-46f2-81fe-74ce1cfa1874">
     <ZetboxBase:AllowFilterCollections>false</ZetboxBase:AllowFilterCollections>
     <ZetboxBase:CategoryTags>DataModel</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-04-05T05:26:13.120035Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2019-04-15T07:14:40.757359Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_Enumeration(EnumerationEntry obj, PropertyGetterEventArgs&lt;Zetbox.App.Base.Enumeration&gt; e)
 {
@@ -43440,7 +43440,7 @@ public static void isValid_Enumeration(EnumerationEntry obj, PropertyIsValidEven
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>Enumeration</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>6365c62d-60a6-4fa3-9c78-370ffcc50478</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>800</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>4</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>83aae6fd-0fae-4348-b313-737a6e751027</GUI:ValueModelDescriptor>
     <ZetboxBase:EagerLoading>false</ZetboxBase:EagerLoading>
     <ZetboxBase:RelationEnd>cbeccf82-4509-4036-a785-5400e4675945</ZetboxBase:RelationEnd>
@@ -43448,7 +43448,7 @@ public static void isValid_Enumeration(EnumerationEntry obj, PropertyIsValidEven
   <ZetboxBase:GuidProperty ExportGuid="9cee8923-5189-4e1e-b752-a87be1968491">
     <ZetboxBase:AllowFilterCollections>false</ZetboxBase:AllowFilterCollections>
     <ZetboxBase:CategoryTags>Meta</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2019-04-15T07:14:30.744446Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_ExportGuid(EnumerationEntry obj, PropertyGetterEventArgs&lt;Guid&gt; e)
 {
@@ -43478,7 +43478,7 @@ public static void isValid_ExportGuid(EnumerationEntry obj, PropertyIsValidEvent
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>ExportGuid</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>6365c62d-60a6-4fa3-9c78-370ffcc50478</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>601</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>602</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>2b6fb70f-a382-4057-a139-cc33333d619d</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -43487,7 +43487,7 @@ public static void isValid_ExportGuid(EnumerationEntry obj, PropertyIsValidEvent
   <ZetboxBase:StringProperty ExportGuid="feb0b203-5f83-4b9b-848c-a3e4ee895055">
     <ZetboxBase:AllowFilterCollections>false</ZetboxBase:AllowFilterCollections>
     <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2019-04-15T07:14:30.744446Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_Label(EnumerationEntry obj, PropertyGetterEventArgs&lt;string&gt; e)
 {
@@ -43515,7 +43515,7 @@ public static void isValid_Label(EnumerationEntry obj, PropertyIsValidEventArgs 
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>Label</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>6365c62d-60a6-4fa3-9c78-370ffcc50478</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>401</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>1</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -43524,7 +43524,7 @@ public static void isValid_Label(EnumerationEntry obj, PropertyIsValidEventArgs 
   <ZetboxBase:StringProperty ExportGuid="1c1e497b-294f-442e-8793-478b298d4aba">
     <ZetboxBase:AllowFilterCollections>false</ZetboxBase:AllowFilterCollections>
     <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2019-04-15T07:14:30.744446Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_Name(EnumerationEntry obj, PropertyGetterEventArgs&lt;string&gt; e)
 {
@@ -43554,16 +43554,56 @@ public static void isValid_Name(EnumerationEntry obj, PropertyIsValidEventArgs e
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>Name</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>6365c62d-60a6-4fa3-9c78-370ffcc50478</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>400</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>0</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>975eee82-e7e1-4a12-ab43-d2e3bc3766e4</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
     <ZetboxBase:IsList>false</ZetboxBase:IsList>
   </ZetboxBase:StringProperty>
+  <ZetboxBase:BoolProperty ExportGuid="43a77c0a-75bf-4130-9d6d-a2ac629d3602">
+    <ZetboxBase:AllowFilterCollections>false</ZetboxBase:AllowFilterCollections>
+    <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
+    <ZetboxBase:ChangedOn>2019-04-15T07:14:40.757359Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CodeTemplate>[Invocation]
+public static void get_NotSelectable(EnumerationEntry obj, PropertyGetterEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void preSet_NotSelectable(EnumerationEntry obj, PropertyPreSetterEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void postSet_NotSelectable(EnumerationEntry obj, PropertyPostSetterEventArgs&lt;bool&gt; e)
+{
+}
+
+[Invocation]
+public static void isValid_NotSelectable(EnumerationEntry obj, PropertyIsValidEventArgs e)
+{
+	e.IsValid = obj.NotSelectable == ...;
+	e.Error = e.IsValid ? string.Empty : "&lt;Error&gt;";
+}
+
+</ZetboxBase:CodeTemplate>
+    <ZetboxBase:CreatedOn>2019-04-15T07:14:30.744446Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:DefaultValue>d5e0c7ac-7a35-41c8-aa7b-29ac64f89484</ZetboxBase:DefaultValue>
+    <ZetboxBase:Description>If true, the entry will not be selectable in the UI</ZetboxBase:Description>
+    <ZetboxBase:Label>Not selectable</ZetboxBase:Label>
+    <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
+    <ZetboxBase:Name>NotSelectable</ZetboxBase:Name>
+    <ZetboxBase:ObjectClass>6365c62d-60a6-4fa3-9c78-370ffcc50478</ZetboxBase:ObjectClass>
+    <ZetboxBase:Properties_pos>3</ZetboxBase:Properties_pos>
+    <GUI:ValueModelDescriptor>09d1f453-d0d9-429e-88e7-e84b33de7c2e</GUI:ValueModelDescriptor>
+    <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
+    <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
+    <ZetboxBase:IsList>false</ZetboxBase:IsList>
+  </ZetboxBase:BoolProperty>
   <ZetboxBase:IntProperty ExportGuid="2fea1d2e-d5ed-457f-9828-4df8c3d3d3aa">
     <ZetboxBase:AllowFilterCollections>false</ZetboxBase:AllowFilterCollections>
     <ZetboxBase:CategoryTags>Summary, Main</ZetboxBase:CategoryTags>
-    <ZetboxBase:ChangedOn>2012-10-10T15:03:06.717368Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2019-04-15T07:14:30.744446Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CodeTemplate>[Invocation]
 public static void get_Value(EnumerationEntry obj, PropertyGetterEventArgs&lt;int&gt; e)
 {
@@ -43593,7 +43633,7 @@ public static void isValid_Value(EnumerationEntry obj, PropertyIsValidEventArgs 
     <ZetboxBase:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</ZetboxBase:Module>
     <ZetboxBase:Name>Value</ZetboxBase:Name>
     <ZetboxBase:ObjectClass>6365c62d-60a6-4fa3-9c78-370ffcc50478</ZetboxBase:ObjectClass>
-    <ZetboxBase:Properties_pos>600</ZetboxBase:Properties_pos>
+    <ZetboxBase:Properties_pos>2</ZetboxBase:Properties_pos>
     <GUI:ValueModelDescriptor>edaf9334-dc36-4778-aa33-1e5cdaeeb767</GUI:ValueModelDescriptor>
     <ZetboxBase:HasPersistentOrder>false</ZetboxBase:HasPersistentOrder>
     <ZetboxBase:IsCalculated>false</ZetboxBase:IsCalculated>
@@ -52778,6 +52818,11 @@ public static void isValid_IsList(ValueTypeProperty obj, PropertyIsValidEventArg
     <ZetboxBase:MaxLength>200</ZetboxBase:MaxLength>
     <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
   </ZetboxBase:StringRangeConstraint>
+  <ZetboxBase:NotNullableConstraint ExportGuid="be3db98a-5944-4713-b426-8afb99fafce9">
+    <ZetboxBase:ChangedOn>2019-04-15T07:14:30.744446Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ConstrainedProperty>43a77c0a-75bf-4130-9d6d-a2ac629d3602</ZetboxBase:ConstrainedProperty>
+    <ZetboxBase:CreatedOn>2019-04-15T07:14:30.744446Z</ZetboxBase:CreatedOn>
+  </ZetboxBase:NotNullableConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="a53354a8-0430-4999-83cb-0a1c17d3f21d">
     <ZetboxBase:ChangedOn>2011-08-06T04:31:05.392047Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>2fea1d2e-d5ed-457f-9828-4df8c3d3d3aa</ZetboxBase:ConstrainedProperty>
@@ -54198,6 +54243,12 @@ public static void isValid_IsList(ValueTypeProperty obj, PropertyIsValidEventArg
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Property>9cee8923-5189-4e1e-b752-a87be1968491</ZetboxBase:Property>
   </ZetboxBase:NewGuidDefaultValue>
+  <ZetboxBase:BoolDefaultValue ExportGuid="d5e0c7ac-7a35-41c8-aa7b-29ac64f89484">
+    <ZetboxBase:ChangedOn>2019-04-15T07:14:30.744446Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:CreatedOn>2019-04-15T07:14:30.744446Z</ZetboxBase:CreatedOn>
+    <ZetboxBase:Property>43a77c0a-75bf-4130-9d6d-a2ac629d3602</ZetboxBase:Property>
+    <ZetboxBase:BoolValue>false</ZetboxBase:BoolValue>
+  </ZetboxBase:BoolDefaultValue>
   <ZetboxBase:NewGuidDefaultValue ExportGuid="0d75021d-5071-4766-b63f-5d704879da12">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:56.497538Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2010-01-29T20:01:14Z</ZetboxBase:CreatedOn>
@@ -65698,6 +65749,13 @@ public static void GetNameCanExecReason(Sequence obj, MethodReturnEventArgs&lt;s
     <GUI:Description>A debugger window showing the used IZetboxContexts and their AttachedObjects</GUI:Description>
     <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
     <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.Debugger.ZetboxContextDebuggerViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
+  </GUI:ViewModelDescriptor>
+  <GUI:ViewModelDescriptor ExportGuid="ec757023-9316-4dae-9867-8081eefab9a8">
+    <GUI:DefaultEditorKind>06bf9adc-c5bc-4552-abdc-18a96c527962</GUI:DefaultEditorKind>
+    <GUI:Deleted>false</GUI:Deleted>
+    <GUI:Description>DataObjectViewModel with specific extensions for Enumerations</GUI:Description>
+    <GUI:Module>ef6d5bd8-5826-4ce6-a9ca-c8438ddde773</GUI:Module>
+    <GUI:ViewModelTypeRef>Zetbox.Client.Presentables.EnumerationViewModel, Zetbox.Client</GUI:ViewModelTypeRef>
   </GUI:ViewModelDescriptor>
   <GUI:ViewModelDescriptor ExportGuid="a658dd55-98ef-4c55-978a-d9ce13386135">
     <GUI:DefaultEditorKind>017abeeb-c2fa-4203-83fb-e64bb418b0a1</GUI:DefaultEditorKind>

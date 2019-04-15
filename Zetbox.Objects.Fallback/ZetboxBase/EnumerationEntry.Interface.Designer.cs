@@ -51,6 +51,15 @@ namespace Zetbox.App.Base
         }
 
         /// <summary>
+        /// If true, the entry will not be selectable in the UI
+        /// </summary>
+        [Zetbox.API.DefinitionGuid("43a77c0a-75bf-4130-9d6d-a2ac629d3602")]
+        bool NotSelectable {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// The CLR value of this entry
         /// </summary>
         [Zetbox.API.DefinitionGuid("2fea1d2e-d5ed-457f-9828-4df8c3d3d3aa")]

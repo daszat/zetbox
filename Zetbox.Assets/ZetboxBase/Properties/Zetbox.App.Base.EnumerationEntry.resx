@@ -171,6 +171,12 @@
   <data name="Name_description" xml:space="preserve">
     <value>CLR name of this entry</value>
   </data>
+  <data name="NotSelectable_label" xml:space="preserve">
+    <value>Not selectable</value>
+  </data>
+  <data name="NotSelectable_description" xml:space="preserve">
+    <value>If true, the entry will not be selectable in the UI</value>
+  </data>
   <data name="Value_label" xml:space="preserve">
     <value>Value</value>
   </data>

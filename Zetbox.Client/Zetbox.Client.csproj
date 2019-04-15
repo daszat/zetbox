@@ -257,6 +257,7 @@
     <Compile Include="Presentables\ModuleEditor\GroupingTreeItemViewModel.cs" />
     <Compile Include="Presentables\ModuleEditor\TreeItemIconInstanceListViewModel.cs" />
     <Compile Include="Presentables\ObjectBrowser\ObjectClassViewModel.cs" />
+    <Compile Include="Presentables\EnumerationViewModel.cs" />
     <Compile Include="Presentables\ObjectEditor\MergeObjectsTaskViewModel.cs" />
     <Compile Include="Presentables\ObjectEditor\MergeObjectsTaskViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
