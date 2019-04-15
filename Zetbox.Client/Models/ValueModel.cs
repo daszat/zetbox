@@ -673,7 +673,9 @@ namespace Zetbox.Client.Models
 
         public IEnumerable<KeyValuePair<int, string>> GetEntries()
         {
-            return enumDef.EnumerationEntries.Select(ee => new KeyValuePair<int, string>(ee.Value, ee.GetLabel()));
+            return enumDef
+                .EnumerationEntries
+                .Select(ee => new KeyValuePair<int, string>(ee.Value, ee.GetLabel()));
         }
 
         #endregion

@@ -967,21 +967,29 @@ namespace Zetbox.Client.Presentables.ValueViewModels
 
         public IEnumerationValueModel EnumModel { get; private set; }
 
-        private ReadOnlyCollection<KeyValuePair<int?, string>> _PossibleValues = null;
-        public ReadOnlyCollection<KeyValuePair<int?, string>> PossibleValues
+        private ObservableCollection<KeyValuePair<int?, string>> _possibleValues = null;
+        private ReadOnlyObservableCollection<KeyValuePair<int?, string>> _possibleValuesRO = null;
+        public ReadOnlyObservableCollection<KeyValuePair<int?, string>> PossibleValues
         {
             get
             {
-                if (_PossibleValues == null)
+                if (_possibleValues == null)
                 {
-                    var entries = EnumModel.GetEntries().Select(kv => new KeyValuePair<int?, string>(kv.Key, kv.Value));
-                    this._PossibleValues = new ReadOnlyCollection<KeyValuePair<int?, string>>(
+                    var entries = EnumModel
+                        .Enumeration
+                        .EnumerationEntries
+                        .Where(i => i.NotSelectable != true)
+                        .Select(ee => new KeyValuePair<int?, string>(ee.Value, ee.GetLabel()));
+
+                    _possibleValues = new ObservableCollection<KeyValuePair<int?, string>>(
                         new[] { new KeyValuePair<int?, string>(null, String.Empty) }
                         .Concat(entries)
                         .ToList()
                     );
+                    _possibleValuesRO = new ReadOnlyObservableCollection<KeyValuePair<int?, string>>(_possibleValues);
+                    EnsureValuePossible(Value);
                 }
-                return _PossibleValues;
+                return _possibleValuesRO;
             }
         }
 
@@ -1039,6 +1047,30 @@ namespace Zetbox.Client.Presentables.ValueViewModels
                 Value = value,
                 Error = error
             };
+        }
+
+        private void EnsureValuePossible(int? value)
+        {
+            if (_possibleValues != null && value != null)
+            {
+                // Add if not found
+                if (!_possibleValues.Any(i => i.Key == value))
+                {
+                    _possibleValues.Add(new KeyValuePair<int?, string>(value, EnumModel.Enumeration.EnumerationEntries.FirstOrDefault(i => i.Value == value.Value)?.GetLabel()));
+                }
+            }
+        }
+
+        protected override ZbTask<int?> GetValueFromModelAsync()
+        {
+            return base.GetValueFromModelAsync()
+                .OnResult(i => EnsureValuePossible(i.Result));
+        }
+
+        protected override void SetValueToModel(int? value)
+        {
+            base.SetValueToModel(value);
+            EnsureValuePossible(value);
         }
     }
 
