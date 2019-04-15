@@ -1102,6 +1102,10 @@ namespace Zetbox {
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.StringProperty>("1c1e497b-294f-442e-8793-478b298d4aba"); }
                                 }
+                                public static TypedGuid<global::Zetbox.App.Base.BoolProperty> NotSelectable
+                                {
+                                    get { return new TypedGuid<global::Zetbox.App.Base.BoolProperty>("43a77c0a-75bf-4130-9d6d-a2ac629d3602"); }
+                                }
                                 public static TypedGuid<global::Zetbox.App.Base.IntProperty> Value
                                 {
                                     get { return new TypedGuid<global::Zetbox.App.Base.IntProperty>("2fea1d2e-d5ed-457f-9828-4df8c3d3d3aa"); }
@@ -8060,6 +8064,10 @@ namespace Zetbox {
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_DocumentManagement_ImportedFileViewModel
                 {
                     get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("3aeddad1-a2cf-46b0-af26-6bf6e5f8f6e2"); }
+                }
+                public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_EnumerationViewModel
+                {
+                    get { return new TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor>("ec757023-9316-4dae-9867-8081eefab9a8"); }
                 }
                 public static TypedGuid<global::Zetbox.App.GUI.ViewModelDescriptor> Zetbox_Client_Presentables_ErrorListViewModel
                 {

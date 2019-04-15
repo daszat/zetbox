@@ -46,6 +46,7 @@ namespace Zetbox.App.Base
             _isChangedOnSet = Proxy.ID > 0;
             _isCreatedOnSet = Proxy.ID > 0;
             _isExportGuidSet = Proxy.ID > 0;
+            _isNotSelectableSet = Proxy.ID > 0;
         }
 
         /// <summary>the NHibernate proxy of the represented entity</summary>
@@ -809,6 +810,84 @@ namespace Zetbox.App.Base
         public static event PropertyIsValidHandler<Zetbox.App.Base.EnumerationEntry> OnName_IsValid;
 
         /// <summary>
+        /// If true, the entry will not be selectable in the UI
+        /// </summary>
+
+        // BEGIN Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+        public bool NotSelectable
+        {
+            get
+            {
+                // create local variable to create single point of return
+                // for the benefit of down-stream templates
+                var __result = FetchNotSelectableOrDefault();
+                if (OnNotSelectable_Getter != null)
+                {
+                    var __e = new PropertyGetterEventArgs<bool>(__result);
+                    OnNotSelectable_Getter(this, __e);
+                    __result = __e.Result;
+                }
+                return __result;
+            }
+            set
+            {
+                if (this.IsReadonly) throw new ReadOnlyObjectException();
+                _isNotSelectableSet = true;
+                if (Proxy.NotSelectable != value)
+                {
+                    var __oldValue = Proxy.NotSelectable;
+                    var __newValue = value;
+                    if (OnNotSelectable_PreSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPreSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnNotSelectable_PreSetter(this, __e);
+                        __newValue = __e.Result;
+                    }
+                    NotifyPropertyChanging("NotSelectable", __oldValue, __newValue);
+                    Proxy.NotSelectable = __newValue;
+                    NotifyPropertyChanged("NotSelectable", __oldValue, __newValue);
+                    if(IsAttached) UpdateChangedInfo = true;
+
+                    if (OnNotSelectable_PostSetter != null && IsAttached)
+                    {
+                        var __e = new PropertyPostSetterEventArgs<bool>(__oldValue, __newValue);
+                        OnNotSelectable_PostSetter(this, __e);
+                    }
+                }
+                else
+                {
+                    SetInitializedProperty("NotSelectable");
+                }
+            }
+        }
+
+
+        private bool FetchNotSelectableOrDefault()
+        {
+            var __result = Proxy.NotSelectable;
+                if (!_isNotSelectableSet && ObjectState == DataObjectState.New) {
+                    var __p = FrozenContext.FindPersistenceObject<Zetbox.App.Base.Property>(new Guid("43a77c0a-75bf-4130-9d6d-a2ac629d3602"));
+                    if (__p != null) {
+                        _isNotSelectableSet = true;
+                        // http://connect.microsoft.com/VisualStudio/feedback/details/593117/cannot-directly-cast-boxed-int-to-nullable-enum
+                        object __tmp_value = __p.DefaultValue.GetDefaultValue();
+                        __result = this.Proxy.NotSelectable = (bool)__tmp_value;
+                    } else {
+                        Zetbox.API.Utils.Logging.Log.Warn("Unable to get default value for property 'Zetbox.App.Base.EnumerationEntry.NotSelectable'");
+                    }
+                }
+            return __result;
+        }
+
+        private bool _isNotSelectableSet = false;
+        // END Zetbox.DalProvider.NHibernate.Generator.Templates.Properties.ProxyProperty
+		public static event PropertyGetterHandler<Zetbox.App.Base.EnumerationEntry, bool> OnNotSelectable_Getter;
+		public static event PropertyPreSetterHandler<Zetbox.App.Base.EnumerationEntry, bool> OnNotSelectable_PreSetter;
+		public static event PropertyPostSetterHandler<Zetbox.App.Base.EnumerationEntry, bool> OnNotSelectable_PostSetter;
+
+        public static event PropertyIsValidHandler<Zetbox.App.Base.EnumerationEntry> OnNotSelectable_IsValid;
+
+        /// <summary>
         /// The CLR value of this entry
         /// </summary>
 
@@ -948,6 +1027,7 @@ namespace Zetbox.App.Base
             me.ExportGuid = other.ExportGuid;
             me.Label = other.Label;
             me.Name = other.Name;
+            me.NotSelectable = other.NotSelectable;
             me.Value = other.Value;
             this._fk_ChangedBy = otherImpl._fk_ChangedBy;
             this._fk_CreatedBy = otherImpl._fk_CreatedBy;
@@ -1013,6 +1093,7 @@ namespace Zetbox.App.Base
                 case "ExportGuid":
                 case "Label":
                 case "Name":
+                case "NotSelectable":
                 case "Value":
                     AuditPropertyChange(property, oldValue, newValue);
                     break;
@@ -1157,6 +1238,15 @@ namespace Zetbox.App.Base
                         (obj, val) => obj.Name = val,
 						obj => OnName_IsValid), 
                     // else
+                    new PropertyDescriptorNHibernateImpl<EnumerationEntry, bool>(
+                        lazyCtx,
+                        new Guid("43a77c0a-75bf-4130-9d6d-a2ac629d3602"),
+                        "NotSelectable",
+                        null,
+                        obj => obj.NotSelectable,
+                        (obj, val) => obj.NotSelectable = val,
+						obj => OnNotSelectable_IsValid), 
+                    // else
                     new PropertyDescriptorNHibernateImpl<EnumerationEntry, int>(
                         lazyCtx,
                         new Guid("2fea1d2e-d5ed-457f-9828-4df8c3d3d3aa"),
@@ -1224,6 +1314,7 @@ namespace Zetbox.App.Base
             FetchChangedOnOrDefault();
             FetchCreatedOnOrDefault();
             FetchExportGuidOrDefault();
+            FetchNotSelectableOrDefault();
             base.NotifyPreSave();
             if (OnNotifyPreSave_EnumerationEntry != null) OnNotifyPreSave_EnumerationEntry(this);
         }
@@ -1316,6 +1407,8 @@ namespace Zetbox.App.Base
 
             public virtual string Name { get; set; }
 
+            public virtual bool NotSelectable { get; set; }
+
             public virtual int Value { get; set; }
 
         }
@@ -1349,6 +1442,10 @@ namespace Zetbox.App.Base
             }
             binStream.Write(this.Proxy.Label);
             binStream.Write(this.Proxy.Name);
+            binStream.Write(this._isNotSelectableSet);
+            if (this._isNotSelectableSet) {
+                binStream.Write(this.Proxy.NotSelectable);
+            }
             binStream.Write(this.Proxy.Value);
         }
 
@@ -1377,6 +1474,10 @@ namespace Zetbox.App.Base
             }
             this.Proxy.Label = binStream.ReadString();
             this.Proxy.Name = binStream.ReadString();
+            this._isNotSelectableSet = binStream.ReadBoolean();
+            if (this._isNotSelectableSet) {
+                this.Proxy.NotSelectable = binStream.ReadBoolean();
+            }
             this.Proxy.Value = binStream.ReadInt32();
             } // if (CurrentAccessRights != Zetbox.API.AccessRights.None)
             return baseResult == null
@@ -1398,6 +1499,7 @@ namespace Zetbox.App.Base
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.EnumerationEntries_pos, xml, "EnumerationEntries_pos", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.Label, xml, "Label", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.Name, xml, "Name", "Zetbox.App.Base");
+            if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.NotSelectable, xml, "NotSelectable", "Zetbox.App.Base");
             if (modules.Contains("*") || modules.Contains("Zetbox.App.Base")) XmlStreamer.ToStream(this.Proxy.Value, xml, "Value", "Zetbox.App.Base");
         }
 
@@ -1435,6 +1537,11 @@ namespace Zetbox.App.Base
                 break;
             case "Zetbox.App.Base|Name":
                 this.Proxy.Name = XmlStreamer.ReadString(xml);
+                break;
+            case "Zetbox.App.Base|NotSelectable":
+                // Import must have default value set
+                this.Proxy.NotSelectable = XmlStreamer.ReadBoolean(xml);
+                this._isNotSelectableSet = true;
                 break;
             case "Zetbox.App.Base|Value":
                 this.Proxy.Value = XmlStreamer.ReadInt32(xml);

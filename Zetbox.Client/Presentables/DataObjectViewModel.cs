@@ -254,6 +254,7 @@ namespace Zetbox.Client.Presentables
                             var translatedTag = TranslatePropertyGroupTag(tag, propModule, zbBaseModule);
                             return CreatePropertyGroup(tag, translatedTag, lst);
                         })
+                        .Where(group => group != null)
                         .ToList();
         }
 

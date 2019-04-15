@@ -98,6 +98,7 @@
     <Compile Include="AbstractServerTestFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\ContextTests.cs" />
+    <Compile Include="Tests\SequenceTests.cs" />
     <Compile Include="Tests\SchemaProviders\CheckExpressionVisitorTests.cs" />
     <Compile Include="Tests\Security\when_updating_calcprop.cs" />
     <None Include="packages.config" />

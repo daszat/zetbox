@@ -505,6 +505,7 @@
           <ScalarProperty Name="ExportGuid" ColumnName="ExportGuid" />
           <ScalarProperty Name="Label" ColumnName="Label" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="NotSelectable" ColumnName="NotSelectable" />
           <ScalarProperty Name="Value" ColumnName="Value" />
 	    </MappingFragment>
       </EntityTypeMapping>

@@ -47,11 +47,6 @@ namespace Zetbox.Client.Presentables
 
         private ObjectClass _class;
 
-        public override System.Drawing.Image Icon
-        {
-            get { return IconConverter.ToImage(_class.DefaultIcon); }
-        }
-
         protected override List<PropertyGroupViewModel> CreatePropertyGroups()
         {
             var result = base.CreatePropertyGroups();
