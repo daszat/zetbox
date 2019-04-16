@@ -134,7 +134,8 @@ namespace Zetbox.Client.Presentables.Calendar
                 FetchCacheEntry entry;
                 if (_cache.TryGetValue(curDay, out entry))
                 {
-                    if (entry.FetchTime.AddMinutes(5) > DateTime.Now)
+                    // The SynchronizationContext may change, why is unkown
+                    if (entry.FetchTime.AddMinutes(5) > DateTime.Now && entry.EventsTask.SyncContext == System.Threading.SynchronizationContext.Current)
                     {
                         result.Add(entry.EventsTask);
                     }
