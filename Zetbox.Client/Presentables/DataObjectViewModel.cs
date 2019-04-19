@@ -328,7 +328,7 @@ namespace Zetbox.Client.Presentables
             {
                 // only accept new value if it is a contained model
                 // Do not accept null's
-                if (value != null && (PropertyGroupsByName.ContainsKey(value.Name) && PropertyGroupsByName[value.Name] == value))
+                if (value != null && (PropertyGroupsByName.ContainsKey(value.TagName) && PropertyGroupsByName[value.TagName] == value))
                 {
                     _selectedPropertyGroup = value;
                     OnPropertyChanged("SelectedPropertyGroup");
