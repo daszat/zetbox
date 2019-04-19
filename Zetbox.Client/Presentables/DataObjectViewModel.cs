@@ -183,7 +183,11 @@ namespace Zetbox.Client.Presentables
                 if (_propertyGroups == null)
                 {
                     _propertyGroups = new ObservableCollection<PropertyGroupViewModel>(CreatePropertyGroups());
-                    _propertyGroups.CollectionChanged += (s, e) => OnPropertyChanged("PropertyGroupsByName");
+                    _propertyGroups.CollectionChanged += (s, e) =>
+                    {
+                        _propertyGroupsByName = null;
+                        OnPropertyChanged("PropertyGroupsByName");
+                    };
                 }
                 return _propertyGroups;
             }
@@ -294,11 +298,16 @@ namespace Zetbox.Client.Presentables
             }
         }
 
+        private LookupDictionary<string, PropertyGroupViewModel, PropertyGroupViewModel> _propertyGroupsByName;
         public LookupDictionary<string, PropertyGroupViewModel, PropertyGroupViewModel> PropertyGroupsByName
         {
             get
             {
-                return new LookupDictionary<string, PropertyGroupViewModel, PropertyGroupViewModel>(PropertyGroups, mdl => mdl.TagName, mdl => mdl);
+                if (_propertyGroupsByName == null)
+                {
+                    _propertyGroupsByName = new LookupDictionary<string, PropertyGroupViewModel, PropertyGroupViewModel>(PropertyGroups, mdl => mdl.TagName, mdl => mdl);
+                }
+                return _propertyGroupsByName;
             }
         }
 

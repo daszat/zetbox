@@ -83,25 +83,26 @@ namespace Zetbox.Client.Presentables
             if (!CanAddTab()) return;
 
             var key = $"New Tab {PropertyGroups.Count + 1}";
-            PropertyGroups.Add(
-                UICreator.CustomPropertyGroup(key, key, new[]
+            var tab = UICreator.CustomPropertyGroup(key, key, new[]
+            {
+                UICreator.StackPanel(new []
                 {
-                    UICreator.StackPanel(new []
+                    UICreator.GroupBox("Grp 1", new []
                     {
-                        UICreator.GroupBox("Grp 1", new []
-                        {
-                            PropertyModelsByName["StringProp"],
-                            PropertyModelsByName["MyIntProperty"],
-                            PropertyModelsByName["ObjectProp"],
-                        }),
-                        UICreator.GroupBox("Grp 2", new []
-                        {
-                            PropertyModelsByName["StringProp"],
-                            PropertyModelsByName["TestEnumProp"],
-                            PropertyModelsByName["TestEnumWithDefault"],
-                        }),
+                        PropertyModelsByName["StringProp"],
+                        PropertyModelsByName["MyIntProperty"],
+                        PropertyModelsByName["ObjectProp"],
                     }),
-                }));
+                    UICreator.GroupBox("Grp 2", new []
+                    {
+                        PropertyModelsByName["StringProp"],
+                        PropertyModelsByName["TestEnumProp"],
+                        PropertyModelsByName["TestEnumWithDefault"],
+                    }),
+                }),
+            });
+            PropertyGroups.Add(tab);
+            SelectedPropertyGroup = tab;
         }
         #endregion
 
