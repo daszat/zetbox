@@ -171,19 +171,19 @@ namespace Zetbox.Client.Presentables
         {
         }
 
-        private ReadOnlyCollection<PropertyGroupViewModel> _propertyGroups;
+        private ObservableCollection<PropertyGroupViewModel> _propertyGroups;
 
         /// <summary>
-        /// A read only collection of property groups. See CreatePropertyGroups for more information.
+        /// A observable collection of property groups. See CreatePropertyGroups for more information.
         /// </summary>
-        public ReadOnlyCollection<PropertyGroupViewModel> PropertyGroups
+        public ObservableCollection<PropertyGroupViewModel> PropertyGroups
         {
             get
             {
                 if (_propertyGroups == null)
                 {
-                    _propertyGroups = new ReadOnlyCollection<PropertyGroupViewModel>(CreatePropertyGroups());
-
+                    _propertyGroups = new ObservableCollection<PropertyGroupViewModel>(CreatePropertyGroups());
+                    _propertyGroups.CollectionChanged += (s, e) => OnPropertyChanged("PropertyGroupsByName");
                 }
                 return _propertyGroups;
             }

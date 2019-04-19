@@ -29,6 +29,7 @@ namespace Zetbox.Client.Presentables
     using Zetbox.Client.Presentables.ValueViewModels;
     using Zetbox.App.Test;
     using Zetbox.Client.GUI;
+    using System.Collections.ObjectModel;
 
     [ViewModelDescriptor]
     public class TestObjClassViewModel
@@ -42,6 +43,67 @@ namespace Zetbox.Client.Presentables
             : base(appCtx, dataCtx, parent, obj)
         {
         }
+
+        protected override ObservableCollection<ICommandViewModel> CreateCommands()
+        {
+            var list = base.CreateCommands();
+
+            list.Add(AddTabCommand);
+
+            return list;
+        }
+
+
+        #region AddTab command
+        private ICommandViewModel _AddTabCommand = null;
+        public ICommandViewModel AddTabCommand
+        {
+            get
+            {
+                if (_AddTabCommand == null)
+                {
+                    _AddTabCommand = ViewModelFactory.CreateViewModel<SimpleCommandViewModel.Factory>().Invoke(DataContext, this, "Add tab", "Add a new Tab", AddTab, CanAddTab, CanAddTabReason);
+                }
+                return _AddTabCommand;
+            }
+        }
+
+        public bool CanAddTab()
+        {
+            return true;
+        }
+
+        public string CanAddTabReason()
+        {
+            return "TODO: Add error string here";
+        }
+
+        public void AddTab()
+        {
+            if (!CanAddTab()) return;
+
+            var key = $"New Tab {PropertyGroups.Count + 1}";
+            PropertyGroups.Add(
+                UICreator.CustomPropertyGroup(key, key, new[]
+                {
+                    UICreator.StackPanel(new []
+                    {
+                        UICreator.GroupBox("Grp 1", new []
+                        {
+                            PropertyModelsByName["StringProp"],
+                            PropertyModelsByName["MyIntProperty"],
+                            PropertyModelsByName["ObjectProp"],
+                        }),
+                        UICreator.GroupBox("Grp 2", new []
+                        {
+                            PropertyModelsByName["StringProp"],
+                            PropertyModelsByName["TestEnumProp"],
+                            PropertyModelsByName["TestEnumWithDefault"],
+                        }),
+                    }),
+                }));
+        }
+        #endregion
 
         protected override List<PropertyGroupViewModel> CreatePropertyGroups()
         {
