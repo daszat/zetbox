@@ -108,6 +108,8 @@ namespace Zetbox.Client.Presentables.Calendar
 
         public void Refresh()
         {
+            if (DataContext.IsDisposed) return;
+
             var taskFrom = From;
             var taskTo = To;
             _Source(From, To).OnResult(t =>
