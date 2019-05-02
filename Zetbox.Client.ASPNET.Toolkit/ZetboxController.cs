@@ -46,5 +46,38 @@ namespace Zetbox.Client.ASPNET
             ModelState.Clear();
             _contextScope.Validation.Validate(ModelState);
         }
+
+        protected void Validate(ViewModel vmdl)
+        {
+            this.Validate();
+            if (vmdl == null) return;
+
+            vmdl.Validate();
+            if (vmdl is DataObjectViewModel)
+            {
+                foreach (var prop in ((DataObjectViewModel)vmdl).PropertyModels)
+                {
+                    prop.Validate();
+                }
+            }
+            if (vmdl is IGenericDataObjectEditViewModel)
+            {
+                foreach (var prop in ((IGenericDataObjectEditViewModel)vmdl).ViewModel.PropertyModels)
+                {
+                    prop.Validate();
+                }
+            }
+
+            if (!vmdl.ValidationManager.IsValid)
+            {
+                foreach (var msg in vmdl.ValidationManager.Errors.Select(i => i.Message).Distinct())
+                {
+                    if (!ModelState.Any(i => i.Key == "" && i.Value.Errors.Any(x => x.ErrorMessage == msg)))
+                    {
+                        ModelState.AddModelError("", msg);
+                    }
+                }
+            }
+        }
     }
 }
