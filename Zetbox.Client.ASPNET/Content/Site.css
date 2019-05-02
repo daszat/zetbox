@@ -465,3 +465,12 @@ th, td
     font: 14px/1.6 Arial;
     font-weight: bold;
 }
+
+label span.required::after {
+    color: red;
+    content: "*";
+}
+
+label.required {
+    font-weight: bold;
+}
