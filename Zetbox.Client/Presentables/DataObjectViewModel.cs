@@ -171,19 +171,23 @@ namespace Zetbox.Client.Presentables
         {
         }
 
-        private ReadOnlyCollection<PropertyGroupViewModel> _propertyGroups;
+        private ObservableCollection<PropertyGroupViewModel> _propertyGroups;
 
         /// <summary>
-        /// A read only collection of property groups. See CreatePropertyGroups for more information.
+        /// A observable collection of property groups. See CreatePropertyGroups for more information.
         /// </summary>
-        public ReadOnlyCollection<PropertyGroupViewModel> PropertyGroups
+        public ObservableCollection<PropertyGroupViewModel> PropertyGroups
         {
             get
             {
                 if (_propertyGroups == null)
                 {
-                    _propertyGroups = new ReadOnlyCollection<PropertyGroupViewModel>(CreatePropertyGroups());
-
+                    _propertyGroups = new ObservableCollection<PropertyGroupViewModel>(CreatePropertyGroups());
+                    _propertyGroups.CollectionChanged += (s, e) =>
+                    {
+                        _propertyGroupsByName = null;
+                        OnPropertyChanged("PropertyGroupsByName");
+                    };
                 }
                 return _propertyGroups;
             }
@@ -294,11 +298,16 @@ namespace Zetbox.Client.Presentables
             }
         }
 
+        private LookupDictionary<string, PropertyGroupViewModel, PropertyGroupViewModel> _propertyGroupsByName;
         public LookupDictionary<string, PropertyGroupViewModel, PropertyGroupViewModel> PropertyGroupsByName
         {
             get
             {
-                return new LookupDictionary<string, PropertyGroupViewModel, PropertyGroupViewModel>(PropertyGroups, mdl => mdl.TagName, mdl => mdl);
+                if (_propertyGroupsByName == null)
+                {
+                    _propertyGroupsByName = new LookupDictionary<string, PropertyGroupViewModel, PropertyGroupViewModel>(PropertyGroups, mdl => mdl.TagName, mdl => mdl);
+                }
+                return _propertyGroupsByName;
             }
         }
 
@@ -319,7 +328,7 @@ namespace Zetbox.Client.Presentables
             {
                 // only accept new value if it is a contained model
                 // Do not accept null's
-                if (value != null && (PropertyGroupsByName.ContainsKey(value.Name) && PropertyGroupsByName[value.Name] == value))
+                if (value != null && (PropertyGroupsByName.ContainsKey(value.TagName) && PropertyGroupsByName[value.TagName] == value))
                 {
                     _selectedPropertyGroup = value;
                     OnPropertyChanged("SelectedPropertyGroup");

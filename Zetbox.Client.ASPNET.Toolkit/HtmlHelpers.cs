@@ -99,10 +99,12 @@ namespace Zetbox.Client.ASPNET
                 exprStr = exprStr + ".FormattedValue";
             }
 
-            var labelStr = string.Format("<label for=\"{0}\"{1}>{2}</label>",
+            var labelStr = string.Format("<label class=\"{4}\" for=\"{0}\"{1}>{2}{3}</label>",
                                                 exprStr,
                                                 string.Join("", HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes).Select(kv => string.Format(" {0}=\"{1}\"", kv.Key, kv.Value))),
-                                                lbmdl.IfNotNull(v => v.Label).IfNullOrEmpty(exprStr));
+                                                html.Encode(lbmdl.IfNotNull(v => v.Label).IfNullOrEmpty(exprStr)),
+                                                !asReadOnly && lbmdl.Required ? " <span class=\"required\"></span>" : "",
+                                                !asReadOnly && lbmdl.Required ? "required" : "");
             return MvcHtmlString.Create(labelStr);
         }
         #endregion

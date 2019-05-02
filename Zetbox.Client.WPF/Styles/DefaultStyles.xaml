@@ -21,7 +21,7 @@
 
     <!-- Nu-Style -->
 
-    <Color x:Key="{x:Static styles:Defaults.MainBackgroundKey}">#FFdddddd</Color>
+    <Color x:Key="{x:Static styles:Defaults.MainBackgroundKey}">#FFFFFFFF</Color>
     <Color x:Key="{x:Static styles:Defaults.MainForegroundKey}">#FF000000</Color>
     <!-- company color 1 -->
     <Color x:Key="{x:Static styles:Defaults.MainAccentKey}">#FF707f87</Color>

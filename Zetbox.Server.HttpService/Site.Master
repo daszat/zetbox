@@ -32,12 +32,12 @@
                 </ctrls:Widget>
                 <ctrls:Widget runat="server" Title="<%$ Resources:Strings, ContactTitle %>">
                     dasz.at e.U.<br/>
-                    Löhnergasse 12/2<br/>
-                    1120 Wien<br/>
+                    Judith-Holzmeister-Weg 10/3/339<br/>
+                    1230 Wien<br/>
                     <br/>
 
                     <a href="mailto:office@dasz.at">office@dasz.at</a> <br/>
-                    <a href="http://dasz.at">http://dasz.at</a>                    
+                    <a href="https://dasz.at">https://dasz.at</a>                    
                     <br />
                     <br />
                 </ctrls:Widget>

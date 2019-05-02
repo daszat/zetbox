@@ -8,6 +8,12 @@ namespace Zetbox.Client.ASPNET
     using Zetbox.API;
     using Zetbox.Client.Presentables.ValueViewModels;
 
+    public interface IGenericDataObjectEditViewModel
+    {
+        IDataObject Object { get; }
+        DataObjectViewModel ViewModel { get; }
+    }
+
     /// <summary>
     /// The only purpose for this kind of ViewModel is to support ASP.NET MVC to recreated it's state.
     /// Internal you should continue using the aleady defined ViewModels for each object.
@@ -33,7 +39,7 @@ namespace Zetbox.Client.ASPNET
     /// <remarks>No descriptor, as it's a ASP.NET MCV only view model</remarks>
     /// <typeparam name="TModel"></typeparam>
     /// <typeparam name="TViewModel"></typeparam>
-    public class GenericDataObjectEditViewModel<TModel, TViewModel> : ViewModel
+    public class GenericDataObjectEditViewModel<TModel, TViewModel> : ViewModel, IGenericDataObjectEditViewModel
         where TModel : class, IDataObject
         where TViewModel : DataObjectViewModel
     {
@@ -83,6 +89,10 @@ namespace Zetbox.Client.ASPNET
                 return _viewModel;
             }
         }
+
+        IDataObject IGenericDataObjectEditViewModel.Object => this.Object;
+
+        DataObjectViewModel IGenericDataObjectEditViewModel.ViewModel => this.ViewModel;
 
         protected virtual TModel CreateNewInstance()
         {
