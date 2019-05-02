@@ -79,7 +79,7 @@ namespace Zetbox.API.Utils
             else if (implementedInterfaces.Contains(typeof(IEnumerable<T>)))
             {
                 // TODO: implement a non-synchronized version for here
-                return new SynchronizedReadOnlyCollection<T>(new object(), (IEnumerable<T>)collection);
+                return new List<T>((IEnumerable<T>)collection);
             }
             else
             {

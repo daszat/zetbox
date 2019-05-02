@@ -1489,6 +1489,8 @@ namespace Zetbox.API
 
     public static class FileExtensions
     {
+#if NETFULL
+
         public static string GetMimeType(this System.IO.FileInfo file)
         {
             if (file == null) throw new ArgumentNullException("file");
@@ -1504,6 +1506,7 @@ namespace Zetbox.API
             }
             return mimeType;
         }
+#endif
     }
 
     /// <summary>

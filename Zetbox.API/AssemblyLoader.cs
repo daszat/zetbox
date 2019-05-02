@@ -36,7 +36,7 @@ namespace Zetbox.API
     // or Mono.Addins; or push all Assemblies to the GAC to avoid this mess.
     public static class AssemblyLoader
     {
-        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger("Zetbox.AssemblyLoader");
+        private readonly static log4net.ILog Log = log4net.LogManager.GetLogger(typeof(AssemblyLoader));
         private readonly static object _lock = new object();
         private readonly static HashSet<string> _missingAssemblies = new HashSet<string>();
 
@@ -48,9 +48,13 @@ namespace Zetbox.API
             if (domain == null) { throw new ArgumentNullException("domain"); }
             if (config == null) { throw new ArgumentNullException("config"); }
 
+#if NETFULL
             var init = (AssemblyLoaderInitializer)domain.CreateInstanceAndUnwrap(
                 "Zetbox.API",
                 "Zetbox.API.AssemblyLoaderInitializer");
+#else
+            var init = new AssemblyLoaderInitializer();
+#endif
 
             init.Init(config);
         }
@@ -59,10 +63,13 @@ namespace Zetbox.API
         {
             if (domain == null) { throw new ArgumentNullException("domain"); }
 
+#if NETFULL
             var init = (AssemblyLoaderInitializer)domain.CreateInstanceAndUnwrap(
                 "Zetbox.API",
                 "Zetbox.API.AssemblyLoaderInitializer");
-
+#else
+            var init = new AssemblyLoaderInitializer();
+#endif
             init.Unload();
         }
 

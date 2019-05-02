@@ -96,7 +96,7 @@ namespace Zetbox.API
             _shutdownTimeout = shutdownTimeout;
 
             // use a dynamically scoped logger.
-            Log = log4net.LogManager.GetLogger(this.GetType().FullName);
+            Log = log4net.LogManager.GetLogger(typeof(ThreadedQueueService<>));
         }
 
         /// <summary>This method is called when the service is started, before the background thread is started.</summary>

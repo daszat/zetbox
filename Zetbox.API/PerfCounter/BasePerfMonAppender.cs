@@ -12,7 +12,7 @@
 //
 // You should have received a copy of the GNU Lesser General Public
 // License along with zetbox.  If not, see <http://www.gnu.org/licenses/>.
-
+#if NETFULL
 namespace Zetbox.API.PerfCounter
 {
     using System;
@@ -27,7 +27,7 @@ namespace Zetbox.API.PerfCounter
         public readonly string InstanceName;
         public abstract string Category { get; }
 
-        #region Fields
+#region Fields
         private readonly MethodPerformanceCounter _FetchRelation = new MethodPerformanceCounter();
         private readonly MethodPerformanceCounter _GetList = new MethodPerformanceCounter();
         private readonly MethodPerformanceCounter _GetListOf = new MethodPerformanceCounter();
@@ -41,7 +41,7 @@ namespace Zetbox.API.PerfCounter
 
         PerformanceCounter _ServerMethodInvocationPerSec;
         PerformanceCounter _ServerMethodInvocationTotal;
-        #endregion
+#endregion
 
         public BasePerfMonAppender(Zetbox.API.Configuration.ZetboxConfig cfg)
         {
@@ -260,7 +260,7 @@ namespace Zetbox.API.PerfCounter
 
         protected bool initialized = false;
 
-        #region Base Descriptors
+#region Base Descriptors
 
         private static readonly MethodPerformanceCounter.Desc[] _methodDescs = new[]
         {
@@ -285,9 +285,9 @@ namespace Zetbox.API.PerfCounter
             new CounterDesc("ServerMethodInvocationTotal", "# of ServerMethodInvocation calls.", PerformanceCounterType.NumberOfItems64, (pma, desc) => pma._ServerMethodInvocationTotal = desc.Get(pma)),
         };
 
-        #endregion
+#endregion
 
-        #region Common Counters
+#region Common Counters
 
         public void IncrementFetchRelation(InterfaceType ifType)
         {
@@ -400,7 +400,8 @@ namespace Zetbox.API.PerfCounter
             _ServerMethodInvocationTotal.Increment();
         }
 
-        #endregion
+#endregion
 
     }
 }
+#endif

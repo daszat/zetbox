@@ -24,7 +24,9 @@ namespace Zetbox.API
     using System.Linq.Expressions;
     using System.Runtime.Serialization;
     using System.Runtime.Serialization.Formatters.Binary;
+#if NETFULL
     using System.ServiceModel;
+#endif
     using System.Text;
     using System.Xml;
     using System.Xml.Serialization;
@@ -34,7 +36,9 @@ namespace Zetbox.API
     /// TODO: Add FaultContracts
     /// TODO: Remove GetListOf
     /// </summary>
+#if NETFULL
     [ServiceContract(SessionMode = SessionMode.NotAllowed, Namespace = "http://dasz.at/Zetbox/")]
+#endif
     public interface IZetboxService
     {
         /// <summary>
@@ -44,10 +48,12 @@ namespace Zetbox.API
         /// <param name="msg">a streamable list of <see cref="IPersistenceObject"/>s</param>
         /// <param name="notificationRequests">A list of objects the client wants to be notified about, if they change.</param>
         /// <returns>a streamable list of <see cref="IPersistenceObject"/>s</returns>
+#if NETFULL
         [OperationContract]
         [FaultContract(typeof(Exception))]
         [FaultContract(typeof(ZetboxContextExceptionMessage))]
         [FaultContract(typeof(InvalidZetboxGeneratedVersionExceptionMessage))]
+#endif
         byte[] SetObjects(Guid version, byte[] msg, ObjectNotificationRequest[] notificationRequests);
 
         /// <summary>
@@ -56,10 +62,12 @@ namespace Zetbox.API
         /// <param name="version">Current version of generated Zetbox.Objects assembly</param>
         /// <param name="query">A full LINQ query returning zero, one or more objects (FirstOrDefault, Single, Where, Skip, Take, etc.)</param>
         /// <returns>the found objects</returns>
+#if NETFULL
         [OperationContract]
         [FaultContract(typeof(Exception))]
         [FaultContract(typeof(InvalidZetboxGeneratedVersionException))]
         [FaultContract(typeof(InvalidZetboxGeneratedVersionExceptionMessage))]
+#endif
         byte[] GetObjects(Guid version, SerializableExpression query);
 
         /// <summary>
@@ -70,11 +78,12 @@ namespace Zetbox.API
         /// <param name="ID">Object id</param>
         /// <param name="property">Property</param>
         /// <returns>the referenced objects</returns>
-        //[Obsolete("Use a properly filtered GetList instead")]
+#if NETFULL
         [OperationContract]
         [FaultContract(typeof(Exception))]
         [FaultContract(typeof(InvalidZetboxGeneratedVersionException))]
         [FaultContract(typeof(InvalidZetboxGeneratedVersionExceptionMessage))]
+#endif
         byte[] GetListOf(Guid version, SerializableType type, int ID, string property);
 
         /// <summary>
@@ -87,10 +96,12 @@ namespace Zetbox.API
         /// <param name="role">the parent role (1 == A, 2 == B)</param>
         /// <param name="ID">the ID of the parent object</param>
         /// <returns>the requested collection entries</returns>
+#if NETFULL
         [OperationContract]
         [FaultContract(typeof(Exception))]
         [FaultContract(typeof(InvalidZetboxGeneratedVersionException))]
         [FaultContract(typeof(InvalidZetboxGeneratedVersionExceptionMessage))]
+#endif
         byte[] FetchRelation(Guid version, Guid relId, int role, int ID);
 
         /// <summary>
@@ -99,10 +110,12 @@ namespace Zetbox.API
         /// <param name="version">Current version of generated Zetbox.Objects assembly</param>
         /// <param name="ID">ID of an valid Blob instance</param>
         /// <returns>Stream containing the Blob content</returns>
+#if NETFULL
         [OperationContract]
         [FaultContract(typeof(Exception))]
         [FaultContract(typeof(InvalidZetboxGeneratedVersionException))]
         [FaultContract(typeof(InvalidZetboxGeneratedVersionExceptionMessage))]
+#endif
         Stream GetBlobStream(Guid version, int ID);
 
         /// <summary>
@@ -110,10 +123,12 @@ namespace Zetbox.API
         /// </summary>
         /// <param name="blob">Information about the given blob</param>
         /// <returns>the newly created Blob instance</returns>
+#if NETFULL
         [OperationContract]
         [FaultContract(typeof(Exception))]
         [FaultContract(typeof(InvalidZetboxGeneratedVersionException))]
         [FaultContract(typeof(InvalidZetboxGeneratedVersionExceptionMessage))]
+#endif
         BlobResponse SetBlobStream(BlobMessage blob);
 
 
@@ -130,50 +145,76 @@ namespace Zetbox.API
         /// <param name="notificationRequests">A list of objects the client wants to be notified about, if they change.</param>
         /// <param name="retChangedObjects">Array of changed objects on the server side</param>
         /// <returns></returns>
+#if NETFULL
         [OperationContract]
         [FaultContract(typeof(Exception))]
         [FaultContract(typeof(InvalidZetboxGeneratedVersionException))]
         [FaultContract(typeof(InvalidZetboxGeneratedVersionExceptionMessage))]
+#endif
         byte[] InvokeServerMethod(Guid version, SerializableType type, int ID, string method, SerializableType[] parameterTypes, byte[] parameter, byte[] changedObjects, ObjectNotificationRequest[] notificationRequests, out byte[] retChangedObjects);
     }
 
+#if NETFULL
     [MessageContract]
+#endif
     public class BlobMessage
     {
+#if NETFULL
         [MessageHeader]
+#endif
         public Guid Version { get; set; }
+#if NETFULL
         [MessageHeader]
+#endif
         public string FileName { get; set; }
+#if NETFULL
         [MessageHeader]
+#endif
         public string MimeType { get; set; }
+#if NETFULL
         [MessageBodyMember]
+#endif
         public System.IO.Stream Stream { get; set; }
     }
 
+#if NETFULL
     [MessageContract]
+#endif
     public class BlobResponse
     {
+#if NETFULL
         [MessageHeader]
+#endif
         public int ID { get; set; }
+#if NETFULL
         [MessageBodyMember]
+#endif
         public System.IO.Stream BlobInstance { get; set; }
     }
 
 
+#if NETFULL
     [DataContract(Namespace = "http://dasz.at/Zetbox/")]
+#endif
     [Serializable]
     [DebuggerDisplay("{IDs.Length} reqs for {Type.TypeName}")]
     [KnownType(typeof(SerializableType))]
     public class ObjectNotificationRequest
     {
+#if NETFULL
         [DataMember(Name = "Type")]
+#endif
         public SerializableType Type { get; set; }
 
+#if NETFULL
         [DataMember(Name = "IDs")]
+#endif
         public int[] IDs { get; set; }
     }
 
+#if NETFULL
     [DataContract(Namespace = "http://dasz.at/Zetbox/", Name = "OrderBy")]
+#endif
     [Serializable]
     [KnownType(typeof(SerializableType))]
     [KnownType(typeof(SerializableBinaryExpression))]
@@ -188,17 +229,23 @@ namespace Zetbox.API
     [KnownType(typeof(SerializableUnaryExpression))]
     public class OrderByContract
     {
+#if NETFULL
         [DataMember(Name = "Type")]
+#endif
         public OrderByType Type { get; set; }
 
+#if NETFULL
         [DataMember(Name = "Expression")]
+#endif
         public SerializableExpression Expression { get; set; }
     }
 
-    #region Exception messages
+#region Exception messages
     [Serializable]
     [XmlRoot(Namespace = "http://dasz.at/zetbox/ZetboxContextExceptionMessage")]
+#if NETFULL
     [DataContract(Namespace = "http://dasz.at/Zetbox/")]
+#endif
     [KnownType(typeof(ConcurrencyExceptionMessage))]
     [KnownType(typeof(ValidationExceptionMessage))]
     [KnownType(typeof(FKViolationExceptionMessage))]
@@ -209,7 +256,9 @@ namespace Zetbox.API
         [XmlElement(typeof(ValidationExceptionMessage), ElementName = "ValidationException")]
         [XmlElement(typeof(FKViolationExceptionMessage), ElementName = "FKViolationException")]
         [XmlElement(typeof(UniqueConstraintViolationExceptionMessage), ElementName = "UniqueConstraintViolationException")]
+#if NETFULL
         [DataMember]
+#endif
         public ZetboxContextExceptionSerializationHelper Exception { get; set; }
     }
 
@@ -249,7 +298,9 @@ namespace Zetbox.API
             return new ConcurrencyException(Message, Details);
         }
 
+#if NETFULL
         [DataMember]
+#endif
         public List<ConcurrencyExceptionDetail> Details { get; set; }
     }
 
@@ -290,7 +341,9 @@ namespace Zetbox.API
             return new FKViolationException(Message, Details);
         }
 
+#if NETFULL
         [DataMember]
+#endif
         public List<FKViolationExceptionDetail> Details { get; set; }
     }
 
@@ -313,16 +366,22 @@ namespace Zetbox.API
             return new UniqueConstraintViolationException(Message, Details);
         }
 
+#if NETFULL
         [DataMember]
+#endif
         public List<UniqueConstraintViolationExceptionDetail> Details { get; set; }
     }
 
     [Serializable]
     [XmlRoot(Namespace = "http://dasz.at/zetbox/ZetboxContextExceptionMessage")]
+#if NETFULL
     [DataContract(Namespace = "http://dasz.at/Zetbox/")]
+#endif
     public class InvalidZetboxGeneratedVersionExceptionMessage
     {
+#if NETFULL
         [DataMember]
+#endif
         public string Message { get; set; }
 
         public InvalidZetboxGeneratedVersionException ToException()
@@ -331,5 +390,5 @@ namespace Zetbox.API
         }
     }
 
-    #endregion
+#endregion
 }
