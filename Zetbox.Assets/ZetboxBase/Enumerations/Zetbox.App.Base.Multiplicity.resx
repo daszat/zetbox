@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ZeroOrOne_label" xml:space="preserve">
-    <value>ZeroOrOne</value>
+    <value>Zero or One</value>
   </data>
   <data name="ZeroOrOne_description" xml:space="preserve">
     <value>Optional Element (zero or one)</value>
@@ -130,7 +130,7 @@
     <value>Required Element (exactly one)</value>
   </data>
   <data name="ZeroOrMore_label" xml:space="preserve">
-    <value>ZeroOrMore</value>
+    <value>Zero or More</value>
   </data>
   <data name="ZeroOrMore_description" xml:space="preserve">
     <value>Optional List Element (zero or more)</value>

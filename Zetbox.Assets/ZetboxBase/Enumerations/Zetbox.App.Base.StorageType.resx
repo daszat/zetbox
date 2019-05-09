@@ -124,7 +124,7 @@
     <value>The relation information is stored on both sides of the Relation</value>
   </data>
   <data name="MergeIntoA_label" xml:space="preserve">
-    <value>MergeIntoA</value>
+    <value>Merge into A</value>
   </data>
   <data name="MergeIntoA_description" xml:space="preserve">
     <value>The relation information is stored with the A-side ObjectClass</value>
@@ -136,7 +136,7 @@
     <value>The relation information is stored in a separate entity</value>
   </data>
   <data name="MergeIntoB_label" xml:space="preserve">
-    <value>MergeIntoB</value>
+    <value>Merge into B</value>
   </data>
   <data name="MergeIntoB_description" xml:space="preserve">
     <value>The relation information is stored with the B-side ObjectClass</value>

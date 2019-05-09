@@ -117,22 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Independent_label" xml:space="preserve">
-    <value>Independent</value>
+  <data name="Sunday_label" xml:space="preserve">
+    <value>Sonntag</value>
   </data>
-  <data name="Independent_description" xml:space="preserve">
-    <value>This relation does not specify a containment.</value>
+  <data name="Monday_label" xml:space="preserve">
+    <value>Montag</value>
   </data>
-  <data name="AContainsB_label" xml:space="preserve">
-    <value>A Contains B</value>
+  <data name="Tuesday_label" xml:space="preserve">
+    <value>Dienstag</value>
   </data>
-  <data name="AContainsB_description" xml:space="preserve">
-    <value>B is an integral part of A.</value>
+  <data name="Wednesday_label" xml:space="preserve">
+    <value>Mittwoch</value>
   </data>
-  <data name="BContainsA_label" xml:space="preserve">
-    <value>B Contains A</value>
+  <data name="Thursday_label" xml:space="preserve">
+    <value>Donnerstag</value>
   </data>
-  <data name="BContainsA_description" xml:space="preserve">
-    <value>A is an integral part of B.</value>
+  <data name="Friday_label" xml:space="preserve">
+    <value>Freitag</value>
+  </data>
+  <data name="Saturday_label" xml:space="preserve">
+    <value>Samstag</value>
   </data>
 </root>

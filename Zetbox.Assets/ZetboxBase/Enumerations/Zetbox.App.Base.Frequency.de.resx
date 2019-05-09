@@ -117,22 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Independent_label" xml:space="preserve">
-    <value>Independent</value>
+  <data name="Monthly_label" xml:space="preserve">
+    <value>Monatlich</value>
   </data>
-  <data name="Independent_description" xml:space="preserve">
-    <value>This relation does not specify a containment.</value>
+  <data name="Weekly_label" xml:space="preserve">
+    <value>Wöchentlich</value>
   </data>
-  <data name="AContainsB_label" xml:space="preserve">
-    <value>A Contains B</value>
+  <data name="Daily_label" xml:space="preserve">
+    <value>Täglich</value>
   </data>
-  <data name="AContainsB_description" xml:space="preserve">
-    <value>B is an integral part of A.</value>
+  <data name="Hourly_label" xml:space="preserve">
+    <value>Stündlich</value>
   </data>
-  <data name="BContainsA_label" xml:space="preserve">
-    <value>B Contains A</value>
+  <data name="Minutely_label" xml:space="preserve">
+    <value>Minütlich</value>
   </data>
-  <data name="BContainsA_description" xml:space="preserve">
-    <value>A is an integral part of B.</value>
+  <data name="Secondly_label" xml:space="preserve">
+    <value>Sekündlich</value>
+  </data>
+  <data name="Yearly_label" xml:space="preserve">
+    <value>Jährlich</value>
   </data>
 </root>
