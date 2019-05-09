@@ -202,17 +202,23 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
         private string GetColumnDefinition(Column col)
         {
             string nullable = col.IsNullable ? "NULL" : "NOT NULL";
+            string typeString = GetColumnType(col);
 
+            return String.Format("{0} {1} {2}", QuoteIdentifier(col.Name), typeString, nullable);
+        }
+
+        private string GetColumnType(Column col)
+        {
             // hardcode special cases
             if (col.Type == DbType.String && col.Size == int.MaxValue)
             {
                 // Create text columns for unlimited string length
-                return String.Format("{0} text {1}", QuoteIdentifier(col.Name), nullable);
+                return "text";
             }
             else if (col.Type == DbType.Binary && col.Size == int.MaxValue)
             {
                 // Create bytea columns for unlimited blob length
-                return String.Format("{0} bytea {1}", QuoteIdentifier(col.Name), nullable);
+                return "bytea";
             }
             else
             {
@@ -226,8 +232,7 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
                     size = String.Format("({0}, {1})", col.Size, col.Scale.Value);
                 }
 
-                string typeString = DbTypeToNative(col.Type) + size;
-                return String.Format("{0} {1} {2}", QuoteIdentifier(col.Name), typeString, nullable);
+                return DbTypeToNative(col.Type) + size;
             }
         }
 
@@ -471,11 +476,10 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
         protected override void DoColumn(bool add, TableRef tblName, string colName, DbType type, int size, int scale, bool isNullable, params DatabaseConstraint[] constraints)
         {
             CheckMaxIdentifierLength(colName);
-            StringBuilder sb = new StringBuilder();
 
             if (add)
             {
-                sb.AppendFormat("ALTER TABLE {0} ADD {1}",
+                ExecuteNonQuery(string.Format("ALTER TABLE {0} ADD {1}",
                     FormatSchemaName(tblName),
                     GetColumnDefinition(new Column()
                     {
@@ -484,18 +488,30 @@ namespace Zetbox.Server.SchemaManagement.NpgsqlProvider
                         Size = size,
                         Scale = scale,
                         IsNullable = isNullable
-                    }));
+                    })));
             }
             else
             {
-                sb.AppendFormat("ALTER TABLE {0} ALTER COLUMN {1} {2} NOT NULL",
+                ExecuteNonQuery(string.Format("ALTER TABLE {0} ALTER COLUMN {1} {2} NOT NULL",
                     FormatSchemaName(tblName),
                     QuoteIdentifier(colName),
                     isNullable ? "DROP" : "SET"
-                    );
-            }
+                ));
 
-            ExecuteNonQuery(sb.ToString());
+                if (type.In(DbType.String, DbType.StringFixedLength, DbType.AnsiString, DbType.AnsiStringFixedLength, DbType.Binary))
+                {
+                    ExecuteNonQuery(string.Format("ALTER TABLE {0} ALTER COLUMN {1} TYPE {2}",
+                        FormatSchemaName(tblName),
+                        QuoteIdentifier(colName),
+                        GetColumnType(new Column()
+                        {
+                            Type = type,
+                            Size = size,
+                            Scale = scale
+                        })
+                    ));
+                }
+            }
 
             if (GetHasColumnDefaultValue(tblName, colName))
             {
