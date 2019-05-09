@@ -117,22 +117,52 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Independent_label" xml:space="preserve">
-    <value>Independent</value>
+  <data name="None_label" xml:space="preserve">
+    <value>Keiner!</value>
   </data>
-  <data name="Independent_description" xml:space="preserve">
-    <value>This relation does not specify a containment.</value>
+  <data name="Good_label" xml:space="preserve">
+    <value>Gut</value>
   </data>
-  <data name="AContainsB_label" xml:space="preserve">
-    <value>A Contains B</value>
+  <data name="Neutral_label" xml:space="preserve">
+    <value>Neutral</value>
   </data>
-  <data name="AContainsB_description" xml:space="preserve">
-    <value>B is an integral part of A.</value>
+  <data name="Bad_label" xml:space="preserve">
+    <value>Schlecht</value>
   </data>
-  <data name="BContainsA_label" xml:space="preserve">
-    <value>B Contains A</value>
+  <data name="Archived_label" xml:space="preserve">
+    <value>Archiviert</value>
   </data>
-  <data name="BContainsA_description" xml:space="preserve">
-    <value>A is an integral part of B.</value>
+  <data name="Deactivated_label" xml:space="preserve">
+    <value>Deaktiviert</value>
+  </data>
+  <data name="Active_label" xml:space="preserve">
+    <value>Aktiv</value>
+  </data>
+  <data name="Output_label" xml:space="preserve">
+    <value>Ausgabe</value>
+  </data>
+  <data name="Input_label" xml:space="preserve">
+    <value>Eingabe</value>
+  </data>
+  <data name="Calculation_label" xml:space="preserve">
+    <value>Berechnung</value>
+  </data>
+  <data name="Info_label" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="Warning_label" xml:space="preserve">
+    <value>Warnung</value>
+  </data>
+  <data name="Error_label" xml:space="preserve">
+    <value>Fehler</value>
+  </data>
+  <data name="Fatal_label" xml:space="preserve">
+    <value>Schwerwiegend</value>
+  </data>
+  <data name="ActionRequired_label" xml:space="preserve">
+    <value>Aktion erforderlich</value>
+  </data>
+  <data name="Note_label" xml:space="preserve">
+    <value>Hinweis</value>
   </data>
 </root>

@@ -19,14 +19,27 @@ namespace Zetbox.App.Base
     using System.Linq;
     using System.Text;
     using Zetbox.API;
+    using Zetbox.API.Common;
 
     [Implementor]
-    public static class EnumerationEntryActions
+    public class EnumerationEntryActions
     {
+        private static IAssetsManager _assets;
+
+        public EnumerationEntryActions(IAssetsManager assets)
+        {
+            _assets = assets;
+        }
+
         [Invocation]
         public static void GetLabel(Zetbox.App.Base.EnumerationEntry obj, MethodReturnEventArgs<System.String> e)
         {
             e.Result = !string.IsNullOrEmpty(obj.Label) ? obj.Label : obj.Name;
+
+            if (obj.Enumeration == null || obj.Enumeration.Module == null)
+                return;
+
+            e.Result = _assets.GetString(obj.Enumeration.Module, ZetboxAssetKeys.ConstructBaseName(obj.Enumeration), ZetboxAssetKeys.ConstructLabelKey(obj), e.Result);
         }
 
         
