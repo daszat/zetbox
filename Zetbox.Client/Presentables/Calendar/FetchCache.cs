@@ -113,6 +113,8 @@ namespace Zetbox.Client.Presentables.Calendar
             var result = MakeFetchTask(from, to);
             result.OnResult(t =>
             {
+                if (_ctx.IsDisposed) return;
+
                 var range = (to - from);
                 MakeFetchTask(from - range, to - range);
                 MakeFetchTask(from + range, to + range);
@@ -128,6 +130,7 @@ namespace Zetbox.Client.Presentables.Calendar
         private ZbTask<IEnumerable<EventViewModel>> MakeFetchTask(DateTime from, DateTime to)
         {
             var result = new List<ZbTask<List<EventViewModel>>>();
+            if (_ctx.IsDisposed) return new ZbTask<IEnumerable<EventViewModel>>(result);
 
             for (var curDay = from.Date; curDay <= to; curDay = curDay.AddDays(1))
             {
