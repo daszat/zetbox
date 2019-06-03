@@ -124,13 +124,13 @@
     <value>This relation does not specify a containment.</value>
   </data>
   <data name="AContainsB_label" xml:space="preserve">
-    <value>A Contains B</value>
+    <value>AContainsB</value>
   </data>
   <data name="AContainsB_description" xml:space="preserve">
     <value>B is an integral part of A.</value>
   </data>
   <data name="BContainsA_label" xml:space="preserve">
-    <value>B Contains A</value>
+    <value>BContainsA</value>
   </data>
   <data name="BContainsA_description" xml:space="preserve">
     <value>A is an integral part of B.</value>
