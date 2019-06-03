@@ -1247,10 +1247,10 @@
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Date" Type="datetime2" Nullable="false" />
-    <Property Name="Exception" Type="nvarchar" MaxLength="4000" Nullable="true" />
+    <Property Name="Exception" Type="nvarchar" Nullable="true" />
     <Property Name="Level" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="Logger" Type="nvarchar" MaxLength="255" Nullable="false" />
-    <Property Name="Message" Type="nvarchar" MaxLength="4000" Nullable="false" />
+    <Property Name="Message" Type="nvarchar" Nullable="false" />
     <Property Name="Thread" Type="nvarchar" MaxLength="255" Nullable="false" />
   </EntityType>
 	
@@ -1463,7 +1463,7 @@
     <Property Name="fk_ChangedBy" Type="int" />
     <Property Name="fk_CreatedBy" Type="int" />
     <Property Name="fk_ObjectClass" Type="int" />
-    <Property Name="CategoryTags" Type="nvarchar" MaxLength="4000" Nullable="true" />
+    <Property Name="CategoryTags" Type="nvarchar" Nullable="true" />
     <Property Name="ChangedOn" Type="datetime2" Nullable="false" />
     <Property Name="CodeTemplate" Type="nvarchar" Nullable="true" />
     <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
@@ -1765,7 +1765,7 @@
     <Property Name="fk_ChangedBy" Type="int" />
     <Property Name="fk_CreatedBy" Type="int" />
     <Property Name="AllowFilterCollections" Type="bit" Nullable="false" />
-    <Property Name="CategoryTags" Type="nvarchar" MaxLength="4000" Nullable="true" />
+    <Property Name="CategoryTags" Type="nvarchar" Nullable="true" />
     <Property Name="ChangedOn" Type="datetime2" Nullable="false" />
     <Property Name="CodeTemplate" Type="nvarchar" Nullable="true" />
     <Property Name="CreatedOn" Type="datetime2" Nullable="false" />
@@ -2257,7 +2257,7 @@
     <Property Name="fk_DefaultGridCellKind" Type="int" />
     <Property Name="fk_Module" Type="int" />
     <Property Name="Deleted" Type="bit" Nullable="false" />
-    <Property Name="Description" Type="nvarchar" MaxLength="4000" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" Nullable="false" />
     <Property Name="ExportGuid" Type="uniqueidentifier" Nullable="false" />
     <Property Name="ViewModelTypeRef" Type="nvarchar" MaxLength="2000" Nullable="true" />
   </EntityType>

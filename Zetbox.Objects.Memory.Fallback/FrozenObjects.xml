@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2019-04-15T07:53:40.1456249Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2019-06-03T13:05:59.4110731Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="1bdbed14-0f97-499c-9208-cc79fdb14d06">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.603232Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2011-06-16T08:03:02Z</ZetboxBase:CreatedOn>
@@ -7988,6 +7988,7 @@ public static void ObjectIsValid(YearFilterConfiguration obj, ObjectIsValidEvent
     <ZetboxBase:EnumerationEntries_pos>14</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Label>Action Required</ZetboxBase:Label>
     <ZetboxBase:Name>ActionRequired</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>14</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="80d950c3-96a0-41c1-a60b-c3b697d67710">
@@ -7997,6 +7998,7 @@ public static void ObjectIsValid(YearFilterConfiguration obj, ObjectIsValidEvent
     <ZetboxBase:EnumerationEntries_pos>6</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Label>Active</ZetboxBase:Label>
     <ZetboxBase:Name>Active</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>6</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="5390887e-6e87-44c2-8656-ecdc05e40549">
@@ -8006,6 +8008,7 @@ public static void ObjectIsValid(YearFilterConfiguration obj, ObjectIsValidEvent
     <ZetboxBase:EnumerationEntries_pos>4</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Label>Archived</ZetboxBase:Label>
     <ZetboxBase:Name>Archived</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>4</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="49f3b915-a2fd-4d3b-ad9d-d6955d26faac">
@@ -8015,6 +8018,7 @@ public static void ObjectIsValid(YearFilterConfiguration obj, ObjectIsValidEvent
     <ZetboxBase:EnumerationEntries_pos>3</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Label>Bad</ZetboxBase:Label>
     <ZetboxBase:Name>Bad</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>3</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="3f602af9-3ec6-4404-b0f5-e8798d537e90">
@@ -8024,6 +8028,7 @@ public static void ObjectIsValid(YearFilterConfiguration obj, ObjectIsValidEvent
     <ZetboxBase:EnumerationEntries_pos>9</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Label>Calculation</ZetboxBase:Label>
     <ZetboxBase:Name>Calculation</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>9</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="29367bb7-27b6-401b-b3a1-ea6fa7de621f">
@@ -8033,6 +8038,7 @@ public static void ObjectIsValid(YearFilterConfiguration obj, ObjectIsValidEvent
     <ZetboxBase:EnumerationEntries_pos>5</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Label>Deactivated</ZetboxBase:Label>
     <ZetboxBase:Name>Deactivated</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>5</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="43a10bf1-bd43-459e-ba19-cdf3976acc8e">
@@ -8042,6 +8048,7 @@ public static void ObjectIsValid(YearFilterConfiguration obj, ObjectIsValidEvent
     <ZetboxBase:EnumerationEntries_pos>12</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Label>Error</ZetboxBase:Label>
     <ZetboxBase:Name>Error</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>12</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="27507ea2-34e0-4aa6-91a8-ab9bd4eabaf9">
@@ -8051,6 +8058,7 @@ public static void ObjectIsValid(YearFilterConfiguration obj, ObjectIsValidEvent
     <ZetboxBase:EnumerationEntries_pos>13</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Label>Fatal</ZetboxBase:Label>
     <ZetboxBase:Name>Fatal</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>13</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="1b9a4894-3edf-477c-b617-d2890047c8fe">
@@ -8060,6 +8068,7 @@ public static void ObjectIsValid(YearFilterConfiguration obj, ObjectIsValidEvent
     <ZetboxBase:EnumerationEntries_pos>1</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Label>Good</ZetboxBase:Label>
     <ZetboxBase:Name>Good</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>1</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="2dcb9a35-691e-4703-9499-544543431896">
@@ -8069,6 +8078,7 @@ public static void ObjectIsValid(YearFilterConfiguration obj, ObjectIsValidEvent
     <ZetboxBase:EnumerationEntries_pos>10</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Label>Info</ZetboxBase:Label>
     <ZetboxBase:Name>Info</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>10</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="2b7dbdd1-1115-47b9-b553-f7d8a9441b83">
@@ -8078,6 +8088,7 @@ public static void ObjectIsValid(YearFilterConfiguration obj, ObjectIsValidEvent
     <ZetboxBase:EnumerationEntries_pos>8</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Label>Input</ZetboxBase:Label>
     <ZetboxBase:Name>Input</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>8</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="ea323aab-eb7e-4289-83a3-63c321693420">
@@ -8087,6 +8098,7 @@ public static void ObjectIsValid(YearFilterConfiguration obj, ObjectIsValidEvent
     <ZetboxBase:EnumerationEntries_pos>2</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Label>Neutral</ZetboxBase:Label>
     <ZetboxBase:Name>Neutral</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>2</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="4fa74946-ca1a-40a8-9b11-ddd4fd63af0a">
@@ -8096,6 +8108,7 @@ public static void ObjectIsValid(YearFilterConfiguration obj, ObjectIsValidEvent
     <ZetboxBase:EnumerationEntries_pos>0</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Label>None</ZetboxBase:Label>
     <ZetboxBase:Name>None</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>0</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="06ea6409-a312-4b91-860f-c91126c895f7">
@@ -8105,6 +8118,7 @@ public static void ObjectIsValid(YearFilterConfiguration obj, ObjectIsValidEvent
     <ZetboxBase:EnumerationEntries_pos>15</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Label>Note</ZetboxBase:Label>
     <ZetboxBase:Name>Note</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>15</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="affcf5ee-84cf-4034-831f-ef900e405de9">
@@ -8114,6 +8128,7 @@ public static void ObjectIsValid(YearFilterConfiguration obj, ObjectIsValidEvent
     <ZetboxBase:EnumerationEntries_pos>7</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Label>Output</ZetboxBase:Label>
     <ZetboxBase:Name>Output</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>7</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="6acc98ac-3b24-424c-8450-332dfced66ee">
@@ -8123,6 +8138,7 @@ public static void ObjectIsValid(YearFilterConfiguration obj, ObjectIsValidEvent
     <ZetboxBase:EnumerationEntries_pos>11</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Label>Warning</ZetboxBase:Label>
     <ZetboxBase:Name>Warning</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>11</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="b13310d4-156b-44d0-985b-13e80031139c">
@@ -8131,6 +8147,7 @@ public static void ObjectIsValid(YearFilterConfiguration obj, ObjectIsValidEvent
     <ZetboxBase:Enumeration>cf9e5c97-7243-43f8-84ff-3590376c770c</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>1</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Details</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>2</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="9eb636db-dc81-465d-9423-0cc2339032d8">
@@ -8139,6 +8156,7 @@ public static void ObjectIsValid(YearFilterConfiguration obj, ObjectIsValidEvent
     <ZetboxBase:Enumeration>cf9e5c97-7243-43f8-84ff-3590376c770c</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>0</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>List</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>1</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="0075b44f-1821-4a10-ad71-9875d205df64">
@@ -8147,6 +8165,7 @@ public static void ObjectIsValid(YearFilterConfiguration obj, ObjectIsValidEvent
     <ZetboxBase:Enumeration>c6f57b69-d401-4fe3-baec-59b9c0e11cad</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>0</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Ascending</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>0</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="112db681-8114-46b4-95bb-873651b3e66f">
@@ -8155,6 +8174,7 @@ public static void ObjectIsValid(YearFilterConfiguration obj, ObjectIsValidEvent
     <ZetboxBase:Enumeration>c6f57b69-d401-4fe3-baec-59b9c0e11cad</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>1</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Descending</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>1</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="98507578-bafe-4ef9-84f8-3eb354153ca2">
@@ -8164,6 +8184,7 @@ public static void ObjectIsValid(YearFilterConfiguration obj, ObjectIsValidEvent
     <ZetboxBase:Enumeration>803fb38d-f0d2-409c-9f15-30da4bdcf576</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>400</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>ASPNET</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>1</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="e3ce800f-eb38-4fac-9043-cc016704b4a2">
@@ -8173,6 +8194,7 @@ public static void ObjectIsValid(YearFilterConfiguration obj, ObjectIsValidEvent
     <ZetboxBase:Enumeration>803fb38d-f0d2-409c-9f15-30da4bdcf576</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>200</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>TEST</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>2</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="f35abbe5-0fe1-4abf-a751-dc0dec58f737">
@@ -8182,6 +8204,7 @@ public static void ObjectIsValid(YearFilterConfiguration obj, ObjectIsValidEvent
     <ZetboxBase:Enumeration>803fb38d-f0d2-409c-9f15-30da4bdcf576</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>300</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>WinForms</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>3</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="546590c8-ae32-4c08-a2fe-20a3804d0ee1">
@@ -8191,6 +8214,7 @@ public static void ObjectIsValid(YearFilterConfiguration obj, ObjectIsValidEvent
     <ZetboxBase:Enumeration>803fb38d-f0d2-409c-9f15-30da4bdcf576</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>100</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>WPF</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>0</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="157eeeb2-e332-4f1b-911a-a18ec778b1cb">
@@ -8199,6 +8223,7 @@ public static void ObjectIsValid(YearFilterConfiguration obj, ObjectIsValidEvent
     <ZetboxBase:Enumeration>376054c0-6e97-450e-b7cf-ac6b8e0eb48f</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>0</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Default</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>0</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="34233210-9855-4fb0-9d43-844fe38e595b">
@@ -8208,6 +8233,7 @@ public static void ObjectIsValid(YearFilterConfiguration obj, ObjectIsValidEvent
     <ZetboxBase:EnumerationEntries_pos>1</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Label>Fit content</ZetboxBase:Label>
     <ZetboxBase:Name>FitContent</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>1</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="6030c618-c8d7-4eb1-9b3b-4a516e721ea2">
@@ -8216,6 +8242,7 @@ public static void ObjectIsValid(YearFilterConfiguration obj, ObjectIsValidEvent
     <ZetboxBase:Enumeration>376054c0-6e97-450e-b7cf-ac6b8e0eb48f</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>6</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Huge</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>60</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="75b6eafe-d6a9-4d4a-acd7-234baddc0a46">
@@ -8224,6 +8251,7 @@ public static void ObjectIsValid(YearFilterConfiguration obj, ObjectIsValidEvent
     <ZetboxBase:Enumeration>376054c0-6e97-450e-b7cf-ac6b8e0eb48f</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>5</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Large</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>50</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="a78c5d4b-841f-4e24-a1d7-477176bff2d2">
@@ -8232,6 +8260,7 @@ public static void ObjectIsValid(YearFilterConfiguration obj, ObjectIsValidEvent
     <ZetboxBase:Enumeration>376054c0-6e97-450e-b7cf-ac6b8e0eb48f</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>4</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Medium</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>40</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="7730f8b1-670b-40ef-aa0f-3d5d92b217da">
@@ -8240,6 +8269,7 @@ public static void ObjectIsValid(YearFilterConfiguration obj, ObjectIsValidEvent
     <ZetboxBase:Enumeration>376054c0-6e97-450e-b7cf-ac6b8e0eb48f</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>3</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Small</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>30</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="dd4077ab-ebeb-40e9-a84d-1b4a31aa5bff">
@@ -8248,6 +8278,7 @@ public static void ObjectIsValid(YearFilterConfiguration obj, ObjectIsValidEvent
     <ZetboxBase:Enumeration>376054c0-6e97-450e-b7cf-ac6b8e0eb48f</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>7</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Stretch</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>100</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="854cd518-39f0-45e3-ac55-7da0369cda5c">
@@ -8256,6 +8287,7 @@ public static void ObjectIsValid(YearFilterConfiguration obj, ObjectIsValidEvent
     <ZetboxBase:Enumeration>376054c0-6e97-450e-b7cf-ac6b8e0eb48f</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>2</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Tiny</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>20</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry ExportGuid="3f5395bb-cc89-4bd2-b1ed-8a9151f76bfe">
@@ -14371,10 +14403,9 @@ public static void isValid_IsCurrentYearDefault(YearFilterConfiguration obj, Pro
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
   <ZetboxBase:StringRangeConstraint ExportGuid="ef21d105-f97d-4f81-a98b-25d472cbc41f">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:01.866845Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2019-06-03T13:00:51.674132Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>93e25648-50f9-40d8-8753-e5dadab68e1d</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:MaxLength>4000</ZetboxBase:MaxLength>
     <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
   </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:InitOnlyConstraint ExportGuid="1e28e996-55d1-48b0-a1ed-7dd23f7c7bff">
@@ -21965,6 +21996,7 @@ public static void ObjectIsValid(StagingDatabase obj, ObjectIsValidEventArgs e)
     <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>2200</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>AnsiString</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>0</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="4c21bd8f-0fc4-4feb-9441-0bc20d31d3d0">
@@ -21973,6 +22005,7 @@ public static void ObjectIsValid(StagingDatabase obj, ObjectIsValidEventArgs e)
     <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>2100</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>AnsiStringFixedLength</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>22</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="41b5f5c1-7dbc-418b-b701-e3b6d59b0a09">
@@ -21981,6 +22014,7 @@ public static void ObjectIsValid(StagingDatabase obj, ObjectIsValidEventArgs e)
     <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>1900</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Binary</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>1</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="b8adb2b5-8299-443e-82f0-592d32d24049">
@@ -21989,6 +22023,7 @@ public static void ObjectIsValid(StagingDatabase obj, ObjectIsValidEventArgs e)
     <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>2000</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Boolean</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>3</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="96e71da7-3295-4a00-ad00-27c2929f180e">
@@ -21997,6 +22032,7 @@ public static void ObjectIsValid(StagingDatabase obj, ObjectIsValidEventArgs e)
     <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>2600</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Byte</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>2</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="4a5d99ea-4d31-4a06-9f01-23abb6ea46ad">
@@ -22005,6 +22041,7 @@ public static void ObjectIsValid(StagingDatabase obj, ObjectIsValidEventArgs e)
     <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>2700</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Currency</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>4</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="a82c83d1-09d7-4e80-86fb-640c57a2f103">
@@ -22013,6 +22050,7 @@ public static void ObjectIsValid(StagingDatabase obj, ObjectIsValidEventArgs e)
     <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>2500</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Date</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>5</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="2d8fa50d-e03d-42b3-9290-dcf7c1c0b941">
@@ -22021,6 +22059,7 @@ public static void ObjectIsValid(StagingDatabase obj, ObjectIsValidEventArgs e)
     <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>2300</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>DateTime</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>6</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="75c0d14c-76ad-4411-be97-087ee68468e7">
@@ -22029,6 +22068,7 @@ public static void ObjectIsValid(StagingDatabase obj, ObjectIsValidEventArgs e)
     <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>2400</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>DateTime2</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>26</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="6ec25427-f23d-4848-8256-c4fbdfcb09d9">
@@ -22037,6 +22077,7 @@ public static void ObjectIsValid(StagingDatabase obj, ObjectIsValidEventArgs e)
     <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>700</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>DateTimeOffset</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>27</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="b8534e08-60df-46d9-95c7-fb8c7fe71b4a">
@@ -22045,6 +22086,7 @@ public static void ObjectIsValid(StagingDatabase obj, ObjectIsValidEventArgs e)
     <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>600</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Decimal</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>7</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="854cde54-70e1-4b96-9c0c-127c79eb0145">
@@ -22053,6 +22095,7 @@ public static void ObjectIsValid(StagingDatabase obj, ObjectIsValidEventArgs e)
     <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>200</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Double</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>8</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="25b1044a-dc8e-44b1-bf75-0d6ce38be484">
@@ -22061,6 +22104,7 @@ public static void ObjectIsValid(StagingDatabase obj, ObjectIsValidEventArgs e)
     <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>100</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Guid</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>9</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="235943a4-b9a8-4330-929a-fbe98fb37b01">
@@ -22069,6 +22113,7 @@ public static void ObjectIsValid(StagingDatabase obj, ObjectIsValidEventArgs e)
     <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>300</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Int16</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>10</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="2f68c3cd-8c7b-4610-a19b-c7e0a97e5d96">
@@ -22077,6 +22122,7 @@ public static void ObjectIsValid(StagingDatabase obj, ObjectIsValidEventArgs e)
     <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>500</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Int32</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>11</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="5ae9ac6c-638b-4b00-aa15-7c8b9f8e4fa2">
@@ -22085,6 +22131,7 @@ public static void ObjectIsValid(StagingDatabase obj, ObjectIsValidEventArgs e)
     <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>400</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Int64</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>12</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="00fcbc9c-ef5a-4494-8cc2-35e174374379">
@@ -22093,6 +22140,7 @@ public static void ObjectIsValid(StagingDatabase obj, ObjectIsValidEventArgs e)
     <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>800</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Object</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>13</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="adea53de-e1c5-48d4-a175-9fe1e1b4865c">
@@ -22101,6 +22149,7 @@ public static void ObjectIsValid(StagingDatabase obj, ObjectIsValidEventArgs e)
     <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>1500</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>SByte</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>14</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="d2065a0f-298d-42ec-8137-96a8c654ca9a">
@@ -22109,6 +22158,7 @@ public static void ObjectIsValid(StagingDatabase obj, ObjectIsValidEventArgs e)
     <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>1400</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Single</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>15</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="5a35d909-7b29-49db-961d-4ef33d78f99c">
@@ -22117,6 +22167,7 @@ public static void ObjectIsValid(StagingDatabase obj, ObjectIsValidEventArgs e)
     <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>1600</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>String</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>16</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="0b18614e-6b7c-4e17-93aa-ddc945412d82">
@@ -22125,6 +22176,7 @@ public static void ObjectIsValid(StagingDatabase obj, ObjectIsValidEventArgs e)
     <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>1800</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>StringFixedLength</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>23</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="69bcf769-2c56-4ad2-a8a7-5c63fb365887">
@@ -22133,6 +22185,7 @@ public static void ObjectIsValid(StagingDatabase obj, ObjectIsValidEventArgs e)
     <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>1700</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Time</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>17</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="5e9cc2db-8298-486d-a6a0-fa82bc450e8f">
@@ -22141,6 +22194,7 @@ public static void ObjectIsValid(StagingDatabase obj, ObjectIsValidEventArgs e)
     <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>1000</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>UInt16</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>18</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="5168ee49-8e33-4603-8ec2-bb3857b47c03">
@@ -22149,6 +22203,7 @@ public static void ObjectIsValid(StagingDatabase obj, ObjectIsValidEventArgs e)
     <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>900</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>UInt32</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>19</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="70380ddf-25fa-4e15-a0b1-fc73f98e6f01">
@@ -22157,6 +22212,7 @@ public static void ObjectIsValid(StagingDatabase obj, ObjectIsValidEventArgs e)
     <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>1100</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>UInt64</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>20</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="b2d0a838-f4c5-4e1f-a5d6-bd3844c5e269">
@@ -22165,6 +22221,7 @@ public static void ObjectIsValid(StagingDatabase obj, ObjectIsValidEventArgs e)
     <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>1300</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>VarNumeric</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>21</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="b27a5bb6-5fc1-4b94-9541-cda08ff46349">
@@ -22173,6 +22230,7 @@ public static void ObjectIsValid(StagingDatabase obj, ObjectIsValidEventArgs e)
     <ZetboxBase:Enumeration>9a72db72-05a6-4cfe-939a-35b62a187cfe</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>1200</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Xml</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>25</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="401097ed-8d85-40ab-be9e-022c4cbdd403">
@@ -22181,6 +22239,7 @@ public static void ObjectIsValid(StagingDatabase obj, ObjectIsValidEventArgs e)
     <ZetboxBase:Enumeration>197fbcb0-8e5c-4b77-a41b-4cc31d804fbf</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>100</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>CustomSource</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>4</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="c369d276-b9a7-48bc-847a-9ae97ea2a682">
@@ -22189,6 +22248,7 @@ public static void ObjectIsValid(StagingDatabase obj, ObjectIsValidEventArgs e)
     <ZetboxBase:Enumeration>197fbcb0-8e5c-4b77-a41b-4cc31d804fbf</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>200</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Ignored</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>3</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="55f6a5bf-c8f3-46a3-9c2e-95c7dbace1d6">
@@ -22197,6 +22257,7 @@ public static void ObjectIsValid(StagingDatabase obj, ObjectIsValidEventArgs e)
     <ZetboxBase:Enumeration>197fbcb0-8e5c-4b77-a41b-4cc31d804fbf</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>300</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Mapped</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>1</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="e5f94a88-a353-47b1-891e-eef70f32c8ae">
@@ -22205,6 +22266,7 @@ public static void ObjectIsValid(StagingDatabase obj, ObjectIsValidEventArgs e)
     <ZetboxBase:Enumeration>197fbcb0-8e5c-4b77-a41b-4cc31d804fbf</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>400</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Questions</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>2</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry ExportGuid="ceb2b91b-11d6-4921-9474-202a91d12f9f">
@@ -27811,15 +27873,17 @@ public static void ObjectIsValid(TPHDerivedBObj obj, ObjectIsValidEventArgs e)
     <ZetboxBase:Enumeration>67b48828-e7d2-4432-a942-88e96d74b40a</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>100</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>First</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>0</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="c8403ba5-7e86-4b0f-b9a5-47720cd79b48">
-    <ZetboxBase:ChangedOn>2011-08-06T08:31:08.944048Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2019-04-15T08:28:55.648051Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T04:08:05Z</ZetboxBase:CreatedOn>
     <ZetboxBase:Description>Second Test Entry</ZetboxBase:Description>
     <ZetboxBase:Enumeration>67b48828-e7d2-4432-a942-88e96d74b40a</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>200</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Second</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>true</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>1</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="93bac9f3-c4c6-4ed2-9c93-0f4575200333">
@@ -27828,6 +27892,7 @@ public static void ObjectIsValid(TPHDerivedBObj obj, ObjectIsValidEventArgs e)
     <ZetboxBase:Enumeration>67b48828-e7d2-4432-a942-88e96d74b40a</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>201</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Third</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>3</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry ExportGuid="d1d2b3ef-b90d-469b-8cec-2807e83a1b41">
@@ -38439,6 +38504,7 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
     <ZetboxBase:EnumerationEntries_pos>100</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Label>Read &amp; Write</ZetboxBase:Label>
     <ZetboxBase:Name>Change</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>3</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="d290265b-ff4e-4201-9ba3-c945ad6fd506">
@@ -38448,6 +38514,7 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
     <ZetboxBase:Enumeration>1d067873-d5e7-448e-a46a-4377a1a16ece</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>600</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Create</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>8</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="c64d196e-9985-4cb3-b084-0a3e66a7b70f">
@@ -38457,6 +38524,7 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
     <ZetboxBase:Enumeration>1d067873-d5e7-448e-a46a-4377a1a16ece</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>101</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Delete</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>4</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="140f60f7-5616-49a0-a070-09c8e341d6a4">
@@ -38466,6 +38534,7 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
     <ZetboxBase:Enumeration>1d067873-d5e7-448e-a46a-4377a1a16ece</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>701</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Full</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>15</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="25aaeb21-8143-467d-9368-94aede884053">
@@ -38475,6 +38544,7 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
     <ZetboxBase:Enumeration>1d067873-d5e7-448e-a46a-4377a1a16ece</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>0</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Read</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>1</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="8ed37905-2837-48b3-81f1-56143651e14c">
@@ -38484,6 +38554,7 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
     <ZetboxBase:Enumeration>89eea80f-b5fd-4972-9163-9bbfef61c747</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>101</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>AContainsB</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>1</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="6038e597-609e-4eec-94ca-f7d283667569">
@@ -38493,6 +38564,7 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
     <ZetboxBase:Enumeration>89eea80f-b5fd-4972-9163-9bbfef61c747</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>200</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>BContainsA</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>2</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="a14867d0-49ab-4fa5-8f77-8da8b6de6ea0">
@@ -38502,6 +38574,7 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
     <ZetboxBase:Enumeration>89eea80f-b5fd-4972-9163-9bbfef61c747</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>100</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Independent</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>0</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="43d8088d-59ac-45ce-8f50-b0de19e6c286">
@@ -38510,6 +38583,7 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
     <ZetboxBase:Enumeration>1385e46d-3e5b-4d91-bf9a-94a740f08ba1</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>300</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Date</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>2</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="148f717e-4ca7-49c8-ba1e-7c88d119e8b6">
@@ -38518,6 +38592,7 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
     <ZetboxBase:Enumeration>1385e46d-3e5b-4d91-bf9a-94a740f08ba1</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>100</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>DateTime</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>1</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="26f8ee39-c050-4a69-9205-e6bc8c8cac50">
@@ -38526,6 +38601,7 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
     <ZetboxBase:Enumeration>1385e46d-3e5b-4d91-bf9a-94a740f08ba1</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>200</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Time</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>3</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="685ea3d9-952c-4679-b931-5dad1425255e">
@@ -38534,6 +38610,7 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
     <ZetboxBase:Enumeration>3961bb73-7ab6-4529-9457-ede6927224c7</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>5</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Friday</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>5</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="01aa69a4-f92d-411a-bfee-177055d8e10d">
@@ -38542,6 +38619,7 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
     <ZetboxBase:Enumeration>3961bb73-7ab6-4529-9457-ede6927224c7</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>1</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Monday</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>1</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="11b5cfd8-b901-4231-b121-f0af4167fb0a">
@@ -38550,6 +38628,7 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
     <ZetboxBase:Enumeration>3961bb73-7ab6-4529-9457-ede6927224c7</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>6</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Saturday</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>6</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="2bf88097-1825-4671-b317-c3ffe9addca0">
@@ -38558,6 +38637,7 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
     <ZetboxBase:Enumeration>3961bb73-7ab6-4529-9457-ede6927224c7</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>0</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Sunday</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>0</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="4e540de9-6844-4578-8b5c-1bc6047c9a1c">
@@ -38566,6 +38646,7 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
     <ZetboxBase:Enumeration>3961bb73-7ab6-4529-9457-ede6927224c7</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>4</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Thursday</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>4</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="111c7e92-53f4-4c9b-9f6d-8bfa7302177e">
@@ -38574,6 +38655,7 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
     <ZetboxBase:Enumeration>3961bb73-7ab6-4529-9457-ede6927224c7</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>2</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Tuesday</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>2</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="49a1e459-42f5-4d5c-ae7c-788cd45be4b1">
@@ -38582,6 +38664,7 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
     <ZetboxBase:Enumeration>3961bb73-7ab6-4529-9457-ede6927224c7</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>3</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Wednesday</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>3</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="3561d68c-cbdb-42b6-b755-d8fedcf8dc24">
@@ -38591,6 +38674,7 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
     <ZetboxBase:Enumeration>2b0b1986-0337-4d90-ad59-bc9d1ad82b2b</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>200</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>ClientOnly</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>1</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="4ce23bf4-9852-4a73-87db-45f40f22a37e">
@@ -38600,6 +38684,7 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
     <ZetboxBase:Enumeration>2b0b1986-0337-4d90-ad59-bc9d1ad82b2b</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>300</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>None</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>0</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="93625455-7181-4764-9562-23bba3771d29">
@@ -38609,6 +38694,7 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
     <ZetboxBase:Enumeration>2b0b1986-0337-4d90-ad59-bc9d1ad82b2b</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>100</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>ServerOnly</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>2</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="5d7e57af-2860-417a-810b-58d6dd8c25c6">
@@ -38617,6 +38703,7 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
     <ZetboxBase:Enumeration>9f6db56d-9c0f-4a76-92a6-770044ca9691</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>3</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Daily</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>4</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="32bb4a71-7f2c-4d16-af45-2061455fd4f3">
@@ -38625,6 +38712,7 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
     <ZetboxBase:Enumeration>9f6db56d-9c0f-4a76-92a6-770044ca9691</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>4</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Hourly</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>5</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="53f01ec0-50e0-4422-ac31-698f6482d894">
@@ -38633,6 +38721,7 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
     <ZetboxBase:Enumeration>9f6db56d-9c0f-4a76-92a6-770044ca9691</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>5</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Minutely</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>6</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="5103f2d8-f4b9-4778-86ef-0868de37bd24">
@@ -38641,6 +38730,7 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
     <ZetboxBase:Enumeration>9f6db56d-9c0f-4a76-92a6-770044ca9691</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>1</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Monthly</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>2</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="17fedb59-bfc3-4c80-89e4-8713f8f00944">
@@ -38649,6 +38739,7 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
     <ZetboxBase:Enumeration>9f6db56d-9c0f-4a76-92a6-770044ca9691</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>6</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Secondly</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>7</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="f2fe1162-6ffa-432b-b495-35563eb38e0c">
@@ -38657,6 +38748,7 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
     <ZetboxBase:Enumeration>9f6db56d-9c0f-4a76-92a6-770044ca9691</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>2</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Weekly</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>3</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="42791a97-25aa-46ca-a70b-a316aae28b98">
@@ -38665,6 +38757,7 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
     <ZetboxBase:Enumeration>9f6db56d-9c0f-4a76-92a6-770044ca9691</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>0</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Yearly</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>1</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="d0d79537-03cc-4eaa-a41a-840825eaa814">
@@ -38674,6 +38767,7 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
     <ZetboxBase:Enumeration>4f2b5005-672e-46ef-80ed-94b8cdd053db</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>200</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>One</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>2</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="c05cda60-88fe-4bd5-bba5-2a7e641b0c08">
@@ -38683,6 +38777,7 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
     <ZetboxBase:Enumeration>4f2b5005-672e-46ef-80ed-94b8cdd053db</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>300</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>ZeroOrMore</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>3</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="38584c56-759f-4d5a-a7a2-8cab15608eea">
@@ -38692,6 +38787,7 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
     <ZetboxBase:Enumeration>4f2b5005-672e-46ef-80ed-94b8cdd053db</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>100</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>ZeroOrOne</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>1</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="566a6de1-1494-4039-9f88-efa3472eca14">
@@ -38701,6 +38797,7 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
     <ZetboxBase:Enumeration>351a22e8-d047-4878-b6d3-3945489139a0</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>200</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>MergeIntoA</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>1</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="b72d3781-3d94-426e-b9a6-d86cac991359">
@@ -38710,6 +38807,7 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
     <ZetboxBase:Enumeration>351a22e8-d047-4878-b6d3-3945489139a0</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>400</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>MergeIntoB</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>2</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="75e22621-c44b-4cac-88fa-5ccc44127f22">
@@ -38719,6 +38817,7 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
     <ZetboxBase:Enumeration>351a22e8-d047-4878-b6d3-3945489139a0</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>100</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Replicate</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>3</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="dd4a4b7f-d1d2-4ff5-b87f-149979bdd75b">
@@ -38728,6 +38827,7 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
     <ZetboxBase:Enumeration>351a22e8-d047-4878-b6d3-3945489139a0</ZetboxBase:Enumeration>
     <ZetboxBase:EnumerationEntries_pos>300</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Name>Separate</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>4</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="1a1e8a9a-e509-46bc-9b7f-5dc696ee4e6d">
@@ -38737,6 +38837,7 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
     <ZetboxBase:EnumerationEntries_pos>1</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Label>Table per Hierarchy</ZetboxBase:Label>
     <ZetboxBase:Name>TPH</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>2</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:EnumerationEntry ExportGuid="e6a227e0-9a3c-4d1d-919f-dfba10756b89">
@@ -38746,6 +38847,7 @@ public static void ObjectIsValid(ViewReadOnlyConstraint obj, ObjectIsValidEventA
     <ZetboxBase:EnumerationEntries_pos>0</ZetboxBase:EnumerationEntries_pos>
     <ZetboxBase:Label>Table per Type</ZetboxBase:Label>
     <ZetboxBase:Name>TPT</ZetboxBase:Name>
+    <ZetboxBase:NotSelectable>false</ZetboxBase:NotSelectable>
     <ZetboxBase:Value>1</ZetboxBase:Value>
   </ZetboxBase:EnumerationEntry>
   <ZetboxBase:DataType_implements_ImplementedInterfaces_RelationEntry ExportGuid="003de5e3-31fd-4b97-9756-d18cecf441e6">
@@ -52844,10 +52946,9 @@ public static void isValid_IsList(ValueTypeProperty obj, PropertyIsValidEventArg
     <ZetboxBase:CreatedOn>2011-07-29T11:29:39Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
   <ZetboxBase:StringRangeConstraint ExportGuid="2eff4001-f8ab-48ed-b8a9-d17503017046">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:05.407048Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2019-06-03T12:59:30.238457Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>203915b1-5bbf-49ff-864b-b66098b39481</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2011-07-29T11:33:40Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:MaxLength>4000</ZetboxBase:MaxLength>
     <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
   </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="1ed29677-689d-4d63-853f-e7242af28ede">
@@ -52880,10 +52981,9 @@ public static void isValid_IsList(ValueTypeProperty obj, PropertyIsValidEventArg
     <ZetboxBase:CreatedOn>2011-07-29T11:31:50Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
   <ZetboxBase:StringRangeConstraint ExportGuid="45348a53-b5b8-4db0-aba0-4602b3271b86">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:05.428049Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2019-06-03T12:59:30.238457Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>d80639ab-d40f-41db-a51f-c1a71440654e</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2011-07-29T11:31:50Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:MaxLength>4000</ZetboxBase:MaxLength>
     <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
   </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="7f49055c-7f5d-4dd3-a4b9-bd7e7b1bbd7f">
@@ -53084,10 +53184,9 @@ public static void isValid_IsList(ValueTypeProperty obj, PropertyIsValidEventArg
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
   <ZetboxBase:StringRangeConstraint ExportGuid="6e50576d-169f-4577-99df-3d5f36a9576a">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:05.561057Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2019-06-03T13:00:51.674132Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>d984fab4-5b62-4a5d-af6a-98cde8337729</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2010-10-13T10:53:50Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:MaxLength>4000</ZetboxBase:MaxLength>
     <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
   </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:ClientReadOnlyConstraint ExportGuid="29ced0a7-4939-4ff2-bd29-a701fa79c7b3">
@@ -53385,10 +53484,9 @@ public static void isValid_IsList(ValueTypeProperty obj, PropertyIsValidEventArg
     <ZetboxBase:CreatedOn>2017-12-21T09:43:56.466861Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
   <ZetboxBase:StringRangeConstraint ExportGuid="9d9c8bf8-26cf-4a35-a542-1fc4ebcd2504">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:05.738067Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2019-06-03T13:00:51.674132Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>13418a59-a804-4bc7-88ed-4d3509940301</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:MaxLength>4000</ZetboxBase:MaxLength>
     <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
   </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:ClientReadOnlyConstraint ExportGuid="726fc300-d6f9-4686-9caa-215895c30069">
