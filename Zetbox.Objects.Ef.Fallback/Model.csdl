@@ -971,10 +971,10 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="Date" Type="DateTime" Nullable="false"  />
-    <Property Name="Exception" Type="String" Nullable="true" MaxLength="4000"  />
+    <Property Name="Exception" Type="String" Nullable="true" MaxLength="2147483647"  />
     <Property Name="Level" Type="String" Nullable="false" MaxLength="20"  />
     <Property Name="Logger" Type="String" Nullable="false" MaxLength="255"  />
-    <Property Name="Message" Type="String" Nullable="false" MaxLength="4000"  />
+    <Property Name="Message" Type="String" Nullable="false" MaxLength="2147483647"  />
     <Property Name="Thread" Type="String" Nullable="false" MaxLength="255"  />
   </EntityType>
   <EntityType Name="FilterConfigurationEfImpl" Abstract="true">
@@ -1077,7 +1077,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
-    <Property Name="CategoryTags" Type="String" Nullable="true" MaxLength="4000"  />
+    <Property Name="CategoryTags" Type="String" Nullable="true" MaxLength="2147483647"  />
     <NavigationProperty Name="ChangedByImpl"
                         Relationship="Model.FK_Method_was_ChangedBy"
                         FromRole="Method"
@@ -1225,7 +1225,7 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" />
     <Property Name="AllowFilterCollections" Type="Boolean" Nullable="false"  />
-    <Property Name="CategoryTags" Type="String" Nullable="true" MaxLength="4000"  />
+    <Property Name="CategoryTags" Type="String" Nullable="true" MaxLength="2147483647"  />
     <NavigationProperty Name="ChangedByImpl"
                         Relationship="Model.FK_Property_was_ChangedBy"
                         FromRole="Property"
@@ -1606,7 +1606,7 @@
                         FromRole="ViewModelDescriptor"
                         ToRole="DefaultGridCellKind" />
     <Property Name="Deleted" Type="Boolean" Nullable="false"  />
-    <Property Name="Description" Type="String" Nullable="false" MaxLength="4000"  />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="2147483647"  />
     <Property Name="ExportGuid" Type="Guid" Nullable="false"  />
     <NavigationProperty Name="ModuleImpl"
                         Relationship="Model.FK_ViewModelDescriptor_has_Module"

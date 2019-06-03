@@ -9,7 +9,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.Generator.Templates.CollectionEntries
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"C:\Projects\zetbox\Zetbox.Generator\Templates\CollectionEntries\ValueCollectionEntryParentReference.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"D:\Projects\zetbox\Zetbox.Generator\Templates\CollectionEntries\ValueCollectionEntryParentReference.cst")]
     public partial class ValueCollectionEntryParentReference : Zetbox.Generator.ResourceTemplate
     {
 		protected IZetboxContext ctx;
@@ -43,11 +43,11 @@ namespace Zetbox.Generator.Templates.CollectionEntries
 
         public override void Generate()
         {
-#line 36 "C:\Projects\zetbox\Zetbox.Generator\Templates\CollectionEntries\ValueCollectionEntryParentReference.cst"
+#line 36 "D:\Projects\zetbox\Zetbox.Generator\Templates\CollectionEntries\ValueCollectionEntryParentReference.cst"
 string cacheName = "_" + propertyName + "Cache";
     string backingName = "_" + fkName;
 
-#line 39 "C:\Projects\zetbox\Zetbox.Generator\Templates\CollectionEntries\ValueCollectionEntryParentReference.cst"
+#line 39 "D:\Projects\zetbox\Zetbox.Generator\Templates\CollectionEntries\ValueCollectionEntryParentReference.cst"
 this.WriteObjects("        public ",  referencedInterface , " ",  propertyName , "\r\n");
 this.WriteObjects("        {\r\n");
 this.WriteObjects("            get\r\n");
@@ -98,7 +98,7 @@ this.WriteObjects("        }\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("        // backing store for serialization\r\n");
 this.WriteObjects("        private int? ",  backingName , ";\r\n");
-#line 90 "C:\Projects\zetbox\Zetbox.Generator\Templates\CollectionEntries\ValueCollectionEntryParentReference.cst"
+#line 90 "D:\Projects\zetbox\Zetbox.Generator\Templates\CollectionEntries\ValueCollectionEntryParentReference.cst"
 if (serializationList != null)
         serializationList.Add(disableExport ?  Serialization.SerializerType.Binary : Serialization.SerializerType.All, moduleNamespace, propertyName, "int?", backingName); // TODO: XML Namespace
 

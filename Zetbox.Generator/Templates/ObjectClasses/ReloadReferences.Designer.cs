@@ -10,7 +10,7 @@ using Zetbox.Generator.Extensions;
 
 namespace Zetbox.Generator.Templates.ObjectClasses
 {
-    [Arebis.CodeGeneration.TemplateInfo(@"C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadReferences.cst")]
+    [Arebis.CodeGeneration.TemplateInfo(@"D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadReferences.cst")]
     public partial class ReloadReferences : Zetbox.Generator.ResourceTemplate
     {
 		protected IZetboxContext ctx;
@@ -34,7 +34,7 @@ namespace Zetbox.Generator.Templates.ObjectClasses
 
         public override void Generate()
         {
-#line 31 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadReferences.cst"
+#line 31 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadReferences.cst"
 this.WriteObjects("\r\n");
 this.WriteObjects("        public override void ReloadReferences()\r\n");
 this.WriteObjects("        {\r\n");
@@ -44,7 +44,7 @@ this.WriteObjects("            //if (this.ObjectState == DataObjectState.Deleted
 this.WriteObjects("            base.ReloadReferences();\r\n");
 this.WriteObjects("\r\n");
 this.WriteObjects("            // fix direct object references\r\n");
-#line 41 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadReferences.cst"
+#line 41 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadReferences.cst"
 // TODO: Use only 1 side relation ends
     foreach(var prop in GetDirectObjectReferences())
     {
@@ -63,22 +63,22 @@ this.WriteObjects("            // fix direct object references\r\n");
         ReloadOneReference.Call(Host, ctx, referencedInterface, referencedImplementation, name, implName, fkBackingName, fkGuidBackingName, isExportable);
     }        
 
-#line 59 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadReferences.cst"
+#line 59 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadReferences.cst"
 this.WriteObjects("            // fix cached lists references\r\n");
-#line 61 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadReferences.cst"
+#line 61 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadReferences.cst"
 foreach(var prop in GetListReferences())
     {
         string name = prop.Name;
         string taskName = "_triggerFetch" + name + "Task";
         string backingName = "_" + name;
 
-#line 67 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadReferences.cst"
+#line 67 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadReferences.cst"
 this.WriteObjects("            ",  taskName , " = null;\r\n");
 this.WriteObjects("            ",  backingName , " = null;\r\n");
-#line 70 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadReferences.cst"
+#line 70 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadReferences.cst"
 }
 
-#line 72 "C:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadReferences.cst"
+#line 72 "D:\Projects\zetbox\Zetbox.Generator\Templates\ObjectClasses\ReloadReferences.cst"
 this.WriteObjects("        }\r\n");
 
         }
