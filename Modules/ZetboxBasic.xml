@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2019-04-15T08:30:34.6124951Z" xmlns="http://dasz.at/Zetbox">
+<ZetboxPackaging xmlns:ZetboxBase="Zetbox.App.Base" xmlns:GUI="Zetbox.App.GUI" date="2019-06-03T13:02:31.6165261Z" xmlns="http://dasz.at/Zetbox">
   <ZetboxBase:Module ExportGuid="84f486f7-19fe-49ad-8e4a-6c05089e7684">
     <ZetboxBase:ChangedOn>2011-08-06T04:30:47.650235Z</ZetboxBase:ChangedOn>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
@@ -7459,10 +7459,9 @@ public static void isValid_IsCurrentYearDefault(YearFilterConfiguration obj, Pro
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
   <ZetboxBase:StringRangeConstraint ExportGuid="ef21d105-f97d-4f81-a98b-25d472cbc41f">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:01.866845Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2019-06-03T13:00:51.674132Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>93e25648-50f9-40d8-8753-e5dadab68e1d</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:MaxLength>4000</ZetboxBase:MaxLength>
     <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
   </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:InitOnlyConstraint ExportGuid="1e28e996-55d1-48b0-a1ed-7dd23f7c7bff">
@@ -31575,10 +31574,9 @@ public static void isValid_IsList(ValueTypeProperty obj, PropertyIsValidEventArg
     <ZetboxBase:CreatedOn>2011-07-29T11:29:39Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
   <ZetboxBase:StringRangeConstraint ExportGuid="2eff4001-f8ab-48ed-b8a9-d17503017046">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:05.407048Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2019-06-03T12:59:30.238457Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>203915b1-5bbf-49ff-864b-b66098b39481</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2011-07-29T11:33:40Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:MaxLength>4000</ZetboxBase:MaxLength>
     <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
   </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="1ed29677-689d-4d63-853f-e7242af28ede">
@@ -31611,10 +31609,9 @@ public static void isValid_IsList(ValueTypeProperty obj, PropertyIsValidEventArg
     <ZetboxBase:CreatedOn>2011-07-29T11:31:50Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
   <ZetboxBase:StringRangeConstraint ExportGuid="45348a53-b5b8-4db0-aba0-4602b3271b86">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:05.428049Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2019-06-03T12:59:30.238457Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>d80639ab-d40f-41db-a51f-c1a71440654e</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2011-07-29T11:31:50Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:MaxLength>4000</ZetboxBase:MaxLength>
     <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
   </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:NotNullableConstraint ExportGuid="7f49055c-7f5d-4dd3-a4b9-bd7e7b1bbd7f">
@@ -31815,10 +31812,9 @@ public static void isValid_IsList(ValueTypeProperty obj, PropertyIsValidEventArg
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
   <ZetboxBase:StringRangeConstraint ExportGuid="6e50576d-169f-4577-99df-3d5f36a9576a">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:05.561057Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2019-06-03T13:00:51.674132Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>d984fab4-5b62-4a5d-af6a-98cde8337729</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2010-10-13T10:53:50Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:MaxLength>4000</ZetboxBase:MaxLength>
     <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
   </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:ClientReadOnlyConstraint ExportGuid="29ced0a7-4939-4ff2-bd29-a701fa79c7b3">
@@ -32116,10 +32112,9 @@ public static void isValid_IsList(ValueTypeProperty obj, PropertyIsValidEventArg
     <ZetboxBase:CreatedOn>2017-12-21T09:43:56.466861Z</ZetboxBase:CreatedOn>
   </ZetboxBase:NotNullableConstraint>
   <ZetboxBase:StringRangeConstraint ExportGuid="9d9c8bf8-26cf-4a35-a542-1fc4ebcd2504">
-    <ZetboxBase:ChangedOn>2011-08-06T04:31:05.738067Z</ZetboxBase:ChangedOn>
+    <ZetboxBase:ChangedOn>2019-06-03T13:00:51.674132Z</ZetboxBase:ChangedOn>
     <ZetboxBase:ConstrainedProperty>13418a59-a804-4bc7-88ed-4d3509940301</ZetboxBase:ConstrainedProperty>
     <ZetboxBase:CreatedOn>2009-12-15T02:08:05Z</ZetboxBase:CreatedOn>
-    <ZetboxBase:MaxLength>4000</ZetboxBase:MaxLength>
     <ZetboxBase:MinLength>0</ZetboxBase:MinLength>
   </ZetboxBase:StringRangeConstraint>
   <ZetboxBase:ClientReadOnlyConstraint ExportGuid="726fc300-d6f9-4686-9caa-215895c30069">
