@@ -116,7 +116,7 @@ namespace ZetboxApp.Wizard
                 }
                 _solution.SaveAs(solutionFile);
 
-                _shell.Execute(".nuget\\nuget.exe", "sources add -name dasz -source https://office.dasz.at/ngf/api/v2/");
+                _shell.Execute("nuget", "sources add -name dasz -source https://office.dasz.at/ngf/api/v2/");
 
                 if (MessageBox.Show("Template created successfully. To finish project setup, zbResetAll.cmd must be executed.\n\nExecute now?", "Templated created", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
@@ -177,7 +177,6 @@ namespace ZetboxApp.Wizard
                 var msBuildProj = new Microsoft.Build.BuildEngine.Project(msBuildEngine);
                 msBuildProj.Load(fileName);
 
-                msBuildProj.Imports.AddNewImport(@"$(SolutionDir)\.nuget\nuget.targets", null);
                 if (prjName == ToProjectName("Common"))
                 {
                     msBuildProj.Imports.AddNewImport(@"$(SolutionDir)\.zetbox\common.targets", null);
