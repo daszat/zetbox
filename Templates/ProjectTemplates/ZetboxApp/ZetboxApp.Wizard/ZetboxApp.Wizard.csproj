@@ -104,7 +104,6 @@
     <EmbeddedResource Include="SolutionItems\StartClient.cmd" />
     <EmbeddedResource Include="SolutionItems\StartServer.cmd" />
     <EmbeddedResource Include="SolutionItems\___nuget\nuget.Config" />
-    <EmbeddedResource Include="SolutionItems\___nuget\nuget.targets" />
     <EmbeddedResource Include="SolutionItems\___zetbox\client.targets">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -141,9 +140,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="SolutionItems\___gitignore" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="SolutionItems\___nuget\nuget.exe" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="SolutionItems\___zetbox\env.xml">
@@ -183,4 +179,3 @@
   </Target>
   -->
 </Project>
-

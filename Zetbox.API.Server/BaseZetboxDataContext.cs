@@ -389,8 +389,6 @@ namespace Zetbox.API.Server
         /// <param name="modifiedObjects">All changed, added and deleted objects</param>
         protected virtual void NotifyChanging(IEnumerable<IDataObject> modifiedObjects)
         {
-            var now = DateTime.Now;
-
             _added = new List<IDataObject>();
             _modified = new List<IDataObject>();
             _deleted = new List<IDataObject>();
@@ -421,6 +419,7 @@ namespace Zetbox.API.Server
                 // Only, if it's not read only. IsReadonly == true is a indicator for a object with no rights & only the fact, that only a calculated property has been changed
                 if (obj.IsReadonly == false && obj is Zetbox.App.Base.IChangedBy && state != DataObjectState.Deleted)
                 {
+                    var now = DateTime.Now.StripMilliseconds();
                     // if the object is new, ChangedBy/ChangedOn has to be set even if nothing else changed
                     var updateChangedInfo = obj is BaseNotifyingObject && ((BaseNotifyingObject)obj).UpdateChangedInfo || state == DataObjectState.New;
                     var cb = (Zetbox.App.Base.IChangedBy)obj;

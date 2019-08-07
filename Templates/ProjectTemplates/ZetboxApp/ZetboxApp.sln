@@ -1,16 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.757
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{1297E8AB-364D-48B4-8F70-C6052A13A0D6}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+	EndProjectSection
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZetboxApp", "ZetboxApp\ZetboxApp.csproj", "{ABC19424-E9EB-4D9A-8C3A-10064A0317E6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZetboxApp.Solution", "ZetboxApp.Solution\ZetboxApp.Solution.csproj", "{21AE7B50-2093-4437-BD14-648BEED8A54C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZetboxApp.Wizard", "ZetboxApp.Wizard\ZetboxApp.Wizard.csproj", "{D22A24E6-48CE-47F9-9987-68385E8C5AC7}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{1297E8AB-364D-48B4-8F70-C6052A13A0D6}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,5 +36,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0D7AA17D-0652-4C9F-BFEC-6A48DAE78731}
+	EndGlobalSection
 EndGlobal
-

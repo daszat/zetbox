@@ -70,16 +70,16 @@
     <Reference Include="Microsoft.CSharp"/>
     <Reference Include="WindowsBase" />
     <Reference Include="Zetbox.API">
-      <HintPath>..\packages\zetboxBasic-Common.1.3.2\lib\net40\Zetbox.API.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic-Common.2.9.9\lib\net40\Zetbox.API.dll</HintPath>
     </Reference>
     <Reference Include="Zetbox.API.Client">
-      <HintPath>..\packages\zetboxBasic-Client.1.3.2\lib\net40\Zetbox.API.Client.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic-Client.2.9.9\lib\net40\Zetbox.API.Client.dll</HintPath>
     </Reference>
     <Reference Include="Zetbox.API.Common">
-      <HintPath>..\packages\zetboxBasic-Common.1.3.2\lib\net40\Zetbox.API.Common.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic-Common.2.9.9\lib\net40\Zetbox.API.Common.dll</HintPath>
     </Reference>
     <Reference Include="Zetbox.Client">
-      <HintPath>..\packages\zetboxBasic-Client.1.3.2\lib\net40\Zetbox.Client.dll</HintPath>
+      <HintPath>..\packages\zetboxBasic-Client.2.9.9\lib\net40\Zetbox.Client.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
