@@ -137,6 +137,14 @@ namespace Zetbox.App.Test
 
         private int? _fk_Fragebogen;
 
+        /// <summary>ForeignKey Property for Fragebogen's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Fragebogen
+		{
+			get { return Fragebogen != null ? Fragebogen.ID : (int?)null; }
+			set { _fk_Fragebogen = value; }
+		}
+
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Ein_Fragebogen_enthaelt_gute_Antworten", "Ein_Fragebogen")]

@@ -73,6 +73,14 @@ namespace Zetbox.App.GUI
             }
         }
 
+        /// <summary>ForeignKey Property for Property's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Property
+		{
+			get { return _fk_Property; }
+			set { _fk_Property = value; }
+		}
+
         private Guid? _fk_guid_Property = null;
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Property> _triggerFetchPropertyTask;

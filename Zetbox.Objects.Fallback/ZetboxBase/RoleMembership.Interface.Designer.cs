@@ -19,6 +19,7 @@ namespace Zetbox.App.Base
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("fb799900-1a5b-4b62-a445-5dae8febdd28")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         IList<Zetbox.App.Base.Relation> Relations { get; }
     }
 }

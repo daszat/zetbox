@@ -23,6 +23,7 @@ namespace Zetbox.App.LicenseManagement
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -32,6 +33,7 @@ namespace Zetbox.App.LicenseManagement
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -40,6 +42,7 @@ namespace Zetbox.App.LicenseManagement
             get;
             set;
         }
+
 
         /// <summary>
         /// Asks the user to open a file and loads the certificate

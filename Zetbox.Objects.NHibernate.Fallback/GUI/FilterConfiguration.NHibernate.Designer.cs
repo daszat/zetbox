@@ -137,6 +137,14 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for ChangedBy's id, used on dehydration only</summary>
         private int? _fk_ChangedBy = null;
 
+        /// <summary>ForeignKey Property for ChangedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ChangedBy
+		{
+			get { return ChangedBy != null ? ChangedBy.ID : (int?)null; }
+			set { _fk_ChangedBy = value; }
+		}
+
 
     public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
     {
@@ -312,6 +320,14 @@ namespace Zetbox.App.GUI
 
         /// <summary>Backing store for CreatedBy's id, used on dehydration only</summary>
         private int? _fk_CreatedBy = null;
+
+        /// <summary>ForeignKey Property for CreatedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_CreatedBy
+		{
+			get { return CreatedBy != null ? CreatedBy.ID : (int?)null; }
+			set { _fk_CreatedBy = value; }
+		}
 
 
     public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
@@ -625,6 +641,14 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for Module's id, used on dehydration only</summary>
         private int? _fk_Module = null;
 
+        /// <summary>ForeignKey Property for Module's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Module
+		{
+			get { return Module != null ? Module.ID : (int?)null; }
+			set { _fk_Module = value; }
+		}
+
         /// <summary>Backing store for Module's guid, used on import only</summary>
         private Guid? _fk_guid_Module = null;
 
@@ -803,6 +827,14 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for RequestedKind's id, used on dehydration only</summary>
         private int? _fk_RequestedKind = null;
 
+        /// <summary>ForeignKey Property for RequestedKind's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_RequestedKind
+		{
+			get { return RequestedKind != null ? RequestedKind.ID : (int?)null; }
+			set { _fk_RequestedKind = value; }
+		}
+
         /// <summary>Backing store for RequestedKind's guid, used on import only</summary>
         private Guid? _fk_guid_RequestedKind = null;
 
@@ -960,6 +992,14 @@ namespace Zetbox.App.GUI
 
         /// <summary>Backing store for ViewModelDescriptor's id, used on dehydration only</summary>
         private int? _fk_ViewModelDescriptor = null;
+
+        /// <summary>ForeignKey Property for ViewModelDescriptor's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ViewModelDescriptor
+		{
+			get { return ViewModelDescriptor != null ? ViewModelDescriptor.ID : (int?)null; }
+			set { _fk_ViewModelDescriptor = value; }
+		}
 
         /// <summary>Backing store for ViewModelDescriptor's guid, used on import only</summary>
         private Guid? _fk_guid_ViewModelDescriptor = null;

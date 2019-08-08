@@ -18,16 +18,25 @@ namespace Zetbox.App.Calendar
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("17a8fbd3-5a42-4cf6-9517-0adf4142f4fe")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Calendar.WorkSchedule BaseWorkSchedule {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_BaseWorkSchedule 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// 
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("c2fc6792-bc1f-42bb-b6c3-451ab99ddbef")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Calendar.WorkSchedule> ChildWorkSchedule { get; }
 
         /// <summary>
@@ -39,11 +48,13 @@ namespace Zetbox.App.Calendar
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("b16c20d8-ac72-45e8-883c-52c6f28571f2")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Calendar.WorkScheduleRule> WorkScheduleRules { get; }
 
         /// <summary>

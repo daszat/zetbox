@@ -156,6 +156,14 @@ namespace Zetbox.App.Test
         /// <summary>Backing store for OneEnd's id, used on dehydration only</summary>
         private int? _fk_OneEnd = null;
 
+        /// <summary>ForeignKey Property for OneEnd's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_OneEnd
+		{
+			get { return OneEnd != null ? OneEnd.ID : (int?)null; }
+			set { _fk_OneEnd = value; }
+		}
+
 
     public Zetbox.API.Async.ZbTask TriggerFetchOneEndAsync()
     {

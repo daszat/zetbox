@@ -23,14 +23,23 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Übergeordnete Enumeration
         /// </summary>
         [Zetbox.API.DefinitionGuid("115c3bfb-72fd-46f2-81fe-74ce1cfa1874")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Base.Enumeration Enumeration {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_Enumeration 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// 
@@ -41,6 +50,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// CLR name of this entry
         /// </summary>
@@ -49,6 +59,7 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
 
         /// <summary>
         /// If true, the entry will not be selectable in the UI
@@ -59,6 +70,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// The CLR value of this entry
         /// </summary>
@@ -67,6 +79,7 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
 
         /// <summary>
         /// 

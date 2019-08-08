@@ -18,19 +18,35 @@ namespace Zetbox.App.Base
         /// The A-side of this Relation.
         /// </summary>
         [Zetbox.API.DefinitionGuid("d4429d3c-8fd1-468e-88d5-17abfd658d04")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Base.RelationEnd A {
             get;
             set;
         }
 
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_A 
+		{ 
+			get; 
+			set;
+		}
+
         /// <summary>
         /// The B-side of this Relation.
         /// </summary>
         [Zetbox.API.DefinitionGuid("20331803-079e-471e-ae45-f4d004aef48e")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Base.RelationEnd B {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_B 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// The ContainmentSpecification of this Relation.
@@ -41,6 +57,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Description of this Relation
         /// </summary>
@@ -49,6 +66,7 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
 
         /// <summary>
         /// Storagetype for 1:1 Relations. Must be null for non 1:1 Relations.
@@ -59,6 +77,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Verb of this Relation
         /// </summary>
@@ -67,6 +86,7 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
 
         /// <summary>
         /// 

@@ -711,6 +711,14 @@ namespace Zetbox.App.GUI
             }
         }
 
+        /// <summary>ForeignKey Property for RequestedEditorKind's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_RequestedEditorKind
+		{
+			get { return _fk_RequestedEditorKind; }
+			set { _fk_RequestedEditorKind = value; }
+		}
+
         private Guid? _fk_guid_RequestedEditorKind = null;
 
         Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> _triggerFetchRequestedEditorKindTask;
@@ -826,6 +834,14 @@ namespace Zetbox.App.GUI
                 _triggerFetchRequestedWorkspaceKindTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for RequestedWorkspaceKind's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_RequestedWorkspaceKind
+		{
+			get { return _fk_RequestedWorkspaceKind; }
+			set { _fk_RequestedWorkspaceKind = value; }
+		}
 
         private Guid? _fk_guid_RequestedWorkspaceKind = null;
 
@@ -1174,6 +1190,14 @@ namespace Zetbox.App.GUI
                 _triggerFetchTypeTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for Type's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Type
+		{
+			get { return _fk_Type; }
+			set { _fk_Type = value; }
+		}
 
         private Guid? _fk_guid_Type = null;
 

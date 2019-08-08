@@ -73,6 +73,14 @@ namespace Zetbox.App.Base
             }
         }
 
+        /// <summary>ForeignKey Property for DefaultPropertyViewModelDescriptor's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_DefaultPropertyViewModelDescriptor
+		{
+			get { return _fk_DefaultPropertyViewModelDescriptor; }
+			set { _fk_DefaultPropertyViewModelDescriptor = value; }
+		}
+
         private Guid? _fk_guid_DefaultPropertyViewModelDescriptor = null;
 
         Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor> _triggerFetchDefaultPropertyViewModelDescriptorTask;
@@ -188,6 +196,14 @@ namespace Zetbox.App.Base
                 _triggerFetchDefaultViewModelDescriptorTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for DefaultViewModelDescriptor's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_DefaultViewModelDescriptor
+		{
+			get { return _fk_DefaultViewModelDescriptor; }
+			set { _fk_DefaultViewModelDescriptor = value; }
+		}
 
         private Guid? _fk_guid_DefaultViewModelDescriptor = null;
 

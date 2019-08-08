@@ -130,6 +130,14 @@ namespace at.dasz.DocumentManagement
 
         private int? _fk_Blob;
 
+        /// <summary>ForeignKey Property for Blob's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Blob
+		{
+			get { return Blob != null ? Blob.ID : (int?)null; }
+			set { _fk_Blob = value; }
+		}
+
         private Guid? _fk_guid_Blob = null;
 
         // internal implementation, EF sees only this property
@@ -237,6 +245,14 @@ namespace at.dasz.DocumentManagement
         }
 
         private int? _fk_ChangedBy;
+
+        /// <summary>ForeignKey Property for ChangedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ChangedBy
+		{
+			get { return ChangedBy != null ? ChangedBy.ID : (int?)null; }
+			set { _fk_ChangedBy = value; }
+		}
 
 
         // internal implementation, EF sees only this property
@@ -429,6 +445,14 @@ namespace at.dasz.DocumentManagement
 
         private int? _fk_CreatedBy;
 
+        /// <summary>ForeignKey Property for CreatedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_CreatedBy
+		{
+			get { return CreatedBy != null ? CreatedBy.ID : (int?)null; }
+			set { _fk_CreatedBy = value; }
+		}
+
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_File_was_CreatedBy", "CreatedBy")]
@@ -619,6 +643,14 @@ namespace at.dasz.DocumentManagement
         }
 
         private int? _fk_Excerpt;
+
+        /// <summary>ForeignKey Property for Excerpt's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Excerpt
+		{
+			get { return Excerpt != null ? Excerpt.ID : (int?)null; }
+			set { _fk_Excerpt = value; }
+		}
 
 
         // internal implementation, EF sees only this property

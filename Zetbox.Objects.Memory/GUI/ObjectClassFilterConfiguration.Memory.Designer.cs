@@ -73,6 +73,14 @@ namespace Zetbox.App.GUI
             }
         }
 
+        /// <summary>ForeignKey Property for ObjectClass's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ObjectClass
+		{
+			get { return _fk_ObjectClass; }
+			set { _fk_ObjectClass = value; }
+		}
+
         private Guid? _fk_guid_ObjectClass = null;
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass> _triggerFetchObjectClassTask;

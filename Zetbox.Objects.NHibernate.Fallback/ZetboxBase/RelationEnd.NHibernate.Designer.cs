@@ -153,6 +153,14 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for AParent's id, used on dehydration only</summary>
         private int? _fk_AParent = null;
 
+        /// <summary>ForeignKey Property for AParent's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_AParent
+		{
+			get { return AParent != null ? AParent.ID : (int?)null; }
+			set { _fk_AParent = value; }
+		}
+
         /// <summary>Backing store for AParent's guid, used on import only</summary>
         private Guid? _fk_guid_AParent = null;
 
@@ -269,6 +277,14 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for BParent's id, used on dehydration only</summary>
         private int? _fk_BParent = null;
 
+        /// <summary>ForeignKey Property for BParent's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_BParent
+		{
+			get { return BParent != null ? BParent.ID : (int?)null; }
+			set { _fk_BParent = value; }
+		}
+
         /// <summary>Backing store for BParent's guid, used on import only</summary>
         private Guid? _fk_guid_BParent = null;
 
@@ -368,6 +384,14 @@ namespace Zetbox.App.Base
 
         /// <summary>Backing store for ChangedBy's id, used on dehydration only</summary>
         private int? _fk_ChangedBy = null;
+
+        /// <summary>ForeignKey Property for ChangedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ChangedBy
+		{
+			get { return ChangedBy != null ? ChangedBy.ID : (int?)null; }
+			set { _fk_ChangedBy = value; }
+		}
 
 
     public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
@@ -544,6 +568,14 @@ namespace Zetbox.App.Base
 
         /// <summary>Backing store for CreatedBy's id, used on dehydration only</summary>
         private int? _fk_CreatedBy = null;
+
+        /// <summary>ForeignKey Property for CreatedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_CreatedBy
+		{
+			get { return CreatedBy != null ? CreatedBy.ID : (int?)null; }
+			set { _fk_CreatedBy = value; }
+		}
 
 
     public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
@@ -951,6 +983,14 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for Navigator's id, used on dehydration only</summary>
         private int? _fk_Navigator = null;
 
+        /// <summary>ForeignKey Property for Navigator's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Navigator
+		{
+			get { return Navigator != null ? Navigator.ID : (int?)null; }
+			set { _fk_Navigator = value; }
+		}
+
         /// <summary>Backing store for Navigator's guid, used on import only</summary>
         private Guid? _fk_guid_Navigator = null;
 
@@ -1136,6 +1176,14 @@ namespace Zetbox.App.Base
 
         /// <summary>Backing store for Type's id, used on dehydration only</summary>
         private int? _fk_Type = null;
+
+        /// <summary>ForeignKey Property for Type's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Type
+		{
+			get { return Type != null ? Type.ID : (int?)null; }
+			set { _fk_Type = value; }
+		}
 
         /// <summary>Backing store for Type's guid, used on import only</summary>
         private Guid? _fk_guid_Type = null;

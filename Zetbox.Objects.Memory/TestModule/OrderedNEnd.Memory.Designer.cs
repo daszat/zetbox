@@ -73,6 +73,14 @@ namespace Zetbox.App.Test
             }
         }
 
+        /// <summary>ForeignKey Property for OneEnd's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_OneEnd
+		{
+			get { return _fk_OneEnd; }
+			set { _fk_OneEnd = value; }
+		}
+
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.OrderedOneEnd> _triggerFetchOneEndTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Test.OrderedOneEnd> TriggerFetchOneEndAsync()

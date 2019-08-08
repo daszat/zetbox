@@ -131,6 +131,14 @@ namespace Zetbox.App.Test
             }
         }
 
+        /// <summary>ForeignKey Property for OneSide's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_OneSide
+		{
+			get { return _fk_OneSide; }
+			set { _fk_OneSide = value; }
+		}
+
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.One_to_N_relations_One> _triggerFetchOneSideTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Test.One_to_N_relations_One> TriggerFetchOneSideAsync()

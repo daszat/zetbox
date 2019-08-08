@@ -214,6 +214,14 @@ namespace Zetbox.App.Calendar
         /// <summary>Backing store for Calendar's id, used on dehydration only</summary>
         private int? _fk_Calendar = null;
 
+        /// <summary>ForeignKey Property for Calendar's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Calendar
+		{
+			get { return Calendar != null ? Calendar.ID : (int?)null; }
+			set { _fk_Calendar = value; }
+		}
+
         /// <summary>Backing store for Calendar's guid, used on import only</summary>
         private Guid? _fk_guid_Calendar = null;
 
@@ -313,6 +321,14 @@ namespace Zetbox.App.Calendar
 
         /// <summary>Backing store for ChangedBy's id, used on dehydration only</summary>
         private int? _fk_ChangedBy = null;
+
+        /// <summary>ForeignKey Property for ChangedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ChangedBy
+		{
+			get { return ChangedBy != null ? ChangedBy.ID : (int?)null; }
+			set { _fk_ChangedBy = value; }
+		}
 
 
     public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
@@ -489,6 +505,14 @@ namespace Zetbox.App.Calendar
 
         /// <summary>Backing store for CreatedBy's id, used on dehydration only</summary>
         private int? _fk_CreatedBy = null;
+
+        /// <summary>ForeignKey Property for CreatedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_CreatedBy
+		{
+			get { return CreatedBy != null ? CreatedBy.ID : (int?)null; }
+			set { _fk_CreatedBy = value; }
+		}
 
 
     public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()

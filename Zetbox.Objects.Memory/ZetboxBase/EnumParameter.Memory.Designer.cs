@@ -73,6 +73,14 @@ namespace Zetbox.App.Base
             }
         }
 
+        /// <summary>ForeignKey Property for Enumeration's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Enumeration
+		{
+			get { return _fk_Enumeration; }
+			set { _fk_Enumeration = value; }
+		}
+
         private Guid? _fk_guid_Enumeration = null;
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Enumeration> _triggerFetchEnumerationTask;

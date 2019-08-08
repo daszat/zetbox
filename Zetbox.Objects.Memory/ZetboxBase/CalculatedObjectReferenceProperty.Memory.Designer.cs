@@ -121,6 +121,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.CalculatedObjectR
             }
         }
 
+        /// <summary>ForeignKey Property for ReferencedClass's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ReferencedClass
+		{
+			get { return _fk_ReferencedClass; }
+			set { _fk_ReferencedClass = value; }
+		}
+
         private Guid? _fk_guid_ReferencedClass = null;
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass> _triggerFetchReferencedClassTask;

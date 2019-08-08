@@ -23,6 +23,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Displayname of this identity
         /// </summary>
@@ -32,11 +33,13 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Identites are member of groups
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("5f534204-f0d5-4d6f-8efa-7ff248580ba3")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Base.Group> Groups { get; }
 
         /// <summary>
@@ -48,6 +51,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Optional Open Id
         /// </summary>
@@ -56,6 +60,7 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
 
         /// <summary>
         /// Password of a generic identity
@@ -66,6 +71,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Username of a generic identity
         /// </summary>
@@ -74,6 +80,7 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
 
         /// <summary>
         /// Clears the login token

@@ -73,6 +73,14 @@ namespace Zetbox.App.GUI
             }
         }
 
+        /// <summary>ForeignKey Property for ControlKind's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ControlKind
+		{
+			get { return _fk_ControlKind; }
+			set { _fk_ControlKind = value; }
+		}
+
         private Guid? _fk_guid_ControlKind = null;
 
         Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ControlKind> _triggerFetchControlKindTask;
@@ -388,6 +396,14 @@ namespace Zetbox.App.GUI
                 _triggerFetchModuleTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for Module's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Module
+		{
+			get { return _fk_Module; }
+			set { _fk_Module = value; }
+		}
 
         private Guid? _fk_guid_Module = null;
 

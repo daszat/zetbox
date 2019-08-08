@@ -62,6 +62,7 @@
         // Target <%= relDataTypeExportable ? String.Empty : "not " %>exportable; does <%= callGetterSetterEvents ? String.Empty : "not " %>call events
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
+		[System.Runtime.Serialization.IgnoreDataMember]
         <%= GetModifiers() %> <%= referencedInterface %> <%= name %>
         {
             get

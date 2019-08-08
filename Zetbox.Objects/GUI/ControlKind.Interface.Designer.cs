@@ -19,6 +19,7 @@ namespace Zetbox.App.GUI
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("bf073bb5-eaa8-4e3d-b019-60b47ba6a088")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.GUI.ControlKind> ChildControlKinds { get; }
 
         /// <summary>
@@ -30,13 +31,22 @@ namespace Zetbox.App.GUI
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("5d75bf4f-29dd-4d00-8e4f-b40a1b9ad92c")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.GUI.ControlKind Parent {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_Parent 
+		{ 
+			get; 
+			set;
+		}
     }
 }

@@ -73,6 +73,14 @@ namespace Zetbox.App.Calendar
             }
         }
 
+        /// <summary>ForeignKey Property for Calendar's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Calendar
+		{
+			get { return _fk_Calendar; }
+			set { _fk_Calendar = value; }
+		}
+
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.CalendarBook> _triggerFetchCalendarTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.CalendarBook> TriggerFetchCalendarAsync()
@@ -187,6 +195,14 @@ namespace Zetbox.App.Calendar
                 _triggerFetchWorkScheduleTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for WorkSchedule's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_WorkSchedule
+		{
+			get { return _fk_WorkSchedule; }
+			set { _fk_WorkSchedule = value; }
+		}
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.WorkSchedule> _triggerFetchWorkScheduleTask;

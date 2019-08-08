@@ -273,6 +273,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         /// <summary>Backing store for MubBlah_Nav's id, used on dehydration only</summary>
         private int? _fk_MubBlah_Nav = null;
 
+        /// <summary>ForeignKey Property for MubBlah_Nav's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_MubBlah_Nav
+		{
+			get { return MubBlah_Nav != null ? MubBlah_Nav.ID : (int?)null; }
+			set { _fk_MubBlah_Nav = value; }
+		}
+
 
     public Zetbox.API.Async.ZbTask TriggerFetchMubBlah_NavAsync()
     {
@@ -424,6 +432,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
 
         /// <summary>Backing store for MuhBlah_One_Nav's id, used on dehydration only</summary>
         private int? _fk_MuhBlah_One_Nav = null;
+
+        /// <summary>ForeignKey Property for MuhBlah_One_Nav's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_MuhBlah_One_Nav
+		{
+			get { return MuhBlah_One_Nav != null ? MuhBlah_One_Nav.ID : (int?)null; }
+			set { _fk_MuhBlah_One_Nav = value; }
+		}
 
 
     public Zetbox.API.Async.ZbTask TriggerFetchMuhBlah_One_NavAsync()

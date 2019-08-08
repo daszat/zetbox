@@ -305,6 +305,14 @@ namespace Zetbox.App.Base
             }
         }
 
+        /// <summary>ForeignKey Property for ReferencedObjectClass's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ReferencedObjectClass
+		{
+			get { return _fk_ReferencedObjectClass; }
+			set { _fk_ReferencedObjectClass = value; }
+		}
+
         private Guid? _fk_guid_ReferencedObjectClass = null;
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass> _triggerFetchReferencedObjectClassTask;

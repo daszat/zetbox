@@ -23,6 +23,7 @@ namespace Zetbox.App.SchemaMigration
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -32,14 +33,23 @@ namespace Zetbox.App.SchemaMigration
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("8edc845c-6d39-45f7-ae28-434f0a1ef503")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.SchemaMigration.MigrationProject MigrationProject {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_MigrationProject 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// 
@@ -50,6 +60,7 @@ namespace Zetbox.App.SchemaMigration
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -59,11 +70,13 @@ namespace Zetbox.App.SchemaMigration
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("e468c835-8c9c-4776-83ce-f54b1f4634a4")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.SchemaMigration.SourceTable> SourceTables { get; }
     }
 }

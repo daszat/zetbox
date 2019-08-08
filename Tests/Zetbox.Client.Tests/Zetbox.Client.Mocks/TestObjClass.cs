@@ -84,6 +84,8 @@ namespace Zetbox.App.Test
         public static event PropertyPreSetterHandler<Zetbox.App.Test.TestObjClass, int?> OnMyIntProperty_PreSetter;
         public static event PropertyPostSetterHandler<Zetbox.App.Test.TestObjClass, int?> OnMyIntProperty_PostSetter;
 
+        public int? FK_ObjectProp { get; set; }
+
         /// <summary>
         /// testtest
         /// </summary>

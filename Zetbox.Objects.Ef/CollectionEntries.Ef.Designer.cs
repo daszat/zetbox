@@ -119,6 +119,14 @@ namespace Zetbox.App.Test
 
         private int? _fk_A;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_ASide_connectsTo_BSide_A", "ASide")]
@@ -198,6 +206,14 @@ namespace Zetbox.App.Test
         }
 
         private int? _fk_B;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
 
         // internal implementation, EF sees only this property
@@ -517,6 +533,14 @@ namespace Zetbox.App.Base
 
         private int? _fk_A;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
         private Guid? _fk_guid_A = null;
 
         // internal implementation, EF sees only this property
@@ -597,6 +621,14 @@ namespace Zetbox.App.Base
         }
 
         private int? _fk_B;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
         private Guid? _fk_guid_B = null;
 
@@ -950,6 +982,14 @@ namespace Zetbox.App.Calendar
 
         private int? _fk_A;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
         private Guid? _fk_guid_A = null;
 
         // internal implementation, EF sees only this property
@@ -1030,6 +1070,14 @@ namespace Zetbox.App.Calendar
         }
 
         private int? _fk_B;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
         private Guid? _fk_guid_B = null;
 
@@ -1335,6 +1383,14 @@ namespace Zetbox.App.Calendar
 
         private int? _fk_A;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Calendar_shared_r_Readers_A", "Calendar")]
@@ -1414,6 +1470,14 @@ namespace Zetbox.App.Calendar
         }
 
         private int? _fk_B;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
 
         // internal implementation, EF sees only this property
@@ -1729,6 +1793,14 @@ namespace Zetbox.App.Calendar
 
         private int? _fk_A;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
         private Guid? _fk_guid_A = null;
 
         // internal implementation, EF sees only this property
@@ -1809,6 +1881,14 @@ namespace Zetbox.App.Calendar
         }
 
         private int? _fk_B;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
         private Guid? _fk_guid_B = null;
 
@@ -2114,6 +2194,14 @@ namespace Zetbox.App.Calendar
 
         private int? _fk_A;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Calendar_shared_w_Writers_A", "Calendar")]
@@ -2193,6 +2281,14 @@ namespace Zetbox.App.Calendar
         }
 
         private int? _fk_B;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
 
         // internal implementation, EF sees only this property
@@ -2508,6 +2604,14 @@ namespace Zetbox.App.Base
 
         private int? _fk_A;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
         private Guid? _fk_guid_A = null;
 
         // internal implementation, EF sees only this property
@@ -2588,6 +2692,14 @@ namespace Zetbox.App.Base
         }
 
         private int? _fk_B;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
         private Guid? _fk_guid_B = null;
 
@@ -2938,6 +3050,14 @@ namespace at.dasz.DocumentManagement
 
         private int? _fk_A;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
         private Guid? _fk_guid_A = null;
 
         // internal implementation, EF sees only this property
@@ -3060,6 +3180,14 @@ namespace at.dasz.DocumentManagement
         }
 
         private int? _fk_B;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
         private Guid? _fk_guid_B = null;
 
@@ -3431,6 +3559,14 @@ namespace Zetbox.App.Base
 
         private int? _fk_A;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Identities_memberOf_Groups_A", "Identities")]
@@ -3510,6 +3646,14 @@ namespace Zetbox.App.Base
         }
 
         private int? _fk_B;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
 
         // internal implementation, EF sees only this property
@@ -3784,6 +3928,14 @@ namespace Zetbox.App.Test
 
         private int? _fk_A;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_MB_Many_Role_has_TCO_ManyList_Role_A", "MB_Many_Role")]
@@ -3863,6 +4015,14 @@ namespace Zetbox.App.Test
         }
 
         private int? _fk_B;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
 
         // internal implementation, EF sees only this property
@@ -4182,6 +4342,14 @@ namespace Zetbox.App.GUI
 
         private int? _fk_A;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
         private Guid? _fk_guid_A = null;
 
         // internal implementation, EF sees only this property
@@ -4262,6 +4430,14 @@ namespace Zetbox.App.GUI
         }
 
         private int? _fk_B;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
         private Guid? _fk_guid_B = null;
 
@@ -4615,6 +4791,14 @@ namespace Zetbox.App.GUI
 
         private int? _fk_A;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
         private Guid? _fk_guid_A = null;
 
         // internal implementation, EF sees only this property
@@ -4695,6 +4879,14 @@ namespace Zetbox.App.GUI
         }
 
         private int? _fk_B;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
         private Guid? _fk_guid_B = null;
 
@@ -5049,6 +5241,14 @@ namespace Zetbox.App.GUI
 
         private int? _fk_A;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
         private Guid? _fk_guid_A = null;
 
         // internal implementation, EF sees only this property
@@ -5129,6 +5329,14 @@ namespace Zetbox.App.GUI
         }
 
         private int? _fk_B;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
         private Guid? _fk_guid_B = null;
 
@@ -5479,6 +5687,14 @@ namespace Zetbox.App.Projekte
 
         private int? _fk_A;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
         private Guid? _fk_guid_A = null;
 
         // internal implementation, EF sees only this property
@@ -5601,6 +5817,14 @@ namespace Zetbox.App.Projekte
         }
 
         private int? _fk_B;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
         private Guid? _fk_guid_B = null;
 
@@ -6021,6 +6245,14 @@ namespace Zetbox.App.Base
 
         private int? _fk_A;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
         private Guid? _fk_guid_A = null;
 
         // internal implementation, EF sees only this property
@@ -6143,6 +6375,14 @@ namespace Zetbox.App.Base
         }
 
         private int? _fk_B;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
         private Guid? _fk_guid_B = null;
 
@@ -6559,6 +6799,14 @@ namespace Zetbox.App.SchemaMigration
 
         private int? _fk_A;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
         private Guid? _fk_guid_A = null;
 
         // internal implementation, EF sees only this property
@@ -6681,6 +6929,14 @@ namespace Zetbox.App.SchemaMigration
         }
 
         private int? _fk_B;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
         private Guid? _fk_guid_B = null;
 
@@ -7055,6 +7311,14 @@ namespace Zetbox.App.Test
 
         private int? _fk_A;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Student_füllt_aus_Testbogen_A", "Student")]
@@ -7134,6 +7398,14 @@ namespace Zetbox.App.Test
         }
 
         private int? _fk_B;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
 
         // internal implementation, EF sees only this property
@@ -7453,6 +7725,14 @@ namespace Zetbox.App.Base
 
         private int? _fk_A;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
         private Guid? _fk_guid_A = null;
 
         // internal implementation, EF sees only this property
@@ -7533,6 +7813,14 @@ namespace Zetbox.App.Base
         }
 
         private int? _fk_B;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
         private Guid? _fk_guid_B = null;
 
@@ -7806,6 +8094,14 @@ public Kunde_EMails_CollectionEntryEfImpl(Func<IFrozenContext> lazyCtx)
         }
 
         private int? _fk_Parent;
+
+        /// <summary>ForeignKey Property for Parent's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Parent
+		{
+			get { return Parent != null ? Parent.ID : (int?)null; }
+			set { _fk_Parent = value; }
+		}
 
 
         // internal implementation, EF sees only this property
@@ -8111,6 +8407,14 @@ public Muhblah_StringCollection_CollectionEntryEfImpl(Func<IFrozenContext> lazyC
 
         private int? _fk_Parent;
 
+        /// <summary>ForeignKey Property for Parent's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Parent
+		{
+			get { return Parent != null ? Parent.ID : (int?)null; }
+			set { _fk_Parent = value; }
+		}
+
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Muhblah_value_StringCollection", "Muhblah")]
@@ -8398,6 +8702,14 @@ public PrivateKey_AuditJournal_CollectionEntryEfImpl(Func<IFrozenContext> lazyCt
         }
 
         private int? _fk_Parent;
+
+        /// <summary>ForeignKey Property for Parent's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Parent
+		{
+			get { return Parent != null ? Parent.ID : (int?)null; }
+			set { _fk_Parent = value; }
+		}
 
 
         // internal implementation, EF sees only this property
@@ -8707,6 +9019,14 @@ public Projekt_AuditJournal_CollectionEntryEfImpl(Func<IFrozenContext> lazyCtx)
         }
 
         private int? _fk_Parent;
+
+        /// <summary>ForeignKey Property for Parent's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Parent
+		{
+			get { return Parent != null ? Parent.ID : (int?)null; }
+			set { _fk_Parent = value; }
+		}
 
 
         // internal implementation, EF sees only this property
@@ -9034,6 +9354,14 @@ public TestCustomObject_PhoneNumbersOther_CollectionEntryEfImpl(Func<IFrozenCont
         }
 
         private int? _fk_Parent;
+
+        /// <summary>ForeignKey Property for Parent's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Parent
+		{
+			get { return Parent != null ? Parent.ID : (int?)null; }
+			set { _fk_Parent = value; }
+		}
 
 
         // internal implementation, EF sees only this property

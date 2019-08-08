@@ -68,6 +68,14 @@ namespace Zetbox.App.Base
 
         private int? _fk_ChangedBy;
 
+        /// <summary>ForeignKey Property for ChangedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ChangedBy
+		{
+			get { return ChangedBy != null ? ChangedBy.ID : (int?)null; }
+			set { _fk_ChangedBy = value; }
+		}
+
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_EnumerationEntry_was_ChangedBy", "ChangedBy")]
@@ -258,6 +266,14 @@ namespace Zetbox.App.Base
         }
 
         private int? _fk_CreatedBy;
+
+        /// <summary>ForeignKey Property for CreatedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_CreatedBy
+		{
+			get { return CreatedBy != null ? CreatedBy.ID : (int?)null; }
+			set { _fk_CreatedBy = value; }
+		}
 
 
         // internal implementation, EF sees only this property
@@ -518,6 +534,14 @@ namespace Zetbox.App.Base
         }
 
         private int? _fk_Enumeration;
+
+        /// <summary>ForeignKey Property for Enumeration's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Enumeration
+		{
+			get { return Enumeration != null ? Enumeration.ID : (int?)null; }
+			set { _fk_Enumeration = value; }
+		}
 
         private Guid? _fk_guid_Enumeration = null;
 

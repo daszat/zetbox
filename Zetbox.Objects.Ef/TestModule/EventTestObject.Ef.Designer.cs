@@ -68,6 +68,14 @@ namespace Zetbox.App.Test
 
         private int? _fk_Event;
 
+        /// <summary>ForeignKey Property for Event's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Event
+		{
+			get { return Event != null ? Event.ID : (int?)null; }
+			set { _fk_Event = value; }
+		}
+
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Test_of_Event", "Event")]

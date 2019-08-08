@@ -73,6 +73,14 @@ namespace Zetbox.App.SchemaMigration
             }
         }
 
+        /// <summary>ForeignKey Property for ChangedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ChangedBy
+		{
+			get { return _fk_ChangedBy; }
+			set { _fk_ChangedBy = value; }
+		}
+
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchChangedByTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchChangedByAsync()
@@ -318,6 +326,14 @@ namespace Zetbox.App.SchemaMigration
                 _triggerFetchCreatedByTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for CreatedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_CreatedBy
+		{
+			get { return _fk_CreatedBy; }
+			set { _fk_CreatedBy = value; }
+		}
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchCreatedByTask;
@@ -635,6 +651,14 @@ namespace Zetbox.App.SchemaMigration
                 _triggerFetchMigrationProjectTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for MigrationProject's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_MigrationProject
+		{
+			get { return _fk_MigrationProject; }
+			set { _fk_MigrationProject = value; }
+		}
 
         private Guid? _fk_guid_MigrationProject = null;
 

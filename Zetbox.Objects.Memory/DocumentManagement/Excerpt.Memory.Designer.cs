@@ -73,6 +73,14 @@ namespace at.dasz.DocumentManagement
             }
         }
 
+        /// <summary>ForeignKey Property for File's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_File
+		{
+			get { return _fk_File; }
+			set { _fk_File = value; }
+		}
+
 
         Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.File> _triggerFetchFileTask;
         public Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.File> TriggerFetchFileAsync()

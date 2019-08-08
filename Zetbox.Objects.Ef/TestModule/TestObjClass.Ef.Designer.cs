@@ -205,6 +205,14 @@ namespace Zetbox.App.Test
 
         private int? _fk_ObjectProp;
 
+        /// <summary>ForeignKey Property for ObjectProp's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ObjectProp
+		{
+			get { return ObjectProp != null ? ObjectProp.ID : (int?)null; }
+			set { _fk_ObjectProp = value; }
+		}
+
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_TestObjClass_has_ObjectProp", "ObjectProp")]

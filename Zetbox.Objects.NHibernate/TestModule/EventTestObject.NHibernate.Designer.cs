@@ -133,6 +133,14 @@ namespace Zetbox.App.Test
         /// <summary>Backing store for Event's id, used on dehydration only</summary>
         private int? _fk_Event = null;
 
+        /// <summary>ForeignKey Property for Event's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Event
+		{
+			get { return Event != null ? Event.ID : (int?)null; }
+			set { _fk_Event = value; }
+		}
+
 
     public Zetbox.API.Async.ZbTask TriggerFetchEventAsync()
     {

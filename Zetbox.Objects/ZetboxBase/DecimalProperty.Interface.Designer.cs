@@ -23,6 +23,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// The maximum number of decimal digits that can be stored to the right of the decimal point.
         /// </summary>
@@ -31,5 +32,6 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
     }
 }

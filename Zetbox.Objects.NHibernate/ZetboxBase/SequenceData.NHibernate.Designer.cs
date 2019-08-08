@@ -207,6 +207,14 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for Sequence's id, used on dehydration only</summary>
         private int? _fk_Sequence = null;
 
+        /// <summary>ForeignKey Property for Sequence's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Sequence
+		{
+			get { return Sequence != null ? Sequence.ID : (int?)null; }
+			set { _fk_Sequence = value; }
+		}
+
 
     public Zetbox.API.Async.ZbTask TriggerFetchSequenceAsync()
     {

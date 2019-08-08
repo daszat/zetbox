@@ -68,6 +68,14 @@ namespace Zetbox.App.GUI
 
         private int? _fk_ObjectClass;
 
+        /// <summary>ForeignKey Property for ObjectClass's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ObjectClass
+		{
+			get { return ObjectClass != null ? ObjectClass.ID : (int?)null; }
+			set { _fk_ObjectClass = value; }
+		}
+
         private Guid? _fk_guid_ObjectClass = null;
 
         // internal implementation, EF sees only this property

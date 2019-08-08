@@ -18,10 +18,18 @@ namespace Zetbox.App.GUI
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("f4dfb868-260d-450b-84b8-833dac4d25ee")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Base.Blob Blob {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_Blob 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// Filename of the Icon
@@ -31,6 +39,7 @@ namespace Zetbox.App.GUI
             get;
             set;
         }
+
 
         /// <summary>
         /// 

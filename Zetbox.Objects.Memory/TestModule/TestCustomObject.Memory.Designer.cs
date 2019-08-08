@@ -203,6 +203,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
             }
         }
 
+        /// <summary>ForeignKey Property for MubBlah_Nav's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_MubBlah_Nav
+		{
+			get { return _fk_MubBlah_Nav; }
+			set { _fk_MubBlah_Nav = value; }
+		}
+
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.Muhblah> _triggerFetchMubBlah_NavTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Test.Muhblah> TriggerFetchMubBlah_NavAsync()
@@ -379,6 +387,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
                 _triggerFetchMuhBlah_One_NavTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for MuhBlah_One_Nav's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_MuhBlah_One_Nav
+		{
+			get { return _fk_MuhBlah_One_Nav; }
+			set { _fk_MuhBlah_One_Nav = value; }
+		}
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.Muhblah> _triggerFetchMuhBlah_One_NavTask;

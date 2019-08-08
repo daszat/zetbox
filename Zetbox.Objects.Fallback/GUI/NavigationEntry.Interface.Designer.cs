@@ -19,6 +19,7 @@ namespace Zetbox.App.GUI
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("87eecae1-aa07-4159-8953-716cd27bb5dd")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         IList<Zetbox.App.GUI.NavigationEntry> Children { get; }
 
         /// <summary>
@@ -30,30 +31,48 @@ namespace Zetbox.App.GUI
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("7b01db75-218a-4040-bae9-aa82c253a620")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Base.Group> Groups { get; }
 
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("0d3e3599-3cf7-4025-8848-597194c3dc2f")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.GUI.NavigationEntry Parent {
             get;
             set;
         }
 
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_Parent 
+		{ 
+			get; 
+			set;
+		}
+
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("9355f2c4-5b4f-47cc-b767-161548d79478")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.GUI.ControlKind RequestedKind {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_RequestedKind 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// The title of this screen
@@ -64,14 +83,23 @@ namespace Zetbox.App.GUI
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("60c43bca-219a-4346-859a-b2979a9f71a5")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.GUI.ViewModelDescriptor ViewModelDescriptor {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_ViewModelDescriptor 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// 

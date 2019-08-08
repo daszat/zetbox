@@ -137,6 +137,14 @@ namespace Zetbox.App.Test
 
         private int? _fk_OneSide;
 
+        /// <summary>ForeignKey Property for OneSide's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_OneSide
+		{
+			get { return OneSide != null ? OneSide.ID : (int?)null; }
+			set { _fk_OneSide = value; }
+		}
+
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_OneSide_connectsTo_NSide", "OneSide")]

@@ -23,6 +23,7 @@ namespace Zetbox.App.Projekte
             set;
         }
 
+
         /// <summary>
         /// Herzlichen Glückwunsch zum Geburtstag
         /// </summary>
@@ -32,14 +33,23 @@ namespace Zetbox.App.Projekte
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("5e148730-ec8a-4349-bcf7-e59cef2ce29f")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Base.Identity Identity {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_Identity 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// Vorname Nachname
@@ -50,11 +60,13 @@ namespace Zetbox.App.Projekte
             set;
         }
 
+
         /// <summary>
         /// Projekte des/der Mitarbeiters/Mitarbeiterin für die er/sie Verantwortlich ist
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("1abb5a1b-ba9f-4b75-b6ea-3d28be877b7c")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         IList<Zetbox.App.Projekte.Projekt> Projekte { get; }
 
         /// <summary>
@@ -66,6 +78,7 @@ namespace Zetbox.App.Projekte
             set;
         }
 
+
         /// <summary>
         /// +43 123 12345678
         /// </summary>
@@ -74,6 +87,7 @@ namespace Zetbox.App.Projekte
             get;
             set;
         }
+
 
         /// <summary>
         /// 

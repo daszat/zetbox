@@ -22,5 +22,6 @@ namespace Zetbox.App.Test
             get;
             set;
         }
+
     }
 }

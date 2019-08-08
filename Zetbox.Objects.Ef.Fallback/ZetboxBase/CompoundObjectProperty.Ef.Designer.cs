@@ -68,6 +68,14 @@ namespace Zetbox.App.Base
 
         private int? _fk_CompoundObjectDefinition;
 
+        /// <summary>ForeignKey Property for CompoundObjectDefinition's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_CompoundObjectDefinition
+		{
+			get { return CompoundObjectDefinition != null ? CompoundObjectDefinition.ID : (int?)null; }
+			set { _fk_CompoundObjectDefinition = value; }
+		}
+
         private Guid? _fk_guid_CompoundObjectDefinition = null;
 
         // internal implementation, EF sees only this property

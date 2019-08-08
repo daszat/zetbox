@@ -771,6 +771,14 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for RequestedEditorKind's id, used on dehydration only</summary>
         private int? _fk_RequestedEditorKind = null;
 
+        /// <summary>ForeignKey Property for RequestedEditorKind's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_RequestedEditorKind
+		{
+			get { return RequestedEditorKind != null ? RequestedEditorKind.ID : (int?)null; }
+			set { _fk_RequestedEditorKind = value; }
+		}
+
         /// <summary>Backing store for RequestedEditorKind's guid, used on import only</summary>
         private Guid? _fk_guid_RequestedEditorKind = null;
 
@@ -870,6 +878,14 @@ namespace Zetbox.App.GUI
 
         /// <summary>Backing store for RequestedWorkspaceKind's id, used on dehydration only</summary>
         private int? _fk_RequestedWorkspaceKind = null;
+
+        /// <summary>ForeignKey Property for RequestedWorkspaceKind's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_RequestedWorkspaceKind
+		{
+			get { return RequestedWorkspaceKind != null ? RequestedWorkspaceKind.ID : (int?)null; }
+			set { _fk_RequestedWorkspaceKind = value; }
+		}
 
         /// <summary>Backing store for RequestedWorkspaceKind's guid, used on import only</summary>
         private Guid? _fk_guid_RequestedWorkspaceKind = null;
@@ -1202,6 +1218,14 @@ namespace Zetbox.App.GUI
 
         /// <summary>Backing store for Type's id, used on dehydration only</summary>
         private int? _fk_Type = null;
+
+        /// <summary>ForeignKey Property for Type's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Type
+		{
+			get { return Type != null ? Type.ID : (int?)null; }
+			set { _fk_Type = value; }
+		}
 
         /// <summary>Backing store for Type's guid, used on import only</summary>
         private Guid? _fk_guid_Type = null;

@@ -73,6 +73,14 @@ namespace Zetbox.App.SchemaMigration
             }
         }
 
+        /// <summary>ForeignKey Property for ChangedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ChangedBy
+		{
+			get { return _fk_ChangedBy; }
+			set { _fk_ChangedBy = value; }
+		}
+
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchChangedByTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchChangedByAsync()
@@ -389,6 +397,14 @@ namespace Zetbox.App.SchemaMigration
                 _triggerFetchCreatedByTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for CreatedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_CreatedBy
+		{
+			get { return _fk_CreatedBy; }
+			set { _fk_CreatedBy = value; }
+		}
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchCreatedByTask;
@@ -995,6 +1011,14 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
             }
         }
 
+        /// <summary>ForeignKey Property for References's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_References
+		{
+			get { return _fk_References; }
+			set { _fk_References = value; }
+		}
+
         private Guid? _fk_guid_References = null;
 
         Zetbox.API.Async.ZbTask<Zetbox.App.SchemaMigration.SourceColumn> _triggerFetchReferencesTask;
@@ -1250,6 +1274,14 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                 _triggerFetchSourceTableTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for SourceTable's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_SourceTable
+		{
+			get { return _fk_SourceTable; }
+			set { _fk_SourceTable = value; }
+		}
 
         private Guid? _fk_guid_SourceTable = null;
 

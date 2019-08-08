@@ -164,6 +164,14 @@ namespace Zetbox.App.Test
         /// <summary>Backing store for A's id, used on dehydration only</summary>
         private int? _fk_A = null;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
 
     public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
     {
@@ -261,6 +269,14 @@ namespace Zetbox.App.Test
 
         /// <summary>Backing store for B's id, used on dehydration only</summary>
         private int? _fk_B = null;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
 
     public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
@@ -607,6 +623,14 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for A's id, used on dehydration only</summary>
         private int? _fk_A = null;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
@@ -683,6 +707,14 @@ namespace Zetbox.App.Base
 
         /// <summary>Backing store for B's id, used on dehydration only</summary>
         private int? _fk_B = null;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
@@ -1064,6 +1096,14 @@ namespace Zetbox.App.Calendar
         /// <summary>Backing store for A's id, used on dehydration only</summary>
         private int? _fk_A = null;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
@@ -1140,6 +1180,14 @@ namespace Zetbox.App.Calendar
 
         /// <summary>Backing store for B's id, used on dehydration only</summary>
         private int? _fk_B = null;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
@@ -1486,6 +1534,14 @@ namespace Zetbox.App.Calendar
         /// <summary>Backing store for A's id, used on dehydration only</summary>
         private int? _fk_A = null;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
 
     public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
     {
@@ -1560,6 +1616,14 @@ namespace Zetbox.App.Calendar
 
         /// <summary>Backing store for B's id, used on dehydration only</summary>
         private int? _fk_B = null;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
 
     public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
@@ -1903,6 +1967,14 @@ namespace Zetbox.App.Calendar
         /// <summary>Backing store for A's id, used on dehydration only</summary>
         private int? _fk_A = null;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
@@ -1979,6 +2051,14 @@ namespace Zetbox.App.Calendar
 
         /// <summary>Backing store for B's id, used on dehydration only</summary>
         private int? _fk_B = null;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
@@ -2325,6 +2405,14 @@ namespace Zetbox.App.Calendar
         /// <summary>Backing store for A's id, used on dehydration only</summary>
         private int? _fk_A = null;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
 
     public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
     {
@@ -2399,6 +2487,14 @@ namespace Zetbox.App.Calendar
 
         /// <summary>Backing store for B's id, used on dehydration only</summary>
         private int? _fk_B = null;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
 
     public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
@@ -2742,6 +2838,14 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for A's id, used on dehydration only</summary>
         private int? _fk_A = null;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
@@ -2818,6 +2922,14 @@ namespace Zetbox.App.Base
 
         /// <summary>Backing store for B's id, used on dehydration only</summary>
         private int? _fk_B = null;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
@@ -3199,6 +3311,14 @@ namespace at.dasz.DocumentManagement
         /// <summary>Backing store for A's id, used on dehydration only</summary>
         private int? _fk_A = null;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
@@ -3305,6 +3425,14 @@ namespace at.dasz.DocumentManagement
 
         /// <summary>Backing store for B's id, used on dehydration only</summary>
         private int? _fk_B = null;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
@@ -3721,6 +3849,14 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for A's id, used on dehydration only</summary>
         private int? _fk_A = null;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
 
     public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
     {
@@ -3818,6 +3954,14 @@ namespace Zetbox.App.Base
 
         /// <summary>Backing store for B's id, used on dehydration only</summary>
         private int? _fk_B = null;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
 
     public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
@@ -4129,6 +4273,14 @@ namespace Zetbox.App.Test
         /// <summary>Backing store for A's id, used on dehydration only</summary>
         private int? _fk_A = null;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
 
     public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
     {
@@ -4226,6 +4378,14 @@ namespace Zetbox.App.Test
 
         /// <summary>Backing store for B's id, used on dehydration only</summary>
         private int? _fk_B = null;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
 
     public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
@@ -4572,6 +4732,14 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for A's id, used on dehydration only</summary>
         private int? _fk_A = null;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
@@ -4648,6 +4816,14 @@ namespace Zetbox.App.GUI
 
         /// <summary>Backing store for B's id, used on dehydration only</summary>
         private int? _fk_B = null;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
@@ -5029,6 +5205,14 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for A's id, used on dehydration only</summary>
         private int? _fk_A = null;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
@@ -5128,6 +5312,14 @@ namespace Zetbox.App.GUI
 
         /// <summary>Backing store for B's id, used on dehydration only</summary>
         private int? _fk_B = null;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
@@ -5512,6 +5704,14 @@ namespace Zetbox.App.GUI
         /// <summary>Backing store for A's id, used on dehydration only</summary>
         private int? _fk_A = null;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
@@ -5588,6 +5788,14 @@ namespace Zetbox.App.GUI
 
         /// <summary>Backing store for B's id, used on dehydration only</summary>
         private int? _fk_B = null;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
@@ -5969,6 +6177,14 @@ namespace Zetbox.App.Projekte
         /// <summary>Backing store for A's id, used on dehydration only</summary>
         private int? _fk_A = null;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
@@ -6098,6 +6314,14 @@ namespace Zetbox.App.Projekte
 
         /// <summary>Backing store for B's id, used on dehydration only</summary>
         private int? _fk_B = null;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
@@ -6552,6 +6776,14 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for A's id, used on dehydration only</summary>
         private int? _fk_A = null;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
@@ -6658,6 +6890,14 @@ namespace Zetbox.App.Base
 
         /// <summary>Backing store for B's id, used on dehydration only</summary>
         private int? _fk_B = null;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
@@ -7109,6 +7349,14 @@ namespace Zetbox.App.SchemaMigration
         /// <summary>Backing store for A's id, used on dehydration only</summary>
         private int? _fk_A = null;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
@@ -7215,6 +7463,14 @@ namespace Zetbox.App.SchemaMigration
 
         /// <summary>Backing store for B's id, used on dehydration only</summary>
         private int? _fk_B = null;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
@@ -7631,6 +7887,14 @@ namespace Zetbox.App.Test
         /// <summary>Backing store for A's id, used on dehydration only</summary>
         private int? _fk_A = null;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
 
     public Zetbox.API.Async.ZbTask TriggerFetchAAsync()
     {
@@ -7728,6 +7992,14 @@ namespace Zetbox.App.Test
 
         /// <summary>Backing store for B's id, used on dehydration only</summary>
         private int? _fk_B = null;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
 
     public Zetbox.API.Async.ZbTask TriggerFetchBAsync()
@@ -8074,6 +8346,14 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for A's id, used on dehydration only</summary>
         private int? _fk_A = null;
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return A != null ? A.ID : (int?)null; }
+			set { _fk_A = value; }
+		}
+
         /// <summary>Backing store for A's guid, used on import only</summary>
         private Guid? _fk_guid_A = null;
 
@@ -8150,6 +8430,14 @@ namespace Zetbox.App.Base
 
         /// <summary>Backing store for B's id, used on dehydration only</summary>
         private int? _fk_B = null;
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return B != null ? B.ID : (int?)null; }
+			set { _fk_B = value; }
+		}
 
         /// <summary>Backing store for B's guid, used on import only</summary>
         private Guid? _fk_guid_B = null;
@@ -8465,6 +8753,14 @@ namespace Zetbox.App.Projekte
 
         /// <summary>Backing store for Parent's id, used on dehydration only</summary>
         private int? _fk_Parent = null;
+
+        /// <summary>ForeignKey Property for Parent's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Parent
+		{
+			get { return Parent != null ? Parent.ID : (int?)null; }
+			set { _fk_Parent = value; }
+		}
 
 
     public Zetbox.API.Async.ZbTask TriggerFetchParentAsync()
@@ -8786,6 +9082,14 @@ namespace Zetbox.App.Test
         /// <summary>Backing store for Parent's id, used on dehydration only</summary>
         private int? _fk_Parent = null;
 
+        /// <summary>ForeignKey Property for Parent's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Parent
+		{
+			get { return Parent != null ? Parent.ID : (int?)null; }
+			set { _fk_Parent = value; }
+		}
+
 
     public Zetbox.API.Async.ZbTask TriggerFetchParentAsync()
     {
@@ -9096,6 +9400,14 @@ namespace Zetbox.App.LicenseManagement
 
         /// <summary>Backing store for Parent's id, used on dehydration only</summary>
         private int? _fk_Parent = null;
+
+        /// <summary>ForeignKey Property for Parent's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Parent
+		{
+			get { return Parent != null ? Parent.ID : (int?)null; }
+			set { _fk_Parent = value; }
+		}
 
 
     public Zetbox.API.Async.ZbTask TriggerFetchParentAsync()
@@ -9427,6 +9739,14 @@ namespace Zetbox.App.Projekte
 
         /// <summary>Backing store for Parent's id, used on dehydration only</summary>
         private int? _fk_Parent = null;
+
+        /// <summary>ForeignKey Property for Parent's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Parent
+		{
+			get { return Parent != null ? Parent.ID : (int?)null; }
+			set { _fk_Parent = value; }
+		}
 
 
     public Zetbox.API.Async.ZbTask TriggerFetchParentAsync()
@@ -9776,6 +10096,14 @@ namespace Zetbox.App.Test
 
         /// <summary>Backing store for Parent's id, used on dehydration only</summary>
         private int? _fk_Parent = null;
+
+        /// <summary>ForeignKey Property for Parent's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Parent
+		{
+			get { return Parent != null ? Parent.ID : (int?)null; }
+			set { _fk_Parent = value; }
+		}
 
 
     public Zetbox.API.Async.ZbTask TriggerFetchParentAsync()

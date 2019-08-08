@@ -197,6 +197,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
         /// <summary>Backing store for Parent's id, used on dehydration only</summary>
         private int? _fk_Parent = null;
 
+        /// <summary>ForeignKey Property for Parent's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Parent
+		{
+			get { return Parent != null ? Parent.ID : (int?)null; }
+			set { _fk_Parent = value; }
+		}
+
 
     public Zetbox.API.Async.ZbTask TriggerFetchParentAsync()
     {

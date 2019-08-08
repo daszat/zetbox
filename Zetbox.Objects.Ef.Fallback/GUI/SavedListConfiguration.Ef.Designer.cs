@@ -219,6 +219,14 @@ namespace Zetbox.App.GUI
 
         private int? _fk_Owner;
 
+        /// <summary>ForeignKey Property for Owner's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Owner
+		{
+			get { return Owner != null ? Owner.ID : (int?)null; }
+			set { _fk_Owner = value; }
+		}
+
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_LstCfg_of_Owner", "Owner")]
@@ -325,6 +333,14 @@ namespace Zetbox.App.GUI
         }
 
         private int? _fk_Type;
+
+        /// <summary>ForeignKey Property for Type's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Type
+		{
+			get { return Type != null ? Type.ID : (int?)null; }
+			set { _fk_Type = value; }
+		}
 
         private Guid? _fk_guid_Type = null;
 

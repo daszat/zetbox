@@ -68,6 +68,14 @@ namespace at.dasz.DocumentManagement
 
         private int? _fk_File;
 
+        /// <summary>ForeignKey Property for File's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_File
+		{
+			get { return File != null ? File.ID : (int?)null; }
+			set { _fk_File = value; }
+		}
+
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_File_has_Excerpt", "File")]

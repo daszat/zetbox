@@ -68,6 +68,14 @@ namespace Zetbox.App.Base
 
         private int? _fk_Constrained;
 
+        /// <summary>ForeignKey Property for Constrained's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Constrained
+		{
+			get { return Constrained != null ? Constrained.ID : (int?)null; }
+			set { _fk_Constrained = value; }
+		}
+
         private Guid? _fk_guid_Constrained = null;
 
         // internal implementation, EF sees only this property

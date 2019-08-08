@@ -23,14 +23,23 @@ namespace Zetbox.App.Calendar
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("d80b3380-9cc2-4237-960c-9cd409d793e3")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Calendar.CalendarBook Calendar {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_Calendar 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// 
@@ -41,6 +50,7 @@ namespace Zetbox.App.Calendar
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -49,6 +59,7 @@ namespace Zetbox.App.Calendar
             get;
             set;
         }
+
 
         /// <summary>
         /// The current event is read only. This property is set by code.
@@ -59,6 +70,7 @@ namespace Zetbox.App.Calendar
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -67,6 +79,7 @@ namespace Zetbox.App.Calendar
             get;
             set;
         }
+
 
         /// <summary>
         /// 
@@ -77,6 +90,7 @@ namespace Zetbox.App.Calendar
             set;
         }
 
+
         /// <summary>
         /// A attached data item
         /// </summary>
@@ -85,6 +99,7 @@ namespace Zetbox.App.Calendar
             get;
             set;
         }
+
 
         /// <summary>
         /// 
@@ -95,6 +110,7 @@ namespace Zetbox.App.Calendar
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -104,6 +120,7 @@ namespace Zetbox.App.Calendar
             set;
         }
 
+
         /// <summary>
         /// A hash used by a sync provider
         /// </summary>
@@ -112,5 +129,6 @@ namespace Zetbox.App.Calendar
             get;
             set;
         }
+
     }
 }

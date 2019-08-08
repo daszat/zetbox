@@ -340,6 +340,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
 
         private int? _fk_TestCustomObjects_Nav;
 
+        /// <summary>ForeignKey Property for TestCustomObjects_Nav's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_TestCustomObjects_Nav
+		{
+			get { return TestCustomObjects_Nav != null ? TestCustomObjects_Nav.ID : (int?)null; }
+			set { _fk_TestCustomObjects_Nav = value; }
+		}
+
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_MB_Lst_Role_hasOther_TCO_Role", "TCO_Role")]
@@ -458,6 +466,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
         }
 
         private int? _fk_TestCustomObjects_One_Nav;
+
+        /// <summary>ForeignKey Property for TestCustomObjects_One_Nav's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_TestCustomObjects_One_Nav
+		{
+			get { return TestCustomObjects_One_Nav != null ? TestCustomObjects_One_Nav.ID : (int?)null; }
+			set { _fk_TestCustomObjects_One_Nav = value; }
+		}
 
 
         // internal implementation, EF sees only this property

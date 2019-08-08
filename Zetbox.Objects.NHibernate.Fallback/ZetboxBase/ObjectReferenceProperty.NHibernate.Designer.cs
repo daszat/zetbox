@@ -324,6 +324,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
         /// <summary>Backing store for RelationEnd's id, used on dehydration only</summary>
         private int? _fk_RelationEnd = null;
 
+        /// <summary>ForeignKey Property for RelationEnd's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_RelationEnd
+		{
+			get { return RelationEnd != null ? RelationEnd.ID : (int?)null; }
+			set { _fk_RelationEnd = value; }
+		}
+
         /// <summary>Backing store for RelationEnd's guid, used on import only</summary>
         private Guid? _fk_guid_RelationEnd = null;
 

@@ -19,16 +19,25 @@ namespace Zetbox.App.Base
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("eda15826-7251-4726-9f6b-65e7f24f6ad1")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Base.InstanceConstraint> Constraints { get; }
 
         /// <summary>
         /// Standard Icon wenn IIcon nicht implementiert ist
         /// </summary>
         [Zetbox.API.DefinitionGuid("b1402cda-de87-4b2a-bd65-a950b8dd7a9f")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.GUI.Icon DefaultIcon {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_DefaultIcon 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// Description of this DataType
@@ -39,6 +48,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// A HTML string with a help text
         /// </summary>
@@ -48,11 +58,13 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Interfaces der Objektklasse
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("a9ec04c2-0807-4d6c-a96a-824d13e5c571")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Base.Interface> ImplementsInterfaces { get; }
 
         /// <summary>
@@ -60,6 +72,7 @@ namespace Zetbox.App.Base
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("e9f8a1f1-a5ed-44a6-bbf3-9b040766f19f")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Base.Method> Methods { get; }
 
         /// <summary>
@@ -71,21 +84,31 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Eigenschaften der Objektklasse
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("e7d91162-0aa8-4fe3-9e29-d0519781ceb7")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         IList<Zetbox.App.Base.Property> Properties { get; }
 
         /// <summary>
         /// Optional requested ControlKind
         /// </summary>
         [Zetbox.API.DefinitionGuid("bd244ed4-5c39-4783-a03d-7bb31a8884fc")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.GUI.ControlKind RequestedKind {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_RequestedKind 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// 
@@ -96,6 +119,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -105,6 +129,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -113,6 +138,7 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
 
         /// <summary>
         /// Property wizard

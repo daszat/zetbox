@@ -136,6 +136,14 @@ namespace Zetbox.App.SchemaMigration
         /// <summary>Backing store for ChangedBy's id, used on dehydration only</summary>
         private int? _fk_ChangedBy = null;
 
+        /// <summary>ForeignKey Property for ChangedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ChangedBy
+		{
+			get { return ChangedBy != null ? ChangedBy.ID : (int?)null; }
+			set { _fk_ChangedBy = value; }
+		}
+
 
     public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
     {
@@ -370,6 +378,14 @@ namespace Zetbox.App.SchemaMigration
         /// <summary>Backing store for CreatedBy's id, used on dehydration only</summary>
         private int? _fk_CreatedBy = null;
 
+        /// <summary>ForeignKey Property for CreatedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_CreatedBy
+		{
+			get { return CreatedBy != null ? CreatedBy.ID : (int?)null; }
+			set { _fk_CreatedBy = value; }
+		}
+
 
     public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
     {
@@ -603,6 +619,14 @@ namespace Zetbox.App.SchemaMigration
 
         /// <summary>Backing store for DestinationObjectClass's id, used on dehydration only</summary>
         private int? _fk_DestinationObjectClass = null;
+
+        /// <summary>ForeignKey Property for DestinationObjectClass's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_DestinationObjectClass
+		{
+			get { return DestinationObjectClass != null ? DestinationObjectClass.ID : (int?)null; }
+			set { _fk_DestinationObjectClass = value; }
+		}
 
         /// <summary>Backing store for DestinationObjectClass's guid, used on import only</summary>
         private Guid? _fk_guid_DestinationObjectClass = null;
@@ -903,6 +927,14 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
 
         /// <summary>Backing store for StagingDatabase's id, used on dehydration only</summary>
         private int? _fk_StagingDatabase = null;
+
+        /// <summary>ForeignKey Property for StagingDatabase's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_StagingDatabase
+		{
+			get { return StagingDatabase != null ? StagingDatabase.ID : (int?)null; }
+			set { _fk_StagingDatabase = value; }
+		}
 
         /// <summary>Backing store for StagingDatabase's guid, used on import only</summary>
         private Guid? _fk_guid_StagingDatabase = null;

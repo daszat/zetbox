@@ -22,6 +22,7 @@ namespace Zetbox.App.Base
             get;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -31,14 +32,23 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("b2d2a5df-4e4e-490b-84ca-982b0b732e7e")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Base.ObjectClass ObjectClass {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_ObjectClass 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// 
@@ -48,5 +58,6 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
     }
 }

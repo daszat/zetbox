@@ -142,6 +142,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
 
         private int? _fk_BaseObjectClass;
 
+        /// <summary>ForeignKey Property for BaseObjectClass's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_BaseObjectClass
+		{
+			get { return BaseObjectClass != null ? BaseObjectClass.ID : (int?)null; }
+			set { _fk_BaseObjectClass = value; }
+		}
+
         private Guid? _fk_guid_BaseObjectClass = null;
 
         // internal implementation, EF sees only this property
@@ -317,6 +325,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
         }
 
         private int? _fk_DefaultViewModelDescriptor;
+
+        /// <summary>ForeignKey Property for DefaultViewModelDescriptor's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_DefaultViewModelDescriptor
+		{
+			get { return DefaultViewModelDescriptor != null ? DefaultViewModelDescriptor.ID : (int?)null; }
+			set { _fk_DefaultViewModelDescriptor = value; }
+		}
 
         private Guid? _fk_guid_DefaultViewModelDescriptor = null;
 

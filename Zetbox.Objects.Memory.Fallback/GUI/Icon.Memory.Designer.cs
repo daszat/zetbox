@@ -73,6 +73,14 @@ namespace Zetbox.App.GUI
             }
         }
 
+        /// <summary>ForeignKey Property for Blob's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Blob
+		{
+			get { return _fk_Blob; }
+			set { _fk_Blob = value; }
+		}
+
         private Guid? _fk_guid_Blob = null;
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Blob> _triggerFetchBlobTask;
@@ -317,6 +325,14 @@ namespace Zetbox.App.GUI
                 _triggerFetchModuleTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for Module's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Module
+		{
+			get { return _fk_Module; }
+			set { _fk_Module = value; }
+		}
 
         private Guid? _fk_guid_Module = null;
 

@@ -18,19 +18,35 @@ namespace Zetbox.App.Base
         /// The Relation using this RelationEnd as A
         /// </summary>
         [Zetbox.API.DefinitionGuid("dd6057d0-78bb-4242-9670-ec6c09bd4d92")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Base.Relation AParent {
             get;
             set;
         }
 
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_AParent 
+		{ 
+			get; 
+			set;
+		}
+
         /// <summary>
         /// The Relation using this RelationEnd as B
         /// </summary>
         [Zetbox.API.DefinitionGuid("521ea0ba-ae3b-4a60-ae28-f366b3ee78f1")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Base.Relation BParent {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_BParent 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// Is true, if this RelationEnd persists the order of its elements
@@ -41,6 +57,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Specifies how many instances may occur on this end of the relation.
         /// </summary>
@@ -50,14 +67,23 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// The ORP to navigate FROM this end of the relation. MAY be null.
         /// </summary>
         [Zetbox.API.DefinitionGuid("6b25eaab-f746-47ec-a91e-f92ec6fccada")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Base.ObjectReferenceProperty Navigator {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_Navigator 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// the parent relation
@@ -66,6 +92,7 @@ namespace Zetbox.App.Base
         Zetbox.App.Base.Relation Parent {
             get;
         }
+
 
         /// <summary>
         /// This end&amp;apos;s role name in the relation
@@ -76,14 +103,23 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Specifies which type this End of the relation has. MUST NOT be null.
         /// </summary>
         [Zetbox.API.DefinitionGuid("d4bfc4e0-6b57-49f0-91fd-b0de428484e0")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Base.ObjectClass Type {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_Type 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// 

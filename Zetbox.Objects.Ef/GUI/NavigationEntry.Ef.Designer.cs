@@ -68,6 +68,14 @@ namespace Zetbox.App.GUI
 
         private int? _fk_ChangedBy;
 
+        /// <summary>ForeignKey Property for ChangedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ChangedBy
+		{
+			get { return ChangedBy != null ? ChangedBy.ID : (int?)null; }
+			set { _fk_ChangedBy = value; }
+		}
+
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_NavigationScreen_was_ChangedBy", "ChangedBy")]
@@ -401,6 +409,14 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         }
 
         private int? _fk_CreatedBy;
+
+        /// <summary>ForeignKey Property for CreatedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_CreatedBy
+		{
+			get { return CreatedBy != null ? CreatedBy.ID : (int?)null; }
+			set { _fk_CreatedBy = value; }
+		}
 
 
         // internal implementation, EF sees only this property
@@ -746,6 +762,14 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
 
         private int? _fk_Module;
 
+        /// <summary>ForeignKey Property for Module's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Module
+		{
+			get { return Module != null ? Module.ID : (int?)null; }
+			set { _fk_Module = value; }
+		}
+
         private Guid? _fk_guid_Module = null;
 
         // internal implementation, EF sees only this property
@@ -853,6 +877,14 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         }
 
         private int? _fk_Parent;
+
+        /// <summary>ForeignKey Property for Parent's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Parent
+		{
+			get { return Parent != null ? Parent.ID : (int?)null; }
+			set { _fk_Parent = value; }
+		}
 
         private Guid? _fk_guid_Parent = null;
 
@@ -1015,6 +1047,14 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         }
 
         private int? _fk_RequestedKind;
+
+        /// <summary>ForeignKey Property for RequestedKind's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_RequestedKind
+		{
+			get { return RequestedKind != null ? RequestedKind.ID : (int?)null; }
+			set { _fk_RequestedKind = value; }
+		}
 
         private Guid? _fk_guid_RequestedKind = null;
 
@@ -1192,6 +1232,14 @@ public static event PropertyListChangedHandler<Zetbox.App.GUI.NavigationEntry> O
         }
 
         private int? _fk_ViewModelDescriptor;
+
+        /// <summary>ForeignKey Property for ViewModelDescriptor's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ViewModelDescriptor
+		{
+			get { return ViewModelDescriptor != null ? ViewModelDescriptor.ID : (int?)null; }
+			set { _fk_ViewModelDescriptor = value; }
+		}
 
         private Guid? _fk_guid_ViewModelDescriptor = null;
 

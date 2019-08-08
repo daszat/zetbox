@@ -136,6 +136,14 @@ namespace Zetbox.App.SchemaMigration
         /// <summary>Backing store for ChangedBy's id, used on dehydration only</summary>
         private int? _fk_ChangedBy = null;
 
+        /// <summary>ForeignKey Property for ChangedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ChangedBy
+		{
+			get { return ChangedBy != null ? ChangedBy.ID : (int?)null; }
+			set { _fk_ChangedBy = value; }
+		}
+
 
     public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
     {
@@ -312,6 +320,14 @@ namespace Zetbox.App.SchemaMigration
         /// <summary>Backing store for CreatedBy's id, used on dehydration only</summary>
         private int? _fk_CreatedBy = null;
 
+        /// <summary>ForeignKey Property for CreatedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_CreatedBy
+		{
+			get { return CreatedBy != null ? CreatedBy.ID : (int?)null; }
+			set { _fk_CreatedBy = value; }
+		}
+
 
     public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
     {
@@ -487,6 +503,14 @@ namespace Zetbox.App.SchemaMigration
 
         /// <summary>Backing store for DestinationValue's id, used on dehydration only</summary>
         private int? _fk_DestinationValue = null;
+
+        /// <summary>ForeignKey Property for DestinationValue's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_DestinationValue
+		{
+			get { return DestinationValue != null ? DestinationValue.ID : (int?)null; }
+			set { _fk_DestinationValue = value; }
+		}
 
         /// <summary>Backing store for DestinationValue's guid, used on import only</summary>
         private Guid? _fk_guid_DestinationValue = null;
@@ -688,6 +712,14 @@ namespace Zetbox.App.SchemaMigration
 
         /// <summary>Backing store for SourceColumn's id, used on dehydration only</summary>
         private int? _fk_SourceColumn = null;
+
+        /// <summary>ForeignKey Property for SourceColumn's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_SourceColumn
+		{
+			get { return SourceColumn != null ? SourceColumn.ID : (int?)null; }
+			set { _fk_SourceColumn = value; }
+		}
 
         /// <summary>Backing store for SourceColumn's guid, used on import only</summary>
         private Guid? _fk_guid_SourceColumn = null;

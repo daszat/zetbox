@@ -18,10 +18,18 @@ namespace Zetbox.App.Base
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("70836ae1-4b54-45e2-a0c6-d1a39c480631")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Base.SequenceData Data {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_Data 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// 
@@ -32,6 +40,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Set to true if the sequence is guaranteed to be continous
         /// </summary>
@@ -41,6 +50,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -49,5 +59,6 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
     }
 }

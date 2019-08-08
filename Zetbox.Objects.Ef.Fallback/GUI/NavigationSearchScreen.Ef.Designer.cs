@@ -839,6 +839,14 @@ namespace Zetbox.App.GUI
 
         private int? _fk_RequestedEditorKind;
 
+        /// <summary>ForeignKey Property for RequestedEditorKind's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_RequestedEditorKind
+		{
+			get { return RequestedEditorKind != null ? RequestedEditorKind.ID : (int?)null; }
+			set { _fk_RequestedEditorKind = value; }
+		}
+
         private Guid? _fk_guid_RequestedEditorKind = null;
 
         // internal implementation, EF sees only this property
@@ -946,6 +954,14 @@ namespace Zetbox.App.GUI
         }
 
         private int? _fk_RequestedWorkspaceKind;
+
+        /// <summary>ForeignKey Property for RequestedWorkspaceKind's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_RequestedWorkspaceKind
+		{
+			get { return RequestedWorkspaceKind != null ? RequestedWorkspaceKind.ID : (int?)null; }
+			set { _fk_RequestedWorkspaceKind = value; }
+		}
 
         private Guid? _fk_guid_RequestedWorkspaceKind = null;
 
@@ -1330,6 +1346,14 @@ namespace Zetbox.App.GUI
         }
 
         private int? _fk_Type;
+
+        /// <summary>ForeignKey Property for Type's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Type
+		{
+			get { return Type != null ? Type.ID : (int?)null; }
+			set { _fk_Type = value; }
+		}
 
         private Guid? _fk_guid_Type = null;
 

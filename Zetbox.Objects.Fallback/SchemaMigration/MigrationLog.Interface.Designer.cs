@@ -23,6 +23,7 @@ namespace Zetbox.App.SchemaMigration
             set;
         }
 
+
         /// <summary>
         /// The number of rows in the destination
         /// </summary>
@@ -31,6 +32,7 @@ namespace Zetbox.App.SchemaMigration
             get;
             set;
         }
+
 
         /// <summary>
         /// The source of the migration step
@@ -41,6 +43,7 @@ namespace Zetbox.App.SchemaMigration
             set;
         }
 
+
         /// <summary>
         /// The number of rows in this source
         /// </summary>
@@ -50,6 +53,7 @@ namespace Zetbox.App.SchemaMigration
             set;
         }
 
+
         /// <summary>
         /// When the logentry was written
         /// </summary>
@@ -58,5 +62,6 @@ namespace Zetbox.App.SchemaMigration
             get;
             set;
         }
+
     }
 }

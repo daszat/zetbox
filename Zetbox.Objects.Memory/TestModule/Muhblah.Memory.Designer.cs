@@ -271,6 +271,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
             }
         }
 
+        /// <summary>ForeignKey Property for TestCustomObjects_Nav's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_TestCustomObjects_Nav
+		{
+			get { return _fk_TestCustomObjects_Nav; }
+			set { _fk_TestCustomObjects_Nav = value; }
+		}
+
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.TestCustomObject> _triggerFetchTestCustomObjects_NavTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Test.TestCustomObject> TriggerFetchTestCustomObjects_NavAsync()
@@ -401,6 +409,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.Muhblah> OnTestCu
                 _triggerFetchTestCustomObjects_One_NavTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for TestCustomObjects_One_Nav's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_TestCustomObjects_One_Nav
+		{
+			get { return _fk_TestCustomObjects_One_Nav; }
+			set { _fk_TestCustomObjects_One_Nav = value; }
+		}
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.TestCustomObject> _triggerFetchTestCustomObjects_One_NavTask;

@@ -23,20 +23,30 @@ namespace Zetbox.App.SchemaMigration
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("ed7a3291-b69b-42f3-9b60-dd06e374f856")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Base.Module DestinationModule {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_DestinationModule 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// 
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("3750005b-3850-4697-8b80-b5a7854fc344")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.SchemaMigration.StagingDatabase> StagingDatabases { get; }
 
         /// <summary>

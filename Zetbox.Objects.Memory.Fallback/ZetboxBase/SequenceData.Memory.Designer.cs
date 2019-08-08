@@ -131,6 +131,14 @@ namespace Zetbox.App.Base
             }
         }
 
+        /// <summary>ForeignKey Property for Sequence's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Sequence
+		{
+			get { return _fk_Sequence; }
+			set { _fk_Sequence = value; }
+		}
+
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Sequence> _triggerFetchSequenceTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Sequence> TriggerFetchSequenceAsync()

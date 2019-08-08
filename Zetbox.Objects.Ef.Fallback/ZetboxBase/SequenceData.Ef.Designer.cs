@@ -137,6 +137,14 @@ namespace Zetbox.App.Base
 
         private int? _fk_Sequence;
 
+        /// <summary>ForeignKey Property for Sequence's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Sequence
+		{
+			get { return Sequence != null ? Sequence.ID : (int?)null; }
+			set { _fk_Sequence = value; }
+		}
+
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_Sequence_has_Data", "Sequence")]

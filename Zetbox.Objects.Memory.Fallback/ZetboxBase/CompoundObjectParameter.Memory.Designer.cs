@@ -73,6 +73,14 @@ namespace Zetbox.App.Base
             }
         }
 
+        /// <summary>ForeignKey Property for CompoundObject's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_CompoundObject
+		{
+			get { return _fk_CompoundObject; }
+			set { _fk_CompoundObject = value; }
+		}
+
         private Guid? _fk_guid_CompoundObject = null;
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.CompoundObject> _triggerFetchCompoundObjectTask;

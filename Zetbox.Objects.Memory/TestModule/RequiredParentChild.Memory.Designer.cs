@@ -131,6 +131,14 @@ namespace Zetbox.App.Test
             }
         }
 
+        /// <summary>ForeignKey Property for Parent's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Parent
+		{
+			get { return _fk_Parent; }
+			set { _fk_Parent = value; }
+		}
+
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.RequiredParent> _triggerFetchParentTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Test.RequiredParent> TriggerFetchParentAsync()

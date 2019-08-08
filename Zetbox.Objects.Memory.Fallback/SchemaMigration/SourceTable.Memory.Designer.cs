@@ -73,6 +73,14 @@ namespace Zetbox.App.SchemaMigration
             }
         }
 
+        /// <summary>ForeignKey Property for ChangedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ChangedBy
+		{
+			get { return _fk_ChangedBy; }
+			set { _fk_ChangedBy = value; }
+		}
+
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchChangedByTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchChangedByAsync()
@@ -319,6 +327,14 @@ namespace Zetbox.App.SchemaMigration
             }
         }
 
+        /// <summary>ForeignKey Property for CreatedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_CreatedBy
+		{
+			get { return _fk_CreatedBy; }
+			set { _fk_CreatedBy = value; }
+		}
+
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchCreatedByTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchCreatedByAsync()
@@ -564,6 +580,14 @@ namespace Zetbox.App.SchemaMigration
                 _triggerFetchDestinationObjectClassTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for DestinationObjectClass's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_DestinationObjectClass
+		{
+			get { return _fk_DestinationObjectClass; }
+			set { _fk_DestinationObjectClass = value; }
+		}
 
         private Guid? _fk_guid_DestinationObjectClass = null;
 
@@ -875,6 +899,14 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
                 _triggerFetchStagingDatabaseTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for StagingDatabase's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_StagingDatabase
+		{
+			get { return _fk_StagingDatabase; }
+			set { _fk_StagingDatabase = value; }
+		}
 
         private Guid? _fk_guid_StagingDatabase = null;
 

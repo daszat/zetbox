@@ -18,10 +18,18 @@ namespace Zetbox.App.Base
         /// Identity which changed this object
         /// </summary>
         [Zetbox.API.DefinitionGuid("ca0d65eb-05e2-40a6-9fb2-cdee91f1dd2d")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Base.Identity ChangedBy {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_ChangedBy 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// Date and time where this object was changed
@@ -32,14 +40,23 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Identity which created this object
         /// </summary>
         [Zetbox.API.DefinitionGuid("2b628a47-48d6-4611-9fd7-8535bbd30b75")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Base.Identity CreatedBy {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_CreatedBy 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// Date and time where this object was created
@@ -49,5 +66,6 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
     }
 }

@@ -23,6 +23,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Provides a code template for the method
         /// </summary>
@@ -30,6 +31,7 @@ namespace Zetbox.App.Base
         string CodeTemplate {
             get;
         }
+
 
         /// <summary>
         /// Description of this Method
@@ -40,6 +42,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// A HTML string with a help text
         /// </summary>
@@ -49,14 +52,23 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("82a3f85f-aa39-4309-a83c-aa5b073a6887")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.GUI.Icon Icon {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_Icon 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// Method will be invoked on server if true
@@ -67,6 +79,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// Shows this Method in th GUI
         /// </summary>
@@ -75,6 +88,7 @@ namespace Zetbox.App.Base
             get;
             set;
         }
+
 
         /// <summary>
         /// 
@@ -85,6 +99,7 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
@@ -94,20 +109,30 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("9afc74a4-4eeb-4c39-879c-eacc8f369fa7")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Base.DataType ObjectClass {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_ObjectClass 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// Parameter der Methode
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("8dace0a9-6db1-458d-b054-ace4a3d906c2")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         IList<Zetbox.App.Base.BaseParameter> Parameter { get; }
 
         /// <summary>
@@ -115,6 +140,7 @@ namespace Zetbox.App.Base
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("f062792d-757f-4c39-bdb1-1cc81d063595")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Base.ObjectReferenceProperty> ShowByProperties { get; }
 
         /// <summary>

@@ -68,6 +68,14 @@ namespace Zetbox.App.Calendar
 
         private int? _fk_Calendar;
 
+        /// <summary>ForeignKey Property for Calendar's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Calendar
+		{
+			get { return Calendar != null ? Calendar.ID : (int?)null; }
+			set { _fk_Calendar = value; }
+		}
+
 
         // internal implementation, EF sees only this property
         [EdmRelationshipNavigationProperty("Model", "FK_SyncAccount_for_Calendar", "Calendar")]
@@ -174,6 +182,14 @@ namespace Zetbox.App.Calendar
         }
 
         private int? _fk_WorkSchedule;
+
+        /// <summary>ForeignKey Property for WorkSchedule's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_WorkSchedule
+		{
+			get { return WorkSchedule != null ? WorkSchedule.ID : (int?)null; }
+			set { _fk_WorkSchedule = value; }
+		}
 
 
         // internal implementation, EF sees only this property

@@ -248,6 +248,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectReferencePr
             }
         }
 
+        /// <summary>ForeignKey Property for RelationEnd's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_RelationEnd
+		{
+			get { return _fk_RelationEnd; }
+			set { _fk_RelationEnd = value; }
+		}
+
         private Guid? _fk_guid_RelationEnd = null;
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.RelationEnd> _triggerFetchRelationEndTask;

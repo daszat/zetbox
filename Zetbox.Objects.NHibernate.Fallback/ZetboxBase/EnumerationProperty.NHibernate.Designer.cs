@@ -133,6 +133,14 @@ namespace Zetbox.App.Base
         /// <summary>Backing store for Enumeration's id, used on dehydration only</summary>
         private int? _fk_Enumeration = null;
 
+        /// <summary>ForeignKey Property for Enumeration's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Enumeration
+		{
+			get { return Enumeration != null ? Enumeration.ID : (int?)null; }
+			set { _fk_Enumeration = value; }
+		}
+
         /// <summary>Backing store for Enumeration's guid, used on import only</summary>
         private Guid? _fk_guid_Enumeration = null;
 

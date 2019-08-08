@@ -139,6 +139,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.MethodTest> OnChi
             }
         }
 
+        /// <summary>ForeignKey Property for Parent's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Parent
+		{
+			get { return _fk_Parent; }
+			set { _fk_Parent = value; }
+		}
+
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Test.MethodTest> _triggerFetchParentTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Test.MethodTest> TriggerFetchParentAsync()

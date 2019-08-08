@@ -68,6 +68,14 @@ namespace Zetbox.App.Base
 
         private int? _fk_AParent;
 
+        /// <summary>ForeignKey Property for AParent's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_AParent
+		{
+			get { return AParent != null ? AParent.ID : (int?)null; }
+			set { _fk_AParent = value; }
+		}
+
         private Guid? _fk_guid_AParent = null;
 
         // internal implementation, EF sees only this property
@@ -188,6 +196,14 @@ namespace Zetbox.App.Base
 
         private int? _fk_BParent;
 
+        /// <summary>ForeignKey Property for BParent's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_BParent
+		{
+			get { return BParent != null ? BParent.ID : (int?)null; }
+			set { _fk_BParent = value; }
+		}
+
         private Guid? _fk_guid_BParent = null;
 
         // internal implementation, EF sees only this property
@@ -307,6 +323,14 @@ namespace Zetbox.App.Base
         }
 
         private int? _fk_ChangedBy;
+
+        /// <summary>ForeignKey Property for ChangedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ChangedBy
+		{
+			get { return ChangedBy != null ? ChangedBy.ID : (int?)null; }
+			set { _fk_ChangedBy = value; }
+		}
 
 
         // internal implementation, EF sees only this property
@@ -498,6 +522,14 @@ namespace Zetbox.App.Base
         }
 
         private int? _fk_CreatedBy;
+
+        /// <summary>ForeignKey Property for CreatedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_CreatedBy
+		{
+			get { return CreatedBy != null ? CreatedBy.ID : (int?)null; }
+			set { _fk_CreatedBy = value; }
+		}
 
 
         // internal implementation, EF sees only this property
@@ -935,6 +967,14 @@ namespace Zetbox.App.Base
 
         private int? _fk_Navigator;
 
+        /// <summary>ForeignKey Property for Navigator's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Navigator
+		{
+			get { return Navigator != null ? Navigator.ID : (int?)null; }
+			set { _fk_Navigator = value; }
+		}
+
         private Guid? _fk_guid_Navigator = null;
 
         // internal implementation, EF sees only this property
@@ -1151,6 +1191,14 @@ namespace Zetbox.App.Base
         }
 
         private int? _fk_Type;
+
+        /// <summary>ForeignKey Property for Type's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Type
+		{
+			get { return Type != null ? Type.ID : (int?)null; }
+			set { _fk_Type = value; }
+		}
 
         private Guid? _fk_guid_Type = null;
 

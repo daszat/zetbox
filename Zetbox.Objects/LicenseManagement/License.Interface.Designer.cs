@@ -23,6 +23,7 @@ namespace Zetbox.App.LicenseManagement
             set;
         }
 
+
         /// <summary>
         /// Optional additional data attached to this license
         /// </summary>
@@ -31,6 +32,7 @@ namespace Zetbox.App.LicenseManagement
             get;
             set;
         }
+
 
         /// <summary>
         /// The licensee of this license
@@ -41,6 +43,7 @@ namespace Zetbox.App.LicenseManagement
             set;
         }
 
+
         /// <summary>
         /// A integer represeting the license subject
         /// </summary>
@@ -49,6 +52,7 @@ namespace Zetbox.App.LicenseManagement
             get;
             set;
         }
+
 
         /// <summary>
         /// Licensor of this License
@@ -59,6 +63,7 @@ namespace Zetbox.App.LicenseManagement
             set;
         }
 
+
         /// <summary>
         /// Encoded Signature
         /// </summary>
@@ -67,6 +72,7 @@ namespace Zetbox.App.LicenseManagement
             get;
             set;
         }
+
 
         /// <summary>
         /// License is valid from
@@ -77,6 +83,7 @@ namespace Zetbox.App.LicenseManagement
             set;
         }
 
+
         /// <summary>
         /// License is valid thru
         /// </summary>
@@ -85,6 +92,7 @@ namespace Zetbox.App.LicenseManagement
             get;
             set;
         }
+
 
         /// <summary>
         /// 

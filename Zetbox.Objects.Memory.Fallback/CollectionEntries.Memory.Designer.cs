@@ -164,6 +164,14 @@ namespace Zetbox.App.Base
             }
         }
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return _fk_A; }
+			set { _fk_A = value; }
+		}
+
         private Guid? _fk_guid_A = null;
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.CalculatedObjectReferenceProperty> _triggerFetchATask;
@@ -267,6 +275,14 @@ namespace Zetbox.App.Base
                 _triggerFetchBTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return _fk_B; }
+			set { _fk_B = value; }
+		}
 
         private Guid? _fk_guid_B = null;
 
@@ -607,6 +623,14 @@ namespace Zetbox.App.Base
             }
         }
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return _fk_A; }
+			set { _fk_A = value; }
+		}
+
         private Guid? _fk_guid_A = null;
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.DataType> _triggerFetchATask;
@@ -710,6 +734,14 @@ namespace Zetbox.App.Base
                 _triggerFetchBTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return _fk_B; }
+			set { _fk_B = value; }
+		}
 
         private Guid? _fk_guid_B = null;
 
@@ -1016,6 +1048,14 @@ namespace Zetbox.App.Base
             }
         }
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return _fk_A; }
+			set { _fk_A = value; }
+		}
+
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> _triggerFetchATask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Base.Identity> TriggerFetchAAsync()
@@ -1118,6 +1158,14 @@ namespace Zetbox.App.Base
                 _triggerFetchBTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return _fk_B; }
+			set { _fk_B = value; }
+		}
 
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Group> _triggerFetchBTask;
@@ -1439,6 +1487,14 @@ namespace Zetbox.App.GUI
             }
         }
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return _fk_A; }
+			set { _fk_A = value; }
+		}
+
         private Guid? _fk_guid_A = null;
 
         Zetbox.API.Async.ZbTask<Zetbox.App.GUI.NavigationEntry> _triggerFetchATask;
@@ -1542,6 +1598,14 @@ namespace Zetbox.App.GUI
                 _triggerFetchBTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return _fk_B; }
+			set { _fk_B = value; }
+		}
 
         private Guid? _fk_guid_B = null;
 
@@ -1882,6 +1946,14 @@ namespace Zetbox.App.GUI
             }
         }
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return _fk_A; }
+			set { _fk_A = value; }
+		}
+
         private Guid? _fk_guid_A = null;
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectReferenceProperty> _triggerFetchATask;
@@ -1985,6 +2057,14 @@ namespace Zetbox.App.GUI
                 _triggerFetchBTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return _fk_B; }
+			set { _fk_B = value; }
+		}
 
         private Guid? _fk_guid_B = null;
 
@@ -2341,6 +2421,14 @@ namespace Zetbox.App.GUI
             }
         }
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return _fk_A; }
+			set { _fk_A = value; }
+		}
+
         private Guid? _fk_guid_A = null;
 
         Zetbox.API.Async.ZbTask<Zetbox.App.GUI.ViewModelDescriptor> _triggerFetchATask;
@@ -2444,6 +2532,14 @@ namespace Zetbox.App.GUI
                 _triggerFetchBTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return _fk_B; }
+			set { _fk_B = value; }
+		}
 
         private Guid? _fk_guid_B = null;
 
@@ -2784,6 +2880,14 @@ namespace Zetbox.App.Base
             }
         }
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return _fk_A; }
+			set { _fk_A = value; }
+		}
+
         private Guid? _fk_guid_A = null;
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.RoleMembership> _triggerFetchATask;
@@ -2918,6 +3022,14 @@ namespace Zetbox.App.Base
                 _triggerFetchBTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return _fk_B; }
+			set { _fk_B = value; }
+		}
 
         private Guid? _fk_guid_B = null;
 
@@ -3313,6 +3425,14 @@ namespace Zetbox.App.SchemaMigration
             }
         }
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return _fk_A; }
+			set { _fk_A = value; }
+		}
+
         private Guid? _fk_guid_A = null;
 
         Zetbox.API.Async.ZbTask<Zetbox.App.SchemaMigration.SourceColumn> _triggerFetchATask;
@@ -3447,6 +3567,14 @@ namespace Zetbox.App.SchemaMigration
                 _triggerFetchBTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return _fk_B; }
+			set { _fk_B = value; }
+		}
 
         private Guid? _fk_guid_B = null;
 
@@ -3842,6 +3970,14 @@ namespace Zetbox.App.Base
             }
         }
 
+        /// <summary>ForeignKey Property for A's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_A
+		{
+			get { return _fk_A; }
+			set { _fk_A = value; }
+		}
+
         private Guid? _fk_guid_A = null;
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.IndexConstraint> _triggerFetchATask;
@@ -3945,6 +4081,14 @@ namespace Zetbox.App.Base
                 _triggerFetchBTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for B's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_B
+		{
+			get { return _fk_B; }
+			set { _fk_B = value; }
+		}
 
         private Guid? _fk_guid_B = null;
 

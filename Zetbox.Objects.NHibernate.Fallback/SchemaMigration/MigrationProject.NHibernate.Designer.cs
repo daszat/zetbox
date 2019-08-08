@@ -136,6 +136,14 @@ namespace Zetbox.App.SchemaMigration
         /// <summary>Backing store for ChangedBy's id, used on dehydration only</summary>
         private int? _fk_ChangedBy = null;
 
+        /// <summary>ForeignKey Property for ChangedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ChangedBy
+		{
+			get { return ChangedBy != null ? ChangedBy.ID : (int?)null; }
+			set { _fk_ChangedBy = value; }
+		}
+
 
     public Zetbox.API.Async.ZbTask TriggerFetchChangedByAsync()
     {
@@ -311,6 +319,14 @@ namespace Zetbox.App.SchemaMigration
 
         /// <summary>Backing store for CreatedBy's id, used on dehydration only</summary>
         private int? _fk_CreatedBy = null;
+
+        /// <summary>ForeignKey Property for CreatedBy's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_CreatedBy
+		{
+			get { return CreatedBy != null ? CreatedBy.ID : (int?)null; }
+			set { _fk_CreatedBy = value; }
+		}
 
 
     public Zetbox.API.Async.ZbTask TriggerFetchCreatedByAsync()
@@ -545,6 +561,14 @@ namespace Zetbox.App.SchemaMigration
 
         /// <summary>Backing store for DestinationModule's id, used on dehydration only</summary>
         private int? _fk_DestinationModule = null;
+
+        /// <summary>ForeignKey Property for DestinationModule's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_DestinationModule
+		{
+			get { return DestinationModule != null ? DestinationModule.ID : (int?)null; }
+			set { _fk_DestinationModule = value; }
+		}
 
         /// <summary>Backing store for DestinationModule's guid, used on import only</summary>
         private Guid? _fk_guid_DestinationModule = null;

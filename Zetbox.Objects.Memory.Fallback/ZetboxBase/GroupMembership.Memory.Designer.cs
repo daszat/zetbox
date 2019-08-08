@@ -73,6 +73,14 @@ namespace Zetbox.App.Base
             }
         }
 
+        /// <summary>ForeignKey Property for Group's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Group
+		{
+			get { return _fk_Group; }
+			set { _fk_Group = value; }
+		}
+
         private Guid? _fk_guid_Group = null;
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Group> _triggerFetchGroupTask;

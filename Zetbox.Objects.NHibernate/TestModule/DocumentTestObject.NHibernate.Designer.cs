@@ -133,6 +133,14 @@ namespace Zetbox.App.Test
         /// <summary>Backing store for AnotherFile's id, used on dehydration only</summary>
         private int? _fk_AnotherFile = null;
 
+        /// <summary>ForeignKey Property for AnotherFile's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_AnotherFile
+		{
+			get { return AnotherFile != null ? AnotherFile.ID : (int?)null; }
+			set { _fk_AnotherFile = value; }
+		}
+
 
     public Zetbox.API.Async.ZbTask TriggerFetchAnotherFileAsync()
     {
@@ -230,6 +238,14 @@ namespace Zetbox.App.Test
 
         /// <summary>Backing store for AnyFile's id, used on dehydration only</summary>
         private int? _fk_AnyFile = null;
+
+        /// <summary>ForeignKey Property for AnyFile's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_AnyFile
+		{
+			get { return AnyFile != null ? AnyFile.ID : (int?)null; }
+			set { _fk_AnyFile = value; }
+		}
 
 
     public Zetbox.API.Async.ZbTask TriggerFetchAnyFileAsync()

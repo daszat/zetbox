@@ -23,6 +23,7 @@ namespace Zetbox.App.Projekte
             set;
         }
 
+
         /// <summary>
         /// Wert in EUR des Auftrages
         /// </summary>
@@ -32,32 +33,57 @@ namespace Zetbox.App.Projekte
             set;
         }
 
+
         /// <summary>
         /// Kunde des Projektes
         /// </summary>
         [Zetbox.API.DefinitionGuid("57c977da-c113-4ce6-9484-3828f74c4193")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Projekte.Kunde Kunde {
             get;
             set;
         }
 
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_Kunde 
+		{ 
+			get; 
+			set;
+		}
+
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("5b57288b-835a-459e-8532-9f47e17ab2b5")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Projekte.Mitarbeiter Mitarbeiter {
             get;
             set;
         }
 
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_Mitarbeiter 
+		{ 
+			get; 
+			set;
+		}
+
         /// <summary>
         /// Projekt zum Auftrag
         /// </summary>
         [Zetbox.API.DefinitionGuid("a0ad574a-356b-4962-a98d-c305b1289154")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Projekte.Projekt Projekt {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_Projekt 
+		{ 
+			get; 
+			set;
+		}
 
         /// <summary>
         /// Testmethode zum Erstellen von Rechnungen mit Word

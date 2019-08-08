@@ -190,6 +190,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.Group> OnMember_P
             }
         }
 
+        /// <summary>ForeignKey Property for Module's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Module
+		{
+			get { return _fk_Module; }
+			set { _fk_Module = value; }
+		}
+
         private Guid? _fk_guid_Module = null;
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.Module> _triggerFetchModuleTask;

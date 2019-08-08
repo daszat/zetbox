@@ -73,6 +73,14 @@ namespace Zetbox.App.Test
             }
         }
 
+        /// <summary>ForeignKey Property for AnotherFile's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_AnotherFile
+		{
+			get { return _fk_AnotherFile; }
+			set { _fk_AnotherFile = value; }
+		}
+
 
         Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.File> _triggerFetchAnotherFileTask;
         public Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.File> TriggerFetchAnotherFileAsync()
@@ -187,6 +195,14 @@ namespace Zetbox.App.Test
                 _triggerFetchAnyFileTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for AnyFile's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_AnyFile
+		{
+			get { return _fk_AnyFile; }
+			set { _fk_AnyFile = value; }
+		}
 
 
         Zetbox.API.Async.ZbTask<at.dasz.DocumentManagement.File> _triggerFetchAnyFileTask;

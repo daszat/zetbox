@@ -139,6 +139,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.CalculatedObjectR
 
         private int? _fk_ReferencedClass;
 
+        /// <summary>ForeignKey Property for ReferencedClass's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ReferencedClass
+		{
+			get { return ReferencedClass != null ? ReferencedClass.ID : (int?)null; }
+			set { _fk_ReferencedClass = value; }
+		}
+
         private Guid? _fk_guid_ReferencedClass = null;
 
         // internal implementation, EF sees only this property

@@ -19,6 +19,7 @@ namespace Zetbox.App.Test
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("e8f20c02-abea-4c91-850f-c321adfd46f0")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         IList<Zetbox.App.Test.Antwort> Antworten { get; }
 
         /// <summary>
@@ -30,11 +31,13 @@ namespace Zetbox.App.Test
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("3a91e745-0dd2-4f31-864e-eaf657ddb577")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Test.TestStudent> Student { get; }
     }
 }

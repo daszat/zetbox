@@ -214,6 +214,14 @@ namespace Zetbox.App.Test
         /// <summary>Backing store for OneSide's id, used on dehydration only</summary>
         private int? _fk_OneSide = null;
 
+        /// <summary>ForeignKey Property for OneSide's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_OneSide
+		{
+			get { return OneSide != null ? OneSide.ID : (int?)null; }
+			set { _fk_OneSide = value; }
+		}
+
 
     public Zetbox.API.Async.ZbTask TriggerFetchOneSideAsync()
     {

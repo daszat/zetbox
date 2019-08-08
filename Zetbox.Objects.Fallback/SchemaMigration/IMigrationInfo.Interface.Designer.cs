@@ -22,5 +22,6 @@ namespace Zetbox.App.SchemaMigration
             get;
             set;
         }
+
     }
 }

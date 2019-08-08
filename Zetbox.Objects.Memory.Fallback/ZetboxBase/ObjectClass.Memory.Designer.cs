@@ -139,6 +139,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
             }
         }
 
+        /// <summary>ForeignKey Property for BaseObjectClass's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_BaseObjectClass
+		{
+			get { return _fk_BaseObjectClass; }
+			set { _fk_BaseObjectClass = value; }
+		}
+
         private Guid? _fk_guid_BaseObjectClass = null;
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Base.ObjectClass> _triggerFetchBaseObjectClassTask;
@@ -315,6 +323,14 @@ public static event PropertyListChangedHandler<Zetbox.App.Base.ObjectClass> OnAc
                 _triggerFetchDefaultViewModelDescriptorTask = null;
             }
         }
+
+        /// <summary>ForeignKey Property for DefaultViewModelDescriptor's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_DefaultViewModelDescriptor
+		{
+			get { return _fk_DefaultViewModelDescriptor; }
+			set { _fk_DefaultViewModelDescriptor = value; }
+		}
 
         private Guid? _fk_guid_DefaultViewModelDescriptor = null;
 

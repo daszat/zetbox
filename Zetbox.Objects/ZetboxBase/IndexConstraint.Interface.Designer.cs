@@ -23,11 +23,13 @@ namespace Zetbox.App.Base
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
 
         [Zetbox.API.DefinitionGuid("3e4bfd37-1037-472b-a5d7-2c20a777e6fd")]
+        [System.Runtime.Serialization.IgnoreDataMember]
         ICollection<Zetbox.App.Base.Property> Properties { get; }
     }
 }

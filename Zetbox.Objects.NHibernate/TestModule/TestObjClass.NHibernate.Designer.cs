@@ -245,6 +245,14 @@ namespace Zetbox.App.Test
         /// <summary>Backing store for ObjectProp's id, used on dehydration only</summary>
         private int? _fk_ObjectProp = null;
 
+        /// <summary>ForeignKey Property for ObjectProp's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ObjectProp
+		{
+			get { return ObjectProp != null ? ObjectProp.ID : (int?)null; }
+			set { _fk_ObjectProp = value; }
+		}
+
 
     public Zetbox.API.Async.ZbTask TriggerFetchObjectPropAsync()
     {

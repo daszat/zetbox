@@ -73,6 +73,14 @@ namespace Zetbox.App.Test
             }
         }
 
+        /// <summary>ForeignKey Property for Event's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_Event
+		{
+			get { return _fk_Event; }
+			set { _fk_Event = value; }
+		}
+
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Event> _triggerFetchEventTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Calendar.Event> TriggerFetchEventAsync()

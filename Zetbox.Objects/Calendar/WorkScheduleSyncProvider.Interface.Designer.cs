@@ -18,18 +18,34 @@ namespace Zetbox.App.Calendar
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("f67558bb-7415-4a41-9196-7c39426746df")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Calendar.CalendarBook Calendar {
             get;
             set;
         }
 
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_Calendar 
+		{ 
+			get; 
+			set;
+		}
+
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("72dcb583-17bc-4247-a7c1-39f607b4905c")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Calendar.WorkSchedule WorkSchedule {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_WorkSchedule 
+		{ 
+			get; 
+			set;
+		}
     }
 }

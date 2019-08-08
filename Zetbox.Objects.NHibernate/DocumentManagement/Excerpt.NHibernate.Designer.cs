@@ -149,6 +149,14 @@ namespace at.dasz.DocumentManagement
         /// <summary>Backing store for File's id, used on dehydration only</summary>
         private int? _fk_File = null;
 
+        /// <summary>ForeignKey Property for File's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_File
+		{
+			get { return File != null ? File.ID : (int?)null; }
+			set { _fk_File = value; }
+		}
+
 
     public Zetbox.API.Async.ZbTask TriggerFetchFileAsync()
     {

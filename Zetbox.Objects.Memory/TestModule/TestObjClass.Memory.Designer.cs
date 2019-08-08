@@ -176,6 +176,14 @@ namespace Zetbox.App.Test
             }
         }
 
+        /// <summary>ForeignKey Property for ObjectProp's id, used on APIs only</summary>
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+        public int? FK_ObjectProp
+		{
+			get { return _fk_ObjectProp; }
+			set { _fk_ObjectProp = value; }
+		}
+
 
         Zetbox.API.Async.ZbTask<Zetbox.App.Projekte.Kunde> _triggerFetchObjectPropTask;
         public Zetbox.API.Async.ZbTask<Zetbox.App.Projekte.Kunde> TriggerFetchObjectPropAsync()

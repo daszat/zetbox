@@ -23,13 +23,22 @@ namespace Zetbox.App.Test
             set;
         }
 
+
         /// <summary>
         /// 
         /// </summary>
         [Zetbox.API.DefinitionGuid("09fb9f88-7a59-4dae-8cad-9fbab99f32c3")]
+		[System.Runtime.Serialization.IgnoreDataMember]
         Zetbox.App.Test.RequiredParent Parent {
             get;
             set;
         }
+
+		[System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
+		int? FK_Parent 
+		{ 
+			get; 
+			set;
+		}
     }
 }
