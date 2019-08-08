@@ -75,6 +75,7 @@ namespace at.dasz.DocumentManagement
         }
 
         /// <summary>backing property for AttachedTo, takes care of attaching/detaching the values</summary>
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.AnyReferenceNHibernateImpl AttachedToImpl
         {
             get
@@ -1805,6 +1806,7 @@ public static event PropertyListChangedHandler<at.dasz.DocumentManagement.File> 
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }
         #region Serializer
 

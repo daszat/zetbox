@@ -971,6 +971,7 @@ namespace Zetbox.App.Calendar
         }
 
         /// <summary>backing property for Recurrence, takes care of attaching/detaching the values</summary>
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.RecurrenceRuleNHibernateImpl RecurrenceImpl
         {
             get
@@ -1018,6 +1019,7 @@ namespace Zetbox.App.Calendar
         }
 
         /// <summary>backing property for Source, takes care of attaching/detaching the values</summary>
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Base.AnyReferenceNHibernateImpl SourceImpl
         {
             get
@@ -1699,6 +1701,7 @@ namespace Zetbox.App.Calendar
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }
         private Zetbox.API.AccessRights? __currentAccessRights;
         public override Zetbox.API.AccessRights CurrentAccessRights

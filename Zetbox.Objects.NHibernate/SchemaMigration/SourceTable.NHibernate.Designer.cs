@@ -1586,6 +1586,7 @@ public static event PropertyListChangedHandler<Zetbox.App.SchemaMigration.Source
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }
         #region Serializer
 

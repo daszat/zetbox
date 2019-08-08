@@ -1151,6 +1151,7 @@ namespace Zetbox.App.Test
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }
         private Zetbox.API.AccessRights? __currentAccessRights;
         public override Zetbox.API.AccessRights CurrentAccessRights

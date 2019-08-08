@@ -528,6 +528,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         }
 
         /// <summary>backing property for PhoneNumberMobile, takes care of attaching/detaching the values</summary>
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl PhoneNumberMobileImpl
         {
             get
@@ -575,6 +576,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         }
 
         /// <summary>backing property for PhoneNumberOffice, takes care of attaching/detaching the values</summary>
+		[System.Runtime.Serialization.IgnoreDataMember]
         public Zetbox.App.Test.TestPhoneCompoundObjectNHibernateImpl PhoneNumberOfficeImpl
         {
             get
@@ -1015,6 +1017,7 @@ public static event PropertyListChangedHandler<Zetbox.App.Test.TestCustomObject>
         }
 
         // make proxy available for the provider
+        [System.Runtime.Serialization.IgnoreDataMember]
         public override IProxyObject NHibernateProxy { get { return Proxy; } }
         #region Serializer
 

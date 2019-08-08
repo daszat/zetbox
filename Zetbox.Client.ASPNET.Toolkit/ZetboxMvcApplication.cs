@@ -83,7 +83,8 @@ namespace Zetbox.Client.ASPNET
             SetupValidation(container);
 
             API.AppDomainInitializer.InitializeFrom(container);
-            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+
+            SetupResolver(container);
         }
 
         protected virtual void SetupValidation(IContainer container)
@@ -104,6 +105,10 @@ namespace Zetbox.Client.ASPNET
         {
             ModelBinderProviders.BinderProviders.Add(container.Resolve<IZetboxViewModelBinderProvider>());
             ModelBinderProviders.BinderProviders.Add(container.Resolve<ILookupDictionaryModelBinderProvider>());
+        }
+        protected virtual void SetupResolver(IContainer container)
+        {
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
         }
 
         protected virtual void ConfigureContainerBuilder(ContainerBuilder builder)

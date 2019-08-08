@@ -41,6 +41,7 @@ namespace Zetbox.API
         // http://www.davidhayden.me/2010/01/auto-factories-in-autofac-for-lazy-instantiation-lazydependencymodule.html
         private Func<IFrozenContext> _lazyCtx;
         private IFrozenContext _frozenContext;
+        [System.Runtime.Serialization.IgnoreDataMember]
         public IFrozenContext FrozenContext
         {
             get
@@ -82,6 +83,7 @@ namespace Zetbox.API
         /// Base implementations returnes always Full
         /// </summary>
         private Zetbox.API.AccessRights? __currentAccessRights;
+        [System.Runtime.Serialization.IgnoreDataMember]
         public virtual Zetbox.API.AccessRights CurrentAccessRights
         {
             get
@@ -125,6 +127,7 @@ namespace Zetbox.API
         /// <summary>
         /// Gets a value indicating the current state of this object.
         /// </summary>
+        [System.Runtime.Serialization.IgnoreDataMember]
         public abstract DataObjectState ObjectState { get; }
 
         public virtual void SetNew()

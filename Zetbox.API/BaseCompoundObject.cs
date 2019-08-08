@@ -38,6 +38,7 @@ namespace Zetbox.API
 
         #region ICompoundObject Members
 
+        [System.Runtime.Serialization.IgnoreDataMember]
         public IPersistenceObject ParentObject { get; protected set; }
         public string ParentProperty { get; protected set; }
 
@@ -65,6 +66,7 @@ namespace Zetbox.API
         }
 
         public virtual bool IsReadonly { get { return ParentObject != null ? ParentObject.IsReadonly : false; } }
+        [System.Runtime.Serialization.IgnoreDataMember]
         public virtual Zetbox.API.AccessRights CurrentAccessRights
         {
             get
@@ -190,6 +192,7 @@ namespace Zetbox.API
 
         protected DataObjectState ObjectState { get { return ParentObject != null ? ParentObject.ObjectState : DataObjectState.Detached; } }
         private IFrozenContext _frozenContext;
+        [System.Runtime.Serialization.IgnoreDataMember]
         protected IFrozenContext FrozenContext
         {
             get
@@ -255,6 +258,7 @@ namespace Zetbox.API
         private Dictionary<object, object> _transientState;
         /// <inheritdoc />
         [XmlIgnore]
+        [System.Runtime.Serialization.IgnoreDataMember]
         public Dictionary<object, object> TransientState
         {
             get
